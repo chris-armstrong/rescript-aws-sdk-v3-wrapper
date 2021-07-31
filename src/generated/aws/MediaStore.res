@@ -5,12 +5,14 @@ httpStatusCode: option<float>,
   cfId: option<string>,
   attempts: option<int>,
   totalRetryDelay: option<int>
-};
-type string_ = string
-type boolean_ = bool
-type integer_ = int
-type timestamp_ = Js.Date.t;
-type long = float
+}
+type awsServiceClient;
+@module("@aws-sdk/client-mediastore") @new external createClient: unit => awsServiceClient = "MediaStoreClient";
+type baseString = string
+type baseBoolean = bool
+type baseInteger = int
+type baseTimestamp = Js.Date.t;
+type baseLong = float
 type timeStamp = Js.Date.t;
 type tagValue = string
 type tagKey = string
@@ -34,20 +36,20 @@ type containerARN = string
 type tagKeyList = array<tagKey>
 type tag = {
 @as("Value") value: option<tagValue>,
-@as("Key") key: tagKey
+  @as("Key") key: tagKey
 }
 type metricPolicyRule = {
 @as("ObjectGroupName") objectGroupName: objectGroupName,
-@as("ObjectGroup") objectGroup: objectGroup
+  @as("ObjectGroup") objectGroup: objectGroup
 }
 type exposeHeaders = array<header>
 type container = {
 @as("AccessLoggingEnabled") accessLoggingEnabled: option<containerAccessLoggingEnabled>,
-@as("Status") status: option<containerStatus>,
-@as("Name") name: option<containerName>,
-@as("ARN") arn: option<containerARN>,
-@as("CreationTime") creationTime: option<timeStamp>,
-@as("Endpoint") endpoint: option<endpoint>
+  @as("Status") status: option<containerStatus>,
+  @as("Name") name: option<containerName>,
+  @as("ARN") arn: option<containerARN>,
+  @as("CreationTime") creationTime: option<timeStamp>,
+  @as("Endpoint") endpoint: option<endpoint>
 }
 type allowedOrigins = array<origin>
 type allowedMethods = array<methodName>
@@ -56,19 +58,18 @@ type tagList_ = array<tag>
 type metricPolicyRules = array<metricPolicyRule>
 type corsRule = {
 @as("ExposeHeaders") exposeHeaders: option<exposeHeaders>,
-@as("MaxAgeSeconds") maxAgeSeconds: option<maxAgeSeconds>,
-@as("AllowedHeaders") allowedHeaders: allowedHeaders,
-@as("AllowedMethods") allowedMethods: option<allowedMethods>,
-@as("AllowedOrigins") allowedOrigins: allowedOrigins
+  @as("MaxAgeSeconds") maxAgeSeconds: option<maxAgeSeconds>,
+  @as("AllowedHeaders") allowedHeaders: allowedHeaders,
+  @as("AllowedMethods") allowedMethods: option<allowedMethods>,
+  @as("AllowedOrigins") allowedOrigins: allowedOrigins
 }
 type containerList = array<container>
 type metricPolicy = {
 @as("MetricPolicyRules") metricPolicyRules: option<metricPolicyRules>,
-@as("ContainerLevelMetrics") containerLevelMetrics: containerLevelMetrics
+  @as("ContainerLevelMetrics") containerLevelMetrics: containerLevelMetrics
 }
 type corsPolicy = array<corsRule>
-type awsServiceClient;
-@module("@aws-sdk/client-mediastore") @new external createClient: unit => awsServiceClient = "MediaStoreClient";
+
 module StopAccessLogging = {
   type t;
   type request = {
@@ -93,7 +94,7 @@ module PutLifecyclePolicy = {
   type t;
   type request = {
 @as("LifecyclePolicy") lifecyclePolicy: lifecyclePolicy,
-@as("ContainerName") containerName: containerName
+  @as("ContainerName") containerName: containerName
 }
   type response = unit
   @module("@aws-sdk/client-mediastore") @new external new_: (request) => t = "PutLifecyclePolicyCommand";
@@ -104,7 +105,7 @@ module PutContainerPolicy = {
   type t;
   type request = {
 @as("Policy") policy: containerPolicy,
-@as("ContainerName") containerName: containerName
+  @as("ContainerName") containerName: containerName
 }
   type response = unit
   @module("@aws-sdk/client-mediastore") @new external new_: (request) => t = "PutContainerPolicyCommand";
@@ -189,7 +190,7 @@ module UntagResource = {
   type t;
   type request = {
 @as("TagKeys") tagKeys: tagKeyList,
-@as("Resource") resource: containerARN
+  @as("Resource") resource: containerARN
 }
   type response = unit
   @module("@aws-sdk/client-mediastore") @new external new_: (request) => t = "UntagResourceCommand";
@@ -212,7 +213,7 @@ module TagResource = {
   type t;
   type request = {
 @as("Tags") tags: tagList_,
-@as("Resource") resource: containerARN
+  @as("Resource") resource: containerARN
 }
   type response = unit
   @module("@aws-sdk/client-mediastore") @new external new_: (request) => t = "TagResourceCommand";
@@ -235,11 +236,11 @@ module ListContainers = {
   type t;
   type request = {
 @as("MaxResults") maxResults: option<containerListLimit>,
-@as("NextToken") nextToken: option<paginationToken>
+  @as("NextToken") nextToken: option<paginationToken>
 }
   type response = {
 @as("NextToken") nextToken: option<paginationToken>,
-@as("Containers") containers: containerList
+  @as("Containers") containers: containerList
 }
   @module("@aws-sdk/client-mediastore") @new external new_: (request) => t = "ListContainersCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -249,7 +250,7 @@ module CreateContainer = {
   type t;
   type request = {
 @as("Tags") tags: option<tagList_>,
-@as("ContainerName") containerName: containerName
+  @as("ContainerName") containerName: containerName
 }
   type response = {
 @as("Container") container: container
@@ -262,7 +263,7 @@ module PutMetricPolicy = {
   type t;
   type request = {
 @as("MetricPolicy") metricPolicy: metricPolicy,
-@as("ContainerName") containerName: containerName
+  @as("ContainerName") containerName: containerName
 }
   type response = unit
   @module("@aws-sdk/client-mediastore") @new external new_: (request) => t = "PutMetricPolicyCommand";
@@ -273,7 +274,7 @@ module PutCorsPolicy = {
   type t;
   type request = {
 @as("CorsPolicy") corsPolicy: corsPolicy,
-@as("ContainerName") containerName: containerName
+  @as("ContainerName") containerName: containerName
 }
   type response = unit
   @module("@aws-sdk/client-mediastore") @new external new_: (request) => t = "PutCorsPolicyCommand";

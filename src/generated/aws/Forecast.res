@@ -5,7 +5,14 @@ httpStatusCode: option<float>,
   cfId: option<string>,
   attempts: option<int>,
   totalRetryDelay: option<int>
-};
+}
+type awsServiceClient;
+@module("@aws-sdk/client-forecast") @new external createClient: unit => awsServiceClient = "ForecastClient";
+type baseString = string
+type baseBoolean = bool
+type baseInteger = int
+type baseTimestamp = Js.Date.t;
+type baseLong = float
 type value = string
 type useGeolocationForTimeZone = bool
 type timestampFormat = string
@@ -29,126 +36,126 @@ type integer_ = int
 type geolocationFormat = string
 type frequency = string
 type forecastType = string
-type filterConditionString = [@as("IS_NOT") #ISNOT | @as("IS") #IS]
+type filterConditionString = [@as("IS_NOT") #IS_NOT | @as("IS") #IS]
 type featurizationMethodName = [@as("filling") #Filling]
 type evaluationType = [@as("COMPUTED") #COMPUTED | @as("SUMMARY") #SUMMARY]
 type errorMessage = string
 type double = float
-type domain = [@as("METRICS") #METRICS | @as("WEB_TRAFFIC") #WEBTRAFFIC | @as("WORK_FORCE") #WORKFORCE | @as("EC2_CAPACITY") #EC2CAPACITY | @as("INVENTORY_PLANNING") #INVENTORYPLANNING | @as("CUSTOM") #CUSTOM | @as("RETAIL") #RETAIL]
-type datasetType = [@as("ITEM_METADATA") #ITEMMETADATA | @as("RELATED_TIME_SERIES") #RELATEDTIMESERIES | @as("TARGET_TIME_SERIES") #TARGETTIMESERIES]
+type domain = [@as("METRICS") #METRICS | @as("WEB_TRAFFIC") #WEB_TRAFFIC | @as("WORK_FORCE") #WORK_FORCE | @as("EC2_CAPACITY") #EC2_CAPACITY | @as("INVENTORY_PLANNING") #INVENTORY_PLANNING | @as("CUSTOM") #CUSTOM | @as("RETAIL") #RETAIL]
+type datasetType = [@as("ITEM_METADATA") #ITEM_METADATA | @as("RELATED_TIME_SERIES") #RELATED_TIME_SERIES | @as("TARGET_TIME_SERIES") #TARGET_TIME_SERIES]
 type boolean_ = bool
 type autoMLOverrideStrategy = [@as("LatencyOptimized") #LatencyOptimized]
 type attributeType = [@as("geolocation") #Geolocation | @as("timestamp") #Timestamp | @as("float") #Float | @as("integer") #Integer | @as("string") #String]
 type arn = string
 type weightedQuantileLoss = {
 @as("LossValue") lossValue: option<double>,
-@as("Quantile") quantile: option<double>
+  @as("Quantile") quantile: option<double>
 }
 type values = array<value>
-type trainingParameters = Js.Dict.t< parameterValue>
+type trainingParameters = Js.Dict.t<parameterValue>
 type testWindowSummary = {
 @as("Message") message: option<errorMessage>,
-@as("Status") status: option<status>,
-@as("TestWindowEnd") testWindowEnd: option<timestamp_>,
-@as("TestWindowStart") testWindowStart: option<timestamp_>
+  @as("Status") status: option<status>,
+  @as("TestWindowEnd") testWindowEnd: option<timestamp_>,
+  @as("TestWindowStart") testWindowStart: option<timestamp_>
 }
 type tagKeys = array<tagKey>
 type tag = {
 @as("Value") value: tagValue,
-@as("Key") key: tagKey
+  @as("Key") key: tagKey
 }
 type supplementaryFeature = {
 @as("Value") value: value,
-@as("Name") name: name
+  @as("Name") name: name
 }
 type statistics = {
 @as("CountNanLong") countNanLong: option<long>,
-@as("CountNullLong") countNullLong: option<long>,
-@as("CountDistinctLong") countDistinctLong: option<long>,
-@as("CountLong") countLong: option<long>,
-@as("Stddev") stddev: option<double>,
-@as("Avg") avg: option<double>,
-@as("Max") max: option<string_>,
-@as("Min") min: option<string_>,
-@as("CountNan") countNan: option<integer_>,
-@as("CountNull") countNull: option<integer_>,
-@as("CountDistinct") countDistinct: option<integer_>,
-@as("Count") count: option<integer_>
+  @as("CountNullLong") countNullLong: option<long>,
+  @as("CountDistinctLong") countDistinctLong: option<long>,
+  @as("CountLong") countLong: option<long>,
+  @as("Stddev") stddev: option<double>,
+  @as("Avg") avg: option<double>,
+  @as("Max") max: option<string_>,
+  @as("Min") min: option<string_>,
+  @as("CountNan") countNan: option<integer_>,
+  @as("CountNull") countNull: option<integer_>,
+  @as("CountDistinct") countDistinct: option<integer_>,
+  @as("Count") count: option<integer_>
 }
 type schemaAttribute = {
 @as("AttributeType") attributeType: option<attributeType>,
-@as("AttributeName") attributeName: option<name>
+  @as("AttributeName") attributeName: option<name>
 }
 type s3Config = {
 @as("KMSKeyArn") kmskeyArn: option<kmskeyArn>,
-@as("RoleArn") roleArn: arn,
-@as("Path") path: s3Path
+  @as("RoleArn") roleArn: arn,
+  @as("Path") path: s3Path
 }
 type predictorSummary = {
 @as("LastModificationTime") lastModificationTime: option<timestamp_>,
-@as("CreationTime") creationTime: option<timestamp_>,
-@as("Message") message: option<errorMessage>,
-@as("Status") status: option<status>,
-@as("DatasetGroupArn") datasetGroupArn: option<arn>,
-@as("PredictorName") predictorName: option<name>,
-@as("PredictorArn") predictorArn: option<arn>
+  @as("CreationTime") creationTime: option<timestamp_>,
+  @as("Message") message: option<errorMessage>,
+  @as("Status") status: option<status>,
+  @as("DatasetGroupArn") datasetGroupArn: option<arn>,
+  @as("PredictorName") predictorName: option<name>,
+  @as("PredictorArn") predictorArn: option<arn>
 }
 type integerParameterRange = {
 @as("ScalingType") scalingType: option<scalingType>,
-@as("MinValue") minValue: integer_,
-@as("MaxValue") maxValue: integer_,
-@as("Name") name: name
+  @as("MinValue") minValue: integer_,
+  @as("MaxValue") maxValue: integer_,
+  @as("Name") name: name
 }
 type forecastTypes = array<forecastType>
 type forecastSummary = {
 @as("LastModificationTime") lastModificationTime: option<timestamp_>,
-@as("CreationTime") creationTime: option<timestamp_>,
-@as("Message") message: option<errorMessage>,
-@as("Status") status: option<status>,
-@as("DatasetGroupArn") datasetGroupArn: option<string_>,
-@as("PredictorArn") predictorArn: option<string_>,
-@as("ForecastName") forecastName: option<name>,
-@as("ForecastArn") forecastArn: option<arn>
+  @as("CreationTime") creationTime: option<timestamp_>,
+  @as("Message") message: option<errorMessage>,
+  @as("Status") status: option<status>,
+  @as("DatasetGroupArn") datasetGroupArn: option<string_>,
+  @as("PredictorArn") predictorArn: option<string_>,
+  @as("ForecastName") forecastName: option<name>,
+  @as("ForecastArn") forecastArn: option<arn>
 }
 type forecastDimensions = array<name>
 type filter = {
 @as("Condition") condition: filterConditionString,
-@as("Value") value: arn,
-@as("Key") key: string_
+  @as("Value") value: arn,
+  @as("Key") key: string_
 }
-type featurizationMethodParameters = Js.Dict.t< parameterValue>
+type featurizationMethodParameters = Js.Dict.t<parameterValue>
 type evaluationParameters = {
 @as("BackTestWindowOffset") backTestWindowOffset: option<integer_>,
-@as("NumberOfBacktestWindows") numberOfBacktestWindows: option<integer_>
+  @as("NumberOfBacktestWindows") numberOfBacktestWindows: option<integer_>
 }
 type errorMetric = {
 @as("RMSE") rmse: option<double>,
-@as("WAPE") wape: option<double>,
-@as("ForecastType") forecastType: option<forecastType>
+  @as("WAPE") wape: option<double>,
+  @as("ForecastType") forecastType: option<forecastType>
 }
 type encryptionConfig = {
 @as("KMSKeyArn") kmskeyArn: kmskeyArn,
-@as("RoleArn") roleArn: arn
+  @as("RoleArn") roleArn: arn
 }
 type datasetSummary = {
 @as("LastModificationTime") lastModificationTime: option<timestamp_>,
-@as("CreationTime") creationTime: option<timestamp_>,
-@as("Domain") domain: option<domain>,
-@as("DatasetType") datasetType: option<datasetType>,
-@as("DatasetName") datasetName: option<name>,
-@as("DatasetArn") datasetArn: option<arn>
+  @as("CreationTime") creationTime: option<timestamp_>,
+  @as("Domain") domain: option<domain>,
+  @as("DatasetType") datasetType: option<datasetType>,
+  @as("DatasetName") datasetName: option<name>,
+  @as("DatasetArn") datasetArn: option<arn>
 }
 type datasetGroupSummary = {
 @as("LastModificationTime") lastModificationTime: option<timestamp_>,
-@as("CreationTime") creationTime: option<timestamp_>,
-@as("DatasetGroupName") datasetGroupName: option<name>,
-@as("DatasetGroupArn") datasetGroupArn: option<arn>
+  @as("CreationTime") creationTime: option<timestamp_>,
+  @as("DatasetGroupName") datasetGroupName: option<name>,
+  @as("DatasetGroupArn") datasetGroupArn: option<arn>
 }
 type continuousParameterRange = {
 @as("ScalingType") scalingType: option<scalingType>,
-@as("MinValue") minValue: double,
-@as("MaxValue") maxValue: double,
-@as("Name") name: name
+  @as("MinValue") minValue: double,
+  @as("MaxValue") maxValue: double,
+  @as("Name") name: name
 }
 type arnList = array<arn>
 type weightedQuantileLosses = array<weightedQuantileLoss>
@@ -160,10 +167,10 @@ type predictors = array<predictorSummary>
 type integerParameterRanges = array<integerParameterRange>
 type forecasts = array<forecastSummary>
 type filters = array<filter>
-type fieldStatistics = Js.Dict.t< statistics>
+type fieldStatistics = Js.Dict.t<statistics>
 type featurizationMethod = {
 @as("FeaturizationMethodParameters") featurizationMethodParameters: option<featurizationMethodParameters>,
-@as("FeaturizationMethodName") featurizationMethodName: featurizationMethodName
+  @as("FeaturizationMethodName") featurizationMethodName: featurizationMethodName
 }
 type errorMetrics = array<errorMetric>
 type datasets = array<datasetSummary>
@@ -177,71 +184,71 @@ type dataDestination = {
 type continuousParameterRanges = array<continuousParameterRange>
 type categoricalParameterRange = {
 @as("Values") values: values,
-@as("Name") name: name
+  @as("Name") name: name
 }
 type schema = {
 @as("Attributes") attributes: option<schemaAttributes>
 }
 type predictorExecution = {
 @as("TestWindows") testWindows: option<testWindowDetails>,
-@as("AlgorithmArn") algorithmArn: option<arn>
+  @as("AlgorithmArn") algorithmArn: option<arn>
 }
 type predictorBacktestExportJobSummary = {
 @as("LastModificationTime") lastModificationTime: option<timestamp_>,
-@as("CreationTime") creationTime: option<timestamp_>,
-@as("Message") message: option<errorMessage>,
-@as("Status") status: option<status>,
-@as("Destination") destination: option<dataDestination>,
-@as("PredictorBacktestExportJobName") predictorBacktestExportJobName: option<name>,
-@as("PredictorBacktestExportJobArn") predictorBacktestExportJobArn: option<arn>
+  @as("CreationTime") creationTime: option<timestamp_>,
+  @as("Message") message: option<errorMessage>,
+  @as("Status") status: option<status>,
+  @as("Destination") destination: option<dataDestination>,
+  @as("PredictorBacktestExportJobName") predictorBacktestExportJobName: option<name>,
+  @as("PredictorBacktestExportJobArn") predictorBacktestExportJobArn: option<arn>
 }
 type metrics = {
 @as("ErrorMetrics") errorMetrics: option<errorMetrics>,
-@as("WeightedQuantileLosses") weightedQuantileLosses: option<weightedQuantileLosses>,
-@as("RMSE") rmse: option<double>
+  @as("WeightedQuantileLosses") weightedQuantileLosses: option<weightedQuantileLosses>,
+  @as("RMSE") rmse: option<double>
 }
 type inputDataConfig = {
 @as("SupplementaryFeatures") supplementaryFeatures: option<supplementaryFeatures>,
-@as("DatasetGroupArn") datasetGroupArn: arn
+  @as("DatasetGroupArn") datasetGroupArn: arn
 }
 type forecastExportJobSummary = {
 @as("LastModificationTime") lastModificationTime: option<timestamp_>,
-@as("CreationTime") creationTime: option<timestamp_>,
-@as("Message") message: option<errorMessage>,
-@as("Status") status: option<status>,
-@as("Destination") destination: option<dataDestination>,
-@as("ForecastExportJobName") forecastExportJobName: option<name>,
-@as("ForecastExportJobArn") forecastExportJobArn: option<arn>
+  @as("CreationTime") creationTime: option<timestamp_>,
+  @as("Message") message: option<errorMessage>,
+  @as("Status") status: option<status>,
+  @as("Destination") destination: option<dataDestination>,
+  @as("ForecastExportJobName") forecastExportJobName: option<name>,
+  @as("ForecastExportJobArn") forecastExportJobArn: option<arn>
 }
 type featurizationPipeline = array<featurizationMethod>
 type datasetImportJobSummary = {
 @as("LastModificationTime") lastModificationTime: option<timestamp_>,
-@as("CreationTime") creationTime: option<timestamp_>,
-@as("Message") message: option<errorMessage>,
-@as("Status") status: option<status>,
-@as("DataSource") dataSource: option<dataSource>,
-@as("DatasetImportJobName") datasetImportJobName: option<name>,
-@as("DatasetImportJobArn") datasetImportJobArn: option<arn>
+  @as("CreationTime") creationTime: option<timestamp_>,
+  @as("Message") message: option<errorMessage>,
+  @as("Status") status: option<status>,
+  @as("DataSource") dataSource: option<dataSource>,
+  @as("DatasetImportJobName") datasetImportJobName: option<name>,
+  @as("DatasetImportJobArn") datasetImportJobArn: option<arn>
 }
 type categoricalParameterRanges = array<categoricalParameterRange>
 type windowSummary = {
 @as("Metrics") metrics: option<metrics>,
-@as("EvaluationType") evaluationType: option<evaluationType>,
-@as("ItemCount") itemCount: option<integer_>,
-@as("TestWindowEnd") testWindowEnd: option<timestamp_>,
-@as("TestWindowStart") testWindowStart: option<timestamp_>
+  @as("EvaluationType") evaluationType: option<evaluationType>,
+  @as("ItemCount") itemCount: option<integer_>,
+  @as("TestWindowEnd") testWindowEnd: option<timestamp_>,
+  @as("TestWindowStart") testWindowStart: option<timestamp_>
 }
 type predictorExecutions = array<predictorExecution>
 type predictorBacktestExportJobs = array<predictorBacktestExportJobSummary>
 type parameterRanges = {
 @as("IntegerParameterRanges") integerParameterRanges: option<integerParameterRanges>,
-@as("ContinuousParameterRanges") continuousParameterRanges: option<continuousParameterRanges>,
-@as("CategoricalParameterRanges") categoricalParameterRanges: option<categoricalParameterRanges>
+  @as("ContinuousParameterRanges") continuousParameterRanges: option<continuousParameterRanges>,
+  @as("CategoricalParameterRanges") categoricalParameterRanges: option<categoricalParameterRanges>
 }
 type forecastExportJobs = array<forecastExportJobSummary>
 type featurization = {
 @as("FeaturizationPipeline") featurizationPipeline: option<featurizationPipeline>,
-@as("AttributeName") attributeName: name
+  @as("AttributeName") attributeName: name
 }
 type datasetImportJobs = array<datasetImportJobSummary>
 type testWindows = array<windowSummary>
@@ -254,16 +261,15 @@ type hyperParameterTuningJobConfig = {
 type featurizations = array<featurization>
 type featurizationConfig = {
 @as("Featurizations") featurizations: option<featurizations>,
-@as("ForecastDimensions") forecastDimensions: option<forecastDimensions>,
-@as("ForecastFrequency") forecastFrequency: frequency
+  @as("ForecastDimensions") forecastDimensions: option<forecastDimensions>,
+  @as("ForecastFrequency") forecastFrequency: frequency
 }
 type evaluationResult = {
 @as("TestWindows") testWindows: option<testWindows>,
-@as("AlgorithmArn") algorithmArn: option<arn>
+  @as("AlgorithmArn") algorithmArn: option<arn>
 }
 type predictorEvaluationResults = array<evaluationResult>
-type awsServiceClient;
-@module("@aws-sdk/client-forecast") @new external createClient: unit => awsServiceClient = "ForecastClient";
+
 module StopResource = {
   type t;
   type request = {
@@ -358,7 +364,7 @@ module UpdateDatasetGroup = {
   type t;
   type request = {
 @as("DatasetArns") datasetArns: arnList,
-@as("DatasetGroupArn") datasetGroupArn: arn
+  @as("DatasetGroupArn") datasetGroupArn: arn
 }
   type response = unit
   @module("@aws-sdk/client-forecast") @new external new_: (request) => t = "UpdateDatasetGroupCommand";
@@ -369,7 +375,7 @@ module UntagResource = {
   type t;
   type request = {
 @as("TagKeys") tagKeys: tagKeys,
-@as("ResourceArn") resourceArn: arn
+  @as("ResourceArn") resourceArn: arn
 }
   type response = unit
   @module("@aws-sdk/client-forecast") @new external new_: (request) => t = "UntagResourceCommand";
@@ -383,15 +389,15 @@ module DescribeForecast = {
 }
   type response = {
 @as("LastModificationTime") lastModificationTime: option<timestamp_>,
-@as("CreationTime") creationTime: option<timestamp_>,
-@as("Message") message: option<errorMessage>,
-@as("Status") status: option<string_>,
-@as("EstimatedTimeRemainingInMinutes") estimatedTimeRemainingInMinutes: option<long>,
-@as("DatasetGroupArn") datasetGroupArn: option<arn>,
-@as("PredictorArn") predictorArn: option<arn>,
-@as("ForecastTypes") forecastTypes: option<forecastTypes>,
-@as("ForecastName") forecastName: option<name>,
-@as("ForecastArn") forecastArn: option<arn>
+  @as("CreationTime") creationTime: option<timestamp_>,
+  @as("Message") message: option<errorMessage>,
+  @as("Status") status: option<string_>,
+  @as("EstimatedTimeRemainingInMinutes") estimatedTimeRemainingInMinutes: option<long>,
+  @as("DatasetGroupArn") datasetGroupArn: option<arn>,
+  @as("PredictorArn") predictorArn: option<arn>,
+  @as("ForecastTypes") forecastTypes: option<forecastTypes>,
+  @as("ForecastName") forecastName: option<name>,
+  @as("ForecastArn") forecastArn: option<arn>
 }
   @module("@aws-sdk/client-forecast") @new external new_: (request) => t = "DescribeForecastCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -404,12 +410,12 @@ module DescribeDatasetGroup = {
 }
   type response = {
 @as("LastModificationTime") lastModificationTime: option<timestamp_>,
-@as("CreationTime") creationTime: option<timestamp_>,
-@as("Status") status: option<status>,
-@as("Domain") domain: option<domain>,
-@as("DatasetArns") datasetArns: option<arnList>,
-@as("DatasetGroupArn") datasetGroupArn: option<arn>,
-@as("DatasetGroupName") datasetGroupName: option<name>
+  @as("CreationTime") creationTime: option<timestamp_>,
+  @as("Status") status: option<status>,
+  @as("Domain") domain: option<domain>,
+  @as("DatasetArns") datasetArns: option<arnList>,
+  @as("DatasetGroupArn") datasetGroupArn: option<arn>,
+  @as("DatasetGroupName") datasetGroupName: option<name>
 }
   @module("@aws-sdk/client-forecast") @new external new_: (request) => t = "DescribeDatasetGroupCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -419,7 +425,7 @@ module TagResource = {
   type t;
   type request = {
 @as("Tags") tags: tags,
-@as("ResourceArn") resourceArn: arn
+  @as("ResourceArn") resourceArn: arn
 }
   type response = unit
   @module("@aws-sdk/client-forecast") @new external new_: (request) => t = "TagResourceCommand";
@@ -442,12 +448,12 @@ module ListPredictors = {
   type t;
   type request = {
 @as("Filters") filters: option<filters>,
-@as("MaxResults") maxResults: option<maxResults>,
-@as("NextToken") nextToken: option<nextToken>
+  @as("MaxResults") maxResults: option<maxResults>,
+  @as("NextToken") nextToken: option<nextToken>
 }
   type response = {
 @as("NextToken") nextToken: option<nextToken>,
-@as("Predictors") predictors: option<predictors>
+  @as("Predictors") predictors: option<predictors>
 }
   @module("@aws-sdk/client-forecast") @new external new_: (request) => t = "ListPredictorsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -457,12 +463,12 @@ module ListForecasts = {
   type t;
   type request = {
 @as("Filters") filters: option<filters>,
-@as("MaxResults") maxResults: option<maxResults>,
-@as("NextToken") nextToken: option<nextToken>
+  @as("MaxResults") maxResults: option<maxResults>,
+  @as("NextToken") nextToken: option<nextToken>
 }
   type response = {
 @as("NextToken") nextToken: option<nextToken>,
-@as("Forecasts") forecasts: option<forecasts>
+  @as("Forecasts") forecasts: option<forecasts>
 }
   @module("@aws-sdk/client-forecast") @new external new_: (request) => t = "ListForecastsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -472,11 +478,11 @@ module ListDatasets = {
   type t;
   type request = {
 @as("MaxResults") maxResults: option<maxResults>,
-@as("NextToken") nextToken: option<nextToken>
+  @as("NextToken") nextToken: option<nextToken>
 }
   type response = {
 @as("NextToken") nextToken: option<nextToken>,
-@as("Datasets") datasets: option<datasets>
+  @as("Datasets") datasets: option<datasets>
 }
   @module("@aws-sdk/client-forecast") @new external new_: (request) => t = "ListDatasetsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -486,11 +492,11 @@ module ListDatasetGroups = {
   type t;
   type request = {
 @as("MaxResults") maxResults: option<maxResults>,
-@as("NextToken") nextToken: option<nextToken>
+  @as("NextToken") nextToken: option<nextToken>
 }
   type response = {
 @as("NextToken") nextToken: option<nextToken>,
-@as("DatasetGroups") datasetGroups: option<datasetGroups>
+  @as("DatasetGroups") datasetGroups: option<datasetGroups>
 }
   @module("@aws-sdk/client-forecast") @new external new_: (request) => t = "ListDatasetGroupsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -503,13 +509,13 @@ module DescribePredictorBacktestExportJob = {
 }
   type response = {
 @as("LastModificationTime") lastModificationTime: option<timestamp_>,
-@as("CreationTime") creationTime: option<timestamp_>,
-@as("Status") status: option<status>,
-@as("Message") message: option<message>,
-@as("Destination") destination: option<dataDestination>,
-@as("PredictorArn") predictorArn: option<arn>,
-@as("PredictorBacktestExportJobName") predictorBacktestExportJobName: option<name>,
-@as("PredictorBacktestExportJobArn") predictorBacktestExportJobArn: option<arn>
+  @as("CreationTime") creationTime: option<timestamp_>,
+  @as("Status") status: option<status>,
+  @as("Message") message: option<message>,
+  @as("Destination") destination: option<dataDestination>,
+  @as("PredictorArn") predictorArn: option<arn>,
+  @as("PredictorBacktestExportJobName") predictorBacktestExportJobName: option<name>,
+  @as("PredictorBacktestExportJobArn") predictorBacktestExportJobArn: option<arn>
 }
   @module("@aws-sdk/client-forecast") @new external new_: (request) => t = "DescribePredictorBacktestExportJobCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -522,13 +528,13 @@ module DescribeForecastExportJob = {
 }
   type response = {
 @as("LastModificationTime") lastModificationTime: option<timestamp_>,
-@as("CreationTime") creationTime: option<timestamp_>,
-@as("Status") status: option<status>,
-@as("Message") message: option<message>,
-@as("Destination") destination: option<dataDestination>,
-@as("ForecastArn") forecastArn: option<arn>,
-@as("ForecastExportJobName") forecastExportJobName: option<name>,
-@as("ForecastExportJobArn") forecastExportJobArn: option<arn>
+  @as("CreationTime") creationTime: option<timestamp_>,
+  @as("Status") status: option<status>,
+  @as("Message") message: option<message>,
+  @as("Destination") destination: option<dataDestination>,
+  @as("ForecastArn") forecastArn: option<arn>,
+  @as("ForecastExportJobName") forecastExportJobName: option<name>,
+  @as("ForecastExportJobArn") forecastExportJobArn: option<arn>
 }
   @module("@aws-sdk/client-forecast") @new external new_: (request) => t = "DescribeForecastExportJobCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -541,20 +547,20 @@ module DescribeDatasetImportJob = {
 }
   type response = {
 @as("LastModificationTime") lastModificationTime: option<timestamp_>,
-@as("CreationTime") creationTime: option<timestamp_>,
-@as("Message") message: option<message>,
-@as("Status") status: option<status>,
-@as("DataSize") dataSize: option<double>,
-@as("FieldStatistics") fieldStatistics: option<fieldStatistics>,
-@as("EstimatedTimeRemainingInMinutes") estimatedTimeRemainingInMinutes: option<long>,
-@as("DataSource") dataSource: option<dataSource>,
-@as("GeolocationFormat") geolocationFormat: option<geolocationFormat>,
-@as("UseGeolocationForTimeZone") useGeolocationForTimeZone: option<useGeolocationForTimeZone>,
-@as("TimeZone") timeZone: option<timeZone>,
-@as("TimestampFormat") timestampFormat: option<timestampFormat>,
-@as("DatasetArn") datasetArn: option<arn>,
-@as("DatasetImportJobArn") datasetImportJobArn: option<arn>,
-@as("DatasetImportJobName") datasetImportJobName: option<name>
+  @as("CreationTime") creationTime: option<timestamp_>,
+  @as("Message") message: option<message>,
+  @as("Status") status: option<status>,
+  @as("DataSize") dataSize: option<double>,
+  @as("FieldStatistics") fieldStatistics: option<fieldStatistics>,
+  @as("EstimatedTimeRemainingInMinutes") estimatedTimeRemainingInMinutes: option<long>,
+  @as("DataSource") dataSource: option<dataSource>,
+  @as("GeolocationFormat") geolocationFormat: option<geolocationFormat>,
+  @as("UseGeolocationForTimeZone") useGeolocationForTimeZone: option<useGeolocationForTimeZone>,
+  @as("TimeZone") timeZone: option<timeZone>,
+  @as("TimestampFormat") timestampFormat: option<timestampFormat>,
+  @as("DatasetArn") datasetArn: option<arn>,
+  @as("DatasetImportJobArn") datasetImportJobArn: option<arn>,
+  @as("DatasetImportJobName") datasetImportJobName: option<name>
 }
   @module("@aws-sdk/client-forecast") @new external new_: (request) => t = "DescribeDatasetImportJobCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -564,9 +570,9 @@ module CreatePredictorBacktestExportJob = {
   type t;
   type request = {
 @as("Tags") tags: option<tags>,
-@as("Destination") destination: dataDestination,
-@as("PredictorArn") predictorArn: arn,
-@as("PredictorBacktestExportJobName") predictorBacktestExportJobName: name
+  @as("Destination") destination: dataDestination,
+  @as("PredictorArn") predictorArn: arn,
+  @as("PredictorBacktestExportJobName") predictorBacktestExportJobName: name
 }
   type response = {
 @as("PredictorBacktestExportJobArn") predictorBacktestExportJobArn: option<arn>
@@ -579,9 +585,9 @@ module CreateForecastExportJob = {
   type t;
   type request = {
 @as("Tags") tags: option<tags>,
-@as("Destination") destination: dataDestination,
-@as("ForecastArn") forecastArn: arn,
-@as("ForecastExportJobName") forecastExportJobName: name
+  @as("Destination") destination: dataDestination,
+  @as("ForecastArn") forecastArn: arn,
+  @as("ForecastExportJobName") forecastExportJobName: name
 }
   type response = {
 @as("ForecastExportJobArn") forecastExportJobArn: option<arn>
@@ -594,9 +600,9 @@ module CreateForecast = {
   type t;
   type request = {
 @as("Tags") tags: option<tags>,
-@as("ForecastTypes") forecastTypes: option<forecastTypes>,
-@as("PredictorArn") predictorArn: arn,
-@as("ForecastName") forecastName: name
+  @as("ForecastTypes") forecastTypes: option<forecastTypes>,
+  @as("PredictorArn") predictorArn: arn,
+  @as("ForecastName") forecastName: name
 }
   type response = {
 @as("ForecastArn") forecastArn: option<arn>
@@ -609,13 +615,13 @@ module CreateDatasetImportJob = {
   type t;
   type request = {
 @as("Tags") tags: option<tags>,
-@as("GeolocationFormat") geolocationFormat: option<geolocationFormat>,
-@as("UseGeolocationForTimeZone") useGeolocationForTimeZone: option<useGeolocationForTimeZone>,
-@as("TimeZone") timeZone: option<timeZone>,
-@as("TimestampFormat") timestampFormat: option<timestampFormat>,
-@as("DataSource") dataSource: dataSource,
-@as("DatasetArn") datasetArn: arn,
-@as("DatasetImportJobName") datasetImportJobName: name
+  @as("GeolocationFormat") geolocationFormat: option<geolocationFormat>,
+  @as("UseGeolocationForTimeZone") useGeolocationForTimeZone: option<useGeolocationForTimeZone>,
+  @as("TimeZone") timeZone: option<timeZone>,
+  @as("TimestampFormat") timestampFormat: option<timestampFormat>,
+  @as("DataSource") dataSource: dataSource,
+  @as("DatasetArn") datasetArn: arn,
+  @as("DatasetImportJobName") datasetImportJobName: name
 }
   type response = {
 @as("DatasetImportJobArn") datasetImportJobArn: option<arn>
@@ -628,9 +634,9 @@ module CreateDatasetGroup = {
   type t;
   type request = {
 @as("Tags") tags: option<tags>,
-@as("DatasetArns") datasetArns: option<arnList>,
-@as("Domain") domain: domain,
-@as("DatasetGroupName") datasetGroupName: name
+  @as("DatasetArns") datasetArns: option<arnList>,
+  @as("Domain") domain: domain,
+  @as("DatasetGroupName") datasetGroupName: name
 }
   type response = {
 @as("DatasetGroupArn") datasetGroupArn: option<arn>
@@ -646,15 +652,15 @@ module DescribeDataset = {
 }
   type response = {
 @as("LastModificationTime") lastModificationTime: option<timestamp_>,
-@as("CreationTime") creationTime: option<timestamp_>,
-@as("Status") status: option<status>,
-@as("EncryptionConfig") encryptionConfig: option<encryptionConfig>,
-@as("Schema") schema: option<schema>,
-@as("DataFrequency") dataFrequency: option<frequency>,
-@as("DatasetType") datasetType: option<datasetType>,
-@as("Domain") domain: option<domain>,
-@as("DatasetName") datasetName: option<name>,
-@as("DatasetArn") datasetArn: option<arn>
+  @as("CreationTime") creationTime: option<timestamp_>,
+  @as("Status") status: option<status>,
+  @as("EncryptionConfig") encryptionConfig: option<encryptionConfig>,
+  @as("Schema") schema: option<schema>,
+  @as("DataFrequency") dataFrequency: option<frequency>,
+  @as("DatasetType") datasetType: option<datasetType>,
+  @as("Domain") domain: option<domain>,
+  @as("DatasetName") datasetName: option<name>,
+  @as("DatasetArn") datasetArn: option<arn>
 }
   @module("@aws-sdk/client-forecast") @new external new_: (request) => t = "DescribeDatasetCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -664,12 +670,12 @@ module CreateDataset = {
   type t;
   type request = {
 @as("Tags") tags: option<tags>,
-@as("EncryptionConfig") encryptionConfig: option<encryptionConfig>,
-@as("Schema") schema: schema,
-@as("DataFrequency") dataFrequency: option<frequency>,
-@as("DatasetType") datasetType: datasetType,
-@as("Domain") domain: domain,
-@as("DatasetName") datasetName: name
+  @as("EncryptionConfig") encryptionConfig: option<encryptionConfig>,
+  @as("Schema") schema: schema,
+  @as("DataFrequency") dataFrequency: option<frequency>,
+  @as("DatasetType") datasetType: datasetType,
+  @as("Domain") domain: domain,
+  @as("DatasetName") datasetName: name
 }
   type response = {
 @as("DatasetArn") datasetArn: option<arn>
@@ -682,12 +688,12 @@ module ListPredictorBacktestExportJobs = {
   type t;
   type request = {
 @as("Filters") filters: option<filters>,
-@as("MaxResults") maxResults: option<maxResults>,
-@as("NextToken") nextToken: option<nextToken>
+  @as("MaxResults") maxResults: option<maxResults>,
+  @as("NextToken") nextToken: option<nextToken>
 }
   type response = {
 @as("NextToken") nextToken: option<nextToken>,
-@as("PredictorBacktestExportJobs") predictorBacktestExportJobs: option<predictorBacktestExportJobs>
+  @as("PredictorBacktestExportJobs") predictorBacktestExportJobs: option<predictorBacktestExportJobs>
 }
   @module("@aws-sdk/client-forecast") @new external new_: (request) => t = "ListPredictorBacktestExportJobsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -697,12 +703,12 @@ module ListForecastExportJobs = {
   type t;
   type request = {
 @as("Filters") filters: option<filters>,
-@as("MaxResults") maxResults: option<maxResults>,
-@as("NextToken") nextToken: option<nextToken>
+  @as("MaxResults") maxResults: option<maxResults>,
+  @as("NextToken") nextToken: option<nextToken>
 }
   type response = {
 @as("NextToken") nextToken: option<nextToken>,
-@as("ForecastExportJobs") forecastExportJobs: option<forecastExportJobs>
+  @as("ForecastExportJobs") forecastExportJobs: option<forecastExportJobs>
 }
   @module("@aws-sdk/client-forecast") @new external new_: (request) => t = "ListForecastExportJobsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -712,12 +718,12 @@ module ListDatasetImportJobs = {
   type t;
   type request = {
 @as("Filters") filters: option<filters>,
-@as("MaxResults") maxResults: option<maxResults>,
-@as("NextToken") nextToken: option<nextToken>
+  @as("MaxResults") maxResults: option<maxResults>,
+  @as("NextToken") nextToken: option<nextToken>
 }
   type response = {
 @as("NextToken") nextToken: option<nextToken>,
-@as("DatasetImportJobs") datasetImportJobs: option<datasetImportJobs>
+  @as("DatasetImportJobs") datasetImportJobs: option<datasetImportJobs>
 }
   @module("@aws-sdk/client-forecast") @new external new_: (request) => t = "ListDatasetImportJobsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -730,27 +736,27 @@ module DescribePredictor = {
 }
   type response = {
 @as("LastModificationTime") lastModificationTime: option<timestamp_>,
-@as("CreationTime") creationTime: option<timestamp_>,
-@as("Message") message: option<message>,
-@as("Status") status: option<status>,
-@as("AutoMLAlgorithmArns") autoMLAlgorithmArns: option<arnList>,
-@as("DatasetImportJobArns") datasetImportJobArns: option<arnList>,
-@as("EstimatedTimeRemainingInMinutes") estimatedTimeRemainingInMinutes: option<long>,
-@as("PredictorExecutionDetails") predictorExecutionDetails: option<predictorExecutionDetails>,
-@as("EncryptionConfig") encryptionConfig: option<encryptionConfig>,
-@as("FeaturizationConfig") featurizationConfig: option<featurizationConfig>,
-@as("InputDataConfig") inputDataConfig: option<inputDataConfig>,
-@as("HPOConfig") hpoconfig: option<hyperParameterTuningJobConfig>,
-@as("EvaluationParameters") evaluationParameters: option<evaluationParameters>,
-@as("TrainingParameters") trainingParameters: option<trainingParameters>,
-@as("PerformHPO") performHPO: option<boolean_>,
-@as("AutoMLOverrideStrategy") autoMLOverrideStrategy: option<autoMLOverrideStrategy>,
-@as("PerformAutoML") performAutoML: option<boolean_>,
-@as("ForecastTypes") forecastTypes: option<forecastTypes>,
-@as("ForecastHorizon") forecastHorizon: option<integer_>,
-@as("AlgorithmArn") algorithmArn: option<arn>,
-@as("PredictorName") predictorName: option<name>,
-@as("PredictorArn") predictorArn: option<name>
+  @as("CreationTime") creationTime: option<timestamp_>,
+  @as("Message") message: option<message>,
+  @as("Status") status: option<status>,
+  @as("AutoMLAlgorithmArns") autoMLAlgorithmArns: option<arnList>,
+  @as("DatasetImportJobArns") datasetImportJobArns: option<arnList>,
+  @as("EstimatedTimeRemainingInMinutes") estimatedTimeRemainingInMinutes: option<long>,
+  @as("PredictorExecutionDetails") predictorExecutionDetails: option<predictorExecutionDetails>,
+  @as("EncryptionConfig") encryptionConfig: option<encryptionConfig>,
+  @as("FeaturizationConfig") featurizationConfig: option<featurizationConfig>,
+  @as("InputDataConfig") inputDataConfig: option<inputDataConfig>,
+  @as("HPOConfig") hpoconfig: option<hyperParameterTuningJobConfig>,
+  @as("EvaluationParameters") evaluationParameters: option<evaluationParameters>,
+  @as("TrainingParameters") trainingParameters: option<trainingParameters>,
+  @as("PerformHPO") performHPO: option<boolean_>,
+  @as("AutoMLOverrideStrategy") autoMLOverrideStrategy: option<autoMLOverrideStrategy>,
+  @as("PerformAutoML") performAutoML: option<boolean_>,
+  @as("ForecastTypes") forecastTypes: option<forecastTypes>,
+  @as("ForecastHorizon") forecastHorizon: option<integer_>,
+  @as("AlgorithmArn") algorithmArn: option<arn>,
+  @as("PredictorName") predictorName: option<name>,
+  @as("PredictorArn") predictorArn: option<name>
 }
   @module("@aws-sdk/client-forecast") @new external new_: (request) => t = "DescribePredictorCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -760,19 +766,19 @@ module CreatePredictor = {
   type t;
   type request = {
 @as("Tags") tags: option<tags>,
-@as("EncryptionConfig") encryptionConfig: option<encryptionConfig>,
-@as("FeaturizationConfig") featurizationConfig: featurizationConfig,
-@as("InputDataConfig") inputDataConfig: inputDataConfig,
-@as("HPOConfig") hpoconfig: option<hyperParameterTuningJobConfig>,
-@as("EvaluationParameters") evaluationParameters: option<evaluationParameters>,
-@as("TrainingParameters") trainingParameters: option<trainingParameters>,
-@as("PerformHPO") performHPO: option<boolean_>,
-@as("AutoMLOverrideStrategy") autoMLOverrideStrategy: option<autoMLOverrideStrategy>,
-@as("PerformAutoML") performAutoML: option<boolean_>,
-@as("ForecastTypes") forecastTypes: option<forecastTypes>,
-@as("ForecastHorizon") forecastHorizon: integer_,
-@as("AlgorithmArn") algorithmArn: option<arn>,
-@as("PredictorName") predictorName: name
+  @as("EncryptionConfig") encryptionConfig: option<encryptionConfig>,
+  @as("FeaturizationConfig") featurizationConfig: featurizationConfig,
+  @as("InputDataConfig") inputDataConfig: inputDataConfig,
+  @as("HPOConfig") hpoconfig: option<hyperParameterTuningJobConfig>,
+  @as("EvaluationParameters") evaluationParameters: option<evaluationParameters>,
+  @as("TrainingParameters") trainingParameters: option<trainingParameters>,
+  @as("PerformHPO") performHPO: option<boolean_>,
+  @as("AutoMLOverrideStrategy") autoMLOverrideStrategy: option<autoMLOverrideStrategy>,
+  @as("PerformAutoML") performAutoML: option<boolean_>,
+  @as("ForecastTypes") forecastTypes: option<forecastTypes>,
+  @as("ForecastHorizon") forecastHorizon: integer_,
+  @as("AlgorithmArn") algorithmArn: option<arn>,
+  @as("PredictorName") predictorName: name
 }
   type response = {
 @as("PredictorArn") predictorArn: option<arn>
@@ -788,7 +794,7 @@ module GetAccuracyMetrics = {
 }
   type response = {
 @as("AutoMLOverrideStrategy") autoMLOverrideStrategy: option<autoMLOverrideStrategy>,
-@as("PredictorEvaluationResults") predictorEvaluationResults: option<predictorEvaluationResults>
+  @as("PredictorEvaluationResults") predictorEvaluationResults: option<predictorEvaluationResults>
 }
   @module("@aws-sdk/client-forecast") @new external new_: (request) => t = "GetAccuracyMetricsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";

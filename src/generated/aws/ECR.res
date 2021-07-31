@@ -5,12 +5,14 @@ httpStatusCode: option<float>,
   cfId: option<string>,
   attempts: option<int>,
   totalRetryDelay: option<int>
-};
-type string_ = string
-type boolean_ = bool
-type integer_ = int
-type timestamp_ = Js.Date.t;
-type long = float
+}
+type awsServiceClient;
+@module("@aws-sdk/client-ecr") @new external createClient: unit => awsServiceClient = "ECRClient";
+type baseString = string
+type baseBoolean = bool
+type baseInteger = int
+type baseTimestamp = Js.Date.t;
+type baseLong = float
 type vulnerabilitySourceUpdateTimestamp = Js.Date.t;
 type url = string
 type uploadId = string
@@ -20,7 +22,7 @@ type tagKey = string
 type severityCount = int
 type scanTimestamp = Js.Date.t;
 type scanStatusDescription = string
-type scanStatus = [@as("FAILED") #FAILED | @as("COMPLETE") #COMPLETE | @as("IN_PROGRESS") #INPROGRESS]
+type scanStatus = [@as("FAILED") #FAILED | @as("COMPLETE") #COMPLETE | @as("IN_PROGRESS") #IN_PROGRESS]
 type scanOnPushFlag = bool
 type repositoryPolicyText = string
 type repositoryName = string
@@ -36,7 +38,7 @@ type maxResults = int
 type lifecyclePreviewMaxResults = int
 type lifecyclePolicyText = string
 type lifecyclePolicyRulePriority = int
-type lifecyclePolicyPreviewStatus = [@as("FAILED") #FAILED | @as("EXPIRED") #EXPIRED | @as("COMPLETE") #COMPLETE | @as("IN_PROGRESS") #INPROGRESS]
+type lifecyclePolicyPreviewStatus = [@as("FAILED") #FAILED | @as("EXPIRED") #EXPIRED | @as("COMPLETE") #COMPLETE | @as("IN_PROGRESS") #IN_PROGRESS]
 type layerSizeInBytes = float
 type layerPartBlob = NodeJs.Buffer.t
 type layerFailureReason = string
@@ -71,12 +73,12 @@ type arn = string
 type tagKeyList = array<tagKey>
 type tag = {
 @as("Value") value: option<tagValue>,
-@as("Key") key: option<tagKey>
+  @as("Key") key: option<tagKey>
 }
 type repositoryNameList = array<repositoryName>
 type replicationDestination = {
 registryId: registryId,
-region: region
+  region: region
 }
 type mediaTypeList = array<mediaType>
 type listImagesFilter = {
@@ -93,15 +95,15 @@ tagStatus: option<tagStatus>
 }
 type layerFailure = {
 failureReason: option<layerFailureReason>,
-failureCode: option<layerFailureCode>,
-layerDigest: option<batchedOperationLayerDigest>
+  failureCode: option<layerFailureCode>,
+  layerDigest: option<batchedOperationLayerDigest>
 }
 type layerDigestList = array<layerDigest>
 type layer = {
 mediaType: option<mediaType>,
-layerSize: option<layerSizeInBytes>,
-layerAvailability: option<layerAvailability>,
-layerDigest: option<layerDigest>
+  layerSize: option<layerSizeInBytes>,
+  layerAvailability: option<layerAvailability>,
+  layerDigest: option<layerDigest>
 }
 type imageTagList = array<imageTag>
 type imageScanningConfiguration = {
@@ -109,17 +111,17 @@ scanOnPush: option<scanOnPushFlag>
 }
 type imageScanStatus = {
 description: option<scanStatusDescription>,
-status: option<scanStatus>
+  status: option<scanStatus>
 }
 type imageIdentifier = {
 imageTag: option<imageTag>,
-imageDigest: option<imageDigest>
+  imageDigest: option<imageDigest>
 }
 type getAuthorizationTokenRegistryIdList = array<registryId>
-type findingSeverityCounts = Js.Dict.t< severityCount>
+type findingSeverityCounts = Js.Dict.t<severityCount>
 type encryptionConfiguration = {
 kmsKey: option<kmsKey>,
-encryptionType: encryptionType
+  encryptionType: encryptionType
 }
 type describeImagesFilter = {
 tagStatus: option<tagStatus>
@@ -127,51 +129,51 @@ tagStatus: option<tagStatus>
 type batchedOperationLayerDigestList = array<batchedOperationLayerDigest>
 type authorizationData = {
 proxyEndpoint: option<proxyEndpoint>,
-expiresAt: option<expirationTimestamp>,
-authorizationToken: option<base64>
+  expiresAt: option<expirationTimestamp>,
+  authorizationToken: option<base64>
 }
 type attribute = {
 value: option<attributeValue>,
-key: attributeKey
+  key: attributeKey
 }
 type tagList_ = array<tag>
 type repository = {
 encryptionConfiguration: option<encryptionConfiguration>,
-imageScanningConfiguration: option<imageScanningConfiguration>,
-imageTagMutability: option<imageTagMutability>,
-createdAt: option<creationTimestamp>,
-repositoryUri: option<url>,
-repositoryName: option<repositoryName>,
-registryId: option<registryId>,
-repositoryArn: option<arn>
+  imageScanningConfiguration: option<imageScanningConfiguration>,
+  imageTagMutability: option<imageTagMutability>,
+  createdAt: option<creationTimestamp>,
+  repositoryUri: option<url>,
+  repositoryName: option<repositoryName>,
+  registryId: option<registryId>,
+  repositoryArn: option<arn>
 }
 type replicationDestinationList = array<replicationDestination>
 type lifecyclePolicyPreviewResult = {
 appliedRulePriority: option<lifecyclePolicyRulePriority>,
-action: option<lifecyclePolicyRuleAction>,
-imagePushedAt: option<pushTimestamp>,
-imageDigest: option<imageDigest>,
-imageTags: option<imageTagList>
+  action: option<lifecyclePolicyRuleAction>,
+  imagePushedAt: option<pushTimestamp>,
+  imageDigest: option<imageDigest>,
+  imageTags: option<imageTagList>
 }
 type layerList = array<layer>
 type layerFailureList = array<layerFailure>
 type imageScanFindingsSummary = {
 findingSeverityCounts: option<findingSeverityCounts>,
-vulnerabilitySourceUpdatedAt: option<vulnerabilitySourceUpdateTimestamp>,
-imageScanCompletedAt: option<scanTimestamp>
+  vulnerabilitySourceUpdatedAt: option<vulnerabilitySourceUpdateTimestamp>,
+  imageScanCompletedAt: option<scanTimestamp>
 }
 type imageIdentifierList = array<imageIdentifier>
 type imageFailure = {
 failureReason: option<imageFailureReason>,
-failureCode: option<imageFailureCode>,
-imageId: option<imageIdentifier>
+  failureCode: option<imageFailureCode>,
+  imageId: option<imageIdentifier>
 }
 type image = {
 imageManifestMediaType: option<mediaType>,
-imageManifest: option<imageManifest>,
-imageId: option<imageIdentifier>,
-repositoryName: option<repositoryName>,
-registryId: option<registryId>
+  imageManifest: option<imageManifest>,
+  imageId: option<imageIdentifier>,
+  repositoryName: option<repositoryName>,
+  registryId: option<registryId>
 }
 type authorizationDataList = array<authorizationData>
 type attributeList = array<attribute>
@@ -182,24 +184,24 @@ destinations: replicationDestinationList
 type lifecyclePolicyPreviewResultList = array<lifecyclePolicyPreviewResult>
 type imageScanFinding = {
 attributes: option<attributeList>,
-severity: option<findingSeverity>,
-uri: option<url>,
-description: option<findingDescription>,
-name: option<findingName>
+  severity: option<findingSeverity>,
+  uri: option<url>,
+  description: option<findingDescription>,
+  name: option<findingName>
 }
 type imageList = array<image>
 type imageFailureList = array<imageFailure>
 type imageDetail = {
 artifactMediaType: option<mediaType>,
-imageManifestMediaType: option<mediaType>,
-imageScanFindingsSummary: option<imageScanFindingsSummary>,
-imageScanStatus: option<imageScanStatus>,
-imagePushedAt: option<pushTimestamp>,
-imageSizeInBytes: option<imageSizeInBytes>,
-imageTags: option<imageTagList>,
-imageDigest: option<imageDigest>,
-repositoryName: option<repositoryName>,
-registryId: option<registryId>
+  imageManifestMediaType: option<mediaType>,
+  imageScanFindingsSummary: option<imageScanFindingsSummary>,
+  imageScanStatus: option<imageScanStatus>,
+  imagePushedAt: option<pushTimestamp>,
+  imageSizeInBytes: option<imageSizeInBytes>,
+  imageTags: option<imageTagList>,
+  imageDigest: option<imageDigest>,
+  repositoryName: option<repositoryName>,
+  registryId: option<registryId>
 }
 type replicationRuleList = array<replicationRule>
 type imageScanFindingList = array<imageScanFinding>
@@ -209,27 +211,26 @@ rules: replicationRuleList
 }
 type imageScanFindings = {
 findingSeverityCounts: option<findingSeverityCounts>,
-findings: option<imageScanFindingList>,
-vulnerabilitySourceUpdatedAt: option<vulnerabilitySourceUpdateTimestamp>,
-imageScanCompletedAt: option<scanTimestamp>
+  findings: option<imageScanFindingList>,
+  vulnerabilitySourceUpdatedAt: option<vulnerabilitySourceUpdateTimestamp>,
+  imageScanCompletedAt: option<scanTimestamp>
 }
-type awsServiceClient;
-@module("@aws-sdk/client-ecr") @new external createClient: unit => awsServiceClient = "ECRClient";
+
 module UploadLayerPart = {
   type t;
   type request = {
 layerPartBlob: layerPartBlob,
-partLastByte: partSize,
-partFirstByte: partSize,
-uploadId: uploadId,
-repositoryName: repositoryName,
-registryId: option<registryId>
+  partLastByte: partSize,
+  partFirstByte: partSize,
+  uploadId: uploadId,
+  repositoryName: repositoryName,
+  registryId: option<registryId>
 }
   type response = {
 lastByteReceived: option<partSize>,
-uploadId: option<uploadId>,
-repositoryName: option<repositoryName>,
-registryId: option<registryId>
+  uploadId: option<uploadId>,
+  repositoryName: option<repositoryName>,
+  registryId: option<registryId>
 }
   @module("@aws-sdk/client-ecr") @new external new_: (request) => t = "UploadLayerPartCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -239,14 +240,14 @@ module StartLifecyclePolicyPreview = {
   type t;
   type request = {
 lifecyclePolicyText: option<lifecyclePolicyText>,
-repositoryName: repositoryName,
-registryId: option<registryId>
+  repositoryName: repositoryName,
+  registryId: option<registryId>
 }
   type response = {
 status: option<lifecyclePolicyPreviewStatus>,
-lifecyclePolicyText: option<lifecyclePolicyText>,
-repositoryName: option<repositoryName>,
-registryId: option<registryId>
+  lifecyclePolicyText: option<lifecyclePolicyText>,
+  repositoryName: option<repositoryName>,
+  registryId: option<registryId>
 }
   @module("@aws-sdk/client-ecr") @new external new_: (request) => t = "StartLifecyclePolicyPreviewCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -256,14 +257,14 @@ module SetRepositoryPolicy = {
   type t;
   type request = {
 force: option<forceFlag>,
-policyText: repositoryPolicyText,
-repositoryName: repositoryName,
-registryId: option<registryId>
+  policyText: repositoryPolicyText,
+  repositoryName: repositoryName,
+  registryId: option<registryId>
 }
   type response = {
 policyText: option<repositoryPolicyText>,
-repositoryName: option<repositoryName>,
-registryId: option<registryId>
+  repositoryName: option<repositoryName>,
+  registryId: option<registryId>
 }
   @module("@aws-sdk/client-ecr") @new external new_: (request) => t = "SetRepositoryPolicyCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -276,7 +277,7 @@ policyText: registryPolicyText
 }
   type response = {
 policyText: option<registryPolicyText>,
-registryId: option<registryId>
+  registryId: option<registryId>
 }
   @module("@aws-sdk/client-ecr") @new external new_: (request) => t = "PutRegistryPolicyCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -286,13 +287,13 @@ module PutLifecyclePolicy = {
   type t;
   type request = {
 lifecyclePolicyText: lifecyclePolicyText,
-repositoryName: repositoryName,
-registryId: option<registryId>
+  repositoryName: repositoryName,
+  registryId: option<registryId>
 }
   type response = {
 lifecyclePolicyText: option<lifecyclePolicyText>,
-repositoryName: option<repositoryName>,
-registryId: option<registryId>
+  repositoryName: option<repositoryName>,
+  registryId: option<registryId>
 }
   @module("@aws-sdk/client-ecr") @new external new_: (request) => t = "PutLifecyclePolicyCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -302,13 +303,13 @@ module PutImageTagMutability = {
   type t;
   type request = {
 imageTagMutability: imageTagMutability,
-repositoryName: repositoryName,
-registryId: option<registryId>
+  repositoryName: repositoryName,
+  registryId: option<registryId>
 }
   type response = {
 imageTagMutability: option<imageTagMutability>,
-repositoryName: option<repositoryName>,
-registryId: option<registryId>
+  repositoryName: option<repositoryName>,
+  registryId: option<registryId>
 }
   @module("@aws-sdk/client-ecr") @new external new_: (request) => t = "PutImageTagMutabilityCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -318,11 +319,11 @@ module InitiateLayerUpload = {
   type t;
   type request = {
 repositoryName: repositoryName,
-registryId: option<registryId>
+  registryId: option<registryId>
 }
   type response = {
 partSize: option<partSize>,
-uploadId: option<uploadId>
+  uploadId: option<uploadId>
 }
   @module("@aws-sdk/client-ecr") @new external new_: (request) => t = "InitiateLayerUploadCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -332,12 +333,12 @@ module GetRepositoryPolicy = {
   type t;
   type request = {
 repositoryName: repositoryName,
-registryId: option<registryId>
+  registryId: option<registryId>
 }
   type response = {
 policyText: option<repositoryPolicyText>,
-repositoryName: option<repositoryName>,
-registryId: option<registryId>
+  repositoryName: option<repositoryName>,
+  registryId: option<registryId>
 }
   @module("@aws-sdk/client-ecr") @new external new_: (request) => t = "GetRepositoryPolicyCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -348,7 +349,7 @@ module GetRegistryPolicy = {
   type request = unit
   type response = {
 policyText: option<registryPolicyText>,
-registryId: option<registryId>
+  registryId: option<registryId>
 }
   @module("@aws-sdk/client-ecr") @new external new_: (request) => t = "GetRegistryPolicyCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -358,13 +359,13 @@ module GetLifecyclePolicy = {
   type t;
   type request = {
 repositoryName: repositoryName,
-registryId: option<registryId>
+  registryId: option<registryId>
 }
   type response = {
 lastEvaluatedAt: option<evaluationTimestamp>,
-lifecyclePolicyText: option<lifecyclePolicyText>,
-repositoryName: option<repositoryName>,
-registryId: option<registryId>
+  lifecyclePolicyText: option<lifecyclePolicyText>,
+  repositoryName: option<repositoryName>,
+  registryId: option<registryId>
 }
   @module("@aws-sdk/client-ecr") @new external new_: (request) => t = "GetLifecyclePolicyCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -374,12 +375,12 @@ module GetDownloadUrlForLayer = {
   type t;
   type request = {
 layerDigest: layerDigest,
-repositoryName: repositoryName,
-registryId: option<registryId>
+  repositoryName: repositoryName,
+  registryId: option<registryId>
 }
   type response = {
 layerDigest: option<layerDigest>,
-downloadUrl: option<url>
+  downloadUrl: option<url>
 }
   @module("@aws-sdk/client-ecr") @new external new_: (request) => t = "GetDownloadUrlForLayerCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -389,12 +390,12 @@ module DeleteRepositoryPolicy = {
   type t;
   type request = {
 repositoryName: repositoryName,
-registryId: option<registryId>
+  registryId: option<registryId>
 }
   type response = {
 policyText: option<repositoryPolicyText>,
-repositoryName: option<repositoryName>,
-registryId: option<registryId>
+  repositoryName: option<repositoryName>,
+  registryId: option<registryId>
 }
   @module("@aws-sdk/client-ecr") @new external new_: (request) => t = "DeleteRepositoryPolicyCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -405,7 +406,7 @@ module DeleteRegistryPolicy = {
   type request = unit
   type response = {
 policyText: option<registryPolicyText>,
-registryId: option<registryId>
+  registryId: option<registryId>
 }
   @module("@aws-sdk/client-ecr") @new external new_: (request) => t = "DeleteRegistryPolicyCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -415,13 +416,13 @@ module DeleteLifecyclePolicy = {
   type t;
   type request = {
 repositoryName: repositoryName,
-registryId: option<registryId>
+  registryId: option<registryId>
 }
   type response = {
 lastEvaluatedAt: option<evaluationTimestamp>,
-lifecyclePolicyText: option<lifecyclePolicyText>,
-repositoryName: option<repositoryName>,
-registryId: option<registryId>
+  lifecyclePolicyText: option<lifecyclePolicyText>,
+  repositoryName: option<repositoryName>,
+  registryId: option<registryId>
 }
   @module("@aws-sdk/client-ecr") @new external new_: (request) => t = "DeleteLifecyclePolicyCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -431,7 +432,7 @@ module UntagResource = {
   type t;
   type request = {
 tagKeys: tagKeyList,
-resourceArn: arn
+  resourceArn: arn
 }
   type response = unit
   @module("@aws-sdk/client-ecr") @new external new_: (request) => t = "UntagResourceCommand";
@@ -442,14 +443,14 @@ module StartImageScan = {
   type t;
   type request = {
 imageId: imageIdentifier,
-repositoryName: repositoryName,
-registryId: option<registryId>
+  repositoryName: repositoryName,
+  registryId: option<registryId>
 }
   type response = {
 imageScanStatus: option<imageScanStatus>,
-imageId: option<imageIdentifier>,
-repositoryName: option<repositoryName>,
-registryId: option<registryId>
+  imageId: option<imageIdentifier>,
+  repositoryName: option<repositoryName>,
+  registryId: option<registryId>
 }
   @module("@aws-sdk/client-ecr") @new external new_: (request) => t = "StartImageScanCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -459,13 +460,13 @@ module PutImageScanningConfiguration = {
   type t;
   type request = {
 imageScanningConfiguration: imageScanningConfiguration,
-repositoryName: repositoryName,
-registryId: option<registryId>
+  repositoryName: repositoryName,
+  registryId: option<registryId>
 }
   type response = {
 imageScanningConfiguration: option<imageScanningConfiguration>,
-repositoryName: option<repositoryName>,
-registryId: option<registryId>
+  repositoryName: option<repositoryName>,
+  registryId: option<registryId>
 }
   @module("@aws-sdk/client-ecr") @new external new_: (request) => t = "PutImageScanningConfigurationCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -475,15 +476,15 @@ module CompleteLayerUpload = {
   type t;
   type request = {
 layerDigests: layerDigestList,
-uploadId: uploadId,
-repositoryName: repositoryName,
-registryId: option<registryId>
+  uploadId: uploadId,
+  repositoryName: repositoryName,
+  registryId: option<registryId>
 }
   type response = {
 layerDigest: option<layerDigest>,
-uploadId: option<uploadId>,
-repositoryName: option<repositoryName>,
-registryId: option<registryId>
+  uploadId: option<uploadId>,
+  repositoryName: option<repositoryName>,
+  registryId: option<registryId>
 }
   @module("@aws-sdk/client-ecr") @new external new_: (request) => t = "CompleteLayerUploadCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -493,7 +494,7 @@ module TagResource = {
   type t;
   type request = {
 tags: tagList_,
-resourceArn: arn
+  resourceArn: arn
 }
   type response = unit
   @module("@aws-sdk/client-ecr") @new external new_: (request) => t = "TagResourceCommand";
@@ -504,11 +505,11 @@ module PutImage = {
   type t;
   type request = {
 imageDigest: option<imageDigest>,
-imageTag: option<imageTag>,
-imageManifestMediaType: option<mediaType>,
-imageManifest: imageManifest,
-repositoryName: repositoryName,
-registryId: option<registryId>
+  imageTag: option<imageTag>,
+  imageManifestMediaType: option<mediaType>,
+  imageManifest: imageManifest,
+  repositoryName: repositoryName,
+  registryId: option<registryId>
 }
   type response = {
 image: option<image>
@@ -533,14 +534,14 @@ module ListImages = {
   type t;
   type request = {
 filter: option<listImagesFilter>,
-maxResults: option<maxResults>,
-nextToken: option<nextToken>,
-repositoryName: repositoryName,
-registryId: option<registryId>
+  maxResults: option<maxResults>,
+  nextToken: option<nextToken>,
+  repositoryName: repositoryName,
+  registryId: option<registryId>
 }
   type response = {
 nextToken: option<nextToken>,
-imageIds: option<imageIdentifierList>
+  imageIds: option<imageIdentifierList>
 }
   @module("@aws-sdk/client-ecr") @new external new_: (request) => t = "ListImagesCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -562,8 +563,8 @@ module DeleteRepository = {
   type t;
   type request = {
 force: option<forceFlag>,
-repositoryName: repositoryName,
-registryId: option<registryId>
+  repositoryName: repositoryName,
+  registryId: option<registryId>
 }
   type response = {
 repository: option<repository>
@@ -576,10 +577,10 @@ module CreateRepository = {
   type t;
   type request = {
 encryptionConfiguration: option<encryptionConfiguration>,
-imageScanningConfiguration: option<imageScanningConfiguration>,
-imageTagMutability: option<imageTagMutability>,
-tags: option<tagList_>,
-repositoryName: repositoryName
+  imageScanningConfiguration: option<imageScanningConfiguration>,
+  imageTagMutability: option<imageTagMutability>,
+  tags: option<tagList_>,
+  repositoryName: repositoryName
 }
   type response = {
 repository: option<repository>
@@ -592,12 +593,12 @@ module BatchCheckLayerAvailability = {
   type t;
   type request = {
 layerDigests: batchedOperationLayerDigestList,
-repositoryName: repositoryName,
-registryId: option<registryId>
+  repositoryName: repositoryName,
+  registryId: option<registryId>
 }
   type response = {
 failures: option<layerFailureList>,
-layers: option<layerList>
+  layers: option<layerList>
 }
   @module("@aws-sdk/client-ecr") @new external new_: (request) => t = "BatchCheckLayerAvailabilityCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -607,20 +608,20 @@ module GetLifecyclePolicyPreview = {
   type t;
   type request = {
 filter: option<lifecyclePolicyPreviewFilter>,
-maxResults: option<lifecyclePreviewMaxResults>,
-nextToken: option<nextToken>,
-imageIds: option<imageIdentifierList>,
-repositoryName: repositoryName,
-registryId: option<registryId>
+  maxResults: option<lifecyclePreviewMaxResults>,
+  nextToken: option<nextToken>,
+  imageIds: option<imageIdentifierList>,
+  repositoryName: repositoryName,
+  registryId: option<registryId>
 }
   type response = {
 summary: option<lifecyclePolicyPreviewSummary>,
-previewResults: option<lifecyclePolicyPreviewResultList>,
-nextToken: option<nextToken>,
-status: option<lifecyclePolicyPreviewStatus>,
-lifecyclePolicyText: option<lifecyclePolicyText>,
-repositoryName: option<repositoryName>,
-registryId: option<registryId>
+  previewResults: option<lifecyclePolicyPreviewResultList>,
+  nextToken: option<nextToken>,
+  status: option<lifecyclePolicyPreviewStatus>,
+  lifecyclePolicyText: option<lifecyclePolicyText>,
+  repositoryName: option<repositoryName>,
+  registryId: option<registryId>
 }
   @module("@aws-sdk/client-ecr") @new external new_: (request) => t = "GetLifecyclePolicyPreviewCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -630,13 +631,13 @@ module DescribeRepositories = {
   type t;
   type request = {
 maxResults: option<maxResults>,
-nextToken: option<nextToken>,
-repositoryNames: option<repositoryNameList>,
-registryId: option<registryId>
+  nextToken: option<nextToken>,
+  repositoryNames: option<repositoryNameList>,
+  registryId: option<registryId>
 }
   type response = {
 nextToken: option<nextToken>,
-repositories: option<repositoryList>
+  repositories: option<repositoryList>
 }
   @module("@aws-sdk/client-ecr") @new external new_: (request) => t = "DescribeRepositoriesCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -646,13 +647,13 @@ module BatchGetImage = {
   type t;
   type request = {
 acceptedMediaTypes: option<mediaTypeList>,
-imageIds: imageIdentifierList,
-repositoryName: repositoryName,
-registryId: option<registryId>
+  imageIds: imageIdentifierList,
+  repositoryName: repositoryName,
+  registryId: option<registryId>
 }
   type response = {
 failures: option<imageFailureList>,
-images: option<imageList>
+  images: option<imageList>
 }
   @module("@aws-sdk/client-ecr") @new external new_: (request) => t = "BatchGetImageCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -662,12 +663,12 @@ module BatchDeleteImage = {
   type t;
   type request = {
 imageIds: imageIdentifierList,
-repositoryName: repositoryName,
-registryId: option<registryId>
+  repositoryName: repositoryName,
+  registryId: option<registryId>
 }
   type response = {
 failures: option<imageFailureList>,
-imageIds: option<imageIdentifierList>
+  imageIds: option<imageIdentifierList>
 }
   @module("@aws-sdk/client-ecr") @new external new_: (request) => t = "BatchDeleteImageCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -677,15 +678,15 @@ module DescribeImages = {
   type t;
   type request = {
 filter: option<describeImagesFilter>,
-maxResults: option<maxResults>,
-nextToken: option<nextToken>,
-imageIds: option<imageIdentifierList>,
-repositoryName: repositoryName,
-registryId: option<registryId>
+  maxResults: option<maxResults>,
+  nextToken: option<nextToken>,
+  imageIds: option<imageIdentifierList>,
+  repositoryName: repositoryName,
+  registryId: option<registryId>
 }
   type response = {
 nextToken: option<nextToken>,
-imageDetails: option<imageDetailList>
+  imageDetails: option<imageDetailList>
 }
   @module("@aws-sdk/client-ecr") @new external new_: (request) => t = "DescribeImagesCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -708,7 +709,7 @@ module DescribeRegistry = {
   type request = unit
   type response = {
 replicationConfiguration: option<replicationConfiguration>,
-registryId: option<registryId>
+  registryId: option<registryId>
 }
   @module("@aws-sdk/client-ecr") @new external new_: (request) => t = "DescribeRegistryCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -718,18 +719,18 @@ module DescribeImageScanFindings = {
   type t;
   type request = {
 maxResults: option<maxResults>,
-nextToken: option<nextToken>,
-imageId: imageIdentifier,
-repositoryName: repositoryName,
-registryId: option<registryId>
+  nextToken: option<nextToken>,
+  imageId: imageIdentifier,
+  repositoryName: repositoryName,
+  registryId: option<registryId>
 }
   type response = {
 nextToken: option<nextToken>,
-imageScanFindings: option<imageScanFindings>,
-imageScanStatus: option<imageScanStatus>,
-imageId: option<imageIdentifier>,
-repositoryName: option<repositoryName>,
-registryId: option<registryId>
+  imageScanFindings: option<imageScanFindings>,
+  imageScanStatus: option<imageScanStatus>,
+  imageId: option<imageIdentifier>,
+  repositoryName: option<repositoryName>,
+  registryId: option<registryId>
 }
   @module("@aws-sdk/client-ecr") @new external new_: (request) => t = "DescribeImageScanFindingsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";

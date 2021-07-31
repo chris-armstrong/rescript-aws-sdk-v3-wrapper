@@ -5,11 +5,14 @@ httpStatusCode: option<float>,
   cfId: option<string>,
   attempts: option<int>,
   totalRetryDelay: option<int>
-};
-type string_ = string
-type boolean_ = bool
-type integer_ = int
-type long = float
+}
+type awsServiceClient;
+@module("@aws-sdk/client-iotanalytics") @new external createClient: unit => awsServiceClient = "IoTAnalyticsClient";
+type baseString = string
+type baseBoolean = bool
+type baseInteger = int
+type baseTimestamp = Js.Date.t;
+type baseLong = float
 type resourceId = string
 type volumeSizeInGB = int
 type variableName = string
@@ -78,7 +81,7 @@ type datasetContentState = [@as("FAILED") #FAILED | @as("SUCCEEDED") #SUCCEEDED 
 type datasetArn = string
 type datasetActionType = [@as("CONTAINER") #CONTAINER | @as("QUERY") #QUERY]
 type datasetActionName = string
-type computeType = [@as("ACU_2") #ACU2 | @as("ACU_1") #ACU1]
+type computeType = [@as("ACU_2") #ACU_2 | @as("ACU_1") #ACU_1]
 type columnName = string
 type columnDataType = string
 type channelStatus = [@as("DELETING") #DELETING | @as("ACTIVE") #ACTIVE | @as("CREATING") #CREATING]
@@ -91,7 +94,7 @@ type activityName = string
 type activityBatchSize = int
 type versioningConfiguration = {
 maxVersions: option<maxVersions>,
-unlimited: option<unlimitedVersioning>
+  unlimited: option<unlimitedVersioning>
 }
 type triggeringDataset = {
 name: datasetName
@@ -99,7 +102,7 @@ name: datasetName
 type tagKeyList = array<tagKey>
 type tag = {
 value: tagValue,
-key: tagKey
+  key: tagKey
 }
 type schedule = {
 expression: option<scheduleExpression>
@@ -107,16 +110,16 @@ expression: option<scheduleExpression>
 type s3PathChannelMessages = array<s3PathChannelMessage>
 type retentionPeriod = {
 numberOfDays: option<retentionPeriodInDays>,
-unlimited: option<unlimitedRetentionPeriod>
+  unlimited: option<unlimitedRetentionPeriod>
 }
 type resourceConfiguration = {
 volumeSizeInGB: volumeSizeInGB,
-computeType: computeType
+  computeType: computeType
 }
 type reprocessingSummary = {
 creationTime: option<timestamp_>,
-status: option<reprocessingStatus>,
-id: option<reprocessingId>
+  status: option<reprocessingStatus>,
+  id: option<reprocessingId>
 }
 type outputFileUriValue = {
 fileName: outputFileName
@@ -124,142 +127,142 @@ fileName: outputFileName
 type messagePayloads = array<messagePayload>
 type message = {
 payload: messagePayload,
-messageId: messageId
+  messageId: messageId
 }
 type mathActivity = {
 next: option<activityName>,
-math: mathExpression,
-attribute: attributeName,
-name: activityName
+  math: mathExpression,
+  attribute: attributeName,
+  name: activityName
 }
 type loggingOptions = {
 enabled: loggingEnabled,
-level: loggingLevel,
-roleArn: roleArn
+  level: loggingLevel,
+  roleArn: roleArn
 }
 type lambdaActivity = {
 next: option<activityName>,
-batchSize: activityBatchSize,
-lambdaName: lambdaName,
-name: activityName
+  batchSize: activityBatchSize,
+  lambdaName: lambdaName,
+  name: activityName
 }
 type iotEventsDestinationConfiguration = {
 roleArn: roleArn,
-inputName: iotEventsInputName
+  inputName: iotEventsInputName
 }
 type glueConfiguration = {
 databaseName: glueDatabaseName,
-tableName: glueTableName
+  tableName: glueTableName
 }
 type filterActivity = {
 next: option<activityName>,
-filter: filterExpression,
-name: activityName
+  filter: filterExpression,
+  name: activityName
 }
 type estimatedResourceSize = {
 estimatedOn: option<timestamp_>,
-estimatedSizeInBytes: option<sizeInBytes>
+  estimatedSizeInBytes: option<sizeInBytes>
 }
 type deviceShadowEnrichActivity = {
 next: option<activityName>,
-roleArn: roleArn,
-thingName: attributeName,
-attribute: attributeName,
-name: activityName
+  roleArn: roleArn,
+  thingName: attributeName,
+  attribute: attributeName,
+  name: activityName
 }
 type deviceRegistryEnrichActivity = {
 next: option<activityName>,
-roleArn: roleArn,
-thingName: attributeName,
-attribute: attributeName,
-name: activityName
+  roleArn: roleArn,
+  thingName: attributeName,
+  attribute: attributeName,
+  name: activityName
 }
 type deltaTimeSessionWindowConfiguration = {
 timeoutInMinutes: sessionTimeoutInMinutes
 }
 type deltaTime = {
 timeExpression: timeExpression,
-offsetSeconds: offsetSeconds
+  offsetSeconds: offsetSeconds
 }
 type datastoreActivity = {
 datastoreName: datastoreName,
-name: activityName
+  name: activityName
 }
 type datasetEntry = {
 dataURI: option<presignedURI>,
-entryName: option<entryName>
+  entryName: option<entryName>
 }
 type datasetContentVersionValue = {
 datasetName: datasetName
 }
 type datasetContentStatus = {
 reason: option<reason>,
-state: option<datasetContentState>
+  state: option<datasetContentState>
 }
 type datasetActionSummary = {
 actionType: option<datasetActionType>,
-actionName: option<datasetActionName>
+  actionName: option<datasetActionName>
 }
 type customerManagedDatastoreS3StorageSummary = {
 roleArn: option<roleArn>,
-keyPrefix: option<s3KeyPrefix>,
-bucket: option<bucketName>
+  keyPrefix: option<s3KeyPrefix>,
+  bucket: option<bucketName>
 }
 type customerManagedDatastoreS3Storage = {
 roleArn: roleArn,
-keyPrefix: option<s3KeyPrefix>,
-bucket: bucketName
+  keyPrefix: option<s3KeyPrefix>,
+  bucket: bucketName
 }
 type customerManagedChannelS3StorageSummary = {
 roleArn: option<roleArn>,
-keyPrefix: option<s3KeyPrefix>,
-bucket: option<bucketName>
+  keyPrefix: option<s3KeyPrefix>,
+  bucket: option<bucketName>
 }
 type customerManagedChannelS3Storage = {
 roleArn: roleArn,
-keyPrefix: option<s3KeyPrefix>,
-bucket: bucketName
+  keyPrefix: option<s3KeyPrefix>,
+  bucket: bucketName
 }
 type column = {
 @as("type") type_: columnDataType,
-name: columnName
+  name: columnName
 }
 type channelActivity = {
 next: option<activityName>,
-channelName: channelName,
-name: activityName
+  channelName: channelName,
+  name: activityName
 }
 type batchPutMessageErrorEntry = {
 errorMessage: option<errorMessage>,
-errorCode: option<errorCode>,
-messageId: option<messageId>
+  errorCode: option<errorCode>,
+  messageId: option<messageId>
 }
 type attributeNames = array<attributeName>
-type attributeNameMapping = Js.Dict.t< attributeName>
+type attributeNameMapping = Js.Dict.t<attributeName>
 type variable = {
 outputFileUriValue: option<outputFileUriValue>,
-datasetContentVersionValue: option<datasetContentVersionValue>,
-doubleValue: option<doubleValue>,
-stringValue: option<stringValue>,
-name: variableName
+  datasetContentVersionValue: option<datasetContentVersionValue>,
+  doubleValue: option<doubleValue>,
+  stringValue: option<stringValue>,
+  name: variableName
 }
 type tagList_ = array<tag>
 type selectAttributesActivity = {
 next: option<activityName>,
-attributes: attributeNames,
-name: activityName
+  attributes: attributeNames,
+  name: activityName
 }
 type s3DestinationConfiguration = {
 roleArn: roleArn,
-glueConfiguration: option<glueConfiguration>,
-key: bucketKeyExpression,
-bucket: bucketName
+  glueConfiguration: option<glueConfiguration>,
+  key: bucketKeyExpression,
+  bucket: bucketName
 }
 type reprocessingSummaries = array<reprocessingSummary>
 type removeAttributesActivity = {
 next: option<activityName>,
-attributes: attributeNames,
-name: activityName
+  attributes: attributeNames,
+  name: activityName
 }
 type queryFilter = {
 deltaTime: option<deltaTime>
@@ -270,33 +273,36 @@ deltaTimeSessionWindowConfiguration: option<deltaTimeSessionWindowConfiguration>
 }
 type datastoreStorageSummary = {
 customerManagedS3: option<customerManagedDatastoreS3StorageSummary>,
-serviceManagedS3: option<serviceManagedDatastoreS3StorageSummary>
+  serviceManagedS3: option<serviceManagedDatastoreS3StorageSummary>
 }
-type datastoreStorage = CustomerManagedS3(customerManagedDatastoreS3Storage) | ServiceManagedS3(serviceManagedDatastoreS3Storage);
+type datastoreStorage = {
+customerManagedS3: option<customerManagedDatastoreS3Storage>,
+  serviceManagedS3: option<serviceManagedDatastoreS3Storage>
+}
 type datastoreStatistics = {
 size: option<estimatedResourceSize>
 }
 type datasetTrigger = {
 dataset: option<triggeringDataset>,
-schedule: option<schedule>
+  schedule: option<schedule>
 }
 type datasetEntries = array<datasetEntry>
 type datasetContentSummary = {
 completionTime: option<timestamp_>,
-scheduleTime: option<timestamp_>,
-creationTime: option<timestamp_>,
-status: option<datasetContentStatus>,
-version: option<datasetContentVersion>
+  scheduleTime: option<timestamp_>,
+  creationTime: option<timestamp_>,
+  status: option<datasetContentStatus>,
+  version: option<datasetContentVersion>
 }
 type datasetActionSummaries = array<datasetActionSummary>
 type columns = array<column>
 type channelStorageSummary = {
 customerManagedS3: option<customerManagedChannelS3StorageSummary>,
-serviceManagedS3: option<serviceManagedChannelS3StorageSummary>
+  serviceManagedS3: option<serviceManagedChannelS3StorageSummary>
 }
 type channelStorage = {
 customerManagedS3: option<customerManagedChannelS3Storage>,
-serviceManagedS3: option<serviceManagedChannelS3Storage>
+  serviceManagedS3: option<serviceManagedChannelS3Storage>
 }
 type channelStatistics = {
 size: option<estimatedResourceSize>
@@ -307,8 +313,8 @@ s3Paths: option<s3PathChannelMessages>
 type batchPutMessageErrorEntries = array<batchPutMessageErrorEntry>
 type addAttributesActivity = {
 next: option<activityName>,
-attributes: attributeNameMapping,
-name: activityName
+  attributes: attributeNameMapping,
+  name: activityName
 }
 type variables = array<variable>
 type schemaDefinition = {
@@ -317,62 +323,62 @@ columns: option<columns>
 type queryFilters = array<queryFilter>
 type pipelineSummary = {
 lastUpdateTime: option<timestamp_>,
-creationTime: option<timestamp_>,
-reprocessingSummaries: option<reprocessingSummaries>,
-pipelineName: option<pipelineName>
+  creationTime: option<timestamp_>,
+  reprocessingSummaries: option<reprocessingSummaries>,
+  pipelineName: option<pipelineName>
 }
 type pipelineActivity = {
 deviceShadowEnrich: option<deviceShadowEnrichActivity>,
-deviceRegistryEnrich: option<deviceRegistryEnrichActivity>,
-math: option<mathActivity>,
-filter: option<filterActivity>,
-selectAttributes: option<selectAttributesActivity>,
-removeAttributes: option<removeAttributesActivity>,
-addAttributes: option<addAttributesActivity>,
-datastore: option<datastoreActivity>,
-lambda: option<lambdaActivity>,
-channel: option<channelActivity>
+  deviceRegistryEnrich: option<deviceRegistryEnrichActivity>,
+  math: option<mathActivity>,
+  filter: option<filterActivity>,
+  selectAttributes: option<selectAttributesActivity>,
+  removeAttributes: option<removeAttributesActivity>,
+  addAttributes: option<addAttributesActivity>,
+  datastore: option<datastoreActivity>,
+  lambda: option<lambdaActivity>,
+  channel: option<channelActivity>
 }
 type lateDataRule = {
 ruleConfiguration: lateDataRuleConfiguration,
-ruleName: option<lateDataRuleName>
+  ruleName: option<lateDataRuleName>
 }
 type datastoreSummary = {
 fileFormatType: option<fileFormatType>,
-lastMessageArrivalTime: option<timestamp_>,
-lastUpdateTime: option<timestamp_>,
-creationTime: option<timestamp_>,
-status: option<datastoreStatus>,
-datastoreStorage: option<datastoreStorageSummary>,
-datastoreName: option<datastoreName>
+  lastMessageArrivalTime: option<timestamp_>,
+  lastUpdateTime: option<timestamp_>,
+  creationTime: option<timestamp_>,
+  status: option<datastoreStatus>,
+  datastoreStorage: option<datastoreStorageSummary>,
+  datastoreName: option<datastoreName>
 }
 type datasetTriggers = array<datasetTrigger>
 type datasetContentSummaries = array<datasetContentSummary>
 type datasetContentDeliveryDestination = {
 s3DestinationConfiguration: option<s3DestinationConfiguration>,
-iotEventsDestinationConfiguration: option<iotEventsDestinationConfiguration>
+  iotEventsDestinationConfiguration: option<iotEventsDestinationConfiguration>
 }
 type channelSummary = {
 lastMessageArrivalTime: option<timestamp_>,
-lastUpdateTime: option<timestamp_>,
-creationTime: option<timestamp_>,
-status: option<channelStatus>,
-channelStorage: option<channelStorageSummary>,
-channelName: option<channelName>
+  lastUpdateTime: option<timestamp_>,
+  creationTime: option<timestamp_>,
+  status: option<channelStatus>,
+  channelStorage: option<channelStorageSummary>,
+  channelName: option<channelName>
 }
 type channel = {
 lastMessageArrivalTime: option<timestamp_>,
-lastUpdateTime: option<timestamp_>,
-creationTime: option<timestamp_>,
-retentionPeriod: option<retentionPeriod>,
-status: option<channelStatus>,
-arn: option<channelArn>,
-storage: option<channelStorage>,
-name: option<channelName>
+  lastUpdateTime: option<timestamp_>,
+  creationTime: option<timestamp_>,
+  retentionPeriod: option<retentionPeriod>,
+  status: option<channelStatus>,
+  arn: option<channelArn>,
+  storage: option<channelStorage>,
+  name: option<channelName>
 }
 type sqlQueryDatasetAction = {
 filters: option<queryFilters>,
-sqlQuery: sqlQuery
+  sqlQuery: sqlQuery
 }
 type pipelineSummaries = array<pipelineSummary>
 type pipelineActivities = array<pipelineActivity>
@@ -383,69 +389,68 @@ type lateDataRules = array<lateDataRule>
 type datastoreSummaries = array<datastoreSummary>
 type datasetSummary = {
 actions: option<datasetActionSummaries>,
-triggers: option<datasetTriggers>,
-lastUpdateTime: option<timestamp_>,
-creationTime: option<timestamp_>,
-status: option<datasetStatus>,
-datasetName: option<datasetName>
+  triggers: option<datasetTriggers>,
+  lastUpdateTime: option<timestamp_>,
+  creationTime: option<timestamp_>,
+  status: option<datasetStatus>,
+  datasetName: option<datasetName>
 }
 type datasetContentDeliveryRule = {
 destination: datasetContentDeliveryDestination,
-entryName: option<entryName>
+  entryName: option<entryName>
 }
 type containerDatasetAction = {
 variables: option<variables>,
-resourceConfiguration: resourceConfiguration,
-executionRoleArn: roleArn,
-image: image
+  resourceConfiguration: resourceConfiguration,
+  executionRoleArn: roleArn,
+  image: image
 }
 type channelSummaries = array<channelSummary>
 type pipeline = {
 lastUpdateTime: option<timestamp_>,
-creationTime: option<timestamp_>,
-reprocessingSummaries: option<reprocessingSummaries>,
-activities: option<pipelineActivities>,
-arn: option<pipelineArn>,
-name: option<pipelineName>
+  creationTime: option<timestamp_>,
+  reprocessingSummaries: option<reprocessingSummaries>,
+  activities: option<pipelineActivities>,
+  arn: option<pipelineArn>,
+  name: option<pipelineName>
 }
 type fileFormatConfiguration = {
 parquetConfiguration: option<parquetConfiguration>,
-jsonConfiguration: option<jsonConfiguration>
+  jsonConfiguration: option<jsonConfiguration>
 }
 type datasetSummaries = array<datasetSummary>
 type datasetContentDeliveryRules = array<datasetContentDeliveryRule>
 type datasetAction = {
 containerAction: option<containerDatasetAction>,
-queryAction: option<sqlQueryDatasetAction>,
-actionName: option<datasetActionName>
+  queryAction: option<sqlQueryDatasetAction>,
+  actionName: option<datasetActionName>
 }
 type datastore = {
 fileFormatConfiguration: option<fileFormatConfiguration>,
-lastMessageArrivalTime: option<timestamp_>,
-lastUpdateTime: option<timestamp_>,
-creationTime: option<timestamp_>,
-retentionPeriod: option<retentionPeriod>,
-status: option<datastoreStatus>,
-arn: option<datastoreArn>,
-storage: option<datastoreStorage>,
-name: option<datastoreName>
+  lastMessageArrivalTime: option<timestamp_>,
+  lastUpdateTime: option<timestamp_>,
+  creationTime: option<timestamp_>,
+  retentionPeriod: option<retentionPeriod>,
+  status: option<datastoreStatus>,
+  arn: option<datastoreArn>,
+  storage: option<datastoreStorage>,
+  name: option<datastoreName>
 }
 type datasetActions = array<datasetAction>
 type dataset = {
 lateDataRules: option<lateDataRules>,
-versioningConfiguration: option<versioningConfiguration>,
-retentionPeriod: option<retentionPeriod>,
-lastUpdateTime: option<timestamp_>,
-creationTime: option<timestamp_>,
-status: option<datasetStatus>,
-contentDeliveryRules: option<datasetContentDeliveryRules>,
-triggers: option<datasetTriggers>,
-actions: option<datasetActions>,
-arn: option<datasetArn>,
-name: option<datasetName>
+  versioningConfiguration: option<versioningConfiguration>,
+  retentionPeriod: option<retentionPeriod>,
+  lastUpdateTime: option<timestamp_>,
+  creationTime: option<timestamp_>,
+  status: option<datasetStatus>,
+  contentDeliveryRules: option<datasetContentDeliveryRules>,
+  triggers: option<datasetTriggers>,
+  actions: option<datasetActions>,
+  arn: option<datasetArn>,
+  name: option<datasetName>
 }
-type awsServiceClient;
-@module("@aws-sdk/client-iotanalytics") @new external createClient: unit => awsServiceClient = "IoTAnalyticsClient";
+
 module DeletePipeline = {
   type t;
   type request = {
@@ -470,7 +475,7 @@ module DeleteDatasetContent = {
   type t;
   type request = {
 versionId: option<datasetContentVersion>,
-datasetName: datasetName
+  datasetName: datasetName
 }
   
   @module("@aws-sdk/client-iotanalytics") @new external new_: (request) => t = "DeleteDatasetContentCommand";
@@ -501,7 +506,7 @@ module CreateDatasetContent = {
   type t;
   type request = {
 versionId: option<datasetContentVersion>,
-datasetName: datasetName
+  datasetName: datasetName
 }
   type response = {
 versionId: option<datasetContentVersion>
@@ -514,7 +519,7 @@ module CancelPipelineReprocessing = {
   type t;
   type request = {
 reprocessingId: reprocessingId,
-pipelineName: pipelineName
+  pipelineName: pipelineName
 }
   type response = unit
   @module("@aws-sdk/client-iotanalytics") @new external new_: (request) => t = "CancelPipelineReprocessingCommand";
@@ -525,7 +530,7 @@ module UntagResource = {
   type t;
   type request = {
 tagKeys: tagKeyList,
-resourceArn: resourceArn
+  resourceArn: resourceArn
 }
   type response = unit
   @module("@aws-sdk/client-iotanalytics") @new external new_: (request) => t = "UntagResourceCommand";
@@ -536,9 +541,9 @@ module SampleChannelData = {
   type t;
   type request = {
 endTime: option<endTime>,
-startTime: option<startTime>,
-maxMessages: option<maxMessages>,
-channelName: channelName
+  startTime: option<startTime>,
+  maxMessages: option<maxMessages>,
+  channelName: channelName
 }
   type response = {
 payloads: option<messagePayloads>
@@ -571,8 +576,8 @@ module UpdateChannel = {
   type t;
   type request = {
 retentionPeriod: option<retentionPeriod>,
-channelStorage: option<channelStorage>,
-channelName: channelName
+  channelStorage: option<channelStorage>,
+  channelName: channelName
 }
   
   @module("@aws-sdk/client-iotanalytics") @new external new_: (request) => t = "UpdateChannelCommand";
@@ -583,7 +588,7 @@ module TagResource = {
   type t;
   type request = {
 tags: tagList_,
-resourceArn: resourceArn
+  resourceArn: resourceArn
 }
   type response = unit
   @module("@aws-sdk/client-iotanalytics") @new external new_: (request) => t = "TagResourceCommand";
@@ -594,9 +599,9 @@ module StartPipelineReprocessing = {
   type t;
   type request = {
 channelMessages: option<channelMessages>,
-endTime: option<endTime>,
-startTime: option<startTime>,
-pipelineName: pipelineName
+  endTime: option<endTime>,
+  startTime: option<startTime>,
+  pipelineName: pipelineName
 }
   type response = {
 reprocessingId: option<reprocessingId>
@@ -621,12 +626,12 @@ module GetDatasetContent = {
   type t;
   type request = {
 versionId: option<datasetContentVersion>,
-datasetName: datasetName
+  datasetName: datasetName
 }
   type response = {
 status: option<datasetContentStatus>,
-@as("timestamp") timestamp_: option<timestamp_>,
-entries: option<datasetEntries>
+  @as("timestamp") timestamp_: option<timestamp_>,
+  entries: option<datasetEntries>
 }
   @module("@aws-sdk/client-iotanalytics") @new external new_: (request) => t = "GetDatasetContentCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -636,14 +641,14 @@ module CreateChannel = {
   type t;
   type request = {
 tags: option<tagList_>,
-retentionPeriod: option<retentionPeriod>,
-channelStorage: option<channelStorage>,
-channelName: channelName
+  retentionPeriod: option<retentionPeriod>,
+  channelStorage: option<channelStorage>,
+  channelName: channelName
 }
   type response = {
 retentionPeriod: option<retentionPeriod>,
-channelArn: option<channelArn>,
-channelName: option<channelName>
+  channelArn: option<channelArn>,
+  channelName: option<channelName>
 }
   @module("@aws-sdk/client-iotanalytics") @new external new_: (request) => t = "CreateChannelCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -653,7 +658,7 @@ module BatchPutMessage = {
   type t;
   type request = {
 messages: messages,
-channelName: channelName
+  channelName: channelName
 }
   type response = {
 batchPutMessageErrorEntries: option<batchPutMessageErrorEntries>
@@ -666,11 +671,11 @@ module RunPipelineActivity = {
   type t;
   type request = {
 payloads: messagePayloads,
-pipelineActivity: pipelineActivity
+  pipelineActivity: pipelineActivity
 }
   type response = {
 logResult: option<logResult>,
-payloads: option<messagePayloads>
+  payloads: option<messagePayloads>
 }
   @module("@aws-sdk/client-iotanalytics") @new external new_: (request) => t = "RunPipelineActivityCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -680,14 +685,14 @@ module ListDatasetContents = {
   type t;
   type request = {
 scheduledBefore: option<timestamp_>,
-scheduledOnOrAfter: option<timestamp_>,
-maxResults: option<maxResults>,
-nextToken: option<nextToken>,
-datasetName: datasetName
+  scheduledOnOrAfter: option<timestamp_>,
+  maxResults: option<maxResults>,
+  nextToken: option<nextToken>,
+  datasetName: datasetName
 }
   type response = {
 nextToken: option<nextToken>,
-datasetContentSummaries: option<datasetContentSummaries>
+  datasetContentSummaries: option<datasetContentSummaries>
 }
   @module("@aws-sdk/client-iotanalytics") @new external new_: (request) => t = "ListDatasetContentsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -697,11 +702,11 @@ module DescribeChannel = {
   type t;
   type request = {
 includeStatistics: option<includeStatisticsFlag>,
-channelName: channelName
+  channelName: channelName
 }
   type response = {
 statistics: option<channelStatistics>,
-channel: option<channel>
+  channel: option<channel>
 }
   @module("@aws-sdk/client-iotanalytics") @new external new_: (request) => t = "DescribeChannelCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -711,7 +716,7 @@ module UpdatePipeline = {
   type t;
   type request = {
 pipelineActivities: pipelineActivities,
-pipelineName: pipelineName
+  pipelineName: pipelineName
 }
   
   @module("@aws-sdk/client-iotanalytics") @new external new_: (request) => t = "UpdatePipelineCommand";
@@ -722,11 +727,11 @@ module ListPipelines = {
   type t;
   type request = {
 maxResults: option<maxResults>,
-nextToken: option<nextToken>
+  nextToken: option<nextToken>
 }
   type response = {
 nextToken: option<nextToken>,
-pipelineSummaries: option<pipelineSummaries>
+  pipelineSummaries: option<pipelineSummaries>
 }
   @module("@aws-sdk/client-iotanalytics") @new external new_: (request) => t = "ListPipelinesCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -736,11 +741,11 @@ module ListDatastores = {
   type t;
   type request = {
 maxResults: option<maxResults>,
-nextToken: option<nextToken>
+  nextToken: option<nextToken>
 }
   type response = {
 nextToken: option<nextToken>,
-datastoreSummaries: option<datastoreSummaries>
+  datastoreSummaries: option<datastoreSummaries>
 }
   @module("@aws-sdk/client-iotanalytics") @new external new_: (request) => t = "ListDatastoresCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -750,11 +755,11 @@ module ListChannels = {
   type t;
   type request = {
 maxResults: option<maxResults>,
-nextToken: option<nextToken>
+  nextToken: option<nextToken>
 }
   type response = {
 nextToken: option<nextToken>,
-channelSummaries: option<channelSummaries>
+  channelSummaries: option<channelSummaries>
 }
   @module("@aws-sdk/client-iotanalytics") @new external new_: (request) => t = "ListChannelsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -764,12 +769,12 @@ module CreatePipeline = {
   type t;
   type request = {
 tags: option<tagList_>,
-pipelineActivities: pipelineActivities,
-pipelineName: pipelineName
+  pipelineActivities: pipelineActivities,
+  pipelineName: pipelineName
 }
   type response = {
 pipelineArn: option<pipelineArn>,
-pipelineName: option<pipelineName>
+  pipelineName: option<pipelineName>
 }
   @module("@aws-sdk/client-iotanalytics") @new external new_: (request) => t = "CreatePipelineCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -779,9 +784,9 @@ module UpdateDatastore = {
   type t;
   type request = {
 fileFormatConfiguration: option<fileFormatConfiguration>,
-datastoreStorage: option<datastoreStorage>,
-retentionPeriod: option<retentionPeriod>,
-datastoreName: datastoreName
+  datastoreStorage: option<datastoreStorage>,
+  retentionPeriod: option<retentionPeriod>,
+  datastoreName: datastoreName
 }
   
   @module("@aws-sdk/client-iotanalytics") @new external new_: (request) => t = "UpdateDatastoreCommand";
@@ -792,11 +797,11 @@ module ListDatasets = {
   type t;
   type request = {
 maxResults: option<maxResults>,
-nextToken: option<nextToken>
+  nextToken: option<nextToken>
 }
   type response = {
 nextToken: option<nextToken>,
-datasetSummaries: option<datasetSummaries>
+  datasetSummaries: option<datasetSummaries>
 }
   @module("@aws-sdk/client-iotanalytics") @new external new_: (request) => t = "ListDatasetsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -818,15 +823,15 @@ module CreateDatastore = {
   type t;
   type request = {
 fileFormatConfiguration: option<fileFormatConfiguration>,
-tags: option<tagList_>,
-retentionPeriod: option<retentionPeriod>,
-datastoreStorage: option<datastoreStorage>,
-datastoreName: datastoreName
+  tags: option<tagList_>,
+  retentionPeriod: option<retentionPeriod>,
+  datastoreStorage: option<datastoreStorage>,
+  datastoreName: datastoreName
 }
   type response = {
 retentionPeriod: option<retentionPeriod>,
-datastoreArn: option<datastoreArn>,
-datastoreName: option<datastoreName>
+  datastoreArn: option<datastoreArn>,
+  datastoreName: option<datastoreName>
 }
   @module("@aws-sdk/client-iotanalytics") @new external new_: (request) => t = "CreateDatastoreCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -836,12 +841,12 @@ module UpdateDataset = {
   type t;
   type request = {
 lateDataRules: option<lateDataRules>,
-versioningConfiguration: option<versioningConfiguration>,
-retentionPeriod: option<retentionPeriod>,
-contentDeliveryRules: option<datasetContentDeliveryRules>,
-triggers: option<datasetTriggers>,
-actions: datasetActions,
-datasetName: datasetName
+  versioningConfiguration: option<versioningConfiguration>,
+  retentionPeriod: option<retentionPeriod>,
+  contentDeliveryRules: option<datasetContentDeliveryRules>,
+  triggers: option<datasetTriggers>,
+  actions: datasetActions,
+  datasetName: datasetName
 }
   
   @module("@aws-sdk/client-iotanalytics") @new external new_: (request) => t = "UpdateDatasetCommand";
@@ -852,11 +857,11 @@ module DescribeDatastore = {
   type t;
   type request = {
 includeStatistics: option<includeStatisticsFlag>,
-datastoreName: datastoreName
+  datastoreName: datastoreName
 }
   type response = {
 statistics: option<datastoreStatistics>,
-datastore: option<datastore>
+  datastore: option<datastore>
 }
   @module("@aws-sdk/client-iotanalytics") @new external new_: (request) => t = "DescribeDatastoreCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -866,18 +871,18 @@ module CreateDataset = {
   type t;
   type request = {
 lateDataRules: option<lateDataRules>,
-tags: option<tagList_>,
-versioningConfiguration: option<versioningConfiguration>,
-retentionPeriod: option<retentionPeriod>,
-contentDeliveryRules: option<datasetContentDeliveryRules>,
-triggers: option<datasetTriggers>,
-actions: datasetActions,
-datasetName: datasetName
+  tags: option<tagList_>,
+  versioningConfiguration: option<versioningConfiguration>,
+  retentionPeriod: option<retentionPeriod>,
+  contentDeliveryRules: option<datasetContentDeliveryRules>,
+  triggers: option<datasetTriggers>,
+  actions: datasetActions,
+  datasetName: datasetName
 }
   type response = {
 retentionPeriod: option<retentionPeriod>,
-datasetArn: option<datasetArn>,
-datasetName: option<datasetName>
+  datasetArn: option<datasetArn>,
+  datasetName: option<datasetName>
 }
   @module("@aws-sdk/client-iotanalytics") @new external new_: (request) => t = "CreateDatasetCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";

@@ -90,7 +90,12 @@ let safeMemberName = name => {
 
 let safeTypeName = target => {
   let name = symbolName(target)
-  safeMemberName(name)
+  let namespace = symbolNamespace(target)
+  if namespace === "smithy.api" {
+    safeMemberName("Base" ++ name)
+  } else {
+    safeMemberName(name)
+  }
 }
 
 let camelCase = name =>
@@ -106,5 +111,5 @@ let safeVariantName = name => {
   ->Array.keepMap(x => String.length(x) > 0 ? {
     Some(camelCase(x))
   } : None)
-  ->Array.joinWith("", x => x)
+  ->Array.joinWith("_", x => x)
 }

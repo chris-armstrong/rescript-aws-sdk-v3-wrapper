@@ -5,12 +5,14 @@ httpStatusCode: option<float>,
   cfId: option<string>,
   attempts: option<int>,
   totalRetryDelay: option<int>
-};
-type string_ = string
-type boolean_ = bool
-type integer_ = int
-type timestamp_ = Js.Date.t;
-type long = float
+}
+type awsServiceClient;
+@module("@aws-sdk/client-appmesh") @new external createClient: unit => awsServiceClient = "AppMeshClient";
+type baseString = string
+type baseBoolean = bool
+type baseInteger = int
+type baseTimestamp = Js.Date.t;
+type baseLong = float
 type virtualServiceStatusCode = [@as("DELETED") #DELETED | @as("INACTIVE") #INACTIVE | @as("ACTIVE") #ACTIVE]
 
 type virtualRouterStatusCode = [@as("DELETED") #DELETED | @as("INACTIVE") #INACTIVE | @as("ACTIVE") #ACTIVE]
@@ -25,7 +27,7 @@ type virtualGatewayHealthCheckTimeoutMillis = float
 type virtualGatewayHealthCheckThreshold = int
 type virtualGatewayHealthCheckIntervalMillis = float
 
-type tcpRetryPolicyEvent = [@as("connection-error") #ConnectionError]
+type tcpRetryPolicyEvent = [@as("connection-error") #Connection_Error]
 type tagsLimit = int
 type tagValue = string
 type tagKey = string
@@ -49,8 +51,8 @@ type maxRequests = int
 type maxPendingRequests = int
 type maxConnections = int
 type matchRange = {
-end: long,
-start: long
+end: baseLong,
+  start: baseLong
 }
 type listenerTlsMode = [@as("DISABLED") #DISABLED | @as("PERMISSIVE") #PERMISSIVE | @as("STRICT") #STRICT]
 type listVirtualServicesLimit = int
@@ -64,7 +66,7 @@ type httpScheme = [@as("https") #Https | @as("http") #Http]
 type httpRetryPolicyEvent = string
 type httpMethod = [@as("PATCH") #PATCH | @as("TRACE") #TRACE | @as("OPTIONS") #OPTIONS | @as("CONNECT") #CONNECT | @as("DELETE") #DELETE | @as("PUT") #PUT | @as("POST") #POST | @as("HEAD") #HEAD | @as("GET") #GET]
 type httpGatewayRouteMatch = {
-prefix: string_
+prefix: baseString
 }
 type hostname = string
 type healthCheckTimeoutMillis = float
@@ -72,11 +74,11 @@ type healthCheckThreshold = int
 type healthCheckIntervalMillis = float
 type headerName = string
 type headerMatch = string
-type grpcRetryPolicyEvent = [@as("unavailable") #Unavailable | @as("resource-exhausted") #ResourceExhausted | @as("internal") #Internal | @as("deadline-exceeded") #DeadlineExceeded | @as("cancelled") #Cancelled]
+type grpcRetryPolicyEvent = [@as("unavailable") #Unavailable | @as("resource-exhausted") #Resource_Exhausted | @as("internal") #Internal | @as("deadline-exceeded") #Deadline_Exceeded | @as("cancelled") #Cancelled]
 type gatewayRouteStatusCode = [@as("DELETED") #DELETED | @as("INACTIVE") #INACTIVE | @as("ACTIVE") #ACTIVE]
 
 type filePath = string
-type egressFilterType = [@as("DROP_ALL") #DROPALL | @as("ALLOW_ALL") #ALLOWALL]
+type egressFilterType = [@as("DROP_ALL") #DROP_ALL | @as("ALLOW_ALL") #ALLOW_ALL]
 type durationValue = float
 type durationUnit = [@as("ms") #Ms | @as("s") #S]
 type awsCloudMapName = string
@@ -86,20 +88,20 @@ type arn = string
 type accountId = string
 type weightedTarget = {
 weight: percentInt,
-virtualNode: resourceName
+  virtualNode: resourceName
 }
 type virtualServiceStatus = {
 status: virtualServiceStatusCode
 }
 type virtualServiceRef = {
-lastUpdatedAt: timestamp_,
-createdAt: timestamp_,
-version: long,
-arn: arn,
-resourceOwner: accountId,
-meshOwner: accountId,
-virtualServiceName: serviceName,
-meshName: resourceName
+lastUpdatedAt: baseTimestamp,
+  createdAt: baseTimestamp,
+  version: baseLong,
+  arn: arn,
+  resourceOwner: accountId,
+  meshOwner: accountId,
+  virtualServiceName: serviceName,
+  meshName: resourceName
 }
 type virtualRouterStatus = {
 status: virtualRouterStatusCode
@@ -108,14 +110,14 @@ type virtualRouterServiceProvider = {
 virtualRouterName: resourceName
 }
 type virtualRouterRef = {
-lastUpdatedAt: timestamp_,
-createdAt: timestamp_,
-version: long,
-arn: arn,
-resourceOwner: accountId,
-meshOwner: accountId,
-virtualRouterName: resourceName,
-meshName: resourceName
+lastUpdatedAt: baseTimestamp,
+  createdAt: baseTimestamp,
+  version: baseLong,
+  arn: arn,
+  resourceOwner: accountId,
+  meshOwner: accountId,
+  virtualRouterName: resourceName,
+  meshName: resourceName
 }
 type virtualNodeTcpConnectionPool = {
 maxConnections: maxConnections
@@ -127,18 +129,18 @@ type virtualNodeServiceProvider = {
 virtualNodeName: resourceName
 }
 type virtualNodeRef = {
-lastUpdatedAt: timestamp_,
-createdAt: timestamp_,
-version: long,
-arn: arn,
-resourceOwner: accountId,
-meshOwner: accountId,
-virtualNodeName: resourceName,
-meshName: resourceName
+lastUpdatedAt: baseTimestamp,
+  createdAt: baseTimestamp,
+  version: baseLong,
+  arn: arn,
+  resourceOwner: accountId,
+  meshOwner: accountId,
+  virtualNodeName: resourceName,
+  meshName: resourceName
 }
 type virtualNodeHttpConnectionPool = {
 maxPendingRequests: option<maxPendingRequests>,
-maxConnections: maxConnections
+  maxConnections: maxConnections
 }
 type virtualNodeHttp2ConnectionPool = {
 maxRequests: maxRequests
@@ -156,44 +158,44 @@ type virtualGatewayStatus = {
 status: virtualGatewayStatusCode
 }
 type virtualGatewayRef = {
-lastUpdatedAt: timestamp_,
-createdAt: timestamp_,
-version: long,
-arn: arn,
-resourceOwner: accountId,
-meshOwner: accountId,
-virtualGatewayName: resourceName,
-meshName: resourceName
+lastUpdatedAt: baseTimestamp,
+  createdAt: baseTimestamp,
+  version: baseLong,
+  arn: arn,
+  resourceOwner: accountId,
+  meshOwner: accountId,
+  virtualGatewayName: resourceName,
+  meshName: resourceName
 }
 type virtualGatewayPortMapping = {
 protocol: virtualGatewayPortProtocol,
-port: portNumber
+  port: portNumber
 }
 type virtualGatewayListenerTlsSdsCertificate = {
 secretName: virtualGatewaySdsSecretName
 }
 type virtualGatewayListenerTlsFileCertificate = {
 privateKey: filePath,
-certificateChain: filePath
+  certificateChain: filePath
 }
 type virtualGatewayListenerTlsAcmCertificate = {
 certificateArn: arn
 }
 type virtualGatewayHttpConnectionPool = {
 maxPendingRequests: option<maxPendingRequests>,
-maxConnections: maxConnections
+  maxConnections: maxConnections
 }
 type virtualGatewayHttp2ConnectionPool = {
 maxRequests: maxRequests
 }
 type virtualGatewayHealthCheckPolicy = {
 unhealthyThreshold: virtualGatewayHealthCheckThreshold,
-healthyThreshold: virtualGatewayHealthCheckThreshold,
-path: option<string_>,
-port: option<portNumber>,
-protocol: virtualGatewayPortProtocol,
-intervalMillis: virtualGatewayHealthCheckIntervalMillis,
-timeoutMillis: virtualGatewayHealthCheckTimeoutMillis
+  healthyThreshold: virtualGatewayHealthCheckThreshold,
+  path: option<baseString>,
+  port: option<portNumber>,
+  protocol: virtualGatewayPortProtocol,
+  intervalMillis: virtualGatewayHealthCheckIntervalMillis,
+  timeoutMillis: virtualGatewayHealthCheckTimeoutMillis
 }
 type virtualGatewayGrpcConnectionPool = {
 maxRequests: maxRequests
@@ -211,7 +213,7 @@ certificateChain: filePath
 type tcpRetryPolicyEvents = array<tcpRetryPolicyEvent>
 type tagRef = {
 value: tagValue,
-key: tagKey
+  key: tagKey
 }
 type tagKeyList = array<tagKey>
 type subjectAlternativeNameList = array<subjectAlternativeName>
@@ -219,48 +221,48 @@ type routeStatus = {
 status: routeStatusCode
 }
 type routeRef = {
-lastUpdatedAt: timestamp_,
-createdAt: timestamp_,
-version: long,
-arn: arn,
-resourceOwner: accountId,
-meshOwner: accountId,
-routeName: resourceName,
-virtualRouterName: resourceName,
-meshName: resourceName
+lastUpdatedAt: baseTimestamp,
+  createdAt: baseTimestamp,
+  version: baseLong,
+  arn: arn,
+  resourceOwner: accountId,
+  meshOwner: accountId,
+  routeName: resourceName,
+  virtualRouterName: resourceName,
+  meshName: resourceName
 }
 type resourceMetadata = {
 resourceOwner: accountId,
-meshOwner: accountId,
-lastUpdatedAt: timestamp_,
-createdAt: timestamp_,
-uid: string_,
-version: long,
-arn: arn
+  meshOwner: accountId,
+  lastUpdatedAt: baseTimestamp,
+  createdAt: baseTimestamp,
+  uid: baseString,
+  version: baseLong,
+  arn: arn
 }
 type portSet = array<portNumber>
 type portMapping = {
 protocol: portProtocol,
-port: portNumber
+  port: portNumber
 }
 type meshStatus = {
 status: option<meshStatusCode>
 }
 type meshRef = {
-lastUpdatedAt: timestamp_,
-createdAt: timestamp_,
-version: long,
-arn: arn,
-resourceOwner: accountId,
-meshOwner: accountId,
-meshName: resourceName
+lastUpdatedAt: baseTimestamp,
+  createdAt: baseTimestamp,
+  version: baseLong,
+  arn: arn,
+  resourceOwner: accountId,
+  meshOwner: accountId,
+  meshName: resourceName
 }
 type listenerTlsSdsCertificate = {
 secretName: sdsSecretName
 }
 type listenerTlsFileCertificate = {
 privateKey: filePath,
-certificateChain: filePath
+  certificateChain: filePath
 }
 type listenerTlsAcmCertificate = {
 certificateArn: arn
@@ -268,15 +270,27 @@ certificateArn: arn
 type httpRetryPolicyEvents = array<httpRetryPolicyEvent>
 type healthCheckPolicy = {
 unhealthyThreshold: healthCheckThreshold,
-healthyThreshold: healthCheckThreshold,
-path: option<string_>,
-port: option<portNumber>,
-protocol: portProtocol,
-intervalMillis: healthCheckIntervalMillis,
-timeoutMillis: healthCheckTimeoutMillis
+  healthyThreshold: healthCheckThreshold,
+  path: option<baseString>,
+  port: option<portNumber>,
+  protocol: portProtocol,
+  intervalMillis: healthCheckIntervalMillis,
+  timeoutMillis: healthCheckTimeoutMillis
 }
-type headerMatchMethod = Suffix(headerMatch) | Prefix(headerMatch) | Range(matchRange) | Regex(headerMatch) | Exact(headerMatch);
-type grpcRouteMetadataMatchMethod = Suffix(headerMatch) | Prefix(headerMatch) | Range(matchRange) | Regex(headerMatch) | Exact(headerMatch);
+type headerMatchMethod = {
+suffix: option<headerMatch>,
+  prefix: option<headerMatch>,
+  range: option<matchRange>,
+  regex: option<headerMatch>,
+  exact: option<headerMatch>
+}
+type grpcRouteMetadataMatchMethod = {
+suffix: option<headerMatch>,
+  prefix: option<headerMatch>,
+  range: option<matchRange>,
+  regex: option<headerMatch>,
+  exact: option<headerMatch>
+}
 type grpcRetryPolicyEvents = array<grpcRetryPolicyEvent>
 type grpcGatewayRouteMatch = {
 serviceName: option<serviceName>
@@ -288,15 +302,15 @@ type gatewayRouteStatus = {
 status: gatewayRouteStatusCode
 }
 type gatewayRouteRef = {
-lastUpdatedAt: timestamp_,
-createdAt: timestamp_,
-version: long,
-arn: arn,
-resourceOwner: accountId,
-meshOwner: accountId,
-virtualGatewayName: resourceName,
-gatewayRouteName: resourceName,
-meshName: resourceName
+lastUpdatedAt: baseTimestamp,
+  createdAt: baseTimestamp,
+  version: baseLong,
+  arn: arn,
+  resourceOwner: accountId,
+  meshOwner: accountId,
+  virtualGatewayName: resourceName,
+  gatewayRouteName: resourceName,
+  meshName: resourceName
 }
 type fileAccessLog = {
 path: filePath
@@ -306,7 +320,7 @@ type egressFilter = {
 }
 type duration = {
 @as("unit") unit_: option<durationUnit>,
-value: option<durationValue>
+  value: option<durationValue>
 }
 type dnsServiceDiscovery = {
 hostname: hostname
@@ -314,26 +328,50 @@ hostname: hostname
 type certificateAuthorityArns = array<arn>
 type awsCloudMapInstanceAttribute = {
 value: awsCloudMapInstanceAttributeValue,
-key: awsCloudMapInstanceAttributeKey
+  key: awsCloudMapInstanceAttributeKey
 }
 type weightedTargets = array<weightedTarget>
-type virtualServiceProvider = VirtualRouter(virtualRouterServiceProvider) | VirtualNode(virtualNodeServiceProvider);
+type virtualServiceProvider = {
+virtualRouter: option<virtualRouterServiceProvider>,
+  virtualNode: option<virtualNodeServiceProvider>
+}
 type virtualServiceList = array<virtualServiceRef>
 type virtualRouterListener = {
 portMapping: portMapping
 }
 type virtualRouterList = array<virtualRouterRef>
 type virtualNodeList = array<virtualNodeRef>
-type virtualNodeConnectionPool = Grpc(virtualNodeGrpcConnectionPool) | Http2(virtualNodeHttp2ConnectionPool) | Http(virtualNodeHttpConnectionPool) | Tcp(virtualNodeTcpConnectionPool);
+type virtualNodeConnectionPool = {
+grpc: option<virtualNodeGrpcConnectionPool>,
+  http2: option<virtualNodeHttp2ConnectionPool>,
+  http: option<virtualNodeHttpConnectionPool>,
+  tcp: option<virtualNodeTcpConnectionPool>
+}
 type virtualGatewayTlsValidationContextAcmTrust = {
 certificateAuthorityArns: virtualGatewayCertificateAuthorityArns
 }
-type virtualGatewayListenerTlsValidationContextTrust = Sds(virtualGatewayTlsValidationContextSdsTrust) | File(virtualGatewayTlsValidationContextFileTrust);
-type virtualGatewayListenerTlsCertificate = Sds(virtualGatewayListenerTlsSdsCertificate) | File(virtualGatewayListenerTlsFileCertificate) | Acm(virtualGatewayListenerTlsAcmCertificate);
+type virtualGatewayListenerTlsValidationContextTrust = {
+sds: option<virtualGatewayTlsValidationContextSdsTrust>,
+  file: option<virtualGatewayTlsValidationContextFileTrust>
+}
+type virtualGatewayListenerTlsCertificate = {
+sds: option<virtualGatewayListenerTlsSdsCertificate>,
+  file: option<virtualGatewayListenerTlsFileCertificate>,
+  acm: option<virtualGatewayListenerTlsAcmCertificate>
+}
 type virtualGatewayList = array<virtualGatewayRef>
-type virtualGatewayConnectionPool = Grpc(virtualGatewayGrpcConnectionPool) | Http2(virtualGatewayHttp2ConnectionPool) | Http(virtualGatewayHttpConnectionPool);
-type virtualGatewayClientTlsCertificate = Sds(virtualGatewayListenerTlsSdsCertificate) | File(virtualGatewayListenerTlsFileCertificate);
-type virtualGatewayAccessLog = File(virtualGatewayFileAccessLog);
+type virtualGatewayConnectionPool = {
+grpc: option<virtualGatewayGrpcConnectionPool>,
+  http2: option<virtualGatewayHttp2ConnectionPool>,
+  http: option<virtualGatewayHttpConnectionPool>
+}
+type virtualGatewayClientTlsCertificate = {
+sds: option<virtualGatewayListenerTlsSdsCertificate>,
+  file: option<virtualGatewayListenerTlsFileCertificate>
+}
+type virtualGatewayAccessLog = {
+file: option<virtualGatewayFileAccessLog>
+}
 type tlsValidationContextAcmTrust = {
 certificateAuthorityArns: certificateAuthorityArns
 }
@@ -347,63 +385,83 @@ exact: subjectAlternativeNameList
 type routeList = array<routeRef>
 type outlierDetection = {
 maxEjectionPercent: outlierDetectionMaxEjectionPercent,
-baseEjectionDuration: duration,
-interval: duration,
-maxServerErrors: outlierDetectionMaxServerErrors
+  baseEjectionDuration: duration,
+  interval: duration,
+  maxServerErrors: outlierDetectionMaxServerErrors
 }
 type meshSpec = {
 egressFilter: option<egressFilter>
 }
 type meshList = array<meshRef>
-type listenerTlsValidationContextTrust = Sds(tlsValidationContextSdsTrust) | File(tlsValidationContextFileTrust);
-type listenerTlsCertificate = Sds(listenerTlsSdsCertificate) | File(listenerTlsFileCertificate) | Acm(listenerTlsAcmCertificate);
+type listenerTlsValidationContextTrust = {
+sds: option<tlsValidationContextSdsTrust>,
+  file: option<tlsValidationContextFileTrust>
+}
+type listenerTlsCertificate = {
+sds: option<listenerTlsSdsCertificate>,
+  file: option<listenerTlsFileCertificate>,
+  acm: option<listenerTlsAcmCertificate>
+}
 type httpTimeout = {
 idle: option<duration>,
-perRequest: option<duration>
+  perRequest: option<duration>
 }
 type httpRouteHeader = {
 @as("match") match_: option<headerMatchMethod>,
-invert: option<boolean_>,
-name: headerName
+  invert: option<baseBoolean>,
+  name: headerName
 }
 type httpRetryPolicy = {
 tcpRetryEvents: option<tcpRetryPolicyEvents>,
-httpRetryEvents: option<httpRetryPolicyEvents>,
-maxRetries: maxRetries,
-perRetryTimeout: duration
+  httpRetryEvents: option<httpRetryPolicyEvents>,
+  maxRetries: maxRetries,
+  perRetryTimeout: duration
 }
 type grpcTimeout = {
 idle: option<duration>,
-perRequest: option<duration>
+  perRequest: option<duration>
 }
 type grpcRouteMetadata = {
 @as("match") match_: option<grpcRouteMetadataMatchMethod>,
-invert: option<boolean_>,
-name: headerName
+  invert: option<baseBoolean>,
+  name: headerName
 }
 type grpcRetryPolicy = {
 grpcRetryEvents: option<grpcRetryPolicyEvents>,
-tcpRetryEvents: option<tcpRetryPolicyEvents>,
-httpRetryEvents: option<httpRetryPolicyEvents>,
-maxRetries: maxRetries,
-perRetryTimeout: duration
+  tcpRetryEvents: option<tcpRetryPolicyEvents>,
+  httpRetryEvents: option<httpRetryPolicyEvents>,
+  maxRetries: maxRetries,
+  perRetryTimeout: duration
 }
 type gatewayRouteTarget = {
 virtualService: gatewayRouteVirtualService
 }
 type gatewayRouteList = array<gatewayRouteRef>
-type clientTlsCertificate = Sds(listenerTlsSdsCertificate) | File(listenerTlsFileCertificate);
+type clientTlsCertificate = {
+sds: option<listenerTlsSdsCertificate>,
+  file: option<listenerTlsFileCertificate>
+}
 type awsCloudMapInstanceAttributes = array<awsCloudMapInstanceAttribute>
-type accessLog = File(fileAccessLog);
+type accessLog = {
+file: option<fileAccessLog>
+}
 type virtualServiceSpec = {
 provider: option<virtualServiceProvider>
 }
 type virtualRouterListeners = array<virtualRouterListener>
-type virtualGatewayTlsValidationContextTrust = Sds(virtualGatewayTlsValidationContextSdsTrust) | File(virtualGatewayTlsValidationContextFileTrust) | Acm(virtualGatewayTlsValidationContextAcmTrust);
+type virtualGatewayTlsValidationContextTrust = {
+sds: option<virtualGatewayTlsValidationContextSdsTrust>,
+  file: option<virtualGatewayTlsValidationContextFileTrust>,
+  acm: option<virtualGatewayTlsValidationContextAcmTrust>
+}
 type virtualGatewayLogging = {
 accessLog: option<virtualGatewayAccessLog>
 }
-type tlsValidationContextTrust = Sds(tlsValidationContextSdsTrust) | File(tlsValidationContextFileTrust) | Acm(tlsValidationContextAcmTrust);
+type tlsValidationContextTrust = {
+sds: option<tlsValidationContextSdsTrust>,
+  file: option<tlsValidationContextFileTrust>,
+  acm: option<tlsValidationContextAcmTrust>
+}
 type tcpRouteAction = {
 weightedTargets: weightedTargets
 }
@@ -412,14 +470,19 @@ type subjectAlternativeNames = {
 }
 type meshData = {
 status: meshStatus,
-metadata: resourceMetadata,
-spec: meshSpec,
-meshName: resourceName
+  metadata: resourceMetadata,
+  spec: meshSpec,
+  meshName: resourceName
 }
 type logging = {
 accessLog: option<accessLog>
 }
-type listenerTimeout = Grpc(grpcTimeout) | Http2(httpTimeout) | Http(httpTimeout) | Tcp(tcpTimeout);
+type listenerTimeout = {
+grpc: option<grpcTimeout>,
+  http2: option<httpTimeout>,
+  http: option<httpTimeout>,
+  tcp: option<tcpTimeout>
+}
 type httpRouteHeaders = array<httpRouteHeader>
 type httpRouteAction = {
 weightedTargets: weightedTargets
@@ -436,145 +499,147 @@ target: gatewayRouteTarget
 }
 type awsCloudMapServiceDiscovery = {
 attributes: option<awsCloudMapInstanceAttributes>,
-serviceName: awsCloudMapName,
-namespaceName: awsCloudMapName
+  serviceName: awsCloudMapName,
+  namespaceName: awsCloudMapName
 }
 type virtualServiceData = {
 status: virtualServiceStatus,
-metadata: resourceMetadata,
-spec: virtualServiceSpec,
-virtualServiceName: serviceName,
-meshName: resourceName
+  metadata: resourceMetadata,
+  spec: virtualServiceSpec,
+  virtualServiceName: serviceName,
+  meshName: resourceName
 }
 type virtualRouterSpec = {
 listeners: option<virtualRouterListeners>
 }
 type virtualGatewayTlsValidationContext = {
 subjectAlternativeNames: option<subjectAlternativeNames>,
-trust: virtualGatewayTlsValidationContextTrust
+  trust: virtualGatewayTlsValidationContextTrust
 }
 type virtualGatewayListenerTlsValidationContext = {
 subjectAlternativeNames: option<subjectAlternativeNames>,
-trust: virtualGatewayListenerTlsValidationContextTrust
+  trust: virtualGatewayListenerTlsValidationContextTrust
 }
 type tlsValidationContext = {
 subjectAlternativeNames: option<subjectAlternativeNames>,
-trust: tlsValidationContextTrust
+  trust: tlsValidationContextTrust
 }
 type tcpRoute = {
 timeout: option<tcpTimeout>,
-action: tcpRouteAction
+  action: tcpRouteAction
 }
-type serviceDiscovery = AwsCloudMap(awsCloudMapServiceDiscovery) | Dns(dnsServiceDiscovery);
+type serviceDiscovery = {
+awsCloudMap: option<awsCloudMapServiceDiscovery>,
+  dns: option<dnsServiceDiscovery>
+}
 type listenerTlsValidationContext = {
 subjectAlternativeNames: option<subjectAlternativeNames>,
-trust: listenerTlsValidationContextTrust
+  trust: listenerTlsValidationContextTrust
 }
 type httpRouteMatch = {
 headers: option<httpRouteHeaders>,
-scheme: option<httpScheme>,
-method: option<httpMethod>,
-prefix: string_
+  scheme: option<httpScheme>,
+  method: option<httpMethod>,
+  prefix: baseString
 }
 type httpGatewayRoute = {
 action: httpGatewayRouteAction,
-@as("match") match_: httpGatewayRouteMatch
+  @as("match") match_: httpGatewayRouteMatch
 }
 type grpcRouteMatch = {
 metadata: option<grpcRouteMetadataList>,
-methodName: option<methodName>,
-serviceName: option<serviceName>
+  methodName: option<methodName>,
+  serviceName: option<serviceName>
 }
 type grpcGatewayRoute = {
 action: grpcGatewayRouteAction,
-@as("match") match_: grpcGatewayRouteMatch
+  @as("match") match_: grpcGatewayRouteMatch
 }
 type virtualRouterData = {
 status: virtualRouterStatus,
-metadata: resourceMetadata,
-spec: virtualRouterSpec,
-virtualRouterName: resourceName,
-meshName: resourceName
+  metadata: resourceMetadata,
+  spec: virtualRouterSpec,
+  virtualRouterName: resourceName,
+  meshName: resourceName
 }
 type virtualGatewayListenerTls = {
 certificate: virtualGatewayListenerTlsCertificate,
-validation: option<virtualGatewayListenerTlsValidationContext>,
-mode: virtualGatewayListenerTlsMode
+  validation: option<virtualGatewayListenerTlsValidationContext>,
+  mode: virtualGatewayListenerTlsMode
 }
 type virtualGatewayClientPolicyTls = {
 validation: virtualGatewayTlsValidationContext,
-certificate: option<virtualGatewayClientTlsCertificate>,
-ports: option<portSet>,
-enforce: option<boolean_>
+  certificate: option<virtualGatewayClientTlsCertificate>,
+  ports: option<portSet>,
+  enforce: option<baseBoolean>
 }
 type listenerTls = {
 validation: option<listenerTlsValidationContext>,
-certificate: listenerTlsCertificate,
-mode: listenerTlsMode
+  certificate: listenerTlsCertificate,
+  mode: listenerTlsMode
 }
 type httpRoute = {
 timeout: option<httpTimeout>,
-retryPolicy: option<httpRetryPolicy>,
-action: httpRouteAction,
-@as("match") match_: httpRouteMatch
+  retryPolicy: option<httpRetryPolicy>,
+  action: httpRouteAction,
+  @as("match") match_: httpRouteMatch
 }
 type grpcRoute = {
 timeout: option<grpcTimeout>,
-retryPolicy: option<grpcRetryPolicy>,
-@as("match") match_: grpcRouteMatch,
-action: grpcRouteAction
+  retryPolicy: option<grpcRetryPolicy>,
+  @as("match") match_: grpcRouteMatch,
+  action: grpcRouteAction
 }
 type gatewayRouteSpec = {
 grpcRoute: option<grpcGatewayRoute>,
-http2Route: option<httpGatewayRoute>,
-httpRoute: option<httpGatewayRoute>
+  http2Route: option<httpGatewayRoute>,
+  httpRoute: option<httpGatewayRoute>
 }
 type clientPolicyTls = {
 validation: tlsValidationContext,
-certificate: option<clientTlsCertificate>,
-ports: option<portSet>,
-enforce: option<boolean_>
+  certificate: option<clientTlsCertificate>,
+  ports: option<portSet>,
+  enforce: option<baseBoolean>
 }
-type awsServiceClient;
-@module("@aws-sdk/client-appmesh") @new external createClient: unit => awsServiceClient = "AppMeshClient";
+
 type virtualGatewayListener = {
 connectionPool: option<virtualGatewayConnectionPool>,
-tls: option<virtualGatewayListenerTls>,
-portMapping: virtualGatewayPortMapping,
-healthCheck: option<virtualGatewayHealthCheckPolicy>
+  tls: option<virtualGatewayListenerTls>,
+  portMapping: virtualGatewayPortMapping,
+  healthCheck: option<virtualGatewayHealthCheckPolicy>
 }
 type virtualGatewayClientPolicy = {
 tls: option<virtualGatewayClientPolicyTls>
 }
 type routeSpec = {
 grpcRoute: option<grpcRoute>,
-http2Route: option<httpRoute>,
-tcpRoute: option<tcpRoute>,
-httpRoute: option<httpRoute>,
-priority: option<routePriority>
+  http2Route: option<httpRoute>,
+  tcpRoute: option<tcpRoute>,
+  httpRoute: option<httpRoute>,
+  priority: option<routePriority>
 }
 type listener = {
 connectionPool: option<virtualNodeConnectionPool>,
-outlierDetection: option<outlierDetection>,
-timeout: option<listenerTimeout>,
-healthCheck: option<healthCheckPolicy>,
-tls: option<listenerTls>,
-portMapping: portMapping
+  outlierDetection: option<outlierDetection>,
+  timeout: option<listenerTimeout>,
+  healthCheck: option<healthCheckPolicy>,
+  tls: option<listenerTls>,
+  portMapping: portMapping
 }
 type gatewayRouteData = {
 status: gatewayRouteStatus,
-metadata: resourceMetadata,
-spec: gatewayRouteSpec,
-virtualGatewayName: resourceName,
-gatewayRouteName: resourceName,
-meshName: resourceName
+  metadata: resourceMetadata,
+  spec: gatewayRouteSpec,
+  virtualGatewayName: resourceName,
+  gatewayRouteName: resourceName,
+  meshName: resourceName
 }
 type clientPolicy = {
 tls: option<clientPolicyTls>
 }
 type virtualServiceBackend = {
 clientPolicy: option<clientPolicy>,
-virtualServiceName: serviceName
+  virtualServiceName: serviceName
 }
 type virtualGatewayListeners = array<virtualGatewayListener>
 type virtualGatewayBackendDefaults = {
@@ -582,11 +647,11 @@ clientPolicy: option<virtualGatewayClientPolicy>
 }
 type routeData = {
 status: routeStatus,
-metadata: resourceMetadata,
-spec: routeSpec,
-routeName: resourceName,
-virtualRouterName: resourceName,
-meshName: resourceName
+  metadata: resourceMetadata,
+  spec: routeSpec,
+  routeName: resourceName,
+  virtualRouterName: resourceName,
+  meshName: resourceName
 }
 type listeners = array<listener>
 type backendDefaults = {
@@ -594,37 +659,39 @@ clientPolicy: option<clientPolicy>
 }
 type virtualGatewaySpec = {
 logging: option<virtualGatewayLogging>,
-listeners: virtualGatewayListeners,
-backendDefaults: option<virtualGatewayBackendDefaults>
+  listeners: virtualGatewayListeners,
+  backendDefaults: option<virtualGatewayBackendDefaults>
 }
-type backend = VirtualService(virtualServiceBackend);
+type backend = {
+virtualService: option<virtualServiceBackend>
+}
 type virtualGatewayData = {
 status: virtualGatewayStatus,
-metadata: resourceMetadata,
-spec: virtualGatewaySpec,
-virtualGatewayName: resourceName,
-meshName: resourceName
+  metadata: resourceMetadata,
+  spec: virtualGatewaySpec,
+  virtualGatewayName: resourceName,
+  meshName: resourceName
 }
 type backends = array<backend>
 type virtualNodeSpec = {
 logging: option<logging>,
-backendDefaults: option<backendDefaults>,
-backends: option<backends>,
-listeners: option<listeners>,
-serviceDiscovery: option<serviceDiscovery>
+  backendDefaults: option<backendDefaults>,
+  backends: option<backends>,
+  listeners: option<listeners>,
+  serviceDiscovery: option<serviceDiscovery>
 }
 type virtualNodeData = {
 status: virtualNodeStatus,
-metadata: resourceMetadata,
-spec: virtualNodeSpec,
-virtualNodeName: resourceName,
-meshName: resourceName
+  metadata: resourceMetadata,
+  spec: virtualNodeSpec,
+  virtualNodeName: resourceName,
+  meshName: resourceName
 }
 module UntagResource = {
   type t;
   type request = {
 tagKeys: tagKeyList,
-resourceArn: arn
+  resourceArn: arn
 }
   type response = unit
   @module("@aws-sdk/client-appmesh") @new external new_: (request) => t = "UntagResourceCommand";
@@ -635,7 +702,7 @@ module TagResource = {
   type t;
   type request = {
 tags: tagList_,
-resourceArn: arn
+  resourceArn: arn
 }
   type response = unit
   @module("@aws-sdk/client-appmesh") @new external new_: (request) => t = "TagResourceCommand";
@@ -646,13 +713,13 @@ module ListVirtualServices = {
   type t;
   type request = {
 meshOwner: option<accountId>,
-limit: option<listVirtualServicesLimit>,
-nextToken: option<string_>,
-meshName: resourceName
+  limit: option<listVirtualServicesLimit>,
+  nextToken: option<baseString>,
+  meshName: resourceName
 }
   type response = {
-nextToken: option<string_>,
-virtualServices: virtualServiceList
+nextToken: option<baseString>,
+  virtualServices: virtualServiceList
 }
   @module("@aws-sdk/client-appmesh") @new external new_: (request) => t = "ListVirtualServicesCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -662,13 +729,13 @@ module ListVirtualRouters = {
   type t;
   type request = {
 meshOwner: option<accountId>,
-limit: option<listVirtualRoutersLimit>,
-nextToken: option<string_>,
-meshName: resourceName
+  limit: option<listVirtualRoutersLimit>,
+  nextToken: option<baseString>,
+  meshName: resourceName
 }
   type response = {
-nextToken: option<string_>,
-virtualRouters: virtualRouterList
+nextToken: option<baseString>,
+  virtualRouters: virtualRouterList
 }
   @module("@aws-sdk/client-appmesh") @new external new_: (request) => t = "ListVirtualRoutersCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -678,13 +745,13 @@ module ListVirtualNodes = {
   type t;
   type request = {
 meshOwner: option<accountId>,
-limit: option<listVirtualNodesLimit>,
-nextToken: option<string_>,
-meshName: resourceName
+  limit: option<listVirtualNodesLimit>,
+  nextToken: option<baseString>,
+  meshName: resourceName
 }
   type response = {
-nextToken: option<string_>,
-virtualNodes: virtualNodeList
+nextToken: option<baseString>,
+  virtualNodes: virtualNodeList
 }
   @module("@aws-sdk/client-appmesh") @new external new_: (request) => t = "ListVirtualNodesCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -694,13 +761,13 @@ module ListVirtualGateways = {
   type t;
   type request = {
 meshOwner: option<accountId>,
-limit: option<listVirtualGatewaysLimit>,
-nextToken: option<string_>,
-meshName: resourceName
+  limit: option<listVirtualGatewaysLimit>,
+  nextToken: option<baseString>,
+  meshName: resourceName
 }
   type response = {
-nextToken: option<string_>,
-virtualGateways: virtualGatewayList
+nextToken: option<baseString>,
+  virtualGateways: virtualGatewayList
 }
   @module("@aws-sdk/client-appmesh") @new external new_: (request) => t = "ListVirtualGatewaysCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -710,12 +777,12 @@ module ListTagsForResource = {
   type t;
   type request = {
 limit: option<tagsLimit>,
-nextToken: option<string_>,
-resourceArn: arn
+  nextToken: option<baseString>,
+  resourceArn: arn
 }
   type response = {
-nextToken: option<string_>,
-tags: tagList_
+nextToken: option<baseString>,
+  tags: tagList_
 }
   @module("@aws-sdk/client-appmesh") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -725,14 +792,14 @@ module ListRoutes = {
   type t;
   type request = {
 meshOwner: option<accountId>,
-limit: option<listRoutesLimit>,
-nextToken: option<string_>,
-virtualRouterName: resourceName,
-meshName: resourceName
+  limit: option<listRoutesLimit>,
+  nextToken: option<baseString>,
+  virtualRouterName: resourceName,
+  meshName: resourceName
 }
   type response = {
-nextToken: option<string_>,
-routes: routeList
+nextToken: option<baseString>,
+  routes: routeList
 }
   @module("@aws-sdk/client-appmesh") @new external new_: (request) => t = "ListRoutesCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -742,11 +809,11 @@ module ListMeshes = {
   type t;
   type request = {
 limit: option<listMeshesLimit>,
-nextToken: option<string_>
+  nextToken: option<baseString>
 }
   type response = {
-nextToken: option<string_>,
-meshes: meshList
+nextToken: option<baseString>,
+  meshes: meshList
 }
   @module("@aws-sdk/client-appmesh") @new external new_: (request) => t = "ListMeshesCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -756,14 +823,14 @@ module ListGatewayRoutes = {
   type t;
   type request = {
 meshOwner: option<accountId>,
-limit: option<listGatewayRoutesLimit>,
-nextToken: option<string_>,
-virtualGatewayName: resourceName,
-meshName: resourceName
+  limit: option<listGatewayRoutesLimit>,
+  nextToken: option<baseString>,
+  virtualGatewayName: resourceName,
+  meshName: resourceName
 }
   type response = {
-nextToken: option<string_>,
-gatewayRoutes: gatewayRouteList
+nextToken: option<baseString>,
+  gatewayRoutes: gatewayRouteList
 }
   @module("@aws-sdk/client-appmesh") @new external new_: (request) => t = "ListGatewayRoutesCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -772,9 +839,9 @@ gatewayRoutes: gatewayRouteList
 module UpdateMesh = {
   type t;
   type request = {
-clientToken: option<string_>,
-spec: option<meshSpec>,
-meshName: resourceName
+clientToken: option<baseString>,
+  spec: option<meshSpec>,
+  meshName: resourceName
 }
   type response = {
 mesh: meshData
@@ -787,7 +854,7 @@ module DescribeMesh = {
   type t;
   type request = {
 meshOwner: option<accountId>,
-meshName: resourceName
+  meshName: resourceName
 }
   type response = {
 mesh: meshData
@@ -811,10 +878,10 @@ mesh: meshData
 module CreateMesh = {
   type t;
   type request = {
-clientToken: option<string_>,
-tags: option<tagList_>,
-spec: option<meshSpec>,
-meshName: resourceName
+clientToken: option<baseString>,
+  tags: option<tagList_>,
+  spec: option<meshSpec>,
+  meshName: resourceName
 }
   type response = {
 mesh: meshData
@@ -827,10 +894,10 @@ module UpdateVirtualService = {
   type t;
   type request = {
 meshOwner: option<accountId>,
-clientToken: option<string_>,
-spec: virtualServiceSpec,
-meshName: resourceName,
-virtualServiceName: serviceName
+  clientToken: option<baseString>,
+  spec: virtualServiceSpec,
+  meshName: resourceName,
+  virtualServiceName: serviceName
 }
   type response = {
 virtualService: virtualServiceData
@@ -843,8 +910,8 @@ module DescribeVirtualService = {
   type t;
   type request = {
 meshOwner: option<accountId>,
-meshName: resourceName,
-virtualServiceName: serviceName
+  meshName: resourceName,
+  virtualServiceName: serviceName
 }
   type response = {
 virtualService: virtualServiceData
@@ -857,8 +924,8 @@ module DeleteVirtualService = {
   type t;
   type request = {
 meshOwner: option<accountId>,
-meshName: resourceName,
-virtualServiceName: serviceName
+  meshName: resourceName,
+  virtualServiceName: serviceName
 }
   type response = {
 virtualService: virtualServiceData
@@ -871,11 +938,11 @@ module CreateVirtualService = {
   type t;
   type request = {
 meshOwner: option<accountId>,
-clientToken: option<string_>,
-tags: option<tagList_>,
-spec: virtualServiceSpec,
-meshName: resourceName,
-virtualServiceName: serviceName
+  clientToken: option<baseString>,
+  tags: option<tagList_>,
+  spec: virtualServiceSpec,
+  meshName: resourceName,
+  virtualServiceName: serviceName
 }
   type response = {
 virtualService: virtualServiceData
@@ -888,10 +955,10 @@ module UpdateVirtualRouter = {
   type t;
   type request = {
 meshOwner: option<accountId>,
-clientToken: option<string_>,
-spec: virtualRouterSpec,
-meshName: resourceName,
-virtualRouterName: resourceName
+  clientToken: option<baseString>,
+  spec: virtualRouterSpec,
+  meshName: resourceName,
+  virtualRouterName: resourceName
 }
   type response = {
 virtualRouter: virtualRouterData
@@ -904,8 +971,8 @@ module DescribeVirtualRouter = {
   type t;
   type request = {
 meshOwner: option<accountId>,
-meshName: resourceName,
-virtualRouterName: resourceName
+  meshName: resourceName,
+  virtualRouterName: resourceName
 }
   type response = {
 virtualRouter: virtualRouterData
@@ -918,8 +985,8 @@ module DeleteVirtualRouter = {
   type t;
   type request = {
 meshOwner: option<accountId>,
-meshName: resourceName,
-virtualRouterName: resourceName
+  meshName: resourceName,
+  virtualRouterName: resourceName
 }
   type response = {
 virtualRouter: virtualRouterData
@@ -932,11 +999,11 @@ module CreateVirtualRouter = {
   type t;
   type request = {
 meshOwner: option<accountId>,
-clientToken: option<string_>,
-tags: option<tagList_>,
-spec: virtualRouterSpec,
-meshName: resourceName,
-virtualRouterName: resourceName
+  clientToken: option<baseString>,
+  tags: option<tagList_>,
+  spec: virtualRouterSpec,
+  meshName: resourceName,
+  virtualRouterName: resourceName
 }
   type response = {
 virtualRouter: virtualRouterData
@@ -949,11 +1016,11 @@ module UpdateGatewayRoute = {
   type t;
   type request = {
 meshOwner: option<accountId>,
-clientToken: option<string_>,
-spec: gatewayRouteSpec,
-virtualGatewayName: resourceName,
-meshName: resourceName,
-gatewayRouteName: resourceName
+  clientToken: option<baseString>,
+  spec: gatewayRouteSpec,
+  virtualGatewayName: resourceName,
+  meshName: resourceName,
+  gatewayRouteName: resourceName
 }
   type response = {
 gatewayRoute: gatewayRouteData
@@ -966,9 +1033,9 @@ module DescribeGatewayRoute = {
   type t;
   type request = {
 meshOwner: option<accountId>,
-virtualGatewayName: resourceName,
-meshName: resourceName,
-gatewayRouteName: resourceName
+  virtualGatewayName: resourceName,
+  meshName: resourceName,
+  gatewayRouteName: resourceName
 }
   type response = {
 gatewayRoute: gatewayRouteData
@@ -981,9 +1048,9 @@ module DeleteGatewayRoute = {
   type t;
   type request = {
 meshOwner: option<accountId>,
-virtualGatewayName: resourceName,
-meshName: resourceName,
-gatewayRouteName: resourceName
+  virtualGatewayName: resourceName,
+  meshName: resourceName,
+  gatewayRouteName: resourceName
 }
   type response = {
 gatewayRoute: gatewayRouteData
@@ -996,12 +1063,12 @@ module CreateGatewayRoute = {
   type t;
   type request = {
 meshOwner: option<accountId>,
-clientToken: option<string_>,
-tags: option<tagList_>,
-spec: gatewayRouteSpec,
-virtualGatewayName: resourceName,
-meshName: resourceName,
-gatewayRouteName: resourceName
+  clientToken: option<baseString>,
+  tags: option<tagList_>,
+  spec: gatewayRouteSpec,
+  virtualGatewayName: resourceName,
+  meshName: resourceName,
+  gatewayRouteName: resourceName
 }
   type response = {
 gatewayRoute: gatewayRouteData
@@ -1014,11 +1081,11 @@ module UpdateRoute = {
   type t;
   type request = {
 meshOwner: option<accountId>,
-clientToken: option<string_>,
-spec: routeSpec,
-virtualRouterName: resourceName,
-meshName: resourceName,
-routeName: resourceName
+  clientToken: option<baseString>,
+  spec: routeSpec,
+  virtualRouterName: resourceName,
+  meshName: resourceName,
+  routeName: resourceName
 }
   type response = {
 route: routeData
@@ -1031,9 +1098,9 @@ module DescribeRoute = {
   type t;
   type request = {
 virtualRouterName: resourceName,
-meshOwner: option<accountId>,
-meshName: resourceName,
-routeName: resourceName
+  meshOwner: option<accountId>,
+  meshName: resourceName,
+  routeName: resourceName
 }
   type response = {
 route: routeData
@@ -1046,9 +1113,9 @@ module DeleteRoute = {
   type t;
   type request = {
 meshOwner: option<accountId>,
-virtualRouterName: resourceName,
-meshName: resourceName,
-routeName: resourceName
+  virtualRouterName: resourceName,
+  meshName: resourceName,
+  routeName: resourceName
 }
   type response = {
 route: routeData
@@ -1061,12 +1128,12 @@ module CreateRoute = {
   type t;
   type request = {
 meshOwner: option<accountId>,
-clientToken: option<string_>,
-tags: option<tagList_>,
-spec: routeSpec,
-virtualRouterName: resourceName,
-meshName: resourceName,
-routeName: resourceName
+  clientToken: option<baseString>,
+  tags: option<tagList_>,
+  spec: routeSpec,
+  virtualRouterName: resourceName,
+  meshName: resourceName,
+  routeName: resourceName
 }
   type response = {
 route: routeData
@@ -1079,10 +1146,10 @@ module UpdateVirtualGateway = {
   type t;
   type request = {
 meshOwner: option<accountId>,
-clientToken: option<string_>,
-spec: virtualGatewaySpec,
-meshName: resourceName,
-virtualGatewayName: resourceName
+  clientToken: option<baseString>,
+  spec: virtualGatewaySpec,
+  meshName: resourceName,
+  virtualGatewayName: resourceName
 }
   type response = {
 virtualGateway: virtualGatewayData
@@ -1095,8 +1162,8 @@ module DescribeVirtualGateway = {
   type t;
   type request = {
 meshOwner: option<accountId>,
-meshName: resourceName,
-virtualGatewayName: resourceName
+  meshName: resourceName,
+  virtualGatewayName: resourceName
 }
   type response = {
 virtualGateway: virtualGatewayData
@@ -1109,8 +1176,8 @@ module DeleteVirtualGateway = {
   type t;
   type request = {
 meshOwner: option<accountId>,
-meshName: resourceName,
-virtualGatewayName: resourceName
+  meshName: resourceName,
+  virtualGatewayName: resourceName
 }
   type response = {
 virtualGateway: virtualGatewayData
@@ -1123,11 +1190,11 @@ module CreateVirtualGateway = {
   type t;
   type request = {
 meshOwner: option<accountId>,
-clientToken: option<string_>,
-tags: option<tagList_>,
-spec: virtualGatewaySpec,
-meshName: resourceName,
-virtualGatewayName: resourceName
+  clientToken: option<baseString>,
+  tags: option<tagList_>,
+  spec: virtualGatewaySpec,
+  meshName: resourceName,
+  virtualGatewayName: resourceName
 }
   type response = {
 virtualGateway: virtualGatewayData
@@ -1140,10 +1207,10 @@ module UpdateVirtualNode = {
   type t;
   type request = {
 meshOwner: option<accountId>,
-clientToken: option<string_>,
-spec: virtualNodeSpec,
-meshName: resourceName,
-virtualNodeName: resourceName
+  clientToken: option<baseString>,
+  spec: virtualNodeSpec,
+  meshName: resourceName,
+  virtualNodeName: resourceName
 }
   type response = {
 virtualNode: virtualNodeData
@@ -1156,8 +1223,8 @@ module DescribeVirtualNode = {
   type t;
   type request = {
 meshOwner: option<accountId>,
-meshName: resourceName,
-virtualNodeName: resourceName
+  meshName: resourceName,
+  virtualNodeName: resourceName
 }
   type response = {
 virtualNode: virtualNodeData
@@ -1170,8 +1237,8 @@ module DeleteVirtualNode = {
   type t;
   type request = {
 meshOwner: option<accountId>,
-meshName: resourceName,
-virtualNodeName: resourceName
+  meshName: resourceName,
+  virtualNodeName: resourceName
 }
   type response = {
 virtualNode: virtualNodeData
@@ -1184,11 +1251,11 @@ module CreateVirtualNode = {
   type t;
   type request = {
 meshOwner: option<accountId>,
-clientToken: option<string_>,
-tags: option<tagList_>,
-spec: virtualNodeSpec,
-meshName: resourceName,
-virtualNodeName: resourceName
+  clientToken: option<baseString>,
+  tags: option<tagList_>,
+  spec: virtualNodeSpec,
+  meshName: resourceName,
+  virtualNodeName: resourceName
 }
   type response = {
 virtualNode: virtualNodeData

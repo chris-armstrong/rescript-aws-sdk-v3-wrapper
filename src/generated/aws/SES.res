@@ -5,11 +5,14 @@ httpStatusCode: option<float>,
   cfId: option<string>,
   attempts: option<int>,
   totalRetryDelay: option<int>
-};
-type string_ = string
-type boolean_ = bool
-type integer_ = int
-type long = float
+}
+type awsServiceClient;
+@module("@aws-sdk/client-ses") @new external createClient: unit => awsServiceClient = "SESClient";
+type baseString = string
+type baseBoolean = bool
+type baseInteger = int
+type baseTimestamp = Js.Date.t;
+type baseLong = float
 type verificationToken = string
 type verificationStatus = [@as("NotStarted") #NotStarted | @as("TemporaryFailure") #TemporaryFailure | @as("Failed") #Failed | @as("Success") #Success | @as("Pending") #Pending]
 type tlsPolicy = [@as("Optional") #Optional | @as("Require") #Require]
@@ -23,7 +26,7 @@ type subjectPart = string
 type subject = string
 type stopScope = [@as("RuleSet") #RuleSet]
 type sentLast24Hours = float
-type snsactionEncoding = [@as("Base64") #Base64 | @as("UTF-8") #UTF8]
+type snsactionEncoding = [@as("Base64") #Base64 | @as("UTF-8") #UTF_8]
 type s3KeyPrefix = string
 type s3BucketName = string
 type ruleOrRuleSetName = string
@@ -93,7 +96,7 @@ type amazonResourceName = string
 type address = string
 type workmailAction = {
 @as("OrganizationArn") organizationArn: amazonResourceName,
-@as("TopicArn") topicArn: option<amazonResourceName>
+  @as("TopicArn") topicArn: option<amazonResourceName>
 }
 type verificationTokenList = array<verificationToken>
 type trackingOptions = {
@@ -101,93 +104,93 @@ type trackingOptions = {
 }
 type templateMetadata = {
 @as("CreatedTimestamp") createdTimestamp: option<timestamp_>,
-@as("Name") name: option<templateName>
+  @as("Name") name: option<templateName>
 }
 type template = {
 @as("HtmlPart") htmlPart: option<htmlPart>,
-@as("TextPart") textPart: option<textPart>,
-@as("SubjectPart") subjectPart: option<subjectPart>,
-@as("TemplateName") templateName: templateName
+  @as("TextPart") textPart: option<textPart>,
+  @as("SubjectPart") subjectPart: option<subjectPart>,
+  @as("TemplateName") templateName: templateName
 }
 type stopAction = {
 @as("TopicArn") topicArn: option<amazonResourceName>,
-@as("Scope") scope: stopScope
+  @as("Scope") scope: stopScope
 }
 type sendDataPoint = {
 @as("Rejects") rejects: option<counter>,
-@as("Complaints") complaints: option<counter>,
-@as("Bounces") bounces: option<counter>,
-@as("DeliveryAttempts") deliveryAttempts: option<counter>,
-@as("Timestamp") timestamp_: option<timestamp_>
+  @as("Complaints") complaints: option<counter>,
+  @as("Bounces") bounces: option<counter>,
+  @as("DeliveryAttempts") deliveryAttempts: option<counter>,
+  @as("Timestamp") timestamp_: option<timestamp_>
 }
 type snsdestination = {
 @as("TopicARN") topicARN: amazonResourceName
 }
 type snsaction = {
 @as("Encoding") encoding: option<snsactionEncoding>,
-@as("TopicArn") topicArn: amazonResourceName
+  @as("TopicArn") topicArn: amazonResourceName
 }
 type s3Action = {
 @as("KmsKeyArn") kmsKeyArn: option<amazonResourceName>,
-@as("ObjectKeyPrefix") objectKeyPrefix: option<s3KeyPrefix>,
-@as("BucketName") bucketName: s3BucketName,
-@as("TopicArn") topicArn: option<amazonResourceName>
+  @as("ObjectKeyPrefix") objectKeyPrefix: option<s3KeyPrefix>,
+  @as("BucketName") bucketName: s3BucketName,
+  @as("TopicArn") topicArn: option<amazonResourceName>
 }
 type reputationOptions = {
 @as("LastFreshStart") lastFreshStart: option<lastFreshStart>,
-@as("ReputationMetricsEnabled") reputationMetricsEnabled: option<enabled>,
-@as("SendingEnabled") sendingEnabled: option<enabled>
+  @as("ReputationMetricsEnabled") reputationMetricsEnabled: option<enabled>,
+  @as("SendingEnabled") sendingEnabled: option<enabled>
 }
 type recipientsList = array<recipient>
 type receiptRuleSetMetadata = {
 @as("CreatedTimestamp") createdTimestamp: option<timestamp_>,
-@as("Name") name: option<receiptRuleSetName>
+  @as("Name") name: option<receiptRuleSetName>
 }
 type receiptRuleNamesList = array<receiptRuleName>
 type receiptIpFilter = {
 @as("Cidr") cidr: cidr,
-@as("Policy") policy: receiptFilterPolicy
+  @as("Policy") policy: receiptFilterPolicy
 }
 type rawMessage = {
 @as("Data") data: rawMessageData
 }
 type policyNameList = array<policyName>
-type policyMap = Js.Dict.t< policy>
+type policyMap = Js.Dict.t<policy>
 type messageTag = {
 @as("Value") value: messageTagValue,
-@as("Name") name: messageTagName
+  @as("Name") name: messageTagName
 }
 type lambdaAction = {
 @as("InvocationType") invocationType: option<invocationType>,
-@as("FunctionArn") functionArn: amazonResourceName,
-@as("TopicArn") topicArn: option<amazonResourceName>
+  @as("FunctionArn") functionArn: amazonResourceName,
+  @as("TopicArn") topicArn: option<amazonResourceName>
 }
 type kinesisFirehoseDestination = {
 @as("DeliveryStreamARN") deliveryStreamARN: amazonResourceName,
-@as("IAMRoleARN") iamroleARN: amazonResourceName
+  @as("IAMRoleARN") iamroleARN: amazonResourceName
 }
 type identityVerificationAttributes = {
 @as("VerificationToken") verificationToken: option<verificationToken>,
-@as("VerificationStatus") verificationStatus: verificationStatus
+  @as("VerificationStatus") verificationStatus: verificationStatus
 }
 type identityNotificationAttributes = {
 @as("HeadersInDeliveryNotificationsEnabled") headersInDeliveryNotificationsEnabled: option<enabled>,
-@as("HeadersInComplaintNotificationsEnabled") headersInComplaintNotificationsEnabled: option<enabled>,
-@as("HeadersInBounceNotificationsEnabled") headersInBounceNotificationsEnabled: option<enabled>,
-@as("ForwardingEnabled") forwardingEnabled: enabled,
-@as("DeliveryTopic") deliveryTopic: notificationTopic,
-@as("ComplaintTopic") complaintTopic: notificationTopic,
-@as("BounceTopic") bounceTopic: notificationTopic
+  @as("HeadersInComplaintNotificationsEnabled") headersInComplaintNotificationsEnabled: option<enabled>,
+  @as("HeadersInBounceNotificationsEnabled") headersInBounceNotificationsEnabled: option<enabled>,
+  @as("ForwardingEnabled") forwardingEnabled: enabled,
+  @as("DeliveryTopic") deliveryTopic: notificationTopic,
+  @as("ComplaintTopic") complaintTopic: notificationTopic,
+  @as("BounceTopic") bounceTopic: notificationTopic
 }
 type identityMailFromDomainAttributes = {
 @as("BehaviorOnMXFailure") behaviorOnMXFailure: behaviorOnMXFailure,
-@as("MailFromDomainStatus") mailFromDomainStatus: customMailFromStatus,
-@as("MailFromDomain") mailFromDomain: mailFromDomainName
+  @as("MailFromDomainStatus") mailFromDomainStatus: customMailFromStatus,
+  @as("MailFromDomain") mailFromDomain: mailFromDomainName
 }
 type identityList = array<identity>
 type extensionField = {
 @as("Value") value: extensionFieldValue,
-@as("Name") name: extensionFieldName
+  @as("Name") name: extensionFieldName
 }
 type eventTypes = array<eventType>
 type deliveryOptions = {
@@ -195,14 +198,14 @@ type deliveryOptions = {
 }
 type customVerificationEmailTemplate = {
 @as("FailureRedirectionURL") failureRedirectionURL: option<failureRedirectionURL>,
-@as("SuccessRedirectionURL") successRedirectionURL: option<successRedirectionURL>,
-@as("TemplateSubject") templateSubject: option<subject>,
-@as("FromEmailAddress") fromEmailAddress: option<fromAddress>,
-@as("TemplateName") templateName: option<templateName>
+  @as("SuccessRedirectionURL") successRedirectionURL: option<successRedirectionURL>,
+  @as("TemplateSubject") templateSubject: option<subject>,
+  @as("FromEmailAddress") fromEmailAddress: option<fromAddress>,
+  @as("TemplateName") templateName: option<templateName>
 }
 type content = {
 @as("Charset") charset: option<charset>,
-@as("Data") data: messageData
+  @as("Data") data: messageData
 }
 type configurationSetAttributeList = array<configurationSetAttribute>
 type configurationSet = {
@@ -210,56 +213,56 @@ type configurationSet = {
 }
 type cloudWatchDimensionConfiguration = {
 @as("DefaultDimensionValue") defaultDimensionValue: defaultDimensionValue,
-@as("DimensionValueSource") dimensionValueSource: dimensionValueSource,
-@as("DimensionName") dimensionName: dimensionName
+  @as("DimensionValueSource") dimensionValueSource: dimensionValueSource,
+  @as("DimensionName") dimensionName: dimensionName
 }
 type bulkEmailDestinationStatus = {
 @as("MessageId") messageId: option<messageId>,
-@as("Error") error: option<error>,
-@as("Status") status: option<bulkEmailStatus>
+  @as("Error") error: option<error>,
+  @as("Status") status: option<bulkEmailStatus>
 }
 type bounceAction = {
 @as("Sender") sender: address,
-@as("Message") message: bounceMessage,
-@as("StatusCode") statusCode: option<bounceStatusCode>,
-@as("SmtpReplyCode") smtpReplyCode: bounceSmtpReplyCode,
-@as("TopicArn") topicArn: option<amazonResourceName>
+  @as("Message") message: bounceMessage,
+  @as("StatusCode") statusCode: option<bounceStatusCode>,
+  @as("SmtpReplyCode") smtpReplyCode: bounceSmtpReplyCode,
+  @as("TopicArn") topicArn: option<amazonResourceName>
 }
 type addressList = array<address>
 type addHeaderAction = {
 @as("HeaderValue") headerValue: headerValue,
-@as("HeaderName") headerName: headerName
+  @as("HeaderName") headerName: headerName
 }
-type verificationAttributes = Js.Dict.t< identityVerificationAttributes>
+type verificationAttributes = Js.Dict.t<identityVerificationAttributes>
 type templateMetadataList = array<templateMetadata>
 type sendDataPointList = array<sendDataPoint>
 type receiptRuleSetsLists = array<receiptRuleSetMetadata>
 type receiptFilter = {
 @as("IpFilter") ipFilter: receiptIpFilter,
-@as("Name") name: receiptFilterName
+  @as("Name") name: receiptFilterName
 }
 type receiptAction = {
 @as("SNSAction") snsaction: option<snsaction>,
-@as("AddHeaderAction") addHeaderAction: option<addHeaderAction>,
-@as("StopAction") stopAction: option<stopAction>,
-@as("LambdaAction") lambdaAction: option<lambdaAction>,
-@as("WorkmailAction") workmailAction: option<workmailAction>,
-@as("BounceAction") bounceAction: option<bounceAction>,
-@as("S3Action") s3Action: option<s3Action>
+  @as("AddHeaderAction") addHeaderAction: option<addHeaderAction>,
+  @as("StopAction") stopAction: option<stopAction>,
+  @as("LambdaAction") lambdaAction: option<lambdaAction>,
+  @as("WorkmailAction") workmailAction: option<workmailAction>,
+  @as("BounceAction") bounceAction: option<bounceAction>,
+  @as("S3Action") s3Action: option<s3Action>
 }
-type notificationAttributes = Js.Dict.t< identityNotificationAttributes>
+type notificationAttributes = Js.Dict.t<identityNotificationAttributes>
 type messageTagList = array<messageTag>
-type mailFromDomainAttributes = Js.Dict.t< identityMailFromDomainAttributes>
+type mailFromDomainAttributes = Js.Dict.t<identityMailFromDomainAttributes>
 type identityDkimAttributes = {
 @as("DkimTokens") dkimTokens: option<verificationTokenList>,
-@as("DkimVerificationStatus") dkimVerificationStatus: verificationStatus,
-@as("DkimEnabled") dkimEnabled: enabled
+  @as("DkimVerificationStatus") dkimVerificationStatus: verificationStatus,
+  @as("DkimEnabled") dkimEnabled: enabled
 }
 type extensionFieldList = array<extensionField>
 type destination = {
 @as("BccAddresses") bccAddresses: option<addressList>,
-@as("CcAddresses") ccAddresses: option<addressList>,
-@as("ToAddresses") toAddresses: option<addressList>
+  @as("CcAddresses") ccAddresses: option<addressList>,
+  @as("ToAddresses") toAddresses: option<addressList>
 }
 type customVerificationEmailTemplates = array<customVerificationEmailTemplate>
 type configurationSets = array<configurationSet>
@@ -267,65 +270,64 @@ type cloudWatchDimensionConfigurations = array<cloudWatchDimensionConfiguration>
 type bulkEmailDestinationStatusList = array<bulkEmailDestinationStatus>
 type body = {
 @as("Html") html: option<content>,
-@as("Text") text: option<content>
+  @as("Text") text: option<content>
 }
 type recipientDsnFields = {
 @as("ExtensionFields") extensionFields: option<extensionFieldList>,
-@as("LastAttemptDate") lastAttemptDate: option<lastAttemptDate>,
-@as("DiagnosticCode") diagnosticCode: option<diagnosticCode>,
-@as("Status") status: dsnStatus,
-@as("RemoteMta") remoteMta: option<remoteMta>,
-@as("Action") action: dsnAction,
-@as("FinalRecipient") finalRecipient: option<address>
+  @as("LastAttemptDate") lastAttemptDate: option<lastAttemptDate>,
+  @as("DiagnosticCode") diagnosticCode: option<diagnosticCode>,
+  @as("Status") status: dsnStatus,
+  @as("RemoteMta") remoteMta: option<remoteMta>,
+  @as("Action") action: dsnAction,
+  @as("FinalRecipient") finalRecipient: option<address>
 }
 type receiptFilterList = array<receiptFilter>
 type receiptActionsList = array<receiptAction>
 type messageDsn = {
 @as("ExtensionFields") extensionFields: option<extensionFieldList>,
-@as("ArrivalDate") arrivalDate: option<arrivalDate>,
-@as("ReportingMta") reportingMta: reportingMta
+  @as("ArrivalDate") arrivalDate: option<arrivalDate>,
+  @as("ReportingMta") reportingMta: reportingMta
 }
 type message = {
 @as("Body") body: body,
-@as("Subject") subject: content
+  @as("Subject") subject: content
 }
-type dkimAttributes = Js.Dict.t< identityDkimAttributes>
+type dkimAttributes = Js.Dict.t<identityDkimAttributes>
 type cloudWatchDestination = {
 @as("DimensionConfigurations") dimensionConfigurations: cloudWatchDimensionConfigurations
 }
 type bulkEmailDestination = {
 @as("ReplacementTemplateData") replacementTemplateData: option<templateData>,
-@as("ReplacementTags") replacementTags: option<messageTagList>,
-@as("Destination") destination: destination
+  @as("ReplacementTags") replacementTags: option<messageTagList>,
+  @as("Destination") destination: destination
 }
 type receiptRule = {
 @as("ScanEnabled") scanEnabled: option<enabled>,
-@as("Actions") actions: option<receiptActionsList>,
-@as("Recipients") recipients: option<recipientsList>,
-@as("TlsPolicy") tlsPolicy: option<tlsPolicy>,
-@as("Enabled") enabled: option<enabled>,
-@as("Name") name: receiptRuleName
+  @as("Actions") actions: option<receiptActionsList>,
+  @as("Recipients") recipients: option<recipientsList>,
+  @as("TlsPolicy") tlsPolicy: option<tlsPolicy>,
+  @as("Enabled") enabled: option<enabled>,
+  @as("Name") name: receiptRuleName
 }
 type eventDestination = {
 @as("SNSDestination") snsdestination: option<snsdestination>,
-@as("CloudWatchDestination") cloudWatchDestination: option<cloudWatchDestination>,
-@as("KinesisFirehoseDestination") kinesisFirehoseDestination: option<kinesisFirehoseDestination>,
-@as("MatchingEventTypes") matchingEventTypes: eventTypes,
-@as("Enabled") enabled: option<enabled>,
-@as("Name") name: eventDestinationName
+  @as("CloudWatchDestination") cloudWatchDestination: option<cloudWatchDestination>,
+  @as("KinesisFirehoseDestination") kinesisFirehoseDestination: option<kinesisFirehoseDestination>,
+  @as("MatchingEventTypes") matchingEventTypes: eventTypes,
+  @as("Enabled") enabled: option<enabled>,
+  @as("Name") name: eventDestinationName
 }
 type bulkEmailDestinationList = array<bulkEmailDestination>
 type bouncedRecipientInfo = {
 @as("RecipientDsnFields") recipientDsnFields: option<recipientDsnFields>,
-@as("BounceType") bounceType: option<bounceType>,
-@as("RecipientArn") recipientArn: option<amazonResourceName>,
-@as("Recipient") recipient: address
+  @as("BounceType") bounceType: option<bounceType>,
+  @as("RecipientArn") recipientArn: option<amazonResourceName>,
+  @as("Recipient") recipient: address
 }
 type receiptRulesList = array<receiptRule>
 type eventDestinations = array<eventDestination>
 type bouncedRecipientInfoList = array<bouncedRecipientInfo>
-type awsServiceClient;
-@module("@aws-sdk/client-ses") @new external createClient: unit => awsServiceClient = "SESClient";
+
 module VerifyEmailIdentity = {
   type t;
   type request = {
@@ -362,11 +364,11 @@ module UpdateCustomVerificationEmailTemplate = {
   type t;
   type request = {
 @as("FailureRedirectionURL") failureRedirectionURL: option<failureRedirectionURL>,
-@as("SuccessRedirectionURL") successRedirectionURL: option<successRedirectionURL>,
-@as("TemplateContent") templateContent: option<templateContent>,
-@as("TemplateSubject") templateSubject: option<subject>,
-@as("FromEmailAddress") fromEmailAddress: option<fromAddress>,
-@as("TemplateName") templateName: templateName
+  @as("SuccessRedirectionURL") successRedirectionURL: option<successRedirectionURL>,
+  @as("TemplateContent") templateContent: option<templateContent>,
+  @as("TemplateSubject") templateSubject: option<subject>,
+  @as("FromEmailAddress") fromEmailAddress: option<fromAddress>,
+  @as("TemplateName") templateName: templateName
 }
   
   @module("@aws-sdk/client-ses") @new external new_: (request) => t = "UpdateCustomVerificationEmailTemplateCommand";
@@ -377,7 +379,7 @@ module UpdateConfigurationSetSendingEnabled = {
   type t;
   type request = {
 @as("Enabled") enabled: enabled,
-@as("ConfigurationSetName") configurationSetName: configurationSetName
+  @as("ConfigurationSetName") configurationSetName: configurationSetName
 }
   
   @module("@aws-sdk/client-ses") @new external new_: (request) => t = "UpdateConfigurationSetSendingEnabledCommand";
@@ -388,7 +390,7 @@ module UpdateConfigurationSetReputationMetricsEnabled = {
   type t;
   type request = {
 @as("Enabled") enabled: enabled,
-@as("ConfigurationSetName") configurationSetName: configurationSetName
+  @as("ConfigurationSetName") configurationSetName: configurationSetName
 }
   
   @module("@aws-sdk/client-ses") @new external new_: (request) => t = "UpdateConfigurationSetReputationMetricsEnabledCommand";
@@ -409,7 +411,7 @@ module TestRenderTemplate = {
   type t;
   type request = {
 @as("TemplateData") templateData: templateData,
-@as("TemplateName") templateName: templateName
+  @as("TemplateName") templateName: templateName
 }
   type response = {
 @as("RenderedTemplate") renderedTemplate: option<renderedTemplate>
@@ -422,8 +424,8 @@ module SetReceiptRulePosition = {
   type t;
   type request = {
 @as("After") after: option<receiptRuleName>,
-@as("RuleName") ruleName: receiptRuleName,
-@as("RuleSetName") ruleSetName: receiptRuleSetName
+  @as("RuleName") ruleName: receiptRuleName,
+  @as("RuleSetName") ruleSetName: receiptRuleSetName
 }
   type response = unit
   @module("@aws-sdk/client-ses") @new external new_: (request) => t = "SetReceiptRulePositionCommand";
@@ -434,8 +436,8 @@ module SetIdentityNotificationTopic = {
   type t;
   type request = {
 @as("SnsTopic") snsTopic: option<notificationTopic>,
-@as("NotificationType") notificationType: notificationType,
-@as("Identity") identity: identity
+  @as("NotificationType") notificationType: notificationType,
+  @as("Identity") identity: identity
 }
   type response = unit
   @module("@aws-sdk/client-ses") @new external new_: (request) => t = "SetIdentityNotificationTopicCommand";
@@ -446,8 +448,8 @@ module SetIdentityMailFromDomain = {
   type t;
   type request = {
 @as("BehaviorOnMXFailure") behaviorOnMXFailure: option<behaviorOnMXFailure>,
-@as("MailFromDomain") mailFromDomain: option<mailFromDomainName>,
-@as("Identity") identity: identity
+  @as("MailFromDomain") mailFromDomain: option<mailFromDomainName>,
+  @as("Identity") identity: identity
 }
   type response = unit
   @module("@aws-sdk/client-ses") @new external new_: (request) => t = "SetIdentityMailFromDomainCommand";
@@ -458,8 +460,8 @@ module SetIdentityHeadersInNotificationsEnabled = {
   type t;
   type request = {
 @as("Enabled") enabled: enabled,
-@as("NotificationType") notificationType: notificationType,
-@as("Identity") identity: identity
+  @as("NotificationType") notificationType: notificationType,
+  @as("Identity") identity: identity
 }
   type response = unit
   @module("@aws-sdk/client-ses") @new external new_: (request) => t = "SetIdentityHeadersInNotificationsEnabledCommand";
@@ -470,7 +472,7 @@ module SetIdentityFeedbackForwardingEnabled = {
   type t;
   type request = {
 @as("ForwardingEnabled") forwardingEnabled: enabled,
-@as("Identity") identity: identity
+  @as("Identity") identity: identity
 }
   type response = unit
   @module("@aws-sdk/client-ses") @new external new_: (request) => t = "SetIdentityFeedbackForwardingEnabledCommand";
@@ -481,7 +483,7 @@ module SetIdentityDkimEnabled = {
   type t;
   type request = {
 @as("DkimEnabled") dkimEnabled: enabled,
-@as("Identity") identity: identity
+  @as("Identity") identity: identity
 }
   type response = unit
   @module("@aws-sdk/client-ses") @new external new_: (request) => t = "SetIdentityDkimEnabledCommand";
@@ -502,8 +504,8 @@ module SendCustomVerificationEmail = {
   type t;
   type request = {
 @as("ConfigurationSetName") configurationSetName: option<configurationSetName>,
-@as("TemplateName") templateName: templateName,
-@as("EmailAddress") emailAddress: address
+  @as("TemplateName") templateName: templateName,
+  @as("EmailAddress") emailAddress: address
 }
   type response = {
 @as("MessageId") messageId: option<messageId>
@@ -516,8 +518,8 @@ module PutIdentityPolicy = {
   type t;
   type request = {
 @as("Policy") policy: policy,
-@as("PolicyName") policyName: policyName,
-@as("Identity") identity: identity
+  @as("PolicyName") policyName: policyName,
+  @as("Identity") identity: identity
 }
   type response = unit
   @module("@aws-sdk/client-ses") @new external new_: (request) => t = "PutIdentityPolicyCommand";
@@ -529,8 +531,8 @@ module GetSendQuota = {
   
   type response = {
 @as("SentLast24Hours") sentLast24Hours: option<sentLast24Hours>,
-@as("MaxSendRate") maxSendRate: option<maxSendRate>,
-@as("Max24HourSend") max24HourSend: option<max24HourSend>
+  @as("MaxSendRate") maxSendRate: option<maxSendRate>,
+  @as("Max24HourSend") max24HourSend: option<max24HourSend>
 }
   @module("@aws-sdk/client-ses") @new external new_: (unit) => t = "GetSendQuotaCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -543,11 +545,11 @@ module GetCustomVerificationEmailTemplate = {
 }
   type response = {
 @as("FailureRedirectionURL") failureRedirectionURL: option<failureRedirectionURL>,
-@as("SuccessRedirectionURL") successRedirectionURL: option<successRedirectionURL>,
-@as("TemplateContent") templateContent: option<templateContent>,
-@as("TemplateSubject") templateSubject: option<subject>,
-@as("FromEmailAddress") fromEmailAddress: option<fromAddress>,
-@as("TemplateName") templateName: option<templateName>
+  @as("SuccessRedirectionURL") successRedirectionURL: option<successRedirectionURL>,
+  @as("TemplateContent") templateContent: option<templateContent>,
+  @as("TemplateSubject") templateSubject: option<subject>,
+  @as("FromEmailAddress") fromEmailAddress: option<fromAddress>,
+  @as("TemplateName") templateName: option<templateName>
 }
   @module("@aws-sdk/client-ses") @new external new_: (request) => t = "GetCustomVerificationEmailTemplateCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -597,7 +599,7 @@ module DeleteReceiptRule = {
   type t;
   type request = {
 @as("RuleName") ruleName: receiptRuleName,
-@as("RuleSetName") ruleSetName: receiptRuleSetName
+  @as("RuleSetName") ruleSetName: receiptRuleSetName
 }
   type response = unit
   @module("@aws-sdk/client-ses") @new external new_: (request) => t = "DeleteReceiptRuleCommand";
@@ -618,7 +620,7 @@ module DeleteIdentityPolicy = {
   type t;
   type request = {
 @as("PolicyName") policyName: policyName,
-@as("Identity") identity: identity
+  @as("Identity") identity: identity
 }
   type response = unit
   @module("@aws-sdk/client-ses") @new external new_: (request) => t = "DeleteIdentityPolicyCommand";
@@ -659,7 +661,7 @@ module DeleteConfigurationSetEventDestination = {
   type t;
   type request = {
 @as("EventDestinationName") eventDestinationName: eventDestinationName,
-@as("ConfigurationSetName") configurationSetName: configurationSetName
+  @as("ConfigurationSetName") configurationSetName: configurationSetName
 }
   type response = unit
   @module("@aws-sdk/client-ses") @new external new_: (request) => t = "DeleteConfigurationSetEventDestinationCommand";
@@ -690,11 +692,11 @@ module CreateCustomVerificationEmailTemplate = {
   type t;
   type request = {
 @as("FailureRedirectionURL") failureRedirectionURL: failureRedirectionURL,
-@as("SuccessRedirectionURL") successRedirectionURL: successRedirectionURL,
-@as("TemplateContent") templateContent: templateContent,
-@as("TemplateSubject") templateSubject: subject,
-@as("FromEmailAddress") fromEmailAddress: fromAddress,
-@as("TemplateName") templateName: templateName
+  @as("SuccessRedirectionURL") successRedirectionURL: successRedirectionURL,
+  @as("TemplateContent") templateContent: templateContent,
+  @as("TemplateSubject") templateSubject: subject,
+  @as("FromEmailAddress") fromEmailAddress: fromAddress,
+  @as("TemplateName") templateName: templateName
 }
   
   @module("@aws-sdk/client-ses") @new external new_: (request) => t = "CreateCustomVerificationEmailTemplateCommand";
@@ -705,7 +707,7 @@ module CloneReceiptRuleSet = {
   type t;
   type request = {
 @as("OriginalRuleSetName") originalRuleSetName: receiptRuleSetName,
-@as("RuleSetName") ruleSetName: receiptRuleSetName
+  @as("RuleSetName") ruleSetName: receiptRuleSetName
 }
   type response = unit
   @module("@aws-sdk/client-ses") @new external new_: (request) => t = "CloneReceiptRuleSetCommand";
@@ -738,7 +740,7 @@ module UpdateConfigurationSetTrackingOptions = {
   type t;
   type request = {
 @as("TrackingOptions") trackingOptions: trackingOptions,
-@as("ConfigurationSetName") configurationSetName: configurationSetName
+  @as("ConfigurationSetName") configurationSetName: configurationSetName
 }
   type response = unit
   @module("@aws-sdk/client-ses") @new external new_: (request) => t = "UpdateConfigurationSetTrackingOptionsCommand";
@@ -749,7 +751,7 @@ module ReorderReceiptRuleSet = {
   type t;
   type request = {
 @as("RuleNames") ruleNames: receiptRuleNamesList,
-@as("RuleSetName") ruleSetName: receiptRuleSetName
+  @as("RuleSetName") ruleSetName: receiptRuleSetName
 }
   type response = unit
   @module("@aws-sdk/client-ses") @new external new_: (request) => t = "ReorderReceiptRuleSetCommand";
@@ -760,7 +762,7 @@ module PutConfigurationSetDeliveryOptions = {
   type t;
   type request = {
 @as("DeliveryOptions") deliveryOptions: option<deliveryOptions>,
-@as("ConfigurationSetName") configurationSetName: configurationSetName
+  @as("ConfigurationSetName") configurationSetName: configurationSetName
 }
   type response = unit
   @module("@aws-sdk/client-ses") @new external new_: (request) => t = "PutConfigurationSetDeliveryOptionsCommand";
@@ -793,12 +795,12 @@ module ListIdentities = {
   type t;
   type request = {
 @as("MaxItems") maxItems: option<maxItems>,
-@as("NextToken") nextToken: option<nextToken>,
-@as("IdentityType") identityType: option<identityType>
+  @as("NextToken") nextToken: option<nextToken>,
+  @as("IdentityType") identityType: option<identityType>
 }
   type response = {
 @as("NextToken") nextToken: option<nextToken>,
-@as("Identities") identities: identityList
+  @as("Identities") identities: identityList
 }
   @module("@aws-sdk/client-ses") @new external new_: (request) => t = "ListIdentitiesCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -820,7 +822,7 @@ module GetIdentityPolicies = {
   type t;
   type request = {
 @as("PolicyNames") policyNames: policyNameList,
-@as("Identity") identity: identity
+  @as("Identity") identity: identity
 }
   type response = {
 @as("Policies") policies: policyMap
@@ -843,7 +845,7 @@ module CreateConfigurationSetTrackingOptions = {
   type t;
   type request = {
 @as("TrackingOptions") trackingOptions: trackingOptions,
-@as("ConfigurationSetName") configurationSetName: configurationSetName
+  @as("ConfigurationSetName") configurationSetName: configurationSetName
 }
   type response = unit
   @module("@aws-sdk/client-ses") @new external new_: (request) => t = "CreateConfigurationSetTrackingOptionsCommand";
@@ -864,16 +866,16 @@ module SendTemplatedEmail = {
   type t;
   type request = {
 @as("TemplateData") templateData: templateData,
-@as("TemplateArn") templateArn: option<amazonResourceName>,
-@as("Template") template: templateName,
-@as("ConfigurationSetName") configurationSetName: option<configurationSetName>,
-@as("Tags") tags: option<messageTagList>,
-@as("ReturnPathArn") returnPathArn: option<amazonResourceName>,
-@as("SourceArn") sourceArn: option<amazonResourceName>,
-@as("ReturnPath") returnPath: option<address>,
-@as("ReplyToAddresses") replyToAddresses: option<addressList>,
-@as("Destination") destination: destination,
-@as("Source") source: address
+  @as("TemplateArn") templateArn: option<amazonResourceName>,
+  @as("Template") template: templateName,
+  @as("ConfigurationSetName") configurationSetName: option<configurationSetName>,
+  @as("Tags") tags: option<messageTagList>,
+  @as("ReturnPathArn") returnPathArn: option<amazonResourceName>,
+  @as("SourceArn") sourceArn: option<amazonResourceName>,
+  @as("ReturnPath") returnPath: option<address>,
+  @as("ReplyToAddresses") replyToAddresses: option<addressList>,
+  @as("Destination") destination: destination,
+  @as("Source") source: address
 }
   type response = {
 @as("MessageId") messageId: messageId
@@ -886,13 +888,13 @@ module SendRawEmail = {
   type t;
   type request = {
 @as("ConfigurationSetName") configurationSetName: option<configurationSetName>,
-@as("Tags") tags: option<messageTagList>,
-@as("ReturnPathArn") returnPathArn: option<amazonResourceName>,
-@as("SourceArn") sourceArn: option<amazonResourceName>,
-@as("FromArn") fromArn: option<amazonResourceName>,
-@as("RawMessage") rawMessage: rawMessage,
-@as("Destinations") destinations: option<addressList>,
-@as("Source") source: option<address>
+  @as("Tags") tags: option<messageTagList>,
+  @as("ReturnPathArn") returnPathArn: option<amazonResourceName>,
+  @as("SourceArn") sourceArn: option<amazonResourceName>,
+  @as("FromArn") fromArn: option<amazonResourceName>,
+  @as("RawMessage") rawMessage: rawMessage,
+  @as("Destinations") destinations: option<addressList>,
+  @as("Source") source: option<address>
 }
   type response = {
 @as("MessageId") messageId: messageId
@@ -905,11 +907,11 @@ module ListTemplates = {
   type t;
   type request = {
 @as("MaxItems") maxItems: option<maxItems>,
-@as("NextToken") nextToken: option<nextToken>
+  @as("NextToken") nextToken: option<nextToken>
 }
   type response = {
 @as("NextToken") nextToken: option<nextToken>,
-@as("TemplatesMetadata") templatesMetadata: option<templateMetadataList>
+  @as("TemplatesMetadata") templatesMetadata: option<templateMetadataList>
 }
   @module("@aws-sdk/client-ses") @new external new_: (request) => t = "ListTemplatesCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -922,7 +924,7 @@ module ListReceiptRuleSets = {
 }
   type response = {
 @as("NextToken") nextToken: option<nextToken>,
-@as("RuleSets") ruleSets: option<receiptRuleSetsLists>
+  @as("RuleSets") ruleSets: option<receiptRuleSetsLists>
 }
   @module("@aws-sdk/client-ses") @new external new_: (request) => t = "ListReceiptRuleSetsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -932,11 +934,11 @@ module ListCustomVerificationEmailTemplates = {
   type t;
   type request = {
 @as("MaxResults") maxResults: option<maxResults>,
-@as("NextToken") nextToken: option<nextToken>
+  @as("NextToken") nextToken: option<nextToken>
 }
   type response = {
 @as("NextToken") nextToken: option<nextToken>,
-@as("CustomVerificationEmailTemplates") customVerificationEmailTemplates: option<customVerificationEmailTemplates>
+  @as("CustomVerificationEmailTemplates") customVerificationEmailTemplates: option<customVerificationEmailTemplates>
 }
   @module("@aws-sdk/client-ses") @new external new_: (request) => t = "ListCustomVerificationEmailTemplatesCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -946,11 +948,11 @@ module ListConfigurationSets = {
   type t;
   type request = {
 @as("MaxItems") maxItems: option<maxItems>,
-@as("NextToken") nextToken: option<nextToken>
+  @as("NextToken") nextToken: option<nextToken>
 }
   type response = {
 @as("NextToken") nextToken: option<nextToken>,
-@as("ConfigurationSets") configurationSets: option<configurationSets>
+  @as("ConfigurationSets") configurationSets: option<configurationSets>
 }
   @module("@aws-sdk/client-ses") @new external new_: (request) => t = "ListConfigurationSetsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1016,14 +1018,14 @@ module SendEmail = {
   type t;
   type request = {
 @as("ConfigurationSetName") configurationSetName: option<configurationSetName>,
-@as("Tags") tags: option<messageTagList>,
-@as("ReturnPathArn") returnPathArn: option<amazonResourceName>,
-@as("SourceArn") sourceArn: option<amazonResourceName>,
-@as("ReturnPath") returnPath: option<address>,
-@as("ReplyToAddresses") replyToAddresses: option<addressList>,
-@as("Message") message: message,
-@as("Destination") destination: destination,
-@as("Source") source: address
+  @as("Tags") tags: option<messageTagList>,
+  @as("ReturnPathArn") returnPathArn: option<amazonResourceName>,
+  @as("SourceArn") sourceArn: option<amazonResourceName>,
+  @as("ReturnPath") returnPath: option<address>,
+  @as("ReplyToAddresses") replyToAddresses: option<addressList>,
+  @as("Message") message: message,
+  @as("Destination") destination: destination,
+  @as("Source") source: address
 }
   type response = {
 @as("MessageId") messageId: messageId
@@ -1058,7 +1060,7 @@ module UpdateReceiptRule = {
   type t;
   type request = {
 @as("Rule") rule: receiptRule,
-@as("RuleSetName") ruleSetName: receiptRuleSetName
+  @as("RuleSetName") ruleSetName: receiptRuleSetName
 }
   type response = unit
   @module("@aws-sdk/client-ses") @new external new_: (request) => t = "UpdateReceiptRuleCommand";
@@ -1069,7 +1071,7 @@ module UpdateConfigurationSetEventDestination = {
   type t;
   type request = {
 @as("EventDestination") eventDestination: eventDestination,
-@as("ConfigurationSetName") configurationSetName: configurationSetName
+  @as("ConfigurationSetName") configurationSetName: configurationSetName
 }
   type response = unit
   @module("@aws-sdk/client-ses") @new external new_: (request) => t = "UpdateConfigurationSetEventDestinationCommand";
@@ -1080,16 +1082,16 @@ module SendBulkTemplatedEmail = {
   type t;
   type request = {
 @as("Destinations") destinations: bulkEmailDestinationList,
-@as("DefaultTemplateData") defaultTemplateData: option<templateData>,
-@as("TemplateArn") templateArn: option<amazonResourceName>,
-@as("Template") template: templateName,
-@as("DefaultTags") defaultTags: option<messageTagList>,
-@as("ConfigurationSetName") configurationSetName: option<configurationSetName>,
-@as("ReturnPathArn") returnPathArn: option<amazonResourceName>,
-@as("ReturnPath") returnPath: option<address>,
-@as("ReplyToAddresses") replyToAddresses: option<addressList>,
-@as("SourceArn") sourceArn: option<amazonResourceName>,
-@as("Source") source: address
+  @as("DefaultTemplateData") defaultTemplateData: option<templateData>,
+  @as("TemplateArn") templateArn: option<amazonResourceName>,
+  @as("Template") template: templateName,
+  @as("DefaultTags") defaultTags: option<messageTagList>,
+  @as("ConfigurationSetName") configurationSetName: option<configurationSetName>,
+  @as("ReturnPathArn") returnPathArn: option<amazonResourceName>,
+  @as("ReturnPath") returnPath: option<address>,
+  @as("ReplyToAddresses") replyToAddresses: option<addressList>,
+  @as("SourceArn") sourceArn: option<amazonResourceName>,
+  @as("Source") source: address
 }
   type response = {
 @as("Status") status: bulkEmailDestinationStatusList
@@ -1102,7 +1104,7 @@ module DescribeReceiptRule = {
   type t;
   type request = {
 @as("RuleName") ruleName: receiptRuleName,
-@as("RuleSetName") ruleSetName: receiptRuleSetName
+  @as("RuleSetName") ruleSetName: receiptRuleSetName
 }
   type response = {
 @as("Rule") rule: option<receiptRule>
@@ -1115,8 +1117,8 @@ module CreateReceiptRule = {
   type t;
   type request = {
 @as("Rule") rule: receiptRule,
-@as("After") after: option<receiptRuleName>,
-@as("RuleSetName") ruleSetName: receiptRuleSetName
+  @as("After") after: option<receiptRuleName>,
+  @as("RuleSetName") ruleSetName: receiptRuleSetName
 }
   type response = unit
   @module("@aws-sdk/client-ses") @new external new_: (request) => t = "CreateReceiptRuleCommand";
@@ -1127,7 +1129,7 @@ module CreateConfigurationSetEventDestination = {
   type t;
   type request = {
 @as("EventDestination") eventDestination: eventDestination,
-@as("ConfigurationSetName") configurationSetName: configurationSetName
+  @as("ConfigurationSetName") configurationSetName: configurationSetName
 }
   type response = unit
   @module("@aws-sdk/client-ses") @new external new_: (request) => t = "CreateConfigurationSetEventDestinationCommand";
@@ -1138,11 +1140,11 @@ module SendBounce = {
   type t;
   type request = {
 @as("BounceSenderArn") bounceSenderArn: option<amazonResourceName>,
-@as("BouncedRecipientInfoList") bouncedRecipientInfoList: bouncedRecipientInfoList,
-@as("MessageDsn") messageDsn: option<messageDsn>,
-@as("Explanation") explanation: option<explanation>,
-@as("BounceSender") bounceSender: address,
-@as("OriginalMessageId") originalMessageId: messageId
+  @as("BouncedRecipientInfoList") bouncedRecipientInfoList: bouncedRecipientInfoList,
+  @as("MessageDsn") messageDsn: option<messageDsn>,
+  @as("Explanation") explanation: option<explanation>,
+  @as("BounceSender") bounceSender: address,
+  @as("OriginalMessageId") originalMessageId: messageId
 }
   type response = {
 @as("MessageId") messageId: option<messageId>
@@ -1158,7 +1160,7 @@ module DescribeReceiptRuleSet = {
 }
   type response = {
 @as("Rules") rules: option<receiptRulesList>,
-@as("Metadata") metadata: option<receiptRuleSetMetadata>
+  @as("Metadata") metadata: option<receiptRuleSetMetadata>
 }
   @module("@aws-sdk/client-ses") @new external new_: (request) => t = "DescribeReceiptRuleSetCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1168,14 +1170,14 @@ module DescribeConfigurationSet = {
   type t;
   type request = {
 @as("ConfigurationSetAttributeNames") configurationSetAttributeNames: option<configurationSetAttributeList>,
-@as("ConfigurationSetName") configurationSetName: configurationSetName
+  @as("ConfigurationSetName") configurationSetName: configurationSetName
 }
   type response = {
 @as("ReputationOptions") reputationOptions: option<reputationOptions>,
-@as("DeliveryOptions") deliveryOptions: option<deliveryOptions>,
-@as("TrackingOptions") trackingOptions: option<trackingOptions>,
-@as("EventDestinations") eventDestinations: option<eventDestinations>,
-@as("ConfigurationSet") configurationSet: option<configurationSet>
+  @as("DeliveryOptions") deliveryOptions: option<deliveryOptions>,
+  @as("TrackingOptions") trackingOptions: option<trackingOptions>,
+  @as("EventDestinations") eventDestinations: option<eventDestinations>,
+  @as("ConfigurationSet") configurationSet: option<configurationSet>
 }
   @module("@aws-sdk/client-ses") @new external new_: (request) => t = "DescribeConfigurationSetCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1186,7 +1188,7 @@ module DescribeActiveReceiptRuleSet = {
   type request = unit
   type response = {
 @as("Rules") rules: option<receiptRulesList>,
-@as("Metadata") metadata: option<receiptRuleSetMetadata>
+  @as("Metadata") metadata: option<receiptRuleSetMetadata>
 }
   @module("@aws-sdk/client-ses") @new external new_: (request) => t = "DescribeActiveReceiptRuleSetCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";

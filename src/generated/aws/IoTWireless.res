@@ -5,13 +5,16 @@ httpStatusCode: option<float>,
   cfId: option<string>,
   attempts: option<int>,
   totalRetryDelay: option<int>
-};
-type string_ = string
-type boolean_ = bool
-type timestamp_ = Js.Date.t;
-type long = float
+}
+type awsServiceClient;
+@module("@aws-sdk/client-iotwireless") @new external createClient: unit => awsServiceClient = "IoTWirelessClient";
+type baseString = string
+type baseBoolean = bool
+type baseInteger = int
+type baseTimestamp = Js.Date.t;
+type baseLong = float
 type wirelessGatewayType = [@as("LoRaWAN") #LoRaWAN]
-type wirelessGatewayTaskStatus = [@as("FAILED") #FAILED | @as("COMPLETED") #COMPLETED | @as("SECOND_RETRY") #SECONDRETRY | @as("FIRST_RETRY") #FIRSTRETRY | @as("IN_PROGRESS") #INPROGRESS | @as("PENDING") #PENDING]
+type wirelessGatewayTaskStatus = [@as("FAILED") #FAILED | @as("COMPLETED") #COMPLETED | @as("SECOND_RETRY") #SECOND_RETRY | @as("FIRST_RETRY") #FIRST_RETRY | @as("IN_PROGRESS") #IN_PROGRESS | @as("PENDING") #PENDING]
 type wirelessGatewayTaskName = string
 type wirelessGatewayTaskDefinitionType = [@as("UPDATE") #UPDATE]
 type wirelessGatewayTaskDefinitionId = string
@@ -20,13 +23,13 @@ type wirelessGatewayServiceType = [@as("LNS") #LNS | @as("CUPS") #CUPS]
 type wirelessGatewayName = string
 type wirelessGatewayIdType = [@as("ThingName") #ThingName | @as("WirelessGatewayId") #WirelessGatewayId | @as("GatewayEui") #GatewayEui]
 type wirelessGatewayId = string
-type wirelessGatewayEvent = [@as("Certificate") #Certificate | @as("CUPS_Request") #CUPSRequest]
+type wirelessGatewayEvent = [@as("Certificate") #Certificate | @as("CUPS_Request") #CUPS_Request]
 type wirelessGatewayArn = string
 type wirelessDeviceType = [@as("LoRaWAN") #LoRaWAN | @as("Sidewalk") #Sidewalk]
 type wirelessDeviceName = string
 type wirelessDeviceIdType = [@as("ThingName") #ThingName | @as("DevEui") #DevEui | @as("WirelessDeviceId") #WirelessDeviceId]
 type wirelessDeviceId = string
-type wirelessDeviceEvent = [@as("Registration") #Registration | @as("Downlink_Data") #DownlinkData | @as("Uplink_Data") #UplinkData | @as("Rejoin") #Rejoin | @as("Join") #Join]
+type wirelessDeviceEvent = [@as("Registration") #Registration | @as("Downlink_Data") #Downlink_Data | @as("Uplink_Data") #Uplink_Data | @as("Rejoin") #Rejoin | @as("Join") #Join]
 type wirelessDeviceArn = string
 type updateSignature = string
 type updateDataSource = string
@@ -85,7 +88,7 @@ type nextToken = string
 type netId = string
 type model = string
 type minGwDiversity = int
-type messageType = [@as("CUSTOM_COMMAND_ID_RESP") #CUSTOMCOMMANDIDRESP | @as("CUSTOM_COMMAND_ID_SET") #CUSTOMCOMMANDIDSET | @as("CUSTOM_COMMAND_ID_GET") #CUSTOMCOMMANDIDGET | @as("CUSTOM_COMMAND_ID_NOTIFY") #CUSTOMCOMMANDIDNOTIFY]
+type messageType = [@as("CUSTOM_COMMAND_ID_RESP") #CUSTOM_COMMAND_ID_RESP | @as("CUSTOM_COMMAND_ID_SET") #CUSTOM_COMMAND_ID_SET | @as("CUSTOM_COMMAND_ID_GET") #CUSTOM_COMMAND_ID_GET | @as("CUSTOM_COMMAND_ID_NOTIFY") #CUSTOM_COMMAND_ID_NOTIFY]
 type messageId = string
 type message = string
 type maxResults = int
@@ -143,16 +146,16 @@ type addGwMetadata = bool
 type accountLinked = bool
 type wirelessGatewayEventLogOption = {
 @as("LogLevel") logLevel: logLevel,
-@as("Event") event: wirelessGatewayEvent
+  @as("Event") event: wirelessGatewayEvent
 }
 type wirelessDeviceEventLogOption = {
 @as("LogLevel") logLevel: logLevel,
-@as("Event") event: wirelessDeviceEvent
+  @as("Event") event: wirelessDeviceEvent
 }
 type tagKeyList = array<tagKey>
 type tag = {
 @as("Value") value: tagValue,
-@as("Key") key: tagKey
+  @as("Key") key: tagKey
 }
 type subBands = array<subBand>
 type sidewalkUpdateAccount = {
@@ -160,51 +163,51 @@ type sidewalkUpdateAccount = {
 }
 type sidewalkSendDataToDevice = {
 @as("MessageType") messageType: option<messageType>,
-@as("Seq") seq: option<seq>
+  @as("Seq") seq: option<seq>
 }
 type sidewalkDeviceMetadata = {
 @as("DeviceState") deviceState: option<deviceState>,
-@as("Event") event: option<event>,
-@as("BatteryLevel") batteryLevel: option<batteryLevel>,
-@as("Rssi") rssi: option<integer_>
+  @as("Event") event: option<event>,
+  @as("BatteryLevel") batteryLevel: option<batteryLevel>,
+  @as("Rssi") rssi: option<integer_>
 }
 type sidewalkAccountInfoWithFingerprint = {
 @as("Arn") arn: option<partnerAccountArn>,
-@as("Fingerprint") fingerprint: option<fingerprint>,
-@as("AmazonId") amazonId: option<amazonId>
+  @as("Fingerprint") fingerprint: option<fingerprint>,
+  @as("AmazonId") amazonId: option<amazonId>
 }
 type sidewalkAccountInfo = {
 @as("AppServerPrivateKey") appServerPrivateKey: option<appServerPrivateKey>,
-@as("AmazonId") amazonId: option<amazonId>
+  @as("AmazonId") amazonId: option<amazonId>
 }
 type sessionKeysAbpV1_1 = {
 @as("AppSKey") appSKey: option<appSKey>,
-@as("NwkSEncKey") nwkSEncKey: option<nwkSEncKey>,
-@as("SNwkSIntKey") snwkSIntKey: option<snwkSIntKey>,
-@as("FNwkSIntKey") fnwkSIntKey: option<fnwkSIntKey>
+  @as("NwkSEncKey") nwkSEncKey: option<nwkSEncKey>,
+  @as("SNwkSIntKey") snwkSIntKey: option<snwkSIntKey>,
+  @as("FNwkSIntKey") fnwkSIntKey: option<fnwkSIntKey>
 }
 type sessionKeysAbpV1_0_x = {
 @as("AppSKey") appSKey: option<appSKey>,
-@as("NwkSKey") nwkSKey: option<nwkSKey>
+  @as("NwkSKey") nwkSKey: option<nwkSKey>
 }
 type serviceProfile = {
 @as("Id") id: option<serviceProfileId>,
-@as("Name") name: option<serviceProfileName>,
-@as("Arn") arn: option<serviceProfileArn>
+  @as("Name") name: option<serviceProfileName>,
+  @as("Arn") arn: option<serviceProfileArn>
 }
 type otaaV1_1 = {
 @as("JoinEui") joinEui: option<joinEui>,
-@as("NwkKey") nwkKey: option<nwkKey>,
-@as("AppKey") appKey: option<appKey>
+  @as("NwkKey") nwkKey: option<nwkKey>,
+  @as("AppKey") appKey: option<appKey>
 }
 type otaaV1_0_x = {
 @as("AppEui") appEui: option<appEui>,
-@as("AppKey") appKey: option<appKey>
+  @as("AppKey") appKey: option<appKey>
 }
 type netIdFilters = array<netId>
 type loRaWANUpdateDevice = {
 @as("ServiceProfileId") serviceProfileId: option<serviceProfileId>,
-@as("DeviceProfileId") deviceProfileId: option<deviceProfileId>
+  @as("DeviceProfileId") deviceProfileId: option<deviceProfileId>
 }
 type loRaWANServiceProfile = {
 @as("AddGwMetadata") addGwMetadata: option<addGwMetadata>
@@ -217,57 +220,57 @@ type loRaWANListDevice = {
 }
 type loRaWANGetServiceProfileInfo = {
 @as("MinGwDiversity") minGwDiversity: option<minGwDiversity>,
-@as("TargetPer") targetPer: option<targetPer>,
-@as("NwkGeoLoc") nwkGeoLoc: option<nwkGeoLoc>,
-@as("RaAllowed") raAllowed: option<raAllowed>,
-@as("HrAllowed") hrAllowed: option<hrAllowed>,
-@as("PrAllowed") prAllowed: option<prAllowed>,
-@as("ChannelMask") channelMask: option<channelMask>,
-@as("DrMax") drMax: option<drMax>,
-@as("DrMin") drMin: option<drMin>,
-@as("ReportDevStatusMargin") reportDevStatusMargin: option<reportDevStatusMargin>,
-@as("ReportDevStatusBattery") reportDevStatusBattery: option<reportDevStatusBattery>,
-@as("DevStatusReqFreq") devStatusReqFreq: option<devStatusReqFreq>,
-@as("AddGwMetadata") addGwMetadata: option<addGwMetadata>,
-@as("DlRatePolicy") dlRatePolicy: option<dlRatePolicy>,
-@as("DlBucketSize") dlBucketSize: option<dlBucketSize>,
-@as("DlRate") dlRate: option<dlRate>,
-@as("UlRatePolicy") ulRatePolicy: option<ulRatePolicy>,
-@as("UlBucketSize") ulBucketSize: option<ulBucketSize>,
-@as("UlRate") ulRate: option<ulRate>
+  @as("TargetPer") targetPer: option<targetPer>,
+  @as("NwkGeoLoc") nwkGeoLoc: option<nwkGeoLoc>,
+  @as("RaAllowed") raAllowed: option<raAllowed>,
+  @as("HrAllowed") hrAllowed: option<hrAllowed>,
+  @as("PrAllowed") prAllowed: option<prAllowed>,
+  @as("ChannelMask") channelMask: option<channelMask>,
+  @as("DrMax") drMax: option<drMax>,
+  @as("DrMin") drMin: option<drMin>,
+  @as("ReportDevStatusMargin") reportDevStatusMargin: option<reportDevStatusMargin>,
+  @as("ReportDevStatusBattery") reportDevStatusBattery: option<reportDevStatusBattery>,
+  @as("DevStatusReqFreq") devStatusReqFreq: option<devStatusReqFreq>,
+  @as("AddGwMetadata") addGwMetadata: option<addGwMetadata>,
+  @as("DlRatePolicy") dlRatePolicy: option<dlRatePolicy>,
+  @as("DlBucketSize") dlBucketSize: option<dlBucketSize>,
+  @as("DlRate") dlRate: option<dlRate>,
+  @as("UlRatePolicy") ulRatePolicy: option<ulRatePolicy>,
+  @as("UlBucketSize") ulBucketSize: option<ulBucketSize>,
+  @as("UlRate") ulRate: option<ulRate>
 }
 type loRaWANGatewayVersion = {
 @as("Station") station: option<station>,
-@as("Model") model: option<model>,
-@as("PackageVersion") packageVersion: option<packageVersion>
+  @as("Model") model: option<model>,
+  @as("PackageVersion") packageVersion: option<packageVersion>
 }
 type loRaWANGatewayMetadata = {
 @as("Rssi") rssi: option<double>,
-@as("Snr") snr: option<double>,
-@as("GatewayEui") gatewayEui: option<gatewayEui>
+  @as("Snr") snr: option<double>,
+  @as("GatewayEui") gatewayEui: option<gatewayEui>
 }
 type joinEuiRange = array<joinEui>
 type factoryPresetFreqsList = array<presetFreq>
 type deviceProfile = {
 @as("Id") id: option<deviceProfileId>,
-@as("Name") name: option<deviceProfileName>,
-@as("Arn") arn: option<deviceProfileArn>
+  @as("Name") name: option<deviceProfileName>,
+  @as("Arn") arn: option<deviceProfileArn>
 }
 type destinations = {
 @as("RoleArn") roleArn: option<roleArn>,
-@as("Description") description: option<description>,
-@as("Expression") expression: option<expression>,
-@as("ExpressionType") expressionType: option<expressionType>,
-@as("Name") name: option<destinationName>,
-@as("Arn") arn: option<destinationArn>
+  @as("Description") description: option<description>,
+  @as("Expression") expression: option<expression>,
+  @as("ExpressionType") expressionType: option<expressionType>,
+  @as("Name") name: option<destinationName>,
+  @as("Arn") arn: option<destinationArn>
 }
 type certificateList = {
 @as("Value") value: certificateValue,
-@as("SigningAlg") signingAlg: signingAlg
+  @as("SigningAlg") signingAlg: signingAlg
 }
 type wirelessMetadata = {
 @as("Sidewalk") sidewalk: option<sidewalkSendDataToDevice>,
-@as("LoRaWAN") loRaWAN: option<loRaWANSendDataToDevice>
+  @as("LoRaWAN") loRaWAN: option<loRaWANSendDataToDevice>
 }
 type wirelessGatewayEventLogOptionList = array<wirelessGatewayEventLogOption>
 type wirelessDeviceEventLogOptionList = array<wirelessDeviceEventLogOption>
@@ -276,13 +279,13 @@ type sidewalkAccountList = array<sidewalkAccountInfoWithFingerprint>
 type serviceProfileList = array<serviceProfile>
 type loRaWANUpdateGatewayTaskEntry = {
 @as("UpdateVersion") updateVersion: option<loRaWANGatewayVersion>,
-@as("CurrentVersion") currentVersion: option<loRaWANGatewayVersion>
+  @as("CurrentVersion") currentVersion: option<loRaWANGatewayVersion>
 }
 type loRaWANUpdateGatewayTaskCreate = {
 @as("UpdateVersion") updateVersion: option<loRaWANGatewayVersion>,
-@as("CurrentVersion") currentVersion: option<loRaWANGatewayVersion>,
-@as("SigKeyCrc") sigKeyCrc: option<crc>,
-@as("UpdateSignature") updateSignature: option<updateSignature>
+  @as("CurrentVersion") currentVersion: option<loRaWANGatewayVersion>,
+  @as("SigKeyCrc") sigKeyCrc: option<crc>,
+  @as("UpdateSignature") updateSignature: option<updateSignature>
 }
 type loRaWANGatewayMetadataList = array<loRaWANGatewayMetadata>
 type loRaWANGatewayCurrentVersion = {
@@ -290,24 +293,24 @@ type loRaWANGatewayCurrentVersion = {
 }
 type loRaWANDeviceProfile = {
 @as("Supports32BitFCnt") supports32BitFCnt: option<supports32BitFCnt>,
-@as("SupportsJoin") supportsJoin: option<supportsJoin>,
-@as("RfRegion") rfRegion: option<rfRegion>,
-@as("MaxDutyCycle") maxDutyCycle: option<maxDutyCycle>,
-@as("MaxEirp") maxEirp: option<maxEirp>,
-@as("FactoryPresetFreqsList") factoryPresetFreqsList: option<factoryPresetFreqsList>,
-@as("RxFreq2") rxFreq2: option<rxFreq2>,
-@as("RxDataRate2") rxDataRate2: option<rxDataRate2>,
-@as("RxDrOffset1") rxDrOffset1: option<rxDrOffset1>,
-@as("RxDelay1") rxDelay1: option<rxDelay1>,
-@as("RegParamsRevision") regParamsRevision: option<regParamsRevision>,
-@as("MacVersion") macVersion: option<macVersion>,
-@as("ClassCTimeout") classCTimeout: option<classCTimeout>,
-@as("SupportsClassC") supportsClassC: option<supportsClassC>,
-@as("PingSlotFreq") pingSlotFreq: option<pingSlotFreq>,
-@as("PingSlotDr") pingSlotDr: option<pingSlotDr>,
-@as("PingSlotPeriod") pingSlotPeriod: option<pingSlotPeriod>,
-@as("ClassBTimeout") classBTimeout: option<classBTimeout>,
-@as("SupportsClassB") supportsClassB: option<supportsClassB>
+  @as("SupportsJoin") supportsJoin: option<supportsJoin>,
+  @as("RfRegion") rfRegion: option<rfRegion>,
+  @as("MaxDutyCycle") maxDutyCycle: option<maxDutyCycle>,
+  @as("MaxEirp") maxEirp: option<maxEirp>,
+  @as("FactoryPresetFreqsList") factoryPresetFreqsList: option<factoryPresetFreqsList>,
+  @as("RxFreq2") rxFreq2: option<rxFreq2>,
+  @as("RxDataRate2") rxDataRate2: option<rxDataRate2>,
+  @as("RxDrOffset1") rxDrOffset1: option<rxDrOffset1>,
+  @as("RxDelay1") rxDelay1: option<rxDelay1>,
+  @as("RegParamsRevision") regParamsRevision: option<regParamsRevision>,
+  @as("MacVersion") macVersion: option<macVersion>,
+  @as("ClassCTimeout") classCTimeout: option<classCTimeout>,
+  @as("SupportsClassC") supportsClassC: option<supportsClassC>,
+  @as("PingSlotFreq") pingSlotFreq: option<pingSlotFreq>,
+  @as("PingSlotDr") pingSlotDr: option<pingSlotDr>,
+  @as("PingSlotPeriod") pingSlotPeriod: option<pingSlotPeriod>,
+  @as("ClassBTimeout") classBTimeout: option<classBTimeout>,
+  @as("SupportsClassB") supportsClassB: option<supportsClassB>
 }
 type joinEuiFilters = array<joinEuiRange>
 type deviceProfileList = array<deviceProfile>
@@ -315,100 +318,99 @@ type deviceCertificateList = array<certificateList>
 type destinationList = array<destinations>
 type abpV1_1 = {
 @as("SessionKeys") sessionKeys: option<sessionKeysAbpV1_1>,
-@as("DevAddr") devAddr: option<devAddr>
+  @as("DevAddr") devAddr: option<devAddr>
 }
 type abpV1_0_x = {
 @as("SessionKeys") sessionKeys: option<sessionKeysAbpV1_0_x>,
-@as("DevAddr") devAddr: option<devAddr>
+  @as("DevAddr") devAddr: option<devAddr>
 }
 type wirelessGatewayLogOption = {
 @as("Events") events: option<wirelessGatewayEventLogOptionList>,
-@as("LogLevel") logLevel: logLevel,
-@as("Type") type_: wirelessGatewayType
+  @as("LogLevel") logLevel: logLevel,
+  @as("Type") type_: wirelessGatewayType
 }
 type wirelessDeviceLogOption = {
 @as("Events") events: option<wirelessDeviceEventLogOptionList>,
-@as("LogLevel") logLevel: logLevel,
-@as("Type") type_: wirelessDeviceType
+  @as("LogLevel") logLevel: logLevel,
+  @as("Type") type_: wirelessDeviceType
 }
 type updateWirelessGatewayTaskEntry = {
 @as("Arn") arn: option<wirelessGatewayTaskDefinitionArn>,
-@as("LoRaWAN") loRaWAN: option<loRaWANUpdateGatewayTaskEntry>,
-@as("Id") id: option<wirelessGatewayTaskDefinitionId>
+  @as("LoRaWAN") loRaWAN: option<loRaWANUpdateGatewayTaskEntry>,
+  @as("Id") id: option<wirelessGatewayTaskDefinitionId>
 }
 type updateWirelessGatewayTaskCreate = {
 @as("LoRaWAN") loRaWAN: option<loRaWANUpdateGatewayTaskCreate>,
-@as("UpdateDataRole") updateDataRole: option<updateDataSource>,
-@as("UpdateDataSource") updateDataSource: option<updateDataSource>
+  @as("UpdateDataRole") updateDataRole: option<updateDataSource>,
+  @as("UpdateDataSource") updateDataSource: option<updateDataSource>
 }
 type sidewalkListDevice = {
 @as("DeviceCertificates") deviceCertificates: option<deviceCertificateList>,
-@as("SidewalkManufacturingSn") sidewalkManufacturingSn: option<sidewalkManufacturingSn>,
-@as("SidewalkId") sidewalkId: option<sidewalkId>,
-@as("AmazonId") amazonId: option<amazonId>
+  @as("SidewalkManufacturingSn") sidewalkManufacturingSn: option<sidewalkManufacturingSn>,
+  @as("SidewalkId") sidewalkId: option<sidewalkId>,
+  @as("AmazonId") amazonId: option<amazonId>
 }
 type sidewalkDevice = {
 @as("DeviceCertificates") deviceCertificates: option<deviceCertificateList>,
-@as("SidewalkManufacturingSn") sidewalkManufacturingSn: option<sidewalkManufacturingSn>,
-@as("SidewalkId") sidewalkId: option<sidewalkId>
+  @as("SidewalkManufacturingSn") sidewalkManufacturingSn: option<sidewalkManufacturingSn>,
+  @as("SidewalkId") sidewalkId: option<sidewalkId>
 }
 type loRaWANGateway = {
 @as("SubBands") subBands: option<subBands>,
-@as("NetIdFilters") netIdFilters: option<netIdFilters>,
-@as("JoinEuiFilters") joinEuiFilters: option<joinEuiFilters>,
-@as("RfRegion") rfRegion: option<rfRegion>,
-@as("GatewayEui") gatewayEui: option<gatewayEui>
+  @as("NetIdFilters") netIdFilters: option<netIdFilters>,
+  @as("JoinEuiFilters") joinEuiFilters: option<joinEuiFilters>,
+  @as("RfRegion") rfRegion: option<rfRegion>,
+  @as("GatewayEui") gatewayEui: option<gatewayEui>
 }
 type loRaWANDeviceMetadata = {
 @as("Gateways") gateways: option<loRaWANGatewayMetadataList>,
-@as("Timestamp") timestamp_: option<isodateTimeString>,
-@as("Frequency") frequency: option<integer_>,
-@as("DataRate") dataRate: option<integer_>,
-@as("FPort") fport: option<integer_>,
-@as("DevEui") devEui: option<devEui>
+  @as("Timestamp") timestamp_: option<isodateTimeString>,
+  @as("Frequency") frequency: option<integer_>,
+  @as("DataRate") dataRate: option<integer_>,
+  @as("FPort") fport: option<integer_>,
+  @as("DevEui") devEui: option<devEui>
 }
 type loRaWANDevice = {
 @as("AbpV1_0_x") abpV1_0_x: option<abpV1_0_x>,
-@as("AbpV1_1") abpV1_1: option<abpV1_1>,
-@as("OtaaV1_0_x") otaaV1_0_x: option<otaaV1_0_x>,
-@as("OtaaV1_1") otaaV1_1: option<otaaV1_1>,
-@as("ServiceProfileId") serviceProfileId: option<serviceProfileId>,
-@as("DeviceProfileId") deviceProfileId: option<deviceProfileId>,
-@as("DevEui") devEui: option<devEui>
+  @as("AbpV1_1") abpV1_1: option<abpV1_1>,
+  @as("OtaaV1_0_x") otaaV1_0_x: option<otaaV1_0_x>,
+  @as("OtaaV1_1") otaaV1_1: option<otaaV1_1>,
+  @as("ServiceProfileId") serviceProfileId: option<serviceProfileId>,
+  @as("DeviceProfileId") deviceProfileId: option<deviceProfileId>,
+  @as("DevEui") devEui: option<devEui>
 }
 type wirelessGatewayTaskDefinitionList = array<updateWirelessGatewayTaskEntry>
 type wirelessGatewayStatistics = {
 @as("LastUplinkReceivedAt") lastUplinkReceivedAt: option<isodateTimeString>,
-@as("LoRaWAN") loRaWAN: option<loRaWANGateway>,
-@as("Description") description: option<description>,
-@as("Name") name: option<wirelessGatewayName>,
-@as("Id") id: option<wirelessGatewayId>,
-@as("Arn") arn: option<wirelessGatewayArn>
+  @as("LoRaWAN") loRaWAN: option<loRaWANGateway>,
+  @as("Description") description: option<description>,
+  @as("Name") name: option<wirelessGatewayName>,
+  @as("Id") id: option<wirelessGatewayId>,
+  @as("Arn") arn: option<wirelessGatewayArn>
 }
 type wirelessGatewayLogOptionList = array<wirelessGatewayLogOption>
 type wirelessDeviceStatistics = {
 @as("Sidewalk") sidewalk: option<sidewalkListDevice>,
-@as("LoRaWAN") loRaWAN: option<loRaWANListDevice>,
-@as("LastUplinkReceivedAt") lastUplinkReceivedAt: option<isodateTimeString>,
-@as("DestinationName") destinationName: option<destinationName>,
-@as("Name") name: option<wirelessDeviceName>,
-@as("Type") type_: option<wirelessDeviceType>,
-@as("Id") id: option<wirelessDeviceId>,
-@as("Arn") arn: option<wirelessDeviceArn>
+  @as("LoRaWAN") loRaWAN: option<loRaWANListDevice>,
+  @as("LastUplinkReceivedAt") lastUplinkReceivedAt: option<isodateTimeString>,
+  @as("DestinationName") destinationName: option<destinationName>,
+  @as("Name") name: option<wirelessDeviceName>,
+  @as("Type") type_: option<wirelessDeviceType>,
+  @as("Id") id: option<wirelessDeviceId>,
+  @as("Arn") arn: option<wirelessDeviceArn>
 }
 type wirelessDeviceLogOptionList = array<wirelessDeviceLogOption>
 type wirelessGatewayStatisticsList = array<wirelessGatewayStatistics>
 type wirelessDeviceStatisticsList = array<wirelessDeviceStatistics>
-type awsServiceClient;
-@module("@aws-sdk/client-iotwireless") @new external createClient: unit => awsServiceClient = "IoTWirelessClient";
+
 module UpdateDestination = {
   type t;
   type request = {
 @as("RoleArn") roleArn: option<roleArn>,
-@as("Description") description: option<description>,
-@as("Expression") expression: option<expression>,
-@as("ExpressionType") expressionType: option<expressionType>,
-@as("Name") name: destinationName
+  @as("Description") description: option<description>,
+  @as("Expression") expression: option<expression>,
+  @as("ExpressionType") expressionType: option<expressionType>,
+  @as("Name") name: destinationName
 }
   type response = unit
   @module("@aws-sdk/client-iotwireless") @new external new_: (request) => t = "UpdateDestinationCommand";
@@ -431,7 +433,7 @@ module ResetResourceLogLevel = {
   type t;
   type request = {
 @as("ResourceType") resourceType: resourceType,
-@as("ResourceIdentifier") resourceIdentifier: resourceIdentifier
+  @as("ResourceIdentifier") resourceIdentifier: resourceIdentifier
 }
   type response = unit
   @module("@aws-sdk/client-iotwireless") @new external new_: (request) => t = "ResetResourceLogLevelCommand";
@@ -450,8 +452,8 @@ module PutResourceLogLevel = {
   type t;
   type request = {
 @as("LogLevel") logLevel: logLevel,
-@as("ResourceType") resourceType: resourceType,
-@as("ResourceIdentifier") resourceIdentifier: resourceIdentifier
+  @as("ResourceType") resourceType: resourceType,
+  @as("ResourceIdentifier") resourceIdentifier: resourceIdentifier
 }
   type response = unit
   @module("@aws-sdk/client-iotwireless") @new external new_: (request) => t = "PutResourceLogLevelCommand";
@@ -465,10 +467,10 @@ module GetWirelessGatewayTask = {
 }
   type response = {
 @as("Status") status: option<wirelessGatewayTaskStatus>,
-@as("TaskCreatedAt") taskCreatedAt: option<isodateTimeString>,
-@as("LastUplinkReceivedAt") lastUplinkReceivedAt: option<isodateTimeString>,
-@as("WirelessGatewayTaskDefinitionId") wirelessGatewayTaskDefinitionId: option<wirelessGatewayTaskDefinitionId>,
-@as("WirelessGatewayId") wirelessGatewayId: option<wirelessGatewayId>
+  @as("TaskCreatedAt") taskCreatedAt: option<isodateTimeString>,
+  @as("LastUplinkReceivedAt") lastUplinkReceivedAt: option<isodateTimeString>,
+  @as("WirelessGatewayTaskDefinitionId") wirelessGatewayTaskDefinitionId: option<wirelessGatewayTaskDefinitionId>,
+  @as("WirelessGatewayId") wirelessGatewayId: option<wirelessGatewayId>
 }
   @module("@aws-sdk/client-iotwireless") @new external new_: (request) => t = "GetWirelessGatewayTaskCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -481,8 +483,8 @@ module GetWirelessGatewayStatistics = {
 }
   type response = {
 @as("ConnectionStatus") connectionStatus: option<connectionStatus>,
-@as("LastUplinkReceivedAt") lastUplinkReceivedAt: option<isodateTimeString>,
-@as("WirelessGatewayId") wirelessGatewayId: option<wirelessGatewayId>
+  @as("LastUplinkReceivedAt") lastUplinkReceivedAt: option<isodateTimeString>,
+  @as("WirelessGatewayId") wirelessGatewayId: option<wirelessGatewayId>
 }
   @module("@aws-sdk/client-iotwireless") @new external new_: (request) => t = "GetWirelessGatewayStatisticsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -495,7 +497,7 @@ module GetWirelessGatewayCertificate = {
 }
   type response = {
 @as("LoRaWANNetworkServerCertificateId") loRaWANNetworkServerCertificateId: option<iotCertificateId>,
-@as("IotCertificateId") iotCertificateId: option<iotCertificateId>
+  @as("IotCertificateId") iotCertificateId: option<iotCertificateId>
 }
   @module("@aws-sdk/client-iotwireless") @new external new_: (request) => t = "GetWirelessGatewayCertificateCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -508,8 +510,8 @@ module GetServiceEndpoint = {
 }
   type response = {
 @as("ServerTrust") serverTrust: option<certificatePEM>,
-@as("ServiceEndpoint") serviceEndpoint: option<endPoint>,
-@as("ServiceType") serviceType: option<wirelessGatewayServiceType>
+  @as("ServiceEndpoint") serviceEndpoint: option<endPoint>,
+  @as("ServiceType") serviceType: option<wirelessGatewayServiceType>
 }
   @module("@aws-sdk/client-iotwireless") @new external new_: (request) => t = "GetServiceEndpointCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -519,7 +521,7 @@ module GetResourceLogLevel = {
   type t;
   type request = {
 @as("ResourceType") resourceType: resourceType,
-@as("ResourceIdentifier") resourceIdentifier: resourceIdentifier
+  @as("ResourceIdentifier") resourceIdentifier: resourceIdentifier
 }
   type response = {
 @as("LogLevel") logLevel: option<logLevel>
@@ -535,11 +537,11 @@ module GetDestination = {
 }
   type response = {
 @as("RoleArn") roleArn: option<roleArn>,
-@as("Description") description: option<description>,
-@as("ExpressionType") expressionType: option<expressionType>,
-@as("Expression") expression: option<expression>,
-@as("Name") name: option<destinationName>,
-@as("Arn") arn: option<destinationArn>
+  @as("Description") description: option<description>,
+  @as("ExpressionType") expressionType: option<expressionType>,
+  @as("Expression") expression: option<expression>,
+  @as("Name") name: option<destinationName>,
+  @as("Arn") arn: option<destinationArn>
 }
   @module("@aws-sdk/client-iotwireless") @new external new_: (request) => t = "GetDestinationCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -579,7 +581,7 @@ module DisassociateAwsAccountFromPartnerAccount = {
   type t;
   type request = {
 @as("PartnerType") partnerType: partnerType,
-@as("PartnerAccountId") partnerAccountId: partnerAccountId
+  @as("PartnerAccountId") partnerAccountId: partnerAccountId
 }
   type response = unit
   @module("@aws-sdk/client-iotwireless") @new external new_: (request) => t = "DisassociateAwsAccountFromPartnerAccountCommand";
@@ -660,11 +662,11 @@ module CreateWirelessGatewayTask = {
   type t;
   type request = {
 @as("WirelessGatewayTaskDefinitionId") wirelessGatewayTaskDefinitionId: wirelessGatewayTaskDefinitionId,
-@as("Id") id: wirelessGatewayId
+  @as("Id") id: wirelessGatewayId
 }
   type response = {
 @as("Status") status: option<wirelessGatewayTaskStatus>,
-@as("WirelessGatewayTaskDefinitionId") wirelessGatewayTaskDefinitionId: option<wirelessGatewayTaskDefinitionId>
+  @as("WirelessGatewayTaskDefinitionId") wirelessGatewayTaskDefinitionId: option<wirelessGatewayTaskDefinitionId>
 }
   @module("@aws-sdk/client-iotwireless") @new external new_: (request) => t = "CreateWirelessGatewayTaskCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -674,7 +676,7 @@ module AssociateWirelessGatewayWithThing = {
   type t;
   type request = {
 @as("ThingArn") thingArn: thingArn,
-@as("Id") id: wirelessGatewayId
+  @as("Id") id: wirelessGatewayId
 }
   type response = unit
   @module("@aws-sdk/client-iotwireless") @new external new_: (request) => t = "AssociateWirelessGatewayWithThingCommand";
@@ -685,7 +687,7 @@ module AssociateWirelessGatewayWithCertificate = {
   type t;
   type request = {
 @as("IotCertificateId") iotCertificateId: iotCertificateId,
-@as("Id") id: wirelessGatewayId
+  @as("Id") id: wirelessGatewayId
 }
   type response = {
 @as("IotCertificateId") iotCertificateId: option<iotCertificateId>
@@ -698,7 +700,7 @@ module AssociateWirelessDeviceWithThing = {
   type t;
   type request = {
 @as("ThingArn") thingArn: thingArn,
-@as("Id") id: wirelessDeviceId
+  @as("Id") id: wirelessDeviceId
 }
   type response = unit
   @module("@aws-sdk/client-iotwireless") @new external new_: (request) => t = "AssociateWirelessDeviceWithThingCommand";
@@ -709,10 +711,10 @@ module UpdateWirelessDevice = {
   type t;
   type request = {
 @as("LoRaWAN") loRaWAN: option<loRaWANUpdateDevice>,
-@as("Description") description: option<description>,
-@as("Name") name: option<wirelessDeviceName>,
-@as("DestinationName") destinationName: option<destinationName>,
-@as("Id") id: wirelessDeviceId
+  @as("Description") description: option<description>,
+  @as("Name") name: option<wirelessDeviceName>,
+  @as("DestinationName") destinationName: option<destinationName>,
+  @as("Id") id: wirelessDeviceId
 }
   type response = unit
   @module("@aws-sdk/client-iotwireless") @new external new_: (request) => t = "UpdateWirelessDeviceCommand";
@@ -723,8 +725,8 @@ module UpdatePartnerAccount = {
   type t;
   type request = {
 @as("PartnerType") partnerType: partnerType,
-@as("PartnerAccountId") partnerAccountId: partnerAccountId,
-@as("Sidewalk") sidewalk: sidewalkUpdateAccount
+  @as("PartnerAccountId") partnerAccountId: partnerAccountId,
+  @as("Sidewalk") sidewalk: sidewalkUpdateAccount
 }
   type response = unit
   @module("@aws-sdk/client-iotwireless") @new external new_: (request) => t = "UpdatePartnerAccountCommand";
@@ -735,7 +737,7 @@ module UntagResource = {
   type t;
   type request = {
 @as("TagKeys") tagKeys: tagKeyList,
-@as("ResourceArn") resourceArn: amazonResourceName
+  @as("ResourceArn") resourceArn: amazonResourceName
 }
   type response = unit
   @module("@aws-sdk/client-iotwireless") @new external new_: (request) => t = "UntagResourceCommand";
@@ -749,9 +751,9 @@ module GetServiceProfile = {
 }
   type response = {
 @as("LoRaWAN") loRaWAN: option<loRaWANGetServiceProfileInfo>,
-@as("Id") id: option<serviceProfileId>,
-@as("Name") name: option<serviceProfileName>,
-@as("Arn") arn: option<serviceProfileArn>
+  @as("Id") id: option<serviceProfileId>,
+  @as("Name") name: option<serviceProfileName>,
+  @as("Arn") arn: option<serviceProfileArn>
 }
   @module("@aws-sdk/client-iotwireless") @new external new_: (request) => t = "GetServiceProfileCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -761,11 +763,11 @@ module GetPartnerAccount = {
   type t;
   type request = {
 @as("PartnerType") partnerType: partnerType,
-@as("PartnerAccountId") partnerAccountId: partnerAccountId
+  @as("PartnerAccountId") partnerAccountId: partnerAccountId
 }
   type response = {
 @as("AccountLinked") accountLinked: option<accountLinked>,
-@as("Sidewalk") sidewalk: option<sidewalkAccountInfoWithFingerprint>
+  @as("Sidewalk") sidewalk: option<sidewalkAccountInfoWithFingerprint>
 }
   @module("@aws-sdk/client-iotwireless") @new external new_: (request) => t = "GetPartnerAccountCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -775,10 +777,10 @@ module UpdateWirelessGateway = {
   type t;
   type request = {
 @as("NetIdFilters") netIdFilters: option<netIdFilters>,
-@as("JoinEuiFilters") joinEuiFilters: option<joinEuiFilters>,
-@as("Description") description: option<description>,
-@as("Name") name: option<wirelessGatewayName>,
-@as("Id") id: wirelessGatewayId
+  @as("JoinEuiFilters") joinEuiFilters: option<joinEuiFilters>,
+  @as("Description") description: option<description>,
+  @as("Name") name: option<wirelessGatewayName>,
+  @as("Id") id: wirelessGatewayId
 }
   type response = unit
   @module("@aws-sdk/client-iotwireless") @new external new_: (request) => t = "UpdateWirelessGatewayCommand";
@@ -789,7 +791,7 @@ module TagResource = {
   type t;
   type request = {
 @as("Tags") tags: tagList_,
-@as("ResourceArn") resourceArn: amazonResourceName
+  @as("ResourceArn") resourceArn: amazonResourceName
 }
   type response = unit
   @module("@aws-sdk/client-iotwireless") @new external new_: (request) => t = "TagResourceCommand";
@@ -800,9 +802,9 @@ module SendDataToWirelessDevice = {
   type t;
   type request = {
 @as("WirelessMetadata") wirelessMetadata: option<wirelessMetadata>,
-@as("PayloadData") payloadData: payloadData,
-@as("TransmitMode") transmitMode: transmitMode,
-@as("Id") id: wirelessDeviceId
+  @as("PayloadData") payloadData: payloadData,
+  @as("TransmitMode") transmitMode: transmitMode,
+  @as("Id") id: wirelessDeviceId
 }
   type response = {
 @as("MessageId") messageId: option<messageId>
@@ -827,11 +829,11 @@ module ListServiceProfiles = {
   type t;
   type request = {
 @as("MaxResults") maxResults: option<maxResults>,
-@as("NextToken") nextToken: option<nextToken>
+  @as("NextToken") nextToken: option<nextToken>
 }
   type response = {
 @as("ServiceProfileList") serviceProfileList: option<serviceProfileList>,
-@as("NextToken") nextToken: option<nextToken>
+  @as("NextToken") nextToken: option<nextToken>
 }
   @module("@aws-sdk/client-iotwireless") @new external new_: (request) => t = "ListServiceProfilesCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -841,11 +843,11 @@ module ListPartnerAccounts = {
   type t;
   type request = {
 @as("MaxResults") maxResults: option<maxResults>,
-@as("NextToken") nextToken: option<nextToken>
+  @as("NextToken") nextToken: option<nextToken>
 }
   type response = {
 @as("Sidewalk") sidewalk: option<sidewalkAccountList>,
-@as("NextToken") nextToken: option<nextToken>
+  @as("NextToken") nextToken: option<nextToken>
 }
   @module("@aws-sdk/client-iotwireless") @new external new_: (request) => t = "ListPartnerAccountsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -855,11 +857,11 @@ module ListDeviceProfiles = {
   type t;
   type request = {
 @as("MaxResults") maxResults: option<maxResults>,
-@as("NextToken") nextToken: option<nextToken>
+  @as("NextToken") nextToken: option<nextToken>
 }
   type response = {
 @as("DeviceProfileList") deviceProfileList: option<deviceProfileList>,
-@as("NextToken") nextToken: option<nextToken>
+  @as("NextToken") nextToken: option<nextToken>
 }
   @module("@aws-sdk/client-iotwireless") @new external new_: (request) => t = "ListDeviceProfilesCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -869,11 +871,11 @@ module ListDestinations = {
   type t;
   type request = {
 @as("NextToken") nextToken: option<nextToken>,
-@as("MaxResults") maxResults: option<maxResults>
+  @as("MaxResults") maxResults: option<maxResults>
 }
   type response = {
 @as("DestinationList") destinationList: option<destinationList>,
-@as("NextToken") nextToken: option<nextToken>
+  @as("NextToken") nextToken: option<nextToken>
 }
   @module("@aws-sdk/client-iotwireless") @new external new_: (request) => t = "ListDestinationsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -898,9 +900,9 @@ module GetDeviceProfile = {
 }
   type response = {
 @as("LoRaWAN") loRaWAN: option<loRaWANDeviceProfile>,
-@as("Id") id: option<deviceProfileId>,
-@as("Name") name: option<deviceProfileName>,
-@as("Arn") arn: option<deviceProfileArn>
+  @as("Id") id: option<deviceProfileId>,
+  @as("Name") name: option<deviceProfileName>,
+  @as("Arn") arn: option<deviceProfileArn>
 }
   @module("@aws-sdk/client-iotwireless") @new external new_: (request) => t = "GetDeviceProfileCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -910,13 +912,13 @@ module CreateServiceProfile = {
   type t;
   type request = {
 @as("ClientRequestToken") clientRequestToken: option<clientRequestToken>,
-@as("Tags") tags: option<tagList_>,
-@as("LoRaWAN") loRaWAN: option<loRaWANServiceProfile>,
-@as("Name") name: option<serviceProfileName>
+  @as("Tags") tags: option<tagList_>,
+  @as("LoRaWAN") loRaWAN: option<loRaWANServiceProfile>,
+  @as("Name") name: option<serviceProfileName>
 }
   type response = {
 @as("Id") id: option<serviceProfileId>,
-@as("Arn") arn: option<serviceProfileArn>
+  @as("Arn") arn: option<serviceProfileArn>
 }
   @module("@aws-sdk/client-iotwireless") @new external new_: (request) => t = "CreateServiceProfileCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -926,13 +928,13 @@ module CreateDeviceProfile = {
   type t;
   type request = {
 @as("ClientRequestToken") clientRequestToken: option<clientRequestToken>,
-@as("Tags") tags: option<tagList_>,
-@as("LoRaWAN") loRaWAN: option<loRaWANDeviceProfile>,
-@as("Name") name: option<deviceProfileName>
+  @as("Tags") tags: option<tagList_>,
+  @as("LoRaWAN") loRaWAN: option<loRaWANDeviceProfile>,
+  @as("Name") name: option<deviceProfileName>
 }
   type response = {
 @as("Id") id: option<deviceProfileId>,
-@as("Arn") arn: option<deviceProfileArn>
+  @as("Arn") arn: option<deviceProfileArn>
 }
   @module("@aws-sdk/client-iotwireless") @new external new_: (request) => t = "CreateDeviceProfileCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -942,16 +944,16 @@ module CreateDestination = {
   type t;
   type request = {
 @as("ClientRequestToken") clientRequestToken: option<clientRequestToken>,
-@as("Tags") tags: option<tagList_>,
-@as("RoleArn") roleArn: roleArn,
-@as("Description") description: option<description>,
-@as("Expression") expression: expression,
-@as("ExpressionType") expressionType: expressionType,
-@as("Name") name: destinationName
+  @as("Tags") tags: option<tagList_>,
+  @as("RoleArn") roleArn: roleArn,
+  @as("Description") description: option<description>,
+  @as("Expression") expression: expression,
+  @as("ExpressionType") expressionType: expressionType,
+  @as("Name") name: destinationName
 }
   type response = {
 @as("Name") name: option<destinationName>,
-@as("Arn") arn: option<destinationArn>
+  @as("Arn") arn: option<destinationArn>
 }
   @module("@aws-sdk/client-iotwireless") @new external new_: (request) => t = "CreateDestinationCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -961,12 +963,12 @@ module AssociateAwsAccountWithPartnerAccount = {
   type t;
   type request = {
 @as("Tags") tags: option<tagList_>,
-@as("ClientRequestToken") clientRequestToken: option<clientRequestToken>,
-@as("Sidewalk") sidewalk: sidewalkAccountInfo
+  @as("ClientRequestToken") clientRequestToken: option<clientRequestToken>,
+  @as("Sidewalk") sidewalk: sidewalkAccountInfo
 }
   type response = {
 @as("Arn") arn: option<partnerAccountArn>,
-@as("Sidewalk") sidewalk: option<sidewalkAccountInfo>
+  @as("Sidewalk") sidewalk: option<sidewalkAccountInfo>
 }
   @module("@aws-sdk/client-iotwireless") @new external new_: (request) => t = "AssociateAwsAccountWithPartnerAccountCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -979,9 +981,9 @@ module GetWirelessGatewayTaskDefinition = {
 }
   type response = {
 @as("Arn") arn: option<wirelessGatewayTaskDefinitionArn>,
-@as("Update") update: option<updateWirelessGatewayTaskCreate>,
-@as("Name") name: option<wirelessGatewayTaskName>,
-@as("AutoCreateTasks") autoCreateTasks: option<autoCreateTasks>
+  @as("Update") update: option<updateWirelessGatewayTaskCreate>,
+  @as("Name") name: option<wirelessGatewayTaskName>,
+  @as("AutoCreateTasks") autoCreateTasks: option<autoCreateTasks>
 }
   @module("@aws-sdk/client-iotwireless") @new external new_: (request) => t = "GetWirelessGatewayTaskDefinitionCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -991,16 +993,16 @@ module GetWirelessGateway = {
   type t;
   type request = {
 @as("IdentifierType") identifierType: wirelessGatewayIdType,
-@as("Identifier") identifier: identifier
+  @as("Identifier") identifier: identifier
 }
   type response = {
 @as("ThingArn") thingArn: option<thingArn>,
-@as("ThingName") thingName: option<thingName>,
-@as("Arn") arn: option<wirelessGatewayArn>,
-@as("LoRaWAN") loRaWAN: option<loRaWANGateway>,
-@as("Description") description: option<description>,
-@as("Id") id: option<wirelessGatewayId>,
-@as("Name") name: option<wirelessGatewayName>
+  @as("ThingName") thingName: option<thingName>,
+  @as("Arn") arn: option<wirelessGatewayArn>,
+  @as("LoRaWAN") loRaWAN: option<loRaWANGateway>,
+  @as("Description") description: option<description>,
+  @as("Id") id: option<wirelessGatewayId>,
+  @as("Name") name: option<wirelessGatewayName>
 }
   @module("@aws-sdk/client-iotwireless") @new external new_: (request) => t = "GetWirelessGatewayCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1013,9 +1015,9 @@ module GetWirelessDeviceStatistics = {
 }
   type response = {
 @as("Sidewalk") sidewalk: option<sidewalkDeviceMetadata>,
-@as("LoRaWAN") loRaWAN: option<loRaWANDeviceMetadata>,
-@as("LastUplinkReceivedAt") lastUplinkReceivedAt: option<isodateTimeString>,
-@as("WirelessDeviceId") wirelessDeviceId: option<wirelessDeviceId>
+  @as("LoRaWAN") loRaWAN: option<loRaWANDeviceMetadata>,
+  @as("LastUplinkReceivedAt") lastUplinkReceivedAt: option<isodateTimeString>,
+  @as("WirelessDeviceId") wirelessDeviceId: option<wirelessDeviceId>
 }
   @module("@aws-sdk/client-iotwireless") @new external new_: (request) => t = "GetWirelessDeviceStatisticsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1025,19 +1027,19 @@ module GetWirelessDevice = {
   type t;
   type request = {
 @as("IdentifierType") identifierType: wirelessDeviceIdType,
-@as("Identifier") identifier: identifier
+  @as("Identifier") identifier: identifier
 }
   type response = {
 @as("Sidewalk") sidewalk: option<sidewalkDevice>,
-@as("LoRaWAN") loRaWAN: option<loRaWANDevice>,
-@as("ThingArn") thingArn: option<thingArn>,
-@as("ThingName") thingName: option<thingName>,
-@as("Arn") arn: option<wirelessDeviceArn>,
-@as("Id") id: option<wirelessDeviceId>,
-@as("DestinationName") destinationName: option<destinationName>,
-@as("Description") description: option<description>,
-@as("Name") name: option<wirelessDeviceName>,
-@as("Type") type_: option<wirelessDeviceType>
+  @as("LoRaWAN") loRaWAN: option<loRaWANDevice>,
+  @as("ThingArn") thingArn: option<thingArn>,
+  @as("ThingName") thingName: option<thingName>,
+  @as("Arn") arn: option<wirelessDeviceArn>,
+  @as("Id") id: option<wirelessDeviceId>,
+  @as("DestinationName") destinationName: option<destinationName>,
+  @as("Description") description: option<description>,
+  @as("Name") name: option<wirelessDeviceName>,
+  @as("Type") type_: option<wirelessDeviceType>
 }
   @module("@aws-sdk/client-iotwireless") @new external new_: (request) => t = "GetWirelessDeviceCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1047,14 +1049,14 @@ module CreateWirelessGatewayTaskDefinition = {
   type t;
   type request = {
 @as("Tags") tags: option<tagList_>,
-@as("ClientRequestToken") clientRequestToken: option<clientRequestToken>,
-@as("Update") update: option<updateWirelessGatewayTaskCreate>,
-@as("Name") name: option<wirelessGatewayTaskName>,
-@as("AutoCreateTasks") autoCreateTasks: autoCreateTasks
+  @as("ClientRequestToken") clientRequestToken: option<clientRequestToken>,
+  @as("Update") update: option<updateWirelessGatewayTaskCreate>,
+  @as("Name") name: option<wirelessGatewayTaskName>,
+  @as("AutoCreateTasks") autoCreateTasks: autoCreateTasks
 }
   type response = {
 @as("Arn") arn: option<wirelessGatewayTaskDefinitionArn>,
-@as("Id") id: option<wirelessGatewayTaskDefinitionId>
+  @as("Id") id: option<wirelessGatewayTaskDefinitionId>
 }
   @module("@aws-sdk/client-iotwireless") @new external new_: (request) => t = "CreateWirelessGatewayTaskDefinitionCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1064,14 +1066,14 @@ module CreateWirelessGateway = {
   type t;
   type request = {
 @as("ClientRequestToken") clientRequestToken: option<clientRequestToken>,
-@as("Tags") tags: option<tagList_>,
-@as("LoRaWAN") loRaWAN: loRaWANGateway,
-@as("Description") description: option<description>,
-@as("Name") name: option<wirelessGatewayName>
+  @as("Tags") tags: option<tagList_>,
+  @as("LoRaWAN") loRaWAN: loRaWANGateway,
+  @as("Description") description: option<description>,
+  @as("Name") name: option<wirelessGatewayName>
 }
   type response = {
 @as("Id") id: option<wirelessDeviceId>,
-@as("Arn") arn: option<wirelessGatewayArn>
+  @as("Arn") arn: option<wirelessGatewayArn>
 }
   @module("@aws-sdk/client-iotwireless") @new external new_: (request) => t = "CreateWirelessGatewayCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1081,16 +1083,16 @@ module CreateWirelessDevice = {
   type t;
   type request = {
 @as("Tags") tags: option<tagList_>,
-@as("LoRaWAN") loRaWAN: option<loRaWANDevice>,
-@as("ClientRequestToken") clientRequestToken: option<clientRequestToken>,
-@as("DestinationName") destinationName: destinationName,
-@as("Description") description: option<description>,
-@as("Name") name: option<wirelessDeviceName>,
-@as("Type") type_: wirelessDeviceType
+  @as("LoRaWAN") loRaWAN: option<loRaWANDevice>,
+  @as("ClientRequestToken") clientRequestToken: option<clientRequestToken>,
+  @as("DestinationName") destinationName: destinationName,
+  @as("Description") description: option<description>,
+  @as("Name") name: option<wirelessDeviceName>,
+  @as("Type") type_: wirelessDeviceType
 }
   type response = {
 @as("Id") id: option<wirelessDeviceId>,
-@as("Arn") arn: option<wirelessDeviceArn>
+  @as("Arn") arn: option<wirelessDeviceArn>
 }
   @module("@aws-sdk/client-iotwireless") @new external new_: (request) => t = "CreateWirelessDeviceCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1100,8 +1102,8 @@ module UpdateLogLevelsByResourceTypes = {
   type t;
   type request = {
 @as("WirelessGatewayLogOptions") wirelessGatewayLogOptions: option<wirelessGatewayLogOptionList>,
-@as("WirelessDeviceLogOptions") wirelessDeviceLogOptions: option<wirelessDeviceLogOptionList>,
-@as("DefaultLogLevel") defaultLogLevel: option<logLevel>
+  @as("WirelessDeviceLogOptions") wirelessDeviceLogOptions: option<wirelessDeviceLogOptionList>,
+  @as("DefaultLogLevel") defaultLogLevel: option<logLevel>
 }
   type response = unit
   @module("@aws-sdk/client-iotwireless") @new external new_: (request) => t = "UpdateLogLevelsByResourceTypesCommand";
@@ -1112,12 +1114,12 @@ module ListWirelessGatewayTaskDefinitions = {
   type t;
   type request = {
 @as("TaskDefinitionType") taskDefinitionType: option<wirelessGatewayTaskDefinitionType>,
-@as("NextToken") nextToken: option<nextToken>,
-@as("MaxResults") maxResults: option<maxResults>
+  @as("NextToken") nextToken: option<nextToken>,
+  @as("MaxResults") maxResults: option<maxResults>
 }
   type response = {
 @as("TaskDefinitions") taskDefinitions: option<wirelessGatewayTaskDefinitionList>,
-@as("NextToken") nextToken: option<nextToken>
+  @as("NextToken") nextToken: option<nextToken>
 }
   @module("@aws-sdk/client-iotwireless") @new external new_: (request) => t = "ListWirelessGatewayTaskDefinitionsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1128,8 +1130,8 @@ module GetLogLevelsByResourceTypes = {
   type request = unit
   type response = {
 @as("WirelessDeviceLogOptions") wirelessDeviceLogOptions: option<wirelessDeviceLogOptionList>,
-@as("WirelessGatewayLogOptions") wirelessGatewayLogOptions: option<wirelessGatewayLogOptionList>,
-@as("DefaultLogLevel") defaultLogLevel: option<logLevel>
+  @as("WirelessGatewayLogOptions") wirelessGatewayLogOptions: option<wirelessGatewayLogOptionList>,
+  @as("DefaultLogLevel") defaultLogLevel: option<logLevel>
 }
   @module("@aws-sdk/client-iotwireless") @new external new_: (request) => t = "GetLogLevelsByResourceTypesCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1139,11 +1141,11 @@ module ListWirelessGateways = {
   type t;
   type request = {
 @as("MaxResults") maxResults: option<maxResults>,
-@as("NextToken") nextToken: option<nextToken>
+  @as("NextToken") nextToken: option<nextToken>
 }
   type response = {
 @as("WirelessGatewayList") wirelessGatewayList: option<wirelessGatewayStatisticsList>,
-@as("NextToken") nextToken: option<nextToken>
+  @as("NextToken") nextToken: option<nextToken>
 }
   @module("@aws-sdk/client-iotwireless") @new external new_: (request) => t = "ListWirelessGatewaysCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1153,15 +1155,15 @@ module ListWirelessDevices = {
   type t;
   type request = {
 @as("WirelessDeviceType") wirelessDeviceType: option<wirelessDeviceType>,
-@as("ServiceProfileId") serviceProfileId: option<serviceProfileId>,
-@as("DeviceProfileId") deviceProfileId: option<deviceProfileId>,
-@as("DestinationName") destinationName: option<destinationName>,
-@as("NextToken") nextToken: option<nextToken>,
-@as("MaxResults") maxResults: option<maxResults>
+  @as("ServiceProfileId") serviceProfileId: option<serviceProfileId>,
+  @as("DeviceProfileId") deviceProfileId: option<deviceProfileId>,
+  @as("DestinationName") destinationName: option<destinationName>,
+  @as("NextToken") nextToken: option<nextToken>,
+  @as("MaxResults") maxResults: option<maxResults>
 }
   type response = {
 @as("WirelessDeviceList") wirelessDeviceList: option<wirelessDeviceStatisticsList>,
-@as("NextToken") nextToken: option<nextToken>
+  @as("NextToken") nextToken: option<nextToken>
 }
   @module("@aws-sdk/client-iotwireless") @new external new_: (request) => t = "ListWirelessDevicesCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";

@@ -90,7 +90,13 @@ function safeMemberName(name) {
 }
 
 function safeTypeName(target) {
-  return safeMemberName(Util.symbolName(target));
+  var name = Util.symbolName(target);
+  var namespace = Util.symbolNamespace(target);
+  if (namespace === "smithy.api") {
+    return safeMemberName("Base" + name);
+  } else {
+    return safeMemberName(name);
+  }
 }
 
 function camelCase(name) {
@@ -105,7 +111,7 @@ function safeVariantName(name) {
                       return camelCase(x);
                     }
                     
-                  })), "", (function (x) {
+                  })), "_", (function (x) {
                 return x;
               }));
 }

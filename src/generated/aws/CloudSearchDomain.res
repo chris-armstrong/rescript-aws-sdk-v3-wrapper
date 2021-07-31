@@ -5,10 +5,14 @@ httpStatusCode: option<float>,
   cfId: option<string>,
   attempts: option<int>,
   totalRetryDelay: option<int>
-};
-type boolean_ = bool
-type integer_ = int
-type timestamp_ = Js.Date.t;
+}
+type awsServiceClient;
+@module("@aws-sdk/client-cloudsearch") @new external createClient: unit => awsServiceClient = "CloudSearchDomainClient";
+type baseString = string
+type baseBoolean = bool
+type baseInteger = int
+type baseTimestamp = Js.Date.t;
+type baseLong = float
 type suggestionsSize = float
 type suggester = string
 type string_ = string
@@ -29,82 +33,81 @@ type expr = string
 type double = float
 type deletes = float
 type cursor = string
-type contentType = [@as("application/xml") #ApplicationXml | @as("application/json") #ApplicationJson]
+type contentType = [@as("application/xml") #Application_Xml | @as("application/json") #Application_Json]
 type blob = NodeJs.Buffer.t
 type adds = float
 type suggestionMatch = {
 id: option<string_>,
-score: option<long>,
-suggestion: option<string_>
+  score: option<long>,
+  suggestion: option<string_>
 }
 type suggestStatus = {
 rid: option<string_>,
-timems: option<long>
+  timems: option<long>
 }
 type searchStatus = {
 rid: option<string_>,
-timems: option<long>
+  timems: option<long>
 }
-type highlights = Js.Dict.t< string_>
+type highlights = Js.Dict.t<string_>
 type fieldValue = array<string_>
 type fieldStats = {
 stddev: option<double>,
-mean: option<string_>,
-sumOfSquares: option<double>,
-sum: option<double>,
-missing: option<long>,
-count: option<long>,
-max: option<string_>,
-min: option<string_>
+  mean: option<string_>,
+  sumOfSquares: option<double>,
+  sum: option<double>,
+  missing: option<long>,
+  count: option<long>,
+  max: option<string_>,
+  min: option<string_>
 }
-type exprs = Js.Dict.t< string_>
+type exprs = Js.Dict.t<string_>
 type documentServiceWarning = {
 message: option<string_>
 }
 type bucket = {
 count: option<long>,
-value: option<string_>
+  value: option<string_>
 }
 type suggestions = array<suggestionMatch>
-type stats = Js.Dict.t< fieldStats>
-type fields = Js.Dict.t< fieldValue>
+type stats = Js.Dict.t<fieldStats>
+type fields = Js.Dict.t<fieldValue>
 type documentServiceWarnings = array<documentServiceWarning>
 type bucketList = array<bucket>
 type suggestModel = {
 suggestions: option<suggestions>,
-found: option<long>,
-query: option<string_>
+  found: option<long>,
+  query: option<string_>
 }
 type hit = {
 highlights: option<highlights>,
-exprs: option<exprs>,
-fields: option<fields>,
-id: option<string_>
+  exprs: option<exprs>,
+  fields: option<fields>,
+  id: option<string_>
 }
 type bucketInfo = {
 buckets: option<bucketList>
 }
 type hitList = array<hit>
-type facets = Js.Dict.t< bucketInfo>
+type facets = Js.Dict.t<bucketInfo>
 type hits = {
 hit: option<hitList>,
-cursor: option<string_>,
-start: option<long>,
-found: option<long>
+  cursor: option<string_>,
+  start: option<long>,
+  found: option<long>
 }
-type awsServiceClient;
-@module("@aws-sdk/client-cloudsearch") @new external createClient: unit => awsServiceClient = "CloudSearchDomainClient";
+
 module UploadDocuments = {
   type t;
   type request = {
 contentType: contentType,
-documents: blob
+  documents: blob
 }
   type response = {
 warnings: option<documentServiceWarnings>,
-deletes: option<deletes>,
-adds: option<adds>,
-status: option<string_>
+  deletes: option<deletes>,
+  adds: option<adds>,
+  status: option<string_>
 }
   @module("@aws-sdk/client-cloudsearch") @new external new_: (request) => t = "UploadDocumentsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -114,12 +117,12 @@ module Suggest = {
   type t;
   type request = {
 size: option<suggestionsSize>,
-suggester: suggester,
-query: query
+  suggester: suggester,
+  query: query
 }
   type response = {
 suggest: option<suggestModel>,
-status: option<suggestStatus>
+  status: option<suggestStatus>
 }
   @module("@aws-sdk/client-cloudsearch") @new external new_: (request) => t = "SuggestCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -129,25 +132,25 @@ module Search = {
   type t;
   type request = {
 stats: option<stat>,
-start: option<start>,
-sort: option<sort>,
-size: option<size>,
-return: option<return>,
-queryParser: option<queryParser>,
-queryOptions: option<queryOptions>,
-query: query,
-partial: option<partial>,
-highlight: option<highlight>,
-filterQuery: option<filterQuery>,
-facet: option<facet>,
-expr: option<expr>,
-cursor: option<cursor>
+  start: option<start>,
+  sort: option<sort>,
+  size: option<size>,
+  return: option<return>,
+  queryParser: option<queryParser>,
+  queryOptions: option<queryOptions>,
+  query: query,
+  partial: option<partial>,
+  highlight: option<highlight>,
+  filterQuery: option<filterQuery>,
+  facet: option<facet>,
+  expr: option<expr>,
+  cursor: option<cursor>
 }
   type response = {
 stats: option<stats>,
-facets: option<facets>,
-hits: option<hits>,
-status: option<searchStatus>
+  facets: option<facets>,
+  hits: option<hits>,
+  status: option<searchStatus>
 }
   @module("@aws-sdk/client-cloudsearch") @new external new_: (request) => t = "SearchCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";

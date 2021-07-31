@@ -5,9 +5,14 @@ httpStatusCode: option<float>,
   cfId: option<string>,
   attempts: option<int>,
   totalRetryDelay: option<int>
-};
-type integer_ = int
-type timestamp_ = Js.Date.t;
+}
+type awsServiceClient;
+@module("@aws-sdk/client-support") @new external createClient: unit => awsServiceClient = "SupportClient";
+type baseString = string
+type baseBoolean = bool
+type baseInteger = int
+type baseTimestamp = Js.Date.t;
+type baseLong = float
 type timeCreated = string
 type submittedBy = string
 type subject = string
@@ -45,53 +50,53 @@ type attachmentId = string
 type afterTime = string
 type trustedAdvisorResourcesSummary = {
 resourcesSuppressed: long,
-resourcesIgnored: long,
-resourcesFlagged: long,
-resourcesProcessed: long
+  resourcesIgnored: long,
+  resourcesFlagged: long,
+  resourcesProcessed: long
 }
 type trustedAdvisorCostOptimizingSummary = {
 estimatedPercentMonthlySavings: double,
-estimatedMonthlySavings: double
+  estimatedMonthlySavings: double
 }
 type trustedAdvisorCheckRefreshStatus = {
 millisUntilNextRefreshable: long,
-status: string_,
-checkId: string_
+  status: string_,
+  checkId: string_
 }
 type stringList = array<string_>
 type severityLevel = {
 name: option<severityLevelName>,
-code: option<severityLevelCode>
+  code: option<severityLevelCode>
 }
 type serviceCodeList = array<serviceCode>
 type ccEmailAddressList = array<ccEmailAddress>
 type category = {
 name: option<categoryName>,
-code: option<categoryCode>
+  code: option<categoryCode>
 }
 type caseIdList = array<caseId>
 type attachmentDetails = {
 fileName: option<fileName>,
-attachmentId: option<attachmentId>
+  attachmentId: option<attachmentId>
 }
 type attachment = {
 data: option<data>,
-fileName: option<fileName>
+  fileName: option<fileName>
 }
 type trustedAdvisorResourceDetail = {
 metadata: stringList,
-isSuppressed: option<boolean_>,
-resourceId: string_,
-region: option<string_>,
-status: string_
+  isSuppressed: option<boolean_>,
+  resourceId: string_,
+  region: option<string_>,
+  status: string_
 }
 type trustedAdvisorCheckRefreshStatusList = array<trustedAdvisorCheckRefreshStatus>
 type trustedAdvisorCheckDescription = {
 metadata: stringList,
-category: string_,
-description: string_,
-name: string_,
-id: string_
+  category: string_,
+  description: string_,
+  name: string_,
+  id: string_
 }
 type trustedAdvisorCategorySpecificSummary = {
 costOptimizing: option<trustedAdvisorCostOptimizingSummary>
@@ -103,57 +108,56 @@ type attachmentSet = array<attachmentDetails>
 type trustedAdvisorResourceDetailList = array<trustedAdvisorResourceDetail>
 type trustedAdvisorCheckSummary = {
 categorySpecificSummary: trustedAdvisorCategorySpecificSummary,
-resourcesSummary: trustedAdvisorResourcesSummary,
-hasFlaggedResources: option<boolean_>,
-status: string_,
-@as("timestamp") timestamp_: string_,
-checkId: string_
+  resourcesSummary: trustedAdvisorResourcesSummary,
+  hasFlaggedResources: option<boolean_>,
+  status: string_,
+  @as("timestamp") timestamp_: string_,
+  checkId: string_
 }
 type trustedAdvisorCheckList = array<trustedAdvisorCheckDescription>
 type service = {
 categories: option<categoryList>,
-name: option<serviceName>,
-code: option<serviceCode>
+  name: option<serviceName>,
+  code: option<serviceCode>
 }
 type communication = {
 attachmentSet: option<attachmentSet>,
-timeCreated: option<timeCreated>,
-submittedBy: option<submittedBy>,
-body: option<communicationBody>,
-caseId: option<caseId>
+  timeCreated: option<timeCreated>,
+  submittedBy: option<submittedBy>,
+  body: option<communicationBody>,
+  caseId: option<caseId>
 }
 type trustedAdvisorCheckSummaryList = array<trustedAdvisorCheckSummary>
 type trustedAdvisorCheckResult = {
 flaggedResources: trustedAdvisorResourceDetailList,
-categorySpecificSummary: trustedAdvisorCategorySpecificSummary,
-resourcesSummary: trustedAdvisorResourcesSummary,
-status: string_,
-@as("timestamp") timestamp_: string_,
-checkId: string_
+  categorySpecificSummary: trustedAdvisorCategorySpecificSummary,
+  resourcesSummary: trustedAdvisorResourcesSummary,
+  status: string_,
+  @as("timestamp") timestamp_: string_,
+  checkId: string_
 }
 type serviceList = array<service>
 type communicationList = array<communication>
 type recentCaseCommunications = {
 nextToken: option<nextToken>,
-communications: option<communicationList>
+  communications: option<communicationList>
 }
 type caseDetails = {
 language: option<language>,
-ccEmailAddresses: option<ccEmailAddressList>,
-recentCommunications: option<recentCaseCommunications>,
-timeCreated: option<timeCreated>,
-submittedBy: option<submittedBy>,
-severityCode: option<severityCode>,
-categoryCode: option<categoryCode>,
-serviceCode: option<serviceCode>,
-status: option<status>,
-subject: option<subject>,
-displayId: option<displayId>,
-caseId: option<caseId>
+  ccEmailAddresses: option<ccEmailAddressList>,
+  recentCommunications: option<recentCaseCommunications>,
+  timeCreated: option<timeCreated>,
+  submittedBy: option<submittedBy>,
+  severityCode: option<severityCode>,
+  categoryCode: option<categoryCode>,
+  serviceCode: option<serviceCode>,
+  status: option<status>,
+  subject: option<subject>,
+  displayId: option<displayId>,
+  caseId: option<caseId>
 }
 type caseList = array<caseDetails>
-type awsServiceClient;
-@module("@aws-sdk/client-support") @new external createClient: unit => awsServiceClient = "SupportClient";
+
 module ResolveCase = {
   type t;
   type request = {
@@ -161,7 +165,7 @@ caseId: option<caseId>
 }
   type response = {
 finalCaseStatus: option<caseStatus>,
-initialCaseStatus: option<caseStatus>
+  initialCaseStatus: option<caseStatus>
 }
   @module("@aws-sdk/client-support") @new external new_: (request) => t = "ResolveCaseCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -195,14 +199,14 @@ module CreateCase = {
   type t;
   type request = {
 attachmentSetId: option<attachmentSetId>,
-issueType: option<issueType>,
-language: option<language>,
-ccEmailAddresses: option<ccEmailAddressList>,
-communicationBody: communicationBody,
-categoryCode: option<categoryCode>,
-severityCode: option<severityCode>,
-serviceCode: option<serviceCode>,
-subject: subject
+  issueType: option<issueType>,
+  language: option<language>,
+  ccEmailAddresses: option<ccEmailAddressList>,
+  communicationBody: communicationBody,
+  categoryCode: option<categoryCode>,
+  severityCode: option<severityCode>,
+  serviceCode: option<serviceCode>,
+  subject: subject
 }
   type response = {
 caseId: option<caseId>
@@ -215,9 +219,9 @@ module AddCommunicationToCase = {
   type t;
   type request = {
 attachmentSetId: option<attachmentSetId>,
-ccEmailAddresses: option<ccEmailAddressList>,
-communicationBody: communicationBody,
-caseId: option<caseId>
+  ccEmailAddresses: option<ccEmailAddressList>,
+  communicationBody: communicationBody,
+  caseId: option<caseId>
 }
   type response = {
 result: option<result>
@@ -254,11 +258,11 @@ module AddAttachmentsToSet = {
   type t;
   type request = {
 attachments: attachments,
-attachmentSetId: option<attachmentSetId>
+  attachmentSetId: option<attachmentSetId>
 }
   type response = {
 expiryTime: option<expiryTime>,
-attachmentSetId: option<attachmentSetId>
+  attachmentSetId: option<attachmentSetId>
 }
   @module("@aws-sdk/client-support") @new external new_: (request) => t = "AddAttachmentsToSetCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -292,7 +296,7 @@ module DescribeTrustedAdvisorCheckResult = {
   type t;
   type request = {
 language: option<string_>,
-checkId: string_
+  checkId: string_
 }
   type response = {
 result: option<trustedAdvisorCheckResult>
@@ -305,7 +309,7 @@ module DescribeServices = {
   type t;
   type request = {
 language: option<language>,
-serviceCodeList: option<serviceCodeList>
+  serviceCodeList: option<serviceCodeList>
 }
   type response = {
 services: option<serviceList>
@@ -318,14 +322,14 @@ module DescribeCommunications = {
   type t;
   type request = {
 maxResults: option<maxResults>,
-nextToken: option<nextToken>,
-afterTime: option<afterTime>,
-beforeTime: option<beforeTime>,
-caseId: caseId
+  nextToken: option<nextToken>,
+  afterTime: option<afterTime>,
+  beforeTime: option<beforeTime>,
+  caseId: caseId
 }
   type response = {
 nextToken: option<nextToken>,
-communications: option<communicationList>
+  communications: option<communicationList>
 }
   @module("@aws-sdk/client-support") @new external new_: (request) => t = "DescribeCommunicationsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -335,18 +339,18 @@ module DescribeCases = {
   type t;
   type request = {
 includeCommunications: option<includeCommunications>,
-language: option<language>,
-maxResults: option<maxResults>,
-nextToken: option<nextToken>,
-includeResolvedCases: option<includeResolvedCases>,
-beforeTime: option<beforeTime>,
-afterTime: option<afterTime>,
-displayId: option<displayId>,
-caseIdList: option<caseIdList>
+  language: option<language>,
+  maxResults: option<maxResults>,
+  nextToken: option<nextToken>,
+  includeResolvedCases: option<includeResolvedCases>,
+  beforeTime: option<beforeTime>,
+  afterTime: option<afterTime>,
+  displayId: option<displayId>,
+  caseIdList: option<caseIdList>
 }
   type response = {
 nextToken: option<nextToken>,
-cases: option<caseList>
+  cases: option<caseList>
 }
   @module("@aws-sdk/client-support") @new external new_: (request) => t = "DescribeCasesCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";

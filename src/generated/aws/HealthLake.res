@@ -5,10 +5,14 @@ httpStatusCode: option<float>,
   cfId: option<string>,
   attempts: option<int>,
   totalRetryDelay: option<int>
-};
-type boolean_ = bool
-type integer_ = int
-type long = float
+}
+type awsServiceClient;
+@module("@aws-sdk/client-healthlake") @new external createClient: unit => awsServiceClient = "HealthLakeClient";
+type baseString = string
+type baseBoolean = bool
+type baseInteger = int
+type baseTimestamp = Js.Date.t;
+type baseLong = float
 type timestamp_ = Js.Date.t;
 type string_ = string
 type s3Uri = string
@@ -16,7 +20,7 @@ type preloadDataType = [@as("SYNTHEA") #SYNTHEA]
 type nextToken = string
 type message = string
 type maxResultsInteger = int
-type jobStatus = [@as("FAILED") #FAILED | @as("COMPLETED") #COMPLETED | @as("IN_PROGRESS") #INPROGRESS | @as("SUBMITTED") #SUBMITTED]
+type jobStatus = [@as("FAILED") #FAILED | @as("COMPLETED") #COMPLETED | @as("IN_PROGRESS") #IN_PROGRESS | @as("SUBMITTED") #SUBMITTED]
 type jobName = string
 type jobId = string
 type iamRoleArn = string
@@ -30,49 +34,52 @@ type boundedLengthString = string
 type preloadDataConfig = {
 @as("PreloadDataType") preloadDataType: preloadDataType
 }
-type outputDataConfig = S3Uri(s3Uri);
-type inputDataConfig = S3Uri(s3Uri);
+type outputDataConfig = {
+@as("S3Uri") s3Uri: option<s3Uri>
+}
+type inputDataConfig = {
+@as("S3Uri") s3Uri: option<s3Uri>
+}
 type datastoreFilter = {
 @as("CreatedAfter") createdAfter: option<timestamp_>,
-@as("CreatedBefore") createdBefore: option<timestamp_>,
-@as("DatastoreStatus") datastoreStatus: option<datastoreStatus>,
-@as("DatastoreName") datastoreName: option<datastoreName>
+  @as("CreatedBefore") createdBefore: option<timestamp_>,
+  @as("DatastoreStatus") datastoreStatus: option<datastoreStatus>,
+  @as("DatastoreName") datastoreName: option<datastoreName>
 }
 type importJobProperties = {
 @as("Message") message: option<message>,
-@as("DataAccessRoleArn") dataAccessRoleArn: option<iamRoleArn>,
-@as("InputDataConfig") inputDataConfig: inputDataConfig,
-@as("DatastoreId") datastoreId: datastoreId,
-@as("EndTime") endTime: option<timestamp_>,
-@as("SubmitTime") submitTime: timestamp_,
-@as("JobStatus") jobStatus: jobStatus,
-@as("JobName") jobName: option<jobName>,
-@as("JobId") jobId: jobId
+  @as("DataAccessRoleArn") dataAccessRoleArn: option<iamRoleArn>,
+  @as("InputDataConfig") inputDataConfig: inputDataConfig,
+  @as("DatastoreId") datastoreId: datastoreId,
+  @as("EndTime") endTime: option<timestamp_>,
+  @as("SubmitTime") submitTime: timestamp_,
+  @as("JobStatus") jobStatus: jobStatus,
+  @as("JobName") jobName: option<jobName>,
+  @as("JobId") jobId: jobId
 }
 type exportJobProperties = {
 @as("Message") message: option<message>,
-@as("DataAccessRoleArn") dataAccessRoleArn: option<iamRoleArn>,
-@as("OutputDataConfig") outputDataConfig: outputDataConfig,
-@as("DatastoreId") datastoreId: datastoreId,
-@as("EndTime") endTime: option<timestamp_>,
-@as("SubmitTime") submitTime: timestamp_,
-@as("JobStatus") jobStatus: jobStatus,
-@as("JobName") jobName: option<jobName>,
-@as("JobId") jobId: jobId
+  @as("DataAccessRoleArn") dataAccessRoleArn: option<iamRoleArn>,
+  @as("OutputDataConfig") outputDataConfig: outputDataConfig,
+  @as("DatastoreId") datastoreId: datastoreId,
+  @as("EndTime") endTime: option<timestamp_>,
+  @as("SubmitTime") submitTime: timestamp_,
+  @as("JobStatus") jobStatus: jobStatus,
+  @as("JobName") jobName: option<jobName>,
+  @as("JobId") jobId: jobId
 }
 type datastoreProperties = {
 @as("PreloadDataConfig") preloadDataConfig: option<preloadDataConfig>,
-@as("DatastoreEndpoint") datastoreEndpoint: string_,
-@as("DatastoreTypeVersion") datastoreTypeVersion: fhirversion,
-@as("CreatedAt") createdAt: option<timestamp_>,
-@as("DatastoreStatus") datastoreStatus: datastoreStatus,
-@as("DatastoreName") datastoreName: option<datastoreName>,
-@as("DatastoreArn") datastoreArn: datastoreArn,
-@as("DatastoreId") datastoreId: datastoreId
+  @as("DatastoreEndpoint") datastoreEndpoint: string_,
+  @as("DatastoreTypeVersion") datastoreTypeVersion: fhirversion,
+  @as("CreatedAt") createdAt: option<timestamp_>,
+  @as("DatastoreStatus") datastoreStatus: datastoreStatus,
+  @as("DatastoreName") datastoreName: option<datastoreName>,
+  @as("DatastoreArn") datastoreArn: datastoreArn,
+  @as("DatastoreId") datastoreId: datastoreId
 }
 type datastorePropertiesList = array<datastoreProperties>
-type awsServiceClient;
-@module("@aws-sdk/client-healthlake") @new external createClient: unit => awsServiceClient = "HealthLakeClient";
+
 module DeleteFHIRDatastore = {
   type t;
   type request = {
@@ -80,9 +87,9 @@ module DeleteFHIRDatastore = {
 }
   type response = {
 @as("DatastoreEndpoint") datastoreEndpoint: boundedLengthString,
-@as("DatastoreStatus") datastoreStatus: datastoreStatus,
-@as("DatastoreArn") datastoreArn: datastoreArn,
-@as("DatastoreId") datastoreId: datastoreId
+  @as("DatastoreStatus") datastoreStatus: datastoreStatus,
+  @as("DatastoreArn") datastoreArn: datastoreArn,
+  @as("DatastoreId") datastoreId: datastoreId
 }
   @module("@aws-sdk/client-healthlake") @new external new_: (request) => t = "DeleteFHIRDatastoreCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -92,15 +99,15 @@ module StartFHIRImportJob = {
   type t;
   type request = {
 @as("ClientToken") clientToken: clientTokenString,
-@as("DataAccessRoleArn") dataAccessRoleArn: iamRoleArn,
-@as("DatastoreId") datastoreId: datastoreId,
-@as("InputDataConfig") inputDataConfig: inputDataConfig,
-@as("JobName") jobName: option<jobName>
+  @as("DataAccessRoleArn") dataAccessRoleArn: iamRoleArn,
+  @as("DatastoreId") datastoreId: datastoreId,
+  @as("InputDataConfig") inputDataConfig: inputDataConfig,
+  @as("JobName") jobName: option<jobName>
 }
   type response = {
 @as("DatastoreId") datastoreId: option<datastoreId>,
-@as("JobStatus") jobStatus: jobStatus,
-@as("JobId") jobId: jobId
+  @as("JobStatus") jobStatus: jobStatus,
+  @as("JobId") jobId: jobId
 }
   @module("@aws-sdk/client-healthlake") @new external new_: (request) => t = "StartFHIRImportJobCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -110,15 +117,15 @@ module StartFHIRExportJob = {
   type t;
   type request = {
 @as("ClientToken") clientToken: clientTokenString,
-@as("DataAccessRoleArn") dataAccessRoleArn: iamRoleArn,
-@as("DatastoreId") datastoreId: datastoreId,
-@as("OutputDataConfig") outputDataConfig: outputDataConfig,
-@as("JobName") jobName: option<jobName>
+  @as("DataAccessRoleArn") dataAccessRoleArn: iamRoleArn,
+  @as("DatastoreId") datastoreId: datastoreId,
+  @as("OutputDataConfig") outputDataConfig: outputDataConfig,
+  @as("JobName") jobName: option<jobName>
 }
   type response = {
 @as("DatastoreId") datastoreId: option<datastoreId>,
-@as("JobStatus") jobStatus: jobStatus,
-@as("JobId") jobId: jobId
+  @as("JobStatus") jobStatus: jobStatus,
+  @as("JobId") jobId: jobId
 }
   @module("@aws-sdk/client-healthlake") @new external new_: (request) => t = "StartFHIRExportJobCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -128,15 +135,15 @@ module CreateFHIRDatastore = {
   type t;
   type request = {
 @as("ClientToken") clientToken: option<clientTokenString>,
-@as("PreloadDataConfig") preloadDataConfig: option<preloadDataConfig>,
-@as("DatastoreTypeVersion") datastoreTypeVersion: fhirversion,
-@as("DatastoreName") datastoreName: option<datastoreName>
+  @as("PreloadDataConfig") preloadDataConfig: option<preloadDataConfig>,
+  @as("DatastoreTypeVersion") datastoreTypeVersion: fhirversion,
+  @as("DatastoreName") datastoreName: option<datastoreName>
 }
   type response = {
 @as("DatastoreEndpoint") datastoreEndpoint: boundedLengthString,
-@as("DatastoreStatus") datastoreStatus: datastoreStatus,
-@as("DatastoreArn") datastoreArn: datastoreArn,
-@as("DatastoreId") datastoreId: datastoreId
+  @as("DatastoreStatus") datastoreStatus: datastoreStatus,
+  @as("DatastoreArn") datastoreArn: datastoreArn,
+  @as("DatastoreId") datastoreId: datastoreId
 }
   @module("@aws-sdk/client-healthlake") @new external new_: (request) => t = "CreateFHIRDatastoreCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -146,7 +153,7 @@ module DescribeFHIRImportJob = {
   type t;
   type request = {
 @as("JobId") jobId: jobId,
-@as("DatastoreId") datastoreId: datastoreId
+  @as("DatastoreId") datastoreId: datastoreId
 }
   type response = {
 @as("ImportJobProperties") importJobProperties: importJobProperties
@@ -159,7 +166,7 @@ module DescribeFHIRExportJob = {
   type t;
   type request = {
 @as("JobId") jobId: jobId,
-@as("DatastoreId") datastoreId: datastoreId
+  @as("DatastoreId") datastoreId: datastoreId
 }
   type response = {
 @as("ExportJobProperties") exportJobProperties: exportJobProperties
@@ -184,12 +191,12 @@ module ListFHIRDatastores = {
   type t;
   type request = {
 @as("MaxResults") maxResults: option<maxResultsInteger>,
-@as("NextToken") nextToken: option<nextToken>,
-@as("Filter") filter: option<datastoreFilter>
+  @as("NextToken") nextToken: option<nextToken>,
+  @as("Filter") filter: option<datastoreFilter>
 }
   type response = {
 @as("NextToken") nextToken: option<nextToken>,
-@as("DatastorePropertiesList") datastorePropertiesList: datastorePropertiesList
+  @as("DatastorePropertiesList") datastorePropertiesList: datastorePropertiesList
 }
   @module("@aws-sdk/client-healthlake") @new external new_: (request) => t = "ListFHIRDatastoresCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";

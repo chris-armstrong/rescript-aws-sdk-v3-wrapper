@@ -1,26 +1,32 @@
-open Belt;
-let basepath = "aws-sdk-js-v3/codegen/sdk-codegen/aws-models";
+open Belt
+let basepath = "aws-sdk-js-v3/codegen/sdk-codegen/aws-models"
 let files = NodeJs.Fs.readdirSync(basepath)
 Array.forEach(files, file => {
-  let path =  NodeJs.Path.join([basepath, file])
-  Js.log(`Reading ${path}`)
-  let parsed =NodeJs.Fs.readFileSync(path, ())->NodeJs.Buffer.toString->Json.Decode.parseJson(Parse.parseModel)
-  let generated = switch parsed {
-    | Ok(shapes) => {
-      switch Convert.convert(Ok(shapes)) {
-        | Ok(result) => Ok(result)
-        | exception Dependencies.CycleError(_, _) => Error("cycle error - skip for now")
-        | Error(x) => Error(x)
+  // if file == "wafv2.2019-07-29.json" {
+    let path = NodeJs.Path.join([basepath, file])
+    Js.log(`Reading ${path}`)
+    let parsed =
+      NodeJs.Fs.readFileSync(path, ())
+      ->NodeJs.Buffer.toString
+      ->Json.Decode.parseJson(Parse.parseModel)
+    let generated = switch parsed {
+    | Ok(shapes) => switch Convert.convert(Ok(shapes)) {
+      | Ok(result) => Ok(result)
+      | exception Dependencies.CycleError(_, _) => Error("cycle error - skip for now")
+      | Error(x) => Error(x)
       }
-    }
     | Error(error) => Error(Json.Decode.jsonParseErrorToString(error))
-  }
-
-  switch generated {
-    | Ok({ moduleName, code }) => {
-      Js.log2("Writing module", moduleName)
-      NodeJs.Fs.writeFileSync(`src/generated/aws/${moduleName}.res`, NodeJs.Buffer.fromString(code))
     }
-    | Error(error) => { Js.log(`Unable to generate for file ${file}: ${error}`)}
-  }
+
+    switch generated {
+    | Ok({moduleName, code}) => {
+        Js.log2("Writing module", moduleName)
+        NodeJs.Fs.writeFileSync(
+          `src/generated/aws/${moduleName}.res`,
+          NodeJs.Buffer.fromString(code),
+        )
+      }
+    | Error(error) => Js.log(`Unable to generate for file ${file}: ${error}`)
+    }
+  // }
 })

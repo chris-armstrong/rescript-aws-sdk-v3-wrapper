@@ -5,14 +5,16 @@ httpStatusCode: option<float>,
   cfId: option<string>,
   attempts: option<int>,
   totalRetryDelay: option<int>
-};
-type string_ = string
-type boolean_ = bool
-type integer_ = int
-type timestamp_ = Js.Date.t;
-type long = float
-type tagsMap = Js.Dict.t< string_>
-type tagKeys = array<string_>
+}
+type awsServiceClient;
+@module("@aws-sdk/client-braket") @new external createClient: unit => awsServiceClient = "BraketClient";
+type baseString = string
+type baseBoolean = bool
+type baseInteger = int
+type baseTimestamp = Js.Date.t;
+type baseLong = float
+type tagsMap = Js.Dict.t<baseString>
+type tagKeys = array<baseString>
 type string64 = string
 type string256 = string
 type searchQuantumTasksFilterOperator = [@as("BETWEEN") #BETWEEN | @as("GTE") #GTE | @as("GT") #GT | @as("EQUAL") #EQUAL | @as("LTE") #LTE | @as("LT") #LT]
@@ -30,42 +32,41 @@ type cancellationStatus = [@as("CANCELLED") #CANCELLED | @as("CANCELLING") #CANC
 type string256List = array<string256>
 type quantumTaskSummary = {
 tags: option<tagsMap>,
-endedAt: option<timestamp_>,
-createdAt: timestamp_,
-outputS3Directory: string_,
-outputS3Bucket: string_,
-shots: long,
-deviceArn: deviceArn,
-status: quantumTaskStatus,
-quantumTaskArn: quantumTaskArn
+  endedAt: option<baseTimestamp>,
+  createdAt: baseTimestamp,
+  outputS3Directory: baseString,
+  outputS3Bucket: baseString,
+  shots: baseLong,
+  deviceArn: deviceArn,
+  status: quantumTaskStatus,
+  quantumTaskArn: quantumTaskArn
 }
 type deviceSummary = {
 deviceStatus: deviceStatus,
-deviceType: deviceType,
-providerName: string_,
-deviceName: string_,
-deviceArn: deviceArn
+  deviceType: deviceType,
+  providerName: baseString,
+  deviceName: baseString,
+  deviceArn: deviceArn
 }
 type searchQuantumTasksFilter = {
 operator: searchQuantumTasksFilterOperator,
-values: string256List,
-name: string64
+  values: string256List,
+  name: string64
 }
 type searchDevicesFilter = {
 values: string256List,
-name: string_
+  name: baseString
 }
 type quantumTaskSummaryList = array<quantumTaskSummary>
 type deviceSummaryList = array<deviceSummary>
 type searchQuantumTasksFilterList = array<searchQuantumTasksFilter>
 type searchDevicesFilterList = array<searchDevicesFilter>
-type awsServiceClient;
-@module("@aws-sdk/client-braket") @new external createClient: unit => awsServiceClient = "BraketClient";
+
 module UntagResource = {
   type t;
   type request = {
 tagKeys: tagKeys,
-resourceArn: string_
+  resourceArn: baseString
 }
   type response = unit
   @module("@aws-sdk/client-braket") @new external new_: (request) => t = "UntagResourceCommand";
@@ -76,7 +77,7 @@ module TagResource = {
   type t;
   type request = {
 tags: tagsMap,
-resourceArn: string_
+  resourceArn: baseString
 }
   type response = unit
   @module("@aws-sdk/client-braket") @new external new_: (request) => t = "TagResourceCommand";
@@ -86,7 +87,7 @@ resourceArn: string_
 module ListTagsForResource = {
   type t;
   type request = {
-resourceArn: string_
+resourceArn: baseString
 }
   type response = {
 tags: option<tagsMap>
@@ -102,16 +103,16 @@ quantumTaskArn: quantumTaskArn
 }
   type response = {
 tags: option<tagsMap>,
-endedAt: option<timestamp_>,
-createdAt: timestamp_,
-outputS3Directory: string_,
-outputS3Bucket: string_,
-shots: long,
-deviceParameters: jsonValue,
-deviceArn: deviceArn,
-failureReason: option<string_>,
-status: quantumTaskStatus,
-quantumTaskArn: quantumTaskArn
+  endedAt: option<baseTimestamp>,
+  createdAt: baseTimestamp,
+  outputS3Directory: baseString,
+  outputS3Bucket: baseString,
+  shots: baseLong,
+  deviceParameters: jsonValue,
+  deviceArn: deviceArn,
+  failureReason: option<baseString>,
+  status: quantumTaskStatus,
+  quantumTaskArn: quantumTaskArn
 }
   @module("@aws-sdk/client-braket") @new external new_: (request) => t = "GetQuantumTaskCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -124,11 +125,11 @@ deviceArn: deviceArn
 }
   type response = {
 deviceCapabilities: jsonValue,
-deviceStatus: deviceStatus,
-deviceType: deviceType,
-providerName: string_,
-deviceName: string_,
-deviceArn: deviceArn
+  deviceStatus: deviceStatus,
+  deviceType: deviceType,
+  providerName: baseString,
+  deviceName: baseString,
+  deviceArn: deviceArn
 }
   @module("@aws-sdk/client-braket") @new external new_: (request) => t = "GetDeviceCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -138,13 +139,13 @@ module CreateQuantumTask = {
   type t;
   type request = {
 tags: option<tagsMap>,
-action: jsonValue,
-outputS3KeyPrefix: string_,
-outputS3Bucket: string_,
-shots: long,
-deviceParameters: option<jsonValue>,
-deviceArn: deviceArn,
-clientToken: string64
+  action: jsonValue,
+  outputS3KeyPrefix: baseString,
+  outputS3Bucket: baseString,
+  shots: baseLong,
+  deviceParameters: option<jsonValue>,
+  deviceArn: deviceArn,
+  clientToken: string64
 }
   type response = {
 quantumTaskArn: quantumTaskArn
@@ -157,11 +158,11 @@ module CancelQuantumTask = {
   type t;
   type request = {
 clientToken: string64,
-quantumTaskArn: quantumTaskArn
+  quantumTaskArn: quantumTaskArn
 }
   type response = {
 cancellationStatus: cancellationStatus,
-quantumTaskArn: quantumTaskArn
+  quantumTaskArn: quantumTaskArn
 }
   @module("@aws-sdk/client-braket") @new external new_: (request) => t = "CancelQuantumTaskCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -171,12 +172,12 @@ module SearchQuantumTasks = {
   type t;
   type request = {
 filters: searchQuantumTasksFilterList,
-maxResults: option<integer_>,
-nextToken: option<string_>
+  maxResults: option<baseInteger>,
+  nextToken: option<baseString>
 }
   type response = {
-nextToken: option<string_>,
-quantumTasks: quantumTaskSummaryList
+nextToken: option<baseString>,
+  quantumTasks: quantumTaskSummaryList
 }
   @module("@aws-sdk/client-braket") @new external new_: (request) => t = "SearchQuantumTasksCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -186,12 +187,12 @@ module SearchDevices = {
   type t;
   type request = {
 filters: searchDevicesFilterList,
-maxResults: option<integer_>,
-nextToken: option<string_>
+  maxResults: option<baseInteger>,
+  nextToken: option<baseString>
 }
   type response = {
-nextToken: option<string_>,
-devices: deviceSummaryList
+nextToken: option<baseString>,
+  devices: deviceSummaryList
 }
   @module("@aws-sdk/client-braket") @new external new_: (request) => t = "SearchDevicesCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";

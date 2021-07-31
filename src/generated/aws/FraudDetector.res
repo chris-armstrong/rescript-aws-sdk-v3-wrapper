@@ -5,10 +5,14 @@ httpStatusCode: option<float>,
   cfId: option<string>,
   attempts: option<int>,
   totalRetryDelay: option<int>
-};
-type boolean_ = bool
-type timestamp_ = Js.Date.t;
-type long = float
+}
+type awsServiceClient;
+@module("@aws-sdk/client-frauddetector") @new external createClient: unit => awsServiceClient = "FraudDetectorClient";
+type baseString = string
+type baseBoolean = bool
+type baseInteger = int
+type baseTimestamp = Js.Date.t;
+type baseLong = float
 type wholeNumberVersionString = string
 type variableValue = string
 type variableName = string
@@ -36,16 +40,16 @@ type blob = NodeJs.Buffer.t
 type batchPredictionsMaxPageSize = int
 type variablesMaxResults = int
 type useEventVariables = bool
-type trainingDataSourceEnum = [@as("EXTERNAL_EVENTS") #EXTERNALEVENTS]
+type trainingDataSourceEnum = [@as("EXTERNAL_EVENTS") #EXTERNAL_EVENTS]
 type tagsMaxResults = int
 type rulesMaxResults = int
-type ruleExecutionMode = [@as("FIRST_MATCHED") #FIRSTMATCHED | @as("ALL_MATCHED") #ALLMATCHED]
+type ruleExecutionMode = [@as("FIRST_MATCHED") #FIRST_MATCHED | @as("ALL_MATCHED") #ALL_MATCHED]
 type outcomesMaxResults = int
-type modelVersionStatus = [@as("TRAINING_CANCELLED") #TRAININGCANCELLED | @as("INACTIVE") #INACTIVE | @as("ACTIVE") #ACTIVE]
-type modelTypeEnum = [@as("ONLINE_FRAUD_INSIGHTS") #ONLINEFRAUDINSIGHTS]
+type modelVersionStatus = [@as("TRAINING_CANCELLED") #TRAINING_CANCELLED | @as("INACTIVE") #INACTIVE | @as("ACTIVE") #ACTIVE]
+type modelTypeEnum = [@as("ONLINE_FRAUD_INSIGHTS") #ONLINE_FRAUD_INSIGHTS]
 type modelSource = [@as("SAGEMAKER") #SAGEMAKER]
-type modelOutputDataFormat = [@as("APPLICATION_JSONLINES") #APPLICATIONJSONLINES | @as("TEXT_CSV") #TEXTCSV]
-type modelInputDataFormat = [@as("APPLICATION_JSON") #APPLICATIONJSON | @as("TEXT_CSV") #TEXTCSV]
+type modelOutputDataFormat = [@as("APPLICATION_JSONLINES") #APPLICATION_JSONLINES | @as("TEXT_CSV") #TEXT_CSV]
+type modelInputDataFormat = [@as("APPLICATION_JSON") #APPLICATION_JSON | @as("TEXT_CSV") #TEXT_CSV]
 type modelEndpointStatus = [@as("DISSOCIATED") #DISSOCIATED | @as("ASSOCIATED") #ASSOCIATED]
 type language = [@as("DETECTORPL") #DETECTORPL]
 type kmsEncryptionKeyArn = string
@@ -56,166 +60,166 @@ type detectorsMaxResults = int
 type detectorVersionStatus = [@as("INACTIVE") #INACTIVE | @as("ACTIVE") #ACTIVE | @as("DRAFT") #DRAFT]
 type detectorVersionMaxResults = int
 type dataType = [@as("BOOLEAN") #BOOLEAN | @as("FLOAT") #FLOAT | @as("INTEGER") #INTEGER | @as("STRING") #STRING]
-type dataSource = [@as("EXTERNAL_MODEL_SCORE") #EXTERNALMODELSCORE | @as("MODEL_SCORE") #MODELSCORE | @as("EVENT") #EVENT]
-type asyncJobStatus = [@as("FAILED") #FAILED | @as("COMPLETE") #COMPLETE | @as("CANCELED") #CANCELED | @as("CANCEL_IN_PROGRESS") #CANCELINPROGRESS | @as("IN_PROGRESS") #INPROGRESS | @as("IN_PROGRESS_INITIALIZING") #INPROGRESSINITIALIZING]
+type dataSource = [@as("EXTERNAL_MODEL_SCORE") #EXTERNAL_MODEL_SCORE | @as("MODEL_SCORE") #MODEL_SCORE | @as("EVENT") #EVENT]
+type asyncJobStatus = [@as("FAILED") #FAILED | @as("COMPLETE") #COMPLETE | @as("CANCELED") #CANCELED | @as("CANCEL_IN_PROGRESS") #CANCEL_IN_PROGRESS | @as("IN_PROGRESS") #IN_PROGRESS | @as("IN_PROGRESS_INITIALIZING") #IN_PROGRESS_INITIALIZING]
 type tagKeyList = array<tagKey>
 type variableEntry = {
 variableType: option<string_>,
-description: option<string_>,
-defaultValue: option<string_>,
-dataSource: option<string_>,
-dataType: option<string_>,
-name: option<string_>
+  description: option<string_>,
+  defaultValue: option<string_>,
+  dataSource: option<string_>,
+  dataType: option<string_>,
+  name: option<string_>
 }
 type variable = {
 arn: option<fraudDetectorArn>,
-createdTime: option<time>,
-lastUpdatedTime: option<time>,
-variableType: option<string_>,
-description: option<string_>,
-defaultValue: option<string_>,
-dataSource: option<dataSource>,
-dataType: option<dataType>,
-name: option<string_>
+  createdTime: option<time>,
+  lastUpdatedTime: option<time>,
+  variableType: option<string_>,
+  description: option<string_>,
+  defaultValue: option<string_>,
+  dataSource: option<dataSource>,
+  dataType: option<dataType>,
+  name: option<string_>
 }
 type tag = {
 value: tagValue,
-key: tagKey
+  key: tagKey
 }
 type rule = {
 ruleVersion: wholeNumberVersionString,
-ruleId: identifier,
-detectorId: identifier
+  ruleId: identifier,
+  detectorId: identifier
 }
 type outcome = {
 arn: option<fraudDetectorArn>,
-createdTime: option<time>,
-lastUpdatedTime: option<time>,
-description: option<description>,
-name: option<identifier>
+  createdTime: option<time>,
+  lastUpdatedTime: option<time>,
+  description: option<description>,
+  name: option<identifier>
 }
 type nonEmptyListOfStrings = array<string_>
 type nameList = array<string_>
 type modelVersion = {
 arn: option<fraudDetectorArn>,
-modelVersionNumber: nonEmptyString,
-modelType: modelTypeEnum,
-modelId: modelIdentifier
+  modelVersionNumber: nonEmptyString,
+  modelType: modelTypeEnum,
+  modelId: modelIdentifier
 }
-type modelPredictionMap = Js.Dict.t< float_>
+type modelPredictionMap = Js.Dict.t<float_>
 type modelInputConfiguration = {
 csvInputTemplate: option<string_>,
-jsonInputTemplate: option<string_>,
-useEventVariables: useEventVariables,
-format: option<modelInputDataFormat>,
-eventTypeName: option<identifier>
+  jsonInputTemplate: option<string_>,
+  useEventVariables: useEventVariables,
+  format: option<modelInputDataFormat>,
+  eventTypeName: option<identifier>
 }
 type modelEndpointDataBlob = {
 contentType: option<contentType>,
-byteBuffer: option<blob>
+  byteBuffer: option<blob>
 }
 type model = {
 arn: option<fraudDetectorArn>,
-lastUpdatedTime: option<time>,
-createdTime: option<time>,
-eventTypeName: option<string_>,
-description: option<description>,
-modelType: option<modelTypeEnum>,
-modelId: option<modelIdentifier>
+  lastUpdatedTime: option<time>,
+  createdTime: option<time>,
+  eventTypeName: option<string_>,
+  description: option<description>,
+  modelType: option<modelTypeEnum>,
+  modelId: option<modelIdentifier>
 }
 type metricDataPoint = {
 threshold: option<float_>,
-tpr: option<float_>,
-precision: option<float_>,
-fpr: option<float_>
+  tpr: option<float_>,
+  precision: option<float_>,
+  fpr: option<float_>
 }
 type listOfStrings = array<string_>
 type label = {
 arn: option<fraudDetectorArn>,
-createdTime: option<time>,
-lastUpdatedTime: option<time>,
-description: option<description>,
-name: option<string_>
+  createdTime: option<time>,
+  lastUpdatedTime: option<time>,
+  description: option<description>,
+  name: option<string_>
 }
 type kmskey = {
 kmsEncryptionKeyArn: option<kmsEncryptionKeyArn>
 }
-type jsonKeyToVariableMap = Js.Dict.t< string_>
+type jsonKeyToVariableMap = Js.Dict.t<string_>
 type fileValidationMessage = {
 @as("type") type_: option<string_>,
-content: option<string_>,
-title: option<string_>
+  content: option<string_>,
+  title: option<string_>
 }
 type fieldValidationMessage = {
 @as("type") type_: option<string_>,
-content: option<string_>,
-title: option<string_>,
-identifier: option<string_>,
-fieldName: option<string_>
+  content: option<string_>,
+  title: option<string_>,
+  identifier: option<string_>,
+  fieldName: option<string_>
 }
 type externalEventsDetail = {
 dataAccessRoleArn: iamRoleArn,
-dataLocation: s3BucketLocation
+  dataLocation: s3BucketLocation
 }
-type eventVariableMap = Js.Dict.t< variableValue>
+type eventVariableMap = Js.Dict.t<variableValue>
 type entityType = {
 arn: option<fraudDetectorArn>,
-createdTime: option<time>,
-lastUpdatedTime: option<time>,
-description: option<description>,
-name: option<string_>
+  createdTime: option<time>,
+  lastUpdatedTime: option<time>,
+  description: option<description>,
+  name: option<string_>
 }
 type entity = {
 entityId: identifier,
-entityType: string_
+  entityType: string_
 }
 type detectorVersionSummary = {
 lastUpdatedTime: option<time>,
-description: option<description>,
-status: option<detectorVersionStatus>,
-detectorVersionId: option<nonEmptyString>
+  description: option<description>,
+  status: option<detectorVersionStatus>,
+  detectorVersionId: option<nonEmptyString>
 }
 type detector = {
 arn: option<fraudDetectorArn>,
-createdTime: option<time>,
-lastUpdatedTime: option<time>,
-eventTypeName: option<identifier>,
-description: option<description>,
-detectorId: option<identifier>
+  createdTime: option<time>,
+  lastUpdatedTime: option<time>,
+  eventTypeName: option<identifier>,
+  description: option<description>,
+  detectorId: option<identifier>
 }
-type csvIndexToVariableMap = Js.Dict.t< string_>
+type csvIndexToVariableMap = Js.Dict.t<string_>
 type batchPrediction = {
 totalRecordsCount: option<integer_>,
-processedRecordsCount: option<integer_>,
-arn: option<fraudDetectorArn>,
-iamRoleArn: option<iamRoleArn>,
-detectorVersion: option<floatVersionString>,
-detectorName: option<identifier>,
-eventTypeName: option<identifier>,
-outputPath: option<s3BucketLocation>,
-inputPath: option<s3BucketLocation>,
-lastHeartbeatTime: option<time>,
-completionTime: option<time>,
-startTime: option<time>,
-failureReason: option<string_>,
-status: option<asyncJobStatus>,
-jobId: option<identifier>
+  processedRecordsCount: option<integer_>,
+  arn: option<fraudDetectorArn>,
+  iamRoleArn: option<iamRoleArn>,
+  detectorVersion: option<floatVersionString>,
+  detectorName: option<identifier>,
+  eventTypeName: option<identifier>,
+  outputPath: option<s3BucketLocation>,
+  inputPath: option<s3BucketLocation>,
+  lastHeartbeatTime: option<time>,
+  completionTime: option<time>,
+  startTime: option<time>,
+  failureReason: option<string_>,
+  status: option<asyncJobStatus>,
+  jobId: option<identifier>
 }
 type batchGetVariableError = {
 message: option<string_>,
-code: option<integer2>,
-name: option<string_>
+  code: option<integer2>,
+  name: option<string_>
 }
 type batchCreateVariableError = {
 message: option<string_>,
-code: option<integer2>,
-name: option<string_>
+  code: option<integer2>,
+  name: option<string_>
 }
 type tagList_ = array<tag>
 type modelList = array<model>
 type metricDataPointsList = array<metricDataPoint>
 type listOfEntities = array<entity>
-type labelMapper = Js.Dict.t< listOfStrings>
+type labelMapper = Js.Dict.t<listOfStrings>
 type labelList = array<label>
 type fileValidationMessageList = array<fileValidationMessage>
 type fieldValidationMessageList = array<fieldValidationMessage>
@@ -224,42 +228,42 @@ type variableList = array<variable>
 type variableEntryList = array<variableEntry>
 type ruleResult = {
 outcomes: option<listOfStrings>,
-ruleId: option<string_>
+  ruleId: option<string_>
 }
 type ruleList = array<rule>
 type ruleDetail = {
 arn: option<fraudDetectorArn>,
-createdTime: option<time>,
-lastUpdatedTime: option<time>,
-outcomes: option<nonEmptyListOfStrings>,
-language: option<language>,
-expression: option<ruleExpression>,
-ruleVersion: option<wholeNumberVersionString>,
-detectorId: option<identifier>,
-description: option<description>,
-ruleId: option<identifier>
+  createdTime: option<time>,
+  lastUpdatedTime: option<time>,
+  outcomes: option<nonEmptyListOfStrings>,
+  language: option<language>,
+  expression: option<ruleExpression>,
+  ruleVersion: option<wholeNumberVersionString>,
+  detectorId: option<identifier>,
+  description: option<description>,
+  ruleId: option<identifier>
 }
 type outcomeList = array<outcome>
 type modelScores = {
 scores: option<modelPredictionMap>,
-modelVersion: option<modelVersion>
+  modelVersion: option<modelVersion>
 }
 type modelOutputConfiguration = {
 csvIndexToVariableMap: option<csvIndexToVariableMap>,
-jsonKeyToVariableMap: option<jsonKeyToVariableMap>,
-format: modelOutputDataFormat
+  jsonKeyToVariableMap: option<jsonKeyToVariableMap>,
+  format: modelOutputDataFormat
 }
 type listOfModelVersions = array<modelVersion>
-type externalModelEndpointDataBlobMap = Js.Dict.t< modelEndpointDataBlob>
+type externalModelEndpointDataBlobMap = Js.Dict.t<modelEndpointDataBlob>
 type eventType = {
 arn: option<fraudDetectorArn>,
-createdTime: option<time>,
-lastUpdatedTime: option<time>,
-entityTypes: option<nonEmptyListOfStrings>,
-labels: option<listOfStrings>,
-eventVariables: option<listOfStrings>,
-description: option<description>,
-name: option<string_>
+  createdTime: option<time>,
+  lastUpdatedTime: option<time>,
+  entityTypes: option<nonEmptyListOfStrings>,
+  labels: option<listOfStrings>,
+  eventVariables: option<listOfStrings>,
+  description: option<description>,
+  name: option<string_>
 }
 type detectorVersionSummaryList = array<detectorVersionSummary>
 type detectorList = array<detector>
@@ -269,7 +273,7 @@ type batchCreateVariableErrorList = array<batchCreateVariableError>
 type eventTypeList = array<eventType>
 type trainingMetrics = {
 metricDataPoints: option<metricDataPointsList>,
-auc: option<float_>
+  auc: option<float_>
 }
 type ruleDetailList = array<ruleDetail>
 type listOfRuleResults = array<ruleResult>
@@ -279,51 +283,50 @@ labelMapper: labelMapper
 }
 type externalModel = {
 arn: option<fraudDetectorArn>,
-createdTime: option<time>,
-lastUpdatedTime: option<time>,
-modelEndpointStatus: option<modelEndpointStatus>,
-outputConfiguration: option<modelOutputConfiguration>,
-inputConfiguration: option<modelInputConfiguration>,
-invokeModelEndpointRoleArn: option<string_>,
-modelSource: option<modelSource>,
-modelEndpoint: option<string_>
+  createdTime: option<time>,
+  lastUpdatedTime: option<time>,
+  modelEndpointStatus: option<modelEndpointStatus>,
+  outputConfiguration: option<modelOutputConfiguration>,
+  inputConfiguration: option<modelInputConfiguration>,
+  invokeModelEndpointRoleArn: option<string_>,
+  modelSource: option<modelSource>,
+  modelEndpoint: option<string_>
 }
 type dataValidationMetrics = {
 fieldLevelMessages: option<fieldValidationMessageList>,
-fileLevelMessages: option<fileValidationMessageList>
+  fileLevelMessages: option<fileValidationMessageList>
 }
 type trainingResult = {
 trainingMetrics: option<trainingMetrics>,
-dataValidationMetrics: option<dataValidationMetrics>
+  dataValidationMetrics: option<dataValidationMetrics>
 }
 type trainingDataSchema = {
 labelSchema: labelSchema,
-modelVariables: listOfStrings
+  modelVariables: listOfStrings
 }
 type externalModelList = array<externalModel>
 type modelVersionDetail = {
 arn: option<fraudDetectorArn>,
-createdTime: option<time>,
-lastUpdatedTime: option<time>,
-trainingResult: option<trainingResult>,
-externalEventsDetail: option<externalEventsDetail>,
-trainingDataSchema: option<trainingDataSchema>,
-trainingDataSource: option<trainingDataSourceEnum>,
-status: option<string_>,
-modelVersionNumber: option<floatVersionString>,
-modelType: option<modelTypeEnum>,
-modelId: option<modelIdentifier>
+  createdTime: option<time>,
+  lastUpdatedTime: option<time>,
+  trainingResult: option<trainingResult>,
+  externalEventsDetail: option<externalEventsDetail>,
+  trainingDataSchema: option<trainingDataSchema>,
+  trainingDataSource: option<trainingDataSourceEnum>,
+  status: option<string_>,
+  modelVersionNumber: option<floatVersionString>,
+  modelType: option<modelTypeEnum>,
+  modelId: option<modelIdentifier>
 }
 type modelVersionDetailList = array<modelVersionDetail>
-type awsServiceClient;
-@module("@aws-sdk/client-frauddetector") @new external createClient: unit => awsServiceClient = "FraudDetectorClient";
+
 module UpdateVariable = {
   type t;
   type request = {
 variableType: option<string_>,
-description: option<string_>,
-defaultValue: option<string_>,
-name: string_
+  description: option<string_>,
+  defaultValue: option<string_>,
+  name: string_
 }
   type response = unit
   @module("@aws-sdk/client-frauddetector") @new external new_: (request) => t = "UpdateVariableCommand";
@@ -334,9 +337,9 @@ module UpdateModelVersionStatus = {
   type t;
   type request = {
 status: modelVersionStatus,
-modelVersionNumber: floatVersionString,
-modelType: modelTypeEnum,
-modelId: modelIdentifier
+  modelVersionNumber: floatVersionString,
+  modelType: modelTypeEnum,
+  modelId: modelIdentifier
 }
   type response = unit
   @module("@aws-sdk/client-frauddetector") @new external new_: (request) => t = "UpdateModelVersionStatusCommand";
@@ -347,8 +350,8 @@ module UpdateModel = {
   type t;
   type request = {
 description: option<description>,
-modelType: modelTypeEnum,
-modelId: modelIdentifier
+  modelType: modelTypeEnum,
+  modelId: modelIdentifier
 }
   type response = unit
   @module("@aws-sdk/client-frauddetector") @new external new_: (request) => t = "UpdateModelCommand";
@@ -359,8 +362,8 @@ module UpdateDetectorVersionStatus = {
   type t;
   type request = {
 status: detectorVersionStatus,
-detectorVersionId: wholeNumberVersionString,
-detectorId: identifier
+  detectorVersionId: wholeNumberVersionString,
+  detectorId: identifier
 }
   type response = unit
   @module("@aws-sdk/client-frauddetector") @new external new_: (request) => t = "UpdateDetectorVersionStatusCommand";
@@ -371,8 +374,8 @@ module UpdateDetectorVersionMetadata = {
   type t;
   type request = {
 description: description,
-detectorVersionId: wholeNumberVersionString,
-detectorId: identifier
+  detectorVersionId: wholeNumberVersionString,
+  detectorId: identifier
 }
   type response = unit
   @module("@aws-sdk/client-frauddetector") @new external new_: (request) => t = "UpdateDetectorVersionMetadataCommand";
@@ -413,8 +416,8 @@ module DeleteModelVersion = {
   type t;
   type request = {
 modelVersionNumber: floatVersionString,
-modelType: modelTypeEnum,
-modelId: modelIdentifier
+  modelType: modelTypeEnum,
+  modelId: modelIdentifier
 }
   type response = unit
   @module("@aws-sdk/client-frauddetector") @new external new_: (request) => t = "DeleteModelVersionCommand";
@@ -425,7 +428,7 @@ module DeleteModel = {
   type t;
   type request = {
 modelType: modelTypeEnum,
-modelId: modelIdentifier
+  modelId: modelIdentifier
 }
   type response = unit
   @module("@aws-sdk/client-frauddetector") @new external new_: (request) => t = "DeleteModelCommand";
@@ -466,7 +469,7 @@ module DeleteEvent = {
   type t;
   type request = {
 eventTypeName: identifier,
-eventId: identifier
+  eventId: identifier
 }
   type response = unit
   @module("@aws-sdk/client-frauddetector") @new external new_: (request) => t = "DeleteEventCommand";
@@ -487,7 +490,7 @@ module DeleteDetectorVersion = {
   type t;
   type request = {
 detectorVersionId: wholeNumberVersionString,
-detectorId: identifier
+  detectorId: identifier
 }
   type response = unit
   @module("@aws-sdk/client-frauddetector") @new external new_: (request) => t = "DeleteDetectorVersionCommand";
@@ -528,7 +531,7 @@ module UpdateRuleMetadata = {
   type t;
   type request = {
 description: description,
-rule: rule
+  rule: rule
 }
   type response = unit
   @module("@aws-sdk/client-frauddetector") @new external new_: (request) => t = "UpdateRuleMetadataCommand";
@@ -539,7 +542,7 @@ module UntagResource = {
   type t;
   type request = {
 tagKeys: tagKeyList,
-resourceARN: fraudDetectorArn
+  resourceARN: fraudDetectorArn
 }
   type response = unit
   @module("@aws-sdk/client-frauddetector") @new external new_: (request) => t = "UntagResourceCommand";
@@ -570,11 +573,11 @@ module UpdateRuleVersion = {
   type t;
   type request = {
 tags: option<tagList_>,
-outcomes: nonEmptyListOfStrings,
-language: language,
-expression: ruleExpression,
-description: option<description>,
-rule: rule
+  outcomes: nonEmptyListOfStrings,
+  language: language,
+  expression: ruleExpression,
+  description: option<description>,
+  rule: rule
 }
   type response = {
 rule: option<rule>
@@ -587,16 +590,16 @@ module UpdateModelVersion = {
   type t;
   type request = {
 tags: option<tagList_>,
-externalEventsDetail: option<externalEventsDetail>,
-majorVersionNumber: wholeNumberVersionString,
-modelType: modelTypeEnum,
-modelId: modelIdentifier
+  externalEventsDetail: option<externalEventsDetail>,
+  majorVersionNumber: wholeNumberVersionString,
+  modelType: modelTypeEnum,
+  modelId: modelIdentifier
 }
   type response = {
 status: option<string_>,
-modelVersionNumber: option<floatVersionString>,
-modelType: option<modelTypeEnum>,
-modelId: option<modelIdentifier>
+  modelVersionNumber: option<floatVersionString>,
+  modelType: option<modelTypeEnum>,
+  modelId: option<modelIdentifier>
 }
   @module("@aws-sdk/client-frauddetector") @new external new_: (request) => t = "UpdateModelVersionCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -606,12 +609,12 @@ module UpdateDetectorVersion = {
   type t;
   type request = {
 ruleExecutionMode: option<ruleExecutionMode>,
-modelVersions: option<listOfModelVersions>,
-description: option<description>,
-rules: ruleList,
-externalModelEndpoints: listOfStrings,
-detectorVersionId: wholeNumberVersionString,
-detectorId: identifier
+  modelVersions: option<listOfModelVersions>,
+  description: option<description>,
+  rules: ruleList,
+  externalModelEndpoints: listOfStrings,
+  detectorVersionId: wholeNumberVersionString,
+  detectorId: identifier
 }
   type response = unit
   @module("@aws-sdk/client-frauddetector") @new external new_: (request) => t = "UpdateDetectorVersionCommand";
@@ -622,7 +625,7 @@ module TagResource = {
   type t;
   type request = {
 tags: tagList_,
-resourceARN: fraudDetectorArn
+  resourceARN: fraudDetectorArn
 }
   type response = unit
   @module("@aws-sdk/client-frauddetector") @new external new_: (request) => t = "TagResourceCommand";
@@ -633,8 +636,8 @@ module PutOutcome = {
   type t;
   type request = {
 tags: option<tagList_>,
-description: option<description>,
-name: identifier
+  description: option<description>,
+  name: identifier
 }
   type response = unit
   @module("@aws-sdk/client-frauddetector") @new external new_: (request) => t = "PutOutcomeCommand";
@@ -645,8 +648,8 @@ module PutLabel = {
   type t;
   type request = {
 tags: option<tagList_>,
-description: option<description>,
-name: identifier
+  description: option<description>,
+  name: identifier
 }
   type response = unit
   @module("@aws-sdk/client-frauddetector") @new external new_: (request) => t = "PutLabelCommand";
@@ -657,12 +660,12 @@ module PutExternalModel = {
   type t;
   type request = {
 tags: option<tagList_>,
-modelEndpointStatus: modelEndpointStatus,
-outputConfiguration: modelOutputConfiguration,
-inputConfiguration: modelInputConfiguration,
-invokeModelEndpointRoleArn: string_,
-modelSource: modelSource,
-modelEndpoint: sageMakerEndpointIdentifier
+  modelEndpointStatus: modelEndpointStatus,
+  outputConfiguration: modelOutputConfiguration,
+  inputConfiguration: modelInputConfiguration,
+  invokeModelEndpointRoleArn: string_,
+  modelSource: modelSource,
+  modelEndpoint: sageMakerEndpointIdentifier
 }
   type response = unit
   @module("@aws-sdk/client-frauddetector") @new external new_: (request) => t = "PutExternalModelCommand";
@@ -673,11 +676,11 @@ module PutEventType = {
   type t;
   type request = {
 tags: option<tagList_>,
-entityTypes: nonEmptyListOfStrings,
-labels: option<listOfStrings>,
-eventVariables: nonEmptyListOfStrings,
-description: option<description>,
-name: identifier
+  entityTypes: nonEmptyListOfStrings,
+  labels: option<listOfStrings>,
+  eventVariables: nonEmptyListOfStrings,
+  description: option<description>,
+  name: identifier
 }
   type response = unit
   @module("@aws-sdk/client-frauddetector") @new external new_: (request) => t = "PutEventTypeCommand";
@@ -688,8 +691,8 @@ module PutEntityType = {
   type t;
   type request = {
 tags: option<tagList_>,
-description: option<description>,
-name: identifier
+  description: option<description>,
+  name: identifier
 }
   type response = unit
   @module("@aws-sdk/client-frauddetector") @new external new_: (request) => t = "PutEntityTypeCommand";
@@ -700,9 +703,9 @@ module PutDetector = {
   type t;
   type request = {
 tags: option<tagList_>,
-eventTypeName: identifier,
-description: option<description>,
-detectorId: identifier
+  eventTypeName: identifier,
+  description: option<description>,
+  detectorId: identifier
 }
   type response = unit
   @module("@aws-sdk/client-frauddetector") @new external new_: (request) => t = "PutDetectorCommand";
@@ -713,12 +716,12 @@ module ListTagsForResource = {
   type t;
   type request = {
 maxResults: option<tagsMaxResults>,
-nextToken: option<string_>,
-resourceARN: fraudDetectorArn
+  nextToken: option<string_>,
+  resourceARN: fraudDetectorArn
 }
   type response = {
 nextToken: option<string_>,
-tags: option<tagList_>
+  tags: option<tagList_>
 }
   @module("@aws-sdk/client-frauddetector") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -728,12 +731,12 @@ module GetVariables = {
   type t;
   type request = {
 maxResults: option<variablesMaxResults>,
-nextToken: option<string_>,
-name: option<string_>
+  nextToken: option<string_>,
+  name: option<string_>
 }
   type response = {
 nextToken: option<string_>,
-variables: option<variableList>
+  variables: option<variableList>
 }
   @module("@aws-sdk/client-frauddetector") @new external new_: (request) => t = "GetVariablesCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -743,12 +746,12 @@ module GetOutcomes = {
   type t;
   type request = {
 maxResults: option<outcomesMaxResults>,
-nextToken: option<string_>,
-name: option<identifier>
+  nextToken: option<string_>,
+  name: option<identifier>
 }
   type response = {
 nextToken: option<string_>,
-outcomes: option<outcomeList>
+  outcomes: option<outcomeList>
 }
   @module("@aws-sdk/client-frauddetector") @new external new_: (request) => t = "GetOutcomesCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -758,13 +761,13 @@ module GetModels = {
   type t;
   type request = {
 maxResults: option<modelsMaxPageSize>,
-nextToken: option<string_>,
-modelType: option<modelTypeEnum>,
-modelId: option<modelIdentifier>
+  nextToken: option<string_>,
+  modelType: option<modelTypeEnum>,
+  modelId: option<modelIdentifier>
 }
   type response = {
 models: option<modelList>,
-nextToken: option<string_>
+  nextToken: option<string_>
 }
   @module("@aws-sdk/client-frauddetector") @new external new_: (request) => t = "GetModelsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -774,12 +777,12 @@ module GetLabels = {
   type t;
   type request = {
 maxResults: option<labelsMaxResults>,
-nextToken: option<string_>,
-name: option<identifier>
+  nextToken: option<string_>,
+  name: option<identifier>
 }
   type response = {
 nextToken: option<string_>,
-labels: option<labelList>
+  labels: option<labelList>
 }
   @module("@aws-sdk/client-frauddetector") @new external new_: (request) => t = "GetLabelsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -789,12 +792,12 @@ module GetEntityTypes = {
   type t;
   type request = {
 maxResults: option<entityTypesMaxResults>,
-nextToken: option<string_>,
-name: option<identifier>
+  nextToken: option<string_>,
+  name: option<identifier>
 }
   type response = {
 nextToken: option<string_>,
-entityTypes: option<entityTypeList>
+  entityTypes: option<entityTypeList>
 }
   @module("@aws-sdk/client-frauddetector") @new external new_: (request) => t = "GetEntityTypesCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -804,12 +807,12 @@ module GetDetectors = {
   type t;
   type request = {
 maxResults: option<detectorsMaxResults>,
-nextToken: option<string_>,
-detectorId: option<identifier>
+  nextToken: option<string_>,
+  detectorId: option<identifier>
 }
   type response = {
 nextToken: option<string_>,
-detectors: option<detectorList>
+  detectors: option<detectorList>
 }
   @module("@aws-sdk/client-frauddetector") @new external new_: (request) => t = "GetDetectorsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -819,20 +822,20 @@ module GetDetectorVersion = {
   type t;
   type request = {
 detectorVersionId: wholeNumberVersionString,
-detectorId: identifier
+  detectorId: identifier
 }
   type response = {
 arn: option<fraudDetectorArn>,
-ruleExecutionMode: option<ruleExecutionMode>,
-createdTime: option<time>,
-lastUpdatedTime: option<time>,
-status: option<detectorVersionStatus>,
-rules: option<ruleList>,
-modelVersions: option<listOfModelVersions>,
-externalModelEndpoints: option<listOfStrings>,
-description: option<description>,
-detectorVersionId: option<wholeNumberVersionString>,
-detectorId: option<identifier>
+  ruleExecutionMode: option<ruleExecutionMode>,
+  createdTime: option<time>,
+  lastUpdatedTime: option<time>,
+  status: option<detectorVersionStatus>,
+  rules: option<ruleList>,
+  modelVersions: option<listOfModelVersions>,
+  externalModelEndpoints: option<listOfStrings>,
+  description: option<description>,
+  detectorVersionId: option<wholeNumberVersionString>,
+  detectorId: option<identifier>
 }
   @module("@aws-sdk/client-frauddetector") @new external new_: (request) => t = "GetDetectorVersionCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -842,12 +845,12 @@ module GetBatchPredictionJobs = {
   type t;
   type request = {
 nextToken: option<string_>,
-maxResults: option<batchPredictionsMaxPageSize>,
-jobId: option<identifier>
+  maxResults: option<batchPredictionsMaxPageSize>,
+  jobId: option<identifier>
 }
   type response = {
 nextToken: option<string_>,
-batchPredictions: option<batchPredictionList>
+  batchPredictions: option<batchPredictionList>
 }
   @module("@aws-sdk/client-frauddetector") @new external new_: (request) => t = "GetBatchPredictionJobsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -857,14 +860,14 @@ module DescribeDetector = {
   type t;
   type request = {
 maxResults: option<detectorVersionMaxResults>,
-nextToken: option<string_>,
-detectorId: identifier
+  nextToken: option<string_>,
+  detectorId: identifier
 }
   type response = {
 arn: option<fraudDetectorArn>,
-nextToken: option<string_>,
-detectorVersionSummaries: option<detectorVersionSummaryList>,
-detectorId: option<identifier>
+  nextToken: option<string_>,
+  detectorVersionSummaries: option<detectorVersionSummaryList>,
+  detectorId: option<identifier>
 }
   @module("@aws-sdk/client-frauddetector") @new external new_: (request) => t = "DescribeDetectorCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -874,12 +877,12 @@ module CreateVariable = {
   type t;
   type request = {
 tags: option<tagList_>,
-variableType: option<string_>,
-description: option<string_>,
-defaultValue: string_,
-dataSource: dataSource,
-dataType: dataType,
-name: string_
+  variableType: option<string_>,
+  description: option<string_>,
+  defaultValue: string_,
+  dataSource: dataSource,
+  dataType: dataType,
+  name: string_
 }
   type response = unit
   @module("@aws-sdk/client-frauddetector") @new external new_: (request) => t = "CreateVariableCommand";
@@ -890,12 +893,12 @@ module CreateRule = {
   type t;
   type request = {
 tags: option<tagList_>,
-outcomes: nonEmptyListOfStrings,
-language: language,
-expression: ruleExpression,
-description: option<description>,
-detectorId: identifier,
-ruleId: identifier
+  outcomes: nonEmptyListOfStrings,
+  language: language,
+  expression: ruleExpression,
+  description: option<description>,
+  detectorId: identifier,
+  ruleId: identifier
 }
   type response = {
 rule: option<rule>
@@ -908,10 +911,10 @@ module CreateModel = {
   type t;
   type request = {
 tags: option<tagList_>,
-eventTypeName: string_,
-description: option<description>,
-modelType: modelTypeEnum,
-modelId: modelIdentifier
+  eventTypeName: string_,
+  description: option<description>,
+  modelType: modelTypeEnum,
+  modelId: modelIdentifier
 }
   type response = unit
   @module("@aws-sdk/client-frauddetector") @new external new_: (request) => t = "CreateModelCommand";
@@ -922,17 +925,17 @@ module CreateDetectorVersion = {
   type t;
   type request = {
 tags: option<tagList_>,
-ruleExecutionMode: option<ruleExecutionMode>,
-modelVersions: option<listOfModelVersions>,
-rules: ruleList,
-externalModelEndpoints: option<listOfStrings>,
-description: option<description>,
-detectorId: identifier
+  ruleExecutionMode: option<ruleExecutionMode>,
+  modelVersions: option<listOfModelVersions>,
+  rules: ruleList,
+  externalModelEndpoints: option<listOfStrings>,
+  description: option<description>,
+  detectorId: identifier
 }
   type response = {
 status: option<detectorVersionStatus>,
-detectorVersionId: option<nonEmptyString>,
-detectorId: option<identifier>
+  detectorVersionId: option<nonEmptyString>,
+  detectorId: option<identifier>
 }
   @module("@aws-sdk/client-frauddetector") @new external new_: (request) => t = "CreateDetectorVersionCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -942,13 +945,13 @@ module CreateBatchPredictionJob = {
   type t;
   type request = {
 tags: option<tagList_>,
-iamRoleArn: iamRoleArn,
-detectorVersion: option<wholeNumberVersionString>,
-detectorName: identifier,
-eventTypeName: identifier,
-outputPath: s3BucketLocation,
-inputPath: s3BucketLocation,
-jobId: identifier
+  iamRoleArn: iamRoleArn,
+  detectorVersion: option<wholeNumberVersionString>,
+  detectorName: identifier,
+  eventTypeName: identifier,
+  outputPath: s3BucketLocation,
+  inputPath: s3BucketLocation,
+  jobId: identifier
 }
   type response = unit
   @module("@aws-sdk/client-frauddetector") @new external new_: (request) => t = "CreateBatchPredictionJobCommand";
@@ -962,7 +965,7 @@ names: nameList
 }
   type response = {
 errors: option<batchGetVariableErrorList>,
-variables: option<variableList>
+  variables: option<variableList>
 }
   @module("@aws-sdk/client-frauddetector") @new external new_: (request) => t = "BatchGetVariableCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -972,7 +975,7 @@ module BatchCreateVariable = {
   type t;
   type request = {
 tags: option<tagList_>,
-variableEntries: variableEntryList
+  variableEntries: variableEntryList
 }
   type response = {
 errors: option<batchCreateVariableErrorList>
@@ -985,14 +988,14 @@ module GetRules = {
   type t;
   type request = {
 maxResults: option<rulesMaxResults>,
-nextToken: option<string_>,
-ruleVersion: option<wholeNumberVersionString>,
-detectorId: identifier,
-ruleId: option<identifier>
+  nextToken: option<string_>,
+  ruleVersion: option<wholeNumberVersionString>,
+  detectorId: identifier,
+  ruleId: option<identifier>
 }
   type response = {
 nextToken: option<string_>,
-ruleDetails: option<ruleDetailList>
+  ruleDetails: option<ruleDetailList>
 }
   @module("@aws-sdk/client-frauddetector") @new external new_: (request) => t = "GetRulesCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1002,12 +1005,12 @@ module GetEventTypes = {
   type t;
   type request = {
 maxResults: option<eventTypesMaxResults>,
-nextToken: option<string_>,
-name: option<identifier>
+  nextToken: option<string_>,
+  name: option<identifier>
 }
   type response = {
 nextToken: option<string_>,
-eventTypes: option<eventTypeList>
+  eventTypes: option<eventTypeList>
 }
   @module("@aws-sdk/client-frauddetector") @new external new_: (request) => t = "GetEventTypesCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1017,17 +1020,17 @@ module GetEventPrediction = {
   type t;
   type request = {
 externalModelEndpointDataBlobs: option<externalModelEndpointDataBlobMap>,
-eventVariables: eventVariableMap,
-eventTimestamp: string_,
-entities: listOfEntities,
-eventTypeName: string_,
-eventId: string_,
-detectorVersionId: option<wholeNumberVersionString>,
-detectorId: string_
+  eventVariables: eventVariableMap,
+  eventTimestamp: string_,
+  entities: listOfEntities,
+  eventTypeName: string_,
+  eventId: string_,
+  detectorVersionId: option<wholeNumberVersionString>,
+  detectorId: string_
 }
   type response = {
 ruleResults: option<listOfRuleResults>,
-modelScores: option<listOfModelScores>
+  modelScores: option<listOfModelScores>
 }
   @module("@aws-sdk/client-frauddetector") @new external new_: (request) => t = "GetEventPredictionCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1037,18 +1040,18 @@ module GetModelVersion = {
   type t;
   type request = {
 modelVersionNumber: floatVersionString,
-modelType: modelTypeEnum,
-modelId: modelIdentifier
+  modelType: modelTypeEnum,
+  modelId: modelIdentifier
 }
   type response = {
 arn: option<fraudDetectorArn>,
-status: option<string_>,
-externalEventsDetail: option<externalEventsDetail>,
-trainingDataSchema: option<trainingDataSchema>,
-trainingDataSource: option<trainingDataSourceEnum>,
-modelVersionNumber: option<floatVersionString>,
-modelType: option<modelTypeEnum>,
-modelId: option<modelIdentifier>
+  status: option<string_>,
+  externalEventsDetail: option<externalEventsDetail>,
+  trainingDataSchema: option<trainingDataSchema>,
+  trainingDataSource: option<trainingDataSourceEnum>,
+  modelVersionNumber: option<floatVersionString>,
+  modelType: option<modelTypeEnum>,
+  modelId: option<modelIdentifier>
 }
   @module("@aws-sdk/client-frauddetector") @new external new_: (request) => t = "GetModelVersionCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1058,12 +1061,12 @@ module GetExternalModels = {
   type t;
   type request = {
 maxResults: option<externalModelsMaxResults>,
-nextToken: option<string_>,
-modelEndpoint: option<string_>
+  nextToken: option<string_>,
+  modelEndpoint: option<string_>
 }
   type response = {
 nextToken: option<string_>,
-externalModels: option<externalModelList>
+  externalModels: option<externalModelList>
 }
   @module("@aws-sdk/client-frauddetector") @new external new_: (request) => t = "GetExternalModelsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1073,17 +1076,17 @@ module CreateModelVersion = {
   type t;
   type request = {
 tags: option<tagList_>,
-externalEventsDetail: option<externalEventsDetail>,
-trainingDataSchema: trainingDataSchema,
-trainingDataSource: trainingDataSourceEnum,
-modelType: modelTypeEnum,
-modelId: modelIdentifier
+  externalEventsDetail: option<externalEventsDetail>,
+  trainingDataSchema: trainingDataSchema,
+  trainingDataSource: trainingDataSourceEnum,
+  modelType: modelTypeEnum,
+  modelId: modelIdentifier
 }
   type response = {
 status: option<string_>,
-modelVersionNumber: option<nonEmptyString>,
-modelType: option<modelTypeEnum>,
-modelId: option<modelIdentifier>
+  modelVersionNumber: option<nonEmptyString>,
+  modelType: option<modelTypeEnum>,
+  modelId: option<modelIdentifier>
 }
   @module("@aws-sdk/client-frauddetector") @new external new_: (request) => t = "CreateModelVersionCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1093,14 +1096,14 @@ module DescribeModelVersions = {
   type t;
   type request = {
 maxResults: option<modelsMaxPageSize>,
-nextToken: option<string_>,
-modelType: option<modelTypeEnum>,
-modelVersionNumber: option<floatVersionString>,
-modelId: option<modelIdentifier>
+  nextToken: option<string_>,
+  modelType: option<modelTypeEnum>,
+  modelVersionNumber: option<floatVersionString>,
+  modelId: option<modelIdentifier>
 }
   type response = {
 nextToken: option<string_>,
-modelVersionDetails: option<modelVersionDetailList>
+  modelVersionDetails: option<modelVersionDetailList>
 }
   @module("@aws-sdk/client-frauddetector") @new external new_: (request) => t = "DescribeModelVersionsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";

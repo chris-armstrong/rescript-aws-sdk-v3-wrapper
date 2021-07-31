@@ -5,11 +5,14 @@ httpStatusCode: option<float>,
   cfId: option<string>,
   attempts: option<int>,
   totalRetryDelay: option<int>
-};
-type string_ = string
-type boolean_ = bool
-type integer_ = int
-type long = float
+}
+type awsServiceClient;
+@module("@aws-sdk/client-iotfleethub") @new external createClient: unit => awsServiceClient = "IoTFleetHubClient";
+type baseString = string
+type baseBoolean = bool
+type baseInteger = int
+type baseTimestamp = Js.Date.t;
+type baseLong = float
 type url = string
 type timestamp_ = float
 type tagValue = string
@@ -23,28 +26,27 @@ type errorMessage = string
 type description = string
 type clientRequestToken = string
 type arn = string
-type applicationState = [@as("DELETE_FAILED") #DELETEFAILED | @as("CREATE_FAILED") #CREATEFAILED | @as("ACTIVE") #ACTIVE | @as("DELETING") #DELETING | @as("CREATING") #CREATING]
-type tagMap = Js.Dict.t< tagValue>
+type applicationState = [@as("DELETE_FAILED") #DELETE_FAILED | @as("CREATE_FAILED") #CREATE_FAILED | @as("ACTIVE") #ACTIVE | @as("DELETING") #DELETING | @as("CREATING") #CREATING]
+type tagMap = Js.Dict.t<tagValue>
 type tagKeyList = array<tagKey>
 type applicationSummary = {
 applicationState: option<applicationState>,
-applicationLastUpdateDate: option<timestamp_>,
-applicationCreationDate: option<timestamp_>,
-applicationUrl: url,
-applicationDescription: option<description>,
-applicationName: name,
-applicationId: id
+  applicationLastUpdateDate: option<timestamp_>,
+  applicationCreationDate: option<timestamp_>,
+  applicationUrl: url,
+  applicationDescription: option<description>,
+  applicationName: name,
+  applicationId: id
 }
 type applicationSummaries = array<applicationSummary>
-type awsServiceClient;
-@module("@aws-sdk/client-iotfleethub") @new external createClient: unit => awsServiceClient = "IoTFleetHubClient";
+
 module UpdateApplication = {
   type t;
   type request = {
 clientToken: option<clientRequestToken>,
-applicationDescription: option<description>,
-applicationName: option<name>,
-applicationId: id
+  applicationDescription: option<description>,
+  applicationName: option<name>,
+  applicationId: id
 }
   type response = unit
   @module("@aws-sdk/client-iotfleethub") @new external new_: (request) => t = "UpdateApplicationCommand";
@@ -55,7 +57,7 @@ module DeleteApplication = {
   type t;
   type request = {
 clientToken: option<clientRequestToken>,
-applicationId: id
+  applicationId: id
 }
   type response = unit
   @module("@aws-sdk/client-iotfleethub") @new external new_: (request) => t = "DeleteApplicationCommand";
@@ -66,7 +68,7 @@ module UntagResource = {
   type t;
   type request = {
 tagKeys: tagKeyList,
-resourceArn: resourceArn
+  resourceArn: resourceArn
 }
   type response = unit
   @module("@aws-sdk/client-iotfleethub") @new external new_: (request) => t = "UntagResourceCommand";
@@ -77,7 +79,7 @@ module TagResource = {
   type t;
   type request = {
 tags: tagMap,
-resourceArn: resourceArn
+  resourceArn: resourceArn
 }
   type response = unit
   @module("@aws-sdk/client-iotfleethub") @new external new_: (request) => t = "TagResourceCommand";
@@ -103,17 +105,17 @@ applicationId: id
 }
   type response = {
 tags: option<tagMap>,
-errorMessage: option<errorMessage>,
-ssoClientId: option<ssoClientId>,
-roleArn: arn,
-applicationLastUpdateDate: timestamp_,
-applicationCreationDate: timestamp_,
-applicationState: applicationState,
-applicationUrl: url,
-applicationDescription: option<description>,
-applicationName: name,
-applicationArn: arn,
-applicationId: id
+  errorMessage: option<errorMessage>,
+  ssoClientId: option<ssoClientId>,
+  roleArn: arn,
+  applicationLastUpdateDate: timestamp_,
+  applicationCreationDate: timestamp_,
+  applicationState: applicationState,
+  applicationUrl: url,
+  applicationDescription: option<description>,
+  applicationName: name,
+  applicationArn: arn,
+  applicationId: id
 }
   @module("@aws-sdk/client-iotfleethub") @new external new_: (request) => t = "DescribeApplicationCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -123,14 +125,14 @@ module CreateApplication = {
   type t;
   type request = {
 tags: option<tagMap>,
-roleArn: arn,
-clientToken: option<clientRequestToken>,
-applicationDescription: option<description>,
-applicationName: name
+  roleArn: arn,
+  clientToken: option<clientRequestToken>,
+  applicationDescription: option<description>,
+  applicationName: name
 }
   type response = {
 applicationArn: arn,
-applicationId: id
+  applicationId: id
 }
   @module("@aws-sdk/client-iotfleethub") @new external new_: (request) => t = "CreateApplicationCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -143,7 +145,7 @@ nextToken: option<nextToken>
 }
   type response = {
 nextToken: option<nextToken>,
-applicationSummaries: option<applicationSummaries>
+  applicationSummaries: option<applicationSummaries>
 }
   @module("@aws-sdk/client-iotfleethub") @new external new_: (request) => t = "ListApplicationsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";

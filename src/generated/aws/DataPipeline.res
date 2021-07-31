@@ -5,9 +5,14 @@ httpStatusCode: option<float>,
   cfId: option<string>,
   attempts: option<int>,
   totalRetryDelay: option<int>
-};
-type integer_ = int
-type long = float
+}
+type awsServiceClient;
+@module("@aws-sdk/client-datapipeline") @new external createClient: unit => awsServiceClient = "DataPipelineClient";
+type baseString = string
+type baseBoolean = bool
+type baseInteger = int
+type baseTimestamp = Js.Date.t;
+type baseLong = float
 type validationMessage = string
 type timestamp_ = Js.Date.t;
 type taskId = string
@@ -25,98 +30,97 @@ type boolean_ = bool
 type attributeValueString = string
 type attributeNameString = string
 type taskStatus = [@as("FALSE") #FALSE | @as("FAILED") #FAILED | @as("FINISHED") #FINISHED]
-type operatorType = [@as("BETWEEN") #BETWEEN | @as("GE") #GE | @as("LE") #LE | @as("REF_EQ") #REFEQ | @as("EQ") #EQ]
+type operatorType = [@as("BETWEEN") #BETWEEN | @as("GE") #GE | @as("LE") #LE | @as("REF_EQ") #REF_EQ | @as("EQ") #EQ]
 type validationMessages = array<validationMessage>
 type stringList = array<string_>
 type idList = array<id>
 type tag = {
 value: tagValue,
-key: tagKey
+  key: tagKey
 }
 type pipelineIdName = {
 name: option<id>,
-id: option<id>
+  id: option<id>
 }
 type parameterValue = {
 stringValue: fieldStringValue,
-id: fieldNameString
+  id: fieldNameString
 }
 type parameterAttribute = {
 stringValue: attributeValueString,
-key: attributeNameString
+  key: attributeNameString
 }
 type instanceIdentity = {
 signature: option<string_>,
-document: option<string_>
+  document: option<string_>
 }
 type field = {
 refValue: option<fieldNameString>,
-stringValue: option<fieldStringValue>,
-key: fieldNameString
+  stringValue: option<fieldStringValue>,
+  key: fieldNameString
 }
 type tagList_ = array<tag>
 type pipelineList = array<pipelineIdName>
 type fieldList = array<field>
 type validationWarning = {
 warnings: option<validationMessages>,
-id: option<id>
+  id: option<id>
 }
 type validationError = {
 errors: option<validationMessages>,
-id: option<id>
+  id: option<id>
 }
 type parameterValueList = array<parameterValue>
 type parameterAttributeList = array<parameterAttribute>
 type operator = {
 values: option<stringList>,
-@as("type") type_: option<operatorType>
+  @as("type") type_: option<operatorType>
 }
 type validationWarnings = array<validationWarning>
 type validationErrors = array<validationError>
 type selector = {
 operator: option<operator>,
-fieldName: option<string_>
+  fieldName: option<string_>
 }
 type pipelineObject = {
 fields: fieldList,
-name: id,
-id: id
+  name: id,
+  id: id
 }
 type pipelineDescription = {
 tags: option<tagList_>,
-description: option<string_>,
-fields: fieldList,
-name: id,
-pipelineId: id
+  description: option<string_>,
+  fields: fieldList,
+  name: id,
+  pipelineId: id
 }
 type parameterObject = {
 attributes: parameterAttributeList,
-id: fieldNameString
+  id: fieldNameString
 }
 type selectorList = array<selector>
-type pipelineObjectMap = Js.Dict.t< pipelineObject>
+type pipelineObjectMap = Js.Dict.t<pipelineObject>
 type pipelineObjectList = array<pipelineObject>
 type pipelineDescriptionList = array<pipelineDescription>
 type parameterObjectList = array<parameterObject>
 type taskObject = {
 objects: option<pipelineObjectMap>,
-attemptId: option<id>,
-pipelineId: option<id>,
-taskId: option<taskId>
+  attemptId: option<id>,
+  pipelineId: option<id>,
+  taskId: option<taskId>
 }
 type query = {
 selectors: option<selectorList>
 }
-type awsServiceClient;
-@module("@aws-sdk/client-datapipeline") @new external createClient: unit => awsServiceClient = "DataPipelineClient";
+
 module SetTaskStatus = {
   type t;
   type request = {
 errorStackTrace: option<string_>,
-errorMessage: option<errorMessage>,
-errorId: option<string_>,
-taskStatus: taskStatus,
-taskId: taskId
+  errorMessage: option<errorMessage>,
+  errorId: option<string_>,
+  taskStatus: taskStatus,
+  taskId: taskId
 }
   type response = unit
   @module("@aws-sdk/client-datapipeline") @new external new_: (request) => t = "SetTaskStatusCommand";
@@ -127,8 +131,8 @@ module ReportTaskRunnerHeartbeat = {
   type t;
   type request = {
 hostname: option<id>,
-workerGroup: option<string_>,
-taskrunnerId: id
+  workerGroup: option<string_>,
+  taskrunnerId: id
 }
   type response = {
 terminate: boolean_
@@ -141,8 +145,8 @@ module EvaluateExpression = {
   type t;
   type request = {
 expression: longString,
-objectId: id,
-pipelineId: id
+  objectId: id,
+  pipelineId: id
 }
   type response = {
 evaluatedExpression: longString
@@ -165,7 +169,7 @@ module DeactivatePipeline = {
   type t;
   type request = {
 cancelActive: option<cancelActive>,
-pipelineId: id
+  pipelineId: id
 }
   type response = unit
   @module("@aws-sdk/client-datapipeline") @new external new_: (request) => t = "DeactivatePipelineCommand";
@@ -176,8 +180,8 @@ module SetStatus = {
   type t;
   type request = {
 status: string_,
-objectIds: idList,
-pipelineId: id
+  objectIds: idList,
+  pipelineId: id
 }
   
   @module("@aws-sdk/client-datapipeline") @new external new_: (request) => t = "SetStatusCommand";
@@ -188,7 +192,7 @@ module RemoveTags = {
   type t;
   type request = {
 tagKeys: stringList,
-pipelineId: id
+  pipelineId: id
 }
   type response = unit
   @module("@aws-sdk/client-datapipeline") @new external new_: (request) => t = "RemoveTagsCommand";
@@ -199,7 +203,7 @@ module ReportTaskProgress = {
   type t;
   type request = {
 fields: option<fieldList>,
-taskId: taskId
+  taskId: taskId
 }
   type response = {
 canceled: boolean_
@@ -215,8 +219,8 @@ marker: option<string_>
 }
   type response = {
 hasMoreResults: option<boolean_>,
-marker: option<string_>,
-pipelineIdList: pipelineList
+  marker: option<string_>,
+  pipelineIdList: pipelineList
 }
   @module("@aws-sdk/client-datapipeline") @new external new_: (request) => t = "ListPipelinesCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -226,9 +230,9 @@ module CreatePipeline = {
   type t;
   type request = {
 tags: option<tagList_>,
-description: option<string_>,
-uniqueId: id,
-name: id
+  description: option<string_>,
+  uniqueId: id,
+  name: id
 }
   type response = {
 pipelineId: id
@@ -241,7 +245,7 @@ module AddTags = {
   type t;
   type request = {
 tags: tagList_,
-pipelineId: id
+  pipelineId: id
 }
   type response = unit
   @module("@aws-sdk/client-datapipeline") @new external new_: (request) => t = "AddTagsCommand";
@@ -252,8 +256,8 @@ module ActivatePipeline = {
   type t;
   type request = {
 startTimestamp: option<timestamp_>,
-parameterValues: option<parameterValueList>,
-pipelineId: id
+  parameterValues: option<parameterValueList>,
+  pipelineId: id
 }
   type response = unit
   @module("@aws-sdk/client-datapipeline") @new external new_: (request) => t = "ActivatePipelineCommand";
@@ -264,14 +268,14 @@ module ValidatePipelineDefinition = {
   type t;
   type request = {
 parameterValues: option<parameterValueList>,
-parameterObjects: option<parameterObjectList>,
-pipelineObjects: pipelineObjectList,
-pipelineId: id
+  parameterObjects: option<parameterObjectList>,
+  pipelineObjects: pipelineObjectList,
+  pipelineId: id
 }
   type response = {
 errored: boolean_,
-validationWarnings: option<validationWarnings>,
-validationErrors: option<validationErrors>
+  validationWarnings: option<validationWarnings>,
+  validationErrors: option<validationErrors>
 }
   @module("@aws-sdk/client-datapipeline") @new external new_: (request) => t = "ValidatePipelineDefinitionCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -281,14 +285,14 @@ module PutPipelineDefinition = {
   type t;
   type request = {
 parameterValues: option<parameterValueList>,
-parameterObjects: option<parameterObjectList>,
-pipelineObjects: pipelineObjectList,
-pipelineId: id
+  parameterObjects: option<parameterObjectList>,
+  pipelineObjects: pipelineObjectList,
+  pipelineId: id
 }
   type response = {
 errored: boolean_,
-validationWarnings: option<validationWarnings>,
-validationErrors: option<validationErrors>
+  validationWarnings: option<validationWarnings>,
+  validationErrors: option<validationErrors>
 }
   @module("@aws-sdk/client-datapipeline") @new external new_: (request) => t = "PutPipelineDefinitionCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -298,12 +302,12 @@ module GetPipelineDefinition = {
   type t;
   type request = {
 version: option<string_>,
-pipelineId: id
+  pipelineId: id
 }
   type response = {
 parameterValues: option<parameterValueList>,
-parameterObjects: option<parameterObjectList>,
-pipelineObjects: option<pipelineObjectList>
+  parameterObjects: option<parameterObjectList>,
+  pipelineObjects: option<pipelineObjectList>
 }
   @module("@aws-sdk/client-datapipeline") @new external new_: (request) => t = "GetPipelineDefinitionCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -325,14 +329,14 @@ module DescribeObjects = {
   type t;
   type request = {
 marker: option<string_>,
-evaluateExpressions: option<boolean_>,
-objectIds: idList,
-pipelineId: id
+  evaluateExpressions: option<boolean_>,
+  objectIds: idList,
+  pipelineId: id
 }
   type response = {
 hasMoreResults: option<boolean_>,
-marker: option<string_>,
-pipelineObjects: pipelineObjectList
+  marker: option<string_>,
+  pipelineObjects: pipelineObjectList
 }
   @module("@aws-sdk/client-datapipeline") @new external new_: (request) => t = "DescribeObjectsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -342,15 +346,15 @@ module QueryObjects = {
   type t;
   type request = {
 limit: option<int_>,
-marker: option<string_>,
-sphere: string_,
-query: option<query>,
-pipelineId: id
+  marker: option<string_>,
+  sphere: string_,
+  query: option<query>,
+  pipelineId: id
 }
   type response = {
 hasMoreResults: option<boolean_>,
-marker: option<string_>,
-ids: option<idList>
+  marker: option<string_>,
+  ids: option<idList>
 }
   @module("@aws-sdk/client-datapipeline") @new external new_: (request) => t = "QueryObjectsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -360,8 +364,8 @@ module PollForTask = {
   type t;
   type request = {
 instanceIdentity: option<instanceIdentity>,
-hostname: option<id>,
-workerGroup: string_
+  hostname: option<id>,
+  workerGroup: string_
 }
   type response = {
 taskObject: option<taskObject>

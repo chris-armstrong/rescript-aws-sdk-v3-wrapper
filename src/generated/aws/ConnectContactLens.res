@@ -5,12 +5,14 @@ httpStatusCode: option<float>,
   cfId: option<string>,
   attempts: option<int>,
   totalRetryDelay: option<int>
-};
-type string_ = string
-type boolean_ = bool
-type integer_ = int
-type timestamp_ = Js.Date.t;
-type long = float
+}
+type awsServiceClient;
+@module("@aws-sdk/client-connect") @new external createClient: unit => awsServiceClient = "ConnectContactLensClient";
+type baseString = string
+type baseBoolean = bool
+type baseInteger = int
+type baseTimestamp = Js.Date.t;
+type baseLong = float
 type transcriptId = string
 type transcriptContent = string
 type sentimentValue = [@as("NEGATIVE") #NEGATIVE | @as("NEUTRAL") #NEUTRAL | @as("POSITIVE") #POSITIVE]
@@ -26,12 +28,12 @@ type characterOffset = int
 type categoryName = string
 type pointOfInterest = {
 @as("EndOffsetMillis") endOffsetMillis: offsetMillis,
-@as("BeginOffsetMillis") beginOffsetMillis: offsetMillis
+  @as("BeginOffsetMillis") beginOffsetMillis: offsetMillis
 }
 type matchedCategories = array<categoryName>
 type characterOffsets = {
 @as("EndOffsetChar") endOffsetChar: characterOffset,
-@as("BeginOffsetChar") beginOffsetChar: characterOffset
+  @as("BeginOffsetChar") beginOffsetChar: characterOffset
 }
 type pointsOfInterest = array<pointOfInterest>
 type issueDetected = {
@@ -43,37 +45,36 @@ type categoryDetails = {
 }
 type transcript = {
 @as("IssuesDetected") issuesDetected: option<issuesDetected>,
-@as("Sentiment") sentiment: sentimentValue,
-@as("EndOffsetMillis") endOffsetMillis: offsetMillis,
-@as("BeginOffsetMillis") beginOffsetMillis: offsetMillis,
-@as("Content") content: transcriptContent,
-@as("ParticipantRole") participantRole: participantRole,
-@as("ParticipantId") participantId: participantId,
-@as("Id") id: transcriptId
+  @as("Sentiment") sentiment: sentimentValue,
+  @as("EndOffsetMillis") endOffsetMillis: offsetMillis,
+  @as("BeginOffsetMillis") beginOffsetMillis: offsetMillis,
+  @as("Content") content: transcriptContent,
+  @as("ParticipantRole") participantRole: participantRole,
+  @as("ParticipantId") participantId: participantId,
+  @as("Id") id: transcriptId
 }
-type matchedDetails = Js.Dict.t< categoryDetails>
+type matchedDetails = Js.Dict.t<categoryDetails>
 type categories = {
 @as("MatchedDetails") matchedDetails: matchedDetails,
-@as("MatchedCategories") matchedCategories: matchedCategories
+  @as("MatchedCategories") matchedCategories: matchedCategories
 }
 type realtimeContactAnalysisSegment = {
 @as("Categories") categories: option<categories>,
-@as("Transcript") transcript: option<transcript>
+  @as("Transcript") transcript: option<transcript>
 }
 type realtimeContactAnalysisSegments = array<realtimeContactAnalysisSegment>
-type awsServiceClient;
-@module("@aws-sdk/client-connect") @new external createClient: unit => awsServiceClient = "ConnectContactLensClient";
+
 module ListRealtimeContactAnalysisSegments = {
   type t;
   type request = {
 @as("NextToken") nextToken: option<nextToken>,
-@as("MaxResults") maxResults: option<maxResults>,
-@as("ContactId") contactId: contactId,
-@as("InstanceId") instanceId: instanceId
+  @as("MaxResults") maxResults: option<maxResults>,
+  @as("ContactId") contactId: contactId,
+  @as("InstanceId") instanceId: instanceId
 }
   type response = {
 @as("NextToken") nextToken: option<nextToken>,
-@as("Segments") segments: realtimeContactAnalysisSegments
+  @as("Segments") segments: realtimeContactAnalysisSegments
 }
   @module("@aws-sdk/client-connect") @new external new_: (request) => t = "ListRealtimeContactAnalysisSegmentsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";

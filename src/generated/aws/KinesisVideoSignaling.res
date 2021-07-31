@@ -5,12 +5,14 @@ httpStatusCode: option<float>,
   cfId: option<string>,
   attempts: option<int>,
   totalRetryDelay: option<int>
-};
-type string_ = string
-type boolean_ = bool
-type integer_ = int
-type timestamp_ = Js.Date.t;
-type long = float
+}
+type awsServiceClient;
+@module("@aws-sdk/client-kinesisvideo") @new external createClient: unit => awsServiceClient = "KinesisVideoSignalingClient";
+type baseString = string
+type baseBoolean = bool
+type baseInteger = int
+type baseTimestamp = Js.Date.t;
+type baseLong = float
 type username = string
 type uri = string
 type ttl = int
@@ -24,19 +26,18 @@ type answer = string
 type uris = array<uri>
 type iceServer = {
 @as("Ttl") ttl: option<ttl>,
-@as("Password") password: option<password>,
-@as("Username") username: option<username>,
-@as("Uris") uris: option<uris>
+  @as("Password") password: option<password>,
+  @as("Username") username: option<username>,
+  @as("Uris") uris: option<uris>
 }
 type iceServerList = array<iceServer>
-type awsServiceClient;
-@module("@aws-sdk/client-kinesisvideo") @new external createClient: unit => awsServiceClient = "KinesisVideoSignalingClient";
+
 module SendAlexaOfferToMaster = {
   type t;
   type request = {
 @as("MessagePayload") messagePayload: messagePayload,
-@as("SenderClientId") senderClientId: clientId,
-@as("ChannelARN") channelARN: resourceARN
+  @as("SenderClientId") senderClientId: clientId,
+  @as("ChannelARN") channelARN: resourceARN
 }
   type response = {
 @as("Answer") answer: option<answer>
@@ -49,9 +50,9 @@ module GetIceServerConfig = {
   type t;
   type request = {
 @as("Username") username: option<username>,
-@as("Service") service: option<service>,
-@as("ClientId") clientId: option<clientId>,
-@as("ChannelARN") channelARN: resourceARN
+  @as("Service") service: option<service>,
+  @as("ClientId") clientId: option<clientId>,
+  @as("ChannelARN") channelARN: resourceARN
 }
   type response = {
 @as("IceServerList") iceServerList: option<iceServerList>

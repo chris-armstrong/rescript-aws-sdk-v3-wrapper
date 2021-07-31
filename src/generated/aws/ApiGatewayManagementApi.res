@@ -5,26 +5,27 @@ httpStatusCode: option<float>,
   cfId: option<string>,
   attempts: option<int>,
   totalRetryDelay: option<int>
-};
-type string_ = string
-type boolean_ = bool
-type integer_ = int
-type timestamp_ = Js.Date.t;
-type long = float
+}
+type awsServiceClient;
+@module("@aws-sdk/client-apigateway") @new external createClient: unit => awsServiceClient = "ApiGatewayManagementApiClient";
+type baseString = string
+type baseBoolean = bool
+type baseInteger = int
+type baseTimestamp = Js.Date.t;
+type baseLong = float
 type __timestampIso8601 = Js.Date.t;
 type __string = string
 type data = NodeJs.Buffer.t
 type identity = {
 @as("UserAgent") userAgent: __string,
-@as("SourceIp") sourceIp: __string
+  @as("SourceIp") sourceIp: __string
 }
-type awsServiceClient;
-@module("@aws-sdk/client-apigateway") @new external createClient: unit => awsServiceClient = "ApiGatewayManagementApiClient";
+
 module PostToConnection = {
   type t;
   type request = {
 @as("ConnectionId") connectionId: __string,
-@as("Data") data: data
+  @as("Data") data: data
 }
   
   @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "PostToConnectionCommand";
@@ -48,8 +49,8 @@ module GetConnection = {
 }
   type response = {
 @as("LastActiveAt") lastActiveAt: option<__timestampIso8601>,
-@as("Identity") identity: option<identity>,
-@as("ConnectedAt") connectedAt: option<__timestampIso8601>
+  @as("Identity") identity: option<identity>,
+  @as("ConnectedAt") connectedAt: option<__timestampIso8601>
 }
   @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetConnectionCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";

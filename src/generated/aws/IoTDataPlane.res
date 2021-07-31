@@ -5,11 +5,14 @@ httpStatusCode: option<float>,
   cfId: option<string>,
   attempts: option<int>,
   totalRetryDelay: option<int>
-};
-type string_ = string
-type boolean_ = bool
-type integer_ = int
-type long = float
+}
+type awsServiceClient;
+@module("@aws-sdk/client-iotdata") @new external createClient: unit => awsServiceClient = "IoTDataPlaneClient";
+type baseString = string
+type baseBoolean = bool
+type baseInteger = int
+type baseTimestamp = Js.Date.t;
+type baseLong = float
 type errorMessage = string
 type topic = string
 type timestamp_ = float
@@ -21,14 +24,13 @@ type pageSize = int
 type nextToken = string
 type jsonDocument = NodeJs.Buffer.t
 type namedShadowList = array<shadowName>
-type awsServiceClient;
-@module("@aws-sdk/client-iotdata") @new external createClient: unit => awsServiceClient = "IoTDataPlaneClient";
+
 module UpdateThingShadow = {
   type t;
   type request = {
 payload: jsonDocument,
-shadowName: option<shadowName>,
-thingName: thingName
+  shadowName: option<shadowName>,
+  thingName: thingName
 }
   type response = {
 payload: option<jsonDocument>
@@ -41,8 +43,8 @@ module Publish = {
   type t;
   type request = {
 payload: option<payload>,
-qos: option<qos>,
-topic: topic
+  qos: option<qos>,
+  topic: topic
 }
   
   @module("@aws-sdk/client-iotdata") @new external new_: (request) => t = "PublishCommand";
@@ -53,7 +55,7 @@ module GetThingShadow = {
   type t;
   type request = {
 shadowName: option<shadowName>,
-thingName: thingName
+  thingName: thingName
 }
   type response = {
 payload: option<jsonDocument>
@@ -66,7 +68,7 @@ module DeleteThingShadow = {
   type t;
   type request = {
 shadowName: option<shadowName>,
-thingName: thingName
+  thingName: thingName
 }
   type response = {
 payload: jsonDocument
@@ -79,13 +81,13 @@ module ListNamedShadowsForThing = {
   type t;
   type request = {
 pageSize: option<pageSize>,
-nextToken: option<nextToken>,
-thingName: thingName
+  nextToken: option<nextToken>,
+  thingName: thingName
 }
   type response = {
 @as("timestamp") timestamp_: option<timestamp_>,
-nextToken: option<nextToken>,
-results: option<namedShadowList>
+  nextToken: option<nextToken>,
+  results: option<namedShadowList>
 }
   @module("@aws-sdk/client-iotdata") @new external new_: (request) => t = "ListNamedShadowsForThingCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";

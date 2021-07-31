@@ -5,12 +5,14 @@ httpStatusCode: option<float>,
   cfId: option<string>,
   attempts: option<int>,
   totalRetryDelay: option<int>
-};
-type string_ = string
-type boolean_ = bool
-type integer_ = int
-type timestamp_ = Js.Date.t;
-type long = float
+}
+type awsServiceClient;
+@module("@aws-sdk/client-amplify") @new external createClient: unit => awsServiceClient = "AmplifyClient";
+type baseString = string
+type baseBoolean = bool
+type baseInteger = int
+type baseTimestamp = Js.Date.t;
+type baseLong = float
 type webhookUrl = string
 type webhookId = string
 type webhookArn = string
@@ -30,7 +32,7 @@ type stepName = string
 type statusReason = string
 type status = string
 type startTime = Js.Date.t;
-type stage = [@as("PULL_REQUEST") #PULLREQUEST | @as("EXPERIMENTAL") #EXPERIMENTAL | @as("DEVELOPMENT") #DEVELOPMENT | @as("BETA") #BETA | @as("PRODUCTION") #PRODUCTION]
+type stage = [@as("PULL_REQUEST") #PULL_REQUEST | @as("EXPERIMENTAL") #EXPERIMENTAL | @as("DEVELOPMENT") #DEVELOPMENT | @as("BETA") #BETA | @as("PRODUCTION") #PRODUCTION]
 type stackName = string
 type sourceUrl = string
 type source = string
@@ -46,7 +48,7 @@ type maxResults = int
 type md5Hash = string
 type logUrl = string
 type lastDeployTime = Js.Date.t;
-type jobType = [@as("WEB_HOOK") #WEBHOOK | @as("MANUAL") #MANUAL | @as("RETRY") #RETRY | @as("RELEASE") #RELEASE]
+type jobType = [@as("WEB_HOOK") #WEB_HOOK | @as("MANUAL") #MANUAL | @as("RETRY") #RETRY | @as("RELEASE") #RELEASE]
 type jobStatus = [@as("CANCELLED") #CANCELLED | @as("CANCELLING") #CANCELLING | @as("SUCCEED") #SUCCEED | @as("FAILED") #FAILED | @as("RUNNING") #RUNNING | @as("PROVISIONING") #PROVISIONING | @as("PENDING") #PENDING]
 type jobReason = string
 type jobId = string
@@ -67,7 +69,7 @@ type enableBasicAuth = bool
 type enableAutoSubDomain = bool
 type enableAutoBuild = bool
 type enableAutoBranchCreation = bool
-type domainStatus = [@as("UPDATING") #UPDATING | @as("REQUESTING_CERTIFICATE") #REQUESTINGCERTIFICATE | @as("CREATING") #CREATING | @as("FAILED") #FAILED | @as("PENDING_DEPLOYMENT") #PENDINGDEPLOYMENT | @as("AVAILABLE") #AVAILABLE | @as("IN_PROGRESS") #INPROGRESS | @as("PENDING_VERIFICATION") #PENDINGVERIFICATION]
+type domainStatus = [@as("UPDATING") #UPDATING | @as("REQUESTING_CERTIFICATE") #REQUESTING_CERTIFICATE | @as("CREATING") #CREATING | @as("FAILED") #FAILED | @as("PENDING_DEPLOYMENT") #PENDING_DEPLOYMENT | @as("AVAILABLE") #AVAILABLE | @as("IN_PROGRESS") #IN_PROGRESS | @as("PENDING_VERIFICATION") #PENDING_VERIFICATION]
 type domainPrefix = string
 type domainName = string
 type domainAssociationArn = string
@@ -105,125 +107,125 @@ type activeJobId = string
 type accessToken = string
 type webhook = {
 updateTime: updateTime,
-createTime: createTime,
-description: description,
-branchName: branchName,
-webhookUrl: webhookUrl,
-webhookId: webhookId,
-webhookArn: webhookArn
+  createTime: createTime,
+  description: description,
+  branchName: branchName,
+  webhookUrl: webhookUrl,
+  webhookId: webhookId,
+  webhookArn: webhookArn
 }
-type tagMap = Js.Dict.t< tagValue>
+type tagMap = Js.Dict.t<tagValue>
 type tagKeyList = array<tagKey>
 type subDomainSetting = {
 branchName: branchName,
-prefix: domainPrefix
+  prefix: domainPrefix
 }
-type screenshots = Js.Dict.t< thumbnailUrl>
+type screenshots = Js.Dict.t<thumbnailUrl>
 type productionBranch = {
 branchName: option<branchName>,
-thumbnailUrl: option<thumbnailUrl>,
-status: option<status>,
-lastDeployTime: option<lastDeployTime>
+  thumbnailUrl: option<thumbnailUrl>,
+  status: option<status>,
+  lastDeployTime: option<lastDeployTime>
 }
 type jobSummary = {
 jobType: jobType,
-endTime: option<endTime>,
-status: jobStatus,
-startTime: startTime,
-commitTime: commitTime,
-commitMessage: commitMessage,
-commitId: commitId,
-jobId: jobId,
-jobArn: jobArn
+  endTime: option<endTime>,
+  status: jobStatus,
+  startTime: startTime,
+  commitTime: commitTime,
+  commitMessage: commitMessage,
+  commitId: commitId,
+  jobId: jobId,
+  jobArn: jobArn
 }
-type fileUploadUrls = Js.Dict.t< uploadUrl>
-type fileMap = Js.Dict.t< md5Hash>
-type environmentVariables = Js.Dict.t< envValue>
+type fileUploadUrls = Js.Dict.t<uploadUrl>
+type fileMap = Js.Dict.t<md5Hash>
+type environmentVariables = Js.Dict.t<envValue>
 type customRule = {
 condition: option<condition>,
-status: option<status>,
-target: target,
-source: source
+  status: option<status>,
+  target: target,
+  source: source
 }
 type customDomains = array<customDomain>
 type backendEnvironment = {
 updateTime: updateTime,
-createTime: createTime,
-deploymentArtifacts: option<deploymentArtifacts>,
-stackName: option<stackName>,
-environmentName: environmentName,
-backendEnvironmentArn: backendEnvironmentArn
+  createTime: createTime,
+  deploymentArtifacts: option<deploymentArtifacts>,
+  stackName: option<stackName>,
+  environmentName: environmentName,
+  backendEnvironmentArn: backendEnvironmentArn
 }
 type autoSubDomainCreationPatterns = array<autoSubDomainCreationPattern>
 type autoBranchCreationPatterns = array<autoBranchCreationPattern>
 type associatedResources = array<associatedResource>
 type artifact = {
 artifactId: artifactId,
-artifactFileName: artifactFileName
+  artifactFileName: artifactFileName
 }
 type webhooks = array<webhook>
 type subDomainSettings = array<subDomainSetting>
 type subDomain = {
 dnsRecord: dnsrecord,
-verified: verified,
-subDomainSetting: subDomainSetting
+  verified: verified,
+  subDomainSetting: subDomainSetting
 }
 type step = {
 context: option<context>,
-statusReason: option<statusReason>,
-screenshots: option<screenshots>,
-testConfigUrl: option<testConfigUrl>,
-testArtifactsUrl: option<testArtifactsUrl>,
-artifactsUrl: option<artifactsUrl>,
-logUrl: option<logUrl>,
-endTime: endTime,
-status: jobStatus,
-startTime: startTime,
-stepName: stepName
+  statusReason: option<statusReason>,
+  screenshots: option<screenshots>,
+  testConfigUrl: option<testConfigUrl>,
+  testArtifactsUrl: option<testArtifactsUrl>,
+  artifactsUrl: option<artifactsUrl>,
+  logUrl: option<logUrl>,
+  endTime: endTime,
+  status: jobStatus,
+  startTime: startTime,
+  stepName: stepName
 }
 type jobSummaries = array<jobSummary>
 type customRules = array<customRule>
 type branch = {
 backendEnvironmentArn: option<backendEnvironmentArn>,
-sourceBranch: option<branchName>,
-destinationBranch: option<branchName>,
-pullRequestEnvironmentName: option<pullRequestEnvironmentName>,
-enablePullRequestPreview: enablePullRequestPreview,
-associatedResources: option<associatedResources>,
-ttl: ttl,
-buildSpec: option<buildSpec>,
-basicAuthCredentials: option<basicAuthCredentials>,
-thumbnailUrl: option<thumbnailUrl>,
-enablePerformanceMode: option<enablePerformanceMode>,
-enableBasicAuth: enableBasicAuth,
-totalNumberOfJobs: totalNumberOfJobs,
-activeJobId: activeJobId,
-framework: framework,
-customDomains: customDomains,
-enableAutoBuild: enableAutoBuild,
-environmentVariables: environmentVariables,
-updateTime: updateTime,
-createTime: createTime,
-enableNotification: enableNotification,
-displayName: displayName,
-stage: stage,
-tags: option<tagMap>,
-description: description,
-branchName: branchName,
-branchArn: branchArn
+  sourceBranch: option<branchName>,
+  destinationBranch: option<branchName>,
+  pullRequestEnvironmentName: option<pullRequestEnvironmentName>,
+  enablePullRequestPreview: enablePullRequestPreview,
+  associatedResources: option<associatedResources>,
+  ttl: ttl,
+  buildSpec: option<buildSpec>,
+  basicAuthCredentials: option<basicAuthCredentials>,
+  thumbnailUrl: option<thumbnailUrl>,
+  enablePerformanceMode: option<enablePerformanceMode>,
+  enableBasicAuth: enableBasicAuth,
+  totalNumberOfJobs: totalNumberOfJobs,
+  activeJobId: activeJobId,
+  framework: framework,
+  customDomains: customDomains,
+  enableAutoBuild: enableAutoBuild,
+  environmentVariables: environmentVariables,
+  updateTime: updateTime,
+  createTime: createTime,
+  enableNotification: enableNotification,
+  displayName: displayName,
+  stage: stage,
+  tags: option<tagMap>,
+  description: description,
+  branchName: branchName,
+  branchArn: branchArn
 }
 type backendEnvironments = array<backendEnvironment>
 type autoBranchCreationConfig = {
 pullRequestEnvironmentName: option<pullRequestEnvironmentName>,
-enablePullRequestPreview: option<enablePullRequestPreview>,
-buildSpec: option<buildSpec>,
-enablePerformanceMode: option<enablePerformanceMode>,
-enableBasicAuth: option<enableBasicAuth>,
-basicAuthCredentials: option<basicAuthCredentials>,
-environmentVariables: option<environmentVariables>,
-enableAutoBuild: option<enableAutoBuild>,
-framework: option<framework>,
-stage: option<stage>
+  enablePullRequestPreview: option<enablePullRequestPreview>,
+  buildSpec: option<buildSpec>,
+  enablePerformanceMode: option<enablePerformanceMode>,
+  enableBasicAuth: option<enableBasicAuth>,
+  basicAuthCredentials: option<basicAuthCredentials>,
+  environmentVariables: option<environmentVariables>,
+  enableAutoBuild: option<enableAutoBuild>,
+  framework: option<framework>,
+  stage: option<stage>
 }
 type artifacts = array<artifact>
 type subDomains = array<subDomain>
@@ -231,48 +233,47 @@ type steps = array<step>
 type branches = array<branch>
 type app = {
 autoBranchCreationConfig: option<autoBranchCreationConfig>,
-autoBranchCreationPatterns: option<autoBranchCreationPatterns>,
-enableAutoBranchCreation: option<enableAutoBranchCreation>,
-customHeaders: option<customHeaders>,
-buildSpec: option<buildSpec>,
-productionBranch: option<productionBranch>,
-customRules: option<customRules>,
-basicAuthCredentials: option<basicAuthCredentials>,
-enableBasicAuth: enableBasicAuth,
-enableBranchAutoDeletion: option<enableBranchAutoDeletion>,
-enableBranchAutoBuild: enableBranchAutoBuild,
-defaultDomain: defaultDomain,
-environmentVariables: environmentVariables,
-iamServiceRoleArn: option<serviceRoleArn>,
-updateTime: updateTime,
-createTime: createTime,
-platform: platform,
-repository: repository,
-description: description,
-tags: option<tagMap>,
-name: name,
-appArn: appArn,
-appId: appId
+  autoBranchCreationPatterns: option<autoBranchCreationPatterns>,
+  enableAutoBranchCreation: option<enableAutoBranchCreation>,
+  customHeaders: option<customHeaders>,
+  buildSpec: option<buildSpec>,
+  productionBranch: option<productionBranch>,
+  customRules: option<customRules>,
+  basicAuthCredentials: option<basicAuthCredentials>,
+  enableBasicAuth: enableBasicAuth,
+  enableBranchAutoDeletion: option<enableBranchAutoDeletion>,
+  enableBranchAutoBuild: enableBranchAutoBuild,
+  defaultDomain: defaultDomain,
+  environmentVariables: environmentVariables,
+  iamServiceRoleArn: option<serviceRoleArn>,
+  updateTime: updateTime,
+  createTime: createTime,
+  platform: platform,
+  repository: repository,
+  description: description,
+  tags: option<tagMap>,
+  name: name,
+  appArn: appArn,
+  appId: appId
 }
 type job = {
 steps: steps,
-summary: jobSummary
+  summary: jobSummary
 }
 type domainAssociation = {
 subDomains: subDomains,
-certificateVerificationDNSRecord: option<certificateVerificationDNSRecord>,
-statusReason: statusReason,
-domainStatus: domainStatus,
-autoSubDomainIAMRole: option<autoSubDomainIAMRole>,
-autoSubDomainCreationPatterns: option<autoSubDomainCreationPatterns>,
-enableAutoSubDomain: enableAutoSubDomain,
-domainName: domainName,
-domainAssociationArn: domainAssociationArn
+  certificateVerificationDNSRecord: option<certificateVerificationDNSRecord>,
+  statusReason: statusReason,
+  domainStatus: domainStatus,
+  autoSubDomainIAMRole: option<autoSubDomainIAMRole>,
+  autoSubDomainCreationPatterns: option<autoSubDomainCreationPatterns>,
+  enableAutoSubDomain: enableAutoSubDomain,
+  domainName: domainName,
+  domainAssociationArn: domainAssociationArn
 }
 type apps = array<app>
 type domainAssociations = array<domainAssociation>
-type awsServiceClient;
-@module("@aws-sdk/client-amplify") @new external createClient: unit => awsServiceClient = "AmplifyClient";
+
 module GetArtifactUrl = {
   type t;
   type request = {
@@ -280,7 +281,7 @@ artifactId: artifactId
 }
   type response = {
 artifactUrl: artifactUrl,
-artifactId: artifactId
+  artifactId: artifactId
 }
   @module("@aws-sdk/client-amplify") @new external new_: (request) => t = "GetArtifactUrlCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -290,9 +291,9 @@ module GenerateAccessLogs = {
   type t;
   type request = {
 appId: appId,
-domainName: domainName,
-endTime: option<endTime>,
-startTime: option<startTime>
+  domainName: domainName,
+  endTime: option<endTime>,
+  startTime: option<startTime>
 }
   type response = {
 logUrl: option<logUrl>
@@ -305,8 +306,8 @@ module UpdateWebhook = {
   type t;
   type request = {
 description: option<description>,
-branchName: option<branchName>,
-webhookId: webhookId
+  branchName: option<branchName>,
+  webhookId: webhookId
 }
   type response = {
 webhook: webhook
@@ -319,7 +320,7 @@ module UntagResource = {
   type t;
   type request = {
 tagKeys: tagKeyList,
-resourceArn: resourceArn
+  resourceArn: resourceArn
 }
   type response = unit
   @module("@aws-sdk/client-amplify") @new external new_: (request) => t = "UntagResourceCommand";
@@ -330,7 +331,7 @@ module TagResource = {
   type t;
   type request = {
 tags: tagMap,
-resourceArn: resourceArn
+  resourceArn: resourceArn
 }
   type response = unit
   @module("@aws-sdk/client-amplify") @new external new_: (request) => t = "TagResourceCommand";
@@ -341,8 +342,8 @@ module StopJob = {
   type t;
   type request = {
 jobId: jobId,
-branchName: branchName,
-appId: appId
+  branchName: branchName,
+  appId: appId
 }
   type response = {
 jobSummary: jobSummary
@@ -355,13 +356,13 @@ module StartJob = {
   type t;
   type request = {
 commitTime: option<commitTime>,
-commitMessage: option<commitMessage>,
-commitId: option<commitId>,
-jobReason: option<jobReason>,
-jobType: jobType,
-jobId: option<jobId>,
-branchName: branchName,
-appId: appId
+  commitMessage: option<commitMessage>,
+  commitId: option<commitId>,
+  jobReason: option<jobReason>,
+  jobType: jobType,
+  jobId: option<jobId>,
+  branchName: branchName,
+  appId: appId
 }
   type response = {
 jobSummary: jobSummary
@@ -374,9 +375,9 @@ module StartDeployment = {
   type t;
   type request = {
 sourceUrl: option<sourceUrl>,
-jobId: option<jobId>,
-branchName: branchName,
-appId: appId
+  jobId: option<jobId>,
+  branchName: branchName,
+  appId: appId
 }
   type response = {
 jobSummary: jobSummary
@@ -413,7 +414,7 @@ module GetBackendEnvironment = {
   type t;
   type request = {
 environmentName: environmentName,
-appId: appId
+  appId: appId
 }
   type response = {
 backendEnvironment: backendEnvironment
@@ -438,8 +439,8 @@ module DeleteJob = {
   type t;
   type request = {
 jobId: jobId,
-branchName: branchName,
-appId: appId
+  branchName: branchName,
+  appId: appId
 }
   type response = {
 jobSummary: jobSummary
@@ -452,7 +453,7 @@ module DeleteBackendEnvironment = {
   type t;
   type request = {
 environmentName: environmentName,
-appId: appId
+  appId: appId
 }
   type response = {
 backendEnvironment: backendEnvironment
@@ -465,8 +466,8 @@ module CreateWebhook = {
   type t;
   type request = {
 description: option<description>,
-branchName: branchName,
-appId: appId
+  branchName: branchName,
+  appId: appId
 }
   type response = {
 webhook: webhook
@@ -479,13 +480,13 @@ module CreateDeployment = {
   type t;
   type request = {
 fileMap: option<fileMap>,
-branchName: branchName,
-appId: appId
+  branchName: branchName,
+  appId: appId
 }
   type response = {
 zipUploadUrl: uploadUrl,
-fileUploadUrls: fileUploadUrls,
-jobId: option<jobId>
+  fileUploadUrls: fileUploadUrls,
+  jobId: option<jobId>
 }
   @module("@aws-sdk/client-amplify") @new external new_: (request) => t = "CreateDeploymentCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -495,9 +496,9 @@ module CreateBackendEnvironment = {
   type t;
   type request = {
 deploymentArtifacts: option<deploymentArtifacts>,
-stackName: option<stackName>,
-environmentName: environmentName,
-appId: appId
+  stackName: option<stackName>,
+  environmentName: environmentName,
+  appId: appId
 }
   type response = {
 backendEnvironment: backendEnvironment
@@ -510,22 +511,22 @@ module UpdateBranch = {
   type t;
   type request = {
 backendEnvironmentArn: option<backendEnvironmentArn>,
-pullRequestEnvironmentName: option<pullRequestEnvironmentName>,
-enablePullRequestPreview: option<enablePullRequestPreview>,
-displayName: option<displayName>,
-ttl: option<ttl>,
-buildSpec: option<buildSpec>,
-enablePerformanceMode: option<enablePerformanceMode>,
-enableBasicAuth: option<enableBasicAuth>,
-basicAuthCredentials: option<basicAuthCredentials>,
-environmentVariables: option<environmentVariables>,
-enableAutoBuild: option<enableAutoBuild>,
-enableNotification: option<enableNotification>,
-stage: option<stage>,
-framework: option<framework>,
-description: option<description>,
-branchName: branchName,
-appId: appId
+  pullRequestEnvironmentName: option<pullRequestEnvironmentName>,
+  enablePullRequestPreview: option<enablePullRequestPreview>,
+  displayName: option<displayName>,
+  ttl: option<ttl>,
+  buildSpec: option<buildSpec>,
+  enablePerformanceMode: option<enablePerformanceMode>,
+  enableBasicAuth: option<enableBasicAuth>,
+  basicAuthCredentials: option<basicAuthCredentials>,
+  environmentVariables: option<environmentVariables>,
+  enableAutoBuild: option<enableAutoBuild>,
+  enableNotification: option<enableNotification>,
+  stage: option<stage>,
+  framework: option<framework>,
+  description: option<description>,
+  branchName: branchName,
+  appId: appId
 }
   type response = {
 branch: branch
@@ -538,12 +539,12 @@ module ListWebhooks = {
   type t;
   type request = {
 maxResults: option<maxResults>,
-nextToken: option<nextToken>,
-appId: appId
+  nextToken: option<nextToken>,
+  appId: appId
 }
   type response = {
 nextToken: option<nextToken>,
-webhooks: webhooks
+  webhooks: webhooks
 }
   @module("@aws-sdk/client-amplify") @new external new_: (request) => t = "ListWebhooksCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -553,13 +554,13 @@ module ListJobs = {
   type t;
   type request = {
 maxResults: option<maxResults>,
-nextToken: option<nextToken>,
-branchName: branchName,
-appId: appId
+  nextToken: option<nextToken>,
+  branchName: branchName,
+  appId: appId
 }
   type response = {
 nextToken: option<nextToken>,
-jobSummaries: jobSummaries
+  jobSummaries: jobSummaries
 }
   @module("@aws-sdk/client-amplify") @new external new_: (request) => t = "ListJobsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -569,13 +570,13 @@ module ListBackendEnvironments = {
   type t;
   type request = {
 maxResults: option<maxResults>,
-nextToken: option<nextToken>,
-environmentName: option<environmentName>,
-appId: appId
+  nextToken: option<nextToken>,
+  environmentName: option<environmentName>,
+  appId: appId
 }
   type response = {
 nextToken: option<nextToken>,
-backendEnvironments: backendEnvironments
+  backendEnvironments: backendEnvironments
 }
   @module("@aws-sdk/client-amplify") @new external new_: (request) => t = "ListBackendEnvironmentsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -585,14 +586,14 @@ module ListArtifacts = {
   type t;
   type request = {
 maxResults: option<maxResults>,
-nextToken: option<nextToken>,
-jobId: jobId,
-branchName: branchName,
-appId: appId
+  nextToken: option<nextToken>,
+  jobId: jobId,
+  branchName: branchName,
+  appId: appId
 }
   type response = {
 nextToken: option<nextToken>,
-artifacts: artifacts
+  artifacts: artifacts
 }
   @module("@aws-sdk/client-amplify") @new external new_: (request) => t = "ListArtifactsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -602,7 +603,7 @@ module GetBranch = {
   type t;
   type request = {
 branchName: branchName,
-appId: appId
+  appId: appId
 }
   type response = {
 branch: branch
@@ -615,7 +616,7 @@ module DeleteBranch = {
   type t;
   type request = {
 branchName: branchName,
-appId: appId
+  appId: appId
 }
   type response = {
 branch: branch
@@ -628,23 +629,23 @@ module CreateBranch = {
   type t;
   type request = {
 backendEnvironmentArn: option<backendEnvironmentArn>,
-pullRequestEnvironmentName: option<pullRequestEnvironmentName>,
-enablePullRequestPreview: option<enablePullRequestPreview>,
-displayName: option<displayName>,
-ttl: option<ttl>,
-buildSpec: option<buildSpec>,
-tags: option<tagMap>,
-enablePerformanceMode: option<enablePerformanceMode>,
-enableBasicAuth: option<enableBasicAuth>,
-basicAuthCredentials: option<basicAuthCredentials>,
-environmentVariables: option<environmentVariables>,
-enableAutoBuild: option<enableAutoBuild>,
-enableNotification: option<enableNotification>,
-framework: option<framework>,
-stage: option<stage>,
-description: option<description>,
-branchName: branchName,
-appId: appId
+  pullRequestEnvironmentName: option<pullRequestEnvironmentName>,
+  enablePullRequestPreview: option<enablePullRequestPreview>,
+  displayName: option<displayName>,
+  ttl: option<ttl>,
+  buildSpec: option<buildSpec>,
+  tags: option<tagMap>,
+  enablePerformanceMode: option<enablePerformanceMode>,
+  enableBasicAuth: option<enableBasicAuth>,
+  basicAuthCredentials: option<basicAuthCredentials>,
+  environmentVariables: option<environmentVariables>,
+  enableAutoBuild: option<enableAutoBuild>,
+  enableNotification: option<enableNotification>,
+  framework: option<framework>,
+  stage: option<stage>,
+  description: option<description>,
+  branchName: branchName,
+  appId: appId
 }
   type response = {
 branch: branch
@@ -657,24 +658,24 @@ module UpdateApp = {
   type t;
   type request = {
 accessToken: option<accessToken>,
-oauthToken: option<oauthToken>,
-repository: option<repository>,
-autoBranchCreationConfig: option<autoBranchCreationConfig>,
-autoBranchCreationPatterns: option<autoBranchCreationPatterns>,
-enableAutoBranchCreation: option<enableAutoBranchCreation>,
-customHeaders: option<customHeaders>,
-buildSpec: option<buildSpec>,
-customRules: option<customRules>,
-basicAuthCredentials: option<basicAuthCredentials>,
-enableBasicAuth: option<enableBasicAuth>,
-enableBranchAutoDeletion: option<enableBranchAutoDeletion>,
-enableBranchAutoBuild: option<enableAutoBuild>,
-environmentVariables: option<environmentVariables>,
-iamServiceRoleArn: option<serviceRoleArn>,
-platform: option<platform>,
-description: option<description>,
-name: option<name>,
-appId: appId
+  oauthToken: option<oauthToken>,
+  repository: option<repository>,
+  autoBranchCreationConfig: option<autoBranchCreationConfig>,
+  autoBranchCreationPatterns: option<autoBranchCreationPatterns>,
+  enableAutoBranchCreation: option<enableAutoBranchCreation>,
+  customHeaders: option<customHeaders>,
+  buildSpec: option<buildSpec>,
+  customRules: option<customRules>,
+  basicAuthCredentials: option<basicAuthCredentials>,
+  enableBasicAuth: option<enableBasicAuth>,
+  enableBranchAutoDeletion: option<enableBranchAutoDeletion>,
+  enableBranchAutoBuild: option<enableAutoBuild>,
+  environmentVariables: option<environmentVariables>,
+  iamServiceRoleArn: option<serviceRoleArn>,
+  platform: option<platform>,
+  description: option<description>,
+  name: option<name>,
+  appId: appId
 }
   type response = {
 app: app
@@ -687,12 +688,12 @@ module ListBranches = {
   type t;
   type request = {
 maxResults: option<maxResults>,
-nextToken: option<nextToken>,
-appId: appId
+  nextToken: option<nextToken>,
+  appId: appId
 }
   type response = {
 nextToken: option<nextToken>,
-branches: branches
+  branches: branches
 }
   @module("@aws-sdk/client-amplify") @new external new_: (request) => t = "ListBranchesCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -726,24 +727,24 @@ module CreateApp = {
   type t;
   type request = {
 autoBranchCreationConfig: option<autoBranchCreationConfig>,
-autoBranchCreationPatterns: option<autoBranchCreationPatterns>,
-enableAutoBranchCreation: option<enableAutoBranchCreation>,
-customHeaders: option<customHeaders>,
-buildSpec: option<buildSpec>,
-tags: option<tagMap>,
-customRules: option<customRules>,
-basicAuthCredentials: option<basicAuthCredentials>,
-enableBasicAuth: option<enableBasicAuth>,
-enableBranchAutoDeletion: option<enableBranchAutoDeletion>,
-enableBranchAutoBuild: option<enableBranchAutoBuild>,
-environmentVariables: option<environmentVariables>,
-accessToken: option<accessToken>,
-oauthToken: option<oauthToken>,
-iamServiceRoleArn: option<serviceRoleArn>,
-platform: option<platform>,
-repository: option<repository>,
-description: option<description>,
-name: name
+  autoBranchCreationPatterns: option<autoBranchCreationPatterns>,
+  enableAutoBranchCreation: option<enableAutoBranchCreation>,
+  customHeaders: option<customHeaders>,
+  buildSpec: option<buildSpec>,
+  tags: option<tagMap>,
+  customRules: option<customRules>,
+  basicAuthCredentials: option<basicAuthCredentials>,
+  enableBasicAuth: option<enableBasicAuth>,
+  enableBranchAutoDeletion: option<enableBranchAutoDeletion>,
+  enableBranchAutoBuild: option<enableBranchAutoBuild>,
+  environmentVariables: option<environmentVariables>,
+  accessToken: option<accessToken>,
+  oauthToken: option<oauthToken>,
+  iamServiceRoleArn: option<serviceRoleArn>,
+  platform: option<platform>,
+  repository: option<repository>,
+  description: option<description>,
+  name: name
 }
   type response = {
 app: app
@@ -756,11 +757,11 @@ module UpdateDomainAssociation = {
   type t;
   type request = {
 autoSubDomainIAMRole: option<autoSubDomainIAMRole>,
-autoSubDomainCreationPatterns: option<autoSubDomainCreationPatterns>,
-subDomainSettings: subDomainSettings,
-enableAutoSubDomain: option<enableAutoSubDomain>,
-domainName: domainName,
-appId: appId
+  autoSubDomainCreationPatterns: option<autoSubDomainCreationPatterns>,
+  subDomainSettings: subDomainSettings,
+  enableAutoSubDomain: option<enableAutoSubDomain>,
+  domainName: domainName,
+  appId: appId
 }
   type response = {
 domainAssociation: domainAssociation
@@ -773,11 +774,11 @@ module ListApps = {
   type t;
   type request = {
 maxResults: option<maxResults>,
-nextToken: option<nextToken>
+  nextToken: option<nextToken>
 }
   type response = {
 nextToken: option<nextToken>,
-apps: apps
+  apps: apps
 }
   @module("@aws-sdk/client-amplify") @new external new_: (request) => t = "ListAppsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -787,8 +788,8 @@ module GetJob = {
   type t;
   type request = {
 jobId: jobId,
-branchName: branchName,
-appId: appId
+  branchName: branchName,
+  appId: appId
 }
   type response = {
 job: job
@@ -801,7 +802,7 @@ module GetDomainAssociation = {
   type t;
   type request = {
 domainName: domainName,
-appId: appId
+  appId: appId
 }
   type response = {
 domainAssociation: domainAssociation
@@ -814,7 +815,7 @@ module DeleteDomainAssociation = {
   type t;
   type request = {
 domainName: domainName,
-appId: appId
+  appId: appId
 }
   type response = {
 domainAssociation: domainAssociation
@@ -827,11 +828,11 @@ module CreateDomainAssociation = {
   type t;
   type request = {
 autoSubDomainIAMRole: option<autoSubDomainIAMRole>,
-autoSubDomainCreationPatterns: option<autoSubDomainCreationPatterns>,
-subDomainSettings: subDomainSettings,
-enableAutoSubDomain: option<enableAutoSubDomain>,
-domainName: domainName,
-appId: appId
+  autoSubDomainCreationPatterns: option<autoSubDomainCreationPatterns>,
+  subDomainSettings: subDomainSettings,
+  enableAutoSubDomain: option<enableAutoSubDomain>,
+  domainName: domainName,
+  appId: appId
 }
   type response = {
 domainAssociation: domainAssociation
@@ -844,12 +845,12 @@ module ListDomainAssociations = {
   type t;
   type request = {
 maxResults: option<maxResults>,
-nextToken: option<nextToken>,
-appId: appId
+  nextToken: option<nextToken>,
+  appId: appId
 }
   type response = {
 nextToken: option<nextToken>,
-domainAssociations: domainAssociations
+  domainAssociations: domainAssociations
 }
   @module("@aws-sdk/client-amplify") @new external new_: (request) => t = "ListDomainAssociationsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";

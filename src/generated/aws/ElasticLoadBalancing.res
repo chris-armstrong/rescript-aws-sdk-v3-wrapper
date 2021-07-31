@@ -5,12 +5,14 @@ httpStatusCode: option<float>,
   cfId: option<string>,
   attempts: option<int>,
   totalRetryDelay: option<int>
-};
-type string_ = string
-type boolean_ = bool
-type integer_ = int
-type timestamp_ = Js.Date.t;
-type long = float
+}
+type awsServiceClient;
+@module("@aws-sdk/client-elasticloadbalancing") @new external createClient: unit => awsServiceClient = "ElasticLoadBalancingClient";
+type baseString = string
+type baseBoolean = bool
+type baseInteger = int
+type baseTimestamp = Js.Date.t;
+type baseLong = float
 type vpcid = string
 type unhealthyThreshold = int
 type tagValue = string
@@ -66,12 +68,12 @@ type tagKeyOnly = {
 }
 type tag = {
 @as("Value") value: option<tagValue>,
-@as("Key") key: tagKey
+  @as("Key") key: tagKey
 }
 type subnets = array<subnetId>
 type sourceSecurityGroup = {
 @as("GroupName") groupName: option<securityGroupName>,
-@as("OwnerAlias") ownerAlias: option<securityGroupOwnerAlias>
+  @as("OwnerAlias") ownerAlias: option<securityGroupOwnerAlias>
 }
 type securityGroups = array<securityGroupId>
 type ports = array<accessPointPort>
@@ -79,51 +81,51 @@ type policyTypeNames = array<policyTypeName>
 type policyNames = array<policyName>
 type policyAttributeTypeDescription = {
 @as("Cardinality") cardinality: option<cardinality>,
-@as("DefaultValue") defaultValue: option<defaultValue>,
-@as("Description") description: option<description>,
-@as("AttributeType") attributeType: option<attributeType>,
-@as("AttributeName") attributeName: option<attributeName>
+  @as("DefaultValue") defaultValue: option<defaultValue>,
+  @as("Description") description: option<description>,
+  @as("AttributeType") attributeType: option<attributeType>,
+  @as("AttributeName") attributeName: option<attributeName>
 }
 type policyAttributeDescription = {
 @as("AttributeValue") attributeValue: option<attributeValue>,
-@as("AttributeName") attributeName: option<attributeName>
+  @as("AttributeName") attributeName: option<attributeName>
 }
 type policyAttribute = {
 @as("AttributeValue") attributeValue: option<attributeValue>,
-@as("AttributeName") attributeName: option<attributeName>
+  @as("AttributeName") attributeName: option<attributeName>
 }
 type loadBalancerNamesMax20 = array<accessPointName>
 type loadBalancerNames = array<accessPointName>
 type listener = {
 @as("SSLCertificateId") sslcertificateId: option<sslcertificateId>,
-@as("InstancePort") instancePort: instancePort,
-@as("InstanceProtocol") instanceProtocol: option<protocol>,
-@as("LoadBalancerPort") loadBalancerPort: accessPointPort,
-@as("Protocol") protocol: protocol
+  @as("InstancePort") instancePort: instancePort,
+  @as("InstanceProtocol") instanceProtocol: option<protocol>,
+  @as("LoadBalancerPort") loadBalancerPort: accessPointPort,
+  @as("Protocol") protocol: protocol
 }
 type limit = {
 @as("Max") max: option<max>,
-@as("Name") name: option<name>
+  @as("Name") name: option<name>
 }
 type lbcookieStickinessPolicy = {
 @as("CookieExpirationPeriod") cookieExpirationPeriod: option<cookieExpirationPeriod>,
-@as("PolicyName") policyName: option<policyName>
+  @as("PolicyName") policyName: option<policyName>
 }
 type instanceState = {
 @as("Description") description: option<description>,
-@as("ReasonCode") reasonCode: option<reasonCode>,
-@as("State") state: option<state>,
-@as("InstanceId") instanceId: option<instanceId>
+  @as("ReasonCode") reasonCode: option<reasonCode>,
+  @as("State") state: option<state>,
+  @as("InstanceId") instanceId: option<instanceId>
 }
 type instance = {
 @as("InstanceId") instanceId: option<instanceId>
 }
 type healthCheck = {
 @as("HealthyThreshold") healthyThreshold: healthyThreshold,
-@as("UnhealthyThreshold") unhealthyThreshold: unhealthyThreshold,
-@as("Timeout") timeout: healthCheckTimeout,
-@as("Interval") interval: healthCheckInterval,
-@as("Target") target: healthCheckTarget
+  @as("UnhealthyThreshold") unhealthyThreshold: unhealthyThreshold,
+  @as("Timeout") timeout: healthCheckTimeout,
+  @as("Interval") interval: healthCheckInterval,
+  @as("Target") target: healthCheckTarget
 }
 type crossZoneLoadBalancing = {
 @as("Enabled") enabled: crossZoneLoadBalancingEnabled
@@ -133,22 +135,22 @@ type connectionSettings = {
 }
 type connectionDraining = {
 @as("Timeout") timeout: option<connectionDrainingTimeout>,
-@as("Enabled") enabled: connectionDrainingEnabled
+  @as("Enabled") enabled: connectionDrainingEnabled
 }
 type availabilityZones = array<availabilityZone>
 type appCookieStickinessPolicy = {
 @as("CookieName") cookieName: option<cookieName>,
-@as("PolicyName") policyName: option<policyName>
+  @as("PolicyName") policyName: option<policyName>
 }
 type additionalAttribute = {
 @as("Value") value: option<additionalAttributeValue>,
-@as("Key") key: option<additionalAttributeKey>
+  @as("Key") key: option<additionalAttributeKey>
 }
 type accessLog = {
 @as("S3BucketPrefix") s3BucketPrefix: option<accessLogPrefix>,
-@as("EmitInterval") emitInterval: option<accessLogInterval>,
-@as("S3BucketName") s3BucketName: option<s3BucketName>,
-@as("Enabled") enabled: accessLogEnabled
+  @as("EmitInterval") emitInterval: option<accessLogInterval>,
+  @as("S3BucketName") s3BucketName: option<s3BucketName>,
+  @as("Enabled") enabled: accessLogEnabled
 }
 type tagList_ = array<tag>
 type tagKeyList = array<tagKeyOnly>
@@ -158,7 +160,7 @@ type policyAttributeDescriptions = array<policyAttributeDescription>
 type listeners = array<listener>
 type listenerDescription = {
 @as("PolicyNames") policyNames: option<policyNames>,
-@as("Listener") listener: option<listener>
+  @as("Listener") listener: option<listener>
 }
 type limits = array<limit>
 type lbcookieStickinessPolicies = array<lbcookieStickinessPolicy>
@@ -166,35 +168,35 @@ type instances = array<instance>
 type instanceStates = array<instanceState>
 type backendServerDescription = {
 @as("PolicyNames") policyNames: option<policyNames>,
-@as("InstancePort") instancePort: option<instancePort>
+  @as("InstancePort") instancePort: option<instancePort>
 }
 type appCookieStickinessPolicies = array<appCookieStickinessPolicy>
 type additionalAttributes = array<additionalAttribute>
 type tagDescription = {
 @as("Tags") tags: option<tagList_>,
-@as("LoadBalancerName") loadBalancerName: option<accessPointName>
+  @as("LoadBalancerName") loadBalancerName: option<accessPointName>
 }
 type policyTypeDescription = {
 @as("PolicyAttributeTypeDescriptions") policyAttributeTypeDescriptions: option<policyAttributeTypeDescriptions>,
-@as("Description") description: option<description>,
-@as("PolicyTypeName") policyTypeName: option<policyTypeName>
+  @as("Description") description: option<description>,
+  @as("PolicyTypeName") policyTypeName: option<policyTypeName>
 }
 type policyDescription = {
 @as("PolicyAttributeDescriptions") policyAttributeDescriptions: option<policyAttributeDescriptions>,
-@as("PolicyTypeName") policyTypeName: option<policyTypeName>,
-@as("PolicyName") policyName: option<policyName>
+  @as("PolicyTypeName") policyTypeName: option<policyTypeName>,
+  @as("PolicyName") policyName: option<policyName>
 }
 type policies = {
 @as("OtherPolicies") otherPolicies: option<policyNames>,
-@as("LBCookieStickinessPolicies") lbcookieStickinessPolicies: option<lbcookieStickinessPolicies>,
-@as("AppCookieStickinessPolicies") appCookieStickinessPolicies: option<appCookieStickinessPolicies>
+  @as("LBCookieStickinessPolicies") lbcookieStickinessPolicies: option<lbcookieStickinessPolicies>,
+  @as("AppCookieStickinessPolicies") appCookieStickinessPolicies: option<appCookieStickinessPolicies>
 }
 type loadBalancerAttributes = {
 @as("AdditionalAttributes") additionalAttributes: option<additionalAttributes>,
-@as("ConnectionSettings") connectionSettings: option<connectionSettings>,
-@as("ConnectionDraining") connectionDraining: option<connectionDraining>,
-@as("AccessLog") accessLog: option<accessLog>,
-@as("CrossZoneLoadBalancing") crossZoneLoadBalancing: option<crossZoneLoadBalancing>
+  @as("ConnectionSettings") connectionSettings: option<connectionSettings>,
+  @as("ConnectionDraining") connectionDraining: option<connectionDraining>,
+  @as("AccessLog") accessLog: option<accessLog>,
+  @as("CrossZoneLoadBalancing") crossZoneLoadBalancing: option<crossZoneLoadBalancing>
 }
 type listenerDescriptions = array<listenerDescription>
 type backendServerDescriptions = array<backendServerDescription>
@@ -203,31 +205,30 @@ type policyTypeDescriptions = array<policyTypeDescription>
 type policyDescriptions = array<policyDescription>
 type loadBalancerDescription = {
 @as("Scheme") scheme: option<loadBalancerScheme>,
-@as("CreatedTime") createdTime: option<createdTime>,
-@as("SecurityGroups") securityGroups: option<securityGroups>,
-@as("SourceSecurityGroup") sourceSecurityGroup: option<sourceSecurityGroup>,
-@as("HealthCheck") healthCheck: option<healthCheck>,
-@as("Instances") instances: option<instances>,
-@as("VPCId") vpcid: option<vpcid>,
-@as("Subnets") subnets: option<subnets>,
-@as("AvailabilityZones") availabilityZones: option<availabilityZones>,
-@as("BackendServerDescriptions") backendServerDescriptions: option<backendServerDescriptions>,
-@as("Policies") policies: option<policies>,
-@as("ListenerDescriptions") listenerDescriptions: option<listenerDescriptions>,
-@as("CanonicalHostedZoneNameID") canonicalHostedZoneNameID: option<dnsname>,
-@as("CanonicalHostedZoneName") canonicalHostedZoneName: option<dnsname>,
-@as("DNSName") dnsname: option<dnsname>,
-@as("LoadBalancerName") loadBalancerName: option<accessPointName>
+  @as("CreatedTime") createdTime: option<createdTime>,
+  @as("SecurityGroups") securityGroups: option<securityGroups>,
+  @as("SourceSecurityGroup") sourceSecurityGroup: option<sourceSecurityGroup>,
+  @as("HealthCheck") healthCheck: option<healthCheck>,
+  @as("Instances") instances: option<instances>,
+  @as("VPCId") vpcid: option<vpcid>,
+  @as("Subnets") subnets: option<subnets>,
+  @as("AvailabilityZones") availabilityZones: option<availabilityZones>,
+  @as("BackendServerDescriptions") backendServerDescriptions: option<backendServerDescriptions>,
+  @as("Policies") policies: option<policies>,
+  @as("ListenerDescriptions") listenerDescriptions: option<listenerDescriptions>,
+  @as("CanonicalHostedZoneNameID") canonicalHostedZoneNameID: option<dnsname>,
+  @as("CanonicalHostedZoneName") canonicalHostedZoneName: option<dnsname>,
+  @as("DNSName") dnsname: option<dnsname>,
+  @as("LoadBalancerName") loadBalancerName: option<accessPointName>
 }
 type loadBalancerDescriptions = array<loadBalancerDescription>
-type awsServiceClient;
-@module("@aws-sdk/client-elasticloadbalancing") @new external createClient: unit => awsServiceClient = "ElasticLoadBalancingClient";
+
 module SetLoadBalancerListenerSSLCertificate = {
   type t;
   type request = {
 @as("SSLCertificateId") sslcertificateId: sslcertificateId,
-@as("LoadBalancerPort") loadBalancerPort: accessPointPort,
-@as("LoadBalancerName") loadBalancerName: accessPointName
+  @as("LoadBalancerPort") loadBalancerPort: accessPointPort,
+  @as("LoadBalancerName") loadBalancerName: accessPointName
 }
   type response = unit
   @module("@aws-sdk/client-elasticloadbalancing") @new external new_: (request) => t = "SetLoadBalancerListenerSSLCertificateCommand";
@@ -238,7 +239,7 @@ module DeleteLoadBalancerPolicy = {
   type t;
   type request = {
 @as("PolicyName") policyName: policyName,
-@as("LoadBalancerName") loadBalancerName: accessPointName
+  @as("LoadBalancerName") loadBalancerName: accessPointName
 }
   type response = unit
   @module("@aws-sdk/client-elasticloadbalancing") @new external new_: (request) => t = "DeleteLoadBalancerPolicyCommand";
@@ -259,8 +260,8 @@ module CreateLBCookieStickinessPolicy = {
   type t;
   type request = {
 @as("CookieExpirationPeriod") cookieExpirationPeriod: option<cookieExpirationPeriod>,
-@as("PolicyName") policyName: policyName,
-@as("LoadBalancerName") loadBalancerName: accessPointName
+  @as("PolicyName") policyName: policyName,
+  @as("LoadBalancerName") loadBalancerName: accessPointName
 }
   type response = unit
   @module("@aws-sdk/client-elasticloadbalancing") @new external new_: (request) => t = "CreateLBCookieStickinessPolicyCommand";
@@ -271,8 +272,8 @@ module CreateAppCookieStickinessPolicy = {
   type t;
   type request = {
 @as("CookieName") cookieName: cookieName,
-@as("PolicyName") policyName: policyName,
-@as("LoadBalancerName") loadBalancerName: accessPointName
+  @as("PolicyName") policyName: policyName,
+  @as("LoadBalancerName") loadBalancerName: accessPointName
 }
   type response = unit
   @module("@aws-sdk/client-elasticloadbalancing") @new external new_: (request) => t = "CreateAppCookieStickinessPolicyCommand";
@@ -283,8 +284,8 @@ module SetLoadBalancerPoliciesOfListener = {
   type t;
   type request = {
 @as("PolicyNames") policyNames: policyNames,
-@as("LoadBalancerPort") loadBalancerPort: accessPointPort,
-@as("LoadBalancerName") loadBalancerName: accessPointName
+  @as("LoadBalancerPort") loadBalancerPort: accessPointPort,
+  @as("LoadBalancerName") loadBalancerName: accessPointName
 }
   type response = unit
   @module("@aws-sdk/client-elasticloadbalancing") @new external new_: (request) => t = "SetLoadBalancerPoliciesOfListenerCommand";
@@ -295,8 +296,8 @@ module SetLoadBalancerPoliciesForBackendServer = {
   type t;
   type request = {
 @as("PolicyNames") policyNames: policyNames,
-@as("InstancePort") instancePort: endPointPort,
-@as("LoadBalancerName") loadBalancerName: accessPointName
+  @as("InstancePort") instancePort: endPointPort,
+  @as("LoadBalancerName") loadBalancerName: accessPointName
 }
   type response = unit
   @module("@aws-sdk/client-elasticloadbalancing") @new external new_: (request) => t = "SetLoadBalancerPoliciesForBackendServerCommand";
@@ -307,7 +308,7 @@ module EnableAvailabilityZonesForLoadBalancer = {
   type t;
   type request = {
 @as("AvailabilityZones") availabilityZones: availabilityZones,
-@as("LoadBalancerName") loadBalancerName: accessPointName
+  @as("LoadBalancerName") loadBalancerName: accessPointName
 }
   type response = {
 @as("AvailabilityZones") availabilityZones: option<availabilityZones>
@@ -320,7 +321,7 @@ module DisableAvailabilityZonesForLoadBalancer = {
   type t;
   type request = {
 @as("AvailabilityZones") availabilityZones: availabilityZones,
-@as("LoadBalancerName") loadBalancerName: accessPointName
+  @as("LoadBalancerName") loadBalancerName: accessPointName
 }
   type response = {
 @as("AvailabilityZones") availabilityZones: option<availabilityZones>
@@ -333,7 +334,7 @@ module DetachLoadBalancerFromSubnets = {
   type t;
   type request = {
 @as("Subnets") subnets: subnets,
-@as("LoadBalancerName") loadBalancerName: accessPointName
+  @as("LoadBalancerName") loadBalancerName: accessPointName
 }
   type response = {
 @as("Subnets") subnets: option<subnets>
@@ -346,7 +347,7 @@ module DeleteLoadBalancerListeners = {
   type t;
   type request = {
 @as("LoadBalancerPorts") loadBalancerPorts: ports,
-@as("LoadBalancerName") loadBalancerName: accessPointName
+  @as("LoadBalancerName") loadBalancerName: accessPointName
 }
   type response = unit
   @module("@aws-sdk/client-elasticloadbalancing") @new external new_: (request) => t = "DeleteLoadBalancerListenersCommand";
@@ -357,7 +358,7 @@ module ConfigureHealthCheck = {
   type t;
   type request = {
 @as("HealthCheck") healthCheck: healthCheck,
-@as("LoadBalancerName") loadBalancerName: accessPointName
+  @as("LoadBalancerName") loadBalancerName: accessPointName
 }
   type response = {
 @as("HealthCheck") healthCheck: option<healthCheck>
@@ -370,7 +371,7 @@ module AttachLoadBalancerToSubnets = {
   type t;
   type request = {
 @as("Subnets") subnets: subnets,
-@as("LoadBalancerName") loadBalancerName: accessPointName
+  @as("LoadBalancerName") loadBalancerName: accessPointName
 }
   type response = {
 @as("Subnets") subnets: option<subnets>
@@ -383,7 +384,7 @@ module ApplySecurityGroupsToLoadBalancer = {
   type t;
   type request = {
 @as("SecurityGroups") securityGroups: securityGroups,
-@as("LoadBalancerName") loadBalancerName: accessPointName
+  @as("LoadBalancerName") loadBalancerName: accessPointName
 }
   type response = {
 @as("SecurityGroups") securityGroups: option<securityGroups>
@@ -396,7 +397,7 @@ module RemoveTags = {
   type t;
   type request = {
 @as("Tags") tags: tagKeyList,
-@as("LoadBalancerNames") loadBalancerNames: loadBalancerNames
+  @as("LoadBalancerNames") loadBalancerNames: loadBalancerNames
 }
   type response = unit
   @module("@aws-sdk/client-elasticloadbalancing") @new external new_: (request) => t = "RemoveTagsCommand";
@@ -407,7 +408,7 @@ module RegisterInstancesWithLoadBalancer = {
   type t;
   type request = {
 @as("Instances") instances: instances,
-@as("LoadBalancerName") loadBalancerName: accessPointName
+  @as("LoadBalancerName") loadBalancerName: accessPointName
 }
   type response = {
 @as("Instances") instances: option<instances>
@@ -420,7 +421,7 @@ module DescribeInstanceHealth = {
   type t;
   type request = {
 @as("Instances") instances: option<instances>,
-@as("LoadBalancerName") loadBalancerName: accessPointName
+  @as("LoadBalancerName") loadBalancerName: accessPointName
 }
   type response = {
 @as("InstanceStates") instanceStates: option<instanceStates>
@@ -433,11 +434,11 @@ module DescribeAccountLimits = {
   type t;
   type request = {
 @as("PageSize") pageSize: option<pageSize>,
-@as("Marker") marker: option<marker>
+  @as("Marker") marker: option<marker>
 }
   type response = {
 @as("NextMarker") nextMarker: option<marker>,
-@as("Limits") limits: option<limits>
+  @as("Limits") limits: option<limits>
 }
   @module("@aws-sdk/client-elasticloadbalancing") @new external new_: (request) => t = "DescribeAccountLimitsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -447,7 +448,7 @@ module DeregisterInstancesFromLoadBalancer = {
   type t;
   type request = {
 @as("Instances") instances: instances,
-@as("LoadBalancerName") loadBalancerName: accessPointName
+  @as("LoadBalancerName") loadBalancerName: accessPointName
 }
   type response = {
 @as("Instances") instances: option<instances>
@@ -460,9 +461,9 @@ module CreateLoadBalancerPolicy = {
   type t;
   type request = {
 @as("PolicyAttributes") policyAttributes: option<policyAttributes>,
-@as("PolicyTypeName") policyTypeName: policyTypeName,
-@as("PolicyName") policyName: policyName,
-@as("LoadBalancerName") loadBalancerName: accessPointName
+  @as("PolicyTypeName") policyTypeName: policyTypeName,
+  @as("PolicyName") policyName: policyName,
+  @as("LoadBalancerName") loadBalancerName: accessPointName
 }
   type response = unit
   @module("@aws-sdk/client-elasticloadbalancing") @new external new_: (request) => t = "CreateLoadBalancerPolicyCommand";
@@ -473,7 +474,7 @@ module CreateLoadBalancerListeners = {
   type t;
   type request = {
 @as("Listeners") listeners: listeners,
-@as("LoadBalancerName") loadBalancerName: accessPointName
+  @as("LoadBalancerName") loadBalancerName: accessPointName
 }
   type response = unit
   @module("@aws-sdk/client-elasticloadbalancing") @new external new_: (request) => t = "CreateLoadBalancerListenersCommand";
@@ -484,12 +485,12 @@ module CreateLoadBalancer = {
   type t;
   type request = {
 @as("Tags") tags: option<tagList_>,
-@as("Scheme") scheme: option<loadBalancerScheme>,
-@as("SecurityGroups") securityGroups: option<securityGroups>,
-@as("Subnets") subnets: option<subnets>,
-@as("AvailabilityZones") availabilityZones: option<availabilityZones>,
-@as("Listeners") listeners: listeners,
-@as("LoadBalancerName") loadBalancerName: accessPointName
+  @as("Scheme") scheme: option<loadBalancerScheme>,
+  @as("SecurityGroups") securityGroups: option<securityGroups>,
+  @as("Subnets") subnets: option<subnets>,
+  @as("AvailabilityZones") availabilityZones: option<availabilityZones>,
+  @as("Listeners") listeners: listeners,
+  @as("LoadBalancerName") loadBalancerName: accessPointName
 }
   type response = {
 @as("DNSName") dnsname: option<dnsname>
@@ -502,7 +503,7 @@ module AddTags = {
   type t;
   type request = {
 @as("Tags") tags: tagList_,
-@as("LoadBalancerNames") loadBalancerNames: loadBalancerNames
+  @as("LoadBalancerNames") loadBalancerNames: loadBalancerNames
 }
   type response = unit
   @module("@aws-sdk/client-elasticloadbalancing") @new external new_: (request) => t = "AddTagsCommand";
@@ -513,11 +514,11 @@ module ModifyLoadBalancerAttributes = {
   type t;
   type request = {
 @as("LoadBalancerAttributes") loadBalancerAttributes: loadBalancerAttributes,
-@as("LoadBalancerName") loadBalancerName: accessPointName
+  @as("LoadBalancerName") loadBalancerName: accessPointName
 }
   type response = {
 @as("LoadBalancerAttributes") loadBalancerAttributes: option<loadBalancerAttributes>,
-@as("LoadBalancerName") loadBalancerName: option<accessPointName>
+  @as("LoadBalancerName") loadBalancerName: option<accessPointName>
 }
   @module("@aws-sdk/client-elasticloadbalancing") @new external new_: (request) => t = "ModifyLoadBalancerAttributesCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -563,7 +564,7 @@ module DescribeLoadBalancerPolicies = {
   type t;
   type request = {
 @as("PolicyNames") policyNames: option<policyNames>,
-@as("LoadBalancerName") loadBalancerName: option<accessPointName>
+  @as("LoadBalancerName") loadBalancerName: option<accessPointName>
 }
   type response = {
 @as("PolicyDescriptions") policyDescriptions: option<policyDescriptions>
@@ -576,12 +577,12 @@ module DescribeLoadBalancers = {
   type t;
   type request = {
 @as("PageSize") pageSize: option<pageSize>,
-@as("Marker") marker: option<marker>,
-@as("LoadBalancerNames") loadBalancerNames: option<loadBalancerNames>
+  @as("Marker") marker: option<marker>,
+  @as("LoadBalancerNames") loadBalancerNames: option<loadBalancerNames>
 }
   type response = {
 @as("NextMarker") nextMarker: option<marker>,
-@as("LoadBalancerDescriptions") loadBalancerDescriptions: option<loadBalancerDescriptions>
+  @as("LoadBalancerDescriptions") loadBalancerDescriptions: option<loadBalancerDescriptions>
 }
   @module("@aws-sdk/client-elasticloadbalancing") @new external new_: (request) => t = "DescribeLoadBalancersCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";

@@ -5,18 +5,21 @@ httpStatusCode: option<float>,
   cfId: option<string>,
   attempts: option<int>,
   totalRetryDelay: option<int>
-};
-type string_ = string
-type boolean_ = bool
-type integer_ = int
-type long = float
+}
+type awsServiceClient;
+@module("@aws-sdk/client-waf") @new external createClient: unit => awsServiceClient = "WAFClient";
+type baseString = string
+type baseBoolean = bool
+type baseInteger = int
+type baseTimestamp = Js.Date.t;
+type baseLong = float
 type errorMessage = string
-type wafRuleType = [@as("GROUP") #GROUP | @as("RATE_BASED") #RATEBASED | @as("REGULAR") #REGULAR]
+type wafRuleType = [@as("GROUP") #GROUP | @as("RATE_BASED") #RATE_BASED | @as("REGULAR") #REGULAR]
 type wafOverrideActionType = [@as("COUNT") #COUNT | @as("NONE") #NONE]
 type wafActionType = [@as("COUNT") #COUNT | @as("ALLOW") #ALLOW | @as("BLOCK") #BLOCK]
 type uristring = string
 type timestamp_ = Js.Date.t;
-type textTransformation = [@as("URL_DECODE") #URLDECODE | @as("CMD_LINE") #CMDLINE | @as("LOWERCASE") #LOWERCASE | @as("HTML_ENTITY_DECODE") #HTMLENTITYDECODE | @as("COMPRESS_WHITE_SPACE") #COMPRESSWHITESPACE | @as("NONE") #NONE]
+type textTransformation = [@as("URL_DECODE") #URL_DECODE | @as("CMD_LINE") #CMD_LINE | @as("LOWERCASE") #LOWERCASE | @as("HTML_ENTITY_DECODE") #HTML_ENTITY_DECODE | @as("COMPRESS_WHITE_SPACE") #COMPRESS_WHITE_SPACE | @as("NONE") #NONE]
 type tagValue = string
 type tagKey = string
 type size = float
@@ -31,18 +34,18 @@ type regexPatternString = string
 type rateLimit = float
 type rateKey = [@as("IP") #IP]
 type predicateType = [@as("RegexMatch") #RegexMatch | @as("XssMatch") #XssMatch | @as("SizeConstraint") #SizeConstraint | @as("GeoMatch") #GeoMatch | @as("SqlInjectionMatch") #SqlInjectionMatch | @as("ByteMatch") #ByteMatch | @as("IPMatch") #IPMatch]
-type positionalConstraint = [@as("CONTAINS_WORD") #CONTAINSWORD | @as("CONTAINS") #CONTAINS | @as("ENDS_WITH") #ENDSWITH | @as("STARTS_WITH") #STARTSWITH | @as("EXACTLY") #EXACTLY]
+type positionalConstraint = [@as("CONTAINS_WORD") #CONTAINS_WORD | @as("CONTAINS") #CONTAINS | @as("ENDS_WITH") #ENDS_WITH | @as("STARTS_WITH") #STARTS_WITH | @as("EXACTLY") #EXACTLY]
 type populationSize = float
 type policyString = string
-type parameterExceptionReason = [@as("INVALID_TAG_KEY") #INVALIDTAGKEY | @as("ILLEGAL_ARGUMENT") #ILLEGALARGUMENT | @as("ILLEGAL_COMBINATION") #ILLEGALCOMBINATION | @as("INVALID_OPTION") #INVALIDOPTION]
+type parameterExceptionReason = [@as("INVALID_TAG_KEY") #INVALID_TAG_KEY | @as("ILLEGAL_ARGUMENT") #ILLEGAL_ARGUMENT | @as("ILLEGAL_COMBINATION") #ILLEGAL_COMBINATION | @as("INVALID_OPTION") #INVALID_OPTION]
 type parameterExceptionParameter = string
-type parameterExceptionField = [@as("TAG_KEYS") #TAGKEYS | @as("TAGS") #TAGS | @as("RESOURCE_ARN") #RESOURCEARN | @as("NEXT_MARKER") #NEXTMARKER | @as("RULE_TYPE") #RULETYPE | @as("RATE_KEY") #RATEKEY | @as("GEO_MATCH_LOCATION_VALUE") #GEOMATCHLOCATIONVALUE | @as("GEO_MATCH_LOCATION_TYPE") #GEOMATCHLOCATIONTYPE | @as("SIZE_CONSTRAINT_COMPARISON_OPERATOR") #SIZECONSTRAINTCOMPARISONOPERATOR | @as("BYTE_MATCH_POSITIONAL_CONSTRAINT") #BYTEMATCHPOSITIONALCONSTRAINT | @as("BYTE_MATCH_TEXT_TRANSFORMATION") #BYTEMATCHTEXTTRANSFORMATION | @as("SQL_INJECTION_MATCH_FIELD_TYPE") #SQLINJECTIONMATCHFIELDTYPE | @as("BYTE_MATCH_FIELD_TYPE") #BYTEMATCHFIELDTYPE | @as("IPSET_TYPE") #IPSETTYPE | @as("PREDICATE_TYPE") #PREDICATETYPE | @as("WAF_OVERRIDE_ACTION") #WAFOVERRIDEACTION | @as("WAF_ACTION") #WAFACTION | @as("CHANGE_ACTION") #CHANGEACTION]
+type parameterExceptionField = [@as("TAG_KEYS") #TAG_KEYS | @as("TAGS") #TAGS | @as("RESOURCE_ARN") #RESOURCE_ARN | @as("NEXT_MARKER") #NEXT_MARKER | @as("RULE_TYPE") #RULE_TYPE | @as("RATE_KEY") #RATE_KEY | @as("GEO_MATCH_LOCATION_VALUE") #GEO_MATCH_LOCATION_VALUE | @as("GEO_MATCH_LOCATION_TYPE") #GEO_MATCH_LOCATION_TYPE | @as("SIZE_CONSTRAINT_COMPARISON_OPERATOR") #SIZE_CONSTRAINT_COMPARISON_OPERATOR | @as("BYTE_MATCH_POSITIONAL_CONSTRAINT") #BYTE_MATCH_POSITIONAL_CONSTRAINT | @as("BYTE_MATCH_TEXT_TRANSFORMATION") #BYTE_MATCH_TEXT_TRANSFORMATION | @as("SQL_INJECTION_MATCH_FIELD_TYPE") #SQL_INJECTION_MATCH_FIELD_TYPE | @as("BYTE_MATCH_FIELD_TYPE") #BYTE_MATCH_FIELD_TYPE | @as("IPSET_TYPE") #IPSET_TYPE | @as("PREDICATE_TYPE") #PREDICATE_TYPE | @as("WAF_OVERRIDE_ACTION") #WAF_OVERRIDE_ACTION | @as("WAF_ACTION") #WAF_ACTION | @as("CHANGE_ACTION") #CHANGE_ACTION]
 type paginationLimit = int
 type nextMarker = string
 type negated = bool
-type migrationErrorType = [@as("S3_INTERNAL_ERROR") #S3INTERNALERROR | @as("S3_BUCKET_INVALID_REGION") #S3BUCKETINVALIDREGION | @as("S3_BUCKET_NOT_FOUND") #S3BUCKETNOTFOUND | @as("S3_BUCKET_NOT_ACCESSIBLE") #S3BUCKETNOTACCESSIBLE | @as("S3_BUCKET_NO_PERMISSION") #S3BUCKETNOPERMISSION | @as("ENTITY_NOT_FOUND") #ENTITYNOTFOUND | @as("ENTITY_NOT_SUPPORTED") #ENTITYNOTSUPPORTED]
+type migrationErrorType = [@as("S3_INTERNAL_ERROR") #S3_INTERNAL_ERROR | @as("S3_BUCKET_INVALID_REGION") #S3_BUCKET_INVALID_REGION | @as("S3_BUCKET_NOT_FOUND") #S3_BUCKET_NOT_FOUND | @as("S3_BUCKET_NOT_ACCESSIBLE") #S3_BUCKET_NOT_ACCESSIBLE | @as("S3_BUCKET_NO_PERMISSION") #S3_BUCKET_NO_PERMISSION | @as("ENTITY_NOT_FOUND") #ENTITY_NOT_FOUND | @as("ENTITY_NOT_SUPPORTED") #ENTITY_NOT_SUPPORTED]
 type metricName = string
-type matchFieldType = [@as("ALL_QUERY_ARGS") #ALLQUERYARGS | @as("SINGLE_QUERY_ARG") #SINGLEQUERYARG | @as("BODY") #BODY | @as("METHOD") #METHOD | @as("HEADER") #HEADER | @as("QUERY_STRING") #QUERYSTRING | @as("URI") #URI]
+type matchFieldType = [@as("ALL_QUERY_ARGS") #ALL_QUERY_ARGS | @as("SINGLE_QUERY_ARG") #SINGLE_QUERY_ARG | @as("BODY") #BODY | @as("METHOD") #METHOD | @as("HEADER") #HEADER | @as("QUERY_STRING") #QUERY_STRING | @as("URI") #URI]
 type matchFieldData = string
 type managedKey = string
 type ignoreUnsupportedType = bool
@@ -66,11 +69,11 @@ type byteMatchTargetString = NodeJs.Buffer.t
 type action = string
 type xssMatchSetSummary = {
 @as("Name") name: resourceName,
-@as("XssMatchSetId") xssMatchSetId: resourceId
+  @as("XssMatchSetId") xssMatchSetId: resourceId
 }
 type webACLSummary = {
 @as("Name") name: resourceName,
-@as("WebACLId") webACLId: resourceId
+  @as("WebACLId") webACLId: resourceId
 }
 type wafOverrideAction = {
 @as("Type") type_: wafOverrideActionType
@@ -80,93 +83,93 @@ type wafAction = {
 }
 type timeWindow = {
 @as("EndTime") endTime: timestamp_,
-@as("StartTime") startTime: timestamp_
+  @as("StartTime") startTime: timestamp_
 }
 type tagKeyList = array<tagKey>
 type tag = {
 @as("Value") value: tagValue,
-@as("Key") key: tagKey
+  @as("Key") key: tagKey
 }
 type subscribedRuleGroupSummary = {
 @as("MetricName") metricName: metricName,
-@as("Name") name: resourceName,
-@as("RuleGroupId") ruleGroupId: resourceId
+  @as("Name") name: resourceName,
+  @as("RuleGroupId") ruleGroupId: resourceId
 }
 type sqlInjectionMatchSetSummary = {
 @as("Name") name: resourceName,
-@as("SqlInjectionMatchSetId") sqlInjectionMatchSetId: resourceId
+  @as("SqlInjectionMatchSetId") sqlInjectionMatchSetId: resourceId
 }
 type sizeConstraintSetSummary = {
 @as("Name") name: resourceName,
-@as("SizeConstraintSetId") sizeConstraintSetId: resourceId
+  @as("SizeConstraintSetId") sizeConstraintSetId: resourceId
 }
 type ruleSummary = {
 @as("Name") name: resourceName,
-@as("RuleId") ruleId: resourceId
+  @as("RuleId") ruleId: resourceId
 }
 type ruleGroupSummary = {
 @as("Name") name: resourceName,
-@as("RuleGroupId") ruleGroupId: resourceId
+  @as("RuleGroupId") ruleGroupId: resourceId
 }
 type ruleGroup = {
 @as("MetricName") metricName: option<metricName>,
-@as("Name") name: option<resourceName>,
-@as("RuleGroupId") ruleGroupId: resourceId
+  @as("Name") name: option<resourceName>,
+  @as("RuleGroupId") ruleGroupId: resourceId
 }
 type regexPatternStrings = array<regexPatternString>
 type regexPatternSetUpdate = {
 @as("RegexPatternString") regexPatternString: regexPatternString,
-@as("Action") action: changeAction
+  @as("Action") action: changeAction
 }
 type regexPatternSetSummary = {
 @as("Name") name: resourceName,
-@as("RegexPatternSetId") regexPatternSetId: resourceId
+  @as("RegexPatternSetId") regexPatternSetId: resourceId
 }
 type regexMatchSetSummary = {
 @as("Name") name: resourceName,
-@as("RegexMatchSetId") regexMatchSetId: resourceId
+  @as("RegexMatchSetId") regexMatchSetId: resourceId
 }
 type predicate = {
 @as("DataId") dataId: resourceId,
-@as("Type") type_: predicateType,
-@as("Negated") negated: negated
+  @as("Type") type_: predicateType,
+  @as("Negated") negated: negated
 }
 type managedKeys = array<managedKey>
 type logDestinationConfigs = array<resourceArn>
 type ipsetSummary = {
 @as("Name") name: resourceName,
-@as("IPSetId") ipsetId: resourceId
+  @as("IPSetId") ipsetId: resourceId
 }
 type ipsetDescriptor = {
 @as("Value") value: ipsetDescriptorValue,
-@as("Type") type_: ipsetDescriptorType
+  @as("Type") type_: ipsetDescriptorType
 }
 type httpheader = {
 @as("Value") value: option<headerValue>,
-@as("Name") name: option<headerName>
+  @as("Name") name: option<headerName>
 }
 type geoMatchSetSummary = {
 @as("Name") name: resourceName,
-@as("GeoMatchSetId") geoMatchSetId: resourceId
+  @as("GeoMatchSetId") geoMatchSetId: resourceId
 }
 type geoMatchConstraint = {
 @as("Value") value: geoMatchConstraintValue,
-@as("Type") type_: geoMatchConstraintType
+  @as("Type") type_: geoMatchConstraintType
 }
 type fieldToMatch = {
 @as("Data") data: option<matchFieldData>,
-@as("Type") type_: matchFieldType
+  @as("Type") type_: matchFieldType
 }
 type excludedRule = {
 @as("RuleId") ruleId: resourceId
 }
 type byteMatchSetSummary = {
 @as("Name") name: resourceName,
-@as("ByteMatchSetId") byteMatchSetId: resourceId
+  @as("ByteMatchSetId") byteMatchSetId: resourceId
 }
 type xssMatchTuple = {
 @as("TextTransformation") textTransformation: textTransformation,
-@as("FieldToMatch") fieldToMatch: fieldToMatch
+  @as("FieldToMatch") fieldToMatch: fieldToMatch
 }
 type xssMatchSetSummaries = array<xssMatchSetSummary>
 type webACLSummaries = array<webACLSummary>
@@ -174,19 +177,19 @@ type tagList_ = array<tag>
 type subscribedRuleGroupSummaries = array<subscribedRuleGroupSummary>
 type sqlInjectionMatchTuple = {
 @as("TextTransformation") textTransformation: textTransformation,
-@as("FieldToMatch") fieldToMatch: fieldToMatch
+  @as("FieldToMatch") fieldToMatch: fieldToMatch
 }
 type sqlInjectionMatchSetSummaries = array<sqlInjectionMatchSetSummary>
 type sizeConstraintSetSummaries = array<sizeConstraintSetSummary>
 type sizeConstraint = {
 @as("Size") size: size,
-@as("ComparisonOperator") comparisonOperator: comparisonOperator,
-@as("TextTransformation") textTransformation: textTransformation,
-@as("FieldToMatch") fieldToMatch: fieldToMatch
+  @as("ComparisonOperator") comparisonOperator: comparisonOperator,
+  @as("TextTransformation") textTransformation: textTransformation,
+  @as("FieldToMatch") fieldToMatch: fieldToMatch
 }
 type ruleUpdate = {
 @as("Predicate") predicate: predicate,
-@as("Action") action: changeAction
+  @as("Action") action: changeAction
 }
 type ruleSummaries = array<ruleSummary>
 type ruleGroupSummaries = array<ruleGroupSummary>
@@ -194,180 +197,179 @@ type regexPatternSetUpdates = array<regexPatternSetUpdate>
 type regexPatternSetSummaries = array<regexPatternSetSummary>
 type regexPatternSet = {
 @as("RegexPatternStrings") regexPatternStrings: regexPatternStrings,
-@as("Name") name: option<resourceName>,
-@as("RegexPatternSetId") regexPatternSetId: resourceId
+  @as("Name") name: option<resourceName>,
+  @as("RegexPatternSetId") regexPatternSetId: resourceId
 }
 type regexMatchTuple = {
 @as("RegexPatternSetId") regexPatternSetId: resourceId,
-@as("TextTransformation") textTransformation: textTransformation,
-@as("FieldToMatch") fieldToMatch: fieldToMatch
+  @as("TextTransformation") textTransformation: textTransformation,
+  @as("FieldToMatch") fieldToMatch: fieldToMatch
 }
 type regexMatchSetSummaries = array<regexMatchSetSummary>
 type redactedFields = array<fieldToMatch>
 type predicates = array<predicate>
 type ipsetUpdate = {
 @as("IPSetDescriptor") ipsetDescriptor: ipsetDescriptor,
-@as("Action") action: changeAction
+  @as("Action") action: changeAction
 }
 type ipsetSummaries = array<ipsetSummary>
 type ipsetDescriptors = array<ipsetDescriptor>
 type httpheaders = array<httpheader>
 type geoMatchSetUpdate = {
 @as("GeoMatchConstraint") geoMatchConstraint: geoMatchConstraint,
-@as("Action") action: changeAction
+  @as("Action") action: changeAction
 }
 type geoMatchSetSummaries = array<geoMatchSetSummary>
 type geoMatchConstraints = array<geoMatchConstraint>
 type excludedRules = array<excludedRule>
 type byteMatchTuple = {
 @as("PositionalConstraint") positionalConstraint: positionalConstraint,
-@as("TextTransformation") textTransformation: textTransformation,
-@as("TargetString") targetString: byteMatchTargetString,
-@as("FieldToMatch") fieldToMatch: fieldToMatch
+  @as("TextTransformation") textTransformation: textTransformation,
+  @as("TargetString") targetString: byteMatchTargetString,
+  @as("FieldToMatch") fieldToMatch: fieldToMatch
 }
 type byteMatchSetSummaries = array<byteMatchSetSummary>
 type xssMatchTuples = array<xssMatchTuple>
 type xssMatchSetUpdate = {
 @as("XssMatchTuple") xssMatchTuple: xssMatchTuple,
-@as("Action") action: changeAction
+  @as("Action") action: changeAction
 }
 type tagInfoForResource = {
 @as("TagList") tagList_: option<tagList_>,
-@as("ResourceARN") resourceARN: option<resourceArn>
+  @as("ResourceARN") resourceARN: option<resourceArn>
 }
 type sqlInjectionMatchTuples = array<sqlInjectionMatchTuple>
 type sqlInjectionMatchSetUpdate = {
 @as("SqlInjectionMatchTuple") sqlInjectionMatchTuple: sqlInjectionMatchTuple,
-@as("Action") action: changeAction
+  @as("Action") action: changeAction
 }
 type sizeConstraints = array<sizeConstraint>
 type sizeConstraintSetUpdate = {
 @as("SizeConstraint") sizeConstraint: sizeConstraint,
-@as("Action") action: changeAction
+  @as("Action") action: changeAction
 }
 type ruleUpdates = array<ruleUpdate>
 type rule = {
 @as("Predicates") predicates: predicates,
-@as("MetricName") metricName: option<metricName>,
-@as("Name") name: option<resourceName>,
-@as("RuleId") ruleId: resourceId
+  @as("MetricName") metricName: option<metricName>,
+  @as("Name") name: option<resourceName>,
+  @as("RuleId") ruleId: resourceId
 }
 type regexMatchTuples = array<regexMatchTuple>
 type regexMatchSetUpdate = {
 @as("RegexMatchTuple") regexMatchTuple: regexMatchTuple,
-@as("Action") action: changeAction
+  @as("Action") action: changeAction
 }
 type rateBasedRule = {
 @as("RateLimit") rateLimit: rateLimit,
-@as("RateKey") rateKey: rateKey,
-@as("MatchPredicates") matchPredicates: predicates,
-@as("MetricName") metricName: option<metricName>,
-@as("Name") name: option<resourceName>,
-@as("RuleId") ruleId: resourceId
+  @as("RateKey") rateKey: rateKey,
+  @as("MatchPredicates") matchPredicates: predicates,
+  @as("MetricName") metricName: option<metricName>,
+  @as("Name") name: option<resourceName>,
+  @as("RuleId") ruleId: resourceId
 }
 type loggingConfiguration = {
 @as("RedactedFields") redactedFields: option<redactedFields>,
-@as("LogDestinationConfigs") logDestinationConfigs: logDestinationConfigs,
-@as("ResourceArn") resourceArn: resourceArn
+  @as("LogDestinationConfigs") logDestinationConfigs: logDestinationConfigs,
+  @as("ResourceArn") resourceArn: resourceArn
 }
 type ipsetUpdates = array<ipsetUpdate>
 type ipset = {
 @as("IPSetDescriptors") ipsetDescriptors: ipsetDescriptors,
-@as("Name") name: option<resourceName>,
-@as("IPSetId") ipsetId: resourceId
+  @as("Name") name: option<resourceName>,
+  @as("IPSetId") ipsetId: resourceId
 }
 type httprequest = {
 @as("Headers") headers: option<httpheaders>,
-@as("HTTPVersion") httpversion: option<httpversion>,
-@as("Method") method: option<httpmethod>,
-@as("URI") uri: option<uristring>,
-@as("Country") country: option<country>,
-@as("ClientIP") clientIP: option<ipstring>
+  @as("HTTPVersion") httpversion: option<httpversion>,
+  @as("Method") method: option<httpmethod>,
+  @as("URI") uri: option<uristring>,
+  @as("Country") country: option<country>,
+  @as("ClientIP") clientIP: option<ipstring>
 }
 type geoMatchSetUpdates = array<geoMatchSetUpdate>
 type geoMatchSet = {
 @as("GeoMatchConstraints") geoMatchConstraints: geoMatchConstraints,
-@as("Name") name: option<resourceName>,
-@as("GeoMatchSetId") geoMatchSetId: resourceId
+  @as("Name") name: option<resourceName>,
+  @as("GeoMatchSetId") geoMatchSetId: resourceId
 }
 type byteMatchTuples = array<byteMatchTuple>
 type byteMatchSetUpdate = {
 @as("ByteMatchTuple") byteMatchTuple: byteMatchTuple,
-@as("Action") action: changeAction
+  @as("Action") action: changeAction
 }
 type activatedRule = {
 @as("ExcludedRules") excludedRules: option<excludedRules>,
-@as("Type") type_: option<wafRuleType>,
-@as("OverrideAction") overrideAction: option<wafOverrideAction>,
-@as("Action") action: option<wafAction>,
-@as("RuleId") ruleId: resourceId,
-@as("Priority") priority: rulePriority
+  @as("Type") type_: option<wafRuleType>,
+  @as("OverrideAction") overrideAction: option<wafOverrideAction>,
+  @as("Action") action: option<wafAction>,
+  @as("RuleId") ruleId: resourceId,
+  @as("Priority") priority: rulePriority
 }
 type xssMatchSetUpdates = array<xssMatchSetUpdate>
 type xssMatchSet = {
 @as("XssMatchTuples") xssMatchTuples: xssMatchTuples,
-@as("Name") name: option<resourceName>,
-@as("XssMatchSetId") xssMatchSetId: resourceId
+  @as("Name") name: option<resourceName>,
+  @as("XssMatchSetId") xssMatchSetId: resourceId
 }
 type webACLUpdate = {
 @as("ActivatedRule") activatedRule: activatedRule,
-@as("Action") action: changeAction
+  @as("Action") action: changeAction
 }
 type sqlInjectionMatchSetUpdates = array<sqlInjectionMatchSetUpdate>
 type sqlInjectionMatchSet = {
 @as("SqlInjectionMatchTuples") sqlInjectionMatchTuples: sqlInjectionMatchTuples,
-@as("Name") name: option<resourceName>,
-@as("SqlInjectionMatchSetId") sqlInjectionMatchSetId: resourceId
+  @as("Name") name: option<resourceName>,
+  @as("SqlInjectionMatchSetId") sqlInjectionMatchSetId: resourceId
 }
 type sizeConstraintSetUpdates = array<sizeConstraintSetUpdate>
 type sizeConstraintSet = {
 @as("SizeConstraints") sizeConstraints: sizeConstraints,
-@as("Name") name: option<resourceName>,
-@as("SizeConstraintSetId") sizeConstraintSetId: resourceId
+  @as("Name") name: option<resourceName>,
+  @as("SizeConstraintSetId") sizeConstraintSetId: resourceId
 }
 type sampledHTTPRequest = {
 @as("RuleWithinRuleGroup") ruleWithinRuleGroup: option<resourceId>,
-@as("Action") action: option<action>,
-@as("Timestamp") timestamp_: option<timestamp_>,
-@as("Weight") weight: sampleWeight,
-@as("Request") request: httprequest
+  @as("Action") action: option<action>,
+  @as("Timestamp") timestamp_: option<timestamp_>,
+  @as("Weight") weight: sampleWeight,
+  @as("Request") request: httprequest
 }
 type ruleGroupUpdate = {
 @as("ActivatedRule") activatedRule: activatedRule,
-@as("Action") action: changeAction
+  @as("Action") action: changeAction
 }
 type regexMatchSetUpdates = array<regexMatchSetUpdate>
 type regexMatchSet = {
 @as("RegexMatchTuples") regexMatchTuples: option<regexMatchTuples>,
-@as("Name") name: option<resourceName>,
-@as("RegexMatchSetId") regexMatchSetId: option<resourceId>
+  @as("Name") name: option<resourceName>,
+  @as("RegexMatchSetId") regexMatchSetId: option<resourceId>
 }
 type loggingConfigurations = array<loggingConfiguration>
 type byteMatchSetUpdates = array<byteMatchSetUpdate>
 type byteMatchSet = {
 @as("ByteMatchTuples") byteMatchTuples: byteMatchTuples,
-@as("Name") name: option<resourceName>,
-@as("ByteMatchSetId") byteMatchSetId: resourceId
+  @as("Name") name: option<resourceName>,
+  @as("ByteMatchSetId") byteMatchSetId: resourceId
 }
 type activatedRules = array<activatedRule>
 type webACLUpdates = array<webACLUpdate>
 type webACL = {
 @as("WebACLArn") webACLArn: option<resourceArn>,
-@as("Rules") rules: activatedRules,
-@as("DefaultAction") defaultAction: wafAction,
-@as("MetricName") metricName: option<metricName>,
-@as("Name") name: option<resourceName>,
-@as("WebACLId") webACLId: resourceId
+  @as("Rules") rules: activatedRules,
+  @as("DefaultAction") defaultAction: wafAction,
+  @as("MetricName") metricName: option<metricName>,
+  @as("Name") name: option<resourceName>,
+  @as("WebACLId") webACLId: resourceId
 }
 type sampledHTTPRequests = array<sampledHTTPRequest>
 type ruleGroupUpdates = array<ruleGroupUpdate>
-type awsServiceClient;
-@module("@aws-sdk/client-waf") @new external createClient: unit => awsServiceClient = "WAFClient";
+
 module PutPermissionPolicy = {
   type t;
   type request = {
 @as("Policy") policy: policyString,
-@as("ResourceArn") resourceArn: resourceArn
+  @as("ResourceArn") resourceArn: resourceArn
 }
   type response = unit
   @module("@aws-sdk/client-waf") @new external new_: (request) => t = "PutPermissionPolicyCommand";
@@ -412,7 +414,7 @@ module DeleteXssMatchSet = {
   type t;
   type request = {
 @as("ChangeToken") changeToken: changeToken,
-@as("XssMatchSetId") xssMatchSetId: resourceId
+  @as("XssMatchSetId") xssMatchSetId: resourceId
 }
   type response = {
 @as("ChangeToken") changeToken: option<changeToken>
@@ -425,7 +427,7 @@ module DeleteWebACL = {
   type t;
   type request = {
 @as("ChangeToken") changeToken: changeToken,
-@as("WebACLId") webACLId: resourceId
+  @as("WebACLId") webACLId: resourceId
 }
   type response = {
 @as("ChangeToken") changeToken: option<changeToken>
@@ -438,7 +440,7 @@ module DeleteSqlInjectionMatchSet = {
   type t;
   type request = {
 @as("ChangeToken") changeToken: changeToken,
-@as("SqlInjectionMatchSetId") sqlInjectionMatchSetId: resourceId
+  @as("SqlInjectionMatchSetId") sqlInjectionMatchSetId: resourceId
 }
   type response = {
 @as("ChangeToken") changeToken: option<changeToken>
@@ -451,7 +453,7 @@ module DeleteSizeConstraintSet = {
   type t;
   type request = {
 @as("ChangeToken") changeToken: changeToken,
-@as("SizeConstraintSetId") sizeConstraintSetId: resourceId
+  @as("SizeConstraintSetId") sizeConstraintSetId: resourceId
 }
   type response = {
 @as("ChangeToken") changeToken: option<changeToken>
@@ -464,7 +466,7 @@ module DeleteRuleGroup = {
   type t;
   type request = {
 @as("ChangeToken") changeToken: changeToken,
-@as("RuleGroupId") ruleGroupId: resourceId
+  @as("RuleGroupId") ruleGroupId: resourceId
 }
   type response = {
 @as("ChangeToken") changeToken: option<changeToken>
@@ -477,7 +479,7 @@ module DeleteRule = {
   type t;
   type request = {
 @as("ChangeToken") changeToken: changeToken,
-@as("RuleId") ruleId: resourceId
+  @as("RuleId") ruleId: resourceId
 }
   type response = {
 @as("ChangeToken") changeToken: option<changeToken>
@@ -490,7 +492,7 @@ module DeleteRegexPatternSet = {
   type t;
   type request = {
 @as("ChangeToken") changeToken: changeToken,
-@as("RegexPatternSetId") regexPatternSetId: resourceId
+  @as("RegexPatternSetId") regexPatternSetId: resourceId
 }
   type response = {
 @as("ChangeToken") changeToken: option<changeToken>
@@ -503,7 +505,7 @@ module DeleteRegexMatchSet = {
   type t;
   type request = {
 @as("ChangeToken") changeToken: changeToken,
-@as("RegexMatchSetId") regexMatchSetId: resourceId
+  @as("RegexMatchSetId") regexMatchSetId: resourceId
 }
   type response = {
 @as("ChangeToken") changeToken: option<changeToken>
@@ -516,7 +518,7 @@ module DeleteRateBasedRule = {
   type t;
   type request = {
 @as("ChangeToken") changeToken: changeToken,
-@as("RuleId") ruleId: resourceId
+  @as("RuleId") ruleId: resourceId
 }
   type response = {
 @as("ChangeToken") changeToken: option<changeToken>
@@ -549,7 +551,7 @@ module DeleteIPSet = {
   type t;
   type request = {
 @as("ChangeToken") changeToken: changeToken,
-@as("IPSetId") ipsetId: resourceId
+  @as("IPSetId") ipsetId: resourceId
 }
   type response = {
 @as("ChangeToken") changeToken: option<changeToken>
@@ -562,7 +564,7 @@ module DeleteGeoMatchSet = {
   type t;
   type request = {
 @as("ChangeToken") changeToken: changeToken,
-@as("GeoMatchSetId") geoMatchSetId: resourceId
+  @as("GeoMatchSetId") geoMatchSetId: resourceId
 }
   type response = {
 @as("ChangeToken") changeToken: option<changeToken>
@@ -575,7 +577,7 @@ module DeleteByteMatchSet = {
   type t;
   type request = {
 @as("ChangeToken") changeToken: changeToken,
-@as("ByteMatchSetId") byteMatchSetId: resourceId
+  @as("ByteMatchSetId") byteMatchSetId: resourceId
 }
   type response = {
 @as("ChangeToken") changeToken: option<changeToken>
@@ -588,8 +590,8 @@ module CreateWebACLMigrationStack = {
   type t;
   type request = {
 @as("IgnoreUnsupportedType") ignoreUnsupportedType: ignoreUnsupportedType,
-@as("S3BucketName") s3BucketName: s3BucketName,
-@as("WebACLId") webACLId: resourceId
+  @as("S3BucketName") s3BucketName: s3BucketName,
+  @as("WebACLId") webACLId: resourceId
 }
   type response = {
 @as("S3ObjectUrl") s3ObjectUrl: s3ObjectUrl
@@ -602,7 +604,7 @@ module UntagResource = {
   type t;
   type request = {
 @as("TagKeys") tagKeys: tagKeyList,
-@as("ResourceARN") resourceARN: resourceArn
+  @as("ResourceARN") resourceARN: resourceArn
 }
   type response = unit
   @module("@aws-sdk/client-waf") @new external new_: (request) => t = "UntagResourceCommand";
@@ -625,11 +627,11 @@ module GetRateBasedRuleManagedKeys = {
   type t;
   type request = {
 @as("NextMarker") nextMarker: option<nextMarker>,
-@as("RuleId") ruleId: resourceId
+  @as("RuleId") ruleId: resourceId
 }
   type response = {
 @as("NextMarker") nextMarker: option<nextMarker>,
-@as("ManagedKeys") managedKeys: option<managedKeys>
+  @as("ManagedKeys") managedKeys: option<managedKeys>
 }
   @module("@aws-sdk/client-waf") @new external new_: (request) => t = "GetRateBasedRuleManagedKeysCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -639,8 +641,8 @@ module UpdateRegexPatternSet = {
   type t;
   type request = {
 @as("ChangeToken") changeToken: changeToken,
-@as("Updates") updates: regexPatternSetUpdates,
-@as("RegexPatternSetId") regexPatternSetId: resourceId
+  @as("Updates") updates: regexPatternSetUpdates,
+  @as("RegexPatternSetId") regexPatternSetId: resourceId
 }
   type response = {
 @as("ChangeToken") changeToken: option<changeToken>
@@ -653,7 +655,7 @@ module TagResource = {
   type t;
   type request = {
 @as("Tags") tags: tagList_,
-@as("ResourceARN") resourceARN: resourceArn
+  @as("ResourceARN") resourceARN: resourceArn
 }
   type response = unit
   @module("@aws-sdk/client-waf") @new external new_: (request) => t = "TagResourceCommand";
@@ -664,11 +666,11 @@ module ListXssMatchSets = {
   type t;
   type request = {
 @as("Limit") limit: option<paginationLimit>,
-@as("NextMarker") nextMarker: option<nextMarker>
+  @as("NextMarker") nextMarker: option<nextMarker>
 }
   type response = {
 @as("XssMatchSets") xssMatchSets: option<xssMatchSetSummaries>,
-@as("NextMarker") nextMarker: option<nextMarker>
+  @as("NextMarker") nextMarker: option<nextMarker>
 }
   @module("@aws-sdk/client-waf") @new external new_: (request) => t = "ListXssMatchSetsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -678,11 +680,11 @@ module ListWebACLs = {
   type t;
   type request = {
 @as("Limit") limit: option<paginationLimit>,
-@as("NextMarker") nextMarker: option<nextMarker>
+  @as("NextMarker") nextMarker: option<nextMarker>
 }
   type response = {
 @as("WebACLs") webACLs: option<webACLSummaries>,
-@as("NextMarker") nextMarker: option<nextMarker>
+  @as("NextMarker") nextMarker: option<nextMarker>
 }
   @module("@aws-sdk/client-waf") @new external new_: (request) => t = "ListWebACLsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -692,11 +694,11 @@ module ListSubscribedRuleGroups = {
   type t;
   type request = {
 @as("Limit") limit: option<paginationLimit>,
-@as("NextMarker") nextMarker: option<nextMarker>
+  @as("NextMarker") nextMarker: option<nextMarker>
 }
   type response = {
 @as("RuleGroups") ruleGroups: option<subscribedRuleGroupSummaries>,
-@as("NextMarker") nextMarker: option<nextMarker>
+  @as("NextMarker") nextMarker: option<nextMarker>
 }
   @module("@aws-sdk/client-waf") @new external new_: (request) => t = "ListSubscribedRuleGroupsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -706,11 +708,11 @@ module ListSqlInjectionMatchSets = {
   type t;
   type request = {
 @as("Limit") limit: option<paginationLimit>,
-@as("NextMarker") nextMarker: option<nextMarker>
+  @as("NextMarker") nextMarker: option<nextMarker>
 }
   type response = {
 @as("SqlInjectionMatchSets") sqlInjectionMatchSets: option<sqlInjectionMatchSetSummaries>,
-@as("NextMarker") nextMarker: option<nextMarker>
+  @as("NextMarker") nextMarker: option<nextMarker>
 }
   @module("@aws-sdk/client-waf") @new external new_: (request) => t = "ListSqlInjectionMatchSetsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -720,11 +722,11 @@ module ListSizeConstraintSets = {
   type t;
   type request = {
 @as("Limit") limit: option<paginationLimit>,
-@as("NextMarker") nextMarker: option<nextMarker>
+  @as("NextMarker") nextMarker: option<nextMarker>
 }
   type response = {
 @as("SizeConstraintSets") sizeConstraintSets: option<sizeConstraintSetSummaries>,
-@as("NextMarker") nextMarker: option<nextMarker>
+  @as("NextMarker") nextMarker: option<nextMarker>
 }
   @module("@aws-sdk/client-waf") @new external new_: (request) => t = "ListSizeConstraintSetsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -734,11 +736,11 @@ module ListRules = {
   type t;
   type request = {
 @as("Limit") limit: option<paginationLimit>,
-@as("NextMarker") nextMarker: option<nextMarker>
+  @as("NextMarker") nextMarker: option<nextMarker>
 }
   type response = {
 @as("Rules") rules: option<ruleSummaries>,
-@as("NextMarker") nextMarker: option<nextMarker>
+  @as("NextMarker") nextMarker: option<nextMarker>
 }
   @module("@aws-sdk/client-waf") @new external new_: (request) => t = "ListRulesCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -748,11 +750,11 @@ module ListRuleGroups = {
   type t;
   type request = {
 @as("Limit") limit: option<paginationLimit>,
-@as("NextMarker") nextMarker: option<nextMarker>
+  @as("NextMarker") nextMarker: option<nextMarker>
 }
   type response = {
 @as("RuleGroups") ruleGroups: option<ruleGroupSummaries>,
-@as("NextMarker") nextMarker: option<nextMarker>
+  @as("NextMarker") nextMarker: option<nextMarker>
 }
   @module("@aws-sdk/client-waf") @new external new_: (request) => t = "ListRuleGroupsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -762,11 +764,11 @@ module ListRegexPatternSets = {
   type t;
   type request = {
 @as("Limit") limit: option<paginationLimit>,
-@as("NextMarker") nextMarker: option<nextMarker>
+  @as("NextMarker") nextMarker: option<nextMarker>
 }
   type response = {
 @as("RegexPatternSets") regexPatternSets: option<regexPatternSetSummaries>,
-@as("NextMarker") nextMarker: option<nextMarker>
+  @as("NextMarker") nextMarker: option<nextMarker>
 }
   @module("@aws-sdk/client-waf") @new external new_: (request) => t = "ListRegexPatternSetsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -776,11 +778,11 @@ module ListRegexMatchSets = {
   type t;
   type request = {
 @as("Limit") limit: option<paginationLimit>,
-@as("NextMarker") nextMarker: option<nextMarker>
+  @as("NextMarker") nextMarker: option<nextMarker>
 }
   type response = {
 @as("RegexMatchSets") regexMatchSets: option<regexMatchSetSummaries>,
-@as("NextMarker") nextMarker: option<nextMarker>
+  @as("NextMarker") nextMarker: option<nextMarker>
 }
   @module("@aws-sdk/client-waf") @new external new_: (request) => t = "ListRegexMatchSetsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -790,11 +792,11 @@ module ListRateBasedRules = {
   type t;
   type request = {
 @as("Limit") limit: option<paginationLimit>,
-@as("NextMarker") nextMarker: option<nextMarker>
+  @as("NextMarker") nextMarker: option<nextMarker>
 }
   type response = {
 @as("Rules") rules: option<ruleSummaries>,
-@as("NextMarker") nextMarker: option<nextMarker>
+  @as("NextMarker") nextMarker: option<nextMarker>
 }
   @module("@aws-sdk/client-waf") @new external new_: (request) => t = "ListRateBasedRulesCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -804,11 +806,11 @@ module ListIPSets = {
   type t;
   type request = {
 @as("Limit") limit: option<paginationLimit>,
-@as("NextMarker") nextMarker: option<nextMarker>
+  @as("NextMarker") nextMarker: option<nextMarker>
 }
   type response = {
 @as("IPSets") ipsets: option<ipsetSummaries>,
-@as("NextMarker") nextMarker: option<nextMarker>
+  @as("NextMarker") nextMarker: option<nextMarker>
 }
   @module("@aws-sdk/client-waf") @new external new_: (request) => t = "ListIPSetsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -818,11 +820,11 @@ module ListGeoMatchSets = {
   type t;
   type request = {
 @as("Limit") limit: option<paginationLimit>,
-@as("NextMarker") nextMarker: option<nextMarker>
+  @as("NextMarker") nextMarker: option<nextMarker>
 }
   type response = {
 @as("GeoMatchSets") geoMatchSets: option<geoMatchSetSummaries>,
-@as("NextMarker") nextMarker: option<nextMarker>
+  @as("NextMarker") nextMarker: option<nextMarker>
 }
   @module("@aws-sdk/client-waf") @new external new_: (request) => t = "ListGeoMatchSetsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -832,11 +834,11 @@ module ListByteMatchSets = {
   type t;
   type request = {
 @as("Limit") limit: option<paginationLimit>,
-@as("NextMarker") nextMarker: option<nextMarker>
+  @as("NextMarker") nextMarker: option<nextMarker>
 }
   type response = {
 @as("ByteMatchSets") byteMatchSets: option<byteMatchSetSummaries>,
-@as("NextMarker") nextMarker: option<nextMarker>
+  @as("NextMarker") nextMarker: option<nextMarker>
 }
   @module("@aws-sdk/client-waf") @new external new_: (request) => t = "ListByteMatchSetsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -858,13 +860,13 @@ module CreateRuleGroup = {
   type t;
   type request = {
 @as("Tags") tags: option<tagList_>,
-@as("ChangeToken") changeToken: changeToken,
-@as("MetricName") metricName: metricName,
-@as("Name") name: resourceName
+  @as("ChangeToken") changeToken: changeToken,
+  @as("MetricName") metricName: metricName,
+  @as("Name") name: resourceName
 }
   type response = {
 @as("ChangeToken") changeToken: option<changeToken>,
-@as("RuleGroup") ruleGroup: option<ruleGroup>
+  @as("RuleGroup") ruleGroup: option<ruleGroup>
 }
   @module("@aws-sdk/client-waf") @new external new_: (request) => t = "CreateRuleGroupCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -874,11 +876,11 @@ module CreateRegexPatternSet = {
   type t;
   type request = {
 @as("ChangeToken") changeToken: changeToken,
-@as("Name") name: resourceName
+  @as("Name") name: resourceName
 }
   type response = {
 @as("ChangeToken") changeToken: option<changeToken>,
-@as("RegexPatternSet") regexPatternSet: option<regexPatternSet>
+  @as("RegexPatternSet") regexPatternSet: option<regexPatternSet>
 }
   @module("@aws-sdk/client-waf") @new external new_: (request) => t = "CreateRegexPatternSetCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -888,8 +890,8 @@ module UpdateRule = {
   type t;
   type request = {
 @as("Updates") updates: ruleUpdates,
-@as("ChangeToken") changeToken: changeToken,
-@as("RuleId") ruleId: resourceId
+  @as("ChangeToken") changeToken: changeToken,
+  @as("RuleId") ruleId: resourceId
 }
   type response = {
 @as("ChangeToken") changeToken: option<changeToken>
@@ -902,9 +904,9 @@ module UpdateRateBasedRule = {
   type t;
   type request = {
 @as("RateLimit") rateLimit: rateLimit,
-@as("Updates") updates: ruleUpdates,
-@as("ChangeToken") changeToken: changeToken,
-@as("RuleId") ruleId: resourceId
+  @as("Updates") updates: ruleUpdates,
+  @as("ChangeToken") changeToken: changeToken,
+  @as("RuleId") ruleId: resourceId
 }
   type response = {
 @as("ChangeToken") changeToken: option<changeToken>
@@ -917,8 +919,8 @@ module UpdateIPSet = {
   type t;
   type request = {
 @as("Updates") updates: ipsetUpdates,
-@as("ChangeToken") changeToken: changeToken,
-@as("IPSetId") ipsetId: resourceId
+  @as("ChangeToken") changeToken: changeToken,
+  @as("IPSetId") ipsetId: resourceId
 }
   type response = {
 @as("ChangeToken") changeToken: option<changeToken>
@@ -931,8 +933,8 @@ module UpdateGeoMatchSet = {
   type t;
   type request = {
 @as("Updates") updates: geoMatchSetUpdates,
-@as("ChangeToken") changeToken: changeToken,
-@as("GeoMatchSetId") geoMatchSetId: resourceId
+  @as("ChangeToken") changeToken: changeToken,
+  @as("GeoMatchSetId") geoMatchSetId: resourceId
 }
   type response = {
 @as("ChangeToken") changeToken: option<changeToken>
@@ -957,12 +959,12 @@ module ListTagsForResource = {
   type t;
   type request = {
 @as("ResourceARN") resourceARN: resourceArn,
-@as("Limit") limit: option<paginationLimit>,
-@as("NextMarker") nextMarker: option<nextMarker>
+  @as("Limit") limit: option<paginationLimit>,
+  @as("NextMarker") nextMarker: option<nextMarker>
 }
   type response = {
 @as("TagInfoForResource") tagInfoForResource: option<tagInfoForResource>,
-@as("NextMarker") nextMarker: option<nextMarker>
+  @as("NextMarker") nextMarker: option<nextMarker>
 }
   @module("@aws-sdk/client-waf") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1032,13 +1034,13 @@ module CreateRule = {
   type t;
   type request = {
 @as("Tags") tags: option<tagList_>,
-@as("ChangeToken") changeToken: changeToken,
-@as("MetricName") metricName: metricName,
-@as("Name") name: resourceName
+  @as("ChangeToken") changeToken: changeToken,
+  @as("MetricName") metricName: metricName,
+  @as("Name") name: resourceName
 }
   type response = {
 @as("ChangeToken") changeToken: option<changeToken>,
-@as("Rule") rule: option<rule>
+  @as("Rule") rule: option<rule>
 }
   @module("@aws-sdk/client-waf") @new external new_: (request) => t = "CreateRuleCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1048,15 +1050,15 @@ module CreateRateBasedRule = {
   type t;
   type request = {
 @as("Tags") tags: option<tagList_>,
-@as("ChangeToken") changeToken: changeToken,
-@as("RateLimit") rateLimit: rateLimit,
-@as("RateKey") rateKey: rateKey,
-@as("MetricName") metricName: metricName,
-@as("Name") name: resourceName
+  @as("ChangeToken") changeToken: changeToken,
+  @as("RateLimit") rateLimit: rateLimit,
+  @as("RateKey") rateKey: rateKey,
+  @as("MetricName") metricName: metricName,
+  @as("Name") name: resourceName
 }
   type response = {
 @as("ChangeToken") changeToken: option<changeToken>,
-@as("Rule") rule: option<rateBasedRule>
+  @as("Rule") rule: option<rateBasedRule>
 }
   @module("@aws-sdk/client-waf") @new external new_: (request) => t = "CreateRateBasedRuleCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1066,11 +1068,11 @@ module CreateIPSet = {
   type t;
   type request = {
 @as("ChangeToken") changeToken: changeToken,
-@as("Name") name: resourceName
+  @as("Name") name: resourceName
 }
   type response = {
 @as("ChangeToken") changeToken: option<changeToken>,
-@as("IPSet") ipset: option<ipset>
+  @as("IPSet") ipset: option<ipset>
 }
   @module("@aws-sdk/client-waf") @new external new_: (request) => t = "CreateIPSetCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1080,11 +1082,11 @@ module CreateGeoMatchSet = {
   type t;
   type request = {
 @as("ChangeToken") changeToken: changeToken,
-@as("Name") name: resourceName
+  @as("Name") name: resourceName
 }
   type response = {
 @as("ChangeToken") changeToken: option<changeToken>,
-@as("GeoMatchSet") geoMatchSet: option<geoMatchSet>
+  @as("GeoMatchSet") geoMatchSet: option<geoMatchSet>
 }
   @module("@aws-sdk/client-waf") @new external new_: (request) => t = "CreateGeoMatchSetCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1094,8 +1096,8 @@ module UpdateXssMatchSet = {
   type t;
   type request = {
 @as("Updates") updates: xssMatchSetUpdates,
-@as("ChangeToken") changeToken: changeToken,
-@as("XssMatchSetId") xssMatchSetId: resourceId
+  @as("ChangeToken") changeToken: changeToken,
+  @as("XssMatchSetId") xssMatchSetId: resourceId
 }
   type response = {
 @as("ChangeToken") changeToken: option<changeToken>
@@ -1108,8 +1110,8 @@ module UpdateSqlInjectionMatchSet = {
   type t;
   type request = {
 @as("Updates") updates: sqlInjectionMatchSetUpdates,
-@as("ChangeToken") changeToken: changeToken,
-@as("SqlInjectionMatchSetId") sqlInjectionMatchSetId: resourceId
+  @as("ChangeToken") changeToken: changeToken,
+  @as("SqlInjectionMatchSetId") sqlInjectionMatchSetId: resourceId
 }
   type response = {
 @as("ChangeToken") changeToken: option<changeToken>
@@ -1122,8 +1124,8 @@ module UpdateSizeConstraintSet = {
   type t;
   type request = {
 @as("Updates") updates: sizeConstraintSetUpdates,
-@as("ChangeToken") changeToken: changeToken,
-@as("SizeConstraintSetId") sizeConstraintSetId: resourceId
+  @as("ChangeToken") changeToken: changeToken,
+  @as("SizeConstraintSetId") sizeConstraintSetId: resourceId
 }
   type response = {
 @as("ChangeToken") changeToken: option<changeToken>
@@ -1136,8 +1138,8 @@ module UpdateRegexMatchSet = {
   type t;
   type request = {
 @as("ChangeToken") changeToken: changeToken,
-@as("Updates") updates: regexMatchSetUpdates,
-@as("RegexMatchSetId") regexMatchSetId: resourceId
+  @as("Updates") updates: regexMatchSetUpdates,
+  @as("RegexMatchSetId") regexMatchSetId: resourceId
 }
   type response = {
 @as("ChangeToken") changeToken: option<changeToken>
@@ -1150,8 +1152,8 @@ module UpdateByteMatchSet = {
   type t;
   type request = {
 @as("Updates") updates: byteMatchSetUpdates,
-@as("ChangeToken") changeToken: changeToken,
-@as("ByteMatchSetId") byteMatchSetId: resourceId
+  @as("ChangeToken") changeToken: changeToken,
+  @as("ByteMatchSetId") byteMatchSetId: resourceId
 }
   type response = {
 @as("ChangeToken") changeToken: option<changeToken>
@@ -1164,11 +1166,11 @@ module ListLoggingConfigurations = {
   type t;
   type request = {
 @as("Limit") limit: option<paginationLimit>,
-@as("NextMarker") nextMarker: option<nextMarker>
+  @as("NextMarker") nextMarker: option<nextMarker>
 }
   type response = {
 @as("NextMarker") nextMarker: option<nextMarker>,
-@as("LoggingConfigurations") loggingConfigurations: option<loggingConfigurations>
+  @as("LoggingConfigurations") loggingConfigurations: option<loggingConfigurations>
 }
   @module("@aws-sdk/client-waf") @new external new_: (request) => t = "ListLoggingConfigurationsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1178,12 +1180,12 @@ module ListActivatedRulesInRuleGroup = {
   type t;
   type request = {
 @as("Limit") limit: option<paginationLimit>,
-@as("NextMarker") nextMarker: option<nextMarker>,
-@as("RuleGroupId") ruleGroupId: option<resourceId>
+  @as("NextMarker") nextMarker: option<nextMarker>,
+  @as("RuleGroupId") ruleGroupId: option<resourceId>
 }
   type response = {
 @as("ActivatedRules") activatedRules: option<activatedRules>,
-@as("NextMarker") nextMarker: option<nextMarker>
+  @as("NextMarker") nextMarker: option<nextMarker>
 }
   @module("@aws-sdk/client-waf") @new external new_: (request) => t = "ListActivatedRulesInRuleGroupCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1253,11 +1255,11 @@ module CreateXssMatchSet = {
   type t;
   type request = {
 @as("ChangeToken") changeToken: changeToken,
-@as("Name") name: resourceName
+  @as("Name") name: resourceName
 }
   type response = {
 @as("ChangeToken") changeToken: option<changeToken>,
-@as("XssMatchSet") xssMatchSet: option<xssMatchSet>
+  @as("XssMatchSet") xssMatchSet: option<xssMatchSet>
 }
   @module("@aws-sdk/client-waf") @new external new_: (request) => t = "CreateXssMatchSetCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1267,11 +1269,11 @@ module CreateSqlInjectionMatchSet = {
   type t;
   type request = {
 @as("ChangeToken") changeToken: changeToken,
-@as("Name") name: resourceName
+  @as("Name") name: resourceName
 }
   type response = {
 @as("ChangeToken") changeToken: option<changeToken>,
-@as("SqlInjectionMatchSet") sqlInjectionMatchSet: option<sqlInjectionMatchSet>
+  @as("SqlInjectionMatchSet") sqlInjectionMatchSet: option<sqlInjectionMatchSet>
 }
   @module("@aws-sdk/client-waf") @new external new_: (request) => t = "CreateSqlInjectionMatchSetCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1281,11 +1283,11 @@ module CreateSizeConstraintSet = {
   type t;
   type request = {
 @as("ChangeToken") changeToken: changeToken,
-@as("Name") name: resourceName
+  @as("Name") name: resourceName
 }
   type response = {
 @as("ChangeToken") changeToken: option<changeToken>,
-@as("SizeConstraintSet") sizeConstraintSet: option<sizeConstraintSet>
+  @as("SizeConstraintSet") sizeConstraintSet: option<sizeConstraintSet>
 }
   @module("@aws-sdk/client-waf") @new external new_: (request) => t = "CreateSizeConstraintSetCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1295,11 +1297,11 @@ module CreateRegexMatchSet = {
   type t;
   type request = {
 @as("ChangeToken") changeToken: changeToken,
-@as("Name") name: resourceName
+  @as("Name") name: resourceName
 }
   type response = {
 @as("ChangeToken") changeToken: option<changeToken>,
-@as("RegexMatchSet") regexMatchSet: option<regexMatchSet>
+  @as("RegexMatchSet") regexMatchSet: option<regexMatchSet>
 }
   @module("@aws-sdk/client-waf") @new external new_: (request) => t = "CreateRegexMatchSetCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1309,11 +1311,11 @@ module CreateByteMatchSet = {
   type t;
   type request = {
 @as("ChangeToken") changeToken: changeToken,
-@as("Name") name: resourceName
+  @as("Name") name: resourceName
 }
   type response = {
 @as("ChangeToken") changeToken: option<changeToken>,
-@as("ByteMatchSet") byteMatchSet: option<byteMatchSet>
+  @as("ByteMatchSet") byteMatchSet: option<byteMatchSet>
 }
   @module("@aws-sdk/client-waf") @new external new_: (request) => t = "CreateByteMatchSetCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1323,9 +1325,9 @@ module UpdateWebACL = {
   type t;
   type request = {
 @as("DefaultAction") defaultAction: option<wafAction>,
-@as("Updates") updates: option<webACLUpdates>,
-@as("ChangeToken") changeToken: changeToken,
-@as("WebACLId") webACLId: resourceId
+  @as("Updates") updates: option<webACLUpdates>,
+  @as("ChangeToken") changeToken: changeToken,
+  @as("WebACLId") webACLId: resourceId
 }
   type response = {
 @as("ChangeToken") changeToken: option<changeToken>
@@ -1338,8 +1340,8 @@ module UpdateRuleGroup = {
   type t;
   type request = {
 @as("ChangeToken") changeToken: changeToken,
-@as("Updates") updates: ruleGroupUpdates,
-@as("RuleGroupId") ruleGroupId: resourceId
+  @as("Updates") updates: ruleGroupUpdates,
+  @as("RuleGroupId") ruleGroupId: resourceId
 }
   type response = {
 @as("ChangeToken") changeToken: option<changeToken>
@@ -1364,14 +1366,14 @@ module GetSampledRequests = {
   type t;
   type request = {
 @as("MaxItems") maxItems: getSampledRequestsMaxItems,
-@as("TimeWindow") timeWindow: timeWindow,
-@as("RuleId") ruleId: resourceId,
-@as("WebAclId") webAclId: resourceId
+  @as("TimeWindow") timeWindow: timeWindow,
+  @as("RuleId") ruleId: resourceId,
+  @as("WebAclId") webAclId: resourceId
 }
   type response = {
 @as("TimeWindow") timeWindow: option<timeWindow>,
-@as("PopulationSize") populationSize: option<populationSize>,
-@as("SampledRequests") sampledRequests: option<sampledHTTPRequests>
+  @as("PopulationSize") populationSize: option<populationSize>,
+  @as("SampledRequests") sampledRequests: option<sampledHTTPRequests>
 }
   @module("@aws-sdk/client-waf") @new external new_: (request) => t = "GetSampledRequestsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1381,14 +1383,14 @@ module CreateWebACL = {
   type t;
   type request = {
 @as("Tags") tags: option<tagList_>,
-@as("ChangeToken") changeToken: changeToken,
-@as("DefaultAction") defaultAction: wafAction,
-@as("MetricName") metricName: metricName,
-@as("Name") name: resourceName
+  @as("ChangeToken") changeToken: changeToken,
+  @as("DefaultAction") defaultAction: wafAction,
+  @as("MetricName") metricName: metricName,
+  @as("Name") name: resourceName
 }
   type response = {
 @as("ChangeToken") changeToken: option<changeToken>,
-@as("WebACL") webACL: option<webACL>
+  @as("WebACL") webACL: option<webACL>
 }
   @module("@aws-sdk/client-waf") @new external new_: (request) => t = "CreateWebACLCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";

@@ -5,14 +5,17 @@ httpStatusCode: option<float>,
   cfId: option<string>,
   attempts: option<int>,
   totalRetryDelay: option<int>
-};
-type string_ = string
-type boolean_ = bool
-type integer_ = int
-type long = float
+}
+type awsServiceClient;
+@module("@aws-sdk/client-iotsitewise") @new external createClient: unit => awsServiceClient = "IoTSiteWiseClient";
+type baseString = string
+type baseBoolean = bool
+type baseInteger = int
+type baseTimestamp = Js.Date.t;
+type baseLong = float
 type variableName = string
 type url = string
-type traversalType = [@as("PATH_TO_ROOT") #PATHTOROOT]
+type traversalType = [@as("PATH_TO_ROOT") #PATH_TO_ROOT]
 type traversalDirection = [@as("CHILD") #CHILD | @as("PARENT") #PARENT]
 type timestamp_ = Js.Date.t;
 type timeOrdering = [@as("DESCENDING") #DESCENDING | @as("ASCENDING") #ASCENDING]
@@ -41,13 +44,13 @@ type offsetInNanos = int
 type nextToken = string
 type name = string
 type monitorErrorMessage = string
-type monitorErrorCode = [@as("LIMIT_EXCEEDED") #LIMITEXCEEDED | @as("VALIDATION_ERROR") #VALIDATIONERROR | @as("INTERNAL_FAILURE") #INTERNALFAILURE]
+type monitorErrorCode = [@as("LIMIT_EXCEEDED") #LIMIT_EXCEEDED | @as("VALIDATION_ERROR") #VALIDATION_ERROR | @as("INTERNAL_FAILURE") #INTERNAL_FAILURE]
 type measurement = unit
 type maxResults = int
 type maxInterpolatedResults = int
 type macro = string
 type loggingLevel = [@as("OFF") #OFF | @as("INFO") #INFO | @as("ERROR") #ERROR]
-type listAssetsFilter = [@as("TOP_LEVEL") #TOPLEVEL | @as("ALL") #ALL]
+type listAssetsFilter = [@as("TOP_LEVEL") #TOP_LEVEL | @as("ALL") #ALL]
 type kmsKeyId = string
 type intervalInSeconds = float
 type interval = string
@@ -60,16 +63,16 @@ type id = string
 type expression = string
 type exceptionMessage = string
 type errorMessage = string
-type errorCode = [@as("INTERNAL_FAILURE") #INTERNALFAILURE | @as("VALIDATION_ERROR") #VALIDATIONERROR]
+type errorCode = [@as("INTERNAL_FAILURE") #INTERNAL_FAILURE | @as("VALIDATION_ERROR") #VALIDATION_ERROR]
 type entryId = string
-type encryptionType = [@as("KMS_BASED_ENCRYPTION") #KMSBASEDENCRYPTION | @as("SITEWISE_DEFAULT_ENCRYPTION") #SITEWISEDEFAULTENCRYPTION]
+type encryptionType = [@as("KMS_BASED_ENCRYPTION") #KMS_BASED_ENCRYPTION | @as("SITEWISE_DEFAULT_ENCRYPTION") #SITEWISE_DEFAULT_ENCRYPTION]
 type email = string
 type description = string
 type defaultValue = string
 type dashboardDefinition = string
-type configurationState = [@as("UPDATE_FAILED") #UPDATEFAILED | @as("UPDATE_IN_PROGRESS") #UPDATEINPROGRESS | @as("ACTIVE") #ACTIVE]
+type configurationState = [@as("UPDATE_FAILED") #UPDATE_FAILED | @as("UPDATE_IN_PROGRESS") #UPDATE_IN_PROGRESS | @as("ACTIVE") #ACTIVE]
 type clientToken = string
-type capabilitySyncStatus = [@as("SYNC_FAILED") #SYNCFAILED | @as("OUT_OF_SYNC") #OUTOFSYNC | @as("IN_SYNC") #INSYNC]
+type capabilitySyncStatus = [@as("SYNC_FAILED") #SYNC_FAILED | @as("OUT_OF_SYNC") #OUT_OF_SYNC | @as("IN_SYNC") #IN_SYNC]
 type capabilityNamespace = string
 type capabilityConfiguration = string
 type batchPutAssetPropertyValueErrorCode = [@as("AccessDeniedException") #AccessDeniedException | @as("TimestampOutOfRangeException") #TimestampOutOfRangeException | @as("ConflictingOperationException") #ConflictingOperationException | @as("LimitExceededException") #LimitExceededException | @as("ThrottlingException") #ThrottlingException | @as("ServiceUnavailableException") #ServiceUnavailableException | @as("InternalFailureException") #InternalFailureException | @as("InvalidRequestException") #InvalidRequestException | @as("ResourceNotFoundException") #ResourceNotFoundException]
@@ -79,20 +82,20 @@ type assetRelationshipType = [@as("HIERARCHY") #HIERARCHY]
 type assetPropertyAlias = string
 type assetModelState = [@as("FAILED") #FAILED | @as("DELETING") #DELETING | @as("PROPAGATING") #PROPAGATING | @as("UPDATING") #UPDATING | @as("ACTIVE") #ACTIVE | @as("CREATING") #CREATING]
 type assetErrorMessage = string
-type assetErrorCode = [@as("INTERNAL_FAILURE") #INTERNALFAILURE]
+type assetErrorCode = [@as("INTERNAL_FAILURE") #INTERNAL_FAILURE]
 type amazonResourceName = string
 type aggregatedDoubleValue = float
-type aggregateType = [@as("STANDARD_DEVIATION") #STANDARDDEVIATION | @as("SUM") #SUM | @as("MINIMUM") #MINIMUM | @as("MAXIMUM") #MAXIMUM | @as("COUNT") #COUNT | @as("AVERAGE") #AVERAGE]
+type aggregateType = [@as("STANDARD_DEVIATION") #STANDARD_DEVIATION | @as("SUM") #SUM | @as("MINIMUM") #MINIMUM | @as("MAXIMUM") #MAXIMUM | @as("COUNT") #COUNT | @as("AVERAGE") #AVERAGE]
 type arn = string
 type variant = {
 booleanValue: option<propertyValueBooleanValue>,
-doubleValue: option<propertyValueDoubleValue>,
-integerValue: option<propertyValueIntegerValue>,
-stringValue: option<propertyValueStringValue>
+  doubleValue: option<propertyValueDoubleValue>,
+  integerValue: option<propertyValueIntegerValue>,
+  stringValue: option<propertyValueStringValue>
 }
 type variableValue = {
 hierarchyId: option<macro>,
-propertyId: macro
+  propertyId: macro
 }
 type userIdentity = {
 id: identityId
@@ -102,21 +105,21 @@ interval: interval
 }
 type timeInNanos = {
 offsetInNanos: option<offsetInNanos>,
-timeInSeconds: timeInSeconds
+  timeInSeconds: timeInSeconds
 }
-type tagMap = Js.Dict.t< tagValue>
+type tagMap = Js.Dict.t<tagValue>
 type tagKeyList = array<tagKey>
 type qualities = array<quality>
 type propertyNotification = {
 state: propertyNotificationState,
-topic: propertyNotificationTopic
+  topic: propertyNotificationTopic
 }
 type projectSummary = {
 lastUpdateDate: option<timestamp_>,
-creationDate: option<timestamp_>,
-description: option<description>,
-name: name,
-id: id
+  creationDate: option<timestamp_>,
+  description: option<description>,
+  name: name,
+  id: id
 }
 type projectResource = {
 id: id
@@ -126,18 +129,18 @@ id: id
 }
 type monitorErrorDetails = {
 message: option<monitorErrorMessage>,
-code: option<monitorErrorCode>
+  code: option<monitorErrorCode>
 }
 type loggingOptions = {
 level: loggingLevel
 }
 type imageLocation = {
 url: url,
-id: id
+  id: id
 }
 type imageFile = {
 @as("type") type_: imageFileType,
-data: imageFileData
+  data: imageFileData
 }
 type ids = array<id>
 type iamuserIdentity = {
@@ -154,88 +157,88 @@ groupArn: arn
 }
 type gatewayCapabilitySummary = {
 capabilitySyncStatus: capabilitySyncStatus,
-capabilityNamespace: capabilityNamespace
+  capabilityNamespace: capabilityNamespace
 }
 type errorDetails = {
 message: errorMessage,
-code: errorCode
+  code: errorCode
 }
 type dashboardSummary = {
 lastUpdateDate: option<timestamp_>,
-creationDate: option<timestamp_>,
-description: option<description>,
-name: name,
-id: id
+  creationDate: option<timestamp_>,
+  description: option<description>,
+  name: name,
+  id: id
 }
 type configurationErrorDetails = {
 message: errorMessage,
-code: errorCode
+  code: errorCode
 }
 type attribute = {
 defaultValue: option<defaultValue>
 }
 type assetModelHierarchyDefinition = {
 childAssetModelId: id,
-name: name
+  name: name
 }
 type assetModelHierarchy = {
 childAssetModelId: id,
-name: name,
-id: option<id>
+  name: name,
+  id: option<id>
 }
 type assetIDs = array<id>
 type assetHierarchyInfo = {
 childAssetId: option<id>,
-parentAssetId: option<id>
+  parentAssetId: option<id>
 }
 type assetHierarchy = {
 name: name,
-id: option<id>
+  id: option<id>
 }
 type assetErrorDetails = {
 message: assetErrorMessage,
-code: assetErrorCode,
-assetId: id
+  code: assetErrorCode,
+  assetId: id
 }
 type alarms = {
 notificationLambdaArn: option<arn>,
-alarmRoleArn: arn
+  alarmRoleArn: arn
 }
 type aggregates = {
 standardDeviation: option<aggregatedDoubleValue>,
-sum: option<aggregatedDoubleValue>,
-minimum: option<aggregatedDoubleValue>,
-maximum: option<aggregatedDoubleValue>,
-count: option<aggregatedDoubleValue>,
-average: option<aggregatedDoubleValue>
+  sum: option<aggregatedDoubleValue>,
+  minimum: option<aggregatedDoubleValue>,
+  maximum: option<aggregatedDoubleValue>,
+  count: option<aggregatedDoubleValue>,
+  average: option<aggregatedDoubleValue>
 }
 type aggregateTypes = array<aggregateType>
 type timestamps = array<timeInNanos>
 type resource = {
 project: option<projectResource>,
-portal: option<portalResource>
+  portal: option<portalResource>
 }
 type projectSummaries = array<projectSummary>
 type portalStatus = {
 error: option<monitorErrorDetails>,
-state: portalState
+  state: portalState
 }
 type metricWindow = {
 tumbling: option<tumblingWindow>
 }
 type interpolatedAssetPropertyValue = {
 value: variant,
-@as("timestamp") timestamp_: timeInNanos
+  @as("timestamp") timestamp_: timeInNanos
 }
 type image = {
 file: option<imageFile>,
-id: option<id>
+  id: option<id>
 }
 type identity = {
 iamRole: option<iamroleIdentity>,
-iamUser: option<iamuserIdentity>,
-group: option<groupIdentity>,
-user: option<userIdentity>
+  iamUser: option<iamuserIdentity>,
+  group: option<groupIdentity>,
+  user: option<userIdentity>
 }
 type gatewayPlatform = {
 greengrass: greengrass
@@ -243,92 +246,92 @@ greengrass: greengrass
 type gatewayCapabilitySummaries = array<gatewayCapabilitySummary>
 type expressionVariable = {
 value: variableValue,
-name: variableName
+  name: variableName
 }
 type dashboardSummaries = array<dashboardSummary>
 type configurationStatus = {
 error: option<configurationErrorDetails>,
-state: configurationState
+  state: configurationState
 }
 type batchDisassociateProjectAssetsErrors = array<assetErrorDetails>
 type batchAssociateProjectAssetsErrors = array<assetErrorDetails>
 type assetStatus = {
 error: option<errorDetails>,
-state: assetState
+  state: assetState
 }
 type assetRelationshipSummary = {
 relationshipType: assetRelationshipType,
-hierarchyInfo: option<assetHierarchyInfo>
+  hierarchyInfo: option<assetHierarchyInfo>
 }
 type assetPropertyValue = {
 quality: option<quality>,
-@as("timestamp") timestamp_: timeInNanos,
-value: variant
+  @as("timestamp") timestamp_: timeInNanos,
+  value: variant
 }
 type assetProperty = {
 @as("unit") unit_: option<propertyUnit>,
-dataTypeSpec: option<name>,
-dataType: propertyDataType,
-notification: option<propertyNotification>,
-alias: option<propertyAlias>,
-name: name,
-id: id
+  dataTypeSpec: option<name>,
+  dataType: propertyDataType,
+  notification: option<propertyNotification>,
+  alias: option<propertyAlias>,
+  name: name,
+  id: id
 }
 type assetModelStatus = {
 error: option<errorDetails>,
-state: assetModelState
+  state: assetModelState
 }
 type assetModelHierarchyDefinitions = array<assetModelHierarchyDefinition>
 type assetModelHierarchies = array<assetModelHierarchy>
 type assetHierarchies = array<assetHierarchy>
 type aggregatedValue = {
 value: aggregates,
-quality: option<quality>,
-@as("timestamp") timestamp_: timestamp_
+  quality: option<quality>,
+  @as("timestamp") timestamp_: timestamp_
 }
 type portalSummary = {
 status: portalStatus,
-roleArn: option<arn>,
-lastUpdateDate: option<timestamp_>,
-creationDate: option<timestamp_>,
-startUrl: url,
-description: option<description>,
-name: name,
-id: id
+  roleArn: option<arn>,
+  lastUpdateDate: option<timestamp_>,
+  creationDate: option<timestamp_>,
+  startUrl: url,
+  description: option<description>,
+  name: name,
+  id: id
 }
 type interpolatedAssetPropertyValues = array<interpolatedAssetPropertyValue>
 type gatewaySummary = {
 lastUpdateDate: timestamp_,
-creationDate: timestamp_,
-gatewayCapabilitySummaries: option<gatewayCapabilitySummaries>,
-gatewayName: name,
-gatewayId: id
+  creationDate: timestamp_,
+  gatewayCapabilitySummaries: option<gatewayCapabilitySummaries>,
+  gatewayName: name,
+  gatewayId: id
 }
 type expressionVariables = array<expressionVariable>
 type batchPutAssetPropertyError = {
 timestamps: timestamps,
-errorMessage: errorMessage,
-errorCode: batchPutAssetPropertyValueErrorCode
+  errorMessage: errorMessage,
+  errorCode: batchPutAssetPropertyValueErrorCode
 }
 type associatedAssetsSummary = {
 hierarchies: assetHierarchies,
-status: assetStatus,
-lastUpdateDate: timestamp_,
-creationDate: timestamp_,
-assetModelId: id,
-name: name,
-arn: arn,
-id: id
+  status: assetStatus,
+  lastUpdateDate: timestamp_,
+  creationDate: timestamp_,
+  assetModelId: id,
+  name: name,
+  arn: arn,
+  id: id
 }
 type assetSummary = {
 hierarchies: assetHierarchies,
-status: assetStatus,
-lastUpdateDate: timestamp_,
-creationDate: timestamp_,
-assetModelId: id,
-name: name,
-arn: arn,
-id: id
+  status: assetStatus,
+  lastUpdateDate: timestamp_,
+  creationDate: timestamp_,
+  assetModelId: id,
+  name: name,
+  arn: arn,
+  id: id
 }
 type assetRelationshipSummaries = array<assetRelationshipSummary>
 type assetPropertyValues = array<assetPropertyValue>
@@ -336,38 +339,38 @@ type assetPropertyValueHistory = array<assetPropertyValue>
 type assetProperties = array<assetProperty>
 type assetModelSummary = {
 status: assetModelStatus,
-lastUpdateDate: timestamp_,
-creationDate: timestamp_,
-description: description,
-name: name,
-arn: arn,
-id: id
+  lastUpdateDate: timestamp_,
+  creationDate: timestamp_,
+  description: description,
+  name: name,
+  arn: arn,
+  id: id
 }
 type aggregatedValues = array<aggregatedValue>
 type accessPolicySummary = {
 lastUpdateDate: option<timestamp_>,
-creationDate: option<timestamp_>,
-permission: permission,
-resource: resource,
-identity: identity,
-id: id
+  creationDate: option<timestamp_>,
+  permission: permission,
+  resource: resource,
+  identity: identity,
+  id: id
 }
 type transform = {
 variables: expressionVariables,
-expression: expression
+  expression: expression
 }
 type putAssetPropertyValueEntry = {
 propertyValues: assetPropertyValues,
-propertyAlias: option<assetPropertyAlias>,
-propertyId: option<id>,
-assetId: option<id>,
-entryId: entryId
+  propertyAlias: option<assetPropertyAlias>,
+  propertyId: option<id>,
+  assetId: option<id>,
+  entryId: entryId
 }
 type portalSummaries = array<portalSummary>
 type metric = {
 window: metricWindow,
-variables: expressionVariables,
-expression: expression
+  variables: expressionVariables,
+  expression: expression
 }
 type gatewaySummaries = array<gatewaySummary>
 type batchPutAssetPropertyErrors = array<batchPutAssetPropertyError>
@@ -376,78 +379,77 @@ type assetSummaries = array<assetSummary>
 type assetModelSummaries = array<assetModelSummary>
 type assetCompositeModel = {
 properties: assetProperties,
-@as("type") type_: name,
-description: option<description>,
-name: name
+  @as("type") type_: name,
+  description: option<description>,
+  name: name
 }
 type accessPolicySummaries = array<accessPolicySummary>
 type putAssetPropertyValueEntries = array<putAssetPropertyValueEntry>
 type propertyType = {
 metric: option<metric>,
-transform: option<transform>,
-measurement: option<measurement>,
-attribute: option<attribute>
+  transform: option<transform>,
+  measurement: option<measurement>,
+  attribute: option<attribute>
 }
 type batchPutAssetPropertyErrorEntry = {
 errors: batchPutAssetPropertyErrors,
-entryId: entryId
+  entryId: entryId
 }
 type assetCompositeModels = array<assetCompositeModel>
 type property = {
 @as("type") type_: option<propertyType>,
-@as("unit") unit_: option<propertyUnit>,
-dataType: propertyDataType,
-notification: option<propertyNotification>,
-alias: option<propertyAlias>,
-name: name,
-id: id
+  @as("unit") unit_: option<propertyUnit>,
+  dataType: propertyDataType,
+  notification: option<propertyNotification>,
+  alias: option<propertyAlias>,
+  name: name,
+  id: id
 }
 type batchPutAssetPropertyErrorEntries = array<batchPutAssetPropertyErrorEntry>
 type assetModelPropertyDefinition = {
 @as("type") type_: propertyType,
-@as("unit") unit_: option<propertyUnit>,
-dataTypeSpec: option<name>,
-dataType: propertyDataType,
-name: name
+  @as("unit") unit_: option<propertyUnit>,
+  dataTypeSpec: option<name>,
+  dataType: propertyDataType,
+  name: name
 }
 type assetModelProperty = {
 @as("type") type_: propertyType,
-@as("unit") unit_: option<propertyUnit>,
-dataTypeSpec: option<name>,
-dataType: propertyDataType,
-name: name,
-id: option<id>
+  @as("unit") unit_: option<propertyUnit>,
+  dataTypeSpec: option<name>,
+  dataType: propertyDataType,
+  name: name,
+  id: option<id>
 }
 type compositeModelProperty = {
 assetProperty: property,
-@as("type") type_: name,
-name: name
+  @as("type") type_: name,
+  name: name
 }
 type assetModelPropertyDefinitions = array<assetModelPropertyDefinition>
 type assetModelProperties = array<assetModelProperty>
 type assetModelCompositeModelDefinition = {
 properties: option<assetModelPropertyDefinitions>,
-@as("type") type_: name,
-description: option<description>,
-name: name
+  @as("type") type_: name,
+  description: option<description>,
+  name: name
 }
 type assetModelCompositeModel = {
 properties: option<assetModelProperties>,
-@as("type") type_: name,
-description: option<description>,
-name: name
+  @as("type") type_: name,
+  description: option<description>,
+  name: name
 }
 type assetModelCompositeModels = array<assetModelCompositeModel>
 type assetModelCompositeModelDefinitions = array<assetModelCompositeModelDefinition>
-type awsServiceClient;
-@module("@aws-sdk/client-iotsitewise") @new external createClient: unit => awsServiceClient = "IoTSiteWiseClient";
+
 module UpdateProject = {
   type t;
   type request = {
 clientToken: option<clientToken>,
-projectDescription: option<description>,
-projectName: name,
-projectId: id
+  projectDescription: option<description>,
+  projectName: name,
+  projectId: id
 }
   type response = unit
   @module("@aws-sdk/client-iotsitewise") @new external new_: (request) => t = "UpdateProjectCommand";
@@ -458,12 +460,12 @@ module UpdateGatewayCapabilityConfiguration = {
   type t;
   type request = {
 capabilityConfiguration: capabilityConfiguration,
-capabilityNamespace: capabilityNamespace,
-gatewayId: id
+  capabilityNamespace: capabilityNamespace,
+  gatewayId: id
 }
   type response = {
 capabilitySyncStatus: capabilitySyncStatus,
-capabilityNamespace: capabilityNamespace
+  capabilityNamespace: capabilityNamespace
 }
   @module("@aws-sdk/client-iotsitewise") @new external new_: (request) => t = "UpdateGatewayCapabilityConfigurationCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -473,7 +475,7 @@ module UpdateGateway = {
   type t;
   type request = {
 gatewayName: name,
-gatewayId: id
+  gatewayId: id
 }
   
   @module("@aws-sdk/client-iotsitewise") @new external new_: (request) => t = "UpdateGatewayCommand";
@@ -484,10 +486,10 @@ module UpdateDashboard = {
   type t;
   type request = {
 clientToken: option<clientToken>,
-dashboardDefinition: dashboardDefinition,
-dashboardDescription: option<description>,
-dashboardName: name,
-dashboardId: id
+  dashboardDefinition: dashboardDefinition,
+  dashboardDescription: option<description>,
+  dashboardName: name,
+  dashboardId: id
 }
   type response = unit
   @module("@aws-sdk/client-iotsitewise") @new external new_: (request) => t = "UpdateDashboardCommand";
@@ -498,10 +500,10 @@ module UpdateAssetProperty = {
   type t;
   type request = {
 clientToken: option<clientToken>,
-propertyNotificationState: option<propertyNotificationState>,
-propertyAlias: option<propertyAlias>,
-propertyId: id,
-assetId: id
+  propertyNotificationState: option<propertyNotificationState>,
+  propertyAlias: option<propertyAlias>,
+  propertyId: id,
+  assetId: id
 }
   
   @module("@aws-sdk/client-iotsitewise") @new external new_: (request) => t = "UpdateAssetPropertyCommand";
@@ -512,9 +514,9 @@ module DisassociateAssets = {
   type t;
   type request = {
 clientToken: option<clientToken>,
-childAssetId: id,
-hierarchyId: id,
-assetId: id
+  childAssetId: id,
+  hierarchyId: id,
+  assetId: id
 }
   
   @module("@aws-sdk/client-iotsitewise") @new external new_: (request) => t = "DisassociateAssetsCommand";
@@ -528,12 +530,12 @@ projectId: id
 }
   type response = {
 projectLastUpdateDate: timestamp_,
-projectCreationDate: timestamp_,
-projectDescription: option<description>,
-portalId: id,
-projectName: name,
-projectArn: arn,
-projectId: id
+  projectCreationDate: timestamp_,
+  projectDescription: option<description>,
+  portalId: id,
+  projectName: name,
+  projectArn: arn,
+  projectId: id
 }
   @module("@aws-sdk/client-iotsitewise") @new external new_: (request) => t = "DescribeProjectCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -543,13 +545,13 @@ module DescribeGatewayCapabilityConfiguration = {
   type t;
   type request = {
 capabilityNamespace: capabilityNamespace,
-gatewayId: id
+  gatewayId: id
 }
   type response = {
 capabilitySyncStatus: capabilitySyncStatus,
-capabilityConfiguration: capabilityConfiguration,
-capabilityNamespace: capabilityNamespace,
-gatewayId: id
+  capabilityConfiguration: capabilityConfiguration,
+  capabilityNamespace: capabilityNamespace,
+  gatewayId: id
 }
   @module("@aws-sdk/client-iotsitewise") @new external new_: (request) => t = "DescribeGatewayCapabilityConfigurationCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -562,13 +564,13 @@ dashboardId: id
 }
   type response = {
 dashboardLastUpdateDate: timestamp_,
-dashboardCreationDate: timestamp_,
-dashboardDefinition: dashboardDefinition,
-dashboardDescription: option<description>,
-projectId: id,
-dashboardName: name,
-dashboardArn: arn,
-dashboardId: id
+  dashboardCreationDate: timestamp_,
+  dashboardDefinition: dashboardDefinition,
+  dashboardDescription: option<description>,
+  projectId: id,
+  dashboardName: name,
+  dashboardArn: arn,
+  dashboardId: id
 }
   @module("@aws-sdk/client-iotsitewise") @new external new_: (request) => t = "DescribeDashboardCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -578,7 +580,7 @@ module DeleteProject = {
   type t;
   type request = {
 clientToken: option<clientToken>,
-projectId: id
+  projectId: id
 }
   type response = unit
   @module("@aws-sdk/client-iotsitewise") @new external new_: (request) => t = "DeleteProjectCommand";
@@ -599,7 +601,7 @@ module DeleteDashboard = {
   type t;
   type request = {
 clientToken: option<clientToken>,
-dashboardId: id
+  dashboardId: id
 }
   type response = unit
   @module("@aws-sdk/client-iotsitewise") @new external new_: (request) => t = "DeleteDashboardCommand";
@@ -610,7 +612,7 @@ module DeleteAccessPolicy = {
   type t;
   type request = {
 clientToken: option<clientToken>,
-accessPolicyId: id
+  accessPolicyId: id
 }
   type response = unit
   @module("@aws-sdk/client-iotsitewise") @new external new_: (request) => t = "DeleteAccessPolicyCommand";
@@ -621,9 +623,9 @@ module AssociateAssets = {
   type t;
   type request = {
 clientToken: option<clientToken>,
-childAssetId: id,
-hierarchyId: id,
-assetId: id
+  childAssetId: id,
+  hierarchyId: id,
+  assetId: id
 }
   
   @module("@aws-sdk/client-iotsitewise") @new external new_: (request) => t = "AssociateAssetsCommand";
@@ -634,7 +636,7 @@ module UntagResource = {
   type t;
   type request = {
 tagKeys: tagKeyList,
-resourceArn: amazonResourceName
+  resourceArn: amazonResourceName
 }
   type response = unit
   @module("@aws-sdk/client-iotsitewise") @new external new_: (request) => t = "UntagResourceCommand";
@@ -645,7 +647,7 @@ module TagResource = {
   type t;
   type request = {
 tags: tagMap,
-resourceArn: amazonResourceName
+  resourceArn: amazonResourceName
 }
   type response = unit
   @module("@aws-sdk/client-iotsitewise") @new external new_: (request) => t = "TagResourceCommand";
@@ -678,12 +680,12 @@ module ListProjectAssets = {
   type t;
   type request = {
 maxResults: option<maxResults>,
-nextToken: option<nextToken>,
-projectId: id
+  nextToken: option<nextToken>,
+  projectId: id
 }
   type response = {
 nextToken: option<nextToken>,
-assetIds: assetIDs
+  assetIds: assetIDs
 }
   @module("@aws-sdk/client-iotsitewise") @new external new_: (request) => t = "ListProjectAssetsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -703,14 +705,14 @@ module CreateProject = {
   type t;
   type request = {
 tags: option<tagMap>,
-clientToken: option<clientToken>,
-projectDescription: option<description>,
-projectName: name,
-portalId: id
+  clientToken: option<clientToken>,
+  projectDescription: option<description>,
+  projectName: name,
+  portalId: id
 }
   type response = {
 projectArn: arn,
-projectId: id
+  projectId: id
 }
   @module("@aws-sdk/client-iotsitewise") @new external new_: (request) => t = "CreateProjectCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -720,15 +722,15 @@ module CreateDashboard = {
   type t;
   type request = {
 tags: option<tagMap>,
-clientToken: option<clientToken>,
-dashboardDefinition: dashboardDefinition,
-dashboardDescription: option<description>,
-dashboardName: name,
-projectId: id
+  clientToken: option<clientToken>,
+  dashboardDefinition: dashboardDefinition,
+  dashboardDescription: option<description>,
+  dashboardName: name,
+  projectId: id
 }
   type response = {
 dashboardArn: arn,
-dashboardId: id
+  dashboardId: id
 }
   @module("@aws-sdk/client-iotsitewise") @new external new_: (request) => t = "CreateDashboardCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -738,14 +740,14 @@ module UpdatePortal = {
   type t;
   type request = {
 alarms: option<alarms>,
-notificationSenderEmail: option<email>,
-clientToken: option<clientToken>,
-roleArn: arn,
-portalLogoImage: option<image>,
-portalContactEmail: email,
-portalDescription: option<description>,
-portalName: name,
-portalId: id
+  notificationSenderEmail: option<email>,
+  clientToken: option<clientToken>,
+  roleArn: arn,
+  portalLogoImage: option<image>,
+  portalContactEmail: email,
+  portalDescription: option<description>,
+  portalName: name,
+  portalId: id
 }
   type response = {
 portalStatus: portalStatus
@@ -758,8 +760,8 @@ module UpdateAsset = {
   type t;
   type request = {
 clientToken: option<clientToken>,
-assetName: name,
-assetId: id
+  assetName: name,
+  assetId: id
 }
   type response = {
 assetStatus: assetStatus
@@ -772,10 +774,10 @@ module UpdateAccessPolicy = {
   type t;
   type request = {
 clientToken: option<clientToken>,
-accessPolicyPermission: permission,
-accessPolicyResource: resource,
-accessPolicyIdentity: identity,
-accessPolicyId: id
+  accessPolicyPermission: permission,
+  accessPolicyResource: resource,
+  accessPolicyIdentity: identity,
+  accessPolicyId: id
 }
   type response = unit
   @module("@aws-sdk/client-iotsitewise") @new external new_: (request) => t = "UpdateAccessPolicyCommand";
@@ -786,12 +788,12 @@ module PutDefaultEncryptionConfiguration = {
   type t;
   type request = {
 kmsKeyId: option<kmsKeyId>,
-encryptionType: encryptionType
+  encryptionType: encryptionType
 }
   type response = {
 configurationStatus: configurationStatus,
-kmsKeyArn: option<arn>,
-encryptionType: encryptionType
+  kmsKeyArn: option<arn>,
+  encryptionType: encryptionType
 }
   @module("@aws-sdk/client-iotsitewise") @new external new_: (request) => t = "PutDefaultEncryptionConfigurationCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -801,12 +803,12 @@ module ListProjects = {
   type t;
   type request = {
 maxResults: option<maxResults>,
-nextToken: option<nextToken>,
-portalId: id
+  nextToken: option<nextToken>,
+  portalId: id
 }
   type response = {
 nextToken: option<nextToken>,
-projectSummaries: projectSummaries
+  projectSummaries: projectSummaries
 }
   @module("@aws-sdk/client-iotsitewise") @new external new_: (request) => t = "ListProjectsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -816,12 +818,12 @@ module ListDashboards = {
   type t;
   type request = {
 maxResults: option<maxResults>,
-nextToken: option<nextToken>,
-projectId: id
+  nextToken: option<nextToken>,
+  projectId: id
 }
   type response = {
 nextToken: option<nextToken>,
-dashboardSummaries: dashboardSummaries
+  dashboardSummaries: dashboardSummaries
 }
   @module("@aws-sdk/client-iotsitewise") @new external new_: (request) => t = "ListDashboardsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -831,8 +833,8 @@ module GetAssetPropertyValue = {
   type t;
   type request = {
 propertyAlias: option<assetPropertyAlias>,
-propertyId: option<id>,
-assetId: option<id>
+  propertyId: option<id>,
+  assetId: option<id>
 }
   type response = {
 propertyValue: option<assetPropertyValue>
@@ -848,20 +850,20 @@ portalId: id
 }
   type response = {
 alarms: option<alarms>,
-notificationSenderEmail: option<email>,
-portalAuthMode: option<authMode>,
-roleArn: option<arn>,
-portalLogoImageLocation: option<imageLocation>,
-portalLastUpdateDate: timestamp_,
-portalCreationDate: timestamp_,
-portalStatus: portalStatus,
-portalContactEmail: email,
-portalStartUrl: url,
-portalClientId: portalClientId,
-portalDescription: option<description>,
-portalName: name,
-portalArn: arn,
-portalId: id
+  notificationSenderEmail: option<email>,
+  portalAuthMode: option<authMode>,
+  roleArn: option<arn>,
+  portalLogoImageLocation: option<imageLocation>,
+  portalLastUpdateDate: timestamp_,
+  portalCreationDate: timestamp_,
+  portalStatus: portalStatus,
+  portalContactEmail: email,
+  portalStartUrl: url,
+  portalClientId: portalClientId,
+  portalDescription: option<description>,
+  portalName: name,
+  portalArn: arn,
+  portalId: id
 }
   @module("@aws-sdk/client-iotsitewise") @new external new_: (request) => t = "DescribePortalCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -874,12 +876,12 @@ gatewayId: id
 }
   type response = {
 lastUpdateDate: timestamp_,
-creationDate: timestamp_,
-gatewayCapabilitySummaries: gatewayCapabilitySummaries,
-gatewayPlatform: option<gatewayPlatform>,
-gatewayArn: arn,
-gatewayName: name,
-gatewayId: id
+  creationDate: timestamp_,
+  gatewayCapabilitySummaries: gatewayCapabilitySummaries,
+  gatewayPlatform: option<gatewayPlatform>,
+  gatewayArn: arn,
+  gatewayName: name,
+  gatewayId: id
 }
   @module("@aws-sdk/client-iotsitewise") @new external new_: (request) => t = "DescribeGatewayCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -890,8 +892,8 @@ module DescribeDefaultEncryptionConfiguration = {
   type request = unit
   type response = {
 configurationStatus: configurationStatus,
-kmsKeyArn: option<arn>,
-encryptionType: encryptionType
+  kmsKeyArn: option<arn>,
+  encryptionType: encryptionType
 }
   @module("@aws-sdk/client-iotsitewise") @new external new_: (request) => t = "DescribeDefaultEncryptionConfigurationCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -904,12 +906,12 @@ accessPolicyId: id
 }
   type response = {
 accessPolicyLastUpdateDate: timestamp_,
-accessPolicyCreationDate: timestamp_,
-accessPolicyPermission: permission,
-accessPolicyResource: resource,
-accessPolicyIdentity: identity,
-accessPolicyArn: arn,
-accessPolicyId: id
+  accessPolicyCreationDate: timestamp_,
+  accessPolicyPermission: permission,
+  accessPolicyResource: resource,
+  accessPolicyIdentity: identity,
+  accessPolicyArn: arn,
+  accessPolicyId: id
 }
   @module("@aws-sdk/client-iotsitewise") @new external new_: (request) => t = "DescribeAccessPolicyCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -919,7 +921,7 @@ module DeletePortal = {
   type t;
   type request = {
 clientToken: option<clientToken>,
-portalId: id
+  portalId: id
 }
   type response = {
 portalStatus: portalStatus
@@ -932,7 +934,7 @@ module DeleteAssetModel = {
   type t;
   type request = {
 clientToken: option<clientToken>,
-assetModelId: id
+  assetModelId: id
 }
   type response = {
 assetModelStatus: assetModelStatus
@@ -945,7 +947,7 @@ module DeleteAsset = {
   type t;
   type request = {
 clientToken: option<clientToken>,
-assetId: id
+  assetId: id
 }
   type response = {
 assetStatus: assetStatus
@@ -958,22 +960,22 @@ module CreatePortal = {
   type t;
   type request = {
 alarms: option<alarms>,
-notificationSenderEmail: option<email>,
-portalAuthMode: option<authMode>,
-tags: option<tagMap>,
-roleArn: arn,
-portalLogoImageFile: option<imageFile>,
-clientToken: option<clientToken>,
-portalContactEmail: email,
-portalDescription: option<description>,
-portalName: name
+  notificationSenderEmail: option<email>,
+  portalAuthMode: option<authMode>,
+  tags: option<tagMap>,
+  roleArn: arn,
+  portalLogoImageFile: option<imageFile>,
+  clientToken: option<clientToken>,
+  portalContactEmail: email,
+  portalDescription: option<description>,
+  portalName: name
 }
   type response = {
 ssoApplicationId: ssoapplicationId,
-portalStatus: portalStatus,
-portalStartUrl: url,
-portalArn: arn,
-portalId: id
+  portalStatus: portalStatus,
+  portalStartUrl: url,
+  portalArn: arn,
+  portalId: id
 }
   @module("@aws-sdk/client-iotsitewise") @new external new_: (request) => t = "CreatePortalCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -983,12 +985,12 @@ module CreateGateway = {
   type t;
   type request = {
 tags: option<tagMap>,
-gatewayPlatform: gatewayPlatform,
-gatewayName: name
+  gatewayPlatform: gatewayPlatform,
+  gatewayName: name
 }
   type response = {
 gatewayArn: arn,
-gatewayId: id
+  gatewayId: id
 }
   @module("@aws-sdk/client-iotsitewise") @new external new_: (request) => t = "CreateGatewayCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -998,14 +1000,14 @@ module CreateAsset = {
   type t;
   type request = {
 tags: option<tagMap>,
-clientToken: option<clientToken>,
-assetModelId: id,
-assetName: name
+  clientToken: option<clientToken>,
+  assetModelId: id,
+  assetName: name
 }
   type response = {
 assetStatus: assetStatus,
-assetArn: arn,
-assetId: id
+  assetArn: arn,
+  assetId: id
 }
   @module("@aws-sdk/client-iotsitewise") @new external new_: (request) => t = "CreateAssetCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1015,14 +1017,14 @@ module CreateAccessPolicy = {
   type t;
   type request = {
 tags: option<tagMap>,
-clientToken: option<clientToken>,
-accessPolicyPermission: permission,
-accessPolicyResource: resource,
-accessPolicyIdentity: identity
+  clientToken: option<clientToken>,
+  accessPolicyPermission: permission,
+  accessPolicyResource: resource,
+  accessPolicyIdentity: identity
 }
   type response = {
 accessPolicyArn: arn,
-accessPolicyId: id
+  accessPolicyId: id
 }
   @module("@aws-sdk/client-iotsitewise") @new external new_: (request) => t = "CreateAccessPolicyCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1032,8 +1034,8 @@ module BatchDisassociateProjectAssets = {
   type t;
   type request = {
 clientToken: option<clientToken>,
-assetIds: ids,
-projectId: id
+  assetIds: ids,
+  projectId: id
 }
   type response = {
 errors: option<batchDisassociateProjectAssetsErrors>
@@ -1046,8 +1048,8 @@ module BatchAssociateProjectAssets = {
   type t;
   type request = {
 clientToken: option<clientToken>,
-assetIds: ids,
-projectId: id
+  assetIds: ids,
+  projectId: id
 }
   type response = {
 errors: option<batchAssociateProjectAssetsErrors>
@@ -1060,13 +1062,13 @@ module ListAssetRelationships = {
   type t;
   type request = {
 maxResults: option<maxResults>,
-nextToken: option<nextToken>,
-traversalType: traversalType,
-assetId: id
+  nextToken: option<nextToken>,
+  traversalType: traversalType,
+  assetId: id
 }
   type response = {
 nextToken: option<nextToken>,
-assetRelationshipSummaries: assetRelationshipSummaries
+  assetRelationshipSummaries: assetRelationshipSummaries
 }
   @module("@aws-sdk/client-iotsitewise") @new external new_: (request) => t = "ListAssetRelationshipsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1076,21 +1078,21 @@ module GetInterpolatedAssetPropertyValues = {
   type t;
   type request = {
 @as("type") type_: interpolationType,
-maxResults: option<maxInterpolatedResults>,
-nextToken: option<nextToken>,
-intervalInSeconds: intervalInSeconds,
-quality: quality,
-endTimeOffsetInNanos: option<offsetInNanos>,
-endTimeInSeconds: timeInSeconds,
-startTimeOffsetInNanos: option<offsetInNanos>,
-startTimeInSeconds: timeInSeconds,
-propertyAlias: option<assetPropertyAlias>,
-propertyId: option<id>,
-assetId: option<id>
+  maxResults: option<maxInterpolatedResults>,
+  nextToken: option<nextToken>,
+  intervalInSeconds: intervalInSeconds,
+  quality: quality,
+  endTimeOffsetInNanos: option<offsetInNanos>,
+  endTimeInSeconds: timeInSeconds,
+  startTimeOffsetInNanos: option<offsetInNanos>,
+  startTimeInSeconds: timeInSeconds,
+  propertyAlias: option<assetPropertyAlias>,
+  propertyId: option<id>,
+  assetId: option<id>
 }
   type response = {
 nextToken: option<nextToken>,
-interpolatedAssetPropertyValues: interpolatedAssetPropertyValues
+  interpolatedAssetPropertyValues: interpolatedAssetPropertyValues
 }
   @module("@aws-sdk/client-iotsitewise") @new external new_: (request) => t = "GetInterpolatedAssetPropertyValuesCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1100,18 +1102,18 @@ module GetAssetPropertyValueHistory = {
   type t;
   type request = {
 maxResults: option<maxResults>,
-nextToken: option<nextToken>,
-timeOrdering: option<timeOrdering>,
-qualities: option<qualities>,
-endDate: option<timestamp_>,
-startDate: option<timestamp_>,
-propertyAlias: option<assetPropertyAlias>,
-propertyId: option<id>,
-assetId: option<id>
+  nextToken: option<nextToken>,
+  timeOrdering: option<timeOrdering>,
+  qualities: option<qualities>,
+  endDate: option<timestamp_>,
+  startDate: option<timestamp_>,
+  propertyAlias: option<assetPropertyAlias>,
+  propertyId: option<id>,
+  assetId: option<id>
 }
   type response = {
 nextToken: option<nextToken>,
-assetPropertyValueHistory: assetPropertyValueHistory
+  assetPropertyValueHistory: assetPropertyValueHistory
 }
   @module("@aws-sdk/client-iotsitewise") @new external new_: (request) => t = "GetAssetPropertyValueHistoryCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1121,20 +1123,20 @@ module GetAssetPropertyAggregates = {
   type t;
   type request = {
 maxResults: option<maxResults>,
-nextToken: option<nextToken>,
-timeOrdering: option<timeOrdering>,
-endDate: timestamp_,
-startDate: timestamp_,
-qualities: option<qualities>,
-resolution: resolution,
-aggregateTypes: aggregateTypes,
-propertyAlias: option<assetPropertyAlias>,
-propertyId: option<id>,
-assetId: option<id>
+  nextToken: option<nextToken>,
+  timeOrdering: option<timeOrdering>,
+  endDate: timestamp_,
+  startDate: timestamp_,
+  qualities: option<qualities>,
+  resolution: resolution,
+  aggregateTypes: aggregateTypes,
+  propertyAlias: option<assetPropertyAlias>,
+  propertyId: option<id>,
+  assetId: option<id>
 }
   type response = {
 nextToken: option<nextToken>,
-aggregatedValues: aggregatedValues
+  aggregatedValues: aggregatedValues
 }
   @module("@aws-sdk/client-iotsitewise") @new external new_: (request) => t = "GetAssetPropertyAggregatesCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1144,11 +1146,11 @@ module ListPortals = {
   type t;
   type request = {
 maxResults: option<maxResults>,
-nextToken: option<nextToken>
+  nextToken: option<nextToken>
 }
   type response = {
 nextToken: option<nextToken>,
-portalSummaries: option<portalSummaries>
+  portalSummaries: option<portalSummaries>
 }
   @module("@aws-sdk/client-iotsitewise") @new external new_: (request) => t = "ListPortalsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1158,11 +1160,11 @@ module ListGateways = {
   type t;
   type request = {
 maxResults: option<maxResults>,
-nextToken: option<nextToken>
+  nextToken: option<nextToken>
 }
   type response = {
 nextToken: option<nextToken>,
-gatewaySummaries: gatewaySummaries
+  gatewaySummaries: gatewaySummaries
 }
   @module("@aws-sdk/client-iotsitewise") @new external new_: (request) => t = "ListGatewaysCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1172,14 +1174,14 @@ module ListAssociatedAssets = {
   type t;
   type request = {
 maxResults: option<maxResults>,
-nextToken: option<nextToken>,
-traversalDirection: option<traversalDirection>,
-hierarchyId: option<id>,
-assetId: id
+  nextToken: option<nextToken>,
+  traversalDirection: option<traversalDirection>,
+  hierarchyId: option<id>,
+  assetId: id
 }
   type response = {
 nextToken: option<nextToken>,
-assetSummaries: associatedAssetsSummaries
+  assetSummaries: associatedAssetsSummaries
 }
   @module("@aws-sdk/client-iotsitewise") @new external new_: (request) => t = "ListAssociatedAssetsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1189,13 +1191,13 @@ module ListAssets = {
   type t;
   type request = {
 filter: option<listAssetsFilter>,
-assetModelId: option<id>,
-maxResults: option<maxResults>,
-nextToken: option<nextToken>
+  assetModelId: option<id>,
+  maxResults: option<maxResults>,
+  nextToken: option<nextToken>
 }
   type response = {
 nextToken: option<nextToken>,
-assetSummaries: assetSummaries
+  assetSummaries: assetSummaries
 }
   @module("@aws-sdk/client-iotsitewise") @new external new_: (request) => t = "ListAssetsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1205,11 +1207,11 @@ module ListAssetModels = {
   type t;
   type request = {
 maxResults: option<maxResults>,
-nextToken: option<nextToken>
+  nextToken: option<nextToken>
 }
   type response = {
 nextToken: option<nextToken>,
-assetModelSummaries: assetModelSummaries
+  assetModelSummaries: assetModelSummaries
 }
   @module("@aws-sdk/client-iotsitewise") @new external new_: (request) => t = "ListAssetModelsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1219,16 +1221,16 @@ module ListAccessPolicies = {
   type t;
   type request = {
 maxResults: option<maxResults>,
-nextToken: option<nextToken>,
-iamArn: option<arn>,
-resourceId: option<id>,
-resourceType: option<resourceType>,
-identityId: option<identityId>,
-identityType: option<identityType>
+  nextToken: option<nextToken>,
+  iamArn: option<arn>,
+  resourceId: option<id>,
+  resourceType: option<resourceType>,
+  identityId: option<identityId>,
+  identityType: option<identityType>
 }
   type response = {
 nextToken: option<nextToken>,
-accessPolicySummaries: accessPolicySummaries
+  accessPolicySummaries: accessPolicySummaries
 }
   @module("@aws-sdk/client-iotsitewise") @new external new_: (request) => t = "ListAccessPoliciesCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1241,15 +1243,15 @@ assetId: id
 }
   type response = {
 assetStatus: assetStatus,
-assetLastUpdateDate: timestamp_,
-assetCreationDate: timestamp_,
-assetCompositeModels: option<assetCompositeModels>,
-assetHierarchies: assetHierarchies,
-assetProperties: assetProperties,
-assetModelId: id,
-assetName: name,
-assetArn: arn,
-assetId: id
+  assetLastUpdateDate: timestamp_,
+  assetCreationDate: timestamp_,
+  assetCompositeModels: option<assetCompositeModels>,
+  assetHierarchies: assetHierarchies,
+  assetProperties: assetProperties,
+  assetModelId: id,
+  assetName: name,
+  assetArn: arn,
+  assetId: id
 }
   @module("@aws-sdk/client-iotsitewise") @new external new_: (request) => t = "DescribeAssetCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1271,14 +1273,14 @@ module DescribeAssetProperty = {
   type t;
   type request = {
 propertyId: id,
-assetId: id
+  assetId: id
 }
   type response = {
 compositeModel: option<compositeModelProperty>,
-assetProperty: option<property>,
-assetModelId: id,
-assetName: name,
-assetId: id
+  assetProperty: option<property>,
+  assetModelId: id,
+  assetName: name,
+  assetId: id
 }
   @module("@aws-sdk/client-iotsitewise") @new external new_: (request) => t = "DescribeAssetPropertyCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1288,12 +1290,12 @@ module UpdateAssetModel = {
   type t;
   type request = {
 clientToken: option<clientToken>,
-assetModelCompositeModels: option<assetModelCompositeModels>,
-assetModelHierarchies: option<assetModelHierarchies>,
-assetModelProperties: option<assetModelProperties>,
-assetModelDescription: option<description>,
-assetModelName: name,
-assetModelId: id
+  assetModelCompositeModels: option<assetModelCompositeModels>,
+  assetModelHierarchies: option<assetModelHierarchies>,
+  assetModelProperties: option<assetModelProperties>,
+  assetModelDescription: option<description>,
+  assetModelName: name,
+  assetModelId: id
 }
   type response = {
 assetModelStatus: assetModelStatus
@@ -1309,15 +1311,15 @@ assetModelId: id
 }
   type response = {
 assetModelStatus: assetModelStatus,
-assetModelLastUpdateDate: timestamp_,
-assetModelCreationDate: timestamp_,
-assetModelCompositeModels: option<assetModelCompositeModels>,
-assetModelHierarchies: assetModelHierarchies,
-assetModelProperties: assetModelProperties,
-assetModelDescription: description,
-assetModelName: name,
-assetModelArn: arn,
-assetModelId: id
+  assetModelLastUpdateDate: timestamp_,
+  assetModelCreationDate: timestamp_,
+  assetModelCompositeModels: option<assetModelCompositeModels>,
+  assetModelHierarchies: assetModelHierarchies,
+  assetModelProperties: assetModelProperties,
+  assetModelDescription: description,
+  assetModelName: name,
+  assetModelArn: arn,
+  assetModelId: id
 }
   @module("@aws-sdk/client-iotsitewise") @new external new_: (request) => t = "DescribeAssetModelCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1327,17 +1329,17 @@ module CreateAssetModel = {
   type t;
   type request = {
 tags: option<tagMap>,
-clientToken: option<clientToken>,
-assetModelCompositeModels: option<assetModelCompositeModelDefinitions>,
-assetModelHierarchies: option<assetModelHierarchyDefinitions>,
-assetModelProperties: option<assetModelPropertyDefinitions>,
-assetModelDescription: option<description>,
-assetModelName: name
+  clientToken: option<clientToken>,
+  assetModelCompositeModels: option<assetModelCompositeModelDefinitions>,
+  assetModelHierarchies: option<assetModelHierarchyDefinitions>,
+  assetModelProperties: option<assetModelPropertyDefinitions>,
+  assetModelDescription: option<description>,
+  assetModelName: name
 }
   type response = {
 assetModelStatus: assetModelStatus,
-assetModelArn: arn,
-assetModelId: id
+  assetModelArn: arn,
+  assetModelId: id
 }
   @module("@aws-sdk/client-iotsitewise") @new external new_: (request) => t = "CreateAssetModelCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";

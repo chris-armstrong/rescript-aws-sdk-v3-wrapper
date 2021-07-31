@@ -5,12 +5,14 @@ httpStatusCode: option<float>,
   cfId: option<string>,
   attempts: option<int>,
   totalRetryDelay: option<int>
-};
-type string_ = string
-type boolean_ = bool
-type integer_ = int
-type timestamp_ = Js.Date.t;
-type long = float
+}
+type awsServiceClient;
+@module("@aws-sdk/client-finspace") @new external createClient: unit => awsServiceClient = "FinspaceClient";
+type baseString = string
+type baseBoolean = bool
+type baseInteger = int
+type baseTimestamp = Js.Date.t;
+type baseLong = float
 type urn = string
 type url = string
 type errorMessage = string
@@ -25,38 +27,37 @@ type idType = string
 type federationProviderName = string
 type federationMode = [@as("LOCAL") #LOCAL | @as("FEDERATED") #FEDERATED]
 type federationAttributeKey = string
-type environmentStatus = [@as("SUSPENDED") #SUSPENDED | @as("FAILED_DELETION") #FAILEDDELETION | @as("RETRY_DELETION") #RETRYDELETION | @as("FAILED_CREATION") #FAILEDCREATION | @as("DELETED") #DELETED | @as("DELETING") #DELETING | @as("DELETE_REQUESTED") #DELETEREQUESTED | @as("CREATED") #CREATED | @as("CREATING") #CREATING | @as("CREATE_REQUESTED") #CREATEREQUESTED]
+type environmentStatus = [@as("SUSPENDED") #SUSPENDED | @as("FAILED_DELETION") #FAILED_DELETION | @as("RETRY_DELETION") #RETRY_DELETION | @as("FAILED_CREATION") #FAILED_CREATION | @as("DELETED") #DELETED | @as("DELETING") #DELETING | @as("DELETE_REQUESTED") #DELETE_REQUESTED | @as("CREATED") #CREATED | @as("CREATING") #CREATING | @as("CREATE_REQUESTED") #CREATE_REQUESTED]
 type environmentName = string
 type environmentArn = string
 type description = string
-type tagMap = Js.Dict.t< tagValue>
+type tagMap = Js.Dict.t<tagValue>
 type tagKeyList = array<tagKey>
-type attributeMap = Js.Dict.t< url>
+type attributeMap = Js.Dict.t<url>
 type federationParameters = {
 attributeMap: option<attributeMap>,
-federationProviderName: option<federationProviderName>,
-federationURN: option<urn>,
-applicationCallBackURL: option<url>,
-samlMetadataURL: option<url>,
-samlMetadataDocument: option<samlMetadataDocument>
+  federationProviderName: option<federationProviderName>,
+  federationURN: option<urn>,
+  applicationCallBackURL: option<url>,
+  samlMetadataURL: option<url>,
+  samlMetadataDocument: option<samlMetadataDocument>
 }
 type environment = {
 federationParameters: option<federationParameters>,
-federationMode: option<federationMode>,
-dedicatedServiceAccountId: option<idType>,
-kmsKeyId: option<kmsKeyId>,
-sageMakerStudioDomainUrl: option<smsDomainUrl>,
-environmentArn: option<environmentArn>,
-description: option<description>,
-environmentUrl: option<url>,
-status: option<environmentStatus>,
-awsAccountId: option<idType>,
-environmentId: option<idType>,
-name: option<environmentName>
+  federationMode: option<federationMode>,
+  dedicatedServiceAccountId: option<idType>,
+  kmsKeyId: option<kmsKeyId>,
+  sageMakerStudioDomainUrl: option<smsDomainUrl>,
+  environmentArn: option<environmentArn>,
+  description: option<description>,
+  environmentUrl: option<url>,
+  status: option<environmentStatus>,
+  awsAccountId: option<idType>,
+  environmentId: option<idType>,
+  name: option<environmentName>
 }
 type environmentList = array<environment>
-type awsServiceClient;
-@module("@aws-sdk/client-finspace") @new external createClient: unit => awsServiceClient = "FinspaceClient";
+
 module DeleteEnvironment = {
   type t;
   type request = {
@@ -71,7 +72,7 @@ module UntagResource = {
   type t;
   type request = {
 tagKeys: tagKeyList,
-resourceArn: environmentArn
+  resourceArn: environmentArn
 }
   type response = unit
   @module("@aws-sdk/client-finspace") @new external new_: (request) => t = "UntagResourceCommand";
@@ -82,7 +83,7 @@ module TagResource = {
   type t;
   type request = {
 tags: tagMap,
-resourceArn: environmentArn
+  resourceArn: environmentArn
 }
   type response = unit
   @module("@aws-sdk/client-finspace") @new external new_: (request) => t = "TagResourceCommand";
@@ -105,16 +106,16 @@ module CreateEnvironment = {
   type t;
   type request = {
 federationParameters: option<federationParameters>,
-federationMode: option<federationMode>,
-tags: option<tagMap>,
-kmsKeyId: option<kmsKeyId>,
-description: option<description>,
-name: environmentName
+  federationMode: option<federationMode>,
+  tags: option<tagMap>,
+  kmsKeyId: option<kmsKeyId>,
+  description: option<description>,
+  name: environmentName
 }
   type response = {
 environmentUrl: option<url>,
-environmentArn: option<environmentArn>,
-environmentId: option<idType>
+  environmentArn: option<environmentArn>,
+  environmentId: option<idType>
 }
   @module("@aws-sdk/client-finspace") @new external new_: (request) => t = "CreateEnvironmentCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -124,10 +125,10 @@ module UpdateEnvironment = {
   type t;
   type request = {
 federationParameters: option<federationParameters>,
-federationMode: option<federationMode>,
-description: option<description>,
-name: option<environmentName>,
-environmentId: idType
+  federationMode: option<federationMode>,
+  description: option<description>,
+  name: option<environmentName>,
+  environmentId: idType
 }
   type response = {
 environment: option<environment>
@@ -152,11 +153,11 @@ module ListEnvironments = {
   type t;
   type request = {
 maxResults: option<resultLimit>,
-nextToken: option<paginationToken>
+  nextToken: option<paginationToken>
 }
   type response = {
 nextToken: option<paginationToken>,
-environments: option<environmentList>
+  environments: option<environmentList>
 }
   @module("@aws-sdk/client-finspace") @new external new_: (request) => t = "ListEnvironmentsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";

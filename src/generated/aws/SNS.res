@@ -5,9 +5,14 @@ httpStatusCode: option<float>,
   cfId: option<string>,
   attempts: option<int>,
   totalRetryDelay: option<int>
-};
-type integer_ = int
-type long = float
+}
+type awsServiceClient;
+@module("@aws-sdk/client-sns") @new external createClient: unit => awsServiceClient = "SNSClient";
+type baseString = string
+type baseBoolean = bool
+type baseInteger = int
+type baseTimestamp = Js.Date.t;
+type baseLong = float
 type topicName = string
 type topicARN = string
 type token = string
@@ -38,40 +43,40 @@ type otpcode = string
 type numberCapability = [@as("VOICE") #VOICE | @as("MMS") #MMS | @as("SMS") #SMS]
 type maxItemsListOriginationNumbers = int
 type maxItems = int
-type languageCodeString = [@as("zh-TW") #ZhTW | @as("zh-CN") #ZhCN | @as("kr-KR") #KrKR | @as("pt-BR") #PtBR | @as("ja-JP") #JaJP | @as("it-IT") #ItIT | @as("fr-FR") #FrFR | @as("fr-CA") #FrCA | @as("de-DE") #DeDE | @as("es-ES") #EsES | @as("es-419") #Es419 | @as("en-GB") #EnGB | @as("en-US") #EnUS]
+type languageCodeString = [@as("zh-TW") #Zh_TW | @as("zh-CN") #Zh_CN | @as("kr-KR") #Kr_KR | @as("pt-BR") #Pt_BR | @as("ja-JP") #Ja_JP | @as("it-IT") #It_IT | @as("fr-FR") #Fr_FR | @as("fr-CA") #Fr_CA | @as("de-DE") #De_DE | @as("es-ES") #Es_ES | @as("es-419") #Es_419 | @as("en-GB") #En_GB | @as("en-US") #En_US]
 type iso2CountryCode = string
 type endpoint2 = string
 type binary = NodeJs.Buffer.t
 type amazonResourceName = string
-type topicAttributesMap = Js.Dict.t< attributeValue>
+type topicAttributesMap = Js.Dict.t<attributeValue>
 type topic = {
 @as("TopicArn") topicArn: option<topicARN>
 }
 type tagKeyList = array<tagKey>
 type tag = {
 @as("Value") value: tagValue,
-@as("Key") key: tagKey
+  @as("Key") key: tagKey
 }
-type subscriptionAttributesMap = Js.Dict.t< attributeValue>
+type subscriptionAttributesMap = Js.Dict.t<attributeValue>
 type subscription = {
 @as("TopicArn") topicArn: option<topicARN>,
-@as("Endpoint") endpoint: option<endpoint2>,
-@as("Protocol") protocol: option<protocol>,
-@as("Owner") owner: option<account>,
-@as("SubscriptionArn") subscriptionArn: option<subscriptionARN>
+  @as("Endpoint") endpoint: option<endpoint2>,
+  @as("Protocol") protocol: option<protocol>,
+  @as("Owner") owner: option<account>,
+  @as("SubscriptionArn") subscriptionArn: option<subscriptionARN>
 }
 type smssandboxPhoneNumber = {
 @as("Status") status: option<smssandboxPhoneNumberVerificationStatus>,
-@as("PhoneNumber") phoneNumber: option<phoneNumberString>
+  @as("PhoneNumber") phoneNumber: option<phoneNumberString>
 }
 type phoneNumberList = array<phoneNumber>
 type numberCapabilityList = array<numberCapability>
 type messageAttributeValue = {
 @as("BinaryValue") binaryValue: option<binary>,
-@as("StringValue") stringValue: option<string_>,
-@as("DataType") dataType: string_
+  @as("StringValue") stringValue: option<string_>,
+  @as("DataType") dataType: string_
 }
-type mapStringToString = Js.Dict.t< string_>
+type mapStringToString = Js.Dict.t<string_>
 type listString = array<string_>
 type delegatesList = array<delegate>
 type actionsList = array<action>
@@ -81,31 +86,30 @@ type subscriptionsList = array<subscription>
 type smssandboxPhoneNumberList = array<smssandboxPhoneNumber>
 type platformApplication = {
 @as("Attributes") attributes: option<mapStringToString>,
-@as("PlatformApplicationArn") platformApplicationArn: option<string_>
+  @as("PlatformApplicationArn") platformApplicationArn: option<string_>
 }
 type phoneNumberInformation = {
 @as("NumberCapabilities") numberCapabilities: option<numberCapabilityList>,
-@as("RouteType") routeType: option<routeType>,
-@as("Iso2CountryCode") iso2CountryCode: option<iso2CountryCode>,
-@as("Status") status: option<string_>,
-@as("PhoneNumber") phoneNumber: option<string_>,
-@as("CreatedAt") createdAt: option<timestamp_>
+  @as("RouteType") routeType: option<routeType>,
+  @as("Iso2CountryCode") iso2CountryCode: option<iso2CountryCode>,
+  @as("Status") status: option<string_>,
+  @as("PhoneNumber") phoneNumber: option<string_>,
+  @as("CreatedAt") createdAt: option<timestamp_>
 }
-type messageAttributeMap = Js.Dict.t< messageAttributeValue>
+type messageAttributeMap = Js.Dict.t<messageAttributeValue>
 type endpoint = {
 @as("Attributes") attributes: option<mapStringToString>,
-@as("EndpointArn") endpointArn: option<string_>
+  @as("EndpointArn") endpointArn: option<string_>
 }
 type phoneNumberInformationList = array<phoneNumberInformation>
 type listOfPlatformApplications = array<platformApplication>
 type listOfEndpoints = array<endpoint>
-type awsServiceClient;
-@module("@aws-sdk/client-sns") @new external createClient: unit => awsServiceClient = "SNSClient";
+
 module VerifySMSSandboxPhoneNumber = {
   type t;
   type request = {
 @as("OneTimePassword") oneTimePassword: otpcode,
-@as("PhoneNumber") phoneNumber: phoneNumberString
+  @as("PhoneNumber") phoneNumber: phoneNumberString
 }
   type response = unit
   @module("@aws-sdk/client-sns") @new external new_: (request) => t = "VerifySMSSandboxPhoneNumberCommand";
@@ -126,8 +130,8 @@ module SetTopicAttributes = {
   type t;
   type request = {
 @as("AttributeValue") attributeValue: option<attributeValue>,
-@as("AttributeName") attributeName: attributeName,
-@as("TopicArn") topicArn: topicARN
+  @as("AttributeName") attributeName: attributeName,
+  @as("TopicArn") topicArn: topicARN
 }
   
   @module("@aws-sdk/client-sns") @new external new_: (request) => t = "SetTopicAttributesCommand";
@@ -138,8 +142,8 @@ module SetSubscriptionAttributes = {
   type t;
   type request = {
 @as("AttributeValue") attributeValue: option<attributeValue>,
-@as("AttributeName") attributeName: attributeName,
-@as("SubscriptionArn") subscriptionArn: subscriptionARN
+  @as("AttributeName") attributeName: attributeName,
+  @as("SubscriptionArn") subscriptionArn: subscriptionARN
 }
   
   @module("@aws-sdk/client-sns") @new external new_: (request) => t = "SetSubscriptionAttributesCommand";
@@ -150,7 +154,7 @@ module RemovePermission = {
   type t;
   type request = {
 @as("Label") label: label,
-@as("TopicArn") topicArn: topicARN
+  @as("TopicArn") topicArn: topicARN
 }
   
   @module("@aws-sdk/client-sns") @new external new_: (request) => t = "RemovePermissionCommand";
@@ -221,7 +225,7 @@ module CreateSMSSandboxPhoneNumber = {
   type t;
   type request = {
 @as("LanguageCode") languageCode: option<languageCodeString>,
-@as("PhoneNumber") phoneNumber: phoneNumberString
+  @as("PhoneNumber") phoneNumber: phoneNumberString
 }
   type response = unit
   @module("@aws-sdk/client-sns") @new external new_: (request) => t = "CreateSMSSandboxPhoneNumberCommand";
@@ -232,8 +236,8 @@ module ConfirmSubscription = {
   type t;
   type request = {
 @as("AuthenticateOnUnsubscribe") authenticateOnUnsubscribe: option<authenticateOnUnsubscribe>,
-@as("Token") token: token,
-@as("TopicArn") topicArn: topicARN
+  @as("Token") token: token,
+  @as("TopicArn") topicArn: topicARN
 }
   type response = {
 @as("SubscriptionArn") subscriptionArn: option<subscriptionARN>
@@ -258,7 +262,7 @@ module UntagResource = {
   type t;
   type request = {
 @as("TagKeys") tagKeys: tagKeyList,
-@as("ResourceArn") resourceArn: amazonResourceName
+  @as("ResourceArn") resourceArn: amazonResourceName
 }
   type response = unit
   @module("@aws-sdk/client-sns") @new external new_: (request) => t = "UntagResourceCommand";
@@ -269,10 +273,10 @@ module Subscribe = {
   type t;
   type request = {
 @as("ReturnSubscriptionArn") returnSubscriptionArn: option<boolean_>,
-@as("Attributes") attributes: option<subscriptionAttributesMap>,
-@as("Endpoint") endpoint: option<endpoint2>,
-@as("Protocol") protocol: protocol,
-@as("TopicArn") topicArn: topicARN
+  @as("Attributes") attributes: option<subscriptionAttributesMap>,
+  @as("Endpoint") endpoint: option<endpoint2>,
+  @as("Protocol") protocol: protocol,
+  @as("TopicArn") topicArn: topicARN
 }
   type response = {
 @as("SubscriptionArn") subscriptionArn: option<subscriptionARN>
@@ -295,7 +299,7 @@ module SetPlatformApplicationAttributes = {
   type t;
   type request = {
 @as("Attributes") attributes: mapStringToString,
-@as("PlatformApplicationArn") platformApplicationArn: string_
+  @as("PlatformApplicationArn") platformApplicationArn: string_
 }
   
   @module("@aws-sdk/client-sns") @new external new_: (request) => t = "SetPlatformApplicationAttributesCommand";
@@ -306,7 +310,7 @@ module SetEndpointAttributes = {
   type t;
   type request = {
 @as("Attributes") attributes: mapStringToString,
-@as("EndpointArn") endpointArn: string_
+  @as("EndpointArn") endpointArn: string_
 }
   
   @module("@aws-sdk/client-sns") @new external new_: (request) => t = "SetEndpointAttributesCommand";
@@ -320,7 +324,7 @@ nextToken: option<string_>
 }
   type response = {
 nextToken: option<string_>,
-phoneNumbers: option<phoneNumberList>
+  phoneNumbers: option<phoneNumberList>
 }
   @module("@aws-sdk/client-sns") @new external new_: (request) => t = "ListPhoneNumbersOptedOutCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -390,9 +394,9 @@ module CreatePlatformEndpoint = {
   type t;
   type request = {
 @as("Attributes") attributes: option<mapStringToString>,
-@as("CustomUserData") customUserData: option<string_>,
-@as("Token") token: string_,
-@as("PlatformApplicationArn") platformApplicationArn: string_
+  @as("CustomUserData") customUserData: option<string_>,
+  @as("Token") token: string_,
+  @as("PlatformApplicationArn") platformApplicationArn: string_
 }
   type response = {
 @as("EndpointArn") endpointArn: option<string_>
@@ -405,8 +409,8 @@ module CreatePlatformApplication = {
   type t;
   type request = {
 @as("Attributes") attributes: mapStringToString,
-@as("Platform") platform: string_,
-@as("Name") name: string_
+  @as("Platform") platform: string_,
+  @as("Name") name: string_
 }
   type response = {
 @as("PlatformApplicationArn") platformApplicationArn: option<string_>
@@ -419,9 +423,9 @@ module AddPermission = {
   type t;
   type request = {
 @as("ActionName") actionName: actionsList,
-@as("AWSAccountId") awsaccountId: delegatesList,
-@as("Label") label: label,
-@as("TopicArn") topicArn: topicARN
+  @as("AWSAccountId") awsaccountId: delegatesList,
+  @as("Label") label: label,
+  @as("TopicArn") topicArn: topicARN
 }
   
   @module("@aws-sdk/client-sns") @new external new_: (request) => t = "AddPermissionCommand";
@@ -432,7 +436,7 @@ module TagResource = {
   type t;
   type request = {
 @as("Tags") tags: tagList_,
-@as("ResourceArn") resourceArn: amazonResourceName
+  @as("ResourceArn") resourceArn: amazonResourceName
 }
   type response = unit
   @module("@aws-sdk/client-sns") @new external new_: (request) => t = "TagResourceCommand";
@@ -443,18 +447,18 @@ module Publish = {
   type t;
   type request = {
 @as("MessageGroupId") messageGroupId: option<string_>,
-@as("MessageDeduplicationId") messageDeduplicationId: option<string_>,
-@as("MessageAttributes") messageAttributes: option<messageAttributeMap>,
-@as("MessageStructure") messageStructure: option<messageStructure>,
-@as("Subject") subject: option<subject>,
-@as("Message") message: message,
-@as("PhoneNumber") phoneNumber: option<string_>,
-@as("TargetArn") targetArn: option<string_>,
-@as("TopicArn") topicArn: option<topicARN>
+  @as("MessageDeduplicationId") messageDeduplicationId: option<string_>,
+  @as("MessageAttributes") messageAttributes: option<messageAttributeMap>,
+  @as("MessageStructure") messageStructure: option<messageStructure>,
+  @as("Subject") subject: option<subject>,
+  @as("Message") message: message,
+  @as("PhoneNumber") phoneNumber: option<string_>,
+  @as("TargetArn") targetArn: option<string_>,
+  @as("TopicArn") topicArn: option<topicARN>
 }
   type response = {
 @as("SequenceNumber") sequenceNumber: option<string_>,
-@as("MessageId") messageId: option<messageId>
+  @as("MessageId") messageId: option<messageId>
 }
   @module("@aws-sdk/client-sns") @new external new_: (request) => t = "PublishCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -467,7 +471,7 @@ module ListTopics = {
 }
   type response = {
 @as("NextToken") nextToken: option<nextToken>,
-@as("Topics") topics: option<topicsList>
+  @as("Topics") topics: option<topicsList>
 }
   @module("@aws-sdk/client-sns") @new external new_: (request) => t = "ListTopicsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -489,11 +493,11 @@ module ListSubscriptionsByTopic = {
   type t;
   type request = {
 @as("NextToken") nextToken: option<nextToken>,
-@as("TopicArn") topicArn: topicARN
+  @as("TopicArn") topicArn: topicARN
 }
   type response = {
 @as("NextToken") nextToken: option<nextToken>,
-@as("Subscriptions") subscriptions: option<subscriptionsList>
+  @as("Subscriptions") subscriptions: option<subscriptionsList>
 }
   @module("@aws-sdk/client-sns") @new external new_: (request) => t = "ListSubscriptionsByTopicCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -506,7 +510,7 @@ module ListSubscriptions = {
 }
   type response = {
 @as("NextToken") nextToken: option<nextToken>,
-@as("Subscriptions") subscriptions: option<subscriptionsList>
+  @as("Subscriptions") subscriptions: option<subscriptionsList>
 }
   @module("@aws-sdk/client-sns") @new external new_: (request) => t = "ListSubscriptionsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -516,11 +520,11 @@ module ListSMSSandboxPhoneNumbers = {
   type t;
   type request = {
 @as("MaxResults") maxResults: option<maxItems>,
-@as("NextToken") nextToken: option<nextToken>
+  @as("NextToken") nextToken: option<nextToken>
 }
   type response = {
 @as("NextToken") nextToken: option<string_>,
-@as("PhoneNumbers") phoneNumbers: smssandboxPhoneNumberList
+  @as("PhoneNumbers") phoneNumbers: smssandboxPhoneNumberList
 }
   @module("@aws-sdk/client-sns") @new external new_: (request) => t = "ListSMSSandboxPhoneNumbersCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -530,8 +534,8 @@ module CreateTopic = {
   type t;
   type request = {
 @as("Tags") tags: option<tagList_>,
-@as("Attributes") attributes: option<topicAttributesMap>,
-@as("Name") name: topicName
+  @as("Attributes") attributes: option<topicAttributesMap>,
+  @as("Name") name: topicName
 }
   type response = {
 @as("TopicArn") topicArn: option<topicARN>
@@ -547,7 +551,7 @@ module ListPlatformApplications = {
 }
   type response = {
 @as("NextToken") nextToken: option<string_>,
-@as("PlatformApplications") platformApplications: option<listOfPlatformApplications>
+  @as("PlatformApplications") platformApplications: option<listOfPlatformApplications>
 }
   @module("@aws-sdk/client-sns") @new external new_: (request) => t = "ListPlatformApplicationsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -557,11 +561,11 @@ module ListOriginationNumbers = {
   type t;
   type request = {
 @as("MaxResults") maxResults: option<maxItemsListOriginationNumbers>,
-@as("NextToken") nextToken: option<nextToken>
+  @as("NextToken") nextToken: option<nextToken>
 }
   type response = {
 @as("PhoneNumbers") phoneNumbers: option<phoneNumberInformationList>,
-@as("NextToken") nextToken: option<nextToken>
+  @as("NextToken") nextToken: option<nextToken>
 }
   @module("@aws-sdk/client-sns") @new external new_: (request) => t = "ListOriginationNumbersCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -571,11 +575,11 @@ module ListEndpointsByPlatformApplication = {
   type t;
   type request = {
 @as("NextToken") nextToken: option<string_>,
-@as("PlatformApplicationArn") platformApplicationArn: string_
+  @as("PlatformApplicationArn") platformApplicationArn: string_
 }
   type response = {
 @as("NextToken") nextToken: option<string_>,
-@as("Endpoints") endpoints: option<listOfEndpoints>
+  @as("Endpoints") endpoints: option<listOfEndpoints>
 }
   @module("@aws-sdk/client-sns") @new external new_: (request) => t = "ListEndpointsByPlatformApplicationCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";

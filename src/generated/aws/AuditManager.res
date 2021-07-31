@@ -5,8 +5,14 @@ httpStatusCode: option<float>,
   cfId: option<string>,
   attempts: option<int>,
   totalRetryDelay: option<int>
-};
-type long = float
+}
+type awsServiceClient;
+@module("@aws-sdk/client-auditmanager") @new external createClient: unit => awsServiceClient = "AuditManagerClient";
+type baseString = string
+type baseBoolean = bool
+type baseInteger = int
+type baseTimestamp = Js.Date.t;
+type baseLong = float
 type organizationId = string
 type validationExceptionReason = [@as("other") #Other | @as("fieldValidationFailed") #FieldValidationFailed | @as("cannotParse") #CannotParse | @as("unknownOperation") #UnknownOperation]
 type username = string
@@ -20,23 +26,23 @@ type testingInformation = string
 type tagValue = string
 type tagKey = string
 type string_ = string
-type sourceType = [@as("MANUAL") #MANUAL | @as("AWS_API_Call") #AWSAPICall | @as("AWS_Security_Hub") #AWSSecurityHub | @as("AWS_Config") #AWSConfig | @as("AWS_Cloudtrail") #AWSCloudtrail]
-type sourceSetUpOption = [@as("Procedural_Controls_Mapping") #ProceduralControlsMapping | @as("System_Controls_Mapping") #SystemControlsMapping]
+type sourceType = [@as("MANUAL") #MANUAL | @as("AWS_API_Call") #AWS_API_Call | @as("AWS_Security_Hub") #AWS_Security_Hub | @as("AWS_Config") #AWS_Config | @as("AWS_Cloudtrail") #AWS_Cloudtrail]
+type sourceSetUpOption = [@as("Procedural_Controls_Mapping") #Procedural_Controls_Mapping | @as("System_Controls_Mapping") #System_Controls_Mapping]
 type sourceName = string
 type sourceFrequency = [@as("MONTHLY") #MONTHLY | @as("WEEKLY") #WEEKLY | @as("DAILY") #DAILY]
 type sourceDescription = string
 type snsArn = string
-type settingAttribute = [@as("DEFAULT_PROCESS_OWNERS") #DEFAULTPROCESSOWNERS | @as("DEFAULT_ASSESSMENT_REPORTS_DESTINATION") #DEFAULTASSESSMENTREPORTSDESTINATION | @as("SNS_TOPIC") #SNSTOPIC | @as("IS_AWS_ORG_ENABLED") #ISAWSORGENABLED | @as("ALL") #ALL]
+type settingAttribute = [@as("DEFAULT_PROCESS_OWNERS") #DEFAULT_PROCESS_OWNERS | @as("DEFAULT_ASSESSMENT_REPORTS_DESTINATION") #DEFAULT_ASSESSMENT_REPORTS_DESTINATION | @as("SNS_TOPIC") #SNS_TOPIC | @as("IS_AWS_ORG_ENABLED") #IS_AWS_ORG_ENABLED | @as("ALL") #ALL]
 type snstopic = string
 type s3Url = string
-type roleType = [@as("RESOURCE_OWNER") #RESOURCEOWNER | @as("PROCESS_OWNER") #PROCESSOWNER]
-type objectTypeEnum = [@as("ASSESSMENT_REPORT") #ASSESSMENTREPORT | @as("DELEGATION") #DELEGATION | @as("CONTROL") #CONTROL | @as("CONTROL_SET") #CONTROLSET | @as("ASSESSMENT") #ASSESSMENT]
+type roleType = [@as("RESOURCE_OWNER") #RESOURCE_OWNER | @as("PROCESS_OWNER") #PROCESS_OWNER]
+type objectTypeEnum = [@as("ASSESSMENT_REPORT") #ASSESSMENT_REPORT | @as("DELEGATION") #DELEGATION | @as("CONTROL") #CONTROL | @as("CONTROL_SET") #CONTROL_SET | @as("ASSESSMENT") #ASSESSMENT]
 type nonEmptyString = string
 type maxResults = int
 type lastUpdatedBy = string
 type kmsKey = string
 type keywordValue = string
-type keywordInputType = [@as("SELECT_FROM_LIST") #SELECTFROMLIST]
+type keywordInputType = [@as("SELECT_FROM_LIST") #SELECT_FROM_LIST]
 type integer_ = int
 type iamArn = string
 type hyperlinkName = string
@@ -51,15 +57,15 @@ type eventName = string
 type errorMessage = string
 type errorCode = string
 type emailAddress = string
-type delegationStatus = [@as("COMPLETE") #COMPLETE | @as("UNDER_REVIEW") #UNDERREVIEW | @as("IN_PROGRESS") #INPROGRESS]
+type delegationStatus = [@as("COMPLETE") #COMPLETE | @as("UNDER_REVIEW") #UNDER_REVIEW | @as("IN_PROGRESS") #IN_PROGRESS]
 type delegationComment = string
 type createdBy = string
 type controlsCount = int
 type controlType = [@as("Custom") #Custom | @as("Standard") #Standard]
-type controlStatus = [@as("INACTIVE") #INACTIVE | @as("REVIEWED") #REVIEWED | @as("UNDER_REVIEW") #UNDERREVIEW]
+type controlStatus = [@as("INACTIVE") #INACTIVE | @as("REVIEWED") #REVIEWED | @as("UNDER_REVIEW") #UNDER_REVIEW]
 type controlSources = string
 type controlSetsCount = int
-type controlSetStatus = [@as("REVIEWED") #REVIEWED | @as("UNDER_REVIEW") #UNDERREVIEW | @as("ACTIVE") #ACTIVE]
+type controlSetStatus = [@as("REVIEWED") #REVIEWED | @as("UNDER_REVIEW") #UNDER_REVIEW | @as("ACTIVE") #ACTIVE]
 type controlSetName = string
 type controlSetId = string
 type controlResponse = [@as("IGNORE") #IGNORE | @as("DEFER") #DEFER | @as("AUTOMATE") #AUTOMATE | @as("MANUAL") #MANUAL]
@@ -70,7 +76,7 @@ type complianceType = string
 type boolean_ = bool
 type auditManagerArn = string
 type assessmentStatus = [@as("INACTIVE") #INACTIVE | @as("ACTIVE") #ACTIVE]
-type assessmentReportStatus = [@as("FAILED") #FAILED | @as("IN_PROGRESS") #INPROGRESS | @as("COMPLETE") #COMPLETE]
+type assessmentReportStatus = [@as("FAILED") #FAILED | @as("IN_PROGRESS") #IN_PROGRESS | @as("COMPLETE") #COMPLETE]
 type assessmentReportName = string
 type assessmentReportDestinationType = [@as("S3") #S3]
 type assessmentReportDescription = string
@@ -80,49 +86,49 @@ type assessmentEvidenceFolderName = string
 type assessmentDescription = string
 type actionPlanTitle = string
 type actionPlanInstructions = string
-type actionEnum = [@as("IMPORT_EVIDENCE") #IMPORTEVIDENCE | @as("REVIEWED") #REVIEWED | @as("UNDER_REVIEW") #UNDERREVIEW | @as("DELETE") #DELETE | @as("INACTIVE") #INACTIVE | @as("ACTIVE") #ACTIVE | @as("UPDATE_METADATA") #UPDATEMETADATA | @as("CREATE") #CREATE]
-type accountStatus = [@as("PENDING_ACTIVATION") #PENDINGACTIVATION | @as("INACTIVE") #INACTIVE | @as("ACTIVE") #ACTIVE]
+type actionEnum = [@as("IMPORT_EVIDENCE") #IMPORT_EVIDENCE | @as("REVIEWED") #REVIEWED | @as("UNDER_REVIEW") #UNDER_REVIEW | @as("DELETE") #DELETE | @as("INACTIVE") #INACTIVE | @as("ACTIVE") #ACTIVE | @as("UPDATE_METADATA") #UPDATE_METADATA | @as("CREATE") #CREATE]
+type accountStatus = [@as("PENDING_ACTIVATION") #PENDING_ACTIVATION | @as("INACTIVE") #INACTIVE | @as("ACTIVE") #ACTIVE]
 type accountName = string
 type accountId = string
 type awsserviceName = string
 type validationExceptionField = {
 message: string_,
-name: string_
+  name: string_
 }
 type validationErrors = array<nonEmptyString>
 type url = {
 link: option<urlLink>,
-hyperlinkName: option<hyperlinkName>
+  hyperlinkName: option<hyperlinkName>
 }
-type tagMap = Js.Dict.t< tagValue>
+type tagMap = Js.Dict.t<tagValue>
 type tagKeyList = array<tagKey>
 type sourceKeyword = {
 keywordValue: option<keywordValue>,
-keywordInputType: option<keywordInputType>
+  keywordInputType: option<keywordInputType>
 }
 type serviceMetadata = {
 category: option<nonEmptyString>,
-description: option<nonEmptyString>,
-displayName: option<nonEmptyString>,
-name: option<awsserviceName>
+  description: option<nonEmptyString>,
+  displayName: option<nonEmptyString>,
+  name: option<awsserviceName>
 }
 type role = {
 roleArn: option<iamArn>,
-roleType: option<roleType>
+  roleType: option<roleType>
 }
 type resource = {
 value: option<string_>,
-arn: option<genericArn>
+  arn: option<genericArn>
 }
 type notification = {
 source: option<nonEmptyString>,
-eventTime: option<timestamp_>,
-description: option<nonEmptyString>,
-controlSetName: option<nonEmptyString>,
-controlSetId: option<controlSetId>,
-assessmentName: option<assessmentName>,
-assessmentId: option<uuid>,
-id: option<timestampUUID>
+  eventTime: option<timestamp_>,
+  description: option<nonEmptyString>,
+  controlSetName: option<nonEmptyString>,
+  controlSetId: option<controlSetId>,
+  assessmentName: option<assessmentName>,
+  assessmentId: option<uuid>,
+  id: option<timestampUUID>
 }
 type manualEvidence = {
 s3ResourcePath: option<s3Url>
@@ -130,140 +136,140 @@ s3ResourcePath: option<s3Url>
 type keywords = array<keywordValue>
 type frameworkMetadata = {
 complianceType: option<complianceType>,
-logo: option<filename>,
-description: option<assessmentFrameworkDescription>,
-name: option<assessmentName>
+  logo: option<filename>,
+  description: option<assessmentFrameworkDescription>,
+  name: option<assessmentName>
 }
 type evidenceSources = array<nonEmptyString>
 type evidenceIds = array<uuid>
-type evidenceAttributes = Js.Dict.t< evidenceAttributeValue>
+type evidenceAttributes = Js.Dict.t<evidenceAttributeValue>
 type delegationMetadata = {
 controlSetName: option<nonEmptyString>,
-creationTime: option<timestamp_>,
-roleArn: option<iamArn>,
-status: option<delegationStatus>,
-assessmentId: option<uuid>,
-assessmentName: option<assessmentName>,
-id: option<uuid>
+  creationTime: option<timestamp_>,
+  roleArn: option<iamArn>,
+  status: option<delegationStatus>,
+  assessmentId: option<uuid>,
+  assessmentName: option<assessmentName>,
+  id: option<uuid>
 }
 type delegationIds = array<uuid>
 type delegation = {
 createdBy: option<createdBy>,
-comment: option<delegationComment>,
-controlSetId: option<controlSetId>,
-lastUpdated: option<timestamp_>,
-creationTime: option<timestamp_>,
-roleType: option<roleType>,
-roleArn: option<iamArn>,
-status: option<delegationStatus>,
-assessmentId: option<uuid>,
-assessmentName: option<assessmentName>,
-id: option<uuid>
+  comment: option<delegationComment>,
+  controlSetId: option<controlSetId>,
+  lastUpdated: option<timestamp_>,
+  creationTime: option<timestamp_>,
+  roleType: option<roleType>,
+  roleArn: option<iamArn>,
+  status: option<delegationStatus>,
+  assessmentId: option<uuid>,
+  assessmentName: option<assessmentName>,
+  id: option<uuid>
 }
 type createDelegationRequest = {
 roleType: option<roleType>,
-roleArn: option<iamArn>,
-controlSetId: option<controlSetId>,
-comment: option<delegationComment>
+  roleArn: option<iamArn>,
+  controlSetId: option<controlSetId>,
+  comment: option<delegationComment>
 }
 type createAssessmentFrameworkControl = {
 id: option<uuid>
 }
 type controlMetadata = {
 lastUpdatedAt: option<timestamp_>,
-createdAt: option<timestamp_>,
-controlSources: option<controlSources>,
-name: option<controlName>,
-id: option<uuid>,
-arn: option<auditManagerArn>
+  createdAt: option<timestamp_>,
+  controlSources: option<controlSources>,
+  name: option<controlName>,
+  id: option<uuid>,
+  arn: option<auditManagerArn>
 }
 type controlComment = {
 postedDate: option<timestamp_>,
-commentBody: option<controlCommentBody>,
-authorName: option<username>
+  commentBody: option<controlCommentBody>,
+  authorName: option<username>
 }
 type changeLog = {
 createdBy: option<iamArn>,
-createdAt: option<timestamp_>,
-action: option<actionEnum>,
-objectName: option<nonEmptyString>,
-objectType: option<objectTypeEnum>
+  createdAt: option<timestamp_>,
+  action: option<actionEnum>,
+  objectName: option<nonEmptyString>,
+  objectType: option<objectTypeEnum>
 }
 type batchDeleteDelegationByAssessmentError = {
 errorMessage: option<errorMessage>,
-errorCode: option<errorCode>,
-delegationId: option<uuid>
+  errorCode: option<errorCode>,
+  delegationId: option<uuid>
 }
 type assessmentReportsDestination = {
 destination: option<s3Url>,
-destinationType: option<assessmentReportDestinationType>
+  destinationType: option<assessmentReportDestinationType>
 }
 type assessmentReportMetadata = {
 creationTime: option<timestamp_>,
-status: option<assessmentReportStatus>,
-author: option<username>,
-assessmentName: option<assessmentName>,
-assessmentId: option<uuid>,
-description: option<assessmentReportDescription>,
-name: option<assessmentReportName>,
-id: option<uuid>
+  status: option<assessmentReportStatus>,
+  author: option<username>,
+  assessmentName: option<assessmentName>,
+  assessmentId: option<uuid>,
+  description: option<assessmentReportDescription>,
+  name: option<assessmentReportName>,
+  id: option<uuid>
 }
 type assessmentReportEvidenceError = {
 errorMessage: option<errorMessage>,
-errorCode: option<errorCode>,
-evidenceId: option<uuid>
+  errorCode: option<errorCode>,
+  evidenceId: option<uuid>
 }
 type assessmentReport = {
 creationTime: option<timestamp_>,
-status: option<assessmentReportStatus>,
-author: option<username>,
-assessmentName: option<assessmentName>,
-assessmentId: option<uuid>,
-awsAccountId: option<accountId>,
-description: option<assessmentReportDescription>,
-name: option<assessmentReportName>,
-id: option<uuid>
+  status: option<assessmentReportStatus>,
+  author: option<username>,
+  assessmentName: option<assessmentName>,
+  assessmentId: option<uuid>,
+  awsAccountId: option<accountId>,
+  description: option<assessmentReportDescription>,
+  name: option<assessmentReportName>,
+  id: option<uuid>
 }
 type assessmentFrameworkMetadata = {
 lastUpdatedAt: option<timestamp_>,
-createdAt: option<timestamp_>,
-controlSetsCount: option<controlSetsCount>,
-controlsCount: option<controlsCount>,
-complianceType: option<complianceType>,
-logo: option<filename>,
-description: option<frameworkDescription>,
-name: option<frameworkName>,
-@as("type") type_: option<frameworkType>,
-id: option<uuid>,
-arn: option<auditManagerArn>
+  createdAt: option<timestamp_>,
+  controlSetsCount: option<controlSetsCount>,
+  controlsCount: option<controlsCount>,
+  complianceType: option<complianceType>,
+  logo: option<filename>,
+  description: option<frameworkDescription>,
+  name: option<frameworkName>,
+  @as("type") type_: option<frameworkType>,
+  id: option<uuid>,
+  arn: option<auditManagerArn>
 }
 type assessmentEvidenceFolder = {
 evidenceAwsServiceSourceCount: option<integer_>,
-evidenceByTypeUserActivityCount: option<integer_>,
-evidenceByTypeComplianceCheckIssuesCount: option<integer_>,
-evidenceByTypeComplianceCheckCount: option<integer_>,
-evidenceByTypeManualCount: option<integer_>,
-evidenceByTypeConfigurationDataCount: option<integer_>,
-evidenceResourcesIncludedCount: option<integer_>,
-controlName: option<controlName>,
-assessmentReportSelectionCount: option<integer_>,
-totalEvidence: option<integer_>,
-author: option<string_>,
-dataSource: option<string_>,
-id: option<uuid>,
-controlId: option<uuid>,
-controlSetId: option<controlSetId>,
-assessmentId: option<uuid>,
-date: option<timestamp_>,
-name: option<assessmentEvidenceFolderName>
+  evidenceByTypeUserActivityCount: option<integer_>,
+  evidenceByTypeComplianceCheckIssuesCount: option<integer_>,
+  evidenceByTypeComplianceCheckCount: option<integer_>,
+  evidenceByTypeManualCount: option<integer_>,
+  evidenceByTypeConfigurationDataCount: option<integer_>,
+  evidenceResourcesIncludedCount: option<integer_>,
+  controlName: option<controlName>,
+  assessmentReportSelectionCount: option<integer_>,
+  totalEvidence: option<integer_>,
+  author: option<string_>,
+  dataSource: option<string_>,
+  id: option<uuid>,
+  controlId: option<uuid>,
+  controlSetId: option<controlSetId>,
+  assessmentId: option<uuid>,
+  date: option<timestamp_>,
+  name: option<assessmentEvidenceFolderName>
 }
 type awsservice = {
 serviceName: option<awsserviceName>
 }
 type awsaccount = {
 name: option<accountName>,
-emailAddress: option<emailAddress>,
-id: option<accountId>
+  emailAddress: option<emailAddress>,
+  id: option<accountId>
 }
 type validationExceptionFieldList = array<validationExceptionField>
 type serviceMetadataList = array<serviceMetadata>
@@ -277,37 +283,37 @@ type delegationMetadataList = array<delegationMetadata>
 type createDelegationRequests = array<createDelegationRequest>
 type createControlMappingSource = {
 troubleshootingText: option<troubleshootingText>,
-sourceFrequency: option<sourceFrequency>,
-sourceKeyword: option<sourceKeyword>,
-sourceType: option<sourceType>,
-sourceSetUpOption: option<sourceSetUpOption>,
-sourceDescription: option<sourceDescription>,
-sourceName: option<sourceName>
+  sourceFrequency: option<sourceFrequency>,
+  sourceKeyword: option<sourceKeyword>,
+  sourceType: option<sourceType>,
+  sourceSetUpOption: option<sourceSetUpOption>,
+  sourceDescription: option<sourceDescription>,
+  sourceName: option<sourceName>
 }
 type createAssessmentFrameworkControls = array<createAssessmentFrameworkControl>
 type controlMetadataList = array<controlMetadata>
 type controlMappingSource = {
 troubleshootingText: option<troubleshootingText>,
-sourceFrequency: option<sourceFrequency>,
-sourceKeyword: option<sourceKeyword>,
-sourceType: option<sourceType>,
-sourceSetUpOption: option<sourceSetUpOption>,
-sourceDescription: option<sourceDescription>,
-sourceName: option<sourceName>,
-sourceId: option<uuid>
+  sourceFrequency: option<sourceFrequency>,
+  sourceKeyword: option<sourceKeyword>,
+  sourceType: option<sourceType>,
+  sourceSetUpOption: option<sourceSetUpOption>,
+  sourceDescription: option<sourceDescription>,
+  sourceName: option<sourceName>,
+  sourceId: option<uuid>
 }
 type controlComments = array<controlComment>
 type changeLogs = array<changeLog>
 type batchImportEvidenceToAssessmentControlError = {
 errorMessage: option<errorMessage>,
-errorCode: option<errorCode>,
-manualEvidence: option<manualEvidence>
+  errorCode: option<errorCode>,
+  manualEvidence: option<manualEvidence>
 }
 type batchDeleteDelegationByAssessmentErrors = array<batchDeleteDelegationByAssessmentError>
 type batchCreateDelegationByAssessmentError = {
 errorMessage: option<errorMessage>,
-errorCode: option<errorCode>,
-createDelegationRequest: option<createDelegationRequest>
+  errorCode: option<errorCode>,
+  createDelegationRequest: option<createDelegationRequest>
 }
 type assessmentReportsMetadata = array<assessmentReportMetadata>
 type assessmentReportEvidenceErrors = array<assessmentReportEvidenceError>
@@ -316,65 +322,65 @@ type awsservices = array<awsservice>
 type awsaccounts = array<awsaccount>
 type updateAssessmentFrameworkControlSet = {
 controls: option<createAssessmentFrameworkControls>,
-name: controlSetName,
-id: option<controlSetName>
+  name: controlSetName,
+  id: option<controlSetName>
 }
 type settings = {
 kmsKey: option<kmsKey>,
-defaultProcessOwners: option<roles>,
-defaultAssessmentReportsDestination: option<assessmentReportsDestination>,
-snsTopic: option<snstopic>,
-isAwsOrgEnabled: option<boolean_>
+  defaultProcessOwners: option<roles>,
+  defaultAssessmentReportsDestination: option<assessmentReportsDestination>,
+  snsTopic: option<snstopic>,
+  isAwsOrgEnabled: option<boolean_>
 }
 type scope = {
 awsServices: option<awsservices>,
-awsAccounts: option<awsaccounts>
+  awsAccounts: option<awsaccounts>
 }
 type evidence = {
 assessmentReportSelection: option<string_>,
-id: option<uuid>,
-evidenceFolderId: option<uuid>,
-awsAccountId: option<accountId>,
-awsOrganization: option<string_>,
-complianceCheck: option<string_>,
-iamId: option<iamArn>,
-attributes: option<evidenceAttributes>,
-resourcesIncluded: option<resources>,
-evidenceByType: option<string_>,
-eventName: option<eventName>,
-eventSource: option<awsserviceName>,
-time: option<timestamp_>,
-evidenceAwsAccountId: option<accountId>,
-dataSource: option<string_>
+  id: option<uuid>,
+  evidenceFolderId: option<uuid>,
+  awsAccountId: option<accountId>,
+  awsOrganization: option<string_>,
+  complianceCheck: option<string_>,
+  iamId: option<iamArn>,
+  attributes: option<evidenceAttributes>,
+  resourcesIncluded: option<resources>,
+  evidenceByType: option<string_>,
+  eventName: option<eventName>,
+  eventSource: option<awsserviceName>,
+  time: option<timestamp_>,
+  evidenceAwsAccountId: option<accountId>,
+  dataSource: option<string_>
 }
 type createControlMappingSources = array<createControlMappingSource>
 type createAssessmentFrameworkControlSet = {
 controls: option<createAssessmentFrameworkControls>,
-name: controlSetName
+  name: controlSetName
 }
 type controlMappingSources = array<controlMappingSource>
 type batchImportEvidenceToAssessmentControlErrors = array<batchImportEvidenceToAssessmentControlError>
 type batchCreateDelegationByAssessmentErrors = array<batchCreateDelegationByAssessmentError>
 type assessmentMetadataItem = {
 lastUpdated: option<timestamp_>,
-creationTime: option<timestamp_>,
-delegations: option<delegations>,
-roles: option<roles>,
-status: option<assessmentStatus>,
-complianceType: option<complianceType>,
-id: option<uuid>,
-name: option<assessmentName>
+  creationTime: option<timestamp_>,
+  delegations: option<delegations>,
+  roles: option<roles>,
+  status: option<assessmentStatus>,
+  complianceType: option<complianceType>,
+  id: option<uuid>,
+  name: option<assessmentName>
 }
 type assessmentControl = {
 assessmentReportEvidenceCount: option<integer_>,
-evidenceCount: option<integer_>,
-evidenceSources: option<evidenceSources>,
-comments: option<controlComments>,
-response: option<controlResponse>,
-status: option<controlStatus>,
-description: option<controlDescription>,
-name: option<controlName>,
-id: option<uuid>
+  evidenceCount: option<integer_>,
+  evidenceSources: option<evidenceSources>,
+  comments: option<controlComments>,
+  response: option<controlResponse>,
+  status: option<controlStatus>,
+  description: option<controlDescription>,
+  name: option<controlName>,
+  id: option<uuid>
 }
 type updateAssessmentFrameworkControlSets = array<updateAssessmentFrameworkControlSet>
 type listAssessmentMetadata = array<assessmentMetadataItem>
@@ -382,84 +388,83 @@ type evidenceList = array<evidence>
 type createAssessmentFrameworkControlSets = array<createAssessmentFrameworkControlSet>
 type control = {
 tags: option<tagMap>,
-lastUpdatedBy: option<lastUpdatedBy>,
-createdBy: option<createdBy>,
-lastUpdatedAt: option<timestamp_>,
-createdAt: option<timestamp_>,
-controlMappingSources: option<controlMappingSources>,
-controlSources: option<controlSources>,
-actionPlanInstructions: option<actionPlanInstructions>,
-actionPlanTitle: option<actionPlanTitle>,
-testingInformation: option<testingInformation>,
-description: option<controlDescription>,
-name: option<controlName>,
-@as("type") type_: option<controlType>,
-id: option<uuid>,
-arn: option<auditManagerArn>
+  lastUpdatedBy: option<lastUpdatedBy>,
+  createdBy: option<createdBy>,
+  lastUpdatedAt: option<timestamp_>,
+  createdAt: option<timestamp_>,
+  controlMappingSources: option<controlMappingSources>,
+  controlSources: option<controlSources>,
+  actionPlanInstructions: option<actionPlanInstructions>,
+  actionPlanTitle: option<actionPlanTitle>,
+  testingInformation: option<testingInformation>,
+  description: option<controlDescription>,
+  name: option<controlName>,
+  @as("type") type_: option<controlType>,
+  id: option<uuid>,
+  arn: option<auditManagerArn>
 }
 type assessmentMetadata = {
 lastUpdated: option<timestamp_>,
-creationTime: option<timestamp_>,
-delegations: option<delegations>,
-roles: option<roles>,
-scope: option<scope>,
-assessmentReportsDestination: option<assessmentReportsDestination>,
-status: option<assessmentStatus>,
-complianceType: option<complianceType>,
-description: option<assessmentDescription>,
-id: option<uuid>,
-name: option<assessmentName>
+  creationTime: option<timestamp_>,
+  delegations: option<delegations>,
+  roles: option<roles>,
+  scope: option<scope>,
+  assessmentReportsDestination: option<assessmentReportsDestination>,
+  status: option<assessmentStatus>,
+  complianceType: option<complianceType>,
+  description: option<assessmentDescription>,
+  id: option<uuid>,
+  name: option<assessmentName>
 }
 type assessmentControls = array<assessmentControl>
 type controls = array<control>
 type assessmentControlSet = {
 manualEvidenceCount: option<integer_>,
-systemEvidenceCount: option<integer_>,
-delegations: option<delegations>,
-controls: option<assessmentControls>,
-roles: option<roles>,
-status: option<controlSetStatus>,
-description: option<nonEmptyString>,
-id: option<controlSetId>
+  systemEvidenceCount: option<integer_>,
+  delegations: option<delegations>,
+  controls: option<assessmentControls>,
+  roles: option<roles>,
+  status: option<controlSetStatus>,
+  description: option<nonEmptyString>,
+  id: option<controlSetId>
 }
 type controlSet = {
 controls: option<controls>,
-name: option<controlSetName>,
-id: option<uuid>
+  name: option<controlSetName>,
+  id: option<uuid>
 }
 type assessmentControlSets = array<assessmentControlSet>
 type controlSets = array<controlSet>
 type assessmentFramework = {
 controlSets: option<assessmentControlSets>,
-metadata: option<frameworkMetadata>,
-arn: option<auditManagerArn>,
-id: option<uuid>
+  metadata: option<frameworkMetadata>,
+  arn: option<auditManagerArn>,
+  id: option<uuid>
 }
 type framework = {
 tags: option<tagMap>,
-lastUpdatedBy: option<lastUpdatedBy>,
-createdBy: option<createdBy>,
-lastUpdatedAt: option<timestamp_>,
-createdAt: option<timestamp_>,
-controlSets: option<controlSets>,
-controlSources: option<controlSources>,
-logo: option<filename>,
-description: option<frameworkDescription>,
-complianceType: option<complianceType>,
-@as("type") type_: option<frameworkType>,
-name: option<frameworkName>,
-id: option<uuid>,
-arn: option<auditManagerArn>
+  lastUpdatedBy: option<lastUpdatedBy>,
+  createdBy: option<createdBy>,
+  lastUpdatedAt: option<timestamp_>,
+  createdAt: option<timestamp_>,
+  controlSets: option<controlSets>,
+  controlSources: option<controlSources>,
+  logo: option<filename>,
+  description: option<frameworkDescription>,
+  complianceType: option<complianceType>,
+  @as("type") type_: option<frameworkType>,
+  name: option<frameworkName>,
+  id: option<uuid>,
+  arn: option<auditManagerArn>
 }
 type assessment = {
 tags: option<tagMap>,
-framework: option<assessmentFramework>,
-metadata: option<assessmentMetadata>,
-awsAccount: option<awsaccount>,
-arn: option<auditManagerArn>
+  framework: option<assessmentFramework>,
+  metadata: option<assessmentMetadata>,
+  awsAccount: option<awsaccount>,
+  arn: option<auditManagerArn>
 }
-type awsServiceClient;
-@module("@aws-sdk/client-auditmanager") @new external createClient: unit => awsServiceClient = "AuditManagerClient";
+
 module GetAccountStatus = {
   type t;
   type request = unit
@@ -477,10 +482,10 @@ s3RelativePath: s3Url
 }
   type response = {
 validationErrors: option<validationErrors>,
-signatureKeyId: option<string_>,
-signatureDateTime: option<string_>,
-signatureAlgorithm: option<string_>,
-signatureValid: option<boolean_>
+  signatureKeyId: option<string_>,
+  signatureDateTime: option<string_>,
+  signatureAlgorithm: option<string_>,
+  signatureValid: option<boolean_>
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "ValidateAssessmentReportIntegrityCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -490,7 +495,7 @@ module UntagResource = {
   type t;
   type request = {
 tagKeys: tagKeyList,
-resourceArn: auditManagerArn
+  resourceArn: auditManagerArn
 }
   type response = unit
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "UntagResourceCommand";
@@ -501,7 +506,7 @@ module TagResource = {
   type t;
   type request = {
 tags: tagMap,
-resourceArn: auditManagerArn
+  resourceArn: auditManagerArn
 }
   type response = unit
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "TagResourceCommand";
@@ -515,7 +520,7 @@ adminAccountId: accountId
 }
   type response = {
 organizationId: option<organizationId>,
-adminAccountId: option<accountId>
+  adminAccountId: option<accountId>
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "RegisterOrganizationAdminAccountCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -525,7 +530,7 @@ module RegisterAccount = {
   type t;
   type request = {
 delegatedAdminAccount: option<accountId>,
-kmsKey: option<kmsKey>
+  kmsKey: option<kmsKey>
 }
   type response = {
 status: option<accountStatus>
@@ -550,11 +555,11 @@ module ListNotifications = {
   type t;
   type request = {
 maxResults: option<maxResults>,
-nextToken: option<token>
+  nextToken: option<token>
 }
   type response = {
 nextToken: option<token>,
-notifications: option<notifications>
+  notifications: option<notifications>
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "ListNotificationsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -564,12 +569,12 @@ module ListKeywordsForDataSource = {
   type t;
   type request = {
 maxResults: option<maxResults>,
-nextToken: option<token>,
-source: sourceType
+  nextToken: option<token>,
+  source: sourceType
 }
   type response = {
 nextToken: option<token>,
-keywords: option<keywords>
+  keywords: option<keywords>
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "ListKeywordsForDataSourceCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -579,12 +584,12 @@ module ListControls = {
   type t;
   type request = {
 maxResults: option<maxResults>,
-nextToken: option<token>,
-controlType: controlType
+  nextToken: option<token>,
+  controlType: controlType
 }
   type response = {
 nextToken: option<token>,
-controlMetadataList: option<controlMetadataList>
+  controlMetadataList: option<controlMetadataList>
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "ListControlsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -594,11 +599,11 @@ module ListAssessmentReports = {
   type t;
   type request = {
 maxResults: option<maxResults>,
-nextToken: option<token>
+  nextToken: option<token>
 }
   type response = {
 nextToken: option<token>,
-assessmentReports: option<assessmentReportsMetadata>
+  assessmentReports: option<assessmentReportsMetadata>
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "ListAssessmentReportsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -608,12 +613,12 @@ module ListAssessmentFrameworks = {
   type t;
   type request = {
 maxResults: option<maxResults>,
-nextToken: option<token>,
-frameworkType: frameworkType
+  nextToken: option<token>,
+  frameworkType: frameworkType
 }
   type response = {
 nextToken: option<token>,
-frameworkMetadataList: option<frameworkMetadataList>
+  frameworkMetadataList: option<frameworkMetadataList>
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "ListAssessmentFrameworksCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -634,7 +639,7 @@ module GetOrganizationAdminAccount = {
   type request = unit
   type response = {
 organizationId: option<organizationId>,
-adminAccountId: option<accountId>
+  adminAccountId: option<accountId>
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "GetOrganizationAdminAccountCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -644,14 +649,14 @@ module GetEvidenceFoldersByAssessmentControl = {
   type t;
   type request = {
 maxResults: option<maxResults>,
-nextToken: option<token>,
-controlId: uuid,
-controlSetId: controlSetId,
-assessmentId: uuid
+  nextToken: option<token>,
+  controlId: uuid,
+  controlSetId: controlSetId,
+  assessmentId: uuid
 }
   type response = {
 nextToken: option<token>,
-evidenceFolders: option<assessmentEvidenceFolders>
+  evidenceFolders: option<assessmentEvidenceFolders>
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "GetEvidenceFoldersByAssessmentControlCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -661,12 +666,12 @@ module GetEvidenceFoldersByAssessment = {
   type t;
   type request = {
 maxResults: option<maxResults>,
-nextToken: option<token>,
-assessmentId: uuid
+  nextToken: option<token>,
+  assessmentId: uuid
 }
   type response = {
 nextToken: option<token>,
-evidenceFolders: option<assessmentEvidenceFolders>
+  evidenceFolders: option<assessmentEvidenceFolders>
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "GetEvidenceFoldersByAssessmentCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -676,8 +681,8 @@ module GetEvidenceFolder = {
   type t;
   type request = {
 evidenceFolderId: uuid,
-controlSetId: controlSetId,
-assessmentId: uuid
+  controlSetId: controlSetId,
+  assessmentId: uuid
 }
   type response = {
 evidenceFolder: option<assessmentEvidenceFolder>
@@ -690,11 +695,11 @@ module GetDelegations = {
   type t;
   type request = {
 maxResults: option<maxResults>,
-nextToken: option<token>
+  nextToken: option<token>
 }
   type response = {
 nextToken: option<token>,
-delegations: option<delegationMetadataList>
+  delegations: option<delegationMetadataList>
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "GetDelegationsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -704,14 +709,14 @@ module GetChangeLogs = {
   type t;
   type request = {
 maxResults: option<maxResults>,
-nextToken: option<token>,
-controlId: option<uuid>,
-controlSetId: option<controlSetId>,
-assessmentId: uuid
+  nextToken: option<token>,
+  controlId: option<uuid>,
+  controlSetId: option<controlSetId>,
+  assessmentId: uuid
 }
   type response = {
 nextToken: option<token>,
-changeLogs: option<changeLogs>
+  changeLogs: option<changeLogs>
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "GetChangeLogsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -721,7 +726,7 @@ module GetAssessmentReportUrl = {
   type t;
   type request = {
 assessmentId: uuid,
-assessmentReportId: uuid
+  assessmentReportId: uuid
 }
   type response = {
 preSignedUrl: option<url>
@@ -734,7 +739,7 @@ module DisassociateAssessmentReportEvidenceFolder = {
   type t;
   type request = {
 evidenceFolderId: uuid,
-assessmentId: uuid
+  assessmentId: uuid
 }
   type response = unit
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "DisassociateAssessmentReportEvidenceFolderCommand";
@@ -775,7 +780,7 @@ module DeleteAssessmentReport = {
   type t;
   type request = {
 assessmentReportId: uuid,
-assessmentId: uuid
+  assessmentId: uuid
 }
   type response = unit
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "DeleteAssessmentReportCommand";
@@ -806,8 +811,8 @@ module CreateAssessmentReport = {
   type t;
   type request = {
 assessmentId: uuid,
-description: option<assessmentReportDescription>,
-name: assessmentReportName
+  description: option<assessmentReportDescription>,
+  name: assessmentReportName
 }
   type response = {
 assessmentReport: option<assessmentReport>
@@ -820,12 +825,12 @@ module BatchDisassociateAssessmentReportEvidence = {
   type t;
   type request = {
 evidenceIds: evidenceIds,
-evidenceFolderId: uuid,
-assessmentId: uuid
+  evidenceFolderId: uuid,
+  assessmentId: uuid
 }
   type response = {
 errors: option<assessmentReportEvidenceErrors>,
-evidenceIds: option<evidenceIds>
+  evidenceIds: option<evidenceIds>
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "BatchDisassociateAssessmentReportEvidenceCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -835,7 +840,7 @@ module BatchDeleteDelegationByAssessment = {
   type t;
   type request = {
 assessmentId: uuid,
-delegationIds: delegationIds
+  delegationIds: delegationIds
 }
   type response = {
 errors: option<batchDeleteDelegationByAssessmentErrors>
@@ -848,12 +853,12 @@ module BatchAssociateAssessmentReportEvidence = {
   type t;
   type request = {
 evidenceIds: evidenceIds,
-evidenceFolderId: uuid,
-assessmentId: uuid
+  evidenceFolderId: uuid,
+  assessmentId: uuid
 }
   type response = {
 errors: option<assessmentReportEvidenceErrors>,
-evidenceIds: option<evidenceIds>
+  evidenceIds: option<evidenceIds>
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "BatchAssociateAssessmentReportEvidenceCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -863,7 +868,7 @@ module AssociateAssessmentReportEvidenceFolder = {
   type t;
   type request = {
 evidenceFolderId: uuid,
-assessmentId: uuid
+  assessmentId: uuid
 }
   type response = unit
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "AssociateAssessmentReportEvidenceFolderCommand";
@@ -874,9 +879,9 @@ module UpdateSettings = {
   type t;
   type request = {
 kmsKey: option<kmsKey>,
-defaultProcessOwners: option<roles>,
-defaultAssessmentReportsDestination: option<assessmentReportsDestination>,
-snsTopic: option<snsArn>
+  defaultProcessOwners: option<roles>,
+  defaultAssessmentReportsDestination: option<assessmentReportsDestination>,
+  snsTopic: option<snsArn>
 }
   type response = {
 settings: option<settings>
@@ -889,10 +894,10 @@ module UpdateAssessmentControl = {
   type t;
   type request = {
 commentBody: option<controlCommentBody>,
-controlStatus: option<controlStatus>,
-controlId: uuid,
-controlSetId: controlSetId,
-assessmentId: uuid
+  controlStatus: option<controlStatus>,
+  controlId: uuid,
+  controlSetId: controlSetId,
+  assessmentId: uuid
 }
   type response = {
 control: option<assessmentControl>
@@ -917,9 +922,9 @@ module GetEvidence = {
   type t;
   type request = {
 evidenceId: uuid,
-evidenceFolderId: uuid,
-controlSetId: controlSetId,
-assessmentId: uuid
+  evidenceFolderId: uuid,
+  controlSetId: controlSetId,
+  assessmentId: uuid
 }
   type response = {
 evidence: option<evidence>
@@ -932,9 +937,9 @@ module BatchImportEvidenceToAssessmentControl = {
   type t;
   type request = {
 manualEvidence: manualEvidenceList,
-controlId: uuid,
-controlSetId: controlSetId,
-assessmentId: uuid
+  controlId: uuid,
+  controlSetId: controlSetId,
+  assessmentId: uuid
 }
   type response = {
 errors: option<batchImportEvidenceToAssessmentControlErrors>
@@ -947,11 +952,11 @@ module BatchCreateDelegationByAssessment = {
   type t;
   type request = {
 assessmentId: uuid,
-createDelegationRequests: createDelegationRequests
+  createDelegationRequests: createDelegationRequests
 }
   type response = {
 errors: option<batchCreateDelegationByAssessmentErrors>,
-delegations: option<delegations>
+  delegations: option<delegations>
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "BatchCreateDelegationByAssessmentCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -961,12 +966,12 @@ module UpdateControl = {
   type t;
   type request = {
 controlMappingSources: controlMappingSources,
-actionPlanInstructions: option<actionPlanInstructions>,
-actionPlanTitle: option<actionPlanTitle>,
-testingInformation: option<testingInformation>,
-description: option<controlDescription>,
-name: controlName,
-controlId: uuid
+  actionPlanInstructions: option<actionPlanInstructions>,
+  actionPlanTitle: option<actionPlanTitle>,
+  testingInformation: option<testingInformation>,
+  description: option<controlDescription>,
+  name: controlName,
+  controlId: uuid
 }
   type response = {
 control: option<control>
@@ -979,11 +984,11 @@ module ListAssessments = {
   type t;
   type request = {
 maxResults: option<maxResults>,
-nextToken: option<token>
+  nextToken: option<token>
 }
   type response = {
 nextToken: option<token>,
-assessmentMetadata: option<listAssessmentMetadata>
+  assessmentMetadata: option<listAssessmentMetadata>
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "ListAssessmentsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -993,14 +998,14 @@ module GetEvidenceByEvidenceFolder = {
   type t;
   type request = {
 maxResults: option<maxResults>,
-nextToken: option<token>,
-evidenceFolderId: uuid,
-controlSetId: controlSetId,
-assessmentId: uuid
+  nextToken: option<token>,
+  evidenceFolderId: uuid,
+  controlSetId: controlSetId,
+  assessmentId: uuid
 }
   type response = {
 nextToken: option<token>,
-evidence: option<evidenceList>
+  evidence: option<evidenceList>
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "GetEvidenceByEvidenceFolderCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1022,12 +1027,12 @@ module CreateControl = {
   type t;
   type request = {
 tags: option<tagMap>,
-controlMappingSources: createControlMappingSources,
-actionPlanInstructions: option<actionPlanInstructions>,
-actionPlanTitle: option<actionPlanTitle>,
-testingInformation: option<testingInformation>,
-description: option<controlDescription>,
-name: controlName
+  controlMappingSources: createControlMappingSources,
+  actionPlanInstructions: option<actionPlanInstructions>,
+  actionPlanTitle: option<actionPlanTitle>,
+  testingInformation: option<testingInformation>,
+  description: option<controlDescription>,
+  name: controlName
 }
   type response = {
 control: option<control>
@@ -1040,9 +1045,9 @@ module UpdateAssessmentControlSetStatus = {
   type t;
   type request = {
 comment: delegationComment,
-status: controlSetStatus,
-controlSetId: string_,
-assessmentId: uuid
+  status: controlSetStatus,
+  controlSetId: string_,
+  assessmentId: uuid
 }
   type response = {
 controlSet: option<assessmentControlSet>
@@ -1055,7 +1060,7 @@ module UpdateAssessmentStatus = {
   type t;
   type request = {
 status: assessmentStatus,
-assessmentId: uuid
+  assessmentId: uuid
 }
   type response = {
 assessment: option<assessment>
@@ -1068,10 +1073,10 @@ module UpdateAssessmentFramework = {
   type t;
   type request = {
 controlSets: updateAssessmentFrameworkControlSets,
-complianceType: option<complianceType>,
-description: option<frameworkDescription>,
-name: frameworkName,
-frameworkId: uuid
+  complianceType: option<complianceType>,
+  description: option<frameworkDescription>,
+  name: frameworkName,
+  frameworkId: uuid
 }
   type response = {
 framework: option<framework>
@@ -1084,11 +1089,11 @@ module UpdateAssessment = {
   type t;
   type request = {
 roles: option<roles>,
-assessmentReportsDestination: option<assessmentReportsDestination>,
-scope: scope,
-assessmentDescription: option<assessmentDescription>,
-assessmentName: option<assessmentName>,
-assessmentId: uuid
+  assessmentReportsDestination: option<assessmentReportsDestination>,
+  scope: scope,
+  assessmentDescription: option<assessmentDescription>,
+  assessmentName: option<assessmentName>,
+  assessmentId: uuid
 }
   type response = {
 assessment: option<assessment>
@@ -1116,7 +1121,7 @@ assessmentId: uuid
 }
   type response = {
 userRole: option<role>,
-assessment: option<assessment>
+  assessment: option<assessment>
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "GetAssessmentCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1126,10 +1131,10 @@ module CreateAssessmentFramework = {
   type t;
   type request = {
 tags: option<tagMap>,
-controlSets: createAssessmentFrameworkControlSets,
-complianceType: option<complianceType>,
-description: option<frameworkDescription>,
-name: frameworkName
+  controlSets: createAssessmentFrameworkControlSets,
+  complianceType: option<complianceType>,
+  description: option<frameworkDescription>,
+  name: frameworkName
 }
   type response = {
 framework: option<framework>
@@ -1142,12 +1147,12 @@ module CreateAssessment = {
   type t;
   type request = {
 tags: option<tagMap>,
-frameworkId: uuid,
-roles: roles,
-scope: scope,
-assessmentReportsDestination: assessmentReportsDestination,
-description: option<assessmentDescription>,
-name: assessmentName
+  frameworkId: uuid,
+  roles: roles,
+  scope: scope,
+  assessmentReportsDestination: assessmentReportsDestination,
+  description: option<assessmentDescription>,
+  name: assessmentName
 }
   type response = {
 assessment: option<assessment>

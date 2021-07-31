@@ -5,10 +5,16 @@ httpStatusCode: option<float>,
   cfId: option<string>,
   attempts: option<int>,
   totalRetryDelay: option<int>
-};
-type boolean_ = bool
+}
+type awsServiceClient;
+@module("@aws-sdk/client-shield") @new external createClient: unit => awsServiceClient = "ShieldClient";
+type baseString = string
+type baseBoolean = bool
+type baseInteger = int
+type baseTimestamp = Js.Date.t;
+type baseLong = float
 type errorMessage = string
-type validationExceptionReason = [@as("OTHER") #OTHER | @as("FIELD_VALIDATION_FAILED") #FIELDVALIDATIONFAILED]
+type validationExceptionReason = [@as("OTHER") #OTHER | @as("FIELD_VALIDATION_FAILED") #FIELD_VALIDATION_FAILED]
 type unit_ = [@as("REQUESTS") #REQUESTS | @as("PACKETS") #PACKETS | @as("BYTES") #BYTES | @as("BITS") #BITS]
 type token = string
 type timestamp_ = Js.Date.t;
@@ -21,10 +27,10 @@ type roleArn = string
 type resourceArn = string
 type protectionName = string
 type protectionId = string
-type protectionGroupPattern = [@as("BY_RESOURCE_TYPE") #BYRESOURCETYPE | @as("ARBITRARY") #ARBITRARY | @as("ALL") #ALL]
+type protectionGroupPattern = [@as("BY_RESOURCE_TYPE") #BY_RESOURCE_TYPE | @as("ARBITRARY") #ARBITRARY | @as("ALL") #ALL]
 type protectionGroupId = string
 type protectionGroupAggregation = [@as("MAX") #MAX | @as("MEAN") #MEAN | @as("SUM") #SUM]
-type protectedResourceType = [@as("GLOBAL_ACCELERATOR") #GLOBALACCELERATOR | @as("APPLICATION_LOAD_BALANCER") #APPLICATIONLOADBALANCER | @as("CLASSIC_LOAD_BALANCER") #CLASSICLOADBALANCER | @as("ELASTIC_IP_ALLOCATION") #ELASTICIPALLOCATION | @as("ROUTE_53_HOSTED_ZONE") #ROUTE53HOSTEDZONE | @as("CLOUDFRONT_DISTRIBUTION") #CLOUDFRONTDISTRIBUTION]
+type protectedResourceType = [@as("GLOBAL_ACCELERATOR") #GLOBAL_ACCELERATOR | @as("APPLICATION_LOAD_BALANCER") #APPLICATION_LOAD_BALANCER | @as("CLASSIC_LOAD_BALANCER") #CLASSIC_LOAD_BALANCER | @as("ELASTIC_IP_ALLOCATION") #ELASTIC_IP_ALLOCATION | @as("ROUTE_53_HOSTED_ZONE") #ROUTE_53_HOSTED_ZONE | @as("CLOUDFRONT_DISTRIBUTION") #CLOUDFRONT_DISTRIBUTION]
 type proactiveEngagementStatus = [@as("PENDING") #PENDING | @as("DISABLED") #DISABLED | @as("ENABLED") #ENABLED]
 type phoneNumber = string
 type maxResults = int
@@ -41,29 +47,29 @@ type double = float
 type contactNotes = string
 type autoRenew = [@as("DISABLED") #DISABLED | @as("ENABLED") #ENABLED]
 type attackTimestamp = Js.Date.t;
-type attackPropertyIdentifier = [@as("WORDPRESS_PINGBACK_SOURCE") #WORDPRESSPINGBACKSOURCE | @as("WORDPRESS_PINGBACK_REFLECTOR") #WORDPRESSPINGBACKREFLECTOR | @as("SOURCE_USER_AGENT") #SOURCEUSERAGENT | @as("SOURCE_IP_ADDRESS") #SOURCEIPADDRESS | @as("SOURCE_COUNTRY") #SOURCECOUNTRY | @as("SOURCE_ASN") #SOURCEASN | @as("REFERRER") #REFERRER | @as("DESTINATION_URL") #DESTINATIONURL]
+type attackPropertyIdentifier = [@as("WORDPRESS_PINGBACK_SOURCE") #WORDPRESS_PINGBACK_SOURCE | @as("WORDPRESS_PINGBACK_REFLECTOR") #WORDPRESS_PINGBACK_REFLECTOR | @as("SOURCE_USER_AGENT") #SOURCE_USER_AGENT | @as("SOURCE_IP_ADDRESS") #SOURCE_IP_ADDRESS | @as("SOURCE_COUNTRY") #SOURCE_COUNTRY | @as("SOURCE_ASN") #SOURCE_ASN | @as("REFERRER") #REFERRER | @as("DESTINATION_URL") #DESTINATION_URL]
 type attackLayer = [@as("APPLICATION") #APPLICATION | @as("NETWORK") #NETWORK]
 type attackId = string
 type validationExceptionField = {
 message: string_,
-name: string_
+  name: string_
 }
 type timeRange = {
 @as("ToExclusive") toExclusive: option<attackTimestamp>,
-@as("FromInclusive") fromInclusive: option<attackTimestamp>
+  @as("FromInclusive") fromInclusive: option<attackTimestamp>
 }
 type tagKeyList = array<tagKey>
 type tag = {
 @as("Value") value: option<tagValue>,
-@as("Key") key: option<tagKey>
+  @as("Key") key: option<tagKey>
 }
 type summarizedCounter = {
 @as("Unit") unit_: option<string_>,
-@as("N") n: option<integer_>,
-@as("Sum") sum: option<double>,
-@as("Average") average: option<double>,
-@as("Max") max: option<double>,
-@as("Name") name: option<string_>
+  @as("N") n: option<integer_>,
+  @as("Sum") sum: option<double>,
+  @as("Average") average: option<double>,
+  @as("Max") max: option<double>,
+  @as("Name") name: option<string_>
 }
 type resourceArnList = array<resourceArn>
 type resourceArnFilterList = array<resourceArn>
@@ -77,17 +83,17 @@ type mitigation = {
 type logBucketList = array<logBucket>
 type limit = {
 @as("Max") max: option<long>,
-@as("Type") type_: option<string_>
+  @as("Type") type_: option<string_>
 }
 type healthCheckIds = array<healthCheckId>
 type emergencyContact = {
 @as("ContactNotes") contactNotes: option<contactNotes>,
-@as("PhoneNumber") phoneNumber: option<phoneNumber>,
-@as("EmailAddress") emailAddress: emailAddress
+  @as("PhoneNumber") phoneNumber: option<phoneNumber>,
+  @as("EmailAddress") emailAddress: emailAddress
 }
 type contributor = {
 @as("Value") value: option<long>,
-@as("Name") name: option<string_>
+  @as("Name") name: option<string_>
 }
 type attackVolumeStatistics = {
 @as("Max") max: double
@@ -104,31 +110,31 @@ type protectionGroupPatternTypeLimits = {
 }
 type protectionGroup = {
 @as("ProtectionGroupArn") protectionGroupArn: option<resourceArn>,
-@as("Members") members: protectionGroupMembers,
-@as("ResourceType") resourceType: option<protectedResourceType>,
-@as("Pattern") pattern: protectionGroupPattern,
-@as("Aggregation") aggregation: protectionGroupAggregation,
-@as("ProtectionGroupId") protectionGroupId: protectionGroupId
+  @as("Members") members: protectionGroupMembers,
+  @as("ResourceType") resourceType: option<protectedResourceType>,
+  @as("Pattern") pattern: protectionGroupPattern,
+  @as("Aggregation") aggregation: protectionGroupAggregation,
+  @as("ProtectionGroupId") protectionGroupId: protectionGroupId
 }
 type protection = {
 @as("ProtectionArn") protectionArn: option<resourceArn>,
-@as("HealthCheckIds") healthCheckIds: option<healthCheckIds>,
-@as("ResourceArn") resourceArn: option<resourceArn>,
-@as("Name") name: option<protectionName>,
-@as("Id") id: option<protectionId>
+  @as("HealthCheckIds") healthCheckIds: option<healthCheckIds>,
+  @as("ResourceArn") resourceArn: option<resourceArn>,
+  @as("Name") name: option<protectionName>,
+  @as("Id") id: option<protectionId>
 }
 type mitigationList = array<mitigation>
 type limits = array<limit>
 type emergencyContactList = array<emergencyContact>
 type attackVolume = {
 @as("RequestsPerSecond") requestsPerSecond: option<attackVolumeStatistics>,
-@as("PacketsPerSecond") packetsPerSecond: option<attackVolumeStatistics>,
-@as("BitsPerSecond") bitsPerSecond: option<attackVolumeStatistics>
+  @as("PacketsPerSecond") packetsPerSecond: option<attackVolumeStatistics>,
+  @as("BitsPerSecond") bitsPerSecond: option<attackVolumeStatistics>
 }
 type attackVectorDescriptionList = array<attackVectorDescription>
 type summarizedAttackVector = {
 @as("VectorCounters") vectorCounters: option<summarizedCounterList>,
-@as("VectorType") vectorType: string_
+  @as("VectorType") vectorType: string_
 }
 type protections = array<protection>
 type protectionLimits = {
@@ -137,63 +143,62 @@ type protectionLimits = {
 type protectionGroups = array<protectionGroup>
 type protectionGroupLimits = {
 @as("PatternTypeLimits") patternTypeLimits: protectionGroupPatternTypeLimits,
-@as("MaxProtectionGroups") maxProtectionGroups: long
+  @as("MaxProtectionGroups") maxProtectionGroups: long
 }
 type attackSummary = {
 @as("AttackVectors") attackVectors: option<attackVectorDescriptionList>,
-@as("EndTime") endTime: option<attackTimestamp>,
-@as("StartTime") startTime: option<attackTimestamp>,
-@as("ResourceArn") resourceArn: option<string_>,
-@as("AttackId") attackId: option<string_>
+  @as("EndTime") endTime: option<attackTimestamp>,
+  @as("StartTime") startTime: option<attackTimestamp>,
+  @as("ResourceArn") resourceArn: option<string_>,
+  @as("AttackId") attackId: option<string_>
 }
 type attackStatisticsDataItem = {
 @as("AttackCount") attackCount: long,
-@as("AttackVolume") attackVolume: option<attackVolume>
+  @as("AttackVolume") attackVolume: option<attackVolume>
 }
 type attackProperty = {
 @as("Total") total: option<long>,
-@as("Unit") unit_: option<unit_>,
-@as("TopContributors") topContributors: option<topContributors>,
-@as("AttackPropertyIdentifier") attackPropertyIdentifier: option<attackPropertyIdentifier>,
-@as("AttackLayer") attackLayer: option<attackLayer>
+  @as("Unit") unit_: option<unit_>,
+  @as("TopContributors") topContributors: option<topContributors>,
+  @as("AttackPropertyIdentifier") attackPropertyIdentifier: option<attackPropertyIdentifier>,
+  @as("AttackLayer") attackLayer: option<attackLayer>
 }
 type summarizedAttackVectorList = array<summarizedAttackVector>
 type subscriptionLimits = {
 @as("ProtectionGroupLimits") protectionGroupLimits: protectionGroupLimits,
-@as("ProtectionLimits") protectionLimits: protectionLimits
+  @as("ProtectionLimits") protectionLimits: protectionLimits
 }
 type attackSummaries = array<attackSummary>
 type attackStatisticsDataList = array<attackStatisticsDataItem>
 type attackProperties = array<attackProperty>
 type subscription = {
 @as("SubscriptionArn") subscriptionArn: option<resourceArn>,
-@as("SubscriptionLimits") subscriptionLimits: subscriptionLimits,
-@as("ProactiveEngagementStatus") proactiveEngagementStatus: option<proactiveEngagementStatus>,
-@as("Limits") limits: option<limits>,
-@as("AutoRenew") autoRenew: option<autoRenew>,
-@as("TimeCommitmentInSeconds") timeCommitmentInSeconds: option<durationInSeconds>,
-@as("EndTime") endTime: option<timestamp_>,
-@as("StartTime") startTime: option<timestamp_>
+  @as("SubscriptionLimits") subscriptionLimits: subscriptionLimits,
+  @as("ProactiveEngagementStatus") proactiveEngagementStatus: option<proactiveEngagementStatus>,
+  @as("Limits") limits: option<limits>,
+  @as("AutoRenew") autoRenew: option<autoRenew>,
+  @as("TimeCommitmentInSeconds") timeCommitmentInSeconds: option<durationInSeconds>,
+  @as("EndTime") endTime: option<timestamp_>,
+  @as("StartTime") startTime: option<timestamp_>
 }
 type subResourceSummary = {
 @as("Counters") counters: option<summarizedCounterList>,
-@as("AttackVectors") attackVectors: option<summarizedAttackVectorList>,
-@as("Id") id: option<string_>,
-@as("Type") type_: option<subResourceType>
+  @as("AttackVectors") attackVectors: option<summarizedAttackVectorList>,
+  @as("Id") id: option<string_>,
+  @as("Type") type_: option<subResourceType>
 }
 type subResourceSummaryList = array<subResourceSummary>
 type attackDetail = {
 @as("Mitigations") mitigations: option<mitigationList>,
-@as("AttackProperties") attackProperties: option<attackProperties>,
-@as("AttackCounters") attackCounters: option<summarizedCounterList>,
-@as("EndTime") endTime: option<attackTimestamp>,
-@as("StartTime") startTime: option<attackTimestamp>,
-@as("SubResources") subResources: option<subResourceSummaryList>,
-@as("ResourceArn") resourceArn: option<resourceArn>,
-@as("AttackId") attackId: option<attackId>
+  @as("AttackProperties") attackProperties: option<attackProperties>,
+  @as("AttackCounters") attackCounters: option<summarizedCounterList>,
+  @as("EndTime") endTime: option<attackTimestamp>,
+  @as("StartTime") startTime: option<attackTimestamp>,
+  @as("SubResources") subResources: option<subResourceSummaryList>,
+  @as("ResourceArn") resourceArn: option<resourceArn>,
+  @as("AttackId") attackId: option<attackId>
 }
-type awsServiceClient;
-@module("@aws-sdk/client-shield") @new external createClient: unit => awsServiceClient = "ShieldClient";
+
 module GetSubscriptionState = {
   type t;
   type request = unit
@@ -262,12 +267,12 @@ module ListResourcesInProtectionGroup = {
   type t;
   type request = {
 @as("MaxResults") maxResults: option<maxResults>,
-@as("NextToken") nextToken: option<token>,
-@as("ProtectionGroupId") protectionGroupId: protectionGroupId
+  @as("NextToken") nextToken: option<token>,
+  @as("ProtectionGroupId") protectionGroupId: protectionGroupId
 }
   type response = {
 @as("NextToken") nextToken: option<token>,
-@as("ResourceArns") resourceArns: resourceArnList
+  @as("ResourceArns") resourceArns: resourceArnList
 }
   @module("@aws-sdk/client-shield") @new external new_: (request) => t = "ListResourcesInProtectionGroupCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -278,7 +283,7 @@ module DescribeDRTAccess = {
   type request = unit
   type response = {
 @as("LogBucketList") logBucketList: option<logBucketList>,
-@as("RoleArn") roleArn: option<roleArn>
+  @as("RoleArn") roleArn: option<roleArn>
 }
   @module("@aws-sdk/client-shield") @new external new_: (request) => t = "DescribeDRTAccessCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -298,10 +303,10 @@ module UpdateProtectionGroup = {
   type t;
   type request = {
 @as("Members") members: option<protectionGroupMembers>,
-@as("ResourceType") resourceType: option<protectedResourceType>,
-@as("Pattern") pattern: protectionGroupPattern,
-@as("Aggregation") aggregation: protectionGroupAggregation,
-@as("ProtectionGroupId") protectionGroupId: protectionGroupId
+  @as("ResourceType") resourceType: option<protectedResourceType>,
+  @as("Pattern") pattern: protectionGroupPattern,
+  @as("Aggregation") aggregation: protectionGroupAggregation,
+  @as("ProtectionGroupId") protectionGroupId: protectionGroupId
 }
   type response = unit
   @module("@aws-sdk/client-shield") @new external new_: (request) => t = "UpdateProtectionGroupCommand";
@@ -322,7 +327,7 @@ module UntagResource = {
   type t;
   type request = {
 @as("TagKeys") tagKeys: tagKeyList,
-@as("ResourceARN") resourceARN: resourceArn
+  @as("ResourceARN") resourceARN: resourceArn
 }
   type response = unit
   @module("@aws-sdk/client-shield") @new external new_: (request) => t = "UntagResourceCommand";
@@ -333,7 +338,7 @@ module TagResource = {
   type t;
   type request = {
 @as("Tags") tags: tagList_,
-@as("ResourceARN") resourceARN: resourceArn
+  @as("ResourceARN") resourceARN: resourceArn
 }
   type response = unit
   @module("@aws-sdk/client-shield") @new external new_: (request) => t = "TagResourceCommand";
@@ -364,7 +369,7 @@ module DisassociateHealthCheck = {
   type t;
   type request = {
 @as("HealthCheckArn") healthCheckArn: healthCheckArn,
-@as("ProtectionId") protectionId: protectionId
+  @as("ProtectionId") protectionId: protectionId
 }
   type response = unit
   @module("@aws-sdk/client-shield") @new external new_: (request) => t = "DisassociateHealthCheckCommand";
@@ -395,7 +400,7 @@ module DescribeProtection = {
   type t;
   type request = {
 @as("ResourceArn") resourceArn: option<resourceArn>,
-@as("ProtectionId") protectionId: option<protectionId>
+  @as("ProtectionId") protectionId: option<protectionId>
 }
   type response = {
 @as("Protection") protection: option<protection>
@@ -418,11 +423,11 @@ module CreateProtectionGroup = {
   type t;
   type request = {
 @as("Tags") tags: option<tagList_>,
-@as("Members") members: option<protectionGroupMembers>,
-@as("ResourceType") resourceType: option<protectedResourceType>,
-@as("Pattern") pattern: protectionGroupPattern,
-@as("Aggregation") aggregation: protectionGroupAggregation,
-@as("ProtectionGroupId") protectionGroupId: protectionGroupId
+  @as("Members") members: option<protectionGroupMembers>,
+  @as("ResourceType") resourceType: option<protectedResourceType>,
+  @as("Pattern") pattern: protectionGroupPattern,
+  @as("Aggregation") aggregation: protectionGroupAggregation,
+  @as("ProtectionGroupId") protectionGroupId: protectionGroupId
 }
   type response = unit
   @module("@aws-sdk/client-shield") @new external new_: (request) => t = "CreateProtectionGroupCommand";
@@ -433,8 +438,8 @@ module CreateProtection = {
   type t;
   type request = {
 @as("Tags") tags: option<tagList_>,
-@as("ResourceArn") resourceArn: resourceArn,
-@as("Name") name: protectionName
+  @as("ResourceArn") resourceArn: resourceArn,
+  @as("Name") name: protectionName
 }
   type response = {
 @as("ProtectionId") protectionId: option<protectionId>
@@ -457,7 +462,7 @@ module AssociateHealthCheck = {
   type t;
   type request = {
 @as("HealthCheckArn") healthCheckArn: healthCheckArn,
-@as("ProtectionId") protectionId: protectionId
+  @as("ProtectionId") protectionId: protectionId
 }
   type response = unit
   @module("@aws-sdk/client-shield") @new external new_: (request) => t = "AssociateHealthCheckCommand";
@@ -488,11 +493,11 @@ module ListProtections = {
   type t;
   type request = {
 @as("MaxResults") maxResults: option<maxResults>,
-@as("NextToken") nextToken: option<token>
+  @as("NextToken") nextToken: option<token>
 }
   type response = {
 @as("NextToken") nextToken: option<token>,
-@as("Protections") protections: option<protections>
+  @as("Protections") protections: option<protections>
 }
   @module("@aws-sdk/client-shield") @new external new_: (request) => t = "ListProtectionsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -502,11 +507,11 @@ module ListProtectionGroups = {
   type t;
   type request = {
 @as("MaxResults") maxResults: option<maxResults>,
-@as("NextToken") nextToken: option<token>
+  @as("NextToken") nextToken: option<token>
 }
   type response = {
 @as("NextToken") nextToken: option<token>,
-@as("ProtectionGroups") protectionGroups: protectionGroups
+  @as("ProtectionGroups") protectionGroups: protectionGroups
 }
   @module("@aws-sdk/client-shield") @new external new_: (request) => t = "ListProtectionGroupsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -516,14 +521,14 @@ module ListAttacks = {
   type t;
   type request = {
 @as("MaxResults") maxResults: option<maxResults>,
-@as("NextToken") nextToken: option<token>,
-@as("EndTime") endTime: option<timeRange>,
-@as("StartTime") startTime: option<timeRange>,
-@as("ResourceArns") resourceArns: option<resourceArnFilterList>
+  @as("NextToken") nextToken: option<token>,
+  @as("EndTime") endTime: option<timeRange>,
+  @as("StartTime") startTime: option<timeRange>,
+  @as("ResourceArns") resourceArns: option<resourceArnFilterList>
 }
   type response = {
 @as("NextToken") nextToken: option<token>,
-@as("AttackSummaries") attackSummaries: option<attackSummaries>
+  @as("AttackSummaries") attackSummaries: option<attackSummaries>
 }
   @module("@aws-sdk/client-shield") @new external new_: (request) => t = "ListAttacksCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -534,7 +539,7 @@ module DescribeAttackStatistics = {
   type request = unit
   type response = {
 @as("DataItems") dataItems: attackStatisticsDataList,
-@as("TimeRange") timeRange: timeRange
+  @as("TimeRange") timeRange: timeRange
 }
   @module("@aws-sdk/client-shield") @new external new_: (request) => t = "DescribeAttackStatisticsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";

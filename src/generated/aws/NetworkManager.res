@@ -5,10 +5,14 @@ httpStatusCode: option<float>,
   cfId: option<string>,
   attempts: option<int>,
   totalRetryDelay: option<int>
-};
-type boolean_ = bool
-type timestamp_ = Js.Date.t;
-type long = float
+}
+type awsServiceClient;
+@module("@aws-sdk/client-networkmanager") @new external createClient: unit => awsServiceClient = "NetworkManagerClient";
+type baseString = string
+type baseBoolean = bool
+type baseInteger = int
+type baseTimestamp = Js.Date.t;
+type baseLong = float
 type validationExceptionReason = [@as("Other") #Other | @as("FieldValidationFailed") #FieldValidationFailed | @as("CannotParse") #CannotParse | @as("UnknownOperation") #UnknownOperation]
 type transitGatewayRegistrationState = [@as("FAILED") #FAILED | @as("DELETED") #DELETED | @as("DELETING") #DELETING | @as("AVAILABLE") #AVAILABLE | @as("PENDING") #PENDING]
 type transitGatewayConnectPeerAssociationState = [@as("DELETED") #DELETED | @as("DELETING") #DELETING | @as("AVAILABLE") #AVAILABLE | @as("PENDING") #PENDING]
@@ -29,56 +33,56 @@ type customerGatewayAssociationState = [@as("DELETED") #DELETED | @as("DELETING"
 type connectionState = [@as("UPDATING") #UPDATING | @as("DELETING") #DELETING | @as("AVAILABLE") #AVAILABLE | @as("PENDING") #PENDING]
 type validationExceptionField = {
 @as("Message") message: string_,
-@as("Name") name: string_
+  @as("Name") name: string_
 }
 type transitGatewayRegistrationStateReason = {
 @as("Message") message: option<string_>,
-@as("Code") code: option<transitGatewayRegistrationState>
+  @as("Code") code: option<transitGatewayRegistrationState>
 }
 type transitGatewayConnectPeerAssociation = {
 @as("State") state: option<transitGatewayConnectPeerAssociationState>,
-@as("LinkId") linkId: option<string_>,
-@as("DeviceId") deviceId: option<string_>,
-@as("GlobalNetworkId") globalNetworkId: option<string_>,
-@as("TransitGatewayConnectPeerArn") transitGatewayConnectPeerArn: option<string_>
+  @as("LinkId") linkId: option<string_>,
+  @as("DeviceId") deviceId: option<string_>,
+  @as("GlobalNetworkId") globalNetworkId: option<string_>,
+  @as("TransitGatewayConnectPeerArn") transitGatewayConnectPeerArn: option<string_>
 }
 type tagKeyList = array<tagKey>
 type tag = {
 @as("Value") value: option<tagValue>,
-@as("Key") key: option<tagKey>
+  @as("Key") key: option<tagKey>
 }
 type stringList = array<string_>
 type location = {
 @as("Longitude") longitude: option<string_>,
-@as("Latitude") latitude: option<string_>,
-@as("Address") address: option<string_>
+  @as("Latitude") latitude: option<string_>,
+  @as("Address") address: option<string_>
 }
 type linkAssociation = {
 @as("LinkAssociationState") linkAssociationState: option<linkAssociationState>,
-@as("LinkId") linkId: option<string_>,
-@as("DeviceId") deviceId: option<string_>,
-@as("GlobalNetworkId") globalNetworkId: option<string_>
+  @as("LinkId") linkId: option<string_>,
+  @as("DeviceId") deviceId: option<string_>,
+  @as("GlobalNetworkId") globalNetworkId: option<string_>
 }
 type customerGatewayAssociation = {
 @as("State") state: option<customerGatewayAssociationState>,
-@as("LinkId") linkId: option<string_>,
-@as("DeviceId") deviceId: option<string_>,
-@as("GlobalNetworkId") globalNetworkId: option<string_>,
-@as("CustomerGatewayArn") customerGatewayArn: option<string_>
+  @as("LinkId") linkId: option<string_>,
+  @as("DeviceId") deviceId: option<string_>,
+  @as("GlobalNetworkId") globalNetworkId: option<string_>,
+  @as("CustomerGatewayArn") customerGatewayArn: option<string_>
 }
 type bandwidth = {
 @as("DownloadSpeed") downloadSpeed: option<integer_>,
-@as("UploadSpeed") uploadSpeed: option<integer_>
+  @as("UploadSpeed") uploadSpeed: option<integer_>
 }
 type awslocation = {
 @as("SubnetArn") subnetArn: option<string_>,
-@as("Zone") zone: option<string_>
+  @as("Zone") zone: option<string_>
 }
 type validationExceptionFieldList = array<validationExceptionField>
 type transitGatewayRegistration = {
 @as("State") state: option<transitGatewayRegistrationStateReason>,
-@as("TransitGatewayArn") transitGatewayArn: option<string_>,
-@as("GlobalNetworkId") globalNetworkId: option<string_>
+  @as("TransitGatewayArn") transitGatewayArn: option<string_>,
+  @as("GlobalNetworkId") globalNetworkId: option<string_>
 }
 type transitGatewayConnectPeerAssociationList = array<transitGatewayConnectPeerAssociation>
 type tagList_ = array<tag>
@@ -87,76 +91,75 @@ type customerGatewayAssociationList = array<customerGatewayAssociation>
 type transitGatewayRegistrationList = array<transitGatewayRegistration>
 type site = {
 @as("Tags") tags: option<tagList_>,
-@as("State") state: option<siteState>,
-@as("CreatedAt") createdAt: option<dateTime>,
-@as("Location") location: option<location>,
-@as("Description") description: option<string_>,
-@as("GlobalNetworkId") globalNetworkId: option<string_>,
-@as("SiteArn") siteArn: option<string_>,
-@as("SiteId") siteId: option<string_>
+  @as("State") state: option<siteState>,
+  @as("CreatedAt") createdAt: option<dateTime>,
+  @as("Location") location: option<location>,
+  @as("Description") description: option<string_>,
+  @as("GlobalNetworkId") globalNetworkId: option<string_>,
+  @as("SiteArn") siteArn: option<string_>,
+  @as("SiteId") siteId: option<string_>
 }
 type link = {
 @as("Tags") tags: option<tagList_>,
-@as("State") state: option<linkState>,
-@as("CreatedAt") createdAt: option<dateTime>,
-@as("Provider") provider: option<string_>,
-@as("Bandwidth") bandwidth: option<bandwidth>,
-@as("Type") type_: option<string_>,
-@as("Description") description: option<string_>,
-@as("SiteId") siteId: option<string_>,
-@as("GlobalNetworkId") globalNetworkId: option<string_>,
-@as("LinkArn") linkArn: option<string_>,
-@as("LinkId") linkId: option<string_>
+  @as("State") state: option<linkState>,
+  @as("CreatedAt") createdAt: option<dateTime>,
+  @as("Provider") provider: option<string_>,
+  @as("Bandwidth") bandwidth: option<bandwidth>,
+  @as("Type") type_: option<string_>,
+  @as("Description") description: option<string_>,
+  @as("SiteId") siteId: option<string_>,
+  @as("GlobalNetworkId") globalNetworkId: option<string_>,
+  @as("LinkArn") linkArn: option<string_>,
+  @as("LinkId") linkId: option<string_>
 }
 type globalNetwork = {
 @as("Tags") tags: option<tagList_>,
-@as("State") state: option<globalNetworkState>,
-@as("CreatedAt") createdAt: option<dateTime>,
-@as("Description") description: option<string_>,
-@as("GlobalNetworkArn") globalNetworkArn: option<string_>,
-@as("GlobalNetworkId") globalNetworkId: option<string_>
+  @as("State") state: option<globalNetworkState>,
+  @as("CreatedAt") createdAt: option<dateTime>,
+  @as("Description") description: option<string_>,
+  @as("GlobalNetworkArn") globalNetworkArn: option<string_>,
+  @as("GlobalNetworkId") globalNetworkId: option<string_>
 }
 type device = {
 @as("Tags") tags: option<tagList_>,
-@as("State") state: option<deviceState>,
-@as("CreatedAt") createdAt: option<dateTime>,
-@as("SiteId") siteId: option<string_>,
-@as("Location") location: option<location>,
-@as("SerialNumber") serialNumber: option<string_>,
-@as("Model") model: option<string_>,
-@as("Vendor") vendor: option<string_>,
-@as("Type") type_: option<string_>,
-@as("Description") description: option<string_>,
-@as("AWSLocation") awslocation: option<awslocation>,
-@as("GlobalNetworkId") globalNetworkId: option<string_>,
-@as("DeviceArn") deviceArn: option<string_>,
-@as("DeviceId") deviceId: option<string_>
+  @as("State") state: option<deviceState>,
+  @as("CreatedAt") createdAt: option<dateTime>,
+  @as("SiteId") siteId: option<string_>,
+  @as("Location") location: option<location>,
+  @as("SerialNumber") serialNumber: option<string_>,
+  @as("Model") model: option<string_>,
+  @as("Vendor") vendor: option<string_>,
+  @as("Type") type_: option<string_>,
+  @as("Description") description: option<string_>,
+  @as("AWSLocation") awslocation: option<awslocation>,
+  @as("GlobalNetworkId") globalNetworkId: option<string_>,
+  @as("DeviceArn") deviceArn: option<string_>,
+  @as("DeviceId") deviceId: option<string_>
 }
 type connection = {
 @as("Tags") tags: option<tagList_>,
-@as("State") state: option<connectionState>,
-@as("CreatedAt") createdAt: option<dateTime>,
-@as("Description") description: option<string_>,
-@as("ConnectedLinkId") connectedLinkId: option<string_>,
-@as("LinkId") linkId: option<string_>,
-@as("ConnectedDeviceId") connectedDeviceId: option<string_>,
-@as("DeviceId") deviceId: option<string_>,
-@as("GlobalNetworkId") globalNetworkId: option<string_>,
-@as("ConnectionArn") connectionArn: option<string_>,
-@as("ConnectionId") connectionId: option<string_>
+  @as("State") state: option<connectionState>,
+  @as("CreatedAt") createdAt: option<dateTime>,
+  @as("Description") description: option<string_>,
+  @as("ConnectedLinkId") connectedLinkId: option<string_>,
+  @as("LinkId") linkId: option<string_>,
+  @as("ConnectedDeviceId") connectedDeviceId: option<string_>,
+  @as("DeviceId") deviceId: option<string_>,
+  @as("GlobalNetworkId") globalNetworkId: option<string_>,
+  @as("ConnectionArn") connectionArn: option<string_>,
+  @as("ConnectionId") connectionId: option<string_>
 }
 type siteList = array<site>
 type linkList = array<link>
 type globalNetworkList = array<globalNetwork>
 type deviceList = array<device>
 type connectionList = array<connection>
-type awsServiceClient;
-@module("@aws-sdk/client-networkmanager") @new external createClient: unit => awsServiceClient = "NetworkManagerClient";
+
 module UntagResource = {
   type t;
   type request = {
 @as("TagKeys") tagKeys: tagKeyList,
-@as("ResourceArn") resourceArn: resourceARN
+  @as("ResourceArn") resourceArn: resourceARN
 }
   type response = unit
   @module("@aws-sdk/client-networkmanager") @new external new_: (request) => t = "UntagResourceCommand";
@@ -167,7 +170,7 @@ module TagResource = {
   type t;
   type request = {
 @as("Tags") tags: tagList_,
-@as("ResourceArn") resourceArn: resourceARN
+  @as("ResourceArn") resourceArn: resourceARN
 }
   type response = unit
   @module("@aws-sdk/client-networkmanager") @new external new_: (request) => t = "TagResourceCommand";
@@ -178,7 +181,7 @@ module RegisterTransitGateway = {
   type t;
   type request = {
 @as("TransitGatewayArn") transitGatewayArn: string_,
-@as("GlobalNetworkId") globalNetworkId: string_
+  @as("GlobalNetworkId") globalNetworkId: string_
 }
   type response = {
 @as("TransitGatewayRegistration") transitGatewayRegistration: option<transitGatewayRegistration>
@@ -203,13 +206,13 @@ module GetTransitGatewayConnectPeerAssociations = {
   type t;
   type request = {
 @as("NextToken") nextToken: option<string_>,
-@as("MaxResults") maxResults: option<maxResults>,
-@as("TransitGatewayConnectPeerArns") transitGatewayConnectPeerArns: option<stringList>,
-@as("GlobalNetworkId") globalNetworkId: string_
+  @as("MaxResults") maxResults: option<maxResults>,
+  @as("TransitGatewayConnectPeerArns") transitGatewayConnectPeerArns: option<stringList>,
+  @as("GlobalNetworkId") globalNetworkId: string_
 }
   type response = {
 @as("NextToken") nextToken: option<string_>,
-@as("TransitGatewayConnectPeerAssociations") transitGatewayConnectPeerAssociations: option<transitGatewayConnectPeerAssociationList>
+  @as("TransitGatewayConnectPeerAssociations") transitGatewayConnectPeerAssociations: option<transitGatewayConnectPeerAssociationList>
 }
   @module("@aws-sdk/client-networkmanager") @new external new_: (request) => t = "GetTransitGatewayConnectPeerAssociationsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -219,14 +222,14 @@ module GetLinkAssociations = {
   type t;
   type request = {
 @as("NextToken") nextToken: option<string_>,
-@as("MaxResults") maxResults: option<maxResults>,
-@as("LinkId") linkId: option<string_>,
-@as("DeviceId") deviceId: option<string_>,
-@as("GlobalNetworkId") globalNetworkId: string_
+  @as("MaxResults") maxResults: option<maxResults>,
+  @as("LinkId") linkId: option<string_>,
+  @as("DeviceId") deviceId: option<string_>,
+  @as("GlobalNetworkId") globalNetworkId: string_
 }
   type response = {
 @as("NextToken") nextToken: option<string_>,
-@as("LinkAssociations") linkAssociations: option<linkAssociationList>
+  @as("LinkAssociations") linkAssociations: option<linkAssociationList>
 }
   @module("@aws-sdk/client-networkmanager") @new external new_: (request) => t = "GetLinkAssociationsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -236,13 +239,13 @@ module GetCustomerGatewayAssociations = {
   type t;
   type request = {
 @as("NextToken") nextToken: option<string_>,
-@as("MaxResults") maxResults: option<maxResults>,
-@as("CustomerGatewayArns") customerGatewayArns: option<stringList>,
-@as("GlobalNetworkId") globalNetworkId: string_
+  @as("MaxResults") maxResults: option<maxResults>,
+  @as("CustomerGatewayArns") customerGatewayArns: option<stringList>,
+  @as("GlobalNetworkId") globalNetworkId: string_
 }
   type response = {
 @as("NextToken") nextToken: option<string_>,
-@as("CustomerGatewayAssociations") customerGatewayAssociations: option<customerGatewayAssociationList>
+  @as("CustomerGatewayAssociations") customerGatewayAssociations: option<customerGatewayAssociationList>
 }
   @module("@aws-sdk/client-networkmanager") @new external new_: (request) => t = "GetCustomerGatewayAssociationsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -252,7 +255,7 @@ module DisassociateTransitGatewayConnectPeer = {
   type t;
   type request = {
 @as("TransitGatewayConnectPeerArn") transitGatewayConnectPeerArn: string_,
-@as("GlobalNetworkId") globalNetworkId: string_
+  @as("GlobalNetworkId") globalNetworkId: string_
 }
   type response = {
 @as("TransitGatewayConnectPeerAssociation") transitGatewayConnectPeerAssociation: option<transitGatewayConnectPeerAssociation>
@@ -265,8 +268,8 @@ module DisassociateLink = {
   type t;
   type request = {
 @as("LinkId") linkId: string_,
-@as("DeviceId") deviceId: string_,
-@as("GlobalNetworkId") globalNetworkId: string_
+  @as("DeviceId") deviceId: string_,
+  @as("GlobalNetworkId") globalNetworkId: string_
 }
   type response = {
 @as("LinkAssociation") linkAssociation: option<linkAssociation>
@@ -279,7 +282,7 @@ module DisassociateCustomerGateway = {
   type t;
   type request = {
 @as("CustomerGatewayArn") customerGatewayArn: string_,
-@as("GlobalNetworkId") globalNetworkId: string_
+  @as("GlobalNetworkId") globalNetworkId: string_
 }
   type response = {
 @as("CustomerGatewayAssociation") customerGatewayAssociation: option<customerGatewayAssociation>
@@ -292,7 +295,7 @@ module DeregisterTransitGateway = {
   type t;
   type request = {
 @as("TransitGatewayArn") transitGatewayArn: string_,
-@as("GlobalNetworkId") globalNetworkId: string_
+  @as("GlobalNetworkId") globalNetworkId: string_
 }
   type response = {
 @as("TransitGatewayRegistration") transitGatewayRegistration: option<transitGatewayRegistration>
@@ -305,9 +308,9 @@ module AssociateTransitGatewayConnectPeer = {
   type t;
   type request = {
 @as("LinkId") linkId: option<string_>,
-@as("DeviceId") deviceId: string_,
-@as("TransitGatewayConnectPeerArn") transitGatewayConnectPeerArn: string_,
-@as("GlobalNetworkId") globalNetworkId: string_
+  @as("DeviceId") deviceId: string_,
+  @as("TransitGatewayConnectPeerArn") transitGatewayConnectPeerArn: string_,
+  @as("GlobalNetworkId") globalNetworkId: string_
 }
   type response = {
 @as("TransitGatewayConnectPeerAssociation") transitGatewayConnectPeerAssociation: option<transitGatewayConnectPeerAssociation>
@@ -320,8 +323,8 @@ module AssociateLink = {
   type t;
   type request = {
 @as("LinkId") linkId: string_,
-@as("DeviceId") deviceId: string_,
-@as("GlobalNetworkId") globalNetworkId: string_
+  @as("DeviceId") deviceId: string_,
+  @as("GlobalNetworkId") globalNetworkId: string_
 }
   type response = {
 @as("LinkAssociation") linkAssociation: option<linkAssociation>
@@ -334,9 +337,9 @@ module AssociateCustomerGateway = {
   type t;
   type request = {
 @as("LinkId") linkId: option<string_>,
-@as("DeviceId") deviceId: string_,
-@as("GlobalNetworkId") globalNetworkId: string_,
-@as("CustomerGatewayArn") customerGatewayArn: string_
+  @as("DeviceId") deviceId: string_,
+  @as("GlobalNetworkId") globalNetworkId: string_,
+  @as("CustomerGatewayArn") customerGatewayArn: string_
 }
   type response = {
 @as("CustomerGatewayAssociation") customerGatewayAssociation: option<customerGatewayAssociation>
@@ -349,9 +352,9 @@ module UpdateSite = {
   type t;
   type request = {
 @as("Location") location: option<location>,
-@as("Description") description: option<string_>,
-@as("SiteId") siteId: string_,
-@as("GlobalNetworkId") globalNetworkId: string_
+  @as("Description") description: option<string_>,
+  @as("SiteId") siteId: string_,
+  @as("GlobalNetworkId") globalNetworkId: string_
 }
   type response = {
 @as("Site") site: option<site>
@@ -364,11 +367,11 @@ module UpdateLink = {
   type t;
   type request = {
 @as("Provider") provider: option<string_>,
-@as("Bandwidth") bandwidth: option<bandwidth>,
-@as("Type") type_: option<string_>,
-@as("Description") description: option<string_>,
-@as("LinkId") linkId: string_,
-@as("GlobalNetworkId") globalNetworkId: string_
+  @as("Bandwidth") bandwidth: option<bandwidth>,
+  @as("Type") type_: option<string_>,
+  @as("Description") description: option<string_>,
+  @as("LinkId") linkId: string_,
+  @as("GlobalNetworkId") globalNetworkId: string_
 }
   type response = {
 @as("Link") link: option<link>
@@ -381,7 +384,7 @@ module UpdateGlobalNetwork = {
   type t;
   type request = {
 @as("Description") description: option<string_>,
-@as("GlobalNetworkId") globalNetworkId: string_
+  @as("GlobalNetworkId") globalNetworkId: string_
 }
   type response = {
 @as("GlobalNetwork") globalNetwork: option<globalNetwork>
@@ -394,15 +397,15 @@ module UpdateDevice = {
   type t;
   type request = {
 @as("SiteId") siteId: option<string_>,
-@as("Location") location: option<location>,
-@as("SerialNumber") serialNumber: option<string_>,
-@as("Model") model: option<string_>,
-@as("Vendor") vendor: option<string_>,
-@as("Type") type_: option<string_>,
-@as("Description") description: option<string_>,
-@as("AWSLocation") awslocation: option<awslocation>,
-@as("DeviceId") deviceId: string_,
-@as("GlobalNetworkId") globalNetworkId: string_
+  @as("Location") location: option<location>,
+  @as("SerialNumber") serialNumber: option<string_>,
+  @as("Model") model: option<string_>,
+  @as("Vendor") vendor: option<string_>,
+  @as("Type") type_: option<string_>,
+  @as("Description") description: option<string_>,
+  @as("AWSLocation") awslocation: option<awslocation>,
+  @as("DeviceId") deviceId: string_,
+  @as("GlobalNetworkId") globalNetworkId: string_
 }
   type response = {
 @as("Device") device: option<device>
@@ -415,10 +418,10 @@ module UpdateConnection = {
   type t;
   type request = {
 @as("Description") description: option<string_>,
-@as("ConnectedLinkId") connectedLinkId: option<string_>,
-@as("LinkId") linkId: option<string_>,
-@as("ConnectionId") connectionId: string_,
-@as("GlobalNetworkId") globalNetworkId: string_
+  @as("ConnectedLinkId") connectedLinkId: option<string_>,
+  @as("LinkId") linkId: option<string_>,
+  @as("ConnectionId") connectionId: string_,
+  @as("GlobalNetworkId") globalNetworkId: string_
 }
   type response = {
 @as("Connection") connection: option<connection>
@@ -431,13 +434,13 @@ module GetTransitGatewayRegistrations = {
   type t;
   type request = {
 @as("NextToken") nextToken: option<string_>,
-@as("MaxResults") maxResults: option<maxResults>,
-@as("TransitGatewayArns") transitGatewayArns: option<stringList>,
-@as("GlobalNetworkId") globalNetworkId: string_
+  @as("MaxResults") maxResults: option<maxResults>,
+  @as("TransitGatewayArns") transitGatewayArns: option<stringList>,
+  @as("GlobalNetworkId") globalNetworkId: string_
 }
   type response = {
 @as("NextToken") nextToken: option<string_>,
-@as("TransitGatewayRegistrations") transitGatewayRegistrations: option<transitGatewayRegistrationList>
+  @as("TransitGatewayRegistrations") transitGatewayRegistrations: option<transitGatewayRegistrationList>
 }
   @module("@aws-sdk/client-networkmanager") @new external new_: (request) => t = "GetTransitGatewayRegistrationsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -447,7 +450,7 @@ module DeleteSite = {
   type t;
   type request = {
 @as("SiteId") siteId: string_,
-@as("GlobalNetworkId") globalNetworkId: string_
+  @as("GlobalNetworkId") globalNetworkId: string_
 }
   type response = {
 @as("Site") site: option<site>
@@ -460,7 +463,7 @@ module DeleteLink = {
   type t;
   type request = {
 @as("LinkId") linkId: string_,
-@as("GlobalNetworkId") globalNetworkId: string_
+  @as("GlobalNetworkId") globalNetworkId: string_
 }
   type response = {
 @as("Link") link: option<link>
@@ -485,7 +488,7 @@ module DeleteDevice = {
   type t;
   type request = {
 @as("DeviceId") deviceId: string_,
-@as("GlobalNetworkId") globalNetworkId: string_
+  @as("GlobalNetworkId") globalNetworkId: string_
 }
   type response = {
 @as("Device") device: option<device>
@@ -498,7 +501,7 @@ module DeleteConnection = {
   type t;
   type request = {
 @as("ConnectionId") connectionId: string_,
-@as("GlobalNetworkId") globalNetworkId: string_
+  @as("GlobalNetworkId") globalNetworkId: string_
 }
   type response = {
 @as("Connection") connection: option<connection>
@@ -511,9 +514,9 @@ module CreateSite = {
   type t;
   type request = {
 @as("Tags") tags: option<tagList_>,
-@as("Location") location: option<location>,
-@as("Description") description: option<string_>,
-@as("GlobalNetworkId") globalNetworkId: string_
+  @as("Location") location: option<location>,
+  @as("Description") description: option<string_>,
+  @as("GlobalNetworkId") globalNetworkId: string_
 }
   type response = {
 @as("Site") site: option<site>
@@ -526,12 +529,12 @@ module CreateLink = {
   type t;
   type request = {
 @as("Tags") tags: option<tagList_>,
-@as("SiteId") siteId: string_,
-@as("Provider") provider: option<string_>,
-@as("Bandwidth") bandwidth: bandwidth,
-@as("Type") type_: option<string_>,
-@as("Description") description: option<string_>,
-@as("GlobalNetworkId") globalNetworkId: string_
+  @as("SiteId") siteId: string_,
+  @as("Provider") provider: option<string_>,
+  @as("Bandwidth") bandwidth: bandwidth,
+  @as("Type") type_: option<string_>,
+  @as("Description") description: option<string_>,
+  @as("GlobalNetworkId") globalNetworkId: string_
 }
   type response = {
 @as("Link") link: option<link>
@@ -544,7 +547,7 @@ module CreateGlobalNetwork = {
   type t;
   type request = {
 @as("Tags") tags: option<tagList_>,
-@as("Description") description: option<string_>
+  @as("Description") description: option<string_>
 }
   type response = {
 @as("GlobalNetwork") globalNetwork: option<globalNetwork>
@@ -557,15 +560,15 @@ module CreateDevice = {
   type t;
   type request = {
 @as("Tags") tags: option<tagList_>,
-@as("SiteId") siteId: option<string_>,
-@as("Location") location: option<location>,
-@as("SerialNumber") serialNumber: option<string_>,
-@as("Model") model: option<string_>,
-@as("Vendor") vendor: option<string_>,
-@as("Type") type_: option<string_>,
-@as("Description") description: option<string_>,
-@as("AWSLocation") awslocation: option<awslocation>,
-@as("GlobalNetworkId") globalNetworkId: string_
+  @as("SiteId") siteId: option<string_>,
+  @as("Location") location: option<location>,
+  @as("SerialNumber") serialNumber: option<string_>,
+  @as("Model") model: option<string_>,
+  @as("Vendor") vendor: option<string_>,
+  @as("Type") type_: option<string_>,
+  @as("Description") description: option<string_>,
+  @as("AWSLocation") awslocation: option<awslocation>,
+  @as("GlobalNetworkId") globalNetworkId: string_
 }
   type response = {
 @as("Device") device: option<device>
@@ -578,12 +581,12 @@ module CreateConnection = {
   type t;
   type request = {
 @as("Tags") tags: option<tagList_>,
-@as("Description") description: option<string_>,
-@as("ConnectedLinkId") connectedLinkId: option<string_>,
-@as("LinkId") linkId: option<string_>,
-@as("ConnectedDeviceId") connectedDeviceId: string_,
-@as("DeviceId") deviceId: string_,
-@as("GlobalNetworkId") globalNetworkId: string_
+  @as("Description") description: option<string_>,
+  @as("ConnectedLinkId") connectedLinkId: option<string_>,
+  @as("LinkId") linkId: option<string_>,
+  @as("ConnectedDeviceId") connectedDeviceId: string_,
+  @as("DeviceId") deviceId: string_,
+  @as("GlobalNetworkId") globalNetworkId: string_
 }
   type response = {
 @as("Connection") connection: option<connection>
@@ -596,13 +599,13 @@ module GetSites = {
   type t;
   type request = {
 @as("NextToken") nextToken: option<string_>,
-@as("MaxResults") maxResults: option<maxResults>,
-@as("SiteIds") siteIds: option<stringList>,
-@as("GlobalNetworkId") globalNetworkId: string_
+  @as("MaxResults") maxResults: option<maxResults>,
+  @as("SiteIds") siteIds: option<stringList>,
+  @as("GlobalNetworkId") globalNetworkId: string_
 }
   type response = {
 @as("NextToken") nextToken: option<string_>,
-@as("Sites") sites: option<siteList>
+  @as("Sites") sites: option<siteList>
 }
   @module("@aws-sdk/client-networkmanager") @new external new_: (request) => t = "GetSitesCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -612,16 +615,16 @@ module GetLinks = {
   type t;
   type request = {
 @as("NextToken") nextToken: option<string_>,
-@as("MaxResults") maxResults: option<maxResults>,
-@as("Provider") provider: option<string_>,
-@as("Type") type_: option<string_>,
-@as("SiteId") siteId: option<string_>,
-@as("LinkIds") linkIds: option<stringList>,
-@as("GlobalNetworkId") globalNetworkId: string_
+  @as("MaxResults") maxResults: option<maxResults>,
+  @as("Provider") provider: option<string_>,
+  @as("Type") type_: option<string_>,
+  @as("SiteId") siteId: option<string_>,
+  @as("LinkIds") linkIds: option<stringList>,
+  @as("GlobalNetworkId") globalNetworkId: string_
 }
   type response = {
 @as("NextToken") nextToken: option<string_>,
-@as("Links") links: option<linkList>
+  @as("Links") links: option<linkList>
 }
   @module("@aws-sdk/client-networkmanager") @new external new_: (request) => t = "GetLinksCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -631,14 +634,14 @@ module GetDevices = {
   type t;
   type request = {
 @as("NextToken") nextToken: option<string_>,
-@as("MaxResults") maxResults: option<maxResults>,
-@as("SiteId") siteId: option<string_>,
-@as("DeviceIds") deviceIds: option<stringList>,
-@as("GlobalNetworkId") globalNetworkId: string_
+  @as("MaxResults") maxResults: option<maxResults>,
+  @as("SiteId") siteId: option<string_>,
+  @as("DeviceIds") deviceIds: option<stringList>,
+  @as("GlobalNetworkId") globalNetworkId: string_
 }
   type response = {
 @as("NextToken") nextToken: option<string_>,
-@as("Devices") devices: option<deviceList>
+  @as("Devices") devices: option<deviceList>
 }
   @module("@aws-sdk/client-networkmanager") @new external new_: (request) => t = "GetDevicesCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -648,14 +651,14 @@ module GetConnections = {
   type t;
   type request = {
 @as("NextToken") nextToken: option<string_>,
-@as("MaxResults") maxResults: option<maxResults>,
-@as("DeviceId") deviceId: option<string_>,
-@as("ConnectionIds") connectionIds: option<stringList>,
-@as("GlobalNetworkId") globalNetworkId: string_
+  @as("MaxResults") maxResults: option<maxResults>,
+  @as("DeviceId") deviceId: option<string_>,
+  @as("ConnectionIds") connectionIds: option<stringList>,
+  @as("GlobalNetworkId") globalNetworkId: string_
 }
   type response = {
 @as("NextToken") nextToken: option<string_>,
-@as("Connections") connections: option<connectionList>
+  @as("Connections") connections: option<connectionList>
 }
   @module("@aws-sdk/client-networkmanager") @new external new_: (request) => t = "GetConnectionsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -665,12 +668,12 @@ module DescribeGlobalNetworks = {
   type t;
   type request = {
 @as("NextToken") nextToken: option<string_>,
-@as("MaxResults") maxResults: option<maxResults>,
-@as("GlobalNetworkIds") globalNetworkIds: option<stringList>
+  @as("MaxResults") maxResults: option<maxResults>,
+  @as("GlobalNetworkIds") globalNetworkIds: option<stringList>
 }
   type response = {
 @as("NextToken") nextToken: option<string_>,
-@as("GlobalNetworks") globalNetworks: option<globalNetworkList>
+  @as("GlobalNetworks") globalNetworks: option<globalNetworkList>
 }
   @module("@aws-sdk/client-networkmanager") @new external new_: (request) => t = "DescribeGlobalNetworksCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";

@@ -5,15 +5,20 @@ httpStatusCode: option<float>,
   cfId: option<string>,
   attempts: option<int>,
   totalRetryDelay: option<int>
-};
-type integer_ = int
-type long = float
+}
+type awsServiceClient;
+@module("@aws-sdk/client-codepipeline") @new external createClient: unit => awsServiceClient = "CodePipelineClient";
+type baseString = string
+type baseBoolean = bool
+type baseInteger = int
+type baseTimestamp = Js.Date.t;
+type baseLong = float
 type webhookUrl = string
 type webhookName = string
 type webhookLastTriggered = Js.Date.t;
 type webhookErrorMessage = string
 type webhookErrorCode = string
-type webhookAuthenticationType = [@as("UNAUTHENTICATED") #UNAUTHENTICATED | @as("IP") #IP | @as("GITHUB_HMAC") #GITHUBHMAC]
+type webhookAuthenticationType = [@as("UNAUTHENTICATED") #UNAUTHENTICATED | @as("IP") #IP | @as("GITHUB_HMAC") #GITHUB_HMAC]
 type webhookAuthConfigurationSecretToken = string
 type webhookAuthConfigurationAllowedIPRange = string
 type webhookArn = string
@@ -30,7 +35,7 @@ type tagKey = string
 type string_ = string
 type stopPipelineExecutionReason = string
 type stageTransitionType = [@as("Outbound") #Outbound | @as("Inbound") #Inbound]
-type stageRetryMode = [@as("FAILED_ACTIONS") #FAILEDACTIONS]
+type stageRetryMode = [@as("FAILED_ACTIONS") #FAILED_ACTIONS]
 type stageName = string
 type stageExecutionStatus = [@as("Succeeded") #Succeeded | @as("Stopping") #Stopping | @as("Stopped") #Stopped | @as("Failed") #Failed | @as("InProgress") #InProgress | @as("Cancelled") #Cancelled]
 type sessionToken = string
@@ -122,67 +127,67 @@ type accessKeyId = string
 type awsregionName = string
 type webhookFilterRule = {
 matchEquals: option<matchEquals>,
-jsonPath: jsonPath
+  jsonPath: jsonPath
 }
 type webhookAuthConfiguration = {
 @as("SecretToken") secretToken: option<webhookAuthConfigurationSecretToken>,
-@as("AllowedIPRange") allowedIPRange: option<webhookAuthConfigurationAllowedIPRange>
+  @as("AllowedIPRange") allowedIPRange: option<webhookAuthConfigurationAllowedIPRange>
 }
 type transitionState = {
 disabledReason: option<disabledReason>,
-lastChangedAt: option<lastChangedAt>,
-lastChangedBy: option<lastChangedBy>,
-enabled: option<enabled>
+  lastChangedAt: option<lastChangedAt>,
+  lastChangedBy: option<lastChangedBy>,
+  enabled: option<enabled>
 }
 type thirdPartyJob = {
 jobId: option<jobId>,
-clientId: option<clientId>
+  clientId: option<clientId>
 }
 type tagKeyList = array<tagKey>
 type tag = {
 value: tagValue,
-key: tagKey
+  key: tagKey
 }
 type stopExecutionTrigger = {
 reason: option<stopPipelineExecutionReason>
 }
 type stageExecution = {
 status: stageExecutionStatus,
-pipelineExecutionId: pipelineExecutionId
+  pipelineExecutionId: pipelineExecutionId
 }
 type stageContext = {
 name: option<stageName>
 }
 type sourceRevision = {
 revisionUrl: option<url>,
-revisionSummary: option<revisionSummary>,
-revisionId: option<revision>,
-actionName: actionName
+  revisionSummary: option<revisionSummary>,
+  revisionId: option<revision>,
+  actionName: actionName
 }
 type s3Location = {
 key: option<s3Key>,
-bucket: option<s3Bucket>
+  bucket: option<s3Bucket>
 }
 type s3ArtifactLocation = {
 objectKey: s3ObjectKey,
-bucketName: s3BucketName
+  bucketName: s3BucketName
 }
-type resolvedActionConfigurationMap = Js.Dict.t< string_>
-type queryParamMap = Js.Dict.t< actionConfigurationQueryableValue>
+type resolvedActionConfigurationMap = Js.Dict.t<string_>
+type queryParamMap = Js.Dict.t<actionConfigurationQueryableValue>
 type pollingServicePrincipalList = array<servicePrincipal>
 type pollingAccountList = array<accountId>
 type pipelineSummary = {
 updated: option<timestamp_>,
-created: option<timestamp_>,
-version: option<pipelineVersion>,
-name: option<pipelineName>
+  created: option<timestamp_>,
+  version: option<pipelineVersion>,
+  name: option<pipelineName>
 }
 type pipelineMetadata = {
 updated: option<timestamp_>,
-created: option<timestamp_>,
-pipelineArn: option<pipelineArn>
+  created: option<timestamp_>,
+  pipelineArn: option<pipelineArn>
 }
-type outputVariablesMap = Js.Dict.t< outputVariablesValue>
+type outputVariablesMap = Js.Dict.t<outputVariablesValue>
 type outputArtifact = {
 name: artifactName
 }
@@ -194,120 +199,120 @@ name: artifactName
 }
 type failureDetails = {
 externalExecutionId: option<executionId>,
-message: message,
-@as("type") type_: failureType
+  message: message,
+  @as("type") type_: failureType
 }
 type executionTrigger = {
 triggerDetail: option<triggerDetail>,
-triggerType: option<triggerType>
+  triggerType: option<triggerType>
 }
 type executionDetails = {
 percentComplete: option<percentage>,
-externalExecutionId: option<executionId>,
-summary: option<executionSummary>
+  externalExecutionId: option<executionId>,
+  summary: option<executionSummary>
 }
 type errorDetails = {
 message: option<message>,
-code: option<code>
+  code: option<code>
 }
 type encryptionKey = {
 @as("type") type_: encryptionKeyType,
-id: encryptionKeyId
+  id: encryptionKeyId
 }
 type currentRevision = {
 revisionSummary: option<revisionSummary>,
-created: option<time>,
-changeIdentifier: revisionChangeIdentifier,
-revision: revision
+  created: option<time>,
+  changeIdentifier: revisionChangeIdentifier,
+  revision: revision
 }
 type blockerDeclaration = {
 @as("type") type_: blockerType,
-name: blockerName
+  name: blockerName
 }
 type artifactRevision = {
 revisionUrl: option<url>,
-created: option<timestamp_>,
-revisionSummary: option<revisionSummary>,
-revisionChangeIdentifier: option<revisionChangeIdentifier>,
-revisionId: option<revision>,
-name: option<artifactName>
+  created: option<timestamp_>,
+  revisionSummary: option<revisionSummary>,
+  revisionChangeIdentifier: option<revisionChangeIdentifier>,
+  revisionId: option<revision>,
+  name: option<artifactName>
 }
 type artifactDetails = {
 maximumCount: maximumArtifactCount,
-minimumCount: minimumArtifactCount
+  minimumCount: minimumArtifactCount
 }
 type approvalResult = {
 status: approvalStatus,
-summary: approvalSummary
+  summary: approvalSummary
 }
 type allowedAccounts = array<allowedAccount>
 type actionTypeUrls = {
 revisionUrlTemplate: option<urlTemplate>,
-executionUrlTemplate: option<urlTemplate>,
-entityUrlTemplate: option<urlTemplate>,
-configurationUrl: option<url>
+  executionUrlTemplate: option<urlTemplate>,
+  entityUrlTemplate: option<urlTemplate>,
+  configurationUrl: option<url>
 }
 type actionTypeSettings = {
 revisionUrlTemplate: option<urlTemplate>,
-executionUrlTemplate: option<urlTemplate>,
-entityUrlTemplate: option<urlTemplate>,
-thirdPartyConfigurationUrl: option<url>
+  executionUrlTemplate: option<urlTemplate>,
+  entityUrlTemplate: option<urlTemplate>,
+  thirdPartyConfigurationUrl: option<url>
 }
 type actionTypeProperty = {
 description: option<propertyDescription>,
-queryable: option<boolean_>,
-noEcho: boolean_,
-key: boolean_,
-optional: boolean_,
-name: actionConfigurationKey
+  queryable: option<boolean_>,
+  noEcho: boolean_,
+  key: boolean_,
+  optional: boolean_,
+  name: actionConfigurationKey
 }
 type actionTypeIdentifier = {
 version: version,
-provider: actionProvider,
-owner: actionTypeOwner,
-category: actionCategory
+  provider: actionProvider,
+  owner: actionTypeOwner,
+  category: actionCategory
 }
 type actionTypeId = {
 version: version,
-provider: actionProvider,
-owner: actionOwner,
-category: actionCategory
+  provider: actionProvider,
+  owner: actionOwner,
+  category: actionCategory
 }
 type actionTypeArtifactDetails = {
 maximumCount: maximumActionTypeArtifactCount,
-minimumCount: minimumActionTypeArtifactCount
+  minimumCount: minimumActionTypeArtifactCount
 }
 type actionRevision = {
 created: timestamp_,
-revisionChangeId: revisionChangeIdentifier,
-revisionId: revision
+  revisionChangeId: revisionChangeIdentifier,
+  revisionId: revision
 }
 type actionExecutionResult = {
 externalExecutionUrl: option<url>,
-externalExecutionSummary: option<externalExecutionSummary>,
-externalExecutionId: option<externalExecutionId>
+  externalExecutionSummary: option<externalExecutionSummary>,
+  externalExecutionId: option<externalExecutionId>
 }
 type actionExecutionFilter = {
 pipelineExecutionId: option<pipelineExecutionId>
 }
 type actionContext = {
 actionExecutionId: option<actionExecutionId>,
-name: option<actionName>
+  name: option<actionName>
 }
 type actionConfigurationProperty = {
 @as("type") type_: option<actionConfigurationPropertyType>,
-description: option<description>,
-queryable: option<boolean_>,
-secret: boolean_,
-key: boolean_,
-required: boolean_,
-name: actionConfigurationKey
+  description: option<description>,
+  queryable: option<boolean_>,
+  secret: boolean_,
+  key: boolean_,
+  required: boolean_,
+  name: actionConfigurationKey
 }
-type actionConfigurationMap = Js.Dict.t< actionConfigurationValue>
+type actionConfigurationMap = Js.Dict.t<actionConfigurationValue>
 type awssessionCredentials = {
 sessionToken: sessionToken,
-secretAccessKey: secretAccessKey,
-accessKeyId: accessKeyId
+  secretAccessKey: secretAccessKey,
+  accessKeyId: accessKeyId
 }
 type webhookFilters = array<webhookFilterRule>
 type thirdPartyJobList = array<thirdPartyJob>
@@ -317,30 +322,30 @@ type sourceRevisionList = array<sourceRevision>
 type pipelineList = array<pipelineSummary>
 type pipelineContext = {
 pipelineExecutionId: option<pipelineExecutionId>,
-pipelineArn: option<pipelineArn>,
-action: option<actionContext>,
-stage: option<stageContext>,
-pipelineName: option<pipelineName>
+  pipelineArn: option<pipelineArn>,
+  action: option<actionContext>,
+  stage: option<stageContext>,
+  pipelineName: option<pipelineName>
 }
 type outputArtifactList = array<outputArtifact>
 type jobWorkerExecutorConfiguration = {
 pollingServicePrincipals: option<pollingServicePrincipalList>,
-pollingAccounts: option<pollingAccountList>
+  pollingAccounts: option<pollingAccountList>
 }
 type inputArtifactList = array<inputArtifact>
 type artifactStore = {
 encryptionKey: option<encryptionKey>,
-location: artifactStoreLocation,
-@as("type") type_: artifactStoreType
+  location: artifactStoreLocation,
+  @as("type") type_: artifactStoreType
 }
 type artifactRevisionList = array<artifactRevision>
 type artifactLocation = {
 s3Location: option<s3ArtifactLocation>,
-@as("type") type_: option<artifactLocationType>
+  @as("type") type_: option<artifactLocationType>
 }
 type artifactDetail = {
 s3location: option<s3Location>,
-name: option<artifactName>
+  name: option<artifactName>
 }
 type actionTypeProperties = array<actionTypeProperty>
 type actionTypePermissions = {
@@ -348,15 +353,15 @@ allowedAccounts: allowedAccounts
 }
 type actionExecution = {
 errorDetails: option<errorDetails>,
-percentComplete: option<percentage>,
-externalExecutionUrl: option<url>,
-externalExecutionId: option<executionId>,
-lastUpdatedBy: option<lastUpdatedBy>,
-token: option<actionExecutionToken>,
-lastStatusChange: option<timestamp_>,
-summary: option<executionSummary>,
-status: option<actionExecutionStatus>,
-actionExecutionId: option<actionExecutionId>
+  percentComplete: option<percentage>,
+  externalExecutionUrl: option<url>,
+  externalExecutionId: option<executionId>,
+  lastUpdatedBy: option<lastUpdatedBy>,
+  token: option<actionExecutionToken>,
+  lastStatusChange: option<timestamp_>,
+  summary: option<executionSummary>,
+  status: option<actionExecutionStatus>,
+  actionExecutionId: option<actionExecutionId>
 }
 type actionConfigurationPropertyList = array<actionConfigurationProperty>
 type actionConfiguration = {
@@ -364,191 +369,190 @@ configuration: option<actionConfigurationMap>
 }
 type webhookDefinition = {
 authenticationConfiguration: webhookAuthConfiguration,
-authentication: webhookAuthenticationType,
-filters: webhookFilters,
-targetAction: actionName,
-targetPipeline: pipelineName,
-name: webhookName
+  authentication: webhookAuthenticationType,
+  filters: webhookFilters,
+  targetAction: actionName,
+  targetPipeline: pipelineName,
+  name: webhookName
 }
 type pipelineExecutionSummary = {
 stopTrigger: option<stopExecutionTrigger>,
-trigger: option<executionTrigger>,
-sourceRevisions: option<sourceRevisionList>,
-lastUpdateTime: option<timestamp_>,
-startTime: option<timestamp_>,
-status: option<pipelineExecutionStatus>,
-pipelineExecutionId: option<pipelineExecutionId>
+  trigger: option<executionTrigger>,
+  sourceRevisions: option<sourceRevisionList>,
+  lastUpdateTime: option<timestamp_>,
+  startTime: option<timestamp_>,
+  status: option<pipelineExecutionStatus>,
+  pipelineExecutionId: option<pipelineExecutionId>
 }
 type pipelineExecution = {
 artifactRevisions: option<artifactRevisionList>,
-statusSummary: option<pipelineExecutionStatusSummary>,
-status: option<pipelineExecutionStatus>,
-pipelineExecutionId: option<pipelineExecutionId>,
-pipelineVersion: option<pipelineVersion>,
-pipelineName: option<pipelineName>
+  statusSummary: option<pipelineExecutionStatusSummary>,
+  status: option<pipelineExecutionStatus>,
+  pipelineExecutionId: option<pipelineExecutionId>,
+  pipelineVersion: option<pipelineVersion>,
+  pipelineName: option<pipelineName>
 }
 type executorConfiguration = {
 jobWorkerExecutorConfiguration: option<jobWorkerExecutorConfiguration>,
-lambdaExecutorConfiguration: option<lambdaExecutorConfiguration>
+  lambdaExecutorConfiguration: option<lambdaExecutorConfiguration>
 }
-type artifactStoreMap = Js.Dict.t< artifactStore>
+type artifactStoreMap = Js.Dict.t<artifactStore>
 type artifactDetailList = array<artifactDetail>
 type artifact = {
 location: option<artifactLocation>,
-revision: option<revision>,
-name: option<artifactName>
+  revision: option<revision>,
+  name: option<artifactName>
 }
 type actionType = {
 outputArtifactDetails: artifactDetails,
-inputArtifactDetails: artifactDetails,
-actionConfigurationProperties: option<actionConfigurationPropertyList>,
-settings: option<actionTypeSettings>,
-id: actionTypeId
+  inputArtifactDetails: artifactDetails,
+  actionConfigurationProperties: option<actionConfigurationPropertyList>,
+  settings: option<actionTypeSettings>,
+  id: actionTypeId
 }
 type actionState = {
 revisionUrl: option<url>,
-entityUrl: option<url>,
-latestExecution: option<actionExecution>,
-currentRevision: option<actionRevision>,
-actionName: option<actionName>
+  entityUrl: option<url>,
+  latestExecution: option<actionExecution>,
+  currentRevision: option<actionRevision>,
+  actionName: option<actionName>
 }
 type actionDeclaration = {
 namespace: option<actionNamespace>,
-region: option<awsregionName>,
-roleArn: option<roleArn>,
-inputArtifacts: option<inputArtifactList>,
-outputArtifacts: option<outputArtifactList>,
-configuration: option<actionConfigurationMap>,
-runOrder: option<actionRunOrder>,
-actionTypeId: actionTypeId,
-name: actionName
+  region: option<awsregionName>,
+  roleArn: option<roleArn>,
+  inputArtifacts: option<inputArtifactList>,
+  outputArtifacts: option<outputArtifactList>,
+  configuration: option<actionConfigurationMap>,
+  runOrder: option<actionRunOrder>,
+  actionTypeId: actionTypeId,
+  name: actionName
 }
 type stageActionDeclarationList = array<actionDeclaration>
 type pipelineExecutionSummaryList = array<pipelineExecutionSummary>
 type listWebhookItem = {
 tags: option<tagList_>,
-arn: option<webhookArn>,
-lastTriggered: option<webhookLastTriggered>,
-errorCode: option<webhookErrorCode>,
-errorMessage: option<webhookErrorMessage>,
-url: webhookUrl,
-definition: webhookDefinition
+  arn: option<webhookArn>,
+  lastTriggered: option<webhookLastTriggered>,
+  errorCode: option<webhookErrorCode>,
+  errorMessage: option<webhookErrorMessage>,
+  url: webhookUrl,
+  definition: webhookDefinition
 }
 type artifactList = array<artifact>
 type actionTypeList = array<actionType>
 type actionTypeExecutor = {
 jobTimeout: option<jobTimeout>,
-policyStatementsTemplate: option<policyStatementsTemplate>,
-@as("type") type_: executorType,
-configuration: executorConfiguration
+  policyStatementsTemplate: option<policyStatementsTemplate>,
+  @as("type") type_: executorType,
+  configuration: executorConfiguration
 }
 type actionStateList = array<actionState>
 type actionExecutionOutput = {
 outputVariables: option<outputVariablesMap>,
-executionResult: option<actionExecutionResult>,
-outputArtifacts: option<artifactDetailList>
+  executionResult: option<actionExecutionResult>,
+  outputArtifacts: option<artifactDetailList>
 }
 type actionExecutionInput = {
 namespace: option<actionNamespace>,
-inputArtifacts: option<artifactDetailList>,
-region: option<awsregionName>,
-roleArn: option<roleArn>,
-resolvedConfiguration: option<resolvedActionConfigurationMap>,
-configuration: option<actionConfigurationMap>,
-actionTypeId: option<actionTypeId>
+  inputArtifacts: option<artifactDetailList>,
+  region: option<awsregionName>,
+  roleArn: option<roleArn>,
+  resolvedConfiguration: option<resolvedActionConfigurationMap>,
+  configuration: option<actionConfigurationMap>,
+  actionTypeId: option<actionTypeId>
 }
 type webhookList = array<listWebhookItem>
 type thirdPartyJobData = {
 encryptionKey: option<encryptionKey>,
-continuationToken: option<continuationToken>,
-artifactCredentials: option<awssessionCredentials>,
-outputArtifacts: option<artifactList>,
-inputArtifacts: option<artifactList>,
-pipelineContext: option<pipelineContext>,
-actionConfiguration: option<actionConfiguration>,
-actionTypeId: option<actionTypeId>
+  continuationToken: option<continuationToken>,
+  artifactCredentials: option<awssessionCredentials>,
+  outputArtifacts: option<artifactList>,
+  inputArtifacts: option<artifactList>,
+  pipelineContext: option<pipelineContext>,
+  actionConfiguration: option<actionConfiguration>,
+  actionTypeId: option<actionTypeId>
 }
 type stageState = {
 latestExecution: option<stageExecution>,
-actionStates: option<actionStateList>,
-inboundTransitionState: option<transitionState>,
-inboundExecution: option<stageExecution>,
-stageName: option<stageName>
+  actionStates: option<actionStateList>,
+  inboundTransitionState: option<transitionState>,
+  inboundExecution: option<stageExecution>,
+  stageName: option<stageName>
 }
 type stageDeclaration = {
 actions: stageActionDeclarationList,
-blockers: option<stageBlockerDeclarationList>,
-name: stageName
+  blockers: option<stageBlockerDeclarationList>,
+  name: stageName
 }
 type jobData = {
 encryptionKey: option<encryptionKey>,
-continuationToken: option<continuationToken>,
-artifactCredentials: option<awssessionCredentials>,
-outputArtifacts: option<artifactList>,
-inputArtifacts: option<artifactList>,
-pipelineContext: option<pipelineContext>,
-actionConfiguration: option<actionConfiguration>,
-actionTypeId: option<actionTypeId>
+  continuationToken: option<continuationToken>,
+  artifactCredentials: option<awssessionCredentials>,
+  outputArtifacts: option<artifactList>,
+  inputArtifacts: option<artifactList>,
+  pipelineContext: option<pipelineContext>,
+  actionConfiguration: option<actionConfiguration>,
+  actionTypeId: option<actionTypeId>
 }
 type actionTypeDeclaration = {
 urls: option<actionTypeUrls>,
-properties: option<actionTypeProperties>,
-permissions: option<actionTypePermissions>,
-outputArtifactDetails: actionTypeArtifactDetails,
-inputArtifactDetails: actionTypeArtifactDetails,
-id: actionTypeIdentifier,
-executor: actionTypeExecutor,
-description: option<actionTypeDescription>
+  properties: option<actionTypeProperties>,
+  permissions: option<actionTypePermissions>,
+  outputArtifactDetails: actionTypeArtifactDetails,
+  inputArtifactDetails: actionTypeArtifactDetails,
+  id: actionTypeIdentifier,
+  executor: actionTypeExecutor,
+  description: option<actionTypeDescription>
 }
 type actionExecutionDetail = {
 output: option<actionExecutionOutput>,
-input: option<actionExecutionInput>,
-status: option<actionExecutionStatus>,
-lastUpdateTime: option<timestamp_>,
-startTime: option<timestamp_>,
-actionName: option<actionName>,
-stageName: option<stageName>,
-pipelineVersion: option<pipelineVersion>,
-actionExecutionId: option<actionExecutionId>,
-pipelineExecutionId: option<pipelineExecutionId>
+  input: option<actionExecutionInput>,
+  status: option<actionExecutionStatus>,
+  lastUpdateTime: option<timestamp_>,
+  startTime: option<timestamp_>,
+  actionName: option<actionName>,
+  stageName: option<stageName>,
+  pipelineVersion: option<pipelineVersion>,
+  actionExecutionId: option<actionExecutionId>,
+  pipelineExecutionId: option<pipelineExecutionId>
 }
 type thirdPartyJobDetails = {
 nonce: option<nonce>,
-data: option<thirdPartyJobData>,
-id: option<thirdPartyJobId>
+  data: option<thirdPartyJobData>,
+  id: option<thirdPartyJobId>
 }
 type stageStateList = array<stageState>
 type pipelineStageDeclarationList = array<stageDeclaration>
 type jobDetails = {
 accountId: option<accountId>,
-data: option<jobData>,
-id: option<jobId>
+  data: option<jobData>,
+  id: option<jobId>
 }
 type job = {
 accountId: option<accountId>,
-nonce: option<nonce>,
-data: option<jobData>,
-id: option<jobId>
+  nonce: option<nonce>,
+  data: option<jobData>,
+  id: option<jobId>
 }
 type actionExecutionDetailList = array<actionExecutionDetail>
 type pipelineDeclaration = {
 version: option<pipelineVersion>,
-stages: pipelineStageDeclarationList,
-artifactStores: option<artifactStoreMap>,
-artifactStore: option<artifactStore>,
-roleArn: roleArn,
-name: pipelineName
+  stages: pipelineStageDeclarationList,
+  artifactStores: option<artifactStoreMap>,
+  artifactStore: option<artifactStore>,
+  roleArn: roleArn,
+  name: pipelineName
 }
 type jobList = array<job>
-type awsServiceClient;
-@module("@aws-sdk/client-codepipeline") @new external createClient: unit => awsServiceClient = "CodePipelineClient";
+
 module StopPipelineExecution = {
   type t;
   type request = {
 reason: option<stopPipelineExecutionReason>,
-abandon: option<boolean_>,
-pipelineExecutionId: pipelineExecutionId,
-pipelineName: pipelineName
+  abandon: option<boolean_>,
+  pipelineExecutionId: pipelineExecutionId,
+  pipelineName: pipelineName
 }
   type response = {
 pipelineExecutionId: option<pipelineExecutionId>
@@ -561,7 +565,7 @@ module StartPipelineExecution = {
   type t;
   type request = {
 clientRequestToken: option<clientRequestToken>,
-name: pipelineName
+  name: pipelineName
 }
   type response = {
 pipelineExecutionId: option<pipelineExecutionId>
@@ -574,9 +578,9 @@ module RetryStageExecution = {
   type t;
   type request = {
 retryMode: stageRetryMode,
-pipelineExecutionId: pipelineExecutionId,
-stageName: stageName,
-pipelineName: pipelineName
+  pipelineExecutionId: pipelineExecutionId,
+  stageName: stageName,
+  pipelineName: pipelineName
 }
   type response = {
 pipelineExecutionId: option<pipelineExecutionId>
@@ -599,8 +603,8 @@ module EnableStageTransition = {
   type t;
   type request = {
 transitionType: stageTransitionType,
-stageName: stageName,
-pipelineName: pipelineName
+  stageName: stageName,
+  pipelineName: pipelineName
 }
   
   @module("@aws-sdk/client-codepipeline") @new external new_: (request) => t = "EnableStageTransitionCommand";
@@ -611,9 +615,9 @@ module DisableStageTransition = {
   type t;
   type request = {
 reason: disabledReason,
-transitionType: stageTransitionType,
-stageName: stageName,
-pipelineName: pipelineName
+  transitionType: stageTransitionType,
+  stageName: stageName,
+  pipelineName: pipelineName
 }
   
   @module("@aws-sdk/client-codepipeline") @new external new_: (request) => t = "DisableStageTransitionCommand";
@@ -654,8 +658,8 @@ module DeleteCustomActionType = {
   type t;
   type request = {
 version: version,
-provider: actionProvider,
-category: actionCategory
+  provider: actionProvider,
+  category: actionCategory
 }
   
   @module("@aws-sdk/client-codepipeline") @new external new_: (request) => t = "DeleteCustomActionTypeCommand";
@@ -666,8 +670,8 @@ module AcknowledgeThirdPartyJob = {
   type t;
   type request = {
 clientToken: clientToken,
-nonce: nonce,
-jobId: thirdPartyJobId
+  nonce: nonce,
+  jobId: thirdPartyJobId
 }
   type response = {
 status: option<jobStatus>
@@ -680,7 +684,7 @@ module AcknowledgeJob = {
   type t;
   type request = {
 nonce: nonce,
-jobId: jobId
+  jobId: jobId
 }
   type response = {
 status: option<jobStatus>
@@ -693,7 +697,7 @@ module UntagResource = {
   type t;
   type request = {
 tagKeys: tagKeyList,
-resourceArn: resourceArn
+  resourceArn: resourceArn
 }
   type response = unit
   @module("@aws-sdk/client-codepipeline") @new external new_: (request) => t = "UntagResourceCommand";
@@ -704,10 +708,10 @@ module PutThirdPartyJobSuccessResult = {
   type t;
   type request = {
 executionDetails: option<executionDetails>,
-continuationToken: option<continuationToken>,
-currentRevision: option<currentRevision>,
-clientToken: clientToken,
-jobId: thirdPartyJobId
+  continuationToken: option<continuationToken>,
+  currentRevision: option<currentRevision>,
+  clientToken: clientToken,
+  jobId: thirdPartyJobId
 }
   
   @module("@aws-sdk/client-codepipeline") @new external new_: (request) => t = "PutThirdPartyJobSuccessResultCommand";
@@ -718,8 +722,8 @@ module PutThirdPartyJobFailureResult = {
   type t;
   type request = {
 failureDetails: failureDetails,
-clientToken: clientToken,
-jobId: thirdPartyJobId
+  clientToken: clientToken,
+  jobId: thirdPartyJobId
 }
   
   @module("@aws-sdk/client-codepipeline") @new external new_: (request) => t = "PutThirdPartyJobFailureResultCommand";
@@ -730,10 +734,10 @@ module PutJobSuccessResult = {
   type t;
   type request = {
 outputVariables: option<outputVariablesMap>,
-executionDetails: option<executionDetails>,
-continuationToken: option<continuationToken>,
-currentRevision: option<currentRevision>,
-jobId: jobId
+  executionDetails: option<executionDetails>,
+  continuationToken: option<continuationToken>,
+  currentRevision: option<currentRevision>,
+  jobId: jobId
 }
   
   @module("@aws-sdk/client-codepipeline") @new external new_: (request) => t = "PutJobSuccessResultCommand";
@@ -744,7 +748,7 @@ module PutJobFailureResult = {
   type t;
   type request = {
 failureDetails: failureDetails,
-jobId: jobId
+  jobId: jobId
 }
   
   @module("@aws-sdk/client-codepipeline") @new external new_: (request) => t = "PutJobFailureResultCommand";
@@ -755,10 +759,10 @@ module PutApprovalResult = {
   type t;
   type request = {
 token: approvalToken,
-result: approvalResult,
-actionName: actionName,
-stageName: stageName,
-pipelineName: pipelineName
+  result: approvalResult,
+  actionName: actionName,
+  stageName: stageName,
+  pipelineName: pipelineName
 }
   type response = {
 approvedAt: option<timestamp_>
@@ -771,13 +775,13 @@ module PutActionRevision = {
   type t;
   type request = {
 actionRevision: actionRevision,
-actionName: actionName,
-stageName: stageName,
-pipelineName: pipelineName
+  actionName: actionName,
+  stageName: stageName,
+  pipelineName: pipelineName
 }
   type response = {
 pipelineExecutionId: option<pipelineExecutionId>,
-newRevision: option<boolean_>
+  newRevision: option<boolean_>
 }
   @module("@aws-sdk/client-codepipeline") @new external new_: (request) => t = "PutActionRevisionCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -787,7 +791,7 @@ module TagResource = {
   type t;
   type request = {
 tags: tagList_,
-resourceArn: resourceArn
+  resourceArn: resourceArn
 }
   type response = unit
   @module("@aws-sdk/client-codepipeline") @new external new_: (request) => t = "TagResourceCommand";
@@ -798,7 +802,7 @@ module PollForThirdPartyJobs = {
   type t;
   type request = {
 maxBatchSize: option<maxBatchSize>,
-actionTypeId: actionTypeId
+  actionTypeId: actionTypeId
 }
   type response = {
 jobs: option<thirdPartyJobList>
@@ -811,12 +815,12 @@ module ListTagsForResource = {
   type t;
   type request = {
 maxResults: option<maxResults>,
-nextToken: option<nextToken>,
-resourceArn: resourceArn
+  nextToken: option<nextToken>,
+  resourceArn: resourceArn
 }
   type response = {
 nextToken: option<nextToken>,
-tags: option<tagList_>
+  tags: option<tagList_>
 }
   @module("@aws-sdk/client-codepipeline") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -826,11 +830,11 @@ module ListPipelines = {
   type t;
   type request = {
 maxResults: option<maxPipelines>,
-nextToken: option<nextToken>
+  nextToken: option<nextToken>
 }
   type response = {
 nextToken: option<nextToken>,
-pipelines: option<pipelineList>
+  pipelines: option<pipelineList>
 }
   @module("@aws-sdk/client-codepipeline") @new external new_: (request) => t = "ListPipelinesCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -840,7 +844,7 @@ module GetPipelineExecution = {
   type t;
   type request = {
 pipelineExecutionId: pipelineExecutionId,
-pipelineName: pipelineName
+  pipelineName: pipelineName
 }
   type response = {
 pipelineExecution: option<pipelineExecution>
@@ -853,17 +857,17 @@ module CreateCustomActionType = {
   type t;
   type request = {
 tags: option<tagList_>,
-outputArtifactDetails: artifactDetails,
-inputArtifactDetails: artifactDetails,
-configurationProperties: option<actionConfigurationPropertyList>,
-settings: option<actionTypeSettings>,
-version: version,
-provider: actionProvider,
-category: actionCategory
+  outputArtifactDetails: artifactDetails,
+  inputArtifactDetails: artifactDetails,
+  configurationProperties: option<actionConfigurationPropertyList>,
+  settings: option<actionTypeSettings>,
+  version: version,
+  provider: actionProvider,
+  category: actionCategory
 }
   type response = {
 tags: option<tagList_>,
-actionType: actionType
+  actionType: actionType
 }
   @module("@aws-sdk/client-codepipeline") @new external new_: (request) => t = "CreateCustomActionTypeCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -873,7 +877,7 @@ module PutWebhook = {
   type t;
   type request = {
 tags: option<tagList_>,
-webhook: webhookDefinition
+  webhook: webhookDefinition
 }
   type response = {
 webhook: option<listWebhookItem>
@@ -886,12 +890,12 @@ module ListPipelineExecutions = {
   type t;
   type request = {
 nextToken: option<nextToken>,
-maxResults: option<maxResults>,
-pipelineName: pipelineName
+  maxResults: option<maxResults>,
+  pipelineName: pipelineName
 }
   type response = {
 nextToken: option<nextToken>,
-pipelineExecutionSummaries: option<pipelineExecutionSummaryList>
+  pipelineExecutionSummaries: option<pipelineExecutionSummaryList>
 }
   @module("@aws-sdk/client-codepipeline") @new external new_: (request) => t = "ListPipelineExecutionsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -901,12 +905,12 @@ module ListActionTypes = {
   type t;
   type request = {
 regionFilter: option<awsregionName>,
-nextToken: option<nextToken>,
-actionOwnerFilter: option<actionOwner>
+  nextToken: option<nextToken>,
+  actionOwnerFilter: option<actionOwner>
 }
   type response = {
 nextToken: option<nextToken>,
-actionTypes: actionTypeList
+  actionTypes: actionTypeList
 }
   @module("@aws-sdk/client-codepipeline") @new external new_: (request) => t = "ListActionTypesCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -926,11 +930,11 @@ module ListWebhooks = {
   type t;
   type request = {
 @as("MaxResults") maxResults: option<maxResults>,
-@as("NextToken") nextToken: option<nextToken>
+  @as("NextToken") nextToken: option<nextToken>
 }
   type response = {
 @as("NextToken") nextToken: option<nextToken>,
-webhooks: option<webhookList>
+  webhooks: option<webhookList>
 }
   @module("@aws-sdk/client-codepipeline") @new external new_: (request) => t = "ListWebhooksCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -940,9 +944,9 @@ module GetActionType = {
   type t;
   type request = {
 version: version,
-provider: actionProvider,
-owner: actionTypeOwner,
-category: actionCategory
+  provider: actionProvider,
+  owner: actionTypeOwner,
+  category: actionCategory
 }
   type response = {
 actionType: option<actionTypeDeclaration>
@@ -955,13 +959,13 @@ module ListActionExecutions = {
   type t;
   type request = {
 nextToken: option<nextToken>,
-maxResults: option<maxResults>,
-filter: option<actionExecutionFilter>,
-pipelineName: pipelineName
+  maxResults: option<maxResults>,
+  filter: option<actionExecutionFilter>,
+  pipelineName: pipelineName
 }
   type response = {
 nextToken: option<nextToken>,
-actionExecutionDetails: option<actionExecutionDetailList>
+  actionExecutionDetails: option<actionExecutionDetailList>
 }
   @module("@aws-sdk/client-codepipeline") @new external new_: (request) => t = "ListActionExecutionsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -971,7 +975,7 @@ module GetThirdPartyJobDetails = {
   type t;
   type request = {
 clientToken: clientToken,
-jobId: thirdPartyJobId
+  jobId: thirdPartyJobId
 }
   type response = {
 jobDetails: option<thirdPartyJobDetails>
@@ -987,10 +991,10 @@ name: pipelineName
 }
   type response = {
 updated: option<timestamp_>,
-created: option<timestamp_>,
-stageStates: option<stageStateList>,
-pipelineVersion: option<pipelineVersion>,
-pipelineName: option<pipelineName>
+  created: option<timestamp_>,
+  stageStates: option<stageStateList>,
+  pipelineVersion: option<pipelineVersion>,
+  pipelineName: option<pipelineName>
 }
   @module("@aws-sdk/client-codepipeline") @new external new_: (request) => t = "GetPipelineStateCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1024,8 +1028,8 @@ module PollForJobs = {
   type t;
   type request = {
 queryParam: option<queryParamMap>,
-maxBatchSize: option<maxBatchSize>,
-actionTypeId: actionTypeId
+  maxBatchSize: option<maxBatchSize>,
+  actionTypeId: actionTypeId
 }
   type response = {
 jobs: option<jobList>
@@ -1038,11 +1042,11 @@ module GetPipeline = {
   type t;
   type request = {
 version: option<pipelineVersion>,
-name: pipelineName
+  name: pipelineName
 }
   type response = {
 metadata: option<pipelineMetadata>,
-pipeline: option<pipelineDeclaration>
+  pipeline: option<pipelineDeclaration>
 }
   @module("@aws-sdk/client-codepipeline") @new external new_: (request) => t = "GetPipelineCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1052,11 +1056,11 @@ module CreatePipeline = {
   type t;
   type request = {
 tags: option<tagList_>,
-pipeline: pipelineDeclaration
+  pipeline: pipelineDeclaration
 }
   type response = {
 tags: option<tagList_>,
-pipeline: option<pipelineDeclaration>
+  pipeline: option<pipelineDeclaration>
 }
   @module("@aws-sdk/client-codepipeline") @new external new_: (request) => t = "CreatePipelineCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";

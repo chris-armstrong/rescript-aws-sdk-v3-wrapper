@@ -5,11 +5,14 @@ httpStatusCode: option<float>,
   cfId: option<string>,
   attempts: option<int>,
   totalRetryDelay: option<int>
-};
-type string_ = string
-type integer_ = int
-type timestamp_ = Js.Date.t;
-type long = float
+}
+type awsServiceClient;
+@module("@aws-sdk/client-worklink") @new external createClient: unit => awsServiceClient = "WorkLinkClient";
+type baseString = string
+type baseBoolean = bool
+type baseInteger = int
+type baseTimestamp = Js.Date.t;
+type baseLong = float
 type vpcId = string
 type username = string
 type tagValue = string
@@ -21,14 +24,14 @@ type nextToken = string
 type maxResults = int
 type identityProviderType = [@as("SAML") #SAML]
 type id = string
-type fleetStatus = [@as("FAILED_TO_DELETE") #FAILEDTODELETE | @as("FAILED_TO_CREATE") #FAILEDTOCREATE | @as("DELETED") #DELETED | @as("DELETING") #DELETING | @as("ACTIVE") #ACTIVE | @as("CREATING") #CREATING]
+type fleetStatus = [@as("FAILED_TO_DELETE") #FAILED_TO_DELETE | @as("FAILED_TO_CREATE") #FAILED_TO_CREATE | @as("DELETED") #DELETED | @as("DELETING") #DELETING | @as("ACTIVE") #ACTIVE | @as("CREATING") #CREATING]
 type fleetName = string
 type fleetArn = string
 type exceptionMessage = string
-type domainStatus = [@as("FAILED_TO_DISASSOCIATE") #FAILEDTODISASSOCIATE | @as("FAILED_TO_ASSOCIATE") #FAILEDTOASSOCIATE | @as("DISASSOCIATED") #DISASSOCIATED | @as("DISASSOCIATING") #DISASSOCIATING | @as("INACTIVE") #INACTIVE | @as("ACTIVE") #ACTIVE | @as("ASSOCIATING") #ASSOCIATING | @as("PENDING_VALIDATION") #PENDINGVALIDATION]
+type domainStatus = [@as("FAILED_TO_DISASSOCIATE") #FAILED_TO_DISASSOCIATE | @as("FAILED_TO_ASSOCIATE") #FAILED_TO_ASSOCIATE | @as("DISASSOCIATED") #DISASSOCIATED | @as("DISASSOCIATING") #DISASSOCIATING | @as("INACTIVE") #INACTIVE | @as("ACTIVE") #ACTIVE | @as("ASSOCIATING") #ASSOCIATING | @as("PENDING_VALIDATION") #PENDING_VALIDATION]
 type domainName = string
 type displayName = string
-type deviceStatus = [@as("SIGNED_OUT") #SIGNEDOUT | @as("ACTIVE") #ACTIVE]
+type deviceStatus = [@as("SIGNED_OUT") #SIGNED_OUT | @as("ACTIVE") #ACTIVE]
 type devicePatchLevel = string
 type deviceOperatingSystemVersion = string
 type deviceOperatingSystemName = string
@@ -44,52 +47,51 @@ type auditStreamArn = string
 type acmCertificateArn = string
 type websiteCaSummary = {
 @as("DisplayName") displayName: option<displayName>,
-@as("CreatedTime") createdTime: option<dateTime>,
-@as("WebsiteCaId") websiteCaId: option<id>
+  @as("CreatedTime") createdTime: option<dateTime>,
+  @as("WebsiteCaId") websiteCaId: option<id>
 }
 type websiteAuthorizationProviderSummary = {
 @as("CreatedTime") createdTime: option<dateTime>,
-@as("DomainName") domainName: option<domainName>,
-@as("AuthorizationProviderType") authorizationProviderType: authorizationProviderType,
-@as("AuthorizationProviderId") authorizationProviderId: option<id>
+  @as("DomainName") domainName: option<domainName>,
+  @as("AuthorizationProviderType") authorizationProviderType: authorizationProviderType,
+  @as("AuthorizationProviderId") authorizationProviderId: option<id>
 }
-type tagMap = Js.Dict.t< tagValue>
+type tagMap = Js.Dict.t<tagValue>
 type tagKeyList = array<tagKey>
 type subnetIds = array<subnetId>
 type securityGroupIds = array<securityGroupId>
 type domainSummary = {
 @as("DomainStatus") domainStatus: domainStatus,
-@as("CreatedTime") createdTime: dateTime,
-@as("DisplayName") displayName: option<displayName>,
-@as("DomainName") domainName: domainName
+  @as("CreatedTime") createdTime: dateTime,
+  @as("DisplayName") displayName: option<displayName>,
+  @as("DomainName") domainName: domainName
 }
 type deviceSummary = {
 @as("DeviceStatus") deviceStatus: option<deviceStatus>,
-@as("DeviceId") deviceId: option<id>
+  @as("DeviceId") deviceId: option<id>
 }
 type websiteCaSummaryList = array<websiteCaSummary>
 type websiteAuthorizationProvidersSummaryList = array<websiteAuthorizationProviderSummary>
 type fleetSummary = {
 @as("Tags") tags: option<tagMap>,
-@as("FleetStatus") fleetStatus: option<fleetStatus>,
-@as("CompanyCode") companyCode: option<companyCode>,
-@as("DisplayName") displayName: option<displayName>,
-@as("FleetName") fleetName: option<fleetName>,
-@as("LastUpdatedTime") lastUpdatedTime: option<dateTime>,
-@as("CreatedTime") createdTime: option<dateTime>,
-@as("FleetArn") fleetArn: option<fleetArn>
+  @as("FleetStatus") fleetStatus: option<fleetStatus>,
+  @as("CompanyCode") companyCode: option<companyCode>,
+  @as("DisplayName") displayName: option<displayName>,
+  @as("FleetName") fleetName: option<fleetName>,
+  @as("LastUpdatedTime") lastUpdatedTime: option<dateTime>,
+  @as("CreatedTime") createdTime: option<dateTime>,
+  @as("FleetArn") fleetArn: option<fleetArn>
 }
 type domainSummaryList = array<domainSummary>
 type deviceSummaryList = array<deviceSummary>
 type fleetSummaryList = array<fleetSummary>
-type awsServiceClient;
-@module("@aws-sdk/client-worklink") @new external createClient: unit => awsServiceClient = "WorkLinkClient";
+
 module UpdateIdentityProviderConfiguration = {
   type t;
   type request = {
 @as("IdentityProviderSamlMetadata") identityProviderSamlMetadata: option<samlMetadata>,
-@as("IdentityProviderType") identityProviderType: identityProviderType,
-@as("FleetArn") fleetArn: fleetArn
+  @as("IdentityProviderType") identityProviderType: identityProviderType,
+  @as("FleetArn") fleetArn: fleetArn
 }
   type response = unit
   @module("@aws-sdk/client-worklink") @new external new_: (request) => t = "UpdateIdentityProviderConfigurationCommand";
@@ -100,8 +102,8 @@ module UpdateFleetMetadata = {
   type t;
   type request = {
 @as("OptimizeForEndUserLocation") optimizeForEndUserLocation: option<boolean_>,
-@as("DisplayName") displayName: option<displayName>,
-@as("FleetArn") fleetArn: fleetArn
+  @as("DisplayName") displayName: option<displayName>,
+  @as("FleetArn") fleetArn: fleetArn
 }
   type response = unit
   @module("@aws-sdk/client-worklink") @new external new_: (request) => t = "UpdateFleetMetadataCommand";
@@ -112,8 +114,8 @@ module UpdateDomainMetadata = {
   type t;
   type request = {
 @as("DisplayName") displayName: option<displayName>,
-@as("DomainName") domainName: domainName,
-@as("FleetArn") fleetArn: fleetArn
+  @as("DomainName") domainName: domainName,
+  @as("FleetArn") fleetArn: fleetArn
 }
   type response = unit
   @module("@aws-sdk/client-worklink") @new external new_: (request) => t = "UpdateDomainMetadataCommand";
@@ -124,7 +126,7 @@ module UpdateDevicePolicyConfiguration = {
   type t;
   type request = {
 @as("DeviceCaCertificate") deviceCaCertificate: option<certificateChain>,
-@as("FleetArn") fleetArn: fleetArn
+  @as("FleetArn") fleetArn: fleetArn
 }
   type response = unit
   @module("@aws-sdk/client-worklink") @new external new_: (request) => t = "UpdateDevicePolicyConfigurationCommand";
@@ -135,7 +137,7 @@ module UpdateAuditStreamConfiguration = {
   type t;
   type request = {
 @as("AuditStreamArn") auditStreamArn: option<auditStreamArn>,
-@as("FleetArn") fleetArn: fleetArn
+  @as("FleetArn") fleetArn: fleetArn
 }
   type response = unit
   @module("@aws-sdk/client-worklink") @new external new_: (request) => t = "UpdateAuditStreamConfigurationCommand";
@@ -146,7 +148,7 @@ module SignOutUser = {
   type t;
   type request = {
 @as("Username") username: username,
-@as("FleetArn") fleetArn: fleetArn
+  @as("FleetArn") fleetArn: fleetArn
 }
   type response = unit
   @module("@aws-sdk/client-worklink") @new external new_: (request) => t = "SignOutUserCommand";
@@ -157,7 +159,7 @@ module RevokeDomainAccess = {
   type t;
   type request = {
 @as("DomainName") domainName: domainName,
-@as("FleetArn") fleetArn: fleetArn
+  @as("FleetArn") fleetArn: fleetArn
 }
   type response = unit
   @module("@aws-sdk/client-worklink") @new external new_: (request) => t = "RevokeDomainAccessCommand";
@@ -168,7 +170,7 @@ module RestoreDomainAccess = {
   type t;
   type request = {
 @as("DomainName") domainName: domainName,
-@as("FleetArn") fleetArn: fleetArn
+  @as("FleetArn") fleetArn: fleetArn
 }
   type response = unit
   @module("@aws-sdk/client-worklink") @new external new_: (request) => t = "RestoreDomainAccessCommand";
@@ -179,7 +181,7 @@ module DisassociateWebsiteCertificateAuthority = {
   type t;
   type request = {
 @as("WebsiteCaId") websiteCaId: id,
-@as("FleetArn") fleetArn: fleetArn
+  @as("FleetArn") fleetArn: fleetArn
 }
   type response = unit
   @module("@aws-sdk/client-worklink") @new external new_: (request) => t = "DisassociateWebsiteCertificateAuthorityCommand";
@@ -190,7 +192,7 @@ module DisassociateWebsiteAuthorizationProvider = {
   type t;
   type request = {
 @as("AuthorizationProviderId") authorizationProviderId: id,
-@as("FleetArn") fleetArn: fleetArn
+  @as("FleetArn") fleetArn: fleetArn
 }
   type response = unit
   @module("@aws-sdk/client-worklink") @new external new_: (request) => t = "DisassociateWebsiteAuthorizationProviderCommand";
@@ -201,7 +203,7 @@ module DisassociateDomain = {
   type t;
   type request = {
 @as("DomainName") domainName: domainName,
-@as("FleetArn") fleetArn: fleetArn
+  @as("FleetArn") fleetArn: fleetArn
 }
   type response = unit
   @module("@aws-sdk/client-worklink") @new external new_: (request) => t = "DisassociateDomainCommand";
@@ -212,12 +214,12 @@ module DescribeWebsiteCertificateAuthority = {
   type t;
   type request = {
 @as("WebsiteCaId") websiteCaId: id,
-@as("FleetArn") fleetArn: fleetArn
+  @as("FleetArn") fleetArn: fleetArn
 }
   type response = {
 @as("DisplayName") displayName: option<displayName>,
-@as("CreatedTime") createdTime: option<dateTime>,
-@as("Certificate") certificate: option<certificate>
+  @as("CreatedTime") createdTime: option<dateTime>,
+  @as("Certificate") certificate: option<certificate>
 }
   @module("@aws-sdk/client-worklink") @new external new_: (request) => t = "DescribeWebsiteCertificateAuthorityCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -230,8 +232,8 @@ module DescribeIdentityProviderConfiguration = {
 }
   type response = {
 @as("IdentityProviderSamlMetadata") identityProviderSamlMetadata: option<samlMetadata>,
-@as("ServiceProviderSamlMetadata") serviceProviderSamlMetadata: option<samlMetadata>,
-@as("IdentityProviderType") identityProviderType: option<identityProviderType>
+  @as("ServiceProviderSamlMetadata") serviceProviderSamlMetadata: option<samlMetadata>,
+  @as("IdentityProviderType") identityProviderType: option<identityProviderType>
 }
   @module("@aws-sdk/client-worklink") @new external new_: (request) => t = "DescribeIdentityProviderConfigurationCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -241,14 +243,14 @@ module DescribeDomain = {
   type t;
   type request = {
 @as("DomainName") domainName: domainName,
-@as("FleetArn") fleetArn: fleetArn
+  @as("FleetArn") fleetArn: fleetArn
 }
   type response = {
 @as("AcmCertificateArn") acmCertificateArn: option<acmCertificateArn>,
-@as("DomainStatus") domainStatus: option<domainStatus>,
-@as("CreatedTime") createdTime: option<dateTime>,
-@as("DisplayName") displayName: option<displayName>,
-@as("DomainName") domainName: option<domainName>
+  @as("DomainStatus") domainStatus: option<domainStatus>,
+  @as("CreatedTime") createdTime: option<dateTime>,
+  @as("DisplayName") displayName: option<displayName>,
+  @as("DomainName") domainName: option<domainName>
 }
   @module("@aws-sdk/client-worklink") @new external new_: (request) => t = "DescribeDomainCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -270,18 +272,18 @@ module DescribeDevice = {
   type t;
   type request = {
 @as("DeviceId") deviceId: id,
-@as("FleetArn") fleetArn: fleetArn
+  @as("FleetArn") fleetArn: fleetArn
 }
   type response = {
 @as("Username") username: option<username>,
-@as("LastAccessedTime") lastAccessedTime: option<dateTime>,
-@as("FirstAccessedTime") firstAccessedTime: option<dateTime>,
-@as("PatchLevel") patchLevel: option<devicePatchLevel>,
-@as("OperatingSystemVersion") operatingSystemVersion: option<deviceOperatingSystemVersion>,
-@as("OperatingSystem") operatingSystem: option<deviceOperatingSystemName>,
-@as("Manufacturer") manufacturer: option<deviceManufacturer>,
-@as("Model") model: option<deviceModel>,
-@as("Status") status: option<deviceStatus>
+  @as("LastAccessedTime") lastAccessedTime: option<dateTime>,
+  @as("FirstAccessedTime") firstAccessedTime: option<dateTime>,
+  @as("PatchLevel") patchLevel: option<devicePatchLevel>,
+  @as("OperatingSystemVersion") operatingSystemVersion: option<deviceOperatingSystemVersion>,
+  @as("OperatingSystem") operatingSystem: option<deviceOperatingSystemName>,
+  @as("Manufacturer") manufacturer: option<deviceManufacturer>,
+  @as("Model") model: option<deviceModel>,
+  @as("Status") status: option<deviceStatus>
 }
   @module("@aws-sdk/client-worklink") @new external new_: (request) => t = "DescribeDeviceCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -313,8 +315,8 @@ module AssociateWebsiteCertificateAuthority = {
   type t;
   type request = {
 @as("DisplayName") displayName: option<displayName>,
-@as("Certificate") certificate: certificate,
-@as("FleetArn") fleetArn: fleetArn
+  @as("Certificate") certificate: certificate,
+  @as("FleetArn") fleetArn: fleetArn
 }
   type response = {
 @as("WebsiteCaId") websiteCaId: option<id>
@@ -327,8 +329,8 @@ module AssociateWebsiteAuthorizationProvider = {
   type t;
   type request = {
 @as("DomainName") domainName: option<domainName>,
-@as("AuthorizationProviderType") authorizationProviderType: authorizationProviderType,
-@as("FleetArn") fleetArn: fleetArn
+  @as("AuthorizationProviderType") authorizationProviderType: authorizationProviderType,
+  @as("FleetArn") fleetArn: fleetArn
 }
   type response = {
 @as("AuthorizationProviderId") authorizationProviderId: option<id>
@@ -341,9 +343,9 @@ module AssociateDomain = {
   type t;
   type request = {
 @as("AcmCertificateArn") acmCertificateArn: acmCertificateArn,
-@as("DisplayName") displayName: option<displayName>,
-@as("DomainName") domainName: domainName,
-@as("FleetArn") fleetArn: fleetArn
+  @as("DisplayName") displayName: option<displayName>,
+  @as("DomainName") domainName: domainName,
+  @as("FleetArn") fleetArn: fleetArn
 }
   type response = unit
   @module("@aws-sdk/client-worklink") @new external new_: (request) => t = "AssociateDomainCommand";
@@ -354,9 +356,9 @@ module UpdateCompanyNetworkConfiguration = {
   type t;
   type request = {
 @as("SecurityGroupIds") securityGroupIds: securityGroupIds,
-@as("SubnetIds") subnetIds: subnetIds,
-@as("VpcId") vpcId: vpcId,
-@as("FleetArn") fleetArn: fleetArn
+  @as("SubnetIds") subnetIds: subnetIds,
+  @as("VpcId") vpcId: vpcId,
+  @as("FleetArn") fleetArn: fleetArn
 }
   type response = unit
   @module("@aws-sdk/client-worklink") @new external new_: (request) => t = "UpdateCompanyNetworkConfigurationCommand";
@@ -367,7 +369,7 @@ module UntagResource = {
   type t;
   type request = {
 @as("TagKeys") tagKeys: tagKeyList,
-@as("ResourceArn") resourceArn: fleetArn
+  @as("ResourceArn") resourceArn: fleetArn
 }
   type response = unit
   @module("@aws-sdk/client-worklink") @new external new_: (request) => t = "UntagResourceCommand";
@@ -378,7 +380,7 @@ module TagResource = {
   type t;
   type request = {
 @as("Tags") tags: tagMap,
-@as("ResourceArn") resourceArn: fleetArn
+  @as("ResourceArn") resourceArn: fleetArn
 }
   type response = unit
   @module("@aws-sdk/client-worklink") @new external new_: (request) => t = "TagResourceCommand";
@@ -404,13 +406,13 @@ module DescribeFleetMetadata = {
 }
   type response = {
 @as("Tags") tags: option<tagMap>,
-@as("FleetStatus") fleetStatus: option<fleetStatus>,
-@as("CompanyCode") companyCode: option<companyCode>,
-@as("OptimizeForEndUserLocation") optimizeForEndUserLocation: option<boolean_>,
-@as("DisplayName") displayName: option<displayName>,
-@as("FleetName") fleetName: option<fleetName>,
-@as("LastUpdatedTime") lastUpdatedTime: option<dateTime>,
-@as("CreatedTime") createdTime: option<dateTime>
+  @as("FleetStatus") fleetStatus: option<fleetStatus>,
+  @as("CompanyCode") companyCode: option<companyCode>,
+  @as("OptimizeForEndUserLocation") optimizeForEndUserLocation: option<boolean_>,
+  @as("DisplayName") displayName: option<displayName>,
+  @as("FleetName") fleetName: option<fleetName>,
+  @as("LastUpdatedTime") lastUpdatedTime: option<dateTime>,
+  @as("CreatedTime") createdTime: option<dateTime>
 }
   @module("@aws-sdk/client-worklink") @new external new_: (request) => t = "DescribeFleetMetadataCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -423,8 +425,8 @@ module DescribeCompanyNetworkConfiguration = {
 }
   type response = {
 @as("SecurityGroupIds") securityGroupIds: option<securityGroupIds>,
-@as("SubnetIds") subnetIds: option<subnetIds>,
-@as("VpcId") vpcId: option<vpcId>
+  @as("SubnetIds") subnetIds: option<subnetIds>,
+  @as("VpcId") vpcId: option<vpcId>
 }
   @module("@aws-sdk/client-worklink") @new external new_: (request) => t = "DescribeCompanyNetworkConfigurationCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -434,9 +436,9 @@ module CreateFleet = {
   type t;
   type request = {
 @as("Tags") tags: option<tagMap>,
-@as("OptimizeForEndUserLocation") optimizeForEndUserLocation: option<boolean_>,
-@as("DisplayName") displayName: option<displayName>,
-@as("FleetName") fleetName: fleetName
+  @as("OptimizeForEndUserLocation") optimizeForEndUserLocation: option<boolean_>,
+  @as("DisplayName") displayName: option<displayName>,
+  @as("FleetName") fleetName: fleetName
 }
   type response = {
 @as("FleetArn") fleetArn: option<fleetArn>
@@ -449,12 +451,12 @@ module ListWebsiteCertificateAuthorities = {
   type t;
   type request = {
 @as("NextToken") nextToken: option<nextToken>,
-@as("MaxResults") maxResults: option<maxResults>,
-@as("FleetArn") fleetArn: fleetArn
+  @as("MaxResults") maxResults: option<maxResults>,
+  @as("FleetArn") fleetArn: fleetArn
 }
   type response = {
 @as("NextToken") nextToken: option<nextToken>,
-@as("WebsiteCertificateAuthorities") websiteCertificateAuthorities: option<websiteCaSummaryList>
+  @as("WebsiteCertificateAuthorities") websiteCertificateAuthorities: option<websiteCaSummaryList>
 }
   @module("@aws-sdk/client-worklink") @new external new_: (request) => t = "ListWebsiteCertificateAuthoritiesCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -464,12 +466,12 @@ module ListWebsiteAuthorizationProviders = {
   type t;
   type request = {
 @as("MaxResults") maxResults: option<maxResults>,
-@as("NextToken") nextToken: option<nextToken>,
-@as("FleetArn") fleetArn: fleetArn
+  @as("NextToken") nextToken: option<nextToken>,
+  @as("FleetArn") fleetArn: fleetArn
 }
   type response = {
 @as("NextToken") nextToken: option<nextToken>,
-@as("WebsiteAuthorizationProviders") websiteAuthorizationProviders: option<websiteAuthorizationProvidersSummaryList>
+  @as("WebsiteAuthorizationProviders") websiteAuthorizationProviders: option<websiteAuthorizationProvidersSummaryList>
 }
   @module("@aws-sdk/client-worklink") @new external new_: (request) => t = "ListWebsiteAuthorizationProvidersCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -479,12 +481,12 @@ module ListDomains = {
   type t;
   type request = {
 @as("MaxResults") maxResults: option<maxResults>,
-@as("NextToken") nextToken: option<nextToken>,
-@as("FleetArn") fleetArn: fleetArn
+  @as("NextToken") nextToken: option<nextToken>,
+  @as("FleetArn") fleetArn: fleetArn
 }
   type response = {
 @as("NextToken") nextToken: option<nextToken>,
-@as("Domains") domains: option<domainSummaryList>
+  @as("Domains") domains: option<domainSummaryList>
 }
   @module("@aws-sdk/client-worklink") @new external new_: (request) => t = "ListDomainsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -494,12 +496,12 @@ module ListDevices = {
   type t;
   type request = {
 @as("MaxResults") maxResults: option<maxResults>,
-@as("NextToken") nextToken: option<nextToken>,
-@as("FleetArn") fleetArn: fleetArn
+  @as("NextToken") nextToken: option<nextToken>,
+  @as("FleetArn") fleetArn: fleetArn
 }
   type response = {
 @as("NextToken") nextToken: option<nextToken>,
-@as("Devices") devices: option<deviceSummaryList>
+  @as("Devices") devices: option<deviceSummaryList>
 }
   @module("@aws-sdk/client-worklink") @new external new_: (request) => t = "ListDevicesCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -509,11 +511,11 @@ module ListFleets = {
   type t;
   type request = {
 @as("MaxResults") maxResults: option<maxResults>,
-@as("NextToken") nextToken: option<nextToken>
+  @as("NextToken") nextToken: option<nextToken>
 }
   type response = {
 @as("NextToken") nextToken: option<nextToken>,
-@as("FleetSummaryList") fleetSummaryList: option<fleetSummaryList>
+  @as("FleetSummaryList") fleetSummaryList: option<fleetSummaryList>
 }
   @module("@aws-sdk/client-worklink") @new external new_: (request) => t = "ListFleetsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";

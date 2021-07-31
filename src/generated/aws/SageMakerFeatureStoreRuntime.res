@@ -5,30 +5,31 @@ httpStatusCode: option<float>,
   cfId: option<string>,
   attempts: option<int>,
   totalRetryDelay: option<int>
-};
-type string_ = string
-type boolean_ = bool
-type integer_ = int
-type timestamp_ = Js.Date.t;
-type long = float
+}
+type awsServiceClient;
+@module("@aws-sdk/client-sagemaker") @new external createClient: unit => awsServiceClient = "SageMakerFeatureStoreRuntimeClient";
+type baseString = string
+type baseBoolean = bool
+type baseInteger = int
+type baseTimestamp = Js.Date.t;
+type baseLong = float
 type valueAsString = string
 type message = string
 type featureName = string
 type featureGroupName = string
 type featureValue = {
 @as("ValueAsString") valueAsString: valueAsString,
-@as("FeatureName") featureName: featureName
+  @as("FeatureName") featureName: featureName
 }
 type featureNames = array<featureName>
 type record = array<featureValue>
-type awsServiceClient;
-@module("@aws-sdk/client-sagemaker") @new external createClient: unit => awsServiceClient = "SageMakerFeatureStoreRuntimeClient";
+
 module DeleteRecord = {
   type t;
   type request = {
 @as("EventTime") eventTime: valueAsString,
-@as("RecordIdentifierValueAsString") recordIdentifierValueAsString: valueAsString,
-@as("FeatureGroupName") featureGroupName: featureGroupName
+  @as("RecordIdentifierValueAsString") recordIdentifierValueAsString: valueAsString,
+  @as("FeatureGroupName") featureGroupName: featureGroupName
 }
   
   @module("@aws-sdk/client-sagemaker") @new external new_: (request) => t = "DeleteRecordCommand";
@@ -39,7 +40,7 @@ module PutRecord = {
   type t;
   type request = {
 @as("Record") record: record,
-@as("FeatureGroupName") featureGroupName: featureGroupName
+  @as("FeatureGroupName") featureGroupName: featureGroupName
 }
   
   @module("@aws-sdk/client-sagemaker") @new external new_: (request) => t = "PutRecordCommand";
@@ -50,8 +51,8 @@ module GetRecord = {
   type t;
   type request = {
 @as("FeatureNames") featureNames: option<featureNames>,
-@as("RecordIdentifierValueAsString") recordIdentifierValueAsString: valueAsString,
-@as("FeatureGroupName") featureGroupName: featureGroupName
+  @as("RecordIdentifierValueAsString") recordIdentifierValueAsString: valueAsString,
+  @as("FeatureGroupName") featureGroupName: featureGroupName
 }
   type response = {
 @as("Record") record: option<record>

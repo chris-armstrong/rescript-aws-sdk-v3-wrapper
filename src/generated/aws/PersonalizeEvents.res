@@ -5,12 +5,14 @@ httpStatusCode: option<float>,
   cfId: option<string>,
   attempts: option<int>,
   totalRetryDelay: option<int>
-};
-type string_ = string
-type boolean_ = bool
-type integer_ = int
-type timestamp_ = Js.Date.t;
-type long = float
+}
+type awsServiceClient;
+@module("@aws-sdk/client-personalize") @new external createClient: unit => awsServiceClient = "PersonalizeEventsClient";
+type baseString = string
+type baseBoolean = bool
+type baseInteger = int
+type baseTimestamp = Js.Date.t;
+type baseLong = float
 type userId = string
 type synthesizedJsonUserProperties = string
 type synthesizedJsonItemProperties = string
@@ -24,33 +26,32 @@ type date = Js.Date.t;
 type arn = string
 type user = {
 properties: option<synthesizedJsonUserProperties>,
-userId: stringType
+  userId: stringType
 }
 type item = {
 properties: option<synthesizedJsonItemProperties>,
-itemId: stringType
+  itemId: stringType
 }
 type impression = array<itemId>
 type userList = array<user>
 type itemList = array<item>
 type event = {
 impression: option<impression>,
-recommendationId: option<recommendationId>,
-sentAt: date,
-properties: option<synthesizedJsonEventPropertiesJSON>,
-itemId: option<itemId>,
-eventValue: option<floatType>,
-eventType: stringType,
-eventId: option<stringType>
+  recommendationId: option<recommendationId>,
+  sentAt: date,
+  properties: option<synthesizedJsonEventPropertiesJSON>,
+  itemId: option<itemId>,
+  eventValue: option<floatType>,
+  eventType: stringType,
+  eventId: option<stringType>
 }
 type eventList = array<event>
-type awsServiceClient;
-@module("@aws-sdk/client-personalize") @new external createClient: unit => awsServiceClient = "PersonalizeEventsClient";
+
 module PutUsers = {
   type t;
   type request = {
 users: userList,
-datasetArn: arn
+  datasetArn: arn
 }
   
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "PutUsersCommand";
@@ -61,7 +62,7 @@ module PutItems = {
   type t;
   type request = {
 items: itemList,
-datasetArn: arn
+  datasetArn: arn
 }
   
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "PutItemsCommand";
@@ -72,9 +73,9 @@ module PutEvents = {
   type t;
   type request = {
 eventList: eventList,
-sessionId: stringType,
-userId: option<userId>,
-trackingId: stringType
+  sessionId: stringType,
+  userId: option<userId>,
+  trackingId: stringType
 }
   
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "PutEventsCommand";

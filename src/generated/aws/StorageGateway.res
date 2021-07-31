@@ -5,8 +5,14 @@ httpStatusCode: option<float>,
   cfId: option<string>,
   attempts: option<int>,
   totalRetryDelay: option<int>
-};
-type timestamp_ = Js.Date.t;
+}
+type awsServiceClient;
+@module("@aws-sdk/client-storagegateway") @new external createClient: unit => awsServiceClient = "StorageGatewayClient";
+type baseString = string
+type baseBoolean = bool
+type baseInteger = int
+type baseTimestamp = Js.Date.t;
+type baseLong = float
 type string_ = string
 type long = float
 type integer_ = int
@@ -27,7 +33,7 @@ type time = Js.Date.t;
 type targetName = string
 type targetARN = string
 type tapeUsage = float
-type tapeStorageClass = [@as("GLACIER") #GLACIER | @as("DEEP_ARCHIVE") #DEEPARCHIVE]
+type tapeStorageClass = [@as("GLACIER") #GLACIER | @as("DEEP_ARCHIVE") #DEEP_ARCHIVE]
 type tapeStatus = string
 type tapeSize = float
 type tapeRecoveryPointStatus = string
@@ -60,7 +66,7 @@ type permissionMode = string
 type permissionId = float
 type path = string
 type organizationalUnit = string
-type objectACL = [@as("aws-exec-read") #AwsExecRead | @as("bucket-owner-full-control") #BucketOwnerFullControl | @as("bucket-owner-read") #BucketOwnerRead | @as("authenticated-read") #AuthenticatedRead | @as("public-read-write") #PublicReadWrite | @as("public-read") #PublicRead | @as("private") #Private]
+type objectACL = [@as("aws-exec-read") #Aws_Exec_Read | @as("bucket-owner-full-control") #Bucket_Owner_Full_Control | @as("bucket-owner-read") #Bucket_Owner_Read | @as("authenticated-read") #Authenticated_Read | @as("public-read-write") #Public_Read_Write | @as("public-read") #Public_Read | @as("private") #Private]
 type numTapesToCreate = int
 type notificationPolicy = string
 type notificationId = string
@@ -78,7 +84,7 @@ type iqnName = string
 type initiator = string
 type ipv4AddressCIDR = string
 type hourOfDay = int
-type hostEnvironment = [@as("OTHER") #OTHER | @as("KVM") #KVM | @as("EC2") #EC2 | @as("HYPER-V") #HYPERV | @as("VMWARE") #VMWARE]
+type hostEnvironment = [@as("OTHER") #OTHER | @as("KVM") #KVM | @as("EC2") #EC2 | @as("HYPER-V") #HYPER_V | @as("VMWARE") #VMWARE]
 type host = string
 type gatewayType = string
 type gatewayTimezone = string
@@ -127,131 +133,131 @@ type bandwidthDownloadRateLimit = float
 type availabilityMonitorTestStatus = [@as("PENDING") #PENDING | @as("FAILED") #FAILED | @as("COMPLETE") #COMPLETE]
 type authentication = string
 type auditDestinationARN = string
-type activeDirectoryStatus = [@as("UNKNOWN_ERROR") #UNKNOWNERROR | @as("TIMEOUT") #TIMEOUT | @as("NETWORK_ERROR") #NETWORKERROR | @as("JOINING") #JOINING | @as("JOINED") #JOINED | @as("DETACHED") #DETACHED | @as("ACCESS_DENIED") #ACCESSDENIED]
+type activeDirectoryStatus = [@as("UNKNOWN_ERROR") #UNKNOWN_ERROR | @as("TIMEOUT") #TIMEOUT | @as("NETWORK_ERROR") #NETWORK_ERROR | @as("JOINING") #JOINING | @as("JOINED") #JOINED | @as("DETACHED") #DETACHED | @as("ACCESS_DENIED") #ACCESS_DENIED]
 type activationKey = string
-type errorDetails = Js.Dict.t< string_>
+type errorDetails = Js.Dict.t<string_>
 type volumeiSCSIAttributes = {
 @as("ChapEnabled") chapEnabled: option<boolean2>,
-@as("LunNumber") lunNumber: option<positiveIntObject>,
-@as("NetworkInterfacePort") networkInterfacePort: option<integer_>,
-@as("NetworkInterfaceId") networkInterfaceId: option<networkInterfaceId>,
-@as("TargetARN") targetARN: option<targetARN>
+  @as("LunNumber") lunNumber: option<positiveIntObject>,
+  @as("NetworkInterfacePort") networkInterfacePort: option<integer_>,
+  @as("NetworkInterfaceId") networkInterfaceId: option<networkInterfaceId>,
+  @as("TargetARN") targetARN: option<targetARN>
 }
 type volumeRecoveryPointInfo = {
 @as("VolumeRecoveryPointTime") volumeRecoveryPointTime: option<string_>,
-@as("VolumeUsageInBytes") volumeUsageInBytes: option<long>,
-@as("VolumeSizeInBytes") volumeSizeInBytes: option<long>,
-@as("VolumeARN") volumeARN: option<volumeARN>
+  @as("VolumeUsageInBytes") volumeUsageInBytes: option<long>,
+  @as("VolumeSizeInBytes") volumeSizeInBytes: option<long>,
+  @as("VolumeARN") volumeARN: option<volumeARN>
 }
 type volumeInfo = {
 @as("VolumeAttachmentStatus") volumeAttachmentStatus: option<volumeAttachmentStatus>,
-@as("VolumeSizeInBytes") volumeSizeInBytes: option<long>,
-@as("VolumeType") volumeType: option<volumeType>,
-@as("GatewayId") gatewayId: option<gatewayId>,
-@as("GatewayARN") gatewayARN: option<gatewayARN>,
-@as("VolumeId") volumeId: option<volumeId>,
-@as("VolumeARN") volumeARN: option<volumeARN>
+  @as("VolumeSizeInBytes") volumeSizeInBytes: option<long>,
+  @as("VolumeType") volumeType: option<volumeType>,
+  @as("GatewayId") gatewayId: option<gatewayId>,
+  @as("GatewayARN") gatewayARN: option<gatewayARN>,
+  @as("VolumeId") volumeId: option<volumeId>,
+  @as("VolumeARN") volumeARN: option<volumeARN>
 }
 type volumeARNs = array<volumeARN>
 type vtldeviceARNs = array<vtldeviceARN>
 type userList = array<userListUser>
 type tapeRecoveryPointInfo = {
 @as("TapeStatus") tapeStatus: option<tapeRecoveryPointStatus>,
-@as("TapeSizeInBytes") tapeSizeInBytes: option<tapeSize>,
-@as("TapeRecoveryPointTime") tapeRecoveryPointTime: option<time>,
-@as("TapeARN") tapeARN: option<tapeARN>
+  @as("TapeSizeInBytes") tapeSizeInBytes: option<tapeSize>,
+  @as("TapeRecoveryPointTime") tapeRecoveryPointTime: option<time>,
+  @as("TapeARN") tapeARN: option<tapeARN>
 }
 type tapeInfo = {
 @as("PoolEntryDate") poolEntryDate: option<time>,
-@as("RetentionStartDate") retentionStartDate: option<time>,
-@as("PoolId") poolId: option<poolId>,
-@as("GatewayARN") gatewayARN: option<gatewayARN>,
-@as("TapeStatus") tapeStatus: option<tapeStatus>,
-@as("TapeSizeInBytes") tapeSizeInBytes: option<tapeSize>,
-@as("TapeBarcode") tapeBarcode: option<tapeBarcode>,
-@as("TapeARN") tapeARN: option<tapeARN>
+  @as("RetentionStartDate") retentionStartDate: option<time>,
+  @as("PoolId") poolId: option<poolId>,
+  @as("GatewayARN") gatewayARN: option<gatewayARN>,
+  @as("TapeStatus") tapeStatus: option<tapeStatus>,
+  @as("TapeSizeInBytes") tapeSizeInBytes: option<tapeSize>,
+  @as("TapeBarcode") tapeBarcode: option<tapeBarcode>,
+  @as("TapeARN") tapeARN: option<tapeARN>
 }
 type tapeArchive = {
 @as("PoolEntryDate") poolEntryDate: option<time>,
-@as("RetentionStartDate") retentionStartDate: option<time>,
-@as("Worm") worm: option<boolean2>,
-@as("PoolId") poolId: option<poolId>,
-@as("KMSKey") kmskey: option<kmskey>,
-@as("TapeUsedInBytes") tapeUsedInBytes: option<tapeUsage>,
-@as("TapeStatus") tapeStatus: option<tapeArchiveStatus>,
-@as("RetrievedTo") retrievedTo: option<gatewayARN>,
-@as("CompletionTime") completionTime: option<time>,
-@as("TapeSizeInBytes") tapeSizeInBytes: option<tapeSize>,
-@as("TapeCreatedDate") tapeCreatedDate: option<time>,
-@as("TapeBarcode") tapeBarcode: option<tapeBarcode>,
-@as("TapeARN") tapeARN: option<tapeARN>
+  @as("RetentionStartDate") retentionStartDate: option<time>,
+  @as("Worm") worm: option<boolean2>,
+  @as("PoolId") poolId: option<poolId>,
+  @as("KMSKey") kmskey: option<kmskey>,
+  @as("TapeUsedInBytes") tapeUsedInBytes: option<tapeUsage>,
+  @as("TapeStatus") tapeStatus: option<tapeArchiveStatus>,
+  @as("RetrievedTo") retrievedTo: option<gatewayARN>,
+  @as("CompletionTime") completionTime: option<time>,
+  @as("TapeSizeInBytes") tapeSizeInBytes: option<tapeSize>,
+  @as("TapeCreatedDate") tapeCreatedDate: option<time>,
+  @as("TapeBarcode") tapeBarcode: option<tapeBarcode>,
+  @as("TapeARN") tapeARN: option<tapeARN>
 }
 type tapeARNs = array<tapeARN>
 type tape = {
 @as("PoolEntryDate") poolEntryDate: option<time>,
-@as("RetentionStartDate") retentionStartDate: option<time>,
-@as("Worm") worm: option<boolean2>,
-@as("PoolId") poolId: option<poolId>,
-@as("KMSKey") kmskey: option<kmskey>,
-@as("TapeUsedInBytes") tapeUsedInBytes: option<tapeUsage>,
-@as("Progress") progress: option<doubleObject>,
-@as("VTLDevice") vtldevice: option<vtldeviceARN>,
-@as("TapeStatus") tapeStatus: option<tapeStatus>,
-@as("TapeSizeInBytes") tapeSizeInBytes: option<tapeSize>,
-@as("TapeCreatedDate") tapeCreatedDate: option<time>,
-@as("TapeBarcode") tapeBarcode: option<tapeBarcode>,
-@as("TapeARN") tapeARN: option<tapeARN>
+  @as("RetentionStartDate") retentionStartDate: option<time>,
+  @as("Worm") worm: option<boolean2>,
+  @as("PoolId") poolId: option<poolId>,
+  @as("KMSKey") kmskey: option<kmskey>,
+  @as("TapeUsedInBytes") tapeUsedInBytes: option<tapeUsage>,
+  @as("Progress") progress: option<doubleObject>,
+  @as("VTLDevice") vtldevice: option<vtldeviceARN>,
+  @as("TapeStatus") tapeStatus: option<tapeStatus>,
+  @as("TapeSizeInBytes") tapeSizeInBytes: option<tapeSize>,
+  @as("TapeCreatedDate") tapeCreatedDate: option<time>,
+  @as("TapeBarcode") tapeBarcode: option<tapeBarcode>,
+  @as("TapeARN") tapeARN: option<tapeARN>
 }
 type tagKeys = array<tagKey>
 type tag = {
 @as("Value") value: tagValue,
-@as("Key") key: tagKey
+  @as("Key") key: tagKey
 }
 type poolInfo = {
 @as("PoolStatus") poolStatus: option<poolStatus>,
-@as("RetentionLockTimeInDays") retentionLockTimeInDays: option<retentionLockTimeInDays>,
-@as("RetentionLockType") retentionLockType: option<retentionLockType>,
-@as("StorageClass") storageClass: option<tapeStorageClass>,
-@as("PoolName") poolName: option<poolName>,
-@as("PoolARN") poolARN: option<poolARN>
+  @as("RetentionLockTimeInDays") retentionLockTimeInDays: option<retentionLockTimeInDays>,
+  @as("RetentionLockType") retentionLockType: option<retentionLockType>,
+  @as("StorageClass") storageClass: option<tapeStorageClass>,
+  @as("PoolName") poolName: option<poolName>,
+  @as("PoolARN") poolARN: option<poolARN>
 }
 type poolARNs = array<poolARN>
 type networkInterface = {
 @as("Ipv6Address") ipv6Address: option<string_>,
-@as("MacAddress") macAddress: option<string_>,
-@as("Ipv4Address") ipv4Address: option<string_>
+  @as("MacAddress") macAddress: option<string_>,
+  @as("Ipv4Address") ipv4Address: option<string_>
 }
 type nfsfileShareDefaults = {
 @as("OwnerId") ownerId: option<permissionId>,
-@as("GroupId") groupId: option<permissionId>,
-@as("DirectoryMode") directoryMode: option<permissionMode>,
-@as("FileMode") fileMode: option<permissionMode>
+  @as("GroupId") groupId: option<permissionId>,
+  @as("DirectoryMode") directoryMode: option<permissionMode>,
+  @as("FileMode") fileMode: option<permissionMode>
 }
 type initiators = array<initiator>
 type hosts = array<host>
 type gatewayInfo = {
 @as("Ec2InstanceRegion") ec2InstanceRegion: option<ec2InstanceRegion>,
-@as("Ec2InstanceId") ec2InstanceId: option<ec2InstanceId>,
-@as("GatewayName") gatewayName: option<string_>,
-@as("GatewayOperationalState") gatewayOperationalState: option<gatewayOperationalState>,
-@as("GatewayType") gatewayType: option<gatewayType>,
-@as("GatewayARN") gatewayARN: option<gatewayARN>,
-@as("GatewayId") gatewayId: option<gatewayId>
+  @as("Ec2InstanceId") ec2InstanceId: option<ec2InstanceId>,
+  @as("GatewayName") gatewayName: option<string_>,
+  @as("GatewayOperationalState") gatewayOperationalState: option<gatewayOperationalState>,
+  @as("GatewayType") gatewayType: option<gatewayType>,
+  @as("GatewayARN") gatewayARN: option<gatewayARN>,
+  @as("GatewayId") gatewayId: option<gatewayId>
 }
 type folderList = array<folder>
 type fileSystemAssociationSummary = {
 @as("GatewayARN") gatewayARN: option<gatewayARN>,
-@as("FileSystemAssociationStatus") fileSystemAssociationStatus: option<fileSystemAssociationStatus>,
-@as("FileSystemAssociationARN") fileSystemAssociationARN: option<fileSystemAssociationARN>,
-@as("FileSystemAssociationId") fileSystemAssociationId: option<fileSystemAssociationId>
+  @as("FileSystemAssociationStatus") fileSystemAssociationStatus: option<fileSystemAssociationStatus>,
+  @as("FileSystemAssociationARN") fileSystemAssociationARN: option<fileSystemAssociationARN>,
+  @as("FileSystemAssociationId") fileSystemAssociationId: option<fileSystemAssociationId>
 }
 type fileSystemAssociationARNList = array<fileSystemAssociationARN>
 type fileShareInfo = {
 @as("GatewayARN") gatewayARN: option<gatewayARN>,
-@as("FileShareStatus") fileShareStatus: option<fileShareStatus>,
-@as("FileShareId") fileShareId: option<fileShareId>,
-@as("FileShareARN") fileShareARN: option<fileShareARN>,
-@as("FileShareType") fileShareType: option<fileShareType>
+  @as("FileShareStatus") fileShareStatus: option<fileShareStatus>,
+  @as("FileShareId") fileShareId: option<fileShareId>,
+  @as("FileShareARN") fileShareARN: option<fileShareARN>,
+  @as("FileShareType") fileShareType: option<fileShareType>
 }
 type fileShareClientList = array<ipv4AddressCIDR>
 type fileShareARNList = array<fileShareARN>
@@ -259,35 +265,35 @@ type diskIds = array<diskId>
 type diskAttributeList = array<diskAttribute>
 type deviceiSCSIAttributes = {
 @as("ChapEnabled") chapEnabled: option<boolean2>,
-@as("NetworkInterfacePort") networkInterfacePort: option<integer_>,
-@as("NetworkInterfaceId") networkInterfaceId: option<networkInterfaceId>,
-@as("TargetARN") targetARN: option<targetARN>
+  @as("NetworkInterfacePort") networkInterfacePort: option<integer_>,
+  @as("NetworkInterfaceId") networkInterfaceId: option<networkInterfaceId>,
+  @as("TargetARN") targetARN: option<targetARN>
 }
 type daysOfWeek = array<dayOfWeek>
 type chapInfo = {
 @as("SecretToAuthenticateTarget") secretToAuthenticateTarget: option<chapSecret>,
-@as("InitiatorName") initiatorName: option<iqnName>,
-@as("SecretToAuthenticateInitiator") secretToAuthenticateInitiator: option<chapSecret>,
-@as("TargetARN") targetARN: option<targetARN>
+  @as("InitiatorName") initiatorName: option<iqnName>,
+  @as("SecretToAuthenticateInitiator") secretToAuthenticateInitiator: option<chapSecret>,
+  @as("TargetARN") targetARN: option<targetARN>
 }
 type cacheAttributes = {
 @as("CacheStaleTimeoutInSeconds") cacheStaleTimeoutInSeconds: option<cacheStaleTimeoutInSeconds>
 }
 type automaticTapeCreationRule = {
 @as("Worm") worm: option<boolean2>,
-@as("MinimumNumTapes") minimumNumTapes: minimumNumTapes,
-@as("TapeSizeInBytes") tapeSizeInBytes: tapeSize,
-@as("PoolId") poolId: poolId,
-@as("TapeBarcodePrefix") tapeBarcodePrefix: tapeBarcodePrefix
+  @as("MinimumNumTapes") minimumNumTapes: minimumNumTapes,
+  @as("TapeSizeInBytes") tapeSizeInBytes: tapeSize,
+  @as("PoolId") poolId: poolId,
+  @as("TapeBarcodePrefix") tapeBarcodePrefix: tapeBarcodePrefix
 }
 type volumeRecoveryPointInfos = array<volumeRecoveryPointInfo>
 type volumeInfos = array<volumeInfo>
 type vtldevice = {
 @as("DeviceiSCSIAttributes") deviceiSCSIAttributes: option<deviceiSCSIAttributes>,
-@as("VTLDeviceProductIdentifier") vtldeviceProductIdentifier: option<vtldeviceProductIdentifier>,
-@as("VTLDeviceVendor") vtldeviceVendor: option<vtldeviceVendor>,
-@as("VTLDeviceType") vtldeviceType: option<vtldeviceType>,
-@as("VTLDeviceARN") vtldeviceARN: option<vtldeviceARN>
+  @as("VTLDeviceProductIdentifier") vtldeviceProductIdentifier: option<vtldeviceProductIdentifier>,
+  @as("VTLDeviceVendor") vtldeviceVendor: option<vtldeviceVendor>,
+  @as("VTLDeviceType") vtldeviceType: option<vtldeviceType>,
+  @as("VTLDeviceARN") vtldeviceARN: option<vtldeviceARN>
 }
 type tapes = array<tape>
 type tapeRecoveryPointInfos = array<tapeRecoveryPointInfo>
@@ -296,24 +302,24 @@ type tapeArchives = array<tapeArchive>
 type tags = array<tag>
 type storediSCSIVolume = {
 @as("TargetName") targetName: option<targetName>,
-@as("KMSKey") kmskey: option<kmskey>,
-@as("VolumeUsedInBytes") volumeUsedInBytes: option<volumeUsedInBytes>,
-@as("CreatedDate") createdDate: option<createdDate>,
-@as("VolumeiSCSIAttributes") volumeiSCSIAttributes: option<volumeiSCSIAttributes>,
-@as("PreservedExistingData") preservedExistingData: option<boolean2>,
-@as("SourceSnapshotId") sourceSnapshotId: option<snapshotId>,
-@as("VolumeDiskId") volumeDiskId: option<diskId>,
-@as("VolumeProgress") volumeProgress: option<doubleObject>,
-@as("VolumeSizeInBytes") volumeSizeInBytes: option<long>,
-@as("VolumeAttachmentStatus") volumeAttachmentStatus: option<volumeAttachmentStatus>,
-@as("VolumeStatus") volumeStatus: option<volumeStatus>,
-@as("VolumeType") volumeType: option<volumeType>,
-@as("VolumeId") volumeId: option<volumeId>,
-@as("VolumeARN") volumeARN: option<volumeARN>
+  @as("KMSKey") kmskey: option<kmskey>,
+  @as("VolumeUsedInBytes") volumeUsedInBytes: option<volumeUsedInBytes>,
+  @as("CreatedDate") createdDate: option<createdDate>,
+  @as("VolumeiSCSIAttributes") volumeiSCSIAttributes: option<volumeiSCSIAttributes>,
+  @as("PreservedExistingData") preservedExistingData: option<boolean2>,
+  @as("SourceSnapshotId") sourceSnapshotId: option<snapshotId>,
+  @as("VolumeDiskId") volumeDiskId: option<diskId>,
+  @as("VolumeProgress") volumeProgress: option<doubleObject>,
+  @as("VolumeSizeInBytes") volumeSizeInBytes: option<long>,
+  @as("VolumeAttachmentStatus") volumeAttachmentStatus: option<volumeAttachmentStatus>,
+  @as("VolumeStatus") volumeStatus: option<volumeStatus>,
+  @as("VolumeType") volumeType: option<volumeType>,
+  @as("VolumeId") volumeId: option<volumeId>,
+  @as("VolumeARN") volumeARN: option<volumeARN>
 }
 type storageGatewayError = {
 errorDetails: option<errorDetails>,
-errorCode: option<errorCode>
+  errorCode: option<errorCode>
 }
 type poolInfos = array<poolInfo>
 type gateways = array<gatewayInfo>
@@ -322,120 +328,119 @@ type fileSystemAssociationSummaryList = array<fileSystemAssociationSummary>
 type fileShareInfoList = array<fileShareInfo>
 type disk = {
 @as("DiskAttributeList") diskAttributeList: option<diskAttributeList>,
-@as("DiskAllocationResource") diskAllocationResource: option<string_>,
-@as("DiskAllocationType") diskAllocationType: option<diskAllocationType>,
-@as("DiskSizeInBytes") diskSizeInBytes: option<long>,
-@as("DiskStatus") diskStatus: option<string_>,
-@as("DiskNode") diskNode: option<string_>,
-@as("DiskPath") diskPath: option<string_>,
-@as("DiskId") diskId: option<diskId>
+  @as("DiskAllocationResource") diskAllocationResource: option<string_>,
+  @as("DiskAllocationType") diskAllocationType: option<diskAllocationType>,
+  @as("DiskSizeInBytes") diskSizeInBytes: option<long>,
+  @as("DiskStatus") diskStatus: option<string_>,
+  @as("DiskNode") diskNode: option<string_>,
+  @as("DiskPath") diskPath: option<string_>,
+  @as("DiskId") diskId: option<diskId>
 }
 type chapCredentials = array<chapInfo>
 type cachediSCSIVolume = {
 @as("TargetName") targetName: option<targetName>,
-@as("KMSKey") kmskey: option<kmskey>,
-@as("VolumeUsedInBytes") volumeUsedInBytes: option<volumeUsedInBytes>,
-@as("CreatedDate") createdDate: option<createdDate>,
-@as("VolumeiSCSIAttributes") volumeiSCSIAttributes: option<volumeiSCSIAttributes>,
-@as("SourceSnapshotId") sourceSnapshotId: option<snapshotId>,
-@as("VolumeProgress") volumeProgress: option<doubleObject>,
-@as("VolumeSizeInBytes") volumeSizeInBytes: option<long>,
-@as("VolumeAttachmentStatus") volumeAttachmentStatus: option<volumeAttachmentStatus>,
-@as("VolumeStatus") volumeStatus: option<volumeStatus>,
-@as("VolumeType") volumeType: option<volumeType>,
-@as("VolumeId") volumeId: option<volumeId>,
-@as("VolumeARN") volumeARN: option<volumeARN>
+  @as("KMSKey") kmskey: option<kmskey>,
+  @as("VolumeUsedInBytes") volumeUsedInBytes: option<volumeUsedInBytes>,
+  @as("CreatedDate") createdDate: option<createdDate>,
+  @as("VolumeiSCSIAttributes") volumeiSCSIAttributes: option<volumeiSCSIAttributes>,
+  @as("SourceSnapshotId") sourceSnapshotId: option<snapshotId>,
+  @as("VolumeProgress") volumeProgress: option<doubleObject>,
+  @as("VolumeSizeInBytes") volumeSizeInBytes: option<long>,
+  @as("VolumeAttachmentStatus") volumeAttachmentStatus: option<volumeAttachmentStatus>,
+  @as("VolumeStatus") volumeStatus: option<volumeStatus>,
+  @as("VolumeType") volumeType: option<volumeType>,
+  @as("VolumeId") volumeId: option<volumeId>,
+  @as("VolumeARN") volumeARN: option<volumeARN>
 }
 type bandwidthRateLimitInterval = {
 @as("AverageDownloadRateLimitInBitsPerSec") averageDownloadRateLimitInBitsPerSec: option<bandwidthDownloadRateLimit>,
-@as("AverageUploadRateLimitInBitsPerSec") averageUploadRateLimitInBitsPerSec: option<bandwidthUploadRateLimit>,
-@as("DaysOfWeek") daysOfWeek: daysOfWeek,
-@as("EndMinuteOfHour") endMinuteOfHour: minuteOfHour,
-@as("EndHourOfDay") endHourOfDay: hourOfDay,
-@as("StartMinuteOfHour") startMinuteOfHour: minuteOfHour,
-@as("StartHourOfDay") startHourOfDay: hourOfDay
+  @as("AverageUploadRateLimitInBitsPerSec") averageUploadRateLimitInBitsPerSec: option<bandwidthUploadRateLimit>,
+  @as("DaysOfWeek") daysOfWeek: daysOfWeek,
+  @as("EndMinuteOfHour") endMinuteOfHour: minuteOfHour,
+  @as("EndHourOfDay") endHourOfDay: hourOfDay,
+  @as("StartMinuteOfHour") startMinuteOfHour: minuteOfHour,
+  @as("StartHourOfDay") startHourOfDay: hourOfDay
 }
 type automaticTapeCreationRules = array<automaticTapeCreationRule>
 type vtldevices = array<vtldevice>
 type storediSCSIVolumes = array<storediSCSIVolume>
 type smbfileShareInfo = {
 @as("NotificationPolicy") notificationPolicy: option<notificationPolicy>,
-@as("CacheAttributes") cacheAttributes: option<cacheAttributes>,
-@as("FileShareName") fileShareName: option<fileShareName>,
-@as("Tags") tags: option<tags>,
-@as("CaseSensitivity") caseSensitivity: option<caseSensitivity>,
-@as("Authentication") authentication: option<authentication>,
-@as("AuditDestinationARN") auditDestinationARN: option<auditDestinationARN>,
-@as("InvalidUserList") invalidUserList: option<userList>,
-@as("ValidUserList") validUserList: option<userList>,
-@as("AdminUserList") adminUserList: option<userList>,
-@as("AccessBasedEnumeration") accessBasedEnumeration: option<boolean_>,
-@as("SMBACLEnabled") smbaclenabled: option<boolean_>,
-@as("RequesterPays") requesterPays: option<boolean_>,
-@as("GuessMIMETypeEnabled") guessMIMETypeEnabled: option<boolean_>,
-@as("ReadOnly") readOnly: option<boolean_>,
-@as("ObjectACL") objectACL: option<objectACL>,
-@as("DefaultStorageClass") defaultStorageClass: option<storageClass>,
-@as("LocationARN") locationARN: option<locationARN>,
-@as("Role") role: option<role>,
-@as("Path") path: option<path>,
-@as("KMSKey") kmskey: option<kmskey>,
-@as("KMSEncrypted") kmsencrypted: option<boolean2>,
-@as("GatewayARN") gatewayARN: option<gatewayARN>,
-@as("FileShareStatus") fileShareStatus: option<fileShareStatus>,
-@as("FileShareId") fileShareId: option<fileShareId>,
-@as("FileShareARN") fileShareARN: option<fileShareARN>
+  @as("CacheAttributes") cacheAttributes: option<cacheAttributes>,
+  @as("FileShareName") fileShareName: option<fileShareName>,
+  @as("Tags") tags: option<tags>,
+  @as("CaseSensitivity") caseSensitivity: option<caseSensitivity>,
+  @as("Authentication") authentication: option<authentication>,
+  @as("AuditDestinationARN") auditDestinationARN: option<auditDestinationARN>,
+  @as("InvalidUserList") invalidUserList: option<userList>,
+  @as("ValidUserList") validUserList: option<userList>,
+  @as("AdminUserList") adminUserList: option<userList>,
+  @as("AccessBasedEnumeration") accessBasedEnumeration: option<boolean_>,
+  @as("SMBACLEnabled") smbaclenabled: option<boolean_>,
+  @as("RequesterPays") requesterPays: option<boolean_>,
+  @as("GuessMIMETypeEnabled") guessMIMETypeEnabled: option<boolean_>,
+  @as("ReadOnly") readOnly: option<boolean_>,
+  @as("ObjectACL") objectACL: option<objectACL>,
+  @as("DefaultStorageClass") defaultStorageClass: option<storageClass>,
+  @as("LocationARN") locationARN: option<locationARN>,
+  @as("Role") role: option<role>,
+  @as("Path") path: option<path>,
+  @as("KMSKey") kmskey: option<kmskey>,
+  @as("KMSEncrypted") kmsencrypted: option<boolean2>,
+  @as("GatewayARN") gatewayARN: option<gatewayARN>,
+  @as("FileShareStatus") fileShareStatus: option<fileShareStatus>,
+  @as("FileShareId") fileShareId: option<fileShareId>,
+  @as("FileShareARN") fileShareARN: option<fileShareARN>
 }
 type nfsfileShareInfo = {
 @as("NotificationPolicy") notificationPolicy: option<notificationPolicy>,
-@as("CacheAttributes") cacheAttributes: option<cacheAttributes>,
-@as("FileShareName") fileShareName: option<fileShareName>,
-@as("Tags") tags: option<tags>,
-@as("RequesterPays") requesterPays: option<boolean_>,
-@as("GuessMIMETypeEnabled") guessMIMETypeEnabled: option<boolean_>,
-@as("ReadOnly") readOnly: option<boolean_>,
-@as("Squash") squash: option<squash>,
-@as("ClientList") clientList: option<fileShareClientList>,
-@as("ObjectACL") objectACL: option<objectACL>,
-@as("DefaultStorageClass") defaultStorageClass: option<storageClass>,
-@as("LocationARN") locationARN: option<locationARN>,
-@as("Role") role: option<role>,
-@as("Path") path: option<path>,
-@as("KMSKey") kmskey: option<kmskey>,
-@as("KMSEncrypted") kmsencrypted: option<boolean2>,
-@as("GatewayARN") gatewayARN: option<gatewayARN>,
-@as("FileShareStatus") fileShareStatus: option<fileShareStatus>,
-@as("FileShareId") fileShareId: option<fileShareId>,
-@as("FileShareARN") fileShareARN: option<fileShareARN>,
-@as("NFSFileShareDefaults") nfsfileShareDefaults: option<nfsfileShareDefaults>
+  @as("CacheAttributes") cacheAttributes: option<cacheAttributes>,
+  @as("FileShareName") fileShareName: option<fileShareName>,
+  @as("Tags") tags: option<tags>,
+  @as("RequesterPays") requesterPays: option<boolean_>,
+  @as("GuessMIMETypeEnabled") guessMIMETypeEnabled: option<boolean_>,
+  @as("ReadOnly") readOnly: option<boolean_>,
+  @as("Squash") squash: option<squash>,
+  @as("ClientList") clientList: option<fileShareClientList>,
+  @as("ObjectACL") objectACL: option<objectACL>,
+  @as("DefaultStorageClass") defaultStorageClass: option<storageClass>,
+  @as("LocationARN") locationARN: option<locationARN>,
+  @as("Role") role: option<role>,
+  @as("Path") path: option<path>,
+  @as("KMSKey") kmskey: option<kmskey>,
+  @as("KMSEncrypted") kmsencrypted: option<boolean2>,
+  @as("GatewayARN") gatewayARN: option<gatewayARN>,
+  @as("FileShareStatus") fileShareStatus: option<fileShareStatus>,
+  @as("FileShareId") fileShareId: option<fileShareId>,
+  @as("FileShareARN") fileShareARN: option<fileShareARN>,
+  @as("NFSFileShareDefaults") nfsfileShareDefaults: option<nfsfileShareDefaults>
 }
 type fileSystemAssociationInfo = {
 @as("CacheAttributes") cacheAttributes: option<cacheAttributes>,
-@as("Tags") tags: option<tags>,
-@as("GatewayARN") gatewayARN: option<gatewayARN>,
-@as("AuditDestinationARN") auditDestinationARN: option<auditDestinationARN>,
-@as("FileSystemAssociationStatus") fileSystemAssociationStatus: option<fileSystemAssociationStatus>,
-@as("LocationARN") locationARN: option<fileSystemLocationARN>,
-@as("FileSystemAssociationARN") fileSystemAssociationARN: option<fileSystemAssociationARN>
+  @as("Tags") tags: option<tags>,
+  @as("GatewayARN") gatewayARN: option<gatewayARN>,
+  @as("AuditDestinationARN") auditDestinationARN: option<auditDestinationARN>,
+  @as("FileSystemAssociationStatus") fileSystemAssociationStatus: option<fileSystemAssociationStatus>,
+  @as("LocationARN") locationARN: option<fileSystemLocationARN>,
+  @as("FileSystemAssociationARN") fileSystemAssociationARN: option<fileSystemAssociationARN>
 }
 type disks = array<disk>
 type cachediSCSIVolumes = array<cachediSCSIVolume>
 type bandwidthRateLimitIntervals = array<bandwidthRateLimitInterval>
 type automaticTapeCreationPolicyInfo = {
 @as("GatewayARN") gatewayARN: option<gatewayARN>,
-@as("AutomaticTapeCreationRules") automaticTapeCreationRules: option<automaticTapeCreationRules>
+  @as("AutomaticTapeCreationRules") automaticTapeCreationRules: option<automaticTapeCreationRules>
 }
 type smbfileShareInfoList = array<smbfileShareInfo>
 type nfsfileShareInfoList = array<nfsfileShareInfo>
 type fileSystemAssociationInfoList = array<fileSystemAssociationInfo>
 type automaticTapeCreationPolicyInfos = array<automaticTapeCreationPolicyInfo>
-type awsServiceClient;
-@module("@aws-sdk/client-storagegateway") @new external createClient: unit => awsServiceClient = "StorageGatewayClient";
+
 module UpdateVTLDeviceType = {
   type t;
   type request = {
 @as("DeviceType") deviceType: deviceType,
-@as("VTLDeviceARN") vtldeviceARN: vtldeviceARN
+  @as("VTLDeviceARN") vtldeviceARN: vtldeviceARN
 }
   type response = {
 @as("VTLDeviceARN") vtldeviceARN: option<vtldeviceARN>
@@ -448,10 +453,10 @@ module UpdateSnapshotSchedule = {
   type t;
   type request = {
 @as("Tags") tags: option<tags>,
-@as("Description") description: option<description>,
-@as("RecurrenceInHours") recurrenceInHours: recurrenceInHours,
-@as("StartAt") startAt: hourOfDay,
-@as("VolumeARN") volumeARN: volumeARN
+  @as("Description") description: option<description>,
+  @as("RecurrenceInHours") recurrenceInHours: recurrenceInHours,
+  @as("StartAt") startAt: hourOfDay,
+  @as("VolumeARN") volumeARN: volumeARN
 }
   type response = {
 @as("VolumeARN") volumeARN: option<volumeARN>
@@ -464,7 +469,7 @@ module UpdateSMBSecurityStrategy = {
   type t;
   type request = {
 @as("SMBSecurityStrategy") smbsecurityStrategy: smbsecurityStrategy,
-@as("GatewayARN") gatewayARN: gatewayARN
+  @as("GatewayARN") gatewayARN: gatewayARN
 }
   type response = {
 @as("GatewayARN") gatewayARN: option<gatewayARN>
@@ -477,7 +482,7 @@ module UpdateSMBFileShareVisibility = {
   type t;
   type request = {
 @as("FileSharesVisible") fileSharesVisible: boolean_,
-@as("GatewayARN") gatewayARN: gatewayARN
+  @as("GatewayARN") gatewayARN: gatewayARN
 }
   type response = {
 @as("GatewayARN") gatewayARN: option<gatewayARN>
@@ -490,23 +495,23 @@ module UpdateSMBFileShare = {
   type t;
   type request = {
 @as("NotificationPolicy") notificationPolicy: option<notificationPolicy>,
-@as("CacheAttributes") cacheAttributes: option<cacheAttributes>,
-@as("FileShareName") fileShareName: option<fileShareName>,
-@as("CaseSensitivity") caseSensitivity: option<caseSensitivity>,
-@as("AuditDestinationARN") auditDestinationARN: option<auditDestinationARN>,
-@as("InvalidUserList") invalidUserList: option<userList>,
-@as("ValidUserList") validUserList: option<userList>,
-@as("AdminUserList") adminUserList: option<userList>,
-@as("AccessBasedEnumeration") accessBasedEnumeration: option<boolean_>,
-@as("SMBACLEnabled") smbaclenabled: option<boolean_>,
-@as("RequesterPays") requesterPays: option<boolean_>,
-@as("GuessMIMETypeEnabled") guessMIMETypeEnabled: option<boolean_>,
-@as("ReadOnly") readOnly: option<boolean_>,
-@as("ObjectACL") objectACL: option<objectACL>,
-@as("DefaultStorageClass") defaultStorageClass: option<storageClass>,
-@as("KMSKey") kmskey: option<kmskey>,
-@as("KMSEncrypted") kmsencrypted: option<boolean_>,
-@as("FileShareARN") fileShareARN: fileShareARN
+  @as("CacheAttributes") cacheAttributes: option<cacheAttributes>,
+  @as("FileShareName") fileShareName: option<fileShareName>,
+  @as("CaseSensitivity") caseSensitivity: option<caseSensitivity>,
+  @as("AuditDestinationARN") auditDestinationARN: option<auditDestinationARN>,
+  @as("InvalidUserList") invalidUserList: option<userList>,
+  @as("ValidUserList") validUserList: option<userList>,
+  @as("AdminUserList") adminUserList: option<userList>,
+  @as("AccessBasedEnumeration") accessBasedEnumeration: option<boolean_>,
+  @as("SMBACLEnabled") smbaclenabled: option<boolean_>,
+  @as("RequesterPays") requesterPays: option<boolean_>,
+  @as("GuessMIMETypeEnabled") guessMIMETypeEnabled: option<boolean_>,
+  @as("ReadOnly") readOnly: option<boolean_>,
+  @as("ObjectACL") objectACL: option<objectACL>,
+  @as("DefaultStorageClass") defaultStorageClass: option<storageClass>,
+  @as("KMSKey") kmskey: option<kmskey>,
+  @as("KMSEncrypted") kmsencrypted: option<boolean_>,
+  @as("FileShareARN") fileShareARN: fileShareARN
 }
   type response = {
 @as("FileShareARN") fileShareARN: option<fileShareARN>
@@ -519,19 +524,19 @@ module UpdateNFSFileShare = {
   type t;
   type request = {
 @as("NotificationPolicy") notificationPolicy: option<notificationPolicy>,
-@as("CacheAttributes") cacheAttributes: option<cacheAttributes>,
-@as("FileShareName") fileShareName: option<fileShareName>,
-@as("RequesterPays") requesterPays: option<boolean_>,
-@as("GuessMIMETypeEnabled") guessMIMETypeEnabled: option<boolean_>,
-@as("ReadOnly") readOnly: option<boolean_>,
-@as("Squash") squash: option<squash>,
-@as("ClientList") clientList: option<fileShareClientList>,
-@as("ObjectACL") objectACL: option<objectACL>,
-@as("DefaultStorageClass") defaultStorageClass: option<storageClass>,
-@as("NFSFileShareDefaults") nfsfileShareDefaults: option<nfsfileShareDefaults>,
-@as("KMSKey") kmskey: option<kmskey>,
-@as("KMSEncrypted") kmsencrypted: option<boolean_>,
-@as("FileShareARN") fileShareARN: fileShareARN
+  @as("CacheAttributes") cacheAttributes: option<cacheAttributes>,
+  @as("FileShareName") fileShareName: option<fileShareName>,
+  @as("RequesterPays") requesterPays: option<boolean_>,
+  @as("GuessMIMETypeEnabled") guessMIMETypeEnabled: option<boolean_>,
+  @as("ReadOnly") readOnly: option<boolean_>,
+  @as("Squash") squash: option<squash>,
+  @as("ClientList") clientList: option<fileShareClientList>,
+  @as("ObjectACL") objectACL: option<objectACL>,
+  @as("DefaultStorageClass") defaultStorageClass: option<storageClass>,
+  @as("NFSFileShareDefaults") nfsfileShareDefaults: option<nfsfileShareDefaults>,
+  @as("KMSKey") kmskey: option<kmskey>,
+  @as("KMSEncrypted") kmsencrypted: option<boolean_>,
+  @as("FileShareARN") fileShareARN: fileShareARN
 }
   type response = {
 @as("FileShareARN") fileShareARN: option<fileShareARN>
@@ -544,10 +549,10 @@ module UpdateMaintenanceStartTime = {
   type t;
   type request = {
 @as("DayOfMonth") dayOfMonth: option<dayOfMonth>,
-@as("DayOfWeek") dayOfWeek: option<dayOfWeek>,
-@as("MinuteOfHour") minuteOfHour: minuteOfHour,
-@as("HourOfDay") hourOfDay: hourOfDay,
-@as("GatewayARN") gatewayARN: gatewayARN
+  @as("DayOfWeek") dayOfWeek: option<dayOfWeek>,
+  @as("MinuteOfHour") minuteOfHour: minuteOfHour,
+  @as("HourOfDay") hourOfDay: hourOfDay,
+  @as("GatewayARN") gatewayARN: gatewayARN
 }
   type response = {
 @as("GatewayARN") gatewayARN: option<gatewayARN>
@@ -572,13 +577,13 @@ module UpdateGatewayInformation = {
   type t;
   type request = {
 @as("CloudWatchLogGroupARN") cloudWatchLogGroupARN: option<cloudWatchLogGroupARN>,
-@as("GatewayTimezone") gatewayTimezone: option<gatewayTimezone>,
-@as("GatewayName") gatewayName: option<gatewayName>,
-@as("GatewayARN") gatewayARN: gatewayARN
+  @as("GatewayTimezone") gatewayTimezone: option<gatewayTimezone>,
+  @as("GatewayName") gatewayName: option<gatewayName>,
+  @as("GatewayARN") gatewayARN: gatewayARN
 }
   type response = {
 @as("GatewayName") gatewayName: option<string_>,
-@as("GatewayARN") gatewayARN: option<gatewayARN>
+  @as("GatewayARN") gatewayARN: option<gatewayARN>
 }
   @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "UpdateGatewayInformationCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -588,10 +593,10 @@ module UpdateFileSystemAssociation = {
   type t;
   type request = {
 @as("CacheAttributes") cacheAttributes: option<cacheAttributes>,
-@as("AuditDestinationARN") auditDestinationARN: option<auditDestinationARN>,
-@as("Password") password: option<domainUserPassword>,
-@as("UserName") userName: option<domainUserName>,
-@as("FileSystemAssociationARN") fileSystemAssociationARN: fileSystemAssociationARN
+  @as("AuditDestinationARN") auditDestinationARN: option<auditDestinationARN>,
+  @as("Password") password: option<domainUserPassword>,
+  @as("UserName") userName: option<domainUserName>,
+  @as("FileSystemAssociationARN") fileSystemAssociationARN: fileSystemAssociationARN
 }
   type response = {
 @as("FileSystemAssociationARN") fileSystemAssociationARN: option<fileSystemAssociationARN>
@@ -604,13 +609,13 @@ module UpdateChapCredentials = {
   type t;
   type request = {
 @as("SecretToAuthenticateTarget") secretToAuthenticateTarget: option<chapSecret>,
-@as("InitiatorName") initiatorName: iqnName,
-@as("SecretToAuthenticateInitiator") secretToAuthenticateInitiator: chapSecret,
-@as("TargetARN") targetARN: targetARN
+  @as("InitiatorName") initiatorName: iqnName,
+  @as("SecretToAuthenticateInitiator") secretToAuthenticateInitiator: chapSecret,
+  @as("TargetARN") targetARN: targetARN
 }
   type response = {
 @as("InitiatorName") initiatorName: option<iqnName>,
-@as("TargetARN") targetARN: option<targetARN>
+  @as("TargetARN") targetARN: option<targetARN>
 }
   @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "UpdateChapCredentialsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -620,8 +625,8 @@ module UpdateBandwidthRateLimit = {
   type t;
   type request = {
 @as("AverageDownloadRateLimitInBitsPerSec") averageDownloadRateLimitInBitsPerSec: option<bandwidthDownloadRateLimit>,
-@as("AverageUploadRateLimitInBitsPerSec") averageUploadRateLimitInBitsPerSec: option<bandwidthUploadRateLimit>,
-@as("GatewayARN") gatewayARN: gatewayARN
+  @as("AverageUploadRateLimitInBitsPerSec") averageUploadRateLimitInBitsPerSec: option<bandwidthUploadRateLimit>,
+  @as("GatewayARN") gatewayARN: gatewayARN
 }
   type response = {
 @as("GatewayARN") gatewayARN: option<gatewayARN>
@@ -634,7 +639,7 @@ module UpdateAutomaticTapeCreationPolicy = {
   type t;
   type request = {
 @as("GatewayARN") gatewayARN: gatewayARN,
-@as("AutomaticTapeCreationRules") automaticTapeCreationRules: automaticTapeCreationRules
+  @as("AutomaticTapeCreationRules") automaticTapeCreationRules: automaticTapeCreationRules
 }
   type response = {
 @as("GatewayARN") gatewayARN: option<gatewayARN>
@@ -683,7 +688,7 @@ module SetSMBGuestPassword = {
   type t;
   type request = {
 @as("Password") password: smbguestPassword,
-@as("GatewayARN") gatewayARN: gatewayARN
+  @as("GatewayARN") gatewayARN: gatewayARN
 }
   type response = {
 @as("GatewayARN") gatewayARN: option<gatewayARN>
@@ -696,7 +701,7 @@ module SetLocalConsolePassword = {
   type t;
   type request = {
 @as("LocalConsolePassword") localConsolePassword: localConsolePassword,
-@as("GatewayARN") gatewayARN: gatewayARN
+  @as("GatewayARN") gatewayARN: gatewayARN
 }
   type response = {
 @as("GatewayARN") gatewayARN: option<gatewayARN>
@@ -709,7 +714,7 @@ module RetrieveTapeRecoveryPoint = {
   type t;
   type request = {
 @as("GatewayARN") gatewayARN: gatewayARN,
-@as("TapeARN") tapeARN: tapeARN
+  @as("TapeARN") tapeARN: tapeARN
 }
   type response = {
 @as("TapeARN") tapeARN: option<tapeARN>
@@ -722,7 +727,7 @@ module RetrieveTapeArchive = {
   type t;
   type request = {
 @as("GatewayARN") gatewayARN: gatewayARN,
-@as("TapeARN") tapeARN: tapeARN
+  @as("TapeARN") tapeARN: tapeARN
 }
   type response = {
 @as("TapeARN") tapeARN: option<tapeARN>
@@ -747,7 +752,7 @@ module RemoveTagsFromResource = {
   type t;
   type request = {
 @as("TagKeys") tagKeys: tagKeys,
-@as("ResourceARN") resourceARN: resourceARN
+  @as("ResourceARN") resourceARN: resourceARN
 }
   type response = {
 @as("ResourceARN") resourceARN: option<resourceARN>
@@ -760,12 +765,12 @@ module RefreshCache = {
   type t;
   type request = {
 @as("Recursive") recursive: option<boolean_>,
-@as("FolderList") folderList: option<folderList>,
-@as("FileShareARN") fileShareARN: fileShareARN
+  @as("FolderList") folderList: option<folderList>,
+  @as("FileShareARN") fileShareARN: fileShareARN
 }
   type response = {
 @as("NotificationId") notificationId: option<notificationId>,
-@as("FileShareARN") fileShareARN: option<fileShareARN>
+  @as("FileShareARN") fileShareARN: option<fileShareARN>
 }
   @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "RefreshCacheCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -778,7 +783,7 @@ module NotifyWhenUploaded = {
 }
   type response = {
 @as("NotificationId") notificationId: option<notificationId>,
-@as("FileShareARN") fileShareARN: option<fileShareARN>
+  @as("FileShareARN") fileShareARN: option<fileShareARN>
 }
   @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "NotifyWhenUploadedCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -788,13 +793,13 @@ module ListVolumes = {
   type t;
   type request = {
 @as("Limit") limit: option<positiveIntObject>,
-@as("Marker") marker: option<marker>,
-@as("GatewayARN") gatewayARN: option<gatewayARN>
+  @as("Marker") marker: option<marker>,
+  @as("GatewayARN") gatewayARN: option<gatewayARN>
 }
   type response = {
 @as("VolumeInfos") volumeInfos: option<volumeInfos>,
-@as("Marker") marker: option<marker>,
-@as("GatewayARN") gatewayARN: option<gatewayARN>
+  @as("Marker") marker: option<marker>,
+  @as("GatewayARN") gatewayARN: option<gatewayARN>
 }
   @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "ListVolumesCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -807,7 +812,7 @@ module ListVolumeRecoveryPoints = {
 }
   type response = {
 @as("VolumeRecoveryPointInfos") volumeRecoveryPointInfos: option<volumeRecoveryPointInfos>,
-@as("GatewayARN") gatewayARN: option<gatewayARN>
+  @as("GatewayARN") gatewayARN: option<gatewayARN>
 }
   @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "ListVolumeRecoveryPointsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -829,12 +834,12 @@ module ListTapes = {
   type t;
   type request = {
 @as("Limit") limit: option<positiveIntObject>,
-@as("Marker") marker: option<marker>,
-@as("TapeARNs") tapeARNs: option<tapeARNs>
+  @as("Marker") marker: option<marker>,
+  @as("TapeARNs") tapeARNs: option<tapeARNs>
 }
   type response = {
 @as("Marker") marker: option<marker>,
-@as("TapeInfos") tapeInfos: option<tapeInfos>
+  @as("TapeInfos") tapeInfos: option<tapeInfos>
 }
   @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "ListTapesCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -844,12 +849,12 @@ module ListTapePools = {
   type t;
   type request = {
 @as("Limit") limit: option<positiveIntObject>,
-@as("Marker") marker: option<marker>,
-@as("PoolARNs") poolARNs: option<poolARNs>
+  @as("Marker") marker: option<marker>,
+  @as("PoolARNs") poolARNs: option<poolARNs>
 }
   type response = {
 @as("Marker") marker: option<marker>,
-@as("PoolInfos") poolInfos: option<poolInfos>
+  @as("PoolInfos") poolInfos: option<poolInfos>
 }
   @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "ListTapePoolsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -859,13 +864,13 @@ module ListTagsForResource = {
   type t;
   type request = {
 @as("Limit") limit: option<positiveIntObject>,
-@as("Marker") marker: option<marker>,
-@as("ResourceARN") resourceARN: resourceARN
+  @as("Marker") marker: option<marker>,
+  @as("ResourceARN") resourceARN: resourceARN
 }
   type response = {
 @as("Tags") tags: option<tags>,
-@as("Marker") marker: option<marker>,
-@as("ResourceARN") resourceARN: option<resourceARN>
+  @as("Marker") marker: option<marker>,
+  @as("ResourceARN") resourceARN: option<resourceARN>
 }
   @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -875,11 +880,11 @@ module ListGateways = {
   type t;
   type request = {
 @as("Limit") limit: option<positiveIntObject>,
-@as("Marker") marker: option<marker>
+  @as("Marker") marker: option<marker>
 }
   type response = {
 @as("Marker") marker: option<marker>,
-@as("Gateways") gateways: option<gateways>
+  @as("Gateways") gateways: option<gateways>
 }
   @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "ListGatewaysCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -889,13 +894,13 @@ module ListFileSystemAssociations = {
   type t;
   type request = {
 @as("Marker") marker: option<marker>,
-@as("Limit") limit: option<positiveIntObject>,
-@as("GatewayARN") gatewayARN: option<gatewayARN>
+  @as("Limit") limit: option<positiveIntObject>,
+  @as("GatewayARN") gatewayARN: option<gatewayARN>
 }
   type response = {
 @as("FileSystemAssociationSummaryList") fileSystemAssociationSummaryList: option<fileSystemAssociationSummaryList>,
-@as("NextMarker") nextMarker: option<marker>,
-@as("Marker") marker: option<marker>
+  @as("NextMarker") nextMarker: option<marker>,
+  @as("Marker") marker: option<marker>
 }
   @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "ListFileSystemAssociationsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -905,13 +910,13 @@ module ListFileShares = {
   type t;
   type request = {
 @as("Marker") marker: option<marker>,
-@as("Limit") limit: option<positiveIntObject>,
-@as("GatewayARN") gatewayARN: option<gatewayARN>
+  @as("Limit") limit: option<positiveIntObject>,
+  @as("GatewayARN") gatewayARN: option<gatewayARN>
 }
   type response = {
 @as("FileShareInfoList") fileShareInfoList: option<fileShareInfoList>,
-@as("NextMarker") nextMarker: option<marker>,
-@as("Marker") marker: option<marker>
+  @as("NextMarker") nextMarker: option<marker>,
+  @as("Marker") marker: option<marker>
 }
   @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "ListFileSharesCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -921,16 +926,16 @@ module JoinDomain = {
   type t;
   type request = {
 @as("Password") password: domainUserPassword,
-@as("UserName") userName: domainUserName,
-@as("TimeoutInSeconds") timeoutInSeconds: option<timeoutInSeconds>,
-@as("DomainControllers") domainControllers: option<hosts>,
-@as("OrganizationalUnit") organizationalUnit: option<organizationalUnit>,
-@as("DomainName") domainName: domainName,
-@as("GatewayARN") gatewayARN: gatewayARN
+  @as("UserName") userName: domainUserName,
+  @as("TimeoutInSeconds") timeoutInSeconds: option<timeoutInSeconds>,
+  @as("DomainControllers") domainControllers: option<hosts>,
+  @as("OrganizationalUnit") organizationalUnit: option<organizationalUnit>,
+  @as("DomainName") domainName: domainName,
+  @as("GatewayARN") gatewayARN: gatewayARN
 }
   type response = {
 @as("ActiveDirectoryStatus") activeDirectoryStatus: option<activeDirectoryStatus>,
-@as("GatewayARN") gatewayARN: option<gatewayARN>
+  @as("GatewayARN") gatewayARN: option<gatewayARN>
 }
   @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "JoinDomainCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -940,7 +945,7 @@ module DisassociateFileSystem = {
   type t;
   type request = {
 @as("ForceDelete") forceDelete: option<boolean2>,
-@as("FileSystemAssociationARN") fileSystemAssociationARN: fileSystemAssociationARN
+  @as("FileSystemAssociationARN") fileSystemAssociationARN: fileSystemAssociationARN
 }
   type response = {
 @as("FileSystemAssociationARN") fileSystemAssociationARN: option<fileSystemAssociationARN>
@@ -965,7 +970,7 @@ module DetachVolume = {
   type t;
   type request = {
 @as("ForceDetach") forceDetach: option<boolean_>,
-@as("VolumeARN") volumeARN: volumeARN
+  @as("VolumeARN") volumeARN: volumeARN
 }
   type response = {
 @as("VolumeARN") volumeARN: option<volumeARN>
@@ -981,9 +986,9 @@ module DescribeWorkingStorage = {
 }
   type response = {
 @as("WorkingStorageAllocatedInBytes") workingStorageAllocatedInBytes: option<long>,
-@as("WorkingStorageUsedInBytes") workingStorageUsedInBytes: option<long>,
-@as("DiskIds") diskIds: option<diskIds>,
-@as("GatewayARN") gatewayARN: option<gatewayARN>
+  @as("WorkingStorageUsedInBytes") workingStorageUsedInBytes: option<long>,
+  @as("DiskIds") diskIds: option<diskIds>,
+  @as("GatewayARN") gatewayARN: option<gatewayARN>
 }
   @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "DescribeWorkingStorageCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -996,9 +1001,9 @@ module DescribeUploadBuffer = {
 }
   type response = {
 @as("UploadBufferAllocatedInBytes") uploadBufferAllocatedInBytes: option<long>,
-@as("UploadBufferUsedInBytes") uploadBufferUsedInBytes: option<long>,
-@as("DiskIds") diskIds: option<diskIds>,
-@as("GatewayARN") gatewayARN: option<gatewayARN>
+  @as("UploadBufferUsedInBytes") uploadBufferUsedInBytes: option<long>,
+  @as("DiskIds") diskIds: option<diskIds>,
+  @as("GatewayARN") gatewayARN: option<gatewayARN>
 }
   @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "DescribeUploadBufferCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1008,13 +1013,13 @@ module DescribeTapes = {
   type t;
   type request = {
 @as("Limit") limit: option<positiveIntObject>,
-@as("Marker") marker: option<marker>,
-@as("TapeARNs") tapeARNs: option<tapeARNs>,
-@as("GatewayARN") gatewayARN: gatewayARN
+  @as("Marker") marker: option<marker>,
+  @as("TapeARNs") tapeARNs: option<tapeARNs>,
+  @as("GatewayARN") gatewayARN: gatewayARN
 }
   type response = {
 @as("Marker") marker: option<marker>,
-@as("Tapes") tapes: option<tapes>
+  @as("Tapes") tapes: option<tapes>
 }
   @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "DescribeTapesCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1024,13 +1029,13 @@ module DescribeTapeRecoveryPoints = {
   type t;
   type request = {
 @as("Limit") limit: option<positiveIntObject>,
-@as("Marker") marker: option<marker>,
-@as("GatewayARN") gatewayARN: gatewayARN
+  @as("Marker") marker: option<marker>,
+  @as("GatewayARN") gatewayARN: gatewayARN
 }
   type response = {
 @as("Marker") marker: option<marker>,
-@as("TapeRecoveryPointInfos") tapeRecoveryPointInfos: option<tapeRecoveryPointInfos>,
-@as("GatewayARN") gatewayARN: option<gatewayARN>
+  @as("TapeRecoveryPointInfos") tapeRecoveryPointInfos: option<tapeRecoveryPointInfos>,
+  @as("GatewayARN") gatewayARN: option<gatewayARN>
 }
   @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "DescribeTapeRecoveryPointsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1040,12 +1045,12 @@ module DescribeTapeArchives = {
   type t;
   type request = {
 @as("Limit") limit: option<positiveIntObject>,
-@as("Marker") marker: option<marker>,
-@as("TapeARNs") tapeARNs: option<tapeARNs>
+  @as("Marker") marker: option<marker>,
+  @as("TapeARNs") tapeARNs: option<tapeARNs>
 }
   type response = {
 @as("Marker") marker: option<marker>,
-@as("TapeArchives") tapeArchives: option<tapeArchives>
+  @as("TapeArchives") tapeArchives: option<tapeArchives>
 }
   @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "DescribeTapeArchivesCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1058,11 +1063,11 @@ module DescribeSnapshotSchedule = {
 }
   type response = {
 @as("Tags") tags: option<tags>,
-@as("Timezone") timezone: option<gatewayTimezone>,
-@as("Description") description: option<description>,
-@as("RecurrenceInHours") recurrenceInHours: option<recurrenceInHours>,
-@as("StartAt") startAt: option<hourOfDay>,
-@as("VolumeARN") volumeARN: option<volumeARN>
+  @as("Timezone") timezone: option<gatewayTimezone>,
+  @as("Description") description: option<description>,
+  @as("RecurrenceInHours") recurrenceInHours: option<recurrenceInHours>,
+  @as("StartAt") startAt: option<hourOfDay>,
+  @as("VolumeARN") volumeARN: option<volumeARN>
 }
   @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "DescribeSnapshotScheduleCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1075,11 +1080,11 @@ module DescribeSMBSettings = {
 }
   type response = {
 @as("FileSharesVisible") fileSharesVisible: option<boolean_>,
-@as("SMBSecurityStrategy") smbsecurityStrategy: option<smbsecurityStrategy>,
-@as("SMBGuestPasswordSet") smbguestPasswordSet: option<boolean_>,
-@as("ActiveDirectoryStatus") activeDirectoryStatus: option<activeDirectoryStatus>,
-@as("DomainName") domainName: option<domainName>,
-@as("GatewayARN") gatewayARN: option<gatewayARN>
+  @as("SMBSecurityStrategy") smbsecurityStrategy: option<smbsecurityStrategy>,
+  @as("SMBGuestPasswordSet") smbguestPasswordSet: option<boolean_>,
+  @as("ActiveDirectoryStatus") activeDirectoryStatus: option<activeDirectoryStatus>,
+  @as("DomainName") domainName: option<domainName>,
+  @as("GatewayARN") gatewayARN: option<gatewayARN>
 }
   @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "DescribeSMBSettingsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1092,11 +1097,11 @@ module DescribeMaintenanceStartTime = {
 }
   type response = {
 @as("Timezone") timezone: option<gatewayTimezone>,
-@as("DayOfMonth") dayOfMonth: option<dayOfMonth>,
-@as("DayOfWeek") dayOfWeek: option<dayOfWeek>,
-@as("MinuteOfHour") minuteOfHour: option<minuteOfHour>,
-@as("HourOfDay") hourOfDay: option<hourOfDay>,
-@as("GatewayARN") gatewayARN: option<gatewayARN>
+  @as("DayOfMonth") dayOfMonth: option<dayOfMonth>,
+  @as("DayOfWeek") dayOfWeek: option<dayOfWeek>,
+  @as("MinuteOfHour") minuteOfHour: option<minuteOfHour>,
+  @as("HourOfDay") hourOfDay: option<hourOfDay>,
+  @as("GatewayARN") gatewayARN: option<gatewayARN>
 }
   @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "DescribeMaintenanceStartTimeCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1109,23 +1114,23 @@ module DescribeGatewayInformation = {
 }
   type response = {
 @as("DeprecationDate") deprecationDate: option<deprecationDate>,
-@as("SoftwareUpdatesEndDate") softwareUpdatesEndDate: option<softwareUpdatesEndDate>,
-@as("EndpointType") endpointType: option<endpointType>,
-@as("HostEnvironment") hostEnvironment: option<hostEnvironment>,
-@as("CloudWatchLogGroupARN") cloudWatchLogGroupARN: option<cloudWatchLogGroupARN>,
-@as("VPCEndpoint") vpcendpoint: option<string_>,
-@as("Tags") tags: option<tags>,
-@as("Ec2InstanceRegion") ec2InstanceRegion: option<ec2InstanceRegion>,
-@as("Ec2InstanceId") ec2InstanceId: option<ec2InstanceId>,
-@as("LastSoftwareUpdate") lastSoftwareUpdate: option<lastSoftwareUpdate>,
-@as("NextUpdateAvailabilityDate") nextUpdateAvailabilityDate: option<nextUpdateAvailabilityDate>,
-@as("GatewayType") gatewayType: option<gatewayType>,
-@as("GatewayNetworkInterfaces") gatewayNetworkInterfaces: option<gatewayNetworkInterfaces>,
-@as("GatewayState") gatewayState: option<gatewayState>,
-@as("GatewayTimezone") gatewayTimezone: option<gatewayTimezone>,
-@as("GatewayName") gatewayName: option<string_>,
-@as("GatewayId") gatewayId: option<gatewayId>,
-@as("GatewayARN") gatewayARN: option<gatewayARN>
+  @as("SoftwareUpdatesEndDate") softwareUpdatesEndDate: option<softwareUpdatesEndDate>,
+  @as("EndpointType") endpointType: option<endpointType>,
+  @as("HostEnvironment") hostEnvironment: option<hostEnvironment>,
+  @as("CloudWatchLogGroupARN") cloudWatchLogGroupARN: option<cloudWatchLogGroupARN>,
+  @as("VPCEndpoint") vpcendpoint: option<string_>,
+  @as("Tags") tags: option<tags>,
+  @as("Ec2InstanceRegion") ec2InstanceRegion: option<ec2InstanceRegion>,
+  @as("Ec2InstanceId") ec2InstanceId: option<ec2InstanceId>,
+  @as("LastSoftwareUpdate") lastSoftwareUpdate: option<lastSoftwareUpdate>,
+  @as("NextUpdateAvailabilityDate") nextUpdateAvailabilityDate: option<nextUpdateAvailabilityDate>,
+  @as("GatewayType") gatewayType: option<gatewayType>,
+  @as("GatewayNetworkInterfaces") gatewayNetworkInterfaces: option<gatewayNetworkInterfaces>,
+  @as("GatewayState") gatewayState: option<gatewayState>,
+  @as("GatewayTimezone") gatewayTimezone: option<gatewayTimezone>,
+  @as("GatewayName") gatewayName: option<string_>,
+  @as("GatewayId") gatewayId: option<gatewayId>,
+  @as("GatewayARN") gatewayARN: option<gatewayARN>
 }
   @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "DescribeGatewayInformationCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1150,12 +1155,12 @@ module DescribeCache = {
 }
   type response = {
 @as("CacheMissPercentage") cacheMissPercentage: option<double>,
-@as("CacheHitPercentage") cacheHitPercentage: option<double>,
-@as("CacheDirtyPercentage") cacheDirtyPercentage: option<double>,
-@as("CacheUsedPercentage") cacheUsedPercentage: option<double>,
-@as("CacheAllocatedInBytes") cacheAllocatedInBytes: option<long>,
-@as("DiskIds") diskIds: option<diskIds>,
-@as("GatewayARN") gatewayARN: option<gatewayARN>
+  @as("CacheHitPercentage") cacheHitPercentage: option<double>,
+  @as("CacheDirtyPercentage") cacheDirtyPercentage: option<double>,
+  @as("CacheUsedPercentage") cacheUsedPercentage: option<double>,
+  @as("CacheAllocatedInBytes") cacheAllocatedInBytes: option<long>,
+  @as("DiskIds") diskIds: option<diskIds>,
+  @as("GatewayARN") gatewayARN: option<gatewayARN>
 }
   @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "DescribeCacheCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1168,8 +1173,8 @@ module DescribeBandwidthRateLimit = {
 }
   type response = {
 @as("AverageDownloadRateLimitInBitsPerSec") averageDownloadRateLimitInBitsPerSec: option<bandwidthDownloadRateLimit>,
-@as("AverageUploadRateLimitInBitsPerSec") averageUploadRateLimitInBitsPerSec: option<bandwidthUploadRateLimit>,
-@as("GatewayARN") gatewayARN: option<gatewayARN>
+  @as("AverageUploadRateLimitInBitsPerSec") averageUploadRateLimitInBitsPerSec: option<bandwidthUploadRateLimit>,
+  @as("GatewayARN") gatewayARN: option<gatewayARN>
 }
   @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "DescribeBandwidthRateLimitCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1182,8 +1187,8 @@ module DescribeAvailabilityMonitorTest = {
 }
   type response = {
 @as("StartTime") startTime: option<time>,
-@as("Status") status: option<availabilityMonitorTestStatus>,
-@as("GatewayARN") gatewayARN: option<gatewayARN>
+  @as("Status") status: option<availabilityMonitorTestStatus>,
+  @as("GatewayARN") gatewayARN: option<gatewayARN>
 }
   @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "DescribeAvailabilityMonitorTestCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1217,7 +1222,7 @@ module DeleteTapeArchive = {
   type t;
   type request = {
 @as("BypassGovernanceRetention") bypassGovernanceRetention: option<boolean2>,
-@as("TapeARN") tapeARN: tapeARN
+  @as("TapeARN") tapeARN: tapeARN
 }
   type response = {
 @as("TapeARN") tapeARN: option<tapeARN>
@@ -1230,8 +1235,8 @@ module DeleteTape = {
   type t;
   type request = {
 @as("BypassGovernanceRetention") bypassGovernanceRetention: option<boolean2>,
-@as("TapeARN") tapeARN: tapeARN,
-@as("GatewayARN") gatewayARN: gatewayARN
+  @as("TapeARN") tapeARN: tapeARN,
+  @as("GatewayARN") gatewayARN: gatewayARN
 }
   type response = {
 @as("TapeARN") tapeARN: option<tapeARN>
@@ -1268,7 +1273,7 @@ module DeleteFileShare = {
   type t;
   type request = {
 @as("ForceDelete") forceDelete: option<boolean2>,
-@as("FileShareARN") fileShareARN: fileShareARN
+  @as("FileShareARN") fileShareARN: fileShareARN
 }
   type response = {
 @as("FileShareARN") fileShareARN: option<fileShareARN>
@@ -1281,11 +1286,11 @@ module DeleteChapCredentials = {
   type t;
   type request = {
 @as("InitiatorName") initiatorName: iqnName,
-@as("TargetARN") targetARN: targetARN
+  @as("TargetARN") targetARN: targetARN
 }
   type response = {
 @as("InitiatorName") initiatorName: option<iqnName>,
-@as("TargetARN") targetARN: option<targetARN>
+  @as("TargetARN") targetARN: option<targetARN>
 }
   @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "DeleteChapCredentialsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1295,7 +1300,7 @@ module DeleteBandwidthRateLimit = {
   type t;
   type request = {
 @as("BandwidthType") bandwidthType: bandwidthType,
-@as("GatewayARN") gatewayARN: gatewayARN
+  @as("GatewayARN") gatewayARN: gatewayARN
 }
   type response = {
 @as("GatewayARN") gatewayARN: option<gatewayARN>
@@ -1320,15 +1325,15 @@ module CreateTapes = {
   type t;
   type request = {
 @as("Tags") tags: option<tags>,
-@as("Worm") worm: option<boolean2>,
-@as("PoolId") poolId: option<poolId>,
-@as("KMSKey") kmskey: option<kmskey>,
-@as("KMSEncrypted") kmsencrypted: option<boolean_>,
-@as("TapeBarcodePrefix") tapeBarcodePrefix: tapeBarcodePrefix,
-@as("NumTapesToCreate") numTapesToCreate: numTapesToCreate,
-@as("ClientToken") clientToken: clientToken,
-@as("TapeSizeInBytes") tapeSizeInBytes: tapeSize,
-@as("GatewayARN") gatewayARN: gatewayARN
+  @as("Worm") worm: option<boolean2>,
+  @as("PoolId") poolId: option<poolId>,
+  @as("KMSKey") kmskey: option<kmskey>,
+  @as("KMSEncrypted") kmsencrypted: option<boolean_>,
+  @as("TapeBarcodePrefix") tapeBarcodePrefix: tapeBarcodePrefix,
+  @as("NumTapesToCreate") numTapesToCreate: numTapesToCreate,
+  @as("ClientToken") clientToken: clientToken,
+  @as("TapeSizeInBytes") tapeSizeInBytes: tapeSize,
+  @as("GatewayARN") gatewayARN: gatewayARN
 }
   type response = {
 @as("TapeARNs") tapeARNs: option<tapeARNs>
@@ -1341,13 +1346,13 @@ module CreateTapeWithBarcode = {
   type t;
   type request = {
 @as("Tags") tags: option<tags>,
-@as("Worm") worm: option<boolean2>,
-@as("PoolId") poolId: option<poolId>,
-@as("KMSKey") kmskey: option<kmskey>,
-@as("KMSEncrypted") kmsencrypted: option<boolean_>,
-@as("TapeBarcode") tapeBarcode: tapeBarcode,
-@as("TapeSizeInBytes") tapeSizeInBytes: tapeSize,
-@as("GatewayARN") gatewayARN: gatewayARN
+  @as("Worm") worm: option<boolean2>,
+  @as("PoolId") poolId: option<poolId>,
+  @as("KMSKey") kmskey: option<kmskey>,
+  @as("KMSEncrypted") kmsencrypted: option<boolean_>,
+  @as("TapeBarcode") tapeBarcode: tapeBarcode,
+  @as("TapeSizeInBytes") tapeSizeInBytes: tapeSize,
+  @as("GatewayARN") gatewayARN: gatewayARN
 }
   type response = {
 @as("TapeARN") tapeARN: option<tapeARN>
@@ -1360,10 +1365,10 @@ module CreateTapePool = {
   type t;
   type request = {
 @as("Tags") tags: option<tags>,
-@as("RetentionLockTimeInDays") retentionLockTimeInDays: option<retentionLockTimeInDays>,
-@as("RetentionLockType") retentionLockType: option<retentionLockType>,
-@as("StorageClass") storageClass: tapeStorageClass,
-@as("PoolName") poolName: poolName
+  @as("RetentionLockTimeInDays") retentionLockTimeInDays: option<retentionLockTimeInDays>,
+  @as("RetentionLockType") retentionLockType: option<retentionLockType>,
+  @as("StorageClass") storageClass: tapeStorageClass,
+  @as("PoolName") poolName: poolName
 }
   type response = {
 @as("PoolARN") poolARN: option<poolARN>
@@ -1376,19 +1381,19 @@ module CreateStorediSCSIVolume = {
   type t;
   type request = {
 @as("Tags") tags: option<tags>,
-@as("KMSKey") kmskey: option<kmskey>,
-@as("KMSEncrypted") kmsencrypted: option<boolean_>,
-@as("NetworkInterfaceId") networkInterfaceId: networkInterfaceId,
-@as("TargetName") targetName: targetName,
-@as("PreserveExistingData") preserveExistingData: boolean2,
-@as("SnapshotId") snapshotId: option<snapshotId>,
-@as("DiskId") diskId: diskId,
-@as("GatewayARN") gatewayARN: gatewayARN
+  @as("KMSKey") kmskey: option<kmskey>,
+  @as("KMSEncrypted") kmsencrypted: option<boolean_>,
+  @as("NetworkInterfaceId") networkInterfaceId: networkInterfaceId,
+  @as("TargetName") targetName: targetName,
+  @as("PreserveExistingData") preserveExistingData: boolean2,
+  @as("SnapshotId") snapshotId: option<snapshotId>,
+  @as("DiskId") diskId: diskId,
+  @as("GatewayARN") gatewayARN: gatewayARN
 }
   type response = {
 @as("TargetARN") targetARN: option<targetARN>,
-@as("VolumeSizeInBytes") volumeSizeInBytes: option<long>,
-@as("VolumeARN") volumeARN: option<volumeARN>
+  @as("VolumeSizeInBytes") volumeSizeInBytes: option<long>,
+  @as("VolumeARN") volumeARN: option<volumeARN>
 }
   @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "CreateStorediSCSIVolumeCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1398,13 +1403,13 @@ module CreateSnapshotFromVolumeRecoveryPoint = {
   type t;
   type request = {
 @as("Tags") tags: option<tags>,
-@as("SnapshotDescription") snapshotDescription: snapshotDescription,
-@as("VolumeARN") volumeARN: volumeARN
+  @as("SnapshotDescription") snapshotDescription: snapshotDescription,
+  @as("VolumeARN") volumeARN: volumeARN
 }
   type response = {
 @as("VolumeRecoveryPointTime") volumeRecoveryPointTime: option<string_>,
-@as("VolumeARN") volumeARN: option<volumeARN>,
-@as("SnapshotId") snapshotId: option<snapshotId>
+  @as("VolumeARN") volumeARN: option<volumeARN>,
+  @as("SnapshotId") snapshotId: option<snapshotId>
 }
   @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "CreateSnapshotFromVolumeRecoveryPointCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1414,12 +1419,12 @@ module CreateSnapshot = {
   type t;
   type request = {
 @as("Tags") tags: option<tags>,
-@as("SnapshotDescription") snapshotDescription: snapshotDescription,
-@as("VolumeARN") volumeARN: volumeARN
+  @as("SnapshotDescription") snapshotDescription: snapshotDescription,
+  @as("VolumeARN") volumeARN: volumeARN
 }
   type response = {
 @as("SnapshotId") snapshotId: option<snapshotId>,
-@as("VolumeARN") volumeARN: option<volumeARN>
+  @as("VolumeARN") volumeARN: option<volumeARN>
 }
   @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "CreateSnapshotCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1429,28 +1434,28 @@ module CreateSMBFileShare = {
   type t;
   type request = {
 @as("NotificationPolicy") notificationPolicy: option<notificationPolicy>,
-@as("CacheAttributes") cacheAttributes: option<cacheAttributes>,
-@as("FileShareName") fileShareName: option<fileShareName>,
-@as("Tags") tags: option<tags>,
-@as("CaseSensitivity") caseSensitivity: option<caseSensitivity>,
-@as("Authentication") authentication: option<authentication>,
-@as("AuditDestinationARN") auditDestinationARN: option<auditDestinationARN>,
-@as("InvalidUserList") invalidUserList: option<userList>,
-@as("ValidUserList") validUserList: option<userList>,
-@as("AdminUserList") adminUserList: option<userList>,
-@as("AccessBasedEnumeration") accessBasedEnumeration: option<boolean_>,
-@as("SMBACLEnabled") smbaclenabled: option<boolean_>,
-@as("RequesterPays") requesterPays: option<boolean_>,
-@as("GuessMIMETypeEnabled") guessMIMETypeEnabled: option<boolean_>,
-@as("ReadOnly") readOnly: option<boolean_>,
-@as("ObjectACL") objectACL: option<objectACL>,
-@as("DefaultStorageClass") defaultStorageClass: option<storageClass>,
-@as("LocationARN") locationARN: locationARN,
-@as("Role") role: role,
-@as("KMSKey") kmskey: option<kmskey>,
-@as("KMSEncrypted") kmsencrypted: option<boolean_>,
-@as("GatewayARN") gatewayARN: gatewayARN,
-@as("ClientToken") clientToken: clientToken
+  @as("CacheAttributes") cacheAttributes: option<cacheAttributes>,
+  @as("FileShareName") fileShareName: option<fileShareName>,
+  @as("Tags") tags: option<tags>,
+  @as("CaseSensitivity") caseSensitivity: option<caseSensitivity>,
+  @as("Authentication") authentication: option<authentication>,
+  @as("AuditDestinationARN") auditDestinationARN: option<auditDestinationARN>,
+  @as("InvalidUserList") invalidUserList: option<userList>,
+  @as("ValidUserList") validUserList: option<userList>,
+  @as("AdminUserList") adminUserList: option<userList>,
+  @as("AccessBasedEnumeration") accessBasedEnumeration: option<boolean_>,
+  @as("SMBACLEnabled") smbaclenabled: option<boolean_>,
+  @as("RequesterPays") requesterPays: option<boolean_>,
+  @as("GuessMIMETypeEnabled") guessMIMETypeEnabled: option<boolean_>,
+  @as("ReadOnly") readOnly: option<boolean_>,
+  @as("ObjectACL") objectACL: option<objectACL>,
+  @as("DefaultStorageClass") defaultStorageClass: option<storageClass>,
+  @as("LocationARN") locationARN: locationARN,
+  @as("Role") role: role,
+  @as("KMSKey") kmskey: option<kmskey>,
+  @as("KMSEncrypted") kmsencrypted: option<boolean_>,
+  @as("GatewayARN") gatewayARN: gatewayARN,
+  @as("ClientToken") clientToken: clientToken
 }
   type response = {
 @as("FileShareARN") fileShareARN: option<fileShareARN>
@@ -1463,23 +1468,23 @@ module CreateNFSFileShare = {
   type t;
   type request = {
 @as("NotificationPolicy") notificationPolicy: option<notificationPolicy>,
-@as("CacheAttributes") cacheAttributes: option<cacheAttributes>,
-@as("FileShareName") fileShareName: option<fileShareName>,
-@as("Tags") tags: option<tags>,
-@as("RequesterPays") requesterPays: option<boolean_>,
-@as("GuessMIMETypeEnabled") guessMIMETypeEnabled: option<boolean_>,
-@as("ReadOnly") readOnly: option<boolean_>,
-@as("Squash") squash: option<squash>,
-@as("ClientList") clientList: option<fileShareClientList>,
-@as("ObjectACL") objectACL: option<objectACL>,
-@as("DefaultStorageClass") defaultStorageClass: option<storageClass>,
-@as("LocationARN") locationARN: locationARN,
-@as("Role") role: role,
-@as("KMSKey") kmskey: option<kmskey>,
-@as("KMSEncrypted") kmsencrypted: option<boolean_>,
-@as("GatewayARN") gatewayARN: gatewayARN,
-@as("NFSFileShareDefaults") nfsfileShareDefaults: option<nfsfileShareDefaults>,
-@as("ClientToken") clientToken: clientToken
+  @as("CacheAttributes") cacheAttributes: option<cacheAttributes>,
+  @as("FileShareName") fileShareName: option<fileShareName>,
+  @as("Tags") tags: option<tags>,
+  @as("RequesterPays") requesterPays: option<boolean_>,
+  @as("GuessMIMETypeEnabled") guessMIMETypeEnabled: option<boolean_>,
+  @as("ReadOnly") readOnly: option<boolean_>,
+  @as("Squash") squash: option<squash>,
+  @as("ClientList") clientList: option<fileShareClientList>,
+  @as("ObjectACL") objectACL: option<objectACL>,
+  @as("DefaultStorageClass") defaultStorageClass: option<storageClass>,
+  @as("LocationARN") locationARN: locationARN,
+  @as("Role") role: role,
+  @as("KMSKey") kmskey: option<kmskey>,
+  @as("KMSEncrypted") kmsencrypted: option<boolean_>,
+  @as("GatewayARN") gatewayARN: gatewayARN,
+  @as("NFSFileShareDefaults") nfsfileShareDefaults: option<nfsfileShareDefaults>,
+  @as("ClientToken") clientToken: clientToken
 }
   type response = {
 @as("FileShareARN") fileShareARN: option<fileShareARN>
@@ -1492,19 +1497,19 @@ module CreateCachediSCSIVolume = {
   type t;
   type request = {
 @as("Tags") tags: option<tags>,
-@as("KMSKey") kmskey: option<kmskey>,
-@as("KMSEncrypted") kmsencrypted: option<boolean_>,
-@as("ClientToken") clientToken: clientToken,
-@as("NetworkInterfaceId") networkInterfaceId: networkInterfaceId,
-@as("SourceVolumeARN") sourceVolumeARN: option<volumeARN>,
-@as("TargetName") targetName: targetName,
-@as("SnapshotId") snapshotId: option<snapshotId>,
-@as("VolumeSizeInBytes") volumeSizeInBytes: long,
-@as("GatewayARN") gatewayARN: gatewayARN
+  @as("KMSKey") kmskey: option<kmskey>,
+  @as("KMSEncrypted") kmsencrypted: option<boolean_>,
+  @as("ClientToken") clientToken: clientToken,
+  @as("NetworkInterfaceId") networkInterfaceId: networkInterfaceId,
+  @as("SourceVolumeARN") sourceVolumeARN: option<volumeARN>,
+  @as("TargetName") targetName: targetName,
+  @as("SnapshotId") snapshotId: option<snapshotId>,
+  @as("VolumeSizeInBytes") volumeSizeInBytes: long,
+  @as("GatewayARN") gatewayARN: gatewayARN
 }
   type response = {
 @as("TargetARN") targetARN: option<targetARN>,
-@as("VolumeARN") volumeARN: option<volumeARN>
+  @as("VolumeARN") volumeARN: option<volumeARN>
 }
   @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "CreateCachediSCSIVolumeCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1514,7 +1519,7 @@ module CancelRetrieval = {
   type t;
   type request = {
 @as("TapeARN") tapeARN: tapeARN,
-@as("GatewayARN") gatewayARN: gatewayARN
+  @as("GatewayARN") gatewayARN: gatewayARN
 }
   type response = {
 @as("TapeARN") tapeARN: option<tapeARN>
@@ -1527,7 +1532,7 @@ module CancelArchival = {
   type t;
   type request = {
 @as("TapeARN") tapeARN: tapeARN,
-@as("GatewayARN") gatewayARN: gatewayARN
+  @as("GatewayARN") gatewayARN: gatewayARN
 }
   type response = {
 @as("TapeARN") tapeARN: option<tapeARN>
@@ -1540,14 +1545,14 @@ module AttachVolume = {
   type t;
   type request = {
 @as("DiskId") diskId: option<diskId>,
-@as("NetworkInterfaceId") networkInterfaceId: networkInterfaceId,
-@as("VolumeARN") volumeARN: volumeARN,
-@as("TargetName") targetName: option<targetName>,
-@as("GatewayARN") gatewayARN: gatewayARN
+  @as("NetworkInterfaceId") networkInterfaceId: networkInterfaceId,
+  @as("VolumeARN") volumeARN: volumeARN,
+  @as("TargetName") targetName: option<targetName>,
+  @as("GatewayARN") gatewayARN: gatewayARN
 }
   type response = {
 @as("TargetARN") targetARN: option<targetARN>,
-@as("VolumeARN") volumeARN: option<volumeARN>
+  @as("VolumeARN") volumeARN: option<volumeARN>
 }
   @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "AttachVolumeCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1557,13 +1562,13 @@ module AssociateFileSystem = {
   type t;
   type request = {
 @as("CacheAttributes") cacheAttributes: option<cacheAttributes>,
-@as("AuditDestinationARN") auditDestinationARN: option<auditDestinationARN>,
-@as("Tags") tags: option<tags>,
-@as("LocationARN") locationARN: fileSystemLocationARN,
-@as("GatewayARN") gatewayARN: gatewayARN,
-@as("ClientToken") clientToken: clientToken,
-@as("Password") password: domainUserPassword,
-@as("UserName") userName: domainUserName
+  @as("AuditDestinationARN") auditDestinationARN: option<auditDestinationARN>,
+  @as("Tags") tags: option<tags>,
+  @as("LocationARN") locationARN: fileSystemLocationARN,
+  @as("GatewayARN") gatewayARN: gatewayARN,
+  @as("ClientToken") clientToken: clientToken,
+  @as("Password") password: domainUserPassword,
+  @as("UserName") userName: domainUserName
 }
   type response = {
 @as("FileSystemAssociationARN") fileSystemAssociationARN: option<fileSystemAssociationARN>
@@ -1576,8 +1581,8 @@ module AssignTapePool = {
   type t;
   type request = {
 @as("BypassGovernanceRetention") bypassGovernanceRetention: option<boolean2>,
-@as("PoolId") poolId: poolId,
-@as("TapeARN") tapeARN: tapeARN
+  @as("PoolId") poolId: poolId,
+  @as("TapeARN") tapeARN: tapeARN
 }
   type response = {
 @as("TapeARN") tapeARN: option<tapeARN>
@@ -1590,7 +1595,7 @@ module AddWorkingStorage = {
   type t;
   type request = {
 @as("DiskIds") diskIds: diskIds,
-@as("GatewayARN") gatewayARN: gatewayARN
+  @as("GatewayARN") gatewayARN: gatewayARN
 }
   type response = {
 @as("GatewayARN") gatewayARN: option<gatewayARN>
@@ -1603,7 +1608,7 @@ module AddUploadBuffer = {
   type t;
   type request = {
 @as("DiskIds") diskIds: diskIds,
-@as("GatewayARN") gatewayARN: gatewayARN
+  @as("GatewayARN") gatewayARN: gatewayARN
 }
   type response = {
 @as("GatewayARN") gatewayARN: option<gatewayARN>
@@ -1616,7 +1621,7 @@ module AddTagsToResource = {
   type t;
   type request = {
 @as("Tags") tags: tags,
-@as("ResourceARN") resourceARN: resourceARN
+  @as("ResourceARN") resourceARN: resourceARN
 }
   type response = {
 @as("ResourceARN") resourceARN: option<resourceARN>
@@ -1629,7 +1634,7 @@ module AddCache = {
   type t;
   type request = {
 @as("DiskIds") diskIds: diskIds,
-@as("GatewayARN") gatewayARN: gatewayARN
+  @as("GatewayARN") gatewayARN: gatewayARN
 }
   type response = {
 @as("GatewayARN") gatewayARN: option<gatewayARN>
@@ -1642,13 +1647,13 @@ module ActivateGateway = {
   type t;
   type request = {
 @as("Tags") tags: option<tags>,
-@as("MediumChangerType") mediumChangerType: option<mediumChangerType>,
-@as("TapeDriveType") tapeDriveType: option<tapeDriveType>,
-@as("GatewayType") gatewayType: option<gatewayType>,
-@as("GatewayRegion") gatewayRegion: regionId,
-@as("GatewayTimezone") gatewayTimezone: gatewayTimezone,
-@as("GatewayName") gatewayName: gatewayName,
-@as("ActivationKey") activationKey: activationKey
+  @as("MediumChangerType") mediumChangerType: option<mediumChangerType>,
+  @as("TapeDriveType") tapeDriveType: option<tapeDriveType>,
+  @as("GatewayType") gatewayType: option<gatewayType>,
+  @as("GatewayRegion") gatewayRegion: regionId,
+  @as("GatewayTimezone") gatewayTimezone: gatewayTimezone,
+  @as("GatewayName") gatewayName: gatewayName,
+  @as("ActivationKey") activationKey: activationKey
 }
   type response = {
 @as("GatewayARN") gatewayARN: option<gatewayARN>
@@ -1661,7 +1666,7 @@ module UpdateBandwidthRateLimitSchedule = {
   type t;
   type request = {
 @as("BandwidthRateLimitIntervals") bandwidthRateLimitIntervals: bandwidthRateLimitIntervals,
-@as("GatewayARN") gatewayARN: gatewayARN
+  @as("GatewayARN") gatewayARN: gatewayARN
 }
   type response = {
 @as("GatewayARN") gatewayARN: option<gatewayARN>
@@ -1677,7 +1682,7 @@ module ListLocalDisks = {
 }
   type response = {
 @as("Disks") disks: option<disks>,
-@as("GatewayARN") gatewayARN: option<gatewayARN>
+  @as("GatewayARN") gatewayARN: option<gatewayARN>
 }
   @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "ListLocalDisksCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1687,14 +1692,14 @@ module DescribeVTLDevices = {
   type t;
   type request = {
 @as("Limit") limit: option<positiveIntObject>,
-@as("Marker") marker: option<marker>,
-@as("VTLDeviceARNs") vtldeviceARNs: option<vtldeviceARNs>,
-@as("GatewayARN") gatewayARN: gatewayARN
+  @as("Marker") marker: option<marker>,
+  @as("VTLDeviceARNs") vtldeviceARNs: option<vtldeviceARNs>,
+  @as("GatewayARN") gatewayARN: gatewayARN
 }
   type response = {
 @as("Marker") marker: option<marker>,
-@as("VTLDevices") vtldevices: option<vtldevices>,
-@as("GatewayARN") gatewayARN: option<gatewayARN>
+  @as("VTLDevices") vtldevices: option<vtldevices>,
+  @as("GatewayARN") gatewayARN: option<gatewayARN>
 }
   @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "DescribeVTLDevicesCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -1731,7 +1736,7 @@ module DescribeBandwidthRateLimitSchedule = {
 }
   type response = {
 @as("BandwidthRateLimitIntervals") bandwidthRateLimitIntervals: option<bandwidthRateLimitIntervals>,
-@as("GatewayARN") gatewayARN: option<gatewayARN>
+  @as("GatewayARN") gatewayARN: option<gatewayARN>
 }
   @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "DescribeBandwidthRateLimitScheduleCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";

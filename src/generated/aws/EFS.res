@@ -5,14 +5,17 @@ httpStatusCode: option<float>,
   cfId: option<string>,
   attempts: option<int>,
   totalRetryDelay: option<int>
-};
-type string_ = string
-type boolean_ = bool
-type integer_ = int
-type long = float
+}
+type awsServiceClient;
+@module("@aws-sdk/client-elasticfilesystem") @new external createClient: unit => awsServiceClient = "EFSClient";
+type baseString = string
+type baseBoolean = bool
+type baseInteger = int
+type baseTimestamp = Js.Date.t;
+type baseLong = float
 type vpcId = string
 type uid = float
-type transitionToIARules = [@as("AFTER_90_DAYS") #AFTER90DAYS | @as("AFTER_60_DAYS") #AFTER60DAYS | @as("AFTER_30_DAYS") #AFTER30DAYS | @as("AFTER_14_DAYS") #AFTER14DAYS | @as("AFTER_7_DAYS") #AFTER7DAYS]
+type transitionToIARules = [@as("AFTER_90_DAYS") #AFTER_90_DAYS | @as("AFTER_60_DAYS") #AFTER_60_DAYS | @as("AFTER_30_DAYS") #AFTER_30_DAYS | @as("AFTER_14_DAYS") #AFTER_14_DAYS | @as("AFTER_7_DAYS") #AFTER_7_DAYS]
 type token = string
 type timestamp_ = Js.Date.t;
 type throughputMode = [@as("provisioned") #Provisioned | @as("bursting") #Bursting]
@@ -21,9 +24,9 @@ type tagKey = string
 type subnetId = string
 type status = [@as("DISABLING") #DISABLING | @as("DISABLED") #DISABLED | @as("ENABLING") #ENABLING | @as("ENABLED") #ENABLED]
 type securityGroup = string
-type resourceIdType = [@as("SHORT_ID") #SHORTID | @as("LONG_ID") #LONGID]
+type resourceIdType = [@as("SHORT_ID") #SHORT_ID | @as("LONG_ID") #LONG_ID]
 type resourceId = string
-type resource = [@as("MOUNT_TARGET") #MOUNTTARGET | @as("FILE_SYSTEM") #FILESYSTEM]
+type resource = [@as("MOUNT_TARGET") #MOUNT_TARGET | @as("FILE_SYSTEM") #FILE_SYSTEM]
 type provisionedThroughputInMibps = float
 type policy = string
 type permissions = string
@@ -61,36 +64,36 @@ type accessPointArn = string
 type tagKeys = array<tagKey>
 type tag = {
 @as("Value") value: tagValue,
-@as("Key") key: tagKey
+  @as("Key") key: tagKey
 }
 type securityGroups = array<securityGroup>
 type secondaryGids = array<gid>
 type resources = array<resource>
 type mountTargetDescription = {
 @as("VpcId") vpcId: option<vpcId>,
-@as("AvailabilityZoneName") availabilityZoneName: option<availabilityZoneName>,
-@as("AvailabilityZoneId") availabilityZoneId: option<availabilityZoneId>,
-@as("NetworkInterfaceId") networkInterfaceId: option<networkInterfaceId>,
-@as("IpAddress") ipAddress: option<ipAddress>,
-@as("LifeCycleState") lifeCycleState: lifeCycleState,
-@as("SubnetId") subnetId: subnetId,
-@as("FileSystemId") fileSystemId: fileSystemId,
-@as("MountTargetId") mountTargetId: mountTargetId,
-@as("OwnerId") ownerId: option<awsAccountId>
+  @as("AvailabilityZoneName") availabilityZoneName: option<availabilityZoneName>,
+  @as("AvailabilityZoneId") availabilityZoneId: option<availabilityZoneId>,
+  @as("NetworkInterfaceId") networkInterfaceId: option<networkInterfaceId>,
+  @as("IpAddress") ipAddress: option<ipAddress>,
+  @as("LifeCycleState") lifeCycleState: lifeCycleState,
+  @as("SubnetId") subnetId: subnetId,
+  @as("FileSystemId") fileSystemId: fileSystemId,
+  @as("MountTargetId") mountTargetId: mountTargetId,
+  @as("OwnerId") ownerId: option<awsAccountId>
 }
 type lifecyclePolicy = {
 @as("TransitionToIA") transitionToIA: option<transitionToIARules>
 }
 type fileSystemSize = {
 @as("ValueInStandard") valueInStandard: option<fileSystemNullableSizeValue>,
-@as("ValueInIA") valueInIA: option<fileSystemNullableSizeValue>,
-@as("Timestamp") timestamp_: option<timestamp_>,
-@as("Value") value: fileSystemSizeValue
+  @as("ValueInIA") valueInIA: option<fileSystemNullableSizeValue>,
+  @as("Timestamp") timestamp_: option<timestamp_>,
+  @as("Value") value: fileSystemSizeValue
 }
 type creationInfo = {
 @as("Permissions") permissions: permissions,
-@as("OwnerGid") ownerGid: ownerGid,
-@as("OwnerUid") ownerUid: ownerUid
+  @as("OwnerGid") ownerGid: ownerGid,
+  @as("OwnerUid") ownerUid: ownerUid
 }
 type backupPolicy = {
 @as("Status") status: status
@@ -98,64 +101,63 @@ type backupPolicy = {
 type tags = array<tag>
 type rootDirectory = {
 @as("CreationInfo") creationInfo: option<creationInfo>,
-@as("Path") path: option<path>
+  @as("Path") path: option<path>
 }
 type resourceIdPreference = {
 @as("Resources") resources: option<resources>,
-@as("ResourceIdType") resourceIdType: option<resourceIdType>
+  @as("ResourceIdType") resourceIdType: option<resourceIdType>
 }
 type posixUser = {
 @as("SecondaryGids") secondaryGids: option<secondaryGids>,
-@as("Gid") gid: gid,
-@as("Uid") uid: uid
+  @as("Gid") gid: gid,
+  @as("Uid") uid: uid
 }
 type mountTargetDescriptions = array<mountTargetDescription>
 type lifecyclePolicies = array<lifecyclePolicy>
 type fileSystemDescription = {
 @as("Tags") tags: tags,
-@as("AvailabilityZoneId") availabilityZoneId: option<availabilityZoneId>,
-@as("AvailabilityZoneName") availabilityZoneName: option<availabilityZoneName>,
-@as("ProvisionedThroughputInMibps") provisionedThroughputInMibps: option<provisionedThroughputInMibps>,
-@as("ThroughputMode") throughputMode: option<throughputMode>,
-@as("KmsKeyId") kmsKeyId: option<kmsKeyId>,
-@as("Encrypted") encrypted: option<encrypted>,
-@as("PerformanceMode") performanceMode: performanceMode,
-@as("SizeInBytes") sizeInBytes: fileSystemSize,
-@as("NumberOfMountTargets") numberOfMountTargets: mountTargetCount,
-@as("Name") name: option<tagValue>,
-@as("LifeCycleState") lifeCycleState: lifeCycleState,
-@as("CreationTime") creationTime: timestamp_,
-@as("FileSystemArn") fileSystemArn: option<fileSystemArn>,
-@as("FileSystemId") fileSystemId: fileSystemId,
-@as("CreationToken") creationToken: creationToken,
-@as("OwnerId") ownerId: awsAccountId
+  @as("AvailabilityZoneId") availabilityZoneId: option<availabilityZoneId>,
+  @as("AvailabilityZoneName") availabilityZoneName: option<availabilityZoneName>,
+  @as("ProvisionedThroughputInMibps") provisionedThroughputInMibps: option<provisionedThroughputInMibps>,
+  @as("ThroughputMode") throughputMode: option<throughputMode>,
+  @as("KmsKeyId") kmsKeyId: option<kmsKeyId>,
+  @as("Encrypted") encrypted: option<encrypted>,
+  @as("PerformanceMode") performanceMode: performanceMode,
+  @as("SizeInBytes") sizeInBytes: fileSystemSize,
+  @as("NumberOfMountTargets") numberOfMountTargets: mountTargetCount,
+  @as("Name") name: option<tagValue>,
+  @as("LifeCycleState") lifeCycleState: lifeCycleState,
+  @as("CreationTime") creationTime: timestamp_,
+  @as("FileSystemArn") fileSystemArn: option<fileSystemArn>,
+  @as("FileSystemId") fileSystemId: fileSystemId,
+  @as("CreationToken") creationToken: creationToken,
+  @as("OwnerId") ownerId: awsAccountId
 }
 type accessPointDescription = {
 @as("LifeCycleState") lifeCycleState: option<lifeCycleState>,
-@as("OwnerId") ownerId: option<awsAccountId>,
-@as("RootDirectory") rootDirectory: option<rootDirectory>,
-@as("PosixUser") posixUser: option<posixUser>,
-@as("FileSystemId") fileSystemId: option<fileSystemId>,
-@as("AccessPointArn") accessPointArn: option<accessPointArn>,
-@as("AccessPointId") accessPointId: option<accessPointId>,
-@as("Tags") tags: option<tags>,
-@as("Name") name: option<name>,
-@as("ClientToken") clientToken: option<clientToken>
+  @as("OwnerId") ownerId: option<awsAccountId>,
+  @as("RootDirectory") rootDirectory: option<rootDirectory>,
+  @as("PosixUser") posixUser: option<posixUser>,
+  @as("FileSystemId") fileSystemId: option<fileSystemId>,
+  @as("AccessPointArn") accessPointArn: option<accessPointArn>,
+  @as("AccessPointId") accessPointId: option<accessPointId>,
+  @as("Tags") tags: option<tags>,
+  @as("Name") name: option<name>,
+  @as("ClientToken") clientToken: option<clientToken>
 }
 type fileSystemDescriptions = array<fileSystemDescription>
 type accessPointDescriptions = array<accessPointDescription>
-type awsServiceClient;
-@module("@aws-sdk/client-elasticfilesystem") @new external createClient: unit => awsServiceClient = "EFSClient";
+
 module PutFileSystemPolicy = {
   type t;
   type request = {
 @as("BypassPolicyLockoutSafetyCheck") bypassPolicyLockoutSafetyCheck: option<bypassPolicyLockoutSafetyCheck>,
-@as("Policy") policy: policy,
-@as("FileSystemId") fileSystemId: fileSystemId
+  @as("Policy") policy: policy,
+  @as("FileSystemId") fileSystemId: fileSystemId
 }
   type response = {
 @as("Policy") policy: option<policy>,
-@as("FileSystemId") fileSystemId: option<fileSystemId>
+  @as("FileSystemId") fileSystemId: option<fileSystemId>
 }
   @module("@aws-sdk/client-elasticfilesystem") @new external new_: (request) => t = "PutFileSystemPolicyCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -168,7 +170,7 @@ module DescribeFileSystemPolicy = {
 }
   type response = {
 @as("Policy") policy: option<policy>,
-@as("FileSystemId") fileSystemId: option<fileSystemId>
+  @as("FileSystemId") fileSystemId: option<fileSystemId>
 }
   @module("@aws-sdk/client-elasticfilesystem") @new external new_: (request) => t = "DescribeFileSystemPolicyCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -218,7 +220,7 @@ module UntagResource = {
   type t;
   type request = {
 @as("TagKeys") tagKeys: tagKeys,
-@as("ResourceId") resourceId: resourceId
+  @as("ResourceId") resourceId: resourceId
 }
   
   @module("@aws-sdk/client-elasticfilesystem") @new external new_: (request) => t = "UntagResourceCommand";
@@ -229,7 +231,7 @@ module PutBackupPolicy = {
   type t;
   type request = {
 @as("BackupPolicy") backupPolicy: backupPolicy,
-@as("FileSystemId") fileSystemId: fileSystemId
+  @as("FileSystemId") fileSystemId: fileSystemId
 }
   type response = {
 @as("BackupPolicy") backupPolicy: option<backupPolicy>
@@ -242,7 +244,7 @@ module ModifyMountTargetSecurityGroups = {
   type t;
   type request = {
 @as("SecurityGroups") securityGroups: option<securityGroups>,
-@as("MountTargetId") mountTargetId: mountTargetId
+  @as("MountTargetId") mountTargetId: mountTargetId
 }
   
   @module("@aws-sdk/client-elasticfilesystem") @new external new_: (request) => t = "ModifyMountTargetSecurityGroupsCommand";
@@ -277,7 +279,7 @@ module DeleteTags = {
   type t;
   type request = {
 @as("TagKeys") tagKeys: tagKeys,
-@as("FileSystemId") fileSystemId: fileSystemId
+  @as("FileSystemId") fileSystemId: fileSystemId
 }
   
   @module("@aws-sdk/client-elasticfilesystem") @new external new_: (request) => t = "DeleteTagsCommand";
@@ -288,11 +290,11 @@ module CreateMountTarget = {
   type t;
   type request = {
 @as("SecurityGroups") securityGroups: option<securityGroups>,
-@as("IpAddress") ipAddress: option<ipAddress>,
-@as("SubnetId") subnetId: subnetId,
-@as("FileSystemId") fileSystemId: fileSystemId
+  @as("IpAddress") ipAddress: option<ipAddress>,
+  @as("SubnetId") subnetId: subnetId,
+  @as("FileSystemId") fileSystemId: fileSystemId
 }
-  type response = mountTargetDescription;
+  type response = mountTargetDescription
   @module("@aws-sdk/client-elasticfilesystem") @new external new_: (request) => t = "CreateMountTargetCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
@@ -301,10 +303,10 @@ module UpdateFileSystem = {
   type t;
   type request = {
 @as("ProvisionedThroughputInMibps") provisionedThroughputInMibps: option<provisionedThroughputInMibps>,
-@as("ThroughputMode") throughputMode: option<throughputMode>,
-@as("FileSystemId") fileSystemId: fileSystemId
+  @as("ThroughputMode") throughputMode: option<throughputMode>,
+  @as("FileSystemId") fileSystemId: fileSystemId
 }
-  type response = fileSystemDescription;
+  type response = fileSystemDescription
   @module("@aws-sdk/client-elasticfilesystem") @new external new_: (request) => t = "UpdateFileSystemCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
@@ -313,7 +315,7 @@ module TagResource = {
   type t;
   type request = {
 @as("Tags") tags: tags,
-@as("ResourceId") resourceId: resourceId
+  @as("ResourceId") resourceId: resourceId
 }
   
   @module("@aws-sdk/client-elasticfilesystem") @new external new_: (request) => t = "TagResourceCommand";
@@ -324,7 +326,7 @@ module PutLifecycleConfiguration = {
   type t;
   type request = {
 @as("LifecyclePolicies") lifecyclePolicies: lifecyclePolicies,
-@as("FileSystemId") fileSystemId: fileSystemId
+  @as("FileSystemId") fileSystemId: fileSystemId
 }
   type response = {
 @as("LifecyclePolicies") lifecyclePolicies: option<lifecyclePolicies>
@@ -349,12 +351,12 @@ module ListTagsForResource = {
   type t;
   type request = {
 @as("NextToken") nextToken: option<token>,
-@as("MaxResults") maxResults: option<maxResults>,
-@as("ResourceId") resourceId: resourceId
+  @as("MaxResults") maxResults: option<maxResults>,
+  @as("ResourceId") resourceId: resourceId
 }
   type response = {
 @as("NextToken") nextToken: option<token>,
-@as("Tags") tags: option<tags>
+  @as("Tags") tags: option<tags>
 }
   @module("@aws-sdk/client-elasticfilesystem") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -364,13 +366,13 @@ module DescribeTags = {
   type t;
   type request = {
 @as("FileSystemId") fileSystemId: fileSystemId,
-@as("Marker") marker: option<marker>,
-@as("MaxItems") maxItems: option<maxItems>
+  @as("Marker") marker: option<marker>,
+  @as("MaxItems") maxItems: option<maxItems>
 }
   type response = {
 @as("NextMarker") nextMarker: option<marker>,
-@as("Tags") tags: tags,
-@as("Marker") marker: option<marker>
+  @as("Tags") tags: tags,
+  @as("Marker") marker: option<marker>
 }
   @module("@aws-sdk/client-elasticfilesystem") @new external new_: (request) => t = "DescribeTagsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -380,15 +382,15 @@ module DescribeMountTargets = {
   type t;
   type request = {
 @as("AccessPointId") accessPointId: option<accessPointId>,
-@as("MountTargetId") mountTargetId: option<mountTargetId>,
-@as("FileSystemId") fileSystemId: option<fileSystemId>,
-@as("Marker") marker: option<marker>,
-@as("MaxItems") maxItems: option<maxItems>
+  @as("MountTargetId") mountTargetId: option<mountTargetId>,
+  @as("FileSystemId") fileSystemId: option<fileSystemId>,
+  @as("Marker") marker: option<marker>,
+  @as("MaxItems") maxItems: option<maxItems>
 }
   type response = {
 @as("NextMarker") nextMarker: option<marker>,
-@as("MountTargets") mountTargets: option<mountTargetDescriptions>,
-@as("Marker") marker: option<marker>
+  @as("MountTargets") mountTargets: option<mountTargetDescriptions>,
+  @as("Marker") marker: option<marker>
 }
   @module("@aws-sdk/client-elasticfilesystem") @new external new_: (request) => t = "DescribeMountTargetsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -410,11 +412,11 @@ module DescribeAccountPreferences = {
   type t;
   type request = {
 @as("MaxResults") maxResults: option<maxResults>,
-@as("NextToken") nextToken: option<token>
+  @as("NextToken") nextToken: option<token>
 }
   type response = {
 @as("NextToken") nextToken: option<token>,
-@as("ResourceIdPreference") resourceIdPreference: option<resourceIdPreference>
+  @as("ResourceIdPreference") resourceIdPreference: option<resourceIdPreference>
 }
   @module("@aws-sdk/client-elasticfilesystem") @new external new_: (request) => t = "DescribeAccountPreferencesCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -424,7 +426,7 @@ module CreateTags = {
   type t;
   type request = {
 @as("Tags") tags: tags,
-@as("FileSystemId") fileSystemId: fileSystemId
+  @as("FileSystemId") fileSystemId: fileSystemId
 }
   
   @module("@aws-sdk/client-elasticfilesystem") @new external new_: (request) => t = "CreateTagsCommand";
@@ -435,16 +437,16 @@ module CreateFileSystem = {
   type t;
   type request = {
 @as("Tags") tags: option<tags>,
-@as("Backup") backup: option<backup>,
-@as("AvailabilityZoneName") availabilityZoneName: option<availabilityZoneName>,
-@as("ProvisionedThroughputInMibps") provisionedThroughputInMibps: option<provisionedThroughputInMibps>,
-@as("ThroughputMode") throughputMode: option<throughputMode>,
-@as("KmsKeyId") kmsKeyId: option<kmsKeyId>,
-@as("Encrypted") encrypted: option<encrypted>,
-@as("PerformanceMode") performanceMode: option<performanceMode>,
-@as("CreationToken") creationToken: creationToken
+  @as("Backup") backup: option<backup>,
+  @as("AvailabilityZoneName") availabilityZoneName: option<availabilityZoneName>,
+  @as("ProvisionedThroughputInMibps") provisionedThroughputInMibps: option<provisionedThroughputInMibps>,
+  @as("ThroughputMode") throughputMode: option<throughputMode>,
+  @as("KmsKeyId") kmsKeyId: option<kmsKeyId>,
+  @as("Encrypted") encrypted: option<encrypted>,
+  @as("PerformanceMode") performanceMode: option<performanceMode>,
+  @as("CreationToken") creationToken: creationToken
 }
-  type response = fileSystemDescription;
+  type response = fileSystemDescription
   @module("@aws-sdk/client-elasticfilesystem") @new external new_: (request) => t = "CreateFileSystemCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
@@ -453,12 +455,12 @@ module CreateAccessPoint = {
   type t;
   type request = {
 @as("RootDirectory") rootDirectory: option<rootDirectory>,
-@as("PosixUser") posixUser: option<posixUser>,
-@as("FileSystemId") fileSystemId: fileSystemId,
-@as("Tags") tags: option<tags>,
-@as("ClientToken") clientToken: clientToken
+  @as("PosixUser") posixUser: option<posixUser>,
+  @as("FileSystemId") fileSystemId: fileSystemId,
+  @as("Tags") tags: option<tags>,
+  @as("ClientToken") clientToken: clientToken
 }
-  type response = accessPointDescription;
+  type response = accessPointDescription
   @module("@aws-sdk/client-elasticfilesystem") @new external new_: (request) => t = "CreateAccessPointCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
@@ -467,14 +469,14 @@ module DescribeFileSystems = {
   type t;
   type request = {
 @as("FileSystemId") fileSystemId: option<fileSystemId>,
-@as("CreationToken") creationToken: option<creationToken>,
-@as("Marker") marker: option<marker>,
-@as("MaxItems") maxItems: option<maxItems>
+  @as("CreationToken") creationToken: option<creationToken>,
+  @as("Marker") marker: option<marker>,
+  @as("MaxItems") maxItems: option<maxItems>
 }
   type response = {
 @as("NextMarker") nextMarker: option<marker>,
-@as("FileSystems") fileSystems: option<fileSystemDescriptions>,
-@as("Marker") marker: option<marker>
+  @as("FileSystems") fileSystems: option<fileSystemDescriptions>,
+  @as("Marker") marker: option<marker>
 }
   @module("@aws-sdk/client-elasticfilesystem") @new external new_: (request) => t = "DescribeFileSystemsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -484,13 +486,13 @@ module DescribeAccessPoints = {
   type t;
   type request = {
 @as("FileSystemId") fileSystemId: option<fileSystemId>,
-@as("AccessPointId") accessPointId: option<accessPointId>,
-@as("NextToken") nextToken: option<token>,
-@as("MaxResults") maxResults: option<maxResults>
+  @as("AccessPointId") accessPointId: option<accessPointId>,
+  @as("NextToken") nextToken: option<token>,
+  @as("MaxResults") maxResults: option<maxResults>
 }
   type response = {
 @as("NextToken") nextToken: option<token>,
-@as("AccessPoints") accessPoints: option<accessPointDescriptions>
+  @as("AccessPoints") accessPoints: option<accessPointDescriptions>
 }
   @module("@aws-sdk/client-elasticfilesystem") @new external new_: (request) => t = "DescribeAccessPointsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";

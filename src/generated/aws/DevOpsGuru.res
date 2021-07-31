@@ -5,26 +5,29 @@ httpStatusCode: option<float>,
   cfId: option<string>,
   attempts: option<int>,
   totalRetryDelay: option<int>
-};
-type string_ = string
-type boolean_ = bool
-type integer_ = int
-type long = float
-type validationExceptionReason = [@as("OTHER") #OTHER | @as("FIELD_VALIDATION_FAILED") #FIELDVALIDATIONFAILED | @as("CANNOT_PARSE") #CANNOTPARSE | @as("UNKNOWN_OPERATION") #UNKNOWNOPERATION]
+}
+type awsServiceClient;
+@module("@aws-sdk/client-devops-guru") @new external createClient: unit => awsServiceClient = "DevOpsGuruClient";
+type baseString = string
+type baseBoolean = bool
+type baseInteger = int
+type baseTimestamp = Js.Date.t;
+type baseLong = float
+type validationExceptionReason = [@as("OTHER") #OTHER | @as("FIELD_VALIDATION_FAILED") #FIELD_VALIDATION_FAILED | @as("CANNOT_PARSE") #CANNOT_PARSE | @as("UNKNOWN_OPERATION") #UNKNOWN_OPERATION]
 type uuidNextToken = string
 type updateResourceCollectionAction = [@as("REMOVE") #REMOVE | @as("ADD") #ADD]
 type topicArn = string
 type timestamp_ = Js.Date.t;
 type stackName = string
 type ssmOpsItemId = string
-type serviceName = [@as("SWF") #SWF | @as("STEP_FUNCTIONS") #STEPFUNCTIONS | @as("SQS") #SQS | @as("SNS") #SNS | @as("SAGE_MAKER") #SAGEMAKER | @as("S3") #S3 | @as("ROUTE_53") #ROUTE53 | @as("REDSHIFT") #REDSHIFT | @as("RDS") #RDS | @as("NETWORK_ELB") #NETWORKELB | @as("NAT_GATEWAY") #NATGATEWAY | @as("LAMBDA") #LAMBDA | @as("KINESIS") #KINESIS | @as("ES") #ES | @as("ELB") #ELB | @as("ELASTI_CACHE") #ELASTICACHE | @as("ELASTIC_BEANSTALK") #ELASTICBEANSTALK | @as("EKS") #EKS | @as("ECS") #ECS | @as("EC2") #EC2 | @as("DYNAMO_DB") #DYNAMODB | @as("CLOUD_FRONT") #CLOUDFRONT | @as("AUTO_SCALING_GROUP") #AUTOSCALINGGROUP | @as("APPLICATION_ELB") #APPLICATIONELB | @as("API_GATEWAY") #APIGATEWAY]
+type serviceName = [@as("SWF") #SWF | @as("STEP_FUNCTIONS") #STEP_FUNCTIONS | @as("SQS") #SQS | @as("SNS") #SNS | @as("SAGE_MAKER") #SAGE_MAKER | @as("S3") #S3 | @as("ROUTE_53") #ROUTE_53 | @as("REDSHIFT") #REDSHIFT | @as("RDS") #RDS | @as("NETWORK_ELB") #NETWORK_ELB | @as("NAT_GATEWAY") #NAT_GATEWAY | @as("LAMBDA") #LAMBDA | @as("KINESIS") #KINESIS | @as("ES") #ES | @as("ELB") #ELB | @as("ELASTI_CACHE") #ELASTI_CACHE | @as("ELASTIC_BEANSTALK") #ELASTIC_BEANSTALK | @as("EKS") #EKS | @as("ECS") #ECS | @as("EC2") #EC2 | @as("DYNAMO_DB") #DYNAMO_DB | @as("CLOUD_FRONT") #CLOUD_FRONT | @as("AUTO_SCALING_GROUP") #AUTO_SCALING_GROUP | @as("APPLICATION_ELB") #APPLICATION_ELB | @as("API_GATEWAY") #API_GATEWAY]
 type searchInsightsMaxResults = int
 type retryAfterSeconds = int
 type resourceType = string
 type resourceIdType = string
 type resourceIdString = string
 type resourceHours = float
-type resourceCollectionType = [@as("AWS_SERVICE") #AWSSERVICE | @as("AWS_CLOUD_FORMATION") #AWSCLOUDFORMATION]
+type resourceCollectionType = [@as("AWS_SERVICE") #AWS_SERVICE | @as("AWS_CLOUD_FORMATION") #AWS_CLOUD_FORMATION]
 type recommendationRelatedEventResourceType = string
 type recommendationRelatedEventResourceName = string
 type recommendationRelatedEventName = string
@@ -44,7 +47,7 @@ type numOpenProactiveInsights = int
 type numMetricsAnalyzed = int
 type notificationChannelId = string
 type meanTimeToRecoverInMilliseconds = float
-type locale = [@as("ZH_TW") #ZHTW | @as("ZH_CN") #ZHCN | @as("PT_BR") #PTBR | @as("KO_KR") #KOKR | @as("JA_JP") #JAJP | @as("IT_IT") #ITIT | @as("FR_FR") #FRFR | @as("ES_ES") #ESES | @as("EN_GB") #ENGB | @as("EN_US") #ENUS | @as("DE_DE") #DEDE]
+type locale = [@as("ZH_TW") #ZH_TW | @as("ZH_CN") #ZH_CN | @as("PT_BR") #PT_BR | @as("KO_KR") #KO_KR | @as("JA_JP") #JA_JP | @as("IT_IT") #IT_IT | @as("FR_FR") #FR_FR | @as("ES_ES") #ES_ES | @as("EN_GB") #EN_GB | @as("EN_US") #EN_US | @as("DE_DE") #DE_DE]
 type listInsightsMaxResults = int
 type listEventsMaxResults = int
 type listAnomaliesForInsightMaxResults = int
@@ -53,15 +56,15 @@ type insightStatus = [@as("CLOSED") #CLOSED | @as("ONGOING") #ONGOING]
 type insightSeverity = [@as("HIGH") #HIGH | @as("MEDIUM") #MEDIUM | @as("LOW") #LOW]
 type insightName = string
 type insightId = string
-type insightFeedbackOption = [@as("DATA_INCORRECT") #DATAINCORRECT | @as("DATA_NOISY_ANOMALY") #DATANOISYANOMALY | @as("ALERT_TOO_SENSITIVE") #ALERTTOOSENSITIVE | @as("RECOMMENDATION_USEFUL") #RECOMMENDATIONUSEFUL | @as("VALID_COLLECTION") #VALIDCOLLECTION]
+type insightFeedbackOption = [@as("DATA_INCORRECT") #DATA_INCORRECT | @as("DATA_NOISY_ANOMALY") #DATA_NOISY_ANOMALY | @as("ALERT_TOO_SENSITIVE") #ALERT_TOO_SENSITIVE | @as("RECOMMENDATION_USEFUL") #RECOMMENDATION_USEFUL | @as("VALID_COLLECTION") #VALID_COLLECTION]
 type eventSource = string
 type eventResourceType = string
 type eventResourceName = string
 type eventResourceArn = string
 type eventName = string
 type eventId = string
-type eventDataSource = [@as("AWS_CODE_DEPLOY") #AWSCODEDEPLOY | @as("AWS_CLOUD_TRAIL") #AWSCLOUDTRAIL]
-type eventClass = [@as("SCHEMA_CHANGE") #SCHEMACHANGE | @as("CONFIG_CHANGE") #CONFIGCHANGE | @as("SECURITY_CHANGE") #SECURITYCHANGE | @as("DEPLOYMENT") #DEPLOYMENT | @as("INFRASTRUCTURE") #INFRASTRUCTURE]
+type eventDataSource = [@as("AWS_CODE_DEPLOY") #AWS_CODE_DEPLOY | @as("AWS_CLOUD_TRAIL") #AWS_CLOUD_TRAIL]
+type eventClass = [@as("SCHEMA_CHANGE") #SCHEMA_CHANGE | @as("CONFIG_CHANGE") #CONFIG_CHANGE | @as("SECURITY_CHANGE") #SECURITY_CHANGE | @as("DEPLOYMENT") #DEPLOYMENT | @as("INFRASTRUCTURE") #INFRASTRUCTURE]
 type errorServiceCodeString = string
 type errorQuotaCodeString = string
 type errorNameString = string
@@ -84,12 +87,12 @@ type anomalyLimit = float
 type anomalyId = string
 type validationExceptionField = {
 @as("Message") message: errorMessageString,
-@as("Name") name: errorNameString
+  @as("Name") name: errorNameString
 }
 type updateStackNames = array<stackName>
 type startTimeRange = {
 @as("ToTime") toTime: option<timestamp_>,
-@as("FromTime") fromTime: option<timestamp_>
+  @as("FromTime") fromTime: option<timestamp_>
 }
 type stackNames = array<stackName>
 type snsChannelConfig = {
@@ -97,31 +100,31 @@ type snsChannelConfig = {
 }
 type serviceResourceCost = {
 @as("Cost") cost: option<cost>,
-@as("UnitCost") unitCost: option<cost>,
-@as("Count") count: option<costEstimationServiceResourceCount>,
-@as("State") state: option<costEstimationServiceResourceState>,
-@as("Type") type_: option<resourceType>
+  @as("UnitCost") unitCost: option<cost>,
+  @as("Count") count: option<costEstimationServiceResourceCount>,
+  @as("State") state: option<costEstimationServiceResourceState>,
+  @as("Type") type_: option<resourceType>
 }
 type serviceNames = array<serviceName>
 type serviceInsightHealth = {
 @as("OpenReactiveInsights") openReactiveInsights: option<numOpenReactiveInsights>,
-@as("OpenProactiveInsights") openProactiveInsights: option<numOpenProactiveInsights>
+  @as("OpenProactiveInsights") openProactiveInsights: option<numOpenProactiveInsights>
 }
 type recommendationRelatedEventResource = {
 @as("Type") type_: option<recommendationRelatedEventResourceType>,
-@as("Name") name: option<recommendationRelatedEventResourceName>
+  @as("Name") name: option<recommendationRelatedEventResourceName>
 }
 type recommendationRelatedCloudWatchMetricsSourceDetail = {
 @as("Namespace") namespace: option<recommendationRelatedCloudWatchMetricsSourceNamespace>,
-@as("MetricName") metricName: option<recommendationRelatedCloudWatchMetricsSourceMetricName>
+  @as("MetricName") metricName: option<recommendationRelatedCloudWatchMetricsSourceMetricName>
 }
 type recommendationRelatedAnomalyResource = {
 @as("Type") type_: option<recommendationRelatedAnomalyResourceType>,
-@as("Name") name: option<recommendationRelatedAnomalyResourceName>
+  @as("Name") name: option<recommendationRelatedAnomalyResourceName>
 }
 type predictionTimeRange = {
 @as("EndTime") endTime: option<timestamp_>,
-@as("StartTime") startTime: timestamp_
+  @as("StartTime") startTime: timestamp_
 }
 type opsCenterIntegrationConfig = {
 @as("OptInStatus") optInStatus: option<optInStatus>
@@ -134,44 +137,44 @@ type listInsightsOngoingStatusFilter = {
 }
 type insightTimeRange = {
 @as("EndTime") endTime: option<timestamp_>,
-@as("StartTime") startTime: timestamp_
+  @as("StartTime") startTime: timestamp_
 }
 type insightStatuses = array<insightStatus>
 type insightSeverities = array<insightSeverity>
 type insightHealth = {
 @as("MeanTimeToRecoverInMilliseconds") meanTimeToRecoverInMilliseconds: option<meanTimeToRecoverInMilliseconds>,
-@as("OpenReactiveInsights") openReactiveInsights: option<numOpenReactiveInsights>,
-@as("OpenProactiveInsights") openProactiveInsights: option<numOpenProactiveInsights>
+  @as("OpenReactiveInsights") openReactiveInsights: option<numOpenReactiveInsights>,
+  @as("OpenProactiveInsights") openProactiveInsights: option<numOpenProactiveInsights>
 }
 type insightFeedback = {
 @as("Feedback") feedback: option<insightFeedbackOption>,
-@as("Id") id: option<insightId>
+  @as("Id") id: option<insightId>
 }
 type eventTimeRange = {
 @as("ToTime") toTime: timestamp_,
-@as("FromTime") fromTime: timestamp_
+  @as("FromTime") fromTime: timestamp_
 }
 type eventResource = {
 @as("Arn") arn: option<eventResourceArn>,
-@as("Name") name: option<eventResourceName>,
-@as("Type") type_: option<eventResourceType>
+  @as("Name") name: option<eventResourceName>,
+  @as("Type") type_: option<eventResourceType>
 }
 type endTimeRange = {
 @as("ToTime") toTime: option<timestamp_>,
-@as("FromTime") fromTime: option<timestamp_>
+  @as("FromTime") fromTime: option<timestamp_>
 }
 type costEstimationTimeRange = {
 @as("EndTime") endTime: option<timestamp_>,
-@as("StartTime") startTime: option<timestamp_>
+  @as("StartTime") startTime: option<timestamp_>
 }
 type costEstimationStackNames = array<stackName>
 type cloudWatchMetricsDimension = {
 @as("Value") value: option<cloudWatchMetricsDimensionValue>,
-@as("Name") name: option<cloudWatchMetricsDimensionName>
+  @as("Name") name: option<cloudWatchMetricsDimensionName>
 }
 type anomalyTimeRange = {
 @as("EndTime") endTime: option<timestamp_>,
-@as("StartTime") startTime: timestamp_
+  @as("StartTime") startTime: timestamp_
 }
 type validationExceptionFields = array<validationExceptionField>
 type updateServiceIntegrationConfig = {
@@ -186,7 +189,7 @@ type serviceIntegrationConfig = {
 }
 type serviceHealth = {
 @as("Insight") insight: option<serviceInsightHealth>,
-@as("ServiceName") serviceName: option<serviceName>
+  @as("ServiceName") serviceName: option<serviceName>
 }
 type serviceCollection = {
 @as("ServiceNames") serviceNames: option<serviceNames>
@@ -199,17 +202,17 @@ type notificationChannelConfig = {
 }
 type listInsightsClosedStatusFilter = {
 @as("EndTimeRange") endTimeRange: endTimeRange,
-@as("Type") type_: insightType
+  @as("Type") type_: insightType
 }
 type listInsightsAnyStatusFilter = {
 @as("StartTimeRange") startTimeRange: startTimeRange,
-@as("Type") type_: insightType
+  @as("Type") type_: insightType
 }
 type eventResources = array<eventResource>
 type cloudWatchMetricsDimensions = array<cloudWatchMetricsDimension>
 type cloudFormationHealth = {
 @as("Insight") insight: option<insightHealth>,
-@as("StackName") stackName: option<stackName>
+  @as("StackName") stackName: option<stackName>
 }
 type cloudFormationCostEstimationResourceCollectionFilter = {
 @as("StackNames") stackNames: option<costEstimationStackNames>
@@ -232,101 +235,101 @@ type resourceCollection = {
 }
 type recommendationRelatedEvent = {
 @as("Resources") resources: option<recommendationRelatedEventResources>,
-@as("Name") name: option<recommendationRelatedEventName>
+  @as("Name") name: option<recommendationRelatedEventName>
 }
 type recommendationRelatedAnomalySourceDetail = {
 @as("CloudWatchMetrics") cloudWatchMetrics: option<recommendationRelatedCloudWatchMetricsSourceDetails>
 }
 type notificationChannel = {
 @as("Config") config: option<notificationChannelConfig>,
-@as("Id") id: option<notificationChannelId>
+  @as("Id") id: option<notificationChannelId>
 }
 type listInsightsStatusFilter = {
 @as("Any") any: option<listInsightsAnyStatusFilter>,
-@as("Closed") closed: option<listInsightsClosedStatusFilter>,
-@as("Ongoing") ongoing: option<listInsightsOngoingStatusFilter>
+  @as("Closed") closed: option<listInsightsClosedStatusFilter>,
+  @as("Ongoing") ongoing: option<listInsightsOngoingStatusFilter>
 }
 type costEstimationResourceCollectionFilter = {
 @as("CloudFormation") cloudFormation: option<cloudFormationCostEstimationResourceCollectionFilter>
 }
 type cloudWatchMetricsDetail = {
 @as("Period") period: option<cloudWatchMetricsPeriod>,
-@as("Unit") unit_: option<cloudWatchMetricsUnit>,
-@as("Stat") stat: option<cloudWatchMetricsStat>,
-@as("Dimensions") dimensions: option<cloudWatchMetricsDimensions>,
-@as("Namespace") namespace: option<cloudWatchMetricsNamespace>,
-@as("MetricName") metricName: option<cloudWatchMetricsMetricName>
+  @as("Unit") unit_: option<cloudWatchMetricsUnit>,
+  @as("Stat") stat: option<cloudWatchMetricsStat>,
+  @as("Dimensions") dimensions: option<cloudWatchMetricsDimensions>,
+  @as("Namespace") namespace: option<cloudWatchMetricsNamespace>,
+  @as("MetricName") metricName: option<cloudWatchMetricsMetricName>
 }
 type cloudFormationHealths = array<cloudFormationHealth>
 type searchInsightsFilters = {
 @as("ServiceCollection") serviceCollection: option<serviceCollection>,
-@as("ResourceCollection") resourceCollection: option<resourceCollection>,
-@as("Statuses") statuses: option<insightStatuses>,
-@as("Severities") severities: option<insightSeverities>
+  @as("ResourceCollection") resourceCollection: option<resourceCollection>,
+  @as("Statuses") statuses: option<insightStatuses>,
+  @as("Severities") severities: option<insightSeverities>
 }
 type relatedAnomalySourceDetails = array<recommendationRelatedAnomalySourceDetail>
 type recommendationRelatedEvents = array<recommendationRelatedEvent>
 type reactiveInsightSummary = {
 @as("ServiceCollection") serviceCollection: option<serviceCollection>,
-@as("ResourceCollection") resourceCollection: option<resourceCollection>,
-@as("InsightTimeRange") insightTimeRange: option<insightTimeRange>,
-@as("Status") status: option<insightStatus>,
-@as("Severity") severity: option<insightSeverity>,
-@as("Name") name: option<insightName>,
-@as("Id") id: option<insightId>
+  @as("ResourceCollection") resourceCollection: option<resourceCollection>,
+  @as("InsightTimeRange") insightTimeRange: option<insightTimeRange>,
+  @as("Status") status: option<insightStatus>,
+  @as("Severity") severity: option<insightSeverity>,
+  @as("Name") name: option<insightName>,
+  @as("Id") id: option<insightId>
 }
 type reactiveInsight = {
 @as("SsmOpsItemId") ssmOpsItemId: option<ssmOpsItemId>,
-@as("ResourceCollection") resourceCollection: option<resourceCollection>,
-@as("InsightTimeRange") insightTimeRange: option<insightTimeRange>,
-@as("Status") status: option<insightStatus>,
-@as("Severity") severity: option<insightSeverity>,
-@as("Name") name: option<insightName>,
-@as("Id") id: option<insightId>
+  @as("ResourceCollection") resourceCollection: option<resourceCollection>,
+  @as("InsightTimeRange") insightTimeRange: option<insightTimeRange>,
+  @as("Status") status: option<insightStatus>,
+  @as("Severity") severity: option<insightSeverity>,
+  @as("Name") name: option<insightName>,
+  @as("Id") id: option<insightId>
 }
 type proactiveInsightSummary = {
 @as("ServiceCollection") serviceCollection: option<serviceCollection>,
-@as("ResourceCollection") resourceCollection: option<resourceCollection>,
-@as("PredictionTimeRange") predictionTimeRange: option<predictionTimeRange>,
-@as("InsightTimeRange") insightTimeRange: option<insightTimeRange>,
-@as("Status") status: option<insightStatus>,
-@as("Severity") severity: option<insightSeverity>,
-@as("Name") name: option<insightName>,
-@as("Id") id: option<insightId>
+  @as("ResourceCollection") resourceCollection: option<resourceCollection>,
+  @as("PredictionTimeRange") predictionTimeRange: option<predictionTimeRange>,
+  @as("InsightTimeRange") insightTimeRange: option<insightTimeRange>,
+  @as("Status") status: option<insightStatus>,
+  @as("Severity") severity: option<insightSeverity>,
+  @as("Name") name: option<insightName>,
+  @as("Id") id: option<insightId>
 }
 type proactiveInsight = {
 @as("SsmOpsItemId") ssmOpsItemId: option<ssmOpsItemId>,
-@as("ResourceCollection") resourceCollection: option<resourceCollection>,
-@as("PredictionTimeRange") predictionTimeRange: option<predictionTimeRange>,
-@as("InsightTimeRange") insightTimeRange: option<insightTimeRange>,
-@as("Status") status: option<insightStatus>,
-@as("Severity") severity: option<insightSeverity>,
-@as("Name") name: option<insightName>,
-@as("Id") id: option<insightId>
+  @as("ResourceCollection") resourceCollection: option<resourceCollection>,
+  @as("PredictionTimeRange") predictionTimeRange: option<predictionTimeRange>,
+  @as("InsightTimeRange") insightTimeRange: option<insightTimeRange>,
+  @as("Status") status: option<insightStatus>,
+  @as("Severity") severity: option<insightSeverity>,
+  @as("Name") name: option<insightName>,
+  @as("Id") id: option<insightId>
 }
 type listEventsFilters = {
 @as("ResourceCollection") resourceCollection: option<resourceCollection>,
-@as("DataSource") dataSource: option<eventDataSource>,
-@as("EventSource") eventSource: option<eventSource>,
-@as("EventClass") eventClass: option<eventClass>,
-@as("EventTimeRange") eventTimeRange: option<eventTimeRange>,
-@as("InsightId") insightId: option<insightId>
+  @as("DataSource") dataSource: option<eventDataSource>,
+  @as("EventSource") eventSource: option<eventSource>,
+  @as("EventClass") eventClass: option<eventClass>,
+  @as("EventTimeRange") eventTimeRange: option<eventTimeRange>,
+  @as("InsightId") insightId: option<insightId>
 }
 type event = {
 @as("Resources") resources: option<eventResources>,
-@as("EventClass") eventClass: option<eventClass>,
-@as("DataSource") dataSource: option<eventDataSource>,
-@as("Name") name: option<eventName>,
-@as("EventSource") eventSource: option<eventSource>,
-@as("Time") time: option<timestamp_>,
-@as("Id") id: option<eventId>,
-@as("ResourceCollection") resourceCollection: option<resourceCollection>
+  @as("EventClass") eventClass: option<eventClass>,
+  @as("DataSource") dataSource: option<eventDataSource>,
+  @as("Name") name: option<eventName>,
+  @as("EventSource") eventSource: option<eventSource>,
+  @as("Time") time: option<timestamp_>,
+  @as("Id") id: option<eventId>,
+  @as("ResourceCollection") resourceCollection: option<resourceCollection>
 }
 type cloudWatchMetricsDetails = array<cloudWatchMetricsDetail>
 type channels = array<notificationChannel>
 type recommendationRelatedAnomaly = {
 @as("SourceDetails") sourceDetails: option<relatedAnomalySourceDetails>,
-@as("Resources") resources: option<recommendationRelatedAnomalyResources>
+  @as("Resources") resources: option<recommendationRelatedAnomalyResources>
 }
 type reactiveInsights = array<reactiveInsightSummary>
 type proactiveInsights = array<proactiveInsightSummary>
@@ -337,59 +340,58 @@ type anomalySourceDetails = {
 type recommendationRelatedAnomalies = array<recommendationRelatedAnomaly>
 type reactiveAnomalySummary = {
 @as("ResourceCollection") resourceCollection: option<resourceCollection>,
-@as("AssociatedInsightId") associatedInsightId: option<insightId>,
-@as("SourceDetails") sourceDetails: option<anomalySourceDetails>,
-@as("AnomalyTimeRange") anomalyTimeRange: option<anomalyTimeRange>,
-@as("Status") status: option<anomalyStatus>,
-@as("Severity") severity: option<anomalySeverity>,
-@as("Id") id: option<anomalyId>
+  @as("AssociatedInsightId") associatedInsightId: option<insightId>,
+  @as("SourceDetails") sourceDetails: option<anomalySourceDetails>,
+  @as("AnomalyTimeRange") anomalyTimeRange: option<anomalyTimeRange>,
+  @as("Status") status: option<anomalyStatus>,
+  @as("Severity") severity: option<anomalySeverity>,
+  @as("Id") id: option<anomalyId>
 }
 type reactiveAnomaly = {
 @as("ResourceCollection") resourceCollection: option<resourceCollection>,
-@as("AssociatedInsightId") associatedInsightId: option<insightId>,
-@as("SourceDetails") sourceDetails: option<anomalySourceDetails>,
-@as("AnomalyTimeRange") anomalyTimeRange: option<anomalyTimeRange>,
-@as("Status") status: option<anomalyStatus>,
-@as("Severity") severity: option<anomalySeverity>,
-@as("Id") id: option<anomalyId>
+  @as("AssociatedInsightId") associatedInsightId: option<insightId>,
+  @as("SourceDetails") sourceDetails: option<anomalySourceDetails>,
+  @as("AnomalyTimeRange") anomalyTimeRange: option<anomalyTimeRange>,
+  @as("Status") status: option<anomalyStatus>,
+  @as("Severity") severity: option<anomalySeverity>,
+  @as("Id") id: option<anomalyId>
 }
 type proactiveAnomalySummary = {
 @as("Limit") limit: option<anomalyLimit>,
-@as("ResourceCollection") resourceCollection: option<resourceCollection>,
-@as("AssociatedInsightId") associatedInsightId: option<insightId>,
-@as("SourceDetails") sourceDetails: option<anomalySourceDetails>,
-@as("PredictionTimeRange") predictionTimeRange: option<predictionTimeRange>,
-@as("AnomalyTimeRange") anomalyTimeRange: option<anomalyTimeRange>,
-@as("UpdateTime") updateTime: option<timestamp_>,
-@as("Status") status: option<anomalyStatus>,
-@as("Severity") severity: option<anomalySeverity>,
-@as("Id") id: option<anomalyId>
+  @as("ResourceCollection") resourceCollection: option<resourceCollection>,
+  @as("AssociatedInsightId") associatedInsightId: option<insightId>,
+  @as("SourceDetails") sourceDetails: option<anomalySourceDetails>,
+  @as("PredictionTimeRange") predictionTimeRange: option<predictionTimeRange>,
+  @as("AnomalyTimeRange") anomalyTimeRange: option<anomalyTimeRange>,
+  @as("UpdateTime") updateTime: option<timestamp_>,
+  @as("Status") status: option<anomalyStatus>,
+  @as("Severity") severity: option<anomalySeverity>,
+  @as("Id") id: option<anomalyId>
 }
 type proactiveAnomaly = {
 @as("Limit") limit: option<anomalyLimit>,
-@as("ResourceCollection") resourceCollection: option<resourceCollection>,
-@as("AssociatedInsightId") associatedInsightId: option<insightId>,
-@as("SourceDetails") sourceDetails: option<anomalySourceDetails>,
-@as("PredictionTimeRange") predictionTimeRange: option<predictionTimeRange>,
-@as("AnomalyTimeRange") anomalyTimeRange: option<anomalyTimeRange>,
-@as("UpdateTime") updateTime: option<timestamp_>,
-@as("Status") status: option<anomalyStatus>,
-@as("Severity") severity: option<anomalySeverity>,
-@as("Id") id: option<anomalyId>
+  @as("ResourceCollection") resourceCollection: option<resourceCollection>,
+  @as("AssociatedInsightId") associatedInsightId: option<insightId>,
+  @as("SourceDetails") sourceDetails: option<anomalySourceDetails>,
+  @as("PredictionTimeRange") predictionTimeRange: option<predictionTimeRange>,
+  @as("AnomalyTimeRange") anomalyTimeRange: option<anomalyTimeRange>,
+  @as("UpdateTime") updateTime: option<timestamp_>,
+  @as("Status") status: option<anomalyStatus>,
+  @as("Severity") severity: option<anomalySeverity>,
+  @as("Id") id: option<anomalyId>
 }
 type recommendation = {
 @as("RelatedAnomalies") relatedAnomalies: option<recommendationRelatedAnomalies>,
-@as("RelatedEvents") relatedEvents: option<recommendationRelatedEvents>,
-@as("Reason") reason: option<recommendationReason>,
-@as("Name") name: option<recommendationName>,
-@as("Link") link: option<recommendationLink>,
-@as("Description") description: option<recommendationDescription>
+  @as("RelatedEvents") relatedEvents: option<recommendationRelatedEvents>,
+  @as("Reason") reason: option<recommendationReason>,
+  @as("Name") name: option<recommendationName>,
+  @as("Link") link: option<recommendationLink>,
+  @as("Description") description: option<recommendationDescription>
 }
 type reactiveAnomalies = array<reactiveAnomalySummary>
 type proactiveAnomalies = array<proactiveAnomalySummary>
 type recommendations = array<recommendation>
-type awsServiceClient;
-@module("@aws-sdk/client-devops-guru") @new external createClient: unit => awsServiceClient = "DevOpsGuruClient";
+
 module UpdateServiceIntegration = {
   type t;
   type request = {
@@ -446,12 +448,12 @@ module DescribeAccountOverview = {
   type t;
   type request = {
 @as("ToTime") toTime: option<timestamp_>,
-@as("FromTime") fromTime: timestamp_
+  @as("FromTime") fromTime: timestamp_
 }
   type response = {
 @as("MeanTimeToRecoverInMilliseconds") meanTimeToRecoverInMilliseconds: meanTimeToRecoverInMilliseconds,
-@as("ProactiveInsights") proactiveInsights: numProactiveInsights,
-@as("ReactiveInsights") reactiveInsights: numReactiveInsights
+  @as("ProactiveInsights") proactiveInsights: numProactiveInsights,
+  @as("ReactiveInsights") reactiveInsights: numReactiveInsights
 }
   @module("@aws-sdk/client-devops-guru") @new external new_: (request) => t = "DescribeAccountOverviewCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -462,9 +464,9 @@ module DescribeAccountHealth = {
   type request = unit
   type response = {
 @as("ResourceHours") resourceHours: resourceHours,
-@as("MetricsAnalyzed") metricsAnalyzed: numMetricsAnalyzed,
-@as("OpenProactiveInsights") openProactiveInsights: numOpenProactiveInsights,
-@as("OpenReactiveInsights") openReactiveInsights: numOpenReactiveInsights
+  @as("MetricsAnalyzed") metricsAnalyzed: numMetricsAnalyzed,
+  @as("OpenProactiveInsights") openProactiveInsights: numOpenProactiveInsights,
+  @as("OpenReactiveInsights") openReactiveInsights: numOpenReactiveInsights
 }
   @module("@aws-sdk/client-devops-guru") @new external new_: (request) => t = "DescribeAccountHealthCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -486,7 +488,7 @@ module UpdateResourceCollection = {
   type t;
   type request = {
 @as("ResourceCollection") resourceCollection: updateResourceCollectionFilter,
-@as("Action") action: updateResourceCollectionAction
+  @as("Action") action: updateResourceCollectionAction
 }
   type response = unit
   @module("@aws-sdk/client-devops-guru") @new external new_: (request) => t = "UpdateResourceCollectionCommand";
@@ -497,7 +499,7 @@ module StartCostEstimation = {
   type t;
   type request = {
 @as("ClientToken") clientToken: option<clientToken>,
-@as("ResourceCollection") resourceCollection: costEstimationResourceCollectionFilter
+  @as("ResourceCollection") resourceCollection: costEstimationResourceCollectionFilter
 }
   type response = unit
   @module("@aws-sdk/client-devops-guru") @new external new_: (request) => t = "StartCostEstimationCommand";
@@ -508,11 +510,11 @@ module GetResourceCollection = {
   type t;
   type request = {
 @as("NextToken") nextToken: option<uuidNextToken>,
-@as("ResourceCollectionType") resourceCollectionType: resourceCollectionType
+  @as("ResourceCollectionType") resourceCollectionType: resourceCollectionType
 }
   type response = {
 @as("NextToken") nextToken: option<uuidNextToken>,
-@as("ResourceCollection") resourceCollection: option<resourceCollectionFilter>
+  @as("ResourceCollection") resourceCollection: option<resourceCollectionFilter>
 }
   @module("@aws-sdk/client-devops-guru") @new external new_: (request) => t = "GetResourceCollectionCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -525,11 +527,11 @@ module GetCostEstimation = {
 }
   type response = {
 @as("NextToken") nextToken: option<uuidNextToken>,
-@as("TotalCost") totalCost: option<cost>,
-@as("TimeRange") timeRange: option<costEstimationTimeRange>,
-@as("Costs") costs: option<serviceResourceCosts>,
-@as("Status") status: option<costEstimationStatus>,
-@as("ResourceCollection") resourceCollection: option<costEstimationResourceCollectionFilter>
+  @as("TotalCost") totalCost: option<cost>,
+  @as("TimeRange") timeRange: option<costEstimationTimeRange>,
+  @as("Costs") costs: option<serviceResourceCosts>,
+  @as("Status") status: option<costEstimationStatus>,
+  @as("ResourceCollection") resourceCollection: option<costEstimationResourceCollectionFilter>
 }
   @module("@aws-sdk/client-devops-guru") @new external new_: (request) => t = "GetCostEstimationCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -539,12 +541,12 @@ module DescribeResourceCollectionHealth = {
   type t;
   type request = {
 @as("NextToken") nextToken: option<uuidNextToken>,
-@as("ResourceCollectionType") resourceCollectionType: resourceCollectionType
+  @as("ResourceCollectionType") resourceCollectionType: resourceCollectionType
 }
   type response = {
 @as("NextToken") nextToken: option<uuidNextToken>,
-@as("Service") service: option<serviceHealths>,
-@as("CloudFormation") cloudFormation: cloudFormationHealths
+  @as("Service") service: option<serviceHealths>,
+  @as("CloudFormation") cloudFormation: cloudFormationHealths
 }
   @module("@aws-sdk/client-devops-guru") @new external new_: (request) => t = "DescribeResourceCollectionHealthCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -557,7 +559,7 @@ module ListNotificationChannels = {
 }
   type response = {
 @as("NextToken") nextToken: option<uuidNextToken>,
-@as("Channels") channels: option<channels>
+  @as("Channels") channels: option<channels>
 }
   @module("@aws-sdk/client-devops-guru") @new external new_: (request) => t = "ListNotificationChannelsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -570,7 +572,7 @@ module DescribeInsight = {
 }
   type response = {
 @as("ReactiveInsight") reactiveInsight: option<reactiveInsight>,
-@as("ProactiveInsight") proactiveInsight: option<proactiveInsight>
+  @as("ProactiveInsight") proactiveInsight: option<proactiveInsight>
 }
   @module("@aws-sdk/client-devops-guru") @new external new_: (request) => t = "DescribeInsightCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -580,15 +582,15 @@ module SearchInsights = {
   type t;
   type request = {
 @as("Type") type_: insightType,
-@as("NextToken") nextToken: option<uuidNextToken>,
-@as("MaxResults") maxResults: option<searchInsightsMaxResults>,
-@as("Filters") filters: option<searchInsightsFilters>,
-@as("StartTimeRange") startTimeRange: startTimeRange
+  @as("NextToken") nextToken: option<uuidNextToken>,
+  @as("MaxResults") maxResults: option<searchInsightsMaxResults>,
+  @as("Filters") filters: option<searchInsightsFilters>,
+  @as("StartTimeRange") startTimeRange: startTimeRange
 }
   type response = {
 @as("NextToken") nextToken: option<uuidNextToken>,
-@as("ReactiveInsights") reactiveInsights: option<reactiveInsights>,
-@as("ProactiveInsights") proactiveInsights: option<proactiveInsights>
+  @as("ReactiveInsights") reactiveInsights: option<reactiveInsights>,
+  @as("ProactiveInsights") proactiveInsights: option<proactiveInsights>
 }
   @module("@aws-sdk/client-devops-guru") @new external new_: (request) => t = "SearchInsightsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -598,13 +600,13 @@ module ListInsights = {
   type t;
   type request = {
 @as("NextToken") nextToken: option<uuidNextToken>,
-@as("MaxResults") maxResults: option<listInsightsMaxResults>,
-@as("StatusFilter") statusFilter: listInsightsStatusFilter
+  @as("MaxResults") maxResults: option<listInsightsMaxResults>,
+  @as("StatusFilter") statusFilter: listInsightsStatusFilter
 }
   type response = {
 @as("NextToken") nextToken: option<uuidNextToken>,
-@as("ReactiveInsights") reactiveInsights: option<reactiveInsights>,
-@as("ProactiveInsights") proactiveInsights: option<proactiveInsights>
+  @as("ReactiveInsights") reactiveInsights: option<reactiveInsights>,
+  @as("ProactiveInsights") proactiveInsights: option<proactiveInsights>
 }
   @module("@aws-sdk/client-devops-guru") @new external new_: (request) => t = "ListInsightsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -614,12 +616,12 @@ module ListEvents = {
   type t;
   type request = {
 @as("NextToken") nextToken: option<uuidNextToken>,
-@as("MaxResults") maxResults: option<listEventsMaxResults>,
-@as("Filters") filters: listEventsFilters
+  @as("MaxResults") maxResults: option<listEventsMaxResults>,
+  @as("Filters") filters: listEventsFilters
 }
   type response = {
 @as("NextToken") nextToken: option<uuidNextToken>,
-@as("Events") events: events
+  @as("Events") events: events
 }
   @module("@aws-sdk/client-devops-guru") @new external new_: (request) => t = "ListEventsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -632,7 +634,7 @@ module DescribeAnomaly = {
 }
   type response = {
 @as("ReactiveAnomaly") reactiveAnomaly: option<reactiveAnomaly>,
-@as("ProactiveAnomaly") proactiveAnomaly: option<proactiveAnomaly>
+  @as("ProactiveAnomaly") proactiveAnomaly: option<proactiveAnomaly>
 }
   @module("@aws-sdk/client-devops-guru") @new external new_: (request) => t = "DescribeAnomalyCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -642,14 +644,14 @@ module ListAnomaliesForInsight = {
   type t;
   type request = {
 @as("NextToken") nextToken: option<uuidNextToken>,
-@as("MaxResults") maxResults: option<listAnomaliesForInsightMaxResults>,
-@as("StartTimeRange") startTimeRange: option<startTimeRange>,
-@as("InsightId") insightId: insightId
+  @as("MaxResults") maxResults: option<listAnomaliesForInsightMaxResults>,
+  @as("StartTimeRange") startTimeRange: option<startTimeRange>,
+  @as("InsightId") insightId: insightId
 }
   type response = {
 @as("NextToken") nextToken: option<uuidNextToken>,
-@as("ReactiveAnomalies") reactiveAnomalies: option<reactiveAnomalies>,
-@as("ProactiveAnomalies") proactiveAnomalies: option<proactiveAnomalies>
+  @as("ReactiveAnomalies") reactiveAnomalies: option<reactiveAnomalies>,
+  @as("ProactiveAnomalies") proactiveAnomalies: option<proactiveAnomalies>
 }
   @module("@aws-sdk/client-devops-guru") @new external new_: (request) => t = "ListAnomaliesForInsightCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -659,12 +661,12 @@ module ListRecommendations = {
   type t;
   type request = {
 @as("Locale") locale: option<locale>,
-@as("NextToken") nextToken: option<uuidNextToken>,
-@as("InsightId") insightId: insightId
+  @as("NextToken") nextToken: option<uuidNextToken>,
+  @as("InsightId") insightId: insightId
 }
   type response = {
 @as("NextToken") nextToken: option<uuidNextToken>,
-@as("Recommendations") recommendations: option<recommendations>
+  @as("Recommendations") recommendations: option<recommendations>
 }
   @module("@aws-sdk/client-devops-guru") @new external new_: (request) => t = "ListRecommendationsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";

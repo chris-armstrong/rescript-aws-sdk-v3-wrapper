@@ -5,12 +5,14 @@ httpStatusCode: option<float>,
   cfId: option<string>,
   attempts: option<int>,
   totalRetryDelay: option<int>
-};
-type string_ = string
-type boolean_ = bool
-type integer_ = int
-type timestamp_ = Js.Date.t;
-type long = float
+}
+type awsServiceClient;
+@module("@aws-sdk/client-workmailmessageflow") @new external createClient: unit => awsServiceClient = "WorkMailMessageFlowClient";
+type baseString = string
+type baseBoolean = bool
+type baseInteger = int
+type baseTimestamp = Js.Date.t;
+type baseLong = float
 type s3VersionType = string
 type s3KeyIdType = string
 type s3BucketIdType = string
@@ -19,14 +21,13 @@ type messageContentBlob = NodeJs.Buffer.t
 type errorMessage = string
 type s3Reference = {
 objectVersion: option<s3VersionType>,
-key: s3KeyIdType,
-bucket: s3BucketIdType
+  key: s3KeyIdType,
+  bucket: s3BucketIdType
 }
 type rawMessageContent = {
 s3Reference: s3Reference
 }
-type awsServiceClient;
-@module("@aws-sdk/client-workmailmessageflow") @new external createClient: unit => awsServiceClient = "WorkMailMessageFlowClient";
+
 module GetRawMessageContent = {
   type t;
   type request = {
@@ -43,7 +44,7 @@ module PutRawMessageContent = {
   type t;
   type request = {
 content: rawMessageContent,
-messageId: messageIdType
+  messageId: messageIdType
 }
   type response = unit
   @module("@aws-sdk/client-workmailmessageflow") @new external new_: (request) => t = "PutRawMessageContentCommand";

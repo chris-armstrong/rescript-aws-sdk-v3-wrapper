@@ -5,11 +5,14 @@ httpStatusCode: option<float>,
   cfId: option<string>,
   attempts: option<int>,
   totalRetryDelay: option<int>
-};
-type string_ = string
-type integer_ = int
-type timestamp_ = Js.Date.t;
-type long = float
+}
+type awsServiceClient;
+@module("@aws-sdk/client-personalize") @new external createClient: unit => awsServiceClient = "PersonalizeClient";
+type baseString = string
+type baseBoolean = bool
+type baseInteger = int
+type baseTimestamp = Js.Date.t;
+type baseLong = float
 type tunable = bool
 type transactionsPerSecond = int
 type trainingMode = [@as("UPDATE") #UPDATE | @as("FULL") #FULL]
@@ -58,201 +61,201 @@ type arn = string
 type accountId = string
 type solutionVersionSummary = {
 failureReason: option<failureReason>,
-lastUpdatedDateTime: option<date>,
-creationDateTime: option<date>,
-status: option<status>,
-solutionVersionArn: option<arn>
+  lastUpdatedDateTime: option<date>,
+  creationDateTime: option<date>,
+  status: option<status>,
+  solutionVersionArn: option<arn>
 }
 type solutionSummary = {
 lastUpdatedDateTime: option<date>,
-creationDateTime: option<date>,
-status: option<status>,
-solutionArn: option<arn>,
-name: option<name>
+  creationDateTime: option<date>,
+  status: option<status>,
+  solutionArn: option<arn>,
+  name: option<name>
 }
 type s3DataConfig = {
 kmsKeyArn: option<kmsKeyArn>,
-path: s3Location
+  path: s3Location
 }
-type resourceConfig = Js.Dict.t< parameterValue>
+type resourceConfig = Js.Dict.t<parameterValue>
 type recipeSummary = {
 lastUpdatedDateTime: option<date>,
-creationDateTime: option<date>,
-status: option<status>,
-recipeArn: option<arn>,
-name: option<name>
+  creationDateTime: option<date>,
+  status: option<status>,
+  recipeArn: option<arn>,
+  name: option<name>
 }
 type recipe = {
 lastUpdatedDateTime: option<date>,
-recipeType: option<recipeType>,
-creationDateTime: option<date>,
-description: option<description>,
-status: option<status>,
-featureTransformationArn: option<arn>,
-algorithmArn: option<arn>,
-recipeArn: option<arn>,
-name: option<name>
+  recipeType: option<recipeType>,
+  creationDateTime: option<date>,
+  description: option<description>,
+  status: option<status>,
+  featureTransformationArn: option<arn>,
+  algorithmArn: option<arn>,
+  recipeArn: option<arn>,
+  name: option<name>
 }
 type optimizationObjective = {
 objectiveSensitivity: option<objectiveSensitivity>,
-itemAttribute: option<itemAttribute>
+  itemAttribute: option<itemAttribute>
 }
-type metrics = Js.Dict.t< metricValue>
+type metrics = Js.Dict.t<metricValue>
 type integerHyperParameterRange = {
 maxValue: option<integerMaxValue>,
-minValue: option<integerMinValue>,
-name: option<parameterName>
+  minValue: option<integerMinValue>,
+  name: option<parameterName>
 }
-type hyperParameters = Js.Dict.t< parameterValue>
+type hyperParameters = Js.Dict.t<parameterValue>
 type hporesourceConfig = {
 maxParallelTrainingJobs: option<hporesource>,
-maxNumberOfTrainingJobs: option<hporesource>
+  maxNumberOfTrainingJobs: option<hporesource>
 }
 type hpoobjective = {
 metricRegex: option<metricRegex>,
-metricName: option<metricName>,
-@as("type") type_: option<hpoobjectiveType>
+  metricName: option<metricName>,
+  @as("type") type_: option<hpoobjectiveType>
 }
 type filterSummary = {
 status: option<status>,
-failureReason: option<failureReason>,
-datasetGroupArn: option<arn>,
-lastUpdatedDateTime: option<date>,
-creationDateTime: option<date>,
-filterArn: option<arn>,
-name: option<name>
+  failureReason: option<failureReason>,
+  datasetGroupArn: option<arn>,
+  lastUpdatedDateTime: option<date>,
+  creationDateTime: option<date>,
+  filterArn: option<arn>,
+  name: option<name>
 }
 type filter = {
 status: option<status>,
-filterExpression: option<filterExpression>,
-failureReason: option<failureReason>,
-datasetGroupArn: option<arn>,
-lastUpdatedDateTime: option<date>,
-creationDateTime: option<date>,
-filterArn: option<arn>,
-name: option<name>
+  filterExpression: option<filterExpression>,
+  failureReason: option<failureReason>,
+  datasetGroupArn: option<arn>,
+  lastUpdatedDateTime: option<date>,
+  creationDateTime: option<date>,
+  filterArn: option<arn>,
+  name: option<name>
 }
-type featurizationParameters = Js.Dict.t< parameterValue>
-type featureTransformationParameters = Js.Dict.t< parameterValue>
+type featurizationParameters = Js.Dict.t<parameterValue>
+type featureTransformationParameters = Js.Dict.t<parameterValue>
 type eventTrackerSummary = {
 lastUpdatedDateTime: option<date>,
-creationDateTime: option<date>,
-status: option<status>,
-eventTrackerArn: option<arn>,
-name: option<name>
+  creationDateTime: option<date>,
+  status: option<status>,
+  eventTrackerArn: option<arn>,
+  name: option<name>
 }
 type eventTracker = {
 lastUpdatedDateTime: option<date>,
-creationDateTime: option<date>,
-status: option<status>,
-datasetGroupArn: option<arn>,
-trackingId: option<trackingId>,
-accountId: option<accountId>,
-eventTrackerArn: option<arn>,
-name: option<name>
+  creationDateTime: option<date>,
+  status: option<status>,
+  datasetGroupArn: option<arn>,
+  trackingId: option<trackingId>,
+  accountId: option<accountId>,
+  eventTrackerArn: option<arn>,
+  name: option<name>
 }
 type defaultIntegerHyperParameterRange = {
 isTunable: option<tunable>,
-maxValue: option<integerMaxValue>,
-minValue: option<integerMinValue>,
-name: option<parameterName>
+  maxValue: option<integerMaxValue>,
+  minValue: option<integerMinValue>,
+  name: option<parameterName>
 }
 type defaultContinuousHyperParameterRange = {
 isTunable: option<tunable>,
-maxValue: option<continuousMaxValue>,
-minValue: option<continuousMinValue>,
-name: option<parameterName>
+  maxValue: option<continuousMaxValue>,
+  minValue: option<continuousMinValue>,
+  name: option<parameterName>
 }
 type datasetSummary = {
 lastUpdatedDateTime: option<date>,
-creationDateTime: option<date>,
-status: option<status>,
-datasetType: option<datasetType>,
-datasetArn: option<arn>,
-name: option<name>
+  creationDateTime: option<date>,
+  status: option<status>,
+  datasetType: option<datasetType>,
+  datasetArn: option<arn>,
+  name: option<name>
 }
 type datasetSchemaSummary = {
 lastUpdatedDateTime: option<date>,
-creationDateTime: option<date>,
-schemaArn: option<arn>,
-name: option<name>
+  creationDateTime: option<date>,
+  schemaArn: option<arn>,
+  name: option<name>
 }
 type datasetSchema = {
 lastUpdatedDateTime: option<date>,
-creationDateTime: option<date>,
-schema: option<avroSchema>,
-schemaArn: option<arn>,
-name: option<name>
+  creationDateTime: option<date>,
+  schema: option<avroSchema>,
+  schemaArn: option<arn>,
+  name: option<name>
 }
 type datasetImportJobSummary = {
 failureReason: option<failureReason>,
-lastUpdatedDateTime: option<date>,
-creationDateTime: option<date>,
-status: option<status>,
-jobName: option<name>,
-datasetImportJobArn: option<arn>
+  lastUpdatedDateTime: option<date>,
+  creationDateTime: option<date>,
+  status: option<status>,
+  jobName: option<name>,
+  datasetImportJobArn: option<arn>
 }
 type datasetGroupSummary = {
 failureReason: option<failureReason>,
-lastUpdatedDateTime: option<date>,
-creationDateTime: option<date>,
-status: option<status>,
-datasetGroupArn: option<arn>,
-name: option<name>
+  lastUpdatedDateTime: option<date>,
+  creationDateTime: option<date>,
+  status: option<status>,
+  datasetGroupArn: option<arn>,
+  name: option<name>
 }
 type datasetGroup = {
 failureReason: option<failureReason>,
-lastUpdatedDateTime: option<date>,
-creationDateTime: option<date>,
-kmsKeyArn: option<kmsKeyArn>,
-roleArn: option<roleArn>,
-status: option<status>,
-datasetGroupArn: option<arn>,
-name: option<name>
+  lastUpdatedDateTime: option<date>,
+  creationDateTime: option<date>,
+  kmsKeyArn: option<kmsKeyArn>,
+  roleArn: option<roleArn>,
+  status: option<status>,
+  datasetGroupArn: option<arn>,
+  name: option<name>
 }
 type datasetExportJobSummary = {
 failureReason: option<failureReason>,
-lastUpdatedDateTime: option<date>,
-creationDateTime: option<date>,
-status: option<status>,
-jobName: option<name>,
-datasetExportJobArn: option<arn>
+  lastUpdatedDateTime: option<date>,
+  creationDateTime: option<date>,
+  status: option<status>,
+  jobName: option<name>,
+  datasetExportJobArn: option<arn>
 }
 type dataset = {
 lastUpdatedDateTime: option<date>,
-creationDateTime: option<date>,
-status: option<status>,
-schemaArn: option<arn>,
-datasetType: option<datasetType>,
-datasetGroupArn: option<arn>,
-datasetArn: option<arn>,
-name: option<name>
+  creationDateTime: option<date>,
+  status: option<status>,
+  schemaArn: option<arn>,
+  datasetType: option<datasetType>,
+  datasetGroupArn: option<arn>,
+  datasetArn: option<arn>,
+  name: option<name>
 }
 type dataSource = {
 dataLocation: option<s3Location>
 }
 type continuousHyperParameterRange = {
 maxValue: option<continuousMaxValue>,
-minValue: option<continuousMinValue>,
-name: option<parameterName>
+  minValue: option<continuousMinValue>,
+  name: option<parameterName>
 }
 type categoricalValues = array<categoricalValue>
 type campaignSummary = {
 failureReason: option<failureReason>,
-lastUpdatedDateTime: option<date>,
-creationDateTime: option<date>,
-status: option<status>,
-campaignArn: option<arn>,
-name: option<name>
+  lastUpdatedDateTime: option<date>,
+  creationDateTime: option<date>,
+  status: option<status>,
+  campaignArn: option<arn>,
+  name: option<name>
 }
 type batchInferenceJobSummary = {
 solutionVersionArn: option<arn>,
-failureReason: option<failureReason>,
-lastUpdatedDateTime: option<date>,
-creationDateTime: option<date>,
-status: option<status>,
-jobName: option<name>,
-batchInferenceJobArn: option<arn>
+  failureReason: option<failureReason>,
+  lastUpdatedDateTime: option<date>,
+  creationDateTime: option<date>,
+  status: option<status>,
+  jobName: option<name>,
+  batchInferenceJobArn: option<arn>
 }
 type autoMLResult = {
 bestRecipeArn: option<arn>
@@ -260,7 +263,7 @@ bestRecipeArn: option<arn>
 type arnList = array<arn>
 type algorithmImage = {
 dockerURI: dockerURI,
-name: option<name>
+  name: option<name>
 }
 type tunedHPOParams = {
 algorithmHyperParameters: option<hyperParameters>
@@ -273,32 +276,32 @@ type integerHyperParameterRanges = array<integerHyperParameterRange>
 type filters = array<filterSummary>
 type featureTransformation = {
 status: option<status>,
-lastUpdatedDateTime: option<date>,
-creationDateTime: option<date>,
-defaultParameters: option<featurizationParameters>,
-featureTransformationArn: option<arn>,
-name: option<name>
+  lastUpdatedDateTime: option<date>,
+  creationDateTime: option<date>,
+  defaultParameters: option<featurizationParameters>,
+  featureTransformationArn: option<arn>,
+  name: option<name>
 }
 type eventTrackers = array<eventTrackerSummary>
 type defaultIntegerHyperParameterRanges = array<defaultIntegerHyperParameterRange>
 type defaultContinuousHyperParameterRanges = array<defaultContinuousHyperParameterRange>
 type defaultCategoricalHyperParameterRange = {
 isTunable: option<tunable>,
-values: option<categoricalValues>,
-name: option<parameterName>
+  values: option<categoricalValues>,
+  name: option<parameterName>
 }
 type datasets = array<datasetSummary>
 type datasetImportJobs = array<datasetImportJobSummary>
 type datasetImportJob = {
 failureReason: option<failureReason>,
-lastUpdatedDateTime: option<date>,
-creationDateTime: option<date>,
-status: option<status>,
-roleArn: option<arn>,
-dataSource: option<dataSource>,
-datasetArn: option<arn>,
-datasetImportJobArn: option<arn>,
-jobName: option<name>
+  lastUpdatedDateTime: option<date>,
+  creationDateTime: option<date>,
+  status: option<status>,
+  roleArn: option<arn>,
+  dataSource: option<dataSource>,
+  datasetArn: option<arn>,
+  datasetImportJobArn: option<arn>,
+  jobName: option<name>
 }
 type datasetGroups = array<datasetGroupSummary>
 type datasetExportJobs = array<datasetExportJobSummary>
@@ -308,7 +311,7 @@ s3DataDestination: s3DataConfig
 type continuousHyperParameterRanges = array<continuousHyperParameterRange>
 type categoricalHyperParameterRange = {
 values: option<categoricalValues>,
-name: option<parameterName>
+  name: option<parameterName>
 }
 type campaigns = array<campaignSummary>
 type campaignConfig = {
@@ -326,127 +329,126 @@ itemExplorationConfig: option<hyperParameters>
 }
 type autoMLConfig = {
 recipeList: option<arnList>,
-metricName: option<metricName>
+  metricName: option<metricName>
 }
 type defaultCategoricalHyperParameterRanges = array<defaultCategoricalHyperParameterRange>
 type datasetExportJob = {
 failureReason: option<failureReason>,
-lastUpdatedDateTime: option<date>,
-creationDateTime: option<date>,
-jobOutput: option<datasetExportJobOutput>,
-status: option<status>,
-roleArn: option<arn>,
-ingestionMode: option<ingestionMode>,
-datasetArn: option<arn>,
-datasetExportJobArn: option<arn>,
-jobName: option<name>
+  lastUpdatedDateTime: option<date>,
+  creationDateTime: option<date>,
+  jobOutput: option<datasetExportJobOutput>,
+  status: option<status>,
+  roleArn: option<arn>,
+  ingestionMode: option<ingestionMode>,
+  datasetArn: option<arn>,
+  datasetExportJobArn: option<arn>,
+  jobName: option<name>
 }
 type categoricalHyperParameterRanges = array<categoricalHyperParameterRange>
 type campaignUpdateSummary = {
 lastUpdatedDateTime: option<date>,
-creationDateTime: option<date>,
-failureReason: option<failureReason>,
-status: option<status>,
-campaignConfig: option<campaignConfig>,
-minProvisionedTPS: option<transactionsPerSecond>,
-solutionVersionArn: option<arn>
+  creationDateTime: option<date>,
+  failureReason: option<failureReason>,
+  status: option<status>,
+  campaignConfig: option<campaignConfig>,
+  minProvisionedTPS: option<transactionsPerSecond>,
+  solutionVersionArn: option<arn>
 }
 type batchInferenceJob = {
 lastUpdatedDateTime: option<date>,
-creationDateTime: option<date>,
-status: option<status>,
-roleArn: option<roleArn>,
-batchInferenceJobConfig: option<batchInferenceJobConfig>,
-jobOutput: option<batchInferenceJobOutput>,
-jobInput: option<batchInferenceJobInput>,
-numResults: option<numBatchResults>,
-solutionVersionArn: option<arn>,
-failureReason: option<failureReason>,
-filterArn: option<arn>,
-batchInferenceJobArn: option<arn>,
-jobName: option<name>
+  creationDateTime: option<date>,
+  status: option<status>,
+  roleArn: option<roleArn>,
+  batchInferenceJobConfig: option<batchInferenceJobConfig>,
+  jobOutput: option<batchInferenceJobOutput>,
+  jobInput: option<batchInferenceJobInput>,
+  numResults: option<numBatchResults>,
+  solutionVersionArn: option<arn>,
+  failureReason: option<failureReason>,
+  filterArn: option<arn>,
+  batchInferenceJobArn: option<arn>,
+  jobName: option<name>
 }
 type hyperParameterRanges = {
 categoricalHyperParameterRanges: option<categoricalHyperParameterRanges>,
-continuousHyperParameterRanges: option<continuousHyperParameterRanges>,
-integerHyperParameterRanges: option<integerHyperParameterRanges>
+  continuousHyperParameterRanges: option<continuousHyperParameterRanges>,
+  integerHyperParameterRanges: option<integerHyperParameterRanges>
 }
 type defaultHyperParameterRanges = {
 categoricalHyperParameterRanges: option<defaultCategoricalHyperParameterRanges>,
-continuousHyperParameterRanges: option<defaultContinuousHyperParameterRanges>,
-integerHyperParameterRanges: option<defaultIntegerHyperParameterRanges>
+  continuousHyperParameterRanges: option<defaultContinuousHyperParameterRanges>,
+  integerHyperParameterRanges: option<defaultIntegerHyperParameterRanges>
 }
 type campaign = {
 latestCampaignUpdate: option<campaignUpdateSummary>,
-lastUpdatedDateTime: option<date>,
-creationDateTime: option<date>,
-failureReason: option<failureReason>,
-status: option<status>,
-campaignConfig: option<campaignConfig>,
-minProvisionedTPS: option<transactionsPerSecond>,
-solutionVersionArn: option<arn>,
-campaignArn: option<arn>,
-name: option<name>
+  lastUpdatedDateTime: option<date>,
+  creationDateTime: option<date>,
+  failureReason: option<failureReason>,
+  status: option<status>,
+  campaignConfig: option<campaignConfig>,
+  minProvisionedTPS: option<transactionsPerSecond>,
+  solutionVersionArn: option<arn>,
+  campaignArn: option<arn>,
+  name: option<name>
 }
 type hpoconfig = {
 algorithmHyperParameterRanges: option<hyperParameterRanges>,
-hpoResourceConfig: option<hporesourceConfig>,
-hpoObjective: option<hpoobjective>
+  hpoResourceConfig: option<hporesourceConfig>,
+  hpoObjective: option<hpoobjective>
 }
 type algorithm = {
 lastUpdatedDateTime: option<date>,
-creationDateTime: option<date>,
-roleArn: option<arn>,
-trainingInputMode: option<trainingInputMode>,
-defaultResourceConfig: option<resourceConfig>,
-defaultHyperParameterRanges: option<defaultHyperParameterRanges>,
-defaultHyperParameters: option<hyperParameters>,
-algorithmImage: option<algorithmImage>,
-algorithmArn: option<arn>,
-name: option<name>
+  creationDateTime: option<date>,
+  roleArn: option<arn>,
+  trainingInputMode: option<trainingInputMode>,
+  defaultResourceConfig: option<resourceConfig>,
+  defaultHyperParameterRanges: option<defaultHyperParameterRanges>,
+  defaultHyperParameters: option<hyperParameters>,
+  algorithmImage: option<algorithmImage>,
+  algorithmArn: option<arn>,
+  name: option<name>
 }
 type solutionConfig = {
 optimizationObjective: option<optimizationObjective>,
-autoMLConfig: option<autoMLConfig>,
-featureTransformationParameters: option<featureTransformationParameters>,
-algorithmHyperParameters: option<hyperParameters>,
-hpoConfig: option<hpoconfig>,
-eventValueThreshold: option<eventValueThreshold>
+  autoMLConfig: option<autoMLConfig>,
+  featureTransformationParameters: option<featureTransformationParameters>,
+  algorithmHyperParameters: option<hyperParameters>,
+  hpoConfig: option<hpoconfig>,
+  eventValueThreshold: option<eventValueThreshold>
 }
 type solutionVersion = {
 lastUpdatedDateTime: option<date>,
-creationDateTime: option<date>,
-failureReason: option<failureReason>,
-status: option<status>,
-tunedHPOParams: option<tunedHPOParams>,
-trainingMode: option<trainingMode>,
-trainingHours: option<trainingHours>,
-solutionConfig: option<solutionConfig>,
-datasetGroupArn: option<arn>,
-eventType: option<eventType>,
-recipeArn: option<arn>,
-performAutoML: option<performAutoML>,
-performHPO: option<performHPO>,
-solutionArn: option<arn>,
-solutionVersionArn: option<arn>
+  creationDateTime: option<date>,
+  failureReason: option<failureReason>,
+  status: option<status>,
+  tunedHPOParams: option<tunedHPOParams>,
+  trainingMode: option<trainingMode>,
+  trainingHours: option<trainingHours>,
+  solutionConfig: option<solutionConfig>,
+  datasetGroupArn: option<arn>,
+  eventType: option<eventType>,
+  recipeArn: option<arn>,
+  performAutoML: option<performAutoML>,
+  performHPO: option<performHPO>,
+  solutionArn: option<arn>,
+  solutionVersionArn: option<arn>
 }
 type solution = {
 latestSolutionVersion: option<solutionVersionSummary>,
-lastUpdatedDateTime: option<date>,
-creationDateTime: option<date>,
-status: option<status>,
-autoMLResult: option<autoMLResult>,
-solutionConfig: option<solutionConfig>,
-eventType: option<eventType>,
-datasetGroupArn: option<arn>,
-recipeArn: option<arn>,
-performAutoML: option<performAutoML>,
-performHPO: option<performHPO>,
-solutionArn: option<arn>,
-name: option<name>
+  lastUpdatedDateTime: option<date>,
+  creationDateTime: option<date>,
+  status: option<status>,
+  autoMLResult: option<autoMLResult>,
+  solutionConfig: option<solutionConfig>,
+  eventType: option<eventType>,
+  datasetGroupArn: option<arn>,
+  recipeArn: option<arn>,
+  performAutoML: option<performAutoML>,
+  performHPO: option<performHPO>,
+  solutionArn: option<arn>,
+  name: option<name>
 }
-type awsServiceClient;
-@module("@aws-sdk/client-personalize") @new external createClient: unit => awsServiceClient = "PersonalizeClient";
+
 module StopSolutionVersionCreation = {
   type t;
   type request = {
@@ -531,7 +533,7 @@ module CreateSolutionVersion = {
   type t;
   type request = {
 trainingMode: option<trainingMode>,
-solutionArn: arn
+  solutionArn: arn
 }
   type response = {
 solutionVersionArn: option<arn>
@@ -544,7 +546,7 @@ module CreateSchema = {
   type t;
   type request = {
 schema: avroSchema,
-name: name
+  name: name
 }
   type response = {
 schemaArn: option<arn>
@@ -557,8 +559,8 @@ module CreateFilter = {
   type t;
   type request = {
 filterExpression: filterExpression,
-datasetGroupArn: arn,
-name: name
+  datasetGroupArn: arn,
+  name: name
 }
   type response = {
 filterArn: option<arn>
@@ -571,11 +573,11 @@ module CreateEventTracker = {
   type t;
   type request = {
 datasetGroupArn: arn,
-name: name
+  name: name
 }
   type response = {
 trackingId: option<trackingId>,
-eventTrackerArn: option<arn>
+  eventTrackerArn: option<arn>
 }
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "CreateEventTrackerCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -585,8 +587,8 @@ module CreateDatasetGroup = {
   type t;
   type request = {
 kmsKeyArn: option<kmsKeyArn>,
-roleArn: option<roleArn>,
-name: name
+  roleArn: option<roleArn>,
+  name: name
 }
   type response = {
 datasetGroupArn: option<arn>
@@ -599,9 +601,9 @@ module CreateDataset = {
   type t;
   type request = {
 datasetType: datasetType,
-datasetGroupArn: arn,
-schemaArn: arn,
-name: name
+  datasetGroupArn: arn,
+  schemaArn: arn,
+  name: name
 }
   type response = {
 datasetArn: option<arn>
@@ -617,7 +619,7 @@ solutionVersionArn: arn
 }
   type response = {
 metrics: option<metrics>,
-solutionVersionArn: option<arn>
+  solutionVersionArn: option<arn>
 }
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "GetSolutionMetricsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -699,9 +701,9 @@ module CreateDatasetImportJob = {
   type t;
   type request = {
 roleArn: roleArn,
-dataSource: dataSource,
-datasetArn: arn,
-jobName: name
+  dataSource: dataSource,
+  datasetArn: arn,
+  jobName: name
 }
   type response = {
 datasetImportJobArn: option<arn>
@@ -714,9 +716,9 @@ module UpdateCampaign = {
   type t;
   type request = {
 campaignConfig: option<campaignConfig>,
-minProvisionedTPS: option<transactionsPerSecond>,
-solutionVersionArn: option<arn>,
-campaignArn: arn
+  minProvisionedTPS: option<transactionsPerSecond>,
+  solutionVersionArn: option<arn>,
+  campaignArn: arn
 }
   type response = {
 campaignArn: option<arn>
@@ -729,12 +731,12 @@ module ListSolutions = {
   type t;
   type request = {
 maxResults: option<maxResults>,
-nextToken: option<nextToken>,
-datasetGroupArn: option<arn>
+  nextToken: option<nextToken>,
+  datasetGroupArn: option<arn>
 }
   type response = {
 nextToken: option<nextToken>,
-solutions: option<solutions>
+  solutions: option<solutions>
 }
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "ListSolutionsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -744,12 +746,12 @@ module ListSolutionVersions = {
   type t;
   type request = {
 maxResults: option<maxResults>,
-nextToken: option<nextToken>,
-solutionArn: option<arn>
+  nextToken: option<nextToken>,
+  solutionArn: option<arn>
 }
   type response = {
 nextToken: option<nextToken>,
-solutionVersions: option<solutionVersions>
+  solutionVersions: option<solutionVersions>
 }
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "ListSolutionVersionsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -759,11 +761,11 @@ module ListSchemas = {
   type t;
   type request = {
 maxResults: option<maxResults>,
-nextToken: option<nextToken>
+  nextToken: option<nextToken>
 }
   type response = {
 nextToken: option<nextToken>,
-schemas: option<schemas>
+  schemas: option<schemas>
 }
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "ListSchemasCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -773,12 +775,12 @@ module ListRecipes = {
   type t;
   type request = {
 maxResults: option<maxResults>,
-nextToken: option<nextToken>,
-recipeProvider: option<recipeProvider>
+  nextToken: option<nextToken>,
+  recipeProvider: option<recipeProvider>
 }
   type response = {
 nextToken: option<nextToken>,
-recipes: option<recipes>
+  recipes: option<recipes>
 }
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "ListRecipesCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -788,12 +790,12 @@ module ListFilters = {
   type t;
   type request = {
 maxResults: option<maxResults>,
-nextToken: option<nextToken>,
-datasetGroupArn: option<arn>
+  nextToken: option<nextToken>,
+  datasetGroupArn: option<arn>
 }
   type response = {
 nextToken: option<nextToken>,
-@as("Filters") filters: option<filters>
+  @as("Filters") filters: option<filters>
 }
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "ListFiltersCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -803,12 +805,12 @@ module ListEventTrackers = {
   type t;
   type request = {
 maxResults: option<maxResults>,
-nextToken: option<nextToken>,
-datasetGroupArn: option<arn>
+  nextToken: option<nextToken>,
+  datasetGroupArn: option<arn>
 }
   type response = {
 nextToken: option<nextToken>,
-eventTrackers: option<eventTrackers>
+  eventTrackers: option<eventTrackers>
 }
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "ListEventTrackersCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -818,12 +820,12 @@ module ListDatasets = {
   type t;
   type request = {
 maxResults: option<maxResults>,
-nextToken: option<nextToken>,
-datasetGroupArn: option<arn>
+  nextToken: option<nextToken>,
+  datasetGroupArn: option<arn>
 }
   type response = {
 nextToken: option<nextToken>,
-datasets: option<datasets>
+  datasets: option<datasets>
 }
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "ListDatasetsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -833,12 +835,12 @@ module ListDatasetImportJobs = {
   type t;
   type request = {
 maxResults: option<maxResults>,
-nextToken: option<nextToken>,
-datasetArn: option<arn>
+  nextToken: option<nextToken>,
+  datasetArn: option<arn>
 }
   type response = {
 nextToken: option<nextToken>,
-datasetImportJobs: option<datasetImportJobs>
+  datasetImportJobs: option<datasetImportJobs>
 }
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "ListDatasetImportJobsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -848,11 +850,11 @@ module ListDatasetGroups = {
   type t;
   type request = {
 maxResults: option<maxResults>,
-nextToken: option<nextToken>
+  nextToken: option<nextToken>
 }
   type response = {
 nextToken: option<nextToken>,
-datasetGroups: option<datasetGroups>
+  datasetGroups: option<datasetGroups>
 }
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "ListDatasetGroupsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -862,12 +864,12 @@ module ListDatasetExportJobs = {
   type t;
   type request = {
 maxResults: option<maxResults>,
-nextToken: option<nextToken>,
-datasetArn: option<arn>
+  nextToken: option<nextToken>,
+  datasetArn: option<arn>
 }
   type response = {
 nextToken: option<nextToken>,
-datasetExportJobs: option<datasetExportJobs>
+  datasetExportJobs: option<datasetExportJobs>
 }
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "ListDatasetExportJobsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -877,12 +879,12 @@ module ListCampaigns = {
   type t;
   type request = {
 maxResults: option<maxResults>,
-nextToken: option<nextToken>,
-solutionArn: option<arn>
+  nextToken: option<nextToken>,
+  solutionArn: option<arn>
 }
   type response = {
 nextToken: option<nextToken>,
-campaigns: option<campaigns>
+  campaigns: option<campaigns>
 }
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "ListCampaignsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -892,12 +894,12 @@ module ListBatchInferenceJobs = {
   type t;
   type request = {
 maxResults: option<maxResults>,
-nextToken: option<nextToken>,
-solutionVersionArn: option<arn>
+  nextToken: option<nextToken>,
+  solutionVersionArn: option<arn>
 }
   type response = {
 nextToken: option<nextToken>,
-batchInferenceJobs: option<batchInferenceJobs>
+  batchInferenceJobs: option<batchInferenceJobs>
 }
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "ListBatchInferenceJobsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -931,10 +933,10 @@ module CreateDatasetExportJob = {
   type t;
   type request = {
 jobOutput: datasetExportJobOutput,
-roleArn: roleArn,
-ingestionMode: option<ingestionMode>,
-datasetArn: arn,
-jobName: name
+  roleArn: roleArn,
+  ingestionMode: option<ingestionMode>,
+  datasetArn: arn,
+  jobName: name
 }
   type response = {
 datasetExportJobArn: option<arn>
@@ -947,9 +949,9 @@ module CreateCampaign = {
   type t;
   type request = {
 campaignConfig: option<campaignConfig>,
-minProvisionedTPS: transactionsPerSecond,
-solutionVersionArn: arn,
-name: name
+  minProvisionedTPS: transactionsPerSecond,
+  solutionVersionArn: arn,
+  name: name
 }
   type response = {
 campaignArn: option<arn>
@@ -962,13 +964,13 @@ module CreateBatchInferenceJob = {
   type t;
   type request = {
 batchInferenceJobConfig: option<batchInferenceJobConfig>,
-roleArn: roleArn,
-jobOutput: batchInferenceJobOutput,
-jobInput: batchInferenceJobInput,
-numResults: option<numBatchResults>,
-filterArn: option<arn>,
-solutionVersionArn: arn,
-jobName: name
+  roleArn: roleArn,
+  jobOutput: batchInferenceJobOutput,
+  jobInput: batchInferenceJobInput,
+  numResults: option<numBatchResults>,
+  filterArn: option<arn>,
+  solutionVersionArn: arn,
+  jobName: name
 }
   type response = {
 batchInferenceJobArn: option<arn>
@@ -1029,12 +1031,12 @@ module CreateSolution = {
   type t;
   type request = {
 solutionConfig: option<solutionConfig>,
-eventType: option<eventType>,
-datasetGroupArn: arn,
-recipeArn: option<arn>,
-performAutoML: option<performAutoML>,
-performHPO: option<boolean_>,
-name: name
+  eventType: option<eventType>,
+  datasetGroupArn: arn,
+  recipeArn: option<arn>,
+  performAutoML: option<performAutoML>,
+  performHPO: option<boolean_>,
+  name: name
 }
   type response = {
 solutionArn: option<arn>

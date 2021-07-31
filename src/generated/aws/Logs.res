@@ -5,11 +5,14 @@ httpStatusCode: option<float>,
   cfId: option<string>,
   attempts: option<int>,
   totalRetryDelay: option<int>
-};
-type string_ = string
-type boolean_ = bool
-type integer_ = int
-type long = float
+}
+type awsServiceClient;
+@module("@aws-sdk/client-logs") @new external createClient: unit => awsServiceClient = "LogsClient";
+type baseString = string
+type baseBoolean = bool
+type baseInteger = int
+type baseTimestamp = Js.Date.t;
+type baseLong = float
 type value = string
 type token = string
 type timestamp_ = float
@@ -20,7 +23,7 @@ type success = bool
 type storedBytes = float
 type statsValue = float
 type startFromHead = bool
-type standardUnit = [@as("None") #None | @as("Count/Second") #CountSecond | @as("Terabits/Second") #TerabitsSecond | @as("Gigabits/Second") #GigabitsSecond | @as("Megabits/Second") #MegabitsSecond | @as("Kilobits/Second") #KilobitsSecond | @as("Bits/Second") #BitsSecond | @as("Terabytes/Second") #TerabytesSecond | @as("Gigabytes/Second") #GigabytesSecond | @as("Megabytes/Second") #MegabytesSecond | @as("Kilobytes/Second") #KilobytesSecond | @as("Bytes/Second") #BytesSecond | @as("Count") #Count | @as("Percent") #Percent | @as("Terabits") #Terabits | @as("Gigabits") #Gigabits | @as("Megabits") #Megabits | @as("Kilobits") #Kilobits | @as("Bits") #Bits | @as("Terabytes") #Terabytes | @as("Gigabytes") #Gigabytes | @as("Megabytes") #Megabytes | @as("Kilobytes") #Kilobytes | @as("Bytes") #Bytes | @as("Milliseconds") #Milliseconds | @as("Microseconds") #Microseconds | @as("Seconds") #Seconds]
+type standardUnit = [@as("None") #None | @as("Count/Second") #Count_Second | @as("Terabits/Second") #Terabits_Second | @as("Gigabits/Second") #Gigabits_Second | @as("Megabits/Second") #Megabits_Second | @as("Kilobits/Second") #Kilobits_Second | @as("Bits/Second") #Bits_Second | @as("Terabytes/Second") #Terabytes_Second | @as("Gigabytes/Second") #Gigabytes_Second | @as("Megabytes/Second") #Megabytes_Second | @as("Kilobytes/Second") #Kilobytes_Second | @as("Bytes/Second") #Bytes_Second | @as("Count") #Count | @as("Percent") #Percent | @as("Terabits") #Terabits | @as("Gigabits") #Gigabits | @as("Megabits") #Megabits | @as("Kilobits") #Kilobits | @as("Bits") #Bits | @as("Terabytes") #Terabytes | @as("Gigabytes") #Gigabytes | @as("Megabytes") #Megabytes | @as("Kilobytes") #Kilobytes | @as("Bytes") #Bytes | @as("Milliseconds") #Milliseconds | @as("Microseconds") #Microseconds | @as("Seconds") #Seconds]
 type sequenceToken = string
 type roleArn = string
 type queryString = string
@@ -51,7 +54,7 @@ type filterName = string
 type filterCount = int
 type field = string
 type exportTaskStatusMessage = string
-type exportTaskStatusCode = [@as("RUNNING") #RUNNING | @as("PENDING_CANCEL") #PENDINGCANCEL | @as("PENDING") #PENDING | @as("FAILED") #FAILED | @as("COMPLETED") #COMPLETED | @as("CANCELLED") #CANCELLED]
+type exportTaskStatusCode = [@as("RUNNING") #RUNNING | @as("PENDING_CANCEL") #PENDING_CANCEL | @as("PENDING") #PENDING | @as("FAILED") #FAILED | @as("COMPLETED") #COMPLETED | @as("CANCELLED") #CANCELLED]
 type exportTaskName = string
 type exportTaskId = string
 type exportDestinationPrefix = string
@@ -73,110 +76,110 @@ type days = int
 type arn = string
 type accessPolicy = string
 type testEventMessages = array<eventMessage>
-type tags = Js.Dict.t< tagValue>
+type tags = Js.Dict.t<tagValue>
 type tagList_ = array<tagKey>
 type subscriptionFilter = {
 creationTime: option<timestamp_>,
-distribution: option<distribution>,
-roleArn: option<roleArn>,
-destinationArn: option<destinationArn>,
-filterPattern: option<filterPattern>,
-logGroupName: option<logGroupName>,
-filterName: option<filterName>
+  distribution: option<distribution>,
+  roleArn: option<roleArn>,
+  destinationArn: option<destinationArn>,
+  filterPattern: option<filterPattern>,
+  logGroupName: option<logGroupName>,
+  filterName: option<filterName>
 }
 type searchedLogStream = {
 searchedCompletely: option<logStreamSearchedCompletely>,
-logStreamName: option<logStreamName>
+  logStreamName: option<logStreamName>
 }
 type resultField = {
 value: option<value>,
-field: option<field>
+  field: option<field>
 }
 type resourcePolicy = {
 lastUpdatedTime: option<timestamp_>,
-policyDocument: option<policyDocument>,
-policyName: option<policyName>
+  policyDocument: option<policyDocument>,
+  policyName: option<policyName>
 }
 type rejectedLogEventsInfo = {
 expiredLogEventEndIndex: option<logEventIndex>,
-tooOldLogEventEndIndex: option<logEventIndex>,
-tooNewLogEventStartIndex: option<logEventIndex>
+  tooOldLogEventEndIndex: option<logEventIndex>,
+  tooNewLogEventStartIndex: option<logEventIndex>
 }
 type queryStatistics = {
 bytesScanned: option<statsValue>,
-recordsScanned: option<statsValue>,
-recordsMatched: option<statsValue>
+  recordsScanned: option<statsValue>,
+  recordsMatched: option<statsValue>
 }
 type queryInfo = {
 logGroupName: option<logGroupName>,
-createTime: option<timestamp_>,
-status: option<queryStatus>,
-queryString: option<queryString>,
-queryId: option<queryId>
+  createTime: option<timestamp_>,
+  status: option<queryStatus>,
+  queryString: option<queryString>,
+  queryId: option<queryId>
 }
 type queryCompileErrorLocation = {
 endCharOffset: option<queryCharOffset>,
-startCharOffset: option<queryCharOffset>
+  startCharOffset: option<queryCharOffset>
 }
 type outputLogEvent = {
 ingestionTime: option<timestamp_>,
-message: option<eventMessage>,
-@as("timestamp") timestamp_: option<timestamp_>
+  message: option<eventMessage>,
+  @as("timestamp") timestamp_: option<timestamp_>
 }
 type logStream = {
 storedBytes: option<storedBytes>,
-arn: option<arn>,
-uploadSequenceToken: option<sequenceToken>,
-lastIngestionTime: option<timestamp_>,
-lastEventTimestamp: option<timestamp_>,
-firstEventTimestamp: option<timestamp_>,
-creationTime: option<timestamp_>,
-logStreamName: option<logStreamName>
+  arn: option<arn>,
+  uploadSequenceToken: option<sequenceToken>,
+  lastIngestionTime: option<timestamp_>,
+  lastEventTimestamp: option<timestamp_>,
+  firstEventTimestamp: option<timestamp_>,
+  creationTime: option<timestamp_>,
+  logStreamName: option<logStreamName>
 }
-type logRecord = Js.Dict.t< value>
+type logRecord = Js.Dict.t<value>
 type logGroupNames = array<logGroupName>
 type logGroupField = {
 percent: option<percentage>,
-name: option<field>
+  name: option<field>
 }
 type logGroup = {
 kmsKeyId: option<kmsKeyId>,
-storedBytes: option<storedBytes>,
-arn: option<arn>,
-metricFilterCount: option<filterCount>,
-retentionInDays: option<days>,
-creationTime: option<timestamp_>,
-logGroupName: option<logGroupName>
+  storedBytes: option<storedBytes>,
+  arn: option<arn>,
+  metricFilterCount: option<filterCount>,
+  retentionInDays: option<days>,
+  creationTime: option<timestamp_>,
+  logGroupName: option<logGroupName>
 }
 type inputLogStreamNames = array<logStreamName>
 type inputLogEvent = {
 message: eventMessage,
-@as("timestamp") timestamp_: timestamp_
+  @as("timestamp") timestamp_: timestamp_
 }
 type filteredLogEvent = {
 eventId: option<eventId>,
-ingestionTime: option<timestamp_>,
-message: option<eventMessage>,
-@as("timestamp") timestamp_: option<timestamp_>,
-logStreamName: option<logStreamName>
+  ingestionTime: option<timestamp_>,
+  message: option<eventMessage>,
+  @as("timestamp") timestamp_: option<timestamp_>,
+  logStreamName: option<logStreamName>
 }
-type extractedValues = Js.Dict.t< value>
+type extractedValues = Js.Dict.t<value>
 type exportTaskStatus = {
 message: option<exportTaskStatusMessage>,
-code: option<exportTaskStatusCode>
+  code: option<exportTaskStatusCode>
 }
 type exportTaskExecutionInfo = {
 completionTime: option<timestamp_>,
-creationTime: option<timestamp_>
+  creationTime: option<timestamp_>
 }
-type dimensions = Js.Dict.t< dimensionsValue>
+type dimensions = Js.Dict.t<dimensionsValue>
 type destination = {
 creationTime: option<timestamp_>,
-arn: option<arn>,
-accessPolicy: option<accessPolicy>,
-roleArn: option<roleArn>,
-targetArn: option<targetArn>,
-destinationName: option<destinationName>
+  arn: option<arn>,
+  accessPolicy: option<accessPolicy>,
+  roleArn: option<roleArn>,
+  targetArn: option<targetArn>,
+  destinationName: option<destinationName>
 }
 type subscriptionFilters = array<subscriptionFilter>
 type searchedLogStreams = array<searchedLogStream>
@@ -185,28 +188,28 @@ type resourcePolicies = array<resourcePolicy>
 type queryInfoList = array<queryInfo>
 type queryDefinition = {
 logGroupNames: option<logGroupNames>,
-lastModified: option<timestamp_>,
-queryString: option<queryDefinitionString>,
-name: option<queryDefinitionName>,
-queryDefinitionId: option<queryId>
+  lastModified: option<timestamp_>,
+  queryString: option<queryDefinitionString>,
+  name: option<queryDefinitionName>,
+  queryDefinitionId: option<queryId>
 }
 type queryCompileError = {
 message: option<message>,
-location: option<queryCompileErrorLocation>
+  location: option<queryCompileErrorLocation>
 }
 type outputLogEvents = array<outputLogEvent>
 type metricTransformation = {
 @as("unit") unit_: option<standardUnit>,
-dimensions: option<dimensions>,
-defaultValue: option<defaultValue>,
-metricValue: metricValue,
-metricNamespace: metricNamespace,
-metricName: metricName
+  dimensions: option<dimensions>,
+  defaultValue: option<defaultValue>,
+  metricValue: metricValue,
+  metricNamespace: metricNamespace,
+  metricName: metricName
 }
 type metricFilterMatchRecord = {
 extractedValues: option<extractedValues>,
-eventMessage: option<eventMessage>,
-eventNumber: option<eventNumber>
+  eventMessage: option<eventMessage>,
+  eventNumber: option<eventNumber>
 }
 type logStreams = array<logStream>
 type logGroups = array<logGroup>
@@ -215,14 +218,14 @@ type inputLogEvents = array<inputLogEvent>
 type filteredLogEvents = array<filteredLogEvent>
 type exportTask = {
 executionInfo: option<exportTaskExecutionInfo>,
-status: option<exportTaskStatus>,
-destinationPrefix: option<exportDestinationPrefix>,
-destination: option<exportDestinationBucket>,
-to: option<timestamp_>,
-from: option<timestamp_>,
-logGroupName: option<logGroupName>,
-taskName: option<exportTaskName>,
-taskId: option<exportTaskId>
+  status: option<exportTaskStatus>,
+  destinationPrefix: option<exportDestinationPrefix>,
+  destination: option<exportDestinationBucket>,
+  to: option<timestamp_>,
+  from: option<timestamp_>,
+  logGroupName: option<logGroupName>,
+  taskName: option<exportTaskName>,
+  taskId: option<exportTaskId>
 }
 type destinations = array<destination>
 type queryResults = array<resultRows>
@@ -232,14 +235,13 @@ type metricFilterMatches = array<metricFilterMatchRecord>
 type exportTasks = array<exportTask>
 type metricFilter = {
 logGroupName: option<logGroupName>,
-creationTime: option<timestamp_>,
-metricTransformations: option<metricTransformations>,
-filterPattern: option<filterPattern>,
-filterName: option<filterName>
+  creationTime: option<timestamp_>,
+  metricTransformations: option<metricTransformations>,
+  filterPattern: option<filterPattern>,
+  filterName: option<filterName>
 }
 type metricFilters = array<metricFilter>
-type awsServiceClient;
-@module("@aws-sdk/client-logs") @new external createClient: unit => awsServiceClient = "LogsClient";
+
 module StopQuery = {
   type t;
   type request = {
@@ -256,11 +258,11 @@ module PutSubscriptionFilter = {
   type t;
   type request = {
 distribution: option<distribution>,
-roleArn: option<roleArn>,
-destinationArn: destinationArn,
-filterPattern: filterPattern,
-filterName: filterName,
-logGroupName: logGroupName
+  roleArn: option<roleArn>,
+  destinationArn: destinationArn,
+  filterPattern: filterPattern,
+  filterName: filterName,
+  logGroupName: logGroupName
 }
   
   @module("@aws-sdk/client-logs") @new external new_: (request) => t = "PutSubscriptionFilterCommand";
@@ -271,7 +273,7 @@ module PutRetentionPolicy = {
   type t;
   type request = {
 retentionInDays: days,
-logGroupName: logGroupName
+  logGroupName: logGroupName
 }
   
   @module("@aws-sdk/client-logs") @new external new_: (request) => t = "PutRetentionPolicyCommand";
@@ -282,7 +284,7 @@ module PutDestinationPolicy = {
   type t;
   type request = {
 accessPolicy: accessPolicy,
-destinationName: destinationName
+  destinationName: destinationName
 }
   
   @module("@aws-sdk/client-logs") @new external new_: (request) => t = "PutDestinationPolicyCommand";
@@ -303,7 +305,7 @@ module DeleteSubscriptionFilter = {
   type t;
   type request = {
 filterName: filterName,
-logGroupName: logGroupName
+  logGroupName: logGroupName
 }
   
   @module("@aws-sdk/client-logs") @new external new_: (request) => t = "DeleteSubscriptionFilterCommand";
@@ -346,7 +348,7 @@ module DeleteMetricFilter = {
   type t;
   type request = {
 filterName: filterName,
-logGroupName: logGroupName
+  logGroupName: logGroupName
 }
   
   @module("@aws-sdk/client-logs") @new external new_: (request) => t = "DeleteMetricFilterCommand";
@@ -357,7 +359,7 @@ module DeleteLogStream = {
   type t;
   type request = {
 logStreamName: logStreamName,
-logGroupName: logGroupName
+  logGroupName: logGroupName
 }
   
   @module("@aws-sdk/client-logs") @new external new_: (request) => t = "DeleteLogStreamCommand";
@@ -388,7 +390,7 @@ module CreateLogStream = {
   type t;
   type request = {
 logStreamName: logStreamName,
-logGroupName: logGroupName
+  logGroupName: logGroupName
 }
   
   @module("@aws-sdk/client-logs") @new external new_: (request) => t = "CreateLogStreamCommand";
@@ -399,12 +401,12 @@ module CreateExportTask = {
   type t;
   type request = {
 destinationPrefix: option<exportDestinationPrefix>,
-destination: exportDestinationBucket,
-to: timestamp_,
-from: timestamp_,
-logStreamNamePrefix: option<logStreamName>,
-logGroupName: logGroupName,
-taskName: option<exportTaskName>
+  destination: exportDestinationBucket,
+  to: timestamp_,
+  from: timestamp_,
+  logStreamNamePrefix: option<logStreamName>,
+  logGroupName: logGroupName,
+  taskName: option<exportTaskName>
 }
   type response = {
 taskId: option<exportTaskId>
@@ -427,7 +429,7 @@ module AssociateKmsKey = {
   type t;
   type request = {
 kmsKeyId: kmsKeyId,
-logGroupName: logGroupName
+  logGroupName: logGroupName
 }
   
   @module("@aws-sdk/client-logs") @new external new_: (request) => t = "AssociateKmsKeyCommand";
@@ -438,7 +440,7 @@ module UntagLogGroup = {
   type t;
   type request = {
 tags: tagList_,
-logGroupName: logGroupName
+  logGroupName: logGroupName
 }
   
   @module("@aws-sdk/client-logs") @new external new_: (request) => t = "UntagLogGroupCommand";
@@ -449,7 +451,7 @@ module TagLogGroup = {
   type t;
   type request = {
 tags: tags,
-logGroupName: logGroupName
+  logGroupName: logGroupName
 }
   
   @module("@aws-sdk/client-logs") @new external new_: (request) => t = "TagLogGroupCommand";
@@ -460,7 +462,7 @@ module PutResourcePolicy = {
   type t;
   type request = {
 policyDocument: option<policyDocument>,
-policyName: option<policyName>
+  policyName: option<policyName>
 }
   type response = {
 resourcePolicy: option<resourcePolicy>
@@ -473,9 +475,9 @@ module PutQueryDefinition = {
   type t;
   type request = {
 queryString: queryDefinitionString,
-logGroupNames: option<logGroupNames>,
-queryDefinitionId: option<queryId>,
-name: queryDefinitionName
+  logGroupNames: option<logGroupNames>,
+  queryDefinitionId: option<queryId>,
+  name: queryDefinitionName
 }
   type response = {
 queryDefinitionId: option<queryId>
@@ -488,8 +490,8 @@ module PutDestination = {
   type t;
   type request = {
 roleArn: roleArn,
-targetArn: targetArn,
-destinationName: destinationName
+  targetArn: targetArn,
+  destinationName: destinationName
 }
   type response = {
 destination: option<destination>
@@ -526,8 +528,8 @@ module CreateLogGroup = {
   type t;
   type request = {
 tags: option<tags>,
-kmsKeyId: option<kmsKeyId>,
-logGroupName: logGroupName
+  kmsKeyId: option<kmsKeyId>,
+  logGroupName: logGroupName
 }
   
   @module("@aws-sdk/client-logs") @new external new_: (request) => t = "CreateLogGroupCommand";
@@ -538,11 +540,11 @@ module StartQuery = {
   type t;
   type request = {
 limit: option<eventsLimit>,
-queryString: queryString,
-endTime: timestamp_,
-startTime: timestamp_,
-logGroupNames: option<logGroupNames>,
-logGroupName: option<logGroupName>
+  queryString: queryString,
+  endTime: timestamp_,
+  startTime: timestamp_,
+  logGroupNames: option<logGroupNames>,
+  logGroupName: option<logGroupName>
 }
   type response = {
 queryId: option<queryId>
@@ -555,13 +557,13 @@ module PutLogEvents = {
   type t;
   type request = {
 sequenceToken: option<sequenceToken>,
-logEvents: inputLogEvents,
-logStreamName: logStreamName,
-logGroupName: logGroupName
+  logEvents: inputLogEvents,
+  logStreamName: logStreamName,
+  logGroupName: logGroupName
 }
   type response = {
 rejectedLogEventsInfo: option<rejectedLogEventsInfo>,
-nextSequenceToken: option<sequenceToken>
+  nextSequenceToken: option<sequenceToken>
 }
   @module("@aws-sdk/client-logs") @new external new_: (request) => t = "PutLogEventsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -571,7 +573,7 @@ module GetLogGroupFields = {
   type t;
   type request = {
 time: option<timestamp_>,
-logGroupName: logGroupName
+  logGroupName: logGroupName
 }
   type response = {
 logGroupFields: option<logGroupFieldList>
@@ -584,17 +586,17 @@ module GetLogEvents = {
   type t;
   type request = {
 startFromHead: option<startFromHead>,
-limit: option<eventsLimit>,
-nextToken: option<nextToken>,
-endTime: option<timestamp_>,
-startTime: option<timestamp_>,
-logStreamName: logStreamName,
-logGroupName: logGroupName
+  limit: option<eventsLimit>,
+  nextToken: option<nextToken>,
+  endTime: option<timestamp_>,
+  startTime: option<timestamp_>,
+  logStreamName: logStreamName,
+  logGroupName: logGroupName
 }
   type response = {
 nextBackwardToken: option<nextToken>,
-nextForwardToken: option<nextToken>,
-events: option<outputLogEvents>
+  nextForwardToken: option<nextToken>,
+  events: option<outputLogEvents>
 }
   @module("@aws-sdk/client-logs") @new external new_: (request) => t = "GetLogEventsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -604,19 +606,19 @@ module FilterLogEvents = {
   type t;
   type request = {
 interleaved: option<interleaved>,
-limit: option<eventsLimit>,
-nextToken: option<nextToken>,
-filterPattern: option<filterPattern>,
-endTime: option<timestamp_>,
-startTime: option<timestamp_>,
-logStreamNamePrefix: option<logStreamName>,
-logStreamNames: option<inputLogStreamNames>,
-logGroupName: logGroupName
+  limit: option<eventsLimit>,
+  nextToken: option<nextToken>,
+  filterPattern: option<filterPattern>,
+  endTime: option<timestamp_>,
+  startTime: option<timestamp_>,
+  logStreamNamePrefix: option<logStreamName>,
+  logStreamNames: option<inputLogStreamNames>,
+  logGroupName: logGroupName
 }
   type response = {
 nextToken: option<nextToken>,
-searchedLogStreams: option<searchedLogStreams>,
-events: option<filteredLogEvents>
+  searchedLogStreams: option<searchedLogStreams>,
+  events: option<filteredLogEvents>
 }
   @module("@aws-sdk/client-logs") @new external new_: (request) => t = "FilterLogEventsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -626,13 +628,13 @@ module DescribeSubscriptionFilters = {
   type t;
   type request = {
 limit: option<describeLimit>,
-nextToken: option<nextToken>,
-filterNamePrefix: option<filterName>,
-logGroupName: logGroupName
+  nextToken: option<nextToken>,
+  filterNamePrefix: option<filterName>,
+  logGroupName: logGroupName
 }
   type response = {
 nextToken: option<nextToken>,
-subscriptionFilters: option<subscriptionFilters>
+  subscriptionFilters: option<subscriptionFilters>
 }
   @module("@aws-sdk/client-logs") @new external new_: (request) => t = "DescribeSubscriptionFiltersCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -642,11 +644,11 @@ module DescribeResourcePolicies = {
   type t;
   type request = {
 limit: option<describeLimit>,
-nextToken: option<nextToken>
+  nextToken: option<nextToken>
 }
   type response = {
 nextToken: option<nextToken>,
-resourcePolicies: option<resourcePolicies>
+  resourcePolicies: option<resourcePolicies>
 }
   @module("@aws-sdk/client-logs") @new external new_: (request) => t = "DescribeResourcePoliciesCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -656,13 +658,13 @@ module DescribeQueries = {
   type t;
   type request = {
 nextToken: option<nextToken>,
-maxResults: option<describeQueriesMaxResults>,
-status: option<queryStatus>,
-logGroupName: option<logGroupName>
+  maxResults: option<describeQueriesMaxResults>,
+  status: option<queryStatus>,
+  logGroupName: option<logGroupName>
 }
   type response = {
 nextToken: option<nextToken>,
-queries: option<queryInfoList>
+  queries: option<queryInfoList>
 }
   @module("@aws-sdk/client-logs") @new external new_: (request) => t = "DescribeQueriesCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -672,15 +674,15 @@ module DescribeLogStreams = {
   type t;
   type request = {
 limit: option<describeLimit>,
-nextToken: option<nextToken>,
-descending: option<descending>,
-orderBy: option<orderBy>,
-logStreamNamePrefix: option<logStreamName>,
-logGroupName: logGroupName
+  nextToken: option<nextToken>,
+  descending: option<descending>,
+  orderBy: option<orderBy>,
+  logStreamNamePrefix: option<logStreamName>,
+  logGroupName: logGroupName
 }
   type response = {
 nextToken: option<nextToken>,
-logStreams: option<logStreams>
+  logStreams: option<logStreams>
 }
   @module("@aws-sdk/client-logs") @new external new_: (request) => t = "DescribeLogStreamsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -690,12 +692,12 @@ module DescribeLogGroups = {
   type t;
   type request = {
 limit: option<describeLimit>,
-nextToken: option<nextToken>,
-logGroupNamePrefix: option<logGroupName>
+  nextToken: option<nextToken>,
+  logGroupNamePrefix: option<logGroupName>
 }
   type response = {
 nextToken: option<nextToken>,
-logGroups: option<logGroups>
+  logGroups: option<logGroups>
 }
   @module("@aws-sdk/client-logs") @new external new_: (request) => t = "DescribeLogGroupsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -705,12 +707,12 @@ module DescribeDestinations = {
   type t;
   type request = {
 limit: option<describeLimit>,
-nextToken: option<nextToken>,
-@as("DestinationNamePrefix") destinationNamePrefix: option<destinationName>
+  nextToken: option<nextToken>,
+  @as("DestinationNamePrefix") destinationNamePrefix: option<destinationName>
 }
   type response = {
 nextToken: option<nextToken>,
-destinations: option<destinations>
+  destinations: option<destinations>
 }
   @module("@aws-sdk/client-logs") @new external new_: (request) => t = "DescribeDestinationsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -720,7 +722,7 @@ module TestMetricFilter = {
   type t;
   type request = {
 logEventMessages: testEventMessages,
-filterPattern: filterPattern
+  filterPattern: filterPattern
 }
   type response = {
 matches: option<metricFilterMatches>
@@ -733,9 +735,9 @@ module PutMetricFilter = {
   type t;
   type request = {
 metricTransformations: metricTransformations,
-filterPattern: filterPattern,
-filterName: filterName,
-logGroupName: logGroupName
+  filterPattern: filterPattern,
+  filterName: filterName,
+  logGroupName: logGroupName
 }
   
   @module("@aws-sdk/client-logs") @new external new_: (request) => t = "PutMetricFilterCommand";
@@ -749,8 +751,8 @@ queryId: queryId
 }
   type response = {
 status: option<queryStatus>,
-statistics: option<queryStatistics>,
-results: option<queryResults>
+  statistics: option<queryStatistics>,
+  results: option<queryResults>
 }
   @module("@aws-sdk/client-logs") @new external new_: (request) => t = "GetQueryResultsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -760,12 +762,12 @@ module DescribeQueryDefinitions = {
   type t;
   type request = {
 nextToken: option<nextToken>,
-maxResults: option<queryListMaxResults>,
-queryDefinitionNamePrefix: option<queryDefinitionName>
+  maxResults: option<queryListMaxResults>,
+  queryDefinitionNamePrefix: option<queryDefinitionName>
 }
   type response = {
 nextToken: option<nextToken>,
-queryDefinitions: option<queryDefinitionList>
+  queryDefinitions: option<queryDefinitionList>
 }
   @module("@aws-sdk/client-logs") @new external new_: (request) => t = "DescribeQueryDefinitionsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -775,13 +777,13 @@ module DescribeExportTasks = {
   type t;
   type request = {
 limit: option<describeLimit>,
-nextToken: option<nextToken>,
-statusCode: option<exportTaskStatusCode>,
-taskId: option<exportTaskId>
+  nextToken: option<nextToken>,
+  statusCode: option<exportTaskStatusCode>,
+  taskId: option<exportTaskId>
 }
   type response = {
 nextToken: option<nextToken>,
-exportTasks: option<exportTasks>
+  exportTasks: option<exportTasks>
 }
   @module("@aws-sdk/client-logs") @new external new_: (request) => t = "DescribeExportTasksCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -791,15 +793,15 @@ module DescribeMetricFilters = {
   type t;
   type request = {
 metricNamespace: option<metricNamespace>,
-metricName: option<metricName>,
-limit: option<describeLimit>,
-nextToken: option<nextToken>,
-filterNamePrefix: option<filterName>,
-logGroupName: option<logGroupName>
+  metricName: option<metricName>,
+  limit: option<describeLimit>,
+  nextToken: option<nextToken>,
+  filterNamePrefix: option<filterName>,
+  logGroupName: option<logGroupName>
 }
   type response = {
 nextToken: option<nextToken>,
-metricFilters: option<metricFilters>
+  metricFilters: option<metricFilters>
 }
   @module("@aws-sdk/client-logs") @new external new_: (request) => t = "DescribeMetricFiltersCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";

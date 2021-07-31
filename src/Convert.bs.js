@@ -109,10 +109,7 @@ function convert(parsed) {
             return true;
           }
         }));
-  var match$1 = Belt_Array.partition(match[1], (function (param) {
-          return Belt_Option.isSome(param.recursWith);
-        }));
-  var allStructures = match$1[1];
+  var allStructures = match[1];
   var operations = Belt_Array.keepMap(match[0], (function (shape) {
           var details = shape.descriptor;
           if (typeof details === "number" || details.TAG !== /* OperationShape */1) {
@@ -128,7 +125,7 @@ function convert(parsed) {
   var operationDependencies = Belt_Array.concatMany(Belt_Array.map(operations, (function (param) {
               return param[2];
             })));
-  var match$2 = Belt_Array.partition(allStructures, (function (structure) {
+  var match$1 = Belt_Array.partition(allStructures, (function (structure) {
           var name = structure.name;
           var tmp = structure.descriptor;
           if (typeof tmp === "number" || !(tmp.TAG === /* StructureShape */2 && operationDependencies.includes(name))) {
@@ -141,8 +138,8 @@ function convert(parsed) {
                         }));
           }
         }));
-  var remainingStructures = match$2[1];
-  var operationStructures = match$2[0];
+  var remainingStructures = match$1[1];
+  var operationStructures = match$1[0];
   var operationModuleParts = Belt_Array.map(operations, (function (param) {
           var details = param[1];
           var inputString = Belt_Option.getWithDefault(details.input, "");
@@ -168,24 +165,35 @@ function convert(parsed) {
             _0: "no service definition in file"
           };
   }
-  var packagingName = serviceDetails.arnNamespace;
-  var moduleName = serviceDetails.cloudFormationName.replace(" ", "");
+  var cloudFormationName = serviceDetails.cloudFormationName;
+  var serviceName = serviceDetails.arnNamespace;
+  var moduleName = cloudFormationName.replace(" ", "");
   var operationSnippets = Belt_Array.map(operationModuleParts, (function (param) {
           var structures = param[2];
           var details = param[1];
           var inputOperationStructure = findOperationalStructure(structures, details.input);
           var outputOperationStructure = findOperationalStructure(structures, details.output);
-          return Generate.generateOperationModule(packagingName, [
+          return Generate.generateOperationModule(serviceName, [
                       param[0],
                       inputOperationStructure,
                       outputOperationStructure
                     ]);
         }));
   var codeSnippets = Belt_Array.map(remainingStructures, (function (shape) {
-          return Generate.generateTypeBlock(packagingName, {
-                      name: shape.name,
-                      descriptor: shape.descriptor
-                    });
+          var recursItems = shape.recursWith;
+          if (recursItems !== undefined) {
+            return Generate.generateRecursiveTypeBlock(Belt_Array.map(Belt_Array.concat([shape], recursItems), (function (shape) {
+                              return {
+                                      name: shape.name,
+                                      descriptor: shape.descriptor
+                                    };
+                            })));
+          } else {
+            return Generate.generateTypeBlock({
+                        name: shape.name,
+                        descriptor: shape.descriptor
+                      });
+          }
         }));
   return {
           TAG: /* Ok */0,
@@ -193,6 +201,7 @@ function convert(parsed) {
             moduleName: moduleName,
             code: Belt_Array.joinWith(Belt_Array.concatMany([
                       [Generate.generateResponseMetadata(undefined)],
+                      [Generate.generateServiceShape(serviceName, cloudFormationName)],
                       codeSnippets,
                       operationSnippets
                     ]), "\n", (function (x) {

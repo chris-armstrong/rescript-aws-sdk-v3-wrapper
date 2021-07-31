@@ -5,12 +5,14 @@ httpStatusCode: option<float>,
   cfId: option<string>,
   attempts: option<int>,
   totalRetryDelay: option<int>
-};
-type string_ = string
-type boolean_ = bool
-type integer_ = int
-type timestamp_ = Js.Date.t;
-type long = float
+}
+type awsServiceClient;
+@module("@aws-sdk/client-s3-outposts") @new external createClient: unit => awsServiceClient = "S3OutpostsClient";
+type baseString = string
+type baseBoolean = bool
+type baseInteger = int
+type baseTimestamp = Js.Date.t;
+type baseLong = float
 type subnetId = string
 type securityGroupId = string
 type outpostId = string
@@ -29,20 +31,19 @@ type networkInterface = {
 type networkInterfaces = array<networkInterface>
 type endpoint = {
 @as("NetworkInterfaces") networkInterfaces: option<networkInterfaces>,
-@as("CreationTime") creationTime: option<creationTime>,
-@as("Status") status: option<endpointStatus>,
-@as("CidrBlock") cidrBlock: option<cidrBlock>,
-@as("OutpostsId") outpostsId: option<outpostId>,
-@as("EndpointArn") endpointArn: option<endpointArn>
+  @as("CreationTime") creationTime: option<creationTime>,
+  @as("Status") status: option<endpointStatus>,
+  @as("CidrBlock") cidrBlock: option<cidrBlock>,
+  @as("OutpostsId") outpostsId: option<outpostId>,
+  @as("EndpointArn") endpointArn: option<endpointArn>
 }
 type endpoints = array<endpoint>
-type awsServiceClient;
-@module("@aws-sdk/client-s3-outposts") @new external createClient: unit => awsServiceClient = "S3OutpostsClient";
+
 module DeleteEndpoint = {
   type t;
   type request = {
 @as("OutpostId") outpostId: outpostId,
-@as("EndpointId") endpointId: endpointId
+  @as("EndpointId") endpointId: endpointId
 }
   
   @module("@aws-sdk/client-s3-outposts") @new external new_: (request) => t = "DeleteEndpointCommand";
@@ -53,8 +54,8 @@ module CreateEndpoint = {
   type t;
   type request = {
 @as("SecurityGroupId") securityGroupId: securityGroupId,
-@as("SubnetId") subnetId: subnetId,
-@as("OutpostId") outpostId: outpostId
+  @as("SubnetId") subnetId: subnetId,
+  @as("OutpostId") outpostId: outpostId
 }
   type response = {
 @as("EndpointArn") endpointArn: option<endpointArn>
@@ -67,11 +68,11 @@ module ListEndpoints = {
   type t;
   type request = {
 @as("MaxResults") maxResults: option<maxResults>,
-@as("NextToken") nextToken: option<nextToken>
+  @as("NextToken") nextToken: option<nextToken>
 }
   type response = {
 @as("NextToken") nextToken: option<nextToken>,
-@as("Endpoints") endpoints: option<endpoints>
+  @as("Endpoints") endpoints: option<endpoints>
 }
   @module("@aws-sdk/client-s3-outposts") @new external new_: (request) => t = "ListEndpointsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";

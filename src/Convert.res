@@ -64,7 +64,7 @@ let convert = (parsed: Result.t<array<Shape.t>, 'r>) => {
         name: name,
         descriptor: descriptor,
         targets: Dependencies.getTargets(descriptor),
-        recursWith: None
+        recursWith: None,
       })
       let shapesWithTargets = Dependencies.order(shapesWithTargets)
 
@@ -76,7 +76,7 @@ let convert = (parsed: Result.t<array<Shape.t>, 'r>) => {
         }
       )
 
-      let (recursiveShapes, allStructures) = Array.partition(allStructures, ({ recursWith}) => Option.isSome(recursWith))
+      // let (recursiveShapes, allStructures) = Array.partition(allStructures, ({ recursWith}) => Option.isSome(recursWith))
 
       // Simplify operations to their constituent parts
       let operations = Array.keepMap(operationShapes, shape =>
@@ -113,22 +113,37 @@ let convert = (parsed: Result.t<array<Shape.t>, 'r>) => {
       let service = findServiceShape(remainingStructures)
       let serviceDetails = getServiceDetails(service)
       switch serviceDetails {
-      | Some({arnNamespace: packagingName, cloudFormationName}) => {
+      | Some({arnNamespace: serviceName, cloudFormationName}) => {
           let moduleName = Js.String2.replace(cloudFormationName, " ", "")
           let operationSnippets = Array.map(operationModuleParts, ((name, details, structures)) => {
             let inputOperationStructure = findOperationalStructure(structures, details.input)
             let outputOperationStructure = findOperationalStructure(structures, details.output)
             generateOperationModule(
-              packagingName,
+              serviceName,
               (name, inputOperationStructure, outputOperationStructure),
             )
           })
-          let codeSnippets = Array.map(remainingStructures, shape =>
-            generateTypeBlock(packagingName, {name: shape.name, descriptor: shape.descriptor})
-          )
+          let codeSnippets = Array.map(remainingStructures, shape => {
+            switch shape.recursWith {
+            | Some(recursItems) =>
+              generateRecursiveTypeBlock(
+                Array.concat([shape], recursItems)->Array.map((shape): Shape.t => {
+                  name: shape.name,
+                  descriptor: shape.descriptor,
+                }),
+              )
+            | None =>
+              generateTypeBlock({name: shape.name, descriptor: shape.descriptor})
+            }
+          })
           // let recursiveCodeSnippets = generateRecursiveTypeBlock(packagingName, Array.map(recursiveShapes, (s):Shape.t => { name: s.name, descriptor: s.descriptor}))
           Ok({
-            code: Array.concatMany([[generateResponseMetadata()], codeSnippets, operationSnippets])->Array.joinWith("\n", x => x),
+            code: Array.concatMany([
+              [generateResponseMetadata()],
+              [generateServiceShape(serviceName, cloudFormationName)],
+              codeSnippets,
+              operationSnippets,
+            ])->Array.joinWith("\n", x => x),
             moduleName: moduleName,
           })
         }

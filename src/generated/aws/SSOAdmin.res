@@ -5,27 +5,29 @@ httpStatusCode: option<float>,
   cfId: option<string>,
   attempts: option<int>,
   totalRetryDelay: option<int>
-};
-type string_ = string
-type boolean_ = bool
-type integer_ = int
-type timestamp_ = Js.Date.t;
-type long = float
+}
+type awsServiceClient;
+@module("@aws-sdk/client-sso") @new external createClient: unit => awsServiceClient = "SSOAdminClient";
+type baseString = string
+type baseBoolean = bool
+type baseInteger = int
+type baseTimestamp = Js.Date.t;
+type baseLong = float
 type validationExceptionMessage = string
 type uuid = string
 type token = string
 type throttlingExceptionMessage = string
-type targetType = [@as("AWS_ACCOUNT") #AWSACCOUNT]
+type targetType = [@as("AWS_ACCOUNT") #AWS_ACCOUNT]
 type targetId = string
 type tagValue = string
 type tagKey = string
-type statusValues = [@as("SUCCEEDED") #SUCCEEDED | @as("FAILED") #FAILED | @as("IN_PROGRESS") #INPROGRESS]
+type statusValues = [@as("SUCCEEDED") #SUCCEEDED | @as("FAILED") #FAILED | @as("IN_PROGRESS") #IN_PROGRESS]
 type serviceQuotaExceededMessage = string
 type resourceNotFoundMessage = string
 type relayState = string
 type reason = string
-type provisioningStatus = [@as("LATEST_PERMISSION_SET_NOT_PROVISIONED") #LATESTPERMISSIONSETNOTPROVISIONED | @as("LATEST_PERMISSION_SET_PROVISIONED") #LATESTPERMISSIONSETPROVISIONED]
-type provisionTargetType = [@as("ALL_PROVISIONED_ACCOUNTS") #ALLPROVISIONEDACCOUNTS | @as("AWS_ACCOUNT") #AWSACCOUNT]
+type provisioningStatus = [@as("LATEST_PERMISSION_SET_NOT_PROVISIONED") #LATEST_PERMISSION_SET_NOT_PROVISIONED | @as("LATEST_PERMISSION_SET_PROVISIONED") #LATEST_PERMISSION_SET_PROVISIONED]
+type provisionTargetType = [@as("ALL_PROVISIONED_ACCOUNTS") #ALL_PROVISIONED_ACCOUNTS | @as("AWS_ACCOUNT") #AWS_ACCOUNT]
 type principalType = [@as("GROUP") #GROUP | @as("USER") #USER]
 type principalId = string
 type permissionSetPolicyDocument = string
@@ -38,7 +40,7 @@ type managedPolicyArn = string
 type internalFailureMessage = string
 type instanceArn = string
 type instanceAccessControlAttributeConfigurationStatusReason = string
-type instanceAccessControlAttributeConfigurationStatus = [@as("CREATION_FAILED") #CREATIONFAILED | @as("CREATION_IN_PROGRESS") #CREATIONINPROGRESS | @as("ENABLED") #ENABLED]
+type instanceAccessControlAttributeConfigurationStatus = [@as("CREATION_FAILED") #CREATION_FAILED | @as("CREATION_IN_PROGRESS") #CREATION_IN_PROGRESS | @as("ENABLED") #ENABLED]
 type id = string
 type generalArn = string
 type duration = string
@@ -51,63 +53,63 @@ type accessControlAttributeKey = string
 type tagKeyList = array<tagKey>
 type tag = {
 @as("Value") value: option<tagValue>,
-@as("Key") key: option<tagKey>
+  @as("Key") key: option<tagKey>
 }
 type permissionSetProvisioningStatusMetadata = {
 @as("CreatedDate") createdDate: option<date>,
-@as("RequestId") requestId: option<uuid>,
-@as("Status") status: option<statusValues>
+  @as("RequestId") requestId: option<uuid>,
+  @as("Status") status: option<statusValues>
 }
 type permissionSetProvisioningStatus = {
 @as("CreatedDate") createdDate: option<date>,
-@as("FailureReason") failureReason: option<reason>,
-@as("PermissionSetArn") permissionSetArn: option<permissionSetArn>,
-@as("AccountId") accountId: option<accountId>,
-@as("RequestId") requestId: option<uuid>,
-@as("Status") status: option<statusValues>
+  @as("FailureReason") failureReason: option<reason>,
+  @as("PermissionSetArn") permissionSetArn: option<permissionSetArn>,
+  @as("AccountId") accountId: option<accountId>,
+  @as("RequestId") requestId: option<uuid>,
+  @as("Status") status: option<statusValues>
 }
 type permissionSetList = array<permissionSetArn>
 type permissionSet = {
 @as("RelayState") relayState: option<relayState>,
-@as("SessionDuration") sessionDuration: option<duration>,
-@as("CreatedDate") createdDate: option<date>,
-@as("Description") description: option<permissionSetDescription>,
-@as("PermissionSetArn") permissionSetArn: option<permissionSetArn>,
-@as("Name") name: option<permissionSetName>
+  @as("SessionDuration") sessionDuration: option<duration>,
+  @as("CreatedDate") createdDate: option<date>,
+  @as("Description") description: option<permissionSetDescription>,
+  @as("PermissionSetArn") permissionSetArn: option<permissionSetArn>,
+  @as("Name") name: option<permissionSetName>
 }
 type operationStatusFilter = {
 @as("Status") status: option<statusValues>
 }
 type instanceMetadata = {
 @as("IdentityStoreId") identityStoreId: option<id>,
-@as("InstanceArn") instanceArn: option<instanceArn>
+  @as("InstanceArn") instanceArn: option<instanceArn>
 }
 type attachedManagedPolicy = {
 @as("Arn") arn: option<managedPolicyArn>,
-@as("Name") name: option<name>
+  @as("Name") name: option<name>
 }
 type accountList = array<accountId>
 type accountAssignmentOperationStatusMetadata = {
 @as("CreatedDate") createdDate: option<date>,
-@as("RequestId") requestId: option<uuid>,
-@as("Status") status: option<statusValues>
+  @as("RequestId") requestId: option<uuid>,
+  @as("Status") status: option<statusValues>
 }
 type accountAssignmentOperationStatus = {
 @as("CreatedDate") createdDate: option<date>,
-@as("PrincipalId") principalId: option<principalId>,
-@as("PrincipalType") principalType: option<principalType>,
-@as("PermissionSetArn") permissionSetArn: option<permissionSetArn>,
-@as("TargetType") targetType: option<targetType>,
-@as("TargetId") targetId: option<targetId>,
-@as("FailureReason") failureReason: option<reason>,
-@as("RequestId") requestId: option<uuid>,
-@as("Status") status: option<statusValues>
+  @as("PrincipalId") principalId: option<principalId>,
+  @as("PrincipalType") principalType: option<principalType>,
+  @as("PermissionSetArn") permissionSetArn: option<permissionSetArn>,
+  @as("TargetType") targetType: option<targetType>,
+  @as("TargetId") targetId: option<targetId>,
+  @as("FailureReason") failureReason: option<reason>,
+  @as("RequestId") requestId: option<uuid>,
+  @as("Status") status: option<statusValues>
 }
 type accountAssignment = {
 @as("PrincipalId") principalId: option<principalId>,
-@as("PrincipalType") principalType: option<principalType>,
-@as("PermissionSetArn") permissionSetArn: option<permissionSetArn>,
-@as("AccountId") accountId: option<accountId>
+  @as("PrincipalType") principalType: option<principalType>,
+  @as("PermissionSetArn") permissionSetArn: option<permissionSetArn>,
+  @as("AccountId") accountId: option<accountId>
 }
 type accessControlAttributeValueSourceList = array<accessControlAttributeValueSource>
 type tagList_ = array<tag>
@@ -121,22 +123,21 @@ type accessControlAttributeValue = {
 }
 type accessControlAttribute = {
 @as("Value") value: accessControlAttributeValue,
-@as("Key") key: accessControlAttributeKey
+  @as("Key") key: accessControlAttributeKey
 }
 type accessControlAttributeList = array<accessControlAttribute>
 type instanceAccessControlAttributeConfiguration = {
 @as("AccessControlAttributes") accessControlAttributes: accessControlAttributeList
 }
-type awsServiceClient;
-@module("@aws-sdk/client-sso") @new external createClient: unit => awsServiceClient = "SSOAdminClient";
+
 module UpdatePermissionSet = {
   type t;
   type request = {
 @as("RelayState") relayState: option<relayState>,
-@as("SessionDuration") sessionDuration: option<duration>,
-@as("Description") description: option<permissionSetDescription>,
-@as("PermissionSetArn") permissionSetArn: permissionSetArn,
-@as("InstanceArn") instanceArn: instanceArn
+  @as("SessionDuration") sessionDuration: option<duration>,
+  @as("Description") description: option<permissionSetDescription>,
+  @as("PermissionSetArn") permissionSetArn: permissionSetArn,
+  @as("InstanceArn") instanceArn: instanceArn
 }
   type response = unit
   @module("@aws-sdk/client-sso") @new external new_: (request) => t = "UpdatePermissionSetCommand";
@@ -147,8 +148,8 @@ module PutInlinePolicyToPermissionSet = {
   type t;
   type request = {
 @as("InlinePolicy") inlinePolicy: permissionSetPolicyDocument,
-@as("PermissionSetArn") permissionSetArn: permissionSetArn,
-@as("InstanceArn") instanceArn: instanceArn
+  @as("PermissionSetArn") permissionSetArn: permissionSetArn,
+  @as("InstanceArn") instanceArn: instanceArn
 }
   type response = unit
   @module("@aws-sdk/client-sso") @new external new_: (request) => t = "PutInlinePolicyToPermissionSetCommand";
@@ -159,7 +160,7 @@ module GetInlinePolicyForPermissionSet = {
   type t;
   type request = {
 @as("PermissionSetArn") permissionSetArn: permissionSetArn,
-@as("InstanceArn") instanceArn: instanceArn
+  @as("InstanceArn") instanceArn: instanceArn
 }
   type response = {
 @as("InlinePolicy") inlinePolicy: option<permissionSetPolicyDocument>
@@ -172,8 +173,8 @@ module DetachManagedPolicyFromPermissionSet = {
   type t;
   type request = {
 @as("ManagedPolicyArn") managedPolicyArn: managedPolicyArn,
-@as("PermissionSetArn") permissionSetArn: permissionSetArn,
-@as("InstanceArn") instanceArn: instanceArn
+  @as("PermissionSetArn") permissionSetArn: permissionSetArn,
+  @as("InstanceArn") instanceArn: instanceArn
 }
   type response = unit
   @module("@aws-sdk/client-sso") @new external new_: (request) => t = "DetachManagedPolicyFromPermissionSetCommand";
@@ -184,7 +185,7 @@ module DeletePermissionSet = {
   type t;
   type request = {
 @as("PermissionSetArn") permissionSetArn: permissionSetArn,
-@as("InstanceArn") instanceArn: instanceArn
+  @as("InstanceArn") instanceArn: instanceArn
 }
   type response = unit
   @module("@aws-sdk/client-sso") @new external new_: (request) => t = "DeletePermissionSetCommand";
@@ -205,7 +206,7 @@ module DeleteInlinePolicyFromPermissionSet = {
   type t;
   type request = {
 @as("PermissionSetArn") permissionSetArn: permissionSetArn,
-@as("InstanceArn") instanceArn: instanceArn
+  @as("InstanceArn") instanceArn: instanceArn
 }
   type response = unit
   @module("@aws-sdk/client-sso") @new external new_: (request) => t = "DeleteInlinePolicyFromPermissionSetCommand";
@@ -216,8 +217,8 @@ module AttachManagedPolicyToPermissionSet = {
   type t;
   type request = {
 @as("ManagedPolicyArn") managedPolicyArn: managedPolicyArn,
-@as("PermissionSetArn") permissionSetArn: permissionSetArn,
-@as("InstanceArn") instanceArn: instanceArn
+  @as("PermissionSetArn") permissionSetArn: permissionSetArn,
+  @as("InstanceArn") instanceArn: instanceArn
 }
   type response = unit
   @module("@aws-sdk/client-sso") @new external new_: (request) => t = "AttachManagedPolicyToPermissionSetCommand";
@@ -228,8 +229,8 @@ module UntagResource = {
   type t;
   type request = {
 @as("TagKeys") tagKeys: tagKeyList,
-@as("ResourceArn") resourceArn: generalArn,
-@as("InstanceArn") instanceArn: instanceArn
+  @as("ResourceArn") resourceArn: generalArn,
+  @as("InstanceArn") instanceArn: instanceArn
 }
   type response = unit
   @module("@aws-sdk/client-sso") @new external new_: (request) => t = "UntagResourceCommand";
@@ -240,9 +241,9 @@ module ProvisionPermissionSet = {
   type t;
   type request = {
 @as("TargetType") targetType: provisionTargetType,
-@as("TargetId") targetId: option<targetId>,
-@as("PermissionSetArn") permissionSetArn: permissionSetArn,
-@as("InstanceArn") instanceArn: instanceArn
+  @as("TargetId") targetId: option<targetId>,
+  @as("PermissionSetArn") permissionSetArn: permissionSetArn,
+  @as("InstanceArn") instanceArn: instanceArn
 }
   type response = {
 @as("PermissionSetProvisioningStatus") permissionSetProvisioningStatus: option<permissionSetProvisioningStatus>
@@ -255,14 +256,14 @@ module ListPermissionSetsProvisionedToAccount = {
   type t;
   type request = {
 @as("NextToken") nextToken: option<token>,
-@as("MaxResults") maxResults: option<maxResults>,
-@as("ProvisioningStatus") provisioningStatus: option<provisioningStatus>,
-@as("AccountId") accountId: accountId,
-@as("InstanceArn") instanceArn: instanceArn
+  @as("MaxResults") maxResults: option<maxResults>,
+  @as("ProvisioningStatus") provisioningStatus: option<provisioningStatus>,
+  @as("AccountId") accountId: accountId,
+  @as("InstanceArn") instanceArn: instanceArn
 }
   type response = {
 @as("PermissionSets") permissionSets: option<permissionSetList>,
-@as("NextToken") nextToken: option<token>
+  @as("NextToken") nextToken: option<token>
 }
   @module("@aws-sdk/client-sso") @new external new_: (request) => t = "ListPermissionSetsProvisionedToAccountCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -272,12 +273,12 @@ module ListPermissionSets = {
   type t;
   type request = {
 @as("MaxResults") maxResults: option<maxResults>,
-@as("NextToken") nextToken: option<token>,
-@as("InstanceArn") instanceArn: instanceArn
+  @as("NextToken") nextToken: option<token>,
+  @as("InstanceArn") instanceArn: instanceArn
 }
   type response = {
 @as("NextToken") nextToken: option<token>,
-@as("PermissionSets") permissionSets: option<permissionSetList>
+  @as("PermissionSets") permissionSets: option<permissionSetList>
 }
   @module("@aws-sdk/client-sso") @new external new_: (request) => t = "ListPermissionSetsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -287,14 +288,14 @@ module ListAccountsForProvisionedPermissionSet = {
   type t;
   type request = {
 @as("NextToken") nextToken: option<token>,
-@as("MaxResults") maxResults: option<maxResults>,
-@as("ProvisioningStatus") provisioningStatus: option<provisioningStatus>,
-@as("PermissionSetArn") permissionSetArn: permissionSetArn,
-@as("InstanceArn") instanceArn: instanceArn
+  @as("MaxResults") maxResults: option<maxResults>,
+  @as("ProvisioningStatus") provisioningStatus: option<provisioningStatus>,
+  @as("PermissionSetArn") permissionSetArn: permissionSetArn,
+  @as("InstanceArn") instanceArn: instanceArn
 }
   type response = {
 @as("NextToken") nextToken: option<token>,
-@as("AccountIds") accountIds: option<accountList>
+  @as("AccountIds") accountIds: option<accountList>
 }
   @module("@aws-sdk/client-sso") @new external new_: (request) => t = "ListAccountsForProvisionedPermissionSetCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -304,7 +305,7 @@ module DescribePermissionSetProvisioningStatus = {
   type t;
   type request = {
 @as("ProvisionPermissionSetRequestId") provisionPermissionSetRequestId: uuid,
-@as("InstanceArn") instanceArn: instanceArn
+  @as("InstanceArn") instanceArn: instanceArn
 }
   type response = {
 @as("PermissionSetProvisioningStatus") permissionSetProvisioningStatus: option<permissionSetProvisioningStatus>
@@ -317,7 +318,7 @@ module DescribePermissionSet = {
   type t;
   type request = {
 @as("PermissionSetArn") permissionSetArn: permissionSetArn,
-@as("InstanceArn") instanceArn: instanceArn
+  @as("InstanceArn") instanceArn: instanceArn
 }
   type response = {
 @as("PermissionSet") permissionSet: option<permissionSet>
@@ -330,7 +331,7 @@ module DescribeAccountAssignmentDeletionStatus = {
   type t;
   type request = {
 @as("AccountAssignmentDeletionRequestId") accountAssignmentDeletionRequestId: uuid,
-@as("InstanceArn") instanceArn: instanceArn
+  @as("InstanceArn") instanceArn: instanceArn
 }
   type response = {
 @as("AccountAssignmentDeletionStatus") accountAssignmentDeletionStatus: option<accountAssignmentOperationStatus>
@@ -343,7 +344,7 @@ module DescribeAccountAssignmentCreationStatus = {
   type t;
   type request = {
 @as("AccountAssignmentCreationRequestId") accountAssignmentCreationRequestId: uuid,
-@as("InstanceArn") instanceArn: instanceArn
+  @as("InstanceArn") instanceArn: instanceArn
 }
   type response = {
 @as("AccountAssignmentCreationStatus") accountAssignmentCreationStatus: option<accountAssignmentOperationStatus>
@@ -356,11 +357,11 @@ module DeleteAccountAssignment = {
   type t;
   type request = {
 @as("PrincipalId") principalId: principalId,
-@as("PrincipalType") principalType: principalType,
-@as("PermissionSetArn") permissionSetArn: permissionSetArn,
-@as("TargetType") targetType: targetType,
-@as("TargetId") targetId: targetId,
-@as("InstanceArn") instanceArn: instanceArn
+  @as("PrincipalType") principalType: principalType,
+  @as("PermissionSetArn") permissionSetArn: permissionSetArn,
+  @as("TargetType") targetType: targetType,
+  @as("TargetId") targetId: targetId,
+  @as("InstanceArn") instanceArn: instanceArn
 }
   type response = {
 @as("AccountAssignmentDeletionStatus") accountAssignmentDeletionStatus: option<accountAssignmentOperationStatus>
@@ -373,11 +374,11 @@ module CreateAccountAssignment = {
   type t;
   type request = {
 @as("PrincipalId") principalId: principalId,
-@as("PrincipalType") principalType: principalType,
-@as("PermissionSetArn") permissionSetArn: permissionSetArn,
-@as("TargetType") targetType: targetType,
-@as("TargetId") targetId: targetId,
-@as("InstanceArn") instanceArn: instanceArn
+  @as("PrincipalType") principalType: principalType,
+  @as("PermissionSetArn") permissionSetArn: permissionSetArn,
+  @as("TargetType") targetType: targetType,
+  @as("TargetId") targetId: targetId,
+  @as("InstanceArn") instanceArn: instanceArn
 }
   type response = {
 @as("AccountAssignmentCreationStatus") accountAssignmentCreationStatus: option<accountAssignmentOperationStatus>
@@ -390,8 +391,8 @@ module TagResource = {
   type t;
   type request = {
 @as("Tags") tags: tagList_,
-@as("ResourceArn") resourceArn: generalArn,
-@as("InstanceArn") instanceArn: instanceArn
+  @as("ResourceArn") resourceArn: generalArn,
+  @as("InstanceArn") instanceArn: instanceArn
 }
   type response = unit
   @module("@aws-sdk/client-sso") @new external new_: (request) => t = "TagResourceCommand";
@@ -402,12 +403,12 @@ module ListTagsForResource = {
   type t;
   type request = {
 @as("NextToken") nextToken: option<token>,
-@as("ResourceArn") resourceArn: generalArn,
-@as("InstanceArn") instanceArn: instanceArn
+  @as("ResourceArn") resourceArn: generalArn,
+  @as("InstanceArn") instanceArn: instanceArn
 }
   type response = {
 @as("NextToken") nextToken: option<token>,
-@as("Tags") tags: option<tagList_>
+  @as("Tags") tags: option<tagList_>
 }
   @module("@aws-sdk/client-sso") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -417,13 +418,13 @@ module ListPermissionSetProvisioningStatus = {
   type t;
   type request = {
 @as("Filter") filter: option<operationStatusFilter>,
-@as("NextToken") nextToken: option<token>,
-@as("MaxResults") maxResults: option<maxResults>,
-@as("InstanceArn") instanceArn: instanceArn
+  @as("NextToken") nextToken: option<token>,
+  @as("MaxResults") maxResults: option<maxResults>,
+  @as("InstanceArn") instanceArn: instanceArn
 }
   type response = {
 @as("NextToken") nextToken: option<token>,
-@as("PermissionSetsProvisioningStatus") permissionSetsProvisioningStatus: option<permissionSetProvisioningStatusList>
+  @as("PermissionSetsProvisioningStatus") permissionSetsProvisioningStatus: option<permissionSetProvisioningStatusList>
 }
   @module("@aws-sdk/client-sso") @new external new_: (request) => t = "ListPermissionSetProvisioningStatusCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -433,13 +434,13 @@ module ListManagedPoliciesInPermissionSet = {
   type t;
   type request = {
 @as("NextToken") nextToken: option<token>,
-@as("MaxResults") maxResults: option<maxResults>,
-@as("PermissionSetArn") permissionSetArn: permissionSetArn,
-@as("InstanceArn") instanceArn: instanceArn
+  @as("MaxResults") maxResults: option<maxResults>,
+  @as("PermissionSetArn") permissionSetArn: permissionSetArn,
+  @as("InstanceArn") instanceArn: instanceArn
 }
   type response = {
 @as("NextToken") nextToken: option<token>,
-@as("AttachedManagedPolicies") attachedManagedPolicies: option<attachedManagedPolicyList>
+  @as("AttachedManagedPolicies") attachedManagedPolicies: option<attachedManagedPolicyList>
 }
   @module("@aws-sdk/client-sso") @new external new_: (request) => t = "ListManagedPoliciesInPermissionSetCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -449,11 +450,11 @@ module ListInstances = {
   type t;
   type request = {
 @as("NextToken") nextToken: option<token>,
-@as("MaxResults") maxResults: option<maxResults>
+  @as("MaxResults") maxResults: option<maxResults>
 }
   type response = {
 @as("NextToken") nextToken: option<token>,
-@as("Instances") instances: option<instanceList>
+  @as("Instances") instances: option<instanceList>
 }
   @module("@aws-sdk/client-sso") @new external new_: (request) => t = "ListInstancesCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -463,14 +464,14 @@ module ListAccountAssignments = {
   type t;
   type request = {
 @as("NextToken") nextToken: option<token>,
-@as("MaxResults") maxResults: option<maxResults>,
-@as("PermissionSetArn") permissionSetArn: permissionSetArn,
-@as("AccountId") accountId: targetId,
-@as("InstanceArn") instanceArn: instanceArn
+  @as("MaxResults") maxResults: option<maxResults>,
+  @as("PermissionSetArn") permissionSetArn: permissionSetArn,
+  @as("AccountId") accountId: targetId,
+  @as("InstanceArn") instanceArn: instanceArn
 }
   type response = {
 @as("NextToken") nextToken: option<token>,
-@as("AccountAssignments") accountAssignments: option<accountAssignmentList>
+  @as("AccountAssignments") accountAssignments: option<accountAssignmentList>
 }
   @module("@aws-sdk/client-sso") @new external new_: (request) => t = "ListAccountAssignmentsCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -480,13 +481,13 @@ module ListAccountAssignmentDeletionStatus = {
   type t;
   type request = {
 @as("Filter") filter: option<operationStatusFilter>,
-@as("NextToken") nextToken: option<token>,
-@as("MaxResults") maxResults: option<maxResults>,
-@as("InstanceArn") instanceArn: instanceArn
+  @as("NextToken") nextToken: option<token>,
+  @as("MaxResults") maxResults: option<maxResults>,
+  @as("InstanceArn") instanceArn: instanceArn
 }
   type response = {
 @as("NextToken") nextToken: option<token>,
-@as("AccountAssignmentsDeletionStatus") accountAssignmentsDeletionStatus: option<accountAssignmentOperationStatusList>
+  @as("AccountAssignmentsDeletionStatus") accountAssignmentsDeletionStatus: option<accountAssignmentOperationStatusList>
 }
   @module("@aws-sdk/client-sso") @new external new_: (request) => t = "ListAccountAssignmentDeletionStatusCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -496,13 +497,13 @@ module ListAccountAssignmentCreationStatus = {
   type t;
   type request = {
 @as("Filter") filter: option<operationStatusFilter>,
-@as("NextToken") nextToken: option<token>,
-@as("MaxResults") maxResults: option<maxResults>,
-@as("InstanceArn") instanceArn: instanceArn
+  @as("NextToken") nextToken: option<token>,
+  @as("MaxResults") maxResults: option<maxResults>,
+  @as("InstanceArn") instanceArn: instanceArn
 }
   type response = {
 @as("NextToken") nextToken: option<token>,
-@as("AccountAssignmentsCreationStatus") accountAssignmentsCreationStatus: option<accountAssignmentOperationStatusList>
+  @as("AccountAssignmentsCreationStatus") accountAssignmentsCreationStatus: option<accountAssignmentOperationStatusList>
 }
   @module("@aws-sdk/client-sso") @new external new_: (request) => t = "ListAccountAssignmentCreationStatusCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -512,11 +513,11 @@ module CreatePermissionSet = {
   type t;
   type request = {
 @as("Tags") tags: option<tagList_>,
-@as("RelayState") relayState: option<relayState>,
-@as("SessionDuration") sessionDuration: option<duration>,
-@as("InstanceArn") instanceArn: instanceArn,
-@as("Description") description: option<permissionSetDescription>,
-@as("Name") name: permissionSetName
+  @as("RelayState") relayState: option<relayState>,
+  @as("SessionDuration") sessionDuration: option<duration>,
+  @as("InstanceArn") instanceArn: instanceArn,
+  @as("Description") description: option<permissionSetDescription>,
+  @as("Name") name: permissionSetName
 }
   type response = {
 @as("PermissionSet") permissionSet: option<permissionSet>
@@ -529,7 +530,7 @@ module UpdateInstanceAccessControlAttributeConfiguration = {
   type t;
   type request = {
 @as("InstanceAccessControlAttributeConfiguration") instanceAccessControlAttributeConfiguration: instanceAccessControlAttributeConfiguration,
-@as("InstanceArn") instanceArn: instanceArn
+  @as("InstanceArn") instanceArn: instanceArn
 }
   type response = unit
   @module("@aws-sdk/client-sso") @new external new_: (request) => t = "UpdateInstanceAccessControlAttributeConfigurationCommand";
@@ -543,8 +544,8 @@ module DescribeInstanceAccessControlAttributeConfiguration = {
 }
   type response = {
 @as("InstanceAccessControlAttributeConfiguration") instanceAccessControlAttributeConfiguration: option<instanceAccessControlAttributeConfiguration>,
-@as("StatusReason") statusReason: option<instanceAccessControlAttributeConfigurationStatusReason>,
-@as("Status") status: option<instanceAccessControlAttributeConfigurationStatus>
+  @as("StatusReason") statusReason: option<instanceAccessControlAttributeConfigurationStatusReason>,
+  @as("Status") status: option<instanceAccessControlAttributeConfigurationStatus>
 }
   @module("@aws-sdk/client-sso") @new external new_: (request) => t = "DescribeInstanceAccessControlAttributeConfigurationCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -554,7 +555,7 @@ module CreateInstanceAccessControlAttributeConfiguration = {
   type t;
   type request = {
 @as("InstanceAccessControlAttributeConfiguration") instanceAccessControlAttributeConfiguration: instanceAccessControlAttributeConfiguration,
-@as("InstanceArn") instanceArn: instanceArn
+  @as("InstanceArn") instanceArn: instanceArn
 }
   type response = unit
   @module("@aws-sdk/client-sso") @new external new_: (request) => t = "CreateInstanceAccessControlAttributeConfigurationCommand";

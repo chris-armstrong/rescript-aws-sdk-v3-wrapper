@@ -5,16 +5,20 @@ httpStatusCode: option<float>,
   cfId: option<string>,
   attempts: option<int>,
   totalRetryDelay: option<int>
-};
-type integer_ = int
-type timestamp_ = Js.Date.t;
-type long = float
+}
+type awsServiceClient;
+@module("@aws-sdk/client-lex") @new external createClient: unit => awsServiceClient = "LexRuntimeV2Client";
+type baseString = string
+type baseBoolean = bool
+type baseInteger = int
+type baseTimestamp = Js.Date.t;
+type baseLong = float
 type text = string
 type string_ = string
 type sessionId = string
 type sentimentType = [@as("POSITIVE") #POSITIVE | @as("NEUTRAL") #NEUTRAL | @as("NEGATIVE") #NEGATIVE | @as("MIXED") #MIXED]
 type sensitiveNonEmptyString = string
-type playbackInterruptionReason = [@as("VOICE_START_DETECTED") #VOICESTARTDETECTED | @as("TEXT_DETECTED") #TEXTDETECTED | @as("DTMF_START_DETECTED") #DTMFSTARTDETECTED]
+type playbackInterruptionReason = [@as("VOICE_START_DETECTED") #VOICE_START_DETECTED | @as("TEXT_DETECTED") #TEXT_DETECTED | @as("DTMF_START_DETECTED") #DTMF_START_DETECTED]
 type parameterName = string
 type nonEmptyString = string
 type messageContentType = [@as("SSML") #SSML | @as("PlainText") #PlainText | @as("ImageResponseCard") #ImageResponseCard | @as("CustomPayload") #CustomPayload]
@@ -46,10 +50,10 @@ name: string,
   @as("$service") service: option<string>,
   @as("$metadata") metadata: responseMetadata,
   message: string_
-};
+}
 type transcriptEvent = {
 eventId: option<eventId>,
-transcript: option<string_>
+  transcript: option<string_>
 }
 type throttlingException = {
 name: string,
@@ -57,19 +61,19 @@ name: string,
   @as("$service") service: option<string>,
   @as("$metadata") metadata: responseMetadata,
   message: string_
-};
+}
 type textInputEvent = {
 clientTimestampMillis: option<epochMillis>,
-eventId: option<eventId>,
-text: text
+  eventId: option<eventId>,
+  text: text
 }
-type stringMap = Js.Dict.t< string_>
+type stringMap = Js.Dict.t<string_>
 type stringList = array<nonEmptyString>
 type sentimentScore = {
 mixed: option<double>,
-neutral: option<double>,
-negative: option<double>,
-positive: option<double>
+  neutral: option<double>,
+  negative: option<double>,
+  positive: option<double>
 }
 type resourceNotFoundException = {
 name: string,
@@ -77,15 +81,15 @@ name: string,
   @as("$service") service: option<string>,
   @as("$metadata") metadata: responseMetadata,
   message: string_
-};
+}
 type playbackInterruptionEvent = {
 eventId: option<eventId>,
-causedByEventId: option<eventId>,
-eventReason: option<playbackInterruptionReason>
+  causedByEventId: option<eventId>,
+  eventReason: option<playbackInterruptionReason>
 }
 type playbackCompletionEvent = {
 clientTimestampMillis: option<epochMillis>,
-eventId: option<eventId>
+  eventId: option<eventId>
 }
 type internalServerException = {
 name: string,
@@ -93,17 +97,17 @@ name: string,
   @as("$service") service: option<string>,
   @as("$metadata") metadata: responseMetadata,
   message: string_
-};
+}
 type heartbeatEvent = {
 eventId: option<eventId>
 }
 type disconnectionEvent = {
 clientTimestampMillis: option<epochMillis>,
-eventId: option<eventId>
+  eventId: option<eventId>
 }
 type dialogAction = {
 slotToElicit: option<nonEmptyString>,
-@as("type") type_: dialogActionType
+  @as("type") type_: dialogActionType
 }
 type dependencyFailedException = {
 name: string,
@@ -111,11 +115,11 @@ name: string,
   @as("$service") service: option<string>,
   @as("$metadata") metadata: responseMetadata,
   message: string_
-};
+}
 type dtmfinputEvent = {
 clientTimestampMillis: option<epochMillis>,
-eventId: option<eventId>,
-inputCharacter: dtmfregex
+  eventId: option<eventId>,
+  inputCharacter: dtmfregex
 }
 type conflictException = {
 name: string,
@@ -123,13 +127,13 @@ name: string,
   @as("$service") service: option<string>,
   @as("$metadata") metadata: responseMetadata,
   message: string_
-};
+}
 type confidenceScore = {
 score: option<double>
 }
 type button = {
 value: buttonValue,
-text: buttonText
+  text: buttonText
 }
 type badGatewayException = {
 name: string,
@@ -137,129 +141,150 @@ name: string,
   @as("$service") service: option<string>,
   @as("$metadata") metadata: responseMetadata,
   message: string_
-};
+}
 type audioResponseEvent = {
 eventId: option<eventId>,
-contentType: option<nonEmptyString>,
-audioChunk: option<audioChunk>
+  contentType: option<nonEmptyString>,
+  audioChunk: option<audioChunk>
 }
 type audioInputEvent = {
 clientTimestampMillis: option<epochMillis>,
-eventId: option<eventId>,
-contentType: nonEmptyString,
-audioChunk: option<audioChunk>
+  eventId: option<eventId>,
+  contentType: nonEmptyString,
+  audioChunk: option<audioChunk>
 }
 type activeContextTimeToLive = {
 turnsToLive: activeContextTurnsToLive,
-timeToLiveInSeconds: activeContextTimeToLiveInSeconds
+  timeToLiveInSeconds: activeContextTimeToLiveInSeconds
 }
-type activeContextParametersMap = Js.Dict.t< text>
+type activeContextParametersMap = Js.Dict.t<text>
 type accessDeniedException = {
 name: string,
   @as("$fault") fault: [#client | #server],
   @as("$service") service: option<string>,
   @as("$metadata") metadata: responseMetadata,
   message: string_
-};
+}
 type value = {
 resolvedValues: option<stringList>,
-interpretedValue: nonEmptyString,
-originalValue: option<nonEmptyString>
+  interpretedValue: nonEmptyString,
+  originalValue: option<nonEmptyString>
 }
 type sentimentResponse = {
 sentimentScore: option<sentimentScore>,
-sentiment: option<sentimentType>
+  sentiment: option<sentimentType>
 }
 type buttonsList = array<button>
 type activeContext = {
 contextAttributes: option<activeContextParametersMap>,
-timeToLive: activeContextTimeToLive,
-name: activeContextName
+  timeToLive: activeContextTimeToLive,
+  name: activeContextName
 }
 type slot = {
 value: option<value>
 }
 type imageResponseCard = {
 buttons: option<buttonsList>,
-imageUrl: option<attachmentUrl>,
-subtitle: option<attachmentTitle>,
-title: attachmentTitle
+  imageUrl: option<attachmentUrl>,
+  subtitle: option<attachmentTitle>,
+  title: attachmentTitle
 }
 type activeContextsList = array<activeContext>
-type slots = Js.Dict.t< slot>
+type slots = Js.Dict.t<slot>
 type message = {
 imageResponseCard: option<imageResponseCard>,
-contentType: option<messageContentType>,
-content: option<text>
+  contentType: option<messageContentType>,
+  content: option<text>
 }
 type messages = array<message>
 type intent = {
 confirmationState: option<confirmationState>,
-state: option<intentState>,
-slots: option<slots>,
-name: nonEmptyString
+  state: option<intentState>,
+  slots: option<slots>,
+  name: nonEmptyString
 }
 type textResponseEvent = {
 eventId: option<eventId>,
-messages: option<messages>
+  messages: option<messages>
 }
 type sessionState = {
 originatingRequestId: option<nonEmptyString>,
-sessionAttributes: option<stringMap>,
-activeContexts: option<activeContextsList>,
-intent: option<intent>,
-dialogAction: option<dialogAction>
+  sessionAttributes: option<stringMap>,
+  activeContexts: option<activeContextsList>,
+  intent: option<intent>,
+  dialogAction: option<dialogAction>
 }
 type interpretation = {
 intent: option<intent>,
-sentimentResponse: option<sentimentResponse>,
-nluConfidence: option<confidenceScore>
+  sentimentResponse: option<sentimentResponse>,
+  nluConfidence: option<confidenceScore>
 }
 type interpretations = array<interpretation>
 type configurationEvent = {
 clientTimestampMillis: option<epochMillis>,
-eventId: option<eventId>,
-disablePlayback: option<boolean_>,
-welcomeMessages: option<messages>,
-sessionState: option<sessionState>,
-responseContentType: nonEmptyString,
-requestAttributes: option<stringMap>
+  eventId: option<eventId>,
+  disablePlayback: option<boolean_>,
+  welcomeMessages: option<messages>,
+  sessionState: option<sessionState>,
+  responseContentType: nonEmptyString,
+  requestAttributes: option<stringMap>
 }
-type startConversationRequestEventStream = DisconnectionEvent(disconnectionEvent) | PlaybackCompletionEvent(playbackCompletionEvent) | TextInputEvent(textInputEvent) | DTMFInputEvent(dtmfinputEvent) | AudioInputEvent(audioInputEvent) | ConfigurationEvent(configurationEvent);
+type startConversationRequestEventStream = {
+@as("DisconnectionEvent") disconnectionEvent: option<disconnectionEvent>,
+  @as("PlaybackCompletionEvent") playbackCompletionEvent: option<playbackCompletionEvent>,
+  @as("TextInputEvent") textInputEvent: option<textInputEvent>,
+  @as("DTMFInputEvent") dtmfinputEvent: option<dtmfinputEvent>,
+  @as("AudioInputEvent") audioInputEvent: option<audioInputEvent>,
+  @as("ConfigurationEvent") configurationEvent: option<configurationEvent>
+}
 type intentResultEvent = {
 eventId: option<eventId>,
-sessionId: option<sessionId>,
-requestAttributes: option<stringMap>,
-sessionState: option<sessionState>,
-interpretations: option<interpretations>,
-inputMode: option<inputMode>
+  sessionId: option<sessionId>,
+  requestAttributes: option<stringMap>,
+  sessionState: option<sessionState>,
+  interpretations: option<interpretations>,
+  inputMode: option<inputMode>
 }
-type startConversationResponseEventStream = BadGatewayException(badGatewayException) | DependencyFailedException(dependencyFailedException) | ConflictException(conflictException) | InternalServerException(internalServerException) | ThrottlingException(throttlingException) | ValidationException(validationException) | ResourceNotFoundException(resourceNotFoundException) | AccessDeniedException(accessDeniedException) | HeartbeatEvent(heartbeatEvent) | AudioResponseEvent(audioResponseEvent) | TextResponseEvent(textResponseEvent) | IntentResultEvent(intentResultEvent) | TranscriptEvent(transcriptEvent) | PlaybackInterruptionEvent(playbackInterruptionEvent);
-type awsServiceClient;
-@module("@aws-sdk/client-lex") @new external createClient: unit => awsServiceClient = "LexRuntimeV2Client";
+type startConversationResponseEventStream = {
+@as("BadGatewayException") badGatewayException: option<badGatewayException>,
+  @as("DependencyFailedException") dependencyFailedException: option<dependencyFailedException>,
+  @as("ConflictException") conflictException: option<conflictException>,
+  @as("InternalServerException") internalServerException: option<internalServerException>,
+  @as("ThrottlingException") throttlingException: option<throttlingException>,
+  @as("ValidationException") validationException: option<validationException>,
+  @as("ResourceNotFoundException") resourceNotFoundException: option<resourceNotFoundException>,
+  @as("AccessDeniedException") accessDeniedException: option<accessDeniedException>,
+  @as("HeartbeatEvent") heartbeatEvent: option<heartbeatEvent>,
+  @as("AudioResponseEvent") audioResponseEvent: option<audioResponseEvent>,
+  @as("TextResponseEvent") textResponseEvent: option<textResponseEvent>,
+  @as("IntentResultEvent") intentResultEvent: option<intentResultEvent>,
+  @as("TranscriptEvent") transcriptEvent: option<transcriptEvent>,
+  @as("PlaybackInterruptionEvent") playbackInterruptionEvent: option<playbackInterruptionEvent>
+}
+
 module RecognizeUtterance = {
   type t;
   type request = {
 inputStream: option<blobStream>,
-responseContentType: option<nonEmptyString>,
-requestContentType: nonEmptyString,
-requestAttributes: option<sensitiveNonEmptyString>,
-sessionState: option<sensitiveNonEmptyString>,
-sessionId: sessionId,
-localeId: localeId,
-botAliasId: botAliasIdentifier,
-botId: botIdentifier
+  responseContentType: option<nonEmptyString>,
+  requestContentType: nonEmptyString,
+  requestAttributes: option<sensitiveNonEmptyString>,
+  sessionState: option<sensitiveNonEmptyString>,
+  sessionId: sessionId,
+  localeId: localeId,
+  botAliasId: botAliasIdentifier,
+  botId: botIdentifier
 }
   type response = {
 audioStream: option<blobStream>,
-inputTranscript: option<nonEmptyString>,
-sessionId: option<sessionId>,
-requestAttributes: option<nonEmptyString>,
-sessionState: option<nonEmptyString>,
-interpretations: option<nonEmptyString>,
-messages: option<nonEmptyString>,
-contentType: option<nonEmptyString>,
-inputMode: option<nonEmptyString>
+  inputTranscript: option<nonEmptyString>,
+  sessionId: option<sessionId>,
+  requestAttributes: option<nonEmptyString>,
+  sessionState: option<nonEmptyString>,
+  interpretations: option<nonEmptyString>,
+  messages: option<nonEmptyString>,
+  contentType: option<nonEmptyString>,
+  inputMode: option<nonEmptyString>
 }
   @module("@aws-sdk/client-lex") @new external new_: (request) => t = "RecognizeUtteranceCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -269,15 +294,15 @@ module DeleteSession = {
   type t;
   type request = {
 sessionId: sessionId,
-localeId: localeId,
-botAliasId: botAliasIdentifier,
-botId: botIdentifier
+  localeId: localeId,
+  botAliasId: botAliasIdentifier,
+  botId: botIdentifier
 }
   type response = {
 sessionId: option<sessionId>,
-localeId: option<localeId>,
-botAliasId: option<botAliasIdentifier>,
-botId: option<botIdentifier>
+  localeId: option<localeId>,
+  botAliasId: option<botAliasIdentifier>,
+  botId: option<botIdentifier>
 }
   @module("@aws-sdk/client-lex") @new external new_: (request) => t = "DeleteSessionCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -287,21 +312,21 @@ module PutSession = {
   type t;
   type request = {
 responseContentType: option<nonEmptyString>,
-requestAttributes: option<stringMap>,
-sessionState: sessionState,
-messages: option<messages>,
-sessionId: sessionId,
-localeId: localeId,
-botAliasId: botAliasIdentifier,
-botId: botIdentifier
+  requestAttributes: option<stringMap>,
+  sessionState: sessionState,
+  messages: option<messages>,
+  sessionId: sessionId,
+  localeId: localeId,
+  botAliasId: botAliasIdentifier,
+  botId: botIdentifier
 }
   type response = {
 audioStream: option<blobStream>,
-sessionId: option<sessionId>,
-requestAttributes: option<nonEmptyString>,
-sessionState: option<nonEmptyString>,
-messages: option<nonEmptyString>,
-contentType: option<nonEmptyString>
+  sessionId: option<sessionId>,
+  requestAttributes: option<nonEmptyString>,
+  sessionState: option<nonEmptyString>,
+  messages: option<nonEmptyString>,
+  contentType: option<nonEmptyString>
 }
   @module("@aws-sdk/client-lex") @new external new_: (request) => t = "PutSessionCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -311,19 +336,19 @@ module RecognizeText = {
   type t;
   type request = {
 requestAttributes: option<stringMap>,
-sessionState: option<sessionState>,
-text: text,
-sessionId: sessionId,
-localeId: localeId,
-botAliasId: botAliasIdentifier,
-botId: botIdentifier
+  sessionState: option<sessionState>,
+  text: text,
+  sessionId: sessionId,
+  localeId: localeId,
+  botAliasId: botAliasIdentifier,
+  botId: botIdentifier
 }
   type response = {
 sessionId: option<sessionId>,
-requestAttributes: option<stringMap>,
-interpretations: option<interpretations>,
-sessionState: option<sessionState>,
-messages: option<messages>
+  requestAttributes: option<stringMap>,
+  interpretations: option<interpretations>,
+  sessionState: option<sessionState>,
+  messages: option<messages>
 }
   @module("@aws-sdk/client-lex") @new external new_: (request) => t = "RecognizeTextCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -333,15 +358,15 @@ module GetSession = {
   type t;
   type request = {
 sessionId: sessionId,
-localeId: localeId,
-botAliasId: botAliasIdentifier,
-botId: botIdentifier
+  localeId: localeId,
+  botAliasId: botAliasIdentifier,
+  botId: botIdentifier
 }
   type response = {
 sessionState: option<sessionState>,
-interpretations: option<interpretations>,
-messages: option<messages>,
-sessionId: option<nonEmptyString>
+  interpretations: option<interpretations>,
+  messages: option<messages>,
+  sessionId: option<nonEmptyString>
 }
   @module("@aws-sdk/client-lex") @new external new_: (request) => t = "GetSessionCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -351,11 +376,11 @@ module StartConversation = {
   type t;
   type request = {
 requestEventStream: startConversationRequestEventStream,
-conversationMode: option<conversationMode>,
-sessionId: sessionId,
-localeId: localeId,
-botAliasId: botAliasIdentifier,
-botId: botIdentifier
+  conversationMode: option<conversationMode>,
+  sessionId: sessionId,
+  localeId: localeId,
+  botAliasId: botAliasIdentifier,
+  botId: botIdentifier
 }
   type response = {
 responseEventStream: option<startConversationResponseEventStream>

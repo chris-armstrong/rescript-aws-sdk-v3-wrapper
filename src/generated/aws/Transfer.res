@@ -5,12 +5,14 @@ httpStatusCode: option<float>,
   cfId: option<string>,
   attempts: option<int>,
   totalRetryDelay: option<int>
-};
-type string_ = string
-type boolean_ = bool
-type integer_ = int
-type timestamp_ = Js.Date.t;
-type long = float
+}
+type awsServiceClient;
+@module("@aws-sdk/client-transfer") @new external createClient: unit => awsServiceClient = "TransferClient";
+type baseString = string
+type baseBoolean = bool
+type baseInteger = int
+type baseTimestamp = Js.Date.t;
+type baseLong = float
 type vpcId = string
 type vpcEndpointId = string
 type userPassword = string
@@ -21,7 +23,7 @@ type tagValue = string
 type tagKey = string
 type subnetId = string
 type statusCode = int
-type state = [@as("STOP_FAILED") #STOPFAILED | @as("START_FAILED") #STARTFAILED | @as("STOPPING") #STOPPING | @as("STARTING") #STARTING | @as("ONLINE") #ONLINE | @as("OFFLINE") #OFFLINE]
+type state = [@as("STOP_FAILED") #STOP_FAILED | @as("START_FAILED") #START_FAILED | @as("STOPPING") #STOPPING | @as("STARTING") #STARTING | @as("ONLINE") #ONLINE | @as("OFFLINE") #OFFLINE]
 type sshPublicKeyId = string
 type sshPublicKeyCount = int
 type sshPublicKeyBody = string
@@ -45,14 +47,14 @@ type message = string
 type maxResults = int
 type mapTarget = string
 type mapEntry = string
-type identityProviderType = [@as("AWS_DIRECTORY_SERVICE") #AWSDIRECTORYSERVICE | @as("API_GATEWAY") #APIGATEWAY | @as("SERVICE_MANAGED") #SERVICEMANAGED]
+type identityProviderType = [@as("AWS_DIRECTORY_SERVICE") #AWS_DIRECTORY_SERVICE | @as("API_GATEWAY") #API_GATEWAY | @as("SERVICE_MANAGED") #SERVICE_MANAGED]
 type hostKeyFingerprint = string
 type hostKey = string
 type homeDirectoryType = [@as("LOGICAL") #LOGICAL | @as("PATH") #PATH]
 type homeDirectory = string
 type fips = bool
 type externalId = string
-type endpointType = [@as("VPC_ENDPOINT") #VPCENDPOINT | @as("VPC") #VPC | @as("PUBLIC") #PUBLIC]
+type endpointType = [@as("VPC_ENDPOINT") #VPC_ENDPOINT | @as("VPC") #VPC | @as("PUBLIC") #PUBLIC]
 type domain = [@as("EFS") #EFS | @as("S3") #S3]
 type directoryId = string
 type dateImported = Js.Date.t;
@@ -62,13 +64,13 @@ type addressAllocationId = string
 type tagKeys = array<tagKey>
 type tag = {
 @as("Value") value: tagValue,
-@as("Key") key: tagKey
+  @as("Key") key: tagKey
 }
 type subnetIds = array<subnetId>
 type sshPublicKey = {
 @as("SshPublicKeyId") sshPublicKeyId: sshPublicKeyId,
-@as("SshPublicKeyBody") sshPublicKeyBody: sshPublicKeyBody,
-@as("DateImported") dateImported: dateImported
+  @as("SshPublicKeyBody") sshPublicKeyBody: sshPublicKeyBody,
+  @as("DateImported") dateImported: dateImported
 }
 type securityPolicyOptions = array<securityPolicyOption>
 type securityPolicyNames = array<securityPolicyName>
@@ -77,44 +79,44 @@ type secondaryGids = array<posixId>
 type protocols = array<protocol>
 type listedUser = {
 @as("UserName") userName: option<userName>,
-@as("SshPublicKeyCount") sshPublicKeyCount: option<sshPublicKeyCount>,
-@as("Role") role: option<role>,
-@as("HomeDirectoryType") homeDirectoryType: option<homeDirectoryType>,
-@as("HomeDirectory") homeDirectory: option<homeDirectory>,
-@as("Arn") arn: arn
+  @as("SshPublicKeyCount") sshPublicKeyCount: option<sshPublicKeyCount>,
+  @as("Role") role: option<role>,
+  @as("HomeDirectoryType") homeDirectoryType: option<homeDirectoryType>,
+  @as("HomeDirectory") homeDirectory: option<homeDirectory>,
+  @as("Arn") arn: arn
 }
 type listedServer = {
 @as("UserCount") userCount: option<userCount>,
-@as("State") state: option<state>,
-@as("ServerId") serverId: option<serverId>,
-@as("LoggingRole") loggingRole: option<role>,
-@as("EndpointType") endpointType: option<endpointType>,
-@as("IdentityProviderType") identityProviderType: option<identityProviderType>,
-@as("Domain") domain: option<domain>,
-@as("Arn") arn: arn
+  @as("State") state: option<state>,
+  @as("ServerId") serverId: option<serverId>,
+  @as("LoggingRole") loggingRole: option<role>,
+  @as("EndpointType") endpointType: option<endpointType>,
+  @as("IdentityProviderType") identityProviderType: option<identityProviderType>,
+  @as("Domain") domain: option<domain>,
+  @as("Arn") arn: arn
 }
 type listedAccess = {
 @as("ExternalId") externalId: option<externalId>,
-@as("Role") role: option<role>,
-@as("HomeDirectoryType") homeDirectoryType: option<homeDirectoryType>,
-@as("HomeDirectory") homeDirectory: option<homeDirectory>
+  @as("Role") role: option<role>,
+  @as("HomeDirectoryType") homeDirectoryType: option<homeDirectoryType>,
+  @as("HomeDirectory") homeDirectory: option<homeDirectory>
 }
 type identityProviderDetails = {
 @as("DirectoryId") directoryId: option<directoryId>,
-@as("InvocationRole") invocationRole: option<role>,
-@as("Url") url: option<url>
+  @as("InvocationRole") invocationRole: option<role>,
+  @as("Url") url: option<url>
 }
 type homeDirectoryMapEntry = {
 @as("Target") target: mapTarget,
-@as("Entry") entry: mapEntry
+  @as("Entry") entry: mapEntry
 }
 type addressAllocationIds = array<addressAllocationId>
 type tags = array<tag>
 type sshPublicKeys = array<sshPublicKey>
 type posixProfile = {
 @as("SecondaryGids") secondaryGids: option<secondaryGids>,
-@as("Gid") gid: posixId,
-@as("Uid") uid: posixId
+  @as("Gid") gid: posixId,
+  @as("Uid") uid: posixId
 }
 type listedUsers = array<listedUser>
 type listedServers = array<listedServer>
@@ -122,73 +124,72 @@ type listedAccesses = array<listedAccess>
 type homeDirectoryMappings = array<homeDirectoryMapEntry>
 type endpointDetails = {
 @as("SecurityGroupIds") securityGroupIds: option<securityGroupIds>,
-@as("VpcId") vpcId: option<vpcId>,
-@as("VpcEndpointId") vpcEndpointId: option<vpcEndpointId>,
-@as("SubnetIds") subnetIds: option<subnetIds>,
-@as("AddressAllocationIds") addressAllocationIds: option<addressAllocationIds>
+  @as("VpcId") vpcId: option<vpcId>,
+  @as("VpcEndpointId") vpcEndpointId: option<vpcEndpointId>,
+  @as("SubnetIds") subnetIds: option<subnetIds>,
+  @as("AddressAllocationIds") addressAllocationIds: option<addressAllocationIds>
 }
 type describedSecurityPolicy = {
 @as("TlsCiphers") tlsCiphers: option<securityPolicyOptions>,
-@as("SshMacs") sshMacs: option<securityPolicyOptions>,
-@as("SshKexs") sshKexs: option<securityPolicyOptions>,
-@as("SshCiphers") sshCiphers: option<securityPolicyOptions>,
-@as("SecurityPolicyName") securityPolicyName: securityPolicyName,
-@as("Fips") fips: option<fips>
+  @as("SshMacs") sshMacs: option<securityPolicyOptions>,
+  @as("SshKexs") sshKexs: option<securityPolicyOptions>,
+  @as("SshCiphers") sshCiphers: option<securityPolicyOptions>,
+  @as("SecurityPolicyName") securityPolicyName: securityPolicyName,
+  @as("Fips") fips: option<fips>
 }
 type describedUser = {
 @as("UserName") userName: option<userName>,
-@as("Tags") tags: option<tags>,
-@as("SshPublicKeys") sshPublicKeys: option<sshPublicKeys>,
-@as("Role") role: option<role>,
-@as("PosixProfile") posixProfile: option<posixProfile>,
-@as("Policy") policy: option<policy>,
-@as("HomeDirectoryType") homeDirectoryType: option<homeDirectoryType>,
-@as("HomeDirectoryMappings") homeDirectoryMappings: option<homeDirectoryMappings>,
-@as("HomeDirectory") homeDirectory: option<homeDirectory>,
-@as("Arn") arn: arn
+  @as("Tags") tags: option<tags>,
+  @as("SshPublicKeys") sshPublicKeys: option<sshPublicKeys>,
+  @as("Role") role: option<role>,
+  @as("PosixProfile") posixProfile: option<posixProfile>,
+  @as("Policy") policy: option<policy>,
+  @as("HomeDirectoryType") homeDirectoryType: option<homeDirectoryType>,
+  @as("HomeDirectoryMappings") homeDirectoryMappings: option<homeDirectoryMappings>,
+  @as("HomeDirectory") homeDirectory: option<homeDirectory>,
+  @as("Arn") arn: arn
 }
 type describedServer = {
 @as("UserCount") userCount: option<userCount>,
-@as("Tags") tags: option<tags>,
-@as("State") state: option<state>,
-@as("ServerId") serverId: option<serverId>,
-@as("SecurityPolicyName") securityPolicyName: option<securityPolicyName>,
-@as("Protocols") protocols: option<protocols>,
-@as("LoggingRole") loggingRole: option<role>,
-@as("IdentityProviderType") identityProviderType: option<identityProviderType>,
-@as("IdentityProviderDetails") identityProviderDetails: option<identityProviderDetails>,
-@as("HostKeyFingerprint") hostKeyFingerprint: option<hostKeyFingerprint>,
-@as("EndpointType") endpointType: option<endpointType>,
-@as("EndpointDetails") endpointDetails: option<endpointDetails>,
-@as("Domain") domain: option<domain>,
-@as("Certificate") certificate: option<certificate>,
-@as("Arn") arn: arn
+  @as("Tags") tags: option<tags>,
+  @as("State") state: option<state>,
+  @as("ServerId") serverId: option<serverId>,
+  @as("SecurityPolicyName") securityPolicyName: option<securityPolicyName>,
+  @as("Protocols") protocols: option<protocols>,
+  @as("LoggingRole") loggingRole: option<role>,
+  @as("IdentityProviderType") identityProviderType: option<identityProviderType>,
+  @as("IdentityProviderDetails") identityProviderDetails: option<identityProviderDetails>,
+  @as("HostKeyFingerprint") hostKeyFingerprint: option<hostKeyFingerprint>,
+  @as("EndpointType") endpointType: option<endpointType>,
+  @as("EndpointDetails") endpointDetails: option<endpointDetails>,
+  @as("Domain") domain: option<domain>,
+  @as("Certificate") certificate: option<certificate>,
+  @as("Arn") arn: arn
 }
 type describedAccess = {
 @as("ExternalId") externalId: option<externalId>,
-@as("Role") role: option<role>,
-@as("PosixProfile") posixProfile: option<posixProfile>,
-@as("Policy") policy: option<policy>,
-@as("HomeDirectoryType") homeDirectoryType: option<homeDirectoryType>,
-@as("HomeDirectoryMappings") homeDirectoryMappings: option<homeDirectoryMappings>,
-@as("HomeDirectory") homeDirectory: option<homeDirectory>
+  @as("Role") role: option<role>,
+  @as("PosixProfile") posixProfile: option<posixProfile>,
+  @as("Policy") policy: option<policy>,
+  @as("HomeDirectoryType") homeDirectoryType: option<homeDirectoryType>,
+  @as("HomeDirectoryMappings") homeDirectoryMappings: option<homeDirectoryMappings>,
+  @as("HomeDirectory") homeDirectory: option<homeDirectory>
 }
-type awsServiceClient;
-@module("@aws-sdk/client-transfer") @new external createClient: unit => awsServiceClient = "TransferClient";
+
 module TestIdentityProvider = {
   type t;
   type request = {
 @as("UserPassword") userPassword: option<userPassword>,
-@as("UserName") userName: userName,
-@as("SourceIp") sourceIp: option<sourceIp>,
-@as("ServerProtocol") serverProtocol: option<protocol>,
-@as("ServerId") serverId: serverId
+  @as("UserName") userName: userName,
+  @as("SourceIp") sourceIp: option<sourceIp>,
+  @as("ServerProtocol") serverProtocol: option<protocol>,
+  @as("ServerId") serverId: serverId
 }
   type response = {
 @as("Url") url: url,
-@as("Message") message: option<message>,
-@as("StatusCode") statusCode: statusCode,
-@as("Response") response: option<response>
+  @as("Message") message: option<message>,
+  @as("StatusCode") statusCode: statusCode,
+  @as("Response") response: option<response>
 }
   @module("@aws-sdk/client-transfer") @new external new_: (request) => t = "TestIdentityProviderCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -218,13 +219,13 @@ module ImportSshPublicKey = {
   type t;
   type request = {
 @as("UserName") userName: userName,
-@as("SshPublicKeyBody") sshPublicKeyBody: sshPublicKeyBody,
-@as("ServerId") serverId: serverId
+  @as("SshPublicKeyBody") sshPublicKeyBody: sshPublicKeyBody,
+  @as("ServerId") serverId: serverId
 }
   type response = {
 @as("UserName") userName: userName,
-@as("SshPublicKeyId") sshPublicKeyId: sshPublicKeyId,
-@as("ServerId") serverId: serverId
+  @as("SshPublicKeyId") sshPublicKeyId: sshPublicKeyId,
+  @as("ServerId") serverId: serverId
 }
   @module("@aws-sdk/client-transfer") @new external new_: (request) => t = "ImportSshPublicKeyCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -234,7 +235,7 @@ module DeleteUser = {
   type t;
   type request = {
 @as("UserName") userName: userName,
-@as("ServerId") serverId: serverId
+  @as("ServerId") serverId: serverId
 }
   
   @module("@aws-sdk/client-transfer") @new external new_: (request) => t = "DeleteUserCommand";
@@ -245,8 +246,8 @@ module DeleteSshPublicKey = {
   type t;
   type request = {
 @as("UserName") userName: userName,
-@as("SshPublicKeyId") sshPublicKeyId: sshPublicKeyId,
-@as("ServerId") serverId: serverId
+  @as("SshPublicKeyId") sshPublicKeyId: sshPublicKeyId,
+  @as("ServerId") serverId: serverId
 }
   
   @module("@aws-sdk/client-transfer") @new external new_: (request) => t = "DeleteSshPublicKeyCommand";
@@ -267,7 +268,7 @@ module DeleteAccess = {
   type t;
   type request = {
 @as("ExternalId") externalId: externalId,
-@as("ServerId") serverId: serverId
+  @as("ServerId") serverId: serverId
 }
   
   @module("@aws-sdk/client-transfer") @new external new_: (request) => t = "DeleteAccessCommand";
@@ -278,7 +279,7 @@ module UntagResource = {
   type t;
   type request = {
 @as("TagKeys") tagKeys: tagKeys,
-@as("Arn") arn: arn
+  @as("Arn") arn: arn
 }
   
   @module("@aws-sdk/client-transfer") @new external new_: (request) => t = "UntagResourceCommand";
@@ -289,11 +290,11 @@ module ListSecurityPolicies = {
   type t;
   type request = {
 @as("NextToken") nextToken: option<nextToken>,
-@as("MaxResults") maxResults: option<maxResults>
+  @as("MaxResults") maxResults: option<maxResults>
 }
   type response = {
 @as("SecurityPolicyNames") securityPolicyNames: securityPolicyNames,
-@as("NextToken") nextToken: option<nextToken>
+  @as("NextToken") nextToken: option<nextToken>
 }
   @module("@aws-sdk/client-transfer") @new external new_: (request) => t = "ListSecurityPoliciesCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -303,17 +304,17 @@ module UpdateUser = {
   type t;
   type request = {
 @as("UserName") userName: userName,
-@as("ServerId") serverId: serverId,
-@as("Role") role: option<role>,
-@as("PosixProfile") posixProfile: option<posixProfile>,
-@as("Policy") policy: option<policy>,
-@as("HomeDirectoryMappings") homeDirectoryMappings: option<homeDirectoryMappings>,
-@as("HomeDirectoryType") homeDirectoryType: option<homeDirectoryType>,
-@as("HomeDirectory") homeDirectory: option<homeDirectory>
+  @as("ServerId") serverId: serverId,
+  @as("Role") role: option<role>,
+  @as("PosixProfile") posixProfile: option<posixProfile>,
+  @as("Policy") policy: option<policy>,
+  @as("HomeDirectoryMappings") homeDirectoryMappings: option<homeDirectoryMappings>,
+  @as("HomeDirectoryType") homeDirectoryType: option<homeDirectoryType>,
+  @as("HomeDirectory") homeDirectory: option<homeDirectory>
 }
   type response = {
 @as("UserName") userName: userName,
-@as("ServerId") serverId: serverId
+  @as("ServerId") serverId: serverId
 }
   @module("@aws-sdk/client-transfer") @new external new_: (request) => t = "UpdateUserCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -323,14 +324,14 @@ module UpdateServer = {
   type t;
   type request = {
 @as("ServerId") serverId: serverId,
-@as("SecurityPolicyName") securityPolicyName: option<securityPolicyName>,
-@as("Protocols") protocols: option<protocols>,
-@as("LoggingRole") loggingRole: option<nullableRole>,
-@as("IdentityProviderDetails") identityProviderDetails: option<identityProviderDetails>,
-@as("HostKey") hostKey: option<hostKey>,
-@as("EndpointType") endpointType: option<endpointType>,
-@as("EndpointDetails") endpointDetails: option<endpointDetails>,
-@as("Certificate") certificate: option<certificate>
+  @as("SecurityPolicyName") securityPolicyName: option<securityPolicyName>,
+  @as("Protocols") protocols: option<protocols>,
+  @as("LoggingRole") loggingRole: option<nullableRole>,
+  @as("IdentityProviderDetails") identityProviderDetails: option<identityProviderDetails>,
+  @as("HostKey") hostKey: option<hostKey>,
+  @as("EndpointType") endpointType: option<endpointType>,
+  @as("EndpointDetails") endpointDetails: option<endpointDetails>,
+  @as("Certificate") certificate: option<certificate>
 }
   type response = {
 @as("ServerId") serverId: serverId
@@ -343,17 +344,17 @@ module UpdateAccess = {
   type t;
   type request = {
 @as("ExternalId") externalId: externalId,
-@as("ServerId") serverId: serverId,
-@as("Role") role: option<role>,
-@as("PosixProfile") posixProfile: option<posixProfile>,
-@as("Policy") policy: option<policy>,
-@as("HomeDirectoryMappings") homeDirectoryMappings: option<homeDirectoryMappings>,
-@as("HomeDirectoryType") homeDirectoryType: option<homeDirectoryType>,
-@as("HomeDirectory") homeDirectory: option<homeDirectory>
+  @as("ServerId") serverId: serverId,
+  @as("Role") role: option<role>,
+  @as("PosixProfile") posixProfile: option<posixProfile>,
+  @as("Policy") policy: option<policy>,
+  @as("HomeDirectoryMappings") homeDirectoryMappings: option<homeDirectoryMappings>,
+  @as("HomeDirectoryType") homeDirectoryType: option<homeDirectoryType>,
+  @as("HomeDirectory") homeDirectory: option<homeDirectory>
 }
   type response = {
 @as("ExternalId") externalId: externalId,
-@as("ServerId") serverId: serverId
+  @as("ServerId") serverId: serverId
 }
   @module("@aws-sdk/client-transfer") @new external new_: (request) => t = "UpdateAccessCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -363,7 +364,7 @@ module TagResource = {
   type t;
   type request = {
 @as("Tags") tags: tags,
-@as("Arn") arn: arn
+  @as("Arn") arn: arn
 }
   
   @module("@aws-sdk/client-transfer") @new external new_: (request) => t = "TagResourceCommand";
@@ -374,13 +375,13 @@ module ListUsers = {
   type t;
   type request = {
 @as("ServerId") serverId: serverId,
-@as("NextToken") nextToken: option<nextToken>,
-@as("MaxResults") maxResults: option<maxResults>
+  @as("NextToken") nextToken: option<nextToken>,
+  @as("MaxResults") maxResults: option<maxResults>
 }
   type response = {
 @as("Users") users: listedUsers,
-@as("ServerId") serverId: serverId,
-@as("NextToken") nextToken: option<nextToken>
+  @as("ServerId") serverId: serverId,
+  @as("NextToken") nextToken: option<nextToken>
 }
   @module("@aws-sdk/client-transfer") @new external new_: (request) => t = "ListUsersCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -390,13 +391,13 @@ module ListTagsForResource = {
   type t;
   type request = {
 @as("NextToken") nextToken: option<nextToken>,
-@as("MaxResults") maxResults: option<maxResults>,
-@as("Arn") arn: arn
+  @as("MaxResults") maxResults: option<maxResults>,
+  @as("Arn") arn: arn
 }
   type response = {
 @as("Tags") tags: option<tags>,
-@as("NextToken") nextToken: option<nextToken>,
-@as("Arn") arn: option<arn>
+  @as("NextToken") nextToken: option<nextToken>,
+  @as("Arn") arn: option<arn>
 }
   @module("@aws-sdk/client-transfer") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -406,11 +407,11 @@ module ListServers = {
   type t;
   type request = {
 @as("NextToken") nextToken: option<nextToken>,
-@as("MaxResults") maxResults: option<maxResults>
+  @as("MaxResults") maxResults: option<maxResults>
 }
   type response = {
 @as("Servers") servers: listedServers,
-@as("NextToken") nextToken: option<nextToken>
+  @as("NextToken") nextToken: option<nextToken>
 }
   @module("@aws-sdk/client-transfer") @new external new_: (request) => t = "ListServersCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -420,13 +421,13 @@ module ListAccesses = {
   type t;
   type request = {
 @as("ServerId") serverId: serverId,
-@as("NextToken") nextToken: option<nextToken>,
-@as("MaxResults") maxResults: option<maxResults>
+  @as("NextToken") nextToken: option<nextToken>,
+  @as("MaxResults") maxResults: option<maxResults>
 }
   type response = {
 @as("Accesses") accesses: listedAccesses,
-@as("ServerId") serverId: serverId,
-@as("NextToken") nextToken: option<nextToken>
+  @as("ServerId") serverId: serverId,
+  @as("NextToken") nextToken: option<nextToken>
 }
   @module("@aws-sdk/client-transfer") @new external new_: (request) => t = "ListAccessesCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -448,19 +449,19 @@ module CreateUser = {
   type t;
   type request = {
 @as("UserName") userName: userName,
-@as("Tags") tags: option<tags>,
-@as("SshPublicKeyBody") sshPublicKeyBody: option<sshPublicKeyBody>,
-@as("ServerId") serverId: serverId,
-@as("Role") role: role,
-@as("PosixProfile") posixProfile: option<posixProfile>,
-@as("Policy") policy: option<policy>,
-@as("HomeDirectoryMappings") homeDirectoryMappings: option<homeDirectoryMappings>,
-@as("HomeDirectoryType") homeDirectoryType: option<homeDirectoryType>,
-@as("HomeDirectory") homeDirectory: option<homeDirectory>
+  @as("Tags") tags: option<tags>,
+  @as("SshPublicKeyBody") sshPublicKeyBody: option<sshPublicKeyBody>,
+  @as("ServerId") serverId: serverId,
+  @as("Role") role: role,
+  @as("PosixProfile") posixProfile: option<posixProfile>,
+  @as("Policy") policy: option<policy>,
+  @as("HomeDirectoryMappings") homeDirectoryMappings: option<homeDirectoryMappings>,
+  @as("HomeDirectoryType") homeDirectoryType: option<homeDirectoryType>,
+  @as("HomeDirectory") homeDirectory: option<homeDirectory>
 }
   type response = {
 @as("UserName") userName: userName,
-@as("ServerId") serverId: serverId
+  @as("ServerId") serverId: serverId
 }
   @module("@aws-sdk/client-transfer") @new external new_: (request) => t = "CreateUserCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -470,16 +471,16 @@ module CreateServer = {
   type t;
   type request = {
 @as("Tags") tags: option<tags>,
-@as("SecurityPolicyName") securityPolicyName: option<securityPolicyName>,
-@as("Protocols") protocols: option<protocols>,
-@as("LoggingRole") loggingRole: option<role>,
-@as("IdentityProviderType") identityProviderType: option<identityProviderType>,
-@as("IdentityProviderDetails") identityProviderDetails: option<identityProviderDetails>,
-@as("HostKey") hostKey: option<hostKey>,
-@as("EndpointType") endpointType: option<endpointType>,
-@as("EndpointDetails") endpointDetails: option<endpointDetails>,
-@as("Domain") domain: option<domain>,
-@as("Certificate") certificate: option<certificate>
+  @as("SecurityPolicyName") securityPolicyName: option<securityPolicyName>,
+  @as("Protocols") protocols: option<protocols>,
+  @as("LoggingRole") loggingRole: option<role>,
+  @as("IdentityProviderType") identityProviderType: option<identityProviderType>,
+  @as("IdentityProviderDetails") identityProviderDetails: option<identityProviderDetails>,
+  @as("HostKey") hostKey: option<hostKey>,
+  @as("EndpointType") endpointType: option<endpointType>,
+  @as("EndpointDetails") endpointDetails: option<endpointDetails>,
+  @as("Domain") domain: option<domain>,
+  @as("Certificate") certificate: option<certificate>
 }
   type response = {
 @as("ServerId") serverId: serverId
@@ -492,17 +493,17 @@ module CreateAccess = {
   type t;
   type request = {
 @as("ExternalId") externalId: externalId,
-@as("ServerId") serverId: serverId,
-@as("Role") role: role,
-@as("PosixProfile") posixProfile: option<posixProfile>,
-@as("Policy") policy: option<policy>,
-@as("HomeDirectoryMappings") homeDirectoryMappings: option<homeDirectoryMappings>,
-@as("HomeDirectoryType") homeDirectoryType: option<homeDirectoryType>,
-@as("HomeDirectory") homeDirectory: option<homeDirectory>
+  @as("ServerId") serverId: serverId,
+  @as("Role") role: role,
+  @as("PosixProfile") posixProfile: option<posixProfile>,
+  @as("Policy") policy: option<policy>,
+  @as("HomeDirectoryMappings") homeDirectoryMappings: option<homeDirectoryMappings>,
+  @as("HomeDirectoryType") homeDirectoryType: option<homeDirectoryType>,
+  @as("HomeDirectory") homeDirectory: option<homeDirectory>
 }
   type response = {
 @as("ExternalId") externalId: externalId,
-@as("ServerId") serverId: serverId
+  @as("ServerId") serverId: serverId
 }
   @module("@aws-sdk/client-transfer") @new external new_: (request) => t = "CreateAccessCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -512,11 +513,11 @@ module DescribeUser = {
   type t;
   type request = {
 @as("UserName") userName: userName,
-@as("ServerId") serverId: serverId
+  @as("ServerId") serverId: serverId
 }
   type response = {
 @as("User") user: describedUser,
-@as("ServerId") serverId: serverId
+  @as("ServerId") serverId: serverId
 }
   @module("@aws-sdk/client-transfer") @new external new_: (request) => t = "DescribeUserCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
@@ -538,11 +539,11 @@ module DescribeAccess = {
   type t;
   type request = {
 @as("ExternalId") externalId: externalId,
-@as("ServerId") serverId: serverId
+  @as("ServerId") serverId: serverId
 }
   type response = {
 @as("Access") access: describedAccess,
-@as("ServerId") serverId: serverId
+  @as("ServerId") serverId: serverId
 }
   @module("@aws-sdk/client-transfer") @new external new_: (request) => t = "DescribeAccessCommand";
   @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
