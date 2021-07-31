@@ -660,7 +660,7 @@ type optionConfiguration = {
   @as("Port") port: option<integerOptional>,
   @as("OptionName") optionName: string_,
 }
-type option = {
+type option_ = {
   @as("VpcSecurityGroupMemberships")
   vpcSecurityGroupMemberships: option<vpcSecurityGroupMembershipList>,
   @as("DBSecurityGroupMemberships")
@@ -819,7 +819,7 @@ type reservedDBInstancesOfferingList = array<reservedDBInstancesOffering>
 type reservedDBInstanceList = array<reservedDBInstance>
 type pendingMaintenanceActions = array<resourcePendingMaintenanceActions>
 type orderableDBInstanceOptionsList = array<orderableDBInstanceOption>
-type optionsList = array<option>
+type optionsList = array<option_>
 type optionGroupOptionSettingsList = array<optionGroupOptionSetting>
 type optionConfigurationList = array<optionConfiguration>
 type globalCluster = {

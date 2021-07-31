@@ -30,6 +30,13 @@ let reservedWords = [
   "export",
   "int",
   "tagList",
+  "option",
+  "Option",
+  "Some",
+  "None",
+  "Result",
+  "Ok",
+  "Error",
 ]
 
 let uppercaseStartRe = Js.Re.fromString("^([A-Z]*)(.*)$")

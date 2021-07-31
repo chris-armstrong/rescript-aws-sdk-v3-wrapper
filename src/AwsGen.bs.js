@@ -2,13 +2,13 @@
 'use strict';
 
 var Fs = require("fs");
-var Json = require("./Json.bs.js");
 var Path = require("path");
-var Parse = require("./Parse.bs.js");
-var Convert = require("./Convert.bs.js");
 var Belt_Array = require("rescript/lib/js/belt_Array.js");
-var Dependencies = require("./Dependencies.bs.js");
+var Json$AwsSdkV3 = require("./Json.bs.js");
+var Parse$AwsSdkV3 = require("./Parse.bs.js");
+var Convert$AwsSdkV3 = require("./Convert.bs.js");
 var Caml_js_exceptions = require("rescript/lib/js/caml_js_exceptions.js");
+var Dependencies$AwsSdkV3 = require("./Dependencies.bs.js");
 
 var basepath = "aws-sdk-js-v3/codegen/sdk-codegen/aws-models";
 
@@ -17,13 +17,13 @@ var files = Fs.readdirSync(basepath);
 Belt_Array.forEach(files, (function (file) {
         var path = Path.join(basepath, file);
         console.log("Reading " + path);
-        var parsed = Json.Decode.parseJson(Fs.readFileSync(path, undefined).toString(), Parse.parseModel);
+        var parsed = Json$AwsSdkV3.Decode.parseJson(Fs.readFileSync(path, undefined).toString(), Parse$AwsSdkV3.parseModel);
         var generated;
         if (parsed.TAG === /* Ok */0) {
           var exit = 0;
           var result;
           try {
-            result = Convert.convert({
+            result = Convert$AwsSdkV3.convert({
                   TAG: /* Ok */0,
                   _0: parsed._0
                 });
@@ -31,7 +31,7 @@ Belt_Array.forEach(files, (function (file) {
           }
           catch (raw_exn){
             var exn = Caml_js_exceptions.internalToOCamlException(raw_exn);
-            if (exn.RE_EXN_ID === Dependencies.CycleError) {
+            if (exn.RE_EXN_ID === Dependencies$AwsSdkV3.CycleError) {
               generated = {
                 TAG: /* Error */1,
                 _0: "cycle error - skip for now"
@@ -53,7 +53,7 @@ Belt_Array.forEach(files, (function (file) {
         } else {
           generated = {
             TAG: /* Error */1,
-            _0: Json.Decode.jsonParseErrorToString(parsed._0)
+            _0: Json$AwsSdkV3.Decode.jsonParseErrorToString(parsed._0)
           };
         }
         if (generated.TAG === /* Ok */0) {

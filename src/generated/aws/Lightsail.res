@@ -775,7 +775,7 @@ type relationalDatabaseBundleList = array<relationalDatabaseBundle>
 type relationalDatabaseBlueprintList = array<relationalDatabaseBlueprint>
 type queryStringObject = {
   queryStringsAllowList: option<stringList>,
-  option: option<boolean_>,
+  @as("option") option_: option<boolean_>,
 }
 type portInfo = {
   cidrListAliases: option<stringList>,
@@ -835,7 +835,7 @@ type instanceEntryList = array<instanceEntry>
 type hostKeysList = array<hostKeyAttributes>
 type headerObject = {
   headersAllowList: option<headerForwardList>,
-  option: option<forwardValues>,
+  @as("option") option_: option<forwardValues>,
 }
 type endpointRequest = {
   healthCheck: option<containerServiceHealthCheckConfig>,
@@ -859,7 +859,7 @@ type diskMapList = array<diskMap>
 type diskInfoList = array<diskInfo>
 type cookieObject = {
   cookiesAllowList: option<stringList>,
-  option: option<forwardValues>,
+  @as("option") option_: option<forwardValues>,
 }
 type containerServicePublicDomains = Js.Dict.t<containerServicePublicDomainsList>
 type containerServicePowerList = array<containerServicePower>

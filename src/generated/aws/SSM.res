@@ -1298,7 +1298,7 @@ type parametersFilter = {
 type parameters = Js.Dict.t<parameterValueList>
 type parameterStringFilter = {
   @as("Values") values: option<parameterStringFilterValueList>,
-  @as("Option") option: option<parameterStringQueryOption>,
+  @as("Option") option_: option<parameterStringQueryOption>,
   @as("Key") key: parameterStringFilterKey,
 }
 type parameterPolicyList = array<parameterInlinePolicy>

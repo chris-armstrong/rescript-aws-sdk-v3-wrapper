@@ -127,7 +127,7 @@ function getShapeTargets(shapes) {
               }));
 }
 
-var CycleError = /* @__PURE__ */Caml_exceptions.create("Dependencies.CycleError");
+var CycleError = /* @__PURE__ */Caml_exceptions.create("Dependencies-AwsSdkV3.CycleError");
 
 function containsAll(within, targets) {
   if (targets.length === 0) {

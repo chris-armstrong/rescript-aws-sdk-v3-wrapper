@@ -2,10 +2,12 @@
   "name": "rescript-aws-sdk-v3",
   "namespace": "aws-sdk-v3",
   "version": "0.0.1",
-  "sources": {
+  "sources": [{
     "dir" : "src",
-    "subdirs" : true
-  },
+    "type": "dev"
+  }, {
+    "dir": "src/generated/aws"
+  }],
   "package-specs": {
     "module": "commonjs",
     "in-source": true
