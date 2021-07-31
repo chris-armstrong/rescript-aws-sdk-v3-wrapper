@@ -36,6 +36,7 @@ let safeTypeName = (target) => {
   | "Integer" => namespacePrefix ++ "Integer"
   | "Boolean" => namespacePrefix ++ "Boolean"
   | "Bool" => namespacePrefix ++ "Bool"
+  | "bool" => namespacePrefix ++ "Bool"
   | "Long" => namespacePrefix ++ "Long"
   | "Timestamp" => namespacePrefix ++ "Timestamp"
   | "Double" => namespacePrefix ++ "Double"
