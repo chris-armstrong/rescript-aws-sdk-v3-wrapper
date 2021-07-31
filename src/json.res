@@ -27,6 +27,14 @@ module Decode = {
     | RecordParseError(string, string)
     | CustomError(string)
 
+  let jsonParseErrorToString = error =>switch error {
+    | SyntaxError(error) => `Syntax Error: ${error}`
+    | WrongType(path, expected) => `Wrong Type Error: ${expected} was expected at path ${path}`
+    | NoValueError(path) => `No Value Error: expected a value at ${path}`
+    | RecordParseError(path, suberror) => `Record parse error: at path ${path} received record parse error - ${suberror}`
+    | CustomError(error) => `Other parse error: ${error}`
+  }
+
   let parseJson = (jsonString, rootParser) => {
     let treeResult = try Ok(parseExn(jsonString)) catch {
     | Js.Exn.Error(payload) =>
@@ -86,6 +94,15 @@ module Decode = {
       switch numberOption {
       | Some(str) => Ok(str)
       | None => Error(WrongType(path, "number"))
+      }
+    )
+  let parseInteger = x =>
+    x
+    ->map_result(({tree, path}) => (decodeNumber(tree), path))
+    ->flatMap_result(((numberOption, path)) =>
+      switch numberOption {
+      | Some(str) => Ok(Belt.Float.toInt(str))
+      | None => Error(WrongType(path, "integer"))
       }
     )
 

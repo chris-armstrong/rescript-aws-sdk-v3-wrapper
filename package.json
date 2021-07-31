@@ -15,5 +15,8 @@
     "reason-nodejs": "^13.0.0-beta.1",
     "rescript": "*",
     "rescript-tinycolor": "^4.0.0"
+  },
+  "devDependencies": {
+    "@aws-sdk/client-sqs": "^3.20.0"
   }
 }

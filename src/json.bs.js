@@ -24,6 +24,22 @@ function optionToResult(opt, errorString) {
   }
 }
 
+function jsonParseErrorToString(error) {
+  switch (error.TAG | 0) {
+    case /* SyntaxError */0 :
+        return "Syntax Error: " + error._0;
+    case /* WrongType */1 :
+        return "Wrong Type Error: " + error._1 + " was expected at path " + error._0;
+    case /* NoValueError */2 :
+        return "No Value Error: expected a value at " + error._0;
+    case /* RecordParseError */3 :
+        return "Record parse error: at path " + error._0 + " received record parse error - " + error._1;
+    case /* CustomError */4 :
+        return "Other parse error: " + error._0;
+    
+  }
+}
+
 function parseJson(jsonString, rootParser) {
   var treeResult;
   try {
@@ -187,6 +203,32 @@ function parseNumber(x) {
               }));
 }
 
+function parseInteger(x) {
+  return Belt_Result.flatMap(Belt_Result.map(x, (function (param) {
+                    return [
+                            Js_json.decodeNumber(param.tree),
+                            param.path
+                          ];
+                  })), (function (param) {
+                var numberOption = param[0];
+                if (numberOption !== undefined) {
+                  return {
+                          TAG: /* Ok */0,
+                          _0: numberOption | 0
+                        };
+                } else {
+                  return {
+                          TAG: /* Error */1,
+                          _0: {
+                            TAG: /* WrongType */1,
+                            _0: param[1],
+                            _1: "integer"
+                          }
+                        };
+                }
+              }));
+}
+
 function parseArray(arrayRef, itemParser) {
   return Belt_Result.flatMap(Belt_Result.map(arrayRef, (function (param) {
                     return [
@@ -289,11 +331,13 @@ var Decode = {
   map_result: Belt_Result.map,
   flatMap_result: Belt_Result.flatMap,
   optionToResult: optionToResult,
+  jsonParseErrorToString: jsonParseErrorToString,
   parseJson: parseJson,
   parseObject: parseObject,
   parseRecord: parseRecord,
   parseString: parseString,
   parseNumber: parseNumber,
+  parseInteger: parseInteger,
   parseArray: parseArray,
   field: field,
   optional: optional
