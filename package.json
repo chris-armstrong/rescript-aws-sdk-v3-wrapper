@@ -12,6 +12,8 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "rescript": "*"
+    "reason-nodejs": "^13.0.0-beta.1",
+    "rescript": "*",
+    "rescript-tinycolor": "^4.0.0"
   }
 }
