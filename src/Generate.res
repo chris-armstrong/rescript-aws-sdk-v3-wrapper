@@ -78,8 +78,7 @@ let indentString = indent => {
   Belt.Array.joinWith(is, "", x => x)
 }
 
-let generateStructureShape = (details: Shape.structureShapeDetails, ~indent=0, ()) => {
-  let is = indentString(indent)
+let generateStructureShape = (details: Shape.structureShapeDetails) => {
   let isError = Trait.hasTrait(details.traits, Trait.isErrorTrait)
   if isError {
     generateExceptionType(Array.map(details.members, generateMember))
@@ -88,7 +87,46 @@ let generateStructureShape = (details: Shape.structureShapeDetails, ~indent=0, (
   }
 }
 let generateUnionShape = (details: Shape.structureShapeDetails) => {
-  generateStructureShape(details, ())
+  generateStructureShape(details)
+}
+
+let safeUnionValue = (members: array<Shape.member>, member: Shape.member) => {
+  let nones = Array.keepMap(members, candidate =>
+    candidate != member ? Some(`${safeTypeName(candidate.name)}: None`) : None
+  )
+  `{ ${safeTypeName(member.name)}: Some(x), ${Array.joinWith(nones, ",", x => x)} }`
+}
+
+let generateUnionHelperModule = (name: string, details: Shape.structureShapeDetails) => {
+  let tConstructors = Array.map(details.members, member =>
+    `${safeVariantName(member.name)}(${safeTypeName(member.target)})`
+  )
+  let t = `type t = ${Array.joinWith(tConstructors, " | ", x => x)};`
+  let classifyLines = Array.map(details.members, member =>
+    `  | { ${safeMemberName(member.name)}: Some(x) } => ${safeConstructorName(member.name)}(x);`
+  )
+  let exceptionName = `${safeConstructorName(symbolName(name))}Unspecified`
+  let classify = `let classify = value => switch value {
+    ${Array.joinWith(classifyLines, "\n", x => x)}
+    | _ => raise(${exceptionName})
+  };
+  `
+
+  let makeLines = Array.map(details.members, member =>
+    `| ${safeConstructorName(member.name)}(x) => ${safeUnionValue(details.members, member)}`
+  )
+  let make = `let make = value => switch value {
+    ${Array.joinWith(makeLines, "\n", x => x)}
+  };
+  `
+  let exc = `exception ${exceptionName};`
+  `
+  module ${symbolName(name)} = {
+    ${t}
+    ${exc}
+    ${classify}
+    ${make}
+  }`
 }
 
 let generateListShape = target => `array<${safeTypeName(target)}>`
@@ -139,8 +177,7 @@ type operationStructure =
   | OperationStructureNone
 let generateOperationStructureType = (varName, opStruct) =>
   switch opStruct {
-  | OperationStructure(details) =>
-    generateType(`#${varName}`, generateStructureShape(details, ~indent=2, ()))
+  | OperationStructure(details) => generateType(`#${varName}`, generateStructureShape(details))
   | OperationStructureRef(name) => generateType(`#${varName}`, safeTypeName(name))
   | OperationStructureNone => ""
   }
@@ -173,7 +210,7 @@ let generateTypeTarget = descriptor => {
   // Js.log(name)
   switch descriptor {
   | StringShape(details) => generateStringShape(details)
-  | StructureShape(details) => generateStructureShape(details, ())
+  | StructureShape(details) => generateStructureShape(details)
   | ListShape({target}) => generateListShape(target)
   | IntegerShape(_) => generateIntegerShape()
   | LongShape(_) => generateLongShape()
@@ -194,7 +231,14 @@ let generateTypeTarget = descriptor => {
 
 let generateTypeBlock = ({name, descriptor}: Shape.t) => {
   let result = generateTypeTarget(descriptor)
-  result == "" ? "" : generateType(name, result)
+  let t = result == "" ? "" : generateType(name, result)
+  switch descriptor {
+  | UnionShape(details) => {
+      let shapeModule = generateUnionHelperModule(name, details)
+      t ++ shapeModule
+    }
+  | _ => t
+  }
 }
 
 let generateRecursiveTypeBlock = (shapes: array<Shape.t>) => {

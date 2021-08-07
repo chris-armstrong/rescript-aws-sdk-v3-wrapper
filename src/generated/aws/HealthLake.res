@@ -44,7 +44,35 @@ type clientTokenString = string
 type boundedLengthString = string
 type preloadDataConfig = {@as("PreloadDataType") preloadDataType: preloadDataType}
 type outputDataConfig = {@as("S3Uri") s3Uri: option<s3Uri>}
+module OutputDataConfig = {
+  type t = S3Uri(s3Uri)
+  exception OutputDataConfigUnspecified
+  let classify = value =>
+    switch value {
+    | {s3Uri: Some(x)} => S3Uri(x)
+    | _ => raise(OutputDataConfigUnspecified)
+    }
+
+  let make = value =>
+    switch value {
+    | S3Uri(x) => {s3Uri: Some(x)}
+    }
+}
 type inputDataConfig = {@as("S3Uri") s3Uri: option<s3Uri>}
+module InputDataConfig = {
+  type t = S3Uri(s3Uri)
+  exception InputDataConfigUnspecified
+  let classify = value =>
+    switch value {
+    | {s3Uri: Some(x)} => S3Uri(x)
+    | _ => raise(InputDataConfigUnspecified)
+    }
+
+  let make = value =>
+    switch value {
+    | S3Uri(x) => {s3Uri: Some(x)}
+    }
+}
 type datastoreFilter = {
   @as("CreatedAfter") createdAfter: option<timestamp_>,
   @as("CreatedBefore") createdBefore: option<timestamp_>,

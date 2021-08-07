@@ -221,6 +221,26 @@ type pathElement = {
   key: option<baseString>,
   index: option<baseInteger>,
 }
+module PathElement = {
+  type t = Value(baseString) | Substring(substring) | Key(baseString) | Index(baseInteger)
+  exception PathElementUnspecified
+  let classify = value =>
+    switch value {
+    | {value: Some(x)} => Value(x)
+    | {substring: Some(x)} => Substring(x)
+    | {key: Some(x)} => Key(x)
+    | {index: Some(x)} => Index(x)
+    | _ => raise(PathElementUnspecified)
+    }
+
+  let make = value =>
+    switch value {
+    | Value(x) => {value: Some(x), substring: None, key: None, index: None}
+    | Substring(x) => {substring: Some(x), value: None, key: None, index: None}
+    | Key(x) => {key: Some(x), value: None, substring: None, index: None}
+    | Index(x) => {index: Some(x), value: None, substring: None, key: None}
+    }
+}
 type kmsKeyPoliciesMap = Js.Dict.t<kmsKeyPolicy>
 type kmsGrantOperationsList = array<kmsGrantOperation>
 type kmsConstraintsMap = Js.Dict.t<kmsConstraintsValue>
@@ -263,6 +283,22 @@ type aclGrantee = {
   uri: option<aclUri>,
   id: option<aclCanonicalId>,
 }
+module AclGrantee = {
+  type t = Uri(aclUri) | Id(aclCanonicalId)
+  exception AclGranteeUnspecified
+  let classify = value =>
+    switch value {
+    | {uri: Some(x)} => Uri(x)
+    | {id: Some(x)} => Id(x)
+    | _ => raise(AclGranteeUnspecified)
+    }
+
+  let make = value =>
+    switch value {
+    | Uri(x) => {uri: Some(x), id: None}
+    | Id(x) => {id: Some(x), uri: None}
+    }
+}
 type accessPreviewStatusReason = {code: accessPreviewStatusReasonCode}
 type trailPropertiesList = array<trailProperties>
 type trailList = array<trail>
@@ -275,6 +311,22 @@ type pathElementList = array<pathElement>
 type networkOriginConfiguration = {
   internetConfiguration: option<internetConfiguration>,
   vpcConfiguration: option<vpcConfiguration>,
+}
+module NetworkOriginConfiguration = {
+  type t = InternetConfiguration(internetConfiguration) | VpcConfiguration(vpcConfiguration)
+  exception NetworkOriginConfigurationUnspecified
+  let classify = value =>
+    switch value {
+    | {internetConfiguration: Some(x)} => InternetConfiguration(x)
+    | {vpcConfiguration: Some(x)} => VpcConfiguration(x)
+    | _ => raise(NetworkOriginConfigurationUnspecified)
+    }
+
+  let make = value =>
+    switch value {
+    | InternetConfiguration(x) => {internetConfiguration: Some(x), vpcConfiguration: None}
+    | VpcConfiguration(x) => {vpcConfiguration: Some(x), internetConfiguration: None}
+    }
 }
 type kmsGrantConstraints = {
   encryptionContextSubset: option<kmsConstraintsMap>,
@@ -437,6 +489,63 @@ type configuration = {
   secretsManagerSecret: option<secretsManagerSecretConfiguration>,
   kmsKey: option<kmsKeyConfiguration>,
   iamRole: option<iamRoleConfiguration>,
+}
+module Configuration = {
+  type t =
+    | SqsQueue(sqsQueueConfiguration)
+    | S3Bucket(s3BucketConfiguration)
+    | SecretsManagerSecret(secretsManagerSecretConfiguration)
+    | KmsKey(kmsKeyConfiguration)
+    | IamRole(iamRoleConfiguration)
+  exception ConfigurationUnspecified
+  let classify = value =>
+    switch value {
+    | {sqsQueue: Some(x)} => SqsQueue(x)
+    | {s3Bucket: Some(x)} => S3Bucket(x)
+    | {secretsManagerSecret: Some(x)} => SecretsManagerSecret(x)
+    | {kmsKey: Some(x)} => KmsKey(x)
+    | {iamRole: Some(x)} => IamRole(x)
+    | _ => raise(ConfigurationUnspecified)
+    }
+
+  let make = value =>
+    switch value {
+    | SqsQueue(x) => {
+        sqsQueue: Some(x),
+        s3Bucket: None,
+        secretsManagerSecret: None,
+        kmsKey: None,
+        iamRole: None,
+      }
+    | S3Bucket(x) => {
+        s3Bucket: Some(x),
+        sqsQueue: None,
+        secretsManagerSecret: None,
+        kmsKey: None,
+        iamRole: None,
+      }
+    | SecretsManagerSecret(x) => {
+        secretsManagerSecret: Some(x),
+        sqsQueue: None,
+        s3Bucket: None,
+        kmsKey: None,
+        iamRole: None,
+      }
+    | KmsKey(x) => {
+        kmsKey: Some(x),
+        sqsQueue: None,
+        s3Bucket: None,
+        secretsManagerSecret: None,
+        iamRole: None,
+      }
+    | IamRole(x) => {
+        iamRole: Some(x),
+        sqsQueue: None,
+        s3Bucket: None,
+        secretsManagerSecret: None,
+        kmsKey: None,
+      }
+    }
 }
 type configurationsMap = Js.Dict.t<configuration>
 type accessPreview = {

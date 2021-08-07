@@ -826,6 +826,498 @@ type dataSourceParameters = {
   @as("AmazonElasticsearchParameters")
   amazonElasticsearchParameters: option<amazonElasticsearchParameters>,
 }
+module DataSourceParameters = {
+  type t =
+    | TwitterParameters(twitterParameters)
+    | TeradataParameters(teradataParameters)
+    | SqlServerParameters(sqlServerParameters)
+    | SparkParameters(sparkParameters)
+    | SnowflakeParameters(snowflakeParameters)
+    | ServiceNowParameters(serviceNowParameters)
+    | S3Parameters(s3Parameters)
+    | RedshiftParameters(redshiftParameters)
+    | RdsParameters(rdsParameters)
+    | PrestoParameters(prestoParameters)
+    | PostgreSqlParameters(postgreSqlParameters)
+    | OracleParameters(oracleParameters)
+    | MySqlParameters(mySqlParameters)
+    | MariaDbParameters(mariaDbParameters)
+    | JiraParameters(jiraParameters)
+    | AwsIotAnalyticsParameters(awsIotAnalyticsParameters)
+    | AuroraPostgreSqlParameters(auroraPostgreSqlParameters)
+    | AuroraParameters(auroraParameters)
+    | AthenaParameters(athenaParameters)
+    | AmazonElasticsearchParameters(amazonElasticsearchParameters)
+  exception DataSourceParametersUnspecified
+  let classify = value =>
+    switch value {
+    | {twitterParameters: Some(x)} => TwitterParameters(x)
+    | {teradataParameters: Some(x)} => TeradataParameters(x)
+    | {sqlServerParameters: Some(x)} => SqlServerParameters(x)
+    | {sparkParameters: Some(x)} => SparkParameters(x)
+    | {snowflakeParameters: Some(x)} => SnowflakeParameters(x)
+    | {serviceNowParameters: Some(x)} => ServiceNowParameters(x)
+    | {s3Parameters: Some(x)} => S3Parameters(x)
+    | {redshiftParameters: Some(x)} => RedshiftParameters(x)
+    | {rdsParameters: Some(x)} => RdsParameters(x)
+    | {prestoParameters: Some(x)} => PrestoParameters(x)
+    | {postgreSqlParameters: Some(x)} => PostgreSqlParameters(x)
+    | {oracleParameters: Some(x)} => OracleParameters(x)
+    | {mySqlParameters: Some(x)} => MySqlParameters(x)
+    | {mariaDbParameters: Some(x)} => MariaDbParameters(x)
+    | {jiraParameters: Some(x)} => JiraParameters(x)
+    | {awsIotAnalyticsParameters: Some(x)} => AwsIotAnalyticsParameters(x)
+    | {auroraPostgreSqlParameters: Some(x)} => AuroraPostgreSqlParameters(x)
+    | {auroraParameters: Some(x)} => AuroraParameters(x)
+    | {athenaParameters: Some(x)} => AthenaParameters(x)
+    | {amazonElasticsearchParameters: Some(x)} => AmazonElasticsearchParameters(x)
+    | _ => raise(DataSourceParametersUnspecified)
+    }
+
+  let make = value =>
+    switch value {
+    | TwitterParameters(x) => {
+        twitterParameters: Some(x),
+        teradataParameters: None,
+        sqlServerParameters: None,
+        sparkParameters: None,
+        snowflakeParameters: None,
+        serviceNowParameters: None,
+        s3Parameters: None,
+        redshiftParameters: None,
+        rdsParameters: None,
+        prestoParameters: None,
+        postgreSqlParameters: None,
+        oracleParameters: None,
+        mySqlParameters: None,
+        mariaDbParameters: None,
+        jiraParameters: None,
+        awsIotAnalyticsParameters: None,
+        auroraPostgreSqlParameters: None,
+        auroraParameters: None,
+        athenaParameters: None,
+        amazonElasticsearchParameters: None,
+      }
+    | TeradataParameters(x) => {
+        teradataParameters: Some(x),
+        twitterParameters: None,
+        sqlServerParameters: None,
+        sparkParameters: None,
+        snowflakeParameters: None,
+        serviceNowParameters: None,
+        s3Parameters: None,
+        redshiftParameters: None,
+        rdsParameters: None,
+        prestoParameters: None,
+        postgreSqlParameters: None,
+        oracleParameters: None,
+        mySqlParameters: None,
+        mariaDbParameters: None,
+        jiraParameters: None,
+        awsIotAnalyticsParameters: None,
+        auroraPostgreSqlParameters: None,
+        auroraParameters: None,
+        athenaParameters: None,
+        amazonElasticsearchParameters: None,
+      }
+    | SqlServerParameters(x) => {
+        sqlServerParameters: Some(x),
+        twitterParameters: None,
+        teradataParameters: None,
+        sparkParameters: None,
+        snowflakeParameters: None,
+        serviceNowParameters: None,
+        s3Parameters: None,
+        redshiftParameters: None,
+        rdsParameters: None,
+        prestoParameters: None,
+        postgreSqlParameters: None,
+        oracleParameters: None,
+        mySqlParameters: None,
+        mariaDbParameters: None,
+        jiraParameters: None,
+        awsIotAnalyticsParameters: None,
+        auroraPostgreSqlParameters: None,
+        auroraParameters: None,
+        athenaParameters: None,
+        amazonElasticsearchParameters: None,
+      }
+    | SparkParameters(x) => {
+        sparkParameters: Some(x),
+        twitterParameters: None,
+        teradataParameters: None,
+        sqlServerParameters: None,
+        snowflakeParameters: None,
+        serviceNowParameters: None,
+        s3Parameters: None,
+        redshiftParameters: None,
+        rdsParameters: None,
+        prestoParameters: None,
+        postgreSqlParameters: None,
+        oracleParameters: None,
+        mySqlParameters: None,
+        mariaDbParameters: None,
+        jiraParameters: None,
+        awsIotAnalyticsParameters: None,
+        auroraPostgreSqlParameters: None,
+        auroraParameters: None,
+        athenaParameters: None,
+        amazonElasticsearchParameters: None,
+      }
+    | SnowflakeParameters(x) => {
+        snowflakeParameters: Some(x),
+        twitterParameters: None,
+        teradataParameters: None,
+        sqlServerParameters: None,
+        sparkParameters: None,
+        serviceNowParameters: None,
+        s3Parameters: None,
+        redshiftParameters: None,
+        rdsParameters: None,
+        prestoParameters: None,
+        postgreSqlParameters: None,
+        oracleParameters: None,
+        mySqlParameters: None,
+        mariaDbParameters: None,
+        jiraParameters: None,
+        awsIotAnalyticsParameters: None,
+        auroraPostgreSqlParameters: None,
+        auroraParameters: None,
+        athenaParameters: None,
+        amazonElasticsearchParameters: None,
+      }
+    | ServiceNowParameters(x) => {
+        serviceNowParameters: Some(x),
+        twitterParameters: None,
+        teradataParameters: None,
+        sqlServerParameters: None,
+        sparkParameters: None,
+        snowflakeParameters: None,
+        s3Parameters: None,
+        redshiftParameters: None,
+        rdsParameters: None,
+        prestoParameters: None,
+        postgreSqlParameters: None,
+        oracleParameters: None,
+        mySqlParameters: None,
+        mariaDbParameters: None,
+        jiraParameters: None,
+        awsIotAnalyticsParameters: None,
+        auroraPostgreSqlParameters: None,
+        auroraParameters: None,
+        athenaParameters: None,
+        amazonElasticsearchParameters: None,
+      }
+    | S3Parameters(x) => {
+        s3Parameters: Some(x),
+        twitterParameters: None,
+        teradataParameters: None,
+        sqlServerParameters: None,
+        sparkParameters: None,
+        snowflakeParameters: None,
+        serviceNowParameters: None,
+        redshiftParameters: None,
+        rdsParameters: None,
+        prestoParameters: None,
+        postgreSqlParameters: None,
+        oracleParameters: None,
+        mySqlParameters: None,
+        mariaDbParameters: None,
+        jiraParameters: None,
+        awsIotAnalyticsParameters: None,
+        auroraPostgreSqlParameters: None,
+        auroraParameters: None,
+        athenaParameters: None,
+        amazonElasticsearchParameters: None,
+      }
+    | RedshiftParameters(x) => {
+        redshiftParameters: Some(x),
+        twitterParameters: None,
+        teradataParameters: None,
+        sqlServerParameters: None,
+        sparkParameters: None,
+        snowflakeParameters: None,
+        serviceNowParameters: None,
+        s3Parameters: None,
+        rdsParameters: None,
+        prestoParameters: None,
+        postgreSqlParameters: None,
+        oracleParameters: None,
+        mySqlParameters: None,
+        mariaDbParameters: None,
+        jiraParameters: None,
+        awsIotAnalyticsParameters: None,
+        auroraPostgreSqlParameters: None,
+        auroraParameters: None,
+        athenaParameters: None,
+        amazonElasticsearchParameters: None,
+      }
+    | RdsParameters(x) => {
+        rdsParameters: Some(x),
+        twitterParameters: None,
+        teradataParameters: None,
+        sqlServerParameters: None,
+        sparkParameters: None,
+        snowflakeParameters: None,
+        serviceNowParameters: None,
+        s3Parameters: None,
+        redshiftParameters: None,
+        prestoParameters: None,
+        postgreSqlParameters: None,
+        oracleParameters: None,
+        mySqlParameters: None,
+        mariaDbParameters: None,
+        jiraParameters: None,
+        awsIotAnalyticsParameters: None,
+        auroraPostgreSqlParameters: None,
+        auroraParameters: None,
+        athenaParameters: None,
+        amazonElasticsearchParameters: None,
+      }
+    | PrestoParameters(x) => {
+        prestoParameters: Some(x),
+        twitterParameters: None,
+        teradataParameters: None,
+        sqlServerParameters: None,
+        sparkParameters: None,
+        snowflakeParameters: None,
+        serviceNowParameters: None,
+        s3Parameters: None,
+        redshiftParameters: None,
+        rdsParameters: None,
+        postgreSqlParameters: None,
+        oracleParameters: None,
+        mySqlParameters: None,
+        mariaDbParameters: None,
+        jiraParameters: None,
+        awsIotAnalyticsParameters: None,
+        auroraPostgreSqlParameters: None,
+        auroraParameters: None,
+        athenaParameters: None,
+        amazonElasticsearchParameters: None,
+      }
+    | PostgreSqlParameters(x) => {
+        postgreSqlParameters: Some(x),
+        twitterParameters: None,
+        teradataParameters: None,
+        sqlServerParameters: None,
+        sparkParameters: None,
+        snowflakeParameters: None,
+        serviceNowParameters: None,
+        s3Parameters: None,
+        redshiftParameters: None,
+        rdsParameters: None,
+        prestoParameters: None,
+        oracleParameters: None,
+        mySqlParameters: None,
+        mariaDbParameters: None,
+        jiraParameters: None,
+        awsIotAnalyticsParameters: None,
+        auroraPostgreSqlParameters: None,
+        auroraParameters: None,
+        athenaParameters: None,
+        amazonElasticsearchParameters: None,
+      }
+    | OracleParameters(x) => {
+        oracleParameters: Some(x),
+        twitterParameters: None,
+        teradataParameters: None,
+        sqlServerParameters: None,
+        sparkParameters: None,
+        snowflakeParameters: None,
+        serviceNowParameters: None,
+        s3Parameters: None,
+        redshiftParameters: None,
+        rdsParameters: None,
+        prestoParameters: None,
+        postgreSqlParameters: None,
+        mySqlParameters: None,
+        mariaDbParameters: None,
+        jiraParameters: None,
+        awsIotAnalyticsParameters: None,
+        auroraPostgreSqlParameters: None,
+        auroraParameters: None,
+        athenaParameters: None,
+        amazonElasticsearchParameters: None,
+      }
+    | MySqlParameters(x) => {
+        mySqlParameters: Some(x),
+        twitterParameters: None,
+        teradataParameters: None,
+        sqlServerParameters: None,
+        sparkParameters: None,
+        snowflakeParameters: None,
+        serviceNowParameters: None,
+        s3Parameters: None,
+        redshiftParameters: None,
+        rdsParameters: None,
+        prestoParameters: None,
+        postgreSqlParameters: None,
+        oracleParameters: None,
+        mariaDbParameters: None,
+        jiraParameters: None,
+        awsIotAnalyticsParameters: None,
+        auroraPostgreSqlParameters: None,
+        auroraParameters: None,
+        athenaParameters: None,
+        amazonElasticsearchParameters: None,
+      }
+    | MariaDbParameters(x) => {
+        mariaDbParameters: Some(x),
+        twitterParameters: None,
+        teradataParameters: None,
+        sqlServerParameters: None,
+        sparkParameters: None,
+        snowflakeParameters: None,
+        serviceNowParameters: None,
+        s3Parameters: None,
+        redshiftParameters: None,
+        rdsParameters: None,
+        prestoParameters: None,
+        postgreSqlParameters: None,
+        oracleParameters: None,
+        mySqlParameters: None,
+        jiraParameters: None,
+        awsIotAnalyticsParameters: None,
+        auroraPostgreSqlParameters: None,
+        auroraParameters: None,
+        athenaParameters: None,
+        amazonElasticsearchParameters: None,
+      }
+    | JiraParameters(x) => {
+        jiraParameters: Some(x),
+        twitterParameters: None,
+        teradataParameters: None,
+        sqlServerParameters: None,
+        sparkParameters: None,
+        snowflakeParameters: None,
+        serviceNowParameters: None,
+        s3Parameters: None,
+        redshiftParameters: None,
+        rdsParameters: None,
+        prestoParameters: None,
+        postgreSqlParameters: None,
+        oracleParameters: None,
+        mySqlParameters: None,
+        mariaDbParameters: None,
+        awsIotAnalyticsParameters: None,
+        auroraPostgreSqlParameters: None,
+        auroraParameters: None,
+        athenaParameters: None,
+        amazonElasticsearchParameters: None,
+      }
+    | AwsIotAnalyticsParameters(x) => {
+        awsIotAnalyticsParameters: Some(x),
+        twitterParameters: None,
+        teradataParameters: None,
+        sqlServerParameters: None,
+        sparkParameters: None,
+        snowflakeParameters: None,
+        serviceNowParameters: None,
+        s3Parameters: None,
+        redshiftParameters: None,
+        rdsParameters: None,
+        prestoParameters: None,
+        postgreSqlParameters: None,
+        oracleParameters: None,
+        mySqlParameters: None,
+        mariaDbParameters: None,
+        jiraParameters: None,
+        auroraPostgreSqlParameters: None,
+        auroraParameters: None,
+        athenaParameters: None,
+        amazonElasticsearchParameters: None,
+      }
+    | AuroraPostgreSqlParameters(x) => {
+        auroraPostgreSqlParameters: Some(x),
+        twitterParameters: None,
+        teradataParameters: None,
+        sqlServerParameters: None,
+        sparkParameters: None,
+        snowflakeParameters: None,
+        serviceNowParameters: None,
+        s3Parameters: None,
+        redshiftParameters: None,
+        rdsParameters: None,
+        prestoParameters: None,
+        postgreSqlParameters: None,
+        oracleParameters: None,
+        mySqlParameters: None,
+        mariaDbParameters: None,
+        jiraParameters: None,
+        awsIotAnalyticsParameters: None,
+        auroraParameters: None,
+        athenaParameters: None,
+        amazonElasticsearchParameters: None,
+      }
+    | AuroraParameters(x) => {
+        auroraParameters: Some(x),
+        twitterParameters: None,
+        teradataParameters: None,
+        sqlServerParameters: None,
+        sparkParameters: None,
+        snowflakeParameters: None,
+        serviceNowParameters: None,
+        s3Parameters: None,
+        redshiftParameters: None,
+        rdsParameters: None,
+        prestoParameters: None,
+        postgreSqlParameters: None,
+        oracleParameters: None,
+        mySqlParameters: None,
+        mariaDbParameters: None,
+        jiraParameters: None,
+        awsIotAnalyticsParameters: None,
+        auroraPostgreSqlParameters: None,
+        athenaParameters: None,
+        amazonElasticsearchParameters: None,
+      }
+    | AthenaParameters(x) => {
+        athenaParameters: Some(x),
+        twitterParameters: None,
+        teradataParameters: None,
+        sqlServerParameters: None,
+        sparkParameters: None,
+        snowflakeParameters: None,
+        serviceNowParameters: None,
+        s3Parameters: None,
+        redshiftParameters: None,
+        rdsParameters: None,
+        prestoParameters: None,
+        postgreSqlParameters: None,
+        oracleParameters: None,
+        mySqlParameters: None,
+        mariaDbParameters: None,
+        jiraParameters: None,
+        awsIotAnalyticsParameters: None,
+        auroraPostgreSqlParameters: None,
+        auroraParameters: None,
+        amazonElasticsearchParameters: None,
+      }
+    | AmazonElasticsearchParameters(x) => {
+        amazonElasticsearchParameters: Some(x),
+        twitterParameters: None,
+        teradataParameters: None,
+        sqlServerParameters: None,
+        sparkParameters: None,
+        snowflakeParameters: None,
+        serviceNowParameters: None,
+        s3Parameters: None,
+        redshiftParameters: None,
+        rdsParameters: None,
+        prestoParameters: None,
+        postgreSqlParameters: None,
+        oracleParameters: None,
+        mySqlParameters: None,
+        mariaDbParameters: None,
+        jiraParameters: None,
+        awsIotAnalyticsParameters: None,
+        auroraPostgreSqlParameters: None,
+        auroraParameters: None,
+        athenaParameters: None,
+      }
+    }
+}
 type dataSetSummaryList = array<dataSetSummary>
 type dataSetSchema = {@as("ColumnSchemaList") columnSchemaList: option<columnSchemaList>}
 type dashboardVersion = {
@@ -895,6 +1387,24 @@ type physicalTable = {
   @as("CustomSql") customSql: option<customSql>,
   @as("RelationalTable") relationalTable: option<relationalTable>,
 }
+module PhysicalTable = {
+  type t = S3Source(s3Source) | CustomSql(customSql) | RelationalTable(relationalTable)
+  exception PhysicalTableUnspecified
+  let classify = value =>
+    switch value {
+    | {s3Source: Some(x)} => S3Source(x)
+    | {customSql: Some(x)} => CustomSql(x)
+    | {relationalTable: Some(x)} => RelationalTable(x)
+    | _ => raise(PhysicalTableUnspecified)
+    }
+
+  let make = value =>
+    switch value {
+    | S3Source(x) => {s3Source: Some(x), customSql: None, relationalTable: None}
+    | CustomSql(x) => {customSql: Some(x), s3Source: None, relationalTable: None}
+    | RelationalTable(x) => {relationalTable: Some(x), s3Source: None, customSql: None}
+    }
+}
 type parameters = {
   @as("DateTimeParameters") dateTimeParameters: option<dateTimeParameterList>,
   @as("DecimalParameters") decimalParameters: option<decimalParameterList>,
@@ -922,6 +1432,78 @@ type transformOperation = {
   @as("CreateColumnsOperation") createColumnsOperation: option<createColumnsOperation>,
   @as("FilterOperation") filterOperation: option<filterOperation>,
   @as("ProjectOperation") projectOperation: option<projectOperation>,
+}
+module TransformOperation = {
+  type t =
+    | TagColumnOperation(tagColumnOperation)
+    | CastColumnTypeOperation(castColumnTypeOperation)
+    | RenameColumnOperation(renameColumnOperation)
+    | CreateColumnsOperation(createColumnsOperation)
+    | FilterOperation(filterOperation)
+    | ProjectOperation(projectOperation)
+  exception TransformOperationUnspecified
+  let classify = value =>
+    switch value {
+    | {tagColumnOperation: Some(x)} => TagColumnOperation(x)
+    | {castColumnTypeOperation: Some(x)} => CastColumnTypeOperation(x)
+    | {renameColumnOperation: Some(x)} => RenameColumnOperation(x)
+    | {createColumnsOperation: Some(x)} => CreateColumnsOperation(x)
+    | {filterOperation: Some(x)} => FilterOperation(x)
+    | {projectOperation: Some(x)} => ProjectOperation(x)
+    | _ => raise(TransformOperationUnspecified)
+    }
+
+  let make = value =>
+    switch value {
+    | TagColumnOperation(x) => {
+        tagColumnOperation: Some(x),
+        castColumnTypeOperation: None,
+        renameColumnOperation: None,
+        createColumnsOperation: None,
+        filterOperation: None,
+        projectOperation: None,
+      }
+    | CastColumnTypeOperation(x) => {
+        castColumnTypeOperation: Some(x),
+        tagColumnOperation: None,
+        renameColumnOperation: None,
+        createColumnsOperation: None,
+        filterOperation: None,
+        projectOperation: None,
+      }
+    | RenameColumnOperation(x) => {
+        renameColumnOperation: Some(x),
+        tagColumnOperation: None,
+        castColumnTypeOperation: None,
+        createColumnsOperation: None,
+        filterOperation: None,
+        projectOperation: None,
+      }
+    | CreateColumnsOperation(x) => {
+        createColumnsOperation: Some(x),
+        tagColumnOperation: None,
+        castColumnTypeOperation: None,
+        renameColumnOperation: None,
+        filterOperation: None,
+        projectOperation: None,
+      }
+    | FilterOperation(x) => {
+        filterOperation: Some(x),
+        tagColumnOperation: None,
+        castColumnTypeOperation: None,
+        renameColumnOperation: None,
+        createColumnsOperation: None,
+        projectOperation: None,
+      }
+    | ProjectOperation(x) => {
+        projectOperation: Some(x),
+        tagColumnOperation: None,
+        castColumnTypeOperation: None,
+        renameColumnOperation: None,
+        createColumnsOperation: None,
+        filterOperation: None,
+      }
+    }
 }
 type themeVersion = {
   @as("Status") status: option<resourceStatus>,

@@ -117,10 +117,42 @@ type regionInfo = {
   sseKmsKeyId: option<sseKmsKey>,
 }
 type notificationTargetItem = {snsTopicArn: option<arn>}
+module NotificationTargetItem = {
+  type t = SnsTopicArn(arn)
+  exception NotificationTargetItemUnspecified
+  let classify = value =>
+    switch value {
+    | {snsTopicArn: Some(x)} => SnsTopicArn(x)
+    | _ => raise(NotificationTargetItemUnspecified)
+    }
+
+  let make = value =>
+    switch value {
+    | SnsTopicArn(x) => {snsTopicArn: Some(x)}
+    }
+}
 type itemValue = {
   metricDefinition: option<metricDefinition>,
   url: option<url>,
   arn: option<arn>,
+}
+module ItemValue = {
+  type t = MetricDefinition(metricDefinition) | Url(url) | Arn(arn)
+  exception ItemValueUnspecified
+  let classify = value =>
+    switch value {
+    | {metricDefinition: Some(x)} => MetricDefinition(x)
+    | {url: Some(x)} => Url(x)
+    | {arn: Some(x)} => Arn(x)
+    | _ => raise(ItemValueUnspecified)
+    }
+
+  let make = value =>
+    switch value {
+    | MetricDefinition(x) => {metricDefinition: Some(x), url: None, arn: None}
+    | Url(x) => {url: Some(x), metricDefinition: None, arn: None}
+    | Arn(x) => {arn: Some(x), metricDefinition: None, url: None}
+    }
 }
 type incidentRecordSource = {
   source: incidentSource,
@@ -139,9 +171,39 @@ type engagementSet = array<ssmContactsArn>
 type deleteRegionAction = {regionName: regionName}
 type chatbotSnsConfigurationSet = array<snsArn>
 type automationExecution = {ssmExecutionArn: option<arn>}
+module AutomationExecution = {
+  type t = SsmExecutionArn(arn)
+  exception AutomationExecutionUnspecified
+  let classify = value =>
+    switch value {
+    | {ssmExecutionArn: Some(x)} => SsmExecutionArn(x)
+    | _ => raise(AutomationExecutionUnspecified)
+    }
+
+  let make = value =>
+    switch value {
+    | SsmExecutionArn(x) => {ssmExecutionArn: Some(x)}
+    }
+}
 type attributeValueList = {
   integerValues: option<integerList>,
   stringValues: option<stringList>,
+}
+module AttributeValueList = {
+  type t = IntegerValues(integerList) | StringValues(stringList)
+  exception AttributeValueListUnspecified
+  let classify = value =>
+    switch value {
+    | {integerValues: Some(x)} => IntegerValues(x)
+    | {stringValues: Some(x)} => StringValues(x)
+    | _ => raise(AttributeValueListUnspecified)
+    }
+
+  let make = value =>
+    switch value {
+    | IntegerValues(x) => {integerValues: Some(x), stringValues: None}
+    | StringValues(x) => {stringValues: Some(x), integerValues: None}
+    }
 }
 type addRegionAction = {
   sseKmsKeyId: option<sseKmsKey>,
@@ -150,6 +212,22 @@ type addRegionAction = {
 type updateReplicationSetAction = {
   deleteRegionAction: option<deleteRegionAction>,
   addRegionAction: option<addRegionAction>,
+}
+module UpdateReplicationSetAction = {
+  type t = DeleteRegionAction(deleteRegionAction) | AddRegionAction(addRegionAction)
+  exception UpdateReplicationSetActionUnspecified
+  let classify = value =>
+    switch value {
+    | {deleteRegionAction: Some(x)} => DeleteRegionAction(x)
+    | {addRegionAction: Some(x)} => AddRegionAction(x)
+    | _ => raise(UpdateReplicationSetActionUnspecified)
+    }
+
+  let make = value =>
+    switch value {
+    | DeleteRegionAction(x) => {deleteRegionAction: Some(x), addRegionAction: None}
+    | AddRegionAction(x) => {addRegionAction: Some(x), deleteRegionAction: None}
+    }
 }
 type ssmAutomation = {
   parameters: option<ssmParameters>,
@@ -182,9 +260,43 @@ type condition = {
   after: option<baseTimestamp>,
   before: option<baseTimestamp>,
 }
+module Condition = {
+  type t = Equals(attributeValueList) | After(baseTimestamp) | Before(baseTimestamp)
+  exception ConditionUnspecified
+  let classify = value =>
+    switch value {
+    | {equals: Some(x)} => Equals(x)
+    | {after: Some(x)} => After(x)
+    | {before: Some(x)} => Before(x)
+    | _ => raise(ConditionUnspecified)
+    }
+
+  let make = value =>
+    switch value {
+    | Equals(x) => {equals: Some(x), after: None, before: None}
+    | After(x) => {after: Some(x), equals: None, before: None}
+    | Before(x) => {before: Some(x), equals: None, after: None}
+    }
+}
 type chatChannel = {
   chatbotSns: option<chatbotSnsConfigurationSet>,
   empty: option<emptyChatChannel>,
+}
+module ChatChannel = {
+  type t = ChatbotSns(chatbotSnsConfigurationSet) | Empty(emptyChatChannel)
+  exception ChatChannelUnspecified
+  let classify = value =>
+    switch value {
+    | {chatbotSns: Some(x)} => ChatbotSns(x)
+    | {empty: Some(x)} => Empty(x)
+    | _ => raise(ChatChannelUnspecified)
+    }
+
+  let make = value =>
+    switch value {
+    | ChatbotSns(x) => {chatbotSns: Some(x), empty: None}
+    | Empty(x) => {empty: Some(x), chatbotSns: None}
+    }
 }
 type automationExecutionSet = array<automationExecution>
 type updateActionList = array<updateReplicationSetAction>
@@ -230,9 +342,39 @@ type filter = {
   key: baseString,
 }
 type action = {ssmAutomation: option<ssmAutomation>}
+module Action = {
+  type t = SsmAutomation(ssmAutomation)
+  exception ActionUnspecified
+  let classify = value =>
+    switch value {
+    | {ssmAutomation: Some(x)} => SsmAutomation(x)
+    | _ => raise(ActionUnspecified)
+    }
+
+  let make = value =>
+    switch value {
+    | SsmAutomation(x) => {ssmAutomation: Some(x)}
+    }
+}
 type relatedItemsUpdate = {
   itemToRemove: option<itemIdentifier>,
   itemToAdd: option<relatedItem>,
+}
+module RelatedItemsUpdate = {
+  type t = ItemToRemove(itemIdentifier) | ItemToAdd(relatedItem)
+  exception RelatedItemsUpdateUnspecified
+  let classify = value =>
+    switch value {
+    | {itemToRemove: Some(x)} => ItemToRemove(x)
+    | {itemToAdd: Some(x)} => ItemToAdd(x)
+    | _ => raise(RelatedItemsUpdateUnspecified)
+    }
+
+  let make = value =>
+    switch value {
+    | ItemToRemove(x) => {itemToRemove: Some(x), itemToAdd: None}
+    | ItemToAdd(x) => {itemToAdd: Some(x), itemToRemove: None}
+    }
 }
 type relatedItemList = array<relatedItem>
 type filterList = array<filter>

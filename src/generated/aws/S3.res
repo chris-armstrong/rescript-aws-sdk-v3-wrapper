@@ -683,6 +683,33 @@ type selectObjectContentEventStream = {
   @as("Stats") stats: option<statsEvent>,
   @as("Records") records: option<recordsEvent>,
 }
+module SelectObjectContentEventStream = {
+  type t =
+    | End(endEvent)
+    | Cont(continuationEvent)
+    | Progress(progressEvent)
+    | Stats(statsEvent)
+    | Records(recordsEvent)
+  exception SelectObjectContentEventStreamUnspecified
+  let classify = value =>
+    switch value {
+    | {end: Some(x)} => End(x)
+    | {cont: Some(x)} => Cont(x)
+    | {progress: Some(x)} => Progress(x)
+    | {stats: Some(x)} => Stats(x)
+    | {records: Some(x)} => Records(x)
+    | _ => raise(SelectObjectContentEventStreamUnspecified)
+    }
+
+  let make = value =>
+    switch value {
+    | End(x) => {end: Some(x), cont: None, progress: None, stats: None, records: None}
+    | Cont(x) => {cont: Some(x), end: None, progress: None, stats: None, records: None}
+    | Progress(x) => {progress: Some(x), end: None, cont: None, stats: None, records: None}
+    | Stats(x) => {stats: Some(x), end: None, cont: None, progress: None, records: None}
+    | Records(x) => {records: Some(x), end: None, cont: None, progress: None, stats: None}
+    }
+}
 type s3KeyFilter = {@as("FilterRules") filterRules: option<filterRuleList>}
 type routingRules = array<routingRule>
 type replicationRuleAndOperator = {
@@ -760,11 +787,47 @@ type replicationRuleFilter = {
   @as("Tag") tag: option<tag>,
   @as("Prefix") prefix: option<prefix>,
 }
+module ReplicationRuleFilter = {
+  type t = And(replicationRuleAndOperator) | Tag(tag) | Prefix(prefix)
+  exception ReplicationRuleFilterUnspecified
+  let classify = value =>
+    switch value {
+    | {and_: Some(x)} => And(x)
+    | {tag: Some(x)} => Tag(x)
+    | {prefix: Some(x)} => Prefix(x)
+    | _ => raise(ReplicationRuleFilterUnspecified)
+    }
+
+  let make = value =>
+    switch value {
+    | And(x) => {and_: Some(x), tag: None, prefix: None}
+    | Tag(x) => {tag: Some(x), and_: None, prefix: None}
+    | Prefix(x) => {prefix: Some(x), and_: None, tag: None}
+    }
+}
 type notificationConfigurationFilter = {@as("Key") key: option<s3KeyFilter>}
 type metricsFilter = {
   @as("And") and_: option<metricsAndOperator>,
   @as("Tag") tag: option<tag>,
   @as("Prefix") prefix: option<prefix>,
+}
+module MetricsFilter = {
+  type t = And(metricsAndOperator) | Tag(tag) | Prefix(prefix)
+  exception MetricsFilterUnspecified
+  let classify = value =>
+    switch value {
+    | {and_: Some(x)} => And(x)
+    | {tag: Some(x)} => Tag(x)
+    | {prefix: Some(x)} => Prefix(x)
+    | _ => raise(MetricsFilterUnspecified)
+    }
+
+  let make = value =>
+    switch value {
+    | And(x) => {and_: Some(x), tag: None, prefix: None}
+    | Tag(x) => {tag: Some(x), and_: None, prefix: None}
+    | Prefix(x) => {prefix: Some(x), and_: None, tag: None}
+    }
 }
 type loggingEnabled = {
   @as("TargetPrefix") targetPrefix: targetPrefix,
@@ -775,6 +838,24 @@ type lifecycleRuleFilter = {
   @as("And") and_: option<lifecycleRuleAndOperator>,
   @as("Tag") tag: option<tag>,
   @as("Prefix") prefix: option<prefix>,
+}
+module LifecycleRuleFilter = {
+  type t = And(lifecycleRuleAndOperator) | Tag(tag) | Prefix(prefix)
+  exception LifecycleRuleFilterUnspecified
+  let classify = value =>
+    switch value {
+    | {and_: Some(x)} => And(x)
+    | {tag: Some(x)} => Tag(x)
+    | {prefix: Some(x)} => Prefix(x)
+    | _ => raise(LifecycleRuleFilterUnspecified)
+    }
+
+  let make = value =>
+    switch value {
+    | And(x) => {and_: Some(x), tag: None, prefix: None}
+    | Tag(x) => {tag: Some(x), and_: None, prefix: None}
+    | Prefix(x) => {prefix: Some(x), and_: None, tag: None}
+    }
 }
 type inventoryDestination = {
   @as("S3BucketDestination") s3BucketDestination: inventoryS3BucketDestination,
@@ -789,6 +870,24 @@ type analyticsFilter = {
   @as("And") and_: option<analyticsAndOperator>,
   @as("Tag") tag: option<tag>,
   @as("Prefix") prefix: option<prefix>,
+}
+module AnalyticsFilter = {
+  type t = And(analyticsAndOperator) | Tag(tag) | Prefix(prefix)
+  exception AnalyticsFilterUnspecified
+  let classify = value =>
+    switch value {
+    | {and_: Some(x)} => And(x)
+    | {tag: Some(x)} => Tag(x)
+    | {prefix: Some(x)} => Prefix(x)
+    | _ => raise(AnalyticsFilterUnspecified)
+    }
+
+  let make = value =>
+    switch value {
+    | And(x) => {and_: Some(x), tag: None, prefix: None}
+    | Tag(x) => {tag: Some(x), and_: None, prefix: None}
+    | Prefix(x) => {prefix: Some(x), and_: None, tag: None}
+    }
 }
 type accessControlPolicy = {
   @as("Owner") owner: option<owner>,

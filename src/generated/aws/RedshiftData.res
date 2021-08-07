@@ -61,6 +61,78 @@ type field = {
   booleanValue: option<boxedBoolean>,
   isNull: option<boxedBoolean>,
 }
+module Field = {
+  type t =
+    | BlobValue(blob)
+    | StringValue(string_)
+    | DoubleValue(boxedDouble)
+    | LongValue(boxedLong)
+    | BooleanValue(boxedBoolean)
+    | IsNull(boxedBoolean)
+  exception FieldUnspecified
+  let classify = value =>
+    switch value {
+    | {blobValue: Some(x)} => BlobValue(x)
+    | {stringValue: Some(x)} => StringValue(x)
+    | {doubleValue: Some(x)} => DoubleValue(x)
+    | {longValue: Some(x)} => LongValue(x)
+    | {booleanValue: Some(x)} => BooleanValue(x)
+    | {isNull: Some(x)} => IsNull(x)
+    | _ => raise(FieldUnspecified)
+    }
+
+  let make = value =>
+    switch value {
+    | BlobValue(x) => {
+        blobValue: Some(x),
+        stringValue: None,
+        doubleValue: None,
+        longValue: None,
+        booleanValue: None,
+        isNull: None,
+      }
+    | StringValue(x) => {
+        stringValue: Some(x),
+        blobValue: None,
+        doubleValue: None,
+        longValue: None,
+        booleanValue: None,
+        isNull: None,
+      }
+    | DoubleValue(x) => {
+        doubleValue: Some(x),
+        blobValue: None,
+        stringValue: None,
+        longValue: None,
+        booleanValue: None,
+        isNull: None,
+      }
+    | LongValue(x) => {
+        longValue: Some(x),
+        blobValue: None,
+        stringValue: None,
+        doubleValue: None,
+        booleanValue: None,
+        isNull: None,
+      }
+    | BooleanValue(x) => {
+        booleanValue: Some(x),
+        blobValue: None,
+        stringValue: None,
+        doubleValue: None,
+        longValue: None,
+        isNull: None,
+      }
+    | IsNull(x) => {
+        isNull: Some(x),
+        blobValue: None,
+        stringValue: None,
+        doubleValue: None,
+        longValue: None,
+        booleanValue: None,
+      }
+    }
+}
 type databaseList = array<string_>
 type columnMetadata = {
   columnDefault: option<string_>,

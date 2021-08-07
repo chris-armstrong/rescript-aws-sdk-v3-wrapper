@@ -34,6 +34,47 @@ type entitlementValue = {
   @as("DoubleValue") doubleValue: option<double>,
   @as("IntegerValue") integerValue: option<integer_>,
 }
+module EntitlementValue = {
+  type t =
+    StringValue(string_) | BooleanValue(boolean_) | DoubleValue(double) | IntegerValue(integer_)
+  exception EntitlementValueUnspecified
+  let classify = value =>
+    switch value {
+    | {stringValue: Some(x)} => StringValue(x)
+    | {booleanValue: Some(x)} => BooleanValue(x)
+    | {doubleValue: Some(x)} => DoubleValue(x)
+    | {integerValue: Some(x)} => IntegerValue(x)
+    | _ => raise(EntitlementValueUnspecified)
+    }
+
+  let make = value =>
+    switch value {
+    | StringValue(x) => {
+        stringValue: Some(x),
+        booleanValue: None,
+        doubleValue: None,
+        integerValue: None,
+      }
+    | BooleanValue(x) => {
+        booleanValue: Some(x),
+        stringValue: None,
+        doubleValue: None,
+        integerValue: None,
+      }
+    | DoubleValue(x) => {
+        doubleValue: Some(x),
+        stringValue: None,
+        booleanValue: None,
+        integerValue: None,
+      }
+    | IntegerValue(x) => {
+        integerValue: Some(x),
+        stringValue: None,
+        booleanValue: None,
+        doubleValue: None,
+      }
+    }
+}
 type getEntitlementFilters = Js.Dict.t<filterValueList>
 type entitlement = {
   @as("ExpirationDate") expirationDate: option<timestamp_>,

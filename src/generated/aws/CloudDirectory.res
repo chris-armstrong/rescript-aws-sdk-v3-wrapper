@@ -139,6 +139,63 @@ type typedAttributeValue = {
   @as("BinaryValue") binaryValue: option<binaryAttributeValue>,
   @as("StringValue") stringValue: option<stringAttributeValue>,
 }
+module TypedAttributeValue = {
+  type t =
+    | DatetimeValue(datetimeAttributeValue)
+    | NumberValue(numberAttributeValue)
+    | BooleanValue(booleanAttributeValue)
+    | BinaryValue(binaryAttributeValue)
+    | StringValue(stringAttributeValue)
+  exception TypedAttributeValueUnspecified
+  let classify = value =>
+    switch value {
+    | {datetimeValue: Some(x)} => DatetimeValue(x)
+    | {numberValue: Some(x)} => NumberValue(x)
+    | {booleanValue: Some(x)} => BooleanValue(x)
+    | {binaryValue: Some(x)} => BinaryValue(x)
+    | {stringValue: Some(x)} => StringValue(x)
+    | _ => raise(TypedAttributeValueUnspecified)
+    }
+
+  let make = value =>
+    switch value {
+    | DatetimeValue(x) => {
+        datetimeValue: Some(x),
+        numberValue: None,
+        booleanValue: None,
+        binaryValue: None,
+        stringValue: None,
+      }
+    | NumberValue(x) => {
+        numberValue: Some(x),
+        datetimeValue: None,
+        booleanValue: None,
+        binaryValue: None,
+        stringValue: None,
+      }
+    | BooleanValue(x) => {
+        booleanValue: Some(x),
+        datetimeValue: None,
+        numberValue: None,
+        binaryValue: None,
+        stringValue: None,
+      }
+    | BinaryValue(x) => {
+        binaryValue: Some(x),
+        datetimeValue: None,
+        numberValue: None,
+        booleanValue: None,
+        stringValue: None,
+      }
+    | StringValue(x) => {
+        stringValue: Some(x),
+        datetimeValue: None,
+        numberValue: None,
+        booleanValue: None,
+        binaryValue: None,
+      }
+    }
+}
 type tagKeyList = array<tagKey>
 type tag = {
   @as("Value") value: option<tagValue>,

@@ -184,6 +184,24 @@ type annotationValue = {
   @as("BooleanValue") booleanValue: option<nullableBoolean>,
   @as("NumberValue") numberValue: option<nullableDouble>,
 }
+module AnnotationValue = {
+  type t = StringValue(string_) | BooleanValue(nullableBoolean) | NumberValue(nullableDouble)
+  exception AnnotationValueUnspecified
+  let classify = value =>
+    switch value {
+    | {stringValue: Some(x)} => StringValue(x)
+    | {booleanValue: Some(x)} => BooleanValue(x)
+    | {numberValue: Some(x)} => NumberValue(x)
+    | _ => raise(AnnotationValueUnspecified)
+    }
+
+  let make = value =>
+    switch value {
+    | StringValue(x) => {stringValue: Some(x), booleanValue: None, numberValue: None}
+    | BooleanValue(x) => {booleanValue: Some(x), stringValue: None, numberValue: None}
+    | NumberValue(x) => {numberValue: Some(x), stringValue: None, booleanValue: None}
+    }
+}
 type aliasNames = array<string_>
 type unprocessedTraceSegmentList = array<unprocessedTraceSegment>
 type unprocessedStatisticsList = array<unprocessedStatistics>

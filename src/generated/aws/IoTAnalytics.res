@@ -281,6 +281,24 @@ type datastoreStorage = {
   customerManagedS3: option<customerManagedDatastoreS3Storage>,
   serviceManagedS3: option<serviceManagedDatastoreS3Storage>,
 }
+module DatastoreStorage = {
+  type t =
+    | CustomerManagedS3(customerManagedDatastoreS3Storage)
+    | ServiceManagedS3(serviceManagedDatastoreS3Storage)
+  exception DatastoreStorageUnspecified
+  let classify = value =>
+    switch value {
+    | {customerManagedS3: Some(x)} => CustomerManagedS3(x)
+    | {serviceManagedS3: Some(x)} => ServiceManagedS3(x)
+    | _ => raise(DatastoreStorageUnspecified)
+    }
+
+  let make = value =>
+    switch value {
+    | CustomerManagedS3(x) => {customerManagedS3: Some(x), serviceManagedS3: None}
+    | ServiceManagedS3(x) => {serviceManagedS3: Some(x), customerManagedS3: None}
+    }
+}
 type datastoreStatistics = {size: option<estimatedResourceSize>}
 type datasetTrigger = {
   dataset: option<triggeringDataset>,

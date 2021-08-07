@@ -94,6 +94,20 @@ type monitoringConfiguration = {
   persistentAppUI: option<persistentAppUI>,
 }
 type containerInfo = {eksInfo: option<eksInfo>}
+module ContainerInfo = {
+  type t = EksInfo(eksInfo)
+  exception ContainerInfoUnspecified
+  let classify = value =>
+    switch value {
+    | {eksInfo: Some(x)} => EksInfo(x)
+    | _ => raise(ContainerInfoUnspecified)
+    }
+
+  let make = value =>
+    switch value {
+    | EksInfo(x) => {eksInfo: Some(x)}
+    }
+}
 type jobDriver = {sparkSubmitJobDriver: option<sparkSubmitJobDriver>}
 type containerProvider = {
   info: option<containerInfo>,

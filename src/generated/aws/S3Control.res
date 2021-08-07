@@ -349,6 +349,20 @@ type prefixLevelStorageMetrics = {
 type objectLambdaContentTransformation = {
   @as("AwsLambda") awsLambda: option<awsLambdaTransformation>,
 }
+module ObjectLambdaContentTransformation = {
+  type t = AwsLambda(awsLambdaTransformation)
+  exception ObjectLambdaContentTransformationUnspecified
+  let classify = value =>
+    switch value {
+    | {awsLambda: Some(x)} => AwsLambda(x)
+    | _ => raise(ObjectLambdaContentTransformationUnspecified)
+    }
+
+  let make = value =>
+    switch value {
+    | AwsLambda(x) => {awsLambda: Some(x)}
+    }
+}
 type objectLambdaAccessPointList = array<objectLambdaAccessPoint>
 type noncurrentVersionTransitionList = array<noncurrentVersionTransition>
 type jobManifestSpec = {

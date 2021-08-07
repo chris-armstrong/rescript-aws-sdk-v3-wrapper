@@ -258,6 +258,78 @@ type startConversationRequestEventStream = {
   @as("AudioInputEvent") audioInputEvent: option<audioInputEvent>,
   @as("ConfigurationEvent") configurationEvent: option<configurationEvent>,
 }
+module StartConversationRequestEventStream = {
+  type t =
+    | DisconnectionEvent(disconnectionEvent)
+    | PlaybackCompletionEvent(playbackCompletionEvent)
+    | TextInputEvent(textInputEvent)
+    | DTMFInputEvent(dtmfinputEvent)
+    | AudioInputEvent(audioInputEvent)
+    | ConfigurationEvent(configurationEvent)
+  exception StartConversationRequestEventStreamUnspecified
+  let classify = value =>
+    switch value {
+    | {disconnectionEvent: Some(x)} => DisconnectionEvent(x)
+    | {playbackCompletionEvent: Some(x)} => PlaybackCompletionEvent(x)
+    | {textInputEvent: Some(x)} => TextInputEvent(x)
+    | {dtmfinputEvent: Some(x)} => DTMFInputEvent(x)
+    | {audioInputEvent: Some(x)} => AudioInputEvent(x)
+    | {configurationEvent: Some(x)} => ConfigurationEvent(x)
+    | _ => raise(StartConversationRequestEventStreamUnspecified)
+    }
+
+  let make = value =>
+    switch value {
+    | DisconnectionEvent(x) => {
+        disconnectionEvent: Some(x),
+        playbackCompletionEvent: None,
+        textInputEvent: None,
+        dtmfinputEvent: None,
+        audioInputEvent: None,
+        configurationEvent: None,
+      }
+    | PlaybackCompletionEvent(x) => {
+        playbackCompletionEvent: Some(x),
+        disconnectionEvent: None,
+        textInputEvent: None,
+        dtmfinputEvent: None,
+        audioInputEvent: None,
+        configurationEvent: None,
+      }
+    | TextInputEvent(x) => {
+        textInputEvent: Some(x),
+        disconnectionEvent: None,
+        playbackCompletionEvent: None,
+        dtmfinputEvent: None,
+        audioInputEvent: None,
+        configurationEvent: None,
+      }
+    | DTMFInputEvent(x) => {
+        dtmfinputEvent: Some(x),
+        disconnectionEvent: None,
+        playbackCompletionEvent: None,
+        textInputEvent: None,
+        audioInputEvent: None,
+        configurationEvent: None,
+      }
+    | AudioInputEvent(x) => {
+        audioInputEvent: Some(x),
+        disconnectionEvent: None,
+        playbackCompletionEvent: None,
+        textInputEvent: None,
+        dtmfinputEvent: None,
+        configurationEvent: None,
+      }
+    | ConfigurationEvent(x) => {
+        configurationEvent: Some(x),
+        disconnectionEvent: None,
+        playbackCompletionEvent: None,
+        textInputEvent: None,
+        dtmfinputEvent: None,
+        audioInputEvent: None,
+      }
+    }
+}
 type intentResultEvent = {
   eventId: option<eventId>,
   sessionId: option<sessionId>,
@@ -281,6 +353,270 @@ type startConversationResponseEventStream = {
   @as("IntentResultEvent") intentResultEvent: option<intentResultEvent>,
   @as("TranscriptEvent") transcriptEvent: option<transcriptEvent>,
   @as("PlaybackInterruptionEvent") playbackInterruptionEvent: option<playbackInterruptionEvent>,
+}
+module StartConversationResponseEventStream = {
+  type t =
+    | BadGatewayException(badGatewayException)
+    | DependencyFailedException(dependencyFailedException)
+    | ConflictException(conflictException)
+    | InternalServerException(internalServerException)
+    | ThrottlingException(throttlingException)
+    | ValidationException(validationException)
+    | ResourceNotFoundException(resourceNotFoundException)
+    | AccessDeniedException(accessDeniedException)
+    | HeartbeatEvent(heartbeatEvent)
+    | AudioResponseEvent(audioResponseEvent)
+    | TextResponseEvent(textResponseEvent)
+    | IntentResultEvent(intentResultEvent)
+    | TranscriptEvent(transcriptEvent)
+    | PlaybackInterruptionEvent(playbackInterruptionEvent)
+  exception StartConversationResponseEventStreamUnspecified
+  let classify = value =>
+    switch value {
+    | {badGatewayException: Some(x)} => BadGatewayException(x)
+    | {dependencyFailedException: Some(x)} => DependencyFailedException(x)
+    | {conflictException: Some(x)} => ConflictException(x)
+    | {internalServerException: Some(x)} => InternalServerException(x)
+    | {throttlingException: Some(x)} => ThrottlingException(x)
+    | {validationException: Some(x)} => ValidationException(x)
+    | {resourceNotFoundException: Some(x)} => ResourceNotFoundException(x)
+    | {accessDeniedException: Some(x)} => AccessDeniedException(x)
+    | {heartbeatEvent: Some(x)} => HeartbeatEvent(x)
+    | {audioResponseEvent: Some(x)} => AudioResponseEvent(x)
+    | {textResponseEvent: Some(x)} => TextResponseEvent(x)
+    | {intentResultEvent: Some(x)} => IntentResultEvent(x)
+    | {transcriptEvent: Some(x)} => TranscriptEvent(x)
+    | {playbackInterruptionEvent: Some(x)} => PlaybackInterruptionEvent(x)
+    | _ => raise(StartConversationResponseEventStreamUnspecified)
+    }
+
+  let make = value =>
+    switch value {
+    | BadGatewayException(x) => {
+        badGatewayException: Some(x),
+        dependencyFailedException: None,
+        conflictException: None,
+        internalServerException: None,
+        throttlingException: None,
+        validationException: None,
+        resourceNotFoundException: None,
+        accessDeniedException: None,
+        heartbeatEvent: None,
+        audioResponseEvent: None,
+        textResponseEvent: None,
+        intentResultEvent: None,
+        transcriptEvent: None,
+        playbackInterruptionEvent: None,
+      }
+    | DependencyFailedException(x) => {
+        dependencyFailedException: Some(x),
+        badGatewayException: None,
+        conflictException: None,
+        internalServerException: None,
+        throttlingException: None,
+        validationException: None,
+        resourceNotFoundException: None,
+        accessDeniedException: None,
+        heartbeatEvent: None,
+        audioResponseEvent: None,
+        textResponseEvent: None,
+        intentResultEvent: None,
+        transcriptEvent: None,
+        playbackInterruptionEvent: None,
+      }
+    | ConflictException(x) => {
+        conflictException: Some(x),
+        badGatewayException: None,
+        dependencyFailedException: None,
+        internalServerException: None,
+        throttlingException: None,
+        validationException: None,
+        resourceNotFoundException: None,
+        accessDeniedException: None,
+        heartbeatEvent: None,
+        audioResponseEvent: None,
+        textResponseEvent: None,
+        intentResultEvent: None,
+        transcriptEvent: None,
+        playbackInterruptionEvent: None,
+      }
+    | InternalServerException(x) => {
+        internalServerException: Some(x),
+        badGatewayException: None,
+        dependencyFailedException: None,
+        conflictException: None,
+        throttlingException: None,
+        validationException: None,
+        resourceNotFoundException: None,
+        accessDeniedException: None,
+        heartbeatEvent: None,
+        audioResponseEvent: None,
+        textResponseEvent: None,
+        intentResultEvent: None,
+        transcriptEvent: None,
+        playbackInterruptionEvent: None,
+      }
+    | ThrottlingException(x) => {
+        throttlingException: Some(x),
+        badGatewayException: None,
+        dependencyFailedException: None,
+        conflictException: None,
+        internalServerException: None,
+        validationException: None,
+        resourceNotFoundException: None,
+        accessDeniedException: None,
+        heartbeatEvent: None,
+        audioResponseEvent: None,
+        textResponseEvent: None,
+        intentResultEvent: None,
+        transcriptEvent: None,
+        playbackInterruptionEvent: None,
+      }
+    | ValidationException(x) => {
+        validationException: Some(x),
+        badGatewayException: None,
+        dependencyFailedException: None,
+        conflictException: None,
+        internalServerException: None,
+        throttlingException: None,
+        resourceNotFoundException: None,
+        accessDeniedException: None,
+        heartbeatEvent: None,
+        audioResponseEvent: None,
+        textResponseEvent: None,
+        intentResultEvent: None,
+        transcriptEvent: None,
+        playbackInterruptionEvent: None,
+      }
+    | ResourceNotFoundException(x) => {
+        resourceNotFoundException: Some(x),
+        badGatewayException: None,
+        dependencyFailedException: None,
+        conflictException: None,
+        internalServerException: None,
+        throttlingException: None,
+        validationException: None,
+        accessDeniedException: None,
+        heartbeatEvent: None,
+        audioResponseEvent: None,
+        textResponseEvent: None,
+        intentResultEvent: None,
+        transcriptEvent: None,
+        playbackInterruptionEvent: None,
+      }
+    | AccessDeniedException(x) => {
+        accessDeniedException: Some(x),
+        badGatewayException: None,
+        dependencyFailedException: None,
+        conflictException: None,
+        internalServerException: None,
+        throttlingException: None,
+        validationException: None,
+        resourceNotFoundException: None,
+        heartbeatEvent: None,
+        audioResponseEvent: None,
+        textResponseEvent: None,
+        intentResultEvent: None,
+        transcriptEvent: None,
+        playbackInterruptionEvent: None,
+      }
+    | HeartbeatEvent(x) => {
+        heartbeatEvent: Some(x),
+        badGatewayException: None,
+        dependencyFailedException: None,
+        conflictException: None,
+        internalServerException: None,
+        throttlingException: None,
+        validationException: None,
+        resourceNotFoundException: None,
+        accessDeniedException: None,
+        audioResponseEvent: None,
+        textResponseEvent: None,
+        intentResultEvent: None,
+        transcriptEvent: None,
+        playbackInterruptionEvent: None,
+      }
+    | AudioResponseEvent(x) => {
+        audioResponseEvent: Some(x),
+        badGatewayException: None,
+        dependencyFailedException: None,
+        conflictException: None,
+        internalServerException: None,
+        throttlingException: None,
+        validationException: None,
+        resourceNotFoundException: None,
+        accessDeniedException: None,
+        heartbeatEvent: None,
+        textResponseEvent: None,
+        intentResultEvent: None,
+        transcriptEvent: None,
+        playbackInterruptionEvent: None,
+      }
+    | TextResponseEvent(x) => {
+        textResponseEvent: Some(x),
+        badGatewayException: None,
+        dependencyFailedException: None,
+        conflictException: None,
+        internalServerException: None,
+        throttlingException: None,
+        validationException: None,
+        resourceNotFoundException: None,
+        accessDeniedException: None,
+        heartbeatEvent: None,
+        audioResponseEvent: None,
+        intentResultEvent: None,
+        transcriptEvent: None,
+        playbackInterruptionEvent: None,
+      }
+    | IntentResultEvent(x) => {
+        intentResultEvent: Some(x),
+        badGatewayException: None,
+        dependencyFailedException: None,
+        conflictException: None,
+        internalServerException: None,
+        throttlingException: None,
+        validationException: None,
+        resourceNotFoundException: None,
+        accessDeniedException: None,
+        heartbeatEvent: None,
+        audioResponseEvent: None,
+        textResponseEvent: None,
+        transcriptEvent: None,
+        playbackInterruptionEvent: None,
+      }
+    | TranscriptEvent(x) => {
+        transcriptEvent: Some(x),
+        badGatewayException: None,
+        dependencyFailedException: None,
+        conflictException: None,
+        internalServerException: None,
+        throttlingException: None,
+        validationException: None,
+        resourceNotFoundException: None,
+        accessDeniedException: None,
+        heartbeatEvent: None,
+        audioResponseEvent: None,
+        textResponseEvent: None,
+        intentResultEvent: None,
+        playbackInterruptionEvent: None,
+      }
+    | PlaybackInterruptionEvent(x) => {
+        playbackInterruptionEvent: Some(x),
+        badGatewayException: None,
+        dependencyFailedException: None,
+        conflictException: None,
+        internalServerException: None,
+        throttlingException: None,
+        validationException: None,
+        resourceNotFoundException: None,
+        accessDeniedException: None,
+        heartbeatEvent: None,
+        audioResponseEvent: None,
+        textResponseEvent: None,
+        intentResultEvent: None,
+        transcriptEvent: None,
+      }
+    }
 }
 
 module RecognizeUtterance = {

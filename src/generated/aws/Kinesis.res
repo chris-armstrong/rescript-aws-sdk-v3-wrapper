@@ -265,6 +265,158 @@ type subscribeToShardEventStream = {
   @as("ResourceNotFoundException") resourceNotFoundException: option<resourceNotFoundException>,
   @as("SubscribeToShardEvent") subscribeToShardEvent: option<subscribeToShardEvent>,
 }
+module SubscribeToShardEventStream = {
+  type t =
+    | InternalFailureException(internalFailureException)
+    | KMSThrottlingException(kmsthrottlingException)
+    | KMSOptInRequired(kmsoptInRequired)
+    | KMSNotFoundException(kmsnotFoundException)
+    | KMSAccessDeniedException(kmsaccessDeniedException)
+    | KMSInvalidStateException(kmsinvalidStateException)
+    | KMSDisabledException(kmsdisabledException)
+    | ResourceInUseException(resourceInUseException)
+    | ResourceNotFoundException(resourceNotFoundException)
+    | SubscribeToShardEvent(subscribeToShardEvent)
+  exception SubscribeToShardEventStreamUnspecified
+  let classify = value =>
+    switch value {
+    | {internalFailureException: Some(x)} => InternalFailureException(x)
+    | {kmsthrottlingException: Some(x)} => KMSThrottlingException(x)
+    | {kmsoptInRequired: Some(x)} => KMSOptInRequired(x)
+    | {kmsnotFoundException: Some(x)} => KMSNotFoundException(x)
+    | {kmsaccessDeniedException: Some(x)} => KMSAccessDeniedException(x)
+    | {kmsinvalidStateException: Some(x)} => KMSInvalidStateException(x)
+    | {kmsdisabledException: Some(x)} => KMSDisabledException(x)
+    | {resourceInUseException: Some(x)} => ResourceInUseException(x)
+    | {resourceNotFoundException: Some(x)} => ResourceNotFoundException(x)
+    | {subscribeToShardEvent: Some(x)} => SubscribeToShardEvent(x)
+    | _ => raise(SubscribeToShardEventStreamUnspecified)
+    }
+
+  let make = value =>
+    switch value {
+    | InternalFailureException(x) => {
+        internalFailureException: Some(x),
+        kmsthrottlingException: None,
+        kmsoptInRequired: None,
+        kmsnotFoundException: None,
+        kmsaccessDeniedException: None,
+        kmsinvalidStateException: None,
+        kmsdisabledException: None,
+        resourceInUseException: None,
+        resourceNotFoundException: None,
+        subscribeToShardEvent: None,
+      }
+    | KMSThrottlingException(x) => {
+        kmsthrottlingException: Some(x),
+        internalFailureException: None,
+        kmsoptInRequired: None,
+        kmsnotFoundException: None,
+        kmsaccessDeniedException: None,
+        kmsinvalidStateException: None,
+        kmsdisabledException: None,
+        resourceInUseException: None,
+        resourceNotFoundException: None,
+        subscribeToShardEvent: None,
+      }
+    | KMSOptInRequired(x) => {
+        kmsoptInRequired: Some(x),
+        internalFailureException: None,
+        kmsthrottlingException: None,
+        kmsnotFoundException: None,
+        kmsaccessDeniedException: None,
+        kmsinvalidStateException: None,
+        kmsdisabledException: None,
+        resourceInUseException: None,
+        resourceNotFoundException: None,
+        subscribeToShardEvent: None,
+      }
+    | KMSNotFoundException(x) => {
+        kmsnotFoundException: Some(x),
+        internalFailureException: None,
+        kmsthrottlingException: None,
+        kmsoptInRequired: None,
+        kmsaccessDeniedException: None,
+        kmsinvalidStateException: None,
+        kmsdisabledException: None,
+        resourceInUseException: None,
+        resourceNotFoundException: None,
+        subscribeToShardEvent: None,
+      }
+    | KMSAccessDeniedException(x) => {
+        kmsaccessDeniedException: Some(x),
+        internalFailureException: None,
+        kmsthrottlingException: None,
+        kmsoptInRequired: None,
+        kmsnotFoundException: None,
+        kmsinvalidStateException: None,
+        kmsdisabledException: None,
+        resourceInUseException: None,
+        resourceNotFoundException: None,
+        subscribeToShardEvent: None,
+      }
+    | KMSInvalidStateException(x) => {
+        kmsinvalidStateException: Some(x),
+        internalFailureException: None,
+        kmsthrottlingException: None,
+        kmsoptInRequired: None,
+        kmsnotFoundException: None,
+        kmsaccessDeniedException: None,
+        kmsdisabledException: None,
+        resourceInUseException: None,
+        resourceNotFoundException: None,
+        subscribeToShardEvent: None,
+      }
+    | KMSDisabledException(x) => {
+        kmsdisabledException: Some(x),
+        internalFailureException: None,
+        kmsthrottlingException: None,
+        kmsoptInRequired: None,
+        kmsnotFoundException: None,
+        kmsaccessDeniedException: None,
+        kmsinvalidStateException: None,
+        resourceInUseException: None,
+        resourceNotFoundException: None,
+        subscribeToShardEvent: None,
+      }
+    | ResourceInUseException(x) => {
+        resourceInUseException: Some(x),
+        internalFailureException: None,
+        kmsthrottlingException: None,
+        kmsoptInRequired: None,
+        kmsnotFoundException: None,
+        kmsaccessDeniedException: None,
+        kmsinvalidStateException: None,
+        kmsdisabledException: None,
+        resourceNotFoundException: None,
+        subscribeToShardEvent: None,
+      }
+    | ResourceNotFoundException(x) => {
+        resourceNotFoundException: Some(x),
+        internalFailureException: None,
+        kmsthrottlingException: None,
+        kmsoptInRequired: None,
+        kmsnotFoundException: None,
+        kmsaccessDeniedException: None,
+        kmsinvalidStateException: None,
+        kmsdisabledException: None,
+        resourceInUseException: None,
+        subscribeToShardEvent: None,
+      }
+    | SubscribeToShardEvent(x) => {
+        subscribeToShardEvent: Some(x),
+        internalFailureException: None,
+        kmsthrottlingException: None,
+        kmsoptInRequired: None,
+        kmsnotFoundException: None,
+        kmsaccessDeniedException: None,
+        kmsinvalidStateException: None,
+        kmsdisabledException: None,
+        resourceInUseException: None,
+        resourceNotFoundException: None,
+      }
+    }
+}
 
 module UpdateShardCount = {
   type t

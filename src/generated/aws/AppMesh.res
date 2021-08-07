@@ -283,12 +283,66 @@ type headerMatchMethod = {
   regex: option<headerMatch>,
   exact: option<headerMatch>,
 }
+module HeaderMatchMethod = {
+  type t =
+    | Suffix(headerMatch)
+    | Prefix(headerMatch)
+    | Range(matchRange)
+    | Regex(headerMatch)
+    | Exact(headerMatch)
+  exception HeaderMatchMethodUnspecified
+  let classify = value =>
+    switch value {
+    | {suffix: Some(x)} => Suffix(x)
+    | {prefix: Some(x)} => Prefix(x)
+    | {range: Some(x)} => Range(x)
+    | {regex: Some(x)} => Regex(x)
+    | {exact: Some(x)} => Exact(x)
+    | _ => raise(HeaderMatchMethodUnspecified)
+    }
+
+  let make = value =>
+    switch value {
+    | Suffix(x) => {suffix: Some(x), prefix: None, range: None, regex: None, exact: None}
+    | Prefix(x) => {prefix: Some(x), suffix: None, range: None, regex: None, exact: None}
+    | Range(x) => {range: Some(x), suffix: None, prefix: None, regex: None, exact: None}
+    | Regex(x) => {regex: Some(x), suffix: None, prefix: None, range: None, exact: None}
+    | Exact(x) => {exact: Some(x), suffix: None, prefix: None, range: None, regex: None}
+    }
+}
 type grpcRouteMetadataMatchMethod = {
   suffix: option<headerMatch>,
   prefix: option<headerMatch>,
   range: option<matchRange>,
   regex: option<headerMatch>,
   exact: option<headerMatch>,
+}
+module GrpcRouteMetadataMatchMethod = {
+  type t =
+    | Suffix(headerMatch)
+    | Prefix(headerMatch)
+    | Range(matchRange)
+    | Regex(headerMatch)
+    | Exact(headerMatch)
+  exception GrpcRouteMetadataMatchMethodUnspecified
+  let classify = value =>
+    switch value {
+    | {suffix: Some(x)} => Suffix(x)
+    | {prefix: Some(x)} => Prefix(x)
+    | {range: Some(x)} => Range(x)
+    | {regex: Some(x)} => Regex(x)
+    | {exact: Some(x)} => Exact(x)
+    | _ => raise(GrpcRouteMetadataMatchMethodUnspecified)
+    }
+
+  let make = value =>
+    switch value {
+    | Suffix(x) => {suffix: Some(x), prefix: None, range: None, regex: None, exact: None}
+    | Prefix(x) => {prefix: Some(x), suffix: None, range: None, regex: None, exact: None}
+    | Range(x) => {range: Some(x), suffix: None, prefix: None, regex: None, exact: None}
+    | Regex(x) => {regex: Some(x), suffix: None, prefix: None, range: None, exact: None}
+    | Exact(x) => {exact: Some(x), suffix: None, prefix: None, range: None, regex: None}
+    }
 }
 type grpcRetryPolicyEvents = array<grpcRetryPolicyEvent>
 type grpcGatewayRouteMatch = {serviceName: option<serviceName>}
@@ -322,6 +376,22 @@ type virtualServiceProvider = {
   virtualRouter: option<virtualRouterServiceProvider>,
   virtualNode: option<virtualNodeServiceProvider>,
 }
+module VirtualServiceProvider = {
+  type t = VirtualRouter(virtualRouterServiceProvider) | VirtualNode(virtualNodeServiceProvider)
+  exception VirtualServiceProviderUnspecified
+  let classify = value =>
+    switch value {
+    | {virtualRouter: Some(x)} => VirtualRouter(x)
+    | {virtualNode: Some(x)} => VirtualNode(x)
+    | _ => raise(VirtualServiceProviderUnspecified)
+    }
+
+  let make = value =>
+    switch value {
+    | VirtualRouter(x) => {virtualRouter: Some(x), virtualNode: None}
+    | VirtualNode(x) => {virtualNode: Some(x), virtualRouter: None}
+    }
+}
 type virtualServiceList = array<virtualServiceRef>
 type virtualRouterListener = {portMapping: portMapping}
 type virtualRouterList = array<virtualRouterRef>
@@ -332,6 +402,30 @@ type virtualNodeConnectionPool = {
   http: option<virtualNodeHttpConnectionPool>,
   tcp: option<virtualNodeTcpConnectionPool>,
 }
+module VirtualNodeConnectionPool = {
+  type t =
+    | Grpc(virtualNodeGrpcConnectionPool)
+    | Http2(virtualNodeHttp2ConnectionPool)
+    | Http(virtualNodeHttpConnectionPool)
+    | Tcp(virtualNodeTcpConnectionPool)
+  exception VirtualNodeConnectionPoolUnspecified
+  let classify = value =>
+    switch value {
+    | {grpc: Some(x)} => Grpc(x)
+    | {http2: Some(x)} => Http2(x)
+    | {http: Some(x)} => Http(x)
+    | {tcp: Some(x)} => Tcp(x)
+    | _ => raise(VirtualNodeConnectionPoolUnspecified)
+    }
+
+  let make = value =>
+    switch value {
+    | Grpc(x) => {grpc: Some(x), http2: None, http: None, tcp: None}
+    | Http2(x) => {http2: Some(x), grpc: None, http: None, tcp: None}
+    | Http(x) => {http: Some(x), grpc: None, http2: None, tcp: None}
+    | Tcp(x) => {tcp: Some(x), grpc: None, http2: None, http: None}
+    }
+}
 type virtualGatewayTlsValidationContextAcmTrust = {
   certificateAuthorityArns: virtualGatewayCertificateAuthorityArns,
 }
@@ -339,10 +433,49 @@ type virtualGatewayListenerTlsValidationContextTrust = {
   sds: option<virtualGatewayTlsValidationContextSdsTrust>,
   file: option<virtualGatewayTlsValidationContextFileTrust>,
 }
+module VirtualGatewayListenerTlsValidationContextTrust = {
+  type t =
+    | Sds(virtualGatewayTlsValidationContextSdsTrust)
+    | File(virtualGatewayTlsValidationContextFileTrust)
+  exception VirtualGatewayListenerTlsValidationContextTrustUnspecified
+  let classify = value =>
+    switch value {
+    | {sds: Some(x)} => Sds(x)
+    | {file: Some(x)} => File(x)
+    | _ => raise(VirtualGatewayListenerTlsValidationContextTrustUnspecified)
+    }
+
+  let make = value =>
+    switch value {
+    | Sds(x) => {sds: Some(x), file: None}
+    | File(x) => {file: Some(x), sds: None}
+    }
+}
 type virtualGatewayListenerTlsCertificate = {
   sds: option<virtualGatewayListenerTlsSdsCertificate>,
   file: option<virtualGatewayListenerTlsFileCertificate>,
   acm: option<virtualGatewayListenerTlsAcmCertificate>,
+}
+module VirtualGatewayListenerTlsCertificate = {
+  type t =
+    | Sds(virtualGatewayListenerTlsSdsCertificate)
+    | File(virtualGatewayListenerTlsFileCertificate)
+    | Acm(virtualGatewayListenerTlsAcmCertificate)
+  exception VirtualGatewayListenerTlsCertificateUnspecified
+  let classify = value =>
+    switch value {
+    | {sds: Some(x)} => Sds(x)
+    | {file: Some(x)} => File(x)
+    | {acm: Some(x)} => Acm(x)
+    | _ => raise(VirtualGatewayListenerTlsCertificateUnspecified)
+    }
+
+  let make = value =>
+    switch value {
+    | Sds(x) => {sds: Some(x), file: None, acm: None}
+    | File(x) => {file: Some(x), sds: None, acm: None}
+    | Acm(x) => {acm: Some(x), sds: None, file: None}
+    }
 }
 type virtualGatewayList = array<virtualGatewayRef>
 type virtualGatewayConnectionPool = {
@@ -350,11 +483,63 @@ type virtualGatewayConnectionPool = {
   http2: option<virtualGatewayHttp2ConnectionPool>,
   http: option<virtualGatewayHttpConnectionPool>,
 }
+module VirtualGatewayConnectionPool = {
+  type t =
+    | Grpc(virtualGatewayGrpcConnectionPool)
+    | Http2(virtualGatewayHttp2ConnectionPool)
+    | Http(virtualGatewayHttpConnectionPool)
+  exception VirtualGatewayConnectionPoolUnspecified
+  let classify = value =>
+    switch value {
+    | {grpc: Some(x)} => Grpc(x)
+    | {http2: Some(x)} => Http2(x)
+    | {http: Some(x)} => Http(x)
+    | _ => raise(VirtualGatewayConnectionPoolUnspecified)
+    }
+
+  let make = value =>
+    switch value {
+    | Grpc(x) => {grpc: Some(x), http2: None, http: None}
+    | Http2(x) => {http2: Some(x), grpc: None, http: None}
+    | Http(x) => {http: Some(x), grpc: None, http2: None}
+    }
+}
 type virtualGatewayClientTlsCertificate = {
   sds: option<virtualGatewayListenerTlsSdsCertificate>,
   file: option<virtualGatewayListenerTlsFileCertificate>,
 }
+module VirtualGatewayClientTlsCertificate = {
+  type t =
+    Sds(virtualGatewayListenerTlsSdsCertificate) | File(virtualGatewayListenerTlsFileCertificate)
+  exception VirtualGatewayClientTlsCertificateUnspecified
+  let classify = value =>
+    switch value {
+    | {sds: Some(x)} => Sds(x)
+    | {file: Some(x)} => File(x)
+    | _ => raise(VirtualGatewayClientTlsCertificateUnspecified)
+    }
+
+  let make = value =>
+    switch value {
+    | Sds(x) => {sds: Some(x), file: None}
+    | File(x) => {file: Some(x), sds: None}
+    }
+}
 type virtualGatewayAccessLog = {file: option<virtualGatewayFileAccessLog>}
+module VirtualGatewayAccessLog = {
+  type t = File(virtualGatewayFileAccessLog)
+  exception VirtualGatewayAccessLogUnspecified
+  let classify = value =>
+    switch value {
+    | {file: Some(x)} => File(x)
+    | _ => raise(VirtualGatewayAccessLogUnspecified)
+    }
+
+  let make = value =>
+    switch value {
+    | File(x) => {file: Some(x)}
+    }
+}
 type tlsValidationContextAcmTrust = {certificateAuthorityArns: certificateAuthorityArns}
 type tcpTimeout = {idle: option<duration>}
 type tagList_ = array<tagRef>
@@ -372,10 +557,47 @@ type listenerTlsValidationContextTrust = {
   sds: option<tlsValidationContextSdsTrust>,
   file: option<tlsValidationContextFileTrust>,
 }
+module ListenerTlsValidationContextTrust = {
+  type t = Sds(tlsValidationContextSdsTrust) | File(tlsValidationContextFileTrust)
+  exception ListenerTlsValidationContextTrustUnspecified
+  let classify = value =>
+    switch value {
+    | {sds: Some(x)} => Sds(x)
+    | {file: Some(x)} => File(x)
+    | _ => raise(ListenerTlsValidationContextTrustUnspecified)
+    }
+
+  let make = value =>
+    switch value {
+    | Sds(x) => {sds: Some(x), file: None}
+    | File(x) => {file: Some(x), sds: None}
+    }
+}
 type listenerTlsCertificate = {
   sds: option<listenerTlsSdsCertificate>,
   file: option<listenerTlsFileCertificate>,
   acm: option<listenerTlsAcmCertificate>,
+}
+module ListenerTlsCertificate = {
+  type t =
+    | Sds(listenerTlsSdsCertificate)
+    | File(listenerTlsFileCertificate)
+    | Acm(listenerTlsAcmCertificate)
+  exception ListenerTlsCertificateUnspecified
+  let classify = value =>
+    switch value {
+    | {sds: Some(x)} => Sds(x)
+    | {file: Some(x)} => File(x)
+    | {acm: Some(x)} => Acm(x)
+    | _ => raise(ListenerTlsCertificateUnspecified)
+    }
+
+  let make = value =>
+    switch value {
+    | Sds(x) => {sds: Some(x), file: None, acm: None}
+    | File(x) => {file: Some(x), sds: None, acm: None}
+    | Acm(x) => {acm: Some(x), sds: None, file: None}
+    }
 }
 type httpTimeout = {
   idle: option<duration>,
@@ -414,8 +636,38 @@ type clientTlsCertificate = {
   sds: option<listenerTlsSdsCertificate>,
   file: option<listenerTlsFileCertificate>,
 }
+module ClientTlsCertificate = {
+  type t = Sds(listenerTlsSdsCertificate) | File(listenerTlsFileCertificate)
+  exception ClientTlsCertificateUnspecified
+  let classify = value =>
+    switch value {
+    | {sds: Some(x)} => Sds(x)
+    | {file: Some(x)} => File(x)
+    | _ => raise(ClientTlsCertificateUnspecified)
+    }
+
+  let make = value =>
+    switch value {
+    | Sds(x) => {sds: Some(x), file: None}
+    | File(x) => {file: Some(x), sds: None}
+    }
+}
 type awsCloudMapInstanceAttributes = array<awsCloudMapInstanceAttribute>
 type accessLog = {file: option<fileAccessLog>}
+module AccessLog = {
+  type t = File(fileAccessLog)
+  exception AccessLogUnspecified
+  let classify = value =>
+    switch value {
+    | {file: Some(x)} => File(x)
+    | _ => raise(AccessLogUnspecified)
+    }
+
+  let make = value =>
+    switch value {
+    | File(x) => {file: Some(x)}
+    }
+}
 type virtualServiceSpec = {provider: option<virtualServiceProvider>}
 type virtualRouterListeners = array<virtualRouterListener>
 type virtualGatewayTlsValidationContextTrust = {
@@ -423,11 +675,53 @@ type virtualGatewayTlsValidationContextTrust = {
   file: option<virtualGatewayTlsValidationContextFileTrust>,
   acm: option<virtualGatewayTlsValidationContextAcmTrust>,
 }
+module VirtualGatewayTlsValidationContextTrust = {
+  type t =
+    | Sds(virtualGatewayTlsValidationContextSdsTrust)
+    | File(virtualGatewayTlsValidationContextFileTrust)
+    | Acm(virtualGatewayTlsValidationContextAcmTrust)
+  exception VirtualGatewayTlsValidationContextTrustUnspecified
+  let classify = value =>
+    switch value {
+    | {sds: Some(x)} => Sds(x)
+    | {file: Some(x)} => File(x)
+    | {acm: Some(x)} => Acm(x)
+    | _ => raise(VirtualGatewayTlsValidationContextTrustUnspecified)
+    }
+
+  let make = value =>
+    switch value {
+    | Sds(x) => {sds: Some(x), file: None, acm: None}
+    | File(x) => {file: Some(x), sds: None, acm: None}
+    | Acm(x) => {acm: Some(x), sds: None, file: None}
+    }
+}
 type virtualGatewayLogging = {accessLog: option<virtualGatewayAccessLog>}
 type tlsValidationContextTrust = {
   sds: option<tlsValidationContextSdsTrust>,
   file: option<tlsValidationContextFileTrust>,
   acm: option<tlsValidationContextAcmTrust>,
+}
+module TlsValidationContextTrust = {
+  type t =
+    | Sds(tlsValidationContextSdsTrust)
+    | File(tlsValidationContextFileTrust)
+    | Acm(tlsValidationContextAcmTrust)
+  exception TlsValidationContextTrustUnspecified
+  let classify = value =>
+    switch value {
+    | {sds: Some(x)} => Sds(x)
+    | {file: Some(x)} => File(x)
+    | {acm: Some(x)} => Acm(x)
+    | _ => raise(TlsValidationContextTrustUnspecified)
+    }
+
+  let make = value =>
+    switch value {
+    | Sds(x) => {sds: Some(x), file: None, acm: None}
+    | File(x) => {file: Some(x), sds: None, acm: None}
+    | Acm(x) => {acm: Some(x), sds: None, file: None}
+    }
 }
 type tcpRouteAction = {weightedTargets: weightedTargets}
 type subjectAlternativeNames = {@as("match") match_: subjectAlternativeNameMatchers}
@@ -443,6 +737,26 @@ type listenerTimeout = {
   http2: option<httpTimeout>,
   http: option<httpTimeout>,
   tcp: option<tcpTimeout>,
+}
+module ListenerTimeout = {
+  type t = Grpc(grpcTimeout) | Http2(httpTimeout) | Http(httpTimeout) | Tcp(tcpTimeout)
+  exception ListenerTimeoutUnspecified
+  let classify = value =>
+    switch value {
+    | {grpc: Some(x)} => Grpc(x)
+    | {http2: Some(x)} => Http2(x)
+    | {http: Some(x)} => Http(x)
+    | {tcp: Some(x)} => Tcp(x)
+    | _ => raise(ListenerTimeoutUnspecified)
+    }
+
+  let make = value =>
+    switch value {
+    | Grpc(x) => {grpc: Some(x), http2: None, http: None, tcp: None}
+    | Http2(x) => {http2: Some(x), grpc: None, http: None, tcp: None}
+    | Http(x) => {http: Some(x), grpc: None, http2: None, tcp: None}
+    | Tcp(x) => {tcp: Some(x), grpc: None, http2: None, http: None}
+    }
 }
 type httpRouteHeaders = array<httpRouteHeader>
 type httpRouteAction = {weightedTargets: weightedTargets}
@@ -482,6 +796,22 @@ type tcpRoute = {
 type serviceDiscovery = {
   awsCloudMap: option<awsCloudMapServiceDiscovery>,
   dns: option<dnsServiceDiscovery>,
+}
+module ServiceDiscovery = {
+  type t = AwsCloudMap(awsCloudMapServiceDiscovery) | Dns(dnsServiceDiscovery)
+  exception ServiceDiscoveryUnspecified
+  let classify = value =>
+    switch value {
+    | {awsCloudMap: Some(x)} => AwsCloudMap(x)
+    | {dns: Some(x)} => Dns(x)
+    | _ => raise(ServiceDiscoveryUnspecified)
+    }
+
+  let make = value =>
+    switch value {
+    | AwsCloudMap(x) => {awsCloudMap: Some(x), dns: None}
+    | Dns(x) => {dns: Some(x), awsCloudMap: None}
+    }
 }
 type listenerTlsValidationContext = {
   subjectAlternativeNames: option<subjectAlternativeNames>,
@@ -606,6 +936,20 @@ type virtualGatewaySpec = {
   backendDefaults: option<virtualGatewayBackendDefaults>,
 }
 type backend = {virtualService: option<virtualServiceBackend>}
+module Backend = {
+  type t = VirtualService(virtualServiceBackend)
+  exception BackendUnspecified
+  let classify = value =>
+    switch value {
+    | {virtualService: Some(x)} => VirtualService(x)
+    | _ => raise(BackendUnspecified)
+    }
+
+  let make = value =>
+    switch value {
+    | VirtualService(x) => {virtualService: Some(x)}
+    }
+}
 type virtualGatewayData = {
   status: virtualGatewayStatus,
   metadata: resourceMetadata,

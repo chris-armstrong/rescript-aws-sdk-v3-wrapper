@@ -1336,6 +1336,22 @@ type trialComponentParameterValue = {
   @as("NumberValue") numberValue: option<doubleParameterValue>,
   @as("StringValue") stringValue: option<stringParameterValue>,
 }
+module TrialComponentParameterValue = {
+  type t = NumberValue(doubleParameterValue) | StringValue(stringParameterValue)
+  exception TrialComponentParameterValueUnspecified
+  let classify = value =>
+    switch value {
+    | {numberValue: Some(x)} => NumberValue(x)
+    | {stringValue: Some(x)} => StringValue(x)
+    | _ => raise(TrialComponentParameterValueUnspecified)
+    }
+
+  let make = value =>
+    switch value {
+    | NumberValue(x) => {numberValue: Some(x), stringValue: None}
+    | StringValue(x) => {stringValue: Some(x), numberValue: None}
+    }
+}
 type trialComponentMetricSummary = {
   @as("StdDev") stdDev: option<optionalDouble>,
   @as("Avg") avg: option<optionalDouble>,

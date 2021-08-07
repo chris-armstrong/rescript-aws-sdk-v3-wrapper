@@ -520,6 +520,50 @@ type documentAttributeValue = {
   @as("StringListValue") stringListValue: option<documentAttributeStringListValue>,
   @as("StringValue") stringValue: option<documentAttributeStringValue>,
 }
+module DocumentAttributeValue = {
+  type t =
+    | DateValue(timestamp_)
+    | LongValue(long)
+    | StringListValue(documentAttributeStringListValue)
+    | StringValue(documentAttributeStringValue)
+  exception DocumentAttributeValueUnspecified
+  let classify = value =>
+    switch value {
+    | {dateValue: Some(x)} => DateValue(x)
+    | {longValue: Some(x)} => LongValue(x)
+    | {stringListValue: Some(x)} => StringListValue(x)
+    | {stringValue: Some(x)} => StringValue(x)
+    | _ => raise(DocumentAttributeValueUnspecified)
+    }
+
+  let make = value =>
+    switch value {
+    | DateValue(x) => {
+        dateValue: Some(x),
+        longValue: None,
+        stringListValue: None,
+        stringValue: None,
+      }
+    | LongValue(x) => {
+        longValue: Some(x),
+        dateValue: None,
+        stringListValue: None,
+        stringValue: None,
+      }
+    | StringListValue(x) => {
+        stringListValue: Some(x),
+        dateValue: None,
+        longValue: None,
+        stringValue: None,
+      }
+    | StringValue(x) => {
+        stringValue: Some(x),
+        dateValue: None,
+        longValue: None,
+        stringListValue: None,
+      }
+    }
+}
 type dataSourceVpcConfiguration = {
   @as("SecurityGroupIds") securityGroupIds: securityGroupIdList,
   @as("SubnetIds") subnetIds: subnetIdList,

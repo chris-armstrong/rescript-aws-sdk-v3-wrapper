@@ -119,6 +119,20 @@ type medicalItemList = array<medicalItem>
 type medicalEntityList = array<medicalEntity>
 type itemList = array<item>
 type audioStream = {@as("AudioEvent") audioEvent: option<audioEvent>}
+module AudioStream = {
+  type t = AudioEvent(audioEvent)
+  exception AudioStreamUnspecified
+  let classify = value =>
+    switch value {
+    | {audioEvent: Some(x)} => AudioEvent(x)
+    | _ => raise(AudioStreamUnspecified)
+    }
+
+  let make = value =>
+    switch value {
+    | AudioEvent(x) => {audioEvent: Some(x)}
+    }
+}
 type medicalAlternative = {
   @as("Entities") entities: option<medicalEntityList>,
   @as("Items") items: option<medicalItemList>,
@@ -161,6 +175,78 @@ type transcriptResultStream = {
   @as("BadRequestException") badRequestException: option<badRequestException>,
   @as("TranscriptEvent") transcriptEvent: option<transcriptEvent>,
 }
+module TranscriptResultStream = {
+  type t =
+    | ServiceUnavailableException(serviceUnavailableException)
+    | ConflictException(conflictException)
+    | InternalFailureException(internalFailureException)
+    | LimitExceededException(limitExceededException)
+    | BadRequestException(badRequestException)
+    | TranscriptEvent(transcriptEvent)
+  exception TranscriptResultStreamUnspecified
+  let classify = value =>
+    switch value {
+    | {serviceUnavailableException: Some(x)} => ServiceUnavailableException(x)
+    | {conflictException: Some(x)} => ConflictException(x)
+    | {internalFailureException: Some(x)} => InternalFailureException(x)
+    | {limitExceededException: Some(x)} => LimitExceededException(x)
+    | {badRequestException: Some(x)} => BadRequestException(x)
+    | {transcriptEvent: Some(x)} => TranscriptEvent(x)
+    | _ => raise(TranscriptResultStreamUnspecified)
+    }
+
+  let make = value =>
+    switch value {
+    | ServiceUnavailableException(x) => {
+        serviceUnavailableException: Some(x),
+        conflictException: None,
+        internalFailureException: None,
+        limitExceededException: None,
+        badRequestException: None,
+        transcriptEvent: None,
+      }
+    | ConflictException(x) => {
+        conflictException: Some(x),
+        serviceUnavailableException: None,
+        internalFailureException: None,
+        limitExceededException: None,
+        badRequestException: None,
+        transcriptEvent: None,
+      }
+    | InternalFailureException(x) => {
+        internalFailureException: Some(x),
+        serviceUnavailableException: None,
+        conflictException: None,
+        limitExceededException: None,
+        badRequestException: None,
+        transcriptEvent: None,
+      }
+    | LimitExceededException(x) => {
+        limitExceededException: Some(x),
+        serviceUnavailableException: None,
+        conflictException: None,
+        internalFailureException: None,
+        badRequestException: None,
+        transcriptEvent: None,
+      }
+    | BadRequestException(x) => {
+        badRequestException: Some(x),
+        serviceUnavailableException: None,
+        conflictException: None,
+        internalFailureException: None,
+        limitExceededException: None,
+        transcriptEvent: None,
+      }
+    | TranscriptEvent(x) => {
+        transcriptEvent: Some(x),
+        serviceUnavailableException: None,
+        conflictException: None,
+        internalFailureException: None,
+        limitExceededException: None,
+        badRequestException: None,
+      }
+    }
+}
 type medicalTranscriptResultStream = {
   @as("ServiceUnavailableException")
   serviceUnavailableException: option<serviceUnavailableException>,
@@ -169,6 +255,78 @@ type medicalTranscriptResultStream = {
   @as("LimitExceededException") limitExceededException: option<limitExceededException>,
   @as("BadRequestException") badRequestException: option<badRequestException>,
   @as("TranscriptEvent") transcriptEvent: option<medicalTranscriptEvent>,
+}
+module MedicalTranscriptResultStream = {
+  type t =
+    | ServiceUnavailableException(serviceUnavailableException)
+    | ConflictException(conflictException)
+    | InternalFailureException(internalFailureException)
+    | LimitExceededException(limitExceededException)
+    | BadRequestException(badRequestException)
+    | TranscriptEvent(medicalTranscriptEvent)
+  exception MedicalTranscriptResultStreamUnspecified
+  let classify = value =>
+    switch value {
+    | {serviceUnavailableException: Some(x)} => ServiceUnavailableException(x)
+    | {conflictException: Some(x)} => ConflictException(x)
+    | {internalFailureException: Some(x)} => InternalFailureException(x)
+    | {limitExceededException: Some(x)} => LimitExceededException(x)
+    | {badRequestException: Some(x)} => BadRequestException(x)
+    | {transcriptEvent: Some(x)} => TranscriptEvent(x)
+    | _ => raise(MedicalTranscriptResultStreamUnspecified)
+    }
+
+  let make = value =>
+    switch value {
+    | ServiceUnavailableException(x) => {
+        serviceUnavailableException: Some(x),
+        conflictException: None,
+        internalFailureException: None,
+        limitExceededException: None,
+        badRequestException: None,
+        transcriptEvent: None,
+      }
+    | ConflictException(x) => {
+        conflictException: Some(x),
+        serviceUnavailableException: None,
+        internalFailureException: None,
+        limitExceededException: None,
+        badRequestException: None,
+        transcriptEvent: None,
+      }
+    | InternalFailureException(x) => {
+        internalFailureException: Some(x),
+        serviceUnavailableException: None,
+        conflictException: None,
+        limitExceededException: None,
+        badRequestException: None,
+        transcriptEvent: None,
+      }
+    | LimitExceededException(x) => {
+        limitExceededException: Some(x),
+        serviceUnavailableException: None,
+        conflictException: None,
+        internalFailureException: None,
+        badRequestException: None,
+        transcriptEvent: None,
+      }
+    | BadRequestException(x) => {
+        badRequestException: Some(x),
+        serviceUnavailableException: None,
+        conflictException: None,
+        internalFailureException: None,
+        limitExceededException: None,
+        transcriptEvent: None,
+      }
+    | TranscriptEvent(x) => {
+        transcriptEvent: Some(x),
+        serviceUnavailableException: None,
+        conflictException: None,
+        internalFailureException: None,
+        limitExceededException: None,
+        badRequestException: None,
+      }
+    }
 }
 
 module StartStreamTranscription = {

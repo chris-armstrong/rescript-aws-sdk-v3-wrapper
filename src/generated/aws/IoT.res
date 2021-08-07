@@ -1164,6 +1164,50 @@ type assetPropertyVariant = {
   integerValue: option<assetPropertyIntegerValue>,
   stringValue: option<assetPropertyStringValue>,
 }
+module AssetPropertyVariant = {
+  type t =
+    | BooleanValue(assetPropertyBooleanValue)
+    | DoubleValue(assetPropertyDoubleValue)
+    | IntegerValue(assetPropertyIntegerValue)
+    | StringValue(assetPropertyStringValue)
+  exception AssetPropertyVariantUnspecified
+  let classify = value =>
+    switch value {
+    | {booleanValue: Some(x)} => BooleanValue(x)
+    | {doubleValue: Some(x)} => DoubleValue(x)
+    | {integerValue: Some(x)} => IntegerValue(x)
+    | {stringValue: Some(x)} => StringValue(x)
+    | _ => raise(AssetPropertyVariantUnspecified)
+    }
+
+  let make = value =>
+    switch value {
+    | BooleanValue(x) => {
+        booleanValue: Some(x),
+        doubleValue: None,
+        integerValue: None,
+        stringValue: None,
+      }
+    | DoubleValue(x) => {
+        doubleValue: Some(x),
+        booleanValue: None,
+        integerValue: None,
+        stringValue: None,
+      }
+    | IntegerValue(x) => {
+        integerValue: Some(x),
+        booleanValue: None,
+        doubleValue: None,
+        stringValue: None,
+      }
+    | StringValue(x) => {
+        stringValue: Some(x),
+        booleanValue: None,
+        doubleValue: None,
+        integerValue: None,
+      }
+    }
+}
 type assetPropertyTimestamp = {
   offsetInNanos: option<assetPropertyOffsetInNanos>,
   timeInSeconds: assetPropertyTimeInSeconds,
