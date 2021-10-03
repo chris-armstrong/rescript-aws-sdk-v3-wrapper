@@ -5,7 +5,7 @@
     "build": "rescript",
     "clean": "rescript clean -with-deps",
     "start": "rescript build -w",
-    "regenerate": "npm build && node src/AwsGen.bs.js && rescript format -all"
+    "regenerate": "npm run build && node src/AwsGen.bs.js && rescript format -all"
   },
   "keywords": [
     "rescript",
