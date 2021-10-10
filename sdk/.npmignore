@@ -1,0 +1,5 @@
+examples/
+lib/
+src/*.bs.js
+util/*.bs.js
+.merlin

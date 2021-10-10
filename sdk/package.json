@@ -1,5 +1,6 @@
 {
   "name": "rescript-aws-sdk-v3",
+  "description": "ReScript bindings against the AWS JavaScript SDK v3",
   "version": "0.0.1",
   "scripts": {
     "build": "rescript build"
@@ -9,6 +10,7 @@
     "aws",
     "aws-sdk-v3"
   ],
+  "repository": {"url": "https://github.com/chris-armstrong/rescript-aws-sdk-v3-wrapper/"},
   "author": "Chris Armstrong <chris-armstrong@github.com>",
   "license": "MIT",
   "dependencies": {
