@@ -1,0 +1,20 @@
+{
+  "name": "rescript-aws-sdk-v3-generator",
+  "private": true,
+  "version": "0.0.1",
+  "scripts": {
+    "build": "rescript build"
+  },
+  "keywords": [
+    "rescript",
+    "aws",
+    "aws-sdk-v3"
+  ],
+  "author": "Chris Armstrong <chris-armstrong@github.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@ryyppy/rescript-promise": "^2.1.0",
+    "reason-nodejs": "^13.0.0-beta.1",
+    "rescript": "*"
+  }
+}

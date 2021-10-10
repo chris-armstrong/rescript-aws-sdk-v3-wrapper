@@ -1,5 +1,5 @@
 {
-  "name": "RescriptAwsSdkV3Generator",
+  "name": "rescript-aws-sdk-v3-generator",
   "version": "0.0.1",
   "sources": [{
     "dir" : "src",
@@ -14,7 +14,6 @@
   "suffix": ".bs.js",
   "bs-dependencies": [
     "reason-nodejs",
-    "rescript-tinycolor",
     "@ryyppy/rescript-promise"
   ],
   "warnings": {

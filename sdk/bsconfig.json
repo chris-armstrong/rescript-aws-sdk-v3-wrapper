@@ -23,5 +23,6 @@
   "warnings": {
     "number": "-30",
     "error" : "+101"
-  }
+  },
+  "pinned-dependencies": ["rescript-aws-sdk-v3-generator"]
 }

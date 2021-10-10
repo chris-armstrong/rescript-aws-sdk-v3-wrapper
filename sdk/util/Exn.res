@@ -1,4 +1,3 @@
-open Promise;
 type errorMetadata = {
   httpStatusCode: option<int>,
   requestId: option<string>,

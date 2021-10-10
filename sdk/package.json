@@ -1,0 +1,21 @@
+{
+  "name": "rescript-aws-sdk-v3",
+  "version": "0.0.1",
+  "scripts": {
+    "build": "rescript build"
+  },
+  "keywords": [
+    "rescript",
+    "aws",
+    "aws-sdk-v3"
+  ],
+  "author": "Chris Armstrong <chris-armstrong@github.com>",
+  "license": "MIT",
+  "dependencies": {
+    "reason-nodejs": "^13.0.0-beta.1",
+    "rescript": "*"
+  },
+  "devDependencies": {
+    "@aws-sdk/client-s3": "^3.36.0"
+  }
+}
