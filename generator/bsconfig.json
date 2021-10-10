@@ -1,0 +1,24 @@
+{
+  "name": "RescriptAwsSdkV3Generator",
+  "version": "0.0.1",
+  "sources": [{
+    "dir" : "src",
+    "type": "dev",
+    "public": [],
+    "subdirs": false
+  }],
+  "package-specs": {
+    "module": "commonjs",
+    "in-source": true
+  },
+  "suffix": ".bs.js",
+  "bs-dependencies": [
+    "reason-nodejs",
+    "rescript-tinycolor",
+    "@ryyppy/rescript-promise"
+  ],
+  "warnings": {
+    "number": "-30",
+    "error" : "+101"
+  }
+}

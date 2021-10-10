@@ -1,0 +1,27 @@
+{
+  "name": "rescript-aws-sdk-v3",
+  "namespace": "aws-sdk-v3",
+  "version": "0.0.1",
+  "sources": [{
+    "dir" : "src"
+  }, {
+    "dir": "examples",
+    "type": "dev",
+    "public": []
+  }, {
+    "dir": "util"
+  }],
+  "package-specs": {
+    "module": "commonjs",
+    "in-source": true
+  },
+  "suffix": ".bs.js",
+  "bs-dependencies": [
+    "reason-nodejs",
+    "@ryyppy/rescript-promise"
+  ],
+  "warnings": {
+    "number": "-30",
+    "error" : "+101"
+  }
+}

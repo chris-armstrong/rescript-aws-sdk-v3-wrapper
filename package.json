@@ -2,10 +2,10 @@
   "name": "rescript-aws-sdk-v3",
   "version": "0.0.1",
   "scripts": {
-    "build": "rescript",
-    "clean": "rescript clean -with-deps",
-    "start": "rescript build -w",
-    "regenerate": "npm run build && node src/AwsGen.bs.js && rescript format -all"
+    "build:generator": "cd generator && rescript build",
+    "generate": "node generator/src/AwsGen.bs.js && rescript format sdk/src/*.res",
+    "build:sdk": "cd sdk && rescript build ",
+    "regenerate": "npm run build:generator && npm run generate && npm run build:sdk"
   },
   "keywords": [
     "rescript",
@@ -15,8 +15,12 @@
   "author": "Chris Armstrong <chris-armstrong@github.com>",
   "license": "MIT",
   "dependencies": {
+    "@ryyppy/rescript-promise": "^2.1.0",
     "reason-nodejs": "^13.0.0-beta.1",
     "rescript": "*",
     "rescript-tinycolor": "^4.0.0"
+  },
+  "devDependencies": {
+    "@aws-sdk/client-s3": "^3.36.0"
   }
 }
