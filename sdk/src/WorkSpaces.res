@@ -917,7 +917,7 @@ module DescribeAccount = {
     dedicatedTenancySupport: option<dedicatedTenancySupportResultEnum>,
   }
   @module("@aws-sdk/client-workspaces") @new external new: unit => t = "DescribeAccountCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

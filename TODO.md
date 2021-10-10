@@ -12,7 +12,8 @@
   - organise by namespace (smithy.api / aws.api / aws.protocols)
 * Implement exception re-throwing of AWS exceptions or strip out exception generation and create generic handler for AWS exception types
 * ~~Add @obj or @deriving("abstract") functions for creating request types with lots of optional fields~~
-* Combined request create / send helper in each module
+* ~~Combined request create / send helper in each module~~ - see combined make helper
 * ~~Run code through refmt~~
-* Generate types and operations with documentation (from Documentation traits) -- this exists but is not workin
+* Generate types and operations with documentation (from Documentation traits) -- this exists but is not working (may need .resi files)
 * Hand-written wrappers around AWS-helpers like DynamoDB's DocumentClient, etc.
+* Implement `make()` functions for cases where the request type is shared with the rest of the implementation

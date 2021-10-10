@@ -554,7 +554,7 @@ module EnableHealthServiceAccessForOrganization = {
 
   @module("@aws-sdk/client-health") @new
   external new: unit => t = "EnableHealthServiceAccessForOrganizationCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -563,7 +563,7 @@ module DisableHealthServiceAccessForOrganization = {
 
   @module("@aws-sdk/client-health") @new
   external new: unit => t = "DisableHealthServiceAccessForOrganizationCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -578,7 +578,7 @@ module DescribeHealthServiceStatusForOrganization = {
   }
   @module("@aws-sdk/client-health") @new
   external new: unit => t = "DescribeHealthServiceStatusForOrganizationCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

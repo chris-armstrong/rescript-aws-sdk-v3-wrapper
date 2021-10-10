@@ -1702,7 +1702,7 @@ module GetAccount = {
     sendQuota: option<sendQuota>,
   }
   @module("@aws-sdk/client-ses") @new external new: unit => t = "GetAccountCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -2394,7 +2394,7 @@ module GetDeliverabilityDashboardOptions = {
   }
   @module("@aws-sdk/client-ses") @new
   external new: unit => t = "GetDeliverabilityDashboardOptionsCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

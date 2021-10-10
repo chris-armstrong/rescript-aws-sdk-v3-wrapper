@@ -3374,7 +3374,7 @@ module DescribeLimits = {
     accountMaxReadCapacityUnits: option<positiveLongObject>,
   }
   @module("@aws-sdk/client-dynamodb") @new external new: unit => t = "DescribeLimitsCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -3863,7 +3863,7 @@ module DescribeEndpoints = {
 
   type response = {@ocaml.doc("<p>List of endpoints.</p>") @as("Endpoints") endpoints: endpoints}
   @module("@aws-sdk/client-dynamodb") @new external new: unit => t = "DescribeEndpointsCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

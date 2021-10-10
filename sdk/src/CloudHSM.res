@@ -412,7 +412,7 @@ module ListAvailableZones = {
     azlist: option<azlist>,
   }
   @module("@aws-sdk/client-cloudhsm") @new external new: unit => t = "ListAvailableZonesCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

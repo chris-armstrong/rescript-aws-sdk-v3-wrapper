@@ -2518,7 +2518,7 @@ module DescribeAccountLimits = {
   }
   @module("@aws-sdk/client-autoscaling") @new
   external new: unit => t = "DescribeAccountLimitsCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -3192,7 +3192,7 @@ module DescribeTerminationPolicyTypes = {
   }
   @module("@aws-sdk/client-autoscaling") @new
   external new: unit => t = "DescribeTerminationPolicyTypesCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -3205,7 +3205,7 @@ module DescribeLifecycleHookTypes = {
   }
   @module("@aws-sdk/client-autoscaling") @new
   external new: unit => t = "DescribeLifecycleHookTypesCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -3218,7 +3218,7 @@ module DescribeAutoScalingNotificationTypes = {
   }
   @module("@aws-sdk/client-autoscaling") @new
   external new: unit => t = "DescribeAutoScalingNotificationTypesCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -3457,7 +3457,7 @@ module DescribeScalingProcessTypes = {
   }
   @module("@aws-sdk/client-autoscaling") @new
   external new: unit => t = "DescribeScalingProcessTypesCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -3564,7 +3564,7 @@ module DescribeMetricCollectionTypes = {
   }
   @module("@aws-sdk/client-autoscaling") @new
   external new: unit => t = "DescribeMetricCollectionTypesCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -3660,7 +3660,7 @@ module DescribeAdjustmentTypes = {
   }
   @module("@aws-sdk/client-autoscaling") @new
   external new: unit => t = "DescribeAdjustmentTypesCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

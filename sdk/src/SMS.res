@@ -711,7 +711,7 @@ module ImportServerCatalog = {
   type t
 
   @module("@aws-sdk/client-sms") @new external new: unit => t = "ImportServerCatalogCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -742,7 +742,7 @@ module DeleteServerCatalog = {
   type t
 
   @module("@aws-sdk/client-sms") @new external new: unit => t = "DeleteServerCatalogCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 

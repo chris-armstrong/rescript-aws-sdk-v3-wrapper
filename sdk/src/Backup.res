@@ -1651,7 +1651,7 @@ module GetSupportedResourceTypes = {
   }
   @module("@aws-sdk/client-backup") @new
   external new: unit => t = "GetSupportedResourceTypesCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1735,7 +1735,7 @@ module DescribeRegionSettings = {
     resourceTypeOptInPreference: option<resourceTypeOptInPreference>,
   }
   @module("@aws-sdk/client-backup") @new external new: unit => t = "DescribeRegionSettingsCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1865,7 +1865,7 @@ module DescribeGlobalSettings = {
     globalSettings: option<globalSettings>,
   }
   @module("@aws-sdk/client-backup") @new external new: unit => t = "DescribeGlobalSettingsCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

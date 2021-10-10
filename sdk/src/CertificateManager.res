@@ -699,7 +699,7 @@ module GetAccountConfiguration = {
     expiryEvents: option<expiryEventsConfiguration>,
   }
   @module("@aws-sdk/client-acm") @new external new: unit => t = "GetAccountConfigurationCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

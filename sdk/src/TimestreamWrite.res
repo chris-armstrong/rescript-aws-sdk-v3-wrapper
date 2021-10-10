@@ -490,7 +490,7 @@ module DescribeEndpoints = {
     endpoints: endpoints,
   }
   @module("@aws-sdk/client-timestream") @new external new: unit => t = "DescribeEndpointsCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

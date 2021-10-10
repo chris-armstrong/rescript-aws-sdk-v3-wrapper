@@ -1250,7 +1250,7 @@ module DescribeServiceIntegration = {
   type response = {@as("ServiceIntegration") serviceIntegration: option<serviceIntegrationConfig>}
   @module("@aws-sdk/client-devops-guru") @new
   external new: unit => t = "DescribeServiceIntegrationCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1337,7 +1337,7 @@ module DescribeAccountHealth = {
   }
   @module("@aws-sdk/client-devops-guru") @new
   external new: unit => t = "DescribeAccountHealthCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

@@ -418,7 +418,7 @@ module GetSMSSandboxAccountStatus = {
     isInSandbox: boolean_,
   }
   @module("@aws-sdk/client-sns") @new external new: unit => t = "GetSMSSandboxAccountStatusCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

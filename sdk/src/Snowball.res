@@ -689,7 +689,7 @@ module GetSnowballUsage = {
     snowballLimit: option<integer_>,
   }
   @module("@aws-sdk/client-snowball") @new external new: unit => t = "GetSnowballUsageCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

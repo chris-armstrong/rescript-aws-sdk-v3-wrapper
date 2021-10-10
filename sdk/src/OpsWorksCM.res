@@ -868,7 +868,7 @@ module DescribeAccountAttributes = {
   }
   @module("@aws-sdk/client-opsworks-cm") @new
   external new: unit => t = "DescribeAccountAttributesCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

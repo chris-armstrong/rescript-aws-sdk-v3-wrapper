@@ -905,7 +905,7 @@ module GetAccountBalance = {
   }
   @module("@aws-sdk/client-mturk-requester") @new
   external new: unit => t = "GetAccountBalanceCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

@@ -681,7 +681,7 @@ module ResetAllResourceLogLevels = {
 
   @module("@aws-sdk/client-iotwireless") @new
   external new: unit => t = "ResetAllResourceLogLevelsCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -1834,7 +1834,7 @@ module GetLogLevelsByResourceTypes = {
   }
   @module("@aws-sdk/client-iotwireless") @new
   external new: unit => t = "GetLogLevelsByResourceTypesCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

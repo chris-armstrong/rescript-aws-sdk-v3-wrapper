@@ -952,7 +952,7 @@ module GetNotificationChannel = {
     snsTopicArn: option<resourceArn>,
   }
   @module("@aws-sdk/client-fms") @new external new: unit => t = "GetNotificationChannelCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -969,7 +969,7 @@ module GetAdminAccount = {
     adminAccount: option<awsaccountId>,
   }
   @module("@aws-sdk/client-fms") @new external new: unit => t = "GetAdminAccountCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -977,7 +977,7 @@ module DisassociateAdminAccount = {
   type t
 
   @module("@aws-sdk/client-fms") @new external new: unit => t = "DisassociateAdminAccountCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -1046,7 +1046,7 @@ module DeleteNotificationChannel = {
   type t
 
   @module("@aws-sdk/client-fms") @new external new: unit => t = "DeleteNotificationChannelCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 

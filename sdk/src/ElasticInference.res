@@ -302,6 +302,6 @@ module DescribeAcceleratorTypes = {
   }
   @module("@aws-sdk/client-elastic-inference") @new
   external new: unit => t = "DescribeAcceleratorTypesCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

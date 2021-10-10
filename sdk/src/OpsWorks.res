@@ -2861,7 +2861,7 @@ module DescribeMyUserProfile = {
     userProfile: option<selfUserProfile>,
   }
   @module("@aws-sdk/client-opsworks") @new external new: unit => t = "DescribeMyUserProfileCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -4596,7 +4596,7 @@ module DescribeOperatingSystems = {
   }
   @module("@aws-sdk/client-opsworks") @new
   external new: unit => t = "DescribeOperatingSystemsCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

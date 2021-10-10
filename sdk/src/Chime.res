@@ -1588,7 +1588,7 @@ module GetPhoneNumberSettings = {
     callingName: option<callingName>,
   }
   @module("@aws-sdk/client-chime") @new external new: unit => t = "GetPhoneNumberSettingsCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -2380,7 +2380,7 @@ module GetMessagingSessionEndpoint = {
   }
   @module("@aws-sdk/client-chime") @new
   external new: unit => t = "GetMessagingSessionEndpointCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -2394,7 +2394,7 @@ module GetGlobalSettings = {
     businessCalling: option<businessCallingSettings>,
   }
   @module("@aws-sdk/client-chime") @new external new: unit => t = "GetGlobalSettingsCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

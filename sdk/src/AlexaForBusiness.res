@@ -1932,7 +1932,7 @@ module GetInvitationConfiguration = {
     organizationName: option<organizationName>,
   }
   @module("@aws-sdk/client-a4b") @new external new: unit => t = "GetInvitationConfigurationCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1969,7 +1969,7 @@ module GetConferencePreference = {
     preference: option<conferencePreference>,
   }
   @module("@aws-sdk/client-a4b") @new external new: unit => t = "GetConferencePreferenceCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

@@ -2097,7 +2097,7 @@ module DescribeStorage = {
     totalBackupSizeInMegaBytes: option<double>,
   }
   @module("@aws-sdk/client-redshift") @new external new: unit => t = "DescribeStorageCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

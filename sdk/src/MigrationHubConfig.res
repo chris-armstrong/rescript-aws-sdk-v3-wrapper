@@ -92,7 +92,7 @@ module GetHomeRegion = {
     homeRegion: option<homeRegion>,
   }
   @module("@aws-sdk/client-mgh") @new external new: unit => t = "GetHomeRegionCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

@@ -2991,7 +2991,7 @@ module ListSourceCredentials = {
     sourceCredentialsInfos: option<sourceCredentialsInfos>,
   }
   @module("@aws-sdk/client-codebuild") @new external new: unit => t = "ListSourceCredentialsCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -4319,7 +4319,7 @@ module ListCuratedEnvironmentImages = {
   }
   @module("@aws-sdk/client-codebuild") @new
   external new: unit => t = "ListCuratedEnvironmentImagesCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

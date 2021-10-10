@@ -7199,7 +7199,7 @@ module ListBuckets = {
     buckets: option<buckets>,
   }
   @module("@aws-sdk/client-s3") @new external new: unit => t = "ListBucketsCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

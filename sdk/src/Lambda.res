@@ -2019,7 +2019,7 @@ module GetAccountSettings = {
     accountLimit: option<accountLimit>,
   }
   @module("@aws-sdk/client-lambda") @new external new: unit => t = "GetAccountSettingsCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

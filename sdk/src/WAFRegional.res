@@ -2663,7 +2663,7 @@ module GetChangeToken = {
     changeToken: option<changeToken>,
   }
   @module("@aws-sdk/client-waf-regional") @new external new: unit => t = "GetChangeTokenCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

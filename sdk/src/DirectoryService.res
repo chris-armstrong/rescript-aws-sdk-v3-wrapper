@@ -1576,7 +1576,7 @@ module GetDirectoryLimits = {
     directoryLimits: option<directoryLimits>,
   }
   @module("@aws-sdk/client-ds") @new external new: unit => t = "GetDirectoryLimitsCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

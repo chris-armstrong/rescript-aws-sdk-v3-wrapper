@@ -3504,7 +3504,7 @@ module GetV2LoggingOptions = {
     roleArn: option<awsArn>,
   }
   @module("@aws-sdk/client-iot") @new external new: unit => t = "GetV2LoggingOptionsCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -3517,7 +3517,7 @@ module GetRegistrationCode = {
     registrationCode: option<registrationCode>,
   }
   @module("@aws-sdk/client-iot") @new external new: unit => t = "GetRegistrationCodeCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -3577,7 +3577,7 @@ module GetLoggingOptions = {
     @ocaml.doc("<p>The ARN of the IAM role that grants access.</p>") roleArn: option<awsArn>,
   }
   @module("@aws-sdk/client-iot") @new external new: unit => t = "GetLoggingOptionsCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -4008,7 +4008,7 @@ module DeleteRegistrationCode = {
   type t
 
   @module("@aws-sdk/client-iot") @new external new: unit => t = "DeleteRegistrationCodeCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -4420,7 +4420,7 @@ module ClearDefaultAuthorizer = {
   type t
 
   @module("@aws-sdk/client-iot") @new external new: unit => t = "ClearDefaultAuthorizerCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -6865,7 +6865,7 @@ module DescribeEventConfigurations = {
     @ocaml.doc("<p>The event configurations.</p>") eventConfigurations: option<eventConfigurations>,
   }
   @module("@aws-sdk/client-iot") @new external new: unit => t = "DescribeEventConfigurationsCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -6912,7 +6912,7 @@ module DescribeDefaultAuthorizer = {
     authorizerDescription: option<authorizerDescription>,
   }
   @module("@aws-sdk/client-iot") @new external new: unit => t = "DescribeDefaultAuthorizerCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -7034,7 +7034,7 @@ module DescribeAccountAuditConfiguration = {
   }
   @module("@aws-sdk/client-iot") @new
   external new: unit => t = "DescribeAccountAuditConfigurationCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -8026,7 +8026,7 @@ module GetIndexingConfiguration = {
     thingIndexingConfiguration: option<thingIndexingConfiguration>,
   }
   @module("@aws-sdk/client-iot") @new external new: unit => t = "GetIndexingConfigurationCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

@@ -350,7 +350,7 @@ module GetNamespaceDeletionStatus = {
   }
   @module("@aws-sdk/client-iotthingsgraph") @new
   external new: unit => t = "GetNamespaceDeletionStatusCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -464,7 +464,7 @@ module DeleteNamespace = {
     @ocaml.doc("<p>The ARN of the namespace to be deleted.</p>") namespaceArn: option<arn>,
   }
   @module("@aws-sdk/client-iotthingsgraph") @new external new: unit => t = "DeleteNamespaceCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

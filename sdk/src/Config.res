@@ -3710,7 +3710,7 @@ module GetComplianceSummaryByConfigRule = {
   }
   @module("@aws-sdk/client-config") @new
   external new: unit => t = "GetComplianceSummaryByConfigRuleCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

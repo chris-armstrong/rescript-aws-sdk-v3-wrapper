@@ -1293,7 +1293,7 @@ module GetServiceRoleForAccount = {
   }
   @module("@aws-sdk/client-greengrass") @new
   external new: unit => t = "GetServiceRoleForAccountCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1654,7 +1654,7 @@ module DisassociateServiceRoleFromAccount = {
   }
   @module("@aws-sdk/client-greengrass") @new
   external new: unit => t = "DisassociateServiceRoleFromAccountCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

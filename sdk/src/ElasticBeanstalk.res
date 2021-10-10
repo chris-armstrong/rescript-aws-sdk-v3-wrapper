@@ -1810,7 +1810,7 @@ module CreateStorageLocation = {
   }
   @module("@aws-sdk/client-elasticbeanstalk") @new
   external new: unit => t = "CreateStorageLocationCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -2343,7 +2343,7 @@ module DescribeAccountAttributes = {
   }
   @module("@aws-sdk/client-elasticbeanstalk") @new
   external new: unit => t = "DescribeAccountAttributesCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -2774,7 +2774,7 @@ module ListAvailableSolutionStacks = {
   }
   @module("@aws-sdk/client-elasticbeanstalk") @new
   external new: unit => t = "ListAvailableSolutionStacksCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

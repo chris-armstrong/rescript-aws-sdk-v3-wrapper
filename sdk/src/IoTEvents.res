@@ -1440,7 +1440,7 @@ module DescribeLoggingOptions = {
   }
   @module("@aws-sdk/client-iotevents") @new
   external new: unit => t = "DescribeLoggingOptionsCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

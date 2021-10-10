@@ -215,7 +215,7 @@ module GetAssociationForServiceQuotaTemplate = {
   }
   @module("@aws-sdk/client-servicequotas") @new
   external new: unit => t = "GetAssociationForServiceQuotaTemplateCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -224,7 +224,7 @@ module DisassociateServiceQuotaTemplate = {
 
   @module("@aws-sdk/client-servicequotas") @new
   external new: unit => t = "DisassociateServiceQuotaTemplateCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -248,7 +248,7 @@ module AssociateServiceQuotaTemplate = {
 
   @module("@aws-sdk/client-servicequotas") @new
   external new: unit => t = "AssociateServiceQuotaTemplateCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 

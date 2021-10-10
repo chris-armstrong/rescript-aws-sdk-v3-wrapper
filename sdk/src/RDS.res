@@ -4556,7 +4556,7 @@ module DescribeAccountAttributes = {
     accountQuotas: option<accountQuotaList>,
   }
   @module("@aws-sdk/client-rds") @new external new: unit => t = "DescribeAccountAttributesCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

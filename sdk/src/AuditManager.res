@@ -1446,7 +1446,7 @@ The status of the specified AWS account.
     status: option<accountStatus>,
   }
   @module("@aws-sdk/client-auditmanager") @new external new: unit => t = "GetAccountStatusCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1756,7 +1756,7 @@ module GetServicesInScope = {
     serviceMetadata: option<serviceMetadataList>,
   }
   @module("@aws-sdk/client-auditmanager") @new external new: unit => t = "GetServicesInScopeCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1775,7 +1775,7 @@ module GetOrganizationAdminAccount = {
   }
   @module("@aws-sdk/client-auditmanager") @new
   external new: unit => t = "GetOrganizationAdminAccountCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -2032,7 +2032,7 @@ The registration status of the account.
     status: option<accountStatus>,
   }
   @module("@aws-sdk/client-auditmanager") @new external new: unit => t = "DeregisterAccountCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

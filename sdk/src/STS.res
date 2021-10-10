@@ -147,7 +147,7 @@ module GetCallerIdentity = {
     userId: option<userIdType>,
   }
   @module("@aws-sdk/client-sts") @new external new: unit => t = "GetCallerIdentityCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

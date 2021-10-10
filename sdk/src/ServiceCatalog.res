@@ -1575,7 +1575,7 @@ module GetAWSOrganizationsAccessStatus = {
   }
   @module("@aws-sdk/client-servicecatalog") @new
   external new: unit => t = "GetAWSOrganizationsAccessStatusCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1584,7 +1584,7 @@ module EnableAWSOrganizationsAccess = {
 
   @module("@aws-sdk/client-servicecatalog") @new
   external new: unit => t = "EnableAWSOrganizationsAccessCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -1735,7 +1735,7 @@ module DisableAWSOrganizationsAccess = {
 
   @module("@aws-sdk/client-servicecatalog") @new
   external new: unit => t = "DisableAWSOrganizationsAccessCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 

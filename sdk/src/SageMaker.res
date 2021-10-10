@@ -12322,7 +12322,7 @@ module EnableSagemakerServicecatalogPortfolio = {
 
   @module("@aws-sdk/client-sagemaker") @new
   external new: unit => t = "EnableSagemakerServicecatalogPortfolioCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -12331,7 +12331,7 @@ module DisableSagemakerServicecatalogPortfolio = {
 
   @module("@aws-sdk/client-sagemaker") @new
   external new: unit => t = "DisableSagemakerServicecatalogPortfolioCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -12678,7 +12678,7 @@ module GetSagemakerServicecatalogPortfolioStatus = {
   }
   @module("@aws-sdk/client-sagemaker") @new
   external new: unit => t = "GetSagemakerServicecatalogPortfolioStatusCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

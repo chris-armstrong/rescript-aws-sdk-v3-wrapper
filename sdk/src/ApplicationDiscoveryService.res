@@ -640,7 +640,7 @@ module ExportConfigurations = {
     exportId: option<configurationsExportId>,
   }
   @module("@aws-sdk/client-discovery") @new external new: unit => t = "ExportConfigurationsCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -718,7 +718,7 @@ module StartContinuousExport = {
     exportId: option<configurationsExportId>,
   }
   @module("@aws-sdk/client-discovery") @new external new: unit => t = "StartContinuousExportCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -737,7 +737,7 @@ module GetDiscoverySummary = {
     @ocaml.doc("<p>The number of servers discovered.</p>") servers: option<long>,
   }
   @module("@aws-sdk/client-discovery") @new external new: unit => t = "GetDiscoverySummaryCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

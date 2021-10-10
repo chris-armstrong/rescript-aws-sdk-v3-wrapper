@@ -1114,7 +1114,7 @@ module DeleteUsageReportSubscription = {
 
   @module("@aws-sdk/client-appstream") @new
   external new: unit => t = "DeleteUsageReportSubscriptionCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -1222,7 +1222,7 @@ module CreateUsageReportSubscription = {
   }
   @module("@aws-sdk/client-appstream") @new
   external new: unit => t = "CreateUsageReportSubscriptionCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

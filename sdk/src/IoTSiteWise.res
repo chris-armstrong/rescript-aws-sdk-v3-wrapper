@@ -1319,7 +1319,7 @@ module DescribeLoggingOptions = {
   type response = {@ocaml.doc("<p>The current logging options.</p>") loggingOptions: loggingOptions}
   @module("@aws-sdk/client-iotsitewise") @new
   external new: unit => t = "DescribeLoggingOptionsCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1709,7 +1709,7 @@ module DescribeDefaultEncryptionConfiguration = {
   }
   @module("@aws-sdk/client-iotsitewise") @new
   external new: unit => t = "DescribeDefaultEncryptionConfigurationCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

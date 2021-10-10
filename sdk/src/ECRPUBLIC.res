@@ -598,7 +598,7 @@ module GetRegistryCatalogData = {
   }
   @module("@aws-sdk/client-ecr-public") @new
   external new: unit => t = "GetRegistryCatalogDataCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -611,7 +611,7 @@ module GetAuthorizationToken = {
   }
   @module("@aws-sdk/client-ecr-public") @new
   external new: unit => t = "GetAuthorizationTokenCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

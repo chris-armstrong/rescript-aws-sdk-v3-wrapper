@@ -1040,7 +1040,7 @@ module GetEncryptionConfig = {
     encryptionConfig: option<encryptionConfig>,
   }
   @module("@aws-sdk/client-xray") @new external new: unit => t = "GetEncryptionConfigCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

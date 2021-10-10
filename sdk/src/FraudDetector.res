@@ -739,7 +739,7 @@ module GetKMSEncryptionKey = {
   type response = {@ocaml.doc("<p>The KMS encryption key.</p>") kmsKey: option<kmskey>}
   @module("@aws-sdk/client-frauddetector") @new
   external new: unit => t = "GetKMSEncryptionKeyCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

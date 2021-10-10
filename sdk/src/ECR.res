@@ -648,7 +648,7 @@ module GetRegistryPolicy = {
     @ocaml.doc("<p>The ID of the registry.</p>") registryId: option<registryId>,
   }
   @module("@aws-sdk/client-ecr") @new external new: unit => t = "GetRegistryPolicyCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -734,7 +734,7 @@ module DeleteRegistryPolicy = {
     registryId: option<registryId>,
   }
   @module("@aws-sdk/client-ecr") @new external new: unit => t = "DeleteRegistryPolicyCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1377,7 +1377,7 @@ module DescribeRegistry = {
     @ocaml.doc("<p>The ID of the registry.</p>") registryId: option<registryId>,
   }
   @module("@aws-sdk/client-ecr") @new external new: unit => t = "DescribeRegistryCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

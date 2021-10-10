@@ -2503,7 +2503,7 @@ module GetCredentialReport = {
     content: option<reportContentType>,
   }
   @module("@aws-sdk/client-iam") @new external new: unit => t = "GetCredentialReportCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -2581,7 +2581,7 @@ module GenerateCredentialReport = {
     state: option<reportStateType>,
   }
   @module("@aws-sdk/client-iam") @new external new: unit => t = "GenerateCredentialReportCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -3049,7 +3049,7 @@ module DeleteAccountPasswordPolicy = {
   type t
 
   @module("@aws-sdk/client-iam") @new external new: unit => t = "DeleteAccountPasswordPolicyCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -3944,7 +3944,7 @@ module GetAccountSummary = {
     summaryMap: option<summaryMapType>,
   }
   @module("@aws-sdk/client-iam") @new external new: unit => t = "GetAccountSummaryCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -3959,7 +3959,7 @@ module GetAccountPasswordPolicy = {
     passwordPolicy: passwordPolicy,
   }
   @module("@aws-sdk/client-iam") @new external new: unit => t = "GetAccountPasswordPolicyCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -4739,7 +4739,7 @@ module ListSAMLProviders = {
     samlproviderList: option<samlproviderListType>,
   }
   @module("@aws-sdk/client-iam") @new external new: unit => t = "ListSAMLProvidersCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -4950,7 +4950,7 @@ module ListOpenIDConnectProviders = {
     openIDConnectProviderList: option<openIDConnectProviderListType>,
   }
   @module("@aws-sdk/client-iam") @new external new: unit => t = "ListOpenIDConnectProvidersCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

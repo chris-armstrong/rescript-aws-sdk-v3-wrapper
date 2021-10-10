@@ -833,7 +833,7 @@ module DescribeCrossAccountAccessRole = {
   }
   @module("@aws-sdk/client-inspector") @new
   external new: unit => t = "DescribeCrossAccountAccessRoleCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

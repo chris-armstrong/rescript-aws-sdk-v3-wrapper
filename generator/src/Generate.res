@@ -240,8 +240,8 @@ let generateMake = input =>
       let fields = Array.joinWith(members, ", ", member => safeMemberName(member.name) ++ ": " ++ safeMemberName(member.name))
       `let make = (${arguments}, ()) => new({ ${fields} })`
     }
-  | OperationStructureNone
-  | OperationStructureRef(_) => // ref is in the broader types, so generate nothing for now
+  | OperationStructureNone => { `let make = () => new()`}
+  | OperationStructureRef(_) => // FIXME: ref is in the broader types, so generate nothing for now
     ""
   }
 

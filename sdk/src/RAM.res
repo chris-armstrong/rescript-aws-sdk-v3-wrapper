@@ -269,7 +269,7 @@ module EnableSharingWithAwsOrganization = {
   }
   @module("@aws-sdk/client-ram") @new
   external new: unit => t = "EnableSharingWithAwsOrganizationCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

@@ -657,7 +657,7 @@ module ListDomainNames = {
     domainNames: option<domainNameMap>,
   }
   @module("@aws-sdk/client-cloudsearch") @new external new: unit => t = "ListDomainNamesCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

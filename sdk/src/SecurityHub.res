@@ -6506,7 +6506,7 @@ module GetInvitationsCount = {
     invitationsCount: option<integer_>,
   }
   @module("@aws-sdk/client-securityhub") @new external new: unit => t = "GetInvitationsCountCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -6547,7 +6547,7 @@ module DisassociateFromMasterAccount = {
 
   @module("@aws-sdk/client-securityhub") @new
   external new: unit => t = "DisassociateFromMasterAccountCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -6556,7 +6556,7 @@ module DisassociateFromAdministratorAccount = {
 
   @module("@aws-sdk/client-securityhub") @new
   external new: unit => t = "DisassociateFromAdministratorAccountCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -6564,7 +6564,7 @@ module DisableSecurityHub = {
   type t
 
   @module("@aws-sdk/client-securityhub") @new external new: unit => t = "DisableSecurityHubCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -6612,7 +6612,7 @@ module DescribeOrganizationConfiguration = {
   }
   @module("@aws-sdk/client-securityhub") @new
   external new: unit => t = "DescribeOrganizationConfigurationCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -6821,7 +6821,7 @@ module GetMasterAccount = {
     master: option<invitation>,
   }
   @module("@aws-sdk/client-securityhub") @new external new: unit => t = "GetMasterAccountCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -6831,7 +6831,7 @@ module GetAdministratorAccount = {
   type response = {@as("Administrator") administrator: option<invitation>}
   @module("@aws-sdk/client-securityhub") @new
   external new: unit => t = "GetAdministratorAccountCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

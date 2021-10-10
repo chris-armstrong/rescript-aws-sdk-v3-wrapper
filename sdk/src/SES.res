@@ -1670,7 +1670,7 @@ module GetSendQuota = {
     max24HourSend: option<max24HourSend>,
   }
   @module("@aws-sdk/client-ses") @new external new: unit => t = "GetSendQuotaCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1723,7 +1723,7 @@ module GetAccountSendingEnabled = {
     enabled: option<enabled>,
   }
   @module("@aws-sdk/client-ses") @new external new: unit => t = "GetAccountSendingEnabledCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -2131,7 +2131,7 @@ module ListVerifiedEmailAddresses = {
     verifiedEmailAddresses: option<addressList>,
   }
   @module("@aws-sdk/client-ses") @new external new: unit => t = "ListVerifiedEmailAddressesCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -2708,7 +2708,7 @@ module GetSendStatistics = {
     sendDataPoints: option<sendDataPointList>,
   }
   @module("@aws-sdk/client-ses") @new external new: unit => t = "GetSendStatisticsCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -2922,7 +2922,7 @@ module ListReceiptFilters = {
     filters: option<receiptFilterList>,
   }
   @module("@aws-sdk/client-ses") @new external new: unit => t = "ListReceiptFiltersCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -3342,6 +3342,6 @@ module DescribeActiveReceiptRuleSet = {
   }
   @module("@aws-sdk/client-ses") @new
   external new: unit => t = "DescribeActiveReceiptRuleSetCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

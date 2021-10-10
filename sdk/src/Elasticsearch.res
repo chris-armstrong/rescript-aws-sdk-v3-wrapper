@@ -1818,7 +1818,7 @@ module DeleteElasticsearchServiceRole = {
 
   @module("@aws-sdk/client-es") @new
   external new: unit => t = "DeleteElasticsearchServiceRoleCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -2185,7 +2185,7 @@ module ListDomainNames = {
     domainNames: option<domainInfoList>,
   }
   @module("@aws-sdk/client-es") @new external new: unit => t = "ListDomainNamesCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

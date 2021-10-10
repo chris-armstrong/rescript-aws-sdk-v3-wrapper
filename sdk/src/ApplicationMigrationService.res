@@ -806,7 +806,7 @@ module InitializeService = {
   type t
 
   @module("@aws-sdk/client-mgn") @new external new: unit => t = "InitializeServiceCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 

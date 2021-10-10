@@ -4545,7 +4545,7 @@ module DescribeVpcPeeringAuthorizations = {
   }
   @module("@aws-sdk/client-gamelift") @new
   external new: unit => t = "DescribeVpcPeeringAuthorizationsCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

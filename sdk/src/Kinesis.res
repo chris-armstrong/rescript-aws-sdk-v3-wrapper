@@ -1229,7 +1229,7 @@ module DescribeLimits = {
     shardLimit: shardCountObject,
   }
   @module("@aws-sdk/client-kinesis") @new external new: unit => t = "DescribeLimitsCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

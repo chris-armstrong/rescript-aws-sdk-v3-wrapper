@@ -885,7 +885,7 @@ module GetServiceSettings = {
   }
   @module("@aws-sdk/client-license-manager") @new
   external new: unit => t = "GetServiceSettingsCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

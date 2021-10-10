@@ -978,7 +978,7 @@ module GetInvitationsCount = {
     invitationsCount: option<integer_>,
   }
   @module("@aws-sdk/client-guardduty") @new external new: unit => t = "GetInvitationsCountCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

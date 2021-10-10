@@ -3614,7 +3614,7 @@ module IsVpcPeered = {
     isPeered: option<boolean_>,
   }
   @module("@aws-sdk/client-lightsail") @new external new: unit => t = "IsVpcPeeredCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -3681,7 +3681,7 @@ module DownloadDefaultKeyPair = {
   }
   @module("@aws-sdk/client-lightsail") @new
   external new: unit => t = "DownloadDefaultKeyPairCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -3829,7 +3829,7 @@ module CreateContainerServiceRegistryLogin = {
   }
   @module("@aws-sdk/client-lightsail") @new
   external new: unit => t = "CreateContainerServiceRegistryLoginCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -3862,7 +3862,7 @@ module UnpeerVpc = {
     operation: option<operation>,
   }
   @module("@aws-sdk/client-lightsail") @new external new: unit => t = "UnpeerVpcCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -3898,7 +3898,7 @@ module PeerVpc = {
     operation: option<operation>,
   }
   @module("@aws-sdk/client-lightsail") @new external new: unit => t = "PeerVpcCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -4956,7 +4956,7 @@ module GetDistributionBundles = {
   }
   @module("@aws-sdk/client-lightsail") @new
   external new: unit => t = "GetDistributionBundlesCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -4970,7 +4970,7 @@ module GetContainerServicePowers = {
   }
   @module("@aws-sdk/client-lightsail") @new
   external new: unit => t = "GetContainerServicePowersCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -5206,7 +5206,7 @@ module GetContainerAPIMetadata = {
   }
   @module("@aws-sdk/client-lightsail") @new
   external new: unit => t = "GetContainerAPIMetadataCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

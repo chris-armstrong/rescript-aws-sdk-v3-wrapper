@@ -3725,7 +3725,7 @@ module GetAccountSettings = {
     @ocaml.doc("<p>The account settings.</p>") accountSettings: option<accountSettings>,
   }
   @module("@aws-sdk/client-devicefarm") @new external new: unit => t = "GetAccountSettingsCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

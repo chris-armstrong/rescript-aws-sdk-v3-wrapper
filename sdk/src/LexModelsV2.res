@@ -1456,7 +1456,7 @@ module CreateUploadUrl = {
     importId: option<id>,
   }
   @module("@aws-sdk/client-lex") @new external new: unit => t = "CreateUploadUrlCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

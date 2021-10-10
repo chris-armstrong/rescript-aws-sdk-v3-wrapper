@@ -3543,7 +3543,7 @@ module GetBlockPublicAccessConfiguration = {
   }
   @module("@aws-sdk/client-elasticmapreduce") @new
   external new: unit => t = "GetBlockPublicAccessConfigurationCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

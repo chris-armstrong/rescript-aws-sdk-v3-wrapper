@@ -2187,7 +2187,7 @@ module GetMacieSession = {
     createdAt: option<__timestampIso8601>,
   }
   @module("@aws-sdk/client-macie2") @new external new: unit => t = "GetMacieSessionCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -2201,7 +2201,7 @@ module GetInvitationsCount = {
     invitationsCount: option<__long>,
   }
   @module("@aws-sdk/client-macie2") @new external new: unit => t = "GetInvitationsCountCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -2271,7 +2271,7 @@ module DisassociateFromMasterAccount = {
 
   @module("@aws-sdk/client-macie2") @new
   external new: unit => t = "DisassociateFromMasterAccountCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -2280,7 +2280,7 @@ module DisassociateFromAdministratorAccount = {
 
   @module("@aws-sdk/client-macie2") @new
   external new: unit => t = "DisassociateFromAdministratorAccountCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -2301,7 +2301,7 @@ module DisableMacie = {
   type t
 
   @module("@aws-sdk/client-macie2") @new external new: unit => t = "DisableMacieCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -2320,7 +2320,7 @@ module DescribeOrganizationConfiguration = {
   }
   @module("@aws-sdk/client-macie2") @new
   external new: unit => t = "DescribeOrganizationConfigurationCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -2557,7 +2557,7 @@ module GetMasterAccount = {
     master: option<invitation>,
   }
   @module("@aws-sdk/client-macie2") @new external new: unit => t = "GetMasterAccountCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -2572,7 +2572,7 @@ module GetFindingsPublicationConfiguration = {
   }
   @module("@aws-sdk/client-macie2") @new
   external new: unit => t = "GetFindingsPublicationConfigurationCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -2694,7 +2694,7 @@ module GetAdministratorAccount = {
     administrator: option<invitation>,
   }
   @module("@aws-sdk/client-macie2") @new external new: unit => t = "GetAdministratorAccountCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -2935,7 +2935,7 @@ module GetClassificationExportConfiguration = {
   }
   @module("@aws-sdk/client-macie2") @new
   external new: unit => t = "GetClassificationExportConfigurationCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

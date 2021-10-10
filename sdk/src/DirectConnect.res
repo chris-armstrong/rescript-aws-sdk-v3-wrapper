@@ -1607,7 +1607,7 @@ module DescribeVirtualGateways = {
   }
   @module("@aws-sdk/client-directconnect") @new
   external new: unit => t = "DescribeVirtualGatewaysCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1970,7 +1970,7 @@ module DescribeLocations = {
 
   type response = {@ocaml.doc("<p>The locations.</p>") locations: option<locationList>}
   @module("@aws-sdk/client-directconnect") @new external new: unit => t = "DescribeLocationsCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

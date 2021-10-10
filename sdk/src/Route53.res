@@ -2293,7 +2293,7 @@ module GetTrafficPolicyInstanceCount = {
   }
   @module("@aws-sdk/client-route53") @new
   external new: unit => t = "GetTrafficPolicyInstanceCountCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -2311,7 +2311,7 @@ module GetHostedZoneCount = {
     hostedZoneCount: hostedZoneCount,
   }
   @module("@aws-sdk/client-route53") @new external new: unit => t = "GetHostedZoneCountCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -2327,7 +2327,7 @@ module GetHealthCheckCount = {
     healthCheckCount: healthCheckCount,
   }
   @module("@aws-sdk/client-route53") @new external new: unit => t = "GetHealthCheckCountCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -2798,7 +2798,7 @@ module GetCheckerIpRanges = {
     checkerIpRanges: checkerIpRanges,
   }
   @module("@aws-sdk/client-route53") @new external new: unit => t = "GetCheckerIpRangesCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

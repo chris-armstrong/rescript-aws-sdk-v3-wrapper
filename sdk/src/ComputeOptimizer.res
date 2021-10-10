@@ -1857,7 +1857,7 @@ module GetEnrollmentStatus = {
   }
   @module("@aws-sdk/client-compute-optimizer") @new
   external new: unit => t = "GetEnrollmentStatusCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

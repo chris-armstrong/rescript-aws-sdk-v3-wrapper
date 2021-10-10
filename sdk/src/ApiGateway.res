@@ -2871,7 +2871,7 @@ Authorization: AWS4-HMAC-SHA256 Credential={access_key_ID}/us-east-1/apigateway/
     cloudwatchRoleArn: option<string_>,
   }
   @module("@aws-sdk/client-apigateway") @new external new: unit => t = "GetAccountCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

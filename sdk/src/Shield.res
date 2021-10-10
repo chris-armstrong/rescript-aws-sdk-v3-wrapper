@@ -531,7 +531,7 @@ module GetSubscriptionState = {
     subscriptionState: subscriptionState,
   }
   @module("@aws-sdk/client-shield") @new external new: unit => t = "GetSubscriptionStateCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -539,7 +539,7 @@ module DisassociateDRTRole = {
   type t
 
   @module("@aws-sdk/client-shield") @new external new: unit => t = "DisassociateDRTRoleCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -560,7 +560,7 @@ module DeleteSubscription = {
   type t
 
   @module("@aws-sdk/client-shield") @new external new: unit => t = "DeleteSubscriptionCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -597,7 +597,7 @@ module CreateSubscription = {
   type t
 
   @module("@aws-sdk/client-shield") @new external new: unit => t = "CreateSubscriptionCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -652,7 +652,7 @@ module DescribeDRTAccess = {
     roleArn: option<roleArn>,
   }
   @module("@aws-sdk/client-shield") @new external new: unit => t = "DescribeDRTAccessCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -793,7 +793,7 @@ module EnableProactiveEngagement = {
 
   @module("@aws-sdk/client-shield") @new
   external new: unit => t = "EnableProactiveEngagementCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -824,7 +824,7 @@ module DisableProactiveEngagement = {
 
   @module("@aws-sdk/client-shield") @new
   external new: unit => t = "DisableProactiveEngagementCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -884,7 +884,7 @@ module DescribeEmergencyContactSettings = {
   }
   @module("@aws-sdk/client-shield") @new
   external new: unit => t = "DescribeEmergencyContactSettingsCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1191,7 +1191,7 @@ module DescribeAttackStatistics = {
     @as("TimeRange") timeRange: timeRange,
   }
   @module("@aws-sdk/client-shield") @new external new: unit => t = "DescribeAttackStatisticsCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1204,7 +1204,7 @@ module DescribeSubscription = {
     subscription: option<subscription>,
   }
   @module("@aws-sdk/client-shield") @new external new: unit => t = "DescribeSubscriptionCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

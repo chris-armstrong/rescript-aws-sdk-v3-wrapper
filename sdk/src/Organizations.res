@@ -1016,7 +1016,7 @@ module LeaveOrganization = {
   type t
 
   @module("@aws-sdk/client-organizations") @new external new: unit => t = "LeaveOrganizationCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -1160,7 +1160,7 @@ module DeleteOrganization = {
 
   @module("@aws-sdk/client-organizations") @new
   external new: unit => t = "DeleteOrganizationCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -2547,7 +2547,7 @@ module DescribeOrganization = {
   }
   @module("@aws-sdk/client-organizations") @new
   external new: unit => t = "DescribeOrganizationCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -2701,7 +2701,7 @@ module EnableAllFeatures = {
     handshake: option<handshake>,
   }
   @module("@aws-sdk/client-organizations") @new external new: unit => t = "EnableAllFeaturesCommand"
-
+  let make = () => new()
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
