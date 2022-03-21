@@ -1,6 +1,6 @@
 {
   "name": "rescript-aws-sdk-v3-root",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "scripts": {
     "generate": "node generator/src/AwsGen.bs.js && cd sdk && yarn format",
     "regenerate": "cd generator && yarn build && cd .. && yarn generate && cd sdk && yarn build && cd .."
