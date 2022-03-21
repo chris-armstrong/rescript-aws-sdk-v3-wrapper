@@ -13,7 +13,7 @@
   },
   "suffix": ".bs.js",
   "bs-dependencies": [
-    "reason-nodejs",
+    "rescript-nodejs",
     "@ryyppy/rescript-promise"
   ],
   "warnings": {

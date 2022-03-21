@@ -16,7 +16,7 @@ Array.forEach(modelFiles, file => {
   let path = Path.join([modelsPath, file])
   Js.log(`Reading ${path}`)
   let parsed =
-    Fs.readFileSync(path, ())
+    Fs.readFileSync(path)
     ->NodeJs.Buffer.toString
     ->Json.Decode.parseJson(Parse.parseModel)
   let generated = switch parsed {
