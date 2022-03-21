@@ -5,3 +5,12 @@ node_modules
 .bsb.lock
 .merlin
 *.bs.js
+
+# Yarn gitignore coppied from here: https://yarnpkg.com/getting-started/qa#which-files-should-be-gitignored
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions

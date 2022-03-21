@@ -1,4 +1,4 @@
-open AwsSdkV3;
+open AwsSdkV3
 
 let client = S3.createClient()
 let listBucketsCommand = S3.ListBuckets.new()

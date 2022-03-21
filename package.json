@@ -2,15 +2,15 @@
   "name": "rescript-aws-sdk-v3-root",
   "version": "0.0.1",
   "scripts": {
-    "generate": "node generator/src/AwsGen.bs.js && rescript format sdk/src/*.res",
-    "regenerate": "cd generator && npm run build && cd .. && npm run generate && cd sdk && npm run build && cd .."
+    "generate": "node generator/src/AwsGen.bs.js && cd sdk && yarn format",
+    "regenerate": "cd generator && yarn build && cd .. && yarn generate && cd sdk && yarn build && cd .."
   },
   "keywords": [
     "rescript",
     "aws",
     "aws-sdk-v3"
   ],
-  "workspaces": ["generator", "sdk"],
+  "workspaces": ["generator","sdk"],
   "author": "Chris Armstrong <chris-armstrong@github.com>",
   "license": "MIT",
   "private": true

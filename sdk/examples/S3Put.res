@@ -33,7 +33,7 @@ let main = () => {
         }
       | None => Js.log2("An unknown JS error occurred", error)
       }
-      | _ => Js.log2("An unknown ReScript error occurred", error)
+    | _ => Js.log2("An unknown ReScript error occurred", error)
     }
     Promise.resolve()
   })
