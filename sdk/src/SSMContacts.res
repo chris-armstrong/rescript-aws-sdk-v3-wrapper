@@ -59,6 +59,7 @@ type amazonResourceName = string
 type activationStatus = [@as("NOT_ACTIVATED") #NOT_ACTIVATED | @as("ACTIVATED") #ACTIVATED]
 type activationCode = string
 type acceptType = [@as("READ") #READ | @as("DELIVERED") #DELIVERED]
+type acceptCodeValidation = [@as("ENFORCE") #ENFORCE | @as("IGNORE") #IGNORE]
 type acceptCode = string
 @ocaml.doc("<p>Provides information about which field caused the exception.</p>")
 type validationExceptionField = {
@@ -193,7 +194,7 @@ type channelTargetInfo = {
   contactChannelId: ssmContactsArn,
 }
 type validationExceptionFieldList = array<validationExceptionField>
-@ocaml.doc("<p>The contact or contact channel that is being engaged.</p>")
+@ocaml.doc("<p>The contact or contact channel that's being engaged.</p>")
 type target = {
   @ocaml.doc("<p>Information about the contact that Incident Manager is engaging.</p>")
   @as("ContactTargetInfo")
@@ -248,7 +249,9 @@ type stage = {
          engaging.</p>")
   @as("Targets")
   targets: targetsList,
-  @ocaml.doc("<p>The time to wait until beginning the next stage.</p>") @as("DurationInMinutes")
+  @ocaml.doc("<p>The time to wait until beginning the next stage. The duration can only be set to 0 if a
+         target is specified.</p>")
+  @as("DurationInMinutes")
   durationInMinutes: stageDurationInMins,
 }
 type stagesList = array<stage>
@@ -260,7 +263,35 @@ type plan = {
   @as("Stages")
   stages: stagesList,
 }
-@ocaml.doc("<p></p>")
+@ocaml.doc("<p>Systems Manager Incident Manager is an incident management console designed to help users
+         mitigate and recover from incidents affecting their Amazon Web Services-hosted applications.
+         An incident is any unplanned interruption or reduction in quality of services. </p>
+         <p>Incident Manager increases incident resolution by notifying responders of impact,
+         highlighting relevant troubleshooting data, and providing collaboration tools to get
+         services back up and running. To achieve the primary goal of reducing the
+         time-to-resolution of critical incidents, Incident Manager automates response plans
+         and enables responder team escalation. </p>")
+module UpdateContactChannel = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>The details that Incident Manager uses when trying to engage the contact channel. </p>"
+    )
+    @as("DeliveryAddress")
+    deliveryAddress: option<contactChannelAddress>,
+    @ocaml.doc("<p>The name of the contact channel.</p>") @as("Name") name: option<channelName>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the contact channel you want to update.</p>")
+    @as("ContactChannelId")
+    contactChannelId: ssmContactsArn,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-ssm-contacts") @new
+  external new: request => t = "UpdateContactChannelCommand"
+  let make = (~contactChannelId, ~deliveryAddress=?, ~name=?, ()) =>
+    new({deliveryAddress: deliveryAddress, name: name, contactChannelId: contactChannelId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
 module UntagResource = {
   type t
   type request = {
@@ -270,30 +301,9 @@ module UntagResource = {
     @as("ResourceARN")
     resourceARN: amazonResourceName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ssm-contacts") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys: tagKeys, resourceARN: resourceARN})
-  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
-}
-
-module UpdateContactChannel = {
-  type t
-  type request = {
-    @ocaml.doc(
-      "<p>The details that Incident Manager uses when trying to engage the contact channel. </p>"
-    )
-    @as("DeliveryAddress")
-    deliveryAddress: option<contactChannelAddress>,
-    @ocaml.doc("<p>The name of the contact channel</p>") @as("Name") name: option<channelName>,
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the contact channel you want to update.</p>")
-    @as("ContactChannelId")
-    contactChannelId: ssmContactsArn,
-  }
-
-  @module("@aws-sdk/client-ssm-contacts") @new
-  external new: request => t = "UpdateContactChannelCommand"
-  let make = (~contactChannelId, ~deliveryAddress=?, ~name=?, ()) =>
-    new({deliveryAddress: deliveryAddress, name: name, contactChannelId: contactChannelId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -307,7 +317,7 @@ module TagResource = {
     @as("ResourceARN")
     resourceARN: amazonResourceName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ssm-contacts") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceARN, ()) => new({tags: tags, resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -321,7 +331,7 @@ module StopEngagement = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the engagement.</p>") @as("EngagementId")
     engagementId: ssmContactsArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ssm-contacts") @new external new: request => t = "StopEngagementCommand"
   let make = (~engagementId, ~reason=?, ()) => new({reason: reason, engagementId: engagementId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -330,9 +340,8 @@ module StopEngagement = {
 module StartEngagement = {
   type t
   type request = {
-    @ocaml.doc(
-      "<p>A token ensuring that the action is called only once with the specified details.</p>"
-    )
+    @ocaml.doc("<p>A token ensuring that the operation is called only once with the specified
+         details.</p>")
     @as("IdempotencyToken")
     idempotencyToken: option<idempotencyToken>,
     @ocaml.doc("<p>The ARN of the incident that the engagement is part of.</p>") @as("IncidentId")
@@ -394,7 +403,7 @@ module SendActivationCode = {
     @as("ContactChannelId")
     contactChannelId: ssmContactsArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ssm-contacts") @new
   external new: request => t = "SendActivationCodeCommand"
   let make = (~contactChannelId, ()) => new({contactChannelId: contactChannelId})
@@ -409,7 +418,7 @@ module PutContactPolicy = {
     @as("ContactArn")
     contactArn: ssmContactsArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ssm-contacts") @new
   external new: request => t = "PutContactPolicyCommand"
   let make = (~policy, ~contactArn, ()) => new({policy: policy, contactArn: contactArn})
@@ -744,7 +753,7 @@ module DeleteContactChannel = {
     @as("ContactChannelId")
     contactChannelId: ssmContactsArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ssm-contacts") @new
   external new: request => t = "DeleteContactChannelCommand"
   let make = (~contactChannelId, ()) => new({contactChannelId: contactChannelId})
@@ -758,7 +767,7 @@ module DeleteContact = {
     @as("ContactId")
     contactId: ssmContactsArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ssm-contacts") @new external new: request => t = "DeleteContactCommand"
   let make = (~contactId, ()) => new({contactId: contactId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -771,7 +780,7 @@ module DeactivateContactChannel = {
     @as("ContactChannelId")
     contactChannelId: ssmContactsArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ssm-contacts") @new
   external new: request => t = "DeactivateContactChannelCommand"
   let make = (~contactChannelId, ()) => new({contactChannelId: contactChannelId})
@@ -781,9 +790,8 @@ module DeactivateContactChannel = {
 module CreateContactChannel = {
   type t
   type request = {
-    @ocaml.doc(
-      "<p>A token ensuring that the action is called only once with the specified details.</p>"
-    )
+    @ocaml.doc("<p>A token ensuring that the operation is called only once with the specified
+         details.</p>")
     @as("IdempotencyToken")
     idempotencyToken: option<idempotencyToken>,
     @ocaml.doc("<p>If you want to activate the channel at a later time, you can choose to defer activation.
@@ -827,11 +835,15 @@ module CreateContactChannel = {
     @as("Type")
     type_: channelType,
     @ocaml.doc("<p>The name of the contact channel.</p>") @as("Name") name: channelName,
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the contact channel.</p>") @as("ContactId")
+    @ocaml.doc(
+      "<p>The Amazon Resource Name (ARN) of the contact you are adding the contact channel to.</p>"
+    )
+    @as("ContactId")
     contactId: ssmContactsArn,
   }
   type response = {
-    @ocaml.doc("<p>The ARN of the contact channel.</p>") @as("ContactChannelArn")
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the contact channel.</p>")
+    @as("ContactChannelArn")
     contactChannelArn: ssmContactsArn,
   }
   @module("@aws-sdk/client-ssm-contacts") @new
@@ -866,7 +878,7 @@ module ActivateContactChannel = {
     @as("ContactChannelId")
     contactChannelId: ssmContactsArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ssm-contacts") @new
   external new: request => t = "ActivateContactChannelCommand"
   let make = (~activationCode, ~contactChannelId, ()) =>
@@ -877,6 +889,16 @@ module ActivateContactChannel = {
 module AcceptPage = {
   type t
   type request = {
+    @ocaml.doc("<p>An optional field that Incident Manager uses to <code>ENFORCE</code>
+            <code>AcceptCode</code> validation when acknowledging an page. Acknowledgement can occur by
+         replying to a page, or when entering the AcceptCode in the console. Enforcing AcceptCode
+         validation causes Incident Manager to verify that the code entered by the user matches the
+         code sent by Incident Manager with the page.</p>
+         <p>Incident Manager can also <code>IGNORE</code>
+            <code>AcceptCode</code> validation. Ignoring <code>AcceptCode</code> validation causes
+         Incident Manager to accept any value entered for the <code>AcceptCode</code>.</p>")
+    @as("AcceptCodeValidation")
+    acceptCodeValidation: option<acceptCodeValidation>,
     @ocaml.doc("<p>The accept code is a 6-digit code used to acknowledge the page.</p>")
     @as("AcceptCode")
     acceptCode: acceptCode,
@@ -894,10 +916,19 @@ module AcceptPage = {
     @as("PageId")
     pageId: ssmContactsArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ssm-contacts") @new external new: request => t = "AcceptPageCommand"
-  let make = (~acceptCode, ~acceptType, ~pageId, ~note=?, ~contactChannelId=?, ()) =>
+  let make = (
+    ~acceptCode,
+    ~acceptType,
+    ~pageId,
+    ~acceptCodeValidation=?,
+    ~note=?,
+    ~contactChannelId=?,
+    (),
+  ) =>
     new({
+      acceptCodeValidation: acceptCodeValidation,
       acceptCode: acceptCode,
       note: note,
       acceptType: acceptType,
@@ -948,7 +979,7 @@ module UpdateContact = {
     @as("ContactId")
     contactId: ssmContactsArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ssm-contacts") @new external new: request => t = "UpdateContactCommand"
   let make = (~contactId, ~plan=?, ~displayName=?, ()) =>
     new({plan: plan, displayName: displayName, contactId: contactId})
@@ -989,9 +1020,8 @@ module GetContact = {
 module CreateContact = {
   type t
   type request = {
-    @ocaml.doc(
-      "<p>A token ensuring that the action is called only once with the specified details.</p>"
-    )
+    @ocaml.doc("<p>A token ensuring that the operation is called only once with the specified
+         details.</p>")
     @as("IdempotencyToken")
     idempotencyToken: option<idempotencyToken>,
     @ocaml.doc("<p>Adds a tag to the target. You can only tag resources created in the first Region of your

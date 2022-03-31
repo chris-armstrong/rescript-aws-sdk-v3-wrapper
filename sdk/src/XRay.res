@@ -76,7 +76,7 @@ type unprocessedTraceSegment = {
   @ocaml.doc("<p>The segment's ID.</p>") @as("Id") id: option<string_>,
 }
 type unprocessedTraceIdList = array<traceId>
-@ocaml.doc("<p>Sampling statistics from a call to <a>GetSamplingTargets</a> that X-Ray
+@ocaml.doc("<p>Sampling statistics from a call to <a href=\"https://docs.aws.amazon.com/xray/latest/api/API_GetSamplingTargets.html\">GetSamplingTargets</a> that X-Ray
       could not process.</p>")
 type unprocessedStatistics = {
   @ocaml.doc("<p>The error message.</p>") @as("Message") message: option<string_>,
@@ -86,9 +86,9 @@ type unprocessedStatistics = {
 type traceSegmentDocumentList = array<traceSegmentDocument>
 type traceIdList = array<traceId>
 type tagKeyList = array<tagKey>
-@ocaml.doc("<p>A map that contains tag keys and tag values to attach to an AWS X-Ray group or sampling
-      rule. For more information about ways to use tags, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS resources</a>
-      in the <i>AWS General Reference</i>.</p>
+@ocaml.doc("<p>A map that contains tag keys and tag values to attach to an Amazon Web Services X-Ray group or sampling
+      rule. For more information about ways to use tags, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a>
+      in the <i>Amazon Web Services General Reference</i>.</p>
          <p>The following restrictions apply to tags:</p>
          <ul>
             <li>
@@ -98,7 +98,7 @@ type tagKeyList = array<tagKey>
                <p>Tag keys and values are case sensitive.</p>
             </li>
             <li>
-               <p>Don't use <code>aws:</code> as a prefix for keys; it's reserved for AWS use. You
+               <p>Don't use <code>aws:</code> as a prefix for keys; it's reserved for Amazon Web Services use. You
           cannot edit or delete system tags.</p>
             </li>
          </ul>")
@@ -118,17 +118,18 @@ type tag = {
 }
 type serviceNames = array<string_>
 @ocaml.doc("<p>A segment from a trace that has been ingested by the X-Ray service. The segment can be
-      compiled from documents uploaded with <a>PutTraceSegments</a>, or an
+      compiled from documents uploaded with <a href=\"https://docs.aws.amazon.com/xray/latest/api/API_PutTraceSegments.html\">PutTraceSegments</a>, or an
         <code>inferred</code> segment for a downstream service, generated from a subsegment sent by
       the service that called it.</p>
-         <p>For the full segment document schema, see <a href=\"https://docs.aws.amazon.com/xray/latest/devguide/xray-api-segmentdocuments.html\">AWS X-Ray Segment
-        Documents</a> in the <i>AWS X-Ray Developer Guide</i>.</p>")
+         <p>For the full segment document schema, see <a href=\"https://docs.aws.amazon.com/xray/latest/devguide/xray-api-segmentdocuments.html\">Amazon Web Services X-Ray Segment
+      Documents</a> in the <i>Amazon Web Services X-Ray Developer Guide</i>.</p>")
 type segment = {
   @ocaml.doc("<p>The segment document.</p>") @as("Document") document: option<segmentDocument>,
   @ocaml.doc("<p>The segment's ID.</p>") @as("Id") id: option<segmentId>,
 }
 @ocaml.doc("<p>Temporary changes to a sampling rule configuration. To meet the global sampling target for a rule, X-Ray
-      calculates a new reservoir for each service based on the recent sampling results of all services that called <a>GetSamplingTargets</a>.</p>")
+      calculates a new reservoir for each service based on the recent sampling results of all services that called 
+      <a href=\"https://docs.aws.amazon.com/xray/latest/api/API_GetSamplingTargets.html\">GetSamplingTargets</a>.</p>")
 type samplingTargetDocument = {
   @ocaml.doc("<p>The number of seconds for the service to wait before getting sampling targets
       again.</p>")
@@ -152,7 +153,7 @@ type samplingStrategy = {
 }
 @ocaml.doc("<p>Request sampling results for a single rule from a service. Results are for the last 10
       seconds unless the service has been assigned a longer reporting interval after a previous call
-      to <a>GetSamplingTargets</a>.</p>")
+      to <a href=\"https://docs.aws.amazon.com/xray/latest/api/API_GetSamplingTargets.html\">GetSamplingTargets</a>.</p>")
 type samplingStatisticsDocument = {
   @ocaml.doc("<p>The number of requests recorded with borrowed reservoir quota.</p>")
   @as("BorrowCount")
@@ -277,7 +278,7 @@ type errorStatistics = {
 }
 @ocaml.doc("<p>A configuration document that specifies encryption configuration settings.</p>")
 type encryptionConfig = {
-  @ocaml.doc("<p>The type of encryption. Set to <code>KMS</code> for encryption with CMKs. Set to <code>NONE</code> for
+  @ocaml.doc("<p>The type of encryption. Set to <code>KMS</code> for encryption with KMS keys. Set to <code>NONE</code> for
       default encryption.</p>")
   @as("Type")
   type_: option<encryptionType>,
@@ -286,8 +287,7 @@ type encryptionConfig = {
   )
   @as("Status")
   status: option<encryptionStatus>,
-  @ocaml.doc("<p>The ID of the customer master key (CMK) used for encryption, if applicable.</p>")
-  @as("KeyId")
+  @ocaml.doc("<p>The ID of the KMS key used for encryption, if applicable.</p>") @as("KeyId")
   keyId: option<string_>,
 }
 @ocaml.doc("<p></p>")
@@ -408,7 +408,9 @@ type samplingRuleUpdate = {
   fixedRate: option<nullableDouble>,
   @ocaml.doc("<p>The priority of the sampling rule.</p>") @as("Priority")
   priority: option<nullableInteger>,
-  @ocaml.doc("<p>Matches the ARN of the AWS resource on which the service runs.</p>")
+  @ocaml.doc(
+    "<p>Matches the ARN of the Amazon Web Services resource on which the service runs.</p>"
+  )
   @as("ResourceARN")
   resourceARN: option<resourceARN>,
   @ocaml.doc(
@@ -453,7 +455,9 @@ type samplingRule = {
   @as("FixedRate")
   fixedRate: fixedRate,
   @ocaml.doc("<p>The priority of the sampling rule.</p>") @as("Priority") priority: priority,
-  @ocaml.doc("<p>Matches the ARN of the AWS resource on which the service runs.</p>")
+  @ocaml.doc(
+    "<p>Matches the ARN of the Amazon Web Services resource on which the service runs.</p>"
+  )
   @as("ResourceARN")
   resourceARN: resourceARN,
   @ocaml.doc(
@@ -503,7 +507,7 @@ type group = {
                     group or false to disable insights for the group.</p>
             </li>
             <li>
-                <p>The NotifcationsEnabled  boolean can be set to true to enable insights
+                <p>The NotificationsEnabled boolean can be set to true to enable insights
                     notifications through Amazon EventBridge for the group.</p>
             </li>
          </ul>")
@@ -547,7 +551,7 @@ type trace = {
   @as("Segments")
   segments: option<segmentList>,
   @ocaml.doc("<p>LimitExceeded is set to true when the trace has exceeded one of the defined quotas. For
-      more information about quotas, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/xray.html\">AWS X-Ray endpoints and quotas</a>.</p>")
+      more information about quotas, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/xray.html\">Amazon Web Services X-Ray endpoints and quotas</a>.</p>")
   @as("LimitExceeded")
   limitExceeded: option<nullableBoolean>,
   @ocaml.doc("<p>The length of time in seconds between the start time of the root segment and the end
@@ -574,7 +578,9 @@ type timeSeriesServiceStatistics = {
 }
 type telemetryRecordList = array<telemetryRecord>
 type serviceIds = array<serviceId>
-@ocaml.doc("<p>A <a>SamplingRule</a> and its metadata.</p>")
+@ocaml.doc(
+  "<p>A <a href=\"https://docs.aws.amazon.com/xray/latest/api/API_SamplingRule.html\">SamplingRule</a> and its metadata.</p>"
+)
 type samplingRuleRecord = {
   @ocaml.doc("<p>When the rule was last modified.</p>") @as("ModifiedAt")
   modifiedAt: option<timestamp_>,
@@ -600,7 +606,8 @@ type responseTimeRootCauseService = {
 type insightImpactGraphService = {
   @ocaml.doc("<p>Connections to downstream services.</p>") @as("Edges")
   edges: option<insightImpactGraphEdgeList>,
-  @ocaml.doc("<p>Identifier of the AWS account in which the service runs.</p>") @as("AccountId")
+  @ocaml.doc("<p>Identifier of the Amazon Web Services account in which the service runs.</p>")
+  @as("AccountId")
   accountId: option<string_>,
   @ocaml.doc("<p>A list of names for the service, including the canonical name.</p>") @as("Names")
   names: option<serviceNames>,
@@ -608,15 +615,15 @@ type insightImpactGraphService = {
   @ocaml.doc("<p>Identifier for the service. Unique within the service map.</p>
          <ul>
             <li>
-               <p>AWS Resource - The type of an AWS resource. For example, AWS::EC2::Instance for an application running
+               <p>Amazon Web Services Resource - The type of an Amazon Web Services resource. For example, AWS::EC2::Instance for an application running
                on Amazon EC2 or AWS::DynamoDB::Table for an Amazon DynamoDB table that the application used. </p>
             </li>
             <li>
-               <p>AWS Service - The type of an AWS service. For example, AWS::DynamoDB for downstream calls to Amazon
+               <p>Amazon Web Services Service - The type of an Amazon Web Services service. For example, AWS::DynamoDB for downstream calls to Amazon
                DynamoDB that didn't target a specific table. </p>
             </li>
             <li>
-               <p>AWS Service - The type of an AWS service. For example, AWS::DynamoDB for downstream calls to Amazon
+               <p>Amazon Web Services Service - The type of an Amazon Web Services service. For example, AWS::DynamoDB for downstream calls to Amazon
                DynamoDB that didn't target a specific table. </p>
             </li>
             <li>
@@ -834,12 +841,12 @@ type service = {
   @ocaml.doc("<p>The type of service.</p>
          <ul>
             <li>
-               <p>AWS Resource - The type of an AWS resource. For example, <code>AWS::EC2::Instance</code> for an
+               <p>Amazon Web Services Resource - The type of an Amazon Web Services resource. For example, <code>AWS::EC2::Instance</code> for an
           application running on Amazon EC2 or <code>AWS::DynamoDB::Table</code> for an Amazon DynamoDB table that the
           application used.</p>
             </li>
             <li>
-               <p>AWS Service - The type of an AWS service. For example, <code>AWS::DynamoDB</code>
+               <p>Amazon Web Services Service - The type of an Amazon Web Services service. For example, <code>AWS::DynamoDB</code>
           for downstream calls to Amazon DynamoDB that didn't target a specific table.</p>
             </li>
             <li>
@@ -854,7 +861,8 @@ type service = {
          </ul>")
   @as("Type")
   type_: option<string_>,
-  @ocaml.doc("<p>Identifier of the AWS account in which the service runs.</p>") @as("AccountId")
+  @ocaml.doc("<p>Identifier of the Amazon Web Services account in which the service runs.</p>")
+  @as("AccountId")
   accountId: option<string_>,
   @ocaml.doc("<p>Indicates that the service was the first service to process a request.</p>")
   @as("Root")
@@ -958,7 +966,7 @@ type traceSummary = {
   id: option<traceId>,
 }
 type traceSummaryList = array<traceSummary>
-@ocaml.doc("<p>AWS X-Ray provides APIs for managing debug traces and retrieving service maps
+@ocaml.doc("<p>Amazon Web Services X-Ray provides APIs for managing debug traces and retrieving service maps
       and other data created by processing those traces.</p>")
 module DeleteGroup = {
   type t
@@ -968,7 +976,7 @@ module DeleteGroup = {
     @ocaml.doc("<p>The case-sensitive name of the group.</p>") @as("GroupName")
     groupName: option<groupName>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-xray") @new external new: request => t = "DeleteGroupCommand"
   let make = (~groupARN=?, ~groupName=?, ()) => new({groupARN: groupARN, groupName: groupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -986,7 +994,7 @@ module UntagResource = {
     @as("ResourceARN")
     resourceARN: amazonResourceName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-xray") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys: tagKeys, resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -999,7 +1007,7 @@ module PutEncryptionConfig = {
       to <code>NONE</code> for default encryption.</p>")
     @as("Type")
     type_: encryptionType,
-    @ocaml.doc("<p>An AWS KMS customer master key (CMK) in one of the following formats:</p>
+    @ocaml.doc("<p>An Amazon Web Services KMS key in one of the following formats:</p>
          <ul>
             <li>
                <p>
@@ -1009,7 +1017,7 @@ module PutEncryptionConfig = {
             <li>
                <p>
                   <b>Key ID</b> - The KMS key ID of the key. For example,
-          <code>ae4aa6d49-a4d8-9df9-a475-4ff6d7898456</code>. AWS X-Ray does not support asymmetric CMKs.</p>
+          <code>ae4aa6d49-a4d8-9df9-a475-4ff6d7898456</code>. Amazon Web Services X-Ray does not support asymmetric KMS keys.</p>
             </li>
             <li>
                <p>
@@ -1034,13 +1042,13 @@ module PutEncryptionConfig = {
 
 module GetEncryptionConfig = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("<p>The encryption configuration document.</p>") @as("EncryptionConfig")
     encryptionConfig: option<encryptionConfig>,
   }
-  @module("@aws-sdk/client-xray") @new external new: unit => t = "GetEncryptionConfigCommand"
-  let make = () => new()
+  @module("@aws-sdk/client-xray") @new external new: request => t = "GetEncryptionConfigCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1090,8 +1098,8 @@ module TagResource = {
   type t
   type request = {
     @ocaml.doc("<p>A map that contains one or more tag keys and tag values to attach to an X-Ray group or
-      sampling rule. For more information about ways to use tags, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS resources</a>
-      in the <i>AWS General Reference</i>.</p>
+      sampling rule. For more information about ways to use tags, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a>
+      in the <i>Amazon Web Services General Reference</i>.</p>
          <p>The following restrictions apply to tags:</p>
          <ul>
             <li>
@@ -1111,7 +1119,7 @@ module TagResource = {
                <p>Tag keys and values are case sensitive.</p>
             </li>
             <li>
-               <p>Don't use <code>aws:</code> as a prefix for keys; it's reserved for AWS use. You
+               <p>Don't use <code>aws:</code> as a prefix for keys; it's reserved for Amazon Web Services use. You
           cannot edit or delete system tags.</p>
             </li>
          </ul>")
@@ -1121,7 +1129,7 @@ module TagResource = {
     @as("ResourceARN")
     resourceARN: amazonResourceName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-xray") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceARN, ()) => new({tags: tags, resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1180,13 +1188,13 @@ module GetSamplingTargets = {
     samplingStatisticsDocuments: samplingStatisticsDocumentList,
   }
   type response = {
-    @ocaml.doc("<p>Information about <a>SamplingStatisticsDocument</a> that X-Ray could not
+    @ocaml.doc("<p>Information about <a href=\"https://docs.aws.amazon.com/xray/latest/api/API_SamplingStatisticsDocument.html\">SamplingStatisticsDocument</a> that X-Ray could not
          process.</p>")
     @as("UnprocessedStatistics")
     unprocessedStatistics: option<unprocessedStatisticsList>,
     @ocaml.doc("<p>The last time a user changed the sampling rule configuration. If
          the sampling rule configuration changed since the service last retrieved it, the service
-         should call <a>GetSamplingRules</a> to get the latest version.</p>")
+         should call <a href=\"https://docs.aws.amazon.com/xray/latest/api/API_GetSamplingRules.html\">GetSamplingRules</a> to get the latest version.</p>")
     @as("LastRuleModification")
     lastRuleModification: option<timestamp_>,
     @ocaml.doc("<p>Updated rules that the service should use to sample requests.</p>")
@@ -1240,8 +1248,8 @@ module CreateGroup = {
   type t
   type request = {
     @ocaml.doc("<p>A map that contains one or more tag keys and tag values to attach to an X-Ray group.
-            For more information about ways to use tags, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS
-                resources</a> in the <i>AWS General Reference</i>.</p>
+            For more information about ways to use tags, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services
+                resources</a> in the <i>Amazon Web Services General Reference</i>.</p>
         <p>The following restrictions apply to tags:</p>
         <ul>
             <li>
@@ -1261,7 +1269,7 @@ module CreateGroup = {
                 <p>Tag keys and values are case sensitive.</p>
             </li>
             <li>
-                <p>Don't use <code>aws:</code> as a prefix for keys; it's reserved for AWS
+                <p>Don't use <code>aws:</code> as a prefix for keys; it's reserved for Amazon Web Services
                     use.</p>
             </li>
          </ul>")
@@ -1330,7 +1338,7 @@ module PutTelemetryRecords = {
     @ocaml.doc("<p></p>") @as("EC2InstanceId") ec2InstanceId: option<ec2InstanceId>,
     @ocaml.doc("<p></p>") @as("TelemetryRecords") telemetryRecords: telemetryRecordList,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-xray") @new external new: request => t = "PutTelemetryRecordsCommand"
   let make = (~telemetryRecords, ~resourceARN=?, ~hostname=?, ~ec2InstanceId=?, ()) =>
     new({
@@ -1384,8 +1392,8 @@ module CreateSamplingRule = {
   type t
   type request = {
     @ocaml.doc("<p>A map that contains one or more tag keys and tag values to attach to an X-Ray sampling
-         rule. For more information about ways to use tags, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS
-            resources</a> in the <i>AWS General Reference</i>.</p>
+         rule. For more information about ways to use tags, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services
+            resources</a> in the <i>Amazon Web Services General Reference</i>.</p>
          <p>The following restrictions apply to tags:</p>
          <ul>
             <li>
@@ -1405,7 +1413,7 @@ module CreateSamplingRule = {
                <p>Tag keys and values are case sensitive.</p>
             </li>
             <li>
-               <p>Don't use <code>aws:</code> as a prefix for keys; it's reserved for AWS
+               <p>Don't use <code>aws:</code> as a prefix for keys; it's reserved for Amazon Web Services
                use.</p>
             </li>
          </ul>")
@@ -1525,7 +1533,8 @@ module GetInsightImpactGraph = {
   }
   type response = {
     @ocaml.doc("<p>Pagination token.</p>") @as("NextToken") nextToken: option<token>,
-    @ocaml.doc("<p>The AWS instrumented services related to the insight.</p>") @as("Services")
+    @ocaml.doc("<p>The Amazon Web Services instrumented services related to the insight.</p>")
+    @as("Services")
     services: option<insightImpactGraphServiceList>,
     @ocaml.doc("<p>The time, in Unix seconds, at which the service graph ended.</p>")
     @as("ServiceGraphEndTime")

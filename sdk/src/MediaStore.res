@@ -159,7 +159,7 @@ module StopAccessLogging = {
     @as("ContainerName")
     containerName: containerName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-mediastore") @new external new: request => t = "StopAccessLoggingCommand"
   let make = (~containerName, ()) => new({containerName: containerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -172,7 +172,7 @@ module StartAccessLogging = {
     @as("ContainerName")
     containerName: containerName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-mediastore") @new
   external new: request => t = "StartAccessLoggingCommand"
   let make = (~containerName, ()) => new({containerName: containerName})
@@ -191,7 +191,7 @@ module PutLifecyclePolicy = {
     @as("ContainerName")
     containerName: containerName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-mediastore") @new
   external new: request => t = "PutLifecyclePolicyCommand"
   let make = (~lifecyclePolicy, ~containerName, ()) =>
@@ -217,7 +217,7 @@ module PutContainerPolicy = {
     @ocaml.doc("<p>The name of the container.</p>") @as("ContainerName")
     containerName: containerName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-mediastore") @new
   external new: request => t = "PutContainerPolicyCommand"
   let make = (~policy, ~containerName, ()) => new({policy: policy, containerName: containerName})
@@ -266,7 +266,7 @@ module DeleteMetricPolicy = {
     @as("ContainerName")
     containerName: containerName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-mediastore") @new
   external new: request => t = "DeleteMetricPolicyCommand"
   let make = (~containerName, ()) => new({containerName: containerName})
@@ -280,7 +280,7 @@ module DeleteLifecyclePolicy = {
     @as("ContainerName")
     containerName: containerName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-mediastore") @new
   external new: request => t = "DeleteLifecyclePolicyCommand"
   let make = (~containerName, ()) => new({containerName: containerName})
@@ -293,7 +293,7 @@ module DeleteCorsPolicy = {
     @ocaml.doc("<p>The name of the container to remove the policy from.</p>") @as("ContainerName")
     containerName: containerName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-mediastore") @new external new: request => t = "DeleteCorsPolicyCommand"
   let make = (~containerName, ()) => new({containerName: containerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -305,7 +305,7 @@ module DeleteContainerPolicy = {
     @ocaml.doc("<p>The name of the container that holds the policy.</p>") @as("ContainerName")
     containerName: containerName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-mediastore") @new
   external new: request => t = "DeleteContainerPolicyCommand"
   let make = (~containerName, ()) => new({containerName: containerName})
@@ -318,7 +318,7 @@ module DeleteContainer = {
     @ocaml.doc("<p>The name of the container to delete. </p>") @as("ContainerName")
     containerName: containerName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-mediastore") @new external new: request => t = "DeleteContainerCommand"
   let make = (~containerName, ()) => new({containerName: containerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -335,7 +335,7 @@ module UntagResource = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) for the container.</p>") @as("Resource")
     resource: containerARN,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-mediastore") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resource, ()) => new({tagKeys: tagKeys, resource: resource})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -368,7 +368,7 @@ module TagResource = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) for the container. </p>") @as("Resource")
     resource: containerARN,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-mediastore") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resource, ()) => new({tags: tags, resource: resource})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -472,7 +472,7 @@ module PutMetricPolicy = {
     @as("ContainerName")
     containerName: containerName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-mediastore") @new external new: request => t = "PutMetricPolicyCommand"
   let make = (~metricPolicy, ~containerName, ()) =>
     new({metricPolicy: metricPolicy, containerName: containerName})
@@ -488,7 +488,7 @@ module PutCorsPolicy = {
     @as("ContainerName")
     containerName: containerName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-mediastore") @new external new: request => t = "PutCorsPolicyCommand"
   let make = (~corsPolicy, ~containerName, ()) =>
     new({corsPolicy: corsPolicy, containerName: containerName})

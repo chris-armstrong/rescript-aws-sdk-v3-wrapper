@@ -724,7 +724,7 @@ module UpdateHITTypeOfHIT = {
     @ocaml.doc("<p>The ID of the new HIT type.</p>") @as("HITTypeId") hittypeId: entityId,
     @ocaml.doc("<p>The HIT to update.</p>") @as("HITId") hitid: entityId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-mturk-requester") @new
   external new: request => t = "UpdateHITTypeOfHITCommand"
   let make = (~hittypeId, ~hitid, ()) => new({hittypeId: hittypeId, hitid: hitid})
@@ -757,7 +757,7 @@ module UpdateHITReviewStatus = {
     @as("HITId")
     hitid: entityId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-mturk-requester") @new
   external new: request => t = "UpdateHITReviewStatusCommand"
   let make = (~hitid, ~revert=?, ()) => new({revert: revert, hitid: hitid})
@@ -778,7 +778,7 @@ module UpdateExpirationForHIT = {
     @as("HITId")
     hitid: entityId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-mturk-requester") @new
   external new: request => t = "UpdateExpirationForHITCommand"
   let make = (~expireAt, ~hitid, ()) => new({expireAt: expireAt, hitid: hitid})
@@ -812,7 +812,7 @@ module SendBonus = {
     @ocaml.doc("<p>The ID of the Worker being paid the bonus.</p>") @as("WorkerId")
     workerId: customerId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-mturk-requester") @new external new: request => t = "SendBonusCommand"
   let make = (~reason, ~assignmentId, ~bonusAmount, ~workerId, ~uniqueRequestToken=?, ()) =>
     new({
@@ -840,7 +840,7 @@ module RejectQualificationRequest = {
     @as("QualificationRequestId")
     qualificationRequestId: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-mturk-requester") @new
   external new: request => t = "RejectQualificationRequestCommand"
   let make = (~qualificationRequestId, ~reason=?, ()) =>
@@ -862,7 +862,7 @@ module RejectAssignment = {
     @as("AssignmentId")
     assignmentId: entityId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-mturk-requester") @new
   external new: request => t = "RejectAssignmentCommand"
   let make = (~requesterFeedback, ~assignmentId, ()) =>
@@ -898,14 +898,14 @@ module GetFileUploadURL = {
 
 module GetAccountBalance = {
   type t
-
+  type request = {.}
   type response = {
     @as("OnHoldBalance") onHoldBalance: option<currencyAmount>,
     @as("AvailableBalance") availableBalance: option<currencyAmount>,
   }
   @module("@aws-sdk/client-mturk-requester") @new
-  external new: unit => t = "GetAccountBalanceCommand"
-  let make = () => new()
+  external new: request => t = "GetAccountBalanceCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -924,7 +924,7 @@ module DisassociateQualificationFromWorker = {
     @as("WorkerId")
     workerId: customerId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-mturk-requester") @new
   external new: request => t = "DisassociateQualificationFromWorkerCommand"
   let make = (~qualificationTypeId, ~workerId, ~reason=?, ()) =>
@@ -942,7 +942,7 @@ module DeleteWorkerBlock = {
     reason: option<string_>,
     @ocaml.doc("<p>The ID of the Worker to unblock.</p>") @as("WorkerId") workerId: customerId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-mturk-requester") @new
   external new: request => t = "DeleteWorkerBlockCommand"
   let make = (~workerId, ~reason=?, ()) => new({reason: reason, workerId: workerId})
@@ -955,7 +955,7 @@ module DeleteQualificationType = {
     @ocaml.doc("<p>The ID of the QualificationType to dispose.</p>") @as("QualificationTypeId")
     qualificationTypeId: entityId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-mturk-requester") @new
   external new: request => t = "DeleteQualificationTypeCommand"
   let make = (~qualificationTypeId, ()) => new({qualificationTypeId: qualificationTypeId})
@@ -967,7 +967,7 @@ module DeleteHIT = {
   type request = {
     @ocaml.doc("<p>The ID of the HIT to be deleted.</p>") @as("HITId") hitid: entityId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-mturk-requester") @new external new: request => t = "DeleteHITCommand"
   let make = (~hitid, ()) => new({hitid: hitid})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -983,7 +983,7 @@ module CreateWorkerBlock = {
     reason: string_,
     @ocaml.doc("<p>The ID of the Worker to block.</p>") @as("WorkerId") workerId: customerId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-mturk-requester") @new
   external new: request => t = "CreateWorkerBlockCommand"
   let make = (~reason, ~workerId, ()) => new({reason: reason, workerId: workerId})
@@ -1008,7 +1008,7 @@ module CreateAdditionalAssignmentsForHIT = {
     numberOfAdditionalAssignments: integer_,
     @ocaml.doc("<p>The ID of the HIT to extend.</p>") @as("HITId") hitid: entityId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-mturk-requester") @new
   external new: request => t = "CreateAdditionalAssignmentsForHITCommand"
   let make = (~numberOfAdditionalAssignments, ~hitid, ~uniqueRequestToken=?, ()) =>
@@ -1042,7 +1042,7 @@ module AssociateQualificationWithWorker = {
     @as("QualificationTypeId")
     qualificationTypeId: entityId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-mturk-requester") @new
   external new: request => t = "AssociateQualificationWithWorkerCommand"
   let make = (~workerId, ~qualificationTypeId, ~sendNotification=?, ~integerValue=?, ()) =>
@@ -1074,7 +1074,7 @@ module ApproveAssignment = {
     @as("AssignmentId")
     assignmentId: entityId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-mturk-requester") @new
   external new: request => t = "ApproveAssignmentCommand"
   let make = (~assignmentId, ~overrideRejection=?, ~requesterFeedback=?, ()) =>
@@ -1101,7 +1101,7 @@ module AcceptQualificationRequest = {
     @as("QualificationRequestId")
     qualificationRequestId: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-mturk-requester") @new
   external new: request => t = "AcceptQualificationRequestCommand"
   let make = (~qualificationRequestId, ~integerValue=?, ()) =>
@@ -1334,7 +1334,7 @@ module UpdateNotificationSettings = {
     @as("HITTypeId")
     hittypeId: entityId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-mturk-requester") @new
   external new: request => t = "UpdateNotificationSettingsCommand"
   let make = (~hittypeId, ~active=?, ~notification=?, ()) =>
@@ -1361,7 +1361,7 @@ module SendTestEventNotification = {
     @as("Notification")
     notification: notificationSpecification,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-mturk-requester") @new
   external new: request => t = "SendTestEventNotificationCommand"
   let make = (~testEventType, ~notification, ()) =>

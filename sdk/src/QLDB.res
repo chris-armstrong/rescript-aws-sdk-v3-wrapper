@@ -36,6 +36,7 @@ type resourceType = string
 type resourceName = string
 type permissionsMode = [@as("STANDARD") #STANDARD | @as("ALLOW_ALL") #ALLOW_ALL]
 type parameterName = string
+type outputFormat = [@as("JSON") #JSON | @as("ION_TEXT") #ION_TEXT | @as("ION_BINARY") #ION_BINARY]
 type nextToken = string
 type maxResults = int
 type ledgerState = [
@@ -45,6 +46,7 @@ type ledgerState = [
   | @as("CREATING") #CREATING
 ]
 type ledgerName = string
+type kmsKey = string
 type ionText = string
 type exportStatus = [
   | @as("CANCELLED") #CANCELLED
@@ -55,6 +57,11 @@ type errorMessage = string
 type errorCause = [
   | @as("IAM_PERMISSION_REVOKED") #IAM_PERMISSION_REVOKED
   | @as("KINESIS_STREAM_NOT_FOUND") #KINESIS_STREAM_NOT_FOUND
+]
+type encryptionStatus = [
+  | @as("KMS_KEY_INACCESSIBLE") #KMS_KEY_INACCESSIBLE
+  | @as("UPDATING") #UPDATING
+  | @as("ENABLED") #ENABLED
 ]
 type digest = NodeJs.Buffer.t
 type deletionProtection = bool
@@ -73,8 +80,8 @@ type tagKeyList = array<tagKey>
 @ocaml.doc("<p>The encryption settings that are used by a journal export job to write data in an
          Amazon Simple Storage Service (Amazon S3) bucket.</p>")
 type s3EncryptionConfiguration = {
-  @ocaml.doc("<p>The Amazon Resource Name (ARN) for a symmetric customer master key (CMK) in AWS Key
-         Management Service (AWS KMS). Amazon QLDB does not support asymmetric CMKs.</p>
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of a symmetric key in Key Management Service (KMS). Amazon S3 does not
+         support asymmetric KMS keys.</p>
          <p>You must provide a <code>KmsKeyArn</code> if you specify <code>SSE_KMS</code> as the
             <code>ObjectEncryptionType</code>.</p>
          <p>
@@ -98,15 +105,67 @@ type ledgerSummary = {
   @ocaml.doc("<p>The current status of the ledger.</p>") @as("State") state: option<ledgerState>,
   @ocaml.doc("<p>The name of the ledger.</p>") @as("Name") name: option<ledgerName>,
 }
-@ocaml.doc("<p>The configuration settings of the Amazon Kinesis Data Streams destination for your Amazon QLDB journal
+@ocaml.doc("<p>Information about the encryption of data at rest in an Amazon QLDB ledger. This includes
+         the current status, the key in Key Management Service (KMS), and when the key became inaccessible (in
+         the case of an error).</p>
+         <p>For more information, see <a href=\"https://docs.aws.amazon.com/qldb/latest/developerguide/encryption-at-rest.html\">Encryption at rest</a> in
+         the <i>Amazon QLDB Developer Guide</i>.</p>")
+type ledgerEncryptionDescription = {
+  @ocaml.doc("<p>The date and time, in epoch time format, when the KMS key first became inaccessible,
+         in the case of an error. (Epoch time format is the number of seconds that have elapsed
+         since 12:00:00 AM January 1, 1970 UTC.)</p>
+         <p>This parameter is undefined if the KMS key is accessible.</p>")
+  @as("InaccessibleKmsKeyDateTime")
+  inaccessibleKmsKeyDateTime: option<timestamp_>,
+  @ocaml.doc("<p>The current state of encryption at rest for the ledger. This can be one of the following
+         values:</p>
+         <ul>
+            <li>
+               <p>
+                  <code>ENABLED</code>: Encryption is fully enabled using the specified key.</p>
+            </li>
+            <li>
+               <p>
+                  <code>UPDATING</code>: The ledger is actively processing the specified key
+               change.</p>
+               <p>Key changes in QLDB are asynchronous. The ledger is fully accessible without any
+               performance impact while the key change is being processed. The amount of time it
+               takes to update a key varies depending on the ledger size.</p>
+            </li>
+            <li>
+               <p>
+                  <code>KMS_KEY_INACCESSIBLE</code>: The specified customer managed KMS key is not
+               accessible, and the ledger is impaired. Either the key was disabled or deleted, or
+               the grants on the key were revoked. When a ledger is impaired, it is not accessible
+               and does not accept any read or write requests.</p>
+               <p>An impaired ledger automatically returns to an active state after you restore the
+               grants on the key, or re-enable the key that was disabled. However, deleting a
+               customer managed KMS key is irreversible. After a key is deleted, you can no longer
+               access the ledgers that are protected with that key, and the data becomes
+               unrecoverable permanently.</p>
+            </li>
+         </ul>")
+  @as("EncryptionStatus")
+  encryptionStatus: encryptionStatus,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the customer managed KMS key that the ledger uses for
+         encryption at rest. If this parameter is undefined, the ledger uses an Amazon Web Services owned KMS key
+         for encryption.</p>")
+  @as("KmsKeyArn")
+  kmsKeyArn: arn,
+}
+@ocaml.doc("<p>The configuration settings of the Amazon Kinesis Data Streams destination for an Amazon QLDB journal
          stream.</p>")
 type kinesisConfiguration = {
-  @ocaml.doc("<p>Enables QLDB to publish multiple data records in a single Kinesis Data Streams record. To learn more,
-         see <a href=\"https://docs.aws.amazon.com/streams/latest/dev/kinesis-kpl-concepts.html\">KPL Key
-            Concepts</a> in the <i>Amazon Kinesis Data Streams Developer Guide</i>.</p>")
+  @ocaml.doc("<p>Enables QLDB to publish multiple data records in a single Kinesis Data Streams record, increasing the
+         number of records sent per API call.</p>
+         <p>
+            <i>This option is enabled by default.</i> Record aggregation has important
+         implications for processing records and requires de-aggregation in your stream consumer. To
+         learn more, see <a href=\"https://docs.aws.amazon.com/streams/latest/dev/kinesis-kpl-concepts.html\">KPL Key Concepts</a> and <a href=\"https://docs.aws.amazon.com/streams/latest/dev/kinesis-kpl-consumer-deaggregation.html\">Consumer De-aggregation</a> in the <i>Amazon Kinesis Data Streams Developer
+         Guide</i>.</p>")
   @as("AggregationEnabled")
   aggregationEnabled: option<boolean_>,
-  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the Kinesis data stream resource.</p>")
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the Kinesis Data Streams resource.</p>")
   @as("StreamArn")
   streamArn: arn,
 }
@@ -150,8 +209,8 @@ type s3ExportConfiguration = {
   bucket: s3Bucket,
 }
 type ledgerList = array<ledgerSummary>
-@ocaml.doc("<p>The information about an Amazon QLDB journal stream, including the Amazon Resource Name
-         (ARN), stream name, creation time, current status, and the parameters of your original
+@ocaml.doc("<p>Information about an Amazon QLDB journal stream, including the Amazon Resource Name
+         (ARN), stream name, creation time, current status, and the parameters of the original
          stream creation request.</p>")
 type journalKinesisStreamDescription = {
   @ocaml.doc("<p>The user-defined name of the QLDB journal stream.</p>") @as("StreamName")
@@ -161,7 +220,7 @@ type journalKinesisStreamDescription = {
          have other status values.</p>")
   @as("ErrorCause")
   errorCause: option<errorCause>,
-  @ocaml.doc("<p>The configuration settings of the Amazon Kinesis Data Streams destination for your QLDB journal
+  @ocaml.doc("<p>The configuration settings of the Amazon Kinesis Data Streams destination for a QLDB journal
          stream.</p>")
   @as("KinesisConfiguration")
   kinesisConfiguration: kinesisConfiguration,
@@ -169,14 +228,15 @@ type journalKinesisStreamDescription = {
   status: streamStatus,
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the QLDB journal stream.</p>") @as("Arn")
   arn: option<arn>,
-  @ocaml.doc("<p>The unique ID that QLDB assigns to each QLDB journal stream.</p>") @as("StreamId")
+  @ocaml.doc("<p>The UUID (represented in Base62-encoded text) of the QLDB journal stream.</p>")
+  @as("StreamId")
   streamId: uniqueId,
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the IAM role that grants QLDB permissions for a
          journal stream to write data records to a Kinesis Data Streams resource.</p>")
   @as("RoleArn")
   roleArn: arn,
   @ocaml.doc("<p>The exclusive date and time that specifies when the stream ends. If this parameter is
-         blank, the stream runs indefinitely until you cancel it.</p>")
+         undefined, the stream runs indefinitely until you cancel it.</p>")
   @as("ExclusiveEndTime")
   exclusiveEndTime: option<timestamp_>,
   @ocaml.doc("<p>The inclusive start date and time from which to start streaming journal data.</p>")
@@ -189,9 +249,11 @@ type journalKinesisStreamDescription = {
   creationTime: option<timestamp_>,
   @ocaml.doc("<p>The name of the ledger.</p>") @as("LedgerName") ledgerName: ledgerName,
 }
-@ocaml.doc("<p>The information about a journal export job, including the ledger name, export ID, when
-         it was created, current status, and its start and end time export parameters.</p>")
+@ocaml.doc("<p>Information about a journal export job, including the ledger name, export ID, creation
+         time, current status, and the parameters of the original export creation request.</p>")
 type journalS3ExportDescription = {
+  @ocaml.doc("<p>The output format of the exported journal data.</p>") @as("OutputFormat")
+  outputFormat: option<outputFormat>,
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the IAM role that grants QLDB permissions for a
          journal export job to do the following:</p>
          <ul>
@@ -199,18 +261,18 @@ type journalS3ExportDescription = {
                <p>Write objects into your Amazon Simple Storage Service (Amazon S3) bucket.</p>
             </li>
             <li>
-               <p>(Optional) Use your customer master key (CMK) in AWS Key Management Service (AWS
-               KMS) for server-side encryption of your exported data.</p>
+               <p>(Optional) Use your customer managed key in Key Management Service (KMS) for server-side
+               encryption of your exported data.</p>
             </li>
          </ul>")
   @as("RoleArn")
   roleArn: arn,
   @as("S3ExportConfiguration") s3ExportConfiguration: s3ExportConfiguration,
-  @ocaml.doc("<p>The exclusive end date and time for the range of journal contents that are specified in
+  @ocaml.doc("<p>The exclusive end date and time for the range of journal contents that was specified in
          the original export request.</p>")
   @as("ExclusiveEndTime")
   exclusiveEndTime: timestamp_,
-  @ocaml.doc("<p>The inclusive start date and time for the range of journal contents that are specified
+  @ocaml.doc("<p>The inclusive start date and time for the range of journal contents that was specified
          in the original export request.</p>")
   @as("InclusiveStartTime")
   inclusiveStartTime: timestamp_,
@@ -220,7 +282,9 @@ type journalS3ExportDescription = {
          format is the number of seconds elapsed since 12:00:00 AM January 1, 1970 UTC.)</p>")
   @as("ExportCreationTime")
   exportCreationTime: timestamp_,
-  @ocaml.doc("<p>The unique ID of the journal export job.</p>") @as("ExportId") exportId: uniqueId,
+  @ocaml.doc("<p>The UUID (represented in Base62-encoded text) of the journal export job.</p>")
+  @as("ExportId")
+  exportId: uniqueId,
   @ocaml.doc("<p>The name of the ledger.</p>") @as("LedgerName") ledgerName: ledgerName,
 }
 type journalKinesisStreamDescriptionList = array<journalKinesisStreamDescription>
@@ -236,9 +300,9 @@ module UpdateLedgerPermissionsMode = {
                <p>
                   <code>ALLOW_ALL</code>: A legacy permissions mode that enables access control with
                API-level granularity for ledgers.</p>
-               <p>This mode allows users who have <code>SendCommand</code> permissions for this
-               ledger to run all PartiQL commands (hence, <code>ALLOW_ALL</code>) on any tables in
-               the specified ledger. This mode disregards any table-level or command-level IAM
+               <p>This mode allows users who have the <code>SendCommand</code> API permission for
+               this ledger to run all PartiQL commands (hence, <code>ALLOW_ALL</code>) on any tables
+               in the specified ledger. This mode disregards any table-level or command-level IAM
                permissions policies that you create for the ledger.</p>
             </li>
             <li>
@@ -249,7 +313,10 @@ module UpdateLedgerPermissionsMode = {
                <p>By default, this mode denies all user requests to run any PartiQL commands on any
                tables in this ledger. To allow PartiQL commands to run, you must create IAM
                permissions policies for specific table resources and PartiQL actions, in addition to
-                  <code>SendCommand</code> API permissions for the ledger.</p>
+               the <code>SendCommand</code> API permission for the ledger. For information, see
+                  <a href=\"https://docs.aws.amazon.com/qldb/latest/developerguide/getting-started-standard-mode.html\">Getting
+                  started with the standard permissions mode</a> in the <i>Amazon QLDB
+                  Developer Guide</i>.</p>
             </li>
          </ul>
          <note>
@@ -272,26 +339,111 @@ module UpdateLedgerPermissionsMode = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module DeleteLedger = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The name of the ledger that you want to delete.</p>") @as("Name")
+    name: ledgerName,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-qldb") @new external new: request => t = "DeleteLedgerCommand"
+  let make = (~name, ()) => new({name: name})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module CancelJournalKinesisStream = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The UUID (represented in Base62-encoded text) of the QLDB journal stream to be
+         canceled.</p>")
+    @as("StreamId")
+    streamId: uniqueId,
+    @ocaml.doc("<p>The name of the ledger.</p>") @as("LedgerName") ledgerName: ledgerName,
+  }
+  type response = {
+    @ocaml.doc("<p>The UUID (Base62-encoded text) of the canceled QLDB journal stream.</p>")
+    @as("StreamId")
+    streamId: option<uniqueId>,
+  }
+  @module("@aws-sdk/client-qldb") @new
+  external new: request => t = "CancelJournalKinesisStreamCommand"
+  let make = (~streamId, ~ledgerName, ()) => new({streamId: streamId, ledgerName: ledgerName})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module UpdateLedger = {
   type t
   type request = {
+    @ocaml.doc("<p>The key in Key Management Service (KMS) to use for encryption of data at rest in the ledger. For
+         more information, see <a href=\"https://docs.aws.amazon.com/qldb/latest/developerguide/encryption-at-rest.html\">Encryption at rest</a> in
+         the <i>Amazon QLDB Developer Guide</i>.</p>
+         <p>Use one of the following options to specify this parameter:</p>
+         <ul>
+            <li>
+               <p>
+                  <code>AWS_OWNED_KMS_KEY</code>: Use an KMS key that is owned and managed by Amazon Web Services
+               on your behalf.</p>
+            </li>
+            <li>
+               <p>
+                  <b>Undefined</b>: Make no changes to the KMS key of the
+               ledger.</p>
+            </li>
+            <li>
+               <p>
+                  <b>A valid symmetric customer managed KMS key</b>: Use
+               the specified KMS key in your account that you create, own, and manage.</p>
+               <p>Amazon QLDB does not support asymmetric keys. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html\">Using symmetric and asymmetric keys</a> in the <i>Key Management Service Developer
+                  Guide</i>.</p>
+            </li>
+         </ul>
+         <p>To specify a customer managed KMS key, you can use its key ID, Amazon Resource Name
+         (ARN), alias name, or alias ARN. When using an alias name, prefix it with
+            <code>\"alias/\"</code>. To specify a key in a different Amazon Web Services account, you must use the key
+         ARN or alias ARN.</p>
+         <p>For example:</p>
+         <ul>
+            <li>
+               <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>
+               </p>
+            </li>
+            <li>
+               <p>Key ARN:
+                  <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>
+               </p>
+            </li>
+            <li>
+               <p>Alias name: <code>alias/ExampleAlias</code>
+               </p>
+            </li>
+            <li>
+               <p>Alias ARN:
+               <code>arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias</code>
+               </p>
+            </li>
+         </ul>
+         <p>For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id\">Key identifiers (KeyId)</a> in
+         the <i>Key Management Service Developer Guide</i>.</p>")
+    @as("KmsKey")
+    kmsKey: option<kmsKey>,
     @ocaml.doc("<p>The flag that prevents a ledger from being deleted by any user. If not provided on
-         ledger creation, this feature is enabled (<code>true</code>) by default.</p>
+      ledger creation, this feature is enabled (<code>true</code>) by default.</p>
          <p>If deletion protection is enabled, you must first disable it before you can delete the
-         ledger using the QLDB API or the AWS Command Line Interface (AWS CLI). You can disable it by calling the
-            <code>UpdateLedger</code> operation to set the flag to <code>false</code>. The QLDB
-         console disables deletion protection for you when you use it to delete a ledger.</p>")
+      ledger. You can disable it by calling the <code>UpdateLedger</code> operation to set the flag to <code>false</code>.</p>")
     @as("DeletionProtection")
     deletionProtection: option<deletionProtection>,
     @ocaml.doc("<p>The name of the ledger.</p>") @as("Name") name: ledgerName,
   }
   type response = {
+    @ocaml.doc("<p>Information about the encryption of data at rest in the ledger. This includes the
+         current status, the KMS key, and when the key became inaccessible (in the case of an
+         error).</p>")
+    @as("EncryptionDescription")
+    encryptionDescription: option<ledgerEncryptionDescription>,
     @ocaml.doc("<p>The flag that prevents a ledger from being deleted by any user. If not provided on
-         ledger creation, this feature is enabled (<code>true</code>) by default.</p>
+      ledger creation, this feature is enabled (<code>true</code>) by default.</p>
          <p>If deletion protection is enabled, you must first disable it before you can delete the
-         ledger using the QLDB API or the AWS Command Line Interface (AWS CLI). You can disable it by calling the
-            <code>UpdateLedger</code> operation to set the flag to <code>false</code>. The QLDB
-         console disables deletion protection for you when you use it to delete a ledger.</p>")
+      ledger. You can disable it by calling the <code>UpdateLedger</code> operation to set the flag to <code>false</code>.</p>")
     @as("DeletionProtection")
     deletionProtection: option<deletionProtection>,
     @ocaml.doc("<p>The date and time, in epoch time format, when the ledger was created. (Epoch time format
@@ -303,86 +455,23 @@ module UpdateLedger = {
     @ocaml.doc("<p>The name of the ledger.</p>") @as("Name") name: option<ledgerName>,
   }
   @module("@aws-sdk/client-qldb") @new external new: request => t = "UpdateLedgerCommand"
-  let make = (~name, ~deletionProtection=?, ()) =>
-    new({deletionProtection: deletionProtection, name: name})
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
-module DescribeLedger = {
-  type t
-  type request = {
-    @ocaml.doc("<p>The name of the ledger that you want to describe.</p>") @as("Name")
-    name: ledgerName,
-  }
-  type response = {
-    @ocaml.doc("<p>The flag that prevents a ledger from being deleted by any user. If not provided on
-         ledger creation, this feature is enabled (<code>true</code>) by default.</p>
-         <p>If deletion protection is enabled, you must first disable it before you can delete the
-         ledger using the QLDB API or the AWS Command Line Interface (AWS CLI). You can disable it by calling the
-            <code>UpdateLedger</code> operation to set the flag to <code>false</code>. The QLDB
-         console disables deletion protection for you when you use it to delete a ledger.</p>")
-    @as("DeletionProtection")
-    deletionProtection: option<deletionProtection>,
-    @ocaml.doc("<p>The permissions mode of the ledger.</p>") @as("PermissionsMode")
-    permissionsMode: option<permissionsMode>,
-    @ocaml.doc("<p>The date and time, in epoch time format, when the ledger was created. (Epoch time format
-         is the number of seconds elapsed since 12:00:00 AM January 1, 1970 UTC.)</p>")
-    @as("CreationDateTime")
-    creationDateTime: option<timestamp_>,
-    @ocaml.doc("<p>The current status of the ledger.</p>") @as("State") state: option<ledgerState>,
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) for the ledger.</p>") @as("Arn") arn: option<arn>,
-    @ocaml.doc("<p>The name of the ledger.</p>") @as("Name") name: option<ledgerName>,
-  }
-  @module("@aws-sdk/client-qldb") @new external new: request => t = "DescribeLedgerCommand"
-  let make = (~name, ()) => new({name: name})
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
-module DeleteLedger = {
-  type t
-  type request = {
-    @ocaml.doc("<p>The name of the ledger that you want to delete.</p>") @as("Name")
-    name: ledgerName,
-  }
-
-  @module("@aws-sdk/client-qldb") @new external new: request => t = "DeleteLedgerCommand"
-  let make = (~name, ()) => new({name: name})
-  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
-}
-
-module CancelJournalKinesisStream = {
-  type t
-  type request = {
-    @ocaml.doc("<p>The unique ID that QLDB assigns to each QLDB journal stream.</p>")
-    @as("StreamId")
-    streamId: uniqueId,
-    @ocaml.doc("<p>The name of the ledger.</p>") @as("LedgerName") ledgerName: ledgerName,
-  }
-  type response = {
-    @ocaml.doc("<p>The unique ID that QLDB assigns to each QLDB journal stream.</p>")
-    @as("StreamId")
-    streamId: option<uniqueId>,
-  }
-  @module("@aws-sdk/client-qldb") @new
-  external new: request => t = "CancelJournalKinesisStreamCommand"
-  let make = (~streamId, ~ledgerName, ()) => new({streamId: streamId, ledgerName: ledgerName})
+  let make = (~name, ~kmsKey=?, ~deletionProtection=?, ()) =>
+    new({kmsKey: kmsKey, deletionProtection: deletionProtection, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
   type t
   type request = {
-    @ocaml.doc("<p>The list of tag keys that you want to remove.</p>") @as("TagKeys")
-    tagKeys: tagKeyList,
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) from which you want to remove the tags. For
-         example:</p>
+    @ocaml.doc("<p>The list of tag keys to remove.</p>") @as("TagKeys") tagKeys: tagKeyList,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) from which to remove the tags. For example:</p>
          <p>
             <code>arn:aws:qldb:us-east-1:123456789012:ledger/exampleLedger</code>
          </p>")
     @as("ResourceArn")
     resourceArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-qldb") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -403,7 +492,7 @@ module TagResource = {
     @as("ResourceArn")
     resourceArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-qldb") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -429,14 +518,12 @@ module StreamJournalToKinesis = {
          this parameter, the stream runs indefinitely until you cancel it.</p>
          <p>The <code>ExclusiveEndTime</code> must be in <code>ISO 8601</code> date and time format
          and in Universal Coordinated Time (UTC). For example:
-         <code>2019-06-13T21:36:34Z</code>
-         </p>")
+         <code>2019-06-13T21:36:34Z</code>.</p>")
     @as("ExclusiveEndTime")
     exclusiveEndTime: option<timestamp_>,
     @ocaml.doc("<p>The inclusive start date and time from which to start streaming journal data. This
          parameter must be in <code>ISO 8601</code> date and time format and in Universal
-         Coordinated Time (UTC). For example: <code>2019-06-13T21:36:34Z</code>
-         </p>
+         Coordinated Time (UTC). For example: <code>2019-06-13T21:36:34Z</code>.</p>
          <p>The <code>InclusiveStartTime</code> cannot be in the future and must be before
             <code>ExclusiveEndTime</code>.</p>
          <p>If you provide an <code>InclusiveStartTime</code> that is before the ledger's
@@ -449,13 +536,17 @@ module StreamJournalToKinesis = {
     @as("Tags")
     tags: option<tags>,
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the IAM role that grants QLDB permissions for a
-         journal stream to write data records to a Kinesis Data Streams resource.</p>")
+         journal stream to write data records to a Kinesis Data Streams resource.</p>
+         <p>To pass a role to QLDB when requesting a journal stream, you must have permissions to
+         perform the <code>iam:PassRole</code> action on the IAM role resource. This is required for
+         all journal stream requests.</p>")
     @as("RoleArn")
     roleArn: arn,
     @ocaml.doc("<p>The name of the ledger.</p>") @as("LedgerName") ledgerName: ledgerName,
   }
   type response = {
-    @ocaml.doc("<p>The unique ID that QLDB assigns to each QLDB journal stream.</p>")
+    @ocaml.doc("<p>The UUID (represented in Base62-encoded text) that QLDB assigns to each QLDB journal
+         stream.</p>")
     @as("StreamId")
     streamId: option<uniqueId>,
   }
@@ -485,7 +576,7 @@ module StreamJournalToKinesis = {
 module ListTagsForResource = {
   type t
   type request = {
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) for which you want to list the tags. For example:</p>
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) for which to list the tags. For example:</p>
          <p>
             <code>arn:aws:qldb:us-east-1:123456789012:ledger/exampleLedger</code>
          </p>")
@@ -510,16 +601,17 @@ module GetRevision = {
     @ocaml.doc("<p>The latest block location covered by the digest for which to request a proof. An address
          is an Amazon Ion structure that has two fields: <code>strandId</code> and
             <code>sequenceNo</code>.</p>
-         <p>For example: <code>{strandId:\"BlFTjlSXze9BIh1KOszcE3\",sequenceNo:49}</code>
-         </p>")
+         <p>For example: <code>{strandId:\"BlFTjlSXze9BIh1KOszcE3\",sequenceNo:49}</code>.</p>")
     @as("DigestTipAddress")
     digestTipAddress: option<valueHolder>,
-    @ocaml.doc("<p>The unique ID of the document to be verified.</p>") @as("DocumentId")
+    @ocaml.doc(
+      "<p>The UUID (represented in Base62-encoded text) of the document to be verified.</p>"
+    )
+    @as("DocumentId")
     documentId: uniqueId,
     @ocaml.doc("<p>The block location of the document revision to be verified. An address is an Amazon Ion
          structure that has two fields: <code>strandId</code> and <code>sequenceNo</code>.</p>
-         <p>For example: <code>{strandId:\"BlFTjlSXze9BIh1KOszcE3\",sequenceNo:14}</code>
-         </p>")
+         <p>For example: <code>{strandId:\"BlFTjlSXze9BIh1KOszcE3\",sequenceNo:14}</code>.</p>")
     @as("BlockAddress")
     blockAddress: valueHolder,
     @ocaml.doc("<p>The name of the ledger.</p>") @as("Name") name: ledgerName,
@@ -569,14 +661,12 @@ module GetBlock = {
     @ocaml.doc("<p>The latest block location covered by the digest for which to request a proof. An address
          is an Amazon Ion structure that has two fields: <code>strandId</code> and
             <code>sequenceNo</code>.</p>
-         <p>For example: <code>{strandId:\"BlFTjlSXze9BIh1KOszcE3\",sequenceNo:49}</code>
-         </p>")
+         <p>For example: <code>{strandId:\"BlFTjlSXze9BIh1KOszcE3\",sequenceNo:49}</code>.</p>")
     @as("DigestTipAddress")
     digestTipAddress: option<valueHolder>,
     @ocaml.doc("<p>The location of the block that you want to request. An address is an Amazon Ion
          structure that has two fields: <code>strandId</code> and <code>sequenceNo</code>.</p>
-         <p>For example: <code>{strandId:\"BlFTjlSXze9BIh1KOszcE3\",sequenceNo:14}</code>
-         </p>")
+         <p>For example: <code>{strandId:\"BlFTjlSXze9BIh1KOszcE3\",sequenceNo:14}</code>.</p>")
     @as("BlockAddress")
     blockAddress: valueHolder,
     @ocaml.doc("<p>The name of the ledger.</p>") @as("Name") name: ledgerName,
@@ -596,15 +686,98 @@ module GetBlock = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module DescribeLedger = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The name of the ledger that you want to describe.</p>") @as("Name")
+    name: ledgerName,
+  }
+  type response = {
+    @ocaml.doc("<p>Information about the encryption of data at rest in the ledger. This includes the
+         current status, the KMS key, and when the key became inaccessible (in the case of an
+         error).</p>")
+    @as("EncryptionDescription")
+    encryptionDescription: option<ledgerEncryptionDescription>,
+    @ocaml.doc("<p>The flag that prevents a ledger from being deleted by any user. If not provided on
+      ledger creation, this feature is enabled (<code>true</code>) by default.</p>
+         <p>If deletion protection is enabled, you must first disable it before you can delete the
+      ledger. You can disable it by calling the <code>UpdateLedger</code> operation to set the flag to <code>false</code>.</p>")
+    @as("DeletionProtection")
+    deletionProtection: option<deletionProtection>,
+    @ocaml.doc("<p>The permissions mode of the ledger.</p>") @as("PermissionsMode")
+    permissionsMode: option<permissionsMode>,
+    @ocaml.doc("<p>The date and time, in epoch time format, when the ledger was created. (Epoch time format
+         is the number of seconds elapsed since 12:00:00 AM January 1, 1970 UTC.)</p>")
+    @as("CreationDateTime")
+    creationDateTime: option<timestamp_>,
+    @ocaml.doc("<p>The current status of the ledger.</p>") @as("State") state: option<ledgerState>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) for the ledger.</p>") @as("Arn") arn: option<arn>,
+    @ocaml.doc("<p>The name of the ledger.</p>") @as("Name") name: option<ledgerName>,
+  }
+  @module("@aws-sdk/client-qldb") @new external new: request => t = "DescribeLedgerCommand"
+  let make = (~name, ()) => new({name: name})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module CreateLedger = {
   type t
   type request = {
+    @ocaml.doc("<p>The key in Key Management Service (KMS) to use for encryption of data at rest in the ledger. For
+         more information, see <a href=\"https://docs.aws.amazon.com/qldb/latest/developerguide/encryption-at-rest.html\">Encryption at rest</a> in
+         the <i>Amazon QLDB Developer Guide</i>.</p>
+         <p>Use one of the following options to specify this parameter:</p>
+         <ul>
+            <li>
+               <p>
+                  <code>AWS_OWNED_KMS_KEY</code>: Use an KMS key that is owned and managed by Amazon Web Services
+               on your behalf.</p>
+            </li>
+            <li>
+               <p>
+                  <b>Undefined</b>: By default, use an Amazon Web Services owned KMS
+               key.</p>
+            </li>
+            <li>
+               <p>
+                  <b>A valid symmetric customer managed KMS key</b>: Use
+               the specified KMS key in your account that you create, own, and manage.</p>
+               <p>Amazon QLDB does not support asymmetric keys. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html\">Using symmetric and asymmetric keys</a> in the <i>Key Management Service Developer
+                  Guide</i>.</p>
+            </li>
+         </ul>
+         <p>To specify a customer managed KMS key, you can use its key ID, Amazon Resource Name
+         (ARN), alias name, or alias ARN. When using an alias name, prefix it with
+            <code>\"alias/\"</code>. To specify a key in a different Amazon Web Services account, you must use the key
+         ARN or alias ARN.</p>
+         <p>For example:</p>
+         <ul>
+            <li>
+               <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>
+               </p>
+            </li>
+            <li>
+               <p>Key ARN:
+                  <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>
+               </p>
+            </li>
+            <li>
+               <p>Alias name: <code>alias/ExampleAlias</code>
+               </p>
+            </li>
+            <li>
+               <p>Alias ARN:
+               <code>arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias</code>
+               </p>
+            </li>
+         </ul>
+         <p>For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id\">Key identifiers (KeyId)</a> in
+         the <i>Key Management Service Developer Guide</i>.</p>")
+    @as("KmsKey")
+    kmsKey: option<kmsKey>,
     @ocaml.doc("<p>The flag that prevents a ledger from being deleted by any user. If not provided on
-         ledger creation, this feature is enabled (<code>true</code>) by default.</p>
+      ledger creation, this feature is enabled (<code>true</code>) by default.</p>
          <p>If deletion protection is enabled, you must first disable it before you can delete the
-         ledger using the QLDB API or the AWS Command Line Interface (AWS CLI). You can disable it by calling the
-            <code>UpdateLedger</code> operation to set the flag to <code>false</code>. The QLDB
-         console disables deletion protection for you when you use it to delete a ledger.</p>")
+      ledger. You can disable it by calling the <code>UpdateLedger</code> operation to set the flag to <code>false</code>.</p>")
     @as("DeletionProtection")
     deletionProtection: option<deletionProtection>,
     @ocaml.doc("<p>The permissions mode to assign to the ledger that you want to create. This parameter can
@@ -614,9 +787,9 @@ module CreateLedger = {
                <p>
                   <code>ALLOW_ALL</code>: A legacy permissions mode that enables access control with
                API-level granularity for ledgers.</p>
-               <p>This mode allows users who have <code>SendCommand</code> permissions for this
-               ledger to run all PartiQL commands (hence, <code>ALLOW_ALL</code>) on any tables in
-               the specified ledger. This mode disregards any table-level or command-level IAM
+               <p>This mode allows users who have the <code>SendCommand</code> API permission for
+               this ledger to run all PartiQL commands (hence, <code>ALLOW_ALL</code>) on any tables
+               in the specified ledger. This mode disregards any table-level or command-level IAM
                permissions policies that you create for the ledger.</p>
             </li>
             <li>
@@ -627,7 +800,10 @@ module CreateLedger = {
                <p>By default, this mode denies all user requests to run any PartiQL commands on any
                tables in this ledger. To allow PartiQL commands to run, you must create IAM
                permissions policies for specific table resources and PartiQL actions, in addition to
-                  <code>SendCommand</code> API permissions for the ledger.</p>
+               the <code>SendCommand</code> API permission for the ledger. For information, see
+                  <a href=\"https://docs.aws.amazon.com/qldb/latest/developerguide/getting-started-standard-mode.html\">Getting
+                  started with the standard permissions mode</a> in the <i>Amazon QLDB
+                  Developer Guide</i>.</p>
             </li>
          </ul>
          <note>
@@ -640,20 +816,22 @@ module CreateLedger = {
          case sensitive. Tag values are case sensitive and can be null.</p>")
     @as("Tags")
     tags: option<tags>,
-    @ocaml.doc("<p>The name of the ledger that you want to create. The name must be unique among all of
-         your ledgers in the current AWS Region.</p>
+    @ocaml.doc("<p>The name of the ledger that you want to create. The name must be unique among all of the
+         ledgers in your Amazon Web Services account in the current Region.</p>
          <p>Naming constraints for ledger names are defined in <a href=\"https://docs.aws.amazon.com/qldb/latest/developerguide/limits.html#limits.naming\">Quotas in Amazon QLDB</a>
          in the <i>Amazon QLDB Developer Guide</i>.</p>")
     @as("Name")
     name: ledgerName,
   }
   type response = {
+    @ocaml.doc("<p>The ARN of the customer managed KMS key that the ledger uses for encryption at rest. If
+         this parameter is undefined, the ledger uses an Amazon Web Services owned KMS key for encryption.</p>")
+    @as("KmsKeyArn")
+    kmsKeyArn: option<arn>,
     @ocaml.doc("<p>The flag that prevents a ledger from being deleted by any user. If not provided on
-         ledger creation, this feature is enabled (<code>true</code>) by default.</p>
+      ledger creation, this feature is enabled (<code>true</code>) by default.</p>
          <p>If deletion protection is enabled, you must first disable it before you can delete the
-         ledger using the QLDB API or the AWS Command Line Interface (AWS CLI). You can disable it by calling the
-            <code>UpdateLedger</code> operation to set the flag to <code>false</code>. The QLDB
-         console disables deletion protection for you when you use it to delete a ledger.</p>")
+      ledger. You can disable it by calling the <code>UpdateLedger</code> operation to set the flag to <code>false</code>.</p>")
     @as("DeletionProtection")
     deletionProtection: option<deletionProtection>,
     @ocaml.doc("<p>The permissions mode of the ledger that you created.</p>") @as("PermissionsMode")
@@ -667,8 +845,9 @@ module CreateLedger = {
     @ocaml.doc("<p>The name of the ledger.</p>") @as("Name") name: option<ledgerName>,
   }
   @module("@aws-sdk/client-qldb") @new external new: request => t = "CreateLedgerCommand"
-  let make = (~permissionsMode, ~name, ~deletionProtection=?, ~tags=?, ()) =>
+  let make = (~permissionsMode, ~name, ~kmsKey=?, ~deletionProtection=?, ~tags=?, ()) =>
     new({
+      kmsKey: kmsKey,
       deletionProtection: deletionProtection,
       permissionsMode: permissionsMode,
       tags: tags,
@@ -705,7 +884,7 @@ module ListLedgers = {
          </ul>")
     @as("NextToken")
     nextToken: option<nextToken>,
-    @ocaml.doc("<p>The array of ledger summaries that are associated with the current AWS account and
+    @ocaml.doc("<p>The array of ledger summaries that are associated with the current Amazon Web Services account and
          Region.</p>")
     @as("Ledgers")
     ledgers: option<ledgerList>,
@@ -719,6 +898,10 @@ module ListLedgers = {
 module ExportJournalToS3 = {
   type t
   type request = {
+    @ocaml.doc("<p>The output format of your exported journal data. If this parameter is not specified, the
+         exported data defaults to <code>ION_TEXT</code> format.</p>")
+    @as("OutputFormat")
+    outputFormat: option<outputFormat>,
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the IAM role that grants QLDB permissions for a
          journal export job to do the following:</p>
          <ul>
@@ -726,32 +909,31 @@ module ExportJournalToS3 = {
                <p>Write objects into your Amazon Simple Storage Service (Amazon S3) bucket.</p>
             </li>
             <li>
-               <p>(Optional) Use your customer master key (CMK) in AWS Key Management Service (AWS
-               KMS) for server-side encryption of your exported data.</p>
+               <p>(Optional) Use your customer managed key in Key Management Service (KMS) for server-side
+               encryption of your exported data.</p>
             </li>
-         </ul>")
+         </ul>
+         <p>To pass a role to QLDB when requesting a journal export, you must have permissions to
+         perform the <code>iam:PassRole</code> action on the IAM role resource. This is required for
+         all journal export requests.</p>")
     @as("RoleArn")
     roleArn: arn,
     @ocaml.doc("<p>The configuration settings of the Amazon S3 bucket destination for your export
          request.</p>")
     @as("S3ExportConfiguration")
     s3ExportConfiguration: s3ExportConfiguration,
-    @ocaml.doc("<p>The exclusive end date and time for the range of journal contents that you want to
-         export.</p>
+    @ocaml.doc("<p>The exclusive end date and time for the range of journal contents to export.</p>
          <p>The <code>ExclusiveEndTime</code> must be in <code>ISO 8601</code> date and time format
          and in Universal Coordinated Time (UTC). For example:
-         <code>2019-06-13T21:36:34Z</code>
-         </p>
+         <code>2019-06-13T21:36:34Z</code>.</p>
          <p>The <code>ExclusiveEndTime</code> must be less than or equal to the current UTC date and
          time.</p>")
     @as("ExclusiveEndTime")
     exclusiveEndTime: timestamp_,
-    @ocaml.doc("<p>The inclusive start date and time for the range of journal contents that you want to
-         export.</p>
+    @ocaml.doc("<p>The inclusive start date and time for the range of journal contents to export.</p>
          <p>The <code>InclusiveStartTime</code> must be in <code>ISO 8601</code> date and time
          format and in Universal Coordinated Time (UTC). For example:
-            <code>2019-06-13T21:36:34Z</code>
-         </p>
+            <code>2019-06-13T21:36:34Z</code>.</p>
          <p>The <code>InclusiveStartTime</code> must be before <code>ExclusiveEndTime</code>.</p>
          <p>If you provide an <code>InclusiveStartTime</code> that is before the ledger's
             <code>CreationDateTime</code>, Amazon QLDB defaults it to the ledger's
@@ -761,7 +943,8 @@ module ExportJournalToS3 = {
     @ocaml.doc("<p>The name of the ledger.</p>") @as("Name") name: ledgerName,
   }
   type response = {
-    @ocaml.doc("<p>The unique ID that QLDB assigns to each journal export job.</p>
+    @ocaml.doc("<p>The UUID (represented in Base62-encoded text) that QLDB assigns to each journal export
+         job.</p>
          <p>To describe your export request and check the status of the job, you can use
             <code>ExportId</code> to call <code>DescribeJournalS3Export</code>.</p>")
     @as("ExportId")
@@ -774,9 +957,11 @@ module ExportJournalToS3 = {
     ~exclusiveEndTime,
     ~inclusiveStartTime,
     ~name,
+    ~outputFormat=?,
     (),
   ) =>
     new({
+      outputFormat: outputFormat,
       roleArn: roleArn,
       s3ExportConfiguration: s3ExportConfiguration,
       exclusiveEndTime: exclusiveEndTime,
@@ -789,7 +974,8 @@ module ExportJournalToS3 = {
 module DescribeJournalKinesisStream = {
   type t
   type request = {
-    @ocaml.doc("<p>The unique ID that QLDB assigns to each QLDB journal stream.</p>")
+    @ocaml.doc("<p>The UUID (represented in Base62-encoded text) of the QLDB journal stream to
+         describe.</p>")
     @as("StreamId")
     streamId: uniqueId,
     @ocaml.doc("<p>The name of the ledger.</p>") @as("LedgerName") ledgerName: ledgerName,
@@ -852,7 +1038,8 @@ module ListJournalKinesisStreamsForLedger = {
 module DescribeJournalS3Export = {
   type t
   type request = {
-    @ocaml.doc("<p>The unique ID of the journal export job that you want to describe.</p>")
+    @ocaml.doc("<p>The UUID (represented in Base62-encoded text) of the journal export job to
+         describe.</p>")
     @as("ExportId")
     exportId: uniqueId,
     @ocaml.doc("<p>The name of the ledger.</p>") @as("Name") name: ledgerName,
@@ -941,7 +1128,7 @@ module ListJournalS3Exports = {
     @as("NextToken")
     nextToken: option<nextToken>,
     @ocaml.doc("<p>The array of journal export job descriptions for all ledgers that are associated with
-         the current AWS account and Region.</p>")
+         the current Amazon Web Services account and Region.</p>")
     @as("JournalS3Exports")
     journalS3Exports: option<journalS3ExportList>,
   }

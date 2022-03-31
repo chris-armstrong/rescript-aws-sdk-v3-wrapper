@@ -115,6 +115,8 @@ type locationStringModel = string
 type launchTemplateVersion = string
 type launchTemplateName = string
 type launchTemplateId = string
+type launchPathStringModel = string
+type launchParametersStringModel = string
 type largeGameSessionData = string
 type ipProtocol = [@as("UDP") #UDP | @as("TCP") #TCP]
 type ipAddress = string
@@ -172,6 +174,14 @@ type gameServerGroupStatus = [
 type gameServerGroupNameOrArn = string
 type gameServerGroupName = string
 type gameServerGroupInstanceType = [
+  | @as("m6g.16xlarge") #M6g_16xlarge
+  | @as("m6g.12xlarge") #M6g_12xlarge
+  | @as("m6g.8xlarge") #M6g_8xlarge
+  | @as("m6g.4xlarge") #M6g_4xlarge
+  | @as("m6g.2xlarge") #M6g_2xlarge
+  | @as("m6g.xlarge") #M6g_Xlarge
+  | @as("m6g.large") #M6g_Large
+  | @as("m6g.medium") #M6g_Medium
   | @as("m5a.24xlarge") #M5a_24xlarge
   | @as("m5a.16xlarge") #M5a_16xlarge
   | @as("m5a.12xlarge") #M5a_12xlarge
@@ -193,6 +203,14 @@ type gameServerGroupInstanceType = [
   | @as("m4.2xlarge") #M4_2xlarge
   | @as("m4.xlarge") #M4_Xlarge
   | @as("m4.large") #M4_Large
+  | @as("r6g.16xlarge") #R6g_16xlarge
+  | @as("r6g.12xlarge") #R6g_12xlarge
+  | @as("r6g.8xlarge") #R6g_8xlarge
+  | @as("r6g.4xlarge") #R6g_4xlarge
+  | @as("r6g.2xlarge") #R6g_2xlarge
+  | @as("r6g.xlarge") #R6g_Xlarge
+  | @as("r6g.large") #R6g_Large
+  | @as("r6g.medium") #R6g_Medium
   | @as("r5a.24xlarge") #R5a_24xlarge
   | @as("r5a.16xlarge") #R5a_16xlarge
   | @as("r5a.12xlarge") #R5a_12xlarge
@@ -215,6 +233,14 @@ type gameServerGroupInstanceType = [
   | @as("r4.2xlarge") #R4_2xlarge
   | @as("r4.xlarge") #R4_Xlarge
   | @as("r4.large") #R4_Large
+  | @as("c6g.16xlarge") #C6g_16xlarge
+  | @as("c6g.12xlarge") #C6g_12xlarge
+  | @as("c6g.8xlarge") #C6g_8xlarge
+  | @as("c6g.4xlarge") #C6g_4xlarge
+  | @as("c6g.2xlarge") #C6g_2xlarge
+  | @as("c6g.xlarge") #C6g_Xlarge
+  | @as("c6g.large") #C6g_Large
+  | @as("c6g.medium") #C6g_Medium
   | @as("c5a.24xlarge") #C5a_24xlarge
   | @as("c5a.16xlarge") #C5a_16xlarge
   | @as("c5a.12xlarge") #C5a_12xlarge
@@ -429,7 +455,7 @@ type vpcPeeringConnectionStatus = {
   code: option<nonZeroAndMaxString>,
 }
 @ocaml.doc("<p>Represents an authorization for a VPC peering connection between the VPC for an
-            Amazon GameLift fleet and another VPC on an account you have access to. This authorization
+            Amazon Web Services fleet and another VPC on an account you have access to. This authorization
             must exist and be valid for the peering connection to be established. Authorizations are
             valid for 24 hours after they are issued.</p>
         <p>
@@ -456,13 +482,13 @@ type vpcPeeringAuthorization = {
   creationTime: option<timestamp_>,
   @ocaml.doc("<p>A unique identifier for a VPC with resources to be accessed by your GameLift fleet. The
             VPC must be in the same Region as your fleet. To look up a VPC ID, use the 
-            <a href=\"https://console.aws.amazon.com/vpc/\">VPC Dashboard</a> in the AWS Management Console. 
+            <a href=\"https://console.aws.amazon.com/vpc/\">VPC Dashboard</a> in the Amazon Web Services Management Console. 
             Learn more about VPC peering in <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html\">VPC Peering with GameLift Fleets</a>.</p>")
   @as("PeerVpcId")
   peerVpcId: option<nonZeroAndMaxString>,
   @ocaml.doc("<p></p>") @as("PeerVpcAwsAccountId") peerVpcAwsAccountId: option<nonZeroAndMaxString>,
-  @ocaml.doc("<p>A unique identifier for the AWS account that you use to manage your GameLift fleet. 
-            You can find your Account ID in the AWS Management Console under account settings.</p>")
+  @ocaml.doc("<p>A unique identifier for the Amazon Web Services account that you use to manage your GameLift fleet. 
+            You can find your Account ID in the Amazon Web Services Management Console under account settings.</p>")
   @as("GameLiftAwsAccountId")
   gameLiftAwsAccountId: option<nonZeroAndMaxString>,
 }
@@ -482,7 +508,7 @@ type targetTrackingConfiguration = {
 }
 @ocaml.doc("<p>Settings for a target-based scaling policy (see <a>ScalingPolicy</a>. A
         target-based policy tracks a particular fleet metric specifies a target value for the
-        metric. As player usage changes, the policy triggers Amazon GameLift to adjust capacity so
+        metric. As player usage changes, the policy triggers Amazon Web Services to adjust capacity so
         that the metric returns to the target value. The target configuration specifies settings
         as needed for the target based policy, including the target value. </p>
          <p>
@@ -516,12 +542,12 @@ type tagKeyList = array<tagKey>
             <b>Learn more</b>
          </p>
         <p>
-            <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS Resources</a> in the
-            <i>AWS General Reference</i>
+            <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services Resources</a> in the
+            <i>Amazon Web Services General Reference</i>
          </p>
         <p>
             <a href=\"http://aws.amazon.com/answers/account-management/aws-tagging-strategies/\">
-            AWS Tagging Strategies</a>
+            Amazon Web Services Tagging Strategies</a>
          </p>
         <p>
             <b>Related actions</b>
@@ -534,12 +560,12 @@ type tagKeyList = array<tagKey>
          </p>")
 type tag = {
   @ocaml.doc("<p>
-            The value for a developer-defined key:value pair for tagging an AWS resource.
+            The value for a developer-defined key:value pair for tagging an Amazon Web Services resource.
         </p>")
   @as("Value")
   value: tagValue,
   @ocaml.doc("<p>
-            The key for a developer-defined key:value pair for tagging an AWS resource.
+            The key for a developer-defined key:value pair for tagging an Amazon Web Services resource.
         </p>")
   @as("Key")
   key: tagKey,
@@ -557,7 +583,7 @@ type serverProcess = {
   @ocaml.doc("<p>An optional list of parameters to pass to the server executable or Realtime script on
             launch.</p>")
   @as("Parameters")
-  parameters: option<nonZeroAndMaxString>,
+  parameters: option<launchParametersStringModel>,
   @ocaml.doc("<p>The location of a game build executable or the Realtime script file that contains the
                 <code>Init()</code> function. Game builds and Realtime scripts are installed on
             instances at the root: </p>
@@ -572,20 +598,20 @@ type serverProcess = {
             </li>
          </ul>")
   @as("LaunchPath")
-  launchPath: nonZeroAndMaxString,
+  launchPath: launchPathStringModel,
 }
-@ocaml.doc("<p>The location in Amazon S3 where build or script files are stored for access by Amazon GameLift. This
+@ocaml.doc("<p>The location in Amazon S3 where build or script files are stored for access by Amazon Web Services. This
             location is specified in <a>CreateBuild</a>, <a>CreateScript</a>,
             and <a>UpdateScript</a> requests. </p>")
 type s3Location = {
-  @ocaml.doc("<p>The version of the file, if object versioning is turned on for the bucket. Amazon GameLift uses
+  @ocaml.doc("<p>The version of the file, if object versioning is turned on for the bucket. Amazon Web Services uses
             this information when retrieving files from an S3 bucket that you own. Use this
             parameter to specify a specific version of the file. If not set, the latest version of
             the file is retrieved. </p>")
   @as("ObjectVersion")
   objectVersion: option<nonEmptyString>,
   @ocaml.doc("<p>The Amazon Resource Name (<a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html\">ARN</a>) for an IAM role that
-            allows Amazon GameLift to access the S3 bucket.</p>")
+            allows Amazon Web Services to access the S3 bucket.</p>")
   @as("RoleArn")
   roleArn: option<nonEmptyString>,
   @ocaml.doc("<p>The name of the zip file that contains the build files or script files. </p>")
@@ -681,7 +707,7 @@ type playerSession = {
   )
   @as("PlayerData")
   playerData: option<playerData>,
-  @ocaml.doc("<p>Port number for the game session. To connect to a Amazon GameLift server process, an app
+  @ocaml.doc("<p>Port number for the game session. To connect to a Amazon Web Services server process, an app
         needs both the IP address and port number.</p>")
   @as("Port")
   port: option<portNumber>,
@@ -907,7 +933,7 @@ type locationState = {
   @ocaml.doc("<p>The life-cycle status of a fleet location. </p>") @as("Status")
   status: option<fleetStatus>,
   @ocaml.doc(
-    "<p>The fleet location, expressed as an AWS Region code such as <code>us-west-2</code>. </p>"
+    "<p>The fleet location, expressed as an Amazon Web Services Region code such as <code>us-west-2</code>. </p>"
   )
   @as("Location")
   location: option<locationStringModel>,
@@ -919,28 +945,29 @@ type locationList = array<locationStringModel>
             <b>Related actions</b>
          </p>
         <p>
-            <a>CreateFleet</a>
-         </p>")
+            <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateFleet.html\">CreateFleet</a>
+            </p>")
 type locationConfiguration = {
-  @ocaml.doc("<p>An AWS Region code, such as <code>us-west-2</code>. </p>") @as("Location")
+  @ocaml.doc("<p>An Amazon Web Services Region code, such as <code>us-west-2</code>. </p>")
+  @as("Location")
   location: option<locationStringModel>,
 }
 @ocaml.doc("<p>
             <b>This data type is used with the GameLift FleetIQ and game server groups.</b>
          </p>
-        <p>An EC2 launch template that contains configuration settings and game server code to
+        <p>An Amazon EC2 launch template that contains configuration settings and game server code to
             be deployed to all instances in a game server group. The launch template is specified
             when creating a new game server group with <a>CreateGameServerGroup</a>. </p>")
 type launchTemplateSpecification = {
-  @ocaml.doc("<p>The version of the EC2 launch template to use. If no version is specified, the
-            default version will be used. With Amazon EC2, you can specify a default version for a
+  @ocaml.doc("<p>The version of the Amazon EC2 launch template to use. If no version is specified, the
+            default version will be used. With Amazon Elastic Compute Cloud, you can specify a default version for a
             launch template. If none is set, the default is the first version created.</p>")
   @as("Version")
   version: option<launchTemplateVersion>,
-  @ocaml.doc("<p>A readable identifier for an existing EC2 launch template. </p>")
+  @ocaml.doc("<p>A readable identifier for an existing Amazon EC2 launch template. </p>")
   @as("LaunchTemplateName")
   launchTemplateName: option<launchTemplateName>,
-  @ocaml.doc("<p>A unique identifier for an existing EC2 launch template.</p>")
+  @ocaml.doc("<p>A unique identifier for an existing Amazon EC2 launch template.</p>")
   @as("LaunchTemplateId")
   launchTemplateId: option<launchTemplateId>,
 }
@@ -965,10 +992,15 @@ type ipPermission = {
   @as("IpRange")
   ipRange: nonBlankString,
   @ocaml.doc("<p>An ending value for a range of allowed port numbers. Port numbers are end-inclusive.
-            This value must be higher than <code>FromPort</code>.</p>")
+            This value must be higher than <code>FromPort</code>.</p>
+        <p>For fleets using Linux builds, only port 22, 443, 1026-60000 are valid.
+            For fleets using Windows builds, only port 443, 1026-60000 are valid.</p>")
   @as("ToPort")
   toPort: portNumber,
-  @ocaml.doc("<p>A starting value for a range of allowed port numbers.</p>") @as("FromPort")
+  @ocaml.doc("<p>A starting value for a range of allowed port numbers.</p>
+        <p>For fleets using Linux builds, only port 22, 443, 1026-60000 are valid.
+            For fleets using Windows builds, only port 443, 1026-60000 are valid.</p>")
+  @as("FromPort")
   fromPort: portNumber,
 }
 @ocaml.doc("<p>
@@ -983,11 +1015,11 @@ type instanceDefinition = {
             capacity of a game server group. Instance weights are used by GameLift FleetIQ to calculate the
             instance type's cost per unit hour and better identify the most cost-effective options.
             For detailed information on weighting instance capacity, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-weighting.html\">Instance
-                Weighting</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
+                Weighting</a> in the <i>Amazon Elastic Compute Cloud Auto Scaling User Guide</i>.
             Default value is \"1\".</p>")
   @as("WeightedCapacity")
   weightedCapacity: option<weightedCapacity>,
-  @ocaml.doc("<p>An EC2 instance type designation.</p>") @as("InstanceType")
+  @ocaml.doc("<p>An Amazon EC2 instance type designation.</p>") @as("InstanceType")
   instanceType: gameServerGroupInstanceType,
 }
 @ocaml.doc("<p>Set of credentials required to remotely access a fleet instance. Access credentials
@@ -1009,7 +1041,7 @@ type instanceCredentials = {
             <a>DescribeInstances</a>
          </p>")
 type instance = {
-  @ocaml.doc("<p>The fleet location of the instance, expressed as an AWS Region
+  @ocaml.doc("<p>The fleet location of the instance, expressed as an Amazon Web Services Region
             code, such as <code>us-west-2</code>. </p>")
   @as("Location")
   location: option<locationStringModel>,
@@ -1042,7 +1074,7 @@ type instance = {
          </ul>")
   @as("Status")
   status: option<instanceStatus>,
-  @ocaml.doc("<p>EC2 instance type that defines the computing resources of this instance.
+  @ocaml.doc("<p>Amazon EC2 instance type that defines the computing resources of this instance.
     </p>")
   @as("Type")
   type_: option<ec2InstanceType>,
@@ -1147,7 +1179,7 @@ type gameServerInstance = {
   @as("GameServerGroupArn")
   gameServerGroupArn: option<gameServerGroupArn>,
   @ocaml.doc("<p>A developer-defined identifier for the game server group that includes the game
-            server instance. The name is unique for each Region in each AWS account.</p>")
+            server instance. The name is unique for each Region in each Amazon Web Services account.</p>")
   @as("GameServerGroupName")
   gameServerGroupName: option<gameServerGroupName>,
 }
@@ -1226,7 +1258,7 @@ type gameServer = {
   @as("InstanceId")
   instanceId: option<gameServerInstanceId>,
   @ocaml.doc("<p>A custom string that uniquely identifies the game server. Game server IDs are
-            developer-defined and are unique across all game server groups in an AWS
+            developer-defined and are unique across all game server groups in an Amazon Web Services
             account.</p>")
   @as("GameServerId")
   gameServerId: option<gameServerId>,
@@ -1258,7 +1290,7 @@ type gameProperty = {
             <a>DescribeFleetUtilization</a> | <a>DescribeFleetLocationUtilization</a>
          </p>")
 type fleetUtilization = {
-  @ocaml.doc("<p>The fleet location for the fleet utilization information, expressed as an AWS Region
+  @ocaml.doc("<p>The fleet location for the fleet utilization information, expressed as an Amazon Web Services Region
             code, such as <code>us-west-2</code>. </p>")
   @as("Location")
   location: option<locationStringModel>,
@@ -1313,95 +1345,80 @@ type event = {
   @ocaml.doc("<p>Additional information related to the event.</p>") @as("Message")
   message: option<nonEmptyString>,
   @ocaml.doc("<p>The type of event being logged. </p>
+
+        
+        <p>
+            <b>Fleet state transition events:</b>
+         </p>
+        <ul>
+            <li>
+               <p>FLEET_CREATED -- A fleet resource was successfully created with a status of <code>NEW</code>. Event messaging includes the fleet ID.</p>
+            </li>
+            <li>
+               <p>FLEET_STATE_DOWNLOADING -- Fleet status changed from <code>NEW</code> to <code>DOWNLOADING</code>. The compressed build has started downloading to a fleet instance for installation.</p>
+            </li>
+            <li>
+               <p>FLEET_STATE_VALIDATING -- Fleet status changed from <code>DOWNLOADING</code> to <code>VALIDATING</code>. GameLift has successfully downloaded the build and is now validating the build files.</p>
+            </li>
+            <li>
+               <p>FLEET_STATE_BUILDING -- Fleet status changed from <code>VALIDATING</code> to <code>BUILDING</code>. GameLift has successfully verified the build files and is now running the installation scripts.</p>
+            </li>
+            <li>
+               <p>FLEET_STATE_ACTIVATING -- Fleet status changed from <code>BUILDING</code> to <code>ACTIVATING</code>. GameLift is trying to launch an instance and test the connectivity between the build and the GameLift Service via the Server SDK.</p>
+            </li>
+            <li>
+               <p>FLEET_STATE_ACTIVE -- The fleet's status changed from <code>ACTIVATING</code> to <code>ACTIVE</code>. The fleet is now ready to host game sessions.</p>
+            </li>
+            <li>
+               <p>FLEET_STATE_ERROR -- The Fleet's status changed to <code>ERROR</code>.  Describe the fleet event message for more details.</p>
+            </li>
+         </ul>
+    
+        
         <p>
             <b>Fleet creation events (ordered by fleet creation activity):</b>
          </p>
         <ul>
             <li>
-                <p>FLEET_CREATED -- A fleet resource was successfully created with a status of
-                        <code>NEW</code>. Event messaging includes the fleet ID.</p>
+               <p>FLEET_BINARY_DOWNLOAD_FAILED -- The build failed to download to the fleet instance.</p>
             </li>
             <li>
-                <p>FLEET_STATE_DOWNLOADING -- Fleet status changed from <code>NEW</code> to
-                        <code>DOWNLOADING</code>. The compressed build has started downloading to a
-                    fleet instance for installation.</p>
+               <p>FLEET_CREATION_EXTRACTING_BUILD -- The game server build was successfully downloaded to an instance, and the build files are now being extracted from the uploaded build and saved to an instance. Failure at this stage prevents a fleet from moving to ACTIVE status. Logs for this stage display a list of the files that are extracted and saved on the instance. Access the logs by using the URL in <i>PreSignedLogUrl</i>.</p>
             </li>
             <li>
-                <p> FLEET_BINARY_DOWNLOAD_FAILED -- The build failed to download to the fleet
-                    instance.</p>
+               <p>FLEET_CREATION_RUNNING_INSTALLER -- The game server build files were successfully extracted, and the GameLift is now running the build's install script (if one is included). Failure in this stage prevents a fleet from moving to ACTIVE status. Logs for this stage list the installation steps and whether or not the install completed successfully. Access the logs by using the URL in <i>PreSignedLogUrl</i>.</p>
             </li>
             <li>
-                <p>FLEET_CREATION_EXTRACTING_BUILD – The game server build was successfully
-                    downloaded to an instance, and the build files are now being extracted from the
-                    uploaded build and saved to an instance. Failure at this stage prevents a fleet
-                    from moving to <code>ACTIVE</code> status. Logs for this stage display a list of
-                    the files that are extracted and saved on the instance. Access the logs by using
-                    the URL in <i>PreSignedLogUrl</i>.</p>
+               <p>FLEET_CREATION_VALIDATING_RUNTIME_CONFIG -- The build process was successful, and the GameLift is now verifying that the game server launch paths, which are specified in the fleet's runtime configuration, exist. If any listed launch path exists, GameLift tries to launch a game server process and waits for the process to report ready. Failures in this stage prevent a fleet from moving to <code>ACTIVE</code> status. Logs for this stage list the launch paths in the runtime configuration and indicate whether each is found. Access the logs by using the URL in <i>PreSignedLogUrl</i>.</p>
             </li>
             <li>
-                <p>FLEET_CREATION_RUNNING_INSTALLER – The game server build files were
-                    successfully extracted, and the GameLift is now running the build's install
-                    script (if one is included). Failure in this stage prevents a fleet from moving
-                    to <code>ACTIVE</code> status. Logs for this stage list the installation steps
-                    and whether or not the install completed successfully. Access the logs by using
-                    the URL in <i>PreSignedLogUrl</i>. </p>
+               <p>FLEET_VALIDATION_LAUNCH_PATH_NOT_FOUND -- Validation of the runtime configuration failed because the executable specified in a launch path does not exist on the instance.</p>
             </li>
             <li>
-                <p>FLEET_CREATION_VALIDATING_RUNTIME_CONFIG -- The build process was successful,
-                    and the GameLift is now verifying that the game server launch paths, which are
-                    specified in the fleet's runtime configuration, exist. If any listed launch path
-                    exists, GameLift tries to launch a game server process and waits for the process
-                    to report ready. Failures in this stage prevent a fleet from moving to
-                        <code>ACTIVE</code> status. Logs for this stage list the launch paths in the
-                    runtime configuration and indicate whether each is found. Access the logs by
-                    using the URL in <i>PreSignedLogUrl</i>.
-                    
-                </p>
+               <p>FLEET_VALIDATION_EXECUTABLE_RUNTIME_FAILURE -- Validation of the runtime configuration failed because the executable specified in a launch path failed to run on the fleet instance.</p>
             </li>
             <li>
-                <p>FLEET_STATE_VALIDATING -- Fleet status changed from
-                        <code>DOWNLOADING</code> to <code>VALIDATING</code>.</p>
+               <p>FLEET_VALIDATION_TIMED_OUT -- Validation of the fleet at the end of creation timed out.  Try fleet creation again.</p>
             </li>
             <li>
-                <p> FLEET_VALIDATION_LAUNCH_PATH_NOT_FOUND -- Validation of the runtime
-                    configuration failed because the executable specified in a launch path does not
-                    exist on the instance.</p>
+               <p>FLEET_ACTIVATION_FAILED -- The fleet failed to successfully complete one of the steps in the fleet activation process. This event code indicates that the game build was successfully downloaded to a fleet instance, built, and validated, but was not able to start a server process. For more information, see <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html#fleets-creating-debug-creation\">Debug Fleet Creation Issues</a>.</p>
             </li>
             <li>
-                <p>FLEET_STATE_BUILDING -- Fleet status changed from <code>VALIDATING</code>
-                    to <code>BUILDING</code>.</p>
+               <p>FLEET_ACTIVATION_FAILED_NO_INSTANCES -- Fleet creation was not able to obtain any instances based on the input fleet attributes.  Try again at a different time or choose a different combination of fleet attributes such as fleet type, instance type, etc.</p>
             </li>
             <li>
-                <p>FLEET_VALIDATION_EXECUTABLE_RUNTIME_FAILURE -- Validation of the runtime
-                    configuration failed because the executable specified in a launch path failed to
-                    run on the fleet instance.</p>
-            </li>
-            <li>
-                <p>FLEET_STATE_ACTIVATING -- Fleet status changed from <code>BUILDING</code>
-                    to <code>ACTIVATING</code>. </p>
-            </li>
-            <li>
-                <p> FLEET_ACTIVATION_FAILED - The fleet failed to successfully complete one of
-                    the steps in the fleet activation process. This event code indicates that the
-                    game build was successfully downloaded to a fleet instance, built, and
-                    validated, but was not able to start a server process. Learn more at 
-                    <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html#fleets-creating-debug-creation\"> Debug Fleet
-                        Creation Issues</a>
-               </p>
-            </li>
-            <li>
-                <p>FLEET_STATE_ACTIVE -- The fleet's status changed from
-                        <code>ACTIVATING</code> to <code>ACTIVE</code>. The fleet is now ready to
-                    host game sessions.</p>
+               <p>FLEET_INITIALIZATION_FAILED -- A generic exception occurred during fleet creation.  Describe the fleet event message for more details.</p>
             </li>
          </ul>
+        
+        
         <p>
             <b>VPC peering events:</b>
          </p>
         <ul>
             <li>
                 <p>FLEET_VPC_PEERING_SUCCEEDED -- A VPC peering connection has been
-                    established between the VPC for an GameLift fleet and a VPC in your AWS
+                    established between the VPC for an GameLift fleet and a VPC in your Amazon Web Services
                     account.</p>
             </li>
             <li>
@@ -1409,7 +1426,7 @@ type event = {
                     Event details and status information (see <a>DescribeVpcPeeringConnections</a>) provide additional detail. A
                     common reason for peering failure is that the two VPCs have overlapping CIDR
                     blocks of IPv4 addresses. To resolve this, change the CIDR block for the VPC in
-                    your AWS account. For more information on VPC peering failures, see <a href=\"https://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide/invalid-peering-configurations.html\">https://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide/invalid-peering-configurations.html</a>
+                    your Amazon Web Services account. For more information on VPC peering failures, see <a href=\"https://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide/invalid-peering-configurations.html\">https://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide/invalid-peering-configurations.html</a>
                </p>
             </li>
             <li>
@@ -1417,6 +1434,8 @@ type event = {
                     deleted.</p>
             </li>
          </ul>
+
+        
         <p>
             <b>Spot instance events:</b>
          </p>
@@ -1426,6 +1445,46 @@ type event = {
                     two-minute notification.</p>
             </li>
          </ul>
+        
+        
+        <p>
+            <b>Spot process events:</b>
+         </p>
+        <ul>
+            <li>
+               <p>SERVER_PROCESS_INVALID_PATH -- The game server executable or script could not be found based on the Fleet runtime configuration.  Check that the launch path is correct based on the operating system of the Fleet.</p>
+            </li>
+            <li>
+               <p>SERVER_PROCESS_SDK_INITIALIZATION_TIMEOUT -- The server process did not call InitSDK() within the time expected.  Check your game session log to see why InitSDK() was not called in time.</p>
+            </li>
+            <li>
+               <p>SERVER_PROCESS_PROCESS_READY_TIMEOUT -- The server process did not call ProcessReady() within the time expected after calling InitSDK().  Check your game session log to see why ProcessReady() was not called in time.</p>
+            </li>
+            <li>
+               <p>SERVER_PROCESS_CRASHED -- The server process exited without calling ProcessEnding().  Check your game session log to see why ProcessEnding() was not called.</p>
+            </li>
+            <li>
+               <p>SERVER_PROCESS_TERMINATED_UNHEALTHY -- The server process did not report a valid health check for too long and was therefore terminated by GameLift.  Check your game session log to see if the thread became stuck processing a synchronous task for too long.</p>
+            </li>
+            <li>
+               <p>SERVER_PROCESS_FORCE_TERMINATED -- The server process did not exit cleanly after OnProcessTerminate() was sent within the time expected.  Check your game session log to see why termination took longer than expected.</p>
+            </li>
+            <li>
+               <p>SERVER_PROCESS_PROCESS_EXIT_TIMEOUT -- The server process did not exit cleanly within the time expected after calling ProcessEnding().  Check your game session log to see why termination took longer than expected.</p>
+            </li>
+         </ul>
+        
+        
+        <p>
+            <b>Game session events:</b>
+         </p>
+        <ul>
+            <li>
+               <p>GAME_SESSION_ACTIVATION_TIMEOUT -- GameSession failed to activate within the expected time.  Check your game session log to see why ActivateGameSession() took longer to complete than expected.</p>
+            </li>
+         </ul>
+        
+        
         <p>
             <b>Other fleet events:</b>
          </p>
@@ -1455,8 +1514,8 @@ type event = {
   @ocaml.doc("<p>A unique identifier for a fleet event.</p>") @as("EventId")
   eventId: option<nonZeroAndMaxString>,
 }
-@ocaml.doc("<p>The GameLift service limits for an EC2 instance type and current utilization. GameLift
-            allows AWS accounts a maximum number of instances, per instance type, per AWS Region or
+@ocaml.doc("<p>The GameLift service limits for an Amazon EC2 instance type and current utilization. GameLift
+            allows Amazon Web Services accounts a maximum number of instances, per instance type, per Amazon Web Services Region or
             location, for use with GameLift. You can request an limit increase for your account by
             using the <b>Service limits</b> page in the GameLift
             console.</p>
@@ -1467,22 +1526,23 @@ type event = {
             <a>DescribeEC2InstanceLimits</a>
          </p>")
 type ec2InstanceLimit = {
-  @ocaml.doc("<p>An AWS Region code, such as <code>us-west-2</code>. </p>") @as("Location")
+  @ocaml.doc("<p>An Amazon Web Services Region code, such as <code>us-west-2</code>. </p>")
+  @as("Location")
   location: option<locationStringModel>,
   @ocaml.doc("<p>The number of instances that is allowed for the specified instance type and
             location.</p>")
   @as("InstanceLimit")
   instanceLimit: option<wholeNumber>,
   @ocaml.doc("<p>The number of instances for the specified type and location that are currently being
-            used by the AWS account. </p>")
+            used by the Amazon Web Services account. </p>")
   @as("CurrentInstances")
   currentInstances: option<wholeNumber>,
-  @ocaml.doc("<p>The name of an EC2 instance type. See <a href=\"http://aws.amazon.com/ec2/instance-types/\">Amazon EC2 Instance Types</a> for detailed
+  @ocaml.doc("<p>The name of an Amazon EC2 instance type. See <a href=\"http://aws.amazon.com/ec2/instance-types/\">Amazon Elastic Compute Cloud Instance Types</a> for detailed
             descriptions. </p>")
   @as("EC2InstanceType")
   ec2InstanceType: option<ec2InstanceType>,
 }
-@ocaml.doc("<p>Resource capacity settings. Fleet capacity is measured in EC2 instances. Pending and
+@ocaml.doc("<p>Resource capacity settings. Fleet capacity is measured in Amazon EC2 instances. Pending and
             terminating counts are non-zero when the fleet capacity is adjusting to a scaling event
             or if access to resources is temporarily affected.</p>
         <p>EC2 instance counts are part of <a>FleetCapacity</a>.</p>")
@@ -1569,7 +1629,8 @@ type build = {
   @as("OperatingSystem")
   operatingSystem: option<operatingSystem>,
   @ocaml.doc("<p>File size of the uploaded game build, expressed in bytes. When the build status is
-                <code>INITIALIZED</code>, this value is 0.</p>")
+            <code>INITIALIZED</code> or when using a custom Amazon S3 storage location, 
+            this value is 0.</p>")
   @as("SizeOnDisk")
   sizeOnDisk: option<positiveLong>,
   @ocaml.doc("<p>Current status of the build.</p>
@@ -1611,7 +1672,7 @@ type build = {
   buildArn: option<buildArn>,
   @ocaml.doc("<p>A unique identifier for the build.</p>") @as("BuildId") buildId: option<buildId>,
 }
-@ocaml.doc("<p>Temporary access credentials used for uploading game build files to Amazon GameLift. They
+@ocaml.doc("<p>Temporary access credentials used for uploading game build files to Amazon Web Services. They
             are valid for a limited time. If they expire before you upload your game build, get a
             new set by calling <a>RequestUploadCredentials</a>.</p>")
 type awsCredentials = {
@@ -1619,15 +1680,15 @@ type awsCredentials = {
             credentials.</p>")
   @as("SessionToken")
   sessionToken: option<nonEmptyString>,
-  @ocaml.doc("<p>Temporary secret key allowing access to the Amazon GameLift S3 account.</p>")
+  @ocaml.doc("<p>Temporary secret key allowing access to the Amazon Web Services S3 account.</p>")
   @as("SecretAccessKey")
   secretAccessKey: option<nonEmptyString>,
-  @ocaml.doc("<p>Temporary key allowing access to the Amazon GameLift S3 account.</p>")
+  @ocaml.doc("<p>Temporary key allowing access to the Amazon Web Services S3 account.</p>")
   @as("AccessKeyId")
   accessKeyId: option<nonEmptyString>,
 }
-@ocaml.doc("<p>Represents a peering connection between a VPC on one of your AWS accounts and the
-            VPC for your Amazon GameLift fleets. This record may be for an active peering connection or a
+@ocaml.doc("<p>Represents a peering connection between a VPC on one of your Amazon Web Services accounts and the
+            VPC for your Amazon Web Services fleets. This record may be for an active peering connection or a
             pending connection that has not yet been established.</p>
         <p>
             <b>Related actions</b>
@@ -1642,14 +1703,14 @@ type awsCredentials = {
                     <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets\">All APIs by task</a>
          </p>")
 type vpcPeeringConnection = {
-  @ocaml.doc("<p>A unique identifier for the VPC that contains the Amazon GameLift fleet for this
-            connection. This VPC is managed by Amazon GameLift and does not appear in your AWS account.
+  @ocaml.doc("<p>A unique identifier for the VPC that contains the Amazon Web Services fleet for this
+            connection. This VPC is managed by Amazon Web Services and does not appear in your Amazon Web Services account.
         </p>")
   @as("GameLiftVpcId")
   gameLiftVpcId: option<nonZeroAndMaxString>,
   @ocaml.doc("<p>A unique identifier for a VPC with resources to be accessed by your GameLift fleet. The
             VPC must be in the same Region as your fleet. To look up a VPC ID, use the 
-            <a href=\"https://console.aws.amazon.com/vpc/\">VPC Dashboard</a> in the AWS Management Console. 
+            <a href=\"https://console.aws.amazon.com/vpc/\">VPC Dashboard</a> in the Amazon Web Services Management Console. 
             Learn more about VPC peering in <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html\">VPC Peering with GameLift Fleets</a>.</p>")
   @as("PeerVpcId")
   peerVpcId: option<nonZeroAndMaxString>,
@@ -1673,7 +1734,7 @@ type vpcPeeringConnection = {
   @as("FleetArn")
   fleetArn: option<fleetArn>,
   @ocaml.doc(
-    "<p>A unique identifier for the fleet. This ID determines the ID of the Amazon GameLift VPC for your fleet.</p>"
+    "<p>A unique identifier for the fleet. This ID determines the ID of the Amazon Web Services VPC for your fleet.</p>"
   )
   @as("FleetId")
   fleetId: option<fleetId>,
@@ -1739,7 +1800,7 @@ type script = {
          </p>")
 type scalingPolicy = {
   @ocaml.doc("<p>
-            
+            The fleet location.
         </p>")
   @as("Location")
   location: option<locationStringModel>,
@@ -1760,8 +1821,8 @@ type scalingPolicy = {
                 <i>ScalingAdjustment</i>.</p>")
   @as("PolicyType")
   policyType: option<policyType>,
-  @ocaml.doc("<p>Name of the Amazon GameLift-defined metric that is used to trigger a scaling adjustment. For
-            detailed descriptions of fleet metrics, see <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/monitoring-cloudwatch.html\">Monitor Amazon GameLift
+  @ocaml.doc("<p>Name of the Amazon Web Services-defined metric that is used to trigger a scaling adjustment. For
+            detailed descriptions of fleet metrics, see <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/monitoring-cloudwatch.html\">Monitor Amazon Web Services
                 with Amazon CloudWatch</a>. </p>
         <ul>
             <li>
@@ -1949,7 +2010,7 @@ type scalingPolicy = {
 type priorityConfiguration = {
   @ocaml.doc("<p>The prioritization order to use for fleet locations, when the
                 <code>PriorityOrder</code> property includes <code>LOCATION</code>. Locations are
-            identified by AWS Region codes such as <code>us-west-2</code>. Each location can only be
+            identified by Amazon Web Services Region codes such as <code>us-west-2</code>. Each location can only be
             listed once. </p>")
   @as("LocationOrder")
   locationOrder: option<locationList>,
@@ -2060,21 +2121,23 @@ type fleetUtilizationList = array<fleetUtilization>
             <b>Related actions</b>
          </p>
         <p>
-            <a>DescribeFleetCapacity</a> | 
-            <a>DescribeFleetLocationCapacity</a> | 
-            <a>UpdateFleetCapacity</a>
+            <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetCapacity.html\">DescribeFleetCapacity</a>
+            | 
+            <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetLocationCapacity.html\">DescribeFleetLocationCapacity</a>
+            | 
+            <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateFleetCapacity.html\">UpdateFleetCapacity</a>
         </p>")
 type fleetCapacity = {
-  @ocaml.doc("<p>The fleet location for the instance count information, expressed as an AWS Region
+  @ocaml.doc("<p>The fleet location for the instance count information, expressed as an Amazon Web Services Region
             code, such as <code>us-west-2</code>. </p>")
   @as("Location")
   location: option<locationStringModel>,
   @ocaml.doc("<p>The current instance count and capacity settings for the fleet location. </p>")
   @as("InstanceCounts")
   instanceCounts: option<ec2InstanceCounts>,
-  @ocaml.doc("<p>The EC2 instance type that is used for all instances in a fleet. The instance type
+  @ocaml.doc("<p>The Amazon EC2 instance type that is used for all instances in a fleet. The instance type
             determines the computing resources in use, including CPU, memory, storage, and
-            networking capacity. See <a href=\"http://aws.amazon.com/ec2/instance-types/\">Amazon EC2
+            networking capacity. See <a href=\"http://aws.amazon.com/ec2/instance-types/\">Amazon Elastic Compute Cloud
                 Instance Types</a> for detailed descriptions.</p>")
   @as("InstanceType")
   instanceType: option<ec2InstanceType>,
@@ -2098,10 +2161,10 @@ type fleetAttributes = {
   @ocaml.doc("<p>Indicates whether a TLS/SSL certificate was generated for the fleet. </p>")
   @as("CertificateConfiguration")
   certificateConfiguration: option<certificateConfiguration>,
-  @ocaml.doc("<p>A unique identifier for an AWS IAM role that manages access to your AWS services. 
+  @ocaml.doc("<p>A unique identifier for an IAM role that manages access to your Amazon Web Services services. 
         With an instance role ARN set, any application that runs on an instance in this fleet can assume the role, 
         including install scripts, server processes, and daemons (background processes). Create a role or look up a role's 
-        ARN by using the <a href=\"https://console.aws.amazon.com/iam/\">IAM dashboard</a> in the AWS Management Console.
+        ARN by using the <a href=\"https://console.aws.amazon.com/iam/\">IAM dashboard</a> in the Amazon Web Services Management Console.
         Learn more about using on-box credentials for your game servers at 
         <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html\">
         Access external resources from a game server</a>.</p>")
@@ -2153,13 +2216,13 @@ type fleetAttributes = {
             parameters are now defined  using the fleet's <a>RuntimeConfiguration</a>
             parameter. Requests that use this parameter instead continue to be valid.</p>")
   @as("ServerLaunchParameters")
-  serverLaunchParameters: option<nonZeroAndMaxString>,
+  serverLaunchParameters: option<launchParametersStringModel>,
   @ocaml.doc("<p>
             <b>This parameter is no longer used.</b> Server launch paths
             are now defined  using the fleet's <a>RuntimeConfiguration</a> parameter.
             Requests that use this parameter instead continue to be valid.</p>")
   @as("ServerLaunchPath")
-  serverLaunchPath: option<nonZeroAndMaxString>,
+  serverLaunchPath: option<launchPathStringModel>,
   @ocaml.doc("<p> The Amazon Resource Name (<a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html\">ARN</a>) associated with the GameLift script resource that is deployed on instances
             in this fleet. In a GameLift script ARN, the resource ID matches the
                 <code>ScriptId</code> value.</p>")
@@ -2233,9 +2296,9 @@ type fleetAttributes = {
   name: option<nonZeroAndMaxString>,
   @ocaml.doc("<p>A human-readable description of the fleet.</p>") @as("Description")
   description: option<nonZeroAndMaxString>,
-  @ocaml.doc("<p>The EC2 instance type that determines the computing resources of each instance in
+  @ocaml.doc("<p>The Amazon EC2 instance type that determines the computing resources of each instance in
             the fleet. Instance type defines the CPU, memory, storage, and networking capacity. See
-                <a href=\"http://aws.amazon.com/ec2/instance-types/\">Amazon EC2 Instance Types</a>
+                <a href=\"http://aws.amazon.com/ec2/instance-types/\">Amazon Elastic Compute Cloud Instance Types</a>
             for detailed descriptions.</p>")
   @as("InstanceType")
   instanceType: option<ec2InstanceType>,
@@ -2254,7 +2317,7 @@ type fleetAttributes = {
             some, but not all of these locations.</p>
         <p>Filter configurations are part of a <a>GameSessionQueue</a>.</p>")
 type filterConfiguration = {
-  @ocaml.doc("<p> A list of locations to allow game session placement in, in the form of AWS Region
+  @ocaml.doc("<p> A list of locations to allow game session placement in, in the form of Amazon Web Services Region
             codes such as <code>us-west-2</code>. </p>")
   @as("AllowedLocations")
   allowedLocations: option<locationList>,
@@ -2272,7 +2335,7 @@ type attributeValue = {
             is 100 characters. </p>")
   @as("SDM")
   sdm: option<stringDoubleMap>,
-  @ocaml.doc("<p>For a list of up to 10 strings. Maximum length for each string is 100 characters.
+  @ocaml.doc("<p>For a list of up to 100 strings. Maximum length for each string is 100 characters.
             Duplicate values are not recognized; all occurrences of the repeated value after the
             first of a repeated value are ignored.</p>")
   @as("SL")
@@ -2473,8 +2536,12 @@ type locationAttributesList = array<locationAttributes>
             <b>Related actions</b>
          </p>
         <p>
-            <a>CreateGameSessionQueue</a> | <a>DescribeGameSessionQueues</a> | <a>UpdateGameSessionQueue</a>
-         </p>")
+            <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateGameSessionQueue.html\">CreateGameSessionQueue</a>
+            | 
+            <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeGameSessionQueues.html\">DescribeGameSessionQueues</a>
+            | 
+            <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateGameSessionQueue.html\">UpdateGameSessionQueue</a>
+        </p>")
 type gameSessionQueue = {
   @ocaml.doc("<p>An SNS topic ARN that is set up to receive game session placement notifications. See <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/queue-notification.html\">
             Setting up notifications for game session placement</a>.</p>")
@@ -2491,7 +2558,7 @@ type gameSessionQueue = {
   @as("PriorityConfiguration")
   priorityConfiguration: option<priorityConfiguration>,
   @ocaml.doc("<p>A list of locations where a queue is allowed to place new game sessions. Locations 
-            are specified in the form of AWS Region codes, such as <code>us-west-2</code>. If this parameter is 
+            are specified in the form of Amazon Web Services Region codes, such as <code>us-west-2</code>. If this parameter is 
             not set, game sessions can be placed in any queue location. </p>")
   @as("FilterConfiguration")
   filterConfiguration: option<filterConfiguration>,
@@ -2593,7 +2660,7 @@ type gameSessionPlacement = {
   @as("StartTime")
   startTime: option<timestamp_>,
   @ocaml.doc(
-    "<p>A set of values, expressed in milliseconds, that indicates the amount of latency that a player experiences when connected to AWS Regions.</p>"
+    "<p>A set of values, expressed in milliseconds, that indicates the amount of latency that a player experiences when connected to @aws; Regions.</p>"
   )
   @as("PlayerLatencies")
   playerLatencies: option<playerLatencyList>,
@@ -2729,7 +2796,7 @@ type gameSessionConnectionInfo = {
          </p>")
 type gameSession = {
   @ocaml.doc("<p>The fleet location where the game session is running. This value might specify the
-            fleet's home Region or a remote location. Location is expressed as an AWS Region code
+            fleet's home Region or a remote location. Location is expressed as an Amazon Web Services Region code
             such as <code>us-west-2</code>. </p>")
   @as("Location")
   location: option<locationStringModel>,
@@ -2738,11 +2805,12 @@ type gameSession = {
             used, it contains data on all players assigned to the match, including player attributes
             and team assignments. For more details on matchmaker data, see <a href=\"https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-server.html#match-server-data\">Match
                 Data</a>. Matchmaker data is useful when requesting match backfills, and is
-            updated whenever new players are added during a successful backfill (see <a>StartMatchBackfill</a>). </p>")
+            updated whenever new players are added during a successful backfill (see 
+            <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_StartMatchBackfill.html\">StartMatchBackfill</a>). </p>")
   @as("MatchmakerData")
   matchmakerData: option<matchmakerData>,
   @ocaml.doc("<p>A set of custom game session properties, formatted as a single string value. This data is passed to a game server process in the 
-    <a>GameSession</a> object with a request to start a new game session.</p>")
+    <a>GameSession</a> object with a request to start a new game session (see <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession\">Start a Game Session</a>).</p>")
   @as("GameSessionData")
   gameSessionData: option<largeGameSessionData>,
   @ocaml.doc("<p>A unique identifier for a player. This ID is used to enforce a resource protection policy (if one
@@ -2777,7 +2845,7 @@ type gameSession = {
   @as("IpAddress")
   ipAddress: option<ipAddress>,
   @ocaml.doc("<p>A set of custom properties for a game session, formatted as key:value pairs. These properties are passed to a game server process in the 
-    <a>GameSession</a> object with a request to start a new game session. You can search for active game sessions based on this custom data
+    <a>GameSession</a> object with a request to start a new game session (see <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession\">Start a Game Session</a>). You can search for active game sessions based on this custom data
             with <a>SearchGameSessions</a>.</p>")
   @as("GameProperties")
   gameProperties: option<gamePropertyList>,
@@ -2830,7 +2898,7 @@ type gameSession = {
             <b>This data type is used with the GameLift FleetIQ and game server groups.</b>
          </p>
         <p>Properties that describe a game server group resource. A game server group manages
-            certain properties related to a corresponding EC2 Auto Scaling group. </p>
+            certain properties related to a corresponding Amazon EC2 Auto Scaling group. </p>
         <p>A game server group is created by a successful call to
                 <code>CreateGameServerGroup</code> and deleted by calling
                 <code>DeleteGameServerGroup</code>. Game server group activity can be temporarily
@@ -2877,7 +2945,7 @@ type gameServerGroup = {
             <li>
                 <p>
                   <code>ACTIVATING</code> - GameLift FleetIQ is setting up a game server group, which
-                    includes creating an Auto Scaling group in your AWS account. </p>
+                    includes creating an Auto Scaling group in your Amazon Web Services account. </p>
             </li>
             <li>
                 <p>
@@ -2907,7 +2975,7 @@ type gameServerGroup = {
          </ul>")
   @as("Status")
   status: option<gameServerGroupStatus>,
-  @ocaml.doc("<p>A generated unique ID for the EC2 Auto Scaling group that is associated with this
+  @ocaml.doc("<p>A generated unique ID for the Amazon EC2 Auto Scaling group that is associated with this
             game server group.</p>")
   @as("AutoScalingGroupArn")
   autoScalingGroupArn: option<autoScalingGroupArn>,
@@ -2916,7 +2984,7 @@ type gameServerGroup = {
             be terminated during a scale-down event, causing players to be dropped from the game. 
             Protected instances cannot be terminated while there are active game servers running except 
             in the event of a forced game server group deletion (see ). An exception to this is with Spot 
-            Instances, which can be terminated by AWS regardless of protection status. </p>")
+            Instances, which can be terminated by Amazon Web Services regardless of protection status. </p>")
   @as("GameServerProtectionPolicy")
   gameServerProtectionPolicy: option<gameServerProtectionPolicy>,
   @ocaml.doc("<p>Indicates how GameLift FleetIQ balances the use of Spot Instances and On-Demand Instances in the
@@ -2947,18 +3015,18 @@ type gameServerGroup = {
          </ul>")
   @as("BalancingStrategy")
   balancingStrategy: option<balancingStrategy>,
-  @ocaml.doc("<p>The set of EC2 instance types that GameLift FleetIQ can use when balancing and automatically
+  @ocaml.doc("<p>The set of Amazon EC2 instance types that GameLift FleetIQ can use when balancing and automatically
             scaling instances in the corresponding Auto Scaling group. </p>")
   @as("InstanceDefinitions")
   instanceDefinitions: option<instanceDefinitions>,
   @ocaml.doc("<p>The Amazon Resource Name (<a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html\">ARN</a>) for an IAM role that
-            allows Amazon GameLift to access your EC2 Auto Scaling groups.</p>")
+            allows Amazon Web Services to access your Amazon EC2 Auto Scaling groups.</p>")
   @as("RoleArn")
   roleArn: option<iamRoleArn>,
   @ocaml.doc("<p>A generated unique ID for the game server group.</p>") @as("GameServerGroupArn")
   gameServerGroupArn: option<gameServerGroupArn>,
   @ocaml.doc("<p>A developer-defined identifier for the game server group. The name is unique for each
-            Region in each AWS account.</p>")
+            Region in each Amazon Web Services account.</p>")
   @as("GameServerGroupName")
   gameServerGroupName: option<gameServerGroupName>,
 }
@@ -2969,7 +3037,7 @@ type aliasList = array<alias>
             has a player ID, attributes, and may have latency data. Team information is added after
             a match has been successfully completed.</p>")
 type player = {
-  @ocaml.doc("<p>A set of values, expressed in milliseconds, that indicates the amount of latency that a player experiences when connected to AWS Regions. If this property is present, FlexMatch considers placing the match only
+  @ocaml.doc("<p>A set of values, expressed in milliseconds, that indicates the amount of latency that a player experiences when connected to @aws; Regions. If this property is present, FlexMatch considers placing the match only
             in Regions for which latency is reported. </p>
         <p>If a matchmaker has a rule that evaluates player latency, players must report
             latency in order to be matched. If no latency is reported in this scenario, FlexMatch
@@ -3125,9 +3193,9 @@ type matchmakingTicket = {
   ticketId: option<matchmakingIdStringModel>,
 }
 type matchmakingTicketList = array<matchmakingTicket>
-@ocaml.doc("<fullname>Amazon GameLift Service</fullname>
-        <p>GameLift provides solutions for hosting session-based multiplayer game servers in the
-            cloud, including tools for deploying, operating, and scaling game servers. Built on AWS
+@ocaml.doc("<fullname>GameLift Service</fullname>
+        <p>Amazon Web Services provides solutions for hosting session-based multiplayer game servers in the
+            cloud, including tools for deploying, operating, and scaling game servers. Built on Amazon Web Services
             global computing infrastructure, GameLift helps you deliver high-performance,
             high-reliability, low-cost game servers while dynamically scaling your resource usage to
             meet player demand. </p>
@@ -3166,8 +3234,8 @@ type matchmakingTicketList = array<matchmakingTicket>
         <p>
             <b>About this API Reference</b>
          </p>
-        <p>This reference guide describes the low-level service API for Amazon GameLift. With each topic
-            in this guide, you can find links to language-specific SDK guides and the AWS CLI
+        <p>This reference guide describes the low-level service API for Amazon Web Services. With each topic
+            in this guide, you can find links to language-specific SDK guides and the Amazon Web Services CLI
             reference. Useful links:</p>
         <ul>
             <li>
@@ -3207,7 +3275,7 @@ module UpdateFleetCapacity = {
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
   type request = {
     @ocaml.doc("<p>The name of a remote location to update fleet capacity settings for, in the form of an
-            AWS Region code such as <code>us-west-2</code>.</p>")
+            Amazon Web Services Region code such as <code>us-west-2</code>.</p>")
     @as("Location")
     location: option<locationStringModel>,
     @ocaml.doc("<p>The maximum number of instances that are allowed in the specified fleet location. If
@@ -3218,7 +3286,7 @@ module UpdateFleetCapacity = {
             this parameter is not set, the default is 0.</p>")
     @as("MinSize")
     minSize: option<wholeNumber>,
-    @ocaml.doc("<p>The number of EC2 instances you want to maintain in the specified fleet location.
+    @ocaml.doc("<p>The number of Amazon EC2 instances you want to maintain in the specified fleet location.
             This value must fall between the minimum and maximum size limits.</p>")
     @as("DesiredInstances")
     desiredInstances: option<wholeNumber>,
@@ -3229,7 +3297,7 @@ module UpdateFleetCapacity = {
   }
   @ocaml.doc("<p>Represents the returned data in response to a request operation.</p>")
   type response = {
-    @ocaml.doc("<p>The remote location being updated, expressed as an AWS Region code, 
+    @ocaml.doc("<p>The remote location being updated, expressed as an Amazon Web Services Region code, 
             such as <code>us-west-2</code>.</p>")
     @as("Location")
     location: option<locationStringModel>,
@@ -3260,7 +3328,7 @@ module StopMatchmaking = {
     @ocaml.doc("<p>A unique identifier for a matchmaking ticket.</p>") @as("TicketId")
     ticketId: matchmakingIdStringModel,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-gamelift") @new external new: request => t = "StopMatchmakingCommand"
   let make = (~ticketId, ()) => new({ticketId: ticketId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -3324,7 +3392,7 @@ module DeregisterGameServer = {
     @as("GameServerGroupName")
     gameServerGroupName: gameServerGroupNameOrArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-gamelift") @new
   external new: request => t = "DeregisterGameServerCommand"
   let make = (~gameServerId, ~gameServerGroupName, ()) =>
@@ -3346,7 +3414,7 @@ module DeleteVpcPeeringConnection = {
     @as("FleetId")
     fleetId: fleetId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-gamelift") @new
   external new: request => t = "DeleteVpcPeeringConnectionCommand"
   let make = (~vpcPeeringConnectionId, ~fleetId, ()) =>
@@ -3360,16 +3428,16 @@ module DeleteVpcPeeringAuthorization = {
   type request = {
     @ocaml.doc("<p>A unique identifier for a VPC with resources to be accessed by your GameLift fleet. The
             VPC must be in the same Region as your fleet. To look up a VPC ID, use the 
-            <a href=\"https://console.aws.amazon.com/vpc/\">VPC Dashboard</a> in the AWS Management Console. 
+            <a href=\"https://console.aws.amazon.com/vpc/\">VPC Dashboard</a> in the Amazon Web Services Management Console. 
             Learn more about VPC peering in <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html\">VPC Peering with GameLift Fleets</a>.</p>")
     @as("PeerVpcId")
     peerVpcId: nonZeroAndMaxString,
-    @ocaml.doc("<p>A unique identifier for the AWS account that you use to manage your GameLift fleet. 
-            You can find your Account ID in the AWS Management Console under account settings.</p>")
+    @ocaml.doc("<p>A unique identifier for the Amazon Web Services account that you use to manage your GameLift fleet. 
+            You can find your Account ID in the Amazon Web Services Management Console under account settings.</p>")
     @as("GameLiftAwsAccountId")
     gameLiftAwsAccountId: nonZeroAndMaxString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-gamelift") @new
   external new: request => t = "DeleteVpcPeeringAuthorizationCommand"
   let make = (~peerVpcId, ~gameLiftAwsAccountId, ()) =>
@@ -3386,7 +3454,7 @@ module DeleteScript = {
     @as("ScriptId")
     scriptId: scriptIdOrArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-gamelift") @new external new: request => t = "DeleteScriptCommand"
   let make = (~scriptId, ()) => new({scriptId: scriptId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -3407,7 +3475,7 @@ module DeleteScalingPolicy = {
     @as("Name")
     name: nonZeroAndMaxString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-gamelift") @new external new: request => t = "DeleteScalingPolicyCommand"
   let make = (~fleetId, ~name, ()) => new({fleetId: fleetId, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -3422,7 +3490,7 @@ module DeleteMatchmakingRuleSet = {
     @as("Name")
     name: matchmakingRuleSetName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-gamelift") @new
   external new: request => t = "DeleteMatchmakingRuleSetCommand"
   let make = (~name, ()) => new({name: name})
@@ -3439,7 +3507,7 @@ module DeleteMatchmakingConfiguration = {
     @as("Name")
     name: matchmakingConfigurationName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-gamelift") @new
   external new: request => t = "DeleteMatchmakingConfigurationCommand"
   let make = (~name, ()) => new({name: name})
@@ -3456,7 +3524,7 @@ module DeleteGameSessionQueue = {
     @as("Name")
     name: gameSessionQueueNameOrArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-gamelift") @new
   external new: request => t = "DeleteGameSessionQueueCommand"
   let make = (~name, ()) => new({name: name})
@@ -3473,7 +3541,7 @@ module DeleteFleet = {
     @as("FleetId")
     fleetId: fleetIdOrArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-gamelift") @new external new: request => t = "DeleteFleetCommand"
   let make = (~fleetId, ()) => new({fleetId: fleetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -3489,7 +3557,7 @@ module DeleteBuild = {
     @as("BuildId")
     buildId: buildIdOrArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-gamelift") @new external new: request => t = "DeleteBuildCommand"
   let make = (~buildId, ()) => new({buildId: buildId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -3504,7 +3572,7 @@ module DeleteAlias = {
     @as("AliasId")
     aliasId: aliasIdOrArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-gamelift") @new external new: request => t = "DeleteAliasCommand"
   let make = (~aliasId, ()) => new({aliasId: aliasId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -3516,21 +3584,21 @@ module CreateVpcPeeringConnection = {
   type request = {
     @ocaml.doc("<p>A unique identifier for a VPC with resources to be accessed by your GameLift fleet. The
             VPC must be in the same Region as your fleet. To look up a VPC ID, use the 
-            <a href=\"https://console.aws.amazon.com/vpc/\">VPC Dashboard</a> in the AWS Management Console. 
+            <a href=\"https://console.aws.amazon.com/vpc/\">VPC Dashboard</a> in the Amazon Web Services Management Console. 
             Learn more about VPC peering in <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html\">VPC Peering with GameLift Fleets</a>.</p>")
     @as("PeerVpcId")
     peerVpcId: nonZeroAndMaxString,
-    @ocaml.doc("<p>A unique identifier for the AWS account with the VPC that you want to peer your
-            Amazon GameLift fleet with. You can find your Account ID in the AWS Management Console under account
+    @ocaml.doc("<p>A unique identifier for the Amazon Web Services account with the VPC that you want to peer your
+            Amazon Web Services fleet with. You can find your Account ID in the Amazon Web Services Management Console under account
             settings.</p>")
     @as("PeerVpcAwsAccountId")
     peerVpcAwsAccountId: nonZeroAndMaxString,
-    @ocaml.doc("<p>A unique identifier for the fleet. You can use either the fleet ID or ARN value. This tells Amazon GameLift which GameLift
+    @ocaml.doc("<p>A unique identifier for the fleet. You can use either the fleet ID or ARN value. This tells Amazon Web Services which GameLift
             VPC to peer with. </p>")
     @as("FleetId")
     fleetId: fleetId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-gamelift") @new
   external new: request => t = "CreateVpcPeeringConnectionCommand"
   let make = (~peerVpcId, ~peerVpcAwsAccountId, ~fleetId, ()) =>
@@ -3690,7 +3758,7 @@ module UntagResource = {
   type t
   type request = {
     @ocaml.doc("<p>A list of one or more tag keys to remove from the specified GameLift resource. An
-            AWS resource can have only one tag with a specific tag key, so specifying the tag key
+            Amazon Web Services resource can have only one tag with a specific tag key, so specifying the tag key
             identifies which tag to remove. </p>")
     @as("TagKeys")
     tagKeys: tagKeyList,
@@ -3701,7 +3769,7 @@ module UntagResource = {
     @as("ResourceARN")
     resourceARN: amazonResourceName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-gamelift") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys: tagKeys, resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -3711,7 +3779,7 @@ module StopFleetActions = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
   type request = {
-    @ocaml.doc("<p>The fleet location to stop fleet actions for. Specify a location in the form of an AWS Region code, such as
+    @ocaml.doc("<p>The fleet location to stop fleet actions for. Specify a location in the form of an Amazon Web Services Region code, such as
             <code>us-west-2</code>.</p>")
     @as("Location")
     location: option<locationStringModel>,
@@ -3744,7 +3812,7 @@ module StartFleetActions = {
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
   type request = {
     @ocaml.doc("<p>The fleet location to restart fleet actions for. Specify a location in the form of
-            an AWS Region code, such as <code>us-west-2</code>.</p>")
+            an Amazon Web Services Region code, such as <code>us-west-2</code>.</p>")
     @as("Location")
     location: option<locationStringModel>,
     @ocaml.doc("<p>List of actions to restart on the fleet.</p>") @as("Actions")
@@ -3787,7 +3855,7 @@ module RequestUploadCredentials = {
             stored.</p>")
     @as("StorageLocation")
     storageLocation: option<s3Location>,
-    @ocaml.doc("<p>AWS credentials required when uploading a game build to the storage location.
+    @ocaml.doc("<p>Amazon Web Services credentials required when uploading a game build to the storage location.
             These credentials have a limited lifespan and are valid only for the build they were
             issued for.</p>")
     @as("UploadCredentials")
@@ -3817,7 +3885,7 @@ module RegisterGameServer = {
     @as("InstanceId")
     instanceId: gameServerInstanceId,
     @ocaml.doc("<p>A custom string that uniquely identifies the game server to register.  
-            Game server IDs are developer-defined and must be unique across all game server groups in your AWS account.</p>")
+            Game server IDs are developer-defined and must be unique across all game server groups in your Amazon Web Services account.</p>")
     @as("GameServerId")
     gameServerId: gameServerId,
     @ocaml.doc("<p>A unique identifier for the game server group where the game server is running. 
@@ -3864,8 +3932,8 @@ module PutScalingPolicy = {
                 <i>ScalingAdjustment</i>.</p>")
     @as("PolicyType")
     policyType: option<policyType>,
-    @ocaml.doc("<p>Name of the Amazon GameLift-defined metric that is used to trigger a scaling adjustment. For
-            detailed descriptions of fleet metrics, see <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/monitoring-cloudwatch.html\">Monitor Amazon GameLift
+    @ocaml.doc("<p>Name of the Amazon Web Services-defined metric that is used to trigger a scaling adjustment. For
+            detailed descriptions of fleet metrics, see <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/monitoring-cloudwatch.html\">Monitor Amazon Web Services
                 with Amazon CloudWatch</a>. </p>
         <ul>
             <li>
@@ -4086,7 +4154,7 @@ module DescribeFleetLocationUtilization = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
   type request = {
-    @ocaml.doc("<p>The fleet location to retrieve utilization information for. Specify a location in the form of an AWS Region code, such as
+    @ocaml.doc("<p>The fleet location to retrieve utilization information for. Specify a location in the form of an Amazon Web Services Region code, such as
                 <code>us-west-2</code>.</p>")
     @as("Location")
     location: locationStringModel,
@@ -4134,12 +4202,12 @@ module CreateVpcPeeringAuthorization = {
   type request = {
     @ocaml.doc("<p>A unique identifier for a VPC with resources to be accessed by your GameLift fleet. The
             VPC must be in the same Region as your fleet. To look up a VPC ID, use the 
-            <a href=\"https://console.aws.amazon.com/vpc/\">VPC Dashboard</a> in the AWS Management Console. 
+            <a href=\"https://console.aws.amazon.com/vpc/\">VPC Dashboard</a> in the Amazon Web Services Management Console. 
             Learn more about VPC peering in <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html\">VPC Peering with GameLift Fleets</a>.</p>")
     @as("PeerVpcId")
     peerVpcId: nonZeroAndMaxString,
-    @ocaml.doc("<p>A unique identifier for the AWS account that you use to manage your GameLift fleet. 
-            You can find your Account ID in the AWS Management Console under account settings.</p>")
+    @ocaml.doc("<p>A unique identifier for the Amazon Web Services account that you use to manage your GameLift fleet. 
+            You can find your Account ID in the Amazon Web Services Management Console under account settings.</p>")
     @as("GameLiftAwsAccountId")
     gameLiftAwsAccountId: nonZeroAndMaxString,
   }
@@ -4232,7 +4300,7 @@ module AcceptMatch = {
     @as("TicketId")
     ticketId: matchmakingIdStringModel,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-gamelift") @new external new: request => t = "AcceptMatchCommand"
   let make = (~acceptanceType, ~playerIds, ~ticketId, ()) =>
     new({acceptanceType: acceptanceType, playerIds: playerIds, ticketId: ticketId})
@@ -4244,7 +4312,7 @@ module UpdateScript = {
   type request = {
     @ocaml.doc("<p>A data object containing your Realtime scripts and dependencies as a zip file. The zip
             file can have one or multiple files. Maximum size of a zip file is 5 MB.</p>
-        <p>When using the AWS CLI tool to create a script, this parameter is set to the zip file
+        <p>When using the Amazon Web Services CLI tool to create a script, this parameter is set to the zip file
             name. It must be prepended with the string \"fileb://\" to indicate that the file data is
             a binary object. For example: <code>--zip-file
             fileb://myRealtimeScript.zip</code>.</p>")
@@ -4252,9 +4320,9 @@ module UpdateScript = {
     zipFile: option<zipBlob>,
     @ocaml.doc("<p>The location of the Amazon S3 bucket where a zipped file containing your Realtime scripts is
             stored. The storage location must specify the Amazon S3 bucket name, the zip file name (the
-            \"key\"), and a role ARN that allows Amazon GameLift to access the Amazon S3 storage location. The S3
+            \"key\"), and a role ARN that allows Amazon Web Services to access the Amazon S3 storage location. The S3
             bucket must be in the same Region where you want to create a new script. By default,
-            Amazon GameLift uploads the latest version of the zip file; if you have S3 object versioning
+            Amazon Web Services uploads the latest version of the zip file; if you have S3 object versioning
             turned on, you can use the <code>ObjectVersion</code> parameter to specify an earlier
             version. </p>")
     @as("StorageLocation")
@@ -4280,7 +4348,7 @@ module UpdateScript = {
             location reflects an Amazon S3 location: (1) If the script was uploaded from an S3 bucket
             under your account, the storage location reflects the information that was provided in
             the <i>CreateScript</i> request; (2) If the script file was uploaded from
-            a local zip file, the storage location reflects an S3 location controls by the Amazon GameLift
+            a local zip file, the storage location reflects an S3 location controls by the Amazon Web Services
             service.</p>")
     @as("Script")
     script: option<script>,
@@ -4363,7 +4431,7 @@ module TagResource = {
   type request = {
     @ocaml.doc("<p>A list of one or more tags to assign to the specified GameLift resource. 
             Tags are developer-defined and structured as key-value pairs. 
-            The maximum tag limit may be lower than stated. See <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\"> Tagging AWS Resources</a> 
+            The maximum tag limit may be lower than stated. See <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\"> Tagging Amazon Web Services Resources</a> 
             for actual tagging limits.</p>")
     @as("Tags")
     tags: tagList_,
@@ -4376,7 +4444,7 @@ module TagResource = {
     @as("ResourceARN")
     resourceARN: amazonResourceName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-gamelift") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceARN, ()) => new({tags: tags, resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -4536,16 +4604,16 @@ module GetInstanceAccess = {
 
 module DescribeVpcPeeringAuthorizations = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("<p>A collection of objects that describe all valid VPC peering operations for the
-            current AWS account.</p>")
+            current Amazon Web Services account.</p>")
     @as("VpcPeeringAuthorizations")
     vpcPeeringAuthorizations: option<vpcPeeringAuthorizationList>,
   }
   @module("@aws-sdk/client-gamelift") @new
-  external new: unit => t = "DescribeVpcPeeringAuthorizationsCommand"
-  let make = () => new()
+  external new: request => t = "DescribeVpcPeeringAuthorizationsCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -4693,7 +4761,7 @@ module DescribeInstances = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
   type request = {
-    @ocaml.doc("<p>The name of a location to retrieve instance information for, in the form of an AWS
+    @ocaml.doc("<p>The name of a location to retrieve instance information for, in the form of an Amazon Web Services
             Region code such as <code>us-west-2</code>. </p>")
     @as("Location")
     location: option<locationStringModel>,
@@ -4752,7 +4820,7 @@ module DescribeGameServerInstances = {
         </p>")
     @as("Limit")
     limit: option<positiveInteger>,
-    @ocaml.doc("<p>The EC2 instance IDs that you want to retrieve status on. EC2 instance IDs use a
+    @ocaml.doc("<p>The Amazon EC2 instance IDs that you want to retrieve status on. Amazon EC2 instance IDs use a
             17-character format, for example: <code>i-1234567890abcdef0</code>. To retrieve all
             instances in the game server group, leave this parameter empty. </p>")
     @as("InstanceIds")
@@ -4827,7 +4895,7 @@ module DescribeFleetPortSettings = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
   type request = {
-    @ocaml.doc("<p>A remote location to check for status of port setting updates. Use the AWS Region code
+    @ocaml.doc("<p>A remote location to check for status of port setting updates. Use the Amazon Web Services Region code
             format, such as <code>us-west-2</code>.</p>")
     @as("Location")
     location: option<locationStringModel>,
@@ -4838,7 +4906,7 @@ module DescribeFleetPortSettings = {
   }
   @ocaml.doc("<p>Represents the returned data in response to a request operation.</p>")
   type response = {
-    @ocaml.doc("<p>The requested fleet location, expressed as an AWS Region code, 
+    @ocaml.doc("<p>The requested fleet location, expressed as an Amazon Web Services Region code, 
             such as <code>us-west-2</code>. </p>")
     @as("Location")
     location: option<locationStringModel>,
@@ -4867,7 +4935,7 @@ module DescribeFleetLocationCapacity = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
   type request = {
-    @ocaml.doc("<p>The fleet location to retrieve capacity information for. Specify a location in the form of an AWS Region code, such as
+    @ocaml.doc("<p>The fleet location to retrieve capacity information for. Specify a location in the form of an Amazon Web Services Region code, such as
                 <code>us-west-2</code>.</p>")
     @as("Location")
     location: locationStringModel,
@@ -4947,11 +5015,11 @@ module DescribeEC2InstanceLimits = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
   type request = {
-    @ocaml.doc("<p>The name of a remote location to request instance limits for, in the form of an AWS
+    @ocaml.doc("<p>The name of a remote location to request instance limits for, in the form of an Amazon Web Services
             Region code such as <code>us-west-2</code>.</p>")
     @as("Location")
     location: option<locationStringModel>,
-    @ocaml.doc("<p>Name of an EC2 instance type that is supported in GameLift. A fleet instance type
+    @ocaml.doc("<p>Name of an Amazon EC2 instance type that is supported in GameLift. A fleet instance type
             determines the computing resources of each instance in the fleet, including CPU, memory,
             storage, and networking capacity. Do not specify a value for this parameter to retrieve
             limits for all instance types.</p>")
@@ -4994,7 +5062,7 @@ module DeleteFleetLocations = {
   type t
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
   type request = {
-    @ocaml.doc("<p>The list of fleet locations to delete. Specify locations in the form of an AWS Region code, such as
+    @ocaml.doc("<p>The list of fleet locations to delete. Specify locations in the form of an Amazon Web Services Region code, such as
                 <code>us-west-2</code>.</p>")
     @as("Locations")
     locations: locationList,
@@ -5031,26 +5099,26 @@ module CreateScript = {
   type request = {
     @ocaml.doc("<p>A list of labels to assign to the new script resource. Tags are developer-defined 
             key-value pairs. Tagging
-            AWS resources are useful for resource management, access management and cost allocation.
-            For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\"> Tagging AWS Resources</a> in the
-            <i>AWS General Reference</i>. Once the resource is created, you can
+            Amazon Web Services resources are useful for resource management, access management and cost allocation.
+            For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\"> Tagging Amazon Web Services Resources</a> in the
+            <i>Amazon Web Services General Reference</i>. Once the resource is created, you can
             use <a>TagResource</a>, <a>UntagResource</a>, and 
             <a>ListTagsForResource</a> to add, remove, and view tags. The
-            maximum tag limit may be lower than stated. See the AWS General Reference for actual 
+            maximum tag limit may be lower than stated. See the Amazon Web Services General Reference for actual 
             tagging limits.</p>")
     @as("Tags")
     tags: option<tagList_>,
     @ocaml.doc("<p>A data object containing your Realtime scripts and dependencies as a zip file. The zip
             file can have one or multiple files. Maximum size of a zip file is 5 MB.</p>
-        <p>When using the AWS CLI tool to create a script, this parameter is set to the zip file name. It must be prepended with the 
+        <p>When using the Amazon Web Services CLI tool to create a script, this parameter is set to the zip file name. It must be prepended with the 
             string \"fileb://\" to indicate that the file data is a binary object. For example: <code>--zip-file fileb://myRealtimeScript.zip</code>.</p>")
     @as("ZipFile")
     zipFile: option<zipBlob>,
     @ocaml.doc("<p>The location of the Amazon S3 bucket where a zipped file containing your Realtime scripts is
             stored. The storage location must specify the Amazon S3 bucket name, the zip file name (the
-            \"key\"), and a role ARN that allows Amazon GameLift to access the Amazon S3 storage location. The S3
+            \"key\"), and a role ARN that allows Amazon Web Services to access the Amazon S3 storage location. The S3
             bucket must be in the same Region where you want to create a new script. By default,
-            Amazon GameLift uploads the latest version of the zip file; if you have S3 object versioning
+            Amazon Web Services uploads the latest version of the zip file; if you have S3 object versioning
             turned on, you can use the <code>ObjectVersion</code> parameter to specify an earlier
             version. </p>")
     @as("StorageLocation")
@@ -5070,7 +5138,7 @@ module CreateScript = {
             bucket under your account, the storage location reflects the information that was
             provided in the <i>CreateScript</i> request; (2) If the script file was
             uploaded from a local zip file, the storage location reflects an S3 location controls by
-            the Amazon GameLift service.</p>")
+            the Amazon Web Services service.</p>")
     @as("Script")
     script: option<script>,
   }
@@ -5091,7 +5159,7 @@ module CreatePlayerSessions = {
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
   type request = {
     @ocaml.doc("<p>Map of string pairs, each specifying a player ID and a set of developer-defined
-            information related to the player. Amazon GameLift does not use this data, so it can be formatted
+            information related to the player. Amazon Web Services does not use this data, so it can be formatted
             as needed for use in the game. Any player data strings for player IDs that are not
             included in the <code>PlayerIds</code> parameter are ignored. </p>")
     @as("PlayerDataMap")
@@ -5121,12 +5189,12 @@ module CreateMatchmakingRuleSet = {
   type request = {
     @ocaml.doc("<p>A list of labels to assign to the new matchmaking rule set resource. Tags are developer-defined 
             key-value pairs. Tagging
-            AWS resources are useful for resource management, access management and cost allocation.
-            For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\"> Tagging AWS Resources</a> in the
-            <i>AWS General Reference</i>. Once the resource is created, you can
+            Amazon Web Services resources are useful for resource management, access management and cost allocation.
+            For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\"> Tagging Amazon Web Services Resources</a> in the
+            <i>Amazon Web Services General Reference</i>. Once the resource is created, you can
             use <a>TagResource</a>, <a>UntagResource</a>, and 
             <a>ListTagsForResource</a> to add, remove, and view tags. The
-            maximum tag limit may be lower than stated. See the AWS General Reference for actual 
+            maximum tag limit may be lower than stated. See the Amazon Web Services General Reference for actual 
             tagging limits.</p>")
     @as("Tags")
     tags: option<tagList_>,
@@ -5157,7 +5225,7 @@ module CreateFleetLocations = {
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
   type request = {
     @ocaml.doc("<p>A list of locations to deploy additional instances to and manage as part of the fleet.
-            You can add any GameLift-supported AWS Region as a remote location, in the form of an AWS
+            You can add any GameLift-supported Amazon Web Services Region as a remote location, in the form of an Amazon Web Services
             Region code such as <code>us-west-2</code>. </p>")
     @as("Locations")
     locations: locationConfigurationList,
@@ -5198,12 +5266,12 @@ module CreateBuild = {
   type request = {
     @ocaml.doc("<p>A list of labels to assign to the new build resource. Tags are developer-defined 
             key-value pairs. Tagging
-            AWS resources are useful for resource management, access management and cost allocation.
-            For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\"> Tagging AWS Resources</a> in the
-            <i>AWS General Reference</i>. Once the resource is created, you can
+            Amazon Web Services resources are useful for resource management, access management and cost allocation.
+            For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\"> Tagging Amazon Web Services Resources</a> in the
+            <i>Amazon Web Services General Reference</i>. Once the resource is created, you can
             use <a>TagResource</a>, <a>UntagResource</a>, and 
             <a>ListTagsForResource</a> to add, remove, and view tags. The
-            maximum tag limit may be lower than stated. See the AWS General Reference for actual 
+            maximum tag limit may be lower than stated. See the Amazon Web Services General Reference for actual 
             tagging limits.</p>")
     @as("Tags")
     tags: option<tagList_>,
@@ -5217,8 +5285,11 @@ module CreateBuild = {
     @ocaml.doc("<p>Information indicating where your game build files are stored. Use this parameter only
             when creating a build with files stored in an Amazon S3 bucket that you own. The storage
             location must specify an Amazon S3 bucket name and key. The location must also specify a role
-            ARN that you set up to allow Amazon GameLift to access your Amazon S3 bucket. The S3 bucket and your
-            new build must be in the same Region.</p>")
+            ARN that you set up to allow Amazon Web Services to access your Amazon S3 bucket. The S3 bucket and your
+            new build must be in the same Region.</p>
+        <p>If a <code>StorageLocation</code> is specified, the size of your file
+            can be found in your Amazon S3 bucket. Amazon Web Services will report a <code>SizeOnDisk</code> of 0. 
+        </p>")
     @as("StorageLocation")
     storageLocation: option<s3Location>,
     @ocaml.doc("<p>Version information that is associated with a build or script. Version strings do not need to be unique. You can use <a>UpdateBuild</a> to change this value later.
@@ -5238,7 +5309,7 @@ module CreateBuild = {
     storageLocation: option<s3Location>,
     @ocaml.doc("<p>This element is returned only when the operation is called without a storage
             location. It contains credentials to use when you are uploading a build file to an Amazon S3
-            bucket that is owned by Amazon GameLift. Credentials have a limited life span. To refresh these
+            bucket that is owned by Amazon Web Services. Credentials have a limited life span. To refresh these
             credentials, call <a>RequestUploadCredentials</a>. </p>")
     @as("UploadCredentials")
     uploadCredentials: option<awsCredentials>,
@@ -5264,12 +5335,12 @@ module CreateAlias = {
   type request = {
     @ocaml.doc("<p>A list of labels to assign to the new alias resource. Tags are developer-defined 
             key-value pairs. Tagging
-            AWS resources are useful for resource management, access management and cost allocation.
-            For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\"> Tagging AWS Resources</a> in the
-                <i>AWS General Reference</i>. Once the resource is created, you can
+            Amazon Web Services resources are useful for resource management, access management and cost allocation.
+            For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\"> Tagging Amazon Web Services Resources</a> in the
+                <i>Amazon Web Services General Reference</i>. Once the resource is created, you can
             use <a>TagResource</a>, <a>UntagResource</a>, and 
             <a>ListTagsForResource</a> to add, remove, and view tags. The
-            maximum tag limit may be lower than stated. See the AWS General Reference for actual 
+            maximum tag limit may be lower than stated. See the Amazon Web Services General Reference for actual 
             tagging limits.</p>")
     @as("Tags")
     tags: option<tagList_>,
@@ -5476,7 +5547,7 @@ module UpdateGameSessionQueue = {
     @as("PriorityConfiguration")
     priorityConfiguration: option<priorityConfiguration>,
     @ocaml.doc("<p>A list of locations where a queue is allowed to place new game sessions. Locations 
-            are specified in the form of AWS Region codes, such as <code>us-west-2</code>. If this parameter is 
+            are specified in the form of Amazon Web Services Region codes, such as <code>us-west-2</code>. If this parameter is 
             not set, game sessions can be placed in any queue location. To remove an existing filter configuration, pass in an empty set.</p>")
     @as("FilterConfiguration")
     filterConfiguration: option<filterConfiguration>,
@@ -5631,10 +5702,10 @@ module UpdateGameServerGroup = {
             be terminated during a scale-down event, causing players to be dropped from the game. 
             Protected instances cannot be terminated while there are active game servers running except 
             in the event of a forced game server group deletion (see ). An exception to this is with Spot 
-            Instances, which can be terminated by AWS regardless of protection status. This property is set to <code>NO_PROTECTION</code> by default.</p>")
+            Instances, which can be terminated by Amazon Web Services regardless of protection status. This property is set to <code>NO_PROTECTION</code> by default.</p>")
     @as("GameServerProtectionPolicy")
     gameServerProtectionPolicy: option<gameServerProtectionPolicy>,
-    @ocaml.doc("<p>An updated list of EC2 instance types to use in the Auto Scaling group. The instance
+    @ocaml.doc("<p>An updated list of Amazon EC2 instance types to use in the Auto Scaling group. The instance
             definitions must specify at least two different instance types that are supported by
             GameLift FleetIQ. This updated list replaces the entire current list of instance definitions for
             the game server group. For more information on instance types, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html\">EC2 Instance
@@ -5646,7 +5717,7 @@ module UpdateGameServerGroup = {
     @as("InstanceDefinitions")
     instanceDefinitions: option<instanceDefinitions>,
     @ocaml.doc("<p>The Amazon Resource Name (<a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html\">ARN</a>) for an IAM role that
-            allows Amazon GameLift to access your EC2 Auto Scaling groups.</p>")
+            allows Amazon Web Services to access your Amazon EC2 Auto Scaling groups.</p>")
     @as("RoleArn")
     roleArn: option<iamRoleArn>,
     @ocaml.doc(
@@ -5739,7 +5810,7 @@ module StartGameSessionPlacement = {
     @ocaml.doc("<p>Set of information on each player to create a player session for.</p>")
     @as("DesiredPlayerSessions")
     desiredPlayerSessions: option<desiredPlayerSessionList>,
-    @ocaml.doc("<p>A set of values, expressed in milliseconds, that indicates the amount of latency that a player experiences when connected to AWS Regions. This information is used to try to place the new game session where
+    @ocaml.doc("<p>A set of values, expressed in milliseconds, that indicates the amount of latency that a player experiences when connected to @aws; Regions. This information is used to try to place the new game session where
         it can offer the best possible gameplay experience for the players. </p>")
     @as("PlayerLatencies")
     playerLatencies: option<playerLatencyList>,
@@ -5936,7 +6007,7 @@ module DescribeScalingPolicies = {
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
   type request = {
     @ocaml.doc("<p>
-            CONTENT TODO
+            The fleet location. If you don't specify this value, the response contains the scaling policies of every location in the fleet.
         </p>")
     @as("Location")
     location: option<locationStringModel>,
@@ -5991,7 +6062,7 @@ module DescribeScalingPolicies = {
          </ul>")
     @as("StatusFilter")
     statusFilter: option<scalingStatusType>,
-    @ocaml.doc("<p>A unique identifier for the fleet to retrieve scaling policies for. You can use either the fleet ID or ARN
+    @ocaml.doc("<p>A unique identifier for the fleet for which to retrieve scaling policies. You can use either the fleet ID or ARN
             value.</p>")
     @as("FleetId")
     fleetId: fleetIdOrArn,
@@ -6099,7 +6170,7 @@ module DescribeFleetLocationAttributes = {
     )
     @as("Limit")
     limit: option<positiveInteger>,
-    @ocaml.doc("<p>A list of fleet locations to retrieve information for. Specify locations in the form of an AWS Region code, such as
+    @ocaml.doc("<p>A list of fleet locations to retrieve information for. Specify locations in the form of an Amazon Web Services Region code, such as
                 <code>us-west-2</code>.</p>")
     @as("Locations")
     locations: option<locationList>,
@@ -6218,19 +6289,19 @@ module DeleteGameServerGroup = {
             <li>
                 <p>
                   <code>SAFE_DELETE</code> – (default) Terminates the game server group and
-                    EC2 Auto Scaling group only when it has no game servers that are in
+                    Amazon EC2 Auto Scaling group only when it has no game servers that are in
                         <code>UTILIZED</code> status.</p>
             </li>
             <li>
                 <p>
                   <code>FORCE_DELETE</code> – Terminates the game server group, including all
-                    active game servers regardless of their utilization status, and the EC2 Auto
+                    active game servers regardless of their utilization status, and the Amazon EC2 Auto
                     Scaling group. </p>
             </li>
             <li>
                 <p>
                   <code>RETAIN</code> – Does a safe delete of the game server group but retains
-                    the EC2 Auto Scaling group as is.</p>
+                    the Amazon EC2 Auto Scaling group as is.</p>
             </li>
          </ul>")
     @as("DeleteOption")
@@ -6260,12 +6331,12 @@ module CreateMatchmakingConfiguration = {
   type request = {
     @ocaml.doc("<p>A list of labels to assign to the new matchmaking configuration resource. Tags are developer-defined 
             key-value pairs. Tagging
-            AWS resources are useful for resource management, access management and cost allocation.
-            For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\"> Tagging AWS Resources</a> in the
-            <i>AWS General Reference</i>. Once the resource is created, you can
+            Amazon Web Services resources are useful for resource management, access management and cost allocation.
+            For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\"> Tagging Amazon Web Services Resources</a> in the
+            <i>Amazon Web Services General Reference</i>. Once the resource is created, you can
             use <a>TagResource</a>, <a>UntagResource</a>, and 
             <a>ListTagsForResource</a> to add, remove, and view tags. The
-            maximum tag limit may be lower than stated. See the AWS General Reference for actual 
+            maximum tag limit may be lower than stated. See the Amazon Web Services General Reference for actual 
             tagging limits.</p>")
     @as("Tags")
     tags: option<tagList_>,
@@ -6408,12 +6479,12 @@ module CreateGameSessionQueue = {
   type request = {
     @ocaml.doc("<p>A list of labels to assign to the new game session queue resource. Tags are developer-defined 
             key-value pairs. Tagging
-            AWS resources are useful for resource management, access management and cost allocation.
-            For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\"> Tagging AWS Resources</a> in the
-            <i>AWS General Reference</i>. Once the resource is created, you can
+            Amazon Web Services resources are useful for resource management, access management and cost allocation.
+            For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\"> Tagging Amazon Web Services Resources</a> in the
+            <i>Amazon Web Services General Reference</i>. Once the resource is created, you can
             use <a>TagResource</a>, <a>UntagResource</a>, and 
             <a>ListTagsForResource</a> to add, remove, and view tags. The
-            maximum tag limit may be lower than stated. See the AWS General Reference for actual 
+            maximum tag limit may be lower than stated. See the Amazon Web Services General Reference for actual 
             tagging limits.</p>")
     @as("Tags")
     tags: option<tagList_>,
@@ -6432,7 +6503,7 @@ module CreateGameSessionQueue = {
     @as("PriorityConfiguration")
     priorityConfiguration: option<priorityConfiguration>,
     @ocaml.doc("<p>A list of locations where a queue is allowed to place new game sessions. Locations 
-            are specified in the form of AWS Region codes, such as <code>us-west-2</code>. If this parameter is 
+            are specified in the form of Amazon Web Services Region codes, such as <code>us-west-2</code>. If this parameter is 
             not set, game sessions can be placed in any queue location. </p>")
     @as("FilterConfiguration")
     filterConfiguration: option<filterConfiguration>,
@@ -6498,11 +6569,11 @@ module CreateGameSession = {
   type request = {
     @ocaml.doc("<p>A fleet's remote location to place the new game session in. If this parameter is not
             set, the new game session is placed in the fleet's home Region. Specify a remote
-            location with an AWS Region code such as <code>us-west-2</code>.  </p>")
+            location with an Amazon Web Services Region code such as <code>us-west-2</code>.  </p>")
     @as("Location")
     location: option<locationStringModel>,
     @ocaml.doc("<p>A set of custom game session properties, formatted as a single string value. This data is passed to a game server process in the 
-    <a>GameSession</a> object with a request to start a new game session.</p>")
+    <a>GameSession</a> object with a request to start a new game session (see <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession\">Start a Game Session</a>).</p>")
     @as("GameSessionData")
     gameSessionData: option<largeGameSessionData>,
     @ocaml.doc("<p>Custom string that uniquely identifies the new game session request.  This is useful
@@ -6530,7 +6601,7 @@ module CreateGameSession = {
     @as("CreatorId")
     creatorId: option<nonZeroAndMaxString>,
     @ocaml.doc("<p>A set of custom properties for a game session, formatted as key:value pairs. These properties are passed to a game server process in the 
-    <a>GameSession</a> object with a request to start a new game session.</p>")
+    <a>GameSession</a> object with a request to start a new game session (see <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession\">Start a Game Session</a>).</p>")
     @as("GameProperties")
     gameProperties: option<gamePropertyList>,
     @ocaml.doc(
@@ -6592,12 +6663,12 @@ module CreateGameServerGroup = {
   type t
   type request = {
     @ocaml.doc("<p>A list of labels to assign to the new game server group resource. Tags are
-            developer-defined key-value pairs. Tagging AWS resources is useful for resource
-            management, access management, and cost allocation. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\"> Tagging AWS
-                Resources</a> in the <i>AWS General Reference</i>. Once the
+            developer-defined key-value pairs. Tagging Amazon Web Services resources is useful for resource
+            management, access management, and cost allocation. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\"> Tagging Amazon Web Services
+                Resources</a> in the <i>Amazon Web Services General Reference</i>. Once the
             resource is created, you can use <a>TagResource</a>, <a>UntagResource</a>, and <a>ListTagsForResource</a> to add, remove,
             and view tags, respectively. The maximum tag limit may be lower than stated. See the
-            AWS General Reference for actual tagging limits.</p>")
+            Amazon Web Services General Reference for actual tagging limits.</p>")
     @as("Tags")
     tags: option<tagList_>,
     @ocaml.doc("<p>A list of virtual private cloud (VPC) subnets to use with instances in the game server
@@ -6613,7 +6684,7 @@ module CreateGameServerGroup = {
             be terminated during a scale-down event, causing players to be dropped from the game. 
             Protected instances cannot be terminated while there are active game servers running except 
             in the event of a forced game server group deletion (see ). An exception to this is with Spot 
-            Instances, which can be terminated by AWS regardless of protection status. This property is set to <code>NO_PROTECTION</code> by default.</p>")
+            Instances, which can be terminated by Amazon Web Services regardless of protection status. This property is set to <code>NO_PROTECTION</code> by default.</p>")
     @as("GameServerProtectionPolicy")
     gameServerProtectionPolicy: option<gameServerProtectionPolicy>,
     @ocaml.doc("<p>Indicates how GameLift FleetIQ balances the use of Spot Instances and On-Demand Instances in the
@@ -6648,27 +6719,27 @@ module CreateGameServerGroup = {
             optimized for game hosting. The scaling policy uses the metric
                 <code>\"PercentUtilizedGameServers\"</code> to maintain a buffer of idle game servers
             that can immediately accommodate new games and players. After the Auto Scaling group is
-            created, update this value directly in the Auto Scaling group using the AWS console or
+            created, update this value directly in the Auto Scaling group using the Amazon Web Services console or
             APIs.</p>")
     @as("AutoScalingPolicy")
     autoScalingPolicy: option<gameServerGroupAutoScalingPolicy>,
-    @ocaml.doc("<p>The EC2 instance types and sizes to use in the Auto Scaling group. The instance
+    @ocaml.doc("<p>The Amazon EC2 instance types and sizes to use in the Auto Scaling group. The instance
             definitions must specify at least two different instance types that are supported by
             GameLift FleetIQ. For more information on instance types, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html\">EC2 Instance Types</a> in the
-                <i>Amazon EC2 User Guide</i>. You can optionally specify capacity
+                <i>Amazon Elastic Compute Cloud User Guide</i>. You can optionally specify capacity
             weighting for each instance type. If no weight value is specified for an instance type,
             it is set to the default value \"1\". For more information about capacity weighting, see
                 <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-weighting.html\"> Instance Weighting for
                 Amazon EC2 Auto Scaling</a> in the Amazon EC2 Auto Scaling User Guide.</p>")
     @as("InstanceDefinitions")
     instanceDefinitions: instanceDefinitions,
-    @ocaml.doc("<p>The EC2 launch template that contains configuration settings and game server code to
+    @ocaml.doc("<p>The Amazon EC2 launch template that contains configuration settings and game server code to
             be deployed to all instances in the game server group. You can specify the template
             using either the template name or ID. For help with creating a launch template, see
                 <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-template.html\">Creating a Launch
-                Template for an Auto Scaling Group</a> in the <i>Amazon EC2 Auto Scaling
+                Template for an Auto Scaling Group</a> in the <i>Amazon Elastic Compute Cloud Auto Scaling
                 User Guide</i>. After the Auto Scaling group is created, update this value
-            directly in the Auto Scaling group using the AWS console or APIs.</p>
+            directly in the Auto Scaling group using the Amazon Web Services console or APIs.</p>
         <note>
             <p>If you specify network interfaces in your launch template, you must explicitly set
                 the property <code>AssociatePublicIpAddress</code> to \"true\". If no network
@@ -6677,32 +6748,32 @@ module CreateGameServerGroup = {
         </note>")
     @as("LaunchTemplate")
     launchTemplate: launchTemplateSpecification,
-    @ocaml.doc("<p>The maximum number of instances allowed in the EC2 Auto Scaling group. During
+    @ocaml.doc("<p>The maximum number of instances allowed in the Amazon EC2 Auto Scaling group. During
             automatic scaling events, GameLift FleetIQ and EC2 do not scale up the group above this maximum.
             After the Auto Scaling group is created, update this value directly in the Auto Scaling
-            group using the AWS console or APIs.</p>")
+            group using the Amazon Web Services console or APIs.</p>")
     @as("MaxSize")
     maxSize: positiveInteger,
-    @ocaml.doc("<p>The minimum number of instances allowed in the EC2 Auto Scaling group. During
-            automatic scaling events, GameLift FleetIQ and EC2 do not scale down the group below this
+    @ocaml.doc("<p>The minimum number of instances allowed in the Amazon EC2 Auto Scaling group. During
+            automatic scaling events, GameLift FleetIQ and Amazon EC2 do not scale down the group below this
             minimum. In production, this value should be set to at least 1. After the Auto Scaling
-            group is created, update this value directly in the Auto Scaling group using the AWS
+            group is created, update this value directly in the Auto Scaling group using the Amazon Web Services
             console or APIs.</p>")
     @as("MinSize")
     minSize: wholeNumber,
     @ocaml.doc("<p>The Amazon Resource Name (<a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html\">ARN</a>) for an IAM role that
-            allows Amazon GameLift to access your EC2 Auto Scaling groups.</p>")
+            allows Amazon Web Services to access your Amazon EC2 Auto Scaling groups.</p>")
     @as("RoleArn")
     roleArn: iamRoleArn,
     @ocaml.doc("<p>An identifier for the new game server group. This value is used to generate unique ARN
-            identifiers for the EC2 Auto Scaling group and the GameLift FleetIQ game server group. The name
-            must be unique per Region per AWS account.</p>")
+            identifiers for the Amazon EC2 Auto Scaling group and the GameLift FleetIQ game server group. The name
+            must be unique per Region per Amazon Web Services account.</p>")
     @as("GameServerGroupName")
     gameServerGroupName: gameServerGroupName,
   }
   type response = {
     @ocaml.doc("<p>The newly created game server group object, including the new ARN value for the GameLift FleetIQ
-            game server group and the object's status. The EC2 Auto Scaling group ARN is initially
+            game server group and the object's status. The Amazon EC2 Auto Scaling group ARN is initially
             null, since the group has not yet been created. This value is added once the game server
             group status reaches <code>ACTIVE</code>. </p>")
     @as("GameServerGroup")
@@ -6745,36 +6816,35 @@ module CreateFleet = {
   @ocaml.doc("<p>Represents the input for a request operation.</p>")
   type request = {
     @ocaml.doc("<p>A list of labels to assign to the new fleet resource. Tags are developer-defined
-            key-value pairs. Tagging AWS resources are useful for resource management, access
-            management and cost allocation. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\"> Tagging AWS Resources</a> in the
-                <i>AWS General Reference</i>. Once the fleet is created, you can use
+            key-value pairs. Tagging Amazon Web Services resources are useful for resource management, access
+            management and cost allocation. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\"> Tagging Amazon Web Services Resources</a> in the
+                <i>Amazon Web Services General Reference</i>. Once the fleet is created, you can use
                 <a>TagResource</a>, <a>UntagResource</a>, and <a>ListTagsForResource</a> to add, remove, and view tags. The maximum tag limit
-            may be lower than stated. See the <i>AWS General Reference</i> for actual
+            may be lower than stated. See the <i>Amazon Web Services General Reference</i> for actual
             tagging limits.</p>")
     @as("Tags")
     tags: option<tagList_>,
     @ocaml.doc("<p>A set of remote locations to deploy additional instances to and manage as part of the
-            fleet. This parameter can only be used when creating fleets in AWS Regions that support
-            multiple locations. You can add any GameLift-supported AWS Region as a remote location,
-            in the form of an AWS Region code such as <code>us-west-2</code>. To create a fleet with
+            fleet. This parameter can only be used when creating fleets in Amazon Web Services Regions that support
+            multiple locations. You can add any GameLift-supported Amazon Web Services Region as a remote location,
+            in the form of an Amazon Web Services Region code such as <code>us-west-2</code>. To create a fleet with
             instances in the home Region only, omit this parameter. </p>")
     @as("Locations")
     locations: option<locationConfigurationList>,
     @ocaml.doc("<p>Prompts GameLift to generate a TLS/SSL certificate for the fleet. TLS certificates are
             used for encrypting traffic between game clients and the game servers that are running
             on GameLift. By default, the <code>CertificateConfiguration</code> is set to
-                <code>DISABLED</code>. Learn more at <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-howitworks.html#gamelift-howitworks-security\">Securing Client/Server Communication</a>. This property cannot be changed after
-            the fleet is created. </p>
-        <p>Note: This feature requires the AWS Certificate Manager (ACM) service, which is not
-            available in all AWS regions. When working in a region that does not support this
+                <code>DISABLED</code>. This property cannot be changed after the fleet is created. </p>
+        <p>Note: This feature requires the Amazon Web Services Certificate Manager (ACM) service, which is not
+            available in all Amazon Web Services regions. When working in a region that does not support this
             feature, a fleet creation request with certificate generation fails with a 4xx
             error.</p>")
     @as("CertificateConfiguration")
     certificateConfiguration: option<certificateConfiguration>,
-    @ocaml.doc("<p>A unique identifier for an AWS IAM role that manages access to your AWS services. 
+    @ocaml.doc("<p>A unique identifier for an IAM role that manages access to your Amazon Web Services services. 
         With an instance role ARN set, any application that runs on an instance in this fleet can assume the role, 
         including install scripts, server processes, and daemons (background processes). Create a role or look up a role's 
-        ARN by using the <a href=\"https://console.aws.amazon.com/iam/\">IAM dashboard</a> in the AWS Management Console.
+        ARN by using the <a href=\"https://console.aws.amazon.com/iam/\">IAM dashboard</a> in the Amazon Web Services Management Console.
         Learn more about using on-box credentials for your game servers at 
         <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html\">
         Access external resources from a game server</a>.  This property cannot be changed after the fleet is created.</p>")
@@ -6787,16 +6857,16 @@ module CreateFleet = {
     fleetType: option<fleetType>,
     @ocaml.doc("<p>A unique identifier for a VPC with resources to be accessed by your GameLift fleet. The
             VPC must be in the same Region as your fleet. To look up a VPC ID, use the 
-            <a href=\"https://console.aws.amazon.com/vpc/\">VPC Dashboard</a> in the AWS Management Console. 
+            <a href=\"https://console.aws.amazon.com/vpc/\">VPC Dashboard</a> in the Amazon Web Services Management Console. 
             Learn more about VPC peering in <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html\">VPC Peering with GameLift Fleets</a>. </p>")
     @as("PeerVpcId")
     peerVpcId: option<nonZeroAndMaxString>,
-    @ocaml.doc("<p>Used when peering your GameLift fleet with a VPC, the unique identifier for the AWS
-            account that owns the VPC. You can find your account ID in the AWS Management Console under account
+    @ocaml.doc("<p>Used when peering your GameLift fleet with a VPC, the unique identifier for the Amazon Web Services
+            account that owns the VPC. You can find your account ID in the Amazon Web Services Management Console under account
             settings. </p>")
     @as("PeerVpcAwsAccountId")
     peerVpcAwsAccountId: option<nonZeroAndMaxString>,
-    @ocaml.doc("<p>The name of an AWS CloudWatch metric group to add this fleet to. A metric group is
+    @ocaml.doc("<p>The name of an Amazon Web Services CloudWatch metric group to add this fleet to. A metric group is
             used to aggregate the metrics for multiple fleets. You can specify an existing metric
             group name or set a new name to create a new metric group. A fleet can be included in
             only one metric group at a time. </p>")
@@ -6842,10 +6912,10 @@ module CreateFleet = {
             automatically sets TCP and UDP ranges. </p>")
     @as("EC2InboundPermissions")
     ec2InboundPermissions: option<ipPermissionsList>,
-    @ocaml.doc("<p>The GameLift-supported EC2 instance type to use for all fleet instances. Instance
+    @ocaml.doc("<p>The GameLift-supported Amazon EC2 instance type to use for all fleet instances. Instance
             type determines the computing resources that will be used to host your game servers,
-            including CPU, memory, storage, and networking capacity. See <a href=\"http://aws.amazon.com/ec2/instance-types/\">Amazon EC2 Instance Types</a> for detailed descriptions
-            of EC2 instance types.</p>")
+            including CPU, memory, storage, and networking capacity. See <a href=\"http://aws.amazon.com/ec2/instance-types/\">Amazon Elastic Compute Cloud Instance Types</a> for detailed descriptions
+            of Amazon EC2 instance types.</p>")
     @as("EC2InstanceType")
     ec2InstanceType: ec2InstanceType,
     @ocaml.doc("<p>
@@ -6860,13 +6930,13 @@ module CreateFleet = {
             launch parameters using the <code>RuntimeConfiguration</code> parameter. Requests that
             use this parameter instead continue to be valid.</p>")
     @as("ServerLaunchParameters")
-    serverLaunchParameters: option<nonZeroAndMaxString>,
+    serverLaunchParameters: option<launchParametersStringModel>,
     @ocaml.doc("<p>
             <b>This parameter is no longer used.</b> Specify a server
             launch path using the <code>RuntimeConfiguration</code> parameter. Requests that use
             this parameter instead continue to be valid.</p>")
     @as("ServerLaunchPath")
-    serverLaunchPath: option<nonZeroAndMaxString>,
+    serverLaunchPath: option<launchPathStringModel>,
     @ocaml.doc("<p>The unique identifier for a Realtime configuration script to be deployed on fleet
             instances. You can use either the script ID or ARN. Scripts must be uploaded to GameLift
             prior to creating the fleet. This fleet property cannot be changed later.</p>")
@@ -7048,7 +7118,7 @@ module SearchGameSessions = {
     @as("FilterExpression")
     filterExpression: option<nonZeroAndMaxString>,
     @ocaml.doc("<p>A fleet location to search for game sessions. You can specify a fleet's home Region or
-            a remote location. Use the AWS Region code format, such as <code>us-west-2</code>. </p>
+            a remote location. Use the Amazon Web Services Region code format, such as <code>us-west-2</code>. </p>
         <p> </p>")
     @as("Location")
     location: option<locationStringModel>,
@@ -7188,7 +7258,7 @@ module DescribeGameSessions = {
     @as("StatusFilter")
     statusFilter: option<nonZeroAndMaxString>,
     @ocaml.doc("<p>A fleet location to get game session details for. You can specify a fleet's home
-            Region or a remote location. Use the AWS Region code format, such as
+            Region or a remote location. Use the Amazon Web Services Region code format, such as
                 <code>us-west-2</code>. </p>")
     @as("Location")
     location: option<locationStringModel>,
@@ -7296,7 +7366,7 @@ module DescribeGameSessionDetails = {
     @as("StatusFilter")
     statusFilter: option<nonZeroAndMaxString>,
     @ocaml.doc("<p>A fleet location to get game sessions for. You can specify a fleet's home Region or a
-            remote location. Use the AWS Region code format, such as <code>us-west-2</code>. </p>")
+            remote location. Use the Amazon Web Services Region code format, such as <code>us-west-2</code>. </p>")
     @as("Location")
     location: option<locationStringModel>,
     @ocaml.doc("<p>A unique identifier for the alias associated with the fleet to retrieve all game sessions for. You can use either
@@ -7360,7 +7430,7 @@ module StartMatchmaking = {
             configuration name or ARN value.</p>")
     @as("ConfigurationName")
     configurationName: matchmakingConfigurationName,
-    @ocaml.doc("<p>A unique identifier for a matchmaking ticket. If no ticket ID is specified here, Amazon GameLift will generate one in the form of
+    @ocaml.doc("<p>A unique identifier for a matchmaking ticket. If no ticket ID is specified here, Amazon Web Services will generate one in the form of
             a UUID. Use this identifier to track the matchmaking ticket status and retrieve match
             results.</p>")
     @as("TicketId")
@@ -7394,6 +7464,8 @@ module StartMatchBackfill = {
                     for all players who are currently assigned to the game session. The matchmaker
                     data is in JSON syntax, formatted as a string. For more details, see <a href=\"https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-server.html#match-server-data\">
                         Match Data</a>. </p>
+                <p>The backfill request must specify the team membership for every player. 
+                Do not specify team if you are not using backfill.</p>
             </li>
             <li>
                 <p>LatencyInMs -- If the matchmaker uses player latency, include a latency
@@ -7413,7 +7485,7 @@ module StartMatchBackfill = {
                 <code>MatchmakerData</code> property.</p>")
     @as("ConfigurationName")
     configurationName: matchmakingConfigurationName,
-    @ocaml.doc("<p>A unique identifier for a matchmaking ticket. If no ticket ID is specified here, Amazon GameLift will generate one in the form of
+    @ocaml.doc("<p>A unique identifier for a matchmaking ticket. If no ticket ID is specified here, Amazon Web Services will generate one in the form of
             a UUID. Use this identifier to track the match backfill ticket status and retrieve match
             results.</p>")
     @as("TicketId")

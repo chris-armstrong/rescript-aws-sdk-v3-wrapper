@@ -22,6 +22,7 @@ type __stringMin0Max256 = string
 type __string = string
 type __long = float
 type __integer = int
+type __boolean = bool
 type type_ = [@as("JSONSchemaDraft4") #JSONSchemaDraft4 | @as("OpenApi3") #OpenApi3]
 type synthesizedJson__string = string
 type getDiscoveredSchemaVersionItemInput = string
@@ -68,6 +69,11 @@ type registrySummary = {
 }
 type discovererSummary = {
   @ocaml.doc("<p>Tags associated with the resource.</p>") @as("Tags") tags: option<tags>,
+  @ocaml.doc(
+    "<p>The Status if the discoverer will discover schemas from events sent from another account.</p>"
+  )
+  @as("CrossAccount")
+  crossAccount: option<__boolean>,
   @ocaml.doc("<p>The state of the discoverer.</p>") @as("State") state: option<discovererState>,
   @ocaml.doc("<p>The ARN of the event bus.</p>") @as("SourceArn") sourceArn: option<__string>,
   @ocaml.doc("<p>The ID of the discoverer.</p>") @as("DiscovererId") discovererId: option<__string>,
@@ -273,7 +279,7 @@ module DeleteSchemaVersion = {
     @ocaml.doc("<p>The name of the schema.</p>") @as("SchemaName") schemaName: __string,
     @ocaml.doc("<p>The name of the registry.</p>") @as("RegistryName") registryName: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-schemas") @new external new: request => t = "DeleteSchemaVersionCommand"
   let make = (~schemaVersion, ~schemaName, ~registryName, ()) =>
     new({schemaVersion: schemaVersion, schemaName: schemaName, registryName: registryName})
@@ -286,7 +292,7 @@ module DeleteSchema = {
     @ocaml.doc("<p>The name of the schema.</p>") @as("SchemaName") schemaName: __string,
     @ocaml.doc("<p>The name of the registry.</p>") @as("RegistryName") registryName: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-schemas") @new external new: request => t = "DeleteSchemaCommand"
   let make = (~schemaName, ~registryName, ()) =>
     new({schemaName: schemaName, registryName: registryName})
@@ -299,7 +305,7 @@ module DeleteResourcePolicy = {
     @ocaml.doc("<p>The name of the registry.</p>") @as("RegistryName")
     registryName: option<__string>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-schemas") @new external new: request => t = "DeleteResourcePolicyCommand"
   let make = (~registryName=?, ()) => new({registryName: registryName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -310,7 +316,7 @@ module DeleteRegistry = {
   type request = {
     @ocaml.doc("<p>The name of the registry.</p>") @as("RegistryName") registryName: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-schemas") @new external new: request => t = "DeleteRegistryCommand"
   let make = (~registryName, ()) => new({registryName: registryName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -321,7 +327,7 @@ module DeleteDiscoverer = {
   type request = {
     @ocaml.doc("<p>The ID of the discoverer.</p>") @as("DiscovererId") discovererId: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-schemas") @new external new: request => t = "DeleteDiscovererCommand"
   let make = (~discovererId, ()) => new({discovererId: discovererId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -400,12 +406,22 @@ module UpdateRegistry = {
 module UpdateDiscoverer = {
   type t
   type request = {
+    @ocaml.doc(
+      "<p>Support discovery of schemas in events sent to the bus from another account. (default: true)</p>"
+    )
+    @as("CrossAccount")
+    crossAccount: option<__boolean>,
     @ocaml.doc("<p>The ID of the discoverer.</p>") @as("DiscovererId") discovererId: __string,
     @ocaml.doc("<p>The description of the discoverer to update.</p>") @as("Description")
     description: option<__stringMin0Max256>,
   }
   type response = {
     @ocaml.doc("<p>Tags associated with the resource.</p>") @as("Tags") tags: option<tags>,
+    @ocaml.doc(
+      "<p>The Status if the discoverer will discover schemas from events sent from another account.</p>"
+    )
+    @as("CrossAccount")
+    crossAccount: option<__boolean>,
     @ocaml.doc("<p>The state of the discoverer.</p>") @as("State") state: option<discovererState>,
     @ocaml.doc("<p>The ARN of the event bus.</p>") @as("SourceArn") sourceArn: option<__string>,
     @ocaml.doc("<p>The ID of the discoverer.</p>") @as("DiscovererId")
@@ -416,8 +432,8 @@ module UpdateDiscoverer = {
     description: option<__string>,
   }
   @module("@aws-sdk/client-schemas") @new external new: request => t = "UpdateDiscovererCommand"
-  let make = (~discovererId, ~description=?, ()) =>
-    new({discovererId: discovererId, description: description})
+  let make = (~discovererId, ~crossAccount=?, ~description=?, ()) =>
+    new({crossAccount: crossAccount, discovererId: discovererId, description: description})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -427,7 +443,7 @@ module UntagResource = {
     @ocaml.doc("<p>Keys of key-value pairs.</p>") @as("TagKeys") tagKeys: __listOf__string,
     @ocaml.doc("<p>The ARN of the resource.</p>") @as("ResourceArn") resourceArn: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-schemas") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -440,7 +456,7 @@ module TagResource = {
     @ocaml.doc("<p>Tags associated with the resource.</p>") @as("Tags") tags: tags,
     @ocaml.doc("<p>The ARN of the resource.</p>") @as("ResourceArn") resourceArn: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-schemas") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -532,6 +548,11 @@ module DescribeDiscoverer = {
   }
   type response = {
     @ocaml.doc("<p>Tags associated with the resource.</p>") @as("Tags") tags: option<tags>,
+    @ocaml.doc(
+      "<p>The Status if the discoverer will discover schemas from events sent from another account.</p>"
+    )
+    @as("CrossAccount")
+    crossAccount: option<__boolean>,
     @ocaml.doc("<p>The state of the discoverer.</p>") @as("State") state: option<discovererState>,
     @ocaml.doc("<p>The ARN of the event bus.</p>") @as("SourceArn") sourceArn: option<__string>,
     @ocaml.doc("<p>The ID of the discoverer.</p>") @as("DiscovererId")
@@ -611,12 +632,22 @@ module CreateDiscoverer = {
   type t
   type request = {
     @ocaml.doc("<p>Tags associated with the resource.</p>") @as("Tags") tags: option<tags>,
+    @ocaml.doc(
+      "<p>Support discovery of schemas in events sent to the bus from another account. (default: true).</p>"
+    )
+    @as("CrossAccount")
+    crossAccount: option<__boolean>,
     @ocaml.doc("<p>The ARN of the event bus.</p>") @as("SourceArn") sourceArn: __stringMin20Max1600,
     @ocaml.doc("<p>A description for the discoverer.</p>") @as("Description")
     description: option<__stringMin0Max256>,
   }
   type response = {
     @ocaml.doc("<p>Tags associated with the resource.</p>") @as("Tags") tags: option<tags>,
+    @ocaml.doc(
+      "<p>The Status if the discoverer will discover schemas from events sent from another account.</p>"
+    )
+    @as("CrossAccount")
+    crossAccount: option<__boolean>,
     @ocaml.doc("<p>The state of the discoverer.</p>") @as("State") state: option<discovererState>,
     @ocaml.doc("<p>The ARN of the event bus.</p>") @as("SourceArn") sourceArn: option<__string>,
     @ocaml.doc("<p>The ID of the discoverer.</p>") @as("DiscovererId")
@@ -627,8 +658,8 @@ module CreateDiscoverer = {
     description: option<__string>,
   }
   @module("@aws-sdk/client-schemas") @new external new: request => t = "CreateDiscovererCommand"
-  let make = (~sourceArn, ~tags=?, ~description=?, ()) =>
-    new({tags: tags, sourceArn: sourceArn, description: description})
+  let make = (~sourceArn, ~tags=?, ~crossAccount=?, ~description=?, ()) =>
+    new({tags: tags, crossAccount: crossAccount, sourceArn: sourceArn, description: description})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

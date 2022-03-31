@@ -25,6 +25,7 @@ type sourceType = [
 ]
 type integerOptional = int
 type integer_ = int
+type globalClusterIdentifier = string
 type exceptionMessage = string
 type booleanOptional = bool
 type boolean_ = bool
@@ -43,9 +44,9 @@ type upgradeTarget = {
             version.</p>")
   @as("IsMajorVersionUpgrade")
   isMajorVersionUpgrade: option<boolean_>,
-  @ocaml.doc("<p>A value that indicates whether the target version is applied to any source DB
-            instances that have <code>AutoMinorVersionUpgrade</code> set to
-            <code>true</code>.</p>")
+  @ocaml.doc(
+    "<p>A value that indicates whether the target version is applied to any source DB instances that have <code>AutoMinorVersionUpgrade</code> set to <code>true</code>.</p>"
+  )
   @as("AutoUpgrade")
   autoUpgrade: option<boolean_>,
   @ocaml.doc("<p>The version of the database engine that an instance can be upgraded to.</p>")
@@ -61,20 +62,21 @@ type upgradeTarget = {
   "<p>Metadata assigned to an Amazon DocumentDB resource consisting of a key-value pair.</p>"
 )
 type tag = {
-  @ocaml.doc("<p>The optional value of the tag. The string value can be from 1 to 256 Unicode
-            characters in length and can't be prefixed with \"aws:\" or \"rds:\". The string can contain
-            only the set of Unicode letters, digits, white space, '_', '.', '/', '=', '+', '-' (Java
-            regex: \"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-]*)$\").</p>")
+  @ocaml.doc(
+    "<p>The optional value of the tag. The string value can be from 1 to 256 Unicode characters in length and can't be prefixed with \"<code>aws:</code>\" or \"<code>rds:</code>\". The string can contain only the set of Unicode letters, digits, white space, '_', '.', '/', '=', '+', '-' (Java regex: \"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-]*)$\").</p>"
+  )
   @as("Value")
   value: option<string_>,
-  @ocaml.doc("<p>The required name of the tag. The string value can be from 1 to 128 Unicode characters
-            in length and can't be prefixed with \"aws:\" or \"rds:\". The string can contain only the
-            set of Unicode letters, digits, white space, '_', '.', '/', '=', '+', '-' (Java regex:
-            \"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-]*)$\").</p>")
+  @ocaml.doc(
+    "<p>The required name of the tag. The string value can be from 1 to 128 Unicode characters in length and can't be prefixed with \"<code>aws:</code>\" or \"<code>rds:</code>\". The string can contain only the set of Unicode letters, digits, white space, '_', '.', '/', '=', '+', '-' (Java regex: \"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-]*)$\").</p>"
+  )
   @as("Key")
   key: option<string_>,
 }
 type subnetIdentifierList = array<string_>
+type sourceIdsList = array<string_>
+type readersArnList = array<string_>
+type readReplicaIdentifierList = array<string_>
 @ocaml.doc("<p>Provides information about a pending maintenance action for a resource.</p>")
 type pendingMaintenanceAction = {
   @ocaml.doc("<p>A description providing more detail about the maintenance action.</p>")
@@ -162,32 +164,27 @@ type dbinstanceStatusInfo = {
   @ocaml.doc("<p>This value is currently \"<code>read replication</code>.\"</p>") @as("StatusType")
   statusType: option<string_>,
 }
-@ocaml.doc("<p>Describes an AWS Identity and Access Management (IAM) role that is associated with a
+@ocaml.doc("<p>Describes an Identity and Access Management (IAM) role that is associated with a
             cluster.</p>")
 type dbclusterRole = {
-  @ocaml.doc("<p>Describes the state of association between the IAM role and the cluster. The
-                <code>Status</code> property returns one of the following values:</p>
+  @ocaml.doc("<p>Describes the state of association between the IAMrole and the cluster. The <code>Status</code> property returns one of the following values:</p>
         <ul>
             <li>
                 <p>
-                  <code>ACTIVE</code> - The IAM role ARN is associated with the cluster and
-                    can be used to access other AWS services on your behalf.</p>
+                  <code>ACTIVE</code> - The IAMrole ARN is associated with the cluster and can be used to access other Amazon Web Services services on your behalf.</p>
             </li>
             <li>
                 <p>
-                  <code>PENDING</code> - The IAM role ARN is being associated with the DB
-                    cluster.</p>
+                  <code>PENDING</code> - The IAMrole ARN is being associated with the cluster.</p>
             </li>
             <li>
                 <p>
-                  <code>INVALID</code> - The IAM role ARN is associated with the cluster, but
-                    the cluster cannot assume the IAM role to access other AWS services on your
-                    behalf.</p>
+                  <code>INVALID</code> - The IAMrole ARN is associated with the cluster, but the cluster cannot assume the IAMrole to access other Amazon Web Services services on your behalf.</p>
             </li>
          </ul>")
   @as("Status")
   status: option<string_>,
-  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the IAM role that is associated with the DB
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the IAMrole that is associated with the DB
             cluster.</p>")
   @as("RoleArn")
   roleArn: option<string_>,
@@ -227,7 +224,7 @@ type dbclusterMember = {
   @as("DBInstanceIdentifier")
   dbinstanceIdentifier: option<string_>,
 }
-@ocaml.doc("<p>A certificate authority (CA) certificate for an AWS account.</p>")
+@ocaml.doc("<p>A certificate authority (CA) certificate for an account.</p>")
 type certificate = {
   @ocaml.doc("<p>The Amazon Resource Name (ARN) for the certificate.</p>
          <p>Example: <code>arn:aws:rds:us-east-1::cert:rds-ca-2019</code>
@@ -289,6 +286,24 @@ type pendingCloudwatchLogsExports = {
   logTypesToEnable: option<logTypeList>,
 }
 type parametersList = array<parameter>
+@ocaml.doc(
+  "<p>A data structure with information about any primary and secondary clusters associated with an Amazon DocumentDB global clusters. </p>"
+)
+type globalClusterMember = {
+  @ocaml.doc(
+    "<p> Specifies whether the Amazon DocumentDB cluster is the primary cluster (that is, has read-write capability) for the Amazon DocumentDB global cluster with which it is associated. </p>"
+  )
+  @as("IsWriter")
+  isWriter: option<boolean_>,
+  @ocaml.doc(
+    "<p>The Amazon Resource Name (ARN) for each read-only secondary cluster associated with the Aurora global cluster.</p>"
+  )
+  @as("Readers")
+  readers: option<readersArnList>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) for each Amazon DocumentDB cluster.</p>")
+  @as("DBClusterArn")
+  dbclusterArn: option<string_>,
+}
 @ocaml.doc("<p>A named set of filter values, used to return a more specific list of results. You can
             use a filter to match a set of resources by specific criteria, such as IDs.</p>
         <p>Wildcards are not supported in filters.</p>")
@@ -297,6 +312,55 @@ type filter = {
   values: filterValueList,
   @ocaml.doc("<p>The name of the filter. Filter names are case sensitive.</p>") @as("Name")
   name: string_,
+}
+@ocaml.doc("<p>Detailed information about an event to which you have subscribed.</p>")
+type eventSubscription = {
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) for the event subscription.</p>")
+  @as("EventSubscriptionArn")
+  eventSubscriptionArn: option<string_>,
+  @ocaml.doc("<p>A Boolean value indicating whether the subscription is enabled. A value of
+                <code>true</code> indicates that the subscription is enabled.</p>")
+  @as("Enabled")
+  enabled: option<boolean_>,
+  @ocaml.doc(
+    "<p>A list of event categories for the Amazon DocumentDB event notification subscription.</p>"
+  )
+  @as("EventCategoriesList")
+  eventCategoriesList: option<eventCategoriesList>,
+  @ocaml.doc(
+    "<p>A list of source IDs for the Amazon DocumentDB event notification subscription.</p>"
+  )
+  @as("SourceIdsList")
+  sourceIdsList: option<sourceIdsList>,
+  @ocaml.doc("<p>The source type for the Amazon DocumentDB event notification subscription.</p>")
+  @as("SourceType")
+  sourceType: option<string_>,
+  @ocaml.doc(
+    "<p>The time at which the Amazon DocumentDB event notification subscription was created.</p>"
+  )
+  @as("SubscriptionCreationTime")
+  subscriptionCreationTime: option<string_>,
+  @ocaml.doc("<p>The status of the Amazon DocumentDB event notification subscription.</p>
+        <p>Constraints:</p>
+        <p>Can be one of the following: <code>creating</code>, <code>modifying</code>,
+                <code>deleting</code>, <code>active</code>, <code>no-permission</code>,
+                <code>topic-not-exist</code>
+         </p>
+        <p>The <code>no-permission</code> status indicates that Amazon DocumentDB no longer has permission
+            to post to the SNS topic. The <code>topic-not-exist</code> status indicates that the
+            topic was deleted after the subscription was created.</p>")
+  @as("Status")
+  status: option<string_>,
+  @ocaml.doc("<p>The topic ARN of the Amazon DocumentDB event notification subscription.</p>")
+  @as("SnsTopicArn")
+  snsTopicArn: option<string_>,
+  @ocaml.doc("<p>The Amazon DocumentDB event notification subscription ID.</p>")
+  @as("CustSubscriptionId")
+  custSubscriptionId: option<string_>,
+  @ocaml.doc("<p>The Amazon Web Services customer account that is associated with the Amazon DocumentDB event notification
+            subscription.</p>")
+  @as("CustomerAwsId")
+  customerAwsId: option<string_>,
 }
 @ocaml.doc("<p>An event source type, accompanied by one or more event category names.</p>")
 type eventCategoriesMap = {
@@ -320,20 +384,14 @@ type event = {
 }
 type dbinstanceStatusInfoList = array<dbinstanceStatusInfo>
 @ocaml.doc("<p>Contains the name and values of a manual cluster snapshot attribute.</p>
-        <p>Manual cluster snapshot attributes are used to authorize other AWS accounts to
-            restore a manual cluster snapshot.</p>")
+        <p>Manual cluster snapshot attributes are used to authorize other accounts to restore a manual cluster snapshot.</p>")
 type dbclusterSnapshotAttribute = {
   @ocaml.doc("<p>The values for the manual cluster snapshot attribute.</p>
-        <p>If the <code>AttributeName</code> field is set to <code>restore</code>, then this
-            element returns a list of IDs of the AWS accounts that are authorized to copy or restore
-            the manual cluster snapshot. If a value of <code>all</code> is in the list, then the
-            manual cluster snapshot is public and available for any AWS account to copy or
-            restore.</p>")
+        <p>If the <code>AttributeName</code> field is set to <code>restore</code>, then this element returns a list of IDs of the accounts that are authorized to copy or restore the manual cluster snapshot. If a value of <code>all</code> is in the list, then the manual cluster snapshot is public and available for any account to copy or restore.</p>")
   @as("AttributeValues")
   attributeValues: option<attributeValueList>,
   @ocaml.doc("<p>The name of the manual cluster snapshot attribute.</p>
-        <p>The attribute named <code>restore</code> refers to the list of AWS accounts that have
-            permission to copy or restore the manual cluster snapshot.</p>")
+        <p>The attribute named <code>restore</code> refers to the list of accounts that have permission to copy or restore the manual cluster snapshot.</p>")
   @as("AttributeName")
   attributeName: option<string_>,
 }
@@ -346,8 +404,9 @@ type dbclusterSnapshot = {
   @ocaml.doc("<p>The Amazon Resource Name (ARN) for the cluster snapshot.</p>")
   @as("DBClusterSnapshotArn")
   dbclusterSnapshotArn: option<string_>,
-  @ocaml.doc("<p>If <code>StorageEncrypted</code> is <code>true</code>, the AWS KMS key identifier for
-            the encrypted cluster snapshot.</p>")
+  @ocaml.doc(
+    "<p>If <code>StorageEncrypted</code> is <code>true</code>, the KMS key identifier for the encrypted cluster snapshot.</p>"
+  )
   @as("KmsKeyId")
   kmsKeyId: option<string_>,
   @ocaml.doc("<p>Specifies whether the cluster snapshot is encrypted.</p>") @as("StorageEncrypted")
@@ -491,7 +550,9 @@ type orderableDBInstanceOption = {
   engineVersion: option<string_>,
   @ocaml.doc("<p>The engine type of an instance.</p>") @as("Engine") engine: option<string_>,
 }
+type globalClusterMemberList = array<globalClusterMember>
 type filterList = array<filter>
+type eventSubscriptionsList = array<eventSubscription>
 type eventList = array<event>
 type eventCategoriesMapList = array<eventCategoriesMap>
 @ocaml.doc("<p>Contains the result of a successful invocation of the
@@ -505,8 +566,9 @@ type engineDefaults = {
          <code>MaxRecords</code>.</p>")
   @as("Marker")
   marker: option<string_>,
-  @ocaml.doc("<p>The name of the cluster parameter group family to return the engine parameter
-            information for.</p>")
+  @ocaml.doc(
+    "<p>The name of the cluster parameter group family to return the engine parameter information for.</p>"
+  )
   @as("DBParameterGroupFamily")
   dbparameterGroupFamily: option<string_>,
 }
@@ -555,19 +617,18 @@ type dbcluster = {
             (UTC).</p>")
   @as("ClusterCreateTime")
   clusterCreateTime: option<tstamp>,
-  @ocaml.doc("<p>Provides a list of the AWS Identity and Access Management (IAM) roles that are
-            associated with the cluster. IAM roles that are associated with a cluster grant
-            permission for the cluster to access other AWS services on your behalf.</p>")
+  @ocaml.doc(
+    "<p>Provides a list of the Identity and Access Management (IAM) roles that are associated with the cluster. (IAM) roles that are associated with a cluster grant permission for the cluster to access other Amazon Web Services services on your behalf.</p>"
+  )
   @as("AssociatedRoles")
   associatedRoles: option<dbclusterRoles>,
   @ocaml.doc("<p>The Amazon Resource Name (ARN) for the cluster.</p>") @as("DBClusterArn")
   dbclusterArn: option<string_>,
-  @ocaml.doc("<p>The AWS Region-unique, immutable identifier for the cluster. This identifier is
-            found in AWS CloudTrail log entries whenever the AWS KMS key for the cluster is
-            accessed.</p>")
+  @ocaml.doc("<p>The Region-unique, immutable identifier for the cluster. This identifier is
+            found in CloudTrail log entries whenever the KMS key for the cluster is accessed.</p>")
   @as("DbClusterResourceId")
   dbClusterResourceId: option<string_>,
-  @ocaml.doc("<p>If <code>StorageEncrypted</code> is <code>true</code>, the AWS KMS key identifier for
+  @ocaml.doc("<p>If <code>StorageEncrypted</code> is <code>true</code>, the KMS key identifier for
             the encrypted cluster.</p>")
   @as("KmsKeyId")
   kmsKeyId: option<string_>,
@@ -583,6 +644,16 @@ type dbcluster = {
   @ocaml.doc("<p>Provides the list of instances that make up the cluster.</p>")
   @as("DBClusterMembers")
   dbclusterMembers: option<dbclusterMemberList>,
+  @ocaml.doc(
+    "<p>Contains one or more identifiers of the secondary clusters that are associated with this cluster.</p>"
+  )
+  @as("ReadReplicaIdentifiers")
+  readReplicaIdentifiers: option<readReplicaIdentifierList>,
+  @ocaml.doc(
+    "<p>Contains the identifier of the source cluster if this cluster is a secondary cluster.</p>"
+  )
+  @as("ReplicationSourceIdentifier")
+  replicationSourceIdentifier: option<string_>,
   @ocaml.doc("<p>Specifies the weekly time range during which system maintenance can occur, in
             Universal Coordinated Time (UTC).</p>")
   @as("PreferredMaintenanceWindow")
@@ -607,15 +678,8 @@ type dbcluster = {
   @ocaml.doc("<p>Specifies whether the cluster has instances in multiple Availability Zones.</p>")
   @as("MultiAZ")
   multiAZ: option<boolean_>,
-  @ocaml.doc("<p>The reader endpoint for the cluster. The reader endpoint for a cluster load
-            balances connections across the Amazon DocumentDB replicas that are available in a cluster. As
-            clients request new connections to the reader endpoint, Amazon DocumentDB distributes the
-            connection requests among the Amazon DocumentDB replicas in the cluster. This functionality can
-            help balance your read workload across multiple Amazon DocumentDB replicas in your cluster. </p>
-        <p>If a failover occurs, and the Amazon DocumentDB replica that you are connected to is promoted to
-            be the primary instance, your connection is dropped. To continue sending your read
-            workload to other Amazon DocumentDB replicas in the cluster, you can then reconnect to the reader
-            endpoint.</p>")
+  @ocaml.doc("<p>The reader endpoint for the cluster. The reader endpoint for a cluster load balances connections across the Amazon DocumentDB replicas that are available in a cluster. As clients request new connections to the reader endpoint, Amazon DocumentDB distributes the connection requests among the Amazon DocumentDB replicas in the cluster. This functionality can help balance your read workload across multiple Amazon DocumentDB replicas in your cluster. </p>
+        <p>If a failover occurs, and the Amazon DocumentDB replica that you are connected to is promoted to be the primary instance, your connection is dropped. To continue sending your read workload to other Amazon DocumentDB replicas in the cluster, you can then reconnect to the reader endpoint.</p>")
   @as("ReaderEndpoint")
   readerEndpoint: option<string_>,
   @ocaml.doc("<p>Specifies the connection endpoint for the primary instance of the cluster.</p>")
@@ -630,8 +694,9 @@ type dbcluster = {
   percentProgress: option<string_>,
   @ocaml.doc("<p>Specifies the current state of this cluster.</p>") @as("Status")
   status: option<string_>,
-  @ocaml.doc("<p>Specifies information on the subnet group that is associated with the cluster,
-            including the name, description, and subnets in the subnet group.</p>")
+  @ocaml.doc(
+    "<p>Specifies information on the subnet group that is associated with the cluster, including the name, description, and subnets in the subnet group.</p>"
+  )
   @as("DBSubnetGroup")
   dbsubnetGroup: option<string_>,
   @ocaml.doc("<p>Specifies the name of the cluster parameter group for the cluster.</p>")
@@ -651,6 +716,42 @@ type dbcluster = {
 }
 type pendingMaintenanceActions = array<resourcePendingMaintenanceActions>
 type orderableDBInstanceOptionsList = array<orderableDBInstanceOption>
+@ocaml.doc("<p>A data type representing an Amazon DocumentDB global cluster.</p>")
+type globalCluster = {
+  @ocaml.doc(
+    "<p>The list of cluster IDs for secondary clusters within the global cluster. Currently limited to one item. </p>"
+  )
+  @as("GlobalClusterMembers")
+  globalClusterMembers: option<globalClusterMemberList>,
+  @ocaml.doc("<p>The deletion protection setting for the new global cluster.</p>")
+  @as("DeletionProtection")
+  deletionProtection: option<booleanOptional>,
+  @ocaml.doc("<p>The storage encryption setting for the global cluster.</p>")
+  @as("StorageEncrypted")
+  storageEncrypted: option<booleanOptional>,
+  @ocaml.doc("<p>The default database name within the new global cluster.</p>") @as("DatabaseName")
+  databaseName: option<string_>,
+  @ocaml.doc("<p>Indicates the database engine version.</p>") @as("EngineVersion")
+  engineVersion: option<string_>,
+  @ocaml.doc("<p>The Amazon DocumentDB database engine used by the global cluster. </p>")
+  @as("Engine")
+  engine: option<string_>,
+  @ocaml.doc("<p>Specifies the current state of this global cluster.</p>") @as("Status")
+  status: option<string_>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) for the global cluster.</p>")
+  @as("GlobalClusterArn")
+  globalClusterArn: option<string_>,
+  @ocaml.doc(
+    "<p>The Region-unique, immutable identifier for the global database cluster. This identifier is found in AWS CloudTrail log entries whenever the AWS KMS customer master key (CMK) for the cluster is accessed. </p>"
+  )
+  @as("GlobalClusterResourceId")
+  globalClusterResourceId: option<string_>,
+  @ocaml.doc(
+    "<p>Contains a user-supplied global  cluster identifier. This identifier is the unique key that identifies a global cluster. </p>"
+  )
+  @as("GlobalClusterIdentifier")
+  globalClusterIdentifier: option<globalClusterIdentifier>,
+}
 @ocaml.doc("<p>Detailed information about a subnet group. </p>")
 type dbsubnetGroup = {
   @ocaml.doc("<p>The Amazon Resource Name (ARN) for the DB subnet group.</p>")
@@ -680,11 +781,13 @@ type dbclusterSnapshotAttributesResult = {
   dbclusterSnapshotIdentifier: option<string_>,
 }
 type dbclusterList = array<dbcluster>
+type globalClusterList = array<globalCluster>
 type dbsubnetGroups = array<dbsubnetGroup>
 @ocaml.doc("<p>Detailed information about an instance. </p>")
 type dbinstance = {
-  @ocaml.doc("<p>A list of log types that this instance is configured to export to Amazon CloudWatch
-            Logs.</p>")
+  @ocaml.doc(
+    "<p>A list of log types that this instance is configured to export to CloudWatch Logs.</p>"
+  )
   @as("EnabledCloudwatchLogsExports")
   enabledCloudwatchLogsExports: option<logTypeList>,
   @ocaml.doc("<p>The Amazon Resource Name (ARN) for the instance.</p>") @as("DBInstanceArn")
@@ -696,12 +799,11 @@ type dbinstance = {
   @ocaml.doc("<p>The identifier of the CA certificate for this DB instance.</p>")
   @as("CACertificateIdentifier")
   cacertificateIdentifier: option<string_>,
-  @ocaml.doc("<p>The AWS Region-unique, immutable identifier for the instance. This identifier is
-            found in AWS CloudTrail log entries whenever the AWS KMS key for the instance is
+  @ocaml.doc("<p>The Region-unique, immutable identifier for the instance. This identifier is found in CloudTrail log entries whenever the KMS key for the instance is
             accessed.</p>")
   @as("DbiResourceId")
   dbiResourceId: option<string_>,
-  @ocaml.doc("<p> If <code>StorageEncrypted</code> is <code>true</code>, the AWS KMS key identifier for
+  @ocaml.doc("<p> If <code>StorageEncrypted</code> is <code>true</code>, the KMS key identifier for
             the encrypted instance. </p>")
   @as("KmsKeyId")
   kmsKeyId: option<string_>,
@@ -719,7 +821,9 @@ type dbinstance = {
           of <code>PubliclyAccessible</code> is always <code>false</code>.</p>")
   @as("PubliclyAccessible")
   publiclyAccessible: option<boolean_>,
-  @ocaml.doc("<p>Indicates that minor version patches are applied automatically.</p>")
+  @ocaml.doc(
+    "<p>Does not apply. This parameter does not apply to Amazon DocumentDB. Amazon DocumentDB does not perform minor version upgrades regardless of the value set.</p>"
+  )
   @as("AutoMinorVersionUpgrade")
   autoMinorVersionUpgrade: option<boolean_>,
   @ocaml.doc("<p>Indicates the database engine version.</p>") @as("EngineVersion")
@@ -728,16 +832,18 @@ type dbinstance = {
             restore.</p>")
   @as("LatestRestorableTime")
   latestRestorableTime: option<tstamp>,
-  @ocaml.doc("<p>Specifies that changes to the instance are pending. This element is included only
-            when changes are pending. Specific changes are identified by subelements.</p>")
+  @ocaml.doc(
+    "<p>Specifies that changes to the instance are pending. This element is included only when changes are pending. Specific changes are identified by subelements.</p>"
+  )
   @as("PendingModifiedValues")
   pendingModifiedValues: option<pendingModifiedValues>,
   @ocaml.doc("<p>Specifies the weekly time range during which system maintenance can occur, in
             Universal Coordinated Time (UTC).</p>")
   @as("PreferredMaintenanceWindow")
   preferredMaintenanceWindow: option<string_>,
-  @ocaml.doc("<p>Specifies information on the subnet group that is associated with the instance,
-            including the name, description, and subnets in the subnet group.</p>")
+  @ocaml.doc(
+    "<p>Specifies information on the subnet group that is associated with the instance, including the name, description, and subnets in the subnet group.</p>"
+  )
   @as("DBSubnetGroup")
   dbsubnetGroup: option<dbsubnetGroup>,
   @ocaml.doc("<p>Specifies the name of the Availability Zone that the instance is located in.</p>")
@@ -783,14 +889,13 @@ module DeleteDBSubnetGroup = {
             <p>You can't delete the default subnet group.</p>
         </note>
         <p>Constraints:</p>
-        <p>Must match the name of an existing <code>DBSubnetGroup</code>. Must not be
-            default.</p>
+        <p>Must match the name of an existing <code>DBSubnetGroup</code>. Must not be default.</p>
         <p>Example: <code>mySubnetgroup</code>
         </p>")
     @as("DBSubnetGroupName")
     dbsubnetGroupName: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-rds") @new external new: request => t = "DeleteDBSubnetGroupCommand"
   let make = (~dbsubnetGroupName, ()) => new({dbsubnetGroupName: dbsubnetGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -816,7 +921,7 @@ module DeleteDBClusterParameterGroup = {
     @as("DBClusterParameterGroupName")
     dbclusterParameterGroupName: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-rds") @new
   external new: request => t = "DeleteDBClusterParameterGroupCommand"
   let make = (~dbclusterParameterGroupName, ()) =>
@@ -835,7 +940,7 @@ module RemoveTagsFromResource = {
     @as("ResourceName")
     resourceName: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-rds") @new external new: request => t = "RemoveTagsFromResourceCommand"
   let make = (~tagKeys, ~resourceName, ()) => new({tagKeys: tagKeys, resourceName: resourceName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -892,6 +997,71 @@ module ResetDBClusterParameterGroup = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module RemoveSourceIdentifierFromSubscription = {
+  type t
+  @ocaml.doc("<p>Represents the input to <a>RemoveSourceIdentifierFromSubscription</a>.</p>")
+  type request = {
+    @ocaml.doc("<p> The source identifier to be removed from the subscription, such as the instance
+            identifier for an instance, or the name of a security group. </p>")
+    @as("SourceIdentifier")
+    sourceIdentifier: string_,
+    @ocaml.doc("<p>The name of the Amazon DocumentDB event notification subscription that you want to remove a
+            source identifier from.</p>")
+    @as("SubscriptionName")
+    subscriptionName: string_,
+  }
+  type response = {@as("EventSubscription") eventSubscription: option<eventSubscription>}
+  @module("@aws-sdk/client-rds") @new
+  external new: request => t = "RemoveSourceIdentifierFromSubscriptionCommand"
+  let make = (~sourceIdentifier, ~subscriptionName, ()) =>
+    new({sourceIdentifier: sourceIdentifier, subscriptionName: subscriptionName})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module ModifyEventSubscription = {
+  type t
+  @ocaml.doc("<p>Represents the input to <a>ModifyEventSubscription</a>.</p>")
+  type request = {
+    @ocaml.doc("<p> A Boolean value; set to <code>true</code> to activate the subscription. </p>")
+    @as("Enabled")
+    enabled: option<booleanOptional>,
+    @ocaml.doc("<p> A list of event categories for a <code>SourceType</code> that you want to subscribe
+            to.</p>")
+    @as("EventCategories")
+    eventCategories: option<eventCategoriesList>,
+    @ocaml.doc("<p>The type of source that is generating the events. For example, if you want to be notified of events generated by an instance, set this parameter to <code>db-instance</code>. If this value is not specified, all events are returned.</p>
+        <p>Valid values: <code>db-instance</code>, <code>db-parameter-group</code>, <code>db-security-group</code>
+         </p>")
+    @as("SourceType")
+    sourceType: option<string_>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the SNS topic created for event notification. The
+            ARN is created by Amazon SNS when you create a topic and subscribe to it.</p>")
+    @as("SnsTopicArn")
+    snsTopicArn: option<string_>,
+    @ocaml.doc("<p>The name of the Amazon DocumentDB event notification subscription.</p>")
+    @as("SubscriptionName")
+    subscriptionName: string_,
+  }
+  type response = {@as("EventSubscription") eventSubscription: option<eventSubscription>}
+  @module("@aws-sdk/client-rds") @new external new: request => t = "ModifyEventSubscriptionCommand"
+  let make = (
+    ~subscriptionName,
+    ~enabled=?,
+    ~eventCategories=?,
+    ~sourceType=?,
+    ~snsTopicArn=?,
+    (),
+  ) =>
+    new({
+      enabled: enabled,
+      eventCategories: eventCategories,
+      sourceType: sourceType,
+      snsTopicArn: snsTopicArn,
+      subscriptionName: subscriptionName,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module ModifyDBClusterParameterGroup = {
   type t
   @ocaml.doc("<p>Represents the input to <a>ModifyDBClusterParameterGroup</a>.</p>")
@@ -931,13 +1101,28 @@ module ModifyDBClusterParameterGroup = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module DeleteEventSubscription = {
+  type t
+  @ocaml.doc("<p>Represents the input to <a>DeleteEventSubscription</a>.</p>")
+  type request = {
+    @ocaml.doc(
+      "<p>The name of the Amazon DocumentDB event notification subscription that you want to delete.</p>"
+    )
+    @as("SubscriptionName")
+    subscriptionName: string_,
+  }
+  type response = {@as("EventSubscription") eventSubscription: option<eventSubscription>}
+  @module("@aws-sdk/client-rds") @new external new: request => t = "DeleteEventSubscriptionCommand"
+  let make = (~subscriptionName, ()) => new({subscriptionName: subscriptionName})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module DeleteDBClusterSnapshot = {
   type t
   @ocaml.doc("<p>Represents the input to <a>DeleteDBClusterSnapshot</a>.</p>")
   type request = {
     @ocaml.doc("<p>The identifier of the cluster snapshot to delete.</p>
-        <p>Constraints: Must be the name of an existing cluster snapshot in the
-                <code>available</code> state.</p>")
+        <p>Constraints: Must be the name of an existing cluster snapshot in the <code>available</code> state.</p>")
     @as("DBClusterSnapshotIdentifier")
     dbclusterSnapshotIdentifier: string_,
   }
@@ -945,6 +1130,90 @@ module DeleteDBClusterSnapshot = {
   @module("@aws-sdk/client-rds") @new external new: request => t = "DeleteDBClusterSnapshotCommand"
   let make = (~dbclusterSnapshotIdentifier, ()) =>
     new({dbclusterSnapshotIdentifier: dbclusterSnapshotIdentifier})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module CreateEventSubscription = {
+  type t
+  @ocaml.doc("<p>Represents the input to <a>CreateEventSubscription</a>.</p>")
+  type request = {
+    @ocaml.doc("<p>The tags to be assigned to the event subscription.</p>") @as("Tags")
+    tags: option<tagList_>,
+    @ocaml.doc(
+      "<p> A Boolean value; set to <code>true</code> to activate the subscription, set to <code>false</code> to create the subscription but not active it. </p>"
+    )
+    @as("Enabled")
+    enabled: option<booleanOptional>,
+    @ocaml.doc("<p>The list of identifiers of the event sources for which events are returned. If not specified, then all sources are included in the response. An identifier must begin with a letter and must contain only ASCII letters, digits, and hyphens; it can't end with a
+            hyphen or contain two consecutive hyphens.</p>
+        <p>Constraints:</p>
+        <ul>
+            <li>
+                <p>If <code>SourceIds</code> are provided, <code>SourceType</code> must also be
+                    provided.</p>
+            </li>
+            <li>
+                <p>If the source type is an instance, a <code>DBInstanceIdentifier</code> must
+                    be provided.</p>
+            </li>
+            <li>
+                <p>If the source type is a security group, a <code>DBSecurityGroupName</code>
+                    must be provided.</p>
+            </li>
+            <li>
+                <p>If the source type is a parameter group, a
+                        <code>DBParameterGroupName</code> must be provided.</p>
+            </li>
+            <li>
+                <p>If the source type is a snapshot, a <code>DBSnapshotIdentifier</code> must
+                    be provided.</p>
+            </li>
+         </ul>")
+    @as("SourceIds")
+    sourceIds: option<sourceIdsList>,
+    @ocaml.doc(
+      "<p> A list of event categories for a <code>SourceType</code> that you want to subscribe to. </p>"
+    )
+    @as("EventCategories")
+    eventCategories: option<eventCategoriesList>,
+    @ocaml.doc("<p>The type of source that is generating the events. For example, if you want to be notified of events generated by an instance, you would set this parameter to <code>db-instance</code>. If this value is not specified, all events are returned.</p>
+        <p>Valid values: <code>db-instance</code>, <code>db-cluster</code>,
+                <code>db-parameter-group</code>, <code>db-security-group</code>,
+                <code>db-cluster-snapshot</code>
+        </p>")
+    @as("SourceType")
+    sourceType: option<string_>,
+    @ocaml.doc(
+      "<p>The Amazon Resource Name (ARN) of the SNS topic created for event notification. Amazon SNS creates the ARN when you create a topic and subscribe to it.</p>"
+    )
+    @as("SnsTopicArn")
+    snsTopicArn: string_,
+    @ocaml.doc("<p>The name of the subscription.</p>
+        <p>Constraints: The name must be fewer than 255 characters.</p>")
+    @as("SubscriptionName")
+    subscriptionName: string_,
+  }
+  type response = {@as("EventSubscription") eventSubscription: option<eventSubscription>}
+  @module("@aws-sdk/client-rds") @new external new: request => t = "CreateEventSubscriptionCommand"
+  let make = (
+    ~snsTopicArn,
+    ~subscriptionName,
+    ~tags=?,
+    ~enabled=?,
+    ~sourceIds=?,
+    ~eventCategories=?,
+    ~sourceType=?,
+    (),
+  ) =>
+    new({
+      tags: tags,
+      enabled: enabled,
+      sourceIds: sourceIds,
+      eventCategories: eventCategories,
+      sourceType: sourceType,
+      snsTopicArn: snsTopicArn,
+      subscriptionName: subscriptionName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1049,22 +1318,18 @@ module CopyDBClusterSnapshot = {
             <code>false</code>. The default is <code>false</code>.</p>")
     @as("CopyTags")
     copyTags: option<booleanOptional>,
-    @ocaml.doc("<p>The URL that contains a Signature Version 4 signed request for the
-            <code>CopyDBClusterSnapshot</code> API action in the AWS Region that 
-            contains the source cluster snapshot to copy. You must use the 
-            <code>PreSignedUrl</code> parameter when copying a cluster snapshot
-            from another AWS Region.</p>
+    @ocaml.doc("<p>The URL that contains a Signature Version 4 signed request for the<code>CopyDBClusterSnapshot</code> API action in the Region that contains the source cluster snapshot to copy. You must use the <code>PreSignedUrl</code> parameter when copying a cluster snapshot from another Region.</p>
             
-        <p>If you are using an AWS SDK tool or the AWS CLI, you can specify 
+        <p>If you are using an Amazon Web Services SDK tool or the CLI, you can specify 
             <code>SourceRegion</code> (or <code>--source-region</code> for the
-            AWS CLI) instead of specifying <code>PreSignedUrl</code> manually. 
+            CLI) instead of specifying <code>PreSignedUrl</code> manually. 
             Specifying <code>SourceRegion</code> autogenerates a pre-signed URL 
             that is a valid request for the operation that can be executed in
-            the source AWS Region.</p>
+            the source Region.</p>
             
         <p>The presigned URL must be a valid request for the 
             <code>CopyDBClusterSnapshot</code> API action that can be executed 
-            in the source AWS Region that contains the cluster snapshot to be 
+            in the source Region that contains the cluster snapshot to be 
             copied. The presigned URL request must contain the following
             parameter values:</p>
         <ul>
@@ -1078,9 +1343,9 @@ module CopyDBClusterSnapshot = {
                   <code>SourceDBClusterSnapshotIdentifier</code> - The 
                     identifier for the the encrypted cluster snapshot to be 
                     copied. This identifier must be in the Amazon Resource Name
-                    (ARN) format for the source AWS Region. For example, if you 
+                    (ARN) format for the source Region. For example, if you 
                     are copying an encrypted cluster snapshot from the us-east-1
-                    AWS Region, then your 
+                    Region, then your 
                     <code>SourceDBClusterSnapshotIdentifier</code> looks 
                     something like the following: 
                     <code>arn:aws:rds:us-east-1:12345678012:sample-cluster:sample-cluster-snapshot</code>.</p>
@@ -1094,31 +1359,17 @@ module CopyDBClusterSnapshot = {
          </ul>")
     @as("PreSignedUrl")
     preSignedUrl: option<string_>,
-    @ocaml.doc("<p>The AWS KMS key ID for an encrypted cluster snapshot. The AWS KMS
-            key ID is the Amazon Resource Name (ARN), AWS KMS key identifier, or
-            the AWS KMS key alias for the AWS KMS encryption key. </p>
+    @ocaml.doc("<p>The KMS key ID for an encrypted cluster snapshot. The KMS
+            key ID is the Amazon Resource Name (ARN), KMS key identifier, or
+            the KMS key alias for the KMS encryption key. </p>
             
-        <p>If you copy an encrypted cluster snapshot from your AWS account, 
-            you can specify a value for <code>KmsKeyId</code> to encrypt the 
-            copy with a new AWS KMS encryption key. If you don't specify a value
-            for <code>KmsKeyId</code>, then the copy of the cluster snapshot is 
-            encrypted with the same AWS KMS key as the source cluster snapshot.
-            </p>
+        <p>If you copy an encrypted cluster snapshot from your account, you can specify a value for <code>KmsKeyId</code> to encrypt the copy with a new KMS encryption key. If you don't specify a value for <code>KmsKeyId</code>, then the copy of the cluster snapshot is encrypted with the same KMS key as the source cluster snapshot.</p>
             
-        <p>If you copy an encrypted cluster snapshot that is shared from 
-            another AWS account, then you must specify a value for 
-            <code>KmsKeyId</code>.</p>
+        <p>If you copy an encrypted cluster snapshot that is shared from another account, then you must specify a value for <code>KmsKeyId</code>.</p>
         
+        <p>To copy an encrypted cluster snapshot to another Region, set <code>KmsKeyId</code> to the KMS key ID that you want to use to encrypt the copy of the cluster snapshot in the destination Region. KMS encryption keys are specific to the Region that they are created in, and you can't use encryption keys from one Region in another Region.</p>
             
-        <p>To copy an encrypted cluster snapshot to another AWS Region, set
-            <code>KmsKeyId</code> to the AWS KMS key ID that you want to use to 
-            encrypt the copy of the cluster snapshot in the destination Region. 
-            AWS KMS encryption keys are specific to the AWS Region that they are 
-            created in, and you can't use encryption keys from one AWS Region in 
-            another AWS Region.</p>
-            
-        <p>If you copy an unencrypted cluster snapshot and specify a value 
-            for the <code>KmsKeyId</code> parameter, an error is returned.</p>")
+        <p>If you copy an unencrypted cluster snapshot and specify a value for the <code>KmsKeyId</code> parameter, an error is returned.</p>")
     @as("KmsKeyId")
     kmsKeyId: option<string_>,
     @ocaml.doc("<p>The identifier of the new cluster snapshot to create from the 
@@ -1151,13 +1402,11 @@ module CopyDBClusterSnapshot = {
                     <i>available</i> state.</p>
             </li>
             <li>
-                <p>If the source snapshot is in the same AWS Region as the 
-                    copy, specify a valid snapshot identifier.</p>
+                <p>If the source snapshot is in the same Region as the copy, specify a valid snapshot identifier.</p>
             </li>
             <li>
                 
-                <p>If the source snapshot is in a different AWS Region than
-                    the copy, specify a valid cluster snapshot ARN.</p>
+                <p>If the source snapshot is in a different Region than the copy, specify a valid cluster snapshot ARN.</p>
             </li>
          </ul>
         <p>Example: <code>my-cluster-snapshot1</code>
@@ -1219,24 +1468,17 @@ module CopyDBClusterParameterGroup = {
         </p>")
     @as("TargetDBClusterParameterGroupIdentifier")
     targetDBClusterParameterGroupIdentifier: string_,
-    @ocaml.doc("<p>The identifier or Amazon Resource Name (ARN) for the source cluster
-            parameter group.</p>
+    @ocaml.doc("<p>The identifier or Amazon Resource Name (ARN) for the source cluster parameter group.</p>
         <p>Constraints:</p>
         <ul>
             <li>
                 <p>Must specify a valid cluster parameter group.</p>
             </li>
             <li>
-                <p>If the source cluster parameter group is in the same AWS 
-                    Region as the copy, specify a valid parameter group 
-                    identifier; for example, 
-                    <code>my-db-cluster-param-group</code>, or a valid ARN.</p>
+                <p>If the source cluster parameter group is in the same Region as the copy, specify a valid parameter group identifier; for example, <code>my-db-cluster-param-group</code>, or a valid ARN.</p>
             </li>
             <li>
-                <p>If the source parameter group is in a different AWS Region 
-                    than the copy, specify a valid cluster parameter group ARN; 
-                    for example,
-                    <code>arn:aws:rds:us-east-1:123456789012:sample-cluster:sample-parameter-group</code>.</p>
+                <p>If the source parameter group is in a different Region than the copy, specify a valid cluster parameter group ARN; for example, <code>arn:aws:rds:us-east-1:123456789012:sample-cluster:sample-parameter-group</code>.</p>
             </li>
          </ul>")
     @as("SourceDBClusterParameterGroupIdentifier")
@@ -1275,10 +1517,49 @@ module AddTagsToResource = {
     @as("ResourceName")
     resourceName: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-rds") @new external new: request => t = "AddTagsToResourceCommand"
   let make = (~tags, ~resourceName, ()) => new({tags: tags, resourceName: resourceName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module AddSourceIdentifierToSubscription = {
+  type t
+  @ocaml.doc("<p>Represents the input to <a>AddSourceIdentifierToSubscription</a>.
+        </p>")
+  type request = {
+    @ocaml.doc("<p>The identifier of the event source to be added:</p>
+        <ul>
+            <li>
+                <p>If the source type is an instance, a 
+                    <code>DBInstanceIdentifier</code> must be provided.</p>
+            </li>
+            <li>
+                <p>If the source type is a security group, a 
+                    <code>DBSecurityGroupName</code> must be provided.</p>
+            </li>
+            <li>
+                <p>If the source type is a parameter group, a
+                    <code>DBParameterGroupName</code> must be provided.</p>
+            </li>
+            <li>
+                <p>If the source type is a snapshot, a 
+                    <code>DBSnapshotIdentifier</code> must be provided.</p>
+            </li>
+         </ul>")
+    @as("SourceIdentifier")
+    sourceIdentifier: string_,
+    @ocaml.doc("<p>The name of the Amazon DocumentDB event notification subscription that you 
+            want to add a source identifier to.</p>")
+    @as("SubscriptionName")
+    subscriptionName: string_,
+  }
+  type response = {@as("EventSubscription") eventSubscription: option<eventSubscription>}
+  @module("@aws-sdk/client-rds") @new
+  external new: request => t = "AddSourceIdentifierToSubscriptionCommand"
+  let make = (~sourceIdentifier, ~subscriptionName, ()) =>
+    new({sourceIdentifier: sourceIdentifier, subscriptionName: subscriptionName})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StopDBCluster = {
@@ -1315,36 +1596,25 @@ module RestoreDBClusterToPointInTime = {
   type t
   @ocaml.doc("<p>Represents the input to <a>RestoreDBClusterToPointInTime</a>.</p>")
   type request = {
-    @ocaml.doc("<p>Specifies whether this cluster can be deleted. If <code>DeletionProtection</code> is
-            enabled, the cluster cannot be deleted unless it is modified and
-                <code>DeletionProtection</code> is disabled. <code>DeletionProtection</code>
-            protects clusters from being accidentally deleted.</p>")
+    @ocaml.doc(
+      "<p>Specifies whether this cluster can be deleted. If <code>DeletionProtection</code> is enabled, the cluster cannot be deleted unless it is modified and <code>DeletionProtection</code> is disabled. <code>DeletionProtection</code> protects clusters from being accidentally deleted.</p>"
+    )
     @as("DeletionProtection")
     deletionProtection: option<booleanOptional>,
     @ocaml.doc("<p>A list of log types that must be enabled for exporting to Amazon CloudWatch
             Logs.</p>")
     @as("EnableCloudwatchLogsExports")
     enableCloudwatchLogsExports: option<logTypeList>,
-    @ocaml.doc("<p>The AWS KMS key identifier to use when restoring an encrypted cluster from an
-            encrypted cluster.</p>
-        <p>The AWS KMS key identifier is the Amazon Resource Name (ARN) for the AWS KMS
-            encryption key. If you are restoring a cluster with the same AWS account that owns
-            the AWS KMS encryption key used to encrypt the new cluster, then you can use the AWS
-            KMS key alias instead of the ARN for the AWS KMS encryption key.</p>
-        <p>You can restore to a new cluster and encrypt the new cluster with an AWS KMS key
-            that is different from the AWS KMS key used to encrypt the source cluster. The new DB
-            cluster is encrypted with the AWS KMS key identified by the <code>KmsKeyId</code>
-            parameter.</p>
-        <p>If you do not specify a value for the <code>KmsKeyId</code> parameter, then the
-            following occurs:</p>
+    @ocaml.doc("<p>The KMS key identifier to use when restoring an encrypted cluster from an encrypted cluster.</p>
+        <p>The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption key. If you are restoring a cluster with the same account that owns the KMS encryption key used to encrypt the new cluster, then you can use the KMS key alias instead of the ARN for the KMS encryption key.</p>
+        <p>You can restore to a new cluster and encrypt the new cluster with an KMS key that is different from the KMS key used to encrypt the source cluster. The new DB cluster is encrypted with the KMS key identified by the <code>KmsKeyId</code> parameter.</p>
+        <p>If you do not specify a value for the <code>KmsKeyId</code> parameter, then the following occurs:</p>
         <ul>
             <li>
-                <p>If the cluster is encrypted, then the restored cluster is encrypted
-                    using the AWS KMS key that was used to encrypt the source cluster.</p>
+                <p>If the cluster is encrypted, then the restored cluster is encrypted using the KMS key that was used to encrypt the source cluster.</p>
             </li>
             <li>
-                <p>If the cluster is not encrypted, then the restored cluster is not
-                    encrypted.</p>
+                <p>If the cluster is not encrypted, then the restored cluster is not encrypted.</p>
             </li>
          </ul>
         <p>If <code>DBClusterIdentifier</code> refers to a cluster that is not encrypted, then
@@ -1384,16 +1654,13 @@ module RestoreDBClusterToPointInTime = {
                 <p>Must be before the latest restorable time for the instance.</p>
             </li>
             <li>
-                <p>Must be specified if the <code>UseLatestRestorableTime</code> parameter is not
-                    provided.</p>
+                <p>Must be specified if the <code>UseLatestRestorableTime</code> parameter is not provided.</p>
             </li>
             <li>
-                <p>Cannot be specified if the <code>UseLatestRestorableTime</code> parameter is
-                        <code>true</code>.</p>
+                <p>Cannot be specified if the <code>UseLatestRestorableTime</code> parameter is <code>true</code>.</p>
             </li>
             <li>
-                <p>Cannot be specified if the <code>RestoreType</code> parameter is
-                        <code>copy-on-write</code>.</p>
+                <p>Cannot be specified if the <code>RestoreType</code> parameter is <code>copy-on-write</code>.</p>
             </li>
          </ul>
         <p>Example: <code>2015-03-07T23:45:00Z</code>
@@ -1462,29 +1729,23 @@ module RestoreDBClusterFromSnapshot = {
   type t
   @ocaml.doc("<p>Represents the input to <a>RestoreDBClusterFromSnapshot</a>.</p>")
   type request = {
-    @ocaml.doc("<p>Specifies whether this cluster can be deleted. If <code>DeletionProtection</code> is
-            enabled, the cluster cannot be deleted unless it is modified and
-                <code>DeletionProtection</code> is disabled. <code>DeletionProtection</code>
-            protects clusters from being accidentally deleted.</p>")
+    @ocaml.doc(
+      "<p>Specifies whether this cluster can be deleted. If <code>DeletionProtection</code> is enabled, the cluster cannot be deleted unless it is modified and <code>DeletionProtection</code> is disabled. <code>DeletionProtection</code> protects clusters from being accidentally deleted.</p>"
+    )
     @as("DeletionProtection")
     deletionProtection: option<booleanOptional>,
-    @ocaml.doc("<p>A list of log types that must be enabled for exporting to Amazon CloudWatch
-            Logs.</p>")
+    @ocaml.doc(
+      "<p>A list of log types that must be enabled for exporting to Amazon CloudWatch Logs.</p>"
+    )
     @as("EnableCloudwatchLogsExports")
     enableCloudwatchLogsExports: option<logTypeList>,
-    @ocaml.doc("<p>The AWS KMS key identifier to use when restoring an encrypted cluster from a DB
-            snapshot or cluster snapshot.</p>
-        <p>The AWS KMS key identifier is the Amazon Resource Name (ARN) for the AWS KMS
-            encryption key. If you are restoring a cluster with the same AWS account that owns
-            the AWS KMS encryption key used to encrypt the new cluster, then you can use the AWS
-            KMS key alias instead of the ARN for the AWS KMS encryption key.</p>
+    @ocaml.doc("<p>The KMS key identifier to use when restoring an encrypted cluster from a DB snapshot or cluster snapshot.</p>
+        <p>The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption key. If you are restoring a cluster with the same account that owns the KMS encryption key used to encrypt the new cluster, then you can use the KMS key alias instead of the ARN for the KMS encryption key.</p>
         <p>If you do not specify a value for the <code>KmsKeyId</code> parameter, then the
             following occurs:</p>
         <ul>
             <li>
-                <p>If the snapshot or cluster snapshot in <code>SnapshotIdentifier</code>
-                    is encrypted, then the restored cluster is encrypted using the AWS KMS key
-                    that was used to encrypt the snapshot or the cluster snapshot.</p>
+                <p>If the snapshot or cluster snapshot in <code>SnapshotIdentifier</code> is encrypted, then the restored cluster is encrypted using the KMS key that was used to encrypt the snapshot or the cluster snapshot.</p>
             </li>
             <li>
                 <p>If the snapshot or the cluster snapshot in
@@ -1599,9 +1860,9 @@ module ModifyDBCluster = {
             protects clusters from being accidentally deleted.</p>")
     @as("DeletionProtection")
     deletionProtection: option<booleanOptional>,
-    @ocaml.doc("<p>The version number of the database engine to which you want to upgrade. Changing this
-            parameter results in an outage. The change is applied during the next maintenance window
-            unless the <code>ApplyImmediately</code> parameter is set to <code>true</code>.</p>")
+    @ocaml.doc(
+      "<p>The version number of the database engine to which you want to upgrade. Modifying engine version is not supported on Amazon DocumentDB.</p>"
+    )
     @as("EngineVersion")
     engineVersion: option<string_>,
     @ocaml.doc("<p>The configuration setting for the log types to be enabled for export to Amazon
@@ -1615,7 +1876,7 @@ module ModifyDBCluster = {
         <p>Format: <code>ddd:hh24:mi-ddd:hh24:mi</code>
         </p>
         <p>The default is a 30-minute window selected at random from an 8-hour block of time for
-            each AWS Region, occurring on a random day of the week. </p>
+            each Region, occurring on a random day of the week. </p>
         <p>Valid days: Mon, Tue, Wed, Thu, Fri, Sat, Sun</p>
         <p>Constraints: Minimum 30-minute window.</p>")
     @as("PreferredMaintenanceWindow")
@@ -1623,7 +1884,7 @@ module ModifyDBCluster = {
     @ocaml.doc("<p>The daily time range during which automated backups are created if automated backups
             are enabled, using the <code>BackupRetentionPeriod</code> parameter. </p>
         <p>The default is a 30-minute window selected at random from an 8-hour block of time for
-            each AWS Region. </p>
+            each Region. </p>
         <p>Constraints:</p>
         <ul>
             <li>
@@ -1779,8 +2040,7 @@ module FailoverDBCluster = {
             example, <code>mydbcluster-replica1</code>.</p>")
     @as("TargetDBInstanceIdentifier")
     targetDBInstanceIdentifier: option<string_>,
-    @ocaml.doc("<p>A cluster identifier to force a failover for. This parameter is not case
-            sensitive.</p>
+    @ocaml.doc("<p>A cluster identifier to force a failover for. This parameter is not case sensitive.</p>
         <p>Constraints:</p>
         <ul>
             <li>
@@ -1831,22 +2091,20 @@ module DescribeEvents = {
         <p>Example: 2009-07-08T18:00Z</p>")
     @as("EndTime")
     endTime: option<tstamp>,
-    @ocaml.doc("<p> The beginning of the time interval to retrieve events for, specified in ISO 8601
-            format. </p>
+    @ocaml.doc("<p> The beginning of the time interval to retrieve events for, specified in ISO 8601 format. </p>
         <p>Example: 2009-07-08T18:00Z</p>")
     @as("StartTime")
     startTime: option<tstamp>,
-    @ocaml.doc("<p>The event source to retrieve events for. If no value is specified, all events are
-            returned.</p>")
+    @ocaml.doc(
+      "<p>The event source to retrieve events for. If no value is specified, all events are returned.</p>"
+    )
     @as("SourceType")
     sourceType: option<sourceType>,
-    @ocaml.doc("<p>The identifier of the event source for which events are returned. If not specified,
-            then all sources are included in the response.</p>
+    @ocaml.doc("<p>The identifier of the event source for which events are returned. If not specified, then all sources are included in the response.</p>
         <p>Constraints:</p>
         <ul>
             <li>
-                <p>If <code>SourceIdentifier</code> is provided, <code>SourceType</code> must
-                    also be provided.</p>
+                <p>If <code>SourceIdentifier</code> is provided, <code>SourceType</code> must also be provided.</p>
             </li>
             <li>
                 <p>If the source type is <code>DBInstance</code>, a
@@ -1908,6 +2166,51 @@ module DescribeEvents = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module DescribeEventSubscriptions = {
+  type t
+  @ocaml.doc("<p>Represents the input to <a>DescribeEventSubscriptions</a>.</p>")
+  type request = {
+    @ocaml.doc("<p>An optional pagination token provided by a previous request. If this parameter is specified, the response
+         includes only records beyond the marker, up to the value specified by
+         <code>MaxRecords</code>.</p>")
+    @as("Marker")
+    marker: option<string_>,
+    @ocaml.doc("<p> The maximum number of records to include in the response. If more records exist than
+         the specified <code>MaxRecords</code> value, a pagination token (marker) is included
+         in the response so that the remaining results can be retrieved.</p>
+         <p>Default: 100</p>
+        <p>Constraints: Minimum 20, maximum 100.</p>")
+    @as("MaxRecords")
+    maxRecords: option<integerOptional>,
+    @ocaml.doc("<p>This parameter is not currently supported.</p>") @as("Filters")
+    filters: option<filterList>,
+    @ocaml.doc("<p>The name of the Amazon DocumentDB event notification subscription that you want to
+            describe.</p>")
+    @as("SubscriptionName")
+    subscriptionName: option<string_>,
+  }
+  @ocaml.doc("<p>Represents the output of <a>DescribeEventSubscriptions</a>.</p>")
+  type response = {
+    @ocaml.doc("<p>A list of event subscriptions.</p>") @as("EventSubscriptionsList")
+    eventSubscriptionsList: option<eventSubscriptionsList>,
+    @ocaml.doc("<p>An optional pagination token provided by a previous request. If this parameter is specified, the response
+         includes only records beyond the marker, up to the value specified by
+         <code>MaxRecords</code>.</p>")
+    @as("Marker")
+    marker: option<string_>,
+  }
+  @module("@aws-sdk/client-rds") @new
+  external new: request => t = "DescribeEventSubscriptionsCommand"
+  let make = (~marker=?, ~maxRecords=?, ~filters=?, ~subscriptionName=?, ()) =>
+    new({
+      marker: marker,
+      maxRecords: maxRecords,
+      filters: filters,
+      subscriptionName: subscriptionName,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module DescribeEventCategories = {
   type t
   @ocaml.doc("<p>Represents the input to <a>DescribeEventCategories</a>.</p>")
@@ -1915,8 +2218,7 @@ module DescribeEventCategories = {
     @ocaml.doc("<p>This parameter is not currently supported.</p>") @as("Filters")
     filters: option<filterList>,
     @ocaml.doc("<p>The type of source that is generating the events.</p>
-        <p>Valid values: <code>db-instance</code>, <code>db-parameter-group</code>,
-                <code>db-security-group</code>, <code>db-snapshot</code>
+        <p>Valid values: <code>db-instance</code>, <code>db-parameter-group</code>, <code>db-security-group</code>
          </p>")
     @as("SourceType")
     sourceType: option<string_>,
@@ -1971,14 +2273,14 @@ module DescribeDBClusterSnapshots = {
   type t
   @ocaml.doc("<p>Represents the input to <a>DescribeDBClusterSnapshots</a>.</p>")
   type request = {
-    @ocaml.doc("<p>Set to <code>true</code> to include manual cluster snapshots that are public and
-            can be copied or restored by any AWS account, and otherwise <code>false</code>. The
-            default is <code>false</code>.</p>")
+    @ocaml.doc(
+      "<p>Set to <code>true</code> to include manual cluster snapshots that are public and can be copied or restored by any account, and otherwise <code>false</code>. The default is <code>false</code>.</p>"
+    )
     @as("IncludePublic")
     includePublic: option<boolean_>,
-    @ocaml.doc("<p>Set to <code>true</code> to include shared manual cluster snapshots from other AWS
-            accounts that this AWS account has been given permission to copy or restore, and
-            otherwise <code>false</code>. The default is <code>false</code>.</p>")
+    @ocaml.doc(
+      "<p>Set to <code>true</code> to include shared manual cluster snapshots from other accounts that this account has been given permission to copy or restore, and otherwise <code>false</code>. The default is <code>false</code>.</p>"
+    )
     @as("IncludeShared")
     includeShared: option<boolean_>,
     @ocaml.doc("<p>An optional pagination token provided by a previous request. If this parameter is specified, the response
@@ -1995,45 +2297,30 @@ module DescribeDBClusterSnapshots = {
     maxRecords: option<integerOptional>,
     @ocaml.doc("<p>This parameter is not currently supported.</p>") @as("Filters")
     filters: option<filterList>,
-    @ocaml.doc("<p>The type of cluster snapshots to be returned. You can specify one of the following
-            values:</p>
+    @ocaml.doc("<p>The type of cluster snapshots to be returned. You can specify one of the following values:</p>
         <ul>
             <li>
                 <p>
-                    <code>automated</code> - Return all cluster snapshots that Amazon DocumentDB has
-                    automatically created for your AWS account.</p>
+                    <code>automated</code> - Return all cluster snapshots that Amazon DocumentDB has automatically created for your account.</p>
             </li>
             <li>
                 <p>
-                    <code>manual</code> - Return all cluster snapshots that you have manually
-                    created for your AWS account.</p>
+                    <code>manual</code> - Return all cluster snapshots that you have manually created for your account.</p>
             </li>
             <li>
                 <p>
-                    <code>shared</code> - Return all manual cluster snapshots that have been
-                    shared to your AWS account.</p>
+                    <code>shared</code> - Return all manual cluster snapshots that have been shared to your account.</p>
             </li>
             <li>
                 <p>
-                    <code>public</code> - Return all cluster snapshots that have been marked as
-                    public.</p>
+                    <code>public</code> - Return all cluster snapshots that have been marked as public.</p>
             </li>
          </ul>
-        <p>If you don't specify a <code>SnapshotType</code> value, then both automated and manual
-            cluster snapshots are returned. You can include shared cluster snapshots with
-            these results by setting the <code>IncludeShared</code> parameter to <code>true</code>.
-            You can include public cluster snapshots with these results by setting the
-                <code>IncludePublic</code> parameter to <code>true</code>.</p>
-        <p>The <code>IncludeShared</code> and <code>IncludePublic</code> parameters don't apply
-            for <code>SnapshotType</code> values of <code>manual</code> or <code>automated</code>.
-            The <code>IncludePublic</code> parameter doesn't apply when <code>SnapshotType</code> is
-            set to <code>shared</code>. The <code>IncludeShared</code> parameter doesn't apply when
-                <code>SnapshotType</code> is set to <code>public</code>.</p>")
+        <p>If you don't specify a <code>SnapshotType</code> value, then both automated and manual cluster snapshots are returned. You can include shared cluster snapshots with these results by setting the <code>IncludeShared</code> parameter to <code>true</code>. You can include public cluster snapshots with these results by setting the<code>IncludePublic</code> parameter to <code>true</code>.</p>
+        <p>The <code>IncludeShared</code> and <code>IncludePublic</code> parameters don't apply for <code>SnapshotType</code> values of <code>manual</code> or <code>automated</code>. The <code>IncludePublic</code> parameter doesn't apply when <code>SnapshotType</code> is set to <code>shared</code>. The <code>IncludeShared</code> parameter doesn't apply when <code>SnapshotType</code> is set to <code>public</code>.</p>")
     @as("SnapshotType")
     snapshotType: option<string_>,
-    @ocaml.doc("<p>A specific cluster snapshot identifier to describe. This parameter can't be used
-            with the <code>DBClusterIdentifier</code> parameter. This value is stored as a lowercase
-            string. </p>
+    @ocaml.doc("<p>A specific cluster snapshot identifier to describe. This parameter can't be used with the <code>DBClusterIdentifier</code> parameter. This value is stored as a lowercase string. </p>
         <p>Constraints:</p>
         <ul>
             <li>
@@ -2047,9 +2334,7 @@ module DescribeDBClusterSnapshots = {
          </ul>")
     @as("DBClusterSnapshotIdentifier")
     dbclusterSnapshotIdentifier: option<string_>,
-    @ocaml.doc("<p>The ID of the cluster to retrieve the list of cluster snapshots for. This
-            parameter can't be used with the <code>DBClusterSnapshotIdentifier</code> parameter.
-            This parameter is not case sensitive. </p>
+    @ocaml.doc("<p>The ID of the cluster to retrieve the list of cluster snapshots for. This parameter can't be used with the <code>DBClusterSnapshotIdentifier</code> parameter. This parameter is not case sensitive. </p>
         <p>Constraints:</p>
         <ul>
             <li>
@@ -2114,18 +2399,15 @@ module DescribeDBClusterParameters = {
     maxRecords: option<integerOptional>,
     @ocaml.doc("<p>This parameter is not currently supported.</p>") @as("Filters")
     filters: option<filterList>,
-    @ocaml.doc("<p> A value that indicates to return only parameters for a specific source. Parameter
-            sources can be <code>engine</code>, <code>service</code>, or <code>customer</code>.
+    @ocaml.doc("<p> A value that indicates to return only parameters for a specific source. Parameter sources can be <code>engine</code>, <code>service</code>, or <code>customer</code>.
         </p>")
     @as("Source")
     source: option<string_>,
-    @ocaml.doc("<p>The name of a specific cluster parameter group to return parameter details
-            for.</p>
+    @ocaml.doc("<p>The name of a specific cluster parameter group to return parameter details for.</p>
         <p>Constraints:</p>
         <ul>
             <li>
-                <p>If provided, must match the name of an existing
-                        <code>DBClusterParameterGroup</code>.</p>
+                <p>If provided, must match the name of an existing <code>DBClusterParameterGroup</code>.</p>
             </li>
          </ul>")
     @as("DBClusterParameterGroupName")
@@ -2209,15 +2491,12 @@ module DescribeDBClusterParameterGroups = {
 module DescribeCertificates = {
   type t
   type request = {
-    @ocaml.doc("<p>An optional pagination token provided by a previous <code>DescribeCertificates</code> request. 
-         If this parameter is specified, the response includes only records beyond the marker, up to the 
-         value specified by <code>MaxRecords</code>.</p>")
+    @ocaml.doc(
+      "<p>An optional pagination token provided by a previous <code>DescribeCertificates</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p>"
+    )
     @as("Marker")
     marker: option<string_>,
-    @ocaml.doc("<p>The maximum number of records to include in the response. If more records 
-         exist than the specified <code>MaxRecords</code> value, a pagination token 
-         called a marker is included in the response so that the remaining results can 
-         be retrieved.</p>
+    @ocaml.doc("<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.</p>
          <p>Default: 100</p>
          <p>Constraints:</p>
          <ul>
@@ -2232,10 +2511,7 @@ module DescribeCertificates = {
     maxRecords: option<integerOptional>,
     @ocaml.doc("<p>This parameter is not currently supported.</p>") @as("Filters")
     filters: option<filterList>,
-    @ocaml.doc("<p>The user-supplied certificate identifier. If this parameter is specified, information
-            for only the specified certificate is returned. If this parameter is omitted, a list of
-            up to <code>MaxRecords</code> certificates is returned. This parameter is not case
-            sensitive.</p>
+    @ocaml.doc("<p>The user-supplied certificate identifier. If this parameter is specified, information for only the specified certificate is returned. If this parameter is omitted, a list of up to <code>MaxRecords</code> certificates is returned. This parameter is not case sensitive.</p>
          <p>Constraints</p>
          <ul>
             <li>
@@ -2246,13 +2522,12 @@ module DescribeCertificates = {
     certificateIdentifier: option<string_>,
   }
   type response = {
-    @ocaml.doc("<p>An optional pagination token provided if the number of records retrieved is greater than
-         <code>MaxRecords</code>.  If this parameter is specified, the marker specifies the next record
-         in the list. Including the value of <code>Marker</code> in the next call to 
-         <code>DescribeCertificates</code> results in the next page of certificates.</p>")
+    @ocaml.doc(
+      "<p>An optional pagination token provided if the number of records retrieved is greater than <code>MaxRecords</code>. If this parameter is specified, the marker specifies the next record in the list. Including the value of <code>Marker</code> in the next call to <code>DescribeCertificates</code> results in the next page of certificates.</p>"
+    )
     @as("Marker")
     marker: option<string_>,
-    @ocaml.doc("<p>A list of certificates for this AWS account.</p>") @as("Certificates")
+    @ocaml.doc("<p>A list of certificates for this account.</p>") @as("Certificates")
     certificates: option<certificateList>,
   }
   @module("@aws-sdk/client-rds") @new external new: request => t = "DescribeCertificatesCommand"
@@ -2270,11 +2545,9 @@ module DeleteDBCluster = {
   type t
   @ocaml.doc("<p>Represents the input to <a>DeleteDBCluster</a>.</p>")
   type request = {
-    @ocaml.doc("<p> The cluster snapshot identifier of the new cluster snapshot created when
-                <code>SkipFinalSnapshot</code> is set to <code>false</code>. </p>
+    @ocaml.doc("<p> The cluster snapshot identifier of the new cluster snapshot created when <code>SkipFinalSnapshot</code> is set to <code>false</code>. </p>
         <note>
-            <p> Specifying this parameter and also setting the <code>SkipFinalShapshot</code>
-                parameter to <code>true</code> results in an error. </p>
+            <p> Specifying this parameter and also setting the <code>SkipFinalShapshot</code> parameter to <code>true</code> results in an error. </p>
         </note>
         <p>Constraints:</p>
         <ul>
@@ -2290,20 +2563,15 @@ module DeleteDBCluster = {
          </ul>")
     @as("FinalDBSnapshotIdentifier")
     finalDBSnapshotIdentifier: option<string_>,
-    @ocaml.doc("<p> Determines whether a final cluster snapshot is created before the cluster is
-            deleted. If <code>true</code> is specified, no cluster snapshot is created. If
-                <code>false</code> is specified, a cluster snapshot is created before the DB
-            cluster is deleted. </p>
+    @ocaml.doc("<p> Determines whether a final cluster snapshot is created before the cluster is deleted. If <code>true</code> is specified, no cluster snapshot is created. If <code>false</code> is specified, a cluster snapshot is created before the DB cluster is deleted. </p>
         <note>
-            <p>If <code>SkipFinalSnapshot</code> is <code>false</code>, you must specify a
-                    <code>FinalDBSnapshotIdentifier</code> parameter.</p>
+            <p>If <code>SkipFinalSnapshot</code> is <code>false</code>, you must specify a <code>FinalDBSnapshotIdentifier</code> parameter.</p>
         </note>
         <p>Default: <code>false</code>
         </p>")
     @as("SkipFinalSnapshot")
     skipFinalSnapshot: option<boolean_>,
-    @ocaml.doc("<p>The cluster identifier for the cluster to be deleted. This parameter isn't case
-            sensitive.</p>
+    @ocaml.doc("<p>The cluster identifier for the cluster to be deleted. This parameter isn't case sensitive.</p>
         <p>Constraints:</p>
         <ul>
             <li>
@@ -2329,6 +2597,9 @@ module CreateDBCluster = {
   @ocaml.doc("<p>Represents the input to <a>CreateDBCluster</a>.
         </p>")
   type request = {
+    @ocaml.doc("<p>The cluster identifier of the new global cluster.</p>")
+    @as("GlobalClusterIdentifier")
+    globalClusterIdentifier: option<globalClusterIdentifier>,
     @ocaml.doc("<p>Specifies whether this cluster can be deleted. If 
             <code>DeletionProtection</code> is enabled, the cluster cannot be 
             deleted unless it is modified and <code>DeletionProtection</code> is 
@@ -2349,12 +2620,8 @@ module CreateDBCluster = {
             </p>")
     @as("PreSignedUrl")
     preSignedUrl: option<string_>,
-    @ocaml.doc("<p>The AWS KMS key identifier for an encrypted cluster.</p>
-        <p>The AWS KMS key identifier is the Amazon Resource Name (ARN) for 
-            the AWS KMS encryption key. If you are creating a cluster using the
-            same AWS account that owns the AWS KMS encryption key that is used 
-            to encrypt the new cluster, you can use the AWS KMS key alias 
-            instead of the ARN for the AWS KMS encryption key.</p>
+    @ocaml.doc("<p>The KMS key identifier for an encrypted cluster.</p>
+        <p>The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption key. If you are creating a cluster using the same account that owns the KMS encryption key that is used to encrypt the new cluster, you can use the KMS key alias instead of the ARN for the KMS encryption key.</p>
         <p>If an encryption key is not specified in <code>KmsKeyId</code>:
             </p>
         <ul>
@@ -2364,9 +2631,7 @@ module CreateDBCluster = {
                     </p>
             </li>
          </ul>
-        <p>AWS KMS creates the default encryption key for your AWS account. 
-            Your AWS account has a different default encryption key for each AWS
-            Region.</p>")
+        <p>KMS creates the default encryption key for your account. Your account has a different default encryption key for each Regions.</p>")
     @as("KmsKeyId")
     kmsKeyId: option<string_>,
     @ocaml.doc("<p>Specifies whether the cluster is encrypted.</p>") @as("StorageEncrypted")
@@ -2376,18 +2641,14 @@ module CreateDBCluster = {
             in Universal Coordinated Time (UTC).</p>
         <p>Format: <code>ddd:hh24:mi-ddd:hh24:mi</code>
         </p>
-        <p>The default is a 30-minute window selected at random from an 8-hour
-            block of time for each AWS Region, occurring on a random day of the 
-            week.</p>
+        <p>The default is a 30-minute window selected at random from an 8-hour block of time for each Region, occurring on a random day of the week.</p>
         <p>Valid days: Mon, Tue, Wed, Thu, Fri, Sat, Sun</p>
         <p>Constraints: Minimum 30-minute window.</p>")
     @as("PreferredMaintenanceWindow")
     preferredMaintenanceWindow: option<string_>,
     @ocaml.doc("<p>The daily time range during which automated backups are created if
-            automated backups are enabled using the 
-            <code>BackupRetentionPeriod</code> parameter. </p>
-        <p>The default is a 30-minute window selected at random from an 8-hour
-            block of time for each AWS Region. </p>
+            automated backups are enabled using the <code>BackupRetentionPeriod</code> parameter. </p>
+        <p>The default is a 30-minute window selected at random from an 8-hour block of time for each Region. </p>
         <p>Constraints:</p>
         <ul>
             <li>
@@ -2411,7 +2672,7 @@ module CreateDBCluster = {
             double quote (\"), or the \"at\" symbol (@).</p>
         <p>Constraints: Must contain from 8 to 100 characters.</p>")
     @as("MasterUserPassword")
-    masterUserPassword: string_,
+    masterUserPassword: option<string_>,
     @ocaml.doc("<p>The name of the master user for the cluster.</p>
         <p>Constraints:</p>
         <ul>
@@ -2427,13 +2688,13 @@ module CreateDBCluster = {
             </li>
          </ul>")
     @as("MasterUsername")
-    masterUsername: string_,
+    masterUsername: option<string_>,
     @ocaml.doc("<p>The port number on which the instances in the cluster accept 
             connections.</p>")
     @as("Port")
     port: option<integerOptional>,
     @ocaml.doc(
-      "<p>The version number of the database engine to use. The --engine-version will default to the latest major engine version. For production workloads, we recommend explicitly declaring this parameter with the intended major engine version.</p>"
+      "<p>The version number of the database engine to use. The <code>--engine-version</code> will default to the latest major engine version. For production workloads, we recommend explicitly declaring this parameter with the intended major engine version.</p>"
     )
     @as("EngineVersion")
     engineVersion: option<string_>,
@@ -2496,10 +2757,9 @@ module CreateDBCluster = {
   type response = {@as("DBCluster") dbcluster: option<dbcluster>}
   @module("@aws-sdk/client-rds") @new external new: request => t = "CreateDBClusterCommand"
   let make = (
-    ~masterUserPassword,
-    ~masterUsername,
     ~engine,
     ~dbclusterIdentifier,
+    ~globalClusterIdentifier=?,
     ~deletionProtection=?,
     ~enableCloudwatchLogsExports=?,
     ~preSignedUrl=?,
@@ -2508,6 +2768,8 @@ module CreateDBCluster = {
     ~tags=?,
     ~preferredMaintenanceWindow=?,
     ~preferredBackupWindow=?,
+    ~masterUserPassword=?,
+    ~masterUsername=?,
     ~port=?,
     ~engineVersion=?,
     ~dbsubnetGroupName=?,
@@ -2518,6 +2780,7 @@ module CreateDBCluster = {
     (),
   ) =>
     new({
+      globalClusterIdentifier: globalClusterIdentifier,
       deletionProtection: deletionProtection,
       enableCloudwatchLogsExports: enableCloudwatchLogsExports,
       preSignedUrl: preSignedUrl,
@@ -2591,6 +2854,73 @@ module ApplyPendingMaintenanceAction = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module RemoveFromGlobalCluster = {
+  type t
+  @ocaml.doc("<p>Represents the input to <a>RemoveFromGlobalCluster</a>.</p>")
+  type request = {
+    @ocaml.doc(
+      "<p>The Amazon Resource Name (ARN) identifying the cluster that was detached from the Amazon DocumentDB global cluster. </p>"
+    )
+    @as("DbClusterIdentifier")
+    dbClusterIdentifier: string_,
+    @ocaml.doc(
+      "<p>The cluster identifier to detach from the Amazon DocumentDB global cluster. </p>"
+    )
+    @as("GlobalClusterIdentifier")
+    globalClusterIdentifier: globalClusterIdentifier,
+  }
+  type response = {@as("GlobalCluster") globalCluster: option<globalCluster>}
+  @module("@aws-sdk/client-rds") @new external new: request => t = "RemoveFromGlobalClusterCommand"
+  let make = (~dbClusterIdentifier, ~globalClusterIdentifier, ()) =>
+    new({
+      dbClusterIdentifier: dbClusterIdentifier,
+      globalClusterIdentifier: globalClusterIdentifier,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module ModifyGlobalCluster = {
+  type t
+  @ocaml.doc("<p>Represents the input to <a>ModifyGlobalCluster</a>.</p>")
+  type request = {
+    @ocaml.doc(
+      "<p>Indicates if the global cluster has deletion protection enabled. The global cluster can't be deleted when deletion protection is enabled. </p>"
+    )
+    @as("DeletionProtection")
+    deletionProtection: option<booleanOptional>,
+    @ocaml.doc("<p>The new identifier for a global cluster when you modify a global cluster. This value is stored as a lowercase string.</p>
+        <ul>
+            <li>
+				           <p>Must contain from 1 to 63 letters, numbers, or hyphens</p>
+				           <p>The first character must be a letter</p>
+				           <p>Can't end with a hyphen or contain two consecutive hyphens</p>
+			         </li>
+         </ul>
+		       <p>Example: <code>my-cluster2</code>
+         </p>")
+    @as("NewGlobalClusterIdentifier")
+    newGlobalClusterIdentifier: option<globalClusterIdentifier>,
+    @ocaml.doc("<p>The identifier for the global cluster being modified. This parameter isn't case-sensitive.</p>
+		       <p>Constraints:</p>
+        <ul>
+            <li>
+				           <p>Must match the identifier of an existing global cluster.</p>
+			         </li>
+         </ul>")
+    @as("GlobalClusterIdentifier")
+    globalClusterIdentifier: globalClusterIdentifier,
+  }
+  type response = {@as("GlobalCluster") globalCluster: option<globalCluster>}
+  @module("@aws-sdk/client-rds") @new external new: request => t = "ModifyGlobalClusterCommand"
+  let make = (~globalClusterIdentifier, ~deletionProtection=?, ~newGlobalClusterIdentifier=?, ()) =>
+    new({
+      deletionProtection: deletionProtection,
+      newGlobalClusterIdentifier: newGlobalClusterIdentifier,
+      globalClusterIdentifier: globalClusterIdentifier,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module ModifyDBSubnetGroup = {
   type t
   @ocaml.doc("<p>Represents the input to <a>ModifyDBSubnetGroup</a>.</p>")
@@ -2599,10 +2929,8 @@ module ModifyDBSubnetGroup = {
     subnetIds: subnetIdentifierList,
     @ocaml.doc("<p>The description for the subnet group.</p>") @as("DBSubnetGroupDescription")
     dbsubnetGroupDescription: option<string_>,
-    @ocaml.doc("<p>The name for the subnet group. This value is stored as a lowercase string. You
-            can't modify the default subnet group. </p>
-        <p>Constraints: Must match the name of an existing <code>DBSubnetGroup</code>. Must not
-            be default.</p>
+    @ocaml.doc("<p>The name for the subnet group. This value is stored as a lowercase string. You can't modify the default subnet group. </p>
+        <p>Constraints: Must match the name of an existing <code>DBSubnetGroup</code>. Must not be default.</p>
         <p>Example: <code>mySubnetgroup</code>
         </p>")
     @as("DBSubnetGroupName")
@@ -2623,27 +2951,16 @@ module ModifyDBClusterSnapshotAttribute = {
   type t
   @ocaml.doc("<p>Represents the input to <a>ModifyDBClusterSnapshotAttribute</a>.</p>")
   type request = {
-    @ocaml.doc("<p>A list of cluster snapshot attributes to remove from the attribute specified by
-                <code>AttributeName</code>.</p>
-        <p>To remove authorization for other AWS accounts to copy or restore a manual cluster
-            snapshot, set this list to include one or more AWS account identifiers. To remove
-            authorization for any AWS account to copy or restore the cluster snapshot, set it to
-                <code>all</code> . If you specify <code>all</code>, an AWS account whose account ID
-            is explicitly added to the <code>restore</code> attribute can still copy or restore a
-            manual cluster snapshot.</p>")
+    @ocaml.doc("<p>A list of cluster snapshot attributes to remove from the attribute specified by <code>AttributeName</code>.</p>
+        <p>To remove authorization for other accounts to copy or restore a manual cluster snapshot, set this list to include one or more account identifiers. To remove authorization for any account to copy or restore the cluster snapshot, set it to <code>all</code> . If you specify <code>all</code>, an account whose account ID is explicitly added to the <code>restore</code> attribute can still copy or restore a manual cluster snapshot.</p>")
     @as("ValuesToRemove")
     valuesToRemove: option<attributeValueList>,
-    @ocaml.doc("<p>A list of cluster snapshot attributes to add to the attribute specified by
-                <code>AttributeName</code>.</p>
-        <p>To authorize other AWS accounts to copy or restore a manual cluster snapshot, set
-            this list to include one or more AWS account IDs. To make the manual cluster snapshot
-            restorable by any AWS account, set it to <code>all</code>. Do not add the
-                <code>all</code> value for any manual cluster snapshots that contain private
-            information that you don't want to be available to all AWS accounts.</p>")
+    @ocaml.doc("<p>A list of cluster snapshot attributes to add to the attribute specified by <code>AttributeName</code>.</p>
+        <p>To authorize other accounts to copy or restore a manual cluster snapshot, set this list to include one or more account IDs. To make the manual cluster snapshot restorable by any account, set it to <code>all</code>. Do not add the <code>all</code> value for any manual cluster snapshots that contain private information that you don't want to be available to all accounts.</p>")
     @as("ValuesToAdd")
     valuesToAdd: option<attributeValueList>,
     @ocaml.doc("<p>The name of the cluster snapshot attribute to modify.</p>
-        <p>To manage authorization for other AWS accounts to copy or restore a manual cluster
+        <p>To manage authorization for other accounts to copy or restore a manual cluster
             snapshot, set this value to <code>restore</code>.</p>")
     @as("AttributeName")
     attributeName: string_,
@@ -2812,14 +3129,14 @@ module DescribeDBEngineVersions = {
   type t
   @ocaml.doc("<p>Represents the input to <a>DescribeDBEngineVersions</a>.</p>")
   type request = {
-    @ocaml.doc("<p>If this parameter is specified and the requested engine supports the
-                <code>TimeZone</code> parameter for <code>CreateDBInstance</code>, the response
-            includes a list of supported time zones for each engine version. </p>")
+    @ocaml.doc(
+      "<p>If this parameter is specified and the requested engine supports the <code>TimeZone</code> parameter for <code>CreateDBInstance</code>, the response includes a list of supported time zones for each engine version. </p>"
+    )
     @as("ListSupportedTimezones")
     listSupportedTimezones: option<booleanOptional>,
-    @ocaml.doc("<p>If this parameter is specified and the requested engine supports the
-                <code>CharacterSetName</code> parameter for <code>CreateDBInstance</code>, the
-            response includes a list of supported character sets for each engine version. </p>")
+    @ocaml.doc(
+      "<p>If this parameter is specified and the requested engine supports the <code>CharacterSetName</code> parameter for <code>CreateDBInstance</code>, the response includes a list of supported character sets for each engine version. </p>"
+    )
     @as("ListSupportedCharacterSets")
     listSupportedCharacterSets: option<booleanOptional>,
     @ocaml.doc("<p>Indicates that only the default version of the specified engine or engine and major
@@ -2916,16 +3233,12 @@ module DescribeDBClusters = {
         <ul>
             <li>
                 <p>
-                    <code>db-cluster-id</code> - Accepts cluster identifiers and cluster
-                    Amazon Resource Names (ARNs). The results list only includes information about
-                    the clusters identified by these ARNs.</p>
+                    <code>db-cluster-id</code> - Accepts cluster identifiers and cluster Amazon Resource Names (ARNs). The results list only includes information about the clusters identified by these ARNs.</p>
             </li>
          </ul>")
     @as("Filters")
     filters: option<filterList>,
-    @ocaml.doc("<p>The user-provided cluster identifier. If this parameter is specified, information
-            from only the specific cluster is returned. This parameter isn't case
-            sensitive.</p>
+    @ocaml.doc("<p>The user-provided cluster identifier. If this parameter is specified, information from only the specific cluster is returned. This parameter isn't case sensitive.</p>
         <p>Constraints:</p>
         <ul>
             <li>
@@ -2971,6 +3284,75 @@ module DescribeDBClusterSnapshotAttributes = {
   external new: request => t = "DescribeDBClusterSnapshotAttributesCommand"
   let make = (~dbclusterSnapshotIdentifier, ()) =>
     new({dbclusterSnapshotIdentifier: dbclusterSnapshotIdentifier})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module DeleteGlobalCluster = {
+  type t
+  @ocaml.doc("<p>Represents the input to <a>DeleteGlobalCluster</a>.</p>")
+  type request = {
+    @ocaml.doc("<p>The cluster identifier of the global cluster being deleted.</p>")
+    @as("GlobalClusterIdentifier")
+    globalClusterIdentifier: globalClusterIdentifier,
+  }
+  type response = {@as("GlobalCluster") globalCluster: option<globalCluster>}
+  @module("@aws-sdk/client-rds") @new external new: request => t = "DeleteGlobalClusterCommand"
+  let make = (~globalClusterIdentifier, ()) =>
+    new({globalClusterIdentifier: globalClusterIdentifier})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module CreateGlobalCluster = {
+  type t
+  @ocaml.doc("<p>Represents the input to <a>CreateGlobalCluster</a>.</p>")
+  type request = {
+    @ocaml.doc("<p>The storage encryption setting for the new global cluster. </p>")
+    @as("StorageEncrypted")
+    storageEncrypted: option<booleanOptional>,
+    @ocaml.doc(
+      "<p>The name for your database of up to 64 alpha-numeric characters. If you do not provide a name, Amazon DocumentDB will not create a database in the global cluster you are creating.</p>"
+    )
+    @as("DatabaseName")
+    databaseName: option<string_>,
+    @ocaml.doc(
+      "<p>The deletion protection setting for the new global cluster. The global cluster can't be deleted when deletion protection is enabled. </p>"
+    )
+    @as("DeletionProtection")
+    deletionProtection: option<booleanOptional>,
+    @ocaml.doc("<p>The engine version of the global cluster.</p>") @as("EngineVersion")
+    engineVersion: option<string_>,
+    @ocaml.doc("<p>The name of the database engine to be used for this cluster.</p>") @as("Engine")
+    engine: option<string_>,
+    @ocaml.doc(
+      "<p>The Amazon Resource Name (ARN) to use as the primary cluster of the global cluster. This parameter is optional.</p>"
+    )
+    @as("SourceDBClusterIdentifier")
+    sourceDBClusterIdentifier: option<string_>,
+    @ocaml.doc("<p>The cluster identifier of the new global cluster.</p>")
+    @as("GlobalClusterIdentifier")
+    globalClusterIdentifier: globalClusterIdentifier,
+  }
+  type response = {@as("GlobalCluster") globalCluster: option<globalCluster>}
+  @module("@aws-sdk/client-rds") @new external new: request => t = "CreateGlobalClusterCommand"
+  let make = (
+    ~globalClusterIdentifier,
+    ~storageEncrypted=?,
+    ~databaseName=?,
+    ~deletionProtection=?,
+    ~engineVersion=?,
+    ~engine=?,
+    ~sourceDBClusterIdentifier=?,
+    (),
+  ) =>
+    new({
+      storageEncrypted: storageEncrypted,
+      databaseName: databaseName,
+      deletionProtection: deletionProtection,
+      engineVersion: engineVersion,
+      engine: engine,
+      sourceDBClusterIdentifier: sourceDBClusterIdentifier,
+      globalClusterIdentifier: globalClusterIdentifier,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -3034,8 +3416,7 @@ module ModifyDBInstance = {
   type t
   @ocaml.doc("<p>Represents the input to <a>ModifyDBInstance</a>.</p>")
   type request = {
-    @ocaml.doc("<p>A value that specifies the order in which an Amazon DocumentDB replica is promoted to the
-            primary instance after a failure of the existing primary instance.</p>
+    @ocaml.doc("<p>A value that specifies the order in which an Amazon DocumentDB replica is promoted to the primary instance after a failure of the existing primary instance.</p>
         <p>Default: 1</p>
         <p>Valid values: 0-15</p>")
     @as("PromotionTier")
@@ -3043,11 +3424,7 @@ module ModifyDBInstance = {
     @ocaml.doc("<p>Indicates the certificate that needs to be associated with the instance.</p>")
     @as("CACertificateIdentifier")
     cacertificateIdentifier: option<string_>,
-    @ocaml.doc("<p> The new instance identifier for the instance when renaming an instance. When
-            you change the instance identifier, an instance reboot occurs immediately if you set
-                <code>Apply Immediately</code> to <code>true</code>. It occurs during the next
-            maintenance window if you set <code>Apply Immediately</code> to <code>false</code>. This
-            value is stored as a lowercase string. </p>
+    @ocaml.doc("<p> The new instance identifier for the instance when renaming an instance. When you change the instance identifier, an instance reboot occurs immediately if you set <code>Apply Immediately</code> to <code>true</code>. It occurs during the next maintenance window if you set <code>Apply Immediately</code> to <code>false</code>. This value is stored as a lowercase string. </p>
         <p>Constraints:</p>
         <ul>
             <li>
@@ -3064,12 +3441,9 @@ module ModifyDBInstance = {
         </p>")
     @as("NewDBInstanceIdentifier")
     newDBInstanceIdentifier: option<string_>,
-    @ocaml.doc("<p>Indicates that minor version upgrades are applied automatically to the instance
-            during the maintenance window. Changing this parameter doesn't result in an outage
-            except in the following case, and the change is asynchronously applied as soon as
-            possible. An outage results if this parameter is set to <code>true</code> during the
-            maintenance window, and a newer minor version is available, and Amazon DocumentDB has enabled
-            automatic patching for that engine version. </p>")
+    @ocaml.doc(
+      "<p>This parameter does not apply to Amazon DocumentDB. Amazon DocumentDB does not perform minor version upgrades regardless of the value set.</p>"
+    )
     @as("AutoMinorVersionUpgrade")
     autoMinorVersionUpgrade: option<booleanOptional>,
     @ocaml.doc("<p>The weekly time range (in UTC) during which system maintenance can occur, which might
@@ -3097,9 +3471,7 @@ module ModifyDBInstance = {
         </p>")
     @as("ApplyImmediately")
     applyImmediately: option<boolean_>,
-    @ocaml.doc("<p>The new compute and memory capacity of the instance; for example,
-                <code>db.r5.large</code>. Not all instance classes are available in all AWS
-            Regions. </p>
+    @ocaml.doc("<p>The new compute and memory capacity of the instance; for example, <code>db.r5.large</code>. Not all instance classes are available in all Regions. </p>
         <p>If you modify the instance class, an outage occurs during the change. The change is
             applied during the next maintenance window, unless <code>ApplyImmediately</code> is
             specified as <code>true</code> for this request. </p>
@@ -3138,6 +3510,44 @@ module ModifyDBInstance = {
       applyImmediately: applyImmediately,
       dbinstanceClass: dbinstanceClass,
       dbinstanceIdentifier: dbinstanceIdentifier,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module DescribeGlobalClusters = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>An optional pagination token provided by a previous <code>DescribeGlobalClusters</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p>"
+    )
+    @as("Marker")
+    marker: option<string_>,
+    @ocaml.doc(
+      "<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p>"
+    )
+    @as("MaxRecords")
+    maxRecords: option<integerOptional>,
+    @ocaml.doc("<p>A filter that specifies one or more global DB clusters to describe.</p>
+        <p>Supported filters: <code>db-cluster-id</code> accepts  cluster identifiers and  cluster Amazon Resource Names (ARNs). The results list will only include information about the clusters identified by these ARNs.</p>")
+    @as("Filters")
+    filters: option<filterList>,
+    @ocaml.doc(
+      "<p>The user-supplied  cluster identifier. If this parameter is specified, information from only the specific cluster is returned. This parameter isn't case-sensitive.</p>"
+    )
+    @as("GlobalClusterIdentifier")
+    globalClusterIdentifier: option<globalClusterIdentifier>,
+  }
+  type response = {
+    @ocaml.doc("<p></p>") @as("GlobalClusters") globalClusters: option<globalClusterList>,
+    @ocaml.doc("<p></p>") @as("Marker") marker: option<string_>,
+  }
+  @module("@aws-sdk/client-rds") @new external new: request => t = "DescribeGlobalClustersCommand"
+  let make = (~marker=?, ~maxRecords=?, ~filters=?, ~globalClusterIdentifier=?, ()) =>
+    new({
+      marker: marker,
+      maxRecords: maxRecords,
+      filters: filters,
+      globalClusterIdentifier: globalClusterIdentifier,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
@@ -3223,9 +3633,8 @@ module CreateDBInstance = {
            10 tags to an instance.</p>")
     @as("Tags")
     tags: option<tagList_>,
-    @ocaml.doc("<p>Indicates that minor engine upgrades are applied automatically to the instance
-            during the maintenance window.</p>
-        <p>Default: <code>true</code>
+    @ocaml.doc("<p>This parameter does not apply to Amazon DocumentDB. Amazon DocumentDB does not perform minor version upgrades regardless of the value set.</p>
+        <p>Default: <code>false</code>
         </p>")
     @as("AutoMinorVersionUpgrade")
     autoMinorVersionUpgrade: option<booleanOptional>,
@@ -3234,13 +3643,13 @@ module CreateDBInstance = {
         <p> Format: <code>ddd:hh24:mi-ddd:hh24:mi</code>
         </p>
         <p>The default is a 30-minute window selected at random from an 8-hour block of time for
-            each AWS Region, occurring on a random day of the week. </p>
+            each Region, occurring on a random day of the week. </p>
         <p>Valid days: Mon, Tue, Wed, Thu, Fri, Sat, Sun</p>
         <p>Constraints: Minimum 30-minute window.</p>")
     @as("PreferredMaintenanceWindow")
     preferredMaintenanceWindow: option<string_>,
     @ocaml.doc("<p>The Amazon EC2 Availability Zone that the instance is created in. </p>
-        <p>Default: A random, system-chosen Availability Zone in the endpoint's AWS Region.</p>
+        <p>Default: A random, system-chosen Availability Zone in the endpoint's Region.</p>
         <p>Example: <code>us-east-1d</code>
          </p>")
     @as("AvailabilityZone")
@@ -3321,23 +3730,16 @@ module DescribeDBInstances = {
         <ul>
             <li>
                 <p>
-                    <code>db-cluster-id</code> - Accepts cluster identifiers and cluster
-                    Amazon Resource Names (ARNs). The results list includes only the information
-                    about the instances that are associated with the clusters that are
-                    identified by these ARNs.</p>
+                    <code>db-cluster-id</code> - Accepts cluster identifiers and cluster Amazon Resource Names (ARNs). The results list includes only the information about the instances that are associated with the clusters that are identified by these ARNs.</p>
             </li>
             <li>
                 <p>
-                    <code>db-instance-id</code> - Accepts instance identifiers and instance
-                    ARNs. The results list includes only the information about the instances that
-                    are identified by these ARNs.</p>
+                    <code>db-instance-id</code> - Accepts instance identifiers and instance ARNs. The results list includes only the information about the instances that are identified by these ARNs.</p>
             </li>
          </ul>")
     @as("Filters")
     filters: option<filterList>,
-    @ocaml.doc("<p>The user-provided instance identifier. If this parameter is specified, information
-            from only the specific instance is returned. This parameter isn't case
-            sensitive.</p>
+    @ocaml.doc("<p>The user-provided instance identifier. If this parameter is specified, information from only the specific instance is returned. This parameter isn't case sensitive.</p>
         <p>Constraints:</p>
         <ul>
             <li>

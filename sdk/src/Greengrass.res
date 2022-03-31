@@ -629,7 +629,7 @@ module UpdateThingRuntimeConfiguration = {
     @ocaml.doc("Configuration for telemetry service.") @as("TelemetryConfiguration")
     telemetryConfiguration: option<telemetryConfigurationUpdate>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "UpdateThingRuntimeConfigurationCommand"
   let make = (~thingName, ~telemetryConfiguration=?, ()) =>
@@ -644,7 +644,7 @@ module UpdateSubscriptionDefinition = {
     subscriptionDefinitionId: __string,
     @ocaml.doc("The name of the definition.") @as("Name") name: option<__string>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "UpdateSubscriptionDefinitionCommand"
   let make = (~subscriptionDefinitionId, ~name=?, ()) =>
@@ -659,7 +659,7 @@ module UpdateResourceDefinition = {
     resourceDefinitionId: __string,
     @ocaml.doc("The name of the definition.") @as("Name") name: option<__string>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "UpdateResourceDefinitionCommand"
   let make = (~resourceDefinitionId, ~name=?, ()) =>
@@ -674,7 +674,7 @@ module UpdateLoggerDefinition = {
     @ocaml.doc("The ID of the logger definition.") @as("LoggerDefinitionId")
     loggerDefinitionId: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "UpdateLoggerDefinitionCommand"
   let make = (~loggerDefinitionId, ~name=?, ()) =>
@@ -715,7 +715,7 @@ module UpdateGroup = {
     @ocaml.doc("The name of the definition.") @as("Name") name: option<__string>,
     @ocaml.doc("The ID of the Greengrass group.") @as("GroupId") groupId: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-greengrass") @new external new: request => t = "UpdateGroupCommand"
   let make = (~groupId, ~name=?, ()) => new({name: name, groupId: groupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -728,7 +728,7 @@ module UpdateFunctionDefinition = {
     @ocaml.doc("The ID of the Lambda function definition.") @as("FunctionDefinitionId")
     functionDefinitionId: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "UpdateFunctionDefinitionCommand"
   let make = (~functionDefinitionId, ~name=?, ()) =>
@@ -743,7 +743,7 @@ module UpdateDeviceDefinition = {
     @ocaml.doc("The ID of the device definition.") @as("DeviceDefinitionId")
     deviceDefinitionId: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "UpdateDeviceDefinitionCommand"
   let make = (~deviceDefinitionId, ~name=?, ()) =>
@@ -757,7 +757,7 @@ module UpdateCoreDefinition = {
     @ocaml.doc("The name of the definition.") @as("Name") name: option<__string>,
     @ocaml.doc("The ID of the core definition.") @as("CoreDefinitionId") coreDefinitionId: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "UpdateCoreDefinitionCommand"
   let make = (~coreDefinitionId, ~name=?, ()) =>
@@ -772,7 +772,7 @@ module UpdateConnectorDefinition = {
     @ocaml.doc("The ID of the connector definition.") @as("ConnectorDefinitionId")
     connectorDefinitionId: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "UpdateConnectorDefinitionCommand"
   let make = (~connectorDefinitionId, ~name=?, ()) =>
@@ -808,7 +808,7 @@ module UntagResource = {
     @ocaml.doc("The Amazon Resource Name (ARN) of the resource.") @as("ResourceArn")
     resourceArn: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-greengrass") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -822,7 +822,7 @@ module TagResource = {
     @ocaml.doc("The Amazon Resource Name (ARN) of the resource.") @as("ResourceArn")
     resourceArn: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-greengrass") @new external new: request => t = "TagResourceCommand"
   let make = (~resourceArn, ~tags=?, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -833,7 +833,7 @@ module StopBulkDeployment = {
   type request = {
     @ocaml.doc("The ID of the bulk deployment.") @as("BulkDeploymentId") bulkDeploymentId: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "StopBulkDeploymentCommand"
   let make = (~bulkDeploymentId, ()) => new({bulkDeploymentId: bulkDeploymentId})
@@ -1283,7 +1283,7 @@ module GetSubscriptionDefinition = {
 
 module GetServiceRoleForAccount = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("The ARN of the role which is associated with the account.") @as("RoleArn")
     roleArn: option<__string>,
@@ -1292,8 +1292,8 @@ module GetServiceRoleForAccount = {
     associatedAt: option<__string>,
   }
   @module("@aws-sdk/client-greengrass") @new
-  external new: unit => t = "GetServiceRoleForAccountCommand"
-  let make = () => new()
+  external new: request => t = "GetServiceRoleForAccountCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1646,15 +1646,15 @@ module GetAssociatedRole = {
 
 module DisassociateServiceRoleFromAccount = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("The time when the service role was disassociated from the account.")
     @as("DisassociatedAt")
     disassociatedAt: option<__string>,
   }
   @module("@aws-sdk/client-greengrass") @new
-  external new: unit => t = "DisassociateServiceRoleFromAccountCommand"
-  let make = () => new()
+  external new: request => t = "DisassociateServiceRoleFromAccountCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1680,7 +1680,7 @@ module DeleteSubscriptionDefinition = {
     @ocaml.doc("The ID of the subscription definition.") @as("SubscriptionDefinitionId")
     subscriptionDefinitionId: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "DeleteSubscriptionDefinitionCommand"
   let make = (~subscriptionDefinitionId, ()) =>
@@ -1694,7 +1694,7 @@ module DeleteResourceDefinition = {
     @ocaml.doc("The ID of the resource definition.") @as("ResourceDefinitionId")
     resourceDefinitionId: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "DeleteResourceDefinitionCommand"
   let make = (~resourceDefinitionId, ()) => new({resourceDefinitionId: resourceDefinitionId})
@@ -1707,7 +1707,7 @@ module DeleteLoggerDefinition = {
     @ocaml.doc("The ID of the logger definition.") @as("LoggerDefinitionId")
     loggerDefinitionId: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "DeleteLoggerDefinitionCommand"
   let make = (~loggerDefinitionId, ()) => new({loggerDefinitionId: loggerDefinitionId})
@@ -1717,7 +1717,7 @@ module DeleteLoggerDefinition = {
 module DeleteGroup = {
   type t
   type request = {@ocaml.doc("The ID of the Greengrass group.") @as("GroupId") groupId: __string}
-
+  type response = {.}
   @module("@aws-sdk/client-greengrass") @new external new: request => t = "DeleteGroupCommand"
   let make = (~groupId, ()) => new({groupId: groupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1729,7 +1729,7 @@ module DeleteFunctionDefinition = {
     @ocaml.doc("The ID of the Lambda function definition.") @as("FunctionDefinitionId")
     functionDefinitionId: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "DeleteFunctionDefinitionCommand"
   let make = (~functionDefinitionId, ()) => new({functionDefinitionId: functionDefinitionId})
@@ -1742,7 +1742,7 @@ module DeleteDeviceDefinition = {
     @ocaml.doc("The ID of the device definition.") @as("DeviceDefinitionId")
     deviceDefinitionId: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "DeleteDeviceDefinitionCommand"
   let make = (~deviceDefinitionId, ()) => new({deviceDefinitionId: deviceDefinitionId})
@@ -1754,7 +1754,7 @@ module DeleteCoreDefinition = {
   type request = {
     @ocaml.doc("The ID of the core definition.") @as("CoreDefinitionId") coreDefinitionId: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "DeleteCoreDefinitionCommand"
   let make = (~coreDefinitionId, ()) => new({coreDefinitionId: coreDefinitionId})
@@ -1767,7 +1767,7 @@ module DeleteConnectorDefinition = {
     @ocaml.doc("The ID of the connector definition.") @as("ConnectorDefinitionId")
     connectorDefinitionId: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "DeleteConnectorDefinitionCommand"
   let make = (~connectorDefinitionId, ()) => new({connectorDefinitionId: connectorDefinitionId})

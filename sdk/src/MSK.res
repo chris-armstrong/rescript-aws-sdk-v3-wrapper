@@ -43,7 +43,9 @@ type configurationState = [
   | @as("DELETING") #DELETING
   | @as("ACTIVE") #ACTIVE
 ]
-@ocaml.doc("<p>The state of a Kafka cluster.</p>")
+@ocaml.doc("<p>The type of cluster.</p>")
+type clusterType = [@as("SERVERLESS") #SERVERLESS | @as("PROVISIONED") #PROVISIONED]
+@ocaml.doc("<p>The state of the Apache Kafka cluster.</p>")
 type clusterState = [
   | @as("UPDATING") #UPDATING
   | @as("REBOOTING_BROKER") #REBOOTING_BROKER
@@ -73,6 +75,13 @@ type unprocessedScramSecret = {
   @ocaml.doc("<p>Error code for associate/disassociate failure.</p>") @as("ErrorCode")
   errorCode: option<__string>,
 }
+type unauthenticated = {
+  @ocaml.doc(
+    "<p>Specifies whether you want to turn on or turn off unauthenticated traffic to your cluster.</p>"
+  )
+  @as("Enabled")
+  enabled: option<__boolean>,
+}
 type stateInfo = {
   @as("Message") message: option<__string>,
   @as("Code") code: option<__string>,
@@ -87,15 +96,34 @@ type s3 = {
   @as("Enabled") enabled: __boolean,
   @as("Bucket") bucket: option<__string>,
 }
-@ocaml.doc("<p>Indicates whether you want to enable or disable the Node Exporter.</p>")
+@ocaml.doc("Public access control for brokers.")
+type publicAccess = {
+  @ocaml.doc(
+    "<p>The value DISABLED indicates that public access is turned off. SERVICE_PROVIDED_EIPS indicates that public access is turned on.</p>"
+  )
+  @as("Type")
+  type_: option<__string>,
+}
+@ocaml.doc(
+  "Contains information about provisioned throughput for EBS storage volumes attached to kafka broker nodes."
+)
+type provisionedThroughput = {
+  @ocaml.doc(
+    "Throughput value of the EBS volumes for the data drive on each kafka broker node in MiB per second."
+  )
+  @as("VolumeThroughput")
+  volumeThroughput: option<__integer>,
+  @ocaml.doc("Provisioned throughput is enabled or not.") @as("Enabled") enabled: option<__boolean>,
+}
+@ocaml.doc("<p>Indicates whether you want to turn on or turn off the Node Exporter.</p>")
 type nodeExporterInfo = {
-  @ocaml.doc("<p>Indicates whether you want to enable or disable the Node Exporter.</p>")
+  @ocaml.doc("<p>Indicates whether you want to turn on or turn off the Node Exporter.</p>")
   @as("EnabledInBroker")
   enabledInBroker: __boolean,
 }
-@ocaml.doc("<p>Indicates whether you want to enable or disable the Node Exporter.</p>")
+@ocaml.doc("<p>Indicates whether you want to turn on or turn off the Node Exporter.</p>")
 type nodeExporter = {
-  @ocaml.doc("<p>Indicates whether you want to enable or disable the Node Exporter.</p>")
+  @ocaml.doc("<p>Indicates whether you want to turn on or turn off the Node Exporter.</p>")
   @as("EnabledInBroker")
   enabledInBroker: __boolean,
 }
@@ -103,15 +131,15 @@ type kafkaVersion = {
   @as("Status") status: option<kafkaVersionStatus>,
   @as("Version") version: option<__string>,
 }
-@ocaml.doc("<p>Indicates whether you want to enable or disable the JMX Exporter.</p>")
+@ocaml.doc("<p>Indicates whether you want to turn on or turn off the JMX Exporter.</p>")
 type jmxExporterInfo = {
-  @ocaml.doc("<p>Indicates whether you want to enable or disable the JMX Exporter.</p>")
+  @ocaml.doc("<p>Indicates whether you want to turn on or turn off the JMX Exporter.</p>")
   @as("EnabledInBroker")
   enabledInBroker: __boolean,
 }
-@ocaml.doc("<p>Indicates whether you want to enable or disable the JMX Exporter.</p>")
+@ocaml.doc("<p>Indicates whether you want to turn on or turn off the JMX Exporter.</p>")
 type jmxExporter = {
-  @ocaml.doc("<p>Indicates whether you want to enable or disable the JMX Exporter.</p>")
+  @ocaml.doc("<p>Indicates whether you want to turn on or turn off the JMX Exporter.</p>")
   @as("EnabledInBroker")
   enabledInBroker: __boolean,
 }
@@ -156,14 +184,6 @@ type encryptionAtRest = {
   @as("DataVolumeKMSKeyId")
   dataVolumeKMSKeyId: __string,
 }
-@ocaml.doc(
-  "<p>Contains information about the EBS storage volumes attached to Kafka broker nodes.</p>"
-)
-type ebsstorageInfo = {
-  @ocaml.doc("<p>The size in GiB of the EBS volume for the data drive on each broker node.</p>")
-  @as("VolumeSize")
-  volumeSize: option<__integerMin1Max16384>,
-}
 @ocaml.doc("<p>Describes a configuration revision.</p>")
 type configurationRevision = {
   @ocaml.doc("<p>The revision number.</p>") @as("Revision") revision: __long,
@@ -200,19 +220,9 @@ type brokerSoftwareInfo = {
   @as("ConfigurationArn")
   configurationArn: option<__string>,
 }
-@ocaml.doc(
-  "<p>Specifies the EBS volume upgrade information. The broker identifier must be set to the keyword ALL. This means the changes apply to all the brokers in the cluster.</p>"
-)
-type brokerEBSVolumeInfo = {
-  @ocaml.doc("<p>Size of the EBS volume to update.</p>") @as("VolumeSizeGB")
-  volumeSizeGB: __integer,
-  @ocaml.doc("<p>The ID of the broker to update.</p>") @as("KafkaBrokerNodeId")
-  kafkaBrokerNodeId: __string,
-}
 type __listOfUnprocessedScramSecret = array<unprocessedScramSecret>
 type __listOfKafkaVersion = array<kafkaVersion>
 type __listOfConfigurationRevision = array<configurationRevision>
-type __listOfBrokerEBSVolumeInfo = array<brokerEBSVolumeInfo>
 @ocaml.doc("<p>Zookeeper node information.</p>")
 type zookeeperNodeInfo = {
   @ocaml.doc("<p>The version of Zookeeper.</p>") @as("ZookeeperVersion")
@@ -227,15 +237,25 @@ type zookeeperNodeInfo = {
   @ocaml.doc("<p>The attached elastic network interface of the broker.</p>") @as("AttachedENIId")
   attachedENIId: option<__string>,
 }
+@ocaml.doc("<p>The configuration of the Amazon VPCs for the cluster.</p>")
+type vpcConfig = {
+  @ocaml.doc("<p>The IDs of the security groups associated with the cluster.</p>")
+  @as("SecurityGroupIds")
+  securityGroupIds: option<__listOf__string>,
+  @ocaml.doc("<p>The IDs of the subnets associated with the cluster.</p>") @as("SubnetIds")
+  subnetIds: __listOf__string,
+}
 @ocaml.doc("<p>Details for client authentication using TLS.</p>")
 type tls = {
+  @ocaml.doc("<p>Specifies whether you want to turn on or turn off TLS authentication.</p>")
+  @as("Enabled")
+  enabled: option<__boolean>,
   @ocaml.doc("<p>List of ACM Certificate Authority ARNs.</p>") @as("CertificateAuthorityArnList")
   certificateAuthorityArnList: option<__listOf__string>,
 }
-@ocaml.doc("<p>Contains information about storage volumes attached to MSK broker nodes.</p>")
-type storageInfo = {
-  @ocaml.doc("<p>EBS volume information.</p>") @as("EbsStorageInfo")
-  ebsStorageInfo: option<ebsstorageInfo>,
+@ocaml.doc("<p>Details for client authentication using SASL.</p>")
+type serverlessSasl = {
+  @ocaml.doc("<p>Indicates whether IAM access control is enabled.</p>") @as("Iam") iam: option<iam>,
 }
 @ocaml.doc("<p>Details for client authentication using SASL.</p>")
 type sasl = {
@@ -245,19 +265,19 @@ type sasl = {
 }
 @ocaml.doc("<p>Prometheus settings.</p>")
 type prometheusInfo = {
-  @ocaml.doc("<p>Indicates whether you want to enable or disable the Node Exporter.</p>")
+  @ocaml.doc("<p>Indicates whether you want to turn on or turn off the Node Exporter.</p>")
   @as("NodeExporter")
   nodeExporter: option<nodeExporterInfo>,
-  @ocaml.doc("<p>Indicates whether you want to enable or disable the JMX Exporter.</p>")
+  @ocaml.doc("<p>Indicates whether you want to turn on or turn off the JMX Exporter.</p>")
   @as("JmxExporter")
   jmxExporter: option<jmxExporterInfo>,
 }
 @ocaml.doc("<p>Prometheus settings.</p>")
 type prometheus = {
-  @ocaml.doc("<p>Indicates whether you want to enable or disable the Node Exporter.</p>")
+  @ocaml.doc("<p>Indicates whether you want to turn on or turn off the Node Exporter.</p>")
   @as("NodeExporter")
   nodeExporter: option<nodeExporter>,
-  @ocaml.doc("<p>Indicates whether you want to enable or disable the JMX Exporter.</p>")
+  @ocaml.doc("<p>Indicates whether you want to turn on or turn off the JMX Exporter.</p>")
   @as("JmxExporter")
   jmxExporter: option<jmxExporter>,
 }
@@ -269,6 +289,21 @@ type encryptionInfo = {
   encryptionInTransit: option<encryptionInTransit>,
   @ocaml.doc("<p>The data-volume encryption details.</p>") @as("EncryptionAtRest")
   encryptionAtRest: option<encryptionAtRest>,
+}
+@ocaml.doc(
+  "<p>Contains information about the EBS storage volumes attached to Apache Kafka broker nodes.</p>"
+)
+type ebsstorageInfo = {
+  @ocaml.doc("<p>The size in GiB of the EBS volume for the data drive on each broker node.</p>")
+  @as("VolumeSize")
+  volumeSize: option<__integerMin1Max16384>,
+  @ocaml.doc("EBS volume provisioned throughput information.") @as("ProvisionedThroughput")
+  provisionedThroughput: option<provisionedThroughput>,
+}
+@ocaml.doc("<p>Information about the broker access configuration.</p>")
+type connectivityInfo = {
+  @ocaml.doc("<p>Public access control for brokers.</p>") @as("PublicAccess")
+  publicAccess: option<publicAccess>,
 }
 @ocaml.doc("<p>Represents an MSK Configuration.</p>")
 type configuration = {
@@ -292,11 +327,14 @@ type configuration = {
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the configuration.</p>") @as("Arn")
   arn: __string,
 }
-@ocaml.doc("<p>Contains source Kafka versions and compatible target Kafka versions.</p>")
+@ocaml.doc(
+  "<p>Contains source Apache Kafka versions and compatible target Apache Kafka versions.</p>"
+)
 type compatibleKafkaVersion = {
-  @ocaml.doc("<p>A list of Kafka versions.</p>") @as("TargetVersions")
+  @ocaml.doc("<p>A list of Apache Kafka versions.</p>") @as("TargetVersions")
   targetVersions: option<__listOf__string>,
-  @ocaml.doc("<p>A Kafka version.</p>") @as("SourceVersion") sourceVersion: option<__string>,
+  @ocaml.doc("<p>An Apache Kafka version.</p>") @as("SourceVersion")
+  sourceVersion: option<__string>,
 }
 @ocaml.doc("<p>Step taken during a cluster operation.</p>")
 type clusterOperationStep = {
@@ -309,7 +347,7 @@ type brokerNodeInfo = {
   @ocaml.doc("<p>Endpoints for accessing the broker.</p>") @as("Endpoints")
   endpoints: option<__listOf__string>,
   @ocaml.doc(
-    "<p>Information about the version of software currently deployed on the Kafka brokers in the cluster.</p>"
+    "<p>Information about the version of software currently deployed on the Apache Kafka brokers in the cluster.</p>"
   )
   @as("CurrentBrokerSoftwareInfo")
   currentBrokerSoftwareInfo: option<brokerSoftwareInfo>,
@@ -326,9 +364,32 @@ type brokerLogs = {
   @as("Firehose") firehose: option<firehose>,
   @as("CloudWatchLogs") cloudWatchLogs: option<cloudWatchLogs>,
 }
+@ocaml.doc(
+  "<p>Specifies the EBS volume upgrade information. The broker identifier must be set to the keyword ALL. This means the changes apply to all the brokers in the cluster.</p>"
+)
+type brokerEBSVolumeInfo = {
+  @ocaml.doc("<p>Size of the EBS volume to update.</p>") @as("VolumeSizeGB")
+  volumeSizeGB: option<__integer>,
+  @ocaml.doc("EBS volume provisioned throughput information.") @as("ProvisionedThroughput")
+  provisionedThroughput: option<provisionedThroughput>,
+  @ocaml.doc("<p>The ID of the broker to update.</p>") @as("KafkaBrokerNodeId")
+  kafkaBrokerNodeId: __string,
+}
+type __listOfVpcConfig = array<vpcConfig>
 type __listOfConfiguration = array<configuration>
 type __listOfCompatibleKafkaVersion = array<compatibleKafkaVersion>
 type __listOfClusterOperationStep = array<clusterOperationStep>
+type __listOfBrokerEBSVolumeInfo = array<brokerEBSVolumeInfo>
+@ocaml.doc("<p>Contains information about storage volumes attached to MSK broker nodes.</p>")
+type storageInfo = {
+  @ocaml.doc("<p>EBS volume information.</p>") @as("EbsStorageInfo")
+  ebsStorageInfo: option<ebsstorageInfo>,
+}
+@ocaml.doc("<p>Includes all client authentication information.</p>")
+type serverlessClientAuthentication = {
+  @ocaml.doc("<p>Details for ClientAuthentication using SASL.</p>") @as("Sasl")
+  sasl: option<serverlessSasl>,
+}
 @ocaml.doc("<p>JMX and Node monitoring for the MSK cluster.</p>")
 type openMonitoringInfo = {
   @ocaml.doc("<p>Prometheus settings.</p>") @as("Prometheus") prometheus: prometheusInfo,
@@ -353,40 +414,43 @@ type nodeInfo = {
 type loggingInfo = {@as("BrokerLogs") brokerLogs: brokerLogs}
 @ocaml.doc("<p>Includes all client authentication information.</p>")
 type clientAuthentication = {
+  @ocaml.doc("<p>Contains information about unauthenticated traffic to the cluster.</p>")
+  @as("Unauthenticated")
+  unauthenticated: option<unauthenticated>,
   @ocaml.doc("<p>Details for ClientAuthentication using TLS.</p>") @as("Tls") tls: option<tls>,
   @ocaml.doc("<p>Details for ClientAuthentication using SASL.</p>") @as("Sasl") sasl: option<sasl>,
 }
-@ocaml.doc("<p>Describes the setup to be used for Kafka broker nodes in the cluster.</p>")
-type brokerNodeGroupInfo = {
-  @ocaml.doc("<p>Contains information about storage volumes attached to MSK broker nodes.</p>")
-  @as("StorageInfo")
-  storageInfo: option<storageInfo>,
-  @ocaml.doc(
-    "<p>The AWS security groups to associate with the elastic network interfaces in order to specify who can connect to and communicate with the Amazon MSK cluster. If you don't specify a security group, Amazon MSK uses the default security group associated with the VPC.</p>"
-  )
-  @as("SecurityGroups")
-  securityGroups: option<__listOf__string>,
-  @ocaml.doc("<p>The type of Amazon EC2 instances to use for Kafka brokers. The following instance types are allowed: kafka.m5.large, kafka.m5.xlarge, kafka.m5.2xlarge,
-kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.</p>")
-  @as("InstanceType")
-  instanceType: __stringMin5Max32,
-  @ocaml.doc(
-    "<p>The list of subnets to connect to in the client virtual private cloud (VPC). AWS creates elastic network interfaces inside these subnets. Client applications use elastic network interfaces to produce and consume data. Client subnets can't be in Availability Zone us-east-1e.</p>"
-  )
-  @as("ClientSubnets")
-  clientSubnets: __listOf__string,
-  @ocaml.doc("<p>The distribution of broker nodes across Availability Zones. This is an optional parameter. If you don't specify it, Amazon MSK gives it the value DEFAULT. You can also explicitly set this parameter to the value DEFAULT. No other values are currently allowed.</p>
-         <p>Amazon MSK distributes the broker nodes evenly across the Availability Zones that correspond to the subnets you provide when you create the cluster.</p>")
-  @as("BrokerAZDistribution")
-  brokerAZDistribution: option<brokerAZDistribution>,
-}
 type __listOfNodeInfo = array<nodeInfo>
+@ocaml.doc("<p>Serverless cluster request.</p>")
+type serverlessRequest = {
+  @ocaml.doc("<p>Includes all client authentication information.</p>") @as("ClientAuthentication")
+  clientAuthentication: option<serverlessClientAuthentication>,
+  @ocaml.doc("<p>The configuration of the Amazon VPCs for the cluster.</p>") @as("VpcConfigs")
+  vpcConfigs: __listOfVpcConfig,
+}
+@ocaml.doc("<p>Serverless cluster.</p>")
+type serverless = {
+  @ocaml.doc("<p>Includes all client authentication information.</p>") @as("ClientAuthentication")
+  clientAuthentication: option<serverlessClientAuthentication>,
+  @ocaml.doc("<p>The configuration of the Amazon VPCs for the cluster.</p>") @as("VpcConfigs")
+  vpcConfigs: __listOfVpcConfig,
+}
 @ocaml.doc("<p>Information about cluster attributes that can be updated via update APIs.</p>")
 type mutableClusterInfo = {
+  @ocaml.doc("<p>Information about the broker access configuration.</p>") @as("ConnectivityInfo")
+  connectivityInfo: option<connectivityInfo>,
+  @ocaml.doc("<p>Includes all encryption-related information.</p>") @as("EncryptionInfo")
+  encryptionInfo: option<encryptionInfo>,
+  @ocaml.doc("<p>Includes all client authentication information.</p>") @as("ClientAuthentication")
+  clientAuthentication: option<clientAuthentication>,
   @ocaml.doc("<p>Information about the Amazon MSK broker type.</p>") @as("InstanceType")
   instanceType: option<__stringMin5Max32>,
-  @as("LoggingInfo") loggingInfo: option<loggingInfo>,
-  @ocaml.doc("<p>The Kafka version.</p>") @as("KafkaVersion") kafkaVersion: option<__string>,
+  @ocaml.doc(
+    "<p>You can configure your MSK cluster to send broker logs to different destination types. This is a container for the configuration details related to broker logs.</p>"
+  )
+  @as("LoggingInfo")
+  loggingInfo: option<loggingInfo>,
+  @ocaml.doc("<p>The Apache Kafka version.</p>") @as("KafkaVersion") kafkaVersion: option<__string>,
   @ocaml.doc("<p>The settings for open monitoring.</p>") @as("OpenMonitoring")
   openMonitoring: option<openMonitoring>,
   @ocaml.doc(
@@ -402,6 +466,117 @@ type mutableClusterInfo = {
   @ocaml.doc("<p>Specifies the size of the EBS volume and the ID of the associated broker.</p>")
   @as("BrokerEBSVolumeInfo")
   brokerEBSVolumeInfo: option<__listOfBrokerEBSVolumeInfo>,
+}
+@ocaml.doc("<p>Describes the setup to be used for Apache Kafka broker nodes in the cluster.</p>")
+type brokerNodeGroupInfo = {
+  @ocaml.doc("<p>Information about the broker access configuration.</p>") @as("ConnectivityInfo")
+  connectivityInfo: option<connectivityInfo>,
+  @ocaml.doc("<p>Contains information about storage volumes attached to MSK broker nodes.</p>")
+  @as("StorageInfo")
+  storageInfo: option<storageInfo>,
+  @ocaml.doc(
+    "<p>The AWS security groups to associate with the elastic network interfaces in order to specify who can connect to and communicate with the Amazon MSK cluster. If you don't specify a security group, Amazon MSK uses the default security group associated with the VPC.</p>"
+  )
+  @as("SecurityGroups")
+  securityGroups: option<__listOf__string>,
+  @ocaml.doc("<p>The type of Amazon EC2 instances to use for Apache Kafka brokers. The following instance types are allowed: kafka.m5.large, kafka.m5.xlarge, kafka.m5.2xlarge,
+kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.</p>")
+  @as("InstanceType")
+  instanceType: __stringMin5Max32,
+  @ocaml.doc(
+    "<p>The list of subnets to connect to in the client virtual private cloud (VPC). AWS creates elastic network interfaces inside these subnets. Client applications use elastic network interfaces to produce and consume data. Client subnets can't be in Availability Zone us-east-1e.</p>"
+  )
+  @as("ClientSubnets")
+  clientSubnets: __listOf__string,
+  @ocaml.doc("<p>The distribution of broker nodes across Availability Zones. This is an optional parameter. If you don't specify it, Amazon MSK gives it the value DEFAULT. You can also explicitly set this parameter to the value DEFAULT. No other values are currently allowed.</p>
+         <p>Amazon MSK distributes the broker nodes evenly across the Availability Zones that correspond to the subnets you provide when you create the cluster.</p>")
+  @as("BrokerAZDistribution")
+  brokerAZDistribution: option<brokerAZDistribution>,
+}
+@ocaml.doc("<p>Provisioned cluster request.</p>")
+type provisionedRequest = {
+  @ocaml.doc("<p>The number of broker nodes in the cluster.</p>") @as("NumberOfBrokerNodes")
+  numberOfBrokerNodes: __integerMin1Max15,
+  @ocaml.doc("<p>Log delivery information for the cluster.</p>") @as("LoggingInfo")
+  loggingInfo: option<loggingInfo>,
+  @ocaml.doc("<p>The Apache Kafka version that you want for the cluster.</p>") @as("KafkaVersion")
+  kafkaVersion: __stringMin1Max128,
+  @ocaml.doc("<p>The settings for open monitoring.</p>") @as("OpenMonitoring")
+  openMonitoring: option<openMonitoringInfo>,
+  @ocaml.doc(
+    "<p>Specifies the level of monitoring for the MSK cluster. The possible values are DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER, and PER_TOPIC_PER_PARTITION.</p>"
+  )
+  @as("EnhancedMonitoring")
+  enhancedMonitoring: option<enhancedMonitoring>,
+  @ocaml.doc("<p>Includes all encryption-related information.</p>") @as("EncryptionInfo")
+  encryptionInfo: option<encryptionInfo>,
+  @ocaml.doc(
+    "<p>Represents the configuration that you want Amazon MSK to use for the brokers in a cluster.</p>"
+  )
+  @as("ConfigurationInfo")
+  configurationInfo: option<configurationInfo>,
+  @ocaml.doc("<p>Includes all client authentication information.</p>") @as("ClientAuthentication")
+  clientAuthentication: option<clientAuthentication>,
+  @ocaml.doc("<p>Information about the brokers.</p>") @as("BrokerNodeGroupInfo")
+  brokerNodeGroupInfo: brokerNodeGroupInfo,
+}
+@ocaml.doc("<p>Provisioned cluster.</p>")
+type provisioned = {
+  @ocaml.doc(
+    "<p>The connection string to use to connect to the Apache ZooKeeper cluster on a TLS port.</p>"
+  )
+  @as("ZookeeperConnectStringTls")
+  zookeeperConnectStringTls: option<__string>,
+  @ocaml.doc("<p>The connection string to use to connect to the Apache ZooKeeper cluster.</p>")
+  @as("ZookeeperConnectString")
+  zookeeperConnectString: option<__string>,
+  @ocaml.doc("<p>The number of broker nodes in the cluster.</p>") @as("NumberOfBrokerNodes")
+  numberOfBrokerNodes: __integerMin1Max15,
+  @ocaml.doc("<p>Log delivery information for the cluster.</p>") @as("LoggingInfo")
+  loggingInfo: option<loggingInfo>,
+  @ocaml.doc("<p>The settings for open monitoring.</p>") @as("OpenMonitoring")
+  openMonitoring: option<openMonitoringInfo>,
+  @ocaml.doc(
+    "<p>Specifies the level of monitoring for the MSK cluster. The possible values are DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER, and PER_TOPIC_PER_PARTITION.</p>"
+  )
+  @as("EnhancedMonitoring")
+  enhancedMonitoring: option<enhancedMonitoring>,
+  @ocaml.doc("<p>Includes all encryption-related information.</p>") @as("EncryptionInfo")
+  encryptionInfo: option<encryptionInfo>,
+  @ocaml.doc("<p>Includes all client authentication information.</p>") @as("ClientAuthentication")
+  clientAuthentication: option<clientAuthentication>,
+  @ocaml.doc("<p>Information about the Apache Kafka version deployed on the brokers.</p>")
+  @as("CurrentBrokerSoftwareInfo")
+  currentBrokerSoftwareInfo: option<brokerSoftwareInfo>,
+  @ocaml.doc("<p>Information about the brokers.</p>") @as("BrokerNodeGroupInfo")
+  brokerNodeGroupInfo: brokerNodeGroupInfo,
+}
+@ocaml.doc("<p>Returns information about a cluster operation.</p>")
+type clusterOperationInfo = {
+  @ocaml.doc("<p>Information about cluster attributes after a cluster is updated.</p>")
+  @as("TargetClusterInfo")
+  targetClusterInfo: option<mutableClusterInfo>,
+  @ocaml.doc("<p>Information about cluster attributes before a cluster is updated.</p>")
+  @as("SourceClusterInfo")
+  sourceClusterInfo: option<mutableClusterInfo>,
+  @ocaml.doc("<p>Type of the cluster operation.</p>") @as("OperationType")
+  operationType: option<__string>,
+  @ocaml.doc("<p>Steps completed during the operation.</p>") @as("OperationSteps")
+  operationSteps: option<__listOfClusterOperationStep>,
+  @ocaml.doc("<p>State of the cluster operation.</p>") @as("OperationState")
+  operationState: option<__string>,
+  @ocaml.doc("<p>ARN of the cluster operation.</p>") @as("OperationArn")
+  operationArn: option<__string>,
+  @ocaml.doc("<p>Describes the error if the operation fails.</p>") @as("ErrorInfo")
+  errorInfo: option<errorInfo>,
+  @ocaml.doc("<p>The time at which the operation finished.</p>") @as("EndTime")
+  endTime: option<__timestampIso8601>,
+  @ocaml.doc("<p>The time that the operation was created.</p>") @as("CreationTime")
+  creationTime: option<__timestampIso8601>,
+  @ocaml.doc("<p>ARN of the cluster.</p>") @as("ClusterArn") clusterArn: option<__string>,
+  @ocaml.doc("<p>The ID of the API request that triggered this operation.</p>")
+  @as("ClientRequestId")
+  clientRequestId: option<__string>,
 }
 @ocaml.doc("<p>Returns information about a cluster.</p>")
 type clusterInfo = {
@@ -433,7 +608,7 @@ type clusterInfo = {
   @ocaml.doc("<p>The current version of the MSK cluster.</p>") @as("CurrentVersion")
   currentVersion: option<__string>,
   @ocaml.doc(
-    "<p>Information about the version of software currently deployed on the Kafka brokers in the cluster.</p>"
+    "<p>Information about the version of software currently deployed on the Apache Kafka brokers in the cluster.</p>"
   )
   @as("CurrentBrokerSoftwareInfo")
   currentBrokerSoftwareInfo: option<brokerSoftwareInfo>,
@@ -450,35 +625,36 @@ type clusterInfo = {
   @ocaml.doc("<p>Arn of active cluster operation.</p>") @as("ActiveOperationArn")
   activeOperationArn: option<__string>,
 }
-type __listOfClusterInfo = array<clusterInfo>
-@ocaml.doc("<p>Returns information about a cluster operation.</p>")
-type clusterOperationInfo = {
-  @ocaml.doc("<p>Information about cluster attributes after a cluster is updated.</p>")
-  @as("TargetClusterInfo")
-  targetClusterInfo: option<mutableClusterInfo>,
-  @ocaml.doc("<p>Information about cluster attributes before a cluster is updated.</p>")
-  @as("SourceClusterInfo")
-  sourceClusterInfo: option<mutableClusterInfo>,
-  @ocaml.doc("<p>Type of the cluster operation.</p>") @as("OperationType")
-  operationType: option<__string>,
-  @ocaml.doc("<p>Steps completed during the operation.</p>") @as("OperationSteps")
-  operationSteps: option<__listOfClusterOperationStep>,
-  @ocaml.doc("<p>State of the cluster operation.</p>") @as("OperationState")
-  operationState: option<__string>,
-  @ocaml.doc("<p>ARN of the cluster operation.</p>") @as("OperationArn")
-  operationArn: option<__string>,
-  @ocaml.doc("<p>Describes the error if the operation fails.</p>") @as("ErrorInfo")
-  errorInfo: option<errorInfo>,
-  @ocaml.doc("<p>The time at which the operation finished.</p>") @as("EndTime")
-  endTime: option<__timestampIso8601>,
-  @ocaml.doc("<p>The time that the operation was created.</p>") @as("CreationTime")
-  creationTime: option<__timestampIso8601>,
-  @ocaml.doc("<p>ARN of the cluster.</p>") @as("ClusterArn") clusterArn: option<__string>,
-  @ocaml.doc("<p>The ID of the API request that triggered this operation.</p>")
-  @as("ClientRequestId")
-  clientRequestId: option<__string>,
-}
 type __listOfClusterOperationInfo = array<clusterOperationInfo>
+type __listOfClusterInfo = array<clusterInfo>
+@ocaml.doc("<p>Returns information about a cluster.</p>")
+type cluster = {
+  @ocaml.doc("<p>Information about the serverless cluster.</p>") @as("Serverless")
+  serverless: option<serverless>,
+  @ocaml.doc("<p>Information about the provisioned cluster.</p>") @as("Provisioned")
+  provisioned: option<provisioned>,
+  @ocaml.doc("<p>Tags attached to the cluster.</p>") @as("Tags") tags: option<__mapOf__string>,
+  @ocaml.doc("<p>State Info for the Amazon MSK cluster.</p>") @as("StateInfo")
+  stateInfo: option<stateInfo>,
+  @ocaml.doc(
+    "<p>The state of the cluster. The possible states are ACTIVE, CREATING, DELETING, FAILED, HEALING, MAINTENANCE, REBOOTING_BROKER, and UPDATING.</p>"
+  )
+  @as("State")
+  state: option<clusterState>,
+  @ocaml.doc("<p>The current version of the MSK cluster.</p>") @as("CurrentVersion")
+  currentVersion: option<__string>,
+  @ocaml.doc("<p>The time when the cluster was created.</p>") @as("CreationTime")
+  creationTime: option<__timestampIso8601>,
+  @ocaml.doc("<p>The name of the cluster.</p>") @as("ClusterName") clusterName: option<__string>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>")
+  @as("ClusterArn")
+  clusterArn: option<__string>,
+  @ocaml.doc("<p>Cluster Type.</p>") @as("ClusterType") clusterType: option<clusterType>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) that uniquely identifies a cluster operation.</p>")
+  @as("ActiveOperationArn")
+  activeOperationArn: option<__string>,
+}
+type __listOfCluster = array<cluster>
 @ocaml.doc("<p>The operations for managing an Amazon MSK cluster.</p>")
 module UpdateBrokerType = {
   type t
@@ -556,6 +732,19 @@ module GetBootstrapBrokers = {
     clusterArn: __string,
   }
   type response = {
+    @ocaml.doc(
+      "<p>A string that contains one or more DNS names (or IP addresses) and SASL IAM port pairs.</p>"
+    )
+    @as("BootstrapBrokerStringPublicSaslIam")
+    bootstrapBrokerStringPublicSaslIam: option<__string>,
+    @ocaml.doc(
+      "<p>A string containing one or more DNS names (or IP) and Sasl Scram port pairs.</p>"
+    )
+    @as("BootstrapBrokerStringPublicSaslScram")
+    bootstrapBrokerStringPublicSaslScram: option<__string>,
+    @ocaml.doc("<p>A string containing one or more DNS names (or IP) and TLS port pairs.</p>")
+    @as("BootstrapBrokerStringPublicTls")
+    bootstrapBrokerStringPublicTls: option<__string>,
     @ocaml.doc(
       "<p>A string that contains one or more DNS names (or IP addresses) and SASL IAM port pairs.</p>"
     )
@@ -780,7 +969,7 @@ module UntagResource = {
     @as("ResourceArn")
     resourceArn: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-kafka") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -796,7 +985,7 @@ module TagResource = {
     @as("ResourceArn")
     resourceArn: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-kafka") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -936,21 +1125,18 @@ module CreateConfiguration = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
-module UpdateBrokerStorage = {
+module UpdateConnectivity = {
   type t
+  @ocaml.doc("Request body for UpdateConnectivity.")
   type request = {
     @ocaml.doc(
-      "<p>Describes the target volume size and the ID of the broker to apply the update to.</p>"
-    )
-    @as("TargetBrokerEBSVolumeInfo")
-    targetBrokerEBSVolumeInfo: __listOfBrokerEBSVolumeInfo,
-    @ocaml.doc(
-      "<p>The version of cluster to update from. A successful operation will then generate a new version.</p>"
+      "<p>The version of the MSK cluster to update. Cluster versions aren't simple numbers. You can describe an MSK cluster to find its version. When this update operation is successful, it generates a new cluster version.</p>"
     )
     @as("CurrentVersion")
     currentVersion: __string,
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>")
-    @as("ClusterArn")
+    @ocaml.doc("<p>Information about the broker access configuration.</p>") @as("ConnectivityInfo")
+    connectivityInfo: connectivityInfo,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the configuration.</p>") @as("ClusterArn")
     clusterArn: __string,
   }
   type response = {
@@ -960,11 +1146,11 @@ module UpdateBrokerStorage = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the cluster.</p>") @as("ClusterArn")
     clusterArn: option<__string>,
   }
-  @module("@aws-sdk/client-kafka") @new external new: request => t = "UpdateBrokerStorageCommand"
-  let make = (~targetBrokerEBSVolumeInfo, ~currentVersion, ~clusterArn, ()) =>
+  @module("@aws-sdk/client-kafka") @new external new: request => t = "UpdateConnectivityCommand"
+  let make = (~currentVersion, ~connectivityInfo, ~clusterArn, ()) =>
     new({
-      targetBrokerEBSVolumeInfo: targetBrokerEBSVolumeInfo,
       currentVersion: currentVersion,
+      connectivityInfo: connectivityInfo,
       clusterArn: clusterArn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
@@ -1072,6 +1258,41 @@ module BatchAssociateScramSecret = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module UpdateSecurity = {
+  type t
+  type request = {
+    @ocaml.doc("<p>Includes all encryption-related information.</p>") @as("EncryptionInfo")
+    encryptionInfo: option<encryptionInfo>,
+    @ocaml.doc(
+      "<p>The version of the MSK cluster to update. Cluster versions aren't simple numbers. You can describe an MSK cluster to find its version. When this update operation is successful, it generates a new cluster version.</p>"
+    )
+    @as("CurrentVersion")
+    currentVersion: __string,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>")
+    @as("ClusterArn")
+    clusterArn: __string,
+    @ocaml.doc("<p>Includes all client authentication related information.</p>")
+    @as("ClientAuthentication")
+    clientAuthentication: option<clientAuthentication>,
+  }
+  type response = {
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the cluster operation.</p>")
+    @as("ClusterOperationArn")
+    clusterOperationArn: option<__string>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the cluster.</p>") @as("ClusterArn")
+    clusterArn: option<__string>,
+  }
+  @module("@aws-sdk/client-kafka") @new external new: request => t = "UpdateSecurityCommand"
+  let make = (~currentVersion, ~clusterArn, ~encryptionInfo=?, ~clientAuthentication=?, ()) =>
+    new({
+      encryptionInfo: encryptionInfo,
+      currentVersion: currentVersion,
+      clusterArn: clusterArn,
+      clientAuthentication: clientAuthentication,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module UpdateMonitoring = {
   type t
   @ocaml.doc("Request body for UpdateMonitoring.")
@@ -1119,6 +1340,40 @@ module UpdateMonitoring = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module UpdateBrokerStorage = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>Describes the target volume size and the ID of the broker to apply the update to.</p>"
+    )
+    @as("TargetBrokerEBSVolumeInfo")
+    targetBrokerEBSVolumeInfo: __listOfBrokerEBSVolumeInfo,
+    @ocaml.doc(
+      "<p>The version of cluster to update from. A successful operation will then generate a new version.</p>"
+    )
+    @as("CurrentVersion")
+    currentVersion: __string,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>")
+    @as("ClusterArn")
+    clusterArn: __string,
+  }
+  type response = {
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the cluster operation.</p>")
+    @as("ClusterOperationArn")
+    clusterOperationArn: option<__string>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the cluster.</p>") @as("ClusterArn")
+    clusterArn: option<__string>,
+  }
+  @module("@aws-sdk/client-kafka") @new external new: request => t = "UpdateBrokerStorageCommand"
+  let make = (~targetBrokerEBSVolumeInfo, ~currentVersion, ~clusterArn, ()) =>
+    new({
+      targetBrokerEBSVolumeInfo: targetBrokerEBSVolumeInfo,
+      currentVersion: currentVersion,
+      clusterArn: clusterArn,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module ListConfigurations = {
   type t
   type request = {
@@ -1159,6 +1414,36 @@ module GetCompatibleKafkaVersions = {
   @module("@aws-sdk/client-kafka") @new
   external new: request => t = "GetCompatibleKafkaVersionsCommand"
   let make = (~clusterArn=?, ()) => new({clusterArn: clusterArn})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module ListNodes = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response. 
+            To get the next batch, provide this token in your next request.</p>")
+    @as("NextToken")
+    nextToken: option<__string>,
+    @ocaml.doc(
+      "<p>The maximum number of results to return in the response. If there are more results, the response includes a NextToken parameter.</p>"
+    )
+    @as("MaxResults")
+    maxResults: option<maxResults>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>")
+    @as("ClusterArn")
+    clusterArn: __string,
+  }
+  type response = {
+    @ocaml.doc("<p>List containing a NodeInfo object.</p>") @as("NodeInfoList")
+    nodeInfoList: option<__listOfNodeInfo>,
+    @ocaml.doc("<p>The paginated results marker. When the result of a ListNodes operation is truncated, the call returns NextToken in the response. 
+               To get another batch of nodes, provide this token in your next request.</p>")
+    @as("NextToken")
+    nextToken: option<__string>,
+  }
+  @module("@aws-sdk/client-kafka") @new external new: request => t = "ListNodesCommand"
+  let make = (~clusterArn, ~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults, clusterArn: clusterArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1236,33 +1521,22 @@ module CreateCluster = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
-module ListNodes = {
+module DescribeClusterOperation = {
   type t
   type request = {
-    @ocaml.doc("<p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response. 
-            To get the next batch, provide this token in your next request.</p>")
-    @as("NextToken")
-    nextToken: option<__string>,
     @ocaml.doc(
-      "<p>The maximum number of results to return in the response. If there are more results, the response includes a NextToken parameter.</p>"
+      "<p>The Amazon Resource Name (ARN) that uniquely identifies the MSK cluster operation.</p>"
     )
-    @as("MaxResults")
-    maxResults: option<maxResults>,
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>")
-    @as("ClusterArn")
-    clusterArn: __string,
+    @as("ClusterOperationArn")
+    clusterOperationArn: __string,
   }
   type response = {
-    @ocaml.doc("<p>List containing a NodeInfo object.</p>") @as("NodeInfoList")
-    nodeInfoList: option<__listOfNodeInfo>,
-    @ocaml.doc("<p>The paginated results marker. When the result of a ListNodes operation is truncated, the call returns NextToken in the response. 
-               To get another batch of nodes, provide this token in your next request.</p>")
-    @as("NextToken")
-    nextToken: option<__string>,
+    @ocaml.doc("<p>Cluster operation information</p>") @as("ClusterOperationInfo")
+    clusterOperationInfo: option<clusterOperationInfo>,
   }
-  @module("@aws-sdk/client-kafka") @new external new: request => t = "ListNodesCommand"
-  let make = (~clusterArn, ~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults, clusterArn: clusterArn})
+  @module("@aws-sdk/client-kafka") @new
+  external new: request => t = "DescribeClusterOperationCommand"
+  let make = (~clusterOperationArn, ()) => new({clusterOperationArn: clusterOperationArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1279,6 +1553,37 @@ module DescribeCluster = {
   }
   @module("@aws-sdk/client-kafka") @new external new: request => t = "DescribeClusterCommand"
   let make = (~clusterArn, ()) => new({clusterArn: clusterArn})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module CreateClusterV2 = {
+  type t
+  type request = {
+    @ocaml.doc("<p>Information about the serverless cluster.</p>") @as("Serverless")
+    serverless: option<serverlessRequest>,
+    @ocaml.doc("<p>Information about the provisioned cluster.</p>") @as("Provisioned")
+    provisioned: option<provisionedRequest>,
+    @ocaml.doc("<p>A map of tags that you want the cluster to have.</p>") @as("Tags")
+    tags: option<__mapOf__string>,
+    @ocaml.doc("<p>The name of the cluster.</p>") @as("ClusterName") clusterName: __stringMin1Max64,
+  }
+  type response = {
+    @ocaml.doc("<p>The type of the cluster. The possible states are PROVISIONED or SERVERLESS.</p>")
+    @as("ClusterType")
+    clusterType: option<clusterType>,
+    @ocaml.doc(
+      "<p>The state of the cluster. The possible states are ACTIVE, CREATING, DELETING, FAILED, HEALING, MAINTENANCE, REBOOTING_BROKER, and UPDATING.</p>"
+    )
+    @as("State")
+    state: option<clusterState>,
+    @ocaml.doc("<p>The name of the MSK cluster.</p>") @as("ClusterName")
+    clusterName: option<__string>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the cluster.</p>") @as("ClusterArn")
+    clusterArn: option<__string>,
+  }
+  @module("@aws-sdk/client-kafka") @new external new: request => t = "CreateClusterV2Command"
+  let make = (~clusterName, ~serverless=?, ~provisioned=?, ~tags=?, ()) =>
+    new({serverless: serverless, provisioned: provisioned, tags: tags, clusterName: clusterName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1315,25 +1620,6 @@ module ListClusters = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
-module DescribeClusterOperation = {
-  type t
-  type request = {
-    @ocaml.doc(
-      "<p>The Amazon Resource Name (ARN) that uniquely identifies the MSK cluster operation.</p>"
-    )
-    @as("ClusterOperationArn")
-    clusterOperationArn: __string,
-  }
-  type response = {
-    @ocaml.doc("<p>Cluster operation information</p>") @as("ClusterOperationInfo")
-    clusterOperationInfo: option<clusterOperationInfo>,
-  }
-  @module("@aws-sdk/client-kafka") @new
-  external new: request => t = "DescribeClusterOperationCommand"
-  let make = (~clusterOperationArn, ()) => new({clusterOperationArn: clusterOperationArn})
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
 module ListClusterOperations = {
   type t
   type request = {
@@ -1363,5 +1649,60 @@ module ListClusterOperations = {
   @module("@aws-sdk/client-kafka") @new external new: request => t = "ListClusterOperationsCommand"
   let make = (~clusterArn, ~nextToken=?, ~maxResults=?, ()) =>
     new({nextToken: nextToken, maxResults: maxResults, clusterArn: clusterArn})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module DescribeClusterV2 = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>")
+    @as("ClusterArn")
+    clusterArn: __string,
+  }
+  type response = {
+    @ocaml.doc("<p>The cluster information.</p>") @as("ClusterInfo") clusterInfo: option<cluster>,
+  }
+  @module("@aws-sdk/client-kafka") @new external new: request => t = "DescribeClusterV2Command"
+  let make = (~clusterArn, ()) => new({clusterArn: clusterArn})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module ListClustersV2 = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response. 
+            To get the next batch, provide this token in your next request.</p>")
+    @as("NextToken")
+    nextToken: option<__string>,
+    @ocaml.doc(
+      "<p>The maximum number of results to return in the response. If there are more results, the response includes a NextToken parameter.</p>"
+    )
+    @as("MaxResults")
+    maxResults: option<maxResults>,
+    @ocaml.doc("<p>Specify either PROVISIONED or SERVERLESS.</p>") @as("ClusterTypeFilter")
+    clusterTypeFilter: option<__string>,
+    @ocaml.doc(
+      "<p>Specify a prefix of the names of the clusters that you want to list. The service lists all the clusters whose names start with this prefix.</p>"
+    )
+    @as("ClusterNameFilter")
+    clusterNameFilter: option<__string>,
+  }
+  type response = {
+    @ocaml.doc("<p>The paginated results marker. When the result of a ListClusters operation is truncated, the call returns NextToken in the response. 
+               To get another batch of clusters, provide this token in your next request.</p>")
+    @as("NextToken")
+    nextToken: option<__string>,
+    @ocaml.doc("<p>Information on each of the MSK clusters in the response.</p>")
+    @as("ClusterInfoList")
+    clusterInfoList: option<__listOfCluster>,
+  }
+  @module("@aws-sdk/client-kafka") @new external new: request => t = "ListClustersV2Command"
+  let make = (~nextToken=?, ~maxResults=?, ~clusterTypeFilter=?, ~clusterNameFilter=?, ()) =>
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      clusterTypeFilter: clusterTypeFilter,
+      clusterNameFilter: clusterNameFilter,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

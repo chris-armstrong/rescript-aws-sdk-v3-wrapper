@@ -312,7 +312,7 @@ module UnshareApplication = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the application.</p>") @as("ApplicationId")
     applicationId: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-serverlessrepo") @new
   external new: request => t = "UnshareApplicationCommand"
   let make = (~organizationId, ~applicationId, ()) =>
@@ -372,7 +372,7 @@ module DeleteApplication = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the application.</p>") @as("ApplicationId")
     applicationId: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-serverlessrepo") @new
   external new: request => t = "DeleteApplicationCommand"
   let make = (~applicationId, ()) => new({applicationId: applicationId})

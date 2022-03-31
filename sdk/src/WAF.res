@@ -2602,7 +2602,7 @@ module PutPermissionPolicy = {
     @as("ResourceArn")
     resourceArn: resourceArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-waf") @new external new: request => t = "PutPermissionPolicyCommand"
   let make = (~policy, ~resourceArn, ()) => new({policy: policy, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -2646,15 +2646,15 @@ module GetChangeTokenStatus = {
 
 module GetChangeToken = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("<p>The <code>ChangeToken</code> that you used in the request. Use this value in a <code>GetChangeTokenStatus</code> request 
 			to get the current status of the request. </p>")
     @as("ChangeToken")
     changeToken: option<changeToken>,
   }
-  @module("@aws-sdk/client-waf") @new external new: unit => t = "GetChangeTokenCommand"
-  let make = () => new()
+  @module("@aws-sdk/client-waf") @new external new: request => t = "GetChangeTokenCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -2879,7 +2879,7 @@ module DeletePermissionPolicy = {
     @as("ResourceArn")
     resourceArn: resourceArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-waf") @new external new: request => t = "DeletePermissionPolicyCommand"
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -2894,7 +2894,7 @@ module DeleteLoggingConfiguration = {
     @as("ResourceArn")
     resourceArn: resourceArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-waf") @new
   external new: request => t = "DeleteLoggingConfigurationCommand"
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
@@ -3018,7 +3018,7 @@ module UntagResource = {
     @ocaml.doc("<p></p>") @as("TagKeys") tagKeys: tagKeyList,
     @ocaml.doc("<p></p>") @as("ResourceARN") resourceARN: resourceArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-waf") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys: tagKeys, resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -3104,7 +3104,7 @@ module TagResource = {
     @ocaml.doc("<p></p>") @as("Tags") tags: tagList_,
     @ocaml.doc("<p></p>") @as("ResourceARN") resourceARN: resourceArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-waf") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceARN, ()) => new({tags: tags, resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"

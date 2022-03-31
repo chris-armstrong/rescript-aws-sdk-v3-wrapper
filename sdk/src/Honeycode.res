@@ -18,6 +18,8 @@ type workbookCursor = float
 type variableName = string
 type upsertAction = [@as("APPENDED") #APPENDED | @as("UPDATED") #UPDATED]
 type timestampInMillis = Js.Date.t
+type tagValue = string
+type tagKey = string
 type tableName = string
 type tableDataImportJobStatus = [
   | @as("FAILED") #FAILED
@@ -31,6 +33,7 @@ type sourceDataColumnIndex = int
 type secureURL = string
 type rowId = string
 type resourceId = string
+type resourceArn = string
 type rawValue = string
 type paginationToken = string
 type name = string
@@ -50,6 +53,7 @@ type hasHeaderRow = bool
 type formula = string
 type formattedValue = string
 type format = [
+  | @as("ROWSET") #ROWSET
   | @as("ROWLINK") #ROWLINK
   | @as("CONTACT") #CONTACT
   | @as("ACCOUNTING") #ACCOUNTING
@@ -64,6 +68,22 @@ type format = [
 ]
 type fact = string
 type errorMessage = string
+type errorCode = [
+  | @as("SYSTEM_LIMIT_ERROR") #SYSTEM_LIMIT_ERROR
+  | @as("RESOURCE_NOT_FOUND_ERROR") #RESOURCE_NOT_FOUND_ERROR
+  | @as("UNKNOWN_ERROR") #UNKNOWN_ERROR
+  | @as("FILE_NOT_FOUND_ERROR") #FILE_NOT_FOUND_ERROR
+  | @as("FILE_SIZE_LIMIT_ERROR") #FILE_SIZE_LIMIT_ERROR
+  | @as("FILE_PARSING_ERROR") #FILE_PARSING_ERROR
+  | @as("INVALID_FILE_TYPE_ERROR") #INVALID_FILE_TYPE_ERROR
+  | @as("FILE_EMPTY_ERROR") #FILE_EMPTY_ERROR
+  | @as("TABLE_NOT_FOUND_ERROR") #TABLE_NOT_FOUND_ERROR
+  | @as("INVALID_TABLE_COLUMN_ID_ERROR") #INVALID_TABLE_COLUMN_ID_ERROR
+  | @as("INVALID_TABLE_ID_ERROR") #INVALID_TABLE_ID_ERROR
+  | @as("INVALID_IMPORT_OPTIONS_ERROR") #INVALID_IMPORT_OPTIONS_ERROR
+  | @as("INVALID_URL_ERROR") #INVALID_URL_ERROR
+  | @as("ACCESS_DENIED") #ACCESS_DENIED
+]
 type email = string
 type delimitedTextDelimiter = string
 type clientRequestToken = string
@@ -74,6 +94,8 @@ type awsUserArn = string
   "<p>The input variables to the app to be used by the InvokeScreenAutomation action request.</p>"
 )
 type variableValue = {@ocaml.doc("<p>Raw value of the variable.</p>") rawValue: rawValue}
+@ocaml.doc("<p>A string to string map representing tags</p>") type tagsMap = Js.Dict.t<tagValue>
+@ocaml.doc("<p>A list of tag keys</p>") type tagKeysList = array<tagKey>
 @ocaml.doc("<p>An object that contains attributes about a single column in a table</p>")
 type tableColumn = {
   @ocaml.doc("<p>
@@ -115,6 +137,7 @@ type importDataSourceConfig = {
         </p>")
   dataSourceUrl: option<secureURL>,
 }
+type formattedValuesList = array<formattedValue>
 @ocaml.doc("<p>
             An object that represents a filter formula along with the id of the context row under which the filter
             function needs to evaluate.
@@ -151,6 +174,7 @@ type failedBatchItem = {
         </p>")
   id: batchItemId,
 }
+type factList = array<fact>
 @ocaml.doc("<p>
             An object that contains the options relating to parsing delimited text as part of an import request.
         </p>")
@@ -186,10 +210,50 @@ type columnMetadata = {
   @ocaml.doc("<p>The format of the column.</p>") format: format,
   @ocaml.doc("<p>The name of the column.</p>") name: name,
 }
+type variableValueMap = Js.Dict.t<variableValue>
+@ocaml.doc("<p>
+            An object that represents the result of a single upsert row request.
+        </p>")
+type upsertRowsResult = {
+  @ocaml.doc("<p>
+            The result of the upsert action.
+        </p>")
+  upsertAction: upsertAction,
+  @ocaml.doc("<p>
+            The list of row ids that were changed as part of an upsert row operation. If the upsert resulted in an
+            update, this list could potentially contain multiple rows that matched the filter and hence got updated.
+            If the upsert resulted in an append, this list would only have the single row that was appended.
+        </p>")
+  rowIds: rowIdList,
+}
+type tables = array<table>
+type tableColumns = array<tableColumn>
+type resultHeader = array<columnMetadata>
+@ocaml.doc(
+  "<p>An object that has details about the source of the data that was submitted for import.</p>"
+)
+type importDataSource = {
+  @ocaml.doc("<p>The configuration parameters for the data source of the import</p>")
+  dataSourceConfig: importDataSourceConfig,
+}
+type importColumnMap = Js.Dict.t<sourceDataColumnProperties>
+type failedBatchItems = array<failedBatchItem>
+type dataItems = array<dataItem>
 @ocaml.doc("<p>
             CellInput object contains the data needed to create or update cells in a table.
-        </p>")
+        </p>
+        <note>
+            <p>
+                CellInput object has only a facts field or a fact field, but not both. A 400 bad request will be
+                thrown if both fact and facts field are present.
+            </p>
+        </note>")
 type cellInput = {
+  @ocaml.doc("<p>
+            A list representing the values that are entered into a ROWSET cell. Facts list can have either only values
+            or rowIDs, and rowIDs should from the same table.
+        </p>")
+  facts: option<factList>,
   @ocaml.doc("<p>
             Fact represents the data that is entered into a cell. This data can be free text or a formula. Formulas need
             to start with the equals (=) sign.
@@ -198,6 +262,12 @@ type cellInput = {
 }
 @ocaml.doc("<p>An object that represents a single cell in a table.</p>")
 type cell = {
+  @ocaml.doc("<p>
+            A list of formatted values of the cell. This field is only returned when the cell is ROWSET format
+            (aka multi-select or multi-record picklist). Values in the list are always represented as strings.
+            The formattedValue field will be empty if this field is returned.
+        </p>")
+  formattedValues: option<formattedValuesList>,
   @ocaml.doc("<p>
             The formatted value of the cell. This is the value that you see displayed in the cell in the UI.
         </p>
@@ -244,6 +314,18 @@ type cell = {
             \"row:dfcefaee-5b37-4355-8f28-40c3e4ff5dd4/ca432b2f-b8eb-431d-9fb5-cbe0342f9f03\" as the raw value.
         </p>
         <p>
+            Cells with format ROWSET (aka multi-select or multi-record picklist) will by default have the first column
+            of each of the linked rows as the formatted value in the list, and the rowset id of the linked rows as the
+            raw value. For example, a cell containing a multi-select picklist to a table that contains items might have
+            \"Item A\", \"Item B\" in the formatted value list and \"rows:b742c1f4-6cb0-4650-a845-35eb86fcc2bb/
+            [fdea123b-8f68-474a-aa8a-5ff87aa333af,6daf41f0-a138-4eee-89da-123086d36ecf]\" as the raw value.
+        </p>
+        <p>
+            Cells with format ATTACHMENT will have the name of the attachment as the formatted value and the attachment
+            id as the raw value. For example, a cell containing an attachment named \"image.jpeg\" will have
+            \"image.jpeg\" as the formatted value and \"attachment:ca432b2f-b8eb-431d-9fb5-cbe0342f9f03\" as the raw value.
+        </p>
+        <p>
             Cells with format AUTO or cells without any format that are auto-detected as one of the formats above will
             contain the raw and formatted values as mentioned above, based on the auto-detected formats. If there is no
             auto-detected format, the raw and formatted values will be the same as the data in the cell.
@@ -257,38 +339,21 @@ type cell = {
         </p>")
   formula: option<formula>,
 }
-type variableValueMap = Js.Dict.t<variableValue>
-@ocaml.doc("<p>
-            An object that represents the result of a single upsert row request.
-        </p>")
-type upsertRowsResult = {
-  @ocaml.doc("<p>
-            The result of the upsert action.
-        </p>")
-  upsertAction: upsertAction,
-  @ocaml.doc("<p>
-            The list of row ids that were changed as part of an upsert row operation. If the upsert resulted in an
-            update, this list could potentially contain multiple rows that matched the filter and hence got updated.
-            If the upsert resulted in an append, this list would only have the single row that was appended.
-        </p>")
-  rowIds: rowIdList,
-}
-type tables = array<table>
-type tableColumns = array<tableColumn>
-type rowDataInput = Js.Dict.t<cellInput>
-type resultHeader = array<columnMetadata>
-@ocaml.doc(
-  "<p>An object that has details about the source of the data that was submitted for import.</p>"
-)
-type importDataSource = {
-  @ocaml.doc("<p>The configuration parameters for the data source of the import</p>")
-  dataSourceConfig: importDataSourceConfig,
-}
-type importColumnMap = Js.Dict.t<sourceDataColumnProperties>
-type failedBatchItems = array<failedBatchItem>
-type dataItems = array<dataItem>
-type cells = array<cell>
 type upsertRowsResultMap = Js.Dict.t<upsertRowsResult>
+type rowDataInput = Js.Dict.t<cellInput>
+@ocaml.doc("<p>A single row in the ResultSet.</p>")
+type resultRow = {
+  @ocaml.doc("<p>List of all the data cells in a row.</p>") dataItems: dataItems,
+  @ocaml.doc("<p>The ID for a particular row.</p>") rowId: option<rowId>,
+}
+@ocaml.doc(
+  "<p>An object that contains the options relating to the destination of the import request.</p>"
+)
+type destinationOptions = {
+  @ocaml.doc("<p>A map of the column id to the import properties for each column.</p>")
+  columnMap: option<importColumnMap>,
+}
+type cells = array<cell>
 @ocaml.doc("<p>
             Data needed to upsert rows in a table as part of a single item in the BatchUpsertTableRows request.
         </p>")
@@ -339,17 +404,17 @@ type tableRow = {
   cells: cells,
   @ocaml.doc("<p>The id of the row in the table.</p>") rowId: rowId,
 }
-@ocaml.doc("<p>A single row in the ResultSet.</p>")
-type resultRow = {
-  @ocaml.doc("<p>List of all the data cells in a row.</p>") dataItems: dataItems,
-  @ocaml.doc("<p>The ID for a particular row.</p>") rowId: option<rowId>,
-}
+type resultRows = array<resultRow>
 @ocaml.doc(
-  "<p>An object that contains the options relating to the destination of the import request.</p>"
+  "<p>An object that contains the options specified by the sumitter of the import request.</p>"
 )
-type destinationOptions = {
-  @ocaml.doc("<p>A map of the column id to the import properties for each column.</p>")
-  columnMap: option<importColumnMap>,
+type importOptions = {
+  @ocaml.doc(
+    "<p>Options relating to parsing delimited text. Required if dataFormat is DELIMITED_TEXT.</p>"
+  )
+  delimitedTextOptions: option<delimitedTextImportOptions>,
+  @ocaml.doc("<p>Options relating to the destination of the import request.</p>")
+  destinationOptions: option<destinationOptions>,
 }
 @ocaml.doc("<p>
             Data needed to create a single row in a table as part of the BatchCreateTableRows request.
@@ -371,19 +436,6 @@ type createRowData = {
 type upsertRowDataList = array<upsertRowData>
 type updateRowDataList = array<updateRowData>
 type tableRows = array<tableRow>
-type resultRows = array<resultRow>
-@ocaml.doc(
-  "<p>An object that contains the options specified by the sumitter of the import request.</p>"
-)
-type importOptions = {
-  @ocaml.doc(
-    "<p>Options relating to parsing delimited text. Required if dataFormat is DELIMITED_TEXT.</p>"
-  )
-  delimitedTextOptions: option<delimitedTextImportOptions>,
-  @ocaml.doc("<p>Options relating to the destination of the import request.</p>")
-  destinationOptions: option<destinationOptions>,
-}
-type createRowDataList = array<createRowData>
 @ocaml.doc("<p>The metadata associated with the table data import job that was submitted.</p>")
 type tableDataImportJobMetadata = {
   @ocaml.doc("<p>The source of the data that was submitted for import.</p>")
@@ -419,12 +471,49 @@ type resultSet = {
         </p>")
   headers: resultHeader,
 }
+type createRowDataList = array<createRowData>
 type resultSetMap = Js.Dict.t<resultSet>
 @ocaml.doc("<p>
       Amazon Honeycode is a fully managed service that allows you to quickly build mobile and web apps for teams—without
       programming. Build Honeycode apps for managing almost anything, like projects, customers, operations, approvals,
       resources, and even your team.
     </p>")
+module UntagResource = {
+  type t
+  type request = {
+    @ocaml.doc("<p>A list of tag keys to remove from the resource.</p>") tagKeys: tagKeysList,
+    @ocaml.doc("<p>The resource's Amazon Resource Name (ARN).</p>") resourceArn: resourceArn,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-honeycode") @new external new: request => t = "UntagResourceCommand"
+  let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module TagResource = {
+  type t
+  type request = {
+    @ocaml.doc("<p>A list of tags to apply to the resource.</p>") tags: tagsMap,
+    @ocaml.doc("<p>The resource's Amazon Resource Name (ARN).</p>") resourceArn: resourceArn,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-honeycode") @new external new: request => t = "TagResourceCommand"
+  let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module ListTagsForResource = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The resource's Amazon Resource Name (ARN).</p>") resourceArn: resourceArn,
+  }
+  type response = {@ocaml.doc("<p>The resource's tags.</p>") tags: option<tagsMap>}
+  @module("@aws-sdk/client-honeycode") @new
+  external new: request => t = "ListTagsForResourceCommand"
+  let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module ListTables = {
   type t
   type request = {
@@ -829,6 +918,50 @@ module ListTableRows = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module DescribeTableDataImportJob = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The ID of the job that was returned by the StartTableDataImportJob request.</p>
+        <p>
+            If a job with the specified id could not be found, this API throws ResourceNotFoundException.
+        </p>")
+    jobId: jobId,
+    @ocaml.doc("<p>The ID of the table into which data was imported.</p>
+        <p>
+            If a table with the specified id could not be found, this API throws ResourceNotFoundException.
+        </p>")
+    tableId: resourceId,
+    @ocaml.doc("<p>The ID of the workbook into which data was imported.</p>
+        <p>
+            If a workbook with the specified id could not be found, this API throws ResourceNotFoundException.
+        </p>")
+    workbookId: resourceId,
+  }
+  type response = {
+    @ocaml.doc("<p>
+            If job status is failed, error code to understand reason for the failure.
+        </p>")
+    errorCode: option<errorCode>,
+    @ocaml.doc("<p>
+            The metadata about the job that was submitted for import.
+        </p>")
+    jobMetadata: tableDataImportJobMetadata,
+    @ocaml.doc("<p>
+            A message providing more details about the current status of the import job.
+        </p>")
+    message: tableDataImportJobMessage,
+    @ocaml.doc("<p>
+            The current status of the import job.
+        </p>")
+    jobStatus: tableDataImportJobStatus,
+  }
+  @module("@aws-sdk/client-honeycode") @new
+  external new: request => t = "DescribeTableDataImportJobCommand"
+  let make = (~jobId, ~tableId, ~workbookId, ()) =>
+    new({jobId: jobId, tableId: tableId, workbookId: workbookId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module BatchUpsertTableRows = {
   type t
   type request = {
@@ -1018,46 +1151,6 @@ module BatchCreateTableRows = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
-module DescribeTableDataImportJob = {
-  type t
-  type request = {
-    @ocaml.doc("<p>The ID of the job that was returned by the StartTableDataImportJob request.</p>
-        <p>
-            If a job with the specified id could not be found, this API throws ResourceNotFoundException.
-        </p>")
-    jobId: jobId,
-    @ocaml.doc("<p>The ID of the table into which data was imported.</p>
-        <p>
-            If a table with the specified id could not be found, this API throws ResourceNotFoundException.
-        </p>")
-    tableId: resourceId,
-    @ocaml.doc("<p>The ID of the workbook into which data was imported.</p>
-        <p>
-            If a workbook with the specified id could not be found, this API throws ResourceNotFoundException.
-        </p>")
-    workbookId: resourceId,
-  }
-  type response = {
-    @ocaml.doc("<p>
-            The metadata about the job that was submitted for import.
-        </p>")
-    jobMetadata: tableDataImportJobMetadata,
-    @ocaml.doc("<p>
-            A message providing more details about the current status of the import job.
-        </p>")
-    message: tableDataImportJobMessage,
-    @ocaml.doc("<p>
-            The current status of the import job.
-        </p>")
-    jobStatus: tableDataImportJobStatus,
-  }
-  @module("@aws-sdk/client-honeycode") @new
-  external new: request => t = "DescribeTableDataImportJobCommand"
-  let make = (~jobId, ~tableId, ~workbookId, ()) =>
-    new({jobId: jobId, tableId: tableId, workbookId: workbookId})
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
 module GetScreenData = {
   type t
   type request = {
@@ -1085,7 +1178,7 @@ module GetScreenData = {
         </p>")
     variables: option<variableValueMap>,
     @ocaml.doc("<p>The ID of the screen.</p>") screenId: resourceId,
-    @ocaml.doc("<p>The ID of the app that contains the screem.</p>") appId: resourceId,
+    @ocaml.doc("<p>The ID of the app that contains the screen.</p>") appId: resourceId,
     @ocaml.doc("<p>The ID of the workbook that contains the screen.</p>") workbookId: resourceId,
   }
   type response = {

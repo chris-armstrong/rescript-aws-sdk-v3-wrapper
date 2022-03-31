@@ -205,7 +205,7 @@ type serviceQuotaListDefinition = array<serviceQuota>
       create in your AWS account. For more information, see the <a href=\"https://docs.aws.amazon.com/servicequotas/latest/userguide/\">Service Quotas User Guide</a>.</p>")
 module GetAssociationForServiceQuotaTemplate = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("<p>The association status. If the status is <code>ASSOCIATED</code>, the quota increase
       requests in the template are automatically applied to new accounts in your
@@ -214,17 +214,18 @@ module GetAssociationForServiceQuotaTemplate = {
     serviceQuotaTemplateAssociationStatus: option<serviceQuotaTemplateAssociationStatus>,
   }
   @module("@aws-sdk/client-servicequotas") @new
-  external new: unit => t = "GetAssociationForServiceQuotaTemplateCommand"
-  let make = () => new()
+  external new: request => t = "GetAssociationForServiceQuotaTemplateCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociateServiceQuotaTemplate = {
   type t
-
+  type request = {.}
+  type response = {.}
   @module("@aws-sdk/client-servicequotas") @new
-  external new: unit => t = "DisassociateServiceQuotaTemplateCommand"
-  let make = () => new()
+  external new: request => t = "DisassociateServiceQuotaTemplateCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -235,7 +236,7 @@ module DeleteServiceQuotaIncreaseRequestFromTemplate = {
     @ocaml.doc("<p>The quota identifier.</p>") @as("QuotaCode") quotaCode: quotaCode,
     @ocaml.doc("<p>The service identifier.</p>") @as("ServiceCode") serviceCode: serviceCode,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-servicequotas") @new
   external new: request => t = "DeleteServiceQuotaIncreaseRequestFromTemplateCommand"
   let make = (~awsRegion, ~quotaCode, ~serviceCode, ()) =>
@@ -245,10 +246,11 @@ module DeleteServiceQuotaIncreaseRequestFromTemplate = {
 
 module AssociateServiceQuotaTemplate = {
   type t
-
+  type request = {.}
+  type response = {.}
   @module("@aws-sdk/client-servicequotas") @new
-  external new: unit => t = "AssociateServiceQuotaTemplateCommand"
-  let make = () => new()
+  external new: request => t = "AssociateServiceQuotaTemplateCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -263,7 +265,7 @@ module UntagResource = {
     @as("ResourceARN")
     resourceARN: amazonResourceName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-servicequotas") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys: tagKeys, resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -358,7 +360,7 @@ module TagResource = {
     @as("ResourceARN")
     resourceARN: amazonResourceName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-servicequotas") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceARN, ()) => new({tags: tags, resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"

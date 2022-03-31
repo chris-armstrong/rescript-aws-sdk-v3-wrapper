@@ -27,6 +27,12 @@ type validationExceptionField = {
   @ocaml.doc("<p>A message about the validation exception.</p>") message: baseString,
   @ocaml.doc("<p>The name of the validation exception.</p>") name: baseString,
 }
+type validatePolicyResourceType = [
+  | @as("AWS::S3ObjectLambda::AccessPoint") #AWS_S3ObjectLambda_AccessPoint
+  | @as("AWS::S3::MultiRegionAccessPoint") #AWS_S3_MultiRegionAccessPoint
+  | @as("AWS::S3::AccessPoint") #AWS_S3_AccessPoint
+  | @as("AWS::S3::Bucket") #AWS_S3_Bucket
+]
 type validatePolicyFindingType = [
   | @as("WARNING") #WARNING
   | @as("SUGGESTION") #SUGGESTION
@@ -51,9 +57,9 @@ type secretsManagerSecretKmsId = string
          proposed configuration is for an existing Amazon S3 bucket and the configuration is not
          specified, the access preview uses the existing setting. If the proposed configuration is
          for a new bucket and the configuration is not specified, the access preview uses
-            <code>false</code>. If the proposed configuration is for a new access point and the
-         access point BPA configuration is not specified, the access preview uses <code>true</code>.
-         For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-publicaccessblockconfiguration.html\">PublicAccessBlockConfiguration</a>. </p>")
+            <code>false</code>. If the proposed configuration is for a new access point or
+         multi-region access point and the access point BPA configuration is not specified, the
+         access preview uses <code>true</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-publicaccessblockconfiguration.html\">PublicAccessBlockConfiguration</a>. </p>")
 type s3PublicAccessBlockConfiguration = {
   @ocaml.doc(
     "<p> Specifies whether Amazon S3 should restrict public bucket policies for this bucket. </p>"
@@ -150,9 +156,9 @@ type jobErrorCode = [
 ]
 type issuingAccount = string
 type issueCode = string
-@ocaml.doc("<p>This configuration sets the Amazon S3 access point network origin to
-         <code>Internet</code>.</p>")
-type internetConfiguration = unit
+@ocaml.doc("<p>This configuration sets the network origin for the Amazon S3 access point or multi-region
+         access point to <code>Internet</code>.</p>")
+type internetConfiguration = {.}
 type iamTrustPolicy = string
 type granteePrincipal = string
 @ocaml.doc("<p>Contains the text for the generated policy.</p>")
@@ -171,7 +177,8 @@ type findingSourceType = [
 @ocaml.doc("<p>Includes details about how the access that generated the finding is granted. This is
          populated for Amazon S3 bucket findings.</p>")
 type findingSourceDetail = {
-  @ocaml.doc("<p>The ARN of the access point that generated the finding.</p>")
+  @ocaml.doc("<p>The ARN of the access point that generated the finding. The ARN format depends on
+         whether the ARN represents an access point or a multi-region access point.</p>")
   accessPointArn: option<baseString>,
 }
 type findingId = string
@@ -211,9 +218,9 @@ type accessPreviewId = string
 type accessPreviewFindingId = string
 type accessPointPolicy = string
 type accessPointArn = string
-@ocaml.doc("<p> The proposed virtual private cloud (VPC) configuration for the Amazon S3 access point. For
-         more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_VpcConfiguration.html\">VpcConfiguration</a>.
-      </p>")
+@ocaml.doc("<p>The proposed virtual private cloud (VPC) configuration for the Amazon S3 access point. VPC
+         configuration does not apply to multi-region access points. For more information, see
+            <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_VpcConfiguration.html\">VpcConfiguration</a>. </p>")
 type vpcConfiguration = {
   @ocaml.doc("<p> If this field is specified, this access point will only allow connections from the
          specified VPC ID. </p>")
@@ -225,7 +232,7 @@ type validationExceptionFieldList = array<validationExceptionField>
 )
 type trailProperties = {
   @ocaml.doc("<p>Possible values are <code>true</code> or <code>false</code>. If set to
-         <code>true</code>, Access Analyzer retrieves CloudTrail data from all regions to analyze and
+         <code>true</code>, IAM Access Analyzer retrieves CloudTrail data from all regions to analyze and
          generate a policy.</p>")
   allRegions: option<baseBoolean>,
   @ocaml.doc(
@@ -241,7 +248,7 @@ type trailProperties = {
 )
 type trail = {
   @ocaml.doc("<p>Possible values are <code>true</code> or <code>false</code>. If set to
-         <code>true</code>, Access Analyzer retrieves CloudTrail data from all regions to analyze and
+         <code>true</code>, IAM Access Analyzer retrieves CloudTrail data from all regions to analyze and
          generate a policy.</p>")
   allRegions: option<baseBoolean>,
   @ocaml.doc(
@@ -255,21 +262,21 @@ type trail = {
 @ocaml.doc("<p>Provides more details about the current status of the analyzer. For example, if the
          creation for the analyzer fails, a <code>Failed</code> status is returned. For an analyzer
          with organization as the type, this failure can be due to an issue with creating the
-         service-linked roles required in the member accounts of the AWS organization.</p>")
+         service-linked roles required in the member accounts of the Amazon Web Services organization.</p>")
 type statusReason = {
   @ocaml.doc("<p>The reason code for the current status of the analyzer.</p>") code: reasonCode,
 }
-@ocaml.doc("<p>The proposed access control configuration for an SQS queue. You can propose a
-         configuration for a new SQS queue or an existing SQS queue that you own by specifying the
-         SQS policy. If the configuration is for an existing SQS queue and you do not specify the
-         SQS policy, the access preview uses the existing SQS policy for the queue. If the access
-         preview is for a new resource and you do not specify the policy, the access preview assumes
-         an SQS queue without a policy. To propose deletion of an existing SQS queue policy, you can
-         specify an empty string for the SQS policy. For more information about SQS policy limits,
-         see <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/quotas-policies.html\">Quotas related
+@ocaml.doc("<p>The proposed access control configuration for an Amazon SQS queue. You can propose a
+         configuration for a new Amazon SQS queue or an existing Amazon SQS queue that you own by specifying
+         the Amazon SQS policy. If the configuration is for an existing Amazon SQS queue and you do not
+         specify the Amazon SQS policy, the access preview uses the existing Amazon SQS policy for the queue.
+         If the access preview is for a new resource and you do not specify the policy, the access
+         preview assumes an Amazon SQS queue without a policy. To propose deletion of an existing Amazon SQS
+         queue policy, you can specify an empty string for the Amazon SQS policy. For more information
+         about Amazon SQS policy limits, see <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/quotas-policies.html\">Quotas related
             to policies</a>.</p>")
 type sqsQueueConfiguration = {
-  @ocaml.doc("<p> The proposed resource policy for the SQS queue. </p>")
+  @ocaml.doc("<p> The proposed resource policy for the Amazon SQS queue. </p>")
   queuePolicy: option<sqsQueuePolicy>,
 }
 @ocaml.doc("<p>A span in a policy. The span consists of a start position (inclusive) and end position
@@ -290,15 +297,15 @@ type sortCriteria = {
          existing policy for the secret. If the access preview is for a new resource and you do not
          specify the policy, the access preview assumes a secret without a policy. To propose
          deletion of an existing policy, you can specify an empty string. If the proposed
-         configuration is for a new secret and you do not specify the KMS key ID, the access preview
-         uses the default CMK of the AWS account. If you specify an empty string for the KMS key
-         ID, the access preview uses the default CMK of the AWS account. For more information
-         about secret policy limits, see <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_limits.html\">Quotas for AWS Secrets
-            Manager.</a>.</p>")
+         configuration is for a new secret and you do not specify the KMS key ID, the access
+         preview uses the Amazon Web Services managed key <code>aws/secretsmanager</code>. If you specify an empty
+         string for the KMS key ID, the access preview uses the Amazon Web Services managed key of the Amazon Web Services
+         account. For more information about secret policy limits, see <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_limits.html\">Quotas for
+            Secrets Manager.</a>.</p>")
 type secretsManagerSecretConfiguration = {
   @ocaml.doc("<p>The proposed resource policy defining who can access or manage the secret.</p>")
   secretPolicy: option<secretsManagerSecretPolicy>,
-  @ocaml.doc("<p>The proposed ARN, key ID, or alias of the AWS KMS customer master key (CMK).</p>")
+  @ocaml.doc("<p>The proposed ARN, key ID, or alias of the KMS key.</p>")
   kmsKeyId: option<secretsManagerSecretKmsId>,
 }
 @ocaml.doc("<p>Contains the ARN details about the IAM entity for which the policy is
@@ -401,13 +408,15 @@ type criterion = {
 @ocaml.doc("<p>Contains the ARN of the analyzed resource.</p>")
 type analyzedResourceSummary = {
   @ocaml.doc("<p>The type of resource that was analyzed.</p>") resourceType: resourceType,
-  @ocaml.doc("<p>The AWS account ID that owns the resource.</p>") resourceOwnerAccount: baseString,
+  @ocaml.doc("<p>The Amazon Web Services account ID that owns the resource.</p>")
+  resourceOwnerAccount: baseString,
   @ocaml.doc("<p>The ARN of the analyzed resource.</p>") resourceArn: resourceArn,
 }
 @ocaml.doc("<p>Contains details about the analyzed resource.</p>")
 type analyzedResource = {
   @ocaml.doc("<p>An error message.</p>") error: option<baseString>,
-  @ocaml.doc("<p>The AWS account ID that owns the resource.</p>") resourceOwnerAccount: baseString,
+  @ocaml.doc("<p>The Amazon Web Services account ID that owns the resource.</p>")
+  resourceOwnerAccount: baseString,
   @ocaml.doc("<p>The current status of the finding generated from the analyzed resource.</p>")
   status: option<findingStatus>,
   @ocaml.doc("<p>Indicates how the access that generated the finding is granted. This is populated for
@@ -429,7 +438,9 @@ type analyzedResource = {
          only one type of grantee. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketAcl.html\">PutBucketAcl</a>.</p>")
 type aclGrantee = {
   @ocaml.doc("<p>Used for granting permissions to a predefined group.</p>") uri: option<aclUri>,
-  @ocaml.doc("<p>The value specified is the canonical user ID of an AWS account.</p>")
+  @ocaml.doc(
+    "<p>The value specified is the canonical user ID of an Amazon Web Services account.</p>"
+  )
   id: option<aclCanonicalId>,
 }
 module AclGrantee = {
@@ -468,15 +479,15 @@ type s3BucketAclGrantConfiguration = {
 type policyGenerationList = array<policyGeneration>
 type pathElementList = array<pathElement>
 @ocaml.doc("<p>The proposed <code>InternetConfiguration</code> or <code>VpcConfiguration</code> to
-         apply to the Amazon S3 Access point. You can make the access point accessible from the internet,
-         or you can specify that all requests made through that access point must originate from a
+         apply to the Amazon S3 access point. <code>VpcConfiguration</code> does not apply to
+         multi-region access points. You can make the access point accessible from the internet, or
+         you can specify that all requests made through that access point must originate from a
          specific virtual private cloud (VPC). You can specify only one type of network
          configuration. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/creating-access-points.html\">Creating access
          points</a>.</p>")
 type networkOriginConfiguration = {
-  @ocaml.doc(
-    "<p>The configuration for the Amazon S3 access point with an <code>Internet</code> origin.</p>"
-  )
+  @ocaml.doc("<p>The configuration for the Amazon S3 access point or multi-region access point with an
+            <code>Internet</code> origin.</p>")
   internetConfiguration: option<internetConfiguration>,
   vpcConfiguration: option<vpcConfiguration>,
 }
@@ -515,7 +526,7 @@ type kmsGrantConstraints = {
 }
 @ocaml.doc("<p>Contains details about the policy generation request.</p>")
 type jobDetails = {
-  jobError: option<jobError>,
+  @ocaml.doc("<p>The job error for the policy generation request.</p>") jobError: option<jobError>,
   @ocaml.doc("<p>A timestamp of when the job was completed.</p>") completedOn: option<timestamp_>,
   @ocaml.doc("<p>A timestamp of when the job was started.</p>") startedOn: timestamp_,
   @ocaml.doc("<p>The status of the job request.</p>") status: jobStatus,
@@ -532,15 +543,15 @@ type analyzerSummary = {
   @ocaml.doc("<p>The <code>statusReason</code> provides more details about the current status of the
          analyzer. For example, if the creation for the analyzer fails, a <code>Failed</code> status
          is returned. For an analyzer with organization as the type, this failure can be due to an
-         issue with creating the service-linked roles required in the member accounts of the AWS
+         issue with creating the service-linked roles required in the member accounts of the Amazon Web Services
          organization.</p>")
   statusReason: option<statusReason>,
   @ocaml.doc("<p>The status of the analyzer. An <code>Active</code> analyzer successfully monitors
          supported resources and generates new findings. The analyzer is <code>Disabled</code> when
-         a user action, such as removing trusted access for AWS IAM Access Analyzer from AWS Organizations,
-         causes the analyzer to stop generating new findings. The status is <code>Creating</code>
-         when the analyzer creation is in progress and <code>Failed</code> when the analyzer
-         creation has failed. </p>")
+         a user action, such as removing trusted access for Identity and Access Management Access Analyzer from Organizations, causes
+         the analyzer to stop generating new findings. The status is <code>Creating</code> when the
+         analyzer creation is in progress and <code>Failed</code> when the analyzer creation has
+         failed. </p>")
   status: analyzerStatus,
   @ocaml.doc("<p>The tags added to the analyzer.</p>") tags: option<tagsMap>,
   @ocaml.doc("<p>The time at which the most recently analyzed resource was analyzed.</p>")
@@ -583,24 +594,27 @@ type accessPreviewSummary = {
   @ocaml.doc("<p>The unique ID for the access preview.</p>") id: accessPreviewId,
 }
 type s3BucketAclGrantConfigurationsList = array<s3BucketAclGrantConfiguration>
-@ocaml.doc("<p>The configuration for an Amazon S3 access point for the bucket. You can propose up to 10
-         access points per bucket. If the proposed Amazon S3 access point configuration is for an
-         existing bucket, the access preview uses the proposed access point configuration in place
-         of the existing access points. To propose an access point without a policy, you can provide
-         an empty string as the access point policy. For more information, see <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonS3/latest/dev/creating-access-points.html\">Creating access points</a>. For more information about access point policy limits,
+@ocaml.doc("<p>The configuration for an Amazon S3 access point or multi-region access point for the bucket.
+         You can propose up to 10 access points or multi-region access points per bucket. If the
+         proposed Amazon S3 access point configuration is for an existing bucket, the access preview uses
+         the proposed access point configuration in place of the existing access points. To propose
+         an access point without a policy, you can provide an empty string as the access point
+         policy. For more information, see <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonS3/latest/dev/creating-access-points.html\">Creating access points</a>. For more information about access point policy limits,
          see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/access-points-restrictions-limitations.html\">Access points
             restrictions and limitations</a>.</p>")
 type s3AccessPointConfiguration = {
   @ocaml.doc("<p>The proposed <code>Internet</code> and <code>VpcConfiguration</code> to apply to this
-         Amazon S3 access point. If the access preview is for a new resource and neither is specified,
-         the access preview uses <code>Internet</code> for the network origin. If the access preview
-         is for an existing resource and neither is specified, the access preview uses the exiting
-         network origin.</p>")
+         Amazon S3 access point. <code>VpcConfiguration</code> does not apply to multi-region access
+         points. If the access preview is for a new resource and neither is specified, the access
+         preview uses <code>Internet</code> for the network origin. If the access preview is for an
+         existing resource and neither is specified, the access preview uses the exiting network
+         origin.</p>")
   networkOrigin: option<networkOriginConfiguration>,
-  @ocaml.doc("<p>The proposed <code>S3PublicAccessBlock</code> configuration to apply to this Amazon S3 Access
-         Point.</p>")
+  @ocaml.doc("<p>The proposed <code>S3PublicAccessBlock</code> configuration to apply to this Amazon S3 access
+         point or multi-region access point.</p>")
   publicAccessBlock: option<s3PublicAccessBlockConfiguration>,
-  @ocaml.doc("<p>The access point policy.</p>") accessPointPolicy: option<accessPointPolicy>,
+  @ocaml.doc("<p>The access point or multi-region access point policy.</p>")
+  accessPointPolicy: option<accessPointPolicy>,
 }
 @ocaml.doc("<p>A location in a policy that is represented as a path through the JSON representation and
          a corresponding span.</p>")
@@ -613,8 +627,8 @@ type location = {
   "<p>A proposed grant configuration for a KMS key. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateGrant.html\">CreateGrant</a>.</p>"
 )
 type kmsGrantConfiguration = {
-  @ocaml.doc("<p> The AWS account under which the grant was issued. The account is used to propose KMS
-         grants issued by accounts other than the owner of the key.</p>")
+  @ocaml.doc("<p> The Amazon Web Services account under which the grant was issued. The account is used to propose
+         KMS grants issued by accounts other than the owner of the key.</p>")
   issuingAccount: issuingAccount,
   @ocaml.doc("<p>Use this structure to propose allowing <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations\">cryptographic
             operations</a> in the grant only when the operation request includes the specified
@@ -643,7 +657,8 @@ type findingSummary = {
          granted. It is populated for Amazon S3 bucket findings.</p>")
   sources: option<findingSourceList>,
   @ocaml.doc("<p>The error that resulted in an Error finding.</p>") error: option<baseString>,
-  @ocaml.doc("<p>The AWS account ID that owns the resource.</p>") resourceOwnerAccount: baseString,
+  @ocaml.doc("<p>The Amazon Web Services account ID that owns the resource.</p>")
+  resourceOwnerAccount: baseString,
   @ocaml.doc("<p>The status of the finding.</p>") status: findingStatus,
   @ocaml.doc("<p>The time at which the finding was most recently updated.</p>")
   updatedAt: timestamp_,
@@ -675,7 +690,8 @@ type finding = {
          granted. It is populated for Amazon S3 bucket findings.</p>")
   sources: option<findingSourceList>,
   @ocaml.doc("<p>An error.</p>") error: option<baseString>,
-  @ocaml.doc("<p>The AWS account ID that owns the resource.</p>") resourceOwnerAccount: baseString,
+  @ocaml.doc("<p>The Amazon Web Services account ID that owns the resource.</p>")
+  resourceOwnerAccount: baseString,
   @ocaml.doc("<p>The current status of the finding.</p>") status: findingStatus,
   @ocaml.doc("<p>The time at which the finding was updated.</p>") updatedAt: timestamp_,
   @ocaml.doc("<p>The time at which the resource was analyzed.</p>") analyzedAt: timestamp_,
@@ -698,11 +714,11 @@ type finding = {
 }
 @ocaml.doc("<p>Contains information about CloudTrail access.</p>")
 type cloudTrailProperties = {
-  @ocaml.doc("<p>The end of the time range for which Access Analyzer reviews your CloudTrail events. Events with
+  @ocaml.doc("<p>The end of the time range for which IAM Access Analyzer reviews your CloudTrail events. Events with
          a timestamp after this time are not considered to generate a policy. If this is not
          included in the request, the default value is the current time.</p>")
   endTime: timestamp_,
-  @ocaml.doc("<p>The start of the time range for which Access Analyzer reviews your CloudTrail events. Events
+  @ocaml.doc("<p>The start of the time range for which IAM Access Analyzer reviews your CloudTrail events. Events
          with a timestamp before this time are not considered to generate a policy.</p>")
   startTime: timestamp_,
   @ocaml.doc("<p>A <code>TrailProperties</code> object that contains settings for trail
@@ -711,14 +727,14 @@ type cloudTrailProperties = {
 }
 @ocaml.doc("<p>Contains information about CloudTrail access.</p>")
 type cloudTrailDetails = {
-  @ocaml.doc("<p>The end of the time range for which Access Analyzer reviews your CloudTrail events. Events with
+  @ocaml.doc("<p>The end of the time range for which IAM Access Analyzer reviews your CloudTrail events. Events with
          a timestamp after this time are not considered to generate a policy. If this is not
          included in the request, the default value is the current time.</p>")
   endTime: option<timestamp_>,
-  @ocaml.doc("<p>The start of the time range for which Access Analyzer reviews your CloudTrail events. Events
+  @ocaml.doc("<p>The start of the time range for which IAM Access Analyzer reviews your CloudTrail events. Events
          with a timestamp before this time are not considered to generate a policy.</p>")
   startTime: timestamp_,
-  @ocaml.doc("<p>The ARN of the service role that Access Analyzer uses to access your CloudTrail trail and
+  @ocaml.doc("<p>The ARN of the service role that IAM Access Analyzer uses to access your CloudTrail trail and
          service last accessed information.</p>")
   accessRole: roleArn,
   @ocaml.doc("<p>A <code>Trail</code> object that contains settings for a trail.</p>")
@@ -739,7 +755,7 @@ type accessPreviewFinding = {
          granted. It is populated for Amazon S3 bucket findings.</p>")
   sources: option<findingSourceList>,
   @ocaml.doc("<p>An error.</p>") error: option<baseString>,
-  @ocaml.doc("<p>The AWS account ID that owns the resource. For most AWS resources, the owning
+  @ocaml.doc("<p>The Amazon Web Services account ID that owns the resource. For most Amazon Web Services resources, the owning
          account is the account in which the resource was created.</p>")
   resourceOwnerAccount: baseString,
   @ocaml.doc("<p>The preview status of the finding. This is what the status of the finding would be after
@@ -749,7 +765,7 @@ type accessPreviewFinding = {
          proposed permissions change.</p>")
   status: findingStatus,
   @ocaml.doc("<p>Provides context on how the access preview finding compares to existing access
-         identified in Access Analyzer.</p>
+         identified in IAM Access Analyzer.</p>
          <ul>
             <li>
                <p>
@@ -791,9 +807,8 @@ type accessPreviewFinding = {
   principal: option<principalMap>,
   @ocaml.doc("<p>The existing status of the finding, provided only for existing findings.</p>")
   existingFindingStatus: option<findingStatus>,
-  @ocaml.doc(
-    "<p>The existing ID of the finding in Access Analyzer, provided only for existing findings.</p>"
-  )
+  @ocaml.doc("<p>The existing ID of the finding in IAM Access Analyzer, provided only for existing
+         findings.</p>")
   existingFindingId: option<findingId>,
   @ocaml.doc("<p>The ID of the access preview finding. This ID uniquely identifies the element in the
          list of access preview findings and is not related to the finding ID in Access
@@ -812,9 +827,9 @@ type generatedPolicyProperties = {
     "<p>The ARN of the IAM entity (user or role) for which you are generating a policy.</p>"
   )
   principalArn: principalArn,
-  @ocaml.doc("<p>This value is set to <code>true</code> if the generated policy contains all possible actions for a
-         service that Access Analyzer identified from the CloudTrail trail that you specified, and
-         <code>false</code> otherwise.</p>")
+  @ocaml.doc("<p>This value is set to <code>true</code> if the generated policy contains all possible
+         actions for a service that IAM Access Analyzer identified from the CloudTrail trail that you specified,
+         and <code>false</code> otherwise.</p>")
   isComplete: option<baseBoolean>,
 }
 type findingsList = array<findingSummary>
@@ -847,16 +862,17 @@ type validatePolicyFinding = {
 }
 @ocaml.doc("<p>Proposed access control configuration for an Amazon S3 bucket. You can propose a
          configuration for a new Amazon S3 bucket or an existing Amazon S3 bucket that you own by specifying
-         the Amazon S3 bucket policy, bucket ACLs, bucket BPA settings, and Amazon S3 access points attached
-         to the bucket. If the configuration is for an existing Amazon S3 bucket and you do not specify
-         the Amazon S3 bucket policy, the access preview uses the existing policy attached to the bucket.
-         If the access preview is for a new resource and you do not specify the Amazon S3 bucket policy,
-         the access preview assumes a bucket without a policy. To propose deletion of an existing
-         bucket policy, you can specify an empty string. For more information about bucket policy
-         limits, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/example-bucket-policies.html\">Bucket Policy
+         the Amazon S3 bucket policy, bucket ACLs, bucket BPA settings, Amazon S3 access points, and
+         multi-region access points attached to the bucket. If the configuration is for an existing
+         Amazon S3 bucket and you do not specify the Amazon S3 bucket policy, the access preview uses the
+         existing policy attached to the bucket. If the access preview is for a new resource and you
+         do not specify the Amazon S3 bucket policy, the access preview assumes a bucket without a
+         policy. To propose deletion of an existing bucket policy, you can specify an empty string.
+         For more information about bucket policy limits, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/example-bucket-policies.html\">Bucket Policy
          Examples</a>.</p>")
 type s3BucketConfiguration = {
-  @ocaml.doc("<p>The configuration of Amazon S3 access points for the bucket.</p>")
+  @ocaml.doc("<p>The configuration of Amazon S3 access points or multi-region access points for the bucket.
+         You can propose up to 10 new access points per bucket.</p>")
   accessPoints: option<s3AccessPointConfigurationsMap>,
   @ocaml.doc("<p>The proposed block public access configuration for the Amazon S3 bucket.</p>")
   bucketPublicAccessBlock: option<s3PublicAccessBlockConfiguration>,
@@ -868,13 +884,13 @@ type s3BucketConfiguration = {
   @ocaml.doc("<p>The proposed bucket policy for the Amazon S3 bucket.</p>")
   bucketPolicy: option<s3BucketPolicy>,
 }
-@ocaml.doc("<p>Proposed access control configuration for a KMS key. You can propose a configuration for
-         a new KMS key or an existing KMS key that you own by specifying the key policy and KMS
-         grant configuration. If the configuration is for an existing key and you do not specify the
-         key policy, the access preview uses the existing policy for the key. If the access preview
-         is for a new resource and you do not specify the key policy, then the access preview uses
-         the default key policy. The proposed key policy cannot be an empty string. For more
-         information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default\">Default key
+@ocaml.doc("<p>Proposed access control configuration for a KMS key. You can propose a configuration
+         for a new KMS key or an existing KMS key that you own by specifying the key policy and
+         KMS grant configuration. If the configuration is for an existing key and you do not
+         specify the key policy, the access preview uses the existing policy for the key. If the
+         access preview is for a new resource and you do not specify the key policy, then the access
+         preview uses the default key policy. The proposed key policy cannot be an empty string. For
+         more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default\">Default key
             policy</a>. For more information about key policy limits, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/resource-limits.html\">Resource
             quotas</a>.</p>
          <p/>")
@@ -884,8 +900,8 @@ type kmsKeyConfiguration = {
          configurations in place of the existing grants. Otherwise, the access preview uses the
          existing grants for the key.</p>")
   grants: option<kmsGrantConfigurationsList>,
-  @ocaml.doc("<p>Resource policy configuration for the KMS key. The only valid value for the name of the
-         key policy is <code>default</code>. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default\">Default key
+  @ocaml.doc("<p>Resource policy configuration for the KMS key. The only valid value for the name of
+         the key policy is <code>default</code>. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default\">Default key
             policy</a>.</p>")
   keyPolicies: option<kmsKeyPoliciesMap>,
 }
@@ -902,7 +918,7 @@ type validatePolicyFindingList = array<validatePolicyFinding>
 @ocaml.doc("<p>Access control configuration structures for your resource. You specify the configuration
          as a type-value pair. You can specify only one type of access control configuration.</p>")
 type configuration = {
-  @ocaml.doc("<p>The access control configuration is for an SQS queue. </p>")
+  @ocaml.doc("<p>The access control configuration is for an Amazon SQS queue. </p>")
   sqsQueue: option<sqsQueueConfiguration>,
   @ocaml.doc("<p>The access control configuration is for an Amazon S3 Bucket. </p>")
   s3Bucket: option<s3BucketConfiguration>,
@@ -1002,15 +1018,15 @@ type accessPreview = {
   analyzerArn: analyzerArn,
   @ocaml.doc("<p>The unique ID for the access preview.</p>") id: accessPreviewId,
 }
-@ocaml.doc("<p>AWS IAM Access Analyzer helps identify potential resource-access risks by enabling you to identify
-         any policies that grant access to an external principal. It does this by using logic-based
-         reasoning to analyze resource-based policies in your AWS environment. An external
-         principal can be another AWS account, a root user, an IAM user or role, a federated
-         user, an AWS service, or an anonymous user. You can also use Access Analyzer to preview and
-         validate public and cross-account access to your resources before deploying permissions
-         changes. This guide describes the AWS IAM Access Analyzer operations that you can call
-         programmatically. For general information about Access Analyzer, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/what-is-access-analyzer.html\">AWS IAM Access Analyzer</a> in the <b>IAM User Guide</b>.</p>
-         <p>To start using Access Analyzer, you first need to create an analyzer.</p>")
+@ocaml.doc("<p>Identity and Access Management Access Analyzer helps identify potential resource-access risks by enabling you to
+         identify any policies that grant access to an external principal. It does this by using
+         logic-based reasoning to analyze resource-based policies in your Amazon Web Services environment. An
+         external principal can be another Amazon Web Services account, a root user, an IAM user or role, a
+         federated user, an Amazon Web Services service, or an anonymous user. You can also use IAM Access Analyzer to
+         preview and validate public and cross-account access to your resources before deploying
+         permissions changes. This guide describes the Identity and Access Management Access Analyzer operations that you can
+         call programmatically. For general information about IAM Access Analyzer, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/what-is-access-analyzer.html\">Identity and Access Management Access Analyzer</a> in the <b>IAM User Guide</b>.</p>
+         <p>To start using IAM Access Analyzer, you first need to create an analyzer.</p>")
 module UpdateFindings = {
   type t
   @ocaml.doc("<p>Updates findings with the new values provided in the request.</p>")
@@ -1027,7 +1043,7 @@ module UpdateFindings = {
             the analyzer</a> that generated the findings to update.</p>")
     analyzerArn: analyzerArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-access-analyzer") @new
   external new: request => t = "UpdateFindingsCommand"
   let make = (~status, ~analyzerArn, ~clientToken=?, ~resourceArn=?, ~ids=?, ()) =>
@@ -1048,7 +1064,7 @@ module UntagResource = {
     @ocaml.doc("<p>The key for the tag to add.</p>") tagKeys: tagKeys,
     @ocaml.doc("<p>The ARN of the resource to remove the tag from.</p>") resourceArn: baseString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-access-analyzer") @new
   external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
@@ -1062,7 +1078,7 @@ module TagResource = {
     @ocaml.doc("<p>The tags to add to the resource.</p>") tags: tagsMap,
     @ocaml.doc("<p>The ARN of the resource to add the tag to.</p>") resourceArn: baseString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-access-analyzer") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1078,7 +1094,7 @@ module StartResourceScan = {
          resource.</p>")
     analyzerArn: analyzerArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-access-analyzer") @new
   external new: request => t = "StartResourceScanCommand"
   let make = (~resourceArn, ~analyzerArn, ()) =>
@@ -1114,8 +1130,8 @@ module GetAnalyzedResource = {
   }
   @ocaml.doc("<p>The response to the request.</p>")
   type response = {
-    @ocaml.doc("<p>An <code>AnalyzedResource</code> object that contains information that Access Analyzer found
-         when it analyzed the resource.</p>")
+    @ocaml.doc("<p>An <code>AnalyzedResource</code> object that contains information that IAM Access Analyzer
+         found when it analyzed the resource.</p>")
     resource: option<analyzedResource>,
   }
   @module("@aws-sdk/client-access-analyzer") @new
@@ -1134,7 +1150,7 @@ module DeleteArchiveRule = {
     @ocaml.doc("<p>The name of the analyzer that associated with the archive rule to delete.</p>")
     analyzerName: name,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-access-analyzer") @new
   external new: request => t = "DeleteArchiveRuleCommand"
   let make = (~ruleName, ~analyzerName, ~clientToken=?, ()) =>
@@ -1149,7 +1165,7 @@ module DeleteAnalyzer = {
     @ocaml.doc("<p>A client token.</p>") clientToken: option<baseString>,
     @ocaml.doc("<p>The name of the analyzer to delete.</p>") analyzerName: name,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-access-analyzer") @new
   external new: request => t = "DeleteAnalyzerCommand"
   let make = (~analyzerName, ~clientToken=?, ()) =>
@@ -1166,7 +1182,7 @@ module CancelPolicyGeneration = {
          the policy generation request.</p>")
     jobId: jobId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-access-analyzer") @new
   external new: request => t = "CancelPolicyGenerationCommand"
   let make = (~jobId, ()) => new({jobId: jobId})
@@ -1181,7 +1197,7 @@ module ApplyArchiveRule = {
     @ocaml.doc("<p>The name of the rule to apply.</p>") ruleName: name,
     @ocaml.doc("<p>The Amazon resource name (ARN) of the analyzer.</p>") analyzerArn: analyzerArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-access-analyzer") @new
   external new: request => t = "ApplyArchiveRuleCommand"
   let make = (~ruleName, ~analyzerArn, ~clientToken=?, ()) =>
@@ -1201,7 +1217,7 @@ module UpdateArchiveRule = {
     @ocaml.doc("<p>The name of the analyzer to update the archive rules for.</p>")
     analyzerName: name,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-access-analyzer") @new
   external new: request => t = "UpdateArchiveRuleCommand"
   let make = (~filter, ~ruleName, ~analyzerName, ~clientToken=?, ()) =>
@@ -1287,7 +1303,7 @@ module CreateArchiveRule = {
     @ocaml.doc("<p>The name of the rule to create.</p>") ruleName: name,
     @ocaml.doc("<p>The name of the created analyzer.</p>") analyzerName: name,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-access-analyzer") @new
   external new: request => t = "CreateArchiveRuleCommand"
   let make = (~filter, ~ruleName, ~analyzerName, ~clientToken=?, ()) =>
@@ -1303,7 +1319,7 @@ module StartPolicyGeneration = {
          request, if the original request completes successfully, the subsequent retries with the
          same client token return the result from the original successful request and they have no
          additional effect.</p>
-         <p>If you do not specify a client token, one is automatically generated by the AWS
+         <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services
          SDK.</p>")
     clientToken: option<baseString>,
     @ocaml.doc("<p>A <code>CloudTrailDetails</code> object that contains details about a <code>Trail</code>
@@ -1533,8 +1549,8 @@ module GetGeneratedPolicy = {
   type request = {
     @ocaml.doc("<p>The level of detail that you want to generate. You can specify whether to generate
          service-level policies. </p>
-         <p>Access Analyzer uses <code>iam:servicelastaccessed</code> to identify services that have been
-         used recently to create this service-level template.</p>")
+         <p>IAM Access Analyzer uses <code>iam:servicelastaccessed</code> to identify services that have
+         been used recently to create this service-level template.</p>")
     includeServiceLevelTemplate: option<baseBoolean>,
     @ocaml.doc("<p>The level of detail that you want to generate. You can specify whether to generate
          policies with placeholders for resource ARNs for actions that support resource level
@@ -1570,14 +1586,23 @@ module GetGeneratedPolicy = {
 module ValidatePolicy = {
   type t
   type request = {
+    @ocaml.doc("<p>The type of resource to attach to your resource policy. Specify a value for the policy
+         validation resource type only if the policy type is <code>RESOURCE_POLICY</code>. For
+         example, to validate a resource policy to attach to an Amazon S3 bucket, you can choose
+            <code>AWS::S3::Bucket</code> for the policy validation resource type.</p>
+         <p>For resource types not supported as valid values, IAM Access Analyzer runs policy checks that
+         apply to all resource policies. For example, to validate a resource policy to attach to a
+         KMS key, do not specify a value for the policy validation resource type and IAM Access Analyzer
+         will run policy checks that apply to all resource policies.</p>")
+    validatePolicyResourceType: option<validatePolicyResourceType>,
     @ocaml.doc("<p>The type of policy to validate. Identity policies grant permissions to IAM principals.
          Identity policies include managed and inline policies for IAM roles, users, and groups.
-         They also include service-control policies (SCPs) that are attached to an AWS
+         They also include service-control policies (SCPs) that are attached to an Amazon Web Services
          organization, organizational unit (OU), or an account.</p>
-         <p>Resource policies grant permissions on AWS resources. Resource policies include trust
-         policies for IAM roles and bucket policies for S3 buckets. You can provide a generic input
-         such as identity policy or resource policy or a specific input such as managed policy or S3
-         bucket policy. </p>")
+         <p>Resource policies grant permissions on Amazon Web Services resources. Resource policies include trust
+         policies for IAM roles and bucket policies for Amazon S3 buckets. You can provide a generic
+         input such as identity policy or resource policy or a specific input such as managed policy
+         or Amazon S3 bucket policy. </p>")
     policyType: policyType,
     @ocaml.doc("<p>The JSON policy document to use as the content for the policy.</p>")
     policyDocument: policyDocument,
@@ -1588,14 +1613,23 @@ module ValidatePolicy = {
   }
   type response = {
     @ocaml.doc("<p>A token used for pagination of results returned.</p>") nextToken: option<token>,
-    @ocaml.doc("<p>The list of findings in a policy returned by Access Analyzer based on its suite of policy
+    @ocaml.doc("<p>The list of findings in a policy returned by IAM Access Analyzer based on its suite of policy
          checks.</p>")
     findings: validatePolicyFindingList,
   }
   @module("@aws-sdk/client-access-analyzer") @new
   external new: request => t = "ValidatePolicyCommand"
-  let make = (~policyType, ~policyDocument, ~nextToken=?, ~maxResults=?, ~locale=?, ()) =>
+  let make = (
+    ~policyType,
+    ~policyDocument,
+    ~validatePolicyResourceType=?,
+    ~nextToken=?,
+    ~maxResults=?,
+    ~locale=?,
+    (),
+  ) =>
     new({
+      validatePolicyResourceType: validatePolicyResourceType,
       policyType: policyType,
       policyDocument: policyDocument,
       nextToken: nextToken,

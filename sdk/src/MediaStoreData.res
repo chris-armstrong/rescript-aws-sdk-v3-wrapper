@@ -215,7 +215,7 @@ module DeleteObject = {
     @as("Path")
     path: pathNaming,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-mediastore") @new external new: request => t = "DeleteObjectCommand"
   let make = (~path, ()) => new({path: path})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"

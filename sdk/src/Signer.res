@@ -298,7 +298,7 @@ module RevokeSigningProfile = {
     profileVersion: profileVersion,
     @ocaml.doc("<p>The name of the signing profile to be revoked.</p>") profileName: profileName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-signer") @new external new: request => t = "RevokeSigningProfileCommand"
   let make = (~effectiveTime, ~reason, ~profileVersion, ~profileName, ()) =>
     new({
@@ -317,7 +317,7 @@ module RevokeSignature = {
     @ocaml.doc("<p>AWS account ID of the job owner.</p>") jobOwner: option<accountId>,
     @ocaml.doc("<p>ID of the signing job to be revoked.</p>") jobId: jobId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-signer") @new external new: request => t = "RevokeSignatureCommand"
   let make = (~reason, ~jobId, ~jobOwner=?, ()) =>
     new({reason: reason, jobOwner: jobOwner, jobId: jobId})
@@ -352,7 +352,7 @@ module CancelSigningProfile = {
   type request = {
     @ocaml.doc("<p>The name of the signing profile to be canceled.</p>") profileName: profileName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-signer") @new external new: request => t = "CancelSigningProfileCommand"
   let make = (~profileName, ()) => new({profileName: profileName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -406,7 +406,7 @@ module UntagResource = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) for the signing profile.</p>")
     resourceArn: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-signer") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -419,7 +419,7 @@ module TagResource = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) for the signing profile.</p>")
     resourceArn: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-signer") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"

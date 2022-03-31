@@ -205,7 +205,7 @@ module UpdateStream = {
     @as("StreamName")
     streamName: option<streamName>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-kinesisvideo") @new external new: request => t = "UpdateStreamCommand"
   let make = (~currentVersion, ~mediaType=?, ~deviceName=?, ~streamARN=?, ~streamName=?, ()) =>
     new({
@@ -241,7 +241,7 @@ module UpdateDataRetention = {
     @as("StreamName")
     streamName: option<streamName>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-kinesisvideo") @new
   external new: request => t = "UpdateDataRetentionCommand"
   let make = (
@@ -303,7 +303,7 @@ module DeleteStream = {
     @as("StreamARN")
     streamARN: resourceARN,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-kinesisvideo") @new external new: request => t = "DeleteStreamCommand"
   let make = (~streamARN, ~currentVersion=?, ()) =>
     new({currentVersion: currentVersion, streamARN: streamARN})
@@ -323,7 +323,7 @@ module DeleteSignalingChannel = {
     @as("ChannelARN")
     channelARN: resourceARN,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-kinesisvideo") @new
   external new: request => t = "DeleteSignalingChannelCommand"
   let make = (~channelARN, ~currentVersion=?, ()) =>
@@ -346,7 +346,7 @@ module UpdateSignalingChannel = {
     @as("ChannelARN")
     channelARN: resourceARN,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-kinesisvideo") @new
   external new: request => t = "UpdateSignalingChannelCommand"
   let make = (~currentVersion, ~channelARN, ~singleMasterConfiguration=?, ()) =>
@@ -370,7 +370,7 @@ module UntagStream = {
     @as("StreamARN")
     streamARN: option<resourceARN>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-kinesisvideo") @new external new: request => t = "UntagStreamCommand"
   let make = (~tagKeyList, ~streamName=?, ~streamARN=?, ()) =>
     new({tagKeyList: tagKeyList, streamName: streamName, streamARN: streamARN})
@@ -387,7 +387,7 @@ module UntagResource = {
     @as("ResourceARN")
     resourceARN: resourceARN,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-kinesisvideo") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeyList, ~resourceARN, ()) =>
     new({tagKeyList: tagKeyList, resourceARN: resourceARN})
@@ -409,7 +409,7 @@ module TagStream = {
     @as("StreamARN")
     streamARN: option<resourceARN>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-kinesisvideo") @new external new: request => t = "TagStreamCommand"
   let make = (~tags, ~streamName=?, ~streamARN=?, ()) =>
     new({tags: tags, streamName: streamName, streamARN: streamARN})
@@ -580,7 +580,7 @@ module TagResource = {
     @as("ResourceARN")
     resourceARN: resourceARN,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-kinesisvideo") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceARN, ()) => new({tags: tags, resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"

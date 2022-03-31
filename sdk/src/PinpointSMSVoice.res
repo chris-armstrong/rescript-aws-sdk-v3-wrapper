@@ -161,7 +161,7 @@ module DeleteConfigurationSetEventDestination = {
     @ocaml.doc("EventDestinationName") @as("EventDestinationName") eventDestinationName: __string,
     @ocaml.doc("ConfigurationSetName") @as("ConfigurationSetName") configurationSetName: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sms-voice") @new
   external new: request => t = "DeleteConfigurationSetEventDestinationCommand"
   let make = (~eventDestinationName, ~configurationSetName, ()) =>
@@ -174,7 +174,7 @@ module DeleteConfigurationSet = {
   type request = {
     @ocaml.doc("ConfigurationSetName") @as("ConfigurationSetName") configurationSetName: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sms-voice") @new
   external new: request => t = "DeleteConfigurationSetCommand"
   let make = (~configurationSetName, ()) => new({configurationSetName: configurationSetName})
@@ -188,7 +188,7 @@ module CreateConfigurationSet = {
     @ocaml.doc("The name that you want to give the configuration set.") @as("ConfigurationSetName")
     configurationSetName: option<wordCharactersWithDelimiters>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sms-voice") @new
   external new: request => t = "CreateConfigurationSetCommand"
   let make = (~configurationSetName=?, ()) => new({configurationSetName: configurationSetName})
@@ -236,7 +236,7 @@ module UpdateConfigurationSetEventDestination = {
     @as("EventDestination") eventDestination: option<eventDestinationDefinition>,
     @ocaml.doc("ConfigurationSetName") @as("ConfigurationSetName") configurationSetName: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sms-voice") @new
   external new: request => t = "UpdateConfigurationSetEventDestinationCommand"
   let make = (~eventDestinationName, ~configurationSetName, ~eventDestination=?, ()) =>
@@ -305,7 +305,7 @@ module CreateConfigurationSetEventDestination = {
     @as("EventDestination") eventDestination: option<eventDestinationDefinition>,
     @ocaml.doc("ConfigurationSetName") @as("ConfigurationSetName") configurationSetName: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sms-voice") @new
   external new: request => t = "CreateConfigurationSetEventDestinationCommand"
   let make = (~configurationSetName, ~eventDestinationName=?, ~eventDestination=?, ()) =>

@@ -301,7 +301,7 @@ module UntagResource = {
     @as("ResourceId")
     resourceId: resourceId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-cloudhsm") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeyList, ~resourceId, ()) => new({tagKeyList: tagKeyList, resourceId: resourceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -343,7 +343,7 @@ module TagResource = {
     @as("ResourceId")
     resourceId: resourceId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-cloudhsm") @new external new: request => t = "TagResourceCommand"
   let make = (~tagList_, ~resourceId, ()) => new({tagList_: tagList_, resourceId: resourceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"

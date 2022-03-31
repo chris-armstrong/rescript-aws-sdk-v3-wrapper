@@ -1083,7 +1083,7 @@ module UpdateSkillGroup = {
     @ocaml.doc("<p>The ARN of the skill group to update. </p>") @as("SkillGroupArn")
     skillGroupArn: option<arn>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-a4b") @new external new: request => t = "UpdateSkillGroupCommand"
   let make = (~description=?, ~skillGroupName=?, ~skillGroupArn=?, ()) =>
     new({description: description, skillGroupName: skillGroupName, skillGroupArn: skillGroupArn})
@@ -1102,7 +1102,7 @@ module UpdateRoom = {
     @ocaml.doc("<p>The updated name for the room.</p>") @as("RoomName") roomName: option<roomName>,
     @ocaml.doc("<p>The ARN of the room to update. </p>") @as("RoomArn") roomArn: option<arn>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-a4b") @new external new: request => t = "UpdateRoomCommand"
   let make = (~profileArn=?, ~providerCalendarId=?, ~description=?, ~roomName=?, ~roomArn=?, ()) =>
     new({
@@ -1125,7 +1125,7 @@ module UpdateGatewayGroup = {
     @ocaml.doc("<p>The ARN of the gateway group to update.</p>") @as("GatewayGroupArn")
     gatewayGroupArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-a4b") @new external new: request => t = "UpdateGatewayGroupCommand"
   let make = (~gatewayGroupArn, ~description=?, ~name=?, ()) =>
     new({description: description, name: name, gatewayGroupArn: gatewayGroupArn})
@@ -1144,7 +1144,7 @@ module UpdateGateway = {
     @ocaml.doc("<p>The updated name of the gateway.</p>") @as("Name") name: option<gatewayName>,
     @ocaml.doc("<p>The ARN of the gateway to update.</p>") @as("GatewayArn") gatewayArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-a4b") @new external new: request => t = "UpdateGatewayCommand"
   let make = (~gatewayArn, ~softwareVersion=?, ~description=?, ~name=?, ()) =>
     new({
@@ -1164,7 +1164,7 @@ module UpdateDevice = {
     @ocaml.doc("<p>The ARN of the device to update. Required.</p>") @as("DeviceArn")
     deviceArn: option<arn>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-a4b") @new external new: request => t = "UpdateDeviceCommand"
   let make = (~deviceName=?, ~deviceArn=?, ()) =>
     new({deviceName: deviceName, deviceArn: deviceArn})
@@ -1179,7 +1179,7 @@ module UpdateAddressBook = {
     @ocaml.doc("<p>The updated name of the room.</p>") @as("Name") name: option<addressBookName>,
     @ocaml.doc("<p>The ARN of the room to update.</p>") @as("AddressBookArn") addressBookArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-a4b") @new external new: request => t = "UpdateAddressBookCommand"
   let make = (~addressBookArn, ~description=?, ~name=?, ()) =>
     new({description: description, name: name, addressBookArn: addressBookArn})
@@ -1192,7 +1192,7 @@ module StartSmartHomeApplianceDiscovery = {
     @ocaml.doc("<p>The room where smart home appliance discovery was initiated.</p>") @as("RoomArn")
     roomArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-a4b") @new
   external new: request => t = "StartSmartHomeApplianceDiscoveryCommand"
   let make = (~roomArn, ()) => new({roomArn: roomArn})
@@ -1205,7 +1205,7 @@ module SendInvitation = {
     @ocaml.doc("<p>The ARN of the user to whom to send an invitation. Required.</p>") @as("UserArn")
     userArn: option<arn>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-a4b") @new external new: request => t = "SendInvitationCommand"
   let make = (~userArn=?, ()) => new({userArn: userArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1221,7 +1221,7 @@ module RevokeInvitation = {
     @as("UserArn")
     userArn: option<arn>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-a4b") @new external new: request => t = "RevokeInvitationCommand"
   let make = (~enrollmentId=?, ~userArn=?, ()) =>
     new({enrollmentId: enrollmentId, userArn: userArn})
@@ -1233,7 +1233,7 @@ module RejectSkill = {
   type request = {
     @ocaml.doc("<p>The unique identifier of the skill.</p>") @as("SkillId") skillId: skillId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-a4b") @new external new: request => t = "RejectSkillCommand"
   let make = (~skillId, ()) => new({skillId: skillId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1245,7 +1245,7 @@ module ForgetSmartHomeAppliances = {
     @ocaml.doc("<p>The room that the appliances are associated with.</p>") @as("RoomArn")
     roomArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-a4b") @new
   external new: request => t = "ForgetSmartHomeAppliancesCommand"
   let make = (~roomArn, ()) => new({roomArn: roomArn})
@@ -1263,7 +1263,7 @@ module DisassociateSkillGroupFromRoom = {
     @as("SkillGroupArn")
     skillGroupArn: option<arn>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-a4b") @new
   external new: request => t = "DisassociateSkillGroupFromRoomCommand"
   let make = (~roomArn=?, ~skillGroupArn=?, ()) =>
@@ -1278,7 +1278,7 @@ module DisassociateSkillFromUsers = {
     @as("SkillId")
     skillId: skillId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-a4b") @new
   external new: request => t = "DisassociateSkillFromUsersCommand"
   let make = (~skillId, ()) => new({skillId: skillId})
@@ -1293,7 +1293,7 @@ module DisassociateSkillFromSkillGroup = {
     @ocaml.doc("<p>The unique identifier of a skill. Required.</p>") @as("SkillGroupArn")
     skillGroupArn: option<arn>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-a4b") @new
   external new: request => t = "DisassociateSkillFromSkillGroupCommand"
   let make = (~skillId, ~skillGroupArn=?, ()) =>
@@ -1308,7 +1308,7 @@ module DisassociateDeviceFromRoom = {
     @as("DeviceArn")
     deviceArn: option<arn>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-a4b") @new
   external new: request => t = "DisassociateDeviceFromRoomCommand"
   let make = (~deviceArn=?, ()) => new({deviceArn: deviceArn})
@@ -1325,7 +1325,7 @@ module DisassociateContactFromAddressBook = {
     @as("ContactArn")
     contactArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-a4b") @new
   external new: request => t = "DisassociateContactFromAddressBookCommand"
   let make = (~addressBookArn, ~contactArn, ()) =>
@@ -1342,7 +1342,7 @@ module DeleteUser = {
     @ocaml.doc("<p>The ARN of the user to delete in the organization. Required.</p>") @as("UserArn")
     userArn: option<arn>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-a4b") @new external new: request => t = "DeleteUserCommand"
   let make = (~enrollmentId, ~userArn=?, ()) => new({enrollmentId: enrollmentId, userArn: userArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1354,7 +1354,7 @@ module DeleteSkillGroup = {
     @ocaml.doc("<p>The ARN of the skill group to delete. Required.</p>") @as("SkillGroupArn")
     skillGroupArn: option<arn>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-a4b") @new external new: request => t = "DeleteSkillGroupCommand"
   let make = (~skillGroupArn=?, ()) => new({skillGroupArn: skillGroupArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1367,7 +1367,7 @@ module DeleteSkillAuthorization = {
     roomArn: option<arn>,
     @ocaml.doc("<p>The unique identifier of a skill.</p>") @as("SkillId") skillId: skillId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-a4b") @new external new: request => t = "DeleteSkillAuthorizationCommand"
   let make = (~skillId, ~roomArn=?, ()) => new({roomArn: roomArn, skillId: skillId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1386,7 +1386,7 @@ module DeleteRoomSkillParameter = {
     @as("RoomArn")
     roomArn: option<arn>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-a4b") @new external new: request => t = "DeleteRoomSkillParameterCommand"
   let make = (~parameterKey, ~skillId, ~roomArn=?, ()) =>
     new({parameterKey: parameterKey, skillId: skillId, roomArn: roomArn})
@@ -1399,7 +1399,7 @@ module DeleteRoom = {
     @ocaml.doc("<p>The ARN of the room to delete. Required.</p>") @as("RoomArn")
     roomArn: option<arn>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-a4b") @new external new: request => t = "DeleteRoomCommand"
   let make = (~roomArn=?, ()) => new({roomArn: roomArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1411,7 +1411,7 @@ module DeleteProfile = {
     @ocaml.doc("<p>The ARN of the room profile to delete. Required.</p>") @as("ProfileArn")
     profileArn: option<arn>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-a4b") @new external new: request => t = "DeleteProfileCommand"
   let make = (~profileArn=?, ()) => new({profileArn: profileArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1424,7 +1424,7 @@ module DeleteNetworkProfile = {
     @as("NetworkProfileArn")
     networkProfileArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-a4b") @new external new: request => t = "DeleteNetworkProfileCommand"
   let make = (~networkProfileArn, ()) => new({networkProfileArn: networkProfileArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1436,7 +1436,7 @@ module DeleteGatewayGroup = {
     @ocaml.doc("<p>The ARN of the gateway group to delete.</p>") @as("GatewayGroupArn")
     gatewayGroupArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-a4b") @new external new: request => t = "DeleteGatewayGroupCommand"
   let make = (~gatewayGroupArn, ()) => new({gatewayGroupArn: gatewayGroupArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1449,7 +1449,7 @@ module DeleteDeviceUsageData = {
     deviceUsageType: deviceUsageType,
     @ocaml.doc("<p>The ARN of the device.</p>") @as("DeviceArn") deviceArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-a4b") @new external new: request => t = "DeleteDeviceUsageDataCommand"
   let make = (~deviceUsageType, ~deviceArn, ()) =>
     new({deviceUsageType: deviceUsageType, deviceArn: deviceArn})
@@ -1462,7 +1462,7 @@ module DeleteDevice = {
     @ocaml.doc("<p>The ARN of the device for which to request details.</p>") @as("DeviceArn")
     deviceArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-a4b") @new external new: request => t = "DeleteDeviceCommand"
   let make = (~deviceArn, ()) => new({deviceArn: deviceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1473,7 +1473,7 @@ module DeleteContact = {
   type request = {
     @ocaml.doc("<p>The ARN of the contact to delete.</p>") @as("ContactArn") contactArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-a4b") @new external new: request => t = "DeleteContactCommand"
   let make = (~contactArn, ()) => new({contactArn: contactArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1485,7 +1485,7 @@ module DeleteConferenceProvider = {
     @ocaml.doc("<p>The ARN of the conference provider.</p>") @as("ConferenceProviderArn")
     conferenceProviderArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-a4b") @new external new: request => t = "DeleteConferenceProviderCommand"
   let make = (~conferenceProviderArn, ()) => new({conferenceProviderArn: conferenceProviderArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1497,7 +1497,7 @@ module DeleteBusinessReportSchedule = {
     @ocaml.doc("<p>The ARN of the business report schedule.</p>") @as("ScheduleArn")
     scheduleArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-a4b") @new
   external new: request => t = "DeleteBusinessReportScheduleCommand"
   let make = (~scheduleArn, ()) => new({scheduleArn: scheduleArn})
@@ -1510,7 +1510,7 @@ module DeleteAddressBook = {
     @ocaml.doc("<p>The ARN of the address book to delete.</p>") @as("AddressBookArn")
     addressBookArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-a4b") @new external new: request => t = "DeleteAddressBookCommand"
   let make = (~addressBookArn, ()) => new({addressBookArn: addressBookArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1523,7 +1523,7 @@ module AssociateSkillWithUsers = {
     @as("SkillId")
     skillId: skillId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-a4b") @new external new: request => t = "AssociateSkillWithUsersCommand"
   let make = (~skillId, ()) => new({skillId: skillId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1537,7 +1537,7 @@ module AssociateSkillWithSkillGroup = {
     @as("SkillGroupArn")
     skillGroupArn: option<arn>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-a4b") @new
   external new: request => t = "AssociateSkillWithSkillGroupCommand"
   let make = (~skillId, ~skillGroupArn=?, ()) =>
@@ -1555,7 +1555,7 @@ module AssociateSkillGroupWithRoom = {
     @as("SkillGroupArn")
     skillGroupArn: option<arn>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-a4b") @new
   external new: request => t = "AssociateSkillGroupWithRoomCommand"
   let make = (~roomArn=?, ~skillGroupArn=?, ()) =>
@@ -1572,7 +1572,7 @@ module AssociateDeviceWithRoom = {
     @ocaml.doc("<p>The ARN of the device to associate to a room. Required.</p>") @as("DeviceArn")
     deviceArn: option<arn>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-a4b") @new external new: request => t = "AssociateDeviceWithRoomCommand"
   let make = (~roomArn=?, ~deviceArn=?, ()) => new({roomArn: roomArn, deviceArn: deviceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1586,7 +1586,7 @@ module AssociateDeviceWithNetworkProfile = {
     networkProfileArn: arn,
     @ocaml.doc("<p>The device ARN.</p>") @as("DeviceArn") deviceArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-a4b") @new
   external new: request => t = "AssociateDeviceWithNetworkProfileCommand"
   let make = (~networkProfileArn, ~deviceArn, ()) =>
@@ -1603,7 +1603,7 @@ module AssociateContactWithAddressBook = {
     @ocaml.doc("<p>The ARN of the contact to associate with an address book.</p>") @as("ContactArn")
     contactArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-a4b") @new
   external new: request => t = "AssociateContactWithAddressBookCommand"
   let make = (~addressBookArn, ~contactArn, ()) =>
@@ -1616,7 +1616,7 @@ module ApproveSkill = {
   type request = {
     @ocaml.doc("<p>The unique identifier of the skill.</p>") @as("SkillId") skillId: skillId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-a4b") @new external new: request => t = "ApproveSkillCommand"
   let make = (~skillId, ()) => new({skillId: skillId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1649,7 +1649,7 @@ module UpdateNetworkProfile = {
     @as("NetworkProfileArn")
     networkProfileArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-a4b") @new external new: request => t = "UpdateNetworkProfileCommand"
   let make = (
     ~networkProfileArn,
@@ -1687,7 +1687,7 @@ module UpdateConferenceProvider = {
     @ocaml.doc("<p>The ARN of the conference provider.</p>") @as("ConferenceProviderArn")
     conferenceProviderArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-a4b") @new external new: request => t = "UpdateConferenceProviderCommand"
   let make = (
     ~meetingSetting,
@@ -1725,7 +1725,7 @@ module UpdateBusinessReportSchedule = {
     @ocaml.doc("<p>The ARN of the business report schedule.</p>") @as("ScheduleArn")
     scheduleArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-a4b") @new
   external new: request => t = "UpdateBusinessReportScheduleCommand"
   let make = (
@@ -1759,7 +1759,7 @@ module UntagResource = {
     @as("Arn")
     arn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-a4b") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~arn, ()) => new({tagKeys: tagKeys, arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1776,7 +1776,7 @@ module StartDeviceSync = {
     @as("RoomArn")
     roomArn: option<arn>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-a4b") @new external new: request => t = "StartDeviceSyncCommand"
   let make = (~features, ~deviceArn=?, ~roomArn=?, ()) =>
     new({features: features, deviceArn: deviceArn, roomArn: roomArn})
@@ -1794,7 +1794,7 @@ module PutSkillAuthorization = {
     @as("AuthorizationResult")
     authorizationResult: authorizationResult,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-a4b") @new external new: request => t = "PutSkillAuthorizationCommand"
   let make = (~skillId, ~authorizationResult, ~roomArn=?, ()) =>
     new({roomArn: roomArn, skillId: skillId, authorizationResult: authorizationResult})
@@ -1813,7 +1813,7 @@ module PutRoomSkillParameter = {
     @as("RoomArn")
     roomArn: option<arn>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-a4b") @new external new: request => t = "PutRoomSkillParameterCommand"
   let make = (~roomSkillParameter, ~skillId, ~roomArn=?, ()) =>
     new({roomSkillParameter: roomSkillParameter, skillId: skillId, roomArn: roomArn})
@@ -1835,7 +1835,7 @@ module PutInvitationConfiguration = {
     @as("OrganizationName")
     organizationName: organizationName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-a4b") @new
   external new: request => t = "PutInvitationConfigurationCommand"
   let make = (~organizationName, ~privateSkillIds=?, ~contactEmail=?, ()) =>
@@ -1854,7 +1854,7 @@ module PutConferencePreference = {
     @as("ConferencePreference")
     conferencePreference: conferencePreference,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-a4b") @new external new: request => t = "PutConferencePreferenceCommand"
   let make = (~conferencePreference, ()) => new({conferencePreference: conferencePreference})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1917,7 +1917,7 @@ module GetRoom = {
 
 module GetInvitationConfiguration = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("<p>The list of private skill IDs that you want to recommend to the user to enable in the
          invitation.</p>")
@@ -1931,8 +1931,9 @@ module GetInvitationConfiguration = {
     @as("OrganizationName")
     organizationName: option<organizationName>,
   }
-  @module("@aws-sdk/client-a4b") @new external new: unit => t = "GetInvitationConfigurationCommand"
-  let make = () => new()
+  @module("@aws-sdk/client-a4b") @new
+  external new: request => t = "GetInvitationConfigurationCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1963,13 +1964,13 @@ module GetGateway = {
 
 module GetConferencePreference = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("<p>The conference preference.</p>") @as("Preference")
     preference: option<conferencePreference>,
   }
-  @module("@aws-sdk/client-a4b") @new external new: unit => t = "GetConferencePreferenceCommand"
-  let make = () => new()
+  @module("@aws-sdk/client-a4b") @new external new: request => t = "GetConferencePreferenceCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -2009,7 +2010,7 @@ module UpdateContact = {
     displayName: option<contactName>,
     @ocaml.doc("<p>The ARN of the contact to update.</p>") @as("ContactArn") contactArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-a4b") @new external new: request => t = "UpdateContactCommand"
   let make = (
     ~contactArn,
@@ -2044,7 +2045,7 @@ module TagResource = {
     @as("Arn")
     arn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-a4b") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~arn, ()) => new({tags: tags, arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -2794,7 +2795,7 @@ module UpdateProfile = {
     @ocaml.doc("<p>The ARN of the room profile to update. Required.</p>") @as("ProfileArn")
     profileArn: option<arn>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-a4b") @new external new: request => t = "UpdateProfileCommand"
   let make = (
     ~meetingRoomConfiguration=?,

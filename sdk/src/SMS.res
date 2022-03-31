@@ -336,7 +336,9 @@ type appSummary = {
   totalServers: option<totalServers>,
   @ocaml.doc("<p>The number of server groups present in the application.</p>")
   totalServerGroups: option<totalServerGroups>,
-  @ocaml.doc("<p>The name of the service role in the customer's account used by AWS SMS.</p>")
+  @ocaml.doc(
+    "<p>The name of the service role in the customer's account used by Server Migration Service.</p>"
+  )
   roleName: option<roleName>,
   @ocaml.doc("<p>The last modified time of the application.</p>") lastModified: option<timestamp_>,
   @ocaml.doc("<p>The creation time of the application.</p>") creationTime: option<timestamp_>,
@@ -382,7 +384,7 @@ type ssmvalidationParameters = {
   @ocaml.doc("<p>The name of the S3 bucket for output.</p>") outputS3BucketName: option<bucketName>,
   @ocaml.doc("<p>The timeout interval, in seconds.</p>")
   executionTimeoutSeconds: option<executionTimeoutSeconds>,
-  @ocaml.doc("<p>The command to run the validation script</p>") command: option<command>,
+  @ocaml.doc("<p>The command to run the validation script.</p>") command: option<command>,
   @ocaml.doc("<p>The type of validation script.</p>") scriptType: option<scriptType>,
   @ocaml.doc(
     "<p>The ID of the instance. The instance must have the following tag: UserForSMSApplicationValidation=true.</p>"
@@ -442,7 +444,7 @@ type serverLaunchConfiguration = {
   @ocaml.doc("<p>The ID of the subnet the server should be launched into.</p>")
   subnet: option<subnet>,
   @ocaml.doc("<p>The ID of the VPC into which the server should be launched.</p>") vpc: option<vpc>,
-  @ocaml.doc("<p>The logical ID of the server in the AWS CloudFormation template.</p>")
+  @ocaml.doc("<p>The logical ID of the server in the CloudFormation template.</p>")
   logicalId: option<logicalId>,
   @ocaml.doc("<p>The ID of the server with which the launch configuration is associated.</p>")
   server: option<server>,
@@ -480,7 +482,8 @@ type replicationJob = {
   statusMessage: option<replicationJobStatusMessage>,
   @ocaml.doc("<p>The state of the replication job.</p>") state: option<replicationJobState>,
   @ocaml.doc("<p>The ID of the latest Amazon Machine Image (AMI).</p>") latestAmiId: option<amiId>,
-  @ocaml.doc("<p>The name of the IAM role to be used by AWS SMS.</p>") roleName: option<roleName>,
+  @ocaml.doc("<p>The name of the IAM role to be used by Server Migration Service.</p>")
+  roleName: option<roleName>,
   @ocaml.doc("<p>The license type to be used for the AMI created by a successful replication
             run.</p>")
   licenseType: option<licenseType>,
@@ -558,20 +561,32 @@ type serverGroupLaunchConfiguration = {
 type serverGroupValidationConfigurations = array<serverGroupValidationConfiguration>
 type serverGroupReplicationConfigurations = array<serverGroupReplicationConfiguration>
 type serverGroupLaunchConfigurations = array<serverGroupLaunchConfiguration>
-@ocaml.doc("<fullname>AWS Server Migration Service</fullname>
-        <p>AWS Server Migration Service (AWS SMS) makes it easier and faster for you to migrate your
-            on-premises workloads to AWS. To learn more about AWS SMS, see the following 
+@ocaml.doc("<important>
+            <p>
+               <b>Product update</b>
+            </p>
+            <p>As of March 31, 2022, Amazon Web Services will discontinue Server Migration Service (Amazon Web Services SMS).
+         Going forward, we recommend <a href=\"http://aws.amazon.com/application-migration-service\">Amazon Web Services Application Migration Service</a> (Amazon Web Services MGN) as the primary migration
+         service for lift-and-shift migrations.</p>
+            <p>You can initiate new migration jobs in Server Migration Service until January 1, 2022.
+         Complete these active migration projects by March 31, 2022. For more information, see
+            <a href=\"http://aws.amazon.com/application-migration-service/when-to-choose-aws-mgn/\">When
+            to Choose AWS Application Migration Service</a>.</p>
+         </important>
+            
+        <p>Server Migration Service (Server Migration Service) makes it easier and faster for you to migrate your
+            on-premises workloads to Amazon Web Services. To learn more about Server Migration Service, see the following 
             resources:</p>
         <ul>
             <li>
                 <p>
-                  <a href=\"http://aws.amazon.com/server-migration-service/\">AWS Server Migration Service
+                  <a href=\"http://aws.amazon.com/server-migration-service/\">Server Migration Service
                     product page</a>
                </p>
             </li>
             <li>
                 <p>
-                  <a href=\"https://docs.aws.amazon.com/server-migration-service/latest/userguide/\">AWS Server Migration Service User Guide</a>
+                  <a href=\"https://docs.aws.amazon.com/server-migration-service/latest/userguide/\">Server Migration Service User Guide</a>
                </p>
             </li>
          </ul>")
@@ -604,7 +619,8 @@ module UpdateReplicationJob = {
             maximum number is reached and a new AMI is created.</p>")
     numberOfRecentAmisToKeep: option<numberOfRecentAmisToKeep>,
     @ocaml.doc("<p>The description of the replication job.</p>") description: option<description>,
-    @ocaml.doc("<p>The name of the IAM role to be used by AWS SMS.</p>") roleName: option<roleName>,
+    @ocaml.doc("<p>The name of the IAM role to be used by Server Migration Service.</p>")
+    roleName: option<roleName>,
     @ocaml.doc("<p>The license type to be used for the AMI created by a successful replication
             run.</p>")
     licenseType: option<licenseType>,
@@ -614,7 +630,7 @@ module UpdateReplicationJob = {
     frequency: option<frequency>,
     @ocaml.doc("<p>The ID of the replication job.</p>") replicationJobId: replicationJobId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sms") @new external new: request => t = "UpdateReplicationJobCommand"
   let make = (
     ~replicationJobId,
@@ -645,7 +661,7 @@ module UpdateReplicationJob = {
 module TerminateApp = {
   type t
   type request = {@ocaml.doc("<p>The ID of the application.</p>") appId: option<appId>}
-
+  type response = {.}
   @module("@aws-sdk/client-sms") @new external new: request => t = "TerminateAppCommand"
   let make = (~appId=?, ()) => new({appId: appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -654,7 +670,7 @@ module TerminateApp = {
 module StopAppReplication = {
   type t
   type request = {@ocaml.doc("<p>The ID of the application.</p>") appId: option<appId>}
-
+  type response = {.}
   @module("@aws-sdk/client-sms") @new external new: request => t = "StopAppReplicationCommand"
   let make = (~appId=?, ()) => new({appId: appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -682,7 +698,7 @@ module StartOnDemandAppReplication = {
     @ocaml.doc("<p>The description of the replication run.</p>") description: option<description>,
     @ocaml.doc("<p>The ID of the application.</p>") appId: appId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sms") @new
   external new: request => t = "StartOnDemandAppReplicationCommand"
   let make = (~appId, ~description=?, ()) => new({description: description, appId: appId})
@@ -692,7 +708,7 @@ module StartOnDemandAppReplication = {
 module StartAppReplication = {
   type t
   type request = {@ocaml.doc("<p>The ID of the application.</p>") appId: option<appId>}
-
+  type response = {.}
   @module("@aws-sdk/client-sms") @new external new: request => t = "StartAppReplicationCommand"
   let make = (~appId=?, ()) => new({appId: appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -701,7 +717,7 @@ module StartAppReplication = {
 module LaunchApp = {
   type t
   type request = {@ocaml.doc("<p>The ID of the application.</p>") appId: option<appId>}
-
+  type response = {.}
   @module("@aws-sdk/client-sms") @new external new: request => t = "LaunchAppCommand"
   let make = (~appId=?, ()) => new({appId: appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -709,9 +725,10 @@ module LaunchApp = {
 
 module ImportServerCatalog = {
   type t
-
-  @module("@aws-sdk/client-sms") @new external new: unit => t = "ImportServerCatalogCommand"
-  let make = () => new()
+  type request = {.}
+  type response = {.}
+  @module("@aws-sdk/client-sms") @new external new: request => t = "ImportServerCatalogCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -719,11 +736,11 @@ module ImportAppCatalog = {
   type t
   type request = {
     @ocaml.doc("<p>The name of the service role. If you omit this parameter, we create a service-linked role
-            for AWS Migration Hub in your account. Otherwise, the role that you provide must have the <a href=\"https://docs.aws.amazon.com/migrationhub/latest/ug/new-customer-setup.html#sms-managed\">policy
-            and trust policy</a> described in the <i>AWS Migration Hub User Guide</i>.</p>")
+            for Migration Hub in your account. Otherwise, the role that you provide must have the <a href=\"https://docs.aws.amazon.com/migrationhub/latest/ug/new-customer-setup.html#sms-managed\">policy
+                and trust policy</a> described in the <i>Migration Hub User Guide</i>.</p>")
     roleName: option<roleName>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sms") @new external new: request => t = "ImportAppCatalogCommand"
   let make = (~roleName=?, ()) => new({roleName: roleName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -732,7 +749,7 @@ module ImportAppCatalog = {
 module DisassociateConnector = {
   type t
   type request = {@ocaml.doc("<p>The ID of the connector.</p>") connectorId: connectorId}
-
+  type response = {.}
   @module("@aws-sdk/client-sms") @new external new: request => t = "DisassociateConnectorCommand"
   let make = (~connectorId, ()) => new({connectorId: connectorId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -740,9 +757,10 @@ module DisassociateConnector = {
 
 module DeleteServerCatalog = {
   type t
-
-  @module("@aws-sdk/client-sms") @new external new: unit => t = "DeleteServerCatalogCommand"
-  let make = () => new()
+  type request = {.}
+  type response = {.}
+  @module("@aws-sdk/client-sms") @new external new: request => t = "DeleteServerCatalogCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -751,7 +769,7 @@ module DeleteReplicationJob = {
   type request = {
     @ocaml.doc("<p>The ID of the replication job.</p>") replicationJobId: replicationJobId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sms") @new external new: request => t = "DeleteReplicationJobCommand"
   let make = (~replicationJobId, ()) => new({replicationJobId: replicationJobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -760,7 +778,7 @@ module DeleteReplicationJob = {
 module DeleteAppValidationConfiguration = {
   type t
   type request = {@ocaml.doc("<p>The ID of the application.</p>") appId: appIdWithValidation}
-
+  type response = {.}
   @module("@aws-sdk/client-sms") @new
   external new: request => t = "DeleteAppValidationConfigurationCommand"
   let make = (~appId, ()) => new({appId: appId})
@@ -770,7 +788,7 @@ module DeleteAppValidationConfiguration = {
 module DeleteAppReplicationConfiguration = {
   type t
   type request = {@ocaml.doc("<p>The ID of the application.</p>") appId: option<appId>}
-
+  type response = {.}
   @module("@aws-sdk/client-sms") @new
   external new: request => t = "DeleteAppReplicationConfigurationCommand"
   let make = (~appId=?, ()) => new({appId: appId})
@@ -780,7 +798,7 @@ module DeleteAppReplicationConfiguration = {
 module DeleteAppLaunchConfiguration = {
   type t
   type request = {@ocaml.doc("<p>The ID of the application.</p>") appId: option<appId>}
-
+  type response = {.}
   @module("@aws-sdk/client-sms") @new
   external new: request => t = "DeleteAppLaunchConfigurationCommand"
   let make = (~appId=?, ()) => new({appId: appId})
@@ -798,7 +816,7 @@ module DeleteApp = {
     forceStopAppReplication: option<forceStopAppReplication>,
     @ocaml.doc("<p>The ID of the application.</p>") appId: option<appId>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sms") @new external new: request => t = "DeleteAppCommand"
   let make = (~forceTerminateApp=?, ~forceStopAppReplication=?, ~appId=?, ()) =>
     new({
@@ -837,7 +855,7 @@ module CreateReplicationJob = {
             maximum number is reached and a new AMI is created.</p>")
     numberOfRecentAmisToKeep: option<numberOfRecentAmisToKeep>,
     @ocaml.doc("<p>The description of the replication job.</p>") description: option<description>,
-    @ocaml.doc("<p>The name of the IAM role to be used by the AWS SMS.</p>")
+    @ocaml.doc("<p>The name of the IAM role to be used by the Server Migration Service.</p>")
     roleName: option<roleName>,
     @ocaml.doc("<p>The license type to be used for the AMI created by a successful replication
             run.</p>")
@@ -889,7 +907,7 @@ module NotifyAppValidationOutput = {
     notificationContext: option<notificationContext>,
     @ocaml.doc("<p>The ID of the application.</p>") appId: appIdWithValidation,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sms") @new
   external new: request => t = "NotifyAppValidationOutputCommand"
   let make = (~appId, ~notificationContext=?, ()) =>
@@ -900,9 +918,9 @@ module NotifyAppValidationOutput = {
 module GenerateTemplate = {
   type t
   type request = {
-    @ocaml.doc("<p>The format for generating the AWS CloudFormation template.</p>")
+    @ocaml.doc("<p>The format for generating the CloudFormation template.</p>")
     templateFormat: option<outputFormat>,
-    @ocaml.doc("<p>The ID of the application associated with the AWS CloudFormation template.</p>")
+    @ocaml.doc("<p>The ID of the application associated with the CloudFormation template.</p>")
     appId: option<appId>,
   }
   type response = {
@@ -1054,7 +1072,9 @@ module UpdateApp = {
     @ocaml.doc("<p>The tags to associate with the application.</p>") tags: option<tags>,
     @ocaml.doc("<p>The server groups in the application to update.</p>")
     serverGroups: option<serverGroups>,
-    @ocaml.doc("<p>The name of the service role in the customer's account used by AWS SMS.</p>")
+    @ocaml.doc(
+      "<p>The name of the service role in the customer's account used by Server Migration Service.</p>"
+    )
     roleName: option<roleName>,
     @ocaml.doc("<p>The new description of the application.</p>")
     description: option<appDescription>,
@@ -1115,7 +1135,7 @@ module CreateApp = {
             application creation.</p>")
     clientToken: option<clientToken>,
     @ocaml.doc(
-      "<p>The name of the service role in the customer's account to be used by AWS SMS.</p>"
+      "<p>The name of the service role in the customer's account to be used by Server Migration Service.</p>"
     )
     roleName: option<roleName>,
     @ocaml.doc("<p>The description of the new application</p>") description: option<appDescription>,
@@ -1149,7 +1169,7 @@ module PutAppValidationConfiguration = {
     appValidationConfigurations: option<appValidationConfigurations>,
     @ocaml.doc("<p>The ID of the application.</p>") appId: appIdWithValidation,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sms") @new
   external new: request => t = "PutAppValidationConfigurationCommand"
   let make = (~appId, ~serverGroupValidationConfigurations=?, ~appValidationConfigurations=?, ()) =>
@@ -1170,7 +1190,7 @@ module PutAppReplicationConfiguration = {
     serverGroupReplicationConfigurations: option<serverGroupReplicationConfigurations>,
     @ocaml.doc("<p>The ID of the application.</p>") appId: option<appId>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sms") @new
   external new: request => t = "PutAppReplicationConfigurationCommand"
   let make = (~serverGroupReplicationConfigurations=?, ~appId=?, ()) =>
@@ -1189,12 +1209,12 @@ module PutAppLaunchConfiguration = {
       "<p>Indicates whether the application is configured to launch automatically after replication is complete.</p>"
     )
     autoLaunch: option<autoLaunch>,
-    @ocaml.doc("<p>The name of service role in the customer's account that AWS CloudFormation uses to launch the
+    @ocaml.doc("<p>The name of service role in the customer's account that CloudFormation uses to launch the
             application.</p>")
     roleName: option<roleName>,
     @ocaml.doc("<p>The ID of the application.</p>") appId: option<appId>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sms") @new
   external new: request => t = "PutAppLaunchConfigurationCommand"
   let make = (~serverGroupLaunchConfigurations=?, ~autoLaunch=?, ~roleName=?, ~appId=?, ()) =>
@@ -1247,7 +1267,7 @@ module GetAppLaunchConfiguration = {
       "<p>Indicates whether the application is configured to launch automatically after replication is complete.</p>"
     )
     autoLaunch: option<autoLaunch>,
-    @ocaml.doc("<p>The name of the service role in the customer's account that AWS CloudFormation uses to launch the
+    @ocaml.doc("<p>The name of the service role in the customer's account that CloudFormation uses to launch the
             application.</p>")
     roleName: option<roleName>,
     @ocaml.doc("<p>The ID of the application.</p>") appId: option<appId>,

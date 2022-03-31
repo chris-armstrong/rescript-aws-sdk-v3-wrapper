@@ -103,10 +103,10 @@ type subscription = {
   subscriptionArn: option<subscriptionARN>,
 }
 @ocaml.doc("<p>A verified or pending destination phone number in the SMS sandbox.</p>
-        <p>When you start using Amazon SNS to send SMS messages, your AWS account is in the
+        <p>When you start using Amazon SNS to send SMS messages, your Amazon Web Services account is in the
                 <i>SMS sandbox</i>. The SMS sandbox provides a safe environment for 
                 you to try Amazon SNS features without risking your reputation as an SMS sender. While your 
-                account is in the SMS sandbox, you can use all of the features of Amazon SNS. However, you can send 
+                Amazon Web Services account is in the SMS sandbox, you can use all of the features of Amazon SNS. However, you can send 
                 SMS messages only to verified destination phone numbers. For more information, including how to 
                 move out of the sandbox to send messages without restrictions, 
                 see <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html\">SMS sandbox</a> in 
@@ -117,17 +117,28 @@ type smssandboxPhoneNumber = {
   @ocaml.doc("<p>The destination phone number.</p>") @as("PhoneNumber")
   phoneNumber: option<phoneNumberString>,
 }
+@ocaml.doc("<p>Encloses data related to a successful message in a batch request for topic.</p>")
+type publishBatchResultEntry = {
+  @ocaml.doc("<p>This parameter applies only to FIFO (first-in-first-out) topics.</p>
+        <p>The large, non-consecutive number that Amazon SNS assigns to each message.</p>
+        <p>The length of <code>SequenceNumber</code> is 128 bits. <code>SequenceNumber</code> continues to increase for a particular <code>MessageGroupId</code>.</p>")
+  @as("SequenceNumber")
+  sequenceNumber: option<string_>,
+  @ocaml.doc("<p>An identifier for the message.</p>") @as("MessageId") messageId: option<messageId>,
+  @ocaml.doc("<p>The <code>Id</code> of an entry in a batch request.</p>") @as("Id")
+  id: option<string_>,
+}
 type phoneNumberList = array<phoneNumber>
 @ocaml.doc("List of number capability (SMS,MMS,Voice).")
 type numberCapabilityList = array<numberCapability>
 @ocaml.doc("<p>The user-specified message attribute value. For string data types, the value attribute
             has the same restrictions on the content as the message body. For more information, see
-                <a href=\"https://docs.aws.amazon.com/sns/latest/api/API_Publish.html\">Publish</a>.</p>
+            <a href=\"https://docs.aws.amazon.com/sns/latest/api/API_Publish.html\">Publish</a>.</p>
         <p>Name, type, and value must not be empty or null. In addition, the message body should
             not be empty or null. All parts of the message attribute, including name, type, and
             value, are included in the message size restriction, which is currently 256 KB (262,144
             bytes). For more information, see <a href=\"https://docs.aws.amazon.com/sns/latest/dg/SNSMessageAttributes.html\">Amazon SNS message attributes</a> and
-                <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sms_publish-to-phone.html\">Publishing
+            <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sms_publish-to-phone.html\">Publishing
                 to a mobile phone</a> in the <i>Amazon SNS Developer Guide.</i>
          </p>")
 type messageAttributeValue = {
@@ -136,7 +147,7 @@ type messageAttributeValue = {
   @as("BinaryValue")
   binaryValue: option<binary>,
   @ocaml.doc("<p>Strings are Unicode with UTF8 binary encoding. For a list of code values, see <a href=\"https://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters\">ASCII Printable
-                Characters</a>.</p>")
+            Characters</a>.</p>")
   @as("StringValue")
   stringValue: option<string_>,
   @ocaml.doc("<p>Amazon SNS supports the following logical data types: String, String.Array, Number, and
@@ -148,11 +159,25 @@ type messageAttributeValue = {
 type mapStringToString = Js.Dict.t<string_>
 type listString = array<string_>
 type delegatesList = array<delegate>
+@ocaml.doc("<p>Gives a detailed description of failed messages in the batch.</p>")
+type batchResultErrorEntry = {
+  @ocaml.doc(
+    "<p>Specifies whether the error happened due to the caller of the batch API action.</p>"
+  )
+  @as("SenderFault")
+  senderFault: boolean_,
+  @ocaml.doc("<p>A message explaining why the action failed on this entry.</p>") @as("Message")
+  message: option<string_>,
+  @ocaml.doc("<p>An error code representing why the action failed on this entry.</p>") @as("Code")
+  code: string_,
+  @ocaml.doc("<p>The <code>Id</code> of an entry in a batch request</p>") @as("Id") id: string_,
+}
 type actionsList = array<action>
 type topicsList = array<topic>
 type tagList_ = array<tag>
 type subscriptionsList = array<subscription>
 type smssandboxPhoneNumberList = array<smssandboxPhoneNumber>
+type publishBatchResultEntryList = array<publishBatchResultEntry>
 @ocaml.doc("<p>Platform application object.</p>")
 type platformApplication = {
   @ocaml.doc("<p>Attributes for platform application object.</p>") @as("Attributes")
@@ -177,17 +202,106 @@ type phoneNumberInformation = {
   createdAt: option<timestamp_>,
 }
 type messageAttributeMap = Js.Dict.t<messageAttributeValue>
-@ocaml.doc("<p>Endpoint for mobile app and device.</p>")
+@ocaml.doc("<p>The endpoint for mobile app and device.</p>")
 type endpoint = {
   @ocaml.doc("<p>Attributes for endpoint.</p>") @as("Attributes")
   attributes: option<mapStringToString>,
-  @ocaml.doc("<p>EndpointArn for mobile app and device.</p>") @as("EndpointArn")
+  @ocaml.doc("<p>The <code>EndpointArn</code> for mobile app and device.</p>") @as("EndpointArn")
   endpointArn: option<string_>,
+}
+type batchResultErrorEntryList = array<batchResultErrorEntry>
+@ocaml.doc(
+  "<p>Contains the details of a single Amazon SNS message along with an <code>Id</code> that identifies a message within the batch. </p>"
+)
+type publishBatchRequestEntry = {
+  @ocaml.doc("<p>This parameter applies only to FIFO (first-in-first-out) topics.</p>
+        <p>The tag that specifies that a message belongs to a specific message group. Messages that belong to the same message group are processed in a FIFO manner (however, messages in different message groups might be processed out of order). To interleave multiple ordered streams within a single topic, use <code>MessageGroupId</code> values (for example, session data for multiple users). In this scenario, multiple consumers can process the topic, but the session data of each user is processed in a FIFO fashion. </p>
+        <p>You must associate a non-empty <code>MessageGroupId</code> with a message. If you don't provide a <code>MessageGroupId</code>, the action fails. </p>
+        <p>The length of <code>MessageGroupId</code> is 128 characters.</p>
+        <p>
+            <code>MessageGroupId</code> can contain alphanumeric characters <code>(a-z, A-Z, 0-9)</code> and punctuation <code>(!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~)</code>.</p>      
+        
+        
+        <important>
+            <p>
+               <code>MessageGroupId</code> is required for FIFO topics. You can't use it for standard topics. </p>
+         </important>")
+  @as("MessageGroupId")
+  messageGroupId: option<string_>,
+  @ocaml.doc("<p>This parameter applies only to FIFO (first-in-first-out) topics.</p>
+        <p>The token used for deduplication of messages within a 5-minute minimum deduplication interval. If a message with a particular <code>MessageDeduplicationId</code> is sent successfully, subsequent messages with the same <code>MessageDeduplicationId</code> are accepted successfully but aren't delivered.</p>
+        <ul>
+            <li>
+               <p>Every message must have a unique <code>MessageDeduplicationId</code>.</p>
+                <ul>
+                  <li>
+                     <p>You may provide a <code>MessageDeduplicationId</code> explicitly.</p>
+                  </li>
+                  <li>
+                     <p>If you aren't able to provide a <code>MessageDeduplicationId</code> and you enable <code>ContentBasedDeduplication</code> for your topic, Amazon SNS uses a SHA-256 hash to generate the <code>MessageDeduplicationId</code> using the body of the message (but not the attributes of the message).</p>
+                  </li>
+                  <li>
+                     <p>If you don't provide a <code>MessageDeduplicationId</code> and the topic doesn't have <code>ContentBasedDeduplication</code> set, the action fails with an error.</p>
+                  </li>
+                  <li>
+                     <p>If the topic has a <code>ContentBasedDeduplication</code> set, your
+                                <code>MessageDeduplicationId</code> overrides the generated one. </p>
+                  </li>
+               </ul>
+            </li>
+            <li>
+               <p>When <code>ContentBasedDeduplication</code> is in effect, messages with identical content sent within the deduplication interval are treated as duplicates and only one copy of the message is delivered.</p>
+            </li>
+            <li>
+               <p>If you send one message with <code>ContentBasedDeduplication</code> enabled, and then another
+                    message with a <code>MessageDeduplicationId</code> that is the same as the one
+                    generated for the first <code>MessageDeduplicationId</code>, the two messages
+                    are treated as duplicates and only one copy of the message is delivered. </p>
+            </li>
+         </ul> 
+        <note>
+            <p>The <code>MessageDeduplicationId</code> is available to the consumer of the message (this can be useful for troubleshooting delivery issues).</p>
+            <p>If a message is sent successfully but the acknowledgement is lost and the message is resent with the same <code>MessageDeduplicationId</code> after the deduplication interval, Amazon SNS can't detect duplicate messages. </p>
+            <p>Amazon SNS continues to keep track of the message deduplication ID even after the message is received and deleted. </p>
+        </note>
+        <p>The length of <code>MessageDeduplicationId</code> is 128 characters.</p>
+        <p>
+            <code>MessageDeduplicationId</code> can contain alphanumeric characters <code>(a-z, A-Z, 0-9)</code> and punctuation <code>(!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~)</code>.</p>")
+  @as("MessageDeduplicationId")
+  messageDeduplicationId: option<string_>,
+  @ocaml.doc(
+    "<p>Each message attribute consists of a <code>Name</code>, <code>Type</code>, and <code>Value</code>. For more information, see <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-message-attributes.html\">Amazon SNS message attributes</a> in the Amazon SNS Developer Guide.</p>"
+  )
+  @as("MessageAttributes")
+  messageAttributes: option<messageAttributeMap>,
+  @ocaml.doc("<p>Set <code>MessageStructure</code> to <code>json</code> if you want to send a different message for each protocol. For example, using one publish action, you can send a short message to your SMS subscribers and a longer message to your email subscribers. If you set <code>MessageStructure</code> to <code>json</code>, the value of the <code>Message</code> parameter must: </p>                
+        <ul>
+            <li>
+               <p>be a syntactically valid JSON object; and</p>
+            </li>
+            <li>
+               <p>contain at least a top-level JSON key of \"default\" with a value that is a string.</p> 
+            </li>
+         </ul>
+        <p>You can define other top-level keys that define the message you want to send to a
+            specific transport protocol (e.g. http). </p>")
+  @as("MessageStructure")
+  messageStructure: option<messageStructure>,
+  @ocaml.doc("<p>The subject of the batch message.</p>") @as("Subject") subject: option<subject>,
+  @ocaml.doc("<p>The body of the message.</p>") @as("Message") message: message,
+  @ocaml.doc("<p>An identifier for the message in this batch.</p>  
+        <note>
+            <p>The <code>Ids</code> of a batch request must be unique within a request. </p>
+            <p>This identifier can have up to 80 characters. The following characters are accepted: alphanumeric characters, hyphens(-), and underscores (_). </p>
+        </note>")
+  @as("Id")
+  id: string_,
 }
 @ocaml.doc("List of customer owned phone numbers.")
 type phoneNumberInformationList = array<phoneNumberInformation>
 type listOfPlatformApplications = array<platformApplication>
 type listOfEndpoints = array<endpoint>
+type publishBatchRequestEntryList = array<publishBatchRequestEntry>
 @ocaml.doc("<fullname>Amazon Simple Notification Service</fullname>
         <p>Amazon Simple Notification Service (Amazon SNS) is a web service that enables you to build
             distributed web-enabled applications. Applications can use Amazon SNS to easily push
@@ -211,7 +325,7 @@ module VerifySMSSandboxPhoneNumber = {
     @ocaml.doc("<p>The destination phone number to verify.</p>") @as("PhoneNumber")
     phoneNumber: phoneNumberString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sns") @new
   external new: request => t = "VerifySMSSandboxPhoneNumberCommand"
   let make = (~oneTimePassword, ~phoneNumber, ()) =>
@@ -226,7 +340,7 @@ module Unsubscribe = {
     @ocaml.doc("<p>The ARN of the subscription to be deleted.</p>") @as("SubscriptionArn")
     subscriptionArn: subscriptionARN,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sns") @new external new: request => t = "UnsubscribeCommand"
   let make = (~subscriptionArn, ()) => new({subscriptionArn: subscriptionArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -264,9 +378,9 @@ module SetTopicAttributes = {
         <ul>
             <li>
                 <p>
-                    <code>KmsMasterKeyId</code> – The ID of an AWS-managed customer master
+                    <code>KmsMasterKeyId</code> – The ID of an Amazon Web Services managed customer master
                     key (CMK) for Amazon SNS or a custom CMK. For more information, see <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms\">Key
-                        Terms</a>. For more examples, see <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters\">KeyId</a> in the <i>AWS Key Management Service API
+                        Terms</a>. For more examples, see <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters\">KeyId</a> in the <i>Key Management Service API
                         Reference</i>. </p>
             </li>
          </ul>
@@ -276,7 +390,7 @@ module SetTopicAttributes = {
         <ul>
             <li>
                <p>
-                    <code>ContentBasedDeduplication</code> –  Enables content-based deduplication for
+                    <code>ContentBasedDeduplication</code> – Enables content-based deduplication for
                     FIFO topics.</p>
                
                 <ul>
@@ -301,7 +415,7 @@ module SetTopicAttributes = {
     attributeName: attributeName,
     @ocaml.doc("<p>The ARN of the topic to modify.</p>") @as("TopicArn") topicArn: topicARN,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sns") @new external new: request => t = "SetTopicAttributesCommand"
   let make = (~attributeName, ~topicArn, ~attributeValue=?, ()) =>
     new({attributeValue: attributeValue, attributeName: attributeName, topicArn: topicArn})
@@ -369,7 +483,7 @@ module SetSubscriptionAttributes = {
     @ocaml.doc("<p>The ARN of the subscription to modify.</p>") @as("SubscriptionArn")
     subscriptionArn: subscriptionARN,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sns") @new
   external new: request => t = "SetSubscriptionAttributesCommand"
   let make = (~attributeName, ~subscriptionArn, ~attributeValue=?, ()) =>
@@ -391,7 +505,7 @@ module RemovePermission = {
     @as("TopicArn")
     topicArn: topicARN,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sns") @new external new: request => t = "RemovePermissionCommand"
   let make = (~label, ~topicArn, ()) => new({label: label, topicArn: topicArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -403,7 +517,7 @@ module OptInPhoneNumber = {
   type request = {
     @ocaml.doc("<p>The phone number to opt in. Use E.164 format.</p>") phoneNumber: phoneNumber,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sns") @new external new: request => t = "OptInPhoneNumberCommand"
   let make = (~phoneNumber, ()) => new({phoneNumber: phoneNumber})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -411,14 +525,17 @@ module OptInPhoneNumber = {
 
 module GetSMSSandboxAccountStatus = {
   type t
-
+  type request = {.}
   type response = {
-    @ocaml.doc("<p>Indicates whether the calling account is in the SMS sandbox.</p>")
+    @ocaml.doc(
+      "<p>Indicates whether the calling Amazon Web Services account is in the SMS sandbox.</p>"
+    )
     @as("IsInSandbox")
     isInSandbox: boolean_,
   }
-  @module("@aws-sdk/client-sns") @new external new: unit => t = "GetSMSSandboxAccountStatusCommand"
-  let make = () => new()
+  @module("@aws-sdk/client-sns") @new
+  external new: request => t = "GetSMSSandboxAccountStatusCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -428,7 +545,7 @@ module DeleteTopic = {
     @ocaml.doc("<p>The ARN of the topic you want to delete.</p>") @as("TopicArn")
     topicArn: topicARN,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sns") @new external new: request => t = "DeleteTopicCommand"
   let make = (~topicArn, ()) => new({topicArn: topicArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -440,7 +557,7 @@ module DeleteSMSSandboxPhoneNumber = {
     @ocaml.doc("<p>The destination phone number to delete.</p>") @as("PhoneNumber")
     phoneNumber: phoneNumberString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sns") @new
   external new: request => t = "DeleteSMSSandboxPhoneNumberCommand"
   let make = (~phoneNumber, ()) => new({phoneNumber: phoneNumber})
@@ -455,7 +572,7 @@ module DeletePlatformApplication = {
     @as("PlatformApplicationArn")
     platformApplicationArn: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sns") @new
   external new: request => t = "DeletePlatformApplicationCommand"
   let make = (~platformApplicationArn, ()) => new({platformApplicationArn: platformApplicationArn})
@@ -468,7 +585,7 @@ module DeleteEndpoint = {
   type request = {
     @ocaml.doc("<p>EndpointArn of endpoint to delete.</p>") @as("EndpointArn") endpointArn: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sns") @new external new: request => t = "DeleteEndpointCommand"
   let make = (~endpointArn, ()) => new({endpointArn: endpointArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -486,7 +603,7 @@ module CreateSMSSandboxPhoneNumber = {
     @as("PhoneNumber")
     phoneNumber: phoneNumberString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sns") @new
   external new: request => t = "CreateSMSSandboxPhoneNumberCommand"
   let make = (~phoneNumber, ~languageCode=?, ()) =>
@@ -499,9 +616,9 @@ module ConfirmSubscription = {
   @ocaml.doc("<p>Input for ConfirmSubscription action.</p>")
   type request = {
     @ocaml.doc("<p>Disallows unauthenticated unsubscribes of the subscription. If the value of this
-            parameter is <code>true</code> and the request has an AWS signature, then only the topic
+            parameter is <code>true</code> and the request has an Amazon Web Services signature, then only the topic
             owner and the subscription owner can unsubscribe the endpoint. The unsubscribe action
-            requires AWS authentication. </p>")
+            requires Amazon Web Services authentication. </p>")
     @as("AuthenticateOnUnsubscribe")
     authenticateOnUnsubscribe: option<authenticateOnUnsubscribe>,
     @ocaml.doc(
@@ -562,7 +679,7 @@ module UntagResource = {
     @ocaml.doc("<p>The ARN of the topic from which to remove tags.</p>") @as("ResourceArn")
     resourceArn: amazonResourceName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sns") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -586,7 +703,7 @@ module Subscribe = {
     returnSubscriptionArn: option<boolean_>,
     @ocaml.doc("<p>A map of attributes with their corresponding values.</p>
         <p>The following lists the names, descriptions, and values of the special request
-            parameters that the <code>SetTopicAttributes</code> action uses:</p>
+            parameters that the <code>Subscribe</code> action uses:</p>
         <ul>
             <li>
                 <p>
@@ -667,7 +784,7 @@ module Subscribe = {
                     a mobile app and device.</p>
             </li>
             <li>
-                <p>For the <code>lambda</code> protocol, the endpoint is the ARN of an AWS Lambda
+                <p>For the <code>lambda</code> protocol, the endpoint is the ARN of an Lambda
                     function.</p>
             </li>
             <li>
@@ -714,7 +831,7 @@ module Subscribe = {
             </li>
             <li>
                 <p>
-                  <code>lambda</code> – delivery of JSON-encoded message to an AWS Lambda
+                  <code>lambda</code> – delivery of JSON-encoded message to an Lambda
                     function</p>
             </li>
             <li>
@@ -753,7 +870,7 @@ module SetSMSAttributes = {
   type t
   @ocaml.doc("<p>The input for the SetSMSAttributes action.</p>")
   type request = {
-    @ocaml.doc("<p>The default settings for sending SMS messages from your account. You can set values
+    @ocaml.doc("<p>The default settings for sending SMS messages from your Amazon Web Services account. You can set values
             for the following attribute names:</p>
         <p>
             <code>MonthlySpendLimit</code> – The maximum amount in USD that you are willing to spend
@@ -798,15 +915,14 @@ module SetSMSAttributes = {
             <li>
                 <p>
                     <code>Transactional</code> – Critical messages that support customer
-                    transactions, such as one-time passcodes for multi-factor authentication. Amazon
-                    SNS optimizes the message delivery to achieve the highest reliability.</p>
+                    transactions, such as one-time passcodes for multi-factor authentication. Amazon SNS optimizes the message delivery to achieve the highest reliability.</p>
             </li>
          </ul>
         <p>
             <code>UsageReportS3Bucket</code> – The name of the Amazon S3 bucket to receive daily SMS
             usage reports from Amazon SNS. Each day, Amazon SNS will deliver a usage report as a CSV file to
             the bucket. The report includes the following information for each SMS message that was
-            successfully delivered by your account:</p>
+            successfully delivered by your Amazon Web Services account:</p>
         <ul>
             <li>
                 <p>Time that the message was published (in UTC)</p>
@@ -835,13 +951,13 @@ module SetSMSAttributes = {
             </li>
          </ul>
         <p>To receive the report, the bucket must have a policy that allows the Amazon SNS service
-            principle to perform the <code>s3:PutObject</code> and <code>s3:GetBucketLocation</code>
+            principal to perform the <code>s3:PutObject</code> and <code>s3:GetBucketLocation</code>
             actions.</p>
         <p>For an example bucket policy and usage report, see <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sms_stats.html\">Monitoring SMS Activity</a> in the
                 <i>Amazon SNS Developer Guide</i>.</p>")
     attributes: mapStringToString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sns") @new external new: request => t = "SetSMSAttributesCommand"
   let make = (~attributes, ()) => new({attributes: attributes})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -856,24 +972,46 @@ module SetPlatformApplicationAttributes = {
         <ul>
             <li>
                 <p>
-                    <code>PlatformCredential</code> – The credential received from the
-                    notification service. For <code>APNS</code> and <code>APNS_SANDBOX</code>,
-                        <code>PlatformCredential</code> is <code>private key</code>. For
-                        <code>GCM</code> (Firebase Cloud Messaging), <code>PlatformCredential</code>
-                    is <code>API key</code>. For <code>ADM</code>, <code>PlatformCredential</code>
-                    is <code>client secret</code>.</p>
+                  <code>PlatformCredential</code> – The credential received from the notification service.</p> 
+                <ul>
+                  <li>
+                     <p>For ADM, <code>PlatformCredential</code>is client secret.</p>
+                  </li>
+                  <li>
+                     <p>For Apple Services using certificate credentials, <code>PlatformCredential</code> is private key.</p>
+                  </li>
+                  <li>
+                     <p>For Apple Services using token credentials, <code>PlatformCredential</code> is signing key.</p>
+                  </li>
+                  <li>
+                     <p>For GCM (Firebase Cloud Messaging), <code>PlatformCredential</code> is API key. </p>
+                  </li>
+               </ul>
             </li>
+         </ul>
+        <ul>
             <li>
-                <p>
-                    <code>PlatformPrincipal</code> – The principal received from the
-                    notification service. For <code>APNS</code> and <code>APNS_SANDBOX</code>,
-                        <code>PlatformPrincipal</code> is <code>SSL certificate</code>. For
-                        <code>GCM</code> (Firebase Cloud Messaging), there is no
-                        <code>PlatformPrincipal</code>. For <code>ADM</code>,
-                        <code>PlatformPrincipal</code> is <code>client id</code>.</p>
+               <p>
+                  <code>PlatformPrincipal</code> – The principal received from the notification service.</p>  
+               <ul>
+                  <li>
+                     <p>For ADM, <code>PlatformPrincipal</code>is client id.</p>
+                  </li>
+                  <li>
+                     <p>For Apple Services using certificate credentials, <code>PlatformPrincipal</code> is SSL certificate.</p>
+                  </li>
+                  <li>
+                     <p>For Apple Services using token credentials, <code>PlatformPrincipal</code> is signing key ID.</p>
+                  </li>
+                  <li>
+                     <p>For GCM (Firebase Cloud Messaging), there is no <code>PlatformPrincipal</code>. </p>
+                  </li>
+               </ul>
             </li>
+         </ul>
+        <ul>
             <li>
-                <p>
+                   <p>
                     <code>EventEndpointCreated</code> – Topic ARN to which
                         <code>EndpointCreated</code> event notifications are sent.</p>
             </li>
@@ -909,6 +1047,17 @@ module SetPlatformApplicationAttributes = {
                     <code>SuccessFeedbackSampleRate</code> – Sample rate percentage (0-100)
                     of successfully delivered messages.</p>
             </li>
+         </ul> 
+        <p>The following attributes only apply to <code>APNs</code> token-based authentication:</p>  
+        <ul>
+            <li>
+               <p>
+                  <code>ApplePlatformTeamID</code> – The identifier that's assigned to your Apple developer account team.</p>
+            </li>
+            <li>
+               <p>
+                  <code>ApplePlatformBundleID</code> – The bundle identifier that's assigned to your iOS app.</p>
+            </li>
          </ul>")
     @as("Attributes")
     attributes: mapStringToString,
@@ -916,7 +1065,7 @@ module SetPlatformApplicationAttributes = {
     @as("PlatformApplicationArn")
     platformApplicationArn: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sns") @new
   external new: request => t = "SetPlatformApplicationAttributesCommand"
   let make = (~attributes, ~platformApplicationArn, ()) =>
@@ -956,7 +1105,7 @@ module SetEndpointAttributes = {
     @ocaml.doc("<p>EndpointArn used for SetEndpointAttributes action.</p>") @as("EndpointArn")
     endpointArn: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sns") @new external new: request => t = "SetEndpointAttributesCommand"
   let make = (~attributes, ~endpointArn, ()) =>
     new({attributes: attributes, endpointArn: endpointArn})
@@ -1011,7 +1160,7 @@ module GetTopicAttributes = {
             </li>
             <li>
                 <p>
-                  <code>Owner</code> – The AWS account ID of the topic's owner.</p>
+                  <code>Owner</code> – The Amazon Web Services account ID of the topic's owner.</p>
             </li>
             <li>
                 <p>
@@ -1048,9 +1197,9 @@ module GetTopicAttributes = {
         <ul>
             <li>
                 <p>
-                  <code>KmsMasterKeyId</code> - The ID of an AWS-managed customer master key
+                  <code>KmsMasterKeyId</code> - The ID of an Amazon Web Services managed customer master key
                     (CMK) for Amazon SNS or a custom CMK. For more information, see <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms\">Key
-                        Terms</a>. For more examples, see <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters\">KeyId</a> in the <i>AWS Key Management Service API
+                        Terms</a>. For more examples, see <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters\">KeyId</a> in the <i>Key Management Service API
                         Reference</i>.</p>
             </li>
          </ul>
@@ -1065,7 +1214,7 @@ module GetTopicAttributes = {
             </li>
             <li>
                <p>
-                    <code>ContentBasedDeduplication</code> –  Enables content-based deduplication for
+                    <code>ContentBasedDeduplication</code> – Enables content-based deduplication for
                     FIFO topics.</p>
                
                 <ul>
@@ -1131,7 +1280,7 @@ module GetSubscriptionAttributes = {
             </li>
             <li>
                 <p>
-                    <code>Owner</code> – The AWS account ID of the subscription's
+                    <code>Owner</code> – The Amazon Web Services account ID of the subscription's
                     owner.</p>
             </li>
             <li>
@@ -1223,6 +1372,18 @@ module GetPlatformApplicationAttributes = {
   type response = {
     @ocaml.doc("<p>Attributes include the following:</p>
         <ul>
+            <li>
+                <p>
+                    <code>AppleCertificateExpiryDate</code> – The expiry date of the SSL certificate used to configure certificate-based authentication.</p>
+            </li>
+            <li>
+                <p>
+                    <code>ApplePlatformTeamID</code> – The Apple developer account ID used to configure token-based authentication.</p>
+            </li>
+            <li>
+                <p>
+                    <code>ApplePlatformBundleID</code> – The app identifier used to configure token-based authentication.</p>
+            </li>
             <li>
                 <p>
                     <code>EventEndpointCreated</code> – Topic ARN to which EndpointCreated
@@ -1376,8 +1537,8 @@ module AddPermission = {
         <p>Valid values: Any Amazon SNS action name, for example <code>Publish</code>.</p>")
     @as("ActionName")
     actionName: actionsList,
-    @ocaml.doc("<p>The AWS account IDs of the users (principals) who will be given access to the
-            specified actions. The users must have AWS accounts, but do not need to be signed up for
+    @ocaml.doc("<p>The Amazon Web Services account IDs of the users (principals) who will be given access to the
+            specified actions. The users must have Amazon Web Services account, but do not need to be signed up for
             this service.</p>")
     @as("AWSAccountId")
     awsaccountId: delegatesList,
@@ -1387,7 +1548,7 @@ module AddPermission = {
     @as("TopicArn")
     topicArn: topicARN,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sns") @new external new: request => t = "AddPermissionCommand"
   let make = (~actionName, ~awsaccountId, ~label, ~topicArn, ()) =>
     new({actionName: actionName, awsaccountId: awsaccountId, label: label, topicArn: topicArn})
@@ -1404,7 +1565,7 @@ module TagResource = {
     @ocaml.doc("<p>The ARN of the topic to which to add tags.</p>") @as("ResourceArn")
     resourceArn: amazonResourceName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sns") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1415,8 +1576,9 @@ module Publish = {
   @ocaml.doc("<p>Input for Publish action.</p>")
   type request = {
     @ocaml.doc("<p>This parameter applies only to FIFO (first-in-first-out) topics. The
-                <code>MessageGroupId</code> can contain up to 128 alphanumeric characters (a-z, A-Z,
-            0-9) and punctuation <code>(!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~)</code>.</p>
+            <code>MessageGroupId</code> can contain up to 128 alphanumeric characters
+            <code>(a-z, A-Z, 0-9)</code> and punctuation
+            <code>(!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~)</code>.</p>        
         <p>The <code>MessageGroupId</code> is a tag that specifies that a message belongs to a
             specific message group. Messages that belong to the same message group are processed in
             a FIFO manner (however, messages in different message groups might be processed out of
@@ -1425,7 +1587,7 @@ module Publish = {
     messageGroupId: option<string_>,
     @ocaml.doc("<p>This parameter applies only to FIFO (first-in-first-out) topics. The
                 <code>MessageDeduplicationId</code> can contain up to 128 alphanumeric characters
-            (a-z, A-Z, 0-9) and punctuation
+            <code>(a-z, A-Z, 0-9)</code> and punctuation
             <code>(!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~)</code>.</p>
         <p>Every message must have a unique <code>MessageDeduplicationId</code>, which is a token
             used for deduplication of sent messages. If a message with a particular
@@ -1742,9 +1904,9 @@ module CreateTopic = {
         <ul>
             <li>
                 <p>
-                    <code>KmsMasterKeyId</code> – The ID of an AWS managed customer master
+                    <code>KmsMasterKeyId</code> – The ID of an Amazon Web Services managed customer master
                     key (CMK) for Amazon SNS or a custom CMK. For more information, see <a href=\"https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms\">Key
-                        Terms</a>. For more examples, see <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters\">KeyId</a> in the <i>AWS Key Management Service API
+                        Terms</a>. For more examples, see <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters\">KeyId</a> in the <i>Key Management Service API
                         Reference</i>. </p>
             </li>
          </ul>
@@ -1759,7 +1921,7 @@ module CreateTopic = {
             </li>
             <li>
                <p>
-                    <code>ContentBasedDeduplication</code> –  Enables content-based deduplication for
+                    <code>ContentBasedDeduplication</code> – Enables content-based deduplication for
                     FIFO topics.</p>
                
                 <ul>
@@ -1882,5 +2044,29 @@ module ListEndpointsByPlatformApplication = {
   external new: request => t = "ListEndpointsByPlatformApplicationCommand"
   let make = (~platformApplicationArn, ~nextToken=?, ()) =>
     new({nextToken: nextToken, platformApplicationArn: platformApplicationArn})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module PublishBatch = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>A list of <code>PublishBatch</code> request entries to be sent to the SNS topic.</p>"
+    )
+    @as("PublishBatchRequestEntries")
+    publishBatchRequestEntries: publishBatchRequestEntryList,
+    @ocaml.doc("<p>The Amazon resource name (ARN) of the topic you want to batch publish to.</p>")
+    @as("TopicArn")
+    topicArn: topicARN,
+  }
+  type response = {
+    @ocaml.doc("<p>A list of failed <code>PublishBatch</code> responses. </p>") @as("Failed")
+    failed: option<batchResultErrorEntryList>,
+    @ocaml.doc("<p>A list of successful <code>PublishBatch</code> responses.</p>") @as("Successful")
+    successful: option<publishBatchResultEntryList>,
+  }
+  @module("@aws-sdk/client-sns") @new external new: request => t = "PublishBatchCommand"
+  let make = (~publishBatchRequestEntries, ~topicArn, ()) =>
+    new({publishBatchRequestEntries: publishBatchRequestEntries, topicArn: topicArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

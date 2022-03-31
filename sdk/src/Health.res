@@ -23,6 +23,7 @@ type region = string
 type nextToken = string
 type metadataValue = string
 type metadataKey = string
+type maxResultsLowerRange = int
 type maxResults = int
 type locale = string
 type healthServiceAccessStatusForOrganization = string
@@ -72,18 +73,18 @@ type affectedAccountsList = array<accountId>
 @ocaml.doc("<p>Error information returned when a <a href=\"https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetailsForOrganization.html\">DescribeEventDetailsForOrganization</a> operation can't find a specified
          event.</p>")
 type organizationEventDetailsErrorItem = {
-  @ocaml.doc("<p>A message that describes the error.</p>
-         <p>If you call the <code>DescribeEventDetailsForOrganization</code>
-operation and receive one of the following errors, follow the recommendations in the message:</p> 
+  @ocaml.doc("<p>A message that describes the error.</p> 
+         <p>If you call the <code>DescribeEventDetailsForOrganization</code> operation and receive one of the following errors, follow the recommendations in the message:</p> 
          <ul>
             <li>
-               <p>We couldn't find a public event that matches your request. To find an event that is account specific, you must enter an AWS account ID in the request.</p>
+               <p>We couldn't find a public event that matches your request. To find an event that is account specific, you must enter an Amazon Web Services account ID in the request.</p>
             </li>
             <li>
-               <p>We couldn't find an account specific event for the specified AWS account. To find an event that is public, you must enter a null value for the AWS account ID in the request.</p>
+               <p>We couldn't find an account specific event for the specified Amazon Web Services account. To find an event that is public, you must enter a null value for the Amazon Web Services account ID in the request.</p>
             </li>
             <li>
-               <p>Your AWS account doesn't include the AWS Support plan required to use the AWS Health API. You must have either a Business or Enterprise Support plan.</p>
+               <p>Your Amazon Web Services account doesn't include the Amazon Web Services Support plan required to use the
+Health API. You must have either a Business, Enterprise On-Ramp, or Enterprise Support plan.</p>
             </li>
          </ul>")
   errorMessage: option<string_>,
@@ -112,8 +113,8 @@ type organizationEvent = {
   lastUpdatedTime: option<timestamp_>,
   @ocaml.doc("<p>The date and time that the event ended.</p>") endTime: option<timestamp_>,
   @ocaml.doc("<p>The date and time that the event began.</p>") startTime: option<timestamp_>,
-  @ocaml.doc("<p>The AWS Region name of the event.</p>") region: option<region>,
-  @ocaml.doc("<p>This parameter specifies if the AWS Health event is a public AWS service event or an account-specific event.</p>
+  @ocaml.doc("<p>The Amazon Web Services Region name of the event.</p>") region: option<region>,
+  @ocaml.doc("<p>This parameter specifies if the Health event is a public Amazon Web Services service event or an account-specific event.</p>
          <ul>
             <li>
                <p>If the <code>eventScopeCode</code> value is <code>PUBLIC</code>, then the
@@ -121,9 +122,9 @@ type organizationEvent = {
             </li>
             <li>
                <p>If the <code>eventScopeCode</code> value is <code>ACCOUNT_SPECIFIC</code>, then
-               the <code>affectedAccounts</code> value lists the affected AWS accounts in your
+               the <code>affectedAccounts</code> value lists the affected Amazon Web Services accounts in your
                organization. For example, if an event affects a service such as Amazon Elastic Compute Cloud and you
-               have AWS accounts that use that service, those account IDs appear in the
+               have Amazon Web Services accounts that use that service, those account IDs appear in the
                response.</p>
             </li>
             <li>
@@ -133,12 +134,17 @@ type organizationEvent = {
             </li>
          </ul>")
   eventScopeCode: option<eventScopeCode>,
-  @ocaml.doc("<p>The category of the event type.</p>") eventTypeCategory: option<eventTypeCategory>,
+  @ocaml.doc("<p>A list of event type category codes. Possible values are
+<code>issue</code>, <code>accountNotification</code>, or <code>scheduledChange</code>. Currently,
+the <code>investigation</code> value isn't supported at this time.</p>")
+  eventTypeCategory: option<eventTypeCategory>,
   @ocaml.doc("<p>The unique identifier for the event type. The format is
             <code>AWS_SERVICE_DESCRIPTION</code>. For example,
             <code>AWS_EC2_SYSTEM_MAINTENANCE_EVENT</code>.</p>")
   eventTypeCode: option<eventTypeCode>,
-  @ocaml.doc("<p>The AWS service that is affected by the event, such as EC2 and RDS.</p>")
+  @ocaml.doc(
+    "<p>The Amazon Web Services service that is affected by the event, such as EC2 and RDS.</p>"
+  )
   service: option<service>,
   @ocaml.doc("<p>The unique identifier for the event. The event ARN has the
 <code>arn:aws:health:<i>event-region</i>::event/<i>SERVICE</i>/<i>EVENT_TYPE_CODE</i>/<i>EVENT_TYPE_PLUS_ID</i>
@@ -167,30 +173,33 @@ format.</p>
             <code>arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456</code>
          </p>")
   eventArn: option<eventArn>,
-  @ocaml.doc("<p>The 12-digit AWS account numbers that contains the affected entities.</p>")
+  @ocaml.doc(
+    "<p>The 12-digit Amazon Web Services account numbers that contains the affected entities.</p>"
+  )
   awsAccountId: option<accountId>,
 }
 type eventTypeCodeList = array<eventTypeCode>
 type eventTypeCategoryList = array<eventTypeCategory>
-@ocaml.doc("<p>Contains the metadata about a type of event that is reported by AWS Health. The
+@ocaml.doc("<p>Contains the metadata about a type of event that is reported by Health. The
             <code>EventType</code> shows the category, service, and the event type code of the
          event. For example, an <code>issue</code> might be the category, <code>EC2</code> the
          service, and <code>AWS_EC2_SYSTEM_MAINTENANCE_EVENT</code> the event type code.</p>
          <p>You can use the <a href=\"https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventTypes.html\">DescribeEventTypes</a> API operation to return this information
          about an event.</p>
          <p>You can also use the Amazon CloudWatch Events console to create a rule so that you can get notified or
-         take action when AWS Health delivers a specific event to your AWS account. For more
-         information, see <a href=\"https://docs.aws.amazon.com/health/latest/ug/cloudwatch-events-health.html\">Monitor for AWS Health events with Amazon CloudWatch Events</a> in the
-            <i>AWS Health User Guide</i>.</p>")
+         take action when Health delivers a specific event to your Amazon Web Services account. For more
+         information, see <a href=\"https://docs.aws.amazon.com/health/latest/ug/cloudwatch-events-health.html\">Monitor for Health events with Amazon CloudWatch Events</a> in the
+            <i>Health User Guide</i>.</p>")
 type eventType = {
-  @ocaml.doc("<p>A list of event type category codes (<code>issue</code>, <code>scheduledChange</code>,
-         or <code>accountNotification</code>).</p>")
+  @ocaml.doc("<p>A list of event type category codes. Possible values are
+<code>issue</code>, <code>accountNotification</code>, or <code>scheduledChange</code>. Currently,
+the <code>investigation</code> value isn't supported at this time.</p>")
   category: option<eventTypeCategory>,
   @ocaml.doc("<p>The unique identifier for the event type. The format is <code>AWS_<i>SERVICE</i>_<i>DESCRIPTION</i>
             </code>; for example, <code>AWS_EC2_SYSTEM_MAINTENANCE_EVENT</code>.</p>")
   code: option<eventTypeCode>,
   @ocaml.doc(
-    "<p>The AWS service that is affected by the event. For example, <code>EC2</code>, <code>RDS</code>.</p>"
+    "<p>The Amazon Web Services service that is affected by the event. For example, <code>EC2</code>, <code>RDS</code>.</p>"
   )
   service: option<service>,
 }
@@ -229,7 +238,9 @@ type eventAggregate = {
   "<p>The values used to filter results from the <a href=\"https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetailsForOrganization.html\">DescribeEventDetailsForOrganization</a> and <a href=\"https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedEntitiesForOrganization.html\">DescribeAffectedEntitiesForOrganization</a> operations.</p>"
 )
 type eventAccountFilter = {
-  @ocaml.doc("<p>The 12-digit AWS account numbers that contains the affected entities.</p>")
+  @ocaml.doc(
+    "<p>The 12-digit Amazon Web Services account numbers that contains the affected entities.</p>"
+  )
   awsAccountId: option<accountId>,
   @ocaml.doc("<p>The unique identifier for the event. The event ARN has the
 <code>arn:aws:health:<i>event-region</i>::event/<i>SERVICE</i>/<i>EVENT_TYPE_CODE</i>/<i>EVENT_TYPE_PLUS_ID</i>
@@ -241,28 +252,28 @@ format.</p>
          </p>")
   eventArn: eventArn,
 }
-@ocaml.doc("<p>Summary information about an AWS Health event.</p>
-         <p>AWS Health events can be public or account-specific:</p>
+@ocaml.doc("<p>Summary information about an Health event.</p>
+         <p>Health events can be public or account-specific:</p>
          <ul>
             <li>
                <p>
                   <i>Public events</i> might be service events that are not specific
-               to an AWS account. For example, if there is an issue with an AWS Region,
-               AWS Health provides information about the event, even if you don't use services or
+               to an Amazon Web Services account. For example, if there is an issue with an Amazon Web Services Region,
+               Health provides information about the event, even if you don't use services or
                resources in that Region.</p>
             </li>
             <li>
                <p>
-                  <i>Account-specific</i> events are specific to either your AWS
-               account or an account in your organization. For example, if there's an issue with
-               Amazon Elastic Compute Cloud in a Region that you use, AWS Health provides information about the event
-               and the affected resources in the account.</p>
+                  <i>Account-specific</i> events are specific to either your
+               Amazon Web Services account or an account in your organization. For example, if there's an issue
+               with Amazon Elastic Compute Cloud in a Region that you use, Health provides information about the
+               event and the affected resources in the account.</p>
             </li>
          </ul>
          <p>You can determine if an event is public or account-specific by using the
             <code>eventScopeCode</code> parameter. For more information, see <a href=\"https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html#AWSHealth-Type-Event-eventScopeCode\">eventScopeCode</a>.</p>")
 type event = {
-  @ocaml.doc("<p>This parameter specifies if the AWS Health event is a public AWS service event or an account-specific event.</p>
+  @ocaml.doc("<p>This parameter specifies if the Health event is a public Amazon Web Services service event or an account-specific event.</p>
          <ul>
             <li>
                <p>If the <code>eventScopeCode</code> value is <code>PUBLIC</code>, then the
@@ -270,9 +281,9 @@ type event = {
             </li>
             <li>
                <p>If the <code>eventScopeCode</code> value is <code>ACCOUNT_SPECIFIC</code>, then
-               the <code>affectedAccounts</code> value lists the affected AWS accounts in your
+               the <code>affectedAccounts</code> value lists the affected Amazon Web Services accounts in your
                organization. For example, if an event affects a service such as Amazon Elastic Compute Cloud and you
-               have AWS accounts that use that service, those account IDs appear in the
+               have Amazon Web Services accounts that use that service, those account IDs appear in the
                response.</p>
             </li>
             <li>
@@ -289,17 +300,20 @@ type event = {
   lastUpdatedTime: option<timestamp_>,
   @ocaml.doc("<p>The date and time that the event ended.</p>") endTime: option<timestamp_>,
   @ocaml.doc("<p>The date and time that the event began.</p>") startTime: option<timestamp_>,
-  @ocaml.doc("<p>The AWS Availability Zone of the event. For example, us-east-1a.</p>")
+  @ocaml.doc(
+    "<p>The Amazon Web Services Availability Zone of the event. For example, us-east-1a.</p>"
+  )
   availabilityZone: option<availabilityZone>,
-  @ocaml.doc("<p>The AWS Region name of the event.</p>") region: option<region>,
-  @ocaml.doc("<p>The category of the event. Possible values are <code>issue</code>,
-            <code>scheduledChange</code>, and <code>accountNotification</code>.</p>")
+  @ocaml.doc("<p>The Amazon Web Services Region name of the event.</p>") region: option<region>,
+  @ocaml.doc("<p>A list of event type category codes. Possible values are
+<code>issue</code>, <code>accountNotification</code>, or <code>scheduledChange</code>. Currently,
+the <code>investigation</code> value isn't supported at this time.</p>")
   eventTypeCategory: option<eventTypeCategory>,
   @ocaml.doc("<p>The unique identifier for the event type. The format is <code>AWS_<i>SERVICE</i>_<i>DESCRIPTION</i>
             </code>; for example, <code>AWS_EC2_SYSTEM_MAINTENANCE_EVENT</code>.</p>")
   eventTypeCode: option<eventTypeCode>,
   @ocaml.doc(
-    "<p>The AWS service that is affected by the event. For example, <code>EC2</code>, <code>RDS</code>.</p>"
+    "<p>The Amazon Web Services service that is affected by the event. For example, <code>EC2</code>, <code>RDS</code>.</p>"
   )
   service: option<service>,
   @ocaml.doc("<p>The unique identifier for the event. The event ARN has the
@@ -347,9 +361,9 @@ type organizationEventList = array<organizationEvent>
 )
 type organizationEventFilter = {
   @ocaml.doc("<p>A list of event status codes.</p>") eventStatusCodes: option<eventStatusCodeList>,
-  @ocaml.doc(
-    "<p>A list of event type category codes (issue, scheduledChange, or accountNotification).</p>"
-  )
+  @ocaml.doc("<p>A list of event type category codes. Possible values are
+<code>issue</code>, <code>accountNotification</code>, or <code>scheduledChange</code>. Currently,
+the <code>investigation</code> value isn't supported at this time.</p>")
   eventTypeCategories: option<eventTypeCategoryList2>,
   @ocaml.doc(
     "<p>A list of entity identifiers, such as EC2 instance IDs (i-34ab692e) or EBS volumes (vol-426ab23e).</p>"
@@ -360,12 +374,14 @@ type organizationEventFilter = {
   lastUpdatedTime: option<dateTimeRange>,
   endTime: option<dateTimeRange>,
   startTime: option<dateTimeRange>,
-  @ocaml.doc("<p>A list of AWS Regions.</p>") regions: option<regionList>,
+  @ocaml.doc("<p>A list of Amazon Web Services Regions.</p>") regions: option<regionList>,
   @ocaml.doc(
-    "<p>The AWS services associated with the event. For example, <code>EC2</code>, <code>RDS</code>.</p>"
+    "<p>The Amazon Web Services services associated with the event. For example, <code>EC2</code>, <code>RDS</code>.</p>"
   )
   services: option<serviceList>,
-  @ocaml.doc("<p>A list of 12-digit AWS account numbers that contains the affected entities.</p>")
+  @ocaml.doc(
+    "<p>A list of 12-digit Amazon Web Services account numbers that contains the affected entities.</p>"
+  )
   awsAccountIds: option<awsAccountIdsList>,
   @ocaml.doc("<p>A list of unique identifiers for event types. For example, <code>\"AWS_EC2_SYSTEM_MAINTENANCE_EVENT\",\"AWS_RDS_MAINTENANCE_SCHEDULED\".</code>
          </p>")
@@ -377,7 +393,9 @@ type organizationEventDetails = {
   @ocaml.doc("<p>Additional metadata about the event.</p>") eventMetadata: option<eventMetadata>,
   eventDescription: option<eventDescription>,
   event: option<event>,
-  @ocaml.doc("<p>The 12-digit AWS account numbers that contains the affected entities.</p>")
+  @ocaml.doc(
+    "<p>The 12-digit Amazon Web Services account numbers that contains the affected entities.</p>"
+  )
   awsAccountId: option<accountId>,
 }
 type organizationEventDetailFiltersList = array<eventAccountFilter>
@@ -386,11 +404,12 @@ type eventTypeList = array<eventType>
 @ocaml.doc("<p>The values to use to filter results from the <a href=\"https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventTypes.html\">DescribeEventTypes</a>
          operation.</p>")
 type eventTypeFilter = {
-  @ocaml.doc("<p>A list of event type category codes (<code>issue</code>, <code>scheduledChange</code>,
-         or <code>accountNotification</code>).</p>")
+  @ocaml.doc("<p>A list of event type category codes. Possible values are
+<code>issue</code>, <code>accountNotification</code>, or <code>scheduledChange</code>. Currently,
+the <code>investigation</code> value isn't supported at this time.</p>")
   eventTypeCategories: option<eventTypeCategoryList>,
   @ocaml.doc(
-    "<p>The AWS services associated with the event. For example, <code>EC2</code>, <code>RDS</code>.</p>"
+    "<p>The Amazon Web Services services associated with the event. For example, <code>EC2</code>, <code>RDS</code>.</p>"
   )
   services: option<serviceList>,
   @ocaml.doc("<p>A list of event type codes.</p>") eventTypeCodes: option<eventTypeCodeList>,
@@ -421,7 +440,9 @@ type affectedEntity = {
   statusCode: option<entityStatusCode>,
   @ocaml.doc("<p>The most recent time that the entity was updated.</p>")
   lastUpdatedTime: option<timestamp_>,
-  @ocaml.doc("<p>The 12-digit AWS account number that contains the affected entity.</p>")
+  @ocaml.doc(
+    "<p>The 12-digit Amazon Web Services account number that contains the affected entity.</p>"
+  )
   awsAccountId: option<accountId>,
   @ocaml.doc("<p>The URL of the affected entity.</p>") entityUrl: option<entityUrl>,
   @ocaml.doc("<p>The ID of the affected entity.</p>") entityValue: option<entityValue>,
@@ -448,8 +469,9 @@ type eventFilter = {
             <p>Currently, the <code>tags</code> property isn't supported.</p>
          </note>")
   tags: option<tagFilter>,
-  @ocaml.doc("<p>A list of event type category codes (<code>issue</code>, <code>scheduledChange</code>,
-         or <code>accountNotification</code>).</p>")
+  @ocaml.doc("<p>A list of event type category codes. Possible values are
+<code>issue</code>, <code>accountNotification</code>, or <code>scheduledChange</code>. Currently,
+the <code>investigation</code> value isn't supported at this time.</p>")
   eventTypeCategories: option<eventTypeCategoryList2>,
   @ocaml.doc("<p>A list of entity identifiers, such as EC2 instance IDs (<code>i-34ab692e</code>) or EBS
          volumes (<code>vol-426ab23e</code>).</p>")
@@ -462,11 +484,11 @@ type eventFilter = {
   endTimes: option<dateTimeRangeList>,
   @ocaml.doc("<p>A list of dates and times that the event began.</p>")
   startTimes: option<dateTimeRangeList>,
-  @ocaml.doc("<p>A list of AWS Availability Zones.</p>")
+  @ocaml.doc("<p>A list of Amazon Web Services Availability Zones.</p>")
   availabilityZones: option<availabilityZones>,
-  @ocaml.doc("<p>A list of AWS Regions.</p>") regions: option<regionList>,
+  @ocaml.doc("<p>A list of Amazon Web Services Regions.</p>") regions: option<regionList>,
   @ocaml.doc(
-    "<p>The AWS services associated with the event. For example, <code>EC2</code>, <code>RDS</code>.</p>"
+    "<p>The Amazon Web Services services associated with the event. For example, <code>EC2</code>, <code>RDS</code>.</p>"
   )
   services: option<serviceList>,
   @ocaml.doc("<p>A list of unique identifiers for event types. For example, <code>\"AWS_EC2_SYSTEM_MAINTENANCE_EVENT\",\"AWS_RDS_MAINTENANCE_SCHEDULED\".</code>
@@ -477,8 +499,9 @@ type eventFilter = {
   eventArns: option<eventArnList>,
 }
 type entityList = array<affectedEntity>
-@ocaml.doc("<p>The values to use to filter results from the <a href=\"https://docs.aws.amazon.com/health/latest/APIReference/API_EntityFilter.html\">EntityFilter</a>
-         operation.</p>")
+@ocaml.doc(
+  "<p>The values to use to filter results from the <a href=\"https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedEntities.html\">DescribeAffectedEntities</a> operation.</p>"
+)
 type entityFilter = {
   @ocaml.doc("<p>A list of entity status codes (<code>IMPAIRED</code>, <code>UNIMPAIRED</code>, or
             <code>UNKNOWN</code>).</p>")
@@ -499,46 +522,45 @@ type entityFilter = {
 }
 type describeEventDetailsSuccessfulSet = array<eventDetails>
 type describeEventDetailsForOrganizationSuccessfulSet = array<organizationEventDetails>
-@ocaml.doc("<fullname>AWS Health</fullname>
+@ocaml.doc("<fullname>Health</fullname>
       
-         <p>The AWS Health API provides programmatic access to the AWS Health information that
-         appears in the <a href=\"https://phd.aws.amazon.com/phd/home#/\">AWS Personal Health Dashboard</a>. You
-         can use the API operations to get information about AWS Health events that affect your
-         AWS services and resources.</p>
+         <p>The Health API provides programmatic access to the Health information that
+         appears in the <a href=\"https://phd.aws.amazon.com/phd/home#/\">Personal Health Dashboard</a>. You
+         can use the API operations to get information about events that might affect your Amazon Web Services services and resources.</p>
          <note>
             <ul>
                <li>
-                  <p>You must have a Business or Enterprise Support plan from <a href=\"http://aws.amazon.com/premiumsupport/\">AWS Support</a> to use the
-                  AWS Health API. If you call the AWS Health API from an AWS account that
-                  doesn't have a Business or Enterprise Support plan, you receive a
+                  <p>You must have a Business, Enterprise On-Ramp, or Enterprise Support plan from <a href=\"http://aws.amazon.com/premiumsupport/\">Amazon Web Services Support</a> to use the Health
+                  API. If you call the Health API from an Amazon Web Services account that
+                  doesn't have a Business, Enterprise On-Ramp, or Enterprise Support plan, you receive a
                      <code>SubscriptionRequiredException</code> error.</p>
                </li>
                <li>
-                  <p>You can use the AWS Health endpoint health.us-east-1.amazonaws.com (HTTPS) to
-                  call the AWS Health API operations. AWS Health supports a multi-Region
+                  <p>You can use the Health endpoint health.us-east-1.amazonaws.com (HTTPS) to
+                  call the Health API operations. Health supports a multi-Region
                   application architecture and has two regional endpoints in an active-passive
                   configuration. You can use the high availability endpoint example to determine
-                  which AWS Region is active, so that you can get the latest information from the
-                  API. For more information, see <a href=\"https://docs.aws.amazon.com/health/latest/ug/health-api.html\">Accessing the AWS Health API</a> in the
-                     <i>AWS Health User Guide</i>.</p>
+                  which Amazon Web Services Region is active, so that you can get the latest information from the
+                  API. For more information, see <a href=\"https://docs.aws.amazon.com/health/latest/ug/health-api.html\">Accessing the Health API</a> in the
+                     <i>Health User Guide</i>.</p>
                </li>
             </ul>
          </note>
-         <p>For authentication of requests, AWS Health uses the <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4 Signing
+         <p>For authentication of requests, Health uses the <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4 Signing
             Process</a>.</p>
-         <p>If your AWS account is part of AWS Organizations, you can use the AWS Health organizational
-         view feature. This feature provides a centralized view of AWS Health events across all
-         accounts in your organization. You can aggregate AWS Health events in real time to
+         <p>If your Amazon Web Services account is part of Organizations, you can use the Health organizational
+         view feature. This feature provides a centralized view of Health events across all
+         accounts in your organization. You can aggregate Health events in real time to
          identify accounts in your organization that are affected by an operational event or get
          notified of security vulnerabilities. Use the organizational view API operations to enable
          this feature and return event information. For more information, see <a href=\"https://docs.aws.amazon.com/health/latest/ug/aggregate-events.html\">Aggregating
-            AWS Health events</a> in the <i>AWS Health User Guide</i>.</p>
+            Health events</a> in the <i>Health User Guide</i>.</p>
          <note>
-            <p>When you use the AWS Health API operations to return AWS Health events, see the
+            <p>When you use the Health API operations to return Health events, see the
             following recommendations:</p>
             <ul>
                <li>
-                  <p>Use the <a href=\"https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html#AWSHealth-Type-Event-eventScopeCode\">eventScopeCode</a> parameter to specify whether to return AWS Health
+                  <p>Use the <a href=\"https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html#AWSHealth-Type-Event-eventScopeCode\">eventScopeCode</a> parameter to specify whether to return Health
                   events that are public or account-specific.</p>
                </li>
                <li>
@@ -551,34 +573,36 @@ type describeEventDetailsForOrganizationSuccessfulSet = array<organizationEventD
          </note>")
 module EnableHealthServiceAccessForOrganization = {
   type t
-
+  type request = {.}
+  type response = {.}
   @module("@aws-sdk/client-health") @new
-  external new: unit => t = "EnableHealthServiceAccessForOrganizationCommand"
-  let make = () => new()
+  external new: request => t = "EnableHealthServiceAccessForOrganizationCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DisableHealthServiceAccessForOrganization = {
   type t
-
+  type request = {.}
+  type response = {.}
   @module("@aws-sdk/client-health") @new
-  external new: unit => t = "DisableHealthServiceAccessForOrganizationCommand"
-  let make = () => new()
+  external new: request => t = "DisableHealthServiceAccessForOrganizationCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DescribeHealthServiceStatusForOrganization = {
   type t
-
+  type request = {.}
   type response = {
-    @ocaml.doc("<p>Information about the status of enabling or disabling AWS Health Organizational View in
-         your organization.</p>
+    @ocaml.doc("<p>Information about the status of enabling or disabling the Health organizational
+         view feature in your organization.</p>
          <p>Valid values are <code>ENABLED | DISABLED | PENDING</code>. </p>")
     healthServiceAccessStatusForOrganization: option<healthServiceAccessStatusForOrganization>,
   }
   @module("@aws-sdk/client-health") @new
-  external new: unit => t = "DescribeHealthServiceStatusForOrganizationCommand"
-  let make = () => new()
+  external new: request => t = "DescribeHealthServiceStatusForOrganizationCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -610,7 +634,7 @@ results are returned, and a <code>nextToken</code> pagination token is returned 
 retrieve the next batch of results, reissue the search request and include the returned token.
 When all results have been returned, the response does not contain a pagination token value.</p>")
     nextToken: option<nextToken>,
-    @ocaml.doc("<p>This parameter specifies if the AWS Health event is a public AWS service event or an account-specific event.</p>
+    @ocaml.doc("<p>This parameter specifies if the Health event is a public Amazon Web Services service event or an account-specific event.</p>
          <ul>
             <li>
                <p>If the <code>eventScopeCode</code> value is <code>PUBLIC</code>, then the
@@ -618,9 +642,9 @@ When all results have been returned, the response does not contain a pagination 
             </li>
             <li>
                <p>If the <code>eventScopeCode</code> value is <code>ACCOUNT_SPECIFIC</code>, then
-               the <code>affectedAccounts</code> value lists the affected AWS accounts in your
+               the <code>affectedAccounts</code> value lists the affected Amazon Web Services accounts in your
                organization. For example, if an event affects a service such as Amazon Elastic Compute Cloud and you
-               have AWS accounts that use that service, those account IDs appear in the
+               have Amazon Web Services accounts that use that service, those account IDs appear in the
                response.</p>
             </li>
             <li>
@@ -650,7 +674,7 @@ module DescribeEventsForOrganization = {
     @ocaml.doc(
       "<p>The maximum number of items to return in one batch, between 10 and 100, inclusive.</p>"
     )
-    maxResults: option<maxResults>,
+    maxResults: option<maxResultsLowerRange>,
     @ocaml.doc("<p>If the results of a search are large, only a portion of the
 results are returned, and a <code>nextToken</code> pagination token is returned in the response. To
 retrieve the next batch of results, reissue the search request and include the returned token.
@@ -855,7 +879,7 @@ module DescribeAffectedEntitiesForOrganization = {
     @ocaml.doc(
       "<p>The maximum number of items to return in one batch, between 10 and 100, inclusive.</p>"
     )
-    maxResults: option<maxResults>,
+    maxResults: option<maxResultsLowerRange>,
     @ocaml.doc("<p>If the results of a search are large, only a portion of the
 results are returned, and a <code>nextToken</code> pagination token is returned in the response. To
 retrieve the next batch of results, reissue the search request and include the returned token.

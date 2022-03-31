@@ -2978,7 +2978,7 @@ module UndeprecateDomain = {
   type request = {
     @ocaml.doc("<p>The name of the domain of the deprecated workflow type.</p>") name: domainName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-swf") @new external new: request => t = "UndeprecateDomainCommand"
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -3024,7 +3024,7 @@ module TerminateWorkflowExecution = {
     workflowId: workflowId,
     @ocaml.doc("<p>The domain of the workflow execution to terminate.</p>") domain: domainName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-swf") @new
   external new: request => t = "TerminateWorkflowExecutionCommand"
   let make = (~workflowId, ~domain, ~childPolicy=?, ~details=?, ~reason=?, ~runId=?, ()) =>
@@ -3055,7 +3055,7 @@ module SignalWorkflowExecution = {
     @ocaml.doc("<p>The name of the domain containing the workflow execution to signal.</p>")
     domain: domainName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-swf") @new external new: request => t = "SignalWorkflowExecutionCommand"
   let make = (~signalName, ~workflowId, ~domain, ~input=?, ~runId=?, ()) =>
     new({
@@ -3084,7 +3084,7 @@ module RespondActivityTaskFailed = {
          </important>")
     taskToken: taskToken,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-swf") @new
   external new: request => t = "RespondActivityTaskFailedCommand"
   let make = (~taskToken, ~details=?, ~reason=?, ()) =>
@@ -3107,7 +3107,7 @@ module RespondActivityTaskCompleted = {
          </important>")
     taskToken: taskToken,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-swf") @new
   external new: request => t = "RespondActivityTaskCompletedCommand"
   let make = (~taskToken, ~result=?, ()) => new({result: result, taskToken: taskToken})
@@ -3127,7 +3127,7 @@ module RespondActivityTaskCanceled = {
          </important>")
     taskToken: taskToken,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-swf") @new
   external new: request => t = "RespondActivityTaskCanceledCommand"
   let make = (~taskToken, ~details=?, ()) => new({details: details, taskToken: taskToken})
@@ -3143,7 +3143,7 @@ module RequestCancelWorkflowExecution = {
     @ocaml.doc("<p>The name of the domain containing the workflow execution to cancel.</p>")
     domain: domainName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-swf") @new
   external new: request => t = "RequestCancelWorkflowExecutionCommand"
   let make = (~workflowId, ~domain, ~runId=?, ()) =>
@@ -3179,7 +3179,7 @@ module RecordActivityTaskHeartbeat = {
 module DeprecateDomain = {
   type t
   type request = {@ocaml.doc("<p>The name of the domain to deprecate.</p>") name: domainName}
-
+  type response = {.}
   @module("@aws-sdk/client-swf") @new external new: request => t = "DeprecateDomainCommand"
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -3192,7 +3192,7 @@ module UntagResource = {
     tagKeys: resourceTagKeyList,
     @ocaml.doc("<p>The Amazon Resource Name (ARN) for the Amazon SWF domain.</p>") resourceArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-swf") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -3205,7 +3205,7 @@ module UndeprecateWorkflowType = {
     workflowType: workflowType,
     @ocaml.doc("<p>The name of the domain of the deprecated workflow type.</p>") domain: domainName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-swf") @new external new: request => t = "UndeprecateWorkflowTypeCommand"
   let make = (~workflowType, ~domain, ()) => new({workflowType: workflowType, domain: domain})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -3217,7 +3217,7 @@ module UndeprecateActivityType = {
     @ocaml.doc("<p>The activity type to undeprecate.</p>") activityType: activityType,
     @ocaml.doc("<p>The name of the domain of the deprecated activity type.</p>") domain: domainName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-swf") @new external new: request => t = "UndeprecateActivityTypeCommand"
   let make = (~activityType, ~domain, ()) => new({activityType: activityType, domain: domain})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -3460,7 +3460,7 @@ module RegisterWorkflowType = {
     @ocaml.doc("<p>The name of the domain in which to register the workflow type.</p>")
     domain: domainName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-swf") @new external new: request => t = "RegisterWorkflowTypeCommand"
   let make = (
     ~version,
@@ -3561,7 +3561,7 @@ module RegisterActivityType = {
     @ocaml.doc("<p>The name of the domain in which this activity is to be registered.</p>")
     domain: domainName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-swf") @new external new: request => t = "RegisterActivityTypeCommand"
   let make = (
     ~version,
@@ -3657,7 +3657,7 @@ module DeprecateWorkflowType = {
     @ocaml.doc("<p>The name of the domain in which the workflow type is registered.</p>")
     domain: domainName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-swf") @new external new: request => t = "DeprecateWorkflowTypeCommand"
   let make = (~workflowType, ~domain, ()) => new({workflowType: workflowType, domain: domain})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -3670,7 +3670,7 @@ module DeprecateActivityType = {
     @ocaml.doc("<p>The name of the domain in which the activity type is registered.</p>")
     domain: domainName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-swf") @new external new: request => t = "DeprecateActivityTypeCommand"
   let make = (~activityType, ~domain, ()) => new({activityType: activityType, domain: domain})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -3871,7 +3871,7 @@ module TagResource = {
     tags: resourceTagList,
     @ocaml.doc("<p>The Amazon Resource Name (ARN) for the Amazon SWF domain.</p>") resourceArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-swf") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -3903,7 +3903,7 @@ module RegisterDomain = {
       not <i>be</i> the literal string <code>arn</code>.</p>")
     name: domainName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-swf") @new external new: request => t = "RegisterDomainCommand"
   let make = (~workflowExecutionRetentionPeriodInDays, ~name, ~tags=?, ~description=?, ()) =>
     new({
@@ -4402,7 +4402,7 @@ module RespondDecisionTaskCompleted = {
          </important>")
     taskToken: taskToken,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-swf") @new
   external new: request => t = "RespondDecisionTaskCompletedCommand"
   let make = (~taskToken, ~executionContext=?, ~decisions=?, ()) =>

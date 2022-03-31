@@ -22,6 +22,14 @@ type string_ = string
 type stackArn = string
 type resourceType = [@as("CFN_STACK") #CFN_STACK]
 type resourceSpecifier = string
+type resourceGroupState = [
+  | @as("UPDATE_FAILED") #UPDATE_FAILED
+  | @as("UPDATE_COMPLETE") #UPDATE_COMPLETE
+  | @as("UPDATING") #UPDATING
+  | @as("CREATE_FAILED") #CREATE_FAILED
+  | @as("CREATE_COMPLETE") #CREATE_COMPLETE
+  | @as("CREATING") #CREATING
+]
 type nextToken = string
 type name = string
 type maxResults = int
@@ -38,13 +46,35 @@ type applicationId = string
 type applicationArn = string
 type tags = Js.Dict.t<tagValue>
 type tagKeys = array<tagKey>
-@ocaml.doc("<p>Information about the resource.</p>")
+@ocaml.doc("<p>The information about the resource.</p>")
 type resourceInfo = {
   @ocaml.doc("<p>The Amazon resource name (ARN) that specifies the resource across services.</p>")
   arn: option<stackArn>,
   @ocaml.doc("<p>The name of the resource.</p>") name: option<resourceSpecifier>,
 }
-@ocaml.doc("<p>Summary of a Service Catalog AppRegistry attribute group.</p>")
+@ocaml.doc("<p>The information about the resource group integration.</p>")
+type resourceGroup = {
+  @ocaml.doc(
+    "<p>The error message that generates when the propagation process for the resource group fails.</p>"
+  )
+  errorMessage: option<string_>,
+  @ocaml.doc("<p>The Amazon resource name (ARN) of the resource group.</p>") arn: option<arn>,
+  @ocaml.doc("<p>The state of the propagation process for the resource group. The states includes:</p>
+         <p>
+            <code>CREATING </code>if the resource group is in the process of being created.</p>
+         <p>
+            <code>CREATE_COMPLETE</code> if the resource group was created successfully.</p>
+         <p>
+            <code>CREATE_FAILED</code> if the resource group failed to be created.</p>
+         <p>
+            <code>UPDATING</code> if the resource group is in the process of being updated.</p>
+         <p>
+            <code>UPDATE_COMPLETE</code> if the resource group updated successfully.</p>
+         <p>
+            <code>UPDATE_FAILED</code> if the resource group could not update successfully.</p>")
+  state: option<resourceGroupState>,
+}
+@ocaml.doc("<p>Summary of a Amazon Web Services Service Catalog AppRegistry attribute group.</p>")
 type attributeGroupSummary = {
   @ocaml.doc(
     "<p>The ISO-8601 formatted timestamp of the moment the attribute group was last updated. This time is the same as the creationTime for a newly created attribute group.</p>"
@@ -65,7 +95,7 @@ type attributeGroupSummary = {
   id: option<attributeGroupId>,
 }
 type attributeGroupIds = array<attributeGroupId>
-@ocaml.doc("<p>Summary of a Service Catalog AppRegistry application.</p>")
+@ocaml.doc("<p>Summary of a Amazon Web Services Service Catalog AppRegistry application.</p>")
 type applicationSummary = {
   @ocaml.doc(
     "<p> The ISO-8601 formatted timestamp of the moment when the application was last updated.</p>"
@@ -87,9 +117,19 @@ type applicationSummary = {
   @ocaml.doc("<p>The identifier of the application.</p>") id: option<applicationId>,
 }
 type resources = array<resourceInfo>
+@ocaml.doc("<p>The service integration information about the resource.</p>")
+type resourceIntegrations = {
+  @ocaml.doc("<p>The information about the integration of Resource Groups.</p>")
+  resourceGroup: option<resourceGroup>,
+}
+@ocaml.doc("<p> The information about the service integration.</p>")
+type integrations = {
+  @ocaml.doc("<p> The information about the resource group integration.</p>")
+  resourceGroup: option<resourceGroup>,
+}
 type attributeGroupSummaries = array<attributeGroupSummary>
 @ocaml.doc(
-  "<p>Represents a Service Catalog AppRegistry attribute group that is rich metadata which describes an application and its components.</p>"
+  "<p>Represents a Amazon Web Services Service Catalog AppRegistry attribute group that is rich metadata which describes an application and its components.</p>"
 )
 type attributeGroup = {
   @ocaml.doc("<p>Key-value pairs you can use to associate with the attribute group.</p>")
@@ -113,7 +153,7 @@ type attributeGroup = {
   id: option<attributeGroupId>,
 }
 type applicationSummaries = array<applicationSummary>
-@ocaml.doc("<p>Represents a Service Catalog AppRegistry application that is the top-level node in a hierarchy of related
+@ocaml.doc("<p>Represents a Amazon Web Services Service Catalog AppRegistry application that is the top-level node in a hierarchy of related
        cloud resource abstractions.</p>")
 type application = {
   @ocaml.doc("<p>Key-value pairs you can use to associate with the application.</p>")
@@ -137,14 +177,24 @@ type application = {
   arn: option<applicationArn>,
   @ocaml.doc("<p>The identifier of the application.</p>") id: option<applicationId>,
 }
+@ocaml.doc("<p> The information about the resource.</p>")
+type resource = {
+  @ocaml.doc("<p>The service integration information about the resource.
+     </p>")
+  integrations: option<resourceIntegrations>,
+  @ocaml.doc("<p>The time the resource was associated with the application.</p>")
+  associationTime: option<timestamp_>,
+  @ocaml.doc("<p>The Amazon resource name (ARN) of the resource.</p>") arn: option<stackArn>,
+  @ocaml.doc("<p>The name of the resource.</p>") name: option<resourceSpecifier>,
+}
 @ocaml.doc(
-  "<p> AWS Service Catalog AppRegistry enables organizations to understand the application context of their AWS resources. AppRegistry provides a repository of your applications, their resources, and the application metadata that you use within your enterprise.</p>"
+  "<p> Amazon Web Services Service Catalog AppRegistry enables organizations to understand the application context of their Amazon Web Services resources. AppRegistry provides a repository of your applications, their resources, and the application metadata that you use within your enterprise.</p>"
 )
 module SyncResource = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>An entity you can work with and specify with a name or ID. Examples include an Amazon EC2 instance, an AWS CloudFormation stack, or an Amazon S3 bucket.</p>"
+      "<p>An entity you can work with and specify with a name or ID. Examples include an Amazon EC2 instance, an Amazon Web Services CloudFormation stack, or an Amazon S3 bucket.</p>"
     )
     resource: resourceSpecifier,
     @ocaml.doc("<p>The type of resource of which the application will be associated.</p>")
@@ -266,7 +316,7 @@ module UntagResource = {
     @ocaml.doc("<p>The Amazon resource name (ARN) that specifies the resource.</p>")
     resourceArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-servicecatalog") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -279,7 +329,7 @@ module TagResource = {
     @ocaml.doc("<p>The Amazon resource name (ARN) that specifies the resource.</p>")
     resourceArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-servicecatalog") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -359,42 +409,6 @@ module GetAttributeGroup = {
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "GetAttributeGroupCommand"
   let make = (~attributeGroup, ()) => new({attributeGroup: attributeGroup})
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
-module GetApplication = {
-  type t
-  type request = {
-    @ocaml.doc("<p>The name or ID of the application.</p>") application: applicationSpecifier,
-  }
-  type response = {
-    @ocaml.doc("<p>Key-value pairs associated with the application.</p>") tags: option<tags>,
-    @ocaml.doc(
-      "<p>The number of top-level resources that were registered as part of this application.</p>"
-    )
-    associatedResourceCount: option<associationCount>,
-    @ocaml.doc(
-      "<p>The ISO-8601 formatted timestamp of the moment when the application was last updated.</p>"
-    )
-    lastUpdateTime: option<timestamp_>,
-    @ocaml.doc(
-      "<p>The ISO-8601 formatted timestamp of the moment when the application was created.</p>"
-    )
-    creationTime: option<timestamp_>,
-    @ocaml.doc("<p>The description of the application.</p>") description: option<description>,
-    @ocaml.doc(
-      "<p>The name of the application. The name must be unique in the region in which you are creating the application.</p>"
-    )
-    name: option<name>,
-    @ocaml.doc(
-      "<p>The Amazon resource name (ARN) that specifies the application across services.</p>"
-    )
-    arn: option<applicationArn>,
-    @ocaml.doc("<p>The identifier of the application.</p>") id: option<applicationId>,
-  }
-  @module("@aws-sdk/client-servicecatalog") @new
-  external new: request => t = "GetApplicationCommand"
-  let make = (~application, ()) => new({application: application})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -566,6 +580,46 @@ module ListApplications = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module GetApplication = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The name or ID of the application.</p>") application: applicationSpecifier,
+  }
+  type response = {
+    @ocaml.doc(
+      "<p>The information about the integration of the application with other services, such as Resource Groups.</p>"
+    )
+    integrations: option<integrations>,
+    @ocaml.doc("<p>Key-value pairs associated with the application.</p>") tags: option<tags>,
+    @ocaml.doc(
+      "<p>The number of top-level resources that were registered as part of this application.</p>"
+    )
+    associatedResourceCount: option<associationCount>,
+    @ocaml.doc(
+      "<p>The ISO-8601 formatted timestamp of the moment when the application was last updated.</p>"
+    )
+    lastUpdateTime: option<timestamp_>,
+    @ocaml.doc(
+      "<p>The ISO-8601 formatted timestamp of the moment when the application was created.</p>"
+    )
+    creationTime: option<timestamp_>,
+    @ocaml.doc("<p>The description of the application.</p>") description: option<description>,
+    @ocaml.doc(
+      "<p>The name of the application. The name must be unique in the region in which you are creating the application.</p>"
+    )
+    name: option<name>,
+    @ocaml.doc(
+      "<p>The Amazon resource name (ARN) that specifies the application across services.</p>"
+    )
+    arn: option<applicationArn>,
+    @ocaml.doc("<p>The identifier of the application.</p>") id: option<applicationId>,
+  }
+  @module("@aws-sdk/client-servicecatalog") @new
+  external new: request => t = "GetApplicationCommand"
+  let make = (~application, ()) => new({application: application})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module CreateAttributeGroup = {
   type t
   type request = {
@@ -624,5 +678,24 @@ module CreateApplication = {
   external new: request => t = "CreateApplicationCommand"
   let make = (~clientToken, ~name, ~tags=?, ~description=?, ()) =>
     new({clientToken: clientToken, tags: tags, description: description, name: name})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module GetAssociatedResource = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The name or ID of the resource associated with the application.</p>")
+    resource: resourceSpecifier,
+    @ocaml.doc("<p>The type of resource associated with the application.</p>")
+    resourceType: resourceType,
+    @ocaml.doc("<p>The name or ID of the application.</p>") application: applicationSpecifier,
+  }
+  type response = {
+    @ocaml.doc("<p>The resource associated with the application.</p>") resource: option<resource>,
+  }
+  @module("@aws-sdk/client-servicecatalog") @new
+  external new: request => t = "GetAssociatedResourceCommand"
+  let make = (~resource, ~resourceType, ~application, ()) =>
+    new({resource: resource, resourceType: resourceType, application: application})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

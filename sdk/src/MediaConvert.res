@@ -19,15 +19,15 @@ type __stringPatternWS = string
 type __stringPatternW = string
 type __stringPatternSNSignalProcessingNotificationNS = string
 type __stringPatternSNManifestConfirmConditionNotificationNS = string
-type __stringPatternS3MM2PPWWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE = string
-type __stringPatternS3MM2PPMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLOOGGGGaAHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLOOGGGGaA = string
+type __stringPatternS3MM2PPWWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSSOOGGGGaAHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSSOOGGGGaA = string
+type __stringPatternS3MM2PPMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLOOGGGGaAAATTMMOOSSHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLOOGGGGaAAATTMMOOSS = string
 type __stringPatternS3ASSETMAPXml = string
 type __stringPatternS3 = string
 type __stringPatternIdentityAZaZ26AZaZ09163 = string
 type __stringPatternHttpsKantarmediaCom = string
 type __stringPatternHttps = string
 type __stringPatternDD = string
-type __stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912 = string
+type __stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932 = string
 type __stringPatternArnAwsUsGovAcm = string
 type __stringPatternAZaZ23AZaZ = string
 type __stringPatternAZaZ0932 = string
@@ -39,6 +39,7 @@ type __stringPattern01D20305D205D = string
 type __stringPattern010920405090509092 = string
 type __stringPattern = string
 type __stringMin9Max19PatternAZ26EastWestCentralNorthSouthEastWest1912 = string
+type __stringMin6Max8Pattern09aFAF609aFAF2 = string
 type __stringMin3Max3PatternAZaZ3 = string
 type __stringMin3Max3Pattern1809aFAF09aEAE = string
 type __stringMin36Max36Pattern09aFAF809aFAF409aFAF409aFAF409aFAF12 = string
@@ -51,7 +52,8 @@ type __stringMin1Max256 = string
 type __stringMin1Max20 = string
 type __stringMin1Max100000 = string
 type __stringMin16Max24PatternAZaZ0922AZaZ0916 = string
-type __stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTT = string
+type __stringMin14PatternS3XmlXMLHttpsXmlXML = string
+type __stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTT = string
 type __stringMin14PatternS3Mov09PngHttpsMov09Png = string
 type __stringMin14PatternS3BmpBMPPngPNGTgaTGAHttpsBmpBMPPngPNGTgaTGA = string
 type __stringMin14PatternS3BmpBMPPngPNGHttpsBmpBMPPngPNG = string
@@ -70,18 +72,22 @@ type __integerMinNegative1Max10 = int
 type __integerMinNegative180Max180 = int
 type __integerMinNegative1000Max1000 = int
 type __integerMin96Max600 = int
+type __integerMin8Max4096 = int
+type __integerMin8Max12 = int
 type __integerMin8000Max96000 = int
 type __integerMin8000Max192000 = int
 type __integerMin64000Max640000 = int
 type __integerMin6000Max1024000 = int
+type __integerMin4Max12 = int
 type __integerMin48000Max48000 = int
 type __integerMin3Max15 = int
-type __integerMin384000Max768000 = int
+type __integerMin384000Max1024000 = int
 type __integerMin32Max8192 = int
 type __integerMin32Max8182 = int
 type __integerMin32000Max48000 = int
 type __integerMin32000Max384000 = int
 type __integerMin32000Max192000 = int
+type __integerMin2Max4096 = int
 type __integerMin2Max2147483647 = int
 type __integerMin25Max2000 = int
 type __integerMin25Max10000 = int
@@ -90,11 +96,14 @@ type __integerMin22050Max48000 = int
 type __integerMin1Max64 = int
 type __integerMin1Max60000 = int
 type __integerMin1Max6 = int
+type __integerMin1Max512 = int
+type __integerMin1Max4096 = int
 type __integerMin1Max4 = int
 type __integerMin1Max32 = int
 type __integerMin1Max31 = int
 type __integerMin1Max2147483647 = int
 type __integerMin1Max2147483640 = int
+type __integerMin1Max2048 = int
 type __integerMin1Max20 = int
 type __integerMin1Max2 = int
 type __integerMin1Max17895697 = int
@@ -125,6 +134,7 @@ type __integerMin0Max50000 = int
 type __integerMin0Max500 = int
 type __integerMin0Max47185920 = int
 type __integerMin0Max4194303 = int
+type __integerMin0Max4000 = int
 type __integerMin0Max4 = int
 type __integerMin0Max3600 = int
 type __integerMin0Max30000 = int
@@ -153,9 +163,148 @@ type __doubleMin0Max2147483647 = float
 type __doubleMin0Max1 = float
 type __doubleMin0 = float
 @ocaml.doc(
-  "Choose Enabled (ENABLED) to have MediaConvert use the font style, color, and position information from the captions source in the input. Keep the default value, Disabled (DISABLED), for simplified output captions."
+  "The best way to set up adaptive quantization is to keep the default value, Auto (AUTO), for the setting Adaptive quantization (adaptiveQuantization). When you do so, MediaConvert automatically applies the best types of quantization for your video content. Include this setting in your JSON job specification only when you choose to change the default value for Adaptive quantization. For this setting, keep the default value, Enabled (ENABLED), to adjust quantization within each frame based on temporal variation of content complexity. When you enable this feature, the encoder uses fewer bits on areas of the frame that aren't moving and uses more bits on complex objects with sharp edges that move a lot. For example, this feature improves the readability of text tickers on newscasts and scoreboards on sports matches. Enabling this feature will almost always improve your video quality. Note, though, that this feature doesn't take into account where the viewer's attention is likely to be. If viewers are likely to be focusing their attention on a part of the screen that doesn't have moving objects with sharp edges, such as sports athletes' faces, you might choose to disable this feature. Related setting: When you enable temporal adaptive quantization, adjust the strength of the filter with the setting Adaptive quantization (adaptiveQuantization)."
+)
+type xavcTemporalAdaptiveQuantization = [@as("ENABLED") #ENABLED | @as("DISABLED") #DISABLED]
+@ocaml.doc(
+  "The best way to set up adaptive quantization is to keep the default value, Auto (AUTO), for the setting Adaptive quantization (adaptiveQuantization). When you do so, MediaConvert automatically applies the best types of quantization for your video content. Include this setting in your JSON job specification only when you choose to change the default value for Adaptive quantization. For this setting, keep the default value, Enabled (ENABLED), to adjust quantization within each frame based on spatial variation of content complexity. When you enable this feature, the encoder uses fewer bits on areas that can sustain more distortion with no noticeable visual degradation and uses more bits on areas where any small distortion will be noticeable. For example, complex textured blocks are encoded with fewer bits and smooth textured blocks are encoded with more bits. Enabling this feature will almost always improve your video quality. Note, though, that this feature doesn't take into account where the viewer's attention is likely to be. If viewers are likely to be focusing their attention on a part of the screen with a lot of complex texture, you might choose to disable this feature. Related setting: When you enable spatial adaptive quantization, set the value for Adaptive quantization (adaptiveQuantization) depending on your content. For homogeneous content, such as cartoons and video games, set it to Low. For content with a wider variety of textures, set it to High or Higher."
+)
+type xavcSpatialAdaptiveQuantization = [@as("ENABLED") #ENABLED | @as("DISABLED") #DISABLED]
+@ocaml.doc(
+  "Ignore this setting unless your input frame rate is 23.976 or 24 frames per second (fps). Enable slow PAL to create a 25 fps output by relabeling the video frames and resampling your audio. Note that enabling this setting will slightly reduce the duration of your video. Related settings: You must also set Frame rate to 25. In your JSON job specification, set (framerateControl) to (SPECIFIED), (framerateNumerator) to 25 and (framerateDenominator) to 1."
+)
+type xavcSlowPal = [@as("ENABLED") #ENABLED | @as("DISABLED") #DISABLED]
+@ocaml.doc(
+  "Specify the XAVC profile for this output. For more information, see the Sony documentation at https://www.xavc-info.org/. Note that MediaConvert doesn't support the interlaced video XAVC operating points for XAVC_HD_INTRA_CBG. To create an interlaced XAVC output, choose the profile XAVC_HD."
+)
+type xavcProfile = [
+  | @as("XAVC_4K") #XAVC_4K
+  | @as("XAVC_HD") #XAVC_HD
+  | @as("XAVC_4K_INTRA_VBR") #XAVC_4K_INTRA_VBR
+  | @as("XAVC_4K_INTRA_CBG") #XAVC_4K_INTRA_CBG
+  | @as("XAVC_HD_INTRA_CBG") #XAVC_HD_INTRA_CBG
+]
+@ocaml.doc(
+  "Choose the scan line type for the output. Keep the default value, Progressive (PROGRESSIVE) to create a progressive output, regardless of the scan type of your input. Use Top field first (TOP_FIELD) or Bottom field first (BOTTOM_FIELD) to create an output that's interlaced with the same field polarity throughout. Use Follow, default top (FOLLOW_TOP_FIELD) or Follow, default bottom (FOLLOW_BOTTOM_FIELD) to produce outputs with the same field polarity as the source. For jobs that have multiple inputs, the output field polarity might change over the course of the output. Follow behavior depends on the input scan type. If the source is interlaced, the output will be interlaced with the same polarity as the source. If the source is progressive, the output will be interlaced with top field bottom field first, depending on which of the Follow options you choose."
+)
+type xavcInterlaceMode = [
+  | @as("FOLLOW_BOTTOM_FIELD") #FOLLOW_BOTTOM_FIELD
+  | @as("FOLLOW_TOP_FIELD") #FOLLOW_TOP_FIELD
+  | @as("BOTTOM_FIELD") #BOTTOM_FIELD
+  | @as("TOP_FIELD") #TOP_FIELD
+  | @as("PROGRESSIVE") #PROGRESSIVE
+]
+@ocaml.doc(
+  "Ignore this setting unless you set Frame rate (framerateNumerator divided by framerateDenominator) to 29.970. If your input framerate is 23.976, choose Hard (HARD). Otherwise, keep the default value None (NONE). For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/working-with-telecine-and-inverse-telecine.html."
+)
+type xavcHdProfileTelecine = [@as("HARD") #HARD | @as("NONE") #NONE]
+@ocaml.doc(
+  "Optional. Use Quality tuning level (qualityTuningLevel) to choose how you want to trade off encoding speed for output video quality. The default behavior is faster, lower quality, single-pass encoding."
+)
+type xavcHdProfileQualityTuningLevel = [
+  | @as("MULTI_PASS_HQ") #MULTI_PASS_HQ
+  | @as("SINGLE_PASS_HQ") #SINGLE_PASS_HQ
+  | @as("SINGLE_PASS") #SINGLE_PASS
+]
+@ocaml.doc(
+  "Specify the XAVC HD (Long GOP) Bitrate Class to set the bitrate of your output. Outputs of the same class have similar image quality over the operating points that are valid for that class."
+)
+type xavcHdProfileBitrateClass = [
+  | @as("BITRATE_CLASS_50") #BITRATE_CLASS_50
+  | @as("BITRATE_CLASS_35") #BITRATE_CLASS_35
+  | @as("BITRATE_CLASS_25") #BITRATE_CLASS_25
+]
+@ocaml.doc(
+  "Specify the XAVC Intra HD (CBG) Class to set the bitrate of your output. Outputs of the same class have similar image quality over the operating points that are valid for that class."
+)
+type xavcHdIntraCbgProfileClass = [
+  | @as("CLASS_200") #CLASS_200
+  | @as("CLASS_100") #CLASS_100
+  | @as("CLASS_50") #CLASS_50
+]
+@ocaml.doc(
+  "Specify whether the encoder uses B-frames as reference frames for other pictures in the same GOP. Choose Allow (ENABLED) to allow the encoder to use B-frames as reference frames. Choose Don't allow (DISABLED) to prevent the encoder from using B-frames as reference frames."
+)
+type xavcGopBReference = [@as("ENABLED") #ENABLED | @as("DISABLED") #DISABLED]
+@ocaml.doc(
+  "Choose the method that you want MediaConvert to use when increasing or decreasing the frame rate. We recommend using drop duplicate (DUPLICATE_DROP) for numerically simple conversions, such as 60 fps to 30 fps. For numerically complex conversions, you can use interpolate (INTERPOLATE) to avoid stutter. This results in a smooth picture, but might introduce undesirable video artifacts. For complex frame rate conversions, especially if your source video has already been converted from its original cadence, use FrameFormer (FRAMEFORMER) to do motion-compensated interpolation. FrameFormer chooses the best conversion method frame by frame. Note that using FrameFormer increases the transcoding time and incurs a significant add-on cost."
+)
+type xavcFramerateConversionAlgorithm = [
+  | @as("FRAMEFORMER") #FRAMEFORMER
+  | @as("INTERPOLATE") #INTERPOLATE
+  | @as("DUPLICATE_DROP") #DUPLICATE_DROP
+]
+@ocaml.doc(
+  "If you are using the console, use the Frame rate setting to specify the frame rate for this output. If you want to keep the same frame rate as the input video, choose Follow source. If you want to do frame rate conversion, choose a frame rate from the dropdown list. The framerates shown in the dropdown list are decimal approximations of fractions. If you are creating your transcoding job specification as a JSON file without the console, use FramerateControl to specify which value the service uses for the frame rate for this output. Choose INITIALIZE_FROM_SOURCE if you want the service to use the frame rate from the input. Choose SPECIFIED if you want the service to use the frame rate that you specify in the settings FramerateNumerator and FramerateDenominator."
+)
+type xavcFramerateControl = [
+  | @as("SPECIFIED") #SPECIFIED
+  | @as("INITIALIZE_FROM_SOURCE") #INITIALIZE_FROM_SOURCE
+]
+@ocaml.doc(
+  "The best way to set up adaptive quantization is to keep the default value, Auto (AUTO), for the setting Adaptive quantization (XavcAdaptiveQuantization). When you do so, MediaConvert automatically applies the best types of quantization for your video content. Include this setting in your JSON job specification only when you choose to change the default value for Adaptive quantization. Enable this setting to have the encoder reduce I-frame pop. I-frame pop appears as a visual flicker that can arise when the encoder saves bits by copying some macroblocks many times from frame to frame, and then refreshes them at the I-frame. When you enable this setting, the encoder updates these macroblocks slightly more often to smooth out the flicker. This setting is disabled by default. Related setting: In addition to enabling this setting, you must also set Adaptive quantization (adaptiveQuantization) to a value other than Off (OFF) or Auto (AUTO). Use Adaptive quantization to adjust the degree of smoothing that Flicker adaptive quantization provides."
+)
+type xavcFlickerAdaptiveQuantization = [@as("ENABLED") #ENABLED | @as("DISABLED") #DISABLED]
+@ocaml.doc(
+  "Optional. Choose a specific entropy encoding mode only when you want to override XAVC recommendations. If you choose the value auto, MediaConvert uses the mode that the XAVC file format specifies given this output's operating point."
+)
+type xavcEntropyEncoding = [@as("CAVLC") #CAVLC | @as("CABAC") #CABAC | @as("AUTO") #AUTO]
+@ocaml.doc(
+  "Keep the default value, Auto (AUTO), for this setting to have MediaConvert automatically apply the best types of quantization for your video content. When you want to apply your quantization settings manually, you must set Adaptive quantization (adaptiveQuantization) to a value other than Auto (AUTO). Use this setting to specify the strength of any adaptive quantization filters that you enable. If you don't want MediaConvert to do any adaptive quantization in this transcode, set Adaptive quantization to Off (OFF). Related settings: The value that you choose here applies to the following settings: Flicker adaptive quantization (flickerAdaptiveQuantization), Spatial adaptive quantization (spatialAdaptiveQuantization), and Temporal adaptive quantization (temporalAdaptiveQuantization)."
+)
+type xavcAdaptiveQuantization = [
+  | @as("MAX") #MAX
+  | @as("HIGHER") #HIGHER
+  | @as("HIGH") #HIGH
+  | @as("MEDIUM") #MEDIUM
+  | @as("LOW") #LOW
+  | @as("AUTO") #AUTO
+  | @as("OFF") #OFF
+]
+@ocaml.doc(
+  "Optional. Use Quality tuning level (qualityTuningLevel) to choose how you want to trade off encoding speed for output video quality. The default behavior is faster, lower quality, single-pass encoding."
+)
+type xavc4kProfileQualityTuningLevel = [
+  | @as("MULTI_PASS_HQ") #MULTI_PASS_HQ
+  | @as("SINGLE_PASS_HQ") #SINGLE_PASS_HQ
+  | @as("SINGLE_PASS") #SINGLE_PASS
+]
+@ocaml.doc(
+  "Specify the codec profile for this output. Choose High, 8-bit, 4:2:0 (HIGH) or High, 10-bit, 4:2:2 (HIGH_422). These profiles are specified in ITU-T H.264."
+)
+type xavc4kProfileCodecProfile = [@as("HIGH_422") #HIGH_422 | @as("HIGH") #HIGH]
+@ocaml.doc(
+  "Specify the XAVC 4k (Long GOP) Bitrate Class to set the bitrate of your output. Outputs of the same class have similar image quality over the operating points that are valid for that class."
+)
+type xavc4kProfileBitrateClass = [
+  | @as("BITRATE_CLASS_200") #BITRATE_CLASS_200
+  | @as("BITRATE_CLASS_140") #BITRATE_CLASS_140
+  | @as("BITRATE_CLASS_100") #BITRATE_CLASS_100
+]
+@ocaml.doc(
+  "Specify the XAVC Intra 4k (VBR) Class to set the bitrate of your output. Outputs of the same class have similar image quality over the operating points that are valid for that class."
+)
+type xavc4kIntraVbrProfileClass = [
+  | @as("CLASS_480") #CLASS_480
+  | @as("CLASS_300") #CLASS_300
+  | @as("CLASS_100") #CLASS_100
+]
+@ocaml.doc(
+  "Specify the XAVC Intra 4k (CBG) Class to set the bitrate of your output. Outputs of the same class have similar image quality over the operating points that are valid for that class."
+)
+type xavc4kIntraCbgProfileClass = [
+  | @as("CLASS_480") #CLASS_480
+  | @as("CLASS_300") #CLASS_300
+  | @as("CLASS_100") #CLASS_100
+]
+@ocaml.doc(
+  "Set Style passthrough (StylePassthrough) to ENABLED to use the available style, color, and position information from your input captions. MediaConvert uses default settings for any missing style and position information in your input captions. Set Style passthrough to DISABLED, or leave blank, to ignore the style and position information from your input captions and use simplified output captions."
 )
 type webvttStylePassthrough = [@as("DISABLED") #DISABLED | @as("ENABLED") #ENABLED]
+@ocaml.doc(
+  "Set Accessibility subtitles (Accessibility) to Enabled (ENABLED) if the ISMC or WebVTT captions track is intended to provide accessibility for people who are deaf or hard of hearing. When you enable this feature, MediaConvert adds the following attributes under EXT-X-MEDIA in the HLS or CMAF manifest for this track: CHARACTERISTICS=\"public.accessibility.describes-spoken-dialog,public.accessibility.describes-music-and-sound\" and AUTOSELECT=\"YES\". Keep the default value, Disabled (DISABLED), if the captions track is not intended to provide such accessibility. MediaConvert will not add the above attributes."
+)
+type webvttAccessibilitySubs = [@as("ENABLED") #ENABLED | @as("DISABLED") #DISABLED]
 @ocaml.doc(
   "The service defaults to using RIFF for WAV outputs. If your output audio is likely to exceed 4 GB in file size, or if you otherwise need the extended support of the RF64 format, set your output WAV file format to RF64."
 )
@@ -232,6 +381,7 @@ type vp8FramerateControl = [
 type videoTimecodeInsertion = [@as("PIC_TIMING_SEI") #PIC_TIMING_SEI | @as("DISABLED") #DISABLED]
 @ocaml.doc("Type of video codec")
 type videoCodec = [
+  | @as("XAVC") #XAVC
   | @as("VP9") #VP9
   | @as("VP8") #VP8
   | @as("VC3") #VC3
@@ -243,6 +393,10 @@ type videoCodec = [
   | @as("AVC_INTRA") #AVC_INTRA
   | @as("AV1") #AV1
 ]
+@ocaml.doc(
+  "The action to take on content advisory XDS packets.  If you select PASSTHROUGH, packets will not be changed. If you select STRIP, any packets will be removed in output captions."
+)
+type vchipAction = [@as("STRIP") #STRIP | @as("PASSTHROUGH") #PASSTHROUGH]
 @ocaml.doc(
   "When you do frame rate conversion from 23.976 frames per second (fps) to 29.97 fps, and your output scan type is interlaced, you can optionally enable hard telecine (HARD) to create a smoother picture. When you keep the default value, None (NONE), MediaConvert does a standard frame rate conversion to 29.97 without doing anything with the field polarity to create a smoother picture."
 )
@@ -291,7 +445,7 @@ type type_ = [@as("CUSTOM") #CUSTOM | @as("SYSTEM") #SYSTEM]
 )
 type ttmlStylePassthrough = [@as("DISABLED") #DISABLED | @as("ENABLED") #ENABLED]
 @ocaml.doc(
-  "Applies only to HLS outputs. Use this setting to specify whether the service inserts the ID3 timed metadata from the input in this output."
+  "Set ID3 metadata (timedMetadata) to Passthrough (PASSTHROUGH) to include ID3 metadata in this output. This includes ID3 metadata from the following features: ID3 timestamp period (timedMetadataId3Period), and Custom ID3 metadata inserter (timedMetadataInsertion). To exclude this ID3 metadata in this output: set ID3 metadata to None (NONE) or leave blank."
 )
 type timedMetadata = [@as("NONE") #NONE | @as("PASSTHROUGH") #PASSTHROUGH]
 @ocaml.doc(
@@ -345,6 +499,10 @@ type statusUpdateInterval = [
   | @as("SECONDS_10") #SECONDS_10
 ]
 @ocaml.doc(
+  "Set Style passthrough (StylePassthrough) to ENABLED to use the available style, color, and position information from your input captions. MediaConvert uses default settings for any missing style and position information in your input captions. Set Style passthrough to DISABLED, or leave blank, to ignore the style and position information from your input captions and use simplified output captions."
+)
+type srtStylePassthrough = [@as("DISABLED") #DISABLED | @as("ENABLED") #ENABLED]
+@ocaml.doc(
   "Enable this setting when you run a test job to estimate how many reserved transcoding slots (RTS) you need. When this is enabled, MediaConvert runs your job from an on-demand queue with similar performance to what you will see with one RTS in a reserved queue. This setting is disabled by default."
 )
 type simulateReservedQueue = [@as("ENABLED") #ENABLED | @as("DISABLED") #DISABLED]
@@ -362,6 +520,13 @@ type sccDestinationFramerate = [
   "Specify how the service handles outputs that have a different aspect ratio from the input aspect ratio. Choose Stretch to output (STRETCH_TO_OUTPUT) to have the service stretch your video image to fit. Keep the setting Default (DEFAULT) to have the service letterbox your video instead. This setting overrides any value that you specify for the setting Selection placement (position) in this output."
 )
 type scalingBehavior = [@as("STRETCH_TO_OUTPUT") #STRETCH_TO_OUTPUT | @as("DEFAULT") #DEFAULT]
+@ocaml.doc(
+  "Specify the video color sample range for this output. To create a full range output, you must start with a full range YUV input and keep the default value, None (NONE). To create a limited range output from a full range input, choose Limited range (LIMITED_RANGE_SQUEEZE). With RGB inputs, your output is always limited range, regardless of your choice here. When you create a limited range output from a full range input, MediaConvert limits the active pixel values in a way that depends on the output's bit depth: 8-bit outputs contain only values from 16 through 235 and 10-bit outputs contain only values from 64 through 940. With this conversion, MediaConvert also changes the output metadata to note the limited range."
+)
+type sampleRangeConversion = [
+  | @as("NONE") #NONE
+  | @as("LIMITED_RANGE_SQUEEZE") #LIMITED_RANGE_SQUEEZE
+]
 @ocaml.doc(
   "Specify how you want your data keys managed. AWS uses data keys to encrypt your content. AWS also encrypts the data keys themselves, using a customer master key (CMK), and then stores the encrypted data keys alongside your encrypted content. Use this setting to specify which AWS service manages the CMK. For simplest set up, choose Amazon S3 (SERVER_SIDE_ENCRYPTION_S3). If you want your master key to be managed by AWS Key Management Service (KMS), choose AWS KMS (SERVER_SIDE_ENCRYPTION_KMS). By default, when you choose AWS KMS, KMS uses the AWS managed customer master key (CMK) associated with Amazon S3 to encrypt your data keys. You can optionally choose to specify a different, customer managed CMK. Do so by specifying the Amazon Resource Name (ARN) of the key for the setting  KMS ARN (kmsKeyArn)."
 )
@@ -445,10 +610,19 @@ type proresFramerateControl = [
   "Use Profile (ProResCodecProfile) to specify the type of Apple ProRes codec to use for this output."
 )
 type proresCodecProfile = [
+  | @as("APPLE_PRORES_4444_XQ") #APPLE_PRORES_4444_XQ
+  | @as("APPLE_PRORES_4444") #APPLE_PRORES_4444
   | @as("APPLE_PRORES_422_PROXY") #APPLE_PRORES_422_PROXY
   | @as("APPLE_PRORES_422_LT") #APPLE_PRORES_422_LT
   | @as("APPLE_PRORES_422_HQ") #APPLE_PRORES_422_HQ
   | @as("APPLE_PRORES_422") #APPLE_PRORES_422
+]
+@ocaml.doc(
+  "This setting applies only to ProRes 4444 and ProRes 4444 XQ outputs that you create from inputs that use 4:4:4 chroma sampling. Set Preserve 4:4:4 sampling (PRESERVE_444_SAMPLING) to allow outputs to also use 4:4:4 chroma sampling. You must specify a value for this setting when your output codec profile supports 4:4:4 chroma sampling. Related Settings: When you set Chroma sampling to Preserve 4:4:4 sampling (PRESERVE_444_SAMPLING), you must choose an output codec profile that supports 4:4:4 chroma sampling. These values for Profile (CodecProfile) support 4:4:4 chroma sampling: Apple ProRes 4444 (APPLE_PRORES_4444) or Apple ProRes 4444 XQ (APPLE_PRORES_4444_XQ). When you set Chroma sampling to Preserve 4:4:4 sampling, you must disable all video preprocessors except for Nexguard file marker (PartnerWatermarking). When you set Chroma sampling to Preserve 4:4:4 sampling and use framerate conversion, you must set Frame rate conversion algorithm (FramerateConversionAlgorithm) to Drop duplicate (DUPLICATE_DROP)."
+)
+type proresChromaSampling = [
+  | @as("SUBSAMPLE_TO_422") #SUBSAMPLE_TO_422
+  | @as("PRESERVE_444_SAMPLING") #PRESERVE_444_SAMPLING
 ]
 @ocaml.doc(
   "Specifies whether the pricing plan for the queue is on-demand or reserved. For on-demand, you pay per minute, billed in increments of .01 minute. For reserved, you pay for the transcoding capacity of the entire queue, regardless of how much or how little you use it. Reserved pricing requires a 12-month commitment."
@@ -499,7 +673,15 @@ type noiseReducerFilter = [
   | @as("BILATERAL") #BILATERAL
 ]
 @ocaml.doc(
-  "Optional. When you set Noise reducer (noiseReducer) to Temporal (TEMPORAL), you can use this setting to apply sharpening. The default behavior, Auto (AUTO), allows the transcoder to determine whether to apply filtering, depending on input type and quality. When you set Noise reducer to Temporal, your output bandwidth is reduced. When Post temporal sharpening is also enabled, that bandwidth reduction is smaller."
+  "Use Post temporal sharpening strength (postTemporalSharpeningStrength) to define the amount of sharpening the transcoder applies to your output. Set Post temporal sharpening strength to Low (LOW), Medium (MEDIUM), or High (HIGH) to indicate the amount of sharpening."
+)
+type noiseFilterPostTemporalSharpeningStrength = [
+  | @as("HIGH") #HIGH
+  | @as("MEDIUM") #MEDIUM
+  | @as("LOW") #LOW
+]
+@ocaml.doc(
+  "When you set Noise reducer (noiseReducer) to Temporal (TEMPORAL), the bandwidth and sharpness of your output is reduced. You can optionally use Post temporal sharpening (postTemporalSharpening) to apply sharpening to the edges of your output. Note that Post temporal sharpening will also make the bandwidth reduction from the Noise reducer smaller. The default behavior, Auto (AUTO), allows the transcoder to determine whether to apply sharpening, depending on your input type and quality. When you set Post temporal sharpening to Enabled (ENABLED), specify how much sharpening is applied using Post temporal sharpening strength (postTemporalSharpeningStrength). Set Post temporal sharpening to Disabled (DISABLED) to not apply sharpening."
 )
 type noiseFilterPostTemporalSharpening = [
   | @as("AUTO") #AUTO
@@ -526,9 +708,16 @@ type nielsenActiveWatermarkProcessType = [
   | @as("NAES2_AND_NW") #NAES2_AND_NW
 ]
 @ocaml.doc(
+  "To create an output that complies with the XAVC file format guidelines for interoperability, keep the default value, Drop frames for compliance (DROP_FRAMES_FOR_COMPLIANCE). To include all frames from your input in this output, keep the default setting, Allow any duration (ALLOW_ANY_DURATION). The number of frames that MediaConvert excludes when you set this to Drop frames for compliance depends on the output frame rate and duration."
+)
+type mxfXavcDurationMode = [
+  | @as("DROP_FRAMES_FOR_COMPLIANCE") #DROP_FRAMES_FOR_COMPLIANCE
+  | @as("ALLOW_ANY_DURATION") #ALLOW_ANY_DURATION
+]
+@ocaml.doc(
   "Specify the MXF profile, also called shim, for this output. When you choose Auto, MediaConvert chooses a profile based on the video codec and resolution. For a list of codecs supported with each MXF profile, see https://docs.aws.amazon.com/mediaconvert/latest/ug/codecs-supported-with-each-mxf-profile.html. For more information about the automatic selection behavior, see https://docs.aws.amazon.com/mediaconvert/latest/ug/default-automatic-selection-of-mxf-profiles.html."
 )
-type mxfProfile = [@as("OP1A") #OP1A | @as("XDCAM") #XDCAM | @as("D_10") #D_10]
+type mxfProfile = [@as("XAVC") #XAVC | @as("OP1A") #OP1A | @as("XDCAM") #XDCAM | @as("D_10") #D_10]
 @ocaml.doc(
   "Optional. When you have AFD signaling set up in your output video stream, use this setting to choose whether to also include it in the MXF wrapper. Choose Don't copy (NO_COPY) to exclude AFD signaling from the MXF wrapper. Choose Copy from video stream (COPY_FROM_VIDEO) to copy the AFD values from the video stream for this output to the MXF wrapper. Regardless of which option you choose, the AFD values remain in the video stream. Related settings: To set up your output to include or exclude AFD values, see AfdSignaling, under VideoDescription. On the console, find AFD signaling under the output's video encoding settings."
 )
@@ -537,6 +726,10 @@ type mxfAfdSignaling = [@as("COPY_FROM_VIDEO") #COPY_FROM_VIDEO | @as("NO_COPY")
   "Use Manifest encoding (MsSmoothManifestEncoding) to specify the encoding format for the server and client manifest. Valid options are utf8 and utf16."
 )
 type msSmoothManifestEncoding = [@as("UTF16") #UTF16 | @as("UTF8") #UTF8]
+@ocaml.doc(
+  "Specify how you want MediaConvert to determine the fragment length. Choose Exact (EXACT) to have the encoder use the exact length that you specify with the setting Fragment length (FragmentLength). This might result in extra I-frames. Choose Multiple of GOP (GOP_MULTIPLE) to have the encoder round up the segment lengths to match the next GOP boundary."
+)
+type msSmoothFragmentLengthControl = [@as("GOP_MULTIPLE") #GOP_MULTIPLE | @as("EXACT") #EXACT]
 @ocaml.doc(
   "COMBINE_DUPLICATE_STREAMS combines identical audio encoding settings across a Microsoft Smooth output group into a single audio stream."
 )
@@ -611,7 +804,7 @@ type mpeg2InterlaceMode = [
   | @as("PROGRESSIVE") #PROGRESSIVE
 ]
 @ocaml.doc(
-  "Indicates if the GOP Size in MPEG2 is specified in frames or seconds. If seconds the system will convert the GOP Size into a frame count at run time."
+  "Specify the units for GOP size (GopSize). If you don't specify a value here, by default the encoder measures GOP size in frames."
 )
 type mpeg2GopSizeUnits = [@as("SECONDS") #SECONDS | @as("FRAMES") #FRAMES]
 @ocaml.doc(
@@ -652,6 +845,10 @@ type mpeg2AdaptiveQuantization = [
   | @as("LOW") #LOW
   | @as("OFF") #OFF
 ]
+@ocaml.doc(
+  "To include ID3 metadata in this output: Set ID3 metadata (timedMetadata) to Passthrough (PASSTHROUGH). Specify this ID3 metadata in Custom ID3 metadata inserter (timedMetadataInsertion). MediaConvert writes each instance of ID3 metadata in a separate Event Message (eMSG) box. To exclude this ID3 metadata: Set ID3 metadata to None (NONE) or leave blank."
+)
+type mpdTimedMetadata = [@as("NONE") #NONE | @as("PASSTHROUGH") #PASSTHROUGH]
 @ocaml.doc(
   "Ignore this setting unless you have SCTE-35 markers in your input video file. Choose Passthrough (PASSTHROUGH) if you want SCTE-35 markers that appear in your input to also appear in this output. Choose None (NONE) if you don't want those SCTE-35 markers in this output."
 )
@@ -727,6 +924,10 @@ type m3u8PcrControl = [
 )
 type m3u8NielsenId3 = [@as("NONE") #NONE | @as("INSERT") #INSERT]
 @ocaml.doc(
+  "If you select ALIGN_TO_VIDEO, MediaConvert writes captions and data packets with Presentation Timestamp (PTS) values greater than or equal to the first video packet PTS (MediaConvert drops captions and data packets with lesser PTS values). Keep the default value (AUTO) to allow all PTS values."
+)
+type m3u8DataPtsControl = [@as("ALIGN_TO_VIDEO") #ALIGN_TO_VIDEO | @as("AUTO") #AUTO]
+@ocaml.doc(
   "Specify this setting only when your output will be consumed by a downstream repackaging workflow that is sensitive to very small duration differences between video and audio. For this situation, choose Match video duration (MATCH_VIDEO_DURATION). In all other cases, keep the default value, Default codec duration (DEFAULT_CODEC_DURATION). When you choose Match video duration, MediaConvert pads the output audio streams with silence or trims them to ensure that the total duration of each audio stream is at least as long as the total duration of the video stream. After padding or trimming, the audio stream duration is no more than one frame longer than the video stream. MediaConvert applies audio padding or trimming only to the end of the last segment of the output. For unsegmented outputs, MediaConvert adds padding only to the end of the file. When you keep the default value, any minor discrepancies between audio and video duration will depend on your output audio codec."
 )
 type m3u8AudioDuration = [
@@ -791,6 +992,10 @@ type m2tsEbpAudioInterval = [
   | @as("VIDEO_AND_FIXED_INTERVALS") #VIDEO_AND_FIXED_INTERVALS
 ]
 @ocaml.doc(
+  "If you select ALIGN_TO_VIDEO, MediaConvert writes captions and data packets with Presentation Timestamp (PTS) values greater than or equal to the first video packet PTS (MediaConvert drops captions and data packets with lesser PTS values). Keep the default value (AUTO) to allow all PTS values."
+)
+type m2tsDataPtsControl = [@as("ALIGN_TO_VIDEO") #ALIGN_TO_VIDEO | @as("AUTO") #AUTO]
+@ocaml.doc(
   "Controls what buffer model to use for accurate interleaving. If set to MULTIPLEX, use multiplex  buffer model. If set to NONE, this can lead to lower latency, but low-memory devices may not be able to play back the stream without interruptions."
 )
 type m2tsBufferModel = [@as("NONE") #NONE | @as("MULTIPLEX") #MULTIPLEX]
@@ -807,6 +1012,7 @@ type m2tsAudioBufferModel = [@as("ATSC") #ATSC | @as("DVB") #DVB]
   "Specify the language, using the ISO 639-2 three-letter code listed at https://www.loc.gov/standards/iso639-2/php/code_list.php."
 )
 type languageCode = [
+  | @as("SRP") #SRP
   | @as("TNG") #TNG
   | @as("QPC") #QPC
   | @as("ORJ") #ORJ
@@ -1034,7 +1240,7 @@ type inputTimecodeSource = [
 )
 type inputScanType = [@as("PSF") #PSF | @as("AUTO") #AUTO]
 @ocaml.doc(
-  "Use this setting when your input video codec is AVC-Intra. Ignore this setting for all other inputs. If the sample range metadata in your input video is accurate, or if you don't know about sample range, keep the default value, Follow (FOLLOW), for this setting. When you do, the service automatically detects your input sample range. If your input video has metadata indicating the wrong sample range, specify the accurate sample range here. When you do, MediaConvert ignores any sample range information in the input metadata. Regardless of whether MediaConvert uses the input sample range or the sample range that you specify, MediaConvert uses the sample range for transcoding and also writes it to the output metadata."
+  "If the sample range metadata in your input video is accurate, or if you don't know about sample range, keep the default value, Follow (FOLLOW), for this setting. When you do, the service automatically detects your input sample range. If your input video has metadata indicating the wrong sample range, specify the accurate sample range here. When you do, MediaConvert ignores any sample range information in the input metadata. Regardless of whether MediaConvert uses the input sample range or the sample range that you specify, MediaConvert uses the sample range for transcoding and also writes it to the output metadata."
 )
 type inputSampleRange = [
   | @as("LIMITED_RANGE") #LIMITED_RANGE
@@ -1056,6 +1262,10 @@ type inputRotate = [
 )
 type inputPsiControl = [@as("USE_PSI") #USE_PSI | @as("IGNORE_PSI") #IGNORE_PSI]
 @ocaml.doc(
+  "An input policy allows or disallows a job you submit to run based on the conditions that you specify."
+)
+type inputPolicy = [@as("DISALLOWED") #DISALLOWED | @as("ALLOWED") #ALLOWED]
+@ocaml.doc(
   "Specify how the transcoding service applies the denoise and deblock filters. You must also enable the filters separately, with Denoise (InputDenoiseFilter) and Deblock (InputDeblockFilter). * Auto - The transcoding service determines whether to apply filtering, depending on input type and quality. * Disable - The input is not filtered. This is true even if you use the API to enable them in (InputDeblockFilter) and (InputDeblockFilter). * Force - The input is filtered regardless of input type."
 )
 type inputFilterEnable = [@as("FORCE") #FORCE | @as("DISABLE") #DISABLE | @as("AUTO") #AUTO]
@@ -1071,12 +1281,29 @@ type inputDeblockFilter = [@as("DISABLED") #DISABLED | @as("ENABLED") #ENABLED]
   "Keep this setting enabled to have MediaConvert use the font style and position information from the captions source in the output. This option is available only when your input captions are IMSC, SMPTE-TT, or TTML. Disable this setting for simplified output captions."
 )
 type imscStylePassthrough = [@as("DISABLED") #DISABLED | @as("ENABLED") #ENABLED]
-@ocaml.doc("Indicates ID3 frame that has the timecode.")
+@ocaml.doc(
+  "Set Accessibility subtitles (Accessibility) to Enabled (ENABLED) if the ISMC or WebVTT captions track is intended to provide accessibility for people who are deaf or hard of hearing. When you enable this feature, MediaConvert adds the following attributes under EXT-X-MEDIA in the HLS or CMAF manifest for this track: CHARACTERISTICS=\"public.accessibility.describes-spoken-dialog,public.accessibility.describes-music-and-sound\" and AUTOSELECT=\"YES\". Keep the default value, Disabled (DISABLED), if the captions track is not intended to provide such accessibility. MediaConvert will not add the above attributes."
+)
+type imscAccessibilitySubs = [@as("ENABLED") #ENABLED | @as("DISABLED") #DISABLED]
+@ocaml.doc(
+  "Specify the type of the ID3 frame (timedMetadataId3Frame) to use for ID3 timestamps (timedMetadataId3Period) in your output. To include ID3 timestamps: Specify PRIV (PRIV) or TDRL (TDRL) and set ID3 metadata (timedMetadata) to Passthrough (PASSTHROUGH). To exclude ID3 timestamps: Set ID3 timestamp frame type to None (NONE)."
+)
 type hlsTimedMetadataId3Frame = [@as("TDRL") #TDRL | @as("PRIV") #PRIV | @as("NONE") #NONE]
+@ocaml.doc(
+  "When set to LEGACY, the segment target duration is always rounded up to the nearest integer value above its current value in seconds. When set to SPEC\\\\_COMPLIANT, the segment target duration is rounded up to the nearest integer value if fraction seconds are greater than or equal to 0.5 (>= 0.5) and rounded down if less than 0.5 (< 0.5). You may need to use LEGACY if your client needs to ensure that the target duration is always longer than the actual duration of the segment. Some older players may experience interrupted playback when the actual duration of a track in a segment is longer than the target duration."
+)
+type hlsTargetDurationCompatibilityMode = [
+  | @as("SPEC_COMPLIANT") #SPEC_COMPLIANT
+  | @as("LEGACY") #LEGACY
+]
 @ocaml.doc(
   "Include or exclude RESOLUTION attribute for video in EXT-X-STREAM-INF tag of variant manifest."
 )
 type hlsStreamInfResolution = [@as("EXCLUDE") #EXCLUDE | @as("INCLUDE") #INCLUDE]
+@ocaml.doc(
+  "Specify how you want MediaConvert to determine the segment length. Choose Exact (EXACT) to have the encoder use the exact length that you specify with the setting Segment length (SegmentLength). This might result in extra I-frames. Choose Multiple of GOP (GOP_MULTIPLE) to have the encoder round up the segment lengths to match the next GOP boundary."
+)
+type hlsSegmentLengthControl = [@as("GOP_MULTIPLE") #GOP_MULTIPLE | @as("EXACT") #EXACT]
 @ocaml.doc(
   "When set to SINGLE_FILE, emits program as a single media resource (.ts) file, uses #EXT-X-BYTERANGE tags to index segment for playback."
 )
@@ -1107,9 +1334,25 @@ type hlsManifestCompression = [@as("NONE") #NONE | @as("GZIP") #GZIP]
 )
 type hlsKeyProviderType = [@as("STATIC_KEY") #STATIC_KEY | @as("SPEKE") #SPEKE]
 @ocaml.doc(
+  "The cadence MediaConvert follows for generating thumbnails.  If set to FOLLOW_IFRAME, MediaConvert generates thumbnails for each IDR frame in the output (matching the GOP cadence).  If set to FOLLOW_CUSTOM, MediaConvert generates thumbnails according to the interval you specify in thumbnailInterval."
+)
+type hlsIntervalCadence = [
+  | @as("FOLLOW_CUSTOM") #FOLLOW_CUSTOM
+  | @as("FOLLOW_IFRAME") #FOLLOW_IFRAME
+]
+@ocaml.doc(
   "The Initialization Vector is a 128-bit number used in conjunction with the key for encrypting blocks. If set to INCLUDE, Initialization Vector is listed in the manifest. Otherwise Initialization Vector is not in the manifest."
 )
 type hlsInitializationVectorInManifest = [@as("EXCLUDE") #EXCLUDE | @as("INCLUDE") #INCLUDE]
+@ocaml.doc(
+  "Specify whether MediaConvert generates images for trick play. Keep the default value, None (NONE), to not generate any images. Choose Thumbnail (THUMBNAIL) to generate tiled thumbnails. Choose Thumbnail and full frame (THUMBNAIL_AND_FULLFRAME) to generate tiled thumbnails and full-resolution images of single frames. MediaConvert creates a child manifest for each set of images that you generate and adds corresponding entries to the parent manifest. A common application for these images is Roku trick mode. The thumbnails and full-frame images that MediaConvert creates with this feature are compatible with this Roku specification: https://developer.roku.com/docs/developer-program/media-playback/trick-mode/hls-and-dash.md"
+)
+type hlsImageBasedTrickPlay = [
+  | @as("ADVANCED") #ADVANCED
+  | @as("THUMBNAIL_AND_FULLFRAME") #THUMBNAIL_AND_FULLFRAME
+  | @as("THUMBNAIL") #THUMBNAIL
+  | @as("NONE") #NONE
+]
 @ocaml.doc(
   "Choose Include (INCLUDE) to have MediaConvert generate a child manifest that lists only the I-frames for this rendition, in addition to your regular manifest for this rendition. You might use this manifest as part of a workflow that creates preview functions for your video. MediaConvert adds both the I-frame only child manifest and the regular child manifest to the parent manifest. When you don't need the I-frame only child manifest, keep the default value Exclude (EXCLUDE)."
 )
@@ -1135,6 +1378,13 @@ type hlsCodecSpecification = [@as("RFC_4281") #RFC_4281 | @as("RFC_6381") #RFC_6
   "Disable this setting only when your workflow requires the #EXT-X-ALLOW-CACHE:no tag. Otherwise, keep the default value Enabled (ENABLED) and control caching in your video distribution set up. For example, use the Cache-Control http header."
 )
 type hlsClientCache = [@as("ENABLED") #ENABLED | @as("DISABLED") #DISABLED]
+@ocaml.doc(
+  "Set Caption segment length control (CaptionSegmentLengthControl) to Match video (MATCH_VIDEO) to create caption segments that align with the video segments from the first video output in this output group. For example, if the video segments are 2 seconds long, your WebVTT segments will also be 2 seconds long. Keep the default setting, Large segments (LARGE_SEGMENTS) to create caption segments that are 300 seconds long."
+)
+type hlsCaptionSegmentLengthControl = [
+  | @as("MATCH_VIDEO") #MATCH_VIDEO
+  | @as("LARGE_SEGMENTS") #LARGE_SEGMENTS
+]
 @ocaml.doc(
   "Applies only to 608 Embedded output captions. Insert: Include CLOSED-CAPTIONS lines in the manifest. Specify at least one language in the CC1 Language Code field. One CLOSED-CAPTION line is added for each Language Code you specify. Make sure to specify the languages in the order in which they appear in the original source (if the source is embedded format) or the order of the caption selectors (if the source is other than embedded). Otherwise, languages in the manifest will not match up properly with the output captions. None: Include CLOSED-CAPTIONS=NONE line in the manifest. Omit: Omit any CLOSED-CAPTIONS line from the manifest."
 )
@@ -1240,9 +1490,9 @@ type h265InterlaceMode = [
   | @as("PROGRESSIVE") #PROGRESSIVE
 ]
 @ocaml.doc(
-  "Indicates if the GOP Size in H265 is specified in frames or seconds. If seconds the system will convert the GOP Size into a frame count at run time."
+  "Specify how the transcoder determines GOP size for this output. We recommend that you have the transcoder automatically choose this value for you based on characteristics of your input video. To enable this automatic behavior, choose Auto (AUTO) and and leave GOP size (GopSize) blank. By default, if you don't specify GOP mode control (GopSizeUnits), MediaConvert will use automatic behavior. If your output group specifies HLS, DASH, or CMAF, set GOP mode control to Auto and leave GOP size blank in each output in your output group. To explicitly specify the GOP length, choose Specified, frames (FRAMES) or Specified, seconds (SECONDS) and then provide the GOP length in the related setting GOP size (GopSize)."
 )
-type h265GopSizeUnits = [@as("SECONDS") #SECONDS | @as("FRAMES") #FRAMES]
+type h265GopSizeUnits = [@as("AUTO") #AUTO | @as("SECONDS") #SECONDS | @as("FRAMES") #FRAMES]
 @ocaml.doc("If enable, use reference B frames for GOP structures that have B frames > 1.")
 type h265GopBReference = [@as("ENABLED") #ENABLED | @as("DISABLED") #DISABLED]
 @ocaml.doc(
@@ -1303,9 +1553,10 @@ type h265CodecLevel = [
 )
 type h265AlternateTransferFunctionSei = [@as("ENABLED") #ENABLED | @as("DISABLED") #DISABLED]
 @ocaml.doc(
-  "Specify the strength of any adaptive quantization filters that you enable. The value that you choose here applies to the following settings: Flicker adaptive quantization (flickerAdaptiveQuantization), Spatial adaptive quantization (spatialAdaptiveQuantization), and Temporal adaptive quantization (temporalAdaptiveQuantization)."
+  "When you set Adaptive Quantization (H265AdaptiveQuantization) to Auto (AUTO), or leave blank, MediaConvert automatically applies quantization to improve the video quality of your output. Set Adaptive Quantization to Low (LOW), Medium (MEDIUM), High (HIGH), Higher (HIGHER), or Max (MAX) to manually control the strength of the quantization filter. When you do, you can specify a value for Spatial Adaptive Quantization (H265SpatialAdaptiveQuantization), Temporal Adaptive Quantization (H265TemporalAdaptiveQuantization), and Flicker Adaptive Quantization (H265FlickerAdaptiveQuantization), to further control the quantization filter. Set Adaptive Quantization to Off (OFF) to apply no quantization to your output."
 )
 type h265AdaptiveQuantization = [
+  | @as("AUTO") #AUTO
   | @as("MAX") #MAX
   | @as("HIGHER") #HIGHER
   | @as("HIGH") #HIGH
@@ -1380,9 +1631,9 @@ type h264InterlaceMode = [
   | @as("PROGRESSIVE") #PROGRESSIVE
 ]
 @ocaml.doc(
-  "Indicates if the GOP Size in H264 is specified in frames or seconds. If seconds the system will convert the GOP Size into a frame count at run time."
+  "Specify how the transcoder determines GOP size for this output. We recommend that you have the transcoder automatically choose this value for you based on characteristics of your input video. To enable this automatic behavior, choose Auto (AUTO) and and leave GOP size (GopSize) blank. By default, if you don't specify GOP mode control (GopSizeUnits), MediaConvert will use automatic behavior. If your output group specifies HLS, DASH, or CMAF, set GOP mode control to Auto and leave GOP size blank in each output in your output group. To explicitly specify the GOP length, choose Specified, frames (FRAMES) or Specified, seconds (SECONDS) and then provide the GOP length in the related setting GOP size (GopSize)."
 )
-type h264GopSizeUnits = [@as("SECONDS") #SECONDS | @as("FRAMES") #FRAMES]
+type h264GopSizeUnits = [@as("AUTO") #AUTO | @as("SECONDS") #SECONDS | @as("FRAMES") #FRAMES]
 @ocaml.doc("If enable, use reference B frames for GOP structures that have B frames > 1.")
 type h264GopBReference = [@as("ENABLED") #ENABLED | @as("DISABLED") #DISABLED]
 @ocaml.doc(
@@ -1405,9 +1656,9 @@ type h264FramerateControl = [
 )
 type h264FlickerAdaptiveQuantization = [@as("ENABLED") #ENABLED | @as("DISABLED") #DISABLED]
 @ocaml.doc(
-  "Keep the default value, PAFF, to have MediaConvert use PAFF encoding for interlaced outputs. Choose Force field (FORCE_FIELD) to disable PAFF encoding and create separate interlaced fields."
+  "The video encoding method for your MPEG-4 AVC output. Keep the default value, PAFF, to have MediaConvert use PAFF encoding for interlaced outputs. Choose Force field (FORCE_FIELD) to disable PAFF encoding and create separate interlaced fields. Choose MBAFF to disable PAFF and have MediaConvert use MBAFF encoding for interlaced outputs."
 )
-type h264FieldEncoding = [@as("FORCE_FIELD") #FORCE_FIELD | @as("PAFF") #PAFF]
+type h264FieldEncoding = [@as("MBAFF") #MBAFF | @as("FORCE_FIELD") #FORCE_FIELD | @as("PAFF") #PAFF]
 @ocaml.doc("Entropy encoding mode. Use CABAC (must be in Main or High profile) or CAVLC.")
 type h264EntropyEncoding = [@as("CAVLC") #CAVLC | @as("CABAC") #CABAC]
 @ocaml.doc(
@@ -1464,6 +1715,10 @@ type h264AdaptiveQuantization = [
 )
 type fontScript = [@as("HANT") #HANT | @as("HANS") #HANS | @as("AUTOMATIC") #AUTOMATIC]
 @ocaml.doc(
+  "When you use the setting Time delta (TimeDelta) to adjust the sync between your sidecar captions and your video, use this setting to specify the units for the delta that you specify. When you don't specify a value for Time delta units (TimeDeltaUnits), MediaConvert uses seconds by default."
+)
+type fileSourceTimeDeltaUnits = [@as("MILLISECONDS") #MILLISECONDS | @as("SECONDS") #SECONDS]
+@ocaml.doc(
   "Specify whether this set of input captions appears in your outputs in both 608 and 708 format. If you choose Upconvert (UPCONVERT), MediaConvert includes the captions data in two ways: it passes the 608 data through using the 608 compatibility bytes fields of the 708 wrapper, and it also translates the 608 data into 708."
 )
 type fileSourceConvert608To708 = [@as("DISABLED") #DISABLED | @as("UPCONVERT") #UPCONVERT]
@@ -1471,6 +1726,10 @@ type fileSourceConvert608To708 = [@as("DISABLED") #DISABLED | @as("UPCONVERT") #
   "If set to PROGRESSIVE_DOWNLOAD, the MOOV atom is relocated to the beginning of the archive as required for progressive downloading. Otherwise it is placed normally at the end."
 )
 type f4vMoovPlacement = [@as("NORMAL") #NORMAL | @as("PROGRESSIVE_DOWNLOAD") #PROGRESSIVE_DOWNLOAD]
+@ocaml.doc(
+  "Set Embedded timecode override (embeddedTimecodeOverride) to Use MDPM (USE_MDPM) when your AVCHD input contains timecode tag data in the Modified Digital Video Pack Metadata (MDPM). When you do, we recommend you also set Timecode source (inputTimecodeSource) to Embedded (EMBEDDED). Leave Embedded timecode override blank, or set to None (NONE), when your input does not contain MDPM timecode."
+)
+type embeddedTimecodeOverride = [@as("USE_MDPM") #USE_MDPM | @as("NONE") #NONE]
 @ocaml.doc(
   "By default, the service terminates any unterminated captions at the end of each input. If you want the caption to continue onto your next input, disable this setting."
 )
@@ -1580,7 +1839,9 @@ type eac3AtmosSurroundExMode = [
   | @as("ENABLED") #ENABLED
   | @as("NOT_INDICATED") #NOT_INDICATED
 ]
-@ocaml.doc("Choose how the service does stereo downmixing.")
+@ocaml.doc(
+  "Choose how the service does stereo downmixing. Default value: Not indicated (ATMOS_STORAGE_DDP_DMIXMOD_NOT_INDICATED) Related setting: To have MediaConvert use this value, keep the default value, Custom (SPECIFIED) for the setting Downmix control (DownmixControl). Otherwise, MediaConvert ignores Stereo downmix (StereoDownmix)."
+)
 type eac3AtmosStereoDownmix = [
   | @as("DPL2") #DPL2
   | @as("SURROUND") #SURROUND
@@ -1595,7 +1856,16 @@ type eac3AtmosMeteringMode = [
   | @as("ITU_BS_1770_1") #ITU_BS_1770_1
   | @as("LEQ_A") #LEQ_A
 ]
-@ocaml.doc("Specify how the service limits the audio dynamic range when compressing the audio.")
+@ocaml.doc(
+  "Specify whether MediaConvert should use any dynamic range control metadata from your input file. Keep the default value, Custom (SPECIFIED), to provide dynamic range control values in your job settings. Choose Follow source (INITIALIZE_FROM_SOURCE) to use the metadata from your input. Related settings--Use these settings to specify your dynamic range control values: Dynamic range compression line (DynamicRangeCompressionLine) and Dynamic range compression RF (DynamicRangeCompressionRf). When you keep the value Custom (SPECIFIED) for Dynamic range control (DynamicRangeControl) and you don't specify values for the related settings, MediaConvert uses default values for those settings."
+)
+type eac3AtmosDynamicRangeControl = [
+  | @as("INITIALIZE_FROM_SOURCE") #INITIALIZE_FROM_SOURCE
+  | @as("SPECIFIED") #SPECIFIED
+]
+@ocaml.doc(
+  "Choose the Dolby dynamic range control (DRC) profile that MediaConvert uses when encoding the metadata in the Dolby stream for the RF operating mode. Default value: Film light (ATMOS_STORAGE_DDP_COMPR_FILM_LIGHT) Related setting: To have MediaConvert use the value you specify here, keep the default value, Custom (SPECIFIED) for the setting Dynamic range control (DynamicRangeControl). Otherwise, MediaConvert ignores Dynamic range compression RF (DynamicRangeCompressionRf). For information about the Dolby DRC operating modes and profiles, see the Dynamic Range Control chapter of the Dolby Metadata Guide at https://developer.dolby.com/globalassets/professional/documents/dolby-metadata-guide.pdf."
+)
 type eac3AtmosDynamicRangeCompressionRf = [
   | @as("SPEECH") #SPEECH
   | @as("MUSIC_LIGHT") #MUSIC_LIGHT
@@ -1604,7 +1874,9 @@ type eac3AtmosDynamicRangeCompressionRf = [
   | @as("FILM_STANDARD") #FILM_STANDARD
   | @as("NONE") #NONE
 ]
-@ocaml.doc("Specify the absolute peak level for a signal with dynamic range compression.")
+@ocaml.doc(
+  "Choose the Dolby dynamic range control (DRC) profile that MediaConvert uses when encoding the metadata in the Dolby stream for the line operating mode. Default value: Film light (ATMOS_STORAGE_DDP_COMPR_FILM_LIGHT) Related setting: To have MediaConvert use the value you specify here, keep the default value, Custom (SPECIFIED) for the setting Dynamic range control (DynamicRangeControl). Otherwise, MediaConvert ignores Dynamic range compression line (DynamicRangeCompressionLine). For information about the Dolby DRC operating modes and profiles, see the Dynamic Range Control chapter of the Dolby Metadata Guide at https://developer.dolby.com/globalassets/professional/documents/dolby-metadata-guide.pdf."
+)
 type eac3AtmosDynamicRangeCompressionLine = [
   | @as("SPEECH") #SPEECH
   | @as("MUSIC_LIGHT") #MUSIC_LIGHT
@@ -1613,12 +1885,22 @@ type eac3AtmosDynamicRangeCompressionLine = [
   | @as("FILM_STANDARD") #FILM_STANDARD
   | @as("NONE") #NONE
 ]
+@ocaml.doc(
+  "Specify whether MediaConvert should use any downmix metadata from your input file. Keep the default value, Custom (SPECIFIED) to provide downmix values in your job settings. Choose Follow source (INITIALIZE_FROM_SOURCE) to use the metadata from your input. Related settings--Use these settings to specify your downmix values: Left only/Right only surround (LoRoSurroundMixLevel), Left total/Right total surround (LtRtSurroundMixLevel), Left total/Right total center (LtRtCenterMixLevel), Left only/Right only center (LoRoCenterMixLevel),  and Stereo downmix (StereoDownmix). When you keep Custom (SPECIFIED) for Downmix control (DownmixControl) and you don't specify values for the related settings, MediaConvert uses default values for those settings."
+)
+type eac3AtmosDownmixControl = [
+  | @as("INITIALIZE_FROM_SOURCE") #INITIALIZE_FROM_SOURCE
+  | @as("SPECIFIED") #SPECIFIED
+]
 @ocaml.doc("Enable Dolby Dialogue Intelligence to adjust loudness based on dialogue analysis.")
 type eac3AtmosDialogueIntelligence = [@as("DISABLED") #DISABLED | @as("ENABLED") #ENABLED]
-@ocaml.doc(
-  "The coding mode for Dolby Digital Plus JOC (Atmos) is always 9.1.6 (CODING_MODE_9_1_6)."
-)
-type eac3AtmosCodingMode = [@as("CODING_MODE_9_1_6") #CODING_MODE_9_1_6]
+@ocaml.doc("The coding mode for Dolby Digital Plus JOC (Atmos).")
+type eac3AtmosCodingMode = [
+  | @as("CODING_MODE_9_1_6") #CODING_MODE_9_1_6
+  | @as("CODING_MODE_7_1_4") #CODING_MODE_7_1_4
+  | @as("CODING_MODE_5_1_4") #CODING_MODE_5_1_4
+  | @as("CODING_MODE_AUTO") #CODING_MODE_AUTO
+]
 @ocaml.doc(
   "Specify the bitstream mode for the E-AC-3 stream that the encoder emits. For more information about the EAC3 bitstream mode, see ATSC A/52-2012 (Annex E)."
 )
@@ -1636,19 +1918,31 @@ type dvbddsHandling = [
 )
 type dvbSubtitlingType = [@as("STANDARD") #STANDARD | @as("HEARING_IMPAIRED") #HEARING_IMPAIRED]
 @ocaml.doc(
-  "Only applies to jobs with input captions in Teletext or STL formats. Specify whether the spacing between letters in your captions is set by the captions grid or varies depending on letter width. Choose fixed grid to conform to the spacing specified in the captions file more accurately. Choose proportional to make the text easier to read if the captions are closed caption."
+  "Specify whether the Text spacing (TeletextSpacing) in your captions is set by the captions grid, or varies depending on letter width. Choose fixed grid (FIXED_GRID) to conform to the spacing specified in the captions file more accurately. Choose proportional (PROPORTIONAL) to make the text easier to read for closed captions. Within your job settings, all of your DVB-Sub settings must be identical."
 )
 type dvbSubtitleTeletextSpacing = [
+  | @as("AUTO") #AUTO
   | @as("PROPORTIONAL") #PROPORTIONAL
   | @as("FIXED_GRID") #FIXED_GRID
 ]
-@ocaml.doc("Specifies the color of the shadow cast by the captions.
-All burn-in and DVB-Sub font settings must match.")
-type dvbSubtitleShadowColor = [@as("WHITE") #WHITE | @as("BLACK") #BLACK | @as("NONE") #NONE]
 @ocaml.doc(
-  "Specifies font outline color. This option is not valid for source captions that are either 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match."
+  "Set Style passthrough (StylePassthrough) to ENABLED to use the available style, color, and position information from your input captions. MediaConvert uses default settings for any missing style and position information in your input captions. Set Style passthrough to DISABLED, or leave blank, to ignore the style and position information from your input captions and use default settings: white text with black outlining, bottom-center positioning, and automatic sizing. Whether you set Style passthrough to enabled or not, you can also choose to manually override any of the individual style and position settings."
+)
+type dvbSubtitleStylePassthrough = [@as("DISABLED") #DISABLED | @as("ENABLED") #ENABLED]
+@ocaml.doc(
+  "Specify the color of the shadow cast by the captions. Leave Shadow color (ShadowColor) blank and set Style passthrough (StylePassthrough) to enabled to use the shadow color data from your input captions, if present. Within your job settings, all of your DVB-Sub settings must be identical."
+)
+type dvbSubtitleShadowColor = [
+  | @as("AUTO") #AUTO
+  | @as("WHITE") #WHITE
+  | @as("BLACK") #BLACK
+  | @as("NONE") #NONE
+]
+@ocaml.doc(
+  "Specify font outline color. Leave Outline color (OutlineColor) blank and set Style passthrough (StylePassthrough) to enabled to use the font outline color data from your input captions, if present. Within your job settings, all of your DVB-Sub settings must be identical."
 )
 type dvbSubtitleOutlineColor = [
+  | @as("AUTO") #AUTO
   | @as("BLUE") #BLUE
   | @as("GREEN") #GREEN
   | @as("RED") #RED
@@ -1657,9 +1951,11 @@ type dvbSubtitleOutlineColor = [
   | @as("BLACK") #BLACK
 ]
 @ocaml.doc(
-  "Specifies the color of the burned-in captions. This option is not valid for source captions that are STL, 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match."
+  "Specify the color of the captions text. Leave Font color (FontColor) blank and set Style passthrough (StylePassthrough) to enabled to use the font color data from your input captions, if present. Within your job settings, all of your DVB-Sub settings must be identical."
 )
 type dvbSubtitleFontColor = [
+  | @as("AUTO") #AUTO
+  | @as("HEX") #HEX
   | @as("BLUE") #BLUE
   | @as("GREEN") #GREEN
   | @as("RED") #RED
@@ -1667,13 +1963,36 @@ type dvbSubtitleFontColor = [
   | @as("BLACK") #BLACK
   | @as("WHITE") #WHITE
 ]
-@ocaml.doc("Specifies the color of the rectangle behind the captions.
-All burn-in and DVB-Sub font settings must match.")
-type dvbSubtitleBackgroundColor = [@as("WHITE") #WHITE | @as("BLACK") #BLACK | @as("NONE") #NONE]
 @ocaml.doc(
-  "If no explicit x_position or y_position is provided, setting alignment to centered will place the captions at the bottom center of the output. Similarly, setting a left alignment will align captions to the bottom left of the output. If x and y positions are given in conjunction with the alignment parameter, the font will be justified (either left or centered) relative to those coordinates. This option is not valid for source captions that are STL, 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match."
+  "Specify the color of the rectangle behind the captions. Leave background color (BackgroundColor) blank and set Style passthrough (StylePassthrough) to enabled to use the background color data from your input captions, if present."
 )
-type dvbSubtitleAlignment = [@as("LEFT") #LEFT | @as("CENTERED") #CENTERED]
+type dvbSubtitleBackgroundColor = [
+  | @as("AUTO") #AUTO
+  | @as("WHITE") #WHITE
+  | @as("BLACK") #BLACK
+  | @as("NONE") #NONE
+]
+@ocaml.doc(
+  "Ignore this setting unless Style Passthrough (StylePassthrough) is set to Enabled and Font color (FontColor) set to Black, Yellow, Red, Green, Blue, or Hex. Use Apply font color (ApplyFontColor) for additional font color controls. When you choose White text only (WHITE_TEXT_ONLY), or leave blank, your font color setting only applies to white text in your input captions. For example, if your font color setting is Yellow, and your input captions have red and white text, your output captions will have red and yellow text. When you choose ALL_TEXT, your font color setting applies to all of your output captions text."
+)
+type dvbSubtitleApplyFontColor = [
+  | @as("ALL_TEXT") #ALL_TEXT
+  | @as("WHITE_TEXT_ONLY") #WHITE_TEXT_ONLY
+]
+@ocaml.doc(
+  "Specify the alignment of your captions. If no explicit x_position is provided, setting alignment to centered will placethe captions at the bottom center of the output. Similarly, setting a left alignment willalign captions to the bottom left of the output. If x and y positions are given in conjunction with the alignment parameter, the font will be justified (either left or centered) relative to those coordinates. Within your job settings, all of your DVB-Sub settings must be identical."
+)
+type dvbSubtitleAlignment = [@as("AUTO") #AUTO | @as("LEFT") #LEFT | @as("CENTERED") #CENTERED]
+@ocaml.doc(
+  "Specify the font that you want the service to use for your burn in captions when your input captions specify a font that MediaConvert doesn't support. When you set Fallback font (FallbackFont) to best match (BEST_MATCH), or leave blank, MediaConvert uses a supported font that most closely matches the font that your input captions specify. When there are multiple unsupported fonts in your input captions, MediaConvert matches each font with the supported font that matches best. When you explicitly choose a replacement font, MediaConvert uses that font to replace all unsupported fonts from your input."
+)
+type dvbSubSubtitleFallbackFont = [
+  | @as("PROPORTIONAL_SERIF") #PROPORTIONAL_SERIF
+  | @as("PROPORTIONAL_SANSSERIF") #PROPORTIONAL_SANSSERIF
+  | @as("MONOSPACED_SERIF") #MONOSPACED_SERIF
+  | @as("MONOSPACED_SANSSERIF") #MONOSPACED_SANSSERIF
+  | @as("BEST_MATCH") #BEST_MATCH
+]
 @ocaml.doc(
   "Applies only to 29.97 fps outputs. When this feature is enabled, the service will use drop-frame timecode on outputs. If it is not possible to use drop-frame timecode, the system will fall back to non-drop-frame. This setting is enabled by default when Timecode insertion (TimecodeInsertion) is enabled."
 )
@@ -1725,6 +2044,10 @@ type dashIsoWriteSegmentTimelineInRepresentation = [
   | @as("ENABLED") #ENABLED
 ]
 @ocaml.doc(
+  "Specify how you want MediaConvert to determine the segment length. Choose Exact (EXACT) to have the encoder use the exact length that you specify with the setting Segment length (SegmentLength). This might result in extra I-frames. Choose Multiple of GOP (GOP_MULTIPLE) to have the encoder round up the segment lengths to match the next GOP boundary."
+)
+type dashIsoSegmentLengthControl = [@as("GOP_MULTIPLE") #GOP_MULTIPLE | @as("EXACT") #EXACT]
+@ocaml.doc(
   "When set to SINGLE_FILE, a single output file is generated, which is internally segmented using the Fragment Length and Segment Length. When set to SEGMENTED_FILES, separate segment files will be created."
 )
 type dashIsoSegmentControl = [
@@ -1752,6 +2075,22 @@ type dashIsoMpdProfile = [
   | @as("ON_DEMAND_PROFILE") #ON_DEMAND_PROFILE
   | @as("MAIN_PROFILE") #MAIN_PROFILE
 ]
+@ocaml.doc(
+  "The cadence MediaConvert follows for generating thumbnails.  If set to FOLLOW_IFRAME, MediaConvert generates thumbnails for each IDR frame in the output (matching the GOP cadence).  If set to FOLLOW_CUSTOM, MediaConvert generates thumbnails according to the interval you specify in thumbnailInterval."
+)
+type dashIsoIntervalCadence = [
+  | @as("FOLLOW_CUSTOM") #FOLLOW_CUSTOM
+  | @as("FOLLOW_IFRAME") #FOLLOW_IFRAME
+]
+@ocaml.doc(
+  "Specify whether MediaConvert generates images for trick play. Keep the default value, None (NONE), to not generate any images. Choose Thumbnail (THUMBNAIL) to generate tiled thumbnails. Choose Thumbnail and full frame (THUMBNAIL_AND_FULLFRAME) to generate tiled thumbnails and full-resolution images of single frames. MediaConvert adds an entry in the .mpd manifest for each set of images that you generate. A common application for these images is Roku trick mode. The thumbnails and full-frame images that MediaConvert creates with this feature are compatible with this Roku specification: https://developer.roku.com/docs/developer-program/media-playback/trick-mode/hls-and-dash.md"
+)
+type dashIsoImageBasedTrickPlay = [
+  | @as("ADVANCED") #ADVANCED
+  | @as("THUMBNAIL_AND_FULLFRAME") #THUMBNAIL_AND_FULLFRAME
+  | @as("THUMBNAIL") #THUMBNAIL
+  | @as("NONE") #NONE
+]
 @ocaml.doc("Supports HbbTV specification as indicated")
 type dashIsoHbbtvCompliance = [@as("NONE") #NONE | @as("HBBTV_1_5") #HBBTV_1_5]
 @ocaml.doc(
@@ -1761,6 +2100,10 @@ type dashIsoGroupAudioChannelConfigSchemeIdUri = [
   | @as("DOLBY_CHANNEL_CONFIGURATION") #DOLBY_CHANNEL_CONFIGURATION
   | @as("MPEG_CHANNEL_CONFIGURATION") #MPEG_CHANNEL_CONFIGURATION
 ]
+@ocaml.doc(
+  "The action to take on copy and redistribution control XDS packets.  If you select PASSTHROUGH, packets will not be changed. If you select STRIP, any packets will be removed in output captions."
+)
+type copyProtectionAction = [@as("STRIP") #STRIP | @as("PASSTHROUGH") #PASSTHROUGH]
 @ocaml.doc(
   "Container for this output. Some containers require a container settings object. If not specified, the default object will be created."
 )
@@ -1808,6 +2151,10 @@ type colorSpace = [
 )
 type colorMetadata = [@as("INSERT") #INSERT | @as("IGNORE") #IGNORE]
 @ocaml.doc(
+  "To include ID3 metadata in this output: Set ID3 metadata (timedMetadata) to Passthrough (PASSTHROUGH). Specify this ID3 metadata in Custom ID3 metadata inserter (timedMetadataInsertion). MediaConvert writes each instance of ID3 metadata in a separate Event Message (eMSG) box. To exclude this ID3 metadata: Set ID3 metadata to None (NONE) or leave blank."
+)
+type cmfcTimedMetadata = [@as("NONE") #NONE | @as("PASSTHROUGH") #PASSTHROUGH]
+@ocaml.doc(
   "Ignore this setting unless you have SCTE-35 markers in your input video file. Choose Passthrough (PASSTHROUGH) if you want SCTE-35 markers that appear in your input to also appear in this output. Choose None (NONE) if you don't want those SCTE-35 markers in this output."
 )
 type cmfcScte35Source = [@as("NONE") #NONE | @as("PASSTHROUGH") #PASSTHROUGH]
@@ -1850,9 +2197,20 @@ type cmafWriteHLSManifest = [@as("ENABLED") #ENABLED | @as("DISABLED") #DISABLED
 @ocaml.doc("When set to ENABLED, a DASH MPD manifest will be generated for this output.")
 type cmafWriteDASHManifest = [@as("ENABLED") #ENABLED | @as("DISABLED") #DISABLED]
 @ocaml.doc(
+  "When set to LEGACY, the segment target duration is always rounded up to the nearest integer value above its current value in seconds. When set to SPEC\\\\_COMPLIANT, the segment target duration is rounded up to the nearest integer value if fraction seconds are greater than or equal to 0.5 (>= 0.5) and rounded down if less than 0.5 (< 0.5). You may need to use LEGACY if your client needs to ensure that the target duration is always longer than the actual duration of the segment. Some older players may experience interrupted playback when the actual duration of a track in a segment is longer than the target duration."
+)
+type cmafTargetDurationCompatibilityMode = [
+  | @as("SPEC_COMPLIANT") #SPEC_COMPLIANT
+  | @as("LEGACY") #LEGACY
+]
+@ocaml.doc(
   "Include or exclude RESOLUTION attribute for video in EXT-X-STREAM-INF tag of variant manifest."
 )
 type cmafStreamInfResolution = [@as("EXCLUDE") #EXCLUDE | @as("INCLUDE") #INCLUDE]
+@ocaml.doc(
+  "Specify how you want MediaConvert to determine the segment length. Choose Exact (EXACT) to have the encoder use the exact length that you specify with the setting Segment length (SegmentLength). This might result in extra I-frames. Choose Multiple of GOP (GOP_MULTIPLE) to have the encoder round up the segment lengths to match the next GOP boundary."
+)
+type cmafSegmentLengthControl = [@as("GOP_MULTIPLE") #GOP_MULTIPLE | @as("EXACT") #EXACT]
 @ocaml.doc(
   "When set to SINGLE_FILE, a single output file is generated, which is internally segmented using the Fragment Length and Segment Length. When set to SEGMENTED_FILES, separate segment files will be created."
 )
@@ -1885,9 +2243,25 @@ type cmafManifestCompression = [@as("NONE") #NONE | @as("GZIP") #GZIP]
 )
 type cmafKeyProviderType = [@as("STATIC_KEY") #STATIC_KEY | @as("SPEKE") #SPEKE]
 @ocaml.doc(
+  "The cadence MediaConvert follows for generating thumbnails.  If set to FOLLOW_IFRAME, MediaConvert generates thumbnails for each IDR frame in the output (matching the GOP cadence).  If set to FOLLOW_CUSTOM, MediaConvert generates thumbnails according to the interval you specify in thumbnailInterval."
+)
+type cmafIntervalCadence = [
+  | @as("FOLLOW_CUSTOM") #FOLLOW_CUSTOM
+  | @as("FOLLOW_IFRAME") #FOLLOW_IFRAME
+]
+@ocaml.doc(
   "When you use DRM with CMAF outputs, choose whether the service writes the 128-bit encryption initialization vector in the HLS and DASH manifests."
 )
 type cmafInitializationVectorInManifest = [@as("EXCLUDE") #EXCLUDE | @as("INCLUDE") #INCLUDE]
+@ocaml.doc(
+  "Specify whether MediaConvert generates images for trick play. Keep the default value, None (NONE), to not generate any images. Choose Thumbnail (THUMBNAIL) to generate tiled thumbnails. Choose Thumbnail and full frame (THUMBNAIL_AND_FULLFRAME) to generate tiled thumbnails and full-resolution images of single frames. When you enable Write HLS manifest (WriteHlsManifest), MediaConvert creates a child manifest for each set of images that you generate and adds corresponding entries to the parent manifest. When you enable Write DASH manifest (WriteDashManifest), MediaConvert adds an entry in the .mpd manifest for each set of images that you generate. A common application for these images is Roku trick mode. The thumbnails and full-frame images that MediaConvert creates with this feature are compatible with this Roku specification: https://developer.roku.com/docs/developer-program/media-playback/trick-mode/hls-and-dash.md"
+)
+type cmafImageBasedTrickPlay = [
+  | @as("ADVANCED") #ADVANCED
+  | @as("THUMBNAIL_AND_FULLFRAME") #THUMBNAIL_AND_FULLFRAME
+  | @as("THUMBNAIL") #THUMBNAIL
+  | @as("NONE") #NONE
+]
 @ocaml.doc(
   "Specify the encryption scheme that you want the service to use when encrypting your CMAF segments. Choose AES-CBC subsample (SAMPLE-AES) or AES_CTR (AES-CTR)."
 )
@@ -1937,19 +2311,27 @@ type captionDestinationType = [
   | @as("BURN_IN") #BURN_IN
 ]
 @ocaml.doc(
-  "Only applies to jobs with input captions in Teletext or STL formats. Specify whether the spacing between letters in your captions is set by the captions grid or varies depending on letter width. Choose fixed grid to conform to the spacing specified in the captions file more accurately. Choose proportional to make the text easier to read if the captions are closed caption."
+  "Specify whether the text spacing (TeletextSpacing) in your captions is set by the captions grid, or varies depending on letter width. Choose fixed grid (FIXED_GRID) to conform to the spacing specified in the captions file more accurately. Choose proportional (PROPORTIONAL) to make the text easier to read for closed captions."
 )
 type burninSubtitleTeletextSpacing = [
+  | @as("AUTO") #AUTO
   | @as("PROPORTIONAL") #PROPORTIONAL
   | @as("FIXED_GRID") #FIXED_GRID
 ]
-@ocaml.doc("Specifies the color of the shadow cast by the captions.
-All burn-in and DVB-Sub font settings must match.")
-type burninSubtitleShadowColor = [@as("WHITE") #WHITE | @as("BLACK") #BLACK | @as("NONE") #NONE]
 @ocaml.doc(
-  "Specifies font outline color. This option is not valid for source captions that are either 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match."
+  "Specify the color of the shadow cast by the captions. Leave Shadow color (ShadowColor) blank and set Style passthrough (StylePassthrough) to enabled to use the shadow color data from your input captions, if present."
+)
+type burninSubtitleShadowColor = [
+  | @as("AUTO") #AUTO
+  | @as("WHITE") #WHITE
+  | @as("BLACK") #BLACK
+  | @as("NONE") #NONE
+]
+@ocaml.doc(
+  "Specify font outline color. Leave Outline color (OutlineColor) blank and set Style passthrough (StylePassthrough) to enabled to use the font outline color data from your input captions, if present."
 )
 type burninSubtitleOutlineColor = [
+  | @as("AUTO") #AUTO
   | @as("BLUE") #BLUE
   | @as("GREEN") #GREEN
   | @as("RED") #RED
@@ -1958,9 +2340,11 @@ type burninSubtitleOutlineColor = [
   | @as("BLACK") #BLACK
 ]
 @ocaml.doc(
-  "Specifies the color of the burned-in captions. This option is not valid for source captions that are STL, 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match."
+  "Specify the color of the burned-in captions text. Leave Font color (FontColor) blank and set Style passthrough (StylePassthrough) to enabled to use the font color data from your input captions, if present."
 )
 type burninSubtitleFontColor = [
+  | @as("AUTO") #AUTO
+  | @as("HEX") #HEX
   | @as("BLUE") #BLUE
   | @as("GREEN") #GREEN
   | @as("RED") #RED
@@ -1968,13 +2352,40 @@ type burninSubtitleFontColor = [
   | @as("BLACK") #BLACK
   | @as("WHITE") #WHITE
 ]
-@ocaml.doc("Specifies the color of the rectangle behind the captions.
-All burn-in and DVB-Sub font settings must match.")
-type burninSubtitleBackgroundColor = [@as("WHITE") #WHITE | @as("BLACK") #BLACK | @as("NONE") #NONE]
 @ocaml.doc(
-  "If no explicit x_position or y_position is provided, setting alignment to centered will place the captions at the bottom center of the output. Similarly, setting a left alignment will align captions to the bottom left of the output. If x and y positions are given in conjunction with the alignment parameter, the font will be justified (either left or centered) relative to those coordinates. This option is not valid for source captions that are STL, 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match."
+  "Specify the font that you want the service to use for your burn in captions when your input captions specify a font that MediaConvert doesn't support. When you set Fallback font (FallbackFont) to best match (BEST_MATCH), or leave blank, MediaConvert uses a supported font that most closely matches the font that your input captions specify. When there are multiple unsupported fonts in your input captions, MediaConvert matches each font with the supported font that matches best. When you explicitly choose a replacement font, MediaConvert uses that font to replace all unsupported fonts from your input."
 )
-type burninSubtitleAlignment = [@as("LEFT") #LEFT | @as("CENTERED") #CENTERED]
+type burninSubtitleFallbackFont = [
+  | @as("PROPORTIONAL_SERIF") #PROPORTIONAL_SERIF
+  | @as("PROPORTIONAL_SANSSERIF") #PROPORTIONAL_SANSSERIF
+  | @as("MONOSPACED_SERIF") #MONOSPACED_SERIF
+  | @as("MONOSPACED_SANSSERIF") #MONOSPACED_SANSSERIF
+  | @as("BEST_MATCH") #BEST_MATCH
+]
+@ocaml.doc(
+  "Specify the color of the rectangle behind the captions. Leave background color (BackgroundColor) blank and set Style passthrough (StylePassthrough) to enabled to use the background color data from your input captions, if present."
+)
+type burninSubtitleBackgroundColor = [
+  | @as("AUTO") #AUTO
+  | @as("WHITE") #WHITE
+  | @as("BLACK") #BLACK
+  | @as("NONE") #NONE
+]
+@ocaml.doc(
+  "Ignore this setting unless Style passthrough (StylePassthrough) is set to Enabled and Font color (FontColor) set to Black, Yellow, Red, Green, Blue, or Hex. Use Apply font color (ApplyFontColor) for additional font color controls. When you choose White text only (WHITE_TEXT_ONLY), or leave blank, your font color setting only applies to white text in your input captions. For example, if your font color setting is Yellow, and your input captions have red and white text, your output captions will have red and yellow text. When you choose ALL_TEXT, your font color setting applies to all of your output captions text."
+)
+type burninSubtitleApplyFontColor = [
+  | @as("ALL_TEXT") #ALL_TEXT
+  | @as("WHITE_TEXT_ONLY") #WHITE_TEXT_ONLY
+]
+@ocaml.doc(
+  "Specify the alignment of your captions. If no explicit x_position is provided, setting alignment to centered will placethe captions at the bottom center of the output. Similarly, setting a left alignment willalign captions to the bottom left of the output. If x and y positions are given in conjunction with the alignment parameter, the font will be justified (either left or centered) relative to those coordinates."
+)
+type burninSubtitleAlignment = [@as("AUTO") #AUTO | @as("LEFT") #LEFT | @as("CENTERED") #CENTERED]
+@ocaml.doc(
+  "Set Style passthrough (StylePassthrough) to ENABLED to use the available style, color, and position information from your input captions. MediaConvert uses default settings for any missing style and position information in your input captions. Set Style passthrough to DISABLED, or leave blank, to ignore the style and position information from your input captions and use default settings: white text with black outlining, bottom-center positioning, and automatic sizing. Whether you set Style passthrough to enabled or not, you can also choose to manually override any of the individual style and position settings."
+)
+type burnInSubtitleStylePassthrough = [@as("DISABLED") #DISABLED | @as("ENABLED") #ENABLED]
 @ocaml.doc(
   "The tag type that AWS Billing and Cost Management will use to sort your AWS Elemental MediaConvert costs on any billing report that you set up."
 )
@@ -2063,6 +2474,8 @@ type av1FramerateControl = [
   | @as("SPECIFIED") #SPECIFIED
   | @as("INITIALIZE_FROM_SOURCE") #INITIALIZE_FROM_SOURCE
 ]
+@ocaml.doc("Specify the Bit depth (Av1BitDepth). You can choose 8-bit (BIT_8) or 10-bit (BIT_10).")
+type av1BitDepth = [@as("BIT_10") #BIT_10 | @as("BIT_8") #BIT_8]
 @ocaml.doc(
   "Specify the strength of any adaptive quantization filters that you enable. The value that you choose here applies to Spatial adaptive quantization (spatialAdaptiveQuantization)."
 )
@@ -2080,6 +2493,7 @@ type av1AdaptiveQuantization = [
 type audioTypeControl = [@as("USE_CONFIGURED") #USE_CONFIGURED | @as("FOLLOW_INPUT") #FOLLOW_INPUT]
 @ocaml.doc("Specifies the type of the audio selector.")
 type audioSelectorType = [
+  | @as("HLS_RENDITION_GROUP") #HLS_RENDITION_GROUP
   | @as("LANGUAGE_CODE") #LANGUAGE_CODE
   | @as("TRACK") #TRACK
   | @as("PID") #PID
@@ -2298,13 +2712,156 @@ type __listOf__integerMin1Max2147483647 = array<__integerMin1Max2147483647>
 type __listOf__doubleMinNegative60Max6 = array<__doubleMinNegative60Max6>
 type __listOfTeletextPageType = array<teletextPageType>
 type __listOfHlsAdMarkers = array<hlsAdMarkers>
-@ocaml.doc("WEBVTT Destination Settings")
+@ocaml.doc(
+  "Required when you set (Profile) under (VideoDescription)>(CodecSettings)>(XavcSettings) to the value XAVC_HD."
+)
+type xavcHdProfileSettings = {
+  @ocaml.doc(
+    "Ignore this setting unless you set Frame rate (framerateNumerator divided by framerateDenominator) to 29.970. If your input framerate is 23.976, choose Hard (HARD). Otherwise, keep the default value None (NONE). For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/working-with-telecine-and-inverse-telecine.html."
+  )
+  @as("Telecine")
+  telecine: option<xavcHdProfileTelecine>,
+  @ocaml.doc(
+    "Number of slices per picture. Must be less than or equal to the number of macroblock rows for progressive pictures, and less than or equal to half the number of macroblock rows for interlaced pictures."
+  )
+  @as("Slices")
+  slices: option<__integerMin4Max12>,
+  @ocaml.doc(
+    "Optional. Use Quality tuning level (qualityTuningLevel) to choose how you want to trade off encoding speed for output video quality. The default behavior is faster, lower quality, single-pass encoding."
+  )
+  @as("QualityTuningLevel")
+  qualityTuningLevel: option<xavcHdProfileQualityTuningLevel>,
+  @ocaml.doc(
+    "Choose the scan line type for the output. Keep the default value, Progressive (PROGRESSIVE) to create a progressive output, regardless of the scan type of your input. Use Top field first (TOP_FIELD) or Bottom field first (BOTTOM_FIELD) to create an output that's interlaced with the same field polarity throughout. Use Follow, default top (FOLLOW_TOP_FIELD) or Follow, default bottom (FOLLOW_BOTTOM_FIELD) to produce outputs with the same field polarity as the source. For jobs that have multiple inputs, the output field polarity might change over the course of the output. Follow behavior depends on the input scan type. If the source is interlaced, the output will be interlaced with the same polarity as the source. If the source is progressive, the output will be interlaced with top field bottom field first, depending on which of the Follow options you choose."
+  )
+  @as("InterlaceMode")
+  interlaceMode: option<xavcInterlaceMode>,
+  @ocaml.doc(
+    "Specify the size of the buffer that MediaConvert uses in the HRD buffer model for this output. Specify this value in bits; for example, enter five megabits as 5000000. When you don't set this value, or you set it to zero, MediaConvert calculates the default by doubling the bitrate of this output point."
+  )
+  @as("HrdBufferSize")
+  hrdBufferSize: option<__integerMin0Max1152000000>,
+  @ocaml.doc(
+    "Frequency of closed GOPs. In streaming applications, it is recommended that this be set to 1 so a decoder joining mid-stream will receive an IDR frame as quickly as possible. Setting this value to 0 will break output segmenting."
+  )
+  @as("GopClosedCadence")
+  gopClosedCadence: option<__integerMin0Max2147483647>,
+  @ocaml.doc(
+    "Specify whether the encoder uses B-frames as reference frames for other pictures in the same GOP. Choose Allow (ENABLED) to allow the encoder to use B-frames as reference frames. Choose Don't allow (DISABLED) to prevent the encoder from using B-frames as reference frames."
+  )
+  @as("GopBReference")
+  gopBReference: option<xavcGopBReference>,
+  @ocaml.doc(
+    "The best way to set up adaptive quantization is to keep the default value, Auto (AUTO), for the setting Adaptive quantization (XavcAdaptiveQuantization). When you do so, MediaConvert automatically applies the best types of quantization for your video content. Include this setting in your JSON job specification only when you choose to change the default value for Adaptive quantization. Enable this setting to have the encoder reduce I-frame pop. I-frame pop appears as a visual flicker that can arise when the encoder saves bits by copying some macroblocks many times from frame to frame, and then refreshes them at the I-frame. When you enable this setting, the encoder updates these macroblocks slightly more often to smooth out the flicker. This setting is disabled by default. Related setting: In addition to enabling this setting, you must also set Adaptive quantization (adaptiveQuantization) to a value other than Off (OFF) or Auto (AUTO). Use Adaptive quantization to adjust the degree of smoothing that Flicker adaptive quantization provides."
+  )
+  @as("FlickerAdaptiveQuantization")
+  flickerAdaptiveQuantization: option<xavcFlickerAdaptiveQuantization>,
+  @ocaml.doc(
+    "Specify the XAVC HD (Long GOP) Bitrate Class to set the bitrate of your output. Outputs of the same class have similar image quality over the operating points that are valid for that class."
+  )
+  @as("BitrateClass")
+  bitrateClass: option<xavcHdProfileBitrateClass>,
+}
+@ocaml.doc(
+  "Required when you set (Profile) under (VideoDescription)>(CodecSettings)>(XavcSettings) to the value XAVC_HD_INTRA_CBG."
+)
+type xavcHdIntraCbgProfileSettings = {
+  @ocaml.doc(
+    "Specify the XAVC Intra HD (CBG) Class to set the bitrate of your output. Outputs of the same class have similar image quality over the operating points that are valid for that class."
+  )
+  @as("XavcClass")
+  xavcClass: option<xavcHdIntraCbgProfileClass>,
+}
+@ocaml.doc(
+  "Required when you set (Profile) under (VideoDescription)>(CodecSettings)>(XavcSettings) to the value XAVC_4K."
+)
+type xavc4kProfileSettings = {
+  @ocaml.doc(
+    "Number of slices per picture. Must be less than or equal to the number of macroblock rows for progressive pictures, and less than or equal to half the number of macroblock rows for interlaced pictures."
+  )
+  @as("Slices")
+  slices: option<__integerMin8Max12>,
+  @ocaml.doc(
+    "Optional. Use Quality tuning level (qualityTuningLevel) to choose how you want to trade off encoding speed for output video quality. The default behavior is faster, lower quality, single-pass encoding."
+  )
+  @as("QualityTuningLevel")
+  qualityTuningLevel: option<xavc4kProfileQualityTuningLevel>,
+  @ocaml.doc(
+    "Specify the size of the buffer that MediaConvert uses in the HRD buffer model for this output. Specify this value in bits; for example, enter five megabits as 5000000. When you don't set this value, or you set it to zero, MediaConvert calculates the default by doubling the bitrate of this output point."
+  )
+  @as("HrdBufferSize")
+  hrdBufferSize: option<__integerMin0Max1152000000>,
+  @ocaml.doc(
+    "Frequency of closed GOPs. In streaming applications, it is recommended that this be set to 1 so a decoder joining mid-stream will receive an IDR frame as quickly as possible. Setting this value to 0 will break output segmenting."
+  )
+  @as("GopClosedCadence")
+  gopClosedCadence: option<__integerMin0Max2147483647>,
+  @ocaml.doc(
+    "Specify whether the encoder uses B-frames as reference frames for other pictures in the same GOP. Choose Allow (ENABLED) to allow the encoder to use B-frames as reference frames. Choose Don't allow (DISABLED) to prevent the encoder from using B-frames as reference frames."
+  )
+  @as("GopBReference")
+  gopBReference: option<xavcGopBReference>,
+  @ocaml.doc(
+    "The best way to set up adaptive quantization is to keep the default value, Auto (AUTO), for the setting Adaptive quantization (XavcAdaptiveQuantization). When you do so, MediaConvert automatically applies the best types of quantization for your video content. Include this setting in your JSON job specification only when you choose to change the default value for Adaptive quantization. Enable this setting to have the encoder reduce I-frame pop. I-frame pop appears as a visual flicker that can arise when the encoder saves bits by copying some macroblocks many times from frame to frame, and then refreshes them at the I-frame. When you enable this setting, the encoder updates these macroblocks slightly more often to smooth out the flicker. This setting is disabled by default. Related setting: In addition to enabling this setting, you must also set Adaptive quantization (adaptiveQuantization) to a value other than Off (OFF) or Auto (AUTO). Use Adaptive quantization to adjust the degree of smoothing that Flicker adaptive quantization provides."
+  )
+  @as("FlickerAdaptiveQuantization")
+  flickerAdaptiveQuantization: option<xavcFlickerAdaptiveQuantization>,
+  @ocaml.doc(
+    "Specify the codec profile for this output. Choose High, 8-bit, 4:2:0 (HIGH) or High, 10-bit, 4:2:2 (HIGH_422). These profiles are specified in ITU-T H.264."
+  )
+  @as("CodecProfile")
+  codecProfile: option<xavc4kProfileCodecProfile>,
+  @ocaml.doc(
+    "Specify the XAVC 4k (Long GOP) Bitrate Class to set the bitrate of your output. Outputs of the same class have similar image quality over the operating points that are valid for that class."
+  )
+  @as("BitrateClass")
+  bitrateClass: option<xavc4kProfileBitrateClass>,
+}
+@ocaml.doc(
+  "Required when you set (Profile) under (VideoDescription)>(CodecSettings)>(XavcSettings) to the value XAVC_4K_INTRA_VBR."
+)
+type xavc4kIntraVbrProfileSettings = {
+  @ocaml.doc(
+    "Specify the XAVC Intra 4k (VBR) Class to set the bitrate of your output. Outputs of the same class have similar image quality over the operating points that are valid for that class."
+  )
+  @as("XavcClass")
+  xavcClass: option<xavc4kIntraVbrProfileClass>,
+}
+@ocaml.doc(
+  "Required when you set (Profile) under (VideoDescription)>(CodecSettings)>(XavcSettings) to the value XAVC_4K_INTRA_CBG."
+)
+type xavc4kIntraCbgProfileSettings = {
+  @ocaml.doc(
+    "Specify the XAVC Intra 4k (CBG) Class to set the bitrate of your output. Outputs of the same class have similar image quality over the operating points that are valid for that class."
+  )
+  @as("XavcClass")
+  xavcClass: option<xavc4kIntraCbgProfileClass>,
+}
+@ocaml.doc(
+  "Settings specific to WebVTT sources in HLS alternative rendition group. Specify the properties (renditionGroupId, renditionName or renditionLanguageCode) to identify the unique subtitle track among the alternative rendition groups present in the HLS manifest. If no unique track is found, or multiple tracks match the specified properties, the job fails. If there is only one subtitle track in the rendition group, the settings can be left empty and the default subtitle track will be chosen. If your caption source is a sidecar file, use FileSourceSettings instead of WebvttHlsSourceSettings."
+)
+type webvttHlsSourceSettings = {
+  @ocaml.doc("Optional. Specify media name") @as("RenditionName") renditionName: option<__string>,
+  @ocaml.doc("Optional. Specify ISO 639-2 or ISO 639-3 code in the language property")
+  @as("RenditionLanguageCode")
+  renditionLanguageCode: option<languageCode>,
+  @ocaml.doc("Optional. Specify alternative group ID") @as("RenditionGroupId")
+  renditionGroupId: option<__string>,
+}
+@ocaml.doc(
+  "Settings related to WebVTT captions. WebVTT is a sidecar format that holds captions in a file that is separate from the video container. Set up sidecar captions in the same output group, but different output from your video. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/ttml-and-webvtt-output-captions.html. When you work directly in your JSON job specification, include this object and any required children when you set destinationType to WebVTT."
+)
 type webvttDestinationSettings = {
   @ocaml.doc(
-    "Choose Enabled (ENABLED) to have MediaConvert use the font style, color, and position information from the captions source in the input. Keep the default value, Disabled (DISABLED), for simplified output captions."
+    "Set Style passthrough (StylePassthrough) to ENABLED to use the available style, color, and position information from your input captions. MediaConvert uses default settings for any missing style and position information in your input captions. Set Style passthrough to DISABLED, or leave blank, to ignore the style and position information from your input captions and use simplified output captions."
   )
   @as("StylePassthrough")
   stylePassthrough: option<webvttStylePassthrough>,
+  @ocaml.doc(
+    "Set Accessibility subtitles (Accessibility) to Enabled (ENABLED) if the ISMC or WebVTT captions track is intended to provide accessibility for people who are deaf or hard of hearing. When you enable this feature, MediaConvert adds the following attributes under EXT-X-MEDIA in the HLS or CMAF manifest for this track: CHARACTERISTICS=\"public.accessibility.describes-spoken-dialog,public.accessibility.describes-music-and-sound\" and AUTOSELECT=\"YES\". Keep the default value, Disabled (DISABLED), if the captions track is not intended to provide such accessibility. MediaConvert will not add the above attributes."
+  )
+  @as("Accessibility")
+  accessibility: option<webvttAccessibilitySubs>,
 }
 @ocaml.doc(
   "Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to the value WAV."
@@ -2638,6 +3195,16 @@ type staticKeyProvider = {
   keyFormat: option<__stringPatternIdentityAZaZ26AZaZ09163>,
 }
 @ocaml.doc(
+  "Settings related to SRT captions. SRT is a sidecar format that holds captions in a file that is separate from the video container. Set up sidecar captions in the same output group, but different output from your video. When you work directly in your JSON job specification, include this object and any required children when you set destinationType to SRT."
+)
+type srtDestinationSettings = {
+  @ocaml.doc(
+    "Set Style passthrough (StylePassthrough) to ENABLED to use the available style, color, and position information from your input captions. MediaConvert uses default settings for any missing style and position information in your input captions. Set Style passthrough to DISABLED, or leave blank, to ignore the style and position information from your input captions and use simplified output captions."
+  )
+  @as("StylePassthrough")
+  stylePassthrough: option<srtStylePassthrough>,
+}
+@ocaml.doc(
   "Settings related to SCC captions. SCC is a sidecar format that holds captions in a file that is separate from the video container. Set up sidecar captions in the same output group, but different output from your video. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/scc-srt-output-captions.html. When you work directly in your JSON job specification, include this object and any required children when you set destinationType to SCC."
 )
 type sccDestinationSettings = {
@@ -2654,8 +3221,13 @@ type s3EncryptionSettings = {
   )
   @as("KmsKeyArn")
   kmsKeyArn: option<
-    __stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912,
+    __stringPatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932,
   >,
+  @ocaml.doc(
+    "Optionally, specify the encryption context that you want to use alongside your KMS key. AWS KMS uses this encryption context as additional authenticated data (AAD) to support authenticated encryption. This value must be a base64-encoded UTF-8 string holding JSON which represents a string-string map. To use this setting, you must also set Server-side encryption (S3ServerSideEncryptionType) to AWS KMS (SERVER_SIDE_ENCRYPTION_KMS). For more information about encryption context, see: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context."
+  )
+  @as("KmsEncryptionContext")
+  kmsEncryptionContext: option<__stringPatternAZaZ0902>,
   @ocaml.doc(
     "Specify how you want your data keys managed. AWS uses data keys to encrypt your content. AWS also encrypts the data keys themselves, using a customer master key (CMK), and then stores the encrypted data keys alongside your encrypted content. Use this setting to specify which AWS service manages the CMK. For simplest set up, choose Amazon S3 (SERVER_SIDE_ENCRYPTION_S3). If you want your master key to be managed by AWS Key Management Service (KMS), choose AWS KMS (SERVER_SIDE_ENCRYPTION_KMS). By default, when you choose AWS KMS, KMS uses the AWS managed customer master key (CMK) associated with Amazon S3 to encrypt your data keys. You can optionally choose to specify a different, customer managed CMK. Do so by specifying the Amazon Resource Name (ARN) of the key for the setting  KMS ARN (kmsKeyArn)."
   )
@@ -2814,6 +3386,22 @@ type proresSettings = {
   )
   @as("CodecProfile")
   codecProfile: option<proresCodecProfile>,
+  @ocaml.doc(
+    "This setting applies only to ProRes 4444 and ProRes 4444 XQ outputs that you create from inputs that use 4:4:4 chroma sampling. Set Preserve 4:4:4 sampling (PRESERVE_444_SAMPLING) to allow outputs to also use 4:4:4 chroma sampling. You must specify a value for this setting when your output codec profile supports 4:4:4 chroma sampling. Related Settings: When you set Chroma sampling to Preserve 4:4:4 sampling (PRESERVE_444_SAMPLING), you must choose an output codec profile that supports 4:4:4 chroma sampling. These values for Profile (CodecProfile) support 4:4:4 chroma sampling: Apple ProRes 4444 (APPLE_PRORES_4444) or Apple ProRes 4444 XQ (APPLE_PRORES_4444_XQ). When you set Chroma sampling to Preserve 4:4:4 sampling, you must disable all video preprocessors except for Nexguard file marker (PartnerWatermarking). When you set Chroma sampling to Preserve 4:4:4 sampling and use framerate conversion, you must set Frame rate conversion algorithm (FramerateConversionAlgorithm) to Drop duplicate (DUPLICATE_DROP)."
+  )
+  @as("ChromaSampling")
+  chromaSampling: option<proresChromaSampling>,
+}
+@ocaml.doc(
+  "A policy configures behavior that you allow or disallow for your account. For information about MediaConvert policies, see the user guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html"
+)
+type policy = {
+  @ocaml.doc("Allow or disallow jobs that specify Amazon S3 inputs.") @as("S3Inputs")
+  s3Inputs: option<inputPolicy>,
+  @ocaml.doc("Allow or disallow jobs that specify HTTPS inputs.") @as("HttpsInputs")
+  httpsInputs: option<inputPolicy>,
+  @ocaml.doc("Allow or disallow jobs that specify HTTP inputs.") @as("HttpInputs")
+  httpInputs: option<inputPolicy>,
 }
 @ocaml.doc("Required when you set Codec, under AudioDescriptions>CodecSettings, to the value OPUS.")
 type opusSettings = {
@@ -2846,7 +3434,12 @@ type noiseReducerTemporalFilterSettings = {
   @as("Speed")
   speed: option<__integerMinNegative1Max3>,
   @ocaml.doc(
-    "Optional. When you set Noise reducer (noiseReducer) to Temporal (TEMPORAL), you can use this setting to apply sharpening. The default behavior, Auto (AUTO), allows the transcoder to determine whether to apply filtering, depending on input type and quality. When you set Noise reducer to Temporal, your output bandwidth is reduced. When Post temporal sharpening is also enabled, that bandwidth reduction is smaller."
+    "Use Post temporal sharpening strength (postTemporalSharpeningStrength) to define the amount of sharpening the transcoder applies to your output. Set Post temporal sharpening strength to Low (LOW), Medium (MEDIUM), or High (HIGH) to indicate the amount of sharpening."
+  )
+  @as("PostTemporalSharpeningStrength")
+  postTemporalSharpeningStrength: option<noiseFilterPostTemporalSharpeningStrength>,
+  @ocaml.doc(
+    "When you set Noise reducer (noiseReducer) to Temporal (TEMPORAL), the bandwidth and sharpness of your output is reduced. You can optionally use Post temporal sharpening (postTemporalSharpening) to apply sharpening to the edges of your output. Note that Post temporal sharpening will also make the bandwidth reduction from the Noise reducer smaller. The default behavior, Auto (AUTO), allows the transcoder to determine whether to apply sharpening, depending on your input type and quality. When you set Post temporal sharpening to Enabled (ENABLED), specify how much sharpening is applied using Post temporal sharpening strength (postTemporalSharpeningStrength). Set Post temporal sharpening to Disabled (DISABLED) to not apply sharpening."
   )
   @as("PostTemporalSharpening")
   postTemporalSharpening: option<noiseFilterPostTemporalSharpening>,
@@ -2980,18 +3573,20 @@ type nexGuardFileMarkerSettings = {
   @as("License")
   license: option<__stringMin1Max100000>,
 }
-@ocaml.doc("These settings relate to your MXF output container.")
-type mxfSettings = {
+@ocaml.doc(
+  "Specify the XAVC profile settings for MXF outputs when you set your MXF profile to XAVC."
+)
+type mxfXavcProfileSettings = {
   @ocaml.doc(
-    "Specify the MXF profile, also called shim, for this output. When you choose Auto, MediaConvert chooses a profile based on the video codec and resolution. For a list of codecs supported with each MXF profile, see https://docs.aws.amazon.com/mediaconvert/latest/ug/codecs-supported-with-each-mxf-profile.html. For more information about the automatic selection behavior, see https://docs.aws.amazon.com/mediaconvert/latest/ug/default-automatic-selection-of-mxf-profiles.html."
+    "Specify a value for this setting only for outputs that you set up with one of these two XAVC profiles: XAVC HD Intra CBG (XAVC_HD_INTRA_CBG) or XAVC 4K Intra CBG (XAVC_4K_INTRA_CBG). Specify the amount of space in each frame that the service reserves for ancillary data, such as teletext captions. The default value for this setting is 1492 bytes per frame. This should be sufficient to prevent overflow unless you have multiple pages of teletext captions data. If you have a large amount of teletext data, specify a larger number."
   )
-  @as("Profile")
-  profile: option<mxfProfile>,
+  @as("MaxAncDataSize")
+  maxAncDataSize: option<__integerMin0Max2147483647>,
   @ocaml.doc(
-    "Optional. When you have AFD signaling set up in your output video stream, use this setting to choose whether to also include it in the MXF wrapper. Choose Don't copy (NO_COPY) to exclude AFD signaling from the MXF wrapper. Choose Copy from video stream (COPY_FROM_VIDEO) to copy the AFD values from the video stream for this output to the MXF wrapper. Regardless of which option you choose, the AFD values remain in the video stream. Related settings: To set up your output to include or exclude AFD values, see AfdSignaling, under VideoDescription. On the console, find AFD signaling under the output's video encoding settings."
+    "To create an output that complies with the XAVC file format guidelines for interoperability, keep the default value, Drop frames for compliance (DROP_FRAMES_FOR_COMPLIANCE). To include all frames from your input in this output, keep the default setting, Allow any duration (ALLOW_ANY_DURATION). The number of frames that MediaConvert excludes when you set this to Drop frames for compliance depends on the output frame rate and duration."
   )
-  @as("AfdSignaling")
-  afdSignaling: option<mxfAfdSignaling>,
+  @as("DurationMode")
+  durationMode: option<mxfXavcDurationMode>,
 }
 @ocaml.doc(
   "Required when you set (Codec) under (VideoDescription)>(CodecSettings) to the value MPEG2."
@@ -3062,11 +3657,13 @@ type mpeg2Settings = {
   )
   @as("ParControl")
   parControl: option<mpeg2ParControl>,
-  @ocaml.doc("Number of B-frames between reference frames.")
+  @ocaml.doc(
+    "Specify the number of B-frames that MediaConvert puts between reference frames in this output. Valid values are whole numbers from 0 through 7. When you don't specify a value, MediaConvert defaults to 2."
+  )
   @as("NumberBFramesBetweenReferenceFrames")
   numberBFramesBetweenReferenceFrames: option<__integerMin0Max7>,
   @ocaml.doc(
-    "Enforces separation between repeated (cadence) I-frames and I-frames inserted by Scene Change Detection. If a scene change I-frame is within I-interval frames of a cadence I-frame, the GOP is shrunk and/or stretched to the scene change I-frame. GOP stretch requires enabling lookahead as well as setting I-interval. The normal cadence resumes for the next GOP. This setting is only used when Scene Change Detect is enabled. Note: Maximum GOP stretch = GOP size + Min-I-interval - 1"
+    "Use this setting only when you also enable Scene change detection (SceneChangeDetect). This setting determines how the encoder manages the spacing between I-frames that it inserts as part of the I-frame cadence and the I-frames that it inserts for Scene change detection. When you specify a value for this setting, the encoder determines whether to skip a cadence-driven I-frame by the value you set. For example, if you set Min I interval (minIInterval) to 5 and a cadence-driven I-frame would fall within 5 frames of a scene-change I-frame, then the encoder skips the cadence-driven I-frame. In this way, one GOP is shrunk slightly and one GOP is stretched slightly. When the cadence-driven I-frames are farther from the scene-change I-frame than the value you set, then the encoder leaves all I-frames in place and the GOPs surrounding the scene change are smaller than the usual cadence GOPs."
   )
   @as("MinIInterval")
   minIInterval: option<__integerMin0Max30>,
@@ -3094,15 +3691,17 @@ type mpeg2Settings = {
   @as("HrdBufferInitialFillPercentage")
   hrdBufferInitialFillPercentage: option<__integerMin0Max100>,
   @ocaml.doc(
-    "Indicates if the GOP Size in MPEG2 is specified in frames or seconds. If seconds the system will convert the GOP Size into a frame count at run time."
+    "Specify the units for GOP size (GopSize). If you don't specify a value here, by default the encoder measures GOP size in frames."
   )
   @as("GopSizeUnits")
   gopSizeUnits: option<mpeg2GopSizeUnits>,
-  @ocaml.doc("GOP Length (keyframe interval) in frames or seconds. Must be greater than zero.")
+  @ocaml.doc(
+    "Specify the interval between keyframes, in seconds or frames, for this output. Default: 12 Related settings: When you specify the GOP size in seconds, set GOP mode control (GopSizeUnits) to Specified, seconds (SECONDS). The default value for GOP mode control (GopSizeUnits) is Frames (FRAMES)."
+  )
   @as("GopSize")
   gopSize: option<__doubleMin0>,
   @ocaml.doc(
-    "Frequency of closed GOPs. In streaming applications, it is recommended that this be set to 1 so a decoder joining mid-stream will receive an IDR frame as quickly as possible. Setting this value to 0 will break output segmenting."
+    "Specify the relative frequency of open to closed GOPs in this output. For example, if you want to allow four open GOPs and then require a closed GOP, set this value to 5. When you create a streaming output, we recommend that you keep the default value, 1, so that players starting mid-stream receive an IDR frame as quickly as possible. Don't set this value to 0; that would break output segmenting."
   )
   @as("GopClosedCadence")
   gopClosedCadence: option<__integerMin0Max2147483647>,
@@ -3152,6 +3751,11 @@ type mpeg2Settings = {
   "These settings relate to the fragmented MP4 container for the segments in your DASH outputs."
 )
 type mpdSettings = {
+  @ocaml.doc(
+    "To include ID3 metadata in this output: Set ID3 metadata (timedMetadata) to Passthrough (PASSTHROUGH). Specify this ID3 metadata in Custom ID3 metadata inserter (timedMetadataInsertion). MediaConvert writes each instance of ID3 metadata in a separate Event Message (eMSG) box. To exclude this ID3 metadata: Set ID3 metadata to None (NONE) or leave blank."
+  )
+  @as("TimedMetadata")
+  timedMetadata: option<mpdTimedMetadata>,
   @ocaml.doc(
     "Ignore this setting unless you have SCTE-35 markers in your input video file. Choose Passthrough (PASSTHROUGH) if you want SCTE-35 markers that appear in your input to also appear in this output. Choose None (NONE) if you don't want those SCTE-35 markers in this output."
   )
@@ -3477,6 +4081,11 @@ type imscDestinationSettings = {
   )
   @as("StylePassthrough")
   stylePassthrough: option<imscStylePassthrough>,
+  @ocaml.doc(
+    "Set Accessibility subtitles (Accessibility) to Enabled (ENABLED) if the ISMC or WebVTT captions track is intended to provide accessibility for people who are deaf or hard of hearing. When you enable this feature, MediaConvert adds the following attributes under EXT-X-MEDIA in the HLS or CMAF manifest for this track: CHARACTERISTICS=\"public.accessibility.describes-spoken-dialog,public.accessibility.describes-music-and-sound\" and AUTOSELECT=\"YES\". Keep the default value, Disabled (DISABLED), if the captions track is not intended to provide such accessibility. MediaConvert will not add the above attributes."
+  )
+  @as("Accessibility")
+  accessibility: option<imscAccessibilitySubs>,
 }
 @ocaml.doc(
   "To insert ID3 tags in your output, specify two values. Use ID3 tag (Id3) to specify the base 64 encoded string and use Timecode (TimeCode) to specify the time when the tag should be inserted. To insert multiple ID3 tags in your output, create multiple instances of ID3 insertion (Id3Insertion)."
@@ -3484,7 +4093,8 @@ type imscDestinationSettings = {
 type id3Insertion = {
   @ocaml.doc("Provide a Timecode (TimeCode) in HH:MM:SS:FF or HH:MM:SS;FF format.") @as("Timecode")
   timecode: option<__stringPattern010920405090509092>,
-  @ocaml.doc("Use ID3 tag (Id3) to provide a tag value in base64-encode format.") @as("Id3")
+  @ocaml.doc("Use ID3 tag (Id3) to provide a fully formed ID3 tag in base64-encode format.")
+  @as("Id3")
   id3: option<__stringPatternAZaZ0902>,
 }
 @ocaml.doc(
@@ -3542,6 +4152,48 @@ type hlsSettings = {
   @ocaml.doc("Specifies the group to which the audio rendition belongs.") @as("AudioGroupId")
   audioGroupId: option<__string>,
 }
+@ocaml.doc(
+  "Settings specific to audio sources in an HLS alternate rendition group. Specify the properties (renditionGroupId, renditionName or renditionLanguageCode) to identify the unique audio track among the alternative rendition groups present in the HLS manifest. If no unique track is found, or multiple tracks match the properties provided, the job fails. If no properties in hlsRenditionGroupSettings are specified, the default audio track within the video segment is chosen. If there is no audio within video segment, the alternative audio with DEFAULT=YES is chosen instead."
+)
+type hlsRenditionGroupSettings = {
+  @ocaml.doc("Optional. Specify media name") @as("RenditionName") renditionName: option<__string>,
+  @ocaml.doc("Optional. Specify ISO 639-2 or ISO 639-3 code in the language property")
+  @as("RenditionLanguageCode")
+  renditionLanguageCode: option<languageCode>,
+  @ocaml.doc("Optional. Specify alternative group ID") @as("RenditionGroupId")
+  renditionGroupId: option<__string>,
+}
+@ocaml.doc("Tile and thumbnail settings applicable when imageBasedTrickPlay is ADVANCED")
+type hlsImageBasedTrickPlaySettings = {
+  @ocaml.doc("Number of thumbnails in each row of a tile image.  Set a value between 1 and 512.")
+  @as("TileWidth")
+  tileWidth: option<__integerMin1Max512>,
+  @ocaml.doc(
+    "Number of thumbnails in each column of a tile image. Set a value between 2 and 2048. Must be divisible by 2."
+  )
+  @as("TileHeight")
+  tileHeight: option<__integerMin1Max2048>,
+  @ocaml.doc(
+    "Width of each thumbnail within each tile image, in pixels.  Default is 312.  Must be divisible by 8."
+  )
+  @as("ThumbnailWidth")
+  thumbnailWidth: option<__integerMin8Max4096>,
+  @ocaml.doc(
+    "Enter the interval, in seconds, that MediaConvert uses to generate thumbnails.  If the interval you enter doesn't align with the output frame rate, MediaConvert automatically rounds the interval to align with the output frame rate.  For example, if the output frame rate is 29.97 frames per second and you enter 5, MediaConvert uses a 150 frame interval to generate thumbnails."
+  )
+  @as("ThumbnailInterval")
+  thumbnailInterval: option<__doubleMin0Max2147483647>,
+  @ocaml.doc(
+    "Height of each thumbnail within each tile image, in pixels.  Leave blank to maintain aspect ratio with thumbnail width.  If following the aspect ratio would lead to a total tile height greater than 4096, then the job will be rejected.  Must be divisible by 2."
+  )
+  @as("ThumbnailHeight")
+  thumbnailHeight: option<__integerMin2Max4096>,
+  @ocaml.doc(
+    "The cadence MediaConvert follows for generating thumbnails.  If set to FOLLOW_IFRAME, MediaConvert generates thumbnails for each IDR frame in the output (matching the GOP cadence).  If set to FOLLOW_CUSTOM, MediaConvert generates thumbnails according to the interval you specify in thumbnailInterval."
+  )
+  @as("IntervalCadence")
+  intervalCadence: option<hlsIntervalCadence>,
+}
 @ocaml.doc("Caption Language Mapping")
 type hlsCaptionLanguageMapping = {
   @ocaml.doc("Caption language description.") @as("LanguageDescription")
@@ -3558,6 +4210,19 @@ type hlsCaptionLanguageMapping = {
   customLanguageCode: option<__stringMin3Max3PatternAZaZ3>,
   @ocaml.doc("Caption channel.") @as("CaptionChannel")
   captionChannel: option<__integerMinNegative2147483648Max2147483647>,
+}
+@ocaml.doc("Setting for HDR10+ metadata insertion")
+type hdr10Plus = {
+  @ocaml.doc(
+    "Specify the HDR10+ target display nominal peak luminance, in nits. This is the nominal maximum luminance of the target display as defined by ST 2094-40."
+  )
+  @as("TargetMonitorNits")
+  targetMonitorNits: option<__integerMin0Max4000>,
+  @ocaml.doc(
+    "Specify the HDR10+ mastering display normalized peak luminance, in nits. This is the normalized actual peak luminance of the mastering display, as defined by ST 2094-40."
+  )
+  @as("MasteringMonitorNits")
+  masteringMonitorNits: option<__integerMin0Max4000>,
 }
 @ocaml.doc(
   "Use these settings to specify static color calibration metadata, as defined by SMPTE ST 2086. These values don't affect the pixel values that are encoded in the video stream. They are intended to help the downstream video player display content in a way that reflects the intentions of the the content creator."
@@ -3625,7 +4290,7 @@ type hdr10Metadata = {
   bluePrimaryX: option<__integerMin0Max50000>,
 }
 @ocaml.doc(
-  "Settings for quality-defined variable bitrate encoding with the H.265 codec. Required when you set Rate control mode to QVBR. Not valid when you set Rate control mode to a value other than QVBR, or when you don't define Rate control mode."
+  "Settings for quality-defined variable bitrate encoding with the H.265 codec. Use these settings only when you set QVBR for Rate control mode (RateControlMode)."
 )
 type h265QvbrSettings = {
   @ocaml.doc(
@@ -3634,7 +4299,7 @@ type h265QvbrSettings = {
   @as("QvbrQualityLevelFineTune")
   qvbrQualityLevelFineTune: option<__doubleMin0Max1>,
   @ocaml.doc(
-    "Required when you use QVBR rate control mode. That is, when you specify qvbrSettings within h265Settings. Specify the general target quality level for this output, from 1 to 10. Use higher numbers for greater quality. Level 10 results in nearly lossless compression. The quality level for most broadcast-quality transcodes is between 6 and 9. Optionally, to specify a value between whole numbers, also provide a value for the setting qvbrQualityLevelFineTune. For example, if you want your QVBR quality level to be 7.33, set qvbrQualityLevel to 7 and set qvbrQualityLevelFineTune to .33."
+    "Use this setting only when you set Rate control mode (RateControlMode) to QVBR. Specify the target quality level for this output. MediaConvert determines the right number of bits to use for each part of the video to maintain the video quality that you specify. When you keep the default value, AUTO, MediaConvert picks a quality level for you, based on characteristics of your input video. If you prefer to specify a quality level, specify a number from 1 through 10. Use higher numbers for greater quality. Level 10 results in nearly lossless compression. The quality level for most broadcast-quality transcodes is between 6 and 9. Optionally, to specify a value between whole numbers, also provide a value for the setting qvbrQualityLevelFineTune. For example, if you want your QVBR quality level to be 7.33, set qvbrQualityLevel to 7 and set qvbrQualityLevelFineTune to .33."
   )
   @as("QvbrQualityLevel")
   qvbrQualityLevel: option<__integerMin1Max10>,
@@ -3645,7 +4310,7 @@ type h265QvbrSettings = {
   maxAverageBitrate: option<__integerMin1000Max1466400000>,
 }
 @ocaml.doc(
-  "Settings for quality-defined variable bitrate encoding with the H.264 codec. Required when you set Rate control mode to QVBR. Not valid when you set Rate control mode to a value other than QVBR, or when you don't define Rate control mode."
+  "Settings for quality-defined variable bitrate encoding with the H.265 codec. Use these settings only when you set QVBR for Rate control mode (RateControlMode)."
 )
 type h264QvbrSettings = {
   @ocaml.doc(
@@ -3654,7 +4319,7 @@ type h264QvbrSettings = {
   @as("QvbrQualityLevelFineTune")
   qvbrQualityLevelFineTune: option<__doubleMin0Max1>,
   @ocaml.doc(
-    "Required when you use QVBR rate control mode. That is, when you specify qvbrSettings within h264Settings. Specify the general target quality level for this output, from 1 to 10. Use higher numbers for greater quality. Level 10 results in nearly lossless compression. The quality level for most broadcast-quality transcodes is between 6 and 9. Optionally, to specify a value between whole numbers, also provide a value for the setting qvbrQualityLevelFineTune. For example, if you want your QVBR quality level to be 7.33, set qvbrQualityLevel to 7 and set qvbrQualityLevelFineTune to .33."
+    "Use this setting only when you set Rate control mode (RateControlMode) to QVBR. Specify the target quality level for this output. MediaConvert determines the right number of bits to use for each part of the video to maintain the video quality that you specify. When you keep the default value, AUTO, MediaConvert picks a quality level for you, based on characteristics of your input video. If you prefer to specify a quality level, specify a number from 1 through 10. Use higher numbers for greater quality. Level 10 results in nearly lossless compression. The quality level for most broadcast-quality transcodes is between 6 and 9. Optionally, to specify a value between whole numbers, also provide a value for the setting qvbrQualityLevelFineTune. For example, if you want your QVBR quality level to be 7.33, set qvbrQualityLevel to 7 and set qvbrQualityLevelFineTune to .33."
   )
   @as("QvbrQualityLevel")
   qvbrQualityLevel: option<__integerMin1Max10>,
@@ -3690,6 +4355,21 @@ type f4vSettings = {
   )
   @as("MoovPlacement")
   moovPlacement: option<f4vMoovPlacement>,
+}
+@ocaml.doc(
+  "If your source content has EIA-608 Line 21 Data Services, enable this feature to specify what MediaConvert does with the Extended Data Services (XDS) packets. You can choose to pass through XDS packets, or remove them from the output. For more information about XDS, see EIA-608 Line Data Services, section 9.5.1.5 05h Content Advisory."
+)
+type extendedDataServices = {
+  @ocaml.doc(
+    "The action to take on content advisory XDS packets.  If you select PASSTHROUGH, packets will not be changed. If you select STRIP, any packets will be removed in output captions."
+  )
+  @as("VchipAction")
+  vchipAction: option<vchipAction>,
+  @ocaml.doc(
+    "The action to take on copy and redistribution control XDS packets.  If you select PASSTHROUGH, packets will not be changed. If you select STRIP, any packets will be removed in output captions."
+  )
+  @as("CopyProtectionAction")
+  copyProtectionAction: option<copyProtectionAction>,
 }
 @ocaml.doc("ESAM SignalProcessingNotification data defined by OC-SP-ESAM-API-I03-131025.")
 type esamSignalProcessingNotification = {
@@ -3855,61 +4535,75 @@ type eac3AtmosSettings = {
   )
   @as("SurroundExMode")
   surroundExMode: option<eac3AtmosSurroundExMode>,
-  @ocaml.doc("Choose how the service does stereo downmixing.") @as("StereoDownmix")
+  @ocaml.doc(
+    "Choose how the service does stereo downmixing. Default value: Not indicated (ATMOS_STORAGE_DDP_DMIXMOD_NOT_INDICATED) Related setting: To have MediaConvert use this value, keep the default value, Custom (SPECIFIED) for the setting Downmix control (DownmixControl). Otherwise, MediaConvert ignores Stereo downmix (StereoDownmix)."
+  )
+  @as("StereoDownmix")
   stereoDownmix: option<eac3AtmosStereoDownmix>,
   @ocaml.doc(
-    "Specify the percentage of audio content that must be speech before the encoder uses the measured speech loudness as the overall program loudness."
+    "Specify the percentage of audio content, from 0% to 100%, that must be speech in order for the encoder to use the measured speech loudness as the overall program loudness. Default value: 15%"
   )
   @as("SpeechThreshold")
-  speechThreshold: option<__integerMin1Max100>,
+  speechThreshold: option<__integerMin0Max100>,
   @ocaml.doc("This value is always 48000. It represents the sample rate in Hz.") @as("SampleRate")
   sampleRate: option<__integerMin48000Max48000>,
   @ocaml.doc("Choose how the service meters the loudness of your audio.") @as("MeteringMode")
   meteringMode: option<eac3AtmosMeteringMode>,
   @ocaml.doc(
-    "Specify a value for the following Dolby Atmos setting: Left total/Right total surround mix (Lt/Rt surround). MediaConvert uses this value for downmixing. How the service uses this value depends on the value that you choose for Stereo downmix (Eac3AtmosStereoDownmix). Valid values: -1.5, -3.0, -4.5, -6.0, and -60. The value -60 mutes the channel."
+    "Specify a value for the following Dolby Atmos setting: Left total/Right total surround mix (Lt/Rt surround). MediaConvert uses this value for downmixing. Default value: -3 dB (ATMOS_STORAGE_DDP_MIXLEV_MINUS_3_DB) Valid values: -1.5, -3.0, -4.5, -6.0, and -60. The value -60 mutes the channel. Related setting: How the service uses this value depends on the value that you choose for Stereo downmix (Eac3AtmosStereoDownmix). Related setting: To have MediaConvert use this value, keep the default value, Custom (SPECIFIED) for the setting Downmix control (DownmixControl). Otherwise, the service ignores Left total/Right total surround (LtRtSurroundMixLevel)."
   )
   @as("LtRtSurroundMixLevel")
   ltRtSurroundMixLevel: option<__doubleMinNegative60MaxNegative1>,
   @ocaml.doc(
-    "Specify a value for the following Dolby Atmos setting: Left total/Right total center mix (Lt/Rt center). MediaConvert uses this value for downmixing. How the service uses this value depends on the value that you choose for Stereo downmix (Eac3AtmosStereoDownmix). Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0."
+    "Specify a value for the following Dolby Atmos setting: Left total/Right total center mix (Lt/Rt center). MediaConvert uses this value for downmixing. Default value: -3 dB (ATMOS_STORAGE_DDP_MIXLEV_MINUS_3_DB) Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0. Related setting: How the service uses this value depends on the value that you choose for Stereo downmix (Eac3AtmosStereoDownmix). Related setting: To have MediaConvert use this value, keep the default value, Custom (SPECIFIED) for the setting Downmix control (DownmixControl). Otherwise, MediaConvert ignores Left total/Right total center (LtRtCenterMixLevel)."
   )
   @as("LtRtCenterMixLevel")
   ltRtCenterMixLevel: option<__doubleMinNegative6Max3>,
   @ocaml.doc(
-    "Specify a value for the following Dolby Atmos setting: Left only/Right only (Lo/Ro surround). MediaConvert uses this value for downmixing. How the service uses this value depends on the value that you choose for Stereo downmix (Eac3AtmosStereoDownmix). Valid values: -1.5, -3.0, -4.5, -6.0, and -60. The value -60 mutes the channel."
+    "Specify a value for the following Dolby Atmos setting: Left only/Right only (Lo/Ro surround). MediaConvert uses this value for downmixing. Default value: -3 dB (ATMOS_STORAGE_DDP_MIXLEV_MINUS_3_DB). Valid values: -1.5, -3.0, -4.5, -6.0, and -60. The value -60 mutes the channel. Related setting: How the service uses this value depends on the value that you choose for Stereo downmix (Eac3AtmosStereoDownmix). Related setting: To have MediaConvert use this value, keep the default value, Custom (SPECIFIED) for the setting Downmix control (DownmixControl). Otherwise, MediaConvert ignores Left only/Right only surround (LoRoSurroundMixLevel)."
   )
   @as("LoRoSurroundMixLevel")
   loRoSurroundMixLevel: option<__doubleMinNegative60MaxNegative1>,
-  @ocaml.doc("Specify a value for the following Dolby Atmos setting: Left only/Right only center mix
-(Lo/Ro center). MediaConvert uses this value for downmixing. How the service uses this
-value depends on the value that you choose for Stereo downmix (Eac3AtmosStereoDownmix).
-Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0.")
+  @ocaml.doc(
+    "Specify a value for the following Dolby Atmos setting: Left only/Right only center mix (Lo/Ro center). MediaConvert uses this value for downmixing. Default value: -3 dB (ATMOS_STORAGE_DDP_MIXLEV_MINUS_3_DB). Valid values: 3.0, 1.5, 0.0, -1.5, -3.0, -4.5, and -6.0. Related setting: How the service uses this value depends on the value that you choose for Stereo downmix (Eac3AtmosStereoDownmix). Related setting: To have MediaConvert use this value, keep the default value, Custom (SPECIFIED) for the setting Downmix control (DownmixControl). Otherwise, MediaConvert ignores Left only/Right only center (LoRoCenterMixLevel)."
+  )
   @as("LoRoCenterMixLevel")
   loRoCenterMixLevel: option<__doubleMinNegative6Max3>,
-  @ocaml.doc("Specify how the service limits the audio dynamic range when compressing the audio.")
+  @ocaml.doc(
+    "Specify whether MediaConvert should use any dynamic range control metadata from your input file. Keep the default value, Custom (SPECIFIED), to provide dynamic range control values in your job settings. Choose Follow source (INITIALIZE_FROM_SOURCE) to use the metadata from your input. Related settings--Use these settings to specify your dynamic range control values: Dynamic range compression line (DynamicRangeCompressionLine) and Dynamic range compression RF (DynamicRangeCompressionRf). When you keep the value Custom (SPECIFIED) for Dynamic range control (DynamicRangeControl) and you don't specify values for the related settings, MediaConvert uses default values for those settings."
+  )
+  @as("DynamicRangeControl")
+  dynamicRangeControl: option<eac3AtmosDynamicRangeControl>,
+  @ocaml.doc(
+    "Choose the Dolby dynamic range control (DRC) profile that MediaConvert uses when encoding the metadata in the Dolby stream for the RF operating mode. Default value: Film light (ATMOS_STORAGE_DDP_COMPR_FILM_LIGHT) Related setting: To have MediaConvert use the value you specify here, keep the default value, Custom (SPECIFIED) for the setting Dynamic range control (DynamicRangeControl). Otherwise, MediaConvert ignores Dynamic range compression RF (DynamicRangeCompressionRf). For information about the Dolby DRC operating modes and profiles, see the Dynamic Range Control chapter of the Dolby Metadata Guide at https://developer.dolby.com/globalassets/professional/documents/dolby-metadata-guide.pdf."
+  )
   @as("DynamicRangeCompressionRf")
   dynamicRangeCompressionRf: option<eac3AtmosDynamicRangeCompressionRf>,
-  @ocaml.doc("Specify the absolute peak level for a signal with dynamic range compression.")
+  @ocaml.doc(
+    "Choose the Dolby dynamic range control (DRC) profile that MediaConvert uses when encoding the metadata in the Dolby stream for the line operating mode. Default value: Film light (ATMOS_STORAGE_DDP_COMPR_FILM_LIGHT) Related setting: To have MediaConvert use the value you specify here, keep the default value, Custom (SPECIFIED) for the setting Dynamic range control (DynamicRangeControl). Otherwise, MediaConvert ignores Dynamic range compression line (DynamicRangeCompressionLine). For information about the Dolby DRC operating modes and profiles, see the Dynamic Range Control chapter of the Dolby Metadata Guide at https://developer.dolby.com/globalassets/professional/documents/dolby-metadata-guide.pdf."
+  )
   @as("DynamicRangeCompressionLine")
   dynamicRangeCompressionLine: option<eac3AtmosDynamicRangeCompressionLine>,
+  @ocaml.doc(
+    "Specify whether MediaConvert should use any downmix metadata from your input file. Keep the default value, Custom (SPECIFIED) to provide downmix values in your job settings. Choose Follow source (INITIALIZE_FROM_SOURCE) to use the metadata from your input. Related settings--Use these settings to specify your downmix values: Left only/Right only surround (LoRoSurroundMixLevel), Left total/Right total surround (LtRtSurroundMixLevel), Left total/Right total center (LtRtCenterMixLevel), Left only/Right only center (LoRoCenterMixLevel),  and Stereo downmix (StereoDownmix). When you keep Custom (SPECIFIED) for Downmix control (DownmixControl) and you don't specify values for the related settings, MediaConvert uses default values for those settings."
+  )
+  @as("DownmixControl")
+  downmixControl: option<eac3AtmosDownmixControl>,
   @ocaml.doc("Enable Dolby Dialogue Intelligence to adjust loudness based on dialogue analysis.")
   @as("DialogueIntelligence")
   dialogueIntelligence: option<eac3AtmosDialogueIntelligence>,
-  @ocaml.doc(
-    "The coding mode for Dolby Digital Plus JOC (Atmos) is always 9.1.6 (CODING_MODE_9_1_6)."
-  )
-  @as("CodingMode")
+  @ocaml.doc("The coding mode for Dolby Digital Plus JOC (Atmos).") @as("CodingMode")
   codingMode: option<eac3AtmosCodingMode>,
   @ocaml.doc(
     "Specify the bitstream mode for the E-AC-3 stream that the encoder emits. For more information about the EAC3 bitstream mode, see ATSC A/52-2012 (Annex E)."
   )
   @as("BitstreamMode")
   bitstreamMode: option<eac3AtmosBitstreamMode>,
-  @ocaml.doc("Specify the average bitrate in bits per second.
-Valid values: 384k, 448k, 640k, 768k")
+  @ocaml.doc(
+    "Specify the average bitrate for this output in bits per second. Valid values: 384k, 448k, 576k, 640k, 768k, 1024k Default value: 448k Note that MediaConvert supports 384k only with channel-based immersive (CBI) 7.1.4 and 5.1.4 inputs. For CBI 9.1.6 and other input types, MediaConvert automatically increases your output bitrate to 448k."
+  )
   @as("Bitrate")
-  bitrate: option<__integerMin384000Max768000>,
+  bitrate: option<__integerMin384000Max1024000>,
 }
 @ocaml.doc(
   "Use these settings to insert a DVB Time and Date Table (TDT) in the transport stream of this output. When you work directly in your JSON job specification, include this object only when your job has a transport stream output and the container settings contain the object M2tsSettings."
@@ -3934,12 +4628,12 @@ type dvbSubSourceSettings = {
 )
 type dvbSubDestinationSettings = {
   @ocaml.doc(
-    "Specifies the vertical position of the caption relative to the top of the output in pixels. A value of 10 would result in the captions starting 10 pixels from the top of the output. If no explicit y_position is provided, the caption will be positioned towards the bottom of the output. This option is not valid for source captions that are STL, 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match."
+    "Specify the vertical position (YPosition) of the captions, relative to the top of the output in pixels. A value of 10 would result in the captions starting 10 pixels from the top of the output. If no explicit y_position is provided, the caption will be positioned towards the bottom of the output. Within your job settings, all of your DVB-Sub settings must be identical."
   )
   @as("YPosition")
   yposition: option<__integerMin0Max2147483647>,
   @ocaml.doc(
-    "Specifies the horizontal position of the caption relative to the left side of the output in pixels. A value of 10 would result in the captions starting 10 pixels from the left of the output. If no explicit x_position is provided, the horizontal caption position will be determined by the alignment parameter. This option is not valid for source captions that are STL, 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match."
+    "Specify the horizontal position (XPosition) of the captions, relative to the left side of the outputin pixels. A value of 10 would result in the captions starting 10 pixels from the left ofthe output. If no explicit x_position is provided, the horizontal caption position will bedetermined by the alignment parameter. Within your job settings, all of your DVB-Sub settings must be identical."
   )
   @as("XPosition")
   xposition: option<__integerMin0Max2147483647>,
@@ -3949,7 +4643,7 @@ type dvbSubDestinationSettings = {
   @as("Width")
   width: option<__integerMin1Max2147483647>,
   @ocaml.doc(
-    "Only applies to jobs with input captions in Teletext or STL formats. Specify whether the spacing between letters in your captions is set by the captions grid or varies depending on letter width. Choose fixed grid to conform to the spacing specified in the captions file more accurately. Choose proportional to make the text easier to read if the captions are closed caption."
+    "Specify whether the Text spacing (TeletextSpacing) in your captions is set by the captions grid, or varies depending on letter width. Choose fixed grid (FIXED_GRID) to conform to the spacing specified in the captions file more accurately. Choose proportional (PROPORTIONAL) to make the text easier to read for closed captions. Within your job settings, all of your DVB-Sub settings must be identical."
   )
   @as("TeletextSpacing")
   teletextSpacing: option<dvbSubtitleTeletextSpacing>,
@@ -3959,62 +4653,78 @@ type dvbSubDestinationSettings = {
   @as("SubtitlingType")
   subtitlingType: option<dvbSubtitlingType>,
   @ocaml.doc(
-    "Specifies the vertical offset of the shadow relative to the captions in pixels. A value of -2 would result in a shadow offset 2 pixels above the text. All burn-in and DVB-Sub font settings must match."
+    "Set Style passthrough (StylePassthrough) to ENABLED to use the available style, color, and position information from your input captions. MediaConvert uses default settings for any missing style and position information in your input captions. Set Style passthrough to DISABLED, or leave blank, to ignore the style and position information from your input captions and use default settings: white text with black outlining, bottom-center positioning, and automatic sizing. Whether you set Style passthrough to enabled or not, you can also choose to manually override any of the individual style and position settings."
+  )
+  @as("StylePassthrough")
+  stylePassthrough: option<dvbSubtitleStylePassthrough>,
+  @ocaml.doc(
+    "Specify the vertical offset of the shadow relative to the captions in pixels. A value of -2 would result in a shadow offset 2 pixels above the text. Leave Shadow y-offset (ShadowYOffset) blank and set Style passthrough (StylePassthrough) to enabled to use the shadow y-offset data from your input captions, if present. Within your job settings, all of your DVB-Sub settings must be identical."
   )
   @as("ShadowYOffset")
   shadowYOffset: option<__integerMinNegative2147483648Max2147483647>,
   @ocaml.doc(
-    "Specifies the horizontal offset of the shadow relative to the captions in pixels. A value of -2 would result in a shadow offset 2 pixels to the left. All burn-in and DVB-Sub font settings must match."
+    "Specify the horizontal offset of the shadow, relative to the captions in pixels. A value of -2 would result in a shadow offset 2 pixels to the left. Within your job settings, all of your DVB-Sub settings must be identical."
   )
   @as("ShadowXOffset")
   shadowXOffset: option<__integerMinNegative2147483648Max2147483647>,
   @ocaml.doc(
-    "Specifies the opacity of the shadow. 255 is opaque; 0 is transparent. Leaving this parameter blank is equivalent to setting it to 0 (transparent). All burn-in and DVB-Sub font settings must match."
+    "Specify the opacity of the shadow. Enter a value from 0 to 255, where 0 is transparent and 255 is opaque. If Style passthrough (StylePassthrough) is set to Enabled, leave Shadow opacity (ShadowOpacity) blank to pass through the shadow style information in your input captions to your output captions. If Style passthrough is set to disabled, leave blank to use a value of 0 and remove all shadows from your output captions. Within your job settings, all of your DVB-Sub settings must be identical."
   )
   @as("ShadowOpacity")
   shadowOpacity: option<__integerMin0Max255>,
-  @ocaml.doc("Specifies the color of the shadow cast by the captions.
-All burn-in and DVB-Sub font settings must match.")
+  @ocaml.doc(
+    "Specify the color of the shadow cast by the captions. Leave Shadow color (ShadowColor) blank and set Style passthrough (StylePassthrough) to enabled to use the shadow color data from your input captions, if present. Within your job settings, all of your DVB-Sub settings must be identical."
+  )
   @as("ShadowColor")
   shadowColor: option<dvbSubtitleShadowColor>,
   @ocaml.doc(
-    "Specifies font outline size in pixels. This option is not valid for source captions that are either 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match."
+    "Specify the Outline size (OutlineSize) of the caption text, in pixels. Leave Outline size blank and set Style passthrough (StylePassthrough) to enabled to use the outline size data from your input captions, if present. Within your job settings, all of your DVB-Sub settings must be identical."
   )
   @as("OutlineSize")
   outlineSize: option<__integerMin0Max10>,
   @ocaml.doc(
-    "Specifies font outline color. This option is not valid for source captions that are either 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match."
+    "Specify font outline color. Leave Outline color (OutlineColor) blank and set Style passthrough (StylePassthrough) to enabled to use the font outline color data from your input captions, if present. Within your job settings, all of your DVB-Sub settings must be identical."
   )
   @as("OutlineColor")
   outlineColor: option<dvbSubtitleOutlineColor>,
+  @ocaml.doc(
+    "Ignore this setting unless your Font color is set to Hex. Enter either six or eight hexidecimal digits, representing red, green, and blue, with two optional extra digits for alpha. For example a value of 1122AABB is a red value of 0x11, a green value of 0x22, a blue value of 0xAA, and an alpha value of 0xBB."
+  )
+  @as("HexFontColor")
+  hexFontColor: option<__stringMin6Max8Pattern09aFAF609aFAF2>,
   @ocaml.doc(
     "Specify the height, in pixels, of this set of DVB-Sub captions. The default value is 576 pixels. Related setting: When you use this setting, you must set DDS handling (ddsHandling) to a value other than None (NONE). All burn-in and DVB-Sub font settings must match."
   )
   @as("Height")
   height: option<__integerMin1Max2147483647>,
   @ocaml.doc(
-    "A positive integer indicates the exact font size in points. Set to 0 for automatic font size selection. All burn-in and DVB-Sub font settings must match."
+    "Specify the Font size (FontSize) in pixels. Must be a positive integer. Set to 0, or leave blank, for automatic font size. Within your job settings, all of your DVB-Sub settings must be identical."
   )
   @as("FontSize")
   fontSize: option<__integerMin0Max96>,
   @ocaml.doc(
-    "Provide the font script, using an ISO 15924 script code, if the LanguageCode is not sufficient for determining the script type. Where LanguageCode or CustomLanguageCode is sufficient, use \"AUTOMATIC\" or leave unset. This is used to help determine the appropriate font for rendering DVB-Sub captions."
+    "Set Font script (FontScript) to Automatically determined (AUTOMATIC), or leave blank, to automatically determine the font script in your input captions. Otherwise, set to Simplified Chinese (HANS) or Traditional Chinese (HANT) if your input font script uses Simplified or Traditional Chinese. Within your job settings, all of your DVB-Sub settings must be identical."
   )
   @as("FontScript")
   fontScript: option<fontScript>,
-  @ocaml.doc("Font resolution in DPI (dots per inch); default is 96 dpi.
-All burn-in and DVB-Sub font settings must match.")
+  @ocaml.doc("Specify the Font resolution (FontResolution) in DPI (dots per inch).
+Within your job settings, all of your DVB-Sub settings must be identical.")
   @as("FontResolution")
   fontResolution: option<__integerMin96Max600>,
-  @ocaml.doc("Specifies the opacity of the burned-in captions. 255 is opaque; 0 is transparent.
-All burn-in and DVB-Sub font settings must match.")
+  @ocaml.doc("Specify the opacity of the burned-in captions. 255 is opaque; 0 is transparent.
+Within your job settings, all of your DVB-Sub settings must be identical.")
   @as("FontOpacity")
   fontOpacity: option<__integerMin0Max255>,
   @ocaml.doc(
-    "Specifies the color of the burned-in captions. This option is not valid for source captions that are STL, 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match."
+    "Specify the color of the captions text. Leave Font color (FontColor) blank and set Style passthrough (StylePassthrough) to enabled to use the font color data from your input captions, if present. Within your job settings, all of your DVB-Sub settings must be identical."
   )
   @as("FontColor")
   fontColor: option<dvbSubtitleFontColor>,
+  @ocaml.doc(
+    "Specify the font that you want the service to use for your burn in captions when your input captions specify a font that MediaConvert doesn't support. When you set Fallback font (FallbackFont) to best match (BEST_MATCH), or leave blank, MediaConvert uses a supported font that most closely matches the font that your input captions specify. When there are multiple unsupported fonts in your input captions, MediaConvert matches each font with the supported font that matches best. When you explicitly choose a replacement font, MediaConvert uses that font to replace all unsupported fonts from your input."
+  )
+  @as("FallbackFont")
+  fallbackFont: option<dvbSubSubtitleFallbackFont>,
   @ocaml.doc(
     "Use this setting, along with DDS x-coordinate (ddsXCoordinate), to specify the upper left corner of the display definition segment (DDS) display window. With this setting, specify the distance, in pixels, between the top of the frame and the top of the DDS display window. Keep the default value, 0, to have MediaConvert automatically choose this offset. Related setting: When you use this setting, you must set DDS handling (ddsHandling) to a value other than None (NONE). MediaConvert uses these values to determine whether to write page position data to the DDS or to the page composition segment (PCS). All burn-in and DVB-Sub font settings must match."
   )
@@ -4031,16 +4741,22 @@ All burn-in and DVB-Sub font settings must match.")
   @as("DdsHandling")
   ddsHandling: option<dvbddsHandling>,
   @ocaml.doc(
-    "Specifies the opacity of the background rectangle. 255 is opaque; 0 is transparent. Leaving this parameter blank is equivalent to setting it to 0 (transparent). All burn-in and DVB-Sub font settings must match."
+    "Specify the opacity of the background rectangle. Enter a value from 0 to 255, where 0 is transparent and 255 is opaque. If Style passthrough (StylePassthrough) is set to enabled, leave blank to pass through the background style information in your input captions to your output captions. If Style passthrough is set to disabled, leave blank to use a value of 0 and remove all backgrounds from your output captions. Within your job settings, all of your DVB-Sub settings must be identical."
   )
   @as("BackgroundOpacity")
   backgroundOpacity: option<__integerMin0Max255>,
-  @ocaml.doc("Specifies the color of the rectangle behind the captions.
-All burn-in and DVB-Sub font settings must match.")
+  @ocaml.doc(
+    "Specify the color of the rectangle behind the captions. Leave background color (BackgroundColor) blank and set Style passthrough (StylePassthrough) to enabled to use the background color data from your input captions, if present."
+  )
   @as("BackgroundColor")
   backgroundColor: option<dvbSubtitleBackgroundColor>,
   @ocaml.doc(
-    "If no explicit x_position or y_position is provided, setting alignment to centered will place the captions at the bottom center of the output. Similarly, setting a left alignment will align captions to the bottom left of the output. If x and y positions are given in conjunction with the alignment parameter, the font will be justified (either left or centered) relative to those coordinates. This option is not valid for source captions that are STL, 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match."
+    "Ignore this setting unless Style Passthrough (StylePassthrough) is set to Enabled and Font color (FontColor) set to Black, Yellow, Red, Green, Blue, or Hex. Use Apply font color (ApplyFontColor) for additional font color controls. When you choose White text only (WHITE_TEXT_ONLY), or leave blank, your font color setting only applies to white text in your input captions. For example, if your font color setting is Yellow, and your input captions have red and white text, your output captions will have red and yellow text. When you choose ALL_TEXT, your font color setting applies to all of your output captions text."
+  )
+  @as("ApplyFontColor")
+  applyFontColor: option<dvbSubtitleApplyFontColor>,
+  @ocaml.doc(
+    "Specify the alignment of your captions. If no explicit x_position is provided, setting alignment to centered will placethe captions at the bottom center of the output. Similarly, setting a left alignment willalign captions to the bottom left of the output. If x and y positions are given in conjunction with the alignment parameter, the font will be justified (either left or centered) relative to those coordinates. Within your job settings, all of your DVB-Sub settings must be identical."
   )
   @as("Alignment")
   alignment: option<dvbSubtitleAlignment>,
@@ -4120,10 +4836,46 @@ type deinterlacer = {
   @as("Algorithm")
   algorithm: option<deinterlaceAlgorithm>,
 }
+@ocaml.doc("Tile and thumbnail settings applicable when imageBasedTrickPlay is ADVANCED")
+type dashIsoImageBasedTrickPlaySettings = {
+  @ocaml.doc("Number of thumbnails in each row of a tile image.  Set a value between 1 and 512.")
+  @as("TileWidth")
+  tileWidth: option<__integerMin1Max512>,
+  @ocaml.doc(
+    "Number of thumbnails in each column of a tile image. Set a value between 2 and 2048. Must be divisible by 2."
+  )
+  @as("TileHeight")
+  tileHeight: option<__integerMin1Max2048>,
+  @ocaml.doc(
+    "Width of each thumbnail within each tile image, in pixels.  Default is 312.  Must be divisible by 8."
+  )
+  @as("ThumbnailWidth")
+  thumbnailWidth: option<__integerMin8Max4096>,
+  @ocaml.doc(
+    "Enter the interval, in seconds, that MediaConvert uses to generate thumbnails.  If the interval you enter doesn't align with the output frame rate, MediaConvert automatically rounds the interval to align with the output frame rate.  For example, if the output frame rate is 29.97 frames per second and you enter 5, MediaConvert uses a 150 frame interval to generate thumbnails."
+  )
+  @as("ThumbnailInterval")
+  thumbnailInterval: option<__doubleMin0Max2147483647>,
+  @ocaml.doc(
+    "Height of each thumbnail within each tile image, in pixels.  Leave blank to maintain aspect ratio with thumbnail width.  If following the aspect ratio would lead to a total tile height greater than 4096, then the job will be rejected.  Must be divisible by 2."
+  )
+  @as("ThumbnailHeight")
+  thumbnailHeight: option<__integerMin1Max4096>,
+  @ocaml.doc(
+    "The cadence MediaConvert follows for generating thumbnails.  If set to FOLLOW_IFRAME, MediaConvert generates thumbnails for each IDR frame in the output (matching the GOP cadence).  If set to FOLLOW_CUSTOM, MediaConvert generates thumbnails according to the interval you specify in thumbnailInterval."
+  )
+  @as("IntervalCadence")
+  intervalCadence: option<dashIsoIntervalCadence>,
+}
 @ocaml.doc(
   "These settings relate to the fragmented MP4 container for the segments in your CMAF outputs."
 )
 type cmfcSettings = {
+  @ocaml.doc(
+    "To include ID3 metadata in this output: Set ID3 metadata (timedMetadata) to Passthrough (PASSTHROUGH). Specify this ID3 metadata in Custom ID3 metadata inserter (timedMetadataInsertion). MediaConvert writes each instance of ID3 metadata in a separate Event Message (eMSG) box. To exclude this ID3 metadata: Set ID3 metadata to None (NONE) or leave blank."
+  )
+  @as("TimedMetadata")
+  timedMetadata: option<cmfcTimedMetadata>,
   @ocaml.doc(
     "Ignore this setting unless you have SCTE-35 markers in your input video file. Choose Passthrough (PASSTHROUGH) if you want SCTE-35 markers that appear in your input to also appear in this output. Choose None (NONE) if you don't want those SCTE-35 markers in this output."
   )
@@ -4150,7 +4902,7 @@ type cmfcSettings = {
   @as("AudioTrackType")
   audioTrackType: option<cmfcAudioTrackType>,
   @ocaml.doc(
-    "List the audio rendition groups that you want included with this video rendition. Use a comma-separated list. For example, say you want to include the audio rendition groups that have the audio group IDs \"audio_aac_1\" and \"audio_dolby\". Then you would specify this value: \"audio_aac_1, audio_dolby\". Related setting: The rendition groups that you include in your comma-separated list should all match values that you specify in the setting Audio group ID (AudioGroupId) for audio renditions in the same output group as this video rendition. Default behavior: If you don't specify anything here and for Audio group ID, MediaConvert puts each audio variant in its own audio rendition group and associates it with every video variant. Each value in your list appears in your HLS parent manifest in the EXT-X-STREAM-INF tag as the value for the AUDIO attribute. To continue the previous example, say that the file name for the child manifest for your video rendition is \"amazing_video_1.m3u8\". Then, in your parent manifest, each value will appear on separate lines, like this: #EXT-X-STREAM-INF:AUDIO=\"audio_aac_1\"... amazing_video_1.m3u8 #EXT-X-STREAM-INF:AUDIO=\"audio_dolby\"... amazing_video_1.m3u8"
+    "List the audio rendition groups that you want included with this video rendition. Use a comma-separated list. For example, say you want to include the audio rendition groups that have the audio group IDs \"audio_aac_1\" and \"audio_dolby\". Then you would specify this value: \"audio_aac_1,audio_dolby\". Related setting: The rendition groups that you include in your comma-separated list should all match values that you specify in the setting Audio group ID (AudioGroupId) for audio renditions in the same output group as this video rendition. Default behavior: If you don't specify anything here and for Audio group ID, MediaConvert puts each audio variant in its own audio rendition group and associates it with every video variant. Each value in your list appears in your HLS parent manifest in the EXT-X-STREAM-INF tag as the value for the AUDIO attribute. To continue the previous example, say that the file name for the child manifest for your video rendition is \"amazing_video_1.m3u8\". Then, in your parent manifest, each value will appear on separate lines, like this: #EXT-X-STREAM-INF:AUDIO=\"audio_aac_1\"... amazing_video_1.m3u8 #EXT-X-STREAM-INF:AUDIO=\"audio_dolby\"... amazing_video_1.m3u8"
   )
   @as("AudioRenditionSets")
   audioRenditionSets: option<__string>,
@@ -4165,8 +4917,39 @@ type cmfcSettings = {
   @as("AudioDuration")
   audioDuration: option<cmfcAudioDuration>,
 }
+@ocaml.doc("Tile and thumbnail settings applicable when imageBasedTrickPlay is ADVANCED")
+type cmafImageBasedTrickPlaySettings = {
+  @ocaml.doc("Number of thumbnails in each row of a tile image.  Set a value between 1 and 512.")
+  @as("TileWidth")
+  tileWidth: option<__integerMin1Max512>,
+  @ocaml.doc(
+    "Number of thumbnails in each column of a tile image. Set a value between 2 and 2048. Must be divisible by 2."
+  )
+  @as("TileHeight")
+  tileHeight: option<__integerMin1Max2048>,
+  @ocaml.doc(
+    "Width of each thumbnail within each tile image, in pixels.  Default is 312.  Must be divisible by 8."
+  )
+  @as("ThumbnailWidth")
+  thumbnailWidth: option<__integerMin8Max4096>,
+  @ocaml.doc(
+    "Enter the interval, in seconds, that MediaConvert uses to generate thumbnails.  If the interval you enter doesn't align with the output frame rate, MediaConvert automatically rounds the interval to align with the output frame rate.  For example, if the output frame rate is 29.97 frames per second and you enter 5, MediaConvert uses a 150 frame interval to generate thumbnails."
+  )
+  @as("ThumbnailInterval")
+  thumbnailInterval: option<__doubleMin0Max2147483647>,
+  @ocaml.doc(
+    "Height of each thumbnail within each tile image, in pixels.  Leave blank to maintain aspect ratio with thumbnail width.  If following the aspect ratio would lead to a total tile height greater than 4096, then the job will be rejected.  Must be divisible by 2."
+  )
+  @as("ThumbnailHeight")
+  thumbnailHeight: option<__integerMin2Max4096>,
+  @ocaml.doc(
+    "The cadence MediaConvert follows for generating thumbnails.  If set to FOLLOW_IFRAME, MediaConvert generates thumbnails for each IDR frame in the output (matching the GOP cadence).  If set to FOLLOW_CUSTOM, MediaConvert generates thumbnails according to the interval you specify in thumbnailInterval."
+  )
+  @as("IntervalCadence")
+  intervalCadence: option<cmafIntervalCadence>,
+}
 @ocaml.doc(
-  "Ignore this setting unless your input captions format is SCC. To have the service compensate for differing frame rates between your input captions and input video, specify the frame rate of the captions file. Specify this value as a fraction, using the settings Framerate numerator (framerateNumerator) and Framerate denominator (framerateDenominator). For example, you might specify 24 / 1 for 24 fps, 25 / 1 for 25 fps, 24000 / 1001 for 23.976 fps, or 30000 / 1001 for 29.97 fps."
+  "Ignore this setting unless your input captions format is SCC. To have the service compensate for differing frame rates between your input captions and input video, specify the frame rate of the captions file. Specify this value as a fraction. When you work directly in your JSON job specification, use the settings framerateNumerator and framerateDenominator. For example, you might specify 24 / 1 for 24 fps, 25 / 1 for 25 fps, 24000 / 1001 for 23.976 fps, or 30000 / 1001 for 29.97 fps."
 )
 type captionSourceFramerate = {
   @ocaml.doc(
@@ -4181,87 +4964,107 @@ type captionSourceFramerate = {
   framerateDenominator: option<__integerMin1Max1001>,
 }
 @ocaml.doc(
-  "Settings related to burn-in captions. Set up burn-in captions in the same output as your video. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/burn-in-output-captions.html. When you work directly in your JSON job specification, include this object and any required children when you set destinationType to BURN_IN."
+  "Burn-in is a captions delivery method, rather than a captions format. Burn-in writes the captions directly on your video frames, replacing pixels of video content with the captions. Set up burn-in captions in the same output as your video. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/burn-in-output-captions.html. When you work directly in your JSON job specification, include this object and any required children when you set destinationType to BURN_IN."
 )
 type burninDestinationSettings = {
   @ocaml.doc(
-    "Specifies the vertical position of the caption relative to the top of the output in pixels. A value of 10 would result in the captions starting 10 pixels from the top of the output. If no explicit y_position is provided, the caption will be positioned towards the bottom of the output. This option is not valid for source captions that are STL, 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match."
+    "Specify the vertical position (YPosition) of the captions, relative to the top of the output in pixels. A value of 10 would result in the captions starting 10 pixels from the top of the output. If no explicit y_position is provided, the caption will be positioned towards the bottom of the output."
   )
   @as("YPosition")
   yposition: option<__integerMin0Max2147483647>,
   @ocaml.doc(
-    "Specifies the horizontal position of the caption relative to the left side of the output in pixels. A value of 10 would result in the captions starting 10 pixels from the left of the output. If no explicit x_position is provided, the horizontal caption position will be determined by the alignment parameter. This option is not valid for source captions that are STL, 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match."
+    "Specify the horizontal position (XPosition) of the captions, relative to the left side of the output in pixels. A value of 10 would result in the captions starting 10 pixels from the left of the output. If no explicit x_position is provided, the horizontal caption position will be determined by the alignment parameter."
   )
   @as("XPosition")
   xposition: option<__integerMin0Max2147483647>,
   @ocaml.doc(
-    "Only applies to jobs with input captions in Teletext or STL formats. Specify whether the spacing between letters in your captions is set by the captions grid or varies depending on letter width. Choose fixed grid to conform to the spacing specified in the captions file more accurately. Choose proportional to make the text easier to read if the captions are closed caption."
+    "Specify whether the text spacing (TeletextSpacing) in your captions is set by the captions grid, or varies depending on letter width. Choose fixed grid (FIXED_GRID) to conform to the spacing specified in the captions file more accurately. Choose proportional (PROPORTIONAL) to make the text easier to read for closed captions."
   )
   @as("TeletextSpacing")
   teletextSpacing: option<burninSubtitleTeletextSpacing>,
   @ocaml.doc(
-    "Specifies the vertical offset of the shadow relative to the captions in pixels. A value of -2 would result in a shadow offset 2 pixels above the text. All burn-in and DVB-Sub font settings must match."
+    "Set Style passthrough (StylePassthrough) to ENABLED to use the available style, color, and position information from your input captions. MediaConvert uses default settings for any missing style and position information in your input captions. Set Style passthrough to DISABLED, or leave blank, to ignore the style and position information from your input captions and use default settings: white text with black outlining, bottom-center positioning, and automatic sizing. Whether you set Style passthrough to enabled or not, you can also choose to manually override any of the individual style and position settings."
+  )
+  @as("StylePassthrough")
+  stylePassthrough: option<burnInSubtitleStylePassthrough>,
+  @ocaml.doc(
+    "Specify the vertical offset of the shadow relative to the captions in pixels. A value of -2 would result in a shadow offset 2 pixels above the text. Leave Shadow y-offset (ShadowYOffset) blank and set Style passthrough (StylePassthrough) to enabled to use the shadow y-offset data from your input captions, if present."
   )
   @as("ShadowYOffset")
   shadowYOffset: option<__integerMinNegative2147483648Max2147483647>,
   @ocaml.doc(
-    "Specifies the horizontal offset of the shadow relative to the captions in pixels. A value of -2 would result in a shadow offset 2 pixels to the left. All burn-in and DVB-Sub font settings must match."
+    "Specify the horizontal offset of the shadow, relative to the captions in pixels. A value of -2 would result in a shadow offset 2 pixels to the left."
   )
   @as("ShadowXOffset")
   shadowXOffset: option<__integerMinNegative2147483648Max2147483647>,
   @ocaml.doc(
-    "Specifies the opacity of the shadow. 255 is opaque; 0 is transparent. Leaving this parameter blank is equivalent to setting it to 0 (transparent). All burn-in and DVB-Sub font settings must match."
+    "Specify the opacity of the shadow. Enter a value from 0 to 255, where 0 is transparent and 255 is opaque. If Style passthrough (StylePassthrough) is set to Enabled, leave Shadow opacity (ShadowOpacity) blank to pass through the shadow style information in your input captions to your output captions. If Style passthrough is set to disabled, leave blank to use a value of 0 and remove all shadows from your output captions."
   )
   @as("ShadowOpacity")
   shadowOpacity: option<__integerMin0Max255>,
-  @ocaml.doc("Specifies the color of the shadow cast by the captions.
-All burn-in and DVB-Sub font settings must match.")
+  @ocaml.doc(
+    "Specify the color of the shadow cast by the captions. Leave Shadow color (ShadowColor) blank and set Style passthrough (StylePassthrough) to enabled to use the shadow color data from your input captions, if present."
+  )
   @as("ShadowColor")
   shadowColor: option<burninSubtitleShadowColor>,
   @ocaml.doc(
-    "Specifies font outline size in pixels. This option is not valid for source captions that are either 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match."
+    "Specify the Outline size (OutlineSize) of the caption text, in pixels. Leave Outline size blank and set Style passthrough (StylePassthrough) to enabled to use the outline size data from your input captions, if present."
   )
   @as("OutlineSize")
   outlineSize: option<__integerMin0Max10>,
   @ocaml.doc(
-    "Specifies font outline color. This option is not valid for source captions that are either 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match."
+    "Specify font outline color. Leave Outline color (OutlineColor) blank and set Style passthrough (StylePassthrough) to enabled to use the font outline color data from your input captions, if present."
   )
   @as("OutlineColor")
   outlineColor: option<burninSubtitleOutlineColor>,
   @ocaml.doc(
-    "A positive integer indicates the exact font size in points. Set to 0 for automatic font size selection. All burn-in and DVB-Sub font settings must match."
+    "Ignore this setting unless your Font color is set to Hex. Enter either six or eight hexidecimal digits, representing red, green, and blue, with two optional extra digits for alpha. For example a value of 1122AABB is a red value of 0x11, a green value of 0x22, a blue value of 0xAA, and an alpha value of 0xBB."
+  )
+  @as("HexFontColor")
+  hexFontColor: option<__stringMin6Max8Pattern09aFAF609aFAF2>,
+  @ocaml.doc(
+    "Specify the Font size (FontSize) in pixels. Must be a positive integer. Set to 0, or leave blank, for automatic font size."
   )
   @as("FontSize")
   fontSize: option<__integerMin0Max96>,
   @ocaml.doc(
-    "Provide the font script, using an ISO 15924 script code, if the LanguageCode is not sufficient for determining the script type. Where LanguageCode or CustomLanguageCode is sufficient, use \"AUTOMATIC\" or leave unset. This is used to help determine the appropriate font for rendering burn-in captions."
+    "Set Font script (FontScript) to Automatically determined (AUTOMATIC), or leave blank, to automatically determine the font script in your input captions. Otherwise, set to Simplified Chinese (HANS) or Traditional Chinese (HANT) if your input font script uses Simplified or Traditional Chinese."
   )
   @as("FontScript")
   fontScript: option<fontScript>,
-  @ocaml.doc("Font resolution in DPI (dots per inch); default is 96 dpi.
-All burn-in and DVB-Sub font settings must match.")
+  @ocaml.doc("Specify the Font resolution (FontResolution) in DPI (dots per inch).")
   @as("FontResolution")
   fontResolution: option<__integerMin96Max600>,
-  @ocaml.doc("Specifies the opacity of the burned-in captions. 255 is opaque; 0 is transparent.
-All burn-in and DVB-Sub font settings must match.")
+  @ocaml.doc("Specify the opacity of the burned-in captions. 255 is opaque; 0 is transparent.")
   @as("FontOpacity")
   fontOpacity: option<__integerMin0Max255>,
   @ocaml.doc(
-    "Specifies the color of the burned-in captions. This option is not valid for source captions that are STL, 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match."
+    "Specify the color of the burned-in captions text. Leave Font color (FontColor) blank and set Style passthrough (StylePassthrough) to enabled to use the font color data from your input captions, if present."
   )
   @as("FontColor")
   fontColor: option<burninSubtitleFontColor>,
   @ocaml.doc(
-    "Specifies the opacity of the background rectangle. 255 is opaque; 0 is transparent. Leaving this parameter blank is equivalent to setting it to 0 (transparent). All burn-in and DVB-Sub font settings must match."
+    "Specify the font that you want the service to use for your burn in captions when your input captions specify a font that MediaConvert doesn't support. When you set Fallback font (FallbackFont) to best match (BEST_MATCH), or leave blank, MediaConvert uses a supported font that most closely matches the font that your input captions specify. When there are multiple unsupported fonts in your input captions, MediaConvert matches each font with the supported font that matches best. When you explicitly choose a replacement font, MediaConvert uses that font to replace all unsupported fonts from your input."
+  )
+  @as("FallbackFont")
+  fallbackFont: option<burninSubtitleFallbackFont>,
+  @ocaml.doc(
+    "Specify the opacity of the background rectangle. Enter a value from 0 to 255, where 0 is transparent and 255 is opaque. If Style passthrough (StylePassthrough) is set to enabled, leave blank to pass through the background style information in your input captions to your output captions. If Style passthrough is set to disabled, leave blank to use a value of 0 and remove all backgrounds from your output captions."
   )
   @as("BackgroundOpacity")
   backgroundOpacity: option<__integerMin0Max255>,
-  @ocaml.doc("Specifies the color of the rectangle behind the captions.
-All burn-in and DVB-Sub font settings must match.")
+  @ocaml.doc(
+    "Specify the color of the rectangle behind the captions. Leave background color (BackgroundColor) blank and set Style passthrough (StylePassthrough) to enabled to use the background color data from your input captions, if present."
+  )
   @as("BackgroundColor")
   backgroundColor: option<burninSubtitleBackgroundColor>,
   @ocaml.doc(
-    "If no explicit x_position or y_position is provided, setting alignment to centered will place the captions at the bottom center of the output. Similarly, setting a left alignment will align captions to the bottom left of the output. If x and y positions are given in conjunction with the alignment parameter, the font will be justified (either left or centered) relative to those coordinates. This option is not valid for source captions that are STL, 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match."
+    "Ignore this setting unless Style passthrough (StylePassthrough) is set to Enabled and Font color (FontColor) set to Black, Yellow, Red, Green, Blue, or Hex. Use Apply font color (ApplyFontColor) for additional font color controls. When you choose White text only (WHITE_TEXT_ONLY), or leave blank, your font color setting only applies to white text in your input captions. For example, if your font color setting is Yellow, and your input captions have red and white text, your output captions will have red and yellow text. When you choose ALL_TEXT, your font color setting applies to all of your output captions text."
+  )
+  @as("ApplyFontColor")
+  applyFontColor: option<burninSubtitleApplyFontColor>,
+  @ocaml.doc(
+    "Specify the alignment of your captions. If no explicit x_position is provided, setting alignment to centered will placethe captions at the bottom center of the output. Similarly, setting a left alignment willalign captions to the bottom left of the output. If x and y positions are given in conjunction with the alignment parameter, the font will be justified (either left or centered) relative to those coordinates."
   )
   @as("Alignment")
   alignment: option<burninSubtitleAlignment>,
@@ -4287,7 +5090,7 @@ type availBlanking = {
   availBlankingImage: option<__stringMin14PatternS3BmpBMPPngPNGHttpsBmpBMPPngPNG>,
 }
 @ocaml.doc(
-  "Settings for quality-defined variable bitrate encoding with the AV1 codec. Required when you set Rate control mode to QVBR. Not valid when you set Rate control mode to a value other than QVBR, or when you don't define Rate control mode."
+  "Settings for quality-defined variable bitrate encoding with the H.265 codec. Use these settings only when you set QVBR for Rate control mode (RateControlMode)."
 )
 type av1QvbrSettings = {
   @ocaml.doc(
@@ -4296,7 +5099,7 @@ type av1QvbrSettings = {
   @as("QvbrQualityLevelFineTune")
   qvbrQualityLevelFineTune: option<__doubleMin0Max1>,
   @ocaml.doc(
-    "Required when you use QVBR rate control mode. That is, when you specify qvbrSettings within av1Settings. Specify the general target quality level for this output, from 1 to 10. Use higher numbers for greater quality. Level 10 results in nearly lossless compression. The quality level for most broadcast-quality transcodes is between 6 and 9. Optionally, to specify a value between whole numbers, also provide a value for the setting qvbrQualityLevelFineTune. For example, if you want your QVBR quality level to be 7.33, set qvbrQualityLevel to 7 and set qvbrQualityLevelFineTune to .33."
+    "Use this setting only when you set Rate control mode (RateControlMode) to QVBR. Specify the target quality level for this output. MediaConvert determines the right number of bits to use for each part of the video to maintain the video quality that you specify. When you keep the default value, AUTO, MediaConvert picks a quality level for you, based on characteristics of your input video. If you prefer to specify a quality level, specify a number from 1 through 10. Use higher numbers for greater quality. Level 10 results in nearly lossless compression. The quality level for most broadcast-quality transcodes is between 6 and 9. Optionally, to specify a value between whole numbers, also provide a value for the setting qvbrQualityLevelFineTune. For example, if you want your QVBR quality level to be 7.33, set qvbrQualityLevel to 7 and set qvbrQualityLevelFineTune to .33."
   )
   @as("QvbrQualityLevel")
   qvbrQualityLevel: option<__integerMin1Max10>,
@@ -4503,11 +5306,96 @@ type __listOfHopDestination = array<hopDestination>
 type __listOfHlsCaptionLanguageMapping = array<hlsCaptionLanguageMapping>
 type __listOfEndpoint = array<endpoint>
 @ocaml.doc(
+  "Required when you set (Codec) under (VideoDescription)>(CodecSettings) to the value XAVC."
+)
+type xavcSettings = {
+  @ocaml.doc(
+    "Required when you set (Profile) under (VideoDescription)>(CodecSettings)>(XavcSettings) to the value XAVC_HD."
+  )
+  @as("XavcHdProfileSettings")
+  xavcHdProfileSettings: option<xavcHdProfileSettings>,
+  @ocaml.doc(
+    "Required when you set (Profile) under (VideoDescription)>(CodecSettings)>(XavcSettings) to the value XAVC_HD_INTRA_CBG."
+  )
+  @as("XavcHdIntraCbgProfileSettings")
+  xavcHdIntraCbgProfileSettings: option<xavcHdIntraCbgProfileSettings>,
+  @ocaml.doc(
+    "Required when you set (Profile) under (VideoDescription)>(CodecSettings)>(XavcSettings) to the value XAVC_4K."
+  )
+  @as("Xavc4kProfileSettings")
+  xavc4kProfileSettings: option<xavc4kProfileSettings>,
+  @ocaml.doc(
+    "Required when you set (Profile) under (VideoDescription)>(CodecSettings)>(XavcSettings) to the value XAVC_4K_INTRA_VBR."
+  )
+  @as("Xavc4kIntraVbrProfileSettings")
+  xavc4kIntraVbrProfileSettings: option<xavc4kIntraVbrProfileSettings>,
+  @ocaml.doc(
+    "Required when you set (Profile) under (VideoDescription)>(CodecSettings)>(XavcSettings) to the value XAVC_4K_INTRA_CBG."
+  )
+  @as("Xavc4kIntraCbgProfileSettings")
+  xavc4kIntraCbgProfileSettings: option<xavc4kIntraCbgProfileSettings>,
+  @ocaml.doc(
+    "The best way to set up adaptive quantization is to keep the default value, Auto (AUTO), for the setting Adaptive quantization (adaptiveQuantization). When you do so, MediaConvert automatically applies the best types of quantization for your video content. Include this setting in your JSON job specification only when you choose to change the default value for Adaptive quantization. For this setting, keep the default value, Enabled (ENABLED), to adjust quantization within each frame based on temporal variation of content complexity. When you enable this feature, the encoder uses fewer bits on areas of the frame that aren't moving and uses more bits on complex objects with sharp edges that move a lot. For example, this feature improves the readability of text tickers on newscasts and scoreboards on sports matches. Enabling this feature will almost always improve your video quality. Note, though, that this feature doesn't take into account where the viewer's attention is likely to be. If viewers are likely to be focusing their attention on a part of the screen that doesn't have moving objects with sharp edges, such as sports athletes' faces, you might choose to disable this feature. Related setting: When you enable temporal adaptive quantization, adjust the strength of the filter with the setting Adaptive quantization (adaptiveQuantization)."
+  )
+  @as("TemporalAdaptiveQuantization")
+  temporalAdaptiveQuantization: option<xavcTemporalAdaptiveQuantization>,
+  @ocaml.doc(
+    "The best way to set up adaptive quantization is to keep the default value, Auto (AUTO), for the setting Adaptive quantization (adaptiveQuantization). When you do so, MediaConvert automatically applies the best types of quantization for your video content. Include this setting in your JSON job specification only when you choose to change the default value for Adaptive quantization. For this setting, keep the default value, Enabled (ENABLED), to adjust quantization within each frame based on spatial variation of content complexity. When you enable this feature, the encoder uses fewer bits on areas that can sustain more distortion with no noticeable visual degradation and uses more bits on areas where any small distortion will be noticeable. For example, complex textured blocks are encoded with fewer bits and smooth textured blocks are encoded with more bits. Enabling this feature will almost always improve your video quality. Note, though, that this feature doesn't take into account where the viewer's attention is likely to be. If viewers are likely to be focusing their attention on a part of the screen with a lot of complex texture, you might choose to disable this feature. Related setting: When you enable spatial adaptive quantization, set the value for Adaptive quantization (adaptiveQuantization) depending on your content. For homogeneous content, such as cartoons and video games, set it to Low. For content with a wider variety of textures, set it to High or Higher."
+  )
+  @as("SpatialAdaptiveQuantization")
+  spatialAdaptiveQuantization: option<xavcSpatialAdaptiveQuantization>,
+  @ocaml.doc(
+    "Ignore this setting unless your downstream workflow requires that you specify it explicitly. Otherwise, we recommend that you adjust the softness of your output by using a lower value for the setting Sharpness (sharpness) or by enabling a noise reducer filter (noiseReducerFilter). The Softness (softness) setting specifies the quantization matrices that the encoder uses. Keep the default value, 0, for flat quantization. Choose the value 1 or 16 to use the default JVT softening quantization matricies from the H.264 specification. Choose a value from 17 to 128 to use planar interpolation. Increasing values from 17 to 128 result in increasing reduction of high-frequency data. The value 128 results in the softest video."
+  )
+  @as("Softness")
+  softness: option<__integerMin0Max128>,
+  @ocaml.doc(
+    "Ignore this setting unless your input frame rate is 23.976 or 24 frames per second (fps). Enable slow PAL to create a 25 fps output by relabeling the video frames and resampling your audio. Note that enabling this setting will slightly reduce the duration of your video. Related settings: You must also set Frame rate to 25. In your JSON job specification, set (framerateControl) to (SPECIFIED), (framerateNumerator) to 25 and (framerateDenominator) to 1."
+  )
+  @as("SlowPal")
+  slowPal: option<xavcSlowPal>,
+  @ocaml.doc(
+    "Specify the XAVC profile for this output. For more information, see the Sony documentation at https://www.xavc-info.org/. Note that MediaConvert doesn't support the interlaced video XAVC operating points for XAVC_HD_INTRA_CBG. To create an interlaced XAVC output, choose the profile XAVC_HD."
+  )
+  @as("Profile")
+  profile: option<xavcProfile>,
+  @ocaml.doc(
+    "When you use the API for transcode jobs that use frame rate conversion, specify the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps. Use FramerateNumerator to specify the numerator of this fraction. In this example, use 24000 for the value of FramerateNumerator. When you use the console for transcode jobs that use frame rate conversion, provide the value as a decimal number for Framerate. In this example, specify 23.976."
+  )
+  @as("FramerateNumerator")
+  framerateNumerator: option<__integerMin24Max60000>,
+  @ocaml.doc(
+    "When you use the API for transcode jobs that use frame rate conversion, specify the frame rate as a fraction. For example, 24000 / 1001 = 23.976 fps. Use FramerateDenominator to specify the denominator of this fraction. In this example, use 1001 for the value of FramerateDenominator. When you use the console for transcode jobs that use frame rate conversion, provide the value as a decimal number for Frame rate. In this example, specify 23.976."
+  )
+  @as("FramerateDenominator")
+  framerateDenominator: option<__integerMin1Max1001>,
+  @ocaml.doc(
+    "Choose the method that you want MediaConvert to use when increasing or decreasing the frame rate. We recommend using drop duplicate (DUPLICATE_DROP) for numerically simple conversions, such as 60 fps to 30 fps. For numerically complex conversions, you can use interpolate (INTERPOLATE) to avoid stutter. This results in a smooth picture, but might introduce undesirable video artifacts. For complex frame rate conversions, especially if your source video has already been converted from its original cadence, use FrameFormer (FRAMEFORMER) to do motion-compensated interpolation. FrameFormer chooses the best conversion method frame by frame. Note that using FrameFormer increases the transcoding time and incurs a significant add-on cost."
+  )
+  @as("FramerateConversionAlgorithm")
+  framerateConversionAlgorithm: option<xavcFramerateConversionAlgorithm>,
+  @ocaml.doc(
+    "If you are using the console, use the Frame rate setting to specify the frame rate for this output. If you want to keep the same frame rate as the input video, choose Follow source. If you want to do frame rate conversion, choose a frame rate from the dropdown list. The framerates shown in the dropdown list are decimal approximations of fractions. If you are creating your transcoding job specification as a JSON file without the console, use FramerateControl to specify which value the service uses for the frame rate for this output. Choose INITIALIZE_FROM_SOURCE if you want the service to use the frame rate from the input. Choose SPECIFIED if you want the service to use the frame rate that you specify in the settings FramerateNumerator and FramerateDenominator."
+  )
+  @as("FramerateControl")
+  framerateControl: option<xavcFramerateControl>,
+  @ocaml.doc(
+    "Optional. Choose a specific entropy encoding mode only when you want to override XAVC recommendations. If you choose the value auto, MediaConvert uses the mode that the XAVC file format specifies given this output's operating point."
+  )
+  @as("EntropyEncoding")
+  entropyEncoding: option<xavcEntropyEncoding>,
+  @ocaml.doc(
+    "Keep the default value, Auto (AUTO), for this setting to have MediaConvert automatically apply the best types of quantization for your video content. When you want to apply your quantization settings manually, you must set Adaptive quantization (adaptiveQuantization) to a value other than Auto (AUTO). Use this setting to specify the strength of any adaptive quantization filters that you enable. If you don't want MediaConvert to do any adaptive quantization in this transcode, set Adaptive quantization to Off (OFF). Related settings: The value that you choose here applies to the following settings: Flicker adaptive quantization (flickerAdaptiveQuantization), Spatial adaptive quantization (spatialAdaptiveQuantization), and Temporal adaptive quantization (temporalAdaptiveQuantization)."
+  )
+  @as("AdaptiveQuantization")
+  adaptiveQuantization: option<xavcAdaptiveQuantization>,
+}
+@ocaml.doc(
   "Input video selectors contain the video settings for the input. Each of your inputs can have up to one video selector."
 )
 type videoSelector = {
   @ocaml.doc(
-    "Use this setting when your input video codec is AVC-Intra. Ignore this setting for all other inputs. If the sample range metadata in your input video is accurate, or if you don't know about sample range, keep the default value, Follow (FOLLOW), for this setting. When you do, the service automatically detects your input sample range. If your input video has metadata indicating the wrong sample range, specify the accurate sample range here. When you do, MediaConvert ignores any sample range information in the input metadata. Regardless of whether MediaConvert uses the input sample range or the sample range that you specify, MediaConvert uses the sample range for transcoding and also writes it to the output metadata."
+    "If the sample range metadata in your input video is accurate, or if you don't know about sample range, keep the default value, Follow (FOLLOW), for this setting. When you do, the service automatically detects your input sample range. If your input video has metadata indicating the wrong sample range, specify the accurate sample range here. When you do, MediaConvert ignores any sample range information in the input metadata. Regardless of whether MediaConvert uses the input sample range or the sample range that you specify, MediaConvert uses the sample range for transcoding and also writes it to the output metadata."
   )
   @as("SampleRange")
   sampleRange: option<inputSampleRange>,
@@ -4531,6 +5419,11 @@ type videoSelector = {
   )
   @as("Hdr10Metadata")
   hdr10Metadata: option<hdr10Metadata>,
+  @ocaml.doc(
+    "Set Embedded timecode override (embeddedTimecodeOverride) to Use MDPM (USE_MDPM) when your AVCHD input contains timecode tag data in the Modified Digital Video Pack Metadata (MDPM). When you do, we recommend you also set Timecode source (inputTimecodeSource) to Embedded (EMBEDDED). Leave Embedded timecode override blank, or set to None (NONE), when your input does not contain MDPM timecode."
+  )
+  @as("EmbeddedTimecodeOverride")
+  embeddedTimecodeOverride: option<embeddedTimecodeOverride>,
   @ocaml.doc(
     "There are two sources for color metadata, the input file and the job input settings Color space (ColorSpace) and HDR master display information settings(Hdr10Metadata). The Color space usage setting determines which takes precedence. Choose Force (FORCE) to use color metadata from the input job settings. If you don't specify values for those settings, the service defaults to using metadata from your input. FALLBACK - Choose Fallback (FALLBACK) to use color metadata from the source when it is present. If there's no color metadata in your input file, the service defaults to using values you specify in the input settings."
   )
@@ -4726,6 +5619,24 @@ type noiseReducer = {
   @as("Filter")
   filter: option<noiseReducerFilter>,
 }
+@ocaml.doc("These settings relate to your MXF output container.")
+type mxfSettings = {
+  @ocaml.doc(
+    "Specify the XAVC profile settings for MXF outputs when you set your MXF profile to XAVC."
+  )
+  @as("XavcProfileSettings")
+  xavcProfileSettings: option<mxfXavcProfileSettings>,
+  @ocaml.doc(
+    "Specify the MXF profile, also called shim, for this output. When you choose Auto, MediaConvert chooses a profile based on the video codec and resolution. For a list of codecs supported with each MXF profile, see https://docs.aws.amazon.com/mediaconvert/latest/ug/codecs-supported-with-each-mxf-profile.html. For more information about the automatic selection behavior, see https://docs.aws.amazon.com/mediaconvert/latest/ug/default-automatic-selection-of-mxf-profiles.html."
+  )
+  @as("Profile")
+  profile: option<mxfProfile>,
+  @ocaml.doc(
+    "Optional. When you have AFD signaling set up in your output video stream, use this setting to choose whether to also include it in the MXF wrapper. Choose Don't copy (NO_COPY) to exclude AFD signaling from the MXF wrapper. Choose Copy from video stream (COPY_FROM_VIDEO) to copy the AFD values from the video stream for this output to the MXF wrapper. Regardless of which option you choose, the AFD values remain in the video stream. Related settings: To set up your output to include or exclude AFD values, see AfdSignaling, under VideoDescription. On the console, find AFD signaling under the output's video encoding settings."
+  )
+  @as("AfdSignaling")
+  afdSignaling: option<mxfAfdSignaling>,
+}
 @ocaml.doc(
   "Specify the details for each additional Microsoft Smooth Streaming manifest that you want the service to generate for this output group. Each manifest can reference a different subset of outputs in the group."
 )
@@ -4782,11 +5693,11 @@ type m3u8Settings = {
   @ocaml.doc("The value of the transport stream ID field in the Program Map Table.")
   @as("TransportStreamId")
   transportStreamId: option<__integerMin0Max65535>,
-  @ocaml.doc("Packet Identifier (PID) of the timed metadata stream in the transport stream.")
+  @ocaml.doc("Packet Identifier (PID) of the ID3 metadata stream in the transport stream.")
   @as("TimedMetadataPid")
   timedMetadataPid: option<__integerMin32Max8182>,
   @ocaml.doc(
-    "Applies only to HLS outputs. Use this setting to specify whether the service inserts the ID3 timed metadata from the input in this output."
+    "Set ID3 metadata (timedMetadata) to Passthrough (PASSTHROUGH) to include ID3 metadata in this output. This includes ID3 metadata from the following features: ID3 timestamp period (timedMetadataId3Period), and Custom ID3 metadata inserter (timedMetadataInsertion). To exclude this ID3 metadata in this output: set ID3 metadata to None (NONE) or leave blank."
   )
   @as("TimedMetadata")
   timedMetadata: option<timedMetadata>,
@@ -4836,6 +5747,11 @@ type m3u8Settings = {
   )
   @as("MaxPcrInterval")
   maxPcrInterval: option<__integerMin0Max500>,
+  @ocaml.doc(
+    "If you select ALIGN_TO_VIDEO, MediaConvert writes captions and data packets with Presentation Timestamp (PTS) values greater than or equal to the first video packet PTS (MediaConvert drops captions and data packets with lesser PTS values). Keep the default value (AUTO) to allow all PTS values."
+  )
+  @as("DataPTSControl")
+  dataPTSControl: option<m3u8DataPtsControl>,
   @ocaml.doc(
     "Packet Identifier (PID) of the elementary audio stream(s) in the transport stream. Multiple values are accepted, and can be entered in ranges and/or by comma separation."
   )
@@ -5000,6 +5916,11 @@ type m2tsSettings = {
   @as("DvbNitSettings")
   dvbNitSettings: option<dvbNitSettings>,
   @ocaml.doc(
+    "If you select ALIGN_TO_VIDEO, MediaConvert writes captions and data packets with Presentation Timestamp (PTS) values greater than or equal to the first video packet PTS (MediaConvert drops captions and data packets with lesser PTS values). Keep the default value (AUTO) to allow all PTS values."
+  )
+  @as("DataPTSControl")
+  dataPTSControl: option<m2tsDataPtsControl>,
+  @ocaml.doc(
     "Controls what buffer model to use for accurate interleaving. If set to MULTIPLEX, use multiplex  buffer model. If set to NONE, this can lead to lower latency, but low-memory devices may not be able to play back the stream without interruptions."
   )
   @as("BufferModel")
@@ -5119,7 +6040,7 @@ type h265Settings = {
   @as("RateControlMode")
   rateControlMode: option<h265RateControlMode>,
   @ocaml.doc(
-    "Settings for quality-defined variable bitrate encoding with the H.265 codec. Required when you set Rate control mode to QVBR. Not valid when you set Rate control mode to a value other than QVBR, or when you don't define Rate control mode."
+    "Settings for quality-defined variable bitrate encoding with the H.265 codec. Use these settings only when you set QVBR for Rate control mode (RateControlMode)."
   )
   @as("QvbrSettings")
   qvbrSettings: option<h265QvbrSettings>,
@@ -5148,11 +6069,13 @@ type h265Settings = {
   )
   @as("NumberReferenceFrames")
   numberReferenceFrames: option<__integerMin1Max6>,
-  @ocaml.doc("Number of B-frames between reference frames.")
+  @ocaml.doc(
+    "Specify the number of B-frames that MediaConvert puts between reference frames in this output. Valid values are whole numbers from 0 through 7. When you don't specify a value, MediaConvert defaults to 2."
+  )
   @as("NumberBFramesBetweenReferenceFrames")
   numberBFramesBetweenReferenceFrames: option<__integerMin0Max7>,
   @ocaml.doc(
-    "Enforces separation between repeated (cadence) I-frames and I-frames inserted by Scene Change Detection. If a scene change I-frame is within I-interval frames of a cadence I-frame, the GOP is shrunk and/or stretched to the scene change I-frame. GOP stretch requires enabling lookahead as well as setting I-interval. The normal cadence resumes for the next GOP. This setting is only used when Scene Change Detect is enabled. Note: Maximum GOP stretch = GOP size + Min-I-interval - 1"
+    "Use this setting only when you also enable Scene change detection (SceneChangeDetect). This setting determines how the encoder manages the spacing between I-frames that it inserts as part of the I-frame cadence and the I-frames that it inserts for Scene change detection. We recommend that you have the transcoder automatically choose this value for you based on characteristics of your input video. To enable this automatic behavior, keep the default value by leaving this setting out of your JSON job specification. In the console, do this by keeping the default empty value. When you explicitly specify a value for this setting, the encoder determines whether to skip a cadence-driven I-frame by the value you set. For example, if you set Min I interval (minIInterval) to 5 and a cadence-driven I-frame would fall within 5 frames of a scene-change I-frame, then the encoder skips the cadence-driven I-frame. In this way, one GOP is shrunk slightly and one GOP is stretched slightly. When the cadence-driven I-frames are farther from the scene-change I-frame than the value you set, then the encoder leaves all I-frames in place and the GOPs surrounding the scene change are smaller than the usual cadence GOPs."
   )
   @as("MinIInterval")
   minIInterval: option<__integerMin0Max30>,
@@ -5175,15 +6098,17 @@ type h265Settings = {
   @as("HrdBufferInitialFillPercentage")
   hrdBufferInitialFillPercentage: option<__integerMin0Max100>,
   @ocaml.doc(
-    "Indicates if the GOP Size in H265 is specified in frames or seconds. If seconds the system will convert the GOP Size into a frame count at run time."
+    "Specify how the transcoder determines GOP size for this output. We recommend that you have the transcoder automatically choose this value for you based on characteristics of your input video. To enable this automatic behavior, choose Auto (AUTO) and and leave GOP size (GopSize) blank. By default, if you don't specify GOP mode control (GopSizeUnits), MediaConvert will use automatic behavior. If your output group specifies HLS, DASH, or CMAF, set GOP mode control to Auto and leave GOP size blank in each output in your output group. To explicitly specify the GOP length, choose Specified, frames (FRAMES) or Specified, seconds (SECONDS) and then provide the GOP length in the related setting GOP size (GopSize)."
   )
   @as("GopSizeUnits")
   gopSizeUnits: option<h265GopSizeUnits>,
-  @ocaml.doc("GOP Length (keyframe interval) in frames or seconds. Must be greater than zero.")
+  @ocaml.doc(
+    "Use this setting only when you set GOP mode control (GopSizeUnits) to Specified, frames (FRAMES) or Specified, seconds (SECONDS). Specify the GOP length using a whole number of frames or a decimal value of seconds. MediaConvert will interpret this value as frames or seconds depending on the value you choose for GOP mode control (GopSizeUnits). If you want to allow MediaConvert to automatically determine GOP size, leave GOP size blank and set GOP mode control to Auto (AUTO). If your output group specifies HLS, DASH, or CMAF, leave GOP size blank and set GOP mode control to Auto in each output in your output group."
+  )
   @as("GopSize")
   gopSize: option<__doubleMin0>,
   @ocaml.doc(
-    "Frequency of closed GOPs. In streaming applications, it is recommended that this be set to 1 so a decoder joining mid-stream will receive an IDR frame as quickly as possible. Setting this value to 0 will break output segmenting."
+    "Specify the relative frequency of open to closed GOPs in this output. For example, if you want to allow four open GOPs and then require a closed GOP, set this value to 5. We recommend that you have the transcoder automatically choose this value for you based on characteristics of your input video. To enable this automatic behavior, keep the default value by leaving this setting out of your JSON job specification. In the console, do this by keeping the default empty value. If you do explicitly specify a value, for segmented outputs, don't set this value to 0."
   )
   @as("GopClosedCadence")
   gopClosedCadence: option<__integerMin0Max2147483647>,
@@ -5237,7 +6162,7 @@ type h265Settings = {
   @as("AlternateTransferFunctionSei")
   alternateTransferFunctionSei: option<h265AlternateTransferFunctionSei>,
   @ocaml.doc(
-    "Specify the strength of any adaptive quantization filters that you enable. The value that you choose here applies to the following settings: Flicker adaptive quantization (flickerAdaptiveQuantization), Spatial adaptive quantization (spatialAdaptiveQuantization), and Temporal adaptive quantization (temporalAdaptiveQuantization)."
+    "When you set Adaptive Quantization (H265AdaptiveQuantization) to Auto (AUTO), or leave blank, MediaConvert automatically applies quantization to improve the video quality of your output. Set Adaptive Quantization to Low (LOW), Medium (MEDIUM), High (HIGH), Higher (HIGHER), or Max (MAX) to manually control the strength of the quantization filter. When you do, you can specify a value for Spatial Adaptive Quantization (H265SpatialAdaptiveQuantization), Temporal Adaptive Quantization (H265TemporalAdaptiveQuantization), and Flicker Adaptive Quantization (H265FlickerAdaptiveQuantization), to further control the quantization filter. Set Adaptive Quantization to Off (OFF) to apply no quantization to your output."
   )
   @as("AdaptiveQuantization")
   adaptiveQuantization: option<h265AdaptiveQuantization>,
@@ -5299,7 +6224,7 @@ type h264Settings = {
   @as("RateControlMode")
   rateControlMode: option<h264RateControlMode>,
   @ocaml.doc(
-    "Settings for quality-defined variable bitrate encoding with the H.264 codec. Required when you set Rate control mode to QVBR. Not valid when you set Rate control mode to a value other than QVBR, or when you don't define Rate control mode."
+    "Settings for quality-defined variable bitrate encoding with the H.265 codec. Use these settings only when you set QVBR for Rate control mode (RateControlMode)."
   )
   @as("QvbrSettings")
   qvbrSettings: option<h264QvbrSettings>,
@@ -5328,11 +6253,13 @@ type h264Settings = {
   )
   @as("NumberReferenceFrames")
   numberReferenceFrames: option<__integerMin1Max6>,
-  @ocaml.doc("Number of B-frames between reference frames.")
+  @ocaml.doc(
+    "This setting to determines the number of B-frames that MediaConvert puts between reference frames in this output. We recommend that you use automatic behavior to allow the transcoder to choose the best value based on characteristics of your input video. In the console, choose AUTO to select this automatic behavior. When you manually edit your JSON job specification, leave this setting out to choose automatic behavior. When you want to specify this number explicitly, choose a whole number from 0 through 7."
+  )
   @as("NumberBFramesBetweenReferenceFrames")
   numberBFramesBetweenReferenceFrames: option<__integerMin0Max7>,
   @ocaml.doc(
-    "Enforces separation between repeated (cadence) I-frames and I-frames inserted by Scene Change Detection. If a scene change I-frame is within I-interval frames of a cadence I-frame, the GOP is shrunk and/or stretched to the scene change I-frame. GOP stretch requires enabling lookahead as well as setting I-interval. The normal cadence resumes for the next GOP. This setting is only used when Scene Change Detect is enabled. Note: Maximum GOP stretch = GOP size + Min-I-interval - 1"
+    "Use this setting only when you also enable Scene change detection (SceneChangeDetect). This setting determines how the encoder manages the spacing between I-frames that it inserts as part of the I-frame cadence and the I-frames that it inserts for Scene change detection. We recommend that you have the transcoder automatically choose this value for you based on characteristics of your input video. To enable this automatic behavior, keep the default value by leaving this setting out of your JSON job specification. In the console, do this by keeping the default empty value. When you explicitly specify a value for this setting, the encoder determines whether to skip a cadence-driven I-frame by the value you set. For example, if you set Min I interval (minIInterval) to 5 and a cadence-driven I-frame would fall within 5 frames of a scene-change I-frame, then the encoder skips the cadence-driven I-frame. In this way, one GOP is shrunk slightly and one GOP is stretched slightly. When the cadence-driven I-frames are farther from the scene-change I-frame than the value you set, then the encoder leaves all I-frames in place and the GOPs surrounding the scene change are smaller than the usual cadence GOPs."
   )
   @as("MinIInterval")
   minIInterval: option<__integerMin0Max30>,
@@ -5355,15 +6282,17 @@ type h264Settings = {
   @as("HrdBufferInitialFillPercentage")
   hrdBufferInitialFillPercentage: option<__integerMin0Max100>,
   @ocaml.doc(
-    "Indicates if the GOP Size in H264 is specified in frames or seconds. If seconds the system will convert the GOP Size into a frame count at run time."
+    "Specify how the transcoder determines GOP size for this output. We recommend that you have the transcoder automatically choose this value for you based on characteristics of your input video. To enable this automatic behavior, choose Auto (AUTO) and and leave GOP size (GopSize) blank. By default, if you don't specify GOP mode control (GopSizeUnits), MediaConvert will use automatic behavior. If your output group specifies HLS, DASH, or CMAF, set GOP mode control to Auto and leave GOP size blank in each output in your output group. To explicitly specify the GOP length, choose Specified, frames (FRAMES) or Specified, seconds (SECONDS) and then provide the GOP length in the related setting GOP size (GopSize)."
   )
   @as("GopSizeUnits")
   gopSizeUnits: option<h264GopSizeUnits>,
-  @ocaml.doc("GOP Length (keyframe interval) in frames or seconds. Must be greater than zero.")
+  @ocaml.doc(
+    "Use this setting only when you set GOP mode control (GopSizeUnits) to Specified, frames (FRAMES) or Specified, seconds (SECONDS). Specify the GOP length using a whole number of frames or a decimal value of seconds. MediaConvert will interpret this value as frames or seconds depending on the value you choose for GOP mode control (GopSizeUnits). If you want to allow MediaConvert to automatically determine GOP size, leave GOP size blank and set GOP mode control to Auto (AUTO). If your output group specifies HLS, DASH, or CMAF, leave GOP size blank and set GOP mode control to Auto in each output in your output group."
+  )
   @as("GopSize")
   gopSize: option<__doubleMin0>,
   @ocaml.doc(
-    "Frequency of closed GOPs. In streaming applications, it is recommended that this be set to 1 so a decoder joining mid-stream will receive an IDR frame as quickly as possible. Setting this value to 0 will break output segmenting."
+    "Specify the relative frequency of open to closed GOPs in this output. For example, if you want to allow four open GOPs and then require a closed GOP, set this value to 5. We recommend that you have the transcoder automatically choose this value for you based on characteristics of your input video. To enable this automatic behavior, keep the default value by leaving this setting out of your JSON job specification. In the console, do this by keeping the default empty value. If you do explicitly specify a value, for segmented outputs, don't set this value to 0."
   )
   @as("GopClosedCadence")
   gopClosedCadence: option<__integerMin0Max2147483647>,
@@ -5396,7 +6325,7 @@ type h264Settings = {
   @as("FlickerAdaptiveQuantization")
   flickerAdaptiveQuantization: option<h264FlickerAdaptiveQuantization>,
   @ocaml.doc(
-    "Keep the default value, PAFF, to have MediaConvert use PAFF encoding for interlaced outputs. Choose Force field (FORCE_FIELD) to disable PAFF encoding and create separate interlaced fields."
+    "The video encoding method for your MPEG-4 AVC output. Keep the default value, PAFF, to have MediaConvert use PAFF encoding for interlaced outputs. Choose Force field (FORCE_FIELD) to disable PAFF encoding and create separate interlaced fields. Choose MBAFF to disable PAFF and have MediaConvert use MBAFF encoding for interlaced outputs."
   )
   @as("FieldEncoding")
   fieldEncoding: option<h264FieldEncoding>,
@@ -5433,18 +6362,25 @@ type h264Settings = {
   "If your input captions are SCC, SMI, SRT, STL, TTML, WebVTT, or IMSC 1.1 in an xml file, specify the URI of the input caption source file. If your caption source is IMSC in an IMF package, use TrackSourceSettings instead of FileSoureSettings."
 )
 type fileSourceSettings = {
-  @ocaml.doc("Specifies a time delta in seconds to offset the captions from the source file.")
+  @ocaml.doc(
+    "When you use the setting Time delta (TimeDelta) to adjust the sync between your sidecar captions and your video, use this setting to specify the units for the delta that you specify. When you don't specify a value for Time delta units (TimeDeltaUnits), MediaConvert uses seconds by default."
+  )
+  @as("TimeDeltaUnits")
+  timeDeltaUnits: option<fileSourceTimeDeltaUnits>,
+  @ocaml.doc(
+    "Optional. Use this setting when you need to adjust the sync between your sidecar captions and your video. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/time-delta-use-cases.html. Enter a positive or negative number to modify the times in the captions file. For example, type 15 to add 15 seconds to all the times in the captions file. Type -5 to subtract 5 seconds from the times in the captions file. You can optionally specify your time delta in milliseconds instead of seconds. When you do so, set the related setting, Time delta units (TimeDeltaUnits) to Milliseconds (MILLISECONDS). Note that, when you specify a time delta for timecode-based caption sources, such as SCC and STL, and your time delta isn't a multiple of the input frame rate, MediaConvert snaps the captions to the nearest frame. For example, when your input video frame rate is 25 fps and you specify 1010ms for time delta, MediaConvert delays your captions by 1000 ms."
+  )
   @as("TimeDelta")
   timeDelta: option<__integerMinNegative2147483648Max2147483647>,
   @ocaml.doc(
-    "External caption file used for loading captions. Accepted file extensions are 'scc', 'ttml', 'dfxp', 'stl', 'srt', 'xml', 'smi', and 'vtt'."
+    "External caption file used for loading captions. Accepted file extensions are 'scc', 'ttml', 'dfxp', 'stl', 'srt', 'xml', 'smi', 'webvtt', and 'vtt'."
   )
   @as("SourceFile")
   sourceFile: option<
-    __stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTT,
+    __stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTWebvttWEBVTT,
   >,
   @ocaml.doc(
-    "Ignore this setting unless your input captions format is SCC. To have the service compensate for differing frame rates between your input captions and input video, specify the frame rate of the captions file. Specify this value as a fraction, using the settings Framerate numerator (framerateNumerator) and Framerate denominator (framerateDenominator). For example, you might specify 24 / 1 for 24 fps, 25 / 1 for 25 fps, 24000 / 1001 for 23.976 fps, or 30000 / 1001 for 29.97 fps."
+    "Ignore this setting unless your input captions format is SCC. To have the service compensate for differing frame rates between your input captions and input video, specify the frame rate of the captions file. Specify this value as a fraction. When you work directly in your JSON job specification, use the settings framerateNumerator and framerateDenominator. For example, you might specify 24 / 1 for 24 fps, 25 / 1 for 25 fps, 24000 / 1001 for 23.976 fps, or 30000 / 1001 for 29.97 fps."
   )
   @as("Framerate")
   framerate: option<captionSourceFramerate>,
@@ -5510,6 +6446,11 @@ type dashAdditionalManifest = {
 @ocaml.doc("Settings for color correction.")
 type colorCorrector = {
   @ocaml.doc("Saturation level.") @as("Saturation") saturation: option<__integerMin1Max100>,
+  @ocaml.doc(
+    "Specify the video color sample range for this output. To create a full range output, you must start with a full range YUV input and keep the default value, None (NONE). To create a limited range output from a full range input, choose Limited range (LIMITED_RANGE_SQUEEZE). With RGB inputs, your output is always limited range, regardless of your choice here. When you create a limited range output from a full range input, MediaConvert limits the active pixel values in a way that depends on the output's bit depth: 8-bit outputs contain only values from 16 through 235 and 10-bit outputs contain only values from 64 through 940. With this conversion, MediaConvert also changes the output metadata to note the limited range."
+  )
+  @as("SampleRangeConversion")
+  sampleRangeConversion: option<sampleRangeConversion>,
   @ocaml.doc("Hue in degrees.") @as("Hue") hue: option<__integerMinNegative180Max180>,
   @ocaml.doc(
     "Use these settings when you convert to the HDR 10 color space. Specify the SMPTE ST 2086 Mastering Display Color Volume static metadata that you want signaled in the output. These values don't affect the pixel values that are encoded in the video stream. They are intended to help the downstream video player display content in a way that reflects the intentions of the the content creator. When you set Color space conversion (ColorSpaceConversion) to HDR 10 (FORCE_HDR10), these settings are required. You must set values for Max frame average light level (maxFrameAverageLightLevel) and Max content light level (maxContentLightLevel); these settings don't have a default value. The default values for the other HDR 10 metadata settings are defined by the P3D65 color space. For more information about MediaConvert HDR jobs, see https://docs.aws.amazon.com/console/mediaconvert/hdr."
@@ -5610,7 +6551,7 @@ type av1Settings = {
   @as("RateControlMode")
   rateControlMode: option<av1RateControlMode>,
   @ocaml.doc(
-    "Settings for quality-defined variable bitrate encoding with the AV1 codec. Required when you set Rate control mode to QVBR. Not valid when you set Rate control mode to a value other than QVBR, or when you don't define Rate control mode."
+    "Settings for quality-defined variable bitrate encoding with the H.265 codec. Use these settings only when you set QVBR for Rate control mode (RateControlMode)."
   )
   @as("QvbrSettings")
   qvbrSettings: option<av1QvbrSettings>,
@@ -5649,6 +6590,11 @@ type av1Settings = {
   )
   @as("FramerateControl")
   framerateControl: option<av1FramerateControl>,
+  @ocaml.doc(
+    "Specify the Bit depth (Av1BitDepth). You can choose 8-bit (BIT_8) or 10-bit (BIT_10)."
+  )
+  @as("BitDepth")
+  bitDepth: option<av1BitDepth>,
   @ocaml.doc(
     "Specify the strength of any adaptive quantization filters that you enable. The value that you choose here applies to Spatial adaptive quantization (spatialAdaptiveQuantization)."
   )
@@ -5744,9 +6690,14 @@ type __listOfHlsAdditionalManifest = array<hlsAdditionalManifest>
 type __listOfDashAdditionalManifest = array<dashAdditionalManifest>
 type __listOfCmafAdditionalManifest = array<cmafAdditionalManifest>
 @ocaml.doc(
-  "Video codec settings, (CodecSettings) under (VideoDescription), contains the group of settings related to video encoding. The settings in this group vary depending on the value that you choose for Video codec (Codec). For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * AV1, Av1Settings * AVC_INTRA, AvcIntraSettings * FRAME_CAPTURE, FrameCaptureSettings * H_264, H264Settings * H_265, H265Settings * MPEG2, Mpeg2Settings * PRORES, ProresSettings * VC3, Vc3Settings * VP8, Vp8Settings * VP9, Vp9Settings"
+  "Video codec settings, (CodecSettings) under (VideoDescription), contains the group of settings related to video encoding. The settings in this group vary depending on the value that you choose for Video codec (Codec). For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * AV1, Av1Settings * AVC_INTRA, AvcIntraSettings * FRAME_CAPTURE, FrameCaptureSettings * H_264, H264Settings * H_265, H265Settings * MPEG2, Mpeg2Settings * PRORES, ProresSettings * VC3, Vc3Settings * VP8, Vp8Settings * VP9, Vp9Settings * XAVC, XavcSettings"
 )
 type videoCodecSettings = {
+  @ocaml.doc(
+    "Required when you set (Codec) under (VideoDescription)>(CodecSettings) to the value XAVC."
+  )
+  @as("XavcSettings")
+  xavcSettings: option<xavcSettings>,
   @ocaml.doc(
     "Required when you set (Codec) under (VideoDescription)>(CodecSettings) to the value VP9."
   )
@@ -5798,7 +6749,7 @@ type videoCodecSettings = {
   av1Settings: option<av1Settings>,
 }
 @ocaml.doc(
-  "Enable Timed metadata insertion (TimedMetadataInsertion) to include ID3 tags in any HLS outputs. To include timed metadata, you must enable it here, enable it in each output container, and specify tags and timecodes in ID3 insertion (Id3Insertion) objects."
+  "Insert user-defined custom ID3 metadata (id3) at timecodes (timecode) that you specify. In each output that you want to include this metadata, you must set ID3 metadata (timedMetadata) to Passthrough (PASSTHROUGH)."
 )
 type timedMetadataInsertion = {
   @ocaml.doc("Id3Insertions contains the array of Id3Insertion instances.") @as("Id3Insertions")
@@ -5952,6 +6903,11 @@ type cmafEncryptionSettings = {
 )
 type captionSourceSettings = {
   @ocaml.doc(
+    "Settings specific to WebVTT sources in HLS alternative rendition group. Specify the properties (renditionGroupId, renditionName or renditionLanguageCode) to identify the unique subtitle track among the alternative rendition groups present in the HLS manifest. If no unique track is found, or multiple tracks match the specified properties, the job fails. If there is only one subtitle track in the rendition group, the settings can be left empty and the default subtitle track will be chosen. If your caption source is a sidecar file, use FileSourceSettings instead of WebvttHlsSourceSettings."
+  )
+  @as("WebvttHlsSourceSettings")
+  webvttHlsSourceSettings: option<webvttHlsSourceSettings>,
+  @ocaml.doc(
     "Settings specific to caption sources that are specified by track number. Currently, this is only IMSC captions in an IMF package. If your caption source is IMSC 1.1 in a separate xml file, use FileSourceSettings instead of TrackSourceSettings."
   )
   @as("TrackSourceSettings")
@@ -5980,7 +6936,10 @@ type captionSourceSettings = {
   "Settings related to one captions tab on the MediaConvert console. In your job JSON, an instance of captions DestinationSettings is equivalent to one captions tab in the console. Usually, one captions tab corresponds to one output captions track. Depending on your output captions format, one tab might correspond to a set of output captions tracks. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/including-captions.html."
 )
 type captionDestinationSettings = {
-  @ocaml.doc("WEBVTT Destination Settings") @as("WebvttDestinationSettings")
+  @ocaml.doc(
+    "Settings related to WebVTT captions. WebVTT is a sidecar format that holds captions in a file that is separate from the video container. Set up sidecar captions in the same output group, but different output from your video. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/ttml-and-webvtt-output-captions.html. When you work directly in your JSON job specification, include this object and any required children when you set destinationType to WebVTT."
+  )
+  @as("WebvttDestinationSettings")
   webvttDestinationSettings: option<webvttDestinationSettings>,
   @ocaml.doc(
     "Settings related to TTML captions. TTML is a sidecar format that holds captions in a file that is separate from the video container. Set up sidecar captions in the same output group, but different output from your video. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/ttml-and-webvtt-output-captions.html. When you work directly in your JSON job specification, include this object and any required children when you set destinationType to TTML."
@@ -5992,6 +6951,11 @@ type captionDestinationSettings = {
   )
   @as("TeletextDestinationSettings")
   teletextDestinationSettings: option<teletextDestinationSettings>,
+  @ocaml.doc(
+    "Settings related to SRT captions. SRT is a sidecar format that holds captions in a file that is separate from the video container. Set up sidecar captions in the same output group, but different output from your video. When you work directly in your JSON job specification, include this object and any required children when you set destinationType to SRT."
+  )
+  @as("SrtDestinationSettings")
+  srtDestinationSettings: option<srtDestinationSettings>,
   @ocaml.doc(
     "Settings related to SCC captions. SCC is a sidecar format that holds captions in a file that is separate from the video container. Set up sidecar captions in the same output group, but different output from your video. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/scc-srt-output-captions.html. When you work directly in your JSON job specification, include this object and any required children when you set destinationType to SCC."
   )
@@ -6018,7 +6982,7 @@ type captionDestinationSettings = {
   @as("DestinationType")
   destinationType: option<captionDestinationType>,
   @ocaml.doc(
-    "Settings related to burn-in captions. Set up burn-in captions in the same output as your video. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/burn-in-output-captions.html. When you work directly in your JSON job specification, include this object and any required children when you set destinationType to BURN_IN."
+    "Burn-in is a captions delivery method, rather than a captions format. Burn-in writes the captions directly on your video frames, replacing pixels of video content with the captions. Set up burn-in captions in the same output as your video. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/burn-in-output-captions.html. When you work directly in your JSON job specification, include this object and any required children when you set destinationType to BURN_IN."
   )
   @as("BurninDestinationSettings")
   burninDestinationSettings: option<burninDestinationSettings>,
@@ -6045,6 +7009,9 @@ type videoPreprocessor = {
   )
   @as("ImageInserter")
   imageInserter: option<imageInserter>,
+  @ocaml.doc("Enable HDR10+ analyis and metadata injection. Compatible with HEVC only.")
+  @as("Hdr10Plus")
+  hdr10Plus: option<hdr10Plus>,
   @ocaml.doc("Enable Dolby Vision feature to produce Dolby Vision compatible video output.")
   @as("DolbyVision")
   dolbyVision: option<dolbyVision>,
@@ -6074,7 +7041,12 @@ type msSmoothGroupSettings = {
   @as("ManifestEncoding")
   manifestEncoding: option<msSmoothManifestEncoding>,
   @ocaml.doc(
-    "Use Fragment length (FragmentLength) to specify the mp4 fragment sizes in seconds. Fragment length must be compatible with GOP size and frame rate."
+    "Specify how you want MediaConvert to determine the fragment length. Choose Exact (EXACT) to have the encoder use the exact length that you specify with the setting Fragment length (FragmentLength). This might result in extra I-frames. Choose Multiple of GOP (GOP_MULTIPLE) to have the encoder round up the segment lengths to match the next GOP boundary."
+  )
+  @as("FragmentLengthControl")
+  fragmentLengthControl: option<msSmoothFragmentLengthControl>,
+  @ocaml.doc(
+    "Specify how you want MediaConvert to determine the fragment length. Choose Exact (EXACT) to have the encoder use the exact length that you specify with the setting Fragment length (FragmentLength). This might result in extra I-frames. Choose Multiple of GOP (GOP_MULTIPLE) to have the encoder round up the segment lengths to match the next GOP boundary."
   )
   @as("FragmentLength")
   fragmentLength: option<__integerMin1Max2147483647>,
@@ -6109,10 +7081,21 @@ type hlsGroupSettings = {
   @ocaml.doc("Provides an extra millisecond delta offset to fine tune the timestamps.")
   @as("TimestampDeltaMilliseconds")
   timestampDeltaMilliseconds: option<__integerMinNegative2147483648Max2147483647>,
-  @ocaml.doc("Timed Metadata interval in seconds.") @as("TimedMetadataId3Period")
+  @ocaml.doc(
+    "Specify the interval in seconds to write ID3 timestamps in your output. The first timestamp starts at the output timecode and date, and increases incrementally with each ID3 timestamp. To use the default interval of 10 seconds: Leave blank. To include this metadata in your output: Set ID3 timestamp frame type (timedMetadataId3Frame) to PRIV (PRIV) or TDRL (TDRL), and set ID3 metadata (timedMetadata) to Passthrough (PASSTHROUGH)."
+  )
+  @as("TimedMetadataId3Period")
   timedMetadataId3Period: option<__integerMinNegative2147483648Max2147483647>,
-  @ocaml.doc("Indicates ID3 frame that has the timecode.") @as("TimedMetadataId3Frame")
+  @ocaml.doc(
+    "Specify the type of the ID3 frame (timedMetadataId3Frame) to use for ID3 timestamps (timedMetadataId3Period) in your output. To include ID3 timestamps: Specify PRIV (PRIV) or TDRL (TDRL) and set ID3 metadata (timedMetadata) to Passthrough (PASSTHROUGH). To exclude ID3 timestamps: Set ID3 timestamp frame type to None (NONE)."
+  )
+  @as("TimedMetadataId3Frame")
   timedMetadataId3Frame: option<hlsTimedMetadataId3Frame>,
+  @ocaml.doc(
+    "When set to LEGACY, the segment target duration is always rounded up to the nearest integer value above its current value in seconds. When set to SPEC\\\\_COMPLIANT, the segment target duration is rounded up to the nearest integer value if fraction seconds are greater than or equal to 0.5 (>= 0.5) and rounded down if less than 0.5 (< 0.5). You may need to use LEGACY if your client needs to ensure that the target duration is always longer than the actual duration of the segment. Some older players may experience interrupted playback when the actual duration of a track in a segment is longer than the target duration."
+  )
+  @as("TargetDurationCompatibilityMode")
+  targetDurationCompatibilityMode: option<hlsTargetDurationCompatibilityMode>,
   @ocaml.doc(
     "Include or exclude RESOLUTION attribute for video in EXT-X-STREAM-INF tag of variant manifest."
   )
@@ -6124,7 +7107,12 @@ type hlsGroupSettings = {
   @as("SegmentsPerSubdirectory")
   segmentsPerSubdirectory: option<__integerMin1Max2147483647>,
   @ocaml.doc(
-    "Length of MPEG-2 Transport Stream segments to create (in seconds). Note that segments will end on the next keyframe after this number of seconds, so actual segment length may be longer."
+    "Specify how you want MediaConvert to determine the segment length. Choose Exact (EXACT) to have the encoder use the exact length that you specify with the setting Segment length (SegmentLength). This might result in extra I-frames. Choose Multiple of GOP (GOP_MULTIPLE) to have the encoder round up the segment lengths to match the next GOP boundary."
+  )
+  @as("SegmentLengthControl")
+  segmentLengthControl: option<hlsSegmentLengthControl>,
+  @ocaml.doc(
+    "Specify the length, in whole seconds, of each segment. When you don't specify a value, MediaConvert defaults to 10. Related settings: Use Segment length control (SegmentLengthControl) to specify whether the encoder enforces this value strictly. Use Segment control (HlsSegmentControl) to specify whether MediaConvert creates separate segment files or one content file that has metadata to mark the segment boundaries."
   )
   @as("SegmentLength")
   segmentLength: option<__integerMin1Max2147483647>,
@@ -6163,6 +7151,14 @@ type hlsGroupSettings = {
   manifestDurationFormat: option<hlsManifestDurationFormat>,
   @ocaml.doc("When set to GZIP, compresses HLS playlist.") @as("ManifestCompression")
   manifestCompression: option<hlsManifestCompression>,
+  @ocaml.doc("Tile and thumbnail settings applicable when imageBasedTrickPlay is ADVANCED")
+  @as("ImageBasedTrickPlaySettings")
+  imageBasedTrickPlaySettings: option<hlsImageBasedTrickPlaySettings>,
+  @ocaml.doc(
+    "Specify whether MediaConvert generates images for trick play. Keep the default value, None (NONE), to not generate any images. Choose Thumbnail (THUMBNAIL) to generate tiled thumbnails. Choose Thumbnail and full frame (THUMBNAIL_AND_FULLFRAME) to generate tiled thumbnails and full-resolution images of single frames. MediaConvert creates a child manifest for each set of images that you generate and adds corresponding entries to the parent manifest. A common application for these images is Roku trick mode. The thumbnails and full-frame images that MediaConvert creates with this feature are compatible with this Roku specification: https://developer.roku.com/docs/developer-program/media-playback/trick-mode/hls-and-dash.md"
+  )
+  @as("ImageBasedTrickPlay")
+  imageBasedTrickPlay: option<hlsImageBasedTrickPlay>,
   @ocaml.doc("DRM settings.") @as("Encryption") encryption: option<hlsEncryptionSettings>,
   @ocaml.doc("Indicates whether segments should be placed in subdirectories.")
   @as("DirectoryStructure")
@@ -6185,6 +7181,11 @@ type hlsGroupSettings = {
   )
   @as("ClientCache")
   clientCache: option<hlsClientCache>,
+  @ocaml.doc(
+    "Set Caption segment length control (CaptionSegmentLengthControl) to Match video (MATCH_VIDEO) to create caption segments that align with the video segments from the first video output in this output group. For example, if the video segments are 2 seconds long, your WebVTT segments will also be 2 seconds long. Keep the default setting, Large segments (LARGE_SEGMENTS) to create caption segments that are 300 seconds long."
+  )
+  @as("CaptionSegmentLengthControl")
+  captionSegmentLengthControl: option<hlsCaptionSegmentLengthControl>,
   @ocaml.doc(
     "Applies only to 608 Embedded output captions. Insert: Include CLOSED-CAPTIONS lines in the manifest. Specify at least one language in the CC1 Language Code field. One CLOSED-CAPTION line is added for each Language Code you specify. Make sure to specify the languages in the order in which they appear in the original source (if the source is embedded format) or the order of the caption selectors (if the source is other than embedded). Otherwise, languages in the manifest will not match up properly with the output captions. None: Include CLOSED-CAPTIONS=NONE line in the manifest. Omit: Omit any CLOSED-CAPTIONS line from the manifest."
   )
@@ -6236,7 +7237,12 @@ type dashIsoGroupSettings = {
   @as("WriteSegmentTimelineInRepresentation")
   writeSegmentTimelineInRepresentation: option<dashIsoWriteSegmentTimelineInRepresentation>,
   @ocaml.doc(
-    "Length of mpd segments to create (in seconds). Note that segments will end on the next keyframe after this number of seconds, so actual segment length may be longer. When Emit Single File is checked, the segmentation is internal to a single output file and it does not cause the creation of many output files as in other output types."
+    "Specify how you want MediaConvert to determine the segment length. Choose Exact (EXACT) to have the encoder use the exact length that you specify with the setting Segment length (SegmentLength). This might result in extra I-frames. Choose Multiple of GOP (GOP_MULTIPLE) to have the encoder round up the segment lengths to match the next GOP boundary."
+  )
+  @as("SegmentLengthControl")
+  segmentLengthControl: option<dashIsoSegmentLengthControl>,
+  @ocaml.doc(
+    "Specify the length, in whole seconds, of each segment. When you don't specify a value, MediaConvert defaults to 30. Related settings: Use Segment length control (SegmentLengthControl) to specify whether the encoder enforces this value strictly. Use Segment control (DashIsoSegmentControl) to specify whether MediaConvert creates separate segment files or one content file that has metadata to mark the segment boundaries."
   )
   @as("SegmentLength")
   segmentLength: option<__integerMin1Max2147483647>,
@@ -6263,6 +7269,14 @@ type dashIsoGroupSettings = {
   @ocaml.doc("Minimum time of initially buffered media that is needed to ensure smooth playout.")
   @as("MinBufferTime")
   minBufferTime: option<__integerMin0Max2147483647>,
+  @ocaml.doc("Tile and thumbnail settings applicable when imageBasedTrickPlay is ADVANCED")
+  @as("ImageBasedTrickPlaySettings")
+  imageBasedTrickPlaySettings: option<dashIsoImageBasedTrickPlaySettings>,
+  @ocaml.doc(
+    "Specify whether MediaConvert generates images for trick play. Keep the default value, None (NONE), to not generate any images. Choose Thumbnail (THUMBNAIL) to generate tiled thumbnails. Choose Thumbnail and full frame (THUMBNAIL_AND_FULLFRAME) to generate tiled thumbnails and full-resolution images of single frames. MediaConvert adds an entry in the .mpd manifest for each set of images that you generate. A common application for these images is Roku trick mode. The thumbnails and full-frame images that MediaConvert creates with this feature are compatible with this Roku specification: https://developer.roku.com/docs/developer-program/media-playback/trick-mode/hls-and-dash.md"
+  )
+  @as("ImageBasedTrickPlay")
+  imageBasedTrickPlay: option<dashIsoImageBasedTrickPlay>,
   @ocaml.doc("Supports HbbTV specification as indicated") @as("HbbtvCompliance")
   hbbtvCompliance: option<dashIsoHbbtvCompliance>,
   @ocaml.doc(
@@ -6311,12 +7325,22 @@ type cmafGroupSettings = {
   @as("WriteDashManifest")
   writeDashManifest: option<cmafWriteDASHManifest>,
   @ocaml.doc(
+    "When set to LEGACY, the segment target duration is always rounded up to the nearest integer value above its current value in seconds. When set to SPEC\\\\_COMPLIANT, the segment target duration is rounded up to the nearest integer value if fraction seconds are greater than or equal to 0.5 (>= 0.5) and rounded down if less than 0.5 (< 0.5). You may need to use LEGACY if your client needs to ensure that the target duration is always longer than the actual duration of the segment. Some older players may experience interrupted playback when the actual duration of a track in a segment is longer than the target duration."
+  )
+  @as("TargetDurationCompatibilityMode")
+  targetDurationCompatibilityMode: option<cmafTargetDurationCompatibilityMode>,
+  @ocaml.doc(
     "Include or exclude RESOLUTION attribute for video in EXT-X-STREAM-INF tag of variant manifest."
   )
   @as("StreamInfResolution")
   streamInfResolution: option<cmafStreamInfResolution>,
   @ocaml.doc(
-    "Use this setting to specify the length, in seconds, of each individual CMAF segment. This value applies to the whole package; that is, to every output in the output group. Note that segments end on the first keyframe after this number of seconds, so the actual segment length might be slightly longer. If you set Segment control (CmafSegmentControl) to single file, the service puts the content of each output in a single file that has metadata that marks these segments. If you set it to segmented files, the service creates multiple files for each output, each with the content of one segment."
+    "Specify how you want MediaConvert to determine the segment length. Choose Exact (EXACT) to have the encoder use the exact length that you specify with the setting Segment length (SegmentLength). This might result in extra I-frames. Choose Multiple of GOP (GOP_MULTIPLE) to have the encoder round up the segment lengths to match the next GOP boundary."
+  )
+  @as("SegmentLengthControl")
+  segmentLengthControl: option<cmafSegmentLengthControl>,
+  @ocaml.doc(
+    "Specify the length, in whole seconds, of each segment. When you don't specify a value, MediaConvert defaults to 10. Related settings: Use Segment length control (SegmentLengthControl) to specify whether the encoder enforces this value strictly. Use Segment control (CmafSegmentControl) to specify whether MediaConvert creates separate segment files or one content file that has metadata to mark the segment boundaries."
   )
   @as("SegmentLength")
   segmentLength: option<__integerMin1Max2147483647>,
@@ -6350,8 +7374,16 @@ type cmafGroupSettings = {
   manifestDurationFormat: option<cmafManifestDurationFormat>,
   @ocaml.doc("When set to GZIP, compresses HLS playlist.") @as("ManifestCompression")
   manifestCompression: option<cmafManifestCompression>,
+  @ocaml.doc("Tile and thumbnail settings applicable when imageBasedTrickPlay is ADVANCED")
+  @as("ImageBasedTrickPlaySettings")
+  imageBasedTrickPlaySettings: option<cmafImageBasedTrickPlaySettings>,
   @ocaml.doc(
-    "Length of fragments to generate (in seconds). Fragment length must be compatible with GOP size and Framerate. Note that fragments will end on the next keyframe after this number of seconds, so actual fragment length may be longer. When Emit Single File is checked, the fragmentation is internal to a single output file and it does not cause the creation of many output files as in other output types."
+    "Specify whether MediaConvert generates images for trick play. Keep the default value, None (NONE), to not generate any images. Choose Thumbnail (THUMBNAIL) to generate tiled thumbnails. Choose Thumbnail and full frame (THUMBNAIL_AND_FULLFRAME) to generate tiled thumbnails and full-resolution images of single frames. When you enable Write HLS manifest (WriteHlsManifest), MediaConvert creates a child manifest for each set of images that you generate and adds corresponding entries to the parent manifest. When you enable Write DASH manifest (WriteDashManifest), MediaConvert adds an entry in the .mpd manifest for each set of images that you generate. A common application for these images is Roku trick mode. The thumbnails and full-frame images that MediaConvert creates with this feature are compatible with this Roku specification: https://developer.roku.com/docs/developer-program/media-playback/trick-mode/hls-and-dash.md"
+  )
+  @as("ImageBasedTrickPlay")
+  imageBasedTrickPlay: option<cmafImageBasedTrickPlay>,
+  @ocaml.doc(
+    "Specify the length, in whole seconds, of the mp4 fragments. When you don't specify a value, MediaConvert defaults to 2. Related setting: Use Fragment length control (FragmentLengthControl) to specify whether the encoder enforces this value strictly."
   )
   @as("FragmentLength")
   fragmentLength: option<__integerMin1Max2147483647>,
@@ -6537,7 +7569,7 @@ type videoDescription = {
   @as("ColorMetadata")
   colorMetadata: option<colorMetadata>,
   @ocaml.doc(
-    "Video codec settings, (CodecSettings) under (VideoDescription), contains the group of settings related to video encoding. The settings in this group vary depending on the value that you choose for Video codec (Codec). For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * AV1, Av1Settings * AVC_INTRA, AvcIntraSettings * FRAME_CAPTURE, FrameCaptureSettings * H_264, H264Settings * H_265, H265Settings * MPEG2, Mpeg2Settings * PRORES, ProresSettings * VC3, Vc3Settings * VP8, Vp8Settings * VP9, Vp9Settings"
+    "Video codec settings, (CodecSettings) under (VideoDescription), contains the group of settings related to video encoding. The settings in this group vary depending on the value that you choose for Video codec (Codec). For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * AV1, Av1Settings * AVC_INTRA, AvcIntraSettings * FRAME_CAPTURE, FrameCaptureSettings * H_264, H264Settings * H_265, H265Settings * MPEG2, Mpeg2Settings * PRORES, ProresSettings * VC3, Vc3Settings * VP8, Vp8Settings * VP9, Vp9Settings * XAVC, XavcSettings"
   )
   @as("CodecSettings")
   codecSettings: option<videoCodecSettings>,
@@ -6634,9 +7666,14 @@ type audioSelector = {
   offset: option<__integerMinNegative2147483648Max2147483647>,
   @ocaml.doc("Selects a specific language code from within an audio source.") @as("LanguageCode")
   languageCode: option<languageCode>,
+  @ocaml.doc(
+    "Settings specific to audio sources in an HLS alternate rendition group. Specify the properties (renditionGroupId, renditionName or renditionLanguageCode) to identify the unique audio track among the alternative rendition groups present in the HLS manifest. If no unique track is found, or multiple tracks match the properties provided, the job fails. If no properties in hlsRenditionGroupSettings are specified, the default audio track within the video segment is chosen. If there is no audio within video segment, the alternative audio with DEFAULT=YES is chosen instead."
+  )
+  @as("HlsRenditionGroupSettings")
+  hlsRenditionGroupSettings: option<hlsRenditionGroupSettings>,
   @ocaml.doc("Specifies audio data from an external file source.") @as("ExternalAudioFileInput")
   externalAudioFileInput: option<
-    __stringPatternS3MM2PPWWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE,
+    __stringPatternS3MM2PPWWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSSOOGGGGaAHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSSOOGGGGaA,
   >,
   @ocaml.doc(
     "Enable this setting on one audio selector to set it as the default for the job. The service uses this default for outputs where it can't find the specified input audio. If you don't set a default, those outputs have no audio."
@@ -6825,6 +7862,11 @@ type inputTemplate = {
   @as("FilterEnable")
   filterEnable: option<inputFilterEnable>,
   @ocaml.doc(
+    "Use this setting only when your video source has Dolby Vision studio mastering metadata that is carried in a separate XML file. Specify the Amazon S3 location for the metadata XML file. MediaConvert uses this file to provide global and frame-level metadata for Dolby Vision preprocessing. When you specify a file here and your input also has interleaved global and frame level metadata, MediaConvert ignores the interleaved metadata and uses only the the metadata from this external XML file. Note that your IAM service role must grant MediaConvert read permissions to this file. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/iam-role.html."
+  )
+  @as("DolbyVisionMetadataXml")
+  dolbyVisionMetadataXml: option<__stringMin14PatternS3XmlXMLHttpsXmlXML>,
+  @ocaml.doc(
     "Enable Denoise (InputDenoiseFilter) to filter noise from the input.  Default is disabled. Only applicable to MPEG2, H.264, H.265, and uncompressed video inputs."
   )
   @as("DenoiseFilter")
@@ -6924,8 +7966,13 @@ type input = {
   )
   @as("FileInput")
   fileInput: option<
-    __stringPatternS3MM2PPMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLOOGGGGaAHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLOOGGGGaA,
+    __stringPatternS3MM2PPMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLOOGGGGaAAATTMMOOSSHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLOOGGGGaAAATTMMOOSS,
   >,
+  @ocaml.doc(
+    "Use this setting only when your video source has Dolby Vision studio mastering metadata that is carried in a separate XML file. Specify the Amazon S3 location for the metadata XML file. MediaConvert uses this file to provide global and frame-level metadata for Dolby Vision preprocessing. When you specify a file here and your input also has interleaved global and frame level metadata, MediaConvert ignores the interleaved metadata and uses only the the metadata from this external XML file. Note that your IAM service role must grant MediaConvert read permissions to this file. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/iam-role.html."
+  )
+  @as("DolbyVisionMetadataXml")
+  dolbyVisionMetadataXml: option<__stringMin14PatternS3XmlXMLHttpsXmlXML>,
   @ocaml.doc(
     "Enable Denoise (InputDenoiseFilter) to filter noise from the input.  Default is disabled. Only applicable to MPEG2, H.264, H.265, and uncompressed video inputs."
   )
@@ -7015,7 +8062,7 @@ type __listOfOutputGroup = array<outputGroup>
 )
 type jobTemplateSettings = {
   @ocaml.doc(
-    "Enable Timed metadata insertion (TimedMetadataInsertion) to include ID3 tags in any HLS outputs. To include timed metadata, you must enable it here, enable it in each output container, and specify tags and timecodes in ID3 insertion (Id3Insertion) objects."
+    "Insert user-defined custom ID3 metadata (id3) at timecodes (timecode) that you specify. In each output that you want to include this metadata, you must set ID3 metadata (timedMetadata) to Passthrough (PASSTHROUGH)."
   )
   @as("TimedMetadataInsertion")
   timedMetadataInsertion: option<timedMetadataInsertion>,
@@ -7055,6 +8102,11 @@ type jobTemplateSettings = {
   @as("Inputs")
   inputs: option<__listOfInputTemplate>,
   @ocaml.doc(
+    "If your source content has EIA-608 Line 21 Data Services, enable this feature to specify what MediaConvert does with the Extended Data Services (XDS) packets. You can choose to pass through XDS packets, or remove them from the output. For more information about XDS, see EIA-608 Line Data Services, section 9.5.1.5 05h Content Advisory."
+  )
+  @as("ExtendedDataServices")
+  extendedDataServices: option<extendedDataServices>,
+  @ocaml.doc(
     "Settings for Event Signaling And Messaging (ESAM). If you don't do ad insertion, you can ignore these settings."
   )
   @as("Esam")
@@ -7073,7 +8125,7 @@ type jobTemplateSettings = {
 @ocaml.doc("JobSettings contains all the transcode settings for a job.")
 type jobSettings = {
   @ocaml.doc(
-    "Enable Timed metadata insertion (TimedMetadataInsertion) to include ID3 tags in any HLS outputs. To include timed metadata, you must enable it here, enable it in each output container, and specify tags and timecodes in ID3 insertion (Id3Insertion) objects."
+    "Insert user-defined custom ID3 metadata (id3) at timecodes (timecode) that you specify. In each output that you want to include this metadata, you must set ID3 metadata (timedMetadata) to Passthrough (PASSTHROUGH)."
   )
   @as("TimedMetadataInsertion")
   timedMetadataInsertion: option<timedMetadataInsertion>,
@@ -7112,6 +8164,11 @@ type jobSettings = {
   )
   @as("Inputs")
   inputs: option<__listOfInput>,
+  @ocaml.doc(
+    "If your source content has EIA-608 Line 21 Data Services, enable this feature to specify what MediaConvert does with the Extended Data Services (XDS) packets. You can choose to pass through XDS packets, or remove them from the output. For more information about XDS, see EIA-608 Line Data Services, section 9.5.1.5 05h Content Advisory."
+  )
+  @as("ExtendedDataServices")
+  extendedDataServices: option<extendedDataServices>,
   @ocaml.doc(
     "Settings for Event Signaling And Messaging (ESAM). If you don't do ad insertion, you can ignore these settings."
   )
@@ -7283,7 +8340,7 @@ module DisassociateCertificate = {
     @as("Arn")
     arn: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-mediaconvert") @new
   external new: request => t = "DisassociateCertificateCommand"
   let make = (~arn, ()) => new({arn: arn})
@@ -7295,7 +8352,7 @@ module DeleteQueue = {
   type request = {
     @ocaml.doc("The name of the queue that you want to delete.") @as("Name") name: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-mediaconvert") @new external new: request => t = "DeleteQueueCommand"
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -7304,9 +8361,18 @@ module DeleteQueue = {
 module DeletePreset = {
   type t
   type request = {@ocaml.doc("The name of the preset to be deleted.") @as("Name") name: __string}
-
+  type response = {.}
   @module("@aws-sdk/client-mediaconvert") @new external new: request => t = "DeletePresetCommand"
   let make = (~name, ()) => new({name: name})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module DeletePolicy = {
+  type t
+  type request = {.}
+  type response = {.}
+  @module("@aws-sdk/client-mediaconvert") @new external new: request => t = "DeletePolicyCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -7315,7 +8381,7 @@ module DeleteJobTemplate = {
   type request = {
     @ocaml.doc("The name of the job template to be deleted.") @as("Name") name: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-mediaconvert") @new
   external new: request => t = "DeleteJobTemplateCommand"
   let make = (~name, ()) => new({name: name})
@@ -7325,7 +8391,7 @@ module DeleteJobTemplate = {
 module CancelJob = {
   type t
   type request = {@ocaml.doc("The Job ID of the job to be cancelled.") @as("Id") id: __string}
-
+  type response = {.}
   @module("@aws-sdk/client-mediaconvert") @new external new: request => t = "CancelJobCommand"
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -7340,7 +8406,7 @@ module AssociateCertificate = {
     @as("Arn")
     arn: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-mediaconvert") @new
   external new: request => t = "AssociateCertificateCommand"
   let make = (~arn, ()) => new({arn: arn})
@@ -7358,7 +8424,7 @@ module UntagResource = {
     @as("Arn")
     arn: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-mediaconvert") @new external new: request => t = "UntagResourceCommand"
   let make = (~arn, ~tagKeys=?, ()) => new({tagKeys: tagKeys, arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -7378,10 +8444,46 @@ module TagResource = {
     @as("Arn")
     arn: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-mediaconvert") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~arn, ()) => new({tags: tags, arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module PutPolicy = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "A policy configures behavior that you allow or disallow for your account. For information about MediaConvert policies, see the user guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html"
+    )
+    @as("Policy")
+    policy: policy,
+  }
+  type response = {
+    @ocaml.doc(
+      "A policy configures behavior that you allow or disallow for your account. For information about MediaConvert policies, see the user guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html"
+    )
+    @as("Policy")
+    policy: option<policy>,
+  }
+  @module("@aws-sdk/client-mediaconvert") @new external new: request => t = "PutPolicyCommand"
+  let make = (~policy, ()) => new({policy: policy})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module GetPolicy = {
+  type t
+  type request = {.}
+  type response = {
+    @ocaml.doc(
+      "A policy configures behavior that you allow or disallow for your account. For information about MediaConvert policies, see the user guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html"
+    )
+    @as("Policy")
+    policy: option<policy>,
+  }
+  @module("@aws-sdk/client-mediaconvert") @new external new: request => t = "GetPolicyCommand"
+  let make = () => new(Js.Obj.empty())
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateQueue = {

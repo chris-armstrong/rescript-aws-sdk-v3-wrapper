@@ -30,6 +30,7 @@ type tableTypeString = string
 type string_ = string
 type statementType = [@as("UTILITY") #UTILITY | @as("DML") #DML | @as("DDL") #DDL]
 type statementName = string
+type s3AclOption = [@as("BUCKET_OWNER_FULL_CONTROL") #BUCKET_OWNER_FULL_CONTROL]
 type queryString = string
 type queryExecutionState = [
   | @as("CANCELLED") #CANCELLED
@@ -41,6 +42,7 @@ type queryExecutionState = [
 type queryExecutionId = string
 type parametersMapValue = string
 type namedQueryId = string
+type namedQueryDescriptionString = string
 type nameString = string
 type maxWorkGroupsCount = int
 type maxTagsCount = int
@@ -57,10 +59,12 @@ type keyString = string
 type integer_ = int
 type idempotencyToken = string
 type expressionString = string
+type errorType = int
 type errorMessage = string
 @ocaml.doc("<p>The error code returned when the query execution failed to process, or when the
             processing request for the named query failed.</p>")
 type errorCode = string
+type errorCategory = int
 type encryptionOption = [@as("CSE_KMS") #CSE_KMS | @as("SSE_KMS") #SSE_KMS | @as("SSE_S3") #SSE_S3]
 type descriptionString = string
 type date = Js.Date.t
@@ -104,12 +108,12 @@ type unprocessedNamedQueryId = {
   namedQueryId: option<namedQueryId>,
 }
 type tagKeyList = array<tagKey>
-@ocaml.doc("<p>A label that you assign to a resource. In Athena, a resource can be a workgroup or
-            data catalog. Each tag consists of a key and an optional value, both of which you
-            define. For example, you can use tags to categorize Athena workgroups or data catalogs
-            by purpose, owner, or environment. Use a consistent set of tag keys to make it easier to
-            search and filter workgroups or data catalogs in your account. For best practices, see
-                <a href=\"https://aws.amazon.com/answers/account-management/aws-tagging-strategies/\">Tagging Best Practices</a>. Tag keys can be from 1 to 128 UTF-8 Unicode
+@ocaml.doc("<p>A label that you assign to a resource. In Athena, a resource can be a
+            workgroup or data catalog. Each tag consists of a key and an optional value, both of
+            which you define. For example, you can use tags to categorize Athena
+            workgroups or data catalogs by purpose, owner, or environment. Use a consistent set of
+            tag keys to make it easier to search and filter workgroups or data catalogs in your
+            account. For best practices, see <a href=\"https://aws.amazon.com/answers/account-management/aws-tagging-strategies/\">Tagging Best Practices</a>. Tag keys can be from 1 to 128 UTF-8 Unicode
             characters, and tag values can be from 0 to 256 UTF-8 Unicode characters. Tags can use
             letters and numbers representable in UTF-8, and the following characters: + - = . _ : /
             @. Tag keys and values are case-sensitive. Tag keys must be unique per resource. If you
@@ -126,57 +130,34 @@ type tag = {
   @as("Key")
   key: option<tagKey>,
 }
-@ocaml.doc("<p>The completion date, current state, submission time, and state change reason (if
-            applicable) for the query execution.</p>")
-type queryExecutionStatus = {
-  @ocaml.doc("<p>The date and time that the query completed.</p>") @as("CompletionDateTime")
-  completionDateTime: option<date>,
-  @ocaml.doc("<p>The date and time that the query was submitted.</p>") @as("SubmissionDateTime")
-  submissionDateTime: option<date>,
-  @ocaml.doc("<p>Further detail about the status of the query.</p>") @as("StateChangeReason")
-  stateChangeReason: option<string_>,
-  @ocaml.doc("<p>The state of query execution. <code>QUEUED</code> indicates that the query has been
-            submitted to the service, and Athena will execute the query as soon as resources are
-            available. <code>RUNNING</code> indicates that the query is in execution phase.
-                <code>SUCCEEDED</code> indicates that the query completed without errors.
-                <code>FAILED</code> indicates that the query experienced an error and did not
-            complete processing. <code>CANCELLED</code> indicates that a user input interrupted
-            query execution.</p>
-        <note>
-            <p>Athena automatically retries your queries in cases of certain transient errors. As
-                a result, you may see the query state transition from <code>RUNNING</code> or
-                    <code>FAILED</code> to <code>QUEUED</code>. </p>
-        </note>")
-  @as("State")
-  state: option<queryExecutionState>,
-}
 @ocaml.doc("<p>The amount of data scanned during the query execution and the amount of time that it
             took to execute, and the type of statement that was run.</p>")
 type queryExecutionStatistics = {
-  @ocaml.doc("<p>The number of milliseconds that Athena took to finalize and publish the query results
-            after the query engine finished running the query.</p>")
+  @ocaml.doc("<p>The number of milliseconds that Athena took to finalize and publish the
+            query results after the query engine finished running the query.</p>")
   @as("ServiceProcessingTimeInMillis")
   serviceProcessingTimeInMillis: option<long>,
-  @ocaml.doc("<p>The number of milliseconds that Athena took to plan the query processing flow. This
-            includes the time spent retrieving table partitions from the data source. Note that
-            because the query engine performs the query planning, query planning time is a subset of
-            engine processing time.</p>")
+  @ocaml.doc("<p>The number of milliseconds that Athena took to plan the query processing
+            flow. This includes the time spent retrieving table partitions from the data source.
+            Note that because the query engine performs the query planning, query planning time is a
+            subset of engine processing time.</p>")
   @as("QueryPlanningTimeInMillis")
   queryPlanningTimeInMillis: option<long>,
   @ocaml.doc("<p>The number of milliseconds that the query was in your query queue waiting for
-            resources. Note that if transient errors occur, Athena might automatically add the query
-            back to the queue.</p>")
+            resources. Note that if transient errors occur, Athena might automatically
+            add the query back to the queue.</p>")
   @as("QueryQueueTimeInMillis")
   queryQueueTimeInMillis: option<long>,
   @ocaml.doc("<p>The number of milliseconds that Athena took to run the query.</p>")
   @as("TotalExecutionTimeInMillis")
   totalExecutionTimeInMillis: option<long>,
   @ocaml.doc("<p>The location and file name of a data manifest file. The manifest file is saved to the
-            Athena query results location in Amazon S3. The manifest file tracks files that the
-            query wrote to Amazon S3. If the query fails, the manifest file also tracks files that
-            the query intended to write. The manifest is useful for identifying orphaned files
-            resulting from a failed query. For more information, see <a href=\"https://docs.aws.amazon.com/athena/latest/ug/querying.html\">Working with Query Results, Output Files, and
-                Query History</a> in the <i>Amazon Athena User Guide</i>.</p>")
+                Athena query results location in Amazon S3. The manifest file
+            tracks files that the query wrote to Amazon S3. If the query fails, the manifest
+            file also tracks files that the query intended to write. The manifest is useful for
+            identifying orphaned files resulting from a failed query. For more information, see
+                <a href=\"https://docs.aws.amazon.com/athena/latest/ug/querying.html\">Working with Query
+                Results, Output Files, and Query History</a> in the <i>Amazon Athena User Guide</i>.</p>")
   @as("DataManifestLocation")
   dataManifestLocation: option<string_>,
   @ocaml.doc("<p>The number of bytes in the data that was queried.</p>") @as("DataScannedInBytes")
@@ -190,7 +171,9 @@ type queryExecutionIdList = array<queryExecutionId>
 type queryExecutionContext = {
   @ocaml.doc("<p>The name of the data catalog used in the query execution.</p>") @as("Catalog")
   catalog: option<catalogNameString>,
-  @ocaml.doc("<p>The name of the database used in the query execution.</p>") @as("Database")
+  @ocaml.doc("<p>The name of the database used in the query execution. The database must exist in the
+            catalog.</p>")
+  @as("Database")
   database: option<databaseString>,
 }
 @ocaml.doc("<p>The name and last modified time of the prepared statement.</p>")
@@ -216,14 +199,14 @@ type preparedStatement = {
 }
 type parametersMap = Js.Dict.t<parametersMapValue>
 type namedQueryIdList = array<namedQueryId>
-@ocaml.doc("<p>A query, where <code>QueryString</code> is the list of SQL query statements that
-            comprise the query.</p>")
+@ocaml.doc("<p>A query, where <code>QueryString</code> contains the SQL statements that
+            make up the query.</p>")
 type namedQuery = {
   @ocaml.doc("<p>The name of the workgroup that contains the named query.</p>") @as("WorkGroup")
   workGroup: option<workGroupName>,
   @ocaml.doc("<p>The unique identifier of the query.</p>") @as("NamedQueryId")
   namedQueryId: option<namedQueryId>,
-  @ocaml.doc("<p>The SQL query statements that comprise the query.</p>") @as("QueryString")
+  @ocaml.doc("<p>The SQL statements that make up the query.</p>") @as("QueryString")
   queryString: queryString,
   @ocaml.doc("<p>The database to which the query belongs.</p>") @as("Database")
   database: databaseString,
@@ -233,27 +216,28 @@ type namedQuery = {
 }
 @ocaml.doc("<p>The Athena engine version for running queries.</p>")
 type engineVersion = {
-  @ocaml.doc("<p>Read only. The engine version on which the query runs. If the user requests
-            a valid engine version other than Auto, the effective engine version is the same as the
-            engine version that the user requested. If the user requests Auto, the effective engine version is chosen by Athena. When a request to update the engine version is made by a <code>CreateWorkGroup</code> or <code>UpdateWorkGroup</code> operation, the 
-            <code>EffectiveEngineVersion</code> field is ignored.</p>")
+  @ocaml.doc("<p>Read only. The engine version on which the query runs. If the user requests a valid
+            engine version other than Auto, the effective engine version is the same as the engine
+            version that the user requested. If the user requests Auto, the effective engine version
+            is chosen by Athena. When a request to update the engine version is made by
+            a <code>CreateWorkGroup</code> or <code>UpdateWorkGroup</code> operation, the
+                <code>EffectiveEngineVersion</code> field is ignored.</p>")
   @as("EffectiveEngineVersion")
   effectiveEngineVersion: option<nameString>,
-  @ocaml.doc(
-    "<p>The engine version requested by the user. Possible values are determined by the output of <code>ListEngineVersions</code>, including Auto. The default is Auto.</p>"
-  )
+  @ocaml.doc("<p>The engine version requested by the user. Possible values are determined by the output
+            of <code>ListEngineVersions</code>, including Auto. The default is Auto.</p>")
   @as("SelectedEngineVersion")
   selectedEngineVersion: option<nameString>,
 }
-@ocaml.doc("<p>If query results are encrypted in Amazon S3, indicates the encryption option used (for
-            example, <code>SSE-KMS</code> or <code>CSE-KMS</code>) and key information.</p>")
+@ocaml.doc("<p>If query results are encrypted in Amazon S3, indicates the encryption option
+            used (for example, <code>SSE-KMS</code> or <code>CSE-KMS</code>) and key
+            information.</p>")
 type encryptionConfiguration = {
   @ocaml.doc("<p>For <code>SSE-KMS</code> and <code>CSE-KMS</code>, this is the KMS key ARN or
             ID.</p>")
   @as("KmsKey")
   kmsKey: option<string_>,
-  @ocaml.doc("<p>Indicates whether Amazon S3 server-side encryption with Amazon S3-managed keys
-                (<code>SSE-S3</code>), server-side encryption with KMS-managed keys
+  @ocaml.doc("<p>Indicates whether Amazon S3 server-side encryption with Amazon S3-managed keys (<code>SSE-S3</code>), server-side encryption with KMS-managed keys
                 (<code>SSE-KMS</code>), or client-side encryption with KMS-managed keys (CSE-KMS) is
             used.</p>
         <p>If a query runs in a workgroup and the workgroup overrides client-side settings, then
@@ -270,7 +254,10 @@ type datum = {
 @ocaml.doc("<p>The summary information for the data catalog, which includes its name and type.</p>")
 type dataCatalogSummary = {
   @ocaml.doc("<p>The data catalog type.</p>") @as("Type") type_: option<dataCatalogType>,
-  @ocaml.doc("<p>The name of the data catalog.</p>") @as("CatalogName")
+  @ocaml.doc("<p>The name of the data catalog. The catalog name is unique for the Amazon Web Services account and can use a maximum of 127 alphanumeric, underscore, at sign,
+            or hyphen characters. The remainder of the length constraint of 256 is reserved for use
+            by Athena.</p>")
+  @as("CatalogName")
   catalogName: option<catalogNameString>,
 }
 @ocaml.doc("<p>Information about the columns in a query execution result.</p>")
@@ -306,13 +293,52 @@ type column = {
   @ocaml.doc("<p>The data type of the column.</p>") @as("Type") type_: option<typeString>,
   @ocaml.doc("<p>The name of the column.</p>") @as("Name") name: nameString,
 }
+@ocaml.doc("<p>Provides information about an Athena query error. The
+                <code>AthenaError</code> feature provides standardized error information to help you
+            understand failed queries and take steps after a query failure occurs.
+                <code>AthenaError</code> includes an <code>ErrorCategory</code> field that specifies
+            whether the cause of the failed query is due to system error, user error, or other
+            error.</p>")
+type athenaError = {
+  @ocaml.doc("<p>An integer value that provides specific information about an Athena query
+            error. For the meaning of specific values, see the <a href=\"https://docs.aws.amazon.com/athena/latest/ug/error-reference.html#error-reference-error-type-reference\">Error Type Reference</a> in the <i>Amazon Athena User
+                Guide</i>.</p>")
+  @as("ErrorType")
+  errorType: option<errorType>,
+  @ocaml.doc("<p>An integer value that specifies the category of a query failure error. The following
+            list shows the category for each integer value.</p>
+        <p>
+            <b>1</b> - System</p>
+        <p>
+            <b>2</b> - User</p>
+        <p>
+            <b>3</b> - Other</p>")
+  @as("ErrorCategory")
+  errorCategory: option<errorCategory>,
+}
+@ocaml.doc("<p>Indicates that an Amazon S3 canned ACL should be set to control ownership of
+            stored query results. When Athena stores query results in Amazon S3,
+            the canned ACL is set with the <code>x-amz-acl</code> request header. For more
+            information about S3 Object Ownership, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html#object-ownership-overview\">Object Ownership settings</a> in the <i>Amazon S3 User
+                Guide</i>.</p>")
+type aclConfiguration = {
+  @ocaml.doc("<p>The Amazon S3 canned ACL that Athena should specify when storing
+            query results. Currently the only supported canned ACL is
+                <code>BUCKET_OWNER_FULL_CONTROL</code>. If a query runs in a workgroup and the
+            workgroup overrides client-side settings, then the Amazon S3 canned ACL
+            specified in the workgroup's settings is used for all queries that run in the workgroup.
+            For more information about Amazon S3 canned ACLs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html#canned-acl\">Canned ACL</a> in the <i>Amazon S3 User
+                Guide</i>.</p>")
+  @as("S3AclOption")
+  s3AclOption: s3AclOption,
+}
 type datumList = array<datum>
 @ocaml.doc("<p>The summary information for the workgroup, which includes its name, state,
             description, and the date and time it was created.</p>")
 type workGroupSummary = {
-  @ocaml.doc(
-    "<p>The engine version setting for all queries on the workgroup. Queries on the <code>AmazonAthenaPreviewFunctionality</code> workgroup run on the preview engine regardless of this setting.</p>"
-  )
+  @ocaml.doc("<p>The engine version setting for all queries on the workgroup. Queries on the
+                <code>AmazonAthenaPreviewFunctionality</code> workgroup run on the preview engine
+            regardless of this setting.</p>")
   @as("EngineVersion")
   engineVersion: option<engineVersion>,
   @ocaml.doc("<p>The workgroup creation date and time.</p>") @as("CreationTime")
@@ -328,12 +354,45 @@ type tagList_ = array<tag>
 @ocaml.doc("<p>The information about the updates in the query results, such as output location and
             encryption configuration for the query results.</p>")
 type resultConfigurationUpdates = {
+  @ocaml.doc("<p>If set to <code>true</code>, indicates that the previously-specified ACL configuration
+            for queries in this workgroup should be ignored and set to null. If set to
+                <code>false</code> or not set, and a value is present in the
+                <code>AclConfiguration</code> of <code>ResultConfigurationUpdates</code>, the
+                <code>AclConfiguration</code> in the workgroup's <code>ResultConfiguration</code> is
+            updated with the new value. For more information, see <a href=\"https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html\">Workgroup Settings Override
+                Client-Side Settings</a>.</p>")
+  @as("RemoveAclConfiguration")
+  removeAclConfiguration: option<boxedBoolean>,
+  @ocaml.doc("<p>The ACL configuration for the query results.</p>") @as("AclConfiguration")
+  aclConfiguration: option<aclConfiguration>,
+  @ocaml.doc("<p>If set to \"true\", removes the Amazon Web Services account ID previously specified for
+            <a>ResultConfiguration$ExpectedBucketOwner</a>. If set to \"false\" or not
+            set, and a value is present in the <code>ExpectedBucketOwner</code> in
+            <code>ResultConfigurationUpdates</code> (the client-side setting), the
+            <code>ExpectedBucketOwner</code> in the workgroup's <code>ResultConfiguration</code>
+            is updated with the new value. For more information, see <a href=\"https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html\">Workgroup Settings Override
+                Client-Side Settings</a>.</p>")
+  @as("RemoveExpectedBucketOwner")
+  removeExpectedBucketOwner: option<boxedBoolean>,
+  @ocaml.doc("<p>The Amazon Web Services account ID that you expect to be the owner of the Amazon S3 bucket specified by <a>ResultConfiguration$OutputLocation</a>.
+            If set, Athena uses the value for <code>ExpectedBucketOwner</code> when it
+            makes Amazon S3 calls to your specified output location. If the
+            <code>ExpectedBucketOwner</code>
+            Amazon Web Services account ID does not match the actual owner of the Amazon S3
+            bucket, the call fails with a permissions error.</p>
+        
+        <p>If workgroup settings override client-side settings, then the query uses the
+            <code>ExpectedBucketOwner</code> setting that is specified for the workgroup, and
+            also uses the location for storing query results specified in the workgroup. See <a>WorkGroupConfiguration$EnforceWorkGroupConfiguration</a> and <a href=\"https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html\">Workgroup Settings Override Client-Side Settings</a>.</p>")
+  @as("ExpectedBucketOwner")
+  expectedBucketOwner: option<string_>,
   @ocaml.doc("<p>If set to \"true\", indicates that the previously-specified encryption configuration
             (also known as the client-side setting) for queries in this workgroup should be ignored
             and set to null. If set to \"false\" or not set, and a value is present in the
-            EncryptionConfiguration in ResultConfigurationUpdates (the client-side setting), the
-            EncryptionConfiguration in the workgroup's ResultConfiguration will be updated with the
-            new value. For more information, see <a href=\"https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html\">Workgroup Settings Override
+                <code>EncryptionConfiguration</code> in <code>ResultConfigurationUpdates</code> (the
+            client-side setting), the <code>EncryptionConfiguration</code> in the workgroup's
+                <code>ResultConfiguration</code> will be updated with the new value. For more
+            information, see <a href=\"https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html\">Workgroup Settings Override
                 Client-Side Settings</a>.</p>")
   @as("RemoveEncryptionConfiguration")
   removeEncryptionConfiguration: option<boxedBoolean>,
@@ -342,9 +401,10 @@ type resultConfigurationUpdates = {
   encryptionConfiguration: option<encryptionConfiguration>,
   @ocaml.doc("<p>If set to \"true\", indicates that the previously-specified query results location (also
             known as a client-side setting) for queries in this workgroup should be ignored and set
-            to null. If set to \"false\" or not set, and a value is present in the OutputLocation in
-            ResultConfigurationUpdates (the client-side setting), the OutputLocation in the
-            workgroup's ResultConfiguration will be updated with the new value. For more
+            to null. If set to \"false\" or not set, and a value is present in the
+            <code>OutputLocation</code> in <code>ResultConfigurationUpdates</code> (the
+            client-side setting), the <code>OutputLocation</code> in the workgroup's
+            <code>ResultConfiguration</code> will be updated with the new value. For more
             information, see <a href=\"https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html\">Workgroup Settings Override
                 Client-Side Settings</a>.</p>")
   @as("RemoveOutputLocation")
@@ -353,32 +413,80 @@ type resultConfigurationUpdates = {
                 <code>s3://path/to/query/bucket/</code>. For more information, see <a href=\"https://docs.aws.amazon.com/athena/latest/ug/querying.html\">Query Results</a> If
             workgroup settings override client-side settings, then the query uses the location for
             the query results and the encryption configuration that are specified for the workgroup.
-            The \"workgroup settings override\" is specified in EnforceWorkGroupConfiguration
-            (true/false) in the WorkGroupConfiguration. See <a>WorkGroupConfiguration$EnforceWorkGroupConfiguration</a>.</p>")
+            The \"workgroup settings override\" is specified in
+                <code>EnforceWorkGroupConfiguration</code> (true/false) in the
+                <code>WorkGroupConfiguration</code>. See <a>WorkGroupConfiguration$EnforceWorkGroupConfiguration</a>.</p>")
   @as("OutputLocation")
   outputLocation: option<string_>,
 }
-@ocaml.doc("<p>The location in Amazon S3 where query results are stored and the encryption option, if
-            any, used for query results. These are known as \"client-side settings\". If workgroup
-            settings override client-side settings, then the query uses the workgroup
+@ocaml.doc("<p>The location in Amazon S3 where query results are stored and the encryption
+            option, if any, used for query results. These are known as \"client-side settings\". If
+            workgroup settings override client-side settings, then the query uses the workgroup
             settings.</p>")
 type resultConfiguration = {
-  @ocaml.doc("<p>If query results are encrypted in Amazon S3, indicates the encryption option used (for
-            example, <code>SSE-KMS</code> or <code>CSE-KMS</code>) and key information. This is a
-            client-side setting. If workgroup settings override client-side settings, then the query
-            uses the encryption configuration that is specified for the workgroup, and also uses the
-            location for storing query results specified in the workgroup. See <a>WorkGroupConfiguration$EnforceWorkGroupConfiguration</a> and <a href=\"https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html\">Workgroup Settings Override Client-Side Settings</a>.</p>")
+  @ocaml.doc("<p>Indicates that an Amazon S3 canned ACL should be set to control ownership of
+            stored query results. Currently the only supported canned ACL is
+                <code>BUCKET_OWNER_FULL_CONTROL</code>. This is a client-side setting. If workgroup
+            settings override client-side settings, then the query uses the ACL configuration that
+            is specified for the workgroup, and also uses the location for storing query results
+            specified in the workgroup. For more information, see <a>WorkGroupConfiguration$EnforceWorkGroupConfiguration</a> and <a href=\"https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html\">Workgroup Settings Override Client-Side Settings</a>.</p>")
+  @as("AclConfiguration")
+  aclConfiguration: option<aclConfiguration>,
+  @ocaml.doc("<p>The Amazon Web Services account ID that you expect to be the owner of the Amazon S3 bucket specified by <a>ResultConfiguration$OutputLocation</a>.
+            If set, Athena uses the value for <code>ExpectedBucketOwner</code> when it
+            makes Amazon S3 calls to your specified output location. If the
+            <code>ExpectedBucketOwner</code>
+            Amazon Web Services account ID does not match the actual owner of the Amazon S3
+            bucket, the call fails with a permissions error.</p>
+        <p>This is a client-side setting. If workgroup settings override client-side settings,
+            then the query uses the <code>ExpectedBucketOwner</code> setting that is specified for
+            the workgroup, and also uses the location for storing query results specified in the
+            workgroup. See <a>WorkGroupConfiguration$EnforceWorkGroupConfiguration</a>
+            and <a href=\"https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html\">Workgroup Settings Override Client-Side Settings</a>.</p>")
+  @as("ExpectedBucketOwner")
+  expectedBucketOwner: option<string_>,
+  @ocaml.doc("<p>If query results are encrypted in Amazon S3, indicates the encryption option
+            used (for example, <code>SSE-KMS</code> or <code>CSE-KMS</code>) and key information.
+            This is a client-side setting. If workgroup settings override client-side settings, then
+            the query uses the encryption configuration that is specified for the workgroup, and
+            also uses the location for storing query results specified in the workgroup. See <a>WorkGroupConfiguration$EnforceWorkGroupConfiguration</a> and <a href=\"https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html\">Workgroup Settings Override Client-Side Settings</a>.</p>")
   @as("EncryptionConfiguration")
   encryptionConfiguration: option<encryptionConfiguration>,
   @ocaml.doc("<p>The location in Amazon S3 where your query results are stored, such as
                 <code>s3://path/to/query/bucket/</code>. To run the query, you must specify the
             query results location using one of the ways: either for individual queries using either
-            this setting (client-side), or in the workgroup, using <a>WorkGroupConfiguration</a>. If none of them is set, Athena issues an error
-            that no output location is provided. For more information, see <a href=\"https://docs.aws.amazon.com/athena/latest/ug/querying.html\">Query Results</a>. If
+            this setting (client-side), or in the workgroup, using <a>WorkGroupConfiguration</a>. If none of them is set, Athena
+            issues an error that no output location is provided. For more information, see <a href=\"https://docs.aws.amazon.com/athena/latest/ug/querying.html\">Query Results</a>. If
             workgroup settings override client-side settings, then the query uses the settings
             specified for the workgroup. See <a>WorkGroupConfiguration$EnforceWorkGroupConfiguration</a>.</p>")
   @as("OutputLocation")
   outputLocation: option<string_>,
+}
+@ocaml.doc("<p>The completion date, current state, submission time, and state change reason (if
+            applicable) for the query execution.</p>")
+type queryExecutionStatus = {
+  @ocaml.doc("<p>Provides information about an Athena query error.</p>") @as("AthenaError")
+  athenaError: option<athenaError>,
+  @ocaml.doc("<p>The date and time that the query completed.</p>") @as("CompletionDateTime")
+  completionDateTime: option<date>,
+  @ocaml.doc("<p>The date and time that the query was submitted.</p>") @as("SubmissionDateTime")
+  submissionDateTime: option<date>,
+  @ocaml.doc("<p>Further detail about the status of the query.</p>") @as("StateChangeReason")
+  stateChangeReason: option<string_>,
+  @ocaml.doc("<p>The state of query execution. <code>QUEUED</code> indicates that the query has been
+            submitted to the service, and Athena will execute the query as soon as
+            resources are available. <code>RUNNING</code> indicates that the query is in execution
+            phase. <code>SUCCEEDED</code> indicates that the query completed without errors.
+                <code>FAILED</code> indicates that the query experienced an error and did not
+            complete processing. <code>CANCELLED</code> indicates that a user input interrupted
+            query execution.</p>
+        <note>
+            <p>Athena automatically retries your queries in cases of certain
+                transient errors. As a result, you may see the query state transition from
+                    <code>RUNNING</code> or <code>FAILED</code> to <code>QUEUED</code>. </p>
+        </note>")
+  @as("State")
+  state: option<queryExecutionState>,
 }
 type preparedStatementsList = array<preparedStatementSummary>
 type namedQueryList = array<namedQuery>
@@ -392,10 +500,10 @@ type database = {
   @ocaml.doc("<p>The name of the database.</p>") @as("Name") name: nameString,
 }
 type dataCatalogSummaryList = array<dataCatalogSummary>
-@ocaml.doc("<p>Contains information about a data catalog in an AWS account.</p>")
+@ocaml.doc("<p>Contains information about a data catalog in an Amazon Web Services account.</p>")
 type dataCatalog = {
-  @ocaml.doc("<p>Specifies the Lambda function or functions to use for the data catalog. This is a
-            mapping whose values depend on the catalog type. </p>
+  @ocaml.doc("<p>Specifies the Lambda function or functions to use for the data catalog.
+            This is a mapping whose values depend on the catalog type. </p>
         <ul>
             <li>
                 <p>For the <code>HIVE</code> data catalog type, use the following syntax. The
@@ -413,9 +521,9 @@ type dataCatalog = {
                     of required parameters, but not both.</p>
                 <ul>
                   <li>
-                        <p>If you have one Lambda function that processes metadata and another
-                            for reading the actual data, use the following syntax. Both parameters
-                            are required.</p>
+                        <p>If you have one Lambda function that processes metadata
+                            and another for reading the actual data, use the following syntax. Both
+                            parameters are required.</p>
                         <p>
                         <code>metadata-function=<i>lambda_arn</i>,
                                     record-function=<i>lambda_arn</i>
@@ -423,9 +531,8 @@ type dataCatalog = {
                      </p>
                     </li>
                   <li>
-                        <p> If you have a composite Lambda function that processes both metadata
-                            and data, use the following syntax to specify your Lambda
-                            function.</p>
+                        <p> If you have a composite Lambda function that processes
+                            both metadata and data, use the following syntax to specify your Lambda function.</p>
                         <p>
                         <code>function=<i>lambda_arn</i>
                         </code>
@@ -433,19 +540,43 @@ type dataCatalog = {
                     </li>
                </ul>
             </li>
+            <li>
+                <p>The <code>GLUE</code> type takes a catalog ID parameter and is required. The
+                            <code>
+                     <i>catalog_id</i>
+                  </code> is the account ID of the
+                        Amazon Web Services account to which the Glue catalog
+                    belongs.</p>
+                <p>
+                  <code>catalog-id=<i>catalog_id</i>
+                  </code>
+               </p>
+                <ul>
+                  <li>
+                        <p>The <code>GLUE</code> data catalog type also applies to the default
+                                <code>AwsDataCatalog</code> that already exists in your account, of
+                            which you can have only one and cannot modify.</p>
+                    </li>
+                  <li>
+                        <p>Queries that specify a Glue Data Catalog other than the default
+                                <code>AwsDataCatalog</code> must be run on Athena engine
+                            version 2.</p>
+                    </li>
+               </ul>
+            </li>
          </ul>")
   @as("Parameters")
   parameters: option<parametersMap>,
-  @ocaml.doc("<p>The type of data catalog: <code>LAMBDA</code> for a federated catalog or
-                <code>HIVE</code> for an external hive metastore. <code>GLUE</code> refers to the
-                <code>AwsDataCatalog</code> that already exists in your account, of which you can
-            have only one.</p>")
+  @ocaml.doc("<p>The type of data catalog to create: <code>LAMBDA</code> for a federated catalog,
+                <code>HIVE</code> for an external hive metastore, or <code>GLUE</code> for an
+                Glue Data Catalog.</p>")
   @as("Type")
   type_: dataCatalogType,
   @ocaml.doc("<p>An optional description of the data catalog.</p>") @as("Description")
   description: option<descriptionString>,
-  @ocaml.doc("<p>The name of the data catalog. The catalog name must be unique for the AWS account and
-            can use a maximum of 128 alphanumeric, underscore, at sign, or hyphen characters.</p>")
+  @ocaml.doc("<p>The name of the data catalog. The catalog name must be unique for the Amazon Web Services account and can use a maximum of 127 alphanumeric, underscore, at sign,
+            or hyphen characters. The remainder of the length constraint of 256 is reserved for use
+            by Athena.</p>")
   @as("Name")
   name: catalogNameString,
 }
@@ -453,20 +584,21 @@ type columnList = array<column>
 type columnInfoList = array<columnInfo>
 type workGroupsList = array<workGroupSummary>
 @ocaml.doc("<p>The configuration information that will be updated for this workgroup, which includes
-            the location in Amazon S3 where query results are stored, the encryption option, if any,
-            used for query results, whether the Amazon CloudWatch Metrics are enabled for the
-            workgroup, whether the workgroup settings override the client-side settings, and the
-            data usage limit for the amount of bytes scanned per query, if it is specified.</p>")
+            the location in Amazon S3 where query results are stored, the encryption option,
+            if any, used for query results, whether the Amazon CloudWatch Metrics are enabled
+            for the workgroup, whether the workgroup settings override the client-side settings, and
+            the data usage limit for the amount of bytes scanned per query, if it is
+            specified.</p>")
 type workGroupConfigurationUpdates = {
-  @ocaml.doc(
-    "<p>The engine version requested when a workgroup is updated. After the update, all queries on the workgroup run on the requested engine version. If no value was previously set, the default is Auto. Queries on the <code>AmazonAthenaPreviewFunctionality</code> workgroup run on the preview engine regardless of this setting.</p>"
-  )
+  @ocaml.doc("<p>The engine version requested when a workgroup is updated. After the update, all
+            queries on the workgroup run on the requested engine version. If no value was previously
+            set, the default is Auto. Queries on the <code>AmazonAthenaPreviewFunctionality</code>
+            workgroup run on the preview engine regardless of this setting.</p>")
   @as("EngineVersion")
   engineVersion: option<engineVersion>,
-  @ocaml.doc("<p>If set to <code>true</code>, allows members assigned to a workgroup to specify Amazon
-            S3 Requester Pays buckets in queries. If set to <code>false</code>, workgroup members
-            cannot query data from Requester Pays buckets, and queries that retrieve data from
-            Requester Pays buckets cause an error. The default is <code>false</code>. For more
+  @ocaml.doc("<p>If set to <code>true</code>, allows members assigned to a workgroup to specify Amazon S3 Requester Pays buckets in queries. If set to <code>false</code>, workgroup
+            members cannot query data from Requester Pays buckets, and queries that retrieve data
+            from Requester Pays buckets cause an error. The default is <code>false</code>. For more
             information about Requester Pays buckets, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/RequesterPaysBuckets.html\">Requester Pays Buckets</a>
             in the <i>Amazon Simple Storage Service Developer Guide</i>.</p>")
   @as("RequesterPaysEnabled")
@@ -479,8 +611,9 @@ type workGroupConfigurationUpdates = {
             allowed to scan.</p>")
   @as("BytesScannedCutoffPerQuery")
   bytesScannedCutoffPerQuery: option<bytesScannedCutoffValue>,
-  @ocaml.doc("<p>Indicates whether this workgroup enables publishing metrics to Amazon
-            CloudWatch.</p>")
+  @ocaml.doc(
+    "<p>Indicates whether this workgroup enables publishing metrics to Amazon CloudWatch.</p>"
+  )
   @as("PublishCloudWatchMetricsEnabled")
   publishCloudWatchMetricsEnabled: option<boxedBoolean>,
   @ocaml.doc("<p>The result configuration information about the queries in this workgroup that will be
@@ -493,23 +626,26 @@ type workGroupConfigurationUpdates = {
   @as("EnforceWorkGroupConfiguration")
   enforceWorkGroupConfiguration: option<boxedBoolean>,
 }
-@ocaml.doc("<p>The configuration of the workgroup, which includes the location in Amazon S3 where
-            query results are stored, the encryption option, if any, used for query results, whether
-            the Amazon CloudWatch Metrics are enabled for the workgroup and whether workgroup
-            settings override query settings, and the data usage limits for the amount of data
-            scanned per query or per workgroup. The workgroup settings override is specified in
-            EnforceWorkGroupConfiguration (true/false) in the WorkGroupConfiguration. See <a>WorkGroupConfiguration$EnforceWorkGroupConfiguration</a>. </p>")
+@ocaml.doc("<p>The configuration of the workgroup, which includes the location in Amazon S3
+            where query results are stored, the encryption option, if any, used for query results,
+            whether the Amazon CloudWatch Metrics are enabled for the workgroup and whether
+            workgroup settings override query settings, and the data usage limits for the amount of
+            data scanned per query or per workgroup. The workgroup settings override is specified in
+                <code>EnforceWorkGroupConfiguration</code> (true/false) in the
+                <code>WorkGroupConfiguration</code>. See <a>WorkGroupConfiguration$EnforceWorkGroupConfiguration</a>. </p>")
 type workGroupConfiguration = {
-  @ocaml.doc("<p>The engine version that all queries running on
-            the workgroup use. Queries on the <code>AmazonAthenaPreviewFunctionality</code> workgroup run on the preview engine regardless of this setting.</p>")
+  @ocaml.doc("<p>The engine version that all queries running on the workgroup use. Queries on the
+                <code>AmazonAthenaPreviewFunctionality</code> workgroup run on the preview engine
+            regardless of this setting.</p>")
   @as("EngineVersion")
   engineVersion: option<engineVersion>,
   @ocaml.doc("<p>If set to <code>true</code>, allows members assigned to a workgroup to reference
-            Amazon S3 Requester Pays buckets in queries. If set to <code>false</code>, workgroup
-            members cannot query data from Requester Pays buckets, and queries that retrieve data
-            from Requester Pays buckets cause an error. The default is <code>false</code>. For more
-            information about Requester Pays buckets, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/RequesterPaysBuckets.html\">Requester Pays Buckets</a>
-            in the <i>Amazon Simple Storage Service Developer Guide</i>.</p>")
+                Amazon S3 Requester Pays buckets in queries. If set to <code>false</code>,
+            workgroup members cannot query data from Requester Pays buckets, and queries that
+            retrieve data from Requester Pays buckets cause an error. The default is
+                <code>false</code>. For more information about Requester Pays buckets, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/RequesterPaysBuckets.html\">Requester
+                Pays Buckets</a> in the <i>Amazon Simple Storage Service Developer
+                Guide</i>.</p>")
   @as("RequesterPaysEnabled")
   requesterPaysEnabled: option<boxedBoolean>,
   @ocaml.doc("<p>The upper data usage limit (cutoff) for the amount of bytes a single query in a
@@ -523,13 +659,13 @@ type workGroupConfiguration = {
             to \"false\", client-side settings are used. For more information, see <a href=\"https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html\">Workgroup Settings Override Client-Side Settings</a>.</p>")
   @as("EnforceWorkGroupConfiguration")
   enforceWorkGroupConfiguration: option<boxedBoolean>,
-  @ocaml.doc("<p>The configuration for the workgroup, which includes the location in Amazon S3 where
-            query results are stored and the encryption option, if any, used for query results. To
-            run the query, you must specify the query results location using one of the ways: either
-            in the workgroup using this setting, or for individual queries (client-side), using
-                <a>ResultConfiguration$OutputLocation</a>. If none of them is set, Athena
-            issues an error that no output location is provided. For more information, see <a href=\"https://docs.aws.amazon.com/athena/latest/ug/querying.html\">Query
-            Results</a>.</p>")
+  @ocaml.doc("<p>The configuration for the workgroup, which includes the location in Amazon S3
+            where query results are stored and the encryption option, if any, used for query
+            results. To run the query, you must specify the query results location using one of the
+            ways: either in the workgroup using this setting, or for individual queries
+            (client-side), using <a>ResultConfiguration$OutputLocation</a>. If none of
+            them is set, Athena issues an error that no output location is provided. For
+            more information, see <a href=\"https://docs.aws.amazon.com/athena/latest/ug/querying.html\">Query Results</a>.</p>")
   @as("ResultConfiguration")
   resultConfiguration: option<resultConfiguration>,
 }
@@ -541,7 +677,8 @@ type tableMetadata = {
   partitionKeys: option<columnList>,
   @ocaml.doc("<p>A list of the columns in the table.</p>") @as("Columns")
   columns: option<columnList>,
-  @ocaml.doc("<p>The type of table. In Athena, only <code>EXTERNAL_TABLE</code> is supported.</p>")
+  @ocaml.doc("<p>The type of table. In Athena, only <code>EXTERNAL_TABLE</code> is
+            supported.</p>")
   @as("TableType")
   tableType: option<tableTypeString>,
   @ocaml.doc("<p>The last time the table was accessed.</p>") @as("LastAccessTime")
@@ -550,7 +687,7 @@ type tableMetadata = {
   createTime: option<timestamp_>,
   @ocaml.doc("<p>The name of the table.</p>") @as("Name") name: nameString,
 }
-@ocaml.doc("<p>The rows that comprise a query result table.</p>")
+@ocaml.doc("<p>The rows that make up a query result table.</p>")
 type row = {
   @ocaml.doc("<p>The data that populates a row in a query result table.</p>") @as("Data")
   data: option<datumList>,
@@ -579,17 +716,18 @@ type queryExecution = {
   @ocaml.doc("<p>The database in which the query execution occurred.</p>")
   @as("QueryExecutionContext")
   queryExecutionContext: option<queryExecutionContext>,
-  @ocaml.doc("<p>The location in Amazon S3 where query results were stored and the encryption option,
-            if any, used for query results. These are known as \"client-side settings\". If workgroup
-            settings override client-side settings, then the query uses the location for the query
-            results and the encryption configuration that are specified for the workgroup.</p>")
+  @ocaml.doc("<p>The location in Amazon S3 where query results were stored and the encryption
+            option, if any, used for query results. These are known as \"client-side settings\". If
+            workgroup settings override client-side settings, then the query uses the location for
+            the query results and the encryption configuration that are specified for the
+            workgroup.</p>")
   @as("ResultConfiguration")
   resultConfiguration: option<resultConfiguration>,
   @ocaml.doc("<p>The type of query statement that was run. <code>DDL</code> indicates DDL query
             statements. <code>DML</code> indicates DML (Data Manipulation Language) query
             statements, such as <code>CREATE TABLE AS SELECT</code>. <code>UTILITY</code> indicates
             query statements other than DDL and DML, such as <code>SHOW CREATE TABLE</code>, or
-                <code>DESCRIBE <table></code>.</p>")
+                <code>DESCRIBE TABLE</code>.</p>")
   @as("StatementType")
   statementType: option<statementType>,
   @ocaml.doc("<p>The SQL query statements which the query execution ran.</p>") @as("Query")
@@ -602,21 +740,22 @@ type databaseList = array<database>
             configuration, listed under <a>WorkGroup$Configuration</a>. Each workgroup
             enables you to isolate queries for you or your group of users from other queries in the
             same account, to configure the query results location and the encryption configuration
-            (known as workgroup settings), to enable sending query metrics to Amazon CloudWatch, and
-            to establish per-query data usage control limits for all queries in a workgroup. The
-            workgroup settings override is specified in EnforceWorkGroupConfiguration (true/false)
-            in the WorkGroupConfiguration. See <a>WorkGroupConfiguration$EnforceWorkGroupConfiguration</a>.</p>")
+            (known as workgroup settings), to enable sending query metrics to Amazon CloudWatch,
+            and to establish per-query data usage control limits for all queries in a workgroup. The
+            workgroup settings override is specified in <code>EnforceWorkGroupConfiguration</code>
+            (true/false) in the <code>WorkGroupConfiguration</code>. See <a>WorkGroupConfiguration$EnforceWorkGroupConfiguration</a>.</p>")
 type workGroup = {
   @ocaml.doc("<p>The date and time the workgroup was created.</p>") @as("CreationTime")
   creationTime: option<date>,
   @ocaml.doc("<p>The workgroup description.</p>") @as("Description")
   description: option<workGroupDescriptionString>,
-  @ocaml.doc("<p>The configuration of the workgroup, which includes the location in Amazon S3 where
-            query results are stored, the encryption configuration, if any, used for query results;
-            whether the Amazon CloudWatch Metrics are enabled for the workgroup; whether workgroup
-            settings override client-side settings; and the data usage limits for the amount of data
-            scanned per query or per workgroup. The workgroup settings override is specified in
-            EnforceWorkGroupConfiguration (true/false) in the WorkGroupConfiguration. See <a>WorkGroupConfiguration$EnforceWorkGroupConfiguration</a>.</p>")
+  @ocaml.doc("<p>The configuration of the workgroup, which includes the location in Amazon S3
+            where query results are stored, the encryption configuration, if any, used for query
+            results; whether the Amazon CloudWatch Metrics are enabled for the workgroup;
+            whether workgroup settings override client-side settings; and the data usage limits for
+            the amount of data scanned per query or per workgroup. The workgroup settings override
+            is specified in <code>EnforceWorkGroupConfiguration</code> (true/false) in the
+                <code>WorkGroupConfiguration</code>. See <a>WorkGroupConfiguration$EnforceWorkGroupConfiguration</a>.</p>")
   @as("Configuration")
   configuration: option<workGroupConfiguration>,
   @ocaml.doc("<p>The state of the workgroup: ENABLED or DISABLED.</p>") @as("State")
@@ -626,7 +765,7 @@ type workGroup = {
 type tableMetadataList = array<tableMetadata>
 type rowList = array<row>
 type queryExecutionList = array<queryExecution>
-@ocaml.doc("<p>The metadata and rows that comprise a query result set. The metadata describes the
+@ocaml.doc("<p>The metadata and rows that make up a query result set. The metadata describes the
             column structure and data types. To return a <code>ResultSet</code> object, use <a>GetQueryResults</a>.</p>")
 type resultSet = {
   @ocaml.doc("<p>The metadata that describes the column structure and data types of a table of query
@@ -635,19 +774,20 @@ type resultSet = {
   resultSetMetadata: option<resultSetMetadata>,
   @ocaml.doc("<p>The rows in the table.</p>") @as("Rows") rows: option<rowList>,
 }
-@ocaml.doc("<p>Amazon Athena is an interactive query service that lets you use standard SQL to
-            analyze data directly in Amazon S3. You can point Athena at your data in Amazon S3 and
-            run ad-hoc queries and get results in seconds. Athena is serverless, so there is no
-            infrastructure to set up or manage. You pay only for the queries you run. Athena scales
-            automatically—executing queries in parallel—so results are fast, even with large
-            datasets and complex queries. For more information, see <a href=\"http://docs.aws.amazon.com/athena/latest/ug/what-is.html\">What is Amazon
-                Athena</a> in the <i>Amazon Athena User Guide</i>.</p>
-        <p>If you connect to Athena using the JDBC driver, use version 1.1.0 of the driver or
-            later with the Amazon Athena API. Earlier version drivers do not support the API. For
-            more information and to download the driver, see <a href=\"https://docs.aws.amazon.com/athena/latest/ug/connect-with-jdbc.html\">Accessing
-                Amazon Athena with JDBC</a>.</p>
-        <p>For code samples using the AWS SDK for Java, see <a href=\"https://docs.aws.amazon.com/athena/latest/ug/code-samples.html\">Examples and
-                Code Samples</a> in the <i>Amazon Athena User Guide</i>.</p>")
+@ocaml.doc("<p>Amazon Athena is an interactive query service that lets you use standard SQL
+            to analyze data directly in Amazon S3. You can point Athena at your
+            data in Amazon S3 and run ad-hoc queries and get results in seconds. Athena is serverless, so there is no infrastructure to set up or manage. You pay
+            only for the queries you run. Athena scales automatically—executing queries
+            in parallel—so results are fast, even with large datasets and complex queries. For more
+            information, see <a href=\"http://docs.aws.amazon.com/athena/latest/ug/what-is.html\">What is Amazon Athena</a> in the <i>Amazon Athena User
+                Guide</i>.</p>
+        <p>If you connect to Athena using the JDBC driver, use version 1.1.0 of the
+            driver or later with the Amazon Athena API. Earlier version drivers do not
+            support the API. For more information and to download the driver, see <a href=\"https://docs.aws.amazon.com/athena/latest/ug/connect-with-jdbc.html\">Accessing
+                    Amazon Athena with JDBC</a>.</p>
+        <p>For code samples using the Amazon Web Services SDK for Java, see <a href=\"https://docs.aws.amazon.com/athena/latest/ug/code-samples.html\">Examples and
+                Code Samples</a> in the <i>Amazon Athena User
+            Guide</i>.</p>")
 module UpdatePreparedStatement = {
   type t
   type request = {
@@ -660,7 +800,7 @@ module UpdatePreparedStatement = {
     @ocaml.doc("<p>The name of the prepared statement.</p>") @as("StatementName")
     statementName: statementName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-athena") @new
   external new: request => t = "UpdatePreparedStatementCommand"
   let make = (~queryStatement, ~workGroup, ~statementName, ~description=?, ()) =>
@@ -673,13 +813,36 @@ module UpdatePreparedStatement = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
+module UpdateNamedQuery = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The contents of the query with all query statements.</p>") @as("QueryString")
+    queryString: queryString,
+    @ocaml.doc("<p>The query description.</p>") @as("Description")
+    description: option<namedQueryDescriptionString>,
+    @ocaml.doc("<p>The name of the query.</p>") @as("Name") name: nameString,
+    @ocaml.doc("<p>The unique identifier (UUID) of the query.</p>") @as("NamedQueryId")
+    namedQueryId: namedQueryId,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-athena") @new external new: request => t = "UpdateNamedQueryCommand"
+  let make = (~queryString, ~name, ~namedQueryId, ~description=?, ()) =>
+    new({
+      queryString: queryString,
+      description: description,
+      name: name,
+      namedQueryId: namedQueryId,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
 module StopQueryExecution = {
   type t
   type request = {
     @ocaml.doc("<p>The unique ID of the query execution to stop.</p>") @as("QueryExecutionId")
     queryExecutionId: queryExecutionId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-athena") @new external new: request => t = "StopQueryExecutionCommand"
   let make = (~queryExecutionId, ()) => new({queryExecutionId: queryExecutionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -695,7 +858,7 @@ module DeleteWorkGroup = {
     @ocaml.doc("<p>The unique name of the workgroup to delete.</p>") @as("WorkGroup")
     workGroup: workGroupName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-athena") @new external new: request => t = "DeleteWorkGroupCommand"
   let make = (~workGroup, ~recursiveDeleteOption=?, ()) =>
     new({recursiveDeleteOption: recursiveDeleteOption, workGroup: workGroup})
@@ -711,7 +874,7 @@ module DeletePreparedStatement = {
     @ocaml.doc("<p>The name of the prepared statement to delete.</p>") @as("StatementName")
     statementName: statementName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-athena") @new
   external new: request => t = "DeletePreparedStatementCommand"
   let make = (~workGroup, ~statementName, ()) =>
@@ -725,7 +888,7 @@ module DeleteNamedQuery = {
     @ocaml.doc("<p>The unique ID of the query to delete.</p>") @as("NamedQueryId")
     namedQueryId: namedQueryId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-athena") @new external new: request => t = "DeleteNamedQueryCommand"
   let make = (~namedQueryId, ()) => new({namedQueryId: namedQueryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -737,7 +900,7 @@ module DeleteDataCatalog = {
     @ocaml.doc("<p>The name of the data catalog to delete.</p>") @as("Name")
     name: catalogNameString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-athena") @new external new: request => t = "DeleteDataCatalogCommand"
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -756,7 +919,7 @@ module CreatePreparedStatement = {
     @ocaml.doc("<p>The name of the prepared statement.</p>") @as("StatementName")
     statementName: statementName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-athena") @new
   external new: request => t = "CreatePreparedStatementCommand"
   let make = (~queryStatement, ~workGroup, ~statementName, ~description=?, ()) =>
@@ -780,9 +943,10 @@ module CreateNamedQuery = {
             received, the same response is returned and another query is not created. If a parameter
             has changed, for example, the <code>QueryString</code>, an error is returned.</p>
         <important>
-            <p>This token is listed as not required because AWS SDKs (for example the AWS SDK for
-                Java) auto-generate the token for users. If you are not using the AWS SDK or the AWS
-                CLI, you must provide this token or the action will fail.</p>
+            <p>This token is listed as not required because Amazon Web Services SDKs (for example
+                the Amazon Web Services SDK for Java) auto-generate the token for users. If you are
+                not using the Amazon Web Services SDK or the Amazon Web Services CLI, you must provide
+                this token or the action will fail.</p>
         </important>")
     @as("ClientRequestToken")
     clientRequestToken: option<idempotencyToken>,
@@ -822,8 +986,8 @@ module CreateNamedQuery = {
 module UpdateDataCatalog = {
   type t
   type request = {
-    @ocaml.doc("<p>Specifies the Lambda function or functions to use for updating the data catalog. This
-            is a mapping whose values depend on the catalog type. </p>
+    @ocaml.doc("<p>Specifies the Lambda function or functions to use for updating the data
+            catalog. This is a mapping whose values depend on the catalog type. </p>
         <ul>
             <li>
                 <p>For the <code>HIVE</code> data catalog type, use the following syntax. The
@@ -841,9 +1005,9 @@ module UpdateDataCatalog = {
                     of required parameters, but not both.</p>
                 <ul>
                   <li>
-                        <p>If you have one Lambda function that processes metadata and another
-                            for reading the actual data, use the following syntax. Both parameters
-                            are required.</p>
+                        <p>If you have one Lambda function that processes metadata
+                            and another for reading the actual data, use the following syntax. Both
+                            parameters are required.</p>
                         <p>
                         <code>metadata-function=<i>lambda_arn</i>,
                                     record-function=<i>lambda_arn</i>
@@ -851,9 +1015,8 @@ module UpdateDataCatalog = {
                      </p>
                     </li>
                   <li>
-                        <p> If you have a composite Lambda function that processes both metadata
-                            and data, use the following syntax to specify your Lambda
-                            function.</p>
+                        <p> If you have a composite Lambda function that processes
+                            both metadata and data, use the following syntax to specify your Lambda function.</p>
                         <p>
                         <code>function=<i>lambda_arn</i>
                         </code>
@@ -867,22 +1030,18 @@ module UpdateDataCatalog = {
     @ocaml.doc("<p>New or modified text that describes the data catalog.</p>") @as("Description")
     description: option<descriptionString>,
     @ocaml.doc("<p>Specifies the type of data catalog to update. Specify <code>LAMBDA</code> for a
-            federated catalog or <code>HIVE</code> for an external hive metastore.</p>
-        <note>
-            <p>Do not use the <code>GLUE</code> type. This refers to the
-                    <code>AwsDataCatalog</code> that already exists in your account, of which you
-                can have only one. Specifying the <code>GLUE</code> type will result in an
-                    <code>INVALID_INPUT</code> error.</p>
-        </note>")
+            federated catalog, <code>HIVE</code> for an external hive metastore, or
+                <code>GLUE</code> for an Glue Data Catalog.</p>")
     @as("Type")
     type_: dataCatalogType,
-    @ocaml.doc("<p>The name of the data catalog to update. The catalog name must be unique for the AWS
-            account and can use a maximum of 128 alphanumeric, underscore, at sign, or hyphen
-            characters.</p>")
+    @ocaml.doc("<p>The name of the data catalog to update. The catalog name must be unique for the
+                Amazon Web Services account and can use a maximum of 127 alphanumeric, underscore, at
+            sign, or hyphen characters. The remainder of the length constraint of 256 is reserved
+            for use by Athena.</p>")
     @as("Name")
     name: catalogNameString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-athena") @new external new: request => t = "UpdateDataCatalogCommand"
   let make = (~type_, ~name, ~parameters=?, ~description=?, ()) =>
     new({parameters: parameters, description: description, type_: type_, name: name})
@@ -900,7 +1059,7 @@ module UntagResource = {
     @as("ResourceARN")
     resourceARN: amazonResourceName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-athena") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys: tagKeys, resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -917,9 +1076,9 @@ module ListQueryExecutions = {
     @ocaml.doc("<p>The maximum number of query executions to return in this request.</p>")
     @as("MaxResults")
     maxResults: option<maxQueryExecutionsCount>,
-    @ocaml.doc("<p>A token generated by the Athena service that specifies where to continue pagination if
-            a previous request was truncated. To obtain the next set of pages, pass in the
-                <code>NextToken</code> from the response object of the previous page call.</p>")
+    @ocaml.doc("<p>A token generated by the Athena service that specifies where to continue
+            pagination if a previous request was truncated. To obtain the next set of pages, pass in
+            the <code>NextToken</code> from the response object of the previous page call.</p>")
     @as("NextToken")
     nextToken: option<token>,
   }
@@ -947,16 +1106,16 @@ module ListNamedQueries = {
     workGroup: option<workGroupName>,
     @ocaml.doc("<p>The maximum number of queries to return in this request.</p>") @as("MaxResults")
     maxResults: option<maxNamedQueriesCount>,
-    @ocaml.doc("<p>A token generated by the Athena service that specifies where to continue pagination if
-            a previous request was truncated. To obtain the next set of pages, pass in the
-                <code>NextToken</code> from the response object of the previous page call.</p>")
+    @ocaml.doc("<p>A token generated by the Athena service that specifies where to continue
+            pagination if a previous request was truncated. To obtain the next set of pages, pass in
+            the <code>NextToken</code> from the response object of the previous page call.</p>")
     @as("NextToken")
     nextToken: option<token>,
   }
   type response = {
-    @ocaml.doc("<p>A token generated by the Athena service that specifies where to continue pagination if
-            a previous request was truncated. To obtain the next set of pages, pass in the
-                <code>NextToken</code> from the response object of the previous page call.</p>")
+    @ocaml.doc("<p>A token generated by the Athena service that specifies where to continue
+            pagination if a previous request was truncated. To obtain the next set of pages, pass in
+            the <code>NextToken</code> from the response object of the previous page call.</p>")
     @as("NextToken")
     nextToken: option<token>,
     @ocaml.doc("<p>The list of unique query IDs.</p>") @as("NamedQueryIds")
@@ -1008,16 +1167,17 @@ module GetNamedQuery = {
 module TagResource = {
   type t
   type request = {
-    @ocaml.doc("<p>A collection of one or more tags, separated by commas, to be added to an Athena
-            workgroup or data catalog resource.</p>")
+    @ocaml.doc(
+      "<p>A collection of one or more tags, separated by commas, to be added to an Athena workgroup or data catalog resource.</p>"
+    )
     @as("Tags")
     tags: tagList_,
-    @ocaml.doc("<p>Specifies the ARN of the Athena resource (workgroup or data catalog) to which tags are
-            to be added.</p>")
+    @ocaml.doc("<p>Specifies the ARN of the Athena resource (workgroup or data catalog) to
+            which tags are to be added.</p>")
     @as("ResourceARN")
     resourceARN: amazonResourceName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-athena") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceARN, ()) => new({tags: tags, resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1042,9 +1202,10 @@ module StartQueryExecution = {
             received, the same response is returned and another query is not created. If a parameter
             has changed, for example, the <code>QueryString</code>, an error is returned.</p>
         <important>
-            <p>This token is listed as not required because AWS SDKs (for example the AWS SDK for
-                Java) auto-generate the token for users. If you are not using the AWS SDK or the AWS
-                CLI, you must provide this token or the action will fail.</p>
+            <p>This token is listed as not required because Amazon Web Services SDKs (for example
+                the Amazon Web Services SDK for Java) auto-generate the token for users. If you are
+                not using the Amazon Web Services SDK or the Amazon Web Services CLI, you must provide
+                this token or the action will fail.</p>
         </important>")
     @as("ClientRequestToken")
     clientRequestToken: option<idempotencyToken>,
@@ -1108,18 +1269,18 @@ module ListPreparedStatements = {
   type request = {
     @ocaml.doc("<p>The maximum number of results to return in this request.</p>") @as("MaxResults")
     maxResults: option<maxPreparedStatementsCount>,
-    @ocaml.doc("<p>A token generated by the Athena service that specifies where to continue pagination if
-            a previous request was truncated. To obtain the next set of pages, pass in the
-                <code>NextToken</code> from the response object of the previous page call.</p>")
+    @ocaml.doc("<p>A token generated by the Athena service that specifies where to continue
+            pagination if a previous request was truncated. To obtain the next set of pages, pass in
+            the <code>NextToken</code> from the response object of the previous page call.</p>")
     @as("NextToken")
     nextToken: option<token>,
     @ocaml.doc("<p>The workgroup to list the prepared statements for.</p>") @as("WorkGroup")
     workGroup: workGroupName,
   }
   type response = {
-    @ocaml.doc("<p>A token generated by the Athena service that specifies where to continue pagination if
-            a previous request was truncated. To obtain the next set of pages, pass in the
-                <code>NextToken</code> from the response object of the previous page call.</p>")
+    @ocaml.doc("<p>A token generated by the Athena service that specifies where to continue
+            pagination if a previous request was truncated. To obtain the next set of pages, pass in
+            the <code>NextToken</code> from the response object of the previous page call.</p>")
     @as("NextToken")
     nextToken: option<token>,
     @ocaml.doc("<p>The list of prepared statements for the workgroup.</p>")
@@ -1139,16 +1300,16 @@ module ListEngineVersions = {
     @ocaml.doc("<p>The maximum number of engine versions to return in this request.</p>")
     @as("MaxResults")
     maxResults: option<maxEngineVersionsCount>,
-    @ocaml.doc("<p>A token generated by the Athena service that specifies where to continue pagination if
-            a previous request was truncated. To obtain the next set of pages, pass in the
-                <code>NextToken</code> from the response object of the previous page call.</p>")
+    @ocaml.doc("<p>A token generated by the Athena service that specifies where to continue
+            pagination if a previous request was truncated. To obtain the next set of pages, pass in
+            the <code>NextToken</code> from the response object of the previous page call.</p>")
     @as("NextToken")
     nextToken: option<token>,
   }
   type response = {
-    @ocaml.doc("<p>A token generated by the Athena service that specifies where to continue pagination if
-            a previous request was truncated. To obtain the next set of pages, pass in the
-                <code>NextToken</code> from the response object of the previous page call.</p>")
+    @ocaml.doc("<p>A token generated by the Athena service that specifies where to continue
+            pagination if a previous request was truncated. To obtain the next set of pages, pass in
+            the <code>NextToken</code> from the response object of the previous page call.</p>")
     @as("NextToken")
     nextToken: option<token>,
     @ocaml.doc("<p>A list of engine versions that are available to choose from.</p>")
@@ -1166,16 +1327,16 @@ module ListDataCatalogs = {
   type request = {
     @ocaml.doc("<p>Specifies the maximum number of data catalogs to return.</p>") @as("MaxResults")
     maxResults: option<maxDataCatalogsCount>,
-    @ocaml.doc("<p>A token generated by the Athena service that specifies where to continue pagination if
-            a previous request was truncated. To obtain the next set of pages, pass in the NextToken
-            from the response object of the previous page call.</p>")
+    @ocaml.doc("<p>A token generated by the Athena service that specifies where to continue
+            pagination if a previous request was truncated. To obtain the next set of pages, pass in
+            the NextToken from the response object of the previous page call.</p>")
     @as("NextToken")
     nextToken: option<token>,
   }
   type response = {
-    @ocaml.doc("<p>A token generated by the Athena service that specifies where to continue pagination if
-            a previous request was truncated. To obtain the next set of pages, pass in the NextToken
-            from the response object of the previous page call.</p>")
+    @ocaml.doc("<p>A token generated by the Athena service that specifies where to continue
+            pagination if a previous request was truncated. To obtain the next set of pages, pass in
+            the NextToken from the response object of the previous page call.</p>")
     @as("NextToken")
     nextToken: option<token>,
     @ocaml.doc("<p>A summary list of data catalogs.</p>") @as("DataCatalogsSummary")
@@ -1226,8 +1387,8 @@ module CreateDataCatalog = {
     @ocaml.doc("<p>A list of comma separated tags to add to the data catalog that is created.</p>")
     @as("Tags")
     tags: option<tagList_>,
-    @ocaml.doc("<p>Specifies the Lambda function or functions to use for creating the data catalog. This
-            is a mapping whose values depend on the catalog type. </p>
+    @ocaml.doc("<p>Specifies the Lambda function or functions to use for creating the data
+            catalog. This is a mapping whose values depend on the catalog type. </p>
         <ul>
             <li>
                 <p>For the <code>HIVE</code> data catalog type, use the following syntax. The
@@ -1245,9 +1406,9 @@ module CreateDataCatalog = {
                     of required parameters, but not both.</p>
                 <ul>
                   <li>
-                        <p>If you have one Lambda function that processes metadata and another
-                            for reading the actual data, use the following syntax. Both parameters
-                            are required.</p>
+                        <p>If you have one Lambda function that processes metadata
+                            and another for reading the actual data, use the following syntax. Both
+                            parameters are required.</p>
                         <p>
                         <code>metadata-function=<i>lambda_arn</i>,
                                     record-function=<i>lambda_arn</i>
@@ -1255,13 +1416,41 @@ module CreateDataCatalog = {
                      </p>
                     </li>
                   <li>
-                        <p> If you have a composite Lambda function that processes both metadata
-                            and data, use the following syntax to specify your Lambda
-                            function.</p>
+                        <p> If you have a composite Lambda function that processes
+                            both metadata and data, use the following syntax to specify your Lambda function.</p>
                         <p>
                         <code>function=<i>lambda_arn</i>
                         </code>
                      </p>
+                    </li>
+               </ul>
+            </li>
+            <li>
+                <p>The <code>GLUE</code> type takes a catalog ID parameter and is required. The
+                            <code>
+                     <i>catalog_id</i>
+                  </code> is the account ID of the
+                        Amazon Web Services account to which the Glue Data Catalog
+                    belongs.</p>
+                <p>
+                  <code>catalog-id=<i>catalog_id</i>
+                  </code>
+               </p>
+                <ul>
+                  <li>
+                        <p>The <code>GLUE</code> data catalog type also applies to the default
+                                <code>AwsDataCatalog</code> that already exists in your account, of
+                            which you can have only one and cannot modify.</p>
+                    </li>
+                  <li>
+                        <p>Queries that specify a Glue Data Catalog other than the default
+                                <code>AwsDataCatalog</code> must be run on Athena engine
+                            version 2.</p>
+                    </li>
+                  <li>
+                        <p>In Regions where Athena engine version 2 is not available,
+                            creating new Glue data catalogs results in an
+                                <code>INVALID_INPUT</code> error.</p>
                     </li>
                </ul>
             </li>
@@ -1270,23 +1459,19 @@ module CreateDataCatalog = {
     parameters: option<parametersMap>,
     @ocaml.doc("<p>A description of the data catalog to be created.</p>") @as("Description")
     description: option<descriptionString>,
-    @ocaml.doc("<p>The type of data catalog to create: <code>LAMBDA</code> for a federated catalog or
-                <code>HIVE</code> for an external hive metastore.</p>
-        <note>
-            <p>Do not use the <code>GLUE</code> type. This refers to the
-                    <code>AwsDataCatalog</code> that already exists in your account, of which you
-                can have only one. Specifying the <code>GLUE</code> type will result in an
-                    <code>INVALID_INPUT</code> error.</p>
-        </note>")
+    @ocaml.doc("<p>The type of data catalog to create: <code>LAMBDA</code> for a federated catalog,
+                <code>HIVE</code> for an external hive metastore, or <code>GLUE</code> for an
+                Glue Data Catalog.</p>")
     @as("Type")
     type_: dataCatalogType,
-    @ocaml.doc("<p>The name of the data catalog to create. The catalog name must be unique for the AWS
-            account and can use a maximum of 128 alphanumeric, underscore, at sign, or hyphen
-            characters.</p>")
+    @ocaml.doc("<p>The name of the data catalog to create. The catalog name must be unique for the
+                Amazon Web Services account and can use a maximum of 127 alphanumeric, underscore, at
+            sign, or hyphen characters. The remainder of the length constraint of 256 is reserved
+            for use by Athena.</p>")
     @as("Name")
     name: catalogNameString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-athena") @new external new: request => t = "CreateDataCatalogCommand"
   let make = (~type_, ~name, ~tags=?, ~parameters=?, ~description=?, ()) =>
     new({tags: tags, parameters: parameters, description: description, type_: type_, name: name})
@@ -1324,7 +1509,7 @@ module UpdateWorkGroup = {
     @ocaml.doc("<p>The specified workgroup that will be updated.</p>") @as("WorkGroup")
     workGroup: workGroupName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-athena") @new external new: request => t = "UpdateWorkGroupCommand"
   let make = (~workGroup, ~state=?, ~configurationUpdates=?, ~description=?, ()) =>
     new({
@@ -1342,16 +1527,16 @@ module ListWorkGroups = {
     @ocaml.doc("<p>The maximum number of workgroups to return in this request.</p>")
     @as("MaxResults")
     maxResults: option<maxWorkGroupsCount>,
-    @ocaml.doc("<p>A token generated by the Athena service that specifies where to continue pagination if
-            a previous request was truncated. To obtain the next set of pages, pass in the
-                <code>NextToken</code> from the response object of the previous page call.</p>")
+    @ocaml.doc("<p>A token generated by the Athena service that specifies where to continue
+            pagination if a previous request was truncated. To obtain the next set of pages, pass in
+            the <code>NextToken</code> from the response object of the previous page call.</p>")
     @as("NextToken")
     nextToken: option<token>,
   }
   type response = {
-    @ocaml.doc("<p>A token generated by the Athena service that specifies where to continue pagination if
-            a previous request was truncated. To obtain the next set of pages, pass in the
-                <code>NextToken</code> from the response object of the previous page call.</p>")
+    @ocaml.doc("<p>A token generated by the Athena service that specifies where to continue
+            pagination if a previous request was truncated. To obtain the next set of pages, pass in
+            the <code>NextToken</code> from the response object of the previous page call.</p>")
     @as("NextToken")
     nextToken: option<token>,
     @ocaml.doc("<p>A list of <a>WorkGroupSummary</a> objects that include the names,
@@ -1370,9 +1555,9 @@ module ListDatabases = {
   type request = {
     @ocaml.doc("<p>Specifies the maximum number of results to return.</p>") @as("MaxResults")
     maxResults: option<maxDatabasesCount>,
-    @ocaml.doc("<p>A token generated by the Athena service that specifies where to continue pagination if
-            a previous request was truncated. To obtain the next set of pages, pass in the
-                <code>NextToken</code> from the response object of the previous page call.</p>")
+    @ocaml.doc("<p>A token generated by the Athena service that specifies where to continue
+            pagination if a previous request was truncated. To obtain the next set of pages, pass in
+            the <code>NextToken</code> from the response object of the previous page call.</p>")
     @as("NextToken")
     nextToken: option<token>,
     @ocaml.doc("<p>The name of the data catalog that contains the databases to return.</p>")
@@ -1380,9 +1565,9 @@ module ListDatabases = {
     catalogName: catalogNameString,
   }
   type response = {
-    @ocaml.doc("<p>A token generated by the Athena service that specifies where to continue pagination if
-            a previous request was truncated. To obtain the next set of pages, pass in the NextToken
-            from the response object of the previous page call.</p>")
+    @ocaml.doc("<p>A token generated by the Athena service that specifies where to continue
+            pagination if a previous request was truncated. To obtain the next set of pages, pass in
+            the NextToken from the response object of the previous page call.</p>")
     @as("NextToken")
     nextToken: option<token>,
     @ocaml.doc("<p>A list of databases from a data catalog.</p>") @as("DatabaseList")
@@ -1440,17 +1625,18 @@ module CreateWorkGroup = {
     tags: option<tagList_>,
     @ocaml.doc("<p>The workgroup description.</p>") @as("Description")
     description: option<workGroupDescriptionString>,
-    @ocaml.doc("<p>The configuration for the workgroup, which includes the location in Amazon S3 where
-            query results are stored, the encryption configuration, if any, used for encrypting
-            query results, whether the Amazon CloudWatch Metrics are enabled for the workgroup, the
-            limit for the amount of bytes scanned (cutoff) per query, if it is specified, and
-            whether workgroup's settings (specified with EnforceWorkGroupConfiguration) in the
-            WorkGroupConfiguration override client-side settings. See <a>WorkGroupConfiguration$EnforceWorkGroupConfiguration</a>.</p>")
+    @ocaml.doc("<p>The configuration for the workgroup, which includes the location in Amazon S3
+            where query results are stored, the encryption configuration, if any, used for
+            encrypting query results, whether the Amazon CloudWatch Metrics are enabled for the
+            workgroup, the limit for the amount of bytes scanned (cutoff) per query, if it is
+            specified, and whether workgroup's settings (specified with
+                <code>EnforceWorkGroupConfiguration</code>) in the
+                <code>WorkGroupConfiguration</code> override client-side settings. See <a>WorkGroupConfiguration$EnforceWorkGroupConfiguration</a>.</p>")
     @as("Configuration")
     configuration: option<workGroupConfiguration>,
     @ocaml.doc("<p>The workgroup name.</p>") @as("Name") name: workGroupName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-athena") @new external new: request => t = "CreateWorkGroupCommand"
   let make = (~name, ~tags=?, ~description=?, ~configuration=?, ()) =>
     new({tags: tags, description: description, configuration: configuration, name: name})
@@ -1462,9 +1648,9 @@ module ListTableMetadata = {
   type request = {
     @ocaml.doc("<p>Specifies the maximum number of results to return.</p>") @as("MaxResults")
     maxResults: option<maxTableMetadataCount>,
-    @ocaml.doc("<p>A token generated by the Athena service that specifies where to continue pagination if
-            a previous request was truncated. To obtain the next set of pages, pass in the NextToken
-            from the response object of the previous page call.</p>")
+    @ocaml.doc("<p>A token generated by the Athena service that specifies where to continue
+            pagination if a previous request was truncated. To obtain the next set of pages, pass in
+            the NextToken from the response object of the previous page call.</p>")
     @as("NextToken")
     nextToken: option<token>,
     @ocaml.doc("<p>A regex filter that pattern-matches table names. If no expression is supplied,
@@ -1479,9 +1665,9 @@ module ListTableMetadata = {
     catalogName: catalogNameString,
   }
   type response = {
-    @ocaml.doc("<p>A token generated by the Athena service that specifies where to continue pagination if
-            a previous request was truncated. To obtain the next set of pages, pass in the NextToken
-            from the response object of the previous page call.</p>")
+    @ocaml.doc("<p>A token generated by the Athena service that specifies where to continue
+            pagination if a previous request was truncated. To obtain the next set of pages, pass in
+            the NextToken from the response object of the previous page call.</p>")
     @as("NextToken")
     nextToken: option<token>,
     @ocaml.doc("<p>A list of table metadata.</p>") @as("TableMetadataList")
@@ -1538,23 +1724,24 @@ module GetQueryResults = {
     @ocaml.doc("<p>The maximum number of results (rows) to return in this request.</p>")
     @as("MaxResults")
     maxResults: option<maxQueryResults>,
-    @ocaml.doc("<p>A token generated by the Athena service that specifies where to continue pagination if
-            a previous request was truncated. To obtain the next set of pages, pass in the
-                <code>NextToken</code> from the response object of the previous page call.</p>")
+    @ocaml.doc("<p>A token generated by the Athena service that specifies where to continue
+            pagination if a previous request was truncated. To obtain the next set of pages, pass in
+            the <code>NextToken</code> from the response object of the previous page call.</p>")
     @as("NextToken")
     nextToken: option<token>,
     @ocaml.doc("<p>The unique ID of the query execution.</p>") @as("QueryExecutionId")
     queryExecutionId: queryExecutionId,
   }
   type response = {
-    @ocaml.doc("<p>A token generated by the Athena service that specifies where to continue pagination if
-            a previous request was truncated. To obtain the next set of pages, pass in the
-                <code>NextToken</code> from the response object of the previous page call.</p>")
+    @ocaml.doc("<p>A token generated by the Athena service that specifies where to continue
+            pagination if a previous request was truncated. To obtain the next set of pages, pass in
+            the <code>NextToken</code> from the response object of the previous page call.</p>")
     @as("NextToken")
     nextToken: option<token>,
     @ocaml.doc("<p>The results of the query execution.</p>") @as("ResultSet")
     resultSet: option<resultSet>,
-    @ocaml.doc("<p>The number of rows inserted with a CREATE TABLE AS SELECT statement. </p>")
+    @ocaml.doc("<p>The number of rows inserted with a <code>CREATE TABLE AS SELECT</code> statement.
+        </p>")
     @as("UpdateCount")
     updateCount: option<long>,
   }

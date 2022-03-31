@@ -1421,7 +1421,7 @@ module UpdateRepositoryName = {
     @ocaml.doc("<p>The new name for the repository.</p>") newName: repositoryName,
     @ocaml.doc("<p>The current name of the repository.</p>") oldName: repositoryName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-codecommit") @new
   external new: request => t = "UpdateRepositoryNameCommand"
   let make = (~newName, ~oldName, ()) => new({newName: newName, oldName: oldName})
@@ -1439,7 +1439,7 @@ module UpdateRepositoryDescription = {
     @ocaml.doc("<p>The name of the repository to set or change the comment or description for.</p>")
     repositoryName: repositoryName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-codecommit") @new
   external new: request => t = "UpdateRepositoryDescriptionCommand"
   let make = (~repositoryName, ~repositoryDescription=?, ()) =>
@@ -1455,7 +1455,7 @@ module UpdatePullRequestApprovalState = {
     @ocaml.doc("<p>The system-generated ID of the revision.</p>") revisionId: revisionId,
     @ocaml.doc("<p>The system-generated ID of the pull request.</p>") pullRequestId: pullRequestId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-codecommit") @new
   external new: request => t = "UpdatePullRequestApprovalStateCommand"
   let make = (~approvalState, ~revisionId, ~pullRequestId, ()) =>
@@ -1472,7 +1472,7 @@ module UpdateDefaultBranch = {
     @ocaml.doc("<p>The name of the repository to set or change the default branch for.</p>")
     repositoryName: repositoryName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-codecommit") @new
   external new: request => t = "UpdateDefaultBranchCommand"
   let make = (~defaultBranchName, ~repositoryName, ()) =>
@@ -1558,7 +1558,7 @@ module PutCommentReaction = {
     @ocaml.doc("<p>The ID of the comment to which you want to add or update a reaction.</p>")
     commentId: commentId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-codecommit") @new
   external new: request => t = "PutCommentReactionCommand"
   let make = (~reactionValue, ~commentId, ()) =>
@@ -1580,7 +1580,7 @@ module OverridePullRequestApprovalRules = {
             <a>GetPullRequest</a>.</p>")
     pullRequestId: pullRequestId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-codecommit") @new
   external new: request => t = "OverridePullRequestApprovalRulesCommand"
   let make = (~overrideStatus, ~revisionId, ~pullRequestId, ()) =>
@@ -1779,7 +1779,7 @@ module DisassociateApprovalRuleTemplateFromRepository = {
     )
     approvalRuleTemplateName: approvalRuleTemplateName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-codecommit") @new
   external new: request => t = "DisassociateApprovalRuleTemplateFromRepositoryCommand"
   let make = (~repositoryName, ~approvalRuleTemplateName, ()) =>
@@ -1926,7 +1926,7 @@ module CreateBranch = {
     @ocaml.doc("<p>The name of the repository in which you want to create the new branch.</p>")
     repositoryName: repositoryName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-codecommit") @new external new: request => t = "CreateBranchCommand"
   let make = (~commitId, ~branchName, ~repositoryName, ()) =>
     new({commitId: commitId, branchName: branchName, repositoryName: repositoryName})
@@ -1941,7 +1941,7 @@ module AssociateApprovalRuleTemplateWithRepository = {
     @ocaml.doc("<p>The name for the approval rule template. </p>")
     approvalRuleTemplateName: approvalRuleTemplateName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-codecommit") @new
   external new: request => t = "AssociateApprovalRuleTemplateWithRepositoryCommand"
   let make = (~repositoryName, ~approvalRuleTemplateName, ()) =>
@@ -2030,7 +2030,7 @@ module UntagResource = {
     )
     resourceArn: resourceArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-codecommit") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -2045,7 +2045,7 @@ module TagResource = {
     )
     resourceArn: resourceArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-codecommit") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"

@@ -98,9 +98,14 @@ type exportedApi = NodeJs.Buffer.t
 @ocaml.doc("<p>Represents an endpoint type.</p>")
 type endpointType = [@as("EDGE") #EDGE | @as("REGIONAL") #REGIONAL]
 @ocaml.doc(
-  "<p>The status of the domain name migration. The valid values are AVAILABLE and UPDATING. If the status is UPDATING, the domain cannot be modified further until the existing operation is complete. If it is AVAILABLE, the domain can be updated.</p>"
+  "<p>The status of the domain name migration. The valid values are AVAILABLE, UPDATING, PENDING_CERTIFICATE_REIMPORT, and PENDING_OWNERSHIP_VERIFICATION. If the status is UPDATING, the domain cannot be modified further until the existing operation is complete. If it is AVAILABLE, the domain can be updated.</p>"
 )
-type domainNameStatus = [@as("UPDATING") #UPDATING | @as("AVAILABLE") #AVAILABLE]
+type domainNameStatus = [
+  | @as("PENDING_OWNERSHIP_VERIFICATION") #PENDING_OWNERSHIP_VERIFICATION
+  | @as("PENDING_CERTIFICATE_REIMPORT") #PENDING_CERTIFICATE_REIMPORT
+  | @as("UPDATING") #UPDATING
+  | @as("AVAILABLE") #AVAILABLE
+]
 @ocaml.doc("<p>Represents a deployment status.</p>")
 type deploymentStatus = [
   | @as("DEPLOYED") #DEPLOYED
@@ -234,6 +239,11 @@ type identitySourceList = array<__string>
 @ocaml.doc("<p>The domain name configuration.</p>")
 type domainNameConfiguration = {
   @ocaml.doc(
+    "<p>The ARN of the public certificate issued by ACM to validate ownership of your custom domain. Only required when configuring mutual TLS and using an ACM imported or private CA certificate ARN as the regionalCertificateArn</p>"
+  )
+  @as("OwnershipVerificationCertificateArn")
+  ownershipVerificationCertificateArn: option<arn>,
+  @ocaml.doc(
     "<p>The Transport Layer Security (TLS) version of the security policy for this domain name. The valid values are TLS_1_0 and TLS_1_2.</p>"
   )
   @as("SecurityPolicy")
@@ -247,7 +257,7 @@ type domainNameConfiguration = {
   @as("DomainNameStatusMessage")
   domainNameStatusMessage: option<__string>,
   @ocaml.doc(
-    "<p>The status of the domain name migration. The valid values are AVAILABLE and UPDATING. If the status is UPDATING, the domain cannot be modified further until the existing operation is complete. If it is AVAILABLE, the domain can be updated.</p>"
+    "<p>The status of the domain name migration. The valid values are AVAILABLE, UPDATING, PENDING_CERTIFICATE_REIMPORT, and PENDING_OWNERSHIP_VERIFICATION. If the status is UPDATING, the domain cannot be modified further until the existing operation is complete. If it is AVAILABLE, the domain can be updated.</p>"
   )
   @as("DomainNameStatus")
   domainNameStatus: option<domainNameStatus>,
@@ -895,7 +905,7 @@ module ResetAuthorizersCache = {
     stageName: __string,
     @ocaml.doc("<p>The API identifier.</p>") @as("ApiId") apiId: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-apigateway") @new
   external new: request => t = "ResetAuthorizersCacheCommand"
   let make = (~stageName, ~apiId, ()) => new({stageName: stageName, apiId: apiId})
@@ -1043,7 +1053,7 @@ module ExportApi = {
 module DeleteVpcLink = {
   type t
   type request = {@ocaml.doc("<p>The ID of the VPC link.</p>") @as("VpcLinkId") vpcLinkId: __string}
-
+  type response = {.}
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "DeleteVpcLinkCommand"
   let make = (~vpcLinkId, ()) => new({vpcLinkId: vpcLinkId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1059,7 +1069,7 @@ module DeleteStage = {
     stageName: __string,
     @ocaml.doc("<p>The API identifier.</p>") @as("ApiId") apiId: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "DeleteStageCommand"
   let make = (~stageName, ~apiId, ()) => new({stageName: stageName, apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1076,7 +1086,7 @@ module DeleteRouteSettings = {
     @ocaml.doc("<p>The route key.</p>") @as("RouteKey") routeKey: __string,
     @ocaml.doc("<p>The API identifier.</p>") @as("ApiId") apiId: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-apigateway") @new
   external new: request => t = "DeleteRouteSettingsCommand"
   let make = (~stageName, ~routeKey, ~apiId, ()) =>
@@ -1091,7 +1101,7 @@ module DeleteRouteResponse = {
     @ocaml.doc("<p>The route ID.</p>") @as("RouteId") routeId: __string,
     @ocaml.doc("<p>The API identifier.</p>") @as("ApiId") apiId: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-apigateway") @new
   external new: request => t = "DeleteRouteResponseCommand"
   let make = (~routeResponseId, ~routeId, ~apiId, ()) =>
@@ -1107,7 +1117,7 @@ module DeleteRouteRequestParameter = {
     requestParameterKey: __string,
     @ocaml.doc("<p>The API identifier.</p>") @as("ApiId") apiId: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-apigateway") @new
   external new: request => t = "DeleteRouteRequestParameterCommand"
   let make = (~routeId, ~requestParameterKey, ~apiId, ()) =>
@@ -1121,7 +1131,7 @@ module DeleteRoute = {
     @ocaml.doc("<p>The route ID.</p>") @as("RouteId") routeId: __string,
     @ocaml.doc("<p>The API identifier.</p>") @as("ApiId") apiId: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "DeleteRouteCommand"
   let make = (~routeId, ~apiId, ()) => new({routeId: routeId, apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1133,7 +1143,7 @@ module DeleteModel = {
     @ocaml.doc("<p>The model ID.</p>") @as("ModelId") modelId: __string,
     @ocaml.doc("<p>The API identifier.</p>") @as("ApiId") apiId: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "DeleteModelCommand"
   let make = (~modelId, ~apiId, ()) => new({modelId: modelId, apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1147,7 +1157,7 @@ module DeleteIntegrationResponse = {
     @ocaml.doc("<p>The integration ID.</p>") @as("IntegrationId") integrationId: __string,
     @ocaml.doc("<p>The API identifier.</p>") @as("ApiId") apiId: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-apigateway") @new
   external new: request => t = "DeleteIntegrationResponseCommand"
   let make = (~integrationResponseId, ~integrationId, ~apiId, ()) =>
@@ -1161,7 +1171,7 @@ module DeleteIntegration = {
     @ocaml.doc("<p>The integration ID.</p>") @as("IntegrationId") integrationId: __string,
     @ocaml.doc("<p>The API identifier.</p>") @as("ApiId") apiId: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "DeleteIntegrationCommand"
   let make = (~integrationId, ~apiId, ()) => new({integrationId: integrationId, apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1170,7 +1180,7 @@ module DeleteIntegration = {
 module DeleteDomainName = {
   type t
   type request = {@ocaml.doc("<p>The domain name.</p>") @as("DomainName") domainName: __string}
-
+  type response = {.}
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "DeleteDomainNameCommand"
   let make = (~domainName, ()) => new({domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1182,7 +1192,7 @@ module DeleteDeployment = {
     @ocaml.doc("<p>The deployment ID.</p>") @as("DeploymentId") deploymentId: __string,
     @ocaml.doc("<p>The API identifier.</p>") @as("ApiId") apiId: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "DeleteDeploymentCommand"
   let make = (~deploymentId, ~apiId, ()) => new({deploymentId: deploymentId, apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1191,7 +1201,7 @@ module DeleteDeployment = {
 module DeleteCorsConfiguration = {
   type t
   type request = {@ocaml.doc("<p>The API identifier.</p>") @as("ApiId") apiId: __string}
-
+  type response = {.}
   @module("@aws-sdk/client-apigateway") @new
   external new: request => t = "DeleteCorsConfigurationCommand"
   let make = (~apiId, ()) => new({apiId: apiId})
@@ -1204,7 +1214,7 @@ module DeleteAuthorizer = {
     @ocaml.doc("<p>The authorizer identifier.</p>") @as("AuthorizerId") authorizerId: __string,
     @ocaml.doc("<p>The API identifier.</p>") @as("ApiId") apiId: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "DeleteAuthorizerCommand"
   let make = (~authorizerId, ~apiId, ()) => new({authorizerId: authorizerId, apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1216,7 +1226,7 @@ module DeleteApiMapping = {
     @ocaml.doc("<p>The domain name.</p>") @as("DomainName") domainName: __string,
     @ocaml.doc("<p>The API mapping identifier.</p>") @as("ApiMappingId") apiMappingId: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "DeleteApiMappingCommand"
   let make = (~domainName, ~apiMappingId, ()) =>
     new({domainName: domainName, apiMappingId: apiMappingId})
@@ -1226,7 +1236,7 @@ module DeleteApiMapping = {
 module DeleteApi = {
   type t
   type request = {@ocaml.doc("<p>The API identifier.</p>") @as("ApiId") apiId: __string}
-
+  type response = {.}
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "DeleteApiCommand"
   let make = (~apiId, ()) => new({apiId: apiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1242,7 +1252,7 @@ module DeleteAccessLogSettings = {
     stageName: __string,
     @ocaml.doc("<p>The API identifier.</p>") @as("ApiId") apiId: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-apigateway") @new
   external new: request => t = "DeleteAccessLogSettingsCommand"
   let make = (~stageName, ~apiId, ()) => new({stageName: stageName, apiId: apiId})
@@ -1475,7 +1485,7 @@ module UntagResource = {
     @ocaml.doc("<p>The Tag keys to delete</p>") @as("TagKeys") tagKeys: __listOf__string,
     @ocaml.doc("<p>The resource ARN for the tag.</p>") @as("ResourceArn") resourceArn: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1492,7 +1502,7 @@ module TagResource = {
     tags: option<tags>,
     @ocaml.doc("<p>The resource ARN for the tag.</p>") @as("ResourceArn") resourceArn: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "TagResourceCommand"
   let make = (~resourceArn, ~tags=?, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"

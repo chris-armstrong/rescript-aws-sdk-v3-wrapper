@@ -12,7 +12,7 @@ let generateField = (~asName=?, ~doc=?, fieldName, typeName) =>
     )}${safeMemberName(fieldName)}: ${typeName}`
 
 let generateRecordTypeDefinition = members =>
-  Array.length(members) == 0 ? "unit" : `{\n${Array.joinWith(members, ",\n  ", x => x)}\n}`
+  Array.length(members) == 0 ? "{.}" : `{\n${Array.joinWith(members, ",\n  ", x => x)}\n}`
 
 let escapeString = str =>
   str
@@ -213,7 +213,9 @@ let generateOperationStructureType = (varName, opStruct) =>
       docs ++ generateType(`#${varName}`, generateStructureShape(details))
     }
   | OperationStructureRef(name) => generateType(`#${varName}`, safeTypeName(name))
-  | OperationStructureNone => ""
+  | OperationStructureNone => {
+    generateType(`#${varName}`, generateStructureShape({ traits: None, members: [] }))
+  } 
   }
 
 /* Determine if the input request has a type, or is just `unit` */
@@ -240,7 +242,7 @@ let generateMake = input =>
       let fields = Array.joinWith(members, ", ", member => safeMemberName(member.name) ++ ": " ++ safeMemberName(member.name))
       `let make = (${arguments}, ()) => new({ ${fields} })`
     }
-  | OperationStructureNone => { `let make = () => new()`}
+  | OperationStructureNone => { `let make = () => new(Js.Obj.empty())`}
   | OperationStructureRef(_) => // FIXME: ref is in the broader types, so generate nothing for now
     ""
   }
@@ -252,10 +254,8 @@ let generateOperationModule = (
   let commandName = `${symbolName(name)}Command`
   let request = generateOperationStructureType("request", input)
   let response = generateOperationStructureType("response", output)
-  let inputType = isOperationStructureNone(input) ? "unit" : "request"
-  let outputType = isOperationStructureNone(output)
-    ? "Js.Promise.t<unit>"
-    : "Js.Promise.t<response>"
+  let inputType = "request"
+  let outputType = isOperationStructureNone(output) ? "Js.Promise.t<unit>" : "Js.Promise.t<response>"
   let make = generateMake(input)
   `module ${symbolName(name)} = {\n` ++
   `  type t;\n` ++

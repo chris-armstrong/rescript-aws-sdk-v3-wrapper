@@ -93,6 +93,7 @@ type logGroupName = string
 type logEventIndex = int
 type kmsKeyId = string
 type interleaved = bool
+type forceUpdate = bool
 @ocaml.doc("<p>A symbolic description of how CloudWatch Logs should interpret the data in each log
       event. For example, a log event can contain timestamps, IP addresses, strings, and so on. You
       use the filter pattern to specify what to look for in the log event message.</p>")
@@ -130,8 +131,9 @@ type descending = bool
 type defaultValue = float
 @ocaml.doc("<p>The number of days to retain the log events in the specified log group.
       Possible values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150, 180, 365, 400, 545, 731, 1827, and 3653.</p>
-         <p>If you omit <code>retentionInDays</code> in a <code>PutRetentionPolicy</code> operation, 
-  the events in the log group are always retained and never expire.</p>")
+         <p>To set a log group to never have log events expire, use
+    <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DeleteRetentionPolicy.html\">DeleteRetentionPolicy</a>.
+  </p>")
 type days = int
 type arn = string
 type accessPolicy = string
@@ -320,7 +322,7 @@ type destination = {
       1, 1970 00:00:00 UTC.</p>")
   creationTime: option<timestamp_>,
   @ocaml.doc("<p>The ARN of this destination.</p>") arn: option<arn>,
-  @ocaml.doc("<p>An IAM policy document that governs which AWS accounts can create subscription filters
+  @ocaml.doc("<p>An IAM policy document that governs which Amazon Web Services accounts can create subscription filters
       against this destination.</p>")
   accessPolicy: option<accessPolicy>,
   @ocaml.doc("<p>A role for impersonation, used when delivering log events to the target.</p>")
@@ -380,7 +382,7 @@ type metricTransformation = {
             <p>You can also set up a billing alarm to alert you if your charges are higher than 
         expected. For more information, 
         see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html\">
-          Creating a Billing Alarm to Monitor Your Estimated AWS Charges</a>.
+          Creating a Billing Alarm to Monitor Your Estimated Amazon Web Services Charges</a>.
        </p>
          </important>")
   dimensions: option<dimensions>,
@@ -450,9 +452,9 @@ type metricFilter = {
 }
 type metricFilters = array<metricFilter>
 @ocaml.doc("<p>You can use Amazon CloudWatch Logs to monitor, store, and access your log files from
-      EC2 instances, AWS CloudTrail, and other sources. You can then retrieve the associated
+      EC2 instances, CloudTrail, and other sources. You can then retrieve the associated
       log data from CloudWatch Logs using the CloudWatch console, CloudWatch Logs commands in the
-      AWS CLI, CloudWatch Logs API, or CloudWatch Logs SDK.</p> 
+      Amazon Web Services CLI, CloudWatch Logs API, or CloudWatch Logs SDK.</p> 
          <p>You can use CloudWatch Logs to:</p>
          <ul>
             <li>
@@ -470,7 +472,7 @@ type metricFilters = array<metricFilter>
             </li>
             <li>
                <p>
-                  <b>Monitor AWS CloudTrail logged events</b>: You can
+                  <b>Monitor CloudTrail logged events</b>: You can
           create alarms in CloudWatch and receive notifications of particular API activity as
           captured by CloudTrail. You can use the notification to perform troubleshooting.</p>
             </li>
@@ -531,7 +533,7 @@ module PutSubscriptionFilter = {
           subscription filter, for same-account delivery.</p>
             </li>
             <li>
-               <p>An AWS Lambda function belonging to the same account as the subscription filter,
+               <p>A Lambda function belonging to the same account as the subscription filter,
           for same-account delivery.</p>
             </li>
          </ul>")
@@ -544,7 +546,7 @@ module PutSubscriptionFilter = {
     filterName: filterName,
     @ocaml.doc("<p>The name of the log group.</p>") logGroupName: logGroupName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-logs") @new external new: request => t = "PutSubscriptionFilterCommand"
   let make = (
     ~destinationArn,
@@ -572,7 +574,7 @@ module PutRetentionPolicy = {
     retentionInDays: days,
     @ocaml.doc("<p>The name of the log group.</p>") logGroupName: logGroupName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-logs") @new external new: request => t = "PutRetentionPolicyCommand"
   let make = (~retentionInDays, ~logGroupName, ()) =>
     new({retentionInDays: retentionInDays, logGroupName: logGroupName})
@@ -582,22 +584,34 @@ module PutRetentionPolicy = {
 module PutDestinationPolicy = {
   type t
   type request = {
+    @ocaml.doc("<p>Specify true if you are updating an existing destination policy to grant permission to
+    an organization ID instead of granting permission to individual AWS accounts. Before
+    you update a destination policy this way, you must first update the subscription
+    filters in the accounts that send logs to this destination. If you do not, the subscription
+    filters might stop working. By specifying <code>true</code>
+      for <code>forceUpdate</code>, you are affirming that you have already updated the subscription 
+      filters.
+    For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Cross-Account-Log_Subscription-Update.html\">
+      Updating an existing cross-account subscription</a>
+         </p>
+         <p>If you omit this parameter, the default of <code>false</code> is used.</p>")
+    forceUpdate: option<forceUpdate>,
     @ocaml.doc("<p>An IAM policy document that authorizes cross-account users to deliver their log events
       to the associated destination. This can be up to 5120 bytes.</p>")
     accessPolicy: accessPolicy,
     @ocaml.doc("<p>A name for an existing destination.</p>") destinationName: destinationName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-logs") @new external new: request => t = "PutDestinationPolicyCommand"
-  let make = (~accessPolicy, ~destinationName, ()) =>
-    new({accessPolicy: accessPolicy, destinationName: destinationName})
+  let make = (~accessPolicy, ~destinationName, ~forceUpdate=?, ()) =>
+    new({forceUpdate: forceUpdate, accessPolicy: accessPolicy, destinationName: destinationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DisassociateKmsKey = {
   type t
   type request = {@ocaml.doc("<p>The name of the log group.</p>") logGroupName: logGroupName}
-
+  type response = {.}
   @module("@aws-sdk/client-logs") @new external new: request => t = "DisassociateKmsKeyCommand"
   let make = (~logGroupName, ()) => new({logGroupName: logGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -609,7 +623,7 @@ module DeleteSubscriptionFilter = {
     @ocaml.doc("<p>The name of the subscription filter.</p>") filterName: filterName,
     @ocaml.doc("<p>The name of the log group.</p>") logGroupName: logGroupName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-logs") @new
   external new: request => t = "DeleteSubscriptionFilterCommand"
   let make = (~filterName, ~logGroupName, ()) =>
@@ -620,7 +634,7 @@ module DeleteSubscriptionFilter = {
 module DeleteRetentionPolicy = {
   type t
   type request = {@ocaml.doc("<p>The name of the log group.</p>") logGroupName: logGroupName}
-
+  type response = {.}
   @module("@aws-sdk/client-logs") @new external new: request => t = "DeleteRetentionPolicyCommand"
   let make = (~logGroupName, ()) => new({logGroupName: logGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -632,7 +646,7 @@ module DeleteResourcePolicy = {
     @ocaml.doc("<p>The name of the policy to be revoked. This parameter is required.</p>")
     policyName: option<policyName>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-logs") @new external new: request => t = "DeleteResourcePolicyCommand"
   let make = (~policyName=?, ()) => new({policyName: policyName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -661,7 +675,7 @@ module DeleteMetricFilter = {
     @ocaml.doc("<p>The name of the metric filter.</p>") filterName: filterName,
     @ocaml.doc("<p>The name of the log group.</p>") logGroupName: logGroupName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-logs") @new external new: request => t = "DeleteMetricFilterCommand"
   let make = (~filterName, ~logGroupName, ()) =>
     new({filterName: filterName, logGroupName: logGroupName})
@@ -674,7 +688,7 @@ module DeleteLogStream = {
     @ocaml.doc("<p>The name of the log stream.</p>") logStreamName: logStreamName,
     @ocaml.doc("<p>The name of the log group.</p>") logGroupName: logGroupName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-logs") @new external new: request => t = "DeleteLogStreamCommand"
   let make = (~logStreamName, ~logGroupName, ()) =>
     new({logStreamName: logStreamName, logGroupName: logGroupName})
@@ -684,7 +698,7 @@ module DeleteLogStream = {
 module DeleteLogGroup = {
   type t
   type request = {@ocaml.doc("<p>The name of the log group.</p>") logGroupName: logGroupName}
-
+  type response = {.}
   @module("@aws-sdk/client-logs") @new external new: request => t = "DeleteLogGroupCommand"
   let make = (~logGroupName, ()) => new({logGroupName: logGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -695,7 +709,7 @@ module DeleteDestination = {
   type request = {
     @ocaml.doc("<p>The name of the destination.</p>") destinationName: destinationName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-logs") @new external new: request => t = "DeleteDestinationCommand"
   let make = (~destinationName, ()) => new({destinationName: destinationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -707,7 +721,7 @@ module CreateLogStream = {
     @ocaml.doc("<p>The name of the log stream.</p>") logStreamName: logStreamName,
     @ocaml.doc("<p>The name of the log group.</p>") logGroupName: logGroupName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-logs") @new external new: request => t = "CreateLogStreamCommand"
   let make = (~logStreamName, ~logGroupName, ()) =>
     new({logStreamName: logStreamName, logGroupName: logGroupName})
@@ -721,7 +735,7 @@ module CreateExportTask = {
       specify a value, the default is <code>exportedlogs</code>.</p>")
     destinationPrefix: option<exportDestinationPrefix>,
     @ocaml.doc(
-      "<p>The name of S3 bucket for the exported log data. The bucket must be in the same AWS region.</p>"
+      "<p>The name of S3 bucket for the exported log data. The bucket must be in the same Amazon Web Services region.</p>"
     )
     destination: exportDestinationBucket,
     @ocaml.doc("<p>The end time of the range for the request, expreswatchlogsdocused as the number of milliseconds
@@ -765,7 +779,7 @@ module CreateExportTask = {
 module CancelExportTask = {
   type t
   type request = {@ocaml.doc("<p>The ID of the export task.</p>") taskId: exportTaskId}
-
+  type response = {.}
   @module("@aws-sdk/client-logs") @new external new: request => t = "CancelExportTaskCommand"
   let make = (~taskId, ()) => new({taskId: taskId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -775,11 +789,11 @@ module AssociateKmsKey = {
   type t
   type request = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the CMK to use when encrypting log data. This must be a symmetric CMK.
-      For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms\">Amazon Resource Names - AWS Key Management Service (AWS KMS)</a> and <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html\">Using Symmetric and Asymmetric Keys</a>.</p>")
+      For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms\">Amazon Resource Names - Key Management Service</a> and <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html\">Using Symmetric and Asymmetric Keys</a>.</p>")
     kmsKeyId: kmsKeyId,
     @ocaml.doc("<p>The name of the log group.</p>") logGroupName: logGroupName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-logs") @new external new: request => t = "AssociateKmsKeyCommand"
   let make = (~kmsKeyId, ~logGroupName, ()) => new({kmsKeyId: kmsKeyId, logGroupName: logGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -792,7 +806,7 @@ module UntagLogGroup = {
     tags: tagList_,
     @ocaml.doc("<p>The name of the log group.</p>") logGroupName: logGroupName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-logs") @new external new: request => t = "UntagLogGroupCommand"
   let make = (~tags, ~logGroupName, ()) => new({tags: tags, logGroupName: logGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -804,7 +818,7 @@ module TagLogGroup = {
     @ocaml.doc("<p>The key-value pairs to use for the tags.</p>") tags: tags,
     @ocaml.doc("<p>The name of the log group.</p>") logGroupName: logGroupName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-logs") @new external new: request => t = "TagLogGroupCommand"
   let make = (~tags, ~logGroupName, ()) => new({tags: tags, logGroupName: logGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -816,24 +830,40 @@ module PutResourcePolicy = {
     @ocaml.doc("<p>Details of the new policy, including the identity of the principal that is enabled to put logs to this account. This is formatted as a JSON string.
     This parameter is required.</p>
          <p>The following example creates a resource policy enabling the Route 53 service to put
-      DNS query logs in to the specified log group. Replace <code>\"logArn\"</code> with the ARN of your CloudWatch Logs resource, such as a log group or log stream.</p>
+      DNS query logs in to the specified log group. Replace <code>\"logArn\"</code> with the ARN of 
+      your CloudWatch Logs resource, such as a log group or log stream.</p>
+         <p>CloudWatch Logs also supports <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourcearn\">aws:SourceArn</a>
+      and <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourceaccount\">aws:SourceAccount</a>
+condition context keys.</p>
+         <p>In the example resource policy, you would replace the value of <code>SourceArn</code> with the resource making the
+      call from Route 53 to CloudWatch Logs and replace the value of <code>SourceAccount</code> with 
+      the Amazon Web Services account ID making that call.</p>
+         <p></p>
          <p>
-            <code>{ 
-   \"Version\": \"2012-10-17\",
-   \"Statement\": [
-     {
-       \"Sid\": \"Route53LogsToCloudWatchLogs\", 
-       \"Effect\": \"Allow\", 
-       \"Principal\": {
-        \"Service\": [
-                \"route53.amazonaws.com\"
-               ]
-            }, 
-         \"Action\":\"logs:PutLogEvents\", 
-         \"Resource\": \"logArn\"
-      }
-    ]
-} </code>
+            <code>{
+    \"Version\": \"2012-10-17\",
+    \"Statement\": [
+        {
+           \"Sid\": \"Route53LogsToCloudWatchLogs\",
+           \"Effect\": \"Allow\",
+           \"Principal\": {
+               \"Service\": [
+                   \"route53.amazonaws.com\"
+                ]
+            },
+           \"Action\": \"logs:PutLogEvents\",
+           \"Resource\": \"logArn\",
+           \"Condition\": {
+               \"ArnLike\": {
+                   \"aws:SourceArn\": \"myRoute53ResourceArn\"
+                },
+               \"StringEquals\": {
+                   \"aws:SourceAccount\": \"myAwsAccountId\"
+               }
+            }
+        }
+      ]
+}</code>
  
          </p>")
     policyDocument: option<policyDocument>,
@@ -931,13 +961,19 @@ module GetLogRecord = {
 module CreateLogGroup = {
   type t
   type request = {
-    @ocaml.doc("<p>The key-value pairs to use for the tags.</p>") tags: option<tags>,
+    @ocaml.doc("<p>The key-value pairs to use for the tags.</p>
+         <p>CloudWatch Logs doesn’t support IAM policies that prevent users from assigning specified tags to 
+      log groups using the <code>aws:Resource/<i>key-name</i>
+            </code> or <code>aws:TagKeys</code> condition keys. 
+      For more information about using tags to control access, see 
+      <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html\">Controlling access to Amazon Web Services resources using tags</a>.</p>")
+    tags: option<tags>,
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the CMK to use when encrypting log data. 
-      For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms\">Amazon Resource Names - AWS Key Management Service (AWS KMS)</a>.</p>")
+      For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms\">Amazon Resource Names - Key Management Service</a>.</p>")
     kmsKeyId: option<kmsKeyId>,
     @ocaml.doc("<p>The name of the log group.</p>") logGroupName: logGroupName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-logs") @new external new: request => t = "CreateLogGroupCommand"
   let make = (~logGroupName, ~tags=?, ~kmsKeyId=?, ()) =>
     new({tags: tags, kmsKeyId: kmsKeyId, logGroupName: logGroupName})
@@ -1047,13 +1083,15 @@ module GetLogEvents = {
     @ocaml.doc("<p>If the value is true, the earliest log events are returned first.
       If the value is false, the latest log events are returned first.
       The default value is false.</p>
-         <p>If you are using <code>nextToken</code> in this operation, you must specify <code>true</code> for <code>startFromHead</code>.</p>")
+         <p>If you are using a previous <code>nextForwardToken</code> value as the <code>nextToken</code> in this operation, 
+      you must specify <code>true</code> for <code>startFromHead</code>.</p>")
     startFromHead: option<startFromHead>,
     @ocaml.doc("<p>The maximum number of log events returned. If you don't specify a value, the maximum is
       as many log events as can fit in a response size of 1 MB, up to 10,000 log events.</p>")
     limit: option<eventsLimit>,
-    @ocaml.doc("<p>The token for the next set of items to return. (You received this token from a previous call.)</p>
-         <p>Using this token works only when you specify <code>true</code> for <code>startFromHead</code>.</p>")
+    @ocaml.doc(
+      "<p>The token for the next set of items to return. (You received this token from a previous call.)</p>"
+    )
     nextToken: option<nextToken>,
     @ocaml.doc("<p>The end of the time range, expressed as the number of milliseconds after Jan 1, 1970
       00:00:00 UTC. Events with a timestamp equal to or later than this time are not
@@ -1386,7 +1424,7 @@ module PutMetricFilter = {
     @ocaml.doc("<p>A name for the metric filter.</p>") filterName: filterName,
     @ocaml.doc("<p>The name of the log group.</p>") logGroupName: logGroupName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-logs") @new external new: request => t = "PutMetricFilterCommand"
   let make = (~metricTransformations, ~filterPattern, ~filterName, ~logGroupName, ()) =>
     new({

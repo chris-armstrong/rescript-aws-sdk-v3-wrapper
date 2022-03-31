@@ -128,7 +128,7 @@ module DisassociateDeviceFromPlacement = {
     @ocaml.doc("<p>The name of the project that contains the placement.</p>")
     projectName: projectName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot1click") @new
   external new: request => t = "DisassociateDeviceFromPlacementCommand"
   let make = (~deviceTemplateName, ~placementName, ~projectName, ()) =>
@@ -145,7 +145,7 @@ module DeleteProject = {
   type request = {
     @ocaml.doc("<p>The name of the empty project to delete.</p>") projectName: projectName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot1click") @new external new: request => t = "DeleteProjectCommand"
   let make = (~projectName, ()) => new({projectName: projectName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -158,7 +158,7 @@ module DeletePlacement = {
     projectName: projectName,
     @ocaml.doc("<p>The name of the empty placement to delete.</p>") placementName: placementName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot1click") @new external new: request => t = "DeletePlacementCommand"
   let make = (~projectName, ~placementName, ()) =>
     new({projectName: projectName, placementName: placementName})
@@ -181,7 +181,7 @@ module AssociateDeviceWithPlacement = {
     )
     projectName: projectName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot1click") @new
   external new: request => t = "AssociateDeviceWithPlacementCommand"
   let make = (~deviceTemplateName, ~deviceId, ~placementName, ~projectName, ()) =>
@@ -204,7 +204,7 @@ module UpdatePlacement = {
     projectName: projectName,
     @ocaml.doc("<p>The name of the placement to update.</p>") placementName: placementName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot1click") @new external new: request => t = "UpdatePlacementCommand"
   let make = (~projectName, ~placementName, ~attributes=?, ()) =>
     new({attributes: attributes, projectName: projectName, placementName: placementName})
@@ -218,7 +218,7 @@ module UntagResource = {
     @ocaml.doc("<p>The ARN of the resource whose tag you want to remove.</p>")
     resourceArn: projectArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot1click") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -233,7 +233,7 @@ module TagResource = {
     @ocaml.doc("<p>The ARN of the resouce for which tag(s) should be added or modified.</p>")
     resourceArn: projectArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot1click") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -285,7 +285,7 @@ module CreatePlacement = {
     projectName: projectName,
     @ocaml.doc("<p>The name of the placement to be created.</p>") placementName: placementName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot1click") @new external new: request => t = "CreatePlacementCommand"
   let make = (~projectName, ~placementName, ~attributes=?, ()) =>
     new({attributes: attributes, projectName: projectName, placementName: placementName})
@@ -365,7 +365,7 @@ module UpdateProject = {
     description: option<description>,
     @ocaml.doc("<p>The name of the project to be updated.</p>") projectName: projectName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot1click") @new external new: request => t = "UpdateProjectCommand"
   let make = (~projectName, ~placementTemplate=?, ~description=?, ()) =>
     new({placementTemplate: placementTemplate, description: description, projectName: projectName})
@@ -387,7 +387,7 @@ module CreateProject = {
     @ocaml.doc("<p>An optional description for the project.</p>") description: option<description>,
     @ocaml.doc("<p>The name of the project to create.</p>") projectName: projectName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot1click") @new external new: request => t = "CreateProjectCommand"
   let make = (~projectName, ~tags=?, ~placementTemplate=?, ~description=?, ()) =>
     new({

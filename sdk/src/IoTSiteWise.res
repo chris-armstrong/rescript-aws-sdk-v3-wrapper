@@ -16,13 +16,19 @@ type baseTimestamp = Js.Date.t
 type baseLong = float
 type variableName = string
 type url = string
+type unlimited = bool
 type traversalType = [@as("PATH_TO_ROOT") #PATH_TO_ROOT]
 type traversalDirection = [@as("CHILD") #CHILD | @as("PARENT") #PARENT]
 type timestamp_ = Js.Date.t
+type timeSeriesId = string
 type timeOrdering = [@as("DESCENDING") #DESCENDING | @as("ASCENDING") #ASCENDING]
 type timeInSeconds = float
 type tagValue = string
 type tagKey = string
+type storageType = [
+  | @as("MULTI_LAYER_STORAGE") #MULTI_LAYER_STORAGE
+  | @as("SITEWISE_DEFAULT_STORAGE") #SITEWISE_DEFAULT_STORAGE
+]
 type ssoapplicationId = string
 type resourceType = [@as("PROJECT") #PROJECT | @as("PORTAL") #PORTAL]
 type resourceId = string
@@ -54,6 +60,8 @@ type portalState = [
 type portalClientId = string
 type permission = [@as("VIEWER") #VIEWER | @as("ADMINISTRATOR") #ADMINISTRATOR]
 type offsetInNanos = int
+type offset = string
+type numberOfDays = int
 type nextToken = string
 type name = string
 type monitorErrorMessage = string
@@ -62,15 +70,14 @@ type monitorErrorCode = [
   | @as("VALIDATION_ERROR") #VALIDATION_ERROR
   | @as("INTERNAL_FAILURE") #INTERNAL_FAILURE
 ]
-@ocaml.doc("<p>Contains an asset measurement property. For more information, see
-      <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-properties.html#measurements\">Measurements</a> in the <i>AWS IoT SiteWise User Guide</i>.</p>")
-type measurement = unit
 type maxResults = int
 type maxInterpolatedResults = int
 type macro = string
 type loggingLevel = [@as("OFF") #OFF | @as("INFO") #INFO | @as("ERROR") #ERROR]
+type listTimeSeriesType = [@as("DISASSOCIATED") #DISASSOCIATED | @as("ASSOCIATED") #ASSOCIATED]
 type listAssetsFilter = [@as("TOP_LEVEL") #TOP_LEVEL | @as("ALL") #ALL]
 type kmsKeyId = string
+type intervalWindowInSeconds = float
 type intervalInSeconds = float
 type interval = string
 type interpolationType = string
@@ -79,6 +86,7 @@ type imageFileData = NodeJs.Buffer.t
 type identityType = [@as("IAM") #IAM | @as("GROUP") #GROUP | @as("USER") #USER]
 type identityId = string
 type id = string
+type forwardingConfigState = [@as("ENABLED") #ENABLED | @as("DISABLED") #DISABLED]
 type expression = string
 type exceptionMessage = string
 type errorMessage = string
@@ -92,16 +100,25 @@ type encryptionType = [
   | @as("SITEWISE_DEFAULT_ENCRYPTION") #SITEWISE_DEFAULT_ENCRYPTION
 ]
 type email = string
+type disassociatedDataStorageState = [@as("DISABLED") #DISABLED | @as("ENABLED") #ENABLED]
+type detailedErrorMessage = string
+type detailedErrorCode = [
+  | @as("INCOMPATIBLE_FORWARDING_CONFIGURATION") #INCOMPATIBLE_FORWARDING_CONFIGURATION
+  | @as("INCOMPATIBLE_COMPUTE_LOCATION") #INCOMPATIBLE_COMPUTE_LOCATION
+]
 type description = string
 type defaultValue = string
 type dashboardDefinition = string
+type coreDeviceThingName = string
 type configurationState = [
   | @as("UPDATE_FAILED") #UPDATE_FAILED
   | @as("UPDATE_IN_PROGRESS") #UPDATE_IN_PROGRESS
   | @as("ACTIVE") #ACTIVE
 ]
+type computeLocation = [@as("CLOUD") #CLOUD | @as("EDGE") #EDGE]
 type clientToken = string
 type capabilitySyncStatus = [
+  | @as("UNKNOWN") #UNKNOWN
   | @as("SYNC_FAILED") #SYNC_FAILED
   | @as("OUT_OF_SYNC") #OUT_OF_SYNC
   | @as("IN_SYNC") #IN_SYNC
@@ -168,26 +185,117 @@ type variableValue = {
          <p>You use a hierarchy ID instead of a model ID because you can have several hierarchies
       using the same model and therefore the same <code>propertyId</code>. For example, you might
       have separately grouped assets that come from the same asset model. For more information, see
-      <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-hierarchies.html\">Asset hierarchies</a> in the <i>AWS IoT SiteWise User Guide</i>.</p>")
+      <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-hierarchies.html\">Asset hierarchies</a> in the <i>IoT SiteWise User Guide</i>.</p>")
   hierarchyId: option<macro>,
   @ocaml.doc("<p>The ID of the property to use as the variable. You can use the property <code>name</code>
       if it's from the same asset model.</p>")
   propertyId: macro,
 }
 @ocaml.doc("<p>Contains information for a user identity in an access policy.</p>")
-type userIdentity = {@ocaml.doc("<p>The AWS SSO ID of the user.</p>") id: identityId}
+type userIdentity = {
+  @ocaml.doc("<p>The Amazon Web Services SSO ID of the user.</p>") id: identityId,
+}
 @ocaml.doc("<p>Contains a tumbling window, which is a repeating fixed-sized, non-overlapping, and
-      contiguous time interval. This window is used in metric and aggregation computations.</p>")
+      contiguous time window. You can use this window in metrics to aggregate data from properties
+      and other assets.</p>
+         <p>You can use <code>m</code>, <code>h</code>, <code>d</code>, and <code>w</code> when you
+      specify an interval or offset. Note that <code>m</code> represents minutes, <code>h</code>
+      represents hours, <code>d</code> represents days, and <code>w</code> represents weeks. You can
+      also use <code>s</code> to represent seconds in <code>offset</code>.</p>
+         <p>The <code>interval</code> and <code>offset</code> parameters support the <a href=\"https://en.wikipedia.org/wiki/ISO_8601\">ISO 8601 format</a>. For example,
+        <code>PT5S</code> represents 5 seconds, <code>PT5M</code> represents 5 minutes, and
+        <code>PT5H</code> represents 5 hours.</p>")
 type tumblingWindow = {
-  @ocaml.doc("<p>The time interval for the tumbling window. Note that <code>w</code> represents weeks,
-        <code>d</code> represents days, <code>h</code> represents hours, and <code>m</code>
-      represents minutes. AWS IoT SiteWise computes the <code>1w</code> interval the end of Sunday at midnight
-      each week (UTC), the <code>1d</code> interval at the end of each day at midnight (UTC), the
-        <code>1h</code> interval at the end of each hour, and so on. </p>
-         <p>When AWS IoT SiteWise aggregates data points for metric computations, the start of each interval is
-      exclusive and the end of each interval is inclusive. AWS IoT SiteWise places the computed data point at
+  @ocaml.doc("<p>The offset for the tumbling window. The <code>offset</code> parameter accepts the
+      following:</p>
+         <ul>
+            <li>
+               <p>The offset time.</p>
+               <p>For example, if you specify <code>18h</code> for <code>offset</code> and
+            <code>1d</code> for <code>interval</code>, IoT SiteWise aggregates data in one of the following
+          ways:</p>
+               <ul>
+                  <li>
+                     <p>If you create the metric before or at 6 PM (UTC), you get the first aggregation
+              result at 6 PM (UTC) on the day when you create the metric.</p>
+                  </li>
+                  <li>
+                     <p>If you create the metric after 6 PM (UTC), you get the first aggregation result at
+              6 PM (UTC) the next day.</p>
+                  </li>
+               </ul>
+            </li>
+            <li>
+               <p>The ISO 8601 format.</p>
+               <p>For example, if you specify <code>PT18H</code> for <code>offset</code> and
+            <code>1d</code> for <code>interval</code>, IoT SiteWise aggregates data in one of the following
+          ways:</p>
+               <ul>
+                  <li>
+                     <p>If you create the metric before or at 6 PM (UTC), you get the first aggregation
+              result at 6 PM (UTC) on the day when you create the metric.</p>
+                  </li>
+                  <li>
+                     <p>If you create the metric after 6 PM (UTC), you get the first aggregation result at
+              6 PM (UTC) the next day.</p>
+                  </li>
+               </ul>
+            </li>
+            <li>
+               <p>The 24-hour clock.</p>
+               <p>For example, if you specify <code>00:03:00</code> for <code>offset</code>,
+            <code>5m</code> for <code>interval</code>, and you create the metric at 2 PM (UTC), you
+          get the first aggregation result at 2:03 PM (UTC). You get the second aggregation result
+          at 2:08 PM (UTC). </p>
+            </li>
+            <li>
+               <p>The offset time zone.</p>
+               <p>For example, if you specify <code>2021-07-23T18:00-08</code> for <code>offset</code>
+          and <code>1d</code> for <code>interval</code>, IoT SiteWise aggregates data in one of the
+          following ways:</p>
+               <ul>
+                  <li>
+                     <p>If you create the metric before or at 6 PM (PST), you get the first aggregation
+              result at 6 PM (PST) on the day when you create the metric.</p>
+                  </li>
+                  <li>
+                     <p>If you create the metric after 6 PM (PST), you get the first aggregation result at
+              6 PM (PST) the next day.</p>
+                  </li>
+               </ul>
+            </li>
+         </ul>")
+  offset: option<offset>,
+  @ocaml.doc("<p>The time interval for the tumbling window. The interval time must be between 1 minute and
+      1 week.</p>
+         <p>IoT SiteWise computes the <code>1w</code> interval the end of Sunday at midnight each week (UTC),
+      the <code>1d</code> interval at the end of each day at midnight (UTC), the <code>1h</code>
+      interval at the end of each hour, and so on. </p>
+         <p>When IoT SiteWise aggregates data points for metric computations, the start of each interval is
+      exclusive and the end of each interval is inclusive. IoT SiteWise places the computed data point at
       the end of the interval.</p>")
   interval: interval,
+}
+@ocaml.doc("<p>Contains a summary of a time series (data stream).</p>")
+type timeSeriesSummary = {
+  @ocaml.doc("<p>The date that the time series was last updated, in Unix epoch time.</p>")
+  timeSeriesLastUpdateDate: timestamp_,
+  @ocaml.doc("<p>The date that the time series was created, in Unix epoch time.</p>")
+  timeSeriesCreationDate: timestamp_,
+  @ocaml.doc("<p>The data type of the structure for this time series. This parameter is required for time series 
+      that have the <code>STRUCT</code> data type.</p>
+         <p>The options for this parameter depend on the type of the composite model 
+      in which you created the asset property that is associated with your time series. 
+      Use <code>AWS/ALARM_STATE</code> for alarm state in alarm composite models.</p>")
+  dataTypeSpec: option<name>,
+  @ocaml.doc("<p>The data type of the time series.</p>
+         <p>If you specify <code>STRUCT</code>, you must also specify <code>dataTypeSpec</code> to identify the type of the structure for this time series.</p>")
+  dataType: propertyDataType,
+  @ocaml.doc("<p>The ID of the time series.</p>") timeSeriesId: timeSeriesId,
+  @ocaml.doc("<p>The alias that identifies the time series.</p>") alias: option<propertyAlias>,
+  @ocaml.doc("<p>The ID of the asset property.</p>") propertyId: option<id>,
+  @ocaml.doc("<p>The ID of the asset in which the asset property was created.</p>")
+  assetId: option<id>,
 }
 @ocaml.doc("<p>Contains a timestamp with optional nanosecond granularity.</p>")
 type timeInNanos = {
@@ -199,13 +307,30 @@ type timeInNanos = {
 }
 type tagMap = Js.Dict.t<tagValue>
 type tagKeyList = array<tagKey>
+@ocaml.doc(
+  "<p>How many days your data is kept in the hot tier. By default, your data is kept indefinitely in the hot tier.</p>"
+)
+type retentionPeriod = {
+  @ocaml.doc("<p>If true, your data is kept indefinitely.</p>
+         <note>
+            <p>If configured to <code>true</code>, you must not specify a value for the
+          <code>numberOfDays</code> parameter.</p>
+         </note>")
+  unlimited: option<unlimited>,
+  @ocaml.doc("<p>The number of days that your data is kept.</p>
+         <note>
+            <p>If you specified a value for this parameter, the <code>unlimited</code> parameter must
+        be <code>false</code>.</p>
+         </note>")
+  numberOfDays: option<numberOfDays>,
+}
 type qualities = array<quality>
-@ocaml.doc("<p>Contains asset property value notification information. When the notification state is enabled, AWS IoT SiteWise publishes property value
-      updates to a unique MQTT topic. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/interact-with-other-services.html\">Interacting with other services</a> in the <i>AWS IoT SiteWise User Guide</i>.</p>")
+@ocaml.doc("<p>Contains asset property value notification information. When the notification state is enabled, IoT SiteWise publishes property value
+      updates to a unique MQTT topic. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/interact-with-other-services.html\">Interacting with other services</a> in the <i>IoT SiteWise User Guide</i>.</p>")
 type propertyNotification = {
   @ocaml.doc("<p>The current notification state.</p>") state: propertyNotificationState,
   @ocaml.doc(
-    "<p>The MQTT topic to which AWS IoT SiteWise publishes property value update notifications.</p>"
+    "<p>The MQTT topic to which IoT SiteWise publishes property value update notifications.</p>"
   )
   topic: propertyNotificationTopic,
 }
@@ -219,20 +344,27 @@ type projectSummary = {
   @ocaml.doc("<p>The name of the project.</p>") name: name,
   @ocaml.doc("<p>The ID of the project.</p>") id: id,
 }
-@ocaml.doc("<p>Identifies a specific AWS IoT SiteWise Monitor project.</p>")
+@ocaml.doc("<p>Identifies a specific IoT SiteWise Monitor project.</p>")
 type projectResource = {@ocaml.doc("<p>The ID of the project.</p>") id: id}
-@ocaml.doc("<p>Identifies an AWS IoT SiteWise Monitor portal.</p>")
+@ocaml.doc("<p>Identifies an IoT SiteWise Monitor portal.</p>")
 type portalResource = {@ocaml.doc("<p>The ID of the portal.</p>") id: id}
-@ocaml.doc("<p>Contains AWS IoT SiteWise Monitor error details.</p>")
+@ocaml.doc("<p>Contains IoT SiteWise Monitor error details.</p>")
 type monitorErrorDetails = {
   @ocaml.doc("<p>The error message.</p>") message: option<monitorErrorMessage>,
   @ocaml.doc("<p>The error code.</p>") code: option<monitorErrorCode>,
 }
+@ocaml.doc("<p>The processing configuration for the given metric property. 
+      You can configure metrics to be computed at the edge or in the Amazon Web Services Cloud. 
+      By default, metrics are forwarded to the cloud.</p>")
+type metricProcessingConfig = {
+  @ocaml.doc("<p>The compute location for the given metric property. </p>")
+  computeLocation: computeLocation,
+}
 @ocaml.doc("<p>Contains logging options.</p>")
 type loggingOptions = {
-  @ocaml.doc("<p>The AWS IoT SiteWise logging verbosity level.</p>") level: loggingLevel,
+  @ocaml.doc("<p>The IoT SiteWise logging verbosity level.</p>") level: loggingLevel,
 }
-@ocaml.doc("<p>Contains an image that is uploaded to AWS IoT SiteWise and available at a URL.</p>")
+@ocaml.doc("<p>Contains an image that is uploaded to IoT SiteWise and available at a URL.</p>")
 type imageLocation = {
   @ocaml.doc("<p>The URL where the image is available. The URL is valid for 15 minutes so that you can view
       and download the image</p>")
@@ -247,10 +379,10 @@ type imageFile = {
   data: imageFileData,
 }
 type ids = array<id>
-@ocaml.doc("<p>Contains information about an AWS Identity and Access Management (IAM) user.</p>")
+@ocaml.doc("<p>Contains information about an Identity and Access Management user.</p>")
 type iamuserIdentity = {
   @ocaml.doc("<p>The ARN of the IAM user. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html\">IAM ARNs</a> in the
-      <i>IAM User Guide</i>.</p>
+        <i>IAM User Guide</i>.</p>
          <note>
             <p>If you delete the IAM user, access policies that contain this identity include an
         empty <code>arn</code>. You can delete the access policy for the IAM user that no longer
@@ -258,23 +390,34 @@ type iamuserIdentity = {
          </note>")
   arn: arn,
 }
-@ocaml.doc("<p>Contains information about an AWS Identity and Access Management (IAM) role. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html\">IAM roles</a> in the
-      <i>IAM User Guide</i>.</p>")
+@ocaml.doc("<p>Contains information about an Identity and Access Management role. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html\">IAM roles</a> in the
+        <i>IAM User Guide</i>.</p>")
 type iamroleIdentity = {
   @ocaml.doc("<p>The ARN of the IAM role. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html\">IAM ARNs</a> in the
-      <i>IAM User Guide</i>.</p>")
+        <i>IAM User Guide</i>.</p>")
   arn: arn,
 }
 @ocaml.doc("<p>Contains information for a group identity in an access policy.</p>")
-type groupIdentity = {@ocaml.doc("<p>The AWS SSO ID of the group.</p>") id: identityId}
-@ocaml.doc("<p>Contains details for a gateway that runs on AWS IoT Greengrass. To create a gateway that runs on AWS IoT Greengrass,
+type groupIdentity = {
+  @ocaml.doc("<p>The Amazon Web Services SSO ID of the group.</p>") id: identityId,
+}
+@ocaml.doc("<p>Contains details for a gateway that runs on IoT Greengrass V2. To create a gateway that runs on IoT Greengrass
+      V2, you must deploy the IoT SiteWise Edge component to your gateway device. Your <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/device-service-role.html\">Greengrass
+        device role</a> must use the <code>AWSIoTSiteWiseEdgeAccess</code> policy. For more
+      information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/sw-gateways.html\">Using IoT SiteWise at the edge</a> in the
+        <i>IoT SiteWise User Guide</i>.</p>")
+type greengrassV2 = {
+  @ocaml.doc("<p>The name of the IoT thing for your IoT Greengrass V2 core device.</p>")
+  coreDeviceThingName: coreDeviceThingName,
+}
+@ocaml.doc("<p>Contains details for a gateway that runs on IoT Greengrass. To create a gateway that runs on IoT Greengrass,
       you must add the IoT SiteWise connector to a Greengrass group and deploy it. Your Greengrass
-      group must also have permissions to upload data to AWS IoT SiteWise. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/gateway-connector.html\">Ingesting data using a
-        gateway</a> in the <i>AWS IoT SiteWise User Guide</i>.</p>")
+      group must also have permissions to upload data to IoT SiteWise. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/gateway-connector.html\">Ingesting data using a
+        gateway</a> in the <i>IoT SiteWise User Guide</i>.</p>")
 type greengrass = {
   @ocaml.doc("<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of the Greengrass group. For more information about how to find a group's
       ARN, see <a href=\"https://docs.aws.amazon.com/greengrass/latest/apireference/listgroups-get.html\">ListGroups</a> and <a href=\"https://docs.aws.amazon.com/greengrass/latest/apireference/getgroup-get.html\">GetGroup</a> in the
-        <i>AWS IoT Greengrass API Reference</i>.</p>")
+        <i>IoT Greengrass API Reference</i>.</p>")
   groupArn: arn,
 }
 @ocaml.doc("<p>Contains a summary of a gateway capability configuration.</p>")
@@ -297,15 +440,19 @@ type gatewayCapabilitySummary = {
   capabilitySyncStatus: capabilitySyncStatus,
   @ocaml.doc("<p>The namespace of the capability configuration.
       For example, if you configure OPC-UA
-      sources from the AWS IoT SiteWise console, your OPC-UA capability configuration has the namespace
+      sources from the IoT SiteWise console, your OPC-UA capability configuration has the namespace
         <code>iotsitewise:opcuacollector:version</code>, where <code>version</code> is a number such as
         <code>1</code>.</p>")
   capabilityNamespace: capabilityNamespace,
 }
-@ocaml.doc("<p>Contains the details of an AWS IoT SiteWise error.</p>")
-type errorDetails = {
-  @ocaml.doc("<p>The error message.</p>") message: errorMessage,
-  @ocaml.doc("<p>The error code.</p>") code: errorCode,
+@ocaml.doc("<p>The forwarding configuration for a given property.</p>")
+type forwardingConfig = {
+  @ocaml.doc("<p>The forwarding state for the given property. </p>") state: forwardingConfigState,
+}
+@ocaml.doc("<p>Contains detailed error information. </p>")
+type detailedError = {
+  @ocaml.doc("<p>The error message. </p>") message: detailedErrorMessage,
+  @ocaml.doc("<p>The error code. </p>") code: detailedErrorCode,
 }
 @ocaml.doc("<p>Contains a dashboard summary.</p>")
 type dashboardSummary = {
@@ -317,18 +464,29 @@ type dashboardSummary = {
   @ocaml.doc("<p>The name of the dashboard</p>") name: name,
   @ocaml.doc("<p>The ID of the dashboard.</p>") id: id,
 }
-@ocaml.doc("<p>Contains the details of an AWS IoT SiteWise configuration error.</p>")
+@ocaml.doc("<p>Contains information about a customer managed Amazon S3 bucket.</p>")
+type customerManagedS3Storage = {
+  @ocaml.doc(
+    "<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of the Identity and Access Management role that allows IoT SiteWise to send data to Amazon S3.</p>"
+  )
+  roleArn: arn,
+  @ocaml.doc("<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of the Amazon S3 object. For more information about how to find the ARN for an
+      Amazon S3 object, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-arn-format.html\">Amazon S3 resources</a> in the
+        <i>Amazon Simple Storage Service User Guide</i>.</p>")
+  s3ResourceArn: arn,
+}
+@ocaml.doc("<p>Contains the details of an IoT SiteWise configuration error.</p>")
 type configurationErrorDetails = {
   @ocaml.doc("<p>The error message.</p>") message: errorMessage,
   @ocaml.doc("<p>The error code.</p>") code: errorCode,
 }
 @ocaml.doc("<p>Contains an asset attribute property. For more information, see
-      <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-properties.html#attributes\">Attributes</a> in the <i>AWS IoT SiteWise User Guide</i>.</p>")
+      <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-properties.html#attributes\">Attributes</a> in the <i>IoT SiteWise User Guide</i>.</p>")
 type attribute = {
   @ocaml.doc("<p>The default value of the asset model property attribute. All assets that you create from
       the asset model contain this attribute value. You can update an attribute's value after you
       create an asset. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/update-attribute-values.html\">Updating attribute values</a> in the
-        <i>AWS IoT SiteWise User Guide</i>.</p>")
+        <i>IoT SiteWise User Guide</i>.</p>")
   defaultValue: option<defaultValue>,
 }
 @ocaml.doc("<p>Contains an asset model hierarchy used in asset model creation. An asset model hierarchy
@@ -374,15 +532,16 @@ type assetErrorDetails = {
   @ocaml.doc("<p>The error code.</p>") code: assetErrorCode,
   @ocaml.doc("<p>The ID of the asset.</p>") assetId: id,
 }
-@ocaml.doc("<p>Contains the configuration information of an alarm created in an AWS IoT SiteWise Monitor portal. 
-  You can use the alarm to monitor an asset property and get notified when the asset property value is outside a specified range. For more information, see .</p>")
+@ocaml.doc("<p>Contains the configuration information of an alarm created in an IoT SiteWise Monitor portal. 
+  You can use the alarm to monitor an asset property and get notified when the asset property value is outside a specified range. 
+  For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/appguide/monitor-alarms.html\">Monitoring with alarms</a> in the <i>IoT SiteWise Application Guide</i>.</p>")
 type alarms = {
-  @ocaml.doc("<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of the AWS Lambda function that manages alarm notifications. For more information, see <a href=\"https://docs.aws.amazon.com/\">Managing alarm notifications</a> 
-      in the <i>AWS IoT Events Developer Guide</i>.</p>")
+  @ocaml.doc("<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of the Lambda function that manages alarm notifications. For more
+      information, see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/lambda-support.html\">Managing alarm
+        notifications</a> in the <i>IoT Events Developer Guide</i>.</p>")
   notificationLambdaArn: option<arn>,
-  @ocaml.doc(
-    "<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of the IAM role that allows the alarm to perform actions and access AWS resources, including AWS IoT Events.</p>"
-  )
+  @ocaml.doc("<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of the IAM role that allows the alarm to perform actions and access Amazon Web Services
+      resources and services, such as IoT Events.</p>")
   alarmRoleArn: arn,
 }
 @ocaml.doc("<p>Contains the (pre-calculated) aggregate values for an asset property.</p>")
@@ -401,8 +560,17 @@ type aggregates = {
   average: option<aggregatedDoubleValue>,
 }
 type aggregateTypes = array<aggregateType>
+@ocaml.doc("<p>The processing configuration for the given transform property. 
+      You can configure transforms to be kept at the edge or forwarded to the Amazon Web Services Cloud. 
+      You can also configure transforms to be computed at the edge or in the cloud.</p>")
+type transformProcessingConfig = {
+  forwardingConfig: option<forwardingConfig>,
+  @ocaml.doc("<p>The compute location for the given transform property. </p>")
+  computeLocation: computeLocation,
+}
 type timestamps = array<timeInNanos>
-@ocaml.doc("<p>Contains an AWS IoT SiteWise Monitor resource ID for a portal or project.</p>")
+type timeSeriesSummaries = array<timeSeriesSummary>
+@ocaml.doc("<p>Contains an IoT SiteWise Monitor resource ID for a portal or project.</p>")
 type resource = {
   @ocaml.doc("<p>A project resource.</p>") project: option<projectResource>,
   @ocaml.doc("<p>A portal resource.</p>") portal: option<portalResource>,
@@ -414,10 +582,22 @@ type portalStatus = {
   error: option<monitorErrorDetails>,
   @ocaml.doc("<p>The current state of the portal.</p>") state: portalState,
 }
+@ocaml.doc("<p>Contains information about the storage destination.</p>")
+type multiLayerStorage = {
+  @ocaml.doc("<p>Contains information about a customer managed Amazon S3 bucket.</p>")
+  customerManagedS3Storage: customerManagedS3Storage,
+}
 @ocaml.doc("<p>Contains a time interval window used for data aggregate computations (for example,
       average, sum, count, and so on).</p>")
 type metricWindow = {
   @ocaml.doc("<p>The tumbling time interval window.</p>") tumbling: option<tumblingWindow>,
+}
+@ocaml.doc("<p>The processing configuration for the given measurement property. 
+      You can configure measurements to be kept at the edge or forwarded to the Amazon Web Services Cloud. 
+      By default, measurements are forwarded to the cloud.</p>")
+type measurementProcessingConfig = {
+  @ocaml.doc("<p>The forwarding configuration for the given measurement property. </p>")
+  forwardingConfig: forwardingConfig,
 }
 @ocaml.doc("<p>Contains information about an interpolated asset property value.</p>")
 type interpolatedAssetPropertyValue = {
@@ -440,20 +620,21 @@ type image = {
   )
   id: option<id>,
 }
-@ocaml.doc("<p>Contains an identity that can access an AWS IoT SiteWise Monitor resource.</p>
+@ocaml.doc("<p>Contains an identity that can access an IoT SiteWise Monitor resource.</p>
          <note>
-            <p>Currently, you can't use AWS APIs to retrieve AWS SSO identity IDs. You can find the
-        AWS SSO identity IDs in the URL of user and group pages in the <a href=\"https://console.aws.amazon.com/singlesignon\">AWS SSO console</a>.</p>
+            <p>Currently, you can't use Amazon Web Services APIs to retrieve Amazon Web Services SSO identity IDs. You can find the
+        Amazon Web Services SSO identity IDs in the URL of user and group pages in the <a href=\"https://console.aws.amazon.com/singlesignon\">Amazon Web Services SSO console</a>.</p>
          </note>")
 type identity = {
   @ocaml.doc("<p>An IAM role identity.</p>") iamRole: option<iamroleIdentity>,
   @ocaml.doc("<p>An IAM user identity.</p>") iamUser: option<iamuserIdentity>,
-  @ocaml.doc("<p>An AWS SSO group identity.</p>") group: option<groupIdentity>,
-  @ocaml.doc("<p>An AWS SSO user identity.</p>") user: option<userIdentity>,
+  @ocaml.doc("<p>An Amazon Web Services SSO group identity.</p>") group: option<groupIdentity>,
+  @ocaml.doc("<p>An Amazon Web Services SSO user identity.</p>") user: option<userIdentity>,
 }
 @ocaml.doc("<p>Contains a gateway's platform information.</p>")
 type gatewayPlatform = {
-  @ocaml.doc("<p>A gateway that runs on AWS IoT Greengrass.</p>") greengrass: greengrass,
+  @ocaml.doc("<p>A gateway that runs on IoT Greengrass V2.</p>") greengrassV2: option<greengrassV2>,
+  @ocaml.doc("<p>A gateway that runs on IoT Greengrass.</p>") greengrass: option<greengrass>,
 }
 type gatewayCapabilitySummaries = array<gatewayCapabilitySummary>
 @ocaml.doc("<p>Contains expression variable information.</p>")
@@ -463,6 +644,7 @@ type expressionVariable = {
   @ocaml.doc("<p>The friendly name of the variable to be used in the expression.</p>")
   name: variableName,
 }
+type detailedErrors = array<detailedError>
 type dashboardSummaries = array<dashboardSummary>
 @ocaml.doc("<p>Contains current status information for the configuration.</p>")
 type configurationStatus = {
@@ -472,13 +654,6 @@ type configurationStatus = {
 }
 type batchDisassociateProjectAssetsErrors = array<assetErrorDetails>
 type batchAssociateProjectAssetsErrors = array<assetErrorDetails>
-@ocaml.doc("<p>Contains information about the current status of an asset. For more information, see
-        <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-and-model-states.html\">Asset and model
-        states</a> in the <i>AWS IoT SiteWise User Guide</i>.</p>")
-type assetStatus = {
-  @ocaml.doc("<p>Contains associated error information, if any.</p>") error: option<errorDetails>,
-  @ocaml.doc("<p>The current status of the asset.</p>") state: assetState,
-}
 @ocaml.doc("<p>Contains information about assets that are related to one another.</p>")
 type assetRelationshipSummary = {
   @ocaml.doc("<p>The relationship type of the assets in this relationship. This value is one of the
@@ -519,19 +694,13 @@ type assetProperty = {
     "<p>The asset property's notification topic and state. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html\">UpdateAssetProperty</a>.</p>"
   )
   notification: option<propertyNotification>,
-  @ocaml.doc("<p>The property alias that identifies the property, such as an OPC-UA server data stream path
+  @ocaml.doc("<p>The alias that identifies the property, such as an OPC-UA server data stream path
         (for example, <code>/company/windfarm/3/turbine/7/temperature</code>). For more information, see
         <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html\">Mapping industrial data streams to asset properties</a> in the
-        <i>AWS IoT SiteWise User Guide</i>.</p>")
+        <i>IoT SiteWise User Guide</i>.</p>")
   alias: option<propertyAlias>,
   @ocaml.doc("<p>The name of the property.</p>") name: name,
   @ocaml.doc("<p>The ID of the asset property.</p>") id: id,
-}
-@ocaml.doc("<p>Contains current status information for an asset model. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-and-model-states.html\">Asset and model
-        states</a> in the <i>AWS IoT SiteWise User Guide</i>.</p>")
-type assetModelStatus = {
-  @ocaml.doc("<p>Contains associated error information, if any.</p>") error: option<errorDetails>,
-  @ocaml.doc("<p>The current state of the asset model.</p>") state: assetModelState,
 }
 type assetModelHierarchyDefinitions = array<assetModelHierarchyDefinition>
 type assetModelHierarchies = array<assetModelHierarchy>
@@ -548,21 +717,29 @@ type aggregatedValue = {
 @ocaml.doc("<p>Contains a portal summary.</p>")
 type portalSummary = {
   status: portalStatus,
-  @ocaml.doc("<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of the service role that allows the portal's users to access your AWS IoT SiteWise
-      resources on your behalf. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-service-role.html\">Using service roles for AWS IoT SiteWise Monitor</a> in the
-        <i>AWS IoT SiteWise User Guide</i>.</p>")
+  @ocaml.doc("<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of the service role that allows the portal's users to access your IoT SiteWise
+      resources on your behalf. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-service-role.html\">Using service roles for IoT SiteWise Monitor</a> in the
+        <i>IoT SiteWise User Guide</i>.</p>")
   roleArn: option<arn>,
   @ocaml.doc("<p>The date the portal was last updated, in Unix epoch time.</p>")
   lastUpdateDate: option<timestamp_>,
   @ocaml.doc("<p>The date the portal was created, in Unix epoch time.</p>")
   creationDate: option<timestamp_>,
-  @ocaml.doc("<p>The URL for the AWS IoT SiteWise Monitor portal. You can use this URL to access portals that
-      use AWS SSO for authentication. For portals that use IAM for authentication, you must use the 
-      AWS IoT SiteWise console to get a URL that you can use to access the portal.</p>")
+  @ocaml.doc("<p>The URL for the IoT SiteWise Monitor portal. You can use this URL to access portals that
+      use Amazon Web Services SSO for authentication. For portals that use IAM for authentication, you must use the 
+      IoT SiteWise console to get a URL that you can use to access the portal.</p>")
   startUrl: url,
   @ocaml.doc("<p>The portal's description.</p>") description: option<description>,
   @ocaml.doc("<p>The name of the portal.</p>") name: name,
   @ocaml.doc("<p>The ID of the portal.</p>") id: id,
+}
+@ocaml.doc("<p>Contains an asset measurement property. For more information, see
+      <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-properties.html#measurements\">Measurements</a> in the <i>IoT SiteWise User Guide</i>.</p>")
+type measurement = {
+  @ocaml.doc("<p>The processing configuration for the given measurement property. 
+      You can configure measurements to be kept at the edge or forwarded to the Amazon Web Services Cloud. 
+      By default, measurements are forwarded to the cloud.</p>")
+  processingConfig: option<measurementProcessingConfig>,
 }
 type interpolatedAssetPropertyValues = array<interpolatedAssetPropertyValue>
 @ocaml.doc("<p>Contains a summary of a gateway.</p>")
@@ -575,76 +752,29 @@ type gatewaySummary = {
       gateway capability defines data sources for the gateway. To retrieve a capability
       configuration's definition, use <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribeGatewayCapabilityConfiguration.html\">DescribeGatewayCapabilityConfiguration</a>.</p>")
   gatewayCapabilitySummaries: option<gatewayCapabilitySummaries>,
+  gatewayPlatform: option<gatewayPlatform>,
   @ocaml.doc("<p>The name of the asset.</p>") gatewayName: name,
   @ocaml.doc("<p>The ID of the gateway device.</p>") gatewayId: id,
 }
 type expressionVariables = array<expressionVariable>
+@ocaml.doc("<p>Contains the details of an IoT SiteWise error.</p>")
+type errorDetails = {
+  @ocaml.doc("<p> A list of detailed errors. </p>") details: option<detailedErrors>,
+  @ocaml.doc("<p>The error message.</p>") message: errorMessage,
+  @ocaml.doc("<p>The error code.</p>") code: errorCode,
+}
 @ocaml.doc("<p>Contains error information from updating a batch of asset property values.</p>")
 type batchPutAssetPropertyError = {
   @ocaml.doc("<p>A list of timestamps for each  error, if any.</p>") timestamps: timestamps,
   @ocaml.doc("<p>The associated error message.</p>") errorMessage: errorMessage,
   @ocaml.doc("<p>The error code.</p>") errorCode: batchPutAssetPropertyValueErrorCode,
 }
-@ocaml.doc("<p>Contains a summary of an associated asset.</p>")
-type associatedAssetsSummary = {
-  @ocaml.doc(
-    "<p>A list of asset hierarchies that each contain a <code>hierarchyId</code>. A hierarchy specifies allowed parent/child asset relationships.</p>"
-  )
-  hierarchies: assetHierarchies,
-  @ocaml.doc("<p>The current status of the asset.</p>") status: assetStatus,
-  @ocaml.doc("<p>The date the asset was last updated, in Unix epoch time.</p>")
-  lastUpdateDate: timestamp_,
-  @ocaml.doc("<p>The date the asset was created, in Unix epoch time.</p>") creationDate: timestamp_,
-  @ocaml.doc("<p>The ID of the asset model used to create the asset.</p>") assetModelId: id,
-  @ocaml.doc("<p>The name of the asset.</p>") name: name,
-  @ocaml.doc("<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of the asset, which has the following format.</p>
-        <p>
-            <code>arn:${Partition}:iotsitewise:${Region}:${Account}:asset/${AssetId}</code>
-         </p>")
-  arn: arn,
-  @ocaml.doc("<p>The ID of the asset.</p>") id: id,
-}
-@ocaml.doc("<p>Contains a summary of an asset.</p>")
-type assetSummary = {
-  @ocaml.doc(
-    "<p>A list of asset hierarchies that each contain a <code>hierarchyId</code>. A hierarchy specifies allowed parent/child asset relationships.</p>"
-  )
-  hierarchies: assetHierarchies,
-  @ocaml.doc("<p>The current status of the asset.</p>") status: assetStatus,
-  @ocaml.doc("<p>The date the asset was last updated, in Unix epoch time.</p>")
-  lastUpdateDate: timestamp_,
-  @ocaml.doc("<p>The date the asset was created, in Unix epoch time.</p>") creationDate: timestamp_,
-  @ocaml.doc("<p>The ID of the asset model used to create this asset.</p>") assetModelId: id,
-  @ocaml.doc("<p>The name of the asset.</p>") name: name,
-  @ocaml.doc("<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of the asset, which has the following format.</p>
-        <p>
-            <code>arn:${Partition}:iotsitewise:${Region}:${Account}:asset/${AssetId}</code>
-         </p>")
-  arn: arn,
-  @ocaml.doc("<p>The ID of the asset.</p>") id: id,
-}
 type assetRelationshipSummaries = array<assetRelationshipSummary>
 type assetPropertyValues = array<assetPropertyValue>
 type assetPropertyValueHistory = array<assetPropertyValue>
 type assetProperties = array<assetProperty>
-@ocaml.doc("<p>Contains a summary of an asset model.</p>")
-type assetModelSummary = {
-  @ocaml.doc("<p>The current status of the asset model.</p>") status: assetModelStatus,
-  @ocaml.doc("<p>The date the asset model was last updated, in Unix epoch time.</p>")
-  lastUpdateDate: timestamp_,
-  @ocaml.doc("<p>The date the asset model was created, in Unix epoch time.</p>")
-  creationDate: timestamp_,
-  @ocaml.doc("<p>The asset model description.</p>") description: description,
-  @ocaml.doc("<p>The name of the asset model.</p>") name: name,
-  @ocaml.doc("<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of the asset model, which has the following format.</p>
-        <p>
-            <code>arn:${Partition}:iotsitewise:${Region}:${Account}:asset-model/${AssetModelId}</code>
-         </p>")
-  arn: arn,
-  @ocaml.doc("<p>The ID of the asset model (used with AWS IoT SiteWise APIs).</p>") id: id,
-}
 type aggregatedValues = array<aggregatedValue>
-@ocaml.doc("<p>Contains an access policy that defines an identity's access to an AWS IoT SiteWise Monitor
+@ocaml.doc("<p>Contains an access policy that defines an identity's access to an IoT SiteWise Monitor
       resource.</p>")
 type accessPolicySummary = {
   @ocaml.doc("<p>The date the access policy was last updated, in Unix epoch time.</p>")
@@ -654,9 +784,10 @@ type accessPolicySummary = {
   @ocaml.doc("<p>The permissions for the access policy. Note that a project <code>ADMINISTRATOR</code> is
       also known as a project owner.</p>")
   permission: permission,
-  @ocaml.doc("<p>The AWS IoT SiteWise Monitor resource (a portal or project).</p>")
-  resource: resource,
-  @ocaml.doc("<p>The identity (an AWS SSO user, an AWS SSO group, or an IAM user).</p>")
+  @ocaml.doc("<p>The IoT SiteWise Monitor resource (a portal or project).</p>") resource: resource,
+  @ocaml.doc(
+    "<p>The identity (an Amazon Web Services SSO user, an Amazon Web Services SSO group, or an IAM user).</p>"
+  )
   identity: identity,
   @ocaml.doc("<p>The ID of the access policy.</p>") id: id,
 }
@@ -665,13 +796,17 @@ type accessPolicySummary = {
       Celsius data stream to Fahrenheit by applying the transformation expression to each data point
       of the Celsius stream. A transform can only have a data type of <code>DOUBLE</code> and
       consume properties with data types of <code>INTEGER</code> or <code>DOUBLE</code>.</p>
-         <p>For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-properties.html#transforms\">Transforms</a> in the <i>AWS IoT SiteWise User Guide</i>.</p>")
+         <p>For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-properties.html#transforms\">Transforms</a> in the <i>IoT SiteWise User Guide</i>.</p>")
 type transform = {
+  @ocaml.doc("<p>The processing configuration for the given transform property. 
+      You can configure transforms to be kept at the edge or forwarded to the Amazon Web Services Cloud. 
+      You can also configure transforms to be computed at the edge or in the cloud.</p>")
+  processingConfig: option<transformProcessingConfig>,
   @ocaml.doc("<p>The list of variables used in the expression.</p>") variables: expressionVariables,
   @ocaml.doc("<p>The mathematical expression that defines the transformation function. You can specify up
       to 10 variables per expression. You can specify up to 10 functions per
       expression. </p>
-         <p>For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html\">Quotas</a> in the <i>AWS IoT SiteWise User Guide</i>.</p>")
+         <p>For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html\">Quotas</a> in the <i>IoT SiteWise User Guide</i>.</p>")
   expression: expression,
 }
 @ocaml.doc("<p>Contains a list of value updates for an asset property in the list of asset entries
@@ -681,10 +816,10 @@ type putAssetPropertyValueEntry = {
   @ocaml.doc("<p>The list of property values to upload. You can specify up to 10
         <code>propertyValues</code> array elements. </p>")
   propertyValues: assetPropertyValues,
-  @ocaml.doc("<p>The property alias that identifies the property, such as an OPC-UA server data stream path
+  @ocaml.doc("<p>The alias that identifies the property, such as an OPC-UA server data stream path
         (for example, <code>/company/windfarm/3/turbine/7/temperature</code>). For more information, see
         <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html\">Mapping industrial data streams to asset properties</a> in the
-        <i>AWS IoT SiteWise User Guide</i>.</p>")
+        <i>IoT SiteWise User Guide</i>.</p>")
   propertyAlias: option<assetPropertyAlias>,
   @ocaml.doc("<p>The ID of the asset property for this entry.</p>") propertyId: option<id>,
   @ocaml.doc("<p>The ID of the asset to update.</p>") assetId: option<id>,
@@ -701,23 +836,37 @@ type portalSummaries = array<portalSummary>
       up to 10 cascading metrics in its computational dependency
       tree. Additionally, a metric can only have a data type of <code>DOUBLE</code> and consume
       properties with data types of <code>INTEGER</code> or <code>DOUBLE</code>.</p>
-         <p>For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-properties.html#metrics\">Metrics</a> in the <i>AWS IoT SiteWise User Guide</i>.</p>")
+         <p>For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-properties.html#metrics\">Metrics</a> in the <i>IoT SiteWise User Guide</i>.</p>")
 type metric = {
-  @ocaml.doc("<p>The window (time interval) over which AWS IoT SiteWise computes the metric's aggregation expression.
-      AWS IoT SiteWise computes one data point per <code>window</code>.</p>")
+  @ocaml.doc("<p>The processing configuration for the given metric property. 
+      You can configure metrics to be computed at the edge or in the Amazon Web Services Cloud. 
+      By default, metrics are forwarded to the cloud.</p>")
+  processingConfig: option<metricProcessingConfig>,
+  @ocaml.doc("<p>The window (time interval) over which IoT SiteWise computes the metric's aggregation expression.
+      IoT SiteWise computes one data point per <code>window</code>.</p>")
   window: metricWindow,
   @ocaml.doc("<p>The list of variables used in the expression.</p>") variables: expressionVariables,
   @ocaml.doc("<p>The mathematical expression that defines the metric aggregation function. You can specify
       up to 10 variables per expression. You can specify up to 10 functions
       per expression. </p>
-         <p>For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html\">Quotas</a> in the <i>AWS IoT SiteWise User Guide</i>.</p>")
+         <p>For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html\">Quotas</a> in the <i>IoT SiteWise User Guide</i>.</p>")
   expression: expression,
 }
 type gatewaySummaries = array<gatewaySummary>
 type batchPutAssetPropertyErrors = array<batchPutAssetPropertyError>
-type associatedAssetsSummaries = array<associatedAssetsSummary>
-type assetSummaries = array<assetSummary>
-type assetModelSummaries = array<assetModelSummary>
+@ocaml.doc("<p>Contains information about the current status of an asset. For more information, see
+        <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-and-model-states.html\">Asset and model
+        states</a> in the <i>IoT SiteWise User Guide</i>.</p>")
+type assetStatus = {
+  @ocaml.doc("<p>Contains associated error information, if any.</p>") error: option<errorDetails>,
+  @ocaml.doc("<p>The current status of the asset.</p>") state: assetState,
+}
+@ocaml.doc("<p>Contains current status information for an asset model. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-and-model-states.html\">Asset and model
+        states</a> in the <i>IoT SiteWise User Guide</i>.</p>")
+type assetModelStatus = {
+  @ocaml.doc("<p>Contains associated error information, if any.</p>") error: option<errorDetails>,
+  @ocaml.doc("<p>The current state of the asset model.</p>") state: assetModelState,
+}
 @ocaml.doc("<p>Contains information about a composite model in an asset. This object contains the asset's
       properties that you define in the composite model.</p>")
 type assetCompositeModel = {
@@ -757,6 +906,60 @@ type batchPutAssetPropertyErrorEntry = {
   errors: batchPutAssetPropertyErrors,
   @ocaml.doc("<p>The ID of the failed entry.</p>") entryId: entryId,
 }
+@ocaml.doc("<p>Contains a summary of an associated asset.</p>")
+type associatedAssetsSummary = {
+  @ocaml.doc(
+    "<p>A list of asset hierarchies that each contain a <code>hierarchyId</code>. A hierarchy specifies allowed parent/child asset relationships.</p>"
+  )
+  hierarchies: assetHierarchies,
+  @ocaml.doc("<p>The current status of the asset.</p>") status: assetStatus,
+  @ocaml.doc("<p>The date the asset was last updated, in Unix epoch time.</p>")
+  lastUpdateDate: timestamp_,
+  @ocaml.doc("<p>The date the asset was created, in Unix epoch time.</p>") creationDate: timestamp_,
+  @ocaml.doc("<p>The ID of the asset model used to create the asset.</p>") assetModelId: id,
+  @ocaml.doc("<p>The name of the asset.</p>") name: name,
+  @ocaml.doc("<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of the asset, which has the following format.</p>
+        <p>
+            <code>arn:${Partition}:iotsitewise:${Region}:${Account}:asset/${AssetId}</code>
+         </p>")
+  arn: arn,
+  @ocaml.doc("<p>The ID of the asset.</p>") id: id,
+}
+@ocaml.doc("<p>Contains a summary of an asset.</p>")
+type assetSummary = {
+  @ocaml.doc(
+    "<p>A list of asset hierarchies that each contain a <code>hierarchyId</code>. A hierarchy specifies allowed parent/child asset relationships.</p>"
+  )
+  hierarchies: assetHierarchies,
+  @ocaml.doc("<p>The current status of the asset.</p>") status: assetStatus,
+  @ocaml.doc("<p>The date the asset was last updated, in Unix epoch time.</p>")
+  lastUpdateDate: timestamp_,
+  @ocaml.doc("<p>The date the asset was created, in Unix epoch time.</p>") creationDate: timestamp_,
+  @ocaml.doc("<p>The ID of the asset model used to create this asset.</p>") assetModelId: id,
+  @ocaml.doc("<p>The name of the asset.</p>") name: name,
+  @ocaml.doc("<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of the asset, which has the following format.</p>
+        <p>
+            <code>arn:${Partition}:iotsitewise:${Region}:${Account}:asset/${AssetId}</code>
+         </p>")
+  arn: arn,
+  @ocaml.doc("<p>The ID of the asset.</p>") id: id,
+}
+@ocaml.doc("<p>Contains a summary of an asset model.</p>")
+type assetModelSummary = {
+  @ocaml.doc("<p>The current status of the asset model.</p>") status: assetModelStatus,
+  @ocaml.doc("<p>The date the asset model was last updated, in Unix epoch time.</p>")
+  lastUpdateDate: timestamp_,
+  @ocaml.doc("<p>The date the asset model was created, in Unix epoch time.</p>")
+  creationDate: timestamp_,
+  @ocaml.doc("<p>The asset model description.</p>") description: description,
+  @ocaml.doc("<p>The name of the asset model.</p>") name: name,
+  @ocaml.doc("<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of the asset model, which has the following format.</p>
+        <p>
+            <code>arn:${Partition}:iotsitewise:${Region}:${Account}:asset-model/${AssetModelId}</code>
+         </p>")
+  arn: arn,
+  @ocaml.doc("<p>The ID of the asset model (used with IoT SiteWise APIs).</p>") id: id,
+}
 type assetCompositeModels = array<assetCompositeModel>
 @ocaml.doc("<p>Contains asset property information.</p>")
 type property = {
@@ -775,15 +978,18 @@ type property = {
     "<p>The asset property's notification topic and state. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html\">UpdateAssetProperty</a>.</p>"
   )
   notification: option<propertyNotification>,
-  @ocaml.doc("<p>The property alias that identifies the property, such as an OPC-UA server data stream path
+  @ocaml.doc("<p>The alias that identifies the property, such as an OPC-UA server data stream path
         (for example, <code>/company/windfarm/3/turbine/7/temperature</code>). For more information, see
         <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html\">Mapping industrial data streams to asset properties</a> in the
-        <i>AWS IoT SiteWise User Guide</i>.</p>")
+        <i>IoT SiteWise User Guide</i>.</p>")
   alias: option<propertyAlias>,
   @ocaml.doc("<p>The name of the property.</p>") name: name,
   @ocaml.doc("<p>The ID of the asset property.</p>") id: id,
 }
 type batchPutAssetPropertyErrorEntries = array<batchPutAssetPropertyErrorEntry>
+type associatedAssetsSummaries = array<associatedAssetsSummary>
+type assetSummaries = array<assetSummary>
+type assetModelSummaries = array<assetModelSummary>
 @ocaml.doc("<p>Contains an asset model property definition. This property definition is applied to all
       assets created from the asset model.</p>")
 type assetModelPropertyDefinition = {
@@ -837,7 +1043,7 @@ type assetModelCompositeModelDefinition = {
   @ocaml.doc("<p>The asset property definitions for this composite model.</p>")
   properties: option<assetModelPropertyDefinitions>,
   @ocaml.doc("<p>The type of the composite model. For alarm composite models, this type is
-      <code>AWS/ALARM</code>.</p>")
+        <code>AWS/ALARM</code>.</p>")
   @as("type")
   type_: name,
   @ocaml.doc("<p>The description of the composite model.</p>") description: option<description>,
@@ -849,7 +1055,7 @@ type assetModelCompositeModel = {
   @ocaml.doc("<p>The asset property definitions for this composite model.</p>")
   properties: option<assetModelProperties>,
   @ocaml.doc("<p>The type of the composite model. For alarm composite models, this type is
-      <code>AWS/ALARM</code>.</p>")
+        <code>AWS/ALARM</code>.</p>")
   @as("type")
   type_: name,
   @ocaml.doc("<p>The description of the composite model.</p>") description: option<description>,
@@ -857,8 +1063,8 @@ type assetModelCompositeModel = {
 }
 type assetModelCompositeModels = array<assetModelCompositeModel>
 type assetModelCompositeModelDefinitions = array<assetModelCompositeModelDefinition>
-@ocaml.doc("<p>Welcome to the AWS IoT SiteWise API Reference. AWS IoT SiteWise is an AWS service that connects <a href=\"https://en.wikipedia.org/wiki/Internet_of_things#Industrial_applications\">Industrial Internet of Things (IIoT)</a> devices to the power of the AWS Cloud. For more information, see the
-      <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/\">AWS IoT SiteWise User Guide</a>. For information about AWS IoT SiteWise quotas, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html\">Quotas</a> in the <i>AWS IoT SiteWise User Guide</i>.</p>")
+@ocaml.doc("<p>Welcome to the IoT SiteWise API Reference. IoT SiteWise is an Amazon Web Services service that connects <a href=\"https://en.wikipedia.org/wiki/Internet_of_things#Industrial_applications\">Industrial Internet of Things (IIoT)</a> devices to the power of the Amazon Web Services Cloud. For more information, see the
+      <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/\">IoT SiteWise User Guide</a>. For information about IoT SiteWise quotas, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html\">Quotas</a> in the <i>IoT SiteWise User Guide</i>.</p>")
 module UpdateProject = {
   type t
   type request = {
@@ -870,7 +1076,7 @@ module UpdateProject = {
     @ocaml.doc("<p>A new friendly name for the project.</p>") projectName: name,
     @ocaml.doc("<p>The ID of the project to update.</p>") projectId: id,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "UpdateProjectCommand"
   let make = (~projectName, ~projectId, ~clientToken=?, ~projectDescription=?, ()) =>
     new({
@@ -886,11 +1092,11 @@ module UpdateGatewayCapabilityConfiguration = {
   type t
   type request = {
     @ocaml.doc("<p>The JSON document that defines the configuration for the gateway capability. For more
-      information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/configure-sources.html#configure-source-cli\">Configuring data sources (CLI)</a> in the <i>AWS IoT SiteWise User Guide</i>.</p>")
+      information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/configure-sources.html#configure-source-cli\">Configuring data sources (CLI)</a> in the <i>IoT SiteWise User Guide</i>.</p>")
     capabilityConfiguration: capabilityConfiguration,
     @ocaml.doc("<p>The namespace of the gateway capability configuration to be updated.
       For example, if you configure OPC-UA
-      sources from the AWS IoT SiteWise console, your OPC-UA capability configuration has the namespace
+      sources from the IoT SiteWise console, your OPC-UA capability configuration has the namespace
         <code>iotsitewise:opcuacollector:version</code>, where <code>version</code> is a number such as
         <code>1</code>.</p>")
     capabilityNamespace: capabilityNamespace,
@@ -935,7 +1141,7 @@ module UpdateGateway = {
     @ocaml.doc("<p>A unique, friendly name for the gateway.</p>") gatewayName: name,
     @ocaml.doc("<p>The ID of the gateway to update.</p>") gatewayId: id,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "UpdateGatewayCommand"
   let make = (~gatewayName, ~gatewayId, ()) => new({gatewayName: gatewayName, gatewayId: gatewayId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -949,14 +1155,14 @@ module UpdateDashboard = {
     )
     clientToken: option<clientToken>,
     @ocaml.doc("<p>The new dashboard definition, as specified in a JSON literal. For detailed information,
-      see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/create-dashboards-using-aws-cli.html\">Creating dashboards (CLI)</a> in the <i>AWS IoT SiteWise User Guide</i>.</p>")
+      see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/create-dashboards-using-aws-cli.html\">Creating dashboards (CLI)</a> in the <i>IoT SiteWise User Guide</i>.</p>")
     dashboardDefinition: dashboardDefinition,
     @ocaml.doc("<p>A new description for the dashboard.</p>")
     dashboardDescription: option<description>,
     @ocaml.doc("<p>A new friendly name for the dashboard.</p>") dashboardName: name,
     @ocaml.doc("<p>The ID of the dashboard to update.</p>") dashboardId: id,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "UpdateDashboardCommand"
   let make = (
     ~dashboardDefinition,
@@ -984,20 +1190,20 @@ module UpdateAssetProperty = {
     )
     clientToken: option<clientToken>,
     @ocaml.doc("<p>The MQTT notification state (enabled or disabled) for this asset property.
-      When the notification state is enabled, AWS IoT SiteWise publishes property value
-      updates to a unique MQTT topic. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/interact-with-other-services.html\">Interacting with other services</a> in the <i>AWS IoT SiteWise User Guide</i>.</p>
+      When the notification state is enabled, IoT SiteWise publishes property value
+      updates to a unique MQTT topic. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/interact-with-other-services.html\">Interacting with other services</a> in the <i>IoT SiteWise User Guide</i>.</p>
          <p>If you omit this parameter, the notification state is set to <code>DISABLED</code>.</p>")
     propertyNotificationState: option<propertyNotificationState>,
-    @ocaml.doc("<p>The property alias that identifies the property, such as an OPC-UA server data stream path
+    @ocaml.doc("<p>The alias that identifies the property, such as an OPC-UA server data stream path
         (for example, <code>/company/windfarm/3/turbine/7/temperature</code>). For more information, see
         <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html\">Mapping industrial data streams to asset properties</a> in the
-        <i>AWS IoT SiteWise User Guide</i>.</p>
+        <i>IoT SiteWise User Guide</i>.</p>
          <p>If you omit this parameter, the alias is removed from the property.</p>")
     propertyAlias: option<propertyAlias>,
     @ocaml.doc("<p>The ID of the asset property to be updated.</p>") propertyId: id,
     @ocaml.doc("<p>The ID of the asset to be updated.</p>") assetId: id,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iotsitewise") @new
   external new: request => t = "UpdateAssetPropertyCommand"
   let make = (
@@ -1018,6 +1224,25 @@ module UpdateAssetProperty = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
+module DisassociateTimeSeriesFromAssetProperty = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>"
+    )
+    clientToken: option<clientToken>,
+    @ocaml.doc("<p>The ID of the asset property.</p>") propertyId: id,
+    @ocaml.doc("<p>The ID of the asset in which the asset property was created.</p>") assetId: id,
+    @ocaml.doc("<p>The alias that identifies the time series.</p>") alias: propertyAlias,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-iotsitewise") @new
+  external new: request => t = "DisassociateTimeSeriesFromAssetPropertyCommand"
+  let make = (~propertyId, ~assetId, ~alias, ~clientToken=?, ()) =>
+    new({clientToken: clientToken, propertyId: propertyId, assetId: assetId, alias: alias})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
 module DisassociateAssets = {
   type t
   type request = {
@@ -1029,12 +1254,12 @@ module DisassociateAssets = {
     @ocaml.doc("<p>The ID of a hierarchy in the parent asset's model. Hierarchies allow different groupings
       of assets to be formed that all come from the same asset model. You can use the hierarchy ID
       to identify the correct asset to disassociate. For more information, see
-      <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-hierarchies.html\">Asset hierarchies</a> in the <i>AWS IoT SiteWise User Guide</i>.</p>")
+      <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-hierarchies.html\">Asset hierarchies</a> in the <i>IoT SiteWise User Guide</i>.</p>")
     hierarchyId: id,
     @ocaml.doc("<p>The ID of the parent asset from which to disassociate the child asset.</p>")
     assetId: id,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iotsitewise") @new
   external new: request => t = "DisassociateAssetsCommand"
   let make = (~childAssetId, ~hierarchyId, ~assetId, ~clientToken=?, ()) =>
@@ -1045,6 +1270,41 @@ module DisassociateAssets = {
       assetId: assetId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module DescribeTimeSeries = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The ID of the asset property.</p>") propertyId: option<id>,
+    @ocaml.doc("<p>The ID of the asset in which the asset property was created.</p>")
+    assetId: option<id>,
+    @ocaml.doc("<p>The alias that identifies the time series.</p>") alias: option<propertyAlias>,
+  }
+  type response = {
+    @ocaml.doc("<p>The date that the time series was last updated, in Unix epoch time.</p>")
+    timeSeriesLastUpdateDate: timestamp_,
+    @ocaml.doc("<p>The date that the time series was created, in Unix epoch time.</p>")
+    timeSeriesCreationDate: timestamp_,
+    @ocaml.doc("<p>The data type of the structure for this time series. This parameter is required for time series 
+      that have the <code>STRUCT</code> data type.</p>
+         <p>The options for this parameter depend on the type of the composite model 
+      in which you created the asset property that is associated with your time series. 
+      Use <code>AWS/ALARM_STATE</code> for alarm state in alarm composite models.</p>")
+    dataTypeSpec: option<name>,
+    @ocaml.doc("<p>The data type of the time series.</p>
+         <p>If you specify <code>STRUCT</code>, you must also specify <code>dataTypeSpec</code> to identify the type of the structure for this time series.</p>")
+    dataType: propertyDataType,
+    @ocaml.doc("<p>The ID of the time series.</p>") timeSeriesId: timeSeriesId,
+    @ocaml.doc("<p>The alias that identifies the time series.</p>") alias: option<propertyAlias>,
+    @ocaml.doc("<p>The ID of the asset property.</p>") propertyId: option<id>,
+    @ocaml.doc("<p>The ID of the asset in which the asset property was created.</p>")
+    assetId: option<id>,
+  }
+  @module("@aws-sdk/client-iotsitewise") @new
+  external new: request => t = "DescribeTimeSeriesCommand"
+  let make = (~propertyId=?, ~assetId=?, ~alias=?, ()) =>
+    new({propertyId: propertyId, assetId: assetId, alias: alias})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeProject = {
@@ -1075,7 +1335,7 @@ module DescribeGatewayCapabilityConfiguration = {
   type request = {
     @ocaml.doc("<p>The namespace of the capability configuration.
       For example, if you configure OPC-UA
-      sources from the AWS IoT SiteWise console, your OPC-UA capability configuration has the namespace
+      sources from the IoT SiteWise console, your OPC-UA capability configuration has the namespace
         <code>iotsitewise:opcuacollector:version</code>, where <code>version</code> is a number such as
         <code>1</code>.</p>")
     capabilityNamespace: capabilityNamespace,
@@ -1100,7 +1360,7 @@ module DescribeGatewayCapabilityConfiguration = {
          </ul>")
     capabilitySyncStatus: capabilitySyncStatus,
     @ocaml.doc("<p>The JSON document that defines the gateway capability's configuration. For more
-      information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/configure-sources.html#configure-source-cli\">Configuring data sources (CLI)</a> in the <i>AWS IoT SiteWise User Guide</i>.</p>")
+      information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/configure-sources.html#configure-source-cli\">Configuring data sources (CLI)</a> in the <i>IoT SiteWise User Guide</i>.</p>")
     capabilityConfiguration: capabilityConfiguration,
     @ocaml.doc("<p>The namespace of the gateway capability.</p>")
     capabilityNamespace: capabilityNamespace,
@@ -1123,7 +1383,7 @@ module DescribeDashboard = {
     @ocaml.doc("<p>The date the dashboard was created, in Unix epoch time.</p>")
     dashboardCreationDate: timestamp_,
     @ocaml.doc("<p>The dashboard's definition JSON literal. For detailed information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/create-dashboards-using-aws-cli.html\">Creating
-        dashboards (CLI)</a> in the <i>AWS IoT SiteWise User Guide</i>.</p>")
+        dashboards (CLI)</a> in the <i>IoT SiteWise User Guide</i>.</p>")
     dashboardDefinition: dashboardDefinition,
     @ocaml.doc("<p>The dashboard's description.</p>") dashboardDescription: option<description>,
     @ocaml.doc("<p>The ID of the project that the dashboard is in.</p>") projectId: id,
@@ -1141,6 +1401,25 @@ module DescribeDashboard = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module DeleteTimeSeries = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>"
+    )
+    clientToken: option<clientToken>,
+    @ocaml.doc("<p>The ID of the asset property.</p>") propertyId: option<id>,
+    @ocaml.doc("<p>The ID of the asset in which the asset property was created.</p>")
+    assetId: option<id>,
+    @ocaml.doc("<p>The alias that identifies the time series.</p>") alias: option<propertyAlias>,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "DeleteTimeSeriesCommand"
+  let make = (~clientToken=?, ~propertyId=?, ~assetId=?, ~alias=?, ()) =>
+    new({clientToken: clientToken, propertyId: propertyId, assetId: assetId, alias: alias})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
 module DeleteProject = {
   type t
   type request = {
@@ -1150,7 +1429,7 @@ module DeleteProject = {
     clientToken: option<clientToken>,
     @ocaml.doc("<p>The ID of the project.</p>") projectId: id,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "DeleteProjectCommand"
   let make = (~projectId, ~clientToken=?, ()) =>
     new({clientToken: clientToken, projectId: projectId})
@@ -1160,7 +1439,7 @@ module DeleteProject = {
 module DeleteGateway = {
   type t
   type request = {@ocaml.doc("<p>The ID of the gateway to delete.</p>") gatewayId: id}
-
+  type response = {.}
   @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "DeleteGatewayCommand"
   let make = (~gatewayId, ()) => new({gatewayId: gatewayId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1175,7 +1454,7 @@ module DeleteDashboard = {
     clientToken: option<clientToken>,
     @ocaml.doc("<p>The ID of the dashboard to delete.</p>") dashboardId: id,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "DeleteDashboardCommand"
   let make = (~dashboardId, ~clientToken=?, ()) =>
     new({clientToken: clientToken, dashboardId: dashboardId})
@@ -1191,11 +1470,30 @@ module DeleteAccessPolicy = {
     clientToken: option<clientToken>,
     @ocaml.doc("<p>The ID of the access policy to be deleted.</p>") accessPolicyId: id,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iotsitewise") @new
   external new: request => t = "DeleteAccessPolicyCommand"
   let make = (~accessPolicyId, ~clientToken=?, ()) =>
     new({clientToken: clientToken, accessPolicyId: accessPolicyId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module AssociateTimeSeriesToAssetProperty = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>"
+    )
+    clientToken: option<clientToken>,
+    @ocaml.doc("<p>The ID of the asset property.</p>") propertyId: id,
+    @ocaml.doc("<p>The ID of the asset in which the asset property was created.</p>") assetId: id,
+    @ocaml.doc("<p>The alias that identifies the time series.</p>") alias: propertyAlias,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-iotsitewise") @new
+  external new: request => t = "AssociateTimeSeriesToAssetPropertyCommand"
+  let make = (~propertyId, ~assetId, ~alias, ~clientToken=?, ()) =>
+    new({clientToken: clientToken, propertyId: propertyId, assetId: assetId, alias: alias})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -1209,11 +1507,11 @@ module AssociateAssets = {
     @ocaml.doc("<p>The ID of the child asset to be associated.</p>") childAssetId: id,
     @ocaml.doc("<p>The ID of a hierarchy in the parent asset's model. Hierarchies allow different groupings
       of assets to be formed that all come from the same asset model. For more information, see
-      <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-hierarchies.html\">Asset hierarchies</a> in the <i>AWS IoT SiteWise User Guide</i>.</p>")
+      <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-hierarchies.html\">Asset hierarchies</a> in the <i>IoT SiteWise User Guide</i>.</p>")
     hierarchyId: id,
     @ocaml.doc("<p>The ID of the parent asset.</p>") assetId: id,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "AssociateAssetsCommand"
   let make = (~childAssetId, ~hierarchyId, ~assetId, ~clientToken=?, ()) =>
     new({
@@ -1234,7 +1532,7 @@ module UntagResource = {
     )
     resourceArn: amazonResourceName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1244,15 +1542,15 @@ module TagResource = {
   type t
   type request = {
     @ocaml.doc("<p>A list of key-value pairs that contain metadata for the resource. For more information,
-      see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html\">Tagging your AWS IoT SiteWise
-        resources</a> in the <i>AWS IoT SiteWise User Guide</i>.</p>")
+      see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html\">Tagging your IoT SiteWise
+        resources</a> in the <i>IoT SiteWise User Guide</i>.</p>")
     tags: tagMap,
     @ocaml.doc(
       "<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of the resource to tag.</p>"
     )
     resourceArn: amazonResourceName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1261,7 +1559,7 @@ module TagResource = {
 module PutLoggingOptions = {
   type t
   type request = {@ocaml.doc("<p>The logging options to set.</p>") loggingOptions: loggingOptions}
-
+  type response = {.}
   @module("@aws-sdk/client-iotsitewise") @new
   external new: request => t = "PutLoggingOptionsCommand"
   let make = (~loggingOptions, ()) => new({loggingOptions: loggingOptions})
@@ -1278,8 +1576,8 @@ module ListTagsForResource = {
   }
   type response = {
     @ocaml.doc("<p>The list of key-value pairs that contain metadata for the resource. For more information,
-      see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html\">Tagging your AWS IoT SiteWise
-        resources</a> in the <i>AWS IoT SiteWise User Guide</i>.</p>")
+      see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html\">Tagging your IoT SiteWise
+        resources</a> in the <i>IoT SiteWise User Guide</i>.</p>")
     tags: option<tagMap>,
   }
   @module("@aws-sdk/client-iotsitewise") @new
@@ -1291,7 +1589,7 @@ module ListTagsForResource = {
 module ListProjectAssets = {
   type t
   type request = {
-    @ocaml.doc("<p>The maximum number of results to be returned per paginated request.</p>
+    @ocaml.doc("<p>The maximum number of results to return for each paginated request.</p>
          <p>Default: 50</p>")
     maxResults: option<maxResults>,
     @ocaml.doc("<p>The token to be used for the next set of paginated results.</p>")
@@ -1315,11 +1613,11 @@ module ListProjectAssets = {
 
 module DescribeLoggingOptions = {
   type t
-
+  type request = {.}
   type response = {@ocaml.doc("<p>The current logging options.</p>") loggingOptions: loggingOptions}
   @module("@aws-sdk/client-iotsitewise") @new
-  external new: unit => t = "DescribeLoggingOptionsCommand"
-  let make = () => new()
+  external new: request => t = "DescribeLoggingOptionsCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1327,8 +1625,8 @@ module CreateProject = {
   type t
   type request = {
     @ocaml.doc("<p>A list of key-value pairs that contain metadata for the project. For more information, see
-        <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html\">Tagging your AWS IoT SiteWise
-        resources</a> in the <i>AWS IoT SiteWise User Guide</i>.</p>")
+        <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html\">Tagging your IoT SiteWise
+        resources</a> in the <i>IoT SiteWise User Guide</i>.</p>")
     tags: option<tagMap>,
     @ocaml.doc(
       "<p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>"
@@ -1362,15 +1660,15 @@ module CreateDashboard = {
   type t
   type request = {
     @ocaml.doc("<p>A list of key-value pairs that contain metadata for the dashboard. For more information,
-      see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html\">Tagging your AWS IoT SiteWise
-        resources</a> in the <i>AWS IoT SiteWise User Guide</i>.</p>")
+      see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html\">Tagging your IoT SiteWise
+        resources</a> in the <i>IoT SiteWise User Guide</i>.</p>")
     tags: option<tagMap>,
     @ocaml.doc(
       "<p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>"
     )
     clientToken: option<clientToken>,
     @ocaml.doc("<p>The dashboard definition specified in a JSON literal. For detailed information, see
-      <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/create-dashboards-using-aws-cli.html\">Creating dashboards (CLI)</a> in the <i>AWS IoT SiteWise User Guide</i>.</p>")
+      <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/create-dashboards-using-aws-cli.html\">Creating dashboards (CLI)</a> in the <i>IoT SiteWise User Guide</i>.</p>")
     dashboardDefinition: dashboardDefinition,
     @ocaml.doc("<p>A description for the dashboard.</p>") dashboardDescription: option<description>,
     @ocaml.doc("<p>A friendly name for the dashboard.</p>") dashboardName: name,
@@ -1408,8 +1706,9 @@ module CreateDashboard = {
 module UpdatePortal = {
   type t
   type request = {
-    @ocaml.doc("<p>Contains the configuration information of an alarm created in an AWS IoT SiteWise Monitor portal. 
-  You can use the alarm to monitor an asset property and get notified when the asset property value is outside a specified range. For more information, see .</p>")
+    @ocaml.doc("<p>Contains the configuration information of an alarm created in an IoT SiteWise Monitor portal. 
+  You can use the alarm to monitor an asset property and get notified when the asset property value is outside a specified range. 
+  For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/appguide/monitor-alarms.html\">Monitoring with alarms</a> in the <i>IoT SiteWise Application Guide</i>.</p>")
     alarms: option<alarms>,
     @ocaml.doc("<p>The email address that sends alarm notifications.</p>")
     notificationSenderEmail: option<email>,
@@ -1417,12 +1716,13 @@ module UpdatePortal = {
       "<p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>"
     )
     clientToken: option<clientToken>,
-    @ocaml.doc("<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of a service role that allows the portal's users to access your AWS IoT SiteWise
-      resources on your behalf. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-service-role.html\">Using service roles for AWS IoT SiteWise Monitor</a> in the
-        <i>AWS IoT SiteWise User Guide</i>.</p>")
+    @ocaml.doc("<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of a service role that allows the portal's users to access your IoT SiteWise
+      resources on your behalf. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-service-role.html\">Using service roles for IoT SiteWise Monitor</a> in the
+        <i>IoT SiteWise User Guide</i>.</p>")
     roleArn: arn,
     portalLogoImage: option<image>,
-    @ocaml.doc("<p>The AWS administrator's contact email address.</p>") portalContactEmail: email,
+    @ocaml.doc("<p>The Amazon Web Services administrator's contact email address.</p>")
+    portalContactEmail: email,
     @ocaml.doc("<p>A new description for the portal.</p>") portalDescription: option<description>,
     @ocaml.doc("<p>A new friendly name for the portal.</p>") portalName: name,
     @ocaml.doc("<p>The ID of the portal to update.</p>") portalId: id,
@@ -1459,27 +1759,6 @@ module UpdatePortal = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
-module UpdateAsset = {
-  type t
-  type request = {
-    @ocaml.doc(
-      "<p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>"
-    )
-    clientToken: option<clientToken>,
-    @ocaml.doc("<p>A unique, friendly name for the asset.</p>") assetName: name,
-    @ocaml.doc("<p>The ID of the asset to update.</p>") assetId: id,
-  }
-  type response = {
-    @ocaml.doc("<p>The status of the asset, which contains a state (<code>UPDATING</code> after successfully
-      calling this operation) and any error message.</p>")
-    assetStatus: assetStatus,
-  }
-  @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "UpdateAssetCommand"
-  let make = (~assetName, ~assetId, ~clientToken=?, ()) =>
-    new({clientToken: clientToken, assetName: assetName, assetId: assetId})
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
 module UpdateAccessPolicy = {
   type t
   type request = {
@@ -1492,16 +1771,16 @@ module UpdateAccessPolicy = {
     )
     accessPolicyPermission: permission,
     @ocaml.doc(
-      "<p>The AWS IoT SiteWise Monitor resource for this access policy. Choose either a portal or a project.</p>"
+      "<p>The IoT SiteWise Monitor resource for this access policy. Choose either a portal or a project.</p>"
     )
     accessPolicyResource: resource,
     @ocaml.doc(
-      "<p>The identity for this access policy. Choose an AWS SSO user, an AWS SSO group, or an IAM user.</p>"
+      "<p>The identity for this access policy. Choose an Amazon Web Services SSO user, an Amazon Web Services SSO group, or an IAM user.</p>"
     )
     accessPolicyIdentity: identity,
     @ocaml.doc("<p>The ID of the access policy.</p>") accessPolicyId: id,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iotsitewise") @new
   external new: request => t = "UpdateAccessPolicyCommand"
   let make = (
@@ -1522,11 +1801,109 @@ module UpdateAccessPolicy = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
+module PutStorageConfiguration = {
+  type t
+  type request = {
+    retentionPeriod: option<retentionPeriod>,
+    @ocaml.doc("<p>Contains the storage configuration for time series (data streams) that aren't associated with asset properties. 
+      The <code>disassociatedDataStorage</code> can be one of the following values:</p>
+         <ul>
+            <li>
+               <p>
+                  <code>ENABLED</code> – IoT SiteWise accepts time series that aren't associated with asset properties.</p>
+               <important>
+                  <p>After the <code>disassociatedDataStorage</code> is enabled, you can't disable it.</p>
+               </important>
+            </li>
+            <li>
+               <p>
+                  <code>DISABLED</code> – IoT SiteWise doesn't accept time series (data streams) that aren't associated with asset properties.</p>
+            </li>
+         </ul>
+         <p>For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/data-streams.html\">Data streams</a> 
+    in the <i>IoT SiteWise User Guide</i>.</p>")
+    disassociatedDataStorage: option<disassociatedDataStorageState>,
+    @ocaml.doc("<p>Identifies a storage destination. If you specified <code>MULTI_LAYER_STORAGE</code> for the storage type, 
+      you must specify a <code>MultiLayerStorage</code> object.</p>")
+    multiLayerStorage: option<multiLayerStorage>,
+    @ocaml.doc("<p>The storage tier that you specified for your data. 
+      The <code>storageType</code> parameter can be one of the following values:</p>
+         <ul>
+            <li>
+               <p>
+                  <code>SITEWISE_DEFAULT_STORAGE</code> – IoT SiteWise saves your data into the hot tier. 
+          The hot tier is a service-managed database.</p>
+            </li>
+            <li>
+               <p>
+                  <code>MULTI_LAYER_STORAGE</code> – IoT SiteWise saves your data in both the cold tier and the cold tier. 
+          The cold tier is a customer-managed Amazon S3 bucket.</p>
+            </li>
+         </ul>")
+    storageType: storageType,
+  }
+  type response = {
+    configurationStatus: configurationStatus,
+    retentionPeriod: option<retentionPeriod>,
+    @ocaml.doc("<p>Contains the storage configuration for time series (data streams) that aren't associated with asset properties. 
+      The <code>disassociatedDataStorage</code> can be one of the following values:</p>
+         <ul>
+            <li>
+               <p>
+                  <code>ENABLED</code> – IoT SiteWise accepts time series that aren't associated with asset properties.</p>
+               <important>
+                  <p>After the <code>disassociatedDataStorage</code> is enabled, you can't disable it.</p>
+               </important>
+            </li>
+            <li>
+               <p>
+                  <code>DISABLED</code> – IoT SiteWise doesn't accept time series (data streams) that aren't associated with asset properties.</p>
+            </li>
+         </ul>
+         <p>For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/data-streams.html\">Data streams</a> 
+    in the <i>IoT SiteWise User Guide</i>.</p>")
+    disassociatedDataStorage: option<disassociatedDataStorageState>,
+    @ocaml.doc("<p>Contains information about the storage destination.</p>")
+    multiLayerStorage: option<multiLayerStorage>,
+    @ocaml.doc("<p>The storage tier that you specified for your data. 
+      The <code>storageType</code> parameter can be one of the following values:</p>
+         <ul>
+            <li>
+               <p>
+                  <code>SITEWISE_DEFAULT_STORAGE</code> – IoT SiteWise saves your data into the hot tier. 
+          The hot tier is a service-managed database.</p>
+            </li>
+            <li>
+               <p>
+                  <code>MULTI_LAYER_STORAGE</code> – IoT SiteWise saves your data in both the cold tier and the cold tier. 
+          The cold tier is a customer-managed Amazon S3 bucket.</p>
+            </li>
+         </ul>")
+    storageType: storageType,
+  }
+  @module("@aws-sdk/client-iotsitewise") @new
+  external new: request => t = "PutStorageConfigurationCommand"
+  let make = (
+    ~storageType,
+    ~retentionPeriod=?,
+    ~disassociatedDataStorage=?,
+    ~multiLayerStorage=?,
+    (),
+  ) =>
+    new({
+      retentionPeriod: retentionPeriod,
+      disassociatedDataStorage: disassociatedDataStorage,
+      multiLayerStorage: multiLayerStorage,
+      storageType: storageType,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module PutDefaultEncryptionConfiguration = {
   type t
   type request = {
-    @ocaml.doc("<p>The Key ID of the customer managed customer master key (CMK) used for AWS KMS encryption. This is required if you use
-      <code>KMS_BASED_ENCRYPTION</code>.</p>")
+    @ocaml.doc("<p>The Key ID of the customer managed key used for KMS encryption. This is required if you
+      use <code>KMS_BASED_ENCRYPTION</code>.</p>")
     kmsKeyId: option<kmsKeyId>,
     @ocaml.doc("<p>The type of encryption used for the encryption configuration.</p>")
     encryptionType: encryptionType,
@@ -1536,8 +1913,8 @@ module PutDefaultEncryptionConfiguration = {
       <code>ConfigurationState</code>. If there is an error, it also contains the
         <code>ErrorDetails</code>.</p>")
     configurationStatus: configurationStatus,
-    @ocaml.doc("<p>The Key ARN of the AWS KMS CMK used for AWS KMS encryption if you use 
-      <code>KMS_BASED_ENCRYPTION</code>.</p>")
+    @ocaml.doc("<p>The Key ARN of the KMS key used for KMS encryption if you use
+        <code>KMS_BASED_ENCRYPTION</code>.</p>")
     kmsKeyArn: option<arn>,
     @ocaml.doc("<p>The type of encryption used for the encryption configuration.</p>")
     encryptionType: encryptionType,
@@ -1549,10 +1926,56 @@ module PutDefaultEncryptionConfiguration = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module ListTimeSeries = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The type of the time series. The time series type can be one of the following
+      values:</p>
+         <ul>
+            <li>
+               <p>
+                  <code>ASSOCIATED</code> – The time series is associated with an asset
+          property.</p>
+            </li>
+            <li>
+               <p>
+                  <code>DISASSOCIATED</code> – The time series isn't associated with any asset
+          property.</p>
+            </li>
+         </ul>")
+    timeSeriesType: option<listTimeSeriesType>,
+    @ocaml.doc("<p>The alias prefix of the time series.</p>") aliasPrefix: option<propertyAlias>,
+    @ocaml.doc("<p>The ID of the asset in which the asset property was created.</p>")
+    assetId: option<id>,
+    @ocaml.doc("<p>The maximum number of results to return for each paginated request.</p>")
+    maxResults: option<maxResults>,
+    @ocaml.doc("<p>The token to be used for the next set of paginated results.</p>")
+    nextToken: option<nextToken>,
+  }
+  type response = {
+    @ocaml.doc(
+      "<p>The token for the next set of results, or null if there are no additional results.</p>"
+    )
+    nextToken: option<nextToken>,
+    @ocaml.doc("<p>One or more time series summaries to list.</p>") @as("TimeSeriesSummaries")
+    timeSeriesSummaries: timeSeriesSummaries,
+  }
+  @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "ListTimeSeriesCommand"
+  let make = (~timeSeriesType=?, ~aliasPrefix=?, ~assetId=?, ~maxResults=?, ~nextToken=?, ()) =>
+    new({
+      timeSeriesType: timeSeriesType,
+      aliasPrefix: aliasPrefix,
+      assetId: assetId,
+      maxResults: maxResults,
+      nextToken: nextToken,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module ListProjects = {
   type t
   type request = {
-    @ocaml.doc("<p>The maximum number of results to be returned per paginated request.</p>
+    @ocaml.doc("<p>The maximum number of results to return for each paginated request.</p>
          <p>Default: 50</p>")
     maxResults: option<maxResults>,
     @ocaml.doc("<p>The token to be used for the next set of paginated results.</p>")
@@ -1576,7 +1999,7 @@ module ListProjects = {
 module ListDashboards = {
   type t
   type request = {
-    @ocaml.doc("<p>The maximum number of results to be returned per paginated request.</p>
+    @ocaml.doc("<p>The maximum number of results to return for each paginated request.</p>
          <p>Default: 50</p>")
     maxResults: option<maxResults>,
     @ocaml.doc("<p>The token to be used for the next set of paginated results.</p>")
@@ -1600,10 +2023,10 @@ module ListDashboards = {
 module GetAssetPropertyValue = {
   type t
   type request = {
-    @ocaml.doc("<p>The property alias that identifies the property, such as an OPC-UA server data stream path
+    @ocaml.doc("<p>The alias that identifies the property, such as an OPC-UA server data stream path
         (for example, <code>/company/windfarm/3/turbine/7/temperature</code>). For more information, see
         <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html\">Mapping industrial data streams to asset properties</a> in the
-        <i>AWS IoT SiteWise User Guide</i>.</p>")
+        <i>IoT SiteWise User Guide</i>.</p>")
     propertyAlias: option<assetPropertyAlias>,
     @ocaml.doc("<p>The ID of the asset property.</p>") propertyId: option<id>,
     @ocaml.doc("<p>The ID of the asset.</p>") assetId: option<id>,
@@ -1619,21 +2042,74 @@ module GetAssetPropertyValue = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module DescribeStorageConfiguration = {
+  type t
+  type request = {.}
+  type response = {
+    @ocaml.doc("<p>The date the storage configuration was last updated, in Unix epoch time.</p>")
+    lastUpdateDate: option<timestamp_>,
+    configurationStatus: configurationStatus,
+    @ocaml.doc(
+      "<p>How many days your data is kept in the hot tier. By default, your data is kept indefinitely in the hot tier.</p>"
+    )
+    retentionPeriod: option<retentionPeriod>,
+    @ocaml.doc("<p>Contains the storage configuration for time series (data streams) that aren't associated with asset properties. 
+      The <code>disassociatedDataStorage</code> can be one of the following values:</p>
+         <ul>
+            <li>
+               <p>
+                  <code>ENABLED</code> – IoT SiteWise accepts time series that aren't associated with asset properties.</p>
+               <important>
+                  <p>After the <code>disassociatedDataStorage</code> is enabled, you can't disable it.</p>
+               </important>
+            </li>
+            <li>
+               <p>
+                  <code>DISABLED</code> – IoT SiteWise doesn't accept time series (data streams) that aren't associated with asset properties.</p>
+            </li>
+         </ul>
+         <p>For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/data-streams.html\">Data streams</a> 
+    in the <i>IoT SiteWise User Guide</i>.</p>")
+    disassociatedDataStorage: option<disassociatedDataStorageState>,
+    @ocaml.doc("<p>Contains information about the storage destination.</p>")
+    multiLayerStorage: option<multiLayerStorage>,
+    @ocaml.doc("<p>The storage tier that you specified for your data. 
+      The <code>storageType</code> parameter can be one of the following values:</p>
+         <ul>
+            <li>
+               <p>
+                  <code>SITEWISE_DEFAULT_STORAGE</code> – IoT SiteWise saves your data into the hot tier. 
+          The hot tier is a service-managed database.</p>
+            </li>
+            <li>
+               <p>
+                  <code>MULTI_LAYER_STORAGE</code> – IoT SiteWise saves your data in both the cold tier and the cold tier. 
+          The cold tier is a customer-managed Amazon S3 bucket.</p>
+            </li>
+         </ul>")
+    storageType: storageType,
+  }
+  @module("@aws-sdk/client-iotsitewise") @new
+  external new: request => t = "DescribeStorageConfigurationCommand"
+  let make = () => new(Js.Obj.empty())
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module DescribePortal = {
   type t
   type request = {@ocaml.doc("<p>The ID of the portal.</p>") portalId: id}
   type response = {
     @ocaml.doc(
-      "<p>Contains the configuration information of an alarm created in a AWS IoT SiteWise Monitor portal.</p>"
+      "<p>Contains the configuration information of an alarm created in an IoT SiteWise Monitor portal.</p>"
     )
     alarms: option<alarms>,
     @ocaml.doc("<p>The email address that sends alarm notifications.</p>")
     notificationSenderEmail: option<email>,
     @ocaml.doc("<p>The service to use to authenticate users to the portal.</p>")
     portalAuthMode: option<authMode>,
-    @ocaml.doc("<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of the service role that allows the portal's users to access your AWS IoT SiteWise
-      resources on your behalf. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-service-role.html\">Using service roles for AWS IoT SiteWise Monitor</a> in the
-        <i>AWS IoT SiteWise User Guide</i>.</p>")
+    @ocaml.doc("<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of the service role that allows the portal's users to access your IoT SiteWise
+      resources on your behalf. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-service-role.html\">Using service roles for IoT SiteWise Monitor</a> in the
+        <i>IoT SiteWise User Guide</i>.</p>")
     roleArn: option<arn>,
     @ocaml.doc("<p>The portal's logo image, which is available at a URL.</p>")
     portalLogoImageLocation: option<imageLocation>,
@@ -1645,13 +2121,14 @@ module DescribePortal = {
       "<p>The current status of the portal, which contains a state and any error message.</p>"
     )
     portalStatus: portalStatus,
-    @ocaml.doc("<p>The AWS administrator's contact email address.</p>") portalContactEmail: email,
-    @ocaml.doc("<p>The URL for the AWS IoT SiteWise Monitor portal. You can use this URL to access portals that
-      use AWS SSO for authentication. For portals that use IAM for authentication, you must use the 
-      AWS IoT SiteWise console to get a URL that you can use to access the portal.</p>")
+    @ocaml.doc("<p>The Amazon Web Services administrator's contact email address.</p>")
+    portalContactEmail: email,
+    @ocaml.doc("<p>The URL for the IoT SiteWise Monitor portal. You can use this URL to access portals that
+      use Amazon Web Services SSO for authentication. For portals that use IAM for authentication, you must use the 
+      IoT SiteWise console to get a URL that you can use to access the portal.</p>")
     portalStartUrl: url,
-    @ocaml.doc("<p>The AWS SSO application generated client ID (used with AWS SSO APIs). AWS IoT SiteWise includes
-        <code>portalClientId</code> for only portals that use AWS SSO to authenticate users.</p>")
+    @ocaml.doc("<p>The Amazon Web Services SSO application generated client ID (used with Amazon Web Services SSO APIs). IoT SiteWise includes
+        <code>portalClientId</code> for only portals that use Amazon Web Services SSO to authenticate users.</p>")
     portalClientId: portalClientId,
     @ocaml.doc("<p>The portal's description.</p>") portalDescription: option<description>,
     @ocaml.doc("<p>The name of the portal.</p>") portalName: name,
@@ -1695,21 +2172,21 @@ module DescribeGateway = {
 
 module DescribeDefaultEncryptionConfiguration = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("<p>The status of the account configuration. This contains the
-      <code>ConfigurationState</code>. If
-      there's an error, it also contains the <code>ErrorDetails</code>.</p>")
+      <code>ConfigurationState</code>. If there's an error, it also contains the
+        <code>ErrorDetails</code>.</p>")
     configurationStatus: configurationStatus,
-    @ocaml.doc("<p>The key ARN of the customer managed customer master key (CMK) used for AWS KMS encryption
-      if you use <code>KMS_BASED_ENCRYPTION</code>.</p>")
+    @ocaml.doc("<p>The key ARN of the customer managed key used for KMS encryption if you use
+        <code>KMS_BASED_ENCRYPTION</code>.</p>")
     kmsKeyArn: option<arn>,
     @ocaml.doc("<p>The type of encryption used for the encryption configuration.</p>")
     encryptionType: encryptionType,
   }
   @module("@aws-sdk/client-iotsitewise") @new
-  external new: unit => t = "DescribeDefaultEncryptionConfigurationCommand"
-  let make = () => new()
+  external new: request => t = "DescribeDefaultEncryptionConfigurationCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1724,10 +2201,10 @@ module DescribeAccessPolicy = {
     @ocaml.doc("<p>The access policy permission. Note that a project <code>ADMINISTRATOR</code> is also known
       as a project owner.</p>")
     accessPolicyPermission: permission,
-    @ocaml.doc("<p>The AWS IoT SiteWise Monitor resource (portal or project) to which this access policy provides
+    @ocaml.doc("<p>The IoT SiteWise Monitor resource (portal or project) to which this access policy provides
       access.</p>")
     accessPolicyResource: resource,
-    @ocaml.doc("<p>The identity (AWS SSO user, AWS SSO group, or IAM user) to which this access policy
+    @ocaml.doc("<p>The identity (Amazon Web Services SSO user, Amazon Web Services SSO group, or IAM user) to which this access policy
       applies.</p>")
     accessPolicyIdentity: identity,
     @ocaml.doc("<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of the access policy, which has the following format.</p>
@@ -1762,55 +2239,18 @@ module DeletePortal = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
-module DeleteAssetModel = {
-  type t
-  type request = {
-    @ocaml.doc(
-      "<p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>"
-    )
-    clientToken: option<clientToken>,
-    @ocaml.doc("<p>The ID of the asset model to delete.</p>") assetModelId: id,
-  }
-  type response = {
-    @ocaml.doc("<p>The status of the asset model, which contains a state (<code>DELETING</code> after
-      successfully calling this operation) and any error message.</p>")
-    assetModelStatus: assetModelStatus,
-  }
-  @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "DeleteAssetModelCommand"
-  let make = (~assetModelId, ~clientToken=?, ()) =>
-    new({clientToken: clientToken, assetModelId: assetModelId})
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
-module DeleteAsset = {
-  type t
-  type request = {
-    @ocaml.doc(
-      "<p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>"
-    )
-    clientToken: option<clientToken>,
-    @ocaml.doc("<p>The ID of the asset to delete.</p>") assetId: id,
-  }
-  type response = {
-    @ocaml.doc("<p>The status of the asset, which contains a state (<code>DELETING</code> after successfully
-      calling this operation) and any error message.</p>")
-    assetStatus: assetStatus,
-  }
-  @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "DeleteAssetCommand"
-  let make = (~assetId, ~clientToken=?, ()) => new({clientToken: clientToken, assetId: assetId})
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
 module CreatePortal = {
   type t
   type request = {
-    @ocaml.doc("<p>Contains the configuration information of an alarm created in an AWS IoT SiteWise Monitor portal. 
-  You can use the alarm to monitor an asset property and get notified when the asset property value is outside a specified range. For more information, see .</p>")
+    @ocaml.doc("<p>Contains the configuration information of an alarm created in an IoT SiteWise Monitor portal. 
+  You can use the alarm to monitor an asset property and get notified when the asset property value is outside a specified range. 
+  For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/appguide/monitor-alarms.html\">Monitoring with alarms</a> in the <i>IoT SiteWise Application Guide</i>.</p>")
     alarms: option<alarms>,
     @ocaml.doc("<p>The email address that sends alarm notifications.</p>
          <important>
-            <p>If you use the AWS IoT Events managed AWS Lambda function to manage your emails, you must 
-        <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-email-addresses.html\">verify the sender email address in Amazon SES</a>.</p>
+            <p>If you use the <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/lambda-support.html\">IoT Events managed Lambda
+          function</a> to manage your emails, you must <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-email-addresses.html\">verify the sender email
+          address in Amazon SES</a>.</p>
          </important>")
     notificationSenderEmail: option<email>,
     @ocaml.doc("<p>The service to use to authenticate users to the portal. Choose from the following
@@ -1818,16 +2258,16 @@ module CreatePortal = {
          <ul>
             <li>
                <p>
-                  <code>SSO</code> – The portal uses AWS Single Sign-On to authenticate users and manage
-          user permissions. Before you can create a portal that uses AWS SSO, you must enable AWS SSO.
-          For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-get-started.html#mon-gs-sso\">Enabling AWS SSO</a> in the
-            <i>AWS IoT SiteWise User Guide</i>. This option is only available in AWS Regions other than
+                  <code>SSO</code> – The portal uses Amazon Web Services Single Sign On to authenticate users and manage
+          user permissions. Before you can create a portal that uses Amazon Web Services SSO, you must enable Amazon Web Services SSO.
+          For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-get-started.html#mon-gs-sso\">Enabling Amazon Web Services SSO</a> in the
+            <i>IoT SiteWise User Guide</i>. This option is only available in Amazon Web Services Regions other than
           the China Regions.</p>
             </li>
             <li>
                <p>
-                  <code>IAM</code> – The portal uses AWS Identity and Access Management (IAM) to authenticate users and manage
-          user permissions. This option is only available in the China Regions.</p>
+                  <code>IAM</code> – The portal uses Identity and Access Management to authenticate users and manage
+          user permissions.</p>
             </li>
          </ul>
          <p>You can't change this value after you create a portal.</p>
@@ -1835,12 +2275,12 @@ module CreatePortal = {
          </p>")
     portalAuthMode: option<authMode>,
     @ocaml.doc("<p>A list of key-value pairs that contain metadata for the portal. For more information, see
-        <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html\">Tagging your AWS IoT SiteWise
-        resources</a> in the <i>AWS IoT SiteWise User Guide</i>.</p>")
+        <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html\">Tagging your IoT SiteWise
+        resources</a> in the <i>IoT SiteWise User Guide</i>.</p>")
     tags: option<tagMap>,
-    @ocaml.doc("<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of a service role that allows the portal's users to access your AWS IoT SiteWise
-      resources on your behalf. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-service-role.html\">Using service roles for AWS IoT SiteWise Monitor</a> in the
-        <i>AWS IoT SiteWise User Guide</i>.</p>")
+    @ocaml.doc("<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of a service role that allows the portal's users to access your IoT SiteWise
+      resources on your behalf. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-service-role.html\">Using service roles for IoT SiteWise Monitor</a> in the
+        <i>IoT SiteWise User Guide</i>.</p>")
     roleArn: arn,
     @ocaml.doc("<p>A logo image to display in the portal. Upload a square, high-resolution image. The
       image is displayed on a dark background.</p>")
@@ -1849,19 +2289,22 @@ module CreatePortal = {
       "<p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>"
     )
     clientToken: option<clientToken>,
-    @ocaml.doc("<p>The AWS administrator's contact email address.</p>") portalContactEmail: email,
+    @ocaml.doc("<p>The Amazon Web Services administrator's contact email address.</p>")
+    portalContactEmail: email,
     @ocaml.doc("<p>A description for the portal.</p>") portalDescription: option<description>,
     @ocaml.doc("<p>A friendly name for the portal.</p>") portalName: name,
   }
   type response = {
-    @ocaml.doc("<p>The associated AWS SSO application ID, if the portal uses AWS SSO.</p>")
+    @ocaml.doc(
+      "<p>The associated Amazon Web Services SSO application ID, if the portal uses Amazon Web Services SSO.</p>"
+    )
     ssoApplicationId: ssoapplicationId,
     @ocaml.doc("<p>The status of the portal, which contains a state (<code>CREATING</code> after successfully
       calling this operation) and any error message.</p>")
     portalStatus: portalStatus,
-    @ocaml.doc("<p>The URL for the AWS IoT SiteWise Monitor portal. You can use this URL to access portals that
-      use AWS SSO for authentication. For portals that use IAM for authentication, you must use the 
-      AWS IoT SiteWise console to get a URL that you can use to access the portal.</p>")
+    @ocaml.doc("<p>The URL for the IoT SiteWise Monitor portal. You can use this URL to access portals that
+      use Amazon Web Services SSO for authentication. For portals that use IAM for authentication, you must use the 
+      IoT SiteWise console to get a URL that you can use to access the portal.</p>")
     portalStartUrl: url,
     @ocaml.doc("<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of the portal, which has the following format.</p>
         <p>
@@ -1903,8 +2346,8 @@ module CreateGateway = {
   type t
   type request = {
     @ocaml.doc("<p>A list of key-value pairs that contain metadata for the gateway. For more information, see
-        <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html\">Tagging your AWS IoT SiteWise
-        resources</a> in the <i>AWS IoT SiteWise User Guide</i>.</p>")
+        <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html\">Tagging your IoT SiteWise
+        resources</a> in the <i>IoT SiteWise User Guide</i>.</p>")
     tags: option<tagMap>,
     @ocaml.doc("<p>The gateway's platform. You can only specify one platform in a gateway.</p>")
     gatewayPlatform: gatewayPlatform,
@@ -1917,7 +2360,7 @@ module CreateGateway = {
          </p>")
     gatewayArn: arn,
     @ocaml.doc(
-      "<p>The ID of the gateway device. You can use this ID when you call other AWS IoT SiteWise APIs.</p>"
+      "<p>The ID of the gateway device. You can use this ID when you call other IoT SiteWise APIs.</p>"
     )
     gatewayId: id,
   }
@@ -1927,45 +2370,12 @@ module CreateGateway = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
-module CreateAsset = {
-  type t
-  type request = {
-    @ocaml.doc("<p>A list of key-value pairs that contain metadata for the asset. For more information, see
-        <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html\">Tagging your AWS IoT SiteWise
-        resources</a> in the <i>AWS IoT SiteWise User Guide</i>.</p>")
-    tags: option<tagMap>,
-    @ocaml.doc(
-      "<p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>"
-    )
-    clientToken: option<clientToken>,
-    @ocaml.doc("<p>The ID of the asset model from which to create the asset.</p>") assetModelId: id,
-    @ocaml.doc("<p>A unique, friendly name for the asset.</p>") assetName: name,
-  }
-  type response = {
-    @ocaml.doc("<p>The status of the asset, which contains a state (<code>CREATING</code> after successfully
-      calling this operation) and any error message.</p>")
-    assetStatus: assetStatus,
-    @ocaml.doc("<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of the asset, which has the following format.</p>
-        <p>
-            <code>arn:${Partition}:iotsitewise:${Region}:${Account}:asset/${AssetId}</code>
-         </p>")
-    assetArn: arn,
-    @ocaml.doc("<p>The ID of the asset. This ID uniquely identifies the asset within AWS IoT SiteWise and can be used with other
-      AWS IoT SiteWise APIs.</p>")
-    assetId: id,
-  }
-  @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "CreateAssetCommand"
-  let make = (~assetModelId, ~assetName, ~tags=?, ~clientToken=?, ()) =>
-    new({tags: tags, clientToken: clientToken, assetModelId: assetModelId, assetName: assetName})
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
 module CreateAccessPolicy = {
   type t
   type request = {
     @ocaml.doc("<p>A list of key-value pairs that contain metadata for the access policy. For more
       information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html\">Tagging your
-        AWS IoT SiteWise resources</a> in the <i>AWS IoT SiteWise User Guide</i>.</p>")
+        IoT SiteWise resources</a> in the <i>IoT SiteWise User Guide</i>.</p>")
     tags: option<tagMap>,
     @ocaml.doc(
       "<p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>"
@@ -1976,11 +2386,11 @@ module CreateAccessPolicy = {
     )
     accessPolicyPermission: permission,
     @ocaml.doc(
-      "<p>The AWS IoT SiteWise Monitor resource for this access policy. Choose either a portal or a project.</p>"
+      "<p>The IoT SiteWise Monitor resource for this access policy. Choose either a portal or a project.</p>"
     )
     accessPolicyResource: resource,
     @ocaml.doc(
-      "<p>The identity for this access policy. Choose an AWS SSO user, an AWS SSO group, or an IAM user.</p>"
+      "<p>The identity for this access policy. Choose an Amazon Web Services SSO user, an Amazon Web Services SSO group, or an IAM user.</p>"
     )
     accessPolicyIdentity: identity,
   }
@@ -2057,7 +2467,7 @@ module BatchAssociateProjectAssets = {
 module ListAssetRelationships = {
   type t
   type request = {
-    @ocaml.doc("<p>The maximum number of results to be returned per paginated request.</p>")
+    @ocaml.doc("<p>The maximum number of results to return for each paginated request.</p>")
     maxResults: option<maxResults>,
     @ocaml.doc("<p>The token to be used for the next set of paginated results.</p>")
     nextToken: option<nextToken>,
@@ -2097,13 +2507,63 @@ module ListAssetRelationships = {
 module GetInterpolatedAssetPropertyValues = {
   type t
   type request = {
+    @ocaml.doc("<p>The query interval for the window, in seconds. IoT SiteWise computes each interpolated value by
+      using data points from the timestamp of each interval, minus the window to the timestamp of
+      each interval plus the window. If not specified, the window ranges between the start time
+      minus the interval and the end time plus the interval.</p>
+         <note>
+            <ul>
+               <li>
+                  <p>If you specify a value for the <code>intervalWindowInSeconds</code> parameter, the
+            value for the <code>type</code> parameter must be
+            <code>LINEAR_INTERPOLATION</code>.</p>
+               </li>
+               <li>
+                  <p>If a data point isn't found during the specified query window, IoT SiteWise won't return an
+            interpolated value for the interval. This indicates that there's a gap in the ingested
+            data points.</p>
+               </li>
+            </ul>
+         </note>
+         <p>For example, you can get the interpolated temperature values for a wind turbine every 24
+      hours over a duration of 7 days. If the interpolation starts on July 1, 2021, at 9 AM with a
+      window of 2 hours, IoT SiteWise uses the data points from 7 AM (9 AM minus 2 hours) to 11 AM (9 AM
+      plus 2 hours) on July 2, 2021 to compute the first interpolated value. Next, IoT SiteWise uses the
+      data points from 7 AM (9 AM minus 2 hours) to 11 AM (9 AM plus 2 hours) on July 3, 2021 to
+      compute the second interpolated value, and so on. </p>")
+    intervalWindowInSeconds: option<intervalWindowInSeconds>,
     @ocaml.doc("<p>The interpolation type.</p>
-         <p>Valid values: <code>LINEAR_INTERPOLATION</code>
-         </p>")
+         <p>Valid values: <code>LINEAR_INTERPOLATION | LOCF_INTERPOLATION</code>
+         </p>
+         <ul>
+            <li>
+               <p>
+                  <code>LINEAR_INTERPOLATION</code> – Estimates missing data using <a href=\"https://en.wikipedia.org/wiki/Linear_interpolation\">linear
+          interpolation</a>.</p>
+               <p>For example, you can use this operation to return the interpolated temperature values
+          for a wind turbine every 24 hours over a duration of 7 days. If the interpolation starts
+          July 1, 2021, at 9 AM, IoT SiteWise returns the first interpolated value on July 2, 2021, at 9 AM,
+          the second interpolated value on July 3, 2021, at 9 AM, and so on.</p>
+            </li>
+            <li>
+               <p>
+                  <code>LOCF_INTERPOLATION</code> – Estimates missing data using last observation
+          carried forward interpolation</p>
+               <p>If no data point is found for an interval, IoT SiteWise returns the last observed data point
+          for the previous interval and carries forward this interpolated value until a new data
+          point is found.</p>
+               <p>For example, you can get the state of an on-off valve every 24 hours over a duration
+          of 7 days. If the interpolation starts July 1, 2021, at 9 AM, IoT SiteWise returns the last
+          observed data point between July 1, 2021, at 9 AM and July 2, 2021, at 9 AM as the first
+          interpolated value. If a data point isn't found after 9 AM on July 2, 2021, IoT SiteWise uses the
+          same interpolated value for the rest of the days.</p>
+            </li>
+         </ul>")
     @as("type")
     type_: interpolationType,
-    @ocaml.doc("<p>The maximum number of results to be returned per paginated request. 
-      If not specified, the default value is 10.</p>")
+    @ocaml.doc(
+      "<p>The maximum number of results to return for each paginated request. If not specified, the default value is 10.</p>"
+    )
     maxResults: option<maxInterpolatedResults>,
     @ocaml.doc("<p>The token to be used for the next set of paginated results.</p>")
     nextToken: option<nextToken>,
@@ -2123,10 +2583,10 @@ module GetInterpolatedAssetPropertyValues = {
     @ocaml.doc("<p>The exclusive start of the range from which to interpolate data, expressed in seconds in
       Unix epoch time.</p>")
     startTimeInSeconds: timeInSeconds,
-    @ocaml.doc("<p>The property alias that identifies the property, such as an OPC-UA server data stream path
+    @ocaml.doc("<p>The alias that identifies the property, such as an OPC-UA server data stream path
         (for example, <code>/company/windfarm/3/turbine/7/temperature</code>). For more information, see
         <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html\">Mapping industrial data streams to asset properties</a> in the
-        <i>AWS IoT SiteWise User Guide</i>.</p>")
+        <i>IoT SiteWise User Guide</i>.</p>")
     propertyAlias: option<assetPropertyAlias>,
     @ocaml.doc("<p>The ID of the asset property.</p>") propertyId: option<id>,
     @ocaml.doc("<p>The ID of the asset.</p>") assetId: option<id>,
@@ -2147,6 +2607,7 @@ module GetInterpolatedAssetPropertyValues = {
     ~quality,
     ~endTimeInSeconds,
     ~startTimeInSeconds,
+    ~intervalWindowInSeconds=?,
     ~maxResults=?,
     ~nextToken=?,
     ~endTimeOffsetInNanos=?,
@@ -2157,6 +2618,7 @@ module GetInterpolatedAssetPropertyValues = {
     (),
   ) =>
     new({
+      intervalWindowInSeconds: intervalWindowInSeconds,
       type_: type_,
       maxResults: maxResults,
       nextToken: nextToken,
@@ -2176,7 +2638,7 @@ module GetInterpolatedAssetPropertyValues = {
 module GetAssetPropertyValueHistory = {
   type t
   type request = {
-    @ocaml.doc("<p>The maximum number of results to be returned per paginated request.</p>
+    @ocaml.doc("<p>The maximum number of results to return for each paginated request.</p>
          <p>Default: 100</p>")
     maxResults: option<maxResults>,
     @ocaml.doc("<p>The token to be used for the next set of paginated results.</p>")
@@ -2194,10 +2656,10 @@ module GetAssetPropertyValueHistory = {
       "<p>The exclusive start of the range from which to query historical data, expressed in seconds in Unix epoch time.</p>"
     )
     startDate: option<timestamp_>,
-    @ocaml.doc("<p>The property alias that identifies the property, such as an OPC-UA server data stream path
+    @ocaml.doc("<p>The alias that identifies the property, such as an OPC-UA server data stream path
         (for example, <code>/company/windfarm/3/turbine/7/temperature</code>). For more information, see
         <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html\">Mapping industrial data streams to asset properties</a> in the
-        <i>AWS IoT SiteWise User Guide</i>.</p>")
+        <i>IoT SiteWise User Guide</i>.</p>")
     propertyAlias: option<assetPropertyAlias>,
     @ocaml.doc("<p>The ID of the asset property.</p>") propertyId: option<id>,
     @ocaml.doc("<p>The ID of the asset.</p>") assetId: option<id>,
@@ -2241,7 +2703,7 @@ module GetAssetPropertyValueHistory = {
 module GetAssetPropertyAggregates = {
   type t
   type request = {
-    @ocaml.doc("<p>The maximum number of results to be returned per paginated request.</p>
+    @ocaml.doc("<p>The maximum number of results to return for each paginated request.</p>
          <p>Default: 100</p>")
     maxResults: option<maxResults>,
     @ocaml.doc("<p>The token to be used for the next set of paginated results.</p>")
@@ -2261,10 +2723,10 @@ module GetAssetPropertyAggregates = {
     @ocaml.doc("<p>The quality by which to filter asset data.</p>") qualities: option<qualities>,
     @ocaml.doc("<p>The time interval over which to aggregate data.</p>") resolution: resolution,
     @ocaml.doc("<p>The data aggregating function.</p>") aggregateTypes: aggregateTypes,
-    @ocaml.doc("<p>The property alias that identifies the property, such as an OPC-UA server data stream path
+    @ocaml.doc("<p>The alias that identifies the property, such as an OPC-UA server data stream path
         (for example, <code>/company/windfarm/3/turbine/7/temperature</code>). For more information, see
         <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html\">Mapping industrial data streams to asset properties</a> in the
-        <i>AWS IoT SiteWise User Guide</i>.</p>")
+        <i>IoT SiteWise User Guide</i>.</p>")
     propertyAlias: option<assetPropertyAlias>,
     @ocaml.doc("<p>The ID of the asset property.</p>") propertyId: option<id>,
     @ocaml.doc("<p>The ID of the asset.</p>") assetId: option<id>,
@@ -2308,10 +2770,31 @@ module GetAssetPropertyAggregates = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module UpdateAsset = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>"
+    )
+    clientToken: option<clientToken>,
+    @ocaml.doc("<p>A unique, friendly name for the asset.</p>") assetName: name,
+    @ocaml.doc("<p>The ID of the asset to update.</p>") assetId: id,
+  }
+  type response = {
+    @ocaml.doc("<p>The status of the asset, which contains a state (<code>UPDATING</code> after successfully
+      calling this operation) and any error message.</p>")
+    assetStatus: assetStatus,
+  }
+  @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "UpdateAssetCommand"
+  let make = (~assetName, ~assetId, ~clientToken=?, ()) =>
+    new({clientToken: clientToken, assetName: assetName, assetId: assetId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module ListPortals = {
   type t
   type request = {
-    @ocaml.doc("<p>The maximum number of results to be returned per paginated request.</p>
+    @ocaml.doc("<p>The maximum number of results to return for each paginated request.</p>
          <p>Default: 50</p>")
     maxResults: option<maxResults>,
     @ocaml.doc("<p>The token to be used for the next set of paginated results.</p>")
@@ -2334,7 +2817,7 @@ module ListPortals = {
 module ListGateways = {
   type t
   type request = {
-    @ocaml.doc("<p>The maximum number of results to be returned per paginated request.</p>
+    @ocaml.doc("<p>The maximum number of results to return for each paginated request.</p>
          <p>Default: 50</p>")
     maxResults: option<maxResults>,
     @ocaml.doc("<p>The token to be used for the next set of paginated results.</p>")
@@ -2353,10 +2836,176 @@ module ListGateways = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module ListAccessPolicies = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The maximum number of results to return for each paginated request.</p>
+         <p>Default: 50</p>")
+    maxResults: option<maxResults>,
+    @ocaml.doc("<p>The token to be used for the next set of paginated results.</p>")
+    nextToken: option<nextToken>,
+    @ocaml.doc("<p>The ARN of the IAM user. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html\">IAM ARNs</a> in the
+        <i>IAM User Guide</i>. This parameter is required if you specify
+        <code>IAM</code> for <code>identityType</code>.</p>")
+    iamArn: option<arn>,
+    @ocaml.doc("<p>The ID of the resource. This parameter is required if you specify
+        <code>resourceType</code>.</p>")
+    resourceId: option<id>,
+    @ocaml.doc("<p>The type of resource (portal or project). This parameter is required if you specify
+        <code>resourceId</code>.</p>")
+    resourceType: option<resourceType>,
+    @ocaml.doc("<p>The ID of the identity. This parameter is required if you specify <code>USER</code> or
+        <code>GROUP</code> for <code>identityType</code>.</p>")
+    identityId: option<identityId>,
+    @ocaml.doc("<p>The type of identity (Amazon Web Services SSO user, Amazon Web Services SSO group, or IAM user). This parameter is required
+      if you specify <code>identityId</code>.</p>")
+    identityType: option<identityType>,
+  }
+  type response = {
+    @ocaml.doc(
+      "<p>The token for the next set of results, or null if there are no additional results.</p>"
+    )
+    nextToken: option<nextToken>,
+    @ocaml.doc("<p>A list that summarizes each access policy.</p>")
+    accessPolicySummaries: accessPolicySummaries,
+  }
+  @module("@aws-sdk/client-iotsitewise") @new
+  external new: request => t = "ListAccessPoliciesCommand"
+  let make = (
+    ~maxResults=?,
+    ~nextToken=?,
+    ~iamArn=?,
+    ~resourceId=?,
+    ~resourceType=?,
+    ~identityId=?,
+    ~identityType=?,
+    (),
+  ) =>
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      iamArn: iamArn,
+      resourceId: resourceId,
+      resourceType: resourceType,
+      identityId: identityId,
+      identityType: identityType,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module DeleteAssetModel = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>"
+    )
+    clientToken: option<clientToken>,
+    @ocaml.doc("<p>The ID of the asset model to delete.</p>") assetModelId: id,
+  }
+  type response = {
+    @ocaml.doc("<p>The status of the asset model, which contains a state (<code>DELETING</code> after
+      successfully calling this operation) and any error message.</p>")
+    assetModelStatus: assetModelStatus,
+  }
+  @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "DeleteAssetModelCommand"
+  let make = (~assetModelId, ~clientToken=?, ()) =>
+    new({clientToken: clientToken, assetModelId: assetModelId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module DeleteAsset = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>"
+    )
+    clientToken: option<clientToken>,
+    @ocaml.doc("<p>The ID of the asset to delete.</p>") assetId: id,
+  }
+  type response = {
+    @ocaml.doc("<p>The status of the asset, which contains a state (<code>DELETING</code> after successfully
+      calling this operation) and any error message.</p>")
+    assetStatus: assetStatus,
+  }
+  @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "DeleteAssetCommand"
+  let make = (~assetId, ~clientToken=?, ()) => new({clientToken: clientToken, assetId: assetId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module CreateAsset = {
+  type t
+  type request = {
+    @ocaml.doc("<p>A list of key-value pairs that contain metadata for the asset. For more information, see
+        <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html\">Tagging your IoT SiteWise
+        resources</a> in the <i>IoT SiteWise User Guide</i>.</p>")
+    tags: option<tagMap>,
+    @ocaml.doc(
+      "<p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>"
+    )
+    clientToken: option<clientToken>,
+    @ocaml.doc("<p>The ID of the asset model from which to create the asset.</p>") assetModelId: id,
+    @ocaml.doc("<p>A unique, friendly name for the asset.</p>") assetName: name,
+  }
+  type response = {
+    @ocaml.doc("<p>The status of the asset, which contains a state (<code>CREATING</code> after successfully
+      calling this operation) and any error message.</p>")
+    assetStatus: assetStatus,
+    @ocaml.doc("<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of the asset, which has the following format.</p>
+        <p>
+            <code>arn:${Partition}:iotsitewise:${Region}:${Account}:asset/${AssetId}</code>
+         </p>")
+    assetArn: arn,
+    @ocaml.doc("<p>The ID of the asset. This ID uniquely identifies the asset within IoT SiteWise and can be used with other
+      IoT SiteWise APIs.</p>")
+    assetId: id,
+  }
+  @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "CreateAssetCommand"
+  let make = (~assetModelId, ~assetName, ~tags=?, ~clientToken=?, ()) =>
+    new({tags: tags, clientToken: clientToken, assetModelId: assetModelId, assetName: assetName})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module DescribeAsset = {
+  type t
+  type request = {@ocaml.doc("<p>The ID of the asset.</p>") assetId: id}
+  type response = {
+    @ocaml.doc(
+      "<p>The current status of the asset, which contains a state and any error message.</p>"
+    )
+    assetStatus: assetStatus,
+    @ocaml.doc("<p>The date the asset was last updated, in Unix epoch time.</p>")
+    assetLastUpdateDate: timestamp_,
+    @ocaml.doc("<p>The date the asset was created, in Unix epoch time.</p>")
+    assetCreationDate: timestamp_,
+    @ocaml.doc("<p>The composite models for the asset.</p>")
+    assetCompositeModels: option<assetCompositeModels>,
+    @ocaml.doc(
+      "<p>A list of asset hierarchies that each contain a <code>hierarchyId</code>. A hierarchy specifies allowed parent/child asset relationships.</p>"
+    )
+    assetHierarchies: assetHierarchies,
+    @ocaml.doc("<p>The list of asset properties for the asset.</p>
+         <p>This object doesn't include properties that you define in composite models. You can find
+      composite model properties in the <code>assetCompositeModels</code> object.</p>")
+    assetProperties: assetProperties,
+    @ocaml.doc("<p>The ID of the asset model that was used to create the asset.</p>")
+    assetModelId: id,
+    @ocaml.doc("<p>The name of the asset.</p>") assetName: name,
+    @ocaml.doc("<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of the asset, which has the following format.</p>
+        <p>
+            <code>arn:${Partition}:iotsitewise:${Region}:${Account}:asset/${AssetId}</code>
+         </p>")
+    assetArn: arn,
+    @ocaml.doc("<p>The ID of the asset.</p>") assetId: id,
+  }
+  @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "DescribeAssetCommand"
+  let make = (~assetId, ()) => new({assetId: assetId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module ListAssociatedAssets = {
   type t
   type request = {
-    @ocaml.doc("<p>The maximum number of results to be returned per paginated request.</p>
+    @ocaml.doc("<p>The maximum number of results to return for each paginated request.</p>
          <p>Default: 50</p>")
     maxResults: option<maxResults>,
     @ocaml.doc("<p>The token to be used for the next set of paginated results.</p>")
@@ -2381,7 +3030,7 @@ module ListAssociatedAssets = {
       hierarchy ID, use the <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribeAsset.html\">DescribeAsset</a> or <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribeAssetModel.html\">DescribeAssetModel</a> operations. This
       parameter is required if you choose <code>CHILD</code> for
       <code>traversalDirection</code>.</p>
-         <p>For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-hierarchies.html\">Asset hierarchies</a> in the <i>AWS IoT SiteWise User Guide</i>.</p>")
+         <p>For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-hierarchies.html\">Asset hierarchies</a> in the <i>IoT SiteWise User Guide</i>.</p>")
     hierarchyId: option<id>,
     @ocaml.doc("<p>The ID of the asset to query.</p>") assetId: id,
   }
@@ -2429,7 +3078,7 @@ module ListAssets = {
     @ocaml.doc("<p>The ID of the asset model by which to filter the list of assets. This parameter is
       required if you choose <code>ALL</code> for <code>filter</code>.</p>")
     assetModelId: option<id>,
-    @ocaml.doc("<p>The maximum number of results to be returned per paginated request.</p>
+    @ocaml.doc("<p>The maximum number of results to return for each paginated request.</p>
          <p>Default: 50</p>")
     maxResults: option<maxResults>,
     @ocaml.doc("<p>The token to be used for the next set of paginated results.</p>")
@@ -2451,7 +3100,7 @@ module ListAssets = {
 module ListAssetModels = {
   type t
   type request = {
-    @ocaml.doc("<p>The maximum number of results to be returned per paginated request.</p>
+    @ocaml.doc("<p>The maximum number of results to return for each paginated request.</p>
          <p>Default: 50</p>")
     maxResults: option<maxResults>,
     @ocaml.doc("<p>The token to be used for the next set of paginated results.</p>")
@@ -2468,100 +3117,6 @@ module ListAssetModels = {
   @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "ListAssetModelsCommand"
   let make = (~maxResults=?, ~nextToken=?, ()) =>
     new({maxResults: maxResults, nextToken: nextToken})
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
-module ListAccessPolicies = {
-  type t
-  type request = {
-    @ocaml.doc("<p>The maximum number of results to be returned per paginated request.</p>
-         <p>Default: 50</p>")
-    maxResults: option<maxResults>,
-    @ocaml.doc("<p>The token to be used for the next set of paginated results.</p>")
-    nextToken: option<nextToken>,
-    @ocaml.doc("<p>The ARN of the IAM user. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html\">IAM ARNs</a> in the
-        <i>IAM User Guide</i>. This parameter is required if you specify
-        <code>IAM</code> for <code>identityType</code>.</p>")
-    iamArn: option<arn>,
-    @ocaml.doc("<p>The ID of the resource. This parameter is required if you specify
-        <code>resourceType</code>.</p>")
-    resourceId: option<id>,
-    @ocaml.doc("<p>The type of resource (portal or project). This parameter is required if you specify
-        <code>resourceId</code>.</p>")
-    resourceType: option<resourceType>,
-    @ocaml.doc("<p>The ID of the identity. This parameter is required if you specify <code>USER</code> or
-        <code>GROUP</code> for <code>identityType</code>.</p>")
-    identityId: option<identityId>,
-    @ocaml.doc("<p>The type of identity (AWS SSO user, AWS SSO group, or IAM user). This parameter is required
-      if you specify <code>identityId</code>.</p>")
-    identityType: option<identityType>,
-  }
-  type response = {
-    @ocaml.doc(
-      "<p>The token for the next set of results, or null if there are no additional results.</p>"
-    )
-    nextToken: option<nextToken>,
-    @ocaml.doc("<p>A list that summarizes each access policy.</p>")
-    accessPolicySummaries: accessPolicySummaries,
-  }
-  @module("@aws-sdk/client-iotsitewise") @new
-  external new: request => t = "ListAccessPoliciesCommand"
-  let make = (
-    ~maxResults=?,
-    ~nextToken=?,
-    ~iamArn=?,
-    ~resourceId=?,
-    ~resourceType=?,
-    ~identityId=?,
-    ~identityType=?,
-    (),
-  ) =>
-    new({
-      maxResults: maxResults,
-      nextToken: nextToken,
-      iamArn: iamArn,
-      resourceId: resourceId,
-      resourceType: resourceType,
-      identityId: identityId,
-      identityType: identityType,
-    })
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
-module DescribeAsset = {
-  type t
-  type request = {@ocaml.doc("<p>The ID of the asset.</p>") assetId: id}
-  type response = {
-    @ocaml.doc(
-      "<p>The current status of the asset, which contains a state and any error message.</p>"
-    )
-    assetStatus: assetStatus,
-    @ocaml.doc("<p>The date the asset was last updated, in Unix epoch time.</p>")
-    assetLastUpdateDate: timestamp_,
-    @ocaml.doc("<p>The date the asset was created, in Unix epoch time.</p>")
-    assetCreationDate: timestamp_,
-    @ocaml.doc("<p>The composite models for the asset.</p>")
-    assetCompositeModels: option<assetCompositeModels>,
-    @ocaml.doc(
-      "<p>A list of asset hierarchies that each contain a <code>hierarchyId</code>. A hierarchy specifies allowed parent/child asset relationships.</p>"
-    )
-    assetHierarchies: assetHierarchies,
-    @ocaml.doc("<p>The list of asset properties for the asset.</p>
-         <p>This object doesn't include properties that you define in composite models. You can find
-      composite model properties in the <code>assetCompositeModels</code> object.</p>")
-    assetProperties: assetProperties,
-    @ocaml.doc("<p>The ID of the asset model that was used to create the asset.</p>")
-    assetModelId: id,
-    @ocaml.doc("<p>The name of the asset.</p>") assetName: name,
-    @ocaml.doc("<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of the asset, which has the following format.</p>
-        <p>
-            <code>arn:${Partition}:iotsitewise:${Region}:${Account}:asset/${AssetId}</code>
-         </p>")
-    assetArn: arn,
-    @ocaml.doc("<p>The ID of the asset.</p>") assetId: id,
-  }
-  @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "DescribeAssetCommand"
-  let make = (~assetId, ()) => new({assetId: assetId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -2622,14 +3177,14 @@ module UpdateAssetModel = {
     assetModelCompositeModels: option<assetModelCompositeModels>,
     @ocaml.doc("<p>The updated hierarchy definitions of the asset model. Each hierarchy specifies an asset
       model whose assets can be children of any other assets created from this asset model. For more
-      information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-hierarchies.html\">Asset hierarchies</a> in the <i>AWS IoT SiteWise User Guide</i>.</p>
+      information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-hierarchies.html\">Asset hierarchies</a> in the <i>IoT SiteWise User Guide</i>.</p>
          <p>You can specify up to 10 hierarchies per asset model. For more
-      information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html\">Quotas</a> in the <i>AWS IoT SiteWise User Guide</i>.</p>")
+      information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html\">Quotas</a> in the <i>IoT SiteWise User Guide</i>.</p>")
     assetModelHierarchies: option<assetModelHierarchies>,
     @ocaml.doc("<p>The updated property definitions of the asset model. For more information, see
-      <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-properties.html\">Asset properties</a> in the <i>AWS IoT SiteWise User Guide</i>.</p>
+      <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-properties.html\">Asset properties</a> in the <i>IoT SiteWise User Guide</i>.</p>
          <p>You can specify up to 200 properties per asset model. For more
-      information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html\">Quotas</a> in the <i>AWS IoT SiteWise User Guide</i>.</p>")
+      information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html\">Quotas</a> in the <i>IoT SiteWise User Guide</i>.</p>")
     assetModelProperties: option<assetModelProperties>,
     @ocaml.doc("<p>A description for the asset model.</p>")
     assetModelDescription: option<description>,
@@ -2704,8 +3259,8 @@ module CreateAssetModel = {
   type t
   type request = {
     @ocaml.doc("<p>A list of key-value pairs that contain metadata for the asset model. For more information,
-      see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html\">Tagging your AWS IoT SiteWise
-        resources</a> in the <i>AWS IoT SiteWise User Guide</i>.</p>")
+      see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html\">Tagging your IoT SiteWise
+        resources</a> in the <i>IoT SiteWise User Guide</i>.</p>")
     tags: option<tagMap>,
     @ocaml.doc(
       "<p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>"
@@ -2718,14 +3273,14 @@ module CreateAssetModel = {
     assetModelCompositeModels: option<assetModelCompositeModelDefinitions>,
     @ocaml.doc("<p>The hierarchy definitions of the asset model. Each hierarchy specifies an asset model
       whose assets can be children of any other assets created from this asset model. For more
-      information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-hierarchies.html\">Asset hierarchies</a> in the <i>AWS IoT SiteWise User Guide</i>.</p>
+      information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-hierarchies.html\">Asset hierarchies</a> in the <i>IoT SiteWise User Guide</i>.</p>
          <p>You can specify up to 10 hierarchies per asset model. For more
-      information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html\">Quotas</a> in the <i>AWS IoT SiteWise User Guide</i>.</p>")
+      information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html\">Quotas</a> in the <i>IoT SiteWise User Guide</i>.</p>")
     assetModelHierarchies: option<assetModelHierarchyDefinitions>,
     @ocaml.doc("<p>The property definitions of the asset model. For more information, see
-      <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-properties.html\">Asset properties</a> in the <i>AWS IoT SiteWise User Guide</i>.</p>
+      <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-properties.html\">Asset properties</a> in the <i>IoT SiteWise User Guide</i>.</p>
          <p>You can specify up to 200 properties per asset model. For more
-      information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html\">Quotas</a> in the <i>AWS IoT SiteWise User Guide</i>.</p>")
+      information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html\">Quotas</a> in the <i>IoT SiteWise User Guide</i>.</p>")
     assetModelProperties: option<assetModelPropertyDefinitions>,
     @ocaml.doc("<p>A description for the asset model.</p>")
     assetModelDescription: option<description>,
@@ -2741,7 +3296,7 @@ module CreateAssetModel = {
          </p>")
     assetModelArn: arn,
     @ocaml.doc(
-      "<p>The ID of the asset model. You can use this ID when you call other AWS IoT SiteWise APIs.</p>"
+      "<p>The ID of the asset model. You can use this ID when you call other IoT SiteWise APIs.</p>"
     )
     assetModelId: id,
   }

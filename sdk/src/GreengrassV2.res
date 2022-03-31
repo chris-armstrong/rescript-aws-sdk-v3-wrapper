@@ -32,11 +32,13 @@ type recipeOutputFormat = [@as("YAML") #YAML | @as("JSON") #JSON]
 type recipeBlob = NodeJs.Buffer.t
 type reason = string
 type publisherString = string
+type portNumberInt = int
 type optionalInteger = int
 type optionalBoolean = bool
 type nullableString = string
 type nonEmptyString = string
 type nextTokenString = string
+type memory = float
 type lifecycleStateDetails = string
 type lambdaIsolationMode = [
   | @as("NoContainer") #NoContainer
@@ -49,6 +51,7 @@ type lambdaExecArg = string
 type lambdaEventSourceType = [@as("IOT_CORE") #IOT_CORE | @as("PUB_SUB") #PUB_SUB]
 type isRoot = bool
 type isLatestForTarget = bool
+type ioTThingName = string
 type ioTJobRolloutIncrementFactor = float
 type ioTJobRolloutBaseRatePerMinute = int
 type ioTJobNumberOfThings = int
@@ -124,6 +127,8 @@ type cloudComponentState = [
   | @as("INITIATED") #INITIATED
   | @as("REQUESTED") #REQUESTED
 ]
+type clientTokenString = string
+type cpu = float
 @ocaml.doc("<p>Contains information about a validation exception field.</p>")
 type validationExceptionField = {
   @ocaml.doc("<p>The message of the exception field.</p>") message: string_,
@@ -131,8 +136,23 @@ type validationExceptionField = {
 }
 type tagMap = Js.Dict.t<tagValue>
 type tagKeyList = array<tagKey>
+@ocaml.doc("<p>Contains information about system resource limits that the IoT Greengrass Core software applies to a
+      component's processes. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-greengrass-core-v2.html#configure-component-system-resource-limits\">Configure system resource limits for components</a>.</p>")
+type systemResourceLimits = {
+  @ocaml.doc("<p>The maximum amount of CPU time that a component's processes can use on the core device. A
+      core device's total CPU time is equivalent to the device's number of CPU cores. For example,
+      on a core device with 4 CPU cores, you can set this value to <code>2</code> to limit the
+      component's processes to 50 percent usage of each CPU core. On a device with 1 CPU core, you
+      can set this value to <code>0.25</code> to limit the component's processes to 25 percent usage
+      of the CPU. If you set this value to a number greater than the number of CPU cores, the IoT Greengrass Core
+      software doesn't limit the component's CPU usage.</p>")
+  cpus: option<cpu>,
+  @ocaml.doc("<p>The maximum amount of RAM, expressed in kilobytes, that a component's processes can use on
+      the core device.</p>")
+  memory: option<memory>,
+}
 type stringMap = Js.Dict.t<nonEmptyString>
-@ocaml.doc("<p>Contains information about a component version that is compatible to run on a AWS IoT Greengrass core
+@ocaml.doc("<p>Contains information about a component version that is compatible to run on a Greengrass core
       device.</p>")
 type resolvedComponentVersion = {
   @ocaml.doc("<p>The recipe of the component version.</p>") recipe: option<recipeBlob>,
@@ -146,10 +166,10 @@ type resolvedComponentVersion = {
 }
 type platformAttributesMap = Js.Dict.t<nonEmptyString>
 @ocaml.doc("<p>Contains information about a volume that Linux processes in a container can access. When
-      you define a volume, the AWS IoT Greengrass Core software mounts the source files to the destination inside the
+      you define a volume, the IoT Greengrass Core software mounts the source files to the destination inside the
       container.</p>")
 type lambdaVolumeMount = {
-  @ocaml.doc("<p>Whether or not to add the AWS IoT Greengrass user group as an owner of the volume.</p>
+  @ocaml.doc("<p>Whether or not to add the IoT Greengrass user group as an owner of the volume.</p>
          <p>Default: <code>false</code>
          </p>")
   addGroupOwner: option<optionalBoolean>,
@@ -164,7 +184,7 @@ type lambdaVolumeMount = {
   sourcePath: fileSystemPath,
 }
 type lambdaExecArgsList = array<lambdaExecArg>
-@ocaml.doc("<p>Contains information about an event source for an AWS Lambda function. The event source
+@ocaml.doc("<p>Contains information about an event source for an Lambda function. The event source
       defines the topics on which this Lambda function subscribes to receive messages that run the
       function.</p>")
 type lambdaEventSource = {
@@ -178,7 +198,7 @@ type lambdaEventSource = {
             </li>
             <li>
                <p>
-                  <code>IOT_CORE</code> – Subscribe to AWS IoT Core MQTT messages. This event source
+                  <code>IOT_CORE</code> – Subscribe to Amazon Web Services IoT Core MQTT messages. This event source
           type supports MQTT wildcards (<code>+</code> and <code>#</code>) in the event source
           topic.</p>
             </li>
@@ -249,7 +269,7 @@ type ioTJobAbortCriteria = {
   @ocaml.doc("<p>The type of job deployment failure that can cancel a job.</p>")
   failureType: ioTJobExecutionFailureType,
 }
-@ocaml.doc("<p>Contains information about a component on a AWS IoT Greengrass core device.</p>")
+@ocaml.doc("<p>Contains information about a component on a Greengrass core device.</p>")
 type installedComponent = {
   @ocaml.doc("<p>Whether or not the component is a root component.</p>") isRoot: option<isRoot>,
   @ocaml.doc("<p>The details about the lifecycle state of the component.</p>")
@@ -261,7 +281,7 @@ type installedComponent = {
   @ocaml.doc("<p>The name of the component.</p>") componentName: option<componentNameString>,
 }
 @ocaml.doc(
-  "<p>Contains information about a deployment job that AWS IoT Greengrass sends to a AWS IoT Greengrass core device.</p>"
+  "<p>Contains information about a deployment job that IoT Greengrass sends to a Greengrass core device.</p>"
 )
 type effectiveDeployment = {
   @ocaml.doc("<p>The time at which the deployment job was last modified, expressed in ISO 8601
@@ -271,30 +291,41 @@ type effectiveDeployment = {
   creationTimestamp: timestamp_,
   @ocaml.doc("<p>The reason code for the update, if the job was updated.</p>")
   reason: option<reason>,
-  @ocaml.doc("<p>The status of the deployment job on the AWS IoT Greengrass core device.</p>")
+  @ocaml.doc("<p>The status of the deployment job on the Greengrass core device.</p>")
   coreDeviceExecutionStatus: effectiveDeploymentExecutionStatus,
   @ocaml.doc(
-    "<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of the target AWS IoT thing or thing group.</p>"
+    "<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of the target IoT thing or thing group.</p>"
   )
   targetArn: targetARN,
   @ocaml.doc("<p>The description of the deployment job.</p>") description: option<description>,
   @ocaml.doc(
-    "<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of the AWS IoT job that applies the deployment to target devices.</p>"
+    "<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of the IoT job that applies the deployment to target devices.</p>"
   )
   iotJobArn: option<ioTJobARN>,
-  @ocaml.doc("<p>The ID of the AWS IoT job that applies the deployment to target devices.</p>")
+  @ocaml.doc("<p>The ID of the IoT job that applies the deployment to target devices.</p>")
   iotJobId: option<ioTJobId>,
-  @ocaml.doc("<p>The name of the deployment.</p>
-         <p>You can create deployments without names. If you create a deployment without a name, the
-      AWS IoT Greengrass V2 console shows the deployment name as <code><targetType>:<targetName></code>,
-      where <code>targetType</code> and <code>targetName</code> are the type and name of the
-      deployment target.</p>")
-  deploymentName: deploymentName,
+  @ocaml.doc("<p>The name of the deployment.</p>") deploymentName: deploymentName,
   @ocaml.doc("<p>The ID of the deployment.</p>") deploymentId: deploymentID,
+}
+@ocaml.doc("<p>Contains an error that occurs from a request to disassociate a client device from a core
+      device. The <a href=\"https://docs.aws.amazon.com/greengrass/v2/APIReference/API_BatchDisassociateClientDeviceWithCoreDevice.html\">BatchDisassociateClientDeviceWithCoreDevice</a> operation returns a list of these
+      errors.</p>")
+type disassociateClientDeviceFromCoreDeviceErrorEntry = {
+  @ocaml.doc("<p>A message that provides additional information about the error.</p>")
+  message: option<nonEmptyString>,
+  @ocaml.doc("<p>The error code for the request.</p>") code: option<nonEmptyString>,
+  @ocaml.doc("<p>The name of the IoT thing whose disassociate request failed.</p>")
+  thingName: option<ioTThingName>,
+}
+@ocaml.doc("<p>Contains a request to disassociate a client device from a core device. The <a href=\"https://docs.aws.amazon.com/greengrass/v2/APIReference/API_BatchDisassociateClientDeviceWithCoreDevice.html\">BatchDisassociateClientDeviceWithCoreDevice</a> operation consumes a list of these
+      requests.</p>")
+type disassociateClientDeviceFromCoreDeviceEntry = {
+  @ocaml.doc("<p>The name of the IoT thing that represents the client device to disassociate.</p>")
+  thingName: ioTThingName,
 }
 @ocaml.doc("<p>Contains information about how long a component on a core device can validate its
       configuration updates before it times out. Components can use the <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/interprocess-communication.html#ipc-operation-subscribetovalidateconfigurationupdates\">SubscribeToValidateConfigurationUpdates</a> IPC operation to receive notifications when
-      a deployment specifies a configuration update. Then, components can respond with the <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/interprocess-communication.html#ipc-operation-sendconfigurationvalidityreport\">SendConfigurationValidityReport</a> IPC operation. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/create-deployments.html\">Create deployments</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p>")
+      a deployment specifies a configuration update. Then, components can respond with the <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/interprocess-communication.html#ipc-operation-sendconfigurationvalidityreport\">SendConfigurationValidityReport</a> IPC operation. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/create-deployments.html\">Create deployments</a> in the <i>IoT Greengrass V2 Developer Guide</i>.</p>")
 type deploymentConfigurationValidationPolicy = {
   @ocaml.doc("<p>The amount of time in seconds that a component can validate its configuration updates. If
       the validation time exceeds this timeout, then the deployment proceeds for the device.</p>
@@ -317,7 +348,7 @@ type deploymentComponentUpdatePolicy = {
                <p>
                   <code>NOTIFY_COMPONENTS</code> – The deployment notifies each component before
           it stops and updates that component. Components can use the <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/interprocess-communication.html#ipc-operation-subscribetocomponentupdates\">SubscribeToComponentUpdates</a> IPC operation to receive these notifications. Then,
-          components can respond with the <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/interprocess-communication.html#ipc-operation-defercomponentupdate\">DeferComponentUpdate</a> IPC operation. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/create-deployments.html\">Create deployments</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p>
+          components can respond with the <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/interprocess-communication.html#ipc-operation-defercomponentupdate\">DeferComponentUpdate</a> IPC operation. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/create-deployments.html\">Create deployments</a> in the <i>IoT Greengrass V2 Developer Guide</i>.</p>
             </li>
             <li>
                <p>
@@ -342,40 +373,51 @@ type deployment = {
   @ocaml.doc("<p>The status of the deployment.</p>") deploymentStatus: option<deploymentStatus>,
   @ocaml.doc("<p>The time at which the deployment was created, expressed in ISO 8601 format.</p>")
   creationTimestamp: option<timestamp_>,
-  @ocaml.doc("<p>The name of the deployment.</p>
-         <p>You can create deployments without names. If you create a deployment without a name, the
-      AWS IoT Greengrass V2 console shows the deployment name as <code><targetType>:<targetName></code>,
-      where <code>targetType</code> and <code>targetName</code> are the type and name of the
-      deployment target.</p>")
-  deploymentName: option<nonEmptyString>,
+  @ocaml.doc("<p>The name of the deployment.</p>") deploymentName: option<nonEmptyString>,
   @ocaml.doc("<p>The ID of the deployment.</p>") deploymentId: option<nonEmptyString>,
   @ocaml.doc("<p>The revision number of the deployment.</p>") revisionId: option<nonEmptyString>,
   @ocaml.doc(
-    "<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of the target AWS IoT thing or thing group.</p>"
+    "<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of the target IoT thing or thing group.</p>"
   )
   targetArn: option<targetARN>,
 }
-@ocaml.doc("<p>Contains information about a AWS IoT Greengrass core device, which is an AWS IoT thing that runs the AWS IoT Greengrass
+@ocaml.doc("<p>Contains information about a Greengrass core device, which is an IoT thing that runs the IoT Greengrass
       Core software.</p>")
 type coreDevice = {
   @ocaml.doc("<p>The time at which the core device's status last updated, expressed in ISO 8601
       format.</p>")
   lastStatusUpdateTimestamp: option<timestamp_>,
-  @ocaml.doc("<p>The status of the core device. Core devices can have the following statuses:</p>
+  @ocaml.doc("<p>The status of the core device. Core devices can have the following
+      statuses:</p>
          <ul>
             <li>
                <p>
-                  <code>HEALTHY</code> – The AWS IoT Greengrass Core software and all components run on the core device without issue.</p>
+                  <code>HEALTHY</code> – The IoT Greengrass Core software and all components run on the core device without issue.</p>
             </li>
             <li>
                <p>
-                  <code>UNHEALTHY</code> – The AWS IoT Greengrass Core software or a component is in a failed state
+                  <code>UNHEALTHY</code> – The IoT Greengrass Core software or a component is in a failed state
           on the core device.</p>
             </li>
          </ul>")
   status: option<coreDeviceStatus>,
-  @ocaml.doc("<p>The name of the core device. This is also the name of the AWS IoT thing.</p>")
+  @ocaml.doc("<p>The name of the core device. This is also the name of the IoT thing.</p>")
   coreDeviceThingName: option<coreDeviceThingName>,
+}
+@ocaml.doc("<p>Contains information about an endpoint and port where client devices can connect to an
+      MQTT broker on a Greengrass core device.</p>")
+type connectivityInfo = {
+  @ocaml.doc(
+    "<p>Additional metadata to provide to client devices that connect to this core device.</p>"
+  )
+  metadata: option<string_>,
+  @ocaml.doc("<p>The port where the MQTT broker operates on the core device. This port is typically 8883,
+      which is the default port for the MQTT broker component that runs on core devices.</p>")
+  portNumber: option<portNumberInt>,
+  @ocaml.doc("<p>The IP address or DNS address where client devices can connect to an MQTT broker on the
+      Greengrass core device.</p>")
+  hostAddress: option<string_>,
+  @ocaml.doc("<p>An ID for the connectivity information.</p>") id: option<string_>,
 }
 type componentVersionRequirementMap = Js.Dict.t<nonEmptyString>
 @ocaml.doc("<p>Contains information about a component version in a list.</p>")
@@ -387,16 +429,6 @@ type componentVersionListItem = {
   @ocaml.doc("<p>The version of the component.</p>")
   componentVersion: option<componentVersionString>,
   @ocaml.doc("<p>The name of the component.</p>") componentName: option<componentNameString>,
-}
-@ocaml.doc("<p>Contains information system user and group that the AWS IoT Greengrass Core software uses to run component
-      processes on the core device. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-greengrass-core-v2.html#configure-component-user\">Configure the user and group that run components</a> in the <i>AWS IoT Greengrass V2 Developer
-        Guide</i>.</p>")
-type componentRunWith = {
-  @ocaml.doc("<p>The POSIX system user and (optional) group to use to run this component. Specify the user
-      and group separated by a colon (<code>:</code>) in the following format:
-        <code>user:group</code>. The group is optional. If you don't specify a group, the AWS IoT Greengrass Core
-      software uses the primary user for the group.</p>")
-  posixUser: option<nonEmptyString>,
 }
 @ocaml.doc(
   "<p>Contains information about a component dependency for a Lambda function component.</p>"
@@ -419,10 +451,35 @@ type componentDependencyRequirement = {
          </p>")
   dependencyType: option<componentDependencyType>,
   @ocaml.doc("<p>The component version requirement for the component dependency.</p>
-         <p>AWS IoT Greengrass V2 uses semantic version constraints. For more information, see <a href=\"https://semver.org/\">Semantic Versioning</a>.</p>")
+         <p>IoT Greengrass V2 uses semantic version constraints. For more information, see <a href=\"https://semver.org/\">Semantic Versioning</a>.</p>")
   versionRequirement: option<nonEmptyString>,
 }
 type componentConfigurationPathList = array<componentConfigurationPath>
+@ocaml.doc("<p>Contains information about a client device that is associated to a core device for cloud
+      discovery.</p>")
+type associatedClientDevice = {
+  @ocaml.doc("<p>The time that the client device was associated, expressed in ISO 8601 format.</p>")
+  associationTimestamp: option<timestamp_>,
+  @ocaml.doc("<p>The name of the IoT thing that represents the associated client device.</p>")
+  thingName: option<ioTThingName>,
+}
+@ocaml.doc("<p>Contains an error that occurs from a request to associate a client device with a core
+      device. The <a href=\"https://docs.aws.amazon.com/greengrass/v2/APIReference/API_BatchAssociateClientDeviceWithCoreDevice.html\">BatchAssociateClientDeviceWithCoreDevice</a> operation returns a list of these
+      errors.</p>")
+type associateClientDeviceWithCoreDeviceErrorEntry = {
+  @ocaml.doc("<p>A message that provides additional information about the error.</p>")
+  message: option<nonEmptyString>,
+  @ocaml.doc("<p>The error code for the request.</p>") code: option<nonEmptyString>,
+  @ocaml.doc("<p>The name of the IoT thing whose associate request failed.</p>")
+  thingName: option<ioTThingName>,
+}
+@ocaml.doc("<p>Contains a request to associate a client device with a core device. The <a href=\"https://docs.aws.amazon.com/greengrass/v2/APIReference/API_BatchAssociateClientDeviceWithCoreDevice.html\">BatchAssociateClientDeviceWithCoreDevice</a> operation consumes a list of these
+      requests.</p>")
+type associateClientDeviceWithCoreDeviceEntry = {
+  @ocaml.doc("<p>The name of the IoT thing that represents the client device to associate.</p>")
+  thingName: ioTThingName,
+}
+type connectivityInfoList = array<connectivityInfo>
 type validationExceptionFieldList = array<validationExceptionField>
 type resolvedComponentVersionsList = array<resolvedComponentVersion>
 type lambdaVolumeList = array<lambdaVolumeMount>
@@ -444,6 +501,12 @@ type ioTJobExponentialRolloutRate = {
 type ioTJobAbortCriteriaList = array<ioTJobAbortCriteria>
 type installedComponentList = array<installedComponent>
 type effectiveDeploymentsList = array<effectiveDeployment>
+type disassociateClientDeviceFromCoreDeviceErrorList = array<
+  disassociateClientDeviceFromCoreDeviceErrorEntry,
+>
+type disassociateClientDeviceFromCoreDeviceEntryList = array<
+  disassociateClientDeviceFromCoreDeviceEntry,
+>
 @ocaml.doc("<p>Contains information about policies that define how a deployment updates components and
       handles failure.</p>")
 type deploymentPolicies = {
@@ -462,29 +525,53 @@ type deploymentPolicies = {
 type deploymentList = array<deployment>
 type coreDevicesList = array<coreDevice>
 type componentVersionList = array<componentVersionListItem>
+@ocaml.doc("<p>Contains information system user and group that the IoT Greengrass Core software uses to run component
+      processes on the core device. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-greengrass-core-v2.html#configure-component-user\">Configure the user and group that run components</a> in the <i>IoT Greengrass V2 Developer
+        Guide</i>.</p>")
+type componentRunWith = {
+  @ocaml.doc("<p>The Windows user to use to run this component on Windows core devices. The user must exist
+      on each Windows core device, and its name and password must be in the LocalSystem account's
+      Credentials Manager instance.</p>
+         <p>If you omit this parameter, the IoT Greengrass Core software uses the default Windows user that you
+      configure on the Greengrass nucleus component. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-greengrass-core-v2.html#configure-component-user\">Configure the user and group that run components</a>.</p>")
+  windowsUser: option<nonEmptyString>,
+  @ocaml.doc("<p>The system resource limits to apply to this component's process on the core device. IoT Greengrass
+      currently supports this feature on only Linux core devices.</p>
+         <p>If you omit this parameter, the IoT Greengrass Core software uses the default system resource limits
+      that you configure on the Greengrass nucleus component. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-greengrass-core-v2.html#configure-component-system-resource-limits\">Configure system resource limits for components</a>.</p>")
+  systemResourceLimits: option<systemResourceLimits>,
+  @ocaml.doc("<p>The POSIX system user and, optionally, group to use to run this component on Linux core
+      devices. The user, and group if specified, must exist on each Linux core device. Specify the
+      user and group separated by a colon (<code>:</code>) in the following format:
+        <code>user:group</code>. The group is optional. If you don't specify a group, the IoT Greengrass Core
+      software uses the primary user for the group.</p>
+         <p>If you omit this parameter, the IoT Greengrass Core software uses the default system user and group that
+      you configure on the Greengrass nucleus component. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-greengrass-core-v2.html#configure-component-user\">Configure the user and group that run components</a>.</p>")
+  posixUser: option<nonEmptyString>,
+}
 @ocaml.doc("<p>Contains information about a platform that a component supports.</p>")
 type componentPlatform = {
-  @ocaml.doc("<p>A dictionary of attributes for the platform. The AWS IoT Greengrass Core software defines the
+  @ocaml.doc("<p>A dictionary of attributes for the platform. The IoT Greengrass Core software defines the
         <code>os</code> and <code>platform</code> by default. You can specify additional platform
-      attributes for a core device when you deploy the AWS IoT Greengrass nucleus component. For more information,
-      see the <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html\">AWS IoT Greengrass nucleus
-        component</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p>")
+      attributes for a core device when you deploy the Greengrass nucleus component. For more information,
+      see the <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html\">Greengrass nucleus
+        component</a> in the <i>IoT Greengrass V2 Developer Guide</i>.</p>")
   attributes: option<platformAttributesMap>,
   @ocaml.doc("<p>The friendly name of the platform. This name helps you identify the platform.</p>
-         <p>If you omit this parameter, AWS IoT Greengrass creates a friendly name from the <code>os</code> and
+         <p>If you omit this parameter, IoT Greengrass creates a friendly name from the <code>os</code> and
         <code>architecture</code> of the platform.</p>")
   name: option<nonEmptyString>,
 }
 type componentDependencyMap = Js.Dict.t<componentDependencyRequirement>
 @ocaml.doc("<p>Contains information about a deployment's update to a component's configuration on
       Greengrass core devices. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/update-component-configurations.html\">Update component
-        configurations</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p>")
+        configurations</a> in the <i>IoT Greengrass V2 Developer Guide</i>.</p>")
 type componentConfigurationUpdate = {
   @ocaml.doc("<p>The list of configuration nodes to reset to default values on target devices. Use JSON
       pointers to specify each node to reset. JSON pointers start with a forward slash
       (<code>/</code>) and use forward slashes to separate the key for each level in the object.
       For more information, see the <a href=\"https://tools.ietf.org/html/rfc6901\">JSON pointer
-        specification</a> and <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/update-component-configurations.html#reset-configuration-update\">Reset configuration updates</a> in the <i>AWS IoT Greengrass V2 Developer
+        specification</a> and <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/update-component-configurations.html#reset-configuration-update\">Reset configuration updates</a> in the <i>IoT Greengrass V2 Developer
             Guide</i>.</p>")
   reset: option<componentConfigurationPathList>,
   @ocaml.doc("<p>A serialized JSON string that contains the configuration object to merge to target
@@ -492,25 +579,25 @@ type componentConfigurationUpdate = {
       configuration. If this is the first time a component deploys on a device, the core device
       merges this configuration with the component's default configuration. This means that the core
       device keeps it's existing configuration for keys and values that you don't specify in this
-      object. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/update-component-configurations.html#merge-configuration-update\">Merge configuration updates</a> in the <i>AWS IoT Greengrass V2 Developer
+      object. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/update-component-configurations.html#merge-configuration-update\">Merge configuration updates</a> in the <i>IoT Greengrass V2 Developer
           Guide</i>.</p>")
   merge: option<componentConfigurationString>,
 }
-@ocaml.doc("<p>Contains information about a component that is a candidate to deploy to a AWS IoT Greengrass core
+@ocaml.doc("<p>Contains information about a component that is a candidate to deploy to a Greengrass core
       device.</p>")
 type componentCandidate = {
-  @ocaml.doc("<p>The version requirements for the component's dependencies. AWS IoT Greengrass core devices get the
+  @ocaml.doc("<p>The version requirements for the component's dependencies. Greengrass core devices get the
       version requirements from component recipes.</p>
-         <p>AWS IoT Greengrass V2 uses semantic version constraints. For more information, see <a href=\"https://semver.org/\">Semantic Versioning</a>.</p>")
+         <p>IoT Greengrass V2 uses semantic version constraints. For more information, see <a href=\"https://semver.org/\">Semantic Versioning</a>.</p>")
   versionRequirements: option<componentVersionRequirementMap>,
   @ocaml.doc("<p>The version of the component.</p>")
   componentVersion: option<componentVersionString>,
   @ocaml.doc("<p>The name of the component.</p>") componentName: option<componentNameString>,
 }
-@ocaml.doc("<p>Contains the status of a component in the AWS IoT Greengrass service.</p>")
+@ocaml.doc("<p>Contains the status of a component in the IoT Greengrass service.</p>")
 type cloudComponentStatus = {
   @ocaml.doc("<p>A dictionary of errors that communicate why the component is in an error state. For
-      example, if AWS IoT Greengrass can't access an artifact for the component, then <code>errors</code> contains
+      example, if IoT Greengrass can't access an artifact for the component, then <code>errors</code> contains
       the artifact's URI as a key, and the error message as the value for that key.</p>")
   errors: option<stringMap>,
   @ocaml.doc(
@@ -519,7 +606,12 @@ type cloudComponentStatus = {
   message: option<nonEmptyString>,
   @ocaml.doc("<p>The state of the component.</p>") componentState: option<cloudComponentState>,
 }
-@ocaml.doc("<p>Contains information about a container in which AWS Lambda functions run on AWS IoT Greengrass core
+type associatedClientDeviceList = array<associatedClientDevice>
+type associateClientDeviceWithCoreDeviceErrorList = array<
+  associateClientDeviceWithCoreDeviceErrorEntry,
+>
+type associateClientDeviceWithCoreDeviceEntryList = array<associateClientDeviceWithCoreDeviceEntry>
+@ocaml.doc("<p>Contains information about a container in which Lambda functions run on Greengrass core
       devices.</p>")
 type lambdaContainerParams = {
   @ocaml.doc("<p>The list of system devices that the container can access.</p>")
@@ -556,35 +648,35 @@ type ioTJobAbortConfig = {
 type componentPlatformList = array<componentPlatform>
 @ocaml.doc("<p>Contains information about a component to deploy.</p>")
 type componentDeploymentSpecification = {
-  @ocaml.doc("<p>The system user and group that the AWS IoT Greengrass Core software uses to run component processes on the
-      core device. If you omit this parameter, the AWS IoT Greengrass Core software uses the system user and group
-      that you configure for the core device. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-greengrass-core-v2.html#configure-component-user\">Configure the user and group that run components</a> in the <i>AWS IoT Greengrass V2 Developer
+  @ocaml.doc("<p>The system user and group that the IoT Greengrass Core software uses to run component processes on the
+      core device. If you omit this parameter, the IoT Greengrass Core software uses the system user and group
+      that you configure for the core device. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-greengrass-core-v2.html#configure-component-user\">Configure the user and group that run components</a> in the <i>IoT Greengrass V2 Developer
         Guide</i>.</p>")
   runWith: option<componentRunWith>,
   @ocaml.doc("<p>The configuration updates to deploy for the component. You can define
       <i>reset</i> updates and <i>merge</i> updates. A reset updates
       the keys that you specify to the default configuration for the component. A merge updates the
-      core device's component configuration with the keys and values that you specify. The AWS IoT Greengrass Core
+      core device's component configuration with the keys and values that you specify. The IoT Greengrass Core
       software applies reset updates before it applies merge updates. For more information, see
       <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/update-component-configurations.html\">Update component
-        configurations</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p>")
+        configurations</a> in the <i>IoT Greengrass V2 Developer Guide</i>.</p>")
   configurationUpdate: option<componentConfigurationUpdate>,
   @ocaml.doc("<p>The version of the component.</p>")
   componentVersion: option<componentVersionString>,
 }
 type componentCandidateList = array<componentCandidate>
-@ocaml.doc("<p>Contains parameters for a Linux process that contains an AWS Lambda function.</p>")
+@ocaml.doc("<p>Contains parameters for a Linux process that contains an Lambda function.</p>")
 type lambdaLinuxProcessParams = {
   @ocaml.doc("<p>The parameters for the container in which the Lambda function runs.</p>")
   containerParams: option<lambdaContainerParams>,
   @ocaml.doc("<p>The isolation mode for the process that contains the Lambda function. The process can run
-      in an isolated runtime environment inside the AWS IoT Greengrass container, or as a regular process outside
+      in an isolated runtime environment inside the IoT Greengrass container, or as a regular process outside
       any container.</p>
          <p>Default: <code>GreengrassContainer</code>
          </p>")
   isolationMode: option<lambdaIsolationMode>,
 }
-@ocaml.doc("<p>Contains information about an AWS IoT job configuration.</p>")
+@ocaml.doc("<p>Contains information about an IoT job configuration.</p>")
 type deploymentIoTJobConfiguration = {
   @ocaml.doc("<p>The timeout configuration for the job. This configuration defines the amount of time each
       device has to complete the job.</p>")
@@ -613,7 +705,7 @@ type componentLatestVersion = {
   arn: option<componentVersionARN>,
 }
 type componentDeploymentSpecifications = Js.Dict.t<componentDeploymentSpecification>
-@ocaml.doc("<p>Contains parameters for a Lambda function that runs on AWS IoT Greengrass.</p>")
+@ocaml.doc("<p>Contains parameters for a Lambda function that runs on IoT Greengrass.</p>")
 type lambdaExecutionParameters = {
   @ocaml.doc("<p>The parameters for the Linux process that contains the Lambda function.</p>")
   linuxProcessParams: option<lambdaLinuxProcessParams>,
@@ -631,12 +723,12 @@ type lambdaExecutionParameters = {
          <ul>
             <li>
                <p>A pinned Lambda function starts
-          when AWS IoT Greengrass starts and keeps running in its own container.</p>
+          when IoT Greengrass starts and keeps running in its own container.</p>
             </li>
             <li>
                <p>A non-pinned Lambda function starts only when it receives a work item and exists after
           it idles for <code>maxIdleTimeInSeconds</code>. If the function has multiple work items,
-          the AWS IoT Greengrass Core software creates multiple instances of the function.</p>
+          the IoT Greengrass Core software creates multiple instances of the function.</p>
             </li>
          </ul>
          <p>Default: <code>true</code>
@@ -649,18 +741,18 @@ type lambdaExecutionParameters = {
       item.</p>")
   timeoutInSeconds: option<optionalInteger>,
   @ocaml.doc("<p>The maximum amount of time in seconds that a non-pinned Lambda function can idle before the
-      AWS IoT Greengrass Core software stops its process.</p>")
+      IoT Greengrass Core software stops its process.</p>")
   maxIdleTimeInSeconds: option<optionalInteger>,
   @ocaml.doc("<p>The maximum number of instances that a non-pinned Lambda function can run at the same
       time.</p>")
   maxInstancesCount: option<optionalInteger>,
-  @ocaml.doc("<p>The maximum size of the message queue for the Lambda function component. The AWS IoT Greengrass core
+  @ocaml.doc("<p>The maximum size of the message queue for the Lambda function component. The IoT Greengrass core
       stores messages in a FIFO (first-in-first-out) queue until it can run the Lambda function to
       consume each message.</p>")
   maxQueueSize: option<optionalInteger>,
   @ocaml.doc("<p>The list of event sources to which to subscribe to receive work messages. The Lambda
       function runs when it receives a message from an event source. You can subscribe this function
-      to local publish/subscribe messages and AWS IoT Core MQTT messages.</p>")
+      to local publish/subscribe messages and Amazon Web Services IoT Core MQTT messages.</p>")
   eventSources: option<lambdaEventSourceList>,
 }
 @ocaml.doc("<p>Contains information about a component.</p>")
@@ -673,11 +765,9 @@ type component = {
   )
   arn: option<componentARN>,
 }
-@ocaml.doc(
-  "<p>Contains information about an AWS Lambda function to import to create a component.</p>"
-)
+@ocaml.doc("<p>Contains information about an Lambda function to import to create a component.</p>")
 type lambdaFunctionRecipeSource = {
-  @ocaml.doc("<p>The system and runtime parameters for the Lambda function as it runs on the AWS IoT Greengrass core
+  @ocaml.doc("<p>The system and runtime parameters for the Lambda function as it runs on the Greengrass core
       device.</p>")
   componentLambdaParameters: option<lambdaExecutionParameters>,
   @ocaml.doc("<p>The component versions on which this Lambda function component depends.</p>")
@@ -696,17 +786,69 @@ type lambdaFunctionRecipeSource = {
   lambdaArn: lambdaFunctionARNWithVersionNumber,
 }
 type componentList = array<component>
-@ocaml.doc("<p>AWS IoT Greengrass brings local compute, messaging, data management, sync, and ML inference capabilities
+@ocaml.doc("<p>IoT Greengrass brings local compute, messaging, data management, sync, and ML inference capabilities
       to edge devices. This enables devices to collect and analyze data closer to the source of
       information, react autonomously to local events, and communicate securely with each other on
-      local networks. Local devices can also communicate securely with AWS IoT Core and export IoT data
-      to the AWS Cloud. AWS IoT Greengrass developers can use AWS Lambda functions and components to create and
+      local networks. Local devices can also communicate securely with Amazon Web Services IoT Core and export IoT data
+      to the Amazon Web Services Cloud. IoT Greengrass developers can use Lambda functions and components to create and
       deploy applications to fleets of edge devices for local operation.</p>
-         <p>AWS IoT Greengrass Version 2 provides a new major version of the AWS IoT Greengrass Core software, new APIs, and a new console.
-      Use this API reference to learn how to use the AWS IoT Greengrass V2 API operations to manage components,
+         <p>IoT Greengrass Version 2 provides a new major version of the IoT Greengrass Core software, new APIs, and a new console.
+      Use this API reference to learn how to use the IoT Greengrass V2 API operations to manage components,
       manage deployments, and core devices.</p>
-         <p>For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/what-is-iot-greengrass.html\">What is AWS IoT Greengrass?</a> in
-      the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p>")
+         <p>For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/what-is-iot-greengrass.html\">What is IoT Greengrass?</a> in
+      the <i>IoT Greengrass V2 Developer Guide</i>.</p>")
+module GetServiceRoleForAccount = {
+  type t
+  type request = {.}
+  type response = {
+    @ocaml.doc("<p>The ARN of the service role that is associated with IoT Greengrass for your Amazon Web Services account in this
+      Amazon Web Services Region.</p>")
+    roleArn: option<string_>,
+    @ocaml.doc("<p>The time when the service role was associated with IoT Greengrass for your Amazon Web Services account in this
+      Amazon Web Services Region.</p>")
+    associatedAt: option<string_>,
+  }
+  @module("@aws-sdk/client-greengrass") @new
+  external new: request => t = "GetServiceRoleForAccountCommand"
+  let make = () => new(Js.Obj.empty())
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module DisassociateServiceRoleFromAccount = {
+  type t
+  type request = {.}
+  type response = {
+    @ocaml.doc("<p>The time when the service role was disassociated from IoT Greengrass for your Amazon Web Services account in this
+      Amazon Web Services Region.</p>")
+    disassociatedAt: option<string_>,
+  }
+  @module("@aws-sdk/client-greengrass") @new
+  external new: request => t = "DisassociateServiceRoleFromAccountCommand"
+  let make = () => new(Js.Obj.empty())
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module UpdateConnectivityInfo = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The connectivity information for the core device.</p>")
+    connectivityInfo: connectivityInfoList,
+    @ocaml.doc("<p>The name of the core device. This is also the name of the IoT thing.</p>")
+    thingName: coreDeviceThingName,
+  }
+  type response = {
+    @ocaml.doc("<p>A message about the connectivity information update request.</p>")
+    message: option<string_>,
+    @ocaml.doc("<p>The new version of the connectivity information for the core device.</p>")
+    version: option<string_>,
+  }
+  @module("@aws-sdk/client-greengrass") @new
+  external new: request => t = "UpdateConnectivityInfoCommand"
+  let make = (~connectivityInfo, ~thingName, ()) =>
+    new({connectivityInfo: connectivityInfo, thingName: thingName})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module UntagResource = {
   type t
   type request = {
@@ -716,7 +858,7 @@ module UntagResource = {
     )
     resourceArn: genericV2ARN,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-greengrass") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -727,14 +869,14 @@ module TagResource = {
   type request = {
     @ocaml.doc("<p>A list of key-value pairs that contain metadata for the resource. For more
       information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html\">Tag your
-        resources</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p>")
+        resources</a> in the <i>IoT Greengrass V2 Developer Guide</i>.</p>")
     tags: tagMap,
     @ocaml.doc(
       "<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of the resource to tag.</p>"
     )
     resourceArn: genericV2ARN,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-greengrass") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -751,7 +893,7 @@ module ListTagsForResource = {
   type response = {
     @ocaml.doc("<p>A list of key-value pairs that contain metadata for the resource. For more
       information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html\">Tag your
-        resources</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p>")
+        resources</a> in the <i>IoT Greengrass V2 Developer Guide</i>.</p>")
     tags: option<tagMap>,
   }
   @module("@aws-sdk/client-greengrass") @new
@@ -767,7 +909,7 @@ module ListInstalledComponents = {
     nextToken: option<nextTokenString>,
     @ocaml.doc("<p>The maximum number of results to be returned per paginated request.</p>")
     maxResults: option<defaultMaxResults>,
-    @ocaml.doc("<p>The name of the core device. This is also the name of the AWS IoT thing.</p>")
+    @ocaml.doc("<p>The name of the core device. This is also the name of the IoT thing.</p>")
     coreDeviceThingName: coreDeviceThingName,
   }
   type response = {
@@ -792,7 +934,7 @@ module ListEffectiveDeployments = {
     nextToken: option<nextTokenString>,
     @ocaml.doc("<p>The maximum number of results to be returned per paginated request.</p>")
     maxResults: option<defaultMaxResults>,
-    @ocaml.doc("<p>The name of the core device. This is also the name of the AWS IoT thing.</p>")
+    @ocaml.doc("<p>The name of the core device. This is also the name of the IoT thing.</p>")
     coreDeviceThingName: coreDeviceThingName,
   }
   type response = {
@@ -833,7 +975,7 @@ module ListDeployments = {
          </p>")
     historyFilter: option<deploymentHistoryFilter>,
     @ocaml.doc(
-      "<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of the target AWS IoT thing or thing group.</p>"
+      "<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of the target IoT thing or thing group.</p>"
     )
     targetArn: option<targetARN>,
   }
@@ -868,16 +1010,16 @@ module ListCoreDevices = {
          <ul>
             <li>
                <p>
-                  <code>HEALTHY</code> – The AWS IoT Greengrass Core software and all components run on the core device without issue.</p>
+                  <code>HEALTHY</code> – The IoT Greengrass Core software and all components run on the core device without issue.</p>
             </li>
             <li>
                <p>
-                  <code>UNHEALTHY</code> – The AWS IoT Greengrass Core software or a component is in a failed state
+                  <code>UNHEALTHY</code> – The IoT Greengrass Core software or a component is in a failed state
           on the core device.</p>
             </li>
          </ul>")
     status: option<coreDeviceStatus>,
-    @ocaml.doc("<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of the AWS IoT thing group by which to filter. If you specify this parameter, the
+    @ocaml.doc("<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of the IoT thing group by which to filter. If you specify this parameter, the
       list includes only core devices that are members of this thing group.</p>")
     thingGroupArn: option<thingGroupARN>,
   }
@@ -927,16 +1069,43 @@ module ListComponentVersions = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module ListClientDevicesAssociatedWithCoreDevice = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The token to be used for the next set of paginated results.</p>")
+    nextToken: option<nextTokenString>,
+    @ocaml.doc("<p>The maximum number of results to be returned per paginated request.</p>")
+    maxResults: option<defaultMaxResults>,
+    @ocaml.doc("<p>The name of the core device. This is also the name of the IoT thing.</p>")
+    coreDeviceThingName: ioTThingName,
+  }
+  type response = {
+    @ocaml.doc(
+      "<p>The token for the next set of results, or null if there are no additional results.</p>"
+    )
+    nextToken: option<nextTokenString>,
+    @ocaml.doc(
+      "<p>A list that describes the client devices that are associated with the core device.</p>"
+    )
+    associatedClientDevices: option<associatedClientDeviceList>,
+  }
+  @module("@aws-sdk/client-greengrass") @new
+  external new: request => t = "ListClientDevicesAssociatedWithCoreDeviceCommand"
+  let make = (~coreDeviceThingName, ~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults, coreDeviceThingName: coreDeviceThingName})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module GetCoreDevice = {
   type t
   type request = {
-    @ocaml.doc("<p>The name of the core device. This is also the name of the AWS IoT thing.</p>")
+    @ocaml.doc("<p>The name of the core device. This is also the name of the IoT thing.</p>")
     coreDeviceThingName: coreDeviceThingName,
   }
   type response = {
     @ocaml.doc("<p>A list of key-value pairs that contain metadata for the resource. For more
       information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html\">Tag your
-        resources</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p>")
+        resources</a> in the <i>IoT Greengrass V2 Developer Guide</i>.</p>")
     tags: option<tagMap>,
     @ocaml.doc("<p>The time at which the core device's status last updated, expressed in ISO 8601
       format.</p>")
@@ -945,11 +1114,11 @@ module GetCoreDevice = {
          <ul>
             <li>
                <p>
-                  <code>HEALTHY</code> – The AWS IoT Greengrass Core software and all components run on the core device without issue.</p>
+                  <code>HEALTHY</code> – The IoT Greengrass Core software and all components run on the core device without issue.</p>
             </li>
             <li>
                <p>
-                  <code>UNHEALTHY</code> – The AWS IoT Greengrass Core software or a component is in a failed state
+                  <code>UNHEALTHY</code> – The IoT Greengrass Core software or a component is in a failed state
           on the core device.</p>
             </li>
          </ul>")
@@ -958,16 +1127,34 @@ module GetCoreDevice = {
     architecture: option<coreDeviceArchitectureString>,
     @ocaml.doc("<p>The operating system platform that the core device runs.</p>")
     platform: option<coreDevicePlatformString>,
-    @ocaml.doc("<p>The version of the AWS IoT Greengrass Core software that the core device runs. This version is equivalent to
-      the version of the AWS IoT Greengrass nucleus component that runs on the core device. For more information,
-      see the <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html\">AWS IoT Greengrass nucleus
-        component</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p>")
+    @ocaml.doc("<p>The version of the IoT Greengrass Core software that the core device runs. This version is equivalent to
+      the version of the Greengrass nucleus component that runs on the core device. For more information,
+      see the <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html\">Greengrass nucleus
+        component</a> in the <i>IoT Greengrass V2 Developer Guide</i>.</p>")
     coreVersion: option<ggcversion>,
-    @ocaml.doc("<p>The name of the core device. This is also the name of the AWS IoT thing.</p>")
+    @ocaml.doc("<p>The name of the core device. This is also the name of the IoT thing.</p>")
     coreDeviceThingName: option<coreDeviceThingName>,
   }
   @module("@aws-sdk/client-greengrass") @new external new: request => t = "GetCoreDeviceCommand"
   let make = (~coreDeviceThingName, ()) => new({coreDeviceThingName: coreDeviceThingName})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module GetConnectivityInfo = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The name of the core device. This is also the name of the IoT thing.</p>")
+    thingName: coreDeviceThingName,
+  }
+  type response = {
+    @ocaml.doc("<p>A message about the connectivity information request.</p>")
+    message: option<string_>,
+    @ocaml.doc("<p>The connectivity information for the core device.</p>")
+    connectivityInfo: option<connectivityInfoList>,
+  }
+  @module("@aws-sdk/client-greengrass") @new
+  external new: request => t = "GetConnectivityInfoCommand"
+  let make = (~thingName, ()) => new({thingName: thingName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1005,7 +1192,7 @@ module GetComponent = {
   type response = {
     @ocaml.doc("<p>A list of key-value pairs that contain metadata for the resource. For more
       information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html\">Tag your
-        resources</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p>")
+        resources</a> in the <i>IoT Greengrass V2 Developer Guide</i>.</p>")
     tags: option<tagMap>,
     @ocaml.doc("<p>The recipe of the component version.</p>") recipe: recipeBlob,
     @ocaml.doc("<p>The format of the recipe.</p>") recipeOutputFormat: recipeOutputFormat,
@@ -1019,10 +1206,10 @@ module GetComponent = {
 module DeleteCoreDevice = {
   type t
   type request = {
-    @ocaml.doc("<p>The name of the core device. This is also the name of the AWS IoT thing.</p>")
+    @ocaml.doc("<p>The name of the core device. This is also the name of the IoT thing.</p>")
     coreDeviceThingName: coreDeviceThingName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-greengrass") @new external new: request => t = "DeleteCoreDeviceCommand"
   let make = (~coreDeviceThingName, ()) => new({coreDeviceThingName: coreDeviceThingName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1036,7 +1223,7 @@ module DeleteComponent = {
     )
     arn: componentVersionARN,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-greengrass") @new external new: request => t = "DeleteComponentCommand"
   let make = (~arn, ()) => new({arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1051,6 +1238,64 @@ module CancelDeployment = {
   }
   @module("@aws-sdk/client-greengrass") @new external new: request => t = "CancelDeploymentCommand"
   let make = (~deploymentId, ()) => new({deploymentId: deploymentId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module BatchDisassociateClientDeviceFromCoreDevice = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The name of the core device. This is also the name of the IoT thing.</p>")
+    coreDeviceThingName: ioTThingName,
+    @ocaml.doc("<p>The list of client devices to disassociate.</p>")
+    entries: option<disassociateClientDeviceFromCoreDeviceEntryList>,
+  }
+  type response = {
+    @ocaml.doc("<p>The list of any errors for the entries in the request. Each error entry contains the name
+      of the IoT thing that failed to disassociate.</p>")
+    errorEntries: option<disassociateClientDeviceFromCoreDeviceErrorList>,
+  }
+  @module("@aws-sdk/client-greengrass") @new
+  external new: request => t = "BatchDisassociateClientDeviceFromCoreDeviceCommand"
+  let make = (~coreDeviceThingName, ~entries=?, ()) =>
+    new({coreDeviceThingName: coreDeviceThingName, entries: entries})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module BatchAssociateClientDeviceWithCoreDevice = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The name of the core device. This is also the name of the IoT thing.</p>")
+    coreDeviceThingName: ioTThingName,
+    @ocaml.doc("<p>The list of client devices to associate.</p>")
+    entries: option<associateClientDeviceWithCoreDeviceEntryList>,
+  }
+  type response = {
+    @ocaml.doc("<p>The list of any errors for the entries in the request. Each error entry contains the name
+      of the IoT thing that failed to associate.</p>")
+    errorEntries: option<associateClientDeviceWithCoreDeviceErrorList>,
+  }
+  @module("@aws-sdk/client-greengrass") @new
+  external new: request => t = "BatchAssociateClientDeviceWithCoreDeviceCommand"
+  let make = (~coreDeviceThingName, ~entries=?, ()) =>
+    new({coreDeviceThingName: coreDeviceThingName, entries: entries})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module AssociateServiceRoleToAccount = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the service role to associate with IoT Greengrass for your
+      Amazon Web Services account in this Amazon Web Services Region.</p>")
+    roleArn: string_,
+  }
+  type response = {
+    @ocaml.doc("<p>The time when the service role was associated with IoT Greengrass for your Amazon Web Services account in this
+      Amazon Web Services Region.</p>")
+    associatedAt: option<string_>,
+  }
+  @module("@aws-sdk/client-greengrass") @new
+  external new: request => t = "AssociateServiceRoleToAccountCommand"
+  let make = (~roleArn, ()) => new({roleArn: roleArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1085,11 +1330,11 @@ module DescribeComponent = {
   type response = {
     @ocaml.doc("<p>A list of key-value pairs that contain metadata for the resource. For more
       information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html\">Tag your
-        resources</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p>")
+        resources</a> in the <i>IoT Greengrass V2 Developer Guide</i>.</p>")
     tags: option<tagMap>,
     @ocaml.doc("<p>The platforms that the component version supports.</p>")
     platforms: option<componentPlatformList>,
-    @ocaml.doc("<p>The status of the component version in AWS IoT Greengrass V2. This status
+    @ocaml.doc("<p>The status of the component version in IoT Greengrass V2. This status
       is different from the status of the component on a core device.</p>")
     status: option<cloudComponentStatus>,
     @ocaml.doc("<p>The description of the component version.</p>")
@@ -1116,7 +1361,7 @@ module GetDeployment = {
   type response = {
     @ocaml.doc("<p>A list of key-value pairs that contain metadata for the resource. For more
       information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html\">Tag your
-        resources</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p>")
+        resources</a> in the <i>IoT Greengrass V2 Developer Guide</i>.</p>")
     tags: option<tagMap>,
     @ocaml.doc("<p>Whether or not the deployment is the latest revision for its target.</p>")
     isLatestForTarget: option<isLatestForTarget>,
@@ -1132,22 +1377,17 @@ module GetDeployment = {
         and each key's value is the version and configuration to deploy for that component.</p>")
     components: option<componentDeploymentSpecifications>,
     @ocaml.doc(
-      "<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of the AWS IoT job that applies the deployment to target devices.</p>"
+      "<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of the IoT job that applies the deployment to target devices.</p>"
     )
     iotJobArn: option<ioTJobARN>,
-    @ocaml.doc("<p>The ID of the AWS IoT job that applies the deployment to target devices.</p>")
+    @ocaml.doc("<p>The ID of the IoT job that applies the deployment to target devices.</p>")
     iotJobId: option<nullableString>,
     @ocaml.doc("<p>The status of the deployment.</p>") deploymentStatus: option<deploymentStatus>,
-    @ocaml.doc("<p>The name of the deployment.</p>
-         <p>You can create deployments without names. If you create a deployment without a name, the
-      AWS IoT Greengrass V2 console shows the deployment name as <code><targetType>:<targetName></code>,
-      where <code>targetType</code> and <code>targetName</code> are the type and name of the
-      deployment target.</p>")
-    deploymentName: option<nullableString>,
+    @ocaml.doc("<p>The name of the deployment.</p>") deploymentName: option<nullableString>,
     @ocaml.doc("<p>The ID of the deployment.</p>") deploymentId: option<nonEmptyString>,
     @ocaml.doc("<p>The revision number of the deployment.</p>") revisionId: option<nonEmptyString>,
     @ocaml.doc(
-      "<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of the target AWS IoT thing or thing group.</p>"
+      "<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of the target IoT thing or thing group.</p>"
     )
     targetArn: option<targetARN>,
   }
@@ -1159,9 +1399,15 @@ module GetDeployment = {
 module CreateDeployment = {
   type t
   type request = {
+    @ocaml.doc("<p>A unique, case-sensitive identifier that you can provide to ensure that the request is idempotent. 
+    Idempotency means that the request is successfully processed only once, even if you send the request multiple times. 
+    When a request succeeds, and you specify the same client token for subsequent successful requests, the IoT Greengrass V2 service 
+    returns the successful response that it caches from the previous request. IoT Greengrass V2 caches successful responses for 
+    idempotent requests for up to 8 hours.</p>")
+    clientToken: option<clientTokenString>,
     @ocaml.doc("<p>A list of key-value pairs that contain metadata for the resource. For more
       information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html\">Tag your
-        resources</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p>")
+        resources</a> in the <i>IoT Greengrass V2 Developer Guide</i>.</p>")
     tags: option<tagMap>,
     @ocaml.doc("<p>The deployment policies for the deployment. These policies define how the deployment
       updates components and handles failure.</p>")
@@ -1172,29 +1418,25 @@ module CreateDeployment = {
     @ocaml.doc("<p>The components to deploy. This is a dictionary, where each key is the name of a component,
         and each key's value is the version and configuration to deploy for that component.</p>")
     components: option<componentDeploymentSpecifications>,
-    @ocaml.doc("<p>The name of the deployment.</p>
-         <p>You can create deployments without names. If you create a deployment without a name, the
-      AWS IoT Greengrass V2 console shows the deployment name as <code><targetType>:<targetName></code>,
-      where <code>targetType</code> and <code>targetName</code> are the type and name of the
-      deployment target.</p>")
-    deploymentName: option<nonEmptyString>,
+    @ocaml.doc("<p>The name of the deployment.</p>") deploymentName: option<nonEmptyString>,
     @ocaml.doc(
-      "<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of the target AWS IoT thing or thing group.</p>"
+      "<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of the target IoT thing or thing group.</p>"
     )
     targetArn: targetARN,
   }
   type response = {
     @ocaml.doc(
-      "<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of the AWS IoT job that applies the deployment to target devices.</p>"
+      "<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of the IoT job that applies the deployment to target devices.</p>"
     )
     iotJobArn: option<ioTJobARN>,
-    @ocaml.doc("<p>The ID of the AWS IoT job that applies the deployment to target devices.</p>")
+    @ocaml.doc("<p>The ID of the IoT job that applies the deployment to target devices.</p>")
     iotJobId: option<nonEmptyString>,
     @ocaml.doc("<p>The ID of the deployment.</p>") deploymentId: option<nonEmptyString>,
   }
   @module("@aws-sdk/client-greengrass") @new external new: request => t = "CreateDeploymentCommand"
   let make = (
     ~targetArn,
+    ~clientToken=?,
     ~tags=?,
     ~deploymentPolicies=?,
     ~iotJobConfiguration=?,
@@ -1203,6 +1445,7 @@ module CreateDeployment = {
     (),
   ) =>
     new({
+      clientToken: clientToken,
       tags: tags,
       deploymentPolicies: deploymentPolicies,
       iotJobConfiguration: iotJobConfiguration,
@@ -1241,9 +1484,15 @@ module ListComponents = {
 module CreateComponentVersion = {
   type t
   type request = {
+    @ocaml.doc("<p>A unique, case-sensitive identifier that you can provide to ensure that the request is idempotent. 
+    Idempotency means that the request is successfully processed only once, even if you send the request multiple times. 
+    When a request succeeds, and you specify the same client token for subsequent successful requests, the IoT Greengrass V2 service 
+    returns the successful response that it caches from the previous request. IoT Greengrass V2 caches successful responses for 
+    idempotent requests for up to 8 hours.</p>")
+    clientToken: option<clientTokenString>,
     @ocaml.doc("<p>A list of key-value pairs that contain metadata for the resource. For more
       information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html\">Tag your
-        resources</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p>")
+        resources</a> in the <i>IoT Greengrass V2 Developer Guide</i>.</p>")
     tags: option<tagMap>,
     @ocaml.doc("<p>The parameters to create a component from a Lambda function.</p>
          <p>You must specify either <code>inlineRecipe</code> or <code>lambdaFunction</code>.</p>")
@@ -1254,7 +1503,7 @@ module CreateComponentVersion = {
     inlineRecipe: option<recipeBlob>,
   }
   type response = {
-    @ocaml.doc("<p>The status of the component version in AWS IoT Greengrass V2. This status
+    @ocaml.doc("<p>The status of the component version in IoT Greengrass V2. This status
       is different from the status of the component on a core device.</p>")
     status: cloudComponentStatus,
     @ocaml.doc("<p>The time at which the component was created, expressed in ISO 8601 format.</p>")
@@ -1268,7 +1517,12 @@ module CreateComponentVersion = {
   }
   @module("@aws-sdk/client-greengrass") @new
   external new: request => t = "CreateComponentVersionCommand"
-  let make = (~tags=?, ~lambdaFunction=?, ~inlineRecipe=?, ()) =>
-    new({tags: tags, lambdaFunction: lambdaFunction, inlineRecipe: inlineRecipe})
+  let make = (~clientToken=?, ~tags=?, ~lambdaFunction=?, ~inlineRecipe=?, ()) =>
+    new({
+      clientToken: clientToken,
+      tags: tags,
+      lambdaFunction: lambdaFunction,
+      inlineRecipe: inlineRecipe,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

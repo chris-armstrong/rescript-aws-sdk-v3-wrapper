@@ -21,7 +21,7 @@ type __integer = int
 type __doubleMin0Max100 = float
 type __boolean = bool
 type maxResults = int
-type attributes = unit
+type attributes = {.}
 type __mapOf__string = Js.Dict.t<__string>
 type __listOf__string = array<__string>
 type deviceMethod = {
@@ -83,7 +83,7 @@ module UpdateDeviceState = {
     enabled: option<__boolean>,
     @ocaml.doc("<p>The unique identifier of the device.</p>") @as("DeviceId") deviceId: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot1click") @new external new: request => t = "UpdateDeviceStateCommand"
   let make = (~deviceId, ~enabled=?, ()) => new({enabled: enabled, deviceId: deviceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -146,7 +146,7 @@ module UntagResource = {
     tagKeys: __listOf__string,
     @ocaml.doc("<p>The ARN of the resource.</p>") @as("ResourceArn") resourceArn: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot1click") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -164,7 +164,7 @@ module TagResource = {
     tags: __mapOf__string,
     @ocaml.doc("<p>The ARN of the resource.</p>") @as("ResourceArn") resourceArn: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot1click") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"

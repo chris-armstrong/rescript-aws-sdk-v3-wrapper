@@ -25,9 +25,11 @@ type vpcregion = [
   | @as("ap-northeast-2") #Ap_Northeast_2
   | @as("ap-northeast-1") #Ap_Northeast_1
   | @as("ap-south-1") #Ap_South_1
+  | @as("ap-southeast-3") #Ap_Southeast_3
   | @as("ap-southeast-2") #Ap_Southeast_2
   | @as("ap-southeast-1") #Ap_Southeast_1
   | @as("us-isob-east-1") #Us_Isob_East_1
+  | @as("us-iso-west-1") #Us_Iso_West_1
   | @as("us-iso-east-1") #Us_Iso_East_1
   | @as("us-gov-east-1") #Us_Gov_East_1
   | @as("us-gov-west-1") #Us_Gov_West_1
@@ -79,6 +81,7 @@ type signingKeyInteger = int
 type servicePrincipal = string
 type serveSignature = string
 type searchString = string
+type routingControlArn = string
 type reusableDelegationSetLimitType = [
   | @as("MAX_ZONES_BY_REUSABLE_DELEGATION_SET") #MAX_ZONES_BY_REUSABLE_DELEGATION_SET
 ]
@@ -97,6 +100,7 @@ type resourceRecordSetRegion = [
   | @as("ap-northeast-3") #Ap_Northeast_3
   | @as("ap-northeast-2") #Ap_Northeast_2
   | @as("ap-northeast-1") #Ap_Northeast_1
+  | @as("ap-southeast-3") #Ap_Southeast_3
   | @as("ap-southeast-2") #Ap_Southeast_2
   | @as("ap-southeast-1") #Ap_Southeast_1
   | @as("eu-central-1") #Eu_Central_1
@@ -135,8 +139,8 @@ type requestInterval = int
 				the appropriate resource record set based on the request.</p>
             </li>
             <li>
-               <p>For alias resource record sets that refer to AWS resources other than another resource record set, 
-				the <code>RecordDataEntry</code> element contains an IP address or a domain name for the AWS resource, 
+               <p>For alias resource record sets that refer to Amazon Web Services resources other than another resource record set, 
+				the <code>RecordDataEntry</code> element contains an IP address or a domain name for the Amazon Web Services resource, 
 				depending on the type of resource.</p>
             </li>
             <li>
@@ -194,6 +198,7 @@ type hostedZoneCount = float
 type healthThreshold = int
 type healthCheckVersion = float
 type healthCheckType = [
+  | @as("RECOVERY_CONTROL") #RECOVERY_CONTROL
   | @as("CLOUDWATCH_METRIC") #CLOUDWATCH_METRIC
   | @as("CALCULATED") #CALCULATED
   | @as("TCP") #TCP
@@ -239,6 +244,7 @@ type comparisonOperator = [
 ]
 type cloudWatchRegion = [
   | @as("us-isob-east-1") #Us_Isob_East_1
+  | @as("us-iso-west-1") #Us_Iso_West_1
   | @as("us-iso-east-1") #Us_Iso_East_1
   | @as("us-gov-east-1") #Us_Gov_East_1
   | @as("us-gov-west-1") #Us_Gov_West_1
@@ -251,6 +257,7 @@ type cloudWatchRegion = [
   | @as("ap-northeast-3") #Ap_Northeast_3
   | @as("ap-northeast-2") #Ap_Northeast_2
   | @as("ap-northeast-1") #Ap_Northeast_1
+  | @as("ap-southeast-3") #Ap_Southeast_3
   | @as("ap-southeast-2") #Ap_Southeast_2
   | @as("ap-southeast-1") #Ap_Southeast_1
   | @as("ap-south-1") #Ap_South_1
@@ -280,9 +287,9 @@ type accountLimitType = [
   | @as("MAX_HEALTH_CHECKS_BY_OWNER") #MAX_HEALTH_CHECKS_BY_OWNER
 ]
 type awsaccountID = string
-@ocaml.doc(
-  "<p>(Private hosted zones only) A complex type that contains information about an Amazon VPC.</p>"
-)
+@ocaml.doc("<p>(Private hosted zones only) A complex type that contains information about an Amazon VPC.</p>
+		       <p>If you associate a private hosted zone with an Amazon VPC when you make a <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_CreateHostedZone.html\">CreateHostedZone</a> request, the following parameters are also
+			required.</p>")
 type vpc = {
   @as("VPCId") vpcid: option<vpcid>,
   @ocaml.doc("<p>(Private hosted zones only) The region that an Amazon VPC was created in.</p>")
@@ -290,10 +297,10 @@ type vpc = {
   vpcregion: option<vpcregion>,
 }
 @ocaml.doc("<p>A complex type that contains information about the latest version of one traffic policy 
-			that is associated with the current AWS account.</p>")
+			that is associated with the current Amazon Web Services account.</p>")
 type trafficPolicySummary = {
   @ocaml.doc(
-    "<p>The number of traffic policies that are associated with the current AWS account.</p>"
+    "<p>The number of traffic policies that are associated with the current Amazon Web Services account.</p>"
   )
   @as("TrafficPolicyCount")
   trafficPolicyCount: trafficPolicyVersion,
@@ -548,8 +555,8 @@ type keySigningKey = {
             <dt>ACTION_NEEDED</dt>
             <dd>
                <p>There is a problem with the KSK that requires you to take action to resolve.
-				For example, the customer managed customer master key (CMK) might have been deleted, or the
-				permissions for the customer managed CMK might have been changed.</p>
+					For example, the customer managed key might have been deleted, or the
+					permissions for the customer managed key might have been changed.</p>
             </dd>
             <dt>INTERNAL_FAILURE</dt>
             <dd>
@@ -600,9 +607,9 @@ type keySigningKey = {
   )
   @as("Flag")
   flag: option<signingKeyInteger>,
-  @ocaml.doc("<p>The Amazon resource name (ARN) used to identify the customer managed customer master key (CMK) in AWS Key Management Service (AWS KMS).
+  @ocaml.doc("<p>The Amazon resource name (ARN) used to identify the customer managed key in Key Management Service (KMS).
 			The <code>KmsArn</code> must be unique for each key-signing key (KSK) in a single hosted zone.</p>
-		       <p>You must configure the CMK as follows:</p>
+		       <p>You must configure the customer managed key as follows:</p>
 		       <dl>
             <dt>Status</dt>
             <dd>
@@ -635,14 +642,14 @@ type keySigningKey = {
 					          <ul>
                   <li>
                      <p>
-                        <code>\"Service\": \"api-service.dnssec.route53.aws.internal\"</code>
+                        <code>\"Service\": \"dnssec-route53.amazonaws.com\"</code>
                      </p>
                   </li>
                </ul>
 				        </dd>
          </dl>
-		       <p>For more information about working with the customer managed CMK in AWS KMS, see 
-			<a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html\">AWS Key Management Service concepts</a>.</p>")
+		       <p>For more information about working with the customer managed key in KMS, see 
+			<a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html\">Key Management Service concepts</a>.</p>")
   @as("KmsArn")
   kmsArn: option<signingKeyString>,
   @ocaml.doc("<p>A string used to identify a key-signing key (KSK). <code>Name</code> can include numbers, letters,  and underscores (_). <code>Name</code> must be unique for each key-signing key in the same 
@@ -653,14 +660,14 @@ type keySigningKey = {
 @ocaml.doc("<p>A complex type that identifies a hosted zone that a specified Amazon VPC is associated with and the owner of the hosted zone. 
 			If there is a value for <code>OwningAccount</code>, there is no value for <code>OwningService</code>, and vice versa. </p>")
 type hostedZoneOwner = {
-  @ocaml.doc("<p>If an AWS service uses its own account to create a hosted zone and associate the specified VPC with that hosted zone, <code>OwningService</code> 
+  @ocaml.doc("<p>If an Amazon Web Services service uses its own account to create a hosted zone and associate the specified VPC with that hosted zone, <code>OwningService</code> 
 			contains an abbreviation that identifies the service. For example, if Amazon Elastic File System (Amazon EFS) created a hosted zone and 
 			associated a VPC with the hosted zone, the value of <code>OwningService</code> is <code>efs.amazonaws.com</code>.</p>")
   @as("OwningService")
   owningService: option<hostedZoneOwningService>,
-  @ocaml.doc("<p>If the hosted zone was created by an AWS account, or was created by an AWS service that creates hosted zones using the current account,  
-			<code>OwningAccount</code> contains the account ID of that account. For example, when you use AWS Cloud Map to create a hosted zone, Cloud Map 
-			creates the hosted zone using the current AWS account. </p>")
+  @ocaml.doc("<p>If the hosted zone was created by an Amazon Web Services account, or was created by an Amazon Web Services service that creates hosted zones using the current account,  
+			<code>OwningAccount</code> contains the account ID of that account. For example, when you use Cloud Map to create a hosted zone, Cloud Map 
+			creates the hosted zone using the current Amazon Web Services account. </p>")
   @as("OwningAccount")
   owningAccount: option<awsaccountID>,
 }
@@ -813,8 +820,8 @@ type dnssecstatus = {
             <dt>ACTION_NEEDED</dt>
             <dd>
                <p>There is a problem with signing in the hosted zone that requires you to take action to resolve.
-					For example, the customer managed customer master key (CMK) might have been deleted, or the
-					permissions for the customer managed CMK might have been changed.</p>
+					For example, the customer managed key might have been deleted, or the
+					permissions for the customer managed key might have been changed.</p>
             </dd>
             <dt>INTERNAL_FAILURE</dt>
             <dd>
@@ -831,12 +838,7 @@ type checkerIpRanges = array<ipaddressCidr>
 @ocaml.doc("<p>A complex type that describes change information about changes made to your hosted
 			zone.</p>")
 type changeInfo = {
-  @ocaml.doc("<p>A complex type that describes change information about changes made to your hosted
-			zone.</p>
-		       <p>This element contains an ID that you use when performing a 
-			<a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetChange.html\">GetChange</a> 
-			action to get detailed information about the change.</p>")
-  @as("Comment")
+  @ocaml.doc("<p>A comment you can provide.</p>") @as("Comment")
   comment: option<resourceDescription>,
   @ocaml.doc("<p>The date and time that the change request was submitted in 
 			<a href=\"https://en.wikipedia.org/wiki/ISO_8601\">ISO 8601 format</a> and Coordinated Universal Time (UTC). 
@@ -847,10 +849,14 @@ type changeInfo = {
 			not yet been applied to all Amazon Route 53 DNS servers.</p>")
   @as("Status")
   status: changeStatus,
-  @ocaml.doc("<p>The ID of the request.</p>") @as("Id") id: resourceId,
+  @ocaml.doc("<p>This element contains an ID that you use when performing a 
+			<a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetChange.html\">GetChange</a> 
+			action to get detailed information about the change.</p>")
+  @as("Id")
+  id: resourceId,
 }
 @ocaml.doc("<p>
-            <i>Alias resource record sets only:</i> Information about the AWS resource, such as a CloudFront distribution or 
+            <i>Alias resource record sets only:</i> Information about the Amazon Web Services resource, such as a CloudFront distribution or 
 			an Amazon S3 bucket, that you want to route traffic to.</p>
 		       <p>When creating resource record sets for a private hosted zone, note the following:</p>
 		       <ul>
@@ -866,7 +872,7 @@ type changeInfo = {
 type aliasTarget = {
   @ocaml.doc("<p>
             <i>Applies only to alias, failover alias, geolocation alias, latency alias, and weighted alias resource record sets:</i> 
-			When <code>EvaluateTargetHealth</code> is <code>true</code>, an alias resource record set inherits the health of the referenced AWS resource, 
+			When <code>EvaluateTargetHealth</code> is <code>true</code>, an alias resource record set inherits the health of the referenced Amazon Web Services resource, 
 			such as an ELB load balancer or another resource record set in the hosted zone.</p>
 		       <p>Note the following:</p>
 
@@ -925,7 +931,7 @@ type aliasTarget = {
             </dd>
             <dt>Other records in the same hosted zone</dt>
             <dd>
-               <p>If the AWS resource that you specify in <code>DNSName</code> is a record or a group of records 
+               <p>If the Amazon Web Services resource that you specify in <code>DNSName</code> is a record or a group of records 
 					(for example, a group of weighted records) but is not another alias record, we recommend that you associate a health check 
 					with all of the records in the alias target. For more information, see 
 					<a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-complex-configs.html#dns-failover-complex-configs-hc-omitting\">What Happens When You Omit Health Checks?</a> 
@@ -942,7 +948,7 @@ type aliasTarget = {
 		       <dl>
             <dt>Amazon API Gateway custom regional APIs and edge-optimized APIs</dt>
             <dd>
-               <p>Specify the applicable domain name for your API. You can get the applicable value using the AWS CLI command 
+               <p>Specify the applicable domain name for your API. You can get the applicable value using the CLI command 
 					<a href=\"https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-domain-names.html\">get-domain-names</a>:</p>
 					          <ul>
                   <li>
@@ -962,7 +968,7 @@ type aliasTarget = {
             <dd>
                <p>Enter the API endpoint for the interface endpoint, such as 
 					<code>vpce-123456789abcdef01-example-us-east-1a.elasticloadbalancing.us-east-1.vpce.amazonaws.com</code>. For edge-optimized APIs, 
-					this is the domain name for the corresponding CloudFront distribution. You can get the value of <code>DnsName</code> using the AWS CLI command 
+					this is the domain name for the corresponding CloudFront distribution. You can get the value of <code>DnsName</code> using the CLI command 
 					<a href=\"https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-vpc-endpoints.html\">describe-vpc-endpoints</a>.</p>
 				        </dd>
             <dt>CloudFront distribution</dt>
@@ -997,34 +1003,34 @@ type aliasTarget = {
 					          <ul>
                   <li>
 							              <p>
-                        <i>AWS Management Console</i>: For information about how to get the value by using the console, 
-								see <a href=\"https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/customdomains.html\">Using Custom Domains with AWS Elastic Beanstalk</a> in the 
-								<i>AWS Elastic Beanstalk Developer Guide</i>.</p>
+                        <i>Amazon Web Services Management Console</i>: For information about how to get the value by using the console, 
+								see <a href=\"https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/customdomains.html\">Using Custom Domains with Elastic Beanstalk</a> in the 
+								<i>Elastic Beanstalk Developer Guide</i>.</p>
 						            </li>
                   <li>
 							              <p>
                         <i>Elastic Beanstalk API</i>: Use the <code>DescribeEnvironments</code> action to get 
 								the value of the <code>CNAME</code> attribute. For more information, see 
 								<a href=\"https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_DescribeEnvironments.html\">DescribeEnvironments</a> 
-								in the <i>AWS Elastic Beanstalk API Reference</i>.</p>
+								in the <i>Elastic Beanstalk API Reference</i>.</p>
 						            </li>
                   <li>
 							              <p>
-                        <i>AWS CLI</i>: Use the <code>describe-environments</code> command to get the value of the 
+                        <i>CLI</i>: Use the <code>describe-environments</code> command to get the value of the 
 								<code>CNAME</code> attribute. For more information, see 
 								<a href=\"https://docs.aws.amazon.com/cli/latest/reference/elasticbeanstalk/describe-environments.html\">describe-environments</a> in the 
-								<i>AWS CLI Command Reference</i>.</p>
+								<i>CLI Command Reference</i>.</p>
 						            </li>
                </ul>
 				        </dd>
             <dt>ELB load balancer</dt>
             <dd>
-               <p>Specify the DNS name that is associated with the load balancer. Get the DNS name by using the AWS Management Console, 
-					the ELB API, or the AWS CLI. </p>
+               <p>Specify the DNS name that is associated with the load balancer. Get the DNS name by using the Amazon Web Services Management Console, 
+					the ELB API, or the CLI. </p>
 					          <ul>
                   <li>
 							              <p>
-                        <b>AWS Management Console</b>: Go to the EC2 page, choose <b>Load Balancers</b> 
+                        <b>Amazon Web Services Management Console</b>: Go to the EC2 page, choose <b>Load Balancers</b> 
 								in the navigation pane, choose the load balancer, choose the <b>Description</b> tab, and get the value 
 								of the <b>DNS name</b> field. </p>
 							              <p>If you're routing traffic to a Classic Load Balancer, get the value that begins with <b>dualstack</b>. 
@@ -1049,7 +1055,7 @@ type aliasTarget = {
 						            </li>
                   <li>
 							              <p>
-                        <b>AWS CLI</b>: Use <code>describe-load-balancers</code> to get the value of <code>DNSName</code>.
+                        <b>CLI</b>: Use <code>describe-load-balancers</code> to get the value of <code>DNSName</code>.
 								For more information, see the applicable guide:</p>
 							              <ul>
                         <li>
@@ -1066,7 +1072,7 @@ type aliasTarget = {
 						            </li>
                </ul>
 				        </dd>
-            <dt>AWS Global Accelerator accelerator</dt>
+            <dt>Global Accelerator accelerator</dt>
             <dd>
                <p>Specify the DNS name for your accelerator:</p>
 					          <ul>
@@ -1077,7 +1083,7 @@ type aliasTarget = {
                   </li>
                   <li>
                      <p>
-                        <b>AWS CLI:</b> To get the DNS name, use 
+                        <b>CLI:</b> To get the DNS name, use 
 							<a href=\"https://docs.aws.amazon.com/cli/latest/reference/globalaccelerator/describe-accelerator.html\">describe-accelerator</a>.</p>
                   </li>
                </ul>
@@ -1110,7 +1116,7 @@ type aliasTarget = {
 		       <dl>
             <dt>Amazon API Gateway custom regional APIs and edge-optimized APIs</dt>
             <dd>
-               <p>Specify the hosted zone ID for your API. You can get the applicable value using the AWS CLI command 
+               <p>Specify the hosted zone ID for your API. You can get the applicable value using the CLI command 
 					<a href=\"https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-domain-names.html\">get-domain-names</a>:</p>
 					          <ul>
                   <li>
@@ -1124,7 +1130,7 @@ type aliasTarget = {
             <dt>Amazon Virtual Private Cloud interface VPC endpoint</dt>
             <dd>
                <p>Specify the hosted zone ID for your interface endpoint. You can get the value of <code>HostedZoneId</code> 
-					using the AWS CLI command 
+					using the CLI command 
 					<a href=\"https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-vpc-endpoints.html\">describe-vpc-endpoints</a>.</p>
 				        </dd>
             <dt>CloudFront distribution</dt>
@@ -1138,7 +1144,7 @@ type aliasTarget = {
             <dd>
 					          <p>Specify the hosted zone ID for the region that you created the environment in. The environment 
 						must have a regionalized subdomain. For a list of regions and the corresponding hosted zone IDs, see 
-					    <a href=\"https://docs.aws.amazon.com/general/latest/gr/elasticbeanstalk.html\">AWS Elastic Beanstalk endpoints and quotas</a> in the 
+					    <a href=\"https://docs.aws.amazon.com/general/latest/gr/elasticbeanstalk.html\">Elastic Beanstalk endpoints and quotas</a> in the 
 						 the <i>Amazon Web Services General Reference</i>.</p>
 				        </dd>
             <dt>ELB load balancer</dt>
@@ -1154,7 +1160,7 @@ type aliasTarget = {
                   </li>
                   <li>
 							              <p>
-                        <b>AWS Management Console</b>: Go to the Amazon EC2 page, choose 
+                        <b>Amazon Web Services Management Console</b>: Go to the Amazon EC2 page, choose 
 								<b>Load Balancers</b> in the navigation pane, select the load balancer, and get the value of the 
 								<b>Hosted zone</b> field on the <b>Description</b> tab.</p>
 						            </li>
@@ -1177,7 +1183,7 @@ type aliasTarget = {
 						            </li>
                   <li>
 							              <p>
-                        <b>AWS CLI</b>: Use <code>describe-load-balancers</code> to get the applicable value. 
+                        <b>CLI</b>: Use <code>describe-load-balancers</code> to get the applicable value. 
 								For more information, see the applicable guide:</p>
 							              <ul>
                         <li>
@@ -1194,7 +1200,7 @@ type aliasTarget = {
 						            </li>
                </ul>
 				        </dd>
-            <dt>AWS Global Accelerator accelerator</dt>
+            <dt>Global Accelerator accelerator</dt>
             <dd>
                <p>Specify <code>Z2BJ6XQ5FK7U4H</code>.</p>
             </dd>
@@ -1293,8 +1299,8 @@ type keySigningKeys = array<keySigningKey>
 			<code>HostedZoneSummary</code> element for each hosted zone that the specified Amazon VPC is associated with. 
 			Each <code>HostedZoneSummary</code> element contains the hosted zone name and ID, and information about who owns the hosted zone.</p>")
 type hostedZoneSummary = {
-  @ocaml.doc("<p>The owner of a private hosted zone that the specified VPC is associated with. The owner can be either an AWS account or 
-			an AWS service.</p>")
+  @ocaml.doc("<p>The owner of a private hosted zone that the specified VPC is associated with. The owner can be either an Amazon Web Services account or 
+			an Amazon Web Services service.</p>")
   @as("Owner")
   owner: hostedZoneOwner,
   @ocaml.doc("<p>The name of the private hosted zone, such as <code>example.com</code>.</p>")
@@ -1358,6 +1364,10 @@ type healthCheckObservation = {
 }
 @ocaml.doc("<p>A complex type that contains information about the health check.</p>")
 type healthCheckConfig = {
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) for the Route 53 Application Recovery Controller routing control.</p>
+		       <p>For more information about Route 53 Application Recovery Controller, see <a href=\"https://docs.aws.amazon.com/r53recovery/latest/dg/what-is-route-53-recovery.html\">Route 53 Application Recovery Controller Developer Guide.</a>.</p>")
+  @as("RoutingControlArn")
+  routingControlArn: option<routingControlArn>,
   @ocaml.doc("<p>When CloudWatch has insufficient data about the metric to determine the alarm state, the status that you want Amazon Route 53 to assign to the health check:</p>
 		       <ul>
             <li>
@@ -1456,7 +1466,7 @@ type healthCheckConfig = {
 			otherwise would be considered healthy.</p>")
   @as("Inverted")
   inverted: option<inverted>,
-  @ocaml.doc("<p>Specify whether you want Amazon Route 53 to measure the latency between health checkers in multiple AWS regions and your endpoint, and to 
+  @ocaml.doc("<p>Specify whether you want Amazon Route 53 to measure the latency between health checkers in multiple Amazon Web Services regions and your endpoint, and to 
 			display CloudWatch latency graphs on the <b>Health Checks</b> page in the Route 53 console.</p>
 		       <important>
 			         <p>You can't change the value of <code>MeasureLatency</code> after you create a health check.</p>
@@ -1510,8 +1520,8 @@ type healthCheckConfig = {
 			<code>Host</code> header in each of the preceding cases.</p>
 		
 		       <p>
-            <b>If you don't specify a value for <code>IPAddress</code>
-            </b>:</p>
+            <b>If you don't specify a value for</b> 
+            <code>IPAddress</code>:</p>
 		       <p>Route 53 sends a DNS request to the domain that you specify for <code>FullyQualifiedDomainName</code> at the interval that you specify for 
 			<code>RequestInterval</code>. Using an IPv4 address that DNS returns, Route 53 then checks the health of the endpoint.</p>
 		       <note>
@@ -1585,6 +1595,12 @@ type healthCheckConfig = {
 					the number of health checks that Route 53 health checkers consider to be healthy and compares that number with the value of 
 					<code>HealthThreshold</code>. </p>
 			         </li>
+            <li>
+               <p>
+                  <b>RECOVERY_CONTROL</b>: The health check is assocated with a Route53 Application Recovery Controller routing control. 
+				If the routing control state is <code>ON</code>, the health check is considered healthy. If the state is <code>OFF</code>, the health check is considered unhealthy. 
+				</p>
+            </li>
          </ul>
 		       <p>For more information, see 
 			<a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-determining-health-of-endpoints.html\">How Route 53 
@@ -1823,7 +1839,7 @@ type resourceRecordSet = {
   @as("HealthCheckId")
   healthCheckId: option<healthCheckId>,
   @ocaml.doc("<p>
-            <i>Alias resource record sets only:</i> Information about the AWS resource, such as a CloudFront distribution or an 
+            <i>Alias resource record sets only:</i> Information about the Amazon Web Services resource, such as a CloudFront distribution or an 
 			Amazon S3 bucket, that you want to route traffic to. </p>
 		       <p>If you're creating resource records sets for a private hosted zone, note the following:</p>
 		       <ul>
@@ -1974,7 +1990,7 @@ type resourceRecordSet = {
   geoLocation: option<geoLocation>,
   @ocaml.doc("<p>
             <i>Latency-based resource record sets only:</i> The Amazon EC2 Region where you created the resource that this 
-			resource record set refers to. The resource typically is an AWS resource, such as an EC2 instance or an ELB load balancer, and is 
+			resource record set refers to. The resource typically is an Amazon Web Services resource, such as an EC2 instance or an ELB load balancer, and is 
 			referred to by an IP address or a DNS domain name, depending on the record type.</p>
 		       <note>
 			         <p>Although creating latency and latency alias resource record sets in a private hosted zone is allowed, 
@@ -2205,7 +2221,7 @@ type cloudWatchAlarmConfiguration = {
 type resourceTagSetList = array<resourceTagSet>
 type resourceRecordSets = array<resourceRecordSet>
 @ocaml.doc(
-  "<p>A complex type that contains information about one health check that is associated with the current AWS account.</p>"
+  "<p>A complex type that contains information about one health check that is associated with the current Amazon Web Services account.</p>"
 )
 type healthCheck = {
   @ocaml.doc(
@@ -2280,54 +2296,56 @@ type changeBatch = {
 )
 module GetTrafficPolicyInstanceCount = {
   type t
-
+  type request = {.}
   @ocaml.doc(
     "<p>A complex type that contains information about the resource record sets that Amazon Route 53 created based on a specified traffic policy.</p>"
   )
   type response = {
     @ocaml.doc(
-      "<p>The number of traffic policy instances that are associated with the current AWS account.</p>"
+      "<p>The number of traffic policy instances that are associated with the current Amazon Web Services account.</p>"
     )
     @as("TrafficPolicyInstanceCount")
     trafficPolicyInstanceCount: trafficPolicyInstanceCount,
   }
   @module("@aws-sdk/client-route53") @new
-  external new: unit => t = "GetTrafficPolicyInstanceCountCommand"
-  let make = () => new()
+  external new: request => t = "GetTrafficPolicyInstanceCountCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetHostedZoneCount = {
   type t
-
+  type request = {.}
   @ocaml.doc(
     "<p>A complex type that contains the response to a <code>GetHostedZoneCount</code> request.</p>"
   )
   type response = {
     @ocaml.doc(
-      "<p>The total number of public and private hosted zones that are associated with the current AWS account.</p>"
+      "<p>The total number of public and private hosted zones that are associated with the current Amazon Web Services account.</p>"
     )
     @as("HostedZoneCount")
     hostedZoneCount: hostedZoneCount,
   }
-  @module("@aws-sdk/client-route53") @new external new: unit => t = "GetHostedZoneCountCommand"
-  let make = () => new()
+  @module("@aws-sdk/client-route53") @new external new: request => t = "GetHostedZoneCountCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetHealthCheckCount = {
   type t
-
+  type request = {.}
   @ocaml.doc(
     "<p>A complex type that contains the response to a <code>GetHealthCheckCount</code> request.</p>"
   )
   type response = {
-    @ocaml.doc("<p>The number of health checks associated with the current AWS account.</p>")
+    @ocaml.doc(
+      "<p>The number of health checks associated with the current Amazon Web Services account.</p>"
+    )
     @as("HealthCheckCount")
     healthCheckCount: healthCheckCount,
   }
-  @module("@aws-sdk/client-route53") @new external new: unit => t = "GetHealthCheckCountCommand"
-  let make = () => new()
+  @module("@aws-sdk/client-route53") @new external new: request => t = "GetHealthCheckCountCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -2343,7 +2361,7 @@ module DeleteTrafficPolicyInstance = {
     @as("Id")
     id: trafficPolicyInstanceId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-route53") @new
   external new: request => t = "DeleteTrafficPolicyInstanceCommand"
   let make = (~id, ()) => new({id: id})
@@ -2360,7 +2378,7 @@ module DeleteTrafficPolicy = {
     @ocaml.doc("<p>The ID of the traffic policy that you want to delete.</p>") @as("Id")
     id: trafficPolicyId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-route53") @new external new: request => t = "DeleteTrafficPolicyCommand"
   let make = (~version, ~id, ()) => new({version: version, id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -2373,7 +2391,7 @@ module DeleteReusableDelegationSet = {
     @ocaml.doc("<p>The ID of the reusable delegation set that you want to delete.</p>") @as("Id")
     id: resourceId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-route53") @new
   external new: request => t = "DeleteReusableDelegationSetCommand"
   let make = (~id, ()) => new({id: id})
@@ -2386,7 +2404,7 @@ module DeleteQueryLoggingConfig = {
     @ocaml.doc("<p>The ID of the configuration that you want to delete. </p>") @as("Id")
     id: queryLoggingConfigId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-route53") @new
   external new: request => t = "DeleteQueryLoggingConfigCommand"
   let make = (~id, ()) => new({id: id})
@@ -2400,7 +2418,7 @@ module DeleteHealthCheck = {
     @ocaml.doc("<p>The ID of the health check that you want to delete.</p>") @as("HealthCheckId")
     healthCheckId: healthCheckId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-route53") @new external new: request => t = "DeleteHealthCheckCommand"
   let make = (~healthCheckId, ()) => new({healthCheckId: healthCheckId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -2510,7 +2528,7 @@ module TestDNSAnswer = {
     @as("EDNS0ClientSubnetIP")
     edns0ClientSubnetIP: option<ipaddress>,
     @ocaml.doc("<p>If you want to simulate a request from a specific DNS resolver, specify the IP address for that resolver. 
-			If you omit this value, <code>TestDnsAnswer</code> uses the IP address of a DNS resolver in the AWS US East (N. Virginia) Region 
+			If you omit this value, <code>TestDnsAnswer</code> uses the IP address of a DNS resolver in the Amazon Web Services US East (N. Virginia) Region 
 			(<code>us-east-1</code>).</p>")
     @as("ResolverIP")
     resolverIP: option<ipaddress>,
@@ -2789,7 +2807,7 @@ module GetGeoLocation = {
 
 module GetCheckerIpRanges = {
   type t
-
+  type request = {.}
   @ocaml.doc("<p>A complex type that contains the <code>CheckerIpRanges</code> element.</p>")
   type response = {
     @ocaml.doc("<p>A complex type that contains sorted list of IP ranges in CIDR format for Amazon Route 53 health
@@ -2797,8 +2815,8 @@ module GetCheckerIpRanges = {
     @as("CheckerIpRanges")
     checkerIpRanges: checkerIpRanges,
   }
-  @module("@aws-sdk/client-route53") @new external new: unit => t = "GetCheckerIpRangesCommand"
-  let make = () => new()
+  @module("@aws-sdk/client-route53") @new external new: request => t = "GetCheckerIpRangesCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -2941,18 +2959,18 @@ module DisableHostedZoneDNSSEC = {
 module DeleteVPCAssociationAuthorization = {
   type t
   @ocaml.doc("<p>A complex type that contains information about the request to remove authorization to associate a VPC 
-			that was created by one AWS account with a hosted zone that was created with a different AWS account. </p>")
+			that was created by one Amazon Web Services account with a hosted zone that was created with a different Amazon Web Services account. </p>")
   type request = {
-    @ocaml.doc("<p>When removing authorization to associate a VPC that was created by one AWS account with a hosted zone 
-			that was created with a different AWS account, a complex type that includes the ID and region of the VPC.</p>")
+    @ocaml.doc("<p>When removing authorization to associate a VPC that was created by one Amazon Web Services account with a hosted zone 
+			that was created with a different Amazon Web Services account, a complex type that includes the ID and region of the VPC.</p>")
     @as("VPC")
     vpc: vpc,
-    @ocaml.doc("<p>When removing authorization to associate a VPC that was created by one AWS account with a hosted zone 
-			that was created with a different AWS account, the ID of the hosted zone.</p>")
+    @ocaml.doc("<p>When removing authorization to associate a VPC that was created by one Amazon Web Services account with a hosted zone 
+			that was created with a different Amazon Web Services account, the ID of the hosted zone.</p>")
     @as("HostedZoneId")
     hostedZoneId: resourceId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-route53") @new
   external new: request => t = "DeleteVPCAssociationAuthorizationCommand"
   let make = (~vpc, ~hostedZoneId, ()) => new({vpc: vpc, hostedZoneId: hostedZoneId})
@@ -3175,7 +3193,7 @@ module CreateQueryLoggingConfig = {
 		       <p>To get the ARN for a log group, you can use the CloudWatch console, the 
 			<a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeLogGroups.html\">DescribeLogGroups</a> API action, 
 			the <a href=\"https://docs.aws.amazon.com/cli/latest/reference/logs/describe-log-groups.html\">describe-log-groups</a> command, 
-			or the applicable command in one of the AWS SDKs.</p>")
+			or the applicable command in one of the Amazon Web Services SDKs.</p>")
     @as("CloudWatchLogsLogGroupArn")
     cloudWatchLogsLogGroupArn: cloudWatchLogsLogGroupArn,
     @ocaml.doc(
@@ -3212,11 +3230,11 @@ module CreateKeySigningKey = {
 			hosted zone.</p>")
     @as("Name")
     name: signingKeyName,
-    @ocaml.doc("<p>The Amazon resource name (ARN) for a customer managed customer master key (CMK) in AWS Key Management Service (AWS KMS).
+    @ocaml.doc("<p>The Amazon resource name (ARN) for a customer managed key in Key Management Service (KMS).
 			The <code>KeyManagementServiceArn</code> must be unique for each key-signing key (KSK) in a single hosted zone. 
 			To see an example of <code>KeyManagementServiceArn</code> that grants the correct permissions for DNSSEC, 
 			scroll down to <b>Example</b>. </p>
-		       <p>You must configure the customer managed CMK as follows:</p>
+		       <p>You must configure the customer managed customer managed key as follows:</p>
 		       <dl>
             <dt>Status</dt>
             <dd>
@@ -3249,14 +3267,14 @@ module CreateKeySigningKey = {
 					          <ul>
                   <li>
                      <p>
-                        <code>\"Service\": \"dnssec.route53.aws.amazonaws.com\"</code>
+                        <code>\"Service\": \"dnssec-route53.amazonaws.com\"</code>
                      </p>
                   </li>
                </ul>
 				        </dd>
          </dl>
-		       <p>For more information about working with a customer managed CMK in AWS KMS, see 
-			<a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html\">AWS Key Management Service concepts</a>.</p>")
+		       <p>For more information about working with a customer managed key in KMS, see 
+			<a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html\">Key Management Service concepts</a>.</p>")
     @as("KeyManagementServiceArn")
     keyManagementServiceArn: signingKeyString,
     @ocaml.doc("<p>The unique string (ID) used to identify a hosted zone.</p>") @as("HostedZoneId")
@@ -3636,7 +3654,7 @@ module ListTrafficPolicyInstancesByHostedZone = {
 module ListTrafficPolicyInstances = {
   type t
   @ocaml.doc(
-    "<p>A request to get information about the traffic policy instances that you created by using the current AWS account.</p>"
+    "<p>A request to get information about the traffic policy instances that you created by using the current Amazon Web Services account.</p>"
   )
   type request = {
     @ocaml.doc("<p>The maximum number of traffic policy instances that you want Amazon Route 53 to return in response to a <code>ListTrafficPolicyInstances</code> request. 
@@ -3718,7 +3736,7 @@ module ListTrafficPolicyInstances = {
 module ListTrafficPolicies = {
   type t
   @ocaml.doc("<p>A complex type that contains the information about the request to list the traffic policies that are associated 
-			with the current AWS account.</p>")
+			with the current Amazon Web Services account.</p>")
   type request = {
     @ocaml.doc("<p>(Optional) The maximum number of traffic policies that you want Amazon Route 53 to return in response to this request. If you have more than 
 			<code>MaxItems</code> traffic policies, the value of <code>IsTruncated</code> in the response is <code>true</code>, and the 
@@ -3750,7 +3768,7 @@ module ListTrafficPolicies = {
     @as("IsTruncated")
     isTruncated: pageTruncated,
     @ocaml.doc(
-      "<p>A list that contains one <code>TrafficPolicySummary</code> element for each traffic policy that was created by the current AWS account.</p>"
+      "<p>A list that contains one <code>TrafficPolicySummary</code> element for each traffic policy that was created by the current Amazon Web Services account.</p>"
     )
     @as("TrafficPolicySummaries")
     trafficPolicySummaries: trafficPolicySummaries,
@@ -3765,13 +3783,13 @@ module ListQueryLoggingConfigs = {
   type t
   type request = {
     @ocaml.doc("<p>(Optional) The maximum number of query logging configurations that you want Amazon Route 53 to return in response to the current request. 
-			If the current AWS account has more than <code>MaxResults</code> configurations, use the value of 
+			If the current Amazon Web Services account has more than <code>MaxResults</code> configurations, use the value of 
 			<a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_ListQueryLoggingConfigs.html#API_ListQueryLoggingConfigs_RequestSyntax\">NextToken</a> 
 			in the response to get the next page of results.</p>
 		       <p>If you don't specify a value for <code>MaxResults</code>, Route 53 returns up to 100 configurations.</p>")
     @as("MaxResults")
     maxResults: option<baseInteger>,
-    @ocaml.doc("<p>(Optional) If the current AWS account has more than <code>MaxResults</code> query logging configurations, use <code>NextToken</code> 
+    @ocaml.doc("<p>(Optional) If the current Amazon Web Services account has more than <code>MaxResults</code> query logging configurations, use <code>NextToken</code> 
 			to get the second and subsequent pages of results.</p>
 		       <p>For the first <code>ListQueryLoggingConfigs</code> request, omit this value.</p>
 		       <p>For the second and subsequent requests, get the value of <code>NextToken</code> from the previous response and specify that value 
@@ -3781,12 +3799,12 @@ module ListQueryLoggingConfigs = {
     @ocaml.doc("<p>(Optional) If you want to list the query logging configuration that is associated with a hosted zone, specify the ID in 
 			<code>HostedZoneId</code>. </p>
 		       <p>If you don't specify a hosted zone ID, <code>ListQueryLoggingConfigs</code> returns all of the configurations 
-			that are associated with the current AWS account.</p>")
+			that are associated with the current Amazon Web Services account.</p>")
     @as("HostedZoneId")
     hostedZoneId: option<resourceId>,
   }
   type response = {
-    @ocaml.doc("<p>If a response includes the last of the query logging configurations that are associated with the current AWS account, 
+    @ocaml.doc("<p>If a response includes the last of the query logging configurations that are associated with the current Amazon Web Services account, 
 			<code>NextToken</code> doesn't appear in the response.</p>
 		       <p>If a response doesn't include the last of the configurations, you can get more configurations by submitting another 
 			<a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_ListQueryLoggingConfigs.html\">ListQueryLoggingConfigs</a> 
@@ -3796,7 +3814,7 @@ module ListQueryLoggingConfigs = {
     nextToken: option<paginationToken>,
     @ocaml.doc("<p>An array that contains one 
 			<a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_QueryLoggingConfig.html\">QueryLoggingConfig</a> element 
-			for each configuration for DNS query logging that is associated with the current AWS account.</p>")
+			for each configuration for DNS query logging that is associated with the current Amazon Web Services account.</p>")
     @as("QueryLoggingConfigs")
     queryLoggingConfigs: queryLoggingConfigs,
   }
@@ -4015,7 +4033,10 @@ module CreateHostedZone = {
     @as("CallerReference")
     callerReference: nonce,
     @ocaml.doc("<p>(Private hosted zones only) A complex type that contains information about the Amazon VPC that you're associating with this hosted zone.</p>
-		       <p>You can specify only one Amazon VPC when you create a private hosted zone. To associate additional Amazon VPCs with the hosted zone, 
+		       <p>You can specify only one Amazon VPC when you create a private hosted zone. If you are associating a VPC with a hosted zone with this request,
+			the paramaters 
+			<code>VPCId</code> and <code>VPCRegion</code> are also required.</p>
+		       <p>To associate additional Amazon VPCs with the hosted zone, 
 			use <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_AssociateVPCWithHostedZone.html\">AssociateVPCWithHostedZone</a>
 			after you create a hosted zone.</p>")
     @as("VPC")
@@ -4092,7 +4113,7 @@ module ChangeTagsForResource = {
     @as("ResourceType")
     resourceType: tagResourceType,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-route53") @new
   external new: request => t = "ChangeTagsForResourceCommand"
   let make = (~resourceId, ~resourceType, ~removeTagKeys=?, ~addTags=?, ()) =>
@@ -4145,7 +4166,7 @@ module ListTagsForResource = {
 module ListReusableDelegationSets = {
   type t
   @ocaml.doc(
-    "<p>A request to get a list of the reusable delegation sets that are associated with the current AWS account.</p>"
+    "<p>A request to get a list of the reusable delegation sets that are associated with the current Amazon Web Services account.</p>"
   )
   type request = {
     @ocaml.doc("<p>The number of reusable delegation sets that you want Amazon Route 53 to return in the response to this request. If you specify a value 
@@ -4161,7 +4182,7 @@ module ListReusableDelegationSets = {
     marker: option<pageMarker>,
   }
   @ocaml.doc(
-    "<p>A complex type that contains information about the reusable delegation sets that are associated with the current AWS account.</p>"
+    "<p>A complex type that contains information about the reusable delegation sets that are associated with the current Amazon Web Services account.</p>"
   )
   type response = {
     @ocaml.doc("<p>The value that you specified for the <code>maxitems</code> parameter in the call to <code>ListReusableDelegationSets</code> that 
@@ -4183,7 +4204,7 @@ module ListReusableDelegationSets = {
     @as("Marker")
     marker: pageMarker,
     @ocaml.doc("<p>A complex type that contains one <code>DelegationSet</code> element for each reusable delegation set that was created 
-			by the current AWS account.</p>")
+			by the current Amazon Web Services account.</p>")
     @as("DelegationSets")
     delegationSets: delegationSets,
   }
@@ -4196,7 +4217,7 @@ module ListReusableDelegationSets = {
 module ListHostedZonesByVPC = {
   type t
   @ocaml.doc(
-    "<p>Lists all the private hosted zones that a specified VPC is associated with, regardless of which AWS account created the hosted zones.</p>"
+    "<p>Lists all the private hosted zones that a specified VPC is associated with, regardless of which Amazon Web Services account created the hosted zones.</p>"
   )
   type request = {
     @ocaml.doc("<p>If the previous response included a <code>NextToken</code> element, the specified VPC is associated with more hosted zones. 
@@ -4211,7 +4232,7 @@ module ListHostedZonesByVPC = {
     @as("MaxItems")
     maxItems: option<baseInteger>,
     @ocaml.doc(
-      "<p>For the Amazon VPC that you specified for <code>VPCId</code>, the AWS Region that you created the VPC in. </p>"
+      "<p>For the Amazon VPC that you specified for <code>VPCId</code>, the Amazon Web Services Region that you created the VPC in. </p>"
     )
     @as("VPCRegion")
     vpcregion: vpcregion,
@@ -4221,7 +4242,7 @@ module ListHostedZonesByVPC = {
   }
   type response = {
     @ocaml.doc(
-      "<p>The value that you specified for <code>NextToken</code> in the most recent <code>ListHostedZonesByVPC</code> request.</p>"
+      "<p>The value that you will use for <code>NextToken</code> in the next <code>ListHostedZonesByVPC</code> request.</p>"
     )
     @as("NextToken")
     nextToken: option<paginationToken>,
@@ -4243,7 +4264,7 @@ module ListHostedZonesByVPC = {
 
 module ListHostedZonesByName = {
   type t
-  @ocaml.doc("<p>Retrieves a list of the public and private hosted zones that are associated with the current AWS account in ASCII order by domain 
+  @ocaml.doc("<p>Retrieves a list of the public and private hosted zones that are associated with the current Amazon Web Services account in ASCII order by domain 
 			name. </p>")
   type request = {
     @ocaml.doc("<p>The maximum number of hosted zones to be included in the response body for this request. If you have more than <code>maxitems</code> 
@@ -4260,7 +4281,7 @@ module ListHostedZonesByName = {
     hostedZoneId: option<resourceId>,
     @ocaml.doc("<p>(Optional) For your first request to <code>ListHostedZonesByName</code>, include the <code>dnsname</code> parameter only if you want to 
 			specify the name of the first hosted zone in the response. If you don't include the <code>dnsname</code> parameter, Amazon Route 53 returns all of 
-			the hosted zones that were created by the current AWS account, in ASCII order. For subsequent requests, include both <code>dnsname</code> and 
+			the hosted zones that were created by the current Amazon Web Services account, in ASCII order. For subsequent requests, include both <code>dnsname</code> and 
 			<code>hostedzoneid</code> parameters. For <code>dnsname</code>, specify the value of <code>NextDNSName</code> from the previous response.</p>")
     @as("DNSName")
     dnsname: option<dnsname>,
@@ -4311,7 +4332,7 @@ module ListHostedZonesByName = {
 module ListHostedZones = {
   type t
   @ocaml.doc(
-    "<p>A request to retrieve a list of the public and private hosted zones that are associated with the current AWS account.</p>"
+    "<p>A request to retrieve a list of the public and private hosted zones that are associated with the current Amazon Web Services account.</p>"
   )
   type request = {
     @ocaml.doc("<p>If you're using reusable delegation sets and you want to list all of the hosted zones that are associated 
@@ -4465,8 +4486,8 @@ module UpdateHealthCheck = {
             </li>
             <li>
                <p>
-                  <code>LastKnownStatus</code>: Route 53 uses the status of the health check from the last time CloudWatch had sufficient data 
-				to determine the alarm state. For new health checks that have no last known status, the default status for the health check is healthy.</p>
+                  <code>LastKnownStatus</code>: By default, Route 53 uses the status of the health check from the last time CloudWatch had sufficient data 
+				to determine the alarm state. For new health checks that have no last known status, the status for the health check is healthy.</p>
             </li>
          </ul>")
     @as("InsufficientDataHealthStatus")
@@ -4931,7 +4952,7 @@ module GetHealthCheck = {
   )
   type response = {
     @ocaml.doc("<p>A complex type that contains information about one health check that is associated with
-			the current AWS account.</p>")
+			the current Amazon Web Services account.</p>")
     @as("HealthCheck")
     healthCheck: healthCheck,
   }
@@ -4990,7 +5011,7 @@ module CreateHealthCheck = {
 module ListHealthChecks = {
   type t
   @ocaml.doc(
-    "<p>A request to retrieve a list of the health checks that are associated with the current AWS account.</p>"
+    "<p>A request to retrieve a list of the health checks that are associated with the current Amazon Web Services account.</p>"
   )
   type request = {
     @ocaml.doc("<p>The maximum number of health checks that you want <code>ListHealthChecks</code> to return in response to the current request. 
@@ -5028,7 +5049,7 @@ module ListHealthChecks = {
     @as("Marker")
     marker: pageMarker,
     @ocaml.doc("<p>A complex type that contains one <code>HealthCheck</code> element for each health check that is associated with the current 
-			AWS account.</p>")
+			Amazon Web Services account.</p>")
     @as("HealthChecks")
     healthChecks: healthChecks,
   }

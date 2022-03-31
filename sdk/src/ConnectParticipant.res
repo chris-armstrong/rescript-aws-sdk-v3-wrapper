@@ -55,6 +55,7 @@ type chatItemType = [
 type chatItemId = string
 type chatContentType = string
 type chatContent = string
+type bool_ = bool
 type attachmentSizeInBytes = float
 type attachmentName = string
 type artifactStatus = [
@@ -123,9 +124,8 @@ type uploadMetadata = {
   )
   @as("UrlExpiry")
   urlExpiry: option<iso8601Datetime>,
-  @ocaml.doc(
-    "<p>The pre-signed URL using which file would be downloaded from Amazon S3 by the API caller.</p>"
-  )
+  @ocaml.doc("<p>This is the pre-signed URL that can be used for uploading the file to Amazon S3 when used in response 
+to <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_StartAttachmentUpload.html\">StartAttachmentUpload</a>.</p>")
   @as("Url")
   url: option<uploadMetadataUrl>,
 }
@@ -254,9 +254,8 @@ module GetAttachment = {
     )
     @as("UrlExpiry")
     urlExpiry: option<iso8601Datetime>,
-    @ocaml.doc(
-      "<p>The pre-signed URL using which file would be downloaded from Amazon S3 by the API caller.</p>"
-    )
+    @ocaml.doc("<p>This is the pre-signed URL that can be used for uploading the file to Amazon S3 when used in response 
+to <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_StartAttachmentUpload.html\">StartAttachmentUpload</a>.</p>")
     @as("Url")
     url: option<preSignedAttachmentUrl>,
   }
@@ -277,7 +276,7 @@ module DisconnectParticipant = {
     @as("ClientToken")
     clientToken: option<clientToken>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "DisconnectParticipantCommand"
   let make = (~connectionToken, ~clientToken=?, ()) =>
@@ -288,8 +287,12 @@ module DisconnectParticipant = {
 module CreateParticipantConnection = {
   type t
   type request = {
+    @ocaml.doc("<p>Amazon Connect Participant is used to mark the participant as connected for message
+            streaming.</p>")
+    @as("ConnectParticipant")
+    connectParticipant: option<bool_>,
     @ocaml.doc("<p>This is a header parameter.</p>
-        <p>The Participant Token as obtained from <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_StartChatContact.html\">StartChatContact</a>
+        <p>The ParticipantToken as obtained from <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_StartChatContact.html\">StartChatContact</a>
             API response.</p>")
     @as("ParticipantToken")
     participantToken: participantToken,
@@ -306,8 +309,8 @@ module CreateParticipantConnection = {
   }
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "CreateParticipantConnectionCommand"
-  let make = (~participantToken, ~type_, ()) =>
-    new({participantToken: participantToken, type_: type_})
+  let make = (~participantToken, ~type_, ~connectParticipant=?, ()) =>
+    new({connectParticipant: connectParticipant, participantToken: participantToken, type_: type_})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -324,7 +327,7 @@ module CompleteAttachmentUpload = {
     @ocaml.doc("<p>A list of unique identifiers for the attachments.</p>") @as("AttachmentIds")
     attachmentIds: attachmentIdList,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "CompleteAttachmentUploadCommand"
   let make = (~connectionToken, ~clientToken, ~attachmentIds, ()) =>

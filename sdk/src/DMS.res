@@ -24,6 +24,10 @@ type startReplicationTaskTypeValue = [
   | @as("resume-processing") #Resume_Processing
   | @as("start-replication") #Start_Replication
 ]
+type sslSecurityProtocolValue = [
+  | @as("ssl-encryption") #Ssl_Encryption
+  | @as("plaintext") #Plaintext
+]
 type sourceType = [@as("replication-instance") #Replication_Instance]
 type secretString = string
 type safeguardPolicy = [
@@ -39,6 +43,16 @@ type refreshSchemasStatusTypeValue = [
   | @as("refreshing") #Refreshing
   | @as("failed") #Failed
   | @as("successful") #Successful
+]
+type redisAuthTypeValue = [
+  | @as("auth-token") #Auth_Token
+  | @as("auth-role") #Auth_Role
+  | @as("none") #None
+]
+type pluginNameValue = [
+  | @as("pglogical") #Pglogical
+  | @as("test-decoding") #Test_Decoding
+  | @as("no-preference") #No_Preference
 ]
 type parquetVersionValue = [@as("parquet-2-0") #Parquet_2_0 | @as("parquet-1-0") #Parquet_1_0]
 type nestingLevelValue = [@as("one") #One | @as("none") #None]
@@ -93,6 +107,16 @@ type dataFormatValue = [@as("parquet") #Parquet | @as("csv") #Csv]
 type compressionTypeValue = [@as("gzip") #Gzip | @as("none") #None]
 type charLengthSemantics = [@as("byte") #Byte | @as("char") #Char | @as("default") #Default]
 type certificateWallet = NodeJs.Buffer.t
+type cannedAclForObjectsValue = [
+  | @as("bucket-owner-full-control") #Bucket_Owner_Full_Control
+  | @as("bucket-owner-read") #Bucket_Owner_Read
+  | @as("aws-exec-read") #Aws_Exec_Read
+  | @as("authenticated-read") #Authenticated_Read
+  | @as("public-read-write") #Public_Read_Write
+  | @as("public-read") #Public_Read
+  | @as("private") #Private
+  | @as("none") #None
+]
 type booleanOptional = bool
 type boolean_ = bool
 type authTypeValue = [@as("password") #Password | @as("no") #No]
@@ -109,7 +133,7 @@ type vpcSecurityGroupMembership = {
   vpcSecurityGroupId: option<string_>,
 }
 type vpcSecurityGroupIdList = array<string_>
-@ocaml.doc("<p>A user-defined key-value pair that describes metadata added to an AWS DMS resource and
+@ocaml.doc("<p>A user-defined key-value pair that describes metadata added to an DMS resource and
          that is used by operations such as the following:</p>
          <ul>
             <li>
@@ -129,6 +153,11 @@ type vpcSecurityGroupIdList = array<string_>
             </li>
          </ul>")
 type tag = {
+  @ocaml.doc(
+    "<p>The Amazon Resource Name (ARN) string that uniquely identifies the resource for which the tag is created.</p>"
+  )
+  @as("ResourceArn")
+  resourceArn: option<string_>,
   @ocaml.doc("<p>A value is the optional value of the tag. The string value can be 1-256 Unicode
          characters in length and can't be prefixed with \"aws:\" or \"dms:\". The string can only
          contain only the set of Unicode letters, digits, white-space, '_', '.', '/', '=', '+', '-'
@@ -254,10 +283,11 @@ type sybaseSettings = {
   )
   @as("SecretsManagerSecretId")
   secretsManagerSecretId: option<string_>,
-  @ocaml.doc("<p>The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as the
+  @ocaml.doc("<p>The full Amazon Resource Name (ARN) of the IAM role that specifies DMS as the
          trusted entity and grants the required permissions to access the value in
-            <code>SecretsManagerSecret</code>. <code>SecretsManagerSecret</code> has the value of the AWS Secrets
-         Manager secret that allows access to the SAP ASE endpoint.</p>
+         <code>SecretsManagerSecret</code>. The role must allow the <code>iam:PassRole</code> action.
+         <code>SecretsManagerSecret</code> has the value of the Amazon Web Services Secrets Manager
+          secret that allows access to the SAP ASE endpoint.</p>
          <note>
             <p>You can specify one of two sets of values for these permissions. You can specify the
             values for this setting and <code>SecretsManagerSecretId</code>. Or you can specify
@@ -265,8 +295,8 @@ type sybaseSettings = {
                <code>ServerName</code>, and <code>Port</code>. You can't specify both. For more
             information on creating this <code>SecretsManagerSecret</code> and the
                <code>SecretsManagerAccessRoleArn</code> and <code>SecretsManagerSecretId</code>
-            required to access it, see <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager\">Using secrets to access AWS Database Migration Service
-               resources</a> in the <i>AWS Database Migration Service User
+            required to access it, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager\">Using secrets to access Database Migration Service
+               resources</a> in the <i>Database Migration Service User
                Guide</i>.</p>
          </note>")
   @as("SecretsManagerAccessRoleArn")
@@ -274,7 +304,8 @@ type sybaseSettings = {
   @ocaml.doc("<p>Endpoint connection user name.</p>") @as("Username") username: option<string_>,
   @ocaml.doc("<p>Fully qualified domain name of the endpoint.</p>") @as("ServerName")
   serverName: option<string_>,
-  @ocaml.doc("<p>Endpoint TCP port.</p>") @as("Port") port: option<integerOptional>,
+  @ocaml.doc("<p>Endpoint TCP port. The default is 5000.</p>") @as("Port")
+  port: option<integerOptional>,
   @ocaml.doc("<p>Endpoint connection password.</p>") @as("Password") password: option<secretString>,
   @ocaml.doc("<p>Database name for the endpoint.</p>") @as("DatabaseName")
   databaseName: option<string_>,
@@ -289,7 +320,7 @@ type supportedEndpointType = {
   @as("EngineDisplayName")
   engineDisplayName: option<string_>,
   @ocaml.doc(
-    "<p>The earliest AWS DMS engine version that supports this endpoint engine. Note that endpoint engines released with AWS DMS versions earlier than 3.1.1 do not return a value for this parameter.</p>"
+    "<p>The earliest DMS engine version that supports this endpoint engine. Note that endpoint engines released with DMS versions earlier than 3.1.1 do not return a value for this parameter.</p>"
   )
   @as("ReplicationInstanceEngineMinimumVersion")
   replicationInstanceEngineMinimumVersion: option<string_>,
@@ -298,7 +329,7 @@ type supportedEndpointType = {
   )
   @as("EndpointType")
   endpointType: option<replicationEndpointTypeValue>,
-  @ocaml.doc("<p>Indicates if Change Data Capture (CDC) is supported.</p>") @as("SupportsCDC")
+  @ocaml.doc("<p>Indicates if change data capture (CDC) is supported.</p>") @as("SupportsCDC")
   supportsCDC: option<boolean_>,
   @ocaml.doc("<p>The database engine name. Valid values, depending on the EndpointType,  include
          <code>\"mysql\"</code>, <code>\"oracle\"</code>, <code>\"postgres\"</code>,
@@ -315,14 +346,108 @@ type sourceIdsList = array<string_>
 type schemaList = array<string_>
 @ocaml.doc("<p>Settings for exporting data to Amazon S3. </p>")
 type s3Settings = {
+  @ocaml.doc("<p>When creating an S3 target endpoint, set <code>DatePartitionTimezone</code> to convert
+         the current UTC time into a specified time zone. The conversion occurs when a date
+         partition folder is created and a CDC filename is generated. The time zone format is Area/Location.
+         Use this parameter when <code>DatePartitionedEnabled</code> is set to <code>true</code>, as shown in the
+         following example.</p>
+         <p>
+            <code>s3-settings='{\"DatePartitionEnabled\": true, \"DatePartitionSequence\": \"YYYYMMDDHH\",
+            \"DatePartitionDelimiter\": \"SLASH\",
+               \"DatePartitionTimezone\":\"<i>Asia/Seoul</i>\", \"BucketName\":
+            \"dms-nattarat-test\"}'</code>
+         </p>")
+  @as("DatePartitionTimezone")
+  datePartitionTimezone: option<string_>,
+  @ocaml.doc("<p>For an S3 source, when this value is set to <code>true</code> or <code>y</code>,
+         each leading double quotation mark has to be followed by an
+         ending double quotation mark. This formatting complies with RFC
+         4180. When this value is set to <code>false</code> or
+         <code>n</code>, string literals are copied to the target as
+         is. In this case, a delimiter (row or column) signals the end of
+         the field. Thus, you can't use a delimiter as part of the
+         string, because it signals the end of the value.</p>
+         <p>For an S3 target, an optional parameter used to set behavior to comply with RFC
+         4180 for data migrated to Amazon S3 using .csv file format only. When this
+         value is set to <code>true</code> or <code>y</code> using Amazon
+         S3 as a target, if the data has quotation marks or newline
+         characters in it, DMS encloses the entire column with an
+         additional pair of double quotation marks (\"). Every quotation
+         mark within the data is repeated twice.</p>
+         <p>The default value is <code>true</code>. Valid values include <code>true</code>, <code>false</code>,
+         <code>y</code>, and <code>n</code>.</p>")
+  @as("Rfc4180")
+  rfc4180: option<booleanOptional>,
+  @ocaml.doc("<p>A value that specifies the maximum size (in KB) of any .csv
+         file to be created while migrating to an S3 target during full
+         load.</p>
+         <p>The default value is 1,048,576 KB (1 GB). Valid values include 1 to 1,048,576.</p>")
+  @as("MaxFileSize")
+  maxFileSize: option<integerOptional>,
+  @ocaml.doc("<p>When this value is set to 1, DMS ignores the first row header in a .csv file. A value
+         of 1 turns on the feature; a value of 0 turns off the feature.</p>
+         <p>The default is 0.</p>")
+  @as("IgnoreHeaderRows")
+  ignoreHeaderRows: option<integerOptional>,
+  @ocaml.doc("<p>An optional parameter that specifies how DMS treats null
+         values. While handling the null value, you can use this
+         parameter to pass a user-defined string as null when writing to
+         the target. For example, when target columns are not nullable,
+         you can use this option to differentiate between the empty
+         string value and the null value. So, if you set this parameter
+         value to the empty string (\"\" or ''), DMS treats the empty
+         string as the null value instead of <code>NULL</code>.</p>
+         <p>The default value is <code>NULL</code>. Valid values include any valid string.</p>")
+  @as("CsvNullValue")
+  csvNullValue: option<string_>,
+  @ocaml.doc("<p>Minimum file size, defined in megabytes, to reach for a file output to Amazon S3.</p>
+         <p>When <code>CdcMinFileSize</code> and <code>CdcMaxBatchInterval</code> are both specified, the file 
+         write is triggered by whichever parameter condition is met first within an DMS 
+         CloudFormation template.</p>
+         <p>The default value is 32 MB.</p>")
+  @as("CdcMinFileSize")
+  cdcMinFileSize: option<integerOptional>,
+  @ocaml.doc("<p>Maximum length of the interval, defined in seconds, after which to output a file to Amazon S3.</p>
+         <p>When <code>CdcMaxBatchInterval</code> and <code>CdcMinFileSize</code> are both specified, the
+         file write is triggered by whichever parameter condition is met first within an DMS
+         CloudFormation template.</p>
+         <p>The default value is 60 seconds.</p>")
+  @as("CdcMaxBatchInterval")
+  cdcMaxBatchInterval: option<integerOptional>,
+  @ocaml.doc("<p>An optional parameter that, when set to <code>true</code> or <code>y</code>, you can use
+         to add column name information to the .csv output file.</p>
+         <p>The default value is <code>false</code>. Valid values are <code>true</code>, <code>false</code>,
+         <code>y</code>, and <code>n</code>.</p>")
+  @as("AddColumnName")
+  addColumnName: option<booleanOptional>,
+  @ocaml.doc("<p>A value that enables DMS to specify a predefined (canned) access control list for
+         objects created in an Amazon S3 bucket as .csv or .parquet files. For more information
+         about Amazon S3 canned ACLs, see <a href=\"http://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl\">Canned
+            ACL</a> in the <i>Amazon S3 Developer Guide.</i>
+         </p>
+         <p>The default value is NONE. Valid values include NONE, PRIVATE,
+         PUBLIC_READ, PUBLIC_READ_WRITE, AUTHENTICATED_READ,
+         AWS_EXEC_READ, BUCKET_OWNER_READ, and
+         BUCKET_OWNER_FULL_CONTROL.</p>")
+  @as("CannedAclForObjects")
+  cannedAclForObjects: option<cannedAclForObjectsValue>,
+  @ocaml.doc("<p>When set to true, this parameter uses the task start time as the timestamp column value instead of 
+         the time data is written to target. For full load, when <code>useTaskStartTimeForFullLoadTimestamp</code>
+         is set to <code>true</code>, each row of the timestamp column contains the task start time. For CDC loads, 
+         each row of the timestamp column contains the transaction commit time.</p>
+         
+         <p>When <code>useTaskStartTimeForFullLoadTimestamp</code> is set to <code>false</code>, the full load timestamp 
+         in the timestamp column increments with the time data arrives at the target. </p>")
+  @as("UseTaskStartTimeForFullLoadTimestamp")
+  useTaskStartTimeForFullLoadTimestamp: option<booleanOptional>,
   @ocaml.doc("<p>Specifies the folder path of CDC files. For an S3 source, this setting is required if a
-         task captures change data; otherwise, it's optional. If <code>CdcPath</code> is set, AWS
-         DMS reads CDC files from this path and replicates the data changes to the target endpoint.
+         task captures change data; otherwise, it's optional. If <code>CdcPath</code> is set, DMS
+          reads CDC files from this path and replicates the data changes to the target endpoint.
          For an S3 target if you set <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-PreserveTransactions\">
                <code>PreserveTransactions</code>
-            </a> to <code>true</code>, AWS
-         DMS verifies that you have set this parameter to a folder path on your S3 target where AWS
-         DMS can save the transaction order for the CDC load. AWS DMS creates this CDC folder path
+            </a> to <code>true</code>, DMS
+          verifies that you have set this parameter to a folder path on your S3 target where DMS
+          can save the transaction order for the CDC load. DMS creates this CDC folder path
          in either your S3 target working directory or the S3 target location specified by <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-BucketFolder\">
                <code>BucketFolder</code>
             </a> and <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-BucketName\">
@@ -330,26 +455,26 @@ type s3Settings = {
             </a>.</p>
          <p>For example, if you specify <code>CdcPath</code> as <code>MyChangedData</code>, and you
          specify <code>BucketName</code> as <code>MyTargetBucket</code> but do not specify
-            <code>BucketFolder</code>, AWS DMS creates the CDC folder path following:
+            <code>BucketFolder</code>, DMS creates the CDC folder path following:
             <code>MyTargetBucket/MyChangedData</code>.</p>
          <p>If you specify the same <code>CdcPath</code>, and you specify <code>BucketName</code> as
             <code>MyTargetBucket</code> and <code>BucketFolder</code> as <code>MyTargetData</code>,
-         AWS DMS creates the CDC folder path following:
+         DMS creates the CDC folder path following:
             <code>MyTargetBucket/MyTargetData/MyChangedData</code>.</p>
          <p>For more information on CDC including transaction order on an S3 target, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.EndpointSettings.CdcPath\">Capturing data changes (CDC) including transaction order on the S3
             target</a>.</p>
          <note>
-            <p>This setting is supported in AWS DMS versions 3.4.2 and later.</p>
+            <p>This setting is supported in DMS versions 3.4.2 and later.</p>
          </note>")
   @as("CdcPath")
   cdcPath: option<string_>,
-  @ocaml.doc("<p>If set to <code>true</code>, AWS DMS saves the transaction order for a change data
+  @ocaml.doc("<p>If set to <code>true</code>, DMS saves the transaction order for a change data
          capture (CDC) load on the Amazon S3 target specified by <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-CdcPath\">
                <code>CdcPath</code>
             </a>. For more information, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.EndpointSettings.CdcPath\">Capturing data changes (CDC) including transaction order on the S3
             target</a>.</p>
          <note>
-            <p>This setting is supported in AWS DMS versions 3.4.2 and later.</p>
+            <p>This setting is supported in DMS versions 3.4.2 and later.</p>
          </note>")
   @as("PreserveTransactions")
   preserveTransactions: option<booleanOptional>,
@@ -357,22 +482,22 @@ type s3Settings = {
          (CDC) load are written in .csv format. If <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-UseCsvNoSupValue\">
                <code>UseCsvNoSupValue</code>
             </a> is set to true, specify a
-         string value that you want AWS DMS to use for all columns not included in the supplemental
-         log. If you do not specify a string value, AWS DMS uses the null value for these columns
+         string value that you want DMS to use for all columns not included in the supplemental
+         log. If you do not specify a string value, DMS uses the null value for these columns
          regardless of the <code>UseCsvNoSupValue</code> setting.</p>
          <note>
-            <p>This setting is supported in AWS DMS versions 3.4.1 and later.</p>
+            <p>This setting is supported in DMS versions 3.4.1 and later.</p>
          </note>")
   @as("CsvNoSupValue")
   csvNoSupValue: option<string_>,
   @ocaml.doc("<p>This setting applies if the S3 output files during a change data capture (CDC) load are
          written in .csv format. If set to <code>true</code> for columns not included in the
-         supplemental log, AWS DMS uses the value specified by <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-CsvNoSupValue\">
+         supplemental log, DMS uses the value specified by <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-CsvNoSupValue\">
                <code>CsvNoSupValue</code>
             </a>. If not set or set to
-            <code>false</code>, AWS DMS uses the null value for these columns.</p>
+            <code>false</code>, DMS uses the null value for these columns.</p>
          <note>
-            <p>This setting is supported in AWS DMS versions 3.4.1 and later.</p>
+            <p>This setting is supported in DMS versions 3.4.1 and later.</p>
          </note>")
   @as("UseCsvNoSupValue")
   useCsvNoSupValue: option<booleanOptional>,
@@ -384,9 +509,9 @@ type s3Settings = {
          <code>YYYYMMDD</code>. Use this parameter when <code>DatePartitionedEnabled</code> is set to <code>true</code>.</p>")
   @as("DatePartitionSequence")
   datePartitionSequence: option<datePartitionSequenceValue>,
-  @ocaml.doc("<p>When set to <code>true</code>, this parameter partitions S3 bucket folders based on transaction commit 
-         dates. The default value is <code>false</code>. For more information about date-based folder partitoning, 
-         see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.DatePartitioning\">Using date-based folder partitioning</a>.</p>")
+  @ocaml.doc("<p>When set to <code>true</code>, this parameter partitions S3 bucket folders based on
+         transaction commit dates. The default value is <code>false</code>. For more information
+         about date-based folder partitioning, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.DatePartitioning\">Using date-based folder partitioning</a>.</p>")
   @as("DatePartitionEnabled")
   datePartitionEnabled: option<booleanOptional>,
   @ocaml.doc("<p>A value that enables a change data capture (CDC) load to write INSERT and UPDATE
@@ -401,11 +526,10 @@ type s3Settings = {
          operations at the source. But if <code>IncludeOpForFullLoad</code> is set to
             <code>false</code>, CDC records are written without an indication of INSERT or UPDATE
          operations at the source. For more information about how these settings work together, see
-            <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring.InsertOps\">Indicating Source DB Operations in Migrated S3 Data</a> in the <i>AWS
-            Database Migration Service User Guide.</i>.</p>
+            <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring.InsertOps\">Indicating Source DB Operations in Migrated S3 Data</a> in the <i>Database Migration Service User Guide.</i>.</p>
          <note>
 
-            <p>AWS DMS supports the use of the <code>CdcInsertsAndUpdates</code> parameter in
+            <p>DMS supports the use of the <code>CdcInsertsAndUpdates</code> parameter in
             versions 3.3.1 and later.</p>
 
             <p>
@@ -420,34 +544,32 @@ type s3Settings = {
   @ocaml.doc("<p>A value that specifies the precision of any <code>TIMESTAMP</code> column values that
          are written to an Amazon S3 object file in .parquet format.</p>
          <note>
-            <p>AWS DMS supports the <code>ParquetTimestampInMillisecond</code> parameter in versions
+            <p>DMS supports the <code>ParquetTimestampInMillisecond</code> parameter in versions
             3.1.4 and later.</p>
          </note>
          <p>When <code>ParquetTimestampInMillisecond</code> is set to <code>true</code> or
-            <code>y</code>, AWS DMS writes all <code>TIMESTAMP</code> columns in a .parquet
+            <code>y</code>, DMS writes all <code>TIMESTAMP</code> columns in a .parquet
          formatted file with millisecond precision. Otherwise, DMS writes them with microsecond
          precision.</p>
-         <p>Currently, Amazon Athena and AWS Glue can handle only
+         <p>Currently, Amazon Athena and Glue can handle only
          millisecond precision for <code>TIMESTAMP</code> values. Set
          this parameter to <code>true</code> for S3 endpoint object
-         files that are .parquet formatted only if you plan to query or process the data with Athena or AWS Glue.</p>
+         files that are .parquet formatted only if you plan to query or process the data with Athena or Glue.</p>
          <note>
-
-               <p>AWS DMS writes any <code>TIMESTAMP</code> column
+              <p>DMS writes any <code>TIMESTAMP</code> column
                   values written to an S3 file in .csv format with
                   microsecond precision.</p>
 
                <p>Setting <code>ParquetTimestampInMillisecond</code> has no effect on the string
             format of the timestamp column value that is inserted by setting the
                <code>TimestampColumnName</code> parameter.</p>
-
          </note>")
   @as("ParquetTimestampInMillisecond")
   parquetTimestampInMillisecond: option<booleanOptional>,
-  @ocaml.doc("<p>A value that when nonblank causes AWS DMS to add a column with timestamp information to
+  @ocaml.doc("<p>A value that when nonblank causes DMS to add a column with timestamp information to
          the endpoint data for an Amazon S3 target.</p>
          <note>
-            <p>AWS DMS supports the <code>TimestampColumnName</code> parameter in versions 3.1.4 and later.</p>
+            <p>DMS supports the <code>TimestampColumnName</code> parameter in versions 3.1.4 and later.</p>
          </note>
          <p>DMS includes an additional <code>STRING</code> column in the
          .csv or .parquet object files of your migrated data when you set
@@ -481,12 +603,11 @@ type s3Settings = {
          INSERT operation at the source. If <code>IncludeOpForFullLoad</code> is set to
             <code>false</code>, every CDC record is written without a first field to indicate the
          INSERT operation at the source. For more information about how these settings work
-         together, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring.InsertOps\">Indicating Source DB Operations in Migrated S3 Data</a> in the <i>AWS
-            Database Migration Service User Guide.</i>.</p>
+         together, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring.InsertOps\">Indicating Source DB Operations in Migrated S3 Data</a> in the <i>Database Migration Service User Guide.</i>.</p>
 
          <note>
 
-               <p>AWS DMS supports the interaction described preceding between the
+               <p>DMS supports the interaction described preceding between the
                <code>CdcInsertsOnly</code> and <code>IncludeOpForFullLoad</code> parameters in
             versions 3.1.4 and later. </p>
 
@@ -502,7 +623,7 @@ type s3Settings = {
   @ocaml.doc("<p>A value that enables a full load to write INSERT operations to the comma-separated value
          (.csv) output files only to indicate how the rows were added to the source database.</p>
          <note>
-            <p>AWS DMS supports the <code>IncludeOpForFullLoad</code> parameter in versions 3.1.4 and
+            <p>DMS supports the <code>IncludeOpForFullLoad</code> parameter in versions 3.1.4 and
             later.</p>
          </note>
          <p>For full load, records can only be inserted. By default (the <code>false</code>
@@ -514,8 +635,8 @@ type s3Settings = {
          <note>
             <p>This setting works together with the <code>CdcInsertsOnly</code> and the
                <code>CdcInsertsAndUpdates</code> parameters for output to .csv files only. For more
-            information about how these settings work together, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring.InsertOps\">Indicating Source DB Operations in Migrated S3 Data</a> in the <i>AWS
-               Database Migration Service User Guide.</i>.</p>
+            information about how these settings work together, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring.InsertOps\">Indicating Source DB Operations in Migrated S3 Data</a> in the <i>Database Migration Service
+                   User Guide.</i>.</p>
          </note>")
   @as("IncludeOpForFullLoad")
   includeOpForFullLoad: option<booleanOptional>,
@@ -586,8 +707,8 @@ type s3Settings = {
   @as("DataFormat")
   dataFormat: option<dataFormatValue>,
   @ocaml.doc("<p>If you are using <code>SSE_KMS</code> for the <code>EncryptionMode</code>, provide the
-         AWS KMS key ID. The key that you use needs an attached policy that enables AWS Identity and
-         Access Management (IAM) user permissions and allows use of the key.</p>
+         KMS key ID. The key that you use needs an attached policy that enables Identity and Access Management
+         (IAM) user permissions and allows use of the key.</p>
          <p>Here is a CLI example: <code>aws dms create-endpoint --endpoint-identifier
                <i>value</i> --endpoint-type target --engine-name s3 --s3-settings
                ServiceAccessRoleArn=<i>value</i>,BucketFolder=<i>value</i>,BucketName=<i>value</i>,EncryptionMode=SSE_KMS,ServerSideEncryptionKmsKeyId=<i>value</i>
@@ -604,7 +725,7 @@ type s3Settings = {
                <code>SSE_S3</code>. But you can’t change the existing value from <code>SSE_S3</code>
             to <code>SSE_KMS</code>.</p>
          </note>
-         <p>To use <code>SSE_S3</code>, you need an AWS Identity and Access Management (IAM) role
+         <p>To use <code>SSE_S3</code>, you need an Identity and Access Management (IAM) role
          with permission to allow <code>\"arn:aws:s3:::dms-*\"</code> to use the following
          actions:</p>
          <ul>
@@ -692,7 +813,8 @@ type s3Settings = {
   @ocaml.doc("<p> Specifies how tables are defined in the S3 source files only. </p>")
   @as("ExternalTableDefinition")
   externalTableDefinition: option<string_>,
-  @ocaml.doc("<p> The Amazon Resource Name (ARN) used by the service access IAM role. It is a required
+  @ocaml.doc("<p> The Amazon Resource Name (ARN) used by the service to access the IAM role.
+         The role must allow the <code>iam:PassRole</code> action. It is a required
          parameter that enables DMS to write and read objects from an S3 bucket.</p>")
   @as("ServiceAccessRoleArn")
   serviceAccessRoleArn: option<string_>,
@@ -798,10 +920,15 @@ type replicationTaskAssessmentRunProgress = {
 }
 @ocaml.doc("<p> The task assessment report in JSON format. </p>")
 type replicationTaskAssessmentResult = {
-  @ocaml.doc("<p> The URL of the S3 object containing the task assessment results. </p>")
+  @ocaml.doc("<p> The URL of the S3 object containing the task assessment results. </p>
+         <p>The response object only contains this field if you provide <a>DescribeReplicationTaskAssessmentResultsMessage$ReplicationTaskArn</a>
+           in the request.</p>")
   @as("S3ObjectUrl")
   s3ObjectUrl: option<string_>,
-  @ocaml.doc("<p> The task assessment results in JSON format. </p>") @as("AssessmentResults")
+  @ocaml.doc("<p> The task assessment results in JSON format. </p>
+         <p>The response object only contains this field if you provide <a>DescribeReplicationTaskAssessmentResultsMessage$ReplicationTaskArn</a>
+           in the request.</p>")
+  @as("AssessmentResults")
   assessmentResults: option<string_>,
   @ocaml.doc("<p> The file containing the results of the task assessment. </p>")
   @as("AssessmentResultsFile")
@@ -841,7 +968,7 @@ type replicationPendingModifiedValues = {
          replication instance class.</p>
          <p>For more information on the settings and capacities for the available replication instance classes, see 
          <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.html#CHAP_ReplicationInstance.InDepth\">
-            Selecting the right AWS DMS replication instance for your migration</a>.
+            Selecting the right DMS replication instance for your migration</a>.
       </p>")
   @as("ReplicationInstanceClass")
   replicationInstanceClass: option<string_>,
@@ -882,10 +1009,10 @@ type redshiftSettings = {
   )
   @as("SecretsManagerSecretId")
   secretsManagerSecretId: option<string_>,
-  @ocaml.doc("<p>The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as the
+  @ocaml.doc("<p>The full Amazon Resource Name (ARN) of the IAM role that specifies DMS as the
          trusted entity and grants the required permissions to access the value in
-            <code>SecretsManagerSecret</code>. <code>SecretsManagerSecret</code> has the value of the AWS Secrets
-         Manager secret that allows access to the Amazon Redshift endpoint.</p>
+         <code>SecretsManagerSecret</code>. The role must allow the <code>iam:PassRole</code> action.
+         <code>SecretsManagerSecret</code> has the value of the Amazon Web Services Secrets Manager secret that allows access to the Amazon Redshift endpoint.</p>
          <note>
             <p>You can specify one of two sets of values for these permissions. You can specify the
             values for this setting and <code>SecretsManagerSecretId</code>. Or you can specify
@@ -893,8 +1020,8 @@ type redshiftSettings = {
                <code>ServerName</code>, and <code>Port</code>. You can't specify both. For more
             information on creating this <code>SecretsManagerSecret</code> and the
                <code>SecretsManagerAccessRoleArn</code> and <code>SecretsManagerSecretId</code>
-            required to access it, see <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager\">Using secrets to access AWS Database Migration Service
-               resources</a> in the <i>AWS Database Migration Service User
+            required to access it, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager\">Using secrets to access Database Migration Service
+               resources</a> in the <i>Database Migration Service User
                Guide</i>.</p>
          </note>")
   @as("SecretsManagerAccessRoleArn")
@@ -926,13 +1053,13 @@ type redshiftSettings = {
          to <code>auto</code>. </p>")
   @as("TimeFormat")
   timeFormat: option<string_>,
-  @ocaml.doc("<p>The AWS KMS key ID. If you are using <code>SSE_KMS</code> for the <code>EncryptionMode</code>,
+  @ocaml.doc("<p>The KMS key ID. If you are using <code>SSE_KMS</code> for the <code>EncryptionMode</code>,
          provide this key ID. The key that you use needs an attached policy that enables IAM user
          permissions and allows use of the key.</p>")
   @as("ServerSideEncryptionKmsKeyId")
   serverSideEncryptionKmsKeyId: option<string_>,
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the IAM role that has access to the Amazon Redshift
-         service.</p>")
+         service. The role must allow the <code>iam:PassRole</code> action.</p>")
   @as("ServiceAccessRoleArn")
   serviceAccessRoleArn: option<string_>,
   @ocaml.doc("<p>The name of the Amazon Redshift cluster you are using.</p>") @as("ServerName")
@@ -962,7 +1089,7 @@ type redshiftSettings = {
   @as("MaxFileSize")
   maxFileSize: option<integerOptional>,
   @ocaml.doc("<p>The amount of time to wait (in milliseconds) before timing out of operations performed 
-            by AWS DMS on a Redshift cluster, such as Redshift COPY, INSERT, DELETE, and UPDATE.</p>")
+            by DMS on a Redshift cluster, such as Redshift COPY, INSERT, DELETE, and UPDATE.</p>")
   @as("LoadTimeout")
   loadTimeout: option<integerOptional>,
   @ocaml.doc("<p>The number of threads used to upload a single file. This parameter accepts a value from
@@ -990,13 +1117,13 @@ type redshiftSettings = {
                <code>SSE_S3</code>. But you can’t change the existing value from <code>SSE_S3</code>
             to <code>SSE_KMS</code>.</p>
          </note>
-         <p>To use <code>SSE_S3</code>, create an AWS Identity and Access Management (IAM) role with
+         <p>To use <code>SSE_S3</code>, create an Identity and Access Management (IAM) role with
          a policy that allows <code>\"arn:aws:s3:::*\"</code> to use the following actions:
             <code>\"s3:PutObject\", \"s3:ListBucket\"</code>
          </p>")
   @as("EncryptionMode")
   encryptionMode: option<encryptionModeValue>,
-  @ocaml.doc("<p>A value that specifies whether AWS DMS should migrate empty CHAR and VARCHAR fields as
+  @ocaml.doc("<p>A value that specifies whether DMS should migrate empty CHAR and VARCHAR fields as
          NULL. A value of <code>true</code> sets empty CHAR and VARCHAR fields to null. The default
          is <code>false</code>.</p>")
   @as("EmptyAsNull")
@@ -1036,12 +1163,12 @@ type redshiftSettings = {
   bucketName: option<string_>,
   @ocaml.doc("<p>An S3 folder where the comma-separated-value (.csv) files are stored before being 
          uploaded to the target Redshift cluster. </p>
-         <p>For full load mode, AWS DMS converts source records into .csv files and loads them to
-         the <i>BucketFolder/TableID</i> path. AWS DMS uses the Redshift
+         <p>For full load mode, DMS converts source records into .csv files and loads them to
+         the <i>BucketFolder/TableID</i> path. DMS uses the Redshift
             <code>COPY</code> command to upload the .csv files to the target table. The files are
          deleted once the <code>COPY</code> operation has finished. For more information, see <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/r_COPY.html\">COPY</a> in the
             <i>Amazon Redshift Database Developer Guide</i>.</p>
-         <p>For change-data-capture (CDC) mode, AWS DMS creates a <i>NetChanges</i> table, 
+         <p>For change-data-capture (CDC) mode, DMS creates a <i>NetChanges</i> table, 
          and loads the .csv files to this <i>BucketFolder/NetChangesTableID</i> path.</p>")
   @as("BucketFolder")
   bucketFolder: option<string_>,
@@ -1058,6 +1185,43 @@ type redshiftSettings = {
   @as("AcceptAnyDate")
   acceptAnyDate: option<booleanOptional>,
 }
+@ocaml.doc("<p>Provides information that defines a Redis target endpoint.</p>")
+type redisSettings = {
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) for the certificate authority (CA) that DMS uses to
+         connect to your Redis target endpoint.</p>")
+  @as("SslCaCertificateArn")
+  sslCaCertificateArn: option<string_>,
+  @ocaml.doc("<p>The password provided with the <code>auth-role</code> and 
+         <code>auth-token</code> options of the <code>AuthType</code> setting for a Redis 
+         target endpoint.</p>")
+  @as("AuthPassword")
+  authPassword: option<secretString>,
+  @ocaml.doc("<p>The user name provided with the <code>auth-role</code> option of the 
+         <code>AuthType</code> setting for a Redis target endpoint.</p>")
+  @as("AuthUserName")
+  authUserName: option<string_>,
+  @ocaml.doc("<p>The type of authentication to perform when connecting to a Redis target. Options include
+            <code>none</code>, <code>auth-token</code>, and <code>auth-role</code>. The
+            <code>auth-token</code> option requires an <code>AuthPassword</code> value to be provided. The
+         <code>auth-role</code> option requires <code>AuthUserName</code> and <code>AuthPassword</code> values
+         to be provided.</p>")
+  @as("AuthType")
+  authType: option<redisAuthTypeValue>,
+  @ocaml.doc("<p>The connection to a Redis target endpoint using Transport Layer Security (TLS). Valid
+         values include <code>plaintext</code> and <code>ssl-encryption</code>. The default is
+            <code>ssl-encryption</code>. The <code>ssl-encryption</code> option makes an encrypted
+         connection. Optionally, you can identify an Amazon Resource Name (ARN) for an SSL certificate authority (CA) 
+          using the <code>SslCaCertificateArn </code>setting. If an ARN isn't given for a CA, DMS
+         uses the Amazon root CA.</p>
+         <p>The <code>plaintext</code> option doesn't provide Transport Layer Security (TLS) 
+         encryption for traffic between endpoint and database.</p>")
+  @as("SslSecurityProtocol")
+  sslSecurityProtocol: option<sslSecurityProtocolValue>,
+  @ocaml.doc("<p>Transmission Control Protocol (TCP) port for the endpoint.</p>") @as("Port")
+  port: integer_,
+  @ocaml.doc("<p>Fully qualified domain name of the endpoint.</p>") @as("ServerName")
+  serverName: string_,
+}
 @ocaml.doc("<p>Provides information that defines a PostgreSQL endpoint.</p>")
 type postgreSQLSettings = {
   @ocaml.doc(
@@ -1065,10 +1229,11 @@ type postgreSQLSettings = {
   )
   @as("SecretsManagerSecretId")
   secretsManagerSecretId: option<string_>,
-  @ocaml.doc("<p>The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as the
+  @ocaml.doc("<p>The full Amazon Resource Name (ARN) of the IAM role that specifies DMS as the
          trusted entity and grants the required permissions to access the value in
-            <code>SecretsManagerSecret</code>. <code>SecretsManagerSecret</code> has the value of the AWS Secrets
-         Manager secret that allows access to the PostgreSQL endpoint.</p>
+         <code>SecretsManagerSecret</code>. The role must allow the <code>iam:PassRole</code> action.
+         <code>SecretsManagerSecret</code> has the value of the Amazon Web Services Secrets Manager
+          secret that allows access to the PostgreSQL endpoint.</p>
          <note>
             <p>You can specify one of two sets of values for these permissions. You can specify the
             values for this setting and <code>SecretsManagerSecretId</code>. Or you can specify
@@ -1076,24 +1241,48 @@ type postgreSQLSettings = {
                <code>ServerName</code>, and <code>Port</code>. You can't specify both. For more
             information on creating this <code>SecretsManagerSecret</code> and the
                <code>SecretsManagerAccessRoleArn</code> and <code>SecretsManagerSecretId</code>
-            required to access it, see <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager\">Using secrets to access AWS Database Migration Service
-               resources</a> in the <i>AWS Database Migration Service User
+            required to access it, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager\">Using secrets to access Database Migration Service
+               resources</a> in the <i>Database Migration Service User
                Guide</i>.</p>
          </note>")
   @as("SecretsManagerAccessRoleArn")
   secretsManagerAccessRoleArn: option<string_>,
+  @ocaml.doc("<p>Specifies the plugin to use to create a replication slot.</p>") @as("PluginName")
+  pluginName: option<pluginNameValue>,
   @ocaml.doc("<p>Sets the name of a previously created logical replication slot
-         for a CDC load of the PostgreSQL source instance.</p>
-         <p>When used with the AWS DMS API <code>CdcStartPosition</code>
-         request parameter, this attribute also enables using native
-         CDC start points.</p>")
+         for a change data capture (CDC) load of the PostgreSQL source instance. </p>
+         <p>When used with the <code>CdcStartPosition</code>
+         request parameter for the DMS API , this attribute also makes it possible to use native CDC
+         start points. DMS verifies that the specified logical
+         replication slot exists before starting the CDC load task. It
+         also verifies that the task was created with a valid setting of
+         <code>CdcStartPosition</code>. If the specified slot
+         doesn't exist or the task doesn't have a valid
+         <code>CdcStartPosition</code> setting, DMS raises an
+         error.</p>
+         <p>For more information about setting the <code>CdcStartPosition</code> request parameter,
+         see <a href=\"dms/latest/userguide/CHAP_Task.CDC.html#CHAP_Task.CDC.StartPoint.Native\">Determining a CDC native start point</a> in the <i>Database Migration Service User
+            Guide</i>. For more information about using <code>CdcStartPosition</code>, see
+            <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_CreateReplicationTask.html\">CreateReplicationTask</a>, <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTask.html\">StartReplicationTask</a>, and <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_ModifyReplicationTask.html\">ModifyReplicationTask</a>.</p>")
   @as("SlotName")
   slotName: option<string_>,
   @ocaml.doc("<p>Endpoint connection user name.</p>") @as("Username") username: option<string_>,
   @ocaml.doc("<p>Fully qualified domain name of the endpoint.</p>") @as("ServerName")
   serverName: option<string_>,
-  @ocaml.doc("<p>Endpoint TCP port.</p>") @as("Port") port: option<integerOptional>,
+  @ocaml.doc("<p>Endpoint TCP port. The default is 5432.</p>") @as("Port")
+  port: option<integerOptional>,
   @ocaml.doc("<p>Endpoint connection password.</p>") @as("Password") password: option<secretString>,
+  @ocaml.doc("<p>Sets the WAL heartbeat frequency (in minutes).</p>") @as("HeartbeatFrequency")
+  heartbeatFrequency: option<integerOptional>,
+  @ocaml.doc("<p>Sets the schema in which the heartbeat artifacts are created.</p>")
+  @as("HeartbeatSchema")
+  heartbeatSchema: option<string_>,
+  @ocaml.doc("<p>The write-ahead log (WAL) heartbeat feature mimics a dummy transaction. By doing this,
+         it prevents idle logical replication slots from holding onto old WAL logs, which can result in
+         storage full situations on the source. This heartbeat keeps <code>restart_lsn</code> moving
+         and prevents storage full scenarios.</p>")
+  @as("HeartbeatEnable")
+  heartbeatEnable: option<booleanOptional>,
   @ocaml.doc("<p>When set to <code>true</code>, this value causes a task to fail if the
          actual size of a LOB column is greater than the specified
          <code>LobMaxSize</code>.</p>
@@ -1121,7 +1310,7 @@ type postgreSQLSettings = {
          </p>")
   @as("MaxFileSize")
   maxFileSize: option<integerOptional>,
-  @ocaml.doc("<p>To capture DDL events, AWS DMS creates various artifacts in
+  @ocaml.doc("<p>To capture DDL events, DMS creates various artifacts in
          the PostgreSQL database when the task starts. You can later
          remove these artifacts.</p>
          <p>If this value is set to <code>N</code>, you don't have to create tables or
@@ -1129,7 +1318,7 @@ type postgreSQLSettings = {
   @as("CaptureDdls")
   captureDdls: option<booleanOptional>,
   @ocaml.doc("<p>For use with change data capture (CDC) only, this attribute
-         has AWS DMS bypass foreign keys and user triggers to
+         has DMS bypass foreign keys and user triggers to
          reduce the time it takes to bulk load data.</p>
          <p>Example: <code>afterConnectScript=SET
          session_replication_role='replica'</code>
@@ -1137,7 +1326,7 @@ type postgreSQLSettings = {
   @as("AfterConnectScript")
   afterConnectScript: option<string_>,
 }
-@ocaml.doc("<p>Describes a maintenance action pending for an AWS DMS resource, including when and how
+@ocaml.doc("<p>Describes a maintenance action pending for an DMS resource, including when and how
          it will be applied. This data type is a response element to the
             <code>DescribePendingMaintenanceActions</code> operation.</p>")
 type pendingMaintenanceAction = {
@@ -1171,280 +1360,41 @@ type pendingMaintenanceAction = {
   @as("Action")
   action: option<string_>,
 }
-@ocaml.doc("<p>Provides information that defines an Oracle endpoint.</p>")
-type oracleSettings = {
-  @ocaml.doc("<p>Required only if your Oracle endpoint uses Advanced Storage Manager (ASM). The full ARN, partial ARN, or friendly name of the <code>SecretsManagerOracleAsmSecret</code> 
-         that contains the Oracle ASM connection details for the Oracle endpoint.</p>")
-  @as("SecretsManagerOracleAsmSecretId")
-  secretsManagerOracleAsmSecretId: option<string_>,
-  @ocaml.doc("<p>Required only if your Oracle endpoint uses Advanced Storage Manager (ASM). The full ARN
-         of the IAM role that specifies AWS DMS as the trusted entity and grants the required
-         permissions to access the <code>SecretsManagerOracleAsmSecret</code>. This
-            <code>SecretsManagerOracleAsmSecret</code> has the secret value that allows access to
-         the Oracle ASM of the endpoint.</p>
-         <note>
-            <p>You can specify one of two sets of values for these permissions. You can specify the
-            values for this setting and <code>SecretsManagerOracleAsmSecretId</code>. Or you can
-            specify clear-text values for <code>AsmUserName</code>, <code>AsmPassword</code>, and
-               <code>AsmServerName</code>. You can't specify both. For more information on
-            creating this <code>SecretsManagerOracleAsmSecret</code> and the
-               <code>SecretsManagerOracleAsmAccessRoleArn</code> and
-               <code>SecretsManagerOracleAsmSecretId</code> required to access it, see <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager\">Using secrets to access AWS Database Migration Service
-               resources</a> in the <i>AWS Database Migration Service User
-               Guide</i>.</p>
-         </note>")
-  @as("SecretsManagerOracleAsmAccessRoleArn")
-  secretsManagerOracleAsmAccessRoleArn: option<string_>,
-  @ocaml.doc(
-    "<p>The full ARN, partial ARN, or friendly name of the <code>SecretsManagerSecret</code> that contains the Oracle endpoint connection details.</p>"
-  )
-  @as("SecretsManagerSecretId")
-  secretsManagerSecretId: option<string_>,
-  @ocaml.doc("<p>The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as the
-         trusted entity and grants the required permissions to access the value in
-            <code>SecretsManagerSecret</code>. <code>SecretsManagerSecret</code> has the value of the AWS Secrets
-         Manager secret that allows access to the Oracle endpoint.</p>
-         <note>
-            <p>You can specify one of two sets of values for these permissions. You can specify the
-            values for this setting and <code>SecretsManagerSecretId</code>. Or you can specify
-            clear-text values for <code>UserName</code>, <code>Password</code>,
-               <code>ServerName</code>, and <code>Port</code>. You can't specify both. For more
-            information on creating this <code>SecretsManagerSecret</code> and the
-               <code>SecretsManagerAccessRoleArn</code> and <code>SecretsManagerSecretId</code>
-            required to access it, see <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager\">Using secrets to access AWS Database Migration Service
-               resources</a> in the <i>AWS Database Migration Service User
-               Guide</i>.</p>
-         </note>")
-  @as("SecretsManagerAccessRoleArn")
-  secretsManagerAccessRoleArn: option<string_>,
-  @ocaml.doc("<p>Endpoint connection user name.</p>") @as("Username") username: option<string_>,
-  @ocaml.doc("<p>Use this attribute to convert <code>SDO_GEOMETRY</code> to 
-         <code>GEOJSON</code> format. By default, DMS calls the 
-         <code>SDO2GEOJSON</code> custom function if present and accessible. 
-         Or you can create your own custom function that mimics the operation of 
-         <code>SDOGEOJSON</code> and set 
-         <code>SpatialDataOptionToGeoJsonFunctionName</code> to call it instead. </p>")
-  @as("SpatialDataOptionToGeoJsonFunctionName")
-  spatialDataOptionToGeoJsonFunctionName: option<string_>,
-  @ocaml.doc("<p>Fully qualified domain name of the endpoint.</p>") @as("ServerName")
-  serverName: option<string_>,
-  @ocaml.doc("<p>For an Oracle source endpoint, the name of a key used for the transparent data
-         encryption (TDE) of the columns and tablespaces in an Oracle source database that is
-         encrypted using TDE. The key value is the value of the <code>SecurityDbEncryption</code>
-         setting. For more information on setting the key name value of
-            <code>SecurityDbEncryptionName</code>, see the information and example for setting the
-            <code>securityDbEncryptionName</code> extra connection attribute in <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.Encryption\"> Supported encryption methods for using Oracle as a source for AWS
-            DMS</a> in the <i>AWS Database Migration Service User
-         Guide</i>.</p>")
-  @as("SecurityDbEncryptionName")
-  securityDbEncryptionName: option<string_>,
-  @ocaml.doc("<p>For an Oracle source endpoint, the transparent data encryption (TDE) password required
-         by AWM DMS to access Oracle redo logs encrypted by TDE using Binary Reader. It is also the
-               <code>
-               <i>TDE_Password</i>
-            </code> part of the comma-separated value you
-         set to the <code>Password</code> request parameter when you create the endpoint. The
-            <code>SecurityDbEncryptian</code> setting is related to this
-            <code>SecurityDbEncryptionName</code> setting. For more information, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.Encryption\"> Supported encryption methods for using Oracle as a source for AWS
-            DMS</a> in the <i>AWS Database Migration Service User Guide</i>. </p>")
-  @as("SecurityDbEncryption")
-  securityDbEncryption: option<secretString>,
-  @ocaml.doc("<p>Specifies the number of seconds that the system waits
-         before resending a query.</p>
-         <p>Example: <code>retryInterval=6;</code>
-         </p>")
-  @as("RetryInterval")
-  retryInterval: option<integerOptional>,
-  @ocaml.doc("<p>When set to <code>true</code>, this attribute supports tablespace
-         replication.</p>")
-  @as("ReadTableSpaceName")
-  readTableSpaceName: option<booleanOptional>,
-  @ocaml.doc("<p>Endpoint TCP port.</p>") @as("Port") port: option<integerOptional>,
-  @ocaml.doc("<p>Endpoint connection password.</p>") @as("Password") password: option<secretString>,
-  @ocaml.doc("<p>Specifies the number scale. You can select a scale up to 38,
-         or you can select FLOAT. By default, the NUMBER data type
-         is converted to precision 38, scale 10.</p>
-         <p>Example: <code>numberDataTypeScale=12</code>
-         </p>")
-  @as("NumberDatatypeScale")
-  numberDatatypeScale: option<integerOptional>,
-  @ocaml.doc("<p>When set to <code>true</code>, this attribute causes a task to fail if the
-         actual size of an LOB column is greater than the specified
-         <code>LobMaxSize</code>.</p> 
-         <p>If a task is set to limited LOB mode and this option is set to
-         <code>true</code>, the task fails instead of truncating the LOB data.</p>")
-  @as("FailTasksOnLobTruncation")
-  failTasksOnLobTruncation: option<booleanOptional>,
-  @ocaml.doc("<p>When set to <code>true</code>, this attribute specifies a parallel load
-         when <code>useDirectPathFullLoad</code> is set to <code>Y</code>. This attribute
-         also only applies when you use the AWS DMS parallel load
-         feature.  Note that the target table cannot have any constraints or indexes.</p>")
-  @as("DirectPathParallelLoad")
-  directPathParallelLoad: option<booleanOptional>,
-  @ocaml.doc("<p>Database name for the endpoint.</p>") @as("DatabaseName")
-  databaseName: option<string_>,
-  @ocaml.doc("<p>Specifies whether the length of a character column is in
-         bytes or in characters. To indicate that the character column
-         length is in characters, set this attribute to <code>CHAR</code>. Otherwise,
-         the character column length is in bytes.</p>
-         <p>Example: <code>charLengthSemantics=CHAR;</code>
-         </p>")
-  @as("CharLengthSemantics")
-  charLengthSemantics: option<charLengthSemantics>,
-  @ocaml.doc("<p>For an Oracle source endpoint, your ASM user name. You can set this value from the
-            <code>asm_user</code> value. You set <code>asm_user</code> as part of the extra
-         connection attribute string to access an Oracle server with Binary Reader that uses ASM.
-         For more information, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.CDC.Configuration\">Configuration for change data capture (CDC) on an Oracle source
-            database</a>.</p>")
-  @as("AsmUser")
-  asmUser: option<string_>,
-  @ocaml.doc("<p>For an Oracle source endpoint, your ASM server address. You can set this value from the
-            <code>asm_server</code> value. You set <code>asm_server</code> as part of the extra
-         connection attribute string to access an Oracle server with Binary Reader that uses ASM.
-         For more information, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.CDC.Configuration\">Configuration for change data capture (CDC) on an Oracle source
-            database</a>.</p>")
-  @as("AsmServer")
-  asmServer: option<string_>,
-  @ocaml.doc("<p>For an Oracle source endpoint, your Oracle Automatic Storage Management (ASM) password.
-         You can set this value from the <code>
-               <i>asm_user_password</i>
-            </code> value.
-         You set this value as part of the comma-separated value that you set to the
-            <code>Password</code> request parameter when you create the endpoint to access
-         transaction logs using Binary Reader. For more information, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.CDC.Configuration\">Configuration for change data capture (CDC) on an Oracle source
-            database</a>.</p>")
-  @as("AsmPassword")
-  asmPassword: option<secretString>,
-  @ocaml.doc("<p>When this field is set to <code>Y</code>, AWS DMS only accesses the
-         archived redo logs. If the archived redo logs are stored on
-         Oracle ASM only, the AWS DMS user account needs to be
-         granted ASM privileges.</p>")
-  @as("ArchivedLogsOnly")
-  archivedLogsOnly: option<booleanOptional>,
-  @ocaml.doc("<p>When set to <code>true</code>, this attribute helps to increase the
-         commit rate on the Oracle target database by writing
-         directly to tables and not writing a trail to database logs.</p>")
-  @as("DirectPathNoLog")
-  directPathNoLog: option<booleanOptional>,
-  @ocaml.doc("<p>Set this attribute to enable homogenous tablespace
-         replication and create existing tables or indexes under the
-         same tablespace on the target.</p>")
-  @as("EnableHomogenousTablespace")
-  enableHomogenousTablespace: option<booleanOptional>,
-  @ocaml.doc("<p>Set this attribute to true in order to use the Binary Reader
-         to capture change data for an Amazon RDS for Oracle as the
-         source. This setting tells DMS instance to replace the default
-         Oracle root with the specified <code>usePathPrefix</code> setting to
-         access the redo logs.</p>")
-  @as("ReplacePathPrefix")
-  replacePathPrefix: option<booleanOptional>,
-  @ocaml.doc("<p>Set this string attribute to the required value in order to use
-         the Binary Reader to capture change data for an Amazon
-         RDS for Oracle as the source. This value specifies the path
-         prefix used to replace the default Oracle root to access the
-         redo logs.</p>")
-  @as("UsePathPrefix")
-  usePathPrefix: option<string_>,
-  @ocaml.doc("<p>Set this string attribute to the required value in order to use
-         the Binary Reader to capture change data for an Amazon
-         RDS for Oracle as the source. This value specifies the
-         default Oracle root used to access the redo logs.</p>")
-  @as("OraclePathPrefix")
-  oraclePathPrefix: option<string_>,
-  @ocaml.doc("<p>Set this attribute to <code>true</code> in order to use the Binary Reader
-         to capture change data for an Amazon RDS for Oracle as
-         the source. This tells the DMS instance to use any specified
-         prefix replacement to access all online redo logs.</p>")
-  @as("UseAlternateFolderForOnline")
-  useAlternateFolderForOnline: option<booleanOptional>,
-  @ocaml.doc("<p>Set this attribute to <code>false</code> in order to use the Binary Reader
-         to capture change data for an Amazon RDS for Oracle as the
-         source. This tells the DMS instance to not access redo logs
-         through any specified path prefix replacement using direct
-         file access.</p>")
-  @as("AccessAlternateDirectly")
-  accessAlternateDirectly: option<booleanOptional>,
-  @ocaml.doc("<p>Set this attribute to change the number of read-ahead
-         blocks that DMS configures to perform a Change Data
-         Capture (CDC) load using Oracle Automatic Storage
-         Management (ASM). You can specify an integer value
-         between 1000 (the default) and 200,000 (the maximum).</p>")
-  @as("ReadAheadBlocks")
-  readAheadBlocks: option<integerOptional>,
-  @ocaml.doc("<p>Set this attribute to change the number of threads that
-         DMS configures to perform a Change Data Capture (CDC)
-         load using Oracle Automatic Storage Management (ASM).
-         You can specify an integer value between 2 (the default)
-         and 8 (the maximum). Use this attribute together with the
-         <code>readAheadBlocks</code> attribute.</p>")
-  @as("ParallelAsmReadThreads")
-  parallelAsmReadThreads: option<integerOptional>,
-  @ocaml.doc("<p>Set this attribute to <code>true</code> to enable replication of Oracle
-         tables containing columns that are nested tables or defined
-         types.</p>")
-  @as("AllowSelectNestedTables")
-  allowSelectNestedTables: option<booleanOptional>,
-  @ocaml.doc("<p>Set this attribute with <code>archivedLogDestId</code> in a primary/
-         standby setup. This attribute is useful in the case of a
-         switchover. In this case, AWS DMS needs to know which
-         destination to get archive redo logs from to read changes.
-         This need arises because the previous primary instance is
-         now a standby instance after switchover.</p>")
-  @as("AdditionalArchivedLogDestId")
-  additionalArchivedLogDestId: option<integerOptional>,
-  @ocaml.doc("<p>Specifies the destination of the archived redo logs. The
-         value should be the same as the DEST_ID number in the
-         v$archived_log table. When working with multiple log
-         destinations (DEST_ID), we recommend that you to specify
-         an archived redo logs location identifier. Doing this improves
-         performance by ensuring that the correct logs are accessed
-         from the outset.</p>")
-  @as("ArchivedLogDestId")
-  archivedLogDestId: option<integerOptional>,
-  @ocaml.doc("<p>Set this attribute to set up table-level supplemental logging
-         for the Oracle database. This attribute enables PRIMARY KEY
-         supplemental logging on all tables selected for a migration
-         task.</p>
-         <p>If you use this option, you still need to enable
-         database-level supplemental logging.</p>")
-  @as("AddSupplementalLogging")
-  addSupplementalLogging: option<booleanOptional>,
-}
 @ocaml.doc("<p>Provides information that defines an Amazon Neptune endpoint.</p>")
 type neptuneSettings = {
-  @ocaml.doc("<p>If you want AWS Identity and Access Management (IAM) authorization enabled for this
+  @ocaml.doc("<p>If you want Identity and Access Management (IAM) authorization enabled for this
          endpoint, set this parameter to <code>true</code>. Then attach the appropriate IAM policy
          document to your service role specified by <code>ServiceAccessRoleArn</code>. The default
          is <code>false</code>.</p>")
   @as("IamAuthEnabled")
   iamAuthEnabled: option<booleanOptional>,
-  @ocaml.doc("<p>The number of times for AWS DMS to retry a bulk load of migrated graph data to the
+  @ocaml.doc("<p>The number of times for DMS to retry a bulk load of migrated graph data to the
          Neptune target database before raising an error. The default is 5.</p>")
   @as("MaxRetryCount")
   maxRetryCount: option<integerOptional>,
-  @ocaml.doc("<p>The maximum size in kilobytes of migrated graph data stored in a .csv file before AWS
-         DMS bulk-loads the data to the Neptune target database. The default is 1,048,576 KB. If the
-         bulk load is successful, AWS DMS clears the bucket, ready to store the next batch of
+  @ocaml.doc("<p>The maximum size in kilobytes of migrated graph data stored in a .csv file before DMS
+         bulk-loads the data to the Neptune target database. The default is 1,048,576 KB. If the
+         bulk load is successful, DMS clears the bucket, ready to store the next batch of
          migrated graph data.</p>")
   @as("MaxFileSize")
   maxFileSize: option<integerOptional>,
-  @ocaml.doc("<p>The number of milliseconds for AWS DMS to wait to retry a bulk-load of migrated graph
+  @ocaml.doc("<p>The number of milliseconds for DMS to wait to retry a bulk-load of migrated graph
          data to the Neptune target database before raising an error. The default is 250.</p>")
   @as("ErrorRetryDuration")
   errorRetryDuration: option<integerOptional>,
-  @ocaml.doc("<p>A folder path where you want AWS DMS to store migrated graph data in the S3 bucket
+  @ocaml.doc("<p>A folder path where you want DMS to store migrated graph data in the S3 bucket
          specified by <code>S3BucketName</code>
          </p>")
   @as("S3BucketFolder")
   s3BucketFolder: string_,
-  @ocaml.doc("<p>The name of the Amazon S3 bucket where AWS DMS can temporarily store migrated graph data
-         in .csv files before bulk-loading it to the Neptune target database. AWS DMS maps the SQL
+  @ocaml.doc("<p>The name of the Amazon S3 bucket where DMS can temporarily store migrated graph data
+         in .csv files before bulk-loading it to the Neptune target database. DMS maps the SQL
          source data to graph data before storing it in these .csv files.</p>")
   @as("S3BucketName")
   s3BucketName: string_,
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the service role that you created for the Neptune
-         target endpoint.
-         For more information, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Neptune.html#CHAP_Target.Neptune.ServiceRole\">Creating an IAM Service Role for Accessing Amazon Neptune as a Target</a> in the <i>AWS Database Migration Service User
+         target endpoint. The role must allow the <code>iam:PassRole</code> action.
+         For more information, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Neptune.html#CHAP_Target.Neptune.ServiceRole\">Creating an IAM Service Role for Accessing Amazon Neptune as a Target</a> in the <i>Database Migration Service User
             Guide. </i>
          </p>")
   @as("ServiceAccessRoleArn")
@@ -1457,10 +1407,11 @@ type mySQLSettings = {
   )
   @as("SecretsManagerSecretId")
   secretsManagerSecretId: option<string_>,
-  @ocaml.doc("<p>The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as the
+  @ocaml.doc("<p>The full Amazon Resource Name (ARN) of the IAM role that specifies DMS as the
          trusted entity and grants the required permissions to access the value in
-            <code>SecretsManagerSecret</code>. <code>SecretsManagerSecret</code> has the value of the AWS Secrets
-         Manager secret that allows access to the MySQL endpoint.</p>
+         <code>SecretsManagerSecret</code>. The role must allow the <code>iam:PassRole</code> action.
+         <code>SecretsManagerSecret</code> has the value of the Amazon Web Services Secrets Manager
+          secret that allows access to the MySQL endpoint.</p>
          <note>
             <p>You can specify one of two sets of values for these permissions. You can specify the
             values for this setting and <code>SecretsManagerSecretId</code>. Or you can specify
@@ -1468,8 +1419,8 @@ type mySQLSettings = {
                <code>ServerName</code>, and <code>Port</code>. You can't specify both. For more
             information on creating this <code>SecretsManagerSecret</code> and the
                <code>SecretsManagerAccessRoleArn</code> and <code>SecretsManagerSecretId</code>
-            required to access it, see <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager\">Using secrets to access AWS Database Migration Service
-               resources</a> in the <i>AWS Database Migration Service User
+            required to access it, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager\">Using secrets to access Database Migration Service
+               resources</a> in the <i>Database Migration Service User
                Guide</i>.</p>
          </note>")
   @as("SecretsManagerAccessRoleArn")
@@ -1488,7 +1439,7 @@ type mySQLSettings = {
   @ocaml.doc("<p>Improves performance when loading data into the MySQL-compatible target database.
          Specifies how many threads to use to load the data into the MySQL-compatible target
          database. Setting a large number of threads can have an adverse effect on database
-         performance, because a separate connection is required for each thread.</p>
+         performance, because a separate connection is required for each thread. The default is one.</p>
          <p>Example: <code>parallelLoadThreads=1</code>
          </p>")
   @as("ParallelLoadThreads")
@@ -1506,14 +1457,20 @@ type mySQLSettings = {
   @as("TargetDbType")
   targetDbType: option<targetDbType>,
   @ocaml.doc("<p>Specifies how often to check the binary log for new
-         changes/events when the database is idle.</p>
+         changes/events when the database is idle. The default is five seconds.</p>
          <p>Example: <code>eventsPollInterval=5;</code>
          </p>
-         <p>In the example, AWS DMS checks for changes in the binary
+         <p>In the example, DMS checks for changes in the binary
          logs every five seconds.</p>")
   @as("EventsPollInterval")
   eventsPollInterval: option<integerOptional>,
-  @ocaml.doc("<p>Database name for the endpoint.</p>") @as("DatabaseName")
+  @ocaml.doc("<p>Database name for the endpoint. For a MySQL source or target endpoint, don't explicitly
+         specify the database using the <code>DatabaseName</code> request parameter on either the
+         <code>CreateEndpoint</code> or <code>ModifyEndpoint</code> API call. Specifying
+         <code>DatabaseName</code> when you create or modify a MySQL endpoint replicates all the
+         task tables to this single database. For MySQL endpoints, you specify the database only when
+         you specify the schema in the table-mapping rules of the DMS task.</p>")
+  @as("DatabaseName")
   databaseName: option<string_>,
   @ocaml.doc("<p>Adjusts the behavior of DMS when migrating from an SQL Server source database 
          that is hosted as part of an Always On availability group cluster.  If you need DMS to poll 
@@ -1521,9 +1478,11 @@ type mySQLSettings = {
          <code>false</code>.</p>")
   @as("CleanSourceMetadataOnMismatch")
   cleanSourceMetadataOnMismatch: option<booleanOptional>,
-  @ocaml.doc("<p>Specifies a script to run immediately after AWS DMS
+  @ocaml.doc("<p>Specifies a script to run immediately after DMS
          connects to the endpoint. The migration task continues
-         running regardless if the SQL statement succeeds or fails.</p>")
+         running regardless if the SQL statement succeeds or fails.</p>
+         <p>For this parameter, provide the code of the script itself, not the name of a file
+         containing the script.</p>")
   @as("AfterConnectScript")
   afterConnectScript: option<string_>,
 }
@@ -1534,10 +1493,10 @@ type mongoDbSettings = {
   )
   @as("SecretsManagerSecretId")
   secretsManagerSecretId: option<string_>,
-  @ocaml.doc("<p>The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as the
+  @ocaml.doc("<p>The full Amazon Resource Name (ARN) of the IAM role that specifies DMS as the
          trusted entity and grants the required permissions to access the value in
-            <code>SecretsManagerSecret</code>. <code>SecretsManagerSecret</code> has the value of the AWS Secrets
-         Manager secret that allows access to the MongoDB endpoint.</p>
+         <code>SecretsManagerSecret</code>. The role must allow the <code>iam:PassRole</code> action.
+         <code>SecretsManagerSecret</code> has the value of the Amazon Web Services Secrets Manager secret that allows access to the MongoDB endpoint.</p>
          <note>
             <p>You can specify one of two sets of values for these permissions. You can specify the
             values for this setting and <code>SecretsManagerSecretId</code>. Or you can specify
@@ -1545,17 +1504,16 @@ type mongoDbSettings = {
                <code>ServerName</code>, and <code>Port</code>. You can't specify both. For more
             information on creating this <code>SecretsManagerSecret</code> and the
                <code>SecretsManagerAccessRoleArn</code> and <code>SecretsManagerSecretId</code>
-            required to access it, see <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager\">Using secrets to access AWS Database Migration Service
-               resources</a> in the <i>AWS Database Migration Service User
+            required to access it, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager\">Using secrets to access Database Migration Service
+               resources</a> in the <i>Database Migration Service User
                Guide</i>.</p>
          </note>")
   @as("SecretsManagerAccessRoleArn")
   secretsManagerAccessRoleArn: option<string_>,
-  @ocaml.doc("<p>The AWS KMS key identifier that is used to encrypt the content on the replication
+  @ocaml.doc("<p>The KMS key identifier that is used to encrypt the content on the replication
          instance. If you don't specify a value for the <code>KmsKeyId</code> parameter, then
-         AWS DMS uses your default encryption key. AWS KMS creates the default encryption key for
-         your AWS account. Your AWS account has a different default encryption key for each AWS
-         Region.</p>")
+         DMS uses your default encryption key. KMS creates the default encryption key for
+         your Amazon Web Services account. Your Amazon Web Services account has a different default encryption key for each Amazon Web Services Region.</p>")
   @as("KmsKeyId")
   kmsKeyId: option<string_>,
   @ocaml.doc("<p> The MongoDB database name. This setting isn't used when <code>AuthType</code> is
@@ -1611,10 +1569,11 @@ type microsoftSQLServerSettings = {
   )
   @as("SecretsManagerSecretId")
   secretsManagerSecretId: option<string_>,
-  @ocaml.doc("<p>The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as the
+  @ocaml.doc("<p>The full Amazon Resource Name (ARN) of the IAM role that specifies DMS as the
          trusted entity and grants the required permissions to access the value in
-            <code>SecretsManagerSecret</code>. <code>SecretsManagerSecret</code> has the value of the AWS Secrets
-         Manager secret that allows access to the SQL Server endpoint.</p>
+         <code>SecretsManagerSecret</code>. The role must allow the <code>iam:PassRole</code> action.
+         <code>SecretsManagerSecret</code> has the value of the Amazon Web Services Secrets Manager
+          secret that allows access to the SQL Server endpoint.</p>
          <note>
             <p>You can specify one of two sets of values for these permissions. You can specify the
             values for this setting and <code>SecretsManagerSecretId</code>. Or you can specify
@@ -1622,8 +1581,8 @@ type microsoftSQLServerSettings = {
                <code>ServerName</code>, and <code>Port</code>. You can't specify both. For more
             information on creating this <code>SecretsManagerSecret</code> and the
                <code>SecretsManagerAccessRoleArn</code> and <code>SecretsManagerSecretId</code>
-            required to access it, see <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager\">Using secrets to access AWS Database Migration Service
-               resources</a> in the <i>AWS Database Migration Service User
+            required to access it, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager\">Using secrets to access Database Migration Service
+               resources</a> in the <i>Database Migration Service User
                Guide</i>.</p>
          </note>")
   @as("SecretsManagerAccessRoleArn")
@@ -1642,11 +1601,11 @@ type microsoftSQLServerSettings = {
   @ocaml.doc("<p>Fully qualified domain name of the endpoint.</p>") @as("ServerName")
   serverName: option<string_>,
   @ocaml.doc("<p>Use this attribute to minimize the need to access the
-         backup log and enable AWS DMS to prevent truncation using one of the
+         backup log and enable DMS to prevent truncation using one of the
          following two methods.</p>
          <p>
             <i>Start transactions in the database:</i> This is the default
-         method. When this method is used, AWS DMS prevents
+         method. When this method is used, DMS prevents
          TLOG truncation by mimicking a transaction in the database.
          As long as such a transaction is open, changes that appear
          after the transaction started aren't truncated. If you need
@@ -1654,17 +1613,17 @@ type microsoftSQLServerSettings = {
          you must choose this method.</p>
          <p>
             <i>Exclusively use sp_repldone within a single task</i>: When
-         this method is used, AWS DMS reads the changes and then
+         this method is used, DMS reads the changes and then
          uses sp_repldone to mark the TLOG transactions as ready
          for truncation. Although this method doesn't involve any
          transactional activities, it can only be used when Microsoft
          Replication isn't running. Also, when using this method, only
-         one AWS DMS task can access the database at any given
-         time. Therefore, if you need to run parallel AWS DMS tasks
+         one DMS task can access the database at any given
+         time. Therefore, if you need to run parallel DMS tasks
          against the same database, use the default method.</p>")
   @as("SafeguardPolicy")
   safeguardPolicy: option<safeguardPolicy>,
-  @ocaml.doc("<p>When this attribute is set to <code>Y</code>, AWS DMS only reads changes
+  @ocaml.doc("<p>When this attribute is set to <code>Y</code>, DMS only reads changes
          from transaction log backups and doesn't read from the
          active transaction log file during ongoing replication. Setting
          this parameter to <code>Y</code> enables you to control active transaction
@@ -1680,8 +1639,8 @@ type microsoftSQLServerSettings = {
   @as("QuerySingleAlwaysOnNode")
   querySingleAlwaysOnNode: option<booleanOptional>,
   @ocaml.doc("<p>Endpoint connection password.</p>") @as("Password") password: option<secretString>,
-  @ocaml.doc("<p>Specifies a file group for the AWS DMS internal tables. When the replication task
-         starts, all the internal AWS DMS control tables (awsdms_ apply_exception, awsdms_apply,
+  @ocaml.doc("<p>Specifies a file group for the DMS internal tables. When the replication task
+         starts, all the internal DMS control tables (awsdms_ apply_exception, awsdms_apply,
          awsdms_changes) are created for the specified file group.</p>")
   @as("ControlTablesFileGroup")
   controlTablesFileGroup: option<string_>,
@@ -1697,6 +1656,13 @@ type microsoftSQLServerSettings = {
          information includes the output format of records applied to the endpoint and details of
          transaction and control table data information.</p>")
 type kinesisSettings = {
+  @ocaml.doc("<p>Set this optional parameter to <code>true</code> to avoid adding a '0x' prefix
+         to raw data in hexadecimal format. For example, by default, DMS adds a '0x'
+         prefix to the LOB column type in hexadecimal format moving from an Oracle source to an
+         Amazon Kinesis target. Use the <code>NoHexPrefix</code> endpoint setting to enable
+         migration of RAW data type columns without adding the '0x' prefix.</p>")
+  @as("NoHexPrefix")
+  noHexPrefix: option<booleanOptional>,
   @ocaml.doc(
     "<p>Include NULL and empty columns for records migrated to the endpoint. The default is <code>false</code>.</p>"
   )
@@ -1729,8 +1695,9 @@ type kinesisSettings = {
          offset within a transaction). The default is <code>false</code>.</p>")
   @as("IncludeTransactionDetails")
   includeTransactionDetails: option<booleanOptional>,
-  @ocaml.doc("<p>The Amazon Resource Name (ARN) for the AWS Identity and Access Management (IAM) role
-         that AWS DMS uses to write to the Kinesis data stream.</p>")
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) for the IAM role
+         that DMS uses to write to the Kinesis data stream.
+         The role must allow the <code>iam:PassRole</code> action.</p>")
   @as("ServiceAccessRoleArn")
   serviceAccessRoleArn: option<string_>,
   @ocaml.doc("<p>The output format for the records created on the endpoint. The message format is
@@ -1746,15 +1713,23 @@ type keyList = array<string_>
          information includes the output format of records applied to the endpoint and details of
          transaction and control table data information.</p>")
 type kafkaSettings = {
+  @ocaml.doc("<p>Set this optional parameter to <code>true</code> to avoid adding a '0x' prefix
+         to raw data in hexadecimal format. For example, by default, DMS adds a '0x'
+         prefix to the LOB column type in hexadecimal format moving from an Oracle source to a Kafka
+         target. Use the <code>NoHexPrefix</code> endpoint setting to enable migration of RAW data
+         type columns without adding the '0x' prefix.</p>")
+  @as("NoHexPrefix")
+  noHexPrefix: option<booleanOptional>,
   @ocaml.doc("<p>The secure password you created when you first set up your MSK cluster to validate a client identity and 
          make an encrypted connection between server and client using SASL-SSL authentication.</p>")
   @as("SaslPassword")
   saslPassword: option<secretString>,
-  @ocaml.doc("<p> The secure username you created when you first set up your MSK cluster to validate a client identity and 
-         make an encrypted connection between server and client using SASL-SSL authentication.</p>")
+  @ocaml.doc("<p> The secure user name you created when you first set up your MSK cluster to validate a
+         client identity and make an encrypted connection between server and client using SASL-SSL
+         authentication.</p>")
   @as("SaslUsername")
   saslUsername: option<string_>,
-  @ocaml.doc("<p> The Amazon Resource Name (ARN) for the private Certification Authority (CA) cert that AWS DMS uses 
+  @ocaml.doc("<p> The Amazon Resource Name (ARN) for the private certificate authority (CA) cert that DMS uses 
          to securely connect to your Kafka target endpoint.</p>")
   @as("SslCaCertificateArn")
   sslCaCertificateArn: option<string_>,
@@ -1806,7 +1781,7 @@ type kafkaSettings = {
             <code>false</code>.</p>")
   @as("PartitionIncludeSchemaTable")
   partitionIncludeSchemaTable: option<booleanOptional>,
-  @ocaml.doc("<p>Shows the partition value within the Kafka message output, unless the partition type is
+  @ocaml.doc("<p>Shows the partition value within the Kafka message output unless the partition type is
             <code>schema-table-type</code>. The default is <code>false</code>.</p>")
   @as("IncludePartitionValue")
   includePartitionValue: option<booleanOptional>,
@@ -1821,7 +1796,7 @@ type kafkaSettings = {
          tab).</p>")
   @as("MessageFormat")
   messageFormat: option<messageFormatValue>,
-  @ocaml.doc("<p>The topic to which you migrate the data. If you don't specify a topic, AWS DMS
+  @ocaml.doc("<p>The topic to which you migrate the data. If you don't specify a topic, DMS
          specifies <code>\"kafka-default-topic\"</code> as the migration topic.</p>")
   @as("Topic")
   topic: option<string_>,
@@ -1830,12 +1805,13 @@ type kafkaSettings = {
                <i>broker-hostname-or-ip</i>:<i>port</i>
             </code>. For example, <code>\"ec2-12-345-678-901.compute-1.amazonaws.com:2345\"</code>.
          For more information and examples of specifying a list of broker locations,
-         see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kafka.html\">Using Apache Kafka as a target for AWS Database Migration Service</a>
-         in the <i>AWS Data Migration Service User Guide</i>.
+         see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kafka.html\">Using Apache Kafka as a target for Database Migration Service</a>
+         in the <i>Database Migration Service User Guide</i>.
       </p>")
   @as("Broker")
   broker: option<string_>,
 }
+type integerList = array<integer_>
 type individualAssessmentNameList = array<string_>
 type includeTestList = array<string_>
 @ocaml.doc("<p>Provides information that defines an IBM Db2 LUW endpoint.</p>")
@@ -1845,10 +1821,11 @@ type ibmdb2Settings = {
   )
   @as("SecretsManagerSecretId")
   secretsManagerSecretId: option<string_>,
-  @ocaml.doc("<p>The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as the
+  @ocaml.doc("<p>The full Amazon Resource Name (ARN) of the IAM role that specifies DMS as the
          trusted entity and grants the required permissions to access the value in
-            <code>SecretsManagerSecret</code>. <code>SecretsManagerSecret</code> has the value of
-         the AWS Secrets Manager secret that allows access to the Db2 LUW endpoint. </p>
+         <code>SecretsManagerSecret</code>. The role must allow the <code>iam:PassRole</code> action.
+         <code>SecretsManagerSecret</code> has the value of
+         the Amazon Web Services Secrets Manager secret that allows access to the Db2 LUW endpoint. </p>
          <note>
             <p>You can specify one of two sets of values for these permissions. You can specify the
             values for this setting and <code>SecretsManagerSecretId</code>. Or you can specify
@@ -1856,8 +1833,8 @@ type ibmdb2Settings = {
                <code>ServerName</code>, and <code>Port</code>. You can't specify both. For more
             information on creating this <code>SecretsManagerSecret</code> and the
                <code>SecretsManagerAccessRoleArn</code> and <code>SecretsManagerSecretId</code>
-            required to access it, see <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager\">Using secrets to access AWS Database Migration Service
-               resources</a> in the <i>AWS Database Migration Service User
+            required to access it, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager\">Using secrets to access Database Migration Service
+               resources</a> in the <i>Database Migration Service User
                Guide</i>.</p>
          </note>")
   @as("SecretsManagerAccessRoleArn")
@@ -1878,41 +1855,125 @@ type ibmdb2Settings = {
   setDataCaptureChanges: option<booleanOptional>,
   @ocaml.doc("<p>Fully qualified domain name of the endpoint.</p>") @as("ServerName")
   serverName: option<string_>,
-  @ocaml.doc("<p>Endpoint TCP port.</p>") @as("Port") port: option<integerOptional>,
+  @ocaml.doc("<p>Endpoint TCP port. The default value is 50000.</p>") @as("Port")
+  port: option<integerOptional>,
   @ocaml.doc("<p>Endpoint connection password.</p>") @as("Password") password: option<secretString>,
   @ocaml.doc("<p>Database name for the endpoint.</p>") @as("DatabaseName")
   databaseName: option<string_>,
+}
+@ocaml.doc("<p>Settings in JSON format for the source GCP MySQL endpoint.</p>")
+type gcpMySQLSettings = {
+  @ocaml.doc("<p>The full ARN, partial ARN, or friendly name of the <code>SecretsManagerSecret</code>
+         that contains the MySQL endpoint connection details. </p>")
+  @as("SecretsManagerSecretId")
+  secretsManagerSecretId: option<string_>,
+  @ocaml.doc("<p>The full Amazon Resource Name (ARN) of the IAM role that specifies DMS
+         as the trusted entity and grants the required permissions to access the value in 
+         <code>SecretsManagerSecret.</code> The role must allow the <code>iam:PassRole</code> action. 
+         <code>SecretsManagerSecret</code> has the value of the Amazon Web Services Secrets Manager secret 
+         that allows access to the MySQL endpoint.</p>
+         <note>
+            <p>You can specify one of two sets of values for these permissions. You can specify 
+            the values for this setting and <code>SecretsManagerSecretId</code>. Or you can specify clear-text
+            values for <code>UserName</code>, <code>Password</code>, <code>ServerName</code>, and <code>Port</code>.
+            You can't specify both. For more information on creating this <code>SecretsManagerSecret</code> 
+            and the <code>SecretsManagerAccessRoleArn</code> and <code>SecretsManagerSecretId</code> required to 
+            access it, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager\">Using secrets to access Database Migration Service resources</a> in the 
+            Database Migration Service User Guide.
+         
+      </p>
+         </note>")
+  @as("SecretsManagerAccessRoleArn")
+  secretsManagerAccessRoleArn: option<string_>,
+  @ocaml.doc("<p>Endpoint connection user name.</p>") @as("Username") username: option<string_>,
+  @ocaml.doc("<p>Specifies the time zone for the source MySQL database.</p>
+         
+         <p>Example: <code>serverTimezone=US/Pacific;</code>
+         </p>
+         
+         <p>Note: Do not enclose time zones in single quotes.</p>")
+  @as("ServerTimezone")
+  serverTimezone: option<string_>,
+  @ocaml.doc("<p>Endpoint TCP port.</p>") @as("ServerName") serverName: option<string_>,
+  @ocaml.doc("<p></p>") @as("Port") port: option<integerOptional>,
+  @ocaml.doc("<p>Endpoint connection password.</p>") @as("Password") password: option<secretString>,
+  @ocaml.doc("<p>Improves performance when loading data into the MySQL-compatible target database. Specifies how many 
+         threads to use to load the data into the MySQL-compatible target database. Setting a large number of 
+         threads can have an adverse effect on database performance, because a separate connection is required 
+         for each thread. The default is one.</p>
+         
+         <p>Example: <code>parallelLoadThreads=1</code> 
+         </p>")
+  @as("ParallelLoadThreads")
+  parallelLoadThreads: option<integerOptional>,
+  @ocaml.doc("<p>Specifies the maximum size (in KB) of any .csv file used to transfer data to a MySQL-compatible database.</p>
+         <p>Example: <code>maxFileSize=512</code> 
+         </p>")
+  @as("MaxFileSize")
+  maxFileSize: option<integerOptional>,
+  @ocaml.doc("<p>Specifies where to migrate source tables on the target, either to a single database or multiple databases.</p>
+         <p>Example: <code>targetDbType=MULTIPLE_DATABASES</code> 
+         </p>")
+  @as("TargetDbType")
+  targetDbType: option<targetDbType>,
+  @ocaml.doc("<p>Specifies how often to check the binary log for new changes/events when the database is idle. The default is five seconds.</p>
+         <p>Example: <code>eventsPollInterval=5;</code>
+         </p>
+         <p>In the example, DMS checks for changes in the binary logs every five seconds. </p>")
+  @as("EventsPollInterval")
+  eventsPollInterval: option<integerOptional>,
+  @ocaml.doc("<p>Database name for the endpoint. For a MySQL source or target endpoint, don't explicitly specify 
+         the database using the <code>DatabaseName</code> request parameter on either the <code>CreateEndpoint</code>
+         or <code>ModifyEndpoint</code> API call. Specifying <code>DatabaseName</code> when you create or modify a 
+         MySQL endpoint replicates all the task tables to this single database. For MySQL endpoints, you specify 
+         the database only when you specify the schema in the table-mapping rules of the DMS task. </p>")
+  @as("DatabaseName")
+  databaseName: option<string_>,
+  @ocaml.doc("<p>Adjusts the behavior of DMS when migrating from an SQL Server source database 
+         that is hosted as part of an Always On availability group cluster. If you need DMS
+         to poll all the nodes in the Always On cluster for transaction backups, set this attribute to <code>false</code>. </p>")
+  @as("CleanSourceMetadataOnMismatch")
+  cleanSourceMetadataOnMismatch: option<booleanOptional>,
+  @ocaml.doc("<p>Specifies a script to run immediately after DMS connects to the endpoint. 
+         The migration task continues running regardless if the SQL statement succeeds or fails.</p>
+         
+         <p>For this parameter, provide the code of the script itself, not the name of a file containing the script. </p>")
+  @as("AfterConnectScript")
+  afterConnectScript: option<string_>,
 }
 type filterValueList = array<string_>
 type excludeTestList = array<string_>
 type eventCategoriesList = array<string_>
 type endpointSettingEnumValues = array<string_>
-@ocaml.doc("<p>Provides information that defines an Elasticsearch endpoint.</p>")
+@ocaml.doc("<p>Provides information that defines an OpenSearch endpoint.</p>")
 type elasticsearchSettings = {
   @ocaml.doc("<p>The maximum number of seconds for which DMS retries failed API requests to the
-         Elasticsearch cluster.</p>")
+         OpenSearch cluster.</p>")
   @as("ErrorRetryDuration")
   errorRetryDuration: option<integerOptional>,
   @ocaml.doc("<p>The maximum percentage of records that can fail to be written before a full load
             operation stops.</p>
          <p>To avoid early failure, this counter is only effective after 1000 records 
-         are transferred. Elasticsearch also has the concept of error monitoring during the 
+         are transferred. OpenSearch also has the concept of error monitoring during the 
          last 10 minutes of an Observation Window. If transfer of all records fail in the 
          last 10 minutes, the full load operation stops. </p>")
   @as("FullLoadErrorPercentage")
   fullLoadErrorPercentage: option<integerOptional>,
-  @ocaml.doc("<p>The endpoint for the Elasticsearch cluster. AWS DMS uses HTTPS if a transport 
+  @ocaml.doc("<p>The endpoint for the OpenSearch cluster. DMS uses HTTPS if a transport 
          protocol (http/https) is not specified.</p>")
   @as("EndpointUri")
   endpointUri: string_,
-  @ocaml.doc("<p>The Amazon Resource Name (ARN) used by service to access the IAM role.</p>")
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) used by the service to access the IAM role.
+         The role must allow the <code>iam:PassRole</code> action.</p>")
   @as("ServiceAccessRoleArn")
   serviceAccessRoleArn: string_,
 }
-@ocaml.doc("<p>Provides the Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
+@ocaml.doc("<p>Provides the Amazon Resource Name (ARN) of the Identity and Access Management (IAM)
          role used to define an Amazon DynamoDB target endpoint.</p>")
 type dynamoDbSettings = {
-  @ocaml.doc("<p> The Amazon Resource Name (ARN) used by the service access IAM role. </p>")
+  @ocaml.doc(
+    "<p> The Amazon Resource Name (ARN) used by the service to access the IAM role. The role must allow the <code>iam:PassRole</code> action.</p>"
+  )
   @as("ServiceAccessRoleArn")
   serviceAccessRoleArn: string_,
 }
@@ -1922,10 +1983,10 @@ type docDbSettings = {
          that contains the DocumentDB endpoint connection details.</p>")
   @as("SecretsManagerSecretId")
   secretsManagerSecretId: option<string_>,
-  @ocaml.doc("<p>The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as the
+  @ocaml.doc("<p>The full Amazon Resource Name (ARN) of the IAM role that specifies DMS as the
          trusted entity and grants the required permissions to access the value in
-         <code>SecretsManagerSecret</code>. <code>SecretsManagerSecret</code> has the value of the AWS Secrets
-         Manager secret that allows access to the DocumentDB endpoint.</p>
+         <code>SecretsManagerSecret</code>. The role must allow the <code>iam:PassRole</code> action.
+         <code>SecretsManagerSecret</code> has the value of the Amazon Web Services Secrets Manager secret that allows access to the DocumentDB endpoint.</p>
          <note>
             <p>You can specify one of two sets of values for these permissions. You can specify the
             values for this setting and <code>SecretsManagerSecretId</code>. Or you can specify
@@ -1933,17 +1994,16 @@ type docDbSettings = {
             <code>ServerName</code>, and <code>Port</code>. You can't specify both. For more
             information on creating this <code>SecretsManagerSecret</code> and the
             <code>SecretsManagerAccessRoleArn</code> and <code>SecretsManagerSecretId</code>
-            required to access it, see <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager\">Using secrets to access AWS Database Migration Service
-               resources</a> in the <i>AWS Database Migration Service User
+            required to access it, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager\">Using secrets to access Database Migration Service
+               resources</a> in the <i>Database Migration Service User
                   Guide</i>.</p>
          </note>")
   @as("SecretsManagerAccessRoleArn")
   secretsManagerAccessRoleArn: option<string_>,
-  @ocaml.doc("<p>The AWS KMS key identifier that is used to encrypt the content on the replication
+  @ocaml.doc("<p>The KMS key identifier that is used to encrypt the content on the replication
          instance. If you don't specify a value for the <code>KmsKeyId</code> parameter, then
-         AWS DMS uses your default encryption key. AWS KMS creates the default encryption key for
-         your AWS account. Your AWS account has a different default encryption key for each AWS
-         Region.</p>")
+         DMS uses your default encryption key. KMS creates the default encryption key for
+         your Amazon Web Services account. Your Amazon Web Services account has a different default encryption key for each Amazon Web Services Region.</p>")
   @as("KmsKeyId")
   kmsKeyId: option<string_>,
   @ocaml.doc("<p> Indicates the number of documents to preview to determine the document organization.
@@ -1980,7 +2040,9 @@ type docDbSettings = {
 type dmsTransferSettings = {
   @ocaml.doc("<p> The name of the S3 bucket to use. </p>") @as("BucketName")
   bucketName: option<string_>,
-  @ocaml.doc("<p> The IAM role that has permission to access the Amazon S3 bucket. </p>")
+  @ocaml.doc(
+    "<p>The Amazon Resource Name (ARN) used by the service access IAM role. The role must allow the <code>iam:PassRole</code> action.</p>"
+  )
   @as("ServiceAccessRoleArn")
   serviceAccessRoleArn: option<string_>,
 }
@@ -2043,7 +2105,8 @@ type certificate = {
   certificateOwner: option<string_>,
   @ocaml.doc("<p>The Amazon Resource Name (ARN) for the certificate.</p>") @as("CertificateArn")
   certificateArn: option<string_>,
-  @ocaml.doc("<p>The location of an imported Oracle Wallet certificate for use with SSL.</p>")
+  @ocaml.doc("<p>The location of an imported Oracle Wallet certificate for use with SSL. Example: <code>filebase64(\"${path.root}/rds-ca-2019-root.sso\")</code>
+         </p>")
   @as("CertificateWallet")
   certificateWallet: option<certificateWallet>,
   @ocaml.doc(
@@ -2064,18 +2127,20 @@ type availabilityZonesList = array<string_>
             <code>AvailabilityZone</code> is an optional parameter to the <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_CreateReplicationInstance.html\">
                <code>CreateReplicationInstance</code>
             </a> operation, and it’s value relates to
-         the AWS Region of an endpoint. For example, the availability zone of an endpoint in the
+         the Amazon Web Services Region of an endpoint. For example, the availability zone of an endpoint in the
          us-east-1 region might be us-east-1a, us-east-1b, us-east-1c, or us-east-1d.</p>")
 type availabilityZone = {
   @ocaml.doc("<p>The name of the Availability Zone.</p>") @as("Name") name: option<string_>,
 }
-@ocaml.doc("<p>Describes a quota for an AWS account, for example, the number of replication instances
+type arnList = array<string_>
+@ocaml.doc("<p>Describes a quota for an Amazon Web Services account, for example the number of replication instances
          allowed.</p>")
 type accountQuota = {
   @ocaml.doc("<p>The maximum allowed value for the quota.</p>") @as("Max") max: option<long>,
   @ocaml.doc("<p>The amount currently used toward the quota maximum.</p>") @as("Used")
   used: option<long>,
-  @ocaml.doc("<p>The name of the AWS DMS quota for this AWS account.</p>") @as("AccountQuotaName")
+  @ocaml.doc("<p>The name of the DMS quota for this Amazon Web Services account.</p>")
+  @as("AccountQuotaName")
   accountQuotaName: option<string_>,
 }
 type vpcSecurityGroupMembershipList = array<vpcSecurityGroupMembership>
@@ -2101,21 +2166,21 @@ type replicationTaskIndividualAssessmentList = array<replicationTaskIndividualAs
 type replicationTaskAssessmentRun = {
   @ocaml.doc("<p>Unique name of the assessment run.</p>") @as("AssessmentRunName")
   assessmentRunName: option<string_>,
-  @ocaml.doc("<p>ARN of the AWS KMS encryption key used to encrypt the assessment run results.</p>")
+  @ocaml.doc("<p>ARN of the KMS encryption key used to encrypt the assessment run results.</p>")
   @as("ResultKmsKeyArn")
   resultKmsKeyArn: option<string_>,
   @ocaml.doc("<p>Encryption mode used to encrypt the assessment run results.</p>")
   @as("ResultEncryptionMode")
   resultEncryptionMode: option<string_>,
-  @ocaml.doc("<p>Folder in an Amazon S3 bucket where AWS DMS stores the results of this assessment
+  @ocaml.doc("<p>Folder in an Amazon S3 bucket where DMS stores the results of this assessment
          run.</p>")
   @as("ResultLocationFolder")
   resultLocationFolder: option<string_>,
-  @ocaml.doc("<p>Amazon S3 bucket where AWS DMS stores the results of this assessment run.</p>")
+  @ocaml.doc("<p>Amazon S3 bucket where DMS stores the results of this assessment run.</p>")
   @as("ResultLocationBucket")
   resultLocationBucket: option<string_>,
   @ocaml.doc("<p>ARN of the service role used to start the assessment run using the
-            <code>StartReplicationTaskAssessmentRun</code> operation.</p>")
+         <code>StartReplicationTaskAssessmentRun</code> operation. The role must allow the <code>iam:PassRole</code> action.</p>")
   @as("ServiceAccessRoleArn")
   serviceAccessRoleArn: option<string_>,
   @ocaml.doc("<p>Last message generated by an individual assessment failure.</p>")
@@ -2204,7 +2269,7 @@ type replicationTask = {
   targetReplicationInstanceArn: option<string_>,
   @ocaml.doc("<p>Supplemental information that the task requires to migrate the data for certain source and target endpoints. 
             For more information, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.TaskData.html\">Specifying Supplemental Data for Task Settings</a> in the
-         <i>AWS Database Migration Service User Guide.</i>
+         <i>Database Migration Service User Guide.</i>
          </p>")
   @as("TaskData")
   taskData: option<string_>,
@@ -2421,7 +2486,7 @@ type orderableReplicationInstance = {
   @ocaml.doc("<p>The value returned when the specified <code>EngineVersion</code> of the replication 
          instance is in Beta or test mode. This indicates some features might not work as expected.</p>
          <note>
-            <p>AWS DMS supports the <code>ReleaseStatus</code> parameter in versions 3.1.4 and later.</p>
+            <p>DMS supports the <code>ReleaseStatus</code> parameter in versions 3.1.4 and later.</p>
          </note>")
   @as("ReleaseStatus")
   releaseStatus: option<releaseStatusValues>,
@@ -2450,15 +2515,305 @@ type orderableReplicationInstance = {
          replication instance class. For example to specify the instance class dms.c4.large, set this parameter to <code>\"dms.c4.large\"</code>.</p>
          <p>For more information on the settings and capacities for the available replication instance classes, see 
          <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.html#CHAP_ReplicationInstance.InDepth\">
-            Selecting the right AWS DMS replication instance for your migration</a>.
+            Selecting the right DMS replication instance for your migration</a>.
       </p>")
   @as("ReplicationInstanceClass")
   replicationInstanceClass: option<string_>,
   @ocaml.doc("<p>The version of the replication engine.</p>") @as("EngineVersion")
   engineVersion: option<string_>,
 }
+@ocaml.doc("<p>Provides information that defines an Oracle endpoint.</p>")
+type oracleSettings = {
+  @ocaml.doc("<p>Required only if your Oracle endpoint uses Advanced Storage Manager (ASM). The full ARN, partial ARN, or friendly name of the <code>SecretsManagerOracleAsmSecret</code> 
+         that contains the Oracle ASM connection details for the Oracle endpoint.</p>")
+  @as("SecretsManagerOracleAsmSecretId")
+  secretsManagerOracleAsmSecretId: option<string_>,
+  @ocaml.doc("<p>Required only if your Oracle endpoint uses Advanced Storage Manager (ASM). The full ARN
+         of the IAM role that specifies DMS as the trusted entity and grants the required
+         permissions to access the <code>SecretsManagerOracleAsmSecret</code>. This
+            <code>SecretsManagerOracleAsmSecret</code> has the secret value that allows access to
+         the Oracle ASM of the endpoint.</p>
+         <note>
+            <p>You can specify one of two sets of values for these permissions. You can specify the
+            values for this setting and <code>SecretsManagerOracleAsmSecretId</code>. Or you can
+            specify clear-text values for <code>AsmUserName</code>, <code>AsmPassword</code>, and
+               <code>AsmServerName</code>. You can't specify both. For more information on
+            creating this <code>SecretsManagerOracleAsmSecret</code> and the
+               <code>SecretsManagerOracleAsmAccessRoleArn</code> and
+               <code>SecretsManagerOracleAsmSecretId</code> required to access it, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager\">Using secrets to access Database Migration Service
+               resources</a> in the <i>Database Migration Service User
+               Guide</i>.</p>
+         </note>")
+  @as("SecretsManagerOracleAsmAccessRoleArn")
+  secretsManagerOracleAsmAccessRoleArn: option<string_>,
+  @ocaml.doc(
+    "<p>The full ARN, partial ARN, or friendly name of the <code>SecretsManagerSecret</code> that contains the Oracle endpoint connection details.</p>"
+  )
+  @as("SecretsManagerSecretId")
+  secretsManagerSecretId: option<string_>,
+  @ocaml.doc("<p>The full Amazon Resource Name (ARN) of the IAM role that specifies DMS as the
+         trusted entity and grants the required permissions to access the value in
+         <code>SecretsManagerSecret</code>. The role must allow the <code>iam:PassRole</code> action.
+         <code>SecretsManagerSecret</code> has the value of the Amazon Web Services Secrets Manager
+          secret that allows access to the Oracle endpoint.</p>
+         <note>
+            <p>You can specify one of two sets of values for these permissions. You can specify the
+            values for this setting and <code>SecretsManagerSecretId</code>. Or you can specify
+            clear-text values for <code>UserName</code>, <code>Password</code>,
+               <code>ServerName</code>, and <code>Port</code>. You can't specify both. For more
+            information on creating this <code>SecretsManagerSecret</code> and the
+               <code>SecretsManagerAccessRoleArn</code> and <code>SecretsManagerSecretId</code>
+            required to access it, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager\">Using secrets to access Database Migration Service
+               resources</a> in the <i>Database Migration Service User
+               Guide</i>.</p>
+         </note>")
+  @as("SecretsManagerAccessRoleArn")
+  secretsManagerAccessRoleArn: option<string_>,
+  @ocaml.doc("<p>Set this attribute to Y to capture change data using the Oracle LogMiner utility (the
+         default). Set this attribute to N if you want to access the redo logs as a binary file.
+         When you set <code>UseLogminerReader</code> to N, also set <code>UseBfile</code> to Y. For
+         more information on this setting and using Oracle ASM, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.CDC\"> Using Oracle LogMiner or DMS Binary Reader for CDC</a> in
+         the <i>DMS User Guide</i>.</p>")
+  @as("UseLogminerReader")
+  useLogminerReader: option<booleanOptional>,
+  @ocaml.doc("<p>Set this attribute to Y to have DMS use a direct path full load. 
+         Specify this value to use the direct path protocol in the Oracle Call Interface (OCI). 
+         By using this OCI protocol, you can bulk-load Oracle target tables during a full load.</p>")
+  @as("UseDirectPathFullLoad")
+  useDirectPathFullLoad: option<booleanOptional>,
+  @ocaml.doc("<p>Set this attribute to Y to capture change data using the Binary Reader utility. Set
+            <code>UseLogminerReader</code> to N to set this attribute to Y. To use Binary Reader
+         with Amazon RDS for Oracle as the source, you set additional attributes. For more information
+         about using this setting with Oracle Automatic Storage Management (ASM), see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.CDC\"> Using Oracle LogMiner or DMS Binary Reader for
+         CDC</a>.</p>")
+  @as("UseBFile")
+  useBFile: option<booleanOptional>,
+  @ocaml.doc("<p>Endpoint connection user name.</p>") @as("Username") username: option<string_>,
+  @ocaml.doc("<p>Use this attribute to specify a time in minutes for the delay in standby sync. If the
+         source is an Oracle Active Data Guard standby database, use this attribute to specify the
+         time lag between primary and standby databases.</p>
+         <p>In DMS, you can create an Oracle CDC task that uses an Active Data Guard standby
+         instance as a source for replicating ongoing changes. Doing this eliminates the need to connect
+         to an active database that might be in production.</p>")
+  @as("StandbyDelayTime")
+  standbyDelayTime: option<integerOptional>,
+  @ocaml.doc("<p>Use this attribute to convert <code>SDO_GEOMETRY</code> to 
+         <code>GEOJSON</code> format. By default, DMS calls the 
+         <code>SDO2GEOJSON</code> custom function if present and accessible. 
+         Or you can create your own custom function that mimics the operation of 
+         <code>SDOGEOJSON</code> and set 
+         <code>SpatialDataOptionToGeoJsonFunctionName</code> to call it instead. </p>")
+  @as("SpatialDataOptionToGeoJsonFunctionName")
+  spatialDataOptionToGeoJsonFunctionName: option<string_>,
+  @ocaml.doc("<p>Fully qualified domain name of the endpoint.</p>") @as("ServerName")
+  serverName: option<string_>,
+  @ocaml.doc("<p>For an Oracle source endpoint, the name of a key used for the transparent data
+         encryption (TDE) of the columns and tablespaces in an Oracle source database that is
+         encrypted using TDE. The key value is the value of the <code>SecurityDbEncryption</code>
+         setting. For more information on setting the key name value of
+            <code>SecurityDbEncryptionName</code>, see the information and example for setting the
+            <code>securityDbEncryptionName</code> extra connection attribute in <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.Encryption\"> Supported encryption methods for using Oracle as a source for DMS
+            </a> in the <i>Database Migration Service User
+         Guide</i>.</p>")
+  @as("SecurityDbEncryptionName")
+  securityDbEncryptionName: option<string_>,
+  @ocaml.doc("<p>For an Oracle source endpoint, the transparent data encryption (TDE) password required
+         by AWM DMS to access Oracle redo logs encrypted by TDE using Binary Reader. It is also the
+               <code>
+               <i>TDE_Password</i>
+            </code> part of the comma-separated value you
+         set to the <code>Password</code> request parameter when you create the endpoint. The
+            <code>SecurityDbEncryptian</code> setting is related to this
+            <code>SecurityDbEncryptionName</code> setting. For more information, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.Encryption\"> Supported encryption methods for using Oracle as a source for DMS
+            </a> in the <i>Database Migration Service User Guide</i>. </p>")
+  @as("SecurityDbEncryption")
+  securityDbEncryption: option<secretString>,
+  @ocaml.doc("<p>Specifies the number of seconds that the system waits
+         before resending a query.</p>
+         <p>Example: <code>retryInterval=6;</code>
+         </p>")
+  @as("RetryInterval")
+  retryInterval: option<integerOptional>,
+  @ocaml.doc("<p>When set to <code>true</code>, this attribute supports tablespace
+         replication.</p>")
+  @as("ReadTableSpaceName")
+  readTableSpaceName: option<booleanOptional>,
+  @ocaml.doc("<p>Endpoint TCP port.</p>") @as("Port") port: option<integerOptional>,
+  @ocaml.doc("<p>Endpoint connection password.</p>") @as("Password") password: option<secretString>,
+  @ocaml.doc("<p>Specifies the number scale. You can select a scale up to 38,
+         or you can select FLOAT. By default, the NUMBER data type
+         is converted to precision 38, scale 10.</p>
+         <p>Example: <code>numberDataTypeScale=12</code>
+         </p>")
+  @as("NumberDatatypeScale")
+  numberDatatypeScale: option<integerOptional>,
+  @ocaml.doc("<p>When set to <code>true</code>, this attribute causes a task to fail if the
+         actual size of an LOB column is greater than the specified
+         <code>LobMaxSize</code>.</p> 
+         <p>If a task is set to limited LOB mode and this option is set to
+         <code>true</code>, the task fails instead of truncating the LOB data.</p>")
+  @as("FailTasksOnLobTruncation")
+  failTasksOnLobTruncation: option<booleanOptional>,
+  @ocaml.doc("<p>When set to <code>true</code>, this attribute specifies a parallel load
+         when <code>useDirectPathFullLoad</code> is set to <code>Y</code>. This attribute
+         also only applies when you use the DMS parallel load
+         feature.  Note that the target table cannot have any constraints or indexes.</p>")
+  @as("DirectPathParallelLoad")
+  directPathParallelLoad: option<booleanOptional>,
+  @ocaml.doc("<p>Database name for the endpoint.</p>") @as("DatabaseName")
+  databaseName: option<string_>,
+  @ocaml.doc("<p>Specifies whether the length of a character column is in
+         bytes or in characters. To indicate that the character column
+         length is in characters, set this attribute to <code>CHAR</code>. Otherwise,
+         the character column length is in bytes.</p>
+         <p>Example: <code>charLengthSemantics=CHAR;</code>
+         </p>")
+  @as("CharLengthSemantics")
+  charLengthSemantics: option<charLengthSemantics>,
+  @ocaml.doc("<p>For an Oracle source endpoint, your ASM user name. You can set this value from the
+            <code>asm_user</code> value. You set <code>asm_user</code> as part of the extra
+         connection attribute string to access an Oracle server with Binary Reader that uses ASM.
+         For more information, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.CDC.Configuration\">Configuration for change data capture (CDC) on an Oracle source
+            database</a>.</p>")
+  @as("AsmUser")
+  asmUser: option<string_>,
+  @ocaml.doc("<p>For an Oracle source endpoint, your ASM server address. You can set this value from the
+            <code>asm_server</code> value. You set <code>asm_server</code> as part of the extra
+         connection attribute string to access an Oracle server with Binary Reader that uses ASM.
+         For more information, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.CDC.Configuration\">Configuration for change data capture (CDC) on an Oracle source
+            database</a>.</p>")
+  @as("AsmServer")
+  asmServer: option<string_>,
+  @ocaml.doc("<p>For an Oracle source endpoint, your Oracle Automatic Storage Management (ASM) password.
+         You can set this value from the <code>
+               <i>asm_user_password</i>
+            </code> value.
+         You set this value as part of the comma-separated value that you set to the
+            <code>Password</code> request parameter when you create the endpoint to access
+         transaction logs using Binary Reader. For more information, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.CDC.Configuration\">Configuration for change data capture (CDC) on an Oracle source
+            database</a>.</p>")
+  @as("AsmPassword")
+  asmPassword: option<secretString>,
+  @ocaml.doc("<p>When this field is set to <code>Y</code>, DMS only accesses the
+         archived redo logs. If the archived redo logs are stored on
+         Oracle ASM only, the DMS user account needs to be
+         granted ASM privileges.</p>")
+  @as("ArchivedLogsOnly")
+  archivedLogsOnly: option<booleanOptional>,
+  @ocaml.doc("<p>When set to <code>true</code>, this attribute helps to increase the
+         commit rate on the Oracle target database by writing
+         directly to tables and not writing a trail to database logs.</p>")
+  @as("DirectPathNoLog")
+  directPathNoLog: option<booleanOptional>,
+  @ocaml.doc("<p>Set this attribute to enable homogenous tablespace
+         replication and create existing tables or indexes under the
+         same tablespace on the target.</p>")
+  @as("EnableHomogenousTablespace")
+  enableHomogenousTablespace: option<booleanOptional>,
+  @ocaml.doc("<p>Set this attribute to true in order to use the Binary Reader
+         to capture change data for an Amazon RDS for Oracle as the
+         source. This setting tells DMS instance to replace the default
+         Oracle root with the specified <code>usePathPrefix</code> setting to
+         access the redo logs.</p>")
+  @as("ReplacePathPrefix")
+  replacePathPrefix: option<booleanOptional>,
+  @ocaml.doc("<p>Set this string attribute to the required value in order to use
+         the Binary Reader to capture change data for an Amazon
+         RDS for Oracle as the source. This value specifies the path
+         prefix used to replace the default Oracle root to access the
+         redo logs.</p>")
+  @as("UsePathPrefix")
+  usePathPrefix: option<string_>,
+  @ocaml.doc("<p>Set this string attribute to the required value in order to use
+         the Binary Reader to capture change data for an Amazon
+         RDS for Oracle as the source. This value specifies the
+         default Oracle root used to access the redo logs.</p>")
+  @as("OraclePathPrefix")
+  oraclePathPrefix: option<string_>,
+  @ocaml.doc("<p>Set this attribute to <code>true</code> in order to use the Binary Reader
+         to capture change data for an Amazon RDS for Oracle as
+         the source. This tells the DMS instance to use any specified
+         prefix replacement to access all online redo logs.</p>")
+  @as("UseAlternateFolderForOnline")
+  useAlternateFolderForOnline: option<booleanOptional>,
+  @ocaml.doc("<p>Set this attribute to <code>false</code> in order to use the Binary Reader
+         to capture change data for an Amazon RDS for Oracle as the
+         source. This tells the DMS instance to not access redo logs
+         through any specified path prefix replacement using direct
+         file access.</p>")
+  @as("AccessAlternateDirectly")
+  accessAlternateDirectly: option<booleanOptional>,
+  @ocaml.doc("<p>Set this attribute to change the number of read-ahead blocks that DMS configures to
+         perform a change data capture (CDC) load using Oracle Automatic Storage Management (ASM).
+         You can specify an integer value between 1000 (the default) and 200,000 (the
+         maximum).</p>")
+  @as("ReadAheadBlocks")
+  readAheadBlocks: option<integerOptional>,
+  @ocaml.doc("<p>Set this attribute to change the number of threads that DMS configures to perform a
+         change data capture (CDC) load using Oracle Automatic Storage Management (ASM). You can
+         specify an integer value between 2 (the default) and 8 (the maximum). Use this attribute
+         together with the <code>readAheadBlocks</code> attribute.</p>")
+  @as("ParallelAsmReadThreads")
+  parallelAsmReadThreads: option<integerOptional>,
+  @ocaml.doc("<p>Set this attribute to <code>true</code> to enable replication of Oracle
+         tables containing columns that are nested tables or defined
+         types.</p>")
+  @as("AllowSelectNestedTables")
+  allowSelectNestedTables: option<booleanOptional>,
+  @ocaml.doc("<p>Specifies the IDs of one more destinations for one or more archived redo logs. These IDs
+         are the values of the <code>dest_id</code> column in the <code>v$archived_log</code> view.
+         Use this setting with the <code>archivedLogDestId</code> extra connection attribute in a
+         primary-to-single setup or a primary-to-multiple-standby setup. </p>
+         <p>This setting is useful in a switchover when you use an Oracle Data Guard database as a
+         source. In this case, DMS needs information about what destination to get archive redo
+         logs from to read changes. DMS needs this because after the switchover the previous
+         primary is a standby instance. For example, in a primary-to-single standby setup you might
+         apply the following settings. </p>
+         <p>
+            <code>archivedLogDestId=1; ExtraArchivedLogDestIds=[2]</code>
+         </p>
+         <p>In a primary-to-multiple-standby setup, you might apply the following settings.</p>
+         <p>
+            <code>archivedLogDestId=1; ExtraArchivedLogDestIds=[2,3,4]</code>
+         </p>
+         <p>Although DMS supports the use of the Oracle <code>RESETLOGS</code> option to open the
+         database, never use <code>RESETLOGS</code> unless it's necessary. For more information
+         about <code>RESETLOGS</code>, see <a href=\"https://docs.oracle.com/en/database/oracle/oracle-database/19/bradv/rman-data-repair-concepts.html#GUID-1805CCF7-4AF2-482D-B65A-998192F89C2B\"> RMAN Data Repair Concepts</a> in the <i>Oracle Database Backup and Recovery
+            User's Guide</i>.</p>")
+  @as("ExtraArchivedLogDestIds")
+  extraArchivedLogDestIds: option<integerList>,
+  @ocaml.doc("<p>Set this attribute with <code>ArchivedLogDestId</code> in a primary/
+         standby setup. This attribute is useful in the case of a
+         switchover. In this case, DMS needs to know which
+         destination to get archive redo logs from to read changes.
+         This need arises because the previous primary instance is
+         now a standby instance after switchover.</p>
+         <p>Although DMS supports the use of the Oracle
+         <code>RESETLOGS</code> option to open the database, never
+         use <code>RESETLOGS</code> unless necessary. For additional
+         information about <code>RESETLOGS</code>, see <a href=\"https://docs.oracle.com/en/database/oracle/oracle-database/19/bradv/rman-data-repair-concepts.html#GUID-1805CCF7-4AF2-482D-B65A-998192F89C2B\">RMAN Data Repair Concepts</a> in the
+         <i>Oracle Database Backup and Recovery User's Guide</i>.</p>")
+  @as("AdditionalArchivedLogDestId")
+  additionalArchivedLogDestId: option<integerOptional>,
+  @ocaml.doc("<p>Specifies the ID of the destination for the archived redo logs. This value
+         should be the same as a number in the dest_id column of the v$archived_log
+         view. If you work with an additional redo log destination, use the
+         <code>AdditionalArchivedLogDestId</code> option to specify the additional
+         destination ID. Doing this improves performance by ensuring that the correct
+         logs are accessed from the outset.</p>")
+  @as("ArchivedLogDestId")
+  archivedLogDestId: option<integerOptional>,
+  @ocaml.doc("<p>Set this attribute to set up table-level supplemental logging
+         for the Oracle database. This attribute enables PRIMARY KEY
+         supplemental logging on all tables selected for a migration
+         task.</p>
+         <p>If you use this option, you still need to enable
+         database-level supplemental logging.</p>")
+  @as("AddSupplementalLogging")
+  addSupplementalLogging: option<booleanOptional>,
+}
 @ocaml.doc("<p>Identifies the name and value of a filter object. This filter is used to limit the
-         number and type of AWS DMS objects that are returned for a particular
+         number and type of DMS objects that are returned for a particular
             <code>Describe*</code> call or similar operation. Filters are used as an optional
          parameter for certain API operations. </p>")
 type filter = {
@@ -2482,34 +2837,33 @@ type eventSubscription = {
   eventCategoriesList: option<eventCategoriesList>,
   @ocaml.doc("<p>A list of source Ids for the event subscription.</p>") @as("SourceIdsList")
   sourceIdsList: option<sourceIdsList>,
-  @ocaml.doc("<p> The type of AWS DMS resource that generates events. </p>
+  @ocaml.doc("<p> The type of DMS resource that generates events. </p>
          <p>Valid values: replication-instance | replication-server | security-group |
          replication-task</p>")
   @as("SourceType")
   sourceType: option<string_>,
-  @ocaml.doc("<p>The time the AWS DMS event notification subscription was created.</p>")
+  @ocaml.doc("<p>The time the DMS event notification subscription was created.</p>")
   @as("SubscriptionCreationTime")
   subscriptionCreationTime: option<string_>,
-  @ocaml.doc("<p>The status of the AWS DMS event notification subscription.</p>
+  @ocaml.doc("<p>The status of the DMS event notification subscription.</p>
          <p>Constraints:</p>
          <p>Can be one of the following: creating | modifying | deleting | active | no-permission |
          topic-not-exist</p>
-         <p>The status \"no-permission\" indicates that AWS DMS no longer has permission to post to
+         <p>The status \"no-permission\" indicates that DMS no longer has permission to post to
          the SNS topic. The status \"topic-not-exist\" indicates that the topic was deleted after the
          subscription was created.</p>")
   @as("Status")
   status: option<string_>,
-  @ocaml.doc("<p>The topic ARN of the AWS DMS event notification subscription.</p>")
-  @as("SnsTopicArn")
+  @ocaml.doc("<p>The topic ARN of the DMS event notification subscription.</p>") @as("SnsTopicArn")
   snsTopicArn: option<string_>,
-  @ocaml.doc("<p>The AWS DMS event notification subscription Id.</p>") @as("CustSubscriptionId")
+  @ocaml.doc("<p>The DMS event notification subscription Id.</p>") @as("CustSubscriptionId")
   custSubscriptionId: option<string_>,
-  @ocaml.doc("<p>The AWS customer account associated with the AWS DMS event notification
+  @ocaml.doc("<p>The Amazon Web Services customer account associated with the DMS event notification
          subscription.</p>")
   @as("CustomerAwsId")
   customerAwsId: option<string_>,
 }
-@ocaml.doc("<p>Lists categories of events subscribed to, and generated by, the applicable AWS DMS
+@ocaml.doc("<p>Lists categories of events subscribed to, and generated by, the applicable DMS
          resource type. This data type appears in response to the 
          <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_EventCategoryGroup.html\">
                <code>DescribeEventCategories</code>
@@ -2519,7 +2873,7 @@ type eventCategoryGroup = {
   @ocaml.doc("<p> A list of event categories from a source type that you've chosen.</p>")
   @as("EventCategories")
   eventCategories: option<eventCategoriesList>,
-  @ocaml.doc("<p> The type of AWS DMS resource that generates events. </p>
+  @ocaml.doc("<p> The type of DMS resource that generates events. </p>
          <p>Valid values: replication-instance | replication-server | security-group |
          replication-task</p>")
   @as("SourceType")
@@ -2527,14 +2881,14 @@ type eventCategoryGroup = {
 }
 @ocaml.doc("<p>Describes an identifiable significant activity that affects a replication instance or
          task. This object can provide the message, the available event categories, the date and
-         source of the event, and the AWS DMS resource type.</p>")
+         source of the event, and the DMS resource type.</p>")
 type event = {
   @ocaml.doc("<p>The date of the event.</p>") @as("Date") date: option<tstamp>,
   @ocaml.doc("<p>The event categories available for the specified source type.</p>")
   @as("EventCategories")
   eventCategories: option<eventCategoriesList>,
   @ocaml.doc("<p>The event message.</p>") @as("Message") message: option<string_>,
-  @ocaml.doc("<p> The type of AWS DMS resource that generates events. </p>
+  @ocaml.doc("<p> The type of DMS resource that generates events. </p>
          <p>Valid values: replication-instance | endpoint | replication-task</p>")
   @as("SourceType")
   sourceType: option<sourceType>,
@@ -2543,6 +2897,11 @@ type event = {
 }
 @ocaml.doc("<p>Endpoint settings.</p>")
 type endpointSetting = {
+  @ocaml.doc(
+    "<p>The default value of the endpoint setting if no value is specified using <code>CreateEndpoint</code> or <code>ModifyEndpoint</code>.</p>"
+  )
+  @as("DefaultValue")
+  defaultValue: option<string_>,
   @ocaml.doc("<p>The maximum value of an endpoint setting that is of type <code>int</code>.</p>")
   @as("IntValueMax")
   intValueMax: option<integerOptional>,
@@ -2568,6 +2927,29 @@ type endpointSetting = {
   @ocaml.doc("<p>The name that you want to give the endpoint settings.</p>") @as("Name")
   name: option<string_>,
 }
+type connectionList = array<connection>
+type certificateList = array<certificate>
+type accountQuotaList = array<accountQuota>
+type subnetList = array<subnet>
+@ocaml.doc("<p>Identifies an DMS resource and any pending actions for it.</p>")
+type resourcePendingMaintenanceActions = {
+  @ocaml.doc("<p>Detailed information about the pending maintenance action.</p>")
+  @as("PendingMaintenanceActionDetails")
+  pendingMaintenanceActionDetails: option<pendingMaintenanceActionDetails>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the DMS resource that the pending maintenance action
+         applies to. For information about creating an ARN, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Introduction.AWS.ARN.html\"> Constructing an Amazon
+            Resource Name (ARN) for DMS</a> in the DMS documentation.</p>")
+  @as("ResourceIdentifier")
+  resourceIdentifier: option<string_>,
+}
+type replicationTaskList = array<replicationTask>
+type replicationTaskAssessmentRunList = array<replicationTaskAssessmentRun>
+type orderableReplicationInstanceList = array<orderableReplicationInstance>
+type filterList = array<filter>
+type eventSubscriptionsList = array<eventSubscription>
+type eventList = array<event>
+type eventCategoryGroupList = array<eventCategoryGroup>
+type endpointSettingsList = array<endpointSetting>
 @ocaml.doc("<p>Describes an endpoint of a database instance in response to operations such as the
          following:</p>
          <ul>
@@ -2583,16 +2965,18 @@ type endpointSetting = {
             </li>
             <li>
                <p>
-                  <code>DescribeEndpointTypes</code>
-               </p>
-            </li>
-            <li>
-               <p>
                   <code>ModifyEndpoint</code>
                </p>
             </li>
          </ul>")
 type endpoint = {
+  @ocaml.doc("<p>Settings in JSON format for the source GCP MySQL endpoint.</p>")
+  @as("GcpMySQLSettings")
+  gcpMySQLSettings: option<gcpMySQLSettings>,
+  @ocaml.doc("<p>The settings for the Redis target endpoint. For more information, see the 
+         <code>RedisSettings</code> structure.</p>")
+  @as("RedisSettings")
+  redisSettings: option<redisSettings>,
   @as("DocDbSettings") docDbSettings: option<docDbSettings>,
   @ocaml.doc("<p>The settings for the IBM Db2 LUW source endpoint. For more information, see the
             <code>IBMDb2Settings</code> structure.
@@ -2625,7 +3009,7 @@ type endpoint = {
          <code>NeptuneSettings</code> structure.</p>")
   @as("NeptuneSettings")
   neptuneSettings: option<neptuneSettings>,
-  @ocaml.doc("<p>The settings for the Elasticsearch source endpoint. For more information, see the
+  @ocaml.doc("<p>The settings for the OpenSearch source endpoint. For more information, see the
             <code>ElasticsearchSettings</code> structure.</p>")
   @as("ElasticsearchSettings")
   elasticsearchSettings: option<elasticsearchSettings>,
@@ -2641,31 +3025,9 @@ type endpoint = {
             <code>MongoDbSettings</code> structure.</p>")
   @as("MongoDbSettings")
   mongoDbSettings: option<mongoDbSettings>,
-  @ocaml.doc("<p>The settings in JSON format for the DMS transfer type of source endpoint. </p>
-         <p>Possible settings include the following:</p>
-         <ul>
-            <li>
-               <p>
-                  <code>ServiceAccessRoleArn</code> - The IAM role that has permission to access the
-               Amazon S3 bucket.</p>
-            </li>
-            <li>
-               <p>
-                  <code>BucketName</code> - The name of the S3 bucket to use.</p>
-            </li>
-            <li>
-               <p>
-                  <code>CompressionType</code> - An optional parameter to use GZIP to compress the
-               target files. To use GZIP, set this value to <code>NONE</code> (the default). To keep
-               the files uncompressed, don't use this value.</p>
-            </li>
-         </ul>
-         <p>Shorthand syntax for these settings is as follows:
-            <code>ServiceAccessRoleArn=string,BucketName=string,CompressionType=string</code>
-         </p>
-         <p>JSON syntax for these settings is as follows: <code>{ \"ServiceAccessRoleArn\":
-            \"string\", \"BucketName\": \"string\", \"CompressionType\": \"none\"|\"gzip\" } </code>
-         </p>")
+  @ocaml.doc(
+    "<p>The settings for the DMS Transfer type source. For more information, see the DmsTransferSettings structure.  </p>"
+  )
   @as("DmsTransferSettings")
   dmsTransferSettings: option<dmsTransferSettings>,
   @ocaml.doc("<p>The settings for the S3 target endpoint. For more information, see the
@@ -2683,7 +3045,8 @@ type endpoint = {
   externalId: option<string_>,
   @ocaml.doc("<p>The external table definition.</p>") @as("ExternalTableDefinition")
   externalTableDefinition: option<string_>,
-  @ocaml.doc("<p>The Amazon Resource Name (ARN) used by the service access IAM role.</p>")
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) used by the service to access the IAM role.
+         The role must allow the <code>iam:PassRole</code> action.</p>")
   @as("ServiceAccessRoleArn")
   serviceAccessRoleArn: option<string_>,
   @ocaml.doc(
@@ -2697,11 +3060,11 @@ type endpoint = {
   @ocaml.doc("<p>The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.</p>")
   @as("EndpointArn")
   endpointArn: option<string_>,
-  @ocaml.doc("<p>An AWS KMS key identifier that is used to encrypt the connection parameters for the endpoint.</p>
+  @ocaml.doc("<p>An KMS key identifier that is used to encrypt the connection parameters for the endpoint.</p>
          <p>If you don't specify a value for the <code>KmsKeyId</code> parameter, then
-           AWS DMS uses your default encryption key.</p>
-         <p>AWS KMS creates the default encryption key for your AWS account. Your AWS account has a
-         different default encryption key for each AWS Region.</p>")
+           DMS uses your default encryption key.</p>
+         <p>KMS creates the default encryption key for your Amazon Web Services account. Your Amazon Web Services account has a
+         different default encryption key for each Amazon Web Services Region.</p>")
   @as("KmsKeyId")
   kmsKeyId: option<string_>,
   @ocaml.doc("<p>The status of the endpoint.</p>") @as("Status") status: option<string_>,
@@ -2722,7 +3085,7 @@ type endpoint = {
   engineDisplayName: option<string_>,
   @ocaml.doc("<p>The database engine name. Valid values, depending on the EndpointType, include
             <code>\"mysql\"</code>, <code>\"oracle\"</code>, <code>\"postgres\"</code>,
-            <code>\"mariadb\"</code>, <code>\"aurora\"</code>, <code>\"aurora-postgresql\"</code>,
+            <code>\"mariadb\"</code>, <code>\"aurora\"</code>, <code>\"aurora-postgresql\"</code>, <code>\"opensearch\"</code>,
             <code>\"redshift\"</code>, <code>\"s3\"</code>, <code>\"db2\"</code>, <code>\"azuredb\"</code>,
             <code>\"sybase\"</code>, <code>\"dynamodb\"</code>, <code>\"mongodb\"</code>,
             <code>\"kinesis\"</code>, <code>\"kafka\"</code>, <code>\"elasticsearch\"</code>,
@@ -2740,30 +3103,6 @@ type endpoint = {
   @as("EndpointIdentifier")
   endpointIdentifier: option<string_>,
 }
-type connectionList = array<connection>
-type certificateList = array<certificate>
-type accountQuotaList = array<accountQuota>
-type subnetList = array<subnet>
-@ocaml.doc("<p>Identifies an AWS DMS resource and any pending actions for it.</p>")
-type resourcePendingMaintenanceActions = {
-  @ocaml.doc("<p>Detailed information about the pending maintenance action.</p>")
-  @as("PendingMaintenanceActionDetails")
-  pendingMaintenanceActionDetails: option<pendingMaintenanceActionDetails>,
-  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the DMS resource that the pending maintenance action
-         applies to. For information about creating an ARN, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Introduction.AWS.ARN.html\"> Constructing an Amazon
-            Resource Name (ARN) for AWS DMS</a> in the DMS documentation.</p>")
-  @as("ResourceIdentifier")
-  resourceIdentifier: option<string_>,
-}
-type replicationTaskList = array<replicationTask>
-type replicationTaskAssessmentRunList = array<replicationTaskAssessmentRun>
-type orderableReplicationInstanceList = array<orderableReplicationInstance>
-type filterList = array<filter>
-type eventSubscriptionsList = array<eventSubscription>
-type eventList = array<event>
-type eventCategoryGroupList = array<eventCategoryGroup>
-type endpointSettingsList = array<endpointSetting>
-type endpointList = array<endpoint>
 @ocaml.doc("<p>Describes a subnet group in response to a request by the
             <code>DescribeReplicationSubnetGroups</code> operation.</p>")
 type replicationSubnetGroup = {
@@ -2780,6 +3119,7 @@ type replicationSubnetGroup = {
   replicationSubnetGroupIdentifier: option<string_>,
 }
 type pendingMaintenanceActions = array<resourcePendingMaintenanceActions>
+type endpointList = array<endpoint>
 type replicationSubnetGroups = array<replicationSubnetGroup>
 @ocaml.doc("<p>Provides information that defines a replication instance.</p>")
 type replicationInstance = {
@@ -2817,12 +3157,12 @@ type replicationInstance = {
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the replication instance.</p>")
   @as("ReplicationInstanceArn")
   replicationInstanceArn: option<string_>,
-  @ocaml.doc("<p>An AWS KMS key identifier that is used to encrypt the data on the replication
+  @ocaml.doc("<p>An KMS key identifier that is used to encrypt the data on the replication
            instance.</p>
          <p>If you don't specify a value for the <code>KmsKeyId</code> parameter, then
-           AWS DMS uses your default encryption key.</p>
-         <p>AWS KMS creates the default encryption key for your AWS account. Your AWS account has a
-         different default encryption key for each AWS Region.</p>")
+           DMS uses your default encryption key.</p>
+         <p>KMS creates the default encryption key for your Amazon Web Services account. Your Amazon Web Services account has a
+         different default encryption key for each Amazon Web Services Region.</p>")
   @as("KmsKeyId")
   kmsKeyId: option<string_>,
   @ocaml.doc("<p>Boolean value indicating if minor version upgrades will be automatically applied to the
@@ -2931,11 +3271,11 @@ type replicationInstance = {
   @as("ReplicationInstanceStatus")
   replicationInstanceStatus: option<string_>,
   @ocaml.doc("<p>The compute and memory capacity of the replication instance as defined for the specified
-         replication instance class. It is a required parameter, although a defualt value is
+         replication instance class. It is a required parameter, although a default value is
          pre-selected in the DMS console.</p>
          <p>For more information on the settings and capacities for the available replication instance classes, see 
          <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.html#CHAP_ReplicationInstance.InDepth\">
-            Selecting the right AWS DMS replication instance for your migration</a>.
+            Selecting the right DMS replication instance for your migration</a>.
       </p>")
   @as("ReplicationInstanceClass")
   replicationInstanceClass: option<string_>,
@@ -2959,15 +3299,15 @@ type replicationInstance = {
   replicationInstanceIdentifier: option<string_>,
 }
 type replicationInstanceList = array<replicationInstance>
-@ocaml.doc("<fullname>AWS Database Migration Service</fullname>
-         <p>AWS Database Migration Service (AWS DMS) can migrate your data to and from the most
+@ocaml.doc("<fullname>Database Migration Service</fullname>
+         <p>Database Migration Service (DMS) can migrate your data to and from the most
          widely used commercial and open-source databases such as Oracle, PostgreSQL, Microsoft SQL
          Server, Amazon Redshift, MariaDB, Amazon Aurora, MySQL, and SAP Adaptive Server Enterprise
          (ASE). The service supports homogeneous migrations such as Oracle to Oracle, as well as
          heterogeneous migrations between different database platforms, such as Oracle to MySQL or
          SQL Server to PostgreSQL.</p>
-         <p>For more information about AWS DMS, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/Welcome.html\">What Is AWS Database Migration Service?</a>
-         in the <i>AWS Database Migration User Guide.</i>
+         <p>For more information about DMS, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/Welcome.html\">What Is Database Migration Service?</a>
+         in the <i>Database Migration Service User Guide.</i>
          </p>")
 module DeleteReplicationSubnetGroup = {
   type t
@@ -2977,7 +3317,7 @@ module DeleteReplicationSubnetGroup = {
     @as("ReplicationSubnetGroupIdentifier")
     replicationSubnetGroupIdentifier: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-dms") @new
   external new: request => t = "DeleteReplicationSubnetGroupCommand"
   let make = (~replicationSubnetGroupIdentifier, ()) =>
@@ -3010,17 +3350,17 @@ module TestConnection = {
 
 module RemoveTagsFromResource = {
   type t
-  @ocaml.doc("<p>Removes one or more tags from an AWS DMS resource.</p>")
+  @ocaml.doc("<p>Removes one or more tags from an DMS resource.</p>")
   type request = {
     @ocaml.doc("<p>The tag key (name) of the tag to be removed.</p>") @as("TagKeys")
     tagKeys: keyList,
     @ocaml.doc(
-      "<p>An AWS DMS resource from which you want to remove tag(s). The value for this parameter is an Amazon Resource Name (ARN).</p>"
+      "<p>An DMS resource from which you want to remove tag(s). The value for this parameter is an Amazon Resource Name (ARN).</p>"
     )
     @as("ResourceArn")
     resourceArn: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-dms") @new external new: request => t = "RemoveTagsFromResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -3158,7 +3498,7 @@ module DescribeApplicableIndividualAssessments = {
          run that you start based on the specified request parameters. For more information on the
          available individual assessments, including compatibility with different migration task
          configurations, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.AssessmentReport.html\">Working with premigration assessment runs</a> in the
-            <i>AWS Database Migration Service User Guide.</i>
+            <i>Database Migration Service User Guide.</i>
          </p>")
     @as("IndividualAssessmentNames")
     individualAssessmentNames: option<individualAssessmentNameList>,
@@ -3214,8 +3554,7 @@ module DeleteConnection = {
 module DeleteCertificate = {
   type t
   type request = {
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the deleted certificate.</p>")
-    @as("CertificateArn")
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the certificate.</p>") @as("CertificateArn")
     certificateArn: string_,
   }
   type response = {
@@ -3250,13 +3589,13 @@ module StartReplicationTaskAssessmentRun = {
   @ocaml.doc("<p></p>")
   type request = {
     @ocaml.doc("<p>Space-separated list of names for specific individual assessments that you want to
-         exclude. These names come from the default list of individual assessments that AWS DMS
+         exclude. These names come from the default list of individual assessments that DMS
          supports for the associated migration task. This task is specified by
             <code>ReplicationTaskArn</code>.</p>
          <note>
             <p>You can't set a value for <code>Exclude</code> if you also set a value for
             <code>IncludeOnly</code> in the API operation.</p>
-            <p>To identify the names of the default individual assessments that AWS DMS
+            <p>To identify the names of the default individual assessments that DMS
             supports for the associated migration task, run the
             <code>DescribeApplicableIndividualAssessments</code> operation using its own
             <code>ReplicationTaskArn</code> request parameter.</p>
@@ -3264,13 +3603,13 @@ module StartReplicationTaskAssessmentRun = {
     @as("Exclude")
     exclude: option<excludeTestList>,
     @ocaml.doc("<p>Space-separated list of names for specific individual assessments that you want to
-         include. These names come from the default list of individual assessments that AWS DMS
+         include. These names come from the default list of individual assessments that DMS
          supports for the associated migration task. This task is specified by
             <code>ReplicationTaskArn</code>.</p>
          <note>
             <p>You can't set a value for <code>IncludeOnly</code> if you also set a value for
             <code>Exclude</code> in the API operation. </p>
-            <p>To identify the names of the default individual assessments that AWS DMS
+            <p>To identify the names of the default individual assessments that DMS
             supports for the associated migration task, run the
             <code>DescribeApplicableIndividualAssessments</code> operation using its own
             <code>ReplicationTaskArn</code> request parameter.</p>
@@ -3284,7 +3623,7 @@ module StartReplicationTaskAssessmentRun = {
     @as("ResultKmsKeyArn")
     resultKmsKeyArn: option<string_>,
     @ocaml.doc("<p>Encryption mode that you can specify to encrypt the results of this assessment run. If
-         you don't specify this request parameter, AWS DMS stores the assessment run results
+         you don't specify this request parameter, DMS stores the assessment run results
          without encryption. You can specify one of the options following:</p>
          <ul>
             <li>
@@ -3294,22 +3633,24 @@ module StartReplicationTaskAssessmentRun = {
             </li>
             <li>
                <p>
-                  <code>\"SSE_KMS\"</code> – AWS Key Management Service (AWS KMS) encryption.
+                  <code>\"SSE_KMS\"</code> – Key Management Service (KMS) encryption.
                This encryption can use either a custom KMS encryption key that you specify or the
                default KMS encryption key that DMS provides.</p>
             </li>
          </ul>")
     @as("ResultEncryptionMode")
     resultEncryptionMode: option<string_>,
-    @ocaml.doc("<p>Folder within an Amazon S3 bucket where you want AWS DMS to store the results of this assessment
+    @ocaml.doc("<p>Folder within an Amazon S3 bucket where you want DMS to store the results of this assessment
          run.</p>")
     @as("ResultLocationFolder")
     resultLocationFolder: option<string_>,
-    @ocaml.doc("<p>Amazon S3 bucket where you want AWS DMS to store the results of this assessment
+    @ocaml.doc("<p>Amazon S3 bucket where you want DMS to store the results of this assessment
          run.</p>")
     @as("ResultLocationBucket")
     resultLocationBucket: string_,
-    @ocaml.doc("<p>ARN of a service role needed to start the assessment run.</p>")
+    @ocaml.doc(
+      "<p>ARN of the service role needed to start the assessment run. The role must allow the <code>iam:PassRole</code> action.</p>"
+    )
     @as("ServiceAccessRoleArn")
     serviceAccessRoleArn: string_,
     @ocaml.doc("<p>Amazon Resource Name (ARN) of the migration task associated with the premigration
@@ -3393,7 +3734,7 @@ module StartReplicationTask = {
             replication slot should already be created and associated with the source endpoint. You
             can verify this by setting the <code>slotName</code> extra connection attribute to the
             name of this logical replication slot. For more information, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.html#CHAP_Source.PostgreSQL.ConnectionAttrib\">Extra Connection Attributes When Using PostgreSQL as a Source
-               for AWS DMS</a>.</p>
+               for DMS</a>.</p>
          </note>")
     @as("CdcStartPosition")
     cdcStartPosition: option<string_>,
@@ -3403,7 +3744,14 @@ module StartReplicationTask = {
          <p>Timestamp Example: --cdc-start-time “2018-03-08T12:12:12”</p>")
     @as("CdcStartTime")
     cdcStartTime: option<tstamp>,
-    @ocaml.doc("<p>A type of replication task.</p>") @as("StartReplicationTaskType")
+    @ocaml.doc("<p>The type of replication task to start.</p>
+         <p>When the migration type is <code>full-load</code> or <code>full-load-and-cdc</code>, the only valid value 
+           for the first run of the task is <code>start-replication</code>. You use <code>reload-target</code> to restart
+       the task and <code>resume-processing</code> to resume the task.</p>
+         <p>When the migration type is <code>cdc</code>, you use <code>start-replication</code> to start or restart
+       the task, and <code>resume-processing</code> to resume the task. <code>reload-target</code> is not a valid value for 
+       a task with migration type of <code>cdc</code>.</p>")
+    @as("StartReplicationTaskType")
     startReplicationTaskType: startReplicationTaskTypeValue,
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the replication task to be started.</p>")
     @as("ReplicationTaskArn")
@@ -3495,7 +3843,7 @@ module ModifyReplicationTask = {
   type request = {
     @ocaml.doc("<p>Supplemental information that the task requires to migrate the data for certain source and target endpoints. 
             For more information, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.TaskData.html\">Specifying Supplemental Data for Task Settings</a> in the
-         <i>AWS Database Migration Service User Guide.</i>
+         <i>Database Migration Service User Guide.</i>
          </p>")
     @as("TaskData")
     taskData: option<string_>,
@@ -3518,7 +3866,7 @@ module ModifyReplicationTask = {
             replication slot should already be created and associated with the source endpoint. You
             can verify this by setting the <code>slotName</code> extra connection attribute to the
             name of this logical replication slot. For more information, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.html#CHAP_Source.PostgreSQL.ConnectionAttrib\">Extra Connection Attributes When Using PostgreSQL as a Source
-               for AWS DMS</a>.</p>
+               for DMS</a>.</p>
          </note>")
     @as("CdcStartPosition")
     cdcStartPosition: option<string_>,
@@ -3533,9 +3881,9 @@ module ModifyReplicationTask = {
     )
     @as("ReplicationTaskSettings")
     replicationTaskSettings: option<string_>,
-    @ocaml.doc("<p>When using the AWS CLI or boto3, provide the path of the JSON file that contains the
+    @ocaml.doc("<p>When using the CLI or boto3, provide the path of the JSON file that contains the
          table mappings. Precede the path with <code>file://</code>.  For example, 
-         <code>--table-mappings file://mappingfile.json</code>. When working with the DMS API, 
+         <code>--table-mappings file://mappingfile.json</code>. When working with the DMS  API, 
          provide the JSON as the parameter value. 
     </p>")
     @as("TableMappings")
@@ -3607,7 +3955,7 @@ module ModifyEventSubscription = {
             <code>DescribeEventCategories</code> action to see a list of event categories. </p>")
     @as("EventCategories")
     eventCategories: option<eventCategoriesList>,
-    @ocaml.doc("<p> The type of AWS DMS resource that generates the events you want to subscribe to. </p>
+    @ocaml.doc("<p> The type of DMS resource that generates the events you want to subscribe to. </p>
          <p>Valid values: replication-instance | replication-task</p>")
     @as("SourceType")
     sourceType: option<string_>,
@@ -3615,7 +3963,7 @@ module ModifyEventSubscription = {
          The ARN is created by Amazon SNS when you create a topic and subscribe to it.</p>")
     @as("SnsTopicArn")
     snsTopicArn: option<string_>,
-    @ocaml.doc("<p>The name of the AWS DMS event notification subscription to be modified.</p>")
+    @ocaml.doc("<p>The name of the DMS event notification subscription to be modified.</p>")
     @as("SubscriptionName")
     subscriptionName: string_,
   }
@@ -3643,280 +3991,29 @@ module ModifyEventSubscription = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
-module ModifyEndpoint = {
-  type t
-  @ocaml.doc("<p></p>")
-  type request = {
-    @ocaml.doc("<p>Settings in JSON format for the source DocumentDB endpoint. For more information about the
-         available settings, see the configuration properties section in <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.DocumentDB.html\"> Using DocumentDB as a Target for AWS
-            Database Migration Service</a> in the <i>AWS Database Migration Service User
-               Guide.</i>
-         </p>")
-    @as("DocDbSettings")
-    docDbSettings: option<docDbSettings>,
-    @ocaml.doc("<p>Settings in JSON format for the source IBM Db2 LUW endpoint. For information about other
-         available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.DB2.ConnectionAttrib\">Extra connection attributes
-            when using Db2 LUW as a source for AWS DMS</a> in the <i>AWS Database
-            Migration Service User Guide.</i>
-         </p>")
-    @as("IBMDb2Settings")
-    ibmdb2Settings: option<ibmdb2Settings>,
-    @ocaml.doc("<p>Settings in JSON format for the source and target Microsoft SQL Server endpoint. For
-         information about other available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.SQLServer.ConnectionAttrib\">Extra connection
-            attributes when using SQL Server as a source for AWS DMS</a> and <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.SQLServer.ConnectionAttrib\">
-            Extra connection attributes when using SQL Server as a target for AWS DMS</a> in the
-            <i>AWS Database Migration Service User Guide.</i>
-         </p>")
-    @as("MicrosoftSQLServerSettings")
-    microsoftSQLServerSettings: option<microsoftSQLServerSettings>,
-    @ocaml.doc("<p>Settings in JSON format for the source and target SAP ASE endpoint. For information
-         about other available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.SAP.ConnectionAttrib\">Extra connection attributes
-            when using SAP ASE as a source for AWS DMS</a> and <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.SAP.ConnectionAttrib\">Extra connection attributes
-            when using SAP ASE as a target for AWS DMS</a> in the <i>AWS Database
-            Migration Service User Guide.</i>
-         </p>")
-    @as("SybaseSettings")
-    sybaseSettings: option<sybaseSettings>,
-    @ocaml.doc("<p>Settings in JSON format for the source and target Oracle endpoint. For information about
-         other available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.ConnectionAttrib\">Extra connection
-            attributes when using Oracle as a source for AWS DMS</a> and <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Oracle.ConnectionAttrib\">
-            Extra connection attributes when using Oracle as a target for AWS DMS</a> in the
-            <i>AWS Database Migration Service User Guide.</i>
-         </p>")
-    @as("OracleSettings")
-    oracleSettings: option<oracleSettings>,
-    @ocaml.doc("<p>Settings in JSON format for the source and target MySQL endpoint. For information about
-         other available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MySQL.ConnectionAttrib\">Extra connection
-            attributes when using MySQL as a source for AWS DMS</a> and <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.MySQL.ConnectionAttrib\">Extra
-            connection attributes when using a MySQL-compatible database as a target for AWS
-            DMS</a> in the <i>AWS Database Migration Service User
-         Guide.</i>
-         </p>")
-    @as("MySQLSettings")
-    mySQLSettings: option<mySQLSettings>,
-    @ocaml.doc("<p>Settings in JSON format for the source and target PostgreSQL endpoint. For information
-         about other available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.ConnectionAttrib\">Extra connection
-            attributes when using PostgreSQL as a source for AWS DMS</a> and <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.PostgreSQL.ConnectionAttrib\">
-            Extra connection attributes when using PostgreSQL as a target for AWS DMS</a> in the
-            <i>AWS Database Migration Service User Guide.</i>
-         </p>")
-    @as("PostgreSQLSettings")
-    postgreSQLSettings: option<postgreSQLSettings>,
-    @as("RedshiftSettings") redshiftSettings: option<redshiftSettings>,
-    @ocaml.doc("<p>Settings in JSON format for the target Amazon Neptune endpoint. For more information
-         about the available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Neptune.html#CHAP_Target.Neptune.EndpointSettings\">Specifying Endpoint Settings for Amazon Neptune as a Target</a> 
-         in the <i>AWS Database Migration Service User Guide.</i>
-         </p>")
-    @as("NeptuneSettings")
-    neptuneSettings: option<neptuneSettings>,
-    @ocaml.doc("<p>Settings in JSON format for the target Elasticsearch endpoint. For more information
-         about the available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Elasticsearch.html#CHAP_Target.Elasticsearch.Configuration\">Extra Connection Attributes When Using Elasticsearch as a Target for AWS DMS</a> in
-         the <i>AWS Database Migration Service User Guide.</i>
-         </p>")
-    @as("ElasticsearchSettings")
-    elasticsearchSettings: option<elasticsearchSettings>,
-    @ocaml.doc("<p>Settings in JSON format for the target Apache Kafka endpoint. For more information about
-         the available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kafka.html\">Using Apache Kafka as a Target for AWS
-            Database Migration Service</a> in the <i>AWS Database Migration Service User
-               Guide.</i>
-         </p>")
-    @as("KafkaSettings")
-    kafkaSettings: option<kafkaSettings>,
-    @ocaml.doc("<p>Settings in JSON format for the target endpoint for Amazon Kinesis Data Streams. For
-         more information about the available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html\">Using Amazon Kinesis Data Streams 
-            as a Target for AWS Database Migration Service</a> in the <i>AWS Database Migration Service User
-               Guide.</i>
-         </p>")
-    @as("KinesisSettings")
-    kinesisSettings: option<kinesisSettings>,
-    @ocaml.doc("<p>Settings in JSON format for the source MongoDB endpoint. For more information about the
-         available settings, see the configuration properties section in <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MongoDB.html\"> Using MongoDB as a Target for AWS
-            Database Migration Service</a> in the <i>AWS Database Migration Service User
-            Guide.</i>
-         </p>")
-    @as("MongoDbSettings")
-    mongoDbSettings: option<mongoDbSettings>,
-    @ocaml.doc("<p>The settings in JSON format for the DMS transfer type of source endpoint. </p>
-         <p>Attributes include the following:</p>
-         <ul>
-            <li>
-               <p>serviceAccessRoleArn - The AWS Identity and Access Management (IAM) role that has
-               permission to access the Amazon S3 bucket.</p>
-            </li>
-            <li>
-               <p>BucketName - The name of the S3 bucket to use.</p>
-            </li>
-            <li>
-               <p>compressionType - An optional parameter to use GZIP to compress the target files.
-               Either set this parameter to NONE (the default) or don't use it to leave the
-               files uncompressed.</p>
-            </li>
-         </ul>
-         <p>Shorthand syntax for these settings is as follows: <code>ServiceAccessRoleArn=string
-            ,BucketName=string,CompressionType=string</code>
-         </p>
-         <p>JSON syntax for these settings is as follows: <code>{ \"ServiceAccessRoleArn\": \"string\",
-            \"BucketName\": \"string\", \"CompressionType\": \"none\"|\"gzip\" } </code>
-         </p>")
-    @as("DmsTransferSettings")
-    dmsTransferSettings: option<dmsTransferSettings>,
-    @ocaml.doc("<p>Settings in JSON format for the target Amazon S3 endpoint. For more information about
-            the available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring\">Extra
-            Connection Attributes When Using Amazon S3 as a Target for AWS DMS</a> in the
-            <i>AWS Database Migration Service User Guide.</i>
-         </p>")
-    @as("S3Settings")
-    s3Settings: option<s3Settings>,
-    @ocaml.doc("<p>Settings in JSON format for the target Amazon DynamoDB endpoint. For information about other 
-            available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.DynamoDB.html\">Using Object Mapping to Migrate
-            Data to DynamoDB</a> in the <i>AWS Database Migration Service User
-            Guide.</i>
-         </p>")
-    @as("DynamoDbSettings")
-    dynamoDbSettings: option<dynamoDbSettings>,
-    @ocaml.doc("<p>The external table definition.</p>") @as("ExternalTableDefinition")
-    externalTableDefinition: option<string_>,
-    @ocaml.doc("<p> The Amazon Resource Name (ARN) for the service access role you want to use to modify
-         the endpoint. </p>")
-    @as("ServiceAccessRoleArn")
-    serviceAccessRoleArn: option<string_>,
-    @ocaml.doc(
-      "<p>The SSL mode used to connect to the endpoint.  The default value is <code>none</code>.</p>"
-    )
-    @as("SslMode")
-    sslMode: option<dmsSslModeValue>,
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the certificate used for SSL connection.</p>")
-    @as("CertificateArn")
-    certificateArn: option<string_>,
-    @ocaml.doc("<p>Additional attributes associated with the connection. To reset this parameter, pass the
-         empty string (\"\") as an argument.</p>")
-    @as("ExtraConnectionAttributes")
-    extraConnectionAttributes: option<string_>,
-    @ocaml.doc("<p>The name of the endpoint database.</p>") @as("DatabaseName")
-    databaseName: option<string_>,
-    @ocaml.doc("<p>The port used by the endpoint database.</p>") @as("Port")
-    port: option<integerOptional>,
-    @ocaml.doc("<p>The name of the server where the endpoint database resides.</p>")
-    @as("ServerName")
-    serverName: option<string_>,
-    @ocaml.doc("<p>The password to be used to login to the endpoint database.</p>") @as("Password")
-    password: option<secretString>,
-    @ocaml.doc("<p>The user name to be used to login to the endpoint database.</p>") @as("Username")
-    username: option<string_>,
-    @ocaml.doc("<p>The type of engine for the endpoint. Valid values, depending on the EndpointType,
-         include
-         <code>\"mysql\"</code>, <code>\"oracle\"</code>, <code>\"postgres\"</code>,
-         <code>\"mariadb\"</code>, <code>\"aurora\"</code>, <code>\"aurora-postgresql\"</code>,
-         <code>\"redshift\"</code>, <code>\"s3\"</code>, <code>\"db2\"</code>, <code>\"azuredb\"</code>,
-         <code>\"sybase\"</code>, <code>\"dynamodb\"</code>, <code>\"mongodb\"</code>,
-         <code>\"kinesis\"</code>, <code>\"kafka\"</code>, <code>\"elasticsearch\"</code>,
-         <code>\"documentdb\"</code>, <code>\"sqlserver\"</code>, and <code>\"neptune\"</code>.</p>")
-    @as("EngineName")
-    engineName: option<string_>,
-    @ocaml.doc(
-      "<p>The type of endpoint.  Valid values are <code>source</code> and <code>target</code>.</p>"
-    )
-    @as("EndpointType")
-    endpointType: option<replicationEndpointTypeValue>,
-    @ocaml.doc("<p>The database endpoint identifier. Identifiers must begin with a letter and must contain
-         only ASCII letters, digits, and hyphens. They can't end with a hyphen or contain two
-         consecutive hyphens.</p>")
-    @as("EndpointIdentifier")
-    endpointIdentifier: option<string_>,
-    @ocaml.doc(
-      "<p>The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.</p>"
-    )
-    @as("EndpointArn")
-    endpointArn: string_,
-  }
-  @ocaml.doc("<p></p>")
-  type response = {
-    @ocaml.doc("<p>The modified endpoint.</p>") @as("Endpoint") endpoint: option<endpoint>,
-  }
-  @module("@aws-sdk/client-dms") @new external new: request => t = "ModifyEndpointCommand"
-  let make = (
-    ~endpointArn,
-    ~docDbSettings=?,
-    ~ibmdb2Settings=?,
-    ~microsoftSQLServerSettings=?,
-    ~sybaseSettings=?,
-    ~oracleSettings=?,
-    ~mySQLSettings=?,
-    ~postgreSQLSettings=?,
-    ~redshiftSettings=?,
-    ~neptuneSettings=?,
-    ~elasticsearchSettings=?,
-    ~kafkaSettings=?,
-    ~kinesisSettings=?,
-    ~mongoDbSettings=?,
-    ~dmsTransferSettings=?,
-    ~s3Settings=?,
-    ~dynamoDbSettings=?,
-    ~externalTableDefinition=?,
-    ~serviceAccessRoleArn=?,
-    ~sslMode=?,
-    ~certificateArn=?,
-    ~extraConnectionAttributes=?,
-    ~databaseName=?,
-    ~port=?,
-    ~serverName=?,
-    ~password=?,
-    ~username=?,
-    ~engineName=?,
-    ~endpointType=?,
-    ~endpointIdentifier=?,
-    (),
-  ) =>
-    new({
-      docDbSettings: docDbSettings,
-      ibmdb2Settings: ibmdb2Settings,
-      microsoftSQLServerSettings: microsoftSQLServerSettings,
-      sybaseSettings: sybaseSettings,
-      oracleSettings: oracleSettings,
-      mySQLSettings: mySQLSettings,
-      postgreSQLSettings: postgreSQLSettings,
-      redshiftSettings: redshiftSettings,
-      neptuneSettings: neptuneSettings,
-      elasticsearchSettings: elasticsearchSettings,
-      kafkaSettings: kafkaSettings,
-      kinesisSettings: kinesisSettings,
-      mongoDbSettings: mongoDbSettings,
-      dmsTransferSettings: dmsTransferSettings,
-      s3Settings: s3Settings,
-      dynamoDbSettings: dynamoDbSettings,
-      externalTableDefinition: externalTableDefinition,
-      serviceAccessRoleArn: serviceAccessRoleArn,
-      sslMode: sslMode,
-      certificateArn: certificateArn,
-      extraConnectionAttributes: extraConnectionAttributes,
-      databaseName: databaseName,
-      port: port,
-      serverName: serverName,
-      password: password,
-      username: username,
-      engineName: engineName,
-      endpointType: endpointType,
-      endpointIdentifier: endpointIdentifier,
-      endpointArn: endpointArn,
-    })
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
 module ListTagsForResource = {
   type t
   @ocaml.doc("<p></p>")
   type request = {
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) string that uniquely identifies the AWS DMS
-         resource.</p>")
+    @ocaml.doc("<p>List of ARNs that identify multiple DMS resources that you want to list tags for. This
+         returns a list of keys (tag names) and their associated tag values. It also returns each
+         tag's associated <code>ResourceArn</code> value, which is the ARN of the resource for which
+         each listed tag is created. </p>")
+    @as("ResourceArnList")
+    resourceArnList: option<arnList>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) string that uniquely identifies the DMS resource to
+         list tags for. This returns a list of keys (names of tags) created for the resource and
+         their associated tag values.</p>")
     @as("ResourceArn")
-    resourceArn: string_,
+    resourceArn: option<string_>,
   }
   @ocaml.doc("<p></p>")
   type response = {
     @ocaml.doc("<p>A list of tags for the resource.</p>") @as("TagList") tagList_: option<tagList_>,
   }
   @module("@aws-sdk/client-dms") @new external new: request => t = "ListTagsForResourceCommand"
-  let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
+  let make = (~resourceArnList=?, ~resourceArn=?, ()) =>
+    new({resourceArnList: resourceArnList, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -3925,7 +4022,10 @@ module ImportCertificate = {
   type request = {
     @ocaml.doc("<p>The tags associated with the certificate.</p>") @as("Tags")
     tags: option<tagList_>,
-    @ocaml.doc("<p>The location of an imported Oracle Wallet certificate for use with SSL.</p>")
+    @ocaml.doc("<p>The location of an imported Oracle Wallet certificate for use with SSL. Provide the name of a <code>.sso</code> file
+          using the <code>fileb://</code> prefix. You can't provide the certificate inline.</p> 
+          <p>Example: <code>filebase64(\"${path.root}/rds-ca-2019-root.sso\")</code>
+         </p>")
     @as("CertificateWallet")
     certificateWallet: option<certificateWallet>,
     @ocaml.doc(
@@ -4038,19 +4138,19 @@ module DescribeReplicationInstanceTaskLogs = {
 
 module DescribeAccountAttributes = {
   type t
-
+  type request = {.}
   @ocaml.doc("<p></p>")
   type response = {
-    @ocaml.doc("<p>A unique AWS DMS identifier for an account in a particular AWS Region. The value of this
+    @ocaml.doc("<p>A unique DMS identifier for an account in a particular Amazon Web Services Region. The value of this
          identifier has the following format: <code>c99999999999</code>. DMS uses this identifier to
          name artifacts. For example, DMS uses this identifier to name the default Amazon S3 bucket
-         for storing task assessment reports in a given AWS Region. The format of this S3 bucket
+         for storing task assessment reports in a given Amazon Web Services Region. The format of this S3 bucket
          name is the following:
                <code>dms-<i>AccountNumber</i>-<i>UniqueAccountIdentifier</i>.</code>
          Here is an example name for this default S3 bucket:
             <code>dms-111122223333-c44445555666</code>.</p>
          <note>
-            <p>AWS DMS supports the <code>UniqueAccountIdentifier</code> parameter in
+            <p>DMS supports the <code>UniqueAccountIdentifier</code> parameter in
             versions 3.1.4 and later.</p>
          </note>")
     @as("UniqueAccountIdentifier")
@@ -4058,8 +4158,9 @@ module DescribeAccountAttributes = {
     @ocaml.doc("<p>Account quota information.</p>") @as("AccountQuotas")
     accountQuotas: option<accountQuotaList>,
   }
-  @module("@aws-sdk/client-dms") @new external new: unit => t = "DescribeAccountAttributesCommand"
-  let make = () => new()
+  @module("@aws-sdk/client-dms") @new
+  external new: request => t = "DescribeAccountAttributesCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -4123,25 +4224,6 @@ module DeleteEventSubscription = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
-module DeleteEndpoint = {
-  type t
-  @ocaml.doc("<p></p>")
-  type request = {
-    @ocaml.doc(
-      "<p>The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.</p>"
-    )
-    @as("EndpointArn")
-    endpointArn: string_,
-  }
-  @ocaml.doc("<p></p>")
-  type response = {
-    @ocaml.doc("<p>The endpoint that was deleted.</p>") @as("Endpoint") endpoint: option<endpoint>,
-  }
-  @module("@aws-sdk/client-dms") @new external new: request => t = "DeleteEndpointCommand"
-  let make = (~endpointArn, ()) => new({endpointArn: endpointArn})
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
 module CreateReplicationTask = {
   type t
   @ocaml.doc("<p></p>")
@@ -4153,13 +4235,13 @@ module CreateReplicationTask = {
          and can only begin with a letter, such as <code>Example-App-ARN1</code>. For example, this
          value might result in the <code>EndpointArn</code> value
          <code>arn:aws:dms:eu-west-1:012345678901:rep:Example-App-ARN1</code>. If you don't
-         specify a <code>ResourceIdentifier</code> value, AWS DMS generates a default identifier
+         specify a <code>ResourceIdentifier</code> value, DMS generates a default identifier
          value for the end of <code>EndpointArn</code>.</p>")
     @as("ResourceIdentifier")
     resourceIdentifier: option<string_>,
     @ocaml.doc("<p>Supplemental information that the task requires to migrate the data for certain source and target endpoints. 
          For more information, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.TaskData.html\">Specifying Supplemental Data for Task Settings</a> in the
-            <i>AWS Database Migration Service User Guide.</i>
+            <i>Database Migration Service User Guide.</i>
          </p>")
     @as("TaskData")
     taskData: option<string_>,
@@ -4184,7 +4266,7 @@ module CreateReplicationTask = {
             replication slot should already be created and associated with the source endpoint. You
             can verify this by setting the <code>slotName</code> extra connection attribute to the
             name of this logical replication slot. For more information, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.html#CHAP_Source.PostgreSQL.ConnectionAttrib\">Extra Connection Attributes When Using PostgreSQL as a Source
-               for AWS DMS</a>.</p>
+               for DMS</a>.</p>
          </note>")
     @as("CdcStartPosition")
     cdcStartPosition: option<string_>,
@@ -4195,13 +4277,12 @@ module CreateReplicationTask = {
     @as("CdcStartTime")
     cdcStartTime: option<tstamp>,
     @ocaml.doc("<p>Overall settings for the task, in JSON format. For more information, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TaskSettings.html\">Specifying Task
-            Settings for AWS Database Migration Service Tasks</a> in the <i>AWS Database
-            Migration User Guide.</i>
+            Settings for Database Migration Service Tasks</a> in the <i>Database Migration Service User Guide.</i>
          </p>")
     @as("ReplicationTaskSettings")
     replicationTaskSettings: option<string_>,
     @ocaml.doc("<p>The table mappings for the task, in JSON format. For more information, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TableMapping.html\">Using Table
-            Mapping to Specify Task Settings</a> in the <i>AWS Database Migration Service User
+            Mapping to Specify Task Settings</a> in the <i>Database Migration Service User
             Guide.</i>
          </p>")
     @as("TableMappings")
@@ -4285,7 +4366,7 @@ module CreateEventSubscription = {
             <code>false</code> to create the subscription but not activate it. </p>")
     @as("Enabled")
     enabled: option<booleanOptional>,
-    @ocaml.doc("<p>A list of identifiers for which AWS DMS provides notification events.</p>
+    @ocaml.doc("<p>A list of identifiers for which DMS provides notification events.</p>
          <p>If you don't specify a value, notifications are provided for all sources.</p>
         <p>If you specify multiple values, they must be of the same type. For example, if you
             specify a database instance ID, then all of the other values must be database instance
@@ -4294,12 +4375,12 @@ module CreateEventSubscription = {
     sourceIds: option<sourceIdsList>,
     @ocaml.doc("<p>A list of event categories for a source type that you want to subscribe to. For more
            information, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html\">Working with Events and
-               Notifications</a> in the <i>AWS Database Migration Service User
+               Notifications</a> in the <i>Database Migration Service User
                    Guide.</i>
          </p>")
     @as("EventCategories")
     eventCategories: option<eventCategoriesList>,
-    @ocaml.doc("<p> The type of AWS DMS resource that generates the events. For example, if you want to be
+    @ocaml.doc("<p> The type of DMS resource that generates the events. For example, if you want to be
          notified of events generated by a replication instance, you set this parameter to
             <code>replication-instance</code>. If this value isn't specified, all events are
          returned. </p>
@@ -4312,7 +4393,7 @@ module CreateEventSubscription = {
     @as("SnsTopicArn")
     snsTopicArn: string_,
     @ocaml.doc(
-      "<p>The name of the AWS DMS event notification subscription. This name must be less than 255 characters.</p>"
+      "<p>The name of the DMS event notification subscription. This name must be less than 255 characters.</p>"
     )
     @as("SubscriptionName")
     subscriptionName: string_,
@@ -4345,282 +4426,6 @@ module CreateEventSubscription = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
-module CreateEndpoint = {
-  type t
-  @ocaml.doc("<p></p>")
-  type request = {
-    @as("DocDbSettings") docDbSettings: option<docDbSettings>,
-    @ocaml.doc("<p>A friendly name for the resource identifier at the end of the <code>EndpointArn</code>
-         response parameter that is returned in the created <code>Endpoint</code> object. The value
-         for this parameter can have up to 31 characters. It can contain only ASCII letters, digits,
-         and hyphen ('-'). Also, it can't end with a hyphen or contain two consecutive hyphens,
-         and can only begin with a letter, such as <code>Example-App-ARN1</code>. For example, this
-         value might result in the <code>EndpointArn</code> value
-            <code>arn:aws:dms:eu-west-1:012345678901:rep:Example-App-ARN1</code>. If you don't
-         specify a <code>ResourceIdentifier</code> value, AWS DMS generates a default identifier
-         value for the end of <code>EndpointArn</code>.</p>")
-    @as("ResourceIdentifier")
-    resourceIdentifier: option<string_>,
-    @ocaml.doc("<p>Settings in JSON format for the source IBM Db2 LUW endpoint. For information about other
-         available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.DB2.html\">Extra connection attributes
-            when using Db2 LUW as a source for AWS DMS</a> in the <i>AWS Database
-            Migration Service User Guide.</i>
-         </p>")
-    @as("IBMDb2Settings")
-    ibmdb2Settings: option<ibmdb2Settings>,
-    @ocaml.doc("<p>Settings in JSON format for the source and target Microsoft SQL Server endpoint. For
-         information about other available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.SQLServer.html\">Extra connection
-            attributes when using SQL Server as a source for AWS DMS</a> and <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.SQLServer.html\">
-            Extra connection attributes when using SQL Server as a target for AWS DMS</a> in the
-            <i>AWS Database Migration Service User Guide.</i>
-         </p>")
-    @as("MicrosoftSQLServerSettings")
-    microsoftSQLServerSettings: option<microsoftSQLServerSettings>,
-    @ocaml.doc("<p>Settings in JSON format for the source and target SAP ASE endpoint. For information
-         about other available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.SAP.html\">Extra connection attributes
-            when using SAP ASE as a source for AWS DMS</a> and <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.SAP.html\">Extra connection attributes
-            when using SAP ASE as a target for AWS DMS</a> in the <i>AWS Database
-            Migration Service User Guide.</i>
-         </p>")
-    @as("SybaseSettings")
-    sybaseSettings: option<sybaseSettings>,
-    @ocaml.doc("<p>Settings in JSON format for the source and target Oracle endpoint. For information about
-         other available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html\">Extra connection attributes 
-            when using Oracle as a source for AWS DMS</a> and 
-            <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Oracle.html\">
-            Extra connection attributes when using Oracle as a target for AWS DMS</a> 
-            in the <i>AWS Database Migration Service User Guide.</i>
-         </p>")
-    @as("OracleSettings")
-    oracleSettings: option<oracleSettings>,
-    @ocaml.doc("<p>Settings in JSON format for the source and target MySQL endpoint. For information about
-         other available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MySQL.html\">Extra connection attributes 
-            when using MySQL as a source for AWS DMS</a> and <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.MySQL.html\">Extra connection attributes when using a MySQL-compatible database as a target for AWS DMS</a> in
-         the <i>AWS Database Migration Service User Guide.</i>
-         </p>")
-    @as("MySQLSettings")
-    mySQLSettings: option<mySQLSettings>,
-    @ocaml.doc("<p>Settings in JSON format for the source and target PostgreSQL endpoint. For information
-         about other available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.html\">Extra connection
-            attributes when using PostgreSQL as a source for AWS DMS</a> and <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.PostgreSQL.html\">
-               Extra connection attributes when using PostgreSQL as a target for AWS DMS</a> in the
-            <i>AWS Database Migration Service User Guide.</i>
-         </p>")
-    @as("PostgreSQLSettings")
-    postgreSQLSettings: option<postgreSQLSettings>,
-    @as("RedshiftSettings") redshiftSettings: option<redshiftSettings>,
-    @ocaml.doc("<p>Settings in JSON format for the target Amazon Neptune endpoint.
-         For more information
-         about the available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Neptune.html#CHAP_Target.Neptune.EndpointSettings\">Specifying Endpoint Settings for Amazon Neptune as a Target</a> 
-            in the <i>AWS Database Migration Service User Guide.</i>
-         </p>")
-    @as("NeptuneSettings")
-    neptuneSettings: option<neptuneSettings>,
-    @ocaml.doc("<p>Settings in JSON format for the target Elasticsearch endpoint. For more information
-         about the available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Elasticsearch.html#CHAP_Target.Elasticsearch.Configuration\">Extra Connection Attributes When Using Elasticsearch as a Target for AWS DMS</a> in
-         the <i>AWS Database Migration Service User Guide</i>.</p>")
-    @as("ElasticsearchSettings")
-    elasticsearchSettings: option<elasticsearchSettings>,
-    @ocaml.doc("<p>Settings in JSON format for the target Apache Kafka endpoint. For more information about
-         the available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kafka.html\">Using Apache Kafka as a Target for 
-            AWS Database Migration Service</a> in the <i>AWS Database Migration Service User
-            Guide.</i>
-         </p>")
-    @as("KafkaSettings")
-    kafkaSettings: option<kafkaSettings>,
-    @ocaml.doc("<p>Settings in JSON format for the target endpoint for Amazon Kinesis Data Streams. For
-         more information about the available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html\">Using Amazon Kinesis Data Streams 
-            as a Target for AWS Database Migration Service</a> in the <i>AWS Database Migration Service User
-            Guide.</i>
-         </p>")
-    @as("KinesisSettings")
-    kinesisSettings: option<kinesisSettings>,
-    @ocaml.doc("<p>Settings in JSON format for the source MongoDB endpoint. For more information about the
-         available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MongoDB.html#CHAP_Source.MongoDB.Configuration\">Using MongoDB as a Target for AWS Database Migration Service</a> in the
-            <i>AWS Database Migration Service User Guide.</i>
-         </p>")
-    @as("MongoDbSettings")
-    mongoDbSettings: option<mongoDbSettings>,
-    @ocaml.doc("<p>The settings in JSON format for the DMS transfer type of source endpoint. </p>
-         <p>Possible settings include the following:</p>
-         <ul>
-            <li>
-               <p>
-                  <code>ServiceAccessRoleArn</code> - The IAM role that has permission to access the
-               Amazon S3 bucket.</p>
-            </li>
-            <li>
-               <p>
-                  <code>BucketName</code> - The name of the S3 bucket to use.</p>
-            </li>
-            <li>
-               <p>
-                  <code>CompressionType</code> - An optional parameter to use GZIP to compress the
-               target files. To use GZIP, set this value to <code>NONE</code> (the default). To keep
-               the files uncompressed, don't use this value.</p>
-            </li>
-         </ul>
-         <p>Shorthand syntax for these settings is as follows:
-            <code>ServiceAccessRoleArn=string,BucketName=string,CompressionType=string</code>
-         </p>
-         <p>JSON syntax for these settings is as follows: <code>{ \"ServiceAccessRoleArn\":
-            \"string\", \"BucketName\": \"string\", \"CompressionType\": \"none\"|\"gzip\" } </code>
-         </p>")
-    @as("DmsTransferSettings")
-    dmsTransferSettings: option<dmsTransferSettings>,
-    @ocaml.doc("<p>Settings in JSON format for the target Amazon S3 endpoint. For more information about
-         the available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring\">Extra
-            Connection Attributes When Using Amazon S3 as a Target for AWS DMS</a> in the
-            <i>AWS Database Migration Service User Guide.</i>
-         </p>")
-    @as("S3Settings")
-    s3Settings: option<s3Settings>,
-    @ocaml.doc("<p>Settings in JSON format for the target Amazon DynamoDB endpoint. For information about other 
-            available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.DynamoDB.html\">Using Object Mapping to Migrate
-            Data to DynamoDB</a> in the <i>AWS Database Migration Service User
-            Guide.</i>
-         </p>")
-    @as("DynamoDbSettings")
-    dynamoDbSettings: option<dynamoDbSettings>,
-    @ocaml.doc("<p>The external table definition. </p>") @as("ExternalTableDefinition")
-    externalTableDefinition: option<string_>,
-    @ocaml.doc("<p> The Amazon Resource Name (ARN) for the service access role that you want to use to
-         create the endpoint. </p>")
-    @as("ServiceAccessRoleArn")
-    serviceAccessRoleArn: option<string_>,
-    @ocaml.doc("<p>The Secure Sockets Layer (SSL) mode to use for the SSL connection. The default is <code>none</code>
-         </p>")
-    @as("SslMode")
-    sslMode: option<dmsSslModeValue>,
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) for the certificate.</p>") @as("CertificateArn")
-    certificateArn: option<string_>,
-    @ocaml.doc("<p>One or more tags to be assigned to the endpoint.</p>") @as("Tags")
-    tags: option<tagList_>,
-    @ocaml.doc("<p>An AWS KMS key identifier that is used to encrypt the connection parameters for the endpoint.</p>
-         <p>If you don't specify a value for the <code>KmsKeyId</code> parameter, then
-           AWS DMS uses your default encryption key.</p>
-         <p>AWS KMS creates the default encryption key for your AWS account. Your AWS account has a
-         different default encryption key for each AWS Region.</p>")
-    @as("KmsKeyId")
-    kmsKeyId: option<string_>,
-    @ocaml.doc("<p>Additional attributes associated with the connection. Each attribute is specified as a
-         name-value pair associated by an equal sign (=). Multiple attributes are separated by a
-         semicolon (;) with no additional white space. For information on the attributes available
-         for connecting your source or target endpoint, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Endpoints.html\">Working with
-            AWS DMS Endpoints</a> in the <i>AWS Database Migration Service User
-            Guide.</i>
-         </p>")
-    @as("ExtraConnectionAttributes")
-    extraConnectionAttributes: option<string_>,
-    @ocaml.doc("<p>The name of the endpoint database.</p>") @as("DatabaseName")
-    databaseName: option<string_>,
-    @ocaml.doc("<p>The port used by the endpoint database.</p>") @as("Port")
-    port: option<integerOptional>,
-    @ocaml.doc("<p>The name of the server where the endpoint database resides.</p>")
-    @as("ServerName")
-    serverName: option<string_>,
-    @ocaml.doc("<p>The password to be used to log in to the endpoint database.</p>") @as("Password")
-    password: option<secretString>,
-    @ocaml.doc("<p>The user name to be used to log in to the endpoint database.</p>")
-    @as("Username")
-    username: option<string_>,
-    @ocaml.doc("<p>The type of engine for the endpoint. Valid values, depending on the
-         <code>EndpointType</code> value, include <code>\"mysql\"</code>, <code>\"oracle\"</code>,
-         <code>\"postgres\"</code>, <code>\"mariadb\"</code>, <code>\"aurora\"</code>,
-         <code>\"aurora-postgresql\"</code>, <code>\"redshift\"</code>, <code>\"s3\"</code>,
-         <code>\"db2\"</code>, <code>\"azuredb\"</code>, <code>\"sybase\"</code>, <code>\"dynamodb\"</code>, <code>\"mongodb\"</code>,
-         <code>\"kinesis\"</code>, <code>\"kafka\"</code>, <code>\"elasticsearch\"</code>, <code>\"docdb\"</code>,
-         <code>\"sqlserver\"</code>, and <code>\"neptune\"</code>.</p>")
-    @as("EngineName")
-    engineName: string_,
-    @ocaml.doc(
-      "<p>The type of endpoint.  Valid values are <code>source</code> and <code>target</code>.</p>"
-    )
-    @as("EndpointType")
-    endpointType: replicationEndpointTypeValue,
-    @ocaml.doc("<p>The database endpoint identifier. Identifiers must begin with a letter and must contain
-         only ASCII letters, digits, and hyphens. They can't end with a hyphen, or contain two
-         consecutive hyphens.</p>")
-    @as("EndpointIdentifier")
-    endpointIdentifier: string_,
-  }
-  @ocaml.doc("<p></p>")
-  type response = {
-    @ocaml.doc("<p>The endpoint that was created.</p>") @as("Endpoint") endpoint: option<endpoint>,
-  }
-  @module("@aws-sdk/client-dms") @new external new: request => t = "CreateEndpointCommand"
-  let make = (
-    ~engineName,
-    ~endpointType,
-    ~endpointIdentifier,
-    ~docDbSettings=?,
-    ~resourceIdentifier=?,
-    ~ibmdb2Settings=?,
-    ~microsoftSQLServerSettings=?,
-    ~sybaseSettings=?,
-    ~oracleSettings=?,
-    ~mySQLSettings=?,
-    ~postgreSQLSettings=?,
-    ~redshiftSettings=?,
-    ~neptuneSettings=?,
-    ~elasticsearchSettings=?,
-    ~kafkaSettings=?,
-    ~kinesisSettings=?,
-    ~mongoDbSettings=?,
-    ~dmsTransferSettings=?,
-    ~s3Settings=?,
-    ~dynamoDbSettings=?,
-    ~externalTableDefinition=?,
-    ~serviceAccessRoleArn=?,
-    ~sslMode=?,
-    ~certificateArn=?,
-    ~tags=?,
-    ~kmsKeyId=?,
-    ~extraConnectionAttributes=?,
-    ~databaseName=?,
-    ~port=?,
-    ~serverName=?,
-    ~password=?,
-    ~username=?,
-    (),
-  ) =>
-    new({
-      docDbSettings: docDbSettings,
-      resourceIdentifier: resourceIdentifier,
-      ibmdb2Settings: ibmdb2Settings,
-      microsoftSQLServerSettings: microsoftSQLServerSettings,
-      sybaseSettings: sybaseSettings,
-      oracleSettings: oracleSettings,
-      mySQLSettings: mySQLSettings,
-      postgreSQLSettings: postgreSQLSettings,
-      redshiftSettings: redshiftSettings,
-      neptuneSettings: neptuneSettings,
-      elasticsearchSettings: elasticsearchSettings,
-      kafkaSettings: kafkaSettings,
-      kinesisSettings: kinesisSettings,
-      mongoDbSettings: mongoDbSettings,
-      dmsTransferSettings: dmsTransferSettings,
-      s3Settings: s3Settings,
-      dynamoDbSettings: dynamoDbSettings,
-      externalTableDefinition: externalTableDefinition,
-      serviceAccessRoleArn: serviceAccessRoleArn,
-      sslMode: sslMode,
-      certificateArn: certificateArn,
-      tags: tags,
-      kmsKeyId: kmsKeyId,
-      extraConnectionAttributes: extraConnectionAttributes,
-      databaseName: databaseName,
-      port: port,
-      serverName: serverName,
-      password: password,
-      username: username,
-      engineName: engineName,
-      endpointType: endpointType,
-      endpointIdentifier: endpointIdentifier,
-    })
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
 module CancelReplicationTaskAssessmentRun = {
   type t
   @ocaml.doc("<p></p>")
@@ -4647,19 +4452,306 @@ module CancelReplicationTaskAssessmentRun = {
 
 module AddTagsToResource = {
   type t
-  @ocaml.doc("<p>Associates a set of tags with an AWS DMS resource.</p>")
+  @ocaml.doc("<p>Associates a set of tags with an DMS resource.</p>")
   type request = {
     @ocaml.doc("<p>One or more tags to be assigned to the resource.</p>") @as("Tags")
     tags: tagList_,
-    @ocaml.doc("<p>Identifies the AWS DMS resource to which tags should be added. The value for this parameter is an Amazon Resource Name (ARN).</p>
-         <p>For AWS DMS, you can tag a replication instance, an endpoint, or a replication task.</p>")
+    @ocaml.doc("<p>Identifies the DMS resource to which tags should be added. The value for this parameter is an Amazon Resource Name (ARN).</p>
+         <p>For DMS, you can tag a replication instance, an endpoint, or a replication task.</p>")
     @as("ResourceArn")
     resourceArn: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-dms") @new external new: request => t = "AddTagsToResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module ModifyEndpoint = {
+  type t
+  @ocaml.doc("<p></p>")
+  type request = {
+    @ocaml.doc("<p>Settings in JSON format for the source GCP MySQL endpoint.</p>")
+    @as("GcpMySQLSettings")
+    gcpMySQLSettings: option<gcpMySQLSettings>,
+    @ocaml.doc("<p>If this attribute is Y, the current call to <code>ModifyEndpoint</code> replaces all
+         existing endpoint settings with the exact settings that you specify in this call. If this
+         attribute is N, the current call to <code>ModifyEndpoint</code> does two things: </p>
+         <ul>
+            <li>
+               <p>It replaces any endpoint settings that already exist with new values, for settings with the
+               same names.</p>
+            </li>
+            <li>
+               <p>It creates new endpoint settings that you specify in the call, for settings with different
+               names. </p>
+            </li>
+         </ul>
+         <p>For example, if you call <code>create-endpoint ... --endpoint-settings '{\"a\":1}'
+            ...</code>, the endpoint has the following endpoint settings: <code>'{\"a\":1}'</code>. If
+         you then call <code>modify-endpoint ... --endpoint-settings '{\"b\":2}' ...</code> for the
+         same endpoint, the endpoint has the following settings: <code>'{\"a\":1,\"b\":2}'</code>. </p>
+         <p>However, suppose that you follow this with a call to <code>modify-endpoint ...
+            --endpoint-settings '{\"b\":2}' --exact-settings ...</code> for that same endpoint again.
+         Then the endpoint has the following settings: <code>'{\"b\":2}'</code>. All existing settings
+         are replaced with the exact settings that you specify. </p>")
+    @as("ExactSettings")
+    exactSettings: option<booleanOptional>,
+    @ocaml.doc("<p>Settings in JSON format for the Redis target endpoint.</p>") @as("RedisSettings")
+    redisSettings: option<redisSettings>,
+    @ocaml.doc("<p>Settings in JSON format for the source DocumentDB endpoint. For more information about the
+         available settings, see the configuration properties section in <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.DocumentDB.html\"> Using DocumentDB as a Target for Database Migration Service
+             </a> in the <i>Database Migration Service User
+               Guide.</i>
+         </p>")
+    @as("DocDbSettings")
+    docDbSettings: option<docDbSettings>,
+    @ocaml.doc("<p>Settings in JSON format for the source IBM Db2 LUW endpoint. For information about other
+         available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.DB2.html#CHAP_Source.DB2.ConnectionAttrib\">Extra connection attributes
+            when using Db2 LUW as a source for DMS</a> in the <i>Database Migration Service
+                User Guide.</i>
+         </p>")
+    @as("IBMDb2Settings")
+    ibmdb2Settings: option<ibmdb2Settings>,
+    @ocaml.doc("<p>Settings in JSON format for the source and target Microsoft SQL Server endpoint. For
+         information about other available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.SQLServer.html#CHAP_Source.SQLServer.ConnectionAttrib\">Extra connection
+            attributes when using SQL Server as a source for DMS</a> and <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.SQLServer.html#CHAP_Target.SQLServer.ConnectionAttrib\">
+            Extra connection attributes when using SQL Server as a target for DMS</a> in the
+            <i>Database Migration Service User Guide.</i>
+         </p>")
+    @as("MicrosoftSQLServerSettings")
+    microsoftSQLServerSettings: option<microsoftSQLServerSettings>,
+    @ocaml.doc("<p>Settings in JSON format for the source and target SAP ASE endpoint. For information
+         about other available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.SAP.html#CHAP_Source.SAP.ConnectionAttrib\">Extra connection attributes
+            when using SAP ASE as a source for DMS</a> and <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.SAP.html#CHAP_Target.SAP.ConnectionAttrib\">Extra connection attributes
+            when using SAP ASE as a target for DMS</a> in the <i>Database Migration Service
+                User Guide.</i>
+         </p>")
+    @as("SybaseSettings")
+    sybaseSettings: option<sybaseSettings>,
+    @ocaml.doc("<p>Settings in JSON format for the source and target Oracle endpoint. For information about
+         other available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.ConnectionAttrib\">Extra connection
+            attributes when using Oracle as a source for DMS</a> and <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Oracle.html#CHAP_Target.Oracle.ConnectionAttrib\">
+            Extra connection attributes when using Oracle as a target for DMS</a> in the
+            <i>Database Migration Service User Guide.</i>
+         </p>")
+    @as("OracleSettings")
+    oracleSettings: option<oracleSettings>,
+    @ocaml.doc("<p>Settings in JSON format for the source and target MySQL endpoint. For information about
+         other available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MySQL.html#CHAP_Source.MySQL.ConnectionAttrib\">Extra connection
+            attributes when using MySQL as a source for DMS</a> and <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.MySQL.html#CHAP_Target.MySQL.ConnectionAttrib\">Extra
+            connection attributes when using a MySQL-compatible database as a target for DMS</a> in the <i>Database Migration Service User
+         Guide.</i>
+         </p>")
+    @as("MySQLSettings")
+    mySQLSettings: option<mySQLSettings>,
+    @ocaml.doc("<p>Settings in JSON format for the source and target PostgreSQL endpoint. For information
+         about other available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.html#CHAP_Source.PostgreSQL.ConnectionAttrib\">Extra connection
+            attributes when using PostgreSQL as a source for DMS</a> and <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.PostgreSQL.html#CHAP_Target.PostgreSQL.ConnectionAttrib\">
+            Extra connection attributes when using PostgreSQL as a target for DMS</a> in the
+            <i>Database Migration Service User Guide.</i>
+         </p>")
+    @as("PostgreSQLSettings")
+    postgreSQLSettings: option<postgreSQLSettings>,
+    @as("RedshiftSettings") redshiftSettings: option<redshiftSettings>,
+    @ocaml.doc("<p>Settings in JSON format for the target Amazon Neptune endpoint. For more information
+         about the available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Neptune.html#CHAP_Target.Neptune.EndpointSettings\">Specifying graph-mapping rules using Gremlin and R2RML for Amazon Neptune as a target</a> 
+         in the <i>Database Migration Service User Guide.</i>
+         </p>")
+    @as("NeptuneSettings")
+    neptuneSettings: option<neptuneSettings>,
+    @ocaml.doc("<p>Settings in JSON format for the target OpenSearch endpoint. For more information
+         about the available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Elasticsearch.html#CHAP_Target.Elasticsearch.Configuration\">Extra Connection Attributes When Using OpenSearch as a Target for DMS</a> in
+         the <i>Database Migration Service User Guide.</i>
+         </p>")
+    @as("ElasticsearchSettings")
+    elasticsearchSettings: option<elasticsearchSettings>,
+    @ocaml.doc("<p>Settings in JSON format for the target Apache Kafka endpoint. For more information about
+         the available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kafka.html#CHAP_Target.Kafka.ObjectMapping\">Using object mapping
+            to migrate data to a Kafka topic</a> in the <i>Database Migration Service User Guide.</i>
+         </p>")
+    @as("KafkaSettings")
+    kafkaSettings: option<kafkaSettings>,
+    @ocaml.doc("<p>Settings in JSON format for the target endpoint for Amazon Kinesis Data Streams. For
+         more information about the available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html#CHAP_Target.Kinesis.ObjectMapping\">Using object mapping to
+            migrate data to a Kinesis data stream</a> in the <i>Database Migration Service User Guide.</i>
+         </p>")
+    @as("KinesisSettings")
+    kinesisSettings: option<kinesisSettings>,
+    @ocaml.doc("<p>Settings in JSON format for the source MongoDB endpoint. For more information about the
+         available settings, see the configuration properties section in <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MongoDB.html#CHAP_Source.MongoDB.Configuration\">Endpoint configuration settings
+            when using MongoDB as a source for Database Migration Service</a> in the
+         <i>Database Migration Service User Guide.</i>
+         </p>")
+    @as("MongoDbSettings")
+    mongoDbSettings: option<mongoDbSettings>,
+    @ocaml.doc("<p>The settings in JSON format for the DMS transfer type of source endpoint. </p>
+         <p>Attributes include the following:</p>
+         <ul>
+            <li>
+               <p>serviceAccessRoleArn - The Amazon Resource Name (ARN) used by the service access IAM role. The role must allow the <code>iam:PassRole</code> action.</p>
+            </li>
+            <li>
+               <p>BucketName - The name of the S3 bucket to use.</p>
+            </li>
+         </ul>
+         <p>Shorthand syntax for these settings is as follows: <code>ServiceAccessRoleArn=string
+            ,BucketName=string</code>
+         </p>
+         <p>JSON syntax for these settings is as follows: <code>{ \"ServiceAccessRoleArn\": \"string\",
+            \"BucketName\": \"string\"} </code>
+         </p>")
+    @as("DmsTransferSettings")
+    dmsTransferSettings: option<dmsTransferSettings>,
+    @ocaml.doc("<p>Settings in JSON format for the target Amazon S3 endpoint. For more information about
+            the available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring\">Extra
+            Connection Attributes When Using Amazon S3 as a Target for DMS</a> in the
+            <i>Database Migration Service User Guide.</i>
+         </p>")
+    @as("S3Settings")
+    s3Settings: option<s3Settings>,
+    @ocaml.doc("<p>Settings in JSON format for the target Amazon DynamoDB endpoint. For information about other 
+            available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.DynamoDB.html#CHAP_Target.DynamoDB.ObjectMapping\">Using Object Mapping to Migrate
+            Data to DynamoDB</a> in the <i>Database Migration Service User
+            Guide.</i>
+         </p>")
+    @as("DynamoDbSettings")
+    dynamoDbSettings: option<dynamoDbSettings>,
+    @ocaml.doc("<p>The external table definition.</p>") @as("ExternalTableDefinition")
+    externalTableDefinition: option<string_>,
+    @ocaml.doc("<p> The Amazon Resource Name (ARN) for the IAM role you want to use to modify
+         the endpoint. The role must allow the <code>iam:PassRole</code> action.</p>")
+    @as("ServiceAccessRoleArn")
+    serviceAccessRoleArn: option<string_>,
+    @ocaml.doc(
+      "<p>The SSL mode used to connect to the endpoint.  The default value is <code>none</code>.</p>"
+    )
+    @as("SslMode")
+    sslMode: option<dmsSslModeValue>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the certificate used for SSL connection.</p>")
+    @as("CertificateArn")
+    certificateArn: option<string_>,
+    @ocaml.doc("<p>Additional attributes associated with the connection. To reset this parameter, pass the
+         empty string (\"\") as an argument.</p>")
+    @as("ExtraConnectionAttributes")
+    extraConnectionAttributes: option<string_>,
+    @ocaml.doc(
+      "<p>The name of the endpoint database. For a MySQL source or target endpoint, do not specify DatabaseName.</p>"
+    )
+    @as("DatabaseName")
+    databaseName: option<string_>,
+    @ocaml.doc("<p>The port used by the endpoint database.</p>") @as("Port")
+    port: option<integerOptional>,
+    @ocaml.doc("<p>The name of the server where the endpoint database resides.</p>")
+    @as("ServerName")
+    serverName: option<string_>,
+    @ocaml.doc("<p>The password to be used to login to the endpoint database.</p>") @as("Password")
+    password: option<secretString>,
+    @ocaml.doc("<p>The user name to be used to login to the endpoint database.</p>") @as("Username")
+    username: option<string_>,
+    @ocaml.doc("<p>The type of engine for the endpoint. Valid values, depending on the EndpointType,
+         include
+         <code>\"mysql\"</code>, <code>\"oracle\"</code>, <code>\"postgres\"</code>,
+         <code>\"mariadb\"</code>, <code>\"aurora\"</code>, <code>\"aurora-postgresql\"</code>, <code>\"opensearch\"</code>,
+         <code>\"redshift\"</code>, <code>\"s3\"</code>, <code>\"db2\"</code>, <code>\"azuredb\"</code>,
+         <code>\"sybase\"</code>, <code>\"dynamodb\"</code>, <code>\"mongodb\"</code>,
+         <code>\"kinesis\"</code>, <code>\"kafka\"</code>, <code>\"elasticsearch\"</code>,
+         <code>\"documentdb\"</code>, <code>\"sqlserver\"</code>, and <code>\"neptune\"</code>.</p>")
+    @as("EngineName")
+    engineName: option<string_>,
+    @ocaml.doc(
+      "<p>The type of endpoint.  Valid values are <code>source</code> and <code>target</code>.</p>"
+    )
+    @as("EndpointType")
+    endpointType: option<replicationEndpointTypeValue>,
+    @ocaml.doc("<p>The database endpoint identifier. Identifiers must begin with a letter and must contain
+         only ASCII letters, digits, and hyphens. They can't end with a hyphen or contain two
+         consecutive hyphens.</p>")
+    @as("EndpointIdentifier")
+    endpointIdentifier: option<string_>,
+    @ocaml.doc(
+      "<p>The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.</p>"
+    )
+    @as("EndpointArn")
+    endpointArn: string_,
+  }
+  @ocaml.doc("<p></p>")
+  type response = {
+    @ocaml.doc("<p>The modified endpoint.</p>") @as("Endpoint") endpoint: option<endpoint>,
+  }
+  @module("@aws-sdk/client-dms") @new external new: request => t = "ModifyEndpointCommand"
+  let make = (
+    ~endpointArn,
+    ~gcpMySQLSettings=?,
+    ~exactSettings=?,
+    ~redisSettings=?,
+    ~docDbSettings=?,
+    ~ibmdb2Settings=?,
+    ~microsoftSQLServerSettings=?,
+    ~sybaseSettings=?,
+    ~oracleSettings=?,
+    ~mySQLSettings=?,
+    ~postgreSQLSettings=?,
+    ~redshiftSettings=?,
+    ~neptuneSettings=?,
+    ~elasticsearchSettings=?,
+    ~kafkaSettings=?,
+    ~kinesisSettings=?,
+    ~mongoDbSettings=?,
+    ~dmsTransferSettings=?,
+    ~s3Settings=?,
+    ~dynamoDbSettings=?,
+    ~externalTableDefinition=?,
+    ~serviceAccessRoleArn=?,
+    ~sslMode=?,
+    ~certificateArn=?,
+    ~extraConnectionAttributes=?,
+    ~databaseName=?,
+    ~port=?,
+    ~serverName=?,
+    ~password=?,
+    ~username=?,
+    ~engineName=?,
+    ~endpointType=?,
+    ~endpointIdentifier=?,
+    (),
+  ) =>
+    new({
+      gcpMySQLSettings: gcpMySQLSettings,
+      exactSettings: exactSettings,
+      redisSettings: redisSettings,
+      docDbSettings: docDbSettings,
+      ibmdb2Settings: ibmdb2Settings,
+      microsoftSQLServerSettings: microsoftSQLServerSettings,
+      sybaseSettings: sybaseSettings,
+      oracleSettings: oracleSettings,
+      mySQLSettings: mySQLSettings,
+      postgreSQLSettings: postgreSQLSettings,
+      redshiftSettings: redshiftSettings,
+      neptuneSettings: neptuneSettings,
+      elasticsearchSettings: elasticsearchSettings,
+      kafkaSettings: kafkaSettings,
+      kinesisSettings: kinesisSettings,
+      mongoDbSettings: mongoDbSettings,
+      dmsTransferSettings: dmsTransferSettings,
+      s3Settings: s3Settings,
+      dynamoDbSettings: dynamoDbSettings,
+      externalTableDefinition: externalTableDefinition,
+      serviceAccessRoleArn: serviceAccessRoleArn,
+      sslMode: sslMode,
+      certificateArn: certificateArn,
+      extraConnectionAttributes: extraConnectionAttributes,
+      databaseName: databaseName,
+      port: port,
+      serverName: serverName,
+      password: password,
+      username: username,
+      engineName: engineName,
+      endpointType: endpointType,
+      endpointIdentifier: endpointIdentifier,
+      endpointArn: endpointArn,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeTableStatistics = {
@@ -4893,7 +4985,11 @@ module DescribeEvents = {
          <p>Constraints: Minimum 20, maximum 100.</p>")
     @as("MaxRecords")
     maxRecords: option<integerOptional>,
-    @ocaml.doc("<p>Filters applied to events.</p>") @as("Filters") filters: option<filterList>,
+    @ocaml.doc(
+      "<p>Filters applied to events. The only valid filter is <code>replication-instance-id</code>.</p>"
+    )
+    @as("Filters")
+    filters: option<filterList>,
     @ocaml.doc("<p>A list of event categories for the source type that you've chosen.</p>")
     @as("EventCategories")
     eventCategories: option<eventCategoriesList>,
@@ -4903,7 +4999,7 @@ module DescribeEvents = {
     endTime: option<tstamp>,
     @ocaml.doc("<p>The start time for the events to be listed.</p>") @as("StartTime")
     startTime: option<tstamp>,
-    @ocaml.doc("<p>The type of AWS DMS resource that generates events.</p>
+    @ocaml.doc("<p>The type of DMS resource that generates events.</p>
          <p>Valid values: replication-instance | replication-task</p>")
     @as("SourceType")
     sourceType: option<sourceType>,
@@ -4962,9 +5058,11 @@ module DescribeEventSubscriptions = {
          <p>Constraints: Minimum 20, maximum 100.</p>")
     @as("MaxRecords")
     maxRecords: option<integerOptional>,
-    @ocaml.doc("<p>Filters applied to event subscriptions.</p>") @as("Filters")
+    @ocaml.doc("<p>Filters applied to event subscriptions.</p>
+         <p>Valid filter names: event-subscription-arn |  event-subscription-id </p>")
+    @as("Filters")
     filters: option<filterList>,
-    @ocaml.doc("<p>The name of the AWS DMS event subscription to be described.</p>")
+    @ocaml.doc("<p>The name of the DMS event subscription to be described.</p>")
     @as("SubscriptionName")
     subscriptionName: option<string_>,
   }
@@ -4996,7 +5094,7 @@ module DescribeEventCategories = {
   type request = {
     @ocaml.doc("<p>Filters applied to the event categories.</p>") @as("Filters")
     filters: option<filterList>,
-    @ocaml.doc("<p> The type of AWS DMS resource that generates events. </p>
+    @ocaml.doc("<p> The type of DMS resource that generates events. </p>
          <p>Valid values: replication-instance | replication-task</p>")
     @as("SourceType")
     sourceType: option<string_>,
@@ -5008,42 +5106,6 @@ module DescribeEventCategories = {
   }
   @module("@aws-sdk/client-dms") @new external new: request => t = "DescribeEventCategoriesCommand"
   let make = (~filters=?, ~sourceType=?, ()) => new({filters: filters, sourceType: sourceType})
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
-module DescribeEndpoints = {
-  type t
-  @ocaml.doc("<p></p>")
-  type request = {
-    @ocaml.doc("<p> An optional pagination token provided by a previous request. If this parameter is
-         specified, the response includes only records beyond the marker, up to the value specified
-         by <code>MaxRecords</code>. </p>")
-    @as("Marker")
-    marker: option<string_>,
-    @ocaml.doc("<p> The maximum number of records to include in the response. If more records exist than
-         the specified <code>MaxRecords</code> value, a pagination token called a marker is included
-         in the response so that the remaining results can be retrieved. </p>
-         <p>Default: 100</p>
-         <p>Constraints: Minimum 20, maximum 100.</p>")
-    @as("MaxRecords")
-    maxRecords: option<integerOptional>,
-    @ocaml.doc("<p>Filters applied to the endpoints.</p>
-         <p>Valid filter names: endpoint-arn | endpoint-type | endpoint-id | engine-name</p>")
-    @as("Filters")
-    filters: option<filterList>,
-  }
-  @ocaml.doc("<p></p>")
-  type response = {
-    @ocaml.doc("<p>Endpoint description.</p>") @as("Endpoints") endpoints: option<endpointList>,
-    @ocaml.doc("<p> An optional pagination token provided by a previous request. If this parameter is
-         specified, the response includes only records beyond the marker, up to the value specified
-         by <code>MaxRecords</code>. </p>")
-    @as("Marker")
-    marker: option<string_>,
-  }
-  @module("@aws-sdk/client-dms") @new external new: request => t = "DescribeEndpointsCommand"
-  let make = (~marker=?, ~maxRecords=?, ~filters=?, ()) =>
-    new({marker: marker, maxRecords: maxRecords, filters: filters})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -5168,9 +5230,8 @@ module DescribeCertificates = {
          <p>Default: 10</p>")
     @as("MaxRecords")
     maxRecords: option<integerOptional>,
-    @ocaml.doc(
-      "<p>Filters applied to the certificates described in the form of key-value pairs.</p>"
-    )
+    @ocaml.doc("<p>Filters applied to the certificates described in the form of key-value pairs. 
+          Valid values are <code>certificate-arn</code> and <code>certificate-id</code>.</p>")
     @as("Filters")
     filters: option<filterList>,
   }
@@ -5184,6 +5245,307 @@ module DescribeCertificates = {
   @module("@aws-sdk/client-dms") @new external new: request => t = "DescribeCertificatesCommand"
   let make = (~marker=?, ~maxRecords=?, ~filters=?, ()) =>
     new({marker: marker, maxRecords: maxRecords, filters: filters})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module DeleteEndpoint = {
+  type t
+  @ocaml.doc("<p></p>")
+  type request = {
+    @ocaml.doc(
+      "<p>The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.</p>"
+    )
+    @as("EndpointArn")
+    endpointArn: string_,
+  }
+  @ocaml.doc("<p></p>")
+  type response = {
+    @ocaml.doc("<p>The endpoint that was deleted.</p>") @as("Endpoint") endpoint: option<endpoint>,
+  }
+  @module("@aws-sdk/client-dms") @new external new: request => t = "DeleteEndpointCommand"
+  let make = (~endpointArn, ()) => new({endpointArn: endpointArn})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module CreateEndpoint = {
+  type t
+  @ocaml.doc("<p></p>")
+  type request = {
+    @ocaml.doc("<p>Settings in JSON format for the source GCP MySQL endpoint.</p>")
+    @as("GcpMySQLSettings")
+    gcpMySQLSettings: option<gcpMySQLSettings>,
+    @ocaml.doc("<p>Settings in JSON format for the target Redis endpoint.</p>") @as("RedisSettings")
+    redisSettings: option<redisSettings>,
+    @as("DocDbSettings") docDbSettings: option<docDbSettings>,
+    @ocaml.doc("<p>A friendly name for the resource identifier at the end of the <code>EndpointArn</code>
+         response parameter that is returned in the created <code>Endpoint</code> object. The value
+         for this parameter can have up to 31 characters. It can contain only ASCII letters, digits,
+         and hyphen ('-'). Also, it can't end with a hyphen or contain two consecutive hyphens,
+         and can only begin with a letter, such as <code>Example-App-ARN1</code>. For example, this
+         value might result in the <code>EndpointArn</code> value
+            <code>arn:aws:dms:eu-west-1:012345678901:rep:Example-App-ARN1</code>. If you don't
+         specify a <code>ResourceIdentifier</code> value, DMS generates a default identifier
+         value for the end of <code>EndpointArn</code>.</p>")
+    @as("ResourceIdentifier")
+    resourceIdentifier: option<string_>,
+    @ocaml.doc("<p>Settings in JSON format for the source IBM Db2 LUW endpoint. For information about other
+         available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.DB2.html#CHAP_Source.DB2.ConnectionAttrib\">Extra connection attributes
+            when using Db2 LUW as a source for DMS</a> in the <i>Database Migration Service
+                User Guide.</i>
+         </p>")
+    @as("IBMDb2Settings")
+    ibmdb2Settings: option<ibmdb2Settings>,
+    @ocaml.doc("<p>Settings in JSON format for the source and target Microsoft SQL Server endpoint. For
+         information about other available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.SQLServer.html#CHAP_Source.SQLServer.ConnectionAttrib\">Extra connection
+            attributes when using SQL Server as a source for DMS</a> and <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.SQLServer.html#CHAP_Target.SQLServer.ConnectionAttrib\">
+            Extra connection attributes when using SQL Server as a target for DMS</a> in the
+            <i>Database Migration Service User Guide.</i>
+         </p>")
+    @as("MicrosoftSQLServerSettings")
+    microsoftSQLServerSettings: option<microsoftSQLServerSettings>,
+    @ocaml.doc("<p>Settings in JSON format for the source and target SAP ASE endpoint. For information
+         about other available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.SAP.html#CHAP_Source.SAP.ConnectionAttrib\">Extra connection attributes
+            when using SAP ASE as a source for DMS</a> and <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.SAP.html#CHAP_Target.SAP.ConnectionAttrib\">Extra connection attributes
+                when using SAP ASE as a target for DMS</a> in the <i>Database Migration Service
+                    User Guide.</i>
+         </p>")
+    @as("SybaseSettings")
+    sybaseSettings: option<sybaseSettings>,
+    @ocaml.doc("<p>Settings in JSON format for the source and target Oracle endpoint. For information about
+         other available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.ConnectionAttrib\">Extra connection attributes 
+            when using Oracle as a source for DMS</a> and 
+         <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Oracle.html#CHAP_Target.Oracle.ConnectionAttrib\">
+            Extra connection attributes when using Oracle as a target for DMS</a> 
+          in the <i>Database Migration Service User Guide.</i>
+         </p>")
+    @as("OracleSettings")
+    oracleSettings: option<oracleSettings>,
+    @ocaml.doc("<p>Settings in JSON format for the source and target MySQL endpoint. For information about
+         other available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MySQL.html#CHAP_Source.MySQL.ConnectionAttrib\">Extra connection attributes 
+            when using MySQL as a source for DMS</a> and <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.MySQL.html#CHAP_Target.MySQL.ConnectionAttrib\">Extra connection attributes when using a MySQL-compatible database as a target for DMS</a> in
+          the <i>Database Migration Service User Guide.</i>
+         </p>")
+    @as("MySQLSettings")
+    mySQLSettings: option<mySQLSettings>,
+    @ocaml.doc("<p>Settings in JSON format for the source and target PostgreSQL endpoint. For information
+         about other available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.html#CHAP_Source.PostgreSQL.ConnectionAttrib\">Extra connection
+            attributes when using PostgreSQL as a source for DMS</a> and <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.PostgreSQL.html#CHAP_Target.PostgreSQL.ConnectionAttrib\">
+               Extra connection attributes when using PostgreSQL as a target for DMS</a> in the
+          <i>Database Migration Service User Guide.</i>
+         </p>")
+    @as("PostgreSQLSettings")
+    postgreSQLSettings: option<postgreSQLSettings>,
+    @as("RedshiftSettings") redshiftSettings: option<redshiftSettings>,
+    @ocaml.doc("<p>Settings in JSON format for the target Amazon Neptune endpoint.
+         For more information
+         about the available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Neptune.html#CHAP_Target.Neptune.EndpointSettings\">Specifying graph-mapping rules using Gremlin and R2RML for Amazon Neptune as a target</a> 
+            in the <i>Database Migration Service User Guide.</i>
+         </p>")
+    @as("NeptuneSettings")
+    neptuneSettings: option<neptuneSettings>,
+    @ocaml.doc("<p>Settings in JSON format for the target OpenSearch endpoint. For more information
+         about the available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Elasticsearch.html#CHAP_Target.Elasticsearch.Configuration\">Extra Connection Attributes When Using OpenSearch as a Target for DMS</a> in
+          the <i>Database Migration Service User Guide</i>.</p>")
+    @as("ElasticsearchSettings")
+    elasticsearchSettings: option<elasticsearchSettings>,
+    @ocaml.doc("<p>Settings in JSON format for the target Apache Kafka endpoint. For more information about
+         the available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kafka.html#CHAP_Target.Kafka.ObjectMapping\">Using object mapping
+            to migrate data to a Kafka topic</a> in the <i>Database Migration Service User
+            Guide.</i>
+         </p>")
+    @as("KafkaSettings")
+    kafkaSettings: option<kafkaSettings>,
+    @ocaml.doc("<p>Settings in JSON format for the target endpoint for Amazon Kinesis Data Streams. For
+         more information about the available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html#CHAP_Target.Kinesis.ObjectMapping\">Using object mapping to
+            migrate data to a Kinesis data stream</a> in the <i>Database Migration Service User Guide.</i>
+         </p>")
+    @as("KinesisSettings")
+    kinesisSettings: option<kinesisSettings>,
+    @ocaml.doc("<p>Settings in JSON format for the source MongoDB endpoint. For more information about the
+         available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MongoDB.html#CHAP_Source.MongoDB.Configuration\">Endpoint configuration settings
+            when using MongoDB as a source for Database Migration Service</a> in the
+            <i>Database Migration Service User Guide.</i>
+         </p>")
+    @as("MongoDbSettings")
+    mongoDbSettings: option<mongoDbSettings>,
+    @ocaml.doc("<p>The settings in JSON format for the DMS transfer type of source endpoint. </p>
+         <p>Possible settings include the following:</p>
+         <ul>
+            <li>
+               <p>
+                  <code>ServiceAccessRoleArn</code> - The Amazon Resource Name (ARN) used by the service access IAM role.
+                 The role must allow the <code>iam:PassRole</code> action.</p>
+            </li>
+            <li>
+               <p>
+                  <code>BucketName</code> - The name of the S3 bucket to use.</p>
+            </li>
+         </ul>
+         <p>Shorthand syntax for these settings is as follows:
+            <code>ServiceAccessRoleArn=string,BucketName=string</code>
+         </p>
+         <p>JSON syntax for these settings is as follows: <code>{ \"ServiceAccessRoleArn\":
+            \"string\", \"BucketName\": \"string\", } </code>
+         </p>")
+    @as("DmsTransferSettings")
+    dmsTransferSettings: option<dmsTransferSettings>,
+    @ocaml.doc("<p>Settings in JSON format for the target Amazon S3 endpoint. For more information about
+         the available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring\">Extra
+            Connection Attributes When Using Amazon S3 as a Target for DMS</a> in the
+            <i>Database Migration Service User Guide.</i>
+         </p>")
+    @as("S3Settings")
+    s3Settings: option<s3Settings>,
+    @ocaml.doc("<p>Settings in JSON format for the target Amazon DynamoDB endpoint. For information about other 
+            available settings, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.DynamoDB.html#CHAP_Target.DynamoDB.ObjectMapping\">Using Object Mapping to Migrate
+                Data to DynamoDB</a> in the <i>Database Migration Service User
+            Guide.</i>
+         </p>")
+    @as("DynamoDbSettings")
+    dynamoDbSettings: option<dynamoDbSettings>,
+    @ocaml.doc("<p>The external table definition. </p>") @as("ExternalTableDefinition")
+    externalTableDefinition: option<string_>,
+    @ocaml.doc("<p> The Amazon Resource Name (ARN) for the service access role that you want to use to
+          create the endpoint. The role must allow the <code>iam:PassRole</code> action.</p>")
+    @as("ServiceAccessRoleArn")
+    serviceAccessRoleArn: option<string_>,
+    @ocaml.doc("<p>The Secure Sockets Layer (SSL) mode to use for the SSL connection. The default is <code>none</code>
+         </p>")
+    @as("SslMode")
+    sslMode: option<dmsSslModeValue>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) for the certificate.</p>") @as("CertificateArn")
+    certificateArn: option<string_>,
+    @ocaml.doc("<p>One or more tags to be assigned to the endpoint.</p>") @as("Tags")
+    tags: option<tagList_>,
+    @ocaml.doc("<p>An KMS key identifier that is used to encrypt the connection parameters for the endpoint.</p>
+         <p>If you don't specify a value for the <code>KmsKeyId</code> parameter, then
+           DMS uses your default encryption key.</p>
+         <p>KMS creates the default encryption key for your Amazon Web Services account. Your Amazon Web Services account has a
+         different default encryption key for each Amazon Web Services Region.</p>")
+    @as("KmsKeyId")
+    kmsKeyId: option<string_>,
+    @ocaml.doc("<p>Additional attributes associated with the connection. Each attribute is specified as a
+         name-value pair associated by an equal sign (=). Multiple attributes are separated by a
+         semicolon (;) with no additional white space. For information on the attributes available
+         for connecting your source or target endpoint, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Endpoints.html\">Working with
+            DMS Endpoints</a> in the <i>Database Migration Service User
+            Guide.</i>
+         </p>")
+    @as("ExtraConnectionAttributes")
+    extraConnectionAttributes: option<string_>,
+    @ocaml.doc(
+      "<p>The name of the endpoint database. For a MySQL source or target endpoint, do not specify DatabaseName.</p>"
+    )
+    @as("DatabaseName")
+    databaseName: option<string_>,
+    @ocaml.doc("<p>The port used by the endpoint database.</p>") @as("Port")
+    port: option<integerOptional>,
+    @ocaml.doc("<p>The name of the server where the endpoint database resides.</p>")
+    @as("ServerName")
+    serverName: option<string_>,
+    @ocaml.doc("<p>The password to be used to log in to the endpoint database.</p>") @as("Password")
+    password: option<secretString>,
+    @ocaml.doc("<p>The user name to be used to log in to the endpoint database.</p>")
+    @as("Username")
+    username: option<string_>,
+    @ocaml.doc("<p>The type of engine for the endpoint. Valid values, depending on the
+         <code>EndpointType</code> value, include <code>\"mysql\"</code>, <code>\"oracle\"</code>,
+          <code>\"postgres\"</code>, <code>\"mariadb\"</code>, <code>\"aurora\"</code>, 
+          <code>\"aurora-postgresql\"</code>, <code>\"opensearch\"</code>, <code>\"redshift\"</code>, <code>\"s3\"</code>,
+         <code>\"db2\"</code>, <code>\"azuredb\"</code>, <code>\"sybase\"</code>, <code>\"dynamodb\"</code>, <code>\"mongodb\"</code>,
+         <code>\"kinesis\"</code>, <code>\"kafka\"</code>, <code>\"elasticsearch\"</code>, <code>\"docdb\"</code>,
+         <code>\"sqlserver\"</code>, and <code>\"neptune\"</code>.</p>")
+    @as("EngineName")
+    engineName: string_,
+    @ocaml.doc(
+      "<p>The type of endpoint.  Valid values are <code>source</code> and <code>target</code>.</p>"
+    )
+    @as("EndpointType")
+    endpointType: replicationEndpointTypeValue,
+    @ocaml.doc("<p>The database endpoint identifier. Identifiers must begin with a letter and must contain
+         only ASCII letters, digits, and hyphens. They can't end with a hyphen, or contain two
+         consecutive hyphens.</p>")
+    @as("EndpointIdentifier")
+    endpointIdentifier: string_,
+  }
+  @ocaml.doc("<p></p>")
+  type response = {
+    @ocaml.doc("<p>The endpoint that was created.</p>") @as("Endpoint") endpoint: option<endpoint>,
+  }
+  @module("@aws-sdk/client-dms") @new external new: request => t = "CreateEndpointCommand"
+  let make = (
+    ~engineName,
+    ~endpointType,
+    ~endpointIdentifier,
+    ~gcpMySQLSettings=?,
+    ~redisSettings=?,
+    ~docDbSettings=?,
+    ~resourceIdentifier=?,
+    ~ibmdb2Settings=?,
+    ~microsoftSQLServerSettings=?,
+    ~sybaseSettings=?,
+    ~oracleSettings=?,
+    ~mySQLSettings=?,
+    ~postgreSQLSettings=?,
+    ~redshiftSettings=?,
+    ~neptuneSettings=?,
+    ~elasticsearchSettings=?,
+    ~kafkaSettings=?,
+    ~kinesisSettings=?,
+    ~mongoDbSettings=?,
+    ~dmsTransferSettings=?,
+    ~s3Settings=?,
+    ~dynamoDbSettings=?,
+    ~externalTableDefinition=?,
+    ~serviceAccessRoleArn=?,
+    ~sslMode=?,
+    ~certificateArn=?,
+    ~tags=?,
+    ~kmsKeyId=?,
+    ~extraConnectionAttributes=?,
+    ~databaseName=?,
+    ~port=?,
+    ~serverName=?,
+    ~password=?,
+    ~username=?,
+    (),
+  ) =>
+    new({
+      gcpMySQLSettings: gcpMySQLSettings,
+      redisSettings: redisSettings,
+      docDbSettings: docDbSettings,
+      resourceIdentifier: resourceIdentifier,
+      ibmdb2Settings: ibmdb2Settings,
+      microsoftSQLServerSettings: microsoftSQLServerSettings,
+      sybaseSettings: sybaseSettings,
+      oracleSettings: oracleSettings,
+      mySQLSettings: mySQLSettings,
+      postgreSQLSettings: postgreSQLSettings,
+      redshiftSettings: redshiftSettings,
+      neptuneSettings: neptuneSettings,
+      elasticsearchSettings: elasticsearchSettings,
+      kafkaSettings: kafkaSettings,
+      kinesisSettings: kinesisSettings,
+      mongoDbSettings: mongoDbSettings,
+      dmsTransferSettings: dmsTransferSettings,
+      s3Settings: s3Settings,
+      dynamoDbSettings: dynamoDbSettings,
+      externalTableDefinition: externalTableDefinition,
+      serviceAccessRoleArn: serviceAccessRoleArn,
+      sslMode: sslMode,
+      certificateArn: certificateArn,
+      tags: tags,
+      kmsKeyId: kmsKeyId,
+      extraConnectionAttributes: extraConnectionAttributes,
+      databaseName: databaseName,
+      port: port,
+      serverName: serverName,
+      password: password,
+      username: username,
+      engineName: engineName,
+      endpointType: endpointType,
+      endpointIdentifier: endpointIdentifier,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -5212,19 +5574,19 @@ module ApplyPendingMaintenanceAction = {
          </ul>")
     @as("OptInType")
     optInType: string_,
-    @ocaml.doc("<p>The pending maintenance action to apply to this resource.</p>")
+    @ocaml.doc("<p>The pending maintenance action to apply to this resource.</p>
+         <p>Valid values: <code>os-upgrade</code>, <code>system-update</code>, <code>db-upgrade</code> 
+         </p>")
     @as("ApplyAction")
     applyAction: string_,
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the AWS DMS resource that the pending maintenance
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the DMS resource that the pending maintenance
          action applies to.</p>")
     @as("ReplicationInstanceArn")
     replicationInstanceArn: string_,
   }
   @ocaml.doc("<p></p>")
   type response = {
-    @ocaml.doc(
-      "<p>The AWS DMS resource that the pending maintenance action will be applied to.</p>"
-    )
+    @ocaml.doc("<p>The DMS resource that the pending maintenance action will be applied to.</p>")
     @as("ResourcePendingMaintenanceActions")
     resourcePendingMaintenanceActions: option<resourcePendingMaintenanceActions>,
   }
@@ -5315,6 +5677,42 @@ module DescribePendingMaintenanceActions = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module DescribeEndpoints = {
+  type t
+  @ocaml.doc("<p></p>")
+  type request = {
+    @ocaml.doc("<p> An optional pagination token provided by a previous request. If this parameter is
+         specified, the response includes only records beyond the marker, up to the value specified
+         by <code>MaxRecords</code>. </p>")
+    @as("Marker")
+    marker: option<string_>,
+    @ocaml.doc("<p> The maximum number of records to include in the response. If more records exist than
+         the specified <code>MaxRecords</code> value, a pagination token called a marker is included
+         in the response so that the remaining results can be retrieved. </p>
+         <p>Default: 100</p>
+         <p>Constraints: Minimum 20, maximum 100.</p>")
+    @as("MaxRecords")
+    maxRecords: option<integerOptional>,
+    @ocaml.doc("<p>Filters applied to the endpoints.</p>
+         <p>Valid filter names: endpoint-arn | endpoint-type | endpoint-id | engine-name</p>")
+    @as("Filters")
+    filters: option<filterList>,
+  }
+  @ocaml.doc("<p></p>")
+  type response = {
+    @ocaml.doc("<p>Endpoint description.</p>") @as("Endpoints") endpoints: option<endpointList>,
+    @ocaml.doc("<p> An optional pagination token provided by a previous request. If this parameter is
+         specified, the response includes only records beyond the marker, up to the value specified
+         by <code>MaxRecords</code>. </p>")
+    @as("Marker")
+    marker: option<string_>,
+  }
+  @module("@aws-sdk/client-dms") @new external new: request => t = "DescribeEndpointsCommand"
+  let make = (~marker=?, ~maxRecords=?, ~filters=?, ()) =>
+    new({marker: marker, maxRecords: maxRecords, filters: filters})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module CreateReplicationSubnetGroup = {
   type t
   @ocaml.doc("<p></p>")
@@ -5362,9 +5760,15 @@ module CreateReplicationSubnetGroup = {
 module RebootReplicationInstance = {
   type t
   type request = {
+    @ocaml.doc("<p>If this parameter is <code>true</code>, the reboot is conducted through a planned Multi-AZ failover 
+         where resources are released and cleaned up prior to conducting the failover. 
+         If the instance isn''t configured for Multi-AZ, then you can't specify <code>true</code>. 
+         ( <code>--force-planned-failover</code> and <code>--force-failover</code> can't both be set to <code>true</code>.)</p>")
+    @as("ForcePlannedFailover")
+    forcePlannedFailover: option<booleanOptional>,
     @ocaml.doc("<p>If this parameter is <code>true</code>, the reboot is conducted through a Multi-AZ
-         failover. (If the instance isn't configured for Multi-AZ, then you can't specify
-            <code>true</code>.)</p>")
+         failover. If the instance isn't configured for Multi-AZ, then you can't specify
+         <code>true</code>.  ( <code>--force-planned-failover</code> and <code>--force-failover</code> can't both be set to <code>true</code>.)</p>")
     @as("ForceFailover")
     forceFailover: option<booleanOptional>,
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the replication instance.</p>")
@@ -5378,8 +5782,12 @@ module RebootReplicationInstance = {
   }
   @module("@aws-sdk/client-dms") @new
   external new: request => t = "RebootReplicationInstanceCommand"
-  let make = (~replicationInstanceArn, ~forceFailover=?, ()) =>
-    new({forceFailover: forceFailover, replicationInstanceArn: replicationInstanceArn})
+  let make = (~replicationInstanceArn, ~forcePlannedFailover=?, ~forceFailover=?, ()) =>
+    new({
+      forcePlannedFailover: forcePlannedFailover,
+      forceFailover: forceFailover,
+      replicationInstanceArn: replicationInstanceArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -5404,7 +5812,7 @@ module ModifyReplicationInstance = {
                <p>A newer minor version is available. </p>
             </li>
             <li>
-               <p>AWS DMS has enabled automatic patching for the given engine version. </p>
+               <p>DMS has enabled automatic patching for the given engine version. </p>
             </li>
          </ul>")
     @as("AutoMinorVersionUpgrade")
@@ -5445,7 +5853,7 @@ module ModifyReplicationInstance = {
          replication instance class. For example to specify the instance class dms.c4.large, set this parameter to <code>\"dms.c4.large\"</code>.</p>
          <p>For more information on the settings and capacities for the available replication instance classes, see 
          <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.html#CHAP_ReplicationInstance.InDepth\">
-            Selecting the right AWS DMS replication instance for your migration</a>.
+            Selecting the right DMS replication instance for your migration</a>.
       </p>")
     @as("ReplicationInstanceClass")
     replicationInstanceClass: option<string_>,
@@ -5567,7 +5975,7 @@ module CreateReplicationInstance = {
          and can only begin with a letter, such as <code>Example-App-ARN1</code>. For example, this
          value might result in the <code>EndpointArn</code> value
          <code>arn:aws:dms:eu-west-1:012345678901:rep:Example-App-ARN1</code>. If you don't
-         specify a <code>ResourceIdentifier</code> value, AWS DMS generates a default identifier
+         specify a <code>ResourceIdentifier</code> value, DMS generates a default identifier
          value for the end of <code>EndpointArn</code>.</p>")
     @as("ResourceIdentifier")
     resourceIdentifier: option<string_>,
@@ -5585,12 +5993,12 @@ module CreateReplicationInstance = {
          is <code>true</code>. </p>")
     @as("PubliclyAccessible")
     publiclyAccessible: option<booleanOptional>,
-    @ocaml.doc("<p>An AWS KMS key identifier that is used to encrypt the data on the replication
+    @ocaml.doc("<p>An KMS key identifier that is used to encrypt the data on the replication
            instance.</p>
          <p>If you don't specify a value for the <code>KmsKeyId</code> parameter, then
-           AWS DMS uses your default encryption key.</p>
-         <p>AWS KMS creates the default encryption key for your AWS account. Your AWS account has a
-         different default encryption key for each AWS Region.</p>")
+           DMS uses your default encryption key.</p>
+         <p>KMS creates the default encryption key for your Amazon Web Services account. Your Amazon Web Services account has a
+         different default encryption key for each Amazon Web Services Region.</p>")
     @as("KmsKeyId")
     kmsKeyId: option<string_>,
     @ocaml.doc("<p>One or more tags to be assigned to the replication instance.</p>") @as("Tags")
@@ -5616,8 +6024,8 @@ module CreateReplicationInstance = {
          Coordinated Time (UTC).</p>
          <p> Format: <code>ddd:hh24:mi-ddd:hh24:mi</code>
          </p>
-         <p>Default: A 30-minute window selected at random from an 8-hour block of time per AWS
-         Region, occurring on a random day of the week.</p>
+         <p>Default: A 30-minute window selected at random from an 8-hour block of time per Amazon Web Services Region,
+          occurring on a random day of the week.</p>
          <p>Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun</p>
          <p>Constraints: Minimum 30-minute window.</p>")
     @as("PreferredMaintenanceWindow")
@@ -5626,7 +6034,7 @@ module CreateReplicationInstance = {
     @as("ReplicationSubnetGroupIdentifier")
     replicationSubnetGroupIdentifier: option<string_>,
     @ocaml.doc("<p>The Availability Zone where the replication instance will be created. The default
-         value is a random, system-chosen Availability Zone in the endpoint's AWS Region, for
+         value is a random, system-chosen Availability Zone in the endpoint's Amazon Web Services Region, for
          example: <code>us-east-1d</code>
          </p>")
     @as("AvailabilityZone")
@@ -5639,7 +6047,7 @@ module CreateReplicationInstance = {
          replication instance class. For example to specify the instance class dms.c4.large, set this parameter to <code>\"dms.c4.large\"</code>.</p>
          <p>For more information on the settings and capacities for the available replication instance classes, see 
          <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.html#CHAP_ReplicationInstance.InDepth\">
-            Selecting the right AWS DMS replication instance for your migration</a>.
+            Selecting the right DMS replication instance for your migration</a>.
       </p>")
     @as("ReplicationInstanceClass")
     replicationInstanceClass: string_,

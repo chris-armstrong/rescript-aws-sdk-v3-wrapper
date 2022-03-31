@@ -550,7 +550,7 @@ module DeleteServer = {
   type request = {
     @ocaml.doc("<p>The ID of the server to delete.</p>") @as("ServerName") serverName: serverName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-opsworks-cm") @new external new: request => t = "DeleteServerCommand"
   let make = (~serverName, ()) => new({serverName: serverName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -565,7 +565,7 @@ module DeleteBackup = {
     @as("BackupId")
     backupId: backupId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-opsworks-cm") @new external new: request => t = "DeleteBackupCommand"
   let make = (~backupId, ()) => new({backupId: backupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -581,7 +581,7 @@ module UntagResource = {
     @as("ResourceArn")
     resourceArn: awsopsWorksCMResourceArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-opsworks-cm") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -617,7 +617,7 @@ module TagResource = {
     @as("ResourceArn")
     resourceArn: awsopsWorksCMResourceArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-opsworks-cm") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -858,7 +858,7 @@ module DescribeEvents = {
 
 module DescribeAccountAttributes = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("<p>
       The attributes that are currently set for the account.
@@ -867,8 +867,8 @@ module DescribeAccountAttributes = {
     attributes: option<accountAttributes>,
   }
   @module("@aws-sdk/client-opsworks-cm") @new
-  external new: unit => t = "DescribeAccountAttributesCommand"
-  let make = () => new()
+  external new: request => t = "DescribeAccountAttributesCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

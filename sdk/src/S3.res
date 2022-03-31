@@ -16,6 +16,7 @@ type baseLong = float
 type years = int
 type websiteRedirectLocation = string
 type versionIdMarker = string
+type versionCount = int
 type value = string
 type uploadIdMarker = string
 type uri = string
@@ -25,6 +26,7 @@ type type_ = [
   | @as("CanonicalUser") #CanonicalUser
 ]
 type transitionStorageClass = [
+  | @as("GLACIER_IR") #GLACIER_IR
   | @as("DEEP_ARCHIVE") #DEEP_ARCHIVE
   | @as("INTELLIGENT_TIERING") #INTELLIGENT_TIERING
   | @as("ONEZONE_IA") #ONEZONE_IA
@@ -43,6 +45,7 @@ type suffix = string
 type streamingBlob = NodeJs.Buffer.t
 type storageClassAnalysisSchemaVersion = [@as("V_1") #V_1]
 type storageClass = [
+  | @as("GLACIER_IR") #GLACIER_IR
   | @as("OUTPOSTS") #OUTPOSTS
   | @as("DEEP_ARCHIVE") #DEEP_ARCHIVE
   | @as("GLACIER") #GLACIER
@@ -55,11 +58,12 @@ type storageClass = [
 type startAfter = string
 type start = float
 type sseKmsEncryptedObjectsStatus = [@as("Disabled") #Disabled | @as("Enabled") #Enabled]
-type size = int
+type skipValidation = bool
+type size = float
 type setting = bool
 type serverSideEncryption = [@as("aws:kms") #Aws_Kms | @as("AES256") #AES256]
 @ocaml.doc("<p>Specifies the use of SSE-S3 to encrypt delivered inventory reports.</p>")
-type sses3 = unit
+type sses3 = {.}
 type ssekmskeyId = string
 type ssekmsencryptionContext = string
 type ssecustomerKeyMD5 = string
@@ -79,8 +83,8 @@ type requestToken = string
 type requestRoute = string
 @ocaml.doc("<p>Confirms that the requester knows that they will be charged for the request. Bucket
          owners need not specify this parameter in their requests. For information about downloading
-         objects from requester pays buckets, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html\">Downloading Objects in
-            Requestor Pays Buckets</a> in the <i>Amazon S3 User Guide</i>.</p>")
+         objects from Requester Pays buckets, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html\">Downloading Objects in
+            Requester Pays Buckets</a> in the <i>Amazon S3 User Guide</i>.</p>")
 type requestPayer = [@as("requester") #Requester]
 @ocaml.doc("<p>If present, indicates that the requester was successfully charged for the
          request.</p>")
@@ -119,11 +123,12 @@ type payer = [@as("BucketOwner") #BucketOwner | @as("Requester") #Requester]
 type partsCount = int
 type partNumberMarker = string
 type partNumber = int
-@ocaml.doc("<p>Container for Parquet.</p>") type parquetInput = unit
+@ocaml.doc("<p>Container for Parquet.</p>") type parquetInput = {.}
 type ownerOverride = [@as("Destination") #Destination]
 type objectVersionStorageClass = [@as("STANDARD") #STANDARD]
 type objectVersionId = string
 type objectStorageClass = [
+  | @as("GLACIER_IR") #GLACIER_IR
   | @as("OUTPOSTS") #OUTPOSTS
   | @as("DEEP_ARCHIVE") #DEEP_ARCHIVE
   | @as("INTELLIGENT_TIERING") #INTELLIGENT_TIERING
@@ -133,13 +138,22 @@ type objectStorageClass = [
   | @as("REDUCED_REDUNDANCY") #REDUCED_REDUNDANCY
   | @as("STANDARD") #STANDARD
 ]
+type objectSizeLessThanBytes = float
+type objectSizeGreaterThanBytes = float
+type objectSize = float
 @ocaml.doc("<p>The container element for object ownership for a bucket's ownership controls.</p>
          <p>BucketOwnerPreferred - Objects uploaded to the bucket change ownership to the bucket
          owner if the objects are uploaded with the <code>bucket-owner-full-control</code> canned
          ACL.</p>
          <p>ObjectWriter - The uploading account will own the object if the object is uploaded with
-         the <code>bucket-owner-full-control</code> canned ACL.</p>")
+         the <code>bucket-owner-full-control</code> canned ACL.</p>
+         <p>BucketOwnerEnforced - Access control lists (ACLs) are disabled and no longer affect permissions. 
+         The bucket owner automatically owns and has full control over every object in the bucket. The bucket only
+         accepts PUT requests that don't specify an ACL or bucket owner full control
+         ACLs, such as the <code>bucket-owner-full-control</code> canned
+         ACL or an equivalent form of this ACL expressed in the XML format.</p>")
 type objectOwnership = [
+  | @as("BucketOwnerEnforced") #BucketOwnerEnforced
   | @as("ObjectWriter") #ObjectWriter
   | @as("BucketOwnerPreferred") #BucketOwnerPreferred
 ]
@@ -159,6 +173,13 @@ type objectCannedACL = [
   | @as("public-read-write") #Public_Read_Write
   | @as("public-read") #Public_Read
   | @as("private") #Private
+]
+type objectAttributes = [
+  | @as("ObjectSize") #ObjectSize
+  | @as("StorageClass") #StorageClass
+  | @as("ObjectParts") #ObjectParts
+  | @as("Checksum") #Checksum
+  | @as("ETag") #ETag
 ]
 @ocaml.doc("<p>An optional unique identifier for configurations in a notification configuration. If you
          don't provide one, Amazon S3 will assign an ID.</p>")
@@ -200,6 +221,7 @@ type isPublic = bool
 type isLatest = bool
 type isEnabled = bool
 type inventoryOptionalField = [
+  | @as("ChecksumAlgorithm") #ChecksumAlgorithm
   | @as("BucketKeyStatus") #BucketKeyStatus
   | @as("IntelligentTieringAccessTier") #IntelligentTieringAccessTier
   | @as("ObjectLockLegalHoldStatus") #ObjectLockLegalHoldStatus
@@ -252,8 +274,20 @@ type expiredObjectDeleteMarker = bool
 type expirationStatus = [@as("Disabled") #Disabled | @as("Enabled") #Enabled]
 type expiration = string
 type existingObjectReplicationStatus = [@as("Disabled") #Disabled | @as("Enabled") #Enabled]
+@ocaml.doc("<p>A container for specifying the configuration for Amazon EventBridge.</p>")
+type eventBridgeConfiguration = {.}
 @ocaml.doc("<p>The bucket event for which to send notifications.</p>")
 type event = [
+  | @as("s3:ObjectTagging:Delete") #S3_ObjectTagging_Delete
+  | @as("s3:ObjectTagging:Put") #S3_ObjectTagging_Put
+  | @as("s3:ObjectTagging:*") #S3_ObjectTagging_Star
+  | @as("s3:LifecycleExpiration:DeleteMarkerCreated") #S3_LifecycleExpiration_DeleteMarkerCreated
+  | @as("s3:LifecycleExpiration:Delete") #S3_LifecycleExpiration_Delete
+  | @as("s3:LifecycleExpiration:*") #S3_LifecycleExpiration_Star
+  | @as("s3:ObjectAcl:Put") #S3_ObjectAcl_Put
+  | @as("s3:IntelligentTiering") #S3_IntelligentTiering
+  | @as("s3:LifecycleTransition") #S3_LifecycleTransition
+  | @as("s3:ObjectRestore:Delete") #S3_ObjectRestore_Delete
   | @as("s3:Replication:OperationReplicatedAfterThreshold")
   #S3_Replication_OperationReplicatedAfterThreshold
   | @as("s3:Replication:OperationMissedThreshold") #S3_Replication_OperationMissedThreshold
@@ -278,7 +312,7 @@ type errorCode = string
 @ocaml.doc("<p>A message that indicates the request is complete and no more messages will be sent. You
          should not assume that the request is complete until the client receives an
             <code>EndEvent</code>.</p>")
-type endEvent = unit
+type endEvent = {.}
 type end = float
 @ocaml.doc("<p>Requests Amazon S3 to encode the object keys in the response and specifies the encoding
          method to use. An object key may contain any Unicode character; however, XML 1.0 parser
@@ -309,7 +343,7 @@ type copySourceIfNoneMatch = string
 type copySourceIfModifiedSince = Js.Date.t
 type copySourceIfMatch = string
 type copySource = string
-@ocaml.doc("<p></p>") type continuationEvent = unit
+@ocaml.doc("<p></p>") type continuationEvent = {.}
 type contentType = string
 type contentRange = string
 type contentMD5 = string
@@ -321,6 +355,17 @@ type confirmRemoveSelfBucketAccess = bool
 type compressionType = [@as("BZIP2") #BZIP2 | @as("GZIP") #GZIP | @as("NONE") #NONE]
 type comments = string
 type code = string
+type checksumSHA256 = string
+type checksumSHA1 = string
+type checksumMode = [@as("ENABLED") #ENABLED]
+type checksumCRC32C = string
+type checksumCRC32 = string
+type checksumAlgorithm = [
+  | @as("SHA256") #SHA256
+  | @as("SHA1") #SHA1
+  | @as("CRC32C") #CRC32C
+  | @as("CRC32") #CRC32
+]
 type cacheControl = string
 type bytesScanned = float
 type bytesReturned = float
@@ -380,6 +425,7 @@ type allowedMethod = string
 type allowedHeader = string
 type allowQuotedRecordDelimiter = bool
 type accountId = string
+type accessPointArn = string
 type acceptRanges = string
 type abortRuleId = string
 type abortDate = Js.Date.t
@@ -442,25 +488,27 @@ type stats = {
   @ocaml.doc("<p>The total number of object bytes scanned.</p>") @as("BytesScanned")
   bytesScanned: option<bytesScanned>,
 }
-@ocaml.doc("<p>A container for filter information for the selection of S3 objects encrypted with AWS
+@ocaml.doc("<p>A container for filter information for the selection of S3 objects encrypted with Amazon Web Services
          KMS.</p>")
 type sseKmsEncryptedObjects = {
   @ocaml.doc("<p>Specifies whether Amazon S3 replicates objects created with server-side encryption using an
-         AWS KMS key stored in AWS Key Management Service.</p>")
+         Amazon Web Services KMS key stored in Amazon Web Services Key Management Service.</p>")
   @as("Status")
   status: sseKmsEncryptedObjectsStatus,
 }
 @ocaml.doc("<p>Describes the default server-side encryption to apply to new objects in the bucket. If a
          PUT Object request doesn't specify any server-side encryption, this default encryption will
-         be applied. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTencryption.html\">PUT Bucket encryption</a> in
+         be applied. If you don't specify a customer managed key at configuration, Amazon S3 automatically creates 
+         an Amazon Web Services KMS key in your Amazon Web Services account the first time that you add an object encrypted with
+         SSE-KMS to a bucket. By default, Amazon S3 uses this KMS key for SSE-KMS. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTencryption.html\">PUT Bucket encryption</a> in
          the <i>Amazon S3 API Reference</i>.</p>")
 type serverSideEncryptionByDefault = {
-  @ocaml.doc("<p>AWS Key Management Service (KMS) customer AWS KMS key ID to use for the default
+  @ocaml.doc("<p>Amazon Web Services Key Management Service (KMS) customer Amazon Web Services KMS key ID to use for the default
         encryption. This parameter is allowed if and only if <code>SSEAlgorithm</code> is set to
         <code>aws:kms</code>.</p>
-         <p>You can specify the key ID or the Amazon Resource Name (ARN) of the KMS key. However, if you
-        are using encryption with cross-account operations, you must use a fully qualified KMS key ARN.
-        For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html#bucket-encryption-update-bucket-policy\">Using encryption for cross-account operations</a>. </p>
+         <p>You can specify the key ID or the Amazon Resource Name (ARN) of the KMS key. However, if
+         you are using encryption with cross-account or Amazon Web Services service operations you must use a fully qualified KMS
+         key ARN. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html#bucket-encryption-update-bucket-policy\">Using encryption for cross-account operations</a>. </p>
          <p>
             <b>For example:</b>
          </p>
@@ -478,7 +526,7 @@ type serverSideEncryptionByDefault = {
          <important>
             <p>Amazon S3 only supports symmetric KMS keys and not asymmetric KMS keys. For more information, see
            <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html\">Using symmetric and
-           asymmetric keys</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>
+           asymmetric keys</a> in the <i>Amazon Web Services Key Management Service Developer Guide</i>.</p>
          </important>")
   @as("KMSMasterKeyID")
   kmsmasterKeyID: option<ssekmskeyId>,
@@ -500,8 +548,8 @@ type scanRange = {
   @as("End")
   end: option<end>,
   @ocaml.doc("<p>Specifies the start of the byte range. This parameter is optional. Valid values:
-         non-negative integers. The default value is 0. If only start is supplied, it means scan
-         from that point to the end of the file.For example;
+         non-negative integers. The default value is 0. If only <code>start</code> is supplied, it
+         means scan from that point to the end of the file. For example,
             <code><scanrange><start>50</start></scanrange></code> means scan
          from byte 50 until the end of the file.</p>")
   @as("Start")
@@ -509,8 +557,8 @@ type scanRange = {
 }
 @ocaml.doc("<p>Specifies the use of SSE-KMS to encrypt delivered inventory reports.</p>")
 type ssekms = {
-  @ocaml.doc("<p>Specifies the ID of the AWS Key Management Service (AWS KMS) symmetric customer managed
-         customer master key (CMK) to use for encrypting inventory reports.</p>")
+  @ocaml.doc("<p>Specifies the ID of the Amazon Web Services Key Management Service (Amazon Web Services KMS) symmetric customer managed key
+         to use for encrypting inventory reports.</p>")
   @as("KeyId")
   keyId: ssekmskeyId,
 }
@@ -531,7 +579,7 @@ type requestPaymentConfiguration = {
             <code>EventThreshold</code>. </p>")
 type replicationTimeValue = {
   @ocaml.doc("<p> Contains an integer specifying time in minutes. </p>
-         <p> Valid values: 15 minutes. </p>")
+         <p> Valid value: 15</p>")
   @as("Minutes")
   minutes: option<minutes>,
 }
@@ -606,7 +654,7 @@ type recordsEvent = {
          considers a bucket or object public, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status\">The Meaning of \"Public\"</a> in the <i>Amazon S3 User Guide</i>. </p>")
 type publicAccessBlockConfiguration = {
   @ocaml.doc("<p>Specifies whether Amazon S3 should restrict public bucket policies for this bucket. Setting
-         this element to <code>TRUE</code> restricts access to this bucket to only AWS service
+         this element to <code>TRUE</code> restricts access to this bucket to only Amazon Web Service
          principals and authorized users within this account if the bucket has a public
          policy.</p>
          <p>Enabling this setting doesn't affect previously stored bucket policies, except that
@@ -632,7 +680,7 @@ type publicAccessBlockConfiguration = {
          behavior:</p>
          <ul>
             <li>
-               <p>PUT Bucket acl and PUT Object acl calls fail if the specified ACL is
+               <p>PUT Bucket ACL and PUT Object ACL calls fail if the specified ACL is
                public.</p>
             </li>
             <li>
@@ -666,6 +714,30 @@ type policyStatus = {
 }
 @ocaml.doc("<p>Container for elements related to a part.</p>")
 type part = {
+  @ocaml.doc("<p>This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
+    This header specifies the base64-encoded, 256-bit SHA-256 digest of the object. For more information, see
+    <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the
+    <i>Amazon S3 User Guide</i>.</p>")
+  @as("ChecksumSHA256")
+  checksumSHA256: option<checksumSHA256>,
+  @ocaml.doc("<p>The base64-encoded, 160-bit SHA-1 digest of the object. This will only be present if it was uploaded
+    with the object. With multipart uploads, this may not be a checksum value of the object. For more information about how checksums are calculated
+    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">
+    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>")
+  @as("ChecksumSHA1")
+  checksumSHA1: option<checksumSHA1>,
+  @ocaml.doc("<p>The base64-encoded, 32-bit CRC32C checksum of the object. This will only be present if it was uploaded
+    with the object. With multipart uploads, this may not be a checksum value of the object. For more information about how checksums are calculated
+    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">
+    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>")
+  @as("ChecksumCRC32C")
+  checksumCRC32C: option<checksumCRC32C>,
+  @ocaml.doc("<p>This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
+    This header specifies the base64-encoded, 32-bit CRC32 checksum of the object. For more information, see
+    <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the
+    <i>Amazon S3 User Guide</i>.</p>")
+  @as("ChecksumCRC32")
+  checksumCRC32: option<checksumCRC32>,
   @ocaml.doc("<p>Size in bytes of the uploaded part data.</p>") @as("Size") size: option<size>,
   @ocaml.doc("<p>Entity tag returned when the part was uploaded.</p>") @as("ETag")
   etag: option<etag>,
@@ -684,6 +756,38 @@ type owner = {
   @ocaml.doc("<p>Container for the display name of the owner.</p>") @as("DisplayName")
   displayName: option<displayName>,
 }
+@ocaml.doc("<p>A container for elements related to an individual part.</p>")
+type objectPart = {
+  @ocaml.doc("<p>The base64-encoded, 256-bit SHA-256 digest of the object. This will only be present if it was uploaded
+    with the object. With multipart uploads, this may not be a checksum value of the object. For more information about how checksums are calculated
+    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">
+    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>")
+  @as("ChecksumSHA256")
+  checksumSHA256: option<checksumSHA256>,
+  @ocaml.doc("<p>The base64-encoded, 160-bit SHA-1 digest of the object. This will only be present if it was uploaded
+    with the object. With multipart uploads, this may not be a checksum value of the object. For more information about how checksums are calculated
+    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">
+    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>")
+  @as("ChecksumSHA1")
+  checksumSHA1: option<checksumSHA1>,
+  @ocaml.doc("<p>The base64-encoded, 32-bit CRC32C checksum of the object. This will only be present if it was uploaded
+    with the object. With multipart uploads, this may not be a checksum value of the object. For more information about how checksums are calculated
+    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">
+    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>")
+  @as("ChecksumCRC32C")
+  checksumCRC32C: option<checksumCRC32C>,
+  @ocaml.doc("<p>This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
+    This header specifies the base64-encoded, 32-bit CRC32 checksum of the object. For more information, see
+    <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the
+    <i>Amazon S3 User Guide</i>.</p>")
+  @as("ChecksumCRC32")
+  checksumCRC32: option<checksumCRC32>,
+  @ocaml.doc("<p>The size of the uploaded part in bytes.</p>") @as("Size") size: option<size>,
+  @ocaml.doc("<p>The part number identifying the part. This value is a positive integer between 1 and
+         10,000.</p>")
+  @as("PartNumber")
+  partNumber: option<partNumber>,
+}
 @ocaml.doc("<p>A Retention configuration for an object.</p>")
 type objectLockRetention = {
   @ocaml.doc("<p>The date on which this Object Lock Retention will expire.</p>")
@@ -692,9 +796,9 @@ type objectLockRetention = {
   @ocaml.doc("<p>Indicates the Retention mode for the specified object.</p>") @as("Mode")
   mode: option<objectLockRetentionMode>,
 }
-@ocaml.doc("<p>A Legal Hold configuration for an object.</p>")
+@ocaml.doc("<p>A legal hold configuration for an object.</p>")
 type objectLockLegalHold = {
-  @ocaml.doc("<p>Indicates whether the specified object has a Legal Hold in place.</p>")
+  @ocaml.doc("<p>Indicates whether the specified object has a legal hold in place.</p>")
   @as("Status")
   status: option<objectLockLegalHoldStatus>,
 }
@@ -711,15 +815,22 @@ type objectIdentifier = {
   @as("Key")
   key: objectKey,
 }
+type objectAttributesList = array<objectAttributes>
 @ocaml.doc("<p>Container for the transition rule that describes when noncurrent objects transition to
          the <code>STANDARD_IA</code>, <code>ONEZONE_IA</code>, <code>INTELLIGENT_TIERING</code>,
-            <code>GLACIER</code>, or <code>DEEP_ARCHIVE</code> storage class. If your bucket is
+          <code>GLACIER_IR</code>, <code>GLACIER</code>, or <code>DEEP_ARCHIVE</code> storage class. If your bucket is
          versioning-enabled (or versioning is suspended), you can set this action to request that
          Amazon S3 transition noncurrent object versions to the <code>STANDARD_IA</code>,
-            <code>ONEZONE_IA</code>, <code>INTELLIGENT_TIERING</code>, <code>GLACIER</code>, or
+            <code>ONEZONE_IA</code>, <code>INTELLIGENT_TIERING</code>, <code>GLACIER_IR</code>, <code>GLACIER</code>, or
             <code>DEEP_ARCHIVE</code> storage class at a specific period in the object's
          lifetime.</p>")
 type noncurrentVersionTransition = {
+  @ocaml.doc("<p>Specifies how many noncurrent versions Amazon S3 will retain. If there are this many more recent
+         noncurrent versions, Amazon S3 will take the associated action. For more information about noncurrent
+         versions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/intro-lifecycle-rules.html\">Lifecycle configuration elements</a>
+         in the <i>Amazon S3 User Guide</i>.</p>")
+  @as("NewerNoncurrentVersions")
+  newerNoncurrentVersions: option<versionCount>,
   @ocaml.doc("<p>The class of storage used to store the object.</p>") @as("StorageClass")
   storageClass: option<transitionStorageClass>,
   @ocaml.doc("<p>Specifies the number of days an object is noncurrent before Amazon S3 can perform the
@@ -734,6 +845,12 @@ type noncurrentVersionTransition = {
          bucket that has versioning enabled (or suspended) to request that Amazon S3 delete noncurrent
          object versions at a specific period in the object's lifetime.</p>")
 type noncurrentVersionExpiration = {
+  @ocaml.doc("<p>Specifies how many noncurrent versions Amazon S3 will retain. If there are this many more recent
+         noncurrent versions, Amazon S3 will take the associated action. For more information about noncurrent
+         versions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/intro-lifecycle-rules.html\">Lifecycle configuration elements</a>
+         in the <i>Amazon S3 User Guide</i>.</p>")
+  @as("NewerNoncurrentVersions")
+  newerNoncurrentVersions: option<versionCount>,
   @ocaml.doc("<p>Specifies the number of days an object is noncurrent before Amazon S3 can perform the
          associated action. For information about the noncurrent days calculations, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#non-current-days-calculations\">How
             Amazon S3 Calculates When an Object Became Noncurrent</a> in the <i>Amazon S3 User Guide</i>.</p>")
@@ -790,7 +907,7 @@ type inventoryFilter = {
 @ocaml.doc("<p>Container element that identifies who initiated the multipart upload. </p>")
 type initiator = {
   @ocaml.doc("<p>Name of the Principal.</p>") @as("DisplayName") displayName: option<displayName>,
-  @ocaml.doc("<p>If the principal is an AWS account, it provides the Canonical User ID. If the principal
+  @ocaml.doc("<p>If the principal is an Amazon Web Services account, it provides the Canonical User ID. If the principal
          is an IAM User, it provides a user ARN value.</p>")
   @as("ID")
   id: option<id>,
@@ -816,7 +933,7 @@ type grantee = {
   @ocaml.doc("<p>The canonical user ID of the grantee.</p>") @as("ID") id: option<id>,
   @ocaml.doc("<p>Email address of the grantee.</p>
          <note>
-            <p>Using email addresses to specify a grantee is only supported in the following AWS Regions: </p> 
+            <p>Using email addresses to specify a grantee is only supported in the following Amazon Web Services Regions: </p> 
             <ul>
                <li>
                   <p>US East (N. Virginia)</p>
@@ -843,7 +960,7 @@ type grantee = {
                   <p>South America (São Paulo)</p>
                </li>
             </ul> 
-            <p>For a list of all the Amazon S3 supported Regions and endpoints, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region\">Regions and Endpoints</a> in the AWS General Reference.</p>
+            <p>For a list of all the Amazon S3 supported Regions and endpoints, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region\">Regions and Endpoints</a> in the Amazon Web Services General Reference.</p>
          </note>")
   @as("EmailAddress")
   emailAddress: option<emailAddress>,
@@ -929,8 +1046,8 @@ type error = {
                   </li>
                   <li>
                      <p>
-                        <i>Description:</i> There is a problem with your AWS account
-                     that prevents the action from completing successfully. Contact AWS Support
+                        <i>Description:</i> There is a problem with your Amazon Web Services account
+                     that prevents the action from completing successfully. Contact Amazon Web Services Support
                      for further assistance.</p>
                   </li>
                   <li>
@@ -952,7 +1069,7 @@ type error = {
                   <li>
                      <p>
                         <i>Description:</i> All access to this Amazon S3 resource has been
-                     disabled. Contact AWS Support for further assistance.</p>
+                     disabled. Contact Amazon Web Services Support for further assistance.</p>
                   </li>
                   <li>
                      <p>
@@ -1058,7 +1175,7 @@ type error = {
                   <li>
                      <p>
                         <i>Description:</i> The bucket you tried to create already
-                     exists, and you own it. Amazon S3 returns this error in all AWS Regions except in
+                     exists, and you own it. Amazon S3 returns this error in all Amazon Web Services Regions except in
                      the North Virginia Region. For legacy compatibility, if you re-create an
                      existing bucket that you already own in the North Virginia Region, Amazon S3 returns
                      200 OK and resets the bucket access control lists (ACLs).</p>
@@ -1313,7 +1430,7 @@ type error = {
                   </li>
                   <li>
                      <p>
-                        <i>Description:</i> The AWS access key ID you provided does
+                        <i>Description:</i> The Amazon Web Services access key ID you provided does
                      not exist in our records.</p>
                   </li>
                   <li>
@@ -1545,7 +1662,7 @@ type error = {
                   <li>
                      <p>
                         <i>Description:</i> All access to this object has been
-                     disabled. Please contact AWS Support for further assistance.</p>
+                     disabled. Please contact Amazon Web Services Support for further assistance.</p>
                   </li>
                   <li>
                      <p>
@@ -1608,7 +1725,7 @@ type error = {
                   </li>
                   <li>
                      <p>
-                        <i>Description:</i> Please use AWS4-HMAC-SHA256.</p>
+                        <i>Description:</i> Please use <code>AWS4-HMAC-SHA256</code>.</p>
                   </li>
                   <li>
                      <p>
@@ -1755,7 +1872,7 @@ type error = {
                   <li>
                      <p>
                         <i>Description:</i> Amazon S3 Transfer Acceleration is not
-                     supported on this bucket. Contact AWS Support for more information.</p>
+                     supported on this bucket. Contact Amazon Web Services Support for more information.</p>
                   </li>
                   <li>
                      <p>
@@ -1776,7 +1893,7 @@ type error = {
                   <li>
                      <p>
                         <i>Description:</i> Amazon S3 Transfer Acceleration cannot be
-                     enabled on this bucket. Contact AWS Support for more information.</p>
+                     enabled on this bucket. Contact Amazon Web Services Support for more information.</p>
                   </li>
                   <li>
                      <p>
@@ -2365,7 +2482,8 @@ type error = {
                      <p>
                         <i>Description:</i> Your account is not signed up for the Amazon S3
                      service. You must sign up before you can use Amazon S3. You can sign up at the
-                     following URL: https://aws.amazon.com/s3</p>
+                     following URL: <a href=\"http://aws.amazon.com/s3\">Amazon S3</a>
+                     </p>
                   </li>
                   <li>
                      <p>
@@ -2575,7 +2693,7 @@ type error = {
                   <li>
                      <p>
                         <i>Description:</i> The request signature we calculated does
-                     not match the signature you provided. Check your AWS secret access key and
+                     not match the signature you provided. Check your Amazon Web Services secret access key and
                      signing method. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/RESTAuthentication.html\">REST Authentication</a> and
                         <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/SOAPAuthentication.html\">SOAP Authentication</a>
                      for details.</p>
@@ -2767,11 +2885,11 @@ type error = {
 @ocaml.doc("<p>Specifies encryption-related information for an Amazon S3 bucket that is a destination for
          replicated objects.</p>")
 type encryptionConfiguration = {
-  @ocaml.doc("<p>Specifies the ID (Key ARN or Alias ARN) of the customer managed AWS KMS key
-         stored in AWS Key Management Service (KMS) for the destination bucket. Amazon S3 uses
+  @ocaml.doc("<p>Specifies the ID (Key ARN or Alias ARN) of the customer managed Amazon Web Services KMS key
+         stored in Amazon Web Services Key Management Service (KMS) for the destination bucket. Amazon S3 uses
          this key to encrypt replica objects. Amazon S3 only supports symmetric, customer managed KMS keys.
          For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html\">Using symmetric and
-            asymmetric keys</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>")
+            asymmetric keys</a> in the <i>Amazon Web Services Key Management Service Developer Guide</i>.</p>")
   @as("ReplicaKmsKeyID")
   replicaKmsKeyID: option<replicaKmsKeyID>,
 }
@@ -2782,9 +2900,10 @@ type encryption = {
   @as("KMSContext")
   kmscontext: option<kmscontext>,
   @ocaml.doc("<p>If the encryption type is <code>aws:kms</code>, this optional value specifies the ID of
-         the symmetric customer managed AWS KMS CMK to use for encryption of job results. Amazon S3 only
-         supports symmetric CMKs. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html\">Using symmetric and
-            asymmetric keys</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>")
+         the symmetric customer managed key to use for encryption of job results. Amazon S3 only
+         supports symmetric keys. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html\">Using symmetric and
+            asymmetric keys</a> in the <i>Amazon Web Services Key Management Service Developer
+            Guide</i>.</p>")
   @as("KMSKeyId")
   kmskeyId: option<ssekmskeyId>,
   @ocaml.doc("<p>The server-side encryption algorithm used when storing job results in Amazon S3 (for example,
@@ -2866,17 +2985,65 @@ type createBucketConfiguration = {
 }
 @ocaml.doc("<p>Container for all response elements.</p>")
 type copyPartResult = {
+  @ocaml.doc("<p>The base64-encoded, 256-bit SHA-256 digest of the object. This will only be present if it was uploaded
+    with the object. With multipart uploads, this may not be a checksum value of the object. For more information about how checksums are calculated
+    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">
+    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>")
+  @as("ChecksumSHA256")
+  checksumSHA256: option<checksumSHA256>,
+  @ocaml.doc("<p>The base64-encoded, 160-bit SHA-1 digest of the object. This will only be present if it was uploaded
+    with the object. With multipart uploads, this may not be a checksum value of the object. For more information about how checksums are calculated
+    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">
+    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>")
+  @as("ChecksumSHA1")
+  checksumSHA1: option<checksumSHA1>,
+  @ocaml.doc("<p>The base64-encoded, 32-bit CRC32C checksum of the object. This will only be present if it was uploaded
+    with the object. With multipart uploads, this may not be a checksum value of the object. For more information about how checksums are calculated
+    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">
+    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>")
+  @as("ChecksumCRC32C")
+  checksumCRC32C: option<checksumCRC32C>,
+  @ocaml.doc("<p>The base64-encoded, 32-bit CRC32 checksum of the object. This will only be present if it was uploaded
+    with the object. With multipart uploads, this may not be a checksum value of the object. For more information about how checksums are calculated
+    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">
+    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>")
+  @as("ChecksumCRC32")
+  checksumCRC32: option<checksumCRC32>,
   @ocaml.doc("<p>Date and time at which the object was uploaded.</p>") @as("LastModified")
   lastModified: option<lastModified>,
   @ocaml.doc("<p>Entity tag of the object.</p>") @as("ETag") etag: option<etag>,
 }
 @ocaml.doc("<p>Container for all response elements.</p>")
 type copyObjectResult = {
+  @ocaml.doc("<p>The base64-encoded, 256-bit SHA-256 digest of the object. This will only be present if it was uploaded
+    with the object. With multipart uploads, this may not be a checksum value of the object. For more information about how checksums are calculated
+    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">
+    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>")
+  @as("ChecksumSHA256")
+  checksumSHA256: option<checksumSHA256>,
+  @ocaml.doc("<p>The base64-encoded, 160-bit SHA-1 digest of the object. This will only be present if it was uploaded
+    with the object. With multipart uploads, this may not be a checksum value of the object. For more information about how checksums are calculated
+    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">
+    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>")
+  @as("ChecksumSHA1")
+  checksumSHA1: option<checksumSHA1>,
+  @ocaml.doc("<p>The base64-encoded, 32-bit CRC32C checksum of the object. This will only be present if it was uploaded
+    with the object. With multipart uploads, this may not be a checksum value of the object. For more information about how checksums are calculated
+    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">
+    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>")
+  @as("ChecksumCRC32C")
+  checksumCRC32C: option<checksumCRC32C>,
+  @ocaml.doc("<p>The base64-encoded, 32-bit CRC32 checksum of the object. This will only be present if it was uploaded
+    with the object. With multipart uploads, this may not be a checksum value of the object. For more information about how checksums are calculated
+    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">
+    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>")
+  @as("ChecksumCRC32")
+  checksumCRC32: option<checksumCRC32>,
   @ocaml.doc("<p>Creation date of the object.</p>") @as("LastModified")
   lastModified: option<lastModified>,
-  @ocaml.doc("<p>Returns the ETag of the new object. The ETag reflects only changes to the contents of an
-         object, not its metadata. The source and destination ETag is identical for a successfully
-         copied non-multipart object.</p>")
+  @ocaml.doc(
+    "<p>Returns the ETag of the new object. The ETag reflects only changes to the contents of an object, not its metadata.</p>"
+  )
   @as("ETag")
   etag: option<etag>,
 }
@@ -2914,6 +3081,30 @@ type completedPart = {
          10,000.</p>")
   @as("PartNumber")
   partNumber: option<partNumber>,
+  @ocaml.doc("<p>The base64-encoded, 256-bit SHA-256 digest of the object. This will only be present if it was uploaded
+    with the object. With multipart uploads, this may not be a checksum value of the object. For more information about how checksums are calculated
+    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">
+    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>")
+  @as("ChecksumSHA256")
+  checksumSHA256: option<checksumSHA256>,
+  @ocaml.doc("<p>The base64-encoded, 160-bit SHA-1 digest of the object. This will only be present if it was uploaded
+    with the object. With multipart uploads, this may not be a checksum value of the object. For more information about how checksums are calculated
+    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">
+    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>")
+  @as("ChecksumSHA1")
+  checksumSHA1: option<checksumSHA1>,
+  @ocaml.doc("<p>The base64-encoded, 32-bit CRC32C checksum of the object. This will only be present if it was uploaded
+    with the object. With multipart uploads, this may not be a checksum value of the object. For more information about how checksums are calculated
+    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">
+    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>")
+  @as("ChecksumCRC32C")
+  checksumCRC32C: option<checksumCRC32C>,
+  @ocaml.doc("<p>The base64-encoded, 32-bit CRC32 checksum of the object. This will only be present if it was uploaded
+    with the object. With multipart uploads, this may not be a checksum value of the object. For more information about how checksums are calculated
+    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">
+    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>")
+  @as("ChecksumCRC32")
+  checksumCRC32: option<checksumCRC32>,
   @ocaml.doc("<p>Entity tag returned when the part was uploaded.</p>") @as("ETag")
   etag: option<etag>,
 }
@@ -2924,6 +3115,34 @@ type completedPart = {
 type commonPrefix = {
   @ocaml.doc("<p>Container for the specified common prefix.</p>") @as("Prefix")
   prefix: option<prefix>,
+}
+type checksumAlgorithmList = array<checksumAlgorithm>
+@ocaml.doc("<p>Contains all the possible checksum or digest values for an object.</p>")
+type checksum = {
+  @ocaml.doc("<p>The base64-encoded, 256-bit SHA-256 digest of the object. This will only be present if it was uploaded
+    with the object. With multipart uploads, this may not be a checksum value of the object. For more information about how checksums are calculated
+    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">
+    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>")
+  @as("ChecksumSHA256")
+  checksumSHA256: option<checksumSHA256>,
+  @ocaml.doc("<p>The base64-encoded, 160-bit SHA-1 digest of the object. This will only be present if it was uploaded
+    with the object. With multipart uploads, this may not be a checksum value of the object. For more information about how checksums are calculated
+    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">
+    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>")
+  @as("ChecksumSHA1")
+  checksumSHA1: option<checksumSHA1>,
+  @ocaml.doc("<p>The base64-encoded, 32-bit CRC32C checksum of the object. This will only be present if it was uploaded
+    with the object. With multipart uploads, this may not be a checksum value of the object. For more information about how checksums are calculated
+    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">
+    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>")
+  @as("ChecksumCRC32C")
+  checksumCRC32C: option<checksumCRC32C>,
+  @ocaml.doc("<p>The base64-encoded, 32-bit CRC32 checksum of the object. This will only be present if it was uploaded
+    with the object. With multipart uploads, this may not be a checksum value of the object. For more information about how checksums are calculated
+    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">
+    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>")
+  @as("ChecksumCRC32")
+  checksumCRC32: option<checksumCRC32>,
 }
 @ocaml.doc("<p>Describes how uncompressed comma-separated values (CSV)-formatted results are
          formatted.</p>")
@@ -2986,7 +3205,8 @@ type csvinput = {
   @as("RecordDelimiter")
   recordDelimiter: option<recordDelimiter>,
   @ocaml.doc("<p>A single character used for escaping the quotation mark character inside an already
-         escaped value. For example, the value \"\"\" a , b \"\"\" is parsed as \" a , b \".</p>")
+         escaped value. For example, the value <code>\"\"\" a , b \"\"\"</code> is parsed as <code>\" a , b
+            \"</code>.</p>")
   @as("QuoteEscapeCharacter")
   quoteEscapeCharacter: option<quoteEscapeCharacter>,
   @ocaml.doc("<p>A single character used to indicate that a row should be ignored when the character is
@@ -3016,7 +3236,7 @@ type csvinput = {
   fileHeaderInfo: option<fileHeaderInfo>,
 }
 @ocaml.doc("<p> In terms of implementation, a Bucket is a resource. An Amazon S3 bucket name is globally
-         unique, and the namespace is shared by all AWS accounts. </p>")
+         unique, and the namespace is shared by all Amazon Web Services accounts. </p>")
 type bucket = {
   @ocaml.doc(
     "<p>Date the bucket was created. This date can change when making changes to your bucket, such as editing its bucket policy.</p>"
@@ -3077,7 +3297,10 @@ type abortIncompleteMultipartUpload = {
 type userMetadata = array<metadataEntry>
 type transitionList = array<transition>
 type tieringList = array<tiering>
-@ocaml.doc("<p>Container for granting information.</p>")
+@ocaml.doc("<p>Container for granting information.</p>
+         <p>Buckets that use the bucket owner enforced setting for Object
+         Ownership don't support target grants. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/enable-server-access-logging.html#grant-log-delivery-permissions-general\">Permissions server access log delivery</a> in the
+         <i>Amazon S3 User Guide</i>.</p>")
 type targetGrant = {
   @ocaml.doc("<p>Logging permissions assigned to the grantee for the bucket.</p>") @as("Permission")
   permission: option<bucketLogsPermission>,
@@ -3092,7 +3315,7 @@ type statsEvent = {
 @ocaml.doc("<p>A container that describes additional filters for identifying the source objects that
          you want to replicate. You can choose to enable or disable the replication of these
          objects. Currently, Amazon S3 supports only the filter that you can specify for objects created
-         with server-side encryption using a customer master key (CMK) stored in AWS Key Management
+         with server-side encryption using a customer managed key stored in Amazon Web Services Key Management
          Service (SSE-KMS).</p>")
 type sourceSelectionCriteria = {
   @ocaml.doc("<p>A filter that you can specify for selections for modifications on replicas. Amazon S3 doesn't
@@ -3106,7 +3329,7 @@ type sourceSelectionCriteria = {
          </note>")
   @as("ReplicaModifications")
   replicaModifications: option<replicaModifications>,
-  @ocaml.doc("<p> A container for filter information for the selection of Amazon S3 objects encrypted with AWS
+  @ocaml.doc("<p> A container for filter information for the selection of Amazon S3 objects encrypted with Amazon Web Services
          KMS. If you include <code>SourceSelectionCriteria</code> in the replication configuration,
          this element is required. </p>")
   @as("SseKmsEncryptedObjects")
@@ -3155,6 +3378,7 @@ type replicationTime = {
 type progressEvent = {
   @ocaml.doc("<p>The Progress event details.</p>") @as("Details") details: option<progress>,
 }
+type partsList = array<objectPart>
 type parts = array<part>
 type ownershipControlsRules = array<ownershipControlsRule>
 @ocaml.doc("<p>Describes how results of the Select job are serialized.</p>")
@@ -3178,6 +3402,9 @@ type objectVersion = {
   @ocaml.doc("<p>The class of storage used to store the object.</p>") @as("StorageClass")
   storageClass: option<objectVersionStorageClass>,
   @ocaml.doc("<p>Size in bytes of the object.</p>") @as("Size") size: option<size>,
+  @ocaml.doc("<p>The algorithm that was used to create a checksum of the object.</p>")
+  @as("ChecksumAlgorithm")
+  checksumAlgorithm: option<checksumAlgorithmList>,
   @ocaml.doc("<p>The entity tag is an MD5 hash of that version of the object.</p>") @as("ETag")
   etag: option<etag>,
 }
@@ -3197,6 +3424,9 @@ type object_ = {
   @ocaml.doc("<p>The class of storage used to store the object.</p>") @as("StorageClass")
   storageClass: option<objectStorageClass>,
   @ocaml.doc("<p>Size in bytes of the object</p>") @as("Size") size: option<size>,
+  @ocaml.doc("<p>The algorithm that was used to create a checksum of the object.</p>")
+  @as("ChecksumAlgorithm")
+  checksumAlgorithm: option<checksumAlgorithmList>,
   @ocaml.doc("<p>The entity tag is a hash of the object. The ETag reflects changes only to the contents
          of an object, not its metadata. The ETag may or may not be an MD5 digest of the object
          data. Whether or not it is depends on how the object was created and how it is encrypted as
@@ -3204,12 +3434,12 @@ type object_ = {
          <ul>
             <li>
                <p>Objects created by the PUT Object, POST Object, or Copy operation, or through the
-               AWS Management Console, and are encrypted by SSE-S3 or plaintext, have ETags that are
+               Amazon Web Services Management Console, and are encrypted by SSE-S3 or plaintext, have ETags that are
                an MD5 digest of their object data.</p>
             </li>
             <li>
                <p>Objects created by the PUT Object, POST Object, or Copy operation, or through the
-               AWS Management Console, and are encrypted by SSE-C or SSE-KMS, have ETags that are
+               Amazon Web Services Management Console, and are encrypted by SSE-C or SSE-KMS, have ETags that are
                not an MD5 digest of their object data.</p>
             </li>
             <li>
@@ -3229,6 +3459,9 @@ type object_ = {
 type noncurrentVersionTransitionList = array<noncurrentVersionTransition>
 @ocaml.doc("<p>Container for the <code>MultipartUpload</code> for the Amazon S3 object.</p>")
 type multipartUpload = {
+  @ocaml.doc("<p>The algorithm that was used to create a checksum of the object.</p>")
+  @as("ChecksumAlgorithm")
+  checksumAlgorithm: option<checksumAlgorithm>,
   @ocaml.doc("<p>Identifies who initiated the multipart upload.</p>") @as("Initiator")
   initiator: option<initiator>,
   @ocaml.doc("<p>Specifies the owner of the object that is part of the multipart upload. </p>")
@@ -3449,6 +3682,9 @@ type multipartUploadList = array<multipartUpload>
          The operator must have at least two predicates, and an object must match all of the
          predicates in order for the filter to apply.</p>")
 type metricsAndOperator = {
+  @ocaml.doc("<p>The access point ARN used when evaluating an <code>AND</code> predicate.</p>")
+  @as("AccessPointArn")
+  accessPointArn: option<accessPointArn>,
   @ocaml.doc("<p>The list of tags used when evaluating an AND predicate.</p>") @as("Tags")
   tags: option<tagSet>,
   @ocaml.doc("<p>The prefix used when evaluating an AND predicate.</p>") @as("Prefix")
@@ -3458,6 +3694,10 @@ type metricsAndOperator = {
          predicates. The Lifecycle Rule will apply to any object matching all of the predicates
          configured inside the And operator.</p>")
 type lifecycleRuleAndOperator = {
+  @ocaml.doc("<p>Maximum object size to which the rule applies.</p>") @as("ObjectSizeLessThan")
+  objectSizeLessThan: option<objectSizeLessThanBytes>,
+  @ocaml.doc("<p>Minimum object size to which the rule applies.</p>") @as("ObjectSizeGreaterThan")
+  objectSizeGreaterThan: option<objectSizeGreaterThanBytes>,
   @ocaml.doc("<p>All of these tags must exist in the object's tag set in order for the rule to
          apply.</p>")
   @as("Tags")
@@ -3503,6 +3743,29 @@ type intelligentTieringAndOperator = {
   prefix: option<prefix>,
 }
 type grants = array<grant>
+@ocaml.doc("<p>A collection of parts associated with a multipart upload.</p>")
+type getObjectAttributesParts = {
+  @ocaml.doc("<p>A container for elements related to a particular part. A response can contain zero or
+         more <code>Parts</code> elements.</p>")
+  @as("Parts")
+  parts: option<partsList>,
+  @ocaml.doc("<p>Indicates whether the returned list of parts is truncated. A value of
+            <code>true</code> indicates that the list was truncated. A list can be truncated if the
+         number of parts exceeds the limit returned in the <code>MaxParts</code> element.</p>")
+  @as("IsTruncated")
+  isTruncated: option<isTruncated>,
+  @ocaml.doc("<p>The maximum number of parts allowed in the response.</p>") @as("MaxParts")
+  maxParts: option<maxParts>,
+  @ocaml.doc("<p>When a list is truncated, this element specifies the last part in the list, as well as
+         the value to use for the <code>PartNumberMarker</code> request parameter in a subsequent
+         request.</p>")
+  @as("NextPartNumberMarker")
+  nextPartNumberMarker: option<nextPartNumberMarker>,
+  @ocaml.doc("<p>The marker for the current part.</p>") @as("PartNumberMarker")
+  partNumberMarker: option<partNumberMarker>,
+  @ocaml.doc("<p>The total number of parts.</p>") @as("TotalPartsCount")
+  totalPartsCount: option<partsCount>,
+}
 @ocaml.doc("<p>Specifies information about where to publish analysis or configuration results for an
          Amazon S3 bucket and S3 Replication Time Control (S3 RTC).</p>")
 type destination = {
@@ -3520,9 +3783,9 @@ type destination = {
   @as("EncryptionConfiguration")
   encryptionConfiguration: option<encryptionConfiguration>,
   @ocaml.doc("<p>Specify this only in a cross-account scenario (where source and destination bucket
-         owners are not the same), and you want to change replica ownership to the AWS account that
+         owners are not the same), and you want to change replica ownership to the Amazon Web Services account that
          owns the destination bucket. If this is not specified in the replication configuration, the
-         replicas are owned by same AWS account that owns the source object.</p>")
+         replicas are owned by same Amazon Web Services account that owns the source object.</p>")
   @as("AccessControlTranslation")
   accessControlTranslation: option<accessControlTranslation>,
   @ocaml.doc("<p> The storage class to use when replicating objects, such as S3 Standard or reduced
@@ -3533,7 +3796,7 @@ type destination = {
   @as("StorageClass")
   storageClass: option<storageClass>,
   @ocaml.doc("<p>Destination bucket owner account ID. In a cross-account scenario, if you direct Amazon S3 to
-         change replica ownership to the AWS account that owns the destination bucket by specifying
+         change replica ownership to the Amazon Web Services account that owns the destination bucket by specifying
          the <code>AccessControlTranslation</code> property, this is the account ID of the
          destination bucket owner. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-change-owner.html\">Replication Additional
             Configuration: Changing the Replica Owner</a> in the <i>Amazon S3 User Guide</i>.</p>")
@@ -3556,7 +3819,10 @@ type delete = {
 }
 @ocaml.doc("<p>The container for the completed multipart upload details.</p>")
 type completedMultipartUpload = {
-  @ocaml.doc("<p>Array of CompletedPart data types.</p>") @as("Parts")
+  @ocaml.doc("<p>Array of CompletedPart data types.</p>
+         <p>If you do not supply a valid <code>Part</code> with your request, the service sends back an HTTP
+         400 response.</p>")
+  @as("Parts")
   parts: option<completedPartList>,
 }
 type corsrules = array<corsrule>
@@ -3682,24 +3948,28 @@ module ReplicationRuleFilter = {
             Event Notifications</a> in the <i>Amazon S3 User Guide</i>.</p>")
 type notificationConfigurationFilter = {@as("Key") key: option<s3KeyFilter>}
 @ocaml.doc("<p>Specifies a metrics configuration filter. The metrics configuration only includes
-         objects that meet the filter's criteria. A filter must be a prefix, a tag, or a conjunction
-         (MetricsAndOperator).</p>")
+         objects that meet the filter's criteria. A filter must be a prefix, an object tag, an access point ARN, or a conjunction
+         (MetricsAndOperator). For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketMetricsConfiguration.html\">PutBucketMetricsConfiguration</a>.</p>")
 type metricsFilter = {
   @ocaml.doc("<p>A conjunction (logical AND) of predicates, which is used in evaluating a metrics filter.
          The operator must have at least two predicates, and an object must match all of the
          predicates in order for the filter to apply.</p>")
   @as("And")
   and_: option<metricsAndOperator>,
+  @ocaml.doc("<p>The access point ARN used when evaluating a metrics filter.</p>")
+  @as("AccessPointArn")
+  accessPointArn: option<accessPointArn>,
   @ocaml.doc("<p>The tag used when evaluating a metrics filter.</p>") @as("Tag") tag: option<tag>,
   @ocaml.doc("<p>The prefix used when evaluating a metrics filter.</p>") @as("Prefix")
   prefix: option<prefix>,
 }
 module MetricsFilter = {
-  type t = And(metricsAndOperator) | Tag(tag) | Prefix(prefix)
+  type t = And(metricsAndOperator) | AccessPointArn(accessPointArn) | Tag(tag) | Prefix(prefix)
   exception MetricsFilterUnspecified
   let classify = value =>
     switch value {
     | {and_: Some(x)} => And(x)
+    | {accessPointArn: Some(x)} => AccessPointArn(x)
     | {tag: Some(x)} => Tag(x)
     | {prefix: Some(x)} => Prefix(x)
     | _ => raise(MetricsFilterUnspecified)
@@ -3707,9 +3977,10 @@ module MetricsFilter = {
 
   let make = value =>
     switch value {
-    | And(x) => {and_: Some(x), tag: None, prefix: None}
-    | Tag(x) => {tag: Some(x), and_: None, prefix: None}
-    | Prefix(x) => {prefix: Some(x), and_: None, tag: None}
+    | And(x) => {and_: Some(x), accessPointArn: None, tag: None, prefix: None}
+    | AccessPointArn(x) => {accessPointArn: Some(x), and_: None, tag: None, prefix: None}
+    | Tag(x) => {tag: Some(x), and_: None, accessPointArn: None, prefix: None}
+    | Prefix(x) => {prefix: Some(x), and_: None, accessPointArn: None, tag: None}
     }
 }
 @ocaml.doc("<p>Describes where logs are stored and the prefix that Amazon S3 assigns to all log object keys
@@ -3721,7 +3992,11 @@ type loggingEnabled = {
          bucket.</p>")
   @as("TargetPrefix")
   targetPrefix: targetPrefix,
-  @ocaml.doc("<p>Container for granting information.</p>") @as("TargetGrants")
+  @ocaml.doc("<p>Container for granting information.</p>
+         <p>Buckets that use the bucket owner enforced setting for Object
+            Ownership don't support target grants. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/enable-server-access-logging.html#grant-log-delivery-permissions-general\">Permissions for server access log delivery</a> in the
+            <i>Amazon S3 User Guide</i>.</p>")
+  @as("TargetGrants")
   targetGrants: option<targetGrants>,
   @ocaml.doc("<p>Specifies the bucket where you want Amazon S3 to store server access logs. You can have your
          logs delivered to any bucket that you own, including the same bucket that is being logged.
@@ -3736,6 +4011,10 @@ type loggingEnabled = {
             <code>And</code> specified.</p>")
 type lifecycleRuleFilter = {
   @as("And") and_: option<lifecycleRuleAndOperator>,
+  @ocaml.doc("<p>Maximum object size to which the rule applies.</p>") @as("ObjectSizeLessThan")
+  objectSizeLessThan: option<objectSizeLessThanBytes>,
+  @ocaml.doc("<p>Minimum object size to which the rule applies.</p>") @as("ObjectSizeGreaterThan")
+  objectSizeGreaterThan: option<objectSizeGreaterThanBytes>,
   @ocaml.doc("<p>This tag must exist in the object's tag set in order for the rule to apply.</p>")
   @as("Tag")
   tag: option<tag>,
@@ -3749,11 +4028,18 @@ type lifecycleRuleFilter = {
   prefix: option<prefix>,
 }
 module LifecycleRuleFilter = {
-  type t = And(lifecycleRuleAndOperator) | Tag(tag) | Prefix(prefix)
+  type t =
+    | And(lifecycleRuleAndOperator)
+    | ObjectSizeLessThan(objectSizeLessThanBytes)
+    | ObjectSizeGreaterThan(objectSizeGreaterThanBytes)
+    | Tag(tag)
+    | Prefix(prefix)
   exception LifecycleRuleFilterUnspecified
   let classify = value =>
     switch value {
     | {and_: Some(x)} => And(x)
+    | {objectSizeLessThan: Some(x)} => ObjectSizeLessThan(x)
+    | {objectSizeGreaterThan: Some(x)} => ObjectSizeGreaterThan(x)
     | {tag: Some(x)} => Tag(x)
     | {prefix: Some(x)} => Prefix(x)
     | _ => raise(LifecycleRuleFilterUnspecified)
@@ -3761,9 +4047,41 @@ module LifecycleRuleFilter = {
 
   let make = value =>
     switch value {
-    | And(x) => {and_: Some(x), tag: None, prefix: None}
-    | Tag(x) => {tag: Some(x), and_: None, prefix: None}
-    | Prefix(x) => {prefix: Some(x), and_: None, tag: None}
+    | And(x) => {
+        and_: Some(x),
+        objectSizeLessThan: None,
+        objectSizeGreaterThan: None,
+        tag: None,
+        prefix: None,
+      }
+    | ObjectSizeLessThan(x) => {
+        objectSizeLessThan: Some(x),
+        and_: None,
+        objectSizeGreaterThan: None,
+        tag: None,
+        prefix: None,
+      }
+    | ObjectSizeGreaterThan(x) => {
+        objectSizeGreaterThan: Some(x),
+        and_: None,
+        objectSizeLessThan: None,
+        tag: None,
+        prefix: None,
+      }
+    | Tag(x) => {
+        tag: Some(x),
+        and_: None,
+        objectSizeLessThan: None,
+        objectSizeGreaterThan: None,
+        prefix: None,
+      }
+    | Prefix(x) => {
+        prefix: Some(x),
+        and_: None,
+        objectSizeLessThan: None,
+        objectSizeGreaterThan: None,
+        tag: None,
+      }
     }
 }
 @ocaml.doc("<p>Specifies the inventory configuration for an Amazon S3 bucket.</p>")
@@ -3865,7 +4183,7 @@ type replicationRule = {
   @ocaml.doc("<p>A container that describes additional filters for identifying the source objects that
          you want to replicate. You can choose to enable or disable the replication of these
          objects. Currently, Amazon S3 supports only the filter that you can specify for objects created
-         with server-side encryption using a customer master key (CMK) stored in AWS Key Management
+         with server-side encryption using a customer managed key stored in Amazon Web Services Key Management
          Service (SSE-KMS).</p>")
   @as("SourceSelectionCriteria")
   sourceSelectionCriteria: option<sourceSelectionCriteria>,
@@ -3919,11 +4237,10 @@ type outputLocation = {
          metrics configuration ID) from an Amazon S3 bucket. If you're updating an existing metrics
          configuration, note that this is a full replacement of the existing metrics configuration.
          If you don't include the elements you want to keep, they are erased. For more information,
-         see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTMetricConfiguration.html\"> PUT Bucket
-            metrics</a> in the <i>Amazon S3 API Reference</i>.</p>")
+         see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTMetricConfiguration.html\">PutBucketMetricsConfiguration</a>.</p>")
 type metricsConfiguration = {
   @ocaml.doc("<p>Specifies a metrics configuration filter. The metrics configuration will only include
-         objects that meet the filter's criteria. A filter must be a prefix, a tag, or a conjunction
+         objects that meet the filter's criteria. A filter must be a prefix, an object tag, an access point ARN, or a conjunction
          (MetricsAndOperator).</p>")
   @as("Filter")
   filter: option<metricsFilter>,
@@ -3950,9 +4267,9 @@ type lifecycleRule = {
   @as("Status")
   status: expirationStatus,
   @ocaml.doc("<p>The <code>Filter</code> is used to identify objects that a Lifecycle Rule applies to. A
-         <code>Filter</code> must have exactly one of <code>Prefix</code>, <code>Tag</code>, or
-         <code>And</code> specified. <code>Filter</code> is required if the <code>LifecycleRule</code>
-         does not containt a <code>Prefix</code> element.</p>")
+            <code>Filter</code> must have exactly one of <code>Prefix</code>, <code>Tag</code>, or
+            <code>And</code> specified. <code>Filter</code> is required if the
+            <code>LifecycleRule</code> does not contain a <code>Prefix</code> element.</p>")
   @as("Filter")
   filter: option<lifecycleRuleFilter>,
   @ocaml.doc("<p>Prefix identifying one or more objects to which the rule applies. This is
@@ -3974,15 +4291,15 @@ type lifecycleRule = {
   @as("Expiration")
   expiration: option<lifecycleExpiration>,
 }
-@ocaml.doc("<p>A container for specifying the configuration for AWS Lambda notifications.</p>")
+@ocaml.doc("<p>A container for specifying the configuration for Lambda notifications.</p>")
 type lambdaFunctionConfiguration = {
   @as("Filter") filter: option<notificationConfigurationFilter>,
-  @ocaml.doc("<p>The Amazon S3 bucket event for which to invoke the AWS Lambda function. For more information,
+  @ocaml.doc("<p>The Amazon S3 bucket event for which to invoke the Lambda function. For more information,
          see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html\">Supported
             Event Types</a> in the <i>Amazon S3 User Guide</i>.</p>")
   @as("Events")
   events: eventList,
-  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the AWS Lambda function that Amazon S3 invokes when the
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the Lambda function that Amazon S3 invokes when the
          specified event type occurs.</p>")
   @as("LambdaFunctionArn")
   lambdaFunctionArn: lambdaFunctionArn,
@@ -4092,7 +4409,7 @@ type replicationConfiguration = {
          least one rule and can contain a maximum of 1,000 rules. </p>")
   @as("Rules")
   rules: replicationRules,
-  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role that
          Amazon S3 assumes when replicating objects. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-how-setup.html\">How to Set Up
             Replication</a> in the <i>Amazon S3 User Guide</i>.</p>")
   @as("Role")
@@ -4101,7 +4418,10 @@ type replicationConfiguration = {
 @ocaml.doc("<p>A container for specifying the notification configuration of the bucket. If this element
          is empty, notifications are turned off for the bucket.</p>")
 type notificationConfiguration = {
-  @ocaml.doc("<p>Describes the AWS Lambda functions to invoke and the events for which to invoke
+  @ocaml.doc("<p>Enables delivery of events to Amazon EventBridge.</p>")
+  @as("EventBridgeConfiguration")
+  eventBridgeConfiguration: option<eventBridgeConfiguration>,
+  @ocaml.doc("<p>Describes the Lambda functions to invoke and the events for which to invoke
          them.</p>")
   @as("LambdaFunctionConfigurations")
   lambdaFunctionConfigurations: option<lambdaFunctionConfigurationList>,
@@ -4126,7 +4446,7 @@ module UploadPart = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
@@ -4156,6 +4476,41 @@ module UploadPart = {
     partNumber: partNumber,
     @ocaml.doc("<p>Object key for which the multipart upload was initiated.</p>") @as("Key")
     key: objectKey,
+    @ocaml.doc("<p>This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
+    This header specifies the base64-encoded, 256-bit SHA-256 digest of the object. For more information, see
+    <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the
+    <i>Amazon S3 User Guide</i>.</p>")
+    @as("ChecksumSHA256")
+    checksumSHA256: option<checksumSHA256>,
+    @ocaml.doc("<p>This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
+    This header specifies the base64-encoded, 160-bit SHA-1 digest of the object. For more information, see
+    <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the
+    <i>Amazon S3 User Guide</i>.</p>")
+    @as("ChecksumSHA1")
+    checksumSHA1: option<checksumSHA1>,
+    @ocaml.doc("<p>This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
+    This header specifies the base64-encoded, 32-bit CRC32C checksum of the object. For more information, see
+    <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the
+    <i>Amazon S3 User Guide</i>.</p>")
+    @as("ChecksumCRC32C")
+    checksumCRC32C: option<checksumCRC32C>,
+    @ocaml.doc("<p>This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
+    This header specifies the base64-encoded, 32-bit CRC32 checksum of the object. For more information, see
+    <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the
+    <i>Amazon S3 User Guide</i>.</p>")
+    @as("ChecksumCRC32")
+    checksumCRC32: option<checksumCRC32>,
+    @ocaml.doc("<p>Indicates the algorithm used to create the checksum for the object when using the SDK. This header will not provide any
+    additional functionality if not using the SDK. When sending this header, there must be a corresponding <code>x-amz-checksum</code> or
+    <code>x-amz-trailer</code> header sent. Otherwise, Amazon S3 fails the request with the HTTP status code <code>400 Bad Request</code>. For more
+    information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in
+    the <i>Amazon S3 User Guide</i>.</p>
+        <p>If you provide an individual checksum, Amazon S3 ignores any provided
+            <code>ChecksumAlgorithm</code> parameter.</p>
+        <p>This checksum algorithm must be the same for all parts and it match the checksum
+            value supplied in the <code>CreateMultipartUpload</code> request.</p>")
+    @as("ChecksumAlgorithm")
+    checksumAlgorithm: option<checksumAlgorithm>,
     @ocaml.doc("<p>The base64-encoded 128-bit MD5 digest of the part data. This parameter is auto-populated
          when using the command from the CLI. This parameter is required if object lock parameters
          are specified.</p>")
@@ -4166,8 +4521,9 @@ module UploadPart = {
     @as("ContentLength")
     contentLength: option<contentLength>,
     @ocaml.doc("<p>The name of the bucket to which the multipart upload was initiated.</p>
-         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>
-         <p>When using this action with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com. When using this action using S3 on Outposts through the AWS SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>")
+         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the Amazon Web Services SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>
+         <p>When using this action with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <code>
+               <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com</code>. When using this action with S3 on Outposts through the Amazon Web Services SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>")
     @as("Bucket")
     bucket: bucketName,
     @ocaml.doc("<p>Object data.</p>") @as("Body") body: option<streamingBlob>,
@@ -4175,12 +4531,12 @@ module UploadPart = {
   type response = {
     @as("RequestCharged") requestCharged: option<requestCharged>,
     @ocaml.doc(
-      "<p>Indicates whether the multipart upload uses an S3 Bucket Key for server-side encryption with AWS KMS (SSE-KMS).</p>"
+      "<p>Indicates whether the multipart upload uses an S3 Bucket Key for server-side encryption with Amazon Web Services KMS (SSE-KMS).</p>"
     )
     @as("BucketKeyEnabled")
     bucketKeyEnabled: option<bucketKeyEnabled>,
-    @ocaml.doc("<p>If present, specifies the ID of the AWS Key Management Service (AWS KMS) symmetric
-         customer managed customer master key (CMK) was used for the object.</p>")
+    @ocaml.doc("<p>If present, specifies the ID of the Amazon Web Services Key Management Service (Amazon Web Services KMS) symmetric
+         customer managed key was used for the object.</p>")
     @as("SSEKMSKeyId")
     ssekmskeyId: option<ssekmskeyId>,
     @ocaml.doc("<p>If server-side encryption with a customer-provided encryption key was requested, the
@@ -4192,6 +4548,30 @@ module UploadPart = {
          response will include this header confirming the encryption algorithm used.</p>")
     @as("SSECustomerAlgorithm")
     ssecustomerAlgorithm: option<ssecustomerAlgorithm>,
+    @ocaml.doc("<p>The base64-encoded, 256-bit SHA-256 digest of the object. This will only be present if it was uploaded
+    with the object. With multipart uploads, this may not be a checksum value of the object. For more information about how checksums are calculated
+    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">
+    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>")
+    @as("ChecksumSHA256")
+    checksumSHA256: option<checksumSHA256>,
+    @ocaml.doc("<p>The base64-encoded, 160-bit SHA-1 digest of the object. This will only be present if it was uploaded
+    with the object. With multipart uploads, this may not be a checksum value of the object. For more information about how checksums are calculated
+    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">
+    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>")
+    @as("ChecksumSHA1")
+    checksumSHA1: option<checksumSHA1>,
+    @ocaml.doc("<p>The base64-encoded, 32-bit CRC32C checksum of the object. This will only be present if it was uploaded
+    with the object. With multipart uploads, this may not be a checksum value of the object. For more information about how checksums are calculated
+    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">
+    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>")
+    @as("ChecksumCRC32C")
+    checksumCRC32C: option<checksumCRC32C>,
+    @ocaml.doc("<p>The base64-encoded, 32-bit CRC32 checksum of the object. This will only be present if it was uploaded
+    with the object. With multipart uploads, this may not be a checksum value of the object. For more information about how checksums are calculated
+    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">
+    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>")
+    @as("ChecksumCRC32")
+    checksumCRC32: option<checksumCRC32>,
     @ocaml.doc("<p>Entity tag for the uploaded object.</p>") @as("ETag") etag: option<etag>,
     @ocaml.doc("<p>The server-side encryption algorithm used when storing this object in Amazon S3 (for example,
          AES256, aws:kms).</p>")
@@ -4209,6 +4589,11 @@ module UploadPart = {
     ~ssecustomerKeyMD5=?,
     ~ssecustomerKey=?,
     ~ssecustomerAlgorithm=?,
+    ~checksumSHA256=?,
+    ~checksumSHA1=?,
+    ~checksumCRC32C=?,
+    ~checksumCRC32=?,
+    ~checksumAlgorithm=?,
     ~contentMD5=?,
     ~contentLength=?,
     ~body=?,
@@ -4223,6 +4608,11 @@ module UploadPart = {
       uploadId: uploadId,
       partNumber: partNumber,
       key: key,
+      checksumSHA256: checksumSHA256,
+      checksumSHA1: checksumSHA1,
+      checksumCRC32C: checksumCRC32C,
+      checksumCRC32: checksumCRC32,
+      checksumAlgorithm: checksumAlgorithm,
       contentMD5: contentMD5,
       contentLength: contentLength,
       bucket: bucket,
@@ -4235,7 +4625,7 @@ module PutBucketPolicy = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
@@ -4244,19 +4634,29 @@ module PutBucketPolicy = {
          this bucket policy in the future.</p>")
     @as("ConfirmRemoveSelfBucketAccess")
     confirmRemoveSelfBucketAccess: option<confirmRemoveSelfBucketAccess>,
+    @ocaml.doc("<p>Indicates the algorithm used to create the checksum for the object when using the SDK. This header will not provide any
+    additional functionality if not using the SDK. When sending this header, there must be a corresponding <code>x-amz-checksum</code> or
+    <code>x-amz-trailer</code> header sent. Otherwise, Amazon S3 fails the request with the HTTP status code <code>400 Bad Request</code>. For more
+    information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in
+    the <i>Amazon S3 User Guide</i>.</p>
+        <p>If you provide an individual checksum, Amazon S3 ignores any provided
+            <code>ChecksumAlgorithm</code> parameter.</p>")
+    @as("ChecksumAlgorithm")
+    checksumAlgorithm: option<checksumAlgorithm>,
     @ocaml.doc("<p>The MD5 hash of the request body.</p>
-         <p>For requests made using the AWS Command Line Interface (CLI) or AWS SDKs, this field is calculated automatically.</p>")
+         <p>For requests made using the Amazon Web Services Command Line Interface (CLI) or Amazon Web Services SDKs, this field is calculated automatically.</p>")
     @as("ContentMD5")
     contentMD5: option<contentMD5>,
     @ocaml.doc("<p>The name of the bucket.</p>") @as("Bucket") bucket: bucketName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-s3") @new external new: request => t = "PutBucketPolicyCommand"
   let make = (
     ~policy,
     ~bucket,
     ~expectedBucketOwner=?,
     ~confirmRemoveSelfBucketAccess=?,
+    ~checksumAlgorithm=?,
     ~contentMD5=?,
     (),
   ) =>
@@ -4264,6 +4664,7 @@ module PutBucketPolicy = {
       expectedBucketOwner: expectedBucketOwner,
       policy: policy,
       confirmRemoveSelfBucketAccess: confirmRemoveSelfBucketAccess,
+      checksumAlgorithm: checksumAlgorithm,
       contentMD5: contentMD5,
       bucket: bucket,
     })
@@ -4274,17 +4675,18 @@ module HeadBucket = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
     @ocaml.doc("<p>The bucket name.</p>
-         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>
-         <p>When using this action with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com. When using this action using S3 on Outposts through the AWS SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>")
+         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the Amazon Web Services SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>
+         <p>When using this action with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <code>
+               <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com</code>. When using this action with S3 on Outposts through the Amazon Web Services SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>")
     @as("Bucket")
     bucket: bucketName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-s3") @new external new: request => t = "HeadBucketCommand"
   let make = (~bucket, ~expectedBucketOwner=?, ()) =>
     new({expectedBucketOwner: expectedBucketOwner, bucket: bucket})
@@ -4295,7 +4697,7 @@ module GetObjectTorrent = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
@@ -4328,7 +4730,7 @@ module GetBucketVersioning = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
@@ -4355,7 +4757,7 @@ module GetBucketRequestPayment = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
@@ -4377,7 +4779,7 @@ module GetBucketPolicy = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
@@ -4397,7 +4799,7 @@ module GetBucketLocation = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
@@ -4422,7 +4824,7 @@ module GetBucketAccelerateConfiguration = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
@@ -4445,7 +4847,7 @@ module DeletePublicAccessBlock = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
@@ -4454,7 +4856,7 @@ module DeletePublicAccessBlock = {
     @as("Bucket")
     bucket: bucketName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-s3") @new external new: request => t = "DeletePublicAccessBlockCommand"
   let make = (~bucket, ~expectedBucketOwner=?, ()) =>
     new({expectedBucketOwner: expectedBucketOwner, bucket: bucket})
@@ -4465,7 +4867,7 @@ module DeleteObjectTagging = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
@@ -4478,8 +4880,9 @@ module DeleteObjectTagging = {
     @as("Key")
     key: objectKey,
     @ocaml.doc("<p>The bucket name containing the objects from which to remove the tags. </p>
-         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>
-         <p>When using this action with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com. When using this action using S3 on Outposts through the AWS SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>")
+         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the Amazon Web Services SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>
+         <p>When using this action with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <code>
+               <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com</code>. When using this action with S3 on Outposts through the Amazon Web Services SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>")
     @as("Bucket")
     bucket: bucketName,
   }
@@ -4497,12 +4900,13 @@ module DeleteObject = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
     @ocaml.doc("<p>Indicates whether S3 Object Lock should bypass Governance-mode restrictions to process
-         this operation.</p>")
+         this operation. To use this header, you must have the <code>s3:BypassGovernanceRetention</code>
+         permission.</p>")
     @as("BypassGovernanceRetention")
     bypassGovernanceRetention: option<bypassGovernanceRetention>,
     @as("RequestPayer") requestPayer: option<requestPayer>,
@@ -4516,8 +4920,9 @@ module DeleteObject = {
     mfa: option<mfa>,
     @ocaml.doc("<p>Key name of the object to delete.</p>") @as("Key") key: objectKey,
     @ocaml.doc("<p>The bucket name of the bucket containing the object. </p>
-         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>
-         <p>When using this action with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com. When using this action using S3 on Outposts through the AWS SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>")
+         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the Amazon Web Services SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>
+         <p>When using this action with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <code>
+               <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com</code>. When using this action with S3 on Outposts through the Amazon Web Services SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>")
     @as("Bucket")
     bucket: bucketName,
   }
@@ -4559,7 +4964,7 @@ module DeleteBucketWebsite = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
@@ -4567,7 +4972,7 @@ module DeleteBucketWebsite = {
     @as("Bucket")
     bucket: bucketName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-s3") @new external new: request => t = "DeleteBucketWebsiteCommand"
   let make = (~bucket, ~expectedBucketOwner=?, ()) =>
     new({expectedBucketOwner: expectedBucketOwner, bucket: bucket})
@@ -4578,14 +4983,14 @@ module DeleteBucketTagging = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
     @ocaml.doc("<p>The bucket that has the tag set to be removed.</p>") @as("Bucket")
     bucket: bucketName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-s3") @new external new: request => t = "DeleteBucketTaggingCommand"
   let make = (~bucket, ~expectedBucketOwner=?, ()) =>
     new({expectedBucketOwner: expectedBucketOwner, bucket: bucket})
@@ -4596,13 +5001,13 @@ module DeleteBucketReplication = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
     @ocaml.doc("<p> The bucket name. </p>") @as("Bucket") bucket: bucketName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-s3") @new external new: request => t = "DeleteBucketReplicationCommand"
   let make = (~bucket, ~expectedBucketOwner=?, ()) =>
     new({expectedBucketOwner: expectedBucketOwner, bucket: bucket})
@@ -4613,13 +5018,13 @@ module DeleteBucketPolicy = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
     @ocaml.doc("<p>The bucket name.</p>") @as("Bucket") bucket: bucketName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-s3") @new external new: request => t = "DeleteBucketPolicyCommand"
   let make = (~bucket, ~expectedBucketOwner=?, ()) =>
     new({expectedBucketOwner: expectedBucketOwner, bucket: bucket})
@@ -4630,7 +5035,7 @@ module DeleteBucketOwnershipControls = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
@@ -4640,7 +5045,7 @@ module DeleteBucketOwnershipControls = {
     @as("Bucket")
     bucket: bucketName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "DeleteBucketOwnershipControlsCommand"
   let make = (~bucket, ~expectedBucketOwner=?, ()) =>
@@ -4652,7 +5057,7 @@ module DeleteBucketMetricsConfiguration = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
@@ -4661,7 +5066,7 @@ module DeleteBucketMetricsConfiguration = {
     @as("Bucket")
     bucket: bucketName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "DeleteBucketMetricsConfigurationCommand"
   let make = (~id, ~bucket, ~expectedBucketOwner=?, ()) =>
@@ -4673,14 +5078,14 @@ module DeleteBucketLifecycle = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
     @ocaml.doc("<p>The bucket name of the lifecycle to delete.</p>") @as("Bucket")
     bucket: bucketName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-s3") @new external new: request => t = "DeleteBucketLifecycleCommand"
   let make = (~bucket, ~expectedBucketOwner=?, ()) =>
     new({expectedBucketOwner: expectedBucketOwner, bucket: bucket})
@@ -4691,7 +5096,7 @@ module DeleteBucketInventoryConfiguration = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
@@ -4701,7 +5106,7 @@ module DeleteBucketInventoryConfiguration = {
     @as("Bucket")
     bucket: bucketName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "DeleteBucketInventoryConfigurationCommand"
   let make = (~id, ~bucket, ~expectedBucketOwner=?, ()) =>
@@ -4720,7 +5125,7 @@ module DeleteBucketIntelligentTieringConfiguration = {
     @as("Bucket")
     bucket: bucketName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "DeleteBucketIntelligentTieringConfigurationCommand"
   let make = (~id, ~bucket, ()) => new({id: id, bucket: bucket})
@@ -4731,7 +5136,7 @@ module DeleteBucketEncryption = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
@@ -4740,7 +5145,7 @@ module DeleteBucketEncryption = {
     @as("Bucket")
     bucket: bucketName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-s3") @new external new: request => t = "DeleteBucketEncryptionCommand"
   let make = (~bucket, ~expectedBucketOwner=?, ()) =>
     new({expectedBucketOwner: expectedBucketOwner, bucket: bucket})
@@ -4751,7 +5156,7 @@ module DeleteBucketCors = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
@@ -4761,7 +5166,7 @@ module DeleteBucketCors = {
     @as("Bucket")
     bucket: bucketName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-s3") @new external new: request => t = "DeleteBucketCorsCommand"
   let make = (~bucket, ~expectedBucketOwner=?, ()) =>
     new({expectedBucketOwner: expectedBucketOwner, bucket: bucket})
@@ -4772,7 +5177,7 @@ module DeleteBucketAnalyticsConfiguration = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
@@ -4782,7 +5187,7 @@ module DeleteBucketAnalyticsConfiguration = {
     @as("Bucket")
     bucket: bucketName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "DeleteBucketAnalyticsConfigurationCommand"
   let make = (~id, ~bucket, ~expectedBucketOwner=?, ()) =>
@@ -4794,13 +5199,13 @@ module DeleteBucket = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
     @ocaml.doc("<p>Specifies the bucket being deleted.</p>") @as("Bucket") bucket: bucketName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-s3") @new external new: request => t = "DeleteBucketCommand"
   let make = (~bucket, ~expectedBucketOwner=?, ()) =>
     new({expectedBucketOwner: expectedBucketOwner, bucket: bucket})
@@ -4811,7 +5216,7 @@ module AbortMultipartUpload = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
@@ -4821,8 +5226,9 @@ module AbortMultipartUpload = {
     @ocaml.doc("<p>Key of the object for which the multipart upload was initiated.</p>") @as("Key")
     key: objectKey,
     @ocaml.doc("<p>The bucket name to which the upload was taking place. </p>
-         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>
-         <p>When using this action with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com. When using this action using S3 on Outposts through the AWS SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>")
+         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the Amazon Web Services SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>
+         <p>When using this action with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <code>
+               <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com</code>. When using this action with S3 on Outposts through the Amazon Web Services SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>")
     @as("Bucket")
     bucket: bucketName,
   }
@@ -4843,14 +5249,18 @@ module WriteGetObjectResponse = {
   type t
   type request = {
     @ocaml.doc("<p> Indicates whether the object stored in Amazon S3 uses an S3 bucket key for server-side
-         encryption with AWS KMS (SSE-KMS).</p>")
+         encryption with Amazon Web Services KMS (SSE-KMS).</p>")
     @as("BucketKeyEnabled")
     bucketKeyEnabled: option<bucketKeyEnabled>,
     @ocaml.doc("<p>An ID used to reference a specific version of the object.</p>") @as("VersionId")
     versionId: option<objectVersionId>,
     @ocaml.doc("<p>The number of tags, if any, on the object.</p>") @as("TagCount")
     tagCount: option<tagCount>,
-    @ocaml.doc("<p> The class of storage used to store object in Amazon S3.</p>")
+    @ocaml.doc("<p>Provides storage class information of the object. Amazon S3 returns this header for all
+            objects except for S3 Standard storage class objects.</p>
+        
+        <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html\">Storage
+            Classes</a>.</p>")
     @as("StorageClass")
     storageClass: option<storageClass>,
     @ocaml.doc("<p> 128-bit MD5 digest of customer-provided encryption key used in Amazon S3 to encrypt data
@@ -4860,7 +5270,7 @@ module WriteGetObjectResponse = {
     @as("SSECustomerKeyMD5")
     ssecustomerKeyMD5: option<ssecustomerKeyMD5>,
     @ocaml.doc(
-      "<p> If present, specifies the ID of the AWS Key Management Service (AWS KMS) symmetric customer managed customer master key (CMK) that was used for stored in Amazon S3 object. </p>"
+      "<p> If present, specifies the ID of the Amazon Web Services Key Management Service (Amazon Web Services KMS) symmetric customer managed key that was used for stored in Amazon S3 object. </p>"
     )
     @as("SSEKMSKeyId")
     ssekmskeyId: option<ssekmskeyId>,
@@ -4905,9 +5315,10 @@ module WriteGetObjectResponse = {
     missingMeta: option<missingMeta>,
     @ocaml.doc("<p>The date and time that the object was last modified.</p>") @as("LastModified")
     lastModified: option<lastModified>,
-    @ocaml.doc(
-      "<p>If object stored in Amazon S3 expiration is configured (see PUT Bucket lifecycle) it includes expiry-date and rule-id key-value pairs providing object expiration information. The value of the rule-id is URL encoded. </p>"
-    )
+    @ocaml.doc("<p>If the object expiration is configured (see PUT Bucket lifecycle), the response
+         includes this header. It includes the <code>expiry-date</code> and <code>rule-id</code>
+         key-value pairs that provide the object expiration information. The value of the
+            <code>rule-id</code> is URL-encoded. </p>")
     @as("Expiration")
     expiration: option<expiration>,
     @ocaml.doc("<p>The date and time at which the object is no longer cacheable.</p>")
@@ -4921,6 +5332,51 @@ module WriteGetObjectResponse = {
             (<code>false</code>) a delete marker. </p>")
     @as("DeleteMarker")
     deleteMarker: option<deleteMarker>,
+    @ocaml.doc("<p>This header can be used as a data integrity check to verify that the data received is the
+            same data that was originally sent. This specifies the base64-encoded, 256-bit SHA-256 digest
+            of the object returned by the Object Lambda function. This may not match the checksum for the
+            object stored in Amazon S3. Amazon S3 will perform validation of the checksum values only when the original
+            <code>GetObject</code> request required checksum validation. For more information about checksums, see
+            <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking
+                object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>
+        <p>Only one checksum header can be specified at a time. If you supply multiple
+            checksum headers, this request will fail.</p>")
+    @as("ChecksumSHA256")
+    checksumSHA256: option<checksumSHA256>,
+    @ocaml.doc("<p>This header can be used as a data integrity check to verify that the data received is the
+            same data that was originally sent. This specifies the base64-encoded, 160-bit SHA-1 digest
+            of the object returned by the Object Lambda function. This may not match the checksum for the
+            object stored in Amazon S3. Amazon S3 will perform validation of the checksum values only when the original
+            <code>GetObject</code> request required checksum validation. For more information about checksums, see
+            <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking
+                object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>
+        <p>Only one checksum header can be specified at a time. If you supply multiple
+            checksum headers, this request will fail.</p>")
+    @as("ChecksumSHA1")
+    checksumSHA1: option<checksumSHA1>,
+    @ocaml.doc("<p>This header can be used as a data integrity check to verify that the data received is the
+            same data that was originally sent. This specifies the base64-encoded, 32-bit CRC32C checksum
+            of the object returned by the Object Lambda function. This may not match the checksum for the
+            object stored in Amazon S3. Amazon S3 will perform validation of the checksum values only when the original
+            <code>GetObject</code> request required checksum validation. For more information about checksums, see
+            <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking
+                object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>
+        <p>Only one checksum header can be specified at a time. If you supply multiple
+            checksum headers, this request will fail.</p>")
+    @as("ChecksumCRC32C")
+    checksumCRC32C: option<checksumCRC32C>,
+    @ocaml.doc("<p>This header can be used as a data integrity check to verify that the data received is the
+            same data that was originally sent. This specifies the base64-encoded, 32-bit CRC32 checksum
+            of the object returned by the Object Lambda function. This may not match the checksum for the
+            object stored in Amazon S3. Amazon S3 will perform validation of the checksum values only when the original
+            <code>GetObject</code> request required checksum validation. For more information about checksums, see
+            <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking
+                object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>
+        <p>Only one checksum header can be specified at a time. If you supply multiple
+            checksum headers, this request will fail.</p>
+        <p></p>")
+    @as("ChecksumCRC32")
+    checksumCRC32: option<checksumCRC32>,
     @ocaml.doc("<p>A standard MIME type describing the format of the object data.</p>")
     @as("ContentType")
     contentType: option<contentType>,
@@ -4952,7 +5408,8 @@ module WriteGetObjectResponse = {
     @ocaml.doc("<p>A string that uniquely identifies an error condition. Returned in the <Code> tag
          of the error XML response for a corresponding <code>GetObject</code> call. Cannot be used
          with a successful <code>StatusCode</code> header or when the transformed object is provided
-          in the body. All error codes from S3 are sentence-cased. Regex value is \"^[A-Z][a-zA-Z]+$\".</p>")
+         in the body. All error codes from S3 are sentence-cased. The regular expression (regex)
+         value is <code>\"^[A-Z][a-zA-Z]+$\"</code>.</p>")
     @as("ErrorCode")
     errorCode: option<errorCode>,
     @ocaml.doc("<p>The integer status code for an HTTP response of a corresponding <code>GetObject</code>
@@ -4963,72 +5420,72 @@ module WriteGetObjectResponse = {
          <ul>
             <li>
                    <p>
-                  <i>200 - OK</i>
+                  <code>200 - OK</code>
                </p>
                 </li>
             <li>
                    <p>
-                  <i>206 - Partial Content</i>
+                  <code>206 - Partial Content</code>
                </p>
                 </li>
             <li>
                    <p>
-                  <i>304 - Not Modified</i>
+                  <code>304 - Not Modified</code>
                </p>
                 </li>
             <li>
                    <p>
-                  <i>400 - Bad Request</i>
+                  <code>400 - Bad Request</code>
                    </p>
                 </li>
             <li>
                    <p>
-                  <i>401 - Unauthorized</i>
+                  <code>401 - Unauthorized</code>
                    </p>
                 </li>
             <li>
                    <p>
-                  <i>403 - Forbidden</i>
+                  <code>403 - Forbidden</code>
                    </p>
                 </li>
             <li>
                    <p>
-                  <i>404 - Not Found</i>
+                  <code>404 - Not Found</code>
                    </p>
                 </li>
             <li>
                    <p>
-                  <i>405 - Method Not Allowed</i>
+                  <code>405 - Method Not Allowed</code>
                    </p>
                 </li>
             <li>
                    <p>
-                  <i>409 - Conflict</i>
+                  <code>409 - Conflict</code>
                    </p>
                 </li>
             <li>
                    <p>
-                  <i>411 - Length Required</i>
+                  <code>411 - Length Required</code>
                    </p>
                 </li>
             <li>
                    <p>
-                  <i>412 - Precondition Failed</i>
+                  <code>412 - Precondition Failed</code>
                    </p>
                 </li>
             <li>
                    <p>
-                  <i>416 - Range Not Satisfiable</i>
+                  <code>416 - Range Not Satisfiable</code>
                    </p>
                 </li>
             <li>
                    <p>
-                  <i>500 - Internal Server Error</i>
+                  <code>500 - Internal Server Error</code>
                    </p>
                 </li>
             <li>
                    <p>
-                  <i>503 - Service Unavailable</i>
+                  <code>503 - Service Unavailable</code>
                    </p>
                 </li>
          </ul>")
@@ -5042,7 +5499,7 @@ module WriteGetObjectResponse = {
     @ocaml.doc("<p>Route prefix to the HTTP URL generated.</p>") @as("RequestRoute")
     requestRoute: requestRoute,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-s3") @new external new: request => t = "WriteGetObjectResponseCommand"
   let make = (
     ~requestToken,
@@ -5069,6 +5526,10 @@ module WriteGetObjectResponse = {
     ~expires=?,
     ~etag=?,
     ~deleteMarker=?,
+    ~checksumSHA256=?,
+    ~checksumSHA1=?,
+    ~checksumCRC32C=?,
+    ~checksumCRC32=?,
     ~contentType=?,
     ~contentRange=?,
     ~contentLength=?,
@@ -5106,6 +5567,10 @@ module WriteGetObjectResponse = {
       expires: expires,
       etag: etag,
       deleteMarker: deleteMarker,
+      checksumSHA256: checksumSHA256,
+      checksumSHA1: checksumSHA1,
+      checksumCRC32C: checksumCRC32C,
+      checksumCRC32: checksumCRC32,
       contentType: contentType,
       contentRange: contentRange,
       contentLength: contentLength,
@@ -5128,12 +5593,12 @@ module UploadPartCopy = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The account ID of the expected source bucket owner. If the source bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected source bucket owner. If the source bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedSourceBucketOwner")
     expectedSourceBucketOwner: option<accountId>,
     @ocaml.doc(
-      "<p>The account ID of the expected destination bucket owner. If the destination bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected destination bucket owner. If the destination bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
@@ -5201,19 +5666,18 @@ module UploadPartCopy = {
          formats, depending on whether you want to access the source object through an <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points.html\">access point</a>:</p>
          <ul>
             <li>
-               <p>For objects not accessed through an access point, specify the name of the source
-               bucket and key of the source object, separated by a slash (/). For example, to copy
-               the object <code>reports/january.pdf</code> from the bucket
-                  <code>awsexamplebucket</code>, use
-                  <code>awsexamplebucket/reports/january.pdf</code>. The value must be URL
-               encoded.</p>
+               <p>For objects not accessed through an access point, specify the name of the source bucket
+               and key of the source object, separated by a slash (/). For example, to copy the
+               object <code>reports/january.pdf</code> from the bucket
+               <code>awsexamplebucket</code>, use <code>awsexamplebucket/reports/january.pdf</code>.
+               The value must be URL-encoded.</p>
             </li>
             <li> 
                <p>For objects accessed through access points, specify the Amazon Resource Name (ARN) of the object as accessed through the access point, in the format <code>arn:aws:s3:<Region>:<account-id>:accesspoint/<access-point-name>/object/<key></code>. For example, to copy the object <code>reports/january.pdf</code> through access point <code>my-access-point</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3:us-west-2:123456789012:accesspoint/my-access-point/object/reports/january.pdf</code>. The value must be URL encoded.</p> 
                <note>
-                  <p>Amazon S3 supports copy operations using access points only when the source and destination buckets are in the same AWS Region.</p>
+                  <p>Amazon S3 supports copy operations using access points only when the source and destination buckets are in the same Amazon Web Services Region.</p>
                </note> 
-               <p>Alternatively, for objects accessed through Amazon S3 on Outposts, specify the ARN of the object as accessed in the format <code>arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/object/<key></code>. For example, to copy the object <code>reports/january.pdf</code> through outpost <code>my-outpost</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/object/reports/january.pdf</code>. The value must be URL encoded.  </p> 
+               <p>Alternatively, for objects accessed through Amazon S3 on Outposts, specify the ARN of the object as accessed in the format <code>arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/object/<key></code>. For example, to copy the object <code>reports/january.pdf</code> through outpost <code>my-outpost</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/object/reports/january.pdf</code>. The value must be URL-encoded.  </p> 
             </li>
          </ul>
          <p>To copy a specific version of an object, append <code>?versionId=<version-id></code>
@@ -5224,20 +5688,21 @@ module UploadPartCopy = {
     @as("CopySource")
     copySource: copySource,
     @ocaml.doc("<p>The bucket name.</p>
-         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>
-         <p>When using this action with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com. When using this action using S3 on Outposts through the AWS SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>")
+         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the Amazon Web Services SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>
+         <p>When using this action with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <code>
+               <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com</code>. When using this action with S3 on Outposts through the Amazon Web Services SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>")
     @as("Bucket")
     bucket: bucketName,
   }
   type response = {
     @as("RequestCharged") requestCharged: option<requestCharged>,
     @ocaml.doc(
-      "<p>Indicates whether the multipart upload uses an S3 Bucket Key for server-side encryption with AWS KMS (SSE-KMS).</p>"
+      "<p>Indicates whether the multipart upload uses an S3 Bucket Key for server-side encryption with Amazon Web Services KMS (SSE-KMS).</p>"
     )
     @as("BucketKeyEnabled")
     bucketKeyEnabled: option<bucketKeyEnabled>,
-    @ocaml.doc("<p>If present, specifies the ID of the AWS Key Management Service (AWS KMS) symmetric
-         customer managed customer master key (CMK) that was used for the object.</p>")
+    @ocaml.doc("<p>If present, specifies the ID of the Amazon Web Services Key Management Service (Amazon Web Services KMS) symmetric
+         customer managed key that was used for the object.</p>")
     @as("SSEKMSKeyId")
     ssekmskeyId: option<ssekmskeyId>,
     @ocaml.doc("<p>If server-side encryption with a customer-provided encryption key was requested, the
@@ -5310,18 +5775,27 @@ module UploadPartCopy = {
 module PutPublicAccessBlock = {
   type t
   type request = {
+    @ocaml.doc(
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
+    )
+    @as("ExpectedBucketOwner")
+    expectedBucketOwner: option<accountId>,
     @ocaml.doc("<p>The <code>PublicAccessBlock</code> configuration that you want to apply to this Amazon S3
          bucket. You can enable the configuration options in any combination. For more information
          about when Amazon S3 considers a bucket or object public, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status\">The Meaning of \"Public\"</a> in the <i>Amazon S3 User Guide</i>.</p>")
     @as("PublicAccessBlockConfiguration")
     publicAccessBlockConfiguration: publicAccessBlockConfiguration,
-    @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
-    )
-    @as("ExpectedBucketOwner")
-    expectedBucketOwner: option<accountId>,
+    @ocaml.doc("<p>Indicates the algorithm used to create the checksum for the object when using the SDK. This header will not provide any
+    additional functionality if not using the SDK. When sending this header, there must be a corresponding <code>x-amz-checksum</code> or
+    <code>x-amz-trailer</code> header sent. Otherwise, Amazon S3 fails the request with the HTTP status code <code>400 Bad Request</code>. For more
+    information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in
+    the <i>Amazon S3 User Guide</i>.</p>
+        <p>If you provide an individual checksum, Amazon S3 ignores any provided
+            <code>ChecksumAlgorithm</code> parameter.</p>")
+    @as("ChecksumAlgorithm")
+    checksumAlgorithm: option<checksumAlgorithm>,
     @ocaml.doc("<p>The MD5 hash of the <code>PutPublicAccessBlock</code> request body. </p>
-         <p>For requests made using the AWS Command Line Interface (CLI) or AWS SDKs, this field is calculated automatically.</p>")
+         <p>For requests made using the Amazon Web Services Command Line Interface (CLI) or Amazon Web Services SDKs, this field is calculated automatically.</p>")
     @as("ContentMD5")
     contentMD5: option<contentMD5>,
     @ocaml.doc("<p>The name of the Amazon S3 bucket whose <code>PublicAccessBlock</code> configuration you want
@@ -5329,18 +5803,20 @@ module PutPublicAccessBlock = {
     @as("Bucket")
     bucket: bucketName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-s3") @new external new: request => t = "PutPublicAccessBlockCommand"
   let make = (
     ~publicAccessBlockConfiguration,
     ~bucket,
     ~expectedBucketOwner=?,
+    ~checksumAlgorithm=?,
     ~contentMD5=?,
     (),
   ) =>
     new({
-      publicAccessBlockConfiguration: publicAccessBlockConfiguration,
       expectedBucketOwner: expectedBucketOwner,
+      publicAccessBlockConfiguration: publicAccessBlockConfiguration,
+      checksumAlgorithm: checksumAlgorithm,
       contentMD5: contentMD5,
       bucket: bucket,
     })
@@ -5350,16 +5826,22 @@ module PutPublicAccessBlock = {
 module PutObjectRetention = {
   type t
   type request = {
-    @ocaml.doc("<p>The container element for the Object Retention configuration.</p>")
-    @as("Retention")
-    retention: option<objectLockRetention>,
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
+    @ocaml.doc("<p>Indicates the algorithm used to create the checksum for the object when using the SDK. This header will not provide any
+    additional functionality if not using the SDK. When sending this header, there must be a corresponding <code>x-amz-checksum</code> or
+    <code>x-amz-trailer</code> header sent. Otherwise, Amazon S3 fails the request with the HTTP status code <code>400 Bad Request</code>. For more
+    information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in
+    the <i>Amazon S3 User Guide</i>.</p>
+        <p>If you provide an individual checksum, Amazon S3 ignores any provided
+            <code>ChecksumAlgorithm</code> parameter.</p>")
+    @as("ChecksumAlgorithm")
+    checksumAlgorithm: option<checksumAlgorithm>,
     @ocaml.doc("<p>The MD5 hash for the request body.</p>
-         <p>For requests made using the AWS Command Line Interface (CLI) or AWS SDKs, this field is calculated automatically.</p>")
+         <p>For requests made using the Amazon Web Services Command Line Interface (CLI) or Amazon Web Services SDKs, this field is calculated automatically.</p>")
     @as("ContentMD5")
     contentMD5: option<contentMD5>,
     @ocaml.doc("<p>Indicates whether this action should bypass Governance-mode restrictions.</p>")
@@ -5370,13 +5852,16 @@ module PutObjectRetention = {
     @as("VersionId")
     versionId: option<objectVersionId>,
     @as("RequestPayer") requestPayer: option<requestPayer>,
+    @ocaml.doc("<p>The container element for the Object Retention configuration.</p>")
+    @as("Retention")
+    retention: option<objectLockRetention>,
     @ocaml.doc("<p>The key name for the object that you want to apply this Object Retention configuration
          to.</p>")
     @as("Key")
     key: objectKey,
     @ocaml.doc("<p>The bucket name that contains the object you want to apply this Object Retention
          configuration to. </p>
-         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>")
+         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the Amazon Web Services SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>")
     @as("Bucket")
     bucket: bucketName,
   }
@@ -5385,21 +5870,23 @@ module PutObjectRetention = {
   let make = (
     ~key,
     ~bucket,
-    ~retention=?,
     ~expectedBucketOwner=?,
+    ~checksumAlgorithm=?,
     ~contentMD5=?,
     ~bypassGovernanceRetention=?,
     ~versionId=?,
     ~requestPayer=?,
+    ~retention=?,
     (),
   ) =>
     new({
-      retention: retention,
       expectedBucketOwner: expectedBucketOwner,
+      checksumAlgorithm: checksumAlgorithm,
       contentMD5: contentMD5,
       bypassGovernanceRetention: bypassGovernanceRetention,
       versionId: versionId,
       requestPayer: requestPayer,
+      retention: retention,
       key: key,
       bucket: bucket,
     })
@@ -5409,28 +5896,37 @@ module PutObjectRetention = {
 module PutObjectLegalHold = {
   type t
   type request = {
-    @ocaml.doc("<p>Container element for the Legal Hold configuration you want to apply to the specified
-         object.</p>")
-    @as("LegalHold")
-    legalHold: option<objectLockLegalHold>,
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
+    @ocaml.doc("<p>Indicates the algorithm used to create the checksum for the object when using the SDK. This header will not provide any
+    additional functionality if not using the SDK. When sending this header, there must be a corresponding <code>x-amz-checksum</code> or
+    <code>x-amz-trailer</code> header sent. Otherwise, Amazon S3 fails the request with the HTTP status code <code>400 Bad Request</code>. For more
+    information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in
+    the <i>Amazon S3 User Guide</i>.</p>
+        <p>If you provide an individual checksum, Amazon S3 ignores any provided
+            <code>ChecksumAlgorithm</code> parameter.</p>")
+    @as("ChecksumAlgorithm")
+    checksumAlgorithm: option<checksumAlgorithm>,
     @ocaml.doc("<p>The MD5 hash for the request body.</p>
-         <p>For requests made using the AWS Command Line Interface (CLI) or AWS SDKs, this field is calculated automatically.</p>")
+         <p>For requests made using the Amazon Web Services Command Line Interface (CLI) or Amazon Web Services SDKs, this field is calculated automatically.</p>")
     @as("ContentMD5")
     contentMD5: option<contentMD5>,
-    @ocaml.doc("<p>The version ID of the object that you want to place a Legal Hold on.</p>")
+    @ocaml.doc("<p>The version ID of the object that you want to place a legal hold on.</p>")
     @as("VersionId")
     versionId: option<objectVersionId>,
     @as("RequestPayer") requestPayer: option<requestPayer>,
-    @ocaml.doc("<p>The key name for the object that you want to place a Legal Hold on.</p>")
+    @ocaml.doc("<p>Container element for the legal hold configuration you want to apply to the specified
+         object.</p>")
+    @as("LegalHold")
+    legalHold: option<objectLockLegalHold>,
+    @ocaml.doc("<p>The key name for the object that you want to place a legal hold on.</p>")
     @as("Key")
     key: objectKey,
-    @ocaml.doc("<p>The bucket name containing the object that you want to place a Legal Hold on. </p>
-         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>")
+    @ocaml.doc("<p>The bucket name containing the object that you want to place a legal hold on. </p>
+         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the Amazon Web Services SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>")
     @as("Bucket")
     bucket: bucketName,
   }
@@ -5439,19 +5935,21 @@ module PutObjectLegalHold = {
   let make = (
     ~key,
     ~bucket,
-    ~legalHold=?,
     ~expectedBucketOwner=?,
+    ~checksumAlgorithm=?,
     ~contentMD5=?,
     ~versionId=?,
     ~requestPayer=?,
+    ~legalHold=?,
     (),
   ) =>
     new({
-      legalHold: legalHold,
       expectedBucketOwner: expectedBucketOwner,
+      checksumAlgorithm: checksumAlgorithm,
       contentMD5: contentMD5,
       versionId: versionId,
       requestPayer: requestPayer,
+      legalHold: legalHold,
       key: key,
       bucket: bucket,
     })
@@ -5462,7 +5960,7 @@ module PutObject = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
@@ -5487,17 +5985,17 @@ module PutObject = {
          <p>Specifying this header with a PUT action doesn’t affect bucket-level settings for S3 Bucket Key.</p>")
     @as("BucketKeyEnabled")
     bucketKeyEnabled: option<bucketKeyEnabled>,
-    @ocaml.doc("<p>Specifies the AWS KMS Encryption Context to use for object encryption. The value of this
+    @ocaml.doc("<p>Specifies the Amazon Web Services KMS Encryption Context to use for object encryption. The value of this
          header is a base64-encoded UTF-8 string holding JSON with the encryption context key-value
          pairs.</p>")
     @as("SSEKMSEncryptionContext")
     ssekmsencryptionContext: option<ssekmsencryptionContext>,
     @ocaml.doc("<p>If <code>x-amz-server-side-encryption</code> is present and has the value of
-         <code>aws:kms</code>, this header specifies the ID of the AWS Key Management Service
-         (AWS KMS) symmetrical customer managed customer master key (CMK) that was used for the
+         <code>aws:kms</code>, this header specifies the ID of the Amazon Web Services Key Management Service
+         (Amazon Web Services KMS) symmetrical customer managed key that was used for the
          object. If you specify <code>x-amz-server-side-encryption:aws:kms</code>, but do not
-         provide<code> x-amz-server-side-encryption-aws-kms-key-id</code>, Amazon S3 uses the AWS
-         managed CMK in AWS to protect the data. If the KMS key does not exist in the same account
+         provide<code> x-amz-server-side-encryption-aws-kms-key-id</code>, Amazon S3 uses the Amazon Web Services
+         managed key to protect the data. If the KMS key does not exist in the same account
          issuing the command, you must use the full ARN and not just the ID.
       </p>")
     @as("SSEKMSKeyId")
@@ -5577,6 +6075,39 @@ module PutObject = {
             <a href=\"http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.21\">http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.21</a>.</p>")
     @as("Expires")
     expires: option<expires>,
+    @ocaml.doc("<p>This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
+    This header specifies the base64-encoded, 256-bit SHA-256 digest of the object. For more information, see
+    <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the
+    <i>Amazon S3 User Guide</i>.</p>")
+    @as("ChecksumSHA256")
+    checksumSHA256: option<checksumSHA256>,
+    @ocaml.doc("<p>This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
+    This header specifies the base64-encoded, 160-bit SHA-1 digest of the object. For more information, see
+    <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the
+    <i>Amazon S3 User Guide</i>.</p>")
+    @as("ChecksumSHA1")
+    checksumSHA1: option<checksumSHA1>,
+    @ocaml.doc("<p>This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
+    This header specifies the base64-encoded, 32-bit CRC32C checksum of the object. For more information, see
+    <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the
+    <i>Amazon S3 User Guide</i>.</p>")
+    @as("ChecksumCRC32C")
+    checksumCRC32C: option<checksumCRC32C>,
+    @ocaml.doc("<p>This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
+    This header specifies the base64-encoded, 32-bit CRC32 checksum of the object. For more information, see
+    <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the
+    <i>Amazon S3 User Guide</i>.</p>")
+    @as("ChecksumCRC32")
+    checksumCRC32: option<checksumCRC32>,
+    @ocaml.doc("<p>Indicates the algorithm used to create the checksum for the object when using the SDK. This header will not provide any
+    additional functionality if not using the SDK. When sending this header, there must be a corresponding <code>x-amz-checksum</code> or
+    <code>x-amz-trailer</code> header sent. Otherwise, Amazon S3 fails the request with the HTTP status code <code>400 Bad Request</code>. For more
+    information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in
+    the <i>Amazon S3 User Guide</i>.</p>
+        <p>If you provide an individual checksum, Amazon S3 ignores any provided
+            <code>ChecksumAlgorithm</code> parameter.</p>")
+    @as("ChecksumAlgorithm")
+    checksumAlgorithm: option<checksumAlgorithm>,
     @ocaml.doc("<p>A standard MIME type describing the format of the contents. For more information, see
             <a href=\"http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17\">http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17</a>.</p>")
     @as("ContentType")
@@ -5610,8 +6141,9 @@ module PutObject = {
     @as("CacheControl")
     cacheControl: option<cacheControl>,
     @ocaml.doc("<p>The bucket name to which the PUT action was initiated. </p>
-         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>
-         <p>When using this action with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com. When using this action using S3 on Outposts through the AWS SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>")
+         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the Amazon Web Services SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>
+         <p>When using this action with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <code>
+               <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com</code>. When using this action with S3 on Outposts through the Amazon Web Services SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>")
     @as("Bucket")
     bucket: bucketName,
     @ocaml.doc("<p>Object data.</p>") @as("Body") body: option<streamingBlob>,
@@ -5624,18 +6156,18 @@ module PutObject = {
   type response = {
     @as("RequestCharged") requestCharged: option<requestCharged>,
     @ocaml.doc(
-      "<p>Indicates whether the uploaded object uses an S3 Bucket Key for server-side encryption with AWS KMS (SSE-KMS).</p>"
+      "<p>Indicates whether the uploaded object uses an S3 Bucket Key for server-side encryption with Amazon Web Services KMS (SSE-KMS).</p>"
     )
     @as("BucketKeyEnabled")
     bucketKeyEnabled: option<bucketKeyEnabled>,
-    @ocaml.doc("<p>If present, specifies the AWS KMS Encryption Context to use for object encryption. The
+    @ocaml.doc("<p>If present, specifies the Amazon Web Services KMS Encryption Context to use for object encryption. The
          value of this header is a base64-encoded UTF-8 string holding JSON with the encryption
          context key-value pairs.</p>")
     @as("SSEKMSEncryptionContext")
     ssekmsencryptionContext: option<ssekmsencryptionContext>,
     @ocaml.doc("<p>If <code>x-amz-server-side-encryption</code> is present and has the value of
-            <code>aws:kms</code>, this header specifies the ID of the AWS Key Management Service
-         (AWS KMS) symmetric customer managed customer master key (CMK) that was used for the
+            <code>aws:kms</code>, this header specifies the ID of the Amazon Web Services Key Management Service
+         (Amazon Web Services KMS) symmetric customer managed key that was used for the
          object. </p>")
     @as("SSEKMSKeyId")
     ssekmskeyId: option<ssekmskeyId>,
@@ -5649,15 +6181,40 @@ module PutObject = {
     @as("SSECustomerAlgorithm")
     ssecustomerAlgorithm: option<ssecustomerAlgorithm>,
     @ocaml.doc("<p>Version of the object.</p>") @as("VersionId") versionId: option<objectVersionId>,
-    @ocaml.doc("<p>If you specified server-side encryption either with an AWS KMS customer master key (CMK)
+    @ocaml.doc("<p>If you specified server-side encryption either with an Amazon Web Services KMS key
          or Amazon S3-managed encryption key in your PUT request, the response includes this header. It
          confirms the encryption algorithm that Amazon S3 used to encrypt the object.</p>")
     @as("ServerSideEncryption")
     serverSideEncryption: option<serverSideEncryption>,
+    @ocaml.doc("<p>The base64-encoded, 256-bit SHA-256 digest of the object. This will only be present if it was uploaded
+    with the object. With multipart uploads, this may not be a checksum value of the object. For more information about how checksums are calculated
+    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">
+    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>")
+    @as("ChecksumSHA256")
+    checksumSHA256: option<checksumSHA256>,
+    @ocaml.doc("<p>The base64-encoded, 160-bit SHA-1 digest of the object. This will only be present if it was uploaded
+    with the object. With multipart uploads, this may not be a checksum value of the object. For more information about how checksums are calculated
+    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">
+    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>")
+    @as("ChecksumSHA1")
+    checksumSHA1: option<checksumSHA1>,
+    @ocaml.doc("<p>The base64-encoded, 32-bit CRC32C checksum of the object. This will only be present if it was uploaded
+    with the object. With multipart uploads, this may not be a checksum value of the object. For more information about how checksums are calculated
+    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">
+    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>")
+    @as("ChecksumCRC32C")
+    checksumCRC32C: option<checksumCRC32C>,
+    @ocaml.doc("<p>The base64-encoded, 32-bit CRC32 checksum of the object. This will only be present if it was uploaded
+    with the object. With multipart uploads, this may not be a checksum value of the object. For more information about how checksums are calculated
+    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">
+    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>")
+    @as("ChecksumCRC32")
+    checksumCRC32: option<checksumCRC32>,
     @ocaml.doc("<p>Entity tag for the uploaded object.</p>") @as("ETag") etag: option<etag>,
-    @ocaml.doc("<p> If the expiration is configured for the object (see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLifecycleConfiguration.html\">PutBucketLifecycleConfiguration</a>), the response includes this header. It
-         includes the expiry-date and rule-id key-value pairs that provide information about object
-         expiration. The value of the rule-id is URL encoded.</p>")
+    @ocaml.doc("<p>If the expiration is configured for the object (see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLifecycleConfiguration.html\">PutBucketLifecycleConfiguration</a>), the response includes this header. It
+         includes the <code>expiry-date</code> and <code>rule-id</code> key-value pairs that provide
+         information about object expiration. The value of the <code>rule-id</code> is
+         URL-encoded.</p>")
     @as("Expiration")
     expiration: option<expiration>,
   }
@@ -5686,6 +6243,11 @@ module PutObject = {
     ~grantRead=?,
     ~grantFullControl=?,
     ~expires=?,
+    ~checksumSHA256=?,
+    ~checksumSHA1=?,
+    ~checksumCRC32C=?,
+    ~checksumCRC32=?,
+    ~checksumAlgorithm=?,
     ~contentType=?,
     ~contentMD5=?,
     ~contentLength=?,
@@ -5720,6 +6282,11 @@ module PutObject = {
       grantRead: grantRead,
       grantFullControl: grantFullControl,
       expires: expires,
+      checksumSHA256: checksumSHA256,
+      checksumSHA1: checksumSHA1,
+      checksumCRC32C: checksumCRC32C,
+      checksumCRC32: checksumCRC32,
+      checksumAlgorithm: checksumAlgorithm,
       contentType: contentType,
       contentMD5: contentMD5,
       contentLength: contentLength,
@@ -5737,40 +6304,51 @@ module PutObject = {
 module PutBucketVersioning = {
   type t
   type request = {
-    @ocaml.doc("<p>Container for setting the versioning state.</p>") @as("VersioningConfiguration")
-    versioningConfiguration: versioningConfiguration,
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
+    @ocaml.doc("<p>Container for setting the versioning state.</p>") @as("VersioningConfiguration")
+    versioningConfiguration: versioningConfiguration,
     @ocaml.doc("<p>The concatenation of the authentication device's serial number, a space, and the value
          that is displayed on your authentication device.</p>")
     @as("MFA")
     mfa: option<mfa>,
+    @ocaml.doc("<p>Indicates the algorithm used to create the checksum for the object when using the SDK. This header will not provide any
+    additional functionality if not using the SDK. When sending this header, there must be a corresponding <code>x-amz-checksum</code> or
+    <code>x-amz-trailer</code> header sent. Otherwise, Amazon S3 fails the request with the HTTP status code <code>400 Bad Request</code>. For more
+    information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in
+    the <i>Amazon S3 User Guide</i>.</p>
+        <p>If you provide an individual checksum, Amazon S3 ignores any provided
+            <code>ChecksumAlgorithm</code> parameter.</p>")
+    @as("ChecksumAlgorithm")
+    checksumAlgorithm: option<checksumAlgorithm>,
     @ocaml.doc("<p>>The base64-encoded 128-bit MD5 digest of the data. You must use this header as a
          message integrity check to verify that the request body was not corrupted in transit. For
          more information, see <a href=\"http://www.ietf.org/rfc/rfc1864.txt\">RFC
          1864</a>.</p>
-         <p>For requests made using the AWS Command Line Interface (CLI) or AWS SDKs, this field is calculated automatically.</p>")
+         <p>For requests made using the Amazon Web Services Command Line Interface (CLI) or Amazon Web Services SDKs, this field is calculated automatically.</p>")
     @as("ContentMD5")
     contentMD5: option<contentMD5>,
     @ocaml.doc("<p>The bucket name.</p>") @as("Bucket") bucket: bucketName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-s3") @new external new: request => t = "PutBucketVersioningCommand"
   let make = (
     ~versioningConfiguration,
     ~bucket,
     ~expectedBucketOwner=?,
     ~mfa=?,
+    ~checksumAlgorithm=?,
     ~contentMD5=?,
     (),
   ) =>
     new({
-      versioningConfiguration: versioningConfiguration,
       expectedBucketOwner: expectedBucketOwner,
+      versioningConfiguration: versioningConfiguration,
       mfa: mfa,
+      checksumAlgorithm: checksumAlgorithm,
       contentMD5: contentMD5,
       bucket: bucket,
     })
@@ -5780,28 +6358,45 @@ module PutBucketVersioning = {
 module PutBucketRequestPayment = {
   type t
   type request = {
-    @ocaml.doc("<p>Container for Payer.</p>") @as("RequestPaymentConfiguration")
-    requestPaymentConfiguration: requestPaymentConfiguration,
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
+    @ocaml.doc("<p>Container for Payer.</p>") @as("RequestPaymentConfiguration")
+    requestPaymentConfiguration: requestPaymentConfiguration,
+    @ocaml.doc("<p>Indicates the algorithm used to create the checksum for the object when using the SDK. This header will not provide any
+    additional functionality if not using the SDK. When sending this header, there must be a corresponding <code>x-amz-checksum</code> or
+    <code>x-amz-trailer</code> header sent. Otherwise, Amazon S3 fails the request with the HTTP status code <code>400 Bad Request</code>. For more
+    information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in
+    the <i>Amazon S3 User Guide</i>.</p>
+        <p>If you provide an individual checksum, Amazon S3 ignores any provided
+            <code>ChecksumAlgorithm</code> parameter.</p>")
+    @as("ChecksumAlgorithm")
+    checksumAlgorithm: option<checksumAlgorithm>,
     @ocaml.doc("<p>The base64-encoded 128-bit MD5 digest of the data. You must use this header as a
          message integrity check to verify that the request body was not corrupted in transit. For
          more information, see <a href=\"http://www.ietf.org/rfc/rfc1864.txt\">RFC
          1864</a>.</p>
-         <p>For requests made using the AWS Command Line Interface (CLI) or AWS SDKs, this field is calculated automatically.</p>")
+         <p>For requests made using the Amazon Web Services Command Line Interface (CLI) or Amazon Web Services SDKs, this field is calculated automatically.</p>")
     @as("ContentMD5")
     contentMD5: option<contentMD5>,
     @ocaml.doc("<p>The bucket name.</p>") @as("Bucket") bucket: bucketName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-s3") @new external new: request => t = "PutBucketRequestPaymentCommand"
-  let make = (~requestPaymentConfiguration, ~bucket, ~expectedBucketOwner=?, ~contentMD5=?, ()) =>
+  let make = (
+    ~requestPaymentConfiguration,
+    ~bucket,
+    ~expectedBucketOwner=?,
+    ~checksumAlgorithm=?,
+    ~contentMD5=?,
+    (),
+  ) =>
     new({
-      requestPaymentConfiguration: requestPaymentConfiguration,
       expectedBucketOwner: expectedBucketOwner,
+      requestPaymentConfiguration: requestPaymentConfiguration,
+      checksumAlgorithm: checksumAlgorithm,
       contentMD5: contentMD5,
       bucket: bucket,
     })
@@ -5811,25 +6406,41 @@ module PutBucketRequestPayment = {
 module PutBucketAccelerateConfiguration = {
   type t
   type request = {
-    @ocaml.doc("<p>Container for setting the transfer acceleration state.</p>")
-    @as("AccelerateConfiguration")
-    accelerateConfiguration: accelerateConfiguration,
+    @ocaml.doc("<p>Indicates the algorithm used to create the checksum for the object when using the SDK. This header will not provide any
+    additional functionality if not using the SDK. When sending this header, there must be a corresponding <code>x-amz-checksum</code> or
+    <code>x-amz-trailer</code> header sent. Otherwise, Amazon S3 fails the request with the HTTP status code <code>400 Bad Request</code>. For more
+    information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in
+    the <i>Amazon S3 User Guide</i>.</p>
+        <p>If you provide an individual checksum, Amazon S3 ignores any provided
+            <code>ChecksumAlgorithm</code> parameter.</p>")
+    @as("ChecksumAlgorithm")
+    checksumAlgorithm: option<checksumAlgorithm>,
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
+    @ocaml.doc("<p>Container for setting the transfer acceleration state.</p>")
+    @as("AccelerateConfiguration")
+    accelerateConfiguration: accelerateConfiguration,
     @ocaml.doc("<p>The name of the bucket for which the accelerate configuration is set.</p>")
     @as("Bucket")
     bucket: bucketName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "PutBucketAccelerateConfigurationCommand"
-  let make = (~accelerateConfiguration, ~bucket, ~expectedBucketOwner=?, ()) =>
+  let make = (
+    ~accelerateConfiguration,
+    ~bucket,
+    ~checksumAlgorithm=?,
+    ~expectedBucketOwner=?,
+    (),
+  ) =>
     new({
-      accelerateConfiguration: accelerateConfiguration,
+      checksumAlgorithm: checksumAlgorithm,
       expectedBucketOwner: expectedBucketOwner,
+      accelerateConfiguration: accelerateConfiguration,
       bucket: bucket,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -5838,8 +6449,14 @@ module PutBucketAccelerateConfiguration = {
 module HeadObject = {
   type t
   type request = {
+    @ocaml.doc("<p>To retrieve the checksum, this parameter must be enabled.</p>
+         <p>In addition, if you enable <code>ChecksumMode</code> and the object is encrypted with
+          Amazon Web Services Key Management Service (Amazon Web Services KMS), you must have permission to use the
+          <code>kms:Decrypt</code> action for the request to succeed.</p>")
+    @as("ChecksumMode")
+    checksumMode: option<checksumMode>,
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
@@ -5867,34 +6484,31 @@ module HeadObject = {
     @ocaml.doc("<p>VersionId used to reference a specific version of the object.</p>")
     @as("VersionId")
     versionId: option<objectVersionId>,
-    @ocaml.doc("<p>Downloads the specified range bytes of an object. For more information about the HTTP
-         Range header, see <a href=\"http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35\">http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35</a>.</p>
-         <note>
-            <p>Amazon S3 doesn't support retrieving multiple ranges of data per <code>GET</code>
-            request.</p>
-         </note>")
+    @ocaml.doc("<p>Because <code>HeadObject</code> returns only the metadata for an object, this parameter
+        has no effect.</p>")
     @as("Range")
     range: option<range>,
     @ocaml.doc("<p>The object key.</p>") @as("Key") key: objectKey,
-    @ocaml.doc("<p>Return the object only if it has not been modified since the specified time, otherwise
-         return a 412 (precondition failed).</p>")
+    @ocaml.doc("<p>Return the object only if it has not been modified since the specified time; otherwise,
+         return a 412 (precondition failed) error.</p>")
     @as("IfUnmodifiedSince")
     ifUnmodifiedSince: option<ifUnmodifiedSince>,
-    @ocaml.doc("<p>Return the object only if its entity tag (ETag) is different from the one specified,
-         otherwise return a 304 (not modified).</p>")
+    @ocaml.doc("<p>Return the object only if its entity tag (ETag) is different from the one specified;
+         otherwise, return a 304 (not modified) error.</p>")
     @as("IfNoneMatch")
     ifNoneMatch: option<ifNoneMatch>,
-    @ocaml.doc("<p>Return the object only if it has been modified since the specified time, otherwise
-         return a 304 (not modified).</p>")
+    @ocaml.doc("<p>Return the object only if it has been modified since the specified time; otherwise,
+         return a 304 (not modified) error.</p>")
     @as("IfModifiedSince")
     ifModifiedSince: option<ifModifiedSince>,
-    @ocaml.doc("<p>Return the object only if its entity tag (ETag) is the same as the one specified,
-         otherwise return a 412 (precondition failed).</p>")
+    @ocaml.doc("<p>Return the object only if its entity tag (ETag) is the same as the one specified;
+         otherwise, return a 412 (precondition failed) error.</p>")
     @as("IfMatch")
     ifMatch: option<ifMatch>,
     @ocaml.doc("<p>The name of the bucket containing the object.</p>
-         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>
-         <p>When using this action with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com. When using this action using S3 on Outposts through the AWS SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>")
+         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the Amazon Web Services SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>
+         <p>When using this action with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <code>
+               <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com</code>. When using this action with S3 on Outposts through the Amazon Web Services SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>")
     @as("Bucket")
     bucket: bucketName,
   }
@@ -5915,7 +6529,9 @@ module HeadObject = {
             Lock</a>. </p>")
     @as("ObjectLockMode")
     objectLockMode: option<objectLockMode>,
-    @ocaml.doc("<p>The count of parts this object has.</p>") @as("PartsCount")
+    @ocaml.doc("<p>The count of parts this object has. This value is only returned if you specify <code>partNumber</code>
+           in your request and the object was uploaded as a multipart upload.</p>")
+    @as("PartsCount")
     partsCount: option<partsCount>,
     @ocaml.doc("<p>Amazon S3 can return this header if your request involves a bucket that is either a source or
          a destination in a replication rule.</p>
@@ -5927,7 +6543,8 @@ module HeadObject = {
          as follows:</p>
          <ul>
             <li>
-               <p>If requesting an object from the source bucket — Amazon S3 will return the
+               <p>
+                  <b>If requesting an object from the source bucket</b>, Amazon S3 will return the
                   <code>x-amz-replication-status</code> header if the object in your request is
                eligible for replication.</p>
                <p> For example, suppose that in your replication configuration, you specify object
@@ -5939,13 +6556,15 @@ module HeadObject = {
                FAILED indicating object replication status.</p>
             </li>
             <li>
-               <p>If requesting an object from a destination bucket — Amazon S3 will return the
+               <p>
+                  <b>If requesting an object from a destination bucket</b>, Amazon S3 will return the
                   <code>x-amz-replication-status</code> header with value REPLICA if the object in
                your request is a replica that Amazon S3 created and there is no replica modification
                replication in progress.</p>
             </li>
             <li>
-               <p>When replicating objects to multiple destination buckets the
+               <p>
+                  <b>When replicating objects to multiple destination buckets</b>, the
                   <code>x-amz-replication-status</code> header acts differently. The header of the
                source object will only return a value of COMPLETED when replication is successful to
                all destinations. The header will remain at value PENDING until replication has
@@ -5966,12 +6585,12 @@ module HeadObject = {
     @as("StorageClass")
     storageClass: option<storageClass>,
     @ocaml.doc(
-      "<p>Indicates whether the object uses an S3 Bucket Key for server-side encryption with AWS KMS (SSE-KMS).</p>"
+      "<p>Indicates whether the object uses an S3 Bucket Key for server-side encryption with Amazon Web Services KMS (SSE-KMS).</p>"
     )
     @as("BucketKeyEnabled")
     bucketKeyEnabled: option<bucketKeyEnabled>,
-    @ocaml.doc("<p>If present, specifies the ID of the AWS Key Management Service (AWS KMS) symmetric
-         customer managed customer master key (CMK) that was used for the object.</p>")
+    @ocaml.doc("<p>If present, specifies the ID of the Amazon Web Services Key Management Service (Amazon Web Services KMS) symmetric
+         customer managed key that was used for the object.</p>")
     @as("SSEKMSKeyId")
     ssekmskeyId: option<ssekmskeyId>,
     @ocaml.doc("<p>If server-side encryption with a customer-provided encryption key was requested, the
@@ -5985,8 +6604,8 @@ module HeadObject = {
     ssecustomerAlgorithm: option<ssecustomerAlgorithm>,
     @ocaml.doc("<p>A map of metadata to store with the object in S3.</p>") @as("Metadata")
     metadata: option<metadata>,
-    @ocaml.doc("<p>If the object is stored using server-side encryption either with an AWS KMS customer
-         master key (CMK) or an Amazon S3-managed encryption key, the response includes this header with
+    @ocaml.doc("<p>If the object is stored using server-side encryption either with an Amazon Web Services KMS key or 
+         an Amazon S3-managed encryption key, the response includes this header with
          the value of the server-side encryption algorithm used when storing this object in Amazon
          S3 (for example, AES256, aws:kms).</p>")
     @as("ServerSideEncryption")
@@ -6022,10 +6641,34 @@ module HeadObject = {
          values are not legal HTTP headers.</p>")
     @as("MissingMeta")
     missingMeta: option<missingMeta>,
-    @ocaml.doc("<p>An ETag is an opaque identifier assigned by a web server to a specific version of a
-         resource found at a URL.</p>")
+    @ocaml.doc("<p>An entity tag (ETag) is an opaque identifier assigned by a web server to a specific
+         version of a resource found at a URL.</p>")
     @as("ETag")
     etag: option<etag>,
+    @ocaml.doc("<p>The base64-encoded, 256-bit SHA-256 digest of the object. This will only be present if it was uploaded
+    with the object. With multipart uploads, this may not be a checksum value of the object. For more information about how checksums are calculated
+    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">
+    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>")
+    @as("ChecksumSHA256")
+    checksumSHA256: option<checksumSHA256>,
+    @ocaml.doc("<p>The base64-encoded, 160-bit SHA-1 digest of the object. This will only be present if it was uploaded
+    with the object. With multipart uploads, this may not be a checksum value of the object. For more information about how checksums are calculated
+    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">
+    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>")
+    @as("ChecksumSHA1")
+    checksumSHA1: option<checksumSHA1>,
+    @ocaml.doc("<p>The base64-encoded, 32-bit CRC32C checksum of the object. This will only be present if it was uploaded
+    with the object. With multipart uploads, this may not be a checksum value of the object. For more information about how checksums are calculated
+    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">
+    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>")
+    @as("ChecksumCRC32C")
+    checksumCRC32C: option<checksumCRC32C>,
+    @ocaml.doc("<p>The base64-encoded, 32-bit CRC32 checksum of the object. This will only be present if it was uploaded
+    with the object. With multipart uploads, this may not be a checksum value of the object. For more information about how checksums are calculated
+    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">
+    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>")
+    @as("ChecksumCRC32")
+    checksumCRC32: option<checksumCRC32>,
     @ocaml.doc("<p>Size of the body in bytes.</p>") @as("ContentLength")
     contentLength: option<contentLength>,
     @ocaml.doc("<p>Creation date of the object.</p>") @as("LastModified")
@@ -6050,8 +6693,9 @@ module HeadObject = {
     @as("Restore")
     restore: option<restore>,
     @ocaml.doc("<p>If the object expiration is configured (see PUT Bucket lifecycle), the response includes
-         this header. It includes the expiry-date and rule-id key-value pairs providing object
-         expiration information. The value of the rule-id is URL encoded.</p>")
+         this header. It includes the <code>expiry-date</code> and <code>rule-id</code> key-value
+         pairs providing object expiration information. The value of the <code>rule-id</code> is
+         URL-encoded.</p>")
     @as("Expiration")
     expiration: option<expiration>,
     @ocaml.doc("<p>Indicates that a range of bytes was specified.</p>") @as("AcceptRanges")
@@ -6065,6 +6709,7 @@ module HeadObject = {
   let make = (
     ~key,
     ~bucket,
+    ~checksumMode=?,
     ~expectedBucketOwner=?,
     ~partNumber=?,
     ~requestPayer=?,
@@ -6080,6 +6725,7 @@ module HeadObject = {
     (),
   ) =>
     new({
+      checksumMode: checksumMode,
       expectedBucketOwner: expectedBucketOwner,
       partNumber: partNumber,
       requestPayer: requestPayer,
@@ -6102,7 +6748,7 @@ module GetPublicAccessBlock = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
@@ -6127,7 +6773,7 @@ module GetObjectRetention = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
@@ -6141,7 +6787,7 @@ module GetObjectRetention = {
     @as("Key")
     key: objectKey,
     @ocaml.doc("<p>The bucket name containing the object whose retention settings you want to retrieve. </p>
-         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>")
+         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the Amazon Web Services SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>")
     @as("Bucket")
     bucket: bucketName,
   }
@@ -6165,24 +6811,24 @@ module GetObjectLegalHold = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
     @as("RequestPayer") requestPayer: option<requestPayer>,
-    @ocaml.doc("<p>The version ID of the object whose Legal Hold status you want to retrieve.</p>")
+    @ocaml.doc("<p>The version ID of the object whose legal hold status you want to retrieve.</p>")
     @as("VersionId")
     versionId: option<objectVersionId>,
-    @ocaml.doc("<p>The key name for the object whose Legal Hold status you want to retrieve.</p>")
+    @ocaml.doc("<p>The key name for the object whose legal hold status you want to retrieve.</p>")
     @as("Key")
     key: objectKey,
-    @ocaml.doc("<p>The bucket name containing the object whose Legal Hold status you want to retrieve. </p>
-         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>")
+    @ocaml.doc("<p>The bucket name containing the object whose legal hold status you want to retrieve. </p>
+         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the Amazon Web Services SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>")
     @as("Bucket")
     bucket: bucketName,
   }
   type response = {
-    @ocaml.doc("<p>The current Legal Hold status for the specified object.</p>") @as("LegalHold")
+    @ocaml.doc("<p>The current legal hold status for the specified object.</p>") @as("LegalHold")
     legalHold: option<objectLockLegalHold>,
   }
   @module("@aws-sdk/client-s3") @new external new: request => t = "GetObjectLegalHoldCommand"
@@ -6200,8 +6846,10 @@ module GetObjectLegalHold = {
 module GetObject = {
   type t
   type request = {
+    @ocaml.doc("<p>To retrieve the checksum, this mode must be enabled.</p>") @as("ChecksumMode")
+    checksumMode: option<checksumMode>,
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
@@ -6256,25 +6904,27 @@ module GetObject = {
     @as("Range")
     range: option<range>,
     @ocaml.doc("<p>Key of the object to get.</p>") @as("Key") key: objectKey,
-    @ocaml.doc("<p>Return the object only if it has not been modified since the specified time, otherwise
-         return a 412 (precondition failed).</p>")
+    @ocaml.doc("<p>Return the object only if it has not been modified since the specified time; otherwise,
+         return a 412 (precondition failed) error.</p>")
     @as("IfUnmodifiedSince")
     ifUnmodifiedSince: option<ifUnmodifiedSince>,
-    @ocaml.doc("<p>Return the object only if its entity tag (ETag) is different from the one specified,
-         otherwise return a 304 (not modified).</p>")
+    @ocaml.doc("<p>Return the object only if its entity tag (ETag) is different from the one specified;
+         otherwise, return a 304 (not modified) error.</p>")
     @as("IfNoneMatch")
     ifNoneMatch: option<ifNoneMatch>,
-    @ocaml.doc("<p>Return the object only if it has been modified since the specified time, otherwise
-         return a 304 (not modified).</p>")
+    @ocaml.doc("<p>Return the object only if it has been modified since the specified time; otherwise,
+         return a 304 (not modified) error.</p>")
     @as("IfModifiedSince")
     ifModifiedSince: option<ifModifiedSince>,
-    @ocaml.doc("<p>Return the object only if its entity tag (ETag) is the same as the one specified,
-         otherwise return a 412 (precondition failed).</p>")
+    @ocaml.doc("<p>Return the object only if its entity tag (ETag) is the same as the one specified;
+         otherwise, return a 412 (precondition failed) error.</p>")
     @as("IfMatch")
     ifMatch: option<ifMatch>,
     @ocaml.doc("<p>The bucket name containing the object. </p>
-         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>
-         <p>When using this action with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com. When using this action using S3 on Outposts through the AWS SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>")
+         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the Amazon Web Services SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>
+         <p>When using an Object Lambda access point the hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-object-lambda.<i>Region</i>.amazonaws.com.</p>
+         <p>When using this action with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <code>
+               <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com</code>. When using this action with S3 on Outposts through the Amazon Web Services SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>")
     @as("Bucket")
     bucket: bucketName,
   }
@@ -6291,7 +6941,9 @@ module GetObject = {
     objectLockMode: option<objectLockMode>,
     @ocaml.doc("<p>The number of tags, if any, on the object.</p>") @as("TagCount")
     tagCount: option<tagCount>,
-    @ocaml.doc("<p>The count of parts this object has.</p>") @as("PartsCount")
+    @ocaml.doc("<p>The count of parts this object has. This value is only returned if you specify <code>partNumber</code>
+        in your request and the object was uploaded as a multipart upload.</p>")
+    @as("PartsCount")
     partsCount: option<partsCount>,
     @ocaml.doc("<p>Amazon S3 can return this if your request involves a bucket that is either a source or
          destination in a replication rule.</p>")
@@ -6303,12 +6955,12 @@ module GetObject = {
     @as("StorageClass")
     storageClass: option<storageClass>,
     @ocaml.doc(
-      "<p>Indicates whether the object uses an S3 Bucket Key for server-side encryption with AWS KMS (SSE-KMS).</p>"
+      "<p>Indicates whether the object uses an S3 Bucket Key for server-side encryption with Amazon Web Services KMS (SSE-KMS).</p>"
     )
     @as("BucketKeyEnabled")
     bucketKeyEnabled: option<bucketKeyEnabled>,
-    @ocaml.doc("<p>If present, specifies the ID of the AWS Key Management Service (AWS KMS) symmetric
-         customer managed customer master key (CMK) that was used for the object.</p>")
+    @ocaml.doc("<p>If present, specifies the ID of the Amazon Web Services Key Management Service (Amazon Web Services KMS) symmetric
+         customer managed key that was used for the object.</p>")
     @as("SSEKMSKeyId")
     ssekmskeyId: option<ssekmskeyId>,
     @ocaml.doc("<p>If server-side encryption with a customer-provided encryption key was requested, the
@@ -6359,8 +7011,32 @@ module GetObject = {
          values are not legal HTTP headers.</p>")
     @as("MissingMeta")
     missingMeta: option<missingMeta>,
-    @ocaml.doc("<p>An ETag is an opaque identifier assigned by a web server to a specific version of a
-         resource found at a URL.</p>")
+    @ocaml.doc("<p>The base64-encoded, 256-bit SHA-256 digest of the object. This will only be present if it was uploaded
+    with the object. With multipart uploads, this may not be a checksum value of the object. For more information about how checksums are calculated
+    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">
+    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>")
+    @as("ChecksumSHA256")
+    checksumSHA256: option<checksumSHA256>,
+    @ocaml.doc("<p>The base64-encoded, 160-bit SHA-1 digest of the object. This will only be present if it was uploaded
+    with the object. With multipart uploads, this may not be a checksum value of the object. For more information about how checksums are calculated
+    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">
+    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>")
+    @as("ChecksumSHA1")
+    checksumSHA1: option<checksumSHA1>,
+    @ocaml.doc("<p>The base64-encoded, 32-bit CRC32C checksum of the object. This will only be present if it was uploaded
+    with the object. With multipart uploads, this may not be a checksum value of the object. For more information about how checksums are calculated
+    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">
+    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>")
+    @as("ChecksumCRC32C")
+    checksumCRC32C: option<checksumCRC32C>,
+    @ocaml.doc("<p>The base64-encoded, 32-bit CRC32 checksum of the object. This will only be present if it was uploaded
+    with the object. With multipart uploads, this may not be a checksum value of the object. For more information about how checksums are calculated
+    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">
+    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>")
+    @as("ChecksumCRC32")
+    checksumCRC32: option<checksumCRC32>,
+    @ocaml.doc("<p>An entity tag (ETag) is an opaque identifier assigned by a web server to a specific
+         version of a resource found at a URL.</p>")
     @as("ETag")
     etag: option<etag>,
     @ocaml.doc("<p>Size of the body in bytes.</p>") @as("ContentLength")
@@ -6372,8 +7048,9 @@ module GetObject = {
     @as("Restore")
     restore: option<restore>,
     @ocaml.doc("<p>If the object expiration is configured (see PUT Bucket lifecycle), the response includes
-         this header. It includes the expiry-date and rule-id key-value pairs providing object
-         expiration information. The value of the rule-id is URL encoded.</p>")
+         this header. It includes the <code>expiry-date</code> and <code>rule-id</code> key-value
+         pairs providing object expiration information. The value of the <code>rule-id</code> is
+         URL-encoded.</p>")
     @as("Expiration")
     expiration: option<expiration>,
     @ocaml.doc("<p>Indicates that a range of bytes was specified.</p>") @as("AcceptRanges")
@@ -6388,6 +7065,7 @@ module GetObject = {
   let make = (
     ~key,
     ~bucket,
+    ~checksumMode=?,
     ~expectedBucketOwner=?,
     ~partNumber=?,
     ~requestPayer=?,
@@ -6409,6 +7087,7 @@ module GetObject = {
     (),
   ) =>
     new({
+      checksumMode: checksumMode,
       expectedBucketOwner: expectedBucketOwner,
       partNumber: partNumber,
       requestPayer: requestPayer,
@@ -6437,7 +7116,7 @@ module GetBucketPolicyStatus = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
@@ -6458,12 +7137,17 @@ module GetBucketPolicyStatus = {
 module CreateMultipartUpload = {
   type t
   type request = {
+    @ocaml.doc("<p>Indicates the algorithm you want Amazon S3 to use to create the checksum for the object. For more information, see
+    <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in
+    the <i>Amazon S3 User Guide</i>.</p>")
+    @as("ChecksumAlgorithm")
+    checksumAlgorithm: option<checksumAlgorithm>,
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
-    @ocaml.doc("<p>Specifies whether you want to apply a Legal Hold to the uploaded object.</p>")
+    @ocaml.doc("<p>Specifies whether you want to apply a legal hold to the uploaded object.</p>")
     @as("ObjectLockLegalHoldStatus")
     objectLockLegalHoldStatus: option<objectLockLegalHoldStatus>,
     @ocaml.doc("<p>Specifies the date and time when you want the Object Lock to expire.</p>")
@@ -6484,15 +7168,15 @@ module CreateMultipartUpload = {
          <p>Specifying this header with an object action doesn’t affect bucket-level settings for S3 Bucket Key.</p>")
     @as("BucketKeyEnabled")
     bucketKeyEnabled: option<bucketKeyEnabled>,
-    @ocaml.doc("<p>Specifies the AWS KMS Encryption Context to use for object encryption. The value of this
+    @ocaml.doc("<p>Specifies the Amazon Web Services KMS Encryption Context to use for object encryption. The value of this
          header is a base64-encoded UTF-8 string holding JSON with the encryption context key-value
          pairs.</p>")
     @as("SSEKMSEncryptionContext")
     ssekmsencryptionContext: option<ssekmsencryptionContext>,
-    @ocaml.doc("<p>Specifies the ID of the symmetric customer managed AWS KMS CMK to use for object
-         encryption. All GET and PUT requests for an object protected by AWS KMS will fail if not
+    @ocaml.doc("<p>Specifies the ID of the symmetric customer managed key to use for object
+         encryption. All GET and PUT requests for an object protected by Amazon Web Services KMS will fail if not
          made via SSL or using SigV4. For information about configuring using any of the officially
-         supported AWS SDKs and AWS CLI, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version\">Specifying the Signature Version in Request Authentication</a>
+         supported Amazon Web Services SDKs and Amazon Web Services CLI, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version\">Specifying the Signature Version in Request Authentication</a>
          in the <i>Amazon S3 User Guide</i>.</p>")
     @as("SSEKMSKeyId")
     ssekmskeyId: option<ssekmskeyId>,
@@ -6570,8 +7254,9 @@ module CreateMultipartUpload = {
     @as("CacheControl")
     cacheControl: option<cacheControl>,
     @ocaml.doc("<p>The name of the bucket to which to initiate the upload</p>
-         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>
-         <p>When using this action with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com. When using this action using S3 on Outposts through the AWS SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>")
+         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the Amazon Web Services SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>
+         <p>When using this action with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <code>
+               <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com</code>. When using this action with S3 on Outposts through the Amazon Web Services SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>")
     @as("Bucket")
     bucket: bucketName,
     @ocaml.doc("<p>The canned ACL to apply to the object.</p>
@@ -6580,19 +7265,22 @@ module CreateMultipartUpload = {
     acl: option<objectCannedACL>,
   }
   type response = {
+    @ocaml.doc("<p>The algorithm that was used to create a checksum of the object.</p>")
+    @as("ChecksumAlgorithm")
+    checksumAlgorithm: option<checksumAlgorithm>,
     @as("RequestCharged") requestCharged: option<requestCharged>,
     @ocaml.doc(
-      "<p>Indicates whether the multipart upload uses an S3 Bucket Key for server-side encryption with AWS KMS (SSE-KMS).</p>"
+      "<p>Indicates whether the multipart upload uses an S3 Bucket Key for server-side encryption with Amazon Web Services KMS (SSE-KMS).</p>"
     )
     @as("BucketKeyEnabled")
     bucketKeyEnabled: option<bucketKeyEnabled>,
-    @ocaml.doc("<p>If present, specifies the AWS KMS Encryption Context to use for object encryption. The
+    @ocaml.doc("<p>If present, specifies the Amazon Web Services KMS Encryption Context to use for object encryption. The
          value of this header is a base64-encoded UTF-8 string holding JSON with the encryption
          context key-value pairs.</p>")
     @as("SSEKMSEncryptionContext")
     ssekmsencryptionContext: option<ssekmsencryptionContext>,
-    @ocaml.doc("<p>If present, specifies the ID of the AWS Key Management Service (AWS KMS) symmetric
-         customer managed customer master key (CMK) that was used for the object.</p>")
+    @ocaml.doc("<p>If present, specifies the ID of the Amazon Web Services Key Management Service (Amazon Web Services KMS) symmetric
+         customer managed key that was used for the object.</p>")
     @as("SSEKMSKeyId")
     ssekmskeyId: option<ssekmskeyId>,
     @ocaml.doc("<p>If server-side encryption with a customer-provided encryption key was requested, the
@@ -6612,9 +7300,10 @@ module CreateMultipartUpload = {
     uploadId: option<multipartUploadId>,
     @ocaml.doc("<p>Object key for which the multipart upload was initiated.</p>") @as("Key")
     key: option<objectKey>,
-    @ocaml.doc("<p>The name of the bucket to which the multipart upload was initiated. </p>
-         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>
-         <p>When using this action with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com. When using this action using S3 on Outposts through the AWS SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>")
+    @ocaml.doc("<p>The name of the bucket to which the multipart upload was initiated. Does not return the access point ARN or access point alias if used.</p>
+         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the Amazon Web Services SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>
+         <p>When using this action with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <code>
+               <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com</code>. When using this action with S3 on Outposts through the Amazon Web Services SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>")
     @as("Bucket")
     bucket: option<bucketName>,
     @ocaml.doc("<p>This header is returned along with the <code>x-amz-abort-date</code> header. It
@@ -6637,6 +7326,7 @@ module CreateMultipartUpload = {
   let make = (
     ~key,
     ~bucket,
+    ~checksumAlgorithm=?,
     ~expectedBucketOwner=?,
     ~objectLockLegalHoldStatus=?,
     ~objectLockRetainUntilDate=?,
@@ -6667,6 +7357,7 @@ module CreateMultipartUpload = {
     (),
   ) =>
     new({
+      checksumAlgorithm: checksumAlgorithm,
       expectedBucketOwner: expectedBucketOwner,
       objectLockLegalHoldStatus: objectLockLegalHoldStatus,
       objectLockRetainUntilDate: objectLockRetainUntilDate,
@@ -6703,9 +7394,7 @@ module CreateMultipartUpload = {
 module CreateBucket = {
   type t
   type request = {
-    @ocaml.doc("<p>The configuration information for the bucket.</p>")
-    @as("CreateBucketConfiguration")
-    createBucketConfiguration: option<createBucketConfiguration>,
+    @as("ObjectOwnership") objectOwnership: option<objectOwnership>,
     @ocaml.doc("<p>Specifies whether you want S3 Object Lock to be enabled for the new bucket.</p>")
     @as("ObjectLockEnabledForBucket")
     objectLockEnabledForBucket: option<objectLockEnabledForBucket>,
@@ -6724,38 +7413,40 @@ module CreateBucket = {
          bucket.</p>")
     @as("GrantFullControl")
     grantFullControl: option<grantFullControl>,
+    @ocaml.doc("<p>The configuration information for the bucket.</p>")
+    @as("CreateBucketConfiguration")
+    createBucketConfiguration: option<createBucketConfiguration>,
     @ocaml.doc("<p>The name of the bucket to create.</p>") @as("Bucket") bucket: bucketName,
     @ocaml.doc("<p>The canned ACL to apply to the bucket.</p>") @as("ACL")
     acl: option<bucketCannedACL>,
   }
   type response = {
-    @ocaml.doc("<p>Specifies the Region where the bucket will be created. If you are creating a bucket on
-         the US East (N. Virginia) Region (us-east-1), you do not need to specify the
-         location.</p>")
-    @as("Location")
+    @ocaml.doc("<p>A forward slash followed by the name of the bucket.</p>") @as("Location")
     location: option<location>,
   }
   @module("@aws-sdk/client-s3") @new external new: request => t = "CreateBucketCommand"
   let make = (
     ~bucket,
-    ~createBucketConfiguration=?,
+    ~objectOwnership=?,
     ~objectLockEnabledForBucket=?,
     ~grantWriteACP=?,
     ~grantWrite=?,
     ~grantReadACP=?,
     ~grantRead=?,
     ~grantFullControl=?,
+    ~createBucketConfiguration=?,
     ~acl=?,
     (),
   ) =>
     new({
-      createBucketConfiguration: createBucketConfiguration,
+      objectOwnership: objectOwnership,
       objectLockEnabledForBucket: objectLockEnabledForBucket,
       grantWriteACP: grantWriteACP,
       grantWrite: grantWrite,
       grantReadACP: grantReadACP,
       grantRead: grantRead,
       grantFullControl: grantFullControl,
+      createBucketConfiguration: createBucketConfiguration,
       bucket: bucket,
       acl: acl,
     })
@@ -6766,16 +7457,16 @@ module CopyObject = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The account ID of the expected source bucket owner. If the source bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected source bucket owner. If the source bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedSourceBucketOwner")
     expectedSourceBucketOwner: option<accountId>,
     @ocaml.doc(
-      "<p>The account ID of the expected destination bucket owner. If the destination bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected destination bucket owner. If the destination bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
-    @ocaml.doc("<p>Specifies whether you want to apply a Legal Hold to the copied object.</p>")
+    @ocaml.doc("<p>Specifies whether you want to apply a legal hold to the copied object.</p>")
     @as("ObjectLockLegalHoldStatus")
     objectLockLegalHoldStatus: option<objectLockLegalHoldStatus>,
     @ocaml.doc("<p>The date and time when you want the copied object's Object Lock to expire.</p>")
@@ -6808,14 +7499,14 @@ module CopyObject = {
          <p>Specifying this header with a COPY action doesn’t affect bucket-level settings for S3 Bucket Key.</p>")
     @as("BucketKeyEnabled")
     bucketKeyEnabled: option<bucketKeyEnabled>,
-    @ocaml.doc("<p>Specifies the AWS KMS Encryption Context to use for object encryption. The value of this
+    @ocaml.doc("<p>Specifies the Amazon Web Services KMS Encryption Context to use for object encryption. The value of this
          header is a base64-encoded UTF-8 string holding JSON with the encryption context key-value
          pairs.</p>")
     @as("SSEKMSEncryptionContext")
     ssekmsencryptionContext: option<ssekmsencryptionContext>,
-    @ocaml.doc("<p>Specifies the AWS KMS key ID to use for object encryption. All GET and PUT requests for
-         an object protected by AWS KMS will fail if not made via SSL or using SigV4. For
-         information about configuring using any of the officially supported AWS SDKs and AWS CLI,
+    @ocaml.doc("<p>Specifies the Amazon Web Services KMS key ID to use for object encryption. All GET and PUT requests for
+         an object protected by Amazon Web Services KMS will fail if not made via SSL or using SigV4. For
+         information about configuring using any of the officially supported Amazon Web Services SDKs and Amazon Web Services CLI,
          see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version\">Specifying the
             Signature Version in Request Authentication</a> in the <i>Amazon S3 User Guide</i>.</p>")
     @as("SSEKMSKeyId")
@@ -6902,19 +7593,18 @@ module CopyObject = {
          formats, depending on whether you want to access the source object through an <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points.html\">access point</a>:</p>
          <ul>
             <li>
-               <p>For objects not accessed through an access point, specify the name of the source
-               bucket and the key of the source object, separated by a slash (/). For example, to
-               copy the object <code>reports/january.pdf</code> from the bucket
-                  <code>awsexamplebucket</code>, use
-                  <code>awsexamplebucket/reports/january.pdf</code>. The value must be URL
-               encoded.</p>
+               <p>For objects not accessed through an access point, specify the name of the source bucket
+               and the key of the source object, separated by a slash (/). For example, to copy the
+               object <code>reports/january.pdf</code> from the bucket
+               <code>awsexamplebucket</code>, use <code>awsexamplebucket/reports/january.pdf</code>.
+               The value must be URL-encoded.</p>
             </li>
             <li> 
                <p>For objects accessed through access points, specify the Amazon Resource Name (ARN) of the object as accessed through the access point, in the format <code>arn:aws:s3:<Region>:<account-id>:accesspoint/<access-point-name>/object/<key></code>. For example, to copy the object <code>reports/january.pdf</code> through access point <code>my-access-point</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3:us-west-2:123456789012:accesspoint/my-access-point/object/reports/january.pdf</code>. The value must be URL encoded.</p> 
                <note>
-                  <p>Amazon S3 supports copy operations using access points only when the source and destination buckets are in the same AWS Region.</p>
+                  <p>Amazon S3 supports copy operations using access points only when the source and destination buckets are in the same Amazon Web Services Region.</p>
                </note> 
-               <p>Alternatively, for objects accessed through Amazon S3 on Outposts, specify the ARN of the object as accessed in the format <code>arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/object/<key></code>. For example, to copy the object <code>reports/january.pdf</code> through outpost <code>my-outpost</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/object/reports/january.pdf</code>. The value must be URL encoded.  </p> 
+               <p>Alternatively, for objects accessed through Amazon S3 on Outposts, specify the ARN of the object as accessed in the format <code>arn:aws:s3-outposts:<Region>:<account-id>:outpost/<outpost-id>/object/<key></code>. For example, to copy the object <code>reports/january.pdf</code> through outpost <code>my-outpost</code> owned by account <code>123456789012</code> in Region <code>us-west-2</code>, use the URL encoding of <code>arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/object/reports/january.pdf</code>. The value must be URL-encoded.  </p> 
             </li>
          </ul>
          <p>To copy a specific version of an object, append <code>?versionId=<version-id></code>
@@ -6937,12 +7627,18 @@ module CopyObject = {
     @ocaml.doc("<p>Specifies presentational information for the object.</p>")
     @as("ContentDisposition")
     contentDisposition: option<contentDisposition>,
+    @ocaml.doc("<p>Indicates the algorithm you want Amazon S3 to use to create the checksum for the object. For more information, see
+    <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in
+    the <i>Amazon S3 User Guide</i>.</p>")
+    @as("ChecksumAlgorithm")
+    checksumAlgorithm: option<checksumAlgorithm>,
     @ocaml.doc("<p>Specifies caching behavior along the request/reply chain.</p>")
     @as("CacheControl")
     cacheControl: option<cacheControl>,
     @ocaml.doc("<p>The name of the destination bucket.</p>
-         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>
-         <p>When using this action with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com. When using this action using S3 on Outposts through the AWS SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>")
+         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the Amazon Web Services SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>
+         <p>When using this action with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <code>
+               <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com</code>. When using this action with S3 on Outposts through the Amazon Web Services SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>")
     @as("Bucket")
     bucket: bucketName,
     @ocaml.doc("<p>The canned ACL to apply to the object.</p>
@@ -6953,17 +7649,17 @@ module CopyObject = {
   type response = {
     @as("RequestCharged") requestCharged: option<requestCharged>,
     @ocaml.doc(
-      "<p>Indicates whether the copied object uses an S3 Bucket Key for server-side encryption with AWS KMS (SSE-KMS).</p>"
+      "<p>Indicates whether the copied object uses an S3 Bucket Key for server-side encryption with Amazon Web Services KMS (SSE-KMS).</p>"
     )
     @as("BucketKeyEnabled")
     bucketKeyEnabled: option<bucketKeyEnabled>,
-    @ocaml.doc("<p>If present, specifies the AWS KMS Encryption Context to use for object encryption. The
+    @ocaml.doc("<p>If present, specifies the Amazon Web Services KMS Encryption Context to use for object encryption. The
          value of this header is a base64-encoded UTF-8 string holding JSON with the encryption
          context key-value pairs.</p>")
     @as("SSEKMSEncryptionContext")
     ssekmsencryptionContext: option<ssekmsencryptionContext>,
-    @ocaml.doc("<p>If present, specifies the ID of the AWS Key Management Service (AWS KMS) symmetric
-         customer managed customer master key (CMK) that was used for the object.</p>")
+    @ocaml.doc("<p>If present, specifies the ID of the Amazon Web Services Key Management Service (Amazon Web Services KMS) symmetric
+         customer managed key that was used for the object.</p>")
     @as("SSEKMSKeyId")
     ssekmskeyId: option<ssekmskeyId>,
     @ocaml.doc("<p>If server-side encryption with a customer-provided encryption key was requested, the
@@ -7030,6 +7726,7 @@ module CopyObject = {
     ~contentLanguage=?,
     ~contentEncoding=?,
     ~contentDisposition=?,
+    ~checksumAlgorithm=?,
     ~cacheControl=?,
     ~acl=?,
     (),
@@ -7072,6 +7769,7 @@ module CopyObject = {
       contentLanguage: contentLanguage,
       contentEncoding: contentEncoding,
       contentDisposition: contentDisposition,
+      checksumAlgorithm: checksumAlgorithm,
       cacheControl: cacheControl,
       bucket: bucket,
       acl: acl,
@@ -7082,8 +7780,26 @@ module CopyObject = {
 module ListParts = {
   type t
   type request = {
+    @ocaml.doc("<p>The MD5 server-side encryption (SSE) customer managed key. This parameter is needed only when the object was created using a checksum 
+    algorithm. For more information,
+    see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html\">Protecting data using SSE-C keys</a> in the
+    <i>Amazon S3 User Guide</i>.</p>")
+    @as("SSECustomerKeyMD5")
+    ssecustomerKeyMD5: option<ssecustomerKeyMD5>,
+    @ocaml.doc("<p>The server-side encryption (SSE) customer managed key. This parameter is needed only when the object was created using a checksum algorithm. 
+    For more information, see
+    <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html\">Protecting data using SSE-C keys</a> in the
+    <i>Amazon S3 User Guide</i>.</p>")
+    @as("SSECustomerKey")
+    ssecustomerKey: option<ssecustomerKey>,
+    @ocaml.doc("<p>The server-side encryption (SSE) algorithm used to encrypt the object. This parameter is needed only when the object was created 
+    using a checksum algorithm. For more information,
+    see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html\">Protecting data using SSE-C keys</a> in the
+    <i>Amazon S3 User Guide</i>.</p>")
+    @as("SSECustomerAlgorithm")
+    ssecustomerAlgorithm: option<ssecustomerAlgorithm>,
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
@@ -7100,12 +7816,16 @@ module ListParts = {
     @ocaml.doc("<p>Object key for which the multipart upload was initiated.</p>") @as("Key")
     key: objectKey,
     @ocaml.doc("<p>The name of the bucket to which the parts are being uploaded. </p>
-         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>
-         <p>When using this action with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com. When using this action using S3 on Outposts through the AWS SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>")
+         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the Amazon Web Services SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>
+         <p>When using this action with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <code>
+               <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com</code>. When using this action with S3 on Outposts through the Amazon Web Services SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>")
     @as("Bucket")
     bucket: bucketName,
   }
   type response = {
+    @ocaml.doc("<p>The algorithm that was used to create a checksum of the object.</p>")
+    @as("ChecksumAlgorithm")
+    checksumAlgorithm: option<checksumAlgorithm>,
     @as("RequestCharged") requestCharged: option<requestCharged>,
     @ocaml.doc("<p>Class of storage (STANDARD or REDUCED_REDUNDANCY) used to store the uploaded
          object.</p>")
@@ -7117,7 +7837,7 @@ module ListParts = {
     @as("Owner")
     owner: option<owner>,
     @ocaml.doc("<p>Container element that identifies who initiated the multipart upload. If the initiator
-         is an AWS account, this element provides the same information as the <code>Owner</code>
+         is an Amazon Web Services account, this element provides the same information as the <code>Owner</code>
          element. If the initiator is an IAM User, this element provides the user ARN and display
          name.</p>")
     @as("Initiator")
@@ -7148,7 +7868,9 @@ module ListParts = {
     uploadId: option<multipartUploadId>,
     @ocaml.doc("<p>Object key for which the multipart upload was initiated.</p>") @as("Key")
     key: option<objectKey>,
-    @ocaml.doc("<p>The name of the bucket to which the multipart upload was initiated.</p>")
+    @ocaml.doc(
+      "<p>The name of the bucket to which the multipart upload was initiated. Does not return the access point ARN or access point alias if used.</p>"
+    )
     @as("Bucket")
     bucket: option<bucketName>,
     @ocaml.doc("<p>This header is returned along with the <code>x-amz-abort-date</code> header. It
@@ -7172,6 +7894,9 @@ module ListParts = {
     ~uploadId,
     ~key,
     ~bucket,
+    ~ssecustomerKeyMD5=?,
+    ~ssecustomerKey=?,
+    ~ssecustomerAlgorithm=?,
     ~expectedBucketOwner=?,
     ~requestPayer=?,
     ~partNumberMarker=?,
@@ -7179,6 +7904,9 @@ module ListParts = {
     (),
   ) =>
     new({
+      ssecustomerKeyMD5: ssecustomerKeyMD5,
+      ssecustomerKey: ssecustomerKey,
+      ssecustomerAlgorithm: ssecustomerAlgorithm,
       expectedBucketOwner: expectedBucketOwner,
       requestPayer: requestPayer,
       uploadId: uploadId,
@@ -7192,14 +7920,14 @@ module ListParts = {
 
 module ListBuckets = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("<p>The owner of the buckets listed.</p>") @as("Owner") owner: option<owner>,
-    @ocaml.doc("<p>The list of buckets owned by the requestor.</p>") @as("Buckets")
+    @ocaml.doc("<p>The list of buckets owned by the requester.</p>") @as("Buckets")
     buckets: option<buckets>,
   }
-  @module("@aws-sdk/client-s3") @new external new: unit => t = "ListBucketsCommand"
-  let make = () => new()
+  @module("@aws-sdk/client-s3") @new external new: request => t = "ListBucketsCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -7208,7 +7936,7 @@ module GetObjectTagging = {
   type request = {
     @as("RequestPayer") requestPayer: option<requestPayer>,
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
@@ -7218,8 +7946,9 @@ module GetObjectTagging = {
     @ocaml.doc("<p>Object key for which to get the tagging information.</p>") @as("Key")
     key: objectKey,
     @ocaml.doc("<p>The bucket name containing the object for which to get the tagging information. </p>
-         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>
-         <p>When using this action with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com. When using this action using S3 on Outposts through the AWS SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>")
+         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the Amazon Web Services SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>
+         <p>When using this action with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <code>
+               <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com</code>. When using this action with S3 on Outposts through the Amazon Web Services SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>")
     @as("Bucket")
     bucket: bucketName,
   }
@@ -7245,7 +7974,7 @@ module GetBucketTagging = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
@@ -7270,7 +7999,7 @@ module SelectObjectContent = {
             <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectSELECTContent.html\">S3Select API Documentation</a>.</p>")
   type request = {
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
@@ -7316,17 +8045,22 @@ module SelectObjectContent = {
     expressionType: expressionType,
     @ocaml.doc("<p>The expression that is used to query the object.</p>") @as("Expression")
     expression: expression,
-    @ocaml.doc("<p>The SSE Customer Key MD5. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html\">Server-Side Encryption
-            (Using Customer-Provided Encryption Keys</a>. </p>")
+    @ocaml.doc("<p>The MD5 server-side encryption (SSE) customer managed key. This parameter is needed only when the object was created using a checksum 
+    algorithm. For more information,
+    see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html\">Protecting data using SSE-C keys</a> in the
+    <i>Amazon S3 User Guide</i>.</p>")
     @as("SSECustomerKeyMD5")
     ssecustomerKeyMD5: option<ssecustomerKeyMD5>,
-    @ocaml.doc("<p>The SSE Customer Key. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html\">Server-Side Encryption
-            (Using Customer-Provided Encryption Keys</a>. </p>")
+    @ocaml.doc("<p>The server-side encryption (SSE) customer managed key. This parameter is needed only when the object was created using a checksum algorithm. 
+    For more information, see
+    <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html\">Protecting data using SSE-C keys</a> in the
+    <i>Amazon S3 User Guide</i>.</p>")
     @as("SSECustomerKey")
     ssecustomerKey: option<ssecustomerKey>,
-    @ocaml.doc(
-      "<p>The SSE Algorithm used to encrypt the object. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html\">Server-Side Encryption (Using Customer-Provided Encryption Keys</a>. </p>"
-    )
+    @ocaml.doc("<p>The server-side encryption (SSE) algorithm used to encrypt the object. This parameter is needed only when the object was created 
+    using a checksum algorithm. For more information,
+    see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html\">Protecting data using SSE-C keys</a> in the
+    <i>Amazon S3 User Guide</i>.</p>")
     @as("SSECustomerAlgorithm")
     ssecustomerAlgorithm: option<ssecustomerAlgorithm>,
     @ocaml.doc("<p>The object key.</p>") @as("Key") key: objectKey,
@@ -7372,17 +8106,26 @@ module SelectObjectContent = {
 module PutObjectTagging = {
   type t
   type request = {
-    @ocaml.doc("<p>Container for the <code>TagSet</code> and <code>Tag</code> elements</p>")
-    @as("Tagging")
-    tagging: tagging,
     @as("RequestPayer") requestPayer: option<requestPayer>,
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
+    @ocaml.doc("<p>Container for the <code>TagSet</code> and <code>Tag</code> elements</p>")
+    @as("Tagging")
+    tagging: tagging,
+    @ocaml.doc("<p>Indicates the algorithm used to create the checksum for the object when using the SDK. This header will not provide any
+    additional functionality if not using the SDK. When sending this header, there must be a corresponding <code>x-amz-checksum</code> or
+    <code>x-amz-trailer</code> header sent. Otherwise, Amazon S3 fails the request with the HTTP status code <code>400 Bad Request</code>. For more
+    information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in
+    the <i>Amazon S3 User Guide</i>.</p>
+        <p>If you provide an individual checksum, Amazon S3 ignores any provided
+            <code>ChecksumAlgorithm</code> parameter.</p>")
+    @as("ChecksumAlgorithm")
+    checksumAlgorithm: option<checksumAlgorithm>,
     @ocaml.doc("<p>The MD5 hash for the request body.</p>
-         <p>For requests made using the AWS Command Line Interface (CLI) or AWS SDKs, this field is calculated automatically.</p>")
+         <p>For requests made using the Amazon Web Services Command Line Interface (CLI) or Amazon Web Services SDKs, this field is calculated automatically.</p>")
     @as("ContentMD5")
     contentMD5: option<contentMD5>,
     @ocaml.doc("<p>The versionId of the object that the tag-set will be added to.</p>")
@@ -7390,8 +8133,9 @@ module PutObjectTagging = {
     versionId: option<objectVersionId>,
     @ocaml.doc("<p>Name of the object key.</p>") @as("Key") key: objectKey,
     @ocaml.doc("<p>The bucket name containing the object. </p>
-         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>
-         <p>When using this action with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com. When using this action using S3 on Outposts through the AWS SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>")
+         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the Amazon Web Services SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>
+         <p>When using this action with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <code>
+               <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com</code>. When using this action with S3 on Outposts through the Amazon Web Services SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>")
     @as("Bucket")
     bucket: bucketName,
   }
@@ -7406,14 +8150,16 @@ module PutObjectTagging = {
     ~bucket,
     ~requestPayer=?,
     ~expectedBucketOwner=?,
+    ~checksumAlgorithm=?,
     ~contentMD5=?,
     ~versionId=?,
     (),
   ) =>
     new({
-      tagging: tagging,
       requestPayer: requestPayer,
       expectedBucketOwner: expectedBucketOwner,
+      tagging: tagging,
+      checksumAlgorithm: checksumAlgorithm,
       contentMD5: contentMD5,
       versionId: versionId,
       key: key,
@@ -7426,23 +8172,32 @@ module PutObjectLockConfiguration = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The Object Lock configuration that you want to apply to the specified bucket.</p>"
-    )
-    @as("ObjectLockConfiguration")
-    objectLockConfiguration: option<objectLockConfiguration>,
-    @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
+    @ocaml.doc("<p>Indicates the algorithm used to create the checksum for the object when using the SDK. This header will not provide any
+    additional functionality if not using the SDK. When sending this header, there must be a corresponding <code>x-amz-checksum</code> or
+    <code>x-amz-trailer</code> header sent. Otherwise, Amazon S3 fails the request with the HTTP status code <code>400 Bad Request</code>. For more
+    information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in
+    the <i>Amazon S3 User Guide</i>.</p>
+        <p>If you provide an individual checksum, Amazon S3 ignores any provided
+            <code>ChecksumAlgorithm</code> parameter.</p>")
+    @as("ChecksumAlgorithm")
+    checksumAlgorithm: option<checksumAlgorithm>,
     @ocaml.doc("<p>The MD5 hash for the request body.</p>
-         <p>For requests made using the AWS Command Line Interface (CLI) or AWS SDKs, this field is calculated automatically.</p>")
+         <p>For requests made using the Amazon Web Services Command Line Interface (CLI) or Amazon Web Services SDKs, this field is calculated automatically.</p>")
     @as("ContentMD5")
     contentMD5: option<contentMD5>,
     @ocaml.doc("<p>A token to allow Object Lock to be enabled for an existing bucket.</p>")
     @as("Token")
     token: option<objectLockToken>,
     @as("RequestPayer") requestPayer: option<requestPayer>,
+    @ocaml.doc(
+      "<p>The Object Lock configuration that you want to apply to the specified bucket.</p>"
+    )
+    @as("ObjectLockConfiguration")
+    objectLockConfiguration: option<objectLockConfiguration>,
     @ocaml.doc("<p>The bucket whose Object Lock configuration you want to create or replace.</p>")
     @as("Bucket")
     bucket: bucketName,
@@ -7452,19 +8207,21 @@ module PutObjectLockConfiguration = {
   external new: request => t = "PutObjectLockConfigurationCommand"
   let make = (
     ~bucket,
-    ~objectLockConfiguration=?,
     ~expectedBucketOwner=?,
+    ~checksumAlgorithm=?,
     ~contentMD5=?,
     ~token=?,
     ~requestPayer=?,
+    ~objectLockConfiguration=?,
     (),
   ) =>
     new({
-      objectLockConfiguration: objectLockConfiguration,
       expectedBucketOwner: expectedBucketOwner,
+      checksumAlgorithm: checksumAlgorithm,
       contentMD5: contentMD5,
       token: token,
       requestPayer: requestPayer,
+      objectLockConfiguration: objectLockConfiguration,
       bucket: bucket,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
@@ -7473,28 +8230,38 @@ module PutObjectLockConfiguration = {
 module PutBucketTagging = {
   type t
   type request = {
-    @ocaml.doc("<p>Container for the <code>TagSet</code> and <code>Tag</code> elements.</p>")
-    @as("Tagging")
-    tagging: tagging,
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
+    @ocaml.doc("<p>Container for the <code>TagSet</code> and <code>Tag</code> elements.</p>")
+    @as("Tagging")
+    tagging: tagging,
+    @ocaml.doc("<p>Indicates the algorithm used to create the checksum for the object when using the SDK. This header will not provide any
+    additional functionality if not using the SDK. When sending this header, there must be a corresponding <code>x-amz-checksum</code> or
+    <code>x-amz-trailer</code> header sent. Otherwise, Amazon S3 fails the request with the HTTP status code <code>400 Bad Request</code>. For more
+    information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in
+    the <i>Amazon S3 User Guide</i>.</p>
+        <p>If you provide an individual checksum, Amazon S3 ignores any provided
+            <code>ChecksumAlgorithm</code> parameter.</p>")
+    @as("ChecksumAlgorithm")
+    checksumAlgorithm: option<checksumAlgorithm>,
     @ocaml.doc("<p>The base64-encoded 128-bit MD5 digest of the data. You must use this header as a message
          integrity check to verify that the request body was not corrupted in transit. For more
          information, see <a href=\"http://www.ietf.org/rfc/rfc1864.txt\">RFC 1864</a>.</p>
-         <p>For requests made using the AWS Command Line Interface (CLI) or AWS SDKs, this field is calculated automatically.</p>")
+         <p>For requests made using the Amazon Web Services Command Line Interface (CLI) or Amazon Web Services SDKs, this field is calculated automatically.</p>")
     @as("ContentMD5")
     contentMD5: option<contentMD5>,
     @ocaml.doc("<p>The bucket name.</p>") @as("Bucket") bucket: bucketName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-s3") @new external new: request => t = "PutBucketTaggingCommand"
-  let make = (~tagging, ~bucket, ~expectedBucketOwner=?, ~contentMD5=?, ()) =>
+  let make = (~tagging, ~bucket, ~expectedBucketOwner=?, ~checksumAlgorithm=?, ~contentMD5=?, ()) =>
     new({
-      tagging: tagging,
       expectedBucketOwner: expectedBucketOwner,
+      tagging: tagging,
+      checksumAlgorithm: checksumAlgorithm,
       contentMD5: contentMD5,
       bucket: bucket,
     })
@@ -7504,17 +8271,17 @@ module PutBucketTagging = {
 module PutBucketOwnershipControls = {
   type t
   type request = {
-    @ocaml.doc("<p>The <code>OwnershipControls</code> (BucketOwnerPreferred or ObjectWriter) that you want
+    @ocaml.doc("<p>The <code>OwnershipControls</code> (BucketOwnerEnforced, BucketOwnerPreferred, or ObjectWriter) that you want
          to apply to this Amazon S3 bucket.</p>")
     @as("OwnershipControls")
     ownershipControls: ownershipControls,
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
     @ocaml.doc("<p>The MD5 hash of the <code>OwnershipControls</code> request body. </p>
-         <p>For requests made using the AWS Command Line Interface (CLI) or AWS SDKs, this field is calculated automatically.</p>")
+         <p>For requests made using the Amazon Web Services Command Line Interface (CLI) or Amazon Web Services SDKs, this field is calculated automatically.</p>")
     @as("ContentMD5")
     contentMD5: option<contentMD5>,
     @ocaml.doc(
@@ -7523,7 +8290,7 @@ module PutBucketOwnershipControls = {
     @as("Bucket")
     bucket: bucketName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "PutBucketOwnershipControlsCommand"
   let make = (~ownershipControls, ~bucket, ~expectedBucketOwner=?, ~contentMD5=?, ()) =>
@@ -7540,7 +8307,7 @@ module ListObjectsV2 = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
@@ -7575,8 +8342,9 @@ module ListObjectsV2 = {
     @ocaml.doc("<p>A delimiter is a character you use to group keys.</p>") @as("Delimiter")
     delimiter: option<delimiter>,
     @ocaml.doc("<p>Bucket name to list. </p>
-         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>
-         <p>When using this action with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com. When using this action using S3 on Outposts through the AWS SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>")
+         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the Amazon Web Services SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>
+         <p>When using this action with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <code>
+               <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com</code>. When using this action with S3 on Outposts through the Amazon Web Services SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>")
     @as("Bucket")
     bucket: bucketName,
   }
@@ -7645,8 +8413,9 @@ module ListObjectsV2 = {
     @ocaml.doc("<p> Keys that begin with the indicated prefix.</p>") @as("Prefix")
     prefix: option<prefix>,
     @ocaml.doc("<p>The bucket name.</p>
-         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>
-         <p>When using this action with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com. When using this action using S3 on Outposts through the AWS SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>")
+         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the Amazon Web Services SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>
+         <p>When using this action with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <code>
+               <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com</code>. When using this action with S3 on Outposts through the Amazon Web Services SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>")
     @as("Name")
     name: option<bucketName>,
     @ocaml.doc("<p>Metadata about each object returned.</p>") @as("Contents")
@@ -7690,7 +8459,7 @@ module ListObjects = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
@@ -7706,15 +8475,17 @@ module ListObjects = {
       </p>")
     @as("MaxKeys")
     maxKeys: option<maxKeys>,
-    @ocaml.doc("<p>Specifies the key to start with when listing objects in a bucket.</p>")
+    @ocaml.doc("<p>Marker is where you want Amazon S3 to start listing from. Amazon S3 starts listing after
+          this specified key. Marker can be any key in the bucket.</p>")
     @as("Marker")
     marker: option<marker>,
     @as("EncodingType") encodingType: option<encodingType>,
     @ocaml.doc("<p>A delimiter is a character you use to group keys.</p>") @as("Delimiter")
     delimiter: option<delimiter>,
     @ocaml.doc("<p>The name of the bucket containing the objects.</p>
-         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>
-         <p>When using this action with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com. When using this action using S3 on Outposts through the AWS SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>")
+         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the Amazon Web Services SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>
+         <p>When using this action with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <code>
+               <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com</code>. When using this action with S3 on Outposts through the Amazon Web Services SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>")
     @as("Bucket")
     bucket: bucketName,
   }
@@ -7798,7 +8569,7 @@ module ListObjectVersions = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
@@ -7917,7 +8688,7 @@ module ListMultipartUploads = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
@@ -7959,8 +8730,9 @@ module ListMultipartUploads = {
     @as("Delimiter")
     delimiter: option<delimiter>,
     @ocaml.doc("<p>The name of the bucket to which the multipart upload was initiated. </p>
-         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>
-         <p>When using this action with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com. When using this action using S3 on Outposts through the AWS SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>")
+         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the Amazon Web Services SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>
+         <p>When using this action with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <code>
+               <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com</code>. When using this action with S3 on Outposts through the Amazon Web Services SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>")
     @as("Bucket")
     bucket: bucketName,
   }
@@ -8013,7 +8785,9 @@ module ListMultipartUploads = {
     uploadIdMarker: option<uploadIdMarker>,
     @ocaml.doc("<p>The key at or after which the listing began.</p>") @as("KeyMarker")
     keyMarker: option<keyMarker>,
-    @ocaml.doc("<p>The name of the bucket to which the multipart upload was initiated.</p>")
+    @ocaml.doc(
+      "<p>The name of the bucket to which the multipart upload was initiated. Does not return the access point ARN or access point alias if used.</p>"
+    )
     @as("Bucket")
     bucket: option<bucketName>,
   }
@@ -8046,12 +8820,12 @@ module GetObjectLockConfiguration = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
     @ocaml.doc("<p>The bucket whose Object Lock configuration you want to retrieve.</p>
-         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>")
+         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the Amazon Web Services SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>")
     @as("Bucket")
     bucket: bucketName,
   }
@@ -8067,11 +8841,117 @@ module GetObjectLockConfiguration = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module GetObjectAttributes = {
+  type t
+  type request = {
+    @ocaml.doc("<p>An XML header that specifies the fields at the root level that you want returned in
+         the response. Fields that you do not specify are not returned.</p>")
+    @as("ObjectAttributes")
+    objectAttributes: objectAttributesList,
+    @ocaml.doc(
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
+    )
+    @as("ExpectedBucketOwner")
+    expectedBucketOwner: option<accountId>,
+    @as("RequestPayer") requestPayer: option<requestPayer>,
+    @ocaml.doc("<p>Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses
+            this header for a message integrity check to ensure that the encryption key was transmitted
+            without error.</p>")
+    @as("SSECustomerKeyMD5")
+    ssecustomerKeyMD5: option<ssecustomerKeyMD5>,
+    @ocaml.doc("<p>Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This
+            value is used to store the object and then it is discarded; Amazon S3 does not store the
+            encryption key. The key must be appropriate for use with the algorithm specified in the
+            <code>x-amz-server-side-encryption-customer-algorithm</code> header.</p>")
+    @as("SSECustomerKey")
+    ssecustomerKey: option<ssecustomerKey>,
+    @ocaml.doc("<p>Specifies the algorithm to use when encrypting the object (for example,
+         AES256).</p>")
+    @as("SSECustomerAlgorithm")
+    ssecustomerAlgorithm: option<ssecustomerAlgorithm>,
+    @ocaml.doc("<p>Specifies the part after which listing should begin. Only parts with higher part numbers
+            will be listed.</p>")
+    @as("PartNumberMarker")
+    partNumberMarker: option<partNumberMarker>,
+    @ocaml.doc("<p>Sets the maximum number of parts to return.</p>") @as("MaxParts")
+    maxParts: option<maxParts>,
+    @ocaml.doc("<p>The version ID used to reference a specific version of the object.</p>")
+    @as("VersionId")
+    versionId: option<objectVersionId>,
+    @ocaml.doc("<p>The object key.</p>") @as("Key") key: objectKey,
+    @ocaml.doc("<p>The name of the bucket that contains the object.</p>
+        <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the Amazon Web Services SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>
+        <p>When using this action with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <code>
+               <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com</code>. When using this action with S3 on Outposts through the Amazon Web Services SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>")
+    @as("Bucket")
+    bucket: bucketName,
+  }
+  type response = {
+    @ocaml.doc("<p>The size of the object in bytes.</p>") @as("ObjectSize")
+    objectSize: option<objectSize>,
+    @ocaml.doc("<p>Provides the storage class information of the object. Amazon S3 returns this header for all
+         objects except for S3 Standard storage class objects.</p>
+
+        <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html\">Storage
+            Classes</a>.</p>")
+    @as("StorageClass")
+    storageClass: option<storageClass>,
+    @ocaml.doc("<p>A collection of parts associated with a multipart upload.</p>")
+    @as("ObjectParts")
+    objectParts: option<getObjectAttributesParts>,
+    @ocaml.doc("<p>The checksum or digest of the object.</p>") @as("Checksum")
+    checksum: option<checksum>,
+    @ocaml.doc("<p>An ETag is an opaque identifier assigned by a web server to a specific version of a
+            resource found at a URL.</p>")
+    @as("ETag")
+    etag: option<etag>,
+    @as("RequestCharged") requestCharged: option<requestCharged>,
+    @ocaml.doc("<p>The version ID of the object.</p>") @as("VersionId")
+    versionId: option<objectVersionId>,
+    @ocaml.doc("<p>The creation date of the object.</p>") @as("LastModified")
+    lastModified: option<lastModified>,
+    @ocaml.doc("<p>Specifies whether the object retrieved was (<code>true</code>) or was not
+            (<code>false</code>) a delete marker. If <code>false</code>, this response header does
+         not appear in the response.</p>")
+    @as("DeleteMarker")
+    deleteMarker: option<deleteMarker>,
+  }
+  @module("@aws-sdk/client-s3") @new external new: request => t = "GetObjectAttributesCommand"
+  let make = (
+    ~objectAttributes,
+    ~key,
+    ~bucket,
+    ~expectedBucketOwner=?,
+    ~requestPayer=?,
+    ~ssecustomerKeyMD5=?,
+    ~ssecustomerKey=?,
+    ~ssecustomerAlgorithm=?,
+    ~partNumberMarker=?,
+    ~maxParts=?,
+    ~versionId=?,
+    (),
+  ) =>
+    new({
+      objectAttributes: objectAttributes,
+      expectedBucketOwner: expectedBucketOwner,
+      requestPayer: requestPayer,
+      ssecustomerKeyMD5: ssecustomerKeyMD5,
+      ssecustomerKey: ssecustomerKey,
+      ssecustomerAlgorithm: ssecustomerAlgorithm,
+      partNumberMarker: partNumberMarker,
+      maxParts: maxParts,
+      versionId: versionId,
+      key: key,
+      bucket: bucket,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module GetObjectAcl = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
@@ -8082,7 +8962,7 @@ module GetObjectAcl = {
     @ocaml.doc("<p>The key of the object for which to get the ACL information.</p>") @as("Key")
     key: objectKey,
     @ocaml.doc("<p>The bucket name that contains the object for which to get the ACL information. </p>
-         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>")
+         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the Amazon Web Services SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>")
     @as("Bucket")
     bucket: bucketName,
   }
@@ -8108,7 +8988,7 @@ module GetBucketWebsite = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
@@ -8143,7 +9023,7 @@ module GetBucketOwnershipControls = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
@@ -8153,7 +9033,7 @@ module GetBucketOwnershipControls = {
     bucket: bucketName,
   }
   type response = {
-    @ocaml.doc("<p>The <code>OwnershipControls</code> (BucketOwnerPreferred or ObjectWriter) currently in
+    @ocaml.doc("<p>The <code>OwnershipControls</code> (BucketOwnerEnforced, BucketOwnerPreferred, or ObjectWriter) currently in
          effect for this Amazon S3 bucket.</p>")
     @as("OwnershipControls")
     ownershipControls: option<ownershipControls>,
@@ -8169,7 +9049,7 @@ module GetBucketCors = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
@@ -8192,7 +9072,7 @@ module GetBucketAcl = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
@@ -8213,14 +9093,25 @@ module GetBucketAcl = {
 module DeleteObjects = {
   type t
   type request = {
-    @ocaml.doc("<p>Container for the request.</p>") @as("Delete") delete: delete,
+    @ocaml.doc("<p>Indicates the algorithm used to create the checksum for the object when using the SDK. This header will not provide any
+    additional functionality if not using the SDK. When sending this header, there must be a corresponding <code>x-amz-checksum</code> or
+    <code>x-amz-trailer</code> header sent. Otherwise, Amazon S3 fails the request with the HTTP status code <code>400 Bad Request</code>. For more
+    information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in
+    the <i>Amazon S3 User Guide</i>.</p>
+        <p>If you provide an individual checksum, Amazon S3 ignores any provided
+            <code>ChecksumAlgorithm</code> parameter.</p>
+        <p>This checksum algorithm must be the same for all parts and it match the checksum
+            value supplied in the <code>CreateMultipartUpload</code> request.</p>")
+    @as("ChecksumAlgorithm")
+    checksumAlgorithm: option<checksumAlgorithm>,
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
     @ocaml.doc("<p>Specifies whether you want to delete this object even if it has a Governance-type Object
-         Lock in place. You must have sufficient permissions to perform this operation.</p>")
+         Lock in place. To use this header, you must have the <code>s3:BypassGovernanceRetention</code>
+         permission.</p>")
     @as("BypassGovernanceRetention")
     bypassGovernanceRetention: option<bypassGovernanceRetention>,
     @as("RequestPayer") requestPayer: option<requestPayer>,
@@ -8229,9 +9120,11 @@ module DeleteObjects = {
          object if versioning is configured with MFA delete enabled.</p>")
     @as("MFA")
     mfa: option<mfa>,
+    @ocaml.doc("<p>Container for the request.</p>") @as("Delete") delete: delete,
     @ocaml.doc("<p>The bucket name containing the objects to delete. </p>
-         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>
-         <p>When using this action with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com. When using this action using S3 on Outposts through the AWS SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>")
+         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the Amazon Web Services SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>
+         <p>When using this action with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <code>
+               <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com</code>. When using this action with S3 on Outposts through the Amazon Web Services SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>")
     @as("Bucket")
     bucket: bucketName,
   }
@@ -8250,6 +9143,7 @@ module DeleteObjects = {
   let make = (
     ~delete,
     ~bucket,
+    ~checksumAlgorithm=?,
     ~expectedBucketOwner=?,
     ~bypassGovernanceRetention=?,
     ~requestPayer=?,
@@ -8257,11 +9151,12 @@ module DeleteObjects = {
     (),
   ) =>
     new({
-      delete: delete,
+      checksumAlgorithm: checksumAlgorithm,
       expectedBucketOwner: expectedBucketOwner,
       bypassGovernanceRetention: bypassGovernanceRetention,
       requestPayer: requestPayer,
       mfa: mfa,
+      delete: delete,
       bucket: bucket,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
@@ -8270,12 +9165,54 @@ module DeleteObjects = {
 module CompleteMultipartUpload = {
   type t
   type request = {
+    @ocaml.doc("<p>The MD5 server-side encryption (SSE) customer managed key. This parameter is needed only when the object was created using a checksum 
+    algorithm. For more information,
+    see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html\">Protecting data using SSE-C keys</a> in the
+    <i>Amazon S3 User Guide</i>.</p>")
+    @as("SSECustomerKeyMD5")
+    ssecustomerKeyMD5: option<ssecustomerKeyMD5>,
+    @ocaml.doc("<p>The server-side encryption (SSE) customer managed key. This parameter is needed only when the object was created using a checksum algorithm. 
+    For more information, see
+    <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html\">Protecting data using SSE-C keys</a> in the
+    <i>Amazon S3 User Guide</i>.</p>")
+    @as("SSECustomerKey")
+    ssecustomerKey: option<ssecustomerKey>,
+    @ocaml.doc("<p>The server-side encryption (SSE) algorithm used to encrypt the object. This parameter is needed only when the object was created 
+    using a checksum algorithm. For more information,
+    see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerSideEncryptionCustomerKeys.html\">Protecting data using SSE-C keys</a> in the
+    <i>Amazon S3 User Guide</i>.</p>")
+    @as("SSECustomerAlgorithm")
+    ssecustomerAlgorithm: option<ssecustomerAlgorithm>,
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
     @as("RequestPayer") requestPayer: option<requestPayer>,
+    @ocaml.doc("<p>This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
+    This header specifies the base64-encoded, 256-bit SHA-256 digest of the object. For more information, see
+    <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the
+    <i>Amazon S3 User Guide</i>.</p>")
+    @as("ChecksumSHA256")
+    checksumSHA256: option<checksumSHA256>,
+    @ocaml.doc("<p>This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
+    This header specifies the base64-encoded, 160-bit SHA-1 digest of the object. For more information, see
+    <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the
+    <i>Amazon S3 User Guide</i>.</p>")
+    @as("ChecksumSHA1")
+    checksumSHA1: option<checksumSHA1>,
+    @ocaml.doc("<p>This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
+    This header specifies the base64-encoded, 32-bit CRC32C checksum of the object. For more information, see
+    <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the
+    <i>Amazon S3 User Guide</i>.</p>")
+    @as("ChecksumCRC32C")
+    checksumCRC32C: option<checksumCRC32C>,
+    @ocaml.doc("<p>This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
+    This header specifies the base64-encoded, 32-bit CRC32 checksum of the object. For more information, see
+    <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in the
+    <i>Amazon S3 User Guide</i>.</p>")
+    @as("ChecksumCRC32")
+    checksumCRC32: option<checksumCRC32>,
     @ocaml.doc("<p>ID for the initiated multipart upload.</p>") @as("UploadId")
     uploadId: multipartUploadId,
     @ocaml.doc("<p>The container for the multipart upload request information.</p>")
@@ -8283,19 +9220,22 @@ module CompleteMultipartUpload = {
     multipartUpload: option<completedMultipartUpload>,
     @ocaml.doc("<p>Object key for which the multipart upload was initiated.</p>") @as("Key")
     key: objectKey,
-    @ocaml.doc("<p>Name of the bucket to which the multipart upload was initiated.</p>")
+    @ocaml.doc("<p>Name of the bucket to which the multipart upload was initiated.</p>
+         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the Amazon Web Services SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>
+         <p>When using this action with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <code>
+               <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com</code>. When using this action with S3 on Outposts through the Amazon Web Services SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>")
     @as("Bucket")
     bucket: bucketName,
   }
   type response = {
     @as("RequestCharged") requestCharged: option<requestCharged>,
     @ocaml.doc(
-      "<p>Indicates whether the multipart upload uses an S3 Bucket Key for server-side encryption with AWS KMS (SSE-KMS).</p>"
+      "<p>Indicates whether the multipart upload uses an S3 Bucket Key for server-side encryption with Amazon Web Services KMS (SSE-KMS).</p>"
     )
     @as("BucketKeyEnabled")
     bucketKeyEnabled: option<bucketKeyEnabled>,
-    @ocaml.doc("<p>If present, specifies the ID of the AWS Key Management Service (AWS KMS) symmetric
-         customer managed customer master key (CMK) that was used for the object.</p>")
+    @ocaml.doc("<p>If present, specifies the ID of the Amazon Web Services Key Management Service (Amazon Web Services KMS) symmetric
+         customer managed key that was used for the object.</p>")
     @as("SSEKMSKeyId")
     ssekmskeyId: option<ssekmskeyId>,
     @ocaml.doc("<p>Version ID of the newly created object, in case the bucket has versioning turned
@@ -8303,27 +9243,56 @@ module CompleteMultipartUpload = {
     @as("VersionId")
     versionId: option<objectVersionId>,
     @ocaml.doc("<p>If you specified server-side encryption either with an Amazon S3-managed encryption key or an
-         AWS KMS customer master key (CMK) in your initiate multipart upload request, the response
+         Amazon Web Services KMS key in your initiate multipart upload request, the response
          includes this header. It confirms the encryption algorithm that Amazon S3 used to encrypt the
          object.</p>")
     @as("ServerSideEncryption")
     serverSideEncryption: option<serverSideEncryption>,
+    @ocaml.doc("<p>The base64-encoded, 256-bit SHA-256 digest of the object. This will only be present if it was uploaded
+    with the object. With multipart uploads, this may not be a checksum value of the object. For more information about how checksums are calculated
+    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">
+    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>")
+    @as("ChecksumSHA256")
+    checksumSHA256: option<checksumSHA256>,
+    @ocaml.doc("<p>The base64-encoded, 160-bit SHA-1 digest of the object. This will only be present if it was uploaded
+    with the object. With multipart uploads, this may not be a checksum value of the object. For more information about how checksums are calculated
+    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">
+    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>")
+    @as("ChecksumSHA1")
+    checksumSHA1: option<checksumSHA1>,
+    @ocaml.doc("<p>The base64-encoded, 32-bit CRC32C checksum of the object. This will only be present if it was uploaded
+    with the object. With multipart uploads, this may not be a checksum value of the object. For more information about how checksums are calculated
+    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">
+    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>")
+    @as("ChecksumCRC32C")
+    checksumCRC32C: option<checksumCRC32C>,
+    @ocaml.doc("<p>The base64-encoded, 32-bit CRC32 checksum of the object. This will only be present if it was uploaded
+    with the object. With multipart uploads, this may not be a checksum value of the object. For more information about how checksums are calculated
+    with multipart uploads, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums\">
+    Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>")
+    @as("ChecksumCRC32")
+    checksumCRC32: option<checksumCRC32>,
     @ocaml.doc("<p>Entity tag that identifies the newly created object's data. Objects with different
          object data will have different entity tags. The entity tag is an opaque string. The entity
          tag may or may not be an MD5 digest of the object data. If the entity tag is not an MD5
          digest of the object data, it will contain one or more nonhexadecimal characters and/or
-         will consist of less than 32 or more than 32 hexadecimal digits.</p>")
+         will consist of less than 32 or more than 32 hexadecimal digits. For more information about
+         how the entity tag is calculated, see
+         <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking
+              object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>")
     @as("ETag")
     etag: option<etag>,
     @ocaml.doc("<p>If the object expiration is configured, this will contain the expiration date
-         (expiry-date) and rule ID (rule-id). The value of rule-id is URL encoded.</p>")
+            (<code>expiry-date</code>) and rule ID (<code>rule-id</code>). The value of
+            <code>rule-id</code> is URL-encoded.</p>")
     @as("Expiration")
     expiration: option<expiration>,
     @ocaml.doc("<p>The object key of the newly created object.</p>") @as("Key")
     key: option<objectKey>,
-    @ocaml.doc("<p>The name of the bucket that contains the newly created object.</p>
-         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>
-         <p>When using this action with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com. When using this action using S3 on Outposts through the AWS SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>")
+    @ocaml.doc("<p>The name of the bucket that contains the newly created object. Does not return the access point ARN or access point alias if used.</p>
+         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the Amazon Web Services SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>
+         <p>When using this action with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <code>
+               <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com</code>. When using this action with S3 on Outposts through the Amazon Web Services SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>")
     @as("Bucket")
     bucket: option<bucketName>,
     @ocaml.doc("<p>The URI that identifies the newly created object.</p>") @as("Location")
@@ -8334,14 +9303,28 @@ module CompleteMultipartUpload = {
     ~uploadId,
     ~key,
     ~bucket,
+    ~ssecustomerKeyMD5=?,
+    ~ssecustomerKey=?,
+    ~ssecustomerAlgorithm=?,
     ~expectedBucketOwner=?,
     ~requestPayer=?,
+    ~checksumSHA256=?,
+    ~checksumSHA1=?,
+    ~checksumCRC32C=?,
+    ~checksumCRC32=?,
     ~multipartUpload=?,
     (),
   ) =>
     new({
+      ssecustomerKeyMD5: ssecustomerKeyMD5,
+      ssecustomerKey: ssecustomerKey,
+      ssecustomerAlgorithm: ssecustomerAlgorithm,
       expectedBucketOwner: expectedBucketOwner,
       requestPayer: requestPayer,
+      checksumSHA256: checksumSHA256,
+      checksumSHA1: checksumSHA1,
+      checksumCRC32C: checksumCRC32C,
+      checksumCRC32: checksumCRC32,
       uploadId: uploadId,
       multipartUpload: multipartUpload,
       key: key,
@@ -8354,12 +9337,7 @@ module PutObjectAcl = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>Contains the elements that set the ACL permissions for an object per grantee.</p>"
-    )
-    @as("AccessControlPolicy")
-    accessControlPolicy: option<accessControlPolicy>,
-    @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
@@ -8368,8 +9346,9 @@ module PutObjectAcl = {
     versionId: option<objectVersionId>,
     @as("RequestPayer") requestPayer: option<requestPayer>,
     @ocaml.doc("<p>Key for which the PUT action was initiated.</p>
-         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>
-         <p>When using this action with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com. When using this action using S3 on Outposts through the AWS SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>")
+         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the Amazon Web Services SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>
+         <p>When using this action with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <code>
+               <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com</code>. When using this action with S3 on Outposts through the Amazon Web Services SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>")
     @as("Key")
     key: objectKey,
     @ocaml.doc("<p>Allows grantee to write the ACL for the applicable
@@ -8395,18 +9374,32 @@ module PutObjectAcl = {
          <p>This action is not supported by Amazon S3 on Outposts.</p>")
     @as("GrantFullControl")
     grantFullControl: option<grantFullControl>,
+    @ocaml.doc("<p>Indicates the algorithm used to create the checksum for the object when using the SDK. This header will not provide any
+    additional functionality if not using the SDK. When sending this header, there must be a corresponding <code>x-amz-checksum</code> or
+    <code>x-amz-trailer</code> header sent. Otherwise, Amazon S3 fails the request with the HTTP status code <code>400 Bad Request</code>. For more
+    information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in
+    the <i>Amazon S3 User Guide</i>.</p>
+        <p>If you provide an individual checksum, Amazon S3 ignores any provided
+            <code>ChecksumAlgorithm</code> parameter.</p>")
+    @as("ChecksumAlgorithm")
+    checksumAlgorithm: option<checksumAlgorithm>,
     @ocaml.doc("<p>The base64-encoded 128-bit MD5 digest of the data. This header must be used as a message
          integrity check to verify that the request body was not corrupted in transit. For more
          information, go to <a href=\"http://www.ietf.org/rfc/rfc1864.txt\">RFC
          1864.></a>
          </p>
-         <p>For requests made using the AWS Command Line Interface (CLI) or AWS SDKs, this field is calculated automatically.</p>")
+         <p>For requests made using the Amazon Web Services Command Line Interface (CLI) or Amazon Web Services SDKs, this field is calculated automatically.</p>")
     @as("ContentMD5")
     contentMD5: option<contentMD5>,
     @ocaml.doc("<p>The bucket name that contains the object to which you want to attach the ACL. </p>
-         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>")
+         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the Amazon Web Services SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>")
     @as("Bucket")
     bucket: bucketName,
+    @ocaml.doc(
+      "<p>Contains the elements that set the ACL permissions for an object per grantee.</p>"
+    )
+    @as("AccessControlPolicy")
+    accessControlPolicy: option<accessControlPolicy>,
     @ocaml.doc(
       "<p>The canned ACL to apply to the object. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL\">Canned ACL</a>.</p>"
     )
@@ -8418,7 +9411,6 @@ module PutObjectAcl = {
   let make = (
     ~key,
     ~bucket,
-    ~accessControlPolicy=?,
     ~expectedBucketOwner=?,
     ~versionId=?,
     ~requestPayer=?,
@@ -8427,12 +9419,13 @@ module PutObjectAcl = {
     ~grantReadACP=?,
     ~grantRead=?,
     ~grantFullControl=?,
+    ~checksumAlgorithm=?,
     ~contentMD5=?,
+    ~accessControlPolicy=?,
     ~acl=?,
     (),
   ) =>
     new({
-      accessControlPolicy: accessControlPolicy,
       expectedBucketOwner: expectedBucketOwner,
       versionId: versionId,
       requestPayer: requestPayer,
@@ -8442,8 +9435,10 @@ module PutObjectAcl = {
       grantReadACP: grantReadACP,
       grantRead: grantRead,
       grantFullControl: grantFullControl,
+      checksumAlgorithm: checksumAlgorithm,
       contentMD5: contentMD5,
       bucket: bucket,
+      accessControlPolicy: accessControlPolicy,
       acl: acl,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
@@ -8452,27 +9447,44 @@ module PutObjectAcl = {
 module PutBucketWebsite = {
   type t
   type request = {
-    @ocaml.doc("<p>Container for the request.</p>") @as("WebsiteConfiguration")
-    websiteConfiguration: websiteConfiguration,
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
+    @ocaml.doc("<p>Container for the request.</p>") @as("WebsiteConfiguration")
+    websiteConfiguration: websiteConfiguration,
+    @ocaml.doc("<p>Indicates the algorithm used to create the checksum for the object when using the SDK. This header will not provide any
+    additional functionality if not using the SDK. When sending this header, there must be a corresponding <code>x-amz-checksum</code> or
+    <code>x-amz-trailer</code> header sent. Otherwise, Amazon S3 fails the request with the HTTP status code <code>400 Bad Request</code>. For more
+    information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in
+    the <i>Amazon S3 User Guide</i>.</p>
+        <p>If you provide an individual checksum, Amazon S3 ignores any provided
+            <code>ChecksumAlgorithm</code> parameter.</p>")
+    @as("ChecksumAlgorithm")
+    checksumAlgorithm: option<checksumAlgorithm>,
     @ocaml.doc("<p>The base64-encoded 128-bit MD5 digest of the data. You must use this header as a message
          integrity check to verify that the request body was not corrupted in transit. For more
          information, see <a href=\"http://www.ietf.org/rfc/rfc1864.txt\">RFC 1864</a>.</p>
-         <p>For requests made using the AWS Command Line Interface (CLI) or AWS SDKs, this field is calculated automatically.</p>")
+         <p>For requests made using the Amazon Web Services Command Line Interface (CLI) or Amazon Web Services SDKs, this field is calculated automatically.</p>")
     @as("ContentMD5")
     contentMD5: option<contentMD5>,
     @ocaml.doc("<p>The bucket name.</p>") @as("Bucket") bucket: bucketName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-s3") @new external new: request => t = "PutBucketWebsiteCommand"
-  let make = (~websiteConfiguration, ~bucket, ~expectedBucketOwner=?, ~contentMD5=?, ()) =>
+  let make = (
+    ~websiteConfiguration,
+    ~bucket,
+    ~expectedBucketOwner=?,
+    ~checksumAlgorithm=?,
+    ~contentMD5=?,
+    (),
+  ) =>
     new({
-      websiteConfiguration: websiteConfiguration,
       expectedBucketOwner: expectedBucketOwner,
+      websiteConfiguration: websiteConfiguration,
+      checksumAlgorithm: checksumAlgorithm,
       contentMD5: contentMD5,
       bucket: bucket,
     })
@@ -8482,36 +9494,47 @@ module PutBucketWebsite = {
 module PutBucketEncryption = {
   type t
   type request = {
-    @as("ServerSideEncryptionConfiguration")
-    serverSideEncryptionConfiguration: serverSideEncryptionConfiguration,
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
+    @as("ServerSideEncryptionConfiguration")
+    serverSideEncryptionConfiguration: serverSideEncryptionConfiguration,
+    @ocaml.doc("<p>Indicates the algorithm used to create the checksum for the object when using the SDK. This header will not provide any
+    additional functionality if not using the SDK. When sending this header, there must be a corresponding <code>x-amz-checksum</code> or
+    <code>x-amz-trailer</code> header sent. Otherwise, Amazon S3 fails the request with the HTTP status code <code>400 Bad Request</code>. For more
+    information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in
+    the <i>Amazon S3 User Guide</i>.</p>
+        <p>If you provide an individual checksum, Amazon S3 ignores any provided
+            <code>ChecksumAlgorithm</code> parameter.</p>")
+    @as("ChecksumAlgorithm")
+    checksumAlgorithm: option<checksumAlgorithm>,
     @ocaml.doc("<p>The base64-encoded 128-bit MD5 digest of the server-side encryption configuration.</p>
-         <p>For requests made using the AWS Command Line Interface (CLI) or AWS SDKs, this field is calculated automatically.</p>")
+         <p>For requests made using the Amazon Web Services Command Line Interface (CLI) or Amazon Web Services SDKs, this field is calculated automatically.</p>")
     @as("ContentMD5")
     contentMD5: option<contentMD5>,
     @ocaml.doc("<p>Specifies default encryption for a bucket using server-side encryption with Amazon S3-managed
-         keys (SSE-S3) or customer master keys stored in AWS KMS (SSE-KMS). For information about
+         keys (SSE-S3) or customer managed keys (SSE-KMS). For information about
          the Amazon S3 default encryption feature, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html\">Amazon S3 Default Bucket Encryption</a>
          in the <i>Amazon S3 User Guide</i>.</p>")
     @as("Bucket")
     bucket: bucketName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-s3") @new external new: request => t = "PutBucketEncryptionCommand"
   let make = (
     ~serverSideEncryptionConfiguration,
     ~bucket,
     ~expectedBucketOwner=?,
+    ~checksumAlgorithm=?,
     ~contentMD5=?,
     (),
   ) =>
     new({
-      serverSideEncryptionConfiguration: serverSideEncryptionConfiguration,
       expectedBucketOwner: expectedBucketOwner,
+      serverSideEncryptionConfiguration: serverSideEncryptionConfiguration,
+      checksumAlgorithm: checksumAlgorithm,
       contentMD5: contentMD5,
       bucket: bucket,
     })
@@ -8521,35 +9544,52 @@ module PutBucketEncryption = {
 module PutBucketCors = {
   type t
   type request = {
-    @ocaml.doc("<p>Describes the cross-origin access configuration for objects in an Amazon S3 bucket. For more
-         information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html\">Enabling Cross-Origin Resource
-            Sharing</a> in the <i>Amazon S3 User Guide</i>.</p>")
-    @as("CORSConfiguration")
-    corsconfiguration: corsconfiguration,
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
+    @ocaml.doc("<p>Indicates the algorithm used to create the checksum for the object when using the SDK. This header will not provide any
+    additional functionality if not using the SDK. When sending this header, there must be a corresponding <code>x-amz-checksum</code> or
+    <code>x-amz-trailer</code> header sent. Otherwise, Amazon S3 fails the request with the HTTP status code <code>400 Bad Request</code>. For more
+    information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in
+    the <i>Amazon S3 User Guide</i>.</p>
+        <p>If you provide an individual checksum, Amazon S3 ignores any provided
+            <code>ChecksumAlgorithm</code> parameter.</p>")
+    @as("ChecksumAlgorithm")
+    checksumAlgorithm: option<checksumAlgorithm>,
     @ocaml.doc("<p>The base64-encoded 128-bit MD5 digest of the data. This header must be used as a message
          integrity check to verify that the request body was not corrupted in transit. For more
          information, go to <a href=\"http://www.ietf.org/rfc/rfc1864.txt\">RFC
          1864.</a>
          </p>
-         <p>For requests made using the AWS Command Line Interface (CLI) or AWS SDKs, this field is calculated automatically.</p>")
+         <p>For requests made using the Amazon Web Services Command Line Interface (CLI) or Amazon Web Services SDKs, this field is calculated automatically.</p>")
     @as("ContentMD5")
     contentMD5: option<contentMD5>,
+    @ocaml.doc("<p>Describes the cross-origin access configuration for objects in an Amazon S3 bucket. For more
+         information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html\">Enabling Cross-Origin Resource
+            Sharing</a> in the <i>Amazon S3 User Guide</i>.</p>")
+    @as("CORSConfiguration")
+    corsconfiguration: corsconfiguration,
     @ocaml.doc("<p>Specifies the bucket impacted by the <code>cors</code>configuration.</p>")
     @as("Bucket")
     bucket: bucketName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-s3") @new external new: request => t = "PutBucketCorsCommand"
-  let make = (~corsconfiguration, ~bucket, ~expectedBucketOwner=?, ~contentMD5=?, ()) =>
+  let make = (
+    ~corsconfiguration,
+    ~bucket,
+    ~expectedBucketOwner=?,
+    ~checksumAlgorithm=?,
+    ~contentMD5=?,
+    (),
+  ) =>
     new({
-      corsconfiguration: corsconfiguration,
       expectedBucketOwner: expectedBucketOwner,
+      checksumAlgorithm: checksumAlgorithm,
       contentMD5: contentMD5,
+      corsconfiguration: corsconfiguration,
       bucket: bucket,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -8559,12 +9599,7 @@ module PutBucketAcl = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>Contains the elements that set the ACL permissions for an object per grantee.</p>"
-    )
-    @as("AccessControlPolicy")
-    accessControlPolicy: option<accessControlPolicy>,
-    @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
@@ -8583,43 +9618,59 @@ module PutBucketAcl = {
          bucket.</p>")
     @as("GrantFullControl")
     grantFullControl: option<grantFullControl>,
+    @ocaml.doc("<p>Indicates the algorithm used to create the checksum for the object when using the SDK. This header will not provide any
+    additional functionality if not using the SDK. When sending this header, there must be a corresponding <code>x-amz-checksum</code> or
+    <code>x-amz-trailer</code> header sent. Otherwise, Amazon S3 fails the request with the HTTP status code <code>400 Bad Request</code>. For more
+    information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in
+    the <i>Amazon S3 User Guide</i>.</p>
+        <p>If you provide an individual checksum, Amazon S3 ignores any provided
+            <code>ChecksumAlgorithm</code> parameter.</p>")
+    @as("ChecksumAlgorithm")
+    checksumAlgorithm: option<checksumAlgorithm>,
     @ocaml.doc("<p>The base64-encoded 128-bit MD5 digest of the data. This header must be used as a message
          integrity check to verify that the request body was not corrupted in transit. For more
          information, go to <a href=\"http://www.ietf.org/rfc/rfc1864.txt\">RFC
          1864.</a>
          </p>
-         <p>For requests made using the AWS Command Line Interface (CLI) or AWS SDKs, this field is calculated automatically.</p>")
+         <p>For requests made using the Amazon Web Services Command Line Interface (CLI) or Amazon Web Services SDKs, this field is calculated automatically.</p>")
     @as("ContentMD5")
     contentMD5: option<contentMD5>,
     @ocaml.doc("<p>The bucket to which to apply the ACL.</p>") @as("Bucket") bucket: bucketName,
+    @ocaml.doc(
+      "<p>Contains the elements that set the ACL permissions for an object per grantee.</p>"
+    )
+    @as("AccessControlPolicy")
+    accessControlPolicy: option<accessControlPolicy>,
     @ocaml.doc("<p>The canned ACL to apply to the bucket.</p>") @as("ACL")
     acl: option<bucketCannedACL>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-s3") @new external new: request => t = "PutBucketAclCommand"
   let make = (
     ~bucket,
-    ~accessControlPolicy=?,
     ~expectedBucketOwner=?,
     ~grantWriteACP=?,
     ~grantWrite=?,
     ~grantReadACP=?,
     ~grantRead=?,
     ~grantFullControl=?,
+    ~checksumAlgorithm=?,
     ~contentMD5=?,
+    ~accessControlPolicy=?,
     ~acl=?,
     (),
   ) =>
     new({
-      accessControlPolicy: accessControlPolicy,
       expectedBucketOwner: expectedBucketOwner,
       grantWriteACP: grantWriteACP,
       grantWrite: grantWrite,
       grantReadACP: grantReadACP,
       grantRead: grantRead,
       grantFullControl: grantFullControl,
+      checksumAlgorithm: checksumAlgorithm,
       contentMD5: contentMD5,
       bucket: bucket,
+      accessControlPolicy: accessControlPolicy,
       acl: acl,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -8629,7 +9680,7 @@ module GetBucketLogging = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
@@ -8647,7 +9698,7 @@ module GetBucketEncryption = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
@@ -8669,25 +9720,25 @@ module GetBucketEncryption = {
 module PutBucketMetricsConfiguration = {
   type t
   type request = {
-    @ocaml.doc("<p>Specifies the metrics configuration.</p>") @as("MetricsConfiguration")
-    metricsConfiguration: metricsConfiguration,
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
+    @ocaml.doc("<p>Specifies the metrics configuration.</p>") @as("MetricsConfiguration")
+    metricsConfiguration: metricsConfiguration,
     @ocaml.doc("<p>The ID used to identify the metrics configuration.</p>") @as("Id") id: metricsId,
     @ocaml.doc("<p>The name of the bucket for which the metrics configuration is set.</p>")
     @as("Bucket")
     bucket: bucketName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "PutBucketMetricsConfigurationCommand"
   let make = (~metricsConfiguration, ~id, ~bucket, ~expectedBucketOwner=?, ()) =>
     new({
-      metricsConfiguration: metricsConfiguration,
       expectedBucketOwner: expectedBucketOwner,
+      metricsConfiguration: metricsConfiguration,
       id: id,
       bucket: bucket,
     })
@@ -8697,28 +9748,45 @@ module PutBucketMetricsConfiguration = {
 module PutBucketLogging = {
   type t
   type request = {
-    @ocaml.doc("<p>Container for logging status information.</p>") @as("BucketLoggingStatus")
-    bucketLoggingStatus: bucketLoggingStatus,
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
+    @ocaml.doc("<p>Indicates the algorithm used to create the checksum for the object when using the SDK. This header will not provide any
+    additional functionality if not using the SDK. When sending this header, there must be a corresponding <code>x-amz-checksum</code> or
+    <code>x-amz-trailer</code> header sent. Otherwise, Amazon S3 fails the request with the HTTP status code <code>400 Bad Request</code>. For more
+    information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in
+    the <i>Amazon S3 User Guide</i>.</p>
+        <p>If you provide an individual checksum, Amazon S3 ignores any provided
+            <code>ChecksumAlgorithm</code> parameter.</p>")
+    @as("ChecksumAlgorithm")
+    checksumAlgorithm: option<checksumAlgorithm>,
     @ocaml.doc("<p>The MD5 hash of the <code>PutBucketLogging</code> request body.</p>
-         <p>For requests made using the AWS Command Line Interface (CLI) or AWS SDKs, this field is calculated automatically.</p>")
+         <p>For requests made using the Amazon Web Services Command Line Interface (CLI) or Amazon Web Services SDKs, this field is calculated automatically.</p>")
     @as("ContentMD5")
     contentMD5: option<contentMD5>,
+    @ocaml.doc("<p>Container for logging status information.</p>") @as("BucketLoggingStatus")
+    bucketLoggingStatus: bucketLoggingStatus,
     @ocaml.doc("<p>The name of the bucket for which to set the logging parameters.</p>")
     @as("Bucket")
     bucket: bucketName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-s3") @new external new: request => t = "PutBucketLoggingCommand"
-  let make = (~bucketLoggingStatus, ~bucket, ~expectedBucketOwner=?, ~contentMD5=?, ()) =>
+  let make = (
+    ~bucketLoggingStatus,
+    ~bucket,
+    ~expectedBucketOwner=?,
+    ~checksumAlgorithm=?,
+    ~contentMD5=?,
+    (),
+  ) =>
     new({
-      bucketLoggingStatus: bucketLoggingStatus,
       expectedBucketOwner: expectedBucketOwner,
+      checksumAlgorithm: checksumAlgorithm,
       contentMD5: contentMD5,
+      bucketLoggingStatus: bucketLoggingStatus,
       bucket: bucket,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -8727,26 +9795,26 @@ module PutBucketLogging = {
 module PutBucketInventoryConfiguration = {
   type t
   type request = {
-    @ocaml.doc("<p>Specifies the inventory configuration.</p>") @as("InventoryConfiguration")
-    inventoryConfiguration: inventoryConfiguration,
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
+    @ocaml.doc("<p>Specifies the inventory configuration.</p>") @as("InventoryConfiguration")
+    inventoryConfiguration: inventoryConfiguration,
     @ocaml.doc("<p>The ID used to identify the inventory configuration.</p>") @as("Id")
     id: inventoryId,
     @ocaml.doc("<p>The name of the bucket where the inventory configuration will be stored.</p>")
     @as("Bucket")
     bucket: bucketName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "PutBucketInventoryConfigurationCommand"
   let make = (~inventoryConfiguration, ~id, ~bucket, ~expectedBucketOwner=?, ()) =>
     new({
-      inventoryConfiguration: inventoryConfiguration,
       expectedBucketOwner: expectedBucketOwner,
+      inventoryConfiguration: inventoryConfiguration,
       id: id,
       bucket: bucket,
     })
@@ -8767,7 +9835,7 @@ module PutBucketIntelligentTieringConfiguration = {
     @as("Bucket")
     bucket: bucketName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "PutBucketIntelligentTieringConfigurationCommand"
   let make = (~intelligentTieringConfiguration, ~id, ~bucket, ()) =>
@@ -8778,27 +9846,27 @@ module PutBucketIntelligentTieringConfiguration = {
 module PutBucketAnalyticsConfiguration = {
   type t
   type request = {
-    @ocaml.doc("<p>The configuration and any analyses for the analytics filter.</p>")
-    @as("AnalyticsConfiguration")
-    analyticsConfiguration: analyticsConfiguration,
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
+    @ocaml.doc("<p>The configuration and any analyses for the analytics filter.</p>")
+    @as("AnalyticsConfiguration")
+    analyticsConfiguration: analyticsConfiguration,
     @ocaml.doc("<p>The ID that identifies the analytics configuration.</p>") @as("Id")
     id: analyticsId,
     @ocaml.doc("<p>The name of the bucket to which an analytics configuration is stored.</p>")
     @as("Bucket")
     bucket: bucketName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "PutBucketAnalyticsConfigurationCommand"
   let make = (~analyticsConfiguration, ~id, ~bucket, ~expectedBucketOwner=?, ()) =>
     new({
-      analyticsConfiguration: analyticsConfiguration,
       expectedBucketOwner: expectedBucketOwner,
+      analyticsConfiguration: analyticsConfiguration,
       id: id,
       bucket: bucket,
     })
@@ -8809,7 +9877,7 @@ module GetBucketMetricsConfiguration = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
@@ -8833,7 +9901,7 @@ module GetBucketInventoryConfiguration = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
@@ -8880,7 +9948,7 @@ module GetBucketAnalyticsConfiguration = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
@@ -8905,20 +9973,30 @@ module GetBucketAnalyticsConfiguration = {
 module RestoreObject = {
   type t
   type request = {
-    @as("RestoreRequest") restoreRequest: option<restoreRequest>,
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
+    @ocaml.doc("<p>Indicates the algorithm used to create the checksum for the object when using the SDK. This header will not provide any
+    additional functionality if not using the SDK. When sending this header, there must be a corresponding <code>x-amz-checksum</code> or
+    <code>x-amz-trailer</code> header sent. Otherwise, Amazon S3 fails the request with the HTTP status code <code>400 Bad Request</code>. For more
+    information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in
+    the <i>Amazon S3 User Guide</i>.</p>
+        <p>If you provide an individual checksum, Amazon S3 ignores any provided
+            <code>ChecksumAlgorithm</code> parameter.</p>")
+    @as("ChecksumAlgorithm")
+    checksumAlgorithm: option<checksumAlgorithm>,
     @as("RequestPayer") requestPayer: option<requestPayer>,
+    @as("RestoreRequest") restoreRequest: option<restoreRequest>,
     @ocaml.doc("<p>VersionId used to reference a specific version of the object.</p>")
     @as("VersionId")
     versionId: option<objectVersionId>,
     @ocaml.doc("<p>Object key for which the action was initiated.</p>") @as("Key") key: objectKey,
     @ocaml.doc("<p>The bucket name containing the object to restore. </p>
-         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the AWS SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>
-         <p>When using this action with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com. When using this action using S3 on Outposts through the AWS SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>")
+         <p>When using this action with an access point, you must direct requests to the access point hostname. The access point hostname takes the form <i>AccessPointName</i>-<i>AccountId</i>.s3-accesspoint.<i>Region</i>.amazonaws.com. When using this action with an access point through the Amazon Web Services SDKs, you provide the access point ARN in place of the bucket name. For more information about access point ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html\">Using access points</a> in the <i>Amazon S3 User Guide</i>.</p>
+         <p>When using this action with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts hostname. The S3 on Outposts hostname takes the form <code>
+               <i>AccessPointName</i>-<i>AccountId</i>.<i>outpostID</i>.s3-outposts.<i>Region</i>.amazonaws.com</code>. When using this action with S3 on Outposts through the Amazon Web Services SDKs, you provide the Outposts bucket ARN in place of the bucket name. For more information about S3 on Outposts ARNs, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>")
     @as("Bucket")
     bucket: bucketName,
   }
@@ -8933,16 +10011,18 @@ module RestoreObject = {
   let make = (
     ~key,
     ~bucket,
-    ~restoreRequest=?,
     ~expectedBucketOwner=?,
+    ~checksumAlgorithm=?,
     ~requestPayer=?,
+    ~restoreRequest=?,
     ~versionId=?,
     (),
   ) =>
     new({
-      restoreRequest: restoreRequest,
       expectedBucketOwner: expectedBucketOwner,
+      checksumAlgorithm: checksumAlgorithm,
       requestPayer: requestPayer,
+      restoreRequest: restoreRequest,
       versionId: versionId,
       key: key,
       bucket: bucket,
@@ -8954,7 +10034,7 @@ module ListBucketMetricsConfigurations = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
@@ -9003,7 +10083,7 @@ module ListBucketInventoryConfigurations = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
@@ -9049,8 +10129,8 @@ module ListBucketInventoryConfigurations = {
 module ListBucketIntelligentTieringConfigurations = {
   type t
   type request = {
-    @ocaml.doc("<p>The ContinuationToken that represents a placeholder from where this request should
-         begin.</p>")
+    @ocaml.doc("<p>The <code>ContinuationToken</code> that represents a placeholder from where this request
+         should begin.</p>")
     @as("ContinuationToken")
     continuationToken: option<token>,
     @ocaml.doc(
@@ -9068,13 +10148,13 @@ module ListBucketIntelligentTieringConfigurations = {
          subsequent request. The continuation token is an opaque value that Amazon S3 understands.</p>")
     @as("NextContinuationToken")
     nextContinuationToken: option<nextToken>,
-    @ocaml.doc("<p>The ContinuationToken that represents a placeholder from where this request should
-         begin.</p>")
+    @ocaml.doc("<p>The <code>ContinuationToken</code> that represents a placeholder from where this request
+         should begin.</p>")
     @as("ContinuationToken")
     continuationToken: option<token>,
     @ocaml.doc("<p>Indicates whether the returned list of analytics configurations is complete. A value of
-         true indicates that the list is not complete and the NextContinuationToken will be provided
-         for a subsequent request.</p>")
+            <code>true</code> indicates that the list is not complete and the
+            <code>NextContinuationToken</code> will be provided for a subsequent request.</p>")
     @as("IsTruncated")
     isTruncated: option<isTruncated>,
   }
@@ -9089,7 +10169,7 @@ module ListBucketAnalyticsConfigurations = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
@@ -9137,7 +10217,7 @@ module GetBucketNotificationConfiguration = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
@@ -9157,7 +10237,7 @@ module GetBucketLifecycleConfiguration = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
@@ -9178,37 +10258,48 @@ module GetBucketLifecycleConfiguration = {
 module PutBucketReplication = {
   type t
   type request = {
-    @as("ReplicationConfiguration") replicationConfiguration: replicationConfiguration,
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
     @ocaml.doc("<p>A token to allow Object Lock to be enabled for an existing bucket.</p>")
     @as("Token")
     token: option<objectLockToken>,
+    @as("ReplicationConfiguration") replicationConfiguration: replicationConfiguration,
+    @ocaml.doc("<p>Indicates the algorithm used to create the checksum for the object when using the SDK. This header will not provide any
+    additional functionality if not using the SDK. When sending this header, there must be a corresponding <code>x-amz-checksum</code> or
+    <code>x-amz-trailer</code> header sent. Otherwise, Amazon S3 fails the request with the HTTP status code <code>400 Bad Request</code>. For more
+    information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in
+    the <i>Amazon S3 User Guide</i>.</p>
+        <p>If you provide an individual checksum, Amazon S3 ignores any provided
+            <code>ChecksumAlgorithm</code> parameter.</p>")
+    @as("ChecksumAlgorithm")
+    checksumAlgorithm: option<checksumAlgorithm>,
     @ocaml.doc("<p>The base64-encoded 128-bit MD5 digest of the data. You must use this header as a message
          integrity check to verify that the request body was not corrupted in transit. For more
          information, see <a href=\"http://www.ietf.org/rfc/rfc1864.txt\">RFC 1864</a>.</p>
-         <p>For requests made using the AWS Command Line Interface (CLI) or AWS SDKs, this field is calculated automatically.</p>")
+         <p>For requests made using the Amazon Web Services Command Line Interface (CLI) or Amazon Web Services SDKs, this field is calculated automatically.</p>")
     @as("ContentMD5")
     contentMD5: option<contentMD5>,
     @ocaml.doc("<p>The name of the bucket</p>") @as("Bucket") bucket: bucketName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-s3") @new external new: request => t = "PutBucketReplicationCommand"
   let make = (
     ~replicationConfiguration,
     ~bucket,
     ~expectedBucketOwner=?,
     ~token=?,
+    ~checksumAlgorithm=?,
     ~contentMD5=?,
     (),
   ) =>
     new({
-      replicationConfiguration: replicationConfiguration,
       expectedBucketOwner: expectedBucketOwner,
       token: token,
+      replicationConfiguration: replicationConfiguration,
+      checksumAlgorithm: checksumAlgorithm,
       contentMD5: contentMD5,
       bucket: bucket,
     })
@@ -9218,21 +10309,33 @@ module PutBucketReplication = {
 module PutBucketNotificationConfiguration = {
   type t
   type request = {
-    @as("NotificationConfiguration") notificationConfiguration: notificationConfiguration,
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>Skips validation of Amazon SQS, Amazon SNS, and Lambda destinations. True or false value.</p>"
+    )
+    @as("SkipDestinationValidation")
+    skipDestinationValidation: option<skipValidation>,
+    @ocaml.doc(
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
+    @as("NotificationConfiguration") notificationConfiguration: notificationConfiguration,
     @ocaml.doc("<p>The name of the bucket.</p>") @as("Bucket") bucket: bucketName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "PutBucketNotificationConfigurationCommand"
-  let make = (~notificationConfiguration, ~bucket, ~expectedBucketOwner=?, ()) =>
+  let make = (
+    ~notificationConfiguration,
+    ~bucket,
+    ~skipDestinationValidation=?,
+    ~expectedBucketOwner=?,
+    (),
+  ) =>
     new({
-      notificationConfiguration: notificationConfiguration,
+      skipDestinationValidation: skipDestinationValidation,
       expectedBucketOwner: expectedBucketOwner,
+      notificationConfiguration: notificationConfiguration,
       bucket: bucket,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -9241,24 +10344,40 @@ module PutBucketNotificationConfiguration = {
 module PutBucketLifecycleConfiguration = {
   type t
   type request = {
-    @ocaml.doc("<p>Container for lifecycle rules. You can add as many as 1,000 rules.</p>")
-    @as("LifecycleConfiguration")
-    lifecycleConfiguration: option<bucketLifecycleConfiguration>,
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,
+    @ocaml.doc("<p>Container for lifecycle rules. You can add as many as 1,000 rules.</p>")
+    @as("LifecycleConfiguration")
+    lifecycleConfiguration: option<bucketLifecycleConfiguration>,
+    @ocaml.doc("<p>Indicates the algorithm used to create the checksum for the object when using the SDK. This header will not provide any
+    additional functionality if not using the SDK. When sending this header, there must be a corresponding <code>x-amz-checksum</code> or
+    <code>x-amz-trailer</code> header sent. Otherwise, Amazon S3 fails the request with the HTTP status code <code>400 Bad Request</code>. For more
+    information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html\">Checking object integrity</a> in
+    the <i>Amazon S3 User Guide</i>.</p>
+        <p>If you provide an individual checksum, Amazon S3 ignores any provided
+            <code>ChecksumAlgorithm</code> parameter.</p>")
+    @as("ChecksumAlgorithm")
+    checksumAlgorithm: option<checksumAlgorithm>,
     @ocaml.doc("<p>The name of the bucket for which to set the configuration.</p>") @as("Bucket")
     bucket: bucketName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-s3") @new
   external new: request => t = "PutBucketLifecycleConfigurationCommand"
-  let make = (~bucket, ~lifecycleConfiguration=?, ~expectedBucketOwner=?, ()) =>
+  let make = (
+    ~bucket,
+    ~expectedBucketOwner=?,
+    ~lifecycleConfiguration=?,
+    ~checksumAlgorithm=?,
+    (),
+  ) =>
     new({
-      lifecycleConfiguration: lifecycleConfiguration,
       expectedBucketOwner: expectedBucketOwner,
+      lifecycleConfiguration: lifecycleConfiguration,
+      checksumAlgorithm: checksumAlgorithm,
       bucket: bucket,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -9268,7 +10387,7 @@ module GetBucketReplication = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>"
+      "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request fails with the HTTP status code <code>403 Forbidden</code> (access denied).</p>"
     )
     @as("ExpectedBucketOwner")
     expectedBucketOwner: option<accountId>,

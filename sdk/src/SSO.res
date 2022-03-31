@@ -82,7 +82,7 @@ module Logout = {
         <a href=\"https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/API_CreateToken.html\">CreateToken</a> in the <i>AWS SSO OIDC API Reference Guide</i>.</p>")
     accessToken: accessTokenType,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-awsssoportal") @new external new: request => t = "LogoutCommand"
   let make = (~accessToken, ()) => new({accessToken: accessToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"

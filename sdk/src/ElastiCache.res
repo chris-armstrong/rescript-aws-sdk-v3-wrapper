@@ -64,7 +64,7 @@ type nodeUpdateStatus = [
 ]
 type nodeUpdateInitiatedBy = [@as("customer") #Customer | @as("system") #System]
 type multiAZStatus = [@as("disabled") #Disabled | @as("enabled") #Enabled]
-type logType = [@as("slow-log") #Slow_Log]
+type logType = [@as("engine-log") #Engine_Log | @as("slow-log") #Slow_Log]
 type logFormat = [@as("json") #Json | @as("text") #Text]
 type logDeliveryConfigurationStatus = [
   | @as("error") #Error
@@ -84,6 +84,7 @@ type destinationType = [
   | @as("kinesis-firehose") #Kinesis_Firehose
   | @as("cloudwatch-logs") #Cloudwatch_Logs
 ]
+type dataTieringStatus = [@as("disabled") #Disabled | @as("enabled") #Enabled]
 type changeType = [@as("requires-reboot") #Requires_Reboot | @as("immediate") #Immediate]
 type booleanOptional = bool
 type boolean_ = bool
@@ -307,7 +308,7 @@ type kinesisFirehoseDestinationDetails = {
 }
 type keyList = array<string_>
 @ocaml.doc(
-  "<p>A member of a Global datastore. It contains the Replication Group Id, the AWS region and the role of the replication group. </p>"
+  "<p>A member of a Global datastore. It contains the Replication Group Id, the Amazon region and the role of the replication group. </p>"
 )
 type globalReplicationGroupMember = {
   @ocaml.doc("<p>The status of the membership of the replication group.</p>") @as("Status")
@@ -318,7 +319,8 @@ type globalReplicationGroupMember = {
   @ocaml.doc("<p>Indicates the role of the replication group, primary or secondary.</p>")
   @as("Role")
   role: option<string_>,
-  @ocaml.doc("<p>The AWS region of the Global datastore member.</p>") @as("ReplicationGroupRegion")
+  @ocaml.doc("<p>The Amazon region of the Global datastore member.</p>")
+  @as("ReplicationGroupRegion")
   replicationGroupRegion: option<string_>,
   @ocaml.doc("<p>The replication group id of the Global datastore member.</p>")
   @as("ReplicationGroupId")
@@ -370,7 +372,7 @@ type endpoint = {
 }
 @ocaml.doc("<p>Provides ownership and status information for an Amazon EC2 security group.</p>")
 type ec2SecurityGroup = {
-  @ocaml.doc("<p>The AWS account ID of the Amazon EC2 security group owner.</p>")
+  @ocaml.doc("<p>The Amazon account ID of the Amazon EC2 security group owner.</p>")
   @as("EC2SecurityGroupOwnerId")
   ec2SecurityGroupOwnerId: option<string_>,
   @ocaml.doc("<p>The name of the Amazon EC2 security group.</p>") @as("EC2SecurityGroupName")
@@ -473,8 +475,8 @@ type cacheEngineVersion = {
     <code>redis3.2</code> |
     <code>redis4.0</code> |
      <code>redis5.0</code> | 
-      <code>redis6.x</code> | 
-    </p>")
+      <code>redis6.x</code> 
+         </p>")
   @as("CacheParameterGroupFamily")
   cacheParameterGroupFamily: option<string_>,
   @ocaml.doc("<p>The version number of the cache engine.</p>") @as("EngineVersion")
@@ -497,9 +499,9 @@ type authentication = {
 }
 @ocaml.doc("<p>The status of the user group update.</p>")
 type userGroupsUpdateStatus = {
-  @ocaml.doc("<p>The list of user group IDs to remove.</p>") @as("UserGroupIdsToRemove")
+  @ocaml.doc("<p>The ID of the user group to remove.</p>") @as("UserGroupIdsToRemove")
   userGroupIdsToRemove: option<userGroupIdList>,
-  @ocaml.doc("<p>The list of user group IDs to add.</p>") @as("UserGroupIdsToAdd")
+  @ocaml.doc("<p>The ID of the user group to add.</p>") @as("UserGroupIdsToAdd")
   userGroupIdsToAdd: option<userGroupIdList>,
 }
 @ocaml.doc("<p>Returns the updates being applied to the user group.</p>")
@@ -518,6 +520,9 @@ type user = {
   userGroupIds: option<userGroupIdList>,
   @ocaml.doc("<p>Access permissions string used for this user.</p>") @as("AccessString")
   accessString: option<string_>,
+  @ocaml.doc("<p>The minimum engine version required, which is Redis 6.0</p>")
+  @as("MinimumEngineVersion")
+  minimumEngineVersion: option<string_>,
   @ocaml.doc("<p>The current supported value is Redis.</p>") @as("Engine")
   engine: option<engineType>,
   @ocaml.doc("<p>Indicates the user status. Can be \"active\", \"modifying\" or \"deleting\".</p>")
@@ -712,10 +717,12 @@ type cacheNodeTypeSpecificValueList = array<cacheNodeTypeSpecificValue>
                   <li>
                      <p>Current generation: </p>
 					    
-    						           <p>
-                        <b>M6g node types</b> (available only for Redis engine version 5.0.6 onward and for Memcached engine version 1.5.16 onward).</p>
-						               <p>	
-                        <code>cache.m6g.large</code>,
+					    
+					   
+					    
+					    
+					                <p>
+                        <b>M6g node types:</b> (available only for Redis engine version 5.0.6 onward and for Memcached engine version 1.5.16 onward): 	<code>cache.m6g.large</code>,
 							<code>cache.m6g.xlarge</code>,
 							<code>cache.m6g.2xlarge</code>,
 							<code>cache.m6g.4xlarge</code>,
@@ -754,7 +761,15 @@ type cacheNodeTypeSpecificValueList = array<cacheNodeTypeSpecificValue>
     						<code>cache.m4.4xlarge</code>,
     						<code>cache.m4.10xlarge</code>
                      </p>
-    					            <p>
+    		
+					                <p>
+                        <b>T4g node types</b> (available only for Redis engine version 5.0.6 onward and for Memcached engine version 1.5.16 onward):
+					        <code>cache.t4g.micro</code>,
+					        <code>cache.t4g.small</code>,
+					        <code>cache.t4g.medium</code>
+					                </p>	          	    
+					    
+					                <p>
                         <b>T3 node types:</b>
 					                   <code>cache.t3.micro</code>, 
     						<code>cache.t3.small</code>,
@@ -813,14 +828,48 @@ type cacheNodeTypeSpecificValueList = array<cacheNodeTypeSpecificValue>
                </ul>
             </li>
             <li>
+               <p>Memory optimized with data tiering:</p>
+		             <ul>
+                  <li>
+                     <p>Current generation: </p>
+		                
+		                   <p>
+                        <b>R6gd node types</b> (available only for Redis engine version 6.2 onward).</p>
+		                
+		                
+		                
+		                
+		                   <p>	
+		                    
+		                      <code>cache.r6gd.xlarge</code>,
+		                    <code>cache.r6gd.2xlarge</code>,
+		                    <code>cache.r6gd.4xlarge</code>,
+		                    <code>cache.r6gd.8xlarge</code>,
+		                    <code>cache.r6gd.12xlarge</code>,
+		                    <code>cache.r6gd.16xlarge</code>
+		                    
+		                    
+		                    
+		                    
+		                    
+		                    
+		                   </p>					    
+		                
+		                </li>
+               </ul>
+            </li>
+            <li>
                <p>Memory optimized:</p>
 				           <ul>
                   <li>
                      <p>Current generation: </p>
-											          <p>
+
+			    				    
+					    
+					                <p>
                         <b>R6g node types</b> (available only for Redis engine version 5.0.6 onward and for Memcached engine version 1.5.16 onward).</p>
 						
-						
+
 						
 						
 						               <p>	
@@ -937,7 +986,7 @@ type cacheNode = {
   @as("CacheNodeStatus")
   cacheNodeStatus: option<string_>,
   @ocaml.doc(
-    "<p>The cache node identifier. A node ID is a numeric identifier (0001, 0002, etc.). The combination of cluster ID and node ID uniquely identifies every cache node used in a customer's AWS account.</p>"
+    "<p>The cache node identifier. A node ID is a numeric identifier (0001, 0002, etc.). The combination of cluster ID and node ID uniquely identifies every cache node used in a customer's Amazon account.</p>"
   )
   @as("CacheNodeId")
   cacheNodeId: option<string_>,
@@ -950,8 +999,11 @@ type userGroup = {
   @ocaml.doc("<p>A list of replication groups that the user group can access.</p>")
   @as("ReplicationGroups")
   replicationGroups: option<ugreplicationGroupIdList>,
-  @ocaml.doc("<p>A list of updates being applied to the user groups.</p>") @as("PendingChanges")
+  @ocaml.doc("<p>A list of updates being applied to the user group.</p>") @as("PendingChanges")
   pendingChanges: option<userGroupPendingChanges>,
+  @ocaml.doc("<p>The minimum engine version required, which is Redis 6.0</p>")
+  @as("MinimumEngineVersion")
+  minimumEngineVersion: option<string_>,
   @ocaml.doc("<p>The list of user IDs that belong to the user group.</p>") @as("UserIds")
   userIds: option<userIdList>,
   @ocaml.doc("<p>The current supported value is Redis. </p>") @as("Engine")
@@ -990,10 +1042,13 @@ type reservedCacheNodesOffering = {
                   <li>
                      <p>Current generation: </p>
 					    
-    						           <p>
-                        <b>M6g node types</b> (available only for Redis engine version 5.0.6 onward and for Memcached engine version 1.5.16 onward).</p>
-						               <p>	
-                        <code>cache.m6g.large</code>,
+					    
+					    
+					  
+					    
+					    
+					                <p>
+                        <b>M6g node types:</b> (available only for Redis engine version 5.0.6 onward and for Memcached engine version 1.5.16 onward): 	<code>cache.m6g.large</code>,
 							<code>cache.m6g.xlarge</code>,
 							<code>cache.m6g.2xlarge</code>,
 							<code>cache.m6g.4xlarge</code>,
@@ -1032,7 +1087,15 @@ type reservedCacheNodesOffering = {
     						<code>cache.m4.4xlarge</code>,
     						<code>cache.m4.10xlarge</code>
                      </p>
-    					            <p>
+    	
+					                <p>
+                        <b>T4g node types</b> (available only for Redis engine version 5.0.6 onward and Memcached engine version 1.5.16 onward):
+					     <code>cache.t4g.micro</code>,
+					        <code>cache.t4g.small</code>,
+					        <code>cache.t4g.medium</code>
+					                </p>      	    
+					    
+					                <p>
                         <b>T3 node types:</b>
 					                   <code>cache.t3.micro</code>, 
     						<code>cache.t3.small</code>,
@@ -1091,14 +1154,50 @@ type reservedCacheNodesOffering = {
                </ul>
             </li>
             <li>
+               <p>Memory optimized with data tiering:</p>
+		             <ul>
+                  <li>
+                     <p>Current generation: </p>
+		                
+		                   <p>
+                        <b>R6gd node types</b> (available only for Redis engine version 6.2 onward).</p>
+		                
+		                
+		                
+		                
+		                   <p>	
+		                    
+		                      <code>cache.r6gd.xlarge</code>,
+		                    <code>cache.r6gd.2xlarge</code>,
+		                    <code>cache.r6gd.4xlarge</code>,
+		                    <code>cache.r6gd.8xlarge</code>,
+		                    <code>cache.r6gd.12xlarge</code>,
+		                    <code>cache.r6gd.16xlarge</code>
+		                    
+		                    
+		                    
+		                    
+		                    
+		                    
+		                   </p>					    
+		                
+		                </li>
+               </ul>
+            </li>
+            <li>
                <p>Memory optimized:</p>
 				           <ul>
                   <li>
                      <p>Current generation: </p>
-											          <p>
+
+						    
+					    
+					    
+					                <p>
                         <b>R6g node types</b> (available only for Redis engine version 5.0.6 onward and for Memcached engine version 1.5.16 onward).</p>
 						
 						
+
 						
 						
 						               <p>	
@@ -1236,10 +1335,12 @@ type reservedCacheNode = {
                   <li>
                      <p>Current generation: </p>
 					    
-    						           <p>
-                        <b>M6g node types</b> (available only for Redis engine version 5.0.6 onward and for Memcached engine version 1.5.16 onward).</p>
-						               <p>	
-                        <code>cache.m6g.large</code>,
+					    
+					   
+					    
+					    
+					                <p>
+                        <b>M6g node types:</b> (available only for Redis engine version 5.0.6 onward and for Memcached engine version 1.5.16 onward):	<code>cache.m6g.large</code>,
 							<code>cache.m6g.xlarge</code>,
 							<code>cache.m6g.2xlarge</code>,
 							<code>cache.m6g.4xlarge</code>,
@@ -1278,6 +1379,13 @@ type reservedCacheNode = {
     						<code>cache.m4.4xlarge</code>,
     						<code>cache.m4.10xlarge</code>
                      </p>
+					    
+					                <p>
+                        <b>T4g node types</b> (available only for Redis engine version 5.0.6 onward and Memcached engine version 1.5.16 onward):
+					        <code>cache.t4g.micro</code>,
+					        <code>cache.t4g.small</code>,
+					        <code>cache.t4g.medium</code>
+					                </p>	           
     					            <p>
                         <b>T3 node types:</b>
 					                   <code>cache.t3.micro</code>, 
@@ -1337,14 +1445,48 @@ type reservedCacheNode = {
                </ul>
             </li>
             <li>
+               <p>Memory optimized with data tiering:</p>
+		             <ul>
+                  <li>
+                     <p>Current generation: </p>
+		                
+		                   <p>
+                        <b>R6gd node types</b> (available only for Redis engine version 6.2 onward).</p>
+		                
+		                
+		                
+		                
+		                   <p>	
+		                    
+		                      <code>cache.r6gd.xlarge</code>,
+		                    <code>cache.r6gd.2xlarge</code>,
+		                    <code>cache.r6gd.4xlarge</code>,
+		                    <code>cache.r6gd.8xlarge</code>,
+		                    <code>cache.r6gd.12xlarge</code>,
+		                    <code>cache.r6gd.16xlarge</code>
+		                    
+		                    
+		                    
+		                    
+		                    
+		                    
+		                   </p>					    
+		                
+		                </li>
+               </ul>
+            </li>
+            <li>
                <p>Memory optimized:</p>
 				           <ul>
                   <li>
                      <p>Current generation: </p>
-											          <p>
+
+	
+					   
+					                <p>
                         <b>R6g node types</b> (available only for Redis engine version 5.0.6 onward and for Memcached engine version 1.5.16 onward).</p>
 						
-						
+
 						
 						
 						               <p>	
@@ -1460,7 +1602,9 @@ type pendingLogDeliveryConfiguration = {
   )
   @as("DestinationType")
   destinationType: option<destinationType>,
-  @ocaml.doc("<p>Refers to <a href=\"https://redis.io/commands/slowlog\">slow-log</a>.</p>")
+  @ocaml.doc(
+    "<p>Refers to <a href=\"https://redis.io/commands/slowlog\">slow-log</a> or engine-log..</p>"
+  )
   @as("LogType")
   logType: option<logType>,
 }
@@ -1511,7 +1655,9 @@ type logDeliveryConfigurationRequest = {
   )
   @as("DestinationType")
   destinationType: option<destinationType>,
-  @ocaml.doc("<p>Refers to <a href=\"https://redis.io/commands/slowlog\">slow-log</a>.</p>")
+  @ocaml.doc(
+    "<p>Refers to <a href=\"https://redis.io/commands/slowlog\">slow-log</a> or engine-log..</p>"
+  )
   @as("LogType")
   logType: option<logType>,
 }
@@ -1535,11 +1681,13 @@ type logDeliveryConfiguration = {
   )
   @as("DestinationType")
   destinationType: option<destinationType>,
-  @ocaml.doc("<p>Refers to <a href=\"https://redis.io/commands/slowlog\">slow-log</a>.</p>")
+  @ocaml.doc(
+    "<p>Refers to <a href=\"https://redis.io/commands/slowlog\">slow-log</a> or engine-log.</p>"
+  )
   @as("LogType")
   logType: option<logType>,
 }
-@ocaml.doc("<p>Consists of a primary cluster that accepts writes and an associated secondary cluster that resides in a different AWS region. The secondary cluster accepts only reads. The primary
+@ocaml.doc("<p>Consists of a primary cluster that accepts writes and an associated secondary cluster that resides in a different Amazon region. The secondary cluster accepts only reads. The primary
         cluster automatically replicates updates to the secondary cluster.</p>
         
         
@@ -1627,7 +1775,7 @@ type cacheSecurityGroup = {
   description: option<string_>,
   @ocaml.doc("<p>The name of the cache security group.</p>") @as("CacheSecurityGroupName")
   cacheSecurityGroupName: option<string_>,
-  @ocaml.doc("<p>The AWS account ID of the cache security group owner.</p>") @as("OwnerId")
+  @ocaml.doc("<p>The Amazon account ID of the cache security group owner.</p>") @as("OwnerId")
   ownerId: option<string_>,
 }
 @ocaml.doc("<p>A parameter that has a different value for each cache node type it is applied to. For
@@ -1672,7 +1820,7 @@ type regionalConfiguration = {
   )
   @as("ReshardingConfiguration")
   reshardingConfiguration: reshardingConfigurationList,
-  @ocaml.doc("<p>The AWS region where the cluster is stored</p>") @as("ReplicationGroupRegion")
+  @ocaml.doc("<p>The Amazon region where the cluster is stored</p>") @as("ReplicationGroupRegion")
   replicationGroupRegion: string_,
   @ocaml.doc("<p>The name of the secondary cluster</p>") @as("ReplicationGroupId")
   replicationGroupId: string_,
@@ -1793,6 +1941,10 @@ type updateAction = {
   "<p>Represents a copy of an entire Redis cluster as of the time when the snapshot was taken.</p>"
 )
 type snapshot = {
+  @ocaml.doc("<p>Enables data tiering. Data tiering is only supported for replication groups using the r6gd node type. This parameter must be set to true when using r6gd nodes.
+            For more information, see <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/data-tiering.html\">Data tiering</a>.</p>")
+  @as("DataTiering")
+  dataTiering: option<dataTieringStatus>,
   @ocaml.doc("<p>The ARN (Amazon Resource Name) of the snapshot.</p>") @as("ARN")
   arn: option<string_>,
   @ocaml.doc("<p>The ID of the KMS key used to encrypt the snapshot.</p>") @as("KmsKeyId")
@@ -1824,7 +1976,9 @@ type snapshot = {
           If the value of SnapshotRetentionLimit is set to zero (0), backups are turned off.</p>")
   @as("SnapshotRetentionLimit")
   snapshotRetentionLimit: option<integerOptional>,
-  @ocaml.doc("<p>This parameter is currently disabled.</p>") @as("AutoMinorVersionUpgrade")
+  @ocaml.doc("<p> If you are running Redis engine version 6.0 or later, set this parameter to yes if you want to opt-in to the next auto minor version upgrade campaign. This parameter is disabled for previous versions. 
+        </p>")
+  @as("AutoMinorVersionUpgrade")
   autoMinorVersionUpgrade: option<boolean_>,
   @ocaml.doc(
     "<p>The Amazon Virtual Private Cloud identifier (VPC ID) of the cache subnet group for the source cluster.</p>"
@@ -1923,9 +2077,13 @@ type snapshot = {
                   <li>
                      <p>Current generation: </p>
 					    
-    						           <p>
+					                <p>
                         <b>M6g node types</b> (available only for Redis engine version 5.0.6 onward and for Memcached engine version 1.5.16 onward).</p>
-						               <p>	
+					    
+					    
+					    
+					    
+					                <p>	
                         <code>cache.m6g.large</code>,
 							<code>cache.m6g.xlarge</code>,
 							<code>cache.m6g.2xlarge</code>,
@@ -1934,9 +2092,8 @@ type snapshot = {
 							<code>cache.m6g.12xlarge</code>,
 							<code>cache.m6g.16xlarge</code>
 							
+					                </p>
 							
-							
-						               </p>	
 						
 						               <note>
                         <p>For region availability, see <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion\">Supported Node Types</a>
@@ -1965,7 +2122,20 @@ type snapshot = {
     						<code>cache.m4.4xlarge</code>,
     						<code>cache.m4.10xlarge</code>
                      </p>
-    					            <p>
+    			
+					                <p>
+                        <b>T4g node types</b> (available only for Redis engine version 5.0.6 onward and Memcached engine version 1.5.16 onward):</p>
+					    
+					   
+					                <p>
+					                   <code>cache.t4g.micro</code>,
+					        <code>cache.t4g.small</code>,
+					        <code>cache.t4g.medium</code>
+					                </p>	             
+					    
+					    
+					    
+					                <p>
                         <b>T3 node types:</b>
 					                   <code>cache.t3.micro</code>, 
     						<code>cache.t3.small</code>,
@@ -2024,31 +2194,76 @@ type snapshot = {
                </ul>
             </li>
             <li>
-               <p>Memory optimized:</p>
-				           <ul>
+               <p>Memory optimized with data tiering:</p>
+		             <ul>
                   <li>
                      <p>Current generation: </p>
-											          <p>
+		                
+		                   <p>
+                        <b>R6gd node types</b> (available only for Redis engine version 6.2 onward).</p>
+		                
+		                
+		                
+		                
+		                   <p>	
+		                    
+		                      <code>cache.r6gd.xlarge</code>,
+		                    <code>cache.r6gd.2xlarge</code>,
+		                    <code>cache.r6gd.4xlarge</code>,
+		                    <code>cache.r6gd.8xlarge</code>,
+		                    <code>cache.r6gd.12xlarge</code>,
+		                    <code>cache.r6gd.16xlarge</code>
+		                    
+		                    
+		                    
+		                    
+		                    
+		                    
+		                   </p>					    
+		    
+		                </li>
+               </ul>
+            </li>
+            <li>
+               <p>Memory optimized:</p>
+		       
+		     
+		            <ul>
+                  <li>
+                     <p>Current generation: </p>
+		                    
+		                    
+		                    
+		                    
+		                    <p>
                         <b>R6g node types</b> (available only for Redis engine version 5.0.6 onward and for Memcached engine version 1.5.16 onward).</p>
-						
-						
-						
-						
-						               <p>	
-							                 <code>cache.r6g.large</code>,
-							<code>cache.r6g.xlarge</code>,
-							<code>cache.r6g.2xlarge</code>,
-							<code>cache.r6g.4xlarge</code>,
-							<code>cache.r6g.8xlarge</code>,
-							<code>cache.r6g.12xlarge</code>,
-							<code>cache.r6g.16xlarge</code>
-							
-							
-							
-							
-							
-							
-						               </p>	
+		                    
+		                    
+		                    
+		                    <p>	
+		                        <code>cache.r6g.large</code>,
+		                        <code>cache.r6g.xlarge</code>,
+		                        <code>cache.r6g.2xlarge</code>,
+		                        <code>cache.r6g.4xlarge</code>,
+		                        <code>cache.r6g.8xlarge</code>,
+		                        <code>cache.r6g.12xlarge</code>,
+		                        <code>cache.r6g.16xlarge</code>
+		                        
+		                        
+		                        
+		                        
+		                        
+		                        
+		                    </p>	
+		                    <note>
+                        <p>For region availability, see <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion\">Supported Node Types</a>
+                        </p>
+                     </note>
+
+					 			    
+					    
+					    
+					   
 						               <note>
                         <p>For region availability, see <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion\">Supported Node Types</a>
                         </p>
@@ -2155,7 +2370,7 @@ type replicationGroupPendingModifiedValues = {
   @ocaml.doc("<p>The log delivery configurations being modified </p>")
   @as("LogDeliveryConfigurations")
   logDeliveryConfigurations: option<pendingLogDeliveryConfigurationList>,
-  @ocaml.doc("<p>The user groups being modified.</p>") @as("UserGroups")
+  @ocaml.doc("<p>The user group being modified.</p>") @as("UserGroups")
   userGroups: option<userGroupsUpdateStatus>,
   @ocaml.doc("<p>The auth token status</p>") @as("AuthTokenStatus")
   authTokenStatus: option<authTokenUpdateStatus>,
@@ -2217,8 +2432,9 @@ type engineDefaults = {
     <code>redis3.2</code> |
     <code>redis4.0</code> |
      <code>redis5.0</code> | 
-      <code>redis6.x</code> | 
-    </p>")
+      <code>redis6.0</code> | 
+            <code>redis6.x</code>
+         </p>")
   @as("CacheParameterGroupFamily")
   cacheParameterGroupFamily: option<string_>,
 }
@@ -2227,10 +2443,17 @@ type updateActionList = array<updateAction>
 type snapshotList = array<snapshot>
 @ocaml.doc("<p>Contains all of the attributes of a specific Redis replication group.</p>")
 type replicationGroup = {
+  @ocaml.doc("<p>Enables data tiering. Data tiering is only supported for replication groups using the r6gd node type. This parameter must be set to true when using r6gd nodes.
+            For more information, see <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/data-tiering.html\">Data tiering</a>.</p>")
+  @as("DataTiering")
+  dataTiering: option<dataTieringStatus>,
+  @ocaml.doc("<p>The date and time when the cluster was created.</p>")
+  @as("ReplicationGroupCreateTime")
+  replicationGroupCreateTime: option<tstamp>,
   @ocaml.doc("<p>Returns the destination, format and type of the logs. </p>")
   @as("LogDeliveryConfigurations")
   logDeliveryConfigurations: option<logDeliveryConfigurationList>,
-  @ocaml.doc("<p>The list of user group IDs that have access to the replication group.</p>")
+  @ocaml.doc("<p>The ID of the user group associated to the replication group.</p>")
   @as("UserGroupIds")
   userGroupIds: option<userGroupIdList>,
   @ocaml.doc("<p>The ARN (Amazon Resource Name) of the replication group.</p>") @as("ARN")
@@ -2416,7 +2639,9 @@ type cacheCluster = {
   @ocaml.doc("<p>A list of VPC Security Groups associated with the cluster.</p>")
   @as("SecurityGroups")
   securityGroups: option<securityGroupMembershipList>,
-  @ocaml.doc("<p>This parameter is currently disabled.</p>") @as("AutoMinorVersionUpgrade")
+  @ocaml.doc("<p> If you are running Redis engine version 6.0 or later, set this parameter to yes if you want to opt-in to the next auto minor version upgrade campaign. This parameter is disabled for previous versions. 
+        </p>")
+  @as("AutoMinorVersionUpgrade")
   autoMinorVersionUpgrade: option<boolean_>,
   @ocaml.doc("<p>A list of cache nodes that are members of the cluster.</p>") @as("CacheNodes")
   cacheNodes: option<cacheNodeList>,
@@ -2526,10 +2751,12 @@ type cacheCluster = {
                   <li>
                      <p>Current generation: </p>
 					    
-    						           <p>
-                        <b>M6g node types</b> (available only for Redis engine version 5.0.6 onward and for Memcached engine version 1.5.16 onward).</p>
-						               <p>	
-                        <code>cache.m6g.large</code>,
+					    
+					  
+					    
+					    
+					                <p>
+                        <b>M6g node types:</b> (available only for Redis engine version 5.0.6 onward and for Memcached engine version 1.5.16 onward): 	<code>cache.m6g.large</code>,
 							<code>cache.m6g.xlarge</code>,
 							<code>cache.m6g.2xlarge</code>,
 							<code>cache.m6g.4xlarge</code>,
@@ -2568,7 +2795,16 @@ type cacheCluster = {
     						<code>cache.m4.4xlarge</code>,
     						<code>cache.m4.10xlarge</code>
                      </p>
-    					            <p>
+    	
+					    
+					                <p>
+                        <b>T4g node types</b> (available only for Redis engine version 5.0.6 onward and for Memcached engine version 1.5.16 onward):
+					        <code>cache.t4g.micro</code>,
+					        <code>cache.t4g.small</code>,
+					        <code>cache.t4g.medium</code>
+					                </p>
+					    
+					                <p>
                         <b>T3 node types:</b>
 					                   <code>cache.t3.micro</code>, 
     						<code>cache.t3.small</code>,
@@ -2627,16 +2863,51 @@ type cacheCluster = {
                </ul>
             </li>
             <li>
+               <p>Memory optimized with data tiering:</p>
+		             <ul>
+                  <li>
+                     <p>Current generation: </p>
+		                
+		                   <p>
+                        <b>R6gd node types</b> (available only for Redis engine version 6.2 onward).</p>
+		                
+		                
+		                
+		                
+		                   <p>	
+		                    
+		                      <code>cache.r6gd.xlarge</code>,
+		                    <code>cache.r6gd.2xlarge</code>,
+		                    <code>cache.r6gd.4xlarge</code>,
+		                    <code>cache.r6gd.8xlarge</code>,
+		                    <code>cache.r6gd.12xlarge</code>,
+		                    <code>cache.r6gd.16xlarge</code>
+		                    
+		                    
+		                    
+		                    
+		                    
+		                    
+		                   </p>					    
+		                
+		                </li>
+               </ul>
+            </li>
+            <li>
                <p>Memory optimized:</p>
 				           <ul>
                   <li>
                      <p>Current generation: </p>
-											          <p>
+
+		    				    
+					    
+					                <p>
                         <b>R6g node types</b> (available only for Redis engine version 5.0.6 onward and for Memcached engine version 1.5.16 onward).</p>
 						
 						
 						
 						
+
 						               <p>	
 							                 <code>cache.r6g.large</code>,
 							<code>cache.r6g.xlarge</code>,
@@ -2767,7 +3038,7 @@ module DeleteCacheSubnetGroup = {
     @as("CacheSubnetGroupName")
     cacheSubnetGroupName: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticache") @new
   external new: request => t = "DeleteCacheSubnetGroupCommand"
   let make = (~cacheSubnetGroupName, ()) => new({cacheSubnetGroupName: cacheSubnetGroupName})
@@ -2785,7 +3056,7 @@ module DeleteCacheSecurityGroup = {
     @as("CacheSecurityGroupName")
     cacheSecurityGroupName: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticache") @new
   external new: request => t = "DeleteCacheSecurityGroupCommand"
   let make = (~cacheSecurityGroupName, ()) => new({cacheSecurityGroupName: cacheSecurityGroupName})
@@ -2803,7 +3074,7 @@ module DeleteCacheParameterGroup = {
     @as("CacheParameterGroupName")
     cacheParameterGroupName: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticache") @new
   external new: request => t = "DeleteCacheParameterGroupCommand"
   let make = (~cacheParameterGroupName, ()) =>
@@ -2968,7 +3239,7 @@ module RemoveTagsFromResource = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the resource from which you want the tags removed, 
             for example <code>arn:aws:elasticache:us-west-2:0123456789:cluster:myCluster</code> 
             or <code>arn:aws:elasticache:us-west-2:0123456789:snapshot:mySnapshot</code>.</p>
-        <p>For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>")
+        <p>For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and Amazon Service Namespaces</a>.</p>")
     @as("ResourceName")
     resourceName: string_,
   }
@@ -3047,7 +3318,7 @@ module ListTagsForResource = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the resource for which you want the list of tags, 
             for example <code>arn:aws:elasticache:us-west-2:0123456789:cluster:myCluster</code> 
             or <code>arn:aws:elasticache:us-west-2:0123456789:snapshot:mySnapshot</code>.</p>
-        <p>For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>")
+        <p>For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a>.</p>")
     @as("ResourceName")
     resourceName: string_,
   }
@@ -3248,7 +3519,8 @@ module DescribeCacheEngineVersions = {
     <code>redis4.0</code> |
      <code>redis5.0</code> | 
       <code>redis6.x</code> | 
-    </p>
+            <code>redis6.2</code>
+         </p>
         <p>Constraints:</p>
         <ul>
             <li>
@@ -3404,8 +3676,8 @@ module CreateCacheParameterGroup = {
     <code>redis3.2</code> |
     <code>redis4.0</code> |
      <code>redis5.0</code> | 
-      <code>redis6.x</code> | 
-    </p>")
+      <code>redis6.x</code> 
+         </p>")
     @as("CacheParameterGroupFamily")
     cacheParameterGroupFamily: string_,
     @ocaml.doc("<p>A user-specified name for the cache parameter group.</p>")
@@ -3495,7 +3767,7 @@ module AddTagsToResource = {
             for example <code>arn:aws:elasticache:us-west-2:0123456789:cluster:myCluster</code> 
             or <code>arn:aws:elasticache:us-west-2:0123456789:snapshot:mySnapshot</code>.
             ElastiCache resources are <i>cluster</i> and <i>snapshot</i>.</p>
-        <p>For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>")
+        <p>For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and Amazon Service Namespaces</a>.</p>")
     @as("ResourceName")
     resourceName: string_,
   }
@@ -3517,9 +3789,9 @@ module RevokeCacheSecurityGroupIngress = {
     "<p>Represents the input of a <code>RevokeCacheSecurityGroupIngress</code> operation.</p>"
   )
   type request = {
-    @ocaml.doc("<p>The AWS account number of the Amazon EC2 security group owner. 
-            Note that this is not the same thing as an AWS access key ID - you must provide 
-            a valid AWS account number for this parameter.</p>")
+    @ocaml.doc("<p>The Amazon account number of the Amazon EC2 security group owner. 
+            Note that this is not the same thing as an Amazon access key ID - you must provide 
+            a valid Amazon account number for this parameter.</p>")
     @as("EC2SecurityGroupOwnerId")
     ec2SecurityGroupOwnerId: string_,
     @ocaml.doc("<p>The name of the Amazon EC2 security group to revoke access from.</p>")
@@ -3674,7 +3946,7 @@ module FailoverGlobalReplicationGroup = {
   type request = {
     @ocaml.doc("<p>The name of the primary replication group</p>") @as("PrimaryReplicationGroupId")
     primaryReplicationGroupId: string_,
-    @ocaml.doc("<p>The AWS region of the primary cluster of the Global datastore</p>")
+    @ocaml.doc("<p>The Amazon region of the primary cluster of the Global datastore</p>")
     @as("PrimaryRegion")
     primaryRegion: string_,
     @ocaml.doc("<p>The name of the Global datastore</p>") @as("GlobalReplicationGroupId")
@@ -3698,7 +3970,7 @@ module DisassociateGlobalReplicationGroup = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The AWS region of secondary cluster you wish to remove from the Global datastore</p>"
+      "<p>The Amazon region of secondary cluster you wish to remove from the Global datastore</p>"
     )
     @as("ReplicationGroupRegion")
     replicationGroupRegion: string_,
@@ -3842,8 +4114,8 @@ module CreateGlobalReplicationGroup = {
     @as("GlobalReplicationGroupDescription")
     globalReplicationGroupDescription: option<string_>,
     @ocaml.doc("<p>The suffix name of a Global datastore. Amazon ElastiCache automatically applies a prefix 
-            to the Global datastore ID when it is created. Each AWS Region has its own prefix. For instance, a Global datastore ID created in the US-West-1 region will begin with \"dsdfu\" along with the suffix name you provide. The suffix, combined with the auto-generated prefix, guarantees uniqueness of the Global datastore name across multiple regions.  </p>
-        <p>For a full list of AWS Regions and their respective Global datastore iD prefixes, see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Redis-Global-Datastores-CLI.html\">Using the AWS CLI with Global datastores </a>.</p>")
+            to the Global datastore ID when it is created. Each Amazon Region has its own prefix. For instance, a Global datastore ID created in the US-West-1 region will begin with \"dsdfu\" along with the suffix name you provide. The suffix, combined with the auto-generated prefix, guarantees uniqueness of the Global datastore name across multiple regions.  </p>
+        <p>For a full list of Amazon Regions and their respective Global datastore iD prefixes, see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Redis-Global-Datastores-CLI.html\">Using the Amazon CLI with Global datastores </a>.</p>")
     @as("GlobalReplicationGroupIdSuffix")
     globalReplicationGroupIdSuffix: string_,
   }
@@ -3896,9 +4168,9 @@ module AuthorizeCacheSecurityGroupIngress = {
   type t
   @ocaml.doc("<p>Represents the input of an AuthorizeCacheSecurityGroupIngress operation.</p>")
   type request = {
-    @ocaml.doc("<p>The AWS account number of the Amazon EC2 security group owner. 
-            Note that this is not the same thing as an AWS access key ID - 
-            you must provide a valid AWS account number for this parameter.</p>")
+    @ocaml.doc("<p>The Amazon account number of the Amazon EC2 security group owner. 
+            Note that this is not the same thing as an Amazon access key ID - 
+            you must provide a valid Amazon account number for this parameter.</p>")
     @as("EC2SecurityGroupOwnerId")
     ec2SecurityGroupOwnerId: string_,
     @ocaml.doc(
@@ -4029,10 +4301,13 @@ module DescribeReservedCacheNodesOfferings = {
                   <li>
                      <p>Current generation: </p>
 					    
-    						           <p>
-                        <b>M6g node types</b> (available only for Redis engine version 5.0.6 onward and for Memcached engine version 1.5.16 onward).</p>
-						               <p>	
-                        <code>cache.m6g.large</code>,
+					    
+					    
+					
+					    
+					    
+					                <p>
+                        <b>M6g node types:</b> (available only for Redis engine version 5.0.6 onward and for Memcached engine version 1.5.16 onward)	<code>cache.m6g.large</code>,
 							<code>cache.m6g.xlarge</code>,
 							<code>cache.m6g.2xlarge</code>,
 							<code>cache.m6g.4xlarge</code>,
@@ -4071,7 +4346,16 @@ module DescribeReservedCacheNodesOfferings = {
     						<code>cache.m4.4xlarge</code>,
     						<code>cache.m4.10xlarge</code>
                      </p>
-    					            <p>
+    		
+					                <p>
+                        <b>T4g node types</b> (available only for Redis engine version 5.0.6 onward and for Memcached engine version 1.5.16 onward):
+					        <code>cache.t4g.micro</code>,
+					        <code>cache.t4g.small</code>,
+					        <code>cache.t4g.medium</code>
+					                </p>	             
+					    
+					    
+					                <p>
                         <b>T3 node types:</b>
 					                   <code>cache.t3.micro</code>, 
     						<code>cache.t3.small</code>,
@@ -4130,16 +4414,52 @@ module DescribeReservedCacheNodesOfferings = {
                </ul>
             </li>
             <li>
+               <p>Memory optimized with data tiering:</p>
+		             <ul>
+                  <li>
+                     <p>Current generation: </p>
+		                
+		                   <p>
+                        <b>R6gd node types</b> (available only for Redis engine version 6.2 onward).</p>
+		                
+		                
+		                
+		                
+		                   <p>	
+		                    
+		                      <code>cache.r6gd.xlarge</code>,
+		                    <code>cache.r6gd.2xlarge</code>,
+		                    <code>cache.r6gd.4xlarge</code>,
+		                    <code>cache.r6gd.8xlarge</code>,
+		                    <code>cache.r6gd.12xlarge</code>,
+		                    <code>cache.r6gd.16xlarge</code>
+		                    
+		                    
+		                    
+		                    
+		                    
+		                    
+		                   </p>					    
+		                
+		                </li>
+               </ul>
+            </li>
+            <li>
                <p>Memory optimized:</p>
 				           <ul>
                   <li>
                      <p>Current generation: </p>
-											          <p>
+
+
+					 			    					    
+					    
+					                <p>
                         <b>R6g node types</b> (available only for Redis engine version 5.0.6 onward and for Memcached engine version 1.5.16 onward).</p>
 						
 						
 						
 						
+
 						               <p>	
 							                 <code>cache.r6g.large</code>,
 							<code>cache.r6g.xlarge</code>,
@@ -4325,10 +4645,14 @@ module DescribeReservedCacheNodes = {
                   <li>
                      <p>Current generation: </p>
 					    
-    						           <p>
-                        <b>M6g node types</b> (available only for Redis engine version 5.0.6 onward and for Memcached engine version 1.5.16 onward).</p>
-						               <p>	
-                        <code>cache.m6g.large</code>,
+					    
+					    
+					 
+					    
+					    
+					                <p>
+                        <b>M6g node types:</b> (available only for Redis engine version 5.0.6 onward and for Memcached engine version 1.5.16 onward):
+					        <code>cache.m6g.large</code>,
 							<code>cache.m6g.xlarge</code>,
 							<code>cache.m6g.2xlarge</code>,
 							<code>cache.m6g.4xlarge</code>,
@@ -4367,7 +4691,16 @@ module DescribeReservedCacheNodes = {
     						<code>cache.m4.4xlarge</code>,
     						<code>cache.m4.10xlarge</code>
                      </p>
-    					            <p>
+    		
+					                <p>
+                        <b>T4g node types</b> (available only for Redis engine version 5.0.6 onward and for Memcached engine version 1.5.16 onward):
+					        <code>cache.t4g.micro</code>,
+					        <code>cache.t4g.small</code>,
+					        <code>cache.t4g.medium</code>
+					                </p>		    
+					    
+					    
+					                <p>
                         <b>T3 node types:</b>
 					                   <code>cache.t3.micro</code>, 
     						<code>cache.t3.small</code>,
@@ -4426,11 +4759,45 @@ module DescribeReservedCacheNodes = {
                </ul>
             </li>
             <li>
+               <p>Memory optimized with data tiering:</p>
+		             <ul>
+                  <li>
+                     <p>Current generation: </p>
+		                
+		                   <p>
+                        <b>R6gd node types</b> (available only for Redis engine version 6.2 onward).</p>
+		                
+		                
+		                
+		                
+		                   <p>	
+		                    
+		                      <code>cache.r6gd.xlarge</code>,
+		                    <code>cache.r6gd.2xlarge</code>,
+		                    <code>cache.r6gd.4xlarge</code>,
+		                    <code>cache.r6gd.8xlarge</code>,
+		                    <code>cache.r6gd.12xlarge</code>,
+		                    <code>cache.r6gd.16xlarge</code>
+		                    
+		                    
+		                    
+		                    
+		                    
+		                    
+		                   </p>					    
+		                
+		                </li>
+               </ul>
+            </li>
+            <li>
                <p>Memory optimized:</p>
 				           <ul>
                   <li>
                      <p>Current generation: </p>
-											          <p>
+	
+								    				    
+					    
+					                <p>
                         <b>R6g node types</b> (available only for Redis engine version 5.0.6 onward and for Memcached engine version 1.5.16 onward).</p>
 						
 						
@@ -4753,7 +5120,7 @@ module IncreaseNodeGroupsInGlobalReplicationGroup = {
     @as("ApplyImmediately")
     applyImmediately: boolean_,
     @ocaml.doc(
-      "<p>Describes the replication group IDs, the AWS regions where they are stored and the shard configuration for each that comprise the Global datastore</p>"
+      "<p>Describes the replication group IDs, the Amazon regions where they are stored and the shard configuration for each that comprise the Global datastore</p>"
     )
     @as("RegionalConfigurations")
     regionalConfigurations: option<regionalConfigurationList>,
@@ -4813,7 +5180,8 @@ module DescribeEngineDefaultParameters = {
     <code>redis4.0</code> |
      <code>redis5.0</code> | 
       <code>redis6.x</code> | 
-    </p>")
+            <code>redis6.2</code>
+         </p>")
     @as("CacheParameterGroupFamily")
     cacheParameterGroupFamily: string_,
   }
@@ -5108,15 +5476,15 @@ module ModifyReplicationGroup = {
     @ocaml.doc("<p>Specifies the destination, format and type of the logs.</p>")
     @as("LogDeliveryConfigurations")
     logDeliveryConfigurations: option<logDeliveryConfigurationRequestList>,
-    @ocaml.doc("<p>Removes the user groups that can access this replication group.</p>")
+    @ocaml.doc("<p>Removes the user group associated with this replication group.</p>")
     @as("RemoveUserGroups")
     removeUserGroups: option<booleanOptional>,
     @ocaml.doc(
-      "<p>The user group to remove, meaning the users in the group no longer can access the replication group.</p>"
+      "<p>The ID of the user group to disassociate from the replication group, meaning the users in the group no longer can access the replication group.</p>"
     )
     @as("UserGroupIdsToRemove")
     userGroupIdsToRemove: option<userGroupIdList>,
-    @ocaml.doc("<p>The user group you are associating with the replication group.</p>")
+    @ocaml.doc("<p>The ID of the user group you are associating with the replication group.</p>")
     @as("UserGroupIdsToAdd")
     userGroupIdsToAdd: option<userGroupIdList>,
     @ocaml.doc("<p>Specifies the strategy to use to update the AUTH token. This parameter must be specified with the <code>auth-token</code> parameter.
@@ -5171,7 +5539,9 @@ module ModifyReplicationGroup = {
             backups are turned off.</p>")
     @as("SnapshotRetentionLimit")
     snapshotRetentionLimit: option<integerOptional>,
-    @ocaml.doc("<p>This parameter is currently disabled.</p>") @as("AutoMinorVersionUpgrade")
+    @ocaml.doc("<p> If you are running Redis engine version 6.0 or later, set this parameter to yes if you want to opt-in to the next auto minor version upgrade campaign. This parameter is disabled for previous versions. 
+        </p>")
+    @as("AutoMinorVersionUpgrade")
     autoMinorVersionUpgrade: option<booleanOptional>,
     @ocaml.doc("<p>The upgraded version of the cache engine to be run on the clusters in the replication group.</p>
         
@@ -5267,10 +5637,7 @@ module ModifyReplicationGroup = {
     cacheSecurityGroupNames: option<cacheSecurityGroupNameList>,
     @ocaml.doc("<p>Deprecated. This parameter is not used.</p>") @as("NodeGroupId")
     nodeGroupId: option<string_>,
-    @ocaml.doc(
-      "<p>A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.</p>"
-    )
-    @as("MultiAZEnabled")
+    @ocaml.doc("<p>A flag to indicate MultiAZ is enabled.</p>") @as("MultiAZEnabled")
     multiAZEnabled: option<booleanOptional>,
     @ocaml.doc("<p>Determines whether a read replica is automatically promoted to read/write primary if the existing primary encounters a failure.</p>
         <p>Valid values: <code>true</code> | <code>false</code>
@@ -5409,7 +5776,9 @@ module ModifyCacheCluster = {
          </note>")
     @as("SnapshotRetentionLimit")
     snapshotRetentionLimit: option<integerOptional>,
-    @ocaml.doc("<p>This parameter is currently disabled.</p>") @as("AutoMinorVersionUpgrade")
+    @ocaml.doc("<p> If you are running Redis engine version 6.0 or later, set this parameter to yes if you want to opt-in to the next auto minor version upgrade campaign. This parameter is disabled for previous versions. 
+        </p>")
+    @as("AutoMinorVersionUpgrade")
     autoMinorVersionUpgrade: option<booleanOptional>,
     @ocaml.doc("<p>The upgraded version of the cache engine to be run on the cache nodes.</p>
         
@@ -6042,6 +6411,10 @@ module CreateReplicationGroup = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>CreateReplicationGroup</code> operation.</p>")
   type request = {
+    @ocaml.doc("<p>Enables data tiering. Data tiering is only supported for replication groups using the r6gd node type. This parameter must be set to true when using r6gd nodes.
+            For more information, see <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/data-tiering.html\">Data tiering</a>.</p>")
+    @as("DataTieringEnabled")
+    dataTieringEnabled: option<booleanOptional>,
     @ocaml.doc("<p>Specifies the destination, format and type of the logs.</p>")
     @as("LogDeliveryConfigurations")
     logDeliveryConfigurations: option<logDeliveryConfigurationRequestList>,
@@ -6121,7 +6494,9 @@ module CreateReplicationGroup = {
          <p>Default: 0 (i.e., automatic backups are disabled for this cluster).</p>")
     @as("SnapshotRetentionLimit")
     snapshotRetentionLimit: option<integerOptional>,
-    @ocaml.doc("<p>This parameter is currently disabled.</p>") @as("AutoMinorVersionUpgrade")
+    @ocaml.doc("<p> If you are running Redis engine version 6.0 or later, set this parameter to yes if you want to opt-in to the next auto minor version upgrade campaign. This parameter is disabled for previous versions. 
+        </p>")
+    @as("AutoMinorVersionUpgrade")
     autoMinorVersionUpgrade: option<booleanOptional>,
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS) 
             topic to which notifications are sent.</p>
@@ -6268,10 +6643,13 @@ module CreateReplicationGroup = {
                   <li>
                      <p>Current generation: </p>
 					    
-    						           <p>
-                        <b>M6g node types</b> (available only for Redis engine version 5.0.6 onward and for Memcached engine version 1.5.16 onward).</p>
-						               <p>	
-                        <code>cache.m6g.large</code>,
+					    
+					    
+					    
+					    
+					                <p>
+                        <b>M6g node types</b> (available only for Redis engine version 5.0.6 onward and for Memcached engine version 1.5.16 onward):
+						<code>cache.m6g.large</code>,
 							<code>cache.m6g.xlarge</code>,
 							<code>cache.m6g.2xlarge</code>,
 							<code>cache.m6g.4xlarge</code>,
@@ -6310,7 +6688,15 @@ module CreateReplicationGroup = {
     						<code>cache.m4.4xlarge</code>,
     						<code>cache.m4.10xlarge</code>
                      </p>
-    					            <p>
+    			
+					    
+					                <p>
+                        <b>T4g node types</b> (available only for Redis engine version 5.0.6 onward and Memcached engine version 1.5.16 onward):    
+					        <code>cache.t4g.micro</code>,
+					        <code>cache.t4g.small</code>,
+					        <code>cache.t4g.medium</code>
+					                </p>	         
+					                <p>
                         <b>T3 node types:</b>
 					                   <code>cache.t3.micro</code>, 
     						<code>cache.t3.small</code>,
@@ -6369,11 +6755,46 @@ module CreateReplicationGroup = {
                </ul>
             </li>
             <li>
+               <p>Memory optimized with data tiering:</p>
+		             <ul>
+                  <li>
+                     <p>Current generation: </p>
+		                
+		                   <p>
+                        <b>R6gd node types</b> (available only for Redis engine version 6.2 onward).</p>
+		                
+		                
+		                
+		                
+		                   <p>	
+		                    
+		                      <code>cache.r6gd.xlarge</code>,
+		                    <code>cache.r6gd.2xlarge</code>,
+		                    <code>cache.r6gd.4xlarge</code>,
+		                    <code>cache.r6gd.8xlarge</code>,
+		                    <code>cache.r6gd.12xlarge</code>,
+		                    <code>cache.r6gd.16xlarge</code>
+		                    
+		                    
+		                    
+		                    
+		                    
+		                    
+		                   </p>					    
+		                
+		                </li>
+               </ul>
+            </li>
+            <li>
                <p>Memory optimized:</p>
 				           <ul>
                   <li>
                      <p>Current generation: </p>
-											          <p>
+				
+					   		    				    
+					    
+					    
+					                <p>
                         <b>R6g node types</b> (available only for Redis engine version 5.0.6 onward and for Memcached engine version 1.5.16 onward).</p>
 						
 						
@@ -6563,6 +6984,7 @@ module CreateReplicationGroup = {
   let make = (
     ~replicationGroupDescription,
     ~replicationGroupId,
+    ~dataTieringEnabled=?,
     ~logDeliveryConfigurations=?,
     ~userGroupIds=?,
     ~kmsKeyId=?,
@@ -6597,6 +7019,7 @@ module CreateReplicationGroup = {
     (),
   ) =>
     new({
+      dataTieringEnabled: dataTieringEnabled,
       logDeliveryConfigurations: logDeliveryConfigurations,
       userGroupIds: userGroupIds,
       kmsKeyId: kmsKeyId,
@@ -6689,7 +7112,9 @@ module CreateCacheCluster = {
          <p>Default: 0 (i.e., automatic backups are disabled for this cache cluster).</p>")
     @as("SnapshotRetentionLimit")
     snapshotRetentionLimit: option<integerOptional>,
-    @ocaml.doc("<p>This parameter is currently disabled.</p>") @as("AutoMinorVersionUpgrade")
+    @ocaml.doc("<p> If you are running Redis engine version 6.0 or later, set this parameter to yes if you want to opt-in to the next auto minor version upgrade campaign. This parameter is disabled for previous versions. 
+            </p>")
+    @as("AutoMinorVersionUpgrade")
     autoMinorVersionUpgrade: option<booleanOptional>,
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS) topic 
           to which notifications are sent.</p>
@@ -6705,7 +7130,7 @@ module CreateCacheCluster = {
             on the cluster is performed. It is specified as a range in
             the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum
             maintenance window is a 60 minute period.
-            Valid values for <code>ddd</code> are:</p>")
+           </p>")
     @as("PreferredMaintenanceWindow")
     preferredMaintenanceWindow: option<string_>,
     @ocaml.doc("<p>The name of a Redis snapshot from which to restore data into the new node group (shard).
@@ -6775,10 +7200,13 @@ module CreateCacheCluster = {
                   <li>
                      <p>Current generation: </p>
 					    
-    						           <p>
-                        <b>M6g node types</b> (available only for Redis engine version 5.0.6 onward and for Memcached engine version 1.5.16 onward).</p>
-						               <p>	
-                        <code>cache.m6g.large</code>,
+    					
+					   
+					    
+					                <p>
+                        <b>M6g node types</b> (available only for Redis engine version 5.0.6 onward and for Memcached engine version 1.5.16 onward):
+					    
+					 	<code>cache.m6g.large</code>,
 							<code>cache.m6g.xlarge</code>,
 							<code>cache.m6g.2xlarge</code>,
 							<code>cache.m6g.4xlarge</code>,
@@ -6817,7 +7245,16 @@ module CreateCacheCluster = {
     						<code>cache.m4.4xlarge</code>,
     						<code>cache.m4.10xlarge</code>
                      </p>
-    					            <p>
+    		
+					                <p>
+                        <b>T4g node types</b> (available only for Redis engine version 5.0.6 onward and Memcached engine version 1.5.16 onward):
+					        <code>cache.t4g.micro</code>,
+					        <code>cache.t4g.small</code>,
+					        <code>cache.t4g.medium</code>
+					                </p>
+					    
+					    
+					                <p>
                         <b>T3 node types:</b>
 					                   <code>cache.t3.micro</code>, 
     						<code>cache.t3.small</code>,
@@ -6880,11 +7317,14 @@ module CreateCacheCluster = {
 				           <ul>
                   <li>
                      <p>Current generation: </p>
+					  
+					    
+					    
+					    
 											          <p>
                         <b>R6g node types</b> (available only for Redis engine version 5.0.6 onward and for Memcached engine version 1.5.16 onward).</p>
 						
-						
-						
+					  
 						
 						               <p>	
 							                 <code>cache.r6g.large</code>,

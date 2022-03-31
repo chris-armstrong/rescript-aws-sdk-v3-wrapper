@@ -111,6 +111,7 @@ type handshakePartyId = string
 type handshakeNotes = string
 type handshakeId = string
 type handshakeConstraintViolationExceptionReason = [
+  | @as("MANAGEMENT_ACCOUNT_EMAIL_NOT_VERIFIED") #MANAGEMENT_ACCOUNT_EMAIL_NOT_VERIFIED
   | @as("ORGANIZATION_MEMBERSHIP_CHANGE_RATE_LIMIT_EXCEEDED")
   #ORGANIZATION_MEMBERSHIP_CHANGE_RATE_LIMIT_EXCEEDED
   | @as("ORGANIZATION_FROM_DIFFERENT_SELLER_OF_RECORD")
@@ -140,6 +141,7 @@ type createAccountState = [
   | @as("IN_PROGRESS") #IN_PROGRESS
 ]
 type createAccountRequestId = string
+type createAccountName = string
 type createAccountFailureReason = [
   | @as("MISSING_PAYMENT_INSTRUMENT") #MISSING_PAYMENT_INSTRUMENT
   | @as("UNKNOWN_BUSINESS_VALIDATION") #UNKNOWN_BUSINESS_VALIDATION
@@ -156,6 +158,10 @@ type createAccountFailureReason = [
   | @as("ACCOUNT_LIMIT_EXCEEDED") #ACCOUNT_LIMIT_EXCEEDED
 ]
 type constraintViolationExceptionReason = [
+  | @as("SERVICE_ACCESS_NOT_ENABLED") #SERVICE_ACCESS_NOT_ENABLED
+  | @as("CLOSE_ACCOUNT_REQUESTS_LIMIT_EXCEEDED") #CLOSE_ACCOUNT_REQUESTS_LIMIT_EXCEEDED
+  | @as("CLOSE_ACCOUNT_QUOTA_EXCEEDED") #CLOSE_ACCOUNT_QUOTA_EXCEEDED
+  | @as("CANNOT_CLOSE_MANAGEMENT_ACCOUNT") #CANNOT_CLOSE_MANAGEMENT_ACCOUNT
   | @as("MASTER_ACCOUNT_MISSING_BUSINESS_LICENSE") #MASTER_ACCOUNT_MISSING_BUSINESS_LICENSE
   | @as("DELEGATED_ADMINISTRATOR_EXISTS_FOR_THIS_SERVICE")
   #DELEGATED_ADMINISTRATOR_EXISTS_FOR_THIS_SERVICE
@@ -201,7 +207,11 @@ type actionType = [
   | @as("ENABLE_ALL_FEATURES") #ENABLE_ALL_FEATURES
   | @as("INVITE") #INVITE
 ]
-type accountStatus = [@as("SUSPENDED") #SUSPENDED | @as("ACTIVE") #ACTIVE]
+type accountStatus = [
+  | @as("PENDING_CLOSURE") #PENDING_CLOSURE
+  | @as("SUSPENDED") #SUSPENDED
+  | @as("ACTIVE") #ACTIVE
+]
 type accountName = string
 type accountJoinedMethod = [@as("CREATED") #CREATED | @as("INVITED") #INVITED]
 type accountId = string
@@ -215,7 +225,7 @@ type tagKeys = array<tagKey>
         <p>You can attach tags to any of the following organization resources.</p>
         <ul>
             <li>
-                <p>AWS account</p>
+                <p>Amazon Web Services account</p>
             </li>
             <li>
                 <p>Organizational unit (OU)</p>
@@ -254,7 +264,7 @@ type policyTargetSummary = {
   name: option<targetName>,
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the policy target.</p>
         <p>For more information about ARNs in Organizations, see <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies\">ARN 
-    Formats Supported by Organizations</a> in the <i>AWS Service Authorization Reference</i>.</p>")
+    Formats Supported by Organizations</a> in the <i>Amazon Web Services Service Authorization Reference</i>.</p>")
   @as("Arn")
   arn: option<genericArn>,
   @ocaml.doc("<p>The unique identifier (ID) of the policy target.</p>
@@ -283,7 +293,7 @@ type policyTargetSummary = {
 @ocaml.doc("<p>Contains information about a policy, but does not include the content. To see the
             content of a policy, see <a>DescribePolicy</a>.</p>")
 type policySummary = {
-  @ocaml.doc("<p>A boolean value that indicates whether the specified policy is an AWS managed
+  @ocaml.doc("<p>A boolean value that indicates whether the specified policy is an Amazon Web Services managed
             policy. If true, then you can attach the policy to roots, OUs, or accounts, but you
             cannot edit it.</p>")
   @as("AwsManaged")
@@ -299,7 +309,7 @@ type policySummary = {
   name: option<policyName>,
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the policy.</p>
         <p>For more information about ARNs in Organizations, see <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies\">ARN 
-    Formats Supported by Organizations</a> in the <i>AWS Service Authorization Reference</i>.</p>")
+    Formats Supported by Organizations</a> in the <i>Amazon Web Services Service Authorization Reference</i>.</p>")
   @as("Arn")
   arn: option<policyArn>,
   @ocaml.doc("<p>The unique identifier (ID) of the policy.</p>
@@ -331,7 +341,7 @@ type parent = {
   @as("Id")
   id: option<parentId>,
 }
-@ocaml.doc("<p>Contains details about an organizational unit (OU). An OU is a container of AWS
+@ocaml.doc("<p>Contains details about an organizational unit (OU). An OU is a container of Amazon Web Services
             accounts within a root of an organization. Policies that are attached to an OU apply to
             all accounts contained in that OU and in any child OUs.</p>")
 type organizationalUnit = {
@@ -343,7 +353,7 @@ type organizationalUnit = {
   name: option<organizationalUnitName>,
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of this OU.</p>
         <p>For more information about ARNs in Organizations, see <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies\">ARN 
-    Formats Supported by Organizations</a> in the <i>AWS Service Authorization Reference</i>.</p>")
+    Formats Supported by Organizations</a> in the <i>Amazon Web Services Service Authorization Reference</i>.</p>")
   @as("Arn")
   arn: option<organizationalUnitArn>,
   @ocaml.doc("<p>The unique identifier (ID) associated with this OU.</p>
@@ -380,11 +390,11 @@ type handshakeFilter = {
   @as("ActionType")
   actionType: option<actionType>,
 }
-@ocaml.doc("<p>A structure that contains details of a service principal that represents an AWS
-            service that is enabled to integrate with AWS Organizations.</p>")
+@ocaml.doc("<p>A structure that contains details of a service principal that represents an Amazon Web Services
+            service that is enabled to integrate with Organizations.</p>")
 type enabledServicePrincipal = {
   @ocaml.doc(
-    "<p>The date that the service principal was enabled for integration with AWS Organizations.</p>"
+    "<p>The date that the service principal was enabled for integration with Organizations.</p>"
   )
   @as("DateEnabled")
   dateEnabled: option<timestamp_>,
@@ -406,13 +416,13 @@ type effectivePolicy = {
   @ocaml.doc("<p>The text content of the policy.</p>") @as("PolicyContent")
   policyContent: option<policyContent>,
 }
-@ocaml.doc("<p>Contains information about the AWS service for which the account is a delegated
+@ocaml.doc("<p>Contains information about the Amazon Web Services service for which the account is a delegated
             administrator.</p>")
 type delegatedService = {
   @ocaml.doc("<p>The date that the account became a delegated administrator for this service. </p>")
   @as("DelegationEnabledDate")
   delegationEnabledDate: option<timestamp_>,
-  @ocaml.doc("<p>The name of an AWS service that can request an operation for the specified service.
+  @ocaml.doc("<p>The name of an Amazon Web Services service that can request an operation for the specified service.
             This is typically in the form of a URL, such as:
                 <code>
                <i>servicename</i>.amazonaws.com</code>.</p>")
@@ -437,7 +447,7 @@ type delegatedAdministrator = {
   status: option<accountStatus>,
   @ocaml.doc("<p>The friendly name of the delegated administrator's account.</p>") @as("Name")
   name: option<accountName>,
-  @ocaml.doc("<p>The email address that is associated with the delegated administrator's AWS
+  @ocaml.doc("<p>The email address that is associated with the delegated administrator's Amazon Web Services
             account.</p>")
   @as("Email")
   email: option<email>,
@@ -448,7 +458,7 @@ type delegatedAdministrator = {
   @as("Id")
   id: option<accountId>,
 }
-@ocaml.doc("<p>Contains the status about a <a>CreateAccount</a> or <a>CreateGovCloudAccount</a> request to create an AWS account or an AWS
+@ocaml.doc("<p>Contains the status about a <a>CreateAccount</a> or <a>CreateGovCloudAccount</a> request to create an Amazon Web Services account or an Amazon Web Services
             GovCloud (US) account in an organization.</p>")
 type createAccountStatus = {
   @ocaml.doc("<p>If the request failed, a description of the reason for the failure.</p>
@@ -462,20 +472,20 @@ type createAccountStatus = {
                     information.</p>
             </li>
             <li>
-                <p>EMAIL_ALREADY_EXISTS: The account could not be created because another AWS
+                <p>EMAIL_ALREADY_EXISTS: The account could not be created because another Amazon Web Services
                     account with that email address already exists.</p>
             </li>
             <li>
-                <p>FAILED_BUSINESS_VALIDATION: The AWS account that owns your organization
+                <p>FAILED_BUSINESS_VALIDATION: The Amazon Web Services account that owns your organization
                     failed to receive business license validation.</p>
             </li>
             <li>
-                <p>GOVCLOUD_ACCOUNT_ALREADY_EXISTS: The account in the AWS GovCloud (US) Region
+                <p>GOVCLOUD_ACCOUNT_ALREADY_EXISTS: The account in the Amazon Web Services GovCloud (US) Region
                     could not be created because this Region already includes an account with that
                     email address.</p>
             </li>
             <li>
-                <p>IDENTITY_INVALID_BUSINESS_VALIDATION: The AWS account that owns your
+                <p>IDENTITY_INVALID_BUSINESS_VALIDATION: The Amazon Web Services account that owns your
                     organization can't complete business license validation because it doesn't have
                     valid identity data.</p>
             </li>
@@ -489,11 +499,11 @@ type createAccountStatus = {
             </li>
             <li>
                 <p>INTERNAL_FAILURE: The account could not be created because of an internal
-                    failure. Try again later. If the problem persists, contact AWS Customer
+                    failure. Try again later. If the problem persists, contact Amazon Web Services Customer
                     Support.</p>
             </li>
             <li>
-                <p>MISSING_BUSINESS_VALIDATION: The AWS account that owns your organization has
+                <p>MISSING_BUSINESS_VALIDATION: The Amazon Web Services account that owns your organization has
                     not received Business Validation.</p>
             </li>
             <li>
@@ -501,18 +511,18 @@ type createAccountStatus = {
                     valid payment method, such as a credit card.</p>
             </li>
             <li>
-                <p>PENDING_BUSINESS_VALIDATION: The AWS account that owns your organization is
+                <p>PENDING_BUSINESS_VALIDATION: The Amazon Web Services account that owns your organization is
                     still in the process of completing business license validation.</p>
             </li>
             <li>
-                <p>UNKNOWN_BUSINESS_VALIDATION: The AWS account that owns your organization has
+                <p>UNKNOWN_BUSINESS_VALIDATION: The Amazon Web Services account that owns your organization has
                     an unknown issue with business license validation.</p>
             </li>
          </ul>")
   @as("FailureReason")
   failureReason: option<createAccountFailureReason>,
   @ocaml.doc("<p>If the account was created successfully, the unique identifier (ID) of the new account
-            in the AWS GovCloud (US) Region.</p>")
+            in the Amazon Web Services GovCloud (US) Region.</p>")
   @as("GovCloudAccountId")
   govCloudAccountId: option<accountId>,
   @ocaml.doc("<p>If the account was created successfully, the unique identifier (ID) of the new
@@ -527,10 +537,13 @@ type createAccountStatus = {
   @ocaml.doc("<p>The date and time that the request was made for the account creation.</p>")
   @as("RequestedTimestamp")
   requestedTimestamp: option<timestamp_>,
-  @ocaml.doc("<p>The status of the asynchronous request to create an AWS account.</p>") @as("State")
+  @ocaml.doc(
+    "<p>The status of the asynchronous request to create an Amazon Web Services account.</p>"
+  )
+  @as("State")
   state: option<createAccountState>,
   @ocaml.doc("<p>The account name given to the account when it was created.</p>") @as("AccountName")
-  accountName: option<accountName>,
+  accountName: option<createAccountName>,
   @ocaml.doc("<p>The unique identifier (ID) that references this request. You get this value from the
             response of the initial <a>CreateAccount</a> request to create the
             account.</p>
@@ -562,7 +575,7 @@ type child = {
   @as("Id")
   id: option<childId>,
 }
-@ocaml.doc("<p>Contains information about an AWS account that is a member of an
+@ocaml.doc("<p>Contains information about an Amazon Web Services account that is a member of an
             organization.</p>")
 type account = {
   @ocaml.doc("<p>The date the account became a part of the organization.</p>")
@@ -578,14 +591,14 @@ type account = {
     character range.</p>")
   @as("Name")
   name: option<accountName>,
-  @ocaml.doc("<p>The email address associated with the AWS account.</p>
+  @ocaml.doc("<p>The email address associated with the Amazon Web Services account.</p>
         <p>The <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a> for this parameter is a string of characters that represents a
             standard internet email address.</p>")
   @as("Email")
   email: option<email>,
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the account.</p>
         <p>For more information about ARNs in Organizations, see <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies\">ARN 
-    Formats Supported by Organizations</a> in the <i>AWS Service Authorization Reference</i>.</p>")
+    Formats Supported by Organizations</a> in the <i>Amazon Web Services Service Authorization Reference</i>.</p>")
   @as("Arn")
   arn: option<accountArn>,
   @ocaml.doc("<p>The unique identifier (ID) of the account.</p>
@@ -619,7 +632,7 @@ type children = array<child>
 type accounts = array<account>
 @ocaml.doc("<p>Contains details about a root. A root is a top-level parent node in the hierarchy of
             an organization that can contain organizational units (OUs) and accounts.
-            The root contains every AWS account in the
+            The root contains every Amazon Web Services account in the
             organization.</p>")
 type root = {
   @ocaml.doc("<p>The types of policies that are currently enabled for the root and therefore can be
@@ -639,7 +652,7 @@ type root = {
   name: option<rootName>,
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the root.</p>
         <p>For more information about ARNs in Organizations, see <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies\">ARN 
-    Formats Supported by Organizations</a> in the <i>AWS Service Authorization Reference</i>.</p>")
+    Formats Supported by Organizations</a> in the <i>Amazon Web Services Service Authorization Reference</i>.</p>")
   @as("Arn")
   arn: option<rootArn>,
   @ocaml.doc("<p>The unique identifier (ID) for the root.</p>
@@ -660,7 +673,7 @@ type organization = {
             use the <a>ListRoots</a> operation instead.</p>")
   @as("AvailablePolicyTypes")
   availablePolicyTypes: option<policyTypes>,
-  @ocaml.doc("<p>The email address that is associated with the AWS account that is designated as the
+  @ocaml.doc("<p>The email address that is associated with the Amazon Web Services account that is designated as the
             management account for the organization.</p>")
   @as("MasterAccountEmail")
   masterAccountEmail: option<email>,
@@ -672,19 +685,19 @@ type organization = {
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the account that is designated as the management
             account for the organization.</p>
         <p>For more information about ARNs in Organizations, see <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies\">ARN 
-    Formats Supported by Organizations</a> in the <i>AWS Service Authorization Reference</i>.</p>")
+    Formats Supported by Organizations</a> in the <i>Amazon Web Services Service Authorization Reference</i>.</p>")
   @as("MasterAccountArn")
   masterAccountArn: option<accountArn>,
   @ocaml.doc("<p>Specifies the functionality that currently is available to the organization. If set to
             \"ALL\", then all features are enabled and policies can be applied to accounts in the
             organization. If set to \"CONSOLIDATED_BILLING\", then only consolidated billing
             functionality is available. For more information, see <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html\">Enabling All Features
-                in Your Organization</a> in the <i>AWS Organizations User Guide</i>.</p>")
+                in Your Organization</a> in the <i>Organizations User Guide</i>.</p>")
   @as("FeatureSet")
   featureSet: option<organizationFeatureSet>,
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of an organization.</p>
         <p>For more information about ARNs in Organizations, see <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies\">ARN 
-    Formats Supported by Organizations</a> in the <i>AWS Service Authorization Reference</i>.</p>")
+    Formats Supported by Organizations</a> in the <i>Amazon Web Services Service Authorization Reference</i>.</p>")
   @as("Arn")
   arn: option<organizationArn>,
   @ocaml.doc("<p>The unique identifier (ID) of an organization.</p>
@@ -705,7 +718,7 @@ and handshakeResource = {
         <ul>
             <li>
                 <p>
-                  <code>ACCOUNT</code> - Specifies an AWS account ID number.</p>
+                  <code>ACCOUNT</code> - Specifies an Amazon Web Services account ID number.</p>
             </li>
             <li>
                 <p>
@@ -746,8 +759,8 @@ and handshakeResource = {
             accounts exchange information as a series of handshake requests and responses.</p>
         <p>
             <b>Note:</b> Handshakes that are <code>CANCELED</code>,
-                <code>ACCEPTED</code>, or <code>DECLINED</code> show up in lists for only 30 days
-            after entering that state After that they are deleted.</p>")
+                <code>ACCEPTED</code>, <code>DECLINED</code>, or <code>EXPIRED</code> show up in
+            lists for only 30 days after entering that state After that they are deleted.</p>")
 type handshake = {
   @ocaml.doc("<p>Additional information that is needed to process the handshake.</p>")
   @as("Resources")
@@ -835,7 +848,7 @@ type handshake = {
   parties: option<handshakeParties>,
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of a handshake.</p>
         <p>For more information about ARNs in Organizations, see <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies\">ARN 
-    Formats Supported by Organizations</a> in the <i>AWS Service Authorization Reference</i>.</p>")
+    Formats Supported by Organizations</a> in the <i>Amazon Web Services Service Authorization Reference</i>.</p>")
   @as("Arn")
   arn: option<handshakeArn>,
   @ocaml.doc("<p>The unique identifier (ID) of a handshake. The originating account creates the ID when
@@ -846,39 +859,39 @@ type handshake = {
   id: option<handshakeId>,
 }
 type handshakes = array<handshake>
-@ocaml.doc("<p>AWS Organizations is a web service that enables you to consolidate your multiple AWS accounts
-            into an <i>organization</i> and centrally manage your accounts and their
-            resources.</p>
-        <p>This guide provides descriptions of the Organizations operations. For more information about
-            using this service, see the <a href=\"http://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html\">AWS Organizations User Guide</a>.</p>
+@ocaml.doc("<p>Organizations is a web service that enables you to consolidate your multiple
+            Amazon Web Services accounts into an <i>organization</i> and centrally manage your
+            accounts and their resources.</p>
+        <p>This guide provides descriptions of the Organizations operations. For more
+            information about using this service, see the <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html\">Organizations User Guide</a>.</p>
         <p>
-            <b>Support and feedback for AWS Organizations</b>
+            <b>Support and feedback for Organizations</b>
          </p>
         <p>We welcome your feedback. Send your comments to <a href=\"mailto:feedback-awsorganizations@amazon.com\">feedback-awsorganizations@amazon.com</a> or post your feedback and questions in
-            the <a href=\"http://forums.aws.amazon.com/forum.jspa?forumID=219\">AWS Organizations support forum</a>. For
-            more information about the AWS support forums, see <a href=\"http://forums.aws.amazon.com/help.jspa\">Forums Help</a>.</p>
+            the <a href=\"http://forums.aws.amazon.com/forum.jspa?forumID=219\">Organizations support forum</a>. For
+            more information about the Amazon Web Services support forums, see <a href=\"http://forums.aws.amazon.com/help.jspa\">Forums Help</a>.</p>
         <p>
-            <b>Endpoint to call When using the AWS CLI or the AWS
+            <b>Endpoint to call When using the CLI or the Amazon Web Services
                 SDK</b>
          </p>
-        <p>For the current release of Organizations, specify the <code>us-east-1</code> region for all
-            AWS API and AWS CLI calls made from the commercial AWS Regions outside of China. If
-            calling from one of the AWS Regions in China, then specify
-            <code>cn-northwest-1</code>. You can do this in the AWS CLI by using these parameters and
-            commands:</p>
+        <p>For the current release of Organizations, specify the <code>us-east-1</code> region
+            for all Amazon Web Services API and CLI calls made from the commercial Amazon Web Services Regions outside of
+            China. If calling from one of the Amazon Web Services Regions in China, then specify
+                <code>cn-northwest-1</code>. You can do this in the CLI by using these parameters
+            and commands:</p>
         <ul>
             <li>
                 <p>Use the following parameter with each command to specify both the endpoint and
                     its region:</p>
                 <p>
                   <code>--endpoint-url https://organizations.us-east-1.amazonaws.com</code>
-                    <i>(from commercial AWS Regions outside of China)</i>
+                    <i>(from commercial Amazon Web Services Regions outside of China)</i>
                </p>
                 <p>or</p>
                 <p>
                   <code>--endpoint-url
                         https://organizations.cn-northwest-1.amazonaws.com.cn</code>
-                    <i>(from AWS Regions in China)</i>
+                    <i>(from Amazon Web Services Regions in China)</i>
                </p>
             </li>
             <li>
@@ -886,37 +899,38 @@ type handshakes = array<handshake>
                     command:</p>
                 <p>
                   <code>aws configure set default.region us-east-1</code>
-                    <i>(from commercial AWS Regions outside of China)</i>
+                    <i>(from commercial Amazon Web Services Regions outside of China)</i>
                </p>
                 <p>or</p>
                 <p>
                   <code>aws configure set default.region cn-northwest-1</code>
-                    <i>(from AWS Regions in China)</i>
+                    <i>(from Amazon Web Services Regions in China)</i>
                </p>
             </li>
             <li>
                 <p>Use the following parameter with each command to specify the endpoint:</p>
                 <p>
                   <code>--region us-east-1</code>
-                    <i>(from commercial AWS Regions outside of China)</i>
+                    <i>(from commercial Amazon Web Services Regions outside of China)</i>
                </p>
                 <p>or</p>
                 <p>
                   <code>--region cn-northwest-1</code>
-                    <i>(from AWS Regions in China)</i>
+                    <i>(from Amazon Web Services Regions in China)</i>
                </p>
             </li>
          </ul>
         <p>
             <b>Recording API Requests</b>
         </p>
-        <p>AWS Organizations supports AWS CloudTrail, a service that records AWS API calls for your AWS
-            account and delivers log files to an Amazon S3 bucket. By using information collected by
-            AWS CloudTrail, you can determine which requests the Organizations service received, who made the request
-            and when, and so on. For more about AWS Organizations and its support for AWS CloudTrail, see <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_incident-response.html#orgs_cloudtrail-integration\">Logging
-                AWS Organizations Events with AWS CloudTrail</a> in the <i>AWS Organizations User Guide</i>.
-            To learn more about AWS CloudTrail, including how to turn it on and find your log files, see the
-                <a href=\"http://docs.aws.amazon.com/awscloudtrail/latest/userguide/what_is_cloud_trail_top_level.html\">AWS CloudTrail User Guide</a>.</p>")
+        <p>Organizations supports CloudTrail, a service that records Amazon Web Services API calls for your
+            Amazon Web Services account and delivers log files to an Amazon S3 bucket. By using information collected
+            by CloudTrail, you can determine which requests the Organizations service received, who made the
+            request and when, and so on. For more about Organizations and its support for CloudTrail, see
+                <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_incident-response.html#orgs_cloudtrail-integration\">Logging
+                Organizations Events with CloudTrail</a> in the <i>Organizations User Guide</i>.
+            To learn more about CloudTrail, including how to turn it on and find your log files, see the
+                <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/what_is_cloud_trail_top_level.html\">CloudTrail User Guide</a>.</p>")
 module RemoveAccountFromOrganization = {
   type t
   type request = {
@@ -927,7 +941,7 @@ module RemoveAccountFromOrganization = {
     @as("AccountId")
     accountId: accountId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-organizations") @new
   external new: request => t = "RemoveAccountFromOrganizationCommand"
   let make = (~accountId, ()) => new({accountId: accountId})
@@ -937,7 +951,7 @@ module RemoveAccountFromOrganization = {
 module RegisterDelegatedAdministrator = {
   type t
   type request = {
-    @ocaml.doc("<p>The service principal of the AWS service for which you want to make the member
+    @ocaml.doc("<p>The service principal of the Amazon Web Services service for which you want to make the member
             account a delegated administrator.</p>")
     @as("ServicePrincipal")
     servicePrincipal: servicePrincipal,
@@ -946,7 +960,7 @@ module RegisterDelegatedAdministrator = {
     @as("AccountId")
     accountId: accountId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-organizations") @new
   external new: request => t = "RegisterDelegatedAdministratorCommand"
   let make = (~servicePrincipal, ~accountId, ()) =>
@@ -1001,7 +1015,7 @@ module MoveAccount = {
     @as("AccountId")
     accountId: accountId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-organizations") @new external new: request => t = "MoveAccountCommand"
   let make = (~destinationParentId, ~sourceParentId, ~accountId, ()) =>
     new({
@@ -1014,23 +1028,25 @@ module MoveAccount = {
 
 module LeaveOrganization = {
   type t
-
-  @module("@aws-sdk/client-organizations") @new external new: unit => t = "LeaveOrganizationCommand"
-  let make = () => new()
+  type request = {.}
+  type response = {.}
+  @module("@aws-sdk/client-organizations") @new
+  external new: request => t = "LeaveOrganizationCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module EnableAWSServiceAccess = {
   type t
   type request = {
-    @ocaml.doc("<p>The service principal name of the AWS service for which you want to enable
+    @ocaml.doc("<p>The service principal name of the Amazon Web Services service for which you want to enable
             integration with your organization. This is typically in the form of a URL, such as
                     <code>
                <i>service-abbreviation</i>.amazonaws.com</code>.</p>")
     @as("ServicePrincipal")
     servicePrincipal: servicePrincipal,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-organizations") @new
   external new: request => t = "EnableAWSServiceAccessCommand"
   let make = (~servicePrincipal, ()) => new({servicePrincipal: servicePrincipal})
@@ -1040,14 +1056,14 @@ module EnableAWSServiceAccess = {
 module DisableAWSServiceAccess = {
   type t
   type request = {
-    @ocaml.doc("<p>The service principal name of the AWS service for which you want to disable
+    @ocaml.doc("<p>The service principal name of the Amazon Web Services service for which you want to disable
             integration with your organization. This is typically in the form of a URL, such as
                     <code>
                <i>service-abbreviation</i>.amazonaws.com</code>.</p>")
     @as("ServicePrincipal")
     servicePrincipal: servicePrincipal,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-organizations") @new
   external new: request => t = "DisableAWSServiceAccessCommand"
   let make = (~servicePrincipal, ()) => new({servicePrincipal: servicePrincipal})
@@ -1089,7 +1105,7 @@ module DetachPolicy = {
     @as("PolicyId")
     policyId: policyId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-organizations") @new external new: request => t = "DetachPolicyCommand"
   let make = (~targetId, ~policyId, ()) => new({targetId: targetId, policyId: policyId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1098,9 +1114,9 @@ module DetachPolicy = {
 module DeregisterDelegatedAdministrator = {
   type t
   type request = {
-    @ocaml.doc("<p>The service principal name of an AWS service for which the account is a delegated
+    @ocaml.doc("<p>The service principal name of an Amazon Web Services service for which the account is a delegated
             administrator.</p>
-        <p>Delegated administrator privileges are revoked for only the specified AWS service
+        <p>Delegated administrator privileges are revoked for only the specified Amazon Web Services service
             from the member account. If the specified service is the only service for which the
             member account is a delegated administrator, the operation also revokes Organizations read action
             permissions.</p>")
@@ -1111,7 +1127,7 @@ module DeregisterDelegatedAdministrator = {
     @as("AccountId")
     accountId: accountId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-organizations") @new
   external new: request => t = "DeregisterDelegatedAdministratorCommand"
   let make = (~servicePrincipal, ~accountId, ()) =>
@@ -1130,7 +1146,7 @@ module DeletePolicy = {
     @as("PolicyId")
     policyId: policyId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-organizations") @new external new: request => t = "DeletePolicyCommand"
   let make = (~policyId, ()) => new({policyId: policyId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1148,7 +1164,7 @@ module DeleteOrganizationalUnit = {
     @as("OrganizationalUnitId")
     organizationalUnitId: organizationalUnitId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-organizations") @new
   external new: request => t = "DeleteOrganizationalUnitCommand"
   let make = (~organizationalUnitId, ()) => new({organizationalUnitId: organizationalUnitId})
@@ -1157,10 +1173,26 @@ module DeleteOrganizationalUnit = {
 
 module DeleteOrganization = {
   type t
-
+  type request = {.}
+  type response = {.}
   @module("@aws-sdk/client-organizations") @new
-  external new: unit => t = "DeleteOrganizationCommand"
-  let make = () => new()
+  external new: request => t = "DeleteOrganizationCommand"
+  let make = () => new(Js.Obj.empty())
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module CloseAccount = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>Retrieves the Amazon Web Services account Id for the current <code>CloseAccount</code> API request. </p>"
+    )
+    @as("AccountId")
+    accountId: accountId,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-organizations") @new external new: request => t = "CloseAccountCommand"
+  let make = (~accountId, ()) => new({accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -1199,7 +1231,7 @@ module AttachPolicy = {
     @as("PolicyId")
     policyId: policyId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-organizations") @new external new: request => t = "AttachPolicyCommand"
   let make = (~targetId, ~policyId, ()) => new({targetId: targetId, policyId: policyId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1246,7 +1278,7 @@ module UntagResource = {
         <p>You can specify any of the following taggable resources.</p>
         <ul>
             <li>
-                <p>AWS account – specify the account ID number.</p>
+                <p>Amazon Web Services account – specify the account ID number.</p>
             </li>
             <li>
                 <p>Organizational unit  – specify the OU ID that begins with <code>ou-</code> and
@@ -1270,7 +1302,7 @@ module UntagResource = {
     @as("ResourceId")
     resourceId: taggableResourceId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-organizations") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceId, ()) => new({tagKeys: tagKeys, resourceId: resourceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1367,7 +1399,7 @@ module DescribeCreateAccountStatus = {
 module DescribeAccount = {
   type t
   type request = {
-    @ocaml.doc("<p>The unique identifier (ID) of the AWS account that you want information about. You
+    @ocaml.doc("<p>The unique identifier (ID) of the Amazon Web Services account that you want information about. You
             can get the ID from the <a>ListAccounts</a> or <a>ListAccountsForParent</a> operations.</p>
         <p>The <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a> for an account ID string requires exactly 12
     digits.</p>")
@@ -1390,7 +1422,7 @@ module UpdatePolicy = {
   type request = {
     @ocaml.doc("<p>If provided, the new content for the policy. The text must be correctly formatted JSON
             that complies with the syntax for the policy's type. For more information, see <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_scp-syntax.html\">Service
-                Control Policy Syntax</a> in the <i>AWS Organizations User Guide.</i>
+                Control Policy Syntax</a> in the <i>Organizations User Guide.</i>
          </p>")
     @as("Content")
     content: option<policyContent>,
@@ -1424,10 +1456,19 @@ module TagResource = {
   type t
   type request = {
     @ocaml.doc("<p>A list of tags to add to the specified resource.</p>
+        <p>For each tag in the list, you must specify both a tag key and a value. The value can
+            be an empty string, but you can't set it to <code>null</code>.</p>
+        <note>
+            <p>If any one of the tags is invalid or if you exceed the maximum allowed number of
+                tags for a resource, then the entire request fails.</p>
+        </note>")
+    @as("Tags")
+    tags: tags,
+    @ocaml.doc("<p>The ID of the resource to add a tag to.</p>
         <p>You can specify any of the following taggable resources.</p>
         <ul>
             <li>
-                <p>AWS account – specify the account ID number.</p>
+                <p>Amazon Web Services account – specify the account ID number.</p>
             </li>
             <li>
                 <p>Organizational unit  – specify the OU ID that begins with <code>ou-</code> and
@@ -1447,20 +1488,11 @@ module TagResource = {
                   </code>
                </p>
             </li>
-         </ul>
-        <p>For each tag in the list, you must specify both a tag key and a value. You can set the
-            value to an empty string, but you can't set it to <code>null</code>.</p>
-        <note>
-            <p>If any one of the tags is invalid or if you exceed the allowed number of tags for
-                an account user, then the entire request fails and the account is not
-                created.</p>
-        </note>")
-    @as("Tags")
-    tags: tags,
-    @ocaml.doc("<p>The ID of the resource to add a tag to.</p>") @as("ResourceId")
+         </ul>")
+    @as("ResourceId")
     resourceId: taggableResourceId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-organizations") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceId, ()) => new({tags: tags, resourceId: resourceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1525,7 +1557,7 @@ module ListTagsForResource = {
         <p>You can specify any of the following taggable resources.</p>
         <ul>
             <li>
-                <p>AWS account – specify the account ID number.</p>
+                <p>Amazon Web Services account – specify the account ID number.</p>
             </li>
             <li>
                 <p>Organizational unit  – specify the OU ID that begins with <code>ou-</code> and
@@ -2132,7 +2164,7 @@ module ListAWSServiceAccessForOrganization = {
     nextToken: option<nextToken>,
     @ocaml.doc("<p>A list of the service principals for the services that are enabled to integrate with
             your organization. Each principal is a structure that includes the name and the date
-            that it was enabled for integration with AWS Organizations.</p>")
+            that it was enabled for integration with Organizations.</p>")
     @as("EnabledServicePrincipals")
     enabledServicePrincipals: option<enabledServicePrincipals>,
   }
@@ -2169,8 +2201,8 @@ module CreatePolicy = {
     @ocaml.doc("<p>A list of tags that you want to attach to the newly created policy. For each tag in
             the list, you must specify both a tag key and a value. You can set the value to an empty
             string, but you can't set it to <code>null</code>. For more information about tagging,
-            see <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_tagging.html\">Tagging AWS Organizations
-                resources</a> in the AWS Organizations User Guide.</p>
+            see <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_tagging.html\">Tagging Organizations
+                resources</a> in the Organizations User Guide.</p>
         <note>
             <p>If any one of the tags is invalid or if you exceed the allowed number of tags for
                 a policy, then the entire request fails and the policy is not created.</p>
@@ -2232,8 +2264,8 @@ module CreateOrganizationalUnit = {
     @ocaml.doc("<p>A list of tags that you want to attach to the newly created OU. For each tag in the
             list, you must specify both a tag key and a value. You can set the value to an empty
             string, but you can't set it to <code>null</code>. For more information about tagging,
-            see <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_tagging.html\">Tagging AWS Organizations
-                resources</a> in the AWS Organizations User Guide.</p>
+            see <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_tagging.html\">Tagging Organizations
+                resources</a> in the Organizations User Guide.</p>
         <note>
             <p>If any one of the tags is invalid or if you exceed the allowed number of tags for
                 an OU, then the entire request fails and the OU is not created.</p>
@@ -2282,11 +2314,12 @@ module CreateGovCloudAccount = {
             account exists.</p>
         <p>For each tag in the list, you must specify both a tag key and a value. You can set the
             value to an empty string, but you can't set it to <code>null</code>. For more
-            information about tagging, see <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_tagging.html\">Tagging AWS Organizations resources</a> in the
-            AWS Organizations User Guide.</p>
+            information about tagging, see <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_tagging.html\">Tagging Organizations resources</a> in the
+            Organizations User Guide.</p>
         <note>
-            <p>If any one of the tags is invalid or if you exceed the allowed number of tags for
-                an account, then the entire request fails and the account is not created.</p>
+            <p>If any one of the tags is invalid or if you exceed the maximum allowed number of
+                tags for an account, then the entire request fails and the account is not
+                created.</p>
         </note>")
     @as("Tags")
     tags: option<tags>,
@@ -2295,7 +2328,7 @@ module CreateGovCloudAccount = {
             required permissions. If set to <code>DENY</code>, only the root user of the new account
             can access account billing information. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html#ControllingAccessWebsite-Activate\">Activating
                 Access to the Billing and Cost Management Console</a> in the
-                <i>AWS Billing and Cost Management User Guide.</i>
+            <i>Amazon Web Services Billing and Cost Management User Guide.</i>
          </p>
         <p>If you don't specify this parameter, the value defaults to <code>ALLOW</code>, and
             IAM users and roles with the required permissions can access billing information for
@@ -2303,8 +2336,8 @@ module CreateGovCloudAccount = {
     @as("IamUserAccessToBilling")
     iamUserAccessToBilling: option<iamuserAccessToBilling>,
     @ocaml.doc("<p>(Optional)</p>
-        <p>The name of an IAM role that AWS Organizations automatically preconfigures in the new member
-            accounts in both the AWS GovCloud (US) Region and in the commercial Region. This role
+        <p>The name of an IAM role that Organizations automatically preconfigures in the new member
+            accounts in both the Amazon Web Services GovCloud (US) Region and in the commercial Region. This role
             trusts the management account, allowing users in the management account to assume the
             role, as permitted by the management account administrator. The role has administrator
             permissions in the new member account.</p>
@@ -2312,7 +2345,7 @@ module CreateGovCloudAccount = {
                 <code>OrganizationAccountAccessRole</code>.</p>
         <p>For more information about how to use this role to access the member account, see
                 <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_access.html#orgs_manage_accounts_create-cross-account-role\">Accessing and Administering the Member Accounts in Your Organization</a> in the
-                <i>AWS Organizations User Guide</i> and steps 2 and 3 in <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_cross-account-with-roles.html\">Tutorial: Delegate Access Across AWS Accounts Using IAM Roles</a> in the
+                <i>Organizations User Guide</i> and steps 2 and 3 in <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_cross-account-with-roles.html\">Tutorial: Delegate Access Across Amazon Web Services accounts Using IAM Roles</a> in the
                 <i>IAM User Guide.</i>
          </p>
         <p>The <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a> that 
@@ -2321,14 +2354,45 @@ module CreateGovCloudAccount = {
     @as("RoleName")
     roleName: option<roleName>,
     @ocaml.doc("<p>The friendly name of the member account.</p>") @as("AccountName")
-    accountName: accountName,
-    @ocaml.doc("<p>The email address of the owner to assign to the new member account in the commercial
-            Region. This email address must not already be associated with another AWS account.
-            You must use a valid email address to complete account creation. You can't access the
-            root user of the account or remove an account that was created with an invalid email
-            address. Like all request parameters for <code>CreateGovCloudAccount</code>, the request
-            for the email address for the AWS GovCloud (US) account originates from the commercial
-            Region, not from the AWS GovCloud (US) Region.</p>")
+    accountName: createAccountName,
+    @ocaml.doc("<p>Specifies the email address of the owner to assign to the new member account in the
+            commercial Region. This email address must not already be associated with another
+            Amazon Web Services account. You must use a valid email address to complete account creation.</p>
+        <p>The rules for a valid email address:</p>
+        <ul>
+            <li>
+                <p>The address must be a minimum of 6 and a maximum of 64 characters long.</p>
+            </li>
+            <li>
+                <p>All characters must be 7-bit ASCII characters.</p>
+            </li>
+            <li>
+                <p>There must be one and only one @ symbol, which separates the local name from
+                    the domain name.</p>
+            </li>
+            <li>
+                <p>The local name can't contain any of the following characters:</p>
+                <p>whitespace, \" ' ( ) < > [ ] : ; , \\ | % &</p>
+            </li>
+            <li>
+                <p>The local name can't begin with a dot (.)</p> 
+            </li>
+            <li>
+                <p>The domain name can consist of only the characters [a-z],[A-Z],[0-9], hyphen
+                    (-), or dot (.)</p>
+            </li>
+            <li>
+                <p>The domain name can't begin or end with a hyphen (-) or dot (.)</p>
+            </li>
+            <li>
+                <p>The domain name must contain at least one dot</p>
+            </li>
+         </ul>
+        <p>You can't access the root user of the account or remove an account that was created
+            with an invalid email address. Like all request parameters for
+                <code>CreateGovCloudAccount</code>, the request for the email address for the Amazon Web Services
+            GovCloud (US) account originates from the commercial Region, not from the Amazon Web Services GovCloud
+            (US) Region.</p>")
     @as("Email")
     email: email,
   }
@@ -2352,11 +2416,12 @@ module CreateAccount = {
     @ocaml.doc("<p>A list of tags that you want to attach to the newly created account. For each tag in
             the list, you must specify both a tag key and a value. You can set the value to an empty
             string, but you can't set it to <code>null</code>. For more information about tagging,
-            see <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_tagging.html\">Tagging AWS Organizations
-                resources</a> in the AWS Organizations User Guide.</p>
+            see <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_tagging.html\">Tagging Organizations
+                resources</a> in the Organizations User Guide.</p>
         <note>
-            <p>If any one of the tags is invalid or if you exceed the allowed number of tags for
-                an account, then the entire request fails and the account is not created.</p>
+            <p>If any one of the tags is invalid or if you exceed the maximum allowed number of
+                tags for an account, then the entire request fails and the account is not
+                created.</p>
         </note>")
     @as("Tags")
     tags: option<tags>,
@@ -2365,14 +2430,14 @@ module CreateAccount = {
             to <code>DENY</code>, only the root user of the new account can access account billing
             information. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html#ControllingAccessWebsite-Activate\">Activating
                 Access to the Billing and Cost Management Console</a> in the
-                <i>AWS Billing and Cost Management User Guide</i>.</p>
+            <i>Amazon Web Services Billing and Cost Management User Guide</i>.</p>
         <p>If you don't specify this parameter, the value defaults to <code>ALLOW</code>, and
             IAM users and roles with the required permissions can access billing information for
             the new account.</p>")
     @as("IamUserAccessToBilling")
     iamUserAccessToBilling: option<iamuserAccessToBilling>,
     @ocaml.doc("<p>(Optional)</p>
-        <p>The name of an IAM role that AWS Organizations automatically preconfigures in the new member
+        <p>The name of an IAM role that Organizations automatically preconfigures in the new member
             account. This role trusts the management account, allowing users in the management
             account to assume the role, as permitted by the management account administrator. The
             role has administrator permissions in the new member account.</p>
@@ -2384,12 +2449,12 @@ module CreateAccount = {
             <li>
                 <p>
                   <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_access.html#orgs_manage_accounts_create-cross-account-role\">Accessing and Administering the Member Accounts in Your
-                        Organization</a> in the <i>AWS Organizations User Guide</i>
+                        Organization</a> in the <i>Organizations User Guide</i>
                </p>
             </li>
             <li>
                 <p>Steps 2 and 3 in <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_cross-account-with-roles.html\">Tutorial:
-                        Delegate Access Across AWS Accounts Using IAM Roles</a> in the
+                        Delegate Access Across Amazon Web Services accounts Using IAM Roles</a> in the
                         <i>IAM User Guide</i>
                </p>
             </li>
@@ -2400,11 +2465,42 @@ module CreateAccount = {
     @as("RoleName")
     roleName: option<roleName>,
     @ocaml.doc("<p>The friendly name of the member account.</p>") @as("AccountName")
-    accountName: accountName,
+    accountName: createAccountName,
     @ocaml.doc("<p>The email address of the owner to assign to the new member account. This email address
-            must not already be associated with another AWS account. You must use a valid email
-            address to complete account creation. You can't access the root user of the account or
-            remove an account that was created with an invalid email address.</p>")
+            must not already be associated with another Amazon Web Services account. You must use a valid email
+            address to complete account creation.</p>
+        <p>The rules for a valid email address:</p>
+        <ul>
+            <li>
+                <p>The address must be a minimum of 6 and a maximum of 64 characters long.</p>
+            </li>
+            <li>
+                <p>All characters must be 7-bit ASCII characters.</p>
+            </li>
+            <li>
+                <p>There must be one and only one @ symbol, which separates the local name from
+                    the domain name.</p>
+            </li>
+            <li>
+                <p>The local name can't contain any of the following characters:</p>
+                <p>whitespace, \" ' ( ) < > [ ] : ; , \\ | % &</p>
+            </li>
+            <li>
+                <p>The local name can't begin with a dot (.)</p> 
+            </li>
+            <li>
+                <p>The domain name can consist of only the characters [a-z],[A-Z],[0-9], hyphen
+                    (-), or dot (.)</p>
+            </li>
+            <li>
+                <p>The domain name can't begin or end with a hyphen (-) or dot (.)</p>
+            </li>
+            <li>
+                <p>The domain name must contain at least one dot</p>
+            </li>
+         </ul>
+        <p>You can't access the root user of the account or remove an account that was created
+            with an invalid email address.</p>")
     @as("Email")
     email: email,
   }
@@ -2413,9 +2509,10 @@ module CreateAccount = {
             response structure might not be fully populated when you first receive it because
             account creation is an asynchronous process. You can pass the returned
                 <code>CreateAccountStatus</code> ID as a parameter to <a>DescribeCreateAccountStatus</a> to get status about the progress of the
-            request at later times. You can also check the AWS CloudTrail log for the
-                <code>CreateAccountResult</code> event. For more information, see <a href=\"http://docs.aws.amazon.com/organizations/latest/userguide/orgs_monitoring.html\">Monitoring the Activity in Your
-                Organization</a> in the <i>AWS Organizations User Guide</i>.</p>")
+            request at later times. You can also check the CloudTrail log for the
+                <code>CreateAccountResult</code> event. For more information, see <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_monitoring.html\">Monitoring the
+                Activity in Your Organization</a> in the
+            <i>Organizations User Guide</i>.</p>")
     @as("CreateAccountStatus")
     createAccountStatus: option<createAccountStatus>,
   }
@@ -2531,7 +2628,7 @@ module DisablePolicyType = {
 
 module DescribeOrganization = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("<p>A structure that contains information about the organization.</p>
         <important>
@@ -2546,8 +2643,8 @@ module DescribeOrganization = {
     organization: option<organization>,
   }
   @module("@aws-sdk/client-organizations") @new
-  external new: unit => t = "DescribeOrganizationCommand"
-  let make = () => new()
+  external new: request => t = "DescribeOrganizationCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -2562,10 +2659,10 @@ module CreateOrganization = {
                   <code>CONSOLIDATED_BILLING</code>: All member accounts have their bills
                     consolidated to and paid by the management account. For more information, see
                         <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#feature-set-cb-only\">Consolidated billing</a> in the
-                    <i>AWS Organizations User Guide.</i>
+                    <i>Organizations User Guide.</i>
                </p>
                 <p> The consolidated billing feature subset isn't available for organizations in
-                    the AWS GovCloud (US) Region.</p>
+                    the Amazon Web Services GovCloud (US) Region.</p>
             </li>
             <li>
                 <p>
@@ -2573,7 +2670,7 @@ module CreateOrganization = {
                     consolidated billing feature set, the management account can also apply any
                     policy type to any member account in the organization. For more information, see
                         <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#feature-set-all\">All
-                        features</a> in the <i>AWS Organizations User Guide.</i>
+                        features</a> in the <i>Organizations User Guide.</i>
                </p>
             </li>
          </ul>")
@@ -2634,8 +2731,8 @@ module InviteAccountToOrganization = {
     @ocaml.doc("<p>A list of tags that you want to attach to the account when it becomes a member of the
             organization. For each tag in the list, you must specify both a tag key and a value. You
             can set the value to an empty string, but you can't set it to <code>null</code>. For
-            more information about tagging, see <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_tagging.html\">Tagging AWS Organizations resources</a> in the
-            AWS Organizations User Guide.</p>
+            more information about tagging, see <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_tagging.html\">Tagging Organizations resources</a> in the
+            Organizations User Guide.</p>
         <important>
             <p>Any tags in the request are checked for compliance with any applicable tag
                 policies when the request is made. The request is rejected if the tags in the
@@ -2657,7 +2754,7 @@ module InviteAccountToOrganization = {
             recipient account owner.</p>")
     @as("Notes")
     notes: option<handshakeNotes>,
-    @ocaml.doc("<p>The identifier (ID) of the AWS account that you want to invite to join your
+    @ocaml.doc("<p>The identifier (ID) of the Amazon Web Services account that you want to invite to join your
             organization. This is a JSON object that contains the following elements:</p>
         <p>
             <code>{ \"Type\": \"ACCOUNT\", \"Id\": \"<<i>
@@ -2665,12 +2762,12 @@ module InviteAccountToOrganization = {
                         number</b>
                </i>>\" }</code>
         </p>
-        <p>If you use the AWS CLI, you can submit this as a single string, similar to the following
+        <p>If you use the CLI, you can submit this as a single string, similar to the following
             example:</p>
         <p>
             <code>--target Id=123456789012,Type=ACCOUNT</code>
         </p>
-        <p>If you specify <code>\"Type\": \"ACCOUNT\"</code>, you must provide the AWS account ID
+        <p>If you specify <code>\"Type\": \"ACCOUNT\"</code>, you must provide the Amazon Web Services account ID
             number as the <code>Id</code>. If you specify <code>\"Type\": \"EMAIL\"</code>, you must
             specify the email address that is associated with the account.</p>
         <p>
@@ -2693,15 +2790,16 @@ module InviteAccountToOrganization = {
 
 module EnableAllFeatures = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("<p>A structure that contains details about the handshake created to support this request
             to enable all features in the organization.</p>")
     @as("Handshake")
     handshake: option<handshake>,
   }
-  @module("@aws-sdk/client-organizations") @new external new: unit => t = "EnableAllFeaturesCommand"
-  let make = () => new()
+  @module("@aws-sdk/client-organizations") @new
+  external new: request => t = "EnableAllFeaturesCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

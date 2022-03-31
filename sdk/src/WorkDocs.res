@@ -493,7 +493,7 @@ module RemoveResourcePermission = {
     @as("AuthenticationToken")
     authenticationToken: option<authenticationHeaderType>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workdocs") @new
   external new: request => t = "RemoveResourcePermissionCommand"
   let make = (~principalId, ~resourceId, ~principalType=?, ~authenticationToken=?, ()) =>
@@ -516,7 +516,7 @@ module RemoveAllResourcePermissions = {
     @as("AuthenticationToken")
     authenticationToken: option<authenticationHeaderType>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workdocs") @new
   external new: request => t = "RemoveAllResourcePermissionsCommand"
   let make = (~resourceId, ~authenticationToken=?, ()) =>
@@ -541,7 +541,7 @@ module UpdateFolder = {
     @as("AuthenticationToken")
     authenticationToken: option<authenticationHeaderType>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workdocs") @new external new: request => t = "UpdateFolderCommand"
   let make = (
     ~folderId,
@@ -575,7 +575,7 @@ module UpdateDocumentVersion = {
     @as("AuthenticationToken")
     authenticationToken: option<authenticationHeaderType>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workdocs") @new
   external new: request => t = "UpdateDocumentVersionCommand"
   let make = (~versionId, ~documentId, ~versionStatus=?, ~authenticationToken=?, ()) =>
@@ -605,7 +605,7 @@ module UpdateDocument = {
     @as("AuthenticationToken")
     authenticationToken: option<authenticationHeaderType>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workdocs") @new external new: request => t = "UpdateDocumentCommand"
   let make = (
     ~documentId,
@@ -634,7 +634,7 @@ module DeleteUser = {
     @as("AuthenticationToken")
     authenticationToken: option<authenticationHeaderType>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workdocs") @new external new: request => t = "DeleteUserCommand"
   let make = (~userId, ~authenticationToken=?, ()) =>
     new({userId: userId, authenticationToken: authenticationToken})
@@ -647,7 +647,7 @@ module DeleteNotificationSubscription = {
     @ocaml.doc("<p>The ID of the organization.</p>") @as("OrganizationId") organizationId: idType,
     @ocaml.doc("<p>The ID of the subscription.</p>") @as("SubscriptionId") subscriptionId: idType,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workdocs") @new
   external new: request => t = "DeleteNotificationSubscriptionCommand"
   let make = (~organizationId, ~subscriptionId, ()) =>
@@ -670,7 +670,7 @@ module DeleteLabels = {
     authenticationToken: option<authenticationHeaderType>,
     @ocaml.doc("<p>The ID of the resource.</p>") @as("ResourceId") resourceId: resourceIdType,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workdocs") @new external new: request => t = "DeleteLabelsCommand"
   let make = (~resourceId, ~deleteAll=?, ~labels=?, ~authenticationToken=?, ()) =>
     new({
@@ -692,7 +692,7 @@ module DeleteFolderContents = {
     @as("AuthenticationToken")
     authenticationToken: option<authenticationHeaderType>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workdocs") @new
   external new: request => t = "DeleteFolderContentsCommand"
   let make = (~folderId, ~authenticationToken=?, ()) =>
@@ -710,7 +710,7 @@ module DeleteFolder = {
     @as("AuthenticationToken")
     authenticationToken: option<authenticationHeaderType>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workdocs") @new external new: request => t = "DeleteFolderCommand"
   let make = (~folderId, ~authenticationToken=?, ()) =>
     new({folderId: folderId, authenticationToken: authenticationToken})
@@ -727,7 +727,7 @@ module DeleteDocument = {
     @as("AuthenticationToken")
     authenticationToken: option<authenticationHeaderType>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workdocs") @new external new: request => t = "DeleteDocumentCommand"
   let make = (~documentId, ~authenticationToken=?, ()) =>
     new({documentId: documentId, authenticationToken: authenticationToken})
@@ -755,7 +755,7 @@ module DeleteCustomMetadata = {
     @as("AuthenticationToken")
     authenticationToken: option<authenticationHeaderType>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workdocs") @new
   external new: request => t = "DeleteCustomMetadataCommand"
   let make = (~resourceId, ~deleteAll=?, ~keys=?, ~versionId=?, ~authenticationToken=?, ()) =>
@@ -782,7 +782,7 @@ module DeleteComment = {
     @as("AuthenticationToken")
     authenticationToken: option<authenticationHeaderType>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workdocs") @new external new: request => t = "DeleteCommentCommand"
   let make = (~commentId, ~versionId, ~documentId, ~authenticationToken=?, ()) =>
     new({
@@ -804,7 +804,7 @@ module DeactivateUser = {
     authenticationToken: option<authenticationHeaderType>,
     @ocaml.doc("<p>The ID of the user.</p>") @as("UserId") userId: idType,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workdocs") @new external new: request => t = "DeactivateUserCommand"
   let make = (~userId, ~authenticationToken=?, ()) =>
     new({authenticationToken: authenticationToken, userId: userId})
@@ -852,7 +852,7 @@ module CreateLabels = {
     @ocaml.doc("<p>List of labels to add to the resource.</p>") @as("Labels") labels: sharedLabels,
     @ocaml.doc("<p>The ID of the resource.</p>") @as("ResourceId") resourceId: resourceIdType,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workdocs") @new external new: request => t = "CreateLabelsCommand"
   let make = (~labels, ~resourceId, ~authenticationToken=?, ()) =>
     new({authenticationToken: authenticationToken, labels: labels, resourceId: resourceId})
@@ -875,7 +875,7 @@ module CreateCustomMetadata = {
     @as("AuthenticationToken")
     authenticationToken: option<authenticationHeaderType>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workdocs") @new
   external new: request => t = "CreateCustomMetadataCommand"
   let make = (~customMetadata, ~resourceId, ~versionId=?, ~authenticationToken=?, ()) =>
@@ -899,7 +899,7 @@ module AbortDocumentVersionUpload = {
     @as("AuthenticationToken")
     authenticationToken: option<authenticationHeaderType>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workdocs") @new
   external new: request => t = "AbortDocumentVersionUploadCommand"
   let make = (~versionId, ~documentId, ~authenticationToken=?, ()) =>

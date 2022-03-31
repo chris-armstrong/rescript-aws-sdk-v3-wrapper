@@ -15,9 +15,14 @@ type baseInteger = int
 type baseTimestamp = Js.Date.t
 type baseLong = float
 type voiceId = string
+type voiceEngine = [@as("neural") #Neural | @as("standard") #Standard]
 type value = string
 type utterance = string
+type transcriptFormat = [@as("Lex") #Lex]
+type transcript = string
 type timestamp_ = Js.Date.t
+type timeValue = int
+type timeDimension = [@as("Weeks") #Weeks | @as("Days") #Days | @as("Hours") #Hours]
 type tagValue = string
 type tagKey = string
 type stillWaitingResponseTimeout = int
@@ -33,7 +38,15 @@ type slotTypeSortAttribute = [
 ]
 type slotTypeSignature = string
 type slotTypeFilterOperator = [@as("EQ") #EQ | @as("CO") #CO]
-type slotTypeFilterName = [@as("SlotTypeName") #SlotTypeName]
+type slotTypeFilterName = [
+  | @as("ExternalSourceType") #ExternalSourceType
+  | @as("SlotTypeName") #SlotTypeName
+]
+type slotTypeCategory = [
+  | @as("ExternalGrammar") #ExternalGrammar
+  | @as("Extended") #Extended
+  | @as("Custom") #Custom
+]
 type slotSortAttribute = [
   | @as("LastUpdatedDateTime") #LastUpdatedDateTime
   | @as("SlotName") #SlotName
@@ -44,14 +57,20 @@ type slotDefaultValueString = string
 type slotConstraint = [@as("Optional") #Optional | @as("Required") #Required]
 type skipResourceInUseCheck = bool
 type sessionTTL = int
+type sessionId = string
 type servicePrincipal = string
+type searchOrder = [@as("Descending") #Descending | @as("Ascending") #Ascending]
+type sampleUtterancesCount = int
 type ssmlmessageValue = string
+type s3ObjectPath = string
+type s3BucketName = string
 type s3BucketArn = string
 type roleArn = string
 type revisionId = string
 type retryAfterSeconds = int
 type resourceCount = int
 type regexPattern = string
+type recommendedAction = string
 type queryFilterString = string
 type promptMaxRetries = int
 type priorityValue = int
@@ -60,11 +79,18 @@ type presignedS3Url = string
 type policy = string
 type plainTextMessageValue = string
 type operation = string
+type objectPrefix = string
 type obfuscationSettingType = [@as("DefaultObfuscation") #DefaultObfuscation | @as("None") #None]
 type numericalBotVersion = string
 type nextToken = string
+type nextIndex = int
 type name = string
-type mergeStrategy = [@as("FailOnConflict") #FailOnConflict | @as("Overwrite") #Overwrite]
+type missedCount = int
+type mergeStrategy = [
+  | @as("Append") #Append
+  | @as("FailOnConflict") #FailOnConflict
+  | @as("Overwrite") #Overwrite
+]
 type maxResults = int
 type logPrefix = string
 type localeName = string
@@ -87,12 +113,22 @@ type importStatus = [
   | @as("InProgress") #InProgress
 ]
 type importSortAttribute = [@as("LastUpdatedDateTime") #LastUpdatedDateTime]
+type importResourceType = [
+  | @as("CustomVocabulary") #CustomVocabulary
+  | @as("BotLocale") #BotLocale
+  | @as("Bot") #Bot
+]
 type importFilterOperator = [@as("EQ") #EQ | @as("CO") #CO]
 type importFilterName = [@as("ImportResourceType") #ImportResourceType]
 type importExportFilePassword = string
-type importExportFileFormat = [@as("LexJson") #LexJson]
+type importExportFileFormat = [@as("TSV") #TSV | @as("LexJson") #LexJson]
 type id = string
+type hitCount = int
+type fulfillmentUpdateResponseFrequency = int
+type fulfillmentTimeout = int
+type fulfillmentStartResponseDelay = int
 type filterValue = string
+type filePassword = string
 type failureReason = string
 type exportStatus = [
   | @as("Deleting") #Deleting
@@ -107,7 +143,15 @@ type exceptionMessage = string
 type effect = [@as("Deny") #Deny | @as("Allow") #Allow]
 type draftBotVersion = string
 type description = string
+type customVocabularyStatus = [
+  | @as("Creating") #Creating
+  | @as("Importing") #Importing
+  | @as("Exporting") #Exporting
+  | @as("Deleting") #Deleting
+  | @as("Ready") #Ready
+]
 type customPayloadValue = string
+type count = int
 type contextTurnsToLive = int
 type contextTimeToLiveInSeconds = int
 type confidenceThreshold = float
@@ -136,7 +180,17 @@ type botStatus = [
   | @as("Creating") #Creating
 ]
 type botSortAttribute = [@as("BotName") #BotName]
+type botRecommendationStatus = [
+  | @as("Failed") #Failed
+  | @as("Available") #Available
+  | @as("Updating") #Updating
+  | @as("Downloading") #Downloading
+  | @as("Deleted") #Deleted
+  | @as("Deleting") #Deleting
+  | @as("Processing") #Processing
+]
 type botLocaleStatus = [
+  | @as("Processing") #Processing
   | @as("Importing") #Importing
   | @as("NotBuilt") #NotBuilt
   | @as("Deleting") #Deleting
@@ -160,12 +214,30 @@ type botAliasStatus = [
 ]
 type botAliasId = string
 type boolean_ = bool
+type audioRecognitionStrategy = [
+  | @as("UseSlotValuesAsCustomVocabulary") #UseSlotValuesAsCustomVocabulary
+]
 type attachmentUrl = string
 type attachmentTitle = string
+type associatedTranscriptFilterName = [@as("SlotTypeId") #SlotTypeId | @as("IntentId") #IntentId]
 type amazonResourceName = string
+type aggregatedUtterancesSortAttribute = [
+  | @as("MissedCount") #MissedCount
+  | @as("HitCount") #HitCount
+]
+type aggregatedUtterancesFilterOperator = [@as("EQ") #EQ | @as("CO") #CO]
+type aggregatedUtterancesFilterName = [@as("Utterance") #Utterance]
 @ocaml.doc("<p>Defines settings for using an Amazon Polly voice to communicate with a
          user.</p>")
 type voiceSettings = {
+  @ocaml.doc("<p>Indicates the type of Amazon Polly voice that Amazon Lex should use for voice interaction with the user. For more
+         information, see the <a href=\"https://docs.aws.amazon.com/polly/latest/dg/API_SynthesizeSpeech.html#polly-SynthesizeSpeech-request-Engine\">
+               <code>engine</code> parameter of the
+               <code>SynthesizeSpeech</code> operation</a> in the
+               <i>Amazon Polly developer guide</i>.</p>
+         <p>If you do not specify a value, the default is
+         <code>standard</code>.</p>")
+  engine: option<voiceEngine>,
   @ocaml.doc("<p>The identifier of the Amazon Polly voice to use.</p>") voiceId: voiceId,
 }
 type tagMap = Js.Dict.t<tagValue>
@@ -174,8 +246,8 @@ type tagKeyList = array<tagKey>
          slot.</p>")
 type slotValueRegexFilter = {
   @ocaml.doc("<p>A regular expression used to validate the value of a slot.</p>
-         <p> Use a standard regular expression. Amazon Lex supports the
-         following characters in the regular expression: </p>
+         <p> Use a standard regular expression. Amazon Lex supports the following
+         characters in the regular expression: </p>
          <ul>
             <li>
                <p>A-Z, a-z</p>
@@ -202,6 +274,27 @@ type slotValueRegexFilter = {
 }
 @ocaml.doc("<p>Provides summary information about a slot type.</p>")
 type slotTypeSummary = {
+  @ocaml.doc("<p>Indicates the type of the slot type.</p>
+         <ul>
+            <li>
+               <p>
+                  <code>Custom</code> - A slot type that you created using
+               custom values. For more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/custom-slot-types.html\">Creating custom slot
+               types</a>.</p>
+            </li>
+            <li>
+               <p>
+                  <code>Extended</code> - A slot type created by extending the
+               AMAZON.AlphaNumeric built-in slot type. For more information, see
+                  <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/built-in-slot-alphanumerice.html\">AMAZON.AlphaNumeric</a>.</p>
+            </li>
+            <li>
+               <p>
+                  <code>ExternalGrammar</code> - A slot type using a custom
+               GRXML grammar to define values. For more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/building-grxml.html\">Using a custom grammar slot type</a>.</p>
+            </li>
+         </ul>")
+  slotTypeCategory: option<slotTypeCategory>,
   @ocaml.doc("<p>A timestamp of the date and time that the slot type was last
          updated.</p>")
   lastUpdatedDateTime: option<timestamp_>,
@@ -211,6 +304,13 @@ type slotTypeSummary = {
   @ocaml.doc("<p>The description of the slot type.</p>") description: option<description>,
   @ocaml.doc("<p>The name of the slot type.</p>") slotTypeName: option<name>,
   @ocaml.doc("<p>The unique identifier assigned to the slot type.</p>") slotTypeId: option<id>,
+}
+@ocaml.doc("<p>The object that contains the statistical summary of the recommended
+         slot type associated with the bot recommendation.</p>")
+type slotTypeStatistics = {
+  @ocaml.doc("<p>The number of recommended slot types associated with the bot
+         recommendation.</p>")
+  discoveredSlotTypeCount: option<count>,
 }
 @ocaml.doc("<p>Specifies attributes for sorting a list of slot types.</p>")
 type slotTypeSortBy = {
@@ -270,6 +370,72 @@ type s3BucketLogDestination = {
          (KMS) key for encrypting audio log files stored in an S3 bucket.</p>")
   kmsKeyArn: option<kmsKeyArn>,
 }
+@ocaml.doc("<p>Specifies the time window that utterance statistics are returned
+         for. The time window is always relative to the last time that the that
+         utterances were aggregated. For example, if the
+            <code>ListAggregatedUtterances</code> operation is called at 1600,
+         the time window is set to 1 hour, and the last refresh time was 1530,
+         only utterances made between 1430 and 1530 are returned.</p>
+         <p>You can choose the time window that statistics should be returned
+         for.</p>
+         <ul>
+            <li>
+               <p>
+                  <b>Hours</b> - You can request
+               utterance statistics for 1, 3, 6, 12, or 24 hour time windows.
+               Statistics are refreshed every half hour for 1 hour time windows,
+               and hourly for the other time windows.</p>
+            </li>
+            <li>
+               <p>
+                  <b>Days</b> - You can request
+               utterance statistics for 3 days. Statistics are refreshed every 6
+               hours.</p>
+            </li>
+            <li>
+               <p>
+                  <b>Weeks</b> - You can see
+               statistics for one or two weeks. Statistics are refreshed every
+               12 hours for one week time windows, and once per day for two week
+               time windows.</p>
+            </li>
+         </ul>")
+type relativeAggregationDuration = {
+  @ocaml.doc("<p>The period of the time window to gather statistics for. The valid
+         value depends on the setting of the <code>timeDimension</code>
+         field.</p>
+         <ul>
+            <li>
+               <p>
+                  <code>Hours</code> - 1/3/6/12/24</p>
+            </li>
+            <li>
+               <p>
+                  <code>Days</code> - 3</p>
+            </li>
+            <li>
+               <p>
+                  <code>Weeks</code> - 1/2</p>
+            </li>
+         </ul>")
+  timeValue: timeValue,
+  @ocaml.doc("<p>The type of time period that the <code>timeValue</code> field
+         represents. </p>")
+  timeDimension: timeDimension,
+}
+@ocaml.doc("<p>An object that contains a summary of a recommended intent.</p>")
+type recommendedIntentSummary = {
+  @ocaml.doc("<p>The count of sample utterances of a recommended intent that is
+         associated with a bot recommendation.</p>")
+  sampleUtterancesCount: option<sampleUtterancesCount>,
+  @ocaml.doc("<p>The name of a recommended intent associated with the bot
+         recommendation.</p>")
+  intentName: option<name>,
+  @ocaml.doc("<p>The unique identifier of a recommended intent associated with the
+         bot recommendation.</p>")
+  intentId: option<id>,
+}
+type recommendedActions = array<recommendedAction>
 @ocaml.doc("<p>The IAM principal that you allowing or denying access to an Amazon Lex
          action. You must provide a <code>service</code> or an <code>arn</code>,
          but not both in the same statement. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html\"> AWS JSON policy elements: Principal </a>.</p>")
@@ -297,6 +463,7 @@ type outputContext = {
   @ocaml.doc("<p>The name of the output context.</p>") name: name,
 }
 type operationList = array<operation>
+type objectPrefixes = array<objectPrefix>
 @ocaml.doc("<p>Determines whether Amazon Lex obscures slot values in conversation logs.
       </p>")
 type obfuscationSetting = {
@@ -304,8 +471,21 @@ type obfuscationSetting = {
          conversation logs. The default is to obscure the values.</p>")
   obfuscationSettingType: obfuscationSettingType,
 }
+@ocaml.doc("<p>Indicates whether a slot can return multiple values.</p>")
+type multipleValuesSetting = {
+  @ocaml.doc("<p>Indicates whether a slot can return multiple values. When
+            <code>true</code>, the slot may return more than one value in a
+         response. When <code>false</code>, the slot returns only a single
+         value.</p>
+         <p>Multi-value slots are only available in the en-US locale. If you set
+         this value to <code>true</code> in any other locale, Amazon Lex throws a
+            <code>ValidationException</code>.</p>
+         <p>If the <code>allowMutlipleValues</code> is not set, the default
+         value is <code>false</code>.</p>")
+  allowMultipleValues: option<boolean_>,
+}
 @ocaml.doc("<p>Specifies a Lambda function that verifies requests to a bot or
-         fulfilles the user's request to a bot.</p>")
+         fulfills the user's request to a bot.</p>")
 type lambdaCodeHook = {
   @ocaml.doc("<p>The version of the request-response that you want Amazon Lex to use to
          invoke your Lambda function.</p>")
@@ -330,6 +510,13 @@ type kendraConfiguration = {
          same account and Region as the Amazon Lex bot.</p>")
   kendraIndex: kendraIndexArn,
 }
+@ocaml.doc("<p>The object that contains the statistical summary of recommended
+         intents associated with the bot recommendation.</p>")
+type intentStatistics = {
+  @ocaml.doc("<p>The number of recommended intents associated with the bot
+         recommendation.</p>")
+  discoveredIntentCount: option<count>,
+}
 @ocaml.doc("<p>Specifies attributes for sorting a list of intents.</p>")
 type intentSortBy = {
   @ocaml.doc("<p>The order to sort the list. You can choose ascending or
@@ -344,6 +531,8 @@ type inputContext = {@ocaml.doc("<p>The name of the context.</p>") name: name}
 @ocaml.doc("<p>Provides summary information about an import in an import
          list.</p>")
 type importSummary = {
+  @ocaml.doc("<p>The type of resource that was imported.</p>")
+  importedResourceType: option<importResourceType>,
   @ocaml.doc("<p>The date and time that the import was last updated.</p>")
   lastUpdatedDateTime: option<timestamp_>,
   @ocaml.doc("<p>The date and time that the import was created.</p>")
@@ -367,12 +556,15 @@ type importSortBy = {
   @ocaml.doc("<p>The order to sort the list.</p>") order: sortOrder,
   @ocaml.doc("<p>The export field to use for sorting.</p>") attribute: importSortAttribute,
 }
-@ocaml.doc("<p>Determines if a Lambda function should be invoked for a specific
-         intent.</p>")
-type fulfillmentCodeHookSettings = {
-  @ocaml.doc("<p>Indicates whether a Lambda function should be invoked to fulfill a
-         specific intent.</p>")
-  enabled: boolean_,
+@ocaml.doc("<p>Describes the Amazon S3 bucket name and location for the grammar
+         that is the source for the slot type.</p>")
+type grammarSlotTypeSource = {
+  @ocaml.doc("<p>The Amazon KMS key required to decrypt the contents of the grammar,
+         if any.</p>")
+  kmsKeyArn: option<kmsKeyArn>,
+  @ocaml.doc("<p>The path to the grammar in the S3 bucket.</p>") s3ObjectKey: s3ObjectPath,
+  @ocaml.doc("<p>The name of the S3 bucket that contains the grammar source.</p>")
+  s3BucketName: s3BucketName,
 }
 type filterValues = array<filterValue>
 type failureReasons = array<failureReason>
@@ -381,12 +573,35 @@ type exportSortBy = {
   @ocaml.doc("<p>The order to sort the list.</p>") order: sortOrder,
   @ocaml.doc("<p>The export field to use for sorting.</p>") attribute: exportSortAttribute,
 }
+@ocaml.doc("<p>The object representing the passwords that were used to encrypt the
+         data related to the bot recommendation, as well as the KMS key ARN used
+         to encrypt the associated metadata.</p>")
+type encryptionSetting = {
+  @ocaml.doc("<p>The password used to encrypt the associated transcript file.</p>")
+  associatedTranscriptsPassword: option<filePassword>,
+  @ocaml.doc("<p>The password used to encrypt the recommended bot recommendation
+         file.</p>")
+  botLocaleExportPassword: option<filePassword>,
+  @ocaml.doc("<p>The KMS key ARN used to encrypt the metadata associated with the bot
+         recommendation.</p>")
+  kmsKeyArn: option<kmsKeyArn>,
+}
 @ocaml.doc("<p>Settings that determine the Lambda function that Amazon Lex uses for
          processing user responses.</p>")
 type dialogCodeHookSettings = {
   @ocaml.doc("<p>Enables the dialog code hook so that it processes user
          requests.</p>")
   enabled: boolean_,
+}
+@ocaml.doc("<p>The object used for specifying the data range that the customer
+         wants Amazon Lex to read through in the input transcripts.</p>")
+type dateRangeFilter = {
+  @ocaml.doc("<p>A timestamp indicating the end date for the date range
+         filter.</p>")
+  endDateTime: timestamp_,
+  @ocaml.doc("<p>A timestamp indicating the start date for the date range
+         filter.</p>")
+  startDateTime: timestamp_,
 }
 @ocaml.doc("<p>By default, data stored by Amazon Lex is encrypted. The
             <code>DataPrivacy</code> structure provides settings that determine
@@ -421,6 +636,24 @@ type dataPrivacy = {
             FAQ</a>.</p>")
   childDirected: childDirected,
 }
+@ocaml.doc("<p>Provides the parameters required for importing a custom vocabulary.</p>")
+type customVocabularyImportSpecification = {
+  @ocaml.doc("<p>The identifier of the local to import the custom vocabulary to. The value must
+      be <code>en_GB</code>.</p>")
+  localeId: localeId,
+  @ocaml.doc("<p>The version of the bot to import the custom vocabulary to.</p>")
+  botVersion: draftBotVersion,
+  @ocaml.doc("<p>The identifier of the bot to import the custom vocabulary to.</p>") botId: id,
+}
+@ocaml.doc("<p>Provides the parameters required for exporting a custom vocabulary.</p>")
+type customVocabularyExportSpecification = {
+  @ocaml.doc("<p>The locale of the bot that contains the custom vocabulary to export.</p>")
+  localeId: localeId,
+  @ocaml.doc("<p>The version of the bot that contains the custom vocabulary to export.</p>")
+  botVersion: botVersion,
+  @ocaml.doc("<p>The identifier of the bot that contains the custom vocabulary to export.</p>")
+  botId: id,
+}
 @ocaml.doc("<p>A custom response string that Amazon Lex sends to your application. You
          define the content and structure the string.</p>")
 type customPayload = {
@@ -448,7 +681,8 @@ type button = {
   text: buttonText,
 }
 @ocaml.doc("<p>Provides summary information about a built-in slot type for the
-            <a>ListBuiltInSlotTypes</a> operation.</p>")
+            <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_ListBuiltInSlotTypes.html\"> ListBuiltInSlotTypes </a>
+         operation.</p>")
 type builtInSlotTypeSummary = {
   @ocaml.doc("<p>The description of the built-in slot type.</p>") description: option<description>,
   @ocaml.doc("<p>The signature of the built-in slot type. Use this to specify the
@@ -465,7 +699,7 @@ type builtInSlotTypeSortBy = {
   attribute: builtInSlotTypeSortAttribute,
 }
 @ocaml.doc(
-  "<p>Provides summary information about a built-in intent for the <a>ListBuiltInIntents</a> operation.</p>"
+  "<p>Provides summary information about a built-in intent for the <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_ListBuiltInIntents.html\"> ListBuiltInIntents </a> operation.</p>"
 )
 type builtInIntentSummary = {
   @ocaml.doc("<p>The description of the intent.</p>") description: option<description>,
@@ -482,7 +716,7 @@ type builtInIntentSortBy = {
   attribute: builtInIntentSortAttribute,
 }
 @ocaml.doc(
-  "<p>Summary information about a bot version returned by the <a>ListBotVersions</a> operation.</p>"
+  "<p>Summary information about a bot version returned by the <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_ListBotVersions.html\">ListBotVersions</a> operation.</p>"
 )
 type botVersionSummary = {
   @ocaml.doc("<p>A timestamp of the date and time that the version was
@@ -509,7 +743,9 @@ type botVersionSortBy = {
 type botVersionLocaleDetails = {
   @ocaml.doc("<p>The version of a bot used for a bot locale.</p>") sourceBotVersion: botVersion,
 }
-@ocaml.doc("<p>Summary information about a bot returned by the <a>ListBots</a> operation.</p>")
+@ocaml.doc(
+  "<p>Summary information about a bot returned by the <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_ListBots.html\">ListBots</a> operation.</p>"
+)
 type botSummary = {
   @ocaml.doc("<p>The date and time that the bot was last updated.</p>")
   lastUpdatedDateTime: option<timestamp_>,
@@ -521,7 +757,7 @@ type botSummary = {
   @ocaml.doc("<p>The description of the bot.</p>") description: option<description>,
   @ocaml.doc("<p>The name of the bot.</p>") botName: option<name>,
   @ocaml.doc("<p>The unique identifier assigned to the bot. Use this ID to get
-         detailed information about the bot with the <a>DescribeBot</a> operation.</p>")
+         detailed information about the bot with the <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_DescribeBot.html\">DescribeBot</a> operation.</p>")
   botId: option<id>,
 }
 @ocaml.doc("<p>Specifies attributes for sorting a list of bots.</p>")
@@ -531,8 +767,24 @@ type botSortBy = {
   order: sortOrder,
   @ocaml.doc("<p>The attribute to use to sort the list of bots.</p>") attribute: botSortAttribute,
 }
+@ocaml.doc("<p>A summary of the bot recommendation.</p>")
+type botRecommendationSummary = {
+  @ocaml.doc("<p>A timestamp of the date and time that the bot recommendation was
+         last updated.</p>")
+  lastUpdatedDateTime: option<timestamp_>,
+  @ocaml.doc("<p>A timestamp of the date and time that the bot recommendation was
+         created.</p>")
+  creationDateTime: option<timestamp_>,
+  @ocaml.doc("<p>The unique identifier of the bot recommendation to be
+         updated.</p>")
+  botRecommendationId: id,
+  @ocaml.doc("<p>The status of the bot recommendation.</p>
+         <p>If the status is Failed, then the reasons for the failure are listed
+         in the failureReasons field. </p>")
+  botRecommendationStatus: botRecommendationStatus,
+}
 @ocaml.doc(
-  "<p>Summary information about bot locales returned by the <a>ListBotLocales</a> operation.</p>"
+  "<p>Summary information about bot locales returned by the <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_ListBotLocales.html\">ListBotLocales</a> operation.</p>"
 )
 type botLocaleSummary = {
   @ocaml.doc("<p>A timestamp of the date and time that the bot locale was last
@@ -572,7 +824,7 @@ type botLocaleExportSpecification = {
   @ocaml.doc("<p>The version of the bot to export.</p>") botVersion: botVersion,
   @ocaml.doc("<p>The identifier of the bot to create the locale for.</p>") botId: id,
 }
-@ocaml.doc("<p>Provided the identity of a the bot that was exported.</p>")
+@ocaml.doc("<p>Provides the identity of a the bot that was exported.</p>")
 type botExportSpecification = {
   @ocaml.doc("<p>The version of the bot that was exported. This will be either
             <code>DRAFT</code> or the version number.</p>")
@@ -580,7 +832,7 @@ type botExportSpecification = {
   @ocaml.doc("<p>The identifier of the bot assigned by Amazon Lex.</p>") botId: id,
 }
 @ocaml.doc(
-  "<p>Summary information about bot aliases returned from the <a>ListBotAliases</a> operation.</p>"
+  "<p>Summary information about bot aliases returned from the <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_ListBotAliases.html\">ListBotAliases</a> operation.</p>"
 )
 type botAliasSummary = {
   @ocaml.doc("<p>A timestamp of the date and time that the bot alias was last
@@ -597,7 +849,7 @@ type botAliasSummary = {
   @ocaml.doc("<p>The description of the bot alias.</p>") description: option<description>,
   @ocaml.doc("<p>The name of the bot alias.</p>") botAliasName: option<name>,
   @ocaml.doc("<p>The unique identifier assigned to the bot alias. You can use this ID
-         to get detailed information about the alias using the <a>DescribeBotAlias</a> operation.</p>")
+         to get detailed information about the alias using the <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_DescribeBotAlias.html\">DescribeBotAlias</a> operation.</p>")
   botAliasId: option<botAliasId>,
 }
 @ocaml.doc("<p>Provides a record of an event that affects a bot alias. For example,
@@ -607,6 +859,65 @@ type botAliasHistoryEvent = {
   @ocaml.doc("<p>The date and time that the event started.</p>") startDate: option<timestamp_>,
   @ocaml.doc("<p>The version of the bot that was used in the event. </p>")
   botVersion: option<botVersion>,
+}
+@ocaml.doc("<p>The object containing information that associates the recommended
+         intent/slot type with a conversation.</p>")
+type associatedTranscript = {
+  @ocaml.doc("<p>The content of the transcript that meets the search filter criteria.
+         For the JSON format of the transcript, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/designing-output-format.html\">Output transcript
+            format</a>.</p>")
+  transcript: option<transcript>,
+}
+@ocaml.doc("<p>Provides summary information for aggregated utterances. The
+            <code>ListAggregatedUtterances</code> operations combines all
+         instances of the same utterance into a single aggregated
+         summary.</p>")
+type aggregatedUtterancesSummary = {
+  @ocaml.doc("<p>Aggregated utterance data may contain utterances from versions of
+         your bot that have since been deleted. When the aggregated contains
+         this kind of data, this field is set to true.</p>")
+  containsDataFromDeletedResources: option<boxedBoolean>,
+  @ocaml.doc("<p>The last date and time that an utterance was recorded in the time
+         window for aggregation. An utterance may be sent to Amazon Lex after that
+         time, but only utterances within the time window are counted.</p>")
+  utteranceLastRecordedInAggregationDuration: option<timestamp_>,
+  @ocaml.doc("<p>The date and time that the utterance was first recorded in the time
+         window for aggregation. An utterance may have been sent to Amazon Lex before
+         that time, but only utterances within the time window are
+         counted.</p>")
+  utteranceFirstRecordedInAggregationDuration: option<timestamp_>,
+  @ocaml.doc("<p>The number of times that the utterance was missed by Amazon Lex An
+         utterance is missed when it doesn't activate an intent or slot.</p>")
+  missedCount: option<missedCount>,
+  @ocaml.doc("<p>The number of times that the utterance was detected by Amazon Lex during
+         the time period. When an utterance is detected, it activates an intent
+         or a slot.</p>")
+  hitCount: option<hitCount>,
+  @ocaml.doc("<p>The text of the utterance. If the utterance was used with the
+            <code>RecognizeUtterance</code> operation, the text is the
+         transcription of the audio utterance.</p>")
+  utterance: option<utterance>,
+}
+@ocaml.doc("<p>Specifies attributes for sorting a list of utterances.</p>")
+type aggregatedUtterancesSortBy = {
+  @ocaml.doc("<p>Specifies whether to sort the aggregated utterances in ascending or
+         descending order.</p>")
+  order: sortOrder,
+  @ocaml.doc("<p>The utterance attribute to sort by.</p>")
+  attribute: aggregatedUtterancesSortAttribute,
+}
+@ocaml.doc("<p>Provides settings that enable advanced recognition settings for slot values.</p>")
+type advancedRecognitionSetting = {
+  @ocaml.doc(
+    "<p>Enables using the slot values as a custom vocabulary for recognizing user utterances.</p>"
+  )
+  audioRecognitionStrategy: option<audioRecognitionStrategy>,
+}
+@ocaml.doc("<p>Provides parameters for setting the time window and duration for
+         aggregating utterance data.</p>")
+type utteranceAggregationDuration = {
+  @ocaml.doc("<p>The desired time window for aggregating utterances. </p>")
+  relativeAggregationDuration: relativeAggregationDuration,
 }
 @ocaml.doc("<p>Defines the Amazon CloudWatch Logs destination log group for
          conversation text logs.</p>")
@@ -618,6 +929,9 @@ type textLogDestination = {
 type synonymList = array<sampleValue>
 @ocaml.doc("<p>Contains settings used by Amazon Lex to select a slot value.</p>")
 type slotValueSelectionSetting = {
+  @ocaml.doc("<p>Provides settings that enable advanced recognition settings for slot
+         values.</p>")
+  advancedRecognitionSetting: option<advancedRecognitionSetting>,
   @ocaml.doc("<p>A regular expression used to validate the value of a slot.</p>")
   regexFilter: option<slotValueRegexFilter>,
   @ocaml.doc("<p>Determines the slot resolution strategy that Amazon Lex uses to
@@ -668,8 +982,27 @@ type slotFilter = {
 }
 type slotDefaultValueList = array<slotDefaultValue>
 type sampleUtterancesList = array<sampleUtterance>
+type recommendedIntentSummaryList = array<recommendedIntentSummary>
 type principalList = array<principal>
+@ocaml.doc("<p>The object that contains a path format that will be applied when
+         Amazon Lex reads the transcript file in the bucket you provide. Specify this
+         object if you only want Lex to read a subset of files in your Amazon S3
+         bucket.</p>")
+type pathFormat = {
+  @ocaml.doc("<p>A list of Amazon S3 prefixes that points to sub-folders in the Amazon S3
+         bucket. Specify this list if you only want Lex to read the files under
+         this set of sub-folders.</p>")
+  objectPrefixes: option<objectPrefixes>,
+}
 type outputContextsList = array<outputContext>
+@ocaml.doc("<p>The object that contains transcript filter details that are
+         associated with a bot recommendation.</p>")
+type lexTranscriptFilter = {
+  @ocaml.doc("<p>The object that contains a date range filter that will be applied to
+         the transcript. Specify this object if you want Amazon Lex to only read the
+         files that are within the date range.</p>")
+  dateRangeFilter: option<dateRangeFilter>,
+}
 @ocaml.doc("<p>Filters the response from the <code>ListIntents</code>
          operation.</p>")
 type intentFilter = {
@@ -684,8 +1017,9 @@ type intentFilter = {
 }
 type inputContextsList = array<inputContext>
 type importSummaryList = array<importSummary>
-@ocaml.doc("<p>Filters the response from the 
-         operation.</p>")
+@ocaml.doc(
+  "<p>Filters the response from the <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_ListImports.html\">ListImports</a> operation.</p>"
+)
 type importFilter = {
   @ocaml.doc("<p>The operator to use for the filter. Specify EQ when the
             <code>ListImports</code> operation should return only resource types
@@ -693,20 +1027,32 @@ type importFilter = {
             <code>ListImports</code> operation should return resource types that
          contain the specified value.</p>")
   operator: importFilterOperator,
-  @ocaml.doc("<p>The values to use to filter the response.</p>") values: filterValues,
+  @ocaml.doc("<p>The values to use to filter the response. The values must be
+            <code>Bot</code>, <code>BotLocale</code>, or
+            <code>CustomVocabulary</code>.</p>")
+  values: filterValues,
   @ocaml.doc("<p>The name of the field to use for filtering.</p>") name: importFilterName,
+}
+@ocaml.doc("<p>Settings requried for a slot type based on a grammar that you
+         provide.</p>")
+type grammarSlotTypeSetting = {
+  @ocaml.doc("<p>The source of the grammar used to create the slot type.</p>")
+  source: option<grammarSlotTypeSource>,
 }
 @ocaml.doc("<p>Provides information about the bot or bot locale that you want to
          export. You can specify the <code>botExportSpecification</code> or the
             <code>botLocaleExportSpecification</code>, but not both.</p>")
 type exportResourceSpecification = {
+  @ocaml.doc("<p>The parameters required to export a custom vocabulary.</p>")
+  customVocabularyExportSpecification: option<customVocabularyExportSpecification>,
   @ocaml.doc("<p>Parameters for exporting a bot locale.</p>")
   botLocaleExportSpecification: option<botLocaleExportSpecification>,
   @ocaml.doc("<p>Parameters for exporting a bot.</p>")
   botExportSpecification: option<botExportSpecification>,
 }
-@ocaml.doc("<p>Filtes the response form the 
-         operation</p>")
+@ocaml.doc(
+  "<p>Filters the response form the <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_ListExports.html\">ListExports</a> operation</p>"
+)
 type exportFilter = {
   @ocaml.doc("<p>The operator to use for the filter. Specify EQ when the
             <code>ListExports</code> operation should return only resource types
@@ -714,7 +1060,10 @@ type exportFilter = {
             <code>ListExports</code> operation should return resource types that
          contain the specified value.</p>")
   operator: exportFilterOperator,
-  @ocaml.doc("<p>The values to use to fileter the response.</p>") values: filterValues,
+  @ocaml.doc("<p>The values to use to filter the response. The values must be
+            <code>Bot</code>, <code>BotLocale</code>, or
+            <code>CustomVocabulary</code>.</p>")
+  values: filterValues,
   @ocaml.doc("<p>The name of the field to use for filtering.</p>") name: exportFilterName,
 }
 type conditionMap = Js.Dict.t<conditionKeyValueMap>
@@ -727,6 +1076,16 @@ type builtInIntentSummaryList = array<builtInIntentSummary>
 type botVersionSummaryList = array<botVersionSummary>
 type botVersionLocaleSpecification = Js.Dict.t<botVersionLocaleDetails>
 type botSummaryList = array<botSummary>
+type botRecommendationSummaryList = array<botRecommendationSummary>
+@ocaml.doc("<p>A statistical summary of the bot recommendation results.</p>")
+type botRecommendationResultStatistics = {
+  @ocaml.doc("<p>Statistical information about the slot types associated with the bot
+         recommendation results.</p>")
+  slotTypes: option<slotTypeStatistics>,
+  @ocaml.doc("<p>Statistical information about about the intents associated with the
+         bot recommendation results.</p>")
+  intents: option<intentStatistics>,
+}
 type botLocaleSummaryList = array<botLocaleSummary>
 @ocaml.doc("<p>Provides the bot locale parameters required for importing a bot
          locale.</p>")
@@ -834,9 +1193,39 @@ type botAliasHistoryEventsList = array<botAliasHistoryEvent>
          is enabled for a bot.</p>")
 type audioLogDestination = {
   @ocaml.doc("<p>The Amazon S3 bucket where the audio log files are stored. The IAM
-         role specified in the <code>roleArn</code> parameter of the <a>CreateBot</a> operation must have permission to write to
-         this bucket.</p>")
+         role specified in the <code>roleArn</code> parameter of the <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_CreateBot.html\">CreateBot</a> operation must have permission to write to this
+         bucket.</p>")
   s3Bucket: s3BucketLogDestination,
+}
+type associatedTranscriptList = array<associatedTranscript>
+@ocaml.doc("<p>Filters to search for the associated transcript.</p>")
+type associatedTranscriptFilter = {
+  @ocaml.doc("<p>The values to use to filter the transcript.</p>") values: filterValues,
+  @ocaml.doc("<p>The name of the field to use for filtering. The allowed names are
+         IntentId and SlotTypeId.</p>")
+  name: associatedTranscriptFilterName,
+}
+type aggregatedUtterancesSummaryList = array<aggregatedUtterancesSummary>
+@ocaml.doc("<p>Filters responses returned by the
+            <code>ListAggregatedUtterances</code> operation.</p>")
+type aggregatedUtterancesFilter = {
+  @ocaml.doc("<p>The operator to use for the filter. Specify <code>EQ</code> when the
+            <code>ListAggregatedUtterances</code> operation should return only
+         utterances that equal the specified value. Specify <code>CO</code> when
+         the <code>ListAggregatedUtterances</code> operation should return
+         utterances that contain the specified value.</p>")
+  operator: aggregatedUtterancesFilterOperator,
+  @ocaml.doc("<p>The value to use for filtering the list of bots.</p>") values: filterValues,
+  @ocaml.doc("<p>The name of the field to filter the utterance list.</p>")
+  name: aggregatedUtterancesFilterName,
+}
+@ocaml.doc("<p>The object representing the filter that Amazon Lex will use to select the
+         appropriate transcript.</p>")
+type transcriptFilter = {
+  @ocaml.doc("<p>The object representing the filter that Amazon Lex will use to select the
+         appropriate transcript when the transcript format is the Amazon Lex
+         format.</p>")
+  lexTranscriptFilter: option<lexTranscriptFilter>,
 }
 @ocaml.doc("<p>Defines settings to enable text conversation logs.</p>")
 type textLogSetting = {
@@ -849,7 +1238,7 @@ type textLogSetting = {
             <code>SlotTypeValue</code> represents a value that the slot type can
          take.</p>")
 type slotTypeValue = {
-  @ocaml.doc("<p>Additional values releated to the slot type entry.</p>")
+  @ocaml.doc("<p>Additional values related to the slot type entry.</p>")
   synonyms: option<synonymList>,
   @ocaml.doc("<p>The value of the slot type entry.</p>") sampleValue: option<sampleValue>,
 }
@@ -886,9 +1275,10 @@ type intentSummary = {
 }
 type intentFilters = array<intentFilter>
 @ocaml.doc("<p>Provides information about the bot or bot locale that you want to
-         import. You can sepcifiy the <code>botImportSpecification</code> or the
+         import. You can specify the <code>botImportSpecification</code> or the
             <code>botLocaleImportSpecification</code>, but not both.</p>")
 type importResourceSpecification = {
+  customVocabularyImportSpecification: option<customVocabularyImportSpecification>,
   @ocaml.doc("<p>Parameters for importing a bot locale.</p>")
   botLocaleImportSpecification: option<botLocaleImportSpecification>,
   @ocaml.doc("<p>Parameters for importing a bot.</p>")
@@ -916,6 +1306,13 @@ type imageResponseCard = {
          is determined by the platform displaying the response card.</p>")
   title: attachmentTitle,
 }
+@ocaml.doc("<p>Provides information about the external source of the slot type's
+         definition.</p>")
+type externalSourceSetting = {
+  @ocaml.doc("<p>Settings required for a slot type based on a grammar that you
+         provide.</p>")
+  grammarSlotTypeSetting: option<grammarSlotTypeSetting>,
+}
 @ocaml.doc("<p>Provides summary information about an export in an export list.
       </p>")
 type exportSummary = {
@@ -934,6 +1331,17 @@ type exportSummary = {
   exportId: option<id>,
 }
 type exportFilters = array<exportFilter>
+@ocaml.doc("<p>The object representing the URL of the bot definition, the URL of
+         the associated transcript and a statistical summary of the bot
+         recommendation results.</p>")
+type botRecommendationResults = {
+  @ocaml.doc("<p>The statistical summary of the bot recommendation results.</p>")
+  statistics: option<botRecommendationResultStatistics>,
+  @ocaml.doc("<p>The presigned url link of the associated transcript.</p>")
+  associatedTranscriptsUrl: option<presignedS3Url>,
+  @ocaml.doc("<p>The presigned URL link of the recommended bot definition.</p>")
+  botLocaleExportUrl: option<presignedS3Url>,
+}
 type botLocaleFilters = array<botLocaleFilter>
 type botFilters = array<botFilter>
 @ocaml.doc("<p>Specifies settings that are unique to a locale. For example, you can
@@ -953,8 +1361,34 @@ type audioLogSetting = {
   destination: audioLogDestination,
   @ocaml.doc("<p>Determines whether audio logging in enabled for the bot.</p>") enabled: boolean_,
 }
+type associatedTranscriptFilters = array<associatedTranscriptFilter>
+type aggregatedUtterancesFilters = array<aggregatedUtterancesFilter>
 type textLogSettingsList = array<textLogSetting>
 type slotTypeValues = array<slotTypeValue>
+@ocaml.doc("<p>The object representing the Amazon S3 bucket containing the transcript,
+         as well as the associated metadata.</p>")
+type s3BucketTranscriptSource = {
+  @ocaml.doc("<p>The ARN of the KMS key that customer use to encrypt their Amazon S3
+         bucket. Only use this field if your bucket is encrypted using a
+         customer managed KMS key.</p>")
+  kmsKeyArn: option<kmsKeyArn>,
+  @ocaml.doc("<p>The object that contains the filter which will be applied when Amazon Lex
+         reads through the Amazon S3 bucket. Specify this object if you want Amazon Lex to
+         read only a subset of the Amazon S3 bucket based on the filter you
+         provide.</p>")
+  transcriptFilter: option<transcriptFilter>,
+  @ocaml.doc("<p>The format of the transcript content. Currently, Genie only supports
+         the Amazon Lex transcript format.</p>")
+  transcriptFormat: transcriptFormat,
+  @ocaml.doc("<p>The object that contains a path format that will be applied when
+         Amazon Lex reads the transcript file in the bucket you provide. Specify this
+         object if you only want Lex to read a subset of files in your Amazon S3
+         bucket.</p>")
+  pathFormat: option<pathFormat>,
+  @ocaml.doc("<p>The name of the bucket containing the transcript and the associated
+         metadata.</p>")
+  s3BucketName: s3BucketName,
+}
 @ocaml.doc("<p>The object that provides message text and it's type.</p>")
 type message = {
   @ocaml.doc("<p>A message that defines a response card that the client application
@@ -971,6 +1405,13 @@ type intentSummaryList = array<intentSummary>
 type exportSummaryList = array<exportSummary>
 type botAliasLocaleSettingsMap = Js.Dict.t<botAliasLocaleSettings>
 type audioLogSettingsList = array<audioLogSetting>
+@ocaml.doc("<p>Indicates the setting of the location where the transcript is
+         stored.</p>")
+type transcriptSourceSetting = {
+  @ocaml.doc("<p>Indicates the setting of the Amazon S3 bucket where the transcript is
+         stored.</p>")
+  s3BucketTranscriptSource: option<s3BucketTranscriptSource>,
+}
 type messageVariationsList = array<message>
 @ocaml.doc("<p>Configures conversation logging that saves audio, text, and metadata
          for the conversations with your users.</p>")
@@ -1023,16 +1464,50 @@ type promptSpecification = {
   @ocaml.doc("<p>Indicates whether the user can interrupt a speech prompt from the
          bot.</p>")
   allowInterrupt: option<boxedBoolean>,
-  @ocaml.doc("<p>The maximum number of times the bot tries to elicit a resonse from
+  @ocaml.doc("<p>The maximum number of times the bot tries to elicit a response from
          the user using this prompt.</p>")
   maxRetries: promptMaxRetries,
   @ocaml.doc("<p>A collection of messages that Amazon Lex can send to the user. Amazon Lex
          chooses the actual message to send at runtime.</p>")
   messageGroups: messageGroupsList,
 }
+@ocaml.doc("<p>Provides settings for a message that is sent periodically to the
+         user while a fulfillment Lambda function is running.</p>")
+type fulfillmentUpdateResponseSpecification = {
+  @ocaml.doc("<p>Determines whether the user can interrupt an update message while it
+         is playing.</p>")
+  allowInterrupt: option<boxedBoolean>,
+  @ocaml.doc("<p>One to 5 message groups that contain update messages. Amazon Lex chooses
+         one of the messages to play to the user.</p>")
+  messageGroups: messageGroupsList,
+  @ocaml.doc("<p>The frequency that a message is sent to the user. When the period
+         ends, Amazon Lex chooses a message from the message groups and plays it to
+         the user. If the fulfillment Lambda returns before the first period
+         ends, an update message is not played to the user.</p>")
+  frequencyInSeconds: fulfillmentUpdateResponseFrequency,
+}
+@ocaml.doc("<p>Provides settings for a message that is sent to the user when a
+         fulfillment Lambda function starts running.</p>")
+type fulfillmentStartResponseSpecification = {
+  @ocaml.doc("<p>Determines whether the user can interrupt the start message while it
+         is playing.</p>")
+  allowInterrupt: option<boxedBoolean>,
+  @ocaml.doc("<p>One to 5 message groups that contain start messages. Amazon Lex chooses
+         one of the messages to play to the user.</p>")
+  messageGroups: messageGroupsList,
+  @ocaml.doc("<p>The delay between when the Lambda fulfillment function starts running
+         and the start message is played. If the Lambda function returns before
+         the delay is over, the start message isn't played.</p>")
+  delayInSeconds: fulfillmentStartResponseDelay,
+}
 @ocaml.doc("<p>Specifies the prompts that Amazon Lex uses while a bot is waiting for
          customer input. </p>")
 type waitAndContinueSpecification = {
+  @ocaml.doc("<p>Specifies whether the bot will wait for a user to respond. When this
+         field is false, wait and continue responses for a slot aren't used. If
+         the <code>active</code> field isn't specified, the default is
+         true.</p>")
+  active: option<boxedBoolean>,
   @ocaml.doc("<p>A response that Amazon Lex sends periodically to the user to indicate
          that the bot is still waiting for input from the user.</p>")
   stillWaitingResponse: option<stillWaitingResponseSpecification>,
@@ -1062,9 +1537,22 @@ type slotSummary = {
   @ocaml.doc("<p>The name given to the slot.</p>") slotName: option<name>,
   @ocaml.doc("<p>The unique identifier of the slot.</p>") slotId: option<id>,
 }
+@ocaml.doc("<p>Provides a setting that determines whether the post-fulfillment
+         response is sent to the user. For more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/streaming-progress.html#progress-complete\">https://docs.aws.amazon.com/lexv2/latest/dg/streaming-progress.html#progress-complete</a>
+         </p>")
+type postFulfillmentStatusSpecification = {
+  timeoutResponse: option<responseSpecification>,
+  failureResponse: option<responseSpecification>,
+  successResponse: option<responseSpecification>,
+}
 @ocaml.doc("<p>Provides a prompt for making sure that the user is ready for the
          intent to be fulfilled.</p>")
 type intentConfirmationSetting = {
+  @ocaml.doc("<p>Specifies whether the intent's confirmation is sent to the user.
+         When this field is false, confirmation and declination responses aren't
+         sent. If the <code>active</code> field isn't specified, the default is
+         true.</p>")
+  active: option<boxedBoolean>,
   @ocaml.doc("<p>When the user answers \"no\" to the question defined in
             <code>promptSpecification</code>, Amazon Lex responds with this response
          to acknowledge that the intent was canceled. </p>")
@@ -1082,9 +1570,33 @@ type intentConfirmationSetting = {
 @ocaml.doc("<p>Provides a statement the Amazon Lex conveys to the user when the intent
          is successfully fulfilled.</p>")
 type intentClosingSetting = {
+  @ocaml.doc("<p>Specifies whether an intent's closing response is used. When this
+         field is false, the closing response isn't sent to the user. If the
+            <code>active</code> field isn't specified, the default is
+         true.</p>")
+  active: option<boxedBoolean>,
   @ocaml.doc("<p>The response that Amazon Lex sends to the user when the intent is
          complete.</p>")
   closingResponse: responseSpecification,
+}
+@ocaml.doc("<p>Provides information for updating the user on the progress of
+         fulfilling an intent.</p>")
+type fulfillmentUpdatesSpecification = {
+  @ocaml.doc("<p>The length of time that the fulfillment Lambda function should run
+         before it times out.</p>")
+  timeoutInSeconds: option<fulfillmentTimeout>,
+  @ocaml.doc("<p>Provides configuration information for messages sent periodically to
+         the user while the fulfillment Lambda function is running.</p>")
+  updateResponse: option<fulfillmentUpdateResponseSpecification>,
+  @ocaml.doc("<p>Provides configuration information for the message sent to users
+         when the fulfillment Lambda functions starts running.</p>")
+  startResponse: option<fulfillmentStartResponseSpecification>,
+  @ocaml.doc("<p>Determines whether fulfillment updates are sent to the user. When
+         this field is true, updates are sent.</p>
+         <p>If the <code>active</code> field is set to true, the
+            <code>startResponse</code>, <code>updateResponse</code>, and
+            <code>timeoutInSeconds</code> fields are required.</p>")
+  active: boxedBoolean,
 }
 @ocaml.doc("<p>Settings that you can use for eliciting a slot value.</p>")
 type slotValueElicitationSetting = {
@@ -1101,11 +1613,26 @@ type slotValueElicitationSetting = {
   slotConstraint: slotConstraint,
   @ocaml.doc("<p>A list of default values for a slot. Default values are used when
          Amazon Lex hasn't determined a value for a slot. You can specify default
-         values from context variables, sesion attributes, and defined
+         values from context variables, session attributes, and defined
          values.</p>")
   defaultValueSpecification: option<slotDefaultValueSpecification>,
 }
 type slotSummaryList = array<slotSummary>
+@ocaml.doc("<p>Determines if a Lambda function should be invoked for a specific
+         intent.</p>")
+type fulfillmentCodeHookSettings = {
+  @ocaml.doc("<p>Provides settings for update messages sent to the user for
+         long-running Lambda fulfillment functions. Fulfillment updates can be
+         used only with streaming conversations.</p>")
+  fulfillmentUpdatesSpecification: option<fulfillmentUpdatesSpecification>,
+  @ocaml.doc("<p>Provides settings for messages sent to the user for after the Lambda
+         fulfillment function completes. Post-fulfillment messages can be sent
+         for both streaming and non-streaming conversations.</p>")
+  postFulfillmentStatusSpecification: option<postFulfillmentStatusSpecification>,
+  @ocaml.doc("<p>Indicates whether a Lambda function should be invoked to fulfill a
+         specific intent.</p>")
+  enabled: boolean_,
+}
 @ocaml.doc("<p></p>")
 module UpdateResourcePolicy = {
   type t
@@ -1170,6 +1697,60 @@ module DescribeResourcePolicy = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module DescribeCustomVocabularyMetadata = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The locale to return the custom vocabulary information for.
+      The locale must be <code>en_GB</code>.</p>")
+    localeId: localeId,
+    @ocaml.doc("<p>The bot version of the bot to return metadata for.</p>") botVersion: botVersion,
+    @ocaml.doc("<p>The unique identifier of the bot that contains the custom vocabulary.</p>")
+    botId: id,
+  }
+  type response = {
+    @ocaml.doc("<p>The date and time that the custom vocabulary was last updated.</p>")
+    lastUpdatedDateTime: option<timestamp_>,
+    @ocaml.doc("<p>The date and time that the custom vocabulary was created.</p>")
+    creationDateTime: option<timestamp_>,
+    @ocaml.doc("<p>The status of the custom vocabulary. If the status is 
+      <code>Ready</code> the custom vocabulary is ready to use.</p>")
+    customVocabularyStatus: option<customVocabularyStatus>,
+    @ocaml.doc("<p>The locale that contains the custom vocabulary to describe.</p>")
+    localeId: option<localeId>,
+    @ocaml.doc("<p>The version of the bot that contains the custom vocabulary to describe.</p>")
+    botVersion: option<botVersion>,
+    @ocaml.doc("<p>The identifier of the bot that contains the custom vocabulary.</p>")
+    botId: option<id>,
+  }
+  @module("@aws-sdk/client-lex") @new
+  external new: request => t = "DescribeCustomVocabularyMetadataCommand"
+  let make = (~localeId, ~botVersion, ~botId, ()) =>
+    new({localeId: localeId, botVersion: botVersion, botId: botId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module DeleteUtterances = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The unique identifier of the session with the user. The ID is
+         returned in the response from the <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_runtime_RecognizeText.html\">RecognizeText</a> and <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_runtime_RecognizeUtterance.html\">RecognizeUtterance</a> operations.</p>")
+    sessionId: option<sessionId>,
+    @ocaml.doc("<p>The identifier of the language and locale where the utterances were
+         collected. The string must match one of the supported locales. For more
+         information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported
+         languages</a>.</p>")
+    localeId: option<localeId>,
+    @ocaml.doc("<p>The unique identifier of the bot that contains the
+         utterances.</p>")
+    botId: id,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-lex") @new external new: request => t = "DeleteUtterancesCommand"
+  let make = (~botId, ~sessionId=?, ~localeId=?, ()) =>
+    new({sessionId: sessionId, localeId: localeId, botId: botId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
 module DeleteSlotType = {
   type t
   type request = {
@@ -1188,7 +1769,7 @@ module DeleteSlotType = {
     @ocaml.doc("<p>The identifier of the bot associated with the slot type.</p>") botId: id,
     @ocaml.doc("<p>The identifier of the slot type to delete.</p>") slotTypeId: id,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-lex") @new external new: request => t = "DeleteSlotTypeCommand"
   let make = (~localeId, ~botVersion, ~botId, ~slotTypeId, ~skipResourceInUseCheck=?, ()) =>
     new({
@@ -1214,7 +1795,7 @@ module DeleteSlot = {
     @ocaml.doc("<p>The identifier of the bot associated with the slot to delete.</p>") botId: id,
     @ocaml.doc("<p>The identifier of the slot to delete. </p>") slotId: id,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-lex") @new external new: request => t = "DeleteSlotCommand"
   let make = (~intentId, ~localeId, ~botVersion, ~botId, ~slotId, ()) =>
     new({
@@ -1303,7 +1884,7 @@ module DeleteIntent = {
     @ocaml.doc("<p>The identifier of the bot associated with the intent.</p>") botId: id,
     @ocaml.doc("<p>The unique identifier of the intent to delete.</p>") intentId: id,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-lex") @new external new: request => t = "DeleteIntentCommand"
   let make = (~localeId, ~botVersion, ~botId, ~intentId, ()) =>
     new({localeId: localeId, botVersion: botVersion, botId: botId, intentId: intentId})
@@ -1315,7 +1896,7 @@ module DeleteImport = {
   type request = {@ocaml.doc("<p>The unique identifier of the import to delete.</p>") importId: id}
   type response = {
     @ocaml.doc("<p>The current status of the deletion. When the deletion is complete,
-         the import will no longer be returned by the  operation and calls to the  with the import identifier will
+         the import will no longer be returned by the <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_ListImports.html\">ListImports</a> operation and calls to the <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_DescribeImport.html\">DescribeImport</a> operation with the import identifier will
          fail.</p>")
     importStatus: option<importStatus>,
     @ocaml.doc("<p>The unique identifier of the deleted import.</p>") importId: option<id>,
@@ -1330,13 +1911,46 @@ module DeleteExport = {
   type request = {@ocaml.doc("<p>The unique identifier of the export to delete.</p>") exportId: id}
   type response = {
     @ocaml.doc("<p>The current status of the deletion. When the deletion is complete,
-         the export will no longer be returned by the  operation and calls to the  with the export identifier will
+         the export will no longer be returned by the <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_ListExports.html\">ListExports</a> operation and calls to the <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_DescribeExport.html\">
+            DescribeExport</a> operation with the export identifier will
          fail.</p>")
     exportStatus: option<exportStatus>,
     @ocaml.doc("<p>The unique identifier of the deleted export.</p>") exportId: option<id>,
   }
   @module("@aws-sdk/client-lex") @new external new: request => t = "DeleteExportCommand"
   let make = (~exportId, ()) => new({exportId: exportId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module DeleteCustomVocabulary = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The locale identifier for the locale that contains the
+      custom vocabulary to remove.</p>")
+    localeId: localeId,
+    @ocaml.doc("<p>The version of the bot to remove the custom vocabulary
+      from.</p>")
+    botVersion: draftBotVersion,
+    @ocaml.doc("<p>The unique identifier of the bot to remove the custom
+      vocabulary from.</p>")
+    botId: id,
+  }
+  type response = {
+    @ocaml.doc("<p>The status of removing the custom vocabulary.</p>")
+    customVocabularyStatus: option<customVocabularyStatus>,
+    @ocaml.doc("<p>The locale identifier for the locale that the
+         custom vocabulary was removed from.</p>")
+    localeId: option<localeId>,
+    @ocaml.doc("<p>The version of the bot that the custom vocabulary
+         was removed from.</p>")
+    botVersion: option<draftBotVersion>,
+    @ocaml.doc("<p>The identifier of the bot that the custom vocabulary
+      was removed from.</p>")
+    botId: option<id>,
+  }
+  @module("@aws-sdk/client-lex") @new external new: request => t = "DeleteCustomVocabularyCommand"
+  let make = (~localeId, ~botVersion, ~botId, ()) =>
+    new({localeId: localeId, botVersion: botVersion, botId: botId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1446,17 +2060,17 @@ module DeleteBot = {
 
 module CreateUploadUrl = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("<p>A pre-signed S3 write URL. Upload the zip archive file that contains
          the definition of your bot or bot locale.</p>")
     uploadUrl: option<presignedS3Url>,
     @ocaml.doc("<p>An identifier for a unique import job. Use it when you call the
-             operation.</p>")
+            <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_StartImport.html\">StartImport</a> operation.</p>")
     importId: option<id>,
   }
-  @module("@aws-sdk/client-lex") @new external new: unit => t = "CreateUploadUrlCommand"
-  let make = () => new()
+  @module("@aws-sdk/client-lex") @new external new: request => t = "CreateUploadUrlCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1502,7 +2116,7 @@ module BuildBotLocale = {
          of the bot.</p>")
     botVersion: draftBotVersion,
     @ocaml.doc("<p>The identifier of the bot to build. The identifier is returned in
-         the response from the  operation.</p>")
+         the response from the <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_CreateBot.html\">CreateBot</a> operation.</p>")
     botId: id,
   }
   type response = {
@@ -1550,6 +2164,9 @@ module UpdateBotLocale = {
     @ocaml.doc("<p>The unique identifier of the bot that contains the locale.</p>") botId: id,
   }
   type response = {
+    @ocaml.doc("<p>Recommended actions to take to resolve an error in the
+            <code>failureReasons</code> field.</p>")
+    recommendedActions: option<recommendedActions>,
     @ocaml.doc("<p>A timestamp of the date and time that the locale was last
          updated.</p>")
     lastUpdatedDateTime: option<timestamp_>,
@@ -1622,7 +2239,7 @@ module UpdateBot = {
          creates the bot.</p>")
     botName: name,
     @ocaml.doc("<p>The unique identifier of the bot to update. This identifier is
-         returned by the <a>CreateBot</a> operation.</p>")
+         returned by the <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_CreateBot.html\">CreateBot</a> operation.</p>")
     botId: id,
   }
   type response = {
@@ -1680,7 +2297,7 @@ module UntagResource = {
          from.</p>")
     resourceARN: amazonResourceName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-lex") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys: tagKeys, resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1696,7 +2313,7 @@ module TagResource = {
          to tag.</p>")
     resourceARN: amazonResourceName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-lex") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceARN, ()) => new({tags: tags, resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1800,7 +2417,7 @@ module CreateBotLocale = {
          threshold of 0.80 and the <code>AMAZON.FallbackIntent</code>. Amazon Lex
          returns three alternative intents with the following confidence scores:
          IntentA (0.70), IntentB (0.60), IntentC (0.50). The response from the
-         PostText operation would be:</p>
+            <code>RecognizeText</code> operation would be:</p>
          <ul>
             <li>
                <p>AMAZON.FallbackIntent</p>
@@ -1975,7 +2592,9 @@ module UpdateExport = {
     @ocaml.doc("<p>The status of the export. When the status is <code>Completed</code>
          the export archive is available for download.</p>")
     exportStatus: option<exportStatus>,
-    @ocaml.doc("<p>The file format used for the files that define the resource.</p>")
+    @ocaml.doc("<p>The file format used for the files that define the resource. The
+            <code>TSV</code> format is required to export a custom vocabulary
+         only; otherwise use <code>LexJson</code> format.</p>")
     fileFormat: option<importExportFileFormat>,
     @ocaml.doc("<p>A description of the type of resource that was exported, either a
          bot or a bot locale.</p>")
@@ -1986,6 +2605,77 @@ module UpdateExport = {
   @module("@aws-sdk/client-lex") @new external new: request => t = "UpdateExportCommand"
   let make = (~exportId, ~filePassword=?, ()) =>
     new({filePassword: filePassword, exportId: exportId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module ListRecommendedIntents = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The maximum number of bot recommendations to return in each page of
+         results. If there are fewer results than the max page size, only the
+         actual number of results are returned.</p>")
+    maxResults: option<maxResults>,
+    @ocaml.doc("<p>If the response from the ListRecommendedIntents operation contains
+         more results than specified in the maxResults parameter, a token is
+         returned in the response. Use that token in the nextToken parameter to
+         return the next page of results.</p>")
+    nextToken: option<nextToken>,
+    @ocaml.doc("<p>The identifier of the bot recommendation that contains the
+         recommended intents.</p>")
+    botRecommendationId: id,
+    @ocaml.doc("<p>The identifier of the language and locale of the recommended
+         intents.</p>")
+    localeId: localeId,
+    @ocaml.doc("<p>The version of the bot that contains the recommended intents.</p>")
+    botVersion: draftBotVersion,
+    @ocaml.doc("<p>The unique identifier of the bot associated with the recommended
+         intents.</p>")
+    botId: id,
+  }
+  type response = {
+    @ocaml.doc("<p>A token that indicates whether there are more results to return in a
+         response to the ListRecommendedIntents operation. If the nextToken
+         field is present, you send the contents as the nextToken parameter of a
+         ListRecommendedIntents operation request to get the next page of
+         results.</p>")
+    nextToken: option<nextToken>,
+    @ocaml.doc("<p>Summary information for the intents that meet the filter criteria
+         specified in the request. The length of the list is specified in the
+         maxResults parameter of the request. If there are more intents
+         available, the nextToken field contains a token to get the next page of
+         results.</p>")
+    summaryList: option<recommendedIntentSummaryList>,
+    @ocaml.doc("<p>The identifier of the bot recommendation that contains the
+         recommended intent.</p>")
+    botRecommendationId: option<id>,
+    @ocaml.doc("<p>The identifier of the language and locale of the intents to list.
+         The string must match one of the supported locales. For more
+         information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>.</p>")
+    localeId: option<localeId>,
+    @ocaml.doc("<p>The version of the bot that contains the intent.</p>")
+    botVersion: option<draftBotVersion>,
+    @ocaml.doc("<p>The unique identifier of the bot associated with the recommended
+         intent.</p>")
+    botId: option<id>,
+  }
+  @module("@aws-sdk/client-lex") @new external new: request => t = "ListRecommendedIntentsCommand"
+  let make = (
+    ~botRecommendationId,
+    ~localeId,
+    ~botVersion,
+    ~botId,
+    ~maxResults=?,
+    ~nextToken=?,
+    (),
+  ) =>
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      botRecommendationId: botRecommendationId,
+      localeId: localeId,
+      botVersion: botVersion,
+      botId: botId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -2119,6 +2809,63 @@ module ListBotVersions = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module ListBotRecommendations = {
+  type t
+  type request = {
+    @ocaml.doc("<p>If the response from the ListBotRecommendation operation contains
+         more results than specified in the maxResults parameter, a token is
+         returned in the response. Use that token in the nextToken parameter to
+         return the next page of results.</p>")
+    nextToken: option<nextToken>,
+    @ocaml.doc("<p>The maximum number of bot recommendations to return in each page of
+         results. If there are fewer results than the max page size, only the
+         actual number of results are returned.</p>")
+    maxResults: option<maxResults>,
+    @ocaml.doc("<p>The identifier of the language and locale of the bot recommendation
+         list.</p>")
+    localeId: localeId,
+    @ocaml.doc("<p>The version of the bot that contains the bot recommendation
+         list.</p>")
+    botVersion: draftBotVersion,
+    @ocaml.doc("<p>The unique identifier of the bot that contains the bot
+         recommendation list.</p>")
+    botId: id,
+  }
+  type response = {
+    @ocaml.doc("<p>A token that indicates whether there are more results to return in a
+         response to the ListBotRecommendations operation. If the nextToken
+         field is present, you send the contents as the nextToken parameter of a
+         ListBotRecommendations operation request to get the next page of
+         results. </p>")
+    nextToken: option<nextToken>,
+    @ocaml.doc("<p>Summary information for the bot recommendations that meet the filter
+         specified in this request. The length of the list is specified in the
+         maxResults parameter of the request. If there are more bot
+         recommendations available, the nextToken field contains a token to get
+         the next page of results.</p>")
+    botRecommendationSummaries: option<botRecommendationSummaryList>,
+    @ocaml.doc("<p>The identifier of the language and locale of the bot recommendation
+         list.</p>")
+    localeId: option<localeId>,
+    @ocaml.doc("<p>The version of the bot that contains the bot recommendation
+         list.</p>")
+    botVersion: option<draftBotVersion>,
+    @ocaml.doc("<p>The unique identifier of the bot that contains the bot
+         recommendation list.</p>")
+    botId: option<id>,
+  }
+  @module("@aws-sdk/client-lex") @new external new: request => t = "ListBotRecommendationsCommand"
+  let make = (~localeId, ~botVersion, ~botId, ~nextToken=?, ~maxResults=?, ()) =>
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      localeId: localeId,
+      botVersion: botVersion,
+      botId: botId,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module ListBotAliases = {
   type t
   type request = {
@@ -2175,8 +2922,8 @@ module DescribeExport = {
     @ocaml.doc("<p>The status of the export. When the status is <code>Complete</code>
          the export archive file is available for download.</p>")
     exportStatus: option<exportStatus>,
-    @ocaml.doc("<p>The file format used in the files that describe the bot or bot
-         locale.</p>")
+    @ocaml.doc("<p>The file format used in the files that describe the resource.
+      </p>")
     fileFormat: option<importExportFileFormat>,
     @ocaml.doc("<p>The bot, bot ID, and optional locale ID of the exported bot or bot
          locale.</p>")
@@ -2200,6 +2947,9 @@ module DescribeBotLocale = {
     @ocaml.doc("<p>The identifier of the bot associated with the locale.</p>") botId: id,
   }
   type response = {
+    @ocaml.doc("<p>Recommended actions to take to resolve an error in the
+            <code>failureReasons</code> field.</p>")
+    recommendedActions: option<recommendedActions>,
     @ocaml.doc("<p>History of changes, such as when a locale is used in an alias, that
          have taken place for the locale.</p>")
     botLocaleHistoryEvents: option<botLocaleHistoryEventsList>,
@@ -2331,8 +3081,8 @@ module CreateExport = {
          created.</p>")
     creationDateTime: option<timestamp_>,
     @ocaml.doc("<p>The status of the export. When the status is <code>Completed</code>,
-         you can use the  operation to get
-         the pre-signed S3 URL link to your exported bot or bot locale.</p>")
+         you can use the <a href=\"https://docs.aws.amazon.com/latest/dg/API_DescribeExport.html\">DescribeExport</a> operation to get the
+         pre-signed S3 URL link to your exported bot or bot locale.</p>")
     exportStatus: option<exportStatus>,
     @ocaml.doc("<p>The file format used for the bot or bot locale definition
          files.</p>")
@@ -2396,8 +3146,8 @@ module CreateBotVersion = {
 module StartImport = {
   type t
   type request = {
-    @ocaml.doc("<p>The password used to encrypt the zip archive that contains the bot
-         or bot locale definition. You should always encrypt the zip archive to
+    @ocaml.doc("<p>The password used to encrypt the zip archive that contains the
+         resource definition. You should always encrypt the zip archive to
          protect it during transit between your site and Amazon Lex.</p>")
     filePassword: option<importExportFilePassword>,
     @ocaml.doc("<p>The strategy to use when there is a name conflict between the
@@ -2405,24 +3155,26 @@ module StartImport = {
             <code>FailOnConflict</code> existing resources are not overwritten
          and the import fails.</p>")
     mergeStrategy: mergeStrategy,
-    @ocaml.doc("<p>Parameters for creating the bot or bot locale.</p>")
+    @ocaml.doc("<p>Parameters for creating the bot, bot locale or custom
+         vocabulary.</p>")
     resourceSpecification: importResourceSpecification,
     @ocaml.doc("<p>The unique identifier for the import. It is included in the response
-         from the  operation.</p>")
+         from the <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_CreateUploadUrl.html\">CreateUploadUrl</a> operation.</p>")
     importId: id,
   }
   type response = {
     @ocaml.doc("<p>The date and time that the import request was created.</p>")
     creationDateTime: option<timestamp_>,
     @ocaml.doc("<p>The current status of the import. When the status is
-            <code>Complete</code> the bot or bot alias is ready to use.</p>")
+            <code>Complete</code> the bot, bot alias, or custom vocabulary is
+         ready to use.</p>")
     importStatus: option<importStatus>,
     @ocaml.doc("<p>The strategy used when there was a name conflict between the
          imported resource and an existing resource. When the merge strategy is
             <code>FailOnConflict</code> existing resources are not overwritten
          and the import fails.</p>")
     mergeStrategy: option<mergeStrategy>,
-    @ocaml.doc("<p>The parameters used when importing the bot or bot locale.</p>")
+    @ocaml.doc("<p>The parameters used when importing the resource.</p>")
     resourceSpecification: option<importResourceSpecification>,
     @ocaml.doc("<p>A unique identifier for the import.</p>") importId: option<id>,
   }
@@ -2433,6 +3185,90 @@ module StartImport = {
       mergeStrategy: mergeStrategy,
       resourceSpecification: resourceSpecification,
       importId: importId,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module SearchAssociatedTranscripts = {
+  type t
+  type request = {
+    @ocaml.doc("<p>If the response from the SearchAssociatedTranscriptsRequest
+         operation contains more results than specified in the maxResults
+         parameter, an index is returned in the response. Use that index in the
+         nextIndex parameter to return the next page of results.</p>")
+    nextIndex: option<nextIndex>,
+    @ocaml.doc("<p>The maximum number of bot recommendations to return in each page of
+         results. If there are fewer results than the max page size, only the
+         actual number of results are returned.</p>")
+    maxResults: option<maxResults>,
+    @ocaml.doc("<p>A list of filter objects.</p>") filters: associatedTranscriptFilters,
+    @ocaml.doc("<p>How SearchResults are ordered. Valid values are Ascending or
+         Descending. The default is Descending.</p>")
+    searchOrder: option<searchOrder>,
+    @ocaml.doc("<p>The unique identifier of the bot recommendation associated with the
+         transcripts to search.</p>")
+    botRecommendationId: id,
+    @ocaml.doc("<p>The identifier of the language and locale of the transcripts to
+         search. The string must match one of the supported locales. For more
+         information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>
+         </p>")
+    localeId: localeId,
+    @ocaml.doc("<p>The version of the bot containing the transcripts that you are
+         searching.</p>")
+    botVersion: botVersion,
+    @ocaml.doc("<p>The unique identifier of the bot associated with the transcripts
+         that you are searching.</p>")
+    botId: id,
+  }
+  type response = {
+    @ocaml.doc("<p>The total number of transcripts returned by the search.</p>")
+    totalResults: option<maxResults>,
+    @ocaml.doc("<p>The object that contains the associated transcript that meet the
+         criteria you specified.</p>")
+    associatedTranscripts: option<associatedTranscriptList>,
+    @ocaml.doc("<p>A index that indicates whether there are more results to return in a
+         response to the SearchAssociatedTranscripts operation. If the nextIndex
+         field is present, you send the contents as the nextIndex parameter of a
+         SearchAssociatedTranscriptsRequest operation to get the next page of
+         results.</p>")
+    nextIndex: option<nextIndex>,
+    @ocaml.doc("<p> The unique identifier of the bot recommendation associated with the
+         transcripts to search.</p>")
+    botRecommendationId: option<id>,
+    @ocaml.doc("<p>The identifier of the language and locale of the transcripts to
+         search. The string must match one of the supported locales. For more
+         information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>
+         </p>")
+    localeId: option<localeId>,
+    @ocaml.doc("<p>The version of the bot containing the transcripts that you are
+         searching.</p>")
+    botVersion: option<botVersion>,
+    @ocaml.doc("<p>The unique identifier of the bot associated with the transcripts
+         that you are searching.</p>")
+    botId: option<id>,
+  }
+  @module("@aws-sdk/client-lex") @new
+  external new: request => t = "SearchAssociatedTranscriptsCommand"
+  let make = (
+    ~filters,
+    ~botRecommendationId,
+    ~localeId,
+    ~botVersion,
+    ~botId,
+    ~nextIndex=?,
+    ~maxResults=?,
+    ~searchOrder=?,
+    (),
+  ) =>
+    new({
+      nextIndex: nextIndex,
+      maxResults: maxResults,
+      filters: filters,
+      searchOrder: searchOrder,
+      botRecommendationId: botRecommendationId,
+      localeId: localeId,
+      botVersion: botVersion,
+      botId: botId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
@@ -2513,11 +3349,18 @@ module ListSlotTypes = {
 module ListImports = {
   type t
   type request = {
+    @ocaml.doc("<p>Specifies the locale that should be present in the list. If you
+         don't specify a resource type in the <code>filters</code> parameter,
+         the list contains both bot locales and custom vocabularies.</p>")
+    localeId: option<localeId>,
     @ocaml.doc("<p>If the response from the <code>ListImports</code> operation contains
          more results than specified in the <code>maxResults</code> parameter, a
-         token is returned in the response. Use that token in the
-            <code>nextToken</code> parameter to return the next page of
-         results.</p>")
+         token is returned in the response.</p>
+         <p>Use the returned token in the <code>nextToken</code> parameter of a
+            <code>ListImports</code> request to return the next page of results.
+         For a complete set of results, call the <code>ListImports</code>
+         operation until the <code>nextToken</code> returned in the response is
+         null.</p>")
     nextToken: option<nextToken>,
     @ocaml.doc("<p>The maximum number of imports to return in each page of results. If
          there are fewer results than the max page size, only the actual number
@@ -2537,6 +3380,7 @@ module ListImports = {
     botId: option<id>,
   }
   type response = {
+    @ocaml.doc("<p>The locale specified in the request.</p>") localeId: option<localeId>,
     @ocaml.doc("<p>A token that indicates whether there are more results to return in a
          response to the <code>ListImports</code> operation. If the
             <code>nextToken</code> field is present, you send the contents as
@@ -2555,8 +3399,18 @@ module ListImports = {
     @ocaml.doc("<p>The unique identifier assigned by Amazon Lex to the bot.</p>") botId: option<id>,
   }
   @module("@aws-sdk/client-lex") @new external new: request => t = "ListImportsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ~filters=?, ~sortBy=?, ~botVersion=?, ~botId=?, ()) =>
+  let make = (
+    ~localeId=?,
+    ~nextToken=?,
+    ~maxResults=?,
+    ~filters=?,
+    ~sortBy=?,
+    ~botVersion=?,
+    ~botId=?,
+    (),
+  ) =>
     new({
+      localeId: localeId,
       nextToken: nextToken,
       maxResults: maxResults,
       filters: filters,
@@ -2572,9 +3426,12 @@ module ListBots = {
   type request = {
     @ocaml.doc("<p>If the response from the <code>ListBots</code> operation contains
          more results than specified in the <code>maxResults</code> parameter, a
-         token is returned in the response. Use that token in the
-            <code>nextToken</code> parameter to return the next page of
-         results.</p>")
+         token is returned in the response. </p>
+         <p>Use the returned token in the <code>nextToken</code> parameter of a
+            <code>ListBots</code> request to return the next page of results.
+         For a complete set of results, call the <code>ListBots</code> operation
+         until the <code>nextToken</code> returned in the response is
+         null.</p>")
     nextToken: option<nextToken>,
     @ocaml.doc("<p>The maximum number of bots to return in each page of results. If
          there are fewer results than the maximum page size, only the actual
@@ -2661,6 +3518,125 @@ module ListBotLocales = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module ListAggregatedUtterances = {
+  type t
+  type request = {
+    @ocaml.doc("<p>If the response from the <code>ListAggregatedUtterances</code>
+         operation contains more results that specified in the
+            <code>maxResults</code> parameter, a token is returned in the
+         response. Use that token in the <code>nextToken</code> parameter to
+         return the next page of results.</p>")
+    nextToken: option<nextToken>,
+    @ocaml.doc("<p>The maximum number of utterances to return in each page of results.
+         If there are fewer results than the maximum page size, only the actual
+         number of results are returned. If you don't specify the
+            <code>maxResults</code> parameter, 1,000 results are
+         returned.</p>")
+    maxResults: option<maxResults>,
+    @ocaml.doc("<p>Provides the specification of a filter used to limit the utterances
+         in the response to only those that match the filter specification. You
+         can only specify one filter and one string to filter on.</p>")
+    filters: option<aggregatedUtterancesFilters>,
+    @ocaml.doc("<p>Specifies sorting parameters for the list of utterances. You can
+         sort by the hit count, the missed count, or the number of distinct
+         sessions the utterance appeared in.</p>")
+    sortBy: option<aggregatedUtterancesSortBy>,
+    @ocaml.doc("<p>The time window for aggregating the utterance information. You can
+         specify a time between one hour and two weeks.</p>")
+    aggregationDuration: utteranceAggregationDuration,
+    @ocaml.doc("<p>The identifier of the language and locale where the utterances were
+         collected. For more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported
+         languages</a>.</p>")
+    localeId: localeId,
+    @ocaml.doc("<p>The identifier of the bot version associated with this request. If
+         you specify the bot version, you can't specify the bot alias.</p>")
+    botVersion: option<botVersion>,
+    @ocaml.doc("<p>The identifier of the bot alias associated with this request. If you
+         specify the bot alias, you can't specify the bot version.</p>")
+    botAliasId: option<botAliasId>,
+    @ocaml.doc("<p>The unique identifier of the bot associated with this
+         request.</p>")
+    botId: id,
+  }
+  type response = {
+    @ocaml.doc("<p>A token that indicates whether there are more results to return in a
+         response to the <code>ListAggregatedUtterances</code> operation. If the
+            <code>nextToken</code> field is present, you send the contents as
+         the <code>nextToken</code> parameter of a
+            <code>ListAggregatedUtterances</code> operation request to get the
+         next page of results.</p>")
+    nextToken: option<nextToken>,
+    @ocaml.doc("<p>Summaries of the aggregated utterance data. Each response contains
+         information about the number of times that the utterance was seen
+         during the time period, whether it was detected or missed, and when it
+         was seen during the time period.</p>")
+    aggregatedUtterancesSummaries: option<aggregatedUtterancesSummaryList>,
+    @ocaml.doc("<p>The last date and time that the aggregated data was collected. The
+         time period depends on the length of the aggregation window.</p>
+         <ul>
+            <li>
+               <p>
+                  <b>Hours</b> - for 1 hour time
+               window, every half hour; otherwise every hour.</p>
+            </li>
+            <li>
+               <p>
+                  <b>Days</b> - every 6 hours</p>
+            </li>
+            <li>
+               <p>
+                  <b>Weeks</b> - for a one week time
+               window, every 12 hours; otherwise, every day</p>
+            </li>
+         </ul>")
+    aggregationLastRefreshedDateTime: option<timestamp_>,
+    @ocaml.doc("<p>The date and time that the aggregation window ends. Only data
+         collected between the start time and the end time are returned in the
+         results. </p>")
+    aggregationWindowEndTime: option<timestamp_>,
+    @ocaml.doc("<p>The date and time that the aggregation window begins. Only data
+         collected after this time is returned in the results.</p>")
+    aggregationWindowStartTime: option<timestamp_>,
+    @ocaml.doc("<p>The time period used to aggregate the utterance data.</p>")
+    aggregationDuration: option<utteranceAggregationDuration>,
+    @ocaml.doc("<p>The identifier of the language and locale that the utterances are
+         in.</p>")
+    localeId: option<localeId>,
+    @ocaml.doc("<p>The identifier of the bot version that contains the utterances. If
+         you specified the bot alias, the bot version isn't returned.</p>")
+    botVersion: option<botVersion>,
+    @ocaml.doc("<p>The identifier of the bot alias that contains the utterances. If you
+         specified the bot version, the bot alias ID isn't returned.</p>")
+    botAliasId: option<botAliasId>,
+    @ocaml.doc("<p>The identifier of the bot that contains the utterances.</p>") botId: option<id>,
+  }
+  @module("@aws-sdk/client-lex") @new external new: request => t = "ListAggregatedUtterancesCommand"
+  let make = (
+    ~aggregationDuration,
+    ~localeId,
+    ~botId,
+    ~nextToken=?,
+    ~maxResults=?,
+    ~filters=?,
+    ~sortBy=?,
+    ~botVersion=?,
+    ~botAliasId=?,
+    (),
+  ) =>
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      filters: filters,
+      sortBy: sortBy,
+      aggregationDuration: aggregationDuration,
+      localeId: localeId,
+      botVersion: botVersion,
+      botAliasId: botAliasId,
+      botId: botId,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module DescribeImport = {
   type t
   type request = {
@@ -2672,7 +3648,7 @@ module DescribeImport = {
     @ocaml.doc("<p>The date and time that the import was created.</p>")
     creationDateTime: option<timestamp_>,
     @ocaml.doc("<p>If the <code>importStatus</code> field is <code>Failed</code>, this
-         provides one or more reasons for the failture.</p>")
+         provides one or more reasons for the failure.</p>")
     failureReasons: option<failureReasons>,
     @ocaml.doc("<p>The status of the import process. When the status is
             <code>Completed</code> the resource is imported and ready for
@@ -2687,7 +3663,8 @@ module DescribeImport = {
     @ocaml.doc("<p>The unique identifier that Amazon Lex assigned to the resource created by
          the import.</p>")
     importedResourceId: option<importedResourceId>,
-    @ocaml.doc("<p>The specifications of the imported bot or bot locale.</p>")
+    @ocaml.doc("<p>The specifications of the imported bot, bot locale, or custom
+         vocabulary.</p>")
     resourceSpecification: option<importResourceSpecification>,
     @ocaml.doc("<p>The unique identifier of the described import.</p>") importId: option<id>,
   }
@@ -2699,6 +3676,7 @@ module DescribeImport = {
 module UpdateSlotType = {
   type t
   type request = {
+    externalSourceSetting: option<externalSourceSetting>,
     @ocaml.doc("<p>The identifier of the language and locale that contains the slot
          type. The string must match one of the supported locales. For more
          information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>.</p>")
@@ -2712,7 +3690,7 @@ module UpdateSlotType = {
     parentSlotTypeSignature: option<slotTypeSignature>,
     @ocaml.doc("<p>The strategy that Amazon Lex should use when deciding on a value from the
          list of slot type values.</p>")
-    valueSelectionSetting: slotValueSelectionSetting,
+    valueSelectionSetting: option<slotValueSelectionSetting>,
     @ocaml.doc("<p>A new list of values and their optional synonyms that define the
          values that the slot type can take.</p>")
     slotTypeValues: option<slotTypeValues>,
@@ -2721,6 +3699,7 @@ module UpdateSlotType = {
     @ocaml.doc("<p>The unique identifier of the slot type to update.</p>") slotTypeId: id,
   }
   type response = {
+    externalSourceSetting: option<externalSourceSetting>,
     @ocaml.doc("<p>A timestamp of the date and time that the slot type was last
          updated.</p>")
     lastUpdatedDateTime: option<timestamp_>,
@@ -2750,15 +3729,17 @@ module UpdateSlotType = {
     ~localeId,
     ~botVersion,
     ~botId,
-    ~valueSelectionSetting,
     ~slotTypeName,
     ~slotTypeId,
+    ~externalSourceSetting=?,
     ~parentSlotTypeSignature=?,
+    ~valueSelectionSetting=?,
     ~slotTypeValues=?,
     ~description=?,
     (),
   ) =>
     new({
+      externalSourceSetting: externalSourceSetting,
       localeId: localeId,
       botVersion: botVersion,
       botId: botId,
@@ -2777,9 +3758,12 @@ module ListIntents = {
   type request = {
     @ocaml.doc("<p>If the response from the <code>ListIntents</code> operation contains
          more results than specified in the <code>maxResults</code> parameter, a
-         token is returned in the response. Use that token in the
-            <code>nextToken</code> parameter to return the next page of
-         results.</p>")
+         token is returned in the response.</p>
+         <p>Use the returned token in the <code>nextToken</code> parameter of a
+            <code>ListIntents</code> request to return the next page of results.
+         For a complete set of results, call the <code>ListIntents</code>
+         operation until the <code>nextToken</code> returned in the response is
+         null.</p>")
     nextToken: option<nextToken>,
     @ocaml.doc("<p>The maximum number of intents to return in each page of results. If
          there are fewer results than the max page size, only the actual number
@@ -2846,11 +3830,18 @@ module ListIntents = {
 module ListExports = {
   type t
   type request = {
-    @ocaml.doc("<p>If the response from the <code>ListExports</code> operation contans
+    @ocaml.doc("<p>Specifies the resources that should be exported. If you
+      don't specify a resource type in the <code>filters</code> parameter,
+      both bot locales and custom vocabularies are exported.</p>")
+    localeId: option<localeId>,
+    @ocaml.doc("<p>If the response from the <code>ListExports</code> operation contains
          more results that specified in the <code>maxResults</code> parameter, a
-         token is returned in the response. Use that token in the
-            <code>nextToken</code> parameter to return the next page of
-         results.</p>")
+         token is returned in the response. </p>
+         <p>Use the returned token in the <code>nextToken</code> parameter of a
+            <code>ListExports</code> request to return the next page of results.
+         For a complete set of results, call the <code>ListExports</code>
+         operation until the <code>nextToken</code> returned in the response is
+         null.</p>")
     nextToken: option<nextToken>,
     @ocaml.doc("<p>The maximum number of exports to return in each page of results. If
          there are fewer results than the max page size, only the actual number
@@ -2870,6 +3861,7 @@ module ListExports = {
     botId: option<id>,
   }
   type response = {
+    @ocaml.doc("<p>The locale specified in the request.</p>") localeId: option<localeId>,
     @ocaml.doc("<p>A token that indicates whether there are more results to return in a
          response to the <code>ListExports</code> operation. If the
             <code>nextToken</code> field is present, you send the contents as
@@ -2886,8 +3878,18 @@ module ListExports = {
     @ocaml.doc("<p>The unique identifier assigned to the bot by Amazon Lex.</p>") botId: option<id>,
   }
   @module("@aws-sdk/client-lex") @new external new: request => t = "ListExportsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ~filters=?, ~sortBy=?, ~botVersion=?, ~botId=?, ()) =>
+  let make = (
+    ~localeId=?,
+    ~nextToken=?,
+    ~maxResults=?,
+    ~filters=?,
+    ~sortBy=?,
+    ~botVersion=?,
+    ~botId=?,
+    (),
+  ) =>
     new({
+      localeId: localeId,
       nextToken: nextToken,
       maxResults: maxResults,
       filters: filters,
@@ -2911,6 +3913,7 @@ module DescribeSlotType = {
     @ocaml.doc("<p>The identifier of the slot type.</p>") slotTypeId: id,
   }
   type response = {
+    externalSourceSetting: option<externalSourceSetting>,
     @ocaml.doc("<p>A timestamp of the date and time that the slot type was last
          updated.</p>")
     lastUpdatedDateTime: option<timestamp_>,
@@ -2944,6 +3947,9 @@ module DescribeSlotType = {
 module CreateSlotType = {
   type t
   type request = {
+    @ocaml.doc("<p>Sets the type of external information used to create the slot
+         type.</p>")
+    externalSourceSetting: option<externalSourceSetting>,
     @ocaml.doc("<p>The identifier of the language and locale that the slot type will be
          used in. The string must match one of the supported locales. All of the
          bots, intents, and slots used by the slot type must have the same
@@ -2976,7 +3982,7 @@ module CreateSlotType = {
          </ul>
          <p>If you don't specify the <code>valueSelectionSetting</code>
          parameter, the default is <code>OriginalValue</code>.</p>")
-    valueSelectionSetting: slotValueSelectionSetting,
+    valueSelectionSetting: option<slotValueSelectionSetting>,
     @ocaml.doc("<p>A list of <code>SlotTypeValue</code> objects that defines the values
          that the slot type can take. Each value can have a list of synonyms,
          additional values that help train the machine learning model about the
@@ -2990,6 +3996,9 @@ module CreateSlotType = {
     slotTypeName: name,
   }
   type response = {
+    @ocaml.doc("<p>The type of external information used to create the slot
+         type.</p>")
+    externalSourceSetting: option<externalSourceSetting>,
     @ocaml.doc("<p>A timestamp of the date and time that the slot type was
          created.</p>")
     creationDateTime: option<timestamp_>,
@@ -3020,14 +4029,16 @@ module CreateSlotType = {
     ~localeId,
     ~botVersion,
     ~botId,
-    ~valueSelectionSetting,
     ~slotTypeName,
+    ~externalSourceSetting=?,
     ~parentSlotTypeSignature=?,
+    ~valueSelectionSetting=?,
     ~slotTypeValues=?,
     ~description=?,
     (),
   ) =>
     new({
+      externalSourceSetting: externalSourceSetting,
       localeId: localeId,
       botVersion: botVersion,
       botId: botId,
@@ -3036,6 +4047,73 @@ module CreateSlotType = {
       slotTypeValues: slotTypeValues,
       description: description,
       slotTypeName: slotTypeName,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module UpdateBotRecommendation = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The object representing the passwords that will be used to encrypt
+         the data related to the bot recommendation results, as well as the KMS
+         key ARN used to encrypt the associated metadata.</p>")
+    encryptionSetting: encryptionSetting,
+    @ocaml.doc("<p>The unique identifier of the bot recommendation to be
+         updated.</p>")
+    botRecommendationId: id,
+    @ocaml.doc("<p>The identifier of the language and locale of the bot recommendation
+         to update. The string must match one of the supported locales. For more
+         information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>
+         </p>")
+    localeId: localeId,
+    @ocaml.doc("<p>The version of the bot containing the bot recommendation to be
+         updated.</p>")
+    botVersion: draftBotVersion,
+    @ocaml.doc("<p>The unique identifier of the bot containing the bot recommendation
+         to be updated.</p>")
+    botId: id,
+  }
+  type response = {
+    @ocaml.doc("<p>The object representing the passwords that were used to encrypt the
+         data related to the bot recommendation results, as well as the KMS key
+         ARN used to encrypt the associated metadata.</p>")
+    encryptionSetting: option<encryptionSetting>,
+    @ocaml.doc("<p>The object representing the Amazon S3 bucket containing the transcript,
+         as well as the associated metadata.</p>")
+    transcriptSourceSetting: option<transcriptSourceSetting>,
+    @ocaml.doc("<p>A timestamp of the date and time that the bot recommendation was
+         last updated.</p>")
+    lastUpdatedDateTime: option<timestamp_>,
+    @ocaml.doc("<p>A timestamp of the date and time that the bot recommendation was
+         created.</p>")
+    creationDateTime: option<timestamp_>,
+    @ocaml.doc("<p>The unique identifier of the bot recommendation to be
+         updated.</p>")
+    botRecommendationId: option<id>,
+    @ocaml.doc("<p>The status of the bot recommendation.</p>
+         <p>If the status is Failed, then the reasons for the failure are listed
+         in the failureReasons field. </p>")
+    botRecommendationStatus: option<botRecommendationStatus>,
+    @ocaml.doc("<p>The identifier of the language and locale of the bot recommendation
+         to update. The string must match one of the supported locales. For more
+         information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>
+         </p>")
+    localeId: option<localeId>,
+    @ocaml.doc("<p>The version of the bot containing the bot recommendation that has
+         been updated.</p>")
+    botVersion: option<draftBotVersion>,
+    @ocaml.doc("<p>The unique identifier of the bot containing the bot recommendation
+         that has been updated.</p>")
+    botId: option<id>,
+  }
+  @module("@aws-sdk/client-lex") @new external new: request => t = "UpdateBotRecommendationCommand"
+  let make = (~encryptionSetting, ~botRecommendationId, ~localeId, ~botVersion, ~botId, ()) =>
+    new({
+      encryptionSetting: encryptionSetting,
+      botRecommendationId: botRecommendationId,
+      localeId: localeId,
+      botVersion: botVersion,
+      botId: botId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
@@ -3106,6 +4184,131 @@ module UpdateBotAlias = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module StartBotRecommendation = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The object representing the passwords that will be used to encrypt
+         the data related to the bot recommendation results, as well as the KMS
+         key ARN used to encrypt the associated metadata.</p>")
+    encryptionSetting: option<encryptionSetting>,
+    @ocaml.doc("<p>The object representing the Amazon S3 bucket containing the transcript,
+         as well as the associated metadata.</p>")
+    transcriptSourceSetting: transcriptSourceSetting,
+    @ocaml.doc("<p>The identifier of the language and locale of the bot recommendation
+         to start. The string must match one of the supported locales. For more
+         information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>
+         </p>")
+    localeId: localeId,
+    @ocaml.doc("<p>The version of the bot containing the bot recommendation.</p>")
+    botVersion: draftBotVersion,
+    @ocaml.doc("<p>The unique identifier of the bot containing the bot
+         recommendation.</p>")
+    botId: id,
+  }
+  type response = {
+    @ocaml.doc("<p>The object representing the passwords that were used to encrypt the
+         data related to the bot recommendation results, as well as the KMS key
+         ARN used to encrypt the associated metadata.</p>")
+    encryptionSetting: option<encryptionSetting>,
+    @ocaml.doc("<p>The object representing the Amazon S3 bucket containing the transcript,
+         as well as the associated metadata.</p>")
+    transcriptSourceSetting: option<transcriptSourceSetting>,
+    @ocaml.doc("<p>A timestamp of the date and time that the bot recommendation was
+         created.</p>")
+    creationDateTime: option<timestamp_>,
+    @ocaml.doc("<p>The identifier of the bot recommendation that you have
+         created.</p>")
+    botRecommendationId: option<id>,
+    @ocaml.doc("<p>The status of the bot recommendation.</p>
+         <p>If the status is Failed, then the reasons for the failure are listed
+         in the failureReasons field. </p>")
+    botRecommendationStatus: option<botRecommendationStatus>,
+    @ocaml.doc("<p>The identifier of the language and locale of the bot recommendation
+         to start. The string must match one of the supported locales. For more
+         information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>
+         </p>")
+    localeId: option<localeId>,
+    @ocaml.doc("<p>The version of the bot containing the bot recommendation.</p>")
+    botVersion: option<draftBotVersion>,
+    @ocaml.doc("<p>The unique identifier of the bot containing the bot
+         recommendation.</p>")
+    botId: option<id>,
+  }
+  @module("@aws-sdk/client-lex") @new external new: request => t = "StartBotRecommendationCommand"
+  let make = (~transcriptSourceSetting, ~localeId, ~botVersion, ~botId, ~encryptionSetting=?, ()) =>
+    new({
+      encryptionSetting: encryptionSetting,
+      transcriptSourceSetting: transcriptSourceSetting,
+      localeId: localeId,
+      botVersion: botVersion,
+      botId: botId,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module DescribeBotRecommendation = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The identifier of the bot recommendation to describe.</p>")
+    botRecommendationId: id,
+    @ocaml.doc("<p>The identifier of the language and locale of the bot recommendation
+         to describe. The string must match one of the supported locales. For
+         more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>.</p>")
+    localeId: localeId,
+    @ocaml.doc("<p>The version of the bot associated with the bot
+         recommendation.</p>")
+    botVersion: draftBotVersion,
+    @ocaml.doc("<p>The unique identifier of the bot associated with the bot
+         recommendation.</p>")
+    botId: id,
+  }
+  type response = {
+    @ocaml.doc("<p>The object representing the URL of the bot definition, the URL of
+         the associated transcript and a statistical summary of the bot
+         recommendation results.</p>")
+    botRecommendationResults: option<botRecommendationResults>,
+    @ocaml.doc("<p>The object representing the passwords that were used to encrypt the
+         data related to the bot recommendation results, as well as the KMS key
+         ARN used to encrypt the associated metadata.</p>")
+    encryptionSetting: option<encryptionSetting>,
+    @ocaml.doc("<p>The object representing the Amazon S3 bucket containing the transcript,
+         as well as the associated metadata.</p>")
+    transcriptSourceSetting: option<transcriptSourceSetting>,
+    @ocaml.doc("<p>The date and time that the bot recommendation was last
+         updated.</p>")
+    lastUpdatedDateTime: option<timestamp_>,
+    @ocaml.doc("<p>The date and time that the bot recommendation was created.</p>")
+    creationDateTime: option<timestamp_>,
+    @ocaml.doc("<p>If botRecommendationStatus is Failed, Amazon Lex explains why.</p>")
+    failureReasons: option<failureReasons>,
+    @ocaml.doc("<p>The identifier of the bot recommendation being described.</p>")
+    botRecommendationId: option<id>,
+    @ocaml.doc("<p>The status of the bot recommendation. If the status is Failed, then
+         the reasons for the failure are listed in the failureReasons field.
+      </p>")
+    botRecommendationStatus: option<botRecommendationStatus>,
+    @ocaml.doc("<p>The identifier of the language and locale of the bot recommendation
+         to describe.</p>")
+    localeId: option<localeId>,
+    @ocaml.doc("<p>The version of the bot associated with the bot
+         recommendation.</p>")
+    botVersion: option<draftBotVersion>,
+    @ocaml.doc("<p>The identifier of the bot associated with the bot
+         recommendation.</p>")
+    botId: option<id>,
+  }
+  @module("@aws-sdk/client-lex") @new
+  external new: request => t = "DescribeBotRecommendationCommand"
+  let make = (~botRecommendationId, ~localeId, ~botVersion, ~botId, ()) =>
+    new({
+      botRecommendationId: botRecommendationId,
+      localeId: localeId,
+      botVersion: botVersion,
+      botId: botId,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module DescribeBotAlias = {
   type t
   type request = {
@@ -3165,8 +4368,8 @@ module CreateBotAlias = {
          functions in different locales.</p>")
     botAliasLocaleSettings: option<botAliasLocaleSettingsMap>,
     @ocaml.doc("<p>The version of the bot that this alias points to. You can use the
-             operation to change the bot
-         version associated with the alias.</p>")
+            <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/API_UpdateBotAlias.html\">UpdateBotAlias</a> operation to change the
+         bot version associated with the alias.</p>")
     botVersion: option<numericalBotVersion>,
     @ocaml.doc("<p>A description of the alias. Use this description to help identify
          the alias.</p>")
@@ -3220,6 +4423,97 @@ module CreateBotAlias = {
       botVersion: botVersion,
       description: description,
       botAliasName: botAliasName,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module UpdateSlot = {
+  type t
+  type request = {
+    @ocaml.doc("<p>Determines whether the slot accepts multiple values in one response.
+         Multiple value slots are only available in the en-US locale. If you set
+         this value to <code>true</code> in any other locale, Amazon Lex throws a
+            <code>ValidationException</code>.</p>
+         <p>If the <code>multipleValuesSetting</code> is not set, the default
+         value is <code>false</code>.</p>")
+    multipleValuesSetting: option<multipleValuesSetting>,
+    @ocaml.doc("<p>The identifier of the intent that contains the slot.</p>") intentId: id,
+    @ocaml.doc("<p>The identifier of the language and locale that contains the slot.
+         The string must match one of the supported locales. For more
+         information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>.</p>")
+    localeId: localeId,
+    @ocaml.doc("<p>The version of the bot that contains the slot. Must always be
+            <code>DRAFT</code>.</p>")
+    botVersion: draftBotVersion,
+    @ocaml.doc("<p>The unique identifier of the bot that contains the slot.</p>") botId: id,
+    @ocaml.doc("<p>New settings that determine how slot values are formatted in Amazon CloudWatch
+         logs. </p>")
+    obfuscationSetting: option<obfuscationSetting>,
+    @ocaml.doc("<p>A new set of prompts that Amazon Lex sends to the user to elicit a
+         response the provides a value for the slot.</p>")
+    valueElicitationSetting: slotValueElicitationSetting,
+    @ocaml.doc("<p>The unique identifier of the new slot type to associate with this
+         slot. </p>")
+    slotTypeId: option<builtInOrCustomSlotTypeId>,
+    @ocaml.doc("<p>The new description for the slot.</p>") description: option<description>,
+    @ocaml.doc("<p>The new name for the slot.</p>") slotName: name,
+    @ocaml.doc("<p>The unique identifier for the slot to update.</p>") slotId: id,
+  }
+  type response = {
+    @ocaml.doc("<p>Indicates whether the slot accepts multiple values in one
+         response.</p>")
+    multipleValuesSetting: option<multipleValuesSetting>,
+    @ocaml.doc("<p>The timestamp of the date and time that the slot was last
+         updated.</p>")
+    lastUpdatedDateTime: option<timestamp_>,
+    @ocaml.doc("<p>The timestamp of the date and time that the slot was created.</p>")
+    creationDateTime: option<timestamp_>,
+    @ocaml.doc("<p>The intent that contains the slot.</p>") intentId: option<id>,
+    @ocaml.doc("<p>The locale that contains the slot.</p>") localeId: option<localeId>,
+    @ocaml.doc("<p>The identifier of the slot version that contains the slot. Will
+         always be <code>DRAFT</code>.</p>")
+    botVersion: option<draftBotVersion>,
+    @ocaml.doc("<p>The identifier of the bot that contains the slot.</p>") botId: option<id>,
+    @ocaml.doc("<p>The updated setting that determines whether the slot value is
+         obfuscated in the Amazon CloudWatch logs.</p>")
+    obfuscationSetting: option<obfuscationSetting>,
+    @ocaml.doc("<p>The updated prompts that Amazon Lex sends to the user to elicit a
+         response that provides a value for the slot.</p>")
+    valueElicitationSetting: option<slotValueElicitationSetting>,
+    @ocaml.doc("<p>The updated identifier of the slot type that provides values for the
+         slot.</p>")
+    slotTypeId: option<builtInOrCustomSlotTypeId>,
+    @ocaml.doc("<p>The updated description of the bot.</p>") description: option<description>,
+    @ocaml.doc("<p>The updated name of the slot.</p>") slotName: option<name>,
+    @ocaml.doc("<p>The unique identifier of the slot that was updated.</p>") slotId: option<id>,
+  }
+  @module("@aws-sdk/client-lex") @new external new: request => t = "UpdateSlotCommand"
+  let make = (
+    ~intentId,
+    ~localeId,
+    ~botVersion,
+    ~botId,
+    ~valueElicitationSetting,
+    ~slotName,
+    ~slotId,
+    ~multipleValuesSetting=?,
+    ~obfuscationSetting=?,
+    ~slotTypeId=?,
+    ~description=?,
+    (),
+  ) =>
+    new({
+      multipleValuesSetting: multipleValuesSetting,
+      intentId: intentId,
+      localeId: localeId,
+      botVersion: botVersion,
+      botId: botId,
+      obfuscationSetting: obfuscationSetting,
+      valueElicitationSetting: valueElicitationSetting,
+      slotTypeId: slotTypeId,
+      description: description,
+      slotName: slotName,
+      slotId: slotId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
@@ -3351,6 +4645,135 @@ module UpdateIntent = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module ListSlots = {
+  type t
+  type request = {
+    @ocaml.doc("<p>If the response from the <code>ListSlots</code> operation contains
+         more results than specified in the <code>maxResults</code> parameter, a
+         token is returned in the response. Use that token in the
+            <code>nextToken</code> parameter to return the next page of
+         results.</p>")
+    nextToken: option<nextToken>,
+    @ocaml.doc("<p>The maximum number of slots to return in each page of results. If
+         there are fewer results than the max page size, only the actual number
+         of results are returned.</p>")
+    maxResults: option<maxResults>,
+    @ocaml.doc("<p>Provides the specification of a filter used to limit the slots in
+         the response to only those that match the filter specification. You can
+         only specify one filter and only one string to filter on.</p>")
+    filters: option<slotFilters>,
+    @ocaml.doc("<p>Determines the sort order for the response from the
+            <code>ListSlots</code> operation. You can choose to sort by the slot
+         name or last updated date in either ascending or descending
+         order.</p>")
+    sortBy: option<slotSortBy>,
+    @ocaml.doc("<p>The unique identifier of the intent that contains the slot.</p>") intentId: id,
+    @ocaml.doc("<p>The identifier of the language and locale of the slots to list. The
+         string must match one of the supported locales. For more information,
+         see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>.</p>")
+    localeId: localeId,
+    @ocaml.doc("<p>The version of the bot that contains the slot.</p>") botVersion: botVersion,
+    @ocaml.doc("<p>The identifier of the bot that contains the slot.</p>") botId: id,
+  }
+  type response = {
+    @ocaml.doc("<p>A token that indicates whether there are more results to return in a
+         response to the <code>ListSlots</code> operation. If the
+            <code>nextToken</code> field is present, you send the contents as
+         the <code>nextToken</code> parameter of a <code>ListSlots</code>
+         operation request to get the next page of results.</p>")
+    nextToken: option<nextToken>,
+    @ocaml.doc("<p>Summary information for the slots that meet the filter criteria
+         specified in the request. The length of the list is specified in the
+            <code>maxResults</code> parameter of the request. If there are more
+         slots available, the <code>nextToken</code> field contains a token to
+         get the next page of results.</p>")
+    slotSummaries: option<slotSummaryList>,
+    @ocaml.doc("<p>The identifier of the intent that contains the slots.</p>") intentId: option<id>,
+    @ocaml.doc("<p>The language and locale of the slots in the list.</p>")
+    localeId: option<localeId>,
+    @ocaml.doc("<p>The version of the bot that contains the slots.</p>")
+    botVersion: option<botVersion>,
+    @ocaml.doc("<p>The identifier of the bot that contains the slots.</p>") botId: option<id>,
+  }
+  @module("@aws-sdk/client-lex") @new external new: request => t = "ListSlotsCommand"
+  let make = (
+    ~intentId,
+    ~localeId,
+    ~botVersion,
+    ~botId,
+    ~nextToken=?,
+    ~maxResults=?,
+    ~filters=?,
+    ~sortBy=?,
+    (),
+  ) =>
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      filters: filters,
+      sortBy: sortBy,
+      intentId: intentId,
+      localeId: localeId,
+      botVersion: botVersion,
+      botId: botId,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module DescribeSlot = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The identifier of the intent that contains the slot.</p>") intentId: id,
+    @ocaml.doc("<p>The identifier of the language and locale of the slot to describe.
+         The string must match one of the supported locales. For more
+         information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>.</p>")
+    localeId: localeId,
+    @ocaml.doc("<p>The version of the bot associated with the slot.</p>") botVersion: botVersion,
+    @ocaml.doc("<p>The identifier of the bot associated with the slot.</p>") botId: id,
+    @ocaml.doc("<p>The unique identifier for the slot.</p>") slotId: id,
+  }
+  type response = {
+    @ocaml.doc("<p>Indicates whether the slot accepts multiple values in a single
+         utterance.</p>
+         <p>If the <code>multipleValuesSetting</code> is not set, the default
+         value is <code>false</code>.</p>")
+    multipleValuesSetting: option<multipleValuesSetting>,
+    @ocaml.doc("<p>A timestamp of the date and time that the slot was last
+         updated.</p>")
+    lastUpdatedDateTime: option<timestamp_>,
+    @ocaml.doc("<p>A timestamp of the date and time that the slot was created.</p>")
+    creationDateTime: option<timestamp_>,
+    @ocaml.doc("<p>The identifier of the intent associated with the slot.</p>")
+    intentId: option<id>,
+    @ocaml.doc("<p>The language and locale specified for the slot.</p>") localeId: option<localeId>,
+    @ocaml.doc("<p>The version of the bot associated with the slot.</p>")
+    botVersion: option<botVersion>,
+    @ocaml.doc("<p>The identifier of the bot associated with the slot.</p>") botId: option<id>,
+    @ocaml.doc("<p>Whether slot values are shown in Amazon CloudWatch logs. If the value is
+            <code>None</code>, the actual value of the slot is shown in
+         logs.</p>")
+    obfuscationSetting: option<obfuscationSetting>,
+    @ocaml.doc("<p>Prompts that Amazon Lex uses to elicit a value for the slot.</p>")
+    valueElicitationSetting: option<slotValueElicitationSetting>,
+    @ocaml.doc("<p>The identifier of the slot type that determines the values entered
+         into the slot.</p>")
+    slotTypeId: option<builtInOrCustomSlotTypeId>,
+    @ocaml.doc("<p>The description specified for the slot.</p>") description: option<description>,
+    @ocaml.doc("<p>The name specified for the slot.</p>") slotName: option<name>,
+    @ocaml.doc("<p>The unique identifier generated for the slot.</p>") slotId: option<id>,
+  }
+  @module("@aws-sdk/client-lex") @new external new: request => t = "DescribeSlotCommand"
+  let make = (~intentId, ~localeId, ~botVersion, ~botId, ~slotId, ()) =>
+    new({
+      intentId: intentId,
+      localeId: localeId,
+      botVersion: botVersion,
+      botId: botId,
+      slotId: slotId,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module DescribeIntent = {
   type t
   type request = {
@@ -3410,6 +4833,102 @@ module DescribeIntent = {
   @module("@aws-sdk/client-lex") @new external new: request => t = "DescribeIntentCommand"
   let make = (~localeId, ~botVersion, ~botId, ~intentId, ()) =>
     new({localeId: localeId, botVersion: botVersion, botId: botId, intentId: intentId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module CreateSlot = {
+  type t
+  type request = {
+    @ocaml.doc("<p>Indicates whether the slot returns multiple values in one response.
+         Multi-value slots are only available in the en-US locale. If you set
+         this value to <code>true</code> in any other locale, Amazon Lex throws a
+            <code>ValidationException</code>. </p>
+         <p>If the <code>multipleValuesSetting</code> is not set, the default
+         value is <code>false</code>.</p>")
+    multipleValuesSetting: option<multipleValuesSetting>,
+    @ocaml.doc("<p>The identifier of the intent that contains the slot.</p>") intentId: id,
+    @ocaml.doc("<p>The identifier of the language and locale that the slot will be used
+         in. The string must match one of the supported locales. All of the
+         bots, intents, slot types used by the slot must have the same locale.
+         For more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>.</p>")
+    localeId: localeId,
+    @ocaml.doc("<p>The version of the bot associated with the slot.</p>")
+    botVersion: draftBotVersion,
+    @ocaml.doc("<p>The identifier of the bot associated with the slot.</p>") botId: id,
+    @ocaml.doc("<p>Determines how slot values are used in Amazon CloudWatch logs. If the value of
+         the <code>obfuscationSetting</code> parameter is
+            <code>DefaultObfuscation</code>, slot values are obfuscated in the
+         log output. If the value is <code>None</code>, the actual value is
+         present in the log output.</p>
+         <p>The default is to obfuscate values in the CloudWatch logs.</p>")
+    obfuscationSetting: option<obfuscationSetting>,
+    @ocaml.doc("<p>Specifies prompts that Amazon Lex sends to the user to elicit a response
+         that provides the value for the slot. </p>")
+    valueElicitationSetting: slotValueElicitationSetting,
+    @ocaml.doc("<p>The unique identifier for the slot type associated with this slot.
+         The slot type determines the values that can be entered into the
+         slot.</p>")
+    slotTypeId: option<builtInOrCustomSlotTypeId>,
+    @ocaml.doc("<p>A description of the slot. Use this to help identify the slot in
+         lists.</p>")
+    description: option<description>,
+    @ocaml.doc("<p>The name of the slot. Slot names must be unique within the bot that
+         contains the slot.</p>")
+    slotName: name,
+  }
+  type response = {
+    @ocaml.doc("<p>Indicates whether the slot returns multiple values in one
+         response.</p>")
+    multipleValuesSetting: option<multipleValuesSetting>,
+    @ocaml.doc("<p>The timestamp of the date and time that the slot was created.</p>")
+    creationDateTime: option<timestamp_>,
+    @ocaml.doc("<p>The unique identifier of the intent associated with the slot.</p>")
+    intentId: option<id>,
+    @ocaml.doc("<p>The language and local specified for the slot.</p>") localeId: option<localeId>,
+    @ocaml.doc("<p>The version of the bot associated with the slot.</p>")
+    botVersion: option<draftBotVersion>,
+    @ocaml.doc("<p>The unique identifier of the bot associated with the slot.</p>")
+    botId: option<id>,
+    @ocaml.doc("<p>Indicates whether the slot is configured to obfuscate values in Amazon CloudWatch
+         logs.</p>")
+    obfuscationSetting: option<obfuscationSetting>,
+    @ocaml.doc("<p>The value elicitation settings specified for the slot.</p>")
+    valueElicitationSetting: option<slotValueElicitationSetting>,
+    @ocaml.doc("<p>The unique identifier of the slot type associated with this
+         slot.</p>")
+    slotTypeId: option<builtInOrCustomSlotTypeId>,
+    @ocaml.doc("<p>The description associated with the slot.</p>") description: option<description>,
+    @ocaml.doc("<p>The name specified for the slot.</p>") slotName: option<name>,
+    @ocaml.doc("<p>The unique identifier associated with the slot. Use this to identify
+         the slot when you update or delete it.</p>")
+    slotId: option<id>,
+  }
+  @module("@aws-sdk/client-lex") @new external new: request => t = "CreateSlotCommand"
+  let make = (
+    ~intentId,
+    ~localeId,
+    ~botVersion,
+    ~botId,
+    ~valueElicitationSetting,
+    ~slotName,
+    ~multipleValuesSetting=?,
+    ~obfuscationSetting=?,
+    ~slotTypeId=?,
+    ~description=?,
+    (),
+  ) =>
+    new({
+      multipleValuesSetting: multipleValuesSetting,
+      intentId: intentId,
+      localeId: localeId,
+      botVersion: botVersion,
+      botId: botId,
+      obfuscationSetting: obfuscationSetting,
+      valueElicitationSetting: valueElicitationSetting,
+      slotTypeId: slotTypeId,
+      description: description,
+      slotName: slotName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -3561,293 +5080,6 @@ module CreateIntent = {
       parentIntentSignature: parentIntentSignature,
       description: description,
       intentName: intentName,
-    })
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
-module UpdateSlot = {
-  type t
-  type request = {
-    @ocaml.doc("<p>The identifier of the intent that contains the slot.</p>") intentId: id,
-    @ocaml.doc("<p>The identifier of the language and locale that contains the slot.
-         The string must match one of the supported locales. For more
-         information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>.</p>")
-    localeId: localeId,
-    @ocaml.doc("<p>The version of the bot that contains the slot. Must always be
-            <code>DRAFT</code>.</p>")
-    botVersion: draftBotVersion,
-    @ocaml.doc("<p>The unique identifier of the bot that contains the slot.</p>") botId: id,
-    @ocaml.doc("<p>New settings that determine how slot values are formatted in Amazon CloudWatch
-         logs. </p>")
-    obfuscationSetting: option<obfuscationSetting>,
-    @ocaml.doc("<p>A new set of prompts that Amazon Lex sends to the user to elicit a
-         response the provides a value for the slot.</p>")
-    valueElicitationSetting: slotValueElicitationSetting,
-    @ocaml.doc("<p>The unique identifier of the new slot type to associate with this
-         slot. </p>")
-    slotTypeId: builtInOrCustomSlotTypeId,
-    @ocaml.doc("<p>The new description for the slot.</p>") description: option<description>,
-    @ocaml.doc("<p>The new name for the slot.</p>") slotName: name,
-    @ocaml.doc("<p>The unique identifier for the slot to update.</p>") slotId: id,
-  }
-  type response = {
-    @ocaml.doc("<p>The timestamp of the date and time that the slot was last
-         updated.</p>")
-    lastUpdatedDateTime: option<timestamp_>,
-    @ocaml.doc("<p>The timestamp of the date and time that the slot was created.</p>")
-    creationDateTime: option<timestamp_>,
-    @ocaml.doc("<p>The intent that contains the slot.</p>") intentId: option<id>,
-    @ocaml.doc("<p>The locale that contains the slot.</p>") localeId: option<localeId>,
-    @ocaml.doc("<p>The identifier of the slot version that contains the slot. Will
-         always be <code>DRAFT</code>.</p>")
-    botVersion: option<draftBotVersion>,
-    @ocaml.doc("<p>The identifier of the bot that contains the slot.</p>") botId: option<id>,
-    @ocaml.doc("<p>The updated setting that determines whether the slot value is
-         obfuscated in the Amazon CloudWatch logs.</p>")
-    obfuscationSetting: option<obfuscationSetting>,
-    @ocaml.doc("<p>The updated prompts that Amazon Lex sends to the user to elicit a
-         response that provides a value for the slot.</p>")
-    valueElicitationSetting: option<slotValueElicitationSetting>,
-    @ocaml.doc("<p>The updated identifier of the slot type that provides values for the
-         slot.</p>")
-    slotTypeId: option<builtInOrCustomSlotTypeId>,
-    @ocaml.doc("<p>The updated description of the bot.</p>") description: option<description>,
-    @ocaml.doc("<p>The updated name of the slot.</p>") slotName: option<name>,
-    @ocaml.doc("<p>The unique identifier of the slot that was updated.</p>") slotId: option<id>,
-  }
-  @module("@aws-sdk/client-lex") @new external new: request => t = "UpdateSlotCommand"
-  let make = (
-    ~intentId,
-    ~localeId,
-    ~botVersion,
-    ~botId,
-    ~valueElicitationSetting,
-    ~slotTypeId,
-    ~slotName,
-    ~slotId,
-    ~obfuscationSetting=?,
-    ~description=?,
-    (),
-  ) =>
-    new({
-      intentId: intentId,
-      localeId: localeId,
-      botVersion: botVersion,
-      botId: botId,
-      obfuscationSetting: obfuscationSetting,
-      valueElicitationSetting: valueElicitationSetting,
-      slotTypeId: slotTypeId,
-      description: description,
-      slotName: slotName,
-      slotId: slotId,
-    })
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
-module ListSlots = {
-  type t
-  type request = {
-    @ocaml.doc("<p>If the response from the <code>ListSlots</code> operation contains
-         more results than specified in the <code>maxResults</code> parameter, a
-         token is returned in the response. Use that token in the
-            <code>nextToken</code> parameter to return the next page of
-         results.</p>")
-    nextToken: option<nextToken>,
-    @ocaml.doc("<p>The maximum number of slots to return in each page of results. If
-         there are fewer results than the max page size, only the actual number
-         of results are returned.</p>")
-    maxResults: option<maxResults>,
-    @ocaml.doc("<p>Provides the specification of a filter used to limit the slots in
-         the response to only those that match the filter specification. You can
-         only specify one filter and only one string to filter on.</p>")
-    filters: option<slotFilters>,
-    @ocaml.doc("<p>Determines the sort order for the response from the
-            <code>ListSlots</code> operation. You can choose to sort by the slot
-         name or last updated date in either ascending or descending
-         order.</p>")
-    sortBy: option<slotSortBy>,
-    @ocaml.doc("<p>The unique identifier of the intent that contains the slot.</p>") intentId: id,
-    @ocaml.doc("<p>The identifier of the language and locale of the slots to list. The
-         string must match one of the supported locales. For more information,
-         see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>.</p>")
-    localeId: localeId,
-    @ocaml.doc("<p>The version of the bot that contains the slot.</p>") botVersion: botVersion,
-    @ocaml.doc("<p>The identifier of the bot that contains the slot.</p>") botId: id,
-  }
-  type response = {
-    @ocaml.doc("<p>A token that indicates whether there are more results to return in a
-         response to the <code>ListSlots</code> operation. If the
-            <code>nextToken</code> field is present, you send the contents as
-         the <code>nextToken</code> parameter of a <code>ListSlots</code>
-         operation request to get the next page of results.</p>")
-    nextToken: option<nextToken>,
-    @ocaml.doc("<p>Summary information for the slots that meet the filter criteria
-         specified in the request. The length of the list is specified in the
-            <code>maxResults</code> parameter of the request. If there are more
-         slots available, the <code>nextToken</code> field contains a token to
-         get the next page of results.</p>")
-    slotSummaries: option<slotSummaryList>,
-    @ocaml.doc("<p>The identifier of the intent that contains the slots.</p>") intentId: option<id>,
-    @ocaml.doc("<p>The language and locale of the slots in the list.</p>")
-    localeId: option<localeId>,
-    @ocaml.doc("<p>The version of the bot that contains the slots.</p>")
-    botVersion: option<botVersion>,
-    @ocaml.doc("<p>The identifier of the bot that contains the slots.</p>") botId: option<id>,
-  }
-  @module("@aws-sdk/client-lex") @new external new: request => t = "ListSlotsCommand"
-  let make = (
-    ~intentId,
-    ~localeId,
-    ~botVersion,
-    ~botId,
-    ~nextToken=?,
-    ~maxResults=?,
-    ~filters=?,
-    ~sortBy=?,
-    (),
-  ) =>
-    new({
-      nextToken: nextToken,
-      maxResults: maxResults,
-      filters: filters,
-      sortBy: sortBy,
-      intentId: intentId,
-      localeId: localeId,
-      botVersion: botVersion,
-      botId: botId,
-    })
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
-module DescribeSlot = {
-  type t
-  type request = {
-    @ocaml.doc("<p>The identifier of the intent that contains the slot.</p>") intentId: id,
-    @ocaml.doc("<p>The identifier of the language and locale of the slot to describe.
-         The string must match one of the supported locales. For more
-         information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>.</p>")
-    localeId: localeId,
-    @ocaml.doc("<p>The version of the bot associated with the slot.</p>") botVersion: botVersion,
-    @ocaml.doc("<p>The identifier of the bot associated with the slot.</p>") botId: id,
-    @ocaml.doc("<p>The unique identifier for the slot.</p>") slotId: id,
-  }
-  type response = {
-    @ocaml.doc("<p>A timestamp of the date and time that the slot was last
-         updated.</p>")
-    lastUpdatedDateTime: option<timestamp_>,
-    @ocaml.doc("<p>A timestamp of the date and time that the slot was created.</p>")
-    creationDateTime: option<timestamp_>,
-    @ocaml.doc("<p>The identifier of the intent associated with the slot.</p>")
-    intentId: option<id>,
-    @ocaml.doc("<p>The language and locale specified for the slot.</p>") localeId: option<localeId>,
-    @ocaml.doc("<p>The version of the bot associated with the slot.</p>")
-    botVersion: option<botVersion>,
-    @ocaml.doc("<p>The identifier of the bot associated with the slot.</p>") botId: option<id>,
-    @ocaml.doc("<p>Whether slot values are shown in Amazon CloudWatch logs. If the value is
-            <code>None</code>, the actual value of the slot is shown in
-         logs.</p>")
-    obfuscationSetting: option<obfuscationSetting>,
-    @ocaml.doc("<p>Prompts that Amazon Lex uses to elicit a value for the slot.</p>")
-    valueElicitationSetting: option<slotValueElicitationSetting>,
-    @ocaml.doc("<p>The identifier of the slot type that determines the values entered
-         into the slot.</p>")
-    slotTypeId: option<builtInOrCustomSlotTypeId>,
-    @ocaml.doc("<p>The description specified for the slot.</p>") description: option<description>,
-    @ocaml.doc("<p>The name specified for the slot.</p>") slotName: option<name>,
-    @ocaml.doc("<p>The unique identifier generated for the slot.</p>") slotId: option<id>,
-  }
-  @module("@aws-sdk/client-lex") @new external new: request => t = "DescribeSlotCommand"
-  let make = (~intentId, ~localeId, ~botVersion, ~botId, ~slotId, ()) =>
-    new({
-      intentId: intentId,
-      localeId: localeId,
-      botVersion: botVersion,
-      botId: botId,
-      slotId: slotId,
-    })
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
-module CreateSlot = {
-  type t
-  type request = {
-    @ocaml.doc("<p>The identifier of the intent that contains the slot.</p>") intentId: id,
-    @ocaml.doc("<p>The identifier of the language and locale that the slot will be used
-         in. The string must match one of the supported locales. All of the
-         bots, intents, slot types used by the slot must have the same locale.
-         For more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>.</p>")
-    localeId: localeId,
-    @ocaml.doc("<p>The version of the bot associated with the slot.</p>")
-    botVersion: draftBotVersion,
-    @ocaml.doc("<p>The identifier of the bot associated with the slot.</p>") botId: id,
-    @ocaml.doc("<p>Determines how slot values are used in Amazon CloudWatch logs. If the value of
-         the <code>obfuscationSetting</code> parameter is
-            <code>DefaultObfuscation</code>, slot values are obfuscated in the
-         log output. If the value is <code>None</code>, the actual value is
-         present in the log output.</p>
-         <p>The default is to obfuscate values in the CloudWatch logs.</p>")
-    obfuscationSetting: option<obfuscationSetting>,
-    @ocaml.doc("<p>Specifies prompts that Amazon Lex sends to the user to elicit a response
-         that provides the value for the slot. </p>")
-    valueElicitationSetting: slotValueElicitationSetting,
-    @ocaml.doc("<p>The unique identifier for the slot type associated with this slot.
-         The slot type determines the values that can be entered into the
-         slot.</p>")
-    slotTypeId: builtInOrCustomSlotTypeId,
-    @ocaml.doc("<p>A description of the slot. Use this to help identify the slot in
-         lists.</p>")
-    description: option<description>,
-    @ocaml.doc("<p>The name of the slot. Slot names must be unique within the bot that
-         contains the slot.</p>")
-    slotName: name,
-  }
-  type response = {
-    @ocaml.doc("<p>The timestamp of the date and time that the slot was created.</p>")
-    creationDateTime: option<timestamp_>,
-    @ocaml.doc("<p>The unique identifier of the intent associated with the slot.</p>")
-    intentId: option<id>,
-    @ocaml.doc("<p>The language and local specified for the slot.</p>") localeId: option<localeId>,
-    @ocaml.doc("<p>The version of the bot associated with the slot.</p>")
-    botVersion: option<draftBotVersion>,
-    @ocaml.doc("<p>The unique identifier of the bot associated with the slot.</p>")
-    botId: option<id>,
-    @ocaml.doc("<p>Indicates whether the slot is configured to obfuscate values in Amazon CloudWatch
-         logs.</p>")
-    obfuscationSetting: option<obfuscationSetting>,
-    @ocaml.doc("<p>The value elicitation settings specified for the slot.</p>")
-    valueElicitationSetting: option<slotValueElicitationSetting>,
-    @ocaml.doc("<p>The unique identifier of the slot type associated with this
-         slot.</p>")
-    slotTypeId: option<builtInOrCustomSlotTypeId>,
-    @ocaml.doc("<p>The description associated with the slot.</p>") description: option<description>,
-    @ocaml.doc("<p>The name specified for the slot.</p>") slotName: option<name>,
-    @ocaml.doc("<p>The unique identifier associated with the slot. Use this to identify
-         the slot when you update or delete it.</p>")
-    slotId: option<id>,
-  }
-  @module("@aws-sdk/client-lex") @new external new: request => t = "CreateSlotCommand"
-  let make = (
-    ~intentId,
-    ~localeId,
-    ~botVersion,
-    ~botId,
-    ~valueElicitationSetting,
-    ~slotTypeId,
-    ~slotName,
-    ~obfuscationSetting=?,
-    ~description=?,
-    (),
-  ) =>
-    new({
-      intentId: intentId,
-      localeId: localeId,
-      botVersion: botVersion,
-      botId: botId,
-      obfuscationSetting: obfuscationSetting,
-      valueElicitationSetting: valueElicitationSetting,
-      slotTypeId: slotTypeId,
-      description: description,
-      slotName: slotName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

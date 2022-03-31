@@ -53,19 +53,16 @@ type tagMap = Js.Dict.t<tagValue>
 type tagKeyListForUntag = array<tagKey>
 type tagKeyList = array<tagKey>
 type tagKeyFilterList = array<tagKey>
-@ocaml.doc("<p>The metadata that you apply to AWS resources to help you categorize and organize
+@ocaml.doc("<p>The metadata that you apply to Amazon Web Services resources to help you categorize and organize
             them. Each tag consists of a key and a value, both of which you define. For more
-            information, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS
-                Resources</a> in the <i>AWS General Reference</i>.</p>")
+            information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services Resources</a> in the <i>Amazon Web Services General Reference</i>.</p>")
 type tag = {
-  @ocaml.doc(
-    "<p>One part of a key-value pair that make up a tag. A value acts as a descriptor within a tag category (key). The value can be empty or null.</p>"
-  )
+  @ocaml.doc("<p>One part of a key-value pair that make up a tag. A value acts as a 
+    descriptor within a tag category (key). The value can be empty or null.</p>")
   @as("Value")
   value: tagValue,
-  @ocaml.doc(
-    "<p>One part of a key-value pair that makes up a tag. A key is a general label that acts like a category for more specific tag values.</p>"
-  )
+  @ocaml.doc("<p>One part of a key-value pair that makes up a tag. A key is a general label 
+    that acts like a category for more specific tag values.</p>")
   @as("Key")
   key: tagKey,
 }
@@ -73,15 +70,15 @@ type tag = {
 type summary = {
   @ocaml.doc("<p>The count of noncompliant resources.</p>") @as("NonCompliantResources")
   nonCompliantResources: option<nonCompliantResources>,
-  @ocaml.doc("<p>The AWS resource type.</p>") @as("ResourceType")
+  @ocaml.doc("<p>The Amazon Web Services resource type.</p>") @as("ResourceType")
   resourceType: option<amazonResourceType>,
-  @ocaml.doc("<p>The AWS Region that the summary applies to.</p>") @as("Region")
+  @ocaml.doc("<p>The Amazon Web Services Region that the summary applies to.</p>") @as("Region")
   region: option<region>,
   @ocaml.doc("<p>Whether the target is an account, an OU, or the organization root.</p>")
   @as("TargetIdType")
   targetIdType: option<targetIdType>,
   @ocaml.doc("<p>The account identifier or the root identifier of the organization. If you don't know
-            the root ID, you can call the AWS Organizations <a href=\"http://docs.aws.amazon.com/organizations/latest/APIReference/API_ListRoots.html\">ListRoots</a> API.</p>")
+            the root ID, you can call the Organizations <a href=\"https://docs.aws.amazon.com/organizations/latest/APIReference/API_ListRoots.html\">ListRoots</a> API.</p>")
   @as("TargetId")
   targetId: option<targetId>,
   @ocaml.doc("<p>The timestamp that shows when this summary was generated in this Region. </p>")
@@ -96,41 +93,40 @@ type groupBy = array<groupByAttribute>
 @ocaml.doc("<p>Information about the errors that are returned for each failed resource. This
             information can include <code>InternalServiceException</code> and
                 <code>InvalidParameterException</code> errors. It can also include any valid error
-            code returned by the AWS service that hosts the resource that the ARN key
+            code returned by the Amazon Web Services service that hosts the resource that the ARN key
             represents.</p>
-        <p>The following are common error codes that you might receive from other AWS
+        <p>The following are common error codes that you might receive from other Amazon Web Services
             services:</p>
         <ul>
             <li>
                 <p>
                   <b>InternalServiceException</b> – This can
-                    mean that the Resource Groups Tagging API didn't receive a response from another
-                    AWS service. It can also mean the the resource type in the request is not
-                    supported by the Resource Groups Tagging API. In these cases, it's safe to retry
-                    the request and then call <a href=\"http://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html\">GetResources</a> to verify the changes.</p>
+                    mean that the Resource Groups Tagging API didn't receive a response from another Amazon Web Services service. It
+                    can also mean that the resource type in the request is not supported by the
+                    Resource Groups Tagging API. In these cases, it's safe to retry the request and then call <a href=\"https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html\">GetResources</a> to verify the changes.</p>
             </li>
             <li>
                 <p>
                   <b>AccessDeniedException</b> – This can mean
-                    that you need permission to calling tagging operations in the AWS service that
-                    contains the resource. For example, to use the Resource Groups Tagging API to
-                    tag a CloudWatch alarm resource, you need permission to call <a href=\"http://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_TagResources.html\">
+                    that you need permission to call the tagging operations in the Amazon Web Services service
+                    that contains the resource. For example, to use the Resource Groups Tagging API to tag a Amazon CloudWatch
+                    alarm resource, you need permission to call both <a href=\"https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_TagResources.html\">
                      <code>TagResources</code>
                   </a>
                     <i>and</i>
-                    <a href=\"http://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html\">
+                    <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html\">
                      <code>TagResource</code>
                   </a> in the CloudWatch API. </p>
             </li>
          </ul>
-        <p>For more information on errors that are generated from other AWS services, see the
+        <p>For more information on errors that are generated from other Amazon Web Services services, see the
             documentation for that service. </p>")
 type failureInfo = {
   @ocaml.doc("<p>The message of the common error.</p>") @as("ErrorMessage")
   errorMessage: option<errorMessage>,
   @ocaml.doc("<p>The code of the common error. Valid values include
                 <code>InternalServiceException</code>, <code>InvalidParameterException</code>, and
-            any valid error code returned by the AWS service that hosts the resource that you want
+            any valid error code returned by the Amazon Web Services service that hosts the resource that you want
             to tag.</p>")
   @as("ErrorCode")
   errorCode: option<errorCode>,
@@ -141,14 +137,12 @@ type tagList_ = array<tag>
 @ocaml.doc("<p>A list of tags (keys and values) that are used to specify the associated
             resources.</p>")
 type tagFilter = {
-  @ocaml.doc(
-    "<p>One part of a key-value pair that make up a tag. A value acts as a descriptor within a tag category (key). The value can be empty or null.</p>"
-  )
+  @ocaml.doc("<p>One part of a key-value pair that make up a tag. A value acts as a 
+    descriptor within a tag category (key). The value can be empty or null.</p>")
   @as("Values")
   values: option<tagValueList>,
-  @ocaml.doc(
-    "<p>One part of a key-value pair that makes up a tag. A key is a general label that acts like a category for more specific tag values.</p>"
-  )
+  @ocaml.doc("<p>One part of a key-value pair that makes up a tag. A key is a general label 
+    that acts like a category for more specific tag values.</p>")
   @as("Key")
   key: option<tagKey>,
 }
@@ -178,7 +172,8 @@ type resourceTagMapping = {
             including details on any noncompliant tag keys.</p>")
   @as("ComplianceDetails")
   complianceDetails: option<complianceDetails>,
-  @ocaml.doc("<p>The tags that have been applied to one or more AWS resources.</p>") @as("Tags")
+  @ocaml.doc("<p>The tags that have been applied to one or more Amazon Web Services resources.</p>")
+  @as("Tags")
   tags: option<tagList_>,
   @ocaml.doc("<p>The ARN of the resource.</p>") @as("ResourceARN") resourceARN: option<resourceARN>,
 }
@@ -196,7 +191,7 @@ module StartReportCreation = {
     @as("S3Bucket")
     s3Bucket: s3Bucket,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-tagging") @new external new: request => t = "StartReportCreationCommand"
   let make = (~s3Bucket, ()) => new({s3Bucket: s3Bucket})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -204,7 +199,7 @@ module StartReportCreation = {
 
 module DescribeReportCreation = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("<p>Details of the common errors that all operations return.</p>")
     @as("ErrorMessage")
@@ -240,8 +235,9 @@ module DescribeReportCreation = {
     @as("Status")
     status: option<status>,
   }
-  @module("@aws-sdk/client-tagging") @new external new: unit => t = "DescribeReportCreationCommand"
-  let make = () => new()
+  @module("@aws-sdk/client-tagging") @new
+  external new: request => t = "DescribeReportCreationCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -249,7 +245,7 @@ module GetTagValues = {
   type t
   type request = {
     @ocaml.doc("<p>Specifies the tag key for which you want to list all existing values that are
-            currently used in the specified AWS Region for the calling AWS account.</p>")
+            currently used in the specified Amazon Web Services Region for the calling account.</p>")
     @as("Key")
     key: tagKey,
     @ocaml.doc("<p>Specifies a <code>PaginationToken</code> response value from a 
@@ -259,8 +255,8 @@ module GetTagValues = {
     paginationToken: option<paginationToken>,
   }
   type response = {
-    @ocaml.doc("<p>A list of all tag values for the specified key currently used in the specified AWS
-            Region for the calling AWS account.</p>")
+    @ocaml.doc("<p>A list of all tag values for the specified key currently used in the specified Amazon Web Services
+            Region for the calling account.</p>")
     @as("TagValues")
     tagValues: option<tagValuesOutputList>,
     @ocaml.doc("<p>A string that indicates that there is more data available than this
@@ -284,7 +280,7 @@ module GetTagKeys = {
     paginationToken: option<paginationToken>,
   }
   type response = {
-    @ocaml.doc("<p>A list of all tag keys in the AWS account.</p>") @as("TagKeys")
+    @ocaml.doc("<p>A list of all tag keys in the Amazon Web Services account.</p>") @as("TagKeys")
     tagKeys: option<tagKeyList>,
     @ocaml.doc("<p>A string that indicates that there is more data available than this
     response contains. To receive the next part of the response, specify this response value 
@@ -306,8 +302,8 @@ module UntagResources = {
     tagKeys: tagKeyListForUntag,
     @ocaml.doc("<p>Specifies a list of ARNs of the resources that you want to remove tags from.</p>
         <p>An ARN (Amazon Resource Name) uniquely identifies a resource. For more information,
-            see <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon
-                Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS
+            see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon
+                Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services
                 General Reference</i>.</p>")
     @as("ResourceARNList")
     resourceARNList: resourceARNListForTagUntag,
@@ -335,8 +331,8 @@ module TagResources = {
     tags: tagMap,
     @ocaml.doc("<p>Specifies the list of ARNs of the resources that you want to apply tags to.</p>
         <p>An ARN (Amazon Resource Name) uniquely identifies a resource. For more information,
-            see <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon
-                Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS
+            see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon
+                Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services
                 General Reference</i>.</p>")
     @as("ResourceARNList")
     resourceARNList: resourceARNListForTagUntag,
@@ -381,13 +377,16 @@ module GetComplianceSummary = {
             specified types. The format of each resource type is
             <code>service[:resourceType]</code>. For example, specifying a resource type of
                 <code>ec2</code> returns all Amazon EC2 resources (which includes EC2 instances).
-            Specifying a resource type of <code>ec2:instance</code> returns only EC2 instances. </p>
+            Specifying a resource type of <code>ec2:instance</code> returns only EC2
+            instances.</p>
         <p>The string for each service name and resource type is the same as that embedded in a
-            resource's Amazon Resource Name (ARN). Consult the <i>AWS General
-                Reference</i> for the following:</p>
+            resource's Amazon Resource Name (ARN). Consult the <i>
+               <a href=\"https://docs.aws.amazon.com/general/latest/gr/\">Amazon Web Services General Reference</a>
+            </i>
+            for the following:</p>
         <ul>
             <li>
-                <p>For a list of service name strings, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces\">AWS Service Namespaces</a>.</p>
+                <p>For a list of service name strings, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces\">Amazon Web Services Service Namespaces</a>.</p>
             </li>
             <li>
                 <p>For resource type strings, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arns-syntax\">Example
@@ -395,7 +394,7 @@ module GetComplianceSummary = {
             </li>
             <li>
                 <p>For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names
-                        (ARNs) and AWS Service Namespaces</a>.</p>
+                        (ARNs) and Amazon Web Services Service Namespaces</a>.</p>
             </li>
          </ul>
         <p>You can specify multiple resource types by using a comma separated array. The array
@@ -403,7 +402,7 @@ module GetComplianceSummary = {
             resource type filter. </p>")
     @as("ResourceTypeFilters")
     resourceTypeFilters: option<resourceTypeFilterList>,
-    @ocaml.doc("<p>Specifies a list of AWS Regions to limit the output by. If you use this parameter,
+    @ocaml.doc("<p>Specifies a list of Amazon Web Services Regions to limit the output to. If you use this parameter,
             the count of returned noncompliant resources includes only resources in the specified
             Regions.</p>")
     @as("RegionFilters")
@@ -457,9 +456,9 @@ module GetResources = {
         <p>If a resource specified by this parameter doesn't exist, it doesn't generate an error;
             it simply isn't included in the response.</p>
         <p>An ARN (Amazon Resource Name) uniquely identifies a resource. For more information,
-            see <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon
-                Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS
-                General Reference</i>.</p>")
+            see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon
+                Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the
+                <i>Amazon Web Services General Reference</i>.</p>")
     @as("ResourceARNList")
     resourceARNList: option<resourceARNListForGet>,
     @ocaml.doc("<p>Specifies whether to exclude resources that are compliant with the tag policy. Set
@@ -480,16 +479,18 @@ module GetResources = {
             instances). Specifying a resource type of <code>ec2:instance</code> returns only EC2
             instances. </p>
         <p>The string for each service name and resource type is the same as that embedded in a
-            resource's Amazon Resource Name (ARN). Consult the <i>AWS General
-                Reference</i> for the following:</p>
-        <p>For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and
-                AWS Service Namespaces</a>.</p>
+            resource's Amazon Resource Name (ARN). For the list of services whose resources you can
+            use in this parameter, see <a href=\"https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/supported-services.html\">Services that support the Resource Groups Tagging API</a>.</p>
         <p>You can specify multiple resource types by using an array. The array can include up to
             100 items. Note that the length constraint requirement applies to each resource type
-            filter. </p>")
+            filter. For example, the following string would limit the response to only Amazon EC2
+            instances, Amazon S3 buckets, or any Audit Manager resource:</p>
+        <p>
+            <code>ec2:instance,s3:bucket,auditmanager</code>
+         </p>")
     @as("ResourceTypeFilters")
     resourceTypeFilters: option<resourceTypeFilterList>,
-    @ocaml.doc("<p>AWS recommends using <code>ResourcesPerPage</code> instead of this parameter.</p>
+    @ocaml.doc("<p>Amazon Web Services recommends using <code>ResourcesPerPage</code> instead of this parameter.</p>
         <p>A limit that restricts the number of tags (key and value pairs) returned by
                 <code>GetResources</code> in paginated output. A resource with no tags is counted as
             having one tag (one key and value pair).</p>
@@ -514,8 +515,8 @@ module GetResources = {
     @as("ResourcesPerPage")
     resourcesPerPage: option<resourcesPerPage>,
     @ocaml.doc("<p>Specifies a list of TagFilters (keys and values) to restrict the output to only those
-            resources that have the specified tag and, if included, the specified value. Each
-                <code>TagFilter</code> must contain a key with values optional. A request can
+            resources that have tags with the specified keys and, if included, the specified values.
+            Each <code>TagFilter</code> must contain a key with values optional. A request can
             include up to 50 keys, and each key can include up to 20 values. </p>
         <p>Note the following when deciding how to use TagFilters:</p>
         <ul>
@@ -531,12 +532,12 @@ module GetResources = {
             </li>
             <li>
                 <p>If you specify a filter that contains more than one value for a key, the
-                    response returns resources that match any of the specified values for that
-                    key.</p>
+                    response returns resources that match <i>any</i> of the specified
+                    values for that key.</p>
             </li>
             <li>
-                <p>If you don't specify any values for a key, the response returns resources that
-                    are tagged with that key and any or no value.</p>
+                <p>If you don't specify a value for a key, the response returns all resources
+                    that are tagged with that key, with any or no value.</p>
                 <p>For example, for the following filters: <code>filter1= {keyA,{value1}}</code>,
                         <code>filter2={keyB,{value2,value3,value4}}</code>, <code>filter3=
                         {keyC}</code>:</p>
@@ -578,8 +579,8 @@ module GetResources = {
     paginationToken: option<paginationToken>,
   }
   type response = {
-    @ocaml.doc("<p>A list of resource ARNs and the tags (keys and values) associated with
-    those ARNs.</p>")
+    @ocaml.doc("<p>A list of resource ARNs and the tags (keys and values) associated with 
+    each.</p>")
     @as("ResourceTagMappingList")
     resourceTagMappingList: option<resourceTagMappingList>,
     @ocaml.doc("<p>A string that indicates that there is more data available than this

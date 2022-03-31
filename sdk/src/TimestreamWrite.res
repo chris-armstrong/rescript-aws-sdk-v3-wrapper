@@ -26,12 +26,20 @@ type tableStatus = [@as("DELETING") #DELETING | @as("ACTIVE") #ACTIVE]
 type stringValue256 = string
 type stringValue2048 = string
 type string_ = string
+type schemaValue = string
+type schemaName = string
+type s3ObjectKeyPrefix = string
+type s3EncryptionOption = [@as("SSE_KMS") #SSE_KMS | @as("SSE_S3") #SSE_S3]
+type s3BucketName = string
 type resourceName = string
+type resourceCreateAPIName = string
 type recordVersion = float
 type recordIndex = int
 type paginationLimit = int
 type memoryStoreRetentionPeriodInHours = float
 type measureValueType = [
+  | @as("MULTI") #MULTI
+  | @as("TIMESTAMP") #TIMESTAMP
   | @as("BOOLEAN") #BOOLEAN
   | @as("VARCHAR") #VARCHAR
   | @as("BIGINT") #BIGINT
@@ -39,9 +47,11 @@ type measureValueType = [
 ]
 type magneticStoreRetentionPeriodInDays = float
 type long = float
+type integer_ = int
 type errorMessage = string
 type dimensionValueType = [@as("VARCHAR") #VARCHAR]
 type date = Js.Date.t
+type boolean_ = bool
 type amazonResourceName = string
 type tagKeyList = array<tagKey>
 @ocaml.doc("<p>
@@ -60,6 +70,23 @@ The key of the tag. Tag keys are case sensitive.
 </p>")
   @as("Key")
   key: tagKey,
+}
+@ocaml.doc("<p>Configuration specifing an S3 location.</p>")
+type s3Configuration = {
+  @ocaml.doc(
+    "<p>KMS key id for the customer s3 location when encrypting with a KMS managed key.</p>"
+  )
+  @as("KmsKeyId")
+  kmsKeyId: option<stringValue2048>,
+  @ocaml.doc(
+    "<p>Encryption option for the customer s3 location. Options are S3 server side encryption with an S3-managed key or KMS managed key.</p>"
+  )
+  @as("EncryptionOption")
+  encryptionOption: option<s3EncryptionOption>,
+  @ocaml.doc("<p>Object key preview for the customer S3 location.</p>") @as("ObjectKeyPrefix")
+  objectKeyPrefix: option<s3ObjectKeyPrefix>,
+  @ocaml.doc("<p>>Bucket name of the customer S3 bucket.</p>") @as("BucketName")
+  bucketName: option<s3BucketName>,
 }
 @ocaml.doc("<p>Retention properties contain the duration for which your time series data must be stored in the magnetic store and the memory store.
       </p>")
@@ -85,10 +112,22 @@ type rejectedRecord = {
       </p>
          <ul>
             <li>
-               <p>
-                 Records with duplicate data where there are multiple records with the same dimensions,
-         timestamps, and measure names but different measure values.
+               <p>Records with duplicate data where there are multiple records with the same dimensions,
+                  timestamps, and measure names but:
                </p>
+               <ul>
+                  <li>
+                     <p>Measure values are different</p>
+                  </li>
+                  <li>
+                     <p>Version is not present in the request <i>or</i>
+                     the value of version in the new record is equal to or lower than the existing value</p>
+                  </li>
+               </ul>
+               <p>
+                  If Timestream rejects data for this case, the <code>ExistingVersion</code> field in the <code>RejectedRecords</code> 
+                  response will indicate the current record’s version. 
+                  To force an update, you can resend the request with a version for the record set to a value greater than the <code>ExistingVersion</code>.</p>
             </li>
             <li>
                <p>
@@ -124,6 +163,28 @@ The index of the record in the input request for WriteRecords. Indexes begin wit
   @as("RecordIndex")
   recordIndex: option<recordIndex>,
 }
+@ocaml.doc("<p>Information on the records ingested by this request.</p>")
+type recordsIngested = {
+  @ocaml.doc("<p>Count of records ingested into the magnetic store.</p>") @as("MagneticStore")
+  magneticStore: option<integer_>,
+  @ocaml.doc("<p>Count of records ingested into the memory store.</p>") @as("MemoryStore")
+  memoryStore: option<integer_>,
+  @ocaml.doc("<p>Total count of successfully ingested records.</p>") @as("Total")
+  total: option<integer_>,
+}
+@ocaml.doc("<p> MeasureValue represents the data attribute of the time series. For example, the CPU utilization of an EC2 instance or the RPM of a wind turbine are measures. MeasureValue has both name and value. </p>
+         <p> MeasureValue is only allowed for type <code>MULTI</code>. Using <code>MULTI</code> type, you can pass multiple data attributes associated with the same time series in a single record </p>")
+type measureValue = {
+  @ocaml.doc("<p>Contains the data type of the MeasureValue for the time series data point.</p>")
+  @as("Type")
+  type_: measureValueType,
+  @ocaml.doc("<p> Value for the MeasureValue. </p>") @as("Value") value: stringValue2048,
+  @ocaml.doc("<p> Name of the MeasureValue.  </p>
+         <p> For constraints on MeasureValue names, refer to <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html#limits.naming\">
+      Naming Constraints</a> in the Timestream developer guide.</p>")
+  @as("Name")
+  name: schemaName,
+}
 @ocaml.doc(
   "<p>Represents an available endpoint against which to make API calls agaisnt, as well as the TTL for that endpoint.</p>"
 )
@@ -139,7 +200,7 @@ type dimension = {
   @ocaml.doc("<p>The data type of the dimension for the time series data point.</p>")
   @as("DimensionValueType")
   dimensionValueType: option<dimensionValueType>,
-  @ocaml.doc("<p>The value of the dimension.</p>") @as("Value") value: stringValue2048,
+  @ocaml.doc("<p>The value of the dimension.</p>") @as("Value") value: schemaValue,
   @ocaml.doc("<p>
          Dimension represents the meta data attributes of the time series. 
          For example, the name and availability zone of an EC2 instance or 
@@ -149,7 +210,7 @@ type dimension = {
          <p>For constraints on Dimension names, 
          see <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html#limits.naming\">Naming Constraints</a>.</p>")
   @as("Name")
-  name: stringValue256,
+  name: schemaName,
 }
 @ocaml.doc("<p>A top level container for a table. Databases and tables are the
       fundamental management concepts in Amazon Timestream. All tables in a 
@@ -177,9 +238,103 @@ type database = {
   arn: option<string_>,
 }
 type tagList_ = array<tag>
+type rejectedRecords = array<rejectedRecord>
+type measureValues = array<measureValue>
+@ocaml.doc(
+  "<p>The location to write error reports for records rejected, asynchronously, during magnetic store writes.</p>"
+)
+type magneticStoreRejectedDataLocation = {
+  @ocaml.doc(
+    "<p>Configuration of an S3 location to write error reports for records rejected, asynchronously, during magnetic store writes.</p>"
+  )
+  @as("S3Configuration")
+  s3Configuration: option<s3Configuration>,
+}
+type endpoints = array<endpoint>
+type dimensions = array<dimension>
+type databaseList = array<database>
+@ocaml.doc("<p>Record represents a time series data point being written into 
+       Timestream. Each record contains an array of dimensions. Dimensions 
+       represent the meta data attributes of a time series data point such as
+       the instance name or availability zone of an EC2 instance. A record also 
+       contains the measure name which is the name of the measure being collected 
+       for example the CPU utilization of an EC2 instance. A record also contains 
+       the measure value and the value type which is the data type of the measure value.
+       In addition, the record contains the timestamp when the measure was collected that 
+       the timestamp unit which represents the granularity of the timestamp.
+       </p>
+         <p>
+        Records have a <code>Version</code> field, which is a 64-bit <code>long</code> that you can use for updating data points. 
+        Writes of a duplicate record with the same dimension, 
+        timestamp, and measure name 
+        but different measure value will only succeed if the <code>Version</code> attribute of the record in the write request 
+        is higher than that of the existing record. 
+        Timestream defaults to a <code>Version</code> of <code>1</code> for records without the <code>Version</code> field.
+     </p>")
+type record = {
+  @ocaml.doc("<p> Contains the list of MeasureValue for time series data points. </p>
+         <p> This is only allowed for type <code>MULTI</code>. For scalar values, use <code>MeasureValue</code> attribute of the Record directly. </p>")
+  @as("MeasureValues")
+  measureValues: option<measureValues>,
+  @ocaml.doc("<p>64-bit attribute used for record updates. 
+         Write requests for duplicate data with a higher version number will update the existing measure value and version. 
+         In cases where the measure value is the same, <code>Version</code> will still be updated . Default value is <code>1</code>.</p>
+      
+         <note>
+            <p>
+               <code>Version</code> must be <code>1</code> or greater, or you will receive a <code>ValidationException</code> error.</p>
+         </note>")
+  @as("Version")
+  version: option<recordVersion>,
+  @ocaml.doc("<p>
+The granularity of the timestamp unit. It indicates if the time value is in seconds, milliseconds, nanoseconds or other supported values. 
+Default is <code>MILLISECONDS</code>.
+</p>")
+  @as("TimeUnit")
+  timeUnit: option<timeUnit>,
+  @ocaml.doc("<p>
+Contains the time at which the measure value for the data point was collected.
+The time value plus the unit provides the time elapsed since the epoch.
+For example, if the time value is <code>12345</code> and the unit is <code>ms</code>,
+   then <code>12345 ms</code> have elapsed since the epoch.
+</p>")
+  @as("Time")
+  time: option<stringValue256>,
+  @ocaml.doc("<p>
+Contains the data type of the measure value for the time series data point. Default type is <code>DOUBLE</code>.
+</p>")
+  @as("MeasureValueType")
+  measureValueType: option<measureValueType>,
+  @ocaml.doc("<p>
+Contains the measure value for the time series data point. 
+</p>")
+  @as("MeasureValue")
+  measureValue: option<stringValue2048>,
+  @ocaml.doc(
+    "<p>Measure represents the data attribute of the time series. For example, the CPU utilization of an EC2 instance or the RPM of a wind turbine are measures. </p>"
+  )
+  @as("MeasureName")
+  measureName: option<schemaName>,
+  @ocaml.doc("<p>Contains the list of dimensions for time series data points.</p>")
+  @as("Dimensions")
+  dimensions: option<dimensions>,
+}
+@ocaml.doc("<p>The set of properties on a table for configuring magnetic store writes.</p>")
+type magneticStoreWriteProperties = {
+  @ocaml.doc(
+    "<p>The location to write error reports for records rejected asynchronously during magnetic store writes.</p>"
+  )
+  @as("MagneticStoreRejectedDataLocation")
+  magneticStoreRejectedDataLocation: option<magneticStoreRejectedDataLocation>,
+  @ocaml.doc("<p>A flag to enable magnetic store writes.</p>") @as("EnableMagneticStoreWrites")
+  enableMagneticStoreWrites: boolean_,
+}
 @ocaml.doc("<p>Table represents a database table in Timestream. Tables contain one or more related time series. You can modify the retention duration of the memory store and the magnetic store for a table.
       </p>")
 type table = {
+  @ocaml.doc("<p>Contains properties to set on the table when enabling magnetic store writes.</p>")
+  @as("MagneticStoreWriteProperties")
+  magneticStoreWriteProperties: option<magneticStoreWriteProperties>,
   @ocaml.doc("<p>The time when the Timestream table was last updated.</p>") @as("LastUpdatedTime")
   lastUpdatedTime: option<date>,
   @ocaml.doc("<p>The time when the Timestream table was created. </p>") @as("CreationTime")
@@ -208,63 +363,15 @@ type table = {
   @ocaml.doc("<p>The Amazon Resource Name that uniquely identifies this table.</p>") @as("Arn")
   arn: option<string_>,
 }
-type rejectedRecords = array<rejectedRecord>
-type endpoints = array<endpoint>
-type dimensions = array<dimension>
-type databaseList = array<database>
-type tableList = array<table>
-@ocaml.doc("<p>Record represents a time series data point being written into 
-       Timestream. Each record contains an array of dimensions. Dimensions 
-       represent the meta data attributes of a time series data point such as
-       the instance name or availability zone of an EC2 instance. A record also 
-       contains the measure name which is the name of the measure being collected 
-       for example the CPU utilization of an EC2 instance. A record also contains 
-       the measure value and the value type which is the data type of the measure value.
-       In addition, the record contains the timestamp when the measure was collected that 
-       the timestamp unit which represents the granularity of the timestamp.
-       </p>")
-type record = {
-  @ocaml.doc("<p>64-bit attribute used for record updates. 
-         Write requests for duplicate data with a higher version number will update the existing measure value and version. 
-         In cases where the measure value is the same, <code>Version</code> will still be updated . Default value is to 1.</p>")
-  @as("Version")
-  version: option<recordVersion>,
-  @ocaml.doc("<p>
-The granularity of the timestamp unit. It indicates if the time value is in seconds, milliseconds, nanoseconds or other supported values.
-</p>")
-  @as("TimeUnit")
-  timeUnit: option<timeUnit>,
-  @ocaml.doc("<p>
-Contains the time at which the measure value for the data point was collected.
-The time value plus the unit provides the time elapsed since the epoch.
-For example, if the time value is <code>12345</code> and the unit is <code>ms</code>,
-   then <code>12345 ms</code> have elapsed since the epoch.
-</p>")
-  @as("Time")
-  time: option<stringValue256>,
-  @ocaml.doc("<p>
-Contains the data type of the measure value for the time series data point.
-</p>")
-  @as("MeasureValueType")
-  measureValueType: option<measureValueType>,
-  @ocaml.doc("<p>
-Contains the measure value for the time series data point. 
-</p>")
-  @as("MeasureValue")
-  measureValue: option<stringValue2048>,
-  @ocaml.doc(
-    "<p>Measure represents the data attribute of the time series. For example, the CPU utilization of an EC2 instance or the RPM of a wind turbine are measures. </p>"
-  )
-  @as("MeasureName")
-  measureName: option<stringValue256>,
-  @ocaml.doc("<p>Contains the list of dimensions for time series data points.</p>")
-  @as("Dimensions")
-  dimensions: option<dimensions>,
-}
 type records = array<record>
-@ocaml.doc(
-  "<p>Amazon Timestream is a fast, scalable, fully managed time series database service that makes it easy to store and analyze trillions of time series data points per day. With Timestream, you can easily store and analyze IoT sensor data to derive insights from your IoT applications. You can analyze industrial telemetry to streamline equipment management and maintenance. You can also store and analyze log data and metrics to improve the performance and availability of your applications. Timestream is built from the ground up to effectively ingest, process, and store time series data. It organizes data to optimize query processing. It automatically scales based on the volume of data ingested and on the query volume to ensure you receive optimal performance while inserting and querying data. As your data grows over time, Timestream’s adaptive query processing engine spans across storage tiers to provide fast analysis while reducing costs.</p>"
-)
+type tableList = array<table>
+@ocaml.doc("<fullname>Amazon Timestream Write</fullname>
+         <p>Amazon Timestream is a fast, scalable, fully managed time series database service that makes it easy to store and analyze trillions of time series data points per day. 
+       With Timestream, you can easily store and analyze IoT sensor data to derive insights from your IoT applications. 
+         You can analyze industrial telemetry to streamline equipment management and maintenance. 
+         You can also store and analyze log data and metrics to improve the performance and availability of your applications. 
+       Timestream is built from the ground up to effectively ingest, process, 
+         and store time series data. It organizes data to optimize query processing. It automatically scales based on the volume of data ingested and on the query volume to ensure you receive optimal performance while inserting and querying data. As your data grows over time, Timestream’s adaptive query processing engine spans across storage tiers to provide fast analysis while reducing costs.</p>")
 module DeleteTable = {
   type t
   type request = {
@@ -274,7 +381,7 @@ module DeleteTable = {
     @as("DatabaseName")
     databaseName: resourceName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-timestream") @new external new: request => t = "DeleteTableCommand"
   let make = (~tableName, ~databaseName, ()) =>
     new({tableName: tableName, databaseName: databaseName})
@@ -287,7 +394,7 @@ module DeleteDatabase = {
     @ocaml.doc("<p>The name of the Timestream database to be deleted.</p>") @as("DatabaseName")
     databaseName: resourceName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-timestream") @new external new: request => t = "DeleteDatabaseCommand"
   let make = (~databaseName, ()) => new({databaseName: databaseName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -350,7 +457,7 @@ module UntagResource = {
     @as("ResourceARN")
     resourceARN: amazonResourceName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-timestream") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys: tagKeys, resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -371,29 +478,6 @@ module DescribeDatabase = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
-module UpdateTable = {
-  type t
-  type request = {
-    @ocaml.doc("<p>The retention duration of the memory store and the magnetic store.</p>")
-    @as("RetentionProperties")
-    retentionProperties: retentionProperties,
-    @ocaml.doc("<p>The name of the Timesream table.</p>") @as("TableName") tableName: resourceName,
-    @ocaml.doc("<p>The name of the Timestream database.</p>") @as("DatabaseName")
-    databaseName: resourceName,
-  }
-  type response = {
-    @ocaml.doc("<p>The updated Timestream table.</p>") @as("Table") table: option<table>,
-  }
-  @module("@aws-sdk/client-timestream") @new external new: request => t = "UpdateTableCommand"
-  let make = (~retentionProperties, ~tableName, ~databaseName, ()) =>
-    new({
-      retentionProperties: retentionProperties,
-      tableName: tableName,
-      databaseName: databaseName,
-    })
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
 module TagResource = {
   type t
   type request = {
@@ -409,7 +493,7 @@ The tags to be assigned to the Timestream resource.
     @as("ResourceARN")
     resourceARN: amazonResourceName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-timestream") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceARN, ()) => new({tags: tags, resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -465,6 +549,121 @@ module ListDatabases = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module DescribeEndpoints = {
+  type t
+  type request = {.}
+  type response = {
+    @ocaml.doc(
+      "<p>An <code>Endpoints</code> object is returned when a <code>DescribeEndpoints</code> request is made.</p>"
+    )
+    @as("Endpoints")
+    endpoints: endpoints,
+  }
+  @module("@aws-sdk/client-timestream") @new external new: request => t = "DescribeEndpointsCommand"
+  let make = () => new(Js.Obj.empty())
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module CreateDatabase = {
+  type t
+  type request = {
+    @ocaml.doc("<p>
+      A list of key-value pairs to label the table. 
+   </p>")
+    @as("Tags")
+    tags: option<tagList_>,
+    @ocaml.doc("<p>The KMS key for the database. 
+         If the KMS key is not specified, the database will be encrypted with a Timestream
+         managed KMS key located in your account. 
+         Refer to <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk\">Amazon Web Services managed KMS keys</a> for more info.</p>")
+    @as("KmsKeyId")
+    kmsKeyId: option<stringValue2048>,
+    @ocaml.doc("<p>The name of the Timestream database.</p>") @as("DatabaseName")
+    databaseName: resourceCreateAPIName,
+  }
+  type response = {
+    @ocaml.doc("<p>The newly created Timestream database.</p>") @as("Database")
+    database: option<database>,
+  }
+  @module("@aws-sdk/client-timestream") @new external new: request => t = "CreateDatabaseCommand"
+  let make = (~databaseName, ~tags=?, ~kmsKeyId=?, ()) =>
+    new({tags: tags, kmsKeyId: kmsKeyId, databaseName: databaseName})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module WriteRecords = {
+  type t
+  type request = {
+    @ocaml.doc("<p>An array of records containing the unique measure, dimension, time, and version  
+       attributes for each time series data point.
+       </p>")
+    @as("Records")
+    records: records,
+    @ocaml.doc("<p>A record containing the common measure, dimension, time, 
+         and version attributes  
+       shared across all the records in the request. The measure and dimension 
+       attributes specified will be merged with the measure and dimension
+       attributes in the records object when the data is written into Timestream.
+       Dimensions may not overlap,
+       or a <code>ValidationException</code> will be thrown.
+         In other words, a record must contain dimensions with unique names.
+       </p>")
+    @as("CommonAttributes")
+    commonAttributes: option<record>,
+    @ocaml.doc("<p>The name of the Timestream table.</p>") @as("TableName") tableName: resourceName,
+    @ocaml.doc("<p>The name of the Timestream database.</p>") @as("DatabaseName")
+    databaseName: resourceName,
+  }
+  type response = {
+    @ocaml.doc("<p>Information on the records ingested by this request.</p>") @as("RecordsIngested")
+    recordsIngested: option<recordsIngested>,
+  }
+  @module("@aws-sdk/client-timestream") @new external new: request => t = "WriteRecordsCommand"
+  let make = (~records, ~tableName, ~databaseName, ~commonAttributes=?, ()) =>
+    new({
+      records: records,
+      commonAttributes: commonAttributes,
+      tableName: tableName,
+      databaseName: databaseName,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module UpdateTable = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>Contains properties to set on the table when enabling magnetic store writes.</p>"
+    )
+    @as("MagneticStoreWriteProperties")
+    magneticStoreWriteProperties: option<magneticStoreWriteProperties>,
+    @ocaml.doc("<p>The retention duration of the memory store and the magnetic store.</p>")
+    @as("RetentionProperties")
+    retentionProperties: option<retentionProperties>,
+    @ocaml.doc("<p>The name of the Timestream table.</p>") @as("TableName") tableName: resourceName,
+    @ocaml.doc("<p>The name of the Timestream database.</p>") @as("DatabaseName")
+    databaseName: resourceName,
+  }
+  type response = {
+    @ocaml.doc("<p>The updated Timestream table.</p>") @as("Table") table: option<table>,
+  }
+  @module("@aws-sdk/client-timestream") @new external new: request => t = "UpdateTableCommand"
+  let make = (
+    ~tableName,
+    ~databaseName,
+    ~magneticStoreWriteProperties=?,
+    ~retentionProperties=?,
+    (),
+  ) =>
+    new({
+      magneticStoreWriteProperties: magneticStoreWriteProperties,
+      retentionProperties: retentionProperties,
+      tableName: tableName,
+      databaseName: databaseName,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module DescribeTable = {
   type t
   type request = {
@@ -479,24 +678,14 @@ module DescribeTable = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
-module DescribeEndpoints = {
-  type t
-
-  type response = {
-    @ocaml.doc(
-      "<p>An <code>Endpoints</code> object is returned when a <code>DescribeEndpoints</code> request is made.</p>"
-    )
-    @as("Endpoints")
-    endpoints: endpoints,
-  }
-  @module("@aws-sdk/client-timestream") @new external new: unit => t = "DescribeEndpointsCommand"
-  let make = () => new()
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
 module CreateTable = {
   type t
   type request = {
+    @ocaml.doc(
+      "<p>Contains properties to set on the table when enabling magnetic store writes.</p>"
+    )
+    @as("MagneticStoreWriteProperties")
+    magneticStoreWriteProperties: option<magneticStoreWriteProperties>,
     @ocaml.doc("<p>
       A list of key-value pairs to label the table. 
    </p>")
@@ -507,46 +696,30 @@ module CreateTable = {
     )
     @as("RetentionProperties")
     retentionProperties: option<retentionProperties>,
-    @ocaml.doc("<p>The name of the Timestream table.</p>") @as("TableName") tableName: resourceName,
+    @ocaml.doc("<p>The name of the Timestream table.</p>") @as("TableName")
+    tableName: resourceCreateAPIName,
     @ocaml.doc("<p>The name of the Timestream database.</p>") @as("DatabaseName")
-    databaseName: resourceName,
+    databaseName: resourceCreateAPIName,
   }
   type response = {
     @ocaml.doc("<p>The newly created Timestream table.</p>") @as("Table") table: option<table>,
   }
   @module("@aws-sdk/client-timestream") @new external new: request => t = "CreateTableCommand"
-  let make = (~tableName, ~databaseName, ~tags=?, ~retentionProperties=?, ()) =>
+  let make = (
+    ~tableName,
+    ~databaseName,
+    ~magneticStoreWriteProperties=?,
+    ~tags=?,
+    ~retentionProperties=?,
+    (),
+  ) =>
     new({
+      magneticStoreWriteProperties: magneticStoreWriteProperties,
       tags: tags,
       retentionProperties: retentionProperties,
       tableName: tableName,
       databaseName: databaseName,
     })
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
-module CreateDatabase = {
-  type t
-  type request = {
-    @ocaml.doc("<p>
-      A list of key-value pairs to label the table. 
-   </p>")
-    @as("Tags")
-    tags: option<tagList_>,
-    @ocaml.doc("<p>The KMS key for the database. If the KMS key is not specified, the database will be encrypted with a Timestream
-         managed KMS key located in your account. Refer to <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk\">AWS managed KMS keys</a> for more info.</p>")
-    @as("KmsKeyId")
-    kmsKeyId: option<stringValue2048>,
-    @ocaml.doc("<p>The name of the Timestream database.</p>") @as("DatabaseName")
-    databaseName: resourceName,
-  }
-  type response = {
-    @ocaml.doc("<p>The newly created Timestream database.</p>") @as("Database")
-    database: option<database>,
-  }
-  @module("@aws-sdk/client-timestream") @new external new: request => t = "CreateDatabaseCommand"
-  let make = (~databaseName, ~tags=?, ~kmsKeyId=?, ()) =>
-    new({tags: tags, kmsKeyId: kmsKeyId, databaseName: databaseName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -578,35 +751,4 @@ module ListTables = {
   let make = (~maxResults=?, ~nextToken=?, ~databaseName=?, ()) =>
     new({maxResults: maxResults, nextToken: nextToken, databaseName: databaseName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
-module WriteRecords = {
-  type t
-  type request = {
-    @ocaml.doc("<p>An array of records containing the unique dimension and measure 
-       attributes for each time series data point.
-       </p>")
-    @as("Records")
-    records: records,
-    @ocaml.doc("<p>A record containing the common measure and dimension attributes 
-       shared across all the records in the request. The measure and dimension 
-       attributes specified in here will be merged with the measure and dimension
-       attributes in the records object when the data is written into Timestream.
-       </p>")
-    @as("CommonAttributes")
-    commonAttributes: option<record>,
-    @ocaml.doc("<p>The name of the Timesream table.</p>") @as("TableName") tableName: resourceName,
-    @ocaml.doc("<p>The name of the Timestream database.</p>") @as("DatabaseName")
-    databaseName: resourceName,
-  }
-
-  @module("@aws-sdk/client-timestream") @new external new: request => t = "WriteRecordsCommand"
-  let make = (~records, ~tableName, ~databaseName, ~commonAttributes=?, ()) =>
-    new({
-      records: records,
-      commonAttributes: commonAttributes,
-      tableName: tableName,
-      databaseName: databaseName,
-    })
-  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }

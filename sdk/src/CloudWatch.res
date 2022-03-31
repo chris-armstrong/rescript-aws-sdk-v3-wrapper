@@ -150,6 +150,7 @@ type comparisonOperator = [
   | @as("GreaterThanOrEqualToThreshold") #GreaterThanOrEqualToThreshold
 ]
 type awsQueryErrorMessage = string
+type anomalyDetectorType = [@as("METRIC_MATH") #METRIC_MATH | @as("SINGLE_METRIC") #SINGLE_METRIC]
 type anomalyDetectorStateValue = [
   | @as("TRAINED") #TRAINED
   | @as("TRAINED_INSUFFICIENT_DATA") #TRAINED_INSUFFICIENT_DATA
@@ -166,6 +167,7 @@ type alarmDescription = string
 type alarmArn = string
 type actionsEnabled = bool
 type actionPrefix = string
+type accountId = string
 type values = array<datapointValue>
 type timestamps = array<timestamp_>
 type tagKeyList = array<tagKey>
@@ -243,9 +245,11 @@ type metricStreamEntry = {
   creationDate: option<timestamp_>,
   @ocaml.doc("<p>The ARN of the metric stream.</p>") @as("Arn") arn: option<amazonResourceName>,
 }
-@ocaml.doc(
-  "<p>A message returned by the <code>GetMetricData</code>API, including a code and a description.</p>"
-)
+@ocaml.doc("<p>A message returned by the <code>GetMetricData</code>API, including a code and a description.</p>
+		       <p>If a cross-Region <code>GetMetricData</code> operation fails with a code of <code>Forbidden</code> and a 
+			value of <code>Authentication too complex to 
+			retrieve cross region data</code>, you can correct the problem by running the <code>GetMetricData</code>
+		operation in the same Region where the metric data is.</p>")
 type messageData = {
   @ocaml.doc("<p>The message text.</p>") @as("Value") value: option<messageDataValue>,
   @ocaml.doc("<p>The error code or status code associated with the message.</p>") @as("Code")
@@ -315,7 +319,12 @@ type insightRuleContributorDatapoint = {
   approximateValue: insightRuleUnboundDouble,
   @ocaml.doc("<p>The timestamp of the data point.</p>") @as("Timestamp") timestamp_: timestamp_,
 }
-@ocaml.doc("<p>This structure contains the definition for a Contributor Insights rule.</p>")
+@ocaml.doc("<p>This structure contains the definition 
+			for a Contributor Insights rule.
+			For more information about this rule, 
+			see<a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/ContributorInsights.html\">
+				Using Constributor Insights to analyze high-cardinality data</a> 
+			in the <i>Amazon CloudWatch User Guide</i>.</p>")
 type insightRule = {
   @ocaml.doc("<p>The definition of the rule, as a JSON object. The definition contains the keywords used to define contributors, 
 			the value to aggregate on if this rule returns a sum instead of a count, and the filters. For details on the valid syntax, see 
@@ -323,7 +332,7 @@ type insightRule = {
 				Rule Syntax</a>.</p>")
   @as("Definition")
   definition: insightRuleDefinition,
-  @ocaml.doc("<p>For rules that you create, this is always <code>{\"Name\": \"CloudWatchLogRule\", \"Version\": 1}</code>. For built-in rules, 
+  @ocaml.doc("<p>For rules that you create, this is always <code>{\"Name\": \"CloudWatchLogRule\", \"Version\": 1}</code>. For managed rules, 
 			this is <code>{\"Name\": \"ServiceLogRule\", \"Version\": 1}</code>
          </p>")
   @as("Schema")
@@ -344,12 +353,12 @@ type dimensionFilter = {
 			identifier for a metric, whenever you add a unique name/value pair to one of 
 			your metrics, you are creating a new variation of that metric. </p>")
 type dimension = {
-  @ocaml.doc("<p>The value of the dimension. Dimension values cannot contain blank spaces 
-			or non-ASCII characters.</p>")
+  @ocaml.doc("<p>The value of the dimension. Dimension values must contain only ASCII characters and must include 
+			at least one non-whitespace character.</p>")
   @as("Value")
   value: dimensionValue,
-  @ocaml.doc("<p>The name of the dimension. Dimension names cannot contain blank spaces or non-ASCII
-		characters.</p>")
+  @ocaml.doc("<p>The name of the dimension. Dimension names must contain only ASCII characters and must include 
+			at least one non-whitespace character.</p>")
   @as("Name")
   name: dimensionName,
 }
@@ -376,6 +385,7 @@ type dashboardEntry = {
   dashboardName: option<dashboardName>,
 }
 type counts = array<datapointValue>
+type anomalyDetectorTypes = array<anomalyDetectorType>
 type alarmTypes = array<alarmType>
 type alarmNames = array<alarmName>
 @ocaml.doc("<p>Represents the history of a specific alarm.</p>")
@@ -471,6 +481,21 @@ type compositeAlarm = {
 type batchFailures = array<partialFailure>
 type anomalyDetectorExcludedTimeRanges = array<range>
 type alarmHistoryItems = array<alarmHistoryItem>
+@ocaml.doc("<p>Designates the CloudWatch metric and statistic that provides the time series the anomaly detector
+			uses as input.</p>")
+type singleMetricAnomalyDetector = {
+  @ocaml.doc("<p>The statistic to use for the metric and anomaly detection model.</p>") @as("Stat")
+  stat: option<anomalyDetectorMetricStat>,
+  @ocaml.doc("<p>The metric dimensions to create the anomaly detection model for.</p>")
+  @as("Dimensions")
+  dimensions: option<dimensions>,
+  @ocaml.doc("<p>The name of the metric to create the anomaly detection model for.</p>")
+  @as("MetricName")
+  metricName: option<metricName>,
+  @ocaml.doc("<p>The namespace of the metric to create the anomaly detection model for.</p>")
+  @as("Namespace")
+  namespace: option<namespace>,
+}
 @ocaml.doc("<p>Encapsulates the information sent to either create a metric or add new values
 			to be aggregated into an existing metric.</p>")
 type metricDatum = {
@@ -638,32 +663,6 @@ type metricStat = {
 type metricDataResults = array<metricDataResult>
 type metricData = array<metricDatum>
 type insightRuleContributors = array<insightRuleContributor>
-@ocaml.doc("<p>An anomaly detection model associated with a particular CloudWatch metric and statistic. You
-			can use the model to display a band of expected normal values when the metric is
-			graphed.</p>")
-type anomalyDetector = {
-  @ocaml.doc("<p>The current status of the anomaly detector's training. The possible values are <code>TRAINED | PENDING_TRAINING | TRAINED_INSUFFICIENT_DATA</code>
-         </p>")
-  @as("StateValue")
-  stateValue: option<anomalyDetectorStateValue>,
-  @ocaml.doc("<p>The configuration specifies details about how the 
-		anomaly detection model is to be trained, including time ranges to 
-		exclude from use for training the model, and the time zone to use for 
-		the metric.</p>")
-  @as("Configuration")
-  configuration: option<anomalyDetectorConfiguration>,
-  @ocaml.doc("<p>The statistic associated with the anomaly detection model.</p>") @as("Stat")
-  stat: option<anomalyDetectorMetricStat>,
-  @ocaml.doc("<p>The metric dimensions associated with the anomaly detection model.</p>")
-  @as("Dimensions")
-  dimensions: option<dimensions>,
-  @ocaml.doc("<p>The name of the metric associated with the anomaly detection model.</p>")
-  @as("MetricName")
-  metricName: option<metricName>,
-  @ocaml.doc("<p>The namespace of the metric associated with the anomaly detection model.</p>")
-  @as("Namespace")
-  namespace: option<namespace>,
-}
 @ocaml.doc("<p>This structure is used in both <code>GetMetricData</code> and <code>PutMetricAlarm</code>. The supported
 			use of this structure is different for those two operations.</p>
 		       <p>When used in <code>GetMetricData</code>, it indicates the metric data to return, and whether this call is just retrieving
@@ -687,6 +686,11 @@ type anomalyDetector = {
 		       <p>Some of the parameters of this structure also have different uses whether you are using this structure in a <code>GetMetricData</code>
 			operation or a <code>PutMetricAlarm</code> operation. These differences are explained in the following parameter list.</p>")
 type metricDataQuery = {
+  @ocaml.doc("<p>The ID of the account where the metrics are located, if this is a cross-account alarm.</p>
+		       <p>Use this field only for <code>PutMetricAlarm</code> operations. It is not used in 
+		<code>GetMetricData</code> operations.</p>")
+  @as("AccountId")
+  accountId: option<accountId>,
   @ocaml.doc("<p>The granularity, in seconds, of the returned data points. For metrics with regular resolution, a 
 			period can be as short as one minute (60 seconds) and must be a multiple of 60. 
 			For high-resolution metrics that are collected at intervals of less than one minute, 
@@ -735,8 +739,26 @@ type metricDataQuery = {
   @as("Id")
   id: metricId,
 }
-type anomalyDetectors = array<anomalyDetector>
 type metricDataQueries = array<metricDataQuery>
+@ocaml.doc("<p>Indicates the CloudWatch math expression that provides the time series the anomaly detector
+			uses as input.
+			The designated math expression must return a single time series.</p>")
+type metricMathAnomalyDetector = {
+  @ocaml.doc("<p>An array of metric data query structures 
+			that enables you to create an anomaly detector 
+			based on the result of a metric math expression.
+			Each item in <code>MetricDataQueries</code> gets a metric or performs a math expression.
+			One item in <code>MetricDataQueries</code> is the expression 
+			that provides the time series 
+			that the anomaly detector uses as input. 
+			Designate the expression by setting <code>ReturnData</code> to <code>True</code> 
+			for this object in the array.
+			For all other expressions and metrics, set <code>ReturnData</code> to <code>False</code>.
+			The designated expression must return 
+			a single time series.</p>")
+  @as("MetricDataQueries")
+  metricDataQueries: option<metricDataQueries>,
+}
 @ocaml.doc("<p>The details about a metric alarm.</p>")
 type metricAlarm = {
   @ocaml.doc("<p>In an alarm based on an anomaly detection model, this is the ID of the 
@@ -832,8 +854,41 @@ type metricAlarm = {
   @ocaml.doc("<p>The name of the alarm.</p>") @as("AlarmName") alarmName: option<alarmName>,
 }
 type metricAlarms = array<metricAlarm>
-@ocaml.doc("<p>Amazon CloudWatch monitors your Amazon Web Services (AWS) resources and the
-			applications you run on AWS in real time. You can use CloudWatch to collect and track
+@ocaml.doc("<p>An anomaly detection model associated with a particular CloudWatch metric, statistic, or metric math expression. 
+			You can use the model to display a band of expected, normal values 
+			when the metric is graphed.</p>")
+type anomalyDetector = {
+  @ocaml.doc("<p>The CloudWatch metric math expression for this anomaly detector.</p>")
+  @as("MetricMathAnomalyDetector")
+  metricMathAnomalyDetector: option<metricMathAnomalyDetector>,
+  @ocaml.doc("<p>The CloudWatch metric and statistic for this anomaly detector.</p>")
+  @as("SingleMetricAnomalyDetector")
+  singleMetricAnomalyDetector: option<singleMetricAnomalyDetector>,
+  @ocaml.doc("<p>The current status of the anomaly detector's training. The possible values are <code>TRAINED | PENDING_TRAINING | TRAINED_INSUFFICIENT_DATA</code>
+         </p>")
+  @as("StateValue")
+  stateValue: option<anomalyDetectorStateValue>,
+  @ocaml.doc("<p>The configuration specifies details about how the 
+		anomaly detection model is to be trained, including time ranges to 
+		exclude from use for training the model, and the time zone to use for 
+		the metric.</p>")
+  @as("Configuration")
+  configuration: option<anomalyDetectorConfiguration>,
+  @ocaml.doc("<p>The statistic associated with the anomaly detection model.</p>") @as("Stat")
+  stat: option<anomalyDetectorMetricStat>,
+  @ocaml.doc("<p>The metric dimensions associated with the anomaly detection model.</p>")
+  @as("Dimensions")
+  dimensions: option<dimensions>,
+  @ocaml.doc("<p>The name of the metric associated with the anomaly detection model.</p>")
+  @as("MetricName")
+  metricName: option<metricName>,
+  @ocaml.doc("<p>The namespace of the metric associated with the anomaly detection model.</p>")
+  @as("Namespace")
+  namespace: option<namespace>,
+}
+type anomalyDetectors = array<anomalyDetector>
+@ocaml.doc("<p>Amazon CloudWatch monitors your Amazon Web Services (Amazon Web Services) resources and the
+			applications you run on Amazon Web Services in real time. You can use CloudWatch to collect and track
 			metrics, which are the variables you want to measure for your resources and
 			applications.</p>
 
@@ -844,7 +899,7 @@ type metricAlarms = array<metricAlarm>
 			under-used instances to save
 			money.</p>
 
-		       <p>In addition to monitoring the built-in metrics that come with AWS, you can monitor
+		       <p>In addition to monitoring the built-in metrics that come with Amazon Web Services, you can monitor
 			your own custom metrics. With CloudWatch, you gain system-wide visibility into resource
 			utilization, application performance, and operational health.</p>")
 module SetAlarmState = {
@@ -861,7 +916,7 @@ module SetAlarmState = {
     @ocaml.doc("<p>The value of the state.</p>") @as("StateValue") stateValue: stateValue,
     @ocaml.doc("<p>The name of the alarm.</p>") @as("AlarmName") alarmName: alarmName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-monitoring") @new external new: request => t = "SetAlarmStateCommand"
   let make = (~stateReason, ~stateValue, ~alarmName, ~stateReasonData=?, ()) =>
     new({
@@ -915,7 +970,7 @@ module GetMetricWidgetImage = {
          </p>
 		
 		       <p>The <code>image/png</code> setting is intended only for custom HTTP requests. For most
-			use cases, and all actions using an AWS SDK, you should use <code>png</code>. If you specify 
+			use cases, and all actions using an Amazon Web Services SDK, you should use <code>png</code>. If you specify 
 			<code>image/png</code>, the HTTP response has a content-type set to <code>image/png</code>, 
 			and the body of the response is a PNG image. </p>")
     @as("OutputFormat")
@@ -973,7 +1028,7 @@ module DeleteMetricStream = {
     @ocaml.doc("<p>The name of the metric stream to delete.</p>") @as("Name")
     name: metricStreamName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-monitoring") @new
   external new: request => t = "DeleteMetricStreamCommand"
   let make = (~name, ()) => new({name: name})
@@ -1000,7 +1055,7 @@ module UntagResource = {
     @as("ResourceARN")
     resourceARN: amazonResourceName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-monitoring") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys: tagKeys, resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1016,7 +1071,7 @@ module StopMetricStreams = {
     @as("Names")
     names: metricStreamNames,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-monitoring") @new external new: request => t = "StopMetricStreamsCommand"
   let make = (~names, ()) => new({names: names})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1032,7 +1087,7 @@ module StartMetricStreams = {
     @as("Names")
     names: metricStreamNames,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-monitoring") @new
   external new: request => t = "StartMetricStreamsCommand"
   let make = (~names, ()) => new({names: names})
@@ -1044,7 +1099,7 @@ module EnableAlarmActions = {
   type request = {
     @ocaml.doc("<p>The names of the alarms.</p>") @as("AlarmNames") alarmNames: alarmNames,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-monitoring") @new
   external new: request => t = "EnableAlarmActionsCommand"
   let make = (~alarmNames, ()) => new({alarmNames: alarmNames})
@@ -1056,7 +1111,7 @@ module DisableAlarmActions = {
   type request = {
     @ocaml.doc("<p>The names of the alarms.</p>") @as("AlarmNames") alarmNames: alarmNames,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-monitoring") @new
   external new: request => t = "DisableAlarmActionsCommand"
   let make = (~alarmNames, ()) => new({alarmNames: alarmNames})
@@ -1070,7 +1125,7 @@ module DeleteDashboards = {
     @as("DashboardNames")
     dashboardNames: dashboardNames,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-monitoring") @new external new: request => t = "DeleteDashboardsCommand"
   let make = (~dashboardNames, ()) => new({dashboardNames: dashboardNames})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1081,7 +1136,7 @@ module DeleteAlarms = {
   type request = {
     @ocaml.doc("<p>The alarms to be deleted.</p>") @as("AlarmNames") alarmNames: alarmNames,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-monitoring") @new external new: request => t = "DeleteAlarmsCommand"
   let make = (~alarmNames, ()) => new({alarmNames: alarmNames})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1107,7 +1162,7 @@ module TagResource = {
     @as("ResourceARN")
     resourceARN: amazonResourceName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-monitoring") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceARN, ()) => new({tags: tags, resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1120,7 +1175,11 @@ module PutMetricStream = {
 			many as 50 tags with a metric stream.</p>
 		       <p>Tags can help you organize and categorize your resources. You can also use them to scope user
 			permissions by granting a user
-			permission to access or change only resources with certain tag values.</p>")
+			permission to access or change only resources with certain tag values.</p>
+		       <p>You can use this parameter only when you are creating a new metric stream. If you are using this operation to update an existing metric stream, any tags
+			you specify in this parameter are ignored. To change the tags of an existing metric stream, use
+			<a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html\">TagResource</a>
+			or <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UntagResource.html\">UntagResource</a>.</p>")
     @as("Tags")
     tags: option<tagList_>,
     @ocaml.doc("<p>The output format for the stream. Valid values are <code>json</code>
@@ -1219,7 +1278,7 @@ module PutInsightRule = {
     ruleState: option<insightRuleState>,
     @ocaml.doc("<p>A unique name for the rule.</p>") @as("RuleName") ruleName: insightRuleName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-monitoring") @new external new: request => t = "PutInsightRuleCommand"
   let make = (~ruleDefinition, ~ruleName, ~tags=?, ~ruleState=?, ()) =>
     new({tags: tags, ruleDefinition: ruleDefinition, ruleState: ruleState, ruleName: ruleName})
@@ -1369,7 +1428,7 @@ module PutCompositeAlarm = {
     @as("ActionsEnabled")
     actionsEnabled: option<actionsEnabled>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-monitoring") @new external new: request => t = "PutCompositeAlarmCommand"
   let make = (
     ~alarmRule,
@@ -1672,70 +1731,6 @@ module DeleteInsightRules = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
-module DeleteAnomalyDetector = {
-  type t
-  type request = {
-    @ocaml.doc("<p>The statistic associated with the anomaly detection model to delete.</p>")
-    @as("Stat")
-    stat: anomalyDetectorMetricStat,
-    @ocaml.doc(
-      "<p>The metric dimensions associated with the anomaly detection model to delete.</p>"
-    )
-    @as("Dimensions")
-    dimensions: option<dimensions>,
-    @ocaml.doc("<p>The metric name associated with the anomaly detection model to delete.</p>")
-    @as("MetricName")
-    metricName: metricName,
-    @ocaml.doc("<p>The namespace associated with the anomaly detection model to delete.</p>")
-    @as("Namespace")
-    namespace: namespace,
-  }
-
-  @module("@aws-sdk/client-monitoring") @new
-  external new: request => t = "DeleteAnomalyDetectorCommand"
-  let make = (~stat, ~metricName, ~namespace, ~dimensions=?, ()) =>
-    new({stat: stat, dimensions: dimensions, metricName: metricName, namespace: namespace})
-  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
-}
-
-module PutAnomalyDetector = {
-  type t
-  type request = {
-    @ocaml.doc("<p>The configuration specifies details about how the 
-			anomaly detection model is to be trained, including 
-			time ranges to exclude when training and updating the model.
-			You can specify as many as 10 time ranges.</p>
-		       <p>The configuration can also include the time zone to use for 
-			the metric.</p>")
-    @as("Configuration")
-    configuration: option<anomalyDetectorConfiguration>,
-    @ocaml.doc("<p>The statistic to use for the metric and the anomaly detection model.</p>")
-    @as("Stat")
-    stat: anomalyDetectorMetricStat,
-    @ocaml.doc("<p>The metric dimensions to create the anomaly detection model for.</p>")
-    @as("Dimensions")
-    dimensions: option<dimensions>,
-    @ocaml.doc("<p>The name of the metric to create the anomaly detection model for.</p>")
-    @as("MetricName")
-    metricName: metricName,
-    @ocaml.doc("<p>The namespace of the metric to create the anomaly detection model for.</p>")
-    @as("Namespace")
-    namespace: namespace,
-  }
-
-  @module("@aws-sdk/client-monitoring") @new
-  external new: request => t = "PutAnomalyDetectorCommand"
-  let make = (~stat, ~metricName, ~namespace, ~configuration=?, ~dimensions=?, ()) =>
-    new({
-      configuration: configuration,
-      stat: stat,
-      dimensions: dimensions,
-      metricName: metricName,
-      namespace: namespace,
-    })
-  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
-}
-
 module GetMetricStatistics = {
   type t
   type request = {
@@ -1808,7 +1803,8 @@ module GetMetricStatistics = {
 		</p>")
     @as("StartTime")
     startTime: timestamp_,
-    @ocaml.doc("<p>The dimensions. If the metric contains multiple dimensions, you must include a value for each dimension. CloudWatch treats each unique combination of dimensions as a separate metric.
+    @ocaml.doc("<p>The dimensions. If the metric contains multiple dimensions, you must include a value for each dimension. 
+			CloudWatch treats each unique combination of dimensions as a separate metric.
 		    If a specific combination of dimensions was not published, you can't retrieve statistics for it.
 		    You must specify the same dimensions that were used when the metrics were created. For an example,
 		    see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#dimension-combinations\">Dimension Combinations</a> in the <i>Amazon CloudWatch User Guide</i>. For more information about specifying dimensions, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html\">Publishing Metrics</a> in the
@@ -1863,12 +1859,12 @@ module PutMetricData = {
     metricData: metricData,
     @ocaml.doc("<p>The namespace for the metric data.</p>
 		       <p>To avoid conflicts
-			with AWS service namespaces, you should not specify a namespace that begins with <code>AWS/</code>
+			with Amazon Web Services service namespaces, you should not specify a namespace that begins with <code>AWS/</code>
          </p>")
     @as("Namespace")
     namespace: namespace,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-monitoring") @new external new: request => t = "PutMetricDataCommand"
   let make = (~metricData, ~namespace, ()) => new({metricData: metricData, namespace: namespace})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -2037,57 +2033,6 @@ module GetInsightRuleReport = {
       endTime: endTime,
       startTime: startTime,
       ruleName: ruleName,
-    })
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
-module DescribeAnomalyDetectors = {
-  type t
-  type request = {
-    @ocaml.doc("<p>Limits the results to only the anomaly detection models that are associated with the
-			specified metric dimensions. If there are multiple metrics that have these dimensions
-			and have anomaly detection models associated, they're all returned.</p>")
-    @as("Dimensions")
-    dimensions: option<dimensions>,
-    @ocaml.doc("<p>Limits the results to only the anomaly detection models that are associated with the
-			specified metric name. If there are multiple metrics with this name in different
-			namespaces that have anomaly detection models, they're all returned.</p>")
-    @as("MetricName")
-    metricName: option<metricName>,
-    @ocaml.doc("<p>Limits the results to only the anomaly detection models that
-			are associated with the specified namespace.</p>")
-    @as("Namespace")
-    namespace: option<namespace>,
-    @ocaml.doc("<p>The maximum number of results to return in one operation. The maximum
-			value that you can specify is 100.</p>
-			      <p>To retrieve the remaining results, make another call with the returned 
-			<code>NextToken</code> value. </p>")
-    @as("MaxResults")
-    maxResults: option<maxReturnedResultsCount>,
-    @ocaml.doc(
-      "<p>Use the token returned by the previous operation to request the next page of results.</p>"
-    )
-    @as("NextToken")
-    nextToken: option<nextToken>,
-  }
-  type response = {
-    @ocaml.doc("<p>A token that you can use in a subsequent operation to 
-		retrieve the next set of results.</p>")
-    @as("NextToken")
-    nextToken: option<nextToken>,
-    @ocaml.doc("<p>The list of anomaly detection models returned by the operation.</p>")
-    @as("AnomalyDetectors")
-    anomalyDetectors: option<anomalyDetectors>,
-  }
-  @module("@aws-sdk/client-monitoring") @new
-  external new: request => t = "DescribeAnomalyDetectorsCommand"
-  let make = (~dimensions=?, ~metricName=?, ~namespace=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({
-      dimensions: dimensions,
-      metricName: metricName,
-      namespace: namespace,
-      maxResults: maxResults,
-      nextToken: nextToken,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
@@ -2261,12 +2206,15 @@ module PutMetricAlarm = {
             </code>
 			| <code>arn:aws:ssm:<i>region</i>:<i>account-id</i>:opsitem:<i>severity</i>
             </code>
+			| <code>arn:aws:ssm-incidents::<i>account-id</i>:response-plan:<i>response-plan-name</i>
+            </code>
          </p>
 
 		       <p>Valid Values (for use with IAM roles):
 			<code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Stop/1.0</code> |
 				<code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Terminate/1.0</code> |
-				<code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Reboot/1.0</code>
+				<code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Reboot/1.0</code> |
+			<code>arn:aws:swf:<i>region</i>:<i>account-id</i>:action/actions/AWS_EC2.InstanceId.Recover/1.0</code>
          </p>")
     @as("AlarmActions")
     alarmActions: option<resourceList>,
@@ -2301,7 +2249,7 @@ module PutMetricAlarm = {
     @as("AlarmName")
     alarmName: alarmName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-monitoring") @new external new: request => t = "PutMetricAlarmCommand"
   let make = (
     ~comparisonOperator,
@@ -2463,6 +2411,233 @@ module GetMetricData = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module PutAnomalyDetector = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The metric math anomaly detector to be created.</p>
+		
+		       <p>When using <code>MetricMathAnomalyDetector</code>, you cannot include the following parameters in the same operation:</p>
+		
+		       <ul>
+            <li>
+               <p>
+                  <code>Dimensions</code>
+               </p>
+            </li>
+            <li>
+               <p>
+                  <code>MetricName</code>
+               </p>
+            </li>
+            <li>
+               <p>
+                  <code>Namespace</code>
+               </p>
+            </li>
+            <li>
+               <p>
+                  <code>Stat</code>
+               </p>
+            </li>
+            <li>
+               <p>the <code>SingleMetricAnomalyDetector</code> parameters of <code>PutAnomalyDetectorInput</code>
+               </p>
+            </li>
+         </ul>
+		
+		       <p>Instead, specify the metric math anomaly detector attributes
+			as part of the property <code>MetricMathAnomalyDetector</code>.</p>")
+    @as("MetricMathAnomalyDetector")
+    metricMathAnomalyDetector: option<metricMathAnomalyDetector>,
+    @ocaml.doc("<p>A single metric anomaly detector to be created.</p>
+		       <p>When using <code>SingleMetricAnomalyDetector</code>, 
+			you cannot include the following parameters in the same operation:</p>
+		
+		       <ul>
+            <li>
+               <p>
+                  <code>Dimensions</code>
+               </p>
+            </li>
+            <li>
+               <p>
+                  <code>MetricName</code>
+               </p>
+            </li>
+            <li>
+               <p>
+                  <code>Namespace</code>
+               </p>
+            </li>
+            <li>
+               <p>
+                  <code>Stat</code>
+               </p>
+            </li>
+            <li>
+               <p>the <code>MetricMatchAnomalyDetector</code> parameters of <code>PutAnomalyDetectorInput</code>
+               </p>
+            </li>
+         </ul>
+		
+		       <p>Instead, specify the single metric anomaly detector attributes
+			as part of the property <code>SingleMetricAnomalyDetector</code>.</p>")
+    @as("SingleMetricAnomalyDetector")
+    singleMetricAnomalyDetector: option<singleMetricAnomalyDetector>,
+    @ocaml.doc("<p>The configuration specifies details about how the 
+			anomaly detection model is to be trained, including 
+			time ranges to exclude when training and updating the model.
+			You can specify as many as 10 time ranges.</p>
+		       <p>The configuration can also include the time zone to use for 
+			the metric.</p>")
+    @as("Configuration")
+    configuration: option<anomalyDetectorConfiguration>,
+    @ocaml.doc("<p>The statistic to use for the metric and the anomaly detection model.</p>")
+    @as("Stat")
+    stat: option<anomalyDetectorMetricStat>,
+    @ocaml.doc("<p>The metric dimensions to create the anomaly detection model for.</p>")
+    @as("Dimensions")
+    dimensions: option<dimensions>,
+    @ocaml.doc("<p>The name of the metric to create the anomaly detection model for.</p>")
+    @as("MetricName")
+    metricName: option<metricName>,
+    @ocaml.doc("<p>The namespace of the metric to create the anomaly detection model for.</p>")
+    @as("Namespace")
+    namespace: option<namespace>,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-monitoring") @new
+  external new: request => t = "PutAnomalyDetectorCommand"
+  let make = (
+    ~metricMathAnomalyDetector=?,
+    ~singleMetricAnomalyDetector=?,
+    ~configuration=?,
+    ~stat=?,
+    ~dimensions=?,
+    ~metricName=?,
+    ~namespace=?,
+    (),
+  ) =>
+    new({
+      metricMathAnomalyDetector: metricMathAnomalyDetector,
+      singleMetricAnomalyDetector: singleMetricAnomalyDetector,
+      configuration: configuration,
+      stat: stat,
+      dimensions: dimensions,
+      metricName: metricName,
+      namespace: namespace,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module DeleteAnomalyDetector = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The metric math anomaly detector to be deleted.</p>
+		       <p>When using <code>MetricMathAnomalyDetector</code>, you cannot include following parameters in the same operation:</p>
+		
+		       <ul>
+            <li>
+               <p>
+                  <code>Dimensions</code>,</p>
+            </li>
+            <li>
+               <p>
+                  <code>MetricName</code>
+               </p>
+            </li>
+            <li>
+               <p>
+                  <code>Namespace</code>
+               </p>
+            </li>
+            <li>
+               <p>
+                  <code>Stat</code>
+               </p>
+            </li>
+            <li>
+               <p>the <code>SingleMetricAnomalyDetector</code> parameters of <code>DeleteAnomalyDetectorInput</code>
+               </p>
+            </li>
+         </ul>
+		
+		       <p>Instead, specify the metric math anomaly detector attributes as part of the
+			<code>MetricMathAnomalyDetector</code> property.</p>")
+    @as("MetricMathAnomalyDetector")
+    metricMathAnomalyDetector: option<metricMathAnomalyDetector>,
+    @ocaml.doc("<p>A single metric anomaly detector to be deleted.</p>
+		       <p>When using <code>SingleMetricAnomalyDetector</code>, 
+			you cannot include the following parameters in the same operation:</p>
+		
+		       <ul>
+            <li>
+               <p>
+                  <code>Dimensions</code>,</p>
+            </li>
+            <li>
+               <p>
+                  <code>MetricName</code>
+               </p>
+            </li>
+            <li>
+               <p>
+                  <code>Namespace</code>
+               </p>
+            </li>
+            <li>
+               <p>
+                  <code>Stat</code>
+               </p>
+            </li>
+            <li>
+               <p>the <code>MetricMathAnomalyDetector</code> parameters of <code>DeleteAnomalyDetectorInput</code>
+               </p>
+            </li>
+         </ul>
+		
+		       <p>Instead, specify the single metric anomaly detector attributes 
+			as part of the <code>SingleMetricAnomalyDetector</code> property.</p>")
+    @as("SingleMetricAnomalyDetector")
+    singleMetricAnomalyDetector: option<singleMetricAnomalyDetector>,
+    @ocaml.doc("<p>The statistic associated with the anomaly detection model to delete.</p>")
+    @as("Stat")
+    stat: option<anomalyDetectorMetricStat>,
+    @ocaml.doc(
+      "<p>The metric dimensions associated with the anomaly detection model to delete.</p>"
+    )
+    @as("Dimensions")
+    dimensions: option<dimensions>,
+    @ocaml.doc("<p>The metric name associated with the anomaly detection model to delete.</p>")
+    @as("MetricName")
+    metricName: option<metricName>,
+    @ocaml.doc("<p>The namespace associated with the anomaly detection model to delete.</p>")
+    @as("Namespace")
+    namespace: option<namespace>,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-monitoring") @new
+  external new: request => t = "DeleteAnomalyDetectorCommand"
+  let make = (
+    ~metricMathAnomalyDetector=?,
+    ~singleMetricAnomalyDetector=?,
+    ~stat=?,
+    ~dimensions=?,
+    ~metricName=?,
+    ~namespace=?,
+    (),
+  ) =>
+    new({
+      metricMathAnomalyDetector: metricMathAnomalyDetector,
+      singleMetricAnomalyDetector: singleMetricAnomalyDetector,
+      stat: stat,
+      dimensions: dimensions,
+      metricName: metricName,
+      namespace: namespace,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
 module DescribeAlarmsForMetric = {
   type t
   type request = {
@@ -2614,6 +2789,70 @@ module DescribeAlarms = {
       alarmTypes: alarmTypes,
       alarmNamePrefix: alarmNamePrefix,
       alarmNames: alarmNames,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module DescribeAnomalyDetectors = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The anomaly detector types to request when using <code>DescribeAnomalyDetectorsInput</code>.
+			If empty, defaults to <code>SINGLE_METRIC</code>.</p>")
+    @as("AnomalyDetectorTypes")
+    anomalyDetectorTypes: option<anomalyDetectorTypes>,
+    @ocaml.doc("<p>Limits the results to only the anomaly detection models that are associated with the
+			specified metric dimensions. If there are multiple metrics that have these dimensions
+			and have anomaly detection models associated, they're all returned.</p>")
+    @as("Dimensions")
+    dimensions: option<dimensions>,
+    @ocaml.doc("<p>Limits the results to only the anomaly detection models that are associated with the
+			specified metric name. If there are multiple metrics with this name in different
+			namespaces that have anomaly detection models, they're all returned.</p>")
+    @as("MetricName")
+    metricName: option<metricName>,
+    @ocaml.doc("<p>Limits the results to only the anomaly detection models that
+			are associated with the specified namespace.</p>")
+    @as("Namespace")
+    namespace: option<namespace>,
+    @ocaml.doc("<p>The maximum number of results to return in one operation. The maximum
+			value that you can specify is 100.</p>
+			      <p>To retrieve the remaining results, make another call with the returned 
+			<code>NextToken</code> value. </p>")
+    @as("MaxResults")
+    maxResults: option<maxReturnedResultsCount>,
+    @ocaml.doc(
+      "<p>Use the token returned by the previous operation to request the next page of results.</p>"
+    )
+    @as("NextToken")
+    nextToken: option<nextToken>,
+  }
+  type response = {
+    @ocaml.doc("<p>A token that you can use in a subsequent operation to 
+		retrieve the next set of results.</p>")
+    @as("NextToken")
+    nextToken: option<nextToken>,
+    @ocaml.doc("<p>The list of anomaly detection models returned by the operation.</p>")
+    @as("AnomalyDetectors")
+    anomalyDetectors: option<anomalyDetectors>,
+  }
+  @module("@aws-sdk/client-monitoring") @new
+  external new: request => t = "DescribeAnomalyDetectorsCommand"
+  let make = (
+    ~anomalyDetectorTypes=?,
+    ~dimensions=?,
+    ~metricName=?,
+    ~namespace=?,
+    ~maxResults=?,
+    ~nextToken=?,
+    (),
+  ) =>
+    new({
+      anomalyDetectorTypes: anomalyDetectorTypes,
+      dimensions: dimensions,
+      metricName: metricName,
+      namespace: namespace,
+      maxResults: maxResults,
+      nextToken: nextToken,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

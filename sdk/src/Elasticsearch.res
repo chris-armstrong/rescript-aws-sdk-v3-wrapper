@@ -34,6 +34,7 @@ type upgradeStatus = [
 type upgradeName = string
 type updateTimestamp = Js.Date.t
 type uintValue = int
+type totalNumberOfStages = int
 @ocaml.doc(
   "<p>Specifies the unit of a maintenance schedule duration. Valid value is HOUR. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information.</p>"
 )
@@ -131,6 +132,13 @@ type packageName = string
 type packageID = string
 type packageDescription = string
 type ownerId = string
+@ocaml.doc("<p>The overall status value of the domain configuration change.</p>")
+type overallChangeStatus = [
+  | @as("FAILED") #FAILED
+  | @as("COMPLETED") #COMPLETED
+  | @as("PROCESSING") #PROCESSING
+  | @as("PENDING") #PENDING
+]
 type outboundCrossClusterSearchConnectionStatusCode = [
   | @as("DELETED") #DELETED
   | @as("DELETING") #DELETING
@@ -161,6 +169,7 @@ type nextToken = string
       Minimum number of Instances that can be instantiated for given InstanceType.
     </p>")
 type minimumInstanceCount = int
+type message = string
 @ocaml.doc("<p>
       Maximum number of Instances that can be instantiated for given InstanceType.
     </p>")
@@ -205,6 +214,7 @@ type identityPoolId = string
 type guid = string
 type errorType = string
 type errorMessage = string
+type engineType = [@as("Elasticsearch") #Elasticsearch | @as("OpenSearch") #OpenSearch]
 type elasticsearchVersionString = string
 type eswarmPartitionInstanceType = [
   | @as("ultrawarm1.large.elasticsearch") #Ultrawarm1_Large_Elasticsearch
@@ -274,6 +284,7 @@ type espartitionInstanceType = [
   "<p> Integer to specify the value of a maintenance schedule duration. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information.</p>"
 )
 type durationValue = float
+type dryRun = bool
 type double = float
 type domainPackageStatus = [
   | @as("DISSOCIATION_FAILED") #DISSOCIATION_FAILED
@@ -288,12 +299,15 @@ type domainNameFqdn = string
 )
 type domainName = string
 @ocaml.doc("<p>Unique identifier for an Elasticsearch domain.</p>") type domainId = string
+type disableTimestamp = Js.Date.t
+type description = string
 type describePackagesFilterValue = string
 type describePackagesFilterName = [
   | @as("PackageStatus") #PackageStatus
   | @as("PackageName") #PackageName
   | @as("PackageID") #PackageID
 ]
+type deploymentType = string
 type deploymentStatus = [
   | @as("ELIGIBLE") #ELIGIBLE
   | @as("NOT_ELIGIBLE") #NOT_ELIGIBLE
@@ -309,6 +323,8 @@ type connectionAlias = string
 type commitMessage = string
 @ocaml.doc("<p>ARN of the Cloudwatch log group to which log needs to be published.</p>")
 type cloudWatchLogsLogGroupArn = string
+type changeProgressStageStatus = string
+type changeProgressStageName = string
 type boolean_ = bool
 type backendRole = string
 @ocaml.doc("<p>Specifies Auto-Tune type. Valid value is SCHEDULED_ACTION. </p>")
@@ -597,6 +613,21 @@ type duration = {
   @as("Value")
   value: option<durationValue>,
 }
+type dryRunResults = {
+  @ocaml.doc("<p>Contains an optional message associated with the DryRunResults.</p>")
+  @as("Message")
+  message: option<message>,
+  @ocaml.doc("<p>
+            Specifies the deployment mechanism through which the update shall be applied on the domain.
+            Possible responses are
+            <code>Blue/Green</code> (The update will require a blue/green deployment.)
+            <code>DynamicUpdate</code> (The update can be applied in-place without a Blue/Green deployment required.)
+            <code>Undetermined</code> (The domain is undergoing an update which needs to complete before the deployment type can be predicted.)
+            <code>None</code> (The configuration change matches the current configuration and will not result in any update.)
+        </p>")
+  @as("DeploymentType")
+  deploymentType: option<deploymentType>,
+}
 @ocaml.doc("<p>A list of Elasticsearch domain names.</p>") type domainNameList = array<domainName>
 type domainInformation = {
   @as("Region") region: option<region>,
@@ -604,6 +635,8 @@ type domainInformation = {
   @as("OwnerId") ownerId: option<ownerId>,
 }
 type domainInfo = {
+  @ocaml.doc("<p> Specifies the <code>EngineType</code> of the domain.</p>") @as("EngineType")
+  engineType: option<engineType>,
   @ocaml.doc("<p> Specifies the <code>DomainName</code>.</p>") @as("DomainName")
   domainName: option<domainName>,
 }
@@ -634,9 +667,9 @@ type domainEndpointOptions = {
   enforceHTTPS: option<boolean_>,
 }
 type describePackagesFilterValues = array<describePackagesFilterValue>
-@ocaml.doc("<p>Specifies settings for cold storage.</p>")
+@ocaml.doc("<p>Specifies the configuration for cold storage options such as enabled</p>")
 type coldStorageOptions = {
-  @ocaml.doc("<p>True to enable cold storage for an Elasticsearch domain.</p>") @as("Enabled")
+  @ocaml.doc("<p>Enable cold storage option. Accepted values true or false</p>") @as("Enabled")
   enabled: boolean_,
 }
 @ocaml.doc(
@@ -657,6 +690,28 @@ type cognitoOptions = {
   @ocaml.doc("<p>Specifies the option to enable Cognito for Kibana authentication.</p>")
   @as("Enabled")
   enabled: option<boolean_>,
+}
+@ocaml.doc("<p>A progress stage details of a specific domain configuration change.</p>")
+type changeProgressStage = {
+  @ocaml.doc("<p>The last updated timestamp of the progress stage.</p>") @as("LastUpdated")
+  lastUpdated: option<lastUpdated>,
+  @ocaml.doc("<p>The description of the progress stage.</p>") @as("Description")
+  description: option<description>,
+  @ocaml.doc("<p>The overall status of a specific progress stage.</p>") @as("Status")
+  status: option<changeProgressStageStatus>,
+  @ocaml.doc("<p>The name of the specific progress stage.</p>") @as("Name")
+  name: option<changeProgressStageName>,
+}
+@ocaml.doc("<p>Specifies change details of the domain configuration change.</p>")
+type changeProgressDetails = {
+  @ocaml.doc("<p>Contains an optional message associated with the domain configuration change.</p>")
+  @as("Message")
+  message: option<message>,
+  @ocaml.doc(
+    "<p>The unique change identifier associated with a specific domain configuration change.</p>"
+  )
+  @as("ChangeId")
+  changeId: option<guid>,
 }
 @ocaml.doc("<p>Provides the current status of the Auto-Tune options. </p>")
 type autoTuneStatus = {
@@ -977,9 +1032,7 @@ type elasticsearchVersionStatus = {
   "<p>Specifies the configuration for the domain cluster, such as the type and number of instances.</p>"
 )
 type elasticsearchClusterConfig = {
-  @ocaml.doc(
-    "<p>Specifies the <code>ColdStorageOptions</code> configuration for an Elasticsearch domain.</p>"
-  )
+  @ocaml.doc("<p>Specifies the <code>ColdStorageOptions</code> config for Elasticsearch Domain</p>")
   @as("ColdStorageOptions")
   coldStorageOptions: option<coldStorageOptions>,
   @ocaml.doc("<p>The number of warm nodes in the cluster.</p>") @as("WarmCount")
@@ -1103,6 +1156,8 @@ type cognitoOptionsStatus = {
   @as("Options")
   options: cognitoOptions,
 }
+@ocaml.doc("<p>The list of progress stages of a specific domain configuration change.</p>")
+type changeProgressStageList = array<changeProgressStage>
 @ocaml.doc(
   "<p>Specifies Auto-Tune maitenance schedule. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information.</p>"
 )
@@ -1333,6 +1388,40 @@ type domainPackageDetailsList = array<domainPackageDetails>
 )
 type describePackagesFilterList = array<describePackagesFilter>
 type compatibleElasticsearchVersionsList = array<compatibleVersionsMap>
+@ocaml.doc("<p>The progress details of a specific domain configuration change.</p>")
+type changeProgressStatusDetails = {
+  @ocaml.doc(
+    "<p>The specific stages that the domain is going through to perform the configuration change.</p>"
+  )
+  @as("ChangeProgressStages")
+  changeProgressStages: option<changeProgressStageList>,
+  @ocaml.doc("<p>The total number of stages required for the configuration change.</p>")
+  @as("TotalNumberOfStages")
+  totalNumberOfStages: option<totalNumberOfStages>,
+  @ocaml.doc(
+    "<p>The list of properties involved in the domain configuration change that are completed.</p>"
+  )
+  @as("CompletedProperties")
+  completedProperties: option<stringList>,
+  @ocaml.doc(
+    "<p>The list of properties involved in the domain configuration change that are still in pending.</p>"
+  )
+  @as("PendingProperties")
+  pendingProperties: option<stringList>,
+  @ocaml.doc(
+    "<p>The overall status of the domain configuration change. This field can take the following values: <code>PENDING</code>, <code>PROCESSING</code>, <code>COMPLETED</code> and <code>FAILED</code></p>"
+  )
+  @as("Status")
+  status: option<overallChangeStatus>,
+  @ocaml.doc("<p>The time at which the configuration change is made on the domain.</p>")
+  @as("StartTime")
+  startTime: option<updateTimestamp>,
+  @ocaml.doc(
+    "<p>The unique change identifier associated with a specific domain configuration change.</p>"
+  )
+  @as("ChangeId")
+  changeId: option<guid>,
+}
 type autoTuneMaintenanceScheduleList = array<autoTuneMaintenanceSchedule>
 @ocaml.doc("<p>Specifies Auto-Tune type and Auto-Tune action details. </p>")
 type autoTune = {
@@ -1349,6 +1438,11 @@ type autoTune = {
   "<p>Specifies the advanced security configuration: whether advanced security is enabled, whether the internal database option is enabled, master username and password (if internal database is enabled), and master user ARN (if IAM is enabled).</p>"
 )
 type advancedSecurityOptionsInput = {
+  @ocaml.doc(
+    "<p>True if Anonymous auth is enabled. Anonymous auth can be enabled only when AdvancedSecurity is enabled on existing domains.</p>"
+  )
+  @as("AnonymousAuthEnabled")
+  anonymousAuthEnabled: option<boolean_>,
   @ocaml.doc("<p>Specifies the SAML application configuration for the domain.</p>")
   @as("SAMLOptions")
   samloptions: option<samloptionsInput>,
@@ -1365,6 +1459,14 @@ type advancedSecurityOptionsInput = {
   "<p>Specifies the advanced security configuration: whether advanced security is enabled, whether the internal database option is enabled.</p>"
 )
 type advancedSecurityOptions = {
+  @ocaml.doc(
+    "<p>True if Anonymous auth is enabled. Anonymous auth can be enabled only when AdvancedSecurity is enabled on existing domains.</p>"
+  )
+  @as("AnonymousAuthEnabled")
+  anonymousAuthEnabled: option<boolean_>,
+  @ocaml.doc("<p>Specifies the Anonymous Auth Disable Date when Anonymous Auth is enabled.</p>")
+  @as("AnonymousAuthDisableDate")
+  anonymousAuthDisableDate: option<disableTimestamp>,
   @ocaml.doc("<p>Describes the SAML application configured for a domain.</p>") @as("SAMLOptions")
   samloptions: option<samloptionsOutput>,
   @ocaml.doc("<p>True if the internal user database is enabled.</p>")
@@ -1419,6 +1521,9 @@ type reservedElasticsearchInstanceOfferingList = array<reservedElasticsearchInst
 type reservedElasticsearchInstanceList = array<reservedElasticsearchInstance>
 @ocaml.doc("<p>The current status of an Elasticsearch domain.</p>")
 type elasticsearchDomainStatus = {
+  @ocaml.doc("<p>Specifies change details of the domain configuration change.</p>")
+  @as("ChangeProgressDetails")
+  changeProgressDetails: option<changeProgressDetails>,
   @ocaml.doc("<p>The current status of the Elasticsearch domain's Auto-Tune options.</p>")
   @as("AutoTuneOptions")
   autoTuneOptions: option<autoTuneOptionsOutput>,
@@ -1605,6 +1710,9 @@ type limits = {
 }
 @ocaml.doc("<p>The configuration of an Elasticsearch domain.</p>")
 type elasticsearchDomainConfig = {
+  @ocaml.doc("<p>Specifies change details of the domain configuration change.</p>")
+  @as("ChangeProgressDetails")
+  changeProgressDetails: option<changeProgressDetails>,
   @ocaml.doc("<p>Specifies <code>AutoTuneOptions</code> for the domain. </p>")
   @as("AutoTuneOptions")
   autoTuneOptions: option<autoTuneOptionsStatus>,
@@ -1678,53 +1786,6 @@ type limitsByRole = Js.Dict.t<limits>
       <p>The endpoint for configuration service requests is region-specific: es.<i>region</i>.amazonaws.com.
          For example, es.us-east-1.amazonaws.com. For a current list of supported regions and endpoints,
          see <a href=\"http://docs.aws.amazon.com/general/latest/gr/rande.html#elasticsearch-service-regions\" target=\"_blank\">Regions and Endpoints</a>.</p>")
-module UpgradeElasticsearchDomain = {
-  type t
-  @ocaml.doc("<p>
-      Container for request parameters to
-      <code>
-        <a>UpgradeElasticsearchDomain</a>
-      </code>
-      operation.
-    </p>")
-  type request = {
-    @ocaml.doc("<p>
-      This flag, when set to True, indicates that an Upgrade Eligibility Check needs to be performed.
-      This will not actually perform the Upgrade.
-    </p>")
-    @as("PerformCheckOnly")
-    performCheckOnly: option<boolean_>,
-    @ocaml.doc("<p>The version of Elasticsearch that you intend to upgrade the domain to.</p>")
-    @as("TargetVersion")
-    targetVersion: elasticsearchVersionString,
-    @as("DomainName") domainName: domainName,
-  }
-  @ocaml.doc("<p>
-      Container for response returned by
-      <code>
-        <a>UpgradeElasticsearchDomain</a>
-      </code>
-      operation.
-    </p>")
-  type response = {
-    @ocaml.doc("<p>
-      This flag, when set to True, indicates that an Upgrade Eligibility Check needs to be performed.
-      This will not actually perform the Upgrade.
-    </p>")
-    @as("PerformCheckOnly")
-    performCheckOnly: option<boolean_>,
-    @ocaml.doc("<p>The version of Elasticsearch that you intend to upgrade the domain to.</p>")
-    @as("TargetVersion")
-    targetVersion: option<elasticsearchVersionString>,
-    @as("DomainName") domainName: option<domainName>,
-  }
-  @module("@aws-sdk/client-es") @new
-  external new: request => t = "UpgradeElasticsearchDomainCommand"
-  let make = (~targetVersion, ~domainName, ~performCheckOnly=?, ()) =>
-    new({performCheckOnly: performCheckOnly, targetVersion: targetVersion, domainName: domainName})
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
 module PurchaseReservedElasticsearchInstanceOffering = {
   type t
   @ocaml.doc(
@@ -1815,11 +1876,60 @@ module GetUpgradeStatus = {
 
 module DeleteElasticsearchServiceRole = {
   type t
-
+  type request = {.}
+  type response = {.}
   @module("@aws-sdk/client-es") @new
-  external new: unit => t = "DeleteElasticsearchServiceRoleCommand"
-  let make = () => new()
+  external new: request => t = "DeleteElasticsearchServiceRoleCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module UpgradeElasticsearchDomain = {
+  type t
+  @ocaml.doc("<p>
+      Container for request parameters to
+      <code>
+        <a>UpgradeElasticsearchDomain</a>
+      </code>
+      operation.
+    </p>")
+  type request = {
+    @ocaml.doc("<p>
+      This flag, when set to True, indicates that an Upgrade Eligibility Check needs to be performed.
+      This will not actually perform the Upgrade.
+    </p>")
+    @as("PerformCheckOnly")
+    performCheckOnly: option<boolean_>,
+    @ocaml.doc("<p>The version of Elasticsearch that you intend to upgrade the domain to.</p>")
+    @as("TargetVersion")
+    targetVersion: elasticsearchVersionString,
+    @as("DomainName") domainName: domainName,
+  }
+  @ocaml.doc("<p>
+      Container for response returned by
+      <code>
+        <a>UpgradeElasticsearchDomain</a>
+      </code>
+      operation.
+    </p>")
+  type response = {
+    @as("ChangeProgressDetails") changeProgressDetails: option<changeProgressDetails>,
+    @ocaml.doc("<p>
+      This flag, when set to True, indicates that an Upgrade Eligibility Check needs to be performed.
+      This will not actually perform the Upgrade.
+    </p>")
+    @as("PerformCheckOnly")
+    performCheckOnly: option<boolean_>,
+    @ocaml.doc("<p>The version of Elasticsearch that you intend to upgrade the domain to.</p>")
+    @as("TargetVersion")
+    targetVersion: option<elasticsearchVersionString>,
+    @as("DomainName") domainName: option<domainName>,
+  }
+  @module("@aws-sdk/client-es") @new
+  external new: request => t = "UpgradeElasticsearchDomainCommand"
+  let make = (~targetVersion, ~domainName, ~performCheckOnly=?, ()) =>
+    new({performCheckOnly: performCheckOnly, targetVersion: targetVersion, domainName: domainName})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartElasticsearchServiceSoftwareUpdate = {
@@ -1865,7 +1975,7 @@ module RemoveTags = {
     @as("ARN")
     arn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-es") @new external new: request => t = "RemoveTagsCommand"
   let make = (~tagKeys, ~arn, ()) => new({tagKeys: tagKeys, arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -2176,16 +2286,25 @@ module ListTags = {
 
 module ListDomainNames = {
   type t
-
   @ocaml.doc(
-    "<p>The result of a <code>ListDomainNames</code> operation. Contains the names of all Elasticsearch domains owned by this account.</p>"
+    "<p> Container for the parameters to the <code><a>ListDomainNames</a></code> operation.</p>"
+  )
+  type request = {
+    @ocaml.doc(
+      "<p> Optional parameter to filter the output by domain engine type. Acceptable values are 'Elasticsearch' and 'OpenSearch'. </p>"
+    )
+    @as("EngineType")
+    engineType: option<engineType>,
+  }
+  @ocaml.doc(
+    "<p>The result of a <code>ListDomainNames</code> operation. Contains the names of all domains owned by this account and their respective engine types.</p>"
   )
   type response = {
-    @ocaml.doc("<p>List of Elasticsearch domain names.</p>") @as("DomainNames")
+    @ocaml.doc("<p>List of domain names and respective engine types.</p>") @as("DomainNames")
     domainNames: option<domainInfoList>,
   }
-  @module("@aws-sdk/client-es") @new external new: unit => t = "ListDomainNamesCommand"
-  let make = () => new()
+  @module("@aws-sdk/client-es") @new external new: request => t = "ListDomainNamesCommand"
+  let make = (~engineType=?, ()) => new({engineType: engineType})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -2445,7 +2564,7 @@ module AddTags = {
     @as("ARN")
     arn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-es") @new external new: request => t = "AddTagsCommand"
   let make = (~tagList_, ~arn, ()) => new({tagList_: tagList_, arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -2735,6 +2854,36 @@ module DescribeInboundCrossClusterSearchConnections = {
   external new: request => t = "DescribeInboundCrossClusterSearchConnectionsCommand"
   let make = (~nextToken=?, ~maxResults=?, ~filters=?, ()) =>
     new({nextToken: nextToken, maxResults: maxResults, filters: filters})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module DescribeDomainChangeProgress = {
+  type t
+  @ocaml.doc("<p>Container for the parameters to the <code>DescribeDomainChangeProgress</code> operation. Specifies the
+        domain name and optional change specific identity for which you want progress information.
+      </p>")
+  type request = {
+    @ocaml.doc("<p>The specific change ID for which you want to get progress information. This is an optional parameter.
+        If omitted, the service returns information about the most recent configuration change.
+      </p>")
+    @as("ChangeId")
+    changeId: option<guid>,
+    @ocaml.doc("<p>The domain you want to get the progress information about.</p>")
+    @as("DomainName")
+    domainName: domainName,
+  }
+  @ocaml.doc("<p>The result of a <code>DescribeDomainChangeProgress</code> request. Contains the progress information of
+        the requested domain change.
+      </p>")
+  type response = {
+    @ocaml.doc("<p>Progress information for the configuration change that is requested in the <code>DescribeDomainChangeProgress</code> request.
+      </p>")
+    @as("ChangeProgressStatus")
+    changeProgressStatus: option<changeProgressStatusDetails>,
+  }
+  @module("@aws-sdk/client-es") @new
+  external new: request => t = "DescribeDomainChangeProgressCommand"
+  let make = (~domainName, ~changeId=?, ()) => new({changeId: changeId, domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -3100,6 +3249,13 @@ module UpdateElasticsearchDomainConfig = {
     "<p>Container for the parameters to the <code><a>UpdateElasticsearchDomain</a></code> operation. Specifies the type and number of instances in the domain cluster.</p>"
   )
   type request = {
+    @ocaml.doc("<p>
+           This flag, when set to True, specifies whether the <code>UpdateElasticsearchDomain</code> request should return the results of validation checks without actually applying the change.
+           This flag, when set to True, specifies the deployment mechanism through which the update shall be applied on the domain.
+           This will not actually perform the Update.
+       </p>")
+    @as("DryRun")
+    dryRun: option<dryRun>,
     @ocaml.doc("<p>Specifies Auto-Tune options.</p>") @as("AutoTuneOptions")
     autoTuneOptions: option<autoTuneOptions>,
     @ocaml.doc("<p>Specifies the Encryption At Rest Options.</p>") @as("EncryptionAtRestOptions")
@@ -3154,6 +3310,8 @@ module UpdateElasticsearchDomainConfig = {
     "<p>The result of an <code>UpdateElasticsearchDomain</code> request. Contains the status of the Elasticsearch domain being updated.</p>"
   )
   type response = {
+    @ocaml.doc("<p>Contains result of DryRun. </p>") @as("DryRunResults")
+    dryRunResults: option<dryRunResults>,
     @ocaml.doc("<p>The status of the updated Elasticsearch domain. </p>") @as("DomainConfig")
     domainConfig: elasticsearchDomainConfig,
   }
@@ -3161,6 +3319,7 @@ module UpdateElasticsearchDomainConfig = {
   external new: request => t = "UpdateElasticsearchDomainConfigCommand"
   let make = (
     ~domainName,
+    ~dryRun=?,
     ~autoTuneOptions=?,
     ~encryptionAtRestOptions=?,
     ~nodeToNodeEncryptionOptions=?,
@@ -3177,6 +3336,7 @@ module UpdateElasticsearchDomainConfig = {
     (),
   ) =>
     new({
+      dryRun: dryRun,
       autoTuneOptions: autoTuneOptions,
       encryptionAtRestOptions: encryptionAtRestOptions,
       nodeToNodeEncryptionOptions: nodeToNodeEncryptionOptions,

@@ -268,7 +268,7 @@ type savingsPlanOfferingRatesList = array<savingsPlanOfferingRate>
 module DeleteQueuedSavingsPlan = {
   type t
   type request = {@ocaml.doc("<p>The ID of the Savings Plan.</p>") savingsPlanId: savingsPlanId}
-
+  type response = {.}
   @module("@aws-sdk/client-savingsplans") @new
   external new: request => t = "DeleteQueuedSavingsPlanCommand"
   let make = (~savingsPlanId, ()) => new({savingsPlanId: savingsPlanId})
@@ -282,7 +282,7 @@ module UntagResource = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the resource.</p>")
     resourceArn: savingsPlanArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-savingsplans") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -298,7 +298,7 @@ module TagResource = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the resource.</p>")
     resourceArn: savingsPlanArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-savingsplans") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -333,7 +333,7 @@ module CreateSavingsPlan = {
        This parameter is supported only if the payment option is <code>Partial Upfront</code>.</p>")
     upfrontPaymentAmount: option<amount>,
     @ocaml.doc("<p>The hourly commitment, in USD. This is a value between 0.001 and 1 million. You cannot specify more
-        than three digits after the decimal point.</p>")
+        than five digits after the decimal point.</p>")
     commitment: amount,
     @ocaml.doc("<p>The ID of the offering.</p>") savingsPlanOfferingId: savingsPlanOfferingId,
   }

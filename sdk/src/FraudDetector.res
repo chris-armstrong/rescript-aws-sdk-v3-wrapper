@@ -17,15 +17,17 @@ type baseLong = float
 type wholeNumberVersionString = string
 type variableValue = string
 type variableName = string
+type utcTimestampISO8601 = string
 type time = string
 type tagValue = string
 type tagKey = string
 type string_ = string
+type sensitiveString = string
 type sageMakerEndpointIdentifier = string
 type s3BucketLocation = string
 type ruleExpression = string
-type nonEmptyString = string
 type modelsMaxPageSize = int
+type modelInputTemplate = string
 type modelIdentifier = string
 type labelsMaxResults = int
 type identifier = string
@@ -33,15 +35,24 @@ type iamRoleArn = string
 type fraudDetectorArn = string
 type floatVersionString = string
 type float_ = float
+type filterString = string
 type eventTypesMaxResults = int
 type entityTypesMaxResults = int
+type entityRestrictedString = string
 type description = string
 type contentType = string
 type blob = NodeJs.Buffer.t
 type batchPredictionsMaxPageSize = int
+type batchImportsMaxPageSize = int
+type attributeValue = string
+type attributeKey = string
 type variablesMaxResults = int
 type useEventVariables = bool
-type trainingDataSourceEnum = [@as("EXTERNAL_EVENTS") #EXTERNAL_EVENTS]
+type unlabeledEventsTreatment = [@as("LEGIT") #LEGIT | @as("FRAUD") #FRAUD | @as("IGNORE") #IGNORE]
+type trainingDataSourceEnum = [
+  | @as("INGESTED_EVENTS") #INGESTED_EVENTS
+  | @as("EXTERNAL_EVENTS") #EXTERNAL_EVENTS
+]
 type tagsMaxResults = int
 type rulesMaxResults = int
 type ruleExecutionMode = [@as("FIRST_MATCHED") #FIRST_MATCHED | @as("ALL_MATCHED") #ALL_MATCHED]
@@ -51,7 +62,10 @@ type modelVersionStatus = [
   | @as("INACTIVE") #INACTIVE
   | @as("ACTIVE") #ACTIVE
 ]
-type modelTypeEnum = [@as("ONLINE_FRAUD_INSIGHTS") #ONLINE_FRAUD_INSIGHTS]
+type modelTypeEnum = [
+  | @as("TRANSACTION_FRAUD_INSIGHTS") #TRANSACTION_FRAUD_INSIGHTS
+  | @as("ONLINE_FRAUD_INSIGHTS") #ONLINE_FRAUD_INSIGHTS
+]
 type modelSource = [@as("SAGEMAKER") #SAGEMAKER]
 type modelOutputDataFormat = [
   | @as("APPLICATION_JSONLINES") #APPLICATION_JSONLINES
@@ -59,11 +73,14 @@ type modelOutputDataFormat = [
 ]
 type modelInputDataFormat = [@as("APPLICATION_JSON") #APPLICATION_JSON | @as("TEXT_CSV") #TEXT_CSV]
 type modelEndpointStatus = [@as("DISSOCIATED") #DISSOCIATED | @as("ASSOCIATED") #ASSOCIATED]
+type long = float
 type language = [@as("DETECTORPL") #DETECTORPL]
 type kmsEncryptionKeyArn = string
 type integer2 = int
 type integer_ = int
 type externalModelsMaxResults = int
+type eventPredictionsMaxResults = int
+type eventIngestion = [@as("DISABLED") #DISABLED | @as("ENABLED") #ENABLED]
 type detectorsMaxResults = int
 type detectorVersionStatus = [
   | @as("INACTIVE") #INACTIVE
@@ -71,6 +88,7 @@ type detectorVersionStatus = [
   | @as("DRAFT") #DRAFT
 ]
 type detectorVersionMaxResults = int
+type deleteAuditHistory = bool
 type dataType = [
   | @as("BOOLEAN") #BOOLEAN
   | @as("FLOAT") #FLOAT
@@ -82,6 +100,7 @@ type dataSource = [
   | @as("MODEL_SCORE") #MODEL_SCORE
   | @as("EVENT") #EVENT
 ]
+type boolean_ = bool
 type asyncJobStatus = [
   | @as("FAILED") #FAILED
   | @as("COMPLETE") #COMPLETE
@@ -91,6 +110,31 @@ type asyncJobStatus = [
   | @as("IN_PROGRESS_INITIALIZING") #IN_PROGRESS_INITIALIZING
 ]
 type tagKeyList = array<tagKey>
+@ocaml.doc("<p>
+The details of the event variable's impact on the prediction score.
+</p>")
+type variableImpactExplanation = {
+  @ocaml.doc("<p>
+    The raw, uninterpreted value represented as log-odds of the fraud. These values are usually between -10 to +10, but range from - infinity to + infinity.</p>
+         <ul>
+            <li>
+               <p>A positive value indicates that the variable drove the risk score up.</p>
+            </li>
+            <li>
+               <p>A negative value indicates that the variable drove the risk score down.</p>
+            </li>
+         </ul>")
+  logOddsImpact: option<float_>,
+  @ocaml.doc("<p>
+    The event variable's relative impact in terms of magnitude on the prediction scores. 
+    The relative impact values consist of a numerical rating (0-5, 5 being the highest) and direction (increased/decreased) impact of the fraud risk.
+</p>")
+  relativeImpact: option<string_>,
+  @ocaml.doc("<p>
+The event variable name.
+</p>")
+  eventVariableName: option<string_>,
+}
 @ocaml.doc("<p>A variable in the list of variables for the batch create variable request.</p>")
 type variableEntry = {
   @ocaml.doc("<p>The type of the variable. For more information see <a href=\"https://docs.aws.amazon.com/frauddetector/latest/ug/create-a-variable.html#variable-types\">Variable types</a>.</p>
@@ -132,6 +176,19 @@ type rule = {
   @ocaml.doc("<p>The rule ID.</p>") ruleId: identifier,
   @ocaml.doc("<p>The detector for which the rule is associated.</p>") detectorId: identifier,
 }
+@ocaml.doc("<p>
+The time period for when the predictions were generated.
+</p>")
+type predictionTimeRange = {
+  @ocaml.doc("<p>
+The end time of the time period for when the predictions were generated.
+</p>")
+  endTime: time,
+  @ocaml.doc("<p>
+The start time of the time period for when the predictions were generated.
+</p>")
+  startTime: time,
+}
 @ocaml.doc("<p>The outcome.</p>")
 type outcome = {
   @ocaml.doc("<p>The outcome ARN.</p>") arn: option<fraudDetectorArn>,
@@ -146,7 +203,7 @@ type nameList = array<string_>
 @ocaml.doc("<p>The model version.</p>")
 type modelVersion = {
   @ocaml.doc("<p>The model version ARN.</p>") arn: option<fraudDetectorArn>,
-  @ocaml.doc("<p>The model version number.</p>") modelVersionNumber: nonEmptyString,
+  @ocaml.doc("<p>The model version number.</p>") modelVersionNumber: floatVersionString,
   @ocaml.doc("<p>The model type.</p>") modelType: modelTypeEnum,
   @ocaml.doc("<p>The model ID.</p>") modelId: modelIdentifier,
 }
@@ -156,11 +213,11 @@ type modelInputConfiguration = {
   @ocaml.doc("<p> Template for constructing the CSV input-data sent to SageMaker. At event-evaluation,
             the placeholders for variable-names in the template will be replaced with the variable
             values before being sent to SageMaker. </p>")
-  csvInputTemplate: option<string_>,
+  csvInputTemplate: option<modelInputTemplate>,
   @ocaml.doc("<p> Template for constructing the JSON input-data sent to SageMaker. At event-evaluation,
             the placeholders for variable names in the template will be replaced with the variable
             values before being sent to SageMaker. </p>")
-  jsonInputTemplate: option<string_>,
+  jsonInputTemplate: option<modelInputTemplate>,
   @ocaml.doc("<p>The event variables.</p>") useEventVariables: useEventVariables,
   @ocaml.doc("<p> The format of the model input configuration. The format differs depending on if it is
             passed through to SageMaker or constructed by Amazon Fraud Detector.</p>")
@@ -205,6 +262,16 @@ type metricDataPoint = {
   )
   fpr: option<float_>,
 }
+type mapOfStrings = Js.Dict.t<string_>
+@ocaml.doc("<p>The log odds metric details.</p>")
+type logOddsMetric = {
+  @ocaml.doc(
+    "<p>The relative importance of the variable. For more information, see <a href=\"https://docs.aws.amazon.com/frauddetector/latest/ug/model-variable-importance.html\">Model variable importance</a>.</p>"
+  )
+  variableImportance: float_,
+  @ocaml.doc("<p>The type of variable.</p>") variableType: string_,
+  @ocaml.doc("<p>The name of the variable.</p>") variableName: string_,
+}
 type listOfStrings = array<string_>
 @ocaml.doc("<p>The label details.</p>")
 type label = {
@@ -219,6 +286,30 @@ type kmskey = {
   @ocaml.doc("<p>The encryption key ARN.</p>") kmsEncryptionKeyArn: option<kmsEncryptionKeyArn>,
 }
 type jsonKeyToVariableMap = Js.Dict.t<string_>
+@ocaml.doc("<p>The start and stop time of the ingested events.</p>")
+type ingestedEventsTimeWindow = {
+  @ocaml.doc("<p>Timestamp of the final ingested event.</p>") endTime: time,
+  @ocaml.doc("<p>Timestamp of the first ingensted event.</p>") startTime: time,
+}
+@ocaml.doc("<p>Data about the stored events.</p>")
+type ingestedEventStatistics = {
+  @ocaml.doc("<p>Timestamp of when the stored event was last updated.    
+      </p>")
+  lastUpdatedTime: option<time>,
+  @ocaml.doc("<p>The newest stored event.</p>") mostRecentEvent: option<time>,
+  @ocaml.doc("<p>The oldest stored event.</p>") leastRecentEvent: option<time>,
+  @ocaml.doc("<p>The total size of the stored events.</p>") eventDataSizeInBytes: option<long>,
+  @ocaml.doc("<p>The number of stored events.</p>") numberOfEvents: option<long>,
+}
+@ocaml.doc("<p>
+A conditional statement for filtering a list of past predictions.  
+</p>")
+type filterCondition = {
+  @ocaml.doc("<p>
+A statement containing a resource property and a value to specify filter condition. 
+</p>")
+  value: option<filterString>,
+}
 @ocaml.doc("<p>The message details.</p>")
 type fileValidationMessage = {
   @ocaml.doc("<p>The message type.</p>") @as("type") type_: option<string_>,
@@ -233,6 +324,12 @@ type fieldValidationMessage = {
   @ocaml.doc("<p>The message ID.</p>") identifier: option<string_>,
   @ocaml.doc("<p>The field name.</p>") fieldName: option<string_>,
 }
+@ocaml.doc("<p>The Amazon SageMaker model.</p>")
+type externalModelSummary = {
+  @ocaml.doc("<p>The source of the model.</p>") modelSource: option<modelSource>,
+  @ocaml.doc("<p>The endpoint of the Amazon SageMaker model.</p>") modelEndpoint: option<string_>,
+}
+type externalModelPredictionMap = Js.Dict.t<string_>
 @ocaml.doc("<p>Details for the external events data used for model version training.</p>")
 type externalEventsDetail = {
   @ocaml.doc(
@@ -241,7 +338,54 @@ type externalEventsDetail = {
   dataAccessRoleArn: iamRoleArn,
   @ocaml.doc("<p>The Amazon S3 bucket location for the data.</p>") dataLocation: s3BucketLocation,
 }
+@ocaml.doc("<p>
+Information about the summary of an event variable that was evaluated for generating prediction.
+</p>")
+type eventVariableSummary = {
+  @ocaml.doc("<p>
+The event variable source. 
+</p>")
+  source: option<sensitiveString>,
+  @ocaml.doc("<p>
+The value of the event variable.
+</p>")
+  value: option<sensitiveString>,
+  @ocaml.doc("<p>
+The event variable name.
+</p>")
+  name: option<sensitiveString>,
+}
 type eventVariableMap = Js.Dict.t<variableValue>
+@ocaml.doc("<p>
+Information about the summary of an event prediction.
+</p>")
+type eventPredictionSummary = {
+  @ocaml.doc("<p>
+The detector version ID.
+</p>")
+  detectorVersionId: option<wholeNumberVersionString>,
+  @ocaml.doc("<p>
+The detector ID.
+</p>")
+  detectorId: option<identifier>,
+  @ocaml.doc("<p>
+The timestamp when the prediction was generated.
+</p>")
+  predictionTimestamp: option<time>,
+  @ocaml.doc("<p>
+The timestamp of the event.
+</p>")
+  eventTimestamp: option<time>,
+  @ocaml.doc("<p>
+The event type.
+</p>")
+  eventTypeName: option<identifier>,
+  @ocaml.doc("<p>
+The event ID.
+</p>")
+  eventId: option<identifier>,
+}
+type eventAttributeMap = Js.Dict.t<attributeValue>
 @ocaml.doc("<p>The entity type details.</p>")
 type entityType = {
   @ocaml.doc("<p>The entity type ARN.</p>") arn: option<fraudDetectorArn>,
@@ -256,7 +400,7 @@ type entity = {
   @ocaml.doc(
     "<p>The entity ID. If you do not know the <code>entityId</code>, you can pass <code>unknown</code>, which is areserved string literal.</p>"
   )
-  entityId: identifier,
+  entityId: entityRestrictedString,
   @ocaml.doc("<p>The entity type.</p>") entityType: string_,
 }
 @ocaml.doc("<p>The summary of the detector version.</p>")
@@ -265,7 +409,8 @@ type detectorVersionSummary = {
   lastUpdatedTime: option<time>,
   @ocaml.doc("<p>The detector version description. </p>") description: option<description>,
   @ocaml.doc("<p>The detector version status. </p>") status: option<detectorVersionStatus>,
-  @ocaml.doc("<p>The detector version ID. </p>") detectorVersionId: option<nonEmptyString>,
+  @ocaml.doc("<p>The detector version ID. </p>")
+  detectorVersionId: option<wholeNumberVersionString>,
 }
 @ocaml.doc("<p>The detector.</p>")
 type detector = {
@@ -298,12 +443,34 @@ type batchPrediction = {
     "<p>Timestamp of most recent heartbeat indicating the batch prediction job was making progress.</p>"
   )
   lastHeartbeatTime: option<time>,
-  @ocaml.doc("<p>Timestamp of when the batch prediction job comleted.</p>")
+  @ocaml.doc("<p>Timestamp of when the batch prediction job completed.</p>")
   completionTime: option<time>,
   @ocaml.doc("<p>Timestamp of when the batch prediction job started.</p>") startTime: option<time>,
   @ocaml.doc("<p>The reason a batch prediction job failed.</p>") failureReason: option<string_>,
   @ocaml.doc("<p>The batch prediction status.</p>") status: option<asyncJobStatus>,
   @ocaml.doc("<p>The job ID for the batch prediction.</p>") jobId: option<identifier>,
+}
+@ocaml.doc("<p>The batch import job details.</p>")
+type batchImport = {
+  @ocaml.doc("<p>The total number of records in the batch import job.</p>")
+  totalRecordsCount: option<integer_>,
+  @ocaml.doc("<p>The number of records that failed to import. </p>")
+  failedRecordsCount: option<integer_>,
+  @ocaml.doc("<p>The number of records processed by batch import job.</p>")
+  processedRecordsCount: option<integer_>,
+  @ocaml.doc("<p>The ARN of the batch import job.</p>") arn: option<fraudDetectorArn>,
+  @ocaml.doc("<p>The ARN of the IAM role to use for this job request.</p>")
+  iamRoleArn: option<iamRoleArn>,
+  @ocaml.doc("<p>The name of the event type.</p>") eventTypeName: option<identifier>,
+  @ocaml.doc("<p>The Amazon S3 location of your output file.</p>")
+  outputPath: option<s3BucketLocation>,
+  @ocaml.doc("<p>The Amazon S3 location of your data file for batch import.</p>")
+  inputPath: option<s3BucketLocation>,
+  @ocaml.doc("<p>Timestamp of when batch import job completed.</p>") completionTime: option<time>,
+  @ocaml.doc("<p>Timestamp of when the batch import job started.</p>") startTime: option<time>,
+  @ocaml.doc("<p>The reason batch import job failed.</p>") failureReason: option<string_>,
+  @ocaml.doc("<p>The status of the batch import job.</p>") status: option<asyncJobStatus>,
+  @ocaml.doc("<p>The ID of the batch import job. </p>") jobId: option<identifier>,
 }
 @ocaml.doc("<p>Provides the error of the batch get variable API.</p>")
 type batchGetVariableError = {
@@ -320,8 +487,9 @@ type batchCreateVariableError = {
 type tagList_ = array<tag>
 type modelList = array<model>
 type metricDataPointsList = array<metricDataPoint>
+type listOfVariableImpactExplanations = array<variableImpactExplanation>
 type listOfEntities = array<entity>
-type labelMapper = Js.Dict.t<listOfStrings>
+type labelMapper = Js.Dict.t<nonEmptyListOfStrings>
 type labelList = array<label>
 type fileValidationMessageList = array<fileValidationMessage>
 type fieldValidationMessageList = array<fieldValidationMessage>
@@ -370,6 +538,20 @@ type modelOutputConfiguration = {
   @ocaml.doc("<p>The format of the model output configuration.</p>") format: modelOutputDataFormat,
 }
 type listOfModelVersions = array<modelVersion>
+type listOfLogOddsMetrics = array<logOddsMetric>
+type listOfEventVariableSummaries = array<eventVariableSummary>
+type listOfEventPredictionSummaries = array<eventPredictionSummary>
+@ocaml.doc("<p>The details of the ingested event.</p>")
+type ingestedEventsDetail = {
+  @ocaml.doc("<p>The start and stop time of the ingested events.</p>")
+  ingestedEventsTimeWindow: ingestedEventsTimeWindow,
+}
+@ocaml.doc("<p>The fraud prediction scores from Amazon SageMaker model.</p>")
+type externalModelOutputs = {
+  @ocaml.doc("<p>The fraud prediction scores from Amazon SageMaker model.</p>")
+  outputs: option<externalModelPredictionMap>,
+  @ocaml.doc("<p>The Amazon SageMaker model.</p>") externalModel: option<externalModelSummary>,
+}
 type externalModelEndpointDataBlobMap = Js.Dict.t<modelEndpointDataBlob>
 @ocaml.doc("<p>The event type details.</p>")
 type eventType = {
@@ -377,18 +559,83 @@ type eventType = {
   @ocaml.doc("<p>Timestamp of when the event type was created.</p>") createdTime: option<time>,
   @ocaml.doc("<p>Timestamp of when the event type was last updated.</p>")
   lastUpdatedTime: option<time>,
+  @ocaml.doc("<p>Data about the stored events.</p>")
+  ingestedEventStatistics: option<ingestedEventStatistics>,
+  @ocaml.doc(
+    "<p>If <code>Enabled</code>, Amazon Fraud Detector stores event data when you generate a prediction and uses that data to update calculated variables in near real-time. Amazon Fraud Detector uses this data, known as <code>INGESTED_EVENTS</code>, to train your model and  improve fraud predictions.</p>"
+  )
+  eventIngestion: option<eventIngestion>,
   @ocaml.doc("<p>The event type entity types.</p>") entityTypes: option<nonEmptyListOfStrings>,
   @ocaml.doc("<p>The event type labels.</p>") labels: option<listOfStrings>,
   @ocaml.doc("<p>The event type event variables.</p>") eventVariables: option<listOfStrings>,
   @ocaml.doc("<p>The event type description.</p>") description: option<description>,
   @ocaml.doc("<p>The event type name.</p>") name: option<string_>,
 }
+@ocaml.doc("<p>
+The details of the rule used for evaluating variable values.
+</p>")
+type evaluatedRule = {
+  @ocaml.doc("<p>
+Indicates whether the rule matched.
+</p>")
+  matched: option<boolean_>,
+  @ocaml.doc("<p>
+Indicates whether the rule was evaluated.
+</p>")
+  evaluated: option<boolean_>,
+  @ocaml.doc("<p>
+The rule outcome.
+</p>")
+  outcomes: option<listOfStrings>,
+  @ocaml.doc("<p>
+The rule expression value.
+</p>")
+  expressionWithValues: option<sensitiveString>,
+  @ocaml.doc("<p>
+The rule expression.
+</p>")
+  expression: option<sensitiveString>,
+  @ocaml.doc("<p>
+The rule version.
+</p>")
+  ruleVersion: option<wholeNumberVersionString>,
+  @ocaml.doc("<p>
+The rule ID.
+</p>")
+  ruleId: option<identifier>,
+}
+@ocaml.doc("<p>
+The details of the external (Amazon Sagemaker) model evaluated for generating predictions.
+</p>")
+type evaluatedExternalModel = {
+  @ocaml.doc("<p>
+Output variables.
+</p>")
+  outputVariables: option<mapOfStrings>,
+  @ocaml.doc("<p>
+Input variables use for generating predictions.
+</p>")
+  inputVariables: option<mapOfStrings>,
+  @ocaml.doc("<p>
+Indicates whether event variables were used to generate predictions.
+</p>")
+  useEventVariables: option<boolean_>,
+  @ocaml.doc("<p>
+The endpoint of the external (Amazon Sagemaker) model.
+</p>")
+  modelEndpoint: option<string_>,
+}
 type detectorVersionSummaryList = array<detectorVersionSummary>
 type detectorList = array<detector>
 type batchPredictionList = array<batchPrediction>
+type batchImportList = array<batchImport>
 type batchGetVariableErrorList = array<batchGetVariableError>
 type batchCreateVariableErrorList = array<batchCreateVariableError>
 type eventTypeList = array<eventType>
+@ocaml.doc("<p>The variable importance metrics details.</p>")
+type variableImportanceMetrics = {
+  @ocaml.doc("<p>List of variable metrics.</p>") logOddsMetrics: option<listOfLogOddsMetrics>,
+}
 @ocaml.doc("<p>The training metric details.</p>")
 type trainingMetrics = {
   @ocaml.doc("<p>The data points details.</p>") metricDataPoints: option<metricDataPointsList>,
@@ -398,10 +645,23 @@ type trainingMetrics = {
   auc: option<float_>,
 }
 type ruleDetailList = array<ruleDetail>
+@ocaml.doc("<p>
+The prediction explanations that provide insight into how each event variable impacted the model version's fraud prediction score. 
+</p>")
+type predictionExplanations = {
+  @ocaml.doc("<p>
+The details of the event variable's impact on the prediction score.
+</p>")
+  variableImpactExplanations: option<listOfVariableImpactExplanations>,
+}
 type listOfRuleResults = array<ruleResult>
 type listOfModelScores = array<modelScores>
+type listOfExternalModelOutputs = array<externalModelOutputs>
+type listOfEvaluatedExternalModels = array<evaluatedExternalModel>
 @ocaml.doc("<p>The label schema.</p>")
 type labelSchema = {
+  @ocaml.doc("<p>The action to take for unlabeled events.</p>")
+  unlabeledEventsTreatment: option<unlabeledEventsTreatment>,
   @ocaml.doc("<p>The label mapper maps the Amazon Fraud Detector supported model classification labels (<code>FRAUD</code>, <code>LEGIT</code>) to the appropriate event type labels. For example, if \"<code>FRAUD</code>\" and \"<code>LEGIT</code>\" are Amazon Fraud Detector supported labels, this mapper could be: <code>{\"FRAUD\" => [\"0\"]</code>, <code>\"LEGIT\" => [\"1\"]}</code> or <code>{\"FRAUD\" => [\"false\"]</code>, <code>\"LEGIT\" => [\"true\"]}</code> or <code>{\"FRAUD\" => [\"fraud\", \"abuse\"]</code>, <code>\"LEGIT\" => [\"legit\", \"safe\"]}</code>. The value part of the mapper is a list, because you may have multiple label variants from your event type for a single Amazon Fraud Detector label.
         </p>")
   labelMapper: labelMapper,
@@ -421,6 +681,26 @@ type externalModel = {
   @ocaml.doc("<p>The source of the model.</p>") modelSource: option<modelSource>,
   @ocaml.doc("<p>The Amazon SageMaker model endpoints.</p>") modelEndpoint: option<string_>,
 }
+@ocaml.doc("<p>The event details.</p>")
+type event = {
+  @ocaml.doc("<p>The event entities.</p>") entities: option<listOfEntities>,
+  @ocaml.doc(
+    "<p>The timestamp associated with the label to update. The timestamp must be specified using ISO 8601 standard in UTC.</p>"
+  )
+  labelTimestamp: option<string_>,
+  @ocaml.doc("<p>The label associated with the event.</p>") currentLabel: option<string_>,
+  @ocaml.doc(
+    "<p>Names of the event type's variables you defined in Amazon Fraud Detector to represent data elements and their corresponding values for the event you are sending for evaluation.</p>"
+  )
+  eventVariables: option<eventAttributeMap>,
+  @ocaml.doc(
+    "<p>The timestamp that defines when the event under evaluation occurred. The timestamp must be specified using ISO 8601 standard in UTC.</p>"
+  )
+  eventTimestamp: option<string_>,
+  @ocaml.doc("<p>The event type.</p>") eventTypeName: option<string_>,
+  @ocaml.doc("<p>The event ID.</p>") eventId: option<string_>,
+}
+type evaluatedRuleList = array<evaluatedRule>
 @ocaml.doc("<p>The model training validation messages.</p>")
 type dataValidationMetrics = {
   @ocaml.doc("<p>The field-specific model training validation messages.</p>")
@@ -430,6 +710,8 @@ type dataValidationMetrics = {
 }
 @ocaml.doc("<p>The training result details.</p>")
 type trainingResult = {
+  @ocaml.doc("<p>The variable importance metrics.</p>")
+  variableImportanceMetrics: option<variableImportanceMetrics>,
   @ocaml.doc("<p>The training metric details.</p>") trainingMetrics: option<trainingMetrics>,
   @ocaml.doc("<p>The validation metrics.</p>") dataValidationMetrics: option<dataValidationMetrics>,
 }
@@ -438,6 +720,23 @@ type trainingDataSchema = {
   labelSchema: labelSchema,
   @ocaml.doc("<p>The training data schema variables.</p>") modelVariables: listOfStrings,
 }
+@ocaml.doc("<p>
+The model version evalutions.
+</p>")
+type modelVersionEvaluation = {
+  @ocaml.doc("<p>
+The prediction explanations generated for the model version.
+</p>")
+  predictionExplanations: option<predictionExplanations>,
+  @ocaml.doc("<p>
+The evaluation score generated for the model version.
+</p>")
+  evaluationScore: option<string_>,
+  @ocaml.doc("<p>
+The output variable name.
+</p>")
+  outputVariableName: option<string_>,
+}
 type externalModelList = array<externalModel>
 @ocaml.doc("<p>The details of the model version.</p>")
 type modelVersionDetail = {
@@ -445,7 +744,14 @@ type modelVersionDetail = {
   @ocaml.doc("<p>The timestamp when the model was created.</p>") createdTime: option<time>,
   @ocaml.doc("<p>The timestamp when the model was last updated.</p>") lastUpdatedTime: option<time>,
   @ocaml.doc("<p>The training results.</p>") trainingResult: option<trainingResult>,
-  @ocaml.doc("<p>The event details.</p>") externalEventsDetail: option<externalEventsDetail>,
+  @ocaml.doc(
+    "<p>The ingested events data details. This will be populated if the <code>trainingDataSource</code> for the model version is specified as  <code>INGESTED_EVENTS</code>.</p>"
+  )
+  ingestedEventsDetail: option<ingestedEventsDetail>,
+  @ocaml.doc(
+    "<p>The external events data details. This will be populated if the <code>trainingDataSource</code> for the model version is specified as  <code>EXTERNAL_EVENTS</code>.</p>"
+  )
+  externalEventsDetail: option<externalEventsDetail>,
   @ocaml.doc("<p>The training data schema.</p>") trainingDataSchema: option<trainingDataSchema>,
   @ocaml.doc("<p>The model version training data source.</p>")
   trainingDataSource: option<trainingDataSourceEnum>,
@@ -454,7 +760,30 @@ type modelVersionDetail = {
   @ocaml.doc("<p>The model type.</p>") modelType: option<modelTypeEnum>,
   @ocaml.doc("<p>The model ID.</p>") modelId: option<modelIdentifier>,
 }
+type listOfModelVersionEvaluations = array<modelVersionEvaluation>
 type modelVersionDetailList = array<modelVersionDetail>
+@ocaml.doc("<p>
+The model version evaluated for generating prediction.
+</p>")
+type evaluatedModelVersion = {
+  @ocaml.doc("<p>
+Evaluations generated for the model version.
+</p>")
+  evaluations: option<listOfModelVersionEvaluations>,
+  @ocaml.doc("<p>The model type. </p>
+         <p>Valid values: <code>ONLINE_FRAUD_INSIGHTS</code> | <code>TRANSACTION_FRAUD_INSIGHTS</code>
+         </p>")
+  modelType: option<string_>,
+  @ocaml.doc("<p>
+The model version.
+</p>")
+  modelVersion: option<string_>,
+  @ocaml.doc("<p>
+The model ID.
+</p>")
+  modelId: option<string_>,
+}
+type listOfEvaluatedModelVersions = array<evaluatedModelVersion>
 @ocaml.doc("<p>This is the Amazon Fraud Detector API Reference. This guide is for developers who need
             detailed information about Amazon Fraud Detector API actions, data types, and errors. For
             more information about Amazon Fraud Detector features, see the <a href=\"https://docs.aws.amazon.com/frauddetector/latest/ug/\">Amazon Fraud Detector User Guide</a>.</p>")
@@ -469,7 +798,7 @@ module UpdateVariable = {
     @ocaml.doc("<p>The new default value of the variable.</p>") defaultValue: option<string_>,
     @ocaml.doc("<p>The name of the variable.</p>") name: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-frauddetector") @new external new: request => t = "UpdateVariableCommand"
   let make = (~name, ~variableType=?, ~description=?, ~defaultValue=?, ()) =>
     new({
@@ -489,7 +818,7 @@ module UpdateModelVersionStatus = {
     @ocaml.doc("<p>The model type.</p>") modelType: modelTypeEnum,
     @ocaml.doc("<p>The model ID of the model version to update.</p>") modelId: modelIdentifier,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-frauddetector") @new
   external new: request => t = "UpdateModelVersionStatusCommand"
   let make = (~status, ~modelVersionNumber, ~modelType, ~modelId, ()) =>
@@ -509,10 +838,36 @@ module UpdateModel = {
     @ocaml.doc("<p>The model type.</p>") modelType: modelTypeEnum,
     @ocaml.doc("<p>The model ID.</p>") modelId: modelIdentifier,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-frauddetector") @new external new: request => t = "UpdateModelCommand"
   let make = (~modelType, ~modelId, ~description=?, ()) =>
     new({description: description, modelType: modelType, modelId: modelId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module UpdateEventLabel = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>The timestamp associated with the label. The timestamp must be specified using ISO 8601 standard in UTC. </p>"
+    )
+    labelTimestamp: utcTimestampISO8601,
+    @ocaml.doc("<p>The new label to assign to the event.</p>") assignedLabel: identifier,
+    @ocaml.doc("<p>The event type of the event associated with the label to update.</p>")
+    eventTypeName: identifier,
+    @ocaml.doc("<p>The ID of the event associated with the label to update.</p>")
+    eventId: identifier,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-frauddetector") @new
+  external new: request => t = "UpdateEventLabelCommand"
+  let make = (~labelTimestamp, ~assignedLabel, ~eventTypeName, ~eventId, ()) =>
+    new({
+      labelTimestamp: labelTimestamp,
+      assignedLabel: assignedLabel,
+      eventTypeName: eventTypeName,
+      eventId: eventId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -523,7 +878,7 @@ module UpdateDetectorVersionStatus = {
     @ocaml.doc("<p>The detector version ID. </p>") detectorVersionId: wholeNumberVersionString,
     @ocaml.doc("<p>The detector ID. </p>") detectorId: identifier,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-frauddetector") @new
   external new: request => t = "UpdateDetectorVersionStatusCommand"
   let make = (~status, ~detectorVersionId, ~detectorId, ()) =>
@@ -538,7 +893,7 @@ module UpdateDetectorVersionMetadata = {
     @ocaml.doc("<p>The detector version ID. </p>") detectorVersionId: wholeNumberVersionString,
     @ocaml.doc("<p>The detector ID.</p>") detectorId: identifier,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-frauddetector") @new
   external new: request => t = "UpdateDetectorVersionMetadataCommand"
   let make = (~description, ~detectorVersionId, ~detectorId, ()) =>
@@ -551,17 +906,33 @@ module PutKMSEncryptionKey = {
   type request = {
     @ocaml.doc("<p>The KMS encryption key ARN.</p>") kmsEncryptionKeyArn: kmsEncryptionKeyArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-frauddetector") @new
   external new: request => t = "PutKMSEncryptionKeyCommand"
   let make = (~kmsEncryptionKeyArn, ()) => new({kmsEncryptionKeyArn: kmsEncryptionKeyArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
+module GetDeleteEventsByEventTypeStatus = {
+  type t
+  type request = {
+    @ocaml.doc("<p>Name of event type for which to get the deletion status.</p>")
+    eventTypeName: identifier,
+  }
+  type response = {
+    @ocaml.doc("<p>The deletion status.</p>") eventsDeletionStatus: option<asyncJobStatus>,
+    @ocaml.doc("<p>The event type name.</p>") eventTypeName: option<identifier>,
+  }
+  @module("@aws-sdk/client-frauddetector") @new
+  external new: request => t = "GetDeleteEventsByEventTypeStatusCommand"
+  let make = (~eventTypeName, ()) => new({eventTypeName: eventTypeName})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module DeleteVariable = {
   type t
   type request = {@ocaml.doc("<p>The name of the variable to delete.</p>") name: string_}
-
+  type response = {.}
   @module("@aws-sdk/client-frauddetector") @new external new: request => t = "DeleteVariableCommand"
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -570,7 +941,7 @@ module DeleteVariable = {
 module DeleteOutcome = {
   type t
   type request = {@ocaml.doc("<p>The name of the outcome to delete.</p>") name: identifier}
-
+  type response = {.}
   @module("@aws-sdk/client-frauddetector") @new external new: request => t = "DeleteOutcomeCommand"
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -584,7 +955,7 @@ module DeleteModelVersion = {
     @ocaml.doc("<p>The model type of the model version to delete.</p>") modelType: modelTypeEnum,
     @ocaml.doc("<p>The model ID of the model version to delete.</p>") modelId: modelIdentifier,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-frauddetector") @new
   external new: request => t = "DeleteModelVersionCommand"
   let make = (~modelVersionNumber, ~modelType, ~modelId, ()) =>
@@ -598,7 +969,7 @@ module DeleteModel = {
     @ocaml.doc("<p>The model type of the model to delete.</p>") modelType: modelTypeEnum,
     @ocaml.doc("<p>The model ID of the model to delete.</p>") modelId: modelIdentifier,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-frauddetector") @new external new: request => t = "DeleteModelCommand"
   let make = (~modelType, ~modelId, ()) => new({modelType: modelType, modelId: modelId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -607,7 +978,7 @@ module DeleteModel = {
 module DeleteLabel = {
   type t
   type request = {@ocaml.doc("<p>The name of the label to delete.</p>") name: identifier}
-
+  type response = {.}
   @module("@aws-sdk/client-frauddetector") @new external new: request => t = "DeleteLabelCommand"
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -619,17 +990,31 @@ module DeleteExternalModel = {
     @ocaml.doc("<p>The endpoint of the Amazon Sagemaker model to delete.</p>")
     modelEndpoint: sageMakerEndpointIdentifier,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-frauddetector") @new
   external new: request => t = "DeleteExternalModelCommand"
   let make = (~modelEndpoint, ()) => new({modelEndpoint: modelEndpoint})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
+module DeleteEventsByEventType = {
+  type t
+  type request = {@ocaml.doc("<p>The name of the event type.</p>") eventTypeName: identifier}
+  type response = {
+    @ocaml.doc("<p>The status of the delete request.</p>") eventsDeletionStatus: option<string_>,
+    @ocaml.doc("<p>Name of event type for which to delete the events.</p>")
+    eventTypeName: option<identifier>,
+  }
+  @module("@aws-sdk/client-frauddetector") @new
+  external new: request => t = "DeleteEventsByEventTypeCommand"
+  let make = (~eventTypeName, ()) => new({eventTypeName: eventTypeName})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module DeleteEventType = {
   type t
   type request = {@ocaml.doc("<p>The name of the event type to delete.</p>") name: identifier}
-
+  type response = {.}
   @module("@aws-sdk/client-frauddetector") @new
   external new: request => t = "DeleteEventTypeCommand"
   let make = (~name, ()) => new({name: name})
@@ -639,19 +1024,24 @@ module DeleteEventType = {
 module DeleteEvent = {
   type t
   type request = {
+    @ocaml.doc(
+      "<p>Specifies whether or not to delete any predictions associated with the event.</p>"
+    )
+    deleteAuditHistory: option<deleteAuditHistory>,
     @ocaml.doc("<p>The name of the event type.</p>") eventTypeName: identifier,
     @ocaml.doc("<p>The ID of the event to delete.</p>") eventId: identifier,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-frauddetector") @new external new: request => t = "DeleteEventCommand"
-  let make = (~eventTypeName, ~eventId, ()) => new({eventTypeName: eventTypeName, eventId: eventId})
+  let make = (~eventTypeName, ~eventId, ~deleteAuditHistory=?, ()) =>
+    new({deleteAuditHistory: deleteAuditHistory, eventTypeName: eventTypeName, eventId: eventId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteEntityType = {
   type t
   type request = {@ocaml.doc("<p>The name of the entity type to delete.</p>") name: identifier}
-
+  type response = {.}
   @module("@aws-sdk/client-frauddetector") @new
   external new: request => t = "DeleteEntityTypeCommand"
   let make = (~name, ()) => new({name: name})
@@ -666,7 +1056,7 @@ module DeleteDetectorVersion = {
     @ocaml.doc("<p>The ID of the parent detector for the detector version to delete.</p>")
     detectorId: identifier,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-frauddetector") @new
   external new: request => t = "DeleteDetectorVersionCommand"
   let make = (~detectorVersionId, ~detectorId, ()) =>
@@ -677,7 +1067,7 @@ module DeleteDetectorVersion = {
 module DeleteDetector = {
   type t
   type request = {@ocaml.doc("<p>The ID of the detector to delete.</p>") detectorId: identifier}
-
+  type response = {.}
   @module("@aws-sdk/client-frauddetector") @new external new: request => t = "DeleteDetectorCommand"
   let make = (~detectorId, ()) => new({detectorId: detectorId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -688,9 +1078,19 @@ module DeleteBatchPredictionJob = {
   type request = {
     @ocaml.doc("<p>The ID of the batch prediction job to delete.</p>") jobId: identifier,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-frauddetector") @new
   external new: request => t = "DeleteBatchPredictionJobCommand"
+  let make = (~jobId, ()) => new({jobId: jobId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module DeleteBatchImportJob = {
+  type t
+  type request = {@ocaml.doc("<p>The ID of the batch import job to delete. </p>") jobId: identifier}
+  type response = {.}
+  @module("@aws-sdk/client-frauddetector") @new
+  external new: request => t = "DeleteBatchImportJobCommand"
   let make = (~jobId, ()) => new({jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
@@ -700,9 +1100,23 @@ module CancelBatchPredictionJob = {
   type request = {
     @ocaml.doc("<p>The ID of the batch prediction job to cancel.</p>") jobId: identifier,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-frauddetector") @new
   external new: request => t = "CancelBatchPredictionJobCommand"
+  let make = (~jobId, ()) => new({jobId: jobId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module CancelBatchImportJob = {
+  type t
+  type request = {
+    @ocaml.doc("<p> The ID of an in-progress batch import job to cancel. </p>
+         <p>Amazon Fraud Detector will throw an error if the batch import job is in <code>FAILED</code>, <code>CANCELED</code>, or  <code>COMPLETED</code> state.</p>")
+    jobId: identifier,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-frauddetector") @new
+  external new: request => t = "CancelBatchImportJobCommand"
   let make = (~jobId, ()) => new({jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
@@ -713,7 +1127,7 @@ module UpdateRuleMetadata = {
     @ocaml.doc("<p>The rule description.</p>") description: description,
     @ocaml.doc("<p>The rule to update.</p>") rule: rule,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-frauddetector") @new
   external new: request => t = "UpdateRuleMetadataCommand"
   let make = (~description, ~rule, ()) => new({description: description, rule: rule})
@@ -727,7 +1141,7 @@ module UntagResource = {
     @ocaml.doc("<p>The ARN of the resource from which to remove the tag.</p>")
     resourceARN: fraudDetectorArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-frauddetector") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys: tagKeys, resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -735,18 +1149,18 @@ module UntagResource = {
 
 module GetKMSEncryptionKey = {
   type t
-
+  type request = {.}
   type response = {@ocaml.doc("<p>The KMS encryption key.</p>") kmsKey: option<kmskey>}
   @module("@aws-sdk/client-frauddetector") @new
-  external new: unit => t = "GetKMSEncryptionKeyCommand"
-  let make = () => new()
+  external new: request => t = "GetKMSEncryptionKeyCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteRule = {
   type t
   type request = {rule: rule}
-
+  type response = {.}
   @module("@aws-sdk/client-frauddetector") @new external new: request => t = "DeleteRuleCommand"
   let make = (~rule, ()) => new({rule: rule})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -781,7 +1195,14 @@ module UpdateModelVersion = {
   type t
   type request = {
     @ocaml.doc("<p>A collection of key and value pairs.</p>") tags: option<tagList_>,
-    @ocaml.doc("<p>The event details.</p>") externalEventsDetail: option<externalEventsDetail>,
+    @ocaml.doc(
+      "<p>The details of the ingested event used for training the model version. Required if your <code>trainingDataSource</code> is <code>INGESTED_EVENTS</code>.</p>"
+    )
+    ingestedEventsDetail: option<ingestedEventsDetail>,
+    @ocaml.doc(
+      "<p>The details of the external events data used for training the model version. Required if <code>trainingDataSource</code> is <code>EXTERNAL_EVENTS</code>.</p>"
+    )
+    externalEventsDetail: option<externalEventsDetail>,
     @ocaml.doc("<p>The major version number.</p>") majorVersionNumber: wholeNumberVersionString,
     @ocaml.doc("<p>The model type.</p>") modelType: modelTypeEnum,
     @ocaml.doc("<p>The model ID.</p>") modelId: modelIdentifier,
@@ -795,9 +1216,18 @@ module UpdateModelVersion = {
   }
   @module("@aws-sdk/client-frauddetector") @new
   external new: request => t = "UpdateModelVersionCommand"
-  let make = (~majorVersionNumber, ~modelType, ~modelId, ~tags=?, ~externalEventsDetail=?, ()) =>
+  let make = (
+    ~majorVersionNumber,
+    ~modelType,
+    ~modelId,
+    ~tags=?,
+    ~ingestedEventsDetail=?,
+    ~externalEventsDetail=?,
+    (),
+  ) =>
     new({
       tags: tags,
+      ingestedEventsDetail: ingestedEventsDetail,
       externalEventsDetail: externalEventsDetail,
       majorVersionNumber: majorVersionNumber,
       modelType: modelType,
@@ -824,7 +1254,7 @@ module UpdateDetectorVersion = {
     @ocaml.doc("<p>The parent detector ID for the detector version you want to update.</p>")
     detectorId: identifier,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-frauddetector") @new
   external new: request => t = "UpdateDetectorVersionCommand"
   let make = (
@@ -855,9 +1285,56 @@ module TagResource = {
     @ocaml.doc("<p>The tags to assign to the resource.</p>") tags: tagList_,
     @ocaml.doc("<p>The resource ARN.</p>") resourceARN: fraudDetectorArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-frauddetector") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceARN, ()) => new({tags: tags, resourceARN: resourceARN})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module SendEvent = {
+  type t
+  type request = {
+    @ocaml.doc("<p>An array of entities.</p>") entities: listOfEntities,
+    @ocaml.doc(
+      "<p>The timestamp associated with the label. Required if specifying <code>assignedLabel</code>.</p>"
+    )
+    labelTimestamp: option<utcTimestampISO8601>,
+    @ocaml.doc(
+      "<p>The label to associate with the event. Required if specifying <code>labelTimestamp</code>.</p>"
+    )
+    assignedLabel: option<identifier>,
+    @ocaml.doc(
+      "<p>Names of the event type's variables you defined in Amazon Fraud Detector to represent data elements and their corresponding values for the event you are sending for evaluation.</p>"
+    )
+    eventVariables: eventVariableMap,
+    @ocaml.doc(
+      "<p>The timestamp that defines when the event under evaluation occurred. The timestamp must be specified using ISO 8601 standard in UTC.</p>"
+    )
+    eventTimestamp: utcTimestampISO8601,
+    @ocaml.doc("<p>The event type name of the event.</p>") eventTypeName: identifier,
+    @ocaml.doc("<p>The event ID to upload.</p>") eventId: identifier,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-frauddetector") @new external new: request => t = "SendEventCommand"
+  let make = (
+    ~entities,
+    ~eventVariables,
+    ~eventTimestamp,
+    ~eventTypeName,
+    ~eventId,
+    ~labelTimestamp=?,
+    ~assignedLabel=?,
+    (),
+  ) =>
+    new({
+      entities: entities,
+      labelTimestamp: labelTimestamp,
+      assignedLabel: assignedLabel,
+      eventVariables: eventVariables,
+      eventTimestamp: eventTimestamp,
+      eventTypeName: eventTypeName,
+      eventId: eventId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -868,7 +1345,7 @@ module PutOutcome = {
     @ocaml.doc("<p>The outcome description.</p>") description: option<description>,
     @ocaml.doc("<p>The name of the outcome.</p>") name: identifier,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-frauddetector") @new external new: request => t = "PutOutcomeCommand"
   let make = (~name, ~tags=?, ~description=?, ()) =>
     new({tags: tags, description: description, name: name})
@@ -882,7 +1359,7 @@ module PutLabel = {
     @ocaml.doc("<p>The label description.</p>") description: option<description>,
     @ocaml.doc("<p>The label name.</p>") name: identifier,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-frauddetector") @new external new: request => t = "PutLabelCommand"
   let make = (~name, ~tags=?, ~description=?, ()) =>
     new({tags: tags, description: description, name: name})
@@ -904,7 +1381,7 @@ module PutExternalModel = {
     @ocaml.doc("<p>The source of the model.</p>") modelSource: modelSource,
     @ocaml.doc("<p>The model endpoints name.</p>") modelEndpoint: sageMakerEndpointIdentifier,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-frauddetector") @new
   external new: request => t = "PutExternalModelCommand"
   let make = (
@@ -933,6 +1410,8 @@ module PutEventType = {
   type t
   type request = {
     @ocaml.doc("<p>A collection of key and value pairs.</p>") tags: option<tagList_>,
+    @ocaml.doc("<p>Specifies if ingenstion is enabled or disabled.</p>")
+    eventIngestion: option<eventIngestion>,
     @ocaml.doc(
       "<p>The entity type for the event type. Example entity types: customer, merchant, account.</p>"
     )
@@ -942,11 +1421,21 @@ module PutEventType = {
     @ocaml.doc("<p>The description of the event type.</p>") description: option<description>,
     @ocaml.doc("<p>The name.</p>") name: identifier,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-frauddetector") @new external new: request => t = "PutEventTypeCommand"
-  let make = (~entityTypes, ~eventVariables, ~name, ~tags=?, ~labels=?, ~description=?, ()) =>
+  let make = (
+    ~entityTypes,
+    ~eventVariables,
+    ~name,
+    ~tags=?,
+    ~eventIngestion=?,
+    ~labels=?,
+    ~description=?,
+    (),
+  ) =>
     new({
       tags: tags,
+      eventIngestion: eventIngestion,
       entityTypes: entityTypes,
       labels: labels,
       eventVariables: eventVariables,
@@ -963,7 +1452,7 @@ module PutEntityType = {
     @ocaml.doc("<p>The description.</p>") description: option<description>,
     @ocaml.doc("<p>The name of the entity type.</p>") name: identifier,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-frauddetector") @new external new: request => t = "PutEntityTypeCommand"
   let make = (~name, ~tags=?, ~description=?, ()) =>
     new({tags: tags, description: description, name: name})
@@ -978,7 +1467,7 @@ module PutDetector = {
     @ocaml.doc("<p>The description of the detector.</p>") description: option<description>,
     @ocaml.doc("<p>The detector ID. </p>") detectorId: identifier,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-frauddetector") @new external new: request => t = "PutDetectorCommand"
   let make = (~eventTypeName, ~detectorId, ~tags=?, ~description=?, ()) =>
     new({
@@ -1007,6 +1496,72 @@ module ListTagsForResource = {
   external new: request => t = "ListTagsForResourceCommand"
   let make = (~resourceARN, ~maxResults=?, ~nextToken=?, ()) =>
     new({maxResults: maxResults, nextToken: nextToken, resourceARN: resourceARN})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module ListEventPredictions = {
+  type t
+  type request = {
+    @ocaml.doc("<p>
+The maximum number of predictions to return for the request.
+</p>")
+    maxResults: option<eventPredictionsMaxResults>,
+    @ocaml.doc("<p>
+Identifies the next page of results to return. Use the token to make the call again to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours.
+</p>")
+    nextToken: option<string_>,
+    @ocaml.doc("<p>
+The time period for when the predictions were generated.
+</p>")
+    predictionTimeRange: option<predictionTimeRange>,
+    @ocaml.doc("<p>
+The detector version ID.
+</p>")
+    detectorVersionId: option<filterCondition>,
+    @ocaml.doc("<p>
+The detector ID.
+</p>")
+    detectorId: option<filterCondition>,
+    @ocaml.doc("<p>
+The event type associated with the detector.
+</p>")
+    eventType: option<filterCondition>,
+    @ocaml.doc("<p>
+The event ID.
+</p>")
+    eventId: option<filterCondition>,
+  }
+  type response = {
+    @ocaml.doc("<p>
+Identifies the next page of results to return. Use the token to make the call again to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours.
+</p>")
+    nextToken: option<string_>,
+    @ocaml.doc("<p>
+The summary of the past predictions.
+</p>")
+    eventPredictionSummaries: option<listOfEventPredictionSummaries>,
+  }
+  @module("@aws-sdk/client-frauddetector") @new
+  external new: request => t = "ListEventPredictionsCommand"
+  let make = (
+    ~maxResults=?,
+    ~nextToken=?,
+    ~predictionTimeRange=?,
+    ~detectorVersionId=?,
+    ~detectorId=?,
+    ~eventType=?,
+    ~eventId=?,
+    (),
+  ) =>
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      predictionTimeRange: predictionTimeRange,
+      detectorVersionId: detectorVersionId,
+      detectorId: detectorId,
+      eventType: eventType,
+      eventId: eventId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1180,6 +1735,26 @@ module GetBatchPredictionJobs = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module GetBatchImportJobs = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The next token from the previous request.</p>") nextToken: option<string_>,
+    @ocaml.doc("<p>The maximum number of objects to return for request.</p>")
+    maxResults: option<batchImportsMaxPageSize>,
+    @ocaml.doc("<p>The ID of the batch import job to get.</p>") jobId: option<identifier>,
+  }
+  type response = {
+    @ocaml.doc("<p>The next token for the subsequent resquest.</p>") nextToken: option<string_>,
+    @ocaml.doc("<p>An array containing the details of each batch import job.</p>")
+    batchImports: option<batchImportList>,
+  }
+  @module("@aws-sdk/client-frauddetector") @new
+  external new: request => t = "GetBatchImportJobsCommand"
+  let make = (~nextToken=?, ~maxResults=?, ~jobId=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults, jobId: jobId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module DescribeDetector = {
   type t
   type request = {
@@ -1219,7 +1794,7 @@ module CreateVariable = {
     @ocaml.doc("<p>The data type.</p>") dataType: dataType,
     @ocaml.doc("<p>The name of the variable.</p>") name: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-frauddetector") @new external new: request => t = "CreateVariableCommand"
   let make = (
     ~defaultValue,
@@ -1288,7 +1863,7 @@ module CreateModel = {
     @ocaml.doc("<p>The model type. </p>") modelType: modelTypeEnum,
     @ocaml.doc("<p>The model ID.</p>") modelId: modelIdentifier,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-frauddetector") @new external new: request => t = "CreateModelCommand"
   let make = (~eventTypeName, ~modelType, ~modelId, ~tags=?, ~description=?, ()) =>
     new({
@@ -1323,7 +1898,7 @@ module CreateDetectorVersion = {
   type response = {
     @ocaml.doc("<p>The status of the detector version.</p>") status: option<detectorVersionStatus>,
     @ocaml.doc("<p>The ID for the created detector. </p>")
-    detectorVersionId: option<nonEmptyString>,
+    detectorVersionId: option<wholeNumberVersionString>,
     @ocaml.doc("<p>The ID for the created version's parent detector.</p>")
     detectorId: option<identifier>,
   }
@@ -1364,7 +1939,7 @@ module CreateBatchPredictionJob = {
     @ocaml.doc("<p>The Amazon S3 location of your training file.</p>") inputPath: s3BucketLocation,
     @ocaml.doc("<p>The ID of the batch prediction job.</p>") jobId: identifier,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-frauddetector") @new
   external new: request => t = "CreateBatchPredictionJobCommand"
   let make = (
@@ -1383,6 +1958,39 @@ module CreateBatchPredictionJob = {
       iamRoleArn: iamRoleArn,
       detectorVersion: detectorVersion,
       detectorName: detectorName,
+      eventTypeName: eventTypeName,
+      outputPath: outputPath,
+      inputPath: inputPath,
+      jobId: jobId,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module CreateBatchImportJob = {
+  type t
+  type request = {
+    @ocaml.doc("<p>A collection of key-value pairs associated with this request.  </p>")
+    tags: option<tagList_>,
+    @ocaml.doc("<p>The ARN of the IAM role created for Amazon S3 bucket that holds your data file. 
+         The IAM role must have read and write permissions to both input and output S3 buckets.</p>")
+    iamRoleArn: iamRoleArn,
+    @ocaml.doc("<p>The name of the event type.</p>") eventTypeName: identifier,
+    @ocaml.doc("<p>The URI that points to the Amazon S3 location for storing your results. </p>")
+    outputPath: s3BucketLocation,
+    @ocaml.doc("<p>The URI that points to the Amazon S3 location of your data file.</p>")
+    inputPath: s3BucketLocation,
+    @ocaml.doc(
+      "<p>The ID of the batch import job. The ID cannot be of a past job, unless the job exists in <code>CREATE_FAILED</code> state.</p>"
+    )
+    jobId: identifier,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-frauddetector") @new
+  external new: request => t = "CreateBatchImportJobCommand"
+  let make = (~iamRoleArn, ~eventTypeName, ~outputPath, ~inputPath, ~jobId, ~tags=?, ()) =>
+    new({
+      tags: tags,
+      iamRoleArn: iamRoleArn,
       eventTypeName: eventTypeName,
       outputPath: outputPath,
       inputPath: inputPath,
@@ -1471,12 +2079,30 @@ module GetEventPrediction = {
   type request = {
     @ocaml.doc("<p>The Amazon SageMaker model endpoint input data blobs.</p>")
     externalModelEndpointDataBlobs: option<externalModelEndpointDataBlobMap>,
-    @ocaml.doc(
-      "<p>Names of the event type's variables you defined in Amazon Fraud Detector to represent data elements and their corresponding values for the event you are sending for evaluation.</p>"
-    )
+    @ocaml.doc("<p>Names of the event type's variables you defined in Amazon Fraud Detector to represent data elements and 
+         their corresponding values for the event you are sending for evaluation.</p>
+         <important>         
+            <p>You must provide at least one eventVariable</p>        
+         </important>
+      
+         <p>To ensure most accurate fraud prediction and to simplify your data preparation, Amazon Fraud Detector will replace all missing variables or values as follows:</p>
+      
+         <p>
+            <b>For Amazon Fraud Detector trained models:</b>
+         </p>
+         <p>If a null value is provided explicitly for a variable or if a variable is missing, model will replace the null value or the missing variable (no variable name in the eventVariables map) 
+         with calculated default mean/medians for numeric variables and with special values for categorical variables.</p>
+      
+         <p>
+            <b>For imported SageMaker models:</b>
+         </p>
+         <p>If a null value is provided explicitly for a variable, the model and rules will use “null” as the value. If a variable is not provided (no variable name in the eventVariables map), model and rules 
+         will use the default value that is provided for the variable. </p>")
     eventVariables: eventVariableMap,
-    @ocaml.doc("<p>Timestamp that defines when the event under evaluation occurred.</p>")
-    eventTimestamp: string_,
+    @ocaml.doc(
+      "<p>Timestamp that defines when the event under evaluation occurred. The timestamp must be specified using ISO 8601 standard in UTC.</p>"
+    )
+    eventTimestamp: utcTimestampISO8601,
     @ocaml.doc(
       "<p>The entity type (associated with the detector's event type) and specific entity ID representing who performed the event. If an entity id is not available, use \"UNKNOWN.\"</p>"
     )
@@ -1489,7 +2115,9 @@ module GetEventPrediction = {
     @ocaml.doc("<p>The detector ID.</p>") detectorId: string_,
   }
   type response = {
-    @ocaml.doc("<p>The results.</p>") ruleResults: option<listOfRuleResults>,
+    @ocaml.doc("<p>The model scores for Amazon SageMaker models.</p>")
+    externalModelOutputs: option<listOfExternalModelOutputs>,
+    @ocaml.doc("<p>The results from the rules.</p>") ruleResults: option<listOfRuleResults>,
     @ocaml.doc(
       "<p>The model scores. Amazon Fraud Detector generates model scores between 0 and 1000, where 0 is low fraud risk and 1000 is high fraud risk. Model scores are directly related to the false positive rate (FPR). For example, a score of 600 corresponds to an estimated 10% false positive rate whereas a score of 900 corresponds to an estimated 2% false positive rate.</p>"
     )
@@ -1518,6 +2146,18 @@ module GetEventPrediction = {
       detectorVersionId: detectorVersionId,
       detectorId: detectorId,
     })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module GetEvent = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The event type of the event to retrieve.</p>") eventTypeName: string_,
+    @ocaml.doc("<p>The ID of the event to retrieve.</p>") eventId: string_,
+  }
+  type response = {@ocaml.doc("<p>The details of the event.</p>") event: option<event>}
+  @module("@aws-sdk/client-frauddetector") @new external new: request => t = "GetEventCommand"
+  let make = (~eventTypeName, ~eventId, ()) => new({eventTypeName: eventTypeName, eventId: eventId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1580,7 +2220,13 @@ module GetModelVersion = {
             </li>
          </ul>")
     status: option<string_>,
-    @ocaml.doc("<p>The event details.</p>") externalEventsDetail: option<externalEventsDetail>,
+    @ocaml.doc("<p>The details of the ingested events data used for training the model version. 
+         This will be populated if the <code>trainingDataSource</code> is <code>INGESTED_EVENTS</code>.</p>")
+    ingestedEventsDetail: option<ingestedEventsDetail>,
+    @ocaml.doc("<p>The details of the external events data used for training the model version. 
+         This will be populated if the <code>trainingDataSource</code> is <code>EXTERNAL_EVENTS</code>
+         </p>")
+    externalEventsDetail: option<externalEventsDetail>,
     @ocaml.doc("<p>The training data schema.</p>") trainingDataSchema: option<trainingDataSchema>,
     @ocaml.doc("<p>The training data source.</p>")
     trainingDataSource: option<trainingDataSourceEnum>,
@@ -1621,7 +2267,11 @@ module CreateModelVersion = {
   type request = {
     @ocaml.doc("<p>A collection of key and value pairs.</p>") tags: option<tagList_>,
     @ocaml.doc(
-      "<p>Details for the external events data used for model version training. Required if <code>trainingDataSource</code> is <code>EXTERNAL_EVENTS</code>.</p>"
+      "<p>Details of the ingested events data used for model version training. Required if <code>trainingDataSource</code> is <code>INGESTED_EVENTS</code>.</p>"
+    )
+    ingestedEventsDetail: option<ingestedEventsDetail>,
+    @ocaml.doc(
+      "<p>Details of the external events data used for model version training. Required if <code>trainingDataSource</code> is <code>EXTERNAL_EVENTS</code>.</p>"
     )
     externalEventsDetail: option<externalEventsDetail>,
     @ocaml.doc("<p>The training data schema.</p>") trainingDataSchema: trainingDataSchema,
@@ -1633,7 +2283,7 @@ module CreateModelVersion = {
   type response = {
     @ocaml.doc("<p>The model version status. </p>") status: option<string_>,
     @ocaml.doc("<p>The model version number of the model version created.</p>")
-    modelVersionNumber: option<nonEmptyString>,
+    modelVersionNumber: option<floatVersionString>,
     @ocaml.doc("<p>The model type.</p>") modelType: option<modelTypeEnum>,
     @ocaml.doc("<p>The model ID.</p>") modelId: option<modelIdentifier>,
   }
@@ -1645,11 +2295,13 @@ module CreateModelVersion = {
     ~modelType,
     ~modelId,
     ~tags=?,
+    ~ingestedEventsDetail=?,
     ~externalEventsDetail=?,
     (),
   ) =>
     new({
       tags: tags,
+      ingestedEventsDetail: ingestedEventsDetail,
       externalEventsDetail: externalEventsDetail,
       trainingDataSchema: trainingDataSchema,
       trainingDataSource: trainingDataSource,
@@ -1683,6 +2335,111 @@ module DescribeModelVersions = {
       modelType: modelType,
       modelVersionNumber: modelVersionNumber,
       modelId: modelId,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module GetEventPredictionMetadata = {
+  type t
+  type request = {
+    @ocaml.doc("<p>
+The timestamp that defines when the prediction was generated. 
+</p>")
+    predictionTimestamp: time,
+    @ocaml.doc("<p>
+The detector version ID.
+</p>")
+    detectorVersionId: wholeNumberVersionString,
+    @ocaml.doc("<p>
+The detector ID.
+</p>")
+    detectorId: identifier,
+    @ocaml.doc("<p>
+The event type associated with the detector specified for the prediction.
+</p>")
+    eventTypeName: identifier,
+    @ocaml.doc("<p>
+The event ID.
+</p>")
+    eventId: identifier,
+  }
+  type response = {
+    @ocaml.doc("<p>The timestamp that defines when the prediction was generated.
+</p>")
+    predictionTimestamp: option<time>,
+    @ocaml.doc("<p>
+External (Amazon SageMaker) models that were evaluated for generating predictions.
+</p>")
+    evaluatedExternalModels: option<listOfEvaluatedExternalModels>,
+    @ocaml.doc("<p>
+Model versions that were evaluated for generating predictions.
+</p>")
+    evaluatedModelVersions: option<listOfEvaluatedModelVersions>,
+    @ocaml.doc("<p>
+The outcomes of the matched rule, based on the rule execution mode.
+</p>")
+    outcomes: option<listOfStrings>,
+    @ocaml.doc("<p>
+The execution mode of the rule used for evaluating variable values.
+</p>")
+    ruleExecutionMode: option<ruleExecutionMode>,
+    @ocaml.doc("<p>
+List of rules associated with the detector version that were used for evaluating variable values.
+</p>")
+    rules: option<evaluatedRuleList>,
+    @ocaml.doc("<p>
+A list of event variables that influenced the prediction scores.
+</p>")
+    eventVariables: option<listOfEventVariableSummaries>,
+    @ocaml.doc("<p>
+The status of the detector version.
+</p>")
+    detectorVersionStatus: option<string_>,
+    @ocaml.doc("<p>
+The detector version ID.
+</p>")
+    detectorVersionId: option<wholeNumberVersionString>,
+    @ocaml.doc("<p>
+The detector ID.
+</p>")
+    detectorId: option<identifier>,
+    @ocaml.doc("<p>
+The timestamp for when the prediction was generated for the associated event ID.
+</p>")
+    eventTimestamp: option<time>,
+    @ocaml.doc("<p>
+The entity type.
+</p>")
+    entityType: option<string_>,
+    @ocaml.doc("<p>
+The entity ID.
+</p>")
+    entityId: option<string_>,
+    @ocaml.doc("<p>
+The event type associated with the detector specified for this prediction.
+</p>")
+    eventTypeName: option<identifier>,
+    @ocaml.doc("<p>
+The event ID.
+</p>")
+    eventId: option<identifier>,
+  }
+  @module("@aws-sdk/client-frauddetector") @new
+  external new: request => t = "GetEventPredictionMetadataCommand"
+  let make = (
+    ~predictionTimestamp,
+    ~detectorVersionId,
+    ~detectorId,
+    ~eventTypeName,
+    ~eventId,
+    (),
+  ) =>
+    new({
+      predictionTimestamp: predictionTimestamp,
+      detectorVersionId: detectorVersionId,
+      detectorId: detectorId,
+      eventTypeName: eventTypeName,
+      eventId: eventId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

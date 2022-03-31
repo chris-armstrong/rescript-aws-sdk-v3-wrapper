@@ -19,10 +19,13 @@ type useGeolocationForTimeZone = bool
 type timestampFormat = string
 type timestamp_ = Js.Date.t
 type timeZone = string
+type timeSeriesGranularity = [@as("SPECIFIC") #SPECIFIC | @as("ALL") #ALL]
+type timePointGranularity = [@as("SPECIFIC") #SPECIFIC | @as("ALL") #ALL]
 type tagValue = string
 type tagKey = string
 type string_ = string
 type status = string
+type state = [@as("Deleted") #Deleted | @as("Active") #Active]
 type scalingType = [
   | @as("ReverseLogarithmic") #ReverseLogarithmic
   | @as("Logarithmic") #Logarithmic
@@ -32,11 +35,19 @@ type scalingType = [
 type s3Path = string
 type parameterValue = string
 type parameterKey = string
+type optimizationMetric = [
+  | @as("MAPE") #MAPE
+  | @as("MASE") #MASE
+  | @as("AverageWeightedQuantileLoss") #AverageWeightedQuantileLoss
+  | @as("RMSE") #RMSE
+  | @as("WAPE") #WAPE
+]
 type nextToken = string
 type name = string
 type message = string
 type maxResults = int
 type long = float
+type localDateTime = string
 type kmskeyArn = string
 type integer_ = int
 type geolocationFormat = string
@@ -62,7 +73,10 @@ type datasetType = [
   | @as("TARGET_TIME_SERIES") #TARGET_TIME_SERIES
 ]
 type boolean_ = bool
-type autoMLOverrideStrategy = [@as("LatencyOptimized") #LatencyOptimized]
+type autoMLOverrideStrategy = [
+  | @as("AccuracyOptimized") #AccuracyOptimized
+  | @as("LatencyOptimized") #LatencyOptimized
+]
 type attributeType = [
   | @as("geolocation") #Geolocation
   | @as("timestamp") #Timestamp
@@ -71,20 +85,22 @@ type attributeType = [
   | @as("string") #String
 ]
 type arn = string
-@ocaml.doc("<p>The weighted loss value for a quantile. This object is part of the
-      <a>Metrics</a> object.</p>")
+@ocaml.doc(
+  "<p>The weighted loss value for a quantile. This object is part of the <a>Metrics</a> object.</p>"
+)
 type weightedQuantileLoss = {
   @ocaml.doc("<p>The difference between the predicted value and the actual value over the quantile,
       weighted (normalized) by dividing by the sum over all quantiles.</p>")
   @as("LossValue")
   lossValue: option<double>,
   @ocaml.doc("<p>The quantile. Quantiles divide a probability distribution into regions of equal
-      probability. For example, if the distribution was divided into 5 regions of equal
-      probability, the quantiles would be 0.2, 0.4, 0.6, and 0.8.</p>")
+      probability. For example, if the distribution was divided into 5 regions of equal probability,
+      the quantiles would be 0.2, 0.4, 0.6, and 0.8.</p>")
   @as("Quantile")
   quantile: option<double>,
 }
 type values = array<value>
+type transformations = Js.Dict.t<value>
 type trainingParameters = Js.Dict.t<parameterValue>
 @ocaml.doc("<p>The status, start time, and end time of a backtest, as well as a failure reason if
       applicable.</p>")
@@ -117,14 +133,16 @@ type testWindowSummary = {
   testWindowStart: option<timestamp_>,
 }
 type tagKeys = array<tagKey>
-@ocaml.doc("<p>The optional metadata that you apply to a resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p>
+@ocaml.doc("<p>The optional metadata that you apply to a resource to help you categorize and organize
+      them. Each tag consists of a key and an optional value, both of which you define.</p>
          <p>The following basic restrictions apply to tags:</p>
          <ul>
             <li>
                <p>Maximum number of tags per resource - 50.</p>
             </li>
             <li>
-               <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p>
+               <p>For each resource, each tag key must be unique, and each tag key can have only one
+          value.</p>
             </li>
             <li>
                <p>Maximum key length - 128 Unicode characters in UTF-8.</p>
@@ -133,28 +151,38 @@ type tagKeys = array<tagKey>
                <p>Maximum value length - 256 Unicode characters in UTF-8.</p>
             </li>
             <li>
-               <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p>
+               <p>If your tagging schema is used across multiple services and resources, remember that
+          other services may have restrictions on allowed characters. Generally allowed characters
+          are: letters, numbers, and spaces representable in UTF-8, and the following characters: +
+          - = . _ : / @.</p>
             </li>
             <li>
                <p>Tag keys and values are case sensitive.</p>
             </li>
             <li>
-               <p>Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has <code>aws</code> as its prefix but the key does not, then Forecast considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of <code>aws</code> do not count against your tags per resource limit.</p>
+               <p>Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase combination
+          of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag
+          keys with this prefix. Values can have this prefix. If a tag value has <code>aws</code> as
+          its prefix but the key does not, then Forecast considers it to be a user tag and will
+          count against the limit of 50 tags. Tags with only the key prefix of <code>aws</code> do
+          not count against your tags per resource limit.</p>
             </li>
          </ul>")
 type tag = {
-  @ocaml.doc(
-    "<p>The optional part of a key-value pair that makes up a tag. A <code>value</code> acts as a descriptor within a tag category (key).</p>"
-  )
+  @ocaml.doc("<p>The optional part of a key-value pair that makes up a tag. A <code>value</code> acts as a
+      descriptor within a tag category (key).</p>")
   @as("Value")
   value: tagValue,
-  @ocaml.doc(
-    "<p>One part of a key-value pair that makes up a tag. A <code>key</code> is a general label that acts like a category for more specific tag values.</p>"
-  )
+  @ocaml.doc("<p>One part of a key-value pair that makes up a tag. A <code>key</code> is a general label
+      that acts like a category for more specific tag values.</p>")
   @as("Key")
   key: tagKey,
 }
-@ocaml.doc("<p>Describes a supplementary feature of a dataset group. This object is part of the <a>InputDataConfig</a> object. Forecast supports the Weather Index and Holidays built-in
+@ocaml.doc("<note>
+            <p>This object belongs to the <a>CreatePredictor</a> operation. If you created
+        your predictor with <a>CreateAutoPredictor</a>, see <a>AdditionalDataset</a>.</p>
+         </note>
+         <p>Describes a supplementary feature of a dataset group. This object is part of the <a>InputDataConfig</a> object. Forecast supports the Weather Index and Holidays built-in
       featurizations.</p>
          <p>
             <b>Weather Index</b>
@@ -162,7 +190,8 @@ type tag = {
          <p>The Amazon Forecast Weather Index is a built-in featurization that incorporates historical and
       projected weather information into your model. The Weather Index supplements your datasets
       with over two years of historical weather data and up to 14 days of projected weather data.
-      For more information, see <a href=\"https://docs.aws.amazon.com/forecast/latest/dg/weather.html\">Amazon Forecast Weather Index</a>.</p>
+      For more information, see <a href=\"https://docs.aws.amazon.com/forecast/latest/dg/weather.html\">Amazon Forecast Weather
+        Index</a>.</p>
          <p>
             <b>Holidays</b>
          </p>
@@ -383,9 +412,8 @@ type supplementaryFeature = {
          </ul>")
   @as("Value")
   value: value,
-  @ocaml.doc(
-    "<p>The name of the feature. Valid values: <code>\"holiday\"</code> and <code>\"weather\"</code>.</p>"
-  )
+  @ocaml.doc("<p>The name of the feature. Valid values: <code>\"holiday\"</code> and
+      <code>\"weather\"</code>.</p>")
   @as("Name")
   name: name,
 }
@@ -462,77 +490,15 @@ type s3Config = {
   @as("Path")
   path: s3Path,
 }
-@ocaml.doc("<p>Provides a summary of the predictor properties that are used in the <a>ListPredictors</a> operation. To get the complete set of properties, call the <a>DescribePredictor</a> operation, and provide the listed
-      <code>PredictorArn</code>.</p>")
-type predictorSummary = {
-  @ocaml.doc("<p>The last time the resource was modified. The timestamp depends on the status of the job:</p>
-         <ul>
-            <li>
-               <p>
-                  <code>CREATE_PENDING</code> - The <code>CreationTime</code>.</p>
-            </li>
-            <li>
-               <p>
-                  <code>CREATE_IN_PROGRESS</code> - The current timestamp.</p>
-            </li>
-            <li>
-               <p>
-                  <code>CREATE_STOPPING</code> - The current timestamp.</p>
-            </li>
-            <li>
-               <p>
-                  <code>CREATE_STOPPED</code> - When the job stopped.</p>
-            </li>
-            <li>
-               <p>
-                  <code>ACTIVE</code> or <code>CREATE_FAILED</code> - When the job finished or
-          failed.</p>
-            </li>
-         </ul>")
-  @as("LastModificationTime")
-  lastModificationTime: option<timestamp_>,
-  @ocaml.doc("<p>When the model training task was created.</p>") @as("CreationTime")
-  creationTime: option<timestamp_>,
-  @ocaml.doc("<p>If an error occurred, an informational message about the error.</p>")
-  @as("Message")
-  message: option<errorMessage>,
-  @ocaml.doc("<p>The status of the predictor. States include:</p>
-         <ul>
-            <li>
-               <p>
-                  <code>ACTIVE</code>
-               </p>
-            </li>
-            <li>
-               <p>
-                  <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,
-          <code>CREATE_FAILED</code>
-               </p>
-            </li>
-            <li>
-               <p>
-                  <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,
-          <code>DELETE_FAILED</code>
-               </p>
-            </li>
-            <li>
-               <p>
-                  <code>CREATE_STOPPING</code>, <code>CREATE_STOPPED</code>
-               </p>
-            </li>
-         </ul>
-         <note>
-            <p>The <code>Status</code> of the predictor must be <code>ACTIVE</code> before you can use
-        the predictor to create a forecast.</p>
-         </note>")
-  @as("Status")
-  status: option<status>,
-  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the dataset group that contains the data used to train
-      the predictor.</p>")
-  @as("DatasetGroupArn")
-  datasetGroupArn: option<arn>,
-  @ocaml.doc("<p>The name of the predictor.</p>") @as("PredictorName") predictorName: option<name>,
-  @ocaml.doc("<p>The ARN of the predictor.</p>") @as("PredictorArn") predictorArn: option<arn>,
+@ocaml.doc("<p>Provides a summary of the reference predictor used when retraining or upgrading a
+            predictor.</p>")
+type referencePredictorSummary = {
+  @ocaml.doc(
+    "<p>Whether the reference predictor is <code>Active</code> or <code>Deleted</code>.</p>"
+  )
+  @as("State")
+  state: option<state>,
+  @ocaml.doc("<p>The ARN of the reference predictor.</p>") @as("Arn") arn: option<arn>,
 }
 @ocaml.doc("<p>Specifies an integer hyperparameter and it's range of tunable values.
       This object is part of the <a>ParameterRanges</a> object.</p>")
@@ -644,6 +610,9 @@ type forecastSummary = {
       the predictor.</p>")
   @as("DatasetGroupArn")
   datasetGroupArn: option<string_>,
+  @ocaml.doc("<p>Whether the Forecast was created from an AutoPredictor.</p>")
+  @as("CreatedUsingAutoPredictor")
+  createdUsingAutoPredictor: option<boolean_>,
   @ocaml.doc("<p>The ARN of the predictor used to generate the forecast.</p>") @as("PredictorArn")
   predictorArn: option<string_>,
   @ocaml.doc("<p>The name of the forecast.</p>") @as("ForecastName") forecastName: option<name>,
@@ -664,6 +633,63 @@ type filter = {
   @ocaml.doc("<p>The name of the parameter to filter on.</p>") @as("Key") key: string_,
 }
 type featurizationMethodParameters = Js.Dict.t<parameterValue>
+@ocaml.doc("<p>Provides information about the Explainability resource.</p>")
+type explainabilityInfo = {
+  @ocaml.doc("<p>The status of the Explainability. States include: </p>
+        <ul>
+            <li>
+                <p>
+                  <code>ACTIVE</code>
+               </p>
+            </li>
+            <li>
+                <p>
+                  <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,
+                    <code>CREATE_FAILED</code>
+               </p>
+            </li>
+            <li>
+                <p>
+                    <code>CREATE_STOPPING</code>, <code>CREATE_STOPPED</code>
+                </p>
+            </li>
+            <li>
+                <p>
+                  <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,
+                    <code>DELETE_FAILED</code>
+               </p>
+            </li>
+         </ul>")
+  @as("Status")
+  status: option<status>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the Explainability.</p>")
+  @as("ExplainabilityArn")
+  explainabilityArn: option<arn>,
+}
+@ocaml.doc("<p>The ExplainabilityConfig data type defines the number of time series and time points
+            included in <a>CreateExplainability</a>.</p>
+        <p>If you provide a predictor ARN for <code>ResourceArn</code>, you must set both
+                <code>TimePointGranularity</code> and <code>TimeSeriesGranularity</code> to “ALL”.
+            When creating Predictor Explainability, Amazon Forecast considers all time series and
+            time points.</p>
+        <p>If you provide a forecast ARN for <code>ResourceArn</code>, you can set <code>TimePointGranularity</code> and
+            <code>TimeSeriesGranularity</code> to either “ALL” or “Specific”.</p>")
+type explainabilityConfig = {
+  @ocaml.doc("<p>To create an Explainability for all time points in your forecast horizon, use
+                <code>ALL</code>. To create an Explainability for specific time points in your
+            forecast horizon, use <code>SPECIFIC</code>.</p>
+        <p>Specify time points with the <code>StartDateTime</code> and <code>EndDateTime</code>
+            parameters within the <a>CreateExplainability</a> operation.</p>")
+  @as("TimePointGranularity")
+  timePointGranularity: timePointGranularity,
+  @ocaml.doc("<p>To create an Explainability for all time series in your datasets, use
+            <code>ALL</code>. To create an Explainability for specific time series in your datasets,
+            use <code>SPECIFIC</code>.</p>
+        <p>Specify time series by uploading a CSV file to an Amazon S3 bucket and set the location
+            within the <a>DataDestination</a> data type.</p>")
+  @as("TimeSeriesGranularity")
+  timeSeriesGranularity: timeSeriesGranularity,
+}
 @ocaml.doc("<p>Parameters that define how to split a dataset into training data and testing data, and the
       number of iterations to perform. These parameters are specified in the predefined algorithms
       but you can override them in the <a>CreatePredictor</a> request.</p>")
@@ -683,24 +709,15 @@ type evaluationParameters = {
   @as("NumberOfBacktestWindows")
   numberOfBacktestWindows: option<integer_>,
 }
-@ocaml.doc("<p>
-      Provides detailed error metrics to evaluate the performance of a predictor. This object is
-      part of the <a>Metrics</a> object.
-    </p>")
+@ocaml.doc("<p> Provides detailed error metrics to evaluate the performance of a predictor. This object
+      is part of the <a>Metrics</a> object. </p>")
 type errorMetric = {
-  @ocaml.doc("<p>
-      The root-mean-square error (RMSE).
-    </p>")
-  @as("RMSE")
-  rmse: option<double>,
-  @ocaml.doc("<p>
-      The weighted absolute percentage error (WAPE).
-    </p>")
-  @as("WAPE")
+  @ocaml.doc("<p>The Mean Absolute Percentage Error (MAPE)</p>") @as("MAPE") mape: option<double>,
+  @ocaml.doc("<p>The Mean Absolute Scaled Error (MASE)</p>") @as("MASE") mase: option<double>,
+  @ocaml.doc("<p> The root-mean-square error (RMSE). </p>") @as("RMSE") rmse: option<double>,
+  @ocaml.doc("<p> The weighted absolute percentage error (WAPE). </p>") @as("WAPE")
   wape: option<double>,
-  @ocaml.doc("<p>
-      The Forecast type used to compute WAPE and RMSE.
-    </p>")
+  @ocaml.doc("<p> The Forecast type used to compute WAPE, MAPE, MASE, and RMSE. </p>")
   @as("ForecastType")
   forecastType: option<forecastType>,
 }
@@ -797,15 +814,94 @@ type testWindowDetails = array<testWindowSummary>
 type tags = array<tag>
 type supplementaryFeatures = array<supplementaryFeature>
 type schemaAttributes = array<schemaAttribute>
-type predictors = array<predictorSummary>
+@ocaml.doc("<p>Provides a summary of the predictor properties that are used in the <a>ListPredictors</a> operation. To get the complete set of properties, call the <a>DescribePredictor</a> operation, and provide the listed
+      <code>PredictorArn</code>.</p>")
+type predictorSummary = {
+  @ocaml.doc("<p>The last time the resource was modified. The timestamp depends on the status of the
+      job:</p>
+         <ul>
+            <li>
+               <p>
+                  <code>CREATE_PENDING</code> - The <code>CreationTime</code>.</p>
+            </li>
+            <li>
+               <p>
+                  <code>CREATE_IN_PROGRESS</code> - The current timestamp.</p>
+            </li>
+            <li>
+               <p>
+                  <code>CREATE_STOPPING</code> - The current timestamp.</p>
+            </li>
+            <li>
+               <p>
+                  <code>CREATE_STOPPED</code> - When the job stopped.</p>
+            </li>
+            <li>
+               <p>
+                  <code>ACTIVE</code> or <code>CREATE_FAILED</code> - When the job finished or
+          failed.</p>
+            </li>
+         </ul>")
+  @as("LastModificationTime")
+  lastModificationTime: option<timestamp_>,
+  @ocaml.doc("<p>When the model training task was created.</p>") @as("CreationTime")
+  creationTime: option<timestamp_>,
+  @ocaml.doc("<p>If an error occurred, an informational message about the error.</p>")
+  @as("Message")
+  message: option<errorMessage>,
+  @ocaml.doc("<p>The status of the predictor. States include:</p>
+         <ul>
+            <li>
+               <p>
+                  <code>ACTIVE</code>
+               </p>
+            </li>
+            <li>
+               <p>
+                  <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,
+            <code>CREATE_FAILED</code>
+               </p>
+            </li>
+            <li>
+               <p>
+                  <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,
+            <code>DELETE_FAILED</code>
+               </p>
+            </li>
+            <li>
+               <p>
+                  <code>CREATE_STOPPING</code>, <code>CREATE_STOPPED</code>
+               </p>
+            </li>
+         </ul>
+         <note>
+            <p>The <code>Status</code> of the predictor must be <code>ACTIVE</code> before you can use
+        the predictor to create a forecast.</p>
+         </note>")
+  @as("Status")
+  status: option<status>,
+  @ocaml.doc("<p>A summary of the reference predictor used if the predictor was retrained or
+            upgraded.</p>")
+  @as("ReferencePredictorSummary")
+  referencePredictorSummary: option<referencePredictorSummary>,
+  @ocaml.doc("<p>Whether AutoPredictor was used to create the predictor.</p>")
+  @as("IsAutoPredictor")
+  isAutoPredictor: option<boolean_>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the dataset group that contains the data used to train
+      the predictor.</p>")
+  @as("DatasetGroupArn")
+  datasetGroupArn: option<arn>,
+  @ocaml.doc("<p>The name of the predictor.</p>") @as("PredictorName") predictorName: option<name>,
+  @ocaml.doc("<p>The ARN of the predictor.</p>") @as("PredictorArn") predictorArn: option<arn>,
+}
 type integerParameterRanges = array<integerParameterRange>
 type forecasts = array<forecastSummary>
 type filters = array<filter>
 type fieldStatistics = Js.Dict.t<statistics>
-@ocaml.doc("<p>Provides information about the method that featurizes (transforms) a dataset field.
-      The method is part of the <code>FeaturizationPipeline</code> of the
-      <a>Featurization</a> object. </p>
-         <p>The following is an example of how you specify a <code>FeaturizationMethod</code> object.</p>
+@ocaml.doc("<p>Provides information about the method that featurizes (transforms) a dataset field. The
+      method is part of the <code>FeaturizationPipeline</code> of the <a>Featurization</a> object. </p>
+         <p>The following is an example of how you specify a <code>FeaturizationMethod</code>
+      object.</p>
          <p>
             <code>{</code>
          </p>
@@ -813,20 +909,24 @@ type fieldStatistics = Js.Dict.t<statistics>
             <code>\"FeaturizationMethodName\": \"filling\",</code>
          </p>
          <p>
-            <code>\"FeaturizationMethodParameters\": {\"aggregation\": \"sum\", \"middlefill\": \"zero\", \"backfill\": \"zero\"}</code>
+            <code>\"FeaturizationMethodParameters\": {\"aggregation\": \"sum\", \"middlefill\": \"zero\",
+        \"backfill\": \"zero\"}</code>
          </p>
          <p>
             <code>}</code>
          </p>")
 type featurizationMethod = {
-  @ocaml.doc("<p>The method parameters (key-value pairs), which are a map of override parameters. Specify these parameters to override the default values. 
-      Related Time Series attributes do not accept aggregation parameters.</p>
-         <p>The following list shows the parameters and their valid values for the \"filling\" featurization method for a <b>Target Time Series</b> dataset. Bold signifies the default
-      value.</p>
+  @ocaml.doc("<p>The method parameters (key-value pairs), which are a map of override parameters. Specify
+      these parameters to override the default values. Related Time Series attributes do not accept
+      aggregation parameters.</p>
+         <p>The following list shows the parameters and their valid values for the \"filling\"
+      featurization method for a <b>Target Time Series</b> dataset. Bold
+      signifies the default value.</p>
          <ul>
             <li>
                <p>
-                  <code>aggregation</code>: <b>sum</b>, <code>avg</code>, <code>first</code>, <code>min</code>, <code>max</code>
+                  <code>aggregation</code>: <b>sum</b>, <code>avg</code>,
+            <code>first</code>, <code>min</code>, <code>max</code>
                </p>
             </li>
             <li>
@@ -836,12 +936,16 @@ type featurizationMethod = {
             </li>
             <li>
                <p>
-                  <code>middlefill</code>: <b>zero</b>, <code>nan</code> (not a number), <code>value</code>, <code>median</code>, <code>mean</code>, <code>min</code>, <code>max</code>
+                  <code>middlefill</code>: <b>zero</b>, <code>nan</code> (not
+          a number), <code>value</code>, <code>median</code>, <code>mean</code>, <code>min</code>,
+            <code>max</code>
                </p>
             </li>
             <li>
                <p>
-                  <code>backfill</code>: <b>zero</b>, <code>nan</code>, <code>value</code>, <code>median</code>, <code>mean</code>, <code>min</code>, <code>max</code>
+                  <code>backfill</code>: <b>zero</b>, <code>nan</code>,
+            <code>value</code>, <code>median</code>, <code>mean</code>, <code>min</code>,
+            <code>max</code>
                </p>
             </li>
          </ul>
@@ -850,17 +954,20 @@ type featurizationMethod = {
          <ul>
             <li>
                <p>
-                  <code>middlefill</code>: <code>zero</code>, <code>value</code>, <code>median</code>, <code>mean</code>, <code>min</code>, <code>max</code>
+                  <code>middlefill</code>: <code>zero</code>, <code>value</code>, <code>median</code>,
+            <code>mean</code>, <code>min</code>, <code>max</code>
                </p>
             </li>
             <li>
                <p>
-                  <code>backfill</code>: <code>zero</code>, <code>value</code>, <code>median</code>, <code>mean</code>, <code>min</code>, <code>max</code>
+                  <code>backfill</code>: <code>zero</code>, <code>value</code>, <code>median</code>,
+            <code>mean</code>, <code>min</code>, <code>max</code>
                </p>
             </li>
             <li>
                <p>
-                  <code>futurefill</code>: <code>zero</code>, <code>value</code>, <code>median</code>, <code>mean</code>, <code>min</code>, <code>max</code>
+                  <code>futurefill</code>: <code>zero</code>, <code>value</code>, <code>median</code>,
+            <code>mean</code>, <code>min</code>, <code>max</code>
                </p>
             </li>
          </ul>
@@ -874,14 +981,91 @@ type featurizationMethod = {
   @as("FeaturizationMethodName")
   featurizationMethodName: featurizationMethodName,
 }
+@ocaml.doc("<p>Provides a summary of the Explainability properties used in the <a>ListExplainabilities</a> operation. To get a complete set of properties,
+            call the <a>DescribeExplainability</a> operation, and provide the listed
+                <code>ExplainabilityArn</code>.</p>")
+type explainabilitySummary = {
+  @ocaml.doc("<p>The last time the resource was modified. The timestamp depends on the status of the
+            job:</p>
+        <ul>
+            <li>
+                <p>
+                  <code>CREATE_PENDING</code> - The <code>CreationTime</code>.</p>
+            </li>
+            <li>
+                <p>
+                  <code>CREATE_IN_PROGRESS</code> - The current timestamp.</p>
+            </li>
+            <li>
+                <p>
+                  <code>CREATE_STOPPING</code> - The current timestamp.</p>
+            </li>
+            <li>
+                <p>
+                  <code>CREATE_STOPPED</code> - When the job stopped.</p>
+            </li>
+            <li>
+                <p>
+                  <code>ACTIVE</code> or <code>CREATE_FAILED</code> - When the job finished or
+                    failed.</p>
+            </li>
+         </ul>")
+  @as("LastModificationTime")
+  lastModificationTime: option<timestamp_>,
+  @ocaml.doc("<p>When the Explainability was created.</p>") @as("CreationTime")
+  creationTime: option<timestamp_>,
+  @ocaml.doc("<p>Information about any errors that may have occurred during the Explainability creation
+            process.</p>")
+  @as("Message")
+  message: option<message>,
+  @ocaml.doc("<p>The status of the Explainability. States include: </p>
+        <ul>
+            <li>
+                <p>
+                  <code>ACTIVE</code>
+               </p>
+            </li>
+            <li>
+                <p>
+                  <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,
+                        <code>CREATE_FAILED</code>
+               </p>
+            </li>
+            <li>
+                <p>
+                    <code>CREATE_STOPPING</code>, <code>CREATE_STOPPED</code>
+                </p>
+            </li>
+            <li>
+                <p>
+                  <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,
+                        <code>DELETE_FAILED</code>
+               </p>
+            </li>
+         </ul>")
+  @as("Status")
+  status: option<status>,
+  @ocaml.doc("<p>The configuration settings that define the granularity of time series and time points
+            for the Explainability.</p>")
+  @as("ExplainabilityConfig")
+  explainabilityConfig: option<explainabilityConfig>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the Predictor or Forecast used to create the
+            Explainability.</p>")
+  @as("ResourceArn")
+  resourceArn: option<arn>,
+  @ocaml.doc("<p>The name of the Explainability.</p>") @as("ExplainabilityName")
+  explainabilityName: option<name>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the Explainability.</p>")
+  @as("ExplainabilityArn")
+  explainabilityArn: option<arn>,
+}
 type errorMetrics = array<errorMetric>
 type datasets = array<datasetSummary>
 type datasetGroups = array<datasetGroupSummary>
-@ocaml.doc("<p>The source of your training data, an AWS Identity and Access Management (IAM) role that allows Amazon Forecast to
-      access the data and, optionally, an AWS Key Management Service (KMS) key. This object is submitted in the
-      <a>CreateDatasetImportJob</a> request.</p>")
+@ocaml.doc("<p>The source of your data, an AWS Identity and Access Management (IAM) role that allows Amazon Forecast to
+      access the data and, optionally, an AWS Key Management Service (KMS) key.</p>")
 type dataSource = {
-  @ocaml.doc("<p>The path to the training data stored in an Amazon Simple Storage Service (Amazon S3) bucket along with the
+  @ocaml.doc("<p>The path to the data stored in an Amazon Simple Storage Service (Amazon S3) bucket along with the
       credentials to access the data.</p>")
   @as("S3Config")
   s3Config: s3Config,
@@ -895,6 +1079,7 @@ type dataDestination = {
   s3Config: s3Config,
 }
 type continuousParameterRanges = array<continuousParameterRange>
+type configuration = Js.Dict.t<values>
 @ocaml.doc("<p>Specifies a categorical hyperparameter and it's range of tunable values.
       This object is part of the <a>ParameterRanges</a> object.</p>")
 type categoricalParameterRange = {
@@ -902,9 +1087,95 @@ type categoricalParameterRange = {
   values: values,
   @ocaml.doc("<p>The name of the categorical hyperparameter to tune.</p>") @as("Name") name: name,
 }
-@ocaml.doc(
-  "<p>Defines the fields of a dataset. You specify this object in the <a>CreateDataset</a> request.</p>"
-)
+@ocaml.doc("<p>Provides information about the method used to transform attributes.</p>
+        <p>The following is an example using the RETAIL domain:</p>
+        <p>
+            <code>{</code>
+         </p>
+        <p>
+            <code>\"AttributeName\": \"demand\",</code>
+         </p>
+        <p>
+            <code>\"Transformations\": {\"aggregation\": \"sum\", \"middlefill\": \"zero\", \"backfill\":
+                \"zero\"}</code>
+         </p>
+        <p>
+            <code>}</code>
+         </p>")
+type attributeConfig = {
+  @ocaml.doc("<p>The method parameters (key-value pairs), which are a map of override parameters.
+            Specify these parameters to override the default values. Related Time Series attributes
+            do not accept aggregation parameters.</p>
+        <p>The following list shows the parameters and their valid values for the \"filling\"
+            featurization method for a <b>Target Time Series</b> dataset.
+            Default values are bolded.</p>
+        <ul>
+            <li>
+                <p>
+                  <code>aggregation</code>: <b>sum</b>,
+                        <code>avg</code>, <code>first</code>, <code>min</code>,
+                    <code>max</code>
+               </p>
+            </li>
+            <li>
+                <p>
+                  <code>frontfill</code>: <b>none</b>
+               </p>
+            </li>
+            <li>
+                <p>
+                  <code>middlefill</code>: <b>zero</b>,
+                        <code>nan</code> (not a number), <code>value</code>, <code>median</code>,
+                        <code>mean</code>, <code>min</code>, <code>max</code>
+               </p>
+            </li>
+            <li>
+                <p>
+                  <code>backfill</code>: <b>zero</b>,
+                    <code>nan</code>, <code>value</code>, <code>median</code>, <code>mean</code>,
+                        <code>min</code>, <code>max</code>
+               </p>
+            </li>
+         </ul>
+
+        <p>The following list shows the parameters and their valid values for a <b>Related Time Series</b> featurization method (there are no
+            defaults):</p>
+        <ul>
+            <li>
+                <p>
+                  <code>middlefill</code>: <code>zero</code>, <code>value</code>,
+                        <code>median</code>, <code>mean</code>, <code>min</code>,
+                    <code>max</code>
+               </p>
+            </li>
+            <li>
+                <p>
+                  <code>backfill</code>: <code>zero</code>, <code>value</code>,
+                        <code>median</code>, <code>mean</code>, <code>min</code>,
+                    <code>max</code>
+               </p>
+            </li>
+            <li>
+                <p>
+                  <code>futurefill</code>: <code>zero</code>, <code>value</code>,
+                        <code>median</code>, <code>mean</code>, <code>min</code>,
+                    <code>max</code>
+               </p>
+            </li>
+         </ul>
+        <p>To set a filling method to a specific value, set the fill parameter to
+                <code>value</code> and define the value in a corresponding <code>_value</code>
+            parameter. For example, to set backfilling to a value of 2, include the following:
+                <code>\"backfill\": \"value\"</code> and <code>\"backfill_value\":\"2\"</code>. </p>")
+  @as("Transformations")
+  transformations: transformations,
+  @ocaml.doc("<p>The name of the attribute as specified in the schema. Amazon Forecast supports the
+            target field of the target time series and the related time series datasets. For
+            example, for the RETAIL domain, the target is <code>demand</code>.</p>")
+  @as("AttributeName")
+  attributeName: name,
+}
+@ocaml.doc("<p>Defines the fields of a dataset.</p>")
 type schema = {
   @ocaml.doc(
     "<p>An array of attributes specifying the name and type of each field in a dataset.</p>"
@@ -912,6 +1183,7 @@ type schema = {
   @as("Attributes")
   attributes: option<schemaAttributes>,
 }
+type predictors = array<predictorSummary>
 @ocaml.doc("<p>The algorithm used to perform a backtest and the status of those tests.</p>")
 type predictorExecution = {
   @ocaml.doc("<p>An array of test windows used to evaluate the algorithm. The
@@ -922,11 +1194,12 @@ type predictorExecution = {
   @ocaml.doc("<p>The ARN of the algorithm used to test the predictor.</p>") @as("AlgorithmArn")
   algorithmArn: option<arn>,
 }
-@ocaml.doc("<p>Provides a summary of the predictor backtest export job properties used in the <a>ListPredictorBacktestExportJobs</a> operation. To get a complete set of properties, call
-            the <a>DescribePredictorBacktestExportJob</a> operation, and provide the listed
-            <code>PredictorBacktestExportJobArn</code>.</p>")
+@ocaml.doc("<p>Provides a summary of the predictor backtest export job properties used in the <a>ListPredictorBacktestExportJobs</a> operation. To get a complete set of
+            properties, call the <a>DescribePredictorBacktestExportJob</a> operation, and
+            provide the listed <code>PredictorBacktestExportJobArn</code>.</p>")
 type predictorBacktestExportJobSummary = {
-  @ocaml.doc("<p>The last time the resource was modified. The timestamp depends on the status of the job:</p>
+  @ocaml.doc("<p>The last time the resource was modified. The timestamp depends on the status of the
+            job:</p>
         <ul>
             <li>
                 <p>
@@ -969,7 +1242,7 @@ type predictorBacktestExportJobSummary = {
             <li>
                 <p>
                   <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,
-                    <code>CREATE_FAILED</code>
+                        <code>CREATE_FAILED</code>
                </p>
             </li>
             <li>
@@ -980,7 +1253,7 @@ type predictorBacktestExportJobSummary = {
             <li>
                 <p>
                   <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,
-                    <code>DELETE_FAILED</code>
+                        <code>DELETE_FAILED</code>
                </p>
             </li>
          </ul>")
@@ -994,13 +1267,15 @@ type predictorBacktestExportJobSummary = {
   @as("PredictorBacktestExportJobArn")
   predictorBacktestExportJobArn: option<arn>,
 }
-@ocaml.doc("<p>Provides metrics that are used to evaluate the performance of a predictor. This object
-      is part of the <a>WindowSummary</a> object.</p>")
+@ocaml.doc("<p>Provides metrics that are used to evaluate the performance of a predictor. This object is
+      part of the <a>WindowSummary</a> object.</p>")
 type metrics = {
-  @ocaml.doc("<p>
-      Provides detailed error metrics on forecast type, root-mean square-error (RMSE), and weighted
-      average percentage error (WAPE).
-    </p>")
+  @ocaml.doc("<p>The average value of all weighted quantile losses.</p>")
+  @as("AverageWeightedQuantileLoss")
+  averageWeightedQuantileLoss: option<double>,
+  @ocaml.doc("<p> Provides detailed error metrics for each forecast type. Metrics include root-mean
+      square-error (RMSE), mean absolute percentage error (MAPE), mean absolute scaled error (MASE),
+      and weighted average percentage error (WAPE). </p>")
   @as("ErrorMetrics")
   errorMetrics: option<errorMetrics>,
   @ocaml.doc("<p>An array of weighted quantile losses. Quantiles divide a probability distribution into
@@ -1009,7 +1284,11 @@ type metrics = {
   weightedQuantileLosses: option<weightedQuantileLosses>,
   @ocaml.doc("<p>The root-mean-square error (RMSE).</p>") @as("RMSE") rmse: option<double>,
 }
-@ocaml.doc("<p>The data used to train a predictor. The data includes a dataset group and any
+@ocaml.doc("<note>
+            <p>This object belongs to the <a>CreatePredictor</a> operation. If you created
+        your predictor with <a>CreateAutoPredictor</a>, see <a>DataConfig</a>.</p>
+         </note>
+         <p>The data used to train a predictor. The data includes a dataset group and any
       supplementary features. You specify this object in the <a>CreatePredictor</a>
       request.</p>")
 type inputDataConfig = {
@@ -1098,6 +1377,78 @@ type forecastExportJobSummary = {
   forecastExportJobArn: option<arn>,
 }
 type featurizationPipeline = array<featurizationMethod>
+@ocaml.doc("<p>Provides a summary of the Explainability export properties used in the <a>ListExplainabilityExports</a> operation. To get a complete set of
+            properties, call the <a>DescribeExplainabilityExport</a> operation, and
+            provide the <code>ExplainabilityExportArn</code>.</p>")
+type explainabilityExportSummary = {
+  @ocaml.doc("<p>The last time the resource was modified. The timestamp depends on the status of the
+            job:</p>
+        <ul>
+            <li>
+                <p>
+                  <code>CREATE_PENDING</code> - The <code>CreationTime</code>.</p>
+            </li>
+            <li>
+                <p>
+                  <code>CREATE_IN_PROGRESS</code> - The current timestamp.</p>
+            </li>
+            <li>
+                <p>
+                  <code>CREATE_STOPPING</code> - The current timestamp.</p>
+            </li>
+            <li>
+                <p>
+                  <code>CREATE_STOPPED</code> - When the job stopped.</p>
+            </li>
+            <li>
+                <p>
+                  <code>ACTIVE</code> or <code>CREATE_FAILED</code> - When the job finished or
+                    failed.</p>
+            </li>
+         </ul>")
+  @as("LastModificationTime")
+  lastModificationTime: option<timestamp_>,
+  @ocaml.doc("<p>When the Explainability was created.</p>") @as("CreationTime")
+  creationTime: option<timestamp_>,
+  @ocaml.doc("<p>Information about any errors that may have occurred during the Explainability
+            export.</p>")
+  @as("Message")
+  message: option<errorMessage>,
+  @ocaml.doc("<p>The status of the Explainability export. States include: </p>
+        <ul>
+            <li>
+                <p>
+                  <code>ACTIVE</code>
+               </p>
+            </li>
+            <li>
+                <p>
+                  <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,
+                        <code>CREATE_FAILED</code>
+               </p>
+            </li>
+            <li>
+                <p>
+                    <code>CREATE_STOPPING</code>, <code>CREATE_STOPPED</code>
+                </p>
+            </li>
+            <li>
+                <p>
+                  <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,
+                        <code>DELETE_FAILED</code>
+               </p>
+            </li>
+         </ul>")
+  @as("Status")
+  status: option<status>,
+  @as("Destination") destination: option<dataDestination>,
+  @ocaml.doc("<p>The name of the Explainability export</p>") @as("ExplainabilityExportName")
+  explainabilityExportName: option<name>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the Explainability export.</p>")
+  @as("ExplainabilityExportArn")
+  explainabilityExportArn: option<arn>,
+}
+type explainabilities = array<explainabilitySummary>
 @ocaml.doc("<p>Provides a summary of the dataset import job properties used in the <a>ListDatasetImportJobs</a> operation. To get the complete set of properties, call the
         <a>DescribeDatasetImportJob</a> operation, and provide the
         <code>DatasetImportJobArn</code>.</p>")
@@ -1173,11 +1524,246 @@ type datasetImportJobSummary = {
   datasetImportJobArn: option<arn>,
 }
 type categoricalParameterRanges = array<categoricalParameterRange>
-@ocaml.doc("<p>The metrics for a time range within the evaluation portion of a dataset. This object
-      is part of the <a>EvaluationResult</a> object.</p>
-         <p>The <code>TestWindowStart</code> and <code>TestWindowEnd</code> parameters are
-      determined by the <code>BackTestWindowOffset</code> parameter of the
-      <a>EvaluationParameters</a> object.</p>")
+type attributeConfigs = array<attributeConfig>
+@ocaml.doc("<p>Describes an additional dataset. This object is part of the <a>DataConfig</a> object. Forecast supports the Weather Index and Holidays additional datasets.</p>
+        <p>
+            <b>Weather Index</b>
+         </p>
+        <p>The Amazon Forecast Weather Index is a built-in dataset that incorporates historical and
+            projected weather information into your model. The Weather Index supplements your
+            datasets with over two years of historical weather data and up to 14 days of projected
+            weather data. For more information, see <a href=\"https://docs.aws.amazon.com/forecast/latest/dg/weather.html\">Amazon Forecast
+                Weather Index</a>.</p>
+        <p>
+            <b>Holidays</b>
+         </p>
+        <p>Holidays is a built-in dataset that incorporates national holiday information into
+            your model. It provides native support for the holiday calendars of 66 countries. To
+            view the holiday calendars, refer to the <a href=\"http://jollyday.sourceforge.net/data.html\">Jollyday</a> library. For more
+            information, see <a href=\"https://docs.aws.amazon.com/forecast/latest/dg/holidays.html\">Holidays
+                Featurization</a>.</p>")
+type additionalDataset = {
+  @ocaml.doc("<p>
+            <b>Weather Index</b>
+         </p>
+        <p>To enable the Weather Index, do not specify a value for
+            <code>Configuration</code>.</p>
+        <p>
+            <b>Holidays</b>
+         </p>
+        <p>To enable Holidays, set <code>CountryCode</code> to one of the following two-letter country
+            codes:</p>
+        <ul>
+            <li>
+                <p>\"AL\" - ALBANIA</p>
+            </li>
+            <li>
+                <p>\"AR\" - ARGENTINA</p>
+            </li>
+            <li>
+                <p>\"AT\" - AUSTRIA</p>
+            </li>
+            <li>
+                <p>\"AU\" - AUSTRALIA</p>
+            </li>
+            <li>
+                <p>\"BA\" - BOSNIA HERZEGOVINA</p>
+            </li>
+            <li>
+                <p>\"BE\" - BELGIUM</p>
+            </li>
+            <li>
+                <p>\"BG\" - BULGARIA</p>
+            </li>
+            <li>
+                <p>\"BO\" - BOLIVIA</p>
+            </li>
+            <li>
+                <p>\"BR\" - BRAZIL</p>
+            </li>
+            <li>
+                <p>\"BY\" - BELARUS</p>
+            </li>
+            <li>
+                <p>\"CA\" - CANADA</p>
+            </li>
+            <li>
+                <p>\"CL\" - CHILE</p>
+            </li>
+            <li>
+                <p>\"CO\" - COLOMBIA</p>
+            </li>
+            <li>
+                <p>\"CR\" - COSTA RICA</p>
+            </li>
+            <li>
+                <p>\"HR\" - CROATIA</p>
+            </li>
+            <li>
+                <p>\"CZ\" - CZECH REPUBLIC</p>
+            </li>
+            <li>
+                <p>\"DK\" - DENMARK</p>
+            </li>
+            <li>
+                <p>\"EC\" - ECUADOR</p>
+            </li>
+            <li>
+                <p>\"EE\" - ESTONIA</p>
+            </li>
+            <li>
+                <p>\"ET\" - ETHIOPIA</p>
+            </li>
+            <li>
+                <p>\"FI\" - FINLAND</p>
+            </li>
+            <li>
+                <p>\"FR\" - FRANCE</p>
+            </li>
+            <li>
+                <p>\"DE\" - GERMANY</p>
+            </li>
+            <li>
+                <p>\"GR\" - GREECE</p>
+            </li>
+            <li>
+                <p>\"HU\" - HUNGARY</p>
+            </li>
+            <li>
+                <p>\"IS\" - ICELAND</p>
+            </li>
+            <li>
+                <p>\"IN\" - INDIA</p>
+            </li>
+            <li>
+                <p>\"IE\" - IRELAND</p>
+            </li>
+            <li>
+                <p>\"IT\" - ITALY</p>
+            </li>
+            <li>
+                <p>\"JP\" - JAPAN</p>
+            </li>
+            <li>
+                <p>\"KZ\" - KAZAKHSTAN</p>
+            </li>
+            <li>
+                <p>\"KR\" - KOREA</p>
+            </li>
+            <li>
+                <p>\"LV\" - LATVIA</p>
+            </li>
+            <li>
+                <p>\"LI\" - LIECHTENSTEIN</p>
+            </li>
+            <li>
+                <p>\"LT\" - LITHUANIA</p>
+            </li>
+            <li>
+                <p>\"LU\" - LUXEMBOURG</p>
+            </li>
+            <li>
+                <p>\"MK\" - MACEDONIA</p>
+            </li>
+            <li>
+                <p>\"MT\" - MALTA</p>
+            </li>
+            <li>
+                <p>\"MX\" - MEXICO</p>
+            </li>
+            <li>
+                <p>\"MD\" - MOLDOVA</p>
+            </li>
+            <li>
+                <p>\"ME\" - MONTENEGRO</p>
+            </li>
+            <li>
+                <p>\"NL\" - NETHERLANDS</p>
+            </li>
+            <li>
+                <p>\"NZ\" - NEW ZEALAND</p>
+            </li>
+            <li>
+                <p>\"NI\" - NICARAGUA</p>
+            </li>
+            <li>
+                <p>\"NG\" - NIGERIA</p>
+            </li>
+            <li>
+                <p>\"NO\" - NORWAY</p>
+            </li>
+            <li>
+                <p>\"PA\" - PANAMA</p>
+            </li>
+            <li>
+                <p>\"PY\" - PARAGUAY</p>
+            </li>
+            <li>
+                <p>\"PE\" - PERU</p>
+            </li>
+            <li>
+                <p>\"PL\" - POLAND</p>
+            </li>
+            <li>
+                <p>\"PT\" - PORTUGAL</p>
+            </li>
+            <li>
+                <p>\"RO\" - ROMANIA</p>
+            </li>
+            <li>
+                <p>\"RU\" - RUSSIA</p>
+            </li>
+            <li>
+                <p>\"RS\" - SERBIA</p>
+            </li>
+            <li>
+                <p>\"SK\" - SLOVAKIA</p>
+            </li>
+            <li>
+                <p>\"SI\" - SLOVENIA</p>
+            </li>
+            <li>
+                <p>\"ZA\" - SOUTH AFRICA</p>
+            </li>
+            <li>
+                <p>\"ES\" - SPAIN</p>
+            </li>
+            <li>
+                <p>\"SE\" - SWEDEN</p>
+            </li>
+            <li>
+                <p>\"CH\" - SWITZERLAND</p>
+            </li>
+            <li>
+                <p>\"UA\" - UKRAINE</p>
+            </li>
+            <li>
+                <p>\"AE\" - UNITED ARAB EMIRATES</p>
+            </li>
+            <li>
+                <p>\"US\" - UNITED STATES</p>
+            </li>
+            <li>
+                <p>\"UK\" - UNITED KINGDOM</p>
+            </li>
+            <li>
+                <p>\"UY\" - URUGUAY</p>
+            </li>
+            <li>
+                <p>\"VE\" - VENEZUELA</p>
+            </li>
+         </ul>")
+  @as("Configuration")
+  configuration: option<configuration>,
+  @ocaml.doc("<p>The name of the additional dataset. Valid names: <code>\"holiday\"</code> and
+                <code>\"weather\"</code>.</p>")
+  @as("Name")
+  name: name,
+}
+@ocaml.doc("<p>The metrics for a time range within the evaluation portion of a dataset. This object is
+      part of the <a>EvaluationResult</a> object.</p>
+         <p>The <code>TestWindowStart</code> and <code>TestWindowEnd</code> parameters are determined
+      by the <code>BackTestWindowOffset</code> parameter of the <a>EvaluationParameters</a> object.</p>")
 type windowSummary = {
   @ocaml.doc("<p>Provides metrics used to evaluate the performance of a predictor.</p>")
   @as("Metrics")
@@ -1220,8 +1806,12 @@ type parameterRanges = {
   categoricalParameterRanges: option<categoricalParameterRanges>,
 }
 type forecastExportJobs = array<forecastExportJobSummary>
-@ocaml.doc("<p>Provides featurization (transformation) information for a dataset field. This object
-      is part of the <a>FeaturizationConfig</a> object.</p>
+@ocaml.doc("<note>
+            <p>This object belongs to the <a>CreatePredictor</a> operation. If you created
+        your predictor with <a>CreateAutoPredictor</a>, see <a>AttributeConfig</a>.</p>
+         </note>
+         <p>Provides featurization (transformation) information for a dataset field. This object is
+      part of the <a>FeaturizationConfig</a> object.</p>
          <p>For example:</p>
          <p>
             <code>{</code>
@@ -1237,7 +1827,8 @@ type forecastExportJobs = array<forecastExportJobSummary>
             <code>\"FeaturizationMethodName\": \"filling\",</code>
          </p>
          <p>
-            <code>\"FeaturizationMethodParameters\": {\"aggregation\": \"avg\", \"backfill\": \"nan\"}</code>
+            <code>\"FeaturizationMethodParameters\": {\"aggregation\": \"avg\", \"backfill\":
+      \"nan\"}</code>
          </p>
          <p>
             <code>} ]</code>
@@ -1250,15 +1841,17 @@ type featurization = {
       transformation method.</p>")
   @as("FeaturizationPipeline")
   featurizationPipeline: option<featurizationPipeline>,
-  @ocaml.doc("<p>The name of the schema attribute that specifies the data field to be featurized. Amazon Forecast supports the target field of 
-      the <code>TARGET_TIME_SERIES</code> and the <code>RELATED_TIME_SERIES</code> datasets. For example, for the <code>RETAIL</code> domain, the target is
-      <code>demand</code>, and for the <code>CUSTOM</code> domain, the target is
-      <code>target_value</code>.
-      For more information, see <a>howitworks-missing-values</a>.</p>")
+  @ocaml.doc("<p>The name of the schema attribute that specifies the data field to be featurized. Amazon
+      Forecast supports the target field of the <code>TARGET_TIME_SERIES</code> and the
+        <code>RELATED_TIME_SERIES</code> datasets. For example, for the <code>RETAIL</code> domain,
+      the target is <code>demand</code>, and for the <code>CUSTOM</code> domain, the target is
+        <code>target_value</code>. For more information, see <a>howitworks-missing-values</a>.</p>")
   @as("AttributeName")
   attributeName: name,
 }
+type explainabilityExports = array<explainabilityExportSummary>
 type datasetImportJobs = array<datasetImportJobSummary>
+type additionalDatasets = array<additionalDataset>
 type testWindows = array<windowSummary>
 @ocaml.doc("<p>Contains details on the backtests performed to evaluate the accuracy of the predictor. The
       tests are returned in descending order of accuracy, with the most accurate backtest appearing
@@ -1285,38 +1878,56 @@ type hyperParameterTuningJobConfig = {
   parameterRanges: option<parameterRanges>,
 }
 type featurizations = array<featurization>
-@ocaml.doc("<p>In a <a>CreatePredictor</a> operation, the specified algorithm
-      trains a model using the specified dataset group. You can optionally tell the operation
-      to modify data fields prior to training a model. These modifications are referred to as
-      <i>featurization</i>.</p>
-         <p>You define featurization using the <code>FeaturizationConfig</code> object.
-      You specify an array of transformations, one for each field that you want to
-      featurize. You then include the <code>FeaturizationConfig</code> object in your
-      <code>CreatePredictor</code> request. Amazon Forecast applies the featurization to the
-      <code>TARGET_TIME_SERIES</code> and <code>RELATED_TIME_SERIES</code> datasets before model training.</p>
-         <p>You can create multiple featurization configurations. For example, you
-      might call the <code>CreatePredictor</code> operation twice by specifying different
-      featurization configurations.</p>")
+@ocaml.doc("<p>The data configuration for your dataset group and any additional datasets.</p>")
+type dataConfig = {
+  @ocaml.doc("<p>Additional built-in datasets like Holidays and the Weather Index.</p>")
+  @as("AdditionalDatasets")
+  additionalDatasets: option<additionalDatasets>,
+  @ocaml.doc("<p>Aggregation and filling options for attributes in your dataset group.</p>")
+  @as("AttributeConfigs")
+  attributeConfigs: option<attributeConfigs>,
+  @ocaml.doc("<p>The ARN of the dataset group used to train the predictor.</p>")
+  @as("DatasetGroupArn")
+  datasetGroupArn: arn,
+}
+@ocaml.doc("<note>
+            <p>This object belongs to the <a>CreatePredictor</a> operation. If you created
+        your predictor with <a>CreateAutoPredictor</a>, see <a>AttributeConfig</a>.</p>
+         </note>
+         <p>In a <a>CreatePredictor</a> operation, the specified algorithm trains a model
+      using the specified dataset group. You can optionally tell the operation to modify data fields
+      prior to training a model. These modifications are referred to as
+        <i>featurization</i>.</p>
+         <p>You define featurization using the <code>FeaturizationConfig</code> object. You specify an
+      array of transformations, one for each field that you want to featurize. You then include the
+        <code>FeaturizationConfig</code> object in your <code>CreatePredictor</code> request.
+      Amazon Forecast applies the featurization to the <code>TARGET_TIME_SERIES</code> and
+        <code>RELATED_TIME_SERIES</code> datasets before model training.</p>
+         <p>You can create multiple featurization configurations. For example, you might call the
+        <code>CreatePredictor</code> operation twice by specifying different featurization
+      configurations.</p>")
 type featurizationConfig = {
   @ocaml.doc(
     "<p>An array of featurization (transformation) information for the fields of a dataset.</p>"
   )
   @as("Featurizations")
   featurizations: option<featurizations>,
-  @ocaml.doc("<p>An array of dimension (field) names that specify how to group the generated forecast.</p>
-         <p>For example, suppose that you are generating a forecast for item sales across all of
-      your stores, and your dataset contains a <code>store_id</code> field. If you want the sales
-      forecast for each item by store, you would specify <code>store_id</code> as the dimension.</p>
+  @ocaml.doc("<p>An array of dimension (field) names that specify how to group the generated
+      forecast.</p>
+         <p>For example, suppose that you are generating a forecast for item sales across all of your
+      stores, and your dataset contains a <code>store_id</code> field. If you want the sales
+      forecast for each item by store, you would specify <code>store_id</code> as the
+      dimension.</p>
          <p>All forecast dimensions specified in the <code>TARGET_TIME_SERIES</code> dataset don't
-      need to be specified in the <code>CreatePredictor</code> request.
-      All forecast dimensions specified in the <code>RELATED_TIME_SERIES</code> dataset must
-      be specified in the <code>CreatePredictor</code> request.</p>")
+      need to be specified in the <code>CreatePredictor</code> request. All forecast dimensions
+      specified in the <code>RELATED_TIME_SERIES</code> dataset must be specified in the
+        <code>CreatePredictor</code> request.</p>")
   @as("ForecastDimensions")
   forecastDimensions: option<forecastDimensions>,
   @ocaml.doc("<p>The frequency of predictions in a forecast.</p>
          <p>Valid intervals are Y (Year), M (Month), W (Week), D (Day), H (Hour), 30min (30 minutes),
-      15min (15 minutes), 10min (10 minutes), 5min (5 minutes), and 1min (1 minute).
-      For example, \"Y\" indicates every year and \"5min\" indicates every five minutes.</p>
+      15min (15 minutes), 10min (10 minutes), 5min (5 minutes), and 1min (1 minute). For example,
+      \"Y\" indicates every year and \"5min\" indicates every five minutes.</p>
          <p>The frequency must be greater than or equal to the TARGET_TIME_SERIES dataset
       frequency.</p>
          <p>When a RELATED_TIME_SERIES dataset is provided, the frequency must be equal to the
@@ -1324,12 +1935,13 @@ type featurizationConfig = {
   @as("ForecastFrequency")
   forecastFrequency: frequency,
 }
-@ocaml.doc("<p>The results of evaluating an algorithm. Returned as part of the
-      <a>GetAccuracyMetrics</a> response.</p>")
+@ocaml.doc(
+  "<p>The results of evaluating an algorithm. Returned as part of the <a>GetAccuracyMetrics</a> response.</p>"
+)
 type evaluationResult = {
   @ocaml.doc("<p>The array of test windows used for evaluating the algorithm. The
-      <code>NumberOfBacktestWindows</code> from the <a>EvaluationParameters</a>
-      object determines the number of windows in the array.</p>")
+        <code>NumberOfBacktestWindows</code> from the <a>EvaluationParameters</a> object
+      determines the number of windows in the array.</p>")
   @as("TestWindows")
   testWindows: option<testWindows>,
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the algorithm that was evaluated.</p>")
@@ -1343,12 +1955,13 @@ module StopResource = {
   type request = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) that identifies the resource to stop. The supported ARNs
          are <code>DatasetImportJobArn</code>, <code>PredictorArn</code>,
-            <code>PredictorBacktestExportJobArn</code>, <code>ForecastArn</code>, and
-            <code>ForecastExportJobArn</code>. </p>")
+            <code>PredictorBacktestExportJobArn</code>, <code>ForecastArn</code>,
+            <code>ForecastExportJobArn</code>, <code>ExplainabilityArn</code>, and
+            <code>ExplainabilityExportArn</code>. </p>")
     @as("ResourceArn")
     resourceArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-forecast") @new external new: request => t = "StopResourceCommand"
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1362,7 +1975,7 @@ module DeleteResourceTree = {
     @as("ResourceArn")
     resourceArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-forecast") @new external new: request => t = "DeleteResourceTreeCommand"
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1377,7 +1990,7 @@ module DeletePredictorBacktestExportJob = {
     @as("PredictorBacktestExportJobArn")
     predictorBacktestExportJobArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-forecast") @new
   external new: request => t = "DeletePredictorBacktestExportJobCommand"
   let make = (~predictorBacktestExportJobArn, ()) =>
@@ -1392,7 +2005,7 @@ module DeletePredictor = {
     @as("PredictorArn")
     predictorArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-forecast") @new external new: request => t = "DeletePredictorCommand"
   let make = (~predictorArn, ()) => new({predictorArn: predictorArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1405,7 +2018,7 @@ module DeleteForecastExportJob = {
     @as("ForecastExportJobArn")
     forecastExportJobArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-forecast") @new
   external new: request => t = "DeleteForecastExportJobCommand"
   let make = (~forecastExportJobArn, ()) => new({forecastExportJobArn: forecastExportJobArn})
@@ -1419,9 +2032,38 @@ module DeleteForecast = {
     @as("ForecastArn")
     forecastArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-forecast") @new external new: request => t = "DeleteForecastCommand"
   let make = (~forecastArn, ()) => new({forecastArn: forecastArn})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module DeleteExplainabilityExport = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the Explainability export to delete. </p>")
+    @as("ExplainabilityExportArn")
+    explainabilityExportArn: arn,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-forecast") @new
+  external new: request => t = "DeleteExplainabilityExportCommand"
+  let make = (~explainabilityExportArn, ()) =>
+    new({explainabilityExportArn: explainabilityExportArn})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module DeleteExplainability = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the Explainability resource to delete.</p>")
+    @as("ExplainabilityArn")
+    explainabilityArn: arn,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-forecast") @new
+  external new: request => t = "DeleteExplainabilityCommand"
+  let make = (~explainabilityArn, ()) => new({explainabilityArn: explainabilityArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -1432,7 +2074,7 @@ module DeleteDatasetImportJob = {
     @as("DatasetImportJobArn")
     datasetImportJobArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-forecast") @new
   external new: request => t = "DeleteDatasetImportJobCommand"
   let make = (~datasetImportJobArn, ()) => new({datasetImportJobArn: datasetImportJobArn})
@@ -1446,7 +2088,7 @@ module DeleteDatasetGroup = {
     @as("DatasetGroupArn")
     datasetGroupArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-forecast") @new external new: request => t = "DeleteDatasetGroupCommand"
   let make = (~datasetGroupArn, ()) => new({datasetGroupArn: datasetGroupArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1458,7 +2100,7 @@ module DeleteDataset = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the dataset to delete.</p>") @as("DatasetArn")
     datasetArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-forecast") @new external new: request => t = "DeleteDatasetCommand"
   let make = (~datasetArn, ()) => new({datasetArn: datasetArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1473,7 +2115,7 @@ module UpdateDatasetGroup = {
     datasetArns: arnList,
     @ocaml.doc("<p>The ARN of the dataset group.</p>") @as("DatasetGroupArn") datasetGroupArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-forecast") @new external new: request => t = "UpdateDatasetGroupCommand"
   let make = (~datasetArns, ~datasetGroupArn, ()) =>
     new({datasetArns: datasetArns, datasetGroupArn: datasetGroupArn})
@@ -1484,13 +2126,12 @@ module UntagResource = {
   type t
   type request = {
     @ocaml.doc("<p>The keys of the tags to be removed.</p>") @as("TagKeys") tagKeys: tagKeys,
-    @ocaml.doc(
-      "<p>The Amazon Resource Name (ARN) that identifies the resource for which to list the tags. Currently, the supported resources are Forecast dataset groups, datasets, dataset import jobs, predictors, forecasts, and forecast exports.</p>"
-    )
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) that identifies the resource for which to list the tags.
+    </p>")
     @as("ResourceArn")
     resourceArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-forecast") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1661,7 +2302,8 @@ module TagResource = {
                <p>Maximum number of tags per resource - 50.</p>
             </li>
             <li>
-               <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p>
+               <p>For each resource, each tag key must be unique, and each tag key can have only one
+          value.</p>
             </li>
             <li>
                <p>Maximum key length - 128 Unicode characters in UTF-8.</p>
@@ -1670,24 +2312,31 @@ module TagResource = {
                <p>Maximum value length - 256 Unicode characters in UTF-8.</p>
             </li>
             <li>
-               <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p>
+               <p>If your tagging schema is used across multiple services and resources, remember that
+          other services may have restrictions on allowed characters. Generally allowed characters
+          are: letters, numbers, and spaces representable in UTF-8, and the following characters: +
+          - = . _ : / @.</p>
             </li>
             <li>
                <p>Tag keys and values are case sensitive.</p>
             </li>
             <li>
-               <p>Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has <code>aws</code> as its prefix but the key does not, then Forecast considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of <code>aws</code> do not count against your tags per resource limit.</p>
+               <p>Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase combination
+          of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag
+          keys with this prefix. Values can have this prefix. If a tag value has <code>aws</code> as
+          its prefix but the key does not, then Forecast considers it to be a user tag and will
+          count against the limit of 50 tags. Tags with only the key prefix of <code>aws</code> do
+          not count against your tags per resource limit.</p>
             </li>
          </ul>")
     @as("Tags")
     tags: tags,
-    @ocaml.doc(
-      "<p>The Amazon Resource Name (ARN) that identifies the resource for which to list the tags. Currently, the supported resources are Forecast dataset groups, datasets, dataset import jobs, predictors, forecasts, and forecast export jobs.</p>"
-    )
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) that identifies the resource for which to list the tags.
+    </p>")
     @as("ResourceArn")
     resourceArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-forecast") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1696,72 +2345,14 @@ module TagResource = {
 module ListTagsForResource = {
   type t
   type request = {
-    @ocaml.doc(
-      "<p>The Amazon Resource Name (ARN) that identifies the resource for which to list the tags. Currently, the supported resources are Forecast dataset groups, datasets, dataset import jobs, predictors, forecasts, and forecast export jobs.</p>"
-    )
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) that identifies the resource for which to list the tags.
+    </p>")
     @as("ResourceArn")
     resourceArn: arn,
   }
   type response = {@ocaml.doc("<p>The tags for the resource.</p>") @as("Tags") tags: option<tags>}
   @module("@aws-sdk/client-forecast") @new external new: request => t = "ListTagsForResourceCommand"
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
-module ListPredictors = {
-  type t
-  type request = {
-    @ocaml.doc("<p>An array of filters. For each filter, you provide a condition and a match statement. The
-      condition is either <code>IS</code> or <code>IS_NOT</code>, which specifies whether to include
-      or exclude the predictors that match the statement from the list, respectively. The match
-      statement consists of a key and a value.</p>
-         <p>
-            <b>Filter properties</b>
-         </p>
-         <ul>
-            <li>
-               <p>
-                  <code>Condition</code> - The condition to apply. Valid values are <code>IS</code> and
-            <code>IS_NOT</code>. To include the predictors that match the statement, specify
-            <code>IS</code>. To exclude matching predictors, specify <code>IS_NOT</code>.</p>
-            </li>
-            <li>
-               <p>
-                  <code>Key</code> - The name of the parameter to filter on. Valid values are
-            <code>DatasetGroupArn</code> and <code>Status</code>.</p>
-            </li>
-            <li>
-               <p>
-                  <code>Value</code> - The value to match.</p>
-            </li>
-         </ul>
-         <p>For example, to list all predictors whose status is ACTIVE, you would specify:</p>
-         <p>
-            <code>\"Filters\": [ { \"Condition\": \"IS\", \"Key\": \"Status\", \"Value\": \"ACTIVE\" }
-      ]</code>
-         </p>")
-    @as("Filters")
-    filters: option<filters>,
-    @ocaml.doc("<p>The number of items to return in the response.</p>") @as("MaxResults")
-    maxResults: option<maxResults>,
-    @ocaml.doc("<p>If the result of the previous request was truncated, the response includes a
-        <code>NextToken</code>. To retrieve the next set of results, use the token in the next
-      request. Tokens expire after 24 hours.</p>")
-    @as("NextToken")
-    nextToken: option<nextToken>,
-  }
-  type response = {
-    @ocaml.doc("<p>If the response is truncated, Amazon Forecast returns this token. To retrieve the next set of
-      results, use the token in the next request.</p>")
-    @as("NextToken")
-    nextToken: option<nextToken>,
-    @ocaml.doc("<p>An array of objects that summarize each predictor's properties.</p>")
-    @as("Predictors")
-    predictors: option<predictors>,
-  }
-  @module("@aws-sdk/client-forecast") @new external new: request => t = "ListPredictorsCommand"
-  let make = (~filters=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({filters: filters, maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1882,7 +2473,8 @@ module DescribePredictorBacktestExportJob = {
     predictorBacktestExportJobArn: arn,
   }
   type response = {
-    @ocaml.doc("<p>The last time the resource was modified. The timestamp depends on the status of the job:</p>
+    @ocaml.doc("<p>The last time the resource was modified. The timestamp depends on the status of the
+            job:</p>
         <ul>
             <li>
                 <p>
@@ -1920,7 +2512,7 @@ module DescribePredictorBacktestExportJob = {
             <li>
                 <p>
                   <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,
-                    <code>CREATE_FAILED</code>
+                        <code>CREATE_FAILED</code>
                </p>
             </li>
             <li>
@@ -1931,7 +2523,7 @@ module DescribePredictorBacktestExportJob = {
             <li>
                 <p>
                   <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,
-                    <code>DELETE_FAILED</code>
+                        <code>DELETE_FAILED</code>
                </p>
             </li>
          </ul>")
@@ -2044,6 +2636,90 @@ module DescribeForecastExportJob = {
   @module("@aws-sdk/client-forecast") @new
   external new: request => t = "DescribeForecastExportJobCommand"
   let make = (~forecastExportJobArn, ()) => new({forecastExportJobArn: forecastExportJobArn})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module DescribeExplainabilityExport = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the Explainability export.</p>")
+    @as("ExplainabilityExportArn")
+    explainabilityExportArn: arn,
+  }
+  type response = {
+    @ocaml.doc("<p>The last time the resource was modified. The timestamp depends on the status of the
+            job:</p>
+        <ul>
+            <li>
+                <p>
+                  <code>CREATE_PENDING</code> - The <code>CreationTime</code>.</p>
+            </li>
+            <li>
+                <p>
+                  <code>CREATE_IN_PROGRESS</code> - The current timestamp.</p>
+            </li>
+            <li>
+                <p>
+                  <code>CREATE_STOPPING</code> - The current timestamp.</p>
+            </li>
+            <li>
+                <p>
+                  <code>CREATE_STOPPED</code> - When the job stopped.</p>
+            </li>
+            <li>
+                <p>
+                  <code>ACTIVE</code> or <code>CREATE_FAILED</code> - When the job finished or
+                    failed.</p>
+            </li>
+         </ul>")
+    @as("LastModificationTime")
+    lastModificationTime: option<timestamp_>,
+    @ocaml.doc("<p>When the Explainability export was created.</p>") @as("CreationTime")
+    creationTime: option<timestamp_>,
+    @ocaml.doc("<p>The status of the Explainability export. States include: </p>
+        <ul>
+            <li>
+                <p>
+                  <code>ACTIVE</code>
+               </p>
+            </li>
+            <li>
+                <p>
+                  <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,
+                        <code>CREATE_FAILED</code>
+               </p>
+            </li>
+            <li>
+                <p>
+                    <code>CREATE_STOPPING</code>, <code>CREATE_STOPPED</code>
+                </p>
+            </li>
+            <li>
+                <p>
+                  <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,
+                        <code>DELETE_FAILED</code>
+               </p>
+            </li>
+         </ul>")
+    @as("Status")
+    status: option<status>,
+    @ocaml.doc("<p>Information about any errors that occurred during the export.</p>")
+    @as("Message")
+    message: option<message>,
+    @as("Destination") destination: option<dataDestination>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the Explainability.</p>")
+    @as("ExplainabilityArn")
+    explainabilityArn: option<arn>,
+    @ocaml.doc("<p>The name of the Explainability export.</p>") @as("ExplainabilityExportName")
+    explainabilityExportName: option<name>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the Explainability export.</p>")
+    @as("ExplainabilityExportArn")
+    explainabilityExportArn: option<arn>,
+  }
+  @module("@aws-sdk/client-forecast") @new
+  external new: request => t = "DescribeExplainabilityExportCommand"
+  let make = (~explainabilityExportArn, ()) =>
+    new({explainabilityExportArn: explainabilityExportArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -2176,9 +2852,9 @@ module DescribeDatasetImportJob = {
 module CreatePredictorBacktestExportJob = {
   type t
   type request = {
-    @ocaml.doc("<p>Optional metadata to help you categorize and organize your backtests. Each tag consists
-            of a key and an optional value, both of which you define. Tag keys and values are case
-            sensitive.</p>
+    @ocaml.doc("<p>Optional metadata to help you categorize and organize your backtests. Each tag
+            consists of a key and an optional value, both of which you define. Tag keys and values
+            are case sensitive.</p>
         <p>The following restrictions apply to tags:</p>
         <ul>
             <li>
@@ -2195,17 +2871,17 @@ module CreatePredictorBacktestExportJob = {
                 <p>Maximum value length: 256 Unicode characters in UTF-8.</p>
             </li>
             <li>
-                <p>Accepted characters: all letters and numbers, spaces representable in UTF-8, and +
-                    - = . _ : / @. If your tagging schema is used across other services and resources,
-                    the character restrictions of those services also apply. </p>
+                <p>Accepted characters: all letters and numbers, spaces representable in UTF-8,
+                    and + - = . _ : / @. If your tagging schema is used across other services and
+                    resources, the character restrictions of those services also apply. </p>
             </li>
             <li>
                 <p>Key prefixes cannot include any upper or lowercase combination of
-                    <code>aws:</code> or <code>AWS:</code>. Values can have this prefix. If a tag
-                    value has <code>aws</code> as its prefix but the key does not, Forecast considers it
-                    to be a user tag and will count against the limit of 50 tags. Tags with only the key
-                    prefix of <code>aws</code> do not count against your tags per resource limit. You
-                    cannot edit or delete tag keys with this prefix.</p>
+                        <code>aws:</code> or <code>AWS:</code>. Values can have this prefix. If a
+                    tag value has <code>aws</code> as its prefix but the key does not, Forecast
+                    considers it to be a user tag and will count against the limit of 50 tags. Tags
+                    with only the key prefix of <code>aws</code> do not count against your tags per
+                    resource limit. You cannot edit or delete tag keys with this prefix.</p>
             </li>
          </ul>")
     @as("Tags")
@@ -2238,14 +2914,17 @@ module CreatePredictorBacktestExportJob = {
 module CreateForecastExportJob = {
   type t
   type request = {
-    @ocaml.doc("<p>The optional metadata that you apply to the forecast export job to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p>
+    @ocaml.doc("<p>The optional metadata that you apply to the forecast export job to help you categorize and
+      organize them. Each tag consists of a key and an optional value, both of which you
+      define.</p>
          <p>The following basic restrictions apply to tags:</p>
          <ul>
             <li>
                <p>Maximum number of tags per resource - 50.</p>
             </li>
             <li>
-               <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p>
+               <p>For each resource, each tag key must be unique, and each tag key can have only one
+          value.</p>
             </li>
             <li>
                <p>Maximum key length - 128 Unicode characters in UTF-8.</p>
@@ -2254,13 +2933,21 @@ module CreateForecastExportJob = {
                <p>Maximum value length - 256 Unicode characters in UTF-8.</p>
             </li>
             <li>
-               <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p>
+               <p>If your tagging schema is used across multiple services and resources, remember that
+          other services may have restrictions on allowed characters. Generally allowed characters
+          are: letters, numbers, and spaces representable in UTF-8, and the following characters: +
+          - = . _ : / @.</p>
             </li>
             <li>
                <p>Tag keys and values are case sensitive.</p>
             </li>
             <li>
-               <p>Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has <code>aws</code> as its prefix but the key does not, then Forecast considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of <code>aws</code> do not count against your tags per resource limit.</p>
+               <p>Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase combination
+          of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag
+          keys with this prefix. Values can have this prefix. If a tag value has <code>aws</code> as
+          its prefix but the key does not, then Forecast considers it to be a user tag and will
+          count against the limit of 50 tags. Tags with only the key prefix of <code>aws</code> do
+          not count against your tags per resource limit.</p>
             </li>
          </ul>")
     @as("Tags")
@@ -2298,14 +2985,16 @@ module CreateForecastExportJob = {
 module CreateForecast = {
   type t
   type request = {
-    @ocaml.doc("<p>The optional metadata that you apply to the forecast to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p>
+    @ocaml.doc("<p>The optional metadata that you apply to the forecast to help you categorize and organize
+      them. Each tag consists of a key and an optional value, both of which you define.</p>
          <p>The following basic restrictions apply to tags:</p>
          <ul>
             <li>
                <p>Maximum number of tags per resource - 50.</p>
             </li>
             <li>
-               <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p>
+               <p>For each resource, each tag key must be unique, and each tag key can have only one
+          value.</p>
             </li>
             <li>
                <p>Maximum key length - 128 Unicode characters in UTF-8.</p>
@@ -2314,13 +3003,21 @@ module CreateForecast = {
                <p>Maximum value length - 256 Unicode characters in UTF-8.</p>
             </li>
             <li>
-               <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p>
+               <p>If your tagging schema is used across multiple services and resources, remember that
+          other services may have restrictions on allowed characters. Generally allowed characters
+          are: letters, numbers, and spaces representable in UTF-8, and the following characters: +
+          - = . _ : / @.</p>
             </li>
             <li>
                <p>Tag keys and values are case sensitive.</p>
             </li>
             <li>
-               <p>Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has <code>aws</code> as its prefix but the key does not, then Forecast considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of <code>aws</code> do not count against your tags per resource limit.</p>
+               <p>Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase combination
+          of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag
+          keys with this prefix. Values can have this prefix. If a tag value has <code>aws</code> as
+          its prefix but the key does not, then Forecast considers it to be a user tag and will
+          count against the limit of 50 tags. Tags with only the key prefix of <code>aws</code> do
+          not count against your tags per resource limit.</p>
             </li>
          </ul>")
     @as("Tags")
@@ -2354,17 +3051,82 @@ module CreateForecast = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module CreateExplainabilityExport = {
+  type t
+  type request = {
+    @ocaml.doc("<p>Optional metadata to help you categorize and organize your resources. Each tag
+            consists of a key and an optional value, both of which you define. Tag keys and values
+            are case sensitive.</p>
+        <p>The following restrictions apply to tags:</p>
+        <ul>
+            <li>
+                <p>For each resource, each tag key must be unique and each tag key must have one
+                    value.</p>
+            </li>
+            <li>
+                <p>Maximum number of tags per resource: 50.</p>
+            </li>
+            <li>
+                <p>Maximum key length: 128 Unicode characters in UTF-8.</p>
+            </li>
+            <li>
+                <p>Maximum value length: 256 Unicode characters in UTF-8.</p>
+            </li>
+            <li>
+                <p>Accepted characters: all letters and numbers, spaces representable in UTF-8,
+                    and + - = . _ : / @. If your tagging schema is used across other services and
+                    resources, the character restrictions of those services also apply. </p>
+            </li>
+            <li>
+                <p>Key prefixes cannot include any upper or lowercase combination of
+                        <code>aws:</code> or <code>AWS:</code>. Values can have this prefix. If a
+                    tag value has <code>aws</code> as its prefix but the key does not, Forecast
+                    considers it to be a user tag and will count against the limit of 50 tags. Tags
+                    with only the key prefix of <code>aws</code> do not count against your tags per
+                    resource limit. You cannot edit or delete tag keys with this prefix.</p>
+            </li>
+         </ul>")
+    @as("Tags")
+    tags: option<tags>,
+    @as("Destination") destination: dataDestination,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the Explainability to export.</p>")
+    @as("ExplainabilityArn")
+    explainabilityArn: arn,
+    @ocaml.doc("<p>A unique name for the Explainability export.</p>")
+    @as("ExplainabilityExportName")
+    explainabilityExportName: name,
+  }
+  type response = {
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the export.</p>")
+    @as("ExplainabilityExportArn")
+    explainabilityExportArn: option<arn>,
+  }
+  @module("@aws-sdk/client-forecast") @new
+  external new: request => t = "CreateExplainabilityExportCommand"
+  let make = (~destination, ~explainabilityArn, ~explainabilityExportName, ~tags=?, ()) =>
+    new({
+      tags: tags,
+      destination: destination,
+      explainabilityArn: explainabilityArn,
+      explainabilityExportName: explainabilityExportName,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module CreateDatasetImportJob = {
   type t
   type request = {
-    @ocaml.doc("<p>The optional metadata that you apply to the dataset import job to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p>
+    @ocaml.doc("<p>The optional metadata that you apply to the dataset import job to help you categorize and
+      organize them. Each tag consists of a key and an optional value, both of which you
+      define.</p>
          <p>The following basic restrictions apply to tags:</p>
          <ul>
             <li>
                <p>Maximum number of tags per resource - 50.</p>
             </li>
             <li>
-               <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p>
+               <p>For each resource, each tag key must be unique, and each tag key can have only one
+          value.</p>
             </li>
             <li>
                <p>Maximum key length - 128 Unicode characters in UTF-8.</p>
@@ -2373,13 +3135,21 @@ module CreateDatasetImportJob = {
                <p>Maximum value length - 256 Unicode characters in UTF-8.</p>
             </li>
             <li>
-               <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p>
+               <p>If your tagging schema is used across multiple services and resources, remember that
+          other services may have restrictions on allowed characters. Generally allowed characters
+          are: letters, numbers, and spaces representable in UTF-8, and the following characters: +
+          - = . _ : / @.</p>
             </li>
             <li>
                <p>Tag keys and values are case sensitive.</p>
             </li>
             <li>
-               <p>Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has <code>aws</code> as its prefix but the key does not, then Forecast considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of <code>aws</code> do not count against your tags per resource limit.</p>
+               <p>Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase combination
+          of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag
+          keys with this prefix. Values can have this prefix. If a tag value has <code>aws</code> as
+          its prefix but the key does not, then Forecast considers it to be a user tag and will
+          count against the limit of 50 tags. Tags with only the key prefix of <code>aws</code> do
+          not count against your tags per resource limit.</p>
             </li>
          </ul>")
     @as("Tags")
@@ -2479,14 +3249,17 @@ module CreateDatasetImportJob = {
 module CreateDatasetGroup = {
   type t
   type request = {
-    @ocaml.doc("<p>The optional metadata that you apply to the dataset group to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p>
+    @ocaml.doc("<p>The optional metadata that you apply to the dataset group to help you categorize and
+      organize them. Each tag consists of a key and an optional value, both of which you
+      define.</p>
          <p>The following basic restrictions apply to tags:</p>
          <ul>
             <li>
                <p>Maximum number of tags per resource - 50.</p>
             </li>
             <li>
-               <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p>
+               <p>For each resource, each tag key must be unique, and each tag key can have only one
+          value.</p>
             </li>
             <li>
                <p>Maximum key length - 128 Unicode characters in UTF-8.</p>
@@ -2495,13 +3268,21 @@ module CreateDatasetGroup = {
                <p>Maximum value length - 256 Unicode characters in UTF-8.</p>
             </li>
             <li>
-               <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p>
+               <p>If your tagging schema is used across multiple services and resources, remember that
+          other services may have restrictions on allowed characters. Generally allowed characters
+          are: letters, numbers, and spaces representable in UTF-8, and the following characters: +
+          - = . _ : / @.</p>
             </li>
             <li>
                <p>Tag keys and values are case sensitive.</p>
             </li>
             <li>
-               <p>Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has <code>aws</code> as its prefix but the key does not, then Forecast considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of <code>aws</code> do not count against your tags per resource limit.</p>
+               <p>Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase combination
+          of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag
+          keys with this prefix. Values can have this prefix. If a tag value has <code>aws</code> as
+          its prefix but the key does not, then Forecast considers it to be a user tag and will
+          count against the limit of 50 tags. Tags with only the key prefix of <code>aws</code> do
+          not count against your tags per resource limit.</p>
             </li>
          </ul>")
     @as("Tags")
@@ -2530,6 +3311,219 @@ module CreateDatasetGroup = {
   @module("@aws-sdk/client-forecast") @new external new: request => t = "CreateDatasetGroupCommand"
   let make = (~domain, ~datasetGroupName, ~tags=?, ~datasetArns=?, ()) =>
     new({tags: tags, datasetArns: datasetArns, domain: domain, datasetGroupName: datasetGroupName})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module ListPredictors = {
+  type t
+  type request = {
+    @ocaml.doc("<p>An array of filters. For each filter, you provide a condition and a match statement. The
+      condition is either <code>IS</code> or <code>IS_NOT</code>, which specifies whether to include
+      or exclude the predictors that match the statement from the list, respectively. The match
+      statement consists of a key and a value.</p>
+         <p>
+            <b>Filter properties</b>
+         </p>
+         <ul>
+            <li>
+               <p>
+                  <code>Condition</code> - The condition to apply. Valid values are <code>IS</code> and
+            <code>IS_NOT</code>. To include the predictors that match the statement, specify
+            <code>IS</code>. To exclude matching predictors, specify <code>IS_NOT</code>.</p>
+            </li>
+            <li>
+               <p>
+                  <code>Key</code> - The name of the parameter to filter on. Valid values are
+            <code>DatasetGroupArn</code> and <code>Status</code>.</p>
+            </li>
+            <li>
+               <p>
+                  <code>Value</code> - The value to match.</p>
+            </li>
+         </ul>
+         <p>For example, to list all predictors whose status is ACTIVE, you would specify:</p>
+         <p>
+            <code>\"Filters\": [ { \"Condition\": \"IS\", \"Key\": \"Status\", \"Value\": \"ACTIVE\" }
+      ]</code>
+         </p>")
+    @as("Filters")
+    filters: option<filters>,
+    @ocaml.doc("<p>The number of items to return in the response.</p>") @as("MaxResults")
+    maxResults: option<maxResults>,
+    @ocaml.doc("<p>If the result of the previous request was truncated, the response includes a
+        <code>NextToken</code>. To retrieve the next set of results, use the token in the next
+      request. Tokens expire after 24 hours.</p>")
+    @as("NextToken")
+    nextToken: option<nextToken>,
+  }
+  type response = {
+    @ocaml.doc("<p>If the response is truncated, Amazon Forecast returns this token. To retrieve the next set of
+      results, use the token in the next request.</p>")
+    @as("NextToken")
+    nextToken: option<nextToken>,
+    @ocaml.doc("<p>An array of objects that summarize each predictor's properties.</p>")
+    @as("Predictors")
+    predictors: option<predictors>,
+  }
+  @module("@aws-sdk/client-forecast") @new external new: request => t = "ListPredictorsCommand"
+  let make = (~filters=?, ~maxResults=?, ~nextToken=?, ()) =>
+    new({filters: filters, maxResults: maxResults, nextToken: nextToken})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module ListExplainabilities = {
+  type t
+  type request = {
+    @ocaml.doc("<p>An array of filters. For each filter, provide a condition and a match statement. The
+            condition is either <code>IS</code> or <code>IS_NOT</code>, which specifies whether to
+            include or exclude the resources that match the statement from the list. The match
+            statement consists of a key and a value.</p>
+        <p>
+            <b>Filter properties</b>
+        </p>
+        <ul>
+            <li>
+                <p>
+                  <code>Condition</code> - The condition to apply. Valid values are
+                        <code>IS</code> and <code>IS_NOT</code>.</p>
+            </li>
+            <li>
+                <p>
+                  <code>Key</code> - The name of the parameter to filter on. Valid values are
+                        <code>ResourceArn</code> and <code>Status</code>.</p>
+            </li>
+            <li>
+                <p>
+                  <code>Value</code> - The value to match.</p>
+            </li>
+         </ul>")
+    @as("Filters")
+    filters: option<filters>,
+    @ocaml.doc("<p>The number of items returned in the response.</p>") @as("MaxResults")
+    maxResults: option<maxResults>,
+    @ocaml.doc("<p>If the result of the previous request was truncated, the response includes a
+            NextToken. To retrieve the next set of results, use the token in the next request.
+            Tokens expire after 24 hours.</p>")
+    @as("NextToken")
+    nextToken: option<nextToken>,
+  }
+  type response = {
+    @ocaml.doc("<p>Returns this token if the response is truncated. To retrieve the next set of results,
+            use the token in the next request.</p>")
+    @as("NextToken")
+    nextToken: option<nextToken>,
+    @ocaml.doc("<p>An array of objects that summarize the properties of each Explainability
+            resource.</p>")
+    @as("Explainabilities")
+    explainabilities: option<explainabilities>,
+  }
+  @module("@aws-sdk/client-forecast") @new
+  external new: request => t = "ListExplainabilitiesCommand"
+  let make = (~filters=?, ~maxResults=?, ~nextToken=?, ()) =>
+    new({filters: filters, maxResults: maxResults, nextToken: nextToken})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module DescribeExplainability = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the Explaianability to describe.</p>")
+    @as("ExplainabilityArn")
+    explainabilityArn: arn,
+  }
+  type response = {
+    @ocaml.doc("<p>The last time the resource was modified. The timestamp depends on the status of the
+            job:</p>
+        <ul>
+            <li>
+                <p>
+                  <code>CREATE_PENDING</code> - The <code>CreationTime</code>.</p>
+            </li>
+            <li>
+                <p>
+                  <code>CREATE_IN_PROGRESS</code> - The current timestamp.</p>
+            </li>
+            <li>
+                <p>
+                  <code>CREATE_STOPPING</code> - The current timestamp.</p>
+            </li>
+            <li>
+                <p>
+                  <code>CREATE_STOPPED</code> - When the job stopped.</p>
+            </li>
+            <li>
+                <p>
+                  <code>ACTIVE</code> or <code>CREATE_FAILED</code> - When the job finished or
+                    failed.</p>
+            </li>
+         </ul>")
+    @as("LastModificationTime")
+    lastModificationTime: option<timestamp_>,
+    @ocaml.doc("<p>When the Explainability resource was created.</p>") @as("CreationTime")
+    creationTime: option<timestamp_>,
+    @ocaml.doc("<p>The status of the Explainability resource. States include: </p>
+        <ul>
+            <li>
+                <p>
+                  <code>ACTIVE</code>
+               </p>
+            </li>
+            <li>
+                <p>
+                  <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,
+                        <code>CREATE_FAILED</code>
+               </p>
+            </li>
+            <li>
+                <p>
+                    <code>CREATE_STOPPING</code>, <code>CREATE_STOPPED</code>
+                </p>
+            </li>
+            <li>
+                <p>
+                  <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,
+                        <code>DELETE_FAILED</code>
+               </p>
+            </li>
+         </ul>")
+    @as("Status")
+    status: option<status>,
+    @ocaml.doc("<p>If an error occurred, a message about the error.</p>") @as("Message")
+    message: option<message>,
+    @ocaml.doc("<p>The estimated time remaining in minutes for the <a>CreateExplainability</a>
+            job to complete.</p>")
+    @as("EstimatedTimeRemainingInMinutes")
+    estimatedTimeRemainingInMinutes: option<long>,
+    @ocaml.doc("<p>If <code>TimePointGranularity</code> is set to <code>SPECIFIC</code>, the last time
+            point in the Explainability.</p>")
+    @as("EndDateTime")
+    endDateTime: option<localDateTime>,
+    @ocaml.doc("<p>If <code>TimePointGranularity</code> is set to <code>SPECIFIC</code>, the first time
+            point in the Explainability.</p>")
+    @as("StartDateTime")
+    startDateTime: option<localDateTime>,
+    @as("Schema") schema: option<schema>,
+    @as("DataSource") dataSource: option<dataSource>,
+    @ocaml.doc("<p>Whether the visualization was enabled for the Explainability resource.</p>")
+    @as("EnableVisualization")
+    enableVisualization: option<boolean_>,
+    @ocaml.doc("<p>The configuration settings that define the granularity of time series and time points
+            for the Explainability.</p>")
+    @as("ExplainabilityConfig")
+    explainabilityConfig: option<explainabilityConfig>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the Predictor or Forecast used to create the
+            Explainability resource.</p>")
+    @as("ResourceArn")
+    resourceArn: option<arn>,
+    @ocaml.doc("<p>The name of the Explainability.</p>") @as("ExplainabilityName")
+    explainabilityName: option<name>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the Explainability.</p>")
+    @as("ExplainabilityArn")
+    explainabilityArn: option<arn>,
+  }
+  @module("@aws-sdk/client-forecast") @new
+  external new: request => t = "DescribeExplainabilityCommand"
+  let make = (~explainabilityArn, ()) => new({explainabilityArn: explainabilityArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -2611,17 +3605,117 @@ module DescribeDataset = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module CreateExplainability = {
+  type t
+  type request = {
+    @ocaml.doc("<p>Optional metadata to help you categorize and organize your resources. Each tag
+            consists of a key and an optional value, both of which you define. Tag keys and values
+            are case sensitive.</p>
+        <p>The following restrictions apply to tags:</p>
+        <ul>
+            <li>
+                <p>For each resource, each tag key must be unique and each tag key must have one
+                    value.</p>
+            </li>
+            <li>
+                <p>Maximum number of tags per resource: 50.</p>
+            </li>
+            <li>
+                <p>Maximum key length: 128 Unicode characters in UTF-8.</p>
+            </li>
+            <li>
+                <p>Maximum value length: 256 Unicode characters in UTF-8.</p>
+            </li>
+            <li>
+                <p>Accepted characters: all letters and numbers, spaces representable in UTF-8,
+                    and + - = . _ : / @. If your tagging schema is used across other services and
+                    resources, the character restrictions of those services also apply. </p>
+            </li>
+            <li>
+                <p>Key prefixes cannot include any upper or lowercase combination of
+                        <code>aws:</code> or <code>AWS:</code>. Values can have this prefix. If a
+                    tag value has <code>aws</code> as its prefix but the key does not, Forecast
+                    considers it to be a user tag and will count against the limit of 50 tags. Tags
+                    with only the key prefix of <code>aws</code> do not count against your tags per
+                    resource limit. You cannot edit or delete tag keys with this prefix.</p>
+            </li>
+         </ul>")
+    @as("Tags")
+    tags: option<tags>,
+    @ocaml.doc("<p>If <code>TimePointGranularity</code> is set to <code>SPECIFIC</code>, define the last
+            time point for the Explainability.</p>
+        <p>Use the following timestamp format: yyyy-MM-ddTHH:mm:ss (example: 2015-01-01T20:00:00)</p>")
+    @as("EndDateTime")
+    endDateTime: option<localDateTime>,
+    @ocaml.doc("<p>If <code>TimePointGranularity</code> is set to <code>SPECIFIC</code>, define the first
+            point for the Explainability.</p>
+        <p>Use the following timestamp format: yyyy-MM-ddTHH:mm:ss (example: 2015-01-01T20:00:00)</p>")
+    @as("StartDateTime")
+    startDateTime: option<localDateTime>,
+    @ocaml.doc(
+      "<p>Create an Expainability visualization that is viewable within the AWS console.</p>"
+    )
+    @as("EnableVisualization")
+    enableVisualization: option<boolean_>,
+    @as("Schema") schema: option<schema>,
+    @as("DataSource") dataSource: option<dataSource>,
+    @ocaml.doc("<p>The configuration settings that define the granularity of time series and time points
+            for the Explainability.</p>")
+    @as("ExplainabilityConfig")
+    explainabilityConfig: explainabilityConfig,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the Predictor or Forecast used to create the
+            Explainability.</p>")
+    @as("ResourceArn")
+    resourceArn: arn,
+    @ocaml.doc("<p>A unique name for the Explainability.</p>") @as("ExplainabilityName")
+    explainabilityName: name,
+  }
+  type response = {
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the Explainability.</p>")
+    @as("ExplainabilityArn")
+    explainabilityArn: option<arn>,
+  }
+  @module("@aws-sdk/client-forecast") @new
+  external new: request => t = "CreateExplainabilityCommand"
+  let make = (
+    ~explainabilityConfig,
+    ~resourceArn,
+    ~explainabilityName,
+    ~tags=?,
+    ~endDateTime=?,
+    ~startDateTime=?,
+    ~enableVisualization=?,
+    ~schema=?,
+    ~dataSource=?,
+    (),
+  ) =>
+    new({
+      tags: tags,
+      endDateTime: endDateTime,
+      startDateTime: startDateTime,
+      enableVisualization: enableVisualization,
+      schema: schema,
+      dataSource: dataSource,
+      explainabilityConfig: explainabilityConfig,
+      resourceArn: resourceArn,
+      explainabilityName: explainabilityName,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module CreateDataset = {
   type t
   type request = {
-    @ocaml.doc("<p>The optional metadata that you apply to the dataset to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p>
+    @ocaml.doc("<p>The optional metadata that you apply to the dataset to help you categorize and organize
+      them. Each tag consists of a key and an optional value, both of which you define.</p>
          <p>The following basic restrictions apply to tags:</p>
          <ul>
             <li>
                <p>Maximum number of tags per resource - 50.</p>
             </li>
             <li>
-               <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p>
+               <p>For each resource, each tag key must be unique, and each tag key can have only one
+          value.</p>
             </li>
             <li>
                <p>Maximum key length - 128 Unicode characters in UTF-8.</p>
@@ -2630,13 +3724,21 @@ module CreateDataset = {
                <p>Maximum value length - 256 Unicode characters in UTF-8.</p>
             </li>
             <li>
-               <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p>
+               <p>If your tagging schema is used across multiple services and resources, remember that
+          other services may have restrictions on allowed characters. Generally allowed characters
+          are: letters, numbers, and spaces representable in UTF-8, and the following characters: +
+          - = . _ : / @.</p>
             </li>
             <li>
                <p>Tag keys and values are case sensitive.</p>
             </li>
             <li>
-               <p>Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has <code>aws</code> as its prefix but the key does not, then Forecast considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of <code>aws</code> do not count against your tags per resource limit.</p>
+               <p>Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase combination
+          of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag
+          keys with this prefix. Values can have this prefix. If a tag value has <code>aws</code> as
+          its prefix but the key does not, then Forecast considers it to be a user tag and will
+          count against the limit of 50 tags. Tags with only the key prefix of <code>aws</code> do
+          not count against your tags per resource limit.</p>
             </li>
          </ul>")
     @as("Tags")
@@ -2703,43 +3805,43 @@ module ListPredictorBacktestExportJobs = {
   type t
   type request = {
     @ocaml.doc("<p>An array of filters. For each filter, provide a condition and a match statement. The
-                condition is either <code>IS</code> or <code>IS_NOT</code>, which specifies whether to
-                include or exclude the predictor backtest export jobs that match the statement from the
-                list. The match statement consists of a key and a value.</p>
-            <p>
-                <b>Filter properties</b>
-            </p>
-            <ul>
+            condition is either <code>IS</code> or <code>IS_NOT</code>, which specifies whether to
+            include or exclude the predictor backtest export jobs that match the statement from the
+            list. The match statement consists of a key and a value.</p>
+        <p>
+            <b>Filter properties</b>
+        </p>
+        <ul>
             <li>
-                    <p>
+                <p>
                   <code>Condition</code> - The condition to apply. Valid values are
                         <code>IS</code> and <code>IS_NOT</code>. To include the predictor backtest
-                        export jobs that match the statement, specify <code>IS</code>. To exclude matching
-                        predictor backtest export jobs, specify <code>IS_NOT</code>.</p>
-                </li>
+                    export jobs that match the statement, specify <code>IS</code>. To exclude
+                    matching predictor backtest export jobs, specify <code>IS_NOT</code>.</p>
+            </li>
             <li>
-                    <p>
+                <p>
                   <code>Key</code> - The name of the parameter to filter on. Valid values are
                         <code>PredictorArn</code> and <code>Status</code>.</p>
-                </li>
+            </li>
             <li>
-                    <p>
+                <p>
                   <code>Value</code> - The value to match.</p>
-                </li>
+            </li>
          </ul>")
     @as("Filters")
     filters: option<filters>,
     @ocaml.doc("<p>The number of items to return in the response.</p>") @as("MaxResults")
     maxResults: option<maxResults>,
-    @ocaml.doc("<p>If the result of the previous request was truncated, the response includes a NextToken.
-            To retrieve the next set of results, use the token in the next request. Tokens expire after
-            24 hours.</p>")
+    @ocaml.doc("<p>If the result of the previous request was truncated, the response includes a
+            NextToken. To retrieve the next set of results, use the token in the next request.
+            Tokens expire after 24 hours.</p>")
     @as("NextToken")
     nextToken: option<nextToken>,
   }
   type response = {
-    @ocaml.doc("<p>Returns this token if the response is truncated. To retrieve the next
-            set of results, use the token in the next request.</p>")
+    @ocaml.doc("<p>Returns this token if the response is truncated. To retrieve the next set of results,
+            use the token in the next request.</p>")
     @as("NextToken")
     nextToken: option<nextToken>,
     @ocaml.doc("<p>An array of objects that summarize the properties of each predictor backtest export
@@ -2814,6 +3916,59 @@ module ListForecastExportJobs = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module ListExplainabilityExports = {
+  type t
+  type request = {
+    @ocaml.doc("<p>An array of filters. For each filter, provide a condition and a match statement. The
+            condition is either <code>IS</code> or <code>IS_NOT</code>, which specifies whether to
+            include or exclude resources that match the statement from the list. The match statement
+            consists of a key and a value.</p>
+        <p>
+            <b>Filter properties</b>
+        </p>
+        <ul>
+            <li>
+                <p>
+                  <code>Condition</code> - The condition to apply. Valid values are
+                        <code>IS</code> and <code>IS_NOT</code>.</p>
+            </li>
+            <li>
+                <p>
+                  <code>Key</code> - The name of the parameter to filter on. Valid values are
+                        <code>ResourceArn</code> and <code>Status</code>.</p>
+            </li>
+            <li>
+                <p>
+                  <code>Value</code> - The value to match.</p>
+            </li>
+         </ul>")
+    @as("Filters")
+    filters: option<filters>,
+    @ocaml.doc("<p>The number of items to return in the response.</p>") @as("MaxResults")
+    maxResults: option<maxResults>,
+    @ocaml.doc("<p>If the result of the previous request was truncated, the response includes a
+            NextToken. To retrieve the next set of results, use the token in the next request.
+            Tokens expire after 24 hours.</p>")
+    @as("NextToken")
+    nextToken: option<nextToken>,
+  }
+  type response = {
+    @ocaml.doc("<p>Returns this token if the response is truncated. To retrieve the next set of results,
+            use the token in the next request.</p>")
+    @as("NextToken")
+    nextToken: option<nextToken>,
+    @ocaml.doc("<p>An array of objects that summarize the properties of each Explainability
+            export.</p>")
+    @as("ExplainabilityExports")
+    explainabilityExports: option<explainabilityExports>,
+  }
+  @module("@aws-sdk/client-forecast") @new
+  external new: request => t = "ListExplainabilityExportsCommand"
+  let make = (~filters=?, ~maxResults=?, ~nextToken=?, ()) =>
+    new({filters: filters, maxResults: maxResults, nextToken: nextToken})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module ListDatasetImportJobs = {
   type t
   type request = {
@@ -2873,6 +4028,242 @@ module ListDatasetImportJobs = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module DescribeAutoPredictor = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the predictor.</p>") @as("PredictorArn")
+    predictorArn: arn,
+  }
+  type response = {
+    @ocaml.doc("<p>Provides the status and ARN of the Predictor Explainability.</p>")
+    @as("ExplainabilityInfo")
+    explainabilityInfo: option<explainabilityInfo>,
+    @ocaml.doc("<p>The accuracy metric used to optimize the predictor.</p>")
+    @as("OptimizationMetric")
+    optimizationMetric: option<optimizationMetric>,
+    @ocaml.doc("<p>The last time the resource was modified. The timestamp depends on the status of the
+            job:</p>
+        <ul>
+            <li>
+                <p>
+                  <code>CREATE_PENDING</code> - The <code>CreationTime</code>.</p>
+            </li>
+            <li>
+                <p>
+                  <code>CREATE_IN_PROGRESS</code> - The current timestamp.</p>
+            </li>
+            <li>
+                <p>
+                  <code>CREATE_STOPPING</code> - The current timestamp.</p>
+            </li>
+            <li>
+                <p>
+                  <code>CREATE_STOPPED</code> - When the job stopped.</p>
+            </li>
+            <li>
+                <p>
+                  <code>ACTIVE</code> or <code>CREATE_FAILED</code> - When the job finished or
+                    failed.</p>
+            </li>
+         </ul>")
+    @as("LastModificationTime")
+    lastModificationTime: option<timestamp_>,
+    @ocaml.doc("<p>The timestamp of the CreateAutoPredictor request.</p>") @as("CreationTime")
+    creationTime: option<timestamp_>,
+    @ocaml.doc("<p>In the event of an error, a message detailing the cause of the error.</p>")
+    @as("Message")
+    message: option<message>,
+    @ocaml.doc("<p>The status of the predictor. States include: </p>
+        <ul>
+            <li>
+                <p>
+                  <code>ACTIVE</code>
+               </p>
+            </li>
+            <li>
+                <p>
+                  <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,
+                        <code>CREATE_FAILED</code>
+               </p>
+            </li>
+            <li>
+                <p>
+                    <code>CREATE_STOPPING</code>, <code>CREATE_STOPPED</code>
+                </p>
+            </li>
+            <li>
+                <p>
+                  <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,
+                        <code>DELETE_FAILED</code>
+               </p>
+            </li>
+         </ul>")
+    @as("Status")
+    status: option<status>,
+    @ocaml.doc("<p>The estimated time remaining in minutes for the predictor training job to
+            complete.</p>")
+    @as("EstimatedTimeRemainingInMinutes")
+    estimatedTimeRemainingInMinutes: option<long>,
+    @ocaml.doc("<p>The ARN and state of the reference predictor. This parameter is only valid for
+            retrained or upgraded predictors.</p>")
+    @as("ReferencePredictorSummary")
+    referencePredictorSummary: option<referencePredictorSummary>,
+    @as("EncryptionConfig") encryptionConfig: option<encryptionConfig>,
+    @ocaml.doc("<p>The data configuration for your dataset group and any additional datasets.</p>")
+    @as("DataConfig")
+    dataConfig: option<dataConfig>,
+    @ocaml.doc("<p>An array of the ARNs of the dataset import jobs used to import training data for the
+            predictor.</p>")
+    @as("DatasetImportJobArns")
+    datasetImportJobArns: option<arnList>,
+    @ocaml.doc(
+      "<p>An array of dimension (field) names that specify the attributes used to group your time series.</p>"
+    )
+    @as("ForecastDimensions")
+    forecastDimensions: option<forecastDimensions>,
+    @ocaml.doc("<p>The frequency of predictions in a forecast.</p>
+        <p>Valid intervals are Y (Year), M (Month), W (Week), D (Day), H (Hour), 30min (30
+            minutes), 15min (15 minutes), 10min (10 minutes), 5min (5 minutes), and 1min (1 minute).
+            For example, \"Y\" indicates every year and \"5min\" indicates every five minutes.</p>")
+    @as("ForecastFrequency")
+    forecastFrequency: option<frequency>,
+    @ocaml.doc("<p>The forecast types used during predictor training. Default value is
+            [\"0.1\",\"0.5\",\"0.9\"].</p>")
+    @as("ForecastTypes")
+    forecastTypes: option<forecastTypes>,
+    @ocaml.doc("<p>The number of time-steps that the model predicts. The forecast horizon is also called
+            the prediction length.</p>")
+    @as("ForecastHorizon")
+    forecastHorizon: option<integer_>,
+    @ocaml.doc("<p>The name of the predictor.</p>") @as("PredictorName")
+    predictorName: option<name>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the predictor</p>") @as("PredictorArn")
+    predictorArn: option<arn>,
+  }
+  @module("@aws-sdk/client-forecast") @new
+  external new: request => t = "DescribeAutoPredictorCommand"
+  let make = (~predictorArn, ()) => new({predictorArn: predictorArn})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module CreateAutoPredictor = {
+  type t
+  type request = {
+    @ocaml.doc("<p>Optional metadata to help you categorize and organize your predictors. Each tag
+            consists of a key and an optional value, both of which you define. Tag keys and values
+            are case sensitive.</p>
+        <p>The following restrictions apply to tags:</p>
+        <ul>
+            <li>
+                <p>For each resource, each tag key must be unique and each tag key must have one
+                    value.</p>
+            </li>
+            <li>
+                <p>Maximum number of tags per resource: 50.</p>
+            </li>
+            <li>
+                <p>Maximum key length: 128 Unicode characters in UTF-8.</p>
+            </li>
+            <li>
+                <p>Maximum value length: 256 Unicode characters in UTF-8.</p>
+            </li>
+            <li>
+                <p>Accepted characters: all letters and numbers, spaces representable in UTF-8,
+                    and + - = . _ : / @. If your tagging schema is used across other services and
+                    resources, the character restrictions of those services also apply. </p>
+            </li>
+            <li>
+                <p>Key prefixes cannot include any upper or lowercase combination of
+                        <code>aws:</code> or <code>AWS:</code>. Values can have this prefix. If a
+                    tag value has <code>aws</code> as its prefix but the key does not, Forecast
+                    considers it to be a user tag and will count against the limit of 50 tags. Tags
+                    with only the key prefix of <code>aws</code> do not count against your tags per
+                    resource limit. You cannot edit or delete tag keys with this prefix.</p>
+            </li>
+         </ul>")
+    @as("Tags")
+    tags: option<tags>,
+    @ocaml.doc("<p>Create an Explainability resource for the predictor.</p>")
+    @as("ExplainPredictor")
+    explainPredictor: option<boolean_>,
+    @ocaml.doc("<p>The accuracy metric used to optimize the predictor.</p>")
+    @as("OptimizationMetric")
+    optimizationMetric: option<optimizationMetric>,
+    @ocaml.doc("<p>The ARN of the predictor to retrain or upgrade. This parameter is only used when
+            retraining or upgrading a predictor. When creating a new predictor, do not specify a
+            value for this parameter.</p>
+        <p>When upgrading or retraining a predictor, only specify values for the
+                <code>ReferencePredictorArn</code> and <code>PredictorName</code>. The value for
+                <code>PredictorName</code> must be a unique predictor name.</p>")
+    @as("ReferencePredictorArn")
+    referencePredictorArn: option<arn>,
+    @as("EncryptionConfig") encryptionConfig: option<encryptionConfig>,
+    @ocaml.doc("<p>The data configuration for your dataset group and any additional datasets.</p>")
+    @as("DataConfig")
+    dataConfig: option<dataConfig>,
+    @ocaml.doc("<p>The frequency of predictions in a forecast.</p>
+        <p>Valid intervals are Y (Year), M (Month), W (Week), D (Day), H (Hour), 30min (30
+            minutes), 15min (15 minutes), 10min (10 minutes), 5min (5 minutes), and 1min (1 minute).
+            For example, \"Y\" indicates every year and \"5min\" indicates every five minutes.</p>
+        <p>The frequency must be greater than or equal to the TARGET_TIME_SERIES dataset
+            frequency.</p>
+        <p>When a RELATED_TIME_SERIES dataset is provided, the frequency must be equal to the
+            RELATED_TIME_SERIES dataset frequency.</p>")
+    @as("ForecastFrequency")
+    forecastFrequency: option<frequency>,
+    @ocaml.doc("<p>An array of dimension (field) names that specify how to group the generated
+            forecast.</p>
+        <p>For example, if you are generating forecasts for item sales across all your stores,
+            and your dataset contains a <code>store_id</code> field, you would specify
+                <code>store_id</code> as a dimension to group sales forecasts for each store.</p>")
+    @as("ForecastDimensions")
+    forecastDimensions: option<forecastDimensions>,
+    @ocaml.doc("<p>The forecast types used to train a predictor. You can specify up to five forecast
+            types. Forecast types can be quantiles from 0.01 to 0.99, by increments of 0.01 or
+            higher. You can also specify the mean forecast with <code>mean</code>.</p>")
+    @as("ForecastTypes")
+    forecastTypes: option<forecastTypes>,
+    @ocaml.doc("<p>The number of time-steps that the model predicts. The forecast horizon is also called
+            the prediction length.</p>")
+    @as("ForecastHorizon")
+    forecastHorizon: option<integer_>,
+    @ocaml.doc("<p>A unique name for the predictor</p>") @as("PredictorName") predictorName: name,
+  }
+  type response = {
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the predictor.</p>") @as("PredictorArn")
+    predictorArn: option<arn>,
+  }
+  @module("@aws-sdk/client-forecast") @new external new: request => t = "CreateAutoPredictorCommand"
+  let make = (
+    ~predictorName,
+    ~tags=?,
+    ~explainPredictor=?,
+    ~optimizationMetric=?,
+    ~referencePredictorArn=?,
+    ~encryptionConfig=?,
+    ~dataConfig=?,
+    ~forecastFrequency=?,
+    ~forecastDimensions=?,
+    ~forecastTypes=?,
+    ~forecastHorizon=?,
+    (),
+  ) =>
+    new({
+      tags: tags,
+      explainPredictor: explainPredictor,
+      optimizationMetric: optimizationMetric,
+      referencePredictorArn: referencePredictorArn,
+      encryptionConfig: encryptionConfig,
+      dataConfig: dataConfig,
+      forecastFrequency: forecastFrequency,
+      forecastDimensions: forecastDimensions,
+      forecastTypes: forecastTypes,
+      forecastHorizon: forecastHorizon,
+      predictorName: predictorName,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module DescribePredictor = {
   type t
   type request = {
@@ -2883,7 +4274,11 @@ module DescribePredictor = {
     predictorArn: arn,
   }
   type response = {
-    @ocaml.doc("<p>The last time the resource was modified. The timestamp depends on the status of the job:</p>
+    @ocaml.doc("<p>The accuracy metric used to optimize the predictor.</p>")
+    @as("OptimizationMetric")
+    optimizationMetric: option<optimizationMetric>,
+    @ocaml.doc("<p>The last time the resource was modified. The timestamp depends on the status of the
+      job:</p>
          <ul>
             <li>
                <p>
@@ -2924,13 +4319,13 @@ module DescribePredictor = {
             <li>
                <p>
                   <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,
-          <code>CREATE_FAILED</code>
+            <code>CREATE_FAILED</code>
                </p>
             </li>
             <li>
                <p>
                   <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,
-          <code>DELETE_FAILED</code>
+            <code>DELETE_FAILED</code>
                </p>
             </li>
             <li>
@@ -2945,15 +4340,13 @@ module DescribePredictor = {
          </note>")
     @as("Status")
     status: option<status>,
-    @ocaml.doc(
-      "<p>When <code>PerformAutoML</code> is specified, the ARN of the chosen algorithm.</p>"
-    )
-    @as("AutoMLAlgorithmArns")
-    autoMLAlgorithmArns: option<arnList>,
     @ocaml.doc("<p>An array of the ARNs of the dataset import jobs used to import training data for the
       predictor.</p>")
     @as("DatasetImportJobArns")
     datasetImportJobArns: option<arnList>,
+    @ocaml.doc("<p>Whether the predictor was created with <a>CreateAutoPredictor</a>.</p>")
+    @as("IsAutoPredictor")
+    isAutoPredictor: option<boolean_>,
     @ocaml.doc(
       "<p>The estimated time remaining in minutes for the predictor training job to complete.</p>"
     )
@@ -2989,14 +4382,20 @@ module DescribePredictor = {
     @ocaml.doc("<p>Whether the predictor is set to perform hyperparameter optimization (HPO).</p>")
     @as("PerformHPO")
     performHPO: option<boolean_>,
-    @ocaml.doc("<p>The AutoML strategy used to train the predictor. Unless <code>LatencyOptimized</code>
+    @ocaml.doc("<note>
+            <p> The <code>LatencyOptimized</code> AutoML override strategy is only available in private beta.
+                Contact AWS Support or your account manager to learn more about access privileges.
+            </p>
+        </note>
+        <p>The AutoML strategy used to train the predictor. Unless <code>LatencyOptimized</code>
             is specified, the AutoML strategy optimizes predictor accuracy.</p>
         <p>This parameter is only valid for predictors trained using AutoML.</p>")
     @as("AutoMLOverrideStrategy")
     autoMLOverrideStrategy: option<autoMLOverrideStrategy>,
     @ocaml.doc("<p>Whether the predictor is set to perform AutoML.</p>") @as("PerformAutoML")
     performAutoML: option<boolean_>,
-    @ocaml.doc("<p>The forecast types used during predictor training. Default value is <code>[\"0.1\",\"0.5\",\"0.9\"]</code>
+    @ocaml.doc("<p>The forecast types used during predictor training. Default value is
+        <code>[\"0.1\",\"0.5\",\"0.9\"]</code>
          </p>")
     @as("ForecastTypes")
     forecastTypes: option<forecastTypes>,
@@ -3004,6 +4403,11 @@ module DescribePredictor = {
       prediction length.</p>")
     @as("ForecastHorizon")
     forecastHorizon: option<integer_>,
+    @ocaml.doc(
+      "<p>When <code>PerformAutoML</code> is specified, the ARN of the chosen algorithm.</p>"
+    )
+    @as("AutoMLAlgorithmArns")
+    autoMLAlgorithmArns: option<arnList>,
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the algorithm used for model training.</p>")
     @as("AlgorithmArn")
     algorithmArn: option<arn>,
@@ -3019,14 +4423,19 @@ module DescribePredictor = {
 module CreatePredictor = {
   type t
   type request = {
-    @ocaml.doc("<p>The optional metadata that you apply to the predictor to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p>
+    @ocaml.doc("<p>The accuracy metric used to optimize the predictor.</p>")
+    @as("OptimizationMetric")
+    optimizationMetric: option<optimizationMetric>,
+    @ocaml.doc("<p>The optional metadata that you apply to the predictor to help you categorize and organize
+      them. Each tag consists of a key and an optional value, both of which you define.</p>
          <p>The following basic restrictions apply to tags:</p>
          <ul>
             <li>
                <p>Maximum number of tags per resource - 50.</p>
             </li>
             <li>
-               <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p>
+               <p>For each resource, each tag key must be unique, and each tag key can have only one
+          value.</p>
             </li>
             <li>
                <p>Maximum key length - 128 Unicode characters in UTF-8.</p>
@@ -3035,13 +4444,21 @@ module CreatePredictor = {
                <p>Maximum value length - 256 Unicode characters in UTF-8.</p>
             </li>
             <li>
-               <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p>
+               <p>If your tagging schema is used across multiple services and resources, remember that
+          other services may have restrictions on allowed characters. Generally allowed characters
+          are: letters, numbers, and spaces representable in UTF-8, and the following characters: +
+          - = . _ : / @.</p>
             </li>
             <li>
                <p>Tag keys and values are case sensitive.</p>
             </li>
             <li>
-               <p>Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has <code>aws</code> as its prefix but the key does not, then Forecast considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of <code>aws</code> do not count against your tags per resource limit.</p>
+               <p>Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase combination
+          of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag
+          keys with this prefix. Values can have this prefix. If a tag value has <code>aws</code> as
+          its prefix but the key does not, then Forecast considers it to be a user tag and will
+          count against the limit of 50 tags. Tags with only the key prefix of <code>aws</code> do
+          not count against your tags per resource limit.</p>
             </li>
          </ul>")
     @as("Tags")
@@ -3095,7 +4512,12 @@ module CreatePredictor = {
          </ul>")
     @as("PerformHPO")
     performHPO: option<boolean_>,
-    @ocaml.doc("<p>Used to overide the default AutoML strategy, which is to optimize predictor accuracy.
+    @ocaml.doc("<note>
+            <p> The <code>LatencyOptimized</code> AutoML override strategy is only available in private beta.
+                Contact AWS Support or your account manager to learn more about access privileges.
+            </p>
+        </note>
+        <p>Used to overide the default AutoML strategy, which is to optimize predictor accuracy.
             To apply an AutoML strategy that minimizes training time, use
                 <code>LatencyOptimized</code>.</p>
         <p>This parameter is only valid for predictors trained using AutoML.</p>")
@@ -3110,10 +4532,9 @@ module CreatePredictor = {
       this case, <code>PerformHPO</code> must be false.</p>")
     @as("PerformAutoML")
     performAutoML: option<boolean_>,
-    @ocaml.doc("<p>Specifies the forecast types used to train a predictor. You can specify up to five forecast types.
-      Forecast types can be quantiles from 0.01 to 0.99, by increments of 0.01 or higher. You can also specify 
-      the mean forecast with <code>mean</code>.
-    </p>
+    @ocaml.doc("<p>Specifies the forecast types used to train a predictor. You can specify up to five
+      forecast types. Forecast types can be quantiles from 0.01 to 0.99, by increments of 0.01 or
+      higher. You can also specify the mean forecast with <code>mean</code>. </p>
          <p>The default value is <code>[\"0.10\", \"0.50\", \"0.9\"]</code>.</p>")
     @as("ForecastTypes")
     forecastTypes: option<forecastTypes>,
@@ -3177,6 +4598,7 @@ module CreatePredictor = {
     ~inputDataConfig,
     ~forecastHorizon,
     ~predictorName,
+    ~optimizationMetric=?,
     ~tags=?,
     ~encryptionConfig=?,
     ~hpoconfig=?,
@@ -3190,6 +4612,7 @@ module CreatePredictor = {
     (),
   ) =>
     new({
+      optimizationMetric: optimizationMetric,
       tags: tags,
       encryptionConfig: encryptionConfig,
       featurizationConfig: featurizationConfig,
@@ -3216,11 +4639,22 @@ module GetAccuracyMetrics = {
     predictorArn: arn,
   }
   type response = {
-    @ocaml.doc("<p>The AutoML strategy used to train the predictor. Unless <code>LatencyOptimized</code>
+    @ocaml.doc("<p>The accuracy metric used to optimize the predictor.</p>")
+    @as("OptimizationMetric")
+    optimizationMetric: option<optimizationMetric>,
+    @ocaml.doc("<note>
+            <p> The <code>LatencyOptimized</code> AutoML override strategy is only available in private beta.
+                Contact AWS Support or your account manager to learn more about access privileges.
+            </p>
+        </note>
+        <p>The AutoML strategy used to train the predictor. Unless <code>LatencyOptimized</code>
             is specified, the AutoML strategy optimizes predictor accuracy.</p>
         <p>This parameter is only valid for predictors trained using AutoML.</p>")
     @as("AutoMLOverrideStrategy")
     autoMLOverrideStrategy: option<autoMLOverrideStrategy>,
+    @ocaml.doc("<p>Whether the predictor was created with <a>CreateAutoPredictor</a>.</p>")
+    @as("IsAutoPredictor")
+    isAutoPredictor: option<boolean_>,
     @ocaml.doc("<p>An array of results from evaluating the predictor.</p>")
     @as("PredictorEvaluationResults")
     predictorEvaluationResults: option<predictorEvaluationResults>,

@@ -32,6 +32,7 @@ type isModifiable = [@as("CONDITIONAL") #CONDITIONAL | @as("FALSE") #FALSE | @as
 type integerOptional = int
 type integer_ = int
 type exceptionMessage = string
+type clusterEndpointEncryptionType = [@as("TLS") #TLS | @as("NONE") #NONE]
 type changeType = [@as("REQUIRES_REBOOT") #REQUIRES_REBOOT | @as("IMMEDIATE") #IMMEDIATE]
 type awsQueryErrorMessage = string
 @ocaml.doc("<p>A description of a tag.  Every tag is a key-value pair. You can add up to 50 tags to a single
@@ -122,7 +123,10 @@ type parameterGroup = {
             publishing DAX events to subscribers using Amazon Simple Notification Service
             (SNS).</p>")
 type notificationConfiguration = {
-  @ocaml.doc("<p>The current state of the topic.</p>") @as("TopicStatus")
+  @ocaml.doc("<p>The current state of the topic. A value of “active” means that notifications will
+        be sent to the topic. A value of “inactive” means that notifications will not be sent to the
+        topic.</p>")
+  @as("TopicStatus")
   topicStatus: option<string_>,
   @ocaml.doc("<p>The Amazon Resource Name (ARN) that identifies the topic. </p>") @as("TopicArn")
   topicArn: option<string_>,
@@ -153,9 +157,12 @@ type event = {
   sourceName: option<string_>,
 }
 @ocaml.doc("<p>Represents the information required for client programs to connect to the
-            configuration endpoint for a DAX cluster, or to an individual node within the
-            cluster.</p>")
+            endpoint for a DAX cluster.</p>")
 type endpoint = {
+  @ocaml.doc("<p>The URL that applications should use to connect to the endpoint. The default
+            ports are 8111 for the \"dax\" protocol and 9111 for the \"daxs\" protocol.</p>")
+  @as("URL")
+  url: option<string_>,
   @ocaml.doc("<p>The port number that applications should use to connect to the endpoint.</p>")
   @as("Port")
   port: option<integer_>,
@@ -265,6 +272,17 @@ type subnetGroupList = array<subnetGroup>
 type parameterList = array<parameter>
 @ocaml.doc("<p>Contains all of the attributes of a specific DAX cluster.</p>")
 type cluster = {
+  @ocaml.doc("<p>The type of encryption supported by the cluster's endpoint. Values are:</p>
+        <ul>
+            <li>
+                <p>
+                  <code>NONE</code> for no encryption</p>
+                <p>
+                  <code>TLS</code> for Transport Layer Security</p>
+            </li>
+         </ul>")
+  @as("ClusterEndpointEncryptionType")
+  clusterEndpointEncryptionType: option<clusterEndpointEncryptionType>,
   @ocaml.doc(
     "<p>The description of the server-side encryption status on the specified DAX cluster.</p>"
   )
@@ -298,10 +316,9 @@ type cluster = {
   nodes: option<nodeList>,
   @ocaml.doc("<p>A list of nodes to be removed from the cluster.</p>") @as("NodeIdsToRemove")
   nodeIdsToRemove: option<nodeIdentifierList>,
-  @ocaml.doc("<p>The configuration endpoint for this DAX cluster, consisting of a DNS name and a
-            port number. Client applications can specify this endpoint, rather than an individual
-            node endpoint, and allow the DAX client software to intelligently route requests and
-            responses to nodes in the DAX cluster.</p>")
+  @ocaml.doc("<p>The endpoint for this DAX cluster, consisting of a DNS name, a port number,
+             and a URL. Applications should use the URL to configure the DAX client to find
+             their cluster.</p>")
   @as("ClusterDiscoveryEndpoint")
   clusterDiscoveryEndpoint: option<endpoint>,
   @ocaml.doc("<p>The current status of the cluster.</p>") @as("Status") status: option<string_>,
@@ -390,7 +407,11 @@ module UpdateParameterGroup = {
   type t
   type request = {
     @ocaml.doc("<p>An array of name-value pairs for the parameters in the group. Each element in the
-            array represents a single parameter.</p>")
+            array represents a single parameter.</p>
+            <note>
+            <p>
+               <code>record-ttl-millis</code> and <code>query-ttl-millis</code> are the only supported parameter names. For more details, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DAX.cluster-management.html#DAX.cluster-management.custom-settings.ttl\">Configuring TTL Settings</a>.</p>
+        </note>")
     @as("ParameterNameValues")
     parameterNameValues: parameterNameValueList,
     @ocaml.doc("<p>The name of the parameter group.</p>") @as("ParameterGroupName")
@@ -620,7 +641,10 @@ module UpdateCluster = {
     securityGroupIds: option<securityGroupIdentifierList>,
     @ocaml.doc("<p>The name of a parameter group for this cluster.</p>") @as("ParameterGroupName")
     parameterGroupName: option<string_>,
-    @ocaml.doc("<p>The current state of the topic.</p>") @as("NotificationTopicStatus")
+    @ocaml.doc("<p>The current state of the topic. A value of “active” means that notifications will
+        be sent to the topic. A value of “inactive” means that notifications will not be sent to the
+        topic.</p>")
+    @as("NotificationTopicStatus")
     notificationTopicStatus: option<string_>,
     @ocaml.doc("<p>The Amazon Resource Name (ARN) that identifies the topic.</p>")
     @as("NotificationTopicArn")
@@ -871,6 +895,19 @@ module DecreaseReplicationFactor = {
 module CreateCluster = {
   type t
   type request = {
+    @ocaml.doc("<p>The type of encryption the cluster's endpoint should support. Values are:</p>
+        <ul>
+            <li>
+                <p>
+                  <code>NONE</code> for no encryption</p>
+            </li>
+            <li>
+                <p>
+                  <code>TLS</code> for Transport Layer Security</p>
+            </li>
+         </ul>")
+    @as("ClusterEndpointEncryptionType")
+    clusterEndpointEncryptionType: option<clusterEndpointEncryptionType>,
     @ocaml.doc(
       "<p>Represents the settings used to enable server-side encryption on the cluster.</p>"
     )
@@ -1007,6 +1044,7 @@ module CreateCluster = {
     ~replicationFactor,
     ~nodeType,
     ~clusterName,
+    ~clusterEndpointEncryptionType=?,
     ~ssespecification=?,
     ~tags=?,
     ~parameterGroupName=?,
@@ -1019,6 +1057,7 @@ module CreateCluster = {
     (),
   ) =>
     new({
+      clusterEndpointEncryptionType: clusterEndpointEncryptionType,
       ssespecification: ssespecification,
       tags: tags,
       parameterGroupName: parameterGroupName,

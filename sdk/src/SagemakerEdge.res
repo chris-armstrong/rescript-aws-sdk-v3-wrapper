@@ -94,7 +94,7 @@ module SendHeartbeat = {
     @as("AgentMetrics")
     agentMetrics: option<edgeMetrics>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "SendHeartbeatCommand"
   let make = (~deviceFleetName, ~deviceName, ~agentVersion, ~models=?, ~agentMetrics=?, ()) =>
     new({

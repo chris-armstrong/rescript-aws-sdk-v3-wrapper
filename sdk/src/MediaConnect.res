@@ -53,6 +53,7 @@ type reservationState = [
 ]
 type range = [@as("FULLPROTECT") #FULLPROTECT | @as("FULL") #FULL | @as("NARROW") #NARROW]
 type protocol = [
+  | @as("fujitsu-qos") #Fujitsu_Qos
   | @as("srt-listener") #Srt_Listener
   | @as("cdi") #Cdi
   | @as("st2110-jpegxs") #St2110_Jpegxs
@@ -70,11 +71,21 @@ type mediaStreamType = [
   | @as("video") #Video
 ]
 type maxResults = int
+type maintenanceDay = [
+  | @as("Sunday") #Sunday
+  | @as("Saturday") #Saturday
+  | @as("Friday") #Friday
+  | @as("Thursday") #Thursday
+  | @as("Wednesday") #Wednesday
+  | @as("Tuesday") #Tuesday
+  | @as("Monday") #Monday
+]
 type keyType = [
   | @as("srt-password") #Srt_Password
   | @as("static-key") #Static_Key
   | @as("speke") #Speke
 ]
+type failoverMode = [@as("FAILOVER") #FAILOVER | @as("MERGE") #MERGE]
 type entitlementStatus = [@as("DISABLED") #DISABLED | @as("ENABLED") #ENABLED]
 type encodingName = [
   | @as("pcm") #Pcm
@@ -101,11 +112,23 @@ type vpcInterfaceAttachment = {
   @ocaml.doc("The name of the VPC interface to use for this output.") @as("VpcInterfaceName")
   vpcInterfaceName: option<__string>,
 }
-@ocaml.doc("The settings for source failover")
-type updateFailoverConfig = {
-  @as("State") state: option<state>,
-  @ocaml.doc("Recovery window time to look for dash-7 packets") @as("RecoveryWindow")
-  recoveryWindow: option<__integer>,
+@ocaml.doc("Update maintenance setting for a flow")
+type updateMaintenance = {
+  @ocaml.doc(
+    "UTC time when the maintenance will happen. Use 24-hour HH:MM format. Minutes must be 00. Example: 13:00. The default value is 02:00."
+  )
+  @as("MaintenanceStartHour")
+  maintenanceStartHour: option<__string>,
+  @ocaml.doc(
+    "A scheduled date in ISO UTC format when the maintenance will happen. Use YYYY-MM-DD format. Example: 2021-01-30."
+  )
+  @as("MaintenanceScheduledDate")
+  maintenanceScheduledDate: option<__string>,
+  @ocaml.doc(
+    "A day of a week when the maintenance will happen. use Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday."
+  )
+  @as("MaintenanceDay")
+  maintenanceDay: option<maintenanceDay>,
 }
 @ocaml.doc("Information about the encryption of the flow.")
 type updateEncryption = {
@@ -155,6 +178,14 @@ type updateEncryption = {
   @as("Algorithm")
   algorithm: option<algorithm>,
 }
+@ocaml.doc(
+  "The priority you want to assign to a source. You can have a primary stream and a backup stream or two equally prioritized streams."
+)
+type sourcePriority = {
+  @ocaml.doc("The name of the source you choose as the primary source for this flow.")
+  @as("PrimarySource")
+  primarySource: option<__string>,
+}
 @ocaml.doc("A definition of what is being billed for, including the type and amount.")
 type resourceSpecification = {
   @ocaml.doc("The type of resource and the unit that is being billed for.") @as("ResourceType")
@@ -163,19 +194,28 @@ type resourceSpecification = {
   @as("ReservedBitrate")
   reservedBitrate: option<__integer>,
 }
-@ocaml.doc("Provides a summary of a flow, including its ARN, Availability Zone, and source type.")
-type listedFlow = {
-  @ocaml.doc("The current status of the flow.") @as("Status") status: status,
+@ocaml.doc("The maintenance setting of a flow")
+type maintenance = {
   @ocaml.doc(
-    "The type of source. This value is either owned (originated somewhere other than an AWS Elemental MediaConnect flow owned by another AWS account) or entitled (originated at an AWS Elemental MediaConnect flow owned by another AWS account)."
+    "UTC time when the maintenance will happen. Use 24-hour HH:MM format. Minutes must be 00. Example: 13:00. The default value is 02:00."
   )
-  @as("SourceType")
-  sourceType: sourceType,
-  @ocaml.doc("The name of the flow.") @as("Name") name: __string,
-  @ocaml.doc("The ARN of the flow.") @as("FlowArn") flowArn: __string,
-  @ocaml.doc("A description of the flow.") @as("Description") description: __string,
-  @ocaml.doc("The Availability Zone that the flow was created in.") @as("AvailabilityZone")
-  availabilityZone: __string,
+  @as("MaintenanceStartHour")
+  maintenanceStartHour: option<__string>,
+  @ocaml.doc(
+    "A scheduled date in ISO UTC format when the maintenance will happen. Use YYYY-MM-DD format. Example: 2021-01-30."
+  )
+  @as("MaintenanceScheduledDate")
+  maintenanceScheduledDate: option<__string>,
+  @ocaml.doc(
+    "The Maintenance has to be performed before this deadline in ISO UTC format. Example: 2021-01-30T08:30:00Z."
+  )
+  @as("MaintenanceDeadline")
+  maintenanceDeadline: option<__string>,
+  @ocaml.doc(
+    "A day of a week when the maintenance will happen. Use Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday."
+  )
+  @as("MaintenanceDay")
+  maintenanceDay: option<maintenanceDay>,
 }
 @ocaml.doc("An entitlement that has been granted to you from other AWS accounts.")
 type listedEntitlement = {
@@ -228,12 +268,6 @@ type fmtp = {
   @ocaml.doc("The format that is used for the representation of color.") @as("Colorimetry")
   colorimetry: option<colorimetry>,
   @ocaml.doc("The format of the audio channel.") @as("ChannelOrder") channelOrder: option<__string>,
-}
-@ocaml.doc("The settings for source failover")
-type failoverConfig = {
-  @as("State") state: option<state>,
-  @ocaml.doc("Search window time to look for dash-7 packets") @as("RecoveryWindow")
-  recoveryWindow: option<__integer>,
 }
 @ocaml.doc("Information about the encryption of the flow.")
 type encryption = {
@@ -313,7 +347,19 @@ type encodingParameters = {
   @as("CompressionFactor")
   compressionFactor: __double,
 }
-type __listOfListedFlow = array<listedFlow>
+@ocaml.doc("Create maintenance setting for a flow")
+type addMaintenance = {
+  @ocaml.doc(
+    "UTC time when the maintenance will happen. Use 24-hour HH:MM format. Minutes must be 00. Example: 13:00. The default value is 02:00."
+  )
+  @as("MaintenanceStartHour")
+  maintenanceStartHour: __string,
+  @ocaml.doc(
+    "A day of a week when the maintenance will happen. Use Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday."
+  )
+  @as("MaintenanceDay")
+  maintenanceDay: maintenanceDay,
+}
 type __listOfListedEntitlement = array<listedEntitlement>
 @ocaml.doc("Desired VPC Interface for a Flow")
 type vpcInterfaceRequest = {
@@ -345,9 +391,25 @@ type vpcInterface = {
   @ocaml.doc("IDs of the network interfaces created in customer's account by MediaConnect.")
   @as("NetworkInterfaceIds")
   networkInterfaceIds: __listOf__string,
-  @ocaml.doc("Immutable and has to be a unique against other VpcInterfaces in this Flow")
+  @ocaml.doc("Immutable and has to be a unique against other VpcInterfaces in this Flow.")
   @as("Name")
   name: __string,
+}
+@ocaml.doc("The settings for source failover.")
+type updateFailoverConfig = {
+  @as("State") state: option<state>,
+  @ocaml.doc(
+    "The priority you want to assign to a source. You can have a primary stream and a backup stream or two equally prioritized streams."
+  )
+  @as("SourcePriority")
+  sourcePriority: option<sourcePriority>,
+  @ocaml.doc("Recovery window time to look for dash-7 packets") @as("RecoveryWindow")
+  recoveryWindow: option<__integer>,
+  @ocaml.doc(
+    "The type of failover you choose for this flow. MERGE combines the source streams into a single stream, allowing graceful recovery from any single-source loss. FAILOVER allows switching between different streams."
+  )
+  @as("FailoverMode")
+  failoverMode: option<failoverMode>,
 }
 @ocaml.doc("Attributes related to the transport stream that are used in a source or output.")
 type transport = {
@@ -359,6 +421,16 @@ type transport = {
   @ocaml.doc("The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC streams.")
   @as("SmoothingLatency")
   smoothingLatency: option<__integer>,
+  @ocaml.doc(
+    "The IP address that the flow communicates with to initiate connection with the sender."
+  )
+  @as("SenderIpAddress")
+  senderIpAddress: option<__string>,
+  @ocaml.doc(
+    "The port that the flow uses to send outbound requests to initiate connection with the sender."
+  )
+  @as("SenderControlPort")
+  senderControlPort: option<__integer>,
   @ocaml.doc("The remote ID for the Zixi-pull stream.") @as("RemoteId") remoteId: option<__string>,
   @ocaml.doc("The protocol that is used by the source or output.") @as("Protocol")
   protocol: protocol,
@@ -371,7 +443,7 @@ type transport = {
   @as("MaxSyncBuffer")
   maxSyncBuffer: option<__integer>,
   @ocaml.doc(
-    "The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams."
+    "The maximum latency in milliseconds. This parameter applies only to RIST-based, Zixi-based, and Fujitsu-based streams."
   )
   @as("MaxLatency")
   maxLatency: option<__integer>,
@@ -497,6 +569,21 @@ type mediaStreamAttributes = {
   lang: option<__string>,
   @ocaml.doc("A set of parameters that define the media stream.") @as("Fmtp") fmtp: fmtp,
 }
+@ocaml.doc("Provides a summary of a flow, including its ARN, Availability Zone, and source type.")
+type listedFlow = {
+  @as("Maintenance") maintenance: option<maintenance>,
+  @ocaml.doc("The current status of the flow.") @as("Status") status: status,
+  @ocaml.doc(
+    "The type of source. This value is either owned (originated somewhere other than an AWS Elemental MediaConnect flow owned by another AWS account) or entitled (originated at an AWS Elemental MediaConnect flow owned by another AWS account)."
+  )
+  @as("SourceType")
+  sourceType: sourceType,
+  @ocaml.doc("The name of the flow.") @as("Name") name: __string,
+  @ocaml.doc("The ARN of the flow.") @as("FlowArn") flowArn: __string,
+  @ocaml.doc("A description of the flow.") @as("Description") description: __string,
+  @ocaml.doc("The Availability Zone that the flow was created in.") @as("AvailabilityZone")
+  availabilityZone: __string,
+}
 @ocaml.doc("The transport parameters that you want to associate with an incoming media stream.")
 type inputConfigurationRequest = {
   @ocaml.doc("The VPC interface that you want to use for the incoming media stream.")
@@ -544,6 +631,22 @@ type grantEntitlementRequest = {
   @ocaml.doc("Percentage from 0-100 of the data transfer cost to be billed to the subscriber.")
   @as("DataTransferSubscriberFeePercent")
   dataTransferSubscriberFeePercent: option<__integer>,
+}
+@ocaml.doc("The settings for source failover.")
+type failoverConfig = {
+  @as("State") state: option<state>,
+  @ocaml.doc(
+    "The priority you want to assign to a source. You can have a primary stream and a backup stream or two equally prioritized streams."
+  )
+  @as("SourcePriority")
+  sourcePriority: option<sourcePriority>,
+  @ocaml.doc("Search window time to look for dash-7 packets") @as("RecoveryWindow")
+  recoveryWindow: option<__integer>,
+  @ocaml.doc(
+    "The type of failover you choose for this flow. MERGE combines the source streams into a single stream, allowing graceful recovery from any single-source loss. FAILOVER allows switching between different streams."
+  )
+  @as("FailoverMode")
+  failoverMode: option<failoverMode>,
 }
 @ocaml.doc("The settings for a flow entitlement.")
 type entitlement = {
@@ -602,6 +705,7 @@ type __listOfVpcInterfaceRequest = array<vpcInterfaceRequest>
 type __listOfVpcInterface = array<vpcInterface>
 type __listOfReservation = array<reservation>
 type __listOfOffering = array<offering>
+type __listOfListedFlow = array<listedFlow>
 type __listOfInputConfigurationRequest = array<inputConfigurationRequest>
 type __listOfInputConfiguration = array<inputConfiguration>
 type __listOfGrantEntitlementRequest = array<grantEntitlementRequest>
@@ -734,6 +838,16 @@ type source = {
   @as("Transport")
   transport: option<transport>,
   @ocaml.doc("The ARN of the source.") @as("SourceArn") sourceArn: __string,
+  @ocaml.doc(
+    "The IP address that the flow communicates with to initiate connection with the sender."
+  )
+  @as("SenderIpAddress")
+  senderIpAddress: option<__string>,
+  @ocaml.doc(
+    "The port that the flow uses to send outbound requests to initiate connection with the sender."
+  )
+  @as("SenderControlPort")
+  senderControlPort: option<__integer>,
   @ocaml.doc("The name of the source.") @as("Name") name: __string,
   @ocaml.doc(
     "The media streams that are associated with the source, and the parameters for those associations."
@@ -776,6 +890,16 @@ type setSourceRequest = {
   )
   @as("StreamId")
   streamId: option<__string>,
+  @ocaml.doc(
+    "The IP address that the flow communicates with to initiate connection with the sender."
+  )
+  @as("SenderIpAddress")
+  senderIpAddress: option<__string>,
+  @ocaml.doc(
+    "The port that the flow uses to send outbound requests to initiate connection with the sender."
+  )
+  @as("SenderControlPort")
+  senderControlPort: option<__integer>,
   @ocaml.doc("The protocol that is used by the source.") @as("Protocol") protocol: option<protocol>,
   @ocaml.doc("The name of the source.") @as("Name") name: option<__string>,
   @ocaml.doc(
@@ -792,7 +916,7 @@ type setSourceRequest = {
   @as("MaxSyncBuffer")
   maxSyncBuffer: option<__integer>,
   @ocaml.doc(
-    "The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams."
+    "The maximum latency in milliseconds. This parameter applies only to RIST-based, Zixi-based, and Fujitsu-based streams."
   )
   @as("MaxLatency")
   maxLatency: option<__integer>,
@@ -871,6 +995,11 @@ type addOutputRequest = {
   @ocaml.doc("The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC streams.")
   @as("SmoothingLatency")
   smoothingLatency: option<__integer>,
+  @ocaml.doc(
+    "The port that the flow uses to send outbound requests to initiate connection with the sender."
+  )
+  @as("SenderControlPort")
+  senderControlPort: option<__integer>,
   @ocaml.doc("The remote ID for the Zixi-pull output stream.") @as("RemoteId")
   remoteId: option<__string>,
   @ocaml.doc("The protocol to use for the output.") @as("Protocol") protocol: protocol,
@@ -889,7 +1018,10 @@ type addOutputRequest = {
   )
   @as("MediaStreamOutputConfigurations")
   mediaStreamOutputConfigurations: option<__listOfMediaStreamOutputConfigurationRequest>,
-  @ocaml.doc("The maximum latency in milliseconds for Zixi-based streams.") @as("MaxLatency")
+  @ocaml.doc(
+    "The maximum latency in milliseconds. This parameter applies only to RIST-based, Zixi-based, and Fujitsu-based streams."
+  )
+  @as("MaxLatency")
   maxLatency: option<__integer>,
   @ocaml.doc(
     "The type of key used for the encryption. If no keyType is provided, the service will use the default setting (static-key)."
@@ -916,6 +1048,7 @@ type __listOfOutput = array<output>
 type __listOfAddOutputRequest = array<addOutputRequest>
 @ocaml.doc("The settings for a flow, including its source, outputs, and entitlements.")
 type flow = {
+  @as("Maintenance") maintenance: option<maintenance>,
   @ocaml.doc("The VPC Interfaces for this flow.") @as("VpcInterfaces")
   vpcInterfaces: option<__listOfVpcInterface>,
   @ocaml.doc("The current status of the flow.") @as("Status") status: status,
@@ -1084,7 +1217,7 @@ module UntagResource = {
     @as("ResourceArn")
     resourceArn: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-mediaconnect") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1107,7 +1240,7 @@ module TagResource = {
     @as("ResourceArn")
     resourceArn: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-mediaconnect") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1239,34 +1372,6 @@ module PurchaseOffering = {
   external new: request => t = "PurchaseOfferingCommand"
   let make = (~start, ~reservationName, ~offeringArn, ()) =>
     new({start: start, reservationName: reservationName, offeringArn: offeringArn})
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
-module ListFlows = {
-  type t
-  type request = {
-    @ocaml.doc(
-      "The token that identifies which batch of results that you want to see. For example, you submit a ListFlows request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a NextToken value. To see the next batch of results, you can submit the ListFlows request a second time and specify the NextToken value."
-    )
-    @as("NextToken")
-    nextToken: option<__string>,
-    @ocaml.doc(
-      "The maximum number of results to return per API request. For example, you submit a ListFlows request with MaxResults set at 5. Although 20 items match your request, the service returns no more than the first 5 items. (The service also returns a NextToken value that you can use to fetch the next batch of results.) The service might return fewer results than the MaxResults value. If MaxResults is not included in the request, the service defaults to pagination with a maximum of 10 results per page."
-    )
-    @as("MaxResults")
-    maxResults: option<maxResults>,
-  }
-  type response = {
-    @ocaml.doc(
-      "The token that identifies which batch of results that you want to see. For example, you submit a ListFlows request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a NextToken value. To see the next batch of results, you can submit the ListFlows request a second time and specify the NextToken value."
-    )
-    @as("NextToken")
-    nextToken: option<__string>,
-    @ocaml.doc("A list of flow summaries.") @as("Flows") flows: option<__listOfListedFlow>,
-  }
-  @module("@aws-sdk/client-mediaconnect") @new external new: request => t = "ListFlowsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ()) =>
-    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1440,6 +1545,34 @@ module ListOfferings = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module ListFlows = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "The token that identifies which batch of results that you want to see. For example, you submit a ListFlows request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a NextToken value. To see the next batch of results, you can submit the ListFlows request a second time and specify the NextToken value."
+    )
+    @as("NextToken")
+    nextToken: option<__string>,
+    @ocaml.doc(
+      "The maximum number of results to return per API request. For example, you submit a ListFlows request with MaxResults set at 5. Although 20 items match your request, the service returns no more than the first 5 items. (The service also returns a NextToken value that you can use to fetch the next batch of results.) The service might return fewer results than the MaxResults value. If MaxResults is not included in the request, the service defaults to pagination with a maximum of 10 results per page."
+    )
+    @as("MaxResults")
+    maxResults: option<maxResults>,
+  }
+  type response = {
+    @ocaml.doc(
+      "The token that identifies which batch of results that you want to see. For example, you submit a ListFlows request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a NextToken value. To see the next batch of results, you can submit the ListFlows request a second time and specify the NextToken value."
+    )
+    @as("NextToken")
+    nextToken: option<__string>,
+    @ocaml.doc("A list of flow summaries.") @as("Flows") flows: option<__listOfListedFlow>,
+  }
+  @module("@aws-sdk/client-mediaconnect") @new external new: request => t = "ListFlowsCommand"
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module GrantFlowEntitlements = {
   type t
   @ocaml.doc("A request to grant entitlements on a flow.")
@@ -1518,6 +1651,16 @@ module UpdateFlowSource = {
     streamId: option<__string>,
     @ocaml.doc("The ARN of the source that you want to update.") @as("SourceArn")
     sourceArn: __string,
+    @ocaml.doc(
+      "The IP address that the flow communicates with to initiate connection with the sender."
+    )
+    @as("SenderIpAddress")
+    senderIpAddress: option<__string>,
+    @ocaml.doc(
+      "The port that the flow uses to send outbound requests to initiate connection with the sender."
+    )
+    @as("SenderControlPort")
+    senderControlPort: option<__integer>,
     @ocaml.doc("The protocol that is used by the source.") @as("Protocol")
     protocol: option<protocol>,
     @ocaml.doc(
@@ -1534,7 +1677,7 @@ module UpdateFlowSource = {
     @as("MaxSyncBuffer")
     maxSyncBuffer: option<__integer>,
     @ocaml.doc(
-      "The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams."
+      "The maximum latency in milliseconds. This parameter applies only to RIST-based, Zixi-based, and Fujitsu-based streams."
     )
     @as("MaxLatency")
     maxLatency: option<__integer>,
@@ -1573,6 +1716,8 @@ module UpdateFlowSource = {
     ~whitelistCidr=?,
     ~vpcInterfaceName=?,
     ~streamId=?,
+    ~senderIpAddress=?,
+    ~senderControlPort=?,
     ~protocol=?,
     ~minLatency=?,
     ~mediaStreamSourceConfigurations=?,
@@ -1590,6 +1735,8 @@ module UpdateFlowSource = {
       vpcInterfaceName: vpcInterfaceName,
       streamId: streamId,
       sourceArn: sourceArn,
+      senderIpAddress: senderIpAddress,
+      senderControlPort: senderControlPort,
       protocol: protocol,
       minLatency: minLatency,
       mediaStreamSourceConfigurations: mediaStreamSourceConfigurations,
@@ -1620,6 +1767,16 @@ module UpdateFlowOutput = {
     @ocaml.doc("The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC streams.")
     @as("SmoothingLatency")
     smoothingLatency: option<__integer>,
+    @ocaml.doc(
+      "The IP address that the flow communicates with to initiate connection with the sender."
+    )
+    @as("SenderIpAddress")
+    senderIpAddress: option<__string>,
+    @ocaml.doc(
+      "The port that the flow uses to send outbound requests to initiate connection with the sender."
+    )
+    @as("SenderControlPort")
+    senderControlPort: option<__integer>,
     @ocaml.doc("The remote ID for the Zixi-pull stream.") @as("RemoteId")
     remoteId: option<__string>,
     @ocaml.doc("The protocol to use for the output.") @as("Protocol") protocol: option<protocol>,
@@ -1637,7 +1794,10 @@ module UpdateFlowOutput = {
     )
     @as("MediaStreamOutputConfigurations")
     mediaStreamOutputConfigurations: option<__listOfMediaStreamOutputConfigurationRequest>,
-    @ocaml.doc("The maximum latency in milliseconds for Zixi-based streams.") @as("MaxLatency")
+    @ocaml.doc(
+      "The maximum latency in milliseconds. This parameter applies only to RIST-based, Zixi-based, and Fujitsu-based streams."
+    )
+    @as("MaxLatency")
     maxLatency: option<__integer>,
     @ocaml.doc("The flow that is associated with the output that you want to update.")
     @as("FlowArn")
@@ -1674,6 +1834,8 @@ module UpdateFlowOutput = {
     ~vpcInterfaceAttachment=?,
     ~streamId=?,
     ~smoothingLatency=?,
+    ~senderIpAddress=?,
+    ~senderControlPort=?,
     ~remoteId=?,
     ~protocol=?,
     ~port=?,
@@ -1690,6 +1852,8 @@ module UpdateFlowOutput = {
       vpcInterfaceAttachment: vpcInterfaceAttachment,
       streamId: streamId,
       smoothingLatency: smoothingLatency,
+      senderIpAddress: senderIpAddress,
+      senderControlPort: senderControlPort,
       remoteId: remoteId,
       protocol: protocol,
       port: port,
@@ -1748,13 +1912,14 @@ module UpdateFlow = {
   type t
   @ocaml.doc("A request to update flow.")
   type request = {
+    @as("Maintenance") maintenance: option<updateMaintenance>,
     @as("SourceFailoverConfig") sourceFailoverConfig: option<updateFailoverConfig>,
     @ocaml.doc("The flow that you want to update.") @as("FlowArn") flowArn: __string,
   }
   type response = {@as("Flow") flow: option<flow>}
   @module("@aws-sdk/client-mediaconnect") @new external new: request => t = "UpdateFlowCommand"
-  let make = (~flowArn, ~sourceFailoverConfig=?, ()) =>
-    new({sourceFailoverConfig: sourceFailoverConfig, flowArn: flowArn})
+  let make = (~flowArn, ~maintenance=?, ~sourceFailoverConfig=?, ()) =>
+    new({maintenance: maintenance, sourceFailoverConfig: sourceFailoverConfig, flowArn: flowArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1778,6 +1943,7 @@ module CreateFlow = {
     "Creates a new flow. The request must include one source. The request optionally can include outputs (up to 50) and entitlements (up to 50)."
   )
   type request = {
+    @as("Maintenance") maintenance: option<addMaintenance>,
     @ocaml.doc("The VPC interfaces you want on the flow.") @as("VpcInterfaces")
     vpcInterfaces: option<__listOfVpcInterfaceRequest>,
     @as("Sources") sources: option<__listOfSetSourceRequest>,
@@ -1803,6 +1969,7 @@ module CreateFlow = {
   @module("@aws-sdk/client-mediaconnect") @new external new: request => t = "CreateFlowCommand"
   let make = (
     ~name,
+    ~maintenance=?,
     ~vpcInterfaces=?,
     ~sources=?,
     ~sourceFailoverConfig=?,
@@ -1814,6 +1981,7 @@ module CreateFlow = {
     (),
   ) =>
     new({
+      maintenance: maintenance,
       vpcInterfaces: vpcInterfaces,
       sources: sources,
       sourceFailoverConfig: sourceFailoverConfig,

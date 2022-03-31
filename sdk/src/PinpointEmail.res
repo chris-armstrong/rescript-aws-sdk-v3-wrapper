@@ -1227,7 +1227,7 @@ module PutEmailIdentityMailFromAttributes = {
     @as("EmailIdentity")
     emailIdentity: identity,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "PutEmailIdentityMailFromAttributesCommand"
   let make = (~emailIdentity, ~behaviorOnMxFailure=?, ~mailFromDomain=?, ()) =>
@@ -1260,7 +1260,7 @@ module PutEmailIdentityFeedbackAttributes = {
     @as("EmailIdentity")
     emailIdentity: identity,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "PutEmailIdentityFeedbackAttributesCommand"
   let make = (~emailIdentity, ~emailForwardingEnabled=?, ()) =>
@@ -1283,7 +1283,7 @@ module PutEmailIdentityDkimAttributes = {
     @as("EmailIdentity")
     emailIdentity: identity,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "PutEmailIdentityDkimAttributesCommand"
   let make = (~emailIdentity, ~signingEnabled=?, ()) =>
@@ -1306,7 +1306,7 @@ module PutDedicatedIpWarmupAttributes = {
     @as("Ip")
     ip: ip,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "PutDedicatedIpWarmupAttributesCommand"
   let make = (~warmupPercentage, ~ip, ()) => new({warmupPercentage: warmupPercentage, ip: ip})
@@ -1326,7 +1326,7 @@ module PutDedicatedIpInPool = {
     @as("Ip")
     ip: ip,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new external new: request => t = "PutDedicatedIpInPoolCommand"
   let make = (~destinationPoolName, ~ip, ()) =>
     new({destinationPoolName: destinationPoolName, ip: ip})
@@ -1346,7 +1346,7 @@ module PutConfigurationSetTrackingOptions = {
     @as("ConfigurationSetName")
     configurationSetName: configurationSetName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "PutConfigurationSetTrackingOptionsCommand"
   let make = (~configurationSetName, ~customRedirectDomain=?, ()) =>
@@ -1368,7 +1368,7 @@ module PutConfigurationSetSendingOptions = {
     @as("ConfigurationSetName")
     configurationSetName: configurationSetName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "PutConfigurationSetSendingOptionsCommand"
   let make = (~configurationSetName, ~sendingEnabled=?, ()) =>
@@ -1391,7 +1391,7 @@ module PutConfigurationSetReputationOptions = {
     @as("ConfigurationSetName")
     configurationSetName: configurationSetName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "PutConfigurationSetReputationOptionsCommand"
   let make = (~configurationSetName, ~reputationMetricsEnabled=?, ()) =>
@@ -1421,7 +1421,7 @@ module PutConfigurationSetDeliveryOptions = {
     @as("ConfigurationSetName")
     configurationSetName: configurationSetName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "PutConfigurationSetDeliveryOptionsCommand"
   let make = (~configurationSetName, ~sendingPoolName=?, ~tlsPolicy=?, ()) =>
@@ -1446,7 +1446,7 @@ module PutAccountSendingAttributes = {
     @as("SendingEnabled")
     sendingEnabled: option<enabled>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "PutAccountSendingAttributesCommand"
   let make = (~sendingEnabled=?, ()) => new({sendingEnabled: sendingEnabled})
@@ -1464,7 +1464,7 @@ module PutAccountDedicatedIpWarmupAttributes = {
     @as("AutoWarmupEnabled")
     autoWarmupEnabled: option<enabled>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "PutAccountDedicatedIpWarmupAttributesCommand"
   let make = (~autoWarmupEnabled=?, ()) => new({autoWarmupEnabled: autoWarmupEnabled})
@@ -1482,7 +1482,7 @@ module DeleteEmailIdentity = {
     @as("EmailIdentity")
     emailIdentity: identity,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new external new: request => t = "DeleteEmailIdentityCommand"
   let make = (~emailIdentity, ()) => new({emailIdentity: emailIdentity})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1495,7 +1495,7 @@ module DeleteDedicatedIpPool = {
     @ocaml.doc("<p>The name of the dedicated IP pool that you want to delete.</p>") @as("PoolName")
     poolName: poolName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new external new: request => t = "DeleteDedicatedIpPoolCommand"
   let make = (~poolName, ()) => new({poolName: poolName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1513,7 +1513,7 @@ module DeleteConfigurationSetEventDestination = {
     @as("ConfigurationSetName")
     configurationSetName: configurationSetName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "DeleteConfigurationSetEventDestinationCommand"
   let make = (~eventDestinationName, ~configurationSetName, ()) =>
@@ -1529,7 +1529,7 @@ module DeleteConfigurationSet = {
     @as("ConfigurationSetName")
     configurationSetName: configurationSetName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new external new: request => t = "DeleteConfigurationSetCommand"
   let make = (~configurationSetName, ()) => new({configurationSetName: configurationSetName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1552,7 +1552,7 @@ module UntagResource = {
     @as("ResourceArn")
     resourceArn: amazonResourceName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1648,7 +1648,7 @@ module GetDedicatedIp = {
 
 module GetAccount = {
   type t
-
+  type request = {.}
   @ocaml.doc("<p>A list of details about the email-sending capabilities of your Amazon Pinpoint account in the
             current AWS Region.</p>")
   type response = {
@@ -1701,8 +1701,8 @@ module GetAccount = {
     @as("SendQuota")
     sendQuota: option<sendQuota>,
   }
-  @module("@aws-sdk/client-ses") @new external new: unit => t = "GetAccountCommand"
-  let make = () => new()
+  @module("@aws-sdk/client-ses") @new external new: request => t = "GetAccountCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1720,7 +1720,7 @@ module TagResource = {
     @as("ResourceArn")
     resourceArn: amazonResourceName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -2019,7 +2019,7 @@ module CreateDedicatedIpPool = {
     tags: option<tagList_>,
     @ocaml.doc("<p>The name of the dedicated IP pool.</p>") @as("PoolName") poolName: poolName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new external new: request => t = "CreateDedicatedIpPoolCommand"
   let make = (~poolName, ~tags=?, ()) => new({tags: tags, poolName: poolName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -2052,7 +2052,7 @@ module CreateConfigurationSet = {
     @ocaml.doc("<p>The name of the configuration set.</p>") @as("ConfigurationSetName")
     configurationSetName: configurationSetName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new external new: request => t = "CreateConfigurationSetCommand"
   let make = (
     ~configurationSetName,
@@ -2208,7 +2208,7 @@ module UpdateConfigurationSetEventDestination = {
     @as("ConfigurationSetName")
     configurationSetName: configurationSetName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "UpdateConfigurationSetEventDestinationCommand"
   let make = (~eventDestination, ~eventDestinationName, ~configurationSetName, ()) =>
@@ -2313,7 +2313,7 @@ module PutDeliverabilityDashboardOption = {
     @as("DashboardEnabled")
     dashboardEnabled: enabled,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "PutDeliverabilityDashboardOptionCommand"
   let make = (~dashboardEnabled, ~subscribedDomains=?, ()) =>
@@ -2361,7 +2361,7 @@ module GetDomainStatisticsReport = {
 
 module GetDeliverabilityDashboardOptions = {
   type t
-
+  type request = {.}
   @ocaml.doc(
     "<p>An object that shows the status of the Deliverability dashboard for your Amazon Pinpoint account.</p>"
   )
@@ -2393,8 +2393,8 @@ module GetDeliverabilityDashboardOptions = {
     dashboardEnabled: enabled,
   }
   @module("@aws-sdk/client-ses") @new
-  external new: unit => t = "GetDeliverabilityDashboardOptionsCommand"
-  let make = () => new()
+  external new: request => t = "GetDeliverabilityDashboardOptionsCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -2461,7 +2461,7 @@ module CreateConfigurationSetEventDestination = {
     @as("ConfigurationSetName")
     configurationSetName: configurationSetName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "CreateConfigurationSetEventDestinationCommand"
   let make = (~eventDestination, ~eventDestinationName, ~configurationSetName, ()) =>

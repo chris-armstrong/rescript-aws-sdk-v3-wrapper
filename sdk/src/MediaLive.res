@@ -15,10 +15,14 @@ type baseInteger = int
 type baseTimestamp = Js.Date.t
 type baseLong = float
 @ocaml.doc("Placeholder documentation for __timestamp") type __timestamp = Js.Date.t
+@ocaml.doc("Placeholder documentation for __stringPattern010920300")
+type __stringPattern010920300 = string
 @ocaml.doc("Placeholder documentation for __stringMin6Max6") type __stringMin6Max6 = string
 @ocaml.doc("Placeholder documentation for __stringMin3Max3") type __stringMin3Max3 = string
 @ocaml.doc("Placeholder documentation for __stringMin34Max34") type __stringMin34Max34 = string
 @ocaml.doc("Placeholder documentation for __stringMin32Max32") type __stringMin32Max32 = string
+@ocaml.doc("Placeholder documentation for __stringMin2Max2") type __stringMin2Max2 = string
+@ocaml.doc("Placeholder documentation for __stringMin1Max7") type __stringMin1Max7 = string
 @ocaml.doc("Placeholder documentation for __stringMin1Max35") type __stringMin1Max35 = string
 @ocaml.doc("Placeholder documentation for __stringMin1Max256") type __stringMin1Max256 = string
 @ocaml.doc("Placeholder documentation for __stringMin1Max255") type __stringMin1Max255 = string
@@ -46,6 +50,7 @@ type __integerMinNegative1000Max1000 = int
 @ocaml.doc("Placeholder documentation for __integerMin96Max600") type __integerMin96Max600 = int
 @ocaml.doc("Placeholder documentation for __integerMin800Max3000") type __integerMin800Max3000 = int
 @ocaml.doc("Placeholder documentation for __integerMin4Max20") type __integerMin4Max20 = int
+@ocaml.doc("Placeholder documentation for __integerMin32Max8191") type __integerMin32Max8191 = int
 @ocaml.doc("Placeholder documentation for __integerMin30") type __integerMin30 = int
 @ocaml.doc("Placeholder documentation for __integerMin3") type __integerMin3 = int
 @ocaml.doc("Placeholder documentation for __integerMin25Max2000") type __integerMin25Max2000 = int
@@ -101,12 +106,17 @@ type __integerMin0Max1000000 = int
 @ocaml.doc("Placeholder documentation for __integer") type __integer = int
 @ocaml.doc("Placeholder documentation for __doubleMinNegative59Max0")
 type __doubleMinNegative59Max0 = float
+@ocaml.doc("Placeholder documentation for __doubleMin1Max65535") type __doubleMin1Max65535 = float
 @ocaml.doc("Placeholder documentation for __doubleMin1") type __doubleMin1 = float
 @ocaml.doc("Placeholder documentation for __doubleMin0Max100") type __doubleMin0Max100 = float
 @ocaml.doc("Placeholder documentation for __doubleMin0Max1") type __doubleMin0Max1 = float
 @ocaml.doc("Placeholder documentation for __doubleMin0") type __doubleMin0 = float
 @ocaml.doc("Placeholder documentation for __double") type __double = float
-@ocaml.doc("Webvtt Destination Settings") type webvttDestinationSettings = unit
+@ocaml.doc("Webvtt Destination Style Control")
+type webvttDestinationStyleControl = [
+  | @as("PASSTHROUGH") #PASSTHROUGH
+  | @as("NO_STYLE_DATA") #NO_STYLE_DATA
+]
 @ocaml.doc("Wav Coding Mode")
 type wavCodingMode = [
   | @as("CODING_MODE_8_0") #CODING_MODE_8_0
@@ -174,8 +184,8 @@ type temporalFilterPostFilterSharpening = [
   | @as("DISABLED") #DISABLED
   | @as("AUTO") #AUTO
 ]
-@ocaml.doc("Teletext Destination Settings") type teletextDestinationSettings = unit
-@ocaml.doc("Smpte Tt Destination Settings") type smpteTtDestinationSettings = unit
+@ocaml.doc("Teletext Destination Settings") type teletextDestinationSettings = {.}
+@ocaml.doc("Smpte Tt Destination Settings") type smpteTtDestinationSettings = {.}
 @ocaml.doc("Smpte2038 Data Preference")
 type smpte2038DataPreference = [@as("PREFER") #PREFER | @as("IGNORE") #IGNORE]
 @ocaml.doc("Smooth Group Timestamp Offset Mode")
@@ -259,9 +269,18 @@ type scte35ArchiveAllowedFlag = [
 type scte35AposWebDeliveryAllowedBehavior = [@as("IGNORE") #IGNORE | @as("FOLLOW") #FOLLOW]
 @ocaml.doc("Scte35 Apos No Regional Blackout Behavior")
 type scte35AposNoRegionalBlackoutBehavior = [@as("IGNORE") #IGNORE | @as("FOLLOW") #FOLLOW]
-@ocaml.doc("Scte27 Destination Settings") type scte27DestinationSettings = unit
+@ocaml.doc("Scte27 Ocr Language")
+type scte27OcrLanguage = [
+  | @as("SPA") #SPA
+  | @as("POR") #POR
+  | @as("NLD") #NLD
+  | @as("FRA") #FRA
+  | @as("ENG") #ENG
+  | @as("DEU") #DEU
+]
+@ocaml.doc("Scte27 Destination Settings") type scte27DestinationSettings = {.}
 @ocaml.doc("Scte20 Plus Embedded Destination Settings")
-type scte20PlusEmbeddedDestinationSettings = unit
+type scte20PlusEmbeddedDestinationSettings = {.}
 @ocaml.doc("Scte20 Convert608 To708")
 type scte20Convert608To708 = [@as("UPCONVERT") #UPCONVERT | @as("DISABLED") #DISABLED]
 @ocaml.doc("S3 Canned Acl")
@@ -276,7 +295,7 @@ type rtmpOutputCertificateMode = [
   | @as("VERIFY_AUTHENTICITY") #VERIFY_AUTHENTICITY
   | @as("SELF_SIGNED") #SELF_SIGNED
 ]
-@ocaml.doc("Rtmp Caption Info Destination Settings") type rtmpCaptionInfoDestinationSettings = unit
+@ocaml.doc("Rtmp Caption Info Destination Settings") type rtmpCaptionInfoDestinationSettings = {.}
 @ocaml.doc("Rtmp Caption Data")
 type rtmpCaptionData = [
   | @as("FIELD1_AND_FIELD2_608") #FIELD1_AND_FIELD2_608
@@ -302,8 +321,10 @@ type reservationState = [
   | @as("EXPIRED") #EXPIRED
   | @as("ACTIVE") #ACTIVE
 ]
-@ocaml.doc("Special features, 'ADVANCED_AUDIO' or 'AUDIO_NORMALIZATION'")
+@ocaml.doc("Special features, 'ADVANCED_AUDIO' 'AUDIO_NORMALIZATION' 'MGHD' or 'MGUHD'")
 type reservationSpecialFeature = [
+  | @as("MGUHD") #MGUHD
+  | @as("MGHD") #MGHD
   | @as("AUDIO_NORMALIZATION") #AUDIO_NORMALIZATION
   | @as("ADVANCED_AUDIO") #ADVANCED_AUDIO
 ]
@@ -334,9 +355,9 @@ type reservationCodec = [
   | @as("AVC") #AVC
   | @as("MPEG2") #MPEG2
 ]
-@ocaml.doc("Rec709 Settings") type rec709Settings = unit
-@ocaml.doc("Rec601 Settings") type rec601Settings = unit
-@ocaml.doc("Raw Settings") type rawSettings = unit
+@ocaml.doc("Rec709 Settings") type rec709Settings = {.}
+@ocaml.doc("Rec601 Settings") type rec601Settings = {.}
+@ocaml.doc("Raw Settings") type rawSettings = {.}
 @ocaml.doc("Indicates which pipeline is preferred by the multiplex for program ingest.
 If set to \\\"PIPELINE_0\\\" or \\\"PIPELINE_1\\\" and an unhealthy ingest causes the multiplex to switch to the non-preferred pipeline,
 it will switch back once that ingest is healthy again. If set to \\\"CURRENTLY_ACTIVE\\\",
@@ -349,9 +370,16 @@ type preferredChannelPipeline = [
 ]
 @ocaml.doc("Pipeline ID")
 type pipelineId = [@as("PIPELINE_1") #PIPELINE_1 | @as("PIPELINE_0") #PIPELINE_0]
-@ocaml.doc("Pass Through Settings") type passThroughSettings = unit
+@ocaml.doc("Pass Through Settings") type passThroughSettings = {.}
 @ocaml.doc("Offering type, e.g. 'NO_UPFRONT'") type offeringType = [@as("NO_UPFRONT") #NO_UPFRONT]
 @ocaml.doc("Units for duration, e.g. 'MONTHS'") type offeringDurationUnits = [@as("MONTHS") #MONTHS]
+@ocaml.doc("Nielsen Watermarks Distribution Types")
+type nielsenWatermarksDistributionTypes = [
+  | @as("PROGRAM_CONTENT") #PROGRAM_CONTENT
+  | @as("FINAL_DISTRIBUTOR") #FINAL_DISTRIBUTOR
+]
+@ocaml.doc("Nielsen Watermarks Cbet Stepaside")
+type nielsenWatermarksCbetStepaside = [@as("ENABLED") #ENABLED | @as("DISABLED") #DISABLED]
 @ocaml.doc("State of Nielsen PCM to ID3 tagging")
 type nielsenPcmToId3TaggingState = [@as("ENABLED") #ENABLED | @as("DISABLED") #DISABLED]
 @ocaml.doc("Network Input Server Validation")
@@ -371,7 +399,7 @@ type multiplexState = [
   | @as("CREATE_FAILED") #CREATE_FAILED
   | @as("CREATING") #CREATING
 ]
-@ocaml.doc("Multiplex Group Settings") type multiplexGroupSettings = unit
+@ocaml.doc("Multiplex Group Settings") type multiplexGroupSettings = {.}
 @ocaml.doc("Ms Smooth H265 Packaging Type")
 type msSmoothH265PackagingType = [@as("HVC1") #HVC1 | @as("HEV1") #HEV1]
 @ocaml.doc("Mpeg2 Timecode Insertion Behavior")
@@ -410,9 +438,19 @@ type mp2CodingMode = [
 @ocaml.doc("Motion Graphics Insertion")
 type motionGraphicsInsertion = [@as("ENABLED") #ENABLED | @as("DISABLED") #DISABLED]
 @ocaml.doc("Settings to specify the ending of rendering motion graphics into the video stream.")
-type motionGraphicsDeactivateScheduleActionSettings = unit
-@ocaml.doc("Media Package Output Settings") type mediaPackageOutputSettings = unit
+type motionGraphicsDeactivateScheduleActionSettings = {.}
+@ocaml.doc("Media Package Output Settings") type mediaPackageOutputSettings = {.}
 @ocaml.doc("Placeholder documentation for MaxResults") type maxResults = int
+@ocaml.doc("The currently selected maintenance day.")
+type maintenanceDay = [
+  | @as("SUNDAY") #SUNDAY
+  | @as("SATURDAY") #SATURDAY
+  | @as("FRIDAY") #FRIDAY
+  | @as("THURSDAY") #THURSDAY
+  | @as("WEDNESDAY") #WEDNESDAY
+  | @as("TUESDAY") #TUESDAY
+  | @as("MONDAY") #MONDAY
+]
 @ocaml.doc("M3u8 Timed Metadata Behavior")
 type m3u8TimedMetadataBehavior = [
   | @as("PASSTHROUGH") #PASSTHROUGH
@@ -505,8 +543,9 @@ type lastFrameClippingBehavior = [
   | @as("INCLUDE_LAST_FRAME") #INCLUDE_LAST_FRAME
   | @as("EXCLUDE_LAST_FRAME") #EXCLUDE_LAST_FRAME
 ]
-@ocaml.doc("Placeholder documentation for InputType")
+@ocaml.doc("The different types of inputs that AWS Elemental MediaLive supports.")
 type inputType = [
+  | @as("TS_FILE") #TS_FILE
   | @as("AWS_CDI") #AWS_CDI
   | @as("INPUT_DEVICE") #INPUT_DEVICE
   | @as("MEDIACONNECT") #MEDIACONNECT
@@ -528,8 +567,8 @@ type inputState = [
   | @as("CREATING") #CREATING
 ]
 @ocaml.doc("There are two types of input sources, static and dynamic. If an input source is dynamic you can
-change the source url of the input dynamically using an input switch action. However, the only input type
-to support a dynamic url at this time is MP4_FILE. By default all input sources are static.")
+change the source url of the input dynamically using an input switch action. Currently, two input types
+support a dynamic url at this time, MP4_FILE and TS_FILE. By default all input sources are static.")
 type inputSourceType = [@as("DYNAMIC") #DYNAMIC | @as("STATIC") #STATIC]
 @ocaml.doc("Input Source End Behavior")
 type inputSourceEndBehavior = [@as("LOOP") #LOOP | @as("CONTINUE") #CONTINUE]
@@ -619,12 +658,12 @@ type inputCodec = [@as("HEVC") #HEVC | @as("AVC") #AVC | @as("MPEG2") #MPEG2]
 @ocaml.doc("A standard input has two sources and a single pipeline input only has one.")
 type inputClass = [@as("SINGLE_PIPELINE") #SINGLE_PIPELINE | @as("STANDARD") #STANDARD]
 @ocaml.doc("Settings to configure an action so that it occurs as soon as possible.")
-type immediateModeScheduleActionStartSettings = unit
+type immediateModeScheduleActionStartSettings = {.}
 @ocaml.doc(
   "When set to \"standard\", an I-Frame only playlist will be written out for each video output in the output group. This I-Frame only playlist will contain byte range offsets pointing to the I-frame(s) in each segment."
 )
 type iframeOnlyPlaylistType = [@as("STANDARD") #STANDARD | @as("DISABLED") #DISABLED]
-@ocaml.doc("Html Motion Graphics Settings") type htmlMotionGraphicsSettings = unit
+@ocaml.doc("Html Motion Graphics Settings") type htmlMotionGraphicsSettings = {.}
 @ocaml.doc("Hls Webdav Http Transfer Mode")
 type hlsWebdavHttpTransferMode = [@as("NON_CHUNKED") #NON_CHUNKED | @as("CHUNKED") #CHUNKED]
 @ocaml.doc("Hls Ts File Mode")
@@ -638,8 +677,15 @@ type hlsSegmentationMode = [
   | @as("USE_SEGMENT_DURATION") #USE_SEGMENT_DURATION
   | @as("USE_INPUT_SEGMENTATION") #USE_INPUT_SEGMENTATION
 ]
+@ocaml.doc("Hls Scte35 Source Type")
+type hlsScte35SourceType = [@as("SEGMENTS") #SEGMENTS | @as("MANIFEST") #MANIFEST]
 @ocaml.doc("Hls Redundant Manifest")
 type hlsRedundantManifest = [@as("ENABLED") #ENABLED | @as("DISABLED") #DISABLED]
+@ocaml.doc("Hls Program Date Time Clock")
+type hlsProgramDateTimeClock = [
+  | @as("SYSTEM_CLOCK") #SYSTEM_CLOCK
+  | @as("INITIALIZE_FROM_OUTPUT_TIMECODE") #INITIALIZE_FROM_OUTPUT_TIMECODE
+]
 @ocaml.doc("Hls Program Date Time")
 type hlsProgramDateTime = [@as("INCLUDE") #INCLUDE | @as("EXCLUDE") #EXCLUDE]
 @ocaml.doc("Hls Output Selection")
@@ -739,6 +785,7 @@ type h265AdaptiveQuantization = [
   | @as("LOW") #LOW
   | @as("HIGHER") #HIGHER
   | @as("HIGH") #HIGH
+  | @as("AUTO") #AUTO
 ]
 @ocaml.doc("H264 Timecode Insertion Behavior")
 type h264TimecodeInsertionBehavior = [
@@ -829,6 +876,7 @@ type h264AdaptiveQuantization = [
   | @as("LOW") #LOW
   | @as("HIGHER") #HIGHER
   | @as("HIGH") #HIGH
+  | @as("AUTO") #AUTO
 ]
 @ocaml.doc("Global Configuration Output Timing Source")
 type globalConfigurationOutputTimingSource = [
@@ -849,7 +897,7 @@ type globalConfigurationInputEndAction = [
 ]
 @ocaml.doc("Frame Capture Interval Unit")
 type frameCaptureIntervalUnit = [@as("SECONDS") #SECONDS | @as("MILLISECONDS") #MILLISECONDS]
-@ocaml.doc("Frame Capture Hls Settings") type frameCaptureHlsSettings = unit
+@ocaml.doc("Frame Capture Hls Settings") type frameCaptureHlsSettings = {.}
 @ocaml.doc("Follow reference point.") type followPoint = [@as("START") #START | @as("END") #END]
 @ocaml.doc("Fmp4 Timed Metadata Behavior")
 type fmp4TimedMetadataBehavior = [
@@ -885,8 +933,8 @@ type featureActivationsInputPrepareScheduleActions = [
 @ocaml.doc("Embedded Scte20 Detection")
 type embeddedScte20Detection = [@as("OFF") #OFF | @as("AUTO") #AUTO]
 @ocaml.doc("Embedded Plus Scte20 Destination Settings")
-type embeddedPlusScte20DestinationSettings = unit
-@ocaml.doc("Embedded Destination Settings") type embeddedDestinationSettings = unit
+type embeddedPlusScte20DestinationSettings = {.}
+@ocaml.doc("Embedded Destination Settings") type embeddedDestinationSettings = {.}
 @ocaml.doc("Embedded Convert608 To708")
 type embeddedConvert608To708 = [@as("UPCONVERT") #UPCONVERT | @as("DISABLED") #DISABLED]
 @ocaml.doc("Ebu Tt DFill Line Gap Control")
@@ -963,6 +1011,15 @@ type eac3BitstreamMode = [
 ]
 @ocaml.doc("Eac3 Attenuation Control")
 type eac3AttenuationControl = [@as("NONE") #NONE | @as("ATTENUATE_3_DB") #ATTENUATE_3_DB]
+@ocaml.doc("Dvb Sub Ocr Language")
+type dvbSubOcrLanguage = [
+  | @as("SPA") #SPA
+  | @as("POR") #POR
+  | @as("NLD") #NLD
+  | @as("FRA") #FRA
+  | @as("ENG") #ENG
+  | @as("DEU") #DEU
+]
 @ocaml.doc("Dvb Sub Destination Teletext Grid Control")
 type dvbSubDestinationTeletextGridControl = [@as("SCALED") #SCALED | @as("FIXED") #FIXED]
 @ocaml.doc("Dvb Sub Destination Shadow Color")
@@ -1013,7 +1070,7 @@ type deviceSettingsSyncState = [@as("SYNCING") #SYNCING | @as("SYNCED") #SYNCED]
 @ocaml.doc("Specifies the media type of the thumbnail.")
 type contentType = [@as("image/jpeg") #Image_Jpeg]
 @ocaml.doc("Passthrough applies no color space conversion to the output")
-type colorSpacePassthroughSettings = unit
+type colorSpacePassthroughSettings = {.}
 @ocaml.doc("Placeholder documentation for ChannelState")
 type channelState = [
   | @as("UPDATE_FAILED") #UPDATE_FAILED
@@ -1102,8 +1159,8 @@ type audioDescriptionAudioTypeControl = [
   | @as("USE_CONFIGURED") #USE_CONFIGURED
   | @as("FOLLOW_INPUT") #FOLLOW_INPUT
 ]
-@ocaml.doc("Arib Source Settings") type aribSourceSettings = unit
-@ocaml.doc("Arib Destination Settings") type aribDestinationSettings = unit
+@ocaml.doc("Arib Source Settings") type aribSourceSettings = {.}
+@ocaml.doc("Arib Destination Settings") type aribDestinationSettings = {.}
 @ocaml.doc("Afd Signaling")
 type afdSignaling = [@as("NONE") #NONE | @as("FIXED") #FIXED | @as("AUTO") #AUTO]
 @ocaml.doc("The HTTP Accept header. Indicates the requested type fothe thumbnail.")
@@ -1163,6 +1220,14 @@ type __listOf__integer = array<__integer>
 type __listOfRtmpAdMarkers = array<rtmpAdMarkers>
 @ocaml.doc("Placeholder documentation for __listOfHlsAdMarkers")
 type __listOfHlsAdMarkers = array<hlsAdMarkers>
+@ocaml.doc("Webvtt Destination Settings")
+type webvttDestinationSettings = {
+  @ocaml.doc(
+    "Controls whether the color and position of the source captions is passed through to the WebVTT output captions.  PASSTHROUGH - Valid only if the source captions are EMBEDDED or TELETEXT.  NO_STYLE_DATA - Don't pass through the style. The output captions will not contain any font styling information."
+  )
+  @as("StyleControl")
+  styleControl: option<webvttDestinationStyleControl>,
+}
 @ocaml.doc("Wav Settings")
 type wavSettings = {
   @ocaml.doc("Sample rate in Hz.") @as("SampleRate") sampleRate: option<__double>,
@@ -1219,7 +1284,7 @@ type udpGroupSettings = {
 @ocaml.doc("Ttml Destination Settings")
 type ttmlDestinationSettings = {
   @ocaml.doc(
-    "When set to passthrough, passes through style and position information from a TTML-like input source (TTML, SMPTE-TT, CFF-TT) to the CFF-TT output or TTML output."
+    "This field is not currently supported and will not affect the output styling. Leave the default value."
   )
   @as("StyleControl")
   styleControl: option<ttmlDestinationStyleControl>,
@@ -1369,6 +1434,10 @@ type scte27SourceSettings = {
   - Omit PID and omit Language: Valid only if source is DVB-Sub that is being passed through; all languages will be passed through.")
   @as("Pid")
   pid: option<__integerMin1>,
+  @ocaml.doc("If you will configure a WebVTT caption description that references this caption selector, use this field to
+provide the language to consider when translating the image-based source to text.")
+  @as("OcrLanguage")
+  ocrLanguage: option<scte27OcrLanguage>,
 }
 @ocaml.doc("Scte20 Source Settings")
 type scte20SourceSettings = {
@@ -1436,6 +1505,13 @@ type outputDestinationSettings = {
   @ocaml.doc("key used to extract the password from EC2 Parameter store") @as("PasswordParam")
   passwordParam: option<__string>,
 }
+@ocaml.doc("Nielsen Naes Ii Nw")
+type nielsenNaesIiNw = {
+  @ocaml.doc("Enter the Nielsen Source ID (SID) to include in the watermark") @as("Sid")
+  sid: __doubleMin1Max65535,
+  @ocaml.doc("Enter the check digit string for the watermark") @as("CheckDigitString")
+  checkDigitString: __stringMin2Max2,
+}
 @ocaml.doc("Nielsen Configuration")
 type nielsenConfiguration = {
   @ocaml.doc("Enables Nielsen PCM to ID3 tagging") @as("NielsenPcmToId3Tagging")
@@ -1443,6 +1519,18 @@ type nielsenConfiguration = {
   @ocaml.doc("Enter the Distributor ID assigned to your organization by Nielsen.")
   @as("DistributorId")
   distributorId: option<__string>,
+}
+@ocaml.doc("Nielsen CBET")
+type nielsenCBET = {
+  @ocaml.doc("Enter the CBET Source ID (CSID) to use in the watermark") @as("Csid")
+  csid: __stringMin1Max7,
+  @ocaml.doc(
+    "Determines the method of CBET insertion mode when prior encoding is detected on the same layer."
+  )
+  @as("CbetStepaside")
+  cbetStepaside: nielsenWatermarksCbetStepaside,
+  @ocaml.doc("Enter the CBET check digits to use in the watermark.") @as("CbetCheckDigitString")
+  cbetCheckDigitString: __stringMin2Max2,
 }
 @ocaml.doc("Statmux rate control settings")
 type multiplexStatmuxVideoSettings = {
@@ -1565,6 +1653,51 @@ type mediaConnectFlowRequest = {
 type mediaConnectFlow = {
   @ocaml.doc("The unique ARN of the MediaConnect Flow being used as a source.") @as("FlowArn")
   flowArn: option<__string>,
+}
+@ocaml.doc("Placeholder documentation for MaintenanceUpdateSettings")
+type maintenanceUpdateSettings = {
+  @ocaml.doc(
+    "Choose the hour that maintenance will start. The chosen time is used for all future maintenance windows."
+  )
+  @as("MaintenanceStartTime")
+  maintenanceStartTime: option<__stringPattern010920300>,
+  @ocaml.doc(
+    "Choose a specific date for maintenance to occur. The chosen date is used for the next maintenance window only."
+  )
+  @as("MaintenanceScheduledDate")
+  maintenanceScheduledDate: option<__string>,
+  @ocaml.doc(
+    "Choose one day of the week for maintenance. The chosen day is used for all future maintenance windows."
+  )
+  @as("MaintenanceDay")
+  maintenanceDay: option<maintenanceDay>,
+}
+@ocaml.doc("Placeholder documentation for MaintenanceStatus")
+type maintenanceStatus = {
+  @ocaml.doc("The currently selected maintenance start time. Time is in UTC.")
+  @as("MaintenanceStartTime")
+  maintenanceStartTime: option<__string>,
+  @ocaml.doc("The currently scheduled maintenance date and time. Date and time is in ISO.")
+  @as("MaintenanceScheduledDate")
+  maintenanceScheduledDate: option<__string>,
+  @ocaml.doc("Maintenance is required by the displayed date and time. Date and time is in ISO.")
+  @as("MaintenanceDeadline")
+  maintenanceDeadline: option<__string>,
+  @ocaml.doc("The currently selected maintenance day.") @as("MaintenanceDay")
+  maintenanceDay: option<maintenanceDay>,
+}
+@ocaml.doc("Placeholder documentation for MaintenanceCreateSettings")
+type maintenanceCreateSettings = {
+  @ocaml.doc(
+    "Choose the hour that maintenance will start. The chosen time is used for all future maintenance windows."
+  )
+  @as("MaintenanceStartTime")
+  maintenanceStartTime: option<__stringPattern010920300>,
+  @ocaml.doc(
+    "Choose one day of the week for maintenance. The chosen day is used for all future maintenance windows."
+  )
+  @as("MaintenanceDay")
+  maintenanceDay: option<maintenanceDay>,
 }
 @ocaml.doc("Settings information for the .m3u8 container")
 type m3u8Settings = {
@@ -1862,6 +1995,11 @@ type hlsMediaStoreSettings = {
 @ocaml.doc("Hls Input Settings")
 type hlsInputSettings = {
   @ocaml.doc(
+    "Identifies the source for the SCTE-35 messages that MediaLive will ingest. Messages can be ingested from the content segments (in the stream) or from tags in the playlist (the HLS manifest). MediaLive ignores SCTE-35 information in the source that is not selected."
+  )
+  @as("Scte35Source")
+  scte35Source: option<hlsScte35SourceType>,
+  @ocaml.doc(
     "The number of seconds between retries when an attempt to read a manifest or segment fails."
   )
   @as("RetryInterval")
@@ -2083,7 +2221,7 @@ You specify only the font family. All other style information (color, bold, posi
   @as("FillLineGap")
   fillLineGap: option<ebuTtDFillLineGapControl>,
   @ocaml.doc(
-    "Applies only if you plan to convert these source captions to EBU-TT-D or TTML in an output. Complete this field if you want to include the name of the copyright holder in the copyright metadata tag in the TTML"
+    "Complete this field if you want to include the name of the copyright holder in the copyright tag in the captions metadata."
   )
   @as("CopyrightHolder")
   copyrightHolder: option<__stringMax1000>,
@@ -2182,6 +2320,10 @@ type dvbSubSourceSettings = {
   )
   @as("Pid")
   pid: option<__integerMin1>,
+  @ocaml.doc("If you will configure a WebVTT caption description that references this caption selector, use this field to
+provide the language to consider when translating the image-based source to text.")
+  @as("OcrLanguage")
+  ocrLanguage: option<dvbSubOcrLanguage>,
 }
 @ocaml.doc("DVB Service Description Table (SDT)")
 type dvbSdtSettings = {
@@ -2333,6 +2475,15 @@ type audioLanguageSelection = {
   @ocaml.doc("Selects a specific three-letter language code from within an audio source.")
   @as("LanguageCode")
   languageCode: __string,
+}
+@ocaml.doc("Audio Hls Rendition Selection")
+type audioHlsRenditionSelection = {
+  @ocaml.doc("Specifies the NAME in the #EXT-X-MEDIA tag of the target HLS audio rendition.")
+  @as("Name")
+  name: __stringMin1,
+  @ocaml.doc("Specifies the GROUP-ID in the #EXT-X-MEDIA tag of the target HLS audio rendition.")
+  @as("GroupId")
+  groupId: __stringMin1,
 }
 @ocaml.doc("Archive S3 Settings")
 type archiveS3Settings = {
@@ -2769,6 +2920,22 @@ type offering = {
   )
   @as("Arn")
   arn: option<__string>,
+}
+@ocaml.doc("Nielsen Watermarks Settings")
+type nielsenWatermarksSettings = {
+  @ocaml.doc(
+    "Complete these fields only if you want to insert watermarks of type Nielsen NAES II (N2) and Nielsen NAES VI (NW)."
+  )
+  @as("NielsenNaesIiNwSettings")
+  nielsenNaesIiNwSettings: option<nielsenNaesIiNw>,
+  @ocaml.doc("Choose the distribution types that you want to assign to the watermarks:
+- PROGRAM_CONTENT
+- FINAL_DISTRIBUTOR")
+  @as("NielsenDistributionType")
+  nielsenDistributionType: option<nielsenWatermarksDistributionTypes>,
+  @ocaml.doc("Complete these fields only if you want to insert watermarks of type Nielsen CBET")
+  @as("NielsenCbetSettings")
+  nielsenCbetSettings: option<nielsenCBET>,
 }
 @ocaml.doc(
   "Network source to transcode. Must be accessible to the Elemental Live node that is running the live event through a network connection."
@@ -3877,7 +4044,7 @@ type h264Settings = {
   @as("TimecodeInsertion")
   timecodeInsertion: option<h264TimecodeInsertionBehavior>,
   @ocaml.doc(
-    "If set to enabled, adjust quantization within each frame based on temporal variation of content complexity."
+    "Temporal makes adjustments within each frame based on temporal variation of content complexity. The value to enter in this field depends on the value in the Adaptive quantization field: If you have set the Adaptive quantization field to Auto, MediaLive ignores any value in this field. MediaLive will determine if temporal AQ is appropriate and will apply the appropriate strength. If you have set the Adaptive quantization field to a strength, you can set this field to Enabled or Disabled. Enabled: MediaLive will apply temporal AQ using the specified strength. Disabled: MediaLive won't apply temporal AQ. If you have set the Adaptive quantization to Disabled, MediaLive ignores any value in this field and doesn't apply temporal AQ."
   )
   @as("TemporalAq")
   temporalAq: option<h264TemporalAq>,
@@ -3889,7 +4056,7 @@ type h264Settings = {
   @as("SubgopLength")
   subgopLength: option<h264SubGopLength>,
   @ocaml.doc(
-    "If set to enabled, adjust quantization within each frame based on spatial variation of content complexity."
+    "Spatial AQ makes adjustments within each frame based on spatial variation of content complexity. The value to enter in this field depends on the value in the Adaptive quantization field: If you have set the Adaptive quantization field to Auto, MediaLive ignores any value in this field. MediaLive will determine if spatial AQ is appropriate and will apply the appropriate strength. If you have set the Adaptive quantization field to a strength, you can set this field to Enabled or Disabled. Enabled: MediaLive will apply spatial AQ using the specified strength. Disabled: MediaLive won't apply spatial AQ. If you have set the Adaptive quantization to Disabled, MediaLive ignores any value in this field and doesn't apply spatial AQ."
   )
   @as("SpatialAq")
   spatialAq: option<h264SpatialAq>,
@@ -3927,10 +4094,11 @@ delivered to a MediaLive Multiplex in which case the rate control configuration 
 by the properties within the Multiplex Program.")
   @as("RateControlMode")
   rateControlMode: option<h264RateControlMode>,
-  @ocaml.doc("Controls the target quality for the video encode. Applies only when the rate control mode is QVBR. Set values for the QVBR quality level field and Max bitrate field that suit your most important viewing devices. Recommended values are:
+  @ocaml.doc("Controls the target quality for the video encode. Applies only when the rate control mode is QVBR. You can set a target quality or you can let MediaLive determine the best quality. To set a target quality, enter values in the QVBR quality level field and the Max bitrate field. Enter values that suit your most important viewing devices. Recommended values are:
 - Primary screen: Quality level: 8 to 10. Max bitrate: 4M
 - PC or tablet: Quality level: 7. Max bitrate: 1.5M to 3M
-- Smartphone: Quality level: 6. Max bitrate: 1M to 1.5M")
+- Smartphone: Quality level: 6. Max bitrate: 1M to 1.5M
+To let MediaLive decide, leave the QVBR quality level field empty, and in Max bitrate enter the maximum rate you want in the video. For more information, see the section called \"Video - rate control mode\" in the MediaLive user guide")
   @as("QvbrQualityLevel")
   qvbrQualityLevel: option<__integerMin1Max10>,
   @ocaml.doc("Leave as STANDARD_QUALITY or choose a different value (which might result in additional costs to run the channel).
@@ -4004,7 +4172,7 @@ disabled: Code the two sets of fields separately (on a field basis) or together 
   @as("ForceFieldPictures")
   forceFieldPictures: option<h264ForceFieldPictures>,
   @ocaml.doc(
-    "If set to enabled, adjust quantization within each frame to reduce flicker or 'pop' on I-frames."
+    "Flicker AQ makes adjustments within each frame to reduce flicker or 'pop' on I-frames. The value to enter in this field depends on the value in the Adaptive quantization field: If you have set the Adaptive quantization field to Auto, MediaLive ignores any value in this field. MediaLive will determine if flicker AQ is appropriate and will apply the appropriate strength. If you have set the Adaptive quantization field to a strength, you can set this field to Enabled or Disabled. Enabled: MediaLive will apply flicker AQ using the specified strength. Disabled: MediaLive won't apply flicker AQ. If you have set the Adaptive quantization to Disabled, MediaLive ignores any value in this field and doesn't apply flicker AQ."
   )
   @as("FlickerAq")
   flickerAq: option<h264FlickerAq>,
@@ -4038,7 +4206,7 @@ disabled: Code the two sets of fields separately (on a field basis) or together 
   @as("AfdSignaling")
   afdSignaling: option<afdSignaling>,
   @ocaml.doc(
-    "Adaptive quantization. Allows intra-frame quantizers to vary to improve visual quality."
+    "Enables or disables adaptive quantization, which is a technique MediaLive can apply to video on a frame-by-frame basis to produce more compression without losing quality. There are three types of adaptive quantization: flicker, spatial, and temporal. Set the field in one of these ways: Set to Auto. Recommended. For each type of AQ, MediaLive will determine if AQ is needed, and if so, the appropriate strength. Set a strength (a value other than Auto or Disable). This strength will apply to any of the AQ fields that you choose to enable. Set to Disabled to disable all types of adaptive quantization."
   )
   @as("AdaptiveQuantization")
   adaptiveQuantization: option<h264AdaptiveQuantization>,
@@ -4122,6 +4290,12 @@ type captionDestinationSettings = {
 @ocaml.doc("Avail Configuration")
 type availConfiguration = {
   @ocaml.doc("Ad avail settings.") @as("AvailSettings") availSettings: option<availSettings>,
+}
+@ocaml.doc("Audio Watermark Settings")
+type audioWatermarkSettings = {
+  @ocaml.doc("Settings to configure Nielsen Watermarks in the audio encode")
+  @as("NielsenWatermarksSettings")
+  nielsenWatermarksSettings: option<nielsenWatermarksSettings>,
 }
 @ocaml.doc("Audio Track Selection")
 type audioTrackSelection = {
@@ -4246,7 +4420,7 @@ type input = {
   @ocaml.doc("A list of MediaConnect Flows for this input.") @as("MediaConnectFlows")
   mediaConnectFlows: option<__listOfMediaConnectFlow>,
   @ocaml.doc("Certain pull input sources can be dynamic, meaning that they can have their URL's dynamically changes
-during input switch actions. Presently, this functionality only works with MP4_FILE inputs.")
+during input switch actions. Presently, this functionality only works with MP4_FILE and TS_FILE inputs.")
   @as("InputSourceType")
   inputSourceType: option<inputSourceType>,
   @ocaml.doc("A list of IDs for all Inputs which are partners of this one.") @as("InputPartnerIds")
@@ -4332,8 +4506,15 @@ For an HLS output group with MediaPackage as the destination, the DISABLED behav
   @ocaml.doc("Period of insertion of EXT-X-PROGRAM-DATE-TIME entry, in seconds.")
   @as("ProgramDateTimePeriod")
   programDateTimePeriod: option<__integerMin0Max3600>,
+  @ocaml.doc("Specifies the algorithm used to drive the HLS EXT-X-PROGRAM-DATE-TIME clock. Options include:
+
+INITIALIZE_FROM_OUTPUT_TIMECODE: The PDT clock is initialized as a function of the first output timecode, then incremented by the EXTINF duration of each encoded segment.
+
+SYSTEM_CLOCK: The PDT clock is initialized as a function of the UTC wall clock, then incremented by the EXTINF duration of each encoded segment. If the PDT clock diverges from the wall clock by more than 500ms, it is resynchronized to the wall clock.")
+  @as("ProgramDateTimeClock")
+  programDateTimeClock: option<hlsProgramDateTimeClock>,
   @ocaml.doc(
-    "Includes or excludes EXT-X-PROGRAM-DATE-TIME tag in .m3u8 manifest files. The value is calculated as follows: either the program date and time are initialized using the input timecode source, or the time is initialized using the input timecode source and the date is initialized using the timestampOffset."
+    "Includes or excludes EXT-X-PROGRAM-DATE-TIME tag in .m3u8 manifest files. The value is calculated using the program date time clock."
   )
   @as("ProgramDateTime")
   programDateTime: option<hlsProgramDateTime>,
@@ -4526,6 +4707,7 @@ type audioSelectorSettings = {
   @as("AudioTrackSelection") audioTrackSelection: option<audioTrackSelection>,
   @as("AudioPidSelection") audioPidSelection: option<audioPidSelection>,
   @as("AudioLanguageSelection") audioLanguageSelection: option<audioLanguageSelection>,
+  @as("AudioHlsRenditionSelection") audioHlsRenditionSelection: option<audioHlsRenditionSelection>,
 }
 @ocaml.doc("Archive Output Settings")
 type archiveOutputSettings = {
@@ -4704,6 +4886,11 @@ type audioDescription = {
   languageCode: option<__stringMin1Max35>,
   @ocaml.doc("Audio codec settings.") @as("CodecSettings")
   codecSettings: option<audioCodecSettings>,
+  @ocaml.doc(
+    "Settings to configure one or more solutions that insert audio watermarks in the audio encode"
+  )
+  @as("AudioWatermarkingSettings")
+  audioWatermarkingSettings: option<audioWatermarkSettings>,
   @ocaml.doc("Determines how audio type is determined.
   followInput: If the input contains an ISO 639 audioType, then that value is passed through to the output. If the input contains no ISO 639 audioType, the value in Audio Type is included in the output.
   useConfigured: The value in Audio Type is included in the output.
@@ -4770,6 +4957,11 @@ type inputSettings = {
 - IGNORE: Never extract any ancillary data from SMPTE-2038.")
   @as("Smpte2038DataPreference")
   smpte2038DataPreference: option<smpte2038DataPreference>,
+  @ocaml.doc(
+    "PID from which to read SCTE-35 messages. If left undefined, EML will select the first SCTE-35 PID found in the input."
+  )
+  @as("Scte35Pid")
+  scte35Pid: option<__integerMin32Max8191>,
   @ocaml.doc("Input settings.") @as("NetworkInputSettings")
   networkInputSettings: option<networkInputSettings>,
   @ocaml.doc("Turns on the filter for this input. MPEG-2 inputs have the deblocking filter enabled by default.
@@ -4811,10 +5003,7 @@ type outputGroup = {
   @as("Outputs") outputs: __listOfOutput,
   @ocaml.doc("Settings associated with the output group.") @as("OutputGroupSettings")
   outputGroupSettings: outputGroupSettings,
-  @ocaml.doc(
-    "Custom output group name optionally defined by the user.  Only letters, numbers, and the underscore character allowed; only 32 characters allowed."
-  )
-  @as("Name")
+  @ocaml.doc("Custom output group name optionally defined by the user.") @as("Name")
   name: option<__stringMax32>,
 }
 @ocaml.doc("Placeholder documentation for InputAttachment")
@@ -4867,7 +5056,7 @@ type encoderSettings = {
 }
 @ocaml.doc("Placeholder documentation for ChannelSummary")
 type channelSummary = {
-  @ocaml.doc("Settings for VPC output") @as("Vpc") vpc: option<vpcOutputSettingsDescription>,
+  @ocaml.doc("Settings for any VPC outputs.") @as("Vpc") vpc: option<vpcOutputSettingsDescription>,
   @ocaml.doc("A collection of key-value pairs.") @as("Tags") tags: option<tags>,
   @as("State") state: option<channelState>,
   @ocaml.doc("The Amazon Resource Name (ARN) of the role assumed when running the Channel.")
@@ -4876,6 +5065,8 @@ type channelSummary = {
   @ocaml.doc("The number of currently healthy pipelines.") @as("PipelinesRunningCount")
   pipelinesRunningCount: option<__integer>,
   @ocaml.doc("The name of the channel. (user-mutable)") @as("Name") name: option<__string>,
+  @ocaml.doc("Maintenance settings for this channel.") @as("Maintenance")
+  maintenance: option<maintenanceStatus>,
   @ocaml.doc("The log level being written to CloudWatch Logs.") @as("LogLevel")
   logLevel: option<logLevel>,
   @ocaml.doc("Specification of network and file inputs for this channel") @as("InputSpecification")
@@ -4931,6 +5122,8 @@ type channel = {
   @ocaml.doc("Runtime details for the pipelines of a running channel.") @as("PipelineDetails")
   pipelineDetails: option<__listOfPipelineDetail>,
   @ocaml.doc("The name of the channel. (user-mutable)") @as("Name") name: option<__string>,
+  @ocaml.doc("Maintenance settings for this channel.") @as("Maintenance")
+  maintenance: option<maintenanceStatus>,
   @ocaml.doc("The log level being written to CloudWatch Logs.") @as("LogLevel")
   logLevel: option<logLevel>,
   @ocaml.doc("Specification of network and file inputs for this channel") @as("InputSpecification")
@@ -4996,7 +5189,7 @@ module DeleteSchedule = {
     @ocaml.doc("Id of the channel whose schedule is being deleted.") @as("ChannelId")
     channelId: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-medialive") @new external new: request => t = "DeleteScheduleCommand"
   let make = (~channelId, ()) => new({channelId: channelId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -5009,7 +5202,7 @@ module DeleteInputSecurityGroup = {
     @ocaml.doc("The Input Security Group to delete") @as("InputSecurityGroupId")
     inputSecurityGroupId: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-medialive") @new
   external new: request => t = "DeleteInputSecurityGroupCommand"
   let make = (~inputSecurityGroupId, ()) => new({inputSecurityGroupId: inputSecurityGroupId})
@@ -5020,7 +5213,7 @@ module DeleteInput = {
   type t
   @ocaml.doc("Placeholder documentation for DeleteInputRequest")
   type request = {@ocaml.doc("Unique ID of the input") @as("InputId") inputId: __string}
-
+  type response = {.}
   @module("@aws-sdk/client-medialive") @new external new: request => t = "DeleteInputCommand"
   let make = (~inputId, ()) => new({inputId: inputId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -5144,7 +5337,7 @@ module DeleteTags = {
     @ocaml.doc("An array of tag keys to delete") @as("TagKeys") tagKeys: __listOf__string,
     @as("ResourceArn") resourceArn: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-medialive") @new external new: request => t = "DeleteTagsCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -5213,7 +5406,7 @@ module CreateTags = {
     @as("Tags") tags: option<tags>,
     @as("ResourceArn") resourceArn: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-medialive") @new external new: request => t = "CreateTagsCommand"
   let make = (~resourceArn, ~tags=?, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -5304,7 +5497,7 @@ module TransferInputDevice = {
     @as("InputDeviceId")
     inputDeviceId: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-medialive") @new
   external new: request => t = "TransferInputDeviceCommand"
   let make = (~inputDeviceId, ~transferMessage=?, ~targetRegion=?, ~targetCustomerId=?, ()) =>
@@ -5325,7 +5518,7 @@ module RejectInputDeviceTransfer = {
     @as("InputDeviceId")
     inputDeviceId: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-medialive") @new
   external new: request => t = "RejectInputDeviceTransferCommand"
   let make = (~inputDeviceId, ()) => new({inputDeviceId: inputDeviceId})
@@ -5480,6 +5673,20 @@ module DescribeInputDevice = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module ClaimDevice = {
+  type t
+  @ocaml.doc(
+    "A request to claim an AWS Elemental device that you have purchased from a third-party vendor."
+  )
+  type request = {
+    @ocaml.doc("The id of the device you want to claim.") @as("Id") id: option<__string>,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-medialive") @new external new: request => t = "ClaimDeviceCommand"
+  let make = (~id=?, ()) => new({id: id})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
 module CancelInputDeviceTransfer = {
   type t
   @ocaml.doc("Placeholder documentation for CancelInputDeviceTransferRequest")
@@ -5488,7 +5695,7 @@ module CancelInputDeviceTransfer = {
     @as("InputDeviceId")
     inputDeviceId: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-medialive") @new
   external new: request => t = "CancelInputDeviceTransferCommand"
   let make = (~inputDeviceId, ()) => new({inputDeviceId: inputDeviceId})
@@ -5571,7 +5778,7 @@ module AcceptInputDeviceTransfer = {
     @as("InputDeviceId")
     inputDeviceId: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-medialive") @new
   external new: request => t = "AcceptInputDeviceTransferCommand"
   let make = (~inputDeviceId, ()) => new({inputDeviceId: inputDeviceId})
@@ -5890,7 +6097,7 @@ module DescribeInput = {
     @ocaml.doc("A list of MediaConnect Flows for this input.") @as("MediaConnectFlows")
     mediaConnectFlows: option<__listOfMediaConnectFlow>,
     @ocaml.doc("Certain pull input sources can be dynamic, meaning that they can have their URL's dynamically changes
-during input switch actions. Presently, this functionality only works with MP4_FILE inputs.")
+during input switch actions. Presently, this functionality only works with MP4_FILE and TS_FILE inputs.")
     @as("InputSourceType")
     inputSourceType: option<inputSourceType>,
     @ocaml.doc("A list of IDs for all Inputs which are partners of this one.")
@@ -6343,6 +6550,8 @@ module StopChannel = {
     @ocaml.doc("Runtime details for the pipelines of a running channel.") @as("PipelineDetails")
     pipelineDetails: option<__listOfPipelineDetail>,
     @ocaml.doc("The name of the channel. (user-mutable)") @as("Name") name: option<__string>,
+    @ocaml.doc("Maintenance settings for this channel.") @as("Maintenance")
+    maintenance: option<maintenanceStatus>,
     @ocaml.doc("The log level being written to CloudWatch Logs.") @as("LogLevel")
     logLevel: option<logLevel>,
     @ocaml.doc("Specification of network and file inputs for this channel")
@@ -6390,6 +6599,8 @@ module StartChannel = {
     @ocaml.doc("Runtime details for the pipelines of a running channel.") @as("PipelineDetails")
     pipelineDetails: option<__listOfPipelineDetail>,
     @ocaml.doc("The name of the channel. (user-mutable)") @as("Name") name: option<__string>,
+    @ocaml.doc("Maintenance settings for this channel.") @as("Maintenance")
+    maintenance: option<maintenanceStatus>,
     @ocaml.doc("The log level being written to CloudWatch Logs.") @as("LogLevel")
     logLevel: option<logLevel>,
     @ocaml.doc("Specification of network and file inputs for this channel")
@@ -6437,6 +6648,8 @@ module DescribeChannel = {
     @ocaml.doc("Runtime details for the pipelines of a running channel.") @as("PipelineDetails")
     pipelineDetails: option<__listOfPipelineDetail>,
     @ocaml.doc("The name of the channel. (user-mutable)") @as("Name") name: option<__string>,
+    @ocaml.doc("Maintenance settings for this channel.") @as("Maintenance")
+    maintenance: option<maintenanceStatus>,
     @ocaml.doc("The log level being written to CloudWatch Logs.") @as("LogLevel")
     logLevel: option<logLevel>,
     @ocaml.doc("Specification of network and file inputs for this channel")
@@ -6484,6 +6697,8 @@ module DeleteChannel = {
     @ocaml.doc("Runtime details for the pipelines of a running channel.") @as("PipelineDetails")
     pipelineDetails: option<__listOfPipelineDetail>,
     @ocaml.doc("The name of the channel. (user-mutable)") @as("Name") name: option<__string>,
+    @ocaml.doc("Maintenance settings for this channel.") @as("Maintenance")
+    maintenance: option<maintenanceStatus>,
     @ocaml.doc("The log level being written to CloudWatch Logs.") @as("LogLevel")
     logLevel: option<logLevel>,
     @ocaml.doc("Specification of network and file inputs for this channel")
@@ -6568,6 +6783,8 @@ module UpdateChannel = {
     @as("RoleArn")
     roleArn: option<__string>,
     @ocaml.doc("The name of the channel.") @as("Name") name: option<__string>,
+    @ocaml.doc("Maintenance settings for this channel.") @as("Maintenance")
+    maintenance: option<maintenanceUpdateSettings>,
     @ocaml.doc("The log level to write to CloudWatch Logs.") @as("LogLevel")
     logLevel: option<logLevel>,
     @ocaml.doc("Specification of network and file inputs for this channel")
@@ -6589,6 +6806,7 @@ module UpdateChannel = {
     ~channelId,
     ~roleArn=?,
     ~name=?,
+    ~maintenance=?,
     ~logLevel=?,
     ~inputSpecification=?,
     ~inputAttachments=?,
@@ -6600,6 +6818,7 @@ module UpdateChannel = {
     new({
       roleArn: roleArn,
       name: name,
+      maintenance: maintenance,
       logLevel: logLevel,
       inputSpecification: inputSpecification,
       inputAttachments: inputAttachments,
@@ -6633,7 +6852,7 @@ module CreateChannel = {
   type t
   @ocaml.doc("A request to create a channel")
   type request = {
-    @ocaml.doc("Settings for VPC output") @as("Vpc") vpc: option<vpcOutputSettings>,
+    @ocaml.doc("Settings for the VPC outputs") @as("Vpc") vpc: option<vpcOutputSettings>,
     @ocaml.doc("A collection of key-value pairs.") @as("Tags") tags: option<tags>,
     @ocaml.doc(
       "An optional Amazon Resource Name (ARN) of the role to assume when running the Channel."
@@ -6647,6 +6866,8 @@ creating multiple resources.")
     @as("RequestId")
     requestId: option<__string>,
     @ocaml.doc("Name of channel.") @as("Name") name: option<__string>,
+    @ocaml.doc("Maintenance settings for this channel.") @as("Maintenance")
+    maintenance: option<maintenanceCreateSettings>,
     @ocaml.doc("The log level to write to CloudWatch Logs.") @as("LogLevel")
     logLevel: option<logLevel>,
     @ocaml.doc("Specification of network and file inputs for this channel")
@@ -6674,6 +6895,7 @@ creating multiple resources.")
     ~reserved=?,
     ~requestId=?,
     ~name=?,
+    ~maintenance=?,
     ~logLevel=?,
     ~inputSpecification=?,
     ~inputAttachments=?,
@@ -6690,6 +6912,7 @@ creating multiple resources.")
       reserved: reserved,
       requestId: requestId,
       name: name,
+      maintenance: maintenance,
       logLevel: logLevel,
       inputSpecification: inputSpecification,
       inputAttachments: inputAttachments,

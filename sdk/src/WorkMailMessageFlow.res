@@ -91,7 +91,7 @@ module PutRawMessageContent = {
     @ocaml.doc("<p>The identifier of the email message being updated.</p>")
     messageId: messageIdType,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workmailmessageflow") @new
   external new: request => t = "PutRawMessageContentCommand"
   let make = (~content, ~messageId, ()) => new({content: content, messageId: messageId})

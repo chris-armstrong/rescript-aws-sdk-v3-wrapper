@@ -17,6 +17,8 @@ type baseLong = float
 type roleArn = string
 type version = string
 type value = string
+type v2BotName = string
+type v2BotId = string
 type utteranceString = string
 type utterance = string
 type userId = string
@@ -32,6 +34,7 @@ type status = [
   | @as("READY") #READY
   | @as("BUILDING") #BUILDING
 ]
+type sortOrder = [@as("DESCENDING") #DESCENDING | @as("ASCENDING") #ASCENDING]
 type slotValueSelectionStrategy = [
   | @as("TOP_RESOLUTION") #TOP_RESOLUTION
   | @as("ORIGINAL_VALUE") #ORIGINAL_VALUE
@@ -61,6 +64,21 @@ type obfuscationSetting = [@as("DEFAULT_OBFUSCATION") #DEFAULT_OBFUSCATION | @as
 type numericalVersion = string
 type nextToken = string
 type name = string
+type migrationStrategy = [@as("UPDATE_EXISTING") #UPDATE_EXISTING | @as("CREATE_NEW") #CREATE_NEW]
+type migrationStatus = [
+  | @as("FAILED") #FAILED
+  | @as("COMPLETED") #COMPLETED
+  | @as("IN_PROGRESS") #IN_PROGRESS
+]
+type migrationSortAttribute = [
+  | @as("MIGRATION_DATE_TIME") #MIGRATION_DATE_TIME
+  | @as("V1_BOT_NAME") #V1_BOT_NAME
+]
+type migrationId = string
+type migrationAlertType = [@as("WARN") #WARN | @as("ERROR") #ERROR]
+type migrationAlertReferenceURL = string
+type migrationAlertMessage = string
+type migrationAlertDetail = string
 type messageVersion = string
 type mergeStrategy = [
   | @as("FAIL_ON_CONFLICT") #FAIL_ON_CONFLICT
@@ -69,6 +87,7 @@ type mergeStrategy = [
 type maxResults = int
 type logType = [@as("TEXT") #TEXT | @as("AUDIO") #AUDIO]
 type locale = [
+  | @as("ko-KR") #Ko_KR
   | @as("ja-JP") #Ja_JP
   | @as("it-IT") #It_IT
   | @as("fr-CA") #Fr_CA
@@ -77,6 +96,7 @@ type locale = [
   | @as("es-ES") #Es_ES
   | @as("es-419") #Es_419
   | @as("en-US") #En_US
+  | @as("en-IN") #En_IN
   | @as("en-GB") #En_GB
   | @as("en-AU") #En_AU
   | @as("de-DE") #De_DE
@@ -245,6 +265,33 @@ type outputContext = {
   timeToLiveInSeconds: contextTimeToLiveInSeconds,
   @ocaml.doc("<p>The name of the context.</p>") name: outputContextName,
 }
+@ocaml.doc("<p>Provides information about migrating a bot from Amazon Lex V1 to Amazon Lex V2.</p>")
+type migrationSummary = {
+  @ocaml.doc("<p>The date and time that the migration started.</p>")
+  migrationTimestamp: option<timestamp_>,
+  @ocaml.doc("<p>The strategy used to conduct the migration.</p>")
+  migrationStrategy: option<migrationStrategy>,
+  @ocaml.doc("<p>The status of the operation. When the status is <code>COMPLETE</code>
+    the bot is available in Amazon Lex V2. There may be alerts and warnings that
+    need to be resolved to complete the migration.</p>")
+  migrationStatus: option<migrationStatus>,
+  @ocaml.doc("<p>The IAM role that Amazon Lex uses to run the Amazon Lex V2 bot.</p>")
+  v2BotRole: option<iamRoleArn>,
+  @ocaml.doc(
+    "<p>The unique identifier of the Amazon Lex V2 that is the destination of the migration.</p>"
+  )
+  v2BotId: option<v2BotId>,
+  @ocaml.doc("<p>The locale of the Amazon Lex V1 bot that is the source of the migration.</p>")
+  v1BotLocale: option<locale>,
+  @ocaml.doc("<p>The version of the Amazon Lex V1 bot that is the source of the migration.</p>")
+  v1BotVersion: option<version>,
+  @ocaml.doc("<p>The name of the Amazon Lex V1 bot that is the source of the migration.</p>")
+  v1BotName: option<botName>,
+  @ocaml.doc("<p>The unique identifier that Amazon Lex assigned to the migration.</p>")
+  migrationId: option<migrationId>,
+}
+type migrationAlertReferenceURLs = array<migrationAlertReferenceURL>
+type migrationAlertDetails = array<migrationAlertDetail>
 @ocaml.doc("<p>The message object that provides the message text and its
       type.</p>")
 type message = {
@@ -371,6 +418,34 @@ type slotTypeConfiguration = {
 }
 type slotDefaultValueList = array<slotDefaultValue>
 type outputContextList = array<outputContext>
+type migrationSummaryList = array<migrationSummary>
+@ocaml.doc("<p>Provides information about alerts and warnings that Amazon Lex sends during
+      a migration. The alerts include information about how to resolve the
+      issue.</p>")
+type migrationAlert = {
+  @ocaml.doc("<p>A link to the Amazon Lex documentation that describes how to resolve
+    the alert.</p>")
+  referenceURLs: option<migrationAlertReferenceURLs>,
+  @ocaml.doc("<p>Additional details about the alert.</p>") details: option<migrationAlertDetails>,
+  @ocaml.doc("<p>A message that describes why the alert was issued.</p>")
+  message: option<migrationAlertMessage>,
+  @ocaml.doc("<p>The type of alert. There are two kinds of alerts:</p>
+         <ul>
+            <li>
+               <p>
+                  <code>ERROR</code> - There was an issue with the migration that
+          can't be resolved. The migration stops.</p>
+            </li>
+            <li>
+               <p>
+                  <code>WARN</code> - There was an issue with the migration that
+          requires manual changes to the new Amazon Lex V2 bot. The migration
+          continues.</p>
+            </li>
+         </ul>")
+  @as("type")
+  type_: option<migrationAlertType>,
+}
 type messageList = array<message>
 type logSettingsResponseList = array<logSettingsResponse>
 type logSettingsRequestList = array<logSettingsRequest>
@@ -555,6 +630,7 @@ type prompt = {
       Synthesis Markup Language (SSML).</p>")
   messages: messageList,
 }
+type migrationAlerts = array<migrationAlert>
 type enumerationValues = array<enumerationValue>
 @ocaml.doc("<p>Contains information about conversation log settings.</p>")
 type conversationLogsResponse = {
@@ -655,6 +731,74 @@ type botAliasMetadataList = array<botAliasMetadata>
          <p> Amazon Lex is an AWS service for building conversational voice and text
       interfaces. Use these actions to create, update, and delete conversational
       bots for new and existing client applications. </p>")
+module StartMigration = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The strategy used to conduct the migration.</p>
+         <ul>
+            <li>
+               <p>
+                  <code>CREATE_NEW</code> - Creates a new Amazon Lex V2 bot and migrates
+          the Amazon Lex V1 bot to the new bot.</p>
+            </li>
+            <li>
+               <p>
+                  <code>UPDATE_EXISTING</code> - Overwrites the existing Amazon Lex V2 bot
+          metadata and the locale being migrated. It doesn't change any other
+          locales in the Amazon Lex V2 bot. If the locale doesn't exist, a new locale
+          is created in the Amazon Lex V2 bot.</p>
+            </li>
+         </ul>")
+    migrationStrategy: migrationStrategy,
+    @ocaml.doc("<p>The IAM role that Amazon Lex uses to run the Amazon Lex V2 bot.</p>")
+    v2BotRole: iamRoleArn,
+    @ocaml.doc("<p>The name of the Amazon Lex V2 bot that you are migrating the Amazon Lex V1 bot to. </p>
+         <ul>
+            <li>
+               <p>If the Amazon Lex V2 bot doesn't exist, you must use the
+            <code>CREATE_NEW</code> migration strategy.</p>
+            </li>
+            <li>
+               <p>If the Amazon Lex V2 bot exists, you must use the
+            <code>UPDATE_EXISTING</code> migration strategy to change the
+          contents of the Amazon Lex V2 bot.</p>
+            </li>
+         </ul>")
+    v2BotName: v2BotName,
+    @ocaml.doc("<p>The version of the bot to migrate to Amazon Lex V2. You can migrate the
+        <code>$LATEST</code> version as well as any numbered version.</p>")
+    v1BotVersion: version,
+    @ocaml.doc("<p>The name of the Amazon Lex V1 bot that you are migrating to Amazon Lex V2.</p>")
+    v1BotName: botName,
+  }
+  type response = {
+    @ocaml.doc("<p>The date and time that the migration started.</p>")
+    migrationTimestamp: option<timestamp_>,
+    @ocaml.doc("<p>The strategy used to conduct the migration.</p>")
+    migrationStrategy: option<migrationStrategy>,
+    @ocaml.doc("<p>The unique identifier that Amazon Lex assigned to the migration.</p>")
+    migrationId: option<migrationId>,
+    @ocaml.doc("<p>The IAM role that Amazon Lex uses to run the Amazon Lex V2 bot.</p>")
+    v2BotRole: option<iamRoleArn>,
+    @ocaml.doc("<p>The unique identifier for the Amazon Lex V2 bot. </p>") v2BotId: option<v2BotId>,
+    @ocaml.doc("<p>The locale used for the Amazon Lex V1 bot. </p>") v1BotLocale: option<locale>,
+    @ocaml.doc("<p>The version of the bot to migrate to Amazon Lex V2. </p>")
+    v1BotVersion: option<version>,
+    @ocaml.doc("<p>The name of the Amazon Lex V1 bot that you are migrating to Amazon Lex V2.</p>")
+    v1BotName: option<botName>,
+  }
+  @module("@aws-sdk/client-lex") @new external new: request => t = "StartMigrationCommand"
+  let make = (~migrationStrategy, ~v2BotRole, ~v2BotName, ~v1BotVersion, ~v1BotName, ()) =>
+    new({
+      migrationStrategy: migrationStrategy,
+      v2BotRole: v2BotRole,
+      v2BotName: v2BotName,
+      v1BotVersion: v1BotVersion,
+      v1BotName: v1BotName,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module GetExport = {
   type t
   type request = {
@@ -709,7 +853,7 @@ module DeleteUtterances = {
     userId: userId,
     @ocaml.doc("<p>The name of the bot that stored the utterances.</p>") botName: botName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-lex") @new external new: request => t = "DeleteUtterancesCommand"
   let make = (~userId, ~botName, ()) => new({userId: userId, botName: botName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -725,7 +869,7 @@ module DeleteBotChannelAssociation = {
     @ocaml.doc("<p>The name of the association. The name is case sensitive. </p>")
     name: botChannelName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-lex") @new
   external new: request => t = "DeleteBotChannelAssociationCommand"
   let make = (~botAlias, ~botName, ~name, ()) =>
@@ -743,7 +887,7 @@ module UntagResource = {
       from.</p>")
     resourceArn: amazonResourceName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-lex") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -846,7 +990,7 @@ module DeleteSlotTypeVersion = {
     version: numericalVersion,
     @ocaml.doc("<p>The name of the slot type.</p>") name: slotTypeName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-lex") @new external new: request => t = "DeleteSlotTypeVersionCommand"
   let make = (~version, ~name, ()) => new({version: version, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -857,7 +1001,7 @@ module DeleteSlotType = {
   type request = {
     @ocaml.doc("<p>The name of the slot type. The name is case sensitive. </p>") name: slotTypeName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-lex") @new external new: request => t = "DeleteSlotTypeCommand"
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -873,7 +1017,7 @@ module DeleteIntentVersion = {
     version: numericalVersion,
     @ocaml.doc("<p>The name of the intent.</p>") name: intentName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-lex") @new external new: request => t = "DeleteIntentVersionCommand"
   let make = (~version, ~name, ()) => new({version: version, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -884,7 +1028,7 @@ module DeleteIntent = {
   type request = {
     @ocaml.doc("<p>The name of the intent. The name is case sensitive. </p>") name: intentName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-lex") @new external new: request => t = "DeleteIntentCommand"
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -900,7 +1044,7 @@ module DeleteBotVersion = {
     version: numericalVersion,
     @ocaml.doc("<p>The name of the bot.</p>") name: botName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-lex") @new external new: request => t = "DeleteBotVersionCommand"
   let make = (~version, ~name, ()) => new({version: version, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -914,7 +1058,7 @@ module DeleteBotAlias = {
     </p>")
     name: aliasName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-lex") @new external new: request => t = "DeleteBotAliasCommand"
   let make = (~botName, ~name, ()) => new({botName: botName, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -925,7 +1069,7 @@ module DeleteBot = {
   type request = {
     @ocaml.doc("<p>The name of the bot. The name is case sensitive. </p>") name: botName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-lex") @new external new: request => t = "DeleteBotCommand"
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -941,7 +1085,7 @@ module TagResource = {
       to tag.</p>")
     resourceArn: amazonResourceName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-lex") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1081,6 +1225,60 @@ module GetSlotTypeVersions = {
   @module("@aws-sdk/client-lex") @new external new: request => t = "GetSlotTypeVersionsCommand"
   let make = (~name, ~maxResults=?, ~nextToken=?, ()) =>
     new({maxResults: maxResults, nextToken: nextToken, name: name})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module GetMigrations = {
+  type t
+  type request = {
+    @ocaml.doc("<p>A pagination token that fetches the next page of migrations. If the
+      response to this operation is truncated, Amazon Lex returns a pagination token
+      in the response. To fetch the next page of migrations, specify the
+      pagination token in the request.</p>")
+    nextToken: option<nextToken>,
+    @ocaml.doc("<p>The maximum number of migrations to return in the response. The
+      default is 10.</p>")
+    maxResults: option<maxResults>,
+    @ocaml.doc("<p>Filters the list to contain only migrations in the specified state.</p>")
+    migrationStatusEquals: option<migrationStatus>,
+    @ocaml.doc("<p>Filters the list to contain only bots whose name contains the
+      specified string. The string is matched anywhere in bot name.</p>")
+    v1BotNameContains: option<botName>,
+    @ocaml.doc("<p>The order so sort the list.</p>") sortByOrder: option<sortOrder>,
+    @ocaml.doc("<p>The field to sort the list of migrations by. You can sort by the
+      Amazon Lex V1 bot name or the date and time that the migration was
+      started.</p>")
+    sortByAttribute: option<migrationSortAttribute>,
+  }
+  type response = {
+    @ocaml.doc("<p>If the response is truncated, it includes a pagination token that you
+      can specify in your next request to fetch the next page of
+      migrations.</p>")
+    nextToken: option<nextToken>,
+    @ocaml.doc("<p>An array of summaries for migrations from Amazon Lex V1 to Amazon Lex V2. To see
+      details of the migration, use the <code>migrationId</code> from the
+      summary in a call to the 
+      operation.</p>")
+    migrationSummaries: option<migrationSummaryList>,
+  }
+  @module("@aws-sdk/client-lex") @new external new: request => t = "GetMigrationsCommand"
+  let make = (
+    ~nextToken=?,
+    ~maxResults=?,
+    ~migrationStatusEquals=?,
+    ~v1BotNameContains=?,
+    ~sortByOrder=?,
+    ~sortByAttribute=?,
+    (),
+  ) =>
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      migrationStatusEquals: migrationStatusEquals,
+      v1BotNameContains: v1BotNameContains,
+      sortByOrder: sortByOrder,
+      sortByAttribute: sortByAttribute,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1835,6 +2033,64 @@ module GetSlotType = {
   }
   @module("@aws-sdk/client-lex") @new external new: request => t = "GetSlotTypeCommand"
   let make = (~version, ~name, ()) => new({version: version, name: name})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module GetMigration = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The unique identifier of the migration to view. The
+        <code>migrationID</code> is returned by the  operation.</p>")
+    migrationId: migrationId,
+  }
+  type response = {
+    @ocaml.doc("<p>A list of alerts and warnings that indicate issues with the migration
+      for the Amazon Lex V1 bot to Amazon Lex V2. You receive a warning when an Amazon Lex V1
+      feature has a different implementation if Amazon Lex V2.</p>
+         <p>For more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/migrate.html\">Migrating a bot</a> in the <i>Amazon Lex V2
+        developer guide</i>.</p>")
+    alerts: option<migrationAlerts>,
+    @ocaml.doc("<p>The date and time that the migration started.</p>")
+    migrationTimestamp: option<timestamp_>,
+    @ocaml.doc("<p>The strategy used to conduct the migration.</p>
+         <ul>
+            <li>
+               <p>
+                  <code>CREATE_NEW</code> - Creates a new Amazon Lex V2 bot and migrates
+          the Amazon Lex V1 bot to the new bot.</p>
+            </li>
+            <li>
+               <p>
+                  <code>UPDATE_EXISTING</code> - Overwrites the existing Amazon Lex V2 bot
+        metadata and the locale being migrated. It doesn't change any other
+        locales in the Amazon Lex V2 bot. If the locale doesn't exist, a new locale
+        is created in the Amazon Lex V2 bot.</p>
+            </li>
+         </ul>")
+    migrationStrategy: option<migrationStrategy>,
+    @ocaml.doc("<p>Indicates the status of the migration. When the status is
+        <code>COMPLETE</code> the migration is finished and the bot is available
+      in Amazon Lex V2. There may be alerts and warnings that need to be resolved to
+      complete the migration.</p>")
+    migrationStatus: option<migrationStatus>,
+    @ocaml.doc("<p>The IAM role that Amazon Lex uses to run the Amazon Lex V2 bot.</p>")
+    v2BotRole: option<iamRoleArn>,
+    @ocaml.doc("<p>The unique identifier of the Amazon Lex V2 bot that the Amazon Lex V1 is being
+      migrated to.</p>")
+    v2BotId: option<v2BotId>,
+    @ocaml.doc("<p>The locale of the Amazon Lex V1 bot migrated to Amazon Lex V2.</p>")
+    v1BotLocale: option<locale>,
+    @ocaml.doc("<p>The version of the Amazon Lex V1 bot migrated to Amazon Lex V2.</p>")
+    v1BotVersion: option<version>,
+    @ocaml.doc("<p>The name of the Amazon Lex V1 bot migrated to Amazon Lex V2.</p>")
+    v1BotName: option<botName>,
+    @ocaml.doc("<p>The unique identifier of the migration. This is the same as the
+      identifier used when calling the <code>GetMigration</code>
+      operation.</p>")
+    migrationId: option<migrationId>,
+  }
+  @module("@aws-sdk/client-lex") @new external new: request => t = "GetMigrationCommand"
+  let make = (~migrationId, ()) => new({migrationId: migrationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

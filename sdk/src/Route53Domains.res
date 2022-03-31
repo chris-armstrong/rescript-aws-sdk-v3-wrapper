@@ -15,6 +15,7 @@ type baseInteger = int
 type baseTimestamp = Js.Date.t
 type baseLong = float
 type zipCode = string
+type value = string
 @ocaml.doc("<p>Whether the domain name can be transferred to Route 53.</p>
 		       <note>
             <p>You can transfer only domains that have a value of <code>TRANSFERABLE</code> for <code>Transferable</code>.</p>
@@ -40,11 +41,13 @@ type transferable = [
   | @as("UNTRANSFERABLE") #UNTRANSFERABLE
   | @as("TRANSFERABLE") #TRANSFERABLE
 ]
+type tldName = string
 type timestamp_ = Js.Date.t
 type tagValue = string
 type tagKey = string
 type string_ = string
 type state = string
+type sortOrder = [@as("DESC") #DESC | @as("ASC") #ASC]
 type reseller = string
 type registryDomainId = string
 type registrarWhoIsServer = string
@@ -54,6 +57,7 @@ type reachabilityStatus = [@as("EXPIRED") #EXPIRED | @as("DONE") #DONE | @as("PE
 type price = float
 type pageMaxItems = int
 type pageMarker = string
+type operator = [@as("BEGINS_WITH") #BEGINS_WITH | @as("GE") #GE | @as("LE") #LE]
 type operationType = [
   | @as("INTERNAL_TRANSFER_IN_DOMAIN") #INTERNAL_TRANSFER_IN_DOMAIN
   | @as("INTERNAL_TRANSFER_OUT_DOMAIN") #INTERNAL_TRANSFER_OUT_DOMAIN
@@ -82,6 +86,7 @@ type operationStatus = [
   | @as("SUBMITTED") #SUBMITTED
 ]
 type operationId = string
+type listDomainsAttributeName = [@as("Expiry") #Expiry | @as("DomainName") #DomainName]
 type langCode = string
 type invoiceId = string
 type integer_ = int
@@ -90,6 +95,7 @@ type glueIp = string
 type fiauthKey = string
 type extraParamValue = string
 type extraParamName = [
+  | @as("EU_COUNTRY_OF_CITIZENSHIP") #EU_COUNTRY_OF_CITIZENSHIP
   | @as("UK_COMPANY_NUMBER") #UK_COMPANY_NUMBER
   | @as("UK_CONTACT_TYPE") #UK_CONTACT_TYPE
   | @as("VAT_NUMBER") #VAT_NUMBER
@@ -124,6 +130,7 @@ type errorMessage = string
 type email = string
 type durationInYears = int
 type domainStatus = string
+type domainPriceName = string
 type domainName = string
 type domainAvailability = [
   | @as("DONT_KNOW") #DONT_KNOW
@@ -138,6 +145,7 @@ type domainAvailability = [
 type domainAuthCode = string
 type dnssec = string
 type currentExpiryYear = int
+type currency = string
 type countryCode = [
   | @as("ZW") #ZW
   | @as("ZM") #ZM
@@ -163,6 +171,7 @@ type countryCode = [
   | @as("TV") #TV
   | @as("TT") #TT
   | @as("TR") #TR
+  | @as("TP") #TP
   | @as("TO") #TO
   | @as("TN") #TN
   | @as("TM") #TM
@@ -171,18 +180,22 @@ type countryCode = [
   | @as("TJ") #TJ
   | @as("TH") #TH
   | @as("TG") #TG
+  | @as("TF") #TF
   | @as("TD") #TD
   | @as("TC") #TC
   | @as("SZ") #SZ
   | @as("SY") #SY
+  | @as("SX") #SX
   | @as("SV") #SV
   | @as("ST") #ST
+  | @as("SS") #SS
   | @as("SR") #SR
   | @as("SO") #SO
   | @as("SN") #SN
   | @as("SM") #SM
   | @as("SL") #SL
   | @as("SK") #SK
+  | @as("SJ") #SJ
   | @as("SI") #SI
   | @as("SH") #SH
   | @as("SG") #SG
@@ -195,10 +208,12 @@ type countryCode = [
   | @as("RU") #RU
   | @as("RS") #RS
   | @as("RO") #RO
+  | @as("RE") #RE
   | @as("QA") #QA
   | @as("PY") #PY
   | @as("PW") #PW
   | @as("PT") #PT
+  | @as("PS") #PS
   | @as("PR") #PR
   | @as("PN") #PN
   | @as("PM") #PM
@@ -218,6 +233,7 @@ type countryCode = [
   | @as("NL") #NL
   | @as("NI") #NI
   | @as("NG") #NG
+  | @as("NF") #NF
   | @as("NE") #NE
   | @as("NC") #NC
   | @as("NA") #NA
@@ -230,6 +246,7 @@ type countryCode = [
   | @as("MT") #MT
   | @as("MS") #MS
   | @as("MR") #MR
+  | @as("MQ") #MQ
   | @as("MP") #MP
   | @as("MO") #MO
   | @as("MN") #MN
@@ -268,10 +285,12 @@ type countryCode = [
   | @as("JP") #JP
   | @as("JO") #JO
   | @as("JM") #JM
+  | @as("JE") #JE
   | @as("IT") #IT
   | @as("IS") #IS
   | @as("IR") #IR
   | @as("IQ") #IQ
+  | @as("IO") #IO
   | @as("IN") #IN
   | @as("IM") #IM
   | @as("IL") #IL
@@ -281,18 +300,23 @@ type countryCode = [
   | @as("HT") #HT
   | @as("HR") #HR
   | @as("HN") #HN
+  | @as("HM") #HM
   | @as("HK") #HK
   | @as("GY") #GY
   | @as("GW") #GW
   | @as("GU") #GU
   | @as("GT") #GT
+  | @as("GS") #GS
   | @as("GR") #GR
   | @as("GQ") #GQ
+  | @as("GP") #GP
   | @as("GN") #GN
   | @as("GM") #GM
   | @as("GL") #GL
   | @as("GI") #GI
   | @as("GH") #GH
+  | @as("GG") #GG
+  | @as("GF") #GF
   | @as("GE") #GE
   | @as("GD") #GD
   | @as("GB") #GB
@@ -306,6 +330,7 @@ type countryCode = [
   | @as("ET") #ET
   | @as("ES") #ES
   | @as("ER") #ER
+  | @as("EH") #EH
   | @as("EG") #EG
   | @as("EE") #EE
   | @as("EC") #EC
@@ -318,6 +343,7 @@ type countryCode = [
   | @as("CZ") #CZ
   | @as("CY") #CY
   | @as("CX") #CX
+  | @as("CW") #CW
   | @as("CV") #CV
   | @as("CU") #CU
   | @as("CR") #CR
@@ -336,9 +362,11 @@ type countryCode = [
   | @as("BZ") #BZ
   | @as("BY") #BY
   | @as("BW") #BW
+  | @as("BV") #BV
   | @as("BT") #BT
   | @as("BS") #BS
   | @as("BR") #BR
+  | @as("BQ") #BQ
   | @as("BO") #BO
   | @as("BN") #BN
   | @as("BM") #BM
@@ -353,6 +381,7 @@ type countryCode = [
   | @as("BB") #BB
   | @as("BA") #BA
   | @as("AZ") #AZ
+  | @as("AX") #AX
   | @as("AW") #AW
   | @as("AU") #AU
   | @as("AT") #AT
@@ -368,6 +397,7 @@ type countryCode = [
   | @as("AF") #AF
   | @as("AE") #AE
   | @as("AD") #AD
+  | @as("AC") #AC
 ]
 type contactType = [
   | @as("RESELLER") #RESELLER
@@ -382,6 +412,7 @@ type city = string
 type boolean_ = bool
 type addressLine = string
 type accountId = string
+type values = array<value>
 type tagKeyList = array<tagKey>
 @ocaml.doc("<p>Each tag includes the following elements.</p>")
 type tag = {
@@ -395,6 +426,25 @@ type tag = {
 		       <p>Constraints: Each key can be 1-128 characters long.</p>")
   @as("Key")
   key: option<tagKey>,
+}
+@ocaml.doc("<p>Information for sorting a list of domains.</p>")
+type sortCondition = {
+  @ocaml.doc(
+    "<p>The sort order for a list of domains. Either ascending (ASC) or descending (DES).</p>"
+  )
+  @as("SortOrder")
+  sortOrder: sortOrder,
+  @ocaml.doc("<p>Field to be used for sorting the list of domains. It can be either the name or the expiration for a domain. Note that if 
+			<code>filterCondition</code> is used in the same 
+			<a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains__ListDomains.html\">ListDomains</a>
+			 call, the field used for sorting has to be the same as the field used for filtering.</p>")
+  @as("Name")
+  name: listDomainsAttributeName,
+}
+@ocaml.doc("<p>Currency-specific price information.</p>")
+type priceWithCurrency = {
+  @ocaml.doc("<p>The currency specifier.</p>") @as("Currency") currency: currency,
+  @ocaml.doc("<p>The price of a domain, in a specific currency.</p>") @as("Price") price: price,
 }
 @ocaml.doc("<p>OperationSummary includes the following elements.</p>")
 type operationSummary = {
@@ -651,19 +701,64 @@ type extraParam = {
                      <p>
                         <code>ES_IDENTIFICATION</code>
                      </p>
-							              <p>Specify the applicable value:</p>
+							              <p>The value of <code>ES_IDENTIFICATION</code> depends on the following values:</p>
 							              <ul>
                         <li>
-                           <p>
-                              <b>For contacts inside Spain:</b> Enter your passport ID.</p>
+                           <p>The value of <code>ES_LEGAL_FORM</code>
+                           </p>
                         </li>
                         <li>
-                           <p>
-                              <b>For contacts outside of Spain:</b> Enter the VAT identification number 
-									for the company.</p>
-									                  <note>
-                              <p>For .es domains, the value of <code>ContactType</code> must be <code>PERSON</code>.</p>
-                           </note>
+                           <p>The value of <code>ES_IDENTIFICATION_TYPE</code>
+                           </p>
+                        </li>
+                     </ul>
+							
+							              <p>
+                        <b>If <code>ES_LEGAL_FORM</code> is any value other than <code>INDIVIDUAL</code>:</b>
+                     </p>
+							              <ul>
+                        <li>
+                           <p>Specify 1 letter + 8 numbers (CIF [Certificado de Identificación Fiscal])</p>
+                        </li>
+                        <li>
+                           <p>Example: B12345678</p>
+                        </li>
+                     </ul>
+							
+							              <p>
+                        <b>If <code>ES_LEGAL_FORM</code> is <code>INDIVIDUAL</code>, the value that you specify for 
+								<code>ES_IDENTIFICATION</code> depends on the value of <code>ES_IDENTIFICATION_TYPE</code>:</b>
+                     </p>
+							              <ul>
+                        <li>
+									                  <p>If <code>ES_IDENTIFICATION_TYPE</code> is <code>DNI_AND_NIF</code> (for Spanish contacts):</p>
+									                  <ul>
+                              <li>
+                                 <p>Specify 8 numbers + 1 letter (DNI [Documento Nacional de Identidad], NIF [Número de Identificación Fiscal])</p>
+                              </li>
+                              <li>
+                                 <p>Example: 12345678M</p>
+                              </li>
+                           </ul>
+								                </li>
+                        <li>
+									                  <p>If <code>ES_IDENTIFICATION_TYPE</code> is <code>NIE</code> (for foreigners with legal residence):</p>
+									                  <ul>
+                              <li>
+                                 <p>Specify 1 letter + 7 numbers + 1 letter ( NIE [Número de Identidad de Extranjero])</p>
+                              </li>
+                              <li>
+                                 <p>Example: Y1234567X</p>
+                              </li>
+                           </ul>
+								                </li>
+                        <li>
+									                  <p>If <code>ES_IDENTIFICATION_TYPE</code> is <code>OTHER</code> (for contacts outside of Spain):</p>
+									                  <ul>
+                              <li>
+                                 <p>Specify a passport number, drivers license number, or national identity card number</p>
+                              </li>
+                           </ul>
 								                </li>
                      </ul>
 						            </li>
@@ -888,6 +983,16 @@ type extraParam = {
 						            </li>
                </ul>
 				        </dd>
+            <dt>.eu</dt>
+            <dd>
+		            <ul>
+                  <li>
+                     <p>
+                        <code> EU_COUNTRY_OF_CITIZENSHIP</code>
+                     </p>
+                  </li>
+               </ul>
+		          </dd>
             <dt>.fi</dt>
             <dd>
 					          <ul>
@@ -1292,11 +1397,59 @@ type nameserver = {
   @as("Name")
   name: hostName,
 }
+@ocaml.doc("<p>Information for the filtering of a list of domains returned by 
+			<a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains__ListDomains.html\">ListDomains</a>.</p>")
+type filterCondition = {
+  @ocaml.doc(
+    "<p> An array of strings presenting values to compare. Only 1 item in the list is currently supported.</p>"
+  )
+  @as("Values")
+  values: values,
+  @ocaml.doc("<p>The operator values for filtering domain names. The values can be:</p>
+		       <ul>
+            <li>
+               <p>
+                  <code>LE</code>: Less than, or equal to</p>
+            </li>
+            <li>
+               <p>
+                  <code>GE</code>: Greater than, or equal to</p>
+            </li>
+            <li>
+               <p>
+                  <code>BEGINS_WITH</code>: Begins with</p>
+            </li>
+         </ul>")
+  @as("Operator")
+  operator: operator,
+  @ocaml.doc("<p>Name of the field which should be used for filtering the list of domains.</p>")
+  @as("Name")
+  name: listDomainsAttributeName,
+}
 type extraParamList = array<extraParam>
 type domainSummaryList = array<domainSummary>
 type domainSuggestionsList = array<domainSuggestion>
+@ocaml.doc("<p>Information about the domain price associated with a TLD.</p>")
+type domainPrice = {
+  @ocaml.doc("<p>The price for restoring the domain with Route 53.</p>") @as("RestorationPrice")
+  restorationPrice: option<priceWithCurrency>,
+  @ocaml.doc("<p>The price for changing domain ownership.</p>") @as("ChangeOwnershipPrice")
+  changeOwnershipPrice: option<priceWithCurrency>,
+  @ocaml.doc("<p>The price for renewing domain registration with Route 53.</p>")
+  @as("RenewalPrice")
+  renewalPrice: option<priceWithCurrency>,
+  @ocaml.doc("<p>The price for transferring the domain registration to Route 53.</p>")
+  @as("TransferPrice")
+  transferPrice: option<priceWithCurrency>,
+  @ocaml.doc("<p>The price for domain registration with Route 53.</p>") @as("RegistrationPrice")
+  registrationPrice: option<priceWithCurrency>,
+  @ocaml.doc("<p>The name of the TLD for which the prices apply.</p>") @as("Name")
+  name: option<domainPriceName>,
+}
 type billingRecords = array<billingRecord>
 type nameserverList = array<nameserver>
+type filterConditions = array<filterCondition>
+type domainPriceList = array<domainPrice>
 @ocaml.doc("<p>ContactDetail includes the following elements.</p>")
 type contactDetail = {
   @ocaml.doc(
@@ -1343,8 +1496,7 @@ type contactDetail = {
                </p>
             </li>
             <li>
-               <p>For .es domains, if you specify <code>PERSON</code>, you must specify <code>INDIVIDUAL</code> 
-				for the value of <code>ES_LEGAL_FORM</code>.</p>
+               <p>For .es domains, the value of <code>ContactType</code> must be <code>PERSON</code> for all three contacts.</p>
             </li>
          </ul>")
   @as("ContactType")
@@ -1362,19 +1514,28 @@ module UpdateDomainContactPrivacy = {
     @ocaml.doc("<p>Whether you want to conceal contact information from WHOIS queries. If you specify <code>true</code>, 
 			WHOIS (\"who is\") queries return contact information either for Amazon Registrar (for .com, .net, and .org domains) 
 			or for our registrar associate, Gandi (for all other TLDs). If you specify <code>false</code>, 
-			WHOIS queries return the information that you entered for the technical contact.</p>")
+			WHOIS queries return the information that you entered for the technical contact.</p>
+		       <note>
+			         <p>You must specify the same privacy setting for the administrative, registrant, and technical contacts.</p>
+		       </note>")
     @as("TechPrivacy")
     techPrivacy: option<boolean_>,
     @ocaml.doc("<p>Whether you want to conceal contact information from WHOIS queries. If you specify <code>true</code>, 
 			WHOIS (\"who is\") queries return contact information either for Amazon Registrar (for .com, .net, and .org domains) 
 			or for our registrar associate, Gandi (for all other TLDs). If you specify <code>false</code>, 
-			WHOIS queries return the information that you entered for the registrant contact (domain owner).</p>")
+			WHOIS queries return the information that you entered for the registrant contact (domain owner).</p>
+		       <note>
+			         <p>You must specify the same privacy setting for the administrative, registrant, and technical contacts.</p>
+		       </note>")
     @as("RegistrantPrivacy")
     registrantPrivacy: option<boolean_>,
     @ocaml.doc("<p>Whether you want to conceal contact information from WHOIS queries. If you specify <code>true</code>, 
 			WHOIS (\"who is\") queries return contact information either for Amazon Registrar (for .com, .net, and .org domains) 
 			or for our registrar associate, Gandi (for all other TLDs). If you specify <code>false</code>, 
-			WHOIS queries return the information that you entered for the admin contact.</p>")
+			WHOIS queries return the information that you entered for the admin contact.</p>
+		       <note>
+			         <p>You must specify the same privacy setting for the administrative, registrant, and technical contacts.</p>
+		       </note>")
     @as("AdminPrivacy")
     adminPrivacy: option<boolean_>,
     @ocaml.doc("<p>The name of the domain that you want to update the privacy setting for.</p>")
@@ -1408,12 +1569,12 @@ module TransferDomainToAnotherAwsAccount = {
   )
   type request = {
     @ocaml.doc(
-      "<p>The account ID of the AWS account that you want to transfer the domain to, for example, <code>111122223333</code>.</p>"
+      "<p>The account ID of the Amazon Web Services account that you want to transfer the domain to, for example, <code>111122223333</code>.</p>"
     )
     @as("AccountId")
     accountId: accountId,
     @ocaml.doc(
-      "<p>The name of the domain that you want to transfer from the current AWS account to another account.</p>"
+      "<p>The name of the domain that you want to transfer from the current Amazon Web Services account to another account.</p>"
     )
     @as("DomainName")
     domainName: domainName,
@@ -1422,7 +1583,7 @@ module TransferDomainToAnotherAwsAccount = {
     "<p>The <code>TransferDomainToAnotherAwsAccount</code> response includes the following elements.</p>"
   )
   type response = {
-    @ocaml.doc("<p>To finish transferring a domain to another AWS account, the account that the domain is being transferred to must submit an 
+    @ocaml.doc("<p>To finish transferring a domain to another Amazon Web Services account, the account that the domain is being transferred to must submit an 
 			<a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_AcceptDomainTransferFromAnotherAwsAccount.html\">AcceptDomainTransferFromAnotherAwsAccount</a>
 			request. The request must include the value of the <code>Password</code> element that was returned in the 
 			<code>TransferDomainToAnotherAwsAccount</code> response.</p>")
@@ -1528,7 +1689,7 @@ module RejectDomainTransferFromAnotherAwsAccount = {
     "<p>The RejectDomainTransferFromAnotherAwsAccount request includes the following element.</p>"
   )
   type request = {
-    @ocaml.doc("<p>The name of the domain that was specified when another AWS account submitted a 
+    @ocaml.doc("<p>The name of the domain that was specified when another Amazon Web Services account submitted a 
 			<a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html\">TransferDomainToAnotherAwsAccount</a>
 			request.
 		</p>")
@@ -1646,7 +1807,7 @@ module EnableDomainAutoRenew = {
     @as("DomainName")
     domainName: domainName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-route53domains") @new
   external new: request => t = "EnableDomainAutoRenewCommand"
   let make = (~domainName, ()) => new({domainName: domainName})
@@ -1681,11 +1842,27 @@ module DisableDomainAutoRenew = {
     @as("DomainName")
     domainName: domainName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-route53domains") @new
   external new: request => t = "DisableDomainAutoRenewCommand"
   let make = (~domainName, ()) => new({domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module DeleteDomain = {
+  type t
+  type request = {
+    @ocaml.doc("<p>Name of the domain to be deleted.</p>") @as("DomainName") domainName: domainName,
+  }
+  type response = {
+    @ocaml.doc("<p>Identifier for tracking the progress of the request. 
+			To query the operation status, use <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html\">GetOperationDetail</a>.</p>")
+    @as("OperationId")
+    operationId: option<operationId>,
+  }
+  @module("@aws-sdk/client-route53domains") @new external new: request => t = "DeleteDomainCommand"
+  let make = (~domainName, ()) => new({domainName: domainName})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CheckDomainAvailability = {
@@ -1786,7 +1963,7 @@ module CancelDomainTransferToAnotherAwsAccount = {
   )
   type request = {
     @ocaml.doc(
-      "<p>The name of the domain for which you want to cancel the transfer to another AWS account.</p>"
+      "<p>The name of the domain for which you want to cancel the transfer to another Amazon Web Services account.</p>"
     )
     @as("DomainName")
     domainName: domainName,
@@ -1819,7 +1996,7 @@ module AcceptDomainTransferFromAnotherAwsAccount = {
 		</p>")
     @as("Password")
     password: string_,
-    @ocaml.doc("<p>The name of the domain that was specified when another AWS account submitted a 
+    @ocaml.doc("<p>The name of the domain that was specified when another Amazon Web Services account submitted a 
 			<a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html\">TransferDomainToAnotherAwsAccount</a>
 			request.
 		</p>")
@@ -1849,7 +2026,7 @@ module DeleteTagsForDomain = {
     @ocaml.doc("<p>The domain for which you want to delete one or more tags.</p>") @as("DomainName")
     domainName: domainName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-route53domains") @new
   external new: request => t = "DeleteTagsForDomainCommand"
   let make = (~tagsToDelete, ~domainName, ()) =>
@@ -1910,7 +2087,7 @@ module ViewBilling = {
     @as("MaxItems")
     maxItems: option<pageMaxItems>,
     @ocaml.doc("<p>For an initial request for a list of billing records, omit this element. If the number of billing records 
-			that are associated with the current AWS account during the specified period is greater than the value that 
+			that are associated with the current Amazon Web Services account during the specified period is greater than the value that 
 			you specified for <code>MaxItems</code>, you can use <code>Marker</code> to return additional billing records. 
 			Get the value of <code>NextPageMarker</code> from the previous response, and submit another request that includes 
 			the value of <code>NextPageMarker</code> in the <code>Marker</code> element.
@@ -1953,7 +2130,7 @@ module UpdateTagsForDomain = {
     @ocaml.doc("<p>The domain for which you want to add or update tags.</p>") @as("DomainName")
     domainName: domainName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-route53domains") @new
   external new: request => t = "UpdateTagsForDomainCommand"
   let make = (~domainName, ~tagsToUpdate=?, ()) =>
@@ -2012,36 +2189,6 @@ module ListOperations = {
   external new: request => t = "ListOperationsCommand"
   let make = (~maxItems=?, ~marker=?, ~submittedSince=?, ()) =>
     new({maxItems: maxItems, marker: marker, submittedSince: submittedSince})
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
-module ListDomains = {
-  type t
-  @ocaml.doc("<p>The ListDomains request includes the following elements.</p>")
-  type request = {
-    @ocaml.doc("<p>Number of domains to be returned.</p>
-		       <p>Default: 20</p>")
-    @as("MaxItems")
-    maxItems: option<pageMaxItems>,
-    @ocaml.doc("<p>For an initial request for a list of domains, omit this element. If the number of domains
-			that are associated with the current AWS account is greater than the value that you specified for
-			<code>MaxItems</code>, you can use <code>Marker</code> to return additional domains. Get the value of
-			<code>NextPageMarker</code> from the previous response, and submit another request that includes the
-			value of <code>NextPageMarker</code> in the <code>Marker</code> element.</p>
-		       <p>Constraints: The marker must match the value specified in the previous request.</p>")
-    @as("Marker")
-    marker: option<pageMarker>,
-  }
-  @ocaml.doc("<p>The ListDomains response includes the following elements.</p>")
-  type response = {
-    @ocaml.doc("<p>If there are more domains than you specified for <code>MaxItems</code> in the request, submit another
-			request and include the value of <code>NextPageMarker</code> in the value of <code>Marker</code>.</p>")
-    @as("NextPageMarker")
-    nextPageMarker: option<pageMarker>,
-    @ocaml.doc("<p>A summary of domains.</p>") @as("Domains") domains: domainSummaryList,
-  }
-  @module("@aws-sdk/client-route53domains") @new external new: request => t = "ListDomainsCommand"
-  let make = (~maxItems=?, ~marker=?, ()) => new({maxItems: maxItems, marker: marker})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -2168,6 +2315,9 @@ module TransferDomain = {
 			WHOIS (\"who is\") queries return contact information either for Amazon Registrar (for .com, .net, and .org domains) 
 			or for our registrar associate, Gandi (for all other TLDs). If you specify <code>false</code>, 
 			WHOIS queries return the information that you entered for the technical contact.</p>
+		       <note>
+			         <p>You must specify the same privacy setting for the administrative, registrant, and technical contacts.</p>
+		       </note>
 		       <p>Default: <code>true</code>
          </p>")
     @as("PrivacyProtectTechContact")
@@ -2176,6 +2326,9 @@ module TransferDomain = {
 			WHOIS (\"who is\") queries return contact information either for Amazon Registrar (for .com, .net, and .org domains) 
 			or for our registrar associate, Gandi (for all other TLDs). If you specify <code>false</code>, 
 			WHOIS queries return the information that you entered for the registrant contact (domain owner).</p>
+		       <note>
+			         <p>You must specify the same privacy setting for the administrative, registrant, and technical contacts.</p>
+		       </note>
 		       <p>Default: <code>true</code>
          </p>")
     @as("PrivacyProtectRegistrantContact")
@@ -2184,6 +2337,9 @@ module TransferDomain = {
 			WHOIS (\"who is\") queries return contact information either for Amazon Registrar (for .com, .net, and .org domains) 
 			or for our registrar associate, Gandi (for all other TLDs). If you specify <code>false</code>, 
 			WHOIS queries return the information that you entered for the admin contact.</p>
+		       <note>
+			         <p>You must specify the same privacy setting for the administrative, registrant, and technical contacts.</p>
+		       </note>
 		       <p>Default: <code>true</code>
          </p>")
     @as("PrivacyProtectAdminContact")
@@ -2283,6 +2439,9 @@ module RegisterDomain = {
 			WHOIS (\"who is\") queries return contact information either for Amazon Registrar (for .com, .net, and .org domains) 
 			or for our registrar associate, Gandi (for all other TLDs). If you specify <code>false</code>, 
 			WHOIS queries return the information that you entered for the technical contact.</p>
+		       <note>
+			         <p>You must specify the same privacy setting for the administrative, registrant, and technical contacts.</p>
+		       </note>
 		       <p>Default: <code>true</code>
          </p>")
     @as("PrivacyProtectTechContact")
@@ -2291,6 +2450,9 @@ module RegisterDomain = {
 			WHOIS (\"who is\") queries return contact information either for Amazon Registrar (for .com, .net, and .org domains) 
 			or for our registrar associate, Gandi (for all other TLDs). If you specify <code>false</code>, 
 			WHOIS queries return the information that you entered for the registrant contact (the domain owner).</p>
+		       <note>
+			         <p>You must specify the same privacy setting for the administrative, registrant, and technical contacts.</p>
+		       </note>
 		       <p>Default: <code>true</code>
          </p>")
     @as("PrivacyProtectRegistrantContact")
@@ -2299,6 +2461,9 @@ module RegisterDomain = {
 			WHOIS (\"who is\") queries return contact information either for Amazon Registrar (for .com, .net, and .org domains) 
 			or for our registrar associate, Gandi (for all other TLDs). If you specify <code>false</code>, 
 			WHOIS queries return the information that you entered for the admin contact.</p>
+		       <note>
+			         <p>You must specify the same privacy setting for the administrative, registrant, and technical contacts.</p>
+		       </note>
 		       <p>Default: <code>true</code>
          </p>")
     @as("PrivacyProtectAdminContact")
@@ -2394,6 +2559,90 @@ module RegisterDomain = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module ListPrices = {
+  type t
+  type request = {
+    @ocaml.doc("<p>Number of <code>Prices</code> to be returned.</p>
+		       <p>Used only for all TLDs. If you specify a TLD, don't specify a <code>MaxItems</code>.</p>")
+    @as("MaxItems")
+    maxItems: option<pageMaxItems>,
+    @ocaml.doc("<p>For an initial request for a list of prices, omit this element. 
+			If the number of prices that are not yet complete is greater than the value that you specified for <code>MaxItems</code>, 
+			you can use <code>Marker</code> to return additional prices. Get the value of <code>NextPageMarker</code> from the previous response, 
+			and submit another request that includes the value of <code>NextPageMarker</code> in the <code>Marker</code> element. </p>
+		       <p>Used only for all TLDs. If you specify a TLD, don't specify a <code>Marker</code>.</p>")
+    @as("Marker")
+    marker: option<pageMarker>,
+    @ocaml.doc("<p>The TLD for which you want to receive the pricing information. For example.
+				<code>.net</code>.</p>
+		       <p>If a <code>Tld</code> value is not provided, a list of prices for all TLDs supported by Route 53
+		is returned.</p>")
+    @as("Tld")
+    tld: option<tldName>,
+  }
+  type response = {
+    @ocaml.doc("<p>If there are more prices than you specified for <code>MaxItems</code> in the request, submit another request and include the value of 
+			<code>NextPageMarker</code> in the value of <code>Marker</code>. </p>
+		       <p>Used only for all TLDs. If you specify a TLD, don't specify a
+			<code>NextPageMarker</code>.</p>")
+    @as("NextPageMarker")
+    nextPageMarker: option<pageMarker>,
+    @ocaml.doc("<p>A complex type that includes all the pricing information. If you specify a TLD, this array
+			contains only the pricing for that TLD.</p>")
+    @as("Prices")
+    prices: domainPriceList,
+  }
+  @module("@aws-sdk/client-route53domains") @new external new: request => t = "ListPricesCommand"
+  let make = (~maxItems=?, ~marker=?, ~tld=?, ()) =>
+    new({maxItems: maxItems, marker: marker, tld: tld})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module ListDomains = {
+  type t
+  @ocaml.doc("<p>The ListDomains request includes the following elements.</p>")
+  type request = {
+    @ocaml.doc("<p>Number of domains to be returned.</p>
+		       <p>Default: 20</p>")
+    @as("MaxItems")
+    maxItems: option<pageMaxItems>,
+    @ocaml.doc("<p>For an initial request for a list of domains, omit this element. If the number of domains
+			that are associated with the current Amazon Web Services account is greater than the value that you specified for
+			<code>MaxItems</code>, you can use <code>Marker</code> to return additional domains. Get the value of
+			<code>NextPageMarker</code> from the previous response, and submit another request that includes the
+			value of <code>NextPageMarker</code> in the <code>Marker</code> element.</p>
+		       <p>Constraints: The marker must match the value specified in the previous request.</p>")
+    @as("Marker")
+    marker: option<pageMarker>,
+    @ocaml.doc(
+      "<p>A complex type that contains information about the requested ordering of domains in the returned list.</p>"
+    )
+    @as("SortCondition")
+    sortCondition: option<sortCondition>,
+    @ocaml.doc("<p>A complex type that contains information about the filters applied during the <code>ListDomains</code> request. The filter conditions can
+			include domain name and domain expiration.</p>")
+    @as("FilterConditions")
+    filterConditions: option<filterConditions>,
+  }
+  @ocaml.doc("<p>The ListDomains response includes the following elements.</p>")
+  type response = {
+    @ocaml.doc("<p>If there are more domains than you specified for <code>MaxItems</code> in the request, submit another
+			request and include the value of <code>NextPageMarker</code> in the value of <code>Marker</code>.</p>")
+    @as("NextPageMarker")
+    nextPageMarker: option<pageMarker>,
+    @ocaml.doc("<p>A list of domains.</p>") @as("Domains") domains: domainSummaryList,
+  }
+  @module("@aws-sdk/client-route53domains") @new external new: request => t = "ListDomainsCommand"
+  let make = (~maxItems=?, ~marker=?, ~sortCondition=?, ~filterConditions=?, ()) =>
+    new({
+      maxItems: maxItems,
+      marker: marker,
+      sortCondition: sortCondition,
+      filterConditions: filterConditions,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module GetDomainDetail = {
   type t
   @ocaml.doc("<p>The GetDomainDetail request includes the following element.</p>")
@@ -2414,7 +2663,7 @@ module GetDomainDetail = {
 			(Search on the ICANN website; web searches sometimes return an old version of the document.)</p>")
     @as("StatusList")
     statusList: option<domainStatusList>,
-    @ocaml.doc("<p>Reserved for future use.</p>") @as("DnsSec") dnsSec: option<dnssec>,
+    @ocaml.doc("<p>Deprecated.</p>") @as("DnsSec") dnsSec: option<dnssec>,
     @ocaml.doc("<p>Reseller of the domain. Domains registered or transferred using Route 53 domains will have <code>\"Amazon\"</code> 
 			as the reseller. </p>")
     @as("Reseller")
@@ -2463,9 +2712,10 @@ module GetDomainDetail = {
 			WHOIS queries return the information that you entered for the registrant contact (domain owner).</p>")
     @as("RegistrantPrivacy")
     registrantPrivacy: option<boolean_>,
-    @ocaml.doc("<p>Specifies whether contact information is concealed from WHOIS queries. If the value is <code>true</code>, 
-			WHOIS (\"who is\") queries return contact information either for Amazon Registrar (for .com, .net, and .org domains) 
-			or for our registrar associate, Gandi (for all other TLDs). If the value is <code>false</code>, 
+    @ocaml.doc("<p>Specifies whether contact information is concealed from WHOIS
+			queries. If the value is <code>true</code>, WHOIS (\"who is\") queries return contact
+			information either for Amazon Registrar (for .com, .net, and .org domains) or for our
+			registrar associate, Gandi (for all other TLDs). If the value is <code>false</code>,
 			WHOIS queries return the information that you entered for the admin contact.</p>")
     @as("AdminPrivacy")
     adminPrivacy: option<boolean_>,
@@ -2479,7 +2729,10 @@ module GetDomainDetail = {
     @ocaml.doc("<p>Specifies whether the domain registration is set to renew automatically.</p>")
     @as("AutoRenew")
     autoRenew: option<boolean_>,
-    @ocaml.doc("<p>The name of the domain.</p>") @as("Nameservers") nameservers: nameserverList,
+    @ocaml.doc("<p>The
+			name of the domain.</p>")
+    @as("Nameservers")
+    nameservers: nameserverList,
     @ocaml.doc("<p>The name of a domain.</p>") @as("DomainName") domainName: domainName,
   }
   @module("@aws-sdk/client-route53domains") @new

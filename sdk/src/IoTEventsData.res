@@ -95,8 +95,7 @@ type timerDefinition = {
 }
 @ocaml.doc("<p>The current state of a timer.</p>")
 type timer = {
-  @ocaml.doc("<p>The number of seconds which have elapsed on the timer.</p>") @as("timestamp")
-  timestamp_: timestamp_,
+  @ocaml.doc("<p>The expiration time for the timer.</p>") @as("timestamp") timestamp_: timestamp_,
   @ocaml.doc("<p>The name of the timer.</p>") name: timerName,
 }
 @ocaml.doc("<p>Contains the configuration information of alarm state changes.</p>")
@@ -503,11 +502,11 @@ type alarm = {
   @ocaml.doc("<p>The name of the alarm model.</p>") alarmModelName: option<alarmModelName>,
 }
 type updateDetectorRequests = array<updateDetectorRequest>
-@ocaml.doc("<p>AWS IoT Events monitors your equipment or device fleets for failures or changes in operation, and
-      triggers actions when such events occur. You can use AWS IoT Events Data API commands to send inputs to
+@ocaml.doc("<p>IoT Events monitors your equipment or device fleets for failures or changes in operation, and
+      triggers actions when such events occur. You can use IoT Events Data API commands to send inputs to
       detectors, list detectors, and view or update a detector's status.</p>
-         <p> For more information, see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/what-is-iotevents.html\">What is AWS IoT Events?</a> in the
-        <i>AWS IoT Events Developer Guide</i>.</p>")
+         <p> For more information, see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/what-is-iotevents.html\">What is IoT Events?</a> in the
+        <i>IoT Events Developer Guide</i>.</p>")
 module ListAlarms = {
   type t
   type request = {

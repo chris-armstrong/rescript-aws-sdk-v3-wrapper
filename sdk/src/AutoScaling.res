@@ -15,6 +15,8 @@ type baseInteger = int
 type baseTimestamp = Js.Date.t
 type baseLong = float
 type xmlStringUserData = string
+type xmlStringMetricStat = string
+type xmlStringMetricLabel = string
 type xmlStringMaxLen64 = string
 type xmlStringMaxLen511 = string
 type xmlStringMaxLen32 = string
@@ -25,7 +27,11 @@ type xmlStringMaxLen1600 = string
 type xmlStringMaxLen1023 = string
 type xmlString = string
 type warmPoolStatus = [@as("PendingDelete") #PendingDelete]
-type warmPoolState = [@as("Running") #Running | @as("Stopped") #Stopped]
+type warmPoolState = [
+  | @as("Hibernated") #Hibernated
+  | @as("Running") #Running
+  | @as("Stopped") #Stopped
+]
 type warmPoolSize = int
 type warmPoolMinSize = int
 type timestampType = Js.Date.t
@@ -33,6 +39,7 @@ type tagValue = string
 type tagKey = string
 type spotPrice = string
 type spotInstancePools = int
+type skipMatching = bool
 type shouldRespectGracePeriod = bool
 type shouldDecrementDesiredCapacity = bool
 type scalingPolicyEnabled = bool
@@ -50,6 +57,8 @@ type scalingActivityStatusCode = [
   | @as("WaitingForSpotInstanceRequestId") #WaitingForSpotInstanceRequestId
   | @as("PendingSpotBidPlacement") #PendingSpotBidPlacement
 ]
+type reuseOnScaleIn = bool
+type returnData = bool
 type resourceName = string
 type refreshStrategy = [@as("Rolling") #Rolling]
 type refreshInstanceWarmup = int
@@ -89,6 +98,9 @@ type onDemandPercentageAboveBaseCapacity = int
 type onDemandBaseCapacity = int
 type numberOfLaunchConfigurations = int
 type numberOfAutoScalingGroups = int
+type nullablePositiveInteger = int
+type nullablePositiveDouble = float
+type nullableBoolean = bool
 type notificationTargetResourceName = string
 type nonZeroIntPercent = int
 type noDevice = bool
@@ -120,8 +132,15 @@ type maxNumberOfLaunchConfigurations = int
 type maxNumberOfAutoScalingGroups = int
 type maxInstanceLifetime = int
 type maxGroupPreparedCapacity = int
+type localStorageType = [@as("ssd") #Ssd | @as("hdd") #Hdd]
+type localStorage = [
+  | @as("required") #Required
+  | @as("excluded") #Excluded
+  | @as("included") #Included
+]
 type lifecycleTransition = string
 type lifecycleState = [
+  | @as("Warmed:Hibernated") #Warmed_Hibernated
   | @as("Warmed:Running") #Warmed_Running
   | @as("Warmed:Stopped") #Warmed_Stopped
   | @as("Warmed:Terminated") #Warmed_Terminated
@@ -162,24 +181,38 @@ type instanceProtected = bool
 type instanceMetadataHttpTokensState = [@as("required") #Required | @as("optional") #Optional]
 type instanceMetadataHttpPutResponseHopLimit = int
 type instanceMetadataEndpointState = [@as("enabled") #Enabled | @as("disabled") #Disabled]
+type instanceGeneration = [@as("previous") #Previous | @as("current") #Current]
 type includeDeletedGroups = bool
 type honorCooldown = bool
 type heartbeatTimeout = int
 type healthCheckGracePeriod = int
 type globalTimeout = int
 type forceDelete = bool
+type excludedInstance = string
 type estimatedInstanceWarmup = int
 type ebsOptimized = bool
 type disableScaleIn = bool
+type cpuManufacturer = [
+  | @as("amazon-web-services") #Amazon_Web_Services
+  | @as("amd") #Amd
+  | @as("intel") #Intel
+]
 type cooldown = int
+type context = string
 type checkpointDelay = int
 type capacityRebalanceEnabled = bool
+type burstablePerformance = [
+  | @as("required") #Required
+  | @as("excluded") #Excluded
+  | @as("included") #Included
+]
 type blockDeviceEbsVolumeType = string
 type blockDeviceEbsVolumeSize = int
 type blockDeviceEbsThroughput = int
 type blockDeviceEbsIops = int
 type blockDeviceEbsEncrypted = bool
 type blockDeviceEbsDeleteOnTermination = bool
+type bareMetal = [@as("required") #Required | @as("excluded") #Excluded | @as("included") #Included]
 type autoScalingGroupState = string
 type autoScalingGroupPredictedCapacity = int
 type autoScalingGroupMinSize = int
@@ -187,21 +220,35 @@ type autoScalingGroupMaxSize = int
 type autoScalingGroupDesiredCapacity = int
 type associatePublicIpAddress = bool
 type asciiStringMaxLen255 = string
-@ocaml.doc("<p>Describes a warm pool configuration. </p>")
-type warmPoolConfiguration = {
-  @ocaml.doc("<p>The status of a warm pool that is marked for deletion.</p>") @as("Status")
-  status: option<warmPoolStatus>,
-  @ocaml.doc("<p>The instance state to transition to after the lifecycle actions are complete.</p>")
-  @as("PoolState")
-  poolState: option<warmPoolState>,
-  @ocaml.doc("<p>The minimum number of instances to maintain in the warm pool.</p>") @as("MinSize")
-  minSize: option<warmPoolMinSize>,
-  @ocaml.doc("<p>The maximum number of instances that are allowed to be in the warm pool or in any
-            state except <code>Terminated</code> for the Auto Scaling group.</p>")
-  @as("MaxGroupPreparedCapacity")
-  maxGroupPreparedCapacity: option<maxGroupPreparedCapacity>,
-}
+type acceleratorType = [@as("inference") #Inference | @as("fpga") #Fpga | @as("gpu") #Gpu]
+type acceleratorName = [
+  | @as("vu9p") #Vu9p
+  | @as("radeon-pro-v520") #Radeon_Pro_V520
+  | @as("m60") #M60
+  | @as("t4") #T4
+  | @as("k80") #K80
+  | @as("v100") #V100
+  | @as("a100") #A100
+]
+type acceleratorManufacturer = [
+  | @as("xilinx") #Xilinx
+  | @as("amazon-web-services") #Amazon_Web_Services
+  | @as("amd") #Amd
+  | @as("nvidia") #Nvidia
+]
 type values = array<xmlString>
+@ocaml.doc("<p>Specifies the minimum and maximum for the <code>VCpuCount</code> object when you
+            specify <a>InstanceRequirements</a> for an Auto Scaling group.</p>")
+type vcpuCountRequest = {
+  @ocaml.doc("<p>The maximum number of vCPUs.</p>") @as("Max") max: option<nullablePositiveInteger>,
+  @ocaml.doc("<p>The minimum number of vCPUs.</p>") @as("Min") min: nullablePositiveInteger,
+}
+@ocaml.doc("<p>Specifies the minimum and maximum for the <code>TotalLocalStorageGB</code> object when
+            you specify <a>InstanceRequirements</a> for an Auto Scaling group.</p>")
+type totalLocalStorageGBRequest = {
+  @ocaml.doc("<p>The storage maximum in GB.</p>") @as("Max") max: option<nullablePositiveDouble>,
+  @ocaml.doc("<p>The storage minimum in GB.</p>") @as("Min") min: option<nullablePositiveDouble>,
+}
 type terminationPolicies = array<xmlStringMaxLen1600>
 type targetGroupARNs = array<xmlStringMaxLen511>
 @ocaml.doc("<p>Describes a tag for an Auto Scaling group.</p>")
@@ -362,13 +409,11 @@ type scheduledUpdateGroupAction = {
   @as("Recurrence")
   recurrence: option<xmlStringMaxLen255>,
   @ocaml.doc("<p>The date and time in UTC for the recurring schedule to end. For example,
-                <code>\"2019-06-01T00:00:00Z\"</code>.
-            </p>")
+                <code>\"2019-06-01T00:00:00Z\"</code>. </p>")
   @as("EndTime")
   endTime: option<timestampType>,
   @ocaml.doc("<p>The date and time in UTC for this action to start. For example,
-                <code>\"2019-06-01T00:00:00Z\"</code>.
-            </p>")
+                <code>\"2019-06-01T00:00:00Z\"</code>. </p>")
   @as("StartTime")
   startTime: option<timestampType>,
   @ocaml.doc("<p>This parameter is no longer used.</p>") @as("Time") time: option<timestampType>,
@@ -441,14 +486,14 @@ type processNames = array<xmlStringMaxLen255>
             predictive scaling policy uses individually specified load and scaling metrics instead
             of a metric pair.</p>")
 type predictiveScalingPredefinedScalingMetric = {
-  @ocaml.doc("<p>A label that uniquely identifies a specific Application Load Balancer target 
-            group from which to determine the request count served by your Auto Scaling group. You can't specify a resource label 
-            unless the target group is attached to the Auto Scaling group.</p>
-        <p>You create the resource label by appending the final portion of the load balancer ARN
+  @ocaml.doc("<p>A label that uniquely identifies a specific Application Load Balancer target group from which to determine
+            the average request count served by your Auto Scaling group. You can't specify a resource label
+            unless the target group is attached to the Auto Scaling group.</p> 
+         <p>You create the resource label by appending the final portion of the load balancer ARN
             and the final portion of the target group ARN into a single value, separated by a forward
             slash (/). The format of the resource label is:</p>
         <p>
-            <code>app/EC2Co-EcsEl-1TKLTMITMM0EO/f37c06a68c1748aa/targetgroup/EC2Co-Defau-LDNM7Q3ZH1ZN/6d4ea56ca2d6a18d</code>.</p>
+            <code>app/my-alb/778d41231b141a0f/targetgroup/my-alb-target-group/943f017f100becff</code>.</p>
         <p>Where:</p>
         <ul>
             <li>
@@ -469,14 +514,14 @@ type predictiveScalingPredefinedScalingMetric = {
 }
 @ocaml.doc("<p>Represents a metric pair for a predictive scaling policy. </p>")
 type predictiveScalingPredefinedMetricPair = {
-  @ocaml.doc("<p>A label that uniquely identifies a specific Application Load Balancer target 
-            group from which to determine the request count served by your Auto Scaling group. You can't specify a resource label 
-            unless the target group is attached to the Auto Scaling group.</p>
+  @ocaml.doc("<p>A label that uniquely identifies a specific Application Load Balancer target group from which to determine
+            the total and average request count served by your Auto Scaling group. You can't specify a
+            resource label unless the target group is attached to the Auto Scaling group.</p>
         <p>You create the resource label by appending the final portion of the load balancer ARN
             and the final portion of the target group ARN into a single value, separated by a forward
             slash (/). The format of the resource label is:</p>
         <p>
-            <code>app/EC2Co-EcsEl-1TKLTMITMM0EO/f37c06a68c1748aa/targetgroup/EC2Co-Defau-LDNM7Q3ZH1ZN/6d4ea56ca2d6a18d</code>.</p>
+            <code>app/my-alb/778d41231b141a0f/targetgroup/my-alb-target-group/943f017f100becff</code>.</p>
         <p>Where:</p>
         <ul>
             <li>
@@ -504,14 +549,14 @@ type predictiveScalingPredefinedMetricPair = {
             predictive scaling policy uses individually specified load and scaling metrics instead
             of a metric pair.</p>")
 type predictiveScalingPredefinedLoadMetric = {
-  @ocaml.doc("<p>A label that uniquely identifies a specific Application Load Balancer target 
-            group from which to determine the request count served by your Auto Scaling group. You can't specify a resource label 
-            unless the target group is attached to the Auto Scaling group.</p>
-        <p>You create the resource label by appending the final portion of the load balancer ARN
+  @ocaml.doc("<p>A label that uniquely identifies a specific Application Load Balancer target group from which to determine
+            the request count served by your Auto Scaling group. You can't specify a resource label unless
+            the target group is attached to the Auto Scaling group.</p> 
+         <p>You create the resource label by appending the final portion of the load balancer ARN
             and the final portion of the target group ARN into a single value, separated by a forward
             slash (/). The format of the resource label is:</p>
         <p>
-            <code>app/EC2Co-EcsEl-1TKLTMITMM0EO/f37c06a68c1748aa/targetgroup/EC2Co-Defau-LDNM7Q3ZH1ZN/6d4ea56ca2d6a18d</code>.</p>
+            <code>app/my-alb/778d41231b141a0f/targetgroup/my-alb-target-group/943f017f100becff</code>.</p>
         <p>Where:</p>
         <ul>
             <li>
@@ -535,28 +580,27 @@ type predictiveScalingForecastTimestamps = array<timestampType>
 @ocaml.doc("<p>Represents a predefined metric for a target tracking scaling policy to use with
             Amazon EC2 Auto Scaling.</p>")
 type predefinedMetricSpecification = {
-  @ocaml.doc("<p>Identifies the resource associated with the metric type. You can't specify a resource
-            label unless the metric type is <code>ALBRequestCountPerTarget</code> and there is a
-            target group attached to the Auto Scaling group.</p>
+  @ocaml.doc("<p>A label that uniquely identifies a specific Application Load Balancer target group
+            from which to determine the average request count served by your Auto Scaling group. You can't
+            specify a resource label unless the target group is attached to the Auto Scaling group.</p>
         <p>You create the resource label by appending the final portion of the load balancer ARN
-            and the final portion of the target group ARN into a single value, separated by a
-            forward slash (/). The format is
-            app/<load-balancer-name>/<load-balancer-id>/targetgroup/<target-group-name>/<target-group-id>,
-            where:</p>
+            and the final portion of the target group ARN into a single value, separated by a forward
+            slash (/). The format of the resource label is:</p>
+        <p>
+            <code>app/my-alb/778d41231b141a0f/targetgroup/my-alb-target-group/943f017f100becff</code>.</p>
+        <p>Where:</p>
         <ul>
             <li>
-                <p>app/<load-balancer-name>/<load-balancer-id> is the final portion
-                    of the load balancer ARN</p>
+                <p>app/<load-balancer-name>/<load-balancer-id> is the final portion of
+                    the load balancer ARN</p>
             </li>
             <li>
-                <p>targetgroup/<target-group-name>/<target-group-id> is the final
-                    portion of the target group ARN.</p>
+                <p>targetgroup/<target-group-name>/<target-group-id> is the final portion
+                    of the target group ARN.</p>
             </li>
          </ul>
-        <p>This is an example:
-            app/EC2Co-EcsEl-1TKLTMITMM0EO/f37c06a68c1748aa/targetgroup/EC2Co-Defau-LDNM7Q3ZH1ZN/6d4ea56ca2d6a18d.</p>
-        <p>To find the ARN for an Application Load Balancer, use the <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html\">DescribeLoadBalancers</a> API operation. To find the ARN for the target group,
-            use the <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html\">DescribeTargetGroups</a> API operation.</p>")
+        <p>To find the ARN for an Application Load Balancer, use the <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html\">DescribeLoadBalancers</a> API operation. To find the ARN for the target group, use
+            the <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html\">DescribeTargetGroups</a> API operation.</p>")
   @as("ResourceLabel")
   resourceLabel: option<xmlStringMaxLen1023>,
   @ocaml.doc("<p>The metric type. The following predefined metrics are available:</p>
@@ -568,18 +612,18 @@ type predefinedMetricSpecification = {
             </li>
             <li>
                 <p>
-                  <code>ASGAverageNetworkIn</code> - Average number of bytes received on all
-                    network interfaces by the Auto Scaling group.</p>
+                  <code>ASGAverageNetworkIn</code> - Average number of bytes received (per
+                    instance per minute) for the Auto Scaling group.</p>
             </li>
             <li>
                 <p>
-                  <code>ASGAverageNetworkOut</code> - Average number of bytes sent out on all
-                    network interfaces by the Auto Scaling group.</p>
+                  <code>ASGAverageNetworkOut</code> - Average number of bytes sent out (per
+                    instance per minute) for the Auto Scaling group.</p>
             </li>
             <li>
                 <p>
-                  <code>ALBRequestCountPerTarget</code> - Number of requests completed per
-                    target in an Application Load Balancer target group.</p>
+                  <code>ALBRequestCountPerTarget</code> - Average Application Load Balancer request count (per
+                    target per minute) for your Auto Scaling group.</p>
             </li>
          </ul>")
   @as("PredefinedMetricType")
@@ -619,12 +663,18 @@ type notificationConfiguration = {
          </ul>")
   @as("NotificationType")
   notificationType: option<xmlStringMaxLen255>,
-  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (Amazon SNS)
-            topic.</p>")
-  @as("TopicARN")
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the Amazon SNS topic.</p>") @as("TopicARN")
   topicARN: option<xmlStringMaxLen255>,
   @ocaml.doc("<p>The name of the Auto Scaling group.</p>") @as("AutoScalingGroupName")
   autoScalingGroupName: option<xmlStringMaxLen255>,
+}
+@ocaml.doc("<p>Specifies the minimum and maximum for the <code>NetworkInterfaceCount</code> object
+            when you specify <a>InstanceRequirements</a> for an Auto Scaling group.</p>")
+type networkInterfaceCountRequest = {
+  @ocaml.doc("<p>The maximum number of network interfaces.</p>") @as("Max")
+  max: option<nullablePositiveInteger>,
+  @ocaml.doc("<p>The minimum number of network interfaces.</p>") @as("Min")
+  min: option<nullablePositiveInteger>,
 }
 type metrics = array<xmlStringMaxLen255>
 @ocaml.doc("<p>Describes a granularity of a metric.</p>")
@@ -746,6 +796,19 @@ type metricCollectionType = {
   @as("Metric")
   metric: option<xmlStringMaxLen255>,
 }
+@ocaml.doc("<p>Specifies the minimum and maximum for the <code>MemoryMiB</code> object when you
+            specify <a>InstanceRequirements</a> for an Auto Scaling group.</p>")
+type memoryMiBRequest = {
+  @ocaml.doc("<p>The memory maximum in MiB.</p>") @as("Max") max: option<nullablePositiveInteger>,
+  @ocaml.doc("<p>The memory minimum in MiB.</p>") @as("Min") min: nullablePositiveInteger,
+}
+@ocaml.doc("<p>Specifies the minimum and maximum for the <code>MemoryGiBPerVCpu</code> object when
+            you specify <a>InstanceRequirements</a> for an Auto Scaling group.</p>")
+type memoryGiBPerVCpuRequest = {
+  @ocaml.doc("<p>The memory maximum in GiB.</p>") @as("Max") max: option<nullablePositiveDouble>,
+  @ocaml.doc("<p>The memory minimum in GiB.</p>") @as("Min") min: option<nullablePositiveDouble>,
+}
+type localStorageTypes = array<localStorageType>
 @ocaml.doc("<p>Describes the state of a target group.</p>")
 type loadBalancerTargetGroupState = {
   @ocaml.doc("<p>The state of the target group.</p>
@@ -822,42 +885,16 @@ type loadBalancerState = {
 type loadBalancerNames = array<xmlStringMaxLen255>
 @ocaml.doc("<p>Describes information used to specify a lifecycle hook for an Auto Scaling
             group.</p>
-        <p>A lifecycle hook tells Amazon EC2 Auto Scaling to perform an action on an instance when the instance
-            launches (before it is put into service) or as the instance terminates (before it is
-            fully terminated).</p>
-        <p>This step is a part of the procedure for creating a lifecycle hook for an Auto Scaling
-            group:</p>
-        <ol>
-            <li>
-                <p>(Optional) Create a Lambda function and a rule that allows CloudWatch Events to
-                    invoke your Lambda function when Amazon EC2 Auto Scaling launches or terminates
-                    instances.</p>
-            </li>
-            <li>
-                <p>(Optional) Create a notification target and an IAM role. The target can be
-                    either an Amazon SQS queue or an Amazon SNS topic. The role allows Amazon EC2 Auto Scaling to
-                    publish lifecycle notifications to the target.</p>
-            </li>
-            <li>
-                <p>
-                    <b>Create the lifecycle hook. Specify whether the hook is
-                        used when the instances launch or terminate.</b>
-                </p>
-            </li>
-            <li>
-                <p>If you need more time, record the lifecycle action heartbeat to keep the
-                    instance in a pending state.</p>
-            </li>
-            <li>
-                <p>If you finish before the timeout period ends, complete the lifecycle
-                    action.</p>
-            </li>
-         </ol>
+        
+        
+        
         <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html\">Amazon EC2 Auto Scaling lifecycle
                 hooks</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>")
 type lifecycleHookSpecification = {
   @ocaml.doc("<p>The ARN of the IAM role that allows the Auto Scaling group to publish to the specified
-            notification target, for example, an Amazon SNS topic or an Amazon SQS queue.</p>")
+            notification target.</p>
+        <p>Valid only if the notification target is an Amazon SNS topic or an Amazon SQS queue. Required
+            for new lifecycle hooks, but optional when updating existing hooks.</p>")
   @as("RoleARN")
   roleARN: option<xmlStringMaxLen255>,
   @ocaml.doc("<p>The ARN of the target that Amazon EC2 Auto Scaling sends notifications to when an instance is in the
@@ -897,9 +934,10 @@ type lifecycleHookSpecification = {
   lifecycleHookName: asciiStringMaxLen255,
 }
 type lifecycleHookNames = array<asciiStringMaxLen255>
-@ocaml.doc("<p>Describes a lifecycle hook, which tells Amazon EC2 Auto Scaling that you want to perform an action
-            whenever it launches instances or terminates
-            instances.</p>")
+@ocaml.doc("<p>Describes a lifecycle hook. A lifecycle hook lets you create solutions that are aware
+            of events in the Auto Scaling instance lifecycle, and then perform a custom action on instances
+            when the corresponding lifecycle event
+            occurs.</p>")
 type lifecycleHook = {
   @ocaml.doc("<p>Defines the action the Auto Scaling group should take when the lifecycle hook timeout elapses
             or if an unexpected failure occurs. The possible values are <code>CONTINUE</code> and
@@ -922,7 +960,7 @@ type lifecycleHook = {
   @as("NotificationMetadata")
   notificationMetadata: option<xmlStringMaxLen1023>,
   @ocaml.doc("<p>The ARN of the IAM role that allows the Auto Scaling group to publish to the specified
-            notification target.</p>")
+            notification target (an Amazon SNS topic or an Amazon SQS queue).</p>")
   @as("RoleARN")
   roleARN: option<xmlStringMaxLen255>,
   @ocaml.doc("<p>The ARN of the target that Amazon EC2 Auto Scaling sends notifications to when an instance is in the
@@ -948,11 +986,9 @@ type lifecycleHook = {
   @ocaml.doc("<p>The name of the lifecycle hook.</p>") @as("LifecycleHookName")
   lifecycleHookName: option<asciiStringMaxLen255>,
 }
-@ocaml.doc("<p>Describes the Amazon EC2 launch template and the launch template version that can be used
-            by an Auto Scaling group to configure Amazon EC2 instances.</p>
-        <p>The launch template that is specified must be configured for use with an Auto Scaling group.
-            For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-template.html\">Creating a launch
-                template for an Auto Scaling group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>")
+@ocaml.doc("<p>Describes the launch template and the version of the launch template that Amazon EC2 Auto Scaling
+            uses to launch Amazon EC2 instances. For more information about launch templates, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/LaunchTemplates.html\">Launch
+                templates</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>")
 type launchTemplateSpecification = {
   @ocaml.doc("<p>The version number, <code>$Latest</code>, or <code>$Default</code>. To get the version
             number, use the Amazon EC2 <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeLaunchTemplateVersions.html\">DescribeLaunchTemplateVersions</a> API operation. New launch template versions
@@ -976,66 +1012,75 @@ type launchTemplateSpecification = {
   launchTemplateId: option<xmlStringMaxLen255>,
 }
 type launchConfigurationNames = array<xmlStringMaxLen255>
-@ocaml.doc("<p>Describes an instances distribution for an Auto Scaling group with a <a>MixedInstancesPolicy</a>.</p>
-        <p>The instances distribution specifies the distribution of On-Demand Instances and Spot
-            Instances, the maximum price to pay for Spot Instances, and how the Auto Scaling group allocates
-            instance types to fulfill On-Demand and Spot capacities.</p>
-        <p>When you update <code>SpotAllocationStrategy</code>, <code>SpotInstancePools</code>,
-            or <code>SpotMaxPrice</code>, this update action does not deploy any changes across the
-            running Amazon EC2 instances in the group. Your existing Spot Instances continue to run
-            as long as the maximum price for those instances is higher than the current Spot price.
-            When scale out occurs, Amazon EC2 Auto Scaling launches instances based on the new settings. When scale
-            in occurs, Amazon EC2 Auto Scaling terminates instances according to the group's termination
-            policies.</p>")
+@ocaml.doc("<p>Describes an instances distribution for an Auto Scaling group.</p>")
 type instancesDistribution = {
   @ocaml.doc("<p>The maximum price per unit hour that you are willing to pay for a Spot Instance. If
-            you leave the value at its default (empty), Amazon EC2 Auto Scaling uses the On-Demand price as the
-            maximum Spot price. To remove a value that you previously set, include the property but
-            specify an empty string (\"\") for the value.</p>")
+            you keep the value at its default (unspecified), Amazon EC2 Auto Scaling uses the On-Demand price as
+            the maximum Spot price. To remove a value that you previously set, include the property
+            but specify an empty string (\"\") for the value.</p>")
   @as("SpotMaxPrice")
   spotMaxPrice: option<mixedInstanceSpotPrice>,
   @ocaml.doc("<p>The number of Spot Instance pools across which to allocate your Spot Instances. The
             Spot pools are determined from the different instance types in the overrides. Valid only
             when the Spot allocation strategy is <code>lowest-price</code>. Value must be in the
-            range of 1 to 20. Defaults to 2 if not specified.</p>")
+            range of 1–20.</p>
+        <p>Default: <code>2</code>
+         </p>")
   @as("SpotInstancePools")
   spotInstancePools: option<spotInstancePools>,
   @ocaml.doc("<p>Indicates how to allocate instances across Spot Instance pools. </p>
         <p>If the allocation strategy is <code>lowest-price</code>, the Auto Scaling group launches
             instances using the Spot pools with the lowest price, and evenly allocates your
-            instances across the number of Spot pools that you specify. Defaults to
-                <code>lowest-price</code> if not specified.</p>
+            instances across the number of Spot pools that you specify. </p>
         <p>If the allocation strategy is <code>capacity-optimized</code> (recommended), the Auto Scaling
             group launches instances using Spot pools that are optimally chosen based on the
             available Spot capacity. Alternatively, you can use
                 <code>capacity-optimized-prioritized</code> and set the order of instance types in
             the list of launch template overrides from highest to lowest priority (from first to
             last in the list). Amazon EC2 Auto Scaling honors the instance type priorities on a best-effort basis
-            but optimizes for capacity first. </p>")
+            but optimizes for capacity first. </p>
+        <p>Default: <code>lowest-price</code>
+         </p>")
   @as("SpotAllocationStrategy")
   spotAllocationStrategy: option<xmlString>,
   @ocaml.doc("<p>Controls the percentages of On-Demand Instances and Spot Instances for your additional
             capacity beyond <code>OnDemandBaseCapacity</code>. Expressed as a number (for example,
-            20 specifies 20% On-Demand Instances, 80% Spot Instances). Defaults to 100 if not
-            specified. If set to 100, only On-Demand Instances are provisioned.</p>")
+            20 specifies 20% On-Demand Instances, 80% Spot Instances). If set to 100, only On-Demand
+            Instances are used.</p>
+        <p>Default: <code>100</code>
+         </p>")
   @as("OnDemandPercentageAboveBaseCapacity")
   onDemandPercentageAboveBaseCapacity: option<onDemandPercentageAboveBaseCapacity>,
   @ocaml.doc("<p>The minimum amount of the Auto Scaling group's capacity that must be fulfilled by On-Demand
-            Instances. This base portion is provisioned first as your group scales. Defaults to 0 if
-            not specified. If you specify weights for the instance types in the overrides, set the
-            value of <code>OnDemandBaseCapacity</code> in terms of the number of capacity units, and
-            not the number of instances.</p>")
+            Instances. This base portion is launched first as your group scales.</p>
+        <p>If you specify weights for the instance types in the overrides, the base capacity is
+            measured in the same unit of measurement as the instance types. If you specify <a>InstanceRequirements</a> in the overrides, the base capacity is measured in
+            the same unit of measurement as your group's desired capacity.</p>
+        <p>Default: <code>0</code>
+         </p>")
   @as("OnDemandBaseCapacity")
   onDemandBaseCapacity: option<onDemandBaseCapacity>,
-  @ocaml.doc("<p>Indicates how to allocate instance types to fulfill On-Demand capacity. The only valid
-            value is <code>prioritized</code>, which is also the default value. This strategy uses
-            the order of instance types in the <code>LaunchTemplateOverrides</code> to define the
-            launch priority of each instance type. The first instance type in the array is
-            prioritized higher than the last. If all your On-Demand capacity cannot be fulfilled
-            using your highest priority instance, then the Auto Scaling groups launches the remaining
-            capacity using the second priority instance type, and so on.</p>")
+  @ocaml.doc("<p>The order of the launch template overrides to use in fulfilling On-Demand capacity. </p>
+        <p>If you specify <code>lowest-price</code>, Amazon EC2 Auto Scaling uses price to determine the order,
+            launching the lowest price first. </p>
+        <p>If you specify <code>prioritized</code>, Amazon EC2 Auto Scaling uses the priority that you assigned
+            to each launch template override, launching the highest priority first. If all your
+            On-Demand capacity cannot be fulfilled using your highest priority instance, then
+            Amazon EC2 Auto Scaling launches the remaining capacity using the second priority instance type, and so
+            on.</p>
+        <p>Default: <code>lowest-price</code> for Auto Scaling groups that specify <a>InstanceRequirements</a> in the overrides and <code>prioritized</code> for
+            Auto Scaling groups that don't.</p>")
   @as("OnDemandAllocationStrategy")
   onDemandAllocationStrategy: option<xmlString>,
+}
+@ocaml.doc("<p>Describes an instance reuse policy for a warm pool. </p>
+        <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-warm-pools.html\">Warm pools for
+                Amazon EC2 Auto Scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>")
+type instanceReusePolicy = {
+  @ocaml.doc("<p>Specifies whether instances in the Auto Scaling group can be returned to the warm pool on
+            scale in. </p>")
+  @as("ReuseOnScaleIn")
+  reuseOnScaleIn: option<reuseOnScaleIn>,
 }
 @ocaml.doc("<p>Reports the progress of an instance refresh on instances that are in the warm
             pool.</p>")
@@ -1104,6 +1149,7 @@ type instanceMetadataOptions = {
   httpTokens: option<instanceMetadataHttpTokensState>,
 }
 type instanceIds = array<xmlStringMaxLen19>
+type instanceGenerations = array<instanceGeneration>
 @ocaml.doc("<p>Describes a scheduled action that could not be created, updated, or deleted.</p>")
 type failedScheduledUpdateGroupActionRequest = {
   @ocaml.doc("<p>The error message accompanying the error code.</p>") @as("ErrorMessage")
@@ -1112,6 +1158,7 @@ type failedScheduledUpdateGroupActionRequest = {
   @ocaml.doc("<p>The name of the scheduled action.</p>") @as("ScheduledActionName")
   scheduledActionName: xmlStringMaxLen255,
 }
+type excludedInstanceTypes = array<excludedInstance>
 @ocaml.doc("<p>Describes an enabled metric.</p>")
 type enabledMetric = {
   @ocaml.doc("<p>The granularity of the metric. The only valid value is <code>1Minute</code>.</p>")
@@ -1226,31 +1273,22 @@ type enabledMetric = {
 @ocaml.doc("<p>Describes information used to set up an Amazon EBS volume specified in a block device
             mapping.</p>")
 type ebs = {
-  @ocaml.doc("<p>The throughput to provision for a <code>gp3</code> volume.</p>
-        <p>Valid Range: Minimum value of 125. Maximum value of 1000.</p>")
+  @ocaml.doc("<p>The throughput (MiBps) to provision for a <code>gp3</code> volume.</p>")
   @as("Throughput")
   throughput: option<blockDeviceEbsThroughput>,
   @ocaml.doc("<p>Specifies whether the volume should be encrypted. Encrypted EBS volumes can only be
-            attached to instances that support Amazon EBS encryption. For more information, see
-                <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances\">Supported Instance Types</a>. If your AMI uses encrypted volumes, you can also
+            attached to instances that support Amazon EBS encryption. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances\">Supported instance types</a>. If your AMI uses encrypted volumes, you can also
             only launch it on supported instance types.</p>
         <note>
-            <p>If you are creating a volume from a snapshot, you cannot specify an encryption
-                value. Volumes that are created from encrypted snapshots are automatically
-                encrypted, and volumes that are created from unencrypted snapshots are automatically
-                unencrypted. By default, encrypted snapshots use the AWS managed CMK that is used
-                for EBS encryption, but you can specify a custom CMK when you create the snapshot.
-                The ability to encrypt a snapshot during copying also allows you to apply a new CMK
-                to an already-encrypted snapshot. Volumes restored from the
-                resulting copy are only accessible using the new CMK.</p>
-            <p>Enabling <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-by-default\">encryption by default</a> results in all EBS volumes being encrypted with
-                the AWS managed CMK or a customer managed CMK, whether or not the snapshot was
-                encrypted.</p>
-        </note>
-        <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIEncryption.html\">Using Encryption with EBS-Backed
-                AMIs</a> in the <i>Amazon EC2 User Guide for Linux Instances</i> and <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/key-policy-requirements-EBS-encryption.html\">Required
-                CMK key policy for use with encrypted volumes</a> in the
-                <i>Amazon EC2 Auto Scaling User Guide</i>.</p>")
+            <p>If you are creating a volume from a snapshot, you cannot create an unencrypted
+                volume from an encrypted snapshot. Also, you cannot specify a KMS key ID when using
+                a launch configuration.</p>
+            <p>If you enable encryption by default, the EBS volumes that you create are always
+                encrypted, either using the Amazon Web Services managed KMS key or a customer-managed KMS key,
+                regardless of whether the snapshot was encrypted. </p>
+            <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-data-protection.html#encryption\">Using Amazon Web Services KMS keys to encrypt Amazon EBS volumes</a> in the
+                    <i>Amazon EC2 Auto Scaling User Guide</i>.</p>
+        </note>")
   @as("Encrypted")
   encrypted: option<blockDeviceEbsEncrypted>,
   @ocaml.doc("<p>The number of input/output (I/O) operations per second (IOPS) to provision for the
@@ -1277,15 +1315,15 @@ type ebs = {
             <code>Iops</code> is supported when the volume type is <code>gp3</code> or
                 <code>io1</code> and required only when the volume type is <code>io1</code>. (Not
             used with <code>standard</code>, <code>gp2</code>, <code>st1</code>, or <code>sc1</code>
-            volumes.)  </p>")
+            volumes.) </p>")
   @as("Iops")
   iops: option<blockDeviceEbsIops>,
   @ocaml.doc("<p>Indicates whether the volume is deleted on instance termination. For Amazon EC2 Auto Scaling, the
             default value is <code>true</code>.</p>")
   @as("DeleteOnTermination")
   deleteOnTermination: option<blockDeviceEbsDeleteOnTermination>,
-  @ocaml.doc("<p>The volume type. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html\">Amazon EBS Volume Types</a> in
-            the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>
+  @ocaml.doc("<p>The volume type. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html\">Amazon EBS volume types</a> in the
+                <i>Amazon EC2 User Guide for Linux Instances</i>.</p>
         <p>Valid Values: <code>standard</code> | <code>io1</code> | <code>gp2</code> |
                 <code>st1</code> | <code>sc1</code> | <code>gp3</code>
          </p>")
@@ -1321,8 +1359,15 @@ type ebs = {
   @as("SnapshotId")
   snapshotId: option<xmlStringMaxLen255>,
 }
+type cpuManufacturers = array<cpuManufacturer>
 type classicLinkVPCSecurityGroups = array<xmlStringMaxLen255>
 type checkpointPercentages = array<nonZeroIntPercent>
+@ocaml.doc("<p>Specifies the minimum and maximum for the <code>BaselineEbsBandwidthMbps</code> object
+            when you specify <a>InstanceRequirements</a> for an Auto Scaling group.</p>")
+type baselineEbsBandwidthMbpsRequest = {
+  @ocaml.doc("<p>The maximum value in Mbps.</p>") @as("Max") max: option<nullablePositiveInteger>,
+  @ocaml.doc("<p>The minimum value in Mbps.</p>") @as("Min") min: option<nullablePositiveInteger>,
+}
 type availabilityZones = array<xmlStringMaxLen255>
 type autoScalingNotificationTypes = array<xmlStringMaxLen255>
 type autoScalingGroupNames = array<xmlStringMaxLen255>
@@ -1369,17 +1414,52 @@ type activity = {
   autoScalingGroupName: xmlStringMaxLen255,
   @ocaml.doc("<p>The ID of the activity.</p>") @as("ActivityId") activityId: xmlString,
 }
+type acceleratorTypes = array<acceleratorType>
+@ocaml.doc("<p>Specifies the minimum and maximum for the <code>AcceleratorTotalMemoryMiB</code>
+            object when you specify <a>InstanceRequirements</a> for an Auto Scaling group.</p>")
+type acceleratorTotalMemoryMiBRequest = {
+  @ocaml.doc("<p>The memory maximum in MiB.</p>") @as("Max") max: option<nullablePositiveInteger>,
+  @ocaml.doc("<p>The memory minimum in MiB.</p>") @as("Min") min: option<nullablePositiveInteger>,
+}
+type acceleratorNames = array<acceleratorName>
+type acceleratorManufacturers = array<acceleratorManufacturer>
+@ocaml.doc("<p>Specifies the minimum and maximum for the <code>AcceleratorCount</code> object when
+            you specify <a>InstanceRequirements</a> for an Auto Scaling group.</p>")
+type acceleratorCountRequest = {
+  @ocaml.doc("<p>The maximum value.</p>") @as("Max") max: option<nullablePositiveInteger>,
+  @ocaml.doc("<p>The minimum value.</p>") @as("Min") min: option<nullablePositiveInteger>,
+}
+@ocaml.doc("<p>Describes a warm pool configuration. </p>")
+type warmPoolConfiguration = {
+  @ocaml.doc("<p>The instance reuse policy.</p>") @as("InstanceReusePolicy")
+  instanceReusePolicy: option<instanceReusePolicy>,
+  @ocaml.doc("<p>The status of a warm pool that is marked for deletion.</p>") @as("Status")
+  status: option<warmPoolStatus>,
+  @ocaml.doc("<p>The instance state to transition to after the lifecycle actions are complete.</p>")
+  @as("PoolState")
+  poolState: option<warmPoolState>,
+  @ocaml.doc("<p>The minimum number of instances to maintain in the warm pool.</p>") @as("MinSize")
+  minSize: option<warmPoolMinSize>,
+  @ocaml.doc("<p>The maximum number of instances that are allowed to be in the warm pool or in any
+            state except <code>Terminated</code> for the Auto Scaling group.</p>")
+  @as("MaxGroupPreparedCapacity")
+  maxGroupPreparedCapacity: option<maxGroupPreparedCapacity>,
+}
 type tags = array<tag>
 type tagDescriptionList = array<tagDescription>
 type suspendedProcesses = array<suspendedProcess>
 type stepAdjustments = array<stepAdjustment>
 type scheduledUpdateGroupActions = array<scheduledUpdateGroupAction>
 type scheduledUpdateGroupActionRequests = array<scheduledUpdateGroupActionRequest>
-@ocaml.doc("<p>Describes information used to start an instance refresh. </p>
-        <p>All properties are optional. However, if you specify a value for
-                <code>CheckpointDelay</code>, you must also provide a value for
-                <code>CheckpointPercentages</code>. </p>")
+@ocaml.doc("<p>Describes the preferences for an instance refresh.</p>")
 type refreshPreferences = {
+  @ocaml.doc("<p>A boolean value that indicates whether skip matching is enabled. If true, then
+            Amazon EC2 Auto Scaling skips replacing instances that match the desired configuration. If no desired
+            configuration is specified, then it skips replacing instances that have the same
+            configuration that is already set on the group. The default is
+            <code>false</code>.</p>")
+  @as("SkipMatching")
+  skipMatching: option<skipMatching>,
   @ocaml.doc("<p>The amount of time, in seconds, to wait after a checkpoint before continuing. This
             property is optional, but if you specify a value for it, you must also specify a value
             for <code>CheckpointPercentages</code>. If you specify a value for
@@ -1402,67 +1482,16 @@ type refreshPreferences = {
   @as("InstanceWarmup")
   instanceWarmup: option<refreshInstanceWarmup>,
   @ocaml.doc("<p>The amount of capacity in the Auto Scaling group that must remain healthy during an instance
-            refresh to allow the operation to continue, as a percentage of the desired capacity of
-            the Auto Scaling group (rounded up to the nearest integer). The default is <code>90</code>.
-        </p>")
+            refresh to allow the operation to continue. The value is expressed as a percentage of
+            the desired capacity of the Auto Scaling group (rounded up to the nearest integer). The default
+            is <code>90</code>.</p>
+        <p>Setting the minimum healthy percentage to 100 percent limits the rate of replacement
+            to one instance at a time. In contrast, setting it to 0 percent has the effect of
+            replacing all instances at the same time. </p>")
   @as("MinHealthyPercentage")
   minHealthyPercentage: option<intPercent>,
 }
 type processes = array<processType>
-@ocaml.doc("<p>This structure specifies the metrics and target utilization settings for a predictive
-            scaling policy. </p>
-        <p>You must specify either a metric pair, or a load metric and a scaling metric
-            individually. Specifying a metric pair instead of individual metrics provides a simpler
-            way to configure metrics for a scaling policy. You choose the metric pair, and the
-            policy automatically knows the correct sum and average statistics to use for the load
-            metric and the scaling metric.</p>
-        <p>Example</p>
-        <ul>
-            <li>
-                <p>You create a predictive scaling policy and specify
-                        <code>ALBRequestCount</code> as the value for the metric pair and
-                        <code>1000.0</code> as the target value. For this type of metric, you must
-                    provide the metric dimension for the corresponding target group, so you also
-                    provide a resource label for the Application Load Balancer target group that is
-                    attached to your Auto Scaling group.</p>
-            </li>
-            <li>
-                <p>The number of requests the target group receives per minute provides the load
-                    metric, and the request count averaged between the members of the target group
-                    provides the scaling metric. In CloudWatch, this refers to the
-                        <code>RequestCount</code> and <code>RequestCountPerTarget</code> metrics,
-                    respectively.</p>
-            </li>
-            <li>
-                <p>For optimal use of predictive scaling, you adhere to the best practice of
-                    using a dynamic scaling policy to automatically scale between the minimum
-                    capacity and maximum capacity in response to real-time changes in resource
-                    utilization.</p>
-            </li>
-            <li>
-                <p>Amazon EC2 Auto Scaling consumes data points for the load metric over the last 14 days and
-                    creates an hourly load forecast for predictive scaling. (A minimum of 24 hours
-                    of data is required.)</p>
-            </li>
-            <li>
-                <p>After creating the load forecast, Amazon EC2 Auto Scaling determines when to reduce or
-                    increase the capacity of your Auto Scaling group in each hour of the forecast period so
-                    that the average number of requests received by each instance is as close to
-                    1000 requests per minute as possible at all times.</p>
-            </li>
-         </ul>")
-type predictiveScalingMetricSpecification = {
-  @ocaml.doc("<p>The load metric specification.</p>") @as("PredefinedLoadMetricSpecification")
-  predefinedLoadMetricSpecification: option<predictiveScalingPredefinedLoadMetric>,
-  @ocaml.doc("<p>The scaling metric specification.</p>") @as("PredefinedScalingMetricSpecification")
-  predefinedScalingMetricSpecification: option<predictiveScalingPredefinedScalingMetric>,
-  @ocaml.doc("<p>The metric pair specification from which Amazon EC2 Auto Scaling determines the appropriate scaling
-            metric and load metric to use.</p>")
-  @as("PredefinedMetricPairSpecification")
-  predefinedMetricPairSpecification: option<predictiveScalingPredefinedMetricPair>,
-  @ocaml.doc("<p>Specifies the target utilization.</p>") @as("TargetValue")
-  targetValue: metricScale,
-}
 type notificationConfigurations = array<notificationConfiguration>
 type metricGranularityTypes = array<metricGranularityType>
 type metricDimensions = array<metricDimension>
@@ -1471,37 +1500,231 @@ type loadBalancerTargetGroupStates = array<loadBalancerTargetGroupState>
 type loadBalancerStates = array<loadBalancerState>
 type lifecycleHooks = array<lifecycleHook>
 type lifecycleHookSpecifications = array<lifecycleHookSpecification>
-@ocaml.doc("<p>Describes an override for a launch template. The maximum number of instance types that
-            can be associated with an Auto Scaling group is 40. The maximum number of distinct launch
-            templates you can define for an Auto Scaling group is 20. For more information about configuring
-            overrides, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-override-options.html\">Configuring
-                overrides</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>. </p>")
-type launchTemplateOverrides = {
-  @ocaml.doc("<p>Provides the launch template to be used when launching the instance type. For example,
-            some instance types might require a launch template with a different AMI. If not
-            provided, Amazon EC2 Auto Scaling uses the launch template that's defined for your mixed instances
-            policy. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-launch-template-overrides.html\">Specifying a
-                different launch template for an instance type</a> in the
-                <i>Amazon EC2 Auto Scaling User Guide</i>. </p>")
-  @as("LaunchTemplateSpecification")
-  launchTemplateSpecification: option<launchTemplateSpecification>,
-  @ocaml.doc("<p>The number of capacity units provided by the specified instance type in terms of
-            virtual CPUs, memory, storage, throughput, or other relative performance characteristic.
-            When a Spot or On-Demand Instance is provisioned, the capacity units count toward the
-            desired capacity. Amazon EC2 Auto Scaling provisions instances until the desired capacity is totally
-            fulfilled, even if this results in an overage. For example, if there are 2 units
-            remaining to fulfill capacity, and Amazon EC2 Auto Scaling can only provision an instance with a
-                <code>WeightedCapacity</code> of 5 units, the instance is provisioned, and the
-            desired capacity is exceeded by 3 units. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-weighting.html\">Instance weighting for Amazon EC2 Auto Scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.
-            Value must be in the range of 1 to 999.</p>")
-  @as("WeightedCapacity")
-  weightedCapacity: option<xmlStringMaxLen32>,
-  @ocaml.doc("<p>The instance type, such as <code>m3.xlarge</code>. You must use an instance type that
-            is supported in your requested Region and Availability Zones. For more information, see
-                <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html\">Instance types</a> in the <i>Amazon Elastic Compute Cloud User
-                Guide</i>.</p>")
-  @as("InstanceType")
-  instanceType: option<xmlStringMaxLen255>,
+@ocaml.doc("<p>When you specify multiple parameters, you get instance types that satisfy all of the
+            specified parameters. If you specify multiple values for a parameter, you get instance
+            types that satisfy any of the specified values.</p>
+        
+        
+        <p>Represents requirements for the types of instances that can be launched. You
+            must specify <code>VCpuCount</code> and <code>MemoryMiB</code>, but all other parameters
+            are optional. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-instance-type-requirements.html\">Creating
+                an Auto Scaling group using attribute-based instance type selection</a> in the
+                <i>Amazon EC2 Auto Scaling User Guide</i>.</p>")
+type instanceRequirements = {
+  @ocaml.doc("<p>The minimum and maximum total memory size for the accelerators on an instance type, in
+            MiB.</p>
+        <p>Default: No minimum or maximum</p>")
+  @as("AcceleratorTotalMemoryMiB")
+  acceleratorTotalMemoryMiB: option<acceleratorTotalMemoryMiBRequest>,
+  @ocaml.doc("<p>Lists the accelerators that must be on an instance type.</p>
+        <ul>
+            <li>
+                <p>For instance types with NVIDIA A100 GPUs, specify <code>a100</code>.</p>
+            </li>
+            <li>
+                <p>For instance types with NVIDIA V100 GPUs, specify <code>v100</code>.</p>
+            </li>
+            <li>
+                <p>For instance types with NVIDIA K80 GPUs, specify <code>k80</code>.</p>
+            </li>
+            <li>
+                <p>For instance types with NVIDIA T4 GPUs, specify <code>t4</code>.</p>
+            </li>
+            <li>
+                <p>For instance types with NVIDIA M60 GPUs, specify <code>m60</code>.</p>
+            </li>
+            <li>
+                <p>For instance types with AMD Radeon Pro V520 GPUs, specify
+                        <code>radeon-pro-v520</code>.</p>
+            </li>
+            <li>
+                <p>For instance types with Xilinx VU9P FPGAs, specify <code>vu9p</code>.</p>
+            </li>
+         </ul>
+        <p>Default: Any accelerator</p>")
+  @as("AcceleratorNames")
+  acceleratorNames: option<acceleratorNames>,
+  @ocaml.doc("<p>Indicates whether instance types must have accelerators by specific
+            manufacturers.</p>
+        <ul>
+            <li>
+                <p>For instance types with NVIDIA devices, specify <code>nvidia</code>.</p>
+            </li>
+            <li>
+                <p>For instance types with AMD devices, specify <code>amd</code>.</p>
+            </li>
+            <li>
+                <p>For instance types with Amazon Web Services devices, specify
+                        <code>amazon-web-services</code>.</p>
+            </li>
+            <li>
+                <p>For instance types with Xilinx devices, specify <code>xilinx</code>.</p>
+            </li>
+         </ul>
+        <p>Default: Any manufacturer</p>")
+  @as("AcceleratorManufacturers")
+  acceleratorManufacturers: option<acceleratorManufacturers>,
+  @ocaml.doc("<p>The minimum and maximum number of accelerators (GPUs, FPGAs, or Amazon Web Services Inferentia
+            chips) for an instance type.</p>
+        <p>To exclude accelerator-enabled instance types, set <code>Max</code> to
+            <code>0</code>.</p>
+        <p>Default: No minimum or maximum</p>")
+  @as("AcceleratorCount")
+  acceleratorCount: option<acceleratorCountRequest>,
+  @ocaml.doc("<p>Lists the accelerator types that must be on an instance type.</p>
+        <ul>
+            <li>
+                <p>For instance types with GPU accelerators, specify <code>gpu</code>.</p>
+            </li>
+            <li>
+                <p>For instance types with FPGA accelerators, specify <code>fpga</code>.</p>
+            </li>
+            <li>
+                <p>For instance types with inference accelerators, specify
+                    <code>inference</code>.</p>
+            </li>
+         </ul>
+        <p>Default: Any accelerator type</p>")
+  @as("AcceleratorTypes")
+  acceleratorTypes: option<acceleratorTypes>,
+  @ocaml.doc("<p>The minimum and maximum baseline bandwidth performance for an instance type, in Mbps.
+            For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html\">Amazon EBS–optimized instances</a>
+            in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>
+        <p>Default: No minimum or maximum</p>")
+  @as("BaselineEbsBandwidthMbps")
+  baselineEbsBandwidthMbps: option<baselineEbsBandwidthMbpsRequest>,
+  @ocaml.doc("<p>The minimum and maximum total local storage size for an instance type, in GB.</p>
+        <p>Default: No minimum or maximum</p>")
+  @as("TotalLocalStorageGB")
+  totalLocalStorageGB: option<totalLocalStorageGBRequest>,
+  @ocaml.doc("<p>Indicates the type of local storage that is required.</p>
+        <ul>
+            <li>
+                <p>For instance types with hard disk drive (HDD) storage, specify
+                        <code>hdd</code>.</p>
+            </li>
+            <li>
+                <p>For instance types with solid state drive (SSD) storage, specify
+                        <code>sdd</code>.</p>
+            </li>
+         </ul>
+        <p>Default: Any local storage type</p>")
+  @as("LocalStorageTypes")
+  localStorageTypes: option<localStorageTypes>,
+  @ocaml.doc("<p>Indicates whether instance types with instance store volumes are included, excluded,
+            or required. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html\">Amazon EC2 instance store</a> in
+            the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>
+        <p>Default: <code>included</code>
+         </p>")
+  @as("LocalStorage")
+  localStorage: option<localStorage>,
+  @ocaml.doc("<p>The minimum and maximum number of network interfaces for an instance type.</p>
+        <p>Default: No minimum or maximum</p>")
+  @as("NetworkInterfaceCount")
+  networkInterfaceCount: option<networkInterfaceCountRequest>,
+  @ocaml.doc("<p>Indicates whether instance types must provide On-Demand Instance hibernation
+            support.</p>
+        <p>Default: <code>false</code>
+         </p>")
+  @as("RequireHibernateSupport")
+  requireHibernateSupport: option<nullableBoolean>,
+  @ocaml.doc("<p>Indicates whether burstable performance instance types are included, excluded, or
+            required. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html\">Burstable
+                performance instances</a> in the <i>Amazon EC2 User Guide for Linux
+                Instances</i>.</p>
+        <p>Default: <code>excluded</code>
+         </p>")
+  @as("BurstablePerformance")
+  burstablePerformance: option<burstablePerformance>,
+  @ocaml.doc("<p>Indicates whether bare metal instance types are included, excluded, or
+            required.</p>
+        <p>Default: <code>excluded</code>
+         </p>")
+  @as("BareMetal")
+  bareMetal: option<bareMetal>,
+  @ocaml.doc("<p>The price protection threshold for On-Demand Instances. This is the maximum you’ll pay
+            for an On-Demand Instance, expressed as a percentage higher than the cheapest M, C, or R
+            instance type with your specified attributes. When Amazon EC2 Auto Scaling selects instance types with
+            your attributes, we will exclude instance types whose price is higher than your
+            threshold. The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage.
+            To turn off price protection, specify a high value, such as <code>999999</code>. </p>
+        <p>If you set <code>DesiredCapacityType</code> to <code>vcpu</code> or
+                <code>memory-mib</code>, the price protection threshold is applied based on the per
+            vCPU or per memory price instead of the per instance price. </p>
+        <p>Default: <code>20</code>
+         </p>")
+  @as("OnDemandMaxPricePercentageOverLowestPrice")
+  onDemandMaxPricePercentageOverLowestPrice: option<nullablePositiveInteger>,
+  @ocaml.doc("<p>The price protection threshold for Spot Instances. This is the maximum you’ll pay for
+            a Spot Instance, expressed as a percentage higher than the cheapest M, C, or R instance
+            type with your specified attributes. When Amazon EC2 Auto Scaling selects instance types with your
+            attributes, we will exclude instance types whose price is higher than your threshold.
+            The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage. To turn off
+            price protection, specify a high value, such as <code>999999</code>. </p>
+        <p>If you set <code>DesiredCapacityType</code> to <code>vcpu</code> or
+                <code>memory-mib</code>, the price protection threshold is applied based on the per
+            vCPU or per memory price instead of the per instance price. </p>
+        <p>Default: <code>100</code>
+         </p>")
+  @as("SpotMaxPricePercentageOverLowestPrice")
+  spotMaxPricePercentageOverLowestPrice: option<nullablePositiveInteger>,
+  @ocaml.doc("<p>Indicates whether current or previous generation instance types are included.</p>
+        <ul>
+            <li>
+                <p>For current generation instance types, specify <code>current</code>. The
+                    current generation includes EC2 instance types currently recommended for use.
+                    This typically includes the latest two to three generations in each instance
+                    family. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html\">Instance types</a> in
+                    the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>
+            </li>
+            <li>
+                <p>For previous generation instance types, specify <code>previous</code>.</p>
+            </li>
+         </ul>
+        <p>Default: Any current or previous generation</p>")
+  @as("InstanceGenerations")
+  instanceGenerations: option<instanceGenerations>,
+  @ocaml.doc("<p>Lists which instance types to exclude. You can use strings with one or more wild
+            cards, represented by an asterisk (<code>*</code>). The following are examples:
+                <code>c5*</code>, <code>m5a.*</code>, <code>r*</code>, <code>*3*</code>. </p>
+        <p>For example, if you specify <code>c5*</code>, you are excluding the entire C5 instance
+            family, which includes all C5a and C5n instance types. If you specify
+            <code>m5a.*</code>, you are excluding all the M5a instance types, but not the M5n
+            instance types.</p>
+        <p>Default: No excluded instance types</p>")
+  @as("ExcludedInstanceTypes")
+  excludedInstanceTypes: option<excludedInstanceTypes>,
+  @ocaml.doc("<p>The minimum and maximum amount of memory per vCPU for an instance type, in GiB.</p>
+        <p>Default: No minimum or maximum</p>")
+  @as("MemoryGiBPerVCpu")
+  memoryGiBPerVCpu: option<memoryGiBPerVCpuRequest>,
+  @ocaml.doc("<p>Lists which specific CPU manufacturers to include.</p>
+        <ul>
+            <li>
+                <p>For instance types with Intel CPUs, specify <code>intel</code>.</p>
+            </li>
+            <li>
+                <p>For instance types with AMD CPUs, specify <code>amd</code>.</p>
+            </li>
+            <li>
+                <p>For instance types with Amazon Web Services CPUs, specify
+                    <code>amazon-web-services</code>.</p>
+            </li>
+         </ul>
+        <note>
+            <p>Don't confuse the CPU hardware manufacturer with the CPU hardware architecture.
+                Instances will be launched with a compatible CPU architecture based on the Amazon
+                Machine Image (AMI) that you specify in your launch template. </p>
+        </note>
+        <p>Default: Any manufacturer</p>")
+  @as("CpuManufacturers")
+  cpuManufacturers: option<cpuManufacturers>,
+  @ocaml.doc("<p>The minimum and maximum instance memory size for an instance type, in MiB.</p>")
+  @as("MemoryMiB")
+  memoryMiB: memoryMiBRequest,
+  @ocaml.doc("<p>The minimum and maximum number of vCPUs for an instance type.</p>")
+  @as("VCpuCount")
+  vcpuCount: vcpuCountRequest,
 }
 @ocaml.doc("<p>Reports the progress of an instance refresh on an Auto Scaling group that has a warm pool.
             This includes separate details for instances in the warm pool and instances in the Auto Scaling
@@ -1549,15 +1772,76 @@ type instance = {
   instanceType: option<xmlStringMaxLen255>,
   @ocaml.doc("<p>The ID of the instance.</p>") @as("InstanceId") instanceId: xmlStringMaxLen19,
 }
-@ocaml.doc("<p>Describes a filter that is used to return a more specific list of results when
-            describing tags.</p>
+@ocaml.doc("<p>Describes a filter that is used to return a more specific list of results from a
+            describe operation.</p>
+        <p>If you specify multiple filters, the filters are automatically logically joined with
+            an <code>AND</code>, and the request returns only the results that match all of the
+            specified filters. </p>
         <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-tagging.html\">Tagging Auto Scaling groups and
                 instances</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>")
 type filter = {
-  @ocaml.doc("<p>One or more filter values. Filter values are case-sensitive.</p>") @as("Values")
+  @ocaml.doc("<p>One or more filter values. Filter values are case-sensitive. </p>
+        <p>If you specify multiple values for a filter, the values are automatically logically
+            joined with an <code>OR</code>, and the request returns all results that match any of
+            the specified values. For example, specify \"tag:environment\" for the filter name and
+            \"production,development\" for the filter values to find Auto Scaling groups with the tag
+            \"environment=production\" or \"environment=development\".</p>")
+  @as("Values")
   values: option<values>,
-  @ocaml.doc("<p>The name of the filter. The valid values are: <code>auto-scaling-group</code>,
-                <code>key</code>, <code>value</code>, and <code>propagate-at-launch</code>.</p>")
+  @ocaml.doc("<p>The name of the filter.</p>
+        <p>The valid values for <code>Name</code> depend on which API operation you're using with
+            the filter (<a>DescribeAutoScalingGroups</a> or <a>DescribeTags</a>).</p>
+        <p>
+            <b>DescribeAutoScalingGroups</b>
+         </p>
+        <p>Valid values for <code>Name</code> include the following: </p>
+        <ul>
+            <li>
+                <p>
+                  <code>tag-key</code> - Accepts tag keys. The results only include information
+                    about the Auto Scaling groups associated with these tag keys. </p>
+            </li>
+            <li>
+                <p>
+                  <code>tag-value</code> - Accepts tag values. The results only include
+                    information about the Auto Scaling groups associated with these tag values. </p>
+            </li>
+            <li>
+                <p>
+                  <code>tag:<key></code> - Accepts the key/value combination of the tag.
+                    Use the tag key in the filter name and the tag value as the filter value. The
+                    results only include information about the Auto Scaling groups associated with the
+                    specified key/value combination. </p>
+            </li>
+         </ul>
+        <p>
+            <b>DescribeTags</b>
+        </p>
+        <p>Valid values for <code>Name</code> include the following: </p>
+        <ul>
+            <li>
+                <p>
+                  <code>auto-scaling-group</code> - Accepts the names of Auto Scaling groups. The
+                    results only include information about the tags associated with these Auto Scaling
+                    groups. </p>
+            </li>
+            <li>
+                <p>
+                  <code>key</code> - Accepts tag keys. The results only include information
+                    about the tags associated with these tag keys. </p>
+            </li>
+            <li>
+                <p>
+                    <code>value</code> - Accepts tag values. The results only include information
+                    about the tags associated with these tag values. </p>
+            </li>
+            <li>
+                <p>
+                  <code>propagate-at-launch</code> - Accepts a Boolean value, which specifies
+                    whether tags propagate to instances at launch. The results only include
+                    information about the tags associated with the specified Boolean value. </p>
+            </li>
+         </ul>")
   @as("Name")
   name: option<xmlString>,
 }
@@ -1569,7 +1853,7 @@ type enabledMetrics = array<enabledMetric>
 type capacityForecast = {
   @ocaml.doc("<p>The values of the data points.</p>") @as("Values")
   values: predictiveScalingForecastValues,
-  @ocaml.doc("<p>The time stamps for the data points, in UTC format.</p>") @as("Timestamps")
+  @ocaml.doc("<p>The timestamps for the data points, in UTC format.</p>") @as("Timestamps")
   timestamps: predictiveScalingForecastTimestamps,
 }
 @ocaml.doc("<p>Describes a block device mapping.</p>")
@@ -1648,81 +1932,60 @@ type autoScalingInstanceDetails = {
 type alarms = array<alarm>
 type adjustmentTypes = array<adjustmentType>
 type activities = array<activity>
-type predictiveScalingMetricSpecifications = array<predictiveScalingMetricSpecification>
-type overrides = array<launchTemplateOverrides>
-@ocaml.doc("<p>A <code>GetPredictiveScalingForecast</code> call returns the load forecast for a
-            predictive scaling policy. This structure includes the data points for that load
-            forecast, along with the timestamps of those data points and the metric specification.
-        </p>")
-type loadForecast = {
-  @ocaml.doc("<p>The metric specification for the load forecast.</p>") @as("MetricSpecification")
-  metricSpecification: predictiveScalingMetricSpecification,
-  @ocaml.doc("<p>The values of the data points.</p>") @as("Values")
-  values: predictiveScalingForecastValues,
-  @ocaml.doc("<p>The time stamps for the data points, in UTC format.</p>") @as("Timestamps")
-  timestamps: predictiveScalingForecastTimestamps,
+@ocaml.doc("<p>Represents a specific metric. </p>")
+type metric = {
+  @ocaml.doc("<p>The dimensions for the metric. For the list of available dimensions, see the Amazon Web Services
+            documentation available from the table in <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/aws-services-cloudwatch-metrics.html\">Amazon Web Services
+                services that publish CloudWatch metrics </a> in the <i>Amazon CloudWatch User
+                Guide</i>. </p>
+        <p>Conditional: If you published your metric with dimensions, you must specify the same
+            dimensions in your scaling policy.</p>")
+  @as("Dimensions")
+  dimensions: option<metricDimensions>,
+  @ocaml.doc("<p>The name of the metric.</p>") @as("MetricName") metricName: metricName,
+  @ocaml.doc("<p>The namespace of the metric. For more information, see the table in <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/aws-services-cloudwatch-metrics.html\">Amazon Web Services
+                services that publish CloudWatch metrics </a> in the <i>Amazon CloudWatch User
+                Guide</i>.</p>")
+  @as("Namespace")
+  namespace: metricNamespace,
+}
+@ocaml.doc(
+  "<p>Describes an override for a launch template. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-configuring-overrides.html\">Configuring overrides</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>. </p>"
+)
+type launchTemplateOverrides = {
+  @ocaml.doc("<p>The instance requirements. When you specify instance requirements, Amazon EC2 Auto Scaling finds
+            instance types that satisfy your requirements, and then uses your On-Demand and Spot
+            allocation strategies to launch instances from these instance types, in the same way as
+            when you specify a list of specific instance types. </p>")
+  @as("InstanceRequirements")
+  instanceRequirements: option<instanceRequirements>,
+  @ocaml.doc("<p>Provides a launch template for the specified instance type or instance requirements.
+            For example, some instance types might require a launch template with a different AMI.
+            If not provided, Amazon EC2 Auto Scaling uses the launch template that's defined for your mixed
+            instances policy. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-mixed-instances-groups-launch-template-overrides.html\">Specifying a different launch template for an instance type</a> in the
+                <i>Amazon EC2 Auto Scaling User Guide</i>. </p>")
+  @as("LaunchTemplateSpecification")
+  launchTemplateSpecification: option<launchTemplateSpecification>,
+  @ocaml.doc("<p>The number of capacity units provided by the instance type specified in
+                <code>InstanceType</code> in terms of virtual CPUs, memory, storage, throughput, or
+            other relative performance characteristic. When a Spot or On-Demand Instance is
+            launched, the capacity units count toward the desired capacity. Amazon EC2 Auto Scaling launches
+            instances until the desired capacity is totally fulfilled, even if this results in an
+            overage. For example, if there are two units remaining to fulfill capacity, and Amazon EC2 Auto Scaling
+            can only launch an instance with a <code>WeightedCapacity</code> of five units, the
+            instance is launched, and the desired capacity is exceeded by three units. For more
+            information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-mixed-instances-groups-instance-weighting.html\">Configuring instance weighting for Amazon EC2 Auto Scaling</a> in the
+                <i>Amazon EC2 Auto Scaling User Guide</i>. Value must be in the range of 1–999.</p>")
+  @as("WeightedCapacity")
+  weightedCapacity: option<xmlStringMaxLen32>,
+  @ocaml.doc("<p>The instance type, such as <code>m3.xlarge</code>. You must use an instance type that
+            is supported in your requested Region and Availability Zones. For more information, see
+                <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html\">Instance types</a> in the <i>Amazon Elastic Compute Cloud User
+                Guide</i>.</p>")
+  @as("InstanceType")
+  instanceType: option<xmlStringMaxLen255>,
 }
 type instances = array<instance>
-@ocaml.doc("<p>Describes an instance refresh for an Auto Scaling group. </p>")
-type instanceRefresh = {
-  @ocaml.doc("<p>Additional progress details for an Auto Scaling group that has a warm pool.</p>")
-  @as("ProgressDetails")
-  progressDetails: option<instanceRefreshProgressDetails>,
-  @ocaml.doc("<p>The number of instances remaining to update before the instance refresh is
-            complete.</p>")
-  @as("InstancesToUpdate")
-  instancesToUpdate: option<instancesToUpdate>,
-  @ocaml.doc("<p>The percentage of the instance refresh that is complete. For each instance
-            replacement, Amazon EC2 Auto Scaling tracks the instance's health status and warm-up time. When the
-            instance's health status changes to healthy and the specified warm-up time passes, the
-            instance is considered updated and is added to the percentage complete.</p>")
-  @as("PercentageComplete")
-  percentageComplete: option<intPercent>,
-  @ocaml.doc("<p>The date and time at which the instance refresh ended.</p>") @as("EndTime")
-  endTime: option<timestampType>,
-  @ocaml.doc("<p>The date and time at which the instance refresh began.</p>") @as("StartTime")
-  startTime: option<timestampType>,
-  @ocaml.doc("<p>Provides more details about the current status of the instance refresh. </p>")
-  @as("StatusReason")
-  statusReason: option<xmlStringMaxLen1023>,
-  @ocaml.doc("<p>The current status for the instance refresh operation:</p>
-        <ul>
-            <li>
-                <p>
-                  <code>Pending</code> - The request was created, but the operation has not
-                    started.</p>
-            </li>
-            <li>
-                <p>
-                  <code>InProgress</code> - The operation is in progress.</p>
-            </li>
-            <li>
-                <p>
-                  <code>Successful</code> - The operation completed successfully.</p>
-            </li>
-            <li>
-                <p>
-                  <code>Failed</code> - The operation failed to complete. You can troubleshoot
-                    using the status reason and the scaling activities. </p>
-            </li>
-            <li>
-                <p>
-                  <code>Cancelling</code> - An ongoing operation is being cancelled.
-                    Cancellation does not roll back any replacements that have already been
-                    completed, but it prevents new replacements from being started. </p>
-            </li>
-            <li>
-                <p>
-                  <code>Cancelled</code> - The operation is cancelled. </p>
-            </li>
-         </ul>")
-  @as("Status")
-  status: option<instanceRefreshStatus>,
-  @ocaml.doc("<p>The name of the Auto Scaling group.</p>") @as("AutoScalingGroupName")
-  autoScalingGroupName: option<xmlStringMaxLen255>,
-  @ocaml.doc("<p>The instance refresh ID.</p>") @as("InstanceRefreshId")
-  instanceRefreshId: option<xmlStringMaxLen255>,
-}
 type filters = array<filter>
 @ocaml.doc("<p>Represents a CloudWatch metric of your choosing for a target tracking scaling policy to use
             with Amazon EC2 Auto Scaling.</p>
@@ -1732,7 +1995,7 @@ type filters = array<filter>
                 <p>Add values for each required parameter from CloudWatch. You can use an existing
                     metric, or a new metric that you create. To use your own metric, you must first
                     publish the metric to CloudWatch. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html\">Publish
-                        Custom Metrics</a> in the <i>Amazon CloudWatch User
+                        custom metrics</a> in the <i>Amazon CloudWatch User
                     Guide</i>.</p>
             </li>
             <li>
@@ -1742,10 +2005,19 @@ type filters = array<filter>
                     increases.</p>
             </li>
          </ul>
-        <p>For more information about CloudWatch, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html\">Amazon CloudWatch
-                Concepts</a>.</p>")
+        <p>For more information about the CloudWatch terminology below, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html\">Amazon CloudWatch
+                concepts</a>.</p>
+        <note>
+            <p>Each individual service provides information about the metrics, namespace, and
+                dimensions they use. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/aws-services-cloudwatch-metrics.html\">Amazon Web Services services that publish CloudWatch metrics</a> in the <i>Amazon CloudWatch User
+                    Guide</i>.</p>
+        </note>")
 type customizedMetricSpecification = {
-  @ocaml.doc("<p>The unit of the metric.</p>") @as("Unit") unit_: option<metricUnit>,
+  @ocaml.doc("<p>The unit of the metric. For a complete list of the units that CloudWatch supports, see the
+                <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html\">MetricDatum</a>
+            data type in the <i>Amazon CloudWatch API Reference</i>.</p>")
+  @as("Unit")
+  unit_: option<metricUnit>,
   @ocaml.doc("<p>The statistic of the metric.</p>") @as("Statistic") statistic: metricStatistic,
   @ocaml.doc("<p>The dimensions of the metric.</p>
         <p>Conditional: If you published your metric with dimensions, you must specify the same
@@ -1753,7 +2025,11 @@ type customizedMetricSpecification = {
   @as("Dimensions")
   dimensions: option<metricDimensions>,
   @ocaml.doc("<p>The namespace of the metric.</p>") @as("Namespace") namespace: metricNamespace,
-  @ocaml.doc("<p>The name of the metric.</p>") @as("MetricName") metricName: metricName,
+  @ocaml.doc("<p>The name of the metric. To get the exact metric name, namespace, and dimensions,
+            inspect the <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_Metric.html\">Metric</a> object
+            that is returned by a call to <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html\">ListMetrics</a>.</p>")
+  @as("MetricName")
+  metricName: metricName,
 }
 type blockDeviceMappings = array<blockDeviceMapping>
 type autoScalingInstances = array<autoScalingInstanceDetails>
@@ -1767,7 +2043,16 @@ type targetTrackingConfiguration = {
             the Auto Scaling group. The default is <code>false</code>.</p>")
   @as("DisableScaleIn")
   disableScaleIn: option<disableScaleIn>,
-  @ocaml.doc("<p>The target value for the metric.</p>") @as("TargetValue") targetValue: metricScale,
+  @ocaml.doc("<p>The target value for the metric.</p>
+        <note>
+            <p>Some metrics are based on a count instead of a percentage, such as the request
+                count for an Application Load Balancer or the number of messages in an SQS queue. If the scaling policy
+                specifies one of these metrics, specify the target utilization as the optimal
+                average request or message count per instance during any one-minute interval.
+            </p>
+        </note>")
+  @as("TargetValue")
+  targetValue: metricScale,
   @ocaml.doc("<p>A customized metric. You must specify either a predefined metric or a customized
             metric.</p>")
   @as("CustomizedMetricSpecification")
@@ -1777,78 +2062,28 @@ type targetTrackingConfiguration = {
   @as("PredefinedMetricSpecification")
   predefinedMetricSpecification: option<predefinedMetricSpecification>,
 }
-@ocaml.doc(
-  "<p>Represents a predictive scaling policy configuration to use with Amazon EC2 Auto Scaling.</p>"
-)
-type predictiveScalingConfiguration = {
-  @ocaml.doc("<p>The size of the capacity buffer to use when the forecast capacity is close to or
-            exceeds the maximum capacity. The value is specified as a percentage relative to the
-            forecast capacity. For example, if the buffer is 10, this means a 10 percent buffer,
-            such that if the forecast capacity is 50, and the maximum capacity is 40, then the
-            effective maximum capacity is 55.</p>
-        <p>If set to 0, Amazon EC2 Auto Scaling may scale capacity higher than the maximum capacity to equal but
-            not exceed forecast capacity. </p>
-        <p>Required if the <code>MaxCapacityBreachBehavior</code> property is set to
-                <code>IncreaseMaxCapacity</code>, and cannot be used otherwise.</p>")
-  @as("MaxCapacityBuffer")
-  maxCapacityBuffer: option<predictiveScalingMaxCapacityBuffer>,
-  @ocaml.doc("<p>Defines the behavior that should be applied if the forecast capacity approaches or
-            exceeds the maximum capacity of the Auto Scaling group. Defaults to
-                <code>HonorMaxCapacity</code> if not specified.</p>
-        <p>The following are possible values:</p>
-        <ul>
-            <li>
-                <p>
-                  <code>HonorMaxCapacity</code> - Amazon EC2 Auto Scaling cannot scale out capacity higher than
-                    the maximum capacity. The maximum capacity is enforced as a hard limit. </p>
-            </li>
-            <li>
-                <p>
-                  <code>IncreaseMaxCapacity</code> - Amazon EC2 Auto Scaling can scale out capacity higher than
-                    the maximum capacity when the forecast capacity is close to or exceeds the
-                    maximum capacity. The upper limit is determined by the forecasted capacity and
-                    the value for <code>MaxCapacityBuffer</code>.</p>
-            </li>
-         </ul>")
-  @as("MaxCapacityBreachBehavior")
-  maxCapacityBreachBehavior: option<predictiveScalingMaxCapacityBreachBehavior>,
-  @ocaml.doc("<p>The amount of time, in seconds, by which the instance launch time can be advanced. For
-            example, the forecast says to add capacity at 10:00 AM, and you choose to pre-launch
-            instances by 5 minutes. In that case, the instances will be launched at 9:55 AM. The
-            intention is to give resources time to be provisioned. It can take a few minutes to
-            launch an EC2 instance. The actual amount of time required depends on several factors,
-            such as the size of the instance and whether there are startup scripts to complete. </p>
-        <p>The value must be less than the forecast interval duration of 3600 seconds (60
-            minutes). Defaults to 300 seconds if not specified. </p>")
-  @as("SchedulingBufferTime")
-  schedulingBufferTime: option<predictiveScalingSchedulingBufferTime>,
-  @ocaml.doc("<p>The predictive scaling mode. Defaults to <code>ForecastOnly</code> if not
-            specified.</p>")
-  @as("Mode")
-  mode: option<predictiveScalingMode>,
-  @ocaml.doc("<p>This structure includes the metrics and target utilization to use for predictive
-            scaling. </p>
-        <p>This is an array, but we currently only support a single metric specification. That
-            is, you can specify a target value and a single metric pair, or a target value and one
-            scaling metric and one load metric.</p>")
-  @as("MetricSpecifications")
-  metricSpecifications: predictiveScalingMetricSpecifications,
-}
-type loadForecasts = array<loadForecast>
-@ocaml.doc("<p>Describes a launch template and overrides. </p>
-        <p>You specify these properties as part of a mixed instances policy. </p>
-        <p>When you update the launch template or overrides, existing Amazon EC2 instances continue to
-            run. When scale out occurs, Amazon EC2 Auto Scaling launches instances to match the new settings. When
-            scale in occurs, Amazon EC2 Auto Scaling terminates instances according to the group's termination
-            policies.</p>")
-type launchTemplate = {
-  @ocaml.doc("<p>Any properties that you specify override the same properties in the launch template.
-            If not provided, Amazon EC2 Auto Scaling uses the instance type specified in the launch template when
-            it launches an instance. </p>")
-  @as("Overrides")
-  overrides: option<overrides>,
-  @ocaml.doc("<p>The launch template to use.</p>") @as("LaunchTemplateSpecification")
-  launchTemplateSpecification: option<launchTemplateSpecification>,
+type overrides = array<launchTemplateOverrides>
+@ocaml.doc("<p>This structure defines the CloudWatch metric to return, along with the statistic, period,
+            and unit.</p>
+        
+        <p>For more information about the CloudWatch terminology below, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html\">Amazon CloudWatch
+                concepts</a> in the <i>Amazon CloudWatch User Guide</i>.</p>")
+type metricStat = {
+  @ocaml.doc("<p>The unit to use for the returned data points. For a complete list of the units that
+            CloudWatch supports, see the <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html\">MetricDatum</a>
+            data type in the <i>Amazon CloudWatch API Reference</i>.</p>")
+  @as("Unit")
+  unit_: option<metricUnit>,
+  @ocaml.doc("<p>The statistic to return. It can include any CloudWatch statistic or extended statistic. For
+            a list of valid values, see the table in <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic\">Statistics</a> in the <i>Amazon CloudWatch User Guide</i>.</p>
+        <p>The most commonly used metrics for predictive scaling are <code>Average</code> and
+                <code>Sum</code>.</p>")
+  @as("Stat")
+  stat: xmlStringMetricStat,
+  @ocaml.doc("<p>The CloudWatch metric to return, including the metric name, namespace, and dimensions. To
+            get the exact metric name, namespace, and dimensions, inspect the <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_Metric.html\">Metric</a> object that is returned by a call to <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html\">ListMetrics</a>.</p>")
+  @as("Metric")
+  metric: metric,
 }
 @ocaml.doc("<p>Describes a launch configuration.</p>")
 type launchConfiguration = {
@@ -1951,7 +2186,419 @@ type launchConfiguration = {
   @ocaml.doc("<p>The name of the launch configuration.</p>") @as("LaunchConfigurationName")
   launchConfigurationName: xmlStringMaxLen255,
 }
+@ocaml.doc("<p>The metric data to return. Also defines whether this call is returning data for one
+            metric only, or whether it is performing a math expression on the values of returned
+            metric statistics to create a new time series. A time series is a series of data points,
+            each of which is associated with a timestamp.</p>
+        
+        
+        <p>For more information and examples, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/predictive-scaling-customized-metric-specification.html\">Advanced predictive scaling policy configurations using custom metrics</a> in
+            the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>")
+type metricDataQuery = {
+  @ocaml.doc("<p>Indicates whether to return the timestamps and raw data values of this metric. </p>
+        <p>If you use any math expressions, specify <code>true</code> for this value for only the
+            final math expression that the metric specification is based on. You must specify
+                <code>false</code> for <code>ReturnData</code> for all the other metrics and
+            expressions used in the metric specification.</p>
+        <p>If you are only retrieving metrics and not performing any math expressions, do not
+            specify anything for <code>ReturnData</code>. This sets it to its default
+                (<code>true</code>).</p>")
+  @as("ReturnData")
+  returnData: option<returnData>,
+  @ocaml.doc("<p>A human-readable label for this metric or expression. This is especially useful if
+            this is a math expression, so that you know what the value represents.</p>")
+  @as("Label")
+  label: option<xmlStringMetricLabel>,
+  @ocaml.doc("<p>Information about the metric data to return.</p>
+        <p>Conditional: Within each <code>MetricDataQuery</code> object, you must specify either
+                <code>Expression</code> or <code>MetricStat</code>, but not both.</p>")
+  @as("MetricStat")
+  metricStat: option<metricStat>,
+  @ocaml.doc("<p>The math expression to perform on the returned data, if this object is performing a
+            math expression. This expression can use the <code>Id</code> of the other metrics to
+            refer to those metrics, and can also use the <code>Id</code> of other expressions to use
+            the result of those expressions. </p>
+        <p>Conditional: Within each <code>MetricDataQuery</code> object, you must specify either
+                <code>Expression</code> or <code>MetricStat</code>, but not both.</p>")
+  @as("Expression")
+  expression: option<xmlStringMaxLen1023>,
+  @ocaml.doc("<p>A short name that identifies the object's results in the response. This name must be
+            unique among all <code>MetricDataQuery</code> objects specified for a single scaling
+            policy. If you are performing math expressions on this set of data, this name represents
+            that data and can serve as a variable in the mathematical expression. The valid
+            characters are letters, numbers, and underscores. The first character must be a
+            lowercase letter. </p>")
+  @as("Id")
+  id: xmlStringMaxLen255,
+}
+@ocaml.doc("<p>Describes a launch template and overrides. You specify these properties as part of a
+            mixed instances policy. </p>")
+type launchTemplate = {
+  @ocaml.doc("<p>Any properties that you specify override the same properties in the launch template.
+            If not provided, Amazon EC2 Auto Scaling uses the instance type or instance type requirements specified
+            in the launch template when it launches an instance.</p>
+        <p>The overrides can include either one or more instance types or a set of instance
+            requirements, but not both.</p>")
+  @as("Overrides")
+  overrides: option<overrides>,
+  @ocaml.doc("<p>The launch template to use.</p>") @as("LaunchTemplateSpecification")
+  launchTemplateSpecification: option<launchTemplateSpecification>,
+}
+type launchConfigurations = array<launchConfiguration>
+@ocaml.doc("<p>Describes a mixed instances policy. A mixed instances policy contains the instance
+            types that Amazon EC2 Auto Scaling can launch and other information that Amazon EC2 Auto Scaling can use to launch
+            instances and help optimize your costs. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-mixed-instances-groups.html\">Auto Scaling
+                groups with multiple instance types and purchase options</a> in the
+                <i>Amazon EC2 Auto Scaling User Guide</i>.</p>")
+type mixedInstancesPolicy = {
+  @ocaml.doc("<p>Specifies the instances distribution.</p>") @as("InstancesDistribution")
+  instancesDistribution: option<instancesDistribution>,
+  @ocaml.doc("<p>Specifies the launch template to use and the instance types (overrides) that are used
+            to launch EC2 instances to fulfill On-Demand and Spot capacities. Required when creating
+            a mixed instances policy.</p>")
+  @as("LaunchTemplate")
+  launchTemplate: option<launchTemplate>,
+}
+type metricDataQueries = array<metricDataQuery>
+@ocaml.doc("<p>Describes a custom scaling metric for a predictive scaling policy.</p>")
+type predictiveScalingCustomizedScalingMetric = {
+  @ocaml.doc("<p>One or more metric data queries to provide the data points for a scaling metric. Use
+            multiple metric data queries only if you are performing a math expression on returned
+            data. </p>")
+  @as("MetricDataQueries")
+  metricDataQueries: metricDataQueries,
+}
+@ocaml.doc("<p>Describes a custom load metric for a predictive scaling policy.</p>")
+type predictiveScalingCustomizedLoadMetric = {
+  @ocaml.doc("<p>One or more metric data queries to provide the data points for a load metric. Use
+            multiple metric data queries only if you are performing a math expression on returned
+            data. </p>")
+  @as("MetricDataQueries")
+  metricDataQueries: metricDataQueries,
+}
+@ocaml.doc("<p>Describes a customized capacity metric for a predictive scaling policy.</p>")
+type predictiveScalingCustomizedCapacityMetric = {
+  @ocaml.doc("<p>One or more metric data queries to provide the data points for a capacity metric. Use
+            multiple metric data queries only if you are performing a math expression on returned
+            data. </p>")
+  @as("MetricDataQueries")
+  metricDataQueries: metricDataQueries,
+}
+@ocaml.doc("<p>Describes the desired configuration for an instance refresh. </p>
+        <p>If you specify a desired configuration, you must specify either a
+                <code>LaunchTemplate</code> or a <code>MixedInstancesPolicy</code>. </p>")
+type desiredConfiguration = {
+  @as("MixedInstancesPolicy") mixedInstancesPolicy: option<mixedInstancesPolicy>,
+  @as("LaunchTemplate") launchTemplate: option<launchTemplateSpecification>,
+}
+@ocaml.doc("<p>Describes an Auto Scaling group.</p>")
+type autoScalingGroup = {
+  @ocaml.doc("<p>The unit of measurement for the value specified for desired capacity. Amazon EC2 Auto Scaling
+            supports <code>DesiredCapacityType</code> for attribute-based instance type selection
+            only. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-instance-type-requirements.html\">Creating
+                an Auto Scaling group using attribute-based instance type selection</a> in the
+                <i>Amazon EC2 Auto Scaling User Guide</i>.</p>
+        <p>By default, Amazon EC2 Auto Scaling specifies <code>units</code>, which translates into number of
+            instances.</p>
+        <p>Valid values: <code>units</code> | <code>vcpu</code> | <code>memory-mib</code>
+         </p>")
+  @as("DesiredCapacityType")
+  desiredCapacityType: option<xmlStringMaxLen255>,
+  @ocaml.doc("<p>Reserved.</p>") @as("Context") context: option<context>,
+  @ocaml.doc("<p>The current size of the warm pool.</p>") @as("WarmPoolSize")
+  warmPoolSize: option<warmPoolSize>,
+  @ocaml.doc("<p>The warm pool for the group.</p>") @as("WarmPoolConfiguration")
+  warmPoolConfiguration: option<warmPoolConfiguration>,
+  @ocaml.doc("<p>Indicates whether Capacity Rebalancing is enabled.</p>") @as("CapacityRebalance")
+  capacityRebalance: option<capacityRebalanceEnabled>,
+  @ocaml.doc("<p>The maximum amount of time, in seconds, that an instance can be in service.</p>
+        <p>Valid Range: Minimum value of 0.</p>")
+  @as("MaxInstanceLifetime")
+  maxInstanceLifetime: option<maxInstanceLifetime>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the service-linked role that the Auto Scaling group uses to
+            call other Amazon Web Services on your behalf.</p>")
+  @as("ServiceLinkedRoleARN")
+  serviceLinkedRoleARN: option<resourceName>,
+  @ocaml.doc("<p>Indicates whether newly launched instances are protected from termination by Amazon EC2 Auto Scaling
+            when scaling in.</p>")
+  @as("NewInstancesProtectedFromScaleIn")
+  newInstancesProtectedFromScaleIn: option<instanceProtected>,
+  @ocaml.doc("<p>The termination policies for the group.</p>") @as("TerminationPolicies")
+  terminationPolicies: option<terminationPolicies>,
+  @ocaml.doc("<p>The tags for the group.</p>") @as("Tags") tags: option<tagDescriptionList>,
+  @ocaml.doc("<p>The current state of the group when the <a>DeleteAutoScalingGroup</a>
+            operation is in progress.</p>")
+  @as("Status")
+  status: option<xmlStringMaxLen255>,
+  @ocaml.doc("<p>The metrics enabled for the group.</p>") @as("EnabledMetrics")
+  enabledMetrics: option<enabledMetrics>,
+  @ocaml.doc("<p>One or more subnet IDs, if applicable, separated by commas.</p>")
+  @as("VPCZoneIdentifier")
+  vpczoneIdentifier: option<xmlStringMaxLen2047>,
+  @ocaml.doc("<p>The name of the placement group into which to launch your instances, if any.</p>")
+  @as("PlacementGroup")
+  placementGroup: option<xmlStringMaxLen255>,
+  @ocaml.doc("<p>The suspended processes associated with the group.</p>") @as("SuspendedProcesses")
+  suspendedProcesses: option<suspendedProcesses>,
+  @ocaml.doc("<p>The date and time the group was created.</p>") @as("CreatedTime")
+  createdTime: timestampType,
+  @ocaml.doc("<p>The EC2 instances associated with the group.</p>") @as("Instances")
+  instances: option<instances>,
+  @ocaml.doc("<p>The amount of time, in seconds, that Amazon EC2 Auto Scaling waits before checking the health status
+            of an EC2 instance that has come into service and marking it unhealthy due to a failed
+            health check.</p>")
+  @as("HealthCheckGracePeriod")
+  healthCheckGracePeriod: option<healthCheckGracePeriod>,
+  @ocaml.doc("<p>The service to use for the health checks. The valid values are <code>EC2</code> and
+                <code>ELB</code>. If you configure an Auto Scaling group to use <code>ELB</code> health
+            checks, it considers the instance unhealthy if it fails either the EC2 status checks or
+            the load balancer health checks.</p>")
+  @as("HealthCheckType")
+  healthCheckType: xmlStringMaxLen32,
+  @ocaml.doc("<p>The Amazon Resource Names (ARN) of the target groups for your load balancer.</p>")
+  @as("TargetGroupARNs")
+  targetGroupARNs: option<targetGroupARNs>,
+  @ocaml.doc("<p>One or more load balancers associated with the group.</p>")
+  @as("LoadBalancerNames")
+  loadBalancerNames: option<loadBalancerNames>,
+  @ocaml.doc("<p>One or more Availability Zones for the group.</p>") @as("AvailabilityZones")
+  availabilityZones: availabilityZones,
+  @ocaml.doc("<p>The duration of the default cooldown period, in seconds.</p>")
+  @as("DefaultCooldown")
+  defaultCooldown: cooldown,
+  @ocaml.doc("<p>The predicted capacity of the group when it has a predictive scaling policy.</p>")
+  @as("PredictedCapacity")
+  predictedCapacity: option<autoScalingGroupPredictedCapacity>,
+  @ocaml.doc("<p>The desired size of the group.</p>") @as("DesiredCapacity")
+  desiredCapacity: autoScalingGroupDesiredCapacity,
+  @ocaml.doc("<p>The maximum size of the group.</p>") @as("MaxSize")
+  maxSize: autoScalingGroupMaxSize,
+  @ocaml.doc("<p>The minimum size of the group.</p>") @as("MinSize")
+  minSize: autoScalingGroupMinSize,
+  @ocaml.doc("<p>The mixed instances policy for the group.</p>") @as("MixedInstancesPolicy")
+  mixedInstancesPolicy: option<mixedInstancesPolicy>,
+  @ocaml.doc("<p>The launch template for the group.</p>") @as("LaunchTemplate")
+  launchTemplate: option<launchTemplateSpecification>,
+  @ocaml.doc("<p>The name of the associated launch configuration.</p>")
+  @as("LaunchConfigurationName")
+  launchConfigurationName: option<xmlStringMaxLen255>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the Auto Scaling group.</p>")
+  @as("AutoScalingGroupARN")
+  autoScalingGroupARN: option<resourceName>,
+  @ocaml.doc("<p>The name of the Auto Scaling group.</p>") @as("AutoScalingGroupName")
+  autoScalingGroupName: xmlStringMaxLen255,
+}
+@ocaml.doc("<p>This structure specifies the metrics and target utilization settings for a predictive
+            scaling policy. </p>
+        <p>You must specify either a metric pair, or a load metric and a scaling metric
+            individually. Specifying a metric pair instead of individual metrics provides a simpler
+            way to configure metrics for a scaling policy. You choose the metric pair, and the
+            policy automatically knows the correct sum and average statistics to use for the load
+            metric and the scaling metric.</p>
+        <p>Example</p>
+        <ul>
+            <li>
+                <p>You create a predictive scaling policy and specify
+                        <code>ALBRequestCount</code> as the value for the metric pair and
+                        <code>1000.0</code> as the target value. For this type of metric, you must
+                    provide the metric dimension for the corresponding target group, so you also
+                    provide a resource label for the Application Load Balancer target group that is
+                    attached to your Auto Scaling group.</p>
+            </li>
+            <li>
+                <p>The number of requests the target group receives per minute provides the load
+                    metric, and the request count averaged between the members of the target group
+                    provides the scaling metric. In CloudWatch, this refers to the
+                        <code>RequestCount</code> and <code>RequestCountPerTarget</code> metrics,
+                    respectively.</p>
+            </li>
+            <li>
+                <p>For optimal use of predictive scaling, you adhere to the best practice of
+                    using a dynamic scaling policy to automatically scale between the minimum
+                    capacity and maximum capacity in response to real-time changes in resource
+                    utilization.</p>
+            </li>
+            <li>
+                <p>Amazon EC2 Auto Scaling consumes data points for the load metric over the last 14 days and
+                    creates an hourly load forecast for predictive scaling. (A minimum of 24 hours
+                    of data is required.)</p>
+            </li>
+            <li>
+                <p>After creating the load forecast, Amazon EC2 Auto Scaling determines when to reduce or
+                    increase the capacity of your Auto Scaling group in each hour of the forecast period so
+                    that the average number of requests received by each instance is as close to
+                    1000 requests per minute as possible at all times.</p>
+            </li>
+         </ul>
+        <p>For information about using custom metrics with predictive scaling, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/predictive-scaling-customized-metric-specification.html\">Advanced predictive scaling policy configurations using custom metrics</a> in
+            the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>")
+type predictiveScalingMetricSpecification = {
+  @ocaml.doc("<p>The customized capacity metric specification.</p>")
+  @as("CustomizedCapacityMetricSpecification")
+  customizedCapacityMetricSpecification: option<predictiveScalingCustomizedCapacityMetric>,
+  @ocaml.doc("<p>The customized load metric specification.</p>")
+  @as("CustomizedLoadMetricSpecification")
+  customizedLoadMetricSpecification: option<predictiveScalingCustomizedLoadMetric>,
+  @ocaml.doc("<p>The customized scaling metric specification.</p>")
+  @as("CustomizedScalingMetricSpecification")
+  customizedScalingMetricSpecification: option<predictiveScalingCustomizedScalingMetric>,
+  @ocaml.doc("<p>The predefined load metric specification.</p>")
+  @as("PredefinedLoadMetricSpecification")
+  predefinedLoadMetricSpecification: option<predictiveScalingPredefinedLoadMetric>,
+  @ocaml.doc("<p>The predefined scaling metric specification.</p>")
+  @as("PredefinedScalingMetricSpecification")
+  predefinedScalingMetricSpecification: option<predictiveScalingPredefinedScalingMetric>,
+  @ocaml.doc("<p>The predefined metric pair specification from which Amazon EC2 Auto Scaling determines the
+            appropriate scaling metric and load metric to use.</p>")
+  @as("PredefinedMetricPairSpecification")
+  predefinedMetricPairSpecification: option<predictiveScalingPredefinedMetricPair>,
+  @ocaml.doc("<p>Specifies the target utilization.</p>
+        <note>
+            <p>Some metrics are based on a count instead of a percentage, such as the request
+                count for an Application Load Balancer or the number of messages in an SQS queue. If the scaling policy
+                specifies one of these metrics, specify the target utilization as the optimal
+                average request or message count per instance during any one-minute interval.
+            </p>
+        </note>")
+  @as("TargetValue")
+  targetValue: metricScale,
+}
+@ocaml.doc("<p>Describes an instance refresh for an Auto Scaling group. </p>")
+type instanceRefresh = {
+  @ocaml.doc("<p>Describes the specific update you want to deploy.</p>") @as("DesiredConfiguration")
+  desiredConfiguration: option<desiredConfiguration>,
+  @as("Preferences") preferences: option<refreshPreferences>,
+  @ocaml.doc("<p>Additional progress details for an Auto Scaling group that has a warm pool.</p>")
+  @as("ProgressDetails")
+  progressDetails: option<instanceRefreshProgressDetails>,
+  @ocaml.doc("<p>The number of instances remaining to update before the instance refresh is
+            complete.</p>")
+  @as("InstancesToUpdate")
+  instancesToUpdate: option<instancesToUpdate>,
+  @ocaml.doc("<p>The percentage of the instance refresh that is complete. For each instance
+            replacement, Amazon EC2 Auto Scaling tracks the instance's health status and warm-up time. When the
+            instance's health status changes to healthy and the specified warm-up time passes, the
+            instance is considered updated and is added to the percentage complete.</p>")
+  @as("PercentageComplete")
+  percentageComplete: option<intPercent>,
+  @ocaml.doc("<p>The date and time at which the instance refresh ended.</p>") @as("EndTime")
+  endTime: option<timestampType>,
+  @ocaml.doc("<p>The date and time at which the instance refresh began.</p>") @as("StartTime")
+  startTime: option<timestampType>,
+  @ocaml.doc("<p>Provides more details about the current status of the instance refresh. </p>")
+  @as("StatusReason")
+  statusReason: option<xmlStringMaxLen1023>,
+  @ocaml.doc("<p>The current status for the instance refresh operation:</p>
+        <ul>
+            <li>
+                <p>
+                  <code>Pending</code> - The request was created, but the operation has not
+                    started.</p>
+            </li>
+            <li>
+                <p>
+                  <code>InProgress</code> - The operation is in progress.</p>
+            </li>
+            <li>
+                <p>
+                  <code>Successful</code> - The operation completed successfully.</p>
+            </li>
+            <li>
+                <p>
+                  <code>Failed</code> - The operation failed to complete. You can troubleshoot
+                    using the status reason and the scaling activities. </p>
+            </li>
+            <li>
+                <p>
+                  <code>Cancelling</code> - An ongoing operation is being cancelled.
+                    Cancellation does not roll back any replacements that have already been
+                    completed, but it prevents new replacements from being started. </p>
+            </li>
+            <li>
+                <p>
+                  <code>Cancelled</code> - The operation is cancelled. </p>
+            </li>
+         </ul>")
+  @as("Status")
+  status: option<instanceRefreshStatus>,
+  @ocaml.doc("<p>The name of the Auto Scaling group.</p>") @as("AutoScalingGroupName")
+  autoScalingGroupName: option<xmlStringMaxLen255>,
+  @ocaml.doc("<p>The instance refresh ID.</p>") @as("InstanceRefreshId")
+  instanceRefreshId: option<xmlStringMaxLen255>,
+}
+type autoScalingGroups = array<autoScalingGroup>
+type predictiveScalingMetricSpecifications = array<predictiveScalingMetricSpecification>
+@ocaml.doc("<p>A <code>GetPredictiveScalingForecast</code> call returns the load forecast for a
+            predictive scaling policy. This structure includes the data points for that load
+            forecast, along with the timestamps of those data points and the metric specification.
+        </p>")
+type loadForecast = {
+  @ocaml.doc("<p>The metric specification for the load forecast.</p>") @as("MetricSpecification")
+  metricSpecification: predictiveScalingMetricSpecification,
+  @ocaml.doc("<p>The values of the data points.</p>") @as("Values")
+  values: predictiveScalingForecastValues,
+  @ocaml.doc("<p>The timestamps for the data points, in UTC format.</p>") @as("Timestamps")
+  timestamps: predictiveScalingForecastTimestamps,
+}
 type instanceRefreshes = array<instanceRefresh>
+@ocaml.doc(
+  "<p>Represents a predictive scaling policy configuration to use with Amazon EC2 Auto Scaling.</p>"
+)
+type predictiveScalingConfiguration = {
+  @ocaml.doc("<p>The size of the capacity buffer to use when the forecast capacity is close to or
+            exceeds the maximum capacity. The value is specified as a percentage relative to the
+            forecast capacity. For example, if the buffer is 10, this means a 10 percent buffer,
+            such that if the forecast capacity is 50, and the maximum capacity is 40, then the
+            effective maximum capacity is 55.</p>
+        <p>If set to 0, Amazon EC2 Auto Scaling may scale capacity higher than the maximum capacity to equal but
+            not exceed forecast capacity. </p>
+        <p>Required if the <code>MaxCapacityBreachBehavior</code> property is set to
+                <code>IncreaseMaxCapacity</code>, and cannot be used otherwise.</p>")
+  @as("MaxCapacityBuffer")
+  maxCapacityBuffer: option<predictiveScalingMaxCapacityBuffer>,
+  @ocaml.doc("<p>Defines the behavior that should be applied if the forecast capacity approaches or
+            exceeds the maximum capacity of the Auto Scaling group. Defaults to
+                <code>HonorMaxCapacity</code> if not specified.</p>
+        <p>The following are possible values:</p>
+        <ul>
+            <li>
+                <p>
+                  <code>HonorMaxCapacity</code> - Amazon EC2 Auto Scaling cannot scale out capacity higher than
+                    the maximum capacity. The maximum capacity is enforced as a hard limit. </p>
+            </li>
+            <li>
+                <p>
+                  <code>IncreaseMaxCapacity</code> - Amazon EC2 Auto Scaling can scale out capacity higher than
+                    the maximum capacity when the forecast capacity is close to or exceeds the
+                    maximum capacity. The upper limit is determined by the forecasted capacity and
+                    the value for <code>MaxCapacityBuffer</code>.</p>
+            </li>
+         </ul>")
+  @as("MaxCapacityBreachBehavior")
+  maxCapacityBreachBehavior: option<predictiveScalingMaxCapacityBreachBehavior>,
+  @ocaml.doc("<p>The amount of time, in seconds, by which the instance launch time can be advanced. For
+            example, the forecast says to add capacity at 10:00 AM, and you choose to pre-launch
+            instances by 5 minutes. In that case, the instances will be launched at 9:55 AM. The
+            intention is to give resources time to be provisioned. It can take a few minutes to
+            launch an EC2 instance. The actual amount of time required depends on several factors,
+            such as the size of the instance and whether there are startup scripts to complete. </p>
+        <p>The value must be less than the forecast interval duration of 3600 seconds (60
+            minutes). Defaults to 300 seconds if not specified. </p>")
+  @as("SchedulingBufferTime")
+  schedulingBufferTime: option<predictiveScalingSchedulingBufferTime>,
+  @ocaml.doc("<p>The predictive scaling mode. Defaults to <code>ForecastOnly</code> if not
+            specified.</p>")
+  @as("Mode")
+  mode: option<predictiveScalingMode>,
+  @ocaml.doc("<p>This structure includes the metrics and target utilization to use for predictive
+            scaling. </p>
+        <p>This is an array, but we currently only support a single metric specification. That
+            is, you can specify a target value and a single metric pair, or a target value and one
+            scaling metric and one load metric.</p>")
+  @as("MetricSpecifications")
+  metricSpecifications: predictiveScalingMetricSpecifications,
+}
+type loadForecasts = array<loadForecast>
 @ocaml.doc("<p>Describes a scaling policy.</p>")
 type scalingPolicy = {
   @ocaml.doc("<p>A predictive scaling policy.</p>") @as("PredictiveScalingConfiguration")
@@ -2030,118 +2677,16 @@ type scalingPolicy = {
   @ocaml.doc("<p>The name of the Auto Scaling group.</p>") @as("AutoScalingGroupName")
   autoScalingGroupName: option<xmlStringMaxLen255>,
 }
-@ocaml.doc("<p>Describes a mixed instances policy for an Auto Scaling group. With mixed instances, your Auto Scaling
-            group can provision a combination of On-Demand Instances and Spot Instances across
-            multiple instance types. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html\">Auto Scaling groups with multiple
-                instance types and purchase options</a> in the <i>Amazon EC2 Auto Scaling User
-                Guide</i>.</p>
-        <p>You can create a mixed instances policy for a new Auto Scaling group, or you can create it for
-            an existing group by updating the group to specify <code>MixedInstancesPolicy</code> as
-            the top-level property instead of a launch configuration or launch template.</p>")
-type mixedInstancesPolicy = {
-  @ocaml.doc("<p>Specifies the instances distribution. If not provided, the value for each property in
-                <code>InstancesDistribution</code> uses a default value.</p>")
-  @as("InstancesDistribution")
-  instancesDistribution: option<instancesDistribution>,
-  @ocaml.doc("<p>Specifies the launch template to use and optionally the instance types (overrides)
-            that are used to provision EC2 instances to fulfill On-Demand and Spot capacities.
-            Required when creating a mixed instances policy.</p>")
-  @as("LaunchTemplate")
-  launchTemplate: option<launchTemplate>,
-}
-type launchConfigurations = array<launchConfiguration>
 type scalingPolicies = array<scalingPolicy>
-@ocaml.doc("<p>Describes an Auto Scaling group.</p>")
-type autoScalingGroup = {
-  @ocaml.doc("<p>The current size of the warm pool.</p>") @as("WarmPoolSize")
-  warmPoolSize: option<warmPoolSize>,
-  @ocaml.doc("<p>The warm pool for the group.</p>") @as("WarmPoolConfiguration")
-  warmPoolConfiguration: option<warmPoolConfiguration>,
-  @ocaml.doc("<p>Indicates whether Capacity Rebalancing is enabled.</p>") @as("CapacityRebalance")
-  capacityRebalance: option<capacityRebalanceEnabled>,
-  @ocaml.doc("<p>The maximum amount of time, in seconds, that an instance can be in service.</p>
-        <p>Valid Range: Minimum value of 0.</p>")
-  @as("MaxInstanceLifetime")
-  maxInstanceLifetime: option<maxInstanceLifetime>,
-  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the service-linked role that the Auto Scaling group uses to
-            call other Amazon Web Services on your behalf.</p>")
-  @as("ServiceLinkedRoleARN")
-  serviceLinkedRoleARN: option<resourceName>,
-  @ocaml.doc("<p>Indicates whether newly launched instances are protected from termination by Amazon EC2 Auto Scaling
-            when scaling in.</p>")
-  @as("NewInstancesProtectedFromScaleIn")
-  newInstancesProtectedFromScaleIn: option<instanceProtected>,
-  @ocaml.doc("<p>The termination policies for the group.</p>") @as("TerminationPolicies")
-  terminationPolicies: option<terminationPolicies>,
-  @ocaml.doc("<p>The tags for the group.</p>") @as("Tags") tags: option<tagDescriptionList>,
-  @ocaml.doc("<p>The current state of the group when the <a>DeleteAutoScalingGroup</a>
-            operation is in progress.</p>")
-  @as("Status")
-  status: option<xmlStringMaxLen255>,
-  @ocaml.doc("<p>The metrics enabled for the group.</p>") @as("EnabledMetrics")
-  enabledMetrics: option<enabledMetrics>,
-  @ocaml.doc("<p>One or more subnet IDs, if applicable, separated by commas.</p>")
-  @as("VPCZoneIdentifier")
-  vpczoneIdentifier: option<xmlStringMaxLen2047>,
-  @ocaml.doc("<p>The name of the placement group into which to launch your instances, if any.</p>")
-  @as("PlacementGroup")
-  placementGroup: option<xmlStringMaxLen255>,
-  @ocaml.doc("<p>The suspended processes associated with the group.</p>") @as("SuspendedProcesses")
-  suspendedProcesses: option<suspendedProcesses>,
-  @ocaml.doc("<p>The date and time the group was created.</p>") @as("CreatedTime")
-  createdTime: timestampType,
-  @ocaml.doc("<p>The EC2 instances associated with the group.</p>") @as("Instances")
-  instances: option<instances>,
-  @ocaml.doc("<p>The amount of time, in seconds, that Amazon EC2 Auto Scaling waits before checking the health status
-            of an EC2 instance that has come into service.</p>")
-  @as("HealthCheckGracePeriod")
-  healthCheckGracePeriod: option<healthCheckGracePeriod>,
-  @ocaml.doc("<p>The service to use for the health checks. The valid values are <code>EC2</code> and
-                <code>ELB</code>. If you configure an Auto Scaling group to use <code>ELB</code> health
-            checks, it considers the instance unhealthy if it fails either the EC2 status checks or
-            the load balancer health checks.</p>")
-  @as("HealthCheckType")
-  healthCheckType: xmlStringMaxLen32,
-  @ocaml.doc("<p>The Amazon Resource Names (ARN) of the target groups for your load balancer.</p>")
-  @as("TargetGroupARNs")
-  targetGroupARNs: option<targetGroupARNs>,
-  @ocaml.doc("<p>One or more load balancers associated with the group.</p>")
-  @as("LoadBalancerNames")
-  loadBalancerNames: option<loadBalancerNames>,
-  @ocaml.doc("<p>One or more Availability Zones for the group.</p>") @as("AvailabilityZones")
-  availabilityZones: availabilityZones,
-  @ocaml.doc("<p>The duration of the default cooldown period, in seconds.</p>")
-  @as("DefaultCooldown")
-  defaultCooldown: cooldown,
-  @ocaml.doc("<p>The predicted capacity of the group when it has a predictive scaling policy.</p>")
-  @as("PredictedCapacity")
-  predictedCapacity: option<autoScalingGroupPredictedCapacity>,
-  @ocaml.doc("<p>The desired size of the group.</p>") @as("DesiredCapacity")
-  desiredCapacity: autoScalingGroupDesiredCapacity,
-  @ocaml.doc("<p>The maximum size of the group.</p>") @as("MaxSize")
-  maxSize: autoScalingGroupMaxSize,
-  @ocaml.doc("<p>The minimum size of the group.</p>") @as("MinSize")
-  minSize: autoScalingGroupMinSize,
-  @ocaml.doc("<p>The mixed instances policy for the group.</p>") @as("MixedInstancesPolicy")
-  mixedInstancesPolicy: option<mixedInstancesPolicy>,
-  @ocaml.doc("<p>The launch template for the group.</p>") @as("LaunchTemplate")
-  launchTemplate: option<launchTemplateSpecification>,
-  @ocaml.doc("<p>The name of the associated launch configuration.</p>")
-  @as("LaunchConfigurationName")
-  launchConfigurationName: option<xmlStringMaxLen255>,
-  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the Auto Scaling group.</p>")
-  @as("AutoScalingGroupARN")
-  autoScalingGroupARN: option<resourceName>,
-  @ocaml.doc("<p>The name of the Auto Scaling group.</p>") @as("AutoScalingGroupName")
-  autoScalingGroupName: xmlStringMaxLen255,
-}
-type autoScalingGroups = array<autoScalingGroup>
 @ocaml.doc("<fullname>Amazon EC2 Auto Scaling</fullname>
         
         
         
         
         
+        
+        
+
         
         <p>Amazon EC2 Auto Scaling is designed to automatically launch or terminate EC2 instances
             based on user-defined scaling policies, scheduled actions, and health checks.</p>
@@ -2169,7 +2714,7 @@ module SetInstanceHealth = {
     healthStatus: xmlStringMaxLen32,
     @ocaml.doc("<p>The ID of the instance.</p>") @as("InstanceId") instanceId: xmlStringMaxLen19,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-autoscaling") @new
   external new: request => t = "SetInstanceHealthCommand"
   let make = (~healthStatus, ~instanceId, ~shouldRespectGracePeriod=?, ()) =>
@@ -2196,7 +2741,7 @@ module SetDesiredCapacity = {
     @ocaml.doc("<p>The name of the Auto Scaling group.</p>") @as("AutoScalingGroupName")
     autoScalingGroupName: xmlStringMaxLen255,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-autoscaling") @new
   external new: request => t = "SetDesiredCapacityCommand"
   let make = (~desiredCapacity, ~autoScalingGroupName, ~honorCooldown=?, ()) =>
@@ -2223,7 +2768,7 @@ module RecordLifecycleActionHeartbeat = {
     @ocaml.doc("<p>The name of the lifecycle hook.</p>") @as("LifecycleHookName")
     lifecycleHookName: asciiStringMaxLen255,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-autoscaling") @new
   external new: request => t = "RecordLifecycleActionHeartbeatCommand"
   let make = (
@@ -2238,53 +2783,6 @@ module RecordLifecycleActionHeartbeat = {
       lifecycleActionToken: lifecycleActionToken,
       autoScalingGroupName: autoScalingGroupName,
       lifecycleHookName: lifecycleHookName,
-    })
-  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
-}
-
-module PutWarmPool = {
-  type t
-  type request = {
-    @ocaml.doc("<p>Sets the instance state to transition to after the lifecycle actions are complete.
-            Default is <code>Stopped</code>.</p>")
-    @as("PoolState")
-    poolState: option<warmPoolState>,
-    @ocaml.doc("<p>Specifies the minimum number of instances to maintain in the warm pool. This helps you
-            to ensure that there is always a certain number of warmed instances available to handle
-            traffic spikes. Defaults to 0 if not specified.</p>")
-    @as("MinSize")
-    minSize: option<warmPoolMinSize>,
-    @ocaml.doc("<p>Specifies the maximum number of instances that are allowed to be in the warm pool or
-            in any state except <code>Terminated</code> for the Auto Scaling group. This is an optional
-            property. Specify it only if you do not want the warm pool size to be determined by the
-            difference between the group's maximum capacity and its desired capacity. </p>
-        <important>
-            <p>If a value for <code>MaxGroupPreparedCapacity</code> is not specified, Amazon EC2 Auto Scaling
-                launches and maintains the difference between the group's maximum capacity and its
-                desired capacity. If you specify a value for <code>MaxGroupPreparedCapacity</code>,
-                Amazon EC2 Auto Scaling uses the difference between the <code>MaxGroupPreparedCapacity</code> and
-                the desired capacity instead. </p>
-            <p>The size of the warm pool is dynamic. Only when
-                    <code>MaxGroupPreparedCapacity</code> and <code>MinSize</code> are set to the
-                same value does the warm pool have an absolute size.</p>
-        </important>
-        <p>If the desired capacity of the Auto Scaling group is higher than the
-                <code>MaxGroupPreparedCapacity</code>, the capacity of the warm pool is 0, unless
-            you specify a value for <code>MinSize</code>. To remove a value that you previously set,
-            include the property but specify -1 for the value. </p>")
-    @as("MaxGroupPreparedCapacity")
-    maxGroupPreparedCapacity: option<maxGroupPreparedCapacity>,
-    @ocaml.doc("<p>The name of the Auto Scaling group.</p>") @as("AutoScalingGroupName")
-    autoScalingGroupName: xmlStringMaxLen255,
-  }
-
-  @module("@aws-sdk/client-autoscaling") @new external new: request => t = "PutWarmPoolCommand"
-  let make = (~autoScalingGroupName, ~poolState=?, ~minSize=?, ~maxGroupPreparedCapacity=?, ()) =>
-    new({
-      poolState: poolState,
-      minSize: minSize,
-      maxGroupPreparedCapacity: maxGroupPreparedCapacity,
-      autoScalingGroupName: autoScalingGroupName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
@@ -2335,7 +2833,7 @@ module PutScheduledUpdateGroupAction = {
     @ocaml.doc("<p>The name of the Auto Scaling group.</p>") @as("AutoScalingGroupName")
     autoScalingGroupName: xmlStringMaxLen255,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-autoscaling") @new
   external new: request => t = "PutScheduledUpdateGroupActionCommand"
   let make = (
@@ -2390,17 +2888,17 @@ module PutLifecycleHook = {
             is in the transition state for the lifecycle hook. This target can be either an SQS
             queue or an SNS topic.</p>
         <p>If you specify an empty string, this overrides the current ARN.</p>
-        <p>This operation uses the JSON format when sending notifications to an Amazon SQS queue,
-            and an email key-value pair format when sending notifications to an Amazon SNS
-            topic.</p>
+        <p>This operation uses the JSON format when sending notifications to an Amazon SQS queue, and
+            an email key-value pair format when sending notifications to an Amazon SNS topic.</p>
         <p>When you specify a notification target, Amazon EC2 Auto Scaling sends it a test message. Test
             messages contain the following additional key-value pair: <code>\"Event\":
                 \"autoscaling:TEST_NOTIFICATION\"</code>.</p>")
     @as("NotificationTargetARN")
     notificationTargetARN: option<notificationTargetResourceName>,
     @ocaml.doc("<p>The ARN of the IAM role that allows the Auto Scaling group to publish to the specified
-            notification target, for example, an Amazon SNS topic or an Amazon SQS queue.</p>
-        <p>Required for new lifecycle hooks, but optional when updating existing hooks.</p>")
+            notification target.</p>
+        <p>Valid only if the notification target is an Amazon SNS topic or an Amazon SQS queue. Required
+            for new lifecycle hooks, but optional when updating existing hooks.</p>")
     @as("RoleARN")
     roleARN: option<xmlStringMaxLen255>,
     @ocaml.doc("<p>The instance state to which you want to attach the lifecycle hook. The valid values
@@ -2421,7 +2919,7 @@ module PutLifecycleHook = {
     @ocaml.doc("<p>The name of the lifecycle hook.</p>") @as("LifecycleHookName")
     lifecycleHookName: asciiStringMaxLen255,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-autoscaling") @new external new: request => t = "PutLifecycleHookCommand"
   let make = (
     ~autoScalingGroupName,
@@ -2477,7 +2975,7 @@ module ExecutePolicy = {
     @ocaml.doc("<p>The name of the Auto Scaling group.</p>") @as("AutoScalingGroupName")
     autoScalingGroupName: option<xmlStringMaxLen255>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-autoscaling") @new external new: request => t = "ExecutePolicyCommand"
   let make = (
     ~policyName,
@@ -2499,7 +2997,7 @@ module ExecutePolicy = {
 
 module DescribeAccountLimits = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("<p>The current number of launch configurations for your account.</p>")
     @as("NumberOfLaunchConfigurations")
@@ -2517,8 +3015,8 @@ module DescribeAccountLimits = {
     maxNumberOfAutoScalingGroups: option<maxNumberOfAutoScalingGroups>,
   }
   @module("@aws-sdk/client-autoscaling") @new
-  external new: unit => t = "DescribeAccountLimitsCommand"
-  let make = () => new()
+  external new: request => t = "DescribeAccountLimitsCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -2534,7 +3032,7 @@ module DeleteWarmPool = {
     @ocaml.doc("<p>The name of the Auto Scaling group.</p>") @as("AutoScalingGroupName")
     autoScalingGroupName: xmlStringMaxLen255,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-autoscaling") @new external new: request => t = "DeleteWarmPoolCommand"
   let make = (~autoScalingGroupName, ~forceDelete=?, ()) =>
     new({forceDelete: forceDelete, autoScalingGroupName: autoScalingGroupName})
@@ -2549,7 +3047,7 @@ module DeleteScheduledAction = {
     @ocaml.doc("<p>The name of the Auto Scaling group.</p>") @as("AutoScalingGroupName")
     autoScalingGroupName: xmlStringMaxLen255,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-autoscaling") @new
   external new: request => t = "DeleteScheduledActionCommand"
   let make = (~scheduledActionName, ~autoScalingGroupName, ()) =>
@@ -2565,7 +3063,7 @@ module DeletePolicy = {
     @ocaml.doc("<p>The name of the Auto Scaling group.</p>") @as("AutoScalingGroupName")
     autoScalingGroupName: option<xmlStringMaxLen255>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-autoscaling") @new external new: request => t = "DeletePolicyCommand"
   let make = (~policyName, ~autoScalingGroupName=?, ()) =>
     new({policyName: policyName, autoScalingGroupName: autoScalingGroupName})
@@ -2575,14 +3073,12 @@ module DeletePolicy = {
 module DeleteNotificationConfiguration = {
   type t
   type request = {
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (Amazon SNS)
-            topic.</p>")
-    @as("TopicARN")
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the Amazon SNS topic.</p>") @as("TopicARN")
     topicARN: xmlStringMaxLen255,
     @ocaml.doc("<p>The name of the Auto Scaling group.</p>") @as("AutoScalingGroupName")
     autoScalingGroupName: xmlStringMaxLen255,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-autoscaling") @new
   external new: request => t = "DeleteNotificationConfigurationCommand"
   let make = (~topicARN, ~autoScalingGroupName, ()) =>
@@ -2598,7 +3094,7 @@ module DeleteLifecycleHook = {
     @ocaml.doc("<p>The name of the lifecycle hook.</p>") @as("LifecycleHookName")
     lifecycleHookName: asciiStringMaxLen255,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-autoscaling") @new
   external new: request => t = "DeleteLifecycleHookCommand"
   let make = (~autoScalingGroupName, ~lifecycleHookName, ()) =>
@@ -2612,7 +3108,7 @@ module DeleteLaunchConfiguration = {
     @ocaml.doc("<p>The name of the launch configuration.</p>") @as("LaunchConfigurationName")
     launchConfigurationName: xmlStringMaxLen255,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-autoscaling") @new
   external new: request => t = "DeleteLaunchConfigurationCommand"
   let make = (~launchConfigurationName, ()) =>
@@ -2631,7 +3127,7 @@ module DeleteAutoScalingGroup = {
     @ocaml.doc("<p>The name of the Auto Scaling group.</p>") @as("AutoScalingGroupName")
     autoScalingGroupName: xmlStringMaxLen255,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-autoscaling") @new
   external new: request => t = "DeleteAutoScalingGroupCommand"
   let make = (~autoScalingGroupName, ~forceDelete=?, ()) =>
@@ -2658,7 +3154,7 @@ module CompleteLifecycleAction = {
     @ocaml.doc("<p>The name of the lifecycle hook.</p>") @as("LifecycleHookName")
     lifecycleHookName: asciiStringMaxLen255,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-autoscaling") @new
   external new: request => t = "CompleteLifecycleActionCommand"
   let make = (
@@ -2771,7 +3267,7 @@ module SuspendProcesses = {
     @ocaml.doc("<p>The name of the Auto Scaling group.</p>") @as("AutoScalingGroupName")
     autoScalingGroupName: xmlStringMaxLen255,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-autoscaling") @new external new: request => t = "SuspendProcessesCommand"
   let make = (~autoScalingGroupName, ~scalingProcesses=?, ()) =>
     new({scalingProcesses: scalingProcesses, autoScalingGroupName: autoScalingGroupName})
@@ -2791,7 +3287,7 @@ module SetInstanceProtection = {
     @as("InstanceIds")
     instanceIds: instanceIds,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-autoscaling") @new
   external new: request => t = "SetInstanceProtectionCommand"
   let make = (~protectedFromScaleIn, ~autoScalingGroupName, ~instanceIds, ()) =>
@@ -2860,10 +3356,70 @@ module ResumeProcesses = {
     @ocaml.doc("<p>The name of the Auto Scaling group.</p>") @as("AutoScalingGroupName")
     autoScalingGroupName: xmlStringMaxLen255,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-autoscaling") @new external new: request => t = "ResumeProcessesCommand"
   let make = (~autoScalingGroupName, ~scalingProcesses=?, ()) =>
     new({scalingProcesses: scalingProcesses, autoScalingGroupName: autoScalingGroupName})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module PutWarmPool = {
+  type t
+  type request = {
+    @ocaml.doc("<p>Indicates whether instances in the Auto Scaling group can be returned to the warm pool on
+            scale in. The default is to terminate instances in the Auto Scaling group when the group scales
+            in.</p>")
+    @as("InstanceReusePolicy")
+    instanceReusePolicy: option<instanceReusePolicy>,
+    @ocaml.doc("<p>Sets the instance state to transition to after the lifecycle actions are complete.
+            Default is <code>Stopped</code>.</p>")
+    @as("PoolState")
+    poolState: option<warmPoolState>,
+    @ocaml.doc("<p>Specifies the minimum number of instances to maintain in the warm pool. This helps you
+            to ensure that there is always a certain number of warmed instances available to handle
+            traffic spikes. Defaults to 0 if not specified.</p>")
+    @as("MinSize")
+    minSize: option<warmPoolMinSize>,
+    @ocaml.doc("<p>Specifies the maximum number of instances that are allowed to be in the warm pool or
+            in any state except <code>Terminated</code> for the Auto Scaling group. This is an optional
+            property. Specify it only if you do not want the warm pool size to be determined by the
+            difference between the group's maximum capacity and its desired capacity. </p>
+        <important>
+            <p>If a value for <code>MaxGroupPreparedCapacity</code> is not specified, Amazon EC2 Auto Scaling
+                launches and maintains the difference between the group's maximum capacity and its
+                desired capacity. If you specify a value for <code>MaxGroupPreparedCapacity</code>,
+                Amazon EC2 Auto Scaling uses the difference between the <code>MaxGroupPreparedCapacity</code> and
+                the desired capacity instead. </p>
+            <p>The size of the warm pool is dynamic. Only when
+                    <code>MaxGroupPreparedCapacity</code> and <code>MinSize</code> are set to the
+                same value does the warm pool have an absolute size.</p>
+        </important>
+        <p>If the desired capacity of the Auto Scaling group is higher than the
+                <code>MaxGroupPreparedCapacity</code>, the capacity of the warm pool is 0, unless
+            you specify a value for <code>MinSize</code>. To remove a value that you previously set,
+            include the property but specify -1 for the value. </p>")
+    @as("MaxGroupPreparedCapacity")
+    maxGroupPreparedCapacity: option<maxGroupPreparedCapacity>,
+    @ocaml.doc("<p>The name of the Auto Scaling group.</p>") @as("AutoScalingGroupName")
+    autoScalingGroupName: xmlStringMaxLen255,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-autoscaling") @new external new: request => t = "PutWarmPoolCommand"
+  let make = (
+    ~autoScalingGroupName,
+    ~instanceReusePolicy=?,
+    ~poolState=?,
+    ~minSize=?,
+    ~maxGroupPreparedCapacity=?,
+    (),
+  ) =>
+    new({
+      instanceReusePolicy: instanceReusePolicy,
+      poolState: poolState,
+      minSize: minSize,
+      maxGroupPreparedCapacity: maxGroupPreparedCapacity,
+      autoScalingGroupName: autoScalingGroupName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -2874,14 +3430,12 @@ module PutNotificationConfiguration = {
             types supported by Amazon EC2 Auto Scaling, call the <a>DescribeAutoScalingNotificationTypes</a> API.</p>")
     @as("NotificationTypes")
     notificationTypes: autoScalingNotificationTypes,
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (Amazon SNS)
-            topic.</p>")
-    @as("TopicARN")
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the Amazon SNS topic.</p>") @as("TopicARN")
     topicARN: xmlStringMaxLen255,
     @ocaml.doc("<p>The name of the Auto Scaling group.</p>") @as("AutoScalingGroupName")
     autoScalingGroupName: xmlStringMaxLen255,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-autoscaling") @new
   external new: request => t = "PutNotificationConfigurationCommand"
   let make = (~notificationTypes, ~topicARN, ~autoScalingGroupName, ()) =>
@@ -3016,7 +3570,7 @@ module EnableMetricsCollection = {
     @ocaml.doc("<p>The name of the Auto Scaling group.</p>") @as("AutoScalingGroupName")
     autoScalingGroupName: xmlStringMaxLen255,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-autoscaling") @new
   external new: request => t = "EnableMetricsCollectionCommand"
   let make = (~granularity, ~autoScalingGroupName, ~metrics=?, ()) =>
@@ -3136,7 +3690,7 @@ module DisableMetricsCollection = {
     @ocaml.doc("<p>The name of the Auto Scaling group.</p>") @as("AutoScalingGroupName")
     autoScalingGroupName: xmlStringMaxLen255,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-autoscaling") @new
   external new: request => t = "DisableMetricsCollectionCommand"
   let make = (~autoScalingGroupName, ~metrics=?, ()) =>
@@ -3153,7 +3707,7 @@ module DetachLoadBalancers = {
     @ocaml.doc("<p>The name of the Auto Scaling group.</p>") @as("AutoScalingGroupName")
     autoScalingGroupName: xmlStringMaxLen255,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-autoscaling") @new
   external new: request => t = "DetachLoadBalancersCommand"
   let make = (~loadBalancerNames, ~autoScalingGroupName, ()) =>
@@ -3171,7 +3725,7 @@ module DetachLoadBalancerTargetGroups = {
     @ocaml.doc("<p>The name of the Auto Scaling group.</p>") @as("AutoScalingGroupName")
     autoScalingGroupName: xmlStringMaxLen255,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-autoscaling") @new
   external new: request => t = "DetachLoadBalancerTargetGroupsCommand"
   let make = (~targetGroupARNs, ~autoScalingGroupName, ()) =>
@@ -3181,7 +3735,7 @@ module DetachLoadBalancerTargetGroups = {
 
 module DescribeTerminationPolicyTypes = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("<p>The termination policies supported by Amazon EC2 Auto Scaling: <code>OldestInstance</code>,
                 <code>OldestLaunchConfiguration</code>, <code>NewestInstance</code>,
@@ -3191,34 +3745,34 @@ module DescribeTerminationPolicyTypes = {
     terminationPolicyTypes: option<terminationPolicies>,
   }
   @module("@aws-sdk/client-autoscaling") @new
-  external new: unit => t = "DescribeTerminationPolicyTypesCommand"
-  let make = () => new()
+  external new: request => t = "DescribeTerminationPolicyTypesCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeLifecycleHookTypes = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("<p>The lifecycle hook types.</p>") @as("LifecycleHookTypes")
     lifecycleHookTypes: option<autoScalingNotificationTypes>,
   }
   @module("@aws-sdk/client-autoscaling") @new
-  external new: unit => t = "DescribeLifecycleHookTypesCommand"
-  let make = () => new()
+  external new: request => t = "DescribeLifecycleHookTypesCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAutoScalingNotificationTypes = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("<p>The notification types.</p>") @as("AutoScalingNotificationTypes")
     autoScalingNotificationTypes: option<autoScalingNotificationTypes>,
   }
   @module("@aws-sdk/client-autoscaling") @new
-  external new: unit => t = "DescribeAutoScalingNotificationTypesCommand"
-  let make = () => new()
+  external new: request => t = "DescribeAutoScalingNotificationTypesCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -3231,7 +3785,7 @@ module AttachLoadBalancers = {
     @ocaml.doc("<p>The name of the Auto Scaling group.</p>") @as("AutoScalingGroupName")
     autoScalingGroupName: xmlStringMaxLen255,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-autoscaling") @new
   external new: request => t = "AttachLoadBalancersCommand"
   let make = (~loadBalancerNames, ~autoScalingGroupName, ()) =>
@@ -3249,7 +3803,7 @@ module AttachLoadBalancerTargetGroups = {
     @ocaml.doc("<p>The name of the Auto Scaling group.</p>") @as("AutoScalingGroupName")
     autoScalingGroupName: xmlStringMaxLen255,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-autoscaling") @new
   external new: request => t = "AttachLoadBalancerTargetGroupsCommand"
   let make = (~targetGroupARNs, ~autoScalingGroupName, ()) =>
@@ -3266,46 +3820,11 @@ module AttachInstances = {
     @as("InstanceIds")
     instanceIds: option<instanceIds>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-autoscaling") @new external new: request => t = "AttachInstancesCommand"
   let make = (~autoScalingGroupName, ~instanceIds=?, ()) =>
     new({autoScalingGroupName: autoScalingGroupName, instanceIds: instanceIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
-}
-
-module StartInstanceRefresh = {
-  type t
-  type request = {
-    @ocaml.doc("<p>Set of preferences associated with the instance refresh request.</p>
-        <p>If not provided, the default values are used. For <code>MinHealthyPercentage</code>,
-            the default value is <code>90</code>. For <code>InstanceWarmup</code>, the default is to
-            use the value specified for the health check grace period for the Auto Scaling group.</p>
-        <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_RefreshPreferences.html\">RefreshPreferences</a> in the <i>Amazon EC2 Auto Scaling API
-            Reference</i>.</p>")
-    @as("Preferences")
-    preferences: option<refreshPreferences>,
-    @ocaml.doc("<p>The strategy to use for the instance refresh. The only valid value is
-                <code>Rolling</code>.</p>
-        <p>A rolling update is an update that is applied to all instances in an Auto Scaling group until
-            all instances have been updated. A rolling update can fail due to failed health checks
-            or if instances are on standby or are protected from scale in. If the rolling update
-            process fails, any instances that were already replaced are not rolled back to their
-            previous configuration. </p>")
-    @as("Strategy")
-    strategy: option<refreshStrategy>,
-    @ocaml.doc("<p>The name of the Auto Scaling group.</p>") @as("AutoScalingGroupName")
-    autoScalingGroupName: xmlStringMaxLen255,
-  }
-  type response = {
-    @ocaml.doc("<p>A unique ID for tracking the progress of the request.</p>")
-    @as("InstanceRefreshId")
-    instanceRefreshId: option<xmlStringMaxLen255>,
-  }
-  @module("@aws-sdk/client-autoscaling") @new
-  external new: request => t = "StartInstanceRefreshCommand"
-  let make = (~autoScalingGroupName, ~preferences=?, ~strategy=?, ()) =>
-    new({preferences: preferences, strategy: strategy, autoScalingGroupName: autoScalingGroupName})
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ExitStandby = {
@@ -3450,14 +3969,14 @@ module DescribeScheduledActions = {
 
 module DescribeScalingProcessTypes = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("<p>The names of the process types.</p>") @as("Processes")
     processes: option<processes>,
   }
   @module("@aws-sdk/client-autoscaling") @new
-  external new: unit => t = "DescribeScalingProcessTypesCommand"
-  let make = () => new()
+  external new: request => t = "DescribeScalingProcessTypesCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -3556,15 +4075,15 @@ module DescribeNotificationConfigurations = {
 
 module DescribeMetricCollectionTypes = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("<p>The granularities for the metrics.</p>") @as("Granularities")
     granularities: option<metricGranularityTypes>,
     @ocaml.doc("<p>One or more metrics.</p>") @as("Metrics") metrics: option<metricCollectionTypes>,
   }
   @module("@aws-sdk/client-autoscaling") @new
-  external new: unit => t = "DescribeMetricCollectionTypesCommand"
-  let make = () => new()
+  external new: request => t = "DescribeMetricCollectionTypesCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -3653,21 +4172,21 @@ module DescribeLifecycleHooks = {
 
 module DescribeAdjustmentTypes = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("<p>The policy adjustment types.</p>") @as("AdjustmentTypes")
     adjustmentTypes: option<adjustmentTypes>,
   }
   @module("@aws-sdk/client-autoscaling") @new
-  external new: unit => t = "DescribeAdjustmentTypesCommand"
-  let make = () => new()
+  external new: request => t = "DescribeAdjustmentTypesCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteTags = {
   type t
   type request = {@ocaml.doc("<p>One or more tags.</p>") @as("Tags") tags: tags}
-
+  type response = {.}
   @module("@aws-sdk/client-autoscaling") @new external new: request => t = "DeleteTagsCommand"
   let make = (~tags, ()) => new({tags: tags})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -3676,7 +4195,7 @@ module DeleteTags = {
 module CreateOrUpdateTags = {
   type t
   type request = {@ocaml.doc("<p>One or more tags.</p>") @as("Tags") tags: tags}
-
+  type response = {.}
   @module("@aws-sdk/client-autoscaling") @new
   external new: request => t = "CreateOrUpdateTagsCommand"
   let make = (~tags, ()) => new({tags: tags})
@@ -3868,8 +4387,8 @@ module CreateLaunchConfiguration = {
             throughput to Amazon EBS and an optimized configuration stack to provide optimal I/O
             performance. This optimization is not available with all instance types. Additional fees
             are incurred when you enable EBS optimization for an instance type that is not
-            EBS-optimized by default. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSOptimized.html\">Amazon EBS-Optimized
-                Instances</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>
+            EBS-optimized by default. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSOptimized.html\">Amazon EBS-optimized instances</a> in
+            the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>
         <p>The default value is <code>false</code>.</p>")
     @as("EbsOptimized")
     ebsOptimized: option<ebsOptimized>,
@@ -3977,7 +4496,7 @@ module CreateLaunchConfiguration = {
     @as("LaunchConfigurationName")
     launchConfigurationName: xmlStringMaxLen255,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-autoscaling") @new
   external new: request => t = "CreateLaunchConfigurationCommand"
   let make = (
@@ -4026,12 +4545,583 @@ module CreateLaunchConfiguration = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
+module DescribeLaunchConfigurations = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The maximum number of items to return with this call. The default value is
+                <code>50</code> and the maximum value is <code>100</code>.</p>")
+    @as("MaxRecords")
+    maxRecords: option<maxRecords>,
+    @ocaml.doc("<p>The token for the next set of items to return. (You received this token from a
+            previous call.)</p>")
+    @as("NextToken")
+    nextToken: option<xmlString>,
+    @ocaml.doc("<p>The launch configuration names. If you omit this parameter, all launch configurations
+            are described.</p>
+        <p>Array Members: Maximum number of 50 items.</p>")
+    @as("LaunchConfigurationNames")
+    launchConfigurationNames: option<launchConfigurationNames>,
+  }
+  type response = {
+    @ocaml.doc("<p>A string that indicates that the response contains more items than can be returned in
+            a single response. To receive additional items, specify this string for the
+                <code>NextToken</code> value when requesting the next set of items. This value is
+            null when there are no more items to return.</p>")
+    @as("NextToken")
+    nextToken: option<xmlString>,
+    @ocaml.doc("<p>The launch configurations.</p>") @as("LaunchConfigurations")
+    launchConfigurations: launchConfigurations,
+  }
+  @module("@aws-sdk/client-autoscaling") @new
+  external new: request => t = "DescribeLaunchConfigurationsCommand"
+  let make = (~maxRecords=?, ~nextToken=?, ~launchConfigurationNames=?, ()) =>
+    new({
+      maxRecords: maxRecords,
+      nextToken: nextToken,
+      launchConfigurationNames: launchConfigurationNames,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module UpdateAutoScalingGroup = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The unit of measurement for the value specified for desired capacity. Amazon EC2 Auto Scaling
+            supports <code>DesiredCapacityType</code> for attribute-based instance type selection
+            only. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-instance-type-requirements.html\">Creating
+                an Auto Scaling group using attribute-based instance type selection</a> in the
+                <i>Amazon EC2 Auto Scaling User Guide</i>.</p>
+        <p>By default, Amazon EC2 Auto Scaling specifies <code>units</code>, which translates into number of
+            instances.</p>
+        <p>Valid values: <code>units</code> | <code>vcpu</code> | <code>memory-mib</code>
+         </p>")
+    @as("DesiredCapacityType")
+    desiredCapacityType: option<xmlStringMaxLen255>,
+    @ocaml.doc("<p>Reserved.</p>") @as("Context") context: option<context>,
+    @ocaml.doc("<p>Enables or disables Capacity Rebalancing. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-capacity-rebalancing.html\">Amazon EC2 Auto Scaling
+                Capacity Rebalancing</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>")
+    @as("CapacityRebalance")
+    capacityRebalance: option<capacityRebalanceEnabled>,
+    @ocaml.doc("<p>The maximum amount of time, in seconds, that an instance can be in service. The
+            default is null. If specified, the value must be either 0 or a number equal to or
+            greater than 86,400 seconds (1 day). To clear a previously set value, specify a new
+            value of 0. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-max-instance-lifetime.html\">Replacing Auto Scaling
+                instances based on maximum instance lifetime</a> in the
+                <i>Amazon EC2 Auto Scaling User Guide</i>.</p>")
+    @as("MaxInstanceLifetime")
+    maxInstanceLifetime: option<maxInstanceLifetime>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the service-linked role that the Auto Scaling group uses to
+            call other Amazon Web Services on your behalf. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-service-linked-role.html\">Service-linked
+                roles</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>")
+    @as("ServiceLinkedRoleARN")
+    serviceLinkedRoleARN: option<resourceName>,
+    @ocaml.doc("<p>Indicates whether newly launched instances are protected from termination by Amazon EC2 Auto Scaling
+            when scaling in. For more information about preventing instances from terminating on
+            scale in, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-instance-protection.html\">Using
+                instance scale-in protection</a> in the
+            <i>Amazon EC2 Auto Scaling User Guide</i>.</p>")
+    @as("NewInstancesProtectedFromScaleIn")
+    newInstancesProtectedFromScaleIn: option<instanceProtected>,
+    @ocaml.doc("<p>A policy or a list of policies that are used to select the instances to terminate. The
+            policies are executed in the order that you list them. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html\">Controlling which Auto Scaling instances terminate during scale in</a> in the
+                <i>Amazon EC2 Auto Scaling User Guide</i>.</p>")
+    @as("TerminationPolicies")
+    terminationPolicies: option<terminationPolicies>,
+    @ocaml.doc("<p>A comma-separated list of subnet IDs for a virtual private cloud (VPC). If you specify
+                <code>VPCZoneIdentifier</code> with <code>AvailabilityZones</code>, the subnets that
+            you specify for this parameter must reside in those Availability Zones.</p>")
+    @as("VPCZoneIdentifier")
+    vpczoneIdentifier: option<xmlStringMaxLen2047>,
+    @ocaml.doc("<p>The name of an existing placement group into which to launch your instances, if any. A
+            placement group is a logical grouping of instances within a single Availability Zone.
+            You cannot specify multiple Availability Zones and a placement group. For more
+            information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html\">Placement Groups</a> in the
+                <i>Amazon EC2 User Guide for Linux Instances</i>.</p>")
+    @as("PlacementGroup")
+    placementGroup: option<xmlStringMaxLen255>,
+    @ocaml.doc("<p>The amount of time, in seconds, that Amazon EC2 Auto Scaling waits before checking the health status
+            of an EC2 instance that has come into service and marking it unhealthy due to a failed
+            health check. The default value is <code>0</code>. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html#health-check-grace-period\">Health
+                check grace period</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>
+        <p>Required if you are adding an <code>ELB</code> health check.</p>")
+    @as("HealthCheckGracePeriod")
+    healthCheckGracePeriod: option<healthCheckGracePeriod>,
+    @ocaml.doc("<p>The service to use for the health checks. The valid values are <code>EC2</code> and
+                <code>ELB</code>. If you configure an Auto Scaling group to use <code>ELB</code> health
+            checks, it considers the instance unhealthy if it fails either the EC2 status checks or
+            the load balancer health checks.</p>")
+    @as("HealthCheckType")
+    healthCheckType: option<xmlStringMaxLen32>,
+    @ocaml.doc("<p>One or more Availability Zones for the group.</p>") @as("AvailabilityZones")
+    availabilityZones: option<availabilityZones>,
+    @ocaml.doc("<p>The amount of time, in seconds, after a scaling activity completes before another
+            scaling activity can start. The default value is <code>300</code>. This setting applies
+            when using simple scaling policies, but not when using other scaling policies or
+            scheduled scaling. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/Cooldown.html\">Scaling cooldowns for Amazon EC2 Auto Scaling</a>
+            in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>")
+    @as("DefaultCooldown")
+    defaultCooldown: option<cooldown>,
+    @ocaml.doc("<p>The desired capacity is the initial capacity of the Auto Scaling group after this operation
+            completes and the capacity it attempts to maintain. This number must be greater than or
+            equal to the minimum size of the group and less than or equal to the maximum size of the
+            group.</p>")
+    @as("DesiredCapacity")
+    desiredCapacity: option<autoScalingGroupDesiredCapacity>,
+    @ocaml.doc("<p>The maximum size of the Auto Scaling group.</p>
+        <note>
+            <p>With a mixed instances policy that uses instance weighting, Amazon EC2 Auto Scaling may need to
+                go above <code>MaxSize</code> to meet your capacity requirements. In this event,
+                Amazon EC2 Auto Scaling will never go above <code>MaxSize</code> by more than your largest instance
+                weight (weights that define how many units each instance contributes to the desired
+                capacity of the group).</p>
+        </note>")
+    @as("MaxSize")
+    maxSize: option<autoScalingGroupMaxSize>,
+    @ocaml.doc("<p>The minimum size of the Auto Scaling group.</p>") @as("MinSize")
+    minSize: option<autoScalingGroupMinSize>,
+    @ocaml.doc("<p>An embedded object that specifies a mixed instances policy. For more information, see
+                <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-mixed-instances-groups.html\">Auto Scaling
+                groups with multiple instance types and purchase options</a> in the
+                <i>Amazon EC2 Auto Scaling User Guide</i>.</p>")
+    @as("MixedInstancesPolicy")
+    mixedInstancesPolicy: option<mixedInstancesPolicy>,
+    @ocaml.doc("<p>The launch template and version to use to specify the updates. If you specify
+                <code>LaunchTemplate</code> in your update request, you can't specify
+                <code>LaunchConfigurationName</code> or <code>MixedInstancesPolicy</code>.</p>")
+    @as("LaunchTemplate")
+    launchTemplate: option<launchTemplateSpecification>,
+    @ocaml.doc("<p>The name of the launch configuration. If you specify
+                <code>LaunchConfigurationName</code> in your update request, you can't specify
+                <code>LaunchTemplate</code> or <code>MixedInstancesPolicy</code>.</p>")
+    @as("LaunchConfigurationName")
+    launchConfigurationName: option<xmlStringMaxLen255>,
+    @ocaml.doc("<p>The name of the Auto Scaling group.</p>") @as("AutoScalingGroupName")
+    autoScalingGroupName: xmlStringMaxLen255,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-autoscaling") @new
+  external new: request => t = "UpdateAutoScalingGroupCommand"
+  let make = (
+    ~autoScalingGroupName,
+    ~desiredCapacityType=?,
+    ~context=?,
+    ~capacityRebalance=?,
+    ~maxInstanceLifetime=?,
+    ~serviceLinkedRoleARN=?,
+    ~newInstancesProtectedFromScaleIn=?,
+    ~terminationPolicies=?,
+    ~vpczoneIdentifier=?,
+    ~placementGroup=?,
+    ~healthCheckGracePeriod=?,
+    ~healthCheckType=?,
+    ~availabilityZones=?,
+    ~defaultCooldown=?,
+    ~desiredCapacity=?,
+    ~maxSize=?,
+    ~minSize=?,
+    ~mixedInstancesPolicy=?,
+    ~launchTemplate=?,
+    ~launchConfigurationName=?,
+    (),
+  ) =>
+    new({
+      desiredCapacityType: desiredCapacityType,
+      context: context,
+      capacityRebalance: capacityRebalance,
+      maxInstanceLifetime: maxInstanceLifetime,
+      serviceLinkedRoleARN: serviceLinkedRoleARN,
+      newInstancesProtectedFromScaleIn: newInstancesProtectedFromScaleIn,
+      terminationPolicies: terminationPolicies,
+      vpczoneIdentifier: vpczoneIdentifier,
+      placementGroup: placementGroup,
+      healthCheckGracePeriod: healthCheckGracePeriod,
+      healthCheckType: healthCheckType,
+      availabilityZones: availabilityZones,
+      defaultCooldown: defaultCooldown,
+      desiredCapacity: desiredCapacity,
+      maxSize: maxSize,
+      minSize: minSize,
+      mixedInstancesPolicy: mixedInstancesPolicy,
+      launchTemplate: launchTemplate,
+      launchConfigurationName: launchConfigurationName,
+      autoScalingGroupName: autoScalingGroupName,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module CreateAutoScalingGroup = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The unit of measurement for the value specified for desired capacity. Amazon EC2 Auto Scaling
+            supports <code>DesiredCapacityType</code> for attribute-based instance type selection
+            only. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-instance-type-requirements.html\">Creating
+                an Auto Scaling group using attribute-based instance type selection</a> in the
+                <i>Amazon EC2 Auto Scaling User Guide</i>.</p>
+        <p>By default, Amazon EC2 Auto Scaling specifies <code>units</code>, which translates into number of
+            instances.</p>
+        
+        <p>Valid values: <code>units</code> | <code>vcpu</code> | <code>memory-mib</code>
+         </p>")
+    @as("DesiredCapacityType")
+    desiredCapacityType: option<xmlStringMaxLen255>,
+    @ocaml.doc("<p>Reserved.</p>") @as("Context") context: option<context>,
+    @ocaml.doc("<p>The maximum amount of time, in seconds, that an instance can be in service. The
+            default is null. If specified, the value must be either 0 or a number equal to or
+            greater than 86,400 seconds (1 day). For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-max-instance-lifetime.html\">Replacing Auto Scaling instances based on maximum instance lifetime</a> in the
+                <i>Amazon EC2 Auto Scaling User Guide</i>.</p>")
+    @as("MaxInstanceLifetime")
+    maxInstanceLifetime: option<maxInstanceLifetime>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the service-linked role that the Auto Scaling group uses to
+            call other Amazon Web Services on your behalf. By default, Amazon EC2 Auto Scaling uses a service-linked role
+            named <code>AWSServiceRoleForAutoScaling</code>, which it creates if it does not exist.
+            For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-service-linked-role.html\">Service-linked
+                roles</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>")
+    @as("ServiceLinkedRoleARN")
+    serviceLinkedRoleARN: option<resourceName>,
+    @ocaml.doc("<p>One or more tags. You can tag your Auto Scaling group and propagate the tags to the Amazon EC2
+            instances it launches. Tags are not propagated to Amazon EBS volumes. To add tags to Amazon EBS
+            volumes, specify the tags in a launch template but use caution. If the launch template
+            specifies an instance tag with a key that is also specified for the Auto Scaling group, Amazon EC2 Auto Scaling
+            overrides the value of that instance tag with the value specified by the Auto Scaling group. For
+            more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-tagging.html\">Tagging Auto Scaling groups and
+                instances</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>")
+    @as("Tags")
+    tags: option<tags>,
+    @ocaml.doc("<p>One or more lifecycle hooks for the group, which specify actions to perform when
+            Amazon EC2 Auto Scaling launches or terminates instances.</p>")
+    @as("LifecycleHookSpecificationList")
+    lifecycleHookSpecificationList: option<lifecycleHookSpecifications>,
+    @ocaml.doc("<p>Indicates whether Capacity Rebalancing is enabled. Otherwise, Capacity Rebalancing is
+            disabled. When you turn on Capacity Rebalancing, Amazon EC2 Auto Scaling attempts to launch a Spot
+            Instance whenever Amazon EC2 notifies that a Spot Instance is at an elevated risk of
+            interruption. After launching a new instance, it then terminates an old instance. For
+            more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-capacity-rebalancing.html\">Amazon EC2 Auto Scaling
+                Capacity Rebalancing</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>")
+    @as("CapacityRebalance")
+    capacityRebalance: option<capacityRebalanceEnabled>,
+    @ocaml.doc("<p>Indicates whether newly launched instances are protected from termination by Amazon EC2 Auto Scaling
+            when scaling in. For more information about preventing instances from terminating on
+            scale in, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-instance-protection.html\">Using
+                instance scale-in protection</a> in the
+            <i>Amazon EC2 Auto Scaling User Guide</i>.</p>")
+    @as("NewInstancesProtectedFromScaleIn")
+    newInstancesProtectedFromScaleIn: option<instanceProtected>,
+    @ocaml.doc("<p>A policy or a list of policies that are used to select the instance to terminate.
+            These policies are executed in the order that you list them. For more information, see
+                <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html\">Controlling which Auto Scaling
+                instances terminate during scale in</a> in the
+                <i>Amazon EC2 Auto Scaling User Guide</i>.</p>")
+    @as("TerminationPolicies")
+    terminationPolicies: option<terminationPolicies>,
+    @ocaml.doc("<p>A comma-separated list of subnet IDs for a virtual private cloud (VPC) where instances
+            in the Auto Scaling group can be created. If you specify <code>VPCZoneIdentifier</code> with
+                <code>AvailabilityZones</code>, the subnets that you specify for this parameter must
+            reside in those Availability Zones.</p>
+        <p>Conditional: If your account supports EC2-Classic and VPC, this parameter is required
+            to launch instances into a VPC.</p>")
+    @as("VPCZoneIdentifier")
+    vpczoneIdentifier: option<xmlStringMaxLen2047>,
+    @ocaml.doc("<p>The name of an existing placement group into which to launch your instances, if any. A
+            placement group is a logical grouping of instances within a single Availability Zone.
+            You cannot specify multiple Availability Zones and a placement group. For more
+            information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html\">Placement Groups</a> in the
+                <i>Amazon EC2 User Guide for Linux Instances</i>.</p>")
+    @as("PlacementGroup")
+    placementGroup: option<xmlStringMaxLen255>,
+    @ocaml.doc("<p>The amount of time, in seconds, that Amazon EC2 Auto Scaling waits before checking the health status
+            of an EC2 instance that has come into service and marking it unhealthy due to a failed
+            health check. The default value is <code>0</code>. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html#health-check-grace-period\">Health
+                check grace period</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>
+        <p>Required if you are adding an <code>ELB</code> health check.</p>")
+    @as("HealthCheckGracePeriod")
+    healthCheckGracePeriod: option<healthCheckGracePeriod>,
+    @ocaml.doc("<p>The service to use for the health checks. The valid values are <code>EC2</code>
+            (default) and <code>ELB</code>. If you configure an Auto Scaling group to use load balancer
+            (ELB) health checks, it considers the instance unhealthy if it fails either the EC2
+            status checks or the load balancer health checks. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html\">Health checks
+                for Auto Scaling instances</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>")
+    @as("HealthCheckType")
+    healthCheckType: option<xmlStringMaxLen32>,
+    @ocaml.doc("<p>The Amazon Resource Names (ARN) of the target groups to associate with the Auto Scaling group.
+            Instances are registered as targets in a target group, and traffic is routed to the
+            target group. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html\">Elastic Load Balancing and
+                Amazon EC2 Auto Scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>")
+    @as("TargetGroupARNs")
+    targetGroupARNs: option<targetGroupARNs>,
+    @ocaml.doc("<p>A list of Classic Load Balancers associated with this Auto Scaling group. For
+            Application Load Balancers, Network Load Balancers, and Gateway Load Balancers, specify
+            the <code>TargetGroupARNs</code> property instead.</p>")
+    @as("LoadBalancerNames")
+    loadBalancerNames: option<loadBalancerNames>,
+    @ocaml.doc("<p>A list of Availability Zones where instances in the Auto Scaling group can be created. This
+            parameter is optional if you specify one or more subnets for
+                <code>VPCZoneIdentifier</code>.</p>
+        <p>Conditional: If your account supports EC2-Classic and VPC, this parameter is required
+            to launch instances into EC2-Classic.</p>")
+    @as("AvailabilityZones")
+    availabilityZones: option<availabilityZones>,
+    @ocaml.doc("<p>The amount of time, in seconds, after a scaling activity completes before another
+            scaling activity can start. The default value is <code>300</code>. This setting applies
+            when using simple scaling policies, but not when using other scaling policies or
+            scheduled scaling. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/Cooldown.html\">Scaling cooldowns for Amazon EC2 Auto Scaling</a>
+            in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>")
+    @as("DefaultCooldown")
+    defaultCooldown: option<cooldown>,
+    @ocaml.doc("<p>The desired capacity is the initial capacity of the Auto Scaling group at the time of its
+            creation and the capacity it attempts to maintain. It can scale beyond this capacity if
+            you configure auto scaling. This number must be greater than or equal to the minimum
+            size of the group and less than or equal to the maximum size of the group. If you do not
+            specify a desired capacity, the default is the minimum size of the group.</p>")
+    @as("DesiredCapacity")
+    desiredCapacity: option<autoScalingGroupDesiredCapacity>,
+    @ocaml.doc("<p>The maximum size of the group.</p>
+        <note>
+            <p>With a mixed instances policy that uses instance weighting, Amazon EC2 Auto Scaling may need to
+                go above <code>MaxSize</code> to meet your capacity requirements. In this event,
+                Amazon EC2 Auto Scaling will never go above <code>MaxSize</code> by more than your largest instance
+                weight (weights that define how many units each instance contributes to the desired
+                capacity of the group).</p>
+        </note>")
+    @as("MaxSize")
+    maxSize: autoScalingGroupMaxSize,
+    @ocaml.doc("<p>The minimum size of the group.</p>") @as("MinSize")
+    minSize: autoScalingGroupMinSize,
+    @ocaml.doc("<p>The ID of the instance used to base the launch configuration on. If specified, Amazon
+            EC2 Auto Scaling uses the configuration values from the specified instance to create a
+            new launch configuration. To get the instance ID, use the Amazon EC2 <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html\">DescribeInstances</a> API operation. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-from-instance.html\">Creating an Auto Scaling group using an EC2 instance</a> in the
+                <i>Amazon EC2 Auto Scaling User Guide</i>.</p>")
+    @as("InstanceId")
+    instanceId: option<xmlStringMaxLen19>,
+    @ocaml.doc("<p>An embedded object that specifies a mixed instances policy.</p>
+        
+        
+        
+        <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-mixed-instances-groups.html\">Auto Scaling
+                groups with multiple instance types and purchase options</a> in the
+                <i>Amazon EC2 Auto Scaling User Guide</i>.</p>")
+    @as("MixedInstancesPolicy")
+    mixedInstancesPolicy: option<mixedInstancesPolicy>,
+    @ocaml.doc("<p>Parameters used to specify the launch template and version to use to launch instances. </p>
+        <p>Conditional: You must specify either a launch template (<code>LaunchTemplate</code> or
+                <code>MixedInstancesPolicy</code>) or a launch configuration
+                (<code>LaunchConfigurationName</code> or <code>InstanceId</code>).</p>
+        <note>
+            <p>The launch template that is specified must be configured for use with an Auto Scaling
+                group. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-template.html\">Creating a launch
+                    template for an Auto Scaling group</a> in the
+                <i>Amazon EC2 Auto Scaling User Guide</i>.</p>
+        </note>")
+    @as("LaunchTemplate")
+    launchTemplate: option<launchTemplateSpecification>,
+    @ocaml.doc("<p>The name of the launch configuration to use to launch instances. </p>
+        <p>Conditional: You must specify either a launch template (<code>LaunchTemplate</code> or
+                <code>MixedInstancesPolicy</code>) or a launch configuration
+                (<code>LaunchConfigurationName</code> or <code>InstanceId</code>).</p>")
+    @as("LaunchConfigurationName")
+    launchConfigurationName: option<xmlStringMaxLen255>,
+    @ocaml.doc(
+      "<p>The name of the Auto Scaling group. This name must be unique per Region per account.</p>"
+    )
+    @as("AutoScalingGroupName")
+    autoScalingGroupName: xmlStringMaxLen255,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-autoscaling") @new
+  external new: request => t = "CreateAutoScalingGroupCommand"
+  let make = (
+    ~maxSize,
+    ~minSize,
+    ~autoScalingGroupName,
+    ~desiredCapacityType=?,
+    ~context=?,
+    ~maxInstanceLifetime=?,
+    ~serviceLinkedRoleARN=?,
+    ~tags=?,
+    ~lifecycleHookSpecificationList=?,
+    ~capacityRebalance=?,
+    ~newInstancesProtectedFromScaleIn=?,
+    ~terminationPolicies=?,
+    ~vpczoneIdentifier=?,
+    ~placementGroup=?,
+    ~healthCheckGracePeriod=?,
+    ~healthCheckType=?,
+    ~targetGroupARNs=?,
+    ~loadBalancerNames=?,
+    ~availabilityZones=?,
+    ~defaultCooldown=?,
+    ~desiredCapacity=?,
+    ~instanceId=?,
+    ~mixedInstancesPolicy=?,
+    ~launchTemplate=?,
+    ~launchConfigurationName=?,
+    (),
+  ) =>
+    new({
+      desiredCapacityType: desiredCapacityType,
+      context: context,
+      maxInstanceLifetime: maxInstanceLifetime,
+      serviceLinkedRoleARN: serviceLinkedRoleARN,
+      tags: tags,
+      lifecycleHookSpecificationList: lifecycleHookSpecificationList,
+      capacityRebalance: capacityRebalance,
+      newInstancesProtectedFromScaleIn: newInstancesProtectedFromScaleIn,
+      terminationPolicies: terminationPolicies,
+      vpczoneIdentifier: vpczoneIdentifier,
+      placementGroup: placementGroup,
+      healthCheckGracePeriod: healthCheckGracePeriod,
+      healthCheckType: healthCheckType,
+      targetGroupARNs: targetGroupARNs,
+      loadBalancerNames: loadBalancerNames,
+      availabilityZones: availabilityZones,
+      defaultCooldown: defaultCooldown,
+      desiredCapacity: desiredCapacity,
+      maxSize: maxSize,
+      minSize: minSize,
+      instanceId: instanceId,
+      mixedInstancesPolicy: mixedInstancesPolicy,
+      launchTemplate: launchTemplate,
+      launchConfigurationName: launchConfigurationName,
+      autoScalingGroupName: autoScalingGroupName,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module StartInstanceRefresh = {
+  type t
+  type request = {
+    @ocaml.doc("<p>Set of preferences associated with the instance refresh request. If not provided, the
+            default values are used.</p>")
+    @as("Preferences")
+    preferences: option<refreshPreferences>,
+    @ocaml.doc("<p>The desired configuration. For example, the desired configuration can specify a new
+            launch template or a new version of the current launch template.</p>
+        <p>Once the instance refresh succeeds, Amazon EC2 Auto Scaling updates the settings of the Auto Scaling group to
+            reflect the new desired configuration. </p>
+        <note>
+            <p>When you specify a new launch template or a new version of the current launch
+                template for your desired configuration, consider enabling the
+                    <code>SkipMatching</code> property in preferences. If it's enabled, Amazon EC2 Auto Scaling
+                skips replacing instances that already use the specified launch template and
+                version. This can help you reduce the number of replacements that are required to
+                apply updates. </p>
+        </note>")
+    @as("DesiredConfiguration")
+    desiredConfiguration: option<desiredConfiguration>,
+    @ocaml.doc("<p>The strategy to use for the instance refresh. The only valid value is
+                <code>Rolling</code>.</p>
+        <p>A rolling update helps you update your instances gradually. A rolling update can fail
+            due to failed health checks or if instances are on standby or are protected from scale
+            in. If the rolling update process fails, any instances that are replaced are not rolled
+            back to their previous configuration. </p>")
+    @as("Strategy")
+    strategy: option<refreshStrategy>,
+    @ocaml.doc("<p>The name of the Auto Scaling group.</p>") @as("AutoScalingGroupName")
+    autoScalingGroupName: xmlStringMaxLen255,
+  }
+  type response = {
+    @ocaml.doc("<p>A unique ID for tracking the progress of the request.</p>")
+    @as("InstanceRefreshId")
+    instanceRefreshId: option<xmlStringMaxLen255>,
+  }
+  @module("@aws-sdk/client-autoscaling") @new
+  external new: request => t = "StartInstanceRefreshCommand"
+  let make = (~autoScalingGroupName, ~preferences=?, ~desiredConfiguration=?, ~strategy=?, ()) =>
+    new({
+      preferences: preferences,
+      desiredConfiguration: desiredConfiguration,
+      strategy: strategy,
+      autoScalingGroupName: autoScalingGroupName,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module DescribeAutoScalingGroups = {
+  type t
+  type request = {
+    @ocaml.doc("<p>One or more filters to limit the results based on specific tags.
+            </p>")
+    @as("Filters")
+    filters: option<filters>,
+    @ocaml.doc("<p>The maximum number of items to return with this call. The default value is
+                <code>50</code> and the maximum value is <code>100</code>.</p>")
+    @as("MaxRecords")
+    maxRecords: option<maxRecords>,
+    @ocaml.doc("<p>The token for the next set of items to return. (You received this token from a
+            previous call.)</p>")
+    @as("NextToken")
+    nextToken: option<xmlString>,
+    @ocaml.doc("<p>The names of the Auto Scaling groups. By default, you can only specify up to 50 names. You can
+            optionally increase this limit using the <code>MaxRecords</code> parameter.</p>
+        <p>If you omit this parameter, all Auto Scaling groups are described.</p>")
+    @as("AutoScalingGroupNames")
+    autoScalingGroupNames: option<autoScalingGroupNames>,
+  }
+  type response = {
+    @ocaml.doc("<p>A string that indicates that the response contains more items than can be returned in
+            a single response. To receive additional items, specify this string for the
+                <code>NextToken</code> value when requesting the next set of items. This value is
+            null when there are no more items to return.</p>")
+    @as("NextToken")
+    nextToken: option<xmlString>,
+    @ocaml.doc("<p>The groups.</p>") @as("AutoScalingGroups") autoScalingGroups: autoScalingGroups,
+  }
+  @module("@aws-sdk/client-autoscaling") @new
+  external new: request => t = "DescribeAutoScalingGroupsCommand"
+  let make = (~filters=?, ~maxRecords=?, ~nextToken=?, ~autoScalingGroupNames=?, ()) =>
+    new({
+      filters: filters,
+      maxRecords: maxRecords,
+      nextToken: nextToken,
+      autoScalingGroupNames: autoScalingGroupNames,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module DescribeInstanceRefreshes = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The maximum number of items to return with this call. The default value is
+                <code>50</code> and the maximum value is <code>100</code>.</p>")
+    @as("MaxRecords")
+    maxRecords: option<maxRecords>,
+    @ocaml.doc("<p>The token for the next set of items to return. (You received this token from a
+            previous call.)</p>")
+    @as("NextToken")
+    nextToken: option<xmlString>,
+    @ocaml.doc("<p>One or more instance refresh IDs.</p>") @as("InstanceRefreshIds")
+    instanceRefreshIds: option<instanceRefreshIds>,
+    @ocaml.doc("<p>The name of the Auto Scaling group.</p>") @as("AutoScalingGroupName")
+    autoScalingGroupName: xmlStringMaxLen255,
+  }
+  type response = {
+    @ocaml.doc("<p>A string that indicates that the response contains more items than can be returned in
+            a single response. To receive additional items, specify this string for the
+                <code>NextToken</code> value when requesting the next set of items. This value is
+            null when there are no more items to return.</p>")
+    @as("NextToken")
+    nextToken: option<xmlString>,
+    @ocaml.doc("<p>The instance refreshes for the specified group.</p>") @as("InstanceRefreshes")
+    instanceRefreshes: option<instanceRefreshes>,
+  }
+  @module("@aws-sdk/client-autoscaling") @new
+  external new: request => t = "DescribeInstanceRefreshesCommand"
+  let make = (~autoScalingGroupName, ~maxRecords=?, ~nextToken=?, ~instanceRefreshIds=?, ()) =>
+    new({
+      maxRecords: maxRecords,
+      nextToken: nextToken,
+      instanceRefreshIds: instanceRefreshIds,
+      autoScalingGroupName: autoScalingGroupName,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module PutScalingPolicy = {
   type t
   type request = {
-    @ocaml.doc("<p>A predictive scaling policy. Provides support for only predefined metrics.</p>
-        <p>Predictive scaling works with CPU utilization, network in/out, and the Application
-            Load Balancer request count.</p>
+    @ocaml.doc("<p>A predictive scaling policy. Provides support for predefined and custom
+            metrics.</p>
+        <p>Predefined metrics include CPU utilization, network in/out, and the Application Load
+            Balancer request count.</p>
         <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_PredictiveScalingConfiguration.html\">PredictiveScalingConfiguration</a> in the <i>Amazon EC2 Auto Scaling API
                 Reference</i>.</p>
         <p>Required if the policy type is <code>PredictiveScaling</code>.</p>")
@@ -4043,7 +5133,7 @@ module PutScalingPolicy = {
             <i>Amazon EC2 Auto Scaling User Guide</i>.</p>")
     @as("Enabled")
     enabled: option<scalingPolicyEnabled>,
-    @ocaml.doc("<p>A target tracking scaling policy. Provides support for predefined or customized
+    @ocaml.doc("<p>A target tracking scaling policy. Provides support for predefined or custom
             metrics.</p>
         <p>The following predefined metrics are available:</p>
         <ul>
@@ -4248,457 +5338,6 @@ module GetPredictiveScalingForecast = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
-module DescribeInstanceRefreshes = {
-  type t
-  type request = {
-    @ocaml.doc("<p>The maximum number of items to return with this call. The default value is
-                <code>50</code> and the maximum value is <code>100</code>.</p>")
-    @as("MaxRecords")
-    maxRecords: option<maxRecords>,
-    @ocaml.doc("<p>The token for the next set of items to return. (You received this token from a
-            previous call.)</p>")
-    @as("NextToken")
-    nextToken: option<xmlString>,
-    @ocaml.doc("<p>One or more instance refresh IDs.</p>") @as("InstanceRefreshIds")
-    instanceRefreshIds: option<instanceRefreshIds>,
-    @ocaml.doc("<p>The name of the Auto Scaling group.</p>") @as("AutoScalingGroupName")
-    autoScalingGroupName: xmlStringMaxLen255,
-  }
-  type response = {
-    @ocaml.doc("<p>A string that indicates that the response contains more items than can be returned in
-            a single response. To receive additional items, specify this string for the
-                <code>NextToken</code> value when requesting the next set of items. This value is
-            null when there are no more items to return.</p>")
-    @as("NextToken")
-    nextToken: option<xmlString>,
-    @ocaml.doc("<p>The instance refreshes for the specified group.</p>") @as("InstanceRefreshes")
-    instanceRefreshes: option<instanceRefreshes>,
-  }
-  @module("@aws-sdk/client-autoscaling") @new
-  external new: request => t = "DescribeInstanceRefreshesCommand"
-  let make = (~autoScalingGroupName, ~maxRecords=?, ~nextToken=?, ~instanceRefreshIds=?, ()) =>
-    new({
-      maxRecords: maxRecords,
-      nextToken: nextToken,
-      instanceRefreshIds: instanceRefreshIds,
-      autoScalingGroupName: autoScalingGroupName,
-    })
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
-module UpdateAutoScalingGroup = {
-  type t
-  type request = {
-    @ocaml.doc("<p>Enables or disables Capacity Rebalancing. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/capacity-rebalance.html\">Amazon EC2 Auto Scaling Capacity Rebalancing</a> in the
-            <i>Amazon EC2 Auto Scaling User Guide</i>.</p>")
-    @as("CapacityRebalance")
-    capacityRebalance: option<capacityRebalanceEnabled>,
-    @ocaml.doc("<p>The maximum amount of time, in seconds, that an instance can be in service. The
-            default is null. If specified, the value must be either 0 or a number equal to or
-            greater than 86,400 seconds (1 day). To clear a previously set value, specify a new
-            value of 0. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-max-instance-lifetime.html\">Replacing Auto Scaling
-                instances based on maximum instance lifetime</a> in the
-                <i>Amazon EC2 Auto Scaling User Guide</i>.</p>")
-    @as("MaxInstanceLifetime")
-    maxInstanceLifetime: option<maxInstanceLifetime>,
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the service-linked role that the Auto Scaling group uses to
-            call other Amazon Web Services on your behalf. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-service-linked-role.html\">Service-linked
-                roles</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>")
-    @as("ServiceLinkedRoleARN")
-    serviceLinkedRoleARN: option<resourceName>,
-    @ocaml.doc("<p>Indicates whether newly launched instances are protected from termination by Amazon EC2 Auto Scaling
-            when scaling in. For more information about preventing instances from terminating on
-            scale in, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html#instance-protection\">Instance scale-in protection</a> in the
-            <i>Amazon EC2 Auto Scaling User Guide</i>.</p>")
-    @as("NewInstancesProtectedFromScaleIn")
-    newInstancesProtectedFromScaleIn: option<instanceProtected>,
-    @ocaml.doc("<p>A policy or a list of policies that are used to select the instances to terminate. The
-            policies are executed in the order that you list them. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html\">Controlling which Auto Scaling instances terminate during scale in</a> in the
-                <i>Amazon EC2 Auto Scaling User Guide</i>.</p>")
-    @as("TerminationPolicies")
-    terminationPolicies: option<terminationPolicies>,
-    @ocaml.doc("<p>A comma-separated list of subnet IDs for a virtual private cloud (VPC). If you specify
-                <code>VPCZoneIdentifier</code> with <code>AvailabilityZones</code>, the subnets that
-            you specify for this parameter must reside in those Availability Zones.</p>")
-    @as("VPCZoneIdentifier")
-    vpczoneIdentifier: option<xmlStringMaxLen2047>,
-    @ocaml.doc("<p>The name of an existing placement group into which to launch your instances, if any. A
-            placement group is a logical grouping of instances within a single Availability Zone.
-            You cannot specify multiple Availability Zones and a placement group. For more
-            information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html\">Placement Groups</a> in the
-                <i>Amazon EC2 User Guide for Linux Instances</i>.</p>")
-    @as("PlacementGroup")
-    placementGroup: option<xmlStringMaxLen255>,
-    @ocaml.doc("<p>The amount of time, in seconds, that Amazon EC2 Auto Scaling waits before checking the health status
-            of an EC2 instance that has come into service. The default value is <code>0</code>. For
-            more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html#health-check-grace-period\">Health
-                check grace period</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>
-        <p>Conditional: Required if you are adding an <code>ELB</code> health check.</p>")
-    @as("HealthCheckGracePeriod")
-    healthCheckGracePeriod: option<healthCheckGracePeriod>,
-    @ocaml.doc("<p>The service to use for the health checks. The valid values are <code>EC2</code> and
-                <code>ELB</code>. If you configure an Auto Scaling group to use <code>ELB</code> health
-            checks, it considers the instance unhealthy if it fails either the EC2 status checks or
-            the load balancer health checks.</p>")
-    @as("HealthCheckType")
-    healthCheckType: option<xmlStringMaxLen32>,
-    @ocaml.doc("<p>One or more Availability Zones for the group.</p>") @as("AvailabilityZones")
-    availabilityZones: option<availabilityZones>,
-    @ocaml.doc("<p>The amount of time, in seconds, after a scaling activity completes before another
-            scaling activity can start. The default value is <code>300</code>. This setting applies
-            when using simple scaling policies, but not when using other scaling policies or
-            scheduled scaling. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/Cooldown.html\">Scaling cooldowns for Amazon EC2 Auto Scaling</a>
-            in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>")
-    @as("DefaultCooldown")
-    defaultCooldown: option<cooldown>,
-    @ocaml.doc("<p>The desired capacity is the initial capacity of the Auto Scaling group after this operation
-            completes and the capacity it attempts to maintain. This number must be greater than or
-            equal to the minimum size of the group and less than or equal to the maximum size of the
-            group.</p>")
-    @as("DesiredCapacity")
-    desiredCapacity: option<autoScalingGroupDesiredCapacity>,
-    @ocaml.doc("<p>The maximum size of the Auto Scaling group.</p>
-        <note>
-            <p>With a mixed instances policy that uses instance weighting, Amazon EC2 Auto Scaling may need to
-                go above <code>MaxSize</code> to meet your capacity requirements. In this event,
-                Amazon EC2 Auto Scaling will never go above <code>MaxSize</code> by more than your largest instance
-                weight (weights that define how many units each instance contributes to the desired
-                capacity of the group).</p>
-        </note>")
-    @as("MaxSize")
-    maxSize: option<autoScalingGroupMaxSize>,
-    @ocaml.doc("<p>The minimum size of the Auto Scaling group.</p>") @as("MinSize")
-    minSize: option<autoScalingGroupMinSize>,
-    @ocaml.doc("<p>An embedded object that specifies a mixed instances policy. When you make changes to
-            an existing policy, all optional properties are left unchanged if not specified. For
-            more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html\">Auto Scaling groups with multiple
-                instance types and purchase options</a> in the <i>Amazon EC2 Auto Scaling User
-                Guide</i>.</p>")
-    @as("MixedInstancesPolicy")
-    mixedInstancesPolicy: option<mixedInstancesPolicy>,
-    @ocaml.doc("<p>The launch template and version to use to specify the updates. If you specify
-                <code>LaunchTemplate</code> in your update request, you can't specify
-                <code>LaunchConfigurationName</code> or <code>MixedInstancesPolicy</code>.</p>")
-    @as("LaunchTemplate")
-    launchTemplate: option<launchTemplateSpecification>,
-    @ocaml.doc("<p>The name of the launch configuration. If you specify
-                <code>LaunchConfigurationName</code> in your update request, you can't specify
-                <code>LaunchTemplate</code> or <code>MixedInstancesPolicy</code>.</p>")
-    @as("LaunchConfigurationName")
-    launchConfigurationName: option<xmlStringMaxLen255>,
-    @ocaml.doc("<p>The name of the Auto Scaling group.</p>") @as("AutoScalingGroupName")
-    autoScalingGroupName: xmlStringMaxLen255,
-  }
-
-  @module("@aws-sdk/client-autoscaling") @new
-  external new: request => t = "UpdateAutoScalingGroupCommand"
-  let make = (
-    ~autoScalingGroupName,
-    ~capacityRebalance=?,
-    ~maxInstanceLifetime=?,
-    ~serviceLinkedRoleARN=?,
-    ~newInstancesProtectedFromScaleIn=?,
-    ~terminationPolicies=?,
-    ~vpczoneIdentifier=?,
-    ~placementGroup=?,
-    ~healthCheckGracePeriod=?,
-    ~healthCheckType=?,
-    ~availabilityZones=?,
-    ~defaultCooldown=?,
-    ~desiredCapacity=?,
-    ~maxSize=?,
-    ~minSize=?,
-    ~mixedInstancesPolicy=?,
-    ~launchTemplate=?,
-    ~launchConfigurationName=?,
-    (),
-  ) =>
-    new({
-      capacityRebalance: capacityRebalance,
-      maxInstanceLifetime: maxInstanceLifetime,
-      serviceLinkedRoleARN: serviceLinkedRoleARN,
-      newInstancesProtectedFromScaleIn: newInstancesProtectedFromScaleIn,
-      terminationPolicies: terminationPolicies,
-      vpczoneIdentifier: vpczoneIdentifier,
-      placementGroup: placementGroup,
-      healthCheckGracePeriod: healthCheckGracePeriod,
-      healthCheckType: healthCheckType,
-      availabilityZones: availabilityZones,
-      defaultCooldown: defaultCooldown,
-      desiredCapacity: desiredCapacity,
-      maxSize: maxSize,
-      minSize: minSize,
-      mixedInstancesPolicy: mixedInstancesPolicy,
-      launchTemplate: launchTemplate,
-      launchConfigurationName: launchConfigurationName,
-      autoScalingGroupName: autoScalingGroupName,
-    })
-  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
-}
-
-module DescribeLaunchConfigurations = {
-  type t
-  type request = {
-    @ocaml.doc("<p>The maximum number of items to return with this call. The default value is
-                <code>50</code> and the maximum value is <code>100</code>.</p>")
-    @as("MaxRecords")
-    maxRecords: option<maxRecords>,
-    @ocaml.doc("<p>The token for the next set of items to return. (You received this token from a
-            previous call.)</p>")
-    @as("NextToken")
-    nextToken: option<xmlString>,
-    @ocaml.doc("<p>The launch configuration names. If you omit this parameter, all launch configurations
-            are described.</p>
-        <p>Array Members: Maximum number of 50 items.</p>")
-    @as("LaunchConfigurationNames")
-    launchConfigurationNames: option<launchConfigurationNames>,
-  }
-  type response = {
-    @ocaml.doc("<p>A string that indicates that the response contains more items than can be returned in
-            a single response. To receive additional items, specify this string for the
-                <code>NextToken</code> value when requesting the next set of items. This value is
-            null when there are no more items to return.</p>")
-    @as("NextToken")
-    nextToken: option<xmlString>,
-    @ocaml.doc("<p>The launch configurations.</p>") @as("LaunchConfigurations")
-    launchConfigurations: launchConfigurations,
-  }
-  @module("@aws-sdk/client-autoscaling") @new
-  external new: request => t = "DescribeLaunchConfigurationsCommand"
-  let make = (~maxRecords=?, ~nextToken=?, ~launchConfigurationNames=?, ()) =>
-    new({
-      maxRecords: maxRecords,
-      nextToken: nextToken,
-      launchConfigurationNames: launchConfigurationNames,
-    })
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
-module CreateAutoScalingGroup = {
-  type t
-  type request = {
-    @ocaml.doc("<p>The maximum amount of time, in seconds, that an instance can be in service. The
-            default is null. If specified, the value must be either 0 or a number equal to or
-            greater than 86,400 seconds (1 day). For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-max-instance-lifetime.html\">Replacing Auto Scaling instances based on maximum instance lifetime</a> in the
-                <i>Amazon EC2 Auto Scaling User Guide</i>.</p>")
-    @as("MaxInstanceLifetime")
-    maxInstanceLifetime: option<maxInstanceLifetime>,
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the service-linked role that the Auto Scaling group uses to
-            call other Amazon Web Services on your behalf. By default, Amazon EC2 Auto Scaling uses a service-linked role
-            named AWSServiceRoleForAutoScaling, which it creates if it does not exist. For more
-            information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-service-linked-role.html\">Service-linked
-                roles</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>")
-    @as("ServiceLinkedRoleARN")
-    serviceLinkedRoleARN: option<resourceName>,
-    @ocaml.doc("<p>One or more tags. You can tag your Auto Scaling group and propagate the tags to the Amazon EC2
-            instances it launches. Tags are not propagated to Amazon EBS volumes. To add tags to Amazon EBS
-            volumes, specify the tags in a launch template but use caution. If the launch template
-            specifies an instance tag with a key that is also specified for the Auto Scaling group, Amazon EC2 Auto Scaling
-            overrides the value of that instance tag with the value specified by the Auto Scaling group. For
-            more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-tagging.html\">Tagging Auto Scaling groups and
-                instances</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>")
-    @as("Tags")
-    tags: option<tags>,
-    @ocaml.doc("<p>One or more lifecycle hooks for the group, which specify actions to perform when
-            Amazon EC2 Auto Scaling launches or terminates instances.</p>")
-    @as("LifecycleHookSpecificationList")
-    lifecycleHookSpecificationList: option<lifecycleHookSpecifications>,
-    @ocaml.doc("<p>Indicates whether Capacity Rebalancing is enabled. Otherwise, Capacity Rebalancing is
-            disabled. When you turn on Capacity Rebalancing, Amazon EC2 Auto Scaling attempts to launch a Spot
-            Instance whenever Amazon EC2 notifies that a Spot Instance is at an elevated risk of
-            interruption. After launching a new instance, it then terminates an old instance. For
-            more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/capacity-rebalance.html\">Amazon EC2 Auto Scaling Capacity
-                Rebalancing</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>")
-    @as("CapacityRebalance")
-    capacityRebalance: option<capacityRebalanceEnabled>,
-    @ocaml.doc("<p>Indicates whether newly launched instances are protected from termination by Amazon EC2 Auto Scaling
-            when scaling in. For more information about preventing instances from terminating on
-            scale in, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html#instance-protection\">Instance scale-in protection</a> in the
-            <i>Amazon EC2 Auto Scaling User Guide</i>.</p>")
-    @as("NewInstancesProtectedFromScaleIn")
-    newInstancesProtectedFromScaleIn: option<instanceProtected>,
-    @ocaml.doc("<p>A policy or a list of policies that are used to select the instance to terminate.
-            These policies are executed in the order that you list them. For more information, see
-                <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html\">Controlling which Auto Scaling
-                instances terminate during scale in</a> in the
-                <i>Amazon EC2 Auto Scaling User Guide</i>.</p>")
-    @as("TerminationPolicies")
-    terminationPolicies: option<terminationPolicies>,
-    @ocaml.doc("<p>A comma-separated list of subnet IDs for a virtual private cloud (VPC) where instances
-            in the Auto Scaling group can be created. If you specify <code>VPCZoneIdentifier</code> with
-                <code>AvailabilityZones</code>, the subnets that you specify for this parameter must
-            reside in those Availability Zones.</p>
-        <p>Conditional: If your account supports EC2-Classic and VPC, this parameter is required
-            to launch instances into a VPC.</p>")
-    @as("VPCZoneIdentifier")
-    vpczoneIdentifier: option<xmlStringMaxLen2047>,
-    @ocaml.doc("<p>The name of an existing placement group into which to launch your instances, if any. A
-            placement group is a logical grouping of instances within a single Availability Zone.
-            You cannot specify multiple Availability Zones and a placement group. For more
-            information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html\">Placement Groups</a> in the
-                <i>Amazon EC2 User Guide for Linux Instances</i>.</p>")
-    @as("PlacementGroup")
-    placementGroup: option<xmlStringMaxLen255>,
-    @ocaml.doc("<p>The amount of time, in seconds, that Amazon EC2 Auto Scaling waits before checking the health status
-            of an EC2 instance that has come into service. During this time, any health check
-            failures for the instance are ignored. The default value is <code>0</code>. For more
-            information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html#health-check-grace-period\">Health
-                check grace period</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>
-        <p>Conditional: Required if you are adding an <code>ELB</code> health check.</p>")
-    @as("HealthCheckGracePeriod")
-    healthCheckGracePeriod: option<healthCheckGracePeriod>,
-    @ocaml.doc("<p>The service to use for the health checks. The valid values are <code>EC2</code>
-            (default) and <code>ELB</code>. If you configure an Auto Scaling group to use load balancer
-            (ELB) health checks, it considers the instance unhealthy if it fails either the EC2
-            status checks or the load balancer health checks. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html\">Health checks
-                for Auto Scaling instances</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>")
-    @as("HealthCheckType")
-    healthCheckType: option<xmlStringMaxLen32>,
-    @ocaml.doc("<p>The Amazon Resource Names (ARN) of the target groups to associate with the Auto Scaling group.
-            Instances are registered as targets in a target group, and traffic is routed to the
-            target group. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html\">Elastic Load Balancing and
-                Amazon EC2 Auto Scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>")
-    @as("TargetGroupARNs")
-    targetGroupARNs: option<targetGroupARNs>,
-    @ocaml.doc("<p>A list of Classic Load Balancers associated with this Auto Scaling group. For
-            Application Load Balancers, Network Load Balancers, and Gateway Load Balancers, specify
-            the <code>TargetGroupARNs</code> property instead.</p>")
-    @as("LoadBalancerNames")
-    loadBalancerNames: option<loadBalancerNames>,
-    @ocaml.doc("<p>A list of Availability Zones where instances in the Auto Scaling group can be created. This
-            parameter is optional if you specify one or more subnets for
-                <code>VPCZoneIdentifier</code>.</p>
-        <p>Conditional: If your account supports EC2-Classic and VPC, this parameter is required
-            to launch instances into EC2-Classic.</p>")
-    @as("AvailabilityZones")
-    availabilityZones: option<availabilityZones>,
-    @ocaml.doc("<p>The amount of time, in seconds, after a scaling activity completes before another
-            scaling activity can start. The default value is <code>300</code>. This setting applies
-            when using simple scaling policies, but not when using other scaling policies or
-            scheduled scaling. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/Cooldown.html\">Scaling cooldowns for Amazon EC2 Auto Scaling</a>
-            in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>")
-    @as("DefaultCooldown")
-    defaultCooldown: option<cooldown>,
-    @ocaml.doc("<p>The desired capacity is the initial capacity of the Auto Scaling group at the time of its
-            creation and the capacity it attempts to maintain. It can scale beyond this capacity if
-            you configure auto scaling. This number must be greater than or equal to the minimum
-            size of the group and less than or equal to the maximum size of the group. If you do not
-            specify a desired capacity, the default is the minimum size of the group.</p>")
-    @as("DesiredCapacity")
-    desiredCapacity: option<autoScalingGroupDesiredCapacity>,
-    @ocaml.doc("<p>The maximum size of the group.</p>
-        <note>
-            <p>With a mixed instances policy that uses instance weighting, Amazon EC2 Auto Scaling may need to
-                go above <code>MaxSize</code> to meet your capacity requirements. In this event,
-                Amazon EC2 Auto Scaling will never go above <code>MaxSize</code> by more than your largest instance
-                weight (weights that define how many units each instance contributes to the desired
-                capacity of the group).</p>
-        </note>")
-    @as("MaxSize")
-    maxSize: autoScalingGroupMaxSize,
-    @ocaml.doc("<p>The minimum size of the group.</p>") @as("MinSize")
-    minSize: autoScalingGroupMinSize,
-    @ocaml.doc("<p>The ID of the instance used to base the launch configuration on. If specified, Amazon
-            EC2 Auto Scaling uses the configuration values from the specified instance to create a
-            new launch configuration. To get the instance ID, use the Amazon EC2 <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html\">DescribeInstances</a> API operation. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-from-instance.html\">Creating an Auto Scaling group using an EC2 instance</a> in the
-                <i>Amazon EC2 Auto Scaling User Guide</i>.</p>")
-    @as("InstanceId")
-    instanceId: option<xmlStringMaxLen19>,
-    @ocaml.doc("<p>An embedded object that specifies a mixed instances policy. The required properties
-            must be specified. If optional properties are unspecified, their default values are
-            used.</p>
-        <p>The policy includes properties that not only define the distribution of On-Demand
-            Instances and Spot Instances, the maximum price to pay for Spot Instances, and how the
-            Auto Scaling group allocates instance types to fulfill On-Demand and Spot capacities, but also
-            the properties that specify the instance configuration information—the launch template
-            and instance types. The policy can also include a weight for each instance type and
-            different launch templates for individual instance types. For more information, see
-                <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html\">Auto Scaling groups with multiple
-                instance types and purchase options</a> in the <i>Amazon EC2 Auto Scaling User
-                Guide</i>.</p>")
-    @as("MixedInstancesPolicy")
-    mixedInstancesPolicy: option<mixedInstancesPolicy>,
-    @ocaml.doc("<p>Parameters used to specify the launch template and version to use to launch instances. </p>
-        <p>Conditional: You must specify either a launch template (<code>LaunchTemplate</code> or
-                <code>MixedInstancesPolicy</code>) or a launch configuration
-                (<code>LaunchConfigurationName</code> or <code>InstanceId</code>).</p>
-        <note>
-            <p>The launch template that is specified must be configured for use with an Auto Scaling
-                group. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-template.html\">Creating a launch
-                    template for an Auto Scaling group</a> in the
-                <i>Amazon EC2 Auto Scaling User Guide</i>.</p>
-        </note>")
-    @as("LaunchTemplate")
-    launchTemplate: option<launchTemplateSpecification>,
-    @ocaml.doc("<p>The name of the launch configuration to use to launch instances. </p>
-        <p>Conditional: You must specify either a launch template (<code>LaunchTemplate</code> or
-                <code>MixedInstancesPolicy</code>) or a launch configuration
-                (<code>LaunchConfigurationName</code> or <code>InstanceId</code>).</p>")
-    @as("LaunchConfigurationName")
-    launchConfigurationName: option<xmlStringMaxLen255>,
-    @ocaml.doc(
-      "<p>The name of the Auto Scaling group. This name must be unique per Region per account.</p>"
-    )
-    @as("AutoScalingGroupName")
-    autoScalingGroupName: xmlStringMaxLen255,
-  }
-
-  @module("@aws-sdk/client-autoscaling") @new
-  external new: request => t = "CreateAutoScalingGroupCommand"
-  let make = (
-    ~maxSize,
-    ~minSize,
-    ~autoScalingGroupName,
-    ~maxInstanceLifetime=?,
-    ~serviceLinkedRoleARN=?,
-    ~tags=?,
-    ~lifecycleHookSpecificationList=?,
-    ~capacityRebalance=?,
-    ~newInstancesProtectedFromScaleIn=?,
-    ~terminationPolicies=?,
-    ~vpczoneIdentifier=?,
-    ~placementGroup=?,
-    ~healthCheckGracePeriod=?,
-    ~healthCheckType=?,
-    ~targetGroupARNs=?,
-    ~loadBalancerNames=?,
-    ~availabilityZones=?,
-    ~defaultCooldown=?,
-    ~desiredCapacity=?,
-    ~instanceId=?,
-    ~mixedInstancesPolicy=?,
-    ~launchTemplate=?,
-    ~launchConfigurationName=?,
-    (),
-  ) =>
-    new({
-      maxInstanceLifetime: maxInstanceLifetime,
-      serviceLinkedRoleARN: serviceLinkedRoleARN,
-      tags: tags,
-      lifecycleHookSpecificationList: lifecycleHookSpecificationList,
-      capacityRebalance: capacityRebalance,
-      newInstancesProtectedFromScaleIn: newInstancesProtectedFromScaleIn,
-      terminationPolicies: terminationPolicies,
-      vpczoneIdentifier: vpczoneIdentifier,
-      placementGroup: placementGroup,
-      healthCheckGracePeriod: healthCheckGracePeriod,
-      healthCheckType: healthCheckType,
-      targetGroupARNs: targetGroupARNs,
-      loadBalancerNames: loadBalancerNames,
-      availabilityZones: availabilityZones,
-      defaultCooldown: defaultCooldown,
-      desiredCapacity: desiredCapacity,
-      maxSize: maxSize,
-      minSize: minSize,
-      instanceId: instanceId,
-      mixedInstancesPolicy: mixedInstancesPolicy,
-      launchTemplate: launchTemplate,
-      launchConfigurationName: launchConfigurationName,
-      autoScalingGroupName: autoScalingGroupName,
-    })
-  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
-}
-
 module DescribePolicies = {
   type t
   type request = {
@@ -4749,43 +5388,6 @@ module DescribePolicies = {
       policyTypes: policyTypes,
       policyNames: policyNames,
       autoScalingGroupName: autoScalingGroupName,
-    })
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
-module DescribeAutoScalingGroups = {
-  type t
-  type request = {
-    @ocaml.doc("<p>The maximum number of items to return with this call. The default value is
-                <code>50</code> and the maximum value is <code>100</code>.</p>")
-    @as("MaxRecords")
-    maxRecords: option<maxRecords>,
-    @ocaml.doc("<p>The token for the next set of items to return. (You received this token from a
-            previous call.)</p>")
-    @as("NextToken")
-    nextToken: option<xmlString>,
-    @ocaml.doc("<p>The names of the Auto Scaling groups. By default, you can only specify up to 50 names. You can
-            optionally increase this limit using the <code>MaxRecords</code> parameter.</p>
-        <p>If you omit this parameter, all Auto Scaling groups are described.</p>")
-    @as("AutoScalingGroupNames")
-    autoScalingGroupNames: option<autoScalingGroupNames>,
-  }
-  type response = {
-    @ocaml.doc("<p>A string that indicates that the response contains more items than can be returned in
-            a single response. To receive additional items, specify this string for the
-                <code>NextToken</code> value when requesting the next set of items. This value is
-            null when there are no more items to return.</p>")
-    @as("NextToken")
-    nextToken: option<xmlString>,
-    @ocaml.doc("<p>The groups.</p>") @as("AutoScalingGroups") autoScalingGroups: autoScalingGroups,
-  }
-  @module("@aws-sdk/client-autoscaling") @new
-  external new: request => t = "DescribeAutoScalingGroupsCommand"
-  let make = (~maxRecords=?, ~nextToken=?, ~autoScalingGroupNames=?, ()) =>
-    new({
-      maxRecords: maxRecords,
-      nextToken: nextToken,
-      autoScalingGroupNames: autoScalingGroupNames,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

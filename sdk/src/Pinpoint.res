@@ -21,6 +21,7 @@ type __double = float
 type __boolean = bool
 type __blob = NodeJs.Buffer.t
 type __EndpointTypesElement = [
+  | @as("IN_APP") #IN_APP
   | @as("CUSTOM") #CUSTOM
   | @as("BAIDU") #BAIDU
   | @as("EMAIL") #EMAIL
@@ -36,6 +37,7 @@ type __EndpointTypesElement = [
 ]
 type type_ = [@as("NONE") #NONE | @as("ANY") #ANY | @as("ALL") #ALL]
 type templateType = [
+  | @as("INAPP") #INAPP
   | @as("PUSH") #PUSH
   | @as("VOICE") #VOICE
   | @as("SMS") #SMS
@@ -55,6 +57,14 @@ type recencyType = [@as("INACTIVE") #INACTIVE | @as("ACTIVE") #ACTIVE]
 type operator = [@as("ANY") #ANY | @as("ALL") #ALL]
 type mode = [@as("FILTER") #FILTER | @as("DELIVERY") #DELIVERY]
 type messageType = [@as("PROMOTIONAL") #PROMOTIONAL | @as("TRANSACTIONAL") #TRANSACTIONAL]
+type layout = [
+  | @as("CAROUSEL") #CAROUSEL
+  | @as("MIDDLE_BANNER") #MIDDLE_BANNER
+  | @as("MOBILE_FEED") #MOBILE_FEED
+  | @as("OVERLAYS") #OVERLAYS
+  | @as("TOP_BANNER") #TOP_BANNER
+  | @as("BOTTOM_BANNER") #BOTTOM_BANNER
+]
 type jobStatus = [
   | @as("FAILED") #FAILED
   | @as("FAILING") #FAILING
@@ -68,6 +78,7 @@ type jobStatus = [
 ]
 type include_ = [@as("NONE") #NONE | @as("ANY") #ANY | @as("ALL") #ALL]
 type frequency = [
+  | @as("IN_APP_EVENT") #IN_APP_EVENT
   | @as("EVENT") #EVENT
   | @as("MONTHLY") #MONTHLY
   | @as("WEEKLY") #WEEKLY
@@ -94,6 +105,7 @@ type deliveryStatus = [
   | @as("SUCCESSFUL") #SUCCESSFUL
 ]
 type channelType = [
+  | @as("IN_APP") #IN_APP
   | @as("CUSTOM") #CUSTOM
   | @as("BAIDU") #BAIDU
   | @as("EMAIL") #EMAIL
@@ -116,6 +128,7 @@ type campaignStatus = [
   | @as("EXECUTING") #EXECUTING
   | @as("SCHEDULED") #SCHEDULED
 ]
+type buttonAction = [@as("CLOSE") #CLOSE | @as("DEEP_LINK") #DEEP_LINK | @as("LINK") #LINK]
 type attributeType = [
   | @as("BETWEEN") #BETWEEN
   | @as("ON") #ON
@@ -125,6 +138,7 @@ type attributeType = [
   | @as("EXCLUSIVE") #EXCLUSIVE
   | @as("INCLUSIVE") #INCLUSIVE
 ]
+type alignment = [@as("RIGHT") #RIGHT | @as("CENTER") #CENTER | @as("LEFT") #LEFT]
 type action = [@as("URL") #URL | @as("DEEP_LINK") #DEEP_LINK | @as("OPEN_APP") #OPEN_APP]
 @ocaml.doc(
   "<p>Specifies the Amazon Resource Name (ARN) of an event stream to publish events to and the AWS Identity and Access Management (IAM) role to use when publishing those events.</p>"
@@ -200,6 +214,20 @@ type voiceChannelRequest = {
   @as("Enabled")
   enabled: option<__boolean>,
 }
+@ocaml.doc("<p>Verify OTP message request.</p>")
+type verifyOTPMessageRequestParameters = {
+  @ocaml.doc("<p>The reference identifier provided when the OTP was previously sent.</p>")
+  @as("ReferenceId")
+  referenceId: __string,
+  @ocaml.doc("<p>The OTP the end user provided for verification.</p>") @as("Otp") otp: __string,
+  @ocaml.doc("<p>The destination identity to send OTP to.</p>") @as("DestinationIdentity")
+  destinationIdentity: __string,
+}
+@ocaml.doc("<p>Verify OTP Message Response.</p>")
+type verificationResponse = {
+  @ocaml.doc("<p>Specifies whether the OTP is valid or not.</p>") @as("Valid")
+  valid: option<__boolean>,
+}
 @ocaml.doc("<p>Provides information about a specific version of a message template.</p>")
 type templateVersionResponse = {
   @ocaml.doc(
@@ -231,6 +259,20 @@ type templateVersionResponse = {
   )
   @as("CreationDate")
   creationDate: __string,
+}
+@ocaml.doc("<p>Provides information about a request to create a message template.</p>")
+type templateCreateMessageBody = {
+  @ocaml.doc("<p>The unique identifier for the request to create the message template.</p>")
+  @as("RequestID")
+  requestID: option<__string>,
+  @ocaml.doc(
+    "<p>The message that's returned from the API for the request to create the message template.</p>"
+  )
+  @as("Message")
+  message: option<__string>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the message template that was created.</p>")
+  @as("Arn")
+  arn: option<__string>,
 }
 @ocaml.doc(
   "<p>Specifies which version of a message template to use as the active version of the template.</p>"
@@ -272,6 +314,40 @@ type session = {
   @ocaml.doc("<p>The unique identifier for the session.</p>") @as("Id") id: __string,
   @ocaml.doc("<p>The duration of the session, in milliseconds.</p>") @as("Duration")
   duration: option<__integer>,
+}
+@ocaml.doc("<p>Send OTP message request parameters.</p>")
+type sendOTPMessageRequestParameters = {
+  @ocaml.doc("<p>The time in minutes before the OTP is no longer valid.</p>") @as("ValidityPeriod")
+  validityPeriod: option<__integer>,
+  @ocaml.doc("<p>A unique Template ID received from DLT after entity registration is approved.</p>")
+  @as("TemplateId")
+  templateId: option<__string>,
+  @ocaml.doc(
+    "<p>Developer-specified reference identifier. Required to match during OTP verification.</p>"
+  )
+  @as("ReferenceId")
+  referenceId: __string,
+  @ocaml.doc("<p>The origination identity used to send OTP from.</p>") @as("OriginationIdentity")
+  originationIdentity: __string,
+  @ocaml.doc("<p>The language to be used for the outgoing message body containing the OTP.</p>")
+  @as("Language")
+  language: option<__string>,
+  @ocaml.doc("<p>A unique Entity ID received from DLT after entity registration is approved.</p>")
+  @as("EntityId")
+  entityId: option<__string>,
+  @ocaml.doc("<p>The destination identity to send OTP to.</p>") @as("DestinationIdentity")
+  destinationIdentity: __string,
+  @ocaml.doc("<p>The number of characters in the generated OTP.</p>") @as("CodeLength")
+  codeLength: option<__integer>,
+  @ocaml.doc("<p>Channel type for the OTP message. Supported values: [SMS].</p>") @as("Channel")
+  channel: __string,
+  @ocaml.doc(
+    "<p>The brand name that will be substituted into the OTP message body. Should be owned by calling AWS account.</p>"
+  )
+  @as("BrandName")
+  brandName: __string,
+  @ocaml.doc("<p>The attempts allowed to validate an OTP.</p>") @as("AllowedAttempts")
+  allowedAttempts: option<__integer>,
 }
 @ocaml.doc("<p>Specifies the segment identifier and version of a segment.</p>")
 type segmentReference = {
@@ -425,6 +501,12 @@ type quietTime = {
   )
   @as("End")
   end: option<__string>,
+}
+@ocaml.doc("<p>Override button configuration.</p>")
+type overrideButtonConfiguration = {
+  @ocaml.doc("<p>Button destination.</p>") @as("Link") link: option<__string>,
+  @ocaml.doc("<p>Action triggered by the button.</p>") @as("ButtonAction")
+  buttonAction: buttonAction,
 }
 @ocaml.doc("<p>Provides information about a phone number.</p>")
 type numberValidateResponse = {
@@ -710,6 +792,32 @@ type journeyCustomMessage = {
   @ocaml.doc("<p>The message content that's passed to an AWS Lambda function or to a web hook.</p>")
   @as("Data")
   data: option<__string>,
+}
+@ocaml.doc("<p>The channel-specific configurations for the journey.</p>")
+type journeyChannelSettings = {
+  @ocaml.doc(
+    "<p>IAM role ARN to be assumed when invoking Connect campaign execution APIs for dialing.</p>"
+  )
+  @as("ConnectCampaignExecutionRoleArn")
+  connectCampaignExecutionRoleArn: option<__string>,
+  @ocaml.doc("<p>Amazon Resource Name (ARN) of the Connect Campaign.</p>") @as("ConnectCampaignArn")
+  connectCampaignArn: option<__string>,
+}
+@ocaml.doc("<p>Text config for Message Header.</p>")
+type inAppMessageHeaderConfig = {
+  @ocaml.doc("<p>The text color.</p>") @as("TextColor") textColor: __string,
+  @ocaml.doc("<p>Message Header.</p>") @as("Header") header: __string,
+  @ocaml.doc("<p>The alignment of the text. Valid values: LEFT, CENTER, RIGHT.</p>")
+  @as("Alignment")
+  alignment: alignment,
+}
+@ocaml.doc("<p>Text config for Message Body.</p>")
+type inAppMessageBodyConfig = {
+  @ocaml.doc("<p>The text color.</p>") @as("TextColor") textColor: __string,
+  @ocaml.doc("<p>Message Body.</p>") @as("Body") body: __string,
+  @ocaml.doc("<p>The alignment of the text. Valid values: LEFT, CENTER, RIGHT.</p>")
+  @as("Alignment")
+  alignment: alignment,
 }
 @ocaml.doc(
   "<p>Provides information about the resource settings for a job that imports endpoint definitions from one or more files. The files can be stored in an Amazon Simple Storage Service (Amazon S3) bucket or uploaded directly from a computer by using the Amazon Pinpoint console.</p>"
@@ -1177,6 +1285,18 @@ type defaultPushNotificationTemplate = {
   @as("Action")
   action: option<action>,
 }
+@ocaml.doc("<p>Default button configuration.</p>")
+type defaultButtonConfiguration = {
+  @ocaml.doc("<p>The text color of the button.</p>") @as("TextColor") textColor: option<__string>,
+  @ocaml.doc("<p>Button text.</p>") @as("Text") text: __string,
+  @ocaml.doc("<p>Button destination.</p>") @as("Link") link: option<__string>,
+  @ocaml.doc("<p>Action triggered by the button.</p>") @as("ButtonAction")
+  buttonAction: buttonAction,
+  @ocaml.doc("<p>The border radius of the button.</p>") @as("BorderRadius")
+  borderRadius: option<__integer>,
+  @ocaml.doc("<p>The background color of the button.</p>") @as("BackgroundColor")
+  backgroundColor: option<__string>,
+}
 @ocaml.doc("<p>Provides information about a request to create a message template.</p>")
 type createTemplateMessageBody = {
   @ocaml.doc("<p>The unique identifier for the request to create the message template.</p>")
@@ -1190,6 +1310,13 @@ type createTemplateMessageBody = {
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the message template that was created.</p>")
   @as("Arn")
   arn: option<__string>,
+}
+type contactCenterActivity = {
+  @ocaml.doc(
+    "<p>The unique identifier for the next activity to perform after the this activity.</p>"
+  )
+  @as("NextActivity")
+  nextActivity: option<__string>,
 }
 @ocaml.doc(
   "<p>Provides information about the general settings and status of a channel for an application.</p>"
@@ -1263,6 +1390,11 @@ type campaignSmsMessage = {
   "<p>For a campaign, specifies limits on the messages that the campaign can send. For an application, specifies the default limits for messages that campaigns in the application can send.</p>"
 )
 type campaignLimits = {
+  @ocaml.doc(
+    "<p>The maximum total number of messages that the campaign can send per user session.</p>"
+  )
+  @as("Session")
+  session: option<__integer>,
   @ocaml.doc(
     "<p>The maximum number of messages that a campaign can send to a single endpoint during the course of the campaign. If a campaign recurs, this setting applies to all runs of the campaign. The maximum value is 100.</p>"
   )
@@ -2544,49 +2676,6 @@ type pushMessageActivity = {
   @as("MessageConfig")
   messageConfig: option<journeyPushMessage>,
 }
-@ocaml.doc("<p>Specifies the message configuration settings for a campaign.</p>")
-type messageConfiguration = {
-  @ocaml.doc(
-    "<p>The message that the campaign sends through the SMS channel. If specified, this message overrides the default message.</p>"
-  )
-  @as("SMSMessage")
-  smsmessage: option<campaignSmsMessage>,
-  @ocaml.doc(
-    "<p>The message that the campaign sends through the GCM channel, which enables Amazon Pinpoint to send push notifications through the Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging (GCM), service. If specified, this message overrides the default message.</p>"
-  )
-  @as("GCMMessage")
-  gcmmessage: option<message>,
-  @ocaml.doc(
-    "<p>The message that the campaign sends through the email channel. If specified, this message overrides the default message.</p>"
-  )
-  @as("EmailMessage")
-  emailMessage: option<campaignEmailMessage>,
-  @ocaml.doc(
-    "<p>The default message that the campaign sends through all the channels that are configured for the campaign.</p>"
-  )
-  @as("DefaultMessage")
-  defaultMessage: option<message>,
-  @ocaml.doc(
-    "<p>The message that the campaign sends through a custom channel, as specified by the delivery configuration (CustomDeliveryConfiguration) settings for the campaign. If specified, this message overrides the default message.</p>"
-  )
-  @as("CustomMessage")
-  customMessage: option<campaignCustomMessage>,
-  @ocaml.doc(
-    "<p>The message that the campaign sends through the Baidu (Baidu Cloud Push) channel. If specified, this message overrides the default message.</p>"
-  )
-  @as("BaiduMessage")
-  baiduMessage: option<message>,
-  @ocaml.doc(
-    "<p>The message that the campaign sends through the APNs (Apple Push Notification service) channel. If specified, this message overrides the default message.</p>"
-  )
-  @as("APNSMessage")
-  apnsmessage: option<message>,
-  @ocaml.doc(
-    "<p>The message that the campaign sends through the ADM (Amazon Device Messaging) channel. If specified, this message overrides the default message.</p>"
-  )
-  @as("ADMMessage")
-  admmessage: option<message>,
-}
 type mapOfMetricDimension = Js.Dict.t<metricDimension>
 type mapOfMessageResult = Js.Dict.t<messageResult>
 type mapOfListOf__string = Js.Dict.t<listOf__string>
@@ -2647,6 +2736,15 @@ type journeyExecutionActivityMetricsResponse = {
   )
   @as("ActivityType")
   activityType: __string,
+}
+@ocaml.doc("<p>Button Config for an in-app message.</p>")
+type inAppMessageButton = {
+  @ocaml.doc("<p>Default button content.</p>") @as("Web") web: option<overrideButtonConfiguration>,
+  @ocaml.doc("<p>Default button content.</p>") @as("IOS") ios: option<overrideButtonConfiguration>,
+  @ocaml.doc("<p>Default button content.</p>") @as("DefaultConfig")
+  defaultConfig: option<defaultButtonConfiguration>,
+  @ocaml.doc("<p>Default button content.</p>") @as("Android")
+  android: option<overrideButtonConfiguration>,
 }
 @ocaml.doc(
   "<p>Provides information about the status and settings of a job that imports endpoint definitions from one or more files. The files can be stored in an Amazon Simple Storage Service (Amazon S3) bucket or uploaded directly from a computer by using the Amazon Pinpoint console.</p>"
@@ -3086,6 +3184,8 @@ type applicationSettingsResource = {
 }
 @ocaml.doc("<p>Provides information about an application.</p>")
 type applicationResponse = {
+  @ocaml.doc("<p>The date and time when the Application was created.</p>") @as("CreationDate")
+  creationDate: option<__string>,
   @ocaml.doc(
     "<p>A string-to-string map of key-value pairs that identifies the tags that are associated with the application. Each tag consists of a required tag key and an associated tag value.</p>"
   )
@@ -3284,6 +3384,21 @@ type itemResponse = {
   @ocaml.doc("<p>The response that was received after the endpoint data was accepted.</p>")
   @as("EndpointItemResponse")
   endpointItemResponse: option<endpointItemResponse>,
+}
+@ocaml.doc("<p>The configuration for the message content.</p>")
+type inAppMessageContent = {
+  @ocaml.doc("<p>The second button inside message.</p>") @as("SecondaryBtn")
+  secondaryBtn: option<inAppMessageButton>,
+  @ocaml.doc("<p>The first button inside the message.</p>") @as("PrimaryBtn")
+  primaryBtn: option<inAppMessageButton>,
+  @ocaml.doc("<p>The image url for the background of message.</p>") @as("ImageUrl")
+  imageUrl: option<__string>,
+  @ocaml.doc("<p>The configuration for the message header.</p>") @as("HeaderConfig")
+  headerConfig: option<inAppMessageHeaderConfig>,
+  @ocaml.doc("<p>The configuration for the message body.</p>") @as("BodyConfig")
+  bodyConfig: option<inAppMessageBodyConfig>,
+  @ocaml.doc("<p>The background color for the message.</p>") @as("BackgroundColor")
+  backgroundColor: option<__string>,
 }
 @ocaml.doc(
   "<p>Specifies the settings for a one-time message that's sent directly to an endpoint through the GCM channel. The GCM channel enables Amazon Pinpoint to send messages to the Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging (GCM), service.</p>"
@@ -3892,6 +4007,7 @@ type listRecommenderConfigurationsResponse = {
   item: listOfRecommenderConfigurationResponse,
 }
 type listOfResultRow = array<resultRow>
+type listOfInAppMessageContent = array<inAppMessageContent>
 @ocaml.doc(
   "<p>Provides information about the status and settings of all the import jobs that are associated with an application or segment. An import job is a job that imports endpoint definitions from one or more files.</p>"
 )
@@ -4235,6 +4351,56 @@ type messageRequest = {
 type listOfSegmentDimensions = array<segmentDimensions>
 type listOfEndpointResponse = array<endpointResponse>
 type listOfEndpointBatchItem = array<endpointBatchItem>
+@ocaml.doc("<p>In-App Template Response.</p>")
+type inAppTemplateResponse = {
+  @ocaml.doc("<p>The version id of the template.</p>") @as("Version") version: option<__string>,
+  @ocaml.doc("<p>The type of the template.</p>") @as("TemplateType") templateType: templateType,
+  @ocaml.doc("<p>The name of the template.</p>") @as("TemplateName") templateName: __string,
+  @ocaml.doc("<p>The description of the template.</p>") @as("TemplateDescription")
+  templateDescription: option<__string>,
+  @ocaml.doc(
+    "<p>A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.</p>"
+  )
+  tags: option<mapOf__string>,
+  @ocaml.doc("<p>The layout of the message.</p>") @as("Layout") layout: option<layout>,
+  @ocaml.doc("<p>The last modified date of the template.</p>") @as("LastModifiedDate")
+  lastModifiedDate: __string,
+  @ocaml.doc("<p>Custom config to be sent to client.</p>") @as("CustomConfig")
+  customConfig: option<mapOf__string>,
+  @ocaml.doc("<p>The creation date of the template.</p>") @as("CreationDate")
+  creationDate: __string,
+  @ocaml.doc(
+    "<p>The content of the message, can include up to 5 modals. Each modal must contain a message, a header, and background color. ImageUrl and buttons are optional.</p>"
+  )
+  @as("Content")
+  content: option<listOfInAppMessageContent>,
+  @ocaml.doc("<p>The resource arn of the template.</p>") @as("Arn") arn: option<__string>,
+}
+@ocaml.doc("<p>InApp Template Request.</p>")
+type inAppTemplateRequest = {
+  @ocaml.doc("<p>The description of the template.</p>") @as("TemplateDescription")
+  templateDescription: option<__string>,
+  @ocaml.doc(
+    "<p>A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.</p>"
+  )
+  tags: option<mapOf__string>,
+  @ocaml.doc("<p>The layout of the message.</p>") @as("Layout") layout: option<layout>,
+  @ocaml.doc("<p>Custom config to be sent to client.</p>") @as("CustomConfig")
+  customConfig: option<mapOf__string>,
+  @ocaml.doc(
+    "<p>The content of the message, can include up to 5 modals. Each modal must contain a message, a header, and background color. ImageUrl and buttons are optional.</p>"
+  )
+  @as("Content")
+  content: option<listOfInAppMessageContent>,
+}
+@ocaml.doc("<p>Provides all fields required for building an in-app message.</p>")
+type inAppMessage = {
+  @ocaml.doc("<p>The layout of the message.</p>") @as("Layout") layout: option<layout>,
+  @ocaml.doc("<p>Custom config to be sent to SDK.</p>") @as("CustomConfig")
+  customConfig: option<mapOf__string>,
+  @ocaml.doc("<p>In-app message content.</p>") @as("Content")
+  content: option<listOfInAppMessageContent>,
+}
 @ocaml.doc(
   "<p>Provides information about endpoints and the events that they're associated with.</p>"
 )
@@ -4280,6 +4446,17 @@ type eventCondition = {
   @ocaml.doc("<p>The dimensions for the event filter to use for the activity.</p>")
   @as("Dimensions")
   dimensions: option<eventDimensions>,
+}
+@ocaml.doc("<p>In-app message configuration.</p>")
+type campaignInAppMessage = {
+  @ocaml.doc("<p>In-app message layout.</p>") @as("Layout") layout: option<layout>,
+  @ocaml.doc("<p>Custom config to be sent to client.</p>") @as("CustomConfig")
+  customConfig: option<mapOf__string>,
+  @ocaml.doc("<p>In-app message content.</p>") @as("Content")
+  content: option<listOfInAppMessageContent>,
+  @ocaml.doc("<p>The message body of the notification, the email body or the text message.</p>")
+  @as("Body")
+  body: option<__string>,
 }
 @ocaml.doc("<p>Specifies the settings for events that cause a campaign to be sent.</p>")
 type campaignEventFilter = {
@@ -4372,6 +4549,51 @@ type schedule = {
   @as("EndTime")
   endTime: option<__string>,
 }
+@ocaml.doc("<p>Specifies the message configuration settings for a campaign.</p>")
+type messageConfiguration = {
+  @ocaml.doc("<p>The in-app message configuration.</p>") @as("InAppMessage")
+  inAppMessage: option<campaignInAppMessage>,
+  @ocaml.doc(
+    "<p>The message that the campaign sends through the SMS channel. If specified, this message overrides the default message.</p>"
+  )
+  @as("SMSMessage")
+  smsmessage: option<campaignSmsMessage>,
+  @ocaml.doc(
+    "<p>The message that the campaign sends through the GCM channel, which enables Amazon Pinpoint to send push notifications through the Firebase Cloud Messaging (FCM), formerly Google Cloud Messaging (GCM), service. If specified, this message overrides the default message.</p>"
+  )
+  @as("GCMMessage")
+  gcmmessage: option<message>,
+  @ocaml.doc(
+    "<p>The message that the campaign sends through the email channel. If specified, this message overrides the default message.</p>"
+  )
+  @as("EmailMessage")
+  emailMessage: option<campaignEmailMessage>,
+  @ocaml.doc(
+    "<p>The default message that the campaign sends through all the channels that are configured for the campaign.</p>"
+  )
+  @as("DefaultMessage")
+  defaultMessage: option<message>,
+  @ocaml.doc(
+    "<p>The message that the campaign sends through a custom channel, as specified by the delivery configuration (CustomDeliveryConfiguration) settings for the campaign. If specified, this message overrides the default message.</p>"
+  )
+  @as("CustomMessage")
+  customMessage: option<campaignCustomMessage>,
+  @ocaml.doc(
+    "<p>The message that the campaign sends through the Baidu (Baidu Cloud Push) channel. If specified, this message overrides the default message.</p>"
+  )
+  @as("BaiduMessage")
+  baiduMessage: option<message>,
+  @ocaml.doc(
+    "<p>The message that the campaign sends through the APNs (Apple Push Notification service) channel. If specified, this message overrides the default message.</p>"
+  )
+  @as("APNSMessage")
+  apnsmessage: option<message>,
+  @ocaml.doc(
+    "<p>The message that the campaign sends through the ADM (Amazon Device Messaging) channel. If specified, this message overrides the default message.</p>"
+  )
+  @as("ADMMessage")
+  admmessage: option<message>,
+}
 type mapOfEventsBatch = Js.Dict.t<eventsBatch>
 @ocaml.doc(
   "<p>Provides the results of a query that retrieved the data for a standard engagement metric that applies to a journey, and provides information about that query.</p>"
@@ -4408,6 +4630,22 @@ type journeyDateRangeKpiResponse = {
   @ocaml.doc("<p>The unique identifier for the application that the metric applies to.</p>")
   @as("ApplicationId")
   applicationId: __string,
+}
+@ocaml.doc("<p>Schedule of the campaign.</p>")
+type inAppCampaignSchedule = {
+  @ocaml.doc("<p>Time during which the in-app message should not be shown to the user.</p>")
+  @as("QuietTime")
+  quietTime: option<quietTime>,
+  @ocaml.doc(
+    "<p>The event filter the SDK has to use to show the in-app message in the application.</p>"
+  )
+  @as("EventFilter")
+  eventFilter: option<campaignEventFilter>,
+  @ocaml.doc(
+    "<p>The scheduled time after which the in-app message should not be shown. Timestamp is in ISO 8601 format.</p>"
+  )
+  @as("EndDate")
+  endDate: option<__string>,
 }
 @ocaml.doc("<p>Specifies the settings for an event that causes a journey activity to start.</p>")
 type eventStartCondition = {
@@ -4581,6 +4819,36 @@ type multiConditionalBranch = {
 }
 type listOfSimpleCondition = array<simpleCondition>
 type listOfSegmentGroup = array<segmentGroup>
+@ocaml.doc("<p>Targeted in-app message campaign.</p>")
+type inAppMessageCampaign = {
+  @ocaml.doc("<p>Treatment id of the campaign.</p>") @as("TreatmentId")
+  treatmentId: option<__string>,
+  @ocaml.doc(
+    "<p>Total cap which controls the number of times an in-app message can be shown to the endpoint.</p>"
+  )
+  @as("TotalCap")
+  totalCap: option<__integer>,
+  @ocaml.doc(
+    "<p>Session cap which controls the number of times an in-app message can be shown to the endpoint during an application session.</p>"
+  )
+  @as("SessionCap")
+  sessionCap: option<__integer>,
+  @ocaml.doc("<p>Schedule of the campaign.</p>") @as("Schedule")
+  schedule: option<inAppCampaignSchedule>,
+  @ocaml.doc("<p>Priority of the in-app message.</p>") @as("Priority") priority: option<__integer>,
+  @ocaml.doc(
+    "<p>In-app message content with all fields required for rendering an in-app message.</p>"
+  )
+  @as("InAppMessage")
+  inAppMessage: option<inAppMessage>,
+  @ocaml.doc(
+    "<p>Daily cap which controls the number of times any in-app messages can be shown to the endpoint during a day.</p>"
+  )
+  @as("DailyCap")
+  dailyCap: option<__integer>,
+  @ocaml.doc("<p>Campaign id of the corresponding campaign.</p>") @as("CampaignId")
+  campaignId: option<__string>,
+}
 @ocaml.doc("<p>Specifies a batch of events to process.</p>")
 type eventsRequest = {
   @ocaml.doc(
@@ -4607,6 +4875,7 @@ type segmentGroupList = {
 type listOfWriteTreatmentResource = array<writeTreatmentResource>
 type listOfTreatmentResource = array<treatmentResource>
 type listOfMultiConditionalBranch = array<multiConditionalBranch>
+type listOfInAppMessageCampaign = array<inAppMessageCampaign>
 @ocaml.doc(
   "<p>Specifies the conditions to evaluate for an activity in a journey, and how to evaluate those conditions.</p>"
 )
@@ -4638,6 +4907,11 @@ type writeSegmentRequest = {
 }
 @ocaml.doc("<p>Specifies the configuration and other settings for a campaign.</p>")
 type writeCampaignRequest = {
+  @ocaml.doc(
+    "<p>Defines the priority of the campaign, used to decide the order of messages displayed to user if there are multiple messages scheduled to be displayed at the same moment.</p>"
+  )
+  @as("Priority")
+  priority: option<__integer>,
   @ocaml.doc(
     "<p>A custom name of the default treatment for the campaign, if the campaign has multiple treatments. A <i>treatment</i> is a variation of a campaign that's used for A/B testing.</p>"
   )
@@ -4751,6 +5025,11 @@ type multiConditionalSplitActivity = {
   @as("Branches")
   branches: option<listOfMultiConditionalBranch>,
 }
+@ocaml.doc("<p>Get in-app messages response object.</p>")
+type inAppMessagesResponse = {
+  @ocaml.doc("<p>List of targeted in-app message campaigns.</p>") @as("InAppMessageCampaigns")
+  inAppMessageCampaigns: option<listOfInAppMessageCampaign>,
+}
 @ocaml.doc(
   "<p>Specifies the settings for a yes/no split activity in a journey. This type of activity sends participants down one of two paths in a journey, based on conditions that you specify.</p> <note><p>To create yes/no split activities that send participants down different paths based on push notification events (such as Open or Received events), your mobile app has to specify the User ID and Endpoint ID values. For more information, see <a href=\"https://docs.aws.amazon.com/pinpoint/latest/developerguide/integrate.html\">Integrating Amazon Pinpoint with your application</a> in the <i>Amazon Pinpoint Developer Guide</i>.</p></note>"
 )
@@ -4778,6 +5057,11 @@ type conditionalSplitActivity = {
   "<p>Provides information about the status, configuration, and other settings for a campaign.</p>"
 )
 type campaignResponse = {
+  @ocaml.doc(
+    "<p>Defines the priority of the campaign, used to decide the order of messages displayed to user if there are multiple messages scheduled to be displayed at the same moment.</p>"
+  )
+  @as("Priority")
+  priority: option<__integer>,
   @ocaml.doc("<p>The version number of the campaign.</p>") @as("Version")
   version: option<__integer>,
   @ocaml.doc(
@@ -4860,6 +5144,11 @@ type listOfCampaignResponse = array<campaignResponse>
 @ocaml.doc("<p>Specifies the configuration and other settings for an activity in a journey.</p>")
 type activity = {
   @ocaml.doc(
+    "<p>The settings for a connect activity. This type of activity initiates a contact center call to participants.</p>"
+  )
+  @as("ContactCenter")
+  contactCenter: option<contactCenterActivity>,
+  @ocaml.doc(
     "<p>The settings for a wait activity. This type of activity waits for a certain amount of time or until a specific date and time before moving participants to the next activity in a journey.</p>"
   )
   @as("Wait")
@@ -4940,6 +5229,9 @@ type campaignsResponse = {
 }
 @ocaml.doc("<p>Specifies the configuration and other settings for a journey.</p>")
 type writeJourneyRequest = {
+  @ocaml.doc("<p>The channel-specific configurations for the journey.</p>")
+  @as("JourneyChannelSettings")
+  journeyChannelSettings: option<journeyChannelSettings>,
   @ocaml.doc("<p>Specifies whether a journey should be refreshed on segment update.</p>")
   @as("RefreshOnSegmentUpdate")
   refreshOnSegmentUpdate: option<__boolean>,
@@ -5001,6 +5293,9 @@ type writeJourneyRequest = {
   "<p>Provides information about the status, configuration, and other settings for a journey.</p>"
 )
 type journeyResponse = {
+  @ocaml.doc("<p>The channel-specific configurations for the journey.</p>")
+  @as("JourneyChannelSettings")
+  journeyChannelSettings: option<journeyChannelSettings>,
   @ocaml.doc("<p>Specifies whether a journey should be refreshed on segment update.</p>")
   @as("RefreshOnSegmentUpdate")
   refreshOnSegmentUpdate: option<__boolean>,
@@ -5074,6 +5369,25 @@ type journeysResponse = {
   item: listOfJourneyResponse,
 }
 @ocaml.doc("<p>Doc Engage API - Amazon Pinpoint API</p>")
+module VerifyOTPMessage = {
+  type t
+  type request = {
+    @as("VerifyOTPMessageRequestParameters")
+    verifyOTPMessageRequestParameters: verifyOTPMessageRequestParameters,
+    @ocaml.doc("<p>The unique ID of your Amazon Pinpoint application.</p>") @as("ApplicationId")
+    applicationId: __string,
+  }
+  type response = {@as("VerificationResponse") verificationResponse: verificationResponse}
+  @module("@aws-sdk/client-mobiletargeting") @new
+  external new: request => t = "VerifyOTPMessageCommand"
+  let make = (~verifyOTPMessageRequestParameters, ~applicationId, ()) =>
+    new({
+      verifyOTPMessageRequestParameters: verifyOTPMessageRequestParameters,
+      applicationId: applicationId,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module UpdateVoiceChannel = {
   type t
   type request = {
@@ -5301,7 +5615,7 @@ module UntagResource = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the resource.</p>") @as("ResourceArn")
     resourceArn: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-mobiletargeting") @new
   external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
@@ -5608,6 +5922,27 @@ module DeletePushTemplate = {
   type response = {@as("MessageBody") messageBody: messageBody}
   @module("@aws-sdk/client-mobiletargeting") @new
   external new: request => t = "DeletePushTemplateCommand"
+  let make = (~templateName, ~version=?, ()) => new({version: version, templateName: templateName})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module DeleteInAppTemplate = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the <link  linkend=\"templates-template-name-template-type-versions\">Template Versions</link> resource.</p> <p>If specified, this value must match the identifier for an existing template version. If specified for an update operation, this value must match the identifier for the latest existing version of the template. This restriction helps ensure that race conditions don't occur.</p> <p>If you don't specify a value for this parameter, Amazon Pinpoint does the following:</p> <ul><li><p>For a get operation, retrieves information about the active version of the template.</p></li> <li><p>For an update operation, saves the updates to (overwrites) the latest existing version of the template, if the create-new-version parameter isn't used or is set to false.</p></li> <li><p>For a delete operation, deletes the template, including all versions of the template.</p></li></ul>"
+    )
+    @as("Version")
+    version: option<__string>,
+    @ocaml.doc(
+      "<p>The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.</p>"
+    )
+    @as("TemplateName")
+    templateName: __string,
+  }
+  type response = {@as("MessageBody") messageBody: messageBody}
+  @module("@aws-sdk/client-mobiletargeting") @new
+  external new: request => t = "DeleteInAppTemplateCommand"
   let make = (~templateName, ~version=?, ()) => new({version: version, templateName: templateName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
@@ -5977,7 +6312,7 @@ module TagResource = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the resource.</p>") @as("ResourceArn")
     resourceArn: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-mobiletargeting") @new external new: request => t = "TagResourceCommand"
   let make = (~tagsModel, ~resourceArn, ()) => new({tagsModel: tagsModel, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -6454,6 +6789,25 @@ module CreateApp = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module SendOTPMessage = {
+  type t
+  type request = {
+    @as("SendOTPMessageRequestParameters")
+    sendOTPMessageRequestParameters: sendOTPMessageRequestParameters,
+    @ocaml.doc("<p>The unique ID of your Amazon Pinpoint application.</p>") @as("ApplicationId")
+    applicationId: __string,
+  }
+  type response = {@as("MessageResponse") messageResponse: messageResponse}
+  @module("@aws-sdk/client-mobiletargeting") @new
+  external new: request => t = "SendOTPMessageCommand"
+  let make = (~sendOTPMessageRequestParameters, ~applicationId, ()) =>
+    new({
+      sendOTPMessageRequestParameters: sendOTPMessageRequestParameters,
+      applicationId: applicationId,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module ListTemplateVersions = {
   type t
   type request = {
@@ -6782,6 +7136,39 @@ module DeleteEndpoint = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module UpdateInAppTemplate = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the <link  linkend=\"templates-template-name-template-type-versions\">Template Versions</link> resource.</p> <p>If specified, this value must match the identifier for an existing template version. If specified for an update operation, this value must match the identifier for the latest existing version of the template. This restriction helps ensure that race conditions don't occur.</p> <p>If you don't specify a value for this parameter, Amazon Pinpoint does the following:</p> <ul><li><p>For a get operation, retrieves information about the active version of the template.</p></li> <li><p>For an update operation, saves the updates to (overwrites) the latest existing version of the template, if the create-new-version parameter isn't used or is set to false.</p></li> <li><p>For a delete operation, deletes the template, including all versions of the template.</p></li></ul>"
+    )
+    @as("Version")
+    version: option<__string>,
+    @ocaml.doc(
+      "<p>The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.</p>"
+    )
+    @as("TemplateName")
+    templateName: __string,
+    @as("InAppTemplateRequest") inAppTemplateRequest: inAppTemplateRequest,
+    @ocaml.doc(
+      "<p>Specifies whether to save the updates as a new version of the message template. Valid values are: true, save the updates as a new version; and, false, save the updates to (overwrite) the latest existing version of the template.</p> <p>If you don't specify a value for this parameter, Amazon Pinpoint saves the updates to (overwrites) the latest existing version of the template. If you specify a value of true for this parameter, don't specify a value for the version parameter. Otherwise, an error will occur.</p>"
+    )
+    @as("CreateNewVersion")
+    createNewVersion: option<__boolean>,
+  }
+  type response = {@as("MessageBody") messageBody: messageBody}
+  @module("@aws-sdk/client-mobiletargeting") @new
+  external new: request => t = "UpdateInAppTemplateCommand"
+  let make = (~templateName, ~inAppTemplateRequest, ~version=?, ~createNewVersion=?, ()) =>
+    new({
+      version: version,
+      templateName: templateName,
+      inAppTemplateRequest: inAppTemplateRequest,
+      createNewVersion: createNewVersion,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module SendUsersMessages = {
   type t
   type request = {
@@ -6816,6 +7203,47 @@ module SendMessages = {
   @module("@aws-sdk/client-mobiletargeting") @new external new: request => t = "SendMessagesCommand"
   let make = (~messageRequest, ~applicationId, ()) =>
     new({messageRequest: messageRequest, applicationId: applicationId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module GetInAppTemplate = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the <link  linkend=\"templates-template-name-template-type-versions\">Template Versions</link> resource.</p> <p>If specified, this value must match the identifier for an existing template version. If specified for an update operation, this value must match the identifier for the latest existing version of the template. This restriction helps ensure that race conditions don't occur.</p> <p>If you don't specify a value for this parameter, Amazon Pinpoint does the following:</p> <ul><li><p>For a get operation, retrieves information about the active version of the template.</p></li> <li><p>For an update operation, saves the updates to (overwrites) the latest existing version of the template, if the create-new-version parameter isn't used or is set to false.</p></li> <li><p>For a delete operation, deletes the template, including all versions of the template.</p></li></ul>"
+    )
+    @as("Version")
+    version: option<__string>,
+    @ocaml.doc(
+      "<p>The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.</p>"
+    )
+    @as("TemplateName")
+    templateName: __string,
+  }
+  type response = {@as("InAppTemplateResponse") inAppTemplateResponse: inAppTemplateResponse}
+  @module("@aws-sdk/client-mobiletargeting") @new
+  external new: request => t = "GetInAppTemplateCommand"
+  let make = (~templateName, ~version=?, ()) => new({version: version, templateName: templateName})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module CreateInAppTemplate = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.</p>"
+    )
+    @as("TemplateName")
+    templateName: __string,
+    @as("InAppTemplateRequest") inAppTemplateRequest: inAppTemplateRequest,
+  }
+  type response = {
+    @as("TemplateCreateMessageBody") templateCreateMessageBody: templateCreateMessageBody,
+  }
+  @module("@aws-sdk/client-mobiletargeting") @new
+  external new: request => t = "CreateInAppTemplateCommand"
+  let make = (~templateName, ~inAppTemplateRequest, ()) =>
+    new({templateName: templateName, inAppTemplateRequest: inAppTemplateRequest})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -7151,6 +7579,25 @@ module GetSegment = {
   @module("@aws-sdk/client-mobiletargeting") @new external new: request => t = "GetSegmentCommand"
   let make = (~segmentId, ~applicationId, ()) =>
     new({segmentId: segmentId, applicationId: applicationId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module GetInAppMessages = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The unique identifier for the endpoint.</p>") @as("EndpointId")
+    endpointId: __string,
+    @ocaml.doc(
+      "<p>The unique identifier for the application. This identifier is displayed as the <b>Project ID</b> on the Amazon Pinpoint console.</p>"
+    )
+    @as("ApplicationId")
+    applicationId: __string,
+  }
+  type response = {@as("InAppMessagesResponse") inAppMessagesResponse: inAppMessagesResponse}
+  @module("@aws-sdk/client-mobiletargeting") @new
+  external new: request => t = "GetInAppMessagesCommand"
+  let make = (~endpointId, ~applicationId, ()) =>
+    new({endpointId: endpointId, applicationId: applicationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

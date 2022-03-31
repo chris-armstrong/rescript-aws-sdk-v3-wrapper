@@ -14,6 +14,8 @@ type baseBoolean = bool
 type baseInteger = int
 type baseTimestamp = Js.Date.t
 type baseLong = float
+type xsltTemplateNameForMacSec = string
+type xsltTemplateName = string
 type virtualInterfaceType = string
 type virtualInterfaceState = [
   | @as("unknown") #Unknown
@@ -32,16 +34,21 @@ type virtualInterfaceId = string
 type virtualGatewayState = string
 type virtualGatewayRegion = string
 type virtualGatewayId = string
+type vendor = string
 type vlan = int
 type testId = string
 type testDuration = int
 type tagValue = string
 type tagKey = string
+type status = string
 type stateChangeError = string
 type state = string
 type startTime = Js.Date.t
 type startOnDate = string
+type software = string
+type siteLinkEnabled = bool
 type secretARN = string
+type routerTypeIdentifier = string
 type routerConfig = string
 type resourceArn = string
 type requestMACSec = bool
@@ -49,9 +56,11 @@ type region = string
 type providerName = string
 type portSpeed = string
 type portEncryptionStatus = string
+type platform = string
 type partnerName = string
 type paginationToken = string
 type ownerAccount = string
+type nniPartnerType = [@as("nonPartner") #NonPartner | @as("v2") #V2 | @as("v1") #V1]
 type maxResultSetSize = int
 type macSecCapable = bool
 type mtu = int
@@ -95,6 +104,7 @@ type failureTestHistoryStatus = string
 type errorMessage = string
 type endTime = Js.Date.t
 type encryptionMode = string
+type enableSiteLink = bool
 type directConnectGatewayState = [
   | @as("deleted") #Deleted
   | @as("deleting") #Deleting
@@ -157,10 +167,12 @@ type bgppeerState = [
 ]
 type bgppeerId = string
 type bgpauthKey = string
+type awsLogicalDeviceId = string
 type awsDeviceV2 = string
 type awsDevice = string
 type associatedGatewayId = string
 type amazonAddress = string
+type agreementName = string
 type addressFamily = [@as("ipv6") #Ipv6 | @as("ipv4") #Ipv4]
 type asn = int
 @ocaml.doc("<p>Information about a virtual private gateway for a private virtual interface.</p>")
@@ -193,6 +205,20 @@ type tagKeyList = array<tagKey>
 type tag = {
   @ocaml.doc("<p>The value.</p>") value: option<tagValue>,
   @ocaml.doc("<p>The key.</p>") key: tagKey,
+}
+@ocaml.doc("<p>Information about the virtual router.</p>")
+type routerType = {
+  @ocaml.doc(
+    "<p>Identifies the router by a combination of vendor, platform, and software version. For example, <code>CiscoSystemsInc-2900SeriesRouters-IOS124</code>.</p>"
+  )
+  routerTypeIdentifier: option<routerTypeIdentifier>,
+  @ocaml.doc("<p>The MAC Security (MACsec) template for the virtual interface's router.</p>")
+  xsltTemplateNameForMacSec: option<xsltTemplateNameForMacSec>,
+  @ocaml.doc("<p>The template for the virtual interface's router.</p>")
+  xsltTemplateName: option<xsltTemplateName>,
+  @ocaml.doc("<p>The router software. </p>") software: option<software>,
+  @ocaml.doc("<p>The virtual interface router platform.</p>") platform: option<platform>,
+  @ocaml.doc("<p>The vendor for the virtual interface's router.</p>") vendor: option<vendor>,
 }
 @ocaml.doc("<p>Information about a route filter prefix that a customer can advertise through Border Gateway Protocol (BGP) 
         over a public virtual interface.</p>")
@@ -290,9 +316,9 @@ type directConnectGatewayAttachment = {
             </li>
          </ul>")
   attachmentState: option<directConnectGatewayAttachmentState>,
-  @ocaml.doc("<p>The ID of the AWS account that owns the virtual interface.</p>")
+  @ocaml.doc("<p>The ID of the Amazon Web Services account that owns the virtual interface.</p>")
   virtualInterfaceOwnerAccount: option<ownerAccount>,
-  @ocaml.doc("<p>The AWS Region where the virtual interface is located.</p>")
+  @ocaml.doc("<p>The Amazon Web Services Region where the virtual interface is located.</p>")
   virtualInterfaceRegion: option<virtualInterfaceRegion>,
   @ocaml.doc("<p>The ID of the virtual interface.</p>")
   virtualInterfaceId: option<virtualInterfaceId>,
@@ -325,7 +351,9 @@ type directConnectGateway = {
             </li>
          </ul>")
   directConnectGatewayState: option<directConnectGatewayState>,
-  @ocaml.doc("<p>The ID of the AWS account that owns the Direct Connect gateway.</p>")
+  @ocaml.doc(
+    "<p>The ID of the Amazon Web Services account that owns the Direct Connect gateway.</p>"
+  )
   ownerAccount: option<ownerAccount>,
   @ocaml.doc("<p>The autonomous system number (ASN) for the Amazon side of the connection.</p>")
   amazonSideAsn: option<longAsn>,
@@ -334,10 +362,20 @@ type directConnectGateway = {
   @ocaml.doc("<p>The ID of the Direct Connect gateway.</p>")
   directConnectGatewayId: option<directConnectGatewayId>,
 }
+@ocaml.doc("<p>The name and status of a customer agreement. </p>")
+type customerAgreement = {
+  @ocaml.doc("<p>The status of the customer agreement. This will be either <code>signed</code> or <code>unsigned</code>
+         </p>")
+  status: option<status>,
+  @ocaml.doc("<p>The name of the agreement.</p>") agreementName: option<agreementName>,
+}
 type bgppeerIdList = array<bgppeerId>
 @ocaml.doc("<p>Information about a BGP peer.</p>")
 type bgppeer = {
-  @ocaml.doc("<p>The Direct Connect endpoint on which the BGP peer terminates.</p>")
+  @ocaml.doc("<p>The Direct Connect endpoint that terminates the logical connection. This device might be
+      different than the device that terminates the physical connection.</p>")
+  awsLogicalDeviceId: option<awsLogicalDeviceId>,
+  @ocaml.doc("<p>The Direct Connect endpoint that terminates the BGP peer.</p>")
   awsDeviceV2: option<awsDeviceV2>,
   @ocaml.doc("<p>The status of the BGP peer. The following are the possible values:</p>
          <ul>
@@ -401,7 +439,7 @@ type availableMacSecPortSpeeds = array<portSpeed>
 type associatedGateway = {
   @ocaml.doc("<p>The Region where the associated gateway is located.</p>") region: option<region>,
   @ocaml.doc(
-    "<p>The ID of the AWS account that owns the associated virtual private gateway or transit gateway.</p>"
+    "<p>The ID of the Amazon Web Services account that owns the associated virtual private gateway or transit gateway.</p>"
   )
   ownerAccount: option<ownerAccount>,
   @ocaml.doc("<p>The type of associated gateway.</p>") @as("type") type_: option<gatewayType>,
@@ -431,7 +469,7 @@ type virtualGatewayList = array<virtualGateway>
 type tagList_ = array<tag>
 type routeFilterPrefixList = array<routeFilterPrefix>
 type macSecKeyList = array<macSecKey>
-@ocaml.doc("<p>Information about an AWS Direct Connect location.</p>")
+@ocaml.doc("<p>Information about an Direct Connect location.</p>")
 type location = {
   @ocaml.doc("<p>The available MAC Security (MACsec) port speeds for the location.</p>")
   availableMacSecPortSpeeds: option<availableMacSecPortSpeeds>,
@@ -439,7 +477,7 @@ type location = {
   availableProviders: option<providerList>,
   @ocaml.doc("<p>The available port speeds for the location.</p>")
   availablePortSpeeds: option<availablePortSpeeds>,
-  @ocaml.doc("<p>The AWS Region for the location.</p>") region: option<region>,
+  @ocaml.doc("<p>The Amazon Web Services Region for the location.</p>") region: option<region>,
   @ocaml.doc(
     "<p>The name of the location. This includes the name of the colocation partner and the physical site of the building.</p>"
   )
@@ -449,19 +487,24 @@ type location = {
 type directConnectGatewayList = array<directConnectGateway>
 type directConnectGatewayAttachmentList = array<directConnectGatewayAttachment>
 type bgppeerList = array<bgppeer>
+type agreementList = array<customerAgreement>
 type virtualInterfaceTestHistoryList = array<virtualInterfaceTestHistory>
 @ocaml.doc("<p>Information about a virtual interface.</p>")
 type virtualInterface = {
+  @ocaml.doc("<p>Indicates whether SiteLink is enabled.</p>")
+  siteLinkEnabled: option<siteLinkEnabled>,
   @ocaml.doc("<p>The tags associated with the virtual interface.</p>") tags: option<tagList_>,
-  @ocaml.doc("<p>The
-      Direct Connect endpoint on which the virtual interface terminates.</p>")
+  @ocaml.doc("<p>The Direct Connect endpoint that terminates the logical connection. This device might be
+      different than the device that terminates the physical connection.</p>")
+  awsLogicalDeviceId: option<awsLogicalDeviceId>,
+  @ocaml.doc("<p>The Direct Connect endpoint that terminates the physical connection.</p>")
   awsDeviceV2: option<awsDeviceV2>,
-  @ocaml.doc("<p>The AWS Region where the virtual interface is located.</p>")
+  @ocaml.doc("<p>The Amazon Web Services Region where the virtual interface is located.</p>")
   region: option<region>,
   @ocaml.doc("<p>The BGP peers configured on this virtual interface.</p>")
   bgpPeers: option<bgppeerList>,
   @ocaml.doc(
-    "<p>The routes to be advertised to the AWS network in this Region. Applies to public virtual interfaces.</p>"
+    "<p>The routes to be advertised to the Amazon Web Services network in this Region. Applies to public virtual interfaces.</p>"
   )
   routeFilterPrefixes: option<routeFilterPrefixList>,
   @ocaml.doc("<p>The ID of the Direct Connect gateway.</p>")
@@ -545,10 +588,10 @@ type virtualInterface = {
   @ocaml.doc("<p>The location of the connection.</p>") location: option<locationCode>,
   @ocaml.doc("<p>The ID of the virtual interface.</p>")
   virtualInterfaceId: option<virtualInterfaceId>,
-  @ocaml.doc("<p>The ID of the AWS account that owns the virtual interface.</p>")
+  @ocaml.doc("<p>The ID of the Amazon Web Services account that owns the virtual interface.</p>")
   ownerAccount: option<ownerAccount>,
 }
-@ocaml.doc("<p>Information about a tag associated with an AWS Direct Connect resource.</p>")
+@ocaml.doc("<p>Information about a tag associated with an Direct Connect resource.</p>")
 type resourceTag = {
   @ocaml.doc("<p>The tags.</p>") tags: option<tagList_>,
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the resource.</p>")
@@ -584,6 +627,8 @@ type newTransitVirtualInterfaceAllocation = {
 }
 @ocaml.doc("<p>Information about a transit virtual interface.</p>")
 type newTransitVirtualInterface = {
+  @ocaml.doc("<p>Indicates whether to enable or disable SiteLink.</p>")
+  enableSiteLink: option<enableSiteLink>,
   @ocaml.doc("<p>The tags associated with the transitive virtual interface.</p>")
   tags: option<tagList_>,
   @ocaml.doc("<p>The ID of the Direct Connect gateway.</p>")
@@ -615,7 +660,7 @@ type newPublicVirtualInterfaceAllocation = {
   @ocaml.doc("<p>The tags associated with the public virtual interface.</p>")
   tags: option<tagList_>,
   @ocaml.doc(
-    "<p>The routes to be advertised to the AWS network in this Region. Applies to public virtual interfaces.</p>"
+    "<p>The routes to be advertised to the Amazon Web Services network in this Region. Applies to public virtual interfaces.</p>"
   )
   routeFilterPrefixes: option<routeFilterPrefixList>,
   @ocaml.doc("<p>The address family for the BGP peer.</p>") addressFamily: option<addressFamily>,
@@ -641,7 +686,7 @@ type newPublicVirtualInterface = {
   @ocaml.doc("<p>The tags associated with the public virtual interface.</p>")
   tags: option<tagList_>,
   @ocaml.doc(
-    "<p>The routes to be advertised to the AWS network in this Region. Applies to public virtual interfaces.</p>"
+    "<p>The routes to be advertised to the Amazon Web Services network in this Region. Applies to public virtual interfaces.</p>"
   )
   routeFilterPrefixes: option<routeFilterPrefixList>,
   @ocaml.doc("<p>The address family for the BGP peer.</p>") addressFamily: option<addressFamily>,
@@ -692,6 +737,8 @@ type newPrivateVirtualInterfaceAllocation = {
 }
 @ocaml.doc("<p>Information about a private virtual interface.</p>")
 type newPrivateVirtualInterface = {
+  @ocaml.doc("<p>Indicates whether to enable or disable SiteLink.</p>")
+  enableSiteLink: option<enableSiteLink>,
   @ocaml.doc("<p>The tags associated with the private virtual interface.</p>")
   tags: option<tagList_>,
   @ocaml.doc("<p>The ID of the Direct Connect gateway.</p>")
@@ -730,7 +777,10 @@ type interconnect = {
     "<p>Indicates whether the interconnect supports a secondary BGP in the same address family (IPv4/IPv6).</p>"
   )
   hasLogicalRedundancy: option<hasLogicalRedundancy>,
-  @ocaml.doc("<p>The Direct Connect endpoint on which the physical connection terminates.</p>")
+  @ocaml.doc("<p>The Direct Connect endpoint that terminates the logical connection. This device might be
+      different than the device that terminates the physical connection.</p>")
+  awsLogicalDeviceId: option<awsLogicalDeviceId>,
+  @ocaml.doc("<p>The Direct Connect endpoint that terminates the physical connection.</p>")
   awsDeviceV2: option<awsDeviceV2>,
   @ocaml.doc("<p>Indicates whether jumbo frames (9001 MTU) are supported.</p>")
   jumboFrameCapable: option<jumboFrameCapable>,
@@ -741,7 +791,8 @@ type interconnect = {
   loaIssueTime: option<loaIssueTime>,
   @ocaml.doc("<p>The bandwidth of the connection.</p>") bandwidth: option<bandwidth>,
   @ocaml.doc("<p>The location of the connection.</p>") location: option<locationCode>,
-  @ocaml.doc("<p>The AWS Region where the connection is located.</p>") region: option<region>,
+  @ocaml.doc("<p>The Amazon Web Services Region where the connection is located.</p>")
+  region: option<region>,
   @ocaml.doc("<p>The state of the interconnect. The following are the possible values:</p>
          <ul>
             <li>
@@ -804,7 +855,9 @@ type directConnectGatewayAssociationProposal = {
             </li>
          </ul>")
   proposalState: option<directConnectGatewayAssociationProposalState>,
-  @ocaml.doc("<p>The ID of the AWS account that owns the Direct Connect gateway.</p>")
+  @ocaml.doc(
+    "<p>The ID of the Amazon Web Services account that owns the Direct Connect gateway.</p>"
+  )
   directConnectGatewayOwnerAccount: option<ownerAccount>,
   @ocaml.doc("<p>The ID of the Direct Connect gateway.</p>")
   directConnectGatewayId: option<directConnectGatewayId>,
@@ -815,9 +868,11 @@ type directConnectGatewayAssociationProposal = {
   "<p>Information about an association between a Direct Connect gateway and a virtual private gateway or transit gateway.</p>"
 )
 type directConnectGatewayAssociation = {
-  @ocaml.doc("<p>The ID of the AWS account that owns the virtual private gateway.</p>")
+  @ocaml.doc(
+    "<p>The ID of the Amazon Web Services account that owns the virtual private gateway.</p>"
+  )
   virtualGatewayOwnerAccount: option<ownerAccount>,
-  @ocaml.doc("<p>The AWS Region where the virtual private gateway is located.</p>")
+  @ocaml.doc("<p>The Amazon Web Services Region where the virtual private gateway is located.</p>")
   virtualGatewayRegion: option<virtualGatewayRegion>,
   @ocaml.doc(
     "<p>The ID of the virtual private gateway. Applies only to private virtual interfaces.</p>"
@@ -851,12 +906,12 @@ type directConnectGatewayAssociation = {
             </li>
          </ul>")
   associationState: option<directConnectGatewayAssociationState>,
-  @ocaml.doc("<p>The ID of the AWS account that owns the associated gateway.</p>")
+  @ocaml.doc("<p>The ID of the Amazon Web Services account that owns the associated gateway.</p>")
   directConnectGatewayOwnerAccount: option<ownerAccount>,
   @ocaml.doc("<p>The ID of the Direct Connect gateway.</p>")
   directConnectGatewayId: option<directConnectGatewayId>,
 }
-@ocaml.doc("<p>Information about an AWS Direct Connect connection.</p>")
+@ocaml.doc("<p>Information about an Direct Connect connection.</p>")
 type connection = {
   @ocaml.doc("<p>The MAC Security (MACsec) security keys associated with the connection.</p>")
   macSecKeys: option<macSecKeyList>,
@@ -875,7 +930,10 @@ type connection = {
     "<p>Indicates whether the connection supports a secondary BGP peer in the same address family (IPv4/IPv6).</p>"
   )
   hasLogicalRedundancy: option<hasLogicalRedundancy>,
-  @ocaml.doc("<p>The Direct Connect endpoint on which the physical connection terminates.</p>")
+  @ocaml.doc("<p>The Direct Connect endpoint that terminates the logical connection. This device might be
+      different than the device that terminates the physical connection.</p>")
+  awsLogicalDeviceId: option<awsLogicalDeviceId>,
+  @ocaml.doc("<p>The Direct Connect endpoint that terminates the physical connection.</p>")
   awsDeviceV2: option<awsDeviceV2>,
   @ocaml.doc("<p>Indicates whether jumbo frames (9001 MTU) are supported.</p>")
   jumboFrameCapable: option<jumboFrameCapable>,
@@ -885,13 +943,14 @@ type connection = {
   @ocaml.doc("<p>The time of the most recent call to <a>DescribeLoa</a> for this connection.</p>")
   loaIssueTime: option<loaIssueTime>,
   @ocaml.doc(
-    "<p>The name of the AWS Direct Connect service provider associated with the connection.</p>"
+    "<p>The name of the Direct Connect service provider associated with the connection.</p>"
   )
   partnerName: option<partnerName>,
   @ocaml.doc("<p>The ID of the VLAN.</p>") vlan: option<vlan>,
   @ocaml.doc("<p>The bandwidth of the connection.</p>") bandwidth: option<bandwidth>,
   @ocaml.doc("<p>The location of the connection.</p>") location: option<locationCode>,
-  @ocaml.doc("<p>The AWS Region where the connection is located.</p>") region: option<region>,
+  @ocaml.doc("<p>The Amazon Web Services Region where the connection is located.</p>")
+  region: option<region>,
   @ocaml.doc("<p>The state of the connection. The following are the possible values:</p>
          <ul>
             <li>
@@ -934,7 +993,7 @@ type connection = {
   connectionState: option<connectionState>,
   @ocaml.doc("<p>The name of the connection.</p>") connectionName: option<connectionName>,
   @ocaml.doc("<p>The ID of the connection.</p>") connectionId: option<connectionId>,
-  @ocaml.doc("<p>The ID of the AWS account that owns the connection.</p>")
+  @ocaml.doc("<p>The ID of the Amazon Web Services account that owns the connection.</p>")
   ownerAccount: option<ownerAccount>,
 }
 type virtualInterfaceList = array<virtualInterface>
@@ -964,15 +1023,18 @@ type lag = {
   @ocaml.doc("<p>Indicates whether the LAG can host other connections.</p>")
   allowsHostedConnections: option<booleanFlag>,
   @ocaml.doc("<p>The connections bundled by the LAG.</p>") connections: option<connectionList>,
-  @ocaml.doc("<p>The AWS Direct Connect endpoint that hosts the LAG.</p>")
+  @ocaml.doc("<p>The Direct Connect endpoint that terminates the logical connection. This device might be
+      different than the device that terminates the physical connection.</p>")
+  awsLogicalDeviceId: option<awsLogicalDeviceId>,
+  @ocaml.doc("<p>The Direct Connect endpoint that hosts the LAG.</p>")
   awsDeviceV2: option<awsDeviceV2>,
-  @ocaml.doc("<p>The AWS Direct Connect endpoint that hosts the LAG.</p>")
-  awsDevice: option<awsDevice>,
+  @ocaml.doc("<p>The Direct Connect endpoint that hosts the LAG.</p>") awsDevice: option<awsDevice>,
   @ocaml.doc(
     "<p>The minimum number of physical dedicated connections that must be operational for the LAG itself to be operational.</p>"
   )
   minimumLinks: option<count>,
-  @ocaml.doc("<p>The AWS Region where the connection is located.</p>") region: option<region>,
+  @ocaml.doc("<p>The Amazon Web Services Region where the connection is located.</p>")
+  region: option<region>,
   @ocaml.doc("<p>The location of the LAG.</p>") location: option<locationCode>,
   @ocaml.doc("<p>The state of the LAG. The following are the possible values:</p>
         <ul>
@@ -1008,7 +1070,7 @@ type lag = {
          </ul>")
   lagState: option<lagState>,
   @ocaml.doc("<p>The name of the LAG.</p>") lagName: option<lagName>,
-  @ocaml.doc("<p>The ID of the AWS account that owns the LAG.</p>")
+  @ocaml.doc("<p>The ID of the Amazon Web Services account that owns the LAG.</p>")
   ownerAccount: option<ownerAccount>,
   @ocaml.doc("<p>The ID of the LAG.</p>") lagId: option<lagId>,
   @ocaml.doc(
@@ -1020,12 +1082,12 @@ type lag = {
   connectionsBandwidth: option<bandwidth>,
 }
 type lagList = array<lag>
-@ocaml.doc("<p>AWS Direct Connect links your internal network to an AWS Direct Connect location over a standard Ethernet fiber-optic cable. 
-      One end of the cable is connected to your router, the other to an AWS Direct Connect router. With this connection
-      in place, you can create virtual interfaces directly to the AWS cloud (for example, to Amazon EC2 
+@ocaml.doc("<p>Direct Connect links your internal network to an Direct Connect location over a standard Ethernet fiber-optic cable. 
+      One end of the cable is connected to your router, the other to an Direct Connect router. With this connection
+      in place, you can create virtual interfaces directly to the Amazon Web Services Cloud (for example, to Amazon EC2 
       and Amazon S3) and to Amazon VPC, bypassing Internet service providers in your network path. A 
-      connection provides access to all AWS Regions except the China (Beijing) and (China) Ningxia Regions. 
-      AWS resources in the China Regions can only be accessed through locations associated with those Regions.</p>")
+      connection provides access to all Amazon Web Services Regions except the China (Beijing) and (China) Ningxia Regions. 
+      Amazon Web Services resources in the China Regions can only be accessed through locations associated with those Regions.</p>")
 module DescribeLoa = {
   type t
   type request = {
@@ -1313,6 +1375,28 @@ module ConfirmPrivateVirtualInterface = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module ConfirmCustomerAgreement = {
+  type t
+  type request = {
+    @ocaml.doc("<p>
+
+      The name of the customer agreement.
+
+    </p>")
+    agreementName: option<agreementName>,
+  }
+  type response = {
+    @ocaml.doc("<p>
+      The status of the customer agreement when the connection was created. This will be either <code>signed</code> or <code>unsigned</code>.
+    </p>")
+    status: option<status>,
+  }
+  @module("@aws-sdk/client-directconnect") @new
+  external new: request => t = "ConfirmCustomerAgreementCommand"
+  let make = (~agreementName=?, ()) => new({agreementName: agreementName})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module ConfirmConnection = {
   type t
   type request = {@ocaml.doc("<p>The ID of the hosted connection.</p>") connectionId: connectionId}
@@ -1364,16 +1448,61 @@ module ConfirmConnection = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module UpdateDirectConnectGateway = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The new name for the Direct Connect gateway.</p>")
+    newDirectConnectGatewayName: directConnectGatewayName,
+    @ocaml.doc("<p>The ID of the Direct Connect gateway to update.</p>")
+    directConnectGatewayId: directConnectGatewayId,
+  }
+  type response = {directConnectGateway: option<directConnectGateway>}
+  @module("@aws-sdk/client-directconnect") @new
+  external new: request => t = "UpdateDirectConnectGatewayCommand"
+  let make = (~newDirectConnectGatewayName, ~directConnectGatewayId, ()) =>
+    new({
+      newDirectConnectGatewayName: newDirectConnectGatewayName,
+      directConnectGatewayId: directConnectGatewayId,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module UntagResource = {
   type t
   type request = {
     @ocaml.doc("<p>The tag keys of the tags to remove.</p>") tagKeys: tagKeyList,
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the resource.</p>") resourceArn: resourceArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-directconnect") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module DescribeRouterConfiguration = {
+  type t
+  @ocaml.doc("<p>Provides the details about a virtual interface's router.</p>")
+  type request = {
+    @ocaml.doc(
+      "<p>Identifies the router by a combination of vendor, platform, and software version. For example, <code>CiscoSystemsInc-2900SeriesRouters-IOS124</code>.</p>"
+    )
+    routerTypeIdentifier: option<routerTypeIdentifier>,
+    @ocaml.doc("<p>The ID of the virtual interface.</p>") virtualInterfaceId: virtualInterfaceId,
+  }
+  type response = {
+    @ocaml.doc("<p>Provides the details about a virtual interface's router.</p>")
+    virtualInterfaceName: option<virtualInterfaceName>,
+    @ocaml.doc("<p>The ID assigned to the virtual interface.</p>")
+    virtualInterfaceId: option<virtualInterfaceId>,
+    @ocaml.doc("<p>The details about the router.</p>") router: option<routerType>,
+    @ocaml.doc("<p>The customer router configuration.</p>")
+    customerRouterConfig: option<routerConfig>,
+  }
+  @module("@aws-sdk/client-directconnect") @new
+  external new: request => t = "DescribeRouterConfigurationCommand"
+  let make = (~virtualInterfaceId, ~routerTypeIdentifier=?, ()) =>
+    new({routerTypeIdentifier: routerTypeIdentifier, virtualInterfaceId: virtualInterfaceId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeInterconnectLoa = {
@@ -1467,6 +1596,10 @@ module CreateDirectConnectGateway = {
 module UpdateVirtualInterfaceAttributes = {
   type t
   type request = {
+    @ocaml.doc("<p>The name of the virtual private interface.</p>")
+    virtualInterfaceName: option<virtualInterfaceName>,
+    @ocaml.doc("<p>Indicates whether to enable or disable SiteLink.</p>")
+    enableSiteLink: option<enableSiteLink>,
     @ocaml.doc(
       "<p>The maximum transmission unit (MTU), in bytes. The supported values are 1500 and 9001. The default value is 1500.</p>"
     )
@@ -1477,8 +1610,13 @@ module UpdateVirtualInterfaceAttributes = {
   type response = virtualInterface
   @module("@aws-sdk/client-directconnect") @new
   external new: request => t = "UpdateVirtualInterfaceAttributesCommand"
-  let make = (~virtualInterfaceId, ~mtu=?, ()) =>
-    new({mtu: mtu, virtualInterfaceId: virtualInterfaceId})
+  let make = (~virtualInterfaceId, ~virtualInterfaceName=?, ~enableSiteLink=?, ~mtu=?, ()) =>
+    new({
+      virtualInterfaceName: virtualInterfaceName,
+      enableSiteLink: enableSiteLink,
+      mtu: mtu,
+      virtualInterfaceId: virtualInterfaceId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1511,7 +1649,7 @@ module TagResource = {
     @ocaml.doc("<p>The tags to add.</p>") tags: tagList_,
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the resource.</p>") resourceArn: resourceArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-directconnect") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1601,13 +1739,13 @@ module DisassociateConnectionFromLag = {
 
 module DescribeVirtualGateways = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("<p>The virtual private gateways.</p>") virtualGateways: option<virtualGatewayList>,
   }
   @module("@aws-sdk/client-directconnect") @new
-  external new: unit => t = "DescribeVirtualGatewaysCommand"
-  let make = () => new()
+  external new: request => t = "DescribeVirtualGatewaysCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1672,6 +1810,31 @@ module DescribeDirectConnectGatewayAttachments = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module DescribeCustomerMetadata = {
+  type t
+  type request = {.}
+  type response = {
+    @ocaml.doc("<p>The type of network-to-network interface (NNI) partner. The partner type will be one of the following:</p>
+         <ul>
+            <li>
+               <p>V1: This partner can only allocate 50Mbps, 100Mbps, 200Mbps, 300Mbps, 400Mbps, or 500Mbps subgigabit connections.</p>
+            </li>
+            <li>
+               <p>V2: This partner can only allocate 1GB, 2GB, 5GB, or 10GB hosted connections.</p>
+            </li>
+            <li>
+               <p>nonPartner: The customer is not a partner.</p>
+            </li>
+         </ul>")
+    nniPartnerType: option<nniPartnerType>,
+    @ocaml.doc("<p>The list of customer agreements.</p>") agreements: option<agreementList>,
+  }
+  @module("@aws-sdk/client-directconnect") @new
+  external new: request => t = "DescribeCustomerMetadataCommand"
+  let make = () => new(Js.Obj.empty())
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module DeleteConnection = {
   type t
   type request = {@ocaml.doc("<p>The ID of the connection.</p>") connectionId: connectionId}
@@ -1713,7 +1876,7 @@ module CreateConnection = {
   type t
   type request = {
     @ocaml.doc("<p>Indicates whether you want the connection to support MAC Security (MACsec).</p>
-         <p>MAC Security (MACsec) is only available on dedicated connections. For information about MAC Security (MACsec) prerequisties, see  <a href=\"https://docs.aws.amazon.com/directconnect/latest/UserGuide/direct-connect-mac-sec-getting-started.html#mac-sec-prerequisites\">MACsec prerequisties</a> in the <i>AWS Direct Connect User Guide</i>.</p>")
+         <p>MAC Security (MACsec) is only available on dedicated connections. For information about MAC Security (MACsec) prerequisties, see  <a href=\"https://docs.aws.amazon.com/directconnect/latest/UserGuide/direct-connect-mac-sec-getting-started.html#mac-sec-prerequisites\">MACsec prerequisties</a> in the <i>Direct Connect User Guide</i>.</p>")
     requestMACSec: option<requestMACSec>,
     @ocaml.doc("<p>The name of the service provider associated with the requested connection.</p>")
     providerName: option<providerName>,
@@ -1834,10 +1997,12 @@ module AllocateHostedConnection = {
     @ocaml.doc("<p>The dedicated VLAN provisioned to the hosted connection.</p>") vlan: vlan,
     @ocaml.doc("<p>The name of the hosted connection.</p>") connectionName: connectionName,
     @ocaml.doc(
-      "<p>The bandwidth of the connection. The possible values are 50Mbps, 100Mbps, 200Mbps, 300Mbps, 400Mbps, 500Mbps, 1Gbps, 2Gbps, 5Gbps, and 10Gbps. Note that only those AWS Direct Connect Partners who have met specific requirements are allowed to create a 1Gbps, 2Gbps, 5Gbps or 10Gbps hosted connection. </p>"
+      "<p>The bandwidth of the connection. The possible values are 50Mbps, 100Mbps, 200Mbps, 300Mbps, 400Mbps, 500Mbps, 1Gbps, 2Gbps, 5Gbps, and 10Gbps. Note that only those Direct Connect Partners who have met specific requirements are allowed to create a 1Gbps, 2Gbps, 5Gbps or 10Gbps hosted connection. </p>"
     )
     bandwidth: bandwidth,
-    @ocaml.doc("<p>The ID of the AWS account ID of the customer for the connection.</p>")
+    @ocaml.doc(
+      "<p>The ID of the Amazon Web Services account ID of the customer for the connection.</p>"
+    )
     ownerAccount: ownerAccount,
     @ocaml.doc("<p>The ID of the interconnect or LAG.</p>") connectionId: connectionId,
   }
@@ -1863,12 +2028,12 @@ module AllocateConnectionOnInterconnect = {
     @ocaml.doc("<p>The ID of the interconnect on which the connection will be provisioned.</p>")
     interconnectId: interconnectId,
     @ocaml.doc(
-      "<p>The ID of the AWS account of the customer for whom the connection will be provisioned.</p>"
+      "<p>The ID of the Amazon Web Services account of the customer for whom the connection will be provisioned.</p>"
     )
     ownerAccount: ownerAccount,
     @ocaml.doc("<p>The name of the provisioned connection.</p>") connectionName: connectionName,
     @ocaml.doc("<p>The bandwidth of the connection. The possible values are 50Mbps, 100Mbps, 200Mbps,
-      300Mbps, 400Mbps, 500Mbps, 1Gbps, 2Gbps, 5Gbps, and 10Gbps. Note that only those AWS Direct Connect Partners
+      300Mbps, 400Mbps, 500Mbps, 1Gbps, 2Gbps, 5Gbps, and 10Gbps. Note that only those Direct Connect Partners
       who have met specific requirements
     are allowed to create a 1Gbps, 2Gbps, 5Gbps or 10Gbps hosted connection.</p>")
     bandwidth: bandwidth,
@@ -1967,10 +2132,11 @@ module ListVirtualInterfaceTestHistory = {
 
 module DescribeLocations = {
   type t
-
+  type request = {.}
   type response = {@ocaml.doc("<p>The locations.</p>") locations: option<locationList>}
-  @module("@aws-sdk/client-directconnect") @new external new: unit => t = "DescribeLocationsCommand"
-  let make = () => new()
+  @module("@aws-sdk/client-directconnect") @new
+  external new: request => t = "DescribeLocationsCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -2098,7 +2264,9 @@ module CreateDirectConnectGatewayAssociationProposal = {
     addAllowedPrefixesToDirectConnectGateway: option<routeFilterPrefixList>,
     @ocaml.doc("<p>The ID of the virtual private gateway or transit gateway.</p>")
     gatewayId: gatewayIdToAssociate,
-    @ocaml.doc("<p>The ID of the AWS account that owns the Direct Connect gateway.</p>")
+    @ocaml.doc(
+      "<p>The ID of the Amazon Web Services account that owns the Direct Connect gateway.</p>"
+    )
     directConnectGatewayOwnerAccount: ownerAccount,
     @ocaml.doc("<p>The ID of the Direct Connect gateway.</p>")
     directConnectGatewayId: directConnectGatewayId,
@@ -2134,7 +2302,7 @@ module CreateDirectConnectGatewayAssociation = {
     virtualGatewayId: option<virtualGatewayId>,
     @ocaml.doc("<p>The Amazon VPC prefixes to advertise to the Direct Connect gateway</p>
          <p>This parameter is required when you create an association to a transit gateway.</p>
-         <p>For information about how to set the prefixes, see <a href=\"https://docs.aws.amazon.com/directconnect/latest/UserGuide/multi-account-associate-vgw.html#allowed-prefixes\">Allowed Prefixes</a> in the <i>AWS Direct Connect User Guide</i>.</p>")
+         <p>For information about how to set the prefixes, see <a href=\"https://docs.aws.amazon.com/directconnect/latest/UserGuide/multi-account-associate-vgw.html#allowed-prefixes\">Allowed Prefixes</a> in the <i>Direct Connect User Guide</i>.</p>")
     addAllowedPrefixesToDirectConnectGateway: option<routeFilterPrefixList>,
     @ocaml.doc("<p>The ID of the virtual private gateway or transit gateway.</p>")
     gatewayId: option<gatewayIdToAssociate>,
@@ -2184,7 +2352,9 @@ module AllocateTransitVirtualInterface = {
   type request = {
     @ocaml.doc("<p>Information about the transit virtual interface.</p>")
     newTransitVirtualInterfaceAllocation: newTransitVirtualInterfaceAllocation,
-    @ocaml.doc("<p>The ID of the AWS account that owns the transit virtual interface.</p>")
+    @ocaml.doc(
+      "<p>The ID of the Amazon Web Services account that owns the transit virtual interface.</p>"
+    )
     ownerAccount: ownerAccount,
     @ocaml.doc(
       "<p>The ID of the connection on which the transit virtual interface is provisioned.</p>"
@@ -2208,7 +2378,9 @@ module AllocatePublicVirtualInterface = {
   type request = {
     @ocaml.doc("<p>Information about the public virtual interface.</p>")
     newPublicVirtualInterfaceAllocation: newPublicVirtualInterfaceAllocation,
-    @ocaml.doc("<p>The ID of the AWS account that owns the public virtual interface.</p>")
+    @ocaml.doc(
+      "<p>The ID of the Amazon Web Services account that owns the public virtual interface.</p>"
+    )
     ownerAccount: ownerAccount,
     @ocaml.doc(
       "<p>The ID of the connection on which the public virtual interface is provisioned.</p>"
@@ -2232,7 +2404,9 @@ module AllocatePrivateVirtualInterface = {
   type request = {
     @ocaml.doc("<p>Information about the private virtual interface.</p>")
     newPrivateVirtualInterfaceAllocation: newPrivateVirtualInterfaceAllocation,
-    @ocaml.doc("<p>The ID of the AWS account that owns the virtual private interface.</p>")
+    @ocaml.doc(
+      "<p>The ID of the Amazon Web Services account that owns the virtual private interface.</p>"
+    )
     ownerAccount: ownerAccount,
     @ocaml.doc(
       "<p>The ID of the connection on which the private virtual interface is provisioned.</p>"
@@ -2255,10 +2429,10 @@ module AcceptDirectConnectGatewayAssociationProposal = {
   type t
   type request = {
     @ocaml.doc("<p>Overrides the Amazon VPC prefixes advertised to the Direct Connect gateway.</p>
-         <p>For information about how to set the prefixes, see <a href=\"https://docs.aws.amazon.com/directconnect/latest/UserGuide/multi-account-associate-vgw.html#allowed-prefixes\">Allowed Prefixes</a> in the <i>AWS Direct Connect User Guide</i>.</p>")
+         <p>For information about how to set the prefixes, see <a href=\"https://docs.aws.amazon.com/directconnect/latest/UserGuide/multi-account-associate-vgw.html#allowed-prefixes\">Allowed Prefixes</a> in the <i>Direct Connect User Guide</i>.</p>")
     overrideAllowedPrefixesToDirectConnectGateway: option<routeFilterPrefixList>,
     @ocaml.doc(
-      "<p>The ID of the AWS account that owns the virtual private gateway or transit gateway.</p>"
+      "<p>The ID of the Amazon Web Services account that owns the virtual private gateway or transit gateway.</p>"
     )
     associatedGatewayOwnerAccount: ownerAccount,
     @ocaml.doc("<p>The ID of the request proposal.</p>")
@@ -2289,7 +2463,7 @@ module UpdateLag = {
   type t
   type request = {
     @ocaml.doc("<p>The LAG MAC Security (MACsec) encryption mode.</p>
-         <p>AWS applies the value to all connections which are part of the LAG.</p>")
+         <p>Amazon Web Services applies the value to all connections which are part of the LAG.</p>")
     encryptionMode: option<encryptionMode>,
     @ocaml.doc(
       "<p>The minimum number of physical connections that must be operational for the LAG itself to be operational.</p>"
@@ -2489,7 +2663,7 @@ module CreateLag = {
   type request = {
     @ocaml.doc("<p>Indicates whether the connection will support MAC Security (MACsec).</p>
          <note>
-            <p>All connections in the LAG must be capable of  supporting MAC Security (MACsec). For information about MAC Security (MACsec) prerequisties, see  <a href=\"https://docs.aws.amazon.com/directconnect/latest/UserGuide/direct-connect-mac-sec-getting-started.html#mac-sec-prerequisites\">MACsec prerequisties</a> in the <i>AWS Direct Connect User Guide</i>.</p>
+            <p>All connections in the LAG must be capable of  supporting MAC Security (MACsec). For information about MAC Security (MACsec) prerequisties, see  <a href=\"https://docs.aws.amazon.com/directconnect/latest/UserGuide/direct-connect-mac-sec-getting-started.html#mac-sec-prerequisites\">MACsec prerequisties</a> in the <i>Direct Connect User Guide</i>.</p>
          </note>")
     requestMACSec: option<requestMACSec>,
     @ocaml.doc("<p>The name of the service provider associated with the LAG.</p>")

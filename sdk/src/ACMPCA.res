@@ -32,6 +32,7 @@ type string39 = string
 type string3 = string
 type string256 = string
 type string253 = string
+type string1To256 = string
 type string16 = string
 type string128 = string
 type string_ = string
@@ -113,6 +114,7 @@ type certificateAuthorityStatus = [
   | @as("CREATING") #CREATING
 ]
 type boolean_ = bool
+type base64String1To4096 = string
 type auditReportStatus = [
   | @as("FAILED") #FAILED
   | @as("SUCCESS") #SUCCESS
@@ -137,9 +139,10 @@ type asn1PrintableString64 = string
 @ocaml.doc("<p>Validity specifies the period of time during which a certificate is valid. Validity
 			can be expressed as an explicit date and time when the validity of a certificate starts
 			or expires, or as a span of time after issuance, stated in days, months, or years. For
-			more information, see <a href=\"https://tools.ietf.org/html/rfc5280#section-4.1.2.5\">Validity</a> in RFC 5280.</p>
-		       <p>ACM Private CA API consumes the <code>Validity</code> data type differently in two distinct
-			parameters of the <code>IssueCertificate</code> action. The required parameter
+			more information, see <a href=\"https://datatracker.ietf.org/doc/html/rfc5280#section-4.1.2.5\">Validity</a>
+			in RFC 5280.</p>
+		       <p>ACM Private CA API consumes the <code>Validity</code> data type differently in two
+			distinct parameters of the <code>IssueCertificate</code> action. The required parameter
 				<code>IssueCertificate</code>:<code>Validity</code> specifies the end of a
 			certificate's validity period. The optional parameter
 				<code>IssueCertificate</code>:<code>ValidityNotBefore</code> specifies a customized
@@ -205,8 +208,8 @@ type tag = {
   @ocaml.doc("<p>Value of the tag.</p>") @as("Value") value: option<tagValue>,
   @ocaml.doc("<p>Key (name) of the tag.</p>") @as("Key") key: tagKey,
 }
-@ocaml.doc("<p>Defines a <code>PolicyInformation</code> qualifier. ACM Private CA supports the <a href=\"https://tools.ietf.org/html/rfc5280#section-4.2.1.4\">certification practice
-				statement (CPS) qualifier</a> defined in RFC 5280. </p>")
+@ocaml.doc("<p>Defines a <code>PolicyInformation</code> qualifier. ACM Private CA supports the <a href=\"https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.4\">certification
+				practice statement (CPS) qualifier</a> defined in RFC 5280. </p>")
 type qualifier = {
   @ocaml.doc("<p>Contains a pointer to a certification practice statement (CPS) published by the
 			CA.</p>")
@@ -220,6 +223,25 @@ type qualifier = {
 type otherName = {
   @ocaml.doc("<p>Specifies an OID value.</p>") @as("Value") value: string256,
   @ocaml.doc("<p>Specifies an OID. </p>") @as("TypeId") typeId: customObjectIdentifier,
+}
+@ocaml.doc("<p>Contains information to enable and configure Online Certificate Status Protocol (OCSP)
+			for validating certificate revocation status.</p>
+		       <p>When you revoke a certificate, OCSP responses may take up to 60 minutes 
+	to reflect the new status.</p>")
+type ocspConfiguration = {
+  @ocaml.doc("<p>By default, ACM Private CA injects an Amazon Web Services domain into certificates being validated by
+			the Online Certificate Status Protocol (OCSP). A customer can alternatively use this
+			object to define a CNAME specifying a customized OCSP domain.</p>
+		       <p>Note: The value of the CNAME must not include a protocol prefix such as \"http://\" or
+			\"https://\".</p>
+		       <p>For more information, see <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/ocsp-customize.html\">Customizing Online Certificate Status Protocol
+				(OCSP) </a> in the <i>Certificate Manager Private Certificate Authority (PCA) User Guide</i>.</p>")
+  @as("OcspCustomCname")
+  ocspCustomCname: option<string253>,
+  @ocaml.doc("<p>Flag enabling use of the Online Certificate Status Protocol (OCSP) for validating
+			certificate revocation status.</p>")
+  @as("Enabled")
+  enabled: boolean_,
 }
 @ocaml.doc("<p>Defines one or more purposes for which the key contained in the certificate can be
 			used. Default value for each option is false.</p>")
@@ -249,19 +271,61 @@ type extendedKeyUsage = {
 			(OID).</p>")
   @as("ExtendedKeyUsageObjectIdentifier")
   extendedKeyUsageObjectIdentifier: option<customObjectIdentifier>,
-  @ocaml.doc(
-    "<p>Specifies a standard <code>ExtendedKeyUsage</code> as defined as in <a href=\"https://tools.ietf.org/html/rfc5280#section-4.2.1.12\">RFC 5280</a>.</p>"
-  )
+  @ocaml.doc("<p>Specifies a standard <code>ExtendedKeyUsage</code> as defined as in <a href=\"https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.12\">RFC
+				5280</a>.</p>")
   @as("ExtendedKeyUsageType")
   extendedKeyUsageType: option<extendedKeyUsageType>,
 }
 @ocaml.doc("<p>Describes an Electronic Data Interchange (EDI) entity as described in as defined in
-				<a href=\"https://tools.ietf.org/html/rfc5280\">Subject Alternative Name</a> in
-			RFC 5280.</p>")
+				<a href=\"https://datatracker.ietf.org/doc/html/rfc5280\">Subject Alternative
+				Name</a> in RFC 5280.</p>")
 type ediPartyName = {
   @ocaml.doc("<p>Specifies the name assigner.</p>") @as("NameAssigner")
   nameAssigner: option<string256>,
   @ocaml.doc("<p>Specifies the party name.</p>") @as("PartyName") partyName: string256,
+}
+@ocaml.doc("<p></p>
+		       <p>Specifies the X.509 extension information for a
+			certificate.</p>
+		       <p>Extensions present in <code>CustomExtensions</code> follow the
+				<code>ApiPassthrough</code>
+			         <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/UsingTemplates.html#template-order-of-operations\">template
+				rules</a>. </p>")
+type customExtension = {
+  @ocaml.doc("<p></p>
+		       <p>Specifies the critical flag of
+			the
+			X.509
+			extension.</p>")
+  @as("Critical")
+  critical: option<boolean_>,
+  @ocaml.doc("<p></p>
+		       <p>Specifies the base64-encoded value of the X.509
+			extension.</p>")
+  @as("Value")
+  value: base64String1To4096,
+  @ocaml.doc("<p></p>
+		       <p>Specifies the object identifier (OID) of the X.509 extension. For more information,
+			see the
+				<a href=\"https://oidref.com/2.5.29\">Global OID reference
+				database.</a>
+		       </p>")
+  @as("ObjectIdentifier")
+  objectIdentifier: customObjectIdentifier,
+}
+@ocaml.doc("<p>Defines the X.500 relative distinguished name (RDN).</p>")
+type customAttribute = {
+  @ocaml.doc("<p></p>
+		       <p>Specifies the attribute value of relative distinguished name
+			(RDN).</p>")
+  @as("Value")
+  value: string1To256,
+  @ocaml.doc("<p>Specifies the object identifier (OID) of the attribute type of
+			the
+			relative distinguished name
+			(RDN).</p>")
+  @as("ObjectIdentifier")
+  objectIdentifier: customObjectIdentifier,
 }
 @ocaml.doc("<p>Contains configuration information for a certificate revocation list (CRL). Your
 			private certificate authority (CA) creates base CRLs. Delta CRLs are not supported. You
@@ -274,10 +338,15 @@ type ediPartyName = {
 		       <p>ACM Private CA assets that are stored in Amazon S3 can be protected with encryption. 
   For more information, see <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaCreateCa.html#crl-encryption\">Encrypting Your
 			CRLs</a>.</p>
-		       <p>Your private CA uses the value in the <b>ExpirationInDays</b> parameter to calculate the <b>nextUpdate</b> field in the CRL. The CRL is refreshed at 1/2 the age of next
-			update or when a certificate is revoked. When a certificate is revoked, it is recorded
-			in the next CRL that is generated and in the next audit report. Only time valid
-			certificates are listed in the CRL. Expired certificates are not included. </p>
+		       <p>Your private CA uses the value in the <b>ExpirationInDays</b> parameter to calculate the <b>nextUpdate</b> field in the CRL. The CRL is refreshed prior to a
+			certificate's expiration date or when a certificate is revoked. When a certificate is
+			revoked, it appears in the CRL until the certificate expires, and then in one additional
+			CRL after expiration, and it always appears in the audit report.</p>
+
+		       <p>A CRL is typically updated approximately 30 minutes after a certificate 
+	is revoked. If for any reason a CRL update fails, ACM Private CA makes further attempts 
+	every 15 minutes.</p>
+
 		       <p>CRLs contain the following fields:</p>
 		       <ul>
             <li>
@@ -368,6 +437,9 @@ type ediPartyName = {
 		       <p>
             <code>openssl crl -inform DER -text -in <i>crl_path</i>
 			-noout</code>
+         </p>
+		       <p>For more information, see <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/crl-planning.html\">Planning a certificate revocation list
+				(CRL)</a> in the <i>Certificate Manager Private Certificate Authority (PCA) User Guide</i>
          </p>")
 type crlConfiguration = {
   @ocaml.doc("<p>Determines whether the CRL will be publicly readable or privately held in the CRL
@@ -390,9 +462,8 @@ type crlConfiguration = {
   @ocaml.doc("<p>Name of the S3 bucket that contains the CRL. If you do not provide a value for the
 				<b>CustomCname</b> argument, the name of your S3 bucket
 			is placed into the <b>CRL Distribution Points</b> extension of
-			the issued certificate. You can change the name of your bucket by calling the <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_UpdateCertificateAuthority.html\">UpdateCertificateAuthority</a> action. You must specify a 
-			<a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaCreateCa.html#s3-policies\">bucket policy</a> that
-			allows ACM Private CA to write the CRL to your bucket.</p>")
+			the issued certificate. You can change the name of your bucket by calling the <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_UpdateCertificateAuthority.html\">UpdateCertificateAuthority</a> operation. You must specify a <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaCreateCa.html#s3-policies\">bucket
+				policy</a> that allows ACM Private CA to write the CRL to your bucket.</p>")
   @as("S3BucketName")
   s3BucketName: option<string3To255>,
   @ocaml.doc("<p>Name inserted into the certificate <b>CRL Distribution
@@ -424,12 +495,94 @@ type accessMethod = {
   @as("CustomObjectIdentifier")
   customObjectIdentifier: option<customObjectIdentifier>,
 }
+type tagList_ = array<tag>
+@ocaml.doc("<p>Certificate revocation information used by the <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html\">CreateCertificateAuthority</a> and <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_UpdateCertificateAuthority.html\">UpdateCertificateAuthority</a> actions. Your private certificate authority (CA)
+			can configure Online Certificate Status Protocol (OCSP) support and/or maintain a
+			certificate revocation list (CRL). OCSP returns validation information about
+			certificates as requested by clients, and a CRL contains an updated list of certificates
+			revoked by your CA. For more information, see <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_RevokeCertificate.html\">RevokeCertificate</a> and <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/revocation-setup.html\">Setting up a
+				certificate revocation method</a> in the <i>Certificate Manager Private Certificate Authority (PCA) User
+				Guide</i>.</p>")
+type revocationConfiguration = {
+  @ocaml.doc("<p>Configuration of Online Certificate Status Protocol (OCSP) support, if any, maintained
+			by your private CA. When you revoke a certificate, OCSP responses may take up to 60 minutes 
+	to reflect the new status.</p>")
+  @as("OcspConfiguration")
+  ocspConfiguration: option<ocspConfiguration>,
+  @ocaml.doc("<p>Configuration of the certificate revocation list (CRL), if any, maintained by your
+			private CA. A CRL is typically updated approximately 30 minutes after a certificate 
+	is revoked. If for any reason a CRL update fails, ACM Private CA makes further attempts 
+	every 15 minutes.</p>")
+  @as("CrlConfiguration")
+  crlConfiguration: option<crlConfiguration>,
+}
+@ocaml.doc("<p>Modifies the <code>CertPolicyId</code> of a <code>PolicyInformation</code> object with
+			a qualifier. ACM Private CA supports the certification practice statement (CPS)
+			qualifier.</p>")
+type policyQualifierInfo = {
+  @ocaml.doc("<p>Defines the qualifier type. ACM Private CA supports the use of a URI for a CPS qualifier
+			in this field.</p>")
+  @as("Qualifier")
+  qualifier: qualifier,
+  @ocaml.doc("<p>Identifies the qualifier modifying a <code>CertPolicyId</code>.</p>")
+  @as("PolicyQualifierId")
+  policyQualifierId: policyQualifierId,
+}
+@ocaml.doc("<p>Permissions designate which private CA actions can be performed by an Amazon Web Services service or
+			entity. In order for ACM to automatically renew private certificates, you must give
+			the ACM service principal all available permissions (<code>IssueCertificate</code>,
+				<code>GetCertificate</code>, and <code>ListPermissions</code>). Permissions can be
+			assigned with the <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreatePermission.html\">CreatePermission</a> action,
+			removed with the <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_DeletePermission.html\">DeletePermission</a> action, and
+			listed with the <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListPermissions.html\">ListPermissions</a> action.</p>")
+type permission = {
+  @ocaml.doc("<p>The name of the policy that is associated with the permission.</p>") @as("Policy")
+  policy: option<awspolicy>,
+  @ocaml.doc(
+    "<p>The private CA actions that can be performed by the designated Amazon Web Services service.</p>"
+  )
+  @as("Actions")
+  actions: option<actionList>,
+  @ocaml.doc("<p>The ID of the account that assigned the permission.</p>") @as("SourceAccount")
+  sourceAccount: option<accountId>,
+  @ocaml.doc("<p>The Amazon Web Services service or entity that holds the permission. At this time, the only valid
+			principal is <code>acm.amazonaws.com</code>.</p>")
+  @as("Principal")
+  principal: option<principal>,
+  @ocaml.doc("<p>The time at which the permission was created.</p>") @as("CreatedAt")
+  createdAt: option<tstamp>,
+  @ocaml.doc("<p>The Amazon Resource Number (ARN) of the private CA from which the permission was
+			issued.</p>")
+  @as("CertificateAuthorityArn")
+  certificateAuthorityArn: option<arn>,
+}
+type extendedKeyUsageList = array<extendedKeyUsage>
+type customExtensionList = array<customExtension>
+type customAttributeList = array<customAttribute>
+type policyQualifierInfoList = array<policyQualifierInfo>
+type permissionList = array<permission>
 @ocaml.doc("<p>Contains information about the certificate subject. The <code>Subject</code> field in
 			the certificate identifies the entity that owns or controls the public key in the
 			certificate. The entity can be a user, computer, device, or service. The <code>Subject
 			</code>must contain an X.500 distinguished name (DN). A DN is a sequence of relative
 			distinguished names (RDNs). The RDNs are separated by commas in the certificate.</p>")
 type asn1Subject = {
+  @ocaml.doc("<p></p>
+		       <p>Contains a sequence of one or more X.500 relative distinguished
+			names
+			(RDNs),
+			each of which consists of an object identifier (OID) and
+			a
+			value. For more information, see NIST’s definition of 
+			<a href=\"https://csrc.nist.gov/glossary/term/Object_Identifier\">Object
+				Identifier
+				(OID)</a>.</p>
+		
+		       <note>
+			         <p>Custom attributes cannot be used in combination with standard attributes.</p>
+		       </note>")
+  @as("CustomAttributes")
+  customAttributes: option<customAttributeList>,
   @ocaml.doc("<p>Typically a qualifier appended to the name of an individual. Examples include Jr. for
 			junior, Sr. for senior, and III for third.</p>")
   @as("GenerationQualifier")
@@ -482,56 +635,21 @@ type asn1Subject = {
   @as("Country")
   country: option<countryCodeString>,
 }
-type tagList_ = array<tag>
-@ocaml.doc("<p>Certificate revocation information used by the <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html\">CreateCertificateAuthority</a> and <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_UpdateCertificateAuthority.html\">UpdateCertificateAuthority</a> actions. Your private certificate authority (CA)
-			can create and maintain a certificate revocation list (CRL). A CRL contains information
-			about certificates revoked by your CA. For more information, see <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_RevokeCertificate.html\">RevokeCertificate</a>.</p>")
-type revocationConfiguration = {
-  @ocaml.doc("<p>Configuration of the certificate revocation list (CRL), if any, maintained by your
-			private CA.</p>")
-  @as("CrlConfiguration")
-  crlConfiguration: option<crlConfiguration>,
+@ocaml.doc("<p>Defines the X.509 <code>CertificatePolicies</code> extension.</p>")
+type policyInformation = {
+  @ocaml.doc("<p>Modifies the given <code>CertPolicyId</code> with a qualifier. ACM Private CA supports the
+			certification practice statement (CPS) qualifier.</p>")
+  @as("PolicyQualifiers")
+  policyQualifiers: option<policyQualifierInfoList>,
+  @ocaml.doc("<p>Specifies the object identifier (OID) of the certificate policy under which the
+			certificate was issued. For more information, see NIST's definition of <a href=\"https://csrc.nist.gov/glossary/term/Object_Identifier\">Object Identifier
+				(OID)</a>.</p>")
+  @as("CertPolicyId")
+  certPolicyId: customObjectIdentifier,
 }
-@ocaml.doc("<p>Modifies the <code>CertPolicyId</code> of a <code>PolicyInformation</code> object with
-			a qualifier. ACM Private CA supports the certification practice statement (CPS) qualifier.</p>")
-type policyQualifierInfo = {
-  @ocaml.doc("<p>Defines the qualifier type. ACM Private CA supports the use of a URI for a CPS qualifier in
-			this field.</p>")
-  @as("Qualifier")
-  qualifier: qualifier,
-  @ocaml.doc("<p>Identifies the qualifier modifying a <code>CertPolicyId</code>.</p>")
-  @as("PolicyQualifierId")
-  policyQualifierId: policyQualifierId,
-}
-@ocaml.doc("<p>Permissions designate which private CA actions can be performed by an AWS service or
-			entity. In order for ACM to automatically renew private certificates, you must give
-			the ACM service principal all available permissions (<code>IssueCertificate</code>,
-				<code>GetCertificate</code>, and <code>ListPermissions</code>). Permissions can be
-			assigned with the <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreatePermission.html\">CreatePermission</a> action,
-			removed with the <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_DeletePermission.html\">DeletePermission</a> action, and
-			listed with the <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListPermissions.html\">ListPermissions</a> action.</p>")
-type permission = {
-  @ocaml.doc("<p>The name of the policy that is associated with the permission.</p>") @as("Policy")
-  policy: option<awspolicy>,
-  @ocaml.doc("<p>The private CA actions that can be performed by the designated AWS service.</p>")
-  @as("Actions")
-  actions: option<actionList>,
-  @ocaml.doc("<p>The ID of the account that assigned the permission.</p>") @as("SourceAccount")
-  sourceAccount: option<accountId>,
-  @ocaml.doc("<p>The AWS service or entity that holds the permission. At this time, the only valid
-			principal is <code>acm.amazonaws.com</code>.</p>")
-  @as("Principal")
-  principal: option<principal>,
-  @ocaml.doc("<p>The time at which the permission was created.</p>") @as("CreatedAt")
-  createdAt: option<tstamp>,
-  @ocaml.doc("<p>The Amazon Resource Number (ARN) of the private CA from which the permission was
-			issued.</p>")
-  @as("CertificateAuthorityArn")
-  certificateAuthorityArn: option<arn>,
-}
-@ocaml.doc("<p>Describes an ASN.1 X.400 <code>GeneralName</code> as defined in <a href=\"https://tools.ietf.org/html/rfc5280\">RFC 5280</a>. Only one of the
-			following naming options should be provided. Providing more than one option results in
-			an <code>InvalidArgsException</code> error.</p>")
+@ocaml.doc("<p>Describes an ASN.1 X.400 <code>GeneralName</code> as defined in <a href=\"https://datatracker.ietf.org/doc/html/rfc5280\">RFC 5280</a>. Only one of
+			the following naming options should be provided. Providing more than one option results
+			in an <code>InvalidArgsException</code> error.</p>")
 type generalName = {
   @ocaml.doc("<p> Represents <code>GeneralName</code> as an object identifier (OID).</p>")
   @as("RegisteredId")
@@ -548,21 +666,18 @@ type generalName = {
   @as("DirectoryName") directoryName: option<asn1Subject>,
   @ocaml.doc("<p>Represents <code>GeneralName</code> as a DNS name.</p>") @as("DnsName")
   dnsName: option<string253>,
-  @ocaml.doc(
-    "<p>Represents <code>GeneralName</code> as an <a href=\"https://tools.ietf.org/html/rfc822\">RFC 822</a> email address.</p>"
-  )
+  @ocaml.doc("<p>Represents <code>GeneralName</code> as an <a href=\"https://datatracker.ietf.org/doc/html/rfc822\">RFC 822</a> email
+			address.</p>")
   @as("Rfc822Name")
   rfc822Name: option<string256>,
   @ocaml.doc("<p>Represents <code>GeneralName</code> using an <code>OtherName</code> object.</p>")
   @as("OtherName")
   otherName: option<otherName>,
 }
-type extendedKeyUsageList = array<extendedKeyUsage>
-type policyQualifierInfoList = array<policyQualifierInfo>
-type permissionList = array<permission>
 type generalNameList = array<generalName>
+type certificatePolicyList = array<policyInformation>
 @ocaml.doc("<p>Provides access information used by the <code>authorityInfoAccess</code> and
-				<code>subjectInfoAccess</code> extensions described in <a href=\"https://tools.ietf.org/html/rfc5280\">RFC 5280</a>.</p>")
+				<code>subjectInfoAccess</code> extensions described in <a href=\"https://datatracker.ietf.org/doc/html/rfc5280\">RFC 5280</a>.</p>")
 type accessDescription = {
   @ocaml.doc("<p>The location of <code>AccessDescription</code> information.</p>")
   @as("AccessLocation")
@@ -571,35 +686,25 @@ type accessDescription = {
   @as("AccessMethod")
   accessMethod: accessMethod,
 }
-@ocaml.doc("<p>Defines the X.509 <code>CertificatePolicies</code> extension.</p>")
-type policyInformation = {
-  @ocaml.doc("<p>Modifies the given <code>CertPolicyId</code> with a qualifier. ACM Private CA supports the
-			certification practice statement (CPS) qualifier.</p>")
-  @as("PolicyQualifiers")
-  policyQualifiers: option<policyQualifierInfoList>,
-  @ocaml.doc("<p>Specifies the object identifier (OID) of the certificate policy under which the
-			certificate was issued. For more information, see NIST's definition of <a href=\"https://csrc.nist.gov/glossary/term/Object_Identifier\">Object Identifier
-				(OID)</a>.</p>")
-  @as("CertPolicyId")
-  certPolicyId: customObjectIdentifier,
-}
-type accessDescriptionList = array<accessDescription>
-@ocaml.doc("<p>Describes the certificate extensions to be added to the certificate signing request
-			(CSR).</p>")
-type csrExtensions = {
-  @ocaml.doc("<p>For CA certificates, provides a path to additional information pertaining to the CA,
-			such as revocation and policy. For more information, see <a href=\"https://tools.ietf.org/html/rfc5280#section-4.2.2.2\">Subject Information
-				Access</a> in RFC 5280.</p>")
-  @as("SubjectInformationAccess")
-  subjectInformationAccess: option<accessDescriptionList>,
-  @ocaml.doc("<p>Indicates the purpose of the certificate and of the key contained in the
-			certificate.</p>")
-  @as("KeyUsage")
-  keyUsage: option<keyUsage>,
-}
-type certificatePolicyList = array<policyInformation>
 @ocaml.doc("<p>Contains X.509 extension information for a certificate.</p>")
 type extensions = {
+  @ocaml.doc("<p></p>
+		       <p>Contains a sequence of one or more X.509 extensions, each of which consists of an
+			object identifier (OID), a base64-encoded
+			value,
+			and the
+			critical flag.
+			For
+			more information, see the <a href=\"https://oidref.com/2.5.29\">Global OID reference
+				database.</a>
+         </p>
+		
+		       <note>
+			         <p>The OID value of a <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CustomExtension.html\">CustomExtension</a> must not
+				match the OID of a predefined extension.</p>
+		       </note>")
+  @as("CustomExtensions")
+  customExtensions: option<customExtensionList>,
   @ocaml.doc("<p>The subject alternative name extension allows identities to be bound to the subject of
 			the certificate. These identities may be included in addition to or in place of the
 			identity in the subject field of the certificate.</p>")
@@ -620,6 +725,31 @@ type extensions = {
 			certificate.</p>")
   @as("CertificatePolicies")
   certificatePolicies: option<certificatePolicyList>,
+}
+type accessDescriptionList = array<accessDescription>
+@ocaml.doc("<p>Describes the certificate extensions to be added to the certificate signing request
+			(CSR).</p>")
+type csrExtensions = {
+  @ocaml.doc("<p>For CA certificates, provides a path to additional information pertaining to the CA,
+			such as revocation and policy. For more information, see <a href=\"https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.2.2\">Subject
+				Information Access</a> in RFC 5280.</p>")
+  @as("SubjectInformationAccess")
+  subjectInformationAccess: option<accessDescriptionList>,
+  @ocaml.doc("<p>Indicates the purpose of the certificate and of the key contained in the
+			certificate.</p>")
+  @as("KeyUsage")
+  keyUsage: option<keyUsage>,
+}
+@ocaml.doc("<p>Contains X.509 certificate information to be placed in an issued certificate. An
+				<code>APIPassthrough</code> or <code>APICSRPassthrough</code> template variant must
+			be selected, or else this parameter is ignored. </p>
+		       <p>If conflicting or duplicate certificate information is supplied from other sources,
+			ACM Private CA applies <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/UsingTemplates.html#template-order-of-operations\">order of
+				operation rules</a> to determine what information is used.</p>")
+type apiPassthrough = {
+  @as("Subject") subject: option<asn1Subject>,
+  @ocaml.doc("<p>Specifies X.509 extension information for a certificate.</p>") @as("Extensions")
+  extensions: option<extensions>,
 }
 @ocaml.doc("<p>Contains configuration information for your private certificate authority (CA). This
 			includes information about the class of public key algorithm and the key pair that your
@@ -652,13 +782,13 @@ type certificateAuthorityConfiguration = {
 			controls the public key contained in the <b>Subject Public Key
 				Info</b> field. Call the <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html\">CreateCertificateAuthority</a> action to create your private CA. You must then
 			call the <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_GetCertificateAuthorityCertificate.html\">GetCertificateAuthorityCertificate</a> action to retrieve a private CA
-			certificate signing request (CSR). Sign the CSR with your ACM Private CA-hosted or on-premises
-			root or subordinate CA certificate. Call the <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ImportCertificateAuthorityCertificate.html\">ImportCertificateAuthorityCertificate</a> action to import the signed
-			certificate into AWS Certificate Manager (ACM). </p>")
+			certificate signing request (CSR). Sign the CSR with your ACM Private CA-hosted or
+			on-premises root or subordinate CA certificate. Call the <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ImportCertificateAuthorityCertificate.html\">ImportCertificateAuthorityCertificate</a> action to import the signed
+			certificate into Certificate Manager (ACM). </p>")
 type certificateAuthority = {
   @ocaml.doc("<p>Defines a cryptographic key management compliance standard used for handling CA keys. </p>
 		       <p>Default: FIPS_140_2_LEVEL_3_OR_HIGHER</p>
-		       <p>Note: AWS Region ap-northeast-3 supports only FIPS_140_2_LEVEL_2_OR_HIGHER. You must
+		       <p>Note: Amazon Web Services Region ap-northeast-3 supports only FIPS_140_2_LEVEL_2_OR_HIGHER. You must
 			explicitly specify this parameter and value when creating a CA in that Region.
 			Specifying a different value (or no value) results in an
 				<code>InvalidArgsException</code> with the message \"A certificate authority cannot
@@ -669,8 +799,8 @@ type certificateAuthority = {
 				<code>PermanentDeletionTimeInDays</code> parameter of the <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_DeleteCertificateAuthorityRequest.html\">DeleteCertificateAuthorityRequest</a> action. </p>")
   @as("RestorableUntil")
   restorableUntil: option<tstamp>,
-  @ocaml.doc("<p>Information about the certificate revocation list (CRL) created and maintained by your
-			private CA. </p>")
+  @ocaml.doc("<p>Information about the Online Certificate Status Protocol (OCSP) configuration or
+			certificate revocation list (CRL) created and maintained by your private CA. </p>")
   @as("RevocationConfiguration")
   revocationConfiguration: option<revocationConfiguration>,
   @ocaml.doc("<p>Your private CA configuration.</p>") @as("CertificateAuthorityConfiguration")
@@ -692,7 +822,8 @@ type certificateAuthority = {
   lastStateChangeAt: option<tstamp>,
   @ocaml.doc("<p>Date and time at which your private CA was created.</p>") @as("CreatedAt")
   createdAt: option<tstamp>,
-  @ocaml.doc("<p>The AWS account ID that owns the certificate authority.</p>") @as("OwnerAccount")
+  @ocaml.doc("<p>The Amazon Web Services account ID that owns the certificate authority.</p>")
+  @as("OwnerAccount")
   ownerAccount: option<accountId>,
   @ocaml.doc("<p>Amazon Resource Name (ARN) for your private certificate authority (CA). The format is
 					<code>
@@ -701,31 +832,24 @@ type certificateAuthority = {
   @as("Arn")
   arn: option<arn>,
 }
-@ocaml.doc("<p>Contains X.509 certificate information to be placed in an issued certificate. An
-				<code>APIPassthrough</code> or <code>APICSRPassthrough</code> template variant must
-			be selected, or else this parameter is ignored. </p>
-		       <p>If conflicting or duplicate certificate information is supplied from other sources,
-			ACM Private CA applies <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/UsingTemplates.html#template-order-of-operations\">order of
-				operation rules</a> to determine what information is used.</p>")
-type apiPassthrough = {
-  @as("Subject") subject: option<asn1Subject>,
-  @ocaml.doc("<p>Specifies X.509 extension information for a certificate.</p>") @as("Extensions")
-  extensions: option<extensions>,
-}
 type certificateAuthorities = array<certificateAuthority>
-@ocaml.doc("<p>This is the <i>ACM Private CA API Reference</i>. It provides descriptions,
+@ocaml.doc("<p>This is the <i>Certificate Manager Private Certificate Authority (PCA) API Reference</i>. It provides descriptions,
 			syntax, and usage examples for each of the actions and data types involved in creating
-			and managing private certificate authorities (CA) for your organization.</p>
-		       <p>The documentation for each action shows the Query API request parameters and the XML
-			response. Alternatively, you can use one of the AWS SDKs to access an API that's
-			tailored to the programming language or platform that you're using. For more
-			information, see <a href=\"https://aws.amazon.com/tools/#SDKs\">AWS
-			SDKs</a>.</p>
-		       <note>
-			         <p>Each ACM Private CA API action has a quota that determines the number of times the action
-				can be called per second. For more information, see <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaLimits.html#PcaLimits-api\">API Rate Quotas in ACM Private CA</a>
-				in the ACM Private CA user guide.</p>
-		       </note>")
+			and managing a private certificate authority (CA) for your organization.</p>
+		       <p>The documentation for each action shows the API request parameters and the JSON
+			response. Alternatively, you can use one of the Amazon Web Services SDKs to access an API that is
+			tailored to the programming language or platform that you prefer. For more information,
+			see <a href=\"https://aws.amazon.com/tools/#SDKs\">Amazon Web Services SDKs</a>.</p>
+		       <p>Each ACM Private CA API operation has a quota that determines the number of times the
+			operation can be called per second. ACM Private CA throttles API requests at different rates
+			depending on the operation. Throttling means that ACM Private CA rejects an otherwise valid
+			request because the request exceeds the operation's quota for the number of requests per
+			second. When a request is throttled, ACM Private CA returns a <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/CommonErrors.html\">ThrottlingException</a> error. ACM Private CA does not guarantee a minimum request
+			rate for APIs. </p>
+
+		       <p>To see an up-to-date list of your ACM Private CA quotas, or to request a quota increase,
+			log into your Amazon Web Services account and visit the <a href=\"https://console.aws.amazon.com/servicequotas/\">Service Quotas</a>
+			console.</p>")
 module RevokeCertificate = {
   type t
   type request = {
@@ -740,7 +864,7 @@ module RevokeCertificate = {
 		       <p>
             <code>openssl x509 -in <i>file_path</i> -text -noout</code>
          </p>
-		       <p>You can also copy the serial number from the console or use the <a href=\"https://docs.aws.amazon.com/acm/latest/APIReference/API_DescribeCertificate.html\">DescribeCertificate</a> action in the <i>AWS Certificate Manager API
+		       <p>You can also copy the serial number from the console or use the <a href=\"https://docs.aws.amazon.com/acm/latest/APIReference/API_DescribeCertificate.html\">DescribeCertificate</a> action in the <i>Certificate Manager API
 				Reference</i>. </p>")
     @as("CertificateSerial")
     certificateSerial: string128,
@@ -753,7 +877,7 @@ module RevokeCertificate = {
     @as("CertificateAuthorityArn")
     certificateAuthorityArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-acm-pca") @new external new: request => t = "RevokeCertificateCommand"
   let make = (~revocationReason, ~certificateSerial, ~certificateAuthorityArn, ()) =>
     new({
@@ -775,7 +899,7 @@ module RestoreCertificateAuthority = {
     @as("CertificateAuthorityArn")
     certificateAuthorityArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-acm-pca") @new
   external new: request => t = "RestoreCertificateAuthorityCommand"
   let make = (~certificateAuthorityArn, ()) =>
@@ -799,7 +923,7 @@ module PutPolicy = {
     @as("ResourceArn")
     resourceArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-acm-pca") @new external new: request => t = "PutPolicyCommand"
   let make = (~policy, ~resourceArn, ()) => new({policy: policy, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -809,9 +933,9 @@ module ImportCertificateAuthorityCertificate = {
   type t
   type request = {
     @ocaml.doc("<p>A PEM-encoded file that contains all of your certificates, other than the certificate
-			you're importing, chaining up to your root CA. Your ACM Private CA-hosted or on-premises root
-			certificate is the last in the chain, and each certificate in the chain signs the one
-			preceding. </p>
+			you're importing, chaining up to your root CA. Your ACM Private CA-hosted or on-premises
+			root certificate is the last in the chain, and each certificate in the chain signs the
+			one preceding. </p>
 		       <p>This parameter must be supplied when you import a subordinate CA. When you import a
 			root CA, there is no chain.</p>")
     @as("CertificateChain")
@@ -828,7 +952,7 @@ module ImportCertificateAuthorityCertificate = {
     @as("CertificateAuthorityArn")
     certificateAuthorityArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-acm-pca") @new
   external new: request => t = "ImportCertificateAuthorityCertificateCommand"
   let make = (~certificate, ~certificateAuthorityArn, ~certificateChain=?, ()) =>
@@ -994,7 +1118,7 @@ module DeletePolicy = {
     @as("ResourceArn")
     resourceArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-acm-pca") @new external new: request => t = "DeletePolicyCommand"
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1003,9 +1127,10 @@ module DeletePolicy = {
 module DeletePermission = {
   type t
   type request = {
-    @ocaml.doc("<p>The AWS account that calls this action.</p>") @as("SourceAccount")
+    @ocaml.doc("<p>The Amazon Web Services account that calls this action.</p>")
+    @as("SourceAccount")
     sourceAccount: option<accountId>,
-    @ocaml.doc("<p>The AWS service or identity that will have its CA permissions revoked. At this time,
+    @ocaml.doc("<p>The Amazon Web Services service or identity that will have its CA permissions revoked. At this time,
 			the only valid service principal is <code>acm.amazonaws.com</code>
          </p>")
     @as("Principal")
@@ -1019,7 +1144,7 @@ module DeletePermission = {
     @as("CertificateAuthorityArn")
     certificateAuthorityArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-acm-pca") @new external new: request => t = "DeletePermissionCommand"
   let make = (~principal, ~certificateAuthorityArn, ~sourceAccount=?, ()) =>
     new({
@@ -1045,7 +1170,7 @@ module DeleteCertificateAuthority = {
     @as("CertificateAuthorityArn")
     certificateAuthorityArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-acm-pca") @new
   external new: request => t = "DeleteCertificateAuthorityCommand"
   let make = (~certificateAuthorityArn, ~permanentDeletionTimeInDays=?, ()) =>
@@ -1097,14 +1222,14 @@ module CreateCertificateAuthorityAuditReport = {
 module CreatePermission = {
   type t
   type request = {
-    @ocaml.doc("<p>The actions that the specified AWS service principal can use. These include
+    @ocaml.doc("<p>The actions that the specified Amazon Web Services service principal can use. These include
 				<code>IssueCertificate</code>, <code>GetCertificate</code>, and
 				<code>ListPermissions</code>.</p>")
     @as("Actions")
     actions: actionList,
     @ocaml.doc("<p>The ID of the calling account.</p>") @as("SourceAccount")
     sourceAccount: option<accountId>,
-    @ocaml.doc("<p>The AWS service or identity that receives the permission. At this time, the only
+    @ocaml.doc("<p>The Amazon Web Services service or identity that receives the permission. At this time, the only
 			valid principal is <code>acm.amazonaws.com</code>.</p>")
     @as("Principal")
     principal: principal,
@@ -1117,7 +1242,7 @@ module CreatePermission = {
     @as("CertificateAuthorityArn")
     certificateAuthorityArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-acm-pca") @new external new: request => t = "CreatePermissionCommand"
   let make = (~actions, ~principal, ~certificateAuthorityArn, ~sourceAccount=?, ()) =>
     new({
@@ -1134,7 +1259,11 @@ module UpdateCertificateAuthority = {
   type request = {
     @ocaml.doc("<p>Status of your private CA.</p>") @as("Status")
     status: option<certificateAuthorityStatus>,
-    @ocaml.doc("<p>Revocation information for your private CA.</p>") @as("RevocationConfiguration")
+    @ocaml.doc("<p>Contains information to enable Online Certificate Status Protocol (OCSP) support, to
+			enable a certificate revocation list (CRL), to enable both, or to enable neither. If
+			this parameter is not supplied, existing capibilites remain unchanged. For more
+			information, see the <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_OcspConfiguration.html\">OcspConfiguration</a> and <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CrlConfiguration.html\">CrlConfiguration</a> types.</p>")
+    @as("RevocationConfiguration")
     revocationConfiguration: option<revocationConfiguration>,
     @ocaml.doc("<p>Amazon Resource Name (ARN) of the private CA that issued the certificate to be
 			revoked. This must be of the form:</p>
@@ -1145,7 +1274,7 @@ module UpdateCertificateAuthority = {
     @as("CertificateAuthorityArn")
     certificateAuthorityArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-acm-pca") @new
   external new: request => t = "UpdateCertificateAuthorityCommand"
   let make = (~certificateAuthorityArn, ~status=?, ~revocationConfiguration=?, ()) =>
@@ -1169,7 +1298,7 @@ module UntagCertificateAuthority = {
     @as("CertificateAuthorityArn")
     certificateAuthorityArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-acm-pca") @new
   external new: request => t = "UntagCertificateAuthorityCommand"
   let make = (~tags, ~certificateAuthorityArn, ()) =>
@@ -1189,7 +1318,7 @@ module TagCertificateAuthority = {
     @as("CertificateAuthorityArn")
     certificateAuthorityArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-acm-pca") @new
   external new: request => t = "TagCertificateAuthorityCommand"
   let make = (~tags, ~certificateAuthorityArn, ()) =>
@@ -1278,87 +1407,14 @@ module ListPermissions = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
-module CreateCertificateAuthority = {
-  type t
-  type request = {
-    @ocaml.doc("<p>Key-value pairs that will be attached to the new private CA. You can associate up to
-			50 tags with a private CA. For information using tags with IAM to manage permissions,
-			see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html\">Controlling Access Using IAM Tags</a>.</p>")
-    @as("Tags")
-    tags: option<tagList_>,
-    @ocaml.doc("<p>Specifies a
-			cryptographic key management compliance standard used for handling CA keys.</p>
-		       <p>Default: FIPS_140_2_LEVEL_3_OR_HIGHER</p>
-		       <p>Note: <code>FIPS_140_2_LEVEL_3_OR_HIGHER</code> is not supported in Region
-			ap-northeast-3. When creating a CA in the ap-northeast-3, you must provide
-				<code>FIPS_140_2_LEVEL_2_OR_HIGHER</code> as the argument for
-				<code>KeyStorageSecurityStandard</code>. Failure to do this results in an
-				<code>InvalidArgsException</code> with the message, \"A certificate authority cannot
-			be created in this region with the specified security standard.\"</p>")
-    @as("KeyStorageSecurityStandard")
-    keyStorageSecurityStandard: option<keyStorageSecurityStandard>,
-    @ocaml.doc("<p>Custom string that can be used to distinguish between calls to the <b>CreateCertificateAuthority</b> action. Idempotency tokens for
-				<b>CreateCertificateAuthority</b> time out after five
-			minutes. Therefore, if you call <b>CreateCertificateAuthority</b> multiple times with the same idempotency
-			token within five minutes, ACM Private CA recognizes that you are requesting only certificate
-			authority and will issue only one. If you change the idempotency token for each call,
-			PCA recognizes that you are requesting multiple certificate authorities.</p>")
-    @as("IdempotencyToken")
-    idempotencyToken: option<idempotencyToken>,
-    @ocaml.doc("<p>The type of the certificate authority.</p>") @as("CertificateAuthorityType")
-    certificateAuthorityType: certificateAuthorityType,
-    @ocaml.doc("<p>Contains a Boolean value that you can use to enable a certification revocation list
-			(CRL) for the CA, the name of the S3 bucket to which ACM Private CA will write the CRL, and an
-			optional CNAME alias that you can use to hide the name of your bucket in the <b>CRL Distribution Points</b> extension of your CA certificate. For
-			more information, see the <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CrlConfiguration.html\">CrlConfiguration</a> structure.
-		</p>")
-    @as("RevocationConfiguration")
-    revocationConfiguration: option<revocationConfiguration>,
-    @ocaml.doc("<p>Name and bit size of the private key algorithm, the name of the signing algorithm, and
-			X.500 certificate subject information.</p>")
-    @as("CertificateAuthorityConfiguration")
-    certificateAuthorityConfiguration: certificateAuthorityConfiguration,
-  }
-  type response = {
-    @ocaml.doc("<p>If successful, the Amazon Resource Name (ARN) of the certificate authority (CA). This
-			is of the form: </p>
-		       <p>
-			         <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i>
-            </code>.
-		</p>")
-    @as("CertificateAuthorityArn")
-    certificateAuthorityArn: option<arn>,
-  }
-  @module("@aws-sdk/client-acm-pca") @new
-  external new: request => t = "CreateCertificateAuthorityCommand"
-  let make = (
-    ~certificateAuthorityType,
-    ~certificateAuthorityConfiguration,
-    ~tags=?,
-    ~keyStorageSecurityStandard=?,
-    ~idempotencyToken=?,
-    ~revocationConfiguration=?,
-    (),
-  ) =>
-    new({
-      tags: tags,
-      keyStorageSecurityStandard: keyStorageSecurityStandard,
-      idempotencyToken: idempotencyToken,
-      certificateAuthorityType: certificateAuthorityType,
-      revocationConfiguration: revocationConfiguration,
-      certificateAuthorityConfiguration: certificateAuthorityConfiguration,
-    })
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
 module IssueCertificate = {
   type t
   type request = {
     @ocaml.doc("<p>Alphanumeric string that can be used to distinguish between calls to the <b>IssueCertificate</b> action. Idempotency tokens for <b>IssueCertificate</b> time out after one minute. Therefore, if you
 			call <b>IssueCertificate</b> multiple times with the same
-			idempotency token within one minute, ACM Private CA recognizes that you are requesting only one
-			certificate and will issue only one. If you change the idempotency token for each call,
-			PCA recognizes that you are requesting multiple certificates.</p>")
+			idempotency token within one minute, ACM Private CA recognizes that you are requesting only
+			one certificate and will issue only one. If you change the idempotency token for each
+			call, PCA recognizes that you are requesting multiple certificates.</p>")
     @as("IdempotencyToken")
     idempotencyToken: option<idempotencyToken>,
     @ocaml.doc("<p>Information describing the start of the validity period of the certificate. This
@@ -1371,8 +1427,8 @@ module IssueCertificate = {
 			parameter is optional.</p>
 		       <p>The <code>ValidityNotBefore</code> value is expressed as an explicit date and time,
 			using the <code>Validity</code> type value <code>ABSOLUTE</code>. For more information,
-			see <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_Validity.html\">Validity</a> in this API reference and <a href=\"https://tools.ietf.org/html/rfc5280#section-4.1.2.5\">Validity</a> in RFC
-			5280.</p>")
+			see <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_Validity.html\">Validity</a> in this API reference and <a href=\"https://datatracker.ietf.org/doc/html/rfc5280#section-4.1.2.5\">Validity</a>
+			in RFC 5280.</p>")
     @as("ValidityNotBefore")
     validityNotBefore: option<validity>,
     @ocaml.doc("<p>Information describing the end of the validity period of the certificate. This
@@ -1380,7 +1436,8 @@ module IssueCertificate = {
 		       <p>Certificate validity is the period of time during which a certificate is valid.
 			Validity can be expressed as an explicit date and time when the certificate expires, or
 			as a span of time after issuance, stated in days, months, or years. For more
-			information, see <a href=\"https://tools.ietf.org/html/rfc5280#section-4.1.2.5\">Validity</a> in RFC 5280. </p>
+			information, see <a href=\"https://datatracker.ietf.org/doc/html/rfc5280#section-4.1.2.5\">Validity</a>
+			in RFC 5280. </p>
 		       <p>This value is unaffected when <code>ValidityNotBefore</code> is also specified. For
 			example, if <code>Validity</code> is set to 20 days in the future, the certificate will
 			expire 20 days from issuance time regardless of the <code>ValidityNotBefore</code>
@@ -1390,10 +1447,12 @@ module IssueCertificate = {
     @as("Validity")
     validity: validity,
     @ocaml.doc("<p>Specifies a custom configuration template to use when issuing a certificate. If this
-			parameter is not provided, ACM Private CA defaults to the <code>EndEntityCertificate/V1</code>
-			template. For CA certificates, you should choose the shortest path length that meets
-			your needs. The path length is indicated by the PathLen<i>N</i> portion of
-			the ARN, where <i>N</i> is the <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaTerms.html#terms-cadepth\">CA depth</a>.</p>
+			parameter is not provided, ACM Private CA defaults to the
+				<code>EndEntityCertificate/V1</code> template. For CA certificates, you should
+			choose the shortest path length that meets your needs. The path length is indicated by
+			the PathLen<i>N</i> portion of the ARN, where <i>N</i> is
+			the <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaTerms.html#terms-cadepth\">CA
+				depth</a>.</p>
 		       <p>Note: The CA depth configured on a subordinate CA certificate must not exceed the
 			limit set by its parents in the CA hierarchy.</p>
 		       <p>For a list of <code>TemplateArn</code> values supported by ACM Private CA, see <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/UsingTemplates.html\">Understanding Certificate
@@ -1402,7 +1461,11 @@ module IssueCertificate = {
     templateArn: option<arn>,
     @ocaml.doc("<p>The name of the algorithm that will be used to sign the certificate to be issued. </p>
 		       <p>This parameter should not be confused with the <code>SigningAlgorithm</code> parameter
-			used to sign a CSR in the <code>CreateCertificateAuthority</code> action.</p>")
+			used to sign a CSR in the <code>CreateCertificateAuthority</code> action.</p>
+		       <note>
+			         <p>The specified signing algorithm family (RSA or ECDSA) much match the algorithm
+				family of the CA's secret key.</p>
+		       </note>")
     @as("SigningAlgorithm")
     signingAlgorithm: signingAlgorithm,
     @ocaml.doc("<p>The certificate signing request (CSR) for the certificate you want to issue. As an
@@ -1417,7 +1480,7 @@ module IssueCertificate = {
 			extensions. </p>
 		       <p>
             <code>openssl req -new -config openssl_rsa.cnf -extensions usr_cert -newkey rsa:2048
-				-days -365 -keyout private/test_cert_priv_key.pem -out
+				-days 365 -keyout private/test_cert_priv_key.pem -out
 			csr/test_cert_.csr</code>
          </p>
 		       <p>Note: A CSR must provide either a <i>subject name</i> or a
@@ -1473,6 +1536,79 @@ module IssueCertificate = {
       csr: csr,
       certificateAuthorityArn: certificateAuthorityArn,
       apiPassthrough: apiPassthrough,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module CreateCertificateAuthority = {
+  type t
+  type request = {
+    @ocaml.doc("<p>Key-value pairs that will be attached to the new private CA. You can associate up to
+			50 tags with a private CA. For information using tags with IAM to manage permissions,
+			see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html\">Controlling Access Using IAM Tags</a>.</p>")
+    @as("Tags")
+    tags: option<tagList_>,
+    @ocaml.doc("<p>Specifies a
+			cryptographic key management compliance standard used for handling CA keys.</p>
+		       <p>Default: FIPS_140_2_LEVEL_3_OR_HIGHER</p>
+		       <p>Note: <code>FIPS_140_2_LEVEL_3_OR_HIGHER</code> is not supported in Region
+			ap-northeast-3. When creating a CA in the ap-northeast-3, you must provide
+				<code>FIPS_140_2_LEVEL_2_OR_HIGHER</code> as the argument for
+				<code>KeyStorageSecurityStandard</code>. Failure to do this results in an
+				<code>InvalidArgsException</code> with the message, \"A certificate authority cannot
+			be created in this region with the specified security standard.\"</p>")
+    @as("KeyStorageSecurityStandard")
+    keyStorageSecurityStandard: option<keyStorageSecurityStandard>,
+    @ocaml.doc("<p>Custom string that can be used to distinguish between calls to the <b>CreateCertificateAuthority</b> action. Idempotency tokens for
+				<b>CreateCertificateAuthority</b> time out after five
+			minutes. Therefore, if you call <b>CreateCertificateAuthority</b> multiple times with the same idempotency
+			token within five minutes, ACM Private CA recognizes that you are requesting only
+			certificate authority and will issue only one. If you change the idempotency token for
+			each call, PCA recognizes that you are requesting multiple certificate
+			authorities.</p>")
+    @as("IdempotencyToken")
+    idempotencyToken: option<idempotencyToken>,
+    @ocaml.doc("<p>The type of the certificate authority.</p>") @as("CertificateAuthorityType")
+    certificateAuthorityType: certificateAuthorityType,
+    @ocaml.doc("<p>Contains information to enable Online Certificate Status Protocol (OCSP) support, to
+			enable a certificate revocation list (CRL), to enable both, or to enable neither. The
+			default is for both certificate validation mechanisms to be disabled. For more
+			information, see the <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_OcspConfiguration.html\">OcspConfiguration</a> and <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CrlConfiguration.html\">CrlConfiguration</a> types.</p>")
+    @as("RevocationConfiguration")
+    revocationConfiguration: option<revocationConfiguration>,
+    @ocaml.doc("<p>Name and bit size of the private key algorithm, the name of the signing algorithm, and
+			X.500 certificate subject information.</p>")
+    @as("CertificateAuthorityConfiguration")
+    certificateAuthorityConfiguration: certificateAuthorityConfiguration,
+  }
+  type response = {
+    @ocaml.doc("<p>If successful, the Amazon Resource Name (ARN) of the certificate authority (CA). This
+			is of the form: </p>
+		       <p>
+			         <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i>
+            </code>.
+		</p>")
+    @as("CertificateAuthorityArn")
+    certificateAuthorityArn: option<arn>,
+  }
+  @module("@aws-sdk/client-acm-pca") @new
+  external new: request => t = "CreateCertificateAuthorityCommand"
+  let make = (
+    ~certificateAuthorityType,
+    ~certificateAuthorityConfiguration,
+    ~tags=?,
+    ~keyStorageSecurityStandard=?,
+    ~idempotencyToken=?,
+    ~revocationConfiguration=?,
+    (),
+  ) =>
+    new({
+      tags: tags,
+      keyStorageSecurityStandard: keyStorageSecurityStandard,
+      idempotencyToken: idempotencyToken,
+      certificateAuthorityType: certificateAuthorityType,
+      revocationConfiguration: revocationConfiguration,
+      certificateAuthorityConfiguration: certificateAuthorityConfiguration,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

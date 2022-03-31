@@ -1189,7 +1189,7 @@ module DescribeDetectorModelAnalysis = {
 module DeleteInput = {
   type t
   type request = {@ocaml.doc("<p>The name of the input to delete.</p>") inputName: inputName}
-
+  type response = {.}
   @module("@aws-sdk/client-iotevents") @new external new: request => t = "DeleteInputCommand"
   let make = (~inputName, ()) => new({inputName: inputName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1201,7 +1201,7 @@ module DeleteDetectorModel = {
     @ocaml.doc("<p>The name of the detector model to be deleted.</p>")
     detectorModelName: detectorModelName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iotevents") @new
   external new: request => t = "DeleteDetectorModelCommand"
   let make = (~detectorModelName, ()) => new({detectorModelName: detectorModelName})
@@ -1211,7 +1211,7 @@ module DeleteDetectorModel = {
 module DeleteAlarmModel = {
   type t
   type request = {@ocaml.doc("<p>The name of the alarm model.</p>") alarmModelName: alarmModelName}
-
+  type response = {.}
   @module("@aws-sdk/client-iotevents") @new external new: request => t = "DeleteAlarmModelCommand"
   let make = (~alarmModelName, ()) => new({alarmModelName: alarmModelName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1224,7 +1224,7 @@ module UntagResource = {
     tagKeys: tagKeys,
     @ocaml.doc("<p>The ARN of the resource.</p>") resourceArn: amazonResourceName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iotevents") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1236,7 +1236,7 @@ module TagResource = {
     @ocaml.doc("<p>The new or modified tags for the resource.</p>") tags: tags,
     @ocaml.doc("<p>The ARN of the resource.</p>") resourceArn: amazonResourceName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iotevents") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1392,7 +1392,7 @@ module PutLoggingOptions = {
     @ocaml.doc("<p>The new values of the AWS IoT Events logging options.</p>")
     loggingOptions: loggingOptions,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iotevents") @new external new: request => t = "PutLoggingOptionsCommand"
   let make = (~loggingOptions, ()) => new({loggingOptions: loggingOptions})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1433,14 +1433,14 @@ or <code>null</code> if there are no more results.
 
 module DescribeLoggingOptions = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("<p>The current settings of the AWS IoT Events logging options.</p>")
     loggingOptions: option<loggingOptions>,
   }
   @module("@aws-sdk/client-iotevents") @new
-  external new: unit => t = "DescribeLoggingOptionsCommand"
-  let make = () => new()
+  external new: request => t = "DescribeLoggingOptionsCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

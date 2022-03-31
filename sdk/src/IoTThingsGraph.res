@@ -336,7 +336,7 @@ type entityDescriptions = array<entityDescription>
          <p>For more information about how AWS IoT Things Graph works, see the <a href=\"https://docs.aws.amazon.com/thingsgraph/latest/ug/iot-tg-whatis.html\">User Guide</a>.</p>")
 module GetNamespaceDeletionStatus = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("<p>An error code returned by the namespace deletion task.</p>")
     errorMessage: option<string_>,
@@ -349,8 +349,8 @@ module GetNamespaceDeletionStatus = {
     @ocaml.doc("<p>The ARN of the namespace that is being deleted.</p>") namespaceArn: option<arn>,
   }
   @module("@aws-sdk/client-iotthingsgraph") @new
-  external new: unit => t = "GetNamespaceDeletionStatusCommand"
-  let make = () => new()
+  external new: request => t = "GetNamespaceDeletionStatusCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -361,7 +361,7 @@ module DissociateEntityFromThing = {
     entityType: entityType,
     @ocaml.doc("<p>The name of the thing to disassociate.</p>") thingName: thingName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iotthingsgraph") @new
   external new: request => t = "DissociateEntityFromThingCommand"
   let make = (~entityType, ~thingName, ()) => new({entityType: entityType, thingName: thingName})
@@ -404,7 +404,7 @@ module DeprecateSystemTemplate = {
          </p>")
     id: urn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iotthingsgraph") @new
   external new: request => t = "DeprecateSystemTemplateCommand"
   let make = (~id, ()) => new({id: id})
@@ -421,7 +421,7 @@ module DeprecateFlowTemplate = {
          </p>")
     id: urn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iotthingsgraph") @new
   external new: request => t = "DeprecateFlowTemplateCommand"
   let make = (~id, ()) => new({id: id})
@@ -438,7 +438,7 @@ module DeleteSystemTemplate = {
          </p>")
     id: urn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iotthingsgraph") @new
   external new: request => t = "DeleteSystemTemplateCommand"
   let make = (~id, ()) => new({id: id})
@@ -448,7 +448,7 @@ module DeleteSystemTemplate = {
 module DeleteSystemInstance = {
   type t
   type request = {@ocaml.doc("<p>The ID of the system instance to be deleted.</p>") id: option<urn>}
-
+  type response = {.}
   @module("@aws-sdk/client-iotthingsgraph") @new
   external new: request => t = "DeleteSystemInstanceCommand"
   let make = (~id=?, ()) => new({id: id})
@@ -457,14 +457,15 @@ module DeleteSystemInstance = {
 
 module DeleteNamespace = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("<p>The name of the namespace to be deleted.</p>")
     namespaceName: option<namespaceName>,
     @ocaml.doc("<p>The ARN of the namespace to be deleted.</p>") namespaceArn: option<arn>,
   }
-  @module("@aws-sdk/client-iotthingsgraph") @new external new: unit => t = "DeleteNamespaceCommand"
-  let make = () => new()
+  @module("@aws-sdk/client-iotthingsgraph") @new
+  external new: request => t = "DeleteNamespaceCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -478,7 +479,7 @@ module DeleteFlowTemplate = {
          </p>")
     id: urn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iotthingsgraph") @new
   external new: request => t = "DeleteFlowTemplateCommand"
   let make = (~id, ()) => new({id: id})
@@ -501,7 +502,7 @@ module AssociateEntityToThing = {
     @ocaml.doc("<p>The name of the thing to which the entity is to be associated.</p>")
     thingName: thingName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iotthingsgraph") @new
   external new: request => t = "AssociateEntityToThingCommand"
   let make = (~entityId, ~thingName, ~namespaceVersion=?, ()) =>
@@ -607,7 +608,7 @@ module UntagResource = {
     )
     resourceArn: resourceArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iotthingsgraph") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -730,7 +731,7 @@ module TagResource = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the resource whose tags are returned.</p>")
     resourceArn: resourceArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iotthingsgraph") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"

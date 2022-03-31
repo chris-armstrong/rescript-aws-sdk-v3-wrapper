@@ -224,7 +224,7 @@ module NotifyApplicationState = {
     @as("ApplicationId")
     applicationId: applicationId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-mgh") @new external new: request => t = "NotifyApplicationStateCommand"
   let make = (~status, ~applicationId, ~dryRun=?, ~updateDateTime=?, ()) =>
     new({
@@ -251,7 +251,7 @@ module ImportMigrationTask = {
     @ocaml.doc("<p>The name of the ProgressUpdateStream. ></p>") @as("ProgressUpdateStream")
     progressUpdateStream: progressUpdateStream,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-mgh") @new external new: request => t = "ImportMigrationTaskCommand"
   let make = (~migrationTaskName, ~progressUpdateStream, ~dryRun=?, ()) =>
     new({
@@ -281,7 +281,7 @@ module DisassociateDiscoveredResource = {
     @ocaml.doc("<p>The name of the ProgressUpdateStream.</p>") @as("ProgressUpdateStream")
     progressUpdateStream: progressUpdateStream,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-mgh") @new
   external new: request => t = "DisassociateDiscoveredResourceCommand"
   let make = (~configurationId, ~migrationTaskName, ~progressUpdateStream, ~dryRun=?, ()) =>
@@ -313,7 +313,7 @@ module DisassociateCreatedArtifact = {
     @ocaml.doc("<p>The name of the ProgressUpdateStream. </p>") @as("ProgressUpdateStream")
     progressUpdateStream: progressUpdateStream,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-mgh") @new
   external new: request => t = "DisassociateCreatedArtifactCommand"
   let make = (~createdArtifactName, ~migrationTaskName, ~progressUpdateStream, ~dryRun=?, ()) =>
@@ -360,7 +360,7 @@ module DeleteProgressUpdateStream = {
     @as("ProgressUpdateStreamName")
     progressUpdateStreamName: progressUpdateStream,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-mgh") @new
   external new: request => t = "DeleteProgressUpdateStreamCommand"
   let make = (~progressUpdateStreamName, ~dryRun=?, ()) =>
@@ -381,7 +381,7 @@ module CreateProgressUpdateStream = {
     @as("ProgressUpdateStreamName")
     progressUpdateStreamName: progressUpdateStream,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-mgh") @new
   external new: request => t = "CreateProgressUpdateStreamCommand"
   let make = (~progressUpdateStreamName, ~dryRun=?, ()) =>
@@ -412,7 +412,7 @@ module NotifyMigrationTaskState = {
     @ocaml.doc("<p>The name of the ProgressUpdateStream. </p>") @as("ProgressUpdateStream")
     progressUpdateStream: progressUpdateStream,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-mgh") @new external new: request => t = "NotifyMigrationTaskStateCommand"
   let make = (
     ~nextUpdateSeconds,
@@ -451,7 +451,7 @@ module AssociateDiscoveredResource = {
     @ocaml.doc("<p>The name of the ProgressUpdateStream.</p>") @as("ProgressUpdateStream")
     progressUpdateStream: progressUpdateStream,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-mgh") @new
   external new: request => t = "AssociateDiscoveredResourceCommand"
   let make = (~discoveredResource, ~migrationTaskName, ~progressUpdateStream, ~dryRun=?, ()) =>
@@ -483,7 +483,7 @@ module AssociateCreatedArtifact = {
     @ocaml.doc("<p>The name of the ProgressUpdateStream. </p>") @as("ProgressUpdateStream")
     progressUpdateStream: progressUpdateStream,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-mgh") @new external new: request => t = "AssociateCreatedArtifactCommand"
   let make = (~createdArtifact, ~migrationTaskName, ~progressUpdateStream, ~dryRun=?, ()) =>
     new({
@@ -540,7 +540,7 @@ module PutResourceAttributes = {
     @ocaml.doc("<p>The name of the ProgressUpdateStream. </p>") @as("ProgressUpdateStream")
     progressUpdateStream: progressUpdateStream,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-mgh") @new external new: request => t = "PutResourceAttributesCommand"
   let make = (~resourceAttributeList, ~migrationTaskName, ~progressUpdateStream, ~dryRun=?, ()) =>
     new({

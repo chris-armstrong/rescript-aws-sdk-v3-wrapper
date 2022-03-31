@@ -552,7 +552,7 @@ module SetLoadBalancerListenerSSLCertificate = {
     @ocaml.doc("<p>The name of the load balancer.</p>") @as("LoadBalancerName")
     loadBalancerName: accessPointName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "SetLoadBalancerListenerSSLCertificateCommand"
   let make = (~sslcertificateId, ~loadBalancerPort, ~loadBalancerName, ()) =>
@@ -572,7 +572,7 @@ module DeleteLoadBalancerPolicy = {
     @ocaml.doc("<p>The name of the load balancer.</p>") @as("LoadBalancerName")
     loadBalancerName: accessPointName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "DeleteLoadBalancerPolicyCommand"
   let make = (~policyName, ~loadBalancerName, ()) =>
@@ -587,7 +587,7 @@ module DeleteLoadBalancer = {
     @ocaml.doc("<p>The name of the load balancer.</p>") @as("LoadBalancerName")
     loadBalancerName: accessPointName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "DeleteLoadBalancerCommand"
   let make = (~loadBalancerName, ()) => new({loadBalancerName: loadBalancerName})
@@ -611,7 +611,7 @@ module CreateLBCookieStickinessPolicy = {
     @ocaml.doc("<p>The name of the load balancer.</p>") @as("LoadBalancerName")
     loadBalancerName: accessPointName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "CreateLBCookieStickinessPolicyCommand"
   let make = (~policyName, ~loadBalancerName, ~cookieExpirationPeriod=?, ()) =>
@@ -637,7 +637,7 @@ module CreateAppCookieStickinessPolicy = {
     @ocaml.doc("<p>The name of the load balancer.</p>") @as("LoadBalancerName")
     loadBalancerName: accessPointName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "CreateAppCookieStickinessPolicyCommand"
   let make = (~cookieName, ~policyName, ~loadBalancerName, ()) =>
@@ -659,7 +659,7 @@ module SetLoadBalancerPoliciesOfListener = {
     @ocaml.doc("<p>The name of the load balancer.</p>") @as("LoadBalancerName")
     loadBalancerName: accessPointName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "SetLoadBalancerPoliciesOfListenerCommand"
   let make = (~policyNames, ~loadBalancerPort, ~loadBalancerName, ()) =>
@@ -685,7 +685,7 @@ module SetLoadBalancerPoliciesForBackendServer = {
     @ocaml.doc("<p>The name of the load balancer.</p>") @as("LoadBalancerName")
     loadBalancerName: accessPointName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "SetLoadBalancerPoliciesForBackendServerCommand"
   let make = (~policyNames, ~instancePort, ~loadBalancerName, ()) =>
@@ -769,7 +769,7 @@ module DeleteLoadBalancerListeners = {
     @ocaml.doc("<p>The name of the load balancer.</p>") @as("LoadBalancerName")
     loadBalancerName: accessPointName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "DeleteLoadBalancerListenersCommand"
   let make = (~loadBalancerPorts, ~loadBalancerName, ()) =>
@@ -857,7 +857,7 @@ module RemoveTags = {
     @as("LoadBalancerNames")
     loadBalancerNames: loadBalancerNames,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "RemoveTagsCommand"
   let make = (~tags, ~loadBalancerNames, ()) =>
@@ -968,7 +968,7 @@ module CreateLoadBalancerPolicy = {
     @ocaml.doc("<p>The name of the load balancer.</p>") @as("LoadBalancerName")
     loadBalancerName: accessPointName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "CreateLoadBalancerPolicyCommand"
   let make = (~policyTypeName, ~policyName, ~loadBalancerName, ~policyAttributes=?, ()) =>
@@ -989,7 +989,7 @@ module CreateLoadBalancerListeners = {
     @ocaml.doc("<p>The name of the load balancer.</p>") @as("LoadBalancerName")
     loadBalancerName: accessPointName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "CreateLoadBalancerListenersCommand"
   let make = (~listeners, ~loadBalancerName, ()) =>
@@ -1073,7 +1073,7 @@ module AddTags = {
     @as("LoadBalancerNames")
     loadBalancerNames: loadBalancerNames,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticloadbalancing") @new external new: request => t = "AddTagsCommand"
   let make = (~tags, ~loadBalancerNames, ()) =>
     new({tags: tags, loadBalancerNames: loadBalancerNames})

@@ -36,6 +36,10 @@ type securityGroupId = string
 type score = float
 type resourceType = string
 type resourceId = string
+type relationshipType = [
+  | @as("EFFECT_OF_INPUT_ANOMALY_GROUP") #EFFECT_OF_INPUT_ANOMALY_GROUP
+  | @as("CAUSE_OF_INPUT_ANOMALY_GROUP") #CAUSE_OF_INPUT_ANOMALY_GROUP
+]
 type redshiftDatabaseName = string
 type redshiftClusterIdentifier = string
 type rdsdatabaseName = string
@@ -50,6 +54,7 @@ type metricValue = float
 type metricSetName = string
 type metricSetDescription = string
 type metricName = string
+type metricChangePercentage = float
 type message = string
 type maxResults = int
 type kmsKeyArn = string
@@ -73,9 +78,12 @@ type csvfileCompression = [@as("GZIP") #GZIP | @as("NONE") #NONE]
 type boolean_ = bool
 type arn = string
 type anomalyDetectorStatus = [
+  | @as("DEACTIVATING") #DEACTIVATING
+  | @as("DEACTIVATED") #DEACTIVATED
   | @as("BACK_TEST_COMPLETE") #BACK_TEST_COMPLETE
   | @as("BACK_TEST_ACTIVE") #BACK_TEST_ACTIVE
   | @as("BACK_TEST_ACTIVATING") #BACK_TEST_ACTIVATING
+  | @as("LEARNING") #LEARNING
   | @as("INACTIVE") #INACTIVE
   | @as("FAILED") #FAILED
   | @as("DELETING") #DELETING
@@ -83,6 +91,12 @@ type anomalyDetectorStatus = [
   | @as("ACTIVE") #ACTIVE
 ]
 type anomalyDetectorName = string
+type anomalyDetectorFailureType = [
+  | @as("DEACTIVATION_FAILURE") #DEACTIVATION_FAILURE
+  | @as("DELETION_FAILURE") #DELETION_FAILURE
+  | @as("BACK_TEST_ACTIVATION_FAILURE") #BACK_TEST_ACTIVATION_FAILURE
+  | @as("ACTIVATION_FAILURE") #ACTIVATION_FAILURE
+]
 type anomalyDetectorDescription = string
 type anomalyDetectionTaskStatusMessage = string
 type anomalyDetectionTaskStatus = [
@@ -162,6 +176,23 @@ type itemizedMetricStats = {
   occurrenceCount: option<integer_>,
   @ocaml.doc("<p>The name of the measure.</p>") @as("MetricName") metricName: option<columnName>,
 }
+@ocaml.doc("<p>Aggregated details about the measures contributing to the anomaly group, and the measures
+            potentially impacted by the anomaly group.</p>
+        <p></p>")
+type interMetricImpactDetails = {
+  @ocaml.doc("<p>For potential causes (<code>CAUSE_OF_INPUT_ANOMALY_GROUP</code>), the percentage
+            contribution the measure has in causing the anomalies.</p>")
+  @as("ContributionPercentage")
+  contributionPercentage: option<metricChangePercentage>,
+  @ocaml.doc("<p>Whether a measure is a potential cause of the anomaly group
+            (<code>CAUSE_OF_INPUT_ANOMALY_GROUP</code>), or whether the measure is impacted by the
+            anomaly group (<code>EFFECT_OF_INPUT_ANOMALY_GROUP</code>).</p>")
+  @as("RelationshipType")
+  relationshipType: option<relationshipType>,
+  @ocaml.doc("<p>The ID of the anomaly group.</p>") @as("AnomalyGroupId")
+  anomalyGroupId: option<uuid>,
+  @ocaml.doc("<p>The name of the measure.</p>") @as("MetricName") metricName: option<metricName>,
+}
 type historicalDataPathList = array<historicalDataPath>
 type headerValueList = array<headerValue>
 type headerList = array<columnName>
@@ -192,16 +223,16 @@ type cloudWatchConfig = {
     "<p>An IAM role that gives Amazon Lookout for Metrics permission to access data in Amazon CloudWatch.</p>"
   )
   @as("RoleArn")
-  roleArn: arn,
+  roleArn: option<arn>,
 }
 @ocaml.doc("<p>Details about an Amazon AppFlow flow datasource.</p>")
 type appFlowConfig = {
-  @ocaml.doc("<p> name of the flow.</p>") @as("FlowName") flowName: flowName,
+  @ocaml.doc("<p> name of the flow.</p>") @as("FlowName") flowName: option<flowName>,
   @ocaml.doc(
     "<p>An IAM role that gives Amazon Lookout for Metrics permission to access the flow.</p>"
   )
   @as("RoleArn")
-  roleArn: arn,
+  roleArn: option<arn>,
 }
 @ocaml.doc("<p>Feedback for an anomalous metric.</p>")
 type anomalyGroupTimeSeriesFeedback = {
@@ -278,6 +309,7 @@ type metricSetSummary = {
 }
 type metricList = array<metric>
 type itemizedMetricStatsList = array<itemizedMetricStats>
+type interMetricImpactList = array<interMetricImpactDetails>
 type executionList = array<executionStatus>
 type dimensionValueContributionList = array<dimensionValueContribution>
 type dimensionNameValueList = array<dimensionNameValue>
@@ -362,23 +394,23 @@ type redshiftSourceConfig = {
     "<p>Contains information about the Amazon Virtual Private Cloud (VPC) configuration.</p>"
   )
   @as("VpcConfiguration")
-  vpcConfiguration: vpcConfiguration,
+  vpcConfiguration: option<vpcConfiguration>,
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the role providing access to the database.</p>")
   @as("RoleArn")
-  roleArn: arn,
+  roleArn: option<arn>,
   @ocaml.doc("<p>The table name of the Redshift database.</p>") @as("TableName")
-  tableName: tableName,
+  tableName: option<tableName>,
   @ocaml.doc("<p>The Redshift database name.</p>") @as("DatabaseName")
-  databaseName: redshiftDatabaseName,
+  databaseName: option<redshiftDatabaseName>,
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the AWS Secrets Manager role.</p>")
   @as("SecretManagerArn")
-  secretManagerArn: poirotSecretManagerArn,
+  secretManagerArn: option<poirotSecretManagerArn>,
   @ocaml.doc("<p>The port number where the database can be accessed.</p>") @as("DatabasePort")
-  databasePort: databasePort,
+  databasePort: option<databasePort>,
   @ocaml.doc("<p>The name of the database host.</p>") @as("DatabaseHost")
-  databaseHost: databaseHost,
+  databaseHost: option<databaseHost>,
   @ocaml.doc("<p>A string identifying the Redshift cluster.</p>") @as("ClusterIdentifier")
-  clusterIdentifier: redshiftClusterIdentifier,
+  clusterIdentifier: option<redshiftClusterIdentifier>,
 }
 @ocaml.doc(
   "<p>Contains information about the Amazon Relational Database Service (RDS) configuration.</p>"
@@ -388,20 +420,22 @@ type rdssourceConfig = {
     "<p>An object containing information about the Amazon Virtual Private Cloud (VPC) configuration.</p>"
   )
   @as("VpcConfiguration")
-  vpcConfiguration: vpcConfiguration,
-  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the role.</p>") @as("RoleArn") roleArn: arn,
-  @ocaml.doc("<p>The name of the table in the database.</p>") @as("TableName") tableName: tableName,
+  vpcConfiguration: option<vpcConfiguration>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the role.</p>") @as("RoleArn")
+  roleArn: option<arn>,
+  @ocaml.doc("<p>The name of the table in the database.</p>") @as("TableName")
+  tableName: option<tableName>,
   @ocaml.doc("<p>The name of the RDS database.</p>") @as("DatabaseName")
-  databaseName: rdsdatabaseName,
+  databaseName: option<rdsdatabaseName>,
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the AWS Secrets Manager role.</p>")
   @as("SecretManagerArn")
-  secretManagerArn: poirotSecretManagerArn,
+  secretManagerArn: option<poirotSecretManagerArn>,
   @ocaml.doc("<p>The port number where the database can be accessed.</p>") @as("DatabasePort")
-  databasePort: databasePort,
+  databasePort: option<databasePort>,
   @ocaml.doc("<p>The host name of the database.</p>") @as("DatabaseHost")
-  databaseHost: databaseHost,
+  databaseHost: option<databaseHost>,
   @ocaml.doc("<p>A string identifying the database instance.</p>") @as("DBInstanceIdentifier")
-  dbinstanceIdentifier: rdsdatabaseIdentifier,
+  dbinstanceIdentifier: option<rdsdatabaseIdentifier>,
 }
 type metricSetSummaryList = array<metricSetSummary>
 @ocaml.doc("<p>Contains information about a source file's formatting.</p>")
@@ -480,7 +514,7 @@ type s3SourceConfig = {
     "<p>The ARN of an IAM role that has read and write access permissions to the source S3 bucket.</p>"
   )
   @as("RoleArn")
-  roleArn: arn,
+  roleArn: option<arn>,
 }
 type dimensionContributionList = array<dimensionContribution>
 @ocaml.doc("<p>Contains information about source data used to generate a metric.</p>")
@@ -584,7 +618,7 @@ module UntagResource = {
     @ocaml.doc("<p>The resource's Amazon Resource Name (ARN).</p>") @as("ResourceArn")
     resourceArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-lookoutmetrics") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -601,7 +635,7 @@ module TagResource = {
     @ocaml.doc("<p>The resource's Amazon Resource Name (ARN).</p>") @as("ResourceArn")
     resourceArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-lookoutmetrics") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -616,7 +650,7 @@ module PutFeedback = {
     @as("AnomalyDetectorArn")
     anomalyDetectorArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-lookoutmetrics") @new external new: request => t = "PutFeedbackCommand"
   let make = (~anomalyGroupTimeSeriesFeedback, ~anomalyDetectorArn, ()) =>
     new({
@@ -636,6 +670,53 @@ module ListTagsForResource = {
   @module("@aws-sdk/client-lookoutmetrics") @new
   external new: request => t = "ListTagsForResourceCommand"
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module ListAnomalyGroupRelatedMetrics = {
+  type t
+  type request = {
+    @ocaml.doc("<p>Specify the pagination token that's returned by a previous request to retrieve the next
+            page of results.</p>")
+    @as("NextToken")
+    nextToken: option<nextToken>,
+    @ocaml.doc("<p>The maximum number of results to return.</p>") @as("MaxResults")
+    maxResults: option<maxResults>,
+    @ocaml.doc("<p>Filter for potential causes (<code>CAUSE_OF_INPUT_ANOMALY_GROUP</code>) or
+            downstream effects (<code>EFFECT_OF_INPUT_ANOMALY_GROUP</code>) of the anomaly group.</p>")
+    @as("RelationshipTypeFilter")
+    relationshipTypeFilter: option<relationshipType>,
+    @ocaml.doc("<p>The ID of the anomaly group.</p>") @as("AnomalyGroupId") anomalyGroupId: uuid,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the anomaly detector.</p>")
+    @as("AnomalyDetectorArn")
+    anomalyDetectorArn: arn,
+  }
+  type response = {
+    @ocaml.doc("<p>The pagination token that's included if more results are available.</p>")
+    @as("NextToken")
+    nextToken: option<nextToken>,
+    @ocaml.doc("<p>Aggregated details about the measures contributing to the anomaly group, and the measures
+            potentially impacted by the anomaly group.</p>")
+    @as("InterMetricImpactList")
+    interMetricImpactList: option<interMetricImpactList>,
+  }
+  @module("@aws-sdk/client-lookoutmetrics") @new
+  external new: request => t = "ListAnomalyGroupRelatedMetricsCommand"
+  let make = (
+    ~anomalyGroupId,
+    ~anomalyDetectorArn,
+    ~nextToken=?,
+    ~maxResults=?,
+    ~relationshipTypeFilter=?,
+    (),
+  ) =>
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      relationshipTypeFilter: relationshipTypeFilter,
+      anomalyGroupId: anomalyGroupId,
+      anomalyDetectorArn: anomalyDetectorArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -686,9 +767,11 @@ module DescribeAnomalyDetector = {
     anomalyDetectorArn: arn,
   }
   type response = {
+    @ocaml.doc("<p>The process that caused the detector to fail.</p>") @as("FailureType")
+    failureType: option<anomalyDetectorFailureType>,
     @ocaml.doc("<p>The ARN of the KMS key to use to encrypt your data.</p>") @as("KmsKeyArn")
     kmsKeyArn: option<kmsKeyArn>,
-    @ocaml.doc("<p>The reason that the detector failed, if any.</p>") @as("FailureReason")
+    @ocaml.doc("<p>The reason that the detector failed.</p>") @as("FailureReason")
     failureReason: option<errorMessage>,
     @ocaml.doc("<p>The status of the detector.</p>") @as("Status")
     status: option<anomalyDetectorStatus>,
@@ -754,7 +837,7 @@ module DeleteAnomalyDetector = {
     @ocaml.doc("<p>The ARN of the detector to delete.</p>") @as("AnomalyDetectorArn")
     anomalyDetectorArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-lookoutmetrics") @new
   external new: request => t = "DeleteAnomalyDetectorCommand"
   let make = (~anomalyDetectorArn, ()) => new({anomalyDetectorArn: anomalyDetectorArn})
@@ -766,9 +849,23 @@ module DeleteAlert = {
   type request = {
     @ocaml.doc("<p>The ARN of the alert to delete.</p>") @as("AlertArn") alertArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-lookoutmetrics") @new external new: request => t = "DeleteAlertCommand"
   let make = (~alertArn, ()) => new({alertArn: alertArn})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module DeactivateAnomalyDetector = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the anomaly detector.</p>")
+    @as("AnomalyDetectorArn")
+    anomalyDetectorArn: arn,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-lookoutmetrics") @new
+  external new: request => t = "DeactivateAnomalyDetectorCommand"
+  let make = (~anomalyDetectorArn, ()) => new({anomalyDetectorArn: anomalyDetectorArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -863,7 +960,7 @@ module BackTestAnomalyDetector = {
     @as("AnomalyDetectorArn")
     anomalyDetectorArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-lookoutmetrics") @new
   external new: request => t = "BackTestAnomalyDetectorCommand"
   let make = (~anomalyDetectorArn, ()) => new({anomalyDetectorArn: anomalyDetectorArn})
@@ -876,7 +973,7 @@ module ActivateAnomalyDetector = {
     @ocaml.doc("<p>The ARN of the anomaly detector.</p>") @as("AnomalyDetectorArn")
     anomalyDetectorArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-lookoutmetrics") @new
   external new: request => t = "ActivateAnomalyDetectorCommand"
   let make = (~anomalyDetectorArn, ()) => new({anomalyDetectorArn: anomalyDetectorArn})
@@ -886,8 +983,9 @@ module ActivateAnomalyDetector = {
 module ListMetricSets = {
   type t
   type request = {
-    @ocaml.doc("<p>If the result of the previous request was truncated, the response includes a <code>NextToken</code>. To
-      retrieve the next set of results, use the token in the next request. Tokens expire after 24 hours.</p>")
+    @ocaml.doc("<p>If the result of the previous request was truncated, the response includes a
+        <code>NextToken</code>. To retrieve the next set of results, use the token in the next
+      request. Tokens expire after 24 hours.</p>")
     @as("NextToken")
     nextToken: option<nextToken>,
     @ocaml.doc("<p>The maximum number of results to return.</p>") @as("MaxResults")
@@ -897,8 +995,8 @@ module ListMetricSets = {
     anomalyDetectorArn: option<arn>,
   }
   type response = {
-    @ocaml.doc("<p>If the response is truncated, the list call returns this token. To retrieve the next set of results, use the
-      token in the next list request. </p>")
+    @ocaml.doc("<p>If the response is truncated, the list call returns this token. To retrieve the next set
+      of results, use the token in the next list request. </p>")
     @as("NextToken")
     nextToken: option<nextToken>,
     @ocaml.doc(
@@ -1087,7 +1185,7 @@ module UpdateMetricSet = {
     @ocaml.doc("<p>The timestamp column.</p>") @as("TimestampColumn")
     timestampColumn: option<timestampColumn>,
     @ocaml.doc(
-      "<p>After an interval ends, the amount of time that the detector waits before importing data.</p>"
+      "<p>After an interval ends, the amount of seconds that the detector waits before importing data. Offset is only supported for S3 and Redshift datasources.</p>"
     )
     @as("Offset")
     offset: option<offset>,
@@ -1147,7 +1245,9 @@ module DescribeMetricSet = {
     timestampColumn: option<timestampColumn>,
     @ocaml.doc("<p>A list of the metrics defined by the dataset.</p>") @as("MetricList")
     metricList: option<metricList>,
-    @ocaml.doc("<p>The offset for the dataset.</p>") @as("Offset") offset: option<offset>,
+    @ocaml.doc("<p>The offset in seconds. Only supported for S3 and Redshift datasources.</p>")
+    @as("Offset")
+    offset: option<offset>,
     @ocaml.doc("<p>The time at which the dataset was last modified.</p>")
     @as("LastModificationTime")
     lastModificationTime: option<timestamp_>,
@@ -1192,7 +1292,7 @@ module CreateMetricSet = {
     @as("TimestampColumn")
     timestampColumn: option<timestampColumn>,
     @ocaml.doc(
-      "<p>After an interval ends, the amount of time that the detector waits before importing data.</p>"
+      "<p>After an interval ends, the amount of seconds that the detector waits before importing data. Offset is only supported for S3 and Redshift datasources.</p>"
     )
     @as("Offset")
     offset: option<offset>,

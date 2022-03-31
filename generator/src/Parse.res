@@ -186,6 +186,18 @@ let parseTrait = (name, value: Result.t<jsonTreeRef, jsonParseError>) => {
   | "smithy.api#sparse" => Ok(Trait.SparseTrait)
   | "smithy.api#httpChecksumRequired" => Ok(Trait.HttpChecksumRequiredTrait)
   | "aws.api#clientDiscoveredEndpoint" => Ok(Trait.AwsApiClientDiscoveredEndpointTrait)
+  | "aws.protocols#awsQueryError" => Ok(Trait.AwsProtocolAwsQueryErrorTrait)
+  | "aws.cloudformation#cfnExcludeProperty" => Ok(Trait.AwsCloudFormationCfnExcludePropertyTrait)
+  | "aws.cloudformation#cfnMutability" => Ok(Trait.AwsCloudFormationCfnMutabilityTrait)
+  | "aws.iam#requiredActions" => Ok(Trait.AwsIamRequiredActionsTrait)
+  | "aws.api#dataPlane" => Ok(Trait.AwsApiDataPlaneTrait)
+  | "aws.iam#defineConditionKeys" => Ok(Trait.AwsIamDefineConditionKeysTrait)
+  | "smithy.api#examples" => Ok(Trait.ExamplesTrait)
+  | "aws.api#controlPlane" => Ok(Trait.AwsApiControlPlaneTrait)
+  | "aws.iam#actionPermissionDescription" => Ok(Trait.AwsIamActionPermissionDescriptionTrait)
+  | "aws.iam#conditionKeys" => Ok(Trait.AwsIamConditionKeysTrait)
+  | "aws.protocols#httpChecksum" => Ok(Trait.AwsProtocolsHttpChecksumTrait)
+  | "aws.customizations#s3UnwrappedXmlOutput" => Ok(Trait.AwsCustomizationsS3UnwrappedXmlOutputTrait)
   | _ => raise(UnknownTrait(name))
   }
   traitValue

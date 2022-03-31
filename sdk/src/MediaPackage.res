@@ -44,7 +44,7 @@ type segmentTemplateFormat = [
   | @as("TIME_WITH_TIMELINE") #TIME_WITH_TIMELINE
   | @as("NUMBER_WITH_TIMELINE") #NUMBER_WITH_TIMELINE
 ]
-type profile = [@as("HBBTV_1_5") #HBBTV_1_5 | @as("NONE") #NONE]
+type profile = [@as("HYBRIDCAST") #HYBRIDCAST | @as("HBBTV_1_5") #HBBTV_1_5 | @as("NONE") #NONE]
 type presetSpeke20Video = [@as("PRESET-VIDEO-1") #PRESET_VIDEO_1]
 type presetSpeke20Audio = [@as("PRESET-AUDIO-1") #PRESET_AUDIO_1]
 type playlistType = [@as("VOD") #VOD | @as("EVENT") #EVENT | @as("NONE") #NONE]
@@ -165,7 +165,7 @@ that is greater than 0.")
 The encryption contract defines which content keys are used to encrypt the audio and video tracks in your stream. 
 To configure the encryption contract, specify which audio and video encryption presets to use.
 Note the following considerations when using encryptionContractConfiguration:
-encryptionContractConfiguration can be used for DASH endpoints that use SPEKE 2.0. SPEKE 2.0 relies on the CPIX 2.3 specification.
+encryptionContractConfiguration can be used for DASH or CMAF endpoints that use SPEKE 2.0. SPEKE 2.0 relies on the CPIX 2.3 specification.
 You must disable key rotation for this endpoint by setting keyRotationIntervalSeconds to 0.")
 type encryptionContractConfiguration = {
   @ocaml.doc("A collection of video encryption presets.") @as("PresetSpeke20Video")
@@ -377,6 +377,11 @@ entry will be included in the media playlist.")
   @ocaml.doc("When enabled, an I-Frame only stream will be included in the output.")
   @as("IncludeIframeOnlyStream")
   includeIframeOnlyStream: option<__boolean>,
+  @ocaml.doc(
+    "When enabled, MediaPackage passes through digital video broadcasting (DVB) subtitles into the output."
+  )
+  @as("IncludeDvbSubtitles")
+  includeDvbSubtitles: option<__boolean>,
   @as("Encryption") encryption: option<hlsEncryption>,
   @as("AdsOnDeliveryRestrictions") adsOnDeliveryRestrictions: option<adsOnDeliveryRestrictions>,
   @as("AdTriggers") adTriggers: option<adTriggers>,
@@ -535,7 +540,7 @@ type __listOfOriginEndpoint = array<originEndpoint>
 module DeleteOriginEndpoint = {
   type t
   type request = {@ocaml.doc("The ID of the OriginEndpoint to delete.") @as("Id") id: __string}
-
+  type response = {.}
   @module("@aws-sdk/client-mediapackage") @new
   external new: request => t = "DeleteOriginEndpointCommand"
   let make = (~id, ()) => new({id: id})
@@ -545,7 +550,7 @@ module DeleteOriginEndpoint = {
 module DeleteChannel = {
   type t
   type request = {@ocaml.doc("The ID of the Channel to delete.") @as("Id") id: __string}
-
+  type response = {.}
   @module("@aws-sdk/client-mediapackage") @new external new: request => t = "DeleteChannelCommand"
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -557,7 +562,7 @@ module UntagResource = {
     @ocaml.doc("The key(s) of tag to be deleted") @as("TagKeys") tagKeys: __listOf__string,
     @as("ResourceArn") resourceArn: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-mediapackage") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -569,7 +574,7 @@ module TagResource = {
     @as("Tags") tags: __mapOf__string,
     @as("ResourceArn") resourceArn: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-mediapackage") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"

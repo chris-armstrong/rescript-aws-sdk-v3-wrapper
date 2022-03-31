@@ -53,10 +53,23 @@ type replayState = [
 type replayName = string
 type replayDescription = string
 type replayArn = string
+type referenceId = string
 type redshiftSecretManagerArn = string
 type queryStringValue = string
 type queryStringKey = string
+type propagateTags = [@as("TASK_DEFINITION") #TASK_DEFINITION]
 type principal = string
+type placementStrategyType = [
+  | @as("binpack") #Binpack
+  | @as("spread") #Spread
+  | @as("random") #Random
+]
+type placementStrategyField = string
+type placementConstraintType = [
+  | @as("memberOf") #MemberOf
+  | @as("distinctInstance") #DistinctInstance
+]
+type placementConstraintExpression = string
 type pathParameter = string
 type partnerEventSourceNamePrefix = string
 type nonPartnerEventBusNameOrArn = string
@@ -69,7 +82,7 @@ type managedBy = string
 type long = float
 type limitMin1 = int
 type limitMax100 = int
-type launchType = [@as("FARGATE") #FARGATE | @as("EC2") #EC2]
+type launchType = [@as("EXTERNAL") #EXTERNAL | @as("FARGATE") #FARGATE | @as("EC2") #EC2]
 type integer_ = int
 type inputTransformerPathKey = string
 type httpsEndpoint = string
@@ -108,6 +121,9 @@ type connectionAuthorizationType = [
   | @as("BASIC") #BASIC
 ]
 type connectionArn = string
+type capacityProviderStrategyItemWeight = int
+type capacityProviderStrategyItemBase = int
+type capacityProvider = string
 type boolean_ = bool
 type authHeaderParameters = string
 type assignPublicIp = [@as("DISABLED") #DISABLED | @as("ENABLED") #ENABLED]
@@ -169,7 +185,7 @@ type updateConnectionApiKeyAuthRequestParameters = {
 type transformerPaths = Js.Dict.t<targetInputPath>
 type targetIdList = array<targetId>
 type tagKeyList = array<tagKey>
-@ocaml.doc("<p>A key-value pair associated with an AWS resource. In EventBridge, rules and event buses
+@ocaml.doc("<p>A key-value pair associated with an Amazon Web Services resource. In EventBridge, rules and event buses
       support tagging.</p>")
 type tag = {
   @ocaml.doc("<p>The value for the specified tag key.</p>") @as("Value") value: tagValue,
@@ -203,17 +219,19 @@ type rule = {
       event bus is used.</p>")
   @as("EventBusName")
   eventBusName: option<eventBusName>,
-  @ocaml.doc("<p>If the rule was created on behalf of your account by an AWS service, this field displays
+  @ocaml.doc("<p>If the rule was created on behalf of your account by an Amazon Web Services service, this field displays
       the principal name of the service that created the rule.</p>")
   @as("ManagedBy")
   managedBy: option<managedBy>,
-  @ocaml.doc(
-    "<p>The Amazon Resource Name (ARN) of the role that is used for target invocation.</p>"
-  )
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the role that is used for target invocation.</p>
+         <p>If you're setting an event bus in another account as the target and that account granted
+      permission to your account through an organization instead of directly by the account ID, you
+      must specify a <code>RoleArn</code> with proper permissions in the <code>Target</code>
+      structure, instead of here in this parameter.</p>")
   @as("RoleArn")
   roleArn: option<roleArn>,
   @ocaml.doc(
-    "<p>The scheduling expression. For example, \"cron(0 20 * * ? *)\", \"rate(5 minutes)\".</p>"
+    "<p>The scheduling expression. For example, \"cron(0 20 * * ? *)\", \"rate(5 minutes)\". For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-create-rule-schedule.html\">Creating an Amazon EventBridge rule that runs on a schedule</a>.</p>"
   )
   @as("ScheduleExpression")
   scheduleExpression: option<scheduleExpression>,
@@ -276,8 +294,8 @@ type removeTargetsResultEntry = {
   errorCode: option<errorCode>,
   @ocaml.doc("<p>The ID of the target.</p>") @as("TargetId") targetId: option<targetId>,
 }
-@ocaml.doc("<p>These are custom parameters to be used when the target is a Redshift cluster to invoke the
-      Redshift Data API ExecuteStatement based on EventBridge events.</p>")
+@ocaml.doc("<p>These are custom parameters to be used when the target is a Amazon Redshift cluster to invoke the
+      Amazon Redshift Data API ExecuteStatement based on EventBridge events.</p>")
 type redshiftDataParameters = {
   @ocaml.doc("<p>Indicates whether to send an event back to EventBridge after the SQL statement
       runs.</p>")
@@ -299,7 +317,7 @@ type redshiftDataParameters = {
   @as("Database")
   database: database,
   @ocaml.doc("<p>The name or ARN of the secret that enables access to the database. Required when
-      authenticating using AWS Secrets Manager.</p>")
+      authenticating using Amazon Web Services Secrets Manager.</p>")
   @as("SecretManagerArn")
   secretManagerArn: option<redshiftSecretManagerArn>,
 }
@@ -326,7 +344,8 @@ type putPartnerEventsResultEntry = {
   errorCode: option<errorCode>,
   @ocaml.doc("<p>The ID of the event.</p>") @as("EventId") eventId: option<eventId>,
 }
-@ocaml.doc("<p>Represents an event that failed to be submitted.</p>")
+@ocaml.doc("<p>Represents an event that failed to be submitted. For information about the errors that are common to all actions, see 
+      <a href=\"https://docs.aws.amazon.com/eventbridge/latest/APIReference/CommonErrors.html\">Common Errors</a>.</p>")
 type putEventsResultEntry = {
   @ocaml.doc("<p>The error message that explains why the event submission failed.</p>")
   @as("ErrorMessage")
@@ -336,8 +355,41 @@ type putEventsResultEntry = {
   errorCode: option<errorCode>,
   @ocaml.doc("<p>The ID of the event.</p>") @as("EventId") eventId: option<eventId>,
 }
+@ocaml.doc("<p>The task placement strategy for a task or service. To learn more, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-strategies.html\">Task Placement Strategies</a> in the Amazon Elastic Container Service Service Developer
+      Guide.</p>")
+type placementStrategy = {
+  @ocaml.doc("<p>The field to apply the placement strategy against. For the spread placement strategy,
+      valid values are instanceId (or host, which has the same effect), or any platform or custom
+      attribute that is applied to a container instance, such as attribute:ecs.availability-zone.
+      For the binpack placement strategy, valid values are cpu and memory. For the random placement
+      strategy, this field is not used. </p>")
+  field: option<placementStrategyField>,
+  @ocaml.doc("<p>The type of placement strategy. The random placement strategy randomly places tasks on
+      available candidates. The spread placement strategy spreads placement across available
+      candidates evenly based on the field parameter. The binpack strategy places tasks on available
+      candidates that have the least available amount of the resource that is specified with the
+      field parameter. For example, if you binpack on memory, a task is placed on the instance with
+      the least amount of remaining memory (but still enough to run the task). </p>")
+  @as("type")
+  type_: option<placementStrategyType>,
+}
+@ocaml.doc("<p>An object representing a constraint on task placement. To learn more, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html\">Task Placement Constraints</a> in the Amazon Elastic Container Service Developer
+      Guide.</p>")
+type placementConstraint = {
+  @ocaml.doc("<p>A cluster query language expression to apply to the constraint. You cannot specify an
+      expression if the constraint type is <code>distinctInstance</code>. To learn more, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html\">Cluster Query Language</a> in the Amazon Elastic Container Service Developer Guide.
+    </p>")
+  expression: option<placementConstraintExpression>,
+  @ocaml.doc("<p>The type of constraint. Use distinctInstance to ensure that each task in a particular
+      group is running on a different container instance. Use memberOf to restrict the selection to
+      a group of valid candidates. </p>")
+  @as("type")
+  type_: option<placementConstraintType>,
+}
 type pathParameterList = array<pathParameter>
-@ocaml.doc("<p>The AWS account that a partner event source has been offered to.</p>")
+@ocaml.doc(
+  "<p>The Amazon Web Services account that a partner event source has been offered to.</p>"
+)
 type partnerEventSourceAccount = {
   @ocaml.doc("<p>The state of the event source. If it is ACTIVE, you have already created a matching event
       bus for this event source, and that event bus is active. If it is PENDING, either you haven't
@@ -345,18 +397,20 @@ type partnerEventSourceAccount = {
       created a matching event bus, but the event source has since been deleted.</p>")
   @as("State")
   state: option<eventSourceState>,
-  @ocaml.doc("<p>The date and time that the event source will expire, if the AWS account doesn't create a
+  @ocaml.doc("<p>The date and time that the event source will expire, if the Amazon Web Services account doesn't create a
       matching event bus for it.</p>")
   @as("ExpirationTime")
   expirationTime: option<timestamp_>,
   @ocaml.doc("<p>The date and time the event source was created.</p>") @as("CreationTime")
   creationTime: option<timestamp_>,
-  @ocaml.doc("<p>The AWS account ID that the partner event source was offered to.</p>")
+  @ocaml.doc(
+    "<p>The Amazon Web Services account ID that the partner event source was offered to.</p>"
+  )
   @as("Account")
   account: option<accountId>,
 }
 @ocaml.doc("<p>A partner event source is created by an SaaS partner. If a customer creates a partner
-      event bus that matches this event source, that AWS account can receive events from the
+      event bus that matches this event source, that Amazon Web Services account can receive events from the
       partner's applications or services.</p>")
 type partnerEventSource = {
   @ocaml.doc("<p>The name of the partner event source.</p>") @as("Name") name: option<string_>,
@@ -375,7 +429,7 @@ type kinesisParameters = {
 }
 type headerParametersMap = Js.Dict.t<headerValue>
 @ocaml.doc("<p>A partner event source is created by an SaaS partner. If a customer creates a partner
-      event bus that matches this event source, that AWS account can receive events from the
+      event bus that matches this event source, that Amazon Web Services account can receive events from the
       partner's applications or services.</p>")
 type eventSource = {
   @ocaml.doc("<p>The state of the event source. If it is ACTIVE, you have already created a matching event
@@ -385,7 +439,7 @@ type eventSource = {
   @as("State")
   state: option<eventSourceState>,
   @ocaml.doc("<p>The name of the event source.</p>") @as("Name") name: option<string_>,
-  @ocaml.doc("<p>The date and time that the event source will expire, if the AWS account doesn't create a
+  @ocaml.doc("<p>The date and time that the event source will expire, if the Amazon Web Services account doesn't create a
       matching event bus for it.</p>")
   @as("ExpirationTime")
   expirationTime: option<timestamp_>,
@@ -397,12 +451,12 @@ type eventSource = {
 }
 type eventResourceList = array<eventResource>
 @ocaml.doc("<p>An event bus receives events from a source and routes them to rules associated with that
-      event bus. Your account's default event bus receives rules from AWS services. A custom event
-      bus can receive rules from AWS services as well as your custom applications and services. A
-      partner event bus receives events from an event source created by an SaaS partner. These
-      events come from the partners services or applications.</p>")
+      event bus. Your account's default event bus receives events from Amazon Web Services services. A custom event
+      bus can receive events from your custom applications and services. A partner event bus
+      receives events from an event source created by an SaaS partner. These events come from the
+      partners services or applications.</p>")
 type eventBus = {
-  @ocaml.doc("<p>The permissions policy of the event bus, describing which other AWS accounts can write
+  @ocaml.doc("<p>The permissions policy of the event bus, describing which other Amazon Web Services accounts can write
       events to this event bus.</p>")
   @as("Policy")
   policy: option<string_>,
@@ -484,9 +538,8 @@ type connectionBasicAuthResponseParameters = {
 @ocaml.doc("<p>Contains the authorization parameters for the connection if API Key is specified as the
       authorization type.</p>")
 type connectionApiKeyAuthResponseParameters = {
-  @ocaml.doc(
-    "<p>The name of the header to use for the <code>APIKeyValue</code> used for authorization.</p>"
-  )
+  @ocaml.doc("<p>The name of the header to use for the <code>APIKeyValue</code> used for
+      authorization.</p>")
   @as("ApiKeyName")
   apiKeyName: option<authHeaderParameters>,
 }
@@ -513,9 +566,9 @@ type connection = {
 }
 @ocaml.doc("<p>A JSON string which you can use to limit the event bus permissions you are granting to
       only accounts that fulfill the condition. Currently, the only supported condition is
-      membership in a certain AWS organization. The string must contain <code>Type</code>,
+      membership in a certain Amazon Web Services organization. The string must contain <code>Type</code>,
         <code>Key</code>, and <code>Value</code> fields. The <code>Value</code> field specifies the
-      ID of the AWS organization. Following is an example value for <code>Condition</code>:</p>
+      ID of the Amazon Web Services organization. Following is an example value for <code>Condition</code>:</p>
          <p>
             <code>'{\"Type\" : \"StringEquals\", \"Key\": \"aws:PrincipalOrgID\", \"Value\":
         \"o-1234567890\"}'</code>
@@ -534,7 +587,21 @@ type condition = {
   @as("Type")
   type_: string_,
 }
-@ocaml.doc("<p>The retry strategy to use for failed jobs, if the target is an AWS Batch job. If you
+@ocaml.doc(
+  "<p>The details of a capacity provider strategy. To learn more, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CapacityProviderStrategyItem.html\">CapacityProviderStrategyItem</a> in the Amazon ECS API Reference.</p>"
+)
+type capacityProviderStrategyItem = {
+  @ocaml.doc("<p>The base value designates how many tasks, at a minimum, to run on the specified capacity
+      provider. Only one capacity provider in a capacity provider strategy can have a base defined.
+      If no value is specified, the default value of 0 is used. </p>")
+  base: option<capacityProviderStrategyItemBase>,
+  @ocaml.doc("<p>The weight value designates the relative percentage of the total number of tasks launched
+      that should use the specified capacity provider. The weight value is taken into consideration
+      after the base value, if defined, is satisfied.</p>")
+  weight: option<capacityProviderStrategyItemWeight>,
+  @ocaml.doc("<p>The short name of the capacity provider.</p>") capacityProvider: capacityProvider,
+}
+@ocaml.doc("<p>The retry strategy to use for failed jobs, if the target is an Batch job. If you
       specify a retry strategy here, it overrides the retry strategy defined in the job
       definition.</p>")
 type batchRetryStrategy = {
@@ -546,7 +613,7 @@ type batchRetryStrategy = {
 }
 @ocaml.doc("<p>The array properties for the submitted job, such as the size of the array. The array size
       can be between 2 and 10,000. If you specify array properties for a job, it becomes an array
-      job. This parameter is used only if the target is an AWS Batch job.</p>")
+      job. This parameter is used only if the target is an Batch job.</p>")
 type batchArrayProperties = {
   @ocaml.doc("<p>The size of the array, if this is an array batch job. Valid values are integers between 2
       and 10,000.</p>")
@@ -639,19 +706,20 @@ type putPartnerEventsRequestEntry = {
   @ocaml.doc("<p>A free-form string used to decide what fields to expect in the event detail.</p>")
   @as("DetailType")
   detailType: option<string_>,
-  @ocaml.doc("<p>AWS resources, identified by Amazon Resource Name (ARN), which the event primarily
+  @ocaml.doc("<p>Amazon Web Services resources, identified by Amazon Resource Name (ARN), which the event primarily
       concerns. Any number, including zero, may be present.</p>")
   @as("Resources")
   resources: option<eventResourceList>,
-  @ocaml.doc("<p>The event source that is generating the evntry.</p>") @as("Source")
+  @ocaml.doc("<p>The event source that is generating the entry.</p>") @as("Source")
   source: option<eventSourceName>,
   @ocaml.doc("<p>The date and time of the event.</p>") @as("Time") time: option<eventTime>,
 }
 type putEventsResultEntryList = array<putEventsResultEntry>
 @ocaml.doc("<p>Represents an event to be submitted.</p>")
 type putEventsRequestEntry = {
-  @ocaml.doc("<p>An AWS X-Ray trade header, which is an http header (X-Amzn-Trace-Id) that contains the trace-id associated with the event.</p>
-         <p>To learn more about X-Ray trace headers, see <a href=\"https://docs.aws.amazon.com/xray/latest/devguide/xray-concepts.html#xray-concepts-tracingheader\">Tracing header</a> in the AWS X-Ray Developer Guide.</p>")
+  @ocaml.doc("<p>An X-Ray trace header, which is an http header (X-Amzn-Trace-Id) that contains the
+      trace-id associated with the event.</p>
+         <p>To learn more about X-Ray trace headers, see <a href=\"https://docs.aws.amazon.com/xray/latest/devguide/xray-concepts.html#xray-concepts-tracingheader\">Tracing header</a> in the X-Ray Developer Guide.</p>")
   @as("TraceHeader")
   traceHeader: option<traceHeader>,
   @ocaml.doc("<p>The name or ARN of the event bus to receive the event. Only the rules that are associated
@@ -666,17 +734,19 @@ type putEventsRequestEntry = {
   @ocaml.doc("<p>Free-form string used to decide what fields to expect in the event detail.</p>")
   @as("DetailType")
   detailType: option<string_>,
-  @ocaml.doc("<p>AWS resources, identified by Amazon Resource Name (ARN), which the event primarily
+  @ocaml.doc("<p>Amazon Web Services resources, identified by Amazon Resource Name (ARN), which the event primarily
       concerns. Any number, including zero, may be present.</p>")
   @as("Resources")
   resources: option<eventResourceList>,
   @ocaml.doc("<p>The source of the event.</p>") @as("Source") source: option<string_>,
   @ocaml.doc(
-    "<p>The time stamp of the event, per <a href=\"https://www.rfc-editor.org/rfc/rfc3339.txt\">RFC3339</a>. If no time stamp is provided, the time stamp of the <a>PutEvents</a> call is used.</p>"
+    "<p>The time stamp of the event, per <a href=\"https://www.rfc-editor.org/rfc/rfc3339.txt\">RFC3339</a>. If no time stamp is provided, the time stamp of the <a href=\"https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutEvents.html\">PutEvents</a> call is used.</p>"
   )
   @as("Time")
   time: option<eventTime>,
 }
+type placementStrategies = array<placementStrategy>
+type placementConstraints = array<placementConstraint>
 type partnerEventSourceList = array<partnerEventSource>
 type partnerEventSourceAccountList = array<partnerEventSourceAccount>
 @ocaml.doc("<p>Contains the parameters needed for you to provide custom input to a target based on one or
@@ -730,8 +800,8 @@ type inputTransformer = {
          <p>
             <code>}</code>
          </p>
-         <p>The <code>InputTemplate</code> can also be valid JSON with varibles in quotes or out,
-      as in the following example:</p>
+         <p>The <code>InputTemplate</code> can also be valid JSON with varibles in quotes or out, as
+      in the following example:</p>
          <p>
             <code> \"InputTransformer\":</code>
          </p>
@@ -743,8 +813,8 @@ type inputTransformer = {
         \"$.detail.status\"},</code>
          </p>
          <p>
-            <code>\"InputTemplate\": '{\"myInstance\": <instance>,\"myStatus\":
-        \"<instance> is in state \\\"<status>\\\"\"}'</code>
+            <code>\"InputTemplate\": '{\"myInstance\": <instance>,\"myStatus\": \"<instance> is
+        in state \\\"<status>\\\"\"}'</code>
          </p>
          <p>
             <code>}</code>
@@ -758,24 +828,25 @@ type inputTransformer = {
             <code>InputPathsMap</code> is an array key-value pairs, where each value is a valid JSON
       path. You can have as many as 100 key-value pairs. You must use JSON dot notation, not bracket
       notation.</p>
-         <p>The keys cannot start with \"AWS.\" </p>")
+         <p>The keys cannot start with \"Amazon Web Services.\" </p>")
   @as("InputPathsMap")
   inputPathsMap: option<transformerPaths>,
 }
-@ocaml.doc("<p>These are custom parameter to be used when the target is an API Gateway REST APIs
-      or EventBridge ApiDestinations. In the latter case, these are merged with any InvocationParameters
-      specified on the Connection, with any values from the Connection taking precedence.</p>")
+@ocaml.doc("<p>These are custom parameter to be used when the target is an API Gateway REST APIs or
+      EventBridge ApiDestinations. In the latter case, these are merged with any
+      InvocationParameters specified on the Connection, with any values from the Connection taking
+      precedence.</p>")
 type httpParameters = {
-  @ocaml.doc("<p>The query string keys/values that need to be sent as part of request invoking the API
-      Gateway REST API or EventBridge ApiDestination.</p>")
+  @ocaml.doc("<p>The query string keys/values that need to be sent as part of request invoking the API Gateway 
+      REST API or EventBridge ApiDestination.</p>")
   @as("QueryStringParameters")
   queryStringParameters: option<queryStringParametersMap>,
-  @ocaml.doc("<p>The headers that need to be sent as part of request invoking the API Gateway REST
-      API or EventBridge ApiDestination.</p>")
+  @ocaml.doc("<p>The headers that need to be sent as part of request invoking the API Gateway REST API or
+      EventBridge ApiDestination.</p>")
   @as("HeaderParameters")
   headerParameters: option<headerParametersMap>,
-  @ocaml.doc("<p>The path parameter values to be used to populate API Gateway REST API or 
-      EventBridge ApiDestination path wildcards (\"*\").</p>")
+  @ocaml.doc("<p>The path parameter values to be used to populate API Gateway REST API or EventBridge
+      ApiDestination path wildcards (\"*\").</p>")
   @as("PathParameterValues")
   pathParameterValues: option<pathParameterList>,
 }
@@ -785,9 +856,10 @@ type connectionResponseList = array<connection>
 type connectionQueryStringParametersList = array<connectionQueryStringParameter>
 type connectionHeaderParametersList = array<connectionHeaderParameter>
 type connectionBodyParametersList = array<connectionBodyParameter>
-@ocaml.doc("<p>The custom parameters to be used when the target is an AWS Batch job.</p>")
+type capacityProviderStrategy = array<capacityProviderStrategyItem>
+@ocaml.doc("<p>The custom parameters to be used when the target is an Batch job.</p>")
 type batchParameters = {
-  @ocaml.doc("<p>The retry strategy to use for failed jobs, if the target is an AWS Batch job. The retry
+  @ocaml.doc("<p>The retry strategy to use for failed jobs, if the target is an Batch job. The retry
       strategy is the number of times to retry the failed job execution. Valid values are 1–10. When
       you specify a retry strategy here, it overrides the retry strategy defined in the job
       definition.</p>")
@@ -795,15 +867,13 @@ type batchParameters = {
   retryStrategy: option<batchRetryStrategy>,
   @ocaml.doc("<p>The array properties for the submitted job, such as the size of the array. The array size
       can be between 2 and 10,000. If you specify array properties for a job, it becomes an array
-      job. This parameter is used only if the target is an AWS Batch job.</p>")
+      job. This parameter is used only if the target is an Batch job.</p>")
   @as("ArrayProperties")
   arrayProperties: option<batchArrayProperties>,
-  @ocaml.doc(
-    "<p>The name to use for this execution of the job, if the target is an AWS Batch job.</p>"
-  )
+  @ocaml.doc("<p>The name to use for this execution of the job, if the target is an Batch job.</p>")
   @as("JobName")
   jobName: string_,
-  @ocaml.doc("<p>The ARN or name of the job definition to use if the event target is an AWS Batch job. This
+  @ocaml.doc("<p>The ARN or name of the job definition to use if the event target is an Batch job. This
       job definition must already exist.</p>")
   @as("JobDefinition")
   jobDefinition: string_,
@@ -887,6 +957,42 @@ type runCommandParameters = {
 }
 @ocaml.doc("<p>The custom parameters to be used when the target is an Amazon ECS task.</p>")
 type ecsParameters = {
+  @ocaml.doc("<p>The metadata that you apply to the task to help you categorize and organize them. Each tag
+      consists of a key and an optional value, both of which you define. To learn more, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RunTask.html#ECS-RunTask-request-tags\">RunTask</a> in the Amazon ECS API Reference.</p>")
+  @as("Tags")
+  tags: option<tagList_>,
+  @ocaml.doc("<p>The reference ID to use for the task.</p>") @as("ReferenceId")
+  referenceId: option<referenceId>,
+  @ocaml.doc("<p>Specifies whether to propagate the tags from the task definition to the task. If no value
+      is specified, the tags are not propagated. Tags can only be propagated to the task during task
+      creation. To add tags to a task after task creation, use the TagResource API action. </p>")
+  @as("PropagateTags")
+  propagateTags: option<propagateTags>,
+  @ocaml.doc("<p>The placement strategy objects to use for the task. You can specify a maximum of five
+      strategy rules per task. </p>")
+  @as("PlacementStrategy")
+  placementStrategy: option<placementStrategies>,
+  @ocaml.doc("<p>An array of placement constraint objects to use for the task. You can specify up to 10
+      constraints per task (including constraints in the task definition and those specified at
+      runtime).</p>")
+  @as("PlacementConstraints")
+  placementConstraints: option<placementConstraints>,
+  @ocaml.doc("<p>Whether or not to enable the execute command functionality for the containers in this
+      task. If true, this enables execute command functionality on all containers in the
+      task.</p>")
+  @as("EnableExecuteCommand")
+  enableExecuteCommand: option<boolean_>,
+  @ocaml.doc("<p>Specifies whether to enable Amazon ECS managed tags for the task. For more information,
+      see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html\">Tagging Your Amazon ECS Resources</a> in the Amazon Elastic Container Service Developer
+      Guide. </p>")
+  @as("EnableECSManagedTags")
+  enableECSManagedTags: option<boolean_>,
+  @ocaml.doc("<p>The capacity provider strategy to use for the task.</p>
+         <p>If a <code>capacityProviderStrategy</code> is specified, the <code>launchType</code>
+      parameter must be omitted. If no <code>capacityProviderStrategy</code> or launchType is
+      specified, the <code>defaultCapacityProviderStrategy</code> for the cluster is used. </p>")
+  @as("CapacityProviderStrategy")
+  capacityProviderStrategy: option<capacityProviderStrategy>,
   @ocaml.doc(
     "<p>Specifies an ECS task group for the task. The maximum length is 255 characters.</p>"
   )
@@ -895,12 +1001,12 @@ type ecsParameters = {
   @ocaml.doc("<p>Specifies the platform version for the task. Specify only the numeric portion of the
       platform version, such as <code>1.1.0</code>.</p>
          <p>This structure is used only if <code>LaunchType</code> is <code>FARGATE</code>. For more
-      information about valid platform versions, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html\">AWS Fargate Platform
+      information about valid platform versions, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html\">Fargate Platform
         Versions</a> in the <i>Amazon Elastic Container Service Developer
         Guide</i>.</p>")
   @as("PlatformVersion")
   platformVersion: option<string_>,
-  @ocaml.doc("<p>Use this structure if the ECS task uses the <code>awsvpc</code> network mode. This
+  @ocaml.doc("<p>Use this structure if the Amazon ECS task uses the <code>awsvpc</code> network mode. This
       structure specifies the VPC subnets and security groups associated with the task, and whether
       a public IP address is to be used. This structure is required if <code>LaunchType</code> is
         <code>FARGATE</code> because the <code>awsvpc</code> mode is required for Fargate
@@ -911,8 +1017,8 @@ type ecsParameters = {
   networkConfiguration: option<networkConfiguration>,
   @ocaml.doc("<p>Specifies the launch type on which your task is running. The launch type that you specify
       here must match one of the launch type (compatibilities) of the target task. The
-        <code>FARGATE</code> value is supported only in the Regions where AWS Fargate with Amazon
-      ECS is supported. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS-Fargate.html\">AWS Fargate on Amazon ECS</a> in
+      <code>FARGATE</code> value is supported only in the Regions where Fargate with Amazon ECS
+     is supported. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS-Fargate.html\">Fargate on Amazon ECS</a> in
       the <i>Amazon Elastic Container Service Developer Guide</i>.</p>")
   @as("LaunchType")
   launchType: option<launchType>,
@@ -980,13 +1086,13 @@ type updateConnectionAuthRequestParameters = {
   basicAuthParameters: option<updateConnectionBasicAuthRequestParameters>,
 }
 @ocaml.doc("<p>Targets are the resources to be invoked when a rule is triggered. For a complete list of
-      services and resources that can be set as a target, see <a>PutTargets</a>.</p>
+      services and resources that can be set as a target, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutTargets.html\">PutTargets</a>.</p>
 
          <p>If you are setting the event bus of another account as the target, and that account
       granted permission to your account through an organization instead of directly by the account
       ID, then you must specify a <code>RoleArn</code> with proper permissions in the
         <code>Target</code> structure. For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html\">Sending and
-        Receiving Events Between AWS Accounts</a> in the <i>Amazon EventBridge User
+          Receiving Events Between Amazon Web Services Accounts</a> in the <i>Amazon EventBridge User
         Guide</i>.</p>")
 type target = {
   @ocaml.doc("<p>The <code>RetryPolicy</code> object that contains the retry policy configuration to use
@@ -1003,19 +1109,19 @@ type target = {
       specify parameters to start a pipeline execution based on EventBridge events.</p>")
   @as("SageMakerPipelineParameters")
   sageMakerPipelineParameters: option<sageMakerPipelineParameters>,
-  @ocaml.doc("<p>Contains the Redshift Data API parameters to use when the target is a Redshift
+  @ocaml.doc("<p>Contains the Amazon Redshift Data API parameters to use when the target is a Amazon Redshift
       cluster.</p>
-         <p>If you specify a Redshift Cluster as a Target, you can use this to specify parameters to
-      invoke the Redshift Data API ExecuteStatement based on EventBridge events.</p>")
+         <p>If you specify a Amazon Redshift Cluster as a Target, you can use this to specify parameters to
+      invoke the Amazon Redshift Data API ExecuteStatement based on EventBridge events.</p>")
   @as("RedshiftDataParameters")
   redshiftDataParameters: option<redshiftDataParameters>,
-  @ocaml.doc("<p>Contains the HTTP parameters to use when the target is a API Gateway REST endpoint 
-      or EventBridge ApiDestination.</p>
-         <p>If you specify an API Gateway REST API or EventBridge ApiDestination as a target, you 
-      can use this parameter to specify headers, path parameters, and query string keys/values 
-      as part of your target invoking request. If you're using ApiDestinations, the corresponding
-      Connection can also have these values configured. In case of any conflicting keys, values
-      from the Connection take precedence.</p>")
+  @ocaml.doc("<p>Contains the HTTP parameters to use when the target is a API Gateway REST endpoint or
+      EventBridge ApiDestination.</p>
+         <p>If you specify an API Gateway REST API or EventBridge ApiDestination as a target, you can
+      use this parameter to specify headers, path parameters, and query string keys/values as part
+      of your target invoking request. If you're using ApiDestinations, the corresponding Connection
+      can also have these values configured. In case of any conflicting keys, values from the
+      Connection take precedence.</p>")
   @as("HttpParameters")
   httpParameters: option<httpParameters>,
   @ocaml.doc("<p>Contains the message group ID to use when the target is a FIFO queue.</p>
@@ -1023,8 +1129,8 @@ type target = {
       deduplication enabled.</p>")
   @as("SqsParameters")
   sqsParameters: option<sqsParameters>,
-  @ocaml.doc("<p>If the event target is an AWS Batch job, this contains the job definition, job name, and
-      other parameters. For more information, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/jobs.html\">Jobs</a> in the <i>AWS Batch User
+  @ocaml.doc("<p>If the event target is an Batch job, this contains the job definition, job name, and
+      other parameters. For more information, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/jobs.html\">Jobs</a> in the <i>Batch User
         Guide</i>.</p>")
   @as("BatchParameters")
   batchParameters: option<batchParameters>,
@@ -1063,13 +1169,17 @@ type target = {
   @as("RoleArn")
   roleArn: option<roleArn>,
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the target.</p>") @as("Arn") arn: targetArn,
-  @ocaml.doc("<p>The ID of the target.</p>") @as("Id") id: targetId,
+  @ocaml.doc(
+    "<p>The ID of the target within the specified rule. Use this ID to reference the target when updating the rule. We recommend using a memorable and unique string.</p>"
+  )
+  @as("Id")
+  id: targetId,
 }
 @ocaml.doc("<p>Contains the authorization parameters for the connection.</p>")
 type createConnectionAuthRequestParameters = {
   @ocaml.doc("<p>A <code>ConnectionHttpParameters</code> object that contains the API key authorization
-      parameters to use for the connection. Note that if you include additional parameters for
-      the target of a rule via <code>HttpParameters</code>, including query strings, the parameters
+      parameters to use for the connection. Note that if you include additional parameters for the
+      target of a rule via <code>HttpParameters</code>, including query strings, the parameters
       added for the connection take precedence.</p>")
   @as("InvocationHttpParameters")
   invocationHttpParameters: option<connectionHttpParameters>,
@@ -1101,18 +1211,18 @@ type connectionAuthResponseParameters = {
   basicAuthParameters: option<connectionBasicAuthResponseParameters>,
 }
 type targetList = array<target>
-@ocaml.doc("<p>Amazon EventBridge helps you to respond to state changes in your AWS resources. When your
-      resources change state, they automatically send events into an event stream. You can create
+@ocaml.doc("<p>Amazon EventBridge helps you to respond to state changes in your Amazon Web Services resources. When your
+      resources change state, they automatically send events to an event stream. You can create
       rules that match selected events in the stream and route them to targets to take action. You
       can also use rules to take action on a predetermined schedule. For example, you can configure
       rules to:</p>
          <ul>
             <li>
-               <p>Automatically invoke an AWS Lambda function to update DNS entries when an event
+               <p>Automatically invoke an Lambda function to update DNS entries when an event
           notifies you that Amazon EC2 instance enters the running state.</p>
             </li>
             <li>
-               <p>Direct specific API records from AWS CloudTrail to an Amazon Kinesis data stream for
+               <p>Direct specific API records from CloudTrail to an Amazon Kinesis data stream for
           detailed analysis of potential security or availability risks.</p>
             </li>
             <li>
@@ -1213,7 +1323,7 @@ module TestEventPattern = {
   type t
   type request = {
     @ocaml.doc("<p>The event, in JSON format, to test against the event pattern. The JSON must follow the
-      format specified in <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/aws-events.html\">AWS Events</a>, and the following
+      format specified in <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/aws-events.html\">Amazon Web Services Events</a>, and the following
       fields are mandatory:</p>
          <ul>
             <li>
@@ -1282,7 +1392,7 @@ module RemovePermission = {
     @as("StatementId")
     statementId: option<statementId>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-events") @new external new: request => t = "RemovePermissionCommand"
   let make = (~eventBusName=?, ~removeAllPermissions=?, ~statementId=?, ()) =>
     new({
@@ -1302,7 +1412,7 @@ module EnableRule = {
     eventBusName: option<eventBusNameOrArn>,
     @ocaml.doc("<p>The name of the rule.</p>") @as("Name") name: ruleName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-events") @new external new: request => t = "EnableRuleCommand"
   let make = (~name, ~eventBusName=?, ()) => new({eventBusName: eventBusName, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1317,7 +1427,7 @@ module DisableRule = {
     eventBusName: option<eventBusNameOrArn>,
     @ocaml.doc("<p>The name of the rule.</p>") @as("Name") name: ruleName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-events") @new external new: request => t = "DisableRuleCommand"
   let make = (~name, ~eventBusName=?, ()) => new({eventBusName: eventBusName, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1342,8 +1452,8 @@ module DescribeRule = {
     createdBy: option<createdBy>,
     @ocaml.doc("<p>The name of the event bus associated with the rule.</p>") @as("EventBusName")
     eventBusName: option<eventBusName>,
-    @ocaml.doc("<p>If this is a managed rule, created by an AWS service on your behalf, this field displays
-      the principal name of the AWS service that created the rule.</p>")
+    @ocaml.doc("<p>If this is a managed rule, created by an Amazon Web Services service on your behalf, this field displays
+      the principal name of the Amazon Web Services service that created the rule.</p>")
     @as("ManagedBy")
     managedBy: option<managedBy>,
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the IAM role associated with the rule.</p>")
@@ -1524,7 +1634,7 @@ module DescribeApiDestination = {
 module DeleteRule = {
   type t
   type request = {
-    @ocaml.doc("<p>If this is a managed rule, created by an AWS service on your behalf, you must specify
+    @ocaml.doc("<p>If this is a managed rule, created by an Amazon Web Services service on your behalf, you must specify
         <code>Force</code> as <code>True</code> to delete the rule. This parameter is ignored for
       rules that are not managed rules. You can check whether a rule is a managed rule by using
         <code>DescribeRule</code> or <code>ListRules</code> and checking the <code>ManagedBy</code>
@@ -1537,7 +1647,7 @@ module DeleteRule = {
     eventBusName: option<eventBusNameOrArn>,
     @ocaml.doc("<p>The name of the rule.</p>") @as("Name") name: ruleName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-events") @new external new: request => t = "DeleteRuleCommand"
   let make = (~name, ~force=?, ~eventBusName=?, ()) =>
     new({force: force, eventBusName: eventBusName, name: name})
@@ -1548,13 +1658,13 @@ module DeletePartnerEventSource = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The AWS account ID of the AWS customer that the event source was created for.</p>"
+      "<p>The Amazon Web Services account ID of the Amazon Web Services customer that the event source was created for.</p>"
     )
     @as("Account")
     account: accountId,
     @ocaml.doc("<p>The name of the event source to delete.</p>") @as("Name") name: eventSourceName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-events") @new
   external new: request => t = "DeletePartnerEventSourceCommand"
   let make = (~account, ~name, ()) => new({account: account, name: name})
@@ -1566,7 +1676,7 @@ module DeleteEventBus = {
   type request = {
     @ocaml.doc("<p>The name of the event bus to delete.</p>") @as("Name") name: eventBusName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-events") @new external new: request => t = "DeleteEventBusCommand"
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1605,7 +1715,7 @@ module DeleteArchive = {
     @ocaml.doc("<p>The name of the archive to delete.</p>") @as("ArchiveName")
     archiveName: archiveName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-events") @new external new: request => t = "DeleteArchiveCommand"
   let make = (~archiveName, ()) => new({archiveName: archiveName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1617,7 +1727,7 @@ module DeleteApiDestination = {
     @ocaml.doc("<p>The name of the destination to delete.</p>") @as("Name")
     name: apiDestinationName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-events") @new external new: request => t = "DeleteApiDestinationCommand"
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1656,7 +1766,7 @@ module DeactivateEventSource = {
     @ocaml.doc("<p>The name of the partner event source to deactivate.</p>") @as("Name")
     name: eventSourceName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-events") @new external new: request => t = "DeactivateEventSourceCommand"
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1665,7 +1775,7 @@ module DeactivateEventSource = {
 module CreatePartnerEventSource = {
   type t
   type request = {
-    @ocaml.doc("<p>The AWS account ID that is permitted to create a matching partner event bus for this
+    @ocaml.doc("<p>The Amazon Web Services account ID that is permitted to create a matching partner event bus for this
       partner event source.</p>")
     @as("Account")
     account: accountId,
@@ -1673,7 +1783,7 @@ module CreatePartnerEventSource = {
           <code>
                <i>partner_name</i>/<i>event_namespace</i>/<i>event_name</i>
             </code>.
-      The AWS account that wants to use this partner event source must create a partner event bus
+      The Amazon Web Services account that wants to use this partner event source must create a partner event bus
       with a name that matches the name of the partner event source.</p>")
     @as("Name")
     name: eventSourceName,
@@ -1700,7 +1810,7 @@ module CreateArchive = {
     eventPattern: option<eventPattern>,
     @ocaml.doc("<p>A description for the archive.</p>") @as("Description")
     description: option<archiveDescription>,
-    @ocaml.doc("<p>The ARN of the event source associated with the archive.</p>")
+    @ocaml.doc("<p>The ARN of the event bus that sends events to the archive.</p>")
     @as("EventSourceArn")
     eventSourceArn: arn,
     @ocaml.doc("<p>The name for the archive to create.</p>") @as("ArchiveName")
@@ -1818,7 +1928,7 @@ module ActivateEventSource = {
     @ocaml.doc("<p>The name of the partner event source to activate.</p>") @as("Name")
     name: eventSourceName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-events") @new external new: request => t = "ActivateEventSourceCommand"
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1833,7 +1943,7 @@ module UntagResource = {
     @as("ResourceARN")
     resourceARN: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-events") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys: tagKeys, resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1848,10 +1958,10 @@ module PutPermission = {
     @as("Policy")
     policy: option<string_>,
     @ocaml.doc("<p>This parameter enables you to limit the permission to accounts that fulfill a certain
-      condition, such as being a member of a certain AWS organization. For more information about
-      AWS Organizations, see <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html\">What Is AWS
-        Organizations</a> in the <i>AWS Organizations User Guide</i>.</p>
-         <p>If you specify <code>Condition</code> with an AWS organization ID, and specify \"*\" as the
+      condition, such as being a member of a certain Amazon Web Services organization. For more information about
+      Amazon Web Services Organizations, see <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html\">What Is Amazon Web Services 
+        Organizations</a> in the <i>Amazon Web Services Organizations User Guide</i>.</p>
+         <p>If you specify <code>Condition</code> with an Amazon Web Services organization ID, and specify \"*\" as the
       value for <code>Principal</code>, you grant permission to all the accounts in the named
       organization.</p>
 
@@ -1861,10 +1971,13 @@ module PutPermission = {
     condition: option<condition>,
     @ocaml.doc("<p>An identifier string for the external account that you are granting permissions to. If you
       later want to revoke the permission for this external account, specify this
-        <code>StatementId</code> when you run <a>RemovePermission</a>.</p>")
+      <code>StatementId</code> when you run <a href=\"https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_RemovePermission.html\">RemovePermission</a>.</p>
+         <note>
+            <p>Each <code>StatementId</code> must be unique.</p>
+         </note>")
     @as("StatementId")
     statementId: option<statementId>,
-    @ocaml.doc("<p>The 12-digit AWS account ID that you are permitting to put events to your default event
+    @ocaml.doc("<p>The 12-digit Amazon Web Services account ID that you are permitting to put events to your default event
       bus. Specify \"*\" to permit any account to put events to your default event bus.</p>
 
          <p>If you specify \"*\" without specifying <code>Condition</code>, avoid creating rules that
@@ -1874,8 +1987,7 @@ module PutPermission = {
       accounts.</p>")
     @as("Principal")
     principal: option<principal>,
-    @ocaml.doc("<p>The action that you are enabling the other account to perform. Currently, this must be
-        <code>events:PutEvents</code>.</p>")
+    @ocaml.doc("<p>The action that you are enabling the other account to perform.</p>")
     @as("Action")
     action: option<action>,
     @ocaml.doc("<p>The name of the event bus associated with the rule. If you omit this, the default event
@@ -1883,7 +1995,7 @@ module PutPermission = {
     @as("EventBusName")
     eventBusName: option<nonPartnerEventBusName>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-events") @new external new: request => t = "PutPermissionCommand"
   let make = (
     ~policy=?,
@@ -1943,7 +2055,7 @@ module TagResource = {
     @as("ResourceARN")
     resourceARN: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-events") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceARN, ()) => new({tags: tags, resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -2002,7 +2114,7 @@ module StartReplay = {
 module RemoveTargets = {
   type t
   type request = {
-    @ocaml.doc("<p>If this is a managed rule, created by an AWS service on your behalf, you must specify
+    @ocaml.doc("<p>If this is a managed rule, created by an Amazon Web Services service on your behalf, you must specify
         <code>Force</code> as <code>True</code> to remove targets. This parameter is ignored for
       rules that are not managed rules. You can check whether a rule is a managed rule by using
         <code>DescribeRule</code> or <code>ListRules</code> and checking the <code>ManagedBy</code>
@@ -2038,7 +2150,11 @@ module PutRule = {
     eventBusName: option<eventBusNameOrArn>,
     @ocaml.doc("<p>The list of key-value pairs to associate with the rule.</p>") @as("Tags")
     tags: option<tagList_>,
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the IAM role associated with the rule.</p>")
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the IAM role associated with the rule.</p>
+         <p>If you're setting an event bus in another account as the target and that account granted
+      permission to your account through an organization instead of directly by the account ID, you
+      must specify a <code>RoleArn</code> with proper permissions in the <code>Target</code>
+      structure, instead of here in this parameter.</p>")
     @as("RoleArn")
     roleArn: option<roleArn>,
     @ocaml.doc("<p>A description of the rule.</p>") @as("Description")
@@ -2140,7 +2256,7 @@ module ListReplays = {
     @ocaml.doc("<p>The token returned by a previous call to retrieve the next set of results.</p>")
     @as("NextToken")
     nextToken: option<nextToken>,
-    @ocaml.doc("<p>The ARN of the event source associated with the replay.</p>")
+    @ocaml.doc("<p>The ARN of the archive from which the events are replayed.</p>")
     @as("EventSourceArn")
     eventSourceArn: option<arn>,
     @ocaml.doc("<p>The state of the replay.</p>") @as("State") state: option<replayState>,

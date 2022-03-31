@@ -60,7 +60,7 @@ module SendSSHPublicKey = {
   type request = {
     @ocaml.doc("<p>The Availability Zone in which the EC2 instance was launched.</p>")
     @as("AvailabilityZone")
-    availabilityZone: availabilityZone,
+    availabilityZone: option<availabilityZone>,
     @ocaml.doc(
       "<p>The public key material. To use the public key, you must have the matching private key.</p>"
     )
@@ -84,7 +84,7 @@ module SendSSHPublicKey = {
   }
   @module("@aws-sdk/client-ec2-instance-connect") @new
   external new: request => t = "SendSSHPublicKeyCommand"
-  let make = (~availabilityZone, ~sshpublicKey, ~instanceOSUser, ~instanceId, ()) =>
+  let make = (~sshpublicKey, ~instanceOSUser, ~instanceId, ~availabilityZone=?, ()) =>
     new({
       availabilityZone: availabilityZone,
       sshpublicKey: sshpublicKey,

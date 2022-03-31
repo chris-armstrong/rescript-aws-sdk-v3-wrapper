@@ -25,6 +25,12 @@ type value = float
 type unit_ = string
 type title = string
 type tier = [
+  | @as("ACTIVE_DIRECTORY") #ACTIVE_DIRECTORY
+  | @as("SHAREPOINT") #SHAREPOINT
+  | @as("SQL_SERVER_FAILOVER_CLUSTER_INSTANCE") #SQL_SERVER_FAILOVER_CLUSTER_INSTANCE
+  | @as("SAP_HANA_HIGH_AVAILABILITY") #SAP_HANA_HIGH_AVAILABILITY
+  | @as("SAP_HANA_SINGLE_NODE") #SAP_HANA_SINGLE_NODE
+  | @as("SAP_HANA_MULTI_NODE") #SAP_HANA_MULTI_NODE
   | @as("ORACLE") #ORACLE
   | @as("JAVA_JMX") #JAVA_JMX
   | @as("POSTGRESQL") #POSTGRESQL
@@ -40,7 +46,12 @@ type tier = [
 ]
 type tagValue = string
 type tagKey = string
-type status = [@as("PENDING") #PENDING | @as("RESOLVED") #RESOLVED | @as("IGNORE") #IGNORE]
+type status = [
+  | @as("RECURRING") #RECURRING
+  | @as("PENDING") #PENDING
+  | @as("RESOLVED") #RESOLVED
+  | @as("IGNORE") #IGNORE
+]
 type statesStatus = string
 type statesInput = string
 type statesExecutionArn = string
@@ -55,6 +66,7 @@ type resourceGroupName = string
 type resourceARN = string
 type removeSNSTopic = bool
 type remarks = string
+type recurringCount = float
 type rdsEventMessage = string
 type rdsEventCategories = string
 type problemId = string
@@ -78,6 +90,7 @@ type logGroup = string
 type logFilter = [@as("INFO") #INFO | @as("WARN") #WARN | @as("ERROR") #ERROR]
 type lineTime = Js.Date.t
 type lifeCycle = string
+type lastRecurrenceTime = Js.Date.t
 type insights = string
 type healthService = string
 type healthEventTypeCode = string
@@ -98,6 +111,10 @@ type ebsResult = string
 type ebsRequestId = string
 type ebsEvent = string
 type ebsCause = string
+type discoveryType = [
+  | @as("ACCOUNT_BASED") #ACCOUNT_BASED
+  | @as("RESOURCE_GROUP_BASED") #RESOURCE_GROUP_BASED
+]
 type customComponentName = string
 type configurationEventTime = Js.Date.t
 type configurationEventStatus = [@as("ERROR") #ERROR | @as("WARN") #WARN | @as("INFO") #INFO]
@@ -126,6 +143,8 @@ type cloudWatchEventSource = [
 type cloudWatchEventId = string
 type cloudWatchEventDetailType = string
 type cwemonitorEnabled = bool
+type autoCreate = bool
+type autoConfigEnabled = bool
 type amazonResourceName = string
 type affectedResource = string
 type workloadMetaData = Js.Dict.t<metaDataValue>
@@ -405,6 +424,8 @@ type configurationEvent = {
 }
 @ocaml.doc("<p>Describes the status of the application.</p>")
 type applicationInfo = {
+  @as("DiscoveryType") discoveryType: option<discoveryType>,
+  @as("AutoConfigEnabled") autoConfigEnabled: option<autoConfigEnabled>,
   @ocaml.doc("<p>The issues on the user side that block Application Insights from successfully monitoring
          an application. Example remarks include:</p>
          <ul>
@@ -443,6 +464,8 @@ type applicationInfo = {
 type tagList_ = array<tag>
 @ocaml.doc("<p>Describes a problem that is detected by correlating observations.</p>")
 type problem = {
+  @as("LastRecurrenceTime") lastRecurrenceTime: option<lastRecurrenceTime>,
+  @as("RecurringCount") recurringCount: option<recurringCount>,
   @ocaml.doc("<p>Feedback provided by the user about the problem.</p>") @as("Feedback")
   feedback: option<feedback>,
   @ocaml.doc("<p>The name of the resource group affected by the problem.</p>")
@@ -519,6 +542,7 @@ type applicationComponentList = array<applicationComponent>
 module UpdateComponentConfiguration = {
   type t
   type request = {
+    @as("AutoConfigEnabled") autoConfigEnabled: option<autoConfigEnabled>,
     @ocaml.doc("<p>The configuration settings of the component. The value is the escaped JSON of the configuration. For
          more information about the JSON format, see <a href=\"https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/working-with-json.html\">Working with JSON</a>.
          You can send a request to <code>DescribeComponentConfigurationRecommendation</code> to see the recommended configuration for a component. For the complete
@@ -536,18 +560,20 @@ module UpdateComponentConfiguration = {
     @ocaml.doc("<p>The name of the resource group.</p>") @as("ResourceGroupName")
     resourceGroupName: resourceGroupName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-applicationinsights") @new
   external new: request => t = "UpdateComponentConfigurationCommand"
   let make = (
     ~componentName,
     ~resourceGroupName,
+    ~autoConfigEnabled=?,
     ~componentConfiguration=?,
     ~tier=?,
     ~monitor=?,
     (),
   ) =>
     new({
+      autoConfigEnabled: autoConfigEnabled,
       componentConfiguration: componentConfiguration,
       tier: tier,
       monitor: monitor,
@@ -624,7 +650,7 @@ module DeleteLogPattern = {
     @ocaml.doc("<p>The name of the resource group.</p>") @as("ResourceGroupName")
     resourceGroupName: resourceGroupName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-applicationinsights") @new
   external new: request => t = "DeleteLogPatternCommand"
   let make = (~patternName, ~patternSetName, ~resourceGroupName, ()) =>
@@ -644,7 +670,7 @@ module DeleteComponent = {
     @ocaml.doc("<p>The name of the resource group.</p>") @as("ResourceGroupName")
     resourceGroupName: resourceGroupName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-applicationinsights") @new
   external new: request => t = "DeleteComponentCommand"
   let make = (~componentName, ~resourceGroupName, ()) =>
@@ -658,7 +684,7 @@ module DeleteApplication = {
     @ocaml.doc("<p>The name of the resource group.</p>") @as("ResourceGroupName")
     resourceGroupName: resourceGroupName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-applicationinsights") @new
   external new: request => t = "DeleteApplicationCommand"
   let make = (~resourceGroupName, ()) => new({resourceGroupName: resourceGroupName})
@@ -716,7 +742,7 @@ module UpdateComponent = {
     @ocaml.doc("<p>The name of the resource group.</p>") @as("ResourceGroupName")
     resourceGroupName: resourceGroupName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-applicationinsights") @new
   external new: request => t = "UpdateComponentCommand"
   let make = (~componentName, ~resourceGroupName, ~resourceList=?, ~newComponentName=?, ()) =>
@@ -732,6 +758,7 @@ module UpdateComponent = {
 module UpdateApplication = {
   type t
   type request = {
+    @as("AutoConfigEnabled") autoConfigEnabled: option<autoConfigEnabled>,
     @ocaml.doc("<p>
          Disassociates the SNS topic from the opsItem created for detected problems.</p>")
     @as("RemoveSNSTopic")
@@ -762,6 +789,7 @@ module UpdateApplication = {
   external new: request => t = "UpdateApplicationCommand"
   let make = (
     ~resourceGroupName,
+    ~autoConfigEnabled=?,
     ~removeSNSTopic=?,
     ~opsItemSNSTopicArn=?,
     ~cwemonitorEnabled=?,
@@ -769,6 +797,7 @@ module UpdateApplication = {
     (),
   ) =>
     new({
+      autoConfigEnabled: autoConfigEnabled,
       removeSNSTopic: removeSNSTopic,
       opsItemSNSTopicArn: opsItemSNSTopicArn,
       cwemonitorEnabled: cwemonitorEnabled,
@@ -794,7 +823,7 @@ module UntagResource = {
     @as("ResourceARN")
     resourceARN: amazonResourceName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-applicationinsights") @new
   external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys: tagKeys, resourceARN: resourceARN})
@@ -938,7 +967,7 @@ module CreateComponent = {
     @ocaml.doc("<p>The name of the resource group.</p>") @as("ResourceGroupName")
     resourceGroupName: resourceGroupName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-applicationinsights") @new
   external new: request => t = "CreateComponentCommand"
   let make = (~resourceList, ~componentName, ~resourceGroupName, ()) =>
@@ -965,7 +994,7 @@ module TagResource = {
     @as("ResourceARN")
     resourceARN: amazonResourceName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-applicationinsights") @new
   external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceARN, ()) => new({tags: tags, resourceARN: resourceARN})
@@ -1132,6 +1161,8 @@ module DescribeProblem = {
 module CreateApplication = {
   type t
   type request = {
+    @as("AutoCreate") autoCreate: option<autoCreate>,
+    @as("AutoConfigEnabled") autoConfigEnabled: option<autoConfigEnabled>,
     @ocaml.doc("<p>List of tags to add to the application.
          tag key (<code>Key</code>) and an associated tag value (<code>Value</code>). The maximum
          length of a tag key is 128 characters. The maximum length of a tag value is 256
@@ -1155,7 +1186,7 @@ module CreateApplication = {
     @as("OpsCenterEnabled")
     opsCenterEnabled: option<opsCenterEnabled>,
     @ocaml.doc("<p>The name of the resource group.</p>") @as("ResourceGroupName")
-    resourceGroupName: resourceGroupName,
+    resourceGroupName: option<resourceGroupName>,
   }
   type response = {
     @ocaml.doc("<p>Information about the application.</p>") @as("ApplicationInfo")
@@ -1164,14 +1195,18 @@ module CreateApplication = {
   @module("@aws-sdk/client-applicationinsights") @new
   external new: request => t = "CreateApplicationCommand"
   let make = (
-    ~resourceGroupName,
+    ~autoCreate=?,
+    ~autoConfigEnabled=?,
     ~tags=?,
     ~opsItemSNSTopicArn=?,
     ~cwemonitorEnabled=?,
     ~opsCenterEnabled=?,
+    ~resourceGroupName=?,
     (),
   ) =>
     new({
+      autoCreate: autoCreate,
+      autoConfigEnabled: autoConfigEnabled,
       tags: tags,
       opsItemSNSTopicArn: opsItemSNSTopicArn,
       cwemonitorEnabled: cwemonitorEnabled,
@@ -1184,6 +1219,7 @@ module CreateApplication = {
 module ListProblems = {
   type t
   type request = {
+    @as("ComponentName") componentName: option<componentName>,
     @ocaml.doc("<p>The token to request the next page of results.</p>") @as("NextToken")
     nextToken: option<paginationToken>,
     @ocaml.doc("<p>The maximum number of results to return in a single call. To retrieve the remaining
@@ -1202,6 +1238,7 @@ module ListProblems = {
     resourceGroupName: option<resourceGroupName>,
   }
   type response = {
+    @as("ResourceGroupName") resourceGroupName: option<resourceGroupName>,
     @ocaml.doc("<p>The token used to retrieve the next page of results. This value is <code>null</code>
          when there are no more results to return. </p>")
     @as("NextToken")
@@ -1210,8 +1247,17 @@ module ListProblems = {
   }
   @module("@aws-sdk/client-applicationinsights") @new
   external new: request => t = "ListProblemsCommand"
-  let make = (~nextToken=?, ~maxResults=?, ~endTime=?, ~startTime=?, ~resourceGroupName=?, ()) =>
+  let make = (
+    ~componentName=?,
+    ~nextToken=?,
+    ~maxResults=?,
+    ~endTime=?,
+    ~startTime=?,
+    ~resourceGroupName=?,
+    (),
+  ) =>
     new({
+      componentName: componentName,
       nextToken: nextToken,
       maxResults: maxResults,
       endTime: endTime,

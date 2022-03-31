@@ -44,11 +44,15 @@ type tagValue = string
 type tagKey = string
 type string_ = string
 type statusCode = int
+type status = [@as("DISABLED") #DISABLED | @as("ENABLED") #ENABLED]
 type sqlQuery = string
 type siteBaseUrl = string
+type sessionTagValue = string
+type sessionTagKey = string
 type sessionLifetimeInMinutes = float
 type s3Key = string
 type s3Bucket = string
+type rowLevelPermissionTagDelimiter = string
 type rowLevelPermissionPolicy = [
   | @as("DENY_ACCESS") #DENY_ACCESS
   | @as("GRANT_ACCESS") #GRANT_ACCESS
@@ -80,6 +84,7 @@ type physicalTableId = string
 type password = string
 type optionalPort = int
 type onClause = string
+type nullableBoolean = bool
 type nonEmptyString = string
 type namespaceStatus = [
   | @as("NON_RETRYABLE_FAILURE") #NON_RETRYABLE_FAILURE
@@ -93,6 +98,11 @@ type namespaceErrorType = [
   | @as("PERMISSION_DENIED") #PERMISSION_DENIED
 ]
 type namespace = string
+type memberType = [
+  | @as("DATASET") #DATASET
+  | @as("ANALYSIS") #ANALYSIS
+  | @as("DASHBOARD") #DASHBOARD
+]
 type maxResults = int
 type long = float
 type logicalTableId = string
@@ -103,6 +113,7 @@ type joinType = [
   | @as("OUTER") #OUTER
   | @as("INNER") #INNER
 ]
+type ipRestrictionRuleDescription = string
 type instanceId = string
 type inputColumnDataType = [
   | @as("JSON") #JSON
@@ -113,6 +124,13 @@ type inputColumnDataType = [
   | @as("INTEGER") #INTEGER
   | @as("STRING") #STRING
 ]
+@ocaml.doc(
+  "This defines the type of ingestion user wants to trigger. This is part of create ingestion request."
+)
+type ingestionType = [
+  | @as("FULL_REFRESH") #FULL_REFRESH
+  | @as("INCREMENTAL_REFRESH") #INCREMENTAL_REFRESH
+]
 type ingestionStatus = [
   | @as("CANCELLED") #CANCELLED
   | @as("COMPLETED") #COMPLETED
@@ -121,6 +139,9 @@ type ingestionStatus = [
   | @as("QUEUED") #QUEUED
   | @as("INITIALIZED") #INITIALIZED
 ]
+@ocaml.doc(
+  "This defines the type of ingestion request. This is returned as part of create ingestion response."
+)
 type ingestionRequestType = [
   | @as("FULL_REFRESH") #FULL_REFRESH
   | @as("INCREMENTAL_REFRESH") #INCREMENTAL_REFRESH
@@ -131,6 +152,10 @@ type ingestionRequestSource = [@as("SCHEDULED") #SCHEDULED | @as("MANUAL") #MANU
 type ingestionMaxResults = int
 type ingestionId = string
 type ingestionErrorType = [
+  | @as("CURSOR_NOT_ENABLED") #CURSOR_NOT_ENABLED
+  | @as("ELASTICSEARCH_CURSOR_NOT_ENABLED") #ELASTICSEARCH_CURSOR_NOT_ENABLED
+  | @as("PERMISSION_NOT_FOUND") #PERMISSION_NOT_FOUND
+  | @as("REFRESH_SUPPRESSED_BY_EDIT") #REFRESH_SUPPRESSED_BY_EDIT
   | @as("INTERNAL_SERVICE_ERROR") #INTERNAL_SERVICE_ERROR
   | @as("FAILURE_TO_PROCESS_JSON_FILE") #FAILURE_TO_PROCESS_JSON_FILE
   | @as("DATA_SOURCE_CONNECTION_FAILED") #DATA_SOURCE_CONNECTION_FAILED
@@ -180,6 +205,8 @@ type host = string
 type hexColor = string
 type groupName = string
 type groupMemberName = string
+type groupFilterOperator = [@as("StartsWith") #StartsWith]
+type groupFilterAttribute = [@as("GROUP_NAME") #GROUP_NAME]
 type groupDescription = string
 type geoSpatialDataRole = [
   | @as("LATITUDE") #LATITUDE
@@ -191,6 +218,9 @@ type geoSpatialDataRole = [
   | @as("COUNTRY") #COUNTRY
 ]
 type geoSpatialCountryCode = [@as("US") #US]
+type folderType = [@as("SHARED") #SHARED]
+type folderName = string
+type folderFilterAttribute = [@as("PARENT_FOLDER_ARN") #PARENT_FOLDER_ARN]
 type filterOperator = [@as("StringEquals") #StringEquals]
 type fileFormat = [
   | @as("JSON") #JSON
@@ -215,6 +245,7 @@ type exceptionResourceType = [
   | @as("USER") #USER
 ]
 type entryPoint = string
+type entryPath = string
 type embeddingUrl = string
 type embeddingIdentityType = [
   | @as("ANONYMOUS") #ANONYMOUS
@@ -227,6 +258,8 @@ type domain = string
 type delimiter = string
 type database = string
 type dataSourceType = [
+  | @as("EXASOL") #EXASOL
+  | @as("AMAZON_OPENSEARCH") #AMAZON_OPENSEARCH
   | @as("TIMESTREAM") #TIMESTREAM
   | @as("TWITTER") #TWITTER
   | @as("TERADATA") #TERADATA
@@ -281,6 +314,10 @@ type dashboardErrorType = [
 type dashboardBehavior = [@as("DISABLED") #DISABLED | @as("ENABLED") #ENABLED]
 type customSqlName = string
 type copySourceArn = string
+type columnTagName = [
+  | @as("COLUMN_DESCRIPTION") #COLUMN_DESCRIPTION
+  | @as("COLUMN_GEOGRAPHIC_ROLE") #COLUMN_GEOGRAPHIC_ROLE
+]
 type columnName = string
 type columnId = string
 type columnGroupName = string
@@ -293,6 +330,7 @@ type columnDataType = [
 ]
 type clusterId = string
 type catalog = string
+type cidr = string
 type boolean_ = bool
 type awsAndAccountId = string
 type awsAccountId = string
@@ -368,7 +406,7 @@ type user = {
             <li>
                 <p>
                   <code>ADMIN</code>: A user who is an author, who can also manage Amazon
-                    QuickSight settings.</p>
+                    Amazon QuickSight settings.</p>
             </li>
             <li>
                 <p> 
@@ -384,7 +422,11 @@ type user = {
   @as("Role")
   role: option<userRole>,
   @ocaml.doc("<p>The user's email address.</p>") @as("Email") email: option<string_>,
-  @ocaml.doc("<p>The user's user name.</p>") @as("UserName") userName: option<userName>,
+  @ocaml.doc("<p>The user's user name. In the output, the value for <code>UserName</code> is
+                <code>N/A</code> when the value for <code>IdentityType</code> is <code>IAM</code>
+            and the corresponding IAM user is deleted.</p>")
+  @as("UserName")
+  userName: option<userName>,
   @ocaml.doc("<p>The Amazon Resource Name (ARN) for the user.</p>") @as("Arn") arn: option<arn>,
 }
 @ocaml.doc("<p>Information about the format for a source file or files.</p>")
@@ -463,7 +505,7 @@ type uicolorPalette = {
   @as("PrimaryForeground")
   primaryForeground: option<hexColor>,
 }
-@ocaml.doc("<p>Twitter parameters.</p>")
+@ocaml.doc("<p>The parameters for Twitter.</p>")
 type twitterParameters = {
   @ocaml.doc("<p>Maximum number of rows to query Twitter.</p>") @as("MaxRows")
   maxRows: positiveInteger,
@@ -491,7 +533,9 @@ type themeSummary = {
   createdTime: option<timestamp_>,
   @ocaml.doc("<p>The latest version number for the theme. </p>") @as("LatestVersionNumber")
   latestVersionNumber: option<versionNumber>,
-  @ocaml.doc("<p>The ID of the theme. This ID is unique per AWS Region for each AWS account.</p>")
+  @ocaml.doc(
+    "<p>The ID of the theme. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>"
+  )
   @as("ThemeId")
   themeId: option<restrictiveResourceId>,
   @ocaml.doc("<p>the display name for the theme.</p>") @as("Name") name: option<themeName>,
@@ -511,7 +555,7 @@ type themeAlias = {
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the theme alias.</p>") @as("Arn")
   arn: option<arn>,
 }
-@ocaml.doc("<p>Teradata parameters.</p>")
+@ocaml.doc("<p>The parameters for Teradata.</p>")
 type teradataParameters = {
   @ocaml.doc("<p>Database.</p>") @as("Database") database: database,
   @ocaml.doc("<p>Port.</p>") @as("Port") port: port,
@@ -541,7 +585,7 @@ type templateSummary = {
   latestVersionNumber: option<versionNumber>,
   @ocaml.doc("<p>A display name for the template.</p>") @as("Name") name: option<templateName>,
   @ocaml.doc(
-    "<p>The ID of the template. This ID is unique per AWS Region for each AWS account.</p>"
+    "<p>The ID of the template. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>"
   )
   @as("TemplateId")
   templateId: option<restrictiveResourceId>,
@@ -574,24 +618,24 @@ type tag = {
   @ocaml.doc("<p>Tag key.</p>") @as("Key") key: tagKey,
 }
 type stringList = array<string_>
-@ocaml.doc("<p>Secure Socket Layer (SSL) properties that apply when QuickSight connects to your
+@ocaml.doc("<p>Secure Socket Layer (SSL) properties that apply when Amazon QuickSight connects to your
             underlying data source.</p>")
 type sslProperties = {
   @ocaml.doc("<p>A Boolean option to control whether SSL should be disabled.</p>") @as("DisableSsl")
   disableSsl: option<boolean_>,
 }
-@ocaml.doc("<p>SQL Server parameters.</p>")
+@ocaml.doc("<p>The parameters for SQL Server.</p>")
 type sqlServerParameters = {
   @ocaml.doc("<p>Database.</p>") @as("Database") database: database,
   @ocaml.doc("<p>Port.</p>") @as("Port") port: port,
   @ocaml.doc("<p>Host.</p>") @as("Host") host: host,
 }
-@ocaml.doc("<p>Spark parameters.</p>")
+@ocaml.doc("<p>The parameters for Spark.</p>")
 type sparkParameters = {
   @ocaml.doc("<p>Port.</p>") @as("Port") port: port,
   @ocaml.doc("<p>Host.</p>") @as("Host") host: host,
 }
-@ocaml.doc("<p>Snowflake parameters.</p>")
+@ocaml.doc("<p>The parameters for Snowflake.</p>")
 type snowflakeParameters = {
   @ocaml.doc("<p>Warehouse.</p>") @as("Warehouse") warehouse: warehouse,
   @ocaml.doc("<p>Database.</p>") @as("Database") database: database,
@@ -603,34 +647,61 @@ type sheetControlsOption = {
   visibilityState: option<dashboardUIState>,
 }
 @ocaml.doc("<p>A <i>sheet</i>, which is an object that contains a set of visuals that
-            are viewed together on one page in the Amazon QuickSight console. Every analysis and dashboard
+            are viewed together on one page in Amazon QuickSight. Every analysis and dashboard
             contains at least one sheet. Each sheet contains at least one visualization widget, for
             example a chart, pivot table, or narrative insight. Sheets can be associated with other
             components, such as controls, filters, and so on.</p>")
 type sheet = {
-  @ocaml.doc("<p>The name of a sheet. This name is displayed on the sheet's tab in the QuickSight
+  @ocaml.doc("<p>The name of a sheet. This name is displayed on the sheet's tab in the Amazon QuickSight
             console.</p>")
   @as("Name")
   name: option<nonEmptyString>,
   @ocaml.doc("<p>The unique identifier associated with a sheet.</p>") @as("SheetId")
   sheetId: option<restrictiveResourceId>,
 }
-@ocaml.doc("<p>ServiceNow parameters.</p>")
+@ocaml.doc("<p>The key-value pair used for the row-level security tags feature.</p>")
+type sessionTag = {
+  @ocaml.doc("<p>The value that you want to assign the tag.</p>") @as("Value")
+  value: sessionTagValue,
+  @ocaml.doc("<p>The key for the tag.</p>") @as("Key") key: sessionTagKey,
+}
+@ocaml.doc("<p>The parameters for ServiceNow.</p>")
 type serviceNowParameters = {
   @ocaml.doc("<p>URL of the base site.</p>") @as("SiteBaseUrl") siteBaseUrl: siteBaseUrl,
 }
-@ocaml.doc("<p>Information about a dataset that contains permissions for row-level security (RLS). 
-            The permissions dataset maps fields to users or groups. For more information, see 
+@ocaml.doc("<p>A set of rules associated with a tag.</p>")
+type rowLevelPermissionTagRule = {
+  @ocaml.doc(
+    "<p>A string that you want to use to filter by all the values in a column in the dataset and don’t want to list the values one by one. For example, you can use an asterisk as your match all value.</p>"
+  )
+  @as("MatchAllValue")
+  matchAllValue: option<sessionTagValue>,
+  @ocaml.doc(
+    "<p>A string that you want to use to delimit the values when you pass the values at run time. For example, you can delimit the values with a comma.</p>"
+  )
+  @as("TagMultiValueDelimiter")
+  tagMultiValueDelimiter: option<rowLevelPermissionTagDelimiter>,
+  @ocaml.doc("<p>The column name that a tag key is assigned to.</p>") @as("ColumnName")
+  columnName: string_,
+  @ocaml.doc("<p>The unique key for a tag.</p>") @as("TagKey") tagKey: sessionTagKey,
+}
+@ocaml.doc("<p>Information about a dataset that contains permissions for row-level security (RLS).
+            The permissions dataset maps fields to users or groups. For more information, see
             <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/restrict-access-to-a-data-set-using-row-level-security.html\">Using Row-Level Security (RLS) to Restrict Access to a Dataset</a> in the <i>Amazon QuickSight User
                 Guide</i>.</p>
-            <p>The option to deny permissions by setting <code>PermissionPolicy</code> to <code>DENY_ACCESS</code> is 
+            <p>The option to deny permissions by setting <code>PermissionPolicy</code> to <code>DENY_ACCESS</code> is
             not supported for new RLS datasets.</p>")
 type rowLevelPermissionDataSet = {
+  @ocaml.doc(
+    "<p>The status of the row-level security permission dataset. If enabled, the status is <code>ENABLED</code>. If disabled, the status is <code>DISABLED</code>.</p>"
+  )
+  @as("Status")
+  status: option<status>,
   @ocaml.doc("<p>The user or group rules associated with the dataset that contains permissions for RLS.</p>
          <p>By default, <code>FormatVersion</code> is <code>VERSION_1</code>. When <code>FormatVersion</code> is <code>VERSION_1</code>, <code>UserName</code> and <code>GroupName</code> are required. When <code>FormatVersion</code> is <code>VERSION_2</code>, <code>UserARN</code> and <code>GroupARN</code> are required, and <code>Namespace</code> must not exist.</p>")
   @as("FormatVersion")
   formatVersion: option<rowLevelPermissionFormatVersion>,
-  @ocaml.doc("<p>The type of permissions to use when interpretting the permissions for RLS. <code>DENY_ACCESS</code> 
+  @ocaml.doc("<p>The type of permissions to use when interpreting the permissions for RLS. <code>DENY_ACCESS</code>
         is included for backward compatibility only.</p>")
   @as("PermissionPolicy")
   permissionPolicy: rowLevelPermissionPolicy,
@@ -645,6 +716,8 @@ type rowLevelPermissionDataSet = {
 }
 @ocaml.doc("<p>Information about rows for a data set SPICE ingestion.</p>")
 type rowInfo = {
+  @ocaml.doc("<p>The total number of rows in the dataset.</p>") @as("TotalRowsInDataset")
+  totalRowsInDataset: option<long>,
   @ocaml.doc("<p>The number of rows that were not ingested.</p>") @as("RowsDropped")
   rowsDropped: option<long>,
   @ocaml.doc("<p>The number of rows that were ingested.</p>") @as("RowsIngested")
@@ -656,7 +729,62 @@ type renameColumnOperation = {
   @ocaml.doc("<p>The name of the column to be renamed.</p>") @as("ColumnName")
   columnName: columnName,
 }
-@ocaml.doc("<p>Amazon Redshift parameters. The <code>ClusterId</code> field can be blank if
+@ocaml.doc("<p>Information about the Amazon QuickSight console that you want to embed.</p>")
+type registeredUserQuickSightConsoleEmbeddingConfiguration = {
+  @ocaml.doc("<p>The initial URL path for the Amazon QuickSight console. <code>InitialPath</code> is required.</p>
+         <p>The entry point URL is constrained to the following paths:</p>
+         <ul>
+            <li>
+               <p>
+                  <code>/start</code>
+               </p>
+            </li>
+            <li>
+               <p>
+                  <code>/start/analyses</code>
+               </p>
+            </li>
+            <li>
+               <p>
+                  <code>/start/dashboards</code>
+               </p>
+            </li>
+            <li>
+               <p>
+                  <code>/start/favorites</code>
+               </p>
+            </li>
+            <li>
+               <p>
+                  <code>/dashboards/DashboardId</code>. <i>DashboardId</i> is the actual ID key from the Amazon QuickSight console URL of the dashboard.</p>
+            </li>
+            <li>
+               <p>
+                  <code>/analyses/AnalysisId</code>. <i>AnalysisId</i> is the actual ID key from the Amazon QuickSight console URL of the analysis.</p>
+            </li>
+         </ul>")
+  @as("InitialPath")
+  initialPath: option<entryPath>,
+}
+@ocaml.doc("<p>Information about the Q search bar embedding experience.</p>")
+type registeredUserQSearchBarEmbeddingConfiguration = {
+  @ocaml.doc("<p>The ID of the Q topic that you want to make the starting topic in the Q search bar.
+      You can find a topic ID by navigating to the Topics pane in the Amazon QuickSight application and opening
+      a topic. The ID is in the URL for the topic that you open.</p>
+         <p>If you don't specify an initial topic, a list of all shared topics is shown in the Q bar
+      for your readers. When you select an initial topic, you can specify whether or not readers
+      are allowed to select other topics from the available ones in the list.</p>")
+  @as("InitialTopicId")
+  initialTopicId: option<restrictiveResourceId>,
+}
+@ocaml.doc("<p>Information about the dashboard you want to embed.</p>")
+type registeredUserDashboardEmbeddingConfiguration = {
+  @ocaml.doc("<p>The dashboard ID for the dashboard that you want the user to see first. This ID is included in the output URL. When the URL in response is accessed, Amazon QuickSight renders this dashboard if the user has permissions to view it.</p>
+         <p>If the user does not have permission to view this dashboard, they see a permissions error message.</p>")
+  @as("InitialDashboardId")
+  initialDashboardId: restrictiveResourceId,
+}
+@ocaml.doc("<p>The parameters for Amazon Redshift. The <code>ClusterId</code> field can be blank if
             <code>Host</code> and <code>Port</code> are both set. The <code>Host</code> and
             <code>Port</code> fields can be blank if the <code>ClusterId</code> field is set.</p>")
 type redshiftParameters = {
@@ -672,7 +800,7 @@ type redshiftParameters = {
   @as("Host")
   host: option<host>,
 }
-@ocaml.doc("<p>Amazon RDS parameters.</p>")
+@ocaml.doc("<p>The parameters for Amazon RDS.</p>")
 type rdsParameters = {
   @ocaml.doc("<p>Database.</p>") @as("Database") database: database,
   @ocaml.doc("<p>Instance ID.</p>") @as("InstanceId") instanceId: instanceId,
@@ -688,18 +816,19 @@ type queueInfo = {
 }
 type projectedColumnList = array<string_>
 type principalList = array<string_>
-@ocaml.doc("<p>Presto parameters.</p>")
+@ocaml.doc("<p>The parameters for Presto.</p>")
 type prestoParameters = {
   @ocaml.doc("<p>Catalog.</p>") @as("Catalog") catalog: catalog,
   @ocaml.doc("<p>Port.</p>") @as("Port") port: port,
   @ocaml.doc("<p>Host.</p>") @as("Host") host: host,
 }
-@ocaml.doc("<p>PostgreSQL parameters.</p>")
+@ocaml.doc("<p>The parameters for PostgreSQL.</p>")
 type postgreSqlParameters = {
   @ocaml.doc("<p>Database.</p>") @as("Database") database: database,
   @ocaml.doc("<p>Port.</p>") @as("Port") port: port,
   @ocaml.doc("<p>Host.</p>") @as("Host") host: host,
 }
+type path = array<arn>
 @ocaml.doc("<p>Output column.</p>")
 type outputColumn = {
   @ocaml.doc("<p>Type.</p>") @as("Type") type_: option<columnDataType>,
@@ -707,7 +836,7 @@ type outputColumn = {
   description: option<columnDescriptiveText>,
   @ocaml.doc("<p>A display name for the dataset.</p>") @as("Name") name: option<columnName>,
 }
-@ocaml.doc("<p>Oracle parameters.</p>")
+@ocaml.doc("<p>The parameters for Oracle.</p>")
 type oracleParameters = {
   @ocaml.doc("<p>Database.</p>") @as("Database") database: database,
   @ocaml.doc("<p>Port.</p>") @as("Port") port: port,
@@ -718,13 +847,20 @@ type namespaceError = {
   @ocaml.doc("<p>The message for the error.</p>") @as("Message") message: option<string_>,
   @ocaml.doc("<p>The error type.</p>") @as("Type") type_: option<namespaceErrorType>,
 }
-@ocaml.doc("<p>MySQL parameters.</p>")
+@ocaml.doc("<p>The parameters for MySQL.</p>")
 type mySqlParameters = {
   @ocaml.doc("<p>Database.</p>") @as("Database") database: database,
   @ocaml.doc("<p>Port.</p>") @as("Port") port: port,
   @ocaml.doc("<p>Host.</p>") @as("Host") host: host,
 }
-@ocaml.doc("<p>MariaDB parameters.</p>")
+@ocaml.doc("<p>An object that consists of a member Amazon Resource Name (ARN) and a member ID.</p>")
+type memberIdArnPair = {
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the member.</p>") @as("MemberArn")
+  memberArn: option<arn>,
+  @ocaml.doc("<p>The ID of the member.</p>") @as("MemberId")
+  memberId: option<restrictiveResourceId>,
+}
+@ocaml.doc("<p>The parameters for MariaDB.</p>")
 type mariaDbParameters = {
   @ocaml.doc("<p>Database.</p>") @as("Database") database: database,
   @ocaml.doc("<p>Port.</p>") @as("Port") port: port,
@@ -744,14 +880,15 @@ type longList = array<long>
 @ocaml.doc("<p>Properties associated with the columns participating in a join.</p>")
 type joinKeyProperties = {
   @ocaml.doc("<p>A value that indicates that a row in a table is uniquely identified by the columns in
-            a join key. This is used by QuickSight to optimize query performance.</p>")
+            a join key. This is used by Amazon QuickSight to optimize query performance.</p>")
   @as("UniqueKey")
   uniqueKey: option<boolean_>,
 }
-@ocaml.doc("<p>Jira parameters.</p>")
+@ocaml.doc("<p>The parameters for Jira.</p>")
 type jiraParameters = {
   @ocaml.doc("<p>The base URL of the Jira site.</p>") @as("SiteBaseUrl") siteBaseUrl: siteBaseUrl,
 }
+type ipRestrictionRuleMap = Js.Dict.t<ipRestrictionRuleDescription>
 @ocaml.doc("<p>Metadata for a column that is used as the input of a transform operation.</p>")
 type inputColumn = {
   @ocaml.doc("<p>The data type of the column.</p>") @as("Type") type_: inputColumnDataType,
@@ -773,6 +910,24 @@ type gutterStyle = {
   @as("Show")
   show: option<boolean_>,
 }
+@ocaml.doc("<p>A <code>GroupSearchFilter</code> object that you want to apply to your search.</p>")
+type groupSearchFilter = {
+  @ocaml.doc(
+    "<p>The value of the named item, in this case <code>GROUP_NAME</code>, that you want to use as a filter.</p>"
+  )
+  @as("Value")
+  value: string_,
+  @ocaml.doc("<p>The name of the value that you want to use as a filter, for example <code>\"Name\":
+                \"GROUP_NAME\"</code>. Currently, the only supported name is
+            <code>GROUP_NAME</code>.</p>")
+  @as("Name")
+  name: groupFilterAttribute,
+  @ocaml.doc("<p>The comparison operator that you want to use as a filter, for example <code>\"Operator\":
+                \"StartsWith\"</code>. Currently, the only supported operator is
+                <code>StartsWith</code>.</p>")
+  @as("Operator")
+  operator: groupFilterOperator,
+}
 @ocaml.doc("<p>A member of an Amazon QuickSight group. Currently, group members must be users. Groups
             can't be members of another group. .</p>")
 type groupMember = {
@@ -791,6 +946,45 @@ type group = {
   @ocaml.doc("<p>The name of the group.</p>") @as("GroupName") groupName: option<groupName>,
   @ocaml.doc("<p>The Amazon Resource Name (ARN) for the group.</p>") @as("Arn") arn: option<arn>,
 }
+@ocaml.doc("<p>A summary of information about an existing Amazon QuickSight folder. </p>")
+type folderSummary = {
+  @ocaml.doc("<p>The time that the folder was last updated.</p>") @as("LastUpdatedTime")
+  lastUpdatedTime: option<timestamp_>,
+  @ocaml.doc("<p>The time that the folder was created.</p>") @as("CreatedTime")
+  createdTime: option<timestamp_>,
+  @ocaml.doc("<p>The type of folder.</p>") @as("FolderType") folderType: option<folderType>,
+  @ocaml.doc("<p>The display name of the folder.</p>") @as("Name") name: option<folderName>,
+  @ocaml.doc("<p>The ID of the folder.</p>") @as("FolderId")
+  folderId: option<restrictiveResourceId>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the folder.</p>") @as("Arn") arn: option<arn>,
+}
+@ocaml.doc("<p>A filter to use to search a Amazon QuickSight folder.</p>")
+type folderSearchFilter = {
+  @ocaml.doc(
+    "<p>The value of the named item (in this example, <code>PARENT_FOLDER_ARN</code>), that you want to use as a filter. For example, <code>\"Value\": \"arn:aws:quicksight:us-east-1:1:folder/folderId\"</code>.</p>"
+  )
+  @as("Value")
+  value: option<string_>,
+  @ocaml.doc(
+    "<p>The name of a value that you want to use in the filter. For example, <code>\"Name\": \"PARENT_FOLDER_ARN\"</code>.</p>"
+  )
+  @as("Name")
+  name: option<folderFilterAttribute>,
+  @ocaml.doc(
+    "<p>The comparison operator that you want to use in the filter. For example, <code>\"Operator\": \"StringEquals\"</code>.</p>"
+  )
+  @as("Operator")
+  operator: option<filterOperator>,
+}
+@ocaml.doc(
+  "<p>An asset in a Amazon QuickSight folder, such as a dashboard, analysis, or dataset.</p>"
+)
+type folderMember = {
+  @ocaml.doc("<p>The type of asset that it is.</p>") @as("MemberType")
+  memberType: option<memberType>,
+  @ocaml.doc("<p>The ID of an asset in the folder.</p>") @as("MemberId")
+  memberId: option<restrictiveResourceId>,
+}
 type folderColumnList = array<string_>
 @ocaml.doc("<p>A transform operation that filters rows based on a condition.</p>")
 type filterOperation = {
@@ -804,6 +998,11 @@ type exportToCSVOption = {
   @ocaml.doc("<p>Availability status.</p>") @as("AvailabilityStatus")
   availabilityStatus: option<dashboardBehavior>,
 }
+@ocaml.doc("<p>The required parameters for connecting to an Exasol data source.</p>")
+type exasolParameters = {
+  @ocaml.doc("<p>The port for the Exasol data source.</p>") @as("Port") port: port,
+  @ocaml.doc("<p>The hostname or IP address of the Exasol data source.</p>") @as("Host") host: host,
+}
 @ocaml.doc("<p>Error information for the SPICE ingestion of a dataset.</p>")
 type errorInfo = {
   @ocaml.doc("<p>Error message.</p>") @as("Message") message: option<string_>,
@@ -814,6 +1013,21 @@ type doubleList = array<double>
 type dataSourceErrorInfo = {
   @ocaml.doc("<p>Error message.</p>") @as("Message") message: option<string_>,
   @ocaml.doc("<p>Error type.</p>") @as("Type") type_: option<dataSourceErrorInfoType>,
+}
+@ocaml.doc(
+  "<p>The usage configuration to apply to child datasets that reference this dataset as a source.</p>"
+)
+type dataSetUsageConfiguration = {
+  @ocaml.doc(
+    "<p>An option that controls whether a child dataset that's stored in QuickSight can use this dataset as a source.</p>"
+  )
+  @as("DisableUseAsImportedSource")
+  disableUseAsImportedSource: option<boolean_>,
+  @ocaml.doc(
+    "<p>An option that controls whether a child dataset of a direct query can use this dataset as a source.</p>"
+  )
+  @as("DisableUseAsDirectQuerySource")
+  disableUseAsDirectQuerySource: option<boolean_>,
 }
 @ocaml.doc("<p>Dataset reference.</p>")
 type dataSetReference = {
@@ -867,6 +1081,7 @@ type dashboardError = {
   @ocaml.doc("<p>Message.</p>") @as("Message") message: option<nonEmptyString>,
   @ocaml.doc("<p>Type.</p>") @as("Type") type_: option<dashboardErrorType>,
 }
+type columnTagNames = array<columnTagName>
 @ocaml.doc("<p>The column schema.</p>")
 type columnSchema = {
   @ocaml.doc("<p>The geographic role of the column schema.</p>") @as("GeographicRole")
@@ -913,26 +1128,37 @@ type borderStyle = {
   @ocaml.doc("<p>The option to enable display of borders for visuals.</p>") @as("Show")
   show: option<boolean_>,
 }
-@ocaml.doc("<p>AWS IoT Analytics parameters.</p>")
+@ocaml.doc("<p>The parameters for IoT Analytics.</p>")
 type awsIotAnalyticsParameters = {
   @ocaml.doc("<p>Dataset name.</p>") @as("DataSetName") dataSetName: dataSetName,
 }
-@ocaml.doc("<p>Amazon Aurora with PostgreSQL compatibility parameters.</p>")
+@ocaml.doc("<p>Parameters for Amazon Aurora PostgreSQL-Compatible Edition.</p>")
 type auroraPostgreSqlParameters = {
-  @ocaml.doc("<p>Database.</p>") @as("Database") database: database,
-  @ocaml.doc("<p>Port.</p>") @as("Port") port: port,
-  @ocaml.doc("<p>Host.</p>") @as("Host") host: host,
+  @ocaml.doc("<p>The Amazon Aurora PostgreSQL database to connect to.</p>") @as("Database")
+  database: database,
+  @ocaml.doc("<p>The port that Amazon Aurora PostgreSQL is listening on.</p>") @as("Port")
+  port: port,
+  @ocaml.doc("<p>The Amazon Aurora PostgreSQL-Compatible host to connect to.</p>") @as("Host")
+  host: host,
 }
-@ocaml.doc("<p>Amazon Aurora parameters.</p>")
+@ocaml.doc("<p>Parameters for Amazon Aurora.</p>")
 type auroraParameters = {
   @ocaml.doc("<p>Database.</p>") @as("Database") database: database,
   @ocaml.doc("<p>Port.</p>") @as("Port") port: port,
   @ocaml.doc("<p>Host.</p>") @as("Host") host: host,
 }
-@ocaml.doc("<p>Amazon Athena parameters.</p>")
+@ocaml.doc("<p>Parameters for Amazon Athena.</p>")
 type athenaParameters = {
   @ocaml.doc("<p>The workgroup that Amazon Athena uses.</p>") @as("WorkGroup")
   workGroup: option<workGroup>,
+}
+type arnList = array<arn>
+@ocaml.doc("<p>Information about the dashboard that you want to embed.</p>")
+type anonymousUserDashboardEmbeddingConfiguration = {
+  @ocaml.doc("<p>The dashboard ID for the dashboard that you want the user to see first. This ID is included in the output URL. When the URL in response is accessed, Amazon QuickSight renders this dashboard.</p>
+        <p>The Amazon Resource Name (ARN) of this dashboard must be included in the <code>AuthorizedResourceArns</code> parameter. Otherwise, the request will fail with <code>InvalidParameterValueException</code>.</p>")
+  @as("InitialDashboardId")
+  initialDashboardId: restrictiveResourceId,
 }
 @ocaml.doc("<p>The summary metadata that describes an analysis.</p>")
 type analysisSummary = {
@@ -942,7 +1168,7 @@ type analysisSummary = {
   createdTime: option<timestamp_>,
   @ocaml.doc("<p>The last known status for the analysis.</p>") @as("Status")
   status: option<resourceStatus>,
-  @ocaml.doc("<p>The name of the analysis. This name is displayed in the QuickSight console.
+  @ocaml.doc("<p>The name of the analysis. This name is displayed in the Amazon QuickSight console.
             </p>")
   @as("Name")
   name: option<analysisName>,
@@ -966,15 +1192,19 @@ type analysisSearchFilter = {
   @as("Operator")
   operator: option<filterOperator>,
 }
-@ocaml.doc("<p>A metadata error structure for an analysis.</p>")
+@ocaml.doc("<p>Analysis error.</p>")
 type analysisError = {
   @ocaml.doc("<p>The message associated with the analysis error.</p>") @as("Message")
   message: option<nonEmptyString>,
   @ocaml.doc("<p>The type of the analysis error.</p>") @as("Type") type_: option<analysisErrorType>,
 }
-@ocaml.doc("<p>Amazon Elasticsearch Service parameters.</p>")
+@ocaml.doc("<p>The parameters for OpenSearch.</p>")
+type amazonOpenSearchParameters = {
+  @ocaml.doc("<p>The OpenSearch domain.</p>") @as("Domain") domain: domain,
+}
+@ocaml.doc("<p>The parameters for OpenSearch.</p>")
 type amazonElasticsearchParameters = {
-  @ocaml.doc("<p>The Amazon Elasticsearch Service domain.</p>") @as("Domain") domain: domain,
+  @ocaml.doc("<p>The OpenSearch domain.</p>") @as("Domain") domain: domain,
 }
 type additionalDashboardIdList = array<restrictiveResourceId>
 @ocaml.doc("<p>Ad hoc (one-time) filtering option.</p>")
@@ -982,7 +1212,7 @@ type adHocFilteringOption = {
   @ocaml.doc("<p>Availability status.</p>") @as("AvailabilityStatus")
   availabilityStatus: option<dashboardBehavior>,
 }
-@ocaml.doc("<p>The active AWS Identity and Access Management (IAM) policy assignment.</p>")
+@ocaml.doc("<p>The active Identity and Access Management (IAM) policy assignment.</p>")
 type activeIAMPolicyAssignment = {
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the resource.</p>") @as("PolicyArn")
   policyArn: option<arn>,
@@ -990,32 +1220,47 @@ type activeIAMPolicyAssignment = {
   assignmentName: option<iampolicyAssignmentName>,
 }
 type actionList = array<string_>
-@ocaml.doc("<p>The QuickSight settings associated with your AWS account.</p>")
+@ocaml.doc(
+  "<p>The Amazon QuickSight settings associated with your Amazon Web Services account.</p>"
+)
 type accountSettings = {
-  @ocaml.doc("<p>The main notification email for your QuickSight subscription.</p>")
+  @ocaml.doc("<p>The main notification email for your Amazon QuickSight subscription.</p>")
   @as("NotificationEmail")
   notificationEmail: option<string_>,
-  @ocaml.doc("<p>The default QuickSight namespace for your AWS account. </p>")
+  @ocaml.doc(
+    "<p>The default Amazon QuickSight namespace for your Amazon Web Services account. </p>"
+  )
   @as("DefaultNamespace")
   defaultNamespace: option<namespace>,
-  @ocaml.doc("<p>The edition of QuickSight that you're currently subscribed to:
+  @ocaml.doc("<p>The edition of Amazon QuickSight that you're currently subscribed to:
         Enterprise edition or Standard edition.</p>")
   @as("Edition")
   edition: option<edition>,
-  @ocaml.doc("<p>The \"account name\" you provided for the QuickSight subscription in your AWS account. 
-            You create this name when you sign up for QuickSight. It is unique in all of AWS and 
-            it appears only in the console when users sign in.</p>")
+  @ocaml.doc("<p>The \"account name\" you provided for the Amazon QuickSight subscription in your Amazon Web Services account.
+            You create this name when you sign up for Amazon QuickSight. It is unique in all of Amazon Web Services and
+            it appears only when users sign in.</p>")
   @as("AccountName")
   accountName: option<string_>,
 }
 @ocaml.doc(
-  "<p>The Amazon QuickSight customizations associated with your AWS account or a QuickSight namespace in a specific AWS Region.</p>"
+  "<p>The Amazon QuickSight customizations associated with your Amazon Web Services account or a QuickSight namespace in a specific Amazon Web Services Region.</p>"
 )
 type accountCustomization = {
-  @ocaml.doc("<p>The default theme for this QuickSight subscription.</p>") @as("DefaultTheme")
+  @ocaml.doc("<p>The default email customization template.</p>")
+  @as("DefaultEmailCustomizationTemplate")
+  defaultEmailCustomizationTemplate: option<arn>,
+  @ocaml.doc("<p>The default theme for this Amazon QuickSight subscription.</p>")
+  @as("DefaultTheme")
   defaultTheme: option<arn>,
 }
 type userList = array<user>
+@ocaml.doc("<p>A transform operation that removes tags associated with a column.</p>")
+type untagColumnOperation = {
+  @ocaml.doc("<p>The column tags to remove from this column.</p>") @as("TagNames")
+  tagNames: columnTagNames,
+  @ocaml.doc("<p>The column that this operation acts on.</p>") @as("ColumnName")
+  columnName: columnName,
+}
 @ocaml.doc("<p>Display options related to tiles on a sheet.</p>")
 type tileStyle = {
   @ocaml.doc("<p>The border around a tile.</p>") @as("Border") border: option<borderStyle>,
@@ -1043,13 +1288,15 @@ type stringParameter = {
   @ocaml.doc("<p>A display name for a string parameter.</p>") @as("Name") name: nonEmptyString,
 }
 type sheetList = array<sheet>
-@ocaml.doc("<p>S3 parameters.</p>")
+type sessionTagList = array<sessionTag>
+@ocaml.doc("<p>The parameters for S3.</p>")
 type s3Parameters = {
   @ocaml.doc("<p>Location of the Amazon S3 manifest file. This is NULL if the manifest file was
-            uploaded in the console.</p>")
+            uploaded into Amazon QuickSight.</p>")
   @as("ManifestFileLocation")
   manifestFileLocation: manifestFileLocation,
 }
+type rowLevelPermissionTagRuleList = array<rowLevelPermissionTagRule>
 @ocaml.doc("<p>Permission for the resource.</p>")
 type resourcePermission = {
   @ocaml.doc("<p>The IAM action to grant or revoke permissions on.</p>") @as("Actions")
@@ -1064,13 +1311,61 @@ type resourcePermission = {
                 <p>The ARN of an Amazon QuickSight user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)</p>
             </li>
             <li>
-                <p>The ARN of an AWS account root: This is an IAM ARN rather than a QuickSight
-                    ARN. Use this option only to share resources (templates) across AWS accounts.
+                <p>The ARN of an Amazon Web Services account root: This is an IAM ARN rather than a QuickSight
+                    ARN. Use this option only to share resources (templates) across Amazon Web Services accounts.
                     (This is less common.) </p>
             </li>
          </ul>")
   @as("Principal")
   principal: principal,
+}
+@ocaml.doc("<p>The type of experience you want to embed. For registered users, you can embed Amazon QuickSight dashboards or the Amazon QuickSight console.</p>
+         <note>
+            <p>Exactly one of the experience configurations is required. You can choose
+                    <code>Dashboard</code> or <code>QuickSightConsole</code>. You cannot choose more
+                than one experience configuration.</p>
+         </note>")
+type registeredUserEmbeddingExperienceConfiguration = {
+  @ocaml.doc("<p>The configuration details for embedding the Q search bar.</p>
+         <p>For more information about embedding the Q search bar, see
+      <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/embedding-overview.html\">Embedding Overview</a>.</p>")
+  @as("QSearchBar")
+  qsearchBar: option<registeredUserQSearchBarEmbeddingConfiguration>,
+  @ocaml.doc("<p>The configuration details for providing each Amazon QuickSight console embedding experience. This can be used along with custom permissions to restrict access to certain features. For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/customizing-permissions-to-the-quicksight-console.html\">Customizing Access to the Amazon QuickSight Console</a> in the <i>Amazon QuickSight User
+            Guide</i>.</p>
+        <p>Use <code>
+               <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_GenerateEmbedUrlForRegisteredUser.html\">GenerateEmbedUrlForRegisteredUser</a>
+            </code>
+            where
+            you want to provide an authoring portal that allows users to create data sources,
+            datasets, analyses, and dashboards. The users who accesses an embedded Amazon QuickSight console
+            needs to belong to the author or admin security cohort. If you want to restrict permissions
+            to some of these features, add a custom permissions profile to the user with the
+            <code>
+               <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_UpdateUser.html\">UpdateUser</a>
+            </code> API operation. Use the <code>
+               <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_RegisterUser.html\">RegisterUser</a>
+            </code> API operation to add a new user with a custom permission profile attached. For more
+            information, see the following sections in the <i>Amazon QuickSight User
+            Guide</i>:</p>
+        <ul>
+            <li>
+                <p>
+                  <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics-full-console-for-authenticated-users.html\">Embedding the Full Functionality of the Amazon QuickSight Console for Authenticated Users</a>
+               </p>
+            </li>
+            <li>
+                <p>
+                  <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/customizing-permissions-to-the-quicksight-console.html\">Customizing Access to the Amazon QuickSight Console</a>
+               </p>
+            </li>
+         </ul>
+        <p>For more information about the high-level steps for embedding and for an interactive demo of the ways you can customize embedding, visit the <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html\">Amazon QuickSight Developer Portal</a>.</p>")
+  @as("QuickSightConsole")
+  quickSightConsole: option<registeredUserQuickSightConsoleEmbeddingConfiguration>,
+  @ocaml.doc("<p>The configuration details for providing a dashboard embedding experience.</p>")
+  @as("Dashboard")
+  dashboard: option<registeredUserDashboardEmbeddingConfiguration>,
 }
 @ocaml.doc("<p>A transform operation that projects columns. Operations that come after a projection
             can only refer to projected columns.</p>")
@@ -1088,7 +1383,7 @@ type namespaceInfoV2 = {
   @ocaml.doc("<p>The creation status of a namespace that is not yet completely created.</p>")
   @as("CreationStatus")
   creationStatus: option<namespaceStatus>,
-  @ocaml.doc("<p>The namespace AWS Region.</p>") @as("CapacityRegion")
+  @ocaml.doc("<p>The namespace Amazon Web Services Region.</p>") @as("CapacityRegion")
   capacityRegion: option<string_>,
   @ocaml.doc("<p>The namespace ARN.</p>") @as("Arn") arn: option<arn>,
   @ocaml.doc("<p>The name of the error.</p>") @as("Name") name: option<namespace>,
@@ -1137,6 +1432,7 @@ type ingestion = {
 }
 type identityMap = Js.Dict.t<identityNameList>
 type iampolicyAssignmentSummaryList = array<iampolicyAssignmentSummary>
+type groupSearchFilterList = array<groupSearchFilter>
 type groupMemberList = array<groupMember>
 type groupList = array<group>
 @ocaml.doc("<p>Geospatial column group that denotes a hierarchy.</p>")
@@ -1144,6 +1440,23 @@ type geoSpatialColumnGroup = {
   @ocaml.doc("<p>Columns in this hierarchy.</p>") @as("Columns") columns: columnList,
   @ocaml.doc("<p>Country code.</p>") @as("CountryCode") countryCode: geoSpatialCountryCode,
   @ocaml.doc("<p>A display name for the hierarchy.</p>") @as("Name") name: columnGroupName,
+}
+type folderSummaryList = array<folderSummary>
+type folderSearchFilterList = array<folderSearchFilter>
+type folderMemberList = array<memberIdArnPair>
+@ocaml.doc("<p>A folder in Amazon QuickSight.</p>")
+type folder = {
+  @ocaml.doc("<p>The time that the folder was last updated.</p>") @as("LastUpdatedTime")
+  lastUpdatedTime: option<timestamp_>,
+  @ocaml.doc("<p>The time that the folder was created.</p>") @as("CreatedTime")
+  createdTime: option<timestamp_>,
+  @ocaml.doc("<p>An array of ancestor ARN strings for the folder.</p>") @as("FolderPath")
+  folderPath: option<path>,
+  @ocaml.doc("<p>The type of folder it is.</p>") @as("FolderType") folderType: option<folderType>,
+  @ocaml.doc("<p>A display name for the folder.</p>") @as("Name") name: option<folderName>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) for the folder.</p>") @as("Arn") arn: option<arn>,
+  @ocaml.doc("<p>The ID of the folder.</p>") @as("FolderId")
+  folderId: option<restrictiveResourceId>,
 }
 @ocaml.doc("<p>A FieldFolder element is a folder that contains fields and nested subfolders.</p>")
 type fieldFolder = {
@@ -1167,6 +1480,9 @@ type dataSetSummary = {
   @ocaml.doc("<p>A value that indicates if the dataset has column level permission configured.</p>")
   @as("ColumnLevelPermissionRulesApplied")
   columnLevelPermissionRulesApplied: option<boolean_>,
+  @ocaml.doc("<p>Whether or not the row level permission tags are applied.</p>")
+  @as("RowLevelPermissionTagConfigurationApplied")
+  rowLevelPermissionTagConfigurationApplied: option<boolean_>,
   @ocaml.doc("<p>The row-level security configuration for the dataset.</p>")
   @as("RowLevelPermissionDataSet")
   rowLevelPermissionDataSet: option<rowLevelPermissionDataSet>,
@@ -1209,7 +1525,11 @@ type dashboardPublishOptions = {
   adHocFilteringOption: option<adHocFilteringOption>,
 }
 type dashboardErrorList = array<dashboardError>
-@ocaml.doc("<p>A tag for a column in a <a>TagColumnOperation</a> structure. This is a
+@ocaml.doc("<p>A tag for a column in a
+            <code>
+               <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_TagColumnOperation.html\">TagColumnOperation</a>
+            </code>
+            structure. This is a
             variant type structure. For this structure to be valid, only one of the attributes can
             be non-null.</p>")
 type columnTag = {
@@ -1219,26 +1539,37 @@ type columnTag = {
   columnGeographicRole: option<geoSpatialDataRole>,
 }
 type columnSchemaList = array<columnSchema>
-@ocaml.doc("<p>A rule defined to grant access on one or more restricted columns. 
-            Each dataset can have multiple rules. 
-            To create a restricted column, you add it to one or more rules. 
-            Each rule must contain at least one column and at least one user or group. 
-            To be able to see a restricted column, a user or group needs to be added 
+@ocaml.doc("<p>A rule defined to grant access on one or more restricted columns.
+            Each dataset can have multiple rules.
+            To create a restricted column, you add it to one or more rules.
+            Each rule must contain at least one column and at least one user or group.
+            To be able to see a restricted column, a user or group needs to be added
             to a rule for that column.</p>")
 type columnLevelPermissionRule = {
   @ocaml.doc("<p>An array of column names.</p>") @as("ColumnNames")
   columnNames: option<columnNameList>,
-  @ocaml.doc("<p>An array of Amazon Resource Names (ARNs) for QuickSight users or groups.</p>")
+  @ocaml.doc(
+    "<p>An array of Amazon Resource Names (ARNs) for Amazon QuickSight users or groups.</p>"
+  )
   @as("Principals")
   principals: option<principalList>,
 }
 type columnGroupColumnSchemaList = array<columnGroupColumnSchema>
 type calculatedColumnList = array<calculatedColumn>
+@ocaml.doc(
+  "<p>The type of experience you want to embed. For anonymous users, you can embed Amazon QuickSight dashboards.</p>"
+)
+type anonymousUserEmbeddingExperienceConfiguration = {
+  @ocaml.doc("<p>The type of embedding experience. In this case, Amazon QuickSight dashboards.</p>")
+  @as("Dashboard")
+  dashboard: option<anonymousUserDashboardEmbeddingConfiguration>,
+}
 type analysisSummaryList = array<analysisSummary>
 type analysisSearchFilterList = array<analysisSearchFilter>
 type analysisErrorList = array<analysisError>
 type activeIAMPolicyAssignmentList = array<activeIAMPolicyAssignment>
 type updateResourcePermissionList = array<resourcePermission>
+type updateLinkPermissionList = array<resourcePermission>
 @ocaml.doc("<p>The source analysis of the template.</p>")
 type templateSourceAnalysis = {
   @ocaml.doc("<p>A structure containing information about the dataset references used as placeholders
@@ -1254,15 +1585,32 @@ type sheetStyle = {
   tileLayout: option<tileLayoutStyle>,
   @ocaml.doc("<p>The display options for tiles.</p>") @as("Tile") tile: option<tileStyle>,
 }
-@ocaml.doc("<p>A physical table type for as S3 data source.</p>")
+@ocaml.doc("<p>A physical table type for an S3 data source.</p>")
 type s3Source = {
-  @ocaml.doc("<p>A physical table type for as S3 data source.</p>") @as("InputColumns")
+  @ocaml.doc("<p>A physical table type for an S3 data source.</p>
+        <note>
+            <p>For files that aren't JSON, only <code>STRING</code> data types are supported in input columns.</p>
+        </note>")
+  @as("InputColumns")
   inputColumns: inputColumnList,
   @ocaml.doc("<p>Information about the format for the S3 source file or files.</p>")
   @as("UploadSettings")
   uploadSettings: option<uploadSettings>,
   @ocaml.doc("<p>The Amazon Resource Name (ARN) for the data source.</p>") @as("DataSourceArn")
   dataSourceArn: arn,
+}
+@ocaml.doc("<p>The configuration of tags on a dataset to set row-level security. </p>")
+type rowLevelPermissionTagConfiguration = {
+  @ocaml.doc(
+    "<p>A set of rules associated with row-level security, such as the tag names and columns that they are assigned to.</p>"
+  )
+  @as("TagRules")
+  tagRules: rowLevelPermissionTagRuleList,
+  @ocaml.doc(
+    "<p>The status of row-level security tags. If enabled, the status is <code>ENABLED</code>. If disabled, the status is <code>DISABLED</code>.</p>"
+  )
+  @as("Status")
+  status: option<status>,
 }
 type resourcePermissionList = array<resourcePermission>
 @ocaml.doc("<p>A physical table type for relational data sources.</p>")
@@ -1282,6 +1630,8 @@ type namespaces = array<namespaceInfoV2>
 @ocaml.doc("<p>Information about the source of a logical table. This is a variant type structure. For
             this structure to be valid, only one of the attributes can be non-null.</p>")
 type logicalTableSource = {
+  @ocaml.doc("<p>The Amazon Resource Number (ARN) of the parent dataset.</p>") @as("DataSetArn")
+  dataSetArn: option<arn>,
   @ocaml.doc("<p>Physical table ID.</p>") @as("PhysicalTableId")
   physicalTableId: option<physicalTableId>,
   @ocaml.doc("<p>Specifies the result of a join of two logical tables.</p>") @as("JoinInstruction")
@@ -1289,7 +1639,7 @@ type logicalTableSource = {
 }
 type integerParameterList = array<integerParameter>
 type ingestions = array<ingestion>
-@ocaml.doc("<p>An AWS Identity and Access Management (IAM) policy assignment.</p>")
+@ocaml.doc("<p>An Identity and Access Management (IAM) policy assignment.</p>")
 type iampolicyAssignment = {
   @ocaml.doc("<p>Assignment status.</p>") @as("AssignmentStatus")
   assignmentStatus: option<assignmentStatus>,
@@ -1299,7 +1649,8 @@ type iampolicyAssignment = {
   @ocaml.doc("<p>Assignment name.</p>") @as("AssignmentName")
   assignmentName: option<iampolicyAssignmentName>,
   @ocaml.doc("<p>Assignment ID.</p>") @as("AssignmentId") assignmentId: option<string_>,
-  @ocaml.doc("<p>The AWS account ID.</p>") @as("AwsAccountId") awsAccountId: option<awsAccountId>,
+  @ocaml.doc("<p>The Amazon Web Services account ID.</p>") @as("AwsAccountId")
+  awsAccountId: option<awsAccountId>,
 }
 type fieldFolderMap = Js.Dict.t<fieldFolder>
 type decimalParameterList = array<decimalParameter>
@@ -1308,48 +1659,55 @@ type dateTimeParameterList = array<dateTimeParameter>
             This is a variant type structure. For this structure to be valid, only one of the
             attributes can be non-null.</p>")
 type dataSourceParameters = {
-  @ocaml.doc("<p>Twitter parameters.</p>") @as("TwitterParameters")
+  @ocaml.doc("<p>The parameters for Exasol.</p>") @as("ExasolParameters")
+  exasolParameters: option<exasolParameters>,
+  @ocaml.doc("<p>The parameters for OpenSearch.</p>") @as("AmazonOpenSearchParameters")
+  amazonOpenSearchParameters: option<amazonOpenSearchParameters>,
+  @ocaml.doc("<p>The parameters for Twitter.</p>") @as("TwitterParameters")
   twitterParameters: option<twitterParameters>,
-  @ocaml.doc("<p>Teradata parameters.</p>") @as("TeradataParameters")
+  @ocaml.doc("<p>The parameters for Teradata.</p>") @as("TeradataParameters")
   teradataParameters: option<teradataParameters>,
-  @ocaml.doc("<p>SQL Server parameters.</p>") @as("SqlServerParameters")
+  @ocaml.doc("<p>The parameters for SQL Server.</p>") @as("SqlServerParameters")
   sqlServerParameters: option<sqlServerParameters>,
-  @ocaml.doc("<p>Spark parameters.</p>") @as("SparkParameters")
+  @ocaml.doc("<p>The parameters for Spark.</p>") @as("SparkParameters")
   sparkParameters: option<sparkParameters>,
-  @ocaml.doc("<p>Snowflake parameters.</p>") @as("SnowflakeParameters")
+  @ocaml.doc("<p>The parameters for Snowflake.</p>") @as("SnowflakeParameters")
   snowflakeParameters: option<snowflakeParameters>,
-  @ocaml.doc("<p>ServiceNow parameters.</p>") @as("ServiceNowParameters")
+  @ocaml.doc("<p>The parameters for ServiceNow.</p>") @as("ServiceNowParameters")
   serviceNowParameters: option<serviceNowParameters>,
-  @ocaml.doc("<p>S3 parameters.</p>") @as("S3Parameters") s3Parameters: option<s3Parameters>,
-  @ocaml.doc("<p>Amazon Redshift parameters.</p>") @as("RedshiftParameters")
+  @ocaml.doc("<p>The parameters for S3.</p>") @as("S3Parameters")
+  s3Parameters: option<s3Parameters>,
+  @ocaml.doc("<p>The parameters for Amazon Redshift.</p>") @as("RedshiftParameters")
   redshiftParameters: option<redshiftParameters>,
-  @ocaml.doc("<p>Amazon RDS parameters.</p>") @as("RdsParameters")
+  @ocaml.doc("<p>The parameters for Amazon RDS.</p>") @as("RdsParameters")
   rdsParameters: option<rdsParameters>,
-  @ocaml.doc("<p>Presto parameters.</p>") @as("PrestoParameters")
+  @ocaml.doc("<p>The parameters for Presto.</p>") @as("PrestoParameters")
   prestoParameters: option<prestoParameters>,
-  @ocaml.doc("<p>PostgreSQL parameters.</p>") @as("PostgreSqlParameters")
+  @ocaml.doc("<p>The parameters for PostgreSQL.</p>") @as("PostgreSqlParameters")
   postgreSqlParameters: option<postgreSqlParameters>,
-  @ocaml.doc("<p>Oracle parameters.</p>") @as("OracleParameters")
+  @ocaml.doc("<p>The parameters for Oracle.</p>") @as("OracleParameters")
   oracleParameters: option<oracleParameters>,
-  @ocaml.doc("<p>MySQL parameters.</p>") @as("MySqlParameters")
+  @ocaml.doc("<p>The parameters for MySQL.</p>") @as("MySqlParameters")
   mySqlParameters: option<mySqlParameters>,
-  @ocaml.doc("<p>MariaDB parameters.</p>") @as("MariaDbParameters")
+  @ocaml.doc("<p>The parameters for MariaDB.</p>") @as("MariaDbParameters")
   mariaDbParameters: option<mariaDbParameters>,
-  @ocaml.doc("<p>Jira parameters.</p>") @as("JiraParameters")
+  @ocaml.doc("<p>The parameters for Jira.</p>") @as("JiraParameters")
   jiraParameters: option<jiraParameters>,
-  @ocaml.doc("<p>AWS IoT Analytics parameters.</p>") @as("AwsIotAnalyticsParameters")
+  @ocaml.doc("<p>The parameters for IoT Analytics.</p>") @as("AwsIotAnalyticsParameters")
   awsIotAnalyticsParameters: option<awsIotAnalyticsParameters>,
-  @ocaml.doc("<p>Aurora PostgreSQL parameters.</p>") @as("AuroraPostgreSqlParameters")
+  @ocaml.doc("<p>The parameters for Amazon Aurora.</p>") @as("AuroraPostgreSqlParameters")
   auroraPostgreSqlParameters: option<auroraPostgreSqlParameters>,
-  @ocaml.doc("<p>Amazon Aurora MySQL parameters.</p>") @as("AuroraParameters")
+  @ocaml.doc("<p>The parameters for Amazon Aurora MySQL.</p>") @as("AuroraParameters")
   auroraParameters: option<auroraParameters>,
-  @ocaml.doc("<p>Amazon Athena parameters.</p>") @as("AthenaParameters")
+  @ocaml.doc("<p>The parameters for Amazon Athena.</p>") @as("AthenaParameters")
   athenaParameters: option<athenaParameters>,
-  @ocaml.doc("<p>Amazon Elasticsearch Service parameters.</p>") @as("AmazonElasticsearchParameters")
+  @ocaml.doc("<p>The parameters for OpenSearch.</p>") @as("AmazonElasticsearchParameters")
   amazonElasticsearchParameters: option<amazonElasticsearchParameters>,
 }
 module DataSourceParameters = {
   type t =
+    | ExasolParameters(exasolParameters)
+    | AmazonOpenSearchParameters(amazonOpenSearchParameters)
     | TwitterParameters(twitterParameters)
     | TeradataParameters(teradataParameters)
     | SqlServerParameters(sqlServerParameters)
@@ -1373,6 +1731,8 @@ module DataSourceParameters = {
   exception DataSourceParametersUnspecified
   let classify = value =>
     switch value {
+    | {exasolParameters: Some(x)} => ExasolParameters(x)
+    | {amazonOpenSearchParameters: Some(x)} => AmazonOpenSearchParameters(x)
     | {twitterParameters: Some(x)} => TwitterParameters(x)
     | {teradataParameters: Some(x)} => TeradataParameters(x)
     | {sqlServerParameters: Some(x)} => SqlServerParameters(x)
@@ -1398,8 +1758,58 @@ module DataSourceParameters = {
 
   let make = value =>
     switch value {
+    | ExasolParameters(x) => {
+        exasolParameters: Some(x),
+        amazonOpenSearchParameters: None,
+        twitterParameters: None,
+        teradataParameters: None,
+        sqlServerParameters: None,
+        sparkParameters: None,
+        snowflakeParameters: None,
+        serviceNowParameters: None,
+        s3Parameters: None,
+        redshiftParameters: None,
+        rdsParameters: None,
+        prestoParameters: None,
+        postgreSqlParameters: None,
+        oracleParameters: None,
+        mySqlParameters: None,
+        mariaDbParameters: None,
+        jiraParameters: None,
+        awsIotAnalyticsParameters: None,
+        auroraPostgreSqlParameters: None,
+        auroraParameters: None,
+        athenaParameters: None,
+        amazonElasticsearchParameters: None,
+      }
+    | AmazonOpenSearchParameters(x) => {
+        amazonOpenSearchParameters: Some(x),
+        exasolParameters: None,
+        twitterParameters: None,
+        teradataParameters: None,
+        sqlServerParameters: None,
+        sparkParameters: None,
+        snowflakeParameters: None,
+        serviceNowParameters: None,
+        s3Parameters: None,
+        redshiftParameters: None,
+        rdsParameters: None,
+        prestoParameters: None,
+        postgreSqlParameters: None,
+        oracleParameters: None,
+        mySqlParameters: None,
+        mariaDbParameters: None,
+        jiraParameters: None,
+        awsIotAnalyticsParameters: None,
+        auroraPostgreSqlParameters: None,
+        auroraParameters: None,
+        athenaParameters: None,
+        amazonElasticsearchParameters: None,
+      }
     | TwitterParameters(x) => {
         twitterParameters: Some(x),
+        exasolParameters: None,
+        amazonOpenSearchParameters: None,
         teradataParameters: None,
         sqlServerParameters: None,
         sparkParameters: None,
@@ -1422,6 +1832,8 @@ module DataSourceParameters = {
       }
     | TeradataParameters(x) => {
         teradataParameters: Some(x),
+        exasolParameters: None,
+        amazonOpenSearchParameters: None,
         twitterParameters: None,
         sqlServerParameters: None,
         sparkParameters: None,
@@ -1444,6 +1856,8 @@ module DataSourceParameters = {
       }
     | SqlServerParameters(x) => {
         sqlServerParameters: Some(x),
+        exasolParameters: None,
+        amazonOpenSearchParameters: None,
         twitterParameters: None,
         teradataParameters: None,
         sparkParameters: None,
@@ -1466,6 +1880,8 @@ module DataSourceParameters = {
       }
     | SparkParameters(x) => {
         sparkParameters: Some(x),
+        exasolParameters: None,
+        amazonOpenSearchParameters: None,
         twitterParameters: None,
         teradataParameters: None,
         sqlServerParameters: None,
@@ -1488,6 +1904,8 @@ module DataSourceParameters = {
       }
     | SnowflakeParameters(x) => {
         snowflakeParameters: Some(x),
+        exasolParameters: None,
+        amazonOpenSearchParameters: None,
         twitterParameters: None,
         teradataParameters: None,
         sqlServerParameters: None,
@@ -1510,6 +1928,8 @@ module DataSourceParameters = {
       }
     | ServiceNowParameters(x) => {
         serviceNowParameters: Some(x),
+        exasolParameters: None,
+        amazonOpenSearchParameters: None,
         twitterParameters: None,
         teradataParameters: None,
         sqlServerParameters: None,
@@ -1532,6 +1952,8 @@ module DataSourceParameters = {
       }
     | S3Parameters(x) => {
         s3Parameters: Some(x),
+        exasolParameters: None,
+        amazonOpenSearchParameters: None,
         twitterParameters: None,
         teradataParameters: None,
         sqlServerParameters: None,
@@ -1554,6 +1976,8 @@ module DataSourceParameters = {
       }
     | RedshiftParameters(x) => {
         redshiftParameters: Some(x),
+        exasolParameters: None,
+        amazonOpenSearchParameters: None,
         twitterParameters: None,
         teradataParameters: None,
         sqlServerParameters: None,
@@ -1576,6 +2000,8 @@ module DataSourceParameters = {
       }
     | RdsParameters(x) => {
         rdsParameters: Some(x),
+        exasolParameters: None,
+        amazonOpenSearchParameters: None,
         twitterParameters: None,
         teradataParameters: None,
         sqlServerParameters: None,
@@ -1598,6 +2024,8 @@ module DataSourceParameters = {
       }
     | PrestoParameters(x) => {
         prestoParameters: Some(x),
+        exasolParameters: None,
+        amazonOpenSearchParameters: None,
         twitterParameters: None,
         teradataParameters: None,
         sqlServerParameters: None,
@@ -1620,6 +2048,8 @@ module DataSourceParameters = {
       }
     | PostgreSqlParameters(x) => {
         postgreSqlParameters: Some(x),
+        exasolParameters: None,
+        amazonOpenSearchParameters: None,
         twitterParameters: None,
         teradataParameters: None,
         sqlServerParameters: None,
@@ -1642,6 +2072,8 @@ module DataSourceParameters = {
       }
     | OracleParameters(x) => {
         oracleParameters: Some(x),
+        exasolParameters: None,
+        amazonOpenSearchParameters: None,
         twitterParameters: None,
         teradataParameters: None,
         sqlServerParameters: None,
@@ -1664,6 +2096,8 @@ module DataSourceParameters = {
       }
     | MySqlParameters(x) => {
         mySqlParameters: Some(x),
+        exasolParameters: None,
+        amazonOpenSearchParameters: None,
         twitterParameters: None,
         teradataParameters: None,
         sqlServerParameters: None,
@@ -1686,6 +2120,8 @@ module DataSourceParameters = {
       }
     | MariaDbParameters(x) => {
         mariaDbParameters: Some(x),
+        exasolParameters: None,
+        amazonOpenSearchParameters: None,
         twitterParameters: None,
         teradataParameters: None,
         sqlServerParameters: None,
@@ -1708,6 +2144,8 @@ module DataSourceParameters = {
       }
     | JiraParameters(x) => {
         jiraParameters: Some(x),
+        exasolParameters: None,
+        amazonOpenSearchParameters: None,
         twitterParameters: None,
         teradataParameters: None,
         sqlServerParameters: None,
@@ -1730,6 +2168,8 @@ module DataSourceParameters = {
       }
     | AwsIotAnalyticsParameters(x) => {
         awsIotAnalyticsParameters: Some(x),
+        exasolParameters: None,
+        amazonOpenSearchParameters: None,
         twitterParameters: None,
         teradataParameters: None,
         sqlServerParameters: None,
@@ -1752,6 +2192,8 @@ module DataSourceParameters = {
       }
     | AuroraPostgreSqlParameters(x) => {
         auroraPostgreSqlParameters: Some(x),
+        exasolParameters: None,
+        amazonOpenSearchParameters: None,
         twitterParameters: None,
         teradataParameters: None,
         sqlServerParameters: None,
@@ -1774,6 +2216,8 @@ module DataSourceParameters = {
       }
     | AuroraParameters(x) => {
         auroraParameters: Some(x),
+        exasolParameters: None,
+        amazonOpenSearchParameters: None,
         twitterParameters: None,
         teradataParameters: None,
         sqlServerParameters: None,
@@ -1796,6 +2240,8 @@ module DataSourceParameters = {
       }
     | AthenaParameters(x) => {
         athenaParameters: Some(x),
+        exasolParameters: None,
+        amazonOpenSearchParameters: None,
         twitterParameters: None,
         teradataParameters: None,
         sqlServerParameters: None,
@@ -1818,6 +2264,8 @@ module DataSourceParameters = {
       }
     | AmazonElasticsearchParameters(x) => {
         amazonElasticsearchParameters: Some(x),
+        exasolParameters: None,
+        amazonOpenSearchParameters: None,
         twitterParameters: None,
         teradataParameters: None,
         sqlServerParameters: None,
@@ -1960,9 +2408,9 @@ type templateSourceEntity = {
 }
 @ocaml.doc("<p>A transform operation that tags a column with additional information.</p>")
 type tagColumnOperation = {
-  @ocaml.doc("<p>The dataset column tag, currently only used for geospatial type tagging. .</p>
+  @ocaml.doc("<p>The dataset column tag, currently only used for geospatial type tagging.</p>
         <note>
-            <p>This is not tags for the AWS tagging feature. .</p>
+            <p>This is not tags for the Amazon Web Services tagging feature.</p>
         </note>")
   @as("Tags")
   tags: columnTagList,
@@ -1999,16 +2447,24 @@ module PhysicalTable = {
     | RelationalTable(x) => {relationalTable: Some(x), s3Source: None, customSql: None}
     }
 }
-@ocaml.doc("<p>A list of QuickSight parameters and the list's override values.</p>")
+@ocaml.doc("<p>A list of Amazon QuickSight parameters and the list's override values.</p>")
 type parameters = {
-  @ocaml.doc("<p>Date-time parameters.</p>") @as("DateTimeParameters")
+  @ocaml.doc("<p>The parameters that have a data type of date-time.</p>") @as("DateTimeParameters")
   dateTimeParameters: option<dateTimeParameterList>,
-  @ocaml.doc("<p>Decimal parameters.</p>") @as("DecimalParameters")
+  @ocaml.doc("<p>The parameters that have a data type of decimal.</p>") @as("DecimalParameters")
   decimalParameters: option<decimalParameterList>,
-  @ocaml.doc("<p>Integer parameters.</p>") @as("IntegerParameters")
+  @ocaml.doc("<p>The parameters that have a data type of integer.</p>") @as("IntegerParameters")
   integerParameters: option<integerParameterList>,
-  @ocaml.doc("<p>String parameters.</p>") @as("StringParameters")
+  @ocaml.doc("<p>The parameters that have a data type of string.</p>") @as("StringParameters")
   stringParameters: option<stringParameterList>,
+}
+@ocaml.doc(
+  "<p>A structure that contains the configuration of a shareable link to the dashboard.</p>"
+)
+type linkSharingConfiguration = {
+  @ocaml.doc("<p>A structure that contains the permissions of a shareable link.</p>")
+  @as("Permissions")
+  permissions: option<resourcePermissionList>,
 }
 type dataSourceParametersList = array<dataSourceParameters>
 @ocaml.doc("<p>Dashboard source entity.</p>")
@@ -2040,6 +2496,7 @@ type analysisSourceEntity = {
 @ocaml.doc("<p>A data transformation on a logical table. This is a variant type structure. For this
             structure to be valid, only one of the attributes can be non-null.</p>")
 type transformOperation = {
+  @as("UntagColumnOperation") untagColumnOperation: option<untagColumnOperation>,
   @ocaml.doc("<p>An operation that tags a column with additional information.</p>")
   @as("TagColumnOperation")
   tagColumnOperation: option<tagColumnOperation>,
@@ -2062,6 +2519,7 @@ type transformOperation = {
 }
 module TransformOperation = {
   type t =
+    | UntagColumnOperation(untagColumnOperation)
     | TagColumnOperation(tagColumnOperation)
     | CastColumnTypeOperation(castColumnTypeOperation)
     | RenameColumnOperation(renameColumnOperation)
@@ -2071,6 +2529,7 @@ module TransformOperation = {
   exception TransformOperationUnspecified
   let classify = value =>
     switch value {
+    | {untagColumnOperation: Some(x)} => UntagColumnOperation(x)
     | {tagColumnOperation: Some(x)} => TagColumnOperation(x)
     | {castColumnTypeOperation: Some(x)} => CastColumnTypeOperation(x)
     | {renameColumnOperation: Some(x)} => RenameColumnOperation(x)
@@ -2082,8 +2541,18 @@ module TransformOperation = {
 
   let make = value =>
     switch value {
+    | UntagColumnOperation(x) => {
+        untagColumnOperation: Some(x),
+        tagColumnOperation: None,
+        castColumnTypeOperation: None,
+        renameColumnOperation: None,
+        createColumnsOperation: None,
+        filterOperation: None,
+        projectOperation: None,
+      }
     | TagColumnOperation(x) => {
         tagColumnOperation: Some(x),
+        untagColumnOperation: None,
         castColumnTypeOperation: None,
         renameColumnOperation: None,
         createColumnsOperation: None,
@@ -2092,6 +2561,7 @@ module TransformOperation = {
       }
     | CastColumnTypeOperation(x) => {
         castColumnTypeOperation: Some(x),
+        untagColumnOperation: None,
         tagColumnOperation: None,
         renameColumnOperation: None,
         createColumnsOperation: None,
@@ -2100,6 +2570,7 @@ module TransformOperation = {
       }
     | RenameColumnOperation(x) => {
         renameColumnOperation: Some(x),
+        untagColumnOperation: None,
         tagColumnOperation: None,
         castColumnTypeOperation: None,
         createColumnsOperation: None,
@@ -2108,6 +2579,7 @@ module TransformOperation = {
       }
     | CreateColumnsOperation(x) => {
         createColumnsOperation: Some(x),
+        untagColumnOperation: None,
         tagColumnOperation: None,
         castColumnTypeOperation: None,
         renameColumnOperation: None,
@@ -2116,6 +2588,7 @@ module TransformOperation = {
       }
     | FilterOperation(x) => {
         filterOperation: Some(x),
+        untagColumnOperation: None,
         tagColumnOperation: None,
         castColumnTypeOperation: None,
         renameColumnOperation: None,
@@ -2124,6 +2597,7 @@ module TransformOperation = {
       }
     | ProjectOperation(x) => {
         projectOperation: Some(x),
+        untagColumnOperation: None,
         tagColumnOperation: None,
         castColumnTypeOperation: None,
         renameColumnOperation: None,
@@ -2144,7 +2618,7 @@ type themeVersion = {
   @ocaml.doc("<p>The date and time that this theme version was created.</p>") @as("CreatedTime")
   createdTime: option<timestamp_>,
   @ocaml.doc("<p>The Amazon QuickSight-defined ID of the theme that a custom theme inherits from. All
-            themes initially inherit from a default QuickSight theme.</p>")
+            themes initially inherit from a default Amazon QuickSight theme.</p>")
   @as("BaseThemeId")
   baseThemeId: option<restrictiveResourceId>,
   @ocaml.doc("<p>The description of the theme.</p>") @as("Description")
@@ -2159,12 +2633,12 @@ type dataSource = {
   @ocaml.doc("<p>Error information from the last update or the creation of the data source.</p>")
   @as("ErrorInfo")
   errorInfo: option<dataSourceErrorInfo>,
-  @ocaml.doc("<p>Secure Socket Layer (SSL) properties that apply when QuickSight connects to your
+  @ocaml.doc("<p>Secure Socket Layer (SSL) properties that apply when Amazon QuickSight connects to your
             underlying source.</p>")
   @as("SslProperties")
   sslProperties: option<sslProperties>,
   @ocaml.doc("<p>The VPC connection information. You need to use this parameter only when you want
-            QuickSight to use a VPC connection when connecting to your underlying source.</p>")
+            Amazon QuickSight to use a VPC connection when connecting to your underlying source.</p>")
   @as("VpcConnectionProperties")
   vpcConnectionProperties: option<vpcConnectionProperties>,
   @ocaml.doc("<p>A set of alternate data source parameters that you want to share for the credentials
@@ -2193,8 +2667,8 @@ type dataSource = {
   @as("Type")
   type_: option<dataSourceType>,
   @ocaml.doc("<p>A display name for the data source.</p>") @as("Name") name: option<resourceName>,
-  @ocaml.doc("<p>The ID of the data source. This ID is unique per AWS Region for each AWS
-            account.</p>")
+  @ocaml.doc("<p>The ID of the data source. This ID is unique per Amazon Web Services Region for each
+            Amazon Web Services account.</p>")
   @as("DataSourceId")
   dataSourceId: option<resourceId>,
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the data source.</p>") @as("Arn")
@@ -2252,7 +2726,10 @@ type dataSourceCredentials = {
             <code>DataSourceCredentials</code> structure.</p>")
   @as("CopySourceArn")
   copySourceArn: option<copySourceArn>,
-  @ocaml.doc("<p>Credential pair. For more information, see <a>CredentialPair</a>.</p>")
+  @ocaml.doc("<p>Credential pair. For more information, see
+            <code>
+               <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_CredentialPair.html\">CredentialPair</a>
+            </code>.</p>")
   @as("CredentialPair")
   credentialPair: option<credentialPair>,
 }
@@ -2296,20 +2773,22 @@ type logicalTable = {
   dataTransforms: option<transformOperationList>,
   @ocaml.doc("<p>A display name for the logical table.</p>") @as("Alias") alias: logicalTableAlias,
 }
-@ocaml.doc("<p>A template object. A <i>template</i> is an entity in QuickSight that
+@ocaml.doc("<p>A template object. A <i>template</i> is an entity in Amazon QuickSight that
             encapsulates the metadata required to create an analysis and that you can use to create
             a dashboard. A template adds a layer of abstraction by using placeholders to replace the
             dataset associated with an analysis. You can use templates to create dashboards by
             replacing dataset placeholders with datasets that follow the same schema that was used
             to create the source analysis and template.</p>
-        <p>You can share templates across AWS accounts by allowing users in other AWS accounts to
+        <p>You can share templates across Amazon Web Services accounts by allowing users in other Amazon Web Services accounts to
             create a template or a dashboard from an existing template.</p>")
 type template = {
   @ocaml.doc("<p>Time when this was created.</p>") @as("CreatedTime")
   createdTime: option<timestamp_>,
   @ocaml.doc("<p>Time when this was last updated.</p>") @as("LastUpdatedTime")
   lastUpdatedTime: option<timestamp_>,
-  @ocaml.doc("<p>The ID for the template. This is unique per AWS Region for each AWS account.</p>")
+  @ocaml.doc(
+    "<p>The ID for the template. This is unique per Amazon Web Services Region for each Amazon Web Services account.</p>"
+  )
   @as("TemplateId")
   templateId: option<restrictiveResourceId>,
   @ocaml.doc("<p>A structure describing the versions of the template.</p>") @as("Version")
@@ -2320,11 +2799,19 @@ type template = {
 type logicalTableMap = Js.Dict.t<logicalTable>
 @ocaml.doc("<p>Dataset.</p>")
 type dataSet = {
+  @ocaml.doc(
+    "<p>The usage configuration to apply to child datasets that reference this dataset as a source.</p>"
+  )
+  @as("DataSetUsageConfiguration")
+  dataSetUsageConfiguration: option<dataSetUsageConfiguration>,
   @ocaml.doc("<p>A set of one or more definitions of a <code>
-               <a>ColumnLevelPermissionRule</a>
+               <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_ColumnLevelPermissionRule.html\">ColumnLevelPermissionRule</a>
             </code>.</p>")
   @as("ColumnLevelPermissionRules")
   columnLevelPermissionRules: option<columnLevelPermissionRuleList>,
+  @ocaml.doc("<p>The element you can use to define tags for row-level security.</p>")
+  @as("RowLevelPermissionTagConfiguration")
+  rowLevelPermissionTagConfiguration: option<rowLevelPermissionTagConfiguration>,
   @ocaml.doc("<p>The row-level security configuration for the dataset.</p>")
   @as("RowLevelPermissionDataSet")
   rowLevelPermissionDataSet: option<rowLevelPermissionDataSet>,
@@ -2365,9 +2852,34 @@ type dataSet = {
 }
 @ocaml.doc("<fullname>Amazon QuickSight API Reference</fullname>
         <p>Amazon QuickSight is a fully managed, serverless business intelligence service for the
-            AWS Cloud that makes it easy to extend data and insights to every user in your
+            Amazon Web Services Cloud that makes it easy to extend data and insights to every user in your
             organization. This API reference contains documentation for a programming interface that
             you can use to manage Amazon QuickSight. </p>")
+module UpdateFolder = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The name of the folder.</p>") @as("Name") name: folderName,
+    @ocaml.doc("<p>The ID of the folder.</p>") @as("FolderId") folderId: restrictiveResourceId,
+    @ocaml.doc(
+      "<p>The ID for the Amazon Web Services account that contains the folder to update.</p>"
+    )
+    @as("AwsAccountId")
+    awsAccountId: awsAccountId,
+  }
+  type response = {
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
+    requestId: option<string_>,
+    @ocaml.doc("<p>The ID of the folder.</p>") @as("FolderId")
+    folderId: option<restrictiveResourceId>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the folder.</p>") @as("Arn") arn: option<arn>,
+    @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
+  }
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "UpdateFolderCommand"
+  let make = (~name, ~folderId, ~awsAccountId, ()) =>
+    new({name: name, folderId: folderId, awsAccountId: awsAccountId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module UpdateDashboardPublishedVersion = {
   type t
   type request = {
@@ -2375,13 +2887,13 @@ module UpdateDashboardPublishedVersion = {
     versionNumber: versionNumber,
     @ocaml.doc("<p>The ID for the dashboard.</p>") @as("DashboardId")
     dashboardId: restrictiveResourceId,
-    @ocaml.doc("<p>The ID of the AWS account that contains the dashboard that you're
+    @ocaml.doc("<p>The ID of the Amazon Web Services account that contains the dashboard that you're
             updating.</p>")
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
   }
   type response = {
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the dashboard.</p>") @as("DashboardArn")
@@ -2399,24 +2911,24 @@ module UpdateDashboardPublishedVersion = {
 module UpdateAccountSettings = {
   type t
   type request = {
-    @ocaml.doc("<p>The email address that you want QuickSight to send notifications to regarding your AWS
-            account or QuickSight subscription.</p>")
+    @ocaml.doc("<p>The email address that you want Amazon QuickSight to send notifications to regarding your
+            Amazon Web Services account or Amazon QuickSight subscription.</p>")
     @as("NotificationEmail")
     notificationEmail: option<string_>,
-    @ocaml.doc("<p>The default namespace for this AWS account. Currently, the default is
-                <code>default</code>. AWS Identity and Access Management (IAM) users that register
-            for the first time with QuickSight provide an email that becomes associated with the
+    @ocaml.doc("<p>The default namespace for this Amazon Web Services account. Currently, the default is
+                <code>default</code>. Identity and Access Management (IAM) users that register
+            for the first time with Amazon QuickSight provide an email that becomes associated with the
             default namespace.</p>")
     @as("DefaultNamespace")
     defaultNamespace: namespace,
-    @ocaml.doc("<p>The ID for the AWS account that contains the QuickSight settings that you want to
+    @ocaml.doc("<p>The ID for the Amazon Web Services account that contains the Amazon QuickSight settings that you want to
             list.</p>")
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
   }
   type response = {
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
   }
   @module("@aws-sdk/client-quicksight") @new
@@ -2435,11 +2947,12 @@ module RestoreAnalysis = {
   type request = {
     @ocaml.doc("<p>The ID of the analysis that you're restoring.</p>") @as("AnalysisId")
     analysisId: restrictiveResourceId,
-    @ocaml.doc("<p>The ID of the AWS account that contains the analysis.</p>") @as("AwsAccountId")
+    @ocaml.doc("<p>The ID of the Amazon Web Services account that contains the analysis.</p>")
+    @as("AwsAccountId")
     awsAccountId: awsAccountId,
   }
   type response = {
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>The ID of the analysis that you're restoring.
         </p>")
@@ -2470,7 +2983,7 @@ module GetSessionEmbedUrl = {
 				           <p>Invited nonfederated users</p>
 			         </li>
             <li>
-				           <p>AWS Identity and Access Management (IAM) users and IAM role-based sessions authenticated
+				           <p>Identity and Access Management (IAM) users and IAM role-based sessions authenticated
                     through Federated Single Sign-On using SAML, OpenID Connect, or IAM
                     federation</p>
 			         </li>
@@ -2484,7 +2997,7 @@ module GetSessionEmbedUrl = {
     )
     @as("SessionLifetimeInMinutes")
     sessionLifetimeInMinutes: option<sessionLifetimeInMinutes>,
-    @ocaml.doc("<p>The URL you use to access the embedded session. The entry point URL is constrained to 
+    @ocaml.doc("<p>The URL you use to access the embedded session. The entry point URL is constrained to
           the following paths:</p>
          <ul>
             <li>
@@ -2510,26 +3023,28 @@ module GetSessionEmbedUrl = {
             <li>
                 <p>
                   <code>/dashboards/<i>DashboardId</i>
-                  </code> - where <code>DashboardId</code> is the actual ID key from the QuickSight console URL of the dashboard</p>
+                  </code> - where <code>DashboardId</code> is the actual ID key from the Amazon QuickSight console URL of the dashboard</p>
             </li>
             <li>
                 <p>
                   <code>/analyses/<i>AnalysisId</i>
-                  </code> - where <code>AnalysisId</code> is the actual ID key from the QuickSight console URL of the analysis</p>
+                  </code> - where <code>AnalysisId</code> is the actual ID key from the Amazon QuickSight console URL of the analysis</p>
             </li>
          </ul>")
     @as("EntryPoint")
     entryPoint: option<entryPoint>,
-    @ocaml.doc("<p>The ID for the AWS account associated with your QuickSight subscription.</p>")
+    @ocaml.doc(
+      "<p>The ID for the Amazon Web Services account associated with your Amazon QuickSight subscription.</p>"
+    )
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
   }
   type response = {
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
     @ocaml.doc("<p>A single-use URL that you can put into your server-side web page to embed your
-			QuickSight session. This URL is valid for 5 minutes. The API operation provides the URL with an
+			Amazon QuickSight session. This URL is valid for 5 minutes. The API operation provides the URL with an
 			<code>auth_code</code> value that enables one (and only one) sign-on to a user session
 			that is valid for 10 hours. </p>")
     @as("EmbedUrl")
@@ -2554,15 +3069,15 @@ module DeleteUserByPrincipalId = {
     @ocaml.doc("<p>The namespace. Currently, you should set this to <code>default</code>.</p>")
     @as("Namespace")
     namespace: namespace,
-    @ocaml.doc("<p>The ID for the AWS account that the user is in. Currently, you use the ID for the AWS
-			account that contains your Amazon QuickSight account.</p>")
+    @ocaml.doc("<p>The ID for the Amazon Web Services account that the user is in. Currently, you use the ID for the
+			Amazon Web Services account that contains your Amazon QuickSight account.</p>")
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
     @ocaml.doc("<p>The principal ID of the user.</p>") @as("PrincipalId") principalId: string_,
   }
   type response = {
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
   }
   @module("@aws-sdk/client-quicksight") @new
@@ -2578,8 +3093,8 @@ module DeleteUser = {
     @ocaml.doc("<p>The namespace. Currently, you should set this to <code>default</code>.</p>")
     @as("Namespace")
     namespace: namespace,
-    @ocaml.doc("<p>The ID for the AWS account that the user is in. Currently, you use the ID for the AWS
-			account that contains your Amazon QuickSight account.</p>")
+    @ocaml.doc("<p>The ID for the Amazon Web Services account that the user is in. Currently, you use the ID for the
+			Amazon Web Services account that contains your Amazon QuickSight account.</p>")
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
     @ocaml.doc("<p>The name of the user that you want to delete.</p>") @as("UserName")
@@ -2587,7 +3102,7 @@ module DeleteUser = {
   }
   type response = {
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
   }
   @module("@aws-sdk/client-quicksight") @new external new: request => t = "DeleteUserCommand"
@@ -2603,7 +3118,9 @@ module DeleteThemeAlias = {
     aliasName: aliasName,
     @ocaml.doc("<p>The ID for the theme that the specified alias is for.</p>") @as("ThemeId")
     themeId: restrictiveResourceId,
-    @ocaml.doc("<p>The ID of the AWS account that contains the theme alias to delete.</p>")
+    @ocaml.doc(
+      "<p>The ID of the Amazon Web Services account that contains the theme alias to delete.</p>"
+    )
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
   }
@@ -2611,7 +3128,7 @@ module DeleteThemeAlias = {
     @ocaml.doc("<p>An ID for the theme associated with the deletion.</p>") @as("ThemeId")
     themeId: option<restrictiveResourceId>,
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc(
       "<p>The Amazon Resource Name (ARN) of the theme resource using the deleted alias.</p>"
@@ -2638,14 +3155,16 @@ module DeleteTheme = {
     versionNumber: option<versionNumber>,
     @ocaml.doc("<p>An ID for the theme that you want to delete.</p>") @as("ThemeId")
     themeId: restrictiveResourceId,
-    @ocaml.doc("<p>The ID of the AWS account that contains the theme that you're deleting.</p>")
+    @ocaml.doc(
+      "<p>The ID of the Amazon Web Services account that contains the theme that you're deleting.</p>"
+    )
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
   }
   type response = {
     @ocaml.doc("<p>An ID for the theme.</p>") @as("ThemeId") themeId: option<restrictiveResourceId>,
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the resource.</p>") @as("Arn")
     arn: option<arn>,
@@ -2667,12 +3186,12 @@ module DeleteTemplateAlias = {
     aliasName: aliasName,
     @ocaml.doc("<p>The ID for the template that the specified alias is for.</p>") @as("TemplateId")
     templateId: restrictiveResourceId,
-    @ocaml.doc("<p>The ID of the AWS account that contains the item to delete.</p>")
+    @ocaml.doc("<p>The ID of the Amazon Web Services account that contains the item to delete.</p>")
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
   }
   type response = {
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the template you want to delete.</p>")
     @as("Arn")
@@ -2694,13 +3213,15 @@ module DeleteTemplate = {
   type t
   type request = {
     @ocaml.doc("<p>Specifies the version of the template that you want to delete.
-			If you don't provide a version number, <code>DeleteTemplate</code> deletes all versions of the template. 
+			If you don't provide a version number, <code>DeleteTemplate</code> deletes all versions of the template.
 	 </p>")
     @as("VersionNumber")
     versionNumber: option<versionNumber>,
     @ocaml.doc("<p>An ID for the template you want to delete.</p>") @as("TemplateId")
     templateId: restrictiveResourceId,
-    @ocaml.doc("<p>The ID of the AWS account that contains the template that you're deleting.</p>")
+    @ocaml.doc(
+      "<p>The ID of the Amazon Web Services account that contains the template that you're deleting.</p>"
+    )
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
   }
@@ -2710,7 +3231,7 @@ module DeleteTemplate = {
     templateId: option<restrictiveResourceId>,
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the resource.</p>") @as("Arn")
     arn: option<arn>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
   }
   @module("@aws-sdk/client-quicksight") @new external new: request => t = "DeleteTemplateCommand"
@@ -2725,14 +3246,14 @@ module DeleteNamespace = {
     @ocaml.doc("<p>The namespace that you want to delete.</p>") @as("Namespace")
     namespace: namespace,
     @ocaml.doc(
-      "<p>The ID for the AWS account that you want to delete the QuickSight namespace from.</p>"
+      "<p>The ID for the Amazon Web Services account that you want to delete the Amazon QuickSight namespace from.</p>"
     )
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
   }
   type response = {
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
   }
   @module("@aws-sdk/client-quicksight") @new external new: request => t = "DeleteNamespaceCommand"
@@ -2748,13 +3269,15 @@ module DeleteIAMPolicyAssignment = {
     namespace: namespace,
     @ocaml.doc("<p>The name of the assignment. </p>") @as("AssignmentName")
     assignmentName: iampolicyAssignmentName,
-    @ocaml.doc("<p>The AWS account ID where you want to delete the IAM policy assignment.</p>")
+    @ocaml.doc(
+      "<p>The Amazon Web Services account ID where you want to delete the IAM policy assignment.</p>"
+    )
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
   }
   type response = {
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>The name of the assignment. </p>") @as("AssignmentName")
     assignmentName: option<iampolicyAssignmentName>,
@@ -2769,11 +3292,11 @@ module DeleteIAMPolicyAssignment = {
 module DeleteGroupMembership = {
   type t
   type request = {
-    @ocaml.doc("<p>The namespace. Currently, you should set this to <code>default</code>.</p>")
+    @ocaml.doc("<p>The namespace of the group that you want to remove a user from.</p>")
     @as("Namespace")
     namespace: namespace,
-    @ocaml.doc("<p>The ID for the AWS account that the group is in. Currently, you use the ID for the AWS
-			account that contains your Amazon QuickSight account.</p>")
+    @ocaml.doc("<p>The ID for the Amazon Web Services account that the group is in. Currently, you use the ID for the
+			Amazon Web Services account that contains your Amazon QuickSight account.</p>")
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
     @ocaml.doc("<p>The name of the group that you want to delete the user from.</p>")
@@ -2785,7 +3308,7 @@ module DeleteGroupMembership = {
   }
   type response = {
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
   }
   @module("@aws-sdk/client-quicksight") @new
@@ -2803,11 +3326,10 @@ module DeleteGroupMembership = {
 module DeleteGroup = {
   type t
   type request = {
-    @ocaml.doc("<p>The namespace. Currently, you should set this to <code>default</code>.</p>")
-    @as("Namespace")
+    @ocaml.doc("<p>The namespace of the group that you want to delete.</p>") @as("Namespace")
     namespace: namespace,
-    @ocaml.doc("<p>The ID for the AWS account that the group is in. Currently, you use the ID for the AWS
-			account that contains your Amazon QuickSight account.</p>")
+    @ocaml.doc("<p>The ID for the Amazon Web Services account that the group is in. Currently, you use the ID for the
+			Amazon Web Services account that contains your Amazon QuickSight account.</p>")
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
     @ocaml.doc("<p>The name of the group that you want to delete.</p>") @as("GroupName")
@@ -2815,7 +3337,7 @@ module DeleteGroup = {
   }
   type response = {
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
   }
   @module("@aws-sdk/client-quicksight") @new external new: request => t = "DeleteGroupCommand"
@@ -2824,22 +3346,79 @@ module DeleteGroup = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module DeleteFolderMembership = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The type of the member, including <code>DASHBOARD</code>, <code>ANALYSIS</code>, and <code>DATASET</code>
+         </p>")
+    @as("MemberType")
+    memberType: memberType,
+    @ocaml.doc(
+      "<p>The ID of the asset (the dashboard, analysis, or dataset) that you want to delete.</p>"
+    )
+    @as("MemberId")
+    memberId: restrictiveResourceId,
+    @ocaml.doc("<p>The Folder ID.</p>") @as("FolderId") folderId: restrictiveResourceId,
+    @ocaml.doc("<p>The ID for the Amazon Web Services account that contains the folder.</p>")
+    @as("AwsAccountId")
+    awsAccountId: awsAccountId,
+  }
+  type response = {
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
+    requestId: option<string_>,
+    @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
+  }
+  @module("@aws-sdk/client-quicksight") @new
+  external new: request => t = "DeleteFolderMembershipCommand"
+  let make = (~memberType, ~memberId, ~folderId, ~awsAccountId, ()) =>
+    new({
+      memberType: memberType,
+      memberId: memberId,
+      folderId: folderId,
+      awsAccountId: awsAccountId,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module DeleteFolder = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The ID of the folder.</p>") @as("FolderId") folderId: restrictiveResourceId,
+    @ocaml.doc("<p>The ID for the Amazon Web Services account that contains the folder.</p>")
+    @as("AwsAccountId")
+    awsAccountId: awsAccountId,
+  }
+  type response = {
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
+    requestId: option<string_>,
+    @ocaml.doc("<p>The ID of the folder.</p>") @as("FolderId")
+    folderId: option<restrictiveResourceId>,
+    @ocaml.doc("<p>The Amazon Resource Name of the deleted folder.</p>") @as("Arn")
+    arn: option<arn>,
+    @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
+  }
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "DeleteFolderCommand"
+  let make = (~folderId, ~awsAccountId, ()) => new({folderId: folderId, awsAccountId: awsAccountId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module DeleteDataSource = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The ID of the data source. This ID is unique per AWS Region for each AWS account.</p>"
+      "<p>The ID of the data source. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>"
     )
     @as("DataSourceId")
     dataSourceId: resourceId,
-    @ocaml.doc("<p>The AWS account ID.</p>") @as("AwsAccountId") awsAccountId: awsAccountId,
+    @ocaml.doc("<p>The Amazon Web Services account ID.</p>") @as("AwsAccountId")
+    awsAccountId: awsAccountId,
   }
   type response = {
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc(
-      "<p>The ID of the data source. This ID is unique per AWS Region for each AWS account.</p>"
+      "<p>The ID of the data source. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>"
     )
     @as("DataSourceId")
     dataSourceId: option<resourceId>,
@@ -2857,18 +3436,19 @@ module DeleteDataSet = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The ID for the dataset that you want to create. This ID is unique per AWS Region for each AWS account.</p>"
+      "<p>The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>"
     )
     @as("DataSetId")
     dataSetId: resourceId,
-    @ocaml.doc("<p>The AWS account ID.</p>") @as("AwsAccountId") awsAccountId: awsAccountId,
+    @ocaml.doc("<p>The Amazon Web Services account ID.</p>") @as("AwsAccountId")
+    awsAccountId: awsAccountId,
   }
   type response = {
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc(
-      "<p>The ID for the dataset that you want to create. This ID is unique per AWS Region for each AWS account.</p>"
+      "<p>The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>"
     )
     @as("DataSetId")
     dataSetId: option<resourceId>,
@@ -2889,13 +3469,13 @@ module DeleteDashboard = {
     versionNumber: option<versionNumber>,
     @ocaml.doc("<p>The ID for the dashboard.</p>") @as("DashboardId")
     dashboardId: restrictiveResourceId,
-    @ocaml.doc("<p>The ID of the AWS account that contains the dashboard that you're
+    @ocaml.doc("<p>The ID of the Amazon Web Services account that contains the dashboard that you're
             deleting.</p>")
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
   }
   type response = {
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>The ID of the dashboard.</p>") @as("DashboardId")
     dashboardId: option<restrictiveResourceId>,
@@ -2918,19 +3498,21 @@ module DeleteAnalysis = {
             You can't restore an analysis after it's deleted. </p>")
     @as("ForceDeleteWithoutRecovery")
     forceDeleteWithoutRecovery: option<boolean_>,
-    @ocaml.doc("<p>A value that specifies the number of days that QuickSight waits before it deletes the
+    @ocaml.doc("<p>A value that specifies the number of days that Amazon QuickSight waits before it deletes the
             analysis. You can't use this parameter with the <code>ForceDeleteWithoutRecovery</code>
             option in the same API call. The default value is 30.</p>")
     @as("RecoveryWindowInDays")
     recoveryWindowInDays: option<recoveryWindowInDays>,
     @ocaml.doc("<p>The ID of the analysis that you're deleting.</p>") @as("AnalysisId")
     analysisId: restrictiveResourceId,
-    @ocaml.doc("<p>The ID of the AWS account where you want to delete an analysis.</p>")
+    @ocaml.doc(
+      "<p>The ID of the Amazon Web Services account where you want to delete an analysis.</p>"
+    )
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
   }
   type response = {
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>The date and time that the analysis is scheduled to be deleted.</p>")
     @as("DeletionTime")
@@ -2961,17 +3543,19 @@ module DeleteAnalysis = {
 module DeleteAccountCustomization = {
   type t
   type request = {
-    @ocaml.doc("<p>The QuickSight namespace that you're deleting the customizations from.</p>")
+    @ocaml.doc(
+      "<p>The Amazon QuickSight namespace that you're deleting the customizations from.</p>"
+    )
     @as("Namespace")
     namespace: option<namespace>,
-    @ocaml.doc("<p>The ID for the AWS account that you want to delete QuickSight customizations from in
-            this AWS Region.</p>")
+    @ocaml.doc("<p>The ID for the Amazon Web Services account that you want to delete Amazon QuickSight customizations from in
+            this Amazon Web Services Region.</p>")
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
   }
   type response = {
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
   }
   @module("@aws-sdk/client-quicksight") @new
@@ -2984,14 +3568,17 @@ module DeleteAccountCustomization = {
 module CreateIngestion = {
   type t
   type request = {
-    @ocaml.doc("<p>The AWS account ID.</p>") @as("AwsAccountId") awsAccountId: awsAccountId,
+    @ocaml.doc("<p>The type of ingestion that you want to create.</p>") @as("IngestionType")
+    ingestionType: option<ingestionType>,
+    @ocaml.doc("<p>The Amazon Web Services account ID.</p>") @as("AwsAccountId")
+    awsAccountId: awsAccountId,
     @ocaml.doc("<p>An ID for the ingestion.</p>") @as("IngestionId") ingestionId: ingestionId,
     @ocaml.doc("<p>The ID of the dataset used in the ingestion.</p>") @as("DataSetId")
     dataSetId: string_,
   }
   type response = {
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>The ingestion status.</p>") @as("IngestionStatus")
     ingestionStatus: option<ingestionStatus>,
@@ -3001,8 +3588,13 @@ module CreateIngestion = {
     arn: option<arn>,
   }
   @module("@aws-sdk/client-quicksight") @new external new: request => t = "CreateIngestionCommand"
-  let make = (~awsAccountId, ~ingestionId, ~dataSetId, ()) =>
-    new({awsAccountId: awsAccountId, ingestionId: ingestionId, dataSetId: dataSetId})
+  let make = (~awsAccountId, ~ingestionId, ~dataSetId, ~ingestionType=?, ()) =>
+    new({
+      ingestionType: ingestionType,
+      awsAccountId: awsAccountId,
+      ingestionId: ingestionId,
+      dataSetId: dataSetId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -3012,11 +3604,12 @@ module CancelIngestion = {
     @ocaml.doc("<p>An ID for the ingestion.</p>") @as("IngestionId") ingestionId: ingestionId,
     @ocaml.doc("<p>The ID of the dataset used in the ingestion.</p>") @as("DataSetId")
     dataSetId: string_,
-    @ocaml.doc("<p>The AWS account ID.</p>") @as("AwsAccountId") awsAccountId: awsAccountId,
+    @ocaml.doc("<p>The Amazon Web Services account ID.</p>") @as("AwsAccountId")
+    awsAccountId: awsAccountId,
   }
   type response = {
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>An ID for the ingestion.</p>") @as("IngestionId")
     ingestionId: option<ingestionId>,
@@ -3036,11 +3629,11 @@ module UpdateUser = {
     @as("ExternalLoginId")
     externalLoginId: option<string_>,
     @ocaml.doc("<p>The URL of the custom OpenID Connect (OIDC) provider that provides identity to let a user federate
-         into QuickSight with an associated AWS Identity and Access Management (IAM) role. This parameter should
+         into Amazon QuickSight with an associated Identity and Access Management(IAM) role. This parameter should
          only be used when <code>ExternalLoginFederationProviderType</code> parameter is set to <code>CUSTOM_OIDC</code>.</p>")
     @as("CustomFederationProviderUrl")
     customFederationProviderUrl: option<string_>,
-    @ocaml.doc("<p>The type of supported external login provider that provides identity to let a user federate into QuickSight with an associated AWS Identity and Access Management (IAM) role. The type of supported external login provider can be one of the following.</p>
+    @ocaml.doc("<p>The type of supported external login provider that provides identity to let a user federate into Amazon QuickSight with an associated Identity and Access Management(IAM) role. The type of supported external login provider can be one of the following.</p>
          <ul>
             <li>
                <p>
@@ -3052,9 +3645,11 @@ module UpdateUser = {
             </li>
             <li>
                <p>
-                  <code>NONE</code>: This clears all the previously saved external login information for a user. Use <code>
-                     <a>DescribeUser</a>
-                  </code> API to check the external login information.</p>
+                  <code>NONE</code>: This clears all the previously saved external login information for a user. Use the
+          <code>
+                     <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_DescribeUser.html\">DescribeUser</a>
+                  </code>
+          API operation to check the external login information.</p>
             </li>
          </ul>")
     @as("ExternalLoginFederationProviderType")
@@ -3083,14 +3678,13 @@ module UpdateUser = {
             </li>
          </ul>
         <p>A set of custom permissions includes any combination of these restrictions. Currently,
-            you need to create the profile names for custom permission sets by using the QuickSight
+            you need to create the profile names for custom permission sets by using the Amazon QuickSight
             console. Then, you use the <code>RegisterUser</code> API operation to assign the named set of
-            permissions to a QuickSight user. </p>
-        <p>QuickSight custom permissions are applied through IAM policies. Therefore, they
-            override the permissions typically granted by assigning QuickSight users to one of the
-            default security cohorts in QuickSight (admin, author, reader).</p>
-        <p>This feature is available only to QuickSight Enterprise edition subscriptions that use
-            SAML 2.0-Based Federation for Single Sign-On (SSO).</p>")
+            permissions to a Amazon QuickSight user. </p>
+        <p>Amazon QuickSight custom permissions are applied through IAM policies. Therefore, they
+            override the permissions typically granted by assigning Amazon QuickSight users to one of the
+            default security cohorts in Amazon QuickSight (admin, author, reader).</p>
+        <p>This feature is available only to Amazon QuickSight Enterprise edition subscriptions.</p>")
     @as("CustomPermissionsName")
     customPermissionsName: option<roleName>,
     @ocaml.doc("<p>The Amazon QuickSight role of the user. The role can be one of the
@@ -3111,7 +3705,7 @@ module UpdateUser = {
 					settings.</p>
 			         </li>
          </ul>
-	        <p>The name of the QuickSight role is invisible to the user except for the console 
+	        <p>The name of the Amazon QuickSight role is invisible to the user except for the console
 	        screens dealing with permissions.</p>")
     @as("Role")
     role: userRole,
@@ -3120,8 +3714,8 @@ module UpdateUser = {
     @ocaml.doc("<p>The namespace. Currently, you should set this to <code>default</code>.</p>")
     @as("Namespace")
     namespace: namespace,
-    @ocaml.doc("<p>The ID for the AWS account that the user is in. Currently, you use the ID for the AWS
-			account that contains your Amazon QuickSight account.</p>")
+    @ocaml.doc("<p>The ID for the Amazon Web Services account that the user is in. Currently, you use the ID for the
+			Amazon Web Services account that contains your Amazon QuickSight account.</p>")
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
     @ocaml.doc("<p>The Amazon QuickSight user name that you want to update.</p>") @as("UserName")
@@ -3129,7 +3723,7 @@ module UpdateUser = {
   }
   type response = {
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>The Amazon QuickSight user.</p>") @as("User") user: option<user>,
   }
@@ -3172,13 +3766,13 @@ module UpdateThemeAlias = {
     aliasName: aliasName,
     @ocaml.doc("<p>The ID for the theme.</p>") @as("ThemeId") themeId: restrictiveResourceId,
     @ocaml.doc(
-      "<p>The ID of the AWS account that contains the theme alias that you're updating.</p>"
+      "<p>The ID of the Amazon Web Services account that contains the theme alias that you're updating.</p>"
     )
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
   }
   type response = {
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
     @ocaml.doc("<p>Information about the theme alias.</p>") @as("ThemeAlias")
@@ -3209,13 +3803,13 @@ module UpdateTemplateAlias = {
     @ocaml.doc("<p>The ID for the template.</p>") @as("TemplateId")
     templateId: restrictiveResourceId,
     @ocaml.doc(
-      "<p>The ID of the AWS account that contains the template alias that you're updating.</p>"
+      "<p>The ID of the Amazon Web Services account that contains the template alias that you're updating.</p>"
     )
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
   }
   type response = {
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
     @ocaml.doc("<p>The template alias.</p>") @as("TemplateAlias")
@@ -3233,14 +3827,42 @@ module UpdateTemplateAlias = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module UpdateIpRestriction = {
+  type t
+  type request = {
+    @ocaml.doc("<p>A value that specifies whether IP rules are turned on.</p>") @as("Enabled")
+    enabled: option<nullableBoolean>,
+    @ocaml.doc(
+      "<p>A map that describes the updated IP rules with CIDR ranges and descriptions.</p>"
+    )
+    @as("IpRestrictionRuleMap")
+    ipRestrictionRuleMap: option<ipRestrictionRuleMap>,
+    @ocaml.doc("<p>The ID of the Amazon Web Services account that contains the IP rules.</p>")
+    @as("AwsAccountId")
+    awsAccountId: awsAccountId,
+  }
+  type response = {
+    @ocaml.doc("<p>The HTTP status of the request. </p>") @as("Status") status: option<statusCode>,
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
+    requestId: option<string_>,
+    @ocaml.doc("<p>The ID of the Amazon Web Services account that contains the IP rules.</p>")
+    @as("AwsAccountId")
+    awsAccountId: option<awsAccountId>,
+  }
+  @module("@aws-sdk/client-quicksight") @new
+  external new: request => t = "UpdateIpRestrictionCommand"
+  let make = (~awsAccountId, ~enabled=?, ~ipRestrictionRuleMap=?, ()) =>
+    new({enabled: enabled, ipRestrictionRuleMap: ipRestrictionRuleMap, awsAccountId: awsAccountId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module UpdateGroup = {
   type t
   type request = {
-    @ocaml.doc("<p>The namespace. Currently, you should set this to <code>default</code>.</p>")
-    @as("Namespace")
+    @ocaml.doc("<p>The namespace of the group that you want to update.</p>") @as("Namespace")
     namespace: namespace,
-    @ocaml.doc("<p>The ID for the AWS account that the group is in. Currently, you use the ID for the AWS
-			account that contains your Amazon QuickSight account.</p>")
+    @ocaml.doc("<p>The ID for the Amazon Web Services account that the group is in. Currently, you use the ID for the
+			Amazon Web Services account that contains your Amazon QuickSight account.</p>")
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
     @ocaml.doc("<p>The description for the group that you want to update.</p>") @as("Description")
@@ -3250,7 +3872,7 @@ module UpdateGroup = {
   }
   type response = {
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>The name of the group.</p>") @as("Group") group: option<group>,
   }
@@ -3268,33 +3890,37 @@ module UpdateGroup = {
 module UpdateAccountCustomization = {
   type t
   type request = {
-    @ocaml.doc("<p>The QuickSight customizations you're updating in the current AWS Region. </p>")
+    @ocaml.doc(
+      "<p>The Amazon QuickSight customizations you're updating in the current Amazon Web Services Region. </p>"
+    )
     @as("AccountCustomization")
     accountCustomization: accountCustomization,
-    @ocaml.doc("<p>The namespace that you want to update QuickSight customizations for.</p>")
+    @ocaml.doc("<p>The namespace that you want to update Amazon QuickSight customizations for.</p>")
     @as("Namespace")
     namespace: option<namespace>,
-    @ocaml.doc("<p>The ID for the AWS account that you want to update QuickSight customizations
+    @ocaml.doc("<p>The ID for the Amazon Web Services account that you want to update Amazon QuickSight customizations
             for.</p>")
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
   }
   type response = {
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
-    @ocaml.doc("<p>The QuickSight customizations you're updating in the current AWS Region. </p>")
+    @ocaml.doc(
+      "<p>The Amazon QuickSight customizations you're updating in the current Amazon Web Services Region. </p>"
+    )
     @as("AccountCustomization")
     accountCustomization: option<accountCustomization>,
     @ocaml.doc("<p>The namespace associated with the customization that you're updating.</p>")
     @as("Namespace")
     namespace: option<namespace>,
-    @ocaml.doc("<p>The ID for the AWS account that you want to update QuickSight customizations
+    @ocaml.doc("<p>The ID for the Amazon Web Services account that you want to update Amazon QuickSight customizations
             for.</p>")
     @as("AwsAccountId")
     awsAccountId: option<awsAccountId>,
     @ocaml.doc(
-      "<p>The Amazon Resource Name (ARN) for the updated customization for this AWS account.</p>"
+      "<p>The Amazon Resource Name (ARN) for the updated customization for this Amazon Web Services account.</p>"
     )
     @as("Arn")
     arn: option<arn>,
@@ -3324,7 +3950,7 @@ module UntagResource = {
   }
   type response = {
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
   }
   @module("@aws-sdk/client-quicksight") @new external new: request => t = "UntagResourceCommand"
@@ -3339,11 +3965,11 @@ module RegisterUser = {
     @as("ExternalLoginId")
     externalLoginId: option<string_>,
     @ocaml.doc("<p>The URL of the custom OpenID Connect (OIDC) provider that provides identity to let a user federate
-         into QuickSight with an associated AWS Identity and Access Management (IAM) role. This parameter should
+         into Amazon QuickSight with an associated Identity and Access Management(IAM) role. This parameter should
          only be used when <code>ExternalLoginFederationProviderType</code> parameter is set to <code>CUSTOM_OIDC</code>.</p>")
     @as("CustomFederationProviderUrl")
     customFederationProviderUrl: option<string_>,
-    @ocaml.doc("<p>The type of supported external login provider that provides identity to let a user federate into Amazon QuickSight with an associated AWS Identity and Access Management (IAM) role. The type of supported external login provider can be one of the following.</p>
+    @ocaml.doc("<p>The type of supported external login provider that provides identity to let a user federate into Amazon QuickSight with an associated Identity and Access Management(IAM) role. The type of supported external login provider can be one of the following.</p>
          <ul>
             <li>
                <p>
@@ -3374,17 +4000,16 @@ module RegisterUser = {
             </li>
          </ul>
         <p>To add custom permissions to an existing user, use <code>
-               <a>UpdateUser</a>
+               <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_UpdateUser.html\">UpdateUser</a>
             </code> instead.</p>
         <p>A set of custom permissions includes any combination of these restrictions. Currently,
-            you need to create the profile names for custom permission sets by using the QuickSight
+            you need to create the profile names for custom permission sets by using the Amazon QuickSight
             console. Then, you use the <code>RegisterUser</code> API operation to assign the named set of
-            permissions to a QuickSight user. </p>
-        <p>QuickSight custom permissions are applied through IAM policies. Therefore, they
-            override the permissions typically granted by assigning QuickSight users to one of the
-            default security cohorts in QuickSight (admin, author, reader).</p>
-        <p>This feature is available only to QuickSight Enterprise edition subscriptions that use
-            SAML 2.0-Based Federation for Single Sign-On (SSO).</p>")
+            permissions to a Amazon QuickSight user. </p>
+        <p>Amazon QuickSight custom permissions are applied through IAM policies. Therefore, they
+            override the permissions typically granted by assigning Amazon QuickSight users to one of the
+            default security cohorts in Amazon QuickSight (admin, author, reader).</p>
+        <p>This feature is available only to Amazon QuickSight Enterprise edition subscriptions.</p>")
     @as("CustomPermissionsName")
     customPermissionsName: option<roleName>,
     @ocaml.doc("<p>The Amazon QuickSight user name that you want to create for the user you are
@@ -3394,8 +4019,8 @@ module RegisterUser = {
     @ocaml.doc("<p>The namespace. Currently, you should set this to <code>default</code>.</p>")
     @as("Namespace")
     namespace: namespace,
-    @ocaml.doc("<p>The ID for the AWS account that the user is in. Currently, you use the ID for the AWS
-			account that contains your Amazon QuickSight account.</p>")
+    @ocaml.doc("<p>The ID for the Amazon Web Services account that the user is in. Currently, you use the ID for the
+			Amazon Web Services account that contains your Amazon QuickSight account.</p>")
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
     @ocaml.doc("<p>You need to use this parameter only when you register one or more users using an assumed
@@ -3404,7 +4029,7 @@ module RegisterUser = {
 			users using the same IAM role if each user has a different session name. For more
 			information on assuming IAM roles, see <a href=\"https://docs.aws.amazon.com/cli/latest/reference/sts/assume-role.html\">
                <code>assume-role</code>
-            </a> in the <i>AWS CLI Reference.</i>
+            </a> in the <i>CLI Reference.</i>
          </p>")
     @as("SessionName")
     sessionName: option<roleSessionName>,
@@ -3464,7 +4089,7 @@ module RegisterUser = {
   }
   type response = {
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>The URL the user visits to complete registration and provide a password. This is
 			returned only for users with an identity type of <code>QUICKSIGHT</code>.</p>")
@@ -3511,14 +4136,13 @@ module GetDashboardEmbedUrl = {
     @ocaml.doc("<p>A list of one or more dashboard IDs that you want to add to a session that includes
             anonymous users. The <code>IdentityType</code> parameter must be set to
                 <code>ANONYMOUS</code> for this to work, because other identity types authenticate
-            as QuickSight or IAM users. For example, if you set \"<code>--dashboard-id dash_id1
+            as Amazon QuickSight or IAM users. For example, if you set \"<code>--dashboard-id dash_id1
                 --dashboard-id dash_id2 dash_id3 identity-type ANONYMOUS</code>\", the session
             can access all three dashboards. </p>")
     @as("AdditionalDashboardIds")
     additionalDashboardIds: option<additionalDashboardIdList>,
-    @ocaml.doc("<p>The QuickSight namespace that contains the dashboard IDs in this request.
-    	   If you're not using a custom namespace, set this to 
-    	    \"<code>default</code>\".</p>")
+    @ocaml.doc("<p>The Amazon QuickSight namespace that contains the dashboard IDs in this request.
+    	   If you're not using a custom namespace, set <code>Namespace = default</code>.</p>")
     @as("Namespace")
     namespace: option<namespace>,
     @ocaml.doc("<p>The Amazon QuickSight user's Amazon Resource Name (ARN), for use with <code>QUICKSIGHT</code> identity type.
@@ -3542,9 +4166,9 @@ module GetDashboardEmbedUrl = {
     userArn: option<arn>,
     @ocaml.doc("<p>Adds persistence of state for the user session in an embedded dashboard. Persistence
             applies to the sheet and the parameter settings. These are control settings that the
-            dashboard subscriber (QuickSight reader) chooses while viewing the dashboard. If this is
+            dashboard subscriber (Amazon QuickSight reader) chooses while viewing the dashboard. If this is
             set to <code>TRUE</code>, the settings are the same when the subscriber reopens the same
-            dashboard URL. The state is stored in QuickSight, not in a browser cookie. If this is
+            dashboard URL. The state is stored in Amazon QuickSight, not in a browser cookie. If this is
             set to FALSE, the state of the user session is not persisted. The default is
                 <code>FALSE</code>.</p>")
     @as("StatePersistenceEnabled")
@@ -3565,19 +4189,19 @@ module GetDashboardEmbedUrl = {
     @ocaml.doc("<p>The authentication method that the user uses to sign in.</p>")
     @as("IdentityType")
     identityType: embeddingIdentityType,
-    @ocaml.doc("<p>The ID for the dashboard, also added to the AWS Identity and Access Management (IAM)
+    @ocaml.doc("<p>The ID for the dashboard, also added to the Identity and Access Management (IAM)
             policy.</p>")
     @as("DashboardId")
     dashboardId: restrictiveResourceId,
     @ocaml.doc(
-      "<p>The ID for the AWS account that contains the dashboard that you're embedding.</p>"
+      "<p>The ID for the Amazon Web Services account that contains the dashboard that you're embedding.</p>"
     )
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
   }
   @ocaml.doc("<p>Output returned from the <code>GetDashboardEmbedUrl</code> operation.</p>")
   type response = {
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
     @ocaml.doc("<p>A single-use URL that you can put into your server-side webpage to embed your
@@ -3623,8 +4247,8 @@ module DescribeUser = {
     @ocaml.doc("<p>The namespace. Currently, you should set this to <code>default</code>.</p>")
     @as("Namespace")
     namespace: namespace,
-    @ocaml.doc("<p>The ID for the AWS account that the user is in. Currently, you use the ID for the AWS
-			account that contains your Amazon QuickSight account.</p>")
+    @ocaml.doc("<p>The ID for the Amazon Web Services account that the user is in. Currently, you use the ID for the
+			Amazon Web Services account that contains your Amazon QuickSight account.</p>")
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
     @ocaml.doc("<p>The name of the user that you want to describe.</p>") @as("UserName")
@@ -3632,7 +4256,7 @@ module DescribeUser = {
   }
   type response = {
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>The user name.</p>") @as("User") user: option<user>,
   }
@@ -3648,13 +4272,13 @@ module DescribeThemeAlias = {
     @ocaml.doc("<p>The name of the theme alias that you want to describe.</p>") @as("AliasName")
     aliasName: aliasName,
     @ocaml.doc("<p>The ID for the theme.</p>") @as("ThemeId") themeId: restrictiveResourceId,
-    @ocaml.doc("<p>The ID of the AWS account that contains the theme alias that you're
+    @ocaml.doc("<p>The ID of the Amazon Web Services account that contains the theme alias that you're
 			describing.</p>")
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
   }
   type response = {
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
     @ocaml.doc("<p>Information about the theme alias.</p>") @as("ThemeAlias")
@@ -3678,13 +4302,13 @@ module DescribeTemplateAlias = {
     aliasName: aliasName,
     @ocaml.doc("<p>The ID for the template.</p>") @as("TemplateId")
     templateId: restrictiveResourceId,
-    @ocaml.doc("<p>The ID of the AWS account that contains the template alias that you're
+    @ocaml.doc("<p>The ID of the Amazon Web Services account that contains the template alias that you're
 			describing.</p>")
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
   }
   type response = {
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
     @ocaml.doc("<p>Information about the template alias.</p>") @as("TemplateAlias")
@@ -3697,14 +4321,72 @@ module DescribeTemplateAlias = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module DescribeIpRestriction = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The ID of the Amazon Web Services account that contains the IP rules.</p>")
+    @as("AwsAccountId")
+    awsAccountId: awsAccountId,
+  }
+  type response = {
+    @ocaml.doc("<p>The HTTP status of the request. </p>") @as("Status") status: option<statusCode>,
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
+    requestId: option<string_>,
+    @ocaml.doc("<p>A value that specifies whether IP rules are turned on.</p>") @as("Enabled")
+    enabled: option<nullableBoolean>,
+    @ocaml.doc("<p>A map that describes the IP rules with CIDR range and description.</p>")
+    @as("IpRestrictionRuleMap")
+    ipRestrictionRuleMap: option<ipRestrictionRuleMap>,
+    @ocaml.doc("<p>The ID of the Amazon Web Services account that contains the IP rules.</p>")
+    @as("AwsAccountId")
+    awsAccountId: option<awsAccountId>,
+  }
+  @module("@aws-sdk/client-quicksight") @new
+  external new: request => t = "DescribeIpRestrictionCommand"
+  let make = (~awsAccountId, ()) => new({awsAccountId: awsAccountId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module DescribeGroupMembership = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The namespace that includes the group you are searching within.</p>")
+    @as("Namespace")
+    namespace: namespace,
+    @ocaml.doc("<p>The ID for the Amazon Web Services account that the group is in. Currently, you use the ID for the 
+         Amazon Web Services account that contains your Amazon QuickSight account.</p>")
+    @as("AwsAccountId")
+    awsAccountId: awsAccountId,
+    @ocaml.doc("<p>The name of the group that you want to search.</p>") @as("GroupName")
+    groupName: groupName,
+    @ocaml.doc("<p>The user name of the user that you want to search for.</p>") @as("MemberName")
+    memberName: groupMemberName,
+  }
+  type response = {
+    @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
+    requestId: option<string_>,
+    @as("GroupMember") groupMember: option<groupMember>,
+  }
+  @module("@aws-sdk/client-quicksight") @new
+  external new: request => t = "DescribeGroupMembershipCommand"
+  let make = (~namespace, ~awsAccountId, ~groupName, ~memberName, ()) =>
+    new({
+      namespace: namespace,
+      awsAccountId: awsAccountId,
+      groupName: groupName,
+      memberName: memberName,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module DescribeGroup = {
   type t
   type request = {
-    @ocaml.doc("<p>The namespace. Currently, you should set this to <code>default</code>.</p>")
-    @as("Namespace")
+    @ocaml.doc("<p>The namespace of the group that you want described.</p>") @as("Namespace")
     namespace: namespace,
-    @ocaml.doc("<p>The ID for the AWS account that the group is in. Currently, you use the ID for the AWS
-			account that contains your Amazon QuickSight account.</p>")
+    @ocaml.doc("<p>The ID for the Amazon Web Services account that the group is in. Currently, you use the ID for the
+			Amazon Web Services account that contains your Amazon QuickSight account.</p>")
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
     @ocaml.doc("<p>The name of the group that you want to describe.</p>") @as("GroupName")
@@ -3712,7 +4394,7 @@ module DescribeGroup = {
   }
   type response = {
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>The name of the group.</p>") @as("Group") group: option<group>,
   }
@@ -3726,21 +4408,21 @@ module DescribeAccountSettings = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The ID for the AWS account that contains the settings that you want to list.</p>"
+      "<p>The ID for the Amazon Web Services account that contains the settings that you want to list.</p>"
     )
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
   }
   type response = {
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
-    @ocaml.doc("<p>The QuickSight settings for this AWS account. This information includes the edition of Amazon
-            QuickSight that you subscribed to (Standard or Enterprise) and the notification email for the
-            QuickSight subscription. In the QuickSight console, the QuickSight subscription is sometimes
+    @ocaml.doc("<p>The Amazon QuickSight settings for this Amazon Web Services account. This information includes the edition of Amazon
+            Amazon QuickSight that you subscribed to (Standard or Enterprise) and the notification email for the
+            Amazon QuickSight subscription. In the QuickSight console, the Amazon QuickSight subscription is sometimes
             referred to as a QuickSight \"account\" even though it's technically not an account
-            by itself. Instead, it's a subscription to the QuickSight service for your AWS account. The
-            edition that you subscribe to applies to QuickSight in every AWS Region where you use it.</p>")
+            by itself. Instead, it's a subscription to the Amazon QuickSight service for your Amazon Web Services account. The
+            edition that you subscribe to applies to Amazon QuickSight in every Amazon Web Services Region where you use it.</p>")
     @as("AccountSettings")
     accountSettings: option<accountSettings>,
   }
@@ -3754,34 +4436,37 @@ module DescribeAccountCustomization = {
   type t
   type request = {
     @ocaml.doc("<p>The <code>Resolved</code> flag works with the other parameters to determine which view
-            of QuickSight customizations is returned. You can add this flag to your command to use
-            the same view that QuickSight uses to identify which customizations to apply to the
+            of Amazon QuickSight customizations is returned. You can add this flag to your command to use
+            the same view that Amazon QuickSight uses to identify which customizations to apply to the
             console. Omit this flag, or set it to <code>no-resolved</code>, to reveal customizations
             that are configured at different levels. </p>")
     @as("Resolved")
     resolved: option<boolean_>,
-    @ocaml.doc("<p>The QuickSight namespace that you want to describe QuickSight customizations
+    @ocaml.doc("<p>The Amazon QuickSight namespace that you want to describe Amazon QuickSight customizations
             for.</p>")
     @as("Namespace")
     namespace: option<namespace>,
-    @ocaml.doc("<p>The ID for the AWS account that you want to describe QuickSight customizations
+    @ocaml.doc("<p>The ID for the Amazon Web Services account that you want to describe Amazon QuickSight customizations
             for.</p>")
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
   }
   type response = {
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
-    @ocaml.doc("<p>The QuickSight customizations that exist in the current AWS Region. </p>")
+    @ocaml.doc(
+      "<p>The Amazon QuickSight customizations that exist in the current Amazon Web Services Region. </p>"
+    )
     @as("AccountCustomization")
     accountCustomization: option<accountCustomization>,
-    @ocaml.doc("<p>The QuickSight namespace that you're describing. </p>") @as("Namespace")
+    @ocaml.doc("<p>The Amazon QuickSight namespace that you're describing. </p>") @as("Namespace")
     namespace: option<namespace>,
-    @ocaml.doc("<p>The ID for the AWS account that you're describing.</p>") @as("AwsAccountId")
+    @ocaml.doc("<p>The ID for the Amazon Web Services account that you're describing.</p>")
+    @as("AwsAccountId")
     awsAccountId: option<awsAccountId>,
     @ocaml.doc(
-      "<p>The Amazon Resource Name (ARN) of the customization that's associated with this AWS account.</p>"
+      "<p>The Amazon Resource Name (ARN) of the customization that's associated with this Amazon Web Services account.</p>"
     )
     @as("Arn")
     arn: option<arn>,
@@ -3804,12 +4489,14 @@ module CreateThemeAlias = {
     @as("AliasName")
     aliasName: aliasName,
     @ocaml.doc("<p>An ID for the theme alias.</p>") @as("ThemeId") themeId: restrictiveResourceId,
-    @ocaml.doc("<p>The ID of the AWS account that contains the theme for the new theme alias.</p>")
+    @ocaml.doc(
+      "<p>The ID of the Amazon Web Services account that contains the theme for the new theme alias.</p>"
+    )
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
   }
   type response = {
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
     @ocaml.doc("<p>Information about the theme alias.</p>") @as("ThemeAlias")
@@ -3833,19 +4520,19 @@ module CreateTemplateAlias = {
     templateVersionNumber: versionNumber,
     @ocaml.doc("<p>The name that you want to give to the template alias that you're creating. Don't start the
 			alias name with the <code>$</code> character. Alias names that start with <code>$</code>
-			are reserved by QuickSight. </p>")
+			are reserved by Amazon QuickSight. </p>")
     @as("AliasName")
     aliasName: aliasName,
     @ocaml.doc("<p>An ID for the template.</p>") @as("TemplateId")
     templateId: restrictiveResourceId,
     @ocaml.doc(
-      "<p>The ID of the AWS account that contains the template that you creating an alias for.</p>"
+      "<p>The ID of the Amazon Web Services account that contains the template that you creating an alias for.</p>"
     )
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
   }
   type response = {
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
     @ocaml.doc("<p>Information about the template alias.</p>") @as("TemplateAlias")
@@ -3866,11 +4553,10 @@ module CreateTemplateAlias = {
 module CreateGroupMembership = {
   type t
   type request = {
-    @ocaml.doc("<p>The namespace. Currently, you should set this to <code>default</code>.</p>")
-    @as("Namespace")
+    @ocaml.doc("<p>The namespace that you want the user to be a part of.</p>") @as("Namespace")
     namespace: namespace,
-    @ocaml.doc("<p>The ID for the AWS account that the group is in. Currently, you use the ID for the AWS
-			account that contains your Amazon QuickSight account.</p>")
+    @ocaml.doc("<p>The ID for the Amazon Web Services account that the group is in. Currently, you use the ID for the 
+			Amazon Web Services account that contains your Amazon QuickSight account.</p>")
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
     @ocaml.doc("<p>The name of the group that you want to add the user to.</p>") @as("GroupName")
@@ -3881,7 +4567,7 @@ module CreateGroupMembership = {
   }
   type response = {
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>The group member.</p>") @as("GroupMember") groupMember: option<groupMember>,
   }
@@ -3901,11 +4587,10 @@ module CreateGroup = {
   type t
   @ocaml.doc("<p>The request object for this operation. </p>")
   type request = {
-    @ocaml.doc("<p>The namespace. Currently, you should set this to <code>default</code>.</p>")
-    @as("Namespace")
+    @ocaml.doc("<p>The namespace that you want the group to be a part of.</p>") @as("Namespace")
     namespace: namespace,
-    @ocaml.doc("<p>The ID for the AWS account that the group is in. Currently, you use the ID for the AWS
-			account that contains your Amazon QuickSight account.</p>")
+    @ocaml.doc("<p>The ID for the Amazon Web Services account that the group is in. Currently, you use the ID for the
+			Amazon Web Services account that contains your Amazon QuickSight account.</p>")
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
     @ocaml.doc("<p>A description for the group that you want to create.</p>") @as("Description")
@@ -3916,7 +4601,7 @@ module CreateGroup = {
   @ocaml.doc("<p>The response object for this operation.</p>")
   type response = {
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>The name of the group.</p>") @as("Group") group: option<group>,
   }
@@ -3931,15 +4616,49 @@ module CreateGroup = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module CreateFolderMembership = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>The type of the member, including <code>DASHBOARD</code>, <code>ANALYSIS</code>, and <code>DATASET</code>.</p>"
+    )
+    @as("MemberType")
+    memberType: memberType,
+    @ocaml.doc("<p>The ID of the asset (the dashboard, analysis, or dataset).</p>") @as("MemberId")
+    memberId: restrictiveResourceId,
+    @ocaml.doc("<p>The ID of the folder.</p>") @as("FolderId") folderId: restrictiveResourceId,
+    @ocaml.doc("<p>The ID for the Amazon Web Services account that contains the folder.</p>")
+    @as("AwsAccountId")
+    awsAccountId: awsAccountId,
+  }
+  type response = {
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
+    requestId: option<string_>,
+    @ocaml.doc("<p>Information about the member in the folder.</p>") @as("FolderMember")
+    folderMember: option<folderMember>,
+    @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
+  }
+  @module("@aws-sdk/client-quicksight") @new
+  external new: request => t = "CreateFolderMembershipCommand"
+  let make = (~memberType, ~memberId, ~folderId, ~awsAccountId, ()) =>
+    new({
+      memberType: memberType,
+      memberId: memberId,
+      folderId: folderId,
+      awsAccountId: awsAccountId,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module UpdateIAMPolicyAssignment = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The QuickSight users, groups, or both that you want to assign the policy to.</p>"
+      "<p>The Amazon QuickSight users, groups, or both that you want to assign the policy to.</p>"
     )
     @as("Identities")
     identities: option<identityMap>,
-    @ocaml.doc("<p>The ARN for the IAM policy to apply to the QuickSight users and groups
+    @ocaml.doc("<p>The ARN for the IAM policy to apply to the Amazon QuickSight users and groups
 			specified in this assignment.</p>")
     @as("PolicyArn")
     policyArn: option<arn>,
@@ -3964,17 +4683,19 @@ module UpdateIAMPolicyAssignment = {
     assignmentStatus: option<assignmentStatus>,
     @ocaml.doc("<p>The namespace of the assignment.</p>") @as("Namespace") namespace: namespace,
     @ocaml.doc(
-      "<p>The name of the assignment, also called a rule. This name must be unique within an AWS account.</p>"
+      "<p>The name of the assignment, also called a rule. This name must be unique within an Amazon Web Services account.</p>"
     )
     @as("AssignmentName")
     assignmentName: iampolicyAssignmentName,
-    @ocaml.doc("<p>The ID of the AWS account that contains the IAM policy assignment. </p>")
+    @ocaml.doc(
+      "<p>The ID of the Amazon Web Services account that contains the IAM policy assignment. </p>"
+    )
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
   }
   type response = {
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>The status of the assignment. Possible values are as follows:</p>
 		       <ul>
@@ -3995,10 +4716,12 @@ module UpdateIAMPolicyAssignment = {
          </ul>")
     @as("AssignmentStatus")
     assignmentStatus: option<assignmentStatus>,
-    @ocaml.doc("<p>The QuickSight users, groups, or both that the IAM policy is assigned to.</p>")
+    @ocaml.doc(
+      "<p>The Amazon QuickSight users, groups, or both that the IAM policy is assigned to.</p>"
+    )
     @as("Identities")
     identities: option<identityMap>,
-    @ocaml.doc("<p>The ARN for the IAM policy applied to the QuickSight users and groups specified in this
+    @ocaml.doc("<p>The ARN for the IAM policy applied to the Amazon QuickSight users and groups specified in this
 			assignment.</p>")
     @as("PolicyArn")
     policyArn: option<arn>,
@@ -4043,11 +4766,100 @@ module TagResource = {
   }
   type response = {
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
   }
   @module("@aws-sdk/client-quicksight") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module SearchGroups = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The structure for the search filters that you want to apply to your search.</p>")
+    @as("Filters")
+    filters: groupSearchFilterList,
+    @ocaml.doc("<p>The namespace that you want to search.</p>") @as("Namespace")
+    namespace: namespace,
+    @ocaml.doc("<p>The maximum number of results to return from this request.</p>")
+    @as("MaxResults")
+    maxResults: option<maxResults>,
+    @ocaml.doc("<p>A pagination token that can be used in a subsequent request.</p>")
+    @as("NextToken")
+    nextToken: option<string_>,
+    @ocaml.doc("<p>The ID for the Amazon Web Services account that the group is in. Currently, you use the ID for the
+          Amazon Web Services account that contains your Amazon QuickSight account.</p>")
+    @as("AwsAccountId")
+    awsAccountId: awsAccountId,
+  }
+  type response = {
+    @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
+    requestId: option<string_>,
+    @ocaml.doc("<p>A pagination token that can be used in a subsequent request.</p>")
+    @as("NextToken")
+    nextToken: option<string_>,
+    @ocaml.doc(
+      "<p>A list of groups in a specified namespace that match the filters you set in your <code>SearchGroups</code> request.</p>"
+    )
+    @as("GroupList")
+    groupList: option<groupList>,
+  }
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "SearchGroupsCommand"
+  let make = (~filters, ~namespace, ~awsAccountId, ~maxResults=?, ~nextToken=?, ()) =>
+    new({
+      filters: filters,
+      namespace: namespace,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      awsAccountId: awsAccountId,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module SearchFolders = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The maximum number of results to be returned per request.</p>") @as("MaxResults")
+    maxResults: option<maxResults>,
+    @ocaml.doc(
+      "<p>The token for the next set of results, or null if there are no more results.</p>"
+    )
+    @as("NextToken")
+    nextToken: option<string_>,
+    @ocaml.doc(
+      "<p>The filters to apply to the search. Currently, you can search only by the parent folder ARN. For example, <code>\"Filters\": [ { \"Name\": \"PARENT_FOLDER_ARN\", \"Operator\": \"StringEquals\", \"Value\": \"arn:aws:quicksight:us-east-1:1:folder/folderId\" } ]</code>.</p>"
+    )
+    @as("Filters")
+    filters: folderSearchFilterList,
+    @ocaml.doc("<p>The ID for the Amazon Web Services account that contains the folder.</p>")
+    @as("AwsAccountId")
+    awsAccountId: awsAccountId,
+  }
+  type response = {
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
+    requestId: option<string_>,
+    @ocaml.doc(
+      "<p>The token for the next set of results, or null if there are no more results.</p>"
+    )
+    @as("NextToken")
+    nextToken: option<string_>,
+    @ocaml.doc(
+      "<p>A structure that contains all of the folders in the Amazon Web Services account. This structure provides basic information about the folders.</p>"
+    )
+    @as("FolderSummaryList")
+    folderSummaryList: option<folderSummaryList>,
+    @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
+  }
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "SearchFoldersCommand"
+  let make = (~filters, ~awsAccountId, ~maxResults=?, ~nextToken=?, ()) =>
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      filters: filters,
+      awsAccountId: awsAccountId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -4067,13 +4879,13 @@ module SearchDashboards = {
          </p>")
     @as("Filters")
     filters: dashboardSearchFilterList,
-    @ocaml.doc("<p>The ID of the AWS account that contains the user whose dashboards you're searching
+    @ocaml.doc("<p>The ID of the Amazon Web Services account that contains the user whose dashboards you're searching
             for. </p>")
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
   }
   type response = {
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
     @ocaml.doc(
@@ -4110,13 +4922,13 @@ module SearchAnalyses = {
     )
     @as("Filters")
     filters: analysisSearchFilterList,
-    @ocaml.doc("<p>The ID of the AWS account that contains the analyses that you're searching
+    @ocaml.doc("<p>The ID of the Amazon Web Services account that contains the analyses that you're searching
             for.</p>")
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
   }
   type response = {
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
     @ocaml.doc("<p>A pagination token that can be used in a subsequent request.
@@ -4150,14 +4962,14 @@ module ListUsers = {
     @ocaml.doc("<p>A pagination token that can be used in a subsequent request.</p>")
     @as("NextToken")
     nextToken: option<string_>,
-    @ocaml.doc("<p>The ID for the AWS account that the user is in. Currently, you use the ID for the AWS
-			account that contains your Amazon QuickSight account.</p>")
+    @ocaml.doc("<p>The ID for the Amazon Web Services account that the user is in. Currently, you use the ID for the
+			Amazon Web Services account that contains your Amazon QuickSight account.</p>")
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
   }
   type response = {
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>A pagination token that can be used in a subsequent request.</p>")
     @as("NextToken")
@@ -4187,7 +4999,7 @@ module ListUserGroups = {
     @ocaml.doc("<p>The namespace. Currently, you should set this to <code>default</code>.</p>")
     @as("Namespace")
     namespace: namespace,
-    @ocaml.doc("<p>The AWS account ID that the user is in. Currently, you use the ID for the AWS account
+    @ocaml.doc("<p>The Amazon Web Services account ID that the user is in. Currently, you use the ID for the Amazon Web Services account
 			that contains your Amazon QuickSight account.</p>")
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
@@ -4199,7 +5011,7 @@ module ListUserGroups = {
   }
   type response = {
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>A pagination token that can be used in a subsequent request.</p>")
     @as("NextToken")
@@ -4234,7 +5046,7 @@ module ListThemes = {
             </li>
             <li>
                <p>
-                  <code>QUICKSIGHT</code> - Display only the starting themes defined by QuickSight.</p>
+                  <code>QUICKSIGHT</code> - Display only the starting themes defined by Amazon QuickSight.</p>
             </li>
          </ul>")
     @as("Type")
@@ -4246,12 +5058,14 @@ module ListThemes = {
     )
     @as("NextToken")
     nextToken: option<string_>,
-    @ocaml.doc("<p>The ID of the AWS account that contains the themes that you're listing.</p>")
+    @ocaml.doc(
+      "<p>The ID of the Amazon Web Services account that contains the themes that you're listing.</p>"
+    )
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
   }
   type response = {
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
     @ocaml.doc(
@@ -4279,12 +5093,14 @@ module ListThemeVersions = {
     @as("NextToken")
     nextToken: option<string_>,
     @ocaml.doc("<p>The ID for the theme.</p>") @as("ThemeId") themeId: restrictiveResourceId,
-    @ocaml.doc("<p>The ID of the AWS account that contains the themes that you're listing.</p>")
+    @ocaml.doc(
+      "<p>The ID of the Amazon Web Services account that contains the themes that you're listing.</p>"
+    )
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
   }
   type response = {
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
     @ocaml.doc(
@@ -4319,7 +5135,7 @@ module ListThemeAliases = {
     nextToken: option<string_>,
     @ocaml.doc("<p>The ID for the theme.</p>") @as("ThemeId") themeId: restrictiveResourceId,
     @ocaml.doc(
-      "<p>The ID of the AWS account that contains the theme aliases that you're listing.</p>"
+      "<p>The ID of the Amazon Web Services account that contains the theme aliases that you're listing.</p>"
     )
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
@@ -4330,7 +5146,7 @@ module ListThemeAliases = {
     )
     @as("NextToken")
     nextToken: option<string_>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
     @ocaml.doc("<p>A structure containing the list of the theme's aliases.</p>")
@@ -4358,12 +5174,14 @@ module ListTemplates = {
     )
     @as("NextToken")
     nextToken: option<string_>,
-    @ocaml.doc("<p>The ID of the AWS account that contains the templates that you're listing.</p>")
+    @ocaml.doc(
+      "<p>The ID of the Amazon Web Services account that contains the templates that you're listing.</p>"
+    )
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
   }
   type response = {
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
     @ocaml.doc(
@@ -4393,12 +5211,14 @@ module ListTemplateVersions = {
     nextToken: option<string_>,
     @ocaml.doc("<p>The ID for the template.</p>") @as("TemplateId")
     templateId: restrictiveResourceId,
-    @ocaml.doc("<p>The ID of the AWS account that contains the templates that you're listing.</p>")
+    @ocaml.doc(
+      "<p>The ID of the Amazon Web Services account that contains the templates that you're listing.</p>"
+    )
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
   }
   type response = {
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
     @ocaml.doc(
@@ -4437,7 +5257,7 @@ module ListTemplateAliases = {
     @ocaml.doc("<p>The ID for the template.</p>") @as("TemplateId")
     templateId: restrictiveResourceId,
     @ocaml.doc(
-      "<p>The ID of the AWS account that contains the template aliases that you're listing.</p>"
+      "<p>The ID of the Amazon Web Services account that contains the template aliases that you're listing.</p>"
     )
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
@@ -4448,7 +5268,7 @@ module ListTemplateAliases = {
     )
     @as("NextToken")
     nextToken: option<string_>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
     @ocaml.doc("<p>A structure containing the list of the template's aliases.</p>")
@@ -4478,7 +5298,7 @@ module ListTagsForResource = {
   }
   type response = {
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>Contains a map of the key-value pairs for the resource tag or tags assigned to the
 			resource.</p>")
@@ -4503,7 +5323,7 @@ module ListIAMPolicyAssignmentsForUser = {
     @as("NextToken")
     nextToken: option<string_>,
     @ocaml.doc("<p>The name of the user.</p>") @as("UserName") userName: userName,
-    @ocaml.doc("<p>The ID of the AWS account that contains the assignments.</p>")
+    @ocaml.doc("<p>The ID of the Amazon Web Services account that contains the assignments.</p>")
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
   }
@@ -4514,7 +5334,7 @@ module ListIAMPolicyAssignmentsForUser = {
     )
     @as("NextToken")
     nextToken: option<string_>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>The active assignments for this user.</p>") @as("ActiveAssignments")
     activeAssignments: option<activeIAMPolicyAssignmentList>,
@@ -4545,13 +5365,15 @@ module ListIAMPolicyAssignments = {
     @ocaml.doc("<p>The namespace for the assignments.</p>") @as("Namespace") namespace: namespace,
     @ocaml.doc("<p>The status of the assignments.</p>") @as("AssignmentStatus")
     assignmentStatus: option<assignmentStatus>,
-    @ocaml.doc("<p>The ID of the AWS account that contains these IAM policy assignments.</p>")
+    @ocaml.doc(
+      "<p>The ID of the Amazon Web Services account that contains these IAM policy assignments.</p>"
+    )
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
   }
   type response = {
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc(
       "<p>The token for the next set of results, or null if there are no more results.</p>"
@@ -4578,22 +5400,21 @@ module ListIAMPolicyAssignments = {
 module ListGroups = {
   type t
   type request = {
-    @ocaml.doc("<p>The namespace. Currently, you should set this to <code>default</code>.</p>")
-    @as("Namespace")
+    @ocaml.doc("<p>The namespace that you want a list of groups from.</p>") @as("Namespace")
     namespace: namespace,
     @ocaml.doc("<p>The maximum number of results to return.</p>") @as("MaxResults")
     maxResults: option<maxResults>,
     @ocaml.doc("<p>A pagination token that can be used in a subsequent request.</p>")
     @as("NextToken")
     nextToken: option<string_>,
-    @ocaml.doc("<p>The ID for the AWS account that the group is in. Currently, you use the ID for the AWS
-			account that contains your Amazon QuickSight account.</p>")
+    @ocaml.doc("<p>The ID for the Amazon Web Services account that the group is in. Currently, you use the ID for the
+			Amazon Web Services account that contains your Amazon QuickSight account.</p>")
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
   }
   type response = {
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>A pagination token that can be used in a subsequent request.</p>")
     @as("NextToken")
@@ -4614,11 +5435,11 @@ module ListGroups = {
 module ListGroupMemberships = {
   type t
   type request = {
-    @ocaml.doc("<p>The namespace. Currently, you should set this to <code>default</code>.</p>")
+    @ocaml.doc("<p>The namespace of the group that you want a list of users from.</p>")
     @as("Namespace")
     namespace: namespace,
-    @ocaml.doc("<p>The ID for the AWS account that the group is in. Currently, you use the ID for the AWS
-			account that contains your Amazon QuickSight account.</p>")
+    @ocaml.doc("<p>The ID for the Amazon Web Services account that the group is in. Currently, you use the ID for the
+			Amazon Web Services account that contains your Amazon QuickSight account.</p>")
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
     @ocaml.doc("<p>The maximum number of results to return from this request.</p>")
@@ -4633,7 +5454,7 @@ module ListGroupMemberships = {
   }
   type response = {
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>A pagination token that can be used in a subsequent request.</p>")
     @as("NextToken")
@@ -4654,6 +5475,82 @@ module ListGroupMemberships = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module ListFolders = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The maximum number of results to be returned per request.</p>") @as("MaxResults")
+    maxResults: option<maxResults>,
+    @ocaml.doc(
+      "<p>The token for the next set of results, or null if there are no more results.</p>"
+    )
+    @as("NextToken")
+    nextToken: option<string_>,
+    @ocaml.doc("<p>The ID for the Amazon Web Services account that contains the folder.</p>")
+    @as("AwsAccountId")
+    awsAccountId: awsAccountId,
+  }
+  type response = {
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
+    requestId: option<string_>,
+    @ocaml.doc(
+      "<p>The token for the next set of results, or null if there are no more results.</p>"
+    )
+    @as("NextToken")
+    nextToken: option<string_>,
+    @ocaml.doc(
+      "<p>A structure that contains all of the folders in the Amazon Web Services account. This structure provides basic information about the folders.</p>"
+    )
+    @as("FolderSummaryList")
+    folderSummaryList: option<folderSummaryList>,
+    @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
+  }
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "ListFoldersCommand"
+  let make = (~awsAccountId, ~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken, awsAccountId: awsAccountId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module ListFolderMembers = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The maximum number of results to be returned per request.</p>") @as("MaxResults")
+    maxResults: option<maxResults>,
+    @ocaml.doc(
+      "<p>The token for the next set of results, or null if there are no more results.</p>"
+    )
+    @as("NextToken")
+    nextToken: option<string_>,
+    @ocaml.doc("<p>The ID of the folder.</p>") @as("FolderId") folderId: restrictiveResourceId,
+    @ocaml.doc("<p>The ID for the Amazon Web Services account that contains the folder.</p>")
+    @as("AwsAccountId")
+    awsAccountId: awsAccountId,
+  }
+  type response = {
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
+    requestId: option<string_>,
+    @ocaml.doc(
+      "<p>The token for the next set of results, or null if there are no more results.</p>"
+    )
+    @as("NextToken")
+    nextToken: option<string_>,
+    @ocaml.doc(
+      "<p>A structure that contains all of the folder members (dashboards, analyses, and datasets) in the folder.</p>"
+    )
+    @as("FolderMemberList")
+    folderMemberList: option<folderMemberList>,
+    @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
+  }
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "ListFolderMembersCommand"
+  let make = (~folderId, ~awsAccountId, ~maxResults=?, ~nextToken=?, ()) =>
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      folderId: folderId,
+      awsAccountId: awsAccountId,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module ListDashboards = {
   type t
   type request = {
@@ -4664,13 +5561,13 @@ module ListDashboards = {
     )
     @as("NextToken")
     nextToken: option<string_>,
-    @ocaml.doc("<p>The ID of the AWS account that contains the dashboards that you're
+    @ocaml.doc("<p>The ID of the Amazon Web Services account that contains the dashboards that you're
             listing.</p>")
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
   }
   type response = {
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
     @ocaml.doc(
@@ -4678,7 +5575,7 @@ module ListDashboards = {
     )
     @as("NextToken")
     nextToken: option<string_>,
-    @ocaml.doc("<p>A structure that contains all of the dashboards in your AWS account. This structure
+    @ocaml.doc("<p>A structure that contains all of the dashboards in your Amazon Web Services account. This structure
             provides basic information about the dashboards.</p>")
     @as("DashboardSummaryList")
     dashboardSummaryList: option<dashboardSummaryList>,
@@ -4701,13 +5598,13 @@ module ListDashboardVersions = {
     nextToken: option<string_>,
     @ocaml.doc("<p>The ID for the dashboard.</p>") @as("DashboardId")
     dashboardId: restrictiveResourceId,
-    @ocaml.doc("<p>The ID of the AWS account that contains the dashboard that you're listing versions
+    @ocaml.doc("<p>The ID of the Amazon Web Services account that contains the dashboard that you're listing versions
             for.</p>")
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
   }
   type response = {
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
     @ocaml.doc(
@@ -4739,11 +5636,12 @@ module ListAnalyses = {
     @ocaml.doc("<p>A pagination token that can be used in a subsequent request.</p>")
     @as("NextToken")
     nextToken: option<string_>,
-    @ocaml.doc("<p>The ID of the AWS account that contains the analyses.</p>") @as("AwsAccountId")
+    @ocaml.doc("<p>The ID of the Amazon Web Services account that contains the analyses.</p>")
+    @as("AwsAccountId")
     awsAccountId: awsAccountId,
   }
   type response = {
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
     @ocaml.doc("<p>A pagination token that can be used in a subsequent request.</p>")
@@ -4759,23 +5657,124 @@ module ListAnalyses = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module GenerateEmbedUrlForRegisteredUser = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>The experience you are embedding. For registered users, you can embed Amazon QuickSight dashboards or the entire Amazon QuickSight console.</p>"
+    )
+    @as("ExperienceConfiguration")
+    experienceConfiguration: registeredUserEmbeddingExperienceConfiguration,
+    @ocaml.doc("<p>The Amazon Resource Name for the registered user.</p>") @as("UserArn")
+    userArn: arn,
+    @ocaml.doc(
+      "<p>How many minutes the session is valid. The session lifetime must be in [15-600] minutes range.</p>"
+    )
+    @as("SessionLifetimeInMinutes")
+    sessionLifetimeInMinutes: option<sessionLifetimeInMinutes>,
+    @ocaml.doc(
+      "<p>The ID for the Amazon Web Services account that contains the dashboard that you're embedding.</p>"
+    )
+    @as("AwsAccountId")
+    awsAccountId: awsAccountId,
+  }
+  type response = {
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
+    requestId: string_,
+    @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: statusCode,
+    @ocaml.doc("<p>The embed URL for the Amazon QuickSight dashboard or console.</p>")
+    @as("EmbedUrl")
+    embedUrl: embeddingUrl,
+  }
+  @module("@aws-sdk/client-quicksight") @new
+  external new: request => t = "GenerateEmbedUrlForRegisteredUserCommand"
+  let make = (~experienceConfiguration, ~userArn, ~awsAccountId, ~sessionLifetimeInMinutes=?, ()) =>
+    new({
+      experienceConfiguration: experienceConfiguration,
+      userArn: userArn,
+      sessionLifetimeInMinutes: sessionLifetimeInMinutes,
+      awsAccountId: awsAccountId,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module GenerateEmbedUrlForAnonymousUser = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The configuration of the experience you are embedding.</p>")
+    @as("ExperienceConfiguration")
+    experienceConfiguration: anonymousUserEmbeddingExperienceConfiguration,
+    @ocaml.doc(
+      "<p>The Amazon Resource Names for the Amazon QuickSight resources that the user is authorized to access during the lifetime of the session. If you choose <code>Dashboard</code> embedding experience, pass the list of dashboard ARNs in the account that you want the user to be able to view.</p>"
+    )
+    @as("AuthorizedResourceArns")
+    authorizedResourceArns: arnList,
+    @ocaml.doc("<p>The session tags used for row-level security. Before you use this parameter, make sure that
+  you have configured the relevant datasets using the <code>DataSet$RowLevelPermissionTagConfiguration</code> parameter so that session tags can be used to provide row-level security.</p>
+        <p>These are not the tags used for the Amazon Web Services resource tagging feature. For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-rls-tags.html\">Using Row-Level Security (RLS) with Tags</a>.</p>")
+    @as("SessionTags")
+    sessionTags: option<sessionTagList>,
+    @ocaml.doc(
+      "<p>The Amazon QuickSight namespace that the anonymous user virtually belongs to. If you are not using an Amazon QuickSight custom namespace, set this to <code>default</code>.</p>"
+    )
+    @as("Namespace")
+    namespace: namespace,
+    @ocaml.doc(
+      "<p>How many minutes the session is valid. The session lifetime must be in [15-600] minutes range.</p>"
+    )
+    @as("SessionLifetimeInMinutes")
+    sessionLifetimeInMinutes: option<sessionLifetimeInMinutes>,
+    @ocaml.doc(
+      "<p>The ID for the Amazon Web Services account that contains the dashboard that you're embedding.</p>"
+    )
+    @as("AwsAccountId")
+    awsAccountId: awsAccountId,
+  }
+  type response = {
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
+    requestId: string_,
+    @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: statusCode,
+    @ocaml.doc("<p>The embed URL for the dashboard.</p>") @as("EmbedUrl") embedUrl: embeddingUrl,
+  }
+  @module("@aws-sdk/client-quicksight") @new
+  external new: request => t = "GenerateEmbedUrlForAnonymousUserCommand"
+  let make = (
+    ~experienceConfiguration,
+    ~authorizedResourceArns,
+    ~namespace,
+    ~awsAccountId,
+    ~sessionTags=?,
+    ~sessionLifetimeInMinutes=?,
+    (),
+  ) =>
+    new({
+      experienceConfiguration: experienceConfiguration,
+      authorizedResourceArns: authorizedResourceArns,
+      sessionTags: sessionTags,
+      namespace: namespace,
+      sessionLifetimeInMinutes: sessionLifetimeInMinutes,
+      awsAccountId: awsAccountId,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module DescribeNamespace = {
   type t
   type request = {
     @ocaml.doc("<p>The namespace that you want to describe.</p>") @as("Namespace")
     namespace: namespace,
     @ocaml.doc(
-      "<p>The ID for the AWS account that contains the QuickSight namespace that you want to describe.</p>"
+      "<p>The ID for the Amazon Web Services account that contains the Amazon QuickSight namespace that you want to describe.</p>"
     )
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
   }
   type response = {
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>The information about the namespace that you're describing. The response includes 
-        the namespace ARN, name, AWS Region, creation status, and identity store. <code>DescribeNamespace</code> also
+        the namespace ARN, name, Amazon Web Services Region, creation status, and identity store. <code>DescribeNamespace</code> also
         works for namespaces that are in the process of being created. For incomplete namespaces,
         this API operation lists the namespace error types and messages associated with the creation process.</p>")
     @as("Namespace")
@@ -4793,11 +5792,12 @@ module DescribeIngestion = {
     @ocaml.doc("<p>An ID for the ingestion.</p>") @as("IngestionId") ingestionId: ingestionId,
     @ocaml.doc("<p>The ID of the dataset used in the ingestion.</p>") @as("DataSetId")
     dataSetId: string_,
-    @ocaml.doc("<p>The AWS account ID.</p>") @as("AwsAccountId") awsAccountId: awsAccountId,
+    @ocaml.doc("<p>The Amazon Web Services account ID.</p>") @as("AwsAccountId")
+    awsAccountId: awsAccountId,
   }
   type response = {
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>Information about the ingestion.</p>") @as("Ingestion")
     ingestion: option<ingestion>,
@@ -4805,6 +5805,25 @@ module DescribeIngestion = {
   @module("@aws-sdk/client-quicksight") @new external new: request => t = "DescribeIngestionCommand"
   let make = (~ingestionId, ~dataSetId, ~awsAccountId, ()) =>
     new({ingestionId: ingestionId, dataSetId: dataSetId, awsAccountId: awsAccountId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module DescribeFolder = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The ID of the folder.</p>") @as("FolderId") folderId: restrictiveResourceId,
+    @ocaml.doc("<p>The ID for the Amazon Web Services account that contains the folder.</p>")
+    @as("AwsAccountId")
+    awsAccountId: awsAccountId,
+  }
+  type response = {
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
+    requestId: option<string_>,
+    @ocaml.doc("<p>Information about the folder.</p>") @as("Folder") folder: option<folder>,
+    @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
+  }
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "DescribeFolderCommand"
+  let make = (~folderId, ~awsAccountId, ()) => new({folderId: folderId, awsAccountId: awsAccountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -4824,14 +5843,14 @@ module CreateNamespace = {
     @as("Namespace")
     namespace: namespace,
     @ocaml.doc(
-      "<p>The ID for the AWS account that you want to create the QuickSight namespace in.</p>"
+      "<p>The ID for the Amazon Web Services account that you want to create the Amazon QuickSight namespace in.</p>"
     )
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
   }
   type response = {
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>Specifies the type of your user identity directory. Currently, this supports users
             with an identity type of <code>QUICKSIGHT</code>.</p>")
@@ -4844,13 +5863,13 @@ module CreateNamespace = {
             tasks.</p>")
     @as("CreationStatus")
     creationStatus: option<namespaceStatus>,
-    @ocaml.doc("<p>The AWS Region that you want to use for the free SPICE capacity for the new namespace.
+    @ocaml.doc("<p>The Amazon Web Services Region; that you want to use for the free SPICE capacity for the new namespace.
             This is set to the region that you run CreateNamespace in. </p>")
     @as("CapacityRegion")
     capacityRegion: option<string_>,
     @ocaml.doc("<p>The name of the new namespace that you created.</p>") @as("Name")
     name: option<namespace>,
-    @ocaml.doc("<p>The ARN of the QuickSight namespace you created. </p>") @as("Arn")
+    @ocaml.doc("<p>The ARN of the Amazon QuickSight namespace you created. </p>") @as("Arn")
     arn: option<arn>,
   }
   @module("@aws-sdk/client-quicksight") @new external new: request => t = "CreateNamespaceCommand"
@@ -4870,11 +5889,11 @@ module CreateIAMPolicyAssignment = {
     @ocaml.doc("<p>The namespace that contains the assignment.</p>") @as("Namespace")
     namespace: namespace,
     @ocaml.doc(
-      "<p>The QuickSight users, groups, or both that you want to assign the policy to.</p>"
+      "<p>The Amazon QuickSight users, groups, or both that you want to assign the policy to.</p>"
     )
     @as("Identities")
     identities: option<identityMap>,
-    @ocaml.doc("<p>The ARN for the IAM policy to apply to the QuickSight users and groups
+    @ocaml.doc("<p>The ARN for the IAM policy to apply to the Amazon QuickSight users and groups
 			specified in this assignment.</p>")
     @as("PolicyArn")
     policyArn: option<arn>,
@@ -4898,24 +5917,26 @@ module CreateIAMPolicyAssignment = {
     @as("AssignmentStatus")
     assignmentStatus: assignmentStatus,
     @ocaml.doc(
-      "<p>The name of the assignment, also called a rule. It must be unique within an AWS account.</p>"
+      "<p>The name of the assignment, also called a rule. It must be unique within an Amazon Web Services account.</p>"
     )
     @as("AssignmentName")
     assignmentName: iampolicyAssignmentName,
-    @ocaml.doc("<p>The ID of the AWS account where you want to assign an IAM policy to QuickSight users or
+    @ocaml.doc("<p>The ID of the Amazon Web Services account where you want to assign an IAM policy to Amazon QuickSight users or
 			groups.</p>")
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
   }
   type response = {
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
-    @ocaml.doc("<p>The QuickSight users, groups, or both that the IAM policy is assigned to.</p>")
+    @ocaml.doc(
+      "<p>The Amazon QuickSight users, groups, or both that the IAM policy is assigned to.</p>"
+    )
     @as("Identities")
     identities: option<identityMap>,
     @ocaml.doc(
-      "<p>The ARN for the IAM policy that is applied to the QuickSight users and groups specified in this assignment.</p>"
+      "<p>The ARN for the IAM policy that is applied to the Amazon QuickSight users and groups specified in this assignment.</p>"
     )
     @as("PolicyArn")
     policyArn: option<arn>,
@@ -4941,7 +5962,7 @@ module CreateIAMPolicyAssignment = {
     @ocaml.doc("<p>The ID for the assignment.</p>") @as("AssignmentId")
     assignmentId: option<string_>,
     @ocaml.doc(
-      "<p>The name of the assignment. This name must be unique within the AWS account.</p>"
+      "<p>The name of the assignment. This name must be unique within the Amazon Web Services account.</p>"
     )
     @as("AssignmentName")
     assignmentName: option<iampolicyAssignmentName>,
@@ -4973,8 +5994,8 @@ module CreateAccountCustomization = {
   type request = {
     @ocaml.doc("<p>A list of the tags that you want to attach to this resource.</p>") @as("Tags")
     tags: option<tagList_>,
-    @ocaml.doc("<p>The QuickSight customizations you're adding in the current AWS Region. You can add
-            these to an AWS account and a QuickSight namespace. </p>
+    @ocaml.doc("<p>The Amazon QuickSight customizations you're adding in the current Amazon Web Services Region. You can add
+            these to an Amazon Web Services account and a QuickSight namespace. </p>
         <p>For example, you can add a default theme by setting <code>AccountCustomization</code>
             to the midnight theme: <code>\"AccountCustomization\": { \"DefaultTheme\":
                 \"arn:aws:quicksight::aws:theme/MIDNIGHT\" }</code>. Or, you can add a custom theme by
@@ -4983,28 +6004,34 @@ module CreateAccountCustomization = {
                 }</code>. </p>")
     @as("AccountCustomization")
     accountCustomization: accountCustomization,
-    @ocaml.doc("<p>The QuickSight namespace that you want to add customizations to.</p>")
+    @ocaml.doc("<p>The Amazon QuickSight namespace that you want to add customizations to.</p>")
     @as("Namespace")
     namespace: option<namespace>,
-    @ocaml.doc("<p>The ID for the AWS account that you want to customize QuickSight for.</p>")
+    @ocaml.doc(
+      "<p>The ID for the Amazon Web Services account that you want to customize Amazon QuickSight for.</p>"
+    )
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
   }
   type response = {
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
-    @ocaml.doc("<p>The QuickSight customizations you're adding in the current AWS Region. </p>")
+    @ocaml.doc(
+      "<p>The Amazon QuickSight customizations you're adding in the current Amazon Web Services Region. </p>"
+    )
     @as("AccountCustomization")
     accountCustomization: option<accountCustomization>,
     @ocaml.doc("<p>The namespace associated with the customization you're creating. </p>")
     @as("Namespace")
     namespace: option<namespace>,
-    @ocaml.doc("<p>The ID for the AWS account that you want to customize QuickSight for.</p>")
+    @ocaml.doc(
+      "<p>The ID for the Amazon Web Services account that you want to customize Amazon QuickSight for.</p>"
+    )
     @as("AwsAccountId")
     awsAccountId: option<awsAccountId>,
     @ocaml.doc(
-      "<p>The Amazon Resource Name (ARN) for the customization that you created for this AWS account.</p>"
+      "<p>The Amazon Resource Name (ARN) for the customization that you created for this Amazon Web Services account.</p>"
     )
     @as("Arn")
     arn: option<arn>,
@@ -5031,12 +6058,13 @@ module UpdateThemePermissions = {
     @as("GrantPermissions")
     grantPermissions: option<updateResourcePermissionList>,
     @ocaml.doc("<p>The ID for the theme.</p>") @as("ThemeId") themeId: restrictiveResourceId,
-    @ocaml.doc("<p>The ID of the AWS account that contains the theme.</p>") @as("AwsAccountId")
+    @ocaml.doc("<p>The ID of the Amazon Web Services account that contains the theme.</p>")
+    @as("AwsAccountId")
     awsAccountId: awsAccountId,
   }
   type response = {
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>The resulting list of resource permissions for the theme.</p>")
     @as("Permissions")
@@ -5069,12 +6097,13 @@ module UpdateTemplatePermissions = {
     grantPermissions: option<updateResourcePermissionList>,
     @ocaml.doc("<p>The ID for the template.</p>") @as("TemplateId")
     templateId: restrictiveResourceId,
-    @ocaml.doc("<p>The ID of the AWS account that contains the template.</p>") @as("AwsAccountId")
+    @ocaml.doc("<p>The ID of the Amazon Web Services account that contains the template.</p>")
+    @as("AwsAccountId")
     awsAccountId: awsAccountId,
   }
   type response = {
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>A list of resource permissions to be set on the template.</p>")
     @as("Permissions")
@@ -5096,6 +6125,44 @@ module UpdateTemplatePermissions = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module UpdateFolderPermissions = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The permissions that you want to revoke from a resource.</p>")
+    @as("RevokePermissions")
+    revokePermissions: option<resourcePermissionList>,
+    @ocaml.doc("<p>The permissions that you want to grant on a resource.</p>")
+    @as("GrantPermissions")
+    grantPermissions: option<resourcePermissionList>,
+    @ocaml.doc("<p>The ID of the folder.</p>") @as("FolderId") folderId: restrictiveResourceId,
+    @ocaml.doc(
+      "<p>The ID for the Amazon Web Services account that contains the folder to update.</p>"
+    )
+    @as("AwsAccountId")
+    awsAccountId: awsAccountId,
+  }
+  type response = {
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
+    requestId: option<string_>,
+    @ocaml.doc("<p>Information about the permissions for the folder.</p>") @as("Permissions")
+    permissions: option<resourcePermissionList>,
+    @ocaml.doc("<p>The ID of the folder.</p>") @as("FolderId")
+    folderId: option<restrictiveResourceId>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the folder.</p>") @as("Arn") arn: option<arn>,
+    @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
+  }
+  @module("@aws-sdk/client-quicksight") @new
+  external new: request => t = "UpdateFolderPermissionsCommand"
+  let make = (~folderId, ~awsAccountId, ~revokePermissions=?, ~grantPermissions=?, ()) =>
+    new({
+      revokePermissions: revokePermissions,
+      grantPermissions: grantPermissions,
+      folderId: folderId,
+      awsAccountId: awsAccountId,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module UpdateDataSourcePermissions = {
   type t
   type request = {
@@ -5106,18 +6173,19 @@ module UpdateDataSourcePermissions = {
     @as("GrantPermissions")
     grantPermissions: option<resourcePermissionList>,
     @ocaml.doc(
-      "<p>The ID of the data source. This ID is unique per AWS Region for each AWS account. </p>"
+      "<p>The ID of the data source. This ID is unique per Amazon Web Services Region for each Amazon Web Services account. </p>"
     )
     @as("DataSourceId")
     dataSourceId: resourceId,
-    @ocaml.doc("<p>The AWS account ID.</p>") @as("AwsAccountId") awsAccountId: awsAccountId,
+    @ocaml.doc("<p>The Amazon Web Services account ID.</p>") @as("AwsAccountId")
+    awsAccountId: awsAccountId,
   }
   type response = {
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc(
-      "<p>The ID of the data source. This ID is unique per AWS Region for each AWS account.</p>"
+      "<p>The ID of the data source. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>"
     )
     @as("DataSourceId")
     dataSourceId: option<resourceId>,
@@ -5145,18 +6213,19 @@ module UpdateDataSetPermissions = {
     @ocaml.doc("<p>The resource permissions that you want to grant to the dataset.</p>")
     @as("GrantPermissions")
     grantPermissions: option<resourcePermissionList>,
-    @ocaml.doc("<p>The ID for the dataset whose permissions you want to update. This ID is unique per AWS
-			Region for each AWS account.</p>")
+    @ocaml.doc("<p>The ID for the dataset whose permissions you want to update. This ID is unique per
+			Amazon Web Services Region for each Amazon Web Services account.</p>")
     @as("DataSetId")
     dataSetId: resourceId,
-    @ocaml.doc("<p>The AWS account ID.</p>") @as("AwsAccountId") awsAccountId: awsAccountId,
+    @ocaml.doc("<p>The Amazon Web Services account ID.</p>") @as("AwsAccountId")
+    awsAccountId: awsAccountId,
   }
   type response = {
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
-    @ocaml.doc("<p>The ID for the dataset whose permissions you want to update. This ID is unique per AWS
-			Region for each AWS account.</p>")
+    @ocaml.doc("<p>The ID for the dataset whose permissions you want to update. This ID is unique per
+			Amazon Web Services Region for each Amazon Web Services account.</p>")
     @as("DataSetId")
     dataSetId: option<resourceId>,
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the dataset.</p>") @as("DataSetArn")
@@ -5169,45 +6238,6 @@ module UpdateDataSetPermissions = {
       revokePermissions: revokePermissions,
       grantPermissions: grantPermissions,
       dataSetId: dataSetId,
-      awsAccountId: awsAccountId,
-    })
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
-module UpdateDashboardPermissions = {
-  type t
-  type request = {
-    @ocaml.doc("<p>The permissions that you want to revoke from this resource.</p>")
-    @as("RevokePermissions")
-    revokePermissions: option<updateResourcePermissionList>,
-    @ocaml.doc("<p>The permissions that you want to grant on this resource.</p>")
-    @as("GrantPermissions")
-    grantPermissions: option<updateResourcePermissionList>,
-    @ocaml.doc("<p>The ID for the dashboard.</p>") @as("DashboardId")
-    dashboardId: restrictiveResourceId,
-    @ocaml.doc("<p>The ID of the AWS account that contains the dashboard whose permissions you're
-            updating.</p>")
-    @as("AwsAccountId")
-    awsAccountId: awsAccountId,
-  }
-  type response = {
-    @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
-    requestId: option<string_>,
-    @ocaml.doc("<p>Information about the permissions on the dashboard.</p>") @as("Permissions")
-    permissions: option<resourcePermissionList>,
-    @ocaml.doc("<p>The ID for the dashboard.</p>") @as("DashboardId")
-    dashboardId: option<restrictiveResourceId>,
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the dashboard.</p>") @as("DashboardArn")
-    dashboardArn: option<arn>,
-  }
-  @module("@aws-sdk/client-quicksight") @new
-  external new: request => t = "UpdateDashboardPermissionsCommand"
-  let make = (~dashboardId, ~awsAccountId, ~revokePermissions=?, ~grantPermissions=?, ()) =>
-    new({
-      revokePermissions: revokePermissions,
-      grantPermissions: grantPermissions,
-      dashboardId: dashboardId,
       awsAccountId: awsAccountId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
@@ -5228,14 +6258,14 @@ module UpdateAnalysisPermissions = {
             analysis URL.</p>")
     @as("AnalysisId")
     analysisId: restrictiveResourceId,
-    @ocaml.doc("<p>The ID of the AWS account that contains the analysis whose permissions you're
-            updating. You must be using the AWS account that the analysis is in.</p>")
+    @ocaml.doc("<p>The ID of the Amazon Web Services account that contains the analysis whose permissions you're
+            updating. You must be using the Amazon Web Services account that the analysis is in.</p>")
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
   }
   type response = {
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>A structure that describes the principals and the resource-level permissions on an
             analysis.</p>")
@@ -5268,20 +6298,20 @@ module ListNamespaces = {
     @as("NextToken")
     nextToken: option<string_>,
     @ocaml.doc(
-      "<p>The ID for the AWS account that contains the QuickSight namespaces that you want to list.</p>"
+      "<p>The ID for the Amazon Web Services account that contains the Amazon QuickSight namespaces that you want to list.</p>"
     )
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
   }
   type response = {
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>A pagination token that can be used in a subsequent request.</p>")
     @as("NextToken")
     nextToken: option<string_>,
-    @ocaml.doc("<p>The information about the namespaces in this AWS account. The response includes 
-        the namespace ARN, name, AWS Region, notification email address, creation status, and 
+    @ocaml.doc("<p>The information about the namespaces in this Amazon Web Services account. The response includes 
+        the namespace ARN, name, Amazon Web Services Region, notification email address, creation status, and 
         identity store.</p>")
     @as("Namespaces")
     namespaces: option<namespaces>,
@@ -5297,7 +6327,8 @@ module ListIngestions = {
   type request = {
     @ocaml.doc("<p>The maximum number of results to be returned per request.</p>") @as("MaxResults")
     maxResults: option<ingestionMaxResults>,
-    @ocaml.doc("<p>The AWS account ID.</p>") @as("AwsAccountId") awsAccountId: awsAccountId,
+    @ocaml.doc("<p>The Amazon Web Services account ID.</p>") @as("AwsAccountId")
+    awsAccountId: awsAccountId,
     @ocaml.doc(
       "<p>The token for the next set of results, or null if there are no more results.</p>"
     )
@@ -5308,7 +6339,7 @@ module ListIngestions = {
   }
   type response = {
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc(
       "<p>The token for the next set of results, or null if there are no more results.</p>"
@@ -5338,11 +6369,12 @@ module ListDataSets = {
     )
     @as("NextToken")
     nextToken: option<string_>,
-    @ocaml.doc("<p>The AWS account ID.</p>") @as("AwsAccountId") awsAccountId: awsAccountId,
+    @ocaml.doc("<p>The Amazon Web Services account ID.</p>") @as("AwsAccountId")
+    awsAccountId: awsAccountId,
   }
   type response = {
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc(
       "<p>The token for the next set of results, or null if there are no more results.</p>"
@@ -5364,13 +6396,15 @@ module DescribeThemePermissions = {
     @ocaml.doc("<p>The ID for the theme that you want to describe permissions for.</p>")
     @as("ThemeId")
     themeId: restrictiveResourceId,
-    @ocaml.doc("<p>The ID of the AWS account that contains the theme that you're describing.</p>")
+    @ocaml.doc(
+      "<p>The ID of the Amazon Web Services account that contains the theme that you're describing.</p>"
+    )
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
   }
   type response = {
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>A list of resource permissions set on the theme. </p>") @as("Permissions")
     permissions: option<resourcePermissionList>,
@@ -5391,14 +6425,14 @@ module DescribeTemplatePermissions = {
     @ocaml.doc("<p>The ID for the template.</p>") @as("TemplateId")
     templateId: restrictiveResourceId,
     @ocaml.doc(
-      "<p>The ID of the AWS account that contains the template that you're describing.</p>"
+      "<p>The ID of the Amazon Web Services account that contains the template that you're describing.</p>"
     )
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
   }
   type response = {
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>A list of resource permissions to be set on the template. </p>")
     @as("Permissions")
@@ -5423,14 +6457,14 @@ module DescribeIAMPolicyAssignment = {
     @ocaml.doc("<p>The name of the assignment, also called a rule.</p>") @as("AssignmentName")
     assignmentName: iampolicyAssignmentName,
     @ocaml.doc(
-      "<p>The ID of the AWS account that contains the assignment that you want to describe.</p>"
+      "<p>The ID of the Amazon Web Services account that contains the assignment that you want to describe.</p>"
     )
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
   }
   type response = {
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>Information describing the IAM policy assignment.</p>")
     @as("IAMPolicyAssignment")
@@ -5443,24 +6477,73 @@ module DescribeIAMPolicyAssignment = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module DescribeFolderResolvedPermissions = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The ID of the folder.</p>") @as("FolderId") folderId: restrictiveResourceId,
+    @ocaml.doc("<p>The ID for the Amazon Web Services account that contains the folder.</p>")
+    @as("AwsAccountId")
+    awsAccountId: awsAccountId,
+  }
+  type response = {
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
+    requestId: option<string_>,
+    @ocaml.doc("<p>Information about the permissions for the folder.</p>") @as("Permissions")
+    permissions: option<resourcePermissionList>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the folder.</p>") @as("Arn") arn: option<arn>,
+    @ocaml.doc("<p>The ID of the folder.</p>") @as("FolderId")
+    folderId: option<restrictiveResourceId>,
+    @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
+  }
+  @module("@aws-sdk/client-quicksight") @new
+  external new: request => t = "DescribeFolderResolvedPermissionsCommand"
+  let make = (~folderId, ~awsAccountId, ()) => new({folderId: folderId, awsAccountId: awsAccountId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module DescribeFolderPermissions = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The ID of the folder.</p>") @as("FolderId") folderId: restrictiveResourceId,
+    @ocaml.doc("<p>The ID for the Amazon Web Services account that contains the folder.</p>")
+    @as("AwsAccountId")
+    awsAccountId: awsAccountId,
+  }
+  type response = {
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
+    requestId: option<string_>,
+    @ocaml.doc("<p>Information about the permissions on the folder.</p>") @as("Permissions")
+    permissions: option<resourcePermissionList>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) for the folder.</p>") @as("Arn") arn: option<arn>,
+    @ocaml.doc("<p>The ID of the folder.</p>") @as("FolderId")
+    folderId: option<restrictiveResourceId>,
+    @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
+  }
+  @module("@aws-sdk/client-quicksight") @new
+  external new: request => t = "DescribeFolderPermissionsCommand"
+  let make = (~folderId, ~awsAccountId, ()) => new({folderId: folderId, awsAccountId: awsAccountId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module DescribeDataSourcePermissions = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The ID of the data source. This ID is unique per AWS Region for each AWS account.</p>"
+      "<p>The ID of the data source. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>"
     )
     @as("DataSourceId")
     dataSourceId: resourceId,
-    @ocaml.doc("<p>The AWS account ID.</p>") @as("AwsAccountId") awsAccountId: awsAccountId,
+    @ocaml.doc("<p>The Amazon Web Services account ID.</p>") @as("AwsAccountId")
+    awsAccountId: awsAccountId,
   }
   type response = {
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>A list of resource permissions on the data source.</p>") @as("Permissions")
     permissions: option<resourcePermissionList>,
     @ocaml.doc(
-      "<p>The ID of the data source. This ID is unique per AWS Region for each AWS account.</p>"
+      "<p>The ID of the data source. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>"
     )
     @as("DataSourceId")
     dataSourceId: option<resourceId>,
@@ -5478,20 +6561,21 @@ module DescribeDataSetPermissions = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The ID for the dataset that you want to create. This ID is unique per AWS Region for each AWS account.</p>"
+      "<p>The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>"
     )
     @as("DataSetId")
     dataSetId: resourceId,
-    @ocaml.doc("<p>The AWS account ID.</p>") @as("AwsAccountId") awsAccountId: awsAccountId,
+    @ocaml.doc("<p>The Amazon Web Services account ID.</p>") @as("AwsAccountId")
+    awsAccountId: awsAccountId,
   }
   type response = {
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>A list of resource permissions on the dataset.</p>") @as("Permissions")
     permissions: option<resourcePermissionList>,
     @ocaml.doc(
-      "<p>The ID for the dataset that you want to create. This ID is unique per AWS Region for each AWS account.</p>"
+      "<p>The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>"
     )
     @as("DataSetId")
     dataSetId: option<resourceId>,
@@ -5505,35 +6589,6 @@ module DescribeDataSetPermissions = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
-module DescribeDashboardPermissions = {
-  type t
-  type request = {
-    @ocaml.doc("<p>The ID for the dashboard, also added to the IAM policy.</p>") @as("DashboardId")
-    dashboardId: restrictiveResourceId,
-    @ocaml.doc("<p>The ID of the AWS account that contains the dashboard that you're describing
-            permissions for.</p>")
-    @as("AwsAccountId")
-    awsAccountId: awsAccountId,
-  }
-  type response = {
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
-    requestId: option<string_>,
-    @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
-    @ocaml.doc("<p>A structure that contains the permissions for the dashboard.</p>")
-    @as("Permissions")
-    permissions: option<resourcePermissionList>,
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the dashboard.</p>") @as("DashboardArn")
-    dashboardArn: option<arn>,
-    @ocaml.doc("<p>The ID for the dashboard.</p>") @as("DashboardId")
-    dashboardId: option<restrictiveResourceId>,
-  }
-  @module("@aws-sdk/client-quicksight") @new
-  external new: request => t = "DescribeDashboardPermissionsCommand"
-  let make = (~dashboardId, ~awsAccountId, ()) =>
-    new({dashboardId: dashboardId, awsAccountId: awsAccountId})
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
 module DescribeAnalysisPermissions = {
   type t
   type request = {
@@ -5541,13 +6596,13 @@ module DescribeAnalysisPermissions = {
             analysis URL.</p>")
     @as("AnalysisId")
     analysisId: restrictiveResourceId,
-    @ocaml.doc("<p>The ID of the AWS account that contains the analysis whose permissions you're
-            describing. You must be using the AWS account that the analysis is in.</p>")
+    @ocaml.doc("<p>The ID of the Amazon Web Services account that contains the analysis whose permissions you're
+            describing. You must be using the Amazon Web Services account that the analysis is in.</p>")
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
   }
   type response = {
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
     @ocaml.doc("<p>A structure that describes the principals and the resource-level permissions on an
@@ -5576,13 +6631,13 @@ module DescribeAnalysis = {
             analysis.</p>")
     @as("AnalysisId")
     analysisId: restrictiveResourceId,
-    @ocaml.doc("<p>The ID of the AWS account that contains the analysis. You must be using the AWS
-            account that the analysis is in.</p>")
+    @ocaml.doc("<p>The ID of the Amazon Web Services account that contains the analysis. You must be using the 
+            Amazon Web Services account that the analysis is in.</p>")
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
   }
   type response = {
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
     @ocaml.doc("<p>A metadata structure that contains summary information for the analysis that you're
@@ -5593,6 +6648,64 @@ module DescribeAnalysis = {
   @module("@aws-sdk/client-quicksight") @new external new: request => t = "DescribeAnalysisCommand"
   let make = (~analysisId, ~awsAccountId, ()) =>
     new({analysisId: analysisId, awsAccountId: awsAccountId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module CreateFolder = {
+  type t
+  type request = {
+    @ocaml.doc("<p>Tags for the folder.</p>") @as("Tags") tags: option<tagList_>,
+    @ocaml.doc("<p>A structure that describes the principals and the resource-level permissions of a folder.</p>
+        <p>To specify no permissions, omit <code>Permissions</code>.</p>")
+    @as("Permissions")
+    permissions: option<resourcePermissionList>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) for the parent folder.</p>
+        <p>
+            <code>ParentFolderArn</code> can be null. An empty <code>parentFolderArn</code> creates a root-level folder.</p>")
+    @as("ParentFolderArn")
+    parentFolderArn: option<arn>,
+    @ocaml.doc(
+      "<p>The type of folder. By default, <code>folderType</code> is <code>SHARED</code>.</p>"
+    )
+    @as("FolderType")
+    folderType: option<folderType>,
+    @ocaml.doc("<p>The name of the folder.</p>") @as("Name") name: option<folderName>,
+    @ocaml.doc("<p>The ID of the folder.</p>") @as("FolderId") folderId: restrictiveResourceId,
+    @ocaml.doc(
+      "<p>The ID for the Amazon Web Services account where you want to create the folder.</p>"
+    )
+    @as("AwsAccountId")
+    awsAccountId: awsAccountId,
+  }
+  type response = {
+    @ocaml.doc("<p>The request ID for the newly created folder.</p>") @as("RequestId")
+    requestId: option<string_>,
+    @ocaml.doc("<p>The folder ID for the newly created folder.</p>") @as("FolderId")
+    folderId: option<restrictiveResourceId>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) for the newly created folder.</p>") @as("Arn")
+    arn: option<arn>,
+    @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
+  }
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "CreateFolderCommand"
+  let make = (
+    ~folderId,
+    ~awsAccountId,
+    ~tags=?,
+    ~permissions=?,
+    ~parentFolderArn=?,
+    ~folderType=?,
+    ~name=?,
+    (),
+  ) =>
+    new({
+      tags: tags,
+      permissions: permissions,
+      parentFolderArn: parentFolderArn,
+      folderType: folderType,
+      name: name,
+      folderId: folderId,
+      awsAccountId: awsAccountId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -5608,17 +6721,19 @@ module UpdateTheme = {
     @as("VersionDescription")
     versionDescription: option<versionDescription>,
     @ocaml.doc("<p>The theme ID, defined by Amazon QuickSight, that a custom theme inherits from.
-		All themes initially inherit from a default QuickSight theme.</p>")
+		All themes initially inherit from a default Amazon QuickSight theme.</p>")
     @as("BaseThemeId")
     baseThemeId: restrictiveResourceId,
     @ocaml.doc("<p>The name for the theme.</p>") @as("Name") name: option<themeName>,
     @ocaml.doc("<p>The ID for the theme.</p>") @as("ThemeId") themeId: restrictiveResourceId,
-    @ocaml.doc("<p>The ID of the AWS account that contains the theme that you're updating.</p>")
+    @ocaml.doc(
+      "<p>The ID of the Amazon Web Services account that contains the theme that you're updating.</p>"
+    )
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
   }
   type response = {
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
     @ocaml.doc("<p>The creation status of the theme.</p>") @as("CreationStatus")
@@ -5667,7 +6782,7 @@ module UpdateTemplate = {
 			analysis. Both of these require an Amazon Resource Name (ARN). For
 			<code>SourceTemplate</code>, specify the ARN of the source template. For
 			<code>SourceAnalysis</code>, specify the ARN of the source analysis. The <code>SourceTemplate</code>
-			ARN can contain any AWS Account and any QuickSight-supported AWS Region. </p>
+			ARN can contain any Amazon Web Services account and any Amazon QuickSight-supported Amazon Web Services Region;. </p>
 		       <p>Use the <code>DataSetReferences</code> entity within <code>SourceTemplate</code> or
 			<code>SourceAnalysis</code> to list the replacement datasets for the placeholders listed
 			in the original. The schema in each dataset must match its placeholder. </p>")
@@ -5675,12 +6790,14 @@ module UpdateTemplate = {
     sourceEntity: templateSourceEntity,
     @ocaml.doc("<p>The ID for the template.</p>") @as("TemplateId")
     templateId: restrictiveResourceId,
-    @ocaml.doc("<p>The ID of the AWS account that contains the template that you're updating.</p>")
+    @ocaml.doc(
+      "<p>The ID of the Amazon Web Services account that contains the template that you're updating.</p>"
+    )
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
   }
   type response = {
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
     @ocaml.doc("<p>The creation status of the template.</p>") @as("CreationStatus")
@@ -5707,12 +6824,70 @@ module UpdateTemplate = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module UpdateDashboardPermissions = {
+  type t
+  type request = {
+    @ocaml.doc("<p>Revokes link permissions from all users in a defined namespace.</p>")
+    @as("RevokeLinkPermissions")
+    revokeLinkPermissions: option<updateLinkPermissionList>,
+    @ocaml.doc("<p>Grants link permissions to all users in a defined namespace.</p>")
+    @as("GrantLinkPermissions")
+    grantLinkPermissions: option<updateLinkPermissionList>,
+    @ocaml.doc("<p>The permissions that you want to revoke from this resource.</p>")
+    @as("RevokePermissions")
+    revokePermissions: option<updateResourcePermissionList>,
+    @ocaml.doc("<p>The permissions that you want to grant on this resource.</p>")
+    @as("GrantPermissions")
+    grantPermissions: option<updateResourcePermissionList>,
+    @ocaml.doc("<p>The ID for the dashboard.</p>") @as("DashboardId")
+    dashboardId: restrictiveResourceId,
+    @ocaml.doc("<p>The ID of the Amazon Web Services account that contains the dashboard whose permissions you're
+            updating.</p>")
+    @as("AwsAccountId")
+    awsAccountId: awsAccountId,
+  }
+  type response = {
+    @ocaml.doc("<p>Updates the permissions of a shared link to an Amazon QuickSight dashboard.</p>")
+    @as("LinkSharingConfiguration")
+    linkSharingConfiguration: option<linkSharingConfiguration>,
+    @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
+    requestId: option<string_>,
+    @ocaml.doc("<p>Information about the permissions on the dashboard.</p>") @as("Permissions")
+    permissions: option<resourcePermissionList>,
+    @ocaml.doc("<p>The ID for the dashboard.</p>") @as("DashboardId")
+    dashboardId: option<restrictiveResourceId>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the dashboard.</p>") @as("DashboardArn")
+    dashboardArn: option<arn>,
+  }
+  @module("@aws-sdk/client-quicksight") @new
+  external new: request => t = "UpdateDashboardPermissionsCommand"
+  let make = (
+    ~dashboardId,
+    ~awsAccountId,
+    ~revokeLinkPermissions=?,
+    ~grantLinkPermissions=?,
+    ~revokePermissions=?,
+    ~grantPermissions=?,
+    (),
+  ) =>
+    new({
+      revokeLinkPermissions: revokeLinkPermissions,
+      grantLinkPermissions: grantLinkPermissions,
+      revokePermissions: revokePermissions,
+      grantPermissions: grantPermissions,
+      dashboardId: dashboardId,
+      awsAccountId: awsAccountId,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module UpdateDashboard = {
   type t
   type request = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the theme that is being used for this dashboard. If
             you add a value for this field, it overrides the value that was originally associated
-            with the entity. The theme ARN must exist in the same AWS account where you create the
+            with the entity. The theme ARN must exist in the same Amazon Web Services account where you create the
             dashboard.</p>")
     @as("ThemeArn")
     themeArn: option<arn>,
@@ -5722,7 +6897,7 @@ module UpdateDashboard = {
                 <p>
                   <code>AvailabilityStatus</code> for <code>AdHocFilteringOption</code> - This
                     status can be either <code>ENABLED</code> or <code>DISABLED</code>. When this is
-                    set to <code>DISABLED</code>, QuickSight disables the left filter pane on the
+                    set to <code>DISABLED</code>, Amazon QuickSight disables the left filter pane on the
                     published dashboard, which can be used for ad hoc (one-time) filtering. This
                     option is <code>ENABLED</code> by default. </p>
             </li>
@@ -5754,10 +6929,12 @@ module UpdateDashboard = {
             <code>SourceEntity</code>, you specify the type of object you're using as source. You
             can only update a dashboard from a template, so you use a <code>SourceTemplate</code>
             entity. If you need to update a dashboard from an analysis, first convert the analysis
-            to a template by using the <a>CreateTemplate</a> API operation. For
+            to a template by using the <code>
+               <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_CreateTemplate.html\">CreateTemplate</a>
+            </code> API operation. For
             <code>SourceTemplate</code>, specify the Amazon Resource Name (ARN) of the source
-            template. The <code>SourceTemplate</code> ARN can contain any AWS Account and any
-            QuickSight-supported AWS Region. </p>
+            template. The <code>SourceTemplate</code> ARN can contain any Amazon Web Services account and any
+            Amazon QuickSight-supported Amazon Web Services Region. </p>
         <p>Use the <code>DataSetReferences</code> entity within <code>SourceTemplate</code> to
             list the replacement datasets for the placeholders listed in the original. The schema in
             each dataset must match its placeholder. </p>")
@@ -5766,13 +6943,13 @@ module UpdateDashboard = {
     @ocaml.doc("<p>The display name of the dashboard.</p>") @as("Name") name: dashboardName,
     @ocaml.doc("<p>The ID for the dashboard.</p>") @as("DashboardId")
     dashboardId: restrictiveResourceId,
-    @ocaml.doc("<p>The ID of the AWS account that contains the dashboard that you're
+    @ocaml.doc("<p>The ID of the Amazon Web Services account that contains the dashboard that you're
             updating.</p>")
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
   }
   type response = {
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
     @ocaml.doc("<p>The creation status of the request.</p>") @as("CreationStatus")
@@ -5813,7 +6990,7 @@ module UpdateAnalysis = {
   type t
   type request = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) for the theme to apply to the analysis that you're
-            creating. To see the theme in the QuickSight console, make sure that you have access to
+            creating. To see the theme in the Amazon QuickSight console, make sure that you have access to
             it.</p>")
     @as("ThemeArn")
     themeArn: option<arn>,
@@ -5826,19 +7003,21 @@ module UpdateAnalysis = {
     @as("Parameters")
     parameters: option<parameters>,
     @ocaml.doc("<p>A descriptive name for the analysis that you're updating. This name displays for the
-            analysis in the QuickSight console.</p>")
+            analysis in the Amazon QuickSight console.</p>")
     @as("Name")
     name: analysisName,
     @ocaml.doc("<p>The ID for the analysis that you're updating. This ID displays in the URL of the
             analysis.</p>")
     @as("AnalysisId")
     analysisId: restrictiveResourceId,
-    @ocaml.doc("<p>The ID of the AWS account that contains the analysis that you're updating.</p>")
+    @ocaml.doc(
+      "<p>The ID of the Amazon Web Services account that contains the analysis that you're updating.</p>"
+    )
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
   }
   type response = {
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
     @ocaml.doc("<p>The update status of the last update that was made to the analysis.</p>")
@@ -5861,6 +7040,41 @@ module UpdateAnalysis = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module DescribeDashboardPermissions = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The ID for the dashboard, also added to the IAM policy.</p>") @as("DashboardId")
+    dashboardId: restrictiveResourceId,
+    @ocaml.doc("<p>The ID of the Amazon Web Services account that contains the dashboard that you're describing
+            permissions for.</p>")
+    @as("AwsAccountId")
+    awsAccountId: awsAccountId,
+  }
+  type response = {
+    @ocaml.doc("<p>A structure that contains the configuration of a shareable link that grants access to
+            the dashboard. Your users can use the link to view and interact with the dashboard, if
+            the dashboard has been shared with them. For more information about sharing dashboards,
+            see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/sharing-a-dashboard.html\">Sharing Dashboards</a>.</p>")
+    @as("LinkSharingConfiguration")
+    linkSharingConfiguration: option<linkSharingConfiguration>,
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
+    requestId: option<string_>,
+    @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
+    @ocaml.doc("<p>A structure that contains the permissions for the dashboard.</p>")
+    @as("Permissions")
+    permissions: option<resourcePermissionList>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the dashboard.</p>") @as("DashboardArn")
+    dashboardArn: option<arn>,
+    @ocaml.doc("<p>The ID for the dashboard.</p>") @as("DashboardId")
+    dashboardId: option<restrictiveResourceId>,
+  }
+  @module("@aws-sdk/client-quicksight") @new
+  external new: request => t = "DescribeDashboardPermissionsCommand"
+  let make = (~dashboardId, ~awsAccountId, ()) =>
+    new({dashboardId: dashboardId, awsAccountId: awsAccountId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module DescribeDashboard = {
   type t
   type request = {
@@ -5871,13 +7085,13 @@ module DescribeDashboard = {
     versionNumber: option<versionNumber>,
     @ocaml.doc("<p>The ID for the dashboard.</p>") @as("DashboardId")
     dashboardId: restrictiveResourceId,
-    @ocaml.doc("<p>The ID of the AWS account that contains the dashboard that you're
+    @ocaml.doc("<p>The ID of the Amazon Web Services account that contains the dashboard that you're
             describing.</p>")
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
   }
   type response = {
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>The HTTP status of this request.</p>") @as("Status") status: option<statusCode>,
     @ocaml.doc("<p>Information about the dashboard.</p>") @as("Dashboard")
@@ -5917,20 +7131,22 @@ module CreateTheme = {
     @ocaml.doc("<p>The ID of the theme that a custom theme will inherit from. All themes inherit from one of
 			the starting themes defined by Amazon QuickSight. For a list of the starting themes, use
 				<code>ListThemes</code> or choose <b>Themes</b> from
-			within a QuickSight analysis. </p>")
+			within an analysis. </p>")
     @as("BaseThemeId")
     baseThemeId: restrictiveResourceId,
     @ocaml.doc("<p>A display name for the theme.</p>") @as("Name") name: themeName,
-    @ocaml.doc("<p>An ID for the theme that you want to create. The theme ID is unique per AWS Region in
-			each AWS account.</p>")
+    @ocaml.doc("<p>An ID for the theme that you want to create. The theme ID is unique per Amazon Web Services Region in
+			each Amazon Web Services account.</p>")
     @as("ThemeId")
     themeId: restrictiveResourceId,
-    @ocaml.doc("<p>The ID of the AWS account where you want to store the new theme. </p>")
+    @ocaml.doc(
+      "<p>The ID of the Amazon Web Services account where you want to store the new theme. </p>"
+    )
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
   }
   type response = {
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
     @ocaml.doc("<p>The theme creation status.</p>") @as("CreationStatus")
@@ -5985,7 +7201,7 @@ module CreateTemplate = {
 			analysis. Both of these require an Amazon Resource Name (ARN). For
 			<code>SourceTemplate</code>, specify the ARN of the source template. For
 			<code>SourceAnalysis</code>, specify the ARN of the source analysis. The <code>SourceTemplate</code>
-			ARN can contain any AWS Account and any QuickSight-supported AWS Region. </p>
+			ARN can contain any Amazon Web Services account and any Amazon QuickSight-supported Amazon Web Services Region. </p>
 		       <p>Use the <code>DataSetReferences</code> entity within <code>SourceTemplate</code> or
 			<code>SourceAnalysis</code> to list the replacement datasets for the placeholders listed
 			in the original. The schema in each dataset must match its placeholder. </p>")
@@ -5995,17 +7211,18 @@ module CreateTemplate = {
     @as("Permissions")
     permissions: option<resourcePermissionList>,
     @ocaml.doc("<p>A display name for the template.</p>") @as("Name") name: option<templateName>,
-    @ocaml.doc("<p>An ID for the template that you want to create. This template is unique per AWS Region in
-			each AWS account.</p>")
+    @ocaml.doc("<p>An ID for the template that you want to create. This template is unique per Amazon Web Services Region; in
+			each Amazon Web Services account.</p>")
     @as("TemplateId")
     templateId: restrictiveResourceId,
-    @ocaml.doc("<p>The ID for the AWS account that the group is in. Currently, you use the ID for the AWS
-			account that contains your Amazon QuickSight account.</p>")
+    @ocaml.doc(
+      "<p>The ID for the Amazon Web Services account that the group is in. You use the ID for the Amazon Web Services account that contains your Amazon QuickSight account.</p>"
+    )
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
   }
   type response = {
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
     @ocaml.doc("<p>The template creation status.</p>") @as("CreationStatus")
@@ -6046,7 +7263,7 @@ module CreateDashboard = {
   type request = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the theme that is being used for this dashboard. If
             you add a value for this field, it overrides the value that is used in the source
-            entity. The theme ARN must exist in the same AWS account where you create the
+            entity. The theme ARN must exist in the same Amazon Web Services account where you create the
             dashboard.</p>")
     @as("ThemeArn")
     themeArn: option<arn>,
@@ -6056,7 +7273,7 @@ module CreateDashboard = {
                 <p>
                   <code>AvailabilityStatus</code> for <code>AdHocFilteringOption</code> - This
                     status can be either <code>ENABLED</code> or <code>DISABLED</code>. When this is
-                    set to <code>DISABLED</code>, QuickSight disables the left filter pane on the
+                    set to <code>DISABLED</code>, Amazon QuickSight disables the left filter pane on the
                     published dashboard, which can be used for ad hoc (one-time) filtering. This
                     option is <code>ENABLED</code> by default. </p>
             </li>
@@ -6087,10 +7304,13 @@ module CreateDashboard = {
             <code>SourceEntity</code>, you specify the type of object you're using as source. You
             can only create a dashboard from a template, so you use a <code>SourceTemplate</code>
             entity. If you need to create a dashboard from an analysis, first convert the analysis
-            to a template by using the <a>CreateTemplate</a> API operation. For
+            to a template by using the <code>
+               <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_CreateTemplate.html\">CreateTemplate</a>
+            </code> 
+            API operation. For
             <code>SourceTemplate</code>, specify the Amazon Resource Name (ARN) of the source
-            template. The <code>SourceTemplate</code>ARN can contain any AWS Account and any
-            QuickSight-supported AWS Region. </p>
+            template. The <code>SourceTemplate</code>ARN can contain any Amazon Web Services account and any
+            Amazon QuickSight-supported Amazon Web Services Region. </p>
         <p>Use the <code>DataSetReferences</code> entity within <code>SourceTemplate</code> to
             list the replacement datasets for the placeholders listed in the original. The schema in
             each dataset must match its placeholder. </p>")
@@ -6099,7 +7319,7 @@ module CreateDashboard = {
     @ocaml.doc("<p>A structure that contains the permissions of the dashboard. You can use this structure
             for granting permissions by providing a list of IAM action information for each
             principal ARN. </p>
-      
+
         <p>To specify no permissions, omit the permissions list.</p>")
     @as("Permissions")
     permissions: option<resourcePermissionList>,
@@ -6111,12 +7331,14 @@ module CreateDashboard = {
     @ocaml.doc("<p>The display name of the dashboard.</p>") @as("Name") name: dashboardName,
     @ocaml.doc("<p>The ID for the dashboard, also added to the IAM policy.</p>") @as("DashboardId")
     dashboardId: restrictiveResourceId,
-    @ocaml.doc("<p>The ID of the AWS account where you want to create the dashboard.</p>")
+    @ocaml.doc(
+      "<p>The ID of the Amazon Web Services account where you want to create the dashboard.</p>"
+    )
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
   }
   type response = {
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
     @ocaml.doc("<p>The status of the dashboard creation request.</p>") @as("CreationStatus")
@@ -6166,7 +7388,7 @@ module CreateAnalysis = {
     @as("Tags")
     tags: option<tagList_>,
     @ocaml.doc("<p>The ARN for the theme to apply to the analysis that you're creating. To see the theme
-            in the QuickSight console, make sure that you have access to it.</p>")
+            in the Amazon QuickSight console, make sure that you have access to it.</p>")
     @as("ThemeArn")
     themeArn: option<arn>,
     @ocaml.doc("<p>A source entity to use for the analysis that you're creating. This metadata structure
@@ -6175,7 +7397,7 @@ module CreateAnalysis = {
     sourceEntity: analysisSourceEntity,
     @ocaml.doc("<p>A structure that describes the principals and the resource-level permissions on an
             analysis. You can use the <code>Permissions</code> structure to grant permissions by
-            providing a list of AWS Identity and Access Management (IAM) action information for each
+            providing a list of Identity and Access Management (IAM) action information for each
             principal listed by Amazon Resource Name (ARN). </p>
         
         <p>To specify no permissions, omit <code>Permissions</code>.</p>")
@@ -6186,19 +7408,21 @@ module CreateAnalysis = {
     @as("Parameters")
     parameters: option<parameters>,
     @ocaml.doc("<p>A descriptive name for the analysis that you're creating. This name displays for the
-            analysis in the QuickSight console. </p>")
+            analysis in the Amazon QuickSight console. </p>")
     @as("Name")
     name: analysisName,
     @ocaml.doc("<p>The ID for the analysis that you're creating. This ID displays in the URL of the
             analysis.</p>")
     @as("AnalysisId")
     analysisId: restrictiveResourceId,
-    @ocaml.doc("<p>The ID of the AWS account where you are creating an analysis.</p>")
+    @ocaml.doc(
+      "<p>The ID of the Amazon Web Services account where you are creating an analysis.</p>"
+    )
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
   }
   type response = {
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
     @ocaml.doc("<p>The status of the creation of the analysis. </p>") @as("CreationStatus")
@@ -6236,15 +7460,16 @@ module DescribeDataSource = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The ID of the data source. This ID is unique per AWS Region for each AWS account.</p>"
+      "<p>The ID of the data source. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>"
     )
     @as("DataSourceId")
     dataSourceId: resourceId,
-    @ocaml.doc("<p>The AWS account ID.</p>") @as("AwsAccountId") awsAccountId: awsAccountId,
+    @ocaml.doc("<p>The Amazon Web Services account ID.</p>") @as("AwsAccountId")
+    awsAccountId: awsAccountId,
   }
   type response = {
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>The information on the data source.</p>") @as("DataSource")
     dataSource: option<dataSource>,
@@ -6259,37 +7484,40 @@ module DescribeDataSource = {
 module UpdateDataSource = {
   type t
   type request = {
-    @ocaml.doc("<p>Secure Socket Layer (SSL) properties that apply when QuickSight connects to your underlying
+    @ocaml.doc("<p>Secure Socket Layer (SSL) properties that apply when Amazon QuickSight connects to your underlying
 			source.</p>")
     @as("SslProperties")
     sslProperties: option<sslProperties>,
-    @ocaml.doc("<p>Use this parameter only when you want QuickSight to use a VPC connection when connecting to
+    @ocaml.doc("<p>Use this parameter only when you want Amazon QuickSight to use a VPC connection when connecting to
 			your underlying source.</p>")
     @as("VpcConnectionProperties")
     vpcConnectionProperties: option<vpcConnectionProperties>,
-    @ocaml.doc("<p>The credentials that QuickSight that uses to connect to your underlying source. Currently,
+    @ocaml.doc("<p>The credentials that Amazon QuickSight that uses to connect to your underlying source. Currently,
 			only credentials based on user name and password are supported.</p>")
     @as("Credentials")
     credentials: option<dataSourceCredentials>,
-    @ocaml.doc("<p>The parameters that QuickSight uses to connect to your underlying source.</p>")
+    @ocaml.doc(
+      "<p>The parameters that Amazon QuickSight uses to connect to your underlying source.</p>"
+    )
     @as("DataSourceParameters")
     dataSourceParameters: option<dataSourceParameters>,
     @ocaml.doc("<p>A display name for the data source.</p>") @as("Name") name: resourceName,
     @ocaml.doc(
-      "<p>The ID of the data source. This ID is unique per AWS Region for each AWS account. </p>"
+      "<p>The ID of the data source. This ID is unique per Amazon Web Services Region for each Amazon Web Services account. </p>"
     )
     @as("DataSourceId")
     dataSourceId: resourceId,
-    @ocaml.doc("<p>The AWS account ID.</p>") @as("AwsAccountId") awsAccountId: awsAccountId,
+    @ocaml.doc("<p>The Amazon Web Services account ID.</p>") @as("AwsAccountId")
+    awsAccountId: awsAccountId,
   }
   type response = {
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>The update status of the data source's last update.</p>") @as("UpdateStatus")
     updateStatus: option<resourceStatus>,
     @ocaml.doc(
-      "<p>The ID of the data source. This ID is unique per AWS Region for each AWS account.</p>"
+      "<p>The ID of the data source. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>"
     )
     @as("DataSourceId")
     dataSourceId: option<resourceId>,
@@ -6329,11 +7557,12 @@ module ListDataSources = {
     )
     @as("NextToken")
     nextToken: option<string_>,
-    @ocaml.doc("<p>The AWS account ID.</p>") @as("AwsAccountId") awsAccountId: awsAccountId,
+    @ocaml.doc("<p>The Amazon Web Services account ID.</p>") @as("AwsAccountId")
+    awsAccountId: awsAccountId,
   }
   type response = {
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc(
       "<p>The token for the next set of results, or null if there are no more results.</p>"
@@ -6363,12 +7592,14 @@ module DescribeTheme = {
     @as("VersionNumber")
     versionNumber: option<versionNumber>,
     @ocaml.doc("<p>The ID for the theme.</p>") @as("ThemeId") themeId: restrictiveResourceId,
-    @ocaml.doc("<p>The ID of the AWS account that contains the theme that you're describing.</p>")
+    @ocaml.doc(
+      "<p>The ID of the Amazon Web Services account that contains the theme that you're describing.</p>"
+    )
     @as("AwsAccountId")
     awsAccountId: awsAndAccountId,
   }
   type response = {
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
     @ocaml.doc("<p>The information about the theme that you are describing.</p>") @as("Theme")
@@ -6394,48 +7625,47 @@ module CreateDataSource = {
     @as("Tags")
     tags: option<tagList_>,
     @ocaml.doc(
-      "<p>Secure Socket Layer (SSL) properties that apply when QuickSight connects to your underlying source.</p>"
+      "<p>Secure Socket Layer (SSL) properties that apply when Amazon QuickSight connects to your underlying source.</p>"
     )
     @as("SslProperties")
     sslProperties: option<sslProperties>,
-    @ocaml.doc("<p>Use this parameter only when you want QuickSight to use a VPC connection when connecting to
+    @ocaml.doc("<p>Use this parameter only when you want Amazon QuickSight to use a VPC connection when connecting to
 			your underlying source.</p>")
     @as("VpcConnectionProperties")
     vpcConnectionProperties: option<vpcConnectionProperties>,
     @ocaml.doc("<p>A list of resource permissions on the data source.</p>") @as("Permissions")
     permissions: option<resourcePermissionList>,
-    @ocaml.doc("<p>The credentials QuickSight that uses to connect to your underlying source. Currently, only
+    @ocaml.doc("<p>The credentials Amazon QuickSight that uses to connect to your underlying source. Currently, only
 			credentials based on user name and password are supported.</p>")
     @as("Credentials")
     credentials: option<dataSourceCredentials>,
-    @ocaml.doc("<p>The parameters that QuickSight uses to connect to your underlying source.</p>")
+    @ocaml.doc(
+      "<p>The parameters that Amazon QuickSight uses to connect to your underlying source.</p>"
+    )
     @as("DataSourceParameters")
     dataSourceParameters: option<dataSourceParameters>,
-    @ocaml.doc("<p>The type of the data source. Currently, the supported types for this operation are:
-			<code>ATHENA, AURORA, AURORA_POSTGRESQL, AMAZON_ELASTICSEARCH, MARIADB, MYSQL, POSTGRESQL, PRESTO, REDSHIFT, S3,
-			SNOWFLAKE, SPARK, SQLSERVER, TERADATA</code>. 
-			Use <code>ListDataSources</code> to return a
-			list of all data sources.</p>
-		       <p>
-            <code>AMAZON_ELASTICSEARCH</code> is for Amazon managed Elasticsearch Service.</p>")
+    @ocaml.doc("<p>The type of the data source. To return a
+			list of all data sources, use <code>ListDataSources</code>.</p>
+		       <p>Use <code>AMAZON_ELASTICSEARCH</code> for Amazon OpenSearch Service.</p>")
     @as("Type")
     type_: dataSourceType,
     @ocaml.doc("<p>A display name for the data source.</p>") @as("Name") name: resourceName,
     @ocaml.doc(
-      "<p>An ID for the data source. This ID is unique per AWS Region for each AWS account. </p>"
+      "<p>An ID for the data source. This ID is unique per Amazon Web Services Region for each Amazon Web Services account. </p>"
     )
     @as("DataSourceId")
     dataSourceId: resourceId,
-    @ocaml.doc("<p>The AWS account ID.</p>") @as("AwsAccountId") awsAccountId: awsAccountId,
+    @ocaml.doc("<p>The Amazon Web Services account ID.</p>") @as("AwsAccountId")
+    awsAccountId: awsAccountId,
   }
   type response = {
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>The status of creating the data source.</p>") @as("CreationStatus")
     creationStatus: option<resourceStatus>,
     @ocaml.doc(
-      "<p>The ID of the data source. This ID is unique per AWS Region for each AWS account.</p>"
+      "<p>The ID of the data source. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>"
     )
     @as("DataSourceId")
     dataSourceId: option<resourceId>,
@@ -6474,11 +7704,17 @@ module CreateDataSource = {
 module UpdateDataSet = {
   type t
   type request = {
+    @as("DataSetUsageConfiguration") dataSetUsageConfiguration: option<dataSetUsageConfiguration>,
     @ocaml.doc("<p>A set of one or more definitions of a <code>
-               <a>ColumnLevelPermissionRule</a>
+               <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_ColumnLevelPermissionRule.html\">ColumnLevelPermissionRule</a>
             </code>.</p>")
     @as("ColumnLevelPermissionRules")
     columnLevelPermissionRules: option<columnLevelPermissionRuleList>,
+    @ocaml.doc(
+      "<p>The configuration of tags on a dataset to set row-level security. Row-level security tags are currently supported for anonymous embedding only.</p>"
+    )
+    @as("RowLevelPermissionTagConfiguration")
+    rowLevelPermissionTagConfiguration: option<rowLevelPermissionTagConfiguration>,
     @ocaml.doc("<p>The row-level security configuration for the data you want to create.</p>")
     @as("RowLevelPermissionDataSet")
     rowLevelPermissionDataSet: option<rowLevelPermissionDataSet>,
@@ -6486,7 +7722,7 @@ module UpdateDataSet = {
     @as("FieldFolders")
     fieldFolders: option<fieldFolderMap>,
     @ocaml.doc(
-      "<p>Groupings of columns that work together in certain QuickSight features. Currently, only geospatial hierarchy is supported.</p>"
+      "<p>Groupings of columns that work together in certain Amazon QuickSight features. Currently, only geospatial hierarchy is supported.</p>"
     )
     @as("ColumnGroups")
     columnGroups: option<columnGroupList>,
@@ -6503,15 +7739,16 @@ module UpdateDataSet = {
     @as("PhysicalTableMap")
     physicalTableMap: physicalTableMap,
     @ocaml.doc("<p>The display name for the dataset.</p>") @as("Name") name: resourceName,
-    @ocaml.doc("<p>The ID for the dataset that you want to update. This ID is unique per AWS Region for each
-			AWS account.</p>")
+    @ocaml.doc("<p>The ID for the dataset that you want to update. This ID is unique per Amazon Web Services Region for each
+			Amazon Web Services account.</p>")
     @as("DataSetId")
     dataSetId: resourceId,
-    @ocaml.doc("<p>The AWS account ID.</p>") @as("AwsAccountId") awsAccountId: awsAccountId,
+    @ocaml.doc("<p>The Amazon Web Services account ID.</p>") @as("AwsAccountId")
+    awsAccountId: awsAccountId,
   }
   type response = {
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>The ID of the ingestion, which is triggered as a result of dataset creation if the import
 			mode is SPICE.</p>")
@@ -6522,7 +7759,7 @@ module UpdateDataSet = {
     @as("IngestionArn")
     ingestionArn: option<arn>,
     @ocaml.doc(
-      "<p>The ID for the dataset that you want to create. This ID is unique per AWS Region for each AWS account.</p>"
+      "<p>The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>"
     )
     @as("DataSetId")
     dataSetId: option<resourceId>,
@@ -6535,7 +7772,9 @@ module UpdateDataSet = {
     ~name,
     ~dataSetId,
     ~awsAccountId,
+    ~dataSetUsageConfiguration=?,
     ~columnLevelPermissionRules=?,
+    ~rowLevelPermissionTagConfiguration=?,
     ~rowLevelPermissionDataSet=?,
     ~fieldFolders=?,
     ~columnGroups=?,
@@ -6543,7 +7782,9 @@ module UpdateDataSet = {
     (),
   ) =>
     new({
+      dataSetUsageConfiguration: dataSetUsageConfiguration,
       columnLevelPermissionRules: columnLevelPermissionRules,
+      rowLevelPermissionTagConfiguration: rowLevelPermissionTagConfiguration,
       rowLevelPermissionDataSet: rowLevelPermissionDataSet,
       fieldFolders: fieldFolders,
       columnGroups: columnGroups,
@@ -6573,13 +7814,13 @@ module DescribeTemplate = {
     @ocaml.doc("<p>The ID for the template.</p>") @as("TemplateId")
     templateId: restrictiveResourceId,
     @ocaml.doc(
-      "<p>The ID of the AWS account that contains the template that you're describing.</p>"
+      "<p>The ID of the Amazon Web Services account that contains the template that you're describing.</p>"
     )
     @as("AwsAccountId")
     awsAccountId: awsAccountId,
   }
   type response = {
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
     @ocaml.doc("<p>The template structure for the object you want to describe.</p>") @as("Template")
@@ -6599,16 +7840,22 @@ module DescribeTemplate = {
 module CreateDataSet = {
   type t
   type request = {
+    @as("DataSetUsageConfiguration") dataSetUsageConfiguration: option<dataSetUsageConfiguration>,
     @ocaml.doc(
       "<p>Contains a map of the key-value pairs for the resource tag or tags assigned to the dataset.</p>"
     )
     @as("Tags")
     tags: option<tagList_>,
     @ocaml.doc("<p>A set of one or more definitions of a <code>
-               <a>ColumnLevelPermissionRule</a>
+               <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_ColumnLevelPermissionRule.html\">ColumnLevelPermissionRule</a>
             </code>.</p>")
     @as("ColumnLevelPermissionRules")
     columnLevelPermissionRules: option<columnLevelPermissionRuleList>,
+    @ocaml.doc(
+      "<p>The configuration of tags on a dataset to set row-level security. Row-level security tags are currently supported for anonymous embedding only.</p>"
+    )
+    @as("RowLevelPermissionTagConfiguration")
+    rowLevelPermissionTagConfiguration: option<rowLevelPermissionTagConfiguration>,
     @ocaml.doc("<p>The row-level security configuration for the data that you want to create.</p>")
     @as("RowLevelPermissionDataSet")
     rowLevelPermissionDataSet: option<rowLevelPermissionDataSet>,
@@ -6618,7 +7865,7 @@ module CreateDataSet = {
     @as("FieldFolders")
     fieldFolders: option<fieldFolderMap>,
     @ocaml.doc(
-      "<p>Groupings of columns that work together in certain QuickSight features. Currently, only geospatial hierarchy is supported.</p>"
+      "<p>Groupings of columns that work together in certain Amazon QuickSight features. Currently, only geospatial hierarchy is supported.</p>"
     )
     @as("ColumnGroups")
     columnGroups: option<columnGroupList>,
@@ -6636,15 +7883,16 @@ module CreateDataSet = {
     physicalTableMap: physicalTableMap,
     @ocaml.doc("<p>The display name for the dataset.</p>") @as("Name") name: resourceName,
     @ocaml.doc(
-      "<p>An ID for the dataset that you want to create. This ID is unique per AWS Region for each AWS account.</p>"
+      "<p>An ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>"
     )
     @as("DataSetId")
     dataSetId: resourceId,
-    @ocaml.doc("<p>The AWS account ID.</p>") @as("AwsAccountId") awsAccountId: awsAccountId,
+    @ocaml.doc("<p>The Amazon Web Services account ID.</p>") @as("AwsAccountId")
+    awsAccountId: awsAccountId,
   }
   type response = {
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>The ID of the ingestion, which is triggered as a result of dataset creation if the import
 			mode is SPICE.</p>")
@@ -6655,7 +7903,7 @@ module CreateDataSet = {
     @as("IngestionArn")
     ingestionArn: option<arn>,
     @ocaml.doc(
-      "<p>The ID for the dataset that you want to create. This ID is unique per AWS Region for each AWS account.</p>"
+      "<p>The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>"
     )
     @as("DataSetId")
     dataSetId: option<resourceId>,
@@ -6668,8 +7916,10 @@ module CreateDataSet = {
     ~name,
     ~dataSetId,
     ~awsAccountId,
+    ~dataSetUsageConfiguration=?,
     ~tags=?,
     ~columnLevelPermissionRules=?,
+    ~rowLevelPermissionTagConfiguration=?,
     ~rowLevelPermissionDataSet=?,
     ~permissions=?,
     ~fieldFolders=?,
@@ -6678,8 +7928,10 @@ module CreateDataSet = {
     (),
   ) =>
     new({
+      dataSetUsageConfiguration: dataSetUsageConfiguration,
       tags: tags,
       columnLevelPermissionRules: columnLevelPermissionRules,
+      rowLevelPermissionTagConfiguration: rowLevelPermissionTagConfiguration,
       rowLevelPermissionDataSet: rowLevelPermissionDataSet,
       permissions: permissions,
       fieldFolders: fieldFolders,
@@ -6698,15 +7950,16 @@ module DescribeDataSet = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The ID for the dataset that you want to create. This ID is unique per AWS Region for each AWS account.</p>"
+      "<p>The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>"
     )
     @as("DataSetId")
     dataSetId: resourceId,
-    @ocaml.doc("<p>The AWS account ID.</p>") @as("AwsAccountId") awsAccountId: awsAccountId,
+    @ocaml.doc("<p>The Amazon Web Services account ID.</p>") @as("AwsAccountId")
+    awsAccountId: awsAccountId,
   }
   type response = {
     @ocaml.doc("<p>The HTTP status of the request.</p>") @as("Status") status: option<statusCode>,
-    @ocaml.doc("<p>The AWS request ID for this operation.</p>") @as("RequestId")
+    @ocaml.doc("<p>The Amazon Web Services request ID for this operation.</p>") @as("RequestId")
     requestId: option<string_>,
     @ocaml.doc("<p>Information on the dataset.</p>") @as("DataSet") dataSet: option<dataSet>,
   }

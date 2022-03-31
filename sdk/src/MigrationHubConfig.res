@@ -86,13 +86,13 @@ type homeRegionControls = array<homeRegionControl>
       API reference. </p>")
 module GetHomeRegion = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("<p>The name of the home region of the calling account.</p>") @as("HomeRegion")
     homeRegion: option<homeRegion>,
   }
-  @module("@aws-sdk/client-mgh") @new external new: unit => t = "GetHomeRegionCommand"
-  let make = () => new()
+  @module("@aws-sdk/client-mgh") @new external new: request => t = "GetHomeRegionCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

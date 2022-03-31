@@ -62,6 +62,9 @@ type state = [
 ]
 type sourceOwner = string
 type sourceAccessType = [
+  | @as("SERVER_ROOT_CA_CERTIFICATE") #SERVER_ROOT_CA_CERTIFICATE
+  | @as("CLIENT_CERTIFICATE_TLS_AUTH") #CLIENT_CERTIFICATE_TLS_AUTH
+  | @as("VIRTUAL_HOST") #VIRTUAL_HOST
   | @as("SASL_SCRAM_256_AUTH") #SASL_SCRAM_256_AUTH
   | @as("SASL_SCRAM_512_AUTH") #SASL_SCRAM_512_AUTH
   | @as("VPC_SECURITY_GROUP") #VPC_SECURITY_GROUP
@@ -80,10 +83,12 @@ type runtime = [
   | @as("ruby2.5") #Ruby2_5
   | @as("go1.x") #Go1_X
   | @as("nodejs4.3-edge") #Nodejs4_3_Edge
+  | @as("dotnet6") #Dotnet6
   | @as("dotnetcore3.1") #Dotnetcore3_1
   | @as("dotnetcore2.1") #Dotnetcore2_1
   | @as("dotnetcore2.0") #Dotnetcore2_0
   | @as("dotnetcore1.0") #Dotnetcore1_0
+  | @as("python3.9") #Python3_9
   | @as("python3.8") #Python3_8
   | @as("python3.7") #Python3_7
   | @as("python3.6") #Python3_6
@@ -109,8 +114,10 @@ type provisionedConcurrencyStatusEnum = [
   | @as("READY") #READY
   | @as("IN_PROGRESS") #IN_PROGRESS
 ]
+type principalOrgID = string
 type principal = string
 type positiveInteger = int
+type pattern = string
 type parallelizationFactor = int
 type packageType = [@as("Image") #Image | @as("Zip") #Zip]
 type organizationId = string
@@ -177,6 +184,7 @@ type eventSourcePosition = [
   | @as("LATEST") #LATEST
   | @as("TRIM_HORIZON") #TRIM_HORIZON
 ]
+type ephemeralStorageSize = int
 type environmentVariableValue = string
 type environmentVariableName = string
 type endpoint = string
@@ -194,15 +202,16 @@ type blob = NodeJs.Buffer.t
 type bisectBatchOnFunctionError = bool
 type batchSize = int
 type arn = string
+type architecture = [@as("arm64") #Arm64 | @as("x86_64") #X86_64]
 type alias = string
 type additionalVersion = string
 type action = string
-@ocaml.doc("<p>The function's AWS X-Ray tracing configuration.</p>")
+@ocaml.doc("<p>The function's X-Ray tracing configuration.</p>")
 type tracingConfigResponse = {
   @ocaml.doc("<p>The tracing mode.</p>") @as("Mode") mode: option<tracingMode>,
 }
-@ocaml.doc("<p>The function's AWS X-Ray tracing configuration. To sample and record incoming requests, set <code>Mode</code>
-      to <code>Active</code>.</p>")
+@ocaml.doc("<p>The function's <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/services-xray.html\">X-Ray</a> tracing configuration.
+      To sample and record incoming requests, set <code>Mode</code> to <code>Active</code>.</p>")
 type tracingConfig = {@ocaml.doc("<p>The tracing mode.</p>") @as("Mode") mode: option<tracingMode>}
 type topics = array<topic>
 type tags = Js.Dict.t<tagValue>
@@ -210,7 +219,7 @@ type tagKeyList = array<tagKey>
 type subnetIds = array<subnetId>
 type stringList = array<string_>
 @ocaml.doc(
-  "<p>You can specify the authentication protocol, or the VPC components to secure access to your event source.</p>"
+  "<p>To secure and define access to your event source, you can specify the authentication protocol, VPC components, or virtual host.</p>"
 )
 type sourceAccessConfiguration = {
   @ocaml.doc(
@@ -218,27 +227,46 @@ type sourceAccessConfiguration = {
   )
   @as("URI")
   uri: option<uri>,
-  @ocaml.doc("<p>The type of authentication protocol or the VPC components for your event source. For example: <code>\"Type\":\"SASL_SCRAM_512_AUTH\"</code>.</p>
+  @ocaml.doc("<p>The type of authentication protocol, VPC components, or virtual host for your event source. For example: <code>\"Type\":\"SASL_SCRAM_512_AUTH\"</code>.</p>
          <ul>
             <li>
                <p>
-                  <code>BASIC_AUTH</code> - (MQ) The Secrets Manager secret that stores your broker credentials.</p>
+                  <code>BASIC_AUTH</code> - (Amazon MQ) The Secrets Manager secret that stores your broker credentials.</p>
             </li>
             <li>
                <p>
-                  <code>VPC_SUBNET</code> - The subnets associated with your VPC. Lambda connects to these subnets to fetch data from your Self-Managed Apache Kafka cluster.</p>
+                  <code>BASIC_AUTH</code> - (Self-managed Apache Kafka) The Secrets Manager ARN of your secret key used for SASL/PLAIN authentication of your Apache Kafka brokers.</p>
             </li>
             <li>
                <p>
-                  <code>VPC_SECURITY_GROUP</code> - The VPC security group used to manage access to your Self-Managed Apache Kafka brokers.</p>
+                  <code>VPC_SUBNET</code> - The subnets associated with your VPC. Lambda connects to these subnets to fetch data from your self-managed Apache Kafka cluster.</p>
             </li>
             <li>
                <p>
-                  <code>SASL_SCRAM_256_AUTH</code> - The Secrets Manager ARN of your secret key used for SASL SCRAM-256 authentication of your Self-Managed Apache Kafka brokers.</p>
+                  <code>VPC_SECURITY_GROUP</code> - The VPC security group used to manage access to your self-managed Apache Kafka brokers.</p>
             </li>
             <li>
                <p>
-                  <code>SASL_SCRAM_512_AUTH</code> - The Secrets Manager ARN of your secret key used for SASL SCRAM-512 authentication of your Self-Managed Apache Kafka brokers.</p>
+                  <code>SASL_SCRAM_256_AUTH</code> - The Secrets Manager ARN of your secret key used for SASL SCRAM-256 authentication of your self-managed Apache Kafka brokers.</p>
+            </li>
+            <li>
+               <p>
+                  <code>SASL_SCRAM_512_AUTH</code> - The Secrets Manager ARN of your secret key used for SASL SCRAM-512 authentication of your self-managed Apache Kafka brokers.</p>
+            </li>
+            <li>
+               <p>
+                  <code>VIRTUAL_HOST</code> - (Amazon MQ) The name of the virtual host in your RabbitMQ broker. Lambda uses this RabbitMQ host as the event source. 
+  This property cannot be specified in an UpdateEventSourceMapping API call.</p>
+            </li>
+            <li>
+               <p>
+                  <code>CLIENT_CERTIFICATE_TLS_AUTH</code> - (Amazon MSK, Self-managed Apache Kafka) The Secrets Manager ARN of your secret key containing the certificate chain (X.509 PEM), 
+  private key (PKCS#8 PEM), and private key password (optional) used for mutual TLS authentication of your MSK/Apache Kafka brokers.</p>
+            </li>
+            <li>
+               <p>
+                  <code>SERVER_ROOT_CA_CERTIFICATE</code> - (Self-managed Apache Kafka) The Secrets Manager ARN of your secret key containing the root CA certificate (X.509 PEM) used for TLS encryption of your Apache Kafka brokers.
+  </p>
             </li>
          </ul>")
   @as("Type")
@@ -287,7 +315,7 @@ type onFailure = {
   @as("Destination")
   destination: option<destinationArn>,
 }
-@ocaml.doc("<p>Details about a version of an <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html\">AWS Lambda
+@ocaml.doc("<p>Details about a version of an <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html\">Lambda
         layer</a>.</p>")
 type layerVersionContentOutput = {
   @ocaml.doc("<p>The Amazon Resource Name (ARN)  of a signing job.</p>") @as("SigningJobArn")
@@ -303,11 +331,11 @@ type layerVersionContentOutput = {
   @as("Location")
   location: option<string_>,
 }
-@ocaml.doc("<p>A ZIP archive that contains the contents of an <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html\">AWS Lambda
+@ocaml.doc("<p>A ZIP archive that contains the contents of an <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html\">Lambda
         layer</a>. You can specify either an Amazon S3 location,
       or upload a layer archive directly.</p>")
 type layerVersionContentInput = {
-  @ocaml.doc("<p>The base64-encoded contents of the layer archive. AWS SDK and AWS CLI clients handle the encoding for
+  @ocaml.doc("<p>The base64-encoded contents of the layer archive. Amazon Web Services SDK and Amazon Web Services CLI clients handle the encoding for
       you.</p>")
   @as("ZipFile")
   zipFile: option<blob>,
@@ -319,7 +347,7 @@ type layerVersionContentInput = {
   s3Bucket: option<s3Bucket>,
 }
 type layerList = array<layerVersionArn>
-@ocaml.doc("<p>An <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html\">AWS Lambda
+@ocaml.doc("<p>An <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html\">Lambda
         layer</a>.</p>")
 type layer = {
   @ocaml.doc("<p>The Amazon Resource Name (ARN)  of a signing job.</p>") @as("SigningJobArn")
@@ -353,7 +381,10 @@ type functionCodeLocation = {
 @ocaml.doc("<p>The code for the Lambda function. You can specify either an object in Amazon S3, upload a .zip file archive deployment
       package directly, or specify the URI of a container image.</p>")
 type functionCode = {
-  @ocaml.doc("<p>URI of a container image in the Amazon ECR registry.</p>") @as("ImageUri")
+  @ocaml.doc(
+    "<p>URI of a <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-images.html\">container image</a> in the Amazon ECR registry.</p>"
+  )
+  @as("ImageUri")
   imageUri: option<string_>,
   @ocaml.doc("<p>For versioned objects, the version of the deployment package object to use.</p>")
   @as("S3ObjectVersion")
@@ -361,19 +392,30 @@ type functionCode = {
   @ocaml.doc("<p>The Amazon S3 key of the deployment package.</p>") @as("S3Key")
   s3Key: option<s3Key>,
   @ocaml.doc(
-    "<p>An Amazon S3 bucket in the same AWS Region as your function. The bucket can be in a different AWS account.</p>"
+    "<p>An Amazon S3 bucket in the same Amazon Web Services Region as your function. The bucket can be in a different Amazon Web Services account.</p>"
   )
   @as("S3Bucket")
   s3Bucket: option<s3Bucket>,
-  @ocaml.doc("<p>The base64-encoded contents of the deployment package. AWS SDK and AWS CLI clients handle the encoding for
+  @ocaml.doc("<p>The base64-encoded contents of the deployment package. Amazon Web Services SDK and Amazon Web Services CLI clients handle the encoding for
   you.</p>")
   @as("ZipFile")
   zipFile: option<blob>,
 }
 type functionArnList = array<functionArn>
-@ocaml.doc(
-  "<p>Details about the connection between a Lambda function and an Amazon EFS file system.</p>"
-)
+@ocaml.doc("<p>
+      A structure within a <code>FilterCriteria</code> object that defines an event filtering pattern.
+    </p>")
+type filter = {
+  @ocaml.doc("<p>
+      A filter pattern. For more information on the syntax of a filter pattern, see
+      <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html#filtering-syntax\">
+        Filter rule syntax</a>.
+    </p>")
+  @as("Pattern")
+  pattern: option<pattern>,
+}
+@ocaml.doc("<p>Details about the connection between a Lambda function and an
+      <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html\">Amazon EFS file system</a>.</p>")
 type fileSystemConfig = {
   @ocaml.doc(
     "<p>The path where the function can access the file system, starting with <code>/mnt/</code>.</p>"
@@ -385,6 +427,13 @@ type fileSystemConfig = {
   )
   @as("Arn")
   arn: fileSystemArn,
+}
+@ocaml.doc(
+  "<p>The size of the function’s /tmp directory in MB. The default value is 512, but can be any whole number between 512 and 10240 MB.</p>"
+)
+type ephemeralStorage = {
+  @ocaml.doc("<p>The size of the function’s /tmp directory.</p>") @as("Size")
+  size: ephemeralStorageSize,
 }
 type environmentVariables = Js.Dict.t<environmentVariableValue>
 @ocaml.doc("<p>Error messages for environment variables that couldn't be applied.</p>")
@@ -402,13 +451,14 @@ type deadLetterConfig = {
 }
 type concurrency = {
   @ocaml.doc(
-    "<p>The number of concurrent executions that are reserved for this function. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html\">Managing Concurrency</a>.</p>"
+    "<p>The number of concurrent executions that are reserved for this function. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-concurrency.html\">Managing Concurrency</a>.</p>"
   )
   @as("ReservedConcurrentExecutions")
   reservedConcurrentExecutions: option<reservedConcurrentExecutions>,
 }
 type compatibleRuntimes = array<runtime>
-@ocaml.doc("<p>Code signing configuration policies specifies the validation failure action for signature mismatch or
+type compatibleArchitectures = array<architecture>
+@ocaml.doc("<p>Code signing configuration <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html#config-codesigning-policies\">policies</a> specify the validation failure action for signature mismatch or
        expiry.</p>")
 type codeSigningPolicies = {
   @ocaml.doc("<p>Code signing configuration policy for deployment validation failure. If you set the policy to
@@ -419,6 +469,7 @@ type codeSigningPolicies = {
   @as("UntrustedArtifactOnDeployment")
   untrustedArtifactOnDeployment: option<codeSigningPolicy>,
 }
+type architecturesList = array<architecture>
 type additionalVersionWeights = Js.Dict.t<weight>
 @ocaml.doc("<p>The number of functions and amount of storage in use.</p>")
 type accountUsage = {
@@ -441,7 +492,7 @@ type accountLimit = {
   @ocaml.doc("<p>The maximum number of simultaneous function executions.</p>")
   @as("ConcurrentExecutions")
   concurrentExecutions: option<integer_>,
-  @ocaml.doc("<p>The maximum size of a deployment package when it's uploaded directly to AWS Lambda. Use Amazon S3 for larger
+  @ocaml.doc("<p>The maximum size of a deployment package when it's uploaded directly to Lambda. Use Amazon S3 for larger
       files.</p>")
   @as("CodeSizeZipped")
   codeSizeZipped: option<long>,
@@ -474,9 +525,13 @@ type vpcConfig = {
 type sourceAccessConfigurations = array<sourceAccessConfiguration>
 type provisionedConcurrencyConfigList = array<provisionedConcurrencyConfigListItem>
 type layersReferenceList = array<layer>
-@ocaml.doc("<p>Details about a version of an <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html\">AWS Lambda
+@ocaml.doc("<p>Details about a version of an <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html\">Lambda
         layer</a>.</p>")
 type layerVersionsListItem = {
+  @ocaml.doc("<p>A list of compatible  
+      <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html\">instruction set architectures</a>.</p>")
+  @as("CompatibleArchitectures")
+  compatibleArchitectures: option<compatibleArchitectures>,
   @ocaml.doc("<p>The layer's open-source license.</p>") @as("LicenseInfo")
   licenseInfo: option<licenseInfo>,
   @ocaml.doc("<p>The layer's compatible runtimes.</p>") @as("CompatibleRuntimes")
@@ -492,7 +547,7 @@ type layerVersionsListItem = {
   @ocaml.doc("<p>The ARN of the layer version.</p>") @as("LayerVersionArn")
   layerVersionArn: option<layerVersionArn>,
 }
-@ocaml.doc("<p>Configuration values that override the container image Dockerfile settings. See   
+@ocaml.doc("<p>Configuration values that override the container image Dockerfile settings. See
       <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/images-create.html#images-parms\">Container settings</a>. </p>")
 type imageConfig = {
   @ocaml.doc("<p>Specifies the working directory.</p>") @as("WorkingDirectory")
@@ -505,6 +560,7 @@ type imageConfig = {
   @as("EntryPoint")
   entryPoint: option<stringList>,
 }
+type filterList = array<filter>
 type fileSystemConfigList = array<fileSystemConfig>
 @ocaml.doc("<p>The results of an operation to update or read environment variables. If the operation is successful, the
       response contains the environment variables. If it failed, the response contains details about the error.</p>")
@@ -515,9 +571,13 @@ type environmentResponse = {
   @ocaml.doc("<p>Environment variable key-value pairs.</p>") @as("Variables")
   variables: option<environmentVariables>,
 }
-@ocaml.doc("<p>A function's environment variable settings.</p>")
+@ocaml.doc("<p>A function's environment variable settings.
+    You can use environment variables to adjust your function's behavior without updating code.
+    An environment variable is a pair of strings that are stored in a function's version-specific configuration. </p>")
 type environment = {
-  @ocaml.doc("<p>Environment variable key-value pairs.</p>") @as("Variables")
+  @ocaml.doc("<p>Environment variable key-value pairs. For more information, see
+    <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html\">Using Lambda environment variables</a>.</p>")
+  @as("Variables")
   variables: option<environmentVariables>,
 }
 type endpoints = Js.Dict.t<endpointLists>
@@ -545,15 +605,14 @@ type aliasRoutingConfiguration = {
   @as("AdditionalVersionWeights")
   additionalVersionWeights: option<additionalVersionWeights>,
 }
-@ocaml.doc("<p>The Self-Managed Apache Kafka cluster for your event source.</p>")
+@ocaml.doc("<p>The self-managed Apache Kafka cluster for your event source.</p>")
 type selfManagedEventSource = {
-  @ocaml.doc(
-    "<p>The list of bootstrap servers for your Kafka brokers in the following format: <code>\"KAFKA_BOOTSTRAP_SERVERS\": [\"abc.xyz.com:xxxx\",\"abc2.xyz.com:xxxx\"]</code>.</p>"
-  )
+  @ocaml.doc("<p>The list of bootstrap servers for your Kafka brokers in the following format: <code>\"KAFKA_BOOTSTRAP_SERVERS\":
+        [\"abc.xyz.com:xxxx\",\"abc2.xyz.com:xxxx\"]</code>.</p>")
   @as("Endpoints")
   endpoints: option<endpoints>,
 }
-@ocaml.doc("<p>Details about an <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html\">AWS Lambda
+@ocaml.doc("<p>Details about an <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html\">Lambda
         layer</a>.</p>")
 type layersListItem = {
   @ocaml.doc("<p>The newest version of the layer.</p>") @as("LatestMatchingVersion")
@@ -608,7 +667,19 @@ type functionEventInvokeConfig = {
   @as("LastModified")
   lastModified: option<date>,
 }
-@ocaml.doc("<p>Details about a Code signing configuration. </p>")
+@ocaml.doc("<p>
+      An object that contains the filters for an event source.
+    </p>")
+type filterCriteria = {
+  @ocaml.doc("<p>
+      A list of filters.
+    </p>")
+  @as("Filters")
+  filters: option<filterList>,
+}
+@ocaml.doc(
+  "<p>Details about a <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html\">Code signing configuration</a>. </p>"
+)
 type codeSigningConfig = {
   @ocaml.doc(
     "<p>The date and time that the Code signing configuration was last modified, in ISO-8601 format (YYYY-MM-DDThh:mm:ss.sTZD). </p>"
@@ -653,6 +724,15 @@ type layersList = array<layersListItem>
 type functionEventInvokeConfigList = array<functionEventInvokeConfig>
 @ocaml.doc("<p>Details about a function's configuration.</p>")
 type functionConfiguration = {
+  @ocaml.doc(
+    "<p>The size of the function’s /tmp directory in MB. The default value is 512, but can be any whole number between 512 and 10240 MB.</p>"
+  )
+  @as("EphemeralStorage")
+  ephemeralStorage: option<ephemeralStorage>,
+  @ocaml.doc("<p>The instruction set architecture that the function supports. Architecture is a string array with one of the 
+      valid values. The default architecture value is <code>x86_64</code>.</p>")
+  @as("Architectures")
+  architectures: option<architecturesList>,
   @ocaml.doc("<p>The ARN of the signing job.</p>") @as("SigningJobArn") signingJobArn: option<arn>,
   @ocaml.doc("<p>The ARN of the signing profile version.</p>") @as("SigningProfileVersionArn")
   signingProfileVersionArn: option<arn>,
@@ -663,7 +743,10 @@ type functionConfiguration = {
   )
   @as("PackageType")
   packageType: option<packageType>,
-  @ocaml.doc("<p>Connection settings for an Amazon EFS file system.</p>") @as("FileSystemConfigs")
+  @ocaml.doc(
+    "<p>Connection settings for an <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html\">Amazon EFS file system</a>.</p>"
+  )
+  @as("FileSystemConfigs")
   fileSystemConfigs: option<fileSystemConfigList>,
   @ocaml.doc("<p>The reason code for the last update that was performed on the function.</p>")
   @as("LastUpdateStatusReasonCode")
@@ -691,15 +774,18 @@ type functionConfiguration = {
   layers: option<layersReferenceList>,
   @ocaml.doc("<p>The latest updated revision of the function or alias.</p>") @as("RevisionId")
   revisionId: option<string_>,
-  @ocaml.doc("<p>For Lambda@Edge functions, the ARN of the master function.</p>") @as("MasterArn")
+  @ocaml.doc("<p>For Lambda@Edge functions, the ARN of the main function.</p>") @as("MasterArn")
   masterArn: option<functionArn>,
-  @ocaml.doc("<p>The function's AWS X-Ray tracing configuration.</p>") @as("TracingConfig")
+  @ocaml.doc("<p>The function's X-Ray tracing configuration.</p>") @as("TracingConfig")
   tracingConfig: option<tracingConfigResponse>,
   @ocaml.doc("<p>The KMS key that's used to encrypt the function's environment variables. This key is only returned if you've
-      configured a customer managed CMK.</p>")
+      configured a customer managed key.</p>")
   @as("KMSKeyArn")
   kmskeyArn: option<kmskeyArn>,
-  @ocaml.doc("<p>The function's environment variables.</p>") @as("Environment")
+  @ocaml.doc(
+    "<p>The function's <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html\">environment variables</a>.</p>"
+  )
+  @as("Environment")
   environment: option<environmentResponse>,
   @ocaml.doc("<p>The function's dead letter queue.</p>") @as("DeadLetterConfig")
   deadLetterConfig: option<deadLetterConfig>,
@@ -736,92 +822,96 @@ type functionConfiguration = {
   functionName: option<namespacedFunctionName>,
 }
 @ocaml.doc(
-  "<p>A mapping between an AWS resource and an AWS Lambda function. See <a>CreateEventSourceMapping</a> for details.</p>"
+  "<p>A mapping between an Amazon Web Services resource and a Lambda function. For details, see <a>CreateEventSourceMapping</a>.</p>"
 )
 type eventSourceMappingConfiguration = {
   @ocaml.doc(
-    "<p>(Streams) A list of current response type enums applied to the event source mapping.</p>"
+    "<p>(Streams only) A list of current response type enums applied to the event source mapping.</p>"
   )
   @as("FunctionResponseTypes")
   functionResponseTypes: option<functionResponseTypeList>,
   @ocaml.doc(
-    "<p>(Streams) The duration in seconds of a processing window. The range is between 1 second up to 900 seconds.</p>"
+    "<p>(Streams only) The duration in seconds of a processing window. The range is 1–900 seconds.</p>"
   )
   @as("TumblingWindowInSeconds")
   tumblingWindowInSeconds: option<tumblingWindowInSeconds>,
-  @ocaml.doc(
-    "<p>(Streams) Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.</p>"
-  )
+  @ocaml.doc("<p>(Streams only) Discard records after the specified number of retries. The default value is -1,
+which sets the maximum number of retries to infinite. When MaximumRetryAttempts is infinite, Lambda retries failed records until the record expires in the event source.</p>")
   @as("MaximumRetryAttempts")
   maximumRetryAttempts: option<maximumRetryAttemptsEventSourceMapping>,
   @ocaml.doc(
-    "<p>(Streams) If the function returns an error, split the batch in two and retry. The default value is false.</p>"
+    "<p>(Streams only) If the function returns an error, split the batch in two and retry. The default value is false.</p>"
   )
   @as("BisectBatchOnFunctionError")
   bisectBatchOnFunctionError: option<bisectBatchOnFunctionError>,
-  @ocaml.doc(
-    "<p>(Streams) Discard records older than the specified age. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.</p>"
-  )
+  @ocaml.doc("<p>(Streams only) Discard records older than the specified age. The default value is -1,
+which sets the maximum age to infinite. When the value is set to infinite, Lambda never discards old records.  </p>")
   @as("MaximumRecordAgeInSeconds")
   maximumRecordAgeInSeconds: option<maximumRecordAgeInSeconds>,
-  @ocaml.doc("<p>The Self-Managed Apache Kafka cluster for your event source.</p>")
+  @ocaml.doc("<p>The self-managed Apache Kafka cluster for your event source.</p>")
   @as("SelfManagedEventSource")
   selfManagedEventSource: option<selfManagedEventSource>,
   @ocaml.doc(
-    "<p>An array of the authentication protocol, or the VPC components to secure your event source.</p>"
+    "<p>An array of the authentication protocol, VPC components, or virtual host to secure and define your event source.</p>"
   )
   @as("SourceAccessConfigurations")
   sourceAccessConfigurations: option<sourceAccessConfigurations>,
-  @ocaml.doc("<p>
-      (MQ) The name of the Amazon MQ broker destination queue to consume.
-    </p>")
+  @ocaml.doc("<p> (Amazon MQ) The name of the Amazon MQ broker destination queue to consume.</p>")
   @as("Queues")
   queues: option<queues>,
   @ocaml.doc("<p>The name of the Kafka topic.</p>") @as("Topics") topics: option<topics>,
   @ocaml.doc(
-    "<p>(Streams) An Amazon SQS queue or Amazon SNS topic destination for discarded records.</p>"
+    "<p>(Streams only) An Amazon SQS queue or Amazon SNS topic destination for discarded records.</p>"
   )
   @as("DestinationConfig")
   destinationConfig: option<destinationConfig>,
-  @ocaml.doc("<p>Indicates whether the last change to the event source mapping was made by a user, or by the Lambda
-      service.</p>")
+  @ocaml.doc(
+    "<p>Indicates whether a user or Lambda made the last change to the event source mapping.</p>"
+  )
   @as("StateTransitionReason")
   stateTransitionReason: option<string_>,
   @ocaml.doc("<p>The state of the event source mapping. It can be one of the following: <code>Creating</code>,
-      <code>Enabling</code>, <code>Enabled</code>, <code>Disabling</code>, <code>Disabled</code>,
-      <code>Updating</code>, or <code>Deleting</code>.</p>")
+        <code>Enabling</code>, <code>Enabled</code>, <code>Disabling</code>, <code>Disabled</code>,
+        <code>Updating</code>, or <code>Deleting</code>.</p>")
   @as("State")
   state: option<string_>,
-  @ocaml.doc("<p>The result of the last AWS Lambda invocation of your Lambda function.</p>")
+  @ocaml.doc("<p>The result of the last Lambda invocation of your function.</p>")
   @as("LastProcessingResult")
   lastProcessingResult: option<string_>,
   @ocaml.doc(
-    "<p>The date that the event source mapping was last updated, or its state changed.</p>"
+    "<p>The date that the event source mapping was last updated or that its state changed.</p>"
   )
   @as("LastModified")
   lastModified: option<date>,
   @ocaml.doc("<p>The ARN of the Lambda function.</p>") @as("FunctionArn")
   functionArn: option<functionArn>,
+  @ocaml.doc("<p>(Streams and Amazon SQS) An object that defines the filter criteria that
+    determine whether Lambda should process an event. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html\">Lambda event filtering</a>.</p>")
+  @as("FilterCriteria")
+  filterCriteria: option<filterCriteria>,
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the event source.</p>") @as("EventSourceArn")
   eventSourceArn: option<arn>,
   @ocaml.doc(
-    "<p>(Streams) The number of batches to process from each shard concurrently. The default value is 1.</p>"
+    "<p>(Streams only) The number of batches to process concurrently from each shard. The default value is 1.</p>"
   )
   @as("ParallelizationFactor")
   parallelizationFactor: option<parallelizationFactor>,
-  @ocaml.doc(
-    "<p>(Streams and SQS standard queues) The maximum amount of time to gather records before invoking the function, in seconds. The default value is zero.</p>"
-  )
+  @ocaml.doc("<p>(Streams and Amazon SQS standard queues) The maximum amount of time, in seconds, that Lambda spends gathering records before invoking the function.</p>
+         <p>Default: 0</p>
+         <p>Related setting: When you set <code>BatchSize</code> to a value greater than 10, you must set <code>MaximumBatchingWindowInSeconds</code> to at least 1.</p>")
   @as("MaximumBatchingWindowInSeconds")
   maximumBatchingWindowInSeconds: option<maximumBatchingWindowInSeconds>,
-  @ocaml.doc("<p>The maximum number of items to retrieve in a single batch.</p>") @as("BatchSize")
+  @ocaml.doc("<p>The maximum number of records in each batch that Lambda pulls from your stream or queue and sends to your function. Lambda passes all of the records in the batch to the function in a single call, up to the payload limit for synchronous invocation (6 MB).</p>
+         <p>Default value: Varies by service. For Amazon SQS, the default is 10. For all other services, the default is 100.</p>
+         <p>Related setting: When you set <code>BatchSize</code> to a value greater than 10, you must set <code>MaximumBatchingWindowInSeconds</code> to at least 1.</p>")
+  @as("BatchSize")
   batchSize: option<batchSize>,
   @ocaml.doc("<p>With <code>StartingPosition</code> set to <code>AT_TIMESTAMP</code>, the time from which to start
       reading.</p>")
   @as("StartingPositionTimestamp")
   startingPositionTimestamp: option<date>,
-  @ocaml.doc("<p>The position in a stream from which to start reading. Required for Amazon Kinesis, Amazon DynamoDB, and Amazon MSK Streams
-      sources. <code>AT_TIMESTAMP</code> is only supported for Amazon Kinesis streams.</p>")
+  @ocaml.doc("<p>The position in a stream from which to start reading. Required for Amazon Kinesis, Amazon DynamoDB, and Amazon MSK stream sources. <code>AT_TIMESTAMP</code> is supported only for Amazon Kinesis
+      streams.</p>")
   @as("StartingPosition")
   startingPosition: option<eventSourcePosition>,
   @ocaml.doc("<p>The identifier of the event source mapping.</p>") @as("UUID")
@@ -831,13 +921,72 @@ type codeSigningConfigList = array<codeSigningConfig>
 type aliasList = array<aliasConfiguration>
 type functionList = array<functionConfiguration>
 type eventSourceMappingsList = array<eventSourceMappingConfiguration>
-@ocaml.doc("<fullname>AWS Lambda</fullname>
+@ocaml.doc("<fullname>Lambda</fullname>
          <p>
             <b>Overview</b>
          </p>
-         <p>This is the <i>AWS Lambda API Reference</i>. The AWS Lambda Developer Guide provides additional
-      information. For the service overview, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/welcome.html\">What is
-        AWS Lambda</a>, and for information about how the service works, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-introduction.html\">AWS Lambda: How it Works</a> in the <b>AWS Lambda Developer Guide</b>.</p>")
+         <p>Lambda is a compute service that lets you run code without provisioning or managing servers.
+        Lambda runs your code on a high-availability compute infrastructure and performs all of the
+      administration of the compute resources, including server and operating system maintenance, capacity provisioning
+      and automatic scaling, code monitoring and logging. With Lambda, you can run code for virtually any
+      type of application or backend service. For more information about the Lambda service, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/welcome.html\">What is Lambda</a> in the <b>Lambda Developer Guide</b>.</p>
+         <p>The <i>Lambda API Reference</i> provides information about
+      each of the API methods, including details about the parameters in each API request and
+      response. </p>
+         <p></p>
+         <p>You can use Software Development Kits (SDKs), Integrated Development Environment (IDE) Toolkits, and command
+      line tools to access the API. For installation instructions, see <a href=\"http://aws.amazon.com/tools/\">Tools for
+        Amazon Web Services</a>. </p>
+         <p>For a list of Region-specific endpoints that Lambda supports, 
+      see <a href=\"https://docs.aws.amazon.com/general/latest/gr/lambda-service.html/\">Lambda
+        endpoints and quotas </a> in the <i>Amazon Web Services General Reference.</i>. </p>   
+         <p>When making the API calls, you will need to
+      authenticate your request by providing a signature. Lambda supports signature version 4. For more information,
+      see <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4 signing process</a> in the
+      <i>Amazon Web Services General Reference.</i>. </p>
+         <p>
+            <b>CA certificates</b>
+         </p>
+
+         <p>Because Amazon Web Services SDKs use the CA certificates from your computer, changes to the certificates on the Amazon Web Services servers
+        can cause connection failures when you attempt to use an SDK. You can prevent these failures by keeping your
+        computer's CA certificates and operating system up-to-date. If you encounter this issue in a corporate
+        environment and do not manage your own computer, you might need to ask an administrator to assist with the
+        update process. The following list shows minimum operating system and Java versions:</p>
+         <ul>
+            <li>
+               <p>Microsoft Windows versions that have updates from January 2005 or later installed contain at least one
+            of the required CAs in their trust list. </p>
+            </li>
+            <li>
+               <p>Mac OS X 10.4 with Java for Mac OS X 10.4 Release 5 (February 2007), Mac OS X 10.5 (October 2007), and
+            later versions contain at least one of the required CAs in their trust list. </p>
+            </li>
+            <li>
+               <p>Red Hat Enterprise Linux 5 (March 2007), 6, and 7 and CentOS 5, 6, and 7 all contain at least one of the
+            required CAs in their default trusted CA list. </p>
+            </li>
+            <li>
+               <p>Java 1.4.2_12 (May 2006), 5 Update 2 (March 2005), and all later versions, including Java 6 (December
+            2006), 7, and 8, contain at least one of the required CAs in their default trusted CA list. </p>
+            </li>
+         </ul>
+         <p>When accessing the Lambda management console or Lambda API endpoints, whether through browsers or
+        programmatically, you will need to ensure your client machines support any of the following CAs: </p>
+         <ul>
+            <li>
+               <p>Amazon Root CA 1</p>
+            </li>
+            <li>
+               <p>Starfield Services Root Certificate Authority - G2</p>
+            </li>
+            <li>
+               <p>Starfield Class 2 Certification Authority</p>
+            </li>
+         </ul>
+         <p>Root certificates from the first two authorities are available from <a href=\"https://www.amazontrust.com/repository/\">Amazon trust services</a>, but keeping your computer
+        up-to-date is the more straightforward solution. To learn more about ACM-provided certificates, see <a href=\"http://aws.amazon.com/certificate-manager/faqs/#certificates\">Amazon Web Services Certificate Manager FAQs.</a>
+         </p>")
 module RemovePermission = {
   type t
   type request = {
@@ -875,7 +1024,7 @@ module RemovePermission = {
     @as("FunctionName")
     functionName: functionName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-lambda") @new external new: request => t = "RemovePermissionCommand"
   let make = (~statementId, ~functionName, ~revisionId=?, ~qualifier=?, ()) =>
     new({
@@ -901,7 +1050,7 @@ module RemoveLayerVersionPermission = {
     @ocaml.doc("<p>The name or Amazon Resource Name (ARN) of the layer.</p>") @as("LayerName")
     layerName: layerName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-lambda") @new
   external new: request => t = "RemoveLayerVersionPermissionCommand"
   let make = (~statementId, ~versionNumber, ~layerName, ~revisionId=?, ()) =>
@@ -1123,14 +1272,19 @@ module Invoke = {
     @ocaml.doc("<p>Specify a version or alias to invoke a published version of the function.</p>")
     @as("Qualifier")
     qualifier: option<qualifier>,
-    @ocaml.doc("<p>The JSON that you want to provide to your Lambda function as input.</p>")
+    @ocaml.doc("<p>The JSON that you want to provide to your Lambda function as input.</p>
+         <p>You can enter the JSON directly. For example, <code>--payload '{ \"key\": \"value\" }'</code>. 
+      You can also specify a file path. For example, <code>--payload file://payload.json</code>.
+    </p>")
     @as("Payload")
     payload: option<blob>,
     @ocaml.doc("<p>Up to 3583 bytes of base64-encoded data about the invoking client to pass to the function in the context
       object.</p>")
     @as("ClientContext")
     clientContext: option<string_>,
-    @ocaml.doc("<p>Set to <code>Tail</code> to include the execution log in the response.</p>")
+    @ocaml.doc(
+      "<p>Set to <code>Tail</code> to include the execution log in the response. Applies to synchronously invoked functions only.</p>"
+    )
     @as("LogType")
     logType: option<logType>,
     @ocaml.doc("<p>Choose from the following options.</p>
@@ -1458,7 +1612,7 @@ module DeleteProvisionedConcurrencyConfig = {
     @as("FunctionName")
     functionName: functionName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-lambda") @new
   external new: request => t = "DeleteProvisionedConcurrencyConfigCommand"
   let make = (~qualifier, ~functionName, ()) =>
@@ -1473,7 +1627,7 @@ module DeleteLayerVersion = {
     @ocaml.doc("<p>The name or Amazon Resource Name (ARN) of the layer.</p>") @as("LayerName")
     layerName: layerName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-lambda") @new external new: request => t = "DeleteLayerVersionCommand"
   let make = (~versionNumber, ~layerName, ()) =>
     new({versionNumber: versionNumber, layerName: layerName})
@@ -1508,7 +1662,7 @@ module DeleteFunctionEventInvokeConfig = {
     @as("FunctionName")
     functionName: functionName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-lambda") @new
   external new: request => t = "DeleteFunctionEventInvokeConfigCommand"
   let make = (~functionName, ~qualifier=?, ()) =>
@@ -1542,7 +1696,7 @@ module DeleteFunctionConcurrency = {
     @as("FunctionName")
     functionName: functionName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-lambda") @new
   external new: request => t = "DeleteFunctionConcurrencyCommand"
   let make = (~functionName, ()) => new({functionName: functionName})
@@ -1575,7 +1729,7 @@ module DeleteFunctionCodeSigningConfig = {
     @as("FunctionName")
     functionName: functionName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-lambda") @new
   external new: request => t = "DeleteFunctionCodeSigningConfigCommand"
   let make = (~functionName, ()) => new({functionName: functionName})
@@ -1613,7 +1767,7 @@ module DeleteFunction = {
     @as("FunctionName")
     functionName: functionName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-lambda") @new external new: request => t = "DeleteFunctionCommand"
   let make = (~functionName, ~qualifier=?, ()) =>
     new({qualifier: qualifier, functionName: functionName})
@@ -1627,7 +1781,7 @@ module DeleteCodeSigningConfig = {
     @as("CodeSigningConfigArn")
     codeSigningConfigArn: codeSigningConfigArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-lambda") @new
   external new: request => t = "DeleteCodeSigningConfigCommand"
   let make = (~codeSigningConfigArn, ()) => new({codeSigningConfigArn: codeSigningConfigArn})
@@ -1661,7 +1815,7 @@ module DeleteAlias = {
     @as("FunctionName")
     functionName: functionName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-lambda") @new external new: request => t = "DeleteAliasCommand"
   let make = (~name, ~functionName, ()) => new({name: name, functionName: functionName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1670,6 +1824,10 @@ module DeleteAlias = {
 module AddPermission = {
   type t
   type request = {
+    @ocaml.doc("<p>The identifier for your organization in Organizations. Use this to grant permissions to all the Amazon Web Services
+      accounts under this organization.</p>")
+    @as("PrincipalOrgID")
+    principalOrgID: option<principalOrgID>,
     @ocaml.doc("<p>Only update the policy if the revision ID matches the ID that's specified. Use this option to avoid modifying a
       policy that has changed since you last read it.</p>")
     @as("RevisionId")
@@ -1689,11 +1847,12 @@ module AddPermission = {
       by its owner and recreated by another account.</p>")
     @as("SourceAccount")
     sourceAccount: option<sourceOwner>,
-    @ocaml.doc("<p>For AWS services, the ARN of the AWS resource that invokes the function. For example, an Amazon S3 bucket or
-      Amazon SNS topic.</p>")
+    @ocaml.doc("<p>For Amazon Web Services services, the ARN of the Amazon Web Services resource that invokes the function. For example, an Amazon S3 bucket or
+      Amazon SNS topic.</p>
+         <p>Note that Lambda configures the comparison using the <code>StringLike</code> operator.</p>")
     @as("SourceArn")
     sourceArn: option<arn>,
-    @ocaml.doc("<p>The AWS service or account that invokes the function. If you specify a service, use <code>SourceArn</code> or
+    @ocaml.doc("<p>The Amazon Web Services service or account that invokes the function. If you specify a service, use <code>SourceArn</code> or
         <code>SourceAccount</code> to limit who can invoke the function through that service.</p>")
     @as("Principal")
     principal: principal,
@@ -1740,6 +1899,7 @@ module AddPermission = {
     ~action,
     ~statementId,
     ~functionName,
+    ~principalOrgID=?,
     ~revisionId=?,
     ~qualifier=?,
     ~eventSourceToken=?,
@@ -1748,6 +1908,7 @@ module AddPermission = {
     (),
   ) =>
     new({
+      principalOrgID: principalOrgID,
       revisionId: revisionId,
       qualifier: qualifier,
       eventSourceToken: eventSourceToken,
@@ -1772,7 +1933,10 @@ module AddLayerVersionPermission = {
       organization.</p>")
     @as("OrganizationId")
     organizationId: option<organizationId>,
-    @ocaml.doc("<p>An account ID, or <code>*</code> to grant permission to all AWS accounts.</p>")
+    @ocaml.doc("<p>An account ID, or <code>*</code> to grant layer usage permission to all
+      accounts in an organization, or all Amazon Web Services accounts (if <code>organizationId</code> is not specified).
+      For the last case, make sure that you really do want all Amazon Web Services accounts to have usage permission to this layer.
+    </p>")
     @as("Principal")
     principal: layerPermissionAllowedPrincipal,
     @ocaml.doc(
@@ -1827,7 +1991,7 @@ module UntagResource = {
     @ocaml.doc("<p>The function's Amazon Resource Name (ARN).</p>") @as("Resource")
     resource: functionArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-lambda") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resource, ()) => new({tagKeys: tagKeys, resource: resource})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1840,7 +2004,7 @@ module TagResource = {
     @ocaml.doc("<p>The function's Amazon Resource Name (ARN).</p>") @as("Resource")
     resource: functionArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-lambda") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resource, ()) => new({tags: tags, resource: resource})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1849,6 +2013,10 @@ module TagResource = {
 module PublishLayerVersion = {
   type t
   type request = {
+    @ocaml.doc("<p>A list of compatible  
+<a href=\"https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html\">instruction set architectures</a>.</p>")
+    @as("CompatibleArchitectures")
+    compatibleArchitectures: option<compatibleArchitectures>,
     @ocaml.doc("<p>The layer's software license. It can be any of the following:</p>
          <ul>
             <li>
@@ -1877,6 +2045,10 @@ module PublishLayerVersion = {
     layerName: layerName,
   }
   type response = {
+    @ocaml.doc("<p>A list of compatible  
+<a href=\"https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html\">instruction set architectures</a>.</p>")
+    @as("CompatibleArchitectures")
+    compatibleArchitectures: option<compatibleArchitectures>,
     @ocaml.doc("<p>The layer's software license.</p>") @as("LicenseInfo")
     licenseInfo: option<licenseInfo>,
     @ocaml.doc("<p>The layer's compatible runtimes.</p>") @as("CompatibleRuntimes")
@@ -1896,8 +2068,17 @@ module PublishLayerVersion = {
     content: option<layerVersionContentOutput>,
   }
   @module("@aws-sdk/client-lambda") @new external new: request => t = "PublishLayerVersionCommand"
-  let make = (~content, ~layerName, ~licenseInfo=?, ~compatibleRuntimes=?, ~description=?, ()) =>
+  let make = (
+    ~content,
+    ~layerName,
+    ~compatibleArchitectures=?,
+    ~licenseInfo=?,
+    ~compatibleRuntimes=?,
+    ~description=?,
+    (),
+  ) =>
     new({
+      compatibleArchitectures: compatibleArchitectures,
       licenseInfo: licenseInfo,
       compatibleRuntimes: compatibleRuntimes,
       content: content,
@@ -1910,7 +2091,9 @@ module PublishLayerVersion = {
 module ListTags = {
   type t
   type request = {
-    @ocaml.doc("<p>The function's Amazon Resource Name (ARN).</p>") @as("Resource")
+    @ocaml.doc("<p>The function's Amazon Resource Name (ARN). 
+      Note: Lambda does not support adding tags to aliases or versions.</p>")
+    @as("Resource")
     resource: functionArn,
   }
   type response = {@ocaml.doc("<p>The function's tags.</p>") @as("Tags") tags: option<tags>}
@@ -1953,6 +2136,10 @@ module GetLayerVersionByArn = {
     @ocaml.doc("<p>The ARN of the layer version.</p>") @as("Arn") arn: layerVersionArn,
   }
   type response = {
+    @ocaml.doc("<p>A list of compatible  
+<a href=\"https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html\">instruction set architectures</a>.</p>")
+    @as("CompatibleArchitectures")
+    compatibleArchitectures: option<compatibleArchitectures>,
     @ocaml.doc("<p>The layer's software license.</p>") @as("LicenseInfo")
     licenseInfo: option<licenseInfo>,
     @ocaml.doc("<p>The layer's compatible runtimes.</p>") @as("CompatibleRuntimes")
@@ -1984,6 +2171,10 @@ module GetLayerVersion = {
     layerName: layerName,
   }
   type response = {
+    @ocaml.doc("<p>A list of compatible  
+<a href=\"https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html\">instruction set architectures</a>.</p>")
+    @as("CompatibleArchitectures")
+    compatibleArchitectures: option<compatibleArchitectures>,
     @ocaml.doc("<p>The layer's software license.</p>") @as("LicenseInfo")
     licenseInfo: option<licenseInfo>,
     @ocaml.doc("<p>The layer's compatible runtimes.</p>") @as("CompatibleRuntimes")
@@ -2010,7 +2201,7 @@ module GetLayerVersion = {
 
 module GetAccountSettings = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("<p>The number of functions and amount of storage in use.</p>") @as("AccountUsage")
     accountUsage: option<accountUsage>,
@@ -2018,8 +2209,8 @@ module GetAccountSettings = {
     @as("AccountLimit")
     accountLimit: option<accountLimit>,
   }
-  @module("@aws-sdk/client-lambda") @new external new: unit => t = "GetAccountSettingsCommand"
-  let make = () => new()
+  @module("@aws-sdk/client-lambda") @new external new: request => t = "GetAccountSettingsCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -2415,9 +2606,14 @@ module CreateAlias = {
 module UpdateFunctionConfiguration = {
   type t
   type request = {
+    @ocaml.doc(
+      "<p>The size of the function’s /tmp directory in MB. The default value is 512, but can be any whole number between 512 and 10240 MB.</p>"
+    )
+    @as("EphemeralStorage")
+    ephemeralStorage: option<ephemeralStorage>,
     @ocaml.doc("<p>
             <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/images-parms.html\">Container image configuration
-        values</a> that override the values in the container image Dockerfile.</p>")
+        values</a> that override the values in the container image Docker file.</p>")
     @as("ImageConfig")
     imageConfig: option<imageConfig>,
     @ocaml.doc("<p>Connection settings for an Amazon EFS file system.</p>") @as("FileSystemConfigs")
@@ -2430,21 +2626,20 @@ module UpdateFunctionConfiguration = {
       function that has changed since you last read it.</p>")
     @as("RevisionId")
     revisionId: option<string_>,
-    @ocaml.doc("<p>Set <code>Mode</code> to <code>Active</code> to sample and trace a subset of incoming requests with AWS
-      X-Ray.</p>")
+    @ocaml.doc("<p>Set <code>Mode</code> to <code>Active</code> to sample and trace a subset of incoming requests with
+<a href=\"https://docs.aws.amazon.com/lambda/latest/dg/services-xray.html\">X-Ray</a>.</p>")
     @as("TracingConfig")
     tracingConfig: option<tracingConfig>,
-    @ocaml.doc("<p>The ARN of the AWS Key Management Service (AWS KMS) key that's used to encrypt your function's environment
-      variables. If it's not provided, AWS Lambda uses a default service key.</p>")
+    @ocaml.doc("<p>The ARN of the Amazon Web Services Key Management Service (KMS) key that's used to encrypt your function's environment
+      variables. If it's not provided, Lambda uses a default service key.</p>")
     @as("KMSKeyArn")
     kmskeyArn: option<kmskeyArn>,
     @ocaml.doc("<p>A dead letter queue configuration that specifies the queue or topic where Lambda sends asynchronous events
       when they fail processing. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#dlq\">Dead Letter Queues</a>.</p>")
     @as("DeadLetterConfig")
     deadLetterConfig: option<deadLetterConfig>,
-    @ocaml.doc(
-      "<p>The identifier of the function's <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html\">runtime</a>.</p>"
-    )
+    @ocaml.doc("<p>The identifier of the function's <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html\">runtime</a>. Runtime is required if the deployment package is a .zip file archive. 
+        </p>")
     @as("Runtime")
     runtime: option<runtime>,
     @ocaml.doc(
@@ -2452,22 +2647,23 @@ module UpdateFunctionConfiguration = {
     )
     @as("Environment")
     environment: option<environment>,
-    @ocaml.doc("<p>For network connectivity to AWS resources in a VPC, specify a list of security groups and subnets in the VPC.
+    @ocaml.doc("<p>For network connectivity to Amazon Web Services resources in a VPC, specify a list of security groups and subnets in the VPC.
       When you connect a function to a VPC, it can only access resources and the internet through that VPC. For more
       information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html\">VPC Settings</a>.</p>")
     @as("VpcConfig")
     vpcConfig: option<vpcConfig>,
-    @ocaml.doc("<p>The amount of memory available to the function at runtime. Increasing the function's memory also increases its CPU
-      allocation. The default value is 128 MB. The value can be any multiple of 1 MB.</p>")
+    @ocaml.doc("<p>The amount of  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-memory.html\">memory available to the function</a> at runtime.
+      Increasing the function memory also increases its CPU allocation. The default value is 128 MB. The value can be any multiple of 1 MB.</p>")
     @as("MemorySize")
     memorySize: option<memorySize>,
-    @ocaml.doc("<p>The amount of time that Lambda allows a function to run before stopping it. The default is 3 seconds. The
-      maximum allowed value is 900 seconds.</p>")
+    @ocaml.doc("<p>The amount of time (in seconds) that Lambda allows a function to run before stopping it. The default is 3 seconds. The
+      maximum allowed value is 900 seconds. For additional information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/runtimes-context.html\">Lambda execution environment</a>.</p>")
     @as("Timeout")
     timeout: option<timeout>,
     @ocaml.doc("<p>A description of the function.</p>") @as("Description")
     description: option<description>,
-    @ocaml.doc("<p>The name of the method within your code that Lambda calls to execute your function. The format includes the
+    @ocaml.doc("<p>The name of the method within your code that Lambda calls to execute your function. 
+Handler is required if the deployment package is a .zip file archive. The format includes the
       file name. It can also include namespaces and other qualifiers, depending on the runtime. For more information,
       see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/programming-model-v2.html\">Programming Model</a>.</p>")
     @as("Handler")
@@ -2503,6 +2699,7 @@ module UpdateFunctionConfiguration = {
   external new: request => t = "UpdateFunctionConfigurationCommand"
   let make = (
     ~functionName,
+    ~ephemeralStorage=?,
     ~imageConfig=?,
     ~fileSystemConfigs=?,
     ~layers=?,
@@ -2521,6 +2718,7 @@ module UpdateFunctionConfiguration = {
     (),
   ) =>
     new({
+      ephemeralStorage: ephemeralStorage,
       imageConfig: imageConfig,
       fileSystemConfigs: fileSystemConfigs,
       layers: layers,
@@ -2544,6 +2742,10 @@ module UpdateFunctionConfiguration = {
 module UpdateFunctionCode = {
   type t
   type request = {
+    @ocaml.doc("<p>The instruction set architecture that the function supports. Enter a string array with one of the valid values (arm64 or x86_64).
+     The default value is <code>x86_64</code>.</p>")
+    @as("Architectures")
+    architectures: option<architecturesList>,
     @ocaml.doc("<p>Only update the function if the revision ID matches the ID that's specified. Use this option to avoid modifying a
       function that has changed since you last read it.</p>")
     @as("RevisionId")
@@ -2556,20 +2758,24 @@ module UpdateFunctionCode = {
       calling <a>PublishVersion</a> separately.</p>")
     @as("Publish")
     publish: option<boolean_>,
-    @ocaml.doc("<p>URI of a container image in the Amazon ECR registry.</p>") @as("ImageUri")
+    @ocaml.doc("<p>URI of a container image in the Amazon ECR registry. Do not use for a function defined
+    with a .zip file archive.</p>")
+    @as("ImageUri")
     imageUri: option<string_>,
     @ocaml.doc("<p>For versioned objects, the version of the deployment package object to use.</p>")
     @as("S3ObjectVersion")
     s3ObjectVersion: option<s3ObjectVersion>,
-    @ocaml.doc("<p>The Amazon S3 key of the deployment package.</p>") @as("S3Key")
-    s3Key: option<s3Key>,
     @ocaml.doc(
-      "<p>An Amazon S3 bucket in the same AWS Region as your function. The bucket can be in a different AWS account.</p>"
+      "<p>The Amazon S3 key of the deployment package. Use only with a function defined with a .zip file archive deployment package.</p>"
     )
+    @as("S3Key")
+    s3Key: option<s3Key>,
+    @ocaml.doc("<p>An Amazon S3 bucket in the same Amazon Web Services Region as your function. The bucket can be in a different 
+Amazon Web Services account. Use only with a function defined with a .zip file archive deployment package.</p>")
     @as("S3Bucket")
     s3Bucket: option<s3Bucket>,
-    @ocaml.doc("<p>The base64-encoded contents of the deployment package. AWS SDK and AWS CLI clients handle the encoding for
-      you.</p>")
+    @ocaml.doc("<p>The base64-encoded contents of the deployment package. Amazon Web Services SDK and Amazon Web Services CLI clients 
+handle the encoding for you. Use only with a function defined with a .zip file archive deployment package.</p>")
     @as("ZipFile")
     zipFile: option<blob>,
     @ocaml.doc("<p>The name of the Lambda function.</p>
@@ -2599,6 +2805,7 @@ module UpdateFunctionCode = {
   @module("@aws-sdk/client-lambda") @new external new: request => t = "UpdateFunctionCodeCommand"
   let make = (
     ~functionName,
+    ~architectures=?,
     ~revisionId=?,
     ~dryRun=?,
     ~publish=?,
@@ -2610,6 +2817,7 @@ module UpdateFunctionCode = {
     (),
   ) =>
     new({
+      architectures: architectures,
       revisionId: revisionId,
       dryRun: dryRun,
       publish: publish,
@@ -2627,49 +2835,56 @@ module UpdateEventSourceMapping = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>(Streams) A list of current response type enums applied to the event source mapping.</p>"
+      "<p>(Streams and Amazon SQS) A list of current response type enums applied to the event source mapping.</p>"
     )
     @as("FunctionResponseTypes")
     functionResponseTypes: option<functionResponseTypeList>,
     @ocaml.doc(
-      "<p>(Streams) The duration in seconds of a processing window. The range is between 1 second up to 900 seconds.</p>"
+      "<p>(Streams only) The duration in seconds of a processing window. The range is between 1 second up to 900 seconds.</p>"
     )
     @as("TumblingWindowInSeconds")
     tumblingWindowInSeconds: option<tumblingWindowInSeconds>,
     @ocaml.doc(
-      "<p>An array of the authentication protocol, or the VPC components to secure your event source.</p>"
+      "<p>An array of authentication protocols or VPC components required to secure your event source.</p>"
     )
     @as("SourceAccessConfigurations")
     sourceAccessConfigurations: option<sourceAccessConfigurations>,
-    @ocaml.doc("<p>(Streams) The number of batches to process from each shard concurrently.</p>")
+    @ocaml.doc(
+      "<p>(Streams only) The number of batches to process from each shard concurrently.</p>"
+    )
     @as("ParallelizationFactor")
     parallelizationFactor: option<parallelizationFactor>,
     @ocaml.doc(
-      "<p>(Streams) Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records will be retried until the record expires.</p>"
+      "<p>(Streams only) Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records will be retried until the record expires.</p>"
     )
     @as("MaximumRetryAttempts")
     maximumRetryAttempts: option<maximumRetryAttemptsEventSourceMapping>,
     @ocaml.doc(
-      "<p>(Streams) If the function returns an error, split the batch in two and retry.</p>"
+      "<p>(Streams only) If the function returns an error, split the batch in two and retry.</p>"
     )
     @as("BisectBatchOnFunctionError")
     bisectBatchOnFunctionError: option<bisectBatchOnFunctionError>,
     @ocaml.doc(
-      "<p>(Streams) Discard records older than the specified age. The default value is infinite (-1).</p>"
+      "<p>(Streams only) Discard records older than the specified age. The default value is infinite (-1).</p>"
     )
     @as("MaximumRecordAgeInSeconds")
     maximumRecordAgeInSeconds: option<maximumRecordAgeInSeconds>,
     @ocaml.doc(
-      "<p>(Streams) An Amazon SQS queue or Amazon SNS topic destination for discarded records.</p>"
+      "<p>(Streams only) An Amazon SQS queue or Amazon SNS topic destination for discarded records.</p>"
     )
     @as("DestinationConfig")
     destinationConfig: option<destinationConfig>,
-    @ocaml.doc(
-      "<p>(Streams and SQS standard queues) The maximum amount of time to gather records before invoking the function, in seconds.</p>"
-    )
+    @ocaml.doc("<p>(Streams and Amazon SQS standard queues) The maximum amount of time, in seconds, that Lambda spends gathering records before invoking the function.</p>
+         <p>Default: 0</p>
+         <p>Related setting: When you set <code>BatchSize</code> to a value greater than 10, you must set <code>MaximumBatchingWindowInSeconds</code> to at least 1.</p>")
     @as("MaximumBatchingWindowInSeconds")
     maximumBatchingWindowInSeconds: option<maximumBatchingWindowInSeconds>,
-    @ocaml.doc("<p>The maximum number of items to retrieve in a single batch.</p>
+    @ocaml.doc("<p>(Streams and Amazon SQS) An object that defines the filter criteria that
+    determine whether Lambda should process an event. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html\">Lambda event filtering</a>.</p>")
+    @as("FilterCriteria")
+    filterCriteria: option<filterCriteria>,
+    @ocaml.doc("<p>The maximum number of records in each batch that Lambda pulls from your stream or queue and sends to your function. Lambda passes all of the records in the batch to the function in a single call, up to the payload limit for synchronous invocation
+  (6 MB).</p>
          <ul>
             <li>
                <p>
@@ -2691,12 +2906,15 @@ module UpdateEventSourceMapping = {
                <p>
                   <b>Self-Managed Apache Kafka</b> - Default 100. Max 10,000.</p>
             </li>
+            <li>
+               <p>
+                  <b>Amazon MQ (ActiveMQ and RabbitMQ)</b> - Default 100. Max 10,000.</p>
+            </li>
          </ul>")
     @as("BatchSize")
     batchSize: option<batchSize>,
-    @ocaml.doc(
-      "<p>If true, the event source mapping is active. Set to false to pause polling and invocation.</p>"
-    )
+    @ocaml.doc("<p>When true, the event source mapping is active. When false, Lambda pauses polling and invocation.</p>
+         <p>Default: True</p>")
     @as("Enabled")
     enabled: option<enabled>,
     @ocaml.doc("<p>The name of the Lambda function.</p>
@@ -2741,6 +2959,7 @@ module UpdateEventSourceMapping = {
     ~maximumRecordAgeInSeconds=?,
     ~destinationConfig=?,
     ~maximumBatchingWindowInSeconds=?,
+    ~filterCriteria=?,
     ~batchSize=?,
     ~enabled=?,
     ~functionName=?,
@@ -2756,6 +2975,7 @@ module UpdateEventSourceMapping = {
       maximumRecordAgeInSeconds: maximumRecordAgeInSeconds,
       destinationConfig: destinationConfig,
       maximumBatchingWindowInSeconds: maximumBatchingWindowInSeconds,
+      filterCriteria: filterCriteria,
       batchSize: batchSize,
       enabled: enabled,
       functionName: functionName,
@@ -2855,6 +3075,10 @@ module PublishVersion = {
 module ListLayerVersions = {
   type t
   type request = {
+    @ocaml.doc("<p>The compatible 
+<a href=\"https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html\">instruction set architecture</a>.</p>")
+    @as("CompatibleArchitecture")
+    compatibleArchitecture: option<architecture>,
     @ocaml.doc("<p>The maximum number of versions to return.</p>") @as("MaxItems")
     maxItems: option<maxLayerListItems>,
     @ocaml.doc("<p>A pagination token returned by a previous call.</p>") @as("Marker")
@@ -2873,8 +3097,16 @@ module ListLayerVersions = {
     nextMarker: option<string_>,
   }
   @module("@aws-sdk/client-lambda") @new external new: request => t = "ListLayerVersionsCommand"
-  let make = (~layerName, ~maxItems=?, ~marker=?, ~compatibleRuntime=?, ()) =>
+  let make = (
+    ~layerName,
+    ~compatibleArchitecture=?,
+    ~maxItems=?,
+    ~marker=?,
+    ~compatibleRuntime=?,
+    (),
+  ) =>
     new({
+      compatibleArchitecture: compatibleArchitecture,
       maxItems: maxItems,
       marker: marker,
       layerName: layerName,
@@ -2964,12 +3196,20 @@ module DeleteEventSourceMapping = {
 module CreateFunction = {
   type t
   type request = {
+    @ocaml.doc(
+      "<p>The size of the function’s /tmp directory in MB. The default value is 512, but can be any whole number between 512 and 10240 MB.</p>"
+    )
+    @as("EphemeralStorage")
+    ephemeralStorage: option<ephemeralStorage>,
+    @ocaml.doc("<p>The instruction set architecture that the function supports. Enter a string array with one of the valid values (arm64 or x86_64).
+     The default value is <code>x86_64</code>.</p>")
+    @as("Architectures")
+    architectures: option<architecturesList>,
     @ocaml.doc("<p>To enable code signing for this function, specify the ARN of a code-signing configuration. A code-signing configuration
 includes a set of signing profiles, which define the trusted publishers for this function.</p>")
     @as("CodeSigningConfigArn")
     codeSigningConfigArn: option<codeSigningConfigArn>,
-    @ocaml.doc("<p>
-            <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/images-parms.html\">Container image configuration
+    @ocaml.doc("<p>Container image <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-images.html#configuration-images-settings\">configuration
       values</a> that override the values in the container image Dockerfile.</p>")
     @as("ImageConfig")
     imageConfig: option<imageConfig>,
@@ -2983,12 +3223,12 @@ includes a set of signing profiles, which define the trusted publishers for this
       function.</p>")
     @as("Tags")
     tags: option<tags>,
-    @ocaml.doc("<p>Set <code>Mode</code> to <code>Active</code> to sample and trace a subset of incoming requests with AWS
-      X-Ray.</p>")
+    @ocaml.doc("<p>Set <code>Mode</code> to <code>Active</code> to sample and trace a subset of incoming requests with
+<a href=\"https://docs.aws.amazon.com/lambda/latest/dg/services-xray.html\">X-Ray</a>.</p>")
     @as("TracingConfig")
     tracingConfig: option<tracingConfig>,
-    @ocaml.doc("<p>The ARN of the AWS Key Management Service (AWS KMS) key that's used to encrypt your function's environment
-      variables. If it's not provided, AWS Lambda uses a default service key.</p>")
+    @ocaml.doc("<p>The ARN of the Amazon Web Services Key Management Service (KMS) key that's used to encrypt your function's environment
+      variables. If it's not provided, Lambda uses a default service key.</p>")
     @as("KMSKeyArn")
     kmskeyArn: option<kmskeyArn>,
     @ocaml.doc(
@@ -3005,7 +3245,7 @@ includes a set of signing profiles, which define the trusted publishers for this
     )
     @as("PackageType")
     packageType: option<packageType>,
-    @ocaml.doc("<p>For network connectivity to AWS resources in a VPC, specify a list of security groups and subnets in the VPC.
+    @ocaml.doc("<p>For network connectivity to Amazon Web Services resources in a VPC, specify a list of security groups and subnets in the VPC.
       When you connect a function to a VPC, it can only access resources and the internet through that VPC. For more
       information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html\">VPC Settings</a>.</p>")
     @as("VpcConfig")
@@ -3013,18 +3253,19 @@ includes a set of signing profiles, which define the trusted publishers for this
     @ocaml.doc("<p>Set to true to publish the first version of the function during creation.</p>")
     @as("Publish")
     publish: option<boolean_>,
-    @ocaml.doc("<p>The amount of memory available to the function at runtime. Increasing the function's memory also increases its CPU
-      allocation. The default value is 128 MB. The value can be any multiple of 1 MB.</p>")
+    @ocaml.doc("<p>The amount of  <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-memory.html\">memory available to the function</a> at runtime.
+      Increasing the function memory also increases its CPU allocation. The default value is 128 MB. The value can be any multiple of 1 MB.</p>")
     @as("MemorySize")
     memorySize: option<memorySize>,
-    @ocaml.doc("<p>The amount of time that Lambda allows a function to run before stopping it. The default is 3 seconds. The
-      maximum allowed value is 900 seconds.</p>")
+    @ocaml.doc("<p>The amount of time (in seconds) that Lambda allows a function to run before stopping it. The default is 3 seconds. The
+      maximum allowed value is 900 seconds. For additional information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/runtimes-context.html\">Lambda execution environment</a>.</p>")
     @as("Timeout")
     timeout: option<timeout>,
     @ocaml.doc("<p>A description of the function.</p>") @as("Description")
     description: option<description>,
     @ocaml.doc("<p>The code for the function.</p>") @as("Code") code: functionCode,
-    @ocaml.doc("<p>The name of the method within your code that Lambda calls to execute your function. The format includes the
+    @ocaml.doc("<p>The name of the method within your code that Lambda calls to execute your function. 
+Handler is required if the deployment package is a .zip file archive. The format includes the
       file name. It can also include namespaces and other qualifiers, depending on the runtime. For more information,
       see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/programming-model-v2.html\">Programming Model</a>.</p>")
     @as("Handler")
@@ -3032,9 +3273,8 @@ includes a set of signing profiles, which define the trusted publishers for this
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the function's execution role.</p>")
     @as("Role")
     role: roleArn,
-    @ocaml.doc(
-      "<p>The identifier of the function's <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html\">runtime</a>.</p>"
-    )
+    @ocaml.doc("<p>The identifier of the function's <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html\">runtime</a>. Runtime is required if the deployment package is a .zip file archive. 
+        </p>")
     @as("Runtime")
     runtime: option<runtime>,
     @ocaml.doc("<p>The name of the Lambda function.</p>
@@ -3066,6 +3306,8 @@ includes a set of signing profiles, which define the trusted publishers for this
     ~code,
     ~role,
     ~functionName,
+    ~ephemeralStorage=?,
+    ~architectures=?,
     ~codeSigningConfigArn=?,
     ~imageConfig=?,
     ~fileSystemConfigs=?,
@@ -3086,6 +3328,8 @@ includes a set of signing profiles, which define the trusted publishers for this
     (),
   ) =>
     new({
+      ephemeralStorage: ephemeralStorage,
+      architectures: architectures,
       codeSigningConfigArn: codeSigningConfigArn,
       imageConfig: imageConfig,
       fileSystemConfigs: fileSystemConfigs,
@@ -3114,7 +3358,7 @@ module CreateEventSourceMapping = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>(Streams) A list of current response type enums applied to the event source mapping.</p>"
+      "<p>(Streams and Amazon SQS) A list of current response type enums applied to the event source mapping.</p>"
     )
     @as("FunctionResponseTypes")
     functionResponseTypes: option<functionResponseTypeList>,
@@ -3122,38 +3366,36 @@ module CreateEventSourceMapping = {
     @as("SelfManagedEventSource")
     selfManagedEventSource: option<selfManagedEventSource>,
     @ocaml.doc(
-      "<p>An array of the authentication protocol, or the VPC components to secure your event source.</p>"
+      "<p>An array of authentication protocols or VPC components required to secure your event source.</p>"
     )
     @as("SourceAccessConfigurations")
     sourceAccessConfigurations: option<sourceAccessConfigurations>,
-    @ocaml.doc("<p>
-      (MQ) The name of the Amazon MQ broker destination queue to consume.
-    </p>")
+    @ocaml.doc("<p> (MQ) The name of the Amazon MQ broker destination queue to consume. </p>")
     @as("Queues")
     queues: option<queues>,
     @ocaml.doc("<p>The name of the Kafka topic.</p>") @as("Topics") topics: option<topics>,
     @ocaml.doc(
-      "<p>(Streams) The duration in seconds of a processing window. The range is between 1 second up to 900 seconds.</p>"
+      "<p>(Streams only) The duration in seconds of a processing window. The range is between 1 second up to 900 seconds.</p>"
     )
     @as("TumblingWindowInSeconds")
     tumblingWindowInSeconds: option<tumblingWindowInSeconds>,
     @ocaml.doc(
-      "<p>(Streams) Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records will be retried until the record expires.</p>"
+      "<p>(Streams only) Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records will be retried until the record expires.</p>"
     )
     @as("MaximumRetryAttempts")
     maximumRetryAttempts: option<maximumRetryAttemptsEventSourceMapping>,
     @ocaml.doc(
-      "<p>(Streams) If the function returns an error, split the batch in two and retry.</p>"
+      "<p>(Streams only) If the function returns an error, split the batch in two and retry.</p>"
     )
     @as("BisectBatchOnFunctionError")
     bisectBatchOnFunctionError: option<bisectBatchOnFunctionError>,
     @ocaml.doc(
-      "<p>(Streams) Discard records older than the specified age. The default value is infinite (-1).</p>"
+      "<p>(Streams only) Discard records older than the specified age. The default value is infinite (-1).</p>"
     )
     @as("MaximumRecordAgeInSeconds")
     maximumRecordAgeInSeconds: option<maximumRecordAgeInSeconds>,
     @ocaml.doc(
-      "<p>(Streams) An Amazon SQS queue or Amazon SNS topic destination for discarded records.</p>"
+      "<p>(Streams only) An Amazon SQS queue or Amazon SNS topic destination for discarded records.</p>"
     )
     @as("DestinationConfig")
     destinationConfig: option<destinationConfig>,
@@ -3161,19 +3403,26 @@ module CreateEventSourceMapping = {
       reading.</p>")
     @as("StartingPositionTimestamp")
     startingPositionTimestamp: option<date>,
-    @ocaml.doc("<p>The position in a stream from which to start reading. Required for Amazon Kinesis, Amazon DynamoDB, and Amazon MSK Streams
-      sources. <code>AT_TIMESTAMP</code> is only supported for Amazon Kinesis streams.</p>")
+    @ocaml.doc("<p>The position in a stream from which to start reading. Required for Amazon Kinesis, Amazon DynamoDB, and Amazon
+      MSK Streams sources. <code>AT_TIMESTAMP</code> is only supported for Amazon Kinesis streams.</p>")
     @as("StartingPosition")
     startingPosition: option<eventSourcePosition>,
-    @ocaml.doc("<p>(Streams) The number of batches to process from each shard concurrently.</p>")
+    @ocaml.doc(
+      "<p>(Streams only) The number of batches to process from each shard concurrently.</p>"
+    )
     @as("ParallelizationFactor")
     parallelizationFactor: option<parallelizationFactor>,
-    @ocaml.doc(
-      "<p>(Streams and SQS standard queues) The maximum amount of time to gather records before invoking the function, in seconds.</p>"
-    )
+    @ocaml.doc("<p>(Streams and Amazon SQS standard queues) The maximum amount of time, in seconds, that Lambda spends gathering records before invoking the function.</p>
+         <p>Default: 0</p>
+         <p>Related setting: When you set <code>BatchSize</code> to a value greater than 10, you must set <code>MaximumBatchingWindowInSeconds</code> to at least 1.</p>")
     @as("MaximumBatchingWindowInSeconds")
     maximumBatchingWindowInSeconds: option<maximumBatchingWindowInSeconds>,
-    @ocaml.doc("<p>The maximum number of items to retrieve in a single batch.</p>
+    @ocaml.doc("<p>(Streams and Amazon SQS) An object that defines the filter criteria that
+    determine whether Lambda should process an event. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html\">Lambda event filtering</a>.</p>")
+    @as("FilterCriteria")
+    filterCriteria: option<filterCriteria>,
+    @ocaml.doc("<p>The maximum number of records in each batch that Lambda pulls from your stream or queue and sends to your function. Lambda passes all of the records in the batch to the function in a single call, up to the payload limit for synchronous invocation
+  (6 MB).</p>
          <ul>
             <li>
                <p>
@@ -3195,12 +3444,15 @@ module CreateEventSourceMapping = {
                <p>
                   <b>Self-Managed Apache Kafka</b> - Default 100. Max 10,000.</p>
             </li>
+            <li>
+               <p>
+                  <b>Amazon MQ (ActiveMQ and RabbitMQ)</b> - Default 100. Max 10,000.</p>
+            </li>
          </ul>")
     @as("BatchSize")
     batchSize: option<batchSize>,
-    @ocaml.doc(
-      "<p>If true, the event source mapping is active. Set to false to pause polling and invocation.</p>"
-    )
+    @ocaml.doc("<p>When true, the event source mapping is active. When false, Lambda pauses polling and invocation.</p>
+         <p>Default: True</p>")
     @as("Enabled")
     enabled: option<enabled>,
     @ocaml.doc("<p>The name of the Lambda function.</p>
@@ -3270,6 +3522,7 @@ module CreateEventSourceMapping = {
     ~startingPosition=?,
     ~parallelizationFactor=?,
     ~maximumBatchingWindowInSeconds=?,
+    ~filterCriteria=?,
     ~batchSize=?,
     ~enabled=?,
     ~eventSourceArn=?,
@@ -3290,6 +3543,7 @@ module CreateEventSourceMapping = {
       startingPosition: startingPosition,
       parallelizationFactor: parallelizationFactor,
       maximumBatchingWindowInSeconds: maximumBatchingWindowInSeconds,
+      filterCriteria: filterCriteria,
       batchSize: batchSize,
       enabled: enabled,
       functionName: functionName,
@@ -3330,6 +3584,10 @@ module CreateCodeSigningConfig = {
 module ListLayers = {
   type t
   type request = {
+    @ocaml.doc("<p>The compatible 
+<a href=\"https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html\">instruction set architecture</a>.</p>")
+    @as("CompatibleArchitecture")
+    compatibleArchitecture: option<architecture>,
     @ocaml.doc("<p>The maximum number of layers to return.</p>") @as("MaxItems")
     maxItems: option<maxLayerListItems>,
     @ocaml.doc("<p>A pagination token returned by a previous call.</p>") @as("Marker")
@@ -3345,8 +3603,13 @@ module ListLayers = {
     nextMarker: option<string_>,
   }
   @module("@aws-sdk/client-lambda") @new external new: request => t = "ListLayersCommand"
-  let make = (~maxItems=?, ~marker=?, ~compatibleRuntime=?, ()) =>
-    new({maxItems: maxItems, marker: marker, compatibleRuntime: compatibleRuntime})
+  let make = (~compatibleArchitecture=?, ~maxItems=?, ~marker=?, ~compatibleRuntime=?, ()) =>
+    new({
+      compatibleArchitecture: compatibleArchitecture,
+      maxItems: maxItems,
+      marker: marker,
+      compatibleRuntime: compatibleRuntime,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -3529,7 +3792,9 @@ module GetFunction = {
 module ListVersionsByFunction = {
   type t
   type request = {
-    @ocaml.doc("<p>The maximum number of versions to return.</p>") @as("MaxItems")
+    @ocaml.doc("<p>The maximum number of versions to return. Note that <code>ListVersionsByFunction</code> returns a maximum of 50 items in each response, 
+      even if you set the number higher.</p>")
+    @as("MaxItems")
     maxItems: option<maxListItems>,
     @ocaml.doc(
       "<p>Specify the pagination token that's returned by a previous request to retrieve the next page of results.</p>"
@@ -3576,7 +3841,7 @@ module ListVersionsByFunction = {
 module ListFunctions = {
   type t
   type request = {
-    @ocaml.doc("<p>The maximum number of functions to return in the response. Note that <code>ListFunctions</code> returns a maximum of 50 items in each response, 
+    @ocaml.doc("<p>The maximum number of functions to return in the response. Note that <code>ListFunctions</code> returns a maximum of 50 items in each response,
       even if you set the number higher.</p>")
     @as("MaxItems")
     maxItems: option<maxListItems>,
@@ -3590,7 +3855,7 @@ module ListFunctions = {
     )
     @as("FunctionVersion")
     functionVersion: option<functionVersion>,
-    @ocaml.doc("<p>For Lambda@Edge functions, the AWS Region of the master function. For example, <code>us-east-1</code> filters
+    @ocaml.doc("<p>For Lambda@Edge functions, the Amazon Web Services Region of the master function. For example, <code>us-east-1</code> filters
       the list of functions to only include Lambda@Edge functions replicated from a master function in US East (N.
       Virginia). If specified, you must set <code>FunctionVersion</code> to <code>ALL</code>.</p>")
     @as("MasterRegion")
@@ -3618,7 +3883,9 @@ module ListFunctions = {
 module ListEventSourceMappings = {
   type t
   type request = {
-    @ocaml.doc("<p>The maximum number of event source mappings to return.</p>") @as("MaxItems")
+    @ocaml.doc("<p>The maximum number of event source mappings to return. Note that ListEventSourceMappings returns a maximum of
+      100 items in each response, even if you set the number higher.</p>")
+    @as("MaxItems")
     maxItems: option<maxListItems>,
     @ocaml.doc("<p>A pagination token returned by a previous call.</p>") @as("Marker")
     marker: option<string_>,

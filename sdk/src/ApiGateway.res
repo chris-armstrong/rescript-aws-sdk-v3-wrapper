@@ -56,6 +56,7 @@ type integrationType = [
 ]
 type integer_ = int
 type gatewayResponseType = [
+  | @as("WAF_FILTERED") #WAF_FILTERED
   | @as("QUOTA_EXCEEDED") #QUOTA_EXCEEDED
   | @as("THROTTLED") #THROTTLED
   | @as("REQUEST_TOO_LARGE") #REQUEST_TOO_LARGE
@@ -83,6 +84,8 @@ type gatewayResponseType = [
 type endpointType = [@as("PRIVATE") #PRIVATE | @as("EDGE") #EDGE | @as("REGIONAL") #REGIONAL]
 type double = float
 type domainNameStatus = [
+  | @as("PENDING_OWNERSHIP_VERIFICATION") #PENDING_OWNERSHIP_VERIFICATION
+  | @as("PENDING_CERTIFICATE_REIMPORT") #PENDING_CERTIFICATE_REIMPORT
   | @as("PENDING") #PENDING
   | @as("UPDATING") #UPDATING
   | @as("AVAILABLE") #AVAILABLE
@@ -167,9 +170,9 @@ type tlsConfig = {
 }
 @ocaml.doc("<p> The API request rate limits.</p>")
 type throttleSettings = {
-  @ocaml.doc("<p>The API request steady-state rate limit.</p>") rateLimit: option<double>,
+  @ocaml.doc("<p>The API target request rate limit.</p>") rateLimit: option<double>,
   @ocaml.doc(
-    "<p>The API request burst limit, the maximum rate limit over a time ranging from one to a few seconds, depending upon whether the underlying token bucket is at its full capacity.</p>"
+    "<p>The API target request burst rate limit. This allows more requests through for a period of time than the target rate limit.</p>"
   )
   burstLimit: option<integer_>,
 }
@@ -223,7 +226,9 @@ type quotaSettings = {
     "<p>The day that a time period starts. For example, with a time period of <code>WEEK</code>, an offset of <code>0</code> starts on Sunday, and an offset of <code>1</code> starts on Monday.</p>"
   )
   offset: option<integer_>,
-  @ocaml.doc("<p>The maximum number of requests that can be made in a given time period.</p>")
+  @ocaml.doc(
+    "<p>The target maximum number of requests that can be made in a given time period.</p>"
+  )
   limit: option<integer_>,
 }
 @ocaml.doc("A single patch operation to apply to the specified resource. Please refer to
@@ -251,7 +256,7 @@ type patchOperation = {
 )
 type mutualTlsAuthenticationInput = {
   @ocaml.doc("<p>The version of the S3 object that contains your truststore. To
-            specify a version, you must have versioning enabled for the S3 bucket.</p>")
+           specify a version, you must have versioning enabled for the S3 bucket.</p>")
   truststoreVersion: option<string_>,
   @ocaml.doc("<p>An Amazon S3 resource ARN that specifies the truststore for mutual TLS authentication,
             for example,
@@ -322,7 +327,7 @@ type methodSetting = {
   )
   throttlingBurstLimit: option<integer_>,
   @ocaml.doc(
-    "<p>Specifies whether data trace logging is enabled for this method, which affects the log entries pushed to Amazon CloudWatch Logs. The PATCH path for this setting is <code>/{method_setting_key}/logging/dataTrace</code>, and the value is a Boolean.</p>"
+    "<p>Specifies whether full requests and responses are logged for this method, which affects the log entries pushed to Amazon CloudWatch Logs. This can be useful to troubleshoot APIs, but can result in logging sensitive data. We recommend that you don't enable this option for production APIs. The PATCH path for this setting is <code>/{method_setting_key}/logging/dataTrace</code>, and the value is a Boolean.</p>"
   )
   dataTraceEnabled: option<boolean_>,
   @ocaml.doc(
@@ -619,9 +624,7 @@ type gatewayResponse = {
   responseParameters: option<mapOfStringToString>,
   @ocaml.doc("<p>The HTTP status code for this <a>GatewayResponse</a>.</p>")
   statusCode: option<statusCode>,
-  @ocaml.doc(
-    "<p>The response type of the associated <a>GatewayResponse</a>. Valid values are <ul><li>ACCESS_DENIED</li><li>API_CONFIGURATION_ERROR</li><li>AUTHORIZER_FAILURE</li><li> AUTHORIZER_CONFIGURATION_ERROR</li><li>BAD_REQUEST_PARAMETERS</li><li>BAD_REQUEST_BODY</li><li>DEFAULT_4XX</li><li>DEFAULT_5XX</li><li>EXPIRED_TOKEN</li><li>INVALID_SIGNATURE</li><li>INTEGRATION_FAILURE</li><li>INTEGRATION_TIMEOUT</li><li>INVALID_API_KEY</li><li>MISSING_AUTHENTICATION_TOKEN</li><li> QUOTA_EXCEEDED</li><li>REQUEST_TOO_LARGE</li><li>RESOURCE_NOT_FOUND</li><li>THROTTLED</li><li>UNAUTHORIZED</li><li>UNSUPPORTED_MEDIA_TYPE</li></ul> </p>"
-  )
+  @ocaml.doc("<p>The response type of the associated <a>GatewayResponse</a>.</p>")
   responseType: option<gatewayResponseType>,
 }
 @ocaml.doc(
@@ -888,6 +891,10 @@ type listOfApiKey = array<apiKey>
       </div>")
 type domainName = {
   @ocaml.doc(
+    "<p>The ARN of the public certificate issued by ACM to validate ownership of your custom domain. Only required when configuring mutual TLS and using an ACM imported or private CA certificate ARN as the regionalCertificateArn.</p>"
+  )
+  ownershipVerificationCertificateArn: option<string_>,
+  @ocaml.doc(
     "<p>The mutual TLS authentication configuration for a custom domain name. If specified, API Gateway performs two-way authentication between the client and the server. Clients must present a trusted certificate to access your API.</p>"
   )
   mutualTlsAuthentication: option<mutualTlsAuthentication>,
@@ -902,7 +909,7 @@ type domainName = {
   )
   domainNameStatusMessage: option<string_>,
   @ocaml.doc(
-    "<p>The status of the <a>DomainName</a> migration. The valid values are <code>AVAILABLE</code> and <code>UPDATING</code>. If the status is <code>UPDATING</code>, the domain cannot be modified further until the existing operation is complete. If it is <code>AVAILABLE</code>, the domain can be updated.</p>"
+    "<p>The status of the <a>DomainName</a> migration. The valid values are <code>AVAILABLE</code>, <code>UPDATING</code>, <code>PENDING_CERTIFICATE_REIMPORT</code>, and <code>PENDING_OWNERSHIP_VERIFICATION</code>. If the status is <code>UPDATING</code>, the domain cannot be modified further until the existing operation is complete. If it is <code>AVAILABLE</code>, the domain can be updated.</p>"
   )
   domainNameStatus: option<domainNameStatus>,
   @ocaml.doc(
@@ -910,7 +917,7 @@ type domainName = {
   )
   endpointConfiguration: option<endpointConfiguration>,
   @ocaml.doc(
-    "<p>The region-agnostic Amazon Route 53 Hosted Zone ID of the edge-optimized endpoint. The valid value is <code>Z2FDTNDATAQYW2</code> for all the regions. For more information, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-regional-api-custom-domain-create.html\">Set up a Regional Custom Domain Name</a> and <a href=\"https://docs.aws.amazon.com/general/latest/gr/rande.html#apigateway_region\">AWS Regions and Endpoints for API Gateway</a>. </p>"
+    "<p>The region-agnostic Amazon Route 53 Hosted Zone ID of the edge-optimized endpoint. The valid value is <code>Z2FDTNDATAQYW2</code> for all the regions. For more information, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-regional-api-custom-domain-create.html\">Set up a Regional Custom Domain Name</a> and <a href=\"https://docs.aws.amazon.com/general/latest/gr/rande.html#apigateway_region\">AWS Regions and Endpoints for API Gateway</a>.</p>"
   )
   distributionHostedZoneId: option<string_>,
   @ocaml.doc(
@@ -926,7 +933,7 @@ type domainName = {
   )
   regionalCertificateName: option<string_>,
   @ocaml.doc(
-    "<p>The region-specific Amazon Route 53 Hosted Zone ID of the regional endpoint. For more information, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-regional-api-custom-domain-create.html\">Set up a Regional Custom Domain Name</a> and  <a href=\"https://docs.aws.amazon.com/general/latest/gr/rande.html#apigateway_region\">AWS Regions and Endpoints for API Gateway</a>. </p>"
+    "<p>The region-specific Amazon Route 53 Hosted Zone ID of the regional endpoint. For more information, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-regional-api-custom-domain-create.html\">Set up a Regional Custom Domain Name</a> and  <a href=\"https://docs.aws.amazon.com/general/latest/gr/rande.html#apigateway_region\">AWS Regions and Endpoints for API Gateway</a>.</p>"
   )
   regionalHostedZoneId: option<string_>,
   @ocaml.doc(
@@ -1120,7 +1127,10 @@ type deployment = {
   @ocaml.doc("<p>The description for the deployment resource.</p>") description: option<string_>,
   @ocaml.doc("<p>The identifier for the deployment resource.</p>") id: option<string_>,
 }
-@ocaml.doc("<p>Represents a usage plan than can specify who can assess associated API stages with specified request limits and quotas.</p>
+@ocaml.doc("<p>Represents a usage plan used to specify who can assess associated API stages. Optionally, target request rate and quota limits can be set. 
+      In some cases clients can exceed the targets that you set. Don’t rely on usage plans to control costs. 
+      Consider using <a href=\"https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html\">AWS Budgets</a> to monitor costs 
+      and <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html\">AWS WAF</a> to manage API requests.</p>
       <div class=\"remarks\">
         <p>In a usage plan, you associate an API by specifying the API's Id and a stage name of the specified API. You add plan customers by adding API keys to the plan. </p>
       </div>
@@ -1134,9 +1144,13 @@ type usagePlan = {
     "<p>The AWS Markeplace product identifier to associate with the usage plan as a SaaS product on AWS Marketplace.</p>"
   )
   productCode: option<string_>,
-  @ocaml.doc("<p>The maximum number of permitted requests per a given unit time interval.</p>")
+  @ocaml.doc(
+    "<p>The target maximum number of permitted requests per a given unit time interval.</p>"
+  )
   quota: option<quotaSettings>,
-  @ocaml.doc("<p>The request throttle limits of a usage plan.</p>")
+  @ocaml.doc(
+    "<p>Map containing method level throttling information for API stage in a usage plan.</p>"
+  )
   throttle: option<throttleSettings>,
   @ocaml.doc("<p>The associated API stages of a usage plan.</p>") apiStages: option<listOfApiStage>,
   @ocaml.doc("<p>The description of a usage plan.</p>") description: option<string_>,
@@ -1779,7 +1793,7 @@ module FlushStageCache = {
     @ocaml.doc("<p>[Required] The string identifier of the associated <a>RestApi</a>.</p>")
     restApiId: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "FlushStageCacheCommand"
   let make = (~stageName, ~restApiId, ()) => new({stageName: stageName, restApiId: restApiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1792,7 +1806,7 @@ module FlushStageAuthorizersCache = {
     @ocaml.doc("<p>The name of the stage to flush.</p>") stageName: string_,
     @ocaml.doc("<p>The string identifier of the associated <a>RestApi</a>.</p>") restApiId: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-apigateway") @new
   external new: request => t = "FlushStageAuthorizersCacheCommand"
   let make = (~stageName, ~restApiId, ()) => new({stageName: stageName, restApiId: restApiId})
@@ -1808,7 +1822,7 @@ module DeleteVpcLink = {
     )
     vpcLinkId: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "DeleteVpcLinkCommand"
   let make = (~vpcLinkId, ()) => new({vpcLinkId: vpcLinkId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1827,7 +1841,7 @@ module DeleteUsagePlanKey = {
     )
     usagePlanId: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-apigateway") @new
   external new: request => t = "DeleteUsagePlanKeyCommand"
   let make = (~keyId, ~usagePlanId, ()) => new({keyId: keyId, usagePlanId: usagePlanId})
@@ -1840,7 +1854,7 @@ module DeleteUsagePlan = {
   type request = {
     @ocaml.doc("<p>[Required] The Id of the to-be-deleted usage plan.</p>") usagePlanId: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "DeleteUsagePlanCommand"
   let make = (~usagePlanId, ()) => new({usagePlanId: usagePlanId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1855,7 +1869,7 @@ module DeleteStage = {
     @ocaml.doc("<p>[Required] The string identifier of the associated <a>RestApi</a>.</p>")
     restApiId: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "DeleteStageCommand"
   let make = (~stageName, ~restApiId, ()) => new({stageName: stageName, restApiId: restApiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1868,7 +1882,7 @@ module DeleteRestApi = {
     @ocaml.doc("<p>[Required] The string identifier of the associated <a>RestApi</a>.</p>")
     restApiId: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "DeleteRestApiCommand"
   let make = (~restApiId, ()) => new({restApiId: restApiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1883,7 +1897,7 @@ module DeleteResource = {
     @ocaml.doc("<p>[Required] The string identifier of the associated <a>RestApi</a>.</p>")
     restApiId: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "DeleteResourceCommand"
   let make = (~resourceId, ~restApiId, ()) => new({resourceId: resourceId, restApiId: restApiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1898,7 +1912,7 @@ module DeleteRequestValidator = {
     @ocaml.doc("<p>[Required] The string identifier of the associated <a>RestApi</a>.</p>")
     restApiId: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-apigateway") @new
   external new: request => t = "DeleteRequestValidatorCommand"
   let make = (~requestValidatorId, ~restApiId, ()) =>
@@ -1914,7 +1928,7 @@ module DeleteModel = {
     @ocaml.doc("<p>[Required] The string identifier of the associated <a>RestApi</a>.</p>")
     restApiId: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "DeleteModelCommand"
   let make = (~modelName, ~restApiId, ()) => new({modelName: modelName, restApiId: restApiId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1937,7 +1951,7 @@ module DeleteMethodResponse = {
     @ocaml.doc("<p>[Required] The string identifier of the associated <a>RestApi</a>.</p>")
     restApiId: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-apigateway") @new
   external new: request => t = "DeleteMethodResponseCommand"
   let make = (~statusCode, ~httpMethod, ~resourceId, ~restApiId, ()) =>
@@ -1961,7 +1975,7 @@ module DeleteMethod = {
     @ocaml.doc("<p>[Required] The string identifier of the associated <a>RestApi</a>.</p>")
     restApiId: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "DeleteMethodCommand"
   let make = (~httpMethod, ~resourceId, ~restApiId, ()) =>
     new({httpMethod: httpMethod, resourceId: resourceId, restApiId: restApiId})
@@ -1983,7 +1997,7 @@ module DeleteIntegrationResponse = {
     @ocaml.doc("<p>[Required] The string identifier of the associated <a>RestApi</a>.</p>")
     restApiId: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-apigateway") @new
   external new: request => t = "DeleteIntegrationResponseCommand"
   let make = (~statusCode, ~httpMethod, ~resourceId, ~restApiId, ()) =>
@@ -2007,7 +2021,7 @@ module DeleteIntegration = {
     @ocaml.doc("<p>[Required] The string identifier of the associated <a>RestApi</a>.</p>")
     restApiId: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "DeleteIntegrationCommand"
   let make = (~httpMethod, ~resourceId, ~restApiId, ()) =>
     new({httpMethod: httpMethod, resourceId: resourceId, restApiId: restApiId})
@@ -2021,13 +2035,13 @@ module DeleteGatewayResponse = {
   )
   type request = {
     @ocaml.doc(
-      "<p>[Required] <p>The response type of the associated <a>GatewayResponse</a>. Valid values are <ul><li>ACCESS_DENIED</li><li>API_CONFIGURATION_ERROR</li><li>AUTHORIZER_FAILURE</li><li> AUTHORIZER_CONFIGURATION_ERROR</li><li>BAD_REQUEST_PARAMETERS</li><li>BAD_REQUEST_BODY</li><li>DEFAULT_4XX</li><li>DEFAULT_5XX</li><li>EXPIRED_TOKEN</li><li>INVALID_SIGNATURE</li><li>INTEGRATION_FAILURE</li><li>INTEGRATION_TIMEOUT</li><li>INVALID_API_KEY</li><li>MISSING_AUTHENTICATION_TOKEN</li><li> QUOTA_EXCEEDED</li><li>REQUEST_TOO_LARGE</li><li>RESOURCE_NOT_FOUND</li><li>THROTTLED</li><li>UNAUTHORIZED</li><li>UNSUPPORTED_MEDIA_TYPE</li></ul> </p></p>"
+      "<p>[Required] <p>The response type of the associated <a>GatewayResponse</a>.</p></p>"
     )
     responseType: gatewayResponseType,
     @ocaml.doc("<p>[Required] The string identifier of the associated <a>RestApi</a>.</p>")
     restApiId: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-apigateway") @new
   external new: request => t = "DeleteGatewayResponseCommand"
   let make = (~responseType, ~restApiId, ()) =>
@@ -2042,7 +2056,7 @@ module DeleteDomainName = {
     @ocaml.doc("<p>[Required] The name of the <a>DomainName</a> resource to be deleted.</p>")
     domainName: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "DeleteDomainNameCommand"
   let make = (~domainName, ()) => new({domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -2059,7 +2073,7 @@ module DeleteDocumentationVersion = {
     @ocaml.doc("<p>[Required] The string identifier of the associated <a>RestApi</a>.</p>")
     restApiId: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-apigateway") @new
   external new: request => t = "DeleteDocumentationVersionCommand"
   let make = (~documentationVersion, ~restApiId, ()) =>
@@ -2076,7 +2090,7 @@ module DeleteDocumentationPart = {
     @ocaml.doc("<p>[Required] The string identifier of the associated <a>RestApi</a>.</p>")
     restApiId: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-apigateway") @new
   external new: request => t = "DeleteDocumentationPartCommand"
   let make = (~documentationPartId, ~restApiId, ()) =>
@@ -2093,7 +2107,7 @@ module DeleteDeployment = {
     @ocaml.doc("<p>[Required] The string identifier of the associated <a>RestApi</a>.</p>")
     restApiId: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "DeleteDeploymentCommand"
   let make = (~deploymentId, ~restApiId, ()) =>
     new({deploymentId: deploymentId, restApiId: restApiId})
@@ -2109,7 +2123,7 @@ module DeleteClientCertificate = {
     )
     clientCertificateId: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-apigateway") @new
   external new: request => t = "DeleteClientCertificateCommand"
   let make = (~clientCertificateId, ()) => new({clientCertificateId: clientCertificateId})
@@ -2128,7 +2142,7 @@ module DeleteBasePathMapping = {
     )
     domainName: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-apigateway") @new
   external new: request => t = "DeleteBasePathMappingCommand"
   let make = (~basePath, ~domainName, ()) => new({basePath: basePath, domainName: domainName})
@@ -2144,7 +2158,7 @@ module DeleteAuthorizer = {
     @ocaml.doc("<p>[Required] The string identifier of the associated <a>RestApi</a>.</p>")
     restApiId: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "DeleteAuthorizerCommand"
   let make = (~authorizerId, ~restApiId, ()) =>
     new({authorizerId: authorizerId, restApiId: restApiId})
@@ -2158,7 +2172,7 @@ module DeleteApiKey = {
     @ocaml.doc("<p>[Required] The identifier of the <a>ApiKey</a> resource to be deleted.</p>")
     apiKey: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "DeleteApiKeyCommand"
   let make = (~apiKey, ()) => new({apiKey: apiKey})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -2308,7 +2322,7 @@ module UntagResource = {
     @ocaml.doc("<p>[Required] The Tag keys to delete.</p>") tagKeys: listOfString,
     @ocaml.doc("<p>[Required] The ARN of a resource that can be tagged.</p>") resourceArn: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -2324,7 +2338,7 @@ module TagResource = {
     tags: mapOfStringToString,
     @ocaml.doc("<p>[Required] The ARN of a resource that can be tagged.</p>") resourceArn: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -2447,7 +2461,7 @@ module PutGatewayResponse = {
     @ocaml.doc("The HTTP status code of the <a>GatewayResponse</a>.")
     statusCode: option<statusCode>,
     @ocaml.doc(
-      "<p>[Required] <p>The response type of the associated <a>GatewayResponse</a>. Valid values are <ul><li>ACCESS_DENIED</li><li>API_CONFIGURATION_ERROR</li><li>AUTHORIZER_FAILURE</li><li> AUTHORIZER_CONFIGURATION_ERROR</li><li>BAD_REQUEST_PARAMETERS</li><li>BAD_REQUEST_BODY</li><li>DEFAULT_4XX</li><li>DEFAULT_5XX</li><li>EXPIRED_TOKEN</li><li>INVALID_SIGNATURE</li><li>INTEGRATION_FAILURE</li><li>INTEGRATION_TIMEOUT</li><li>INVALID_API_KEY</li><li>MISSING_AUTHENTICATION_TOKEN</li><li> QUOTA_EXCEEDED</li><li>REQUEST_TOO_LARGE</li><li>RESOURCE_NOT_FOUND</li><li>THROTTLED</li><li>UNAUTHORIZED</li><li>UNSUPPORTED_MEDIA_TYPE</li></ul> </p></p>"
+      "<p>[Required] <p>The response type of the associated <a>GatewayResponse</a>.</p></p>"
     )
     responseType: gatewayResponseType,
     @ocaml.doc("<p>[Required] The string identifier of the associated <a>RestApi</a>.</p>")
@@ -2679,7 +2693,7 @@ module GetGatewayResponse = {
   )
   type request = {
     @ocaml.doc(
-      "<p>[Required] <p>The response type of the associated <a>GatewayResponse</a>. Valid values are <ul><li>ACCESS_DENIED</li><li>API_CONFIGURATION_ERROR</li><li>AUTHORIZER_FAILURE</li><li> AUTHORIZER_CONFIGURATION_ERROR</li><li>BAD_REQUEST_PARAMETERS</li><li>BAD_REQUEST_BODY</li><li>DEFAULT_4XX</li><li>DEFAULT_5XX</li><li>EXPIRED_TOKEN</li><li>INVALID_SIGNATURE</li><li>INTEGRATION_FAILURE</li><li>INTEGRATION_TIMEOUT</li><li>INVALID_API_KEY</li><li>MISSING_AUTHENTICATION_TOKEN</li><li> QUOTA_EXCEEDED</li><li>REQUEST_TOO_LARGE</li><li>RESOURCE_NOT_FOUND</li><li>THROTTLED</li><li>UNAUTHORIZED</li><li>UNSUPPORTED_MEDIA_TYPE</li></ul> </p></p>"
+      "<p>[Required] <p>The response type of the associated <a>GatewayResponse</a>.</p></p>"
     )
     responseType: gatewayResponseType,
     @ocaml.doc("<p>[Required] The string identifier of the associated <a>RestApi</a>.</p>")
@@ -2808,7 +2822,7 @@ module GetApiKey = {
 
 module GetAccount = {
   type t
-
+  type request = {.}
   @ocaml.doc("<p>Represents an AWS account that is associated with API Gateway.</p>
         <div class=\"remarks\">
           <p>To view the account info, call <code>GET</code> on this resource.</p>
@@ -2867,11 +2881,11 @@ Authorization: AWS4-HMAC-SHA256 Credential={access_key_ID}/us-east-1/apigateway/
     features: option<listOfString>,
     @ocaml.doc("<p>Specifies the API request limits configured for the current <a>Account</a>.</p>")
     throttleSettings: option<throttleSettings>,
-    @ocaml.doc("<p>The ARN of an Amazon CloudWatch role for the current <a>Account</a>. </p>")
+    @ocaml.doc("<p>The ARN of an Amazon CloudWatch role for the current <a>Account</a>.</p>")
     cloudwatchRoleArn: option<string_>,
   }
-  @module("@aws-sdk/client-apigateway") @new external new: unit => t = "GetAccountCommand"
-  let make = () => new()
+  @module("@aws-sdk/client-apigateway") @new external new: request => t = "GetAccountCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -3194,7 +3208,7 @@ module UpdateGatewayResponse = {
     )
     patchOperations: option<listOfPatchOperation>,
     @ocaml.doc(
-      "<p>[Required] <p>The response type of the associated <a>GatewayResponse</a>. Valid values are <ul><li>ACCESS_DENIED</li><li>API_CONFIGURATION_ERROR</li><li>AUTHORIZER_FAILURE</li><li> AUTHORIZER_CONFIGURATION_ERROR</li><li>BAD_REQUEST_PARAMETERS</li><li>BAD_REQUEST_BODY</li><li>DEFAULT_4XX</li><li>DEFAULT_5XX</li><li>EXPIRED_TOKEN</li><li>INVALID_SIGNATURE</li><li>INTEGRATION_FAILURE</li><li>INTEGRATION_TIMEOUT</li><li>INVALID_API_KEY</li><li>MISSING_AUTHENTICATION_TOKEN</li><li> QUOTA_EXCEEDED</li><li>REQUEST_TOO_LARGE</li><li>RESOURCE_NOT_FOUND</li><li>THROTTLED</li><li>UNAUTHORIZED</li><li>UNSUPPORTED_MEDIA_TYPE</li></ul> </p></p>"
+      "<p>[Required] <p>The response type of the associated <a>GatewayResponse</a>.</p></p>"
     )
     responseType: gatewayResponseType,
     @ocaml.doc("<p>[Required] The string identifier of the associated <a>RestApi</a>.</p>")
@@ -3430,7 +3444,7 @@ Authorization: AWS4-HMAC-SHA256 Credential={access_key_ID}/us-east-1/apigateway/
     features: option<listOfString>,
     @ocaml.doc("<p>Specifies the API request limits configured for the current <a>Account</a>.</p>")
     throttleSettings: option<throttleSettings>,
-    @ocaml.doc("<p>The ARN of an Amazon CloudWatch role for the current <a>Account</a>. </p>")
+    @ocaml.doc("<p>The ARN of an Amazon CloudWatch role for the current <a>Account</a>.</p>")
     cloudwatchRoleArn: option<string_>,
   }
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "UpdateAccountCommand"
@@ -4011,6 +4025,10 @@ module CreateDomainName = {
   type t
   @ocaml.doc("<p>A request to create a new domain name.</p>")
   type request = {
+    @ocaml.doc(
+      "<p>The ARN of the public certificate issued by ACM to validate ownership of your custom domain. Only required when configuring mutual TLS and using an ACM imported or private CA certificate ARN as the regionalCertificateArn.</p>"
+    )
+    ownershipVerificationCertificateArn: option<string_>,
     mutualTlsAuthentication: option<mutualTlsAuthenticationInput>,
     @ocaml.doc(
       "<p>The Transport Layer Security (TLS) version + cipher suite for this <a>DomainName</a>. The valid values are <code>TLS_1_0</code> and <code>TLS_1_2</code>.</p>"
@@ -4058,6 +4076,7 @@ module CreateDomainName = {
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "CreateDomainNameCommand"
   let make = (
     ~domainName,
+    ~ownershipVerificationCertificateArn=?,
     ~mutualTlsAuthentication=?,
     ~securityPolicy=?,
     ~tags=?,
@@ -4072,6 +4091,7 @@ module CreateDomainName = {
     (),
   ) =>
     new({
+      ownershipVerificationCertificateArn: ownershipVerificationCertificateArn,
       mutualTlsAuthentication: mutualTlsAuthentication,
       securityPolicy: securityPolicy,
       tags: tags,

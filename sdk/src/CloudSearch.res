@@ -43,6 +43,10 @@ type policyDocument = string
   "<p>The instance type (such as <code>search.m1.small</code>) on which an index partition is hosted.</p>"
 )
 type partitionInstanceType = [
+  | @as("search.previousgeneration.2xlarge") #Search_Previousgeneration_2xlarge
+  | @as("search.previousgeneration.xlarge") #Search_Previousgeneration_Xlarge
+  | @as("search.previousgeneration.large") #Search_Previousgeneration_Large
+  | @as("search.previousgeneration.small") #Search_Previousgeneration_Small
   | @as("search.2xlarge") #Search_2xlarge
   | @as("search.xlarge") #Search_Xlarge
   | @as("search.large") #Search_Large
@@ -648,7 +652,7 @@ type analysisSchemeStatusList = array<analysisSchemeStatus>
       see <a href=\"http://docs.aws.amazon.com/general/latest/gr/rande.html#cloudsearch_region\" target=\"_blank\">Regions and Endpoints</a>.</p>")
 module ListDomainNames = {
   type t
-
+  type request = {.}
   @ocaml.doc(
     "<p>The result of a <code>ListDomainNames</code> request. Contains a list of the domains owned by an account.</p>"
   )
@@ -656,8 +660,8 @@ module ListDomainNames = {
     @ocaml.doc("<p>The names of the search domains owned by an account.</p>") @as("DomainNames")
     domainNames: option<domainNameMap>,
   }
-  @module("@aws-sdk/client-cloudsearch") @new external new: unit => t = "ListDomainNamesCommand"
-  let make = () => new()
+  @module("@aws-sdk/client-cloudsearch") @new external new: request => t = "ListDomainNamesCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

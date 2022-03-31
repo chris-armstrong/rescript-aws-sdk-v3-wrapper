@@ -115,6 +115,7 @@ type notebookExecutionStatus = [
   | @as("START_PENDING") #START_PENDING
 ]
 type nonNegativeDouble = float
+type maxResultsNumber = int
 type marketType = [@as("SPOT") #SPOT | @as("ON_DEMAND") #ON_DEMAND]
 type marker = string
 type long = float
@@ -266,12 +267,11 @@ type volumeSpecification = {
   @ocaml.doc("<p>The number of I/O operations per second (IOPS) that the volume supports.</p>")
   @as("Iops")
   iops: option<integer_>,
-  @ocaml.doc("<p>The volume type. Volume types supported are gp2, io1, standard.</p>")
+  @ocaml.doc("<p>The volume type. Volume types supported are gp2, io1, and standard.</p>")
   @as("VolumeType")
   volumeType: string_,
 }
-@ocaml.doc("<p>A key-value pair containing user-defined metadata that you can associate with an Amazon
-         EMR resource. Tags make it easier to associate clusters in various ways, such as grouping
+@ocaml.doc("<p>A key-value pair containing user-defined metadata that you can associate with an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping
          clusters to track your Amazon EMR resource allocation costs. For more information, see
             <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html\">Tag
             Clusters</a>. </p>")
@@ -281,7 +281,7 @@ type tag = {
   @as("Value")
   value: option<string_>,
   @ocaml.doc("<p>A user-defined key, which is the minimum required information for a valid tag. For more
-         information, see <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html\">Tag </a>. </p>")
+         information, see <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html\">Tag</a>. </p>")
   @as("Key")
   key: option<string_>,
 }
@@ -293,6 +293,11 @@ type subnetIdList = array<string_>
 type studioSummary = {
   @ocaml.doc("<p>The time when the Amazon EMR Studio was created.</p>") @as("CreationTime")
   creationTime: option<date>,
+  @ocaml.doc(
+    "<p>Specifies whether the Studio authenticates users using IAM or Amazon Web Services SSO.</p>"
+  )
+  @as("AuthMode")
+  authMode: option<authMode>,
   @ocaml.doc("<p>The unique access URL of the Amazon EMR Studio.</p>") @as("Url")
   url: option<xmlStringMaxLen256>,
   @ocaml.doc("<p>The detailed description of the Amazon EMR Studio.</p>") @as("Description")
@@ -348,6 +353,10 @@ type stepExecutionStatusDetail = {
             <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and
             later, excluding 5.0.x versions. Spot Instance allocation strategy is available in
             Amazon EMR version 5.12.1 and later.</p>
+         </note>
+         <note>
+            <p>Spot Instances with a defined duration (also known as Spot blocks) are no longer available to new customers from July 1, 2021. For customers who have previously used the feature, we will continue to support Spot Instances with a defined duration until December 31, 2022.
+         </p>  
          </note>")
 type spotProvisioningSpecification = {
   @ocaml.doc("<p> Specifies the strategy to use in launching Spot Instance fleets. Currently, the only
@@ -361,7 +370,11 @@ type spotProvisioningSpecification = {
          300, or 360. The duration period starts as soon as a Spot Instance receives its instance
          ID. At the end of the duration, Amazon EC2 marks the Spot Instance for termination and
          provides a Spot Instance termination notice, which gives the instance a two-minute warning
-         before it terminates. </p>")
+         before it terminates. </p>
+         <note>
+            <p>Spot Instances with a defined duration (also known as Spot blocks) are no longer available to new customers from July 1, 2021. For customers who have previously used the feature, we will continue to support Spot Instances with a defined duration until December 31, 2022.
+         </p>  
+         </note>")
   @as("BlockDurationMinutes")
   blockDurationMinutes: option<wholeNumber>,
   @ocaml.doc("<p>The action to take when <code>TargetSpotCapacity</code> has not been fulfilled when the
@@ -378,6 +391,19 @@ type spotProvisioningSpecification = {
          cluster is first created.</p>")
   @as("TimeoutDurationMinutes")
   timeoutDurationMinutes: wholeNumber,
+}
+@ocaml.doc("<p>The returned release label application names or versions.</p>")
+type simplifiedApplication = {
+  @ocaml.doc(
+    "<p>The returned release label application version. For example, <code>3.2.1</code>.</p>"
+  )
+  @as("Version")
+  version: option<string_>,
+  @ocaml.doc(
+    "<p>The returned release label application name. For example, <code>hadoop</code>.</p>"
+  )
+  @as("Name")
+  name: option<string_>,
 }
 @ocaml.doc("<p>An automatic scaling configuration, which describes how the policy adds or removes
          instances, the cooldown period, and the number of EC2 instances that will be added each
@@ -424,11 +450,11 @@ type sessionMappingSummary = {
   )
   @as("IdentityType")
   identityType: option<identityType>,
-  @ocaml.doc("<p>The name of the user or group. For more information, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName\">UserName</a> and <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName\">DisplayName</a> in the <i>AWS SSO Identity Store API
+  @ocaml.doc("<p>The name of the user or group. For more information, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName\">UserName</a> and <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName\">DisplayName</a> in the <i>Amazon Web Services SSO Identity Store API
          Reference</i>.</p>")
   @as("IdentityName")
   identityName: option<xmlStringMaxLen256>,
-  @ocaml.doc("<p>The globally unique identifier (GUID) of the user or group from the AWS SSO Identity
+  @ocaml.doc("<p>The globally unique identifier (GUID) of the user or group from the Amazon Web Services SSO Identity
          Store.</p>")
   @as("IdentityId")
   identityId: option<xmlStringMaxLen256>,
@@ -451,7 +477,7 @@ type sessionMappingDetail = {
   )
   @as("IdentityType")
   identityType: option<identityType>,
-  @ocaml.doc("<p>The name of the user or group. For more information, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName\">UserName</a> and <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName\">DisplayName</a> in the <i>AWS SSO Identity Store API
+  @ocaml.doc("<p>The name of the user or group. For more information, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName\">UserName</a> and <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName\">DisplayName</a> in the <i>Amazon Web Services SSO Identity Store API
          Reference</i>.</p>")
   @as("IdentityName")
   identityName: option<xmlStringMaxLen256>,
@@ -482,6 +508,19 @@ type scalingConstraints = {
          boundary.</p>")
   @as("MinCapacity")
   minCapacity: integer_,
+}
+@ocaml.doc("<p>The release label filters by application or version prefix.</p>")
+type releaseLabelFilter = {
+  @ocaml.doc(
+    "<p>Optional release label application filter. For example, <code>spark@2.1.0</code>.</p>"
+  )
+  @as("Application")
+  application: option<string_>,
+  @ocaml.doc(
+    "<p>Optional release label version prefix filter. For example, <code>emr-5</code>.</p>"
+  )
+  @as("Prefix")
+  prefix: option<string_>,
 }
 @ocaml.doc("<p>A list of port ranges that are permitted to allow inbound traffic from all public IP
          addresses. To specify a single port, use the same value for <code>MinRange</code> and
@@ -534,11 +573,13 @@ type onDemandCapacityReservationOptions = {
   capacityReservationPreference: option<onDemandCapacityReservationPreference>,
   @ocaml.doc("<p>Indicates whether to use unused Capacity Reservations for fulfilling On-Demand capacity.</p>
          <p>If you specify <code>use-capacity-reservations-first</code>, the fleet uses unused Capacity Reservations to fulfill On-Demand capacity up to the target On-Demand capacity. If multiple instance pools have unused Capacity Reservations, the On-Demand allocation strategy (<code>lowest-price</code>) is applied. If the number of unused Capacity Reservations is less than the On-Demand target capacity, the remaining On-Demand target capacity is launched according to the On-Demand allocation strategy (<code>lowest-price</code>).</p>
-         <p>If you do not specify a value, the fleet fulfils the On-Demand capacity according to the chosen On-Demand allocation strategy.</p>")
+         <p>If you do not specify a value, the fleet fulfills the On-Demand capacity according to the chosen On-Demand allocation strategy.</p>")
   @as("UsageStrategy")
   usageStrategy: option<onDemandCapacityReservationUsageStrategy>,
 }
-@ocaml.doc("<p></p>")
+@ocaml.doc(
+  "<p>Details for a notebook execution. The details include information such as the unique ID and status of the notebook execution.</p>"
+)
 type notebookExecutionSummary = {
   @ocaml.doc("<p>The timestamp when notebook execution started.</p>") @as("EndTime")
   endTime: option<date>,
@@ -702,6 +743,9 @@ type instanceGroupStateChangeReason = {
 type instanceGroupIdsList = array<xmlStringMaxLen256>
 @ocaml.doc("<p>Detailed information about an instance group.</p>")
 type instanceGroupDetail = {
+  @ocaml.doc("<p>The custom AMI ID to use for the provisioned instance group.</p>")
+  @as("CustomAmiId")
+  customAmiId: option<xmlStringMaxLen256>,
   @ocaml.doc("<p>The date/time the instance group was terminated.</p>") @as("EndDateTime")
   endDateTime: option<date>,
   @ocaml.doc("<p>The date/time the instance group was available to the cluster.</p>")
@@ -714,7 +758,7 @@ type instanceGroupDetail = {
   @ocaml.doc("<p>Details regarding the state of the instance group.</p>")
   @as("LastStateChangeReason")
   lastStateChangeReason: option<xmlString>,
-  @ocaml.doc("<p>State of instance group. The following values are deprecated: STARTING, TERMINATED, and
+  @ocaml.doc("<p>State of instance group. The following values are no longer supported: STARTING, TERMINATED, and
          FAILED.</p>")
   @as("State")
   state: instanceGroupState,
@@ -884,7 +928,7 @@ type cancelStepsInfo = {
   status: option<cancelStepsRequestStatus>,
   @ocaml.doc("<p>The encrypted StepId of a step.</p>") @as("StepId") stepId: option<stepId>,
 }
-@ocaml.doc("<p>Properties that describe the AWS principal that created the
+@ocaml.doc("<p>Properties that describe the Amazon Web Services principal that created the
             <code>BlockPublicAccessConfiguration</code> using the
             <code>PutBlockPublicAccessConfiguration</code> action as well as the date and time that
          the configuration was created. Each time a configuration for block public access is
@@ -895,6 +939,16 @@ type blockPublicAccessConfigurationMetadata = {
   createdByArn: arnType,
   @ocaml.doc("<p>The date and time that the configuration was created.</p>") @as("CreationDateTime")
   creationDateTime: date,
+}
+@ocaml.doc(
+  "<p>An auto-termination policy for an Amazon EMR cluster. An auto-termination policy defines the amount of idle time in seconds after which a cluster automatically terminates. For alternative cluster termination options, see <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-termination.html\">Control cluster termination</a>.</p>"
+)
+type autoTerminationPolicy = {
+  @ocaml.doc(
+    "<p>Specifies the amount of idle time in seconds after which the cluster automatically terminates. You can specify a minimum of 60 seconds and a maximum of 604800 seconds (seven days).</p>"
+  )
+  @as("IdleTimeout")
+  idleTimeout: option<long>,
 }
 @ocaml.doc("<p>The reason for an <a>AutoScalingPolicyStatus</a> change.</p>")
 type autoScalingPolicyStateChangeReason = {
@@ -932,6 +986,7 @@ type stepStatus = {
   @ocaml.doc("<p>The execution state of the cluster step.</p>") @as("State")
   state: option<stepState>,
 }
+type simplifiedApplicationList = array<simplifiedApplication>
 type sessionMappingSummaryList = array<sessionMappingSummary>
 type securityConfigurationList = array<securityConfigurationSummary>
 @ocaml.doc("<p>Configuration of the script to run during a bootstrap action.</p>")
@@ -939,8 +994,7 @@ type scriptBootstrapActionConfig = {
   @ocaml.doc("<p>A list of command line arguments to pass to the bootstrap action script.</p>")
   @as("Args")
   args: option<xmlStringList>,
-  @ocaml.doc("<p>Location of the script to run during a bootstrap action. Can be either a location in
-         Amazon S3 or on a local file system.</p>")
+  @ocaml.doc("<p>Location in Amazon S3 of the script to run during a bootstrap action.</p>")
   @as("Path")
   path: xmlString,
 }
@@ -1246,6 +1300,14 @@ type application = {
 type studio = {
   @ocaml.doc("<p>A list of tags associated with the Amazon EMR Studio.</p>") @as("Tags")
   tags: option<tagList_>,
+  @ocaml.doc("<p>The name of your identity provider's <code>RelayState</code> parameter.</p>")
+  @as("IdpRelayStateParameterName")
+  idpRelayStateParameterName: option<xmlStringMaxLen256>,
+  @ocaml.doc(
+    "<p>Your identity provider's authentication endpoint. Amazon EMR Studio redirects federated users to this endpoint for authentication when logging in to a Studio with the Studio URL.</p>"
+  )
+  @as("IdpAuthUrl")
+  idpAuthUrl: option<xmlString>,
   @ocaml.doc("<p>The Amazon S3 location to back up Amazon EMR Studio Workspaces and notebook
          files.</p>")
   @as("DefaultS3Location")
@@ -1264,7 +1326,9 @@ type studio = {
          security group and to the internet.</p>")
   @as("WorkspaceSecurityGroupId")
   workspaceSecurityGroupId: option<xmlStringMaxLen256>,
-  @ocaml.doc("<p>The name of the IAM role assumed by users logged in to the Amazon EMR Studio.</p>")
+  @ocaml.doc(
+    "<p>The name of the IAM role assumed by users logged in to the Amazon EMR Studio. A Studio only requires a <code>UserRole</code> when you use IAM authentication.</p>"
+  )
   @as("UserRole")
   userRole: option<xmlString>,
   @ocaml.doc("<p>The name of the IAM role assumed by the Amazon EMR Studio.</p>") @as("ServiceRole")
@@ -1274,8 +1338,9 @@ type studio = {
   subnetIds: option<subnetIdList>,
   @ocaml.doc("<p>The ID of the VPC associated with the Amazon EMR Studio.</p>") @as("VpcId")
   vpcId: option<xmlStringMaxLen256>,
-  @ocaml.doc("<p>Specifies whether the Amazon EMR Studio authenticates users using single sign-on (SSO) or
-         IAM.</p>")
+  @ocaml.doc(
+    "<p>Specifies whether the Amazon EMR Studio authenticates users using IAM or Amazon Web Services SSO.</p>"
+  )
   @as("AuthMode")
   authMode: option<authMode>,
   @ocaml.doc("<p>The detailed description of the Amazon EMR Studio.</p>") @as("Description")
@@ -1292,8 +1357,7 @@ type stepSummary = {
   @ocaml.doc("<p>The current execution status details of the cluster step.</p>") @as("Status")
   status: option<stepStatus>,
   @ocaml.doc("<p>The action to take when the cluster step fails. Possible values are TERMINATE_CLUSTER,
-         CANCEL_AND_WAIT, and CONTINUE. TERMINATE_JOB_FLOW is available for backward compatibility.
-         We recommend using TERMINATE_CLUSTER instead.</p>")
+         CANCEL_AND_WAIT, and CONTINUE. TERMINATE_JOB_FLOW is available for backward compatibility.</p>")
   @as("ActionOnFailure")
   actionOnFailure: option<actionOnFailure>,
   @ocaml.doc("<p>The Hadoop job configuration of the cluster step.</p>") @as("Config")
@@ -1305,9 +1369,11 @@ type stepSummary = {
 type step = {
   @ocaml.doc("<p>The current execution status details of the cluster step.</p>") @as("Status")
   status: option<stepStatus>,
-  @ocaml.doc("<p>The action to take when the cluster step fails. Possible values are TERMINATE_CLUSTER,
-         CANCEL_AND_WAIT, and CONTINUE. TERMINATE_JOB_FLOW is provided for backward compatibility.
-         We recommend using TERMINATE_CLUSTER instead.</p>")
+  @ocaml.doc("<p>The action to take when the cluster step fails. Possible values are <code>TERMINATE_CLUSTER</code>,
+         <code>CANCEL_AND_WAIT</code>, and <code>CONTINUE</code>. <code>TERMINATE_JOB_FLOW</code> is provided for backward compatibility.
+         We recommend using <code>TERMINATE_CLUSTER</code> instead.</p>
+         <p>If a cluster's <code>StepConcurrencyLevel</code> is greater than <code>1</code>, do not use <code>AddJobFlowSteps</code> to submit a step with this parameter set to <code>CANCEL_AND_WAIT</code> or <code>TERMINATE_CLUSTER</code>. The step is not submitted and the action fails with a message that the <code>ActionOnFailure</code> setting is not valid.</p>
+         <p>If you change a cluster's <code>StepConcurrencyLevel</code> to be greater than 1 while a step is running, the <code>ActionOnFailure</code> parameter may not behave as you expect. In this case, for a step that fails with this parameter set to <code>CANCEL_AND_WAIT</code>, pending steps and the running step are not canceled; for a step that fails with this parameter set to <code>TERMINATE_CLUSTER</code>, the cluster does not terminate.</p>")
   @as("ActionOnFailure")
   actionOnFailure: option<actionOnFailure>,
   @ocaml.doc("<p>The Hadoop job configuration of the cluster step.</p>") @as("Config")
@@ -1498,7 +1564,8 @@ type instanceFleetProvisioningSpecifications = {
 }
 @ocaml.doc("<p>Represents an EC2 instance provisioned as part of cluster.</p>")
 type instance = {
-  @ocaml.doc("<p>The list of EBS volumes that are attached to this instance.</p>") @as("EbsVolumes")
+  @ocaml.doc("<p>The list of Amazon EBS volumes that are attached to this instance.</p>")
+  @as("EbsVolumes")
   ebsVolumes: option<ebsVolumeList>,
   @ocaml.doc("<p>The EC2 instance type, for example <code>m3.xlarge</code>.</p>")
   @as("InstanceType")
@@ -1618,13 +1685,31 @@ type bootstrapActionConfig = {
 }
 type applicationList = array<application>
 type stepSummaryList = array<stepSummary>
-@ocaml.doc("<p>Specification of a cluster (job flow) step.</p>")
+@ocaml.doc("<p>Specification for a cluster (job flow) step.</p>")
 type stepConfig = {
   @ocaml.doc("<p>The JAR file used for the step.</p>") @as("HadoopJarStep")
   hadoopJarStep: hadoopJarStepConfig,
-  @ocaml.doc("<p>The action to take when the cluster step fails. Possible values are TERMINATE_CLUSTER,
-         CANCEL_AND_WAIT, and CONTINUE. TERMINATE_JOB_FLOW is provided for backward compatibility.
-         We recommend using TERMINATE_CLUSTER instead.</p>")
+  @ocaml.doc("<p>The action to take when the step fails. Use one of the following values:</p>
+         <ul>
+            <li>
+               <p>
+                  <code>TERMINATE_CLUSTER</code> - Shuts down the cluster.</p>
+            </li>
+            <li>
+               <p>
+                  <code>CANCEL_AND_WAIT</code> - Cancels any pending steps and returns the cluster to the <code>WAITING</code> state.</p>
+            </li>
+            <li>
+               <p>
+                  <code>CONTINUE</code> - Continues to the next step in the queue.</p>
+            </li>
+            <li>
+               <p>
+                  <code>TERMINATE_JOB_FLOW</code> - Shuts down the cluster. <code>TERMINATE_JOB_FLOW</code> is provided for backward compatibility. We recommend using <code>TERMINATE_CLUSTER</code> instead.</p>
+            </li>
+         </ul>
+         <p>If a cluster's <code>StepConcurrencyLevel</code> is greater than <code>1</code>, do not use <code>AddJobFlowSteps</code> to submit a step with this parameter set to <code>CANCEL_AND_WAIT</code> or <code>TERMINATE_CLUSTER</code>. The step is not submitted and the action fails with a message that the <code>ActionOnFailure</code> setting is not valid.</p>
+         <p>If you change a cluster's <code>StepConcurrencyLevel</code> to be greater than 1 while a step is running, the <code>ActionOnFailure</code> parameter may not behave as you expect. In this case, for a step that fails with this parameter set to <code>CANCEL_AND_WAIT</code>, pending steps and the running step are not canceled; for a step that fails with this parameter set to <code>TERMINATE_CLUSTER</code>, the cluster does not terminate.</p>")
   @as("ActionOnFailure")
   actionOnFailure: option<actionOnFailure>,
   @ocaml.doc("<p>The name of the step.</p>") @as("Name") name: xmlStringMaxLen256,
@@ -1702,7 +1787,7 @@ type jobFlowDetail = {
          instances in an instance group.</p>")
   @as("AutoScalingRole")
   autoScalingRole: option<xmlString>,
-  @ocaml.doc("<p>The IAM role that is assumed by the Amazon EMR service to access AWS resources on your
+  @ocaml.doc("<p>The IAM role that is assumed by the Amazon EMR service to access Amazon Web Services resources on your
          behalf.</p>")
   @as("ServiceRole")
   serviceRole: option<xmlString>,
@@ -1710,13 +1795,12 @@ type jobFlowDetail = {
          job flow assume this role.</p>")
   @as("JobFlowRole")
   jobFlowRole: option<xmlString>,
-  @ocaml.doc("<p>Indicates whether the cluster is visible to all IAM users of the AWS account associated
-         with the cluster. The default value, <code>true</code>, indicates that all IAM users in the
-         AWS account can perform cluster actions if they have the proper IAM policy permissions. If
-         this value is <code>false</code>, only the IAM user that created the cluster can perform
-         actions. This value can be changed on a running cluster by using the <a>SetVisibleToAllUsers</a> action. You can override the default value of
-            <code>true</code> when you create a cluster by using the <code>VisibleToAllUsers</code>
-         parameter of the <code>RunJobFlow</code> action.</p>")
+  @ocaml.doc("<p>Indicates whether the cluster is visible to IAM principals in the Amazon Web Services account associated
+         with the cluster. When <code>true</code>, IAM principals in the
+         Amazon Web Services account can perform EMR cluster actions that their IAM policies allow. When <code>false</code>, only the IAM principal that created the cluster and the Amazon Web Services account root user can perform EMR actions, regardless of IAM permissions policies attached to other IAM principals.</p>
+         <p>The default value is <code>true</code> if a value is not provided when creating a
+         cluster using the EMR API <a>RunJobFlow</a> command, the CLI
+         <a href=\"https://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html\">create-cluster</a> command, or the Amazon Web Services Management Console.</p>")
   @as("VisibleToAllUsers")
   visibleToAllUsers: option<boolean_>,
   @ocaml.doc("<p>A list of strings set by third-party software when the job flow is launched. If you are
@@ -1736,7 +1820,7 @@ type jobFlowDetail = {
             <code>CustomAmiID</code>.</p>")
   @as("AmiVersion")
   amiVersion: option<xmlStringMaxLen256>,
-  @ocaml.doc("<p>The AWS KMS customer master key (CMK) used for encrypting log files. This attribute is
+  @ocaml.doc("<p>The KMS key used for encrypting log files. This attribute is
          only available with EMR version 5.30.0 and later, excluding EMR 6.0.0.</p>")
   @as("LogEncryptionKmsKeyId")
   logEncryptionKmsKeyId: option<xmlString>,
@@ -1794,11 +1878,13 @@ and configuration = {
             later, excluding 5.0.x versions.</p>
          </note>")
 type instanceTypeSpecification = {
+  @ocaml.doc("<p>The custom AMI ID to use for the instance type.</p>") @as("CustomAmiId")
+  customAmiId: option<xmlStringMaxLen256>,
   @ocaml.doc("<p>Evaluates to <code>TRUE</code> when the specified <code>InstanceType</code> is
          EBS-optimized.</p>")
   @as("EbsOptimized")
   ebsOptimized: option<booleanObject>,
-  @ocaml.doc("<p>The configuration of Amazon Elastic Block Storage (Amazon EBS) attached to each instance
+  @ocaml.doc("<p>The configuration of Amazon Elastic Block Store (Amazon EBS) attached to each instance
          as defined by <code>InstanceType</code>.</p>")
   @as("EbsBlockDevices")
   ebsBlockDevices: option<ebsBlockDeviceList>,
@@ -1826,18 +1912,19 @@ type instanceTypeSpecification = {
 }
 @ocaml.doc("<p>An instance type configuration for each instance type in an instance fleet, which
          determines the EC2 instances Amazon EMR attempts to provision to fulfill On-Demand and Spot
-         target capacities. There can be a maximum of five instance type configurations in a
-         fleet.</p>
+         target capacities. When you use an allocation strategy, you can include a maximum of 30 instance type configurations for a fleet. For more information about how to use an allocation strategy, see <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-instance-fleet.html\">Configure Instance Fleets</a>. Without an allocation strategy, you may specify a maximum of five instance type configurations for a fleet.</p>
          <note>
             <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and
             later, excluding 5.0.x versions.</p>
          </note>")
 type instanceTypeConfig = {
+  @ocaml.doc("<p>The custom AMI ID to use for the instance type.</p>") @as("CustomAmiId")
+  customAmiId: option<xmlStringMaxLen256>,
   @ocaml.doc("<p>A configuration classification that applies when provisioning cluster instances, which
          can include configurations for applications and software that run on the cluster.</p>")
   @as("Configurations")
   configurations: option<configurationList>,
-  @ocaml.doc("<p>The configuration of Amazon Elastic Block Storage (Amazon EBS) attached to each instance
+  @ocaml.doc("<p>The configuration of Amazon Elastic Block Store (Amazon EBS) attached to each instance
          as defined by <code>InstanceType</code>. </p>")
   @as("EbsConfiguration")
   ebsConfiguration: option<ebsConfiguration>,
@@ -1880,6 +1967,9 @@ type instanceGroupModifyConfig = {
 }
 @ocaml.doc("<p>Configuration defining a new instance group.</p>")
 type instanceGroupConfig = {
+  @ocaml.doc("<p>The custom AMI ID to use for the provisioned instance group.</p>")
+  @as("CustomAmiId")
+  customAmiId: option<xmlStringMaxLen256>,
   @ocaml.doc("<p>An automatic scaling policy for a core instance group or task instance group in an
          Amazon EMR cluster. The automatic scaling policy defines how an instance group dynamically
          adds and terminates EC2 instances in response to the value of a CloudWatch metric. See
@@ -1917,6 +2007,9 @@ type instanceGroupConfig = {
 @ocaml.doc("<p>This entity represents an instance group, which is a group of instances that have common
          purpose. For example, CORE instance group is used for HDFS.</p>")
 type instanceGroup = {
+  @ocaml.doc("<p>The custom AMI ID to use for the provisioned instance group.</p>")
+  @as("CustomAmiId")
+  customAmiId: option<xmlStringMaxLen256>,
   @ocaml.doc("<p>An automatic scaling policy for a core instance group or task instance group in an
          Amazon EMR cluster. The automatic scaling policy defines how an instance group dynamically
          adds and terminates EC2 instances in response to the value of a CloudWatch metric. See
@@ -1948,7 +2041,7 @@ type instanceGroup = {
   @ocaml.doc("<note>
             <p>Amazon EMR releases 4.x or later.</p>
          </note>
-         <p>The list of configurations supplied for an EMR cluster instance group. You can specify a
+         <p>The list of configurations supplied for an Amazon EMR cluster instance group. You can specify a
          separate configuration for each instance group (master, core, and task).</p>")
   @as("Configurations")
   configurations: option<configurationList>,
@@ -2047,20 +2140,19 @@ type cluster = {
          approximation and does not reflect the actual billing rate.</p>")
   @as("NormalizedInstanceHours")
   normalizedInstanceHours: option<integer_>,
-  @ocaml.doc("<p>The IAM role that will be assumed by the Amazon EMR service to access AWS resources on
+  @ocaml.doc("<p>The IAM role that Amazon EMR assumes in order to access Amazon Web Services resources on
          your behalf.</p>")
   @as("ServiceRole")
   serviceRole: option<string_>,
   @ocaml.doc("<p>A list of tags associated with a cluster.</p>") @as("Tags") tags: option<tagList_>,
   @ocaml.doc("<p>The applications installed on this cluster.</p>") @as("Applications")
   applications: option<applicationList>,
-  @ocaml.doc("<p>Indicates whether the cluster is visible to all IAM users of the AWS account associated
-         with the cluster. The default value, <code>true</code>, indicates that all IAM users in the
-         AWS account can perform cluster actions if they have the proper IAM policy permissions. If
-         this value is <code>false</code>, only the IAM user that created the cluster can perform
-         actions. This value can be changed on a running cluster by using the <a>SetVisibleToAllUsers</a> action. You can override the default value of
-            <code>true</code> when you create a cluster by using the <code>VisibleToAllUsers</code>
-         parameter of the <code>RunJobFlow</code> action.</p>")
+  @ocaml.doc("<p>Indicates whether the cluster is visible to IAM principals in the Amazon Web Services account associated
+         with the cluster. When <code>true</code>, IAM principals in the
+         Amazon Web Services account can perform EMR cluster actions on the cluster that their IAM policies allow. When <code>false</code>, only the IAM principal that created the cluster and the Amazon Web Services account root user can perform EMR actions, regardless of IAM permissions policies attached to other IAM principals.</p>
+         <p>The default value is <code>true</code> if a value is not provided when creating a
+         cluster using the EMR API <a>RunJobFlow</a> command, the CLI
+         <a href=\"https://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html\">create-cluster</a> command, or the Amazon Web Services Management Console.</p>")
   @as("VisibleToAllUsers")
   visibleToAllUsers: option<boolean_>,
   @ocaml.doc("<p>Indicates whether Amazon EMR will lock the cluster to prevent the EC2 instances from
@@ -2084,7 +2176,7 @@ type cluster = {
   runningAmiVersion: option<string_>,
   @ocaml.doc("<p>The AMI version requested for this cluster.</p>") @as("RequestedAmiVersion")
   requestedAmiVersion: option<string_>,
-  @ocaml.doc("<p> The AWS KMS customer master key (CMK) used for encrypting log files. This attribute is
+  @ocaml.doc("<p> The KMS key used for encrypting log files. This attribute is
          only available with EMR version 5.30.0 and later, excluding EMR 6.0.0. </p>")
   @as("LogEncryptionKmsKeyId")
   logEncryptionKmsKeyId: option<string_>,
@@ -2214,8 +2306,9 @@ type instanceFleet = {
   @ocaml.doc("<p>Describes the launch specification for an instance fleet. </p>")
   @as("LaunchSpecifications")
   launchSpecifications: option<instanceFleetProvisioningSpecifications>,
-  @ocaml.doc("<p>The specification for the instance types that comprise an instance fleet. Up to five
-         unique instance specifications may be defined for each instance fleet. </p>")
+  @ocaml.doc(
+    "<p>An array of specifications for the instance types that comprise an instance fleet.</p>"
+  )
   @as("InstanceTypeSpecifications")
   instanceTypeSpecifications: option<instanceTypeSpecificationList>,
   @ocaml.doc("<p>The number of Spot units that have been provisioned for this instance fleet to fulfill
@@ -2299,10 +2392,14 @@ type jobFlowInstancesConfig = {
          clusters in VPC private subnets.</p>")
   @as("ServiceAccessSecurityGroup")
   serviceAccessSecurityGroup: option<xmlStringMaxLen256>,
-  @ocaml.doc("<p>The identifier of the Amazon EC2 security group for the core and task nodes.</p>")
+  @ocaml.doc(
+    "<p>The identifier of the Amazon EC2 security group for the core and task nodes. If you specify <code>EmrManagedSlaveSecurityGroup</code>, you must also specify <code>EmrManagedMasterSecurityGroup</code>.</p>"
+  )
   @as("EmrManagedSlaveSecurityGroup")
   emrManagedSlaveSecurityGroup: option<xmlStringMaxLen256>,
-  @ocaml.doc("<p>The identifier of the Amazon EC2 security group for the master node.</p>")
+  @ocaml.doc(
+    "<p>The identifier of the Amazon EC2 security group for the master node. If you specify <code>EmrManagedMasterSecurityGroup</code>, you must also specify <code>EmrManagedSlaveSecurityGroup</code>.</p>"
+  )
   @as("EmrManagedMasterSecurityGroup")
   emrManagedMasterSecurityGroup: option<xmlStringMaxLen256>,
   @ocaml.doc("<p>Applies to clusters that use the instance fleet configuration. When multiple EC2 subnet
@@ -2333,7 +2430,7 @@ type jobFlowInstancesConfig = {
   @as("TerminationProtected")
   terminationProtected: option<boolean_>,
   @ocaml.doc(
-    "<p>Specifies whether the cluster should remain available after completing all steps.</p>"
+    "<p>Specifies whether the cluster should remain available after completing all steps. Defaults to <code>true</code>. For more information about configuring cluster termination, see <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-termination.html\">Control Cluster Termination</a> in the <i>EMR Management Guide</i>.</p>"
   )
   @as("KeepJobFlowAliveWhenNoSteps")
   keepJobFlowAliveWhenNoSteps: option<boolean_>,
@@ -2361,7 +2458,7 @@ type jobFlowInstancesConfig = {
   masterInstanceType: option<instanceType>,
 }
 @ocaml.doc("<p>Amazon EMR is a web service that makes it easier to process large amounts of data
-         efficiently. Amazon EMR uses Hadoop processing combined with several AWS services to do
+         efficiently. Amazon EMR uses Hadoop processing combined with several Amazon Web Services services to do
          tasks such as web indexing, data mining, log file analysis, machine learning, scientific
          simulation, and data warehouse management.</p>")
 module UpdateStudioSessionMapping = {
@@ -2374,19 +2471,19 @@ module UpdateStudioSessionMapping = {
     @ocaml.doc("<p>Specifies whether the identity to update is a user or a group.</p>")
     @as("IdentityType")
     identityType: identityType,
-    @ocaml.doc("<p>The name of the user or group to update. For more information, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName\">UserName</a> and <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName\">DisplayName</a> in the <i>AWS SSO Identity Store API Reference</i>.
+    @ocaml.doc("<p>The name of the user or group to update. For more information, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName\">UserName</a> and <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName\">DisplayName</a> in the <i>Amazon Web Services SSO Identity Store API Reference</i>.
          Either <code>IdentityName</code> or <code>IdentityId</code> must be specified.</p>")
     @as("IdentityName")
     identityName: option<xmlStringMaxLen256>,
     @ocaml.doc("<p>The globally unique identifier (GUID) of the user or group. For more information, see
-            <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId\">UserId</a> and <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-GroupId\">GroupId</a> in the <i>AWS SSO Identity Store API Reference</i>.
+            <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId\">UserId</a> and <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-GroupId\">GroupId</a> in the <i>Amazon Web Services SSO Identity Store API Reference</i>.
          Either <code>IdentityName</code> or <code>IdentityId</code> must be specified.</p>")
     @as("IdentityId")
     identityId: option<xmlStringMaxLen256>,
     @ocaml.doc("<p>The ID of the Amazon EMR Studio.</p>") @as("StudioId")
     studioId: xmlStringMaxLen256,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticmapreduce") @new
   external new: request => t = "UpdateStudioSessionMappingCommand"
   let make = (~sessionPolicyArn, ~identityType, ~studioId, ~identityName=?, ~identityId=?, ()) =>
@@ -2406,7 +2503,7 @@ module StopNotebookExecution = {
     @ocaml.doc("<p>The unique identifier of the notebook execution.</p>") @as("NotebookExecutionId")
     notebookExecutionId: xmlStringMaxLen256,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticmapreduce") @new
   external new: request => t = "StopNotebookExecutionCommand"
   let make = (~notebookExecutionId, ()) => new({notebookExecutionId: notebookExecutionId})
@@ -2421,9 +2518,25 @@ module RemoveManagedScalingPolicy = {
     @as("ClusterId")
     clusterId: clusterId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticmapreduce") @new
   external new: request => t = "RemoveManagedScalingPolicyCommand"
+  let make = (~clusterId, ()) => new({clusterId: clusterId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module RemoveAutoTerminationPolicy = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>Specifies the ID of the Amazon EMR cluster from which the auto-termination policy will be removed.</p>"
+    )
+    @as("ClusterId")
+    clusterId: clusterId,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-elasticmapreduce") @new
+  external new: request => t = "RemoveAutoTerminationPolicyCommand"
   let make = (~clusterId, ()) => new({clusterId: clusterId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
@@ -2441,7 +2554,7 @@ module RemoveAutoScalingPolicy = {
     @as("ClusterId")
     clusterId: clusterId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticmapreduce") @new
   external new: request => t = "RemoveAutoScalingPolicyCommand"
   let make = (~instanceGroupId, ~clusterId, ()) =>
@@ -2452,8 +2565,9 @@ module RemoveAutoScalingPolicy = {
 module ModifyCluster = {
   type t
   type request = {
-    @ocaml.doc("<p>The number of steps that can be executed concurrently. You can specify a minimum of 1 step and a maximum of 256
-         steps. </p>")
+    @ocaml.doc(
+      "<p>The number of steps that can be executed concurrently. You can specify a minimum of 1 step and a maximum of 256 steps. We recommend that you do not change this parameter while steps are running or the <code>ActionOnFailure</code> setting may not behave as expected. For more information see <a>Step$ActionOnFailure</a>.</p>"
+    )
     @as("StepConcurrencyLevel")
     stepConcurrencyLevel: option<integer_>,
     @ocaml.doc("<p>The unique identifier of the cluster.</p>") @as("ClusterId") clusterId: string_,
@@ -2500,19 +2614,19 @@ module DeleteStudioSessionMapping = {
     @as("IdentityType")
     identityType: identityType,
     @ocaml.doc("<p>The name of the user name or group to remove from the Amazon EMR Studio. For more information, see
-            <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName\">UserName</a> and <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName\">DisplayName</a> in the <i>AWS SSO Identity Store API Reference</i>.
+            <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName\">UserName</a> and <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName\">DisplayName</a> in the <i>Amazon Web Services SSO Store API Reference</i>.
          Either <code>IdentityName</code> or <code>IdentityId</code> must be specified.</p>")
     @as("IdentityName")
     identityName: option<xmlStringMaxLen256>,
     @ocaml.doc("<p>The globally unique identifier (GUID) of the user or group to remove from the Amazon EMR
-         Studio. For more information, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId\">UserId</a> and <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-GroupId\">GroupId</a> in the <i>AWS SSO Identity Store API Reference</i>.
+         Studio. For more information, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId\">UserId</a> and <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-GroupId\">GroupId</a> in the <i>Amazon Web Services SSO Identity Store API Reference</i>.
          Either <code>IdentityName</code> or <code>IdentityId</code> must be specified.</p>")
     @as("IdentityId")
     identityId: option<xmlStringMaxLen256>,
     @ocaml.doc("<p>The ID of the Amazon EMR Studio.</p>") @as("StudioId")
     studioId: xmlStringMaxLen256,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticmapreduce") @new
   external new: request => t = "DeleteStudioSessionMappingCommand"
   let make = (~identityType, ~studioId, ~identityName=?, ~identityId=?, ()) =>
@@ -2531,7 +2645,7 @@ module DeleteStudio = {
     @ocaml.doc("<p>The ID of the Amazon EMR Studio.</p>") @as("StudioId")
     studioId: xmlStringMaxLen256,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticmapreduce") @new
   external new: request => t = "DeleteStudioCommand"
   let make = (~studioId, ()) => new({studioId: studioId})
@@ -2543,7 +2657,7 @@ module DeleteSecurityConfiguration = {
   type request = {
     @ocaml.doc("<p>The name of the security configuration.</p>") @as("Name") name: xmlString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticmapreduce") @new
   external new: request => t = "DeleteSecurityConfigurationCommand"
   let make = (~name, ()) => new({name: name})
@@ -2554,8 +2668,7 @@ module CreateStudioSessionMapping = {
   type t
   type request = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) for the session policy that will be applied to the user
-         or group. Session policies refine Studio user permissions without the need to use multiple
-         IAM user roles.</p>")
+         or group. You should specify the ARN for the session policy that you want to apply, not the ARN of your user role. For more information, see <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-studio-user-role.html\">Create an EMR Studio User Role with Session Policies</a>.</p>")
     @as("SessionPolicyArn")
     sessionPolicyArn: xmlStringMaxLen256,
     @ocaml.doc(
@@ -2563,20 +2676,20 @@ module CreateStudioSessionMapping = {
     )
     @as("IdentityType")
     identityType: identityType,
-    @ocaml.doc("<p>The name of the user or group. For more information, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName\">UserName</a> and <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName\">DisplayName</a> in the <i>AWS SSO Identity Store API Reference</i>.
-         Either <code>IdentityName</code> or <code>IdentityId</code> must be specified.</p>")
+    @ocaml.doc("<p>The name of the user or group. For more information, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName\">UserName</a> and <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName\">DisplayName</a> in the <i>Amazon Web Services SSO Identity Store API Reference</i>.
+         Either <code>IdentityName</code> or <code>IdentityId</code> must be specified, but not both.</p>")
     @as("IdentityName")
     identityName: option<xmlStringMaxLen256>,
-    @ocaml.doc("<p>The globally unique identifier (GUID) of the user or group from the AWS SSO Identity
-         Store. For more information, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId\">UserId</a> and <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-GroupId\">GroupId</a> in the <i>AWS SSO Identity Store API Reference</i>.
-         Either <code>IdentityName</code> or <code>IdentityId</code> must be specified.</p>")
+    @ocaml.doc("<p>The globally unique identifier (GUID) of the user or group from the Amazon Web Services SSO Identity
+         Store. For more information, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId\">UserId</a> and <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-GroupId\">GroupId</a> in the <i>Amazon Web Services SSO Identity Store API Reference</i>.
+         Either <code>IdentityName</code> or <code>IdentityId</code> must be specified, but not both.</p>")
     @as("IdentityId")
     identityId: option<xmlStringMaxLen256>,
     @ocaml.doc("<p>The ID of the Amazon EMR Studio to which the user or group will be mapped.</p>")
     @as("StudioId")
     studioId: xmlStringMaxLen256,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticmapreduce") @new
   external new: request => t = "CreateStudioSessionMappingCommand"
   let make = (~sessionPolicyArn, ~identityType, ~studioId, ~identityName=?, ~identityId=?, ()) =>
@@ -2635,7 +2748,7 @@ module UpdateStudio = {
     @ocaml.doc("<p>The ID of the Amazon EMR Studio to update.</p>") @as("StudioId")
     studioId: xmlStringMaxLen256,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticmapreduce") @new
   external new: request => t = "UpdateStudioCommand"
   let make = (~studioId, ~defaultS3Location=?, ~subnetIds=?, ~description=?, ~name=?, ()) =>
@@ -2656,7 +2769,7 @@ module TerminateJobFlows = {
     @ocaml.doc("<p>A list of job flows to be shut down.</p>") @as("JobFlowIds")
     jobFlowIds: xmlStringList,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticmapreduce") @new
   external new: request => t = "TerminateJobFlowsCommand"
   let make = (~jobFlowIds, ()) => new({jobFlowIds: jobFlowIds})
@@ -2667,16 +2780,15 @@ module SetVisibleToAllUsers = {
   type t
   @ocaml.doc("<p>The input to the SetVisibleToAllUsers action.</p>")
   type request = {
-    @ocaml.doc("<p>A value of <code>true</code> indicates that all IAM users in the AWS account can perform
-         cluster actions if they have the proper IAM policy permissions. This is the default. A
-         value of <code>false</code> indicates that only the IAM user who created the cluster can
-         perform actions.</p>")
+    @ocaml.doc("<p>A value of <code>true</code> indicates that an IAM principal in the Amazon Web Services account can perform
+         EMR actions on the cluster that the IAM policies attached to the principal allow. A
+         value of <code>false</code> indicates that only the IAM principal that created the cluster and the Amazon Web Services root user can perform EMR actions on the cluster.</p>")
     @as("VisibleToAllUsers")
     visibleToAllUsers: boolean_,
     @ocaml.doc("<p>The unique identifier of the job flow (cluster).</p>") @as("JobFlowIds")
     jobFlowIds: xmlStringList,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticmapreduce") @new
   external new: request => t = "SetVisibleToAllUsersCommand"
   let make = (~visibleToAllUsers, ~jobFlowIds, ()) =>
@@ -2698,7 +2810,7 @@ module SetTerminationProtection = {
     @as("JobFlowIds")
     jobFlowIds: xmlStringList,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticmapreduce") @new
   external new: request => t = "SetTerminationProtectionCommand"
   let make = (~terminationProtected, ~jobFlowIds, ()) =>
@@ -2708,35 +2820,90 @@ module SetTerminationProtection = {
 
 module RemoveTags = {
   type t
-  @ocaml.doc("<p>This input identifies a cluster and a list of tags to remove.</p>")
+  @ocaml.doc("<p>This input identifies an Amazon EMR resource and a list of tags to remove.</p>")
   type request = {
-    @ocaml.doc("<p>A list of tag keys to remove from a resource.</p>") @as("TagKeys")
+    @ocaml.doc("<p>A list of tag keys to remove from the resource.</p>") @as("TagKeys")
     tagKeys: stringList,
-    @ocaml.doc("<p>The Amazon EMR resource identifier from which tags will be removed. This value must be a
-         cluster identifier.</p>")
+    @ocaml.doc("<p>The Amazon EMR resource identifier from which tags will be removed. For example, a
+         cluster identifier or an Amazon EMR Studio ID.</p>")
     @as("ResourceId")
     resourceId: resourceId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticmapreduce") @new external new: request => t = "RemoveTagsCommand"
   let make = (~tagKeys, ~resourceId, ()) => new({tagKeys: tagKeys, resourceId: resourceId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module PutAutoTerminationPolicy = {
+  type t
+  type request = {
+    @ocaml.doc("<p>Specifies the auto-termination policy to attach to the cluster.</p>")
+    @as("AutoTerminationPolicy")
+    autoTerminationPolicy: option<autoTerminationPolicy>,
+    @ocaml.doc(
+      "<p>Specifies the ID of the Amazon EMR cluster to which the auto-termination policy will be attached.</p>"
+    )
+    @as("ClusterId")
+    clusterId: clusterId,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-elasticmapreduce") @new
+  external new: request => t = "PutAutoTerminationPolicyCommand"
+  let make = (~clusterId, ~autoTerminationPolicy=?, ()) =>
+    new({autoTerminationPolicy: autoTerminationPolicy, clusterId: clusterId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module ModifyInstanceFleet = {
   type t
   type request = {
-    @ocaml.doc("<p>The unique identifier of the instance fleet.</p>") @as("InstanceFleet")
+    @ocaml.doc("<p>The configuration parameters of the instance fleet.</p>") @as("InstanceFleet")
     instanceFleet: instanceFleetModifyConfig,
     @ocaml.doc("<p>The unique identifier of the cluster.</p>") @as("ClusterId")
     clusterId: clusterId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticmapreduce") @new
   external new: request => t = "ModifyInstanceFleetCommand"
   let make = (~instanceFleet, ~clusterId, ()) =>
     new({instanceFleet: instanceFleet, clusterId: clusterId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module ListReleaseLabels = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>Defines the maximum number of release labels to return in a single response. The default is <code>100</code>.</p>"
+    )
+    @as("MaxResults")
+    maxResults: option<maxResultsNumber>,
+    @ocaml.doc(
+      "<p>Specifies the next page of results. If <code>NextToken</code> is not specified, which is usually the case for the first request of ListReleaseLabels, the first page of results are determined by other filtering parameters or by the latest version. The <code>ListReleaseLabels</code> request fails if the identity (Amazon Web Services account ID) and all filtering parameters are different from the original request, or if the <code>NextToken</code> is expired or tampered with.</p>"
+    )
+    @as("NextToken")
+    nextToken: option<string_>,
+    @ocaml.doc(
+      "<p>Filters the results of the request. <code>Prefix</code> specifies the prefix of release labels to return. <code>Application</code> specifies the application (with/without version) of release labels to return.</p>"
+    )
+    @as("Filters")
+    filters: option<releaseLabelFilter>,
+  }
+  type response = {
+    @ocaml.doc(
+      "<p>Used to paginate the next page of results if specified in the next <code>ListReleaseLabels</code> request.</p>"
+    )
+    @as("NextToken")
+    nextToken: option<string_>,
+    @ocaml.doc("<p>The returned release labels.</p>") @as("ReleaseLabels")
+    releaseLabels: option<stringList>,
+  }
+  @module("@aws-sdk/client-elasticmapreduce") @new
+  external new: request => t = "ListReleaseLabelsCommand"
+  let make = (~maxResults=?, ~nextToken=?, ~filters=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken, filters: filters})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetStudioSessionMapping = {
@@ -2745,12 +2912,12 @@ module GetStudioSessionMapping = {
     @ocaml.doc("<p>Specifies whether the identity to fetch is a user or a group.</p>")
     @as("IdentityType")
     identityType: identityType,
-    @ocaml.doc("<p>The name of the user or group to fetch. For more information, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName\">UserName</a> and <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName\">DisplayName</a> in the <i>AWS SSO Identity Store API Reference</i>.
+    @ocaml.doc("<p>The name of the user or group to fetch. For more information, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName\">UserName</a> and <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName\">DisplayName</a> in the <i>Amazon Web Services SSO Identity Store API Reference</i>.
          Either <code>IdentityName</code> or <code>IdentityId</code> must be specified.</p>")
     @as("IdentityName")
     identityName: option<xmlStringMaxLen256>,
     @ocaml.doc("<p>The globally unique identifier (GUID) of the user or group. For more information, see
-            <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId\">UserId</a> and <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-GroupId\">GroupId</a> in the <i>AWS SSO Identity Store API Reference</i>.
+            <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId\">UserId</a> and <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-GroupId\">GroupId</a> in the <i>Amazon Web Services SSO Identity Store API Reference</i>.
          Either <code>IdentityName</code> or <code>IdentityId</code> must be specified.</p>")
     @as("IdentityId")
     identityId: option<xmlStringMaxLen256>,
@@ -2772,6 +2939,28 @@ module GetStudioSessionMapping = {
       identityId: identityId,
       studioId: studioId,
     })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module GetAutoTerminationPolicy = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>Specifies the ID of the Amazon EMR cluster for which the auto-termination policy will be fetched.</p>"
+    )
+    @as("ClusterId")
+    clusterId: clusterId,
+  }
+  type response = {
+    @ocaml.doc(
+      "<p>Specifies the auto-termination policy that is attached to an Amazon EMR cluster. </p>"
+    )
+    @as("AutoTerminationPolicy")
+    autoTerminationPolicy: option<autoTerminationPolicy>,
+  }
+  @module("@aws-sdk/client-elasticmapreduce") @new
+  external new: request => t = "GetAutoTerminationPolicyCommand"
+  let make = (~clusterId, ()) => new({clusterId: clusterId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -2856,7 +3045,7 @@ module PutManagedScalingPolicy = {
     @as("ClusterId")
     clusterId: clusterId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticmapreduce") @new
   external new: request => t = "PutManagedScalingPolicyCommand"
   let make = (~managedScalingPolicy, ~clusterId, ()) =>
@@ -3045,6 +3234,36 @@ module GetManagedScalingPolicy = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module DescribeReleaseLabel = {
+  type t
+  type request = {
+    @ocaml.doc("<p>Reserved for future use. Currently set to null.</p>") @as("MaxResults")
+    maxResults: option<maxResultsNumber>,
+    @ocaml.doc("<p>The pagination token. Reserved for future use. Currently set to null.</p>")
+    @as("NextToken")
+    nextToken: option<string_>,
+    @ocaml.doc("<p>The target release label to be described.</p>") @as("ReleaseLabel")
+    releaseLabel: option<string_>,
+  }
+  type response = {
+    @ocaml.doc("<p>The pagination token. Reserved for future use. Currently set to null.</p>")
+    @as("NextToken")
+    nextToken: option<string_>,
+    @ocaml.doc(
+      "<p>The list of applications available for the target release label. <code>Name</code> is the name of the application. <code>Version</code> is the concise version of the application.</p>"
+    )
+    @as("Applications")
+    applications: option<simplifiedApplicationList>,
+    @ocaml.doc("<p>The target release label described in the response.</p>") @as("ReleaseLabel")
+    releaseLabel: option<string_>,
+  }
+  @module("@aws-sdk/client-elasticmapreduce") @new
+  external new: request => t = "DescribeReleaseLabelCommand"
+  let make = (~maxResults=?, ~nextToken=?, ~releaseLabel=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken, releaseLabel: releaseLabel})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module CreateStudio = {
   type t
   type request = {
@@ -3053,6 +3272,16 @@ module CreateStudio = {
          string with a maximum of 256 characters.</p>")
     @as("Tags")
     tags: option<tagList_>,
+    @ocaml.doc(
+      "<p>The name that your identity provider (IdP) uses for its <code>RelayState</code> parameter. For example, <code>RelayState</code> or <code>TargetSource</code>. Specify this value when you use IAM authentication and want to let federated users log in to a Studio using the Studio URL. The <code>RelayState</code> parameter differs by IdP.</p>"
+    )
+    @as("IdpRelayStateParameterName")
+    idpRelayStateParameterName: option<xmlStringMaxLen256>,
+    @ocaml.doc(
+      "<p>The authentication endpoint of your identity provider (IdP). Specify this value when you use IAM authentication and want to let federated users log in to a Studio with the Studio URL and credentials from your IdP. Amazon EMR Studio redirects users to this endpoint to enter credentials.</p>"
+    )
+    @as("IdpAuthUrl")
+    idpAuthUrl: option<xmlString>,
     @ocaml.doc(
       "<p>The Amazon S3 location to back up Amazon EMR Studio Workspaces and notebook files.</p>"
     )
@@ -3068,13 +3297,13 @@ module CreateStudio = {
          in the same VPC specified by <code>VpcId</code>.</p>")
     @as("WorkspaceSecurityGroupId")
     workspaceSecurityGroupId: xmlStringMaxLen256,
-    @ocaml.doc("<p>The IAM user role that will be assumed by users and groups logged in to an Amazon EMR Studio. The
-         permissions attached to this IAM role can be scoped down for each user or group using
+    @ocaml.doc("<p>The IAM user role that users and groups assume when logged in to an Amazon EMR Studio. Only specify a <code>UserRole</code> when you use Amazon Web Services SSO authentication. The
+         permissions attached to the <code>UserRole</code> can be scoped down for each user or group using
          session policies.</p>")
     @as("UserRole")
-    userRole: xmlString,
-    @ocaml.doc("<p>The IAM role that will be assumed by the Amazon EMR Studio. The service role provides a
-         way for Amazon EMR Studio to interoperate with other AWS services.</p>")
+    userRole: option<xmlString>,
+    @ocaml.doc("<p>The IAM role that the Amazon EMR Studio assumes. The service role provides a
+         way for Amazon EMR Studio to interoperate with other Amazon Web Services services.</p>")
     @as("ServiceRole")
     serviceRole: xmlString,
     @ocaml.doc("<p>A list of subnet IDs to associate with the Amazon EMR Studio. A Studio can have a maximum of 5 subnets. The subnets must belong to the VPC
@@ -3086,8 +3315,9 @@ module CreateStudio = {
          Studio.</p>")
     @as("VpcId")
     vpcId: xmlStringMaxLen256,
-    @ocaml.doc("<p>Specifies whether the Studio authenticates users using single sign-on (SSO) or IAM.
-         Amazon EMR Studio currently only supports SSO authentication.</p>")
+    @ocaml.doc(
+      "<p>Specifies whether the Studio authenticates users using IAM or Amazon Web Services SSO.</p>"
+    )
     @as("AuthMode")
     authMode: authMode,
     @ocaml.doc("<p>A detailed description of the Amazon EMR Studio.</p>") @as("Description")
@@ -3106,18 +3336,22 @@ module CreateStudio = {
     ~defaultS3Location,
     ~engineSecurityGroupId,
     ~workspaceSecurityGroupId,
-    ~userRole,
     ~serviceRole,
     ~subnetIds,
     ~vpcId,
     ~authMode,
     ~name,
     ~tags=?,
+    ~idpRelayStateParameterName=?,
+    ~idpAuthUrl=?,
+    ~userRole=?,
     ~description=?,
     (),
   ) =>
     new({
       tags: tags,
+      idpRelayStateParameterName: idpRelayStateParameterName,
+      idpAuthUrl: idpAuthUrl,
       defaultS3Location: defaultS3Location,
       engineSecurityGroupId: engineSecurityGroupId,
       workspaceSecurityGroupId: workspaceSecurityGroupId,
@@ -3165,19 +3399,19 @@ module CancelSteps = {
 
 module AddTags = {
   type t
-  @ocaml.doc("<p>This input identifies a cluster and a list of tags to attach.</p>")
+  @ocaml.doc("<p>This input identifies an Amazon EMR resource and a list of tags to attach.</p>")
   type request = {
-    @ocaml.doc("<p>A list of tags to associate with a cluster and propagate to EC2 instances. Tags are
+    @ocaml.doc("<p>A list of tags to associate with a resource. Tags are
          user-defined key-value pairs that consist of a required key string with a maximum of 128
          characters, and an optional value string with a maximum of 256 characters.</p>")
     @as("Tags")
     tags: tagList_,
-    @ocaml.doc("<p>The Amazon EMR resource identifier to which tags will be added. This value must be a
-         cluster identifier.</p>")
+    @ocaml.doc("<p>The Amazon EMR resource identifier to which tags will be added. For example, a
+         cluster identifier or an Amazon EMR Studio ID.</p>")
     @as("ResourceId")
     resourceId: resourceId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticmapreduce") @new external new: request => t = "AddTagsCommand"
   let make = (~tags, ~resourceId, ()) => new({tags: tags, resourceId: resourceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -3260,7 +3494,9 @@ module ListSteps = {
   type t
   @ocaml.doc("<p>This input determines which steps to list.</p>")
   type request = {
-    @ocaml.doc("<p>The pagination token that indicates the next set of results to retrieve.</p>")
+    @ocaml.doc(
+      "<p>The maximum number of steps that a single <code>ListSteps</code> action returns is 50. To return a longer list of steps, use multiple <code>ListSteps</code> actions along with the <code>Marker</code> parameter, which is a pagination token that indicates the next set of results to retrieve.</p>"
+    )
     @as("Marker")
     marker: option<marker>,
     @ocaml.doc("<p>The filter to limit the step list based on the identifier of the steps. You can specify
@@ -3277,7 +3513,9 @@ module ListSteps = {
   @ocaml.doc("<p>This output contains the list of steps returned in reverse order. This means that the
          last step is the first element in the list.</p>")
   type response = {
-    @ocaml.doc("<p>The pagination token that indicates the next set of results to retrieve.</p>")
+    @ocaml.doc(
+      "<p>The maximum number of steps that a single <code>ListSteps</code> action returns is 50. To return a longer list of steps, use multiple <code>ListSteps</code> actions along with the <code>Marker</code> parameter, which is a pagination token that indicates the next set of results to retrieve.</p>"
+    )
     @as("Marker")
     marker: option<marker>,
     @ocaml.doc("<p>The filtered list of steps for the cluster.</p>") @as("Steps")
@@ -3355,7 +3593,9 @@ module ListClusters = {
     @ocaml.doc("<p>The pagination token that indicates the next set of results to retrieve.</p>")
     @as("Marker")
     marker: option<marker>,
-    @ocaml.doc("<p>The cluster state filters to apply when listing clusters.</p>")
+    @ocaml.doc(
+      "<p>The cluster state filters to apply when listing clusters. Clusters that change state while this action runs may be not be returned as expected in the list of clusters.</p>"
+    )
     @as("ClusterStates")
     clusterStates: option<clusterStateList>,
     @ocaml.doc("<p>The creation date and time end value filter for listing clusters.</p>")
@@ -3504,7 +3744,7 @@ module PutBlockPublicAccessConfiguration = {
     @as("BlockPublicAccessConfiguration")
     blockPublicAccessConfiguration: blockPublicAccessConfiguration,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticmapreduce") @new
   external new: request => t = "PutBlockPublicAccessConfigurationCommand"
   let make = (~blockPublicAccessConfiguration, ()) =>
@@ -3514,9 +3754,9 @@ module PutBlockPublicAccessConfiguration = {
 
 module GetBlockPublicAccessConfiguration = {
   type t
-
+  type request = {.}
   type response = {
-    @ocaml.doc("<p>Properties that describe the AWS principal that created the
+    @ocaml.doc("<p>Properties that describe the Amazon Web Services principal that created the
             <code>BlockPublicAccessConfiguration</code> using the
             <code>PutBlockPublicAccessConfiguration</code> action as well as the date and time that
          the configuration was created. Each time a configuration for block public access is
@@ -3542,8 +3782,8 @@ module GetBlockPublicAccessConfiguration = {
     blockPublicAccessConfiguration: blockPublicAccessConfiguration,
   }
   @module("@aws-sdk/client-elasticmapreduce") @new
-  external new: unit => t = "GetBlockPublicAccessConfigurationCommand"
-  let make = () => new()
+  external new: request => t = "GetBlockPublicAccessConfigurationCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -3574,7 +3814,7 @@ module ModifyInstanceGroups = {
     @ocaml.doc("<p>The ID of the cluster to which the instance group belongs.</p>") @as("ClusterId")
     clusterId: option<clusterId>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticmapreduce") @new
   external new: request => t = "ModifyInstanceGroupsCommand"
   let make = (~instanceGroups=?, ~clusterId=?, ()) =>
@@ -3684,6 +3924,7 @@ module RunJobFlow = {
   type t
   @ocaml.doc("<p> Input to the <a>RunJobFlow</a> operation. </p>")
   type request = {
+    @as("AutoTerminationPolicy") autoTerminationPolicy: option<autoTerminationPolicy>,
     @ocaml.doc("<p>The specified placement group configuration for an Amazon EMR cluster.</p>")
     @as("PlacementGroupConfigs")
     placementGroupConfigs: option<placementGroupConfigList>,
@@ -3750,7 +3991,7 @@ module RunJobFlow = {
     )
     @as("Tags")
     tags: option<tagList_>,
-    @ocaml.doc("<p>The IAM role that will be assumed by the Amazon EMR service to access AWS resources on
+    @ocaml.doc("<p>The IAM role that Amazon EMR assumes in order to access Amazon Web Services resources on
          your behalf.</p>")
     @as("ServiceRole")
     serviceRole: option<xmlString>,
@@ -3760,10 +4001,11 @@ module RunJobFlow = {
          already created it using the CLI or console.</p>")
     @as("JobFlowRole")
     jobFlowRole: option<xmlString>,
-    @ocaml.doc("<p>A value of <code>true</code> indicates that all IAM users in the AWS account can perform
-         cluster actions if they have the proper IAM policy permissions. This is the default. A
-         value of <code>false</code> indicates that only the IAM user who created the cluster can
-         perform actions.</p>")
+    @ocaml.doc("<important>
+            <p>The VisibleToAllUsers parameter is no longer supported. By default, the value is set to <code>true</code>. Setting it to <code>false</code> now has no effect.</p>
+         </important>
+         <p>Set this value to <code>true</code> so that IAM principals in the Amazon Web Services account associated with the cluster can perform EMR actions on the cluster that their IAM policies allow. This value defaults to <code>true</code> for clusters created using the EMR API or the CLI <a href=\"https://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html\">create-cluster</a> command.</p> 
+         <p>When set to <code>false</code>, only the IAM principal that created the cluster and the Amazon Web Services account root user can perform EMR actions for the cluster, regardless of the IAM permissions policies attached to other IAM principals. For more information, see <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/security_iam_emr-with-iam.html#security_set_visible_to_all_users\">Understanding the EMR Cluster VisibleToAllUsers Setting</a> in the <i>Amazon EMRManagement Guide</i>.</p>")
     @as("VisibleToAllUsers")
     visibleToAllUsers: option<boolean_>,
     @ocaml.doc("<p>For Amazon EMR releases 4.0 and later. The list of configurations supplied for the EMR
@@ -3772,7 +4014,7 @@ module RunJobFlow = {
     configurations: option<configurationList>,
     @ocaml.doc("<p>Applies to Amazon EMR releases 4.0 and later. A case-insensitive list of applications
          for Amazon EMR to install and configure when launching the cluster. For a list of
-         applications available for each Amazon EMR release version, see the <a href=\"https://docs.aws.amazon.com/emr/latest/ReleaseGuide/\">Amazon EMR Release
+         applications available for each Amazon EMR release version, see the <a href=\"https://docs.aws.amazon.com/emr/latest/ReleaseGuide/\">Amazon EMRRelease
          Guide</a>.</p>")
     @as("Applications")
     applications: option<applicationList>,
@@ -3857,7 +4099,7 @@ module RunJobFlow = {
     amiVersion: option<xmlStringMaxLen256>,
     @ocaml.doc("<p>A JSON string for selecting additional features.</p>") @as("AdditionalInfo")
     additionalInfo: option<xmlString>,
-    @ocaml.doc("<p>The AWS KMS customer master key (CMK) used for encrypting log files. If a value is not
+    @ocaml.doc("<p>The KMS key used for encrypting log files. If a value is not
          provided, the logs remain encrypted by AES-256. This attribute is only available with
          Amazon EMR version 5.30.0 and later, excluding Amazon EMR 6.0.0.</p>")
     @as("LogEncryptionKmsKeyId")
@@ -3879,6 +4121,7 @@ module RunJobFlow = {
   let make = (
     ~instances,
     ~name,
+    ~autoTerminationPolicy=?,
     ~placementGroupConfigs=?,
     ~managedScalingPolicy=?,
     ~stepConcurrencyLevel=?,
@@ -3907,6 +4150,7 @@ module RunJobFlow = {
     (),
   ) =>
     new({
+      autoTerminationPolicy: autoTerminationPolicy,
       placementGroupConfigs: placementGroupConfigs,
       managedScalingPolicy: managedScalingPolicy,
       stepConcurrencyLevel: stepConcurrencyLevel,

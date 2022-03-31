@@ -26,6 +26,13 @@ type violationEventType = [
 ]
 type versionNumber = float
 type version = float
+type verificationStateDescription = string
+type verificationState = [
+  | @as("UNKNOWN") #UNKNOWN
+  | @as("TRUE_POSITIVE") #TRUE_POSITIVE
+  | @as("BENIGN_POSITIVE") #BENIGN_POSITIVE
+  | @as("FALSE_POSITIVE") #FALSE_POSITIVE
+]
 type variance = float
 type value = string
 type valid = bool
@@ -155,6 +162,8 @@ type rolloutRatePerMinute = int
 type roleArn = string
 type roleAliasArn = string
 type roleAlias = string
+type retryableFailureType = [@as("ALL") #ALL | @as("TIMED_OUT") #TIMED_OUT | @as("FAILED") #FAILED]
+type retryAttempt = int
 type resourceType = [
   | @as("IAM_ROLE") #IAM_ROLE
   | @as("ROLE_ALIAS") #ROLE_ALIAS
@@ -180,6 +189,7 @@ type registryS3KeyName = string
 type registryS3BucketName = string
 type registryMaxResults = int
 type registrationCode = string
+type regex = string
 type recursiveWithoutDefault = bool
 type recursive = bool
 type reasonForNonComplianceCode = string
@@ -216,10 +226,13 @@ type percent = float
 type payloadVersion = string
 type payloadField = string
 type partitionKey = string
+type parameterValue = string
+type parameterKey = string
 type parameter = string
 type pageSize = int
 type overrideDynamicGroups = bool
 type optionalVersion = float
+type optional = bool
 type otaupdateStatus = [
   | @as("CREATE_FAILED") #CREATE_FAILED
   | @as("CREATE_COMPLETE") #CREATE_COMPLETE
@@ -232,12 +245,14 @@ type otaupdateErrorMessage = string
 type otaupdateDescription = string
 type otaupdateArn = string
 type numberOfThings = int
+type numberOfRetries = int
 type number = float
 type nullableBoolean = bool
 type nonCompliantResourcesCount = float
 type nonCompliantChecksCount = int
 type nextToken = string
 type namespaceId = string
+type namedShadowIndexingMode = [@as("ON") #ON | @as("OFF") #OFF]
 type mqttUsername = string
 type mqttPassword = NodeJs.Buffer.t
 type mqttClientId = string
@@ -269,8 +284,17 @@ type maximumPerMinute = int
 type maximum = float
 type maxResults = int
 type maxJobExecutionsPerMin = int
+type maxBuckets = int
 type marker = string
-type logTargetType = [@as("THING_GROUP") #THING_GROUP | @as("DEFAULT") #DEFAULT]
+type managedTemplateVersion = string
+type managedJobTemplateName = string
+type logTargetType = [
+  | @as("PRINCIPAL_ID") #PRINCIPAL_ID
+  | @as("SOURCE_IP") #SOURCE_IP
+  | @as("CLIENT_ID") #CLIENT_ID
+  | @as("THING_GROUP") #THING_GROUP
+  | @as("DEFAULT") #DEFAULT
+]
 type logTargetName = string
 type logLevel = [
   | @as("DISABLED") #DISABLED
@@ -350,6 +374,39 @@ type forced = bool
 type forceFlag = bool
 type forceDeleteAWSJob = bool
 type forceDelete = bool
+type fleetMetricUnit = [
+  | @as("None") #None
+  | @as("Count/Second") #Count_Second
+  | @as("Terabits/Second") #Terabits_Second
+  | @as("Gigabits/Second") #Gigabits_Second
+  | @as("Megabits/Second") #Megabits_Second
+  | @as("Kilobits/Second") #Kilobits_Second
+  | @as("Bits/Second") #Bits_Second
+  | @as("Terabytes/Second") #Terabytes_Second
+  | @as("Gigabytes/Second") #Gigabytes_Second
+  | @as("Megabytes/Second") #Megabytes_Second
+  | @as("Kilobytes/Second") #Kilobytes_Second
+  | @as("Bytes/Second") #Bytes_Second
+  | @as("Count") #Count
+  | @as("Percent") #Percent
+  | @as("Terabits") #Terabits
+  | @as("Gigabits") #Gigabits
+  | @as("Megabits") #Megabits
+  | @as("Kilobits") #Kilobits
+  | @as("Bits") #Bits
+  | @as("Terabytes") #Terabytes
+  | @as("Gigabytes") #Gigabytes
+  | @as("Megabytes") #Megabytes
+  | @as("Kilobytes") #Kilobytes
+  | @as("Bytes") #Bytes
+  | @as("Milliseconds") #Milliseconds
+  | @as("Microseconds") #Microseconds
+  | @as("Seconds") #Seconds
+]
+type fleetMetricPeriod = int
+type fleetMetricName = string
+type fleetMetricDescription = string
+type fleetMetricArn = string
 type flag = bool
 type firehoseSeparator = string
 type findingId = string
@@ -366,6 +423,7 @@ type expiresInSec = float
 type expectedVersion = float
 type executionNumber = float
 type executionNamePrefix = string
+type example = string
 type eventType = [
   | @as("CA_CERTIFICATE") #CA_CERTIFICATE
   | @as("CERTIFICATE") #CERTIFICATE
@@ -383,9 +441,11 @@ type evaluationStatistic = string
 type errorMessage2 = string
 type errorMessage = string
 type errorCode = string
+type environment = string
 type endpointType = string
 type endpointAddress = string
 type enabled = bool
+type enableCachingForHttp = bool
 type elasticsearchType = string
 type elasticsearchIndex = string
 type elasticsearchId = string
@@ -407,6 +467,7 @@ type domainName = string
 type domainConfigurationStatus = [@as("DISABLED") #DISABLED | @as("ENABLED") #ENABLED]
 type domainConfigurationName = string
 type domainConfigurationArn = string
+type disconnectReason = string
 type disableAllLogs = bool
 type dimensionValueOperator = [@as("NOT_IN") #NOT_IN | @as("IN") #IN]
 type dimensionType = [@as("TOPIC_FILTER") #TOPIC_FILTER]
@@ -414,6 +475,7 @@ type dimensionStringValue = string
 type dimensionName = string
 type dimensionArn = string
 type deviceDefenderThingName = string
+type deviceDefenderIndexingMode = [@as("VIOLATIONS") #VIOLATIONS | @as("OFF") #OFF]
 type deviceCertificateUpdateAction = [@as("DEACTIVATE") #DEACTIVATE]
 type detectMitigationActionsTaskStatus = [
   | @as("CANCELED") #CANCELED
@@ -520,6 +582,7 @@ type canceledChecksCount = int
 type cacertificateUpdateAction = [@as("DEACTIVATE") #DEACTIVATE]
 type cacertificateStatus = [@as("INACTIVE") #INACTIVE | @as("ACTIVE") #ACTIVE]
 type bucketName = string
+type bucketKeyValue = string
 type booleanKey = bool
 type boolean_ = bool
 type billingGroupName = string
@@ -637,6 +700,12 @@ type allowAuthorizerOverride = bool
 type alertTargetType = [@as("SNS") #SNS]
 type alertTargetArn = string
 type alarmName = string
+type aggregationTypeValue = string
+type aggregationTypeName = [
+  | @as("Cardinality") #Cardinality
+  | @as("Percentiles") #Percentiles
+  | @as("Statistics") #Statistics
+]
 type aggregationField = string
 type actionType = [
   | @as("CONNECT") #CONNECT
@@ -692,7 +761,7 @@ type updateCACertificateParams = {
   )
   action: cacertificateUpdateAction,
 }
-@ocaml.doc("<p>Data used to transfer a certificate to an AWS account.</p>")
+@ocaml.doc("<p>Data used to transfer a certificate to an Amazon Web Services account.</p>")
 type transferData = {
   @ocaml.doc("<p>The date the transfer was rejected.</p>") rejectDate: option<dateType>,
   @ocaml.doc("<p>The date the transfer was accepted.</p>") acceptDate: option<dateType>,
@@ -771,13 +840,24 @@ type thingGroupNameList = array<thingGroupName>
 type thingGroupList = array<thingGroupName>
 @ocaml.doc("<p>The connectivity status of the thing.</p>")
 type thingConnectivity = {
+  @ocaml.doc(
+    "<p>The reason why the client is disconnected. If the thing has been disconnected for approximately an hour, the <code>disconnectReason</code> value might be missing.</p>"
+  )
+  disconnectReason: option<disconnectReason>,
   @ocaml.doc("<p>The epoch time (in milliseconds) when the thing last connected or disconnected. If the
-      thing has been disconnected for more than a few weeks, the time value might be missing.</p>")
+      thing has been disconnected for approximately an hour, the time value might be missing.</p>")
   @as("timestamp")
   timestamp_: option<connectivityTimestamp>,
-  @ocaml.doc("<p>True if the thing is connected to the AWS IoT service; false if it is not
+  @ocaml.doc("<p>True if the thing is connected to the Amazon Web Services IoT Core service; false if it is not
       connected.</p>")
   connected: option<boolean_>,
+}
+@ocaml.doc(
+  "<p>Performs an aggregation that will return a list of buckets. The list of buckets is a ranked list of the number of occurrences of an aggregation field value.</p>"
+)
+type termsAggregation = {
+  @ocaml.doc("<p>The number of buckets to return in the response. Default to 10.</p>")
+  maxBuckets: option<maxBuckets>,
 }
 @ocaml.doc(
   "<p>Provides summary counts of how many tasks for findings are in a particular state. This information is included in the response from DescribeAuditMitigationActionsTask.</p>"
@@ -854,8 +934,9 @@ type stepFunctionsAction = {
       machine execution if one is not provided.</p>")
   executionNamePrefix: option<executionNamePrefix>,
 }
-@ocaml.doc("<p>A map of key-value pairs for all supported statistics. Currently, only count is
-      supported.</p>")
+@ocaml.doc("<p>A map of key-value pairs for all supported statistics. For issues with missing or unexpected values for this API, 
+      consult <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/fleet-indexing-troubleshooting.html\">
+        Fleet indexing troubleshooting guide</a>.</p>")
 type statistics = {
   @ocaml.doc("<p>The standard deviation of the aggregated field values.</p>")
   stdDeviation: option<stdDeviation>,
@@ -866,7 +947,10 @@ type statistics = {
   @ocaml.doc("<p>The minimum aggregated field value.</p>") minimum: option<minimum>,
   @ocaml.doc("<p>The sum of the aggregated field values.</p>") sum: option<sum>,
   @ocaml.doc("<p>The average of the aggregated field values.</p>") average: option<average>,
-  @ocaml.doc("<p>The count of things that match the query.</p>") count: option<count>,
+  @ocaml.doc(
+    "<p>The count of things that match the query string criteria and contain a valid aggregation field value.</p>"
+  )
+  count: option<count>,
 }
 @ocaml.doc("<p>A statistical ranking (percentile) that
       indicates a threshold value by which a behavior is determined to be in compliance or in
@@ -999,6 +1083,14 @@ type roleAliasDescription = {
   @ocaml.doc("<p>The ARN of the role alias.</p>") roleAliasArn: option<roleAliasArn>,
   @ocaml.doc("<p>The role alias.</p>") roleAlias: option<roleAlias>,
 }
+@ocaml.doc("<p>The criteria that determines how many retries are allowed for each failure
+            type for a job.</p>")
+type retryCriteria = {
+  @ocaml.doc("<p>The number of retries allowed for a failure type for the job.</p>")
+  numberOfRetries: numberOfRetries,
+  @ocaml.doc("<p>The type of job execution failures that can initiate a job retry.</p>")
+  failureType: retryableFailureType,
+}
 type resources = array<resource>
 type resourceArns = Js.Dict.t<resourceArn>
 @ocaml.doc("<p>Describes an action to republish to another topic.</p>")
@@ -1115,7 +1207,7 @@ type policyVersion = {
 type policyTargets = array<policyTarget>
 type policyNames = array<policyName>
 type policyDocuments = array<policyDocument>
-@ocaml.doc("<p>Describes an AWS IoT policy.</p>")
+@ocaml.doc("<p>Describes an IoT policy.</p>")
 type policy = {
   @ocaml.doc("<p>The policy ARN.</p>") policyArn: option<policyArn>,
   @ocaml.doc("<p>The policy name.</p>") policyName: option<policyName>,
@@ -1127,15 +1219,26 @@ type percentPair = {
 }
 type percentList = array<percent>
 type parameters = Js.Dict.t<value>
+type parameterMap = Js.Dict.t<parameterValue>
 @ocaml.doc("<p>A certificate that has been transferred but not yet accepted.</p>")
 type outgoingCertificate = {
   @ocaml.doc("<p>The certificate creation date.</p>") creationDate: option<dateType>,
   @ocaml.doc("<p>The transfer message.</p>") transferMessage: option<message>,
   @ocaml.doc("<p>The date the transfer was initiated.</p>") transferDate: option<dateType>,
-  @ocaml.doc("<p>The AWS account to which the transfer was made.</p>")
+  @ocaml.doc("<p>The Amazon Web Services account to which the transfer was made.</p>")
   transferredTo: option<awsAccountId>,
   @ocaml.doc("<p>The certificate ID.</p>") certificateId: option<certificateId>,
   @ocaml.doc("<p>The certificate ARN.</p>") certificateArn: option<certificateArn>,
+}
+@ocaml.doc("<p>Describes an action that writes data to an Amazon OpenSearch Service
+         domain.</p>")
+type openSearchAction = {
+  @ocaml.doc("<p>The unique identifier for the document you are storing.</p>") id: elasticsearchId,
+  @ocaml.doc("<p>The type of document you are storing.</p>") @as("type") type_: elasticsearchType,
+  @ocaml.doc("<p>The OpenSearch index where you want to store your data.</p>")
+  index: elasticsearchIndex,
+  @ocaml.doc("<p>The endpoint of your OpenSearch domain.</p>") endpoint: elasticsearchEndpoint,
+  @ocaml.doc("<p>The IAM role ARN that has access to OpenSearch.</p>") roleArn: awsArn,
 }
 @ocaml.doc("<p>An OTA update summary.</p>")
 type otaupdateSummary = {
@@ -1239,6 +1342,9 @@ type jobSummary = {
 }
 @ocaml.doc("<p>The job execution summary.</p>")
 type jobExecutionSummary = {
+  @ocaml.doc("<p>The number that indicates how many retry attempts have been completed for this 
+        job on this device.</p>")
+  retryAttempt: option<retryAttempt>,
   @ocaml.doc("<p>A string (consisting of the digits \"0\" through \"9\") which identifies this particular job execution on
             this particular device. It can be used later in commands which return or update job execution
             information.</p>")
@@ -1253,9 +1359,9 @@ type jobExecutionSummary = {
   queuedAt: option<dateType>,
   @ocaml.doc("<p>The status of the job execution.</p>") status: option<jobExecutionStatus>,
 }
-@ocaml.doc("<p>Sends an input to an AWS IoT Events detector.</p>")
+@ocaml.doc("<p>Sends an input to an IoT Events detector.</p>")
 type iotEventsAction = {
-  @ocaml.doc("<p>The ARN of the role that grants AWS IoT permission to send an input to an AWS IoT
+  @ocaml.doc("<p>The ARN of the role that grants IoT permission to send an input to an IoT
       Events detector. (\"Action\":\"iotevents:BatchPutMessage\").</p>")
   roleArn: awsArn,
   @ocaml.doc("<p>Whether to process the event actions as a batch. The default value is
@@ -1263,7 +1369,7 @@ type iotEventsAction = {
          <p>When <code>batchMode</code> is <code>true</code>, you can't specify a
             <code>messageId</code>. </p>
          <p>When <code>batchMode</code> is <code>true</code> and the rule SQL statement evaluates
-         to an Array, each Array element is treated as a separate message when it's sent to AWS IoT
+         to an Array, each Array element is treated as a separate message when it's sent to IoT
          Events by calling <a href=\"https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_BatchPutMessage.html\">
                <code>BatchPutMessage</code>
             </a>.  The resulting array can't have more
@@ -1273,11 +1379,11 @@ type iotEventsAction = {
          <p>When <code>batchMode</code> is <code>true</code>, you can't specify a
         <code>messageId</code>--a new UUID value will be assigned.</p>
          <p>Assign a value to this property to ensure that only one input (message) with a given
-            <code>messageId</code> will be processed by an AWS IoT Events detector.</p>")
+            <code>messageId</code> will be processed by an IoT Events detector.</p>")
   messageId: option<messageId>,
-  @ocaml.doc("<p>The name of the AWS IoT Events input.</p>") inputName: inputName,
+  @ocaml.doc("<p>The name of the IoT Events input.</p>") inputName: inputName,
 }
-@ocaml.doc("<p>Sends message data to an AWS IoT Analytics channel.</p>")
+@ocaml.doc("<p>Sends message data to an IoT Analytics channel.</p>")
 type iotAnalyticsAction = {
   @ocaml.doc("<p>The ARN of the role which has a policy that grants IoT Analytics permission to send
          message data via IoT Analytics (iotanalytics:BatchPutMessage).</p>")
@@ -1287,7 +1393,7 @@ type iotAnalyticsAction = {
          <p>When <code>batchMode</code> is <code>true</code> and the rule SQL statement evaluates
          to an Array, each Array element is delivered as a separate message when passed by <a href=\"https://docs.aws.amazon.com/iotanalytics/latest/APIReference/API_BatchPutMessage.html\">
                <code>BatchPutMessage</code>
-            </a> to the AWS IoT Analytics channel. The resulting array can't have more
+            </a> to the IoT Analytics channel. The resulting array can't have more
          than 100 messages.</p>")
   batchMode: option<batchMode>,
   @ocaml.doc("<p>The name of the IoT Analytics channel to which message data will be sent.</p>")
@@ -1310,7 +1416,7 @@ type httpUrlDestinationProperties = {
 }
 @ocaml.doc("<p>HTTP URL destination configuration used by the topic rule's HTTP action.</p>")
 type httpUrlDestinationConfiguration = {
-  @ocaml.doc("<p>The URL AWS IoT uses to confirm ownership of or access to the topic rule destination
+  @ocaml.doc("<p>The URL IoT uses to confirm ownership of or access to the topic rule destination
          URL.</p>")
   confirmationUrl: url,
 }
@@ -1325,6 +1431,11 @@ type httpActionHeader = {
 type groupNameAndArn = {
   @ocaml.doc("<p>The group ARN.</p>") groupArn: option<thingGroupArn>,
   @ocaml.doc("<p>The group name.</p>") groupName: option<thingGroupName>,
+}
+@ocaml.doc("<p>The name and ARN of a fleet metric.</p>")
+type fleetMetricNameAndArn = {
+  @ocaml.doc("<p>The fleet metric ARN.</p>") metricArn: option<fleetMetricArn>,
+  @ocaml.doc("<p>The fleet metric name.</p>") metricName: option<fleetMetricName>,
 }
 @ocaml.doc("<p>Describes an action that writes data to an Amazon Kinesis Firehose stream.</p>")
 type firehoseAction = {
@@ -1349,7 +1460,7 @@ type firehoseAction = {
 type findingIds = array<findingId>
 @ocaml.doc("<p>Describes the name and data type at a field.</p>")
 type field = {
-  @ocaml.doc("<p>The datatype of the field.</p>") @as("type") type_: option<fieldType>,
+  @ocaml.doc("<p>The data type of the field.</p>") @as("type") type_: option<fieldType>,
   @ocaml.doc("<p>The name of the field.</p>") name: option<fieldName>,
 }
 @ocaml.doc("<p>Error information.</p>")
@@ -1357,21 +1468,28 @@ type errorInfo = {
   @ocaml.doc("<p>The error message.</p>") message: option<otaupdateErrorMessage>,
   @ocaml.doc("<p>The error code.</p>") code: option<code>,
 }
-@ocaml.doc("<p>Parameters used when defining a mitigation action that enable AWS IoT logging.</p>")
+type environments = array<environment>
+@ocaml.doc(
+  "<p>Parameters used when defining a mitigation action that enable Amazon Web Services IoT Core logging.</p>"
+)
 type enableIoTLoggingParams = {
   @ocaml.doc("<p>Specifies the type of information to be logged.</p>") logLevel: logLevel,
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the IAM role used for logging.</p>")
   roleArnForLogging: roleArn,
 }
-@ocaml.doc("<p>Describes an action that writes data to an Amazon Elasticsearch Service
-         domain.</p>")
+@ocaml.doc("<p>Describes an action that writes data to an Amazon OpenSearch Service
+         domain.</p>  
+         <note>
+            <p>The <code>Elasticsearch</code> action can only be used by existing rule actions. To create a
+         new rule action or to update an existing rule action, use the
+         <code>OpenSearch</code> rule action instead. For more information, see <a href=\"https://docs.aws.amazon.com/iot/latest/apireference/API_OpenSearchAction.html\">OpenSearchAction</a>.</p>
+         </note>")
 type elasticsearchAction = {
   @ocaml.doc("<p>The unique identifier for the document you are storing.</p>") id: elasticsearchId,
   @ocaml.doc("<p>The type of document you are storing.</p>") @as("type") type_: elasticsearchType,
-  @ocaml.doc("<p>The Elasticsearch index where you want to store your data.</p>")
-  index: elasticsearchIndex,
-  @ocaml.doc("<p>The endpoint of your Elasticsearch domain.</p>") endpoint: elasticsearchEndpoint,
-  @ocaml.doc("<p>The IAM role ARN that has access to Elasticsearch.</p>") roleArn: awsArn,
+  @ocaml.doc("<p>The index where you want to store your data.</p>") index: elasticsearchIndex,
+  @ocaml.doc("<p>The endpoint of your OpenSearch domain.</p>") endpoint: elasticsearchEndpoint,
+  @ocaml.doc("<p>The IAM role ARN that has access to OpenSearch.</p>") roleArn: awsArn,
 }
 @ocaml.doc("<p>The policy that has the effect on the authorization results.</p>")
 type effectivePolicy = {
@@ -1415,7 +1533,7 @@ type dynamoDBAction = {
   @ocaml.doc("<p>The name of the DynamoDB table.</p>") tableName: tableName,
 }
 @ocaml.doc("<p>The summary of a domain configuration. A domain configuration specifies custom IoT-specific information about a domain. 
-         A domain configuration can be associated with an AWS-managed domain 
+         A domain configuration can be associated with an Amazon Web Services-managed domain 
          (for example, dbc123defghijk.iot.us-west-2.amazonaws.com), a customer managed domain, or a default endpoint.</p>
          <ul>
             <li>
@@ -1435,6 +1553,26 @@ type domainConfigurationSummary = {
   domainConfigurationArn: option<domainConfigurationArn>,
   @ocaml.doc("<p>The name of the domain configuration. This value must be unique to a region.</p>")
   domainConfigurationName: option<reservedDomainConfigurationName>,
+}
+@ocaml.doc("<p>A map of key-value pairs containing the patterns that need to be replaced in a managed
+            template job document schema. You can use the description of each key as a guidance to specify 
+            the inputs during runtime when creating a job.</p>")
+type documentParameter = {
+  @ocaml.doc("<p>Specifies whether a pattern that needs to be replaced in a managed template job document 
+            schema is optional or required.</p>")
+  optional: option<optional>,
+  @ocaml.doc("<p>An example illustrating a pattern that need to be replaced in a managed template 
+            job document schema.</p>")
+  example: option<example>,
+  @ocaml.doc("<p>A regular expression of the patterns that need to be replaced in a managed template 
+            job document schema.</p>")
+  regex: option<regex>,
+  @ocaml.doc("<p>Description of the map field containing the patterns that need to be replaced in a 
+            managed template job document schema.</p>")
+  description: option<jobDescription>,
+  @ocaml.doc("<p>Key of the map field containing the patterns that need to be replaced in a managed
+            template job document schema.</p>")
+  key: option<parameterKey>,
 }
 type dimensionStringValues = array<dimensionStringValue>
 type dimensionNames = array<dimensionName>
@@ -1571,6 +1709,15 @@ type cacertificate = {
   @ocaml.doc("<p>The ID of the CA certificate.</p>") certificateId: option<certificateId>,
   @ocaml.doc("<p>The ARN of the CA certificate.</p>") certificateArn: option<certificateArn>,
 }
+@ocaml.doc("<p>A count of documents that meets a specific aggregation criteria.</p>")
+type bucket = {
+  @ocaml.doc(
+    "<p>The number of documents that have the value counted for the particular bucket.</p>"
+  )
+  count: option<count>,
+  @ocaml.doc("<p>The value counted for the particular bucket.</p>")
+  keyValue: option<bucketKeyValue>,
+}
 @ocaml.doc("<p>The properties of a billing group.</p>")
 type billingGroupProperties = {
   @ocaml.doc("<p>The description of the billing group.</p>")
@@ -1643,7 +1790,7 @@ type awsJobAbortCriteria = {
           can be aborted.</p>")
   minNumberOfExecutedThings: awsJobAbortCriteriaMinimumNumberOfExecutedThings,
   @ocaml.doc("<p>The minimum percentage of job execution failures that must occur to initiate the job abort.</p>
-         <p>AWS IoT supports up to two digits after the decimal (for example, 10.9 and 10.99, but not 10.999).</p>")
+         <p>Amazon Web Services IoT Core supports up to two digits after the decimal (for example, 10.9 and 10.99, but not 10.999).</p>")
   thresholdPercentage: awsJobAbortCriteriaAbortThresholdPercentage,
   @ocaml.doc("<p>The type of job action to take to initiate the job abort.</p>")
   action: awsJobAbortCriteriaAbortAction,
@@ -1830,6 +1977,7 @@ type alertTarget = {
   )
   alertTargetArn: alertTargetArn,
 }
+type aggregationTypeValues = array<aggregationTypeValue>
 type additionalParameterMap = Js.Dict.t<value>
 type additionalMetricsToRetainList = array<behaviorMetric>
 @ocaml.doc("<p>The criteria that determine when and how a job abort takes place.</p>")
@@ -1838,7 +1986,7 @@ type abortCriteria = {
             can be aborted.</p>")
   minNumberOfExecutedThings: minimumNumberOfExecutedThings,
   @ocaml.doc("<p>The minimum percentage of job execution failures that must occur to initiate the job abort.</p>
-        <p>AWS IoT supports up to two digits after the decimal (for example, 10.9 and 10.99, but not 10.999).</p>")
+        <p>Amazon Web Services IoT Core supports up to two digits after the decimal (for example, 10.9 and 10.99, but not 10.999).</p>")
   thresholdPercentage: abortThresholdPercentage,
   @ocaml.doc("<p>The type of job action to take to initiate the job abort.</p>")
   action: abortAction,
@@ -1901,9 +2049,17 @@ type thingGroupDocument = {
 }
 @ocaml.doc("<p>The thing search index document.</p>")
 type thingDocument = {
-  @ocaml.doc("<p>Indicates whether the thing is connected to the AWS IoT service.</p>")
+  @ocaml.doc(
+    "<p>Indicates whether the thing is connected to the Amazon Web Services IoT Core service.</p>"
+  )
   connectivity: option<thingConnectivity>,
-  @ocaml.doc("<p>The shadow.</p>") shadow: option<jsonDocument>,
+  @ocaml.doc("<p>Contains Device Defender data.</p>
+         <p>For more information about Device Defender, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/device-defender.html\">Device Defender</a>. </p>")
+  deviceDefender: option<jsonDocument>,
+  @ocaml.doc("<p>The unnamed shadow and named shadow.</p>
+         <p>For more information about shadows, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/iot-device-shadows.html\">IoT Device Shadow service.</a>
+         </p>")
+  shadow: option<jsonDocument>,
   @ocaml.doc("<p>The attributes.</p>") attributes: option<attributes>,
   @ocaml.doc("<p>Thing group names.</p>") thingGroupNames: option<thingGroupNameList>,
   @ocaml.doc("<p>The thing type name.</p>") thingTypeName: option<thingTypeName>,
@@ -1941,6 +2097,7 @@ type securityProfileTargetMapping = {
 }
 type securityProfileIdentifiers = array<securityProfileIdentifier>
 type scheduledAuditMetadataList = array<scheduledAuditMetadata>
+type retryCriteriaList = array<retryCriteria>
 @ocaml.doc("<p>Information that identifies the noncompliant resource.</p>")
 type resourceIdentifier = {
   @ocaml.doc("<p>The ARN of the role alias that has overly permissive actions.</p>")
@@ -1996,6 +2153,18 @@ type metricToRetain = {
   @ocaml.doc("<p>The dimension of a metric. This can't be used with custom metrics.</p>")
   metricDimension: option<metricDimension>,
   @ocaml.doc("<p>What is measured by the behavior.</p>") metric: behaviorMetric,
+}
+@ocaml.doc("<p>An object that contains information about the managed template.</p>")
+type managedJobTemplateSummary = {
+  @ocaml.doc("<p>The version for a managed template.</p>")
+  templateVersion: option<managedTemplateVersion>,
+  @ocaml.doc("<p>A list of environments that are supported with the managed job template.</p>")
+  environments: option<environments>,
+  @ocaml.doc("<p>The description for a managed template.</p>") description: option<jobDescription>,
+  @ocaml.doc("<p>The unique Name for a managed template.</p>")
+  templateName: option<managedJobTemplateName>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) for a managed template.</p>")
+  templateArn: option<jobTemplateArn>,
 }
 @ocaml.doc("<p>The target configuration.</p>")
 type logTargetConfiguration = {
@@ -2072,6 +2241,7 @@ type httpAuthorization = {
   sigv4: option<sigV4Authorization>,
 }
 type headerList = array<httpActionHeader>
+type fleetMetricNameAndArnList = array<fleetMetricNameAndArn>
 @ocaml.doc("<p>The location of the OTA update.</p>")
 type fileLocation = {
   @ocaml.doc("<p>The location of the updated firmware in S3.</p>") s3Location: option<s3Location>,
@@ -2083,7 +2253,7 @@ type exponentialRolloutRate = {
   @ocaml.doc("<p>The criteria to initiate the increase in rate of rollout for a job.</p>")
   rateIncreaseCriteria: rateIncreaseCriteria,
   @ocaml.doc("<p>The exponential factor to increase the rate of rollout for a job.</p>
-        <p>AWS IoT supports up to one digit after the decimal (for example, 1.5, but not 1.55).</p>")
+        <p>Amazon Web Services IoT Core supports up to one digit after the decimal (for example, 1.5, but not 1.55).</p>")
   incrementFactor: incrementFactor,
   @ocaml.doc("<p>The minimum number of things that will be notified of a pending job, per minute at the start of job rollout.
             This parameter allows you to define the initial rate of rollout.</p>")
@@ -2108,6 +2278,7 @@ type dynamoDBv2Action = {
   roleArn: awsArn,
 }
 type domainConfigurations = array<domainConfigurationSummary>
+type documentParameters = array<documentParameter>
 @ocaml.doc("<p>
             The target of a mitigation action task.
         </p>")
@@ -2133,9 +2304,13 @@ type destination = {
 }
 @ocaml.doc("<p>Describes a custom method used to code sign a file.</p>")
 type customCodeSigning = {
-  @ocaml.doc("<p>The signature algorithm used to code sign the file.</p>")
+  @ocaml.doc(
+    "<p>The signature algorithm used to code sign the file. You can use a string as the algorithm name if the target over-the-air (OTA) update devices are able to verify the signature that was generated using the same signature algorithm. For example, FreeRTOS uses <code>ECDSA</code> or <code>RSA</code>, so you can pass either of them based on which was used for generating the signature.</p>"
+  )
   signatureAlgorithm: option<signatureAlgorithm>,
-  @ocaml.doc("<p>The hash algorithm used to code sign the file.</p>")
+  @ocaml.doc(
+    "<p>The hash algorithm used to code sign the file. You can use a string as the algorithm name if the target over-the-air (OTA) update devices are able to verify the signature that was generated using the same signature algorithm. For example, FreeRTOS uses <code>SHA256</code> or <code>SHA1</code>, so you can pass either of them based on which was used for generating the signature.</p>"
+  )
   hashAlgorithm: option<hashAlgorithm>,
   @ocaml.doc("<p>The certificate chain.</p>") certificateChain: option<codeSigningCertificateChain>,
   @ocaml.doc("<p>The signature for the file.</p>") signature: option<codeSigningSignature>,
@@ -2153,9 +2328,11 @@ type certificateDescription = {
   lastModifiedDate: option<dateType>,
   @ocaml.doc("<p>The date and time the certificate was created.</p>")
   creationDate: option<dateType>,
-  @ocaml.doc("<p>The ID of the AWS account of the previous owner of the certificate.</p>")
+  @ocaml.doc(
+    "<p>The ID of the Amazon Web Services account of the previous owner of the certificate.</p>"
+  )
   previousOwnedBy: option<awsAccountId>,
-  @ocaml.doc("<p>The ID of the AWS account that owns the certificate.</p>")
+  @ocaml.doc("<p>The ID of the Amazon Web Services account that owns the certificate.</p>")
   ownedBy: option<awsAccountId>,
   @ocaml.doc("<p>The certificate data, in PEM format.</p>") certificatePem: option<certificatePem>,
   @ocaml.doc("<p>The status of the certificate.</p>") status: option<certificateStatus>,
@@ -2184,13 +2361,21 @@ type cacertificateDescription = {
   @ocaml.doc("<p>The CA certificate ID.</p>") certificateId: option<certificateId>,
   @ocaml.doc("<p>The CA certificate ARN.</p>") certificateArn: option<certificateArn>,
 }
+@ocaml.doc("<p>The type of bucketed aggregation performed.</p>")
+type bucketsAggregationType = {
+  @ocaml.doc(
+    "<p>Performs an aggregation that will return a list of buckets. The list of buckets is a ranked list of the number of occurrences of an aggregation field value.</p>"
+  )
+  termsAggregation: option<termsAggregation>,
+}
+type buckets = array<bucket>
 type billingGroupNameAndArnList = array<groupNameAndArn>
 type behaviorModelTrainingSummaries = array<behaviorModelTrainingSummary>
 @ocaml.doc("<p>The rate of increase for a job rollout. This parameter allows you to define an exponential rate 
             increase for a job rollout.</p>")
 type awsJobExponentialRolloutRate = {
   @ocaml.doc("<p>The criteria to initiate the increase in rate of rollout for a job.</p>
-        <p>AWS IoT supports up to one digit after the decimal (for example, 1.5, but not 1.55).</p>")
+        <p>Amazon Web Services IoT Core supports up to one digit after the decimal (for example, 1.5, but not 1.55).</p>")
   rateIncreaseCriteria: awsJobRateIncreaseCriteria,
   @ocaml.doc("<p>The rate of increase for a job rollout. The number of things notified is multiplied by this 
             factor.</p>")
@@ -2203,8 +2388,12 @@ type awsJobAbortCriteriaList = array<awsJobAbortCriteria>
 type authorizers = array<authorizerSummary>
 @ocaml.doc("<p>The authorizer description.</p>")
 type authorizerDescription = {
+  @ocaml.doc("<p>When <code>true</code>, the result from the authorizer’s Lambda function is
+	  cached for the time specified in <code>refreshAfterInSeconds</code>. The cached
+	  result is used while the device reuses the same HTTP connection.</p>")
+  enableCachingForHttp: option<enableCachingForHttp>,
   @ocaml.doc(
-    "<p>Specifies whether AWS IoT validates the token signature in an authorization request.</p>"
+    "<p>Specifies whether IoT validates the token signature in an authorization request.</p>"
   )
   signingDisabled: option<booleanKey>,
   @ocaml.doc("<p>The UNIX timestamp of when the authorizer was last updated.</p>")
@@ -2264,6 +2453,12 @@ type assetPropertyValue = {
   @ocaml.doc("<p>The value of the asset property.</p>") value: assetPropertyVariant,
 }
 type alertTargets = Js.Dict.t<alertTarget>
+@ocaml.doc("<p>The type of aggregation queries.</p>")
+type aggregationType = {
+  @ocaml.doc("<p>A list of the values of aggregation types.</p>")
+  values: option<aggregationTypeValues>,
+  @ocaml.doc("<p>The name of the aggregation type.</p>") name: aggregationTypeName,
+}
 @ocaml.doc(
   "<p>Parameters used when defining a mitigation action that move a set of things to a thing group.</p>"
 )
@@ -2424,11 +2619,40 @@ type thingIndexingConfiguration = {
   @ocaml.doc("<p>Contains fields that are indexed and whose types are already known by the Fleet Indexing
       service.</p>")
   managedFields: option<fields>,
+  @ocaml.doc("<p>Named shadow indexing mode. Valid values are:</p>
+         <ul>
+            <li>
+               <p>ON – Your thing index contains named shadow. To enable thing
+          named shadow indexing, <i>namedShadowIndexingMode</i> must not be set to
+          OFF.</p>
+            </li>
+            <li>
+               <p>OFF - Named shadow indexing is disabled.</p>
+            </li>
+         </ul>
+         <p>For more information about Shadows, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/iot-device-shadows.html\">IoT Device Shadow service.</a>
+         </p>")
+  namedShadowIndexingMode: option<namedShadowIndexingMode>,
+  @ocaml.doc("<p>Device Defender indexing mode. Valid values are:</p>
+         <ul>
+            <li>
+               <p>VIOLATIONS – Your thing index contains Device Defender violations. To enable Device
+          Defender indexing, <i>deviceDefenderIndexingMode</i> must not be set to
+          OFF.</p>
+            </li>
+            <li>
+               <p>OFF - Device Defender indexing is disabled.</p>
+            </li>
+         </ul>
+        <p>For more information about Device Defender violations, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/device-defender-detect.html\">Device Defender Detect.</a>
+         </p>")
+  deviceDefenderIndexingMode: option<deviceDefenderIndexingMode>,
   @ocaml.doc("<p>Thing connectivity indexing mode. Valid values are: </p>
          <ul>
             <li>
                <p>STATUS – Your thing index contains connectivity status. To enable thing
-          connectivity indexing, thingIndexMode must not be set to OFF.</p>
+          connectivity indexing, <i>thingIndexMode</i> must not be set to
+          OFF.</p>
             </li>
             <li>
                <p>OFF - Thing connectivity status indexing is disabled.</p>
@@ -2512,7 +2736,7 @@ type mitigationActionParams = {
   )
   publishFindingToSnsParams: option<publishFindingToSnsParams>,
   @ocaml.doc(
-    "<p>Parameters to define a mitigation action that enables AWS IoT logging at a specified level of detail.</p>"
+    "<p>Parameters to define a mitigation action that enables Amazon Web Services IoT Core logging at a specified level of detail.</p>"
   )
   enableIoTLoggingParams: option<enableIoTLoggingParams>,
   @ocaml.doc(
@@ -2532,6 +2756,7 @@ type mitigationActionParams = {
   )
   updateDeviceCertificateParams: option<updateDeviceCertificateParams>,
 }
+type managedJobTemplatesSummaryList = array<managedJobTemplateSummary>
 type logTargetConfigurations = array<logTargetConfiguration>
 @ocaml.doc("<p>Allows you to create a staged rollout of a job.</p>")
 type jobExecutionsRolloutConfig = {
@@ -2541,6 +2766,13 @@ type jobExecutionsRolloutConfig = {
   @ocaml.doc("<p>The maximum number of things that will be notified of a pending job, per minute.
         This parameter allows you to create a staged rollout.</p>")
   maximumPerMinute: option<maxJobExecutionsPerMin>,
+}
+@ocaml.doc("<p>The configuration that determines how many retries are allowed for each failure 
+            type for a job.</p>")
+type jobExecutionsRetryConfig = {
+  @ocaml.doc("<p>The list of criteria that determines how many retries are allowed for each failure
+            type for a job.</p>")
+  criteriaList: retryCriteriaList,
 }
 type jobExecutionSummaryForThingList = array<jobExecutionSummaryForThing>
 type jobExecutionSummaryForJobList = array<jobExecutionSummaryForJob>
@@ -2595,8 +2827,8 @@ type httpAction = {
   @ocaml.doc("<p>The authentication method to use when sending data to an HTTPS endpoint.</p>")
   auth: option<httpAuthorization>,
   @ocaml.doc("<p>The HTTP headers to send with the message data.</p>") headers: option<headerList>,
-  @ocaml.doc("<p>The URL to which AWS IoT sends a confirmation message. The value of the confirmation URL
-         must be a prefix of the endpoint URL. If you do not specify a confirmation URL AWS IoT uses
+  @ocaml.doc("<p>The URL to which IoT sends a confirmation message. The value of the confirmation URL
+         must be a prefix of the endpoint URL. If you do not specify a confirmation URL IoT uses
          the endpoint URL as the confirmation URL. If you use substitution templates in the
          confirmationUrl, you must create and enable topic rule destinations that match each
          possible value of the substitution template before traffic is allowed to your endpoint
@@ -2727,8 +2959,7 @@ type topicRuleDestinationSummaries = array<topicRuleDestinationSummary>
 type thingTypeList = array<thingTypeDefinition>
 @ocaml.doc("<p>Information about a stream.</p>")
 type streamInfo = {
-  @ocaml.doc("<p>An IAM role AWS IoT assumes to access your S3 files.</p>")
-  roleArn: option<roleArn>,
+  @ocaml.doc("<p>An IAM role IoT assumes to access your S3 files.</p>") roleArn: option<roleArn>,
   @ocaml.doc("<p>The date when the stream was last updated.</p>") lastUpdatedAt: option<dateType>,
   @ocaml.doc("<p>The date when the stream was created.</p>") createdAt: option<dateType>,
   @ocaml.doc("<p>The files to stream.</p>") files: option<streamFiles>,
@@ -2751,7 +2982,7 @@ type putAssetPropertyValueEntry = {
       both an <code>aliasId</code> and a <code>propertyId</code>. Accepts substitution
       templates.</p>")
   propertyId: option<assetPropertyId>,
-  @ocaml.doc("<p>The ID of the AWS IoT SiteWise asset. You must specify either a <code>propertyAlias</code>
+  @ocaml.doc("<p>The ID of the IoT SiteWise asset. You must specify either a <code>propertyAlias</code>
       or both an <code>aliasId</code> and a <code>propertyId</code>. Accepts substitution
       templates.</p>")
   assetId: option<assetId>,
@@ -2775,10 +3006,16 @@ type mitigationAction = {
 }
 @ocaml.doc("<p>The <code>Job</code> object contains details about a job.</p>")
 type job = {
+  @ocaml.doc("<p>A key-value map that pairs the patterns that need to be replaced in a managed 
+            template job document schema. You can use the description of each key as a guidance 
+            to specify the inputs during runtime when creating a job.</p>")
+  documentParameters: option<parameterMap>,
+  @ocaml.doc("<p>The configuration for the criteria to retry the job.</p>")
+  jobExecutionsRetryConfig: option<jobExecutionsRetryConfig>,
   @ocaml.doc("<p>The ARN of the job template used to create the job.</p>")
   jobTemplateArn: option<jobTemplateArn>,
   @ocaml.doc("<p>The namespace used to indicate that a job is a customer-managed job.</p>
-        <p>When you specify a value for this parameter, AWS IoT Core sends jobs notifications to MQTT topics that 
+        <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that 
             contain the value in the following format.</p>
         <p>
             <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>
@@ -2846,7 +3083,7 @@ type codeSigning = {
   customCodeSigning: option<customCodeSigning>,
   @ocaml.doc("<p>Describes the code-signing job.</p>")
   startSigningJobParameter: option<startSigningJobParameter>,
-  @ocaml.doc("<p>The ID of the AWSSignerJob which was created to sign the file.</p>")
+  @ocaml.doc("<p>The ID of the <code>AWSSignerJob</code> which was created to sign the file.</p>")
   awsSignerJobId: option<signingJobId>,
 }
 @ocaml.doc("<p>A Device Defender security profile behavior.</p>")
@@ -2871,6 +3108,10 @@ type auditSuppressionList = array<auditSuppression>
 type violationEvent = {
   @ocaml.doc("<p>The time the violation event occurred.</p>")
   violationEventTime: option<timestamp_>,
+  @ocaml.doc("<p>The description of the verification state of the violation.</p>")
+  verificationStateDescription: option<verificationStateDescription>,
+  @ocaml.doc("<p>The verification state of the violation (detect alarm).</p>")
+  verificationState: option<verificationState>,
   @ocaml.doc("<p>The type of violation event.</p>") violationEventType: option<violationEventType>,
   @ocaml.doc("<p>
             The details of a violation event.
@@ -2945,6 +3186,10 @@ type activeViolation = {
   @ocaml.doc("<p>The time the violation started.</p>") violationStartTime: option<timestamp_>,
   @ocaml.doc("<p>The time the most recent violation occurred.</p>")
   lastViolationTime: option<timestamp_>,
+  @ocaml.doc("<p>The description of the verification state of the violation.</p>")
+  verificationStateDescription: option<verificationStateDescription>,
+  @ocaml.doc("<p>The verification state of the violation (detect alarm).</p>")
+  verificationState: option<verificationState>,
   @ocaml.doc("<p>
             The details of a violation event.
         </p>")
@@ -2962,11 +3207,10 @@ type activeViolation = {
 }
 type violationEvents = array<violationEvent>
 type otaupdateFiles = array<otaupdateFile>
-@ocaml.doc("<p>Describes an action to send data from an MQTT message that triggered the rule to AWS IoT
+@ocaml.doc("<p>Describes an action to send data from an MQTT message that triggered the rule to IoT
       SiteWise asset properties.</p>")
 type iotSiteWiseAction = {
-  @ocaml.doc("<p>The ARN of the role that grants AWS IoT permission to send an asset property value to AWS
-      IoTSiteWise. (<code>\"Action\": \"iotsitewise:BatchPutAssetPropertyValue\"</code>). The trust
+  @ocaml.doc("<p>The ARN of the role that grants IoT permission to send an asset property value to IoT SiteWise. (<code>\"Action\": \"iotsitewise:BatchPutAssetPropertyValue\"</code>). The trust
       policy can restrict access to specific asset hierarchy paths.</p>")
   roleArn: awsArn,
   @ocaml.doc("<p>A list of asset property value entries.</p>")
@@ -3026,9 +3270,9 @@ type otaupdateInfo = {
   additionalParameters: option<additionalParameterMap>,
   @ocaml.doc("<p>Error information associated with the OTA update.</p>")
   errorInfo: option<errorInfo>,
-  @ocaml.doc("<p>The AWS IoT job ARN associated with the OTA update.</p>")
+  @ocaml.doc("<p>The IoT job ARN associated with the OTA update.</p>")
   awsIotJobArn: option<awsIotJobArn>,
-  @ocaml.doc("<p>The AWS IoT job ID associated with the OTA update.</p>")
+  @ocaml.doc("<p>The IoT job ID associated with the OTA update.</p>")
   awsIotJobId: option<awsIotJobId>,
   @ocaml.doc("<p>The status of the OTA update.</p>") otaUpdateStatus: option<otaupdateStatus>,
   @ocaml.doc("<p>A list of files associated with the OTA update.</p>")
@@ -3058,6 +3302,8 @@ type otaupdateInfo = {
 type detectMitigationActionsTaskSummaryList = array<detectMitigationActionsTaskSummary>
 @ocaml.doc("<p>Describes the actions associated with a rule.</p>")
 type action = {
+  @ocaml.doc("<p>Write data to an Amazon OpenSearch Service domain.</p>")
+  openSearch: option<openSearchAction>,
   @ocaml.doc(
     "<p>Send messages to an Amazon Managed Streaming for Apache Kafka (Amazon MSK) or self-managed Apache Kafka cluster.</p>"
   )
@@ -3069,16 +3315,21 @@ type action = {
   timestream: option<timestreamAction>,
   @ocaml.doc("<p>Starts execution of a Step Functions state machine.</p>")
   stepFunctions: option<stepFunctionsAction>,
-  @ocaml.doc("<p>Sends data from the MQTT message that triggered the rule to AWS IoT SiteWise asset
+  @ocaml.doc("<p>Sends data from the MQTT message that triggered the rule to IoT SiteWise asset
       properties.</p>")
   iotSiteWise: option<iotSiteWiseAction>,
-  @ocaml.doc("<p>Sends an input to an AWS IoT Events detector.</p>")
-  iotEvents: option<iotEventsAction>,
-  @ocaml.doc("<p>Sends message data to an AWS IoT Analytics channel.</p>")
+  @ocaml.doc("<p>Sends an input to an IoT Events detector.</p>") iotEvents: option<iotEventsAction>,
+  @ocaml.doc("<p>Sends message data to an IoT Analytics channel.</p>")
   iotAnalytics: option<iotAnalyticsAction>,
   @ocaml.doc("<p>Send a message to a Salesforce IoT Cloud Input Stream.</p>")
   salesforce: option<salesforceAction>,
-  @ocaml.doc("<p>Write data to an Amazon Elasticsearch Service domain.</p>")
+  @ocaml.doc("<p>Write data to an Amazon OpenSearch Service domain.</p>   
+         <note>
+            <p>The <code>Elasticsearch</code> action can only be used by existing rule actions. 
+            To create a new rule action or to update an existing rule action, use the
+            <code>OpenSearch</code> rule action instead. For more information, see 
+            <a href=\"https://docs.aws.amazon.com/iot/latest/apireference/API_OpenSearchAction.html\">OpenSearchAction</a>.</p>
+         </note>")
   elasticsearch: option<elasticsearchAction>,
   @ocaml.doc("<p>Send data to CloudWatch Logs.</p>") cloudwatchLogs: option<cloudwatchLogsAction>,
   @ocaml.doc("<p>Change the state of a CloudWatch alarm.</p>")
@@ -3107,8 +3358,8 @@ type topicRulePayload = {
   @ocaml.doc("<p>Specifies whether the rule is disabled.</p>") ruleDisabled: option<isDisabled>,
   @ocaml.doc("<p>The actions associated with the rule.</p>") actions: actionList,
   @ocaml.doc("<p>The description of the rule.</p>") description: option<description>,
-  @ocaml.doc("<p>The SQL statement used to query the topic. For more information, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/iot-sql-reference.html\">AWS IoT SQL
-            Reference</a> in the <i>AWS IoT Developer Guide</i>.</p>")
+  @ocaml.doc("<p>The SQL statement used to query the topic. For more information, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/iot-sql-reference.html\">IoT SQL
+            Reference</a> in the <i>IoT Developer Guide</i>.</p>")
   sql: sql,
 }
 @ocaml.doc("<p>Describes a rule.</p>")
@@ -3125,22 +3376,22 @@ type topicRule = {
   sql: option<sql>,
   @ocaml.doc("<p>The name of the rule.</p>") ruleName: option<ruleName>,
 }
-@ocaml.doc("<fullname>AWS IoT</fullname>
-        <p>AWS IoT provides secure, bi-directional communication between Internet-connected
-            devices (such as sensors, actuators, embedded devices, or smart appliances) and the AWS
+@ocaml.doc("<fullname>IoT</fullname>
+        <p>IoT provides secure, bi-directional communication between Internet-connected
+            devices (such as sensors, actuators, embedded devices, or smart appliances) and the Amazon Web Services
             cloud. You can discover your custom IoT-Data endpoint to communicate with, configure
             rules for data processing and integration with other services, organize resources
             associated with each device (Registry), configure logging, and create and manage
             policies and credentials to authenticate devices.</p>
         <p>The service endpoints that expose this API are listed in
-            <a href=\"https://docs.aws.amazon.com/general/latest/gr/iot-core.html\">AWS IoT Core Endpoints and Quotas</a>.
+            <a href=\"https://docs.aws.amazon.com/general/latest/gr/iot-core.html\">Amazon Web Services IoT Core Endpoints and Quotas</a>.
             You must use the endpoint for the region that has the resources you want to access.</p>
-        <p>The service name used by <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">AWS
+        <p>The service name used by <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Amazon Web Services
                 Signature Version 4</a> to sign the request is:
             <i>execute-api</i>.</p>
-        <p>For more information about how AWS IoT works, see the <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/aws-iot-how-it-works.html\">Developer
+        <p>For more information about how IoT works, see the <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/aws-iot-how-it-works.html\">Developer
             Guide</a>.</p>
-        <p>For information about how to use the credentials provider for AWS IoT, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/authorizing-direct-aws.html\">Authorizing Direct Calls to AWS Services</a>.</p>")
+        <p>For information about how to use the credentials provider for IoT, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/authorizing-direct-aws.html\">Authorizing Direct Calls to Amazon Web Services Services</a>.</p>")
 module UpdateTopicRuleDestination = {
   type t
   type request = {
@@ -3179,7 +3430,7 @@ module UpdateTopicRuleDestination = {
     status: topicRuleDestinationStatus,
     @ocaml.doc("<p>The ARN of the topic rule destination.</p>") arn: awsArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new
   external new: request => t = "UpdateTopicRuleDestinationCommand"
   let make = (~status, ~arn, ()) => new({status: status, arn: arn})
@@ -3189,7 +3440,9 @@ module UpdateTopicRuleDestination = {
 module UpdateRoleAlias = {
   type t
   type request = {
-    @ocaml.doc("<p>The number of seconds the credential will be valid.</p>")
+    @ocaml.doc("<p>The number of seconds the credential will be valid.</p>
+         <p>This value must be less than or equal to the maximum session duration of the IAM role
+         that the role alias references.</p>")
     credentialDurationSeconds: option<credentialDurationSeconds>,
     @ocaml.doc("<p>The role ARN.</p>") roleArn: option<roleArn>,
     @ocaml.doc("<p>The role alias to update.</p>") roleAlias: roleAlias,
@@ -3237,9 +3490,10 @@ module UpdateCustomMetric = {
       A friendly name in the console for the custom metric
     </p>")
     displayName: option<customMetricDisplayName>,
-    @ocaml.doc("<p>
-      The type of the custom metric. Types include <code>string-list</code>, <code>ip-address-list</code>, <code>number-list</code>, and <code>number</code>.
-    </p>")
+    @ocaml.doc("<p> The type of the custom metric. </p>
+         <important>
+            <p>The type <code>number</code> only takes a single metric value as an input, but while submitting the metrics value in the DeviceMetrics report, it must be passed as an array with a single value.</p>
+         </important>")
     metricType: option<customMetricType>,
     @ocaml.doc("<p>
       The Amazon Resource Number (ARN) of the custom metric.
@@ -3263,7 +3517,7 @@ module UpdateCertificate = {
     @ocaml.doc("<p>The new status.</p>
          <p>
             <b>Note:</b> Setting the status to PENDING_TRANSFER  or PENDING_ACTIVATION will result
-         in an exception being thrown. PENDING_TRANSFER and PENDING_ACTIVATION are statuses used internally by AWS IoT. They 
+         in an exception being thrown. PENDING_TRANSFER and PENDING_ACTIVATION are statuses used internally by IoT. They 
          are not intended for developer use.</p>
          <p>
             <b>Note:</b> The status value REGISTER_INACTIVE is deprecated and
@@ -3273,7 +3527,7 @@ module UpdateCertificate = {
          certificate ID.)</p>")
     certificateId: certificateId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "UpdateCertificateCommand"
   let make = (~newStatus, ~certificateId, ()) =>
     new({newStatus: newStatus, certificateId: certificateId})
@@ -3285,7 +3539,7 @@ module TransferCertificate = {
   @ocaml.doc("<p>The input for the TransferCertificate operation.</p>")
   type request = {
     @ocaml.doc("<p>The transfer message.</p>") transferMessage: option<message>,
-    @ocaml.doc("<p>The AWS account.</p>") targetAwsAccount: awsAccountId,
+    @ocaml.doc("<p>The Amazon Web Services account.</p>") targetAwsAccount: awsAccountId,
     @ocaml.doc("<p>The ID of the certificate. (The last part of the certificate ARN contains the
          certificate ID.)</p>")
     certificateId: certificateId,
@@ -3308,7 +3562,7 @@ module TransferCertificate = {
 module StopThingRegistrationTask = {
   type t
   type request = {@ocaml.doc("<p>The bulk thing provisioning task ID.</p>") taskId: taskId}
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new
   external new: request => t = "StopThingRegistrationTaskCommand"
   let make = (~taskId, ()) => new({taskId: taskId})
@@ -3349,7 +3603,7 @@ module SetV2LoggingOptions = {
     @ocaml.doc("<p>The ARN of the role that allows IoT to write to Cloudwatch logs.</p>")
     roleArn: option<awsArn>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "SetV2LoggingOptionsCommand"
   let make = (~disableAllLogs=?, ~defaultLogLevel=?, ~roleArn=?, ()) =>
     new({disableAllLogs: disableAllLogs, defaultLogLevel: defaultLogLevel, roleArn: roleArn})
@@ -3363,7 +3617,7 @@ module SetDefaultPolicyVersion = {
     @ocaml.doc("<p>The policy version ID.</p>") policyVersionId: policyVersionId,
     @ocaml.doc("<p>The policy name.</p>") policyName: policyName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "SetDefaultPolicyVersionCommand"
   let make = (~policyVersionId, ~policyName, ()) =>
     new({policyVersionId: policyVersionId, policyName: policyName})
@@ -3391,7 +3645,7 @@ module RemoveThingFromThingGroup = {
     @ocaml.doc("<p>The group ARN.</p>") thingGroupArn: option<thingGroupArn>,
     @ocaml.doc("<p>The group name.</p>") thingGroupName: option<thingGroupName>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new
   external new: request => t = "RemoveThingFromThingGroupCommand"
   let make = (~thingArn=?, ~thingName=?, ~thingGroupArn=?, ~thingGroupName=?, ()) =>
@@ -3414,7 +3668,7 @@ module RemoveThingFromBillingGroup = {
     @ocaml.doc("<p>The ARN of the billing group.</p>") billingGroupArn: option<billingGroupArn>,
     @ocaml.doc("<p>The name of the billing group.</p>") billingGroupName: option<billingGroupName>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new
   external new: request => t = "RemoveThingFromBillingGroupCommand"
   let make = (~thingArn=?, ~thingName=?, ~billingGroupArn=?, ~billingGroupName=?, ()) =>
@@ -3437,7 +3691,7 @@ module RejectCertificateTransfer = {
          certificate ID.)</p>")
     certificateId: certificateId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new
   external new: request => t = "RejectCertificateTransferCommand"
   let make = (~certificateId, ~rejectReason=?, ()) =>
@@ -3470,9 +3724,12 @@ module RegisterCertificate = {
   type t
   @ocaml.doc("<p>The input to the RegisterCertificate operation.</p>")
   type request = {
-    @ocaml.doc("<p>The status of the register certificate request.</p>")
+    @ocaml.doc("<p>The status of the register certificate request. Valid values that you can use include 
+         <code>ACTIVE</code>, <code>INACTIVE</code>, and <code>REVOKED</code>.</p>")
     status: option<certificateStatus>,
-    @ocaml.doc("<p>A boolean value that specifies if the certificate is set to active.</p>")
+    @ocaml.doc("<p>A boolean value that specifies if the certificate is set to active.</p>
+         <p>Valid values: <code>ACTIVE | INACTIVE</code>
+         </p>")
     setAsActive: option<setAsActiveFlag>,
     @ocaml.doc("<p>The CA certificate used to sign the device certificate being registered.</p>")
     caCertificatePem: option<certificatePem>,
@@ -3494,30 +3751,51 @@ module RegisterCertificate = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module PutVerificationStateOnViolation = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The description of the verification state of the violation (detect alarm).</p>")
+    verificationStateDescription: option<verificationStateDescription>,
+    @ocaml.doc("<p>The verification state of the violation.</p>")
+    verificationState: verificationState,
+    @ocaml.doc("<p>The violation ID.</p>") violationId: violationId,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-iot") @new
+  external new: request => t = "PutVerificationStateOnViolationCommand"
+  let make = (~verificationState, ~violationId, ~verificationStateDescription=?, ()) =>
+    new({
+      verificationStateDescription: verificationStateDescription,
+      verificationState: verificationState,
+      violationId: violationId,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
 module GetV2LoggingOptions = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("<p>Disables all logs.</p>") disableAllLogs: option<disableAllLogs>,
     @ocaml.doc("<p>The default log level.</p>") defaultLogLevel: option<logLevel>,
-    @ocaml.doc("<p>The IAM role ARN AWS IoT uses to write to your CloudWatch logs.</p>")
+    @ocaml.doc("<p>The IAM role ARN IoT uses to write to your CloudWatch logs.</p>")
     roleArn: option<awsArn>,
   }
-  @module("@aws-sdk/client-iot") @new external new: unit => t = "GetV2LoggingOptionsCommand"
-  let make = () => new()
+  @module("@aws-sdk/client-iot") @new external new: request => t = "GetV2LoggingOptionsCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetRegistrationCode = {
   type t
-
+  type request = {.}
   @ocaml.doc("<p>The output from the GetRegistrationCode operation.</p>")
   type response = {
     @ocaml.doc("<p>The CA certificate registration code.</p>")
     registrationCode: option<registrationCode>,
   }
-  @module("@aws-sdk/client-iot") @new external new: unit => t = "GetRegistrationCodeCommand"
-  let make = () => new()
+  @module("@aws-sdk/client-iot") @new external new: request => t = "GetRegistrationCodeCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -3570,14 +3848,14 @@ module GetPolicy = {
 
 module GetLoggingOptions = {
   type t
-
+  type request = {.}
   @ocaml.doc("<p>The output from the GetLoggingOptions operation.</p>")
   type response = {
     @ocaml.doc("<p>The logging level.</p>") logLevel: option<logLevel>,
     @ocaml.doc("<p>The ARN of the IAM role that grants access.</p>") roleArn: option<awsArn>,
   }
-  @module("@aws-sdk/client-iot") @new external new: unit => t = "GetLoggingOptionsCommand"
-  let make = () => new()
+  @module("@aws-sdk/client-iot") @new external new: request => t = "GetLoggingOptionsCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -3598,7 +3876,7 @@ module GetCardinality = {
   type request = {
     @ocaml.doc("<p>The query version.</p>") queryVersion: option<queryVersion>,
     @ocaml.doc("<p>The field to aggregate.</p>") aggregationField: option<aggregationField>,
-    @ocaml.doc("<p>The search query.</p>") queryString: queryString,
+    @ocaml.doc("<p>The search query string.</p>") queryString: queryString,
     @ocaml.doc("<p>The name of the index to search.</p>") indexName: option<indexName>,
   }
   type response = {
@@ -3620,7 +3898,7 @@ module EnableTopicRule = {
   type t
   @ocaml.doc("<p>The input for the EnableTopicRuleRequest operation.</p>")
   type request = {@ocaml.doc("<p>The name of the topic rule to enable.</p>") ruleName: ruleName}
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "EnableTopicRuleCommand"
   let make = (~ruleName, ()) => new({ruleName: ruleName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -3630,7 +3908,7 @@ module DisableTopicRule = {
   type t
   @ocaml.doc("<p>The input for the DisableTopicRuleRequest operation.</p>")
   type request = {@ocaml.doc("<p>The name of the rule to disable.</p>") ruleName: ruleName}
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "DisableTopicRuleCommand"
   let make = (~ruleName, ()) => new({ruleName: ruleName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -3646,7 +3924,7 @@ module DetachThingPrincipal = {
     principal: principal,
     @ocaml.doc("<p>The name of the thing.</p>") thingName: thingName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "DetachThingPrincipalCommand"
   let make = (~principal, ~thingName, ()) => new({principal: principal, thingName: thingName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -3660,7 +3938,7 @@ module DetachSecurityProfile = {
     @ocaml.doc("<p>The security profile that is detached.</p>")
     securityProfileName: securityProfileName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "DetachSecurityProfileCommand"
   let make = (~securityProfileTargetArn, ~securityProfileName, ()) =>
     new({
@@ -3679,7 +3957,7 @@ module DetachPrincipalPolicy = {
     principal: principal,
     @ocaml.doc("<p>The name of the policy to detach.</p>") policyName: policyName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "DetachPrincipalPolicyCommand"
   let make = (~principal, ~policyName, ()) => new({principal: principal, policyName: policyName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -3691,7 +3969,7 @@ module DetachPolicy = {
     @ocaml.doc("<p>The target from which the policy will be detached.</p>") target: policyTarget,
     @ocaml.doc("<p>The policy to detach.</p>") policyName: policyName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "DetachPolicyCommand"
   let make = (~target, ~policyName, ()) => new({target: target, policyName: policyName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -3769,6 +4047,10 @@ module DescribeIndex = {
                <p>REGISTRY_AND_SHADOW_AND_CONNECTIVITY_STATUS - Your thing index contains registry
           data, shadow data, and thing connectivity status data.</p>
             </li>
+            <li>
+               <p>MULTI_INDEXING_MODE - Your thing index contains multiple data sources. For more information, see 
+          <a href=\"https://docs.aws.amazon.com/iot/latest/apireference/API_GetIndexingConfiguration.html\">GetIndexingConfiguration</a>.</p>
+            </li>
          </ul>")
     schema: option<indexSchema>,
     @ocaml.doc("<p>The index status.</p>") indexStatus: option<indexStatus>,
@@ -3799,14 +4081,14 @@ module DescribeEndpoint = {
          <ul>
             <li>
                <p>
-                  <code>iot:CredentialProvider</code> - Returns an AWS IoT credentials provider API
+                  <code>iot:CredentialProvider</code> - Returns an IoT credentials provider API
                endpoint.</p>
             </li>
          </ul>
          <ul>
             <li>
                <p>
-                  <code>iot:Jobs</code> - Returns an AWS IoT device management Jobs API
+                  <code>iot:Jobs</code> - Returns an IoT device management Jobs API
                endpoint.</p>
             </li>
          </ul>
@@ -3846,9 +4128,10 @@ module DescribeCustomMetric = {
       Field represents a friendly name in the console for the custom metric; doesn't have to be unique. Don't use this name as the metric identifier in the device metric report. Can be updated.
     </p>")
     displayName: option<customMetricDisplayName>,
-    @ocaml.doc("<p>
-      The type of the custom metric. Types include <code>string-list</code>, <code>ip-address-list</code>, <code>number-list</code>, and <code>number</code>.
-    </p>")
+    @ocaml.doc("<p> The type of the custom metric. </p>
+         <important>
+            <p>The type <code>number</code> only takes a single metric value as an input, but while submitting the metrics value in the DeviceMetrics report, it must be passed as an array with a single value.</p>
+         </important>")
     metricType: option<customMetricType>,
     @ocaml.doc("<p>
       The Amazon Resource Number (ARN) of the custom metric.
@@ -3873,7 +4156,7 @@ module DeprecateThingType = {
     undoDeprecate: option<undoDeprecate>,
     @ocaml.doc("<p>The name of the thing type to deprecate.</p>") thingTypeName: thingTypeName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "DeprecateThingTypeCommand"
   let make = (~thingTypeName, ~undoDeprecate=?, ()) =>
     new({undoDeprecate: undoDeprecate, thingTypeName: thingTypeName})
@@ -3889,7 +4172,7 @@ module DeleteV2LoggingLevel = {
             <code>THING_Group</code>.</p>")
     targetType: logTargetType,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "DeleteV2LoggingLevelCommand"
   let make = (~targetName, ~targetType, ()) => new({targetName: targetName, targetType: targetType})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -3898,7 +4181,7 @@ module DeleteV2LoggingLevel = {
 module DeleteTopicRuleDestination = {
   type t
   type request = {@ocaml.doc("<p>The ARN of the topic rule destination to delete.</p>") arn: awsArn}
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new
   external new: request => t = "DeleteTopicRuleDestinationCommand"
   let make = (~arn, ()) => new({arn: arn})
@@ -3909,7 +4192,7 @@ module DeleteTopicRule = {
   type t
   @ocaml.doc("<p>The input for the DeleteTopicRule operation.</p>")
   type request = {@ocaml.doc("<p>The name of the rule.</p>") ruleName: ruleName}
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "DeleteTopicRuleCommand"
   let make = (~ruleName, ()) => new({ruleName: ruleName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -3919,7 +4202,7 @@ module DeleteThingType = {
   type t
   @ocaml.doc("<p>The input for the DeleteThingType operation.</p>")
   type request = {@ocaml.doc("<p>The name of the thing type.</p>") thingTypeName: thingTypeName}
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "DeleteThingTypeCommand"
   let make = (~thingTypeName, ()) => new({thingTypeName: thingTypeName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -3932,7 +4215,7 @@ module DeleteThingGroup = {
     expectedVersion: option<optionalVersion>,
     @ocaml.doc("<p>The name of the thing group to delete.</p>") thingGroupName: thingGroupName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "DeleteThingGroupCommand"
   let make = (~thingGroupName, ~expectedVersion=?, ()) =>
     new({expectedVersion: expectedVersion, thingGroupName: thingGroupName})
@@ -3950,7 +4233,7 @@ module DeleteThing = {
     expectedVersion: option<optionalVersion>,
     @ocaml.doc("<p>The name of the thing to delete.</p>") thingName: thingName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "DeleteThingCommand"
   let make = (~thingName, ~expectedVersion=?, ()) =>
     new({expectedVersion: expectedVersion, thingName: thingName})
@@ -3960,7 +4243,7 @@ module DeleteThing = {
 module DeleteStream = {
   type t
   type request = {@ocaml.doc("<p>The stream ID.</p>") streamId: streamId}
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "DeleteStreamCommand"
   let make = (~streamId, ()) => new({streamId: streamId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -3976,7 +4259,7 @@ module DeleteSecurityProfile = {
     @ocaml.doc("<p>The name of the security profile to be deleted.</p>")
     securityProfileName: securityProfileName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "DeleteSecurityProfileCommand"
   let make = (~securityProfileName, ~expectedVersion=?, ()) =>
     new({expectedVersion: expectedVersion, securityProfileName: securityProfileName})
@@ -3989,7 +4272,7 @@ module DeleteScheduledAudit = {
     @ocaml.doc("<p>The name of the scheduled audit you want to delete.</p>")
     scheduledAuditName: scheduledAuditName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "DeleteScheduledAuditCommand"
   let make = (~scheduledAuditName, ()) => new({scheduledAuditName: scheduledAuditName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -3998,7 +4281,7 @@ module DeleteScheduledAudit = {
 module DeleteRoleAlias = {
   type t
   type request = {@ocaml.doc("<p>The role alias to delete.</p>") roleAlias: roleAlias}
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "DeleteRoleAliasCommand"
   let make = (~roleAlias, ()) => new({roleAlias: roleAlias})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -4006,9 +4289,10 @@ module DeleteRoleAlias = {
 
 module DeleteRegistrationCode = {
   type t
-
-  @module("@aws-sdk/client-iot") @new external new: unit => t = "DeleteRegistrationCodeCommand"
-  let make = () => new()
+  type request = {.}
+  type response = {.}
+  @module("@aws-sdk/client-iot") @new external new: request => t = "DeleteRegistrationCodeCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -4020,7 +4304,7 @@ module DeleteProvisioningTemplateVersion = {
     @ocaml.doc("<p>The name of the fleet provisioning template version to delete.</p>")
     templateName: templateName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new
   external new: request => t = "DeleteProvisioningTemplateVersionCommand"
   let make = (~versionId, ~templateName, ()) =>
@@ -4034,7 +4318,7 @@ module DeleteProvisioningTemplate = {
     @ocaml.doc("<p>The name of the fleet provision template to delete.</p>")
     templateName: templateName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new
   external new: request => t = "DeleteProvisioningTemplateCommand"
   let make = (~templateName, ()) => new({templateName: templateName})
@@ -4048,7 +4332,7 @@ module DeletePolicyVersion = {
     @ocaml.doc("<p>The policy version ID.</p>") policyVersionId: policyVersionId,
     @ocaml.doc("<p>The name of the policy.</p>") policyName: policyName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "DeletePolicyVersionCommand"
   let make = (~policyVersionId, ~policyName, ()) =>
     new({policyVersionId: policyVersionId, policyName: policyName})
@@ -4059,7 +4343,7 @@ module DeletePolicy = {
   type t
   @ocaml.doc("<p>The input for the DeletePolicy operation.</p>")
   type request = {@ocaml.doc("<p>The name of the policy to delete.</p>") policyName: policyName}
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "DeletePolicyCommand"
   let make = (~policyName, ()) => new({policyName: policyName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -4068,7 +4352,7 @@ module DeletePolicy = {
 module DeleteOTAUpdate = {
   type t
   type request = {
-    @ocaml.doc("<p>When true, deletes the AWS job created by the OTAUpdate process even if it is \"IN_PROGRESS\". Otherwise, if the 
+    @ocaml.doc("<p>When true, deletes the IoT job created by the OTAUpdate process even if it is \"IN_PROGRESS\". Otherwise, if the 
             job is not in a terminal state (\"COMPLETED\" or \"CANCELED\") an exception will occur. The default is false.</p>")
     forceDeleteAWSJob: option<forceDeleteAWSJob>,
     @ocaml.doc("<p>When true, the stream created by the OTAUpdate process is deleted when the OTA update is deleted.
@@ -4076,7 +4360,7 @@ module DeleteOTAUpdate = {
     deleteStream: option<deleteStream_>,
     @ocaml.doc("<p>The ID of the OTA update to delete.</p>") otaUpdateId: otaupdateId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "DeleteOTAUpdateCommand"
   let make = (~otaUpdateId, ~forceDeleteAWSJob=?, ~deleteStream=?, ()) =>
     new({
@@ -4093,7 +4377,7 @@ module DeleteMitigationAction = {
     @ocaml.doc("<p>The name of the mitigation action that you want to delete.</p>")
     actionName: mitigationActionName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "DeleteMitigationActionCommand"
   let make = (~actionName, ()) => new({actionName: actionName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -4105,7 +4389,7 @@ module DeleteJobTemplate = {
     @ocaml.doc("<p>The unique identifier of the job template to delete.</p>")
     jobTemplateId: jobTemplateId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "DeleteJobTemplateCommand"
   let make = (~jobTemplateId, ()) => new({jobTemplateId: jobTemplateId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -4115,7 +4399,7 @@ module DeleteJobExecution = {
   type t
   type request = {
     @ocaml.doc("<p>The namespace used to indicate that a job is a customer-managed job.</p>
-        <p>When you specify a value for this parameter, AWS IoT Core sends jobs notifications to MQTT topics that 
+        <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that 
             contain the value in the following format.</p>
         <p>
             <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>
@@ -4143,7 +4427,7 @@ module DeleteJobExecution = {
     @ocaml.doc("<p>The ID of the job whose execution on a particular device will be deleted.</p>")
     jobId: jobId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "DeleteJobExecutionCommand"
   let make = (~executionNumber, ~thingName, ~jobId, ~namespaceId=?, ~force=?, ()) =>
     new({
@@ -4160,7 +4444,7 @@ module DeleteJob = {
   type t
   type request = {
     @ocaml.doc("<p>The namespace used to indicate that a job is a customer-managed job.</p>
-        <p>When you specify a value for this parameter, AWS IoT Core sends jobs notifications to MQTT topics that 
+        <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that 
             contain the value in the following format.</p>
         <p>
             <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>
@@ -4185,10 +4469,24 @@ module DeleteJob = {
         jobId to refer to the deleted job.</p>")
     jobId: jobId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "DeleteJobCommand"
   let make = (~jobId, ~namespaceId=?, ~force=?, ()) =>
     new({namespaceId: namespaceId, force: force, jobId: jobId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module DeleteFleetMetric = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The expected version of the fleet metric to delete.</p>")
+    expectedVersion: option<optionalVersion>,
+    @ocaml.doc("<p>The name of the fleet metric to delete.</p>") metricName: fleetMetricName,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-iot") @new external new: request => t = "DeleteFleetMetricCommand"
+  let make = (~metricName, ~expectedVersion=?, ()) =>
+    new({expectedVersion: expectedVersion, metricName: metricName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -4200,7 +4498,7 @@ module DeleteDynamicThingGroup = {
     @ocaml.doc("<p>The name of the dynamic thing group to delete.</p>")
     thingGroupName: thingGroupName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "DeleteDynamicThingGroupCommand"
   let make = (~thingGroupName, ~expectedVersion=?, ()) =>
     new({expectedVersion: expectedVersion, thingGroupName: thingGroupName})
@@ -4213,7 +4511,7 @@ module DeleteDomainConfiguration = {
     @ocaml.doc("<p>The name of the domain configuration to be deleted.</p>")
     domainConfigurationName: domainConfigurationName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new
   external new: request => t = "DeleteDomainConfigurationCommand"
   let make = (~domainConfigurationName, ()) =>
@@ -4227,7 +4525,7 @@ module DeleteDimension = {
     @ocaml.doc("<p>The unique identifier for the dimension that you want to delete.</p>")
     name: dimensionName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "DeleteDimensionCommand"
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -4241,7 +4539,7 @@ module DeleteCustomMetric = {
     </p>")
     metricName: metricName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "DeleteCustomMetricCommand"
   let make = (~metricName, ()) => new({metricName: metricName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -4258,7 +4556,7 @@ module DeleteCertificate = {
          certificate ID.)</p>")
     certificateId: certificateId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "DeleteCertificateCommand"
   let make = (~certificateId, ~forceDelete=?, ()) =>
     new({forceDelete: forceDelete, certificateId: certificateId})
@@ -4273,7 +4571,7 @@ module DeleteCACertificate = {
          the certificate ID.)</p>")
     certificateId: certificateId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "DeleteCACertificateCommand"
   let make = (~certificateId, ()) => new({certificateId: certificateId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -4289,7 +4587,7 @@ module DeleteBillingGroup = {
     expectedVersion: option<optionalVersion>,
     @ocaml.doc("<p>The name of the billing group.</p>") billingGroupName: billingGroupName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "DeleteBillingGroupCommand"
   let make = (~billingGroupName, ~expectedVersion=?, ()) =>
     new({expectedVersion: expectedVersion, billingGroupName: billingGroupName})
@@ -4301,7 +4599,7 @@ module DeleteAuthorizer = {
   type request = {
     @ocaml.doc("<p>The name of the authorizer to delete.</p>") authorizerName: authorizerName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "DeleteAuthorizerCommand"
   let make = (~authorizerName, ()) => new({authorizerName: authorizerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -4313,7 +4611,7 @@ module DeleteAccountAuditConfiguration = {
     @ocaml.doc("<p>If true, all scheduled audits are deleted.</p>")
     deleteScheduledAudits: option<deleteScheduledAudits>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new
   external new: request => t = "DeleteAccountAuditConfigurationCommand"
   let make = (~deleteScheduledAudits=?, ()) => new({deleteScheduledAudits: deleteScheduledAudits})
@@ -4409,7 +4707,7 @@ module ConfirmTopicRuleDestination = {
     )
     confirmationToken: confirmationToken,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new
   external new: request => t = "ConfirmTopicRuleDestinationCommand"
   let make = (~confirmationToken, ()) => new({confirmationToken: confirmationToken})
@@ -4418,9 +4716,10 @@ module ConfirmTopicRuleDestination = {
 
 module ClearDefaultAuthorizer = {
   type t
-
-  @module("@aws-sdk/client-iot") @new external new: unit => t = "ClearDefaultAuthorizerCommand"
-  let make = () => new()
+  type request = {.}
+  type response = {.}
+  @module("@aws-sdk/client-iot") @new external new: request => t = "ClearDefaultAuthorizerCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -4461,7 +4760,7 @@ module CancelDetectMitigationActionsTask = {
     </p>")
     taskId: mitigationActionsTaskId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new
   external new: request => t = "CancelDetectMitigationActionsTaskCommand"
   let make = (~taskId, ()) => new({taskId: taskId})
@@ -4476,7 +4775,7 @@ module CancelCertificateTransfer = {
          certificate ID.)</p>")
     certificateId: certificateId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new
   external new: request => t = "CancelCertificateTransferCommand"
   let make = (~certificateId, ()) => new({certificateId: certificateId})
@@ -4490,7 +4789,7 @@ module CancelAuditTask = {
               audit that is \"IN_PROGRESS\".</p>")
     taskId: auditTaskId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "CancelAuditTaskCommand"
   let make = (~taskId, ()) => new({taskId: taskId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -4502,7 +4801,7 @@ module CancelAuditMitigationActionsTask = {
     @ocaml.doc("<p>The unique identifier for the task that you want to cancel. </p>")
     taskId: mitigationActionsTaskId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new
   external new: request => t = "CancelAuditMitigationActionsTaskCommand"
   let make = (~taskId, ()) => new({taskId: taskId})
@@ -4518,7 +4817,7 @@ module AttachThingPrincipal = {
     principal: principal,
     @ocaml.doc("<p>The name of the thing.</p>") thingName: thingName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "AttachThingPrincipalCommand"
   let make = (~principal, ~thingName, ()) => new({principal: principal, thingName: thingName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -4534,7 +4833,7 @@ module AttachSecurityProfile = {
     @ocaml.doc("<p>The security profile that is attached.</p>")
     securityProfileName: securityProfileName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "AttachSecurityProfileCommand"
   let make = (~securityProfileTargetArn, ~securityProfileName, ()) =>
     new({
@@ -4553,7 +4852,7 @@ module AttachPrincipalPolicy = {
     principal: principal,
     @ocaml.doc("<p>The policy name.</p>") policyName: policyName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "AttachPrincipalPolicyCommand"
   let make = (~principal, ~policyName, ()) => new({principal: principal, policyName: policyName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -4568,7 +4867,7 @@ module AttachPolicy = {
     target: policyTarget,
     @ocaml.doc("<p>The name of the policy to attach.</p>") policyName: policyName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "AttachPolicyCommand"
   let make = (~target, ~policyName, ()) => new({target: target, policyName: policyName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -4589,7 +4888,7 @@ module AddThingToThingGroup = {
     @ocaml.doc("<p>The name of the group to which you are adding a thing.</p>")
     thingGroupName: option<thingGroupName>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "AddThingToThingGroupCommand"
   let make = (
     ~overrideDynamicGroups=?,
@@ -4617,9 +4916,13 @@ module AddThingToBillingGroup = {
     @ocaml.doc("<p>The name of the thing to be added to the billing group.</p>")
     thingName: option<thingName>,
     @ocaml.doc("<p>The ARN of the billing group.</p>") billingGroupArn: option<billingGroupArn>,
-    @ocaml.doc("<p>The name of the billing group.</p>") billingGroupName: option<billingGroupName>,
+    @ocaml.doc("<p>The name of the billing group.</p>
+		       <note>
+            <p>This call is asynchronous. It might take several seconds for the detachment to propagate.</p>
+         </note>")
+    billingGroupName: option<billingGroupName>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "AddThingToBillingGroupCommand"
   let make = (~thingArn=?, ~thingName=?, ~billingGroupArn=?, ~billingGroupName=?, ()) =>
     new({
@@ -4641,7 +4944,7 @@ module AcceptCertificateTransfer = {
          certificate ID.)</p>")
     certificateId: certificateId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new
   external new: request => t = "AcceptCertificateTransferCommand"
   let make = (~certificateId, ~setAsActive=?, ()) =>
@@ -4664,7 +4967,7 @@ module UpdateThingGroupsForThing = {
     @ocaml.doc("<p>The thing whose group memberships will be updated.</p>")
     thingName: option<thingName>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new
   external new: request => t = "UpdateThingGroupsForThingCommand"
   let make = (
@@ -4754,7 +5057,7 @@ module UpdateProvisioningTemplate = {
     description: option<templateDescription>,
     @ocaml.doc("<p>The name of the fleet provisioning template.</p>") templateName: templateName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new
   external new: request => t = "UpdateProvisioningTemplateCommand"
   let make = (
@@ -4870,7 +5173,7 @@ module UpdateCACertificate = {
     newStatus: option<cacertificateStatus>,
     @ocaml.doc("<p>The CA certificate identifier.</p>") certificateId: certificateId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "UpdateCACertificateCommand"
   let make = (
     ~certificateId,
@@ -4918,6 +5221,10 @@ module UpdateBillingGroup = {
 module UpdateAuthorizer = {
   type t
   type request = {
+    @ocaml.doc("<p>When <code>true</code>, the result from the authorizer’s Lambda function is
+	  cached for the time specified in <code>refreshAfterInSeconds</code>. The cached
+	  result is used while the device reuses the same HTTP connection.</p>")
+    enableCachingForHttp: option<enableCachingForHttp>,
     @ocaml.doc("<p>The status of the update authorizer request.</p>")
     status: option<authorizerStatus>,
     @ocaml.doc("<p>The public keys used to verify the token signature.</p>")
@@ -4935,6 +5242,7 @@ module UpdateAuthorizer = {
   @module("@aws-sdk/client-iot") @new external new: request => t = "UpdateAuthorizerCommand"
   let make = (
     ~authorizerName,
+    ~enableCachingForHttp=?,
     ~status=?,
     ~tokenSigningPublicKeys=?,
     ~tokenKeyName=?,
@@ -4942,6 +5250,7 @@ module UpdateAuthorizer = {
     (),
   ) =>
     new({
+      enableCachingForHttp: enableCachingForHttp,
       status: status,
       tokenSigningPublicKeys: tokenSigningPublicKeys,
       tokenKeyName: tokenKeyName,
@@ -4958,7 +5267,7 @@ module UntagResource = {
     tagKeys: tagKeyList,
     @ocaml.doc("<p>The ARN of the resource.</p>") resourceArn: resourceArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -4987,7 +5296,7 @@ module SetV2LoggingLevel = {
     @ocaml.doc("<p>The log level.</p>") logLevel: logLevel,
     @ocaml.doc("<p>The log target.</p>") logTarget: logTarget,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "SetV2LoggingLevelCommand"
   let make = (~logLevel, ~logTarget, ()) => new({logLevel: logLevel, logTarget: logTarget})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -4999,7 +5308,7 @@ module SetLoggingOptions = {
   type request = {
     @ocaml.doc("<p>The logging options payload.</p>") loggingOptionsPayload: loggingOptionsPayload,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "SetLoggingOptionsCommand"
   let make = (~loggingOptionsPayload, ()) => new({loggingOptionsPayload: loggingOptionsPayload})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -5334,7 +5643,7 @@ module GetStatistics = {
     queryVersion: option<queryVersion>,
     @ocaml.doc("<p>The aggregation field name.</p>") aggregationField: option<aggregationField>,
     @ocaml.doc("<p>The query used to search. You can specify \"*\" for the query string to get the count of all
-      indexed things in your AWS account.</p>")
+      indexed things in your Amazon Web Services account.</p>")
     queryString: queryString,
     @ocaml.doc(
       "<p>The name of the index to search. The default value is <code>AWS_Things</code>.</p>"
@@ -5380,7 +5689,7 @@ module DescribeThing = {
     @ocaml.doc("<p>The default MQTT client ID. For a typical device, the thing name is also used as the default MQTT client ID.  
 			Although we don’t require a mapping between a thing's registry name and its use of MQTT client IDs, certificates, or 
 			shadow state, we recommend that you choose a thing name and use it as the MQTT client ID for the registry and the Device Shadow service.</p>
-		       <p>This lets you better organize your AWS IoT fleet without removing the flexibility of the underlying device certificate model or shadows.</p>")
+		       <p>This lets you better organize your IoT fleet without removing the flexibility of the underlying device certificate model or shadows.</p>")
     defaultClientId: option<clientId>,
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "DescribeThingCommand"
@@ -5537,7 +5846,8 @@ module CreateProvisioningClaim = {
 
 module CreateKeysAndCertificate = {
   type t
-  @ocaml.doc("<p>The input for the CreateKeysAndCertificate operation.</p>")
+  @ocaml.doc("<p>The input for the CreateKeysAndCertificate operation.</p>
+         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CreateKeysAndCertificateRequest</a> action.</p>")
   type request = {
     @ocaml.doc("<p>Specifies whether the certificate is active.</p>")
     setAsActive: option<setAsActive>,
@@ -5547,8 +5857,8 @@ module CreateKeysAndCertificate = {
     @ocaml.doc("<p>The generated key pair.</p>") keyPair: option<keyPair>,
     @ocaml.doc("<p>The certificate data, in PEM format.</p>")
     certificatePem: option<certificatePem>,
-    @ocaml.doc("<p>The ID of the certificate. AWS IoT issues a default subject name for the certificate
-         (for example, AWS IoT Certificate).</p>")
+    @ocaml.doc("<p>The ID of the certificate. IoT issues a default subject name for the certificate
+         (for example, IoT Certificate).</p>")
     certificateId: option<certificateId>,
     @ocaml.doc("<p>The ARN of the certificate.</p>") certificateArn: option<certificateArn>,
   }
@@ -5583,7 +5893,7 @@ module CancelJobExecution = {
     thingName: thingName,
     @ocaml.doc("<p>The ID of the job to be canceled.</p>") jobId: jobId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "CancelJobExecutionCommand"
   let make = (~thingName, ~jobId, ~statusDetails=?, ~expectedVersion=?, ~force=?, ()) =>
     new({
@@ -5600,7 +5910,7 @@ module AssociateTargetsWithJob = {
   type t
   type request = {
     @ocaml.doc("<p>The namespace used to indicate that a job is a customer-managed job.</p>
-        <p>When you specify a value for this parameter, AWS IoT Core sends jobs notifications to MQTT topics that 
+        <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that 
             contain the value in the following format.</p>
         <p>
             <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>
@@ -5655,7 +5965,7 @@ module UpdateThing = {
 			new thing, give it the new name, and then delete the old thing.</p>")
     thingName: thingName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "UpdateThingCommand"
   let make = (
     ~thingName,
@@ -5675,13 +5985,66 @@ module UpdateThing = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
+module UpdateFleetMetric = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The expected version of the fleet metric record in the registry.</p>")
+    expectedVersion: option<optionalVersion>,
+    @ocaml.doc("<p>Used to support unit transformation such as milliseconds to seconds. The unit must be
+      supported by <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html\">CW metric</a>.</p>")
+    @as("unit")
+    unit_: option<fleetMetricUnit>,
+    @ocaml.doc("<p>The name of the index to search.</p>") indexName: indexName,
+    @ocaml.doc("<p>The version of the query.</p>") queryVersion: option<queryVersion>,
+    @ocaml.doc("<p>The description of the fleet metric.</p>")
+    description: option<fleetMetricDescription>,
+    @ocaml.doc("<p>The field to aggregate.</p>") aggregationField: option<aggregationField>,
+    @ocaml.doc(
+      "<p>The time in seconds between fleet metric emissions. Range [60(1 min), 86400(1 day)] and must be multiple of 60.</p>"
+    )
+    period: option<fleetMetricPeriod>,
+    @ocaml.doc("<p>The type of the aggregation query.</p>")
+    aggregationType: option<aggregationType>,
+    @ocaml.doc("<p>The search query string.</p>") queryString: option<queryString>,
+    @ocaml.doc("<p>The name of the fleet metric to update.</p>") metricName: fleetMetricName,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-iot") @new external new: request => t = "UpdateFleetMetricCommand"
+  let make = (
+    ~indexName,
+    ~metricName,
+    ~expectedVersion=?,
+    ~unit_=?,
+    ~queryVersion=?,
+    ~description=?,
+    ~aggregationField=?,
+    ~period=?,
+    ~aggregationType=?,
+    ~queryString=?,
+    (),
+  ) =>
+    new({
+      expectedVersion: expectedVersion,
+      unit_: unit_,
+      indexName: indexName,
+      queryVersion: queryVersion,
+      description: description,
+      aggregationField: aggregationField,
+      period: period,
+      aggregationType: aggregationType,
+      queryString: queryString,
+      metricName: metricName,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
 module UpdateEventConfigurations = {
   type t
   type request = {
     @ocaml.doc("<p>The new event configuration values.</p>")
     eventConfigurations: option<eventConfigurations>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new
   external new: request => t = "UpdateEventConfigurationsCommand"
   let make = (~eventConfigurations=?, ()) => new({eventConfigurations: eventConfigurations})
@@ -5706,7 +6069,7 @@ module UpdateAuditSuppression = {
     resourceIdentifier: resourceIdentifier,
     checkName: auditCheckName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "UpdateAuditSuppressionCommand"
   let make = (
     ~resourceIdentifier,
@@ -5750,12 +6113,12 @@ module UpdateAccountAuditConfiguration = {
       (ARN)
       of the role that grants permission
       to
-      AWS IoT to access information about your devices, policies,
+      IoT to access information about your devices, policies,
       certificates,
       and other items as required when performing an audit.</p>")
     roleArn: option<roleArn>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new
   external new: request => t = "UpdateAccountAuditConfigurationCommand"
   let make = (
@@ -5824,7 +6187,7 @@ module TagResource = {
     @ocaml.doc("<p>The new or modified tags for the resource.</p>") tags: tagList_,
     @ocaml.doc("<p>The ARN of the resource.</p>") resourceArn: resourceArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -5834,7 +6197,7 @@ module StartDetectMitigationActionsTask = {
   type t
   type request = {
     @ocaml.doc("<p>
-      Each mitigation action task must have a unique client request token. If you try to create a new task with the same token as a task that already exists, an exception occurs. If you omit this value, AWS SDKs will automatically generate a unique client request.
+      Each mitigation action task must have a unique client request token. If you try to create a new task with the same token as a task that already exists, an exception occurs. If you omit this value, Amazon Web Services SDKs will automatically generate a unique client request.
     </p>")
     clientRequestToken: clientRequestToken,
     @ocaml.doc("<p>
@@ -5910,7 +6273,9 @@ module RegisterCACertificate = {
     @ocaml.doc("<p>Allows this CA certificate to be used for auto registration of device
          certificates.</p>")
     allowAutoRegistration: option<allowAutoRegistration>,
-    @ocaml.doc("<p>A boolean value that specifies if the CA certificate is set to active.</p>")
+    @ocaml.doc("<p>A boolean value that specifies if the CA certificate is set to active.</p>
+         <p>Valid values: <code>ACTIVE | INACTIVE</code>
+         </p>")
     setAsActive: option<setAsActive>,
     @ocaml.doc("<p>The private key verification certificate.</p>")
     verificationCertificate: certificatePem,
@@ -6311,7 +6676,7 @@ module ListJobs = {
   type t
   type request = {
     @ocaml.doc("<p>The namespace used to indicate that a job is a customer-managed job.</p>
-        <p>When you specify a value for this parameter, AWS IoT Core sends jobs notifications to MQTT topics that 
+        <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that 
             contain the value in the following format.</p>
         <p>
             <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>
@@ -6385,6 +6750,28 @@ module ListJobTemplates = {
   @module("@aws-sdk/client-iot") @new external new: request => t = "ListJobTemplatesCommand"
   let make = (~nextToken=?, ~maxResults=?, ()) =>
     new({nextToken: nextToken, maxResults: maxResults})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module ListFleetMetrics = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The maximum number of results to return in this operation.</p>")
+    maxResults: option<maxResults>,
+    @ocaml.doc("<p>To retrieve the next set of results, the <code>nextToken</code> value from a previous response; 
+       otherwise <code>null</code> to receive the first set of results.</p>")
+    nextToken: option<nextToken>,
+  }
+  type response = {
+    @ocaml.doc("<p>The token for the next set of results. Will not be returned if the operation has returned
+      all results.</p>")
+    nextToken: option<nextToken>,
+    @ocaml.doc("<p>The list of fleet metrics objects.</p>")
+    fleetMetrics: option<fleetMetricNameAndArnList>,
+  }
+  @module("@aws-sdk/client-iot") @new external new: request => t = "ListFleetMetricsCommand"
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -6544,7 +6931,7 @@ module ListCACertificates = {
   type response = {
     @ocaml.doc("<p>The current position within the list of CA certificates.</p>")
     nextMarker: option<marker>,
-    @ocaml.doc("<p>The CA certificates registered in your AWS account.</p>")
+    @ocaml.doc("<p>The CA certificates registered in your Amazon Web Services account.</p>")
     certificates: option<cacertificates>,
   }
   @module("@aws-sdk/client-iot") @new external new: request => t = "ListCACertificatesCommand"
@@ -6760,7 +7147,7 @@ module GetPercentiles = {
     @ocaml.doc("<p>The percentile groups returned.</p>") percents: option<percentList>,
     @ocaml.doc("<p>The query version.</p>") queryVersion: option<queryVersion>,
     @ocaml.doc("<p>The field to aggregate.</p>") aggregationField: option<aggregationField>,
-    @ocaml.doc("<p>The query string.</p>") queryString: queryString,
+    @ocaml.doc("<p>The search query string.</p>") queryString: queryString,
     @ocaml.doc("<p>The name of the index to search.</p>") indexName: option<indexName>,
   }
   type response = {
@@ -6796,6 +7183,47 @@ module GetEffectivePolicies = {
   @module("@aws-sdk/client-iot") @new external new: request => t = "GetEffectivePoliciesCommand"
   let make = (~thingName=?, ~cognitoIdentityPoolId=?, ~principal=?, ()) =>
     new({thingName: thingName, cognitoIdentityPoolId: cognitoIdentityPoolId, principal: principal})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module GetBucketsAggregation = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>The basic control of the response shape and the bucket aggregation type to perform. </p>"
+    )
+    bucketsAggregationType: bucketsAggregationType,
+    @ocaml.doc("<p>The version of the query.</p>") queryVersion: option<queryVersion>,
+    @ocaml.doc("<p>The aggregation field.</p>") aggregationField: aggregationField,
+    @ocaml.doc("<p>The search query string.</p>") queryString: queryString,
+    @ocaml.doc("<p>The name of the index to search.</p>") indexName: option<indexName>,
+  }
+  type response = {
+    @ocaml.doc("<p>The main part of the response with a list of buckets. Each bucket contains a <code>keyValue</code> and a <code>count</code>.</p>
+         <p>
+            <code>keyValue</code>: The aggregation field value counted for the particular bucket.</p>
+         <p>
+            <code>count</code>: The number of documents that have that value.</p>")
+    buckets: option<buckets>,
+    @ocaml.doc("<p>The total number of things that fit the query string criteria.</p>")
+    totalCount: option<count>,
+  }
+  @module("@aws-sdk/client-iot") @new external new: request => t = "GetBucketsAggregationCommand"
+  let make = (
+    ~bucketsAggregationType,
+    ~aggregationField,
+    ~queryString,
+    ~queryVersion=?,
+    ~indexName=?,
+    (),
+  ) =>
+    new({
+      bucketsAggregationType: bucketsAggregationType,
+      queryVersion: queryVersion,
+      aggregationField: aggregationField,
+      queryString: queryString,
+      indexName: indexName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -6854,9 +7282,77 @@ module DescribeThingType = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module DescribeManagedJobTemplate = {
+  type t
+  type request = {
+    @ocaml.doc("<p>An optional parameter to specify version of a managed template. If not specified, the 
+            pre-defined default version is returned.</p>")
+    templateVersion: option<managedTemplateVersion>,
+    @ocaml.doc("<p>The unique name of a managed job template, which is required.</p>")
+    templateName: managedJobTemplateName,
+  }
+  type response = {
+    @ocaml.doc("<p>The document schema for a managed job template.</p>")
+    document: option<jobDocument>,
+    @ocaml.doc("<p>A map of key-value pairs that you can use as guidance to specify the inputs for creating 
+            a job from a managed template.</p>")
+    documentParameters: option<documentParameters>,
+    @ocaml.doc("<p>A list of environments that are supported with the managed job template.</p>")
+    environments: option<environments>,
+    @ocaml.doc("<p>The version for a managed template.</p>")
+    templateVersion: option<managedTemplateVersion>,
+    @ocaml.doc("<p>The unique description of a managed template.</p>")
+    description: option<jobDescription>,
+    @ocaml.doc("<p>The unique Amazon Resource Name (ARN) of the managed template.</p>")
+    templateArn: option<jobTemplateArn>,
+    @ocaml.doc("<p>The unique name of a managed template, such as <code>AWS-Reboot</code>.</p>")
+    templateName: option<managedJobTemplateName>,
+  }
+  @module("@aws-sdk/client-iot") @new
+  external new: request => t = "DescribeManagedJobTemplateCommand"
+  let make = (~templateName, ~templateVersion=?, ()) =>
+    new({templateVersion: templateVersion, templateName: templateName})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module DescribeFleetMetric = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The name of the fleet metric to describe.</p>") metricName: fleetMetricName,
+  }
+  type response = {
+    @ocaml.doc("<p>The ARN of the fleet metric to describe.</p>") metricArn: option<fleetMetricArn>,
+    @ocaml.doc("<p>The version of the fleet metric.</p>") version: option<version>,
+    @ocaml.doc("<p>Used to support unit transformation such as milliseconds to seconds. The unit must be
+      supported by <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html\">CW metric</a>.</p>")
+    @as("unit")
+    unit_: option<fleetMetricUnit>,
+    @ocaml.doc("<p>The date when the fleet metric is last modified.</p>")
+    lastModifiedDate: option<lastModifiedDate>,
+    @ocaml.doc("<p>The date when the fleet metric is created.</p>")
+    creationDate: option<creationDate>,
+    @ocaml.doc("<p>The name of the index to search.</p>") indexName: option<indexName>,
+    @ocaml.doc("<p>The query version.</p>") queryVersion: option<queryVersion>,
+    @ocaml.doc("<p>The fleet metric description.</p>") description: option<fleetMetricDescription>,
+    @ocaml.doc("<p>The field to aggregate.</p>") aggregationField: option<aggregationField>,
+    @ocaml.doc(
+      "<p>The time in seconds between fleet metric emissions. Range [60(1 min), 86400(1 day)] and must be multiple of 60.</p>"
+    )
+    period: option<fleetMetricPeriod>,
+    @ocaml.doc("<p>The type of the aggregation query.</p>")
+    aggregationType: option<aggregationType>,
+    @ocaml.doc("<p>The search query string.</p>") queryString: option<queryString>,
+    @ocaml.doc("<p>The name of the fleet metric to describe.</p>")
+    metricName: option<fleetMetricName>,
+  }
+  @module("@aws-sdk/client-iot") @new external new: request => t = "DescribeFleetMetricCommand"
+  let make = (~metricName, ()) => new({metricName: metricName})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module DescribeEventConfigurations = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("<p>The date the event configurations were last modified.</p>")
     lastModifiedDate: option<lastModifiedDate>,
@@ -6864,8 +7360,9 @@ module DescribeEventConfigurations = {
     creationDate: option<creationDate>,
     @ocaml.doc("<p>The event configurations.</p>") eventConfigurations: option<eventConfigurations>,
   }
-  @module("@aws-sdk/client-iot") @new external new: unit => t = "DescribeEventConfigurationsCommand"
-  let make = () => new()
+  @module("@aws-sdk/client-iot") @new
+  external new: request => t = "DescribeEventConfigurationsCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -6906,13 +7403,14 @@ module DescribeDomainConfiguration = {
 
 module DescribeDefaultAuthorizer = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("<p>The default authorizer's description.</p>")
     authorizerDescription: option<authorizerDescription>,
   }
-  @module("@aws-sdk/client-iot") @new external new: unit => t = "DescribeDefaultAuthorizerCommand"
-  let make = () => new()
+  @module("@aws-sdk/client-iot") @new
+  external new: request => t = "DescribeDefaultAuthorizerCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -7018,14 +7516,14 @@ module DescribeAuditSuppression = {
 
 module DescribeAccountAuditConfiguration = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("<p>Which audit checks are enabled and disabled for this account.</p>")
     auditCheckConfigurations: option<auditCheckConfigurations>,
     @ocaml.doc("<p>Information about the targets to which audit notifications are sent for 
             this account.</p>")
     auditNotificationTargetConfigurations: option<auditNotificationTargetConfigurations>,
-    @ocaml.doc("<p>The ARN of the role that grants permission to AWS IoT to access information
+    @ocaml.doc("<p>The ARN of the role that grants permission to IoT to access information
             about your devices, policies, certificates, and other items as required when 
             performing an audit.</p>
           <p>On the first call to <code>UpdateAccountAuditConfiguration</code>,
@@ -7033,8 +7531,8 @@ module DescribeAccountAuditConfiguration = {
     roleArn: option<roleArn>,
   }
   @module("@aws-sdk/client-iot") @new
-  external new: unit => t = "DescribeAccountAuditConfigurationCommand"
-  let make = () => new()
+  external new: request => t = "DescribeAccountAuditConfigurationCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -7044,7 +7542,7 @@ module DeleteAuditSuppression = {
     resourceIdentifier: resourceIdentifier,
     checkName: auditCheckName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "DeleteAuditSuppressionCommand"
   let make = (~resourceIdentifier, ~checkName, ()) =>
     new({resourceIdentifier: resourceIdentifier, checkName: checkName})
@@ -7184,7 +7682,9 @@ module CreateRoleAlias = {
             \"key1=value1&key2=value2...\"</p>
          </note>")
     tags: option<tagList_>,
-    @ocaml.doc("<p>How long (in seconds) the credentials will be valid.</p>")
+    @ocaml.doc("<p>How long (in seconds) the credentials will be valid. The default value is 3,600 seconds.</p>
+         <p>This value must be less than or equal to the maximum session duration of the IAM role
+      that the role alias references.</p>")
     credentialDurationSeconds: option<credentialDurationSeconds>,
     @ocaml.doc("<p>The role ARN.</p>") roleArn: roleArn,
     @ocaml.doc("<p>The role alias that points to a role ARN. This allows you to change the role without
@@ -7295,6 +7795,62 @@ module CreatePolicy = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module CreateFleetMetric = {
+  type t
+  type request = {
+    @ocaml.doc("<p>Metadata, which can be used to manage the fleet metric.</p>")
+    tags: option<tagList_>,
+    @ocaml.doc("<p>Used to support unit transformation such as milliseconds to seconds. The unit must be
+      supported by <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html\">CW metric</a>. Default to null.</p>")
+    @as("unit")
+    unit_: option<fleetMetricUnit>,
+    @ocaml.doc("<p>The name of the index to search.</p>") indexName: option<indexName>,
+    @ocaml.doc("<p>The query version.</p>") queryVersion: option<queryVersion>,
+    @ocaml.doc("<p>The fleet metric description.</p>") description: option<fleetMetricDescription>,
+    @ocaml.doc("<p>The field to aggregate.</p>") aggregationField: aggregationField,
+    @ocaml.doc(
+      "<p>The time in seconds between fleet metric emissions. Range [60(1 min), 86400(1 day)] and must be multiple of 60.</p>"
+    )
+    period: fleetMetricPeriod,
+    @ocaml.doc("<p>The type of the aggregation query.</p>") aggregationType: aggregationType,
+    @ocaml.doc("<p>The search query string.</p>") queryString: queryString,
+    @ocaml.doc("<p>The name of the fleet metric to create.</p>") metricName: fleetMetricName,
+  }
+  type response = {
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the new fleet metric.</p>")
+    metricArn: option<fleetMetricArn>,
+    @ocaml.doc("<p>The name of the fleet metric to create.</p>")
+    metricName: option<fleetMetricName>,
+  }
+  @module("@aws-sdk/client-iot") @new external new: request => t = "CreateFleetMetricCommand"
+  let make = (
+    ~aggregationField,
+    ~period,
+    ~aggregationType,
+    ~queryString,
+    ~metricName,
+    ~tags=?,
+    ~unit_=?,
+    ~indexName=?,
+    ~queryVersion=?,
+    ~description=?,
+    (),
+  ) =>
+    new({
+      tags: tags,
+      unit_: unit_,
+      indexName: indexName,
+      queryVersion: queryVersion,
+      description: description,
+      aggregationField: aggregationField,
+      period: period,
+      aggregationType: aggregationType,
+      queryString: queryString,
+      metricName: metricName,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module CreateDomainConfiguration = {
   type t
   type request = {
@@ -7309,16 +7865,16 @@ module CreateDomainConfiguration = {
     tags: option<tagList_>,
     @ocaml.doc("<p>The type of service delivered by the endpoint.</p>
          <note>
-            <p>AWS IoT Core currently supports only the <code>DATA</code> service type.</p>
+            <p>Amazon Web Services IoT Core currently supports only the <code>DATA</code> service type.</p>
          </note>")
     serviceType: option<serviceType>,
     @ocaml.doc("<p>An object that specifies the authorization service for a domain.</p>")
     authorizerConfig: option<authorizerConfig>,
     @ocaml.doc("<p>The certificate used to validate the server certificate and prove domain name ownership. This certificate must be signed by a public certificate authority. 
-         This value is not required for AWS-managed domains.</p>")
+         This value is not required for Amazon Web Services-managed domains.</p>")
     validationCertificateArn: option<acmCertificateArn>,
-    @ocaml.doc("<p>The ARNs of the certificates that AWS IoT passes to the device during the TLS handshake. Currently you can specify only one certificate ARN. 
-      This value is not required for AWS-managed domains.</p>")
+    @ocaml.doc("<p>The ARNs of the certificates that IoT passes to the device during the TLS handshake. Currently you can specify only one certificate ARN. 
+      This value is not required for Amazon Web Services-managed domains.</p>")
     serverCertificateArns: option<serverCertificateArns>,
     @ocaml.doc("<p>The name of the domain.</p>") domainName: option<domainName>,
     @ocaml.doc(
@@ -7359,9 +7915,8 @@ module CreateDomainConfiguration = {
 module CreateDimension = {
   type t
   type request = {
-    @ocaml.doc(
-      "<p>Each dimension must have a unique client request token. If you try to create a new dimension with the same token as a dimension that already exists, an exception occurs. If you omit this value, AWS SDKs will automatically generate a unique client request.</p>"
-    )
+    @ocaml.doc("<p>Each dimension must have a unique client request token. If you try to create a new dimension with the same token as a dimension that already exists, an exception occurs. 
+      If you omit this value, Amazon Web Services SDKs will automatically generate a unique client request.</p>")
     clientRequestToken: clientRequestToken,
     @ocaml.doc("<p>Metadata that can be used to manage the dimension.</p>") tags: option<tagList_>,
     @ocaml.doc(
@@ -7404,31 +7959,31 @@ module CreateCustomMetric = {
       metric must have a unique client request token. If you try to create a new custom metric that
       already exists with a different token,
       an exception
-      occurs. If you omit this value, AWS SDKs will automatically generate a unique client request. </p>")
+      occurs. If you omit this value, Amazon Web Services SDKs will automatically generate a unique client request. </p>")
     clientRequestToken: clientRequestToken,
     @ocaml.doc("<p>
       Metadata that can be used to manage the custom metric.
     </p>")
     tags: option<tagList_>,
-    @ocaml.doc("<p>
-      The type of the custom metric. Types include <code>string-list</code>, <code>ip-address-list</code>, <code>number-list</code>, and <code>number</code>.
-    </p>")
+    @ocaml.doc("<p> The type of the custom metric. </p>
+         <important>
+            <p>The type <code>number</code> only takes a single metric value as an input, but when you
+        submit the metrics value in the DeviceMetrics report, you must pass it as an array with a
+        single value.</p>
+         </important>")
     metricType: customMetricType,
-    @ocaml.doc("<p>
-      Field
-      represents a friendly name in the console for the custom metric;
-      it
-      doesn't have to be unique. Don't use this name as the metric identifier in
-      the device metric report. Can be updated once defined.</p>")
+    @ocaml.doc("<p> The friendly name in the console for the custom metric. This name doesn't have to be
+      unique. Don't use this name as the metric identifier in the device metric report. You can
+      update the friendly name after you define it.</p>")
     displayName: option<customMetricDisplayName>,
-    @ocaml.doc("<p> The name of the custom metric. This will be used in the metric report submitted from the device/thing. Shouldn't begin with <code>aws:</code>.
-      Cannot be updated
-      once defined.</p>")
+    @ocaml.doc("<p> The name of the custom metric. This will be used in the metric report submitted from the
+      device/thing. The name can't begin with <code>aws:</code>. You can't change the name after you
+      define it.</p>")
     metricName: metricName,
   }
   type response = {
-    @ocaml.doc("<p>
-      The Amazon Resource Number (ARN) of the custom metric, e.g. <code>arn:<i>aws-partition</i>:iot:<i>region</i>:<i>accountId</i>:custommetric/<i>metricName</i>
+    @ocaml.doc("<p> The Amazon Resource Number (ARN) of the custom metric. For example,
+          <code>arn:<i>aws-partition</i>:iot:<i>region</i>:<i>accountId</i>:custommetric/<i>metricName</i>
             </code>
          </p>")
     metricArn: option<customMetricArn>,
@@ -7478,8 +8033,14 @@ module CreateBillingGroup = {
 module CreateAuthorizer = {
   type t
   type request = {
+    @ocaml.doc("<p>When <code>true</code>, the result from the authorizer’s Lambda function is
+	  cached for clients that use persistent HTTP connections. The results are cached for the time
+	  specified by the Lambda function in <code>refreshAfterInSeconds</code>. This value
+     does not affect authorization of clients that use MQTT connections.</p>
+         <p>The default value is <code>false</code>.</p>")
+    enableCachingForHttp: option<enableCachingForHttp>,
     @ocaml.doc(
-      "<p>Specifies whether AWS IoT validates the token signature in an authorization request.</p>"
+      "<p>Specifies whether IoT validates the token signature in an authorization request.</p>"
     )
     signingDisabled: option<booleanKey>,
     @ocaml.doc("<p>Metadata which can be used to manage the custom authorizer.</p>
@@ -7510,6 +8071,7 @@ module CreateAuthorizer = {
   let make = (
     ~authorizerFunctionArn,
     ~authorizerName,
+    ~enableCachingForHttp=?,
     ~signingDisabled=?,
     ~tags=?,
     ~status=?,
@@ -7518,6 +8080,7 @@ module CreateAuthorizer = {
     (),
   ) =>
     new({
+      enableCachingForHttp: enableCachingForHttp,
       signingDisabled: signingDisabled,
       tags: tags,
       status: status,
@@ -7533,8 +8096,9 @@ module CreateAuditSuppression = {
   type t
   type request = {
     @ocaml.doc("<p>
-      The epoch timestamp in seconds at which this suppression expires.
-    </p>")
+      Each audit supression must have a unique client request token. If you try to create a new audit
+      suppression with the same token as one that already exists, an exception occurs. If you omit this
+      value, Amazon Web Services SDKs will automatically generate a unique client request.</p>")
     clientRequestToken: clientRequestToken,
     @ocaml.doc("<p>
       The description of the audit suppression.
@@ -7551,7 +8115,7 @@ module CreateAuditSuppression = {
     resourceIdentifier: resourceIdentifier,
     checkName: auditCheckName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "CreateAuditSuppressionCommand"
   let make = (
     ~clientRequestToken,
@@ -7646,8 +8210,10 @@ module UpdateMitigationAction = {
 module UpdateJob = {
   type t
   type request = {
+    @ocaml.doc("<p>Allows you to create the criteria to retry a job.</p>")
+    jobExecutionsRetryConfig: option<jobExecutionsRetryConfig>,
     @ocaml.doc("<p>The namespace used to indicate that a job is a customer-managed job.</p>
-        <p>When you specify a value for this parameter, AWS IoT Core sends jobs notifications to MQTT topics that 
+        <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that 
             contain the value in the following format.</p>
         <p>
             <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>
@@ -7668,10 +8234,11 @@ module UpdateJob = {
     @ocaml.doc("<p>A short text description of the job.</p>") description: option<jobDescription>,
     @ocaml.doc("<p>The ID of the job to be updated.</p>") jobId: jobId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "UpdateJobCommand"
   let make = (
     ~jobId,
+    ~jobExecutionsRetryConfig=?,
     ~namespaceId=?,
     ~timeoutConfig=?,
     ~abortConfig=?,
@@ -7681,6 +8248,7 @@ module UpdateJob = {
     (),
   ) =>
     new({
+      jobExecutionsRetryConfig: jobExecutionsRetryConfig,
       namespaceId: namespaceId,
       timeoutConfig: timeoutConfig,
       abortConfig: abortConfig,
@@ -7700,7 +8268,7 @@ module UpdateIndexingConfiguration = {
     @ocaml.doc("<p>Thing indexing configuration.</p>")
     thingIndexingConfiguration: option<thingIndexingConfiguration>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new
   external new: request => t = "UpdateIndexingConfigurationCommand"
   let make = (~thingGroupIndexingConfiguration=?, ~thingIndexingConfiguration=?, ()) =>
@@ -7724,7 +8292,7 @@ module UpdateDynamicThingGroup = {
     queryString: option<queryString>,
     @ocaml.doc("<p>The dynamic thing group index to update.</p>
 		       <note>
-			         <p>Currently one index is supported: 'AWS_Things'.</p>
+			         <p>Currently one index is supported: <code>AWS_Things</code>.</p>
 		       </note>")
     indexName: option<indexName>,
     @ocaml.doc("<p>The expected version of the dynamic thing group to update.</p>")
@@ -7764,7 +8332,7 @@ module StartAuditMitigationActionsTask = {
     )
     clientRequestToken: clientRequestToken,
     @ocaml.doc(
-      "<p>For an audit check, specifies which mitigation actions to apply. Those actions must be defined in your AWS account.</p>"
+      "<p>For an audit check, specifies which mitigation actions to apply. Those actions must be defined in your Amazon Web Services accounts.</p>"
     )
     auditCheckToActionsMapping: auditCheckToActionsMapping,
     @ocaml.doc("<p>Specifies the audit findings to which the mitigation actions are applied. You can apply
@@ -7937,15 +8505,40 @@ module ListSecurityProfilesForTarget = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module ListManagedJobTemplates = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The token to retrieve the next set of results.</p>")
+    nextToken: option<nextToken>,
+    @ocaml.doc("<p>Maximum number of entries that can be returned.</p>")
+    maxResults: option<laserMaxResults>,
+    @ocaml.doc("<p>An optional parameter for template name. If specified, only the versions of the
+            managed job templates that have the specified template name will be returned.</p>")
+    templateName: option<managedJobTemplateName>,
+  }
+  type response = {
+    @ocaml.doc("<p>The token to retrieve the next set of results.</p>")
+    nextToken: option<nextToken>,
+    @ocaml.doc("<p>A list of managed job templates that are returned.</p>")
+    managedJobTemplates: option<managedJobTemplatesSummaryList>,
+  }
+  @module("@aws-sdk/client-iot") @new external new: request => t = "ListManagedJobTemplatesCommand"
+  let make = (~nextToken=?, ~maxResults=?, ~templateName=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults, templateName: templateName})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module ListJobExecutionsForThing = {
   type t
   type request = {
+    @ocaml.doc("<p>The unique identifier you assigned to this job when it was created.</p>")
+    jobId: option<jobId>,
     @ocaml.doc("<p>The token to retrieve the next set of results.</p>")
     nextToken: option<nextToken>,
     @ocaml.doc("<p>The maximum number of results to be returned per request.</p>")
     maxResults: option<laserMaxResults>,
     @ocaml.doc("<p>The namespace used to indicate that a job is a customer-managed job.</p>
-        <p>When you specify a value for this parameter, AWS IoT Core sends jobs notifications to MQTT topics that 
+        <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that 
             contain the value in the following format.</p>
         <p>
             <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>
@@ -7969,8 +8562,9 @@ module ListJobExecutionsForThing = {
   }
   @module("@aws-sdk/client-iot") @new
   external new: request => t = "ListJobExecutionsForThingCommand"
-  let make = (~thingName, ~nextToken=?, ~maxResults=?, ~namespaceId=?, ~status=?, ()) =>
+  let make = (~thingName, ~jobId=?, ~nextToken=?, ~maxResults=?, ~namespaceId=?, ~status=?, ()) =>
     new({
+      jobId: jobId,
       nextToken: nextToken,
       maxResults: maxResults,
       namespaceId: namespaceId,
@@ -8018,15 +8612,15 @@ module GetTopicRuleDestination = {
 
 module GetIndexingConfiguration = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("<p>The index configuration.</p>")
     thingGroupIndexingConfiguration: option<thingGroupIndexingConfiguration>,
     @ocaml.doc("<p>Thing indexing configuration.</p>")
     thingIndexingConfiguration: option<thingIndexingConfiguration>,
   }
-  @module("@aws-sdk/client-iot") @new external new: unit => t = "GetIndexingConfigurationCommand"
-  let make = () => new()
+  @module("@aws-sdk/client-iot") @new external new: request => t = "GetIndexingConfigurationCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -8061,7 +8655,9 @@ module DescribeMitigationAction = {
   type response = {
     @ocaml.doc("<p>The date and time when the mitigation action was last changed.</p>")
     lastModifiedDate: option<timestamp_>,
-    @ocaml.doc("<p>The date and time when the mitigation action was added to your AWS account.</p>")
+    @ocaml.doc(
+      "<p>The date and time when the mitigation action was added to your Amazon Web Services accounts.</p>"
+    )
     creationDate: option<timestamp_>,
     @ocaml.doc(
       "<p>Parameters that control how the mitigation action is applied, specific to the type of mitigation action.</p>"
@@ -8087,6 +8683,9 @@ module DescribeJobTemplate = {
     @ocaml.doc("<p>The unique identifier of the job template.</p>") jobTemplateId: jobTemplateId,
   }
   type response = {
+    @ocaml.doc("<p>The configuration that determines how many retries are allowed for each failure type
+            for a job.</p>")
+    jobExecutionsRetryConfig: option<jobExecutionsRetryConfig>,
     timeoutConfig: option<timeoutConfig>,
     abortConfig: option<abortConfig>,
     jobExecutionsRolloutConfig: option<jobExecutionsRolloutConfig>,
@@ -8173,9 +8772,7 @@ module CreateStream = {
   type t
   type request = {
     @ocaml.doc("<p>Metadata which can be used to manage streams.</p>") tags: option<tagList_>,
-    @ocaml.doc(
-      "<p>An IAM role that allows the IoT service principal assumes to access your S3 files.</p>"
-    )
+    @ocaml.doc("<p>An IAM role that allows the IoT service principal to access your S3 files.</p>")
     roleArn: roleArn,
     @ocaml.doc("<p>The files to stream.</p>") files: streamFiles,
     @ocaml.doc("<p>A description of the stream.</p>") description: option<streamDescription>,
@@ -8222,6 +8819,8 @@ module CreateMitigationAction = {
 module CreateJobTemplate = {
   type t
   type request = {
+    @ocaml.doc("<p>Allows you to create the criteria to retry a job.</p>")
+    jobExecutionsRetryConfig: option<jobExecutionsRetryConfig>,
     @ocaml.doc("<p>Metadata that can be used to manage the job template.</p>")
     tags: option<tagList_>,
     timeoutConfig: option<timeoutConfig>,
@@ -8258,6 +8857,7 @@ module CreateJobTemplate = {
   let make = (
     ~description,
     ~jobTemplateId,
+    ~jobExecutionsRetryConfig=?,
     ~tags=?,
     ~timeoutConfig=?,
     ~abortConfig=?,
@@ -8269,6 +8869,7 @@ module CreateJobTemplate = {
     (),
   ) =>
     new({
+      jobExecutionsRetryConfig: jobExecutionsRetryConfig,
       tags: tags,
       timeoutConfig: timeoutConfig,
       abortConfig: abortConfig,
@@ -8286,10 +8887,16 @@ module CreateJobTemplate = {
 module CreateJob = {
   type t
   type request = {
+    @ocaml.doc(
+      "<p>Parameters of a managed template that you can specify to create the job document.</p>"
+    )
+    documentParameters: option<parameterMap>,
+    @ocaml.doc("<p>Allows you to create the criteria to retry a job.</p>")
+    jobExecutionsRetryConfig: option<jobExecutionsRetryConfig>,
     @ocaml.doc("<p>The ARN of the job template used to create the job.</p>")
     jobTemplateArn: option<jobTemplateArn>,
     @ocaml.doc("<p>The namespace used to indicate that a job is a customer-managed job.</p>
-        <p>When you specify a value for this parameter, AWS IoT Core sends jobs notifications to MQTT topics that 
+        <p>When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that 
             contain the value in the following format.</p>
         <p>
             <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>
@@ -8304,7 +8911,7 @@ module CreateJob = {
            execution status is not set to another terminal state before the time expires, it will be 
            automatically set to <code>TIMED_OUT</code>.</p>")
     timeoutConfig: option<timeoutConfig>,
-    @ocaml.doc("<p>Allows you to create criteria to abort a job.</p>")
+    @ocaml.doc("<p>Allows you to create the criteria to abort a job.</p>")
     abortConfig: option<abortConfig>,
     @ocaml.doc("<p>Allows you to create a staged rollout of the job.</p>")
     jobExecutionsRolloutConfig: option<jobExecutionsRolloutConfig>,
@@ -8332,7 +8939,7 @@ module CreateJob = {
     documentSource: option<jobDocumentSource>,
     @ocaml.doc("<p>A list of things and thing groups to which the job should be sent.</p>")
     targets: jobTargets,
-    @ocaml.doc("<p>A job identifier which must be unique for your AWS account. We recommend using a UUID. Alpha-numeric
+    @ocaml.doc("<p>A job identifier which must be unique for your Amazon Web Services account. We recommend using a UUID. Alpha-numeric
             characters, \"-\" and \"_\" are valid for use here.</p>")
     jobId: jobId,
   }
@@ -8345,6 +8952,8 @@ module CreateJob = {
   let make = (
     ~targets,
     ~jobId,
+    ~documentParameters=?,
+    ~jobExecutionsRetryConfig=?,
     ~jobTemplateArn=?,
     ~namespaceId=?,
     ~tags=?,
@@ -8359,6 +8968,8 @@ module CreateJob = {
     (),
   ) =>
     new({
+      documentParameters: documentParameters,
+      jobExecutionsRetryConfig: jobExecutionsRetryConfig,
       jobTemplateArn: jobTemplateArn,
       namespaceId: namespaceId,
       tags: tags,
@@ -8392,7 +9003,7 @@ module CreateDynamicThingGroup = {
     queryString: queryString,
     @ocaml.doc("<p>The dynamic thing group index name.</p>
 		       <note>
-			         <p>Currently one index is supported: \"AWS_Things\".</p>
+			         <p>Currently one index is supported: <code>AWS_Things</code>.</p>
 		       </note>")
     indexName: option<indexName>,
     @ocaml.doc("<p>The dynamic thing group properties.</p>")
@@ -8884,6 +9495,8 @@ module ListViolationEvents = {
     @ocaml.doc("<p>The maximum number of results to return at one time.</p>")
     maxResults: option<maxResults>,
     @ocaml.doc("<p>The token for the next set of results.</p>") nextToken: option<nextToken>,
+    @ocaml.doc("<p>The verification state of the violation (detect alarm).</p>")
+    verificationState: option<verificationState>,
     @ocaml.doc("<p>
       A list of all suppressed alerts.
     </p>")
@@ -8915,6 +9528,7 @@ module ListViolationEvents = {
     ~startTime,
     ~maxResults=?,
     ~nextToken=?,
+    ~verificationState=?,
     ~listSuppressedAlerts=?,
     ~behaviorCriteriaType=?,
     ~securityProfileName=?,
@@ -8924,6 +9538,7 @@ module ListViolationEvents = {
     new({
       maxResults: maxResults,
       nextToken: nextToken,
+      verificationState: verificationState,
       listSuppressedAlerts: listSuppressedAlerts,
       behaviorCriteriaType: behaviorCriteriaType,
       securityProfileName: securityProfileName,
@@ -8995,6 +9610,8 @@ module ListActiveViolations = {
     @ocaml.doc("<p>The maximum number of results to return at one time.</p>")
     maxResults: option<maxResults>,
     @ocaml.doc("<p>The token for the next set of results.</p>") nextToken: option<nextToken>,
+    @ocaml.doc("<p>The verification state of the violation (detect alarm).</p>")
+    verificationState: option<verificationState>,
     @ocaml.doc("<p>
       A list of all suppressed alerts.
     </p>")
@@ -9020,6 +9637,7 @@ module ListActiveViolations = {
   let make = (
     ~maxResults=?,
     ~nextToken=?,
+    ~verificationState=?,
     ~listSuppressedAlerts=?,
     ~behaviorCriteriaType=?,
     ~securityProfileName=?,
@@ -9029,6 +9647,7 @@ module ListActiveViolations = {
     new({
       maxResults: maxResults,
       nextToken: nextToken,
+      verificationState: verificationState,
       listSuppressedAlerts: listSuppressedAlerts,
       behaviorCriteriaType: behaviorCriteriaType,
       securityProfileName: securityProfileName,
@@ -9063,7 +9682,7 @@ module CreateOTAUpdate = {
     @ocaml.doc("<p>Metadata which can be used to manage updates.</p>") tags: option<tagList_>,
     @ocaml.doc("<p>A list of additional OTA update parameters which are name-value pairs.</p>")
     additionalParameters: option<additionalParameterMap>,
-    @ocaml.doc("<p>The IAM role that grants AWS IoT access to the Amazon S3, AWS IoT jobs and AWS Code Signing resources 
+    @ocaml.doc("<p>The IAM role that grants Amazon Web Services IoT Core access to the Amazon S3, IoT jobs and Amazon Web Services Code Signing resources 
             to create an OTA update job.</p>")
     roleArn: roleArn,
     @ocaml.doc("<p>The files to be streamed by the OTA update.</p>") files: otaupdateFiles,
@@ -9094,10 +9713,10 @@ module CreateOTAUpdate = {
   }
   type response = {
     @ocaml.doc("<p>The OTA update status.</p>") otaUpdateStatus: option<otaupdateStatus>,
-    @ocaml.doc("<p>The AWS IoT job ARN associated with the OTA update.</p>")
+    @ocaml.doc("<p>The IoT job ARN associated with the OTA update.</p>")
     awsIotJobArn: option<awsIotJobArn>,
     @ocaml.doc("<p>The OTA update ARN.</p>") otaUpdateArn: option<otaupdateArn>,
-    @ocaml.doc("<p>The AWS IoT job ID associated with the OTA update.</p>")
+    @ocaml.doc("<p>The IoT job ID associated with the OTA update.</p>")
     awsIotJobId: option<awsIotJobId>,
     @ocaml.doc("<p>The OTA update ID.</p>") otaUpdateId: option<otaupdateId>,
   }
@@ -9188,7 +9807,7 @@ module ReplaceTopicRule = {
     @ocaml.doc("<p>The rule payload.</p>") topicRulePayload: topicRulePayload,
     @ocaml.doc("<p>The name of the rule.</p>") ruleName: ruleName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "ReplaceTopicRuleCommand"
   let make = (~topicRulePayload, ~ruleName, ()) =>
     new({topicRulePayload: topicRulePayload, ruleName: ruleName})
@@ -9225,7 +9844,7 @@ module CreateTopicRule = {
     @ocaml.doc("<p>The rule payload.</p>") topicRulePayload: topicRulePayload,
     @ocaml.doc("<p>The name of the rule.</p>") ruleName: ruleName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iot") @new external new: request => t = "CreateTopicRuleCommand"
   let make = (~topicRulePayload, ~ruleName, ~tags=?, ()) =>
     new({tags: tags, topicRulePayload: topicRulePayload, ruleName: ruleName})

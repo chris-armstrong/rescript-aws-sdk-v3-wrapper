@@ -23,6 +23,7 @@ type smsDomainUrl = string
 type samlMetadataDocument = string
 type resultLimit = int
 type paginationToken = string
+type nameString = string
 type kmsKeyId = string
 type idType = string
 type federationProviderName = string
@@ -42,9 +43,18 @@ type environmentStatus = [
 ]
 type environmentName = string
 type environmentArn = string
+type emailId = string
 type description = string
+@ocaml.doc("<p>The Amazon Resource Name (ARN) of the data bundle.</p>") type dataBundleArn = string
 type tagMap = Js.Dict.t<tagValue>
 type tagKeyList = array<tagKey>
+@ocaml.doc("<p>Configuration information for the superuser.</p>")
+type superuserParameters = {
+  @ocaml.doc("<p>The last name of the superuser.</p>") lastName: nameString,
+  @ocaml.doc("<p>The first name of the superuser.</p>") firstName: nameString,
+  @ocaml.doc("<p>The email address of the superuser.</p>") emailAddress: emailId,
+}
+type dataBundleArns = array<dataBundleArn>
 type attributeMap = Js.Dict.t<url>
 @ocaml.doc("<p>Configuration information when authentication mode is FEDERATED.</p>")
 type federationParameters = {
@@ -98,14 +108,15 @@ type environment = {
   @ocaml.doc("<p>The name of the FinSpace environment.</p>") name: option<environmentName>,
 }
 type environmentList = array<environment>
-@ocaml.doc("<p>The FinSpace management service provides the APIs for managing the FinSpace
-           environments. </p>")
+@ocaml.doc(
+  "<p>The FinSpace management service provides the APIs for managing FinSpace environments.</p>"
+)
 module DeleteEnvironment = {
   type t
   type request = {
     @ocaml.doc("<p>The identifier for the FinSpace environment.</p>") environmentId: idType,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-finspace") @new external new: request => t = "DeleteEnvironmentCommand"
   let make = (~environmentId, ()) => new({environmentId: environmentId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -120,7 +131,7 @@ module UntagResource = {
          parameter is an Amazon Resource Name (ARN).</p>")
     resourceArn: environmentArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-finspace") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -133,7 +144,7 @@ module TagResource = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) for the resource.</p>")
     resourceArn: environmentArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-finspace") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -153,6 +164,20 @@ module ListTagsForResource = {
 module CreateEnvironment = {
   type t
   type request = {
+    @ocaml.doc("<p>The list of Amazon Resource Names (ARN) of the data bundles to install. Currently supported data bundle ARNs:</p>
+         <ul>
+            <li>
+               <p>
+                  <code>arn:aws:finspace:${Region}::data-bundle/capital-markets-sample</code> - Contains sample Capital Markets datasets, categories and controlled vocabularies.</p>
+            </li>
+            <li>
+               <p>
+                  <code>arn:aws:finspace:${Region}::data-bundle/taq</code> (default) - Contains trades and quotes data in addition to sample Capital Markets data.</p>
+            </li>
+         </ul>")
+    dataBundles: option<dataBundleArns>,
+    @ocaml.doc("<p>Configuration information for the superuser.</p>")
+    superuserParameters: option<superuserParameters>,
     @ocaml.doc("<p>Configuration information when authentication mode is FEDERATED.</p>")
     federationParameters: option<federationParameters>,
     @ocaml.doc("<p>Authentication mode for the environment.</p>
@@ -189,6 +214,8 @@ module CreateEnvironment = {
   @module("@aws-sdk/client-finspace") @new external new: request => t = "CreateEnvironmentCommand"
   let make = (
     ~name,
+    ~dataBundles=?,
+    ~superuserParameters=?,
     ~federationParameters=?,
     ~federationMode=?,
     ~tags=?,
@@ -197,6 +224,8 @@ module CreateEnvironment = {
     (),
   ) =>
     new({
+      dataBundles: dataBundles,
+      superuserParameters: superuserParameters,
       federationParameters: federationParameters,
       federationMode: federationMode,
       tags: tags,

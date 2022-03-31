@@ -63,6 +63,10 @@ type stringFilterComparison = [
   | @as("PREFIX") #PREFIX
   | @as("EQUALS") #EQUALS
 ]
+type statusReasonCode = [
+  | @as("INTERNAL_ERROR") #INTERNAL_ERROR
+  | @as("NO_AVAILABLE_CONFIGURATION_RECORDER") #NO_AVAILABLE_CONFIGURATION_RECORDER
+]
 type standardsStatus = [
   | @as("INCOMPLETE") #INCOMPLETE
   | @as("DELETING") #DELETING
@@ -134,6 +138,10 @@ type complianceStatus = [
   | @as("PASSED") #PASSED
 ]
 type boolean_ = bool
+type awsS3BucketNotificationConfigurationS3KeyFilterRuleName = [
+  | @as("Suffix") #Suffix
+  | @as("Prefix") #Prefix
+]
 type awsLambdaLayerVersionNumber = float
 type awsIamRoleAssumeRolePolicyDocument = string
 type awsIamAccessKeyStatus = [@as("Inactive") #Inactive | @as("Active") #Active]
@@ -142,8 +150,8 @@ type adminStatus = [@as("DISABLE_IN_PROGRESS") #DISABLE_IN_PROGRESS | @as("ENABL
 type accountId = string
 @ocaml.doc("<p>Used to update information about the investigation into the finding.</p>")
 type workflowUpdate = {
-  @ocaml.doc("<p>The status of the investigation into the finding. The allowed values are the
-         following.</p>
+  @ocaml.doc("<p>The status of the investigation into the finding. The workflow status is specific to an individual finding. It does not affect the generation of new findings. For example, setting the workflow status to <code>SUPPRESSED</code> or <code>RESOLVED</code> does not prevent a new finding for the same issue.</p>
+         <p>The allowed values are the following.</p>
          <ul>
             <li>
                <p>
@@ -175,8 +183,7 @@ type workflowUpdate = {
             </li>
             <li>
                <p>
-                  <code>SUPPRESSED</code> - The finding will not be reviewed again and will not be
-               acted upon.</p>
+                  <code>SUPPRESSED</code> - Indicates that you reviewed the finding and do not believe that any action is needed. The finding is no longer updated.</p>
             </li>
          </ul>")
   @as("Status")
@@ -184,8 +191,8 @@ type workflowUpdate = {
 }
 @ocaml.doc("<p>Provides information about the status of the investigation into a finding.</p>")
 type workflow = {
-  @ocaml.doc("<p>The status of the investigation into the finding. The allowed values are the
-         following.</p>
+  @ocaml.doc("<p>The status of the investigation into the finding. The workflow status is specific to an individual finding. It does not affect the generation of new findings. For example, setting the workflow status to <code>SUPPRESSED</code> or <code>RESOLVED</code> does not prevent a new finding for the same issue.</p>
+         <p>The allowed values are the following.</p>
          <ul>
             <li>
                <p>
@@ -214,8 +221,7 @@ type workflow = {
             </li>
             <li>
                <p>
-                  <code>SUPPRESSED</code> - The finding will not be reviewed again and will not be
-               acted upon.</p>
+                  <code>SUPPRESSED</code> - Indicates that you reviewed the finding and do not believe that any action is needed. The finding is no longer updated.</p>
             </li>
             <li>
                <p>
@@ -241,25 +247,25 @@ type wafExcludedRule = {
   @as("RuleId")
   ruleId: option<nonEmptyString>,
 }
-@ocaml.doc("<p>Details about the action that CloudFront or AWS WAF takes when a web request matches the
+@ocaml.doc("<p>Details about the action that CloudFront or WAF takes when a web request matches the
          conditions in the rule. </p>")
 type wafAction = {
-  @ocaml.doc("<p>Specifies how you want AWS WAF to respond to requests that match the settings in a
+  @ocaml.doc("<p>Specifies how you want WAF to respond to requests that match the settings in a
          rule.</p>
          <p>Valid settings include the following:</p>
          <ul>
             <li>
                <p>
-                  <code>ALLOW</code> - AWS WAF allows requests</p>
+                  <code>ALLOW</code> - WAF allows requests</p>
             </li>
             <li>
                <p>
-                  <code>BLOCK</code> - AWS WAF blocks requests</p>
+                  <code>BLOCK</code> - WAF blocks requests</p>
             </li>
             <li>
                <p>
-                  <code>COUNT</code> - AWS WAF increments a counter of the requests that match all
-               of the conditions in the rule. AWS WAF then continues to inspect the web request
+                  <code>COUNT</code> - WAF increments a counter of the requests that match all
+               of the conditions in the rule. WAF then continues to inspect the web request
                based on the remaining rules in the web ACL. You can't specify <code>COUNT</code> for
                the default action for a WebACL.</p>
             </li>
@@ -366,7 +372,7 @@ type stringFilter = {
          this way always returns an error, even if the provided filter values would return valid
          results.</p>
          <p>You can combine <code>PREFIX</code> filters with <code>NOT_EQUALS</code> or
-            <code>PREFIX_NOT_EQUALS</code> filters for the same field. Security Hub first processes the
+         <code>PREFIX_NOT_EQUALS</code> filters for the same field. Security Hub first processes the
             <code>PREFIX</code> filters, then the <code>NOT_EQUALS</code> or
             <code>PREFIX_NOT_EQUALS</code> filters.</p>
          <p> For example, for the following filter, Security Hub first identifies findings that have
@@ -409,11 +415,24 @@ type statusReason = {
   description: option<nonEmptyString>,
   @ocaml.doc("<p>A code that represents a reason for the control status. For the list of status reason
          codes and their meanings, see <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-results.html#securityhub-standards-results-asff\">Standards-related information in the ASFF</a> in the
-            <i>AWS Security Hub User Guide</i>. </p>")
+            <i>Security Hub User Guide</i>. </p>")
   @as("ReasonCode")
   reasonCode: nonEmptyString,
 }
+@ocaml.doc("<p>Defines a CloudWatch dimension value to publish.</p>")
+type statelessCustomPublishMetricActionDimension = {
+  @ocaml.doc("<p>The value to use for the custom metric dimension.</p>") @as("Value")
+  value: option<nonEmptyString>,
+}
 type standardsSubscriptionArns = array<nonEmptyString>
+@ocaml.doc("<p>The reason for the current status of a standard subscription.</p>")
+type standardsStatusReason = {
+  @ocaml.doc(
+    "<p>The reason code that represents the reason for the current status of a standard subscription.</p>"
+  )
+  @as("StatusReasonCode")
+  statusReasonCode: statusReasonCode,
+}
 type standardsInputParameterMap = Js.Dict.t<nonEmptyString>
 @ocaml.doc("<p>Provides information about a specific standard.</p>")
 type standard = {
@@ -440,6 +459,10 @@ type sortCriterion = {
 }
 @ocaml.doc("<p>Information about a software package.</p>")
 type softwarePackage = {
+  @ocaml.doc("<p>The file system path to the package manager inventory file.</p>") @as("FilePath")
+  filePath: option<nonEmptyString>,
+  @ocaml.doc("<p>The source of the package.</p>") @as("PackageManager")
+  packageManager: option<nonEmptyString>,
   @ocaml.doc("<p>The architecture used for the software package.</p>") @as("Architecture")
   architecture: option<nonEmptyString>,
   @ocaml.doc("<p>The release of the software package.</p>") @as("Release")
@@ -478,7 +501,7 @@ type severityUpdate = {
          </ul>")
   @as("Label")
   label: option<severityLabel>,
-  @ocaml.doc("<p>The native severity as defined by the AWS service or integrated partner product that
+  @ocaml.doc("<p>The native severity as defined by the Amazon Web Services service or integrated partner product that
          generated the finding.</p>")
   @as("Product")
   product: option<double>,
@@ -603,17 +626,77 @@ type severity = {
   label: option<severityLabel>,
   @ocaml.doc("<p>Deprecated. This attribute is being deprecated. Instead of providing
             <code>Product</code>, provide <code>Original</code>.</p>
-         <p>The native severity as defined by the AWS service or integrated partner product that
+         <p>The native severity as defined by the Amazon Web Services service or integrated partner product that
          generated the finding.</p>")
   @as("Product")
   product: option<double>,
 }
 type securityGroups = array<nonEmptyString>
+@ocaml.doc("<p>A source IP addresses and address range to inspect for.</p>")
+type ruleGroupSourceStatelessRuleMatchAttributesSources = {
+  @ocaml.doc("<p>An IP address or a block of IP addresses.</p>") @as("AddressDefinition")
+  addressDefinition: option<nonEmptyString>,
+}
+@ocaml.doc("<p>A port range to specify the source ports to inspect for.</p>")
+type ruleGroupSourceStatelessRuleMatchAttributesSourcePorts = {
+  @ocaml.doc("<p>The ending port value for the port range.</p>") @as("ToPort")
+  toPort: option<integer_>,
+  @ocaml.doc("<p>The starting port value for the port range.</p>") @as("FromPort")
+  fromPort: option<integer_>,
+}
+type ruleGroupSourceStatelessRuleMatchAttributesProtocolsList = array<integer_>
+@ocaml.doc("<p>A destination IP address or range.</p>")
+type ruleGroupSourceStatelessRuleMatchAttributesDestinations = {
+  @ocaml.doc("<p>An IP address or a block of IP addresses.</p>") @as("AddressDefinition")
+  addressDefinition: option<nonEmptyString>,
+}
+@ocaml.doc("<p>A port range to specify the destination ports to inspect for.</p>")
+type ruleGroupSourceStatelessRuleMatchAttributesDestinationPorts = {
+  @ocaml.doc("<p>The ending port value for the port range.</p>") @as("ToPort")
+  toPort: option<integer_>,
+  @ocaml.doc("<p>The starting port value for the port range.</p>") @as("FromPort")
+  fromPort: option<integer_>,
+}
+type ruleGroupSourceStatefulRulesRuleOptionsSettingsList = array<nonEmptyString>
+@ocaml.doc("<p>The inspection criteria for a stateful rule.</p>")
+type ruleGroupSourceStatefulRulesHeaderDetails = {
+  @ocaml.doc(
+    "<p>The source port to inspect for. You can specify an individual port, such as <code>1994</code>. You also can specify a port range, such as <code>1990:1994</code>. To match with any port, specify <code>ANY</code>.</p>"
+  )
+  @as("SourcePort")
+  sourcePort: option<nonEmptyString>,
+  @ocaml.doc(
+    "<p>The source IP address or address range to inspect for, in CIDR notation. To match with any address, specify <code>ANY</code>.</p>"
+  )
+  @as("Source")
+  source: option<nonEmptyString>,
+  @ocaml.doc(
+    "<p>The protocol to inspect for. To inspector for all protocols, use <code>IP</code>.</p>"
+  )
+  @as("Protocol")
+  protocol: option<nonEmptyString>,
+  @ocaml.doc(
+    "<p>The direction of traffic flow to inspect. If set to <code>ANY</code>, the inspection matches bidirectional traffic, both from the source to the destination and from the destination to the source. If set to <code>FORWARD</code>, the inspection only matches traffic going from the source to the destination.</p>"
+  )
+  @as("Direction")
+  direction: option<nonEmptyString>,
+  @ocaml.doc(
+    "<p>The destination port to inspect for. You can specify an individual port, such as <code>1994</code>. You also can specify a port range, such as <code>1990:1994</code>. To match with any port, specify <code>ANY</code>.</p>"
+  )
+  @as("DestinationPort")
+  destinationPort: option<nonEmptyString>,
+  @ocaml.doc(
+    "<p>The destination IP address or address range to inspect for, in CIDR notation. To match with any address, specify <code>ANY</code>.</p>"
+  )
+  @as("Destination")
+  destination: option<nonEmptyString>,
+}
 @ocaml.doc("<p>Details about the account that was not processed.</p>")
 type result = {
   @ocaml.doc("<p>The reason that the account was not processed.</p>") @as("ProcessingResult")
   processingResult: option<nonEmptyString>,
-  @ocaml.doc("<p>An AWS account ID of the account that was not processed.</p>") @as("AccountId")
+  @ocaml.doc("<p>An Amazon Web Services account ID of the account that was not processed.</p>")
+  @as("AccountId")
   accountId: option<accountId>,
 }
 type relatedRequirementsList = array<nonEmptyString>
@@ -824,21 +907,25 @@ type member = {
                   <code>DELETED</code> - Indicates that the administrator account deleted the member
                account.</p>
             </li>
+            <li>
+               <p>
+                  <code>ACCOUNT_SUSPENDED</code> - Indicates that an organization account was suspended from Amazon Web Services at the same time that the administrator account tried to enable the organization account as a member account.</p>
+            </li>
          </ul>")
   @as("MemberStatus")
   memberStatus: option<nonEmptyString>,
   @ocaml.doc(
-    "<p>The AWS account ID of the Security Hub administrator account associated with this member account.</p>"
+    "<p>The Amazon Web Services account ID of the Security Hub administrator account associated with this member account.</p>"
   )
   @as("AdministratorId")
   administratorId: option<nonEmptyString>,
   @ocaml.doc("<p>This is replaced by <code>AdministratorID</code>.</p>
-         <p>The AWS account ID of the Security Hub administrator account associated with this member account.</p>")
+         <p>The Amazon Web Services account ID of the Security Hub administrator account associated with this member account.</p>")
   @as("MasterId")
   masterId: option<nonEmptyString>,
   @ocaml.doc("<p>The email address of the member account.</p>") @as("Email")
   email: option<nonEmptyString>,
-  @ocaml.doc("<p>The AWS account ID of the member account.</p>") @as("AccountId")
+  @ocaml.doc("<p>The Amazon Web Services account ID of the member account.</p>") @as("AccountId")
   accountId: option<accountId>,
 }
 @ocaml.doc("<p>A map filter for querying findings. Each map filter provides the field to check, the
@@ -940,6 +1027,7 @@ type invitation = {
   accountId: option<accountId>,
 }
 type integrationTypeList = array<integrationType>
+type integerList = array<integer_>
 @ocaml.doc("<p>The insight result values returned by the <code>GetInsightResults</code>
          operation.</p>")
 type insightResultValue = {
@@ -984,6 +1072,18 @@ type geoLocation = {
   @ocaml.doc("<p>The latitude of the location.</p>") @as("Lat") lat: option<double>,
   @ocaml.doc("<p>The longitude of the location.</p>") @as("Lon") lon: option<double>,
 }
+@ocaml.doc("<p>A stateless rule group that is used by the firewall policy.</p>")
+type firewallPolicyStatelessRuleGroupReferencesDetails = {
+  @ocaml.doc("<p>The ARN of the stateless rule group.</p>") @as("ResourceArn")
+  resourceArn: option<nonEmptyString>,
+  @ocaml.doc("<p>The order in which to run the stateless rule group.</p>") @as("Priority")
+  priority: option<integer_>,
+}
+@ocaml.doc("<p>A stateful rule group that is used by the firewall policy.</p>")
+type firewallPolicyStatefulRuleGroupReferencesDetails = {
+  @ocaml.doc("<p>The ARN of the stateful rule group.</p>") @as("ResourceArn")
+  resourceArn: option<nonEmptyString>,
+}
 @ocaml.doc("<p>The severity assigned to the finding by the finding provider.</p>")
 type findingProviderSeverity = {
   @ocaml.doc("<p>The finding provider's original value for the severity.</p>") @as("Original")
@@ -991,6 +1091,16 @@ type findingProviderSeverity = {
   @ocaml.doc("<p>The severity label assigned to the finding by the finding provider.</p>")
   @as("Label")
   label: option<severityLabel>,
+}
+@ocaml.doc(
+  "<p>A finding aggregator. A finding aggregator contains the configuration for finding aggregation.</p>"
+)
+type findingAggregator = {
+  @ocaml.doc(
+    "<p>The ARN of the finding aggregator. You use the finding aggregator ARN to retrieve details for, update, and delete the finding aggregator.</p>"
+  )
+  @as("FindingAggregatorArn")
+  findingAggregatorArn: option<nonEmptyString>,
 }
 type fieldMap = Js.Dict.t<nonEmptyString>
 @ocaml.doc("<p>Provided if <code>ActionType</code> is <code>DNS_REQUEST</code>. It provides details
@@ -1008,14 +1118,6 @@ type dateRange = {
   @ocaml.doc("<p>A date range unit for the date filter.</p>") @as("Unit")
   unit_: option<dateRangeUnit>,
   @ocaml.doc("<p>A date range value for the date filter.</p>") @as("Value") value: option<integer_>,
-}
-@ocaml.doc("<p>CVSS scores from the advisory related to the vulnerability.</p>")
-type cvss = {
-  @ocaml.doc("<p>The base scoring vector for the CVSS score.</p>") @as("BaseVector")
-  baseVector: option<nonEmptyString>,
-  @ocaml.doc("<p>The base CVSS score.</p>") @as("BaseScore") baseScore: option<double>,
-  @ocaml.doc("<p>The version of CVSS for the CVSS score.</p>") @as("Version")
-  version: option<nonEmptyString>,
 }
 @ocaml.doc("<p>Information about a country.</p>")
 type country = {
@@ -1080,6 +1182,53 @@ type cell = {
   column: option<long>,
 }
 type categoryList = array<nonEmptyString>
+@ocaml.doc("<p>Boolean filter for querying findings.</p>")
+type booleanFilter = {
+  @ocaml.doc("<p>The value of the boolean.</p>") @as("Value") value: option<boolean_>,
+}
+@ocaml.doc("<p>Information about the encryption configuration for X-Ray.</p>")
+type awsXrayEncryptionConfigDetails = {
+  @ocaml.doc(
+    "<p>The type of encryption. <code>KMS</code> indicates that the encryption uses KMS keys. <code>NONE</code> indicates to use the default encryption.</p>"
+  )
+  @as("Type")
+  type_: option<nonEmptyString>,
+  @ocaml.doc(
+    "<p>The current status of the encryption configuration. When <code>Status</code> is <code>UPDATING</code>, X-Ray might use both the old and new encryption.</p>"
+  )
+  @as("Status")
+  status: option<nonEmptyString>,
+  @ocaml.doc(
+    "<p>The identifier of the KMS key that is used for encryption. Provided if <code>Type</code> is <code>KMS</code>.</p>"
+  )
+  @as("KeyId")
+  keyId: option<nonEmptyString>,
+}
+@ocaml.doc(
+  "<p>Details for a match predicate. A predicate might look for characteristics such as specific IP addresses, geographic locations, or sizes.</p>"
+)
+type awsWafRegionalRateBasedRuleMatchPredicate = {
+  @ocaml.doc("<p>The type of predicate.</p>") @as("Type") type_: option<nonEmptyString>,
+  @ocaml.doc("<p>If set to <code>true</code>, then the rule actions are performed on requests that match the predicate settings.</p>
+         <p>If set to <code>false</code>, then the rule actions are performed on all requests except those that match the predicate settings.</p>")
+  @as("Negated")
+  negated: option<boolean_>,
+  @ocaml.doc("<p>The unique identifier for the predicate.</p>") @as("DataId")
+  dataId: option<nonEmptyString>,
+}
+@ocaml.doc(
+  "<p>A match predicate. A predicate might look for characteristics such as specific IP addresses, geographic locations, or sizes.</p>"
+)
+type awsWafRateBasedRuleMatchPredicate = {
+  @ocaml.doc("<p>The type of predicate.</p>") @as("Type") type_: option<nonEmptyString>,
+  @ocaml.doc("<p>If set to <code>true</code>, then the rule actions are performed on requests that match the predicate settings.</p>
+         <p>If set to <code>false</code>, then the rule actions are performed on all requests except those that match the predicate settings.
+      </p>")
+  @as("Negated")
+  negated: option<boolean_>,
+  @ocaml.doc("<p>The unique identifier for the predicate.</p>") @as("DataId")
+  dataId: option<nonEmptyString>,
+}
 @ocaml.doc("<p>Provides the details about the compliance status for a patch.</p>")
 type awsSsmComplianceSummary = {
   @ocaml.doc("<p>The identifier of the patch group for which compliance was determined. A patch group
@@ -1171,18 +1320,18 @@ type awsSsmComplianceSummary = {
 }
 @ocaml.doc("<p>Data about a queue.</p>")
 type awsSqsQueueDetails = {
-  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the dead-letter queue to which Amazon SQS moves
+  @ocaml.doc("<p>The ARN of the dead-letter queue to which Amazon SQS moves
          messages after the value of <code>maxReceiveCount</code> is exceeded. </p>")
   @as("DeadLetterTargetArn")
   deadLetterTargetArn: option<nonEmptyString>,
   @ocaml.doc("<p>The name of the new queue.</p>") @as("QueueName")
   queueName: option<nonEmptyString>,
-  @ocaml.doc("<p>The ID of an AWS managed customer master key (CMK) for Amazon SQS or a custom
-         CMK.</p>")
+  @ocaml.doc("<p>The ID of an Amazon Web Services managed key for Amazon SQS or a custom
+         KMS key.</p>")
   @as("KmsMasterKeyId")
   kmsMasterKeyId: option<nonEmptyString>,
   @ocaml.doc(
-    "<p>The length of time, in seconds, for which Amazon SQS can reuse a data key to encrypt or decrypt messages before calling AWS KMS again.</p>"
+    "<p>The length of time, in seconds, for which Amazon SQS can reuse a data key to encrypt or decrypt messages before calling KMS again.</p>"
   )
   @as("KmsDataKeyReusePeriodSeconds")
   kmsDataKeyReusePeriodSeconds: option<integer_>,
@@ -1213,8 +1362,9 @@ type awsSecretsManagerSecretRotationRules = {
 }
 @ocaml.doc("<p>Details about an Amazon S3 object.</p>")
 type awsS3ObjectDetails = {
-  @ocaml.doc("<p>The identifier of the AWS Key Management Service (AWS KMS) symmetric customer managed
-         customer master key (CMK) that was used for the object.</p>")
+  @ocaml.doc(
+    "<p>The identifier of the KMS symmetric customer managed key that was used for the object.</p>"
+  )
   @as("SSEKMSKeyId")
   ssekmskeyId: option<nonEmptyString>,
   @ocaml.doc("<p>If the object is stored using server-side encryption, the value of the server-side
@@ -1237,22 +1387,139 @@ type awsS3ObjectDetails = {
   @as("LastModified")
   lastModified: option<nonEmptyString>,
 }
+@ocaml.doc("<p>The rules to redirect the request if the condition in <code>Condition</code> is
+         met.</p>")
+type awsS3BucketWebsiteConfigurationRoutingRuleRedirect = {
+  @ocaml.doc("<p>The specific object key to use in the redirect request.</p>
+         <p>Cannot be provided if <code>ReplaceKeyPrefixWith</code> is present.</p>")
+  @as("ReplaceKeyWith")
+  replaceKeyWith: option<nonEmptyString>,
+  @ocaml.doc("<p>The object key prefix to use in the redirect request.</p>
+         <p>Cannot be provided if <code>ReplaceKeyWith</code> is present.</p>")
+  @as("ReplaceKeyPrefixWith")
+  replaceKeyPrefixWith: option<nonEmptyString>,
+  @ocaml.doc("<p>The protocol to use to redirect the request. By default, uses the protocol from the
+         original request.</p>")
+  @as("Protocol")
+  protocol: option<nonEmptyString>,
+  @ocaml.doc("<p>The HTTP redirect code to use in the response.</p>") @as("HttpRedirectCode")
+  httpRedirectCode: option<nonEmptyString>,
+  @ocaml.doc("<p>The host name to use in the redirect request.</p>") @as("Hostname")
+  hostname: option<nonEmptyString>,
+}
+@ocaml.doc("<p>The condition that must be met in order to apply the routing rule.</p>")
+type awsS3BucketWebsiteConfigurationRoutingRuleCondition = {
+  @ocaml.doc("<p>Indicates to redirect the request if the key prefix matches this value.</p>")
+  @as("KeyPrefixEquals")
+  keyPrefixEquals: option<nonEmptyString>,
+  @ocaml.doc("<p>Indicates to redirect the request if the HTTP error code matches this value.</p>")
+  @as("HttpErrorCodeReturnedEquals")
+  httpErrorCodeReturnedEquals: option<nonEmptyString>,
+}
+@ocaml.doc("<p>The redirect behavior for requests
+         to the website.</p>")
+type awsS3BucketWebsiteConfigurationRedirectTo = {
+  @ocaml.doc("<p>The protocol to use when redirecting requests. By default, uses the same protocol as the
+         original request.</p>")
+  @as("Protocol")
+  protocol: option<nonEmptyString>,
+  @ocaml.doc("<p>The name of the host to redirect requests to.</p>") @as("Hostname")
+  hostname: option<nonEmptyString>,
+}
 @ocaml.doc("<p>Specifies the default server-side encryption to apply to new objects in the
          bucket.</p>")
 type awsS3BucketServerSideEncryptionByDefault = {
-  @ocaml.doc("<p>AWS KMS customer master key (CMK) ID to use for the default encryption.</p>")
-  @as("KMSMasterKeyID")
+  @ocaml.doc("<p>KMS key ID to use for the default encryption.</p>") @as("KMSMasterKeyID")
   kmsmasterKeyID: option<nonEmptyString>,
   @ocaml.doc("<p>Server-side encryption algorithm to use for the default encryption.</p>")
   @as("SSEAlgorithm")
   ssealgorithm: option<nonEmptyString>,
+}
+@ocaml.doc("<p>Details for a filter rule.</p>")
+type awsS3BucketNotificationConfigurationS3KeyFilterRule = {
+  @ocaml.doc("<p>The filter value.</p>") @as("Value") value: option<nonEmptyString>,
+  @ocaml.doc(
+    "<p>Indicates whether the filter is based on the prefix or suffix of the Amazon S3 key.</p>"
+  )
+  @as("Name")
+  name: option<awsS3BucketNotificationConfigurationS3KeyFilterRuleName>,
+}
+type awsS3BucketNotificationConfigurationEvents = array<nonEmptyString>
+@ocaml.doc("<p>Information about logging for
+         the S3 bucket</p>")
+type awsS3BucketLoggingConfiguration = {
+  @ocaml.doc("<p>The prefix added to log files for the S3 bucket.</p>") @as("LogFilePrefix")
+  logFilePrefix: option<nonEmptyString>,
+  @ocaml.doc("<p>The name of the S3 bucket where log files for the S3 bucket are stored.</p>")
+  @as("DestinationBucketName")
+  destinationBucketName: option<nonEmptyString>,
+}
+@ocaml.doc("<p>Describes the versioning state of an S3 bucket.</p>")
+type awsS3BucketBucketVersioningConfiguration = {
+  @ocaml.doc("<p>The versioning status of the S3 bucket.</p>") @as("Status")
+  status: option<nonEmptyString>,
+  @ocaml.doc(
+    "<p>Specifies whether MFA delete is currently enabled in the S3 bucket versioning configuration. If the S3 bucket was never configured with MFA delete, then this attribute is not included.</p>"
+  )
+  @as("IsMfaDeleteEnabled")
+  isMfaDeleteEnabled: option<boolean_>,
+}
+@ocaml.doc("<p>A rule for when objects transition to specific storage classes.</p>")
+type awsS3BucketBucketLifecycleConfigurationRulesTransitionsDetails = {
+  @ocaml.doc("<p>The storage class to transition the object to.</p>") @as("StorageClass")
+  storageClass: option<nonEmptyString>,
+  @ocaml.doc(
+    "<p>The number of days after which to transition the object to the specified storage class. If you provide <code>Days</code>, you cannot provide <code>Date</code>.</p>"
+  )
+  @as("Days")
+  days: option<integer_>,
+  @ocaml.doc("<p>A date on which to transition objects to the specified storage class. If you provide <code>Date</code>, you cannot provide <code>Days</code>.</p>
+         <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet
+         Date/Time Format</a>. The value cannot contain spaces. For example,
+         <code>2020-03-22T13:22:13.933Z</code>.</p>")
+  @as("Date")
+  date: option<nonEmptyString>,
+}
+@ocaml.doc(
+  "<p>A transition rule that describes when noncurrent objects transition to a specified storage class.</p>"
+)
+type awsS3BucketBucketLifecycleConfigurationRulesNoncurrentVersionTransitionsDetails = {
+  @ocaml.doc(
+    "<p>The class of storage to change the object to after the object is noncurrent for the specified number of days.</p>"
+  )
+  @as("StorageClass")
+  storageClass: option<nonEmptyString>,
+  @ocaml.doc(
+    "<p>The number of days that an object is noncurrent before Amazon S3 can perform the associated action.</p>"
+  )
+  @as("Days")
+  days: option<integer_>,
+}
+@ocaml.doc("<p>A tag filter.</p>")
+type awsS3BucketBucketLifecycleConfigurationRulesFilterPredicateTagDetails = {
+  @ocaml.doc("<p>The tag value</p>") @as("Value") value: option<nonEmptyString>,
+  @ocaml.doc("<p>The tag key.</p>") @as("Key") key: option<nonEmptyString>,
+}
+@ocaml.doc("<p>A tag that is assigned to matching objects.</p>")
+type awsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsTagDetails = {
+  @ocaml.doc("<p>The tag value.</p>") @as("Value") value: option<nonEmptyString>,
+  @ocaml.doc("<p>The tag key.</p>") @as("Key") key: option<nonEmptyString>,
+}
+@ocaml.doc("<p>Information about what Amazon S3
+         does when a multipart upload is incomplete.</p>")
+type awsS3BucketBucketLifecycleConfigurationRulesAbortIncompleteMultipartUploadDetails = {
+  @ocaml.doc(
+    "<p>The number of days after which Amazon S3 cancels an incomplete multipart upload.</p>"
+  )
+  @as("DaysAfterInitiation")
+  daysAfterInitiation: option<integer_>,
 }
 @ocaml.doc(
   "<p>provides information about the Amazon S3 Public Access Block configuration for accounts.</p>"
 )
 type awsS3AccountPublicAccessBlockDetails = {
   @ocaml.doc(
-    "<p>Indicates whether to restrict access to an access point or S3 bucket that has a public policy to only AWS service principals and authorized users within the S3 bucket owner's account.</p>"
+    "<p>Indicates whether to restrict access to an access point or S3 bucket that has a public policy to only Amazon Web Services service principals and authorized users within the S3 bucket owner's account.</p>"
   )
   @as("RestrictPublicBuckets")
   restrictPublicBuckets: option<boolean_>,
@@ -1360,7 +1627,9 @@ type awsRedshiftClusterPendingModifiedValues = {
   @as("AutomatedSnapshotRetentionPeriod")
   automatedSnapshotRetentionPeriod: option<integer_>,
 }
-@ocaml.doc("<p>An IAM role that the cluster can use to access other AWS services.</p>")
+@ocaml.doc(
+  "<p>An IAM role that the cluster can use to access other Amazon Web Services services.</p>"
+)
 type awsRedshiftClusterIamRole = {
   @ocaml.doc("<p>The ARN of the IAM role.</p>") @as("IamRoleArn")
   iamRoleArn: option<nonEmptyString>,
@@ -1533,9 +1802,7 @@ type awsRdsDbInstanceEndpoint = {
   @ocaml.doc("<p>Specifies the DNS address of the DB instance.</p>") @as("Address")
   address: option<nonEmptyString>,
 }
-@ocaml.doc(
-  "<p>An AWS Identity and Access Management (IAM) role associated with the DB instance.</p>"
-)
+@ocaml.doc("<p>An IAM role associated with the DB instance.</p>")
 type awsRdsDbInstanceAssociatedRole = {
   @ocaml.doc("<p>Describes the state of the association between the IAM role and the DB instance. The
             <code>Status</code> property returns one of the following values:</p>
@@ -1543,7 +1810,7 @@ type awsRdsDbInstanceAssociatedRole = {
             <li>
                <p>
                   <code>ACTIVE</code> - The IAM role ARN is associated with the DB instance and can
-               be used to access other AWS services on your behalf.</p>
+               be used to access other Amazon Web Services services on your behalf.</p>
             </li>
             <li>
                <p>
@@ -1553,15 +1820,15 @@ type awsRdsDbInstanceAssociatedRole = {
             <li>
                <p>
                   <code>INVALID</code> - The IAM role ARN is associated with the DB instance. But
-               the DB instance is unable to assume the IAM role in order to access other AWS
+               the DB instance is unable to assume the IAM role in order to access other Amazon Web Services
                services on your behalf. </p>
             </li>
          </ul>")
   @as("Status")
   status: option<nonEmptyString>,
-  @ocaml.doc("<p>The name of the feature associated with the IAM)role.</p>") @as("FeatureName")
+  @ocaml.doc("<p>The name of the feature associated with the IAM role.</p>") @as("FeatureName")
   featureName: option<nonEmptyString>,
-  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the IAM role that is associated with the DB
+  @ocaml.doc("<p>The ARN of the IAM role that is associated with the DB
          instance.</p>")
   @as("RoleArn")
   roleArn: option<nonEmptyString>,
@@ -1614,26 +1881,106 @@ type awsRdsDbClusterAssociatedRole = {
   status: option<nonEmptyString>,
   @ocaml.doc("<p>The ARN of the IAM role.</p>") @as("RoleArn") roleArn: option<nonEmptyString>,
 }
-@ocaml.doc("<p>The function's AWS X-Ray tracing configuration.</p>")
+@ocaml.doc(
+  "<p>Provides information about the state of the domain relative to the latest service software.</p>"
+)
+type awsOpenSearchServiceDomainServiceSoftwareOptionsDetails = {
+  @ocaml.doc("<p>Whether the service software update is optional.</p>") @as("OptionalDeployment")
+  optionalDeployment: option<boolean_>,
+  @ocaml.doc("<p>The status of the service software update.</p>") @as("UpdateStatus")
+  updateStatus: option<nonEmptyString>,
+  @ocaml.doc("<p>Whether a service software update is available for the domain.</p>")
+  @as("UpdateAvailable")
+  updateAvailable: option<boolean_>,
+  @ocaml.doc("<p>The most recent version of the service software.</p>") @as("NewVersion")
+  newVersion: option<nonEmptyString>,
+  @ocaml.doc("<p>A more detailed description of the service software status.</p>")
+  @as("Description")
+  description: option<nonEmptyString>,
+  @ocaml.doc(
+    "<p>The version of the service software that is currently installed on the domain.</p>"
+  )
+  @as("CurrentVersion")
+  currentVersion: option<nonEmptyString>,
+  @ocaml.doc("<p>Whether a request to update the domain can be canceled.</p>") @as("Cancellable")
+  cancellable: option<boolean_>,
+  @ocaml.doc(
+    "<p>The epoch time when the deployment window closes for required updates. After this time, OpenSearch Service schedules the software upgrade automatically.</p>"
+  )
+  @as("AutomatedUpdateDate")
+  automatedUpdateDate: option<nonEmptyString>,
+}
+@ocaml.doc("<p>Provides details about the configuration for node-to-node encryption.</p>")
+type awsOpenSearchServiceDomainNodeToNodeEncryptionOptionsDetails = {
+  @ocaml.doc("<p>Whether node-to-node encryption is enabled.</p>") @as("Enabled")
+  enabled: option<boolean_>,
+}
+@ocaml.doc("<p>Configuration details for a log publishing option.</p>")
+type awsOpenSearchServiceDomainLogPublishingOption = {
+  @ocaml.doc("<p>Whether the log publishing is enabled.</p>") @as("Enabled")
+  enabled: option<boolean_>,
+  @ocaml.doc("<p>The ARN of the CloudWatch Logs group to publish the logs to.</p>")
+  @as("CloudWatchLogsLogGroupArn")
+  cloudWatchLogsLogGroupArn: option<nonEmptyString>,
+}
+@ocaml.doc(
+  "<p>Details about the configuration for encryption at rest for the OpenSearch domain.</p>"
+)
+type awsOpenSearchServiceDomainEncryptionAtRestOptionsDetails = {
+  @ocaml.doc("<p>The KMS key ID.</p>") @as("KmsKeyId") kmsKeyId: option<nonEmptyString>,
+  @ocaml.doc("<p>Whether encryption at rest is enabled.</p>") @as("Enabled")
+  enabled: option<boolean_>,
+}
+@ocaml.doc("<p>Information about additional options for the domain endpoint.</p>")
+type awsOpenSearchServiceDomainDomainEndpointOptionsDetails = {
+  @ocaml.doc(
+    "<p>The TLS security policy to apply to the HTTPS endpoint of the OpenSearch domain.</p>"
+  )
+  @as("TLSSecurityPolicy")
+  tlssecurityPolicy: option<nonEmptyString>,
+  @ocaml.doc("<p>The fully qualified URL for the custom endpoint.</p>") @as("CustomEndpoint")
+  customEndpoint: option<nonEmptyString>,
+  @ocaml.doc("<p>Whether to require that all traffic to the domain arrive over HTTPS.</p>")
+  @as("EnforceHTTPS")
+  enforceHTTPS: option<boolean_>,
+  @ocaml.doc("<p>Whether to enable a custom endpoint for the domain.</p>")
+  @as("CustomEndpointEnabled")
+  customEndpointEnabled: option<boolean_>,
+  @ocaml.doc("<p>The ARN for the security certificate. The certificate is managed in ACM.</p>")
+  @as("CustomEndpointCertificateArn")
+  customEndpointCertificateArn: option<nonEmptyString>,
+}
+@ocaml.doc("<p>Configuration options for zone awareness.</p>")
+type awsOpenSearchServiceDomainClusterConfigZoneAwarenessConfigDetails = {
+  @ocaml.doc(
+    "<p>The number of Availability Zones that the domain uses. Valid values are 2 and 3. The default is 2.</p>"
+  )
+  @as("AvailabilityZoneCount")
+  availabilityZoneCount: option<integer_>,
+}
+@ocaml.doc("<p>A public subnet that Network Firewall uses for the firewall.</p>")
+type awsNetworkFirewallFirewallSubnetMappingsDetails = {
+  @ocaml.doc("<p>The identifier of the subnet</p>") @as("SubnetId")
+  subnetId: option<nonEmptyString>,
+}
+@ocaml.doc("<p>The function's X-Ray tracing configuration.</p>")
 type awsLambdaFunctionTracingConfig = {
   @ocaml.doc("<p>The tracing mode.</p>") @as("Mode") mode: option<nonEmptyString>,
 }
-@ocaml.doc("<p>An AWS Lambda layer.</p>")
+@ocaml.doc("<p>An Lambda layer.</p>")
 type awsLambdaFunctionLayer = {
   @ocaml.doc("<p>The size of the layer archive in bytes.</p>") @as("CodeSize")
   codeSize: option<integer_>,
-  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the function layer.</p>") @as("Arn")
-  arn: option<nonEmptyString>,
+  @ocaml.doc("<p>The ARN of the function layer.</p>") @as("Arn") arn: option<nonEmptyString>,
 }
-@ocaml.doc("<p>Error messages for environment variables that couldn't be applied.</p>")
+@ocaml.doc("<p>Error messages for environment variables that could not be applied.</p>")
 type awsLambdaFunctionEnvironmentError = {
   @ocaml.doc("<p>The error message.</p>") @as("Message") message: option<nonEmptyString>,
   @ocaml.doc("<p>The error code.</p>") @as("ErrorCode") errorCode: option<nonEmptyString>,
 }
 @ocaml.doc("<p>The dead-letter queue for failed asynchronous invocations.</p>")
 type awsLambdaFunctionDeadLetterConfig = {
-  @ocaml.doc("<p>The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic.</p>")
-  @as("TargetArn")
+  @ocaml.doc("<p>The ARN of an SQS queue or SNS topic.</p>") @as("TargetArn")
   targetArn: option<nonEmptyString>,
 }
 @ocaml.doc(
@@ -1641,7 +1988,7 @@ type awsLambdaFunctionDeadLetterConfig = {
 )
 type awsLambdaFunctionCode = {
   @ocaml.doc(
-    "<p>The base64-encoded contents of the deployment package. AWS SDK and AWS CLI clients handle the encoding for you.</p>"
+    "<p>The base64-encoded contents of the deployment package. Amazon Web Services SDK and Amazon Web Services CLI clients handle the encoding for you.</p>"
   )
   @as("ZipFile")
   zipFile: option<nonEmptyString>,
@@ -1651,38 +1998,41 @@ type awsLambdaFunctionCode = {
   @ocaml.doc("<p>The Amazon S3 key of the deployment package.</p>") @as("S3Key")
   s3Key: option<nonEmptyString>,
   @ocaml.doc(
-    "<p>An Amazon S3 bucket in the same AWS Region as your function. The bucket can be in a different AWS account.</p>"
+    "<p>An Amazon S3 bucket in the same Amazon Web Services Region as your function. The bucket can be in a different Amazon Web Services account.</p>"
   )
   @as("S3Bucket")
   s3Bucket: option<nonEmptyString>,
 }
-@ocaml.doc("<p>Contains metadata about a customer master key (CMK).</p>")
+@ocaml.doc("<p>Contains metadata about an KMS key.</p>")
 type awsKmsKeyDetails = {
+  @ocaml.doc("<p>Whether the key has key rotation enabled.</p>") @as("KeyRotationStatus")
+  keyRotationStatus: option<boolean_>,
   @ocaml.doc("<p>A description of the key.</p>") @as("Description")
   description: option<nonEmptyString>,
-  @ocaml.doc("<p>The source of the CMK's key material.</p>
-         <p>When this value is <code>AWS_KMS</code>, AWS KMS created the key material.</p>
+  @ocaml.doc("<p>The source of the KMS key material.</p>
+         <p>When this value is <code>AWS_KMS</code>, KMS created the key material.</p>
          <p>When this value is <code>EXTERNAL</code>, the key material was imported from your
-         existing key management infrastructure or the CMK lacks key material.</p>
-         <p>When this value is <code>AWS_CLOUDHSM</code>, the key material was created in the AWS
-         CloudHSM cluster associated with a custom key store.</p>")
+         existing key management infrastructure or the KMS key lacks key material.</p>
+         <p>When this value is <code>AWS_CLOUDHSM</code>, the key material was created in the CloudHSM cluster associated with a custom key store.</p>")
   @as("Origin")
   origin: option<nonEmptyString>,
-  @ocaml.doc("<p>The state of the CMK.</p>") @as("KeyState") keyState: option<nonEmptyString>,
+  @ocaml.doc("<p>The state of the KMS key.</p>") @as("KeyState") keyState: option<nonEmptyString>,
   @ocaml.doc(
-    "<p>The manager of the CMK. CMKs in your AWS account are either customer managed or AWS managed.</p>"
+    "<p>The manager of the KMS key. KMS keys in your Amazon Web Services account are either customer managed or Amazon Web Services managed.</p>"
   )
   @as("KeyManager")
   keyManager: option<nonEmptyString>,
-  @ocaml.doc("<p>The globally unique identifier for the CMK.</p>") @as("KeyId")
+  @ocaml.doc("<p>The globally unique identifier for the KMS key.</p>") @as("KeyId")
   keyId: option<nonEmptyString>,
-  @ocaml.doc("<p>Indicates when the CMK was created.</p>
+  @ocaml.doc("<p>Indicates when the KMS key was created.</p>
          <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet
             Date/Time Format</a>. The value cannot contain spaces. For example,
             <code>2020-03-22T13:22:13.933Z</code>.</p>")
   @as("CreationDate")
   creationDate: option<double>,
-  @ocaml.doc("<p>The twelve-digit account ID of the AWS account that owns the CMK.</p>")
+  @ocaml.doc(
+    "<p>The twelve-digit account ID of the Amazon Web Services account that owns the KMS key.</p>"
+  )
   @as("AWSAccountId")
   awsaccountId: option<nonEmptyString>,
 }
@@ -1745,7 +2095,8 @@ type awsIamAttachedManagedPolicy = {
 type awsIamAccessKeySessionContextSessionIssuer = {
   @ocaml.doc("<p>The name of the principal that created the session.</p>") @as("UserName")
   userName: option<nonEmptyString>,
-  @ocaml.doc("<p>The identifier of the AWS account that created the session.</p>") @as("AccountId")
+  @ocaml.doc("<p>The identifier of the Amazon Web Services account that created the session.</p>")
+  @as("AccountId")
   accountId: option<nonEmptyString>,
   @ocaml.doc("<p>The ARN of the session.</p>") @as("Arn") arn: option<nonEmptyString>,
   @ocaml.doc("<p>The principal ID of the principal (user, role, or group) that created the
@@ -1767,6 +2118,13 @@ type awsIamAccessKeySessionContextAttributes = {
   @ocaml.doc("<p>Indicates whether the session used multi-factor authentication (MFA).</p>")
   @as("MfaAuthenticated")
   mfaAuthenticated: option<boolean_>,
+}
+@ocaml.doc("<p>A load balancer attribute.</p>")
+type awsElbv2LoadBalancerAttribute = {
+  @ocaml.doc("<p>The value of the load balancer attribute.</p>") @as("Value")
+  value: option<nonEmptyString>,
+  @ocaml.doc("<p>The name of the load balancer attribute.</p>") @as("Key")
+  key: option<nonEmptyString>,
 }
 @ocaml.doc("<p>Contains information about the security group for the load balancer.</p>")
 type awsElbLoadBalancerSourceSecurityGroup = {
@@ -1906,10 +2264,44 @@ type awsElbAppCookieStickinessPolicy = {
   @ocaml.doc("<p>The name of the application cookie used for stickiness.</p>") @as("CookieName")
   cookieName: option<nonEmptyString>,
 }
+@ocaml.doc(
+  "<p>Information about the state of the domain relative to the latest service software.</p>"
+)
+type awsElasticsearchDomainServiceSoftwareOptions = {
+  @ocaml.doc("<p>The status of the service software update.</p>") @as("UpdateStatus")
+  updateStatus: option<nonEmptyString>,
+  @ocaml.doc("<p>Whether a service software update is available for the domain.</p>")
+  @as("UpdateAvailable")
+  updateAvailable: option<boolean_>,
+  @ocaml.doc("<p>The most recent version of the service software.</p>") @as("NewVersion")
+  newVersion: option<nonEmptyString>,
+  @ocaml.doc("<p>A more detailed description of the service software status.</p>")
+  @as("Description")
+  description: option<nonEmptyString>,
+  @ocaml.doc(
+    "<p>The version of the service software that is currently installed on the domain.</p>"
+  )
+  @as("CurrentVersion")
+  currentVersion: option<nonEmptyString>,
+  @ocaml.doc("<p>Whether a request to update the domain can be canceled.</p>") @as("Cancellable")
+  cancellable: option<boolean_>,
+  @ocaml.doc("<p>The epoch time when the deployment window closes for required updates. After this time,
+         Amazon OpenSearch Service schedules the software upgrade automatically.</p>")
+  @as("AutomatedUpdateDate")
+  automatedUpdateDate: option<nonEmptyString>,
+}
 @ocaml.doc("<p>Details about the configuration for node-to-node encryption.</p>")
 type awsElasticsearchDomainNodeToNodeEncryptionOptions = {
   @ocaml.doc("<p>Whether node-to-node encryption is enabled.</p>") @as("Enabled")
   enabled: option<boolean_>,
+}
+@ocaml.doc("<p>The log configuration.</p>")
+type awsElasticsearchDomainLogPublishingOptionsLogConfig = {
+  @ocaml.doc("<p>Whether the log publishing is enabled.</p>") @as("Enabled")
+  enabled: option<boolean_>,
+  @ocaml.doc("<p>The ARN of the CloudWatch Logs group to publish the logs to.</p>")
+  @as("CloudWatchLogsLogGroupArn")
+  cloudWatchLogsLogGroupArn: option<nonEmptyString>,
 }
 @ocaml.doc("<p>Details about the configuration for encryption at rest.</p>")
 type awsElasticsearchDomainEncryptionAtRestOptions = {
@@ -1919,10 +2311,18 @@ type awsElasticsearchDomainEncryptionAtRestOptions = {
   @ocaml.doc("<p>Whether encryption at rest is enabled.</p>") @as("Enabled")
   enabled: option<boolean_>,
 }
+@ocaml.doc("<p>Configuration options for zone awareness.</p>")
+type awsElasticsearchDomainElasticsearchClusterConfigZoneAwarenessConfigDetails = {
+  @ocaml.doc(
+    "<p>he number of Availability Zones that the domain uses. Valid values are 2 and 3. The default is 2.</p>"
+  )
+  @as("AvailabilityZoneCount")
+  availabilityZoneCount: option<integer_>,
+}
 @ocaml.doc("<p>Additional options for the domain endpoint, such as whether to require HTTPS for all
          traffic.</p>")
 type awsElasticsearchDomainDomainEndpointOptions = {
-  @ocaml.doc("<p>The TLS security policy to apply to the HTTPS endpoint of the Elasticsearch
+  @ocaml.doc("<p>The TLS security policy to apply to the HTTPS endpoint of the OpenSearch
          domain.</p>
          <p>Valid values:</p>
          <ul>
@@ -1968,7 +2368,355 @@ type awsElasticBeanstalkEnvironmentEnvironmentLink = {
   @ocaml.doc("<p>The name of the linked environment.</p>") @as("EnvironmentName")
   environmentName: option<nonEmptyString>,
 }
-@ocaml.doc("<p>An attachment to an AWS EC2 volume.</p>")
+@ocaml.doc("<p>Information about a bind mount host volume.</p>")
+type awsEcsTaskDefinitionVolumesHostDetails = {
+  @ocaml.doc("<p>The path on the host container instance that is presented to the container.</p>")
+  @as("SourcePath")
+  sourcePath: option<nonEmptyString>,
+}
+@ocaml.doc("<p></p>")
+type awsEcsTaskDefinitionVolumesEfsVolumeConfigurationAuthorizationConfigDetails = {
+  @ocaml.doc(
+    "<p>Whether to use the Amazon ECS task IAM role defined in a task definition when mounting the Amazon EFS file system.</p>"
+  )
+  @as("Iam")
+  iam: option<nonEmptyString>,
+  @ocaml.doc("<p>The Amazon EFS access point identifier to use.</p>") @as("AccessPointId")
+  accessPointId: option<nonEmptyString>,
+}
+@ocaml.doc(
+  "<p>A network configuration parameter to provide to the Container Network Interface (CNI) plugin.</p>"
+)
+type awsEcsTaskDefinitionProxyConfigurationProxyConfigurationPropertiesDetails = {
+  @ocaml.doc("<p>The value of the property.</p>") @as("Value") value: option<nonEmptyString>,
+  @ocaml.doc("<p>The name of the property.</p>") @as("Name") name: option<nonEmptyString>,
+}
+@ocaml.doc("<p>A placement constraint object to use for tasks.</p>")
+type awsEcsTaskDefinitionPlacementConstraintsDetails = {
+  @ocaml.doc("<p>The type of constraint.</p>") @as("Type") type_: option<nonEmptyString>,
+  @ocaml.doc("<p>A cluster query language expression to apply to the constraint.</p>")
+  @as("Expression")
+  expression: option<nonEmptyString>,
+}
+@ocaml.doc("<p>An Elastic Inference accelerator to use
+         for the containers in the task.</p>")
+type awsEcsTaskDefinitionInferenceAcceleratorsDetails = {
+  @ocaml.doc("<p>The Elastic Inference accelerator type to use.</p>") @as("DeviceType")
+  deviceType: option<nonEmptyString>,
+  @ocaml.doc("<p>The Elastic Inference accelerator device name.</p>") @as("DeviceName")
+  deviceName: option<nonEmptyString>,
+}
+@ocaml.doc("<p>A data volume to mount from another container.</p>")
+type awsEcsTaskDefinitionContainerDefinitionsVolumesFromDetails = {
+  @ocaml.doc(
+    "<p>The name of another container within the same task definition from which to mount volumes.</p>"
+  )
+  @as("SourceContainer")
+  sourceContainer: option<nonEmptyString>,
+  @ocaml.doc("<p>Whether the container has read-only access to the volume.</p>") @as("ReadOnly")
+  readOnly: option<boolean_>,
+}
+@ocaml.doc("<p>A ulimit to set in the container.</p>")
+type awsEcsTaskDefinitionContainerDefinitionsUlimitsDetails = {
+  @ocaml.doc("<p>The soft limit for the ulimit type.</p>") @as("SoftLimit")
+  softLimit: option<integer_>,
+  @ocaml.doc("<p>The type of the ulimit.</p>") @as("Name") name: option<nonEmptyString>,
+  @ocaml.doc("<p>The hard limit for the ulimit type.</p>") @as("HardLimit")
+  hardLimit: option<integer_>,
+}
+@ocaml.doc("<p>A namespaced kernel parameter to set in the container.</p>")
+type awsEcsTaskDefinitionContainerDefinitionsSystemControlsDetails = {
+  @ocaml.doc("<p>The value of the parameter.</p>") @as("Value") value: option<nonEmptyString>,
+  @ocaml.doc("<p>The namespaced kernel parameter for which to set a value.</p>") @as("Namespace")
+  namespace: option<nonEmptyString>,
+}
+@ocaml.doc("<p>A secret to pass to the container.</p>")
+type awsEcsTaskDefinitionContainerDefinitionsSecretsDetails = {
+  @ocaml.doc("<p>The secret to expose to the container. The value is either the full ARN of the Secrets Manager
+         secret or the full ARN of the parameter in the Systems Manager Parameter Store.</p>")
+  @as("ValueFrom")
+  valueFrom: option<nonEmptyString>,
+  @ocaml.doc("<p>The name of the secret.</p>") @as("Name") name: option<nonEmptyString>,
+}
+@ocaml.doc("<p>A resource to assign to a container.</p>")
+type awsEcsTaskDefinitionContainerDefinitionsResourceRequirementsDetails = {
+  @ocaml.doc("<p>The value for the specified resource type.</p>
+         <p>For <code>GPU</code>, the value is the number of physical GPUs the Amazon ECS container agent
+         reserves for the container.</p>
+         <p>For <code>InferenceAccelerator</code>, the value should match the <code>DeviceName</code>
+         attribute of an entry in <code>InferenceAccelerators</code>.</p>")
+  @as("Value")
+  value: option<nonEmptyString>,
+  @ocaml.doc("<p>The type of resource to assign to a container.</p>") @as("Type")
+  type_: option<nonEmptyString>,
+}
+@ocaml.doc("<p>The private repository authentication credentials to use.</p>")
+type awsEcsTaskDefinitionContainerDefinitionsRepositoryCredentialsDetails = {
+  @ocaml.doc("<p>The ARN of the secret that contains the private repository credentials.</p>")
+  @as("CredentialsParameter")
+  credentialsParameter: option<nonEmptyString>,
+}
+@ocaml.doc("<p>A port mapping for the container.</p>")
+type awsEcsTaskDefinitionContainerDefinitionsPortMappingsDetails = {
+  @ocaml.doc("<p>The protocol used for the port mapping. The default is <code>tcp</code>.</p>")
+  @as("Protocol")
+  protocol: option<nonEmptyString>,
+  @ocaml.doc("<p>The port number on the container instance to reserve for the container.</p>")
+  @as("HostPort")
+  hostPort: option<integer_>,
+  @ocaml.doc(
+    "<p>The port number on the container that is bound to the user-specified or automatically assigned host port.</p>"
+  )
+  @as("ContainerPort")
+  containerPort: option<integer_>,
+}
+@ocaml.doc("<p>A mount point for the data volumes in the container.</p>")
+type awsEcsTaskDefinitionContainerDefinitionsMountPointsDetails = {
+  @ocaml.doc(
+    "<p>The name of the volume to mount. Must match the name of a volume listed in <code>VolumeDetails</code> for the task definition.</p>"
+  )
+  @as("SourceVolume")
+  sourceVolume: option<nonEmptyString>,
+  @ocaml.doc("<p>Whether the container has read-only access to the volume.</p>") @as("ReadOnly")
+  readOnly: option<boolean_>,
+  @ocaml.doc("<p>The path on the container to mount the host volume at.</p>") @as("ContainerPath")
+  containerPath: option<nonEmptyString>,
+}
+@ocaml.doc("<p>A secret to pass to the log configuration.</p>")
+type awsEcsTaskDefinitionContainerDefinitionsLogConfigurationSecretOptionsDetails = {
+  @ocaml.doc("<p>The secret to expose to the container.</p>
+         <p>The value is either the full ARN of the Secrets Manager secret or the full ARN of the
+         parameter in the Systems Manager Parameter Store.</p>")
+  @as("ValueFrom")
+  valueFrom: option<nonEmptyString>,
+  @ocaml.doc("<p>The name of the secret.</p>") @as("Name") name: option<nonEmptyString>,
+}
+@ocaml.doc(
+  "<p>A hostname and IP address mapping to append to the <b>/etc/hosts</b> file on the container.</p>"
+)
+type awsEcsTaskDefinitionContainerDefinitionsExtraHostsDetails = {
+  @ocaml.doc("<p>The IP address to use in the <b>/etc/hosts</b> entry.</p>") @as("IpAddress")
+  ipAddress: option<nonEmptyString>,
+  @ocaml.doc("<p>The hostname to use in the <b>/etc/hosts</b> entry.</p>") @as("Hostname")
+  hostname: option<nonEmptyString>,
+}
+@ocaml.doc("<p>A file that contain environment variables to pass to a container.</p>")
+type awsEcsTaskDefinitionContainerDefinitionsEnvironmentFilesDetails = {
+  @ocaml.doc("<p>The ARN of the S3 object that contains the environment variable file.</p>")
+  @as("Value")
+  value: option<nonEmptyString>,
+  @ocaml.doc("<p>The type of environment file.</p>") @as("Type") type_: option<nonEmptyString>,
+}
+@ocaml.doc("<p>An environment variable to pass to the container.</p>")
+type awsEcsTaskDefinitionContainerDefinitionsEnvironmentDetails = {
+  @ocaml.doc("<p>The value of the environment variable.</p>") @as("Value")
+  value: option<nonEmptyString>,
+  @ocaml.doc("<p>The name of the environment variable.</p>") @as("Name")
+  name: option<nonEmptyString>,
+}
+@ocaml.doc("<p>A dependency that is defined for container startup and shutdown.</p>")
+type awsEcsTaskDefinitionContainerDefinitionsDependsOnDetails = {
+  @ocaml.doc("<p>The name of the dependent container.</p>") @as("ContainerName")
+  containerName: option<nonEmptyString>,
+  @ocaml.doc(
+    "<p>The dependency condition of the dependent container. Indicates the required status of the dependent container before the current container can start.</p>"
+  )
+  @as("Condition")
+  condition: option<nonEmptyString>,
+}
+@ocaml.doc("<p>Information about a service discovery registry to assign to the service.</p>")
+type awsEcsServiceServiceRegistriesDetails = {
+  @ocaml.doc("<p>The ARN of the service registry.</p>") @as("RegistryArn")
+  registryArn: option<nonEmptyString>,
+  @ocaml.doc(
+    "<p>The port value to use for a service discovery service that specifies an SRV record. This field can be used if both the <code>awsvpc</code>awsvpc network mode and SRV records are used.</p>"
+  )
+  @as("Port")
+  port: option<integer_>,
+  @ocaml.doc("<p>The port value to use for the service discovery service.</p>
+         <p>If the task definition uses the <code>bridge</code> or <code>host</code> network mode, you must specify <code>ContainerName</code> and <code>ContainerPort</code>.</p>
+         <p>If the task definition uses the <code>awsvpc</code> network mode and a type SRV DNS record, you must specify either <code>ContainerName</code> and <code>ContainerPort</code>, or <code>Port</code> , but not both.</p>")
+  @as("ContainerPort")
+  containerPort: option<integer_>,
+  @ocaml.doc("<p>The container name value to use for the service discovery service.</p>
+         <p>If the task definition uses the <code>bridge</code> or <code>host</code> network mode, you must specify <code>ContainerName</code> and <code>ContainerPort</code>.</p>
+         <p>If the task definition uses the <code>awsvpc</code> network mode and a type SRV DNS record, you must specify either <code>ContainerName</code> and <code>ContainerPort</code>, or <code>Port</code> , but not both.</p>")
+  @as("ContainerName")
+  containerName: option<nonEmptyString>,
+}
+@ocaml.doc("<p>A placement strategy that determines how to place the tasks for the service.</p>")
+type awsEcsServicePlacementStrategiesDetails = {
+  @ocaml.doc("<p>The type of placement strategy.</p>
+         <p>The <code>random</code> placement strategy randomly places tasks on available candidates.</p>
+         <p>The <code>spread</code> placement strategy spreads placement across available candidates evenly based on the value of <code>Field</code>.</p>
+         <p>The <code>binpack</code> strategy places tasks on available candidates that have the least available amount of the resource that is specified in <code>Field</code>.</p>
+         <p>Valid values: <code>random</code> | <code>spread</code> | <code>binpack</code>
+         </p>")
+  @as("Type")
+  type_: option<nonEmptyString>,
+  @ocaml.doc("<p>The field to apply the placement strategy against.</p>
+         <p>For the <code>spread</code> placement strategy, valid values are <code>instanceId</code> (or <code>host</code>, which has the same effect), or any platform or custom attribute that is applied to a container instance, such as <code>attribute:ecs.availability-zone</code>.</p>
+         <p>For the <code>binpack</code> placement strategy, valid values are <code>cpu</code> and <code>memory</code>.</p>
+         <p>For the <code>random</code> placement strategy, this attribute is not used.</p>")
+  @as("Field")
+  field: option<nonEmptyString>,
+}
+@ocaml.doc("<p>A placement constraint for the tasks in the service.</p>")
+type awsEcsServicePlacementConstraintsDetails = {
+  @ocaml.doc("<p>The type of constraint. Use <code>distinctInstance</code> to run each task in a particular group on a different container instance. Use <code>memberOf</code> to restrict the selection to a group of valid candidates.</p>
+         <p>Valid values: <code>distinctInstance</code> | <code>memberOf</code>
+         </p>")
+  @as("Type")
+  type_: option<nonEmptyString>,
+  @ocaml.doc(
+    "<p>A cluster query language expression to apply to the constraint. You cannot specify an expression if the constraint type is <code>distinctInstance</code>.</p>"
+  )
+  @as("Expression")
+  expression: option<nonEmptyString>,
+}
+@ocaml.doc("<p>Information about a load balancer that the service uses.</p>")
+type awsEcsServiceLoadBalancersDetails = {
+  @ocaml.doc("<p>The ARN of the Elastic Load Balancing target group or groups associated with a service or task set.</p>
+         <p>Only specified when using an Application Load Balancer or a Network Load Balancer. For a Classic Load Balancer, the target group ARN is omitted.</p>")
+  @as("TargetGroupArn")
+  targetGroupArn: option<nonEmptyString>,
+  @ocaml.doc("<p>The name of the load balancer to associate with the Amazon ECS service or task set.</p>
+         <p>Only specified when using a Classic Load Balancer. For an Application Load Balancer or a Network Load Balancer, the load balancer name is omitted.</p>")
+  @as("LoadBalancerName")
+  loadBalancerName: option<nonEmptyString>,
+  @ocaml.doc(
+    "<p>The port on the container to associate with the load balancer. This port must correspond to a <code>containerPort</code> in the task definition the tasks in the service are using. For tasks that use the EC2 launch type, the container instance they are launched on must allow ingress traffic on the <code>hostPort</code> of the port mapping.</p>"
+  )
+  @as("ContainerPort")
+  containerPort: option<integer_>,
+  @ocaml.doc("<p>The name of the container to associate with the load balancer.</p>")
+  @as("ContainerName")
+  containerName: option<nonEmptyString>,
+}
+@ocaml.doc("<p>Information about the deployment controller type that the service uses.</p>")
+type awsEcsServiceDeploymentControllerDetails = {
+  @ocaml.doc("<p>The rolling update (<code>ECS</code>) deployment type replaces the current running version of the container with the latest version.</p>
+         <p>The blue/green (<code>CODE_DEPLOY</code>) deployment type uses the blue/green deployment model that is powered by CodeDeploy. This deployment model a new deployment of a service can be verified before production traffic is sent to it.</p>
+         <p>The external (<code>EXTERNAL</code>) deployment type allows the use of any third-party deployment controller for full control over the deployment process for an Amazon ECS service.</p>
+         <p>Valid values: <code>ECS</code> | <code>CODE_DEPLOY</code> | <code>EXTERNAL</code>
+         </p>")
+  @as("Type")
+  type_: option<nonEmptyString>,
+}
+@ocaml.doc(
+  "<p>Determines whether a service deployment fails if a service cannot reach a steady state.</p>"
+)
+type awsEcsServiceDeploymentConfigurationDeploymentCircuitBreakerDetails = {
+  @ocaml.doc(
+    "<p>Whether to roll back the service if a service deployment fails. If rollback is enabled, when a service deployment fails, the service is rolled back to the last deployment that completed successfully.</p>"
+  )
+  @as("Rollback")
+  rollback: option<boolean_>,
+  @ocaml.doc("<p>Whether to enable the deployment circuit breaker logic for the service.</p>")
+  @as("Enable")
+  enable: option<boolean_>,
+}
+@ocaml.doc("<p>Strategy item for the capacity provider strategy that the service uses.</p>")
+type awsEcsServiceCapacityProviderStrategyDetails = {
+  @ocaml.doc("<p>The relative percentage of the total number of tasks that should use the capacity provider.</p>
+         <p>If no weight is specified, the default value is 0. At least one capacity provider must have a weight greater than 0.</p>
+         <p>The value can be between 0 and 1000.</p>")
+  @as("Weight")
+  weight: option<integer_>,
+  @ocaml.doc("<p>The short name of the capacity provider.</p>") @as("CapacityProvider")
+  capacityProvider: option<nonEmptyString>,
+  @ocaml.doc("<p>The minimum number of tasks to run on the capacity provider. Only one strategy item can specify a value for <code>Base</code>.</p>
+         <p>The value must be between 0 and 100000.</p>")
+  @as("Base")
+  base: option<integer_>,
+}
+@ocaml.doc(
+  "<p>The default capacity provider strategy for the cluster. The default capacity provider strategy is used when services or tasks are run without a specified launch type or capacity provider strategy.</p>"
+)
+type awsEcsClusterDefaultCapacityProviderStrategyDetails = {
+  @ocaml.doc(
+    "<p>The relative percentage of the total number of tasks launched that should use the capacity provider.</p>"
+  )
+  @as("Weight")
+  weight: option<integer_>,
+  @ocaml.doc("<p>The name of the capacity provider.</p>") @as("CapacityProvider")
+  capacityProvider: option<nonEmptyString>,
+  @ocaml.doc("<p>The minimum number of tasks to run on the specified capacity provider.</p>")
+  @as("Base")
+  base: option<integer_>,
+}
+@ocaml.doc("<p>The log configuration for the results of the run command actions.</p>")
+type awsEcsClusterConfigurationExecuteCommandConfigurationLogConfigurationDetails = {
+  @ocaml.doc("<p>Identifies the folder in the S3 bucket to send the logs to.</p>")
+  @as("S3KeyPrefix")
+  s3KeyPrefix: option<nonEmptyString>,
+  @ocaml.doc("<p>Whether to encrypt the logs that are sent to the S3 bucket.</p>")
+  @as("S3EncryptionEnabled")
+  s3EncryptionEnabled: option<boolean_>,
+  @ocaml.doc("<p>The name of the S3 bucket to send logs to.</p>") @as("S3BucketName")
+  s3BucketName: option<nonEmptyString>,
+  @ocaml.doc("<p>The name of the CloudWatch log group to send the logs to.</p>")
+  @as("CloudWatchLogGroupName")
+  cloudWatchLogGroupName: option<nonEmptyString>,
+  @ocaml.doc("<p>Whether to enable encryption on the CloudWatch logs.</p>")
+  @as("CloudWatchEncryptionEnabled")
+  cloudWatchEncryptionEnabled: option<boolean_>,
+}
+@ocaml.doc("<p>Indicates whether to enable CloudWatch Container Insights for the ECS cluster.</p>")
+type awsEcsClusterClusterSettingsDetails = {
+  @ocaml.doc("<p>The value of the setting.</p>") @as("Value") value: option<nonEmptyString>,
+  @ocaml.doc("<p>The name of the setting.</p>") @as("Name") name: option<nonEmptyString>,
+}
+@ocaml.doc("<p>Information about the lifecycle policy for the repository.</p>")
+type awsEcrRepositoryLifecyclePolicyDetails = {
+  @ocaml.doc(
+    "<p>The Amazon Web Services account identifier that is associated with the registry that contains the repository.</p>"
+  )
+  @as("RegistryId")
+  registryId: option<nonEmptyString>,
+  @ocaml.doc("<p>The text of the lifecycle policy.</p>") @as("LifecyclePolicyText")
+  lifecyclePolicyText: option<nonEmptyString>,
+}
+@ocaml.doc("<p>The image scanning configuration for a repository.</p>")
+type awsEcrRepositoryImageScanningConfigurationDetails = {
+  @ocaml.doc("<p>Whether to scan images after they are pushed to a repository.</p>")
+  @as("ScanOnPush")
+  scanOnPush: option<boolean_>,
+}
+@ocaml.doc("<p>Information about the VPN tunnel.</p>")
+type awsEc2VpnConnectionVgwTelemetryDetails = {
+  @ocaml.doc("<p>If an error occurs, a description of the error.</p>") @as("StatusMessage")
+  statusMessage: option<nonEmptyString>,
+  @ocaml.doc("<p>The status of the VPN tunnel.</p>") @as("Status") status: option<nonEmptyString>,
+  @ocaml.doc("<p>The Internet-routable IP address of the virtual private gateway's outside
+         interface.</p>")
+  @as("OutsideIpAddress")
+  outsideIpAddress: option<nonEmptyString>,
+  @ocaml.doc("<p>The date and time of the last change in status.</p>
+         <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet
+         Date/Time Format</a>. The value cannot contain spaces. For example,
+         <code>2020-03-22T13:22:13.933Z</code>.</p>")
+  @as("LastStatusChange")
+  lastStatusChange: option<nonEmptyString>,
+  @ocaml.doc("<p>The ARN of the VPN tunnel endpoint certificate.</p>") @as("CertificateArn")
+  certificateArn: option<nonEmptyString>,
+  @ocaml.doc("<p>The number of accepted routes.</p>") @as("AcceptedRouteCount")
+  acceptedRouteCount: option<integer_>,
+}
+@ocaml.doc("<p>A static routes associated with
+         the VPN connection.</p>")
+type awsEc2VpnConnectionRoutesDetails = {
+  @ocaml.doc("<p>The current state of the static route.</p>") @as("State")
+  state: option<nonEmptyString>,
+  @ocaml.doc("<p>The CIDR block associated with the local subnet of the customer data center.</p>")
+  @as("DestinationCidrBlock")
+  destinationCidrBlock: option<nonEmptyString>,
+}
+@ocaml.doc("<p>The service type information for a VPC endpoint service.</p>")
+type awsEc2VpcEndpointServiceServiceTypeDetails = {
+  @ocaml.doc("<p>The type of service.</p>") @as("ServiceType") serviceType: option<nonEmptyString>,
+}
+@ocaml.doc("<p>An attachment to an Amazon EC2 volume.</p>")
 type awsEc2VolumeAttachment = {
   @ocaml.doc("<p>The attachment state of the volume.</p>") @as("Status")
   status: option<nonEmptyString>,
@@ -1988,12 +2736,12 @@ type awsEc2SecurityGroupUserIdGroupPair = {
   @ocaml.doc("<p>The ID of the VPC for the referenced security group, if applicable.</p>")
   @as("VpcId")
   vpcId: option<nonEmptyString>,
-  @ocaml.doc("<p>The ID of an AWS account.</p>
+  @ocaml.doc("<p>The ID of an Amazon Web Services account.</p>
          <p>For a referenced security group in another VPC, the account ID of the referenced
          security group is returned in the response. If the referenced security group is deleted,
          this value is not returned.</p>
          <p>[EC2-Classic] Required when adding or removing rules that reference a security group in
-         another AWS. </p>")
+         another VPC. </p>")
   @as("UserId")
   userId: option<nonEmptyString>,
   @ocaml.doc("<p>The status of a VPC peering connection, if applicable.</p>") @as("PeeringStatus")
@@ -2048,7 +2796,8 @@ type awsEc2NetworkInterfaceAttachment = {
          </p>")
   @as("Status")
   status: option<nonEmptyString>,
-  @ocaml.doc("<p>The AWS account ID of the owner of the instance.</p>") @as("InstanceOwnerId")
+  @ocaml.doc("<p>The Amazon Web Services account ID of the owner of the instance.</p>")
+  @as("InstanceOwnerId")
   instanceOwnerId: option<nonEmptyString>,
   @ocaml.doc("<p>The ID of the instance.</p>") @as("InstanceId") instanceId: option<nonEmptyString>,
   @ocaml.doc("<p>The device index of the network interface attachment on the instance.</p>")
@@ -2078,12 +2827,20 @@ type awsEc2NetworkAclAssociation = {
   @as("NetworkAclAssociationId")
   networkAclAssociationId: option<nonEmptyString>,
 }
+@ocaml.doc("<p>Identifies a network interface for the EC2 instance.</p>")
+type awsEc2InstanceNetworkInterfacesDetails = {
+  @ocaml.doc(
+    "<p>The identifier of the network interface. The details are in a corresponding <code>AwsEc2NetworkInterfacesDetails</code> object.</p>"
+  )
+  @as("NetworkInterfaceId")
+  networkInterfaceId: option<nonEmptyString>,
+}
 @ocaml.doc("<p>Information about an Elastic IP address.</p>")
 type awsEc2EipDetails = {
   @ocaml.doc("<p>The private IP address that is associated with the Elastic IP address.</p>")
   @as("PrivateIpAddress")
   privateIpAddress: option<nonEmptyString>,
-  @ocaml.doc("<p>The AWS account ID of the owner of the network interface.</p>")
+  @ocaml.doc("<p>The Amazon Web Services account ID of the owner of the network interface.</p>")
   @as("NetworkInterfaceOwnerId")
   networkInterfaceOwnerId: option<nonEmptyString>,
   @ocaml.doc("<p>The identifier of the network interface.</p>") @as("NetworkInterfaceId")
@@ -2104,7 +2861,7 @@ type awsEc2EipDetails = {
          instance.</p>")
   @as("AssociationId")
   associationId: option<nonEmptyString>,
-  @ocaml.doc("<p>The identifier that AWS assigns to represent the allocation of the Elastic IP address
+  @ocaml.doc("<p>The identifier that Amazon Web Services assigns to represent the allocation of the Elastic IP address
          for use with Amazon VPC.</p>")
   @as("AllocationId")
   allocationId: option<nonEmptyString>,
@@ -2124,7 +2881,7 @@ type awsDynamoDbTableStreamSpecification = {
 }
 @ocaml.doc("<p>Information about the server-side encryption for the table.</p>")
 type awsDynamoDbTableSseDescription = {
-  @ocaml.doc("<p>The ARN of the AWS KMS customer master key (CMK) that is used for the AWS KMS
+  @ocaml.doc("<p>The ARN of the KMS key that is used for the KMS
          encryption.</p>")
   @as("KmsMasterKeyArn")
   kmsMasterKeyArn: option<nonEmptyString>,
@@ -2232,12 +2989,11 @@ type awsCodeBuildProjectSource = {
          <ul>
             <li>
                <p>For source code settings that are specified in the source action of a pipeline in
-               AWS CodePipeline, location should not be specified. If it is specified, AWS
-               CodePipeline ignores it. This is because AWS CodePipeline uses the settings in a
+               CodePipeline, location should not be specified. If it is specified, CodePipeline ignores it. This is because CodePipeline uses the settings in a
                pipeline's source action instead of this value.</p>
             </li>
             <li>
-               <p>For source code in an AWS CodeCommit repository, the HTTPS clone URL to the
+               <p>For source code in an CodeCommit repository, the HTTPS clone URL to the
                repository that contains the source code and the build spec file (for example,
                   <code>https://git-codecommit.region-ID.amazonaws.com/v1/repos/repo-name</code>
                ).</p>
@@ -2275,13 +3031,13 @@ type awsCodeBuildProjectSource = {
             </li>
             <li>
                <p>
-                  <code>CODECOMMIT</code> - The source code is in an AWS CodeCommit
+                  <code>CODECOMMIT</code> - The source code is in an CodeCommit
                repository.</p>
             </li>
             <li>
                <p>
                   <code>CODEPIPELINE</code> - The source code settings are specified in the source
-               action of a pipeline in AWS CodePipeline.</p>
+               action of a pipeline in CodePipeline.</p>
             </li>
             <li>
                <p>
@@ -2304,20 +3060,88 @@ type awsCodeBuildProjectSource = {
   @as("Type")
   type_: option<nonEmptyString>,
 }
+@ocaml.doc("<p>Information about logs built to an S3 bucket for a build project.</p>")
+type awsCodeBuildProjectLogsConfigS3LogsDetails = {
+  @ocaml.doc("<p>The current status of the S3 build logs.</p>") @as("Status")
+  status: option<nonEmptyString>,
+  @ocaml.doc("<p>The ARN of the S3 bucket and the path prefix for S3 logs.</p>") @as("Location")
+  location: option<nonEmptyString>,
+  @ocaml.doc("<p>Whether to disable encryption of the S3 build log output.</p>")
+  @as("EncryptionDisabled")
+  encryptionDisabled: option<boolean_>,
+}
+@ocaml.doc("<p>Information about CloudWatch Logs for the build project.</p>")
+type awsCodeBuildProjectLogsConfigCloudWatchLogsDetails = {
+  @ocaml.doc("<p>The prefix of the stream name of the CloudWatch Logs.</p>") @as("StreamName")
+  streamName: option<nonEmptyString>,
+  @ocaml.doc("<p>The current status of the logs in CloudWatch Logs for a build project.</p>")
+  @as("Status")
+  status: option<nonEmptyString>,
+  @ocaml.doc("<p>The group name of the logs in CloudWatch Logs.</p>") @as("GroupName")
+  groupName: option<nonEmptyString>,
+}
 @ocaml.doc("<p>The credentials for access to a private registry.</p>")
 type awsCodeBuildProjectEnvironmentRegistryCredential = {
   @ocaml.doc("<p>The service that created the credentials to access a private Docker registry.</p>
-         <p>The valid value,<code> SECRETS_MANAGER</code>, is for AWS Secrets Manager.</p>")
+         <p>The valid value,<code> SECRETS_MANAGER</code>, is for Secrets Manager.</p>")
   @as("CredentialProvider")
   credentialProvider: option<nonEmptyString>,
-  @ocaml.doc("<p>The Amazon Resource Name (ARN) or name of credentials created using AWS Secrets
-         Manager.</p>
+  @ocaml.doc("<p>The ARN or name of credentials created using Secrets Manager.</p>
          <note>
             <p>The credential can use the name of the credentials only if they exist in your current
-            AWS Region. </p>
+            Amazon Web Services Region. </p>
          </note>")
   @as("Credential")
   credential: option<nonEmptyString>,
+}
+@ocaml.doc(
+  "<p>Information about an environment variable that is available to builds for the build project.</p>"
+)
+type awsCodeBuildProjectEnvironmentEnvironmentVariablesDetails = {
+  @ocaml.doc("<p>The value of the environment variable.</p>") @as("Value")
+  value: option<nonEmptyString>,
+  @ocaml.doc("<p>The type of environment variable.</p>") @as("Type") type_: option<nonEmptyString>,
+  @ocaml.doc("<p>The name of the environment variable.</p>") @as("Name")
+  name: option<nonEmptyString>,
+}
+@ocaml.doc("<p>Information about the build artifacts for the CodeBuild project.</p>")
+type awsCodeBuildProjectArtifactsDetails = {
+  @ocaml.doc("<p>The type of build artifact.</p>") @as("Type") type_: option<nonEmptyString>,
+  @ocaml.doc(
+    "<p>Only used when <code>Type</code> is <code>S3</code>. The path to the artifact. Used with <code>Name</code> and <code>NamespaceType</code> to determine the pattern for storing the artifact.</p>"
+  )
+  @as("Path")
+  path: option<nonEmptyString>,
+  @ocaml.doc(
+    "<p>Only used when <code>Type</code> is <code>S3</code>. The type of output artifact to create.</p>"
+  )
+  @as("Packaging")
+  packaging: option<nonEmptyString>,
+  @ocaml.doc("<p>Whether the name specified in the buildspec file overrides the artifact name.</p>")
+  @as("OverrideArtifactName")
+  overrideArtifactName: option<boolean_>,
+  @ocaml.doc(
+    "<p>Only used when <code>Type</code> is <code>S3</code>. The value to use for the namespace. Used with <code>Name</code> and <code>Path</code> to determine the pattern for storing the artifact.</p>"
+  )
+  @as("NamespaceType")
+  namespaceType: option<nonEmptyString>,
+  @ocaml.doc(
+    "<p>Only used when Type is S3. The name of the artifact. Used with <code>NamepaceType</code> and <code>Path</code> to determine the pattern for storing the artifact.</p>"
+  )
+  @as("Name")
+  name: option<nonEmptyString>,
+  @ocaml.doc(
+    "<p>Only used when <code>Type</code> is <code>S3</code>. The name of the S3 bucket where the artifact is located.</p>"
+  )
+  @as("Location")
+  location: option<nonEmptyString>,
+  @ocaml.doc(
+    "<p>Indicates whether to disable encryption on the artifact. Only valid when <code>Type</code> is <code>S3</code>.</p>"
+  )
+  @as("EncryptionDisabled")
+  encryptionDisabled: option<boolean_>,
+  @ocaml.doc("<p>An identifier for the artifact definition.</p>") @as("ArtifactIdentifier")
+  artifactIdentifier: option<nonEmptyString>,
 }
 @ocaml.doc("<p>Provides details about a CloudTrail trail.</p>")
 type awsCloudTrailTrailDetails = {
@@ -2341,10 +3165,10 @@ type awsCloudTrailTrailDetails = {
   @ocaml.doc("<p>Indicates whether CloudTrail log file validation is enabled.</p>")
   @as("LogFileValidationEnabled")
   logFileValidationEnabled: option<boolean_>,
-  @ocaml.doc("<p>The AWS KMS key ID to use to encrypt the logs.</p>") @as("KmsKeyId")
+  @ocaml.doc("<p>The KMS key ID to use to encrypt the logs.</p>") @as("KmsKeyId")
   kmsKeyId: option<nonEmptyString>,
-  @ocaml.doc("<p>Whether the trail is created for all accounts in an organization in AWS Organizations,
-         or only for the current AWS account.</p>")
+  @ocaml.doc("<p>Whether the trail is created for all accounts in an organization in Organizations,
+         or only for the current Amazon Web Services account.</p>")
   @as("IsOrganizationTrail")
   isOrganizationTrail: option<boolean_>,
   @ocaml.doc(
@@ -2361,13 +3185,51 @@ type awsCloudTrailTrailDetails = {
   @ocaml.doc("<p>Indicates whether the trail has custom event selectors.</p>")
   @as("HasCustomEventSelectors")
   hasCustomEventSelectors: option<boolean_>,
-  @ocaml.doc("<p>The ARN of the role that the CloudWatch Logs endpoint assumes when it writes to the log
+  @ocaml.doc("<p>The ARN of the role that the CloudWatch Events endpoint assumes when it writes to the log
          group.</p>")
   @as("CloudWatchLogsRoleArn")
   cloudWatchLogsRoleArn: option<nonEmptyString>,
   @ocaml.doc("<p>The ARN of the log group that CloudTrail logs are delivered to.</p>")
   @as("CloudWatchLogsLogGroupArn")
   cloudWatchLogsLogGroupArn: option<nonEmptyString>,
+}
+@ocaml.doc(
+  "<p>Provides information about the TLS/SSL configuration that the distribution uses to communicate with viewers.</p>"
+)
+type awsCloudFrontDistributionViewerCertificate = {
+  @ocaml.doc("<p>The viewers that the distribution accepts HTTPS connections from.</p>")
+  @as("SslSupportMethod")
+  sslSupportMethod: option<nonEmptyString>,
+  @ocaml.doc(
+    "<p>The security policy that CloudFront uses for HTTPS connections with viewers. If <code>SslSupportMethod</code> is <code>sni-only</code>, then <code>MinimumProtocolVersion</code> must be <code>TLSv1</code> or higher.</p>"
+  )
+  @as("MinimumProtocolVersion")
+  minimumProtocolVersion: option<nonEmptyString>,
+  @ocaml.doc(
+    "<p>The identifier of the IAM certificate. Used if the certificate is stored in IAM. If you provide <code>IamCertificateId</code>, then you also must provide <code>MinimumProtocolVersion</code> and <code>SslSupportMethod</code>.</p>"
+  )
+  @as("IamCertificateId")
+  iamCertificateId: option<nonEmptyString>,
+  @ocaml.doc(
+    "<p>Whether the distribution uses the CloudFront domain name. If set to <code>false</code>, then you provide either <code>AcmCertificateArn</code> or <code>IamCertificateId</code>.</p>"
+  )
+  @as("CloudFrontDefaultCertificate")
+  cloudFrontDefaultCertificate: option<boolean_>,
+  @ocaml.doc(
+    "<p>The source of the certificate identified by <code>Certificate</code>. Note that in CloudFront, this attribute is deprecated.</p>"
+  )
+  @as("CertificateSource")
+  certificateSource: option<nonEmptyString>,
+  @ocaml.doc(
+    "<p>The identifier of the certificate. Note that in CloudFront, this attribute is deprecated.</p>"
+  )
+  @as("Certificate")
+  certificate: option<nonEmptyString>,
+  @ocaml.doc(
+    "<p>The ARN of the ACM certificate. Used if the certificate is stored in ACM. If you provide an ACM certificate ARN, you must also provide <code>MinimumCertificateVersion</code> and <code>SslSupportMethod</code>.</p>"
+  )
+  @as("AcmCertificateArn")
+  acmCertificateArn: option<nonEmptyString>,
 }
 @ocaml.doc("<p>Information about an origin that is an S3 bucket that is not configured with static
          website hosting.</p>")
@@ -2391,7 +3253,7 @@ type awsCloudFrontDistributionLogging = {
   @ocaml.doc("<p>With this field, you can enable or disable the selected distribution.</p>")
   @as("Enabled")
   enabled: option<boolean_>,
-  @ocaml.doc("<p>The Amazon S3 bucket to store the access logs in.</p>") @as("Bucket")
+  @ocaml.doc("<p>The S3 bucket to store the access logs in.</p>") @as("Bucket")
   bucket: option<nonEmptyString>,
 }
 @ocaml.doc(
@@ -2473,6 +3335,131 @@ type awsCertificateManagerCertificateExtendedKeyUsage = {
          key can be used.</p>")
   @as("Name")
   name: option<nonEmptyString>,
+}
+@ocaml.doc("<p>The metadata options for the instances.</p>")
+type awsAutoScalingLaunchConfigurationMetadataOptions = {
+  @ocaml.doc(
+    "<p>Indicates whether token usage is <code>required</code> or <code>optional</code> for metadata requests. By default, token usage is <code>optional</code>.</p>"
+  )
+  @as("HttpTokens")
+  httpTokens: option<nonEmptyString>,
+  @ocaml.doc(
+    "<p>The HTTP <code>PUT</code> response hop limit for instance metadata requests. The larger the number, the further instance metadata requests can travel.</p>"
+  )
+  @as("HttpPutResponseHopLimit")
+  httpPutResponseHopLimit: option<integer_>,
+  @ocaml.doc(
+    "<p>Enables or disables the HTTP metadata endpoint on your instances. By default, the metadata endpoint is enabled.</p>"
+  )
+  @as("HttpEndpoint")
+  httpEndpoint: option<nonEmptyString>,
+}
+@ocaml.doc("<p>Information about the type of monitoring for instances in the group.</p>")
+type awsAutoScalingLaunchConfigurationInstanceMonitoringDetails = {
+  @ocaml.doc("<p>If set to <code>true</code>, then instances in the group launch with detailed
+         monitoring.</p>
+         <p>If set to <code>false</code>, then instances in the group launch with basic
+         monitoring.</p>")
+  @as("Enabled")
+  enabled: option<boolean_>,
+}
+@ocaml.doc(
+  "<p>Parameters that are used to automatically set up EBS volumes when an instance is launched.</p>"
+)
+type awsAutoScalingLaunchConfigurationBlockDeviceMappingsEbsDetails = {
+  @ocaml.doc("<p>The volume type.</p>") @as("VolumeType") volumeType: option<nonEmptyString>,
+  @ocaml.doc("<p>The volume size, in GiBs. The following are the supported volumes sizes for each volume type:</p>
+         <ul>
+            <li>
+               <p>gp2 and gp3: 1-16,384</p>
+            </li>
+            <li>
+               <p>io1: 4-16,384</p>
+            </li>
+            <li>
+               <p>st1 and sc1: 125-16,384</p>
+            </li>
+            <li>
+               <p>standard: 1-1,024</p>
+            </li>
+         </ul>
+         <p>You must specify either <code>SnapshotId</code> or <code>VolumeSize</code>. If you specify both <code>SnapshotId</code> and <code>VolumeSize</code>, the volume size must be equal or greater than the size of the snapshot.</p>")
+  @as("VolumeSize")
+  volumeSize: option<integer_>,
+  @ocaml.doc("<p>The snapshot ID of the volume to use.</p>
+         <p>You must specify either <code>VolumeSize</code> or <code>SnapshotId</code>.</p>")
+  @as("SnapshotId")
+  snapshotId: option<nonEmptyString>,
+  @ocaml.doc("<p>The number of input/output (I/O) operations per second (IOPS) to provision for the volume.</p>
+         <p>Only supported for <code>gp3</code> or <code>io1</code> volumes. Required for <code>io1</code> volumes. Not used with <code>standard</code>, <code>gp2</code>, <code>st1</code>, or <code>sc1</code> volumes.</p>")
+  @as("Iops")
+  iops: option<integer_>,
+  @ocaml.doc("<p>Whether to encrypt the volume.</p>") @as("Encrypted") encrypted: option<boolean_>,
+  @ocaml.doc("<p>Whether to delete the volume when the instance is terminated.</p>")
+  @as("DeleteOnTermination")
+  deleteOnTermination: option<boolean_>,
+}
+@ocaml.doc("<p>Property values to use to override the values in the launch template.</p>")
+type awsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateOverridesListDetails = {
+  @ocaml.doc(
+    "<p>The number of capacity units provided by the specified instance type in terms of virtual CPUs, memory, storage, throughput, or other relative performance characteristic.</p>"
+  )
+  @as("WeightedCapacity")
+  weightedCapacity: option<nonEmptyString>,
+  @ocaml.doc("<p>The instance type. For example, <code>m3.xlarge</code>.</p>") @as("InstanceType")
+  instanceType: option<nonEmptyString>,
+}
+@ocaml.doc("<p>Details about the launch template to use.</p>")
+type awsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateLaunchTemplateSpecification = {
+  @ocaml.doc(
+    "<p>Identifies the version of the launch template. You can specify a version identifier, or use the values <code>$Latest</code> or <code>$Default</code>.</p>"
+  )
+  @as("Version")
+  version: option<nonEmptyString>,
+  @ocaml.doc(
+    "<p>The name of the launch template. You must specify either <code>LaunchTemplateId</code> or <code>LaunchTemplateName</code>.</p>"
+  )
+  @as("LaunchTemplateName")
+  launchTemplateName: option<nonEmptyString>,
+  @ocaml.doc(
+    "<p>The identifier of the launch template. You must specify either <code>LaunchTemplateId</code> or <code>LaunchTemplateName</code>.</p>"
+  )
+  @as("LaunchTemplateId")
+  launchTemplateId: option<nonEmptyString>,
+}
+@ocaml.doc("<p>Information about the instances distribution.</p>")
+type awsAutoScalingAutoScalingGroupMixedInstancesPolicyInstancesDistributionDetails = {
+  @ocaml.doc(
+    "<p>The maximum price per unit hour that you are willing to pay for a Spot Instance.</p>"
+  )
+  @as("SpotMaxPrice")
+  spotMaxPrice: option<nonEmptyString>,
+  @ocaml.doc(
+    "<p>The number of Spot Instance pools across which to allocate your Spot Instances.</p>"
+  )
+  @as("SpotInstancePools")
+  spotInstancePools: option<integer_>,
+  @ocaml.doc("<p>How to allocate instances across Spot Instance pools.</p>")
+  @as("SpotAllocationStrategy")
+  spotAllocationStrategy: option<nonEmptyString>,
+  @ocaml.doc(
+    "<p>The percentage of On-Demand Instances and Spot Instances for additional capacity beyond <code>OnDemandBaseCapacity</code>.</p>"
+  )
+  @as("OnDemandPercentageAboveBaseCapacity")
+  onDemandPercentageAboveBaseCapacity: option<integer_>,
+  @ocaml.doc(
+    "<p>The minimum amount of the Auto Scaling group's capacity that must be fulfilled by On-Demand Instances.</p>"
+  )
+  @as("OnDemandBaseCapacity")
+  onDemandBaseCapacity: option<integer_>,
+  @ocaml.doc("<p>How to allocate instance types to fulfill On-Demand capacity.</p>")
+  @as("OnDemandAllocationStrategy")
+  onDemandAllocationStrategy: option<nonEmptyString>,
+}
+@ocaml.doc("<p>An Availability Zone for the automatic scaling group.</p>")
+type awsAutoScalingAutoScalingGroupAvailabilityZonesListDetails = {
+  @ocaml.doc("<p>The name of the Availability Zone.</p>") @as("Value")
+  value: option<nonEmptyString>,
 }
 @ocaml.doc("<p>Contains route settings for a stage.</p>")
 type awsApiGatewayV2RouteSettings = {
@@ -2586,9 +3573,16 @@ type adminAccount = {
          currently enabled as a Security Hub administrator.</p>")
   @as("Status")
   status: option<adminStatus>,
-  @ocaml.doc("<p>The AWS account identifier of the Security Hub administrator account.</p>")
+  @ocaml.doc(
+    "<p>The Amazon Web Services account identifier of the Security Hub administrator account.</p>"
+  )
   @as("AccountId")
   accountId: option<nonEmptyString>,
+}
+@ocaml.doc("<p>An adjustment to the CVSS metric.</p>")
+type adjustment = {
+  @ocaml.doc("<p>The reason for the adjustment.</p>") @as("Reason") reason: option<nonEmptyString>,
+  @ocaml.doc("<p>The metric to adjust.</p>") @as("Metric") metric: option<nonEmptyString>,
 }
 @ocaml.doc("<p>An <code>ActionTarget</code> object.</p>")
 type actionTarget = {
@@ -2618,28 +3612,33 @@ type actionLocalIpDetails = {
   @ocaml.doc("<p>The IP address.</p>") @as("IpAddressV4") ipAddressV4: option<nonEmptyString>,
 }
 type accountIdList = array<nonEmptyString>
-@ocaml.doc("<p>The details of an AWS account.</p>")
+@ocaml.doc("<p>The details of an Amazon Web Services account.</p>")
 type accountDetails = {
-  @ocaml.doc("<p>The email of an AWS account.</p>") @as("Email") email: option<nonEmptyString>,
-  @ocaml.doc("<p>The ID of an AWS account.</p>") @as("AccountId") accountId: accountId,
+  @ocaml.doc("<p>The email of an Amazon Web Services account.</p>") @as("Email")
+  email: option<nonEmptyString>,
+  @ocaml.doc("<p>The ID of an Amazon Web Services account.</p>") @as("AccountId")
+  accountId: accountId,
 }
 type wafExcludedRuleList = array<wafExcludedRule>
 type threatIntelIndicatorList = array<threatIntelIndicator>
 type stringFilterList = array<stringFilter>
 type statusReasonsList = array<statusReason>
+type statelessCustomPublishMetricActionDimensionsList = array<
+  statelessCustomPublishMetricActionDimension,
+>
 @ocaml.doc("<p>The standard that you want to enable.</p>")
 type standardsSubscriptionRequest = {
   @ocaml.doc("<p>A key-value pair of input for the standard.</p>") @as("StandardsInput")
   standardsInput: option<standardsInputParameterMap>,
   @ocaml.doc("<p>The ARN of the standard that you want to enable. To view the list of available standards
-         and their ARNs, use the <code>
-               <a>DescribeStandards</a>
-            </code> operation.</p>")
+         and their ARNs, use the <code>DescribeStandards</code> operation.</p>")
   @as("StandardsArn")
   standardsArn: nonEmptyString,
 }
 @ocaml.doc("<p>A resource that represents your subscription to a supported standard.</p>")
 type standardsSubscription = {
+  @ocaml.doc("<p>The reason for the current status.</p>") @as("StandardsStatusReason")
+  standardsStatusReason: option<standardsStatusReason>,
   @ocaml.doc("<p>The status of the standard subscription.</p>
          <p>The status values are as follows:</p>
          <ul>
@@ -2681,7 +3680,7 @@ type standardsControl = {
   @as("RelatedRequirements")
   relatedRequirements: option<relatedRequirementsList>,
   @ocaml.doc("<p>The severity of findings generated from this security standard control.</p>
-         <p>The finding severity is based on an assessment of how easy it would be to compromise AWS
+         <p>The finding severity is based on an assessment of how easy it would be to compromise Amazon Web Services
          resources if the issue is detected.</p>")
   @as("SeverityRating")
   severityRating: option<severityRating>,
@@ -2714,6 +3713,65 @@ type standardsControl = {
 type standards = array<standard>
 type sortCriteria = array<sortCriterion>
 type softwarePackageList = array<softwarePackage>
+@ocaml.doc("<p>A list of port ranges.</p>")
+type ruleGroupVariablesPortSetsDetails = {
+  @ocaml.doc("<p>The list of port ranges.</p>") @as("Definition")
+  definition: option<nonEmptyStringList>,
+}
+@ocaml.doc("<p>A list of IP addresses and address ranges, in CIDR notation.</p>")
+type ruleGroupVariablesIpSetsDetails = {
+  @ocaml.doc("<p>The list of IP addresses and ranges.</p>") @as("Definition")
+  definition: option<nonEmptyStringList>,
+}
+@ocaml.doc("<p>A set of TCP flags and masks to inspect for.</p>")
+type ruleGroupSourceStatelessRuleMatchAttributesTcpFlags = {
+  @ocaml.doc(
+    "<p>The set of flags to consider in the inspection. If not specified, then all flags are inspected.</p>"
+  )
+  @as("Masks")
+  masks: option<nonEmptyStringList>,
+  @ocaml.doc(
+    "<p>Defines the flags from the <code>Masks</code> setting that must be set in order for the packet to match. Flags that are listed must be set. Flags that are not listed must not be set.</p>"
+  )
+  @as("Flags")
+  flags: option<nonEmptyStringList>,
+}
+type ruleGroupSourceStatelessRuleMatchAttributesSourcesList = array<
+  ruleGroupSourceStatelessRuleMatchAttributesSources,
+>
+type ruleGroupSourceStatelessRuleMatchAttributesSourcePortsList = array<
+  ruleGroupSourceStatelessRuleMatchAttributesSourcePorts,
+>
+type ruleGroupSourceStatelessRuleMatchAttributesDestinationsList = array<
+  ruleGroupSourceStatelessRuleMatchAttributesDestinations,
+>
+type ruleGroupSourceStatelessRuleMatchAttributesDestinationPortsList = array<
+  ruleGroupSourceStatelessRuleMatchAttributesDestinationPorts,
+>
+@ocaml.doc("<p>A rule option for a stateful rule.</p>")
+type ruleGroupSourceStatefulRulesOptionsDetails = {
+  @ocaml.doc("<p>A list of settings.</p>") @as("Settings")
+  settings: option<ruleGroupSourceStatefulRulesRuleOptionsSettingsList>,
+  @ocaml.doc("<p>A keyword to look for.</p>") @as("Keyword") keyword: option<nonEmptyString>,
+}
+@ocaml.doc("<p>Stateful inspection criteria for a domain list rule group.</p>")
+type ruleGroupSourceListDetails = {
+  @ocaml.doc(
+    "<p>The domains that you want to inspect for in your traffic flows. You can provide full domain names, or use the '.' prefix as a wildcard. For example, <code>.example.com</code> matches all domains that end with <code>example.com</code>.</p>"
+  )
+  @as("Targets")
+  targets: option<nonEmptyStringList>,
+  @ocaml.doc(
+    "<p>The protocols that you want to inspect. Specify <code>LS_SNI</code> for HTTPS. Specify <code>HTTP_HOST</code> for HTTP. You can specify either or both.</p>"
+  )
+  @as("TargetTypes")
+  targetTypes: option<nonEmptyStringList>,
+  @ocaml.doc(
+    "<p>Indicates whether to allow or deny access to the domains listed in <code>Targets</code>.</p>"
+  )
+  @as("GeneratedRulesType")
+  generatedRulesType: option<nonEmptyString>,
+}
 type resultList = array<result>
 @ocaml.doc("<p>Details about the remediation steps for a finding.</p>")
 type remediation = {
@@ -2736,8 +3794,8 @@ type product = {
   )
   @as("ActivationUrl")
   activationUrl: option<nonEmptyString>,
-  @ocaml.doc("<p>For integrations with AWS services, the AWS Console URL from which to activate the service.</p>
-         <p>For integrations with third-party products, the AWS Marketplace URL from which to subscribe to or purchase the product.</p>")
+  @ocaml.doc("<p>For integrations with Amazon Web Services services, the Amazon Web Services Console URL from which to activate the service.</p>
+         <p>For integrations with third-party products, the Amazon Web Services Marketplace URL from which to subscribe to or purchase the product.</p>")
   @as("MarketplaceUrl")
   marketplaceUrl: option<nonEmptyString>,
   @ocaml.doc("<p>The types of integration that the product supports. Available values are the
@@ -2835,6 +3893,13 @@ type ipFilterList = array<ipFilter>
 type invitationList = array<invitation>
 type insightResultValueList = array<insightResultValue>
 type importFindingsErrorList = array<importFindingsError>
+type firewallPolicyStatelessRuleGroupReferencesList = array<
+  firewallPolicyStatelessRuleGroupReferencesDetails,
+>
+type firewallPolicyStatefulRuleGroupReferencesList = array<
+  firewallPolicyStatefulRuleGroupReferencesDetails,
+>
+type findingAggregatorList = array<findingAggregator>
 @ocaml.doc("<p>A date filter for querying findings.</p>")
 type dateFilter = {
   @ocaml.doc("<p>A date range for the date filter.</p>") @as("DateRange")
@@ -2842,9 +3907,9 @@ type dateFilter = {
   @ocaml.doc("<p>An end date for the date filter.</p>") @as("End") end: option<nonEmptyString>,
   @ocaml.doc("<p>A start date for the date filter.</p>") @as("Start") start: option<nonEmptyString>,
 }
-type cvssList = array<cvss>
 type cidrBlockAssociationList = array<cidrBlockAssociation>
 type cells = array<cell>
+type booleanFilterList = array<booleanFilter>
 @ocaml.doc("<p>A finding from a <code>BatchUpdateFindings</code> request that Security Hub was unable to
          update.</p>")
 type batchUpdateFindingsUnprocessedFinding = {
@@ -2855,6 +3920,10 @@ type batchUpdateFindingsUnprocessedFinding = {
   @ocaml.doc("<p>The identifier of the finding that was not updated.</p>") @as("FindingIdentifier")
   findingIdentifier: awsSecurityFindingIdentifier,
 }
+type awsWafRegionalRateBasedRuleMatchPredicateList = array<
+  awsWafRegionalRateBasedRuleMatchPredicate,
+>
+type awsWafRateBasedRuleMatchPredicateList = array<awsWafRateBasedRuleMatchPredicate>
 @ocaml.doc("<p>Provides details about the compliance for a patch.</p>")
 type awsSsmPatch = {
   @ocaml.doc("<p>The compliance status details for the patch.</p>") @as("ComplianceSummary")
@@ -2862,7 +3931,7 @@ type awsSsmPatch = {
 }
 type awsSnsTopicSubscriptionList = array<awsSnsTopicSubscription>
 type awsSecurityFindingIdentifierList = array<awsSecurityFindingIdentifier>
-@ocaml.doc("<p>Details about an AWS Secrets Manager secret.</p>")
+@ocaml.doc("<p>Details about an Secrets Manager secret.</p>")
 type awsSecretsManagerSecretDetails = {
   @ocaml.doc("<p>The user-provided description of the secret.</p>") @as("Description")
   description: option<nonEmptyString>,
@@ -2873,7 +3942,7 @@ type awsSecretsManagerSecretDetails = {
   rotationLambdaArn: option<nonEmptyString>,
   @ocaml.doc("<p>Whether rotation is enabled.</p>") @as("RotationEnabled")
   rotationEnabled: option<boolean_>,
-  @ocaml.doc("<p>The ARN, Key ID, or alias of the AWS KMS customer master key (CMK) used to encrypt the
+  @ocaml.doc("<p>The ARN, Key ID, or alias of the KMS key used to encrypt the
             <code>SecretString</code> or <code>SecretBinary</code> values for versions of this
          secret.</p>")
   @as("KmsKeyId")
@@ -2884,6 +3953,17 @@ type awsSecretsManagerSecretDetails = {
   @ocaml.doc("<p>Defines the rotation schedule for the secret.</p>") @as("RotationRules")
   rotationRules: option<awsSecretsManagerSecretRotationRules>,
 }
+@ocaml.doc("<p>A rule for redirecting requests
+         to the website.</p>")
+type awsS3BucketWebsiteConfigurationRoutingRule = {
+  @ocaml.doc("<p>Provides the rules to redirect the request if the condition in <code>Condition</code> is
+         met.</p>")
+  @as("Redirect")
+  redirect: option<awsS3BucketWebsiteConfigurationRoutingRuleRedirect>,
+  @ocaml.doc("<p>Provides the condition that must be met in order to apply the routing rule.</p>")
+  @as("Condition")
+  condition: option<awsS3BucketWebsiteConfigurationRoutingRuleCondition>,
+}
 @ocaml.doc("<p>An encryption rule to apply to the S3 bucket.</p>")
 type awsS3BucketServerSideEncryptionRule = {
   @ocaml.doc("<p>Specifies the default server-side encryption to apply to new objects in the bucket. If a
@@ -2891,6 +3971,23 @@ type awsS3BucketServerSideEncryptionRule = {
          encryption is applied.</p>")
   @as("ApplyServerSideEncryptionByDefault")
   applyServerSideEncryptionByDefault: option<awsS3BucketServerSideEncryptionByDefault>,
+}
+type awsS3BucketNotificationConfigurationS3KeyFilterRules = array<
+  awsS3BucketNotificationConfigurationS3KeyFilterRule,
+>
+type awsS3BucketBucketLifecycleConfigurationRulesTransitionsList = array<
+  awsS3BucketBucketLifecycleConfigurationRulesTransitionsDetails,
+>
+type awsS3BucketBucketLifecycleConfigurationRulesNoncurrentVersionTransitionsList = array<
+  awsS3BucketBucketLifecycleConfigurationRulesNoncurrentVersionTransitionsDetails,
+>
+@ocaml.doc("<p>A value to use for the filter.</p>")
+type awsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsDetails = {
+  @ocaml.doc("<p>The type of filter value.</p>") @as("Type") type_: option<nonEmptyString>,
+  @ocaml.doc("<p>A tag that is assigned to matching objects.</p>") @as("Tag")
+  tag: option<awsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsTagDetails>,
+  @ocaml.doc("<p>Prefix text for matching objects.</p>") @as("Prefix")
+  prefix: option<nonEmptyString>,
 }
 type awsRedshiftClusterVpcSecurityGroups = array<awsRedshiftClusterVpcSecurityGroup>
 type awsRedshiftClusterIamRoles = array<awsRedshiftClusterIamRole>
@@ -2906,6 +4003,44 @@ type awsRdsPendingCloudWatchLogsExports = {
   logTypesToDisable: option<stringList>,
   @ocaml.doc("<p>A list of log types that are being enabled.</p>") @as("LogTypesToEnable")
   logTypesToEnable: option<stringList>,
+}
+@ocaml.doc(
+  "<p>Details about an Amazon RDS event notification subscription. The subscription allows Amazon RDS to post events to an SNS topic.</p>"
+)
+type awsRdsEventSubscriptionDetails = {
+  @ocaml.doc("<p>The datetime when the event notification subscription was created.</p>
+         <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet
+         Date/Time Format</a>. The value cannot contain spaces. For example,
+         <code>2020-03-22T13:22:13.933Z</code>.</p>")
+  @as("SubscriptionCreationTime")
+  subscriptionCreationTime: option<nonEmptyString>,
+  @ocaml.doc("<p>The status of the event notification subscription.</p>
+         <p>Valid values: <code>creating</code> | <code>modifying</code> | <code>deleting</code> | <code>active</code> | <code>no-permission</code> | <code>topic-not-exist</code>
+         </p>")
+  @as("Status")
+  status: option<nonEmptyString>,
+  @ocaml.doc("<p>The source type for the event notification subscription.</p>") @as("SourceType")
+  sourceType: option<nonEmptyString>,
+  @ocaml.doc("<p>A list of source identifiers for the event notification subscription.</p>")
+  @as("SourceIdsList")
+  sourceIdsList: option<nonEmptyStringList>,
+  @ocaml.doc("<p>The ARN of the SNS topic to post the event notifications to.</p>")
+  @as("SnsTopicArn")
+  snsTopicArn: option<nonEmptyString>,
+  @ocaml.doc("<p>The ARN of the event notification subscription.</p>") @as("EventSubscriptionArn")
+  eventSubscriptionArn: option<nonEmptyString>,
+  @ocaml.doc("<p>The list of event categories for the event notification subscription.</p>")
+  @as("EventCategoriesList")
+  eventCategoriesList: option<nonEmptyStringList>,
+  @ocaml.doc("<p>Whether the event notification subscription is enabled.</p>") @as("Enabled")
+  enabled: option<boolean_>,
+  @ocaml.doc("<p>The identifier of the event notification subscription.</p>") @as("CustomerAwsId")
+  customerAwsId: option<nonEmptyString>,
+  @ocaml.doc(
+    "<p>The identifier of the account that is associated with the event notification subscription.</p>"
+  )
+  @as("CustSubscriptionId")
+  custSubscriptionId: option<nonEmptyString>,
 }
 @ocaml.doc("<p>Information about a subnet in a subnet group.</p>")
 type awsRdsDbSubnetGroupSubnet = {
@@ -2933,7 +4068,7 @@ type awsRdsDbClusterSnapshotDetails = {
   dbClusterSnapshotIdentifier: option<nonEmptyString>,
   @ocaml.doc("<p>The DB cluster identifier.</p>") @as("DbClusterIdentifier")
   dbClusterIdentifier: option<nonEmptyString>,
-  @ocaml.doc("<p>The ARN of the AWS KMS master key that is used to encrypt the database instances in the
+  @ocaml.doc("<p>The ARN of the KMS master key that is used to encrypt the database instances in the
          DB cluster.</p>")
   @as("KmsKeyId")
   kmsKeyId: option<nonEmptyString>,
@@ -2987,6 +4122,72 @@ type awsRdsDbClusterSnapshotDetails = {
 type awsRdsDbClusterOptionGroupMemberships = array<awsRdsDbClusterOptionGroupMembership>
 type awsRdsDbClusterMembers = array<awsRdsDbClusterMember>
 type awsRdsDbClusterAssociatedRoles = array<awsRdsDbClusterAssociatedRole>
+@ocaml.doc(
+  "<p>Contains information that OpenSearch Service derives based on the <code>VPCOptions</code> for the domain.</p>"
+)
+type awsOpenSearchServiceDomainVpcOptionsDetails = {
+  @ocaml.doc(
+    "<p>A list of subnet IDs that are associated with the VPC endpoints for the domain.</p>"
+  )
+  @as("SubnetIds")
+  subnetIds: option<nonEmptyStringList>,
+  @ocaml.doc(
+    "<p>The list of security group IDs that are associated with the VPC endpoints for the domain.</p>"
+  )
+  @as("SecurityGroupIds")
+  securityGroupIds: option<nonEmptyStringList>,
+}
+@ocaml.doc("<p>Configures the CloudWatch Logs to publish for the OpenSearch domain.</p>")
+type awsOpenSearchServiceDomainLogPublishingOptionsDetails = {
+  @ocaml.doc("<p>Configures the OpenSearch audit logs publishing.</p>") @as("AuditLogs")
+  auditLogs: option<awsOpenSearchServiceDomainLogPublishingOption>,
+  @ocaml.doc("<p>Configures the OpenSearch search slow log publishing.</p>") @as("SearchSlowLogs")
+  searchSlowLogs: option<awsOpenSearchServiceDomainLogPublishingOption>,
+  @ocaml.doc("<p>Configures the OpenSearch index logs publishing.</p>") @as("IndexSlowLogs")
+  indexSlowLogs: option<awsOpenSearchServiceDomainLogPublishingOption>,
+}
+@ocaml.doc("<p>Details about the configuration of an OpenSearch cluster.</p>")
+type awsOpenSearchServiceDomainClusterConfigDetails = {
+  @ocaml.doc("<p>The hardware configuration of the computer that hosts the dedicated master node.</p>
+         <p>If this attribute is specified, then <code>DedicatedMasterEnabled</code> must be <code>true</code>.
+      </p>")
+  @as("DedicatedMasterType")
+  dedicatedMasterType: option<nonEmptyString>,
+  @ocaml.doc(
+    "<p>Whether to enable zone awareness for the OpenSearch domain. When zone awareness is enabled, OpenSearch Service allocates the cluster's nodes and replica index shards across Availability Zones (AZs) in the same Region. This prevents data loss and minimizes downtime if a node or data center fails.</p>"
+  )
+  @as("ZoneAwarenessEnabled")
+  zoneAwarenessEnabled: option<boolean_>,
+  @ocaml.doc("<p>The type of UltraWarm instance.</p>") @as("WarmType")
+  warmType: option<nonEmptyString>,
+  @ocaml.doc("<p>The instance type for your data nodes. </p>") @as("InstanceType")
+  instanceType: option<nonEmptyString>,
+  @ocaml.doc(
+    "<p>The number of instances to use for the master node. If this attribute is specified, then <code>DedicatedMasterEnabled</code> must be <code>true</code>.</p>"
+  )
+  @as("DedicatedMasterCount")
+  dedicatedMasterCount: option<integer_>,
+  @ocaml.doc(
+    "<p>Configuration options for zone awareness. Provided if <code>ZoneAwarenessEnabled</code> is <code>true</code>.</p>"
+  )
+  @as("ZoneAwarenessConfig")
+  zoneAwarenessConfig: option<awsOpenSearchServiceDomainClusterConfigZoneAwarenessConfigDetails>,
+  @ocaml.doc(
+    "<p>Whether to use a dedicated master node for the OpenSearch domain. A dedicated master node performs cluster management tasks, but does not hold data or respond to data upload requests.</p>"
+  )
+  @as("DedicatedMasterEnabled")
+  dedicatedMasterEnabled: option<boolean_>,
+  @ocaml.doc("<p>The number of UltraWarm instances.</p>") @as("WarmCount")
+  warmCount: option<integer_>,
+  @ocaml.doc("<p>Whether UltraWarm is enabled.</p>") @as("WarmEnabled")
+  warmEnabled: option<boolean_>,
+  @ocaml.doc("<p>The number of data nodes to use in the OpenSearch domain.</p>")
+  @as("InstanceCount")
+  instanceCount: option<integer_>,
+}
+type awsNetworkFirewallFirewallSubnetMappingsList = array<
+  awsNetworkFirewallFirewallSubnetMappingsDetails,
+>
 @ocaml.doc("<p>Details about a Lambda layer version.</p>")
 type awsLambdaLayerVersionDetails = {
   @ocaml.doc("<p>Indicates when the version was created.</p>
@@ -3007,9 +4208,7 @@ type awsLambdaLayerVersionDetails = {
   @ocaml.doc("<p>The version number.</p>") @as("Version")
   version: option<awsLambdaLayerVersionNumber>,
 }
-@ocaml.doc(
-  "<p>The VPC security groups and subnets that are attached to a Lambda function. For more information, see VPC Settings.</p>"
-)
+@ocaml.doc("<p>The VPC security groups and subnets that are attached to a Lambda function.</p>")
 type awsLambdaFunctionVpcConfig = {
   @ocaml.doc("<p>The ID of the VPC.</p>") @as("VpcId") vpcId: option<nonEmptyString>,
   @ocaml.doc("<p>A list of VPC subnet IDs.</p>") @as("SubnetIds")
@@ -3038,6 +4237,7 @@ type awsIamAccessKeySessionContext = {
   @ocaml.doc("<p>Attributes of the session that the key was used for.</p>") @as("Attributes")
   attributes: option<awsIamAccessKeySessionContextAttributes>,
 }
+type awsElbv2LoadBalancerAttributes = array<awsElbv2LoadBalancerAttribute>
 @ocaml.doc("<p>Lists the policies that are enabled for a load balancer listener.</p>")
 type awsElbLoadBalancerListenerDescription = {
   @ocaml.doc("<p>The policies enabled for the listener.</p>") @as("PolicyNames")
@@ -3081,7 +4281,7 @@ type awsElbLoadBalancerAttributes = {
 }
 type awsElbLbCookieStickinessPolicies = array<awsElbLbCookieStickinessPolicy>
 type awsElbAppCookieStickinessPolicies = array<awsElbAppCookieStickinessPolicy>
-@ocaml.doc("<p>Information that Amazon ES derives based on <code>VPCOptions</code> for the
+@ocaml.doc("<p>Information that OpenSearch derives based on <code>VPCOptions</code> for the
          domain.</p>")
 type awsElasticsearchDomainVPCOptions = {
   @ocaml.doc("<p>ID for the VPC.</p>") @as("VPCId") vpcid: option<nonEmptyString>,
@@ -3097,12 +4297,428 @@ type awsElasticsearchDomainVPCOptions = {
   @as("AvailabilityZones")
   availabilityZones: option<nonEmptyStringList>,
 }
+@ocaml.doc("<p>configures the CloudWatch Logs to publish for the
+         Elasticsearch domain.</p>")
+type awsElasticsearchDomainLogPublishingOptions = {
+  @as("AuditLogs") auditLogs: option<awsElasticsearchDomainLogPublishingOptionsLogConfig>,
+  @ocaml.doc("<p>Configures the OpenSearch search slow log
+         publishing.</p>")
+  @as("SearchSlowLogs")
+  searchSlowLogs: option<awsElasticsearchDomainLogPublishingOptionsLogConfig>,
+  @ocaml.doc("<p>Configures the OpenSearch index logs
+         publishing.</p>")
+  @as("IndexSlowLogs")
+  indexSlowLogs: option<awsElasticsearchDomainLogPublishingOptionsLogConfig>,
+}
+@ocaml.doc("<p>details about the configuration of an OpenSearch cluster.</p>")
+type awsElasticsearchDomainElasticsearchClusterConfigDetails = {
+  @ocaml.doc(
+    "<p>Whether to enable zone awareness for the Elasticsearch domain. When zone awareness is enabled, OpenSearch allocates the cluster's nodes and replica index shards across Availability Zones in the same Region. This prevents data loss and minimizes downtime if a node or data center fails.</p>"
+  )
+  @as("ZoneAwarenessEnabled")
+  zoneAwarenessEnabled: option<boolean_>,
+  @ocaml.doc(
+    "<p>Configuration options for zone awareness. Provided if <code>ZoneAwarenessEnabled</code> is <code>true</code>.</p>"
+  )
+  @as("ZoneAwarenessConfig")
+  zoneAwarenessConfig: option<
+    awsElasticsearchDomainElasticsearchClusterConfigZoneAwarenessConfigDetails,
+  >,
+  @ocaml.doc(
+    "<p>The instance type for your data nodes. For example, <code>m3.medium.elasticsearch</code>.</p>"
+  )
+  @as("InstanceType")
+  instanceType: option<nonEmptyString>,
+  @ocaml.doc("<p>The number of data nodes to use in the Elasticsearch domain.</p>")
+  @as("InstanceCount")
+  instanceCount: option<integer_>,
+  @ocaml.doc(
+    "<p>The hardware configuration of the computer that hosts the dedicated master node. For example, <code>m3.medium.elasticsearch</code>. If this attribute is specified, then <code>DedicatedMasterEnabled</code> must be <code>true</code>.</p>"
+  )
+  @as("DedicatedMasterType")
+  dedicatedMasterType: option<nonEmptyString>,
+  @ocaml.doc(
+    "<p>Whether to use a dedicated master node for the Elasticsearch domain. A dedicated master node performs cluster management tasks, but doesn't hold data or respond to data upload requests.</p>"
+  )
+  @as("DedicatedMasterEnabled")
+  dedicatedMasterEnabled: option<boolean_>,
+  @ocaml.doc(
+    "<p>The number of instances to use for the master node. If this attribute is specified, then <code>DedicatedMasterEnabled</code> must be <code>true</code>.</p>"
+  )
+  @as("DedicatedMasterCount")
+  dedicatedMasterCount: option<integer_>,
+}
 type awsElasticBeanstalkEnvironmentOptionSettings = array<
   awsElasticBeanstalkEnvironmentOptionSetting,
 >
 type awsElasticBeanstalkEnvironmentEnvironmentLinks = array<
   awsElasticBeanstalkEnvironmentEnvironmentLink,
 >
+@ocaml.doc("<p>Information about the VPC configuration used by the cluster control plane.</p>")
+type awsEksClusterResourcesVpcConfigDetails = {
+  @ocaml.doc("<p>The subnets that are associated with the cluster.</p>") @as("SubnetIds")
+  subnetIds: option<nonEmptyStringList>,
+  @ocaml.doc(
+    "<p>The security groups that are associated with the cross-account elastic network interfaces that are used to allow communication between your nodes and the Amazon EKS control plane.</p>"
+  )
+  @as("SecurityGroupIds")
+  securityGroupIds: option<nonEmptyStringList>,
+}
+@ocaml.doc("<p>Details for a cluster logging configuration.</p>")
+type awsEksClusterLoggingClusterLoggingDetails = {
+  @ocaml.doc("<p>A list of logging types.</p>") @as("Types") types: option<nonEmptyStringList>,
+  @ocaml.doc("<p>Whether the logging types that are listed in <code>Types</code> are enabled.</p>")
+  @as("Enabled")
+  enabled: option<boolean_>,
+}
+@ocaml.doc(
+  "<p>Information about the Amazon Elastic File System file system that is used for task storage.</p>"
+)
+type awsEcsTaskDefinitionVolumesEfsVolumeConfigurationDetails = {
+  @ocaml.doc(
+    "<p>The port to use when sending encrypted data between the Amazon ECS host and the Amazon EFS server.</p>"
+  )
+  @as("TransitEncryptionPort")
+  transitEncryptionPort: option<integer_>,
+  @ocaml.doc(
+    "<p>Whether to enable encryption for Amazon EFS data in transit between the Amazon ECS host and the Amazon EFS server. </p>"
+  )
+  @as("TransitEncryption")
+  transitEncryption: option<nonEmptyString>,
+  @ocaml.doc(
+    "<p>The directory within the Amazon EFS file system to mount as the root directory inside the host.</p>"
+  )
+  @as("RootDirectory")
+  rootDirectory: option<nonEmptyString>,
+  @ocaml.doc("<p>The Amazon EFS file system identifier to use.</p>") @as("FilesystemId")
+  filesystemId: option<nonEmptyString>,
+  @ocaml.doc("<p>The authorization configuration details for the Amazon EFS file system.</p>")
+  @as("AuthorizationConfig")
+  authorizationConfig: option<
+    awsEcsTaskDefinitionVolumesEfsVolumeConfigurationAuthorizationConfigDetails,
+  >,
+}
+@ocaml.doc("<p>Information about a Docker volume.</p>")
+type awsEcsTaskDefinitionVolumesDockerVolumeConfigurationDetails = {
+  @ocaml.doc(
+    "<p>The scope for the Docker volume that determines its lifecycle. Docker volumes that are scoped to a task are provisioned automatically when the task starts and destroyed when the task stops. Docker volumes that are shared persist after the task stops.</p>"
+  )
+  @as("Scope")
+  scope: option<nonEmptyString>,
+  @ocaml.doc("<p>Custom metadata to add to the Docker volume.</p>") @as("Labels")
+  labels: option<fieldMap>,
+  @ocaml.doc("<p>A map of Docker driver-specific options that are passed through.</p>")
+  @as("DriverOpts")
+  driverOpts: option<fieldMap>,
+  @ocaml.doc("<p>The Docker volume driver to use.</p>") @as("Driver")
+  driver: option<nonEmptyString>,
+  @ocaml.doc(
+    "<p>Whether to create the Docker volume automatically if it does not already exist.</p>"
+  )
+  @as("Autoprovision")
+  autoprovision: option<boolean_>,
+}
+type awsEcsTaskDefinitionProxyConfigurationProxyConfigurationPropertiesList = array<
+  awsEcsTaskDefinitionProxyConfigurationProxyConfigurationPropertiesDetails,
+>
+type awsEcsTaskDefinitionPlacementConstraintsList = array<
+  awsEcsTaskDefinitionPlacementConstraintsDetails,
+>
+type awsEcsTaskDefinitionInferenceAcceleratorsList = array<
+  awsEcsTaskDefinitionInferenceAcceleratorsDetails,
+>
+type awsEcsTaskDefinitionContainerDefinitionsVolumesFromList = array<
+  awsEcsTaskDefinitionContainerDefinitionsVolumesFromDetails,
+>
+type awsEcsTaskDefinitionContainerDefinitionsUlimitsList = array<
+  awsEcsTaskDefinitionContainerDefinitionsUlimitsDetails,
+>
+type awsEcsTaskDefinitionContainerDefinitionsSystemControlsList = array<
+  awsEcsTaskDefinitionContainerDefinitionsSystemControlsDetails,
+>
+type awsEcsTaskDefinitionContainerDefinitionsSecretsList = array<
+  awsEcsTaskDefinitionContainerDefinitionsSecretsDetails,
+>
+type awsEcsTaskDefinitionContainerDefinitionsResourceRequirementsList = array<
+  awsEcsTaskDefinitionContainerDefinitionsResourceRequirementsDetails,
+>
+type awsEcsTaskDefinitionContainerDefinitionsPortMappingsList = array<
+  awsEcsTaskDefinitionContainerDefinitionsPortMappingsDetails,
+>
+type awsEcsTaskDefinitionContainerDefinitionsMountPointsList = array<
+  awsEcsTaskDefinitionContainerDefinitionsMountPointsDetails,
+>
+type awsEcsTaskDefinitionContainerDefinitionsLogConfigurationSecretOptionsList = array<
+  awsEcsTaskDefinitionContainerDefinitionsLogConfigurationSecretOptionsDetails,
+>
+@ocaml.doc("<p>The container path, mount options, and size (in MiB) of a tmpfs mount.</p>")
+type awsEcsTaskDefinitionContainerDefinitionsLinuxParametersTmpfsDetails = {
+  @ocaml.doc("<p>The maximum size (in MiB) of the tmpfs volume.</p>") @as("Size")
+  size: option<integer_>,
+  @ocaml.doc("<p>The list of tmpfs volume mount options.</p>") @as("MountOptions")
+  mountOptions: option<nonEmptyStringList>,
+  @ocaml.doc("<p>The absolute file path where the tmpfs volume is to be mounted.</p>")
+  @as("ContainerPath")
+  containerPath: option<nonEmptyString>,
+}
+@ocaml.doc("<p>A host device to expose to the container.</p>")
+type awsEcsTaskDefinitionContainerDefinitionsLinuxParametersDevicesDetails = {
+  @ocaml.doc(
+    "<p>The explicit permissions to provide to the container for the device. By default, the container has permissions for read, write, and <code>mknod</code> for the device.</p>"
+  )
+  @as("Permissions")
+  permissions: option<nonEmptyStringList>,
+  @ocaml.doc("<p>The path for the device on the host container instance.</p>") @as("HostPath")
+  hostPath: option<nonEmptyString>,
+  @ocaml.doc("<p>The path inside the container at which to expose the host device.</p>")
+  @as("ContainerPath")
+  containerPath: option<nonEmptyString>,
+}
+@ocaml.doc(
+  "<p>The Linux capabilities for the container that are added to or dropped from the default configuration provided by Docker.</p>"
+)
+type awsEcsTaskDefinitionContainerDefinitionsLinuxParametersCapabilitiesDetails = {
+  @ocaml.doc(
+    "<p>The Linux capabilities for the container that are dropped from the default configuration provided by Docker.</p>"
+  )
+  @as("Drop")
+  drop: option<nonEmptyStringList>,
+  @ocaml.doc(
+    "<p>The Linux capabilities for the container that are added to the default configuration provided by Docker.</p>"
+  )
+  @as("Add")
+  add: option<nonEmptyStringList>,
+}
+@ocaml.doc(
+  "<p>The container health check command and associated configuration parameters for the container.</p>"
+)
+type awsEcsTaskDefinitionContainerDefinitionsHealthCheckDetails = {
+  @ocaml.doc(
+    "<p>The time period in seconds to wait for a health check to succeed before it is considered a failure. The default value is 5.</p>"
+  )
+  @as("Timeout")
+  timeout: option<integer_>,
+  @ocaml.doc(
+    "<p>The optional grace period in seconds that allows containers time to bootstrap before failed health checks count towards the maximum number of retries.</p>"
+  )
+  @as("StartPeriod")
+  startPeriod: option<integer_>,
+  @ocaml.doc(
+    "<p>The number of times to retry a failed health check before the container is considered unhealthy. The default value is 3.</p>"
+  )
+  @as("Retries")
+  retries: option<integer_>,
+  @ocaml.doc(
+    "<p>The time period in seconds between each health check execution. The default value is 30 seconds.</p>"
+  )
+  @as("Interval")
+  interval: option<integer_>,
+  @ocaml.doc("<p>The command that the container runs to determine whether it is healthy.</p>")
+  @as("Command")
+  command: option<nonEmptyStringList>,
+}
+@ocaml.doc(
+  "<p>The FireLens configuration for the container. The configuration specifies and configures a log router for container logs.</p>"
+)
+type awsEcsTaskDefinitionContainerDefinitionsFirelensConfigurationDetails = {
+  @ocaml.doc("<p>The log router to use. </p>") @as("Type") type_: option<nonEmptyString>,
+  @ocaml.doc("<p>The options to use to configure the log router.</p>
+         <p>The valid option keys are as follows:</p>
+         <ul>
+            <li>
+               <p>
+                  <code>enable-ecs-log-metadata</code>. The value can be <code>true</code> or
+               <code>false</code>.</p>
+            </li>
+            <li>
+               <p>
+                  <code>config-file-type</code>. The value can be <code>s3</code> or
+               <code>file</code>.</p>
+            </li>
+            <li>
+               <p>
+                  <code>config-file-value</code>. The value is either an S3 ARN or a file path.</p>
+            </li>
+         </ul>")
+  @as("Options")
+  options: option<fieldMap>,
+}
+type awsEcsTaskDefinitionContainerDefinitionsExtraHostsList = array<
+  awsEcsTaskDefinitionContainerDefinitionsExtraHostsDetails,
+>
+type awsEcsTaskDefinitionContainerDefinitionsEnvironmentList = array<
+  awsEcsTaskDefinitionContainerDefinitionsEnvironmentDetails,
+>
+type awsEcsTaskDefinitionContainerDefinitionsEnvironmentFilesList = array<
+  awsEcsTaskDefinitionContainerDefinitionsEnvironmentFilesDetails,
+>
+type awsEcsTaskDefinitionContainerDefinitionsDependsOnList = array<
+  awsEcsTaskDefinitionContainerDefinitionsDependsOnDetails,
+>
+type awsEcsServiceServiceRegistriesList = array<awsEcsServiceServiceRegistriesDetails>
+type awsEcsServicePlacementStrategiesList = array<awsEcsServicePlacementStrategiesDetails>
+type awsEcsServicePlacementConstraintsList = array<awsEcsServicePlacementConstraintsDetails>
+@ocaml.doc(
+  "<p>For tasks that use the <code>awsvpc</code> networking mode, the VPC subnet and security group configuration.</p>"
+)
+type awsEcsServiceNetworkConfigurationAwsVpcConfigurationDetails = {
+  @ocaml.doc("<p>The IDs of the subnets associated with the task or service.</p>
+         <p>You can provide up to 16 subnets.</p>")
+  @as("Subnets")
+  subnets: option<nonEmptyStringList>,
+  @ocaml.doc("<p>The IDs of the security groups associated with the task or service.</p>
+         <p>You can provide up to five security groups.</p>")
+  @as("SecurityGroups")
+  securityGroups: option<nonEmptyStringList>,
+  @ocaml.doc("<p>Whether the task's elastic network interface receives a public IP address. The default value is <code>DISABLED</code>.</p>
+         <p>Valid values: <code>ENABLED</code> | <code>DISABLED</code>
+         </p>")
+  @as("AssignPublicIp")
+  assignPublicIp: option<nonEmptyString>,
+}
+type awsEcsServiceLoadBalancersList = array<awsEcsServiceLoadBalancersDetails>
+@ocaml.doc("<p>Optional deployment parameters for the service.</p>")
+type awsEcsServiceDeploymentConfigurationDetails = {
+  @ocaml.doc("<p>For a service that uses the rolling update (<code>ECS</code>) deployment type, the minimum number of tasks in a service that must remain in the <code>RUNNING</code> state during a deployment, and while any container instances are in the <code>DRAINING</code> state if the service contains tasks using the EC2 launch type. Expressed as a percentage of the desired number of tasks. The default value is 100%.</p>
+         <p>For a service that uses the blue/green (<code>CODE_DEPLOY</code>) or <code>EXTERNAL</code> deployment types and tasks that use the EC2 launch type, the minimum number of the tasks in the service that remain in the <code>RUNNING</code> state while the container instances are in the <code>DRAINING</code> state.</p>
+         <p>For the Fargate launch type, the minimum healthy percent value is not used.</p>")
+  @as("MinimumHealthyPercent")
+  minimumHealthyPercent: option<integer_>,
+  @ocaml.doc("<p>For a service that uses the rolling update (<code>ECS</code>) deployment type, the maximum number of tasks in a service that are allowed in the <code>RUNNING</code> or <code>PENDING</code> state during a deployment, and for tasks that use the EC2 launch type, when any container instances are in the <code>DRAINING</code> state. Provided as a percentage of the desired number of tasks. The default value is 200%.</p>
+         <p>For a service that uses the blue/green (<code>CODE_DEPLOY</code>) or <code>EXTERNAL</code> deployment types, and tasks that use the EC2 launch type, the maximum number of tasks in the service that remain in the <code>RUNNING</code> state while the container instances are in the <code>DRAINING</code> state.</p>
+         <p>For the Fargate launch type, the maximum percent value is not used.</p>")
+  @as("MaximumPercent")
+  maximumPercent: option<integer_>,
+  @ocaml.doc(
+    "<p>Determines whether a service deployment fails if a service cannot reach a steady state.</p>"
+  )
+  @as("DeploymentCircuitBreaker")
+  deploymentCircuitBreaker: option<
+    awsEcsServiceDeploymentConfigurationDeploymentCircuitBreakerDetails,
+  >,
+}
+type awsEcsServiceCapacityProviderStrategyList = array<awsEcsServiceCapacityProviderStrategyDetails>
+type awsEcsClusterDefaultCapacityProviderStrategyList = array<
+  awsEcsClusterDefaultCapacityProviderStrategyDetails,
+>
+@ocaml.doc("<p>Contains the run command configuration for the cluster.</p>")
+type awsEcsClusterConfigurationExecuteCommandConfigurationDetails = {
+  @ocaml.doc("<p>The log setting to use for redirecting logs for run command results.</p>")
+  @as("Logging")
+  logging: option<nonEmptyString>,
+  @ocaml.doc(
+    "<p>The log configuration for the results of the run command actions. Required if <code>Logging</code> is <code>NONE</code>.</p>"
+  )
+  @as("LogConfiguration")
+  logConfiguration: option<
+    awsEcsClusterConfigurationExecuteCommandConfigurationLogConfigurationDetails,
+  >,
+  @ocaml.doc(
+    "<p>The identifier of the KMS key that is used to encrypt the data between the local client and the container.</p>"
+  )
+  @as("KmsKeyId")
+  kmsKeyId: option<nonEmptyString>,
+}
+type awsEcsClusterClusterSettingsList = array<awsEcsClusterClusterSettingsDetails>
+@ocaml.doc("<p>Provides information about an Amazon Elastic Container Registry repository.</p>")
+type awsEcrRepositoryDetails = {
+  @ocaml.doc("<p>The text of the repository policy.</p>") @as("RepositoryPolicyText")
+  repositoryPolicyText: option<nonEmptyString>,
+  @ocaml.doc("<p>The name of the repository.</p>") @as("RepositoryName")
+  repositoryName: option<nonEmptyString>,
+  @ocaml.doc("<p>Information about the lifecycle policy for the repository.</p>")
+  @as("LifecyclePolicy")
+  lifecyclePolicy: option<awsEcrRepositoryLifecyclePolicyDetails>,
+  @ocaml.doc("<p>The tag mutability setting for the repository.</p>") @as("ImageTagMutability")
+  imageTagMutability: option<nonEmptyString>,
+  @ocaml.doc("<p>The image scanning configuration for a repository.</p>")
+  @as("ImageScanningConfiguration")
+  imageScanningConfiguration: option<awsEcrRepositoryImageScanningConfigurationDetails>,
+  @ocaml.doc("<p>The ARN of the repository.</p>") @as("Arn") arn: option<nonEmptyString>,
+}
+@ocaml.doc("<p>Information about an Amazon ECR image.</p>")
+type awsEcrContainerImageDetails = {
+  @ocaml.doc("<p>The date and time when the image was pushed to the repository.</p>
+         <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet
+         Date/Time Format</a>. The value cannot contain spaces. For example,
+         <code>2020-03-22T13:22:13.933Z</code>.</p>")
+  @as("ImagePublishedAt")
+  imagePublishedAt: option<nonEmptyString>,
+  @ocaml.doc("<p>The list of tags that are associated with the image.</p>") @as("ImageTags")
+  imageTags: option<nonEmptyStringList>,
+  @ocaml.doc("<p>The sha256 digest of the image manifest.</p>") @as("ImageDigest")
+  imageDigest: option<nonEmptyString>,
+  @ocaml.doc("<p>The architecture of the image.</p>") @as("Architecture")
+  architecture: option<nonEmptyString>,
+  @ocaml.doc("<p>The name of the repository that the image belongs to.</p>") @as("RepositoryName")
+  repositoryName: option<nonEmptyString>,
+  @ocaml.doc("<p>The Amazon Web Services account identifier that is associated with the registry that the image belongs
+         to.</p>")
+  @as("RegistryId")
+  registryId: option<nonEmptyString>,
+}
+type awsEc2VpnConnectionVgwTelemetryList = array<awsEc2VpnConnectionVgwTelemetryDetails>
+type awsEc2VpnConnectionRoutesList = array<awsEc2VpnConnectionRoutesDetails>
+@ocaml.doc("<p>The VPN tunnel options.</p>")
+type awsEc2VpnConnectionOptionsTunnelOptionsDetails = {
+  @ocaml.doc("<p>The range of inside IPv4 addresses for the tunnel.</p>") @as("TunnelInsideCidr")
+  tunnelInsideCidr: option<nonEmptyString>,
+  @ocaml.doc("<p>The number of packets in an IKE replay window.</p>") @as("ReplayWindowSize")
+  replayWindowSize: option<integer_>,
+  @ocaml.doc("<p>The margin time, in seconds, before the phase 2 lifetime expires, during which the Amazon Web Services
+         side of the VPN connection performs an IKE rekey.</p>")
+  @as("RekeyMarginTimeSeconds")
+  rekeyMarginTimeSeconds: option<integer_>,
+  @ocaml.doc("<p>The percentage of the rekey window, which is determined by
+         <code>RekeyMarginTimeSeconds</code> during which the rekey time is randomly selected.</p>")
+  @as("RekeyFuzzPercentage")
+  rekeyFuzzPercentage: option<integer_>,
+  @ocaml.doc("<p>The preshared key to establish initial authentication between the virtual private gateway
+         and the customer gateway.</p>")
+  @as("PreSharedKey")
+  preSharedKey: option<nonEmptyString>,
+  @ocaml.doc("<p>The lifetime for phase 2 of the IKE negotiation, in seconds.</p>")
+  @as("Phase2LifetimeSeconds")
+  phase2LifetimeSeconds: option<integer_>,
+  @ocaml.doc("<p>The permitted integrity algorithms for the VPN tunnel for phase 2 IKE
+         negotiations.</p>")
+  @as("Phase2IntegrityAlgorithms")
+  phase2IntegrityAlgorithms: option<nonEmptyStringList>,
+  @ocaml.doc("<p>The permitted encryption algorithms for the VPN tunnel for phase 2 IKE
+         negotiations.</p>")
+  @as("Phase2EncryptionAlgorithms")
+  phase2EncryptionAlgorithms: option<nonEmptyStringList>,
+  @ocaml.doc("<p>The permitted Diffie-Hellman group numbers for the VPN tunnel for phase 2 IKE
+         negotiations.</p>")
+  @as("Phase2DhGroupNumbers")
+  phase2DhGroupNumbers: option<integerList>,
+  @ocaml.doc("<p>The lifetime for phase 1 of the IKE negotiation, in seconds.</p>")
+  @as("Phase1LifetimeSeconds")
+  phase1LifetimeSeconds: option<integer_>,
+  @ocaml.doc("<p>The permitted integrity algorithms for the VPN tunnel for phase 1 IKE
+         negotiations.</p>")
+  @as("Phase1IntegrityAlgorithms")
+  phase1IntegrityAlgorithms: option<nonEmptyStringList>,
+  @ocaml.doc("<p>The permitted encryption algorithms for the VPN tunnel for phase 1 IKE
+         negotiations.</p>")
+  @as("Phase1EncryptionAlgorithms")
+  phase1EncryptionAlgorithms: option<nonEmptyStringList>,
+  @ocaml.doc("<p>The permitted Diffie-Hellman group numbers for the VPN tunnel for phase 1 IKE
+         negotiations.</p>")
+  @as("Phase1DhGroupNumbers")
+  phase1DhGroupNumbers: option<integerList>,
+  @ocaml.doc("<p>The external IP address of the VPN tunnel.</p>") @as("OutsideIpAddress")
+  outsideIpAddress: option<nonEmptyString>,
+  @ocaml.doc(
+    "<p>The Internet Key Exchange (IKE) versions that are permitted for the VPN tunnel.</p>"
+  )
+  @as("IkeVersions")
+  ikeVersions: option<nonEmptyStringList>,
+  @ocaml.doc("<p>The number of seconds after which a Dead Peer Detection (DPD) timeout occurs.</p>")
+  @as("DpdTimeoutSeconds")
+  dpdTimeoutSeconds: option<integer_>,
+}
+type awsEc2VpcEndpointServiceServiceTypeList = array<awsEc2VpcEndpointServiceServiceTypeDetails>
 type awsEc2VolumeAttachmentList = array<awsEc2VolumeAttachment>
 type awsEc2SecurityGroupUserIdGroupPairList = array<awsEc2SecurityGroupUserIdGroupPair>
 type awsEc2SecurityGroupPrefixListIdList = array<awsEc2SecurityGroupPrefixListId>
@@ -3147,32 +4763,7 @@ type awsEc2NetworkAclEntry = {
   cidrBlock: option<nonEmptyString>,
 }
 type awsEc2NetworkAclAssociationList = array<awsEc2NetworkAclAssociation>
-@ocaml.doc("<p>The details of an Amazon EC2 instance.</p>")
-type awsEc2InstanceDetails = {
-  @ocaml.doc("<p>Indicates when the instance was launched.</p>
-         <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet
-            Date/Time Format</a>. The value cannot contain spaces. For example,
-            <code>2020-03-22T13:22:13.933Z</code>.</p>")
-  @as("LaunchedAt")
-  launchedAt: option<nonEmptyString>,
-  @ocaml.doc("<p>The identifier of the subnet that the instance was launched in.</p>")
-  @as("SubnetId")
-  subnetId: option<nonEmptyString>,
-  @ocaml.doc("<p>The identifier of the VPC that the instance was launched in.</p>") @as("VpcId")
-  vpcId: option<nonEmptyString>,
-  @ocaml.doc("<p>The IAM profile ARN of the instance.</p>") @as("IamInstanceProfileArn")
-  iamInstanceProfileArn: option<nonEmptyString>,
-  @ocaml.doc("<p>The key name associated with the instance.</p>") @as("KeyName")
-  keyName: option<nonEmptyString>,
-  @ocaml.doc("<p>The IPv6 addresses associated with the instance.</p>") @as("IpV6Addresses")
-  ipV6Addresses: option<stringList>,
-  @ocaml.doc("<p>The IPv4 addresses associated with the instance.</p>") @as("IpV4Addresses")
-  ipV4Addresses: option<stringList>,
-  @ocaml.doc("<p>The Amazon Machine Image (AMI) ID of the instance.</p>") @as("ImageId")
-  imageId: option<nonEmptyString>,
-  @ocaml.doc("<p>The instance type of the instance. </p>") @as("Type")
-  type_: option<nonEmptyString>,
-}
+type awsEc2InstanceNetworkInterfacesList = array<awsEc2InstanceNetworkInterfacesDetails>
 @ocaml.doc("<p>Information about a global secondary index for a DynamoDB table replica.</p>")
 type awsDynamoDbTableReplicaGlobalSecondaryIndex = {
   @ocaml.doc("<p>Replica-specific configuration for the provisioned throughput for the index.</p>")
@@ -3211,63 +4802,29 @@ type awsCorsConfiguration = {
   @ocaml.doc("<p>The allowed origins for CORS requests.</p>") @as("AllowOrigins")
   allowOrigins: option<nonEmptyStringList>,
 }
-@ocaml.doc("<p>Information about the VPC configuration that AWS CodeBuild accesses.</p>")
+@ocaml.doc("<p>Information about the VPC configuration that CodeBuild accesses.</p>")
 type awsCodeBuildProjectVpcConfig = {
-  @ocaml.doc("<p>A list of one or more security group IDs in your Amazon VPC.</p>")
-  @as("SecurityGroupIds")
+  @ocaml.doc("<p>A list of one or more security group IDs in your VPC.</p>") @as("SecurityGroupIds")
   securityGroupIds: option<nonEmptyStringList>,
-  @ocaml.doc("<p>A list of one or more subnet IDs in your Amazon VPC.</p>") @as("Subnets")
+  @ocaml.doc("<p>A list of one or more subnet IDs in your VPC.</p>") @as("Subnets")
   subnets: option<nonEmptyStringList>,
   @ocaml.doc("<p>The ID of the VPC.</p>") @as("VpcId") vpcId: option<nonEmptyString>,
 }
-@ocaml.doc("<p>Information about the build environment for this build project.</p>")
-type awsCodeBuildProjectEnvironment = {
-  @ocaml.doc("<p>The type of build environment to use for related builds.</p>
-         <p>The environment type <code>ARM_CONTAINER</code> is available only in Regions US East (N.
-         Virginia), US East (Ohio), US West (Oregon), Europe (Ireland), Asia Pacific (Mumbai), Asia
-         Pacific (Tokyo), Asia Pacific (Sydney), and Europe (Frankfurt).</p>
-         <p>The environment type <code>LINUX_CONTAINER</code> with compute type
-         build.general1.2xlarge is available only in Regions US East (N. Virginia), US East (N.
-         Virginia), US West (Oregon), Canada (Central), Europe (Ireland), Europe (London), Europe
-         (Frankfurt), Asia Pacific (Tokyo), Asia Pacific (Seoul), Asia Pacific (Singapore), Asia
-         Pacific (Sydney), China (Beijing), and China (Ningxia).</p>
-         <p>The environment type <code>LINUX_GPU_CONTAINER</code> is available only in Regions US
-         East (N. Virginia), US East (N. Virginia), US West (Oregon), Canada (Central), Europe
-         (Ireland), Europe (London), Europe (Frankfurt), Asia Pacific (Tokyo), Asia Pacific (Seoul),
-         Asia Pacific (Singapore), Asia Pacific (Sydney), China (Beijing), and China
-         (Ningxia).</p>
-         <p>Valid values: <code>WINDOWS_CONTAINER</code> | <code>LINUX_CONTAINER</code> |
-            <code>LINUX_GPU_CONTAINER</code> | <code>ARM_CONTAINER</code>
-         </p>")
-  @as("Type")
-  type_: option<nonEmptyString>,
-  @ocaml.doc("<p>The credentials for access to a private registry.</p>") @as("RegistryCredential")
-  registryCredential: option<awsCodeBuildProjectEnvironmentRegistryCredential>,
-  @ocaml.doc("<p>The type of credentials AWS CodeBuild uses to pull images in your build.</p>
-         <p>Valid values:</p>
-         <ul>
-            <li>
-               <p>
-                  <code>CODEBUILD</code> specifies that AWS CodeBuild uses its own credentials. This
-               requires that you modify your ECR repository policy to trust the AWS CodeBuild
-               service principal.</p>
-            </li>
-            <li>
-               <p>
-                  <code>SERVICE_ROLE</code> specifies that AWS CodeBuild uses your build project's
-               service role.</p>
-            </li>
-         </ul>
-         <p>When you use a cross-account or private registry image, you must use
-            <code>SERVICE_ROLE</code> credentials. When you use an AWS CodeBuild curated image, you
-         must use <code>CODEBUILD</code> credentials.</p>")
-  @as("ImagePullCredentialsType")
-  imagePullCredentialsType: option<nonEmptyString>,
-  @ocaml.doc("<p>The certificate to use with this build project.</p>") @as("Certificate")
-  certificate: option<nonEmptyString>,
+@ocaml.doc("<p>Information about logs for the build project.</p>")
+type awsCodeBuildProjectLogsConfigDetails = {
+  @ocaml.doc("<p>Information about logs built to an S3 bucket for a build project.</p>")
+  @as("S3Logs")
+  s3Logs: option<awsCodeBuildProjectLogsConfigS3LogsDetails>,
+  @ocaml.doc("<p>Information about CloudWatch Logs for the build project.</p>")
+  @as("CloudWatchLogs")
+  cloudWatchLogs: option<awsCodeBuildProjectLogsConfigCloudWatchLogsDetails>,
 }
-@ocaml.doc("<p>A complex type that describes the Amazon S3 bucket, HTTP server (for example, a web
-         server), Amazon Elemental MediaStore, or other server from which CloudFront gets your
+type awsCodeBuildProjectEnvironmentEnvironmentVariablesList = array<
+  awsCodeBuildProjectEnvironmentEnvironmentVariablesDetails,
+>
+type awsCodeBuildProjectArtifactsList = array<awsCodeBuildProjectArtifactsDetails>
+@ocaml.doc("<p>A complex type that describes the S3 bucket, HTTP server (for example, a web
+         server), AWS Elemental MediaStore, or other server from which CloudFront gets your
          files.</p>")
 type awsCloudFrontDistributionOriginItem = {
   @ocaml.doc("<p>An origin that is an S3 bucket that is not configured with static website
@@ -3282,7 +4839,7 @@ type awsCloudFrontDistributionOriginItem = {
   @ocaml.doc("<p>A unique identifier for the origin or origin group.</p>") @as("Id")
   id: option<nonEmptyString>,
   @ocaml.doc(
-    "<p>Amazon S3 origins: The DNS name of the Amazon S3 bucket from which you want CloudFront to get objects for this origin.</p>"
+    "<p>Amazon S3 origins: The DNS name of the S3 bucket from which you want CloudFront to get objects for this origin.</p>"
   )
   @as("DomainName")
   domainName: option<nonEmptyString>,
@@ -3307,8 +4864,7 @@ type awsCertificateManagerCertificateExtendedKeyUsages = array<
                   <code>RequestCertificate</code> request</p>
             </li>
             <li>
-               <p>The validation of each domain name in the certificate, as it pertains to AWS
-               Certificate Manager managed renewal</p>
+               <p>The validation of each domain name in the certificate, as it pertains to Certificate Manager managed renewal</p>
             </li>
          </ul>")
 type awsCertificateManagerCertificateDomainValidationOption = {
@@ -3316,11 +4872,11 @@ type awsCertificateManagerCertificateDomainValidationOption = {
   validationStatus: option<nonEmptyString>,
   @ocaml.doc("<p>The method used to validate the domain name.</p>") @as("ValidationMethod")
   validationMethod: option<nonEmptyString>,
-  @ocaml.doc("<p>A list of email addresses that AWS Certificate Manager uses to send domain validation
+  @ocaml.doc("<p>A list of email addresses that Certificate Manager uses to send domain validation
          emails.</p>")
   @as("ValidationEmails")
   validationEmails: option<stringList>,
-  @ocaml.doc("<p>The domain name that AWS Certificate Manager uses to send domain validation
+  @ocaml.doc("<p>The domain name that Certificate Manager uses to send domain validation
          emails.</p>")
   @as("ValidationDomain")
   validationDomain: option<nonEmptyString>,
@@ -3330,26 +4886,33 @@ type awsCertificateManagerCertificateDomainValidationOption = {
   @ocaml.doc("<p>A fully qualified domain name (FQDN) in the certificate.</p>") @as("DomainName")
   domainName: option<nonEmptyString>,
 }
-@ocaml.doc("<p>Provides details about an auto scaling group.</p>")
-type awsAutoScalingAutoScalingGroupDetails = {
-  @ocaml.doc("<p>Indicates when the auto scaling group was created.</p>
-         <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet
-            Date/Time Format</a>. The value cannot contain spaces. For example,
-            <code>2020-03-22T13:22:13.933Z</code>.</p>")
-  @as("CreatedTime")
-  createdTime: option<nonEmptyString>,
-  @ocaml.doc("<p>The amount of time, in seconds, that Amazon EC2 Auto Scaling waits before it checks the
-         health status of an EC2 instance that has come into service.</p>")
-  @as("HealthCheckGracePeriod")
-  healthCheckGracePeriod: option<integer_>,
-  @ocaml.doc("<p>The service to use for the health checks.</p>") @as("HealthCheckType")
-  healthCheckType: option<nonEmptyString>,
-  @ocaml.doc("<p>The list of load balancers associated with the group.</p>")
-  @as("LoadBalancerNames")
-  loadBalancerNames: option<stringList>,
-  @ocaml.doc("<p>The name of the launch configuration.</p>") @as("LaunchConfigurationName")
-  launchConfigurationName: option<nonEmptyString>,
+@ocaml.doc("<p>A block device for the instance.</p>")
+type awsAutoScalingLaunchConfigurationBlockDeviceMappingsDetails = {
+  @ocaml.doc("<p>The name of the virtual device (for example, <code>ephemeral0</code>).</p>
+         <p>You can provide either <code>VirtualName</code> or <code>Ebs</code>, but not both.</p>")
+  @as("VirtualName")
+  virtualName: option<nonEmptyString>,
+  @ocaml.doc("<p>Whether to suppress the device that is included in the block device mapping of the Amazon Machine Image (AMI).</p>
+         <p>If <code>NoDevice</code> is <code>true</code>, then you cannot specify <code>Ebs</code>.></p>")
+  @as("NoDevice")
+  noDevice: option<boolean_>,
+  @ocaml.doc(
+    "<p>Parameters that are used to automatically set up Amazon EBS volumes when an instance is launched.</p>"
+  )
+  @as("Ebs")
+  ebs: option<awsAutoScalingLaunchConfigurationBlockDeviceMappingsEbsDetails>,
+  @ocaml.doc(
+    "<p>The device name that is exposed to the EC2 instance. For example, <code>/dev/sdh</code> or <code>xvdh</code>.</p>"
+  )
+  @as("DeviceName")
+  deviceName: option<nonEmptyString>,
 }
+type awsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateOverridesList = array<
+  awsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateOverridesListDetails,
+>
+type awsAutoScalingAutoScalingGroupAvailabilityZonesList = array<
+  awsAutoScalingAutoScalingGroupAvailabilityZonesListDetails,
+>
 @ocaml.doc("<p>Contains information about a version 2 stage for Amazon API Gateway.</p>")
 type awsApiGatewayV2StageDetails = {
   @ocaml.doc("<p>Indicates whether the stage is managed by API Gateway.</p>")
@@ -3403,6 +4966,11 @@ type awsApiGatewayV2StageDetails = {
             <code>2020-03-22T13:22:13.933Z</code>.</p>")
   @as("CreatedDate")
   createdDate: option<nonEmptyString>,
+  @ocaml.doc(
+    "<p>The identifier of a client certificate for a stage. Supported only for WebSocket API calls.</p>"
+  )
+  @as("ClientCertificateId")
+  clientCertificateId: option<nonEmptyString>,
 }
 type awsApiGatewayMethodSettingsList = array<awsApiGatewayMethodSettings>
 @ocaml.doc("<p>Contains information about the endpoints for the API.</p>")
@@ -3433,6 +5001,7 @@ type awsApiGatewayCanarySettings = {
 }
 type availabilityZones = array<availabilityZone>
 type adminAccounts = array<adminAccount>
+type adjustmentList = array<adjustment>
 type actionTargetList = array<actionTarget>
 @ocaml.doc("<p>For <code>AwsApiAction</code>, <code>NetworkConnectionAction</code>, and
             <code>PortProbeAction</code>, <code>RemoteIpDetails</code> provides information about
@@ -3451,27 +5020,25 @@ type actionRemoteIpDetails = {
   @ocaml.doc("<p>The IP address.</p>") @as("IpAddressV4") ipAddressV4: option<nonEmptyString>,
 }
 type accountDetailsList = array<accountDetails>
-@ocaml.doc("<p>A vulnerability associated with a finding.</p>")
-type vulnerability = {
-  @ocaml.doc("<p>A list of URLs that provide additional information about the vulnerability.</p>")
-  @as("ReferenceUrls")
-  referenceUrls: option<stringList>,
-  @ocaml.doc("<p>Information about the vendor that generates the vulnerability report.</p>")
-  @as("Vendor")
-  vendor: option<vulnerabilityVendor>,
-  @ocaml.doc("<p>List of vulnerabilities that are related to this vulnerability.</p>")
-  @as("RelatedVulnerabilities")
-  relatedVulnerabilities: option<stringList>,
-  @ocaml.doc("<p>CVSS scores from the advisory related to the vulnerability.</p>") @as("Cvss")
-  cvss: option<cvssList>,
-  @ocaml.doc("<p>List of software packages that have the vulnerability.</p>")
-  @as("VulnerablePackages")
-  vulnerablePackages: option<softwarePackageList>,
-  @ocaml.doc("<p>The identifier of the vulnerability.</p>") @as("Id") id: nonEmptyString,
+@ocaml.doc("<p>Information about metrics to publish to CloudWatch.</p>")
+type statelessCustomPublishMetricAction = {
+  @ocaml.doc("<p>Defines CloudWatch dimension values to publish.</p>") @as("Dimensions")
+  dimensions: option<statelessCustomPublishMetricActionDimensionsList>,
 }
 type standardsSubscriptions = array<standardsSubscription>
 type standardsSubscriptionRequests = array<standardsSubscriptionRequest>
 type standardsControls = array<standardsControl>
+@ocaml.doc("<p>Additional settings to use in the specified rules.</p>")
+type ruleGroupVariables = {
+  @ocaml.doc("<p>A list of port ranges.</p>") @as("PortSets")
+  portSets: option<ruleGroupVariablesPortSetsDetails>,
+  @ocaml.doc("<p>A list of IP addresses and address ranges, in CIDR notation.</p>") @as("IpSets")
+  ipSets: option<ruleGroupVariablesIpSetsDetails>,
+}
+type ruleGroupSourceStatelessRuleMatchAttributesTcpFlagsList = array<
+  ruleGroupSourceStatelessRuleMatchAttributesTcpFlags,
+>
+type ruleGroupSourceStatefulRulesOptionsList = array<ruleGroupSourceStatefulRulesOptionsDetails>
 type productsList = array<product>
 @ocaml.doc("<p>A port scan that was part of the port probe. For each scan, PortProbeDetails provides
          information about the local IP address and port that were scanned, and the remote IP
@@ -3557,12 +5124,24 @@ type findingProviderFields = {
   confidence: option<ratioScale>,
 }
 type dateFilterList = array<dateFilter>
+@ocaml.doc("<p>CVSS scores from the advisory related to the vulnerability.</p>")
+type cvss = {
+  @ocaml.doc("<p>Adjustments to the CVSS metrics.</p>") @as("Adjustments")
+  adjustments: option<adjustmentList>,
+  @ocaml.doc("<p>The origin of the original CVSS score and vector.</p>") @as("Source")
+  source: option<nonEmptyString>,
+  @ocaml.doc("<p>The base scoring vector for the CVSS score.</p>") @as("BaseVector")
+  baseVector: option<nonEmptyString>,
+  @ocaml.doc("<p>The base CVSS score.</p>") @as("BaseScore") baseScore: option<double>,
+  @ocaml.doc("<p>The version of CVSS for the CVSS score.</p>") @as("Version")
+  version: option<nonEmptyString>,
+}
 @ocaml.doc("<p>Contains finding details that are specific to control-based findings. Only returned for
          findings generated from controls.</p>")
 type compliance = {
   @ocaml.doc("<p>For findings generated from controls, a list of reasons behind the value of
             <code>Status</code>. For the list of status reason codes and their meanings, see <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-results.html#securityhub-standards-results-asff\">Standards-related information in the ASFF</a> in the
-            <i>AWS Security Hub User Guide</i>. </p>")
+            <i>Security Hub User Guide</i>. </p>")
   @as("StatusReasons")
   statusReasons: option<statusReasonsList>,
   @ocaml.doc("<p>For a control, the industry or regulatory framework requirements that are related to the
@@ -3592,9 +5171,9 @@ type compliance = {
                   <li>
                      <p>
                         <code>NOT_AVAILABLE</code> - Check could not be performed due to a service
-                     outage, API error, or because the result of the AWS Config evaluation was
-                        <code>NOT_APPLICABLE</code>. If the AWS Config evaluation result was
-                        <code>NOT_APPLICABLE</code>, then after 3 days, Security Hub automatically archives
+                     outage, API error, or because the result of the Config evaluation was
+                        <code>NOT_APPLICABLE</code>. If the Config evaluation result was
+                     <code>NOT_APPLICABLE</code>, then after 3 days, Security Hub automatically archives
                      the finding.</p>
                   </li>
                </ul>
@@ -3604,7 +5183,7 @@ type compliance = {
   status: option<complianceStatus>,
 }
 type batchUpdateFindingsUnprocessedFindingsList = array<batchUpdateFindingsUnprocessedFinding>
-@ocaml.doc("<p>Details for a rule in a WAF WebACL.</p>")
+@ocaml.doc("<p>Details for a rule in an WAF WebACL.</p>")
 type awsWafWebAclRule = {
   @ocaml.doc("<p>The rule type.</p>
          <p>Valid values: <code>REGULAR</code> | <code>RATE_BASED</code> | <code>GROUP</code>
@@ -3638,10 +5217,54 @@ type awsWafWebAclRule = {
   overrideAction: option<wafOverrideAction>,
   @ocaml.doc("<p>Rules to exclude from a rule group.</p>") @as("ExcludedRules")
   excludedRules: option<wafExcludedRuleList>,
-  @ocaml.doc("<p>Specifies the action that CloudFront or AWS WAF takes when a web request matches the
+  @ocaml.doc("<p>Specifies the action that CloudFront or WAF takes when a web request matches the
          conditions in the rule. </p>")
   @as("Action")
   action: option<wafAction>,
+}
+@ocaml.doc(
+  "<p>contains details about a rate-based rule for Regional resources. A rate-based rule provides settings to indicate when to allow, block, or count a request. Rate-based rules include the number of requests that arrive over a specified period of time.</p>"
+)
+type awsWafRegionalRateBasedRuleDetails = {
+  @ocaml.doc("<p>The predicates to include in the rate-based rule.</p>") @as("MatchPredicates")
+  matchPredicates: option<awsWafRegionalRateBasedRuleMatchPredicateList>,
+  @ocaml.doc("<p>The unique identifier for the rate-based rule.</p>") @as("RuleId")
+  ruleId: option<nonEmptyString>,
+  @ocaml.doc(
+    "<p>The maximum number of requests that have an identical value for the field specified in <code>RateKey</code> that are allowed within a five-minute period. If the number of requests exceeds <code>RateLimit</code> and the other predicates specified in the rule are met, WAF triggers the action for the rule.</p>"
+  )
+  @as("RateLimit")
+  rateLimit: option<long>,
+  @ocaml.doc(
+    "<p>The field that WAF uses to determine whether requests are likely arriving from single source and are subject to rate monitoring.</p>"
+  )
+  @as("RateKey")
+  rateKey: option<nonEmptyString>,
+  @ocaml.doc("<p>The name of the rate-based rule.</p>") @as("Name") name: option<nonEmptyString>,
+  @ocaml.doc("<p>The name of the metrics for the rate-based rule.</p>") @as("MetricName")
+  metricName: option<nonEmptyString>,
+}
+@ocaml.doc(
+  "<p>Details about a rate-based rule for global resources. A rate-based rule provides settings to indicate when to allow, block, or count a request. Rate-based rules include the number of requests that arrive over a specified period of time.</p>"
+)
+type awsWafRateBasedRuleDetails = {
+  @ocaml.doc("<p>The predicates to include in the rate-based rule.</p>") @as("MatchPredicates")
+  matchPredicates: option<awsWafRateBasedRuleMatchPredicateList>,
+  @ocaml.doc("<p>The unique identifier for the rate-based rule.</p>") @as("RuleId")
+  ruleId: option<nonEmptyString>,
+  @ocaml.doc(
+    "<p>The maximum number of requests that have an identical value for the field specified in <code>RateKey</code> that are allowed within a five-minute period. If the number of requests exceeds <code>RateLimit</code> and the other predicates specified in the rule are met, WAF triggers the action for the rule.</p>"
+  )
+  @as("RateLimit")
+  rateLimit: option<long>,
+  @ocaml.doc(
+    "<p>The field that WAF uses to determine whether requests are likely arriving from single source and are subject to rate monitoring.</p>"
+  )
+  @as("RateKey")
+  rateKey: option<nonEmptyString>,
+  @ocaml.doc("<p>The name of the rate-based rule.</p>") @as("Name") name: option<nonEmptyString>,
+  @ocaml.doc("<p>The name of the metrics for the rate-based rule.</p>") @as("MetricName")
+  metricName: option<nonEmptyString>,
 }
 @ocaml.doc("<p>Provides information about the state of a patch on an instance based on the patch
          baseline that was used to patch the instance.</p>")
@@ -3649,21 +5272,31 @@ type awsSsmPatchComplianceDetails = {
   @ocaml.doc("<p>Information about the status of a patch.</p>") @as("Patch")
   patch: option<awsSsmPatch>,
 }
-@ocaml.doc("<p>A wrapper type for the topic's Amazon Resource Name (ARN).</p>")
+@ocaml.doc("<p>A wrapper type for the topic's ARN.</p>")
 type awsSnsTopicDetails = {
   @ocaml.doc("<p>The subscription's owner.</p>") @as("Owner") owner: option<nonEmptyString>,
   @ocaml.doc("<p>The name of the topic.</p>") @as("TopicName") topicName: option<nonEmptyString>,
   @ocaml.doc(
-    "<p>Subscription is an embedded property that describes the subscription endpoints of an Amazon SNS topic.</p>"
+    "<p>Subscription is an embedded property that describes the subscription endpoints of an SNS topic.</p>"
   )
   @as("Subscription")
   subscription: option<awsSnsTopicSubscriptionList>,
-  @ocaml.doc("<p>The ID of an AWS managed customer master key (CMK) for Amazon SNS or a custom
-         CMK.</p>")
+  @ocaml.doc(
+    "<p>The ID of an Amazon Web Services managed key for Amazon SNS or a customer managed key.</p>"
+  )
   @as("KmsMasterKeyId")
   kmsMasterKeyId: option<nonEmptyString>,
 }
+type awsS3BucketWebsiteConfigurationRoutingRules = array<awsS3BucketWebsiteConfigurationRoutingRule>
 type awsS3BucketServerSideEncryptionRules = array<awsS3BucketServerSideEncryptionRule>
+@ocaml.doc("<p>Details for an Amazon S3 filter.</p>")
+type awsS3BucketNotificationConfigurationS3KeyFilter = {
+  @ocaml.doc("<p>The filter rules for the filter.</p>") @as("FilterRules")
+  filterRules: option<awsS3BucketNotificationConfigurationS3KeyFilterRules>,
+}
+type awsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsList = array<
+  awsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsDetails,
+>
 @ocaml.doc("<p>A cluster parameter group that is associated with an Amazon Redshift cluster.</p>")
 type awsRedshiftClusterClusterParameterGroup = {
   @ocaml.doc("<p>The name of the parameter group.</p>") @as("ParameterGroupName")
@@ -3689,7 +5322,7 @@ type awsRdsDbSnapshotDetails = {
   @ocaml.doc("<p>The time zone of the DB snapshot.</p>") @as("Timezone")
   timezone: option<nonEmptyString>,
   @ocaml.doc(
-    "<p>If <code>Encrypted</code> is <code>true</code>, the AWS KMS key identifier for the encrypted DB snapshot.</p>"
+    "<p>If <code>Encrypted</code> is <code>true</code>, the KMS key identifier for the encrypted DB snapshot.</p>"
   )
   @as("KmsKeyId")
   kmsKeyId: option<nonEmptyString>,
@@ -3705,7 +5338,9 @@ type awsRdsDbSnapshotDetails = {
   @ocaml.doc("<p>The DB snapshot ARN that the DB snapshot was copied from.</p>")
   @as("SourceDbSnapshotIdentifier")
   sourceDbSnapshotIdentifier: option<nonEmptyString>,
-  @ocaml.doc("<p>The AWS Region that the DB snapshot was created in or copied from.</p>")
+  @ocaml.doc(
+    "<p>The Amazon Web Services Region that the DB snapshot was created in or copied from.</p>"
+  )
   @as("SourceRegion")
   sourceRegion: option<nonEmptyString>,
   @ocaml.doc("<p>The percentage of the estimated data that has been transferred.</p>")
@@ -3826,7 +5461,7 @@ type awsRdsDbClusterDetails = {
          cluster.</p>")
   @as("DomainMemberships")
   domainMemberships: option<awsRdsDbDomainMemberships>,
-  @ocaml.doc("<p>Whether the DB cluster is a clone of a DB cluster owned by a different AWS
+  @ocaml.doc("<p>Whether the DB cluster is a clone of a DB cluster owned by a different Amazon Web Services
          account.</p>")
   @as("CrossAccountClone")
   crossAccountClone: option<boolean_>,
@@ -3856,11 +5491,11 @@ type awsRdsDbClusterDetails = {
   @ocaml.doc("<p>A list of the IAM roles that are associated with the DB cluster.</p>")
   @as("AssociatedRoles")
   associatedRoles: option<awsRdsDbClusterAssociatedRoles>,
-  @ocaml.doc("<p>The identifier of the DB cluster. The identifier must be unique within each AWS Region
+  @ocaml.doc("<p>The identifier of the DB cluster. The identifier must be unique within each Amazon Web Services Region
          and is immutable.</p>")
   @as("DbClusterResourceId")
   dbClusterResourceId: option<nonEmptyString>,
-  @ocaml.doc("<p>The ARN of the AWS KMS master key that is used to encrypt the database instances in the
+  @ocaml.doc("<p>The ARN of the KMS master key that is used to encrypt the database instances in the
          DB cluster.</p>")
   @as("KmsKeyId")
   kmsKeyId: option<nonEmptyString>,
@@ -3928,13 +5563,93 @@ type awsRdsDbClusterDetails = {
   @as("AllocatedStorage")
   allocatedStorage: option<integer_>,
 }
+@ocaml.doc("<p>Information about an Amazon OpenSearch Service domain.</p>")
+type awsOpenSearchServiceDomainDetails = {
+  @ocaml.doc("<p>The domain endpoints. Used if the OpenSearch domain resides in a VPC.</p>
+         <p>This is a map of key-value pairs. The key is always <code>vpc</code>. The value is the endpoint.</p>")
+  @as("DomainEndpoints")
+  domainEndpoints: option<fieldMap>,
+  @ocaml.doc("<p>Configures the CloudWatch Logs to publish for the OpenSearch domain.</p>")
+  @as("LogPublishingOptions")
+  logPublishingOptions: option<awsOpenSearchServiceDomainLogPublishingOptionsDetails>,
+  @ocaml.doc(
+    "<p>Information that OpenSearch Service derives based on <code>VPCOptions</code> for the domain.</p>"
+  )
+  @as("VpcOptions")
+  vpcOptions: option<awsOpenSearchServiceDomainVpcOptionsDetails>,
+  @ocaml.doc("<p>Additional options for the domain endpoint.</p>") @as("DomainEndpointOptions")
+  domainEndpointOptions: option<awsOpenSearchServiceDomainDomainEndpointOptionsDetails>,
+  @ocaml.doc("<p>Details about the configuration of an OpenSearch cluster.</p>")
+  @as("ClusterConfig")
+  clusterConfig: option<awsOpenSearchServiceDomainClusterConfigDetails>,
+  @ocaml.doc(
+    "<p>Information about the status of a domain relative to the latest service software.</p>"
+  )
+  @as("ServiceSoftwareOptions")
+  serviceSoftwareOptions: option<awsOpenSearchServiceDomainServiceSoftwareOptionsDetails>,
+  @ocaml.doc("<p>Details about the configuration for node-to-node encryption.</p>")
+  @as("NodeToNodeEncryptionOptions")
+  nodeToNodeEncryptionOptions: option<awsOpenSearchServiceDomainNodeToNodeEncryptionOptionsDetails>,
+  @ocaml.doc("<p>Details about the configuration for encryption at rest.</p>")
+  @as("EncryptionAtRestOptions")
+  encryptionAtRestOptions: option<awsOpenSearchServiceDomainEncryptionAtRestOptionsDetails>,
+  @ocaml.doc("<p>The version of the domain engine.</p>") @as("EngineVersion")
+  engineVersion: option<nonEmptyString>,
+  @ocaml.doc("<p>The domain endpoint.</p>") @as("DomainEndpoint")
+  domainEndpoint: option<nonEmptyString>,
+  @ocaml.doc("<p>The identifier of the domain.</p>") @as("Id") id: option<nonEmptyString>,
+  @ocaml.doc("<p>The name of the endpoint.</p>") @as("DomainName")
+  domainName: option<nonEmptyString>,
+  @ocaml.doc(
+    "<p>IAM policy document that specifies the access policies for the OpenSearch Service domain.</p>"
+  )
+  @as("AccessPolicies")
+  accessPolicies: option<nonEmptyString>,
+  @ocaml.doc("<p>The ARN of the OpenSearch Service domain.</p>") @as("Arn")
+  arn: option<nonEmptyString>,
+}
+@ocaml.doc("<p>Details about an Network Firewall firewall.</p>")
+type awsNetworkFirewallFirewallDetails = {
+  @ocaml.doc("<p>The identifier of the VPC where the firewall is used.</p>") @as("VpcId")
+  vpcId: option<nonEmptyString>,
+  @ocaml.doc(
+    "<p>The public subnets that Network Firewall uses for the firewall. Each subnet must belong to a different Availability Zone.</p>"
+  )
+  @as("SubnetMappings")
+  subnetMappings: option<awsNetworkFirewallFirewallSubnetMappingsList>,
+  @ocaml.doc(
+    "<p>Whether the firewall is protected from a change to the subnet associations. If set to <code>true</code>, you cannot map different subnets to the firewall.</p>"
+  )
+  @as("SubnetChangeProtection")
+  subnetChangeProtection: option<boolean_>,
+  @ocaml.doc(
+    "<p>Whether the firewall is protected from a change to the firewall policy. If set to <code>true</code>, you cannot associate a different policy with the firewall.</p>"
+  )
+  @as("FirewallPolicyChangeProtection")
+  firewallPolicyChangeProtection: option<boolean_>,
+  @ocaml.doc("<p>The ARN of the firewall policy.</p>") @as("FirewallPolicyArn")
+  firewallPolicyArn: option<nonEmptyString>,
+  @ocaml.doc("<p>A descriptive name of the firewall.</p>") @as("FirewallName")
+  firewallName: option<nonEmptyString>,
+  @ocaml.doc("<p>The identifier of the firewall.</p>") @as("FirewallId")
+  firewallId: option<nonEmptyString>,
+  @ocaml.doc("<p>The ARN of the firewall.</p>") @as("FirewallArn")
+  firewallArn: option<nonEmptyString>,
+  @ocaml.doc("<p>A description of the firewall.</p>") @as("Description")
+  description: option<nonEmptyString>,
+  @ocaml.doc(
+    "<p>Whether the firewall is protected from deletion. If set to <code>true</code>, then the firewall cannot be deleted.</p>"
+  )
+  @as("DeleteProtection")
+  deleteProtection: option<boolean_>,
+}
 @ocaml.doc("<p>Details about a function's configuration.</p>")
 type awsLambdaFunctionDetails = {
   @ocaml.doc("<p>The version of the Lambda function.</p>") @as("Version")
   version: option<nonEmptyString>,
   @ocaml.doc("<p>The function's networking configuration.</p>") @as("VpcConfig")
   vpcConfig: option<awsLambdaFunctionVpcConfig>,
-  @ocaml.doc("<p>The function's AWS X-Ray tracing configuration.</p>") @as("TracingConfig")
+  @ocaml.doc("<p>The function's X-Ray tracing configuration.</p>") @as("TracingConfig")
   tracingConfig: option<awsLambdaFunctionTracingConfig>,
   @ocaml.doc("<p>The amount of time that Lambda allows a function to run before stopping it.</p>")
   @as("Timeout")
@@ -3944,7 +5659,7 @@ type awsLambdaFunctionDetails = {
   @ocaml.doc("<p>The function's execution role.</p>") @as("Role") role: option<nonEmptyString>,
   @ocaml.doc("<p>The latest updated revision of the function or alias.</p>") @as("RevisionId")
   revisionId: option<nonEmptyString>,
-  @ocaml.doc("<p>The memory that's allocated to the function.</p>") @as("MemorySize")
+  @ocaml.doc("<p>The memory that is allocated to the function.</p>") @as("MemorySize")
   memorySize: option<integer_>,
   @ocaml.doc("<p>For Lambda@Edge functions, the ARN of the master function.</p>") @as("MasterArn")
   masterArn: option<nonEmptyString>,
@@ -3957,7 +5672,7 @@ type awsLambdaFunctionDetails = {
   @as("LastModified")
   lastModified: option<nonEmptyString>,
   @ocaml.doc(
-    "<p>The KMS key that's used to encrypt the function's environment variables. This key is only returned if you've configured a customer managed CMK.</p>"
+    "<p>The KMS key that is used to encrypt the function's environment variables. This key is only returned if you've configured a customer managed customer managed key.</p>"
   )
   @as("KmsKeyArn")
   kmsKeyArn: option<nonEmptyString>,
@@ -4077,7 +5792,8 @@ type awsIamAccessKeyDetails = {
   sessionContext: option<awsIamAccessKeySessionContext>,
   @ocaml.doc("<p>The identifier of the access key.</p>") @as("AccessKeyId")
   accessKeyId: option<nonEmptyString>,
-  @ocaml.doc("<p>The AWS account ID of the account for the key.</p>") @as("AccountId")
+  @ocaml.doc("<p>The Amazon Web Services account ID of the account for the key.</p>")
+  @as("AccountId")
   accountId: option<nonEmptyString>,
   @ocaml.doc("<p>The name of the principal.</p>") @as("PrincipalName")
   principalName: option<nonEmptyString>,
@@ -4102,6 +5818,8 @@ type awsIamAccessKeyDetails = {
 }
 @ocaml.doc("<p>Information about a load balancer.</p>")
 type awsElbv2LoadBalancerDetails = {
+  @ocaml.doc("<p>Attributes of the load balancer.</p>") @as("LoadBalancerAttributes")
+  loadBalancerAttributes: option<awsElbv2LoadBalancerAttributes>,
   @ocaml.doc("<p>The ID of the VPC for the load balancer.</p>") @as("VpcId")
   vpcId: option<nonEmptyString>,
   @ocaml.doc("<p>The type of load balancer.</p>") @as("Type") type_: option<nonEmptyString>,
@@ -4148,40 +5866,53 @@ type awsElbLoadBalancerListenerDescriptions = array<awsElbLoadBalancerListenerDe
 type awsElbLoadBalancerBackendServerDescriptions = array<awsElbLoadBalancerBackendServerDescription>
 @ocaml.doc("<p>Information about an Elasticsearch domain.</p>")
 type awsElasticsearchDomainDetails = {
-  @ocaml.doc("<p>Information that Amazon ES derives based on <code>VPCOptions</code> for the
+  @ocaml.doc("<p>Information that OpenSearch derives based on <code>VPCOptions</code> for the
          domain.</p>")
   @as("VPCOptions")
   vpcoptions: option<awsElasticsearchDomainVPCOptions>,
+  @ocaml.doc(
+    "<p>Information about the status of a domain relative to the latest service software.</p>"
+  )
+  @as("ServiceSoftwareOptions")
+  serviceSoftwareOptions: option<awsElasticsearchDomainServiceSoftwareOptions>,
   @ocaml.doc("<p>Details about the configuration for node-to-node encryption.</p>")
   @as("NodeToNodeEncryptionOptions")
   nodeToNodeEncryptionOptions: option<awsElasticsearchDomainNodeToNodeEncryptionOptions>,
+  @ocaml.doc("<p>Configures the CloudWatch Logs to publish for the Elasticsearch domain.</p>")
+  @as("LogPublishingOptions")
+  logPublishingOptions: option<awsElasticsearchDomainLogPublishingOptions>,
   @ocaml.doc("<p>Details about the configuration for encryption at rest.</p>")
   @as("EncryptionAtRestOptions")
   encryptionAtRestOptions: option<awsElasticsearchDomainEncryptionAtRestOptions>,
-  @ocaml.doc("<p>Elasticsearch version.</p>") @as("ElasticsearchVersion")
+  @ocaml.doc("<p>Information about an OpenSearch cluster configuration.</p>")
+  @as("ElasticsearchClusterConfig")
+  elasticsearchClusterConfig: option<awsElasticsearchDomainElasticsearchClusterConfigDetails>,
+  @ocaml.doc("<p>OpenSearch version.</p>") @as("ElasticsearchVersion")
   elasticsearchVersion: option<nonEmptyString>,
-  @ocaml.doc("<p>The key-value pair that exists if the Amazon ES domain uses VPC endpoints.</p>")
+  @ocaml.doc(
+    "<p>The key-value pair that exists if the Elasticsearch domain uses VPC endpoints.</p>"
+  )
   @as("Endpoints")
   endpoints: option<fieldMap>,
   @ocaml.doc("<p>Domain-specific endpoint used to submit index, search, and data upload requests to an
-         Amazon ES domain.</p>
+         Elasticsearch domain.</p>
          <p>The endpoint is a service URL. </p>")
   @as("Endpoint")
   endpoint: option<nonEmptyString>,
-  @ocaml.doc("<p>Name of an Amazon ES domain.</p>
-         <p>Domain names are unique across all domains owned by the same account within an AWS
+  @ocaml.doc("<p>Name of an Elasticsearch domain.</p>
+         <p>Domain names are unique across all domains owned by the same account within an Amazon Web Services
          Region.</p>
          <p>Domain names must start with a lowercase letter and must be between 3 and 28
          characters.</p>
          <p>Valid characters are a-z (lowercase only), 0-9, and – (hyphen). </p>")
   @as("DomainName")
   domainName: option<nonEmptyString>,
-  @ocaml.doc("<p>Unique identifier for an Amazon ES domain.</p>") @as("DomainId")
+  @ocaml.doc("<p>Unique identifier for an Elasticsearch domain.</p>") @as("DomainId")
   domainId: option<nonEmptyString>,
   @ocaml.doc("<p>Additional options for the domain endpoint.</p>") @as("DomainEndpointOptions")
   domainEndpointOptions: option<awsElasticsearchDomainDomainEndpointOptions>,
   @ocaml.doc(
-    "<p>IAM policy document specifying the access policies for the new Amazon ES domain.</p>"
+    "<p>IAM policy document specifying the access policies for the new Elasticsearch domain.</p>"
   )
   @as("AccessPolicies")
   accessPolicies: option<nonEmptyString>,
@@ -4226,6 +5957,100 @@ type awsElasticBeanstalkEnvironmentDetails = {
   @as("ApplicationName")
   applicationName: option<nonEmptyString>,
 }
+type awsEksClusterLoggingClusterLoggingList = array<awsEksClusterLoggingClusterLoggingDetails>
+@ocaml.doc("<p>A data volume to mount from another container.</p>")
+type awsEcsTaskDefinitionVolumesDetails = {
+  @ocaml.doc("<p>The name of the data volume.</p>") @as("Name") name: option<nonEmptyString>,
+  @ocaml.doc("<p>Information about a bind mount host volume.</p>") @as("Host")
+  host: option<awsEcsTaskDefinitionVolumesHostDetails>,
+  @ocaml.doc(
+    "<p>Information about the Amazon Elastic File System file system that is used for task storage.</p>"
+  )
+  @as("EfsVolumeConfiguration")
+  efsVolumeConfiguration: option<awsEcsTaskDefinitionVolumesEfsVolumeConfigurationDetails>,
+  @ocaml.doc("<p>Information about a Docker volume.</p>") @as("DockerVolumeConfiguration")
+  dockerVolumeConfiguration: option<awsEcsTaskDefinitionVolumesDockerVolumeConfigurationDetails>,
+}
+@ocaml.doc("<p>The configuration details for the App Mesh
+         proxy.</p>")
+type awsEcsTaskDefinitionProxyConfigurationDetails = {
+  @ocaml.doc("<p>The proxy type.</p>") @as("Type") type_: option<nonEmptyString>,
+  @ocaml.doc(
+    "<p>The set of network configuration parameters to provide to the Container Network Interface (CNI) plugin, specified as key-value pairs.</p>"
+  )
+  @as("ProxyConfigurationProperties")
+  proxyConfigurationProperties: option<
+    awsEcsTaskDefinitionProxyConfigurationProxyConfigurationPropertiesList,
+  >,
+  @ocaml.doc("<p>The name of the container that will serve as the App Mesh proxy.</p>")
+  @as("ContainerName")
+  containerName: option<nonEmptyString>,
+}
+@ocaml.doc("<p>The log configuration specification for the container.</p>")
+type awsEcsTaskDefinitionContainerDefinitionsLogConfigurationDetails = {
+  @ocaml.doc("<p>The secrets to pass to the log configuration.</p>") @as("SecretOptions")
+  secretOptions: option<awsEcsTaskDefinitionContainerDefinitionsLogConfigurationSecretOptionsList>,
+  @ocaml.doc(
+    "<p>The configuration options to send to the log driver. Requires version 1.19 of the Docker Remote API or greater on your container instance.</p>"
+  )
+  @as("Options")
+  options: option<fieldMap>,
+  @ocaml.doc("<p>The log driver to use for the container.</p>") @as("LogDriver")
+  logDriver: option<nonEmptyString>,
+}
+type awsEcsTaskDefinitionContainerDefinitionsLinuxParametersTmpfsList = array<
+  awsEcsTaskDefinitionContainerDefinitionsLinuxParametersTmpfsDetails,
+>
+type awsEcsTaskDefinitionContainerDefinitionsLinuxParametersDevicesList = array<
+  awsEcsTaskDefinitionContainerDefinitionsLinuxParametersDevicesDetails,
+>
+@ocaml.doc(
+  "<p>For tasks that use the <code>awsvpc</code> networking mode, the VPC subnet and security group configuration.</p>"
+)
+type awsEcsServiceNetworkConfigurationDetails = {
+  @ocaml.doc("<p>The VPC subnet and security group configuration.</p>") @as("AwsVpcConfiguration")
+  awsVpcConfiguration: option<awsEcsServiceNetworkConfigurationAwsVpcConfigurationDetails>,
+}
+@ocaml.doc("<p>The run command configuration for the cluster.</p>")
+type awsEcsClusterConfigurationDetails = {
+  @ocaml.doc("<p>Contains the run command configuration for the cluster.</p>")
+  @as("ExecuteCommandConfiguration")
+  executeCommandConfiguration: option<awsEcsClusterConfigurationExecuteCommandConfigurationDetails>,
+}
+type awsEc2VpnConnectionOptionsTunnelOptionsList = array<
+  awsEc2VpnConnectionOptionsTunnelOptionsDetails,
+>
+@ocaml.doc("<p>Contains details about the service configuration for a VPC endpoint service.</p>")
+type awsEc2VpcEndpointServiceDetails = {
+  @ocaml.doc("<p>The types for the service.</p>") @as("ServiceType")
+  serviceType: option<awsEc2VpcEndpointServiceServiceTypeList>,
+  @ocaml.doc("<p>The current state of the service.</p>") @as("ServiceState")
+  serviceState: option<nonEmptyString>,
+  @ocaml.doc("<p>The name of the service.</p>") @as("ServiceName")
+  serviceName: option<nonEmptyString>,
+  @ocaml.doc("<p>The identifier of the service.</p>") @as("ServiceId")
+  serviceId: option<nonEmptyString>,
+  @ocaml.doc("<p>The private DNS name for the service.</p>") @as("PrivateDnsName")
+  privateDnsName: option<nonEmptyString>,
+  @ocaml.doc("<p>The ARNs of the Network Load Balancers for the service.</p>")
+  @as("NetworkLoadBalancerArns")
+  networkLoadBalancerArns: option<nonEmptyStringList>,
+  @ocaml.doc("<p>The ARNs of the Gateway Load Balancers for the service.</p>")
+  @as("GatewayLoadBalancerArns")
+  gatewayLoadBalancerArns: option<nonEmptyStringList>,
+  @ocaml.doc("<p>Whether the service manages its VPC endpoints.</p>") @as("ManagesVpcEndpoints")
+  managesVpcEndpoints: option<boolean_>,
+  @ocaml.doc("<p>The DNS names for the service.</p>") @as("BaseEndpointDnsNames")
+  baseEndpointDnsNames: option<nonEmptyStringList>,
+  @ocaml.doc("<p>The Availability Zones where the service is available.</p>")
+  @as("AvailabilityZones")
+  availabilityZones: option<nonEmptyStringList>,
+  @ocaml.doc(
+    "<p>Whether requests from other Amazon Web Services accounts to create an endpoint to the service must first be accepted.</p>"
+  )
+  @as("AcceptanceRequired")
+  acceptanceRequired: option<boolean_>,
+}
 @ocaml.doc("<p>Details about an EC2 VPC.</p>")
 type awsEc2VpcDetails = {
   @ocaml.doc("<p>The current state of the VPC.</p>") @as("State") state: option<nonEmptyString>,
@@ -4245,7 +6070,7 @@ type awsEc2VpcDetails = {
 type awsEc2VolumeDetails = {
   @ocaml.doc("<p>The volume attachments.</p>") @as("Attachments")
   attachments: option<awsEc2VolumeAttachmentList>,
-  @ocaml.doc("<p>The ARN of the AWS Key Management Service (AWS KMS) customer master key (CMK) that was
+  @ocaml.doc("<p>The ARN of the KMS key that was
          used to protect the volume encryption key for the volume.</p>")
   @as("KmsKeyId")
   kmsKeyId: option<nonEmptyString>,
@@ -4262,7 +6087,7 @@ type awsEc2VolumeDetails = {
   @as("CreateTime")
   createTime: option<nonEmptyString>,
 }
-@ocaml.doc("<p>Contains information about a subnet in EC2.</p>")
+@ocaml.doc("<p>Contains information about a subnet in Amazon EC2.</p>")
 type awsEc2SubnetDetails = {
   @ocaml.doc("<p>The IPV6 CIDR blocks that are associated with the subnet.</p>")
   @as("Ipv6CidrBlockAssociationSet")
@@ -4273,7 +6098,8 @@ type awsEc2SubnetDetails = {
   subnetId: option<nonEmptyString>,
   @ocaml.doc("<p>The ARN of the subnet.</p>") @as("SubnetArn") subnetArn: option<nonEmptyString>,
   @ocaml.doc("<p>The current state of the subnet.</p>") @as("State") state: option<nonEmptyString>,
-  @ocaml.doc("<p>The identifier of the AWS account that owns the subnet.</p>") @as("OwnerId")
+  @ocaml.doc("<p>The identifier of the Amazon Web Services account that owns the subnet.</p>")
+  @as("OwnerId")
   ownerId: option<nonEmptyString>,
   @ocaml.doc("<p>Whether instances in this subnet receive a public IP address.</p>")
   @as("MapPublicIpOnLaunch")
@@ -4301,7 +6127,7 @@ type awsEc2SubnetDetails = {
 }
 @ocaml.doc("<p>An IP permission for an EC2 security group.</p>")
 type awsEc2SecurityGroupIpPermission = {
-  @ocaml.doc("<p>[VPC only] The prefix list IDs for an AWS service. With outbound rules, this is the AWS
+  @ocaml.doc("<p>[VPC only] The prefix list IDs for an Amazon Web Services service. With outbound rules, this is the Amazon Web Services
          service to access through a VPC endpoint from instances associated with the security
          group.</p>")
   @as("PrefixListIds")
@@ -4310,7 +6136,8 @@ type awsEc2SecurityGroupIpPermission = {
   ipv6Ranges: option<awsEc2SecurityGroupIpv6RangeList>,
   @ocaml.doc("<p>The IPv4 ranges.</p>") @as("IpRanges")
   ipRanges: option<awsEc2SecurityGroupIpRangeList>,
-  @ocaml.doc("<p>The security group and AWS account ID pairs.</p>") @as("UserIdGroupPairs")
+  @ocaml.doc("<p>The security group and Amazon Web Services account ID pairs.</p>")
+  @as("UserIdGroupPairs")
   userIdGroupPairs: option<awsEc2SecurityGroupUserIdGroupPairList>,
   @ocaml.doc("<p>The end of the port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code.</p>
          <p>A value of -1 indicates all ICMP/ICMPv6 codes. If you specify all ICMP/ICMPv6 types, you
@@ -4360,6 +6187,37 @@ type awsEc2NetworkInterfaceDetails = {
   attachment: option<awsEc2NetworkInterfaceAttachment>,
 }
 type awsEc2NetworkAclEntryList = array<awsEc2NetworkAclEntry>
+@ocaml.doc("<p>The details of an EC2 instance.</p>")
+type awsEc2InstanceDetails = {
+  @ocaml.doc(
+    "<p>The identifiers of the network interfaces for the EC2 instance. The details for each network interface are in a corresponding <code>AwsEc2NetworkInterfacesDetails</code> object.</p>"
+  )
+  @as("NetworkInterfaces")
+  networkInterfaces: option<awsEc2InstanceNetworkInterfacesList>,
+  @ocaml.doc("<p>Indicates when the instance was launched.</p>
+         <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet
+            Date/Time Format</a>. The value cannot contain spaces. For example,
+            <code>2020-03-22T13:22:13.933Z</code>.</p>")
+  @as("LaunchedAt")
+  launchedAt: option<nonEmptyString>,
+  @ocaml.doc("<p>The identifier of the subnet that the instance was launched in.</p>")
+  @as("SubnetId")
+  subnetId: option<nonEmptyString>,
+  @ocaml.doc("<p>The identifier of the VPC that the instance was launched in.</p>") @as("VpcId")
+  vpcId: option<nonEmptyString>,
+  @ocaml.doc("<p>The IAM profile ARN of the instance.</p>") @as("IamInstanceProfileArn")
+  iamInstanceProfileArn: option<nonEmptyString>,
+  @ocaml.doc("<p>The key name associated with the instance.</p>") @as("KeyName")
+  keyName: option<nonEmptyString>,
+  @ocaml.doc("<p>The IPv6 addresses associated with the instance.</p>") @as("IpV6Addresses")
+  ipV6Addresses: option<stringList>,
+  @ocaml.doc("<p>The IPv4 addresses associated with the instance.</p>") @as("IpV4Addresses")
+  ipV4Addresses: option<stringList>,
+  @ocaml.doc("<p>The Amazon Machine Image (AMI) ID of the instance.</p>") @as("ImageId")
+  imageId: option<nonEmptyString>,
+  @ocaml.doc("<p>The instance type of the instance. </p>") @as("Type")
+  type_: option<nonEmptyString>,
+}
 type awsDynamoDbTableReplicaGlobalSecondaryIndexList = array<
   awsDynamoDbTableReplicaGlobalSecondaryIndex,
 >
@@ -4394,28 +6252,61 @@ type awsDynamoDbTableGlobalSecondaryIndex = {
   @ocaml.doc("<p>Whether the index is currently backfilling.</p>") @as("Backfilling")
   backfilling: option<boolean_>,
 }
-@ocaml.doc("<p>Information about an AWS CodeBuild project.</p>")
-type awsCodeBuildProjectDetails = {
-  @ocaml.doc("<p>Information about the VPC configuration that AWS CodeBuild accesses.</p>")
-  @as("VpcConfig")
-  vpcConfig: option<awsCodeBuildProjectVpcConfig>,
-  @ocaml.doc("<p>The ARN of the IAM role that enables AWS CodeBuild to interact with dependent AWS
-         services on behalf of the AWS account.</p>")
-  @as("ServiceRole")
-  serviceRole: option<nonEmptyString>,
-  @ocaml.doc("<p>Information about the build input source code for this build project.</p>")
-  @as("Source")
-  source: option<awsCodeBuildProjectSource>,
-  @ocaml.doc("<p>The name of the build project.</p>") @as("Name") name: option<nonEmptyString>,
-  @ocaml.doc("<p>Information about the build environment for this build project.</p>")
-  @as("Environment")
-  environment: option<awsCodeBuildProjectEnvironment>,
-  @ocaml.doc("<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) used to encrypt the
-         build output artifacts.</p>
-         <p>You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the
-         CMK alias (using the format alias/alias-name). </p>")
-  @as("EncryptionKey")
-  encryptionKey: option<nonEmptyString>,
+@ocaml.doc("<p>Information about the build environment for this build project.</p>")
+type awsCodeBuildProjectEnvironment = {
+  @ocaml.doc("<p>The type of build environment to use for related builds.</p>
+         <p>The environment type <code>ARM_CONTAINER</code> is available only in Regions US East (N.
+         Virginia), US East (Ohio), US West (Oregon), Europe (Ireland), Asia Pacific (Mumbai), Asia
+         Pacific (Tokyo), Asia Pacific (Sydney), and Europe (Frankfurt).</p>
+         <p>The environment type <code>LINUX_CONTAINER</code> with compute type
+         build.general1.2xlarge is available only in Regions US East (N. Virginia), US East (N.
+         Virginia), US West (Oregon), Canada (Central), Europe (Ireland), Europe (London), Europe
+         (Frankfurt), Asia Pacific (Tokyo), Asia Pacific (Seoul), Asia Pacific (Singapore), Asia
+         Pacific (Sydney), China (Beijing), and China (Ningxia).</p>
+         <p>The environment type <code>LINUX_GPU_CONTAINER</code> is available only in Regions US
+         East (N. Virginia), US East (N. Virginia), US West (Oregon), Canada (Central), Europe
+         (Ireland), Europe (London), Europe (Frankfurt), Asia Pacific (Tokyo), Asia Pacific (Seoul),
+         Asia Pacific (Singapore), Asia Pacific (Sydney), China (Beijing), and China
+         (Ningxia).</p>
+         <p>Valid values: <code>WINDOWS_CONTAINER</code> | <code>LINUX_CONTAINER</code> |
+            <code>LINUX_GPU_CONTAINER</code> | <code>ARM_CONTAINER</code>
+         </p>")
+  @as("Type")
+  type_: option<nonEmptyString>,
+  @ocaml.doc("<p>The credentials for access to a private registry.</p>") @as("RegistryCredential")
+  registryCredential: option<awsCodeBuildProjectEnvironmentRegistryCredential>,
+  @ocaml.doc("<p>The type of credentials CodeBuild uses to pull images in your build.</p>
+         <p>Valid values:</p>
+         <ul>
+            <li>
+               <p>
+                  <code>CODEBUILD</code> specifies that CodeBuild uses its own credentials. This
+               requires that you modify your ECR repository policy to trust the CodeBuild
+               service principal.</p>
+            </li>
+            <li>
+               <p>
+                  <code>SERVICE_ROLE</code> specifies that CodeBuild uses your build project's
+               service role.</p>
+            </li>
+         </ul>
+         <p>When you use a cross-account or private registry image, you must use
+            <code>SERVICE_ROLE</code> credentials. When you use an CodeBuild curated image, you
+         must use <code>CODEBUILD</code> credentials.</p>")
+  @as("ImagePullCredentialsType")
+  imagePullCredentialsType: option<nonEmptyString>,
+  @ocaml.doc(
+    "<p>Whether to allow the Docker daemon to run inside a Docker container. Set to <code>true</code> if the build project is used to build Docker images.</p>"
+  )
+  @as("PrivilegedMode")
+  privilegedMode: option<boolean_>,
+  @ocaml.doc(
+    "<p>A set of environment variables to make available to builds for the build project.</p>"
+  )
+  @as("EnvironmentVariables")
+  environmentVariables: option<awsCodeBuildProjectEnvironmentEnvironmentVariablesList>,
+  @ocaml.doc("<p>The certificate to use with this build project.</p>") @as("Certificate")
+  certificate: option<nonEmptyString>,
 }
 type awsCloudFrontDistributionOriginItemList = array<awsCloudFrontDistributionOriginItem>
 @ocaml.doc("<p>Provides information about when an origin group fails over.</p>")
@@ -4432,6 +6323,19 @@ type awsCloudFrontDistributionCacheBehaviors = {
 type awsCertificateManagerCertificateDomainValidationOptions = array<
   awsCertificateManagerCertificateDomainValidationOption,
 >
+type awsAutoScalingLaunchConfigurationBlockDeviceMappingsList = array<
+  awsAutoScalingLaunchConfigurationBlockDeviceMappingsDetails,
+>
+@ocaml.doc("<p>Describes a launch template and overrides for a mixed instances policy.</p>")
+type awsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateDetails = {
+  @ocaml.doc("<p>Property values to use to override the values in the launch template.</p>")
+  @as("Overrides")
+  overrides: option<awsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateOverridesList>,
+  @ocaml.doc("<p>The launch template to use.</p>") @as("LaunchTemplateSpecification")
+  launchTemplateSpecification: option<
+    awsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateLaunchTemplateSpecification,
+  >,
+}
 @ocaml.doc("<p>Contains information about a version 2 API in Amazon API Gateway.</p>")
 type awsApiGatewayV2ApiDetails = {
   @ocaml.doc("<p>A cross-origin resource sharing (CORS) configuration. Supported only for HTTP
@@ -4490,7 +6394,7 @@ type awsApiGatewayStageDetails = {
             <code>2020-03-22T13:22:13.933Z</code>.</p>")
   @as("CreatedDate")
   createdDate: option<nonEmptyString>,
-  @ocaml.doc("<p>Indicates whether active tracing with AWS X-Ray is enabled for the stage.</p>")
+  @ocaml.doc("<p>Indicates whether active tracing with X-Ray is enabled for the stage.</p>")
   @as("TracingEnabled")
   tracingEnabled: option<boolean_>,
   @ocaml.doc("<p>Information about settings for canary deployment in the stage.</p>")
@@ -4598,13 +6502,53 @@ type awsApiCallAction = {
             (<code>remoteip</code>) or from a DNS domain (<code>domain</code>).</p>")
   @as("CallerType")
   callerType: option<nonEmptyString>,
-  @ocaml.doc("<p>The name of the AWS service that the API method belongs to.</p>")
+  @ocaml.doc("<p>The name of the Amazon Web Services service that the API method belongs to.</p>")
   @as("ServiceName")
   serviceName: option<nonEmptyString>,
   @ocaml.doc("<p>The name of the API method that was issued.</p>") @as("Api")
   api: option<nonEmptyString>,
 }
-type vulnerabilityList = array<vulnerability>
+@ocaml.doc(
+  "<p>The definition of a custom action that can be used for stateless packet handling.</p>"
+)
+type statelessCustomActionDefinition = {
+  @ocaml.doc("<p>Information about metrics to publish to CloudWatch.</p>")
+  @as("PublishMetricAction")
+  publishMetricAction: option<statelessCustomPublishMetricAction>,
+}
+@ocaml.doc("<p>Criteria for the stateless rule.</p>")
+type ruleGroupSourceStatelessRuleMatchAttributes = {
+  @ocaml.doc("<p>The TCP flags and masks to inspect for.</p>") @as("TcpFlags")
+  tcpFlags: option<ruleGroupSourceStatelessRuleMatchAttributesTcpFlagsList>,
+  @ocaml.doc("<p>The source IP addresses and address ranges to inspect for, in CIDR notation.</p>")
+  @as("Sources")
+  sources: option<ruleGroupSourceStatelessRuleMatchAttributesSourcesList>,
+  @ocaml.doc("<p>A list of port ranges to specify the source ports to inspect for.</p>")
+  @as("SourcePorts")
+  sourcePorts: option<ruleGroupSourceStatelessRuleMatchAttributesSourcePortsList>,
+  @ocaml.doc("<p>The protocols to inspect for.</p>") @as("Protocols")
+  protocols: option<ruleGroupSourceStatelessRuleMatchAttributesProtocolsList>,
+  @ocaml.doc(
+    "<p>The destination IP addresses and address ranges to inspect for, in CIDR notation.</p>"
+  )
+  @as("Destinations")
+  destinations: option<ruleGroupSourceStatelessRuleMatchAttributesDestinationsList>,
+  @ocaml.doc("<p>A list of port ranges to specify the destination ports to inspect for.</p>")
+  @as("DestinationPorts")
+  destinationPorts: option<ruleGroupSourceStatelessRuleMatchAttributesDestinationPortsList>,
+}
+@ocaml.doc("<p>A Suricata rule specification.</p>")
+type ruleGroupSourceStatefulRulesDetails = {
+  @ocaml.doc("<p>Additional options for the rule.</p>") @as("RuleOptions")
+  ruleOptions: option<ruleGroupSourceStatefulRulesOptionsList>,
+  @ocaml.doc("<p>The stateful inspection criteria for the rule.</p>") @as("Header")
+  header: option<ruleGroupSourceStatefulRulesHeaderDetails>,
+  @ocaml.doc(
+    "<p>Defines what Network Firewall should do with the packets in a traffic flow when the flow matches the stateful rule criteria.</p>"
+  )
+  @as("Action")
+  action: option<nonEmptyString>,
+}
 type portProbeDetailList = array<portProbeDetail>
 @ocaml.doc("<p>The detected occurrences of sensitive data.</p>")
 type occurrences = {
@@ -4642,12 +6586,16 @@ type networkHeader = {
   @ocaml.doc("<p>The protocol used for the component.</p>") @as("Protocol")
   protocol: option<nonEmptyString>,
 }
+type cvssList = array<cvss>
 type awsWafWebAclRuleList = array<awsWafWebAclRule>
 @ocaml.doc("<p>A collection of attributes that are applied to all active Security Hub-aggregated findings and
          that result in a subset of findings that are included in this insight.</p>
          <p>You can filter by up to 10 finding attributes. For each attribute, you can provide up to
          20 filter values.</p>")
 type awsSecurityFindingFilters = {
+  @ocaml.doc("<p>Indicates whether or not sample findings are included in the filter results.</p>")
+  @as("Sample")
+  sample: option<booleanFilterList>,
   @ocaml.doc("<p>One or more finding types that the finding provider assigned to the finding. Uses the format of <code>namespace/category/classifier</code>
          that classify a finding.</p>
          <p>Valid namespace values are: Software and Configuration Checks | TTPs | Effects | Unusual
@@ -4706,10 +6654,12 @@ type awsSecurityFindingFilters = {
                   <code>RESOLVED</code> to <code>NEW</code> in the following cases:</p>
                <ul>
                   <li>
-                     <p>The record state changes from <code>ARCHIVED</code> to <code>ACTIVE</code>.</p>
+                     <p>
+                        <code>RecordState</code> changes from <code>ARCHIVED</code> to <code>ACTIVE</code>.</p>
                   </li>
                   <li>
-                     <p>The compliance status changes from <code>PASSED</code> to either <code>WARNING</code>,
+                     <p>
+                        <code>Compliance.Status</code> changes from <code>PASSED</code> to either <code>WARNING</code>,
                         <code>FAILED</code>, or <code>NOT_AVAILABLE</code>.</p>
                   </li>
                </ul>
@@ -4719,16 +6669,49 @@ type awsSecurityFindingFilters = {
                   <code>NOTIFIED</code> - Indicates that the resource owner has been notified about
                the security issue. Used when the initial reviewer is not the resource owner, and
                needs intervention from the resource owner.</p>
+               <p>If one of the following occurs, the workflow status is changed automatically from
+               <code>NOTIFIED</code> to <code>NEW</code>:</p>
+               <ul>
+                  <li>
+                     <p>
+                        <code>RecordState</code> changes from <code>ARCHIVED</code> to
+                     <code>ACTIVE</code>.</p>
+                  </li>
+                  <li>
+                     <p>
+                        <code>Compliance.Status</code> changes from <code>PASSED</code> to <code>FAILED</code>,
+                     <code>WARNING</code>, or <code>NOT_AVAILABLE</code>.</p>
+                  </li>
+               </ul>
             </li>
             <li>
                <p>
-                  <code>SUPPRESSED</code> - The finding will not be reviewed again and will not be
-               acted upon.</p>
+                  <code>SUPPRESSED</code> - Indicates that you reviewed the finding and do not believe that any action is
+               needed.</p>
+               <p>The workflow status of a <code>SUPPRESSED</code> finding does not change if
+               <code>RecordState</code> changes from <code>ARCHIVED</code> to
+               <code>ACTIVE</code>.</p>
             </li>
             <li>
                <p>
                   <code>RESOLVED</code> - The finding was reviewed and remediated and is now
                considered resolved. </p>
+               <p>The finding remains <code>RESOLVED</code> unless one of the following occurs:</p>
+               <ul>
+                  <li>
+                     <p>
+                        <code>RecordState</code> changes from <code>ARCHIVED</code> to
+                     <code>ACTIVE</code>.</p>
+                  </li>
+                  <li>
+                     <p>
+                        <code>Compliance.Status</code> changes from <code>PASSED</code> to <code>FAILED</code>,
+                     <code>WARNING</code>, or <code>NOT_AVAILABLE</code>.</p>
+                  </li>
+               </ul>
+               <p>In those cases, the workflow status is automatically reset to <code>NEW</code>.</p>
+               <p>For findings from controls, if <code>Compliance.Status</code> is <code>PASSED</code>,
+               then Security Hub automatically sets the workflow status to <code>RESOLVED</code>.</p>
             </li>
          </ul>")
   @as("WorkflowStatus")
@@ -4741,7 +6724,7 @@ type awsSecurityFindingFilters = {
   @ocaml.doc("<p>The veracity of a finding.</p>") @as("VerificationState")
   verificationState: option<stringFilterList>,
   @ocaml.doc("<p>Exclusive to findings that are generated as the result of a check run against a specific
-         rule in a supported standard, such as CIS AWS Foundations. Contains security
+         rule in a supported standard, such as CIS Amazon Web Services Foundations. Contains security
          standard-related finding details.</p>")
   @as("ComplianceStatus")
   complianceStatus: option<stringFilterList>,
@@ -4759,12 +6742,17 @@ type awsSecurityFindingFilters = {
   resourceContainerImageId: option<stringFilterList>,
   @ocaml.doc("<p>The name of the container related to a finding.</p>") @as("ResourceContainerName")
   resourceContainerName: option<stringFilterList>,
+  @ocaml.doc("<p>The name of an IAM user.</p>") @as("ResourceAwsIamUserUserName")
+  resourceAwsIamUserUserName: option<stringFilterList>,
   @ocaml.doc("<p>The creation date/time of the IAM access key related to a finding.</p>")
   @as("ResourceAwsIamAccessKeyCreatedAt")
   resourceAwsIamAccessKeyCreatedAt: option<dateFilterList>,
   @ocaml.doc("<p>The status of the IAM access key related to a finding.</p>")
   @as("ResourceAwsIamAccessKeyStatus")
   resourceAwsIamAccessKeyStatus: option<stringFilterList>,
+  @ocaml.doc("<p>The name of the principal that is associated with an IAM access key.</p>")
+  @as("ResourceAwsIamAccessKeyPrincipalName")
+  resourceAwsIamAccessKeyPrincipalName: option<stringFilterList>,
   @ocaml.doc("<p>The user associated with the IAM access key related to a finding.</p>")
   @as("ResourceAwsIamAccessKeyUserName")
   resourceAwsIamAccessKeyUserName: option<stringFilterList>,
@@ -4800,14 +6788,18 @@ type awsSecurityFindingFilters = {
   resourceAwsEc2InstanceImageId: option<stringFilterList>,
   @ocaml.doc("<p>The instance type of the instance.</p>") @as("ResourceAwsEc2InstanceType")
   resourceAwsEc2InstanceType: option<stringFilterList>,
-  @ocaml.doc("<p>A list of AWS tags associated with a resource at the time the finding was
+  @ocaml.doc("<p>A list of Amazon Web Services tags associated with a resource at the time the finding was
          processed.</p>")
   @as("ResourceTags")
   resourceTags: option<mapFilterList>,
-  @ocaml.doc("<p>The canonical AWS external Region name where this resource is located.</p>")
+  @ocaml.doc(
+    "<p>The canonical Amazon Web Services external Region name where this resource is located.</p>"
+  )
   @as("ResourceRegion")
   resourceRegion: option<stringFilterList>,
-  @ocaml.doc("<p>The canonical AWS partition name that the Region is assigned to.</p>")
+  @ocaml.doc(
+    "<p>The canonical Amazon Web Services partition name that the Region is assigned to.</p>"
+  )
   @as("ResourcePartition")
   resourcePartition: option<stringFilterList>,
   @ocaml.doc("<p>The canonical identifier for the given resource type.</p>") @as("ResourceId")
@@ -4889,10 +6881,12 @@ type awsSecurityFindingFilters = {
   @as("UserDefinedFields")
   userDefinedFields: option<mapFilterList>,
   @ocaml.doc("<p>The name of the findings provider (company) that owns the solution (product) that
-         generates findings.</p>")
+         generates findings.</p>
+         <p>Note that this is a filter against the <code>aws/securityhub/CompanyName</code> field in <code>ProductFields</code>. It is not a filter for the top-level <code>CompanyName</code> field.</p>")
   @as("CompanyName")
   companyName: option<stringFilterList>,
-  @ocaml.doc("<p>The name of the solution (product) that generates findings.</p>")
+  @ocaml.doc("<p>The name of the solution (product) that generates findings.</p>
+         <p>Note that this is a filter against the <code>aws/securityhub/ProductName</code> field in <code>ProductFields</code>. It is not a filter for the top-level <code>ProductName</code> field.</p>")
   @as("ProductName")
   productName: option<stringFilterList>,
   @ocaml.doc("<p>A data type where security-findings providers can include additional solution-specific
@@ -4948,6 +6942,8 @@ type awsSecurityFindingFilters = {
          classifies a finding.</p>")
   @as("Type")
   type_: option<stringFilterList>,
+  @ocaml.doc("<p>The Region from which the finding was generated.</p>") @as("Region")
+  region: option<stringFilterList>,
   @ocaml.doc("<p>The identifier for the solution-specific component (a discrete unit of logic) that
          generated a finding. In various security-findings providers' solutions, this generator can
          be called a rule, a check, a detector, a plugin, etc.</p>")
@@ -4955,7 +6951,8 @@ type awsSecurityFindingFilters = {
   generatorId: option<stringFilterList>,
   @ocaml.doc("<p>The security findings provider-specific identifier for a finding.</p>") @as("Id")
   id: option<stringFilterList>,
-  @ocaml.doc("<p>The AWS account ID that a finding is generated in.</p>") @as("AwsAccountId")
+  @ocaml.doc("<p>The Amazon Web Services account ID that a finding is generated in.</p>")
+  @as("AwsAccountId")
   awsAccountId: option<stringFilterList>,
   @ocaml.doc("<p>The ARN generated by Security Hub that uniquely identifies a third-party company
          (security findings provider) after this provider's product (solution that generates
@@ -4963,10 +6960,41 @@ type awsSecurityFindingFilters = {
   @as("ProductArn")
   productArn: option<stringFilterList>,
 }
+@ocaml.doc("<p>Website parameters for the S3
+         bucket.</p>")
+type awsS3BucketWebsiteConfiguration = {
+  @ocaml.doc("<p>The rules for applying redirects for requests to the website.</p>")
+  @as("RoutingRules")
+  routingRules: option<awsS3BucketWebsiteConfigurationRoutingRules>,
+  @ocaml.doc("<p>The redirect behavior for requests to the website.</p>")
+  @as("RedirectAllRequestsTo")
+  redirectAllRequestsTo: option<awsS3BucketWebsiteConfigurationRedirectTo>,
+  @ocaml.doc("<p>The name of the index document for the website.</p>") @as("IndexDocumentSuffix")
+  indexDocumentSuffix: option<nonEmptyString>,
+  @ocaml.doc("<p>The name of the error document for the website.</p>") @as("ErrorDocument")
+  errorDocument: option<nonEmptyString>,
+}
 @ocaml.doc("<p>The encryption configuration for the S3 bucket.</p>")
 type awsS3BucketServerSideEncryptionConfiguration = {
   @ocaml.doc("<p>The encryption rules that are applied to the S3 bucket.</p>") @as("Rules")
   rules: option<awsS3BucketServerSideEncryptionRules>,
+}
+@ocaml.doc("<p>Filtering information for the notifications. The
+         filtering is based on Amazon S3 key names.</p>")
+type awsS3BucketNotificationConfigurationFilter = {
+  @ocaml.doc("<p>Details for an Amazon S3 filter.</p>") @as("S3KeyFilter")
+  s3KeyFilter: option<awsS3BucketNotificationConfigurationS3KeyFilter>,
+}
+@ocaml.doc("<p>The configuration for the filter.</p>")
+type awsS3BucketBucketLifecycleConfigurationRulesFilterPredicateDetails = {
+  @ocaml.doc("<p>Whether to use <code>AND</code> or <code>OR</code> to join the operands.</p>")
+  @as("Type")
+  type_: option<nonEmptyString>,
+  @ocaml.doc("<p>A tag filter.</p>") @as("Tag")
+  tag: option<awsS3BucketBucketLifecycleConfigurationRulesFilterPredicateTagDetails>,
+  @ocaml.doc("<p>A prefix filter.</p>") @as("Prefix") prefix: option<nonEmptyString>,
+  @ocaml.doc("<p>The values to use for the filter.</p>") @as("Operands")
+  operands: option<awsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsList>,
 }
 type awsRedshiftClusterClusterParameterGroups = array<awsRedshiftClusterClusterParameterGroup>
 @ocaml.doc("<p>Information about the subnet group for the database instance.</p>")
@@ -5040,6 +7068,152 @@ type awsElbLoadBalancerDetails = {
   @as("AvailabilityZones")
   availabilityZones: option<stringList>,
 }
+@ocaml.doc("<p>The logging configuration for an Amazon EKS cluster.</p>")
+type awsEksClusterLoggingDetails = {
+  @ocaml.doc("<p>Cluster logging configurations.</p>") @as("ClusterLogging")
+  clusterLogging: option<awsEksClusterLoggingClusterLoggingList>,
+}
+type awsEcsTaskDefinitionVolumesList = array<awsEcsTaskDefinitionVolumesDetails>
+@ocaml.doc(
+  "<p>>Linux-specific modifications that are applied to the container, such as Linux kernel capabilities.</p>"
+)
+type awsEcsTaskDefinitionContainerDefinitionsLinuxParametersDetails = {
+  @ocaml.doc("<p>The container path, mount options, and size (in MiB) of the tmpfs mount.</p>")
+  @as("Tmpfs")
+  tmpfs: option<awsEcsTaskDefinitionContainerDefinitionsLinuxParametersTmpfsList>,
+  @ocaml.doc(
+    "<p>Configures the container's memory swappiness behavior. Determines how aggressively pages are swapped. The higher the value, the more aggressive the swappiness. The default is 60.</p>"
+  )
+  @as("Swappiness")
+  swappiness: option<integer_>,
+  @ocaml.doc("<p>The value for the size (in MiB) of the <b>/dev/shm</b> volume.</p>")
+  @as("SharedMemorySize")
+  sharedMemorySize: option<integer_>,
+  @ocaml.doc("<p>The total amount of swap memory (in MiB) that a container can use.</p>")
+  @as("MaxSwap")
+  maxSwap: option<integer_>,
+  @ocaml.doc(
+    "<p>Whether to run an <code>init</code> process inside the container that forwards signals and reaps processes. </p>"
+  )
+  @as("InitProcessEnabled")
+  initProcessEnabled: option<boolean_>,
+  @ocaml.doc("<p>The host devices to expose to the container.</p>") @as("Devices")
+  devices: option<awsEcsTaskDefinitionContainerDefinitionsLinuxParametersDevicesList>,
+  @ocaml.doc(
+    "<p>The Linux capabilities for the container that are added to or dropped from the default configuration provided by Docker.</p>"
+  )
+  @as("Capabilities")
+  capabilities: option<awsEcsTaskDefinitionContainerDefinitionsLinuxParametersCapabilitiesDetails>,
+}
+@ocaml.doc("<p>Provides details about a service within an ECS cluster.</p>")
+type awsEcsServiceDetails = {
+  @ocaml.doc("<p>The task definition to use for tasks in the service.</p>") @as("TaskDefinition")
+  taskDefinition: option<nonEmptyString>,
+  @ocaml.doc("<p>Information about the service discovery registries to assign to the service.</p>")
+  @as("ServiceRegistries")
+  serviceRegistries: option<awsEcsServiceServiceRegistriesList>,
+  @ocaml.doc("<p>The name of the service.</p>
+         <p>The name can contain up to 255 characters. It can use letters, numbers, underscores, and hyphens.</p>")
+  @as("ServiceName")
+  serviceName: option<nonEmptyString>,
+  @ocaml.doc("<p>The ARN of the service.</p>") @as("ServiceArn") serviceArn: option<nonEmptyString>,
+  @ocaml.doc("<p>The scheduling strategy to use for the service.</p>
+         <p>The <code>REPLICA</code> scheduling strategy places and maintains the desired number of tasks across the cluster. By default, the service scheduler spreads tasks across Availability Zones. Task placement strategies and constraints are used to customize task placement decisions.</p>
+         <p>The <code>DAEMON</code> scheduling strategy deploys exactly one task on each active container instance that meets all of the task placement constraints that are specified in the cluster. The service scheduler also evaluates the task placement constraints for running tasks and stops tasks that do not meet the placement constraints.</p>
+         <p>Valid values: <code>REPLICA</code> | <code>DAEMON</code>
+         </p>")
+  @as("SchedulingStrategy")
+  schedulingStrategy: option<nonEmptyString>,
+  @ocaml.doc(
+    "<p>The ARN of the IAM role that is associated with the service. The role allows the Amazon ECS container agent to register container instances with an Elastic Load Balancing load balancer.</p>"
+  )
+  @as("Role")
+  role: option<nonEmptyString>,
+  @ocaml.doc("<p>Indicates whether to propagate the tags from the task definition to the task or from the service to the task. If no value is provided, then tags are not propagated.</p>
+         <p>Valid values: <code>TASK_DEFINITION</code> | <code>SERVICE</code>
+         </p>")
+  @as("PropagateTags")
+  propagateTags: option<nonEmptyString>,
+  @ocaml.doc(
+    "<p>The platform version on which to run the service. Only specified for tasks that are hosted on Fargate. If a platform version is not specified, the <code>LATEST</code> platform version is used by default.</p>"
+  )
+  @as("PlatformVersion")
+  platformVersion: option<nonEmptyString>,
+  @ocaml.doc("<p>Information about how tasks for the service are placed.</p>")
+  @as("PlacementStrategies")
+  placementStrategies: option<awsEcsServicePlacementStrategiesList>,
+  @ocaml.doc("<p>The placement constraints for the tasks in the service.</p>")
+  @as("PlacementConstraints")
+  placementConstraints: option<awsEcsServicePlacementConstraintsList>,
+  @ocaml.doc(
+    "<p>For tasks that use the <code>awsvpc</code> networking mode, the VPC subnet and security group configuration.</p>"
+  )
+  @as("NetworkConfiguration")
+  networkConfiguration: option<awsEcsServiceNetworkConfigurationDetails>,
+  @ocaml.doc("<p>The name of the service.</p>") @as("Name") name: option<nonEmptyString>,
+  @ocaml.doc("<p>Information about the load balancers that the service uses.</p>")
+  @as("LoadBalancers")
+  loadBalancers: option<awsEcsServiceLoadBalancersList>,
+  @ocaml.doc("<p>The launch type that the service uses.</p>
+         <p>Valid values: <code>EC2</code> | <code>FARGATE</code> | <code>EXTERNAL</code>
+         </p>")
+  @as("LaunchType")
+  launchType: option<nonEmptyString>,
+  @ocaml.doc(
+    "<p>After a task starts, the amount of time in seconds that the Amazon ECS service scheduler ignores unhealthy Elastic Load Balancing target health checks.</p>"
+  )
+  @as("HealthCheckGracePeriodSeconds")
+  healthCheckGracePeriodSeconds: option<integer_>,
+  @ocaml.doc("<p>Whether the execute command functionality is enabled for the service.</p>")
+  @as("EnableExecuteCommand")
+  enableExecuteCommand: option<boolean_>,
+  @ocaml.doc("<p>Whether to enable Amazon ECS managed tags for the tasks in the service.</p>")
+  @as("EnableEcsManagedTags")
+  enableEcsManagedTags: option<boolean_>,
+  @ocaml.doc("<p>The number of instantiations of the task definition to run on the service.</p>")
+  @as("DesiredCount")
+  desiredCount: option<integer_>,
+  @ocaml.doc("<p>Contains the deployment controller type that the service uses.</p>")
+  @as("DeploymentController")
+  deploymentController: option<awsEcsServiceDeploymentControllerDetails>,
+  @ocaml.doc(
+    "<p>Deployment parameters for the service. Includes the number of tasks that run and the order in which to start and stop tasks.</p>"
+  )
+  @as("DeploymentConfiguration")
+  deploymentConfiguration: option<awsEcsServiceDeploymentConfigurationDetails>,
+  @ocaml.doc("<p>The ARN of the cluster that hosts the service.</p>") @as("Cluster")
+  cluster: option<nonEmptyString>,
+  @ocaml.doc("<p>The capacity provider strategy that the service uses.</p>")
+  @as("CapacityProviderStrategy")
+  capacityProviderStrategy: option<awsEcsServiceCapacityProviderStrategyList>,
+}
+@ocaml.doc("<p>provides details about an ECS cluster.</p>")
+type awsEcsClusterDetails = {
+  @ocaml.doc(
+    "<p>The default capacity provider strategy for the cluster. The default capacity provider strategy is used when services or tasks are run without a specified launch type or capacity provider strategy.</p>"
+  )
+  @as("DefaultCapacityProviderStrategy")
+  defaultCapacityProviderStrategy: option<awsEcsClusterDefaultCapacityProviderStrategyList>,
+  @ocaml.doc("<p>The run command configuration for the cluster.</p>") @as("Configuration")
+  configuration: option<awsEcsClusterConfigurationDetails>,
+  @ocaml.doc(
+    "<p>The setting to use to create the cluster. Specifically used to configure whether to enable CloudWatch Container Insights for the cluster.</p>"
+  )
+  @as("ClusterSettings")
+  clusterSettings: option<awsEcsClusterClusterSettingsList>,
+  @ocaml.doc(
+    "<p>The short name of one or more capacity providers to associate with the cluster.</p>"
+  )
+  @as("CapacityProviders")
+  capacityProviders: option<nonEmptyStringList>,
+}
+@ocaml.doc("<p>VPN connection options.</p>")
+type awsEc2VpnConnectionOptionsDetails = {
+  @ocaml.doc("<p>The VPN tunnel options.</p>") @as("TunnelOptions")
+  tunnelOptions: option<awsEc2VpnConnectionOptionsTunnelOptionsList>,
+  @ocaml.doc("<p>Whether the VPN connection uses static routes only.</p>") @as("StaticRoutesOnly")
+  staticRoutesOnly: option<boolean_>,
+}
 type awsEc2SecurityGroupIpPermissionList = array<awsEc2SecurityGroupIpPermission>
 @ocaml.doc("<p>Contains details about an EC2 network access control list (ACL).</p>")
 type awsEc2NetworkAclDetails = {
@@ -5049,7 +7223,8 @@ type awsEc2NetworkAclDetails = {
   associations: option<awsEc2NetworkAclAssociationList>,
   @ocaml.doc("<p>The identifier of the VPC for the network ACL.</p>") @as("VpcId")
   vpcId: option<nonEmptyString>,
-  @ocaml.doc("<p>The identifier of the AWS account that owns the network ACL.</p>") @as("OwnerId")
+  @ocaml.doc("<p>The identifier of the Amazon Web Services account that owns the network ACL.</p>")
+  @as("OwnerId")
   ownerId: option<nonEmptyString>,
   @ocaml.doc("<p>The identifier of the network ACL.</p>") @as("NetworkAclId")
   networkAclId: option<nonEmptyString>,
@@ -5068,7 +7243,7 @@ type awsDynamoDbTableReplica = {
   @ocaml.doc("<p>Replica-specific configuration for the provisioned throughput.</p>")
   @as("ProvisionedThroughputOverride")
   provisionedThroughputOverride: option<awsDynamoDbTableProvisionedThroughputOverride>,
-  @ocaml.doc("<p>The identifier of the AWS KMS customer master key (CMK) that will be used for AWS KMS
+  @ocaml.doc("<p>The identifier of the KMS key that will be used for KMS
          encryption for the replica.</p>")
   @as("KmsMasterKeyId")
   kmsMasterKeyId: option<nonEmptyString>,
@@ -5078,6 +7253,34 @@ type awsDynamoDbTableReplica = {
 }
 type awsDynamoDbTableLocalSecondaryIndexList = array<awsDynamoDbTableLocalSecondaryIndex>
 type awsDynamoDbTableGlobalSecondaryIndexList = array<awsDynamoDbTableGlobalSecondaryIndex>
+@ocaml.doc("<p>Information about an CodeBuild project.</p>")
+type awsCodeBuildProjectDetails = {
+  @ocaml.doc("<p>Information about the VPC configuration that CodeBuild accesses.</p>")
+  @as("VpcConfig")
+  vpcConfig: option<awsCodeBuildProjectVpcConfig>,
+  @ocaml.doc("<p>Information about logs for the build project.</p>") @as("LogsConfig")
+  logsConfig: option<awsCodeBuildProjectLogsConfigDetails>,
+  @ocaml.doc("<p>The ARN of the IAM role that enables CodeBuild to interact with dependent Amazon Web Services
+         services on behalf of the Amazon Web Services account.</p>")
+  @as("ServiceRole")
+  serviceRole: option<nonEmptyString>,
+  @ocaml.doc("<p>Information about the build input source code for this build project.</p>")
+  @as("Source")
+  source: option<awsCodeBuildProjectSource>,
+  @ocaml.doc("<p>The name of the build project.</p>") @as("Name") name: option<nonEmptyString>,
+  @ocaml.doc("<p>Information about the build environment for this build project.</p>")
+  @as("Environment")
+  environment: option<awsCodeBuildProjectEnvironment>,
+  @ocaml.doc("<p>Information about the build artifacts for the CodeBuild project.</p>")
+  @as("Artifacts")
+  artifacts: option<awsCodeBuildProjectArtifactsList>,
+  @ocaml.doc("<p>The KMS key used to encrypt the
+         build output artifacts.</p>
+         <p>You can specify either the ARN of the KMS key or, if available, the
+         KMS key alias (using the format alias/alias-name). </p>")
+  @as("EncryptionKey")
+  encryptionKey: option<nonEmptyString>,
+}
 @ocaml.doc(
   "<p>A complex type that contains information about origins and origin groups for this distribution.</p>"
 )
@@ -5092,7 +7295,7 @@ type awsCloudFrontDistributionOriginGroup = {
   @as("FailoverCriteria")
   failoverCriteria: option<awsCloudFrontDistributionOriginGroupFailover>,
 }
-@ocaml.doc("<p>Contains information about the AWS Certificate Manager managed renewal for an
+@ocaml.doc("<p>Contains information about the Certificate Manager managed renewal for an
             <code>AMAZON_ISSUED</code> certificate.</p>")
 type awsCertificateManagerCertificateRenewalSummary = {
   @ocaml.doc("<p>Indicates when the renewal summary was last updated.</p>
@@ -5113,17 +7316,116 @@ type awsCertificateManagerCertificateRenewalSummary = {
          </p>")
   @as("RenewalStatusReason")
   renewalStatusReason: option<nonEmptyString>,
-  @ocaml.doc("<p>The status of the AWS Certificate Manager managed renewal of the certificate.</p>
+  @ocaml.doc("<p>The status of the Certificate Manager managed renewal of the certificate.</p>
          <p>Valid values: <code>PENDING_AUTO_RENEWAL</code> | <code>PENDING_VALIDATION</code> |
             <code>SUCCESS</code> | <code>FAILED</code>
          </p>")
   @as("RenewalStatus")
   renewalStatus: option<nonEmptyString>,
   @ocaml.doc("<p>Information about the validation of each domain name in the certificate, as it pertains
-         to AWS Certificate Manager managed renewal. Provided only when the certificate type is
+         to Certificate Manager managed renewal. Provided only when the certificate type is
             <code>AMAZON_ISSUED</code>.</p>")
   @as("DomainValidationOptions")
   domainValidationOptions: option<awsCertificateManagerCertificateDomainValidationOptions>,
+}
+@ocaml.doc("<p>Details about a launch configuration.</p>")
+type awsAutoScalingLaunchConfigurationDetails = {
+  @ocaml.doc("<p>The metadata options for the instances.</p>") @as("MetadataOptions")
+  metadataOptions: option<awsAutoScalingLaunchConfigurationMetadataOptions>,
+  @ocaml.doc("<p>The user data to make available to the launched EC2 instances. Must be base64-encoded
+         text.</p>")
+  @as("UserData")
+  userData: option<nonEmptyString>,
+  @ocaml.doc("<p>The maximum hourly price to be paid for any Spot Instance that is launched to fulfill the
+         request.</p>")
+  @as("SpotPrice")
+  spotPrice: option<nonEmptyString>,
+  @ocaml.doc("<p>The security groups to assign to the instances in the Auto Scaling group.</p>")
+  @as("SecurityGroups")
+  securityGroups: option<nonEmptyStringList>,
+  @ocaml.doc("<p>The identifier of the RAM disk associated with the AMI.</p>") @as("RamdiskId")
+  ramdiskId: option<nonEmptyString>,
+  @ocaml.doc("<p>The tenancy of the instance. An instance with <code>dedicated</code> tenancy runs on
+         isolated, single-tenant hardware and can only be launched into a VPC.</p>")
+  @as("PlacementTenancy")
+  placementTenancy: option<nonEmptyString>,
+  @ocaml.doc("<p>The name of the launch configuration.</p>") @as("LaunchConfigurationName")
+  launchConfigurationName: option<nonEmptyString>,
+  @ocaml.doc("<p>The name of the key pair.</p>") @as("KeyName") keyName: option<nonEmptyString>,
+  @ocaml.doc("<p>The identifier of the kernel associated with the AMI.</p>") @as("KernelId")
+  kernelId: option<nonEmptyString>,
+  @ocaml.doc("<p>The instance type for the instances.</p>") @as("InstanceType")
+  instanceType: option<nonEmptyString>,
+  @ocaml.doc("<p>Indicates the type of monitoring for instances in the group.</p>")
+  @as("InstanceMonitoring")
+  instanceMonitoring: option<awsAutoScalingLaunchConfigurationInstanceMonitoringDetails>,
+  @ocaml.doc("<p>The identifier of the Amazon Machine Image (AMI) that is used to launch EC2
+         instances.</p>")
+  @as("ImageId")
+  imageId: option<nonEmptyString>,
+  @ocaml.doc("<p>The name or the ARN of the instance profile associated with the IAM role for the
+         instance. The instance profile contains the IAM role.</p>")
+  @as("IamInstanceProfile")
+  iamInstanceProfile: option<nonEmptyString>,
+  @ocaml.doc("<p>Whether the launch configuration is optimized for Amazon EBS I/O.</p>")
+  @as("EbsOptimized")
+  ebsOptimized: option<boolean_>,
+  @ocaml.doc("<p>The creation date and time for the launch configuration.</p>
+         <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet
+         Date/Time Format</a>. The value cannot contain spaces. For example,
+         <code>2020-03-22T13:22:13.933Z</code>.</p>")
+  @as("CreatedTime")
+  createdTime: option<nonEmptyString>,
+  @ocaml.doc(
+    "<p>The identifiers of one or more security groups for the VPC that is specified in <code>ClassicLinkVPCId</code>.</p>"
+  )
+  @as("ClassicLinkVpcSecurityGroups")
+  classicLinkVpcSecurityGroups: option<nonEmptyStringList>,
+  @ocaml.doc(
+    "<p>The identifier of a ClassicLink-enabled VPC that EC2-Classic instances are linked to.</p>"
+  )
+  @as("ClassicLinkVpcId")
+  classicLinkVpcId: option<nonEmptyString>,
+  @ocaml.doc("<p>Specifies the block devices for the instance.</p>") @as("BlockDeviceMappings")
+  blockDeviceMappings: option<awsAutoScalingLaunchConfigurationBlockDeviceMappingsList>,
+  @ocaml.doc(
+    "<p>For Auto Scaling groups that run in a VPC, specifies whether to assign a public IP address to the group's instances.</p>"
+  )
+  @as("AssociatePublicIpAddress")
+  associatePublicIpAddress: option<boolean_>,
+}
+@ocaml.doc("<p>The mixed instances policy for the automatic scaling group.</p>")
+type awsAutoScalingAutoScalingGroupMixedInstancesPolicyDetails = {
+  @ocaml.doc(
+    "<p>The launch template to use and the instance types (overrides) to use to provision EC2 instances to fulfill On-Demand and Spot capacities.</p>"
+  )
+  @as("LaunchTemplate")
+  launchTemplate: option<awsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateDetails>,
+  @ocaml.doc(
+    "<p>The instances distribution. The instances distribution specifies the distribution of On-Demand Instances and Spot Instances, the maximum price to pay for Spot Instances, and how the Auto Scaling group allocates instance types to fulfill On-Demand and Spot capacity.</p>"
+  )
+  @as("InstancesDistribution")
+  instancesDistribution: option<
+    awsAutoScalingAutoScalingGroupMixedInstancesPolicyInstancesDistributionDetails,
+  >,
+}
+@ocaml.doc("<p>A vulnerability associated with a finding.</p>")
+type vulnerability = {
+  @ocaml.doc("<p>A list of URLs that provide additional information about the vulnerability.</p>")
+  @as("ReferenceUrls")
+  referenceUrls: option<stringList>,
+  @ocaml.doc("<p>Information about the vendor that generates the vulnerability report.</p>")
+  @as("Vendor")
+  vendor: option<vulnerabilityVendor>,
+  @ocaml.doc("<p>List of vulnerabilities that are related to this vulnerability.</p>")
+  @as("RelatedVulnerabilities")
+  relatedVulnerabilities: option<stringList>,
+  @ocaml.doc("<p>CVSS scores from the advisory related to the vulnerability.</p>") @as("Cvss")
+  cvss: option<cvssList>,
+  @ocaml.doc("<p>List of software packages that have the vulnerability.</p>")
+  @as("VulnerablePackages")
+  vulnerablePackages: option<softwarePackageList>,
+  @ocaml.doc("<p>The identifier of the vulnerability.</p>") @as("Id") id: nonEmptyString,
 }
 @ocaml.doc("<p>The list of detected instances of sensitive data.</p>")
 type sensitiveDataDetections = {
@@ -5137,6 +7439,29 @@ type sensitiveDataDetections = {
   @ocaml.doc("<p>The total number of occurrences of sensitive data that were detected.</p>")
   @as("Count")
   count: option<long>,
+}
+@ocaml.doc("<p>The definition of the stateless rule.</p>")
+type ruleGroupSourceStatelessRuleDefinition = {
+  @ocaml.doc(
+    "<p>The criteria for Network Firewall to use to inspect an individual packet in a stateless rule inspection.</p>"
+  )
+  @as("MatchAttributes")
+  matchAttributes: option<ruleGroupSourceStatelessRuleMatchAttributes>,
+  @ocaml.doc(
+    "<p>The actions to take on a packet that matches one of the stateless rule definition's match attributes. You must specify a standard action (<code>aws:pass</code>, <code>aws:drop</code>, or <code>aws:forward_to_sfe</code>). You can then add custom actions.</p>"
+  )
+  @as("Actions")
+  actions: option<nonEmptyStringList>,
+}
+type ruleGroupSourceStatefulRulesList = array<ruleGroupSourceStatefulRulesDetails>
+@ocaml.doc(
+  "<p>A custom action definition. A custom action is an optional, non-standard action to use for stateless packet handling.</p>"
+)
+type ruleGroupSourceCustomActionsDetails = {
+  @ocaml.doc("<p>A descriptive name of the custom action.</p>") @as("ActionName")
+  actionName: option<nonEmptyString>,
+  @ocaml.doc("<p>The definition of a custom action.</p>") @as("ActionDefinition")
+  actionDefinition: option<statelessCustomActionDefinition>,
 }
 @ocaml.doc("<p>Provided if <code>ActionType</code> is <code>PORT_PROBE</code>. It provides details
          about the attempted port probe that was detected.</p>")
@@ -5178,6 +7503,13 @@ type insight = {
   @ocaml.doc("<p>The ARN of a Security Hub insight.</p>") @as("InsightArn")
   insightArn: nonEmptyString,
 }
+@ocaml.doc("<p>A custom action that can be used for stateless packet handling.</p>")
+type firewallPolicyStatelessCustomActionsDetails = {
+  @ocaml.doc("<p>The name of the custom action.</p>") @as("ActionName")
+  actionName: option<nonEmptyString>,
+  @ocaml.doc("<p>The definition of the custom action.</p>") @as("ActionDefinition")
+  actionDefinition: option<statelessCustomActionDefinition>,
+}
 @ocaml.doc("<p>The list of detected instances of sensitive data.</p>")
 type customDataIdentifiersDetections = {
   @ocaml.doc("<p>Details about the sensitive data that was detected.</p>") @as("Occurrences")
@@ -5192,7 +7524,7 @@ type customDataIdentifiersDetections = {
   @as("Count")
   count: option<long>,
 }
-@ocaml.doc("<p>Details about a WAF WebACL.</p>")
+@ocaml.doc("<p>Details about an WAF WebACL.</p>")
 type awsWafWebAclDetails = {
   @ocaml.doc("<p>A unique identifier for a WebACL.</p>") @as("WebAclId")
   webAclId: option<nonEmptyString>,
@@ -5208,26 +7540,26 @@ type awsWafWebAclDetails = {
   @as("Name")
   name: option<nonEmptyString>,
 }
-@ocaml.doc("<p>The details of an Amazon S3 bucket.</p>")
-type awsS3BucketDetails = {
-  @ocaml.doc(
-    "<p>Provides information about the Amazon S3 Public Access Block configuration for the S3 bucket.</p>"
-  )
-  @as("PublicAccessBlockConfiguration")
-  publicAccessBlockConfiguration: option<awsS3AccountPublicAccessBlockDetails>,
-  @ocaml.doc("<p>The encryption rules that are applied to the S3 bucket.</p>")
-  @as("ServerSideEncryptionConfiguration")
-  serverSideEncryptionConfiguration: option<awsS3BucketServerSideEncryptionConfiguration>,
-  @ocaml.doc("<p>Indicates when the S3 bucket was created.</p>
-         <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet
-            Date/Time Format</a>. The value cannot contain spaces. For example,
-            <code>2020-03-22T13:22:13.933Z</code>.</p>")
-  @as("CreatedAt")
-  createdAt: option<nonEmptyString>,
-  @ocaml.doc("<p>The display name of the owner of the S3 bucket.</p>") @as("OwnerName")
-  ownerName: option<nonEmptyString>,
-  @ocaml.doc("<p>The canonical user ID of the owner of the S3 bucket.</p>") @as("OwnerId")
-  ownerId: option<nonEmptyString>,
+@ocaml.doc("<p>Details for an S3 bucket notification configuration.</p>")
+type awsS3BucketNotificationConfigurationDetail = {
+  @ocaml.doc("<p>Indicates the type of notification. Notifications can be generated using Lambda functions,
+         Amazon SQS queues or Amazon SNS topics.</p>")
+  @as("Type")
+  type_: option<nonEmptyString>,
+  @ocaml.doc("<p>The ARN of the Lambda function, Amazon SQS queue, or Amazon SNS topic that generates the
+         notification.</p>")
+  @as("Destination")
+  destination: option<nonEmptyString>,
+  @ocaml.doc("<p>The filters that determine which S3 buckets generate notifications.</p>")
+  @as("Filter")
+  filter: option<awsS3BucketNotificationConfigurationFilter>,
+  @ocaml.doc("<p>The list of events that trigger a notification.</p>") @as("Events")
+  events: option<awsS3BucketNotificationConfigurationEvents>,
+}
+@ocaml.doc("<p>Identifies the objects that a rule applies to.</p>")
+type awsS3BucketBucketLifecycleConfigurationRulesFilterDetails = {
+  @ocaml.doc("<p>The configuration for the filter.</p>") @as("Predicate")
+  predicate: option<awsS3BucketBucketLifecycleConfigurationRulesFilterPredicateDetails>,
 }
 @ocaml.doc("<p>Details about an Amazon Redshift cluster.</p>")
 type awsRedshiftClusterDetails = {
@@ -5296,11 +7628,13 @@ type awsRedshiftClusterDetails = {
   @ocaml.doc("<p>The name of the maintenance track for the cluster.</p>")
   @as("MaintenanceTrackName")
   maintenanceTrackName: option<nonEmptyString>,
-  @ocaml.doc("<p>The identifier of the AWS KMS encryption key that is used to encrypt data in the
+  @ocaml.doc("<p>The identifier of the KMS encryption key that is used to encrypt data in the
          cluster.</p>")
   @as("KmsKeyId")
   kmsKeyId: option<nonEmptyString>,
-  @ocaml.doc("<p>A list of IAM roles that the cluster can use to access other AWS services.</p>")
+  @ocaml.doc(
+    "<p>A list of IAM roles that the cluster can use to access other Amazon Web Services services.</p>"
+  )
   @as("IamRoles")
   iamRoles: option<awsRedshiftClusterIamRoles>,
   @ocaml.doc("<p>Information about whether the Amazon Redshift cluster finished applying any changes to
@@ -5439,16 +7773,15 @@ type awsRdsDbInstanceDetails = {
          the DB instance.</p>")
   @as("ProcessorFeatures")
   processorFeatures: option<awsRdsDbProcessorFeatures>,
-  @ocaml.doc("<p>A list of log types that this DB instance is configured to export to CloudWatch
-         Logs.</p>")
+  @ocaml.doc(
+    "<p>A list of log types that this DB instance is configured to export to CloudWatch Logs.</p>"
+  )
   @as("EnabledCloudWatchLogsExports")
   enabledCloudWatchLogsExports: option<stringList>,
   @ocaml.doc("<p>The number of days to retain Performance Insights data.</p>")
   @as("PerformanceInsightsRetentionPeriod")
   performanceInsightsRetentionPeriod: option<integer_>,
-  @ocaml.doc(
-    "<p>The identifier of the AWS KMS key used to encrypt the Performance Insights data.</p>"
-  )
+  @ocaml.doc("<p>The identifier of the KMS key used to encrypt the Performance Insights data.</p>")
   @as("PerformanceInsightsKmsKeyId")
   performanceInsightsKmsKeyId: option<nonEmptyString>,
   @ocaml.doc("<p>Indicates whether Performance Insights is enabled for the DB instance.</p>")
@@ -5583,7 +7916,7 @@ type awsRdsDbInstanceDetails = {
          private IP address. </p>")
   @as("PubliclyAccessible")
   publiclyAccessible: option<boolean_>,
-  @ocaml.doc("<p>If <code>StorageEncrypted</code> is true, the AWS KMS key identifier for the encrypted
+  @ocaml.doc("<p>If <code>StorageEncrypted</code> is true, the KMS key identifier for the encrypted
          DB instance.</p>")
   @as("KmsKeyId")
   kmsKeyId: option<nonEmptyString>,
@@ -5593,7 +7926,7 @@ type awsRdsDbInstanceDetails = {
             <code>2020-03-22T13:22:13.933Z</code>.</p>")
   @as("InstanceCreateTime")
   instanceCreateTime: option<nonEmptyString>,
-  @ocaml.doc("<p>True if mapping of AWS Identity and Access Management (IAM) accounts to database
+  @ocaml.doc("<p>True if mapping of IAM accounts to database
          accounts is enabled, and otherwise false.</p>
          <p>IAM database authentication can be enabled for the following database engines.</p>
          <ul>
@@ -5634,8 +7967,8 @@ type awsRdsDbInstanceDetails = {
          returned parameters do not apply to an Oracle DB instance. </p>")
   @as("DBName")
   dbname: option<nonEmptyString>,
-  @ocaml.doc("<p>The AWS Region-unique, immutable identifier for the DB instance. This identifier is
-         found in AWS CloudTrail log entries whenever the AWS KMS key for the DB instance is
+  @ocaml.doc("<p>The Amazon Web Services Region-unique, immutable identifier for the DB instance. This identifier is
+         found in CloudTrail log entries whenever the KMS key for the DB instance is
          accessed. </p>")
   @as("DbiResourceId")
   dbiResourceId: option<nonEmptyString>,
@@ -5659,7 +7992,7 @@ type awsRdsDbInstanceDetails = {
   @ocaml.doc("<p>The identifier of the CA certificate for this DB instance.</p>")
   @as("CACertificateIdentifier")
   cacertificateIdentifier: option<nonEmptyString>,
-  @ocaml.doc("<p>The AWS Identity and Access Management (IAM) roles associated with the DB
+  @ocaml.doc("<p>The IAM roles associated with the DB
          instance.</p>")
   @as("AssociatedRoles")
   associatedRoles: option<awsRdsDbInstanceAssociatedRoles>,
@@ -5696,6 +8029,253 @@ type awsIamRoleDetails = {
   @as("AssumeRolePolicyDocument")
   assumeRolePolicyDocument: option<awsIamRoleAssumeRolePolicyDocument>,
 }
+@ocaml.doc("<p>Provides details about an Amazon EKS cluster.</p>")
+type awsEksClusterDetails = {
+  @ocaml.doc("<p>The logging configuration for the cluster.</p>") @as("Logging")
+  logging: option<awsEksClusterLoggingDetails>,
+  @ocaml.doc("<p>The Amazon EKS server version for the cluster.</p>") @as("Version")
+  version: option<nonEmptyString>,
+  @ocaml.doc(
+    "<p>The ARN of the IAM role that provides permissions for the Amazon EKS control plane to make calls to Amazon Web Services API operations on your behalf.</p>"
+  )
+  @as("RoleArn")
+  roleArn: option<nonEmptyString>,
+  @ocaml.doc("<p>The VPC configuration used by the cluster control plane.</p>")
+  @as("ResourcesVpcConfig")
+  resourcesVpcConfig: option<awsEksClusterResourcesVpcConfigDetails>,
+  @ocaml.doc("<p>The name of the cluster.</p>") @as("Name") name: option<nonEmptyString>,
+  @ocaml.doc("<p>The endpoint for the Amazon EKS API server.</p>") @as("Endpoint")
+  endpoint: option<nonEmptyString>,
+  @ocaml.doc("<p>The status of the cluster.</p>") @as("ClusterStatus")
+  clusterStatus: option<nonEmptyString>,
+  @ocaml.doc("<p>The certificate authority data for the cluster.</p>")
+  @as("CertificateAuthorityData")
+  certificateAuthorityData: option<nonEmptyString>,
+  @ocaml.doc("<p>The ARN of the cluster.</p>") @as("Arn") arn: option<nonEmptyString>,
+}
+@ocaml.doc("<p>A container definition that describes a container in the task.</p>")
+type awsEcsTaskDefinitionContainerDefinitionsDetails = {
+  @ocaml.doc("<p>The working directory in which to run commands inside the container.</p>")
+  @as("WorkingDirectory")
+  workingDirectory: option<nonEmptyString>,
+  @ocaml.doc("<p>Data volumes to mount from another container.</p>") @as("VolumesFrom")
+  volumesFrom: option<awsEcsTaskDefinitionContainerDefinitionsVolumesFromList>,
+  @ocaml.doc("<p>The user to use inside the container.</p>
+         <p>The value can use one of the following formats.</p>
+         <ul>
+            <li>
+               <p>
+                  <code>
+                     <i>user</i>
+                  </code>
+               </p>
+            </li>
+            <li>
+               <p>
+                  <code>
+                     <i>user</i>
+                  </code>:<code>
+                     <i>group</i>
+                  </code>
+               </p>
+            </li>
+            <li>
+               <p>
+                  <code>
+                     <i>uid</i>
+                  </code>
+               </p>
+            </li>
+            <li>
+               <p>
+                  <code>
+                     <i>uid</i>
+                  </code>:<code>
+                     <i>gid</i>
+                  </code>
+               </p>
+            </li>
+            <li>
+               <p>
+                  <code>
+                     <i>user</i>
+                  </code>:<code>
+                     <i>gid</i>
+                  </code>
+               </p>
+            </li>
+            <li>
+               <p>
+                  <code>
+                     <i>uid</i>
+                  </code>:<code>
+                     <i>group</i>
+                  </code>
+               </p>
+            </li>
+         </ul>")
+  @as("User")
+  user: option<nonEmptyString>,
+  @ocaml.doc("<p>A list of ulimits to set in the container. </p>") @as("Ulimits")
+  ulimits: option<awsEcsTaskDefinitionContainerDefinitionsUlimitsList>,
+  @ocaml.doc("<p>A list of namespaced kernel parameters to set in the container.</p>")
+  @as("SystemControls")
+  systemControls: option<awsEcsTaskDefinitionContainerDefinitionsSystemControlsList>,
+  @ocaml.doc(
+    "<p>The number of seconds to wait before the container is stopped if it doesn't shut down normally on its own.</p>"
+  )
+  @as("StopTimeout")
+  stopTimeout: option<integer_>,
+  @ocaml.doc(
+    "<p>The number of seconds to wait before giving up on resolving dependencies for a container. </p>"
+  )
+  @as("StartTimeout")
+  startTimeout: option<integer_>,
+  @ocaml.doc("<p>The secrets to pass to the container.</p>") @as("Secrets")
+  secrets: option<awsEcsTaskDefinitionContainerDefinitionsSecretsList>,
+  @ocaml.doc(
+    "<p>The type and amount of a resource to assign to a container. The only supported resource is a GPU.</p>"
+  )
+  @as("ResourceRequirements")
+  resourceRequirements: option<awsEcsTaskDefinitionContainerDefinitionsResourceRequirementsList>,
+  @ocaml.doc("<p>The private repository authentication credentials to use.</p>")
+  @as("RepositoryCredentials")
+  repositoryCredentials: option<
+    awsEcsTaskDefinitionContainerDefinitionsRepositoryCredentialsDetails,
+  >,
+  @ocaml.doc("<p>Whether the container is given read-only access to its root file system.</p>")
+  @as("ReadonlyRootFilesystem")
+  readonlyRootFilesystem: option<boolean_>,
+  @ocaml.doc("<p>Whether to allocate a TTY to the container.</p>") @as("PseudoTerminal")
+  pseudoTerminal: option<boolean_>,
+  @ocaml.doc(
+    "<p>Whether the container is given elevated privileges on the host container instance. The elevated privileges are similar to the root user.</p>"
+  )
+  @as("Privileged")
+  privileged: option<boolean_>,
+  @ocaml.doc("<p>The list of port mappings for the container.</p>") @as("PortMappings")
+  portMappings: option<awsEcsTaskDefinitionContainerDefinitionsPortMappingsList>,
+  @ocaml.doc("<p>The name of the container.</p>") @as("Name") name: option<nonEmptyString>,
+  @ocaml.doc("<p>The mount points for the data volumes in the container.</p>") @as("MountPoints")
+  mountPoints: option<awsEcsTaskDefinitionContainerDefinitionsMountPointsList>,
+  @ocaml.doc("<p>The soft limit (in MiB) of memory to reserve for the container.</p>")
+  @as("MemoryReservation")
+  memoryReservation: option<integer_>,
+  @ocaml.doc(
+    "<p>The amount (in MiB) of memory to present to the container. If the container attempts to exceed the memory specified here, the container is shut down. The total amount of memory reserved for all containers within a task must be lower than the task memory value, if one is specified.</p>"
+  )
+  @as("Memory")
+  memory: option<integer_>,
+  @ocaml.doc("<p>The log configuration specification for the container.</p>")
+  @as("LogConfiguration")
+  logConfiguration: option<awsEcsTaskDefinitionContainerDefinitionsLogConfigurationDetails>,
+  @ocaml.doc(
+    "<p>Linux-specific modifications that are applied to the container, such as Linux kernel capabilities.</p>"
+  )
+  @as("LinuxParameters")
+  linuxParameters: option<awsEcsTaskDefinitionContainerDefinitionsLinuxParametersDetails>,
+  @ocaml.doc("<p>A list of links for the container in the form <code>
+               <i>container_name</i>:<i>alias</i>
+            </code>. Allows containers to communicate with each other without the need for port mappings.</p>")
+  @as("Links")
+  links: option<nonEmptyStringList>,
+  @ocaml.doc(
+    "<p>If set to true, then containerized applications can be deployed that require <code>stdin</code> or a <code>tty</code> to be allocated.</p>"
+  )
+  @as("Interactive")
+  interactive: option<boolean_>,
+  @ocaml.doc("<p>The image used to start the container.</p>") @as("Image")
+  image: option<nonEmptyString>,
+  @ocaml.doc("<p>The hostname to use for the container.</p>") @as("Hostname")
+  hostname: option<nonEmptyString>,
+  @ocaml.doc(
+    "<p>The container health check command and associated configuration parameters for the container.</p>"
+  )
+  @as("HealthCheck")
+  healthCheck: option<awsEcsTaskDefinitionContainerDefinitionsHealthCheckDetails>,
+  @ocaml.doc(
+    "<p>The FireLens configuration for the container. Specifies and configures a log router for container logs.</p>"
+  )
+  @as("FirelensConfiguration")
+  firelensConfiguration: option<
+    awsEcsTaskDefinitionContainerDefinitionsFirelensConfigurationDetails,
+  >,
+  @ocaml.doc(
+    "<p>A list of hostnames and IP address mappings to append to the <b>/etc/hosts</b> file on the container.</p>"
+  )
+  @as("ExtraHosts")
+  extraHosts: option<awsEcsTaskDefinitionContainerDefinitionsExtraHostsList>,
+  @ocaml.doc(
+    "<p>Whether the container is essential. All tasks must have at least one essential container.</p>"
+  )
+  @as("Essential")
+  essential: option<boolean_>,
+  @ocaml.doc("<p>A list of files containing the environment variables to pass to a container.</p>")
+  @as("EnvironmentFiles")
+  environmentFiles: option<awsEcsTaskDefinitionContainerDefinitionsEnvironmentFilesList>,
+  @ocaml.doc("<p>The environment variables to pass to a container.</p>") @as("Environment")
+  environment: option<awsEcsTaskDefinitionContainerDefinitionsEnvironmentList>,
+  @ocaml.doc("<p>The entry point that is passed to the container.</p>") @as("EntryPoint")
+  entryPoint: option<nonEmptyStringList>,
+  @ocaml.doc(
+    "<p>A list of strings to provide custom labels for SELinux and AppArmor multi-level security systems.</p>"
+  )
+  @as("DockerSecurityOptions")
+  dockerSecurityOptions: option<nonEmptyStringList>,
+  @ocaml.doc("<p>A key-value map of labels to add to the container.</p>") @as("DockerLabels")
+  dockerLabels: option<fieldMap>,
+  @ocaml.doc("<p>A list of DNS servers that are presented to the container.</p>") @as("DnsServers")
+  dnsServers: option<nonEmptyStringList>,
+  @ocaml.doc("<p>A list of DNS search domains that are presented to the container.</p>")
+  @as("DnsSearchDomains")
+  dnsSearchDomains: option<nonEmptyStringList>,
+  @ocaml.doc("<p>Whether to disable networking within the container.</p>") @as("DisableNetworking")
+  disableNetworking: option<boolean_>,
+  @ocaml.doc("<p>The dependencies that are defined for container startup and shutdown.</p>")
+  @as("DependsOn")
+  dependsOn: option<awsEcsTaskDefinitionContainerDefinitionsDependsOnList>,
+  @ocaml.doc("<p>The number of CPU units reserved for the container.</p>") @as("Cpu")
+  cpu: option<integer_>,
+  @ocaml.doc("<p>The command that is passed to the container.</p>") @as("Command")
+  command: option<nonEmptyStringList>,
+}
+@ocaml.doc("<p>Details about an Amazon EC2 VPN
+         connection.</p>")
+type awsEc2VpnConnectionDetails = {
+  @ocaml.doc(
+    "<p>The identifier of the transit gateway that is associated with the VPN connection.</p>"
+  )
+  @as("TransitGatewayId")
+  transitGatewayId: option<nonEmptyString>,
+  @ocaml.doc("<p>The static routes that are associated with the VPN connection.</p>") @as("Routes")
+  routes: option<awsEc2VpnConnectionRoutesList>,
+  @ocaml.doc("<p>The VPN connection options.</p>") @as("Options")
+  options: option<awsEc2VpnConnectionOptionsDetails>,
+  @ocaml.doc("<p>Information about the VPN tunnel.</p>") @as("VgwTelemetry")
+  vgwTelemetry: option<awsEc2VpnConnectionVgwTelemetryList>,
+  @ocaml.doc("<p>The category of the VPN connection. <code>VPN</code> indicates an Amazon Web Services VPN connection. <code>VPN-Classic</code>
+         indicates an Amazon Web Services Classic VPN connection.</p>")
+  @as("Category")
+  category: option<nonEmptyString>,
+  @ocaml.doc("<p>The identifier of the virtual private gateway that is at the Amazon Web Services side of the VPN
+         connection.</p>")
+  @as("VpnGatewayId")
+  vpnGatewayId: option<nonEmptyString>,
+  @ocaml.doc("<p>The type of VPN connection.</p>") @as("Type") type_: option<nonEmptyString>,
+  @ocaml.doc("<p>The configuration information for the VPN connection's customer gateway, in the native XML
+         format.</p>")
+  @as("CustomerGatewayConfiguration")
+  customerGatewayConfiguration: option<nonEmptyString>,
+  @ocaml.doc(
+    "<p>The identifier of the customer gateway that is at your end of the VPN connection.</p>"
+  )
+  @as("CustomerGatewayId")
+  customerGatewayId: option<nonEmptyString>,
+  @ocaml.doc("<p>The current state of the VPN connection.</p>") @as("State")
+  state: option<nonEmptyString>,
+  @ocaml.doc("<p>The identifier of the VPN connection.</p>") @as("VpnConnectionId")
+  vpnConnectionId: option<nonEmptyString>,
+}
 @ocaml.doc("<p>Details about an EC2 security group.</p>")
 type awsEc2SecurityGroupDetails = {
   @ocaml.doc("<p>[VPC only] The outbound rules associated with the security group.</p>")
@@ -5705,7 +8285,8 @@ type awsEc2SecurityGroupDetails = {
   ipPermissions: option<awsEc2SecurityGroupIpPermissionList>,
   @ocaml.doc("<p>[VPC only] The ID of the VPC for the security group.</p>") @as("VpcId")
   vpcId: option<nonEmptyString>,
-  @ocaml.doc("<p>The AWS account ID of the owner of the security group.</p>") @as("OwnerId")
+  @ocaml.doc("<p>The Amazon Web Services account ID of the owner of the security group.</p>")
+  @as("OwnerId")
   ownerId: option<nonEmptyString>,
   @ocaml.doc("<p>The ID of the security group.</p>") @as("GroupId") groupId: option<nonEmptyString>,
   @ocaml.doc("<p>The name of the security group.</p>") @as("GroupName")
@@ -5713,9 +8294,9 @@ type awsEc2SecurityGroupDetails = {
 }
 type awsDynamoDbTableReplicaList = array<awsDynamoDbTableReplica>
 type awsCloudFrontDistributionOriginGroupsItemList = array<awsCloudFrontDistributionOriginGroup>
-@ocaml.doc("<p>Provides details about an AWS Certificate Manager certificate.</p>")
+@ocaml.doc("<p>Provides details about an Certificate Manager certificate.</p>")
 type awsCertificateManagerCertificateDetails = {
-  @ocaml.doc("<p>The source of the certificate. For certificates that AWS Certificate Manager provides,
+  @ocaml.doc("<p>The source of the certificate. For certificates that Certificate Manager provides,
             <code>Type</code> is <code>AMAZON_ISSUED</code>. For certificates that are imported with
             <code>ImportCertificate</code>, <code>Type</code> is <code>IMPORTED</code>.</p>
          <p>Valid values: <code>IMPORTED</code> | <code>AMAZON_ISSUED</code> |
@@ -5746,7 +8327,7 @@ type awsCertificateManagerCertificateDetails = {
   signatureAlgorithm: option<nonEmptyString>,
   @ocaml.doc("<p>The serial number of the certificate.</p>") @as("Serial")
   serial: option<nonEmptyString>,
-  @ocaml.doc("<p>Information about the status of the AWS Certificate Manager managed renewal for the
+  @ocaml.doc("<p>Information about the status of the Certificate Manager managed renewal for the
          certificate. Provided only when the certificate type is <code>AMAZON_ISSUED</code>.</p>")
   @as("RenewalSummary")
   renewalSummary: option<awsCertificateManagerCertificateRenewalSummary>,
@@ -5790,7 +8371,9 @@ type awsCertificateManagerCertificateDetails = {
             <code>2020-03-22T13:22:13.933Z</code>.</p>")
   @as("IssuedAt")
   issuedAt: option<nonEmptyString>,
-  @ocaml.doc("<p>The list of ARNs for the AWS resources that use the certificate.</p>")
+  @ocaml.doc(
+    "<p>The list of ARNs for the Amazon Web Services resources that use the certificate.</p>"
+  )
   @as("InUseBy")
   inUseBy: option<stringList>,
   @ocaml.doc("<p>Indicates when the certificate was imported. Provided if the certificate type is
@@ -5837,10 +8420,106 @@ type awsCertificateManagerCertificateDetails = {
   @as("CertificateAuthorityArn")
   certificateAuthorityArn: option<nonEmptyString>,
 }
+@ocaml.doc("<p>Provides details about an auto scaling group.</p>")
+type awsAutoScalingAutoScalingGroupDetails = {
+  @ocaml.doc("<p>The list of Availability Zones for the automatic scaling group.</p>")
+  @as("AvailabilityZones")
+  availabilityZones: option<awsAutoScalingAutoScalingGroupAvailabilityZonesList>,
+  @ocaml.doc("<p>The mixed instances policy for the automatic scaling group.</p>")
+  @as("MixedInstancesPolicy")
+  mixedInstancesPolicy: option<awsAutoScalingAutoScalingGroupMixedInstancesPolicyDetails>,
+  @ocaml.doc("<p>Indicates when the auto scaling group was created.</p>
+         <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet
+            Date/Time Format</a>. The value cannot contain spaces. For example,
+            <code>2020-03-22T13:22:13.933Z</code>.</p>")
+  @as("CreatedTime")
+  createdTime: option<nonEmptyString>,
+  @ocaml.doc("<p>The amount of time, in seconds, that Amazon EC2 Auto Scaling waits before it checks the
+         health status of an EC2 instance that has come into service.</p>")
+  @as("HealthCheckGracePeriod")
+  healthCheckGracePeriod: option<integer_>,
+  @ocaml.doc("<p>The service to use for the health checks.</p>") @as("HealthCheckType")
+  healthCheckType: option<nonEmptyString>,
+  @ocaml.doc("<p>The list of load balancers associated with the group.</p>")
+  @as("LoadBalancerNames")
+  loadBalancerNames: option<stringList>,
+  @ocaml.doc("<p>The name of the launch configuration.</p>") @as("LaunchConfigurationName")
+  launchConfigurationName: option<nonEmptyString>,
+}
+type vulnerabilityList = array<vulnerability>
 type sensitiveDataDetectionsList = array<sensitiveDataDetections>
+@ocaml.doc("<p>A stateless rule in the rule group.</p>")
+type ruleGroupSourceStatelessRulesDetails = {
+  @ocaml.doc("<p>Provides the definition of the stateless rule.</p>") @as("RuleDefinition")
+  ruleDefinition: option<ruleGroupSourceStatelessRuleDefinition>,
+  @ocaml.doc(
+    "<p>Indicates the order in which to run this rule relative to all of the rules in the stateless rule group.</p>"
+  )
+  @as("Priority")
+  priority: option<integer_>,
+}
+type ruleGroupSourceCustomActionsList = array<ruleGroupSourceCustomActionsDetails>
 type networkPathList = array<networkPathComponent>
 type insightList = array<insight>
+type firewallPolicyStatelessCustomActionsList = array<firewallPolicyStatelessCustomActionsDetails>
 type customDataIdentifiersDetectionsList = array<customDataIdentifiersDetections>
+type awsS3BucketNotificationConfigurationDetails = array<awsS3BucketNotificationConfigurationDetail>
+@ocaml.doc("<p>Configuration for a lifecycle rule.</p>")
+type awsS3BucketBucketLifecycleConfigurationRulesDetails = {
+  @ocaml.doc(
+    "<p>Transition rules that indicate when objects transition to a specified storage class.</p>"
+  )
+  @as("Transitions")
+  transitions: option<awsS3BucketBucketLifecycleConfigurationRulesTransitionsList>,
+  @ocaml.doc(
+    "<p>The current status of the rule. Indicates whether the rule is currently being applied.</p>"
+  )
+  @as("Status")
+  status: option<nonEmptyString>,
+  @ocaml.doc("<p>A prefix that identifies one or more objects that the rule applies to.</p>")
+  @as("Prefix")
+  prefix: option<nonEmptyString>,
+  @ocaml.doc(
+    "<p>Transition rules that describe when noncurrent objects transition to a specified storage class.</p>"
+  )
+  @as("NoncurrentVersionTransitions")
+  noncurrentVersionTransitions: option<
+    awsS3BucketBucketLifecycleConfigurationRulesNoncurrentVersionTransitionsList,
+  >,
+  @ocaml.doc(
+    "<p>The number of days that an object is noncurrent before Amazon S3 can perform the associated action.</p>"
+  )
+  @as("NoncurrentVersionExpirationInDays")
+  noncurrentVersionExpirationInDays: option<integer_>,
+  @ocaml.doc("<p>The unique identifier of the rule.</p>") @as("ID") id: option<nonEmptyString>,
+  @ocaml.doc("<p>Identifies the objects that a rule applies to.</p>") @as("Filter")
+  filter: option<awsS3BucketBucketLifecycleConfigurationRulesFilterDetails>,
+  @ocaml.doc("<p>Whether Amazon S3 removes a delete marker that has no noncurrent versions. If set to
+         <code>true</code>, the delete marker is expired. If set to <code>false</code>, the policy
+         takes no action.</p>
+         <p>If you provide <code>ExpiredObjectDeleteMarker</code>, you cannot provide
+         <code>ExpirationInDays</code> or <code>ExpirationDate</code>.</p>")
+  @as("ExpiredObjectDeleteMarker")
+  expiredObjectDeleteMarker: option<boolean_>,
+  @ocaml.doc("<p>The length in days of the lifetime for objects that are subject to the rule.</p>")
+  @as("ExpirationInDays")
+  expirationInDays: option<integer_>,
+  @ocaml.doc("<p>The date when objects are moved or deleted.</p>
+         <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet
+         Date/Time Format</a>. The value cannot contain spaces. For example,
+         <code>2020-03-22T13:22:13.933Z</code>.</p>")
+  @as("ExpirationDate")
+  expirationDate: option<nonEmptyString>,
+  @ocaml.doc("<p>How Amazon S3 responds when a multipart upload is incomplete. Specifically, provides a number
+         of days before Amazon S3 cancels the entire upload.</p>")
+  @as("AbortIncompleteMultipartUpload")
+  abortIncompleteMultipartUpload: option<
+    awsS3BucketBucketLifecycleConfigurationRulesAbortIncompleteMultipartUploadDetails,
+  >,
+}
+type awsEcsTaskDefinitionContainerDefinitionsList = array<
+  awsEcsTaskDefinitionContainerDefinitionsDetails,
+>
 @ocaml.doc("<p>Provides details about a DynamoDB table.</p>")
 type awsDynamoDbTableDetails = {
   @ocaml.doc("<p>The current status of the table.</p>") @as("TableStatus")
@@ -5899,7 +8578,7 @@ type awsCloudFrontDistributionOriginGroups = {
 @ocaml.doc("<p>Provides details about one of the following actions that affects or that was taken on a resource:</p>
          <ul>
             <li>
-               <p>A remote IP address issued an AWS API call</p>
+               <p>A remote IP address issued an Amazon Web Services API call</p>
             </li>
             <li>
                <p>A DNS request was received</p>
@@ -5968,6 +8647,31 @@ type sensitiveDataResult = {
   @as("Category")
   category: option<nonEmptyString>,
 }
+type ruleGroupSourceStatelessRulesList = array<ruleGroupSourceStatelessRulesDetails>
+@ocaml.doc("<p>Defines the behavior of the firewall.</p>")
+type firewallPolicyDetails = {
+  @ocaml.doc("<p>The stateless rule groups that are used in the firewall policy.</p>")
+  @as("StatelessRuleGroupReferences")
+  statelessRuleGroupReferences: option<firewallPolicyStatelessRuleGroupReferencesList>,
+  @ocaml.doc("<p>The actions to take on a fragmented UDP packet if it doesn't match any of the stateless rules in the policy.</p>
+         <p>You must specify a standard action (<code>aws:pass</code>, <code>aws:drop</code>, <code>aws:forward_to_sfe</code>), and can optionally include a custom action from <code>StatelessCustomActions</code>.
+      </p>")
+  @as("StatelessFragmentDefaultActions")
+  statelessFragmentDefaultActions: option<nonEmptyStringList>,
+  @ocaml.doc("<p>The actions to take on a packet if it doesn't match any of the stateless rules in the policy.</p>
+         <p>You must specify a standard action (<code>aws:pass</code>, <code>aws:drop</code>, <code>aws:forward_to_sfe</code>), and can optionally include a custom action from <code>StatelessCustomActions</code>.
+      </p>")
+  @as("StatelessDefaultActions")
+  statelessDefaultActions: option<nonEmptyStringList>,
+  @ocaml.doc(
+    "<p>The custom action definitions that are available to use in the firewall policy's <code>StatelessDefaultActions</code> setting.</p>"
+  )
+  @as("StatelessCustomActions")
+  statelessCustomActions: option<firewallPolicyStatelessCustomActionsList>,
+  @ocaml.doc("<p>The stateful rule groups that are used in the firewall policy.</p>")
+  @as("StatefulRuleGroupReferences")
+  statefulRuleGroupReferences: option<firewallPolicyStatefulRuleGroupReferencesList>,
+}
 @ocaml.doc(
   "<p>Contains an instance of sensitive data that was detected by a customer-defined identifier.</p>"
 )
@@ -5977,15 +8681,75 @@ type customDataIdentifiersResult = {
   @ocaml.doc("<p>The list of detected instances of sensitive data.</p>") @as("Detections")
   detections: option<customDataIdentifiersDetectionsList>,
 }
+@ocaml.doc("<p>The notification
+         configuration for the S3 bucket.</p>")
+type awsS3BucketNotificationConfiguration = {
+  @ocaml.doc("<p>Configurations for S3 bucket notifications.</p>") @as("Configurations")
+  configurations: option<awsS3BucketNotificationConfigurationDetails>,
+}
+type awsS3BucketBucketLifecycleConfigurationRulesList = array<
+  awsS3BucketBucketLifecycleConfigurationRulesDetails,
+>
+@ocaml.doc(
+  "<p>details about a task definition. A task definition describes the container and volume definitions of an Amazon Elastic Container Service task.</p>"
+)
+type awsEcsTaskDefinitionDetails = {
+  @ocaml.doc("<p>The data volume definitions for the task.</p>") @as("Volumes")
+  volumes: option<awsEcsTaskDefinitionVolumesList>,
+  @ocaml.doc(
+    "<p>The short name or ARN of the IAM role that grants containers in the task permission to call Amazon Web Services API operations on your behalf.</p>"
+  )
+  @as("TaskRoleArn")
+  taskRoleArn: option<nonEmptyString>,
+  @ocaml.doc("<p>The task launch types that the task definition was validated against.</p>")
+  @as("RequiresCompatibilities")
+  requiresCompatibilities: option<nonEmptyStringList>,
+  @ocaml.doc("<p>The configuration details for the App Mesh proxy.</p>") @as("ProxyConfiguration")
+  proxyConfiguration: option<awsEcsTaskDefinitionProxyConfigurationDetails>,
+  @ocaml.doc("<p>The placement constraint objects to use for tasks.</p>")
+  @as("PlacementConstraints")
+  placementConstraints: option<awsEcsTaskDefinitionPlacementConstraintsList>,
+  @ocaml.doc("<p>The process namespace to use for the containers in the task.</p>") @as("PidMode")
+  pidMode: option<nonEmptyString>,
+  @ocaml.doc("<p>The Docker networking mode to use for the containers in the task.</p>")
+  @as("NetworkMode")
+  networkMode: option<nonEmptyString>,
+  @ocaml.doc("<p>The amount (in MiB) of memory used by the task.</p>") @as("Memory")
+  memory: option<nonEmptyString>,
+  @ocaml.doc("<p>The IPC resource namespace to use for the containers in the task.</p>")
+  @as("IpcMode")
+  ipcMode: option<nonEmptyString>,
+  @ocaml.doc("<p>The Elastic Inference accelerators to use for the containers in the task.</p>")
+  @as("InferenceAccelerators")
+  inferenceAccelerators: option<awsEcsTaskDefinitionInferenceAcceleratorsList>,
+  @ocaml.doc("<p>The name of a family that this task definition is registered to.</p>")
+  @as("Family")
+  family: option<nonEmptyString>,
+  @ocaml.doc(
+    "<p>The ARN of the task execution role that grants the container agent permission to make API calls on behalf of the container user.</p>"
+  )
+  @as("ExecutionRoleArn")
+  executionRoleArn: option<nonEmptyString>,
+  @ocaml.doc("<p>The number of CPU units used by the task.</p>") @as("Cpu")
+  cpu: option<nonEmptyString>,
+  @ocaml.doc("<p>The container definitions that describe the containers that make up the task.</p>")
+  @as("ContainerDefinitions")
+  containerDefinitions: option<awsEcsTaskDefinitionContainerDefinitionsList>,
+}
 @ocaml.doc("<p>A distribution configuration.</p>")
 type awsCloudFrontDistributionDetails = {
   @ocaml.doc(
-    "<p>A unique identifier that specifies the AWS WAF web ACL, if any, to associate with this distribution.</p>"
+    "<p>A unique identifier that specifies the WAF web ACL, if any, to associate with this distribution.</p>"
   )
   @as("WebAclId")
   webAclId: option<nonEmptyString>,
   @ocaml.doc("<p>Indicates the current status of the distribution.</p>") @as("Status")
   status: option<nonEmptyString>,
+  @ocaml.doc(
+    "<p>Provides information about the TLS/SSL configuration that the distribution uses to communicate with viewers.</p>"
+  )
+  @as("ViewerCertificate")
+  viewerCertificate: option<awsCloudFrontDistributionViewerCertificate>,
   @ocaml.doc("<p>Provides information about the origin groups in the distribution.</p>")
   @as("OriginGroups")
   originGroups: option<awsCloudFrontDistributionOriginGroups>,
@@ -6020,6 +8784,157 @@ type awsCloudFrontDistributionDetails = {
   cacheBehaviors: option<awsCloudFrontDistributionCacheBehaviors>,
 }
 type sensitiveDataResultList = array<sensitiveDataResult>
+@ocaml.doc("<p>Stateless rules and custom actions for a stateless rule group.</p>")
+type ruleGroupSourceStatelessRulesAndCustomActionsDetails = {
+  @ocaml.doc("<p>Stateless rules for the rule group.</p>") @as("StatelessRules")
+  statelessRules: option<ruleGroupSourceStatelessRulesList>,
+  @ocaml.doc("<p>Custom actions for the rule group.</p>") @as("CustomActions")
+  customActions: option<ruleGroupSourceCustomActionsList>,
+}
+@ocaml.doc("<p>The lifecycle configuration for the objects in the S3 bucket.</p>")
+type awsS3BucketBucketLifecycleConfigurationDetails = {
+  @ocaml.doc("<p>The lifecycle rules.</p>") @as("Rules")
+  rules: option<awsS3BucketBucketLifecycleConfigurationRulesList>,
+}
+@ocaml.doc(
+  "<p>Details about a firewall policy. A firewall policy defines the behavior of a network firewall.</p>"
+)
+type awsNetworkFirewallFirewallPolicyDetails = {
+  @ocaml.doc("<p>A description of the firewall policy.</p>") @as("Description")
+  description: option<nonEmptyString>,
+  @ocaml.doc("<p>The name of the firewall policy.</p>") @as("FirewallPolicyName")
+  firewallPolicyName: option<nonEmptyString>,
+  @ocaml.doc("<p>The identifier of the firewall policy.</p>") @as("FirewallPolicyId")
+  firewallPolicyId: option<nonEmptyString>,
+  @ocaml.doc("<p>The ARN of the firewall policy.</p>") @as("FirewallPolicyArn")
+  firewallPolicyArn: option<nonEmptyString>,
+  @ocaml.doc("<p>The firewall policy configuration.</p>") @as("FirewallPolicy")
+  firewallPolicy: option<firewallPolicyDetails>,
+}
+@ocaml.doc("<p>The rules and actions for the rule group.</p>")
+type ruleGroupSource = {
+  @ocaml.doc("<p>The stateless rules and custom actions used by a stateless rule group.</p>")
+  @as("StatelessRulesAndCustomActions")
+  statelessRulesAndCustomActions: option<ruleGroupSourceStatelessRulesAndCustomActionsDetails>,
+  @ocaml.doc("<p>Suricata rule specifications.</p>") @as("StatefulRules")
+  statefulRules: option<ruleGroupSourceStatefulRulesList>,
+  @ocaml.doc(
+    "<p>Stateful inspection criteria, provided in Suricata compatible intrusion prevention system (IPS) rules.</p>"
+  )
+  @as("RulesString")
+  rulesString: option<nonEmptyString>,
+  @ocaml.doc(
+    "<p>Stateful inspection criteria for a domain list rule group. A domain list rule group determines access by specific protocols to specific domains.</p>"
+  )
+  @as("RulesSourceList")
+  rulesSourceList: option<ruleGroupSourceListDetails>,
+}
+@ocaml.doc("<p>Details about the sensitive data that was detected on the resource.</p>")
+type classificationResult = {
+  @ocaml.doc(
+    "<p>Provides details about sensitive data that was identified based on customer-defined configuration.</p>"
+  )
+  @as("CustomDataIdentifiers")
+  customDataIdentifiers: option<customDataIdentifiersResult>,
+  @ocaml.doc(
+    "<p>Provides details about sensitive data that was identified based on built-in configuration.</p>"
+  )
+  @as("SensitiveData")
+  sensitiveData: option<sensitiveDataResultList>,
+  @ocaml.doc("<p>The current status of the sensitive data detection.</p>") @as("Status")
+  status: option<classificationStatus>,
+  @ocaml.doc(
+    "<p>Indicates whether there are additional occurrences of sensitive data that are not included in the finding. This occurs when the number of occurrences exceeds the maximum that can be included.</p>"
+  )
+  @as("AdditionalOccurrences")
+  additionalOccurrences: option<boolean_>,
+  @ocaml.doc("<p>The total size in bytes of the affected data.</p>") @as("SizeClassified")
+  sizeClassified: option<long>,
+  @ocaml.doc("<p>The type of content that the finding applies to.</p>") @as("MimeType")
+  mimeType: option<nonEmptyString>,
+}
+@ocaml.doc("<p>The details of an Amazon S3 bucket.</p>")
+type awsS3BucketDetails = {
+  @ocaml.doc("<p>The versioning state of an S3 bucket.</p>") @as("BucketVersioningConfiguration")
+  bucketVersioningConfiguration: option<awsS3BucketBucketVersioningConfiguration>,
+  @ocaml.doc("<p>The notification configuration for the S3 bucket.</p>")
+  @as("BucketNotificationConfiguration")
+  bucketNotificationConfiguration: option<awsS3BucketNotificationConfiguration>,
+  @ocaml.doc("<p>The website configuration parameters for the S3 bucket.</p>")
+  @as("BucketWebsiteConfiguration")
+  bucketWebsiteConfiguration: option<awsS3BucketWebsiteConfiguration>,
+  @ocaml.doc("<p>The logging configuration for the S3 bucket.</p>")
+  @as("BucketLoggingConfiguration")
+  bucketLoggingConfiguration: option<awsS3BucketLoggingConfiguration>,
+  @ocaml.doc("<p>The access control list for the S3 bucket.</p>") @as("AccessControlList")
+  accessControlList: option<nonEmptyString>,
+  @ocaml.doc(
+    "<p>Provides information about the Amazon S3 Public Access Block configuration for the S3 bucket.</p>"
+  )
+  @as("PublicAccessBlockConfiguration")
+  publicAccessBlockConfiguration: option<awsS3AccountPublicAccessBlockDetails>,
+  @ocaml.doc("<p>The lifecycle configuration for objects in the S3 bucket.</p>")
+  @as("BucketLifecycleConfiguration")
+  bucketLifecycleConfiguration: option<awsS3BucketBucketLifecycleConfigurationDetails>,
+  @ocaml.doc("<p>The encryption rules that are applied to the S3 bucket.</p>")
+  @as("ServerSideEncryptionConfiguration")
+  serverSideEncryptionConfiguration: option<awsS3BucketServerSideEncryptionConfiguration>,
+  @ocaml.doc("<p>Indicates when the S3 bucket was created.</p>
+         <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet
+            Date/Time Format</a>. The value cannot contain spaces. For example,
+            <code>2020-03-22T13:22:13.933Z</code>.</p>")
+  @as("CreatedAt")
+  createdAt: option<nonEmptyString>,
+  @ocaml.doc(
+    "<p>The Amazon Web Services account identifier of the account that owns the S3 bucket.</p>"
+  )
+  @as("OwnerAccountId")
+  ownerAccountId: option<nonEmptyString>,
+  @ocaml.doc("<p>The display name of the owner of the S3 bucket.</p>") @as("OwnerName")
+  ownerName: option<nonEmptyString>,
+  @ocaml.doc("<p>The canonical user ID of the owner of the S3 bucket.</p>") @as("OwnerId")
+  ownerId: option<nonEmptyString>,
+}
+@ocaml.doc("<p>Details about the rule group.</p>")
+type ruleGroupDetails = {
+  @ocaml.doc("<p>The rules and actions for the rule group.</p>
+         <p>For stateful rule groups, can contain <code>RulesString</code>, <code>RulesSourceList</code>, or <code>StatefulRules</code>.</p>
+         <p>For stateless rule groups, contains <code>StatelessRulesAndCustomActions</code>.</p>")
+  @as("RulesSource")
+  rulesSource: option<ruleGroupSource>,
+  @ocaml.doc("<p>Additional settings to use in the specified rules.</p>") @as("RuleVariables")
+  ruleVariables: option<ruleGroupVariables>,
+}
+@ocaml.doc("<p>Provides details about sensitive data that was detected on a resource.</p>")
+type dataClassificationDetails = {
+  @ocaml.doc("<p>The details about the sensitive data that was detected on the resource.</p>")
+  @as("Result")
+  result: option<classificationResult>,
+  @ocaml.doc("<p>The path to the folder or file that contains the sensitive data.</p>")
+  @as("DetailedResultsLocation")
+  detailedResultsLocation: option<nonEmptyString>,
+}
+@ocaml.doc("<p>Details about an Network Firewall rule group. Rule groups are used to inspect and control network traffic. Stateless rule groups apply to individual packets. Stateful rule groups apply to packets in the context of their traffic flow.</p>
+         <p>Rule groups are referenced in firewall policies.
+      </p>")
+type awsNetworkFirewallRuleGroupDetails = {
+  @ocaml.doc("<p>The type of rule group. A rule group can be stateful or stateless.</p>")
+  @as("Type")
+  type_: option<nonEmptyString>,
+  @ocaml.doc("<p>The descriptive name of the rule group.</p>") @as("RuleGroupName")
+  ruleGroupName: option<nonEmptyString>,
+  @ocaml.doc("<p>The identifier of the rule group.</p>") @as("RuleGroupId")
+  ruleGroupId: option<nonEmptyString>,
+  @ocaml.doc("<p>The ARN of the rule group.</p>") @as("RuleGroupArn")
+  ruleGroupArn: option<nonEmptyString>,
+  @ocaml.doc("<p>Details about the rule group.</p>") @as("RuleGroup")
+  ruleGroup: option<ruleGroupDetails>,
+  @ocaml.doc("<p>A description of the rule group.</p>") @as("Description")
+  description: option<nonEmptyString>,
+  @ocaml.doc("<p>The maximum number of operating resources that this rule group can use.</p>")
+  @as("Capacity")
+  capacity: option<integer_>,
+}
 @ocaml.doc("<p>Additional details about a resource related to a finding.</p>
          <p>To provide the details, use the object that corresponds to the resource type. For
          example, if the resource type is <code>AwsEc2Instance</code>, then you use the
@@ -6029,6 +8944,46 @@ type sensitiveDataResultList = array<sensitiveDataResult>
          <p>You also use the <code>Other</code> object to populate the details when the selected
          type does not have a corresponding object.</p>")
 type resourceDetails = {
+  @ocaml.doc("<p>Details about an Network Firewall rule group.</p>")
+  @as("AwsNetworkFirewallRuleGroup")
+  awsNetworkFirewallRuleGroup: option<awsNetworkFirewallRuleGroupDetails>,
+  @ocaml.doc("<p>Details about an Network Firewall firewall.</p>") @as("AwsNetworkFirewallFirewall")
+  awsNetworkFirewallFirewall: option<awsNetworkFirewallFirewallDetails>,
+  @ocaml.doc("<p>Details about an Network Firewall firewall policy.</p>")
+  @as("AwsNetworkFirewallFirewallPolicy")
+  awsNetworkFirewallFirewallPolicy: option<awsNetworkFirewallFirewallPolicyDetails>,
+  @ocaml.doc("<p>Details about an Amazon EKS cluster.</p>") @as("AwsEksCluster")
+  awsEksCluster: option<awsEksClusterDetails>,
+  @ocaml.doc("<p>Information about an Amazon Elastic Container Registry repository.</p>")
+  @as("AwsEcrRepository")
+  awsEcrRepository: option<awsEcrRepositoryDetails>,
+  @ocaml.doc("<p>Details about a rate-based rule for Regional resources.</p>")
+  @as("AwsWafRegionalRateBasedRule")
+  awsWafRegionalRateBasedRule: option<awsWafRegionalRateBasedRuleDetails>,
+  @ocaml.doc("<p>Details about a rate-based rule for global resources.</p>")
+  @as("AwsWafRateBasedRule")
+  awsWafRateBasedRule: option<awsWafRateBasedRuleDetails>,
+  @ocaml.doc("<p>Information about the encryption configuration for X-Ray.</p>")
+  @as("AwsXrayEncryptionConfig")
+  awsXrayEncryptionConfig: option<awsXrayEncryptionConfigDetails>,
+  @ocaml.doc("<p>Details about the service configuration for a VPC endpoint service.</p>")
+  @as("AwsEc2VpcEndpointService")
+  awsEc2VpcEndpointService: option<awsEc2VpcEndpointServiceDetails>,
+  @ocaml.doc("<p>Details about an Amazon OpenSearch Service domain.</p>")
+  @as("AwsOpenSearchServiceDomain")
+  awsOpenSearchServiceDomain: option<awsOpenSearchServiceDomainDetails>,
+  @ocaml.doc("<p>Information about an Amazon ECR image.</p>") @as("AwsEcrContainerImage")
+  awsEcrContainerImage: option<awsEcrContainerImageDetails>,
+  @ocaml.doc("<p>Details about an EC2 VPN connection.</p>") @as("AwsEc2VpnConnection")
+  awsEc2VpnConnection: option<awsEc2VpnConnectionDetails>,
+  @ocaml.doc("<p>Provides details about a launch configuration.</p>")
+  @as("AwsAutoScalingLaunchConfiguration")
+  awsAutoScalingLaunchConfiguration: option<awsAutoScalingLaunchConfigurationDetails>,
+  @ocaml.doc("<p>Details about a service within an ECS cluster.</p>") @as("AwsEcsService")
+  awsEcsService: option<awsEcsServiceDetails>,
+  @ocaml.doc("<p>Details about an RDS event notification subscription.</p>")
+  @as("AwsRdsEventSubscription")
+  awsRdsEventSubscription: option<awsRdsEventSubscriptionDetails>,
   @ocaml.doc("<p>Details about a resource that are not available in a type-specific details object. Use
          the <code>Other</code> object in the following cases.</p>
          <ul>
@@ -6047,6 +9002,13 @@ type resourceDetails = {
   other: option<fieldMap>,
   @ocaml.doc("<p>Details about a container resource related to a finding.</p>") @as("Container")
   container: option<containerDetails>,
+  @ocaml.doc(
+    "<p>Details about a task definition. A task definition describes the container and volume definitions of an Amazon Elastic Container Service task.</p>"
+  )
+  @as("AwsEcsTaskDefinition")
+  awsEcsTaskDefinition: option<awsEcsTaskDefinitionDetails>,
+  @ocaml.doc("<p>Details about an ECS cluster.</p>") @as("AwsEcsCluster")
+  awsEcsCluster: option<awsEcsClusterDetails>,
   @ocaml.doc("<p>Details about an Amazon RDS database cluster.</p>") @as("AwsRdsDbCluster")
   awsRdsDbCluster: option<awsRdsDbClusterDetails>,
   @ocaml.doc("<p>Details about an Amazon RDS database cluster snapshot.</p>")
@@ -6054,7 +9016,7 @@ type resourceDetails = {
   awsRdsDbClusterSnapshot: option<awsRdsDbClusterSnapshotDetails>,
   @ocaml.doc("<p>Details about an Amazon RDS database snapshot.</p>") @as("AwsRdsDbSnapshot")
   awsRdsDbSnapshot: option<awsRdsDbSnapshotDetails>,
-  @ocaml.doc("<p>Details for a WAF WebACL.</p>") @as("AwsWafWebAcl")
+  @ocaml.doc("<p>Details for an WAF WebACL.</p>") @as("AwsWafWebAcl")
   awsWafWebAcl: option<awsWafWebAclDetails>,
   @ocaml.doc("<p>Details about an SQS queue.</p>") @as("AwsSqsQueue")
   awsSqsQueue: option<awsSqsQueueDetails>,
@@ -6066,17 +9028,17 @@ type resourceDetails = {
   awsLambdaLayerVersion: option<awsLambdaLayerVersionDetails>,
   @ocaml.doc("<p>Details about a Lambda function.</p>") @as("AwsLambdaFunction")
   awsLambdaFunction: option<awsLambdaFunctionDetails>,
-  @ocaml.doc("<p>Details about a KMS key.</p>") @as("AwsKmsKey")
+  @ocaml.doc("<p>Details about an KMS key.</p>") @as("AwsKmsKey")
   awsKmsKey: option<awsKmsKeyDetails>,
   @ocaml.doc("<p>Details about an IAM role.</p>") @as("AwsIamRole")
   awsIamRole: option<awsIamRoleDetails>,
   @ocaml.doc("<p>Contains details about an IAM group.</p>") @as("AwsIamGroup")
   awsIamGroup: option<awsIamGroupDetails>,
-  @ocaml.doc("<p>contains details about a Classic Load Balancer.</p>") @as("AwsElbLoadBalancer")
+  @ocaml.doc("<p>Contains details about a Classic Load Balancer.</p>") @as("AwsElbLoadBalancer")
   awsElbLoadBalancer: option<awsElbLoadBalancerDetails>,
   @ocaml.doc("<p>Contains details about an Amazon Redshift cluster.</p>") @as("AwsRedshiftCluster")
   awsRedshiftCluster: option<awsRedshiftClusterDetails>,
-  @ocaml.doc("<p>Provides details about an AWS Certificate Manager (ACM) certificate.</p>")
+  @ocaml.doc("<p>Provides details about an Certificate Manager certificate.</p>")
   @as("AwsCertificateManagerCertificate")
   awsCertificateManagerCertificate: option<awsCertificateManagerCertificateDetails>,
   @ocaml.doc(
@@ -6108,12 +9070,12 @@ type resourceDetails = {
   awsIamAccessKey: option<awsIamAccessKeyDetails>,
   @ocaml.doc("<p>Details about a Secrets Manager secret.</p>") @as("AwsSecretsManagerSecret")
   awsSecretsManagerSecret: option<awsSecretsManagerSecretDetails>,
-  @ocaml.doc("<p>Details about an Amazon S3 object related to a finding.</p>") @as("AwsS3Object")
+  @ocaml.doc("<p>Details about an S3 object related to a finding.</p>") @as("AwsS3Object")
   awsS3Object: option<awsS3ObjectDetails>,
   @ocaml.doc("<p>Details about the Amazon S3 Public Access Block configuration for an account.</p>")
   @as("AwsS3AccountPublicAccessBlock")
   awsS3AccountPublicAccessBlock: option<awsS3AccountPublicAccessBlockDetails>,
-  @ocaml.doc("<p>Details about an Amazon S3 bucket related to a finding.</p>") @as("AwsS3Bucket")
+  @ocaml.doc("<p>Details about an S3 bucket related to a finding.</p>") @as("AwsS3Bucket")
   awsS3Bucket: option<awsS3BucketDetails>,
   @ocaml.doc("<p>Details for an Elasticsearch domain.</p>") @as("AwsElasticsearchDomain")
   awsElasticsearchDomain: option<awsElasticsearchDomainDetails>,
@@ -6125,7 +9087,7 @@ type resourceDetails = {
   @ocaml.doc("<p>Details about an EC2 network access control list (ACL).</p>")
   @as("AwsEc2NetworkAcl")
   awsEc2NetworkAcl: option<awsEc2NetworkAclDetails>,
-  @ocaml.doc("<p>Details about a subnet in EC2.</p>") @as("AwsEc2Subnet")
+  @ocaml.doc("<p>Details about a subnet in Amazon EC2.</p>") @as("AwsEc2Subnet")
   awsEc2Subnet: option<awsEc2SubnetDetails>,
   @ocaml.doc("<p>Details about an Elastic IP address.</p>") @as("AwsEc2Eip")
   awsEc2Eip: option<awsEc2EipDetails>,
@@ -6134,50 +9096,16 @@ type resourceDetails = {
   awsEc2Volume: option<awsEc2VolumeDetails>,
   @ocaml.doc("<p>Details for an EC2 security group.</p>") @as("AwsEc2SecurityGroup")
   awsEc2SecurityGroup: option<awsEc2SecurityGroupDetails>,
-  @ocaml.doc("<p>Details for an Amazon EC2 network interface.</p>") @as("AwsEc2NetworkInterface")
+  @ocaml.doc("<p>Details for an EC2 network interface.</p>") @as("AwsEc2NetworkInterface")
   awsEc2NetworkInterface: option<awsEc2NetworkInterfaceDetails>,
-  @ocaml.doc("<p>Details about an Amazon EC2 instance related to a finding.</p>")
-  @as("AwsEc2Instance")
+  @ocaml.doc("<p>Details about an EC2 instance related to a finding.</p>") @as("AwsEc2Instance")
   awsEc2Instance: option<awsEc2InstanceDetails>,
   @ocaml.doc("<p>Details about a CloudFront distribution.</p>") @as("AwsCloudFrontDistribution")
   awsCloudFrontDistribution: option<awsCloudFrontDistributionDetails>,
-  @ocaml.doc("<p>Details for an AWS CodeBuild project.</p>") @as("AwsCodeBuildProject")
+  @ocaml.doc("<p>Details for an CodeBuild project.</p>") @as("AwsCodeBuildProject")
   awsCodeBuildProject: option<awsCodeBuildProjectDetails>,
   @ocaml.doc("<p>Details for an autoscaling group.</p>") @as("AwsAutoScalingAutoScalingGroup")
   awsAutoScalingAutoScalingGroup: option<awsAutoScalingAutoScalingGroupDetails>,
-}
-@ocaml.doc("<p>Details about the sensitive data that was detected on the resource.</p>")
-type classificationResult = {
-  @ocaml.doc(
-    "<p>Provides details about sensitive data that was identified based on customer-defined configuration.</p>"
-  )
-  @as("CustomDataIdentifiers")
-  customDataIdentifiers: option<customDataIdentifiersResult>,
-  @ocaml.doc(
-    "<p>Provides details about sensitive data that was identified based on built-in configuration.</p>"
-  )
-  @as("SensitiveData")
-  sensitiveData: option<sensitiveDataResultList>,
-  @ocaml.doc("<p>The current status of the sensitive data detection.</p>") @as("Status")
-  status: option<classificationStatus>,
-  @ocaml.doc(
-    "<p>Indicates whether there are additional occurrences of sensitive data that are not included in the finding. This occurs when the number of occurrences exceeds the maximum that can be included.</p>"
-  )
-  @as("AdditionalOccurrences")
-  additionalOccurrences: option<boolean_>,
-  @ocaml.doc("<p>The total size in bytes of the affected data.</p>") @as("SizeClassified")
-  sizeClassified: option<long>,
-  @ocaml.doc("<p>The type of content that the finding applies to.</p>") @as("MimeType")
-  mimeType: option<nonEmptyString>,
-}
-@ocaml.doc("<p>Provides details about sensitive data that was detected on a resource.</p>")
-type dataClassificationDetails = {
-  @ocaml.doc("<p>The details about the sensitive data that was detected on the resource.</p>")
-  @as("Result")
-  result: option<classificationResult>,
-  @ocaml.doc("<p>The path to the folder or file that contains the sensitive data.</p>")
-  @as("DetailedResultsLocation")
-  detailedResultsLocation: option<nonEmptyString>,
 }
 @ocaml.doc("<p>A resource related to a finding.</p>")
 type resource = {
@@ -6186,7 +9114,7 @@ type resource = {
   @ocaml.doc("<p>Contains information about sensitive data that was detected on the resource.</p>")
   @as("DataClassification")
   dataClassification: option<dataClassificationDetails>,
-  @ocaml.doc("<p>A list of AWS tags associated with a resource at the time the finding was
+  @ocaml.doc("<p>A list of Amazon Web Services tags associated with a resource at the time the finding was
          processed.</p>")
   @as("Tags")
   tags: option<fieldMap>,
@@ -6195,10 +9123,14 @@ type resource = {
   )
   @as("ResourceRole")
   resourceRole: option<nonEmptyString>,
-  @ocaml.doc("<p>The canonical AWS external Region name where this resource is located.</p>")
+  @ocaml.doc(
+    "<p>The canonical Amazon Web Services external Region name where this resource is located.</p>"
+  )
   @as("Region")
   region: option<nonEmptyString>,
-  @ocaml.doc("<p>The canonical AWS partition name that the Region is assigned to.</p>")
+  @ocaml.doc(
+    "<p>The canonical Amazon Web Services partition name that the Region is assigned to.</p>"
+  )
   @as("Partition")
   partition: option<partition>,
   @ocaml.doc("<p>The canonical identifier for the given resource type.</p>") @as("Id")
@@ -6213,14 +9145,15 @@ type resource = {
 }
 type resourceList = array<resource>
 @ocaml.doc("<p>Provides consistent format for the contents of the Security Hub-aggregated findings.
-            <code>AwsSecurityFinding</code> format enables you to share findings between AWS
+         <code>AwsSecurityFinding</code> format enables you to share findings between Amazon Web Services
          security services and third-party solutions, and security standards checks.</p>
          <note>
-            <p>A finding is a potential security issue generated either by AWS services (Amazon
-            GuardDuty, Amazon Inspector, and Amazon Macie) or by the integrated third-party
+            <p>A finding is a potential security issue generated either by Amazon Web Services services or by the integrated third-party
             solutions and standards checks.</p>
          </note>")
 type awsSecurityFinding = {
+  @ocaml.doc("<p>Indicates whether the finding is a sample finding.</p>") @as("Sample")
+  sample: option<boolean_>,
   @ocaml.doc(
     "<p>In a <code>BatchImportFindings</code> request, finding providers use <code>FindingProviderFields</code> to provide and update their own values for confidence, criticality, related findings, severity, and types.</p>"
   )
@@ -6251,7 +9184,7 @@ type awsSecurityFinding = {
   @ocaml.doc("<p>Indicates the veracity of a finding. </p>") @as("VerificationState")
   verificationState: option<verificationState>,
   @ocaml.doc("<p>This data type is exclusive to findings that are generated as the result of a check run
-         against a specific rule in a supported security standard, such as CIS AWS Foundations.
+         against a specific rule in a supported security standard, such as CIS Amazon Web Services Foundations.
          Contains security standard-related finding details.</p>")
   @as("Compliance")
   compliance: option<compliance>,
@@ -6277,7 +9210,8 @@ type awsSecurityFinding = {
   @as("UserDefinedFields")
   userDefinedFields: option<fieldMap>,
   @ocaml.doc("<p>A data type where security-findings providers can include additional solution-specific
-         details that aren't part of the defined <code>AwsSecurityFinding</code> format.</p>")
+         details that aren't part of the defined <code>AwsSecurityFinding</code> format.</p>
+         <p>Can contain up to 50 key-value pairs. For each key-value pair, the key can contain up to 128 characters, and the value can contain up to 2048 characters.</p>")
   @as("ProductFields")
   productFields: option<fieldMap>,
   @ocaml.doc("<p>A URL that links to a page about the current finding in the security-findings provider's
@@ -6344,13 +9278,32 @@ type awsSecurityFinding = {
          Behaviors | Sensitive Data Identifications</p>")
   @as("Types")
   types: option<typeList>,
-  @ocaml.doc("<p>The AWS account ID that a finding is generated in.</p>") @as("AwsAccountId")
+  @ocaml.doc("<p>The Amazon Web Services account ID that a finding is generated in.</p>")
+  @as("AwsAccountId")
   awsAccountId: nonEmptyString,
   @ocaml.doc("<p>The identifier for the solution-specific component (a discrete unit of logic) that
          generated a finding. In various security-findings providers' solutions, this generator can
          be called a rule, a check, a detector, a plugin, etc. </p>")
   @as("GeneratorId")
   generatorId: nonEmptyString,
+  @ocaml.doc("<p>The Region from which the finding was generated.</p>
+         <p>Security Hub populates this attribute automatically for each finding. You cannot update it using <code>BatchImportFindings</code> or <code>BatchUpdateFindings</code>.</p>")
+  @as("Region")
+  region: option<nonEmptyString>,
+  @ocaml.doc("<p>The name of the company for the product that generated the finding.</p>
+         <p>Security Hub populates this attribute automatically for each finding. You cannot be updated using <code>BatchImportFindings</code> or <code>BatchUpdateFindings</code>. The exception to this is when you use a custom integration.</p>
+         <p>When you use the Security Hub console to filter findings by company name, you use this attribute.</p>
+         <p>When you use the Security Hub API to filter findings by company name, you use the <code>aws/securityhub/CompanyName</code> attribute under <code>ProductFields</code>.</p>
+         <p>Security Hub does not synchronize those two attributes.</p>")
+  @as("CompanyName")
+  companyName: option<nonEmptyString>,
+  @ocaml.doc("<p>The name of the product that generated the finding.</p>
+         <p>Security Hub populates this attribute automatically for each finding. You cannot update it using <code>BatchImportFindings</code> or <code>BatchUpdateFindings</code>. The exception to this is when you use a custom integration.</p>
+         <p>When you use the Security Hub console to filter findings by product name, you use this attribute.</p>
+         <p>When you use the Security Hub API to filter findings by product name, you use the <code>aws/securityhub/ProductName</code> attribute under <code>ProductFields</code>.</p>
+         <p>Security Hub does not synchronize those two attributes.</p>")
+  @as("ProductName")
+  productName: option<nonEmptyString>,
   @ocaml.doc("<p>The ARN generated by Security Hub that uniquely identifies a product that generates findings.
          This can be the ARN for a third-party product that is integrated with Security Hub, or the ARN for
          a custom integration.</p>")
@@ -6363,23 +9316,19 @@ type awsSecurityFinding = {
 }
 type batchImportFindingsRequestFindingList = array<awsSecurityFinding>
 type awsSecurityFindingList = array<awsSecurityFinding>
-@ocaml.doc("<p>Security Hub provides you with a comprehensive view of the security state of your AWS
-         environment and resources. It also provides you with the readiness status of your
-         environment based on controls from supported security standards. Security Hub collects security
-         data from AWS accounts, services, and integrated third-party products and helps you analyze
-         security trends in your environment to identify the highest priority security issues. For
-         more information about Security Hub, see the <i>
-               <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/what-is-securityhub.html\">AWS Security Hub User
+@ocaml.doc("<p>Security Hub provides you with a comprehensive view of the security state of your Amazon Web Services environment and resources. It also provides you with the readiness status
+         of your environment based on controls from supported security standards. Security Hub collects
+         security data from Amazon Web Services accounts, services, and integrated third-party products and helps
+         you analyze security trends in your environment to identify the highest priority security
+         issues. For more information about Security Hub, see the <i>Security Hub<a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/what-is-securityhub.html\">User
                Guide</a>
             </i>.</p>
-         <p>When you use operations in the Security Hub API, the requests are executed only in the AWS
-         Region that is currently active or in the specific AWS Region that you specify in your
+         <p>When you use operations in the Security Hub API, the requests are executed only in the Amazon Web Services
+         Region that is currently active or in the specific Amazon Web Services Region that you specify in your
          request. Any configuration or settings change that results from the operation is applied
          only to that Region. To make the same change in other Regions, execute the same command for
          each Region to apply the change to.</p>
-         <p>For example, if your Region is set to <code>us-west-2</code>, when you use <code>
-               <a>CreateMembers</a>
-            </code> to add a member account to Security Hub, the association of
+         <p>For example, if your Region is set to <code>us-west-2</code>, when you use <code>CreateMembers</code> to add a member account to Security Hub, the association of
          the member account with the administrator account is created only in the <code>us-west-2</code>
          Region. Security Hub must be enabled for the member account in the same Region that the invitation
          was sent from.</p>
@@ -6387,30 +9336,22 @@ type awsSecurityFindingList = array<awsSecurityFinding>
          <ul>
             <li>
                <p>
-                  <code>
-                     <a>BatchEnableStandards</a>
-                  </code> - <code>RateLimit</code> of 1
+                  <code>BatchEnableStandards</code> - <code>RateLimit</code> of 1
                request per second, <code>BurstLimit</code> of 1 request per second.</p>
             </li>
             <li>
                <p>
-                  <code>
-                     <a>GetFindings</a>
-                  </code> - <code>RateLimit</code> of 3 requests per second.
+                  <code>GetFindings</code> - <code>RateLimit</code> of 3 requests per second.
                   <code>BurstLimit</code> of 6 requests per second.</p>
             </li>
             <li>
                <p>
-                  <code>
-                     <a>UpdateFindings</a>
-                  </code> - <code>RateLimit</code> of 1 request per
+                  <code>UpdateFindings</code> - <code>RateLimit</code> of 1 request per
                second. <code>BurstLimit</code> of 5 requests per second.</p>
             </li>
             <li>
                <p>
-                  <code>
-                     <a>UpdateStandardsControl</a>
-                  </code> - <code>RateLimit</code> of
+                  <code>UpdateStandardsControl</code> - <code>RateLimit</code> of
                1 request per second, <code>BurstLimit</code> of 5 requests per second.</p>
             </li>
             <li>
@@ -6431,7 +9372,7 @@ module UpdateStandardsControl = {
     @as("StandardsControlArn")
     standardsControlArn: nonEmptyString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-securityhub") @new
   external new: request => t = "UpdateStandardsControlCommand"
   let make = (~standardsControlArn, ~disabledReason=?, ~controlStatus=?, ()) =>
@@ -6454,7 +9395,7 @@ module UpdateSecurityHubConfiguration = {
     @as("AutoEnableControls")
     autoEnableControls: option<boolean_>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-securityhub") @new
   external new: request => t = "UpdateSecurityHubConfigurationCommand"
   let make = (~autoEnableControls=?, ()) => new({autoEnableControls: autoEnableControls})
@@ -6471,7 +9412,7 @@ module UpdateOrganizationConfiguration = {
     @as("AutoEnable")
     autoEnable: boolean_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-securityhub") @new
   external new: request => t = "UpdateOrganizationConfigurationCommand"
   let make = (~autoEnable, ()) => new({autoEnable: autoEnable})
@@ -6488,7 +9429,7 @@ module UpdateActionTarget = {
     @ocaml.doc("<p>The ARN of the custom action target to update.</p>") @as("ActionTargetArn")
     actionTargetArn: nonEmptyString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-securityhub") @new
   external new: request => t = "UpdateActionTargetCommand"
   let make = (~actionTargetArn, ~description=?, ~name=?, ()) =>
@@ -6498,27 +9439,28 @@ module UpdateActionTarget = {
 
 module GetInvitationsCount = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("<p>The number of all membership invitations sent to this Security Hub member account, not
          including the currently accepted invitation.</p>")
     @as("InvitationsCount")
     invitationsCount: option<integer_>,
   }
-  @module("@aws-sdk/client-securityhub") @new external new: unit => t = "GetInvitationsCountCommand"
-  let make = () => new()
+  @module("@aws-sdk/client-securityhub") @new
+  external new: request => t = "GetInvitationsCountCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module EnableOrganizationAdminAccount = {
   type t
   type request = {
-    @ocaml.doc("<p>The AWS account identifier of the account to designate as the Security Hub administrator
+    @ocaml.doc("<p>The Amazon Web Services account identifier of the account to designate as the Security Hub administrator
          account.</p>")
     @as("AdminAccountId")
     adminAccountId: nonEmptyString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-securityhub") @new
   external new: request => t = "EnableOrganizationAdminAccountCommand"
   let make = (~adminAccountId, ()) => new({adminAccountId: adminAccountId})
@@ -6544,38 +9486,44 @@ module EnableImportFindingsForProduct = {
 
 module DisassociateFromMasterAccount = {
   type t
-
+  type request = {.}
+  type response = {.}
   @module("@aws-sdk/client-securityhub") @new
-  external new: unit => t = "DisassociateFromMasterAccountCommand"
-  let make = () => new()
+  external new: request => t = "DisassociateFromMasterAccountCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DisassociateFromAdministratorAccount = {
   type t
-
+  type request = {.}
+  type response = {.}
   @module("@aws-sdk/client-securityhub") @new
-  external new: unit => t = "DisassociateFromAdministratorAccountCommand"
-  let make = () => new()
+  external new: request => t = "DisassociateFromAdministratorAccountCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DisableSecurityHub = {
   type t
-
-  @module("@aws-sdk/client-securityhub") @new external new: unit => t = "DisableSecurityHubCommand"
-  let make = () => new()
+  type request = {.}
+  type response = {.}
+  @module("@aws-sdk/client-securityhub") @new
+  external new: request => t = "DisableSecurityHubCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DisableOrganizationAdminAccount = {
   type t
   type request = {
-    @ocaml.doc("<p>The AWS account identifier of the Security Hub administrator account.</p>")
+    @ocaml.doc(
+      "<p>The Amazon Web Services account identifier of the Security Hub administrator account.</p>"
+    )
     @as("AdminAccountId")
     adminAccountId: nonEmptyString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-securityhub") @new
   external new: request => t = "DisableOrganizationAdminAccountCommand"
   let make = (~adminAccountId, ()) => new({adminAccountId: adminAccountId})
@@ -6589,7 +9537,7 @@ module DisableImportFindingsForProduct = {
     @as("ProductSubscriptionArn")
     productSubscriptionArn: nonEmptyString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-securityhub") @new
   external new: request => t = "DisableImportFindingsForProductCommand"
   let make = (~productSubscriptionArn, ()) => new({productSubscriptionArn: productSubscriptionArn})
@@ -6598,7 +9546,7 @@ module DisableImportFindingsForProduct = {
 
 module DescribeOrganizationConfiguration = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("<p>Whether the maximum number of allowed member accounts are already associated with the
          Security Hub administrator account.</p>")
@@ -6611,8 +9559,8 @@ module DescribeOrganizationConfiguration = {
     autoEnable: option<boolean_>,
   }
   @module("@aws-sdk/client-securityhub") @new
-  external new: unit => t = "DescribeOrganizationConfigurationCommand"
-  let make = () => new()
+  external new: request => t = "DescribeOrganizationConfigurationCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -6655,6 +9603,22 @@ module DeleteInsight = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module DeleteFindingAggregator = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>The ARN of the finding aggregator to delete. To obtain the ARN, use <code>ListFindingAggregators</code>.</p>"
+    )
+    @as("FindingAggregatorArn")
+    findingAggregatorArn: nonEmptyString,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-securityhub") @new
+  external new: request => t = "DeleteFindingAggregatorCommand"
+  let make = (~findingAggregatorArn, ()) => new({findingAggregatorArn: findingAggregatorArn})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
 module DeleteActionTarget = {
   type t
   type request = {
@@ -6675,10 +9639,16 @@ module DeleteActionTarget = {
 module CreateActionTarget = {
   type t
   type request = {
-    @ocaml.doc("<p>The ID for the custom action target.</p>") @as("Id") id: nonEmptyString,
+    @ocaml.doc(
+      "<p>The ID for the custom action target. Can contain up to 20 alphanumeric characters.</p>"
+    )
+    @as("Id")
+    id: nonEmptyString,
     @ocaml.doc("<p>The description for the custom action target.</p>") @as("Description")
     description: nonEmptyString,
-    @ocaml.doc("<p>The name of the custom action target.</p>") @as("Name") name: nonEmptyString,
+    @ocaml.doc("<p>The name of the custom action target. Can contain up to 20 characters.</p>")
+    @as("Name")
+    name: nonEmptyString,
   }
   type response = {
     @ocaml.doc("<p>The ARN for the custom action target.</p>") @as("ActionTargetArn")
@@ -6704,7 +9674,7 @@ module AcceptInvitation = {
     @as("MasterId")
     masterId: nonEmptyString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-securityhub") @new external new: request => t = "AcceptInvitationCommand"
   let make = (~invitationId, ~masterId, ()) => new({invitationId: invitationId, masterId: masterId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -6724,12 +9694,71 @@ module AcceptAdministratorInvitation = {
     @as("AdministratorId")
     administratorId: nonEmptyString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-securityhub") @new
   external new: request => t = "AcceptAdministratorInvitationCommand"
   let make = (~invitationId, ~administratorId, ()) =>
     new({invitationId: invitationId, administratorId: administratorId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module UpdateFindingAggregator = {
+  type t
+  type request = {
+    @ocaml.doc("<p>If <code>RegionLinkingMode</code> is <code>ALL_REGIONS_EXCEPT_SPECIFIED</code>, then this is a comma-separated list of Regions that do not aggregate findings to the aggregation Region.</p>
+         <p>If <code>RegionLinkingMode</code> is <code>SPECIFIED_REGIONS</code>, then this is a comma-separated list of Regions that do aggregate findings to the aggregation Region.</p>")
+    @as("Regions")
+    regions: option<stringList>,
+    @ocaml.doc("<p>Indicates whether to aggregate findings from all of the available Regions in the current partition. Also determines whether to automatically aggregate findings from new Regions as Security Hub supports them and you opt into them.</p>
+         <p>The selected option also determines how to use the Regions provided in the Regions list.</p>
+         <p>The options are as follows:</p>
+         <ul>
+            <li>
+               <p>
+                  <code>ALL_REGIONS</code> - Indicates to aggregate findings from all of the Regions where Security Hub is enabled. When you choose this option, Security Hub also automatically aggregates findings from new Regions as Security Hub supports them and you opt into them.
+         </p>
+            </li>
+            <li>
+               <p>
+                  <code>ALL_REGIONS_EXCEPT_SPECIFIED</code> - Indicates to aggregate findings from all of the Regions where Security Hub is enabled, except for the Regions listed in the <code>Regions</code> parameter. When you choose this option, Security Hub also automatically aggregates findings from new Regions as Security Hub supports them and you opt into them.
+         </p>
+            </li>
+            <li>
+               <p>
+                  <code>SPECIFIED_REGIONS</code> - Indicates to aggregate findings only from the Regions listed in the <code>Regions</code> parameter. Security Hub does not automatically aggregate findings from new Regions.
+         </p>
+            </li>
+         </ul>")
+    @as("RegionLinkingMode")
+    regionLinkingMode: nonEmptyString,
+    @ocaml.doc(
+      "<p>The ARN of the finding aggregator. To obtain the ARN, use <code>ListFindingAggregators</code>.</p>"
+    )
+    @as("FindingAggregatorArn")
+    findingAggregatorArn: nonEmptyString,
+  }
+  type response = {
+    @ocaml.doc("<p>The list of excluded Regions or included Regions.</p>") @as("Regions")
+    regions: option<stringList>,
+    @ocaml.doc(
+      "<p>Indicates whether to link all Regions, all Regions except for a list of excluded Regions, or a list of included Regions.</p>"
+    )
+    @as("RegionLinkingMode")
+    regionLinkingMode: option<nonEmptyString>,
+    @ocaml.doc("<p>The aggregation Region.</p>") @as("FindingAggregationRegion")
+    findingAggregationRegion: option<nonEmptyString>,
+    @ocaml.doc("<p>The ARN of the finding aggregator.</p>") @as("FindingAggregatorArn")
+    findingAggregatorArn: option<nonEmptyString>,
+  }
+  @module("@aws-sdk/client-securityhub") @new
+  external new: request => t = "UpdateFindingAggregatorCommand"
+  let make = (~regionLinkingMode, ~findingAggregatorArn, ~regions=?, ()) =>
+    new({
+      regions: regions,
+      regionLinkingMode: regionLinkingMode,
+      findingAggregatorArn: findingAggregatorArn,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -6743,7 +9772,7 @@ module UntagResource = {
     @ocaml.doc("<p>The ARN of the resource to remove the tags from.</p>") @as("ResourceArn")
     resourceArn: resourceArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-securityhub") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -6760,7 +9789,7 @@ module TagResource = {
     @ocaml.doc("<p>The ARN of the resource to apply the tags to.</p>") @as("ResourceArn")
     resourceArn: resourceArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-securityhub") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -6813,25 +9842,53 @@ module ListEnabledProductsForImport = {
 
 module GetMasterAccount = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("<p>A list of details about the Security Hub administrator account for the current member account.
       </p>")
     @as("Master")
     master: option<invitation>,
   }
-  @module("@aws-sdk/client-securityhub") @new external new: unit => t = "GetMasterAccountCommand"
-  let make = () => new()
+  @module("@aws-sdk/client-securityhub") @new external new: request => t = "GetMasterAccountCommand"
+  let make = () => new(Js.Obj.empty())
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module GetFindingAggregator = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>The ARN of the finding aggregator to return details for. To obtain the ARN, use <code>ListFindingAggregators</code>.</p>"
+    )
+    @as("FindingAggregatorArn")
+    findingAggregatorArn: nonEmptyString,
+  }
+  type response = {
+    @ocaml.doc("<p>The list of excluded Regions or included Regions.</p>") @as("Regions")
+    regions: option<stringList>,
+    @ocaml.doc(
+      "<p>Indicates whether to link all Regions, all Regions except for a list of excluded Regions, or a list of included Regions.</p>"
+    )
+    @as("RegionLinkingMode")
+    regionLinkingMode: option<nonEmptyString>,
+    @ocaml.doc("<p>The aggregation Region.</p>") @as("FindingAggregationRegion")
+    findingAggregationRegion: option<nonEmptyString>,
+    @ocaml.doc("<p>The ARN of the finding aggregator.</p>") @as("FindingAggregatorArn")
+    findingAggregatorArn: option<nonEmptyString>,
+  }
+  @module("@aws-sdk/client-securityhub") @new
+  external new: request => t = "GetFindingAggregatorCommand"
+  let make = (~findingAggregatorArn, ()) => new({findingAggregatorArn: findingAggregatorArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetAdministratorAccount = {
   type t
-
+  type request = {.}
   type response = {@as("Administrator") administrator: option<invitation>}
   @module("@aws-sdk/client-securityhub") @new
-  external new: unit => t = "GetAdministratorAccountCommand"
-  let make = () => new()
+  external new: request => t = "GetAdministratorAccountCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -6848,7 +9905,7 @@ module EnableSecurityHub = {
     @as("Tags")
     tags: option<tagMap>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-securityhub") @new
   external new: request => t = "EnableSecurityHubCommand"
   let make = (~enableDefaultStandards=?, ~tags=?, ()) =>
@@ -6865,11 +9922,65 @@ module DisassociateMembers = {
     @as("AccountIds")
     accountIds: accountIdList,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-securityhub") @new
   external new: request => t = "DisassociateMembersCommand"
   let make = (~accountIds, ()) => new({accountIds: accountIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module CreateFindingAggregator = {
+  type t
+  type request = {
+    @ocaml.doc("<p>If <code>RegionLinkingMode</code> is <code>ALL_REGIONS_EXCEPT_SPECIFIED</code>, then this is a comma-separated list of Regions that do not aggregate findings to the aggregation Region.</p>
+         <p>If <code>RegionLinkingMode</code> is <code>SPECIFIED_REGIONS</code>, then this is a comma-separated list of Regions that do aggregate findings to the aggregation Region.
+      </p>")
+    @as("Regions")
+    regions: option<stringList>,
+    @ocaml.doc("<p>Indicates whether to aggregate findings from all of the available Regions in the current partition. Also determines whether to automatically aggregate findings from new Regions as Security Hub supports them and you opt into them.</p>
+         <p>The selected option also determines how to use the Regions provided in the Regions list.</p>
+         <p>The options are as follows:</p>
+         <ul>
+            <li>
+               <p>
+                  <code>ALL_REGIONS</code> - Indicates to aggregate findings from all of the Regions where Security Hub is enabled. When you choose this option, Security Hub also automatically aggregates findings from new Regions as Security Hub supports them and you opt into them.
+         </p>
+            </li>
+            <li>
+               <p>
+                  <code>ALL_REGIONS_EXCEPT_SPECIFIED</code> - Indicates to aggregate findings from all of the Regions where Security Hub is enabled, except for the Regions listed in the <code>Regions</code> parameter. When you choose this option, Security Hub also automatically aggregates findings from new Regions as Security Hub supports them and you opt into them.
+         </p>
+            </li>
+            <li>
+               <p>
+                  <code>SPECIFIED_REGIONS</code> - Indicates to aggregate findings only from the Regions listed in the <code>Regions</code> parameter. Security Hub does not automatically aggregate findings from new Regions.
+         </p>
+            </li>
+         </ul>")
+    @as("RegionLinkingMode")
+    regionLinkingMode: nonEmptyString,
+  }
+  type response = {
+    @ocaml.doc("<p>The list of excluded Regions or included Regions.</p>") @as("Regions")
+    regions: option<stringList>,
+    @ocaml.doc(
+      "<p>Indicates whether to link all Regions, all Regions except for a list of excluded Regions, or a list of included Regions.</p>"
+    )
+    @as("RegionLinkingMode")
+    regionLinkingMode: option<nonEmptyString>,
+    @ocaml.doc("<p>The aggregation Region.</p>") @as("FindingAggregationRegion")
+    findingAggregationRegion: option<nonEmptyString>,
+    @ocaml.doc(
+      "<p>The ARN of the finding aggregator. You use the finding aggregator ARN to retrieve details for, update, and stop finding aggregation.</p>"
+    )
+    @as("FindingAggregatorArn")
+    findingAggregatorArn: option<nonEmptyString>,
+  }
+  @module("@aws-sdk/client-securityhub") @new
+  external new: request => t = "CreateFindingAggregatorCommand"
+  let make = (~regionLinkingMode, ~regions=?, ()) =>
+    new({regions: regions, regionLinkingMode: regionLinkingMode})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListOrganizationAdminAccounts = {
@@ -6959,17 +10070,50 @@ module ListInvitations = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module ListFindingAggregators = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>The maximum number of results to return. This operation currently only returns a single result.</p>"
+    )
+    @as("MaxResults")
+    maxResults: option<maxResults>,
+    @ocaml.doc(
+      "<p>The token returned with the previous set of results. Identifies the next set of results to return.</p>"
+    )
+    @as("NextToken")
+    nextToken: option<nextToken>,
+  }
+  type response = {
+    @ocaml.doc("<p>If there are more results, this is the token to provide in the next call to <code>ListFindingAggregators</code>.</p>
+         <p>This operation currently only returns a single result.
+      </p>")
+    @as("NextToken")
+    nextToken: option<nextToken>,
+    @ocaml.doc(
+      "<p>The list of finding aggregators. This operation currently only returns a single result.</p>"
+    )
+    @as("FindingAggregators")
+    findingAggregators: option<findingAggregatorList>,
+  }
+  @module("@aws-sdk/client-securityhub") @new
+  external new: request => t = "ListFindingAggregatorsCommand"
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module InviteMembers = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The list of account IDs of the AWS accounts to invite to Security Hub as members. </p>"
+      "<p>The list of account IDs of the Amazon Web Services accounts to invite to Security Hub as members. </p>"
     )
     @as("AccountIds")
     accountIds: accountIdList,
   }
   type response = {
-    @ocaml.doc("<p>The list of AWS accounts that could not be processed. For each account, the list
+    @ocaml.doc("<p>The list of Amazon Web Services accounts that could not be processed. For each account, the list
          includes the account ID and the email address.</p>")
     @as("UnprocessedAccounts")
     unprocessedAccounts: option<resultList>,
@@ -6989,7 +10133,7 @@ module GetMembers = {
     accountIds: accountIdList,
   }
   type response = {
-    @ocaml.doc("<p>The list of AWS accounts that could not be processed. For each account, the list
+    @ocaml.doc("<p>The list of Amazon Web Services accounts that could not be processed. For each account, the list
          includes the account ID and the email address.</p>")
     @as("UnprocessedAccounts")
     unprocessedAccounts: option<resultList>,
@@ -7071,7 +10215,7 @@ module DeleteMembers = {
     accountIds: accountIdList,
   }
   type response = {
-    @ocaml.doc("<p>The list of AWS accounts that were not deleted. For each account, the list includes the
+    @ocaml.doc("<p>The list of Amazon Web Services accounts that were not deleted. For each account, the list includes the
          account ID and the email address.</p>")
     @as("UnprocessedAccounts")
     unprocessedAccounts: option<resultList>,
@@ -7089,7 +10233,7 @@ module DeleteInvitations = {
     accountIds: accountIdList,
   }
   type response = {
-    @ocaml.doc("<p>The list of AWS accounts for which the invitations were not deleted. For each account,
+    @ocaml.doc("<p>The list of Amazon Web Services accounts for which the invitations were not deleted. For each account,
          the list includes the account ID and the email address.</p>")
     @as("UnprocessedAccounts")
     unprocessedAccounts: option<resultList>,
@@ -7109,7 +10253,7 @@ module DeclineInvitations = {
     accountIds: accountIdList,
   }
   type response = {
-    @ocaml.doc("<p>The list of AWS accounts that were not processed. For each account, the list includes
+    @ocaml.doc("<p>The list of Amazon Web Services accounts that were not processed. For each account, the list includes
          the account ID and the email address.</p>")
     @as("UnprocessedAccounts")
     unprocessedAccounts: option<resultList>,
@@ -7129,7 +10273,7 @@ module CreateMembers = {
     accountDetails: accountDetailsList,
   }
   type response = {
-    @ocaml.doc("<p>The list of AWS accounts that were not processed. For each account, the list includes
+    @ocaml.doc("<p>The list of Amazon Web Services accounts that were not processed. For each account, the list includes
          the account ID and the email address.</p>")
     @as("UnprocessedAccounts")
     unprocessedAccounts: option<resultList>,
@@ -7205,9 +10349,7 @@ module DescribeStandardsControls = {
     @as("NextToken")
     nextToken: option<nextToken>,
     @ocaml.doc("<p>The ARN of a resource that represents your subscription to a supported standard. To get
-         the subscription ARNs of the standards you have enabled, use the <code>
-               <a>GetEnabledStandards</a>
-            </code> operation.</p>")
+         the subscription ARNs of the standards you have enabled, use the <code>GetEnabledStandards</code> operation.</p>")
     @as("StandardsSubscriptionArn")
     standardsSubscriptionArn: nonEmptyString,
   }
@@ -7427,7 +10569,7 @@ module UpdateInsight = {
     @ocaml.doc("<p>The ARN of the insight that you want to update.</p>") @as("InsightArn")
     insightArn: nonEmptyString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-securityhub") @new external new: request => t = "UpdateInsightCommand"
   let make = (~insightArn, ~groupByAttribute=?, ~filters=?, ~name=?, ()) =>
     new({groupByAttribute: groupByAttribute, filters: filters, name: name, insightArn: insightArn})
@@ -7444,7 +10586,7 @@ module UpdateFindings = {
     @as("Filters")
     filters: awsSecurityFindingFilters,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-securityhub") @new external new: request => t = "UpdateFindingsCommand"
   let make = (~filters, ~recordState=?, ~note=?, ()) =>
     new({recordState: recordState, note: note, filters: filters})
@@ -7554,7 +10696,7 @@ module BatchImportFindings = {
   type t
   type request = {
     @ocaml.doc("<p>A list of findings to import. To successfully import a finding, it must follow the
-            <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html\">AWS Security Finding Format</a>. Maximum of 100 findings per request.</p>")
+            <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html\">Amazon Web Services Security Finding Format</a>. Maximum of 100 findings per request.</p>")
     @as("Findings")
     findings: batchImportFindingsRequestFindingList,
   }

@@ -405,14 +405,14 @@ module ListHapgs = {
 
 module ListAvailableZones = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("<p>The list of Availability Zones that have available AWS CloudHSM capacity.</p>")
     @as("AZList")
     azlist: option<azlist>,
   }
-  @module("@aws-sdk/client-cloudhsm") @new external new: unit => t = "ListAvailableZonesCommand"
-  let make = () => new()
+  @module("@aws-sdk/client-cloudhsm") @new external new: request => t = "ListAvailableZonesCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

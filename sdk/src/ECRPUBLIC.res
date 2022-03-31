@@ -562,7 +562,7 @@ module UntagResource = {
          resource is an Amazon ECR Public repository.</p>")
     resourceArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ecr-public") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -591,27 +591,27 @@ module PutRegistryCatalogData = {
 
 module GetRegistryCatalogData = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("<p>The catalog metadata for the public registry.</p>")
     registryCatalogData: registryCatalogData,
   }
   @module("@aws-sdk/client-ecr-public") @new
-  external new: unit => t = "GetRegistryCatalogDataCommand"
-  let make = () => new()
+  external new: request => t = "GetRegistryCatalogDataCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetAuthorizationToken = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("<p>An authorization token data object that corresponds to a public registry.</p>")
     authorizationData: option<authorizationData>,
   }
   @module("@aws-sdk/client-ecr-public") @new
-  external new: unit => t = "GetAuthorizationTokenCommand"
-  let make = () => new()
+  external new: request => t = "GetAuthorizationTokenCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -680,7 +680,7 @@ module TagResource = {
          supported resource is an Amazon ECR Public repository.</p>")
     resourceArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ecr-public") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"

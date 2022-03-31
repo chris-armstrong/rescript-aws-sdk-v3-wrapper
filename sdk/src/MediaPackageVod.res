@@ -54,6 +54,11 @@ type streamSelection = {
 type egressEndpoint = {
   @ocaml.doc("The URL of the parent manifest for the repackaged Asset.") @as("Url")
   url: option<__string>,
+  @ocaml.doc(
+    "The current processing status of the asset used for the packaging configuration. The status can be either QUEUED, PROCESSING, PLAYABLE, or FAILED. Status information won't be available for most assets ingested before 2021-09-30."
+  )
+  @as("Status")
+  status: option<__string>,
   @ocaml.doc("The ID of the PackagingConfiguration being applied to the Asset.")
   @as("PackagingConfigurationId")
   packagingConfigurationId: option<__string>,
@@ -191,7 +196,14 @@ When not specified the initialization vector will be periodically rotated.")
 @ocaml.doc("A Dynamic Adaptive Streaming over HTTP (DASH) encryption configuration.")
 type dashEncryption = {@as("SpekeKeyProvider") spekeKeyProvider: spekeKeyProvider}
 @ocaml.doc("A CMAF encryption configuration.")
-type cmafEncryption = {@as("SpekeKeyProvider") spekeKeyProvider: spekeKeyProvider}
+type cmafEncryption = {
+  @as("SpekeKeyProvider") spekeKeyProvider: spekeKeyProvider,
+  @ocaml.doc(
+    "An optional 128-bit, 16-byte hex value represented by a 32-character string, used in conjunction with the key for encrypting blocks. If you don't specify a value, then MediaPackage creates the constant initialization vector (IV)."
+  )
+  @as("ConstantInitializationVector")
+  constantInitializationVector: option<__string>,
+}
 @ocaml.doc("A Microsoft Smooth Streaming (MSS) PackagingConfiguration.")
 type mssPackage = {
   @ocaml.doc("The duration (in seconds) of each segment.") @as("SegmentDurationSeconds")
@@ -209,6 +221,11 @@ type hlsPackage = {
 rounded to the nearest multiple of the source fragment duration.")
   @as("SegmentDurationSeconds")
   segmentDurationSeconds: option<__integer>,
+  @ocaml.doc(
+    "When enabled, MediaPackage passes through digital video broadcasting (DVB) subtitles into the output."
+  )
+  @as("IncludeDvbSubtitles")
+  includeDvbSubtitles: option<__boolean>,
   @ocaml.doc("A list of HLS manifest configurations.") @as("HlsManifests")
   hlsManifests: __listOfHlsManifest,
   @as("Encryption") encryption: option<hlsEncryption>,
@@ -274,7 +291,7 @@ module DeletePackagingGroup = {
     @ocaml.doc("The ID of the MediaPackage VOD PackagingGroup resource to delete.") @as("Id")
     id: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-mediapackage-vod") @new
   external new: request => t = "DeletePackagingGroupCommand"
   let make = (~id, ()) => new({id: id})
@@ -288,7 +305,7 @@ module DeletePackagingConfiguration = {
     @as("Id")
     id: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-mediapackage-vod") @new
   external new: request => t = "DeletePackagingConfigurationCommand"
   let make = (~id, ()) => new({id: id})
@@ -300,7 +317,7 @@ module DeleteAsset = {
   type request = {
     @ocaml.doc("The ID of the MediaPackage VOD Asset resource to delete.") @as("Id") id: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-mediapackage-vod") @new external new: request => t = "DeleteAssetCommand"
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -340,7 +357,7 @@ module UntagResource = {
     @as("ResourceArn")
     resourceArn: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-mediapackage-vod") @new
   external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
@@ -357,7 +374,7 @@ module TagResource = {
     @as("ResourceArn")
     resourceArn: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-mediapackage-vod") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"

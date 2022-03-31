@@ -52,6 +52,7 @@ type tcpRetryPolicyEvent = [@as("connection-error") #Connection_Error]
 type tagsLimit = int
 type tagValue = string
 type tagKey = string
+type suffixHostname = string
 type subjectAlternativeName = string
 type serviceName = string
 type sdsSecretName = string
@@ -59,6 +60,11 @@ type routeStatusCode = [@as("DELETED") #DELETED | @as("INACTIVE") #INACTIVE | @a
 type routePriority = int
 
 type resourceName = string
+type queryParameterName = string
+@ocaml.doc("<p>An object representing the query parameter to match.</p>")
+type queryParameterMatch = {
+  @ocaml.doc("<p>The exact query parameter to match on.</p>") exact: option<baseString>,
+}
 type portProtocol = [@as("grpc") #Grpc | @as("http2") #Http2 | @as("tcp") #Tcp | @as("http") #Http]
 type portNumber = int
 type percentInt = int
@@ -92,6 +98,8 @@ type listMeshesLimit = int
 type listGatewayRoutesLimit = int
 type httpScheme = [@as("https") #Https | @as("http") #Http]
 type httpRetryPolicyEvent = string
+type httpPathRegex = string
+type httpPathExact = string
 type httpMethod = [
   | @as("PATCH") #PATCH
   | @as("TRACE") #TRACE
@@ -103,16 +111,7 @@ type httpMethod = [
   | @as("HEAD") #HEAD
   | @as("GET") #GET
 ]
-@ocaml.doc("<p>An object that represents the criteria for determining a request match.</p>")
-type httpGatewayRouteMatch = {
-  @ocaml.doc("<p>Specifies the path to match requests with. This parameter must always start with
-            <code>/</code>, which by itself matches all requests to the virtual service name. You
-         can also match for path-based routing of requests. For example, if your virtual service
-         name is <code>my-service.local</code> and you want the route to match requests to
-            <code>my-service.local/metrics</code>, your prefix should be
-         <code>/metrics</code>.</p>")
-  prefix: baseString,
-}
+type httpGatewayRoutePrefix = string
 type hostname = string
 type healthCheckTimeoutMillis = float
 type healthCheckThreshold = int
@@ -131,11 +130,15 @@ type gatewayRouteStatusCode = [
   | @as("INACTIVE") #INACTIVE
   | @as("ACTIVE") #ACTIVE
 ]
+type gatewayRoutePriority = int
 
 type filePath = string
+type exactHostName = string
 type egressFilterType = [@as("DROP_ALL") #DROP_ALL | @as("ALLOW_ALL") #ALLOW_ALL]
 type durationValue = float
 type durationUnit = [@as("ms") #Ms | @as("s") #S]
+type dnsResponseType = [@as("ENDPOINTS") #ENDPOINTS | @as("LOADBALANCER") #LOADBALANCER]
+type defaultGatewayRouteRewrite = [@as("DISABLED") #DISABLED | @as("ENABLED") #ENABLED]
 type awsCloudMapName = string
 type awsCloudMapInstanceAttributeValue = string
 type awsCloudMapInstanceAttributeKey = string
@@ -264,8 +267,7 @@ type virtualNodeGrpcConnectionPool = {
 }
 @ocaml.doc("<p>An object that represents a virtual gateway's listener's Transport Layer Security (TLS) Secret Discovery Service
          validation context trust. The proxy must be configured with a local SDS provider via a Unix
-         Domain Socket. See App Mesh <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html\">TLS
-            documentation</a> for more info.</p>")
+         Domain Socket. See App Mesh <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html\">TLS documentation</a> for more info.</p>")
 type virtualGatewayTlsValidationContextSdsTrust = {
   @ocaml.doc("<p>A reference to an object that represents the name of the secret for a virtual gateway's
          Transport Layer Security (TLS) Secret Discovery Service validation context trust.</p>")
@@ -311,7 +313,7 @@ type virtualGatewayPortMapping = {
 }
 @ocaml.doc("<p>An object that represents the virtual gateway's listener's Secret Discovery Service
          certificate.The proxy must be configured with a local SDS provider via a Unix Domain
-         Socket. See App Mesh <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html\">TLS
+         Socket. See App Mesh<a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html\">TLS
             documentation</a> for more info. </p>")
 type virtualGatewayListenerTlsSdsCertificate = {
   @ocaml.doc("<p>A reference to an object that represents the name of the secret secret requested from
@@ -327,7 +329,7 @@ type virtualGatewayListenerTlsFileCertificate = {
   privateKey: filePath,
   @ocaml.doc("<p>The certificate chain for the certificate.</p>") certificateChain: filePath,
 }
-@ocaml.doc("<p>An object that represents an AWS Certicate Manager (ACM) certificate.</p>")
+@ocaml.doc("<p>An object that represents an Certificate Manager certificate.</p>")
 type virtualGatewayListenerTlsAcmCertificate = {
   @ocaml.doc(
     "<p>The Amazon Resource Name (ARN) for the certificate. The certificate must meet specific requirements and you must have proxy authorization enabled. For more information, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html#virtual-node-tls-prerequisites\">Transport Layer Security (TLS)</a>.</p>"
@@ -495,8 +497,8 @@ type meshRef = {
   @ocaml.doc("<p>The name of the service mesh.</p>") meshName: resourceName,
 }
 @ocaml.doc("<p>An object that represents the listener's Secret Discovery Service certificate. The proxy
-         must be configured with a local SDS provider via a Unix Domain Socket. See App Mesh <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html\">TLS
-            documentation</a> for more info.</p>")
+         must be configured with a local SDS provider via a Unix Domain Socket. See App Mesh <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html\">TLS documentation</a>
+         for more info.</p>")
 type listenerTlsSdsCertificate = {
   @ocaml.doc("<p>A reference to an object that represents the name of the secret requested from the
          Secret Discovery Service provider representing Transport Layer Security (TLS) materials like a certificate or
@@ -519,6 +521,29 @@ type listenerTlsAcmCertificate = {
   certificateArn: arn,
 }
 type httpRetryPolicyEvents = array<httpRetryPolicyEvent>
+@ocaml.doc("<p>An object that represents the query parameter in the request.</p>")
+type httpQueryParameter = {
+  @ocaml.doc("<p>The query parameter to match on.</p>") @as("match")
+  match_: option<queryParameterMatch>,
+  @ocaml.doc("<p>A name for the query parameter that will be matched on.</p>")
+  name: queryParameterName,
+}
+@ocaml.doc("<p>An object representing the path to match in the request.</p>")
+type httpPathMatch = {
+  @ocaml.doc("<p>The regex used to match the path.</p>") regex: option<httpPathRegex>,
+  @ocaml.doc("<p>The exact path to match on.</p>") exact: option<httpPathExact>,
+}
+@ocaml.doc("<p>An object representing the beginning characters of the route to rewrite.</p>")
+type httpGatewayRoutePrefixRewrite = {
+  @ocaml.doc("<p>The value used to replace the incoming route prefix when rewritten.</p>")
+  value: option<httpGatewayRoutePrefix>,
+  @ocaml.doc("<p>The default prefix used to replace the incoming route prefix when rewritten.</p>")
+  defaultPrefix: option<defaultGatewayRouteRewrite>,
+}
+@ocaml.doc("<p>An object that represents the path to rewrite.</p>")
+type httpGatewayRoutePathRewrite = {
+  @ocaml.doc("<p>The exact path to rewrite.</p>") exact: option<httpPathExact>,
+}
 @ocaml.doc(
   "<p>An object that represents the health check policy for a virtual node's listener.</p>"
 )
@@ -627,10 +652,42 @@ module GrpcRouteMetadataMatchMethod = {
     }
 }
 type grpcRetryPolicyEvents = array<grpcRetryPolicyEvent>
-@ocaml.doc("<p>An object that represents the criteria for determining a request match.</p>")
-type grpcGatewayRouteMatch = {
-  @ocaml.doc("<p>The fully qualified domain name for the service to match from the request.</p>")
-  serviceName: option<serviceName>,
+@ocaml.doc("<p>An object representing the method header to be matched.</p>")
+type grpcMetadataMatchMethod = {
+  @ocaml.doc("<p>The specified ending characters of the method header to match on.</p>")
+  suffix: option<headerMatch>,
+  @ocaml.doc("<p>The specified beginning characters of the method header to be matched on.</p>")
+  prefix: option<headerMatch>,
+  range: option<matchRange>,
+  @ocaml.doc("<p>The regex used to match the method header.</p>") regex: option<headerMatch>,
+  @ocaml.doc("<p>The exact method header to be matched on.</p>") exact: option<headerMatch>,
+}
+module GrpcMetadataMatchMethod = {
+  type t =
+    | Suffix(headerMatch)
+    | Prefix(headerMatch)
+    | Range(matchRange)
+    | Regex(headerMatch)
+    | Exact(headerMatch)
+  exception GrpcMetadataMatchMethodUnspecified
+  let classify = value =>
+    switch value {
+    | {suffix: Some(x)} => Suffix(x)
+    | {prefix: Some(x)} => Prefix(x)
+    | {range: Some(x)} => Range(x)
+    | {regex: Some(x)} => Regex(x)
+    | {exact: Some(x)} => Exact(x)
+    | _ => raise(GrpcMetadataMatchMethodUnspecified)
+    }
+
+  let make = value =>
+    switch value {
+    | Suffix(x) => {suffix: Some(x), prefix: None, range: None, regex: None, exact: None}
+    | Prefix(x) => {prefix: Some(x), suffix: None, range: None, regex: None, exact: None}
+    | Range(x) => {range: Some(x), suffix: None, prefix: None, regex: None, exact: None}
+    | Regex(x) => {regex: Some(x), suffix: None, prefix: None, range: None, exact: None}
+    | Exact(x) => {exact: Some(x), suffix: None, prefix: None, range: None, regex: None}
+    }
 }
 @ocaml.doc("<p>An object that represents the virtual service that traffic is routed to.</p>")
 type gatewayRouteVirtualService = {
@@ -664,6 +721,17 @@ type gatewayRouteRef = {
   @ocaml.doc("<p>The name of the service mesh that the resource resides in. </p>")
   meshName: resourceName,
 }
+@ocaml.doc("<p>An object representing the gateway route host name to rewrite.</p>")
+type gatewayRouteHostnameRewrite = {
+  @ocaml.doc("<p>The default target host name to write to.</p>")
+  defaultTargetHostname: option<defaultGatewayRouteRewrite>,
+}
+@ocaml.doc("<p>An object representing the gateway route host name to match.</p>")
+type gatewayRouteHostnameMatch = {
+  @ocaml.doc("<p>The specified ending characters of the host name to match on.</p>")
+  suffix: option<suffixHostname>,
+  @ocaml.doc("<p>The exact host name to match on.</p>") exact: option<exactHostName>,
+}
 @ocaml.doc("<p>An object that represents an access log file.</p>")
 type fileAccessLog = {
   @ocaml.doc("<p>The file path to write access logs to. You can use <code>/dev/stdout</code> to send
@@ -681,7 +749,7 @@ type fileAccessLog = {
 type egressFilter = {
   @ocaml.doc("<p>The egress filter type. By default, the type is <code>DROP_ALL</code>, which allows
          egress only from virtual nodes to other defined resources in the service mesh (and any
-         traffic to <code>*.amazonaws.com</code> for AWS API calls). You can set the egress filter
+         traffic to <code>*.amazonaws.com</code> for Amazon Web Services API calls). You can set the egress filter
          type to <code>ALLOW_ALL</code> to allow egress to any endpoint inside or outside of the
          service mesh.</p>")
   @as("type")
@@ -695,20 +763,22 @@ type duration = {
 @ocaml.doc("<p>An object that represents the DNS service discovery information for your virtual
          node.</p>")
 type dnsServiceDiscovery = {
+  @ocaml.doc("<p>Specifies the DNS response type for the virtual node.</p>")
+  responseType: option<dnsResponseType>,
   @ocaml.doc("<p>Specifies the DNS service discovery hostname for the virtual node. </p>")
   hostname: hostname,
 }
 type certificateAuthorityArns = array<arn>
-@ocaml.doc("<p>An object that represents the AWS Cloud Map attribute information for your virtual
+@ocaml.doc("<p>An object that represents the Cloud Map attribute information for your virtual
          node.</p>
          <note>
             <p>AWS Cloud Map is not available in the eu-south-1 Region.</p>
          </note>")
 type awsCloudMapInstanceAttribute = {
-  @ocaml.doc("<p>The value of an AWS Cloud Map service instance attribute key. Any AWS Cloud Map service
+  @ocaml.doc("<p>The value of an Cloud Map service instance attribute key. Any Cloud Map service
          instance that contains the specified key and value is returned.</p>")
   value: awsCloudMapInstanceAttributeValue,
-  @ocaml.doc("<p>The name of an AWS Cloud Map service instance attribute key. Any AWS Cloud Map service
+  @ocaml.doc("<p>The name of an Cloud Map service instance attribute key. Any Cloud Map service
          instance that contains the specified key and value is returned.</p>")
   key: awsCloudMapInstanceAttributeKey,
 }
@@ -781,7 +851,7 @@ module VirtualNodeConnectionPool = {
     | Tcp(x) => {tcp: Some(x), grpc: None, http2: None, http: None}
     }
 }
-@ocaml.doc("<p>An object that represents a Transport Layer Security (TLS) validation context trust for an AWS Certicate Manager (ACM)
+@ocaml.doc("<p>An object that represents a Transport Layer Security (TLS) validation context trust for an Certificate Manager
          certificate.</p>")
 type virtualGatewayTlsValidationContextAcmTrust = {
   @ocaml.doc("<p>One or more ACM Amazon Resource Name (ARN)s.</p>")
@@ -793,6 +863,9 @@ type virtualGatewayListenerTlsValidationContextTrust = {
   @ocaml.doc("<p>A reference to an object that represents a virtual gateway's listener's Transport Layer Security (TLS) Secret
          Discovery Service validation context trust.</p>")
   sds: option<virtualGatewayTlsValidationContextSdsTrust>,
+  @ocaml.doc(
+    "<p>An object that represents a Transport Layer Security (TLS) validation context trust for a local file.</p>"
+  )
   file: option<virtualGatewayTlsValidationContextFileTrust>,
 }
 module VirtualGatewayListenerTlsValidationContextTrust = {
@@ -822,9 +895,7 @@ type virtualGatewayListenerTlsCertificate = {
   sds: option<virtualGatewayListenerTlsSdsCertificate>,
   @ocaml.doc("<p>A reference to an object that represents a local file certificate.</p>")
   file: option<virtualGatewayListenerTlsFileCertificate>,
-  @ocaml.doc(
-    "<p>A reference to an object that represents an AWS Certicate Manager (ACM) certificate.</p>"
-  )
+  @ocaml.doc("<p>A reference to an object that represents an Certificate Manager certificate.</p>")
   acm: option<virtualGatewayListenerTlsAcmCertificate>,
 }
 module VirtualGatewayListenerTlsCertificate = {
@@ -890,6 +961,10 @@ type virtualGatewayClientTlsCertificate = {
   @ocaml.doc("<p>A reference to an object that represents a virtual gateway's client's Secret Discovery
          Service certificate.</p>")
   sds: option<virtualGatewayListenerTlsSdsCertificate>,
+  @ocaml.doc("<p>An object that represents a local file certificate. The certificate must meet specific
+         requirements and you must have proxy authorization enabled. For more information, see
+            <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html\"> Transport Layer Security (TLS)
+         </a>.</p>")
   file: option<virtualGatewayListenerTlsFileCertificate>,
 }
 module VirtualGatewayClientTlsCertificate = {
@@ -928,7 +1003,7 @@ module VirtualGatewayAccessLog = {
     | File(x) => {file: Some(x)}
     }
 }
-@ocaml.doc("<p>An object that represents a Transport Layer Security (TLS) validation context trust for an AWS Certicate Manager (ACM)
+@ocaml.doc("<p>An object that represents a Transport Layer Security (TLS) validation context trust for an Certificate Manager
          certificate.</p>")
 type tlsValidationContextAcmTrust = {
   @ocaml.doc("<p>One or more ACM Amazon Resource Name (ARN)s.</p>")
@@ -973,6 +1048,9 @@ type listenerTlsValidationContextTrust = {
   @ocaml.doc("<p>A reference to an object that represents a listener's Transport Layer Security (TLS) Secret Discovery Service
          validation context trust.</p>")
   sds: option<tlsValidationContextSdsTrust>,
+  @ocaml.doc(
+    "<p>An object that represents a Transport Layer Security (TLS) validation context trust for a local file.</p>"
+  )
   file: option<tlsValidationContextFileTrust>,
 }
 module ListenerTlsValidationContextTrust = {
@@ -1048,9 +1126,9 @@ type httpRouteHeader = {
   @ocaml.doc("<p>A name for the HTTP header in the client request that will be matched on.</p>")
   name: headerName,
 }
-@ocaml.doc(
-  "<p>An object that represents a retry policy. Specify at least one value for at least one of the types of <code>RetryEvents</code>, a value for <code>maxRetries</code>, and a value for <code>perRetryTimeout</code>.</p>"
-)
+@ocaml.doc("<p>An object that represents a retry policy. Specify at least one value for at least one of the types of <code>RetryEvents</code>, a value for <code>maxRetries</code>, and a value for <code>perRetryTimeout</code>. 
+               Both <code>server-error</code> and <code>gateway-error</code> under <code>httpRetryEvents</code> include the Envoy <code>reset</code> policy. For more information on the 
+               <code>reset</code> policy, see the <a href=\"https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/router_filter#x-envoy-retry-on\">Envoy documentation</a>.</p>")
 type httpRetryPolicy = {
   @ocaml.doc(
     "<p>Specify a valid value. The event occurs before any processing of a request has started and is encountered when the upstream is temporarily or permanently unavailable.</p>"
@@ -1082,6 +1160,24 @@ type httpRetryPolicy = {
   @ocaml.doc("<p>The maximum number of retry attempts.</p>") maxRetries: maxRetries,
   @ocaml.doc("<p>The timeout for each retry attempt.</p>") perRetryTimeout: duration,
 }
+type httpQueryParameters = array<httpQueryParameter>
+@ocaml.doc("<p>An object representing the gateway route to rewrite.</p>")
+type httpGatewayRouteRewrite = {
+  @ocaml.doc("<p>The host name to rewrite.</p>") hostname: option<gatewayRouteHostnameRewrite>,
+  @ocaml.doc("<p>The path to rewrite.</p>") path: option<httpGatewayRoutePathRewrite>,
+  @ocaml.doc("<p>The specified beginning characters to rewrite.</p>")
+  prefix: option<httpGatewayRoutePrefixRewrite>,
+}
+@ocaml.doc("<p>An object that represents the HTTP header in the gateway route.</p>")
+type httpGatewayRouteHeader = {
+  @as("match") match_: option<headerMatchMethod>,
+  @ocaml.doc(
+    "<p>Specify <code>True</code> to match anything except the match criteria. The default value is <code>False</code>.</p>"
+  )
+  invert: option<baseBoolean>,
+  @ocaml.doc("<p>A name for the HTTP header in the gateway route that will be matched on.</p>")
+  name: headerName,
+}
 @ocaml.doc("<p>An object that represents types of timeouts. </p>")
 type grpcTimeout = {
   @ocaml.doc(
@@ -1103,9 +1199,9 @@ type grpcRouteMetadata = {
   invert: option<baseBoolean>,
   @ocaml.doc("<p>The name of the route.</p>") name: headerName,
 }
-@ocaml.doc(
-  "<p>An object that represents a retry policy. Specify at least one value for at least one of the types of <code>RetryEvents</code>, a value for <code>maxRetries</code>, and a value for <code>perRetryTimeout</code>.</p>"
-)
+@ocaml.doc("<p>An object that represents a retry policy. Specify at least one value for at least one of the types of <code>RetryEvents</code>, a value for <code>maxRetries</code>, and a value for <code>perRetryTimeout</code>. 
+               Both <code>server-error</code> and <code>gateway-error</code> under <code>httpRetryEvents</code> include the Envoy <code>reset</code> policy. For more information on the 
+               <code>reset</code> policy, see the <a href=\"https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/router_filter#x-envoy-retry-on\">Envoy documentation</a>.</p>")
 type grpcRetryPolicy = {
   @ocaml.doc("<p>Specify at least one of the valid values.</p>")
   grpcRetryEvents: option<grpcRetryPolicyEvents>,
@@ -1139,6 +1235,21 @@ type grpcRetryPolicy = {
   @ocaml.doc("<p>The maximum number of retry attempts.</p>") maxRetries: maxRetries,
   @ocaml.doc("<p>The timeout for each retry attempt.</p>") perRetryTimeout: duration,
 }
+@ocaml.doc("<p>An object that represents the gateway route to rewrite.</p>")
+type grpcGatewayRouteRewrite = {
+  @ocaml.doc("<p>The host name of the gateway route to rewrite.</p>")
+  hostname: option<gatewayRouteHostnameRewrite>,
+}
+@ocaml.doc("<p>An object representing the metadata of the gateway route.</p>")
+type grpcGatewayRouteMetadata = {
+  @ocaml.doc("<p>The criteria for determining a metadata match.</p>") @as("match")
+  match_: option<grpcMetadataMatchMethod>,
+  @ocaml.doc(
+    "<p>Specify <code>True</code> to match anything except the match criteria. The default value is <code>False</code>.</p>"
+  )
+  invert: option<baseBoolean>,
+  @ocaml.doc("<p>A name for the gateway route metadata.</p>") name: headerName,
+}
 @ocaml.doc("<p>An object that represents a gateway route target.</p>")
 type gatewayRouteTarget = {
   @ocaml.doc("<p>An object that represents a virtual service gateway route target.</p>")
@@ -1150,6 +1261,9 @@ type clientTlsCertificate = {
   @ocaml.doc("<p>A reference to an object that represents a client's TLS Secret Discovery Service
          certificate.</p>")
   sds: option<listenerTlsSdsCertificate>,
+  @ocaml.doc("<p>An object that represents a local file certificate. The certificate must meet specific
+         requirements and you must have proxy authorization enabled. For more information, see
+            <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html\">Transport Layer Security (TLS)</a>.</p>")
   file: option<listenerTlsFileCertificate>,
 }
 module ClientTlsCertificate = {
@@ -1207,7 +1321,7 @@ type virtualGatewayTlsValidationContextTrust = {
   )
   file: option<virtualGatewayTlsValidationContextFileTrust>,
   @ocaml.doc("<p>A reference to an object that represents a Transport Layer Security (TLS) validation context trust for an
-         AWS Certicate Manager (ACM) certificate.</p>")
+         Certificate Manager certificate.</p>")
   acm: option<virtualGatewayTlsValidationContextAcmTrust>,
 }
 module VirtualGatewayTlsValidationContextTrust = {
@@ -1247,7 +1361,7 @@ type tlsValidationContextTrust = {
   )
   file: option<tlsValidationContextFileTrust>,
   @ocaml.doc("<p>A reference to an object that represents a Transport Layer Security (TLS) validation context trust for an
-         AWS Certicate Manager (ACM) certificate.</p>")
+         Certificate Manager certificate.</p>")
   acm: option<tlsValidationContextAcmTrust>,
 }
 module TlsValidationContextTrust = {
@@ -1299,7 +1413,7 @@ type logging = {
 }
 @ocaml.doc("<p>An object that represents timeouts for different protocols.</p>")
 type listenerTimeout = {
-  grpc: option<grpcTimeout>,
+  @ocaml.doc("<p>An object that represents types of timeouts. </p>") grpc: option<grpcTimeout>,
   @ocaml.doc("<p>An object that represents types of timeouts. </p>") http2: option<httpTimeout>,
   @ocaml.doc("<p>An object that represents types of timeouts. </p>") http: option<httpTimeout>,
   @ocaml.doc("<p>An object that represents types of timeouts. </p>") tcp: option<tcpTimeout>,
@@ -1332,8 +1446,11 @@ type httpRouteAction = {
   )
   weightedTargets: weightedTargets,
 }
+type httpGatewayRouteHeaders = array<httpGatewayRouteHeader>
 @ocaml.doc("<p>An object that represents the action to take if a match is determined.</p>")
 type httpGatewayRouteAction = {
+  @ocaml.doc("<p>The gateway route action to rewrite.</p>")
+  rewrite: option<httpGatewayRouteRewrite>,
   @ocaml.doc(
     "<p>An object that represents the target that traffic is routed to when a request matches the gateway route.</p>"
   )
@@ -1347,26 +1464,28 @@ type grpcRouteAction = {
   )
   weightedTargets: weightedTargets,
 }
+type grpcGatewayRouteMetadataList = array<grpcGatewayRouteMetadata>
 @ocaml.doc("<p>An object that represents the action to take if a match is determined.</p>")
 type grpcGatewayRouteAction = {
+  @ocaml.doc("<p>The gateway route action to rewrite.</p>")
+  rewrite: option<grpcGatewayRouteRewrite>,
   @ocaml.doc(
     "<p>An object that represents the target that traffic is routed to when a request matches the gateway route.</p>"
   )
   target: gatewayRouteTarget,
 }
-@ocaml.doc("<p>An object that represents the AWS Cloud Map service discovery information for your virtual
+@ocaml.doc("<p>An object that represents the Cloud Map service discovery information for your virtual
          node.</p>
          <note>
-            <p>AWS Cloud Map is not available in the eu-south-1 Region.</p>
+            <p>Cloud Map is not available in the eu-south-1 Region.</p>
          </note>")
 type awsCloudMapServiceDiscovery = {
   @ocaml.doc("<p>A string map that contains attributes with values that you can use to filter instances
          by any custom attribute that you specified when you registered the instance. Only instances
          that match all of the specified key/value pairs will be returned.</p>")
   attributes: option<awsCloudMapInstanceAttributes>,
-  @ocaml.doc("<p>The name of the AWS Cloud Map service to use.</p>") serviceName: awsCloudMapName,
-  @ocaml.doc("<p>The name of the AWS Cloud Map namespace to use.</p>")
-  namespaceName: awsCloudMapName,
+  @ocaml.doc("<p>The name of the Cloud Map service to use.</p>") serviceName: awsCloudMapName,
+  @ocaml.doc("<p>The name of the Cloud Map namespace to use.</p>") namespaceName: awsCloudMapName,
 }
 @ocaml.doc("<p>An object that represents a virtual service returned by a describe operation.</p>")
 type virtualServiceData = {
@@ -1420,7 +1539,7 @@ type tcpRoute = {
 }
 @ocaml.doc("<p>An object that represents the service discovery information for a virtual node.</p>")
 type serviceDiscovery = {
-  @ocaml.doc("<p>Specifies any AWS Cloud Map information for the virtual node.</p>")
+  @ocaml.doc("<p>Specifies any Cloud Map information for the virtual node.</p>")
   awsCloudMap: option<awsCloudMapServiceDiscovery>,
   @ocaml.doc("<p>Specifies the DNS information for the virtual node.</p>")
   dns: option<dnsServiceDiscovery>,
@@ -1455,27 +1574,39 @@ type listenerTlsValidationContext = {
 @ocaml.doc("<p>An object that represents the requirements for a route to match HTTP requests for a
          virtual router.</p>")
 type httpRouteMatch = {
-  @ocaml.doc("<p>An object that represents the client request headers to match on.</p>")
-  headers: option<httpRouteHeaders>,
-  @ocaml.doc("<p>The client request scheme to match on. Specify only one.</p>")
+  @ocaml.doc("<p>The client request headers to match on.</p>") headers: option<httpRouteHeaders>,
+  @ocaml.doc("<p>The client request scheme to match on. Specify only one. Applicable only for HTTP2
+         routes.</p>")
   scheme: option<httpScheme>,
   @ocaml.doc("<p>The client request method to match on. Specify only one.</p>")
   method: option<httpMethod>,
+  @ocaml.doc("<p>The client request query parameters to match on.</p>")
+  queryParameters: option<httpQueryParameters>,
+  @ocaml.doc("<p>The client request path to match on.</p>") path: option<httpPathMatch>,
   @ocaml.doc("<p>Specifies the path to match requests with. This parameter must always start with
             <code>/</code>, which by itself matches all requests to the virtual service name. You
          can also match for path-based routing of requests. For example, if your virtual service
          name is <code>my-service.local</code> and you want the route to match requests to
             <code>my-service.local/metrics</code>, your prefix should be
          <code>/metrics</code>.</p>")
-  prefix: baseString,
+  prefix: option<baseString>,
 }
-@ocaml.doc("<p>An object that represents an HTTP gateway route.</p>")
-type httpGatewayRoute = {
-  @ocaml.doc("<p>An object that represents the action to take if a match is determined.</p>")
-  action: httpGatewayRouteAction,
-  @ocaml.doc("<p>An object that represents the criteria for determining a request match.</p>")
-  @as("match")
-  match_: httpGatewayRouteMatch,
+@ocaml.doc("<p>An object that represents the criteria for determining a request match.</p>")
+type httpGatewayRouteMatch = {
+  @ocaml.doc("<p>The client request headers to match on.</p>")
+  headers: option<httpGatewayRouteHeaders>,
+  @ocaml.doc("<p>The host name to match on.</p>") hostname: option<gatewayRouteHostnameMatch>,
+  @ocaml.doc("<p>The method to match on.</p>") method: option<httpMethod>,
+  @ocaml.doc("<p>The query parameter to match on.</p>")
+  queryParameters: option<httpQueryParameters>,
+  @ocaml.doc("<p>The path to match on.</p>") path: option<httpPathMatch>,
+  @ocaml.doc("<p>Specifies the path to match requests with. This parameter must always start with
+            <code>/</code>, which by itself matches all requests to the virtual service name. You
+         can also match for path-based routing of requests. For example, if your virtual service
+         name is <code>my-service.local</code> and you want the route to match requests to
+            <code>my-service.local/metrics</code>, your prefix should be
+         <code>/metrics</code>.</p>")
+  prefix: option<baseString>,
 }
 @ocaml.doc("<p>An object that represents the criteria for determining a request match.</p>")
 type grpcRouteMatch = {
@@ -1487,13 +1618,14 @@ type grpcRouteMatch = {
   @ocaml.doc("<p>The fully qualified domain name for the service to match from the request.</p>")
   serviceName: option<serviceName>,
 }
-@ocaml.doc("<p>An object that represents a gRPC gateway route.</p>")
-type grpcGatewayRoute = {
-  @ocaml.doc("<p>An object that represents the action to take if a match is determined.</p>")
-  action: grpcGatewayRouteAction,
-  @ocaml.doc("<p>An object that represents the criteria for determining a request match.</p>")
-  @as("match")
-  match_: grpcGatewayRouteMatch,
+@ocaml.doc("<p>An object that represents the criteria for determining a request match.</p>")
+type grpcGatewayRouteMatch = {
+  @ocaml.doc("<p>The gateway route metadata to be matched on.</p>")
+  metadata: option<grpcGatewayRouteMetadataList>,
+  @ocaml.doc("<p>The gateway route host name to be matched on.</p>")
+  hostname: option<gatewayRouteHostnameMatch>,
+  @ocaml.doc("<p>The fully qualified domain name for the service to match from the request.</p>")
+  serviceName: option<serviceName>,
 }
 @ocaml.doc("<p>An object that represents a virtual router returned by a describe operation.</p>")
 type virtualRouterData = {
@@ -1590,6 +1722,14 @@ type httpRoute = {
   @as("match")
   match_: httpRouteMatch,
 }
+@ocaml.doc("<p>An object that represents an HTTP gateway route.</p>")
+type httpGatewayRoute = {
+  @ocaml.doc("<p>An object that represents the action to take if a match is determined.</p>")
+  action: httpGatewayRouteAction,
+  @ocaml.doc("<p>An object that represents the criteria for determining a request match.</p>")
+  @as("match")
+  match_: httpGatewayRouteMatch,
+}
 @ocaml.doc("<p>An object that represents a gRPC route type.</p>")
 type grpcRoute = {
   @ocaml.doc("<p>An object that represents types of timeouts. </p>") timeout: option<grpcTimeout>,
@@ -1601,15 +1741,13 @@ type grpcRoute = {
   @ocaml.doc("<p>An object that represents the action to take if a match is determined.</p>")
   action: grpcRouteAction,
 }
-@ocaml.doc("<p>An object that represents a gateway route specification. Specify one gateway route
-         type.</p>")
-type gatewayRouteSpec = {
-  @ocaml.doc("<p>An object that represents the specification of a gRPC gateway route.</p>")
-  grpcRoute: option<grpcGatewayRoute>,
-  @ocaml.doc("<p>An object that represents the specification of an HTTP/2 gateway route.</p>")
-  http2Route: option<httpGatewayRoute>,
-  @ocaml.doc("<p>An object that represents the specification of an HTTP gateway route.</p>")
-  httpRoute: option<httpGatewayRoute>,
+@ocaml.doc("<p>An object that represents a gRPC gateway route.</p>")
+type grpcGatewayRoute = {
+  @ocaml.doc("<p>An object that represents the action to take if a match is determined.</p>")
+  action: grpcGatewayRouteAction,
+  @ocaml.doc("<p>An object that represents the criteria for determining a request match.</p>")
+  @as("match")
+  match_: grpcGatewayRouteMatch,
 }
 @ocaml.doc(
   "<p>A reference to an object that represents a Transport Layer Security (TLS) client policy.</p>"
@@ -1625,12 +1763,12 @@ type clientPolicyTls = {
   )
   enforce: option<baseBoolean>,
 }
-@ocaml.doc("<p>AWS App Mesh is a service mesh based on the Envoy proxy that makes it easy to monitor and
+@ocaml.doc("<p>App Mesh is a service mesh based on the Envoy proxy that makes it easy to monitor and
          control microservices. App Mesh standardizes how your microservices communicate, giving you
          end-to-end visibility and helping to ensure high availability for your applications.</p>
          <p>App Mesh gives you consistent visibility and network traffic controls for every
-         microservice in an application. You can use App Mesh with AWS Fargate, Amazon ECS, Amazon EKS,
-         Kubernetes on AWS, and Amazon EC2.</p>
+         microservice in an application. You can use App Mesh with Amazon Web Services Fargate, Amazon ECS, Amazon EKS,
+         Kubernetes on Amazon Web Services, and Amazon EC2.</p>
          <note>
             <p>App Mesh supports microservice applications that use service discovery naming for their
             components. For more information about service discovery on Amazon ECS, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html\">Service Discovery</a> in the <i>Amazon Elastic Container Service Developer Guide</i>. Kubernetes
@@ -1688,16 +1826,17 @@ type listener = {
   tls: option<listenerTls>,
   @ocaml.doc("<p>The port mapping information for the listener.</p>") portMapping: portMapping,
 }
-@ocaml.doc("<p>An object that represents a gateway route returned by a describe operation.</p>")
-type gatewayRouteData = {
-  @ocaml.doc("<p>The status of the gateway route.</p>") status: gatewayRouteStatus,
-  metadata: resourceMetadata,
-  @ocaml.doc("<p>The specifications of the gateway route.</p>") spec: gatewayRouteSpec,
-  @ocaml.doc("<p>The virtual gateway that the gateway route is associated with.</p>")
-  virtualGatewayName: resourceName,
-  @ocaml.doc("<p>The name of the gateway route.</p>") gatewayRouteName: resourceName,
-  @ocaml.doc("<p>The name of the service mesh that the resource resides in. </p>")
-  meshName: resourceName,
+@ocaml.doc("<p>An object that represents a gateway route specification. Specify one gateway route
+         type.</p>")
+type gatewayRouteSpec = {
+  @ocaml.doc("<p>An object that represents the specification of a gRPC gateway route.</p>")
+  grpcRoute: option<grpcGatewayRoute>,
+  @ocaml.doc("<p>An object that represents the specification of an HTTP/2 gateway route.</p>")
+  http2Route: option<httpGatewayRoute>,
+  @ocaml.doc("<p>An object that represents the specification of an HTTP gateway route.</p>")
+  httpRoute: option<httpGatewayRoute>,
+  @ocaml.doc("<p>The ordering of the gateway routes spec.</p>")
+  priority: option<gatewayRoutePriority>,
 }
 @ocaml.doc("<p>An object that represents a client policy.</p>")
 type clientPolicy = {
@@ -1731,6 +1870,17 @@ type routeData = {
   meshName: resourceName,
 }
 type listeners = array<listener>
+@ocaml.doc("<p>An object that represents a gateway route returned by a describe operation.</p>")
+type gatewayRouteData = {
+  @ocaml.doc("<p>The status of the gateway route.</p>") status: gatewayRouteStatus,
+  metadata: resourceMetadata,
+  @ocaml.doc("<p>The specifications of the gateway route.</p>") spec: gatewayRouteSpec,
+  @ocaml.doc("<p>The virtual gateway that the gateway route is associated with.</p>")
+  virtualGatewayName: resourceName,
+  @ocaml.doc("<p>The name of the gateway route.</p>") gatewayRouteName: resourceName,
+  @ocaml.doc("<p>The name of the service mesh that the resource resides in. </p>")
+  meshName: resourceName,
+}
 @ocaml.doc("<p>An object that represents the default properties for a backend.</p>")
 type backendDefaults = {
   @ocaml.doc("<p>A reference to an object that represents a client policy.</p>")
@@ -1807,7 +1957,7 @@ module UntagResource = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the resource to delete tags from.</p>")
     resourceArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-appmesh") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1823,7 +1973,7 @@ module TagResource = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the resource to add tags to.</p>")
     resourceArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-appmesh") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -2432,6 +2582,39 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.</p>")
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module UpdateRoute = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's
+               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>")
+    meshOwner: option<accountId>,
+    @ocaml.doc("<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+request. Up to 36 letters, numbers, hyphens, and underscores are allowed.</p>")
+    clientToken: option<baseString>,
+    @ocaml.doc("<p>The new route specification to apply. This overwrites the existing data.</p>")
+    spec: routeSpec,
+    @ocaml.doc("<p>The name of the virtual router that the route is associated with.</p>")
+    virtualRouterName: resourceName,
+    @ocaml.doc("<p>The name of the service mesh that the route resides in.</p>")
+    meshName: resourceName,
+    @ocaml.doc("<p>The name of the route to update.</p>") routeName: resourceName,
+  }
+  type response = {
+    @ocaml.doc("<p>A full description of the route that was updated.</p>") route: routeData,
+  }
+  @module("@aws-sdk/client-appmesh") @new external new: request => t = "UpdateRouteCommand"
+  let make = (~spec, ~virtualRouterName, ~meshName, ~routeName, ~meshOwner=?, ~clientToken=?, ()) =>
+    new({
+      meshOwner: meshOwner,
+      clientToken: clientToken,
+      spec: spec,
+      virtualRouterName: virtualRouterName,
+      meshName: meshName,
+      routeName: routeName,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module UpdateGatewayRoute = {
   type t
   type request = {
@@ -2476,6 +2659,30 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.</p>")
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module DescribeRoute = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The name of the virtual router that the route is associated with.</p>")
+    virtualRouterName: resourceName,
+    @ocaml.doc("<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's
+               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>")
+    meshOwner: option<accountId>,
+    @ocaml.doc("<p>The name of the service mesh that the route resides in.</p>")
+    meshName: resourceName,
+    @ocaml.doc("<p>The name of the route to describe.</p>") routeName: resourceName,
+  }
+  type response = {@ocaml.doc("<p>The full description of your route.</p>") route: routeData}
+  @module("@aws-sdk/client-appmesh") @new external new: request => t = "DescribeRouteCommand"
+  let make = (~virtualRouterName, ~meshName, ~routeName, ~meshOwner=?, ()) =>
+    new({
+      virtualRouterName: virtualRouterName,
+      meshOwner: meshOwner,
+      meshName: meshName,
+      routeName: routeName,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module DescribeGatewayRoute = {
   type t
   type request = {
@@ -2502,6 +2709,30 @@ module DescribeGatewayRoute = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module DeleteRoute = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's
+               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>")
+    meshOwner: option<accountId>,
+    @ocaml.doc("<p>The name of the virtual router to delete the route in.</p>")
+    virtualRouterName: resourceName,
+    @ocaml.doc("<p>The name of the service mesh to delete the route in.</p>")
+    meshName: resourceName,
+    @ocaml.doc("<p>The name of the route to delete.</p>") routeName: resourceName,
+  }
+  type response = {@ocaml.doc("<p>The route that was deleted.</p>") route: routeData}
+  @module("@aws-sdk/client-appmesh") @new external new: request => t = "DeleteRouteCommand"
+  let make = (~virtualRouterName, ~meshName, ~routeName, ~meshOwner=?, ()) =>
+    new({
+      meshOwner: meshOwner,
+      virtualRouterName: virtualRouterName,
+      meshName: meshName,
+      routeName: routeName,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module DeleteGatewayRoute = {
   type t
   type request = {
@@ -2524,6 +2755,56 @@ module DeleteGatewayRoute = {
       virtualGatewayName: virtualGatewayName,
       meshName: meshName,
       gatewayRouteName: gatewayRouteName,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module CreateRoute = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then
+               the account that you specify must share the mesh with your account before you can create 
+             the resource in the service mesh. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>")
+    meshOwner: option<accountId>,
+    @ocaml.doc("<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+request. Up to 36 letters, numbers, hyphens, and underscores are allowed.</p>")
+    clientToken: option<baseString>,
+    @ocaml.doc("<p>Optional metadata that you can apply to the route to assist with categorization and
+         organization. Each tag consists of a key and an optional value, both of which you define.
+         Tag keys can have a maximum character length of 128 characters, and tag values can have
+            a maximum length of 256 characters.</p>")
+    tags: option<tagList_>,
+    @ocaml.doc("<p>The route specification to apply.</p>") spec: routeSpec,
+    @ocaml.doc("<p>The name of the virtual router in which to create the route. If the virtual router is in
+         a shared mesh, then you must be the owner of the virtual router resource.</p>")
+    virtualRouterName: resourceName,
+    @ocaml.doc("<p>The name of the service mesh to create the route in.</p>")
+    meshName: resourceName,
+    @ocaml.doc("<p>The name to use for the route.</p>") routeName: resourceName,
+  }
+  type response = {
+    @ocaml.doc("<p>The full description of your mesh following the create call.</p>")
+    route: routeData,
+  }
+  @module("@aws-sdk/client-appmesh") @new external new: request => t = "CreateRouteCommand"
+  let make = (
+    ~spec,
+    ~virtualRouterName,
+    ~meshName,
+    ~routeName,
+    ~meshOwner=?,
+    ~clientToken=?,
+    ~tags=?,
+    (),
+  ) =>
+    new({
+      meshOwner: meshOwner,
+      clientToken: clientToken,
+      tags: tags,
+      spec: spec,
+      virtualRouterName: virtualRouterName,
+      meshName: meshName,
+      routeName: routeName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
@@ -2575,137 +2856,6 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.</p>")
       virtualGatewayName: virtualGatewayName,
       meshName: meshName,
       gatewayRouteName: gatewayRouteName,
-    })
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
-module UpdateRoute = {
-  type t
-  type request = {
-    @ocaml.doc("<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's
-               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>")
-    meshOwner: option<accountId>,
-    @ocaml.doc("<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the
-request. Up to 36 letters, numbers, hyphens, and underscores are allowed.</p>")
-    clientToken: option<baseString>,
-    @ocaml.doc("<p>The new route specification to apply. This overwrites the existing data.</p>")
-    spec: routeSpec,
-    @ocaml.doc("<p>The name of the virtual router that the route is associated with.</p>")
-    virtualRouterName: resourceName,
-    @ocaml.doc("<p>The name of the service mesh that the route resides in.</p>")
-    meshName: resourceName,
-    @ocaml.doc("<p>The name of the route to update.</p>") routeName: resourceName,
-  }
-  type response = {
-    @ocaml.doc("<p>A full description of the route that was updated.</p>") route: routeData,
-  }
-  @module("@aws-sdk/client-appmesh") @new external new: request => t = "UpdateRouteCommand"
-  let make = (~spec, ~virtualRouterName, ~meshName, ~routeName, ~meshOwner=?, ~clientToken=?, ()) =>
-    new({
-      meshOwner: meshOwner,
-      clientToken: clientToken,
-      spec: spec,
-      virtualRouterName: virtualRouterName,
-      meshName: meshName,
-      routeName: routeName,
-    })
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
-module DescribeRoute = {
-  type t
-  type request = {
-    @ocaml.doc("<p>The name of the virtual router that the route is associated with.</p>")
-    virtualRouterName: resourceName,
-    @ocaml.doc("<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's
-               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>")
-    meshOwner: option<accountId>,
-    @ocaml.doc("<p>The name of the service mesh that the route resides in.</p>")
-    meshName: resourceName,
-    @ocaml.doc("<p>The name of the route to describe.</p>") routeName: resourceName,
-  }
-  type response = {@ocaml.doc("<p>The full description of your route.</p>") route: routeData}
-  @module("@aws-sdk/client-appmesh") @new external new: request => t = "DescribeRouteCommand"
-  let make = (~virtualRouterName, ~meshName, ~routeName, ~meshOwner=?, ()) =>
-    new({
-      virtualRouterName: virtualRouterName,
-      meshOwner: meshOwner,
-      meshName: meshName,
-      routeName: routeName,
-    })
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
-module DeleteRoute = {
-  type t
-  type request = {
-    @ocaml.doc("<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's
-               the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>")
-    meshOwner: option<accountId>,
-    @ocaml.doc("<p>The name of the virtual router to delete the route in.</p>")
-    virtualRouterName: resourceName,
-    @ocaml.doc("<p>The name of the service mesh to delete the route in.</p>")
-    meshName: resourceName,
-    @ocaml.doc("<p>The name of the route to delete.</p>") routeName: resourceName,
-  }
-  type response = {@ocaml.doc("<p>The route that was deleted.</p>") route: routeData}
-  @module("@aws-sdk/client-appmesh") @new external new: request => t = "DeleteRouteCommand"
-  let make = (~virtualRouterName, ~meshName, ~routeName, ~meshOwner=?, ()) =>
-    new({
-      meshOwner: meshOwner,
-      virtualRouterName: virtualRouterName,
-      meshName: meshName,
-      routeName: routeName,
-    })
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
-module CreateRoute = {
-  type t
-  type request = {
-    @ocaml.doc("<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then
-               the account that you specify must share the mesh with your account before you can create 
-             the resource in the service mesh. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>")
-    meshOwner: option<accountId>,
-    @ocaml.doc("<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the
-request. Up to 36 letters, numbers, hyphens, and underscores are allowed.</p>")
-    clientToken: option<baseString>,
-    @ocaml.doc("<p>Optional metadata that you can apply to the route to assist with categorization and
-         organization. Each tag consists of a key and an optional value, both of which you define.
-         Tag keys can have a maximum character length of 128 characters, and tag values can have
-            a maximum length of 256 characters.</p>")
-    tags: option<tagList_>,
-    @ocaml.doc("<p>The route specification to apply.</p>") spec: routeSpec,
-    @ocaml.doc("<p>The name of the virtual router in which to create the route. If the virtual router is in
-         a shared mesh, then you must be the owner of the virtual router resource.</p>")
-    virtualRouterName: resourceName,
-    @ocaml.doc("<p>The name of the service mesh to create the route in.</p>")
-    meshName: resourceName,
-    @ocaml.doc("<p>The name to use for the route.</p>") routeName: resourceName,
-  }
-  type response = {
-    @ocaml.doc("<p>The full description of your mesh following the create call.</p>")
-    route: routeData,
-  }
-  @module("@aws-sdk/client-appmesh") @new external new: request => t = "CreateRouteCommand"
-  let make = (
-    ~spec,
-    ~virtualRouterName,
-    ~meshName,
-    ~routeName,
-    ~meshOwner=?,
-    ~clientToken=?,
-    ~tags=?,
-    (),
-  ) =>
-    new({
-      meshOwner: meshOwner,
-      clientToken: clientToken,
-      tags: tags,
-      spec: spec,
-      virtualRouterName: virtualRouterName,
-      meshName: meshName,
-      routeName: routeName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
@@ -2876,6 +3026,7 @@ module DescribeVirtualNode = {
 
 module DeleteVirtualNode = {
   type t
+  @ocaml.doc("<p>Deletes a virtual node input.</p>")
   type request = {
     @ocaml.doc("<p>The AWS IAM account ID of the service mesh owner. If the account ID is not your own, then it's
                the ID of the account that shared the mesh with your account. For more information about mesh sharing, see <a href=\"https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html\">Working with shared meshes</a>.</p>")

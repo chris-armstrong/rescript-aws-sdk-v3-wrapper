@@ -32,6 +32,7 @@ type operationType = [
   | @as("DEREGISTER_INSTANCE") #DEREGISTER_INSTANCE
   | @as("REGISTER_INSTANCE") #REGISTER_INSTANCE
   | @as("UPDATE_SERVICE") #UPDATE_SERVICE
+  | @as("UPDATE_NAMESPACE") #UPDATE_NAMESPACE
   | @as("DELETE_NAMESPACE") #DELETE_NAMESPACE
   | @as("CREATE_NAMESPACE") #CREATE_NAMESPACE
 ]
@@ -100,6 +101,22 @@ type tag = {
   value: tagValue,
   @ocaml.doc("<p>The key identifier, or name, of the tag.</p>") @as("Key") key: tagKey,
 }
+@ocaml.doc("<p>Updated Start of Authority (SOA)
+   properties for a public or private DNS namespace.</p>")
+type soachange = {
+  @ocaml.doc("<p>The updated time to live (TTL) for
+   purposes of negative caching.</p>")
+  @as("TTL")
+  ttl: recordTTL,
+}
+@ocaml.doc("<p>Start of Authority (SOA) properties for a
+   public or private DNS namespace.</p>")
+type soa = {
+  @ocaml.doc("<p>The time to live (TTL) for purposes of
+   negative caching.</p>")
+  @as("TTL")
+  ttl: recordTTL,
+}
 type operationTargetsMap = Js.Dict.t<resourceId>
 @ocaml.doc("<p>A complex type that contains information about an operation that matches the criteria that you specified in a
     <a href=\"https://docs.aws.amazon.com/cloud-map/latest/api/API_ListOperations.html\">ListOperations</a>
@@ -114,7 +131,7 @@ type operationSummary = {
             </li>
             <li>
                <p>
-                  <b>PENDING</b>: AWS Cloud Map is performing the operation.</p>
+                  <b>PENDING</b>: Cloud Map is performing the operation.</p>
             </li>
             <li>
                <p>
@@ -137,6 +154,14 @@ type httpProperties = {
   @ocaml.doc("<p>The name of an HTTP namespace.</p>") @as("HttpName")
   httpName: option<namespaceName>,
 }
+@ocaml.doc("<p>Updated properties for the HTTP
+   namespace.</p>")
+type httpNamespaceChange = {
+  @ocaml.doc("<p>An updated description for the HTTP
+   namespace.</p>")
+  @as("Description")
+  description: resourceDescription,
+}
 @ocaml.doc("<p>A complex type that contains information about an optional custom health check. A custom health check, which
    requires that you use a third-party health checker to evaluate the health of your resources, is useful in the
    following circumstances:</p>
@@ -155,7 +180,7 @@ type httpProperties = {
      <code>HealthCheckConfig</code> but not both.</p>
          </important>
          <p>To change the status of a custom health check, submit an <code>UpdateInstanceCustomHealthStatus</code> request.
-   AWS Cloud Map doesn't monitor the status of the resource, it just keeps a record of the status specified in the most recent
+   Cloud Map doesn't monitor the status of the resource, it just keeps a record of the status specified in the most recent
     <code>UpdateInstanceCustomHealthStatus</code> request.</p>
          <p>Here's how custom health checks work:</p>
          <ol>
@@ -168,7 +193,7 @@ type httpProperties = {
             <li>
                <p>You configure a third-party health checker to monitor the resource that's associated with the new instance. </p>
                <note>
-                  <p>AWS Cloud Map doesn't check the health of the resource directly. </p>
+                  <p>Cloud Map doesn't check the health of the resource directly. </p>
                </note>
             </li>
             <li>
@@ -178,45 +203,45 @@ type httpProperties = {
                <p>Your application submits an <code>UpdateInstanceCustomHealthStatus</code> request.</p>
             </li>
             <li>
-               <p>AWS Cloud Map waits for 30 seconds.</p>
+               <p>Cloud Map waits for 30 seconds.</p>
             </li>
             <li>
                <p>If another <code>UpdateInstanceCustomHealthStatus</code> request doesn't arrive during that time to change the
-     status back to healthy, AWS Cloud Map stops routing traffic to the resource.</p>
+     status back to healthy, Cloud Map stops routing traffic to the resource.</p>
             </li>
          </ol>")
 type healthCheckCustomConfig = {
   @ocaml.doc("<important>
-            <p>This parameter is no longer supported and is always set to 1. AWS Cloud Map waits for approximately 30 seconds after
+            <p>This parameter is no longer supported and is always set to 1. Cloud Map waits for approximately 30 seconds after
     receiving an <code>UpdateInstanceCustomHealthStatus</code> request before changing the status of the service
     instance.</p>
          </important>
-         <p>The number of 30-second intervals that you want AWS Cloud Map to wait after receiving an
+         <p>The number of 30-second intervals that you want Cloud Map to wait after receiving an
     <code>UpdateInstanceCustomHealthStatus</code> request before it changes the health status of a service
    instance.</p>
          <p>Sending a second or subsequent <code>UpdateInstanceCustomHealthStatus</code> request with the same value before
-   30 seconds has passed doesn't accelerate the change. AWS Cloud Map still waits <code>30</code> seconds after the first
+   30 seconds has passed doesn't accelerate the change. Cloud Map still waits <code>30</code> seconds after the first
    request to make the change.</p>")
   @as("FailureThreshold")
   failureThreshold: option<failureThreshold>,
 }
 @ocaml.doc("<p>
             <i>Public DNS and HTTP namespaces only.</i> A complex type that contains settings for an optional
-   health check. If you specify settings for a health check, AWS Cloud Map associates the health check with the records
+   health check. If you specify settings for a health check, Cloud Map associates the health check with the records
    that you specify in <code>DnsConfig</code>.</p>
          <important>
             <p>If you specify a health check configuration, you can specify either <code>HealthCheckCustomConfig</code> or
      <code>HealthCheckConfig</code> but not both.</p>
          </important>
-         <p>Health checks are basic Route 53 health checks that monitor an AWS endpoint. For information about pricing for
-   health checks, see <a href=\"http://aws.amazon.com/route53/pricing/\">Amazon Route 53 Pricing</a>.</p>
+         <p>Health checks are basic Route 53 health checks that monitor an Amazon Web Services endpoint. For information about
+   pricing for health checks, see <a href=\"http://aws.amazon.com/route53/pricing/\">Amazon Route 53 Pricing</a>.</p>
          <p>Note the following about configuring health checks.</p>
          <dl>
             <dt>A and AAAA records</dt>
             <dd>
                <p>If <code>DnsConfig</code> includes configurations for both <code>A</code> and <code>AAAA</code> records,
-      AWS Cloud Map creates a health check that uses the IPv4 address to check the health of the resource. If the endpoint
-      tthat's specified by the IPv4 address is unhealthy, Route 53 considers both the <code>A</code> and <code>AAAA</code>
+      Cloud Map creates a health check that uses the IPv4 address to check the health of the resource. If the endpoint
+      tthat's specified by the IPv4 address is unhealthy, Route 53 considers both the <code>A</code> and <code>AAAA</code>
       records to be unhealthy. </p>
             </dd>
             <dt>CNAME records</dt>
@@ -227,53 +252,53 @@ type healthCheckCustomConfig = {
             </dd>
             <dt>Request interval</dt>
             <dd>
-               <p>A Route 53 health checker in each health-checking AWS Region sends a health check request to an endpoint every
+               <p>A Route 53 health checker in each health-checking Amazon Web Services Region sends a health check request to an endpoint every
       30 seconds. On average, your endpoint receives a health check request about every two seconds. However, health
       checkers don't coordinate with one another. Therefore, you might sometimes see several requests in one second
       that's followed by a few seconds with no health checks at all.</p>
             </dd>
             <dt>Health checking regions</dt>
             <dd>
-               <p>Health checkers perform checks from all Route 53 health-checking Regions. For a list of the current Regions, see
+               <p>Health checkers perform checks from all Route 53 health-checking Regions. For a list of the current Regions, see
        <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_HealthCheckConfig.html#Route53-Type-HealthCheckConfig-Regions\">Regions</a>.</p>
             </dd>
             <dt>Alias records</dt>
             <dd>
-               <p>When you register an instance, if you include the <code>AWS_ALIAS_DNS_NAME</code> attribute, AWS Cloud Map
-      creates a Route 53 alias record. Note the following:</p>
+               <p>When you register an instance, if you include the <code>AWS_ALIAS_DNS_NAME</code> attribute, Cloud Map
+      creates a Route 53 alias record. Note the following:</p>
                <ul>
                   <li>
-                     <p>Route 53 automatically sets <code>EvaluateTargetHealth</code> to true for alias records. When
-         <code>EvaluateTargetHealth</code> is true, the alias record inherits the health of the referenced AWS
+                     <p>Route 53 automatically sets <code>EvaluateTargetHealth</code> to true for alias records. When
+         <code>EvaluateTargetHealth</code> is true, the alias record inherits the health of the referenced Amazon Web Services
         resource. such as an ELB load balancer. For more information, see <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_AliasTarget.html#Route53-Type-AliasTarget-EvaluateTargetHealth\">EvaluateTargetHealth</a>.</p>
                   </li>
                   <li>
                      <p>If you include <code>HealthCheckConfig</code> and then use the service to register an instance that creates
-        an alias record, Route 53 doesn't create the health check.</p>
+        an alias record, Route 53 doesn't create the health check.</p>
                   </li>
                </ul>
             </dd>
             <dt>Charges for health checks</dt>
             <dd>
-               <p>Health checks are basic Route 53 health checks that monitor an AWS endpoint. For information about pricing for
-      health checks, see <a href=\"http://aws.amazon.com/route53/pricing/\">Amazon Route 53 Pricing</a>.</p>
+               <p>Health checks are basic Route 53 health checks that monitor an Amazon Web Services endpoint. For information about pricing for
+      health checks, see <a href=\"http://aws.amazon.com/route53/pricing/\">Amazon Route 53 Pricing</a>.</p>
             </dd>
          </dl>")
 type healthCheckConfig = {
-  @ocaml.doc("<p>The number of consecutive health checks that an endpoint must pass or fail for Route 53 to change the current
-   status of the endpoint from unhealthy to healthy or the other way around. For more information, see <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-determining-health-of-endpoints.html\">How Route 53
-    Determines Whether an Endpoint Is Healthy</a> in the <i>Route 53 Developer Guide</i>.</p>")
+  @ocaml.doc("<p>The number of consecutive health checks that an endpoint must pass or fail for Route 53 to change the current
+   status of the endpoint from unhealthy to healthy or the other way around. For more information, see <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-determining-health-of-endpoints.html\">How Route 53
+    Determines Whether an Endpoint Is Healthy</a> in the <i>Route 53 Developer Guide</i>.</p>")
   @as("FailureThreshold")
   failureThreshold: option<failureThreshold>,
-  @ocaml.doc("<p>The path that you want Route 53 to request when performing health checks. The path can be any value that your
+  @ocaml.doc("<p>The path that you want Route 53 to request when performing health checks. The path can be any value that your
    endpoint returns an HTTP status code of a 2xx or 3xx format for when the endpoint is healthy. An example file is
-    <code>/docs/route53-health-check.html</code>. Route 53 automatically adds the DNS name for the service. If you don't
+    <code>/docs/route53-health-check.html</code>. Route 53 automatically adds the DNS name for the service. If you don't
    specify a value for <code>ResourcePath</code>, the default value is <code>/</code>.</p>
          <p>If you specify <code>TCP</code> for <code>Type</code>, you must <i>not</i> specify a value for
     <code>ResourcePath</code>.</p>")
   @as("ResourcePath")
   resourcePath: option<resourcePath>,
-  @ocaml.doc("<p>The type of health check that you want to create, which indicates how Route 53 determines whether an endpoint is
+  @ocaml.doc("<p>The type of health check that you want to create, which indicates how Route 53 determines whether an endpoint is
    healthy.</p>
          <important>
             <p>You can't change the value of <code>Type</code> after you create a health check.</p>
@@ -282,12 +307,12 @@ type healthCheckConfig = {
          <ul>
             <li>
                <p>
-                  <b>HTTP</b>: Route 53 tries to establish a TCP connection. If successful, Route 53 submits
+                  <b>HTTP</b>: Route 53 tries to establish a TCP connection. If successful, Route 53 submits
      an HTTP request and waits for an HTTP status code of 200 or greater and less than 400.</p>
             </li>
             <li>
                <p>
-                  <b>HTTPS</b>: Route 53 tries to establish a TCP connection. If successful, Route 53
+                  <b>HTTPS</b>: Route 53 tries to establish a TCP connection. If successful, Route 53
      submits an HTTPS request and waits for an HTTP status code of 200 or greater and less than 400.</p>
                <important>
                   <p>If you specify HTTPS for the value of <code>Type</code>, the endpoint must support TLS v1.0 or later.</p>
@@ -295,30 +320,30 @@ type healthCheckConfig = {
             </li>
             <li>
                <p>
-                  <b>TCP</b>: Route 53 tries to establish a TCP connection.</p>
+                  <b>TCP</b>: Route 53 tries to establish a TCP connection.</p>
                <p>If you specify <code>TCP</code> for <code>Type</code>, don't specify a value for
      <code>ResourcePath</code>.</p>
             </li>
          </ul>
-         <p>For more information, see <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-determining-health-of-endpoints.html\">How Route 53 Determines Whether
-    an Endpoint Is Healthy</a> in the <i>Route 53 Developer Guide</i>.</p>")
+         <p>For more information, see <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-determining-health-of-endpoints.html\">How Route 53 Determines Whether
+    an Endpoint Is Healthy</a> in the <i>Route 53 Developer Guide</i>.</p>")
   @as("Type")
   type_: healthCheckType,
 }
 type filterValues = array<filterValue>
-@ocaml.doc("<p>A complex type that contains information about the Route 53 DNS records that you want AWS Cloud Map to create when you
+@ocaml.doc("<p>A complex type that contains information about the Route 53 DNS records that you want Cloud Map to create when you
    register an instance.</p>")
 type dnsRecord = {
   @ocaml.doc("<p>The amount of time, in seconds, that you want DNS resolvers to cache the settings for this record.</p>
          <note>
-            <p>Alias records don't include a TTL because Route 53 uses the TTL for the AWS resource that an alias record routes
+            <p>Alias records don't include a TTL because Route 53 uses the TTL for the Amazon Web Services resource that an alias record routes
     traffic to. If you include the <code>AWS_ALIAS_DNS_NAME</code> attribute when you submit a <a href=\"https://docs.aws.amazon.com/cloud-map/latest/api/API_RegisterInstance.html\">RegisterInstance</a> request, the
      <code>TTL</code> value is ignored. Always specify a TTL for the service; you can use a service to register
     instances that create either alias or non-alias records.</p>
          </note>")
   @as("TTL")
   ttl: recordTTL,
-  @ocaml.doc("<p>The type of the resource, which indicates the type of value that Route 53 returns in response to DNS queries. You
+  @ocaml.doc("<p>The type of the resource, which indicates the type of value that Route 53 returns in response to DNS queries. You
    can specify values for <code>Type</code> in the following combinations:</p>
          <ul>
             <li>
@@ -359,7 +384,7 @@ type dnsRecord = {
                </p>
             </li>
          </ul>
-         <p>If you want AWS Cloud Map to create a Route 53 alias record when you register an instance, specify <code>A</code> or
+         <p>If you want Cloud Map to create a Route 53 alias record when you register an instance, specify <code>A</code> or
     <code>AAAA</code> for <code>Type</code>.</p>
          <p>You specify other settings, such as the IP address for <code>A</code> and <code>AAAA</code> records, when you
    register an instance. For more information, see <a href=\"https://docs.aws.amazon.com/cloud-map/latest/api/API_RegisterInstance.html\">RegisterInstance</a>.</p>
@@ -367,16 +392,16 @@ type dnsRecord = {
          <dl>
             <dt>A</dt>
             <dd>
-               <p>Route 53 returns the IP address of the resource in IPv4 format, such as 192.0.2.44.</p>
+               <p>Route 53 returns the IP address of the resource in IPv4 format, such as 192.0.2.44.</p>
             </dd>
             <dt>AAAA</dt>
             <dd>
-               <p>Route 53 returns the IP address of the resource in IPv6 format, such as
+               <p>Route 53 returns the IP address of the resource in IPv6 format, such as
       2001:0db8:85a3:0000:0000:abcd:0001:2345.</p>
             </dd>
             <dt>CNAME</dt>
             <dd>
-               <p>Route 53 returns the domain name of the resource, such as www.example.com. Note the following:</p>
+               <p>Route 53 returns the domain name of the resource, such as www.example.com. Note the following:</p>
                <ul>
                   <li>
                      <p>You specify the domain name that you want to route traffic to when you register an instance. For more
@@ -394,7 +419,7 @@ type dnsRecord = {
             </dd>
             <dt>SRV</dt>
             <dd>
-               <p>Route 53 returns the value for an <code>SRV</code> record. The value for an <code>SRV</code> record uses the
+               <p>Route 53 returns the value for an <code>SRV</code> record. The value for an <code>SRV</code> record uses the
       following values:</p>
                <p>
                   <code>priority weight port service-hostname</code>
@@ -407,7 +432,7 @@ type dnsRecord = {
                   </li>
                   <li>
                      <p>The value of <code>port</code> comes from the value that you specify for the <code>AWS_INSTANCE_PORT</code>
-        attribute when you submit a <a href=\"https://docs.aws.amazon.com/cloud-map/latest/api/API_RegisterInstance.html\">RegisterInstance</a> request. </p>
+        attribute when you submit a <a href=\"https://docs.aws.amazon.com/cloud-map/latest/api/API_RegisterInstance.html\">RegisterInstance</a> request.</p>
                   </li>
                   <li>
                      <p>The value of <code>service-hostname</code> is a concatenation of the following values:</p>
@@ -434,7 +459,7 @@ type dnsRecord = {
                <ul>
                   <li>
                      <p>If you specify values for <code>AWS_INSTANCE_IPV4</code>, <code>AWS_INSTANCE_IPV6</code>, or both in the
-         <code>RegisterInstance</code> request, AWS Cloud Map automatically creates <code>A</code> and/or <code>AAAA</code>
+         <code>RegisterInstance</code> request, Cloud Map automatically creates <code>A</code> and/or <code>AAAA</code>
         records that have the same name as the value of <code>service-hostname</code> in the <code>SRV</code> record.
         You can ignore these records.</p>
                   </li>
@@ -447,15 +472,6 @@ type dnsRecord = {
          </dl>")
   @as("Type")
   type_: recordType,
-}
-@ocaml.doc("<p>A complex type that contains the ID for the Route 53 hosted zone that AWS Cloud Map creates when you create a
-   namespace.</p>")
-type dnsProperties = {
-  @ocaml.doc(
-    "<p>The ID for the Route 53 hosted zone that AWS Cloud Map creates when you create a namespace.</p>"
-  )
-  @as("HostedZoneId")
-  hostedZoneId: option<resourceId>,
 }
 type attributes = Js.Dict.t<attrValue>
 type tagList_ = array<tag>
@@ -488,6 +504,38 @@ type serviceFilter = {
   @as("Values")
   values: filterValues,
   @ocaml.doc("<p>Specify <code>NAMESPACE_ID</code>.</p>") @as("Name") name: serviceFilterName,
+}
+@ocaml.doc("<p>Updated DNS properties for the public DNS
+   namespace.</p>")
+type publicDnsPropertiesMutableChange = {
+  @ocaml.doc("<p>Updated fields for the Start of Authority
+   (SOA) record for the hosted zone for the public DNS namespace.</p>")
+  @as("SOA")
+  soa: soachange,
+}
+@ocaml.doc("<p>DNS properties for the public DNS
+   namespace.</p>")
+type publicDnsPropertiesMutable = {
+  @ocaml.doc("<p>Start of Authority (SOA) record for the
+   hosted zone for the public DNS namespace.</p>")
+  @as("SOA")
+  soa: soa,
+}
+@ocaml.doc("<p>Updated DNS properties for the private
+   DNS namespace.</p>")
+type privateDnsPropertiesMutableChange = {
+  @ocaml.doc("<p>Updated fields for the Start of Authority
+   (SOA) record for the hosted zone for the private DNS namespace.</p>")
+  @as("SOA")
+  soa: soachange,
+}
+@ocaml.doc("<p>DNS properties for the private DNS
+   namespace.</p>")
+type privateDnsPropertiesMutable = {
+  @ocaml.doc("<p>Fields for the Start of Authority (SOA)
+   record for the hosted zone for the private DNS namespace.</p>")
+  @as("SOA")
+  soa: soa,
 }
 type operationSummaryList = array<operationSummary>
 @ocaml.doc("<p>A complex type that lets you select the operations that you want to list.</p>")
@@ -656,7 +704,7 @@ type operation = {
             </dd>
             <dt>PENDING</dt>
             <dd>
-               <p>AWS Cloud Map is performing the operation.</p>
+               <p>Cloud Map is performing the operation.</p>
             </dd>
             <dt>SUCCESS</dt>
             <dd>
@@ -674,16 +722,6 @@ type operation = {
   type_: option<operationType>,
   @ocaml.doc("<p>The ID of the operation that you want to get information about.</p>") @as("Id")
   id: option<operationId>,
-}
-@ocaml.doc("<p>A complex type that contains information that's specific to the namespace type.</p>")
-type namespaceProperties = {
-  @ocaml.doc("<p>A complex type that contains the name of an HTTP namespace.</p>")
-  @as("HttpProperties")
-  httpProperties: option<httpProperties>,
-  @ocaml.doc("<p>A complex type that contains the ID for the Route 53 hosted zone that AWS Cloud Map creates when you create a
-   namespace.</p>")
-  @as("DnsProperties")
-  dnsProperties: option<dnsProperties>,
 }
 @ocaml.doc("<p>A complex type that identifies the namespaces that you want to list. You can choose to list public or private
    namespaces.</p>")
@@ -749,23 +787,23 @@ type instanceSummary = {
             </dd>
             <dt>AWS_INSTANCE_CNAME</dt>
             <dd>
-               <p>For a <code>CNAME</code> record, the domain name that Route 53 returns in response to DNS queries (for example,
+               <p>For a <code>CNAME</code> record, the domain name that Route 53 returns in response to DNS queries (for example,
        <code>example.com</code>).</p>
             </dd>
             <dt>AWS_INSTANCE_IPV4</dt>
             <dd>
-               <p>For an <code>A</code> record, the IPv4 address that Route 53 returns in response to DNS queries (for example,
+               <p>For an <code>A</code> record, the IPv4 address that Route 53 returns in response to DNS queries (for example,
        <code>192.0.2.44</code>).</p>
             </dd>
             <dt>AWS_INSTANCE_IPV6</dt>
             <dd>
-               <p>For an <code>AAAA</code> record, the IPv6 address that Route 53 returns in response to DNS queries (for example,
+               <p>For an <code>AAAA</code> record, the IPv6 address that Route 53 returns in response to DNS queries (for example,
        <code>2001:0db8:85a3:0000:0000:abcd:0001:2345</code>).</p>
             </dd>
             <dt>AWS_INSTANCE_PORT</dt>
             <dd>
-               <p>For an <code>SRV</code> record, the value that Route 53 returns for the port. In addition, if the service
-      includes <code>HealthCheckConfig</code>, the port on the endpoint that Route 53 sends requests to.</p>
+               <p>For an <code>SRV</code> record, the value that Route 53 returns for the port. In addition, if the service
+      includes <code>HealthCheckConfig</code>, the port on the endpoint that Route 53 sends requests to.</p>
             </dd>
          </dl>")
   @as("Attributes")
@@ -774,7 +812,7 @@ type instanceSummary = {
   @as("Id")
   id: option<resourceId>,
 }
-@ocaml.doc("<p>A complex type that contains information about an instance that AWS Cloud Map creates when you submit a
+@ocaml.doc("<p>A complex type that contains information about an instance that Cloud Map creates when you submit a
     <code>RegisterInstance</code> request.</p>")
 type instance = {
   @ocaml.doc("<p>A string map that contains the following information for the service that you specify in
@@ -791,8 +829,8 @@ type instance = {
          <dl>
             <dt>AWS_ALIAS_DNS_NAME</dt>
             <dd>
-               <p>If you want AWS Cloud Map to create a Route 53 alias record that routes traffic to an Elastic Load Balancing load balancer, specify
-      the DNS name that's associated with the load balancer. For information about how to get the DNS name, see <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_AliasTarget.html#Route53-Type-AliasTarget-DNSName\">AliasTarget->DNSName</a> in the <i>Route 53 API Reference</i>.</p>
+               <p>If you want Cloud Map to create a Route 53 alias record that routes traffic to an Elastic Load Balancing load balancer, specify
+      the DNS name that's associated with the load balancer. For information about how to get the DNS name, see <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_AliasTarget.html#Route53-Type-AliasTarget-DNSName\">AliasTarget->DNSName</a> in the <i>Route 53 API Reference</i>.</p>
                <p>Note the following:</p>
                <ul>
                   <li>
@@ -805,10 +843,10 @@ type instance = {
                   </li>
                   <li>
                      <p>If the service that's specified by <code>ServiceId</code> includes <code>HealthCheckConfig</code> settings,
-        AWS Cloud Map creates the health check, but it won't associate the health check with the alias record.</p>
+        Cloud Map creates the health check, but it won't associate the health check with the alias record.</p>
                   </li>
                   <li>
-                     <p>Auto naming currently doesn't support creating alias records that route traffic to AWS resources other
+                     <p>Auto naming currently doesn't support creating alias records that route traffic to Amazon Web Services resources other
         than ELB load balancers.</p>
                   </li>
                   <li>
@@ -832,14 +870,14 @@ type instance = {
             </dd>
             <dt>AWS_INSTANCE_CNAME</dt>
             <dd>
-               <p>If the service configuration includes a <code>CNAME</code> record, the domain name that you want Route 53 to
+               <p>If the service configuration includes a <code>CNAME</code> record, the domain name that you want Route 53 to
       return in response to DNS queries (for example, <code>example.com</code>).</p>
                <p>This value is required if the service specified by <code>ServiceId</code> includes settings for an
        <code>CNAME</code> record.</p>
             </dd>
             <dt>AWS_INSTANCE_IPV4</dt>
             <dd>
-               <p>If the service configuration includes an <code>A</code> record, the IPv4 address that you want Route 53 to
+               <p>If the service configuration includes an <code>A</code> record, the IPv4 address that you want Route 53 to
       return in response to DNS queries (for example, <code>192.0.2.44</code>).</p>
                <p>This value is required if the service specified by <code>ServiceId</code> includes settings for an
        <code>A</code> record. If the service includes settings for an <code>SRV</code> record, you must specify a value
@@ -847,7 +885,7 @@ type instance = {
             </dd>
             <dt>AWS_INSTANCE_IPV6</dt>
             <dd>
-               <p>If the service configuration includes an <code>AAAA</code> record, the IPv6 address that you want Route 53 to
+               <p>If the service configuration includes an <code>AAAA</code> record, the IPv6 address that you want Route 53 to
       return in response to DNS queries (for example, <code>2001:0db8:85a3:0000:0000:abcd:0001:2345</code>).</p>
                <p>This value is required if the service specified by <code>ServiceId</code> includes settings for an
        <code>AAAA</code> record. If the service includes settings for an <code>SRV</code> record, you must specify a
@@ -855,11 +893,11 @@ type instance = {
             </dd>
             <dt>AWS_INSTANCE_PORT</dt>
             <dd>
-               <p>If the service includes an <code>SRV</code> record, the value that you want Route 53 to return for the
+               <p>If the service includes an <code>SRV</code> record, the value that you want Route 53 to return for the
       port.</p>
-               <p>If the service includes <code>HealthCheckConfig</code>, the port on the endpoint that you want Route 53 to send
+               <p>If the service includes <code>HealthCheckConfig</code>, the port on the endpoint that you want Route 53 to send
       requests to. </p>
-               <p>This value is required if you specified settings for an <code>SRV</code> record or a Route 53 health check when
+               <p>This value is required if you specified settings for an <code>SRV</code> record or a Route 53 health check when
       you created the service.</p>
             </dd>
          </dl>")
@@ -887,8 +925,8 @@ type instance = {
      the same service. </p>
             </li>
             <li>
-               <p>If you specify an existing <code>InstanceId</code> and <code>ServiceId</code>, AWS Cloud Map updates the existing
-     DNS records. If there's also an existing health check, AWS Cloud Map deletes the old health check and creates a new
+               <p>If you specify an existing <code>InstanceId</code> and <code>ServiceId</code>, Cloud Map updates the existing
+     DNS records. If there's also an existing health check, Cloud Map deletes the old health check and creates a new
      one. </p>
                <note>
                   <p>The health check isn't deleted immediately, so it will still appear for a while if you submit a
@@ -931,101 +969,80 @@ type httpInstanceSummary = {
   instanceId: option<resourceId>,
 }
 type dnsRecordList = array<dnsRecord>
-type serviceFilters = array<serviceFilter>
-type operationFilters = array<operationFilter>
-@ocaml.doc("<p>A complex type that contains information about a namespace.</p>")
-type namespaceSummary = {
-  @ocaml.doc("<p>The date and time that the namespace was created.</p>") @as("CreateDate")
-  createDate: option<timestamp_>,
-  @ocaml.doc("<p>The properties of the namespace.</p>") @as("Properties")
-  properties: option<namespaceProperties>,
-  @ocaml.doc("<p>The number of services that were created using the namespace.</p>")
-  @as("ServiceCount")
-  serviceCount: option<resourceCount>,
-  @ocaml.doc("<p>A description for the namespace.</p>") @as("Description")
-  description: option<resourceDescription>,
-  @ocaml.doc("<p>The type of the namespace, either public or private.</p>") @as("Type")
-  type_: option<namespaceType>,
-  @ocaml.doc("<p>The name of the namespace. When you create a namespace, AWS Cloud Map automatically creates a Route 53 hosted zone
-   that has the same name as the namespace.</p>")
-  @as("Name")
-  name: option<namespaceName>,
+@ocaml.doc("<p>A complex type that contains the ID for the Route 53 hosted zone that Cloud Map creates when you create a
+   namespace.</p>")
+type dnsProperties = {
+  @ocaml.doc("<p>Start of Authority (SOA) record for the hosted zone.</p>") @as("SOA")
+  soa: option<soa>,
   @ocaml.doc(
-    "<p>The Amazon Resource Name (ARN) that AWS Cloud Map assigns to the namespace when you create it.</p>"
+    "<p>The ID for the Route 53 hosted zone that Cloud Map creates when you create a namespace.</p>"
   )
-  @as("Arn")
-  arn: option<arn>,
-  @ocaml.doc("<p>The ID of the namespace.</p>") @as("Id") id: option<resourceId>,
+  @as("HostedZoneId")
+  hostedZoneId: option<resourceId>,
+}
+type serviceFilters = array<serviceFilter>
+@ocaml.doc("<p>Updated properties for the public DNS
+   namespace.</p>")
+type publicDnsNamespacePropertiesChange = {
+  @ocaml.doc("<p>Updated DNS properties for the hosted
+   zone for the public DNS namespace.</p>")
+  @as("DnsProperties")
+  dnsProperties: publicDnsPropertiesMutableChange,
+}
+@ocaml.doc("<p>DNS properties for the public DNS
+   namespace.</p>")
+type publicDnsNamespaceProperties = {
+  @ocaml.doc("<p>DNS properties for the public DNS
+   namespace.</p>")
+  @as("DnsProperties")
+  dnsProperties: publicDnsPropertiesMutable,
+}
+@ocaml.doc("<p>Updated properties for the private DNS
+   namespace.</p>")
+type privateDnsNamespacePropertiesChange = {
+  @ocaml.doc("<p>Updated DNS properties for the private
+   DNS namespace.</p>")
+  @as("DnsProperties")
+  dnsProperties: privateDnsPropertiesMutableChange,
+}
+@ocaml.doc("<p>DNS properties for the private DNS
+   namespace.</p>")
+type privateDnsNamespaceProperties = {
+  @ocaml.doc("<p>DNS properties for the private DNS
+   namespace.</p>")
+  @as("DnsProperties")
+  dnsProperties: privateDnsPropertiesMutable,
+}
+type operationFilters = array<operationFilter>
+@ocaml.doc("<p>A complex type that contains information that's specific to the namespace type.</p>")
+type namespaceProperties = {
+  @ocaml.doc("<p>A complex type that contains the name of an HTTP namespace.</p>")
+  @as("HttpProperties")
+  httpProperties: option<httpProperties>,
+  @ocaml.doc("<p>A complex type that contains the ID for the Route 53 hosted zone that Cloud Map creates when you create a
+   namespace.</p>")
+  @as("DnsProperties")
+  dnsProperties: option<dnsProperties>,
 }
 type namespaceFilters = array<namespaceFilter>
-@ocaml.doc("<p>A complex type that contains information about a specified namespace.</p>")
-type namespace = {
-  @ocaml.doc("<p>A unique string that identifies the request and that allows failed requests to be retried without the risk of
-   running an operation twice. </p>")
-  @as("CreatorRequestId")
-  creatorRequestId: option<resourceId>,
-  @ocaml.doc("<p>The date that the namespace was created, in Unix date/time format and Coordinated Universal Time (UTC). The
-   value of <code>CreateDate</code> is accurate to milliseconds. For example, the value <code>1516925490.087</code>
-   represents Friday, January 26, 2018 12:11:30.087 AM.</p>")
-  @as("CreateDate")
-  createDate: option<timestamp_>,
-  @ocaml.doc(
-    "<p>A complex type that contains information that's specific to the type of the namespace.</p>"
-  )
-  @as("Properties")
-  properties: option<namespaceProperties>,
-  @ocaml.doc("<p>The number of services that are associated with the namespace.</p>")
-  @as("ServiceCount")
-  serviceCount: option<resourceCount>,
-  @ocaml.doc("<p>The description that you specify for the namespace when you create it.</p>")
-  @as("Description")
-  description: option<resourceDescription>,
-  @ocaml.doc("<p>The type of the namespace. The methods for discovering instances depends on the value that you specify:</p>
-         <dl>
-            <dt>HTTP</dt>
-            <dd>
-               <p>Instances can be discovered only programmatically, using the AWS Cloud Map <code>DiscoverInstances</code>
-      API.</p>
-            </dd>
-            <dt>DNS_PUBLIC</dt>
-            <dd>
-               <p>Instances can be discovered using public DNS queries and using the <code>DiscoverInstances</code> API.</p>
-            </dd>
-            <dt>DNS_PRIVATE</dt>
-            <dd>
-               <p>Instances can be discovered using DNS queries in VPCs and using the <code>DiscoverInstances</code>
-      API.</p>
-            </dd>
-         </dl>")
-  @as("Type")
-  type_: option<namespaceType>,
-  @ocaml.doc("<p>The name of the namespace, such as <code>example.com</code>.</p>") @as("Name")
-  name: option<namespaceName>,
-  @ocaml.doc(
-    "<p>The Amazon Resource Name (ARN) that AWS Cloud Map assigns to the namespace when you create it.</p>"
-  )
-  @as("Arn")
-  arn: option<arn>,
-  @ocaml.doc("<p>The ID of a namespace.</p>") @as("Id") id: option<resourceId>,
-}
 type instanceSummaryList = array<instanceSummary>
 type httpInstanceSummaryList = array<httpInstanceSummary>
-@ocaml.doc("<p>A complex type that contains information about changes to the Route 53 DNS records that AWS Cloud Map creates when you
+@ocaml.doc("<p>A complex type that contains information about changes to the Route 53 DNS records that Cloud Map creates when you
    register an instance.</p>")
 type dnsConfigChange = {
-  @ocaml.doc("<p>An array that contains one <code>DnsRecord</code> object for each Route 53 record that you want AWS Cloud Map to
+  @ocaml.doc("<p>An array that contains one <code>DnsRecord</code> object for each Route 53 record that you want Cloud Map to
    create when you register an instance.</p>")
   @as("DnsRecords")
   dnsRecords: dnsRecordList,
 }
-@ocaml.doc("<p>A complex type that contains information about the Amazon Route 53 DNS records that you want AWS Cloud Map to create when
+@ocaml.doc("<p>A complex type that contains information about the Amazon Route 53 DNS records that you want Cloud Map to create when
    you register an instance.</p>")
 type dnsConfig = {
-  @ocaml.doc("<p>An array that contains one <code>DnsRecord</code> object for each Route 53 DNS record that you want AWS Cloud Map to
+  @ocaml.doc("<p>An array that contains one <code>DnsRecord</code> object for each Route 53 DNS record that you want Cloud Map to
    create when you register an instance.</p>")
   @as("DnsRecords")
   dnsRecords: dnsRecordList,
-  @ocaml.doc("<p>The routing policy that you want to apply to all Route 53 DNS records that AWS Cloud Map creates when you register an
+  @ocaml.doc("<p>The routing policy that you want to apply to all Route 53 DNS records that Cloud Map creates when you register an
    instance and specify this service.</p>
          <note>
             <p>If you want to use this service to register instances that create alias records, specify <code>WEIGHTED</code>
@@ -1035,30 +1052,30 @@ type dnsConfig = {
          <dl>
             <dt>MULTIVALUE</dt>
             <dd>
-               <p>If you define a health check for the service and the health check is healthy, Route 53 returns the applicable
+               <p>If you define a health check for the service and the health check is healthy, Route 53 returns the applicable
       value for up to eight instances.</p>
                <p>For example, suppose that the service includes configurations for one <code>A</code> record and a health
-      check. You use the service to register 10 instances. Route 53 responds to DNS queries with IP addresses for up to
-      eight healthy instances. If fewer than eight instances are healthy, Route 53 responds to every DNS query with the IP
+      check. You use the service to register 10 instances. Route 53 responds to DNS queries with IP addresses for up to
+      eight healthy instances. If fewer than eight instances are healthy, Route 53 responds to every DNS query with the IP
       addresses for all of the healthy instances.</p>
-               <p>If you don't define a health check for the service, Route 53 assumes that all instances are healthy and returns
+               <p>If you don't define a health check for the service, Route 53 assumes that all instances are healthy and returns
       the values for up to eight instances.</p>
                <p>For more information about the multivalue routing policy, see <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-multivalue\">Multivalue Answer
-       Routing</a> in the <i>Route 53 Developer Guide</i>.</p>
+       Routing</a> in the <i>Route 53 Developer Guide</i>.</p>
             </dd>
             <dt>WEIGHTED</dt>
             <dd>
-               <p>Route 53 returns the applicable value from one randomly selected instance from among the instances that you
+               <p>Route 53 returns the applicable value from one randomly selected instance from among the instances that you
       registered using the same service. Currently, all records have the same weight, so you can't route more or less
       traffic to any instances.</p>
                <p>For example, suppose that the service includes configurations for one <code>A</code> record and a health
-      check. You use the service to register 10 instances. Route 53 responds to DNS queries with the IP address for one
-      randomly selected instance from among the healthy instances. If no instances are healthy, Route 53 responds to DNS
+      check. You use the service to register 10 instances. Route 53 responds to DNS queries with the IP address for one
+      randomly selected instance from among the healthy instances. If no instances are healthy, Route 53 responds to DNS
       queries as if all of the instances were healthy.</p>
-               <p>If you don't define a health check for the service, Route 53 assumes that all instances are healthy and returns
+               <p>If you don't define a health check for the service, Route 53 assumes that all instances are healthy and returns
       the applicable value for one randomly selected instance.</p>
                <p>For more information about the weighted routing policy, see <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-weighted\">Weighted Routing</a> in the
-       <i>Route 53 Developer Guide</i>.</p>
+       <i>Route 53 Developer Guide</i>.</p>
             </dd>
          </dl>")
   @as("RoutingPolicy")
@@ -1090,12 +1107,12 @@ type serviceSummary = {
   healthCheckCustomConfig: option<healthCheckCustomConfig>,
   @ocaml.doc("<p>
             <i>Public DNS and HTTP namespaces only.</i> Settings for an optional health check. If you specify
-   settings for a health check, AWS Cloud Map associates the health check with the records that you specify in
+   settings for a health check, Cloud Map associates the health check with the records that you specify in
     <code>DnsConfig</code>.</p>")
   @as("HealthCheckConfig")
   healthCheckConfig: option<healthCheckConfig>,
   @ocaml.doc(
-    "<p>Information about the Route 53 DNS records that you want AWS Cloud Map to create when you register an instance.</p>"
+    "<p>Information about the Route 53 DNS records that you want Cloud Map to create when you register an instance.</p>"
   )
   @as("DnsConfig")
   dnsConfig: option<dnsConfig>,
@@ -1127,24 +1144,23 @@ type serviceSummary = {
   type_: option<serviceType>,
   @ocaml.doc("<p>The name of the service.</p>") @as("Name") name: option<serviceName>,
   @ocaml.doc(
-    "<p>The Amazon Resource Name (ARN) that AWS Cloud Map assigns to the service when you create it.</p>"
+    "<p>The Amazon Resource Name (ARN) that Cloud Map assigns to the service when you create it.</p>"
   )
   @as("Arn")
   arn: option<arn>,
-  @ocaml.doc("<p>The ID that AWS Cloud Map assigned to the service when you created it.</p>")
-  @as("Id")
+  @ocaml.doc("<p>The ID that Cloud Map assigned to the service when you created it.</p>") @as("Id")
   id: option<resourceId>,
 }
 @ocaml.doc("<p>A complex type that contains changes to an existing service.</p>")
 type serviceChange = {
   @ocaml.doc("<p>
             <i>Public DNS and HTTP namespaces only.</i> Settings for an optional health check. If you specify
-   settings for a health check, AWS Cloud Map associates the health check with the records that you specify in
+   settings for a health check, Cloud Map associates the health check with the records that you specify in
     <code>DnsConfig</code>.</p>")
   @as("HealthCheckConfig")
   healthCheckConfig: option<healthCheckConfig>,
   @ocaml.doc(
-    "<p>Information about the Route 53 DNS records that you want AWS Cloud Map to create when you register an instance.</p>"
+    "<p>Information about the Route 53 DNS records that you want Cloud Map to create when you register an instance.</p>"
   )
   @as("DnsConfig")
   dnsConfig: option<dnsConfigChange>,
@@ -1172,9 +1188,9 @@ type service = {
   healthCheckCustomConfig: option<healthCheckCustomConfig>,
   @ocaml.doc("<p>
             <i>Public DNS and HTTP namespaces only.</i> A complex type that contains settings for an optional
-   health check. If you specify settings for a health check, AWS Cloud Map associates the health check with the records
+   health check. If you specify settings for a health check, Cloud Map associates the health check with the records
    that you specify in <code>DnsConfig</code>.</p>
-         <p>For information about the charges for health checks, see <a href=\"http://aws.amazon.com/route53/pricing/\">Amazon Route 53 Pricing</a>.</p>")
+         <p>For information about the charges for health checks, see <a href=\"http://aws.amazon.com/route53/pricing/\">Amazon Route 53 Pricing</a>.</p>")
   @as("HealthCheckConfig")
   healthCheckConfig: option<healthCheckConfig>,
   @ocaml.doc("<p>Describes the systems that can be used to discover the service instances.</p>
@@ -1195,7 +1211,7 @@ type service = {
          </dl>")
   @as("Type")
   type_: option<serviceType>,
-  @ocaml.doc("<p>A complex type that contains information about the Route 53 DNS records that you want AWS Cloud Map to create when you
+  @ocaml.doc("<p>A complex type that contains information about the Route 53 DNS records that you want Cloud Map to create when you
    register an instance.</p>")
   @as("DnsConfig")
   dnsConfig: option<dnsConfig>,
@@ -1211,19 +1227,117 @@ type service = {
   namespaceId: option<resourceId>,
   @ocaml.doc("<p>The name of the service.</p>") @as("Name") name: option<serviceName>,
   @ocaml.doc(
-    "<p>The Amazon Resource Name (ARN) that AWS Cloud Map assigns to the service when you create it.</p>"
+    "<p>The Amazon Resource Name (ARN) that Cloud Map assigns to the service when you create it.</p>"
   )
   @as("Arn")
   arn: option<arn>,
-  @ocaml.doc("<p>The ID that AWS Cloud Map assigned to the service when you created it.</p>")
-  @as("Id")
+  @ocaml.doc("<p>The ID that Cloud Map assigned to the service when you created it.</p>") @as("Id")
   id: option<resourceId>,
 }
-type namespaceSummariesList = array<namespaceSummary>
+@ocaml.doc("<p>Updated properties for the public DNS
+   namespace.</p>")
+type publicDnsNamespaceChange = {
+  @ocaml.doc("<p>Properties to be updated in the public
+   DNS namespace.</p>")
+  @as("Properties")
+  properties: option<publicDnsNamespacePropertiesChange>,
+  @ocaml.doc("<p>An updated description for the public DNS
+   namespace.</p>")
+  @as("Description")
+  description: option<resourceDescription>,
+}
+@ocaml.doc("<p>Updated properties for the private DNS
+   namespace.</p>")
+type privateDnsNamespaceChange = {
+  @ocaml.doc("<p>Properties to be updated in the private
+   DNS namespace.</p>")
+  @as("Properties")
+  properties: option<privateDnsNamespacePropertiesChange>,
+  @ocaml.doc("<p>An updated description for the private
+   DNS namespace.</p>")
+  @as("Description")
+  description: option<resourceDescription>,
+}
+@ocaml.doc("<p>A complex type that contains information about a namespace.</p>")
+type namespaceSummary = {
+  @ocaml.doc("<p>The date and time that the namespace was created.</p>") @as("CreateDate")
+  createDate: option<timestamp_>,
+  @ocaml.doc("<p>The properties of the namespace.</p>") @as("Properties")
+  properties: option<namespaceProperties>,
+  @ocaml.doc("<p>The number of services that were created using the namespace.</p>")
+  @as("ServiceCount")
+  serviceCount: option<resourceCount>,
+  @ocaml.doc("<p>A description for the namespace.</p>") @as("Description")
+  description: option<resourceDescription>,
+  @ocaml.doc("<p>The type of the namespace, either public or private.</p>") @as("Type")
+  type_: option<namespaceType>,
+  @ocaml.doc("<p>The name of the namespace. When you create a namespace, Cloud Map automatically creates a Route 53 hosted zone
+   that has the same name as the namespace.</p>")
+  @as("Name")
+  name: option<namespaceName>,
+  @ocaml.doc(
+    "<p>The Amazon Resource Name (ARN) that Cloud Map assigns to the namespace when you create it.</p>"
+  )
+  @as("Arn")
+  arn: option<arn>,
+  @ocaml.doc("<p>The ID of the namespace.</p>") @as("Id") id: option<resourceId>,
+}
+@ocaml.doc("<p>A complex type that contains information about a specified namespace.</p>")
+type namespace = {
+  @ocaml.doc("<p>A unique string that identifies the request and that allows failed requests to be retried without the risk of
+   running an operation twice. </p>")
+  @as("CreatorRequestId")
+  creatorRequestId: option<resourceId>,
+  @ocaml.doc("<p>The date that the namespace was created, in Unix date/time format and Coordinated Universal Time (UTC). The
+   value of <code>CreateDate</code> is accurate to milliseconds. For example, the value <code>1516925490.087</code>
+   represents Friday, January 26, 2018 12:11:30.087 AM.</p>")
+  @as("CreateDate")
+  createDate: option<timestamp_>,
+  @ocaml.doc(
+    "<p>A complex type that contains information that's specific to the type of the namespace.</p>"
+  )
+  @as("Properties")
+  properties: option<namespaceProperties>,
+  @ocaml.doc("<p>The number of services that are associated with the namespace.</p>")
+  @as("ServiceCount")
+  serviceCount: option<resourceCount>,
+  @ocaml.doc("<p>The description that you specify for the namespace when you create it.</p>")
+  @as("Description")
+  description: option<resourceDescription>,
+  @ocaml.doc("<p>The type of the namespace. The methods for discovering instances depends on the value that you specify:</p>
+         <dl>
+            <dt>HTTP</dt>
+            <dd>
+               <p>Instances can be discovered only programmatically, using the Cloud Map <code>DiscoverInstances</code>
+      API.</p>
+            </dd>
+            <dt>DNS_PUBLIC</dt>
+            <dd>
+               <p>Instances can be discovered using public DNS queries and using the <code>DiscoverInstances</code> API.</p>
+            </dd>
+            <dt>DNS_PRIVATE</dt>
+            <dd>
+               <p>Instances can be discovered using DNS queries in VPCs and using the <code>DiscoverInstances</code>
+      API.</p>
+            </dd>
+         </dl>")
+  @as("Type")
+  type_: option<namespaceType>,
+  @ocaml.doc("<p>The name of the namespace, such as <code>example.com</code>.</p>") @as("Name")
+  name: option<namespaceName>,
+  @ocaml.doc(
+    "<p>The Amazon Resource Name (ARN) that Cloud Map assigns to the namespace when you create it.</p>"
+  )
+  @as("Arn")
+  arn: option<arn>,
+  @ocaml.doc("<p>The ID of a namespace.</p>") @as("Id") id: option<resourceId>,
+}
 type serviceSummariesList = array<serviceSummary>
-@ocaml.doc("<p>With AWS Cloud Map, you can configure public DNS, private DNS, or HTTP namespaces that your microservice
-   applications run in. When an instance becomes available, you can call the AWS Cloud Map API to register the instance
-   with AWS Cloud Map. For public or private DNS namespaces, AWS Cloud Map automatically creates DNS records and an optional
+type namespaceSummariesList = array<namespaceSummary>
+@ocaml.doc("<fullname>Cloud Map</fullname>
+         <p>With Cloud Map, you can configure public DNS, private DNS, or HTTP namespaces that your microservice
+   applications run in. When an instance becomes available, you can call the Cloud Map API to register the instance
+   with Cloud Map. For public or private DNS namespaces, Cloud Map automatically creates DNS records and an optional
    health check. Clients that submit public or private DNS queries, or HTTP requests, for the service receive an answer
    that contains up to eight healthy records. </p>")
 module UpdateInstanceCustomHealthStatus = {
@@ -1242,7 +1356,7 @@ module UpdateInstanceCustomHealthStatus = {
     @as("ServiceId")
     serviceId: resourceId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-servicediscovery") @new
   external new: request => t = "UpdateInstanceCustomHealthStatusCommand"
   let make = (~status, ~instanceId, ~serviceId, ()) =>
@@ -1263,8 +1377,8 @@ module DeregisterInstance = {
     serviceId: resourceId,
   }
   type response = {
-    @ocaml.doc("<p>A value that you can use to determine whether the request completed successfully. For more information, see
-    <a href=\"https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html\">GetOperation</a>.</p>")
+    @ocaml.doc("<p>A value that you can use to determine whether the request completed successfully.
+                                To get the status of the operation, see <a href=\"https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html\">GetOperation</a>.</p>")
     @as("OperationId")
     operationId: option<operationId>,
   }
@@ -1279,7 +1393,7 @@ module DeleteService = {
   type request = {
     @ocaml.doc("<p>The ID of the service that you want to delete.</p>") @as("Id") id: resourceId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-servicediscovery") @new
   external new: request => t = "DeleteServiceCommand"
   let make = (~id, ()) => new({id: id})
@@ -1292,14 +1406,45 @@ module DeleteNamespace = {
     @ocaml.doc("<p>The ID of the namespace that you want to delete.</p>") @as("Id") id: resourceId,
   }
   type response = {
-    @ocaml.doc("<p>A value that you can use to determine whether the request completed successfully. To get the status of the
-   operation, see <a href=\"https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html\">GetOperation</a>.</p>")
+    @ocaml.doc("<p>A value that you can use to determine whether the request completed successfully.
+                                To get the status of the operation, see <a href=\"https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html\">GetOperation</a>.</p>")
     @as("OperationId")
     operationId: option<operationId>,
   }
   @module("@aws-sdk/client-servicediscovery") @new
   external new: request => t = "DeleteNamespaceCommand"
   let make = (~id, ()) => new({id: id})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module UpdateHttpNamespace = {
+  type t
+  type request = {
+    @ocaml.doc("<p>Updated properties for the the HTTP
+   namespace.</p>")
+    @as("Namespace")
+    namespace: httpNamespaceChange,
+    @ocaml.doc("<p>A unique string that identifies the
+   request and that allows failed <code>UpdateHttpNamespace</code> requests to be retried without the risk of running
+   the operation twice. <code>UpdaterRequestId</code> can be any unique string (for example, a
+   date/timestamp).</p>")
+    @as("UpdaterRequestId")
+    updaterRequestId: option<resourceId>,
+    @ocaml.doc("<p>The ID of the namespace that you want to
+   update.</p>")
+    @as("Id")
+    id: resourceId,
+  }
+  type response = {
+    @ocaml.doc("<p>A value that you can use to determine whether the request completed successfully.
+                                To get the status of the operation, see <a href=\"https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html\">GetOperation</a>.</p>")
+    @as("OperationId")
+    operationId: option<operationId>,
+  }
+  @module("@aws-sdk/client-servicediscovery") @new
+  external new: request => t = "UpdateHttpNamespaceCommand"
+  let make = (~namespace, ~id, ~updaterRequestId=?, ()) =>
+    new({namespace: namespace, updaterRequestId: updaterRequestId, id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1314,7 +1459,7 @@ module UntagResource = {
     @as("ResourceARN")
     resourceARN: amazonResourceName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-servicediscovery") @new
   external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys: tagKeys, resourceARN: resourceARN})
@@ -1338,9 +1483,9 @@ module RegisterInstance = {
          <dl>
             <dt>AWS_ALIAS_DNS_NAME</dt>
             <dd>
-               <p>If you want AWS Cloud Map to create an Amazon Route 53 alias record that routes traffic to an Elastic Load Balancing load balancer,
+               <p>If you want Cloud Map to create an Amazon Route 53 alias record that routes traffic to an Elastic Load Balancing load balancer,
       specify the DNS name that's associated with the load balancer. For information about how to get the DNS name, see
-      \"DNSName\" in the topic <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_AliasTarget.html\">AliasTarget</a> in the <i>Route 53 API Reference</i>.</p>
+      \"DNSName\" in the topic <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_AliasTarget.html\">AliasTarget</a> in the <i>Route 53 API Reference</i>.</p>
                <p>Note the following:</p>
                <ul>
                   <li>
@@ -1353,12 +1498,12 @@ module RegisterInstance = {
                   </li>
                   <li>
                      <p>If the service that's specified by <code>ServiceId</code> includes <code>HealthCheckConfig</code> settings,
-        AWS Cloud Map will create the Route 53 health check, but it doesn't associate the health check with the alias
+        Cloud Map will create the Route 53 health check, but it doesn't associate the health check with the alias
         record.</p>
                   </li>
                   <li>
-                     <p>Auto naming currently doesn't support creating alias records that route traffic to AWS resources other than
-        Elastic Load Balancing load balancers.</p>
+                     <p>Auto naming currently doesn't support creating alias records that route traffic to Amazon Web Services
+        resources other than Elastic Load Balancing load balancers.</p>
                   </li>
                   <li>
                      <p>If you specify a value for <code>AWS_ALIAS_DNS_NAME</code>, don't specify values for any of the
@@ -1383,14 +1528,14 @@ module RegisterInstance = {
             </dd>
             <dt>AWS_INSTANCE_CNAME</dt>
             <dd>
-               <p>If the service configuration includes a <code>CNAME</code> record, the domain name that you want Route 53 to
+               <p>If the service configuration includes a <code>CNAME</code> record, the domain name that you want Route 53 to
       return in response to DNS queries (for example, <code>example.com</code>).</p>
                <p>This value is required if the service specified by <code>ServiceId</code> includes settings for an
        <code>CNAME</code> record.</p>
             </dd>
             <dt>AWS_INSTANCE_IPV4</dt>
             <dd>
-               <p>If the service configuration includes an <code>A</code> record, the IPv4 address that you want Route 53 to
+               <p>If the service configuration includes an <code>A</code> record, the IPv4 address that you want Route 53 to
       return in response to DNS queries (for example, <code>192.0.2.44</code>).</p>
                <p>This value is required if the service specified by <code>ServiceId</code> includes settings for an
        <code>A</code> record. If the service includes settings for an <code>SRV</code> record, you must specify a value
@@ -1398,7 +1543,7 @@ module RegisterInstance = {
             </dd>
             <dt>AWS_INSTANCE_IPV6</dt>
             <dd>
-               <p>If the service configuration includes an <code>AAAA</code> record, the IPv6 address that you want Route 53 to
+               <p>If the service configuration includes an <code>AAAA</code> record, the IPv6 address that you want Route 53 to
       return in response to DNS queries (for example, <code>2001:0db8:85a3:0000:0000:abcd:0001:2345</code>).</p>
                <p>This value is required if the service specified by <code>ServiceId</code> includes settings for an
        <code>AAAA</code> record. If the service includes settings for an <code>SRV</code> record, you must specify a
@@ -1406,11 +1551,11 @@ module RegisterInstance = {
             </dd>
             <dt>AWS_INSTANCE_PORT</dt>
             <dd>
-               <p>If the service includes an <code>SRV</code> record, the value that you want Route 53 to return for the
+               <p>If the service includes an <code>SRV</code> record, the value that you want Route 53 to return for the
       port.</p>
-               <p>If the service includes <code>HealthCheckConfig</code>, the port on the endpoint that you want Route 53 to send
+               <p>If the service includes <code>HealthCheckConfig</code>, the port on the endpoint that you want Route 53 to send
       requests to. </p>
-               <p>This value is required if you specified settings for an <code>SRV</code> record or a Route 53 health check when
+               <p>This value is required if you specified settings for an <code>SRV</code> record or a Route 53 health check when
       you created the service.</p>
             </dd>
             <dt>Custom attributes</dt>
@@ -1444,8 +1589,8 @@ module RegisterInstance = {
      the same service. </p>
             </li>
             <li>
-               <p>If you specify an existing <code>InstanceId</code> and <code>ServiceId</code>, AWS Cloud Map updates the existing
-     DNS records, if any. If there's also an existing health check, AWS Cloud Map deletes the old health check and creates
+               <p>If you specify an existing <code>InstanceId</code> and <code>ServiceId</code>, Cloud Map updates the existing
+     DNS records, if any. If there's also an existing health check, Cloud Map deletes the old health check and creates
      a new one. </p>
                <note>
                   <p>The health check isn't deleted immediately, so it will still appear for a while if you submit a
@@ -1460,8 +1605,8 @@ module RegisterInstance = {
     serviceId: resourceId,
   }
   type response = {
-    @ocaml.doc("<p>A value that you can use to determine whether the request completed successfully. To get the status of the
-   operation, see <a href=\"https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html\">GetOperation</a>.</p>")
+    @ocaml.doc("<p>A value that you can use to determine whether the request completed successfully.
+                                To get the status of the operation, see <a href=\"https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html\">GetOperation</a>.</p>")
     @as("OperationId")
     operationId: option<operationId>,
   }
@@ -1486,13 +1631,13 @@ module GetInstancesHealthStatus = {
     <code>NextToken</code> from the previous response in the next request.</p>")
     @as("NextToken")
     nextToken: option<nextToken>,
-    @ocaml.doc("<p>The maximum number of instances that you want AWS Cloud Map to return in the response to a
-    <code>GetInstancesHealthStatus</code> request. If you don't specify a value for <code>MaxResults</code>, AWS Cloud Map
+    @ocaml.doc("<p>The maximum number of instances that you want Cloud Map to return in the response to a
+    <code>GetInstancesHealthStatus</code> request. If you don't specify a value for <code>MaxResults</code>, Cloud Map
    returns up to 100 instances.</p>")
     @as("MaxResults")
     maxResults: option<maxResults>,
     @ocaml.doc("<p>An array that contains the IDs of all the instances that you want to get the health status for.</p>
-         <p>If you omit <code>Instances</code>, AWS Cloud Map returns the health status for all the instances that are
+         <p>If you omit <code>Instances</code>, Cloud Map returns the health status for all the instances that are
    associated with the specified service.</p>
          <note>
             <p>To get the IDs for the instances that you've registered by using a specified service, submit a <a href=\"https://docs.aws.amazon.com/cloud-map/latest/api/API_ListInstances.html\">ListInstances</a> request.</p>
@@ -1534,7 +1679,7 @@ module TagResource = {
     @as("ResourceARN")
     resourceARN: amazonResourceName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-servicediscovery") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceARN, ()) => new({tags: tags, resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1597,85 +1742,12 @@ module GetInstance = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
-module CreatePublicDnsNamespace = {
-  type t
-  type request = {
-    @ocaml.doc("<p>The tags to add to the namespace. Each tag consists of a key and an optional value that you define.
-   Tags keys can be up to 128 characters in length, and tag values can be up to 256 characters in
-                     length.</p>")
-    @as("Tags")
-    tags: option<tagList_>,
-    @ocaml.doc("<p>A description for the namespace.</p>") @as("Description")
-    description: option<resourceDescription>,
-    @ocaml.doc("<p>A unique string that identifies the request and that allows failed <code>CreatePublicDnsNamespace</code>
-   requests to be retried without the risk of running the operation twice. <code>CreatorRequestId</code> can be any
-   unique string (for example, a date/timestamp).</p>")
-    @as("CreatorRequestId")
-    creatorRequestId: option<resourceId>,
-    @ocaml.doc("<p>The name that you want to assign to this namespace.</p>") @as("Name")
-    name: namespaceNamePublic,
-  }
-  type response = {
-    @ocaml.doc("<p>A value that you can use to determine whether the request completed successfully. To get the status of the
-   operation, see <a href=\"https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html\">GetOperation</a>.</p>")
-    @as("OperationId")
-    operationId: option<operationId>,
-  }
-  @module("@aws-sdk/client-servicediscovery") @new
-  external new: request => t = "CreatePublicDnsNamespaceCommand"
-  let make = (~name, ~tags=?, ~description=?, ~creatorRequestId=?, ()) =>
-    new({tags: tags, description: description, creatorRequestId: creatorRequestId, name: name})
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
-module CreatePrivateDnsNamespace = {
-  type t
-  type request = {
-    @ocaml.doc("<p>The tags to add to the namespace. Each tag consists of a key and an optional value that you define.
-   Tags keys can be up to 128 characters in length, and tag values can be up to 256 characters in
-                     length.</p>")
-    @as("Tags")
-    tags: option<tagList_>,
-    @ocaml.doc("<p>The ID of the Amazon VPC that you want to associate the namespace with.</p>")
-    @as("Vpc")
-    vpc: resourceId,
-    @ocaml.doc("<p>A description for the namespace.</p>") @as("Description")
-    description: option<resourceDescription>,
-    @ocaml.doc("<p>A unique string that identifies the request and that allows failed <code>CreatePrivateDnsNamespace</code>
-   requests to be retried without the risk of running the operation twice. <code>CreatorRequestId</code> can be any
-   unique string (for example, a date/timestamp).</p>")
-    @as("CreatorRequestId")
-    creatorRequestId: option<resourceId>,
-    @ocaml.doc("<p>The name that you want to assign to this namespace. When you create a private DNS namespace, AWS Cloud Map
-   automatically creates an Amazon Route 53 private hosted zone that has the same name as the namespace.</p>")
-    @as("Name")
-    name: namespaceNamePrivate,
-  }
-  type response = {
-    @ocaml.doc("<p>A value that you can use to determine whether the request completed successfully. To get the status of the
-   operation, see <a href=\"https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html\">GetOperation</a>.</p>")
-    @as("OperationId")
-    operationId: option<operationId>,
-  }
-  @module("@aws-sdk/client-servicediscovery") @new
-  external new: request => t = "CreatePrivateDnsNamespaceCommand"
-  let make = (~vpc, ~name, ~tags=?, ~description=?, ~creatorRequestId=?, ()) =>
-    new({
-      tags: tags,
-      vpc: vpc,
-      description: description,
-      creatorRequestId: creatorRequestId,
-      name: name,
-    })
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
 module CreateHttpNamespace = {
   type t
   type request = {
     @ocaml.doc("<p>The tags to add to the namespace. Each tag consists of a key and an optional value that you define.
-   Tags keys can be up to 128 characters in length, and tag values can be up to 256 characters in
-                     length.</p>")
+   Tags keys can be up to 128 characters in length, and tag values can be up to 256
+                               characters in length.</p>")
     @as("Tags")
     tags: option<tagList_>,
     @ocaml.doc("<p>A description for the namespace.</p>") @as("Description")
@@ -1689,8 +1761,8 @@ module CreateHttpNamespace = {
     name: namespaceNameHttp,
   }
   type response = {
-    @ocaml.doc("<p>A value that you can use to determine whether the request completed successfully. To get the status of the
-   operation, see <a href=\"https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html\">GetOperation</a>.</p>")
+    @ocaml.doc("<p>A value that you can use to determine whether the request completed successfully.
+                                To get the status of the operation, see <a href=\"https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html\">GetOperation</a>.</p>")
     @as("OperationId")
     operationId: option<operationId>,
   }
@@ -1710,8 +1782,8 @@ module ListOperations = {
     <code>ListOperations</code>.</p>")
     @as("Filters")
     filters: option<operationFilters>,
-    @ocaml.doc("<p>The maximum number of items that you want AWS Cloud Map to return in the response to a <code>ListOperations</code>
-   request. If you don't specify a value for <code>MaxResults</code>, AWS Cloud Map returns up to 100 operations.</p>")
+    @ocaml.doc("<p>The maximum number of items that you want Cloud Map to return in the response to a <code>ListOperations</code>
+   request. If you don't specify a value for <code>MaxResults</code>, Cloud Map returns up to 100 operations.</p>")
     @as("MaxResults")
     maxResults: option<maxResults>,
     @ocaml.doc("<p>For the first <code>ListOperations</code> request, omit this value.</p>
@@ -1719,7 +1791,7 @@ module ListOperations = {
    next group of results. Specify the value of <code>NextToken</code> from the previous response in the next
    request.</p>
          <note>
-            <p>AWS Cloud Map gets <code>MaxResults</code> operations and then filters them based on the specified criteria. It's
+            <p>Cloud Map gets <code>MaxResults</code> operations and then filters them based on the specified criteria. It's
     possible that no operations in the first <code>MaxResults</code> operations matched the specified criteria but that
     subsequent groups of <code>MaxResults</code> operations do contain operations that match the criteria.</p>
          </note>")
@@ -1731,7 +1803,7 @@ module ListOperations = {
    next group of results. Specify the value of <code>NextToken</code> from the previous response in the next
    request.</p>
          <note>
-            <p>AWS Cloud Map gets <code>MaxResults</code> operations and then filters them based on the specified criteria. It's
+            <p>Cloud Map gets <code>MaxResults</code> operations and then filters them based on the specified criteria. It's
     possible that no operations in the first <code>MaxResults</code> operations matched the specified criteria but that
     subsequent groups of <code>MaxResults</code> operations do contain operations that match the criteria.</p>
          </note>")
@@ -1751,8 +1823,8 @@ module ListOperations = {
 module ListInstances = {
   type t
   type request = {
-    @ocaml.doc("<p>The maximum number of instances that you want AWS Cloud Map to return in the response to a
-    <code>ListInstances</code> request. If you don't specify a value for <code>MaxResults</code>, AWS Cloud Map returns up
+    @ocaml.doc("<p>The maximum number of instances that you want Cloud Map to return in the response to a
+    <code>ListInstances</code> request. If you don't specify a value for <code>MaxResults</code>, Cloud Map returns up
    to 100 instances.</p>")
     @as("MaxResults")
     maxResults: option<maxResults>,
@@ -1781,23 +1853,6 @@ module ListInstances = {
   external new: request => t = "ListInstancesCommand"
   let make = (~serviceId, ~maxResults=?, ~nextToken=?, ()) =>
     new({maxResults: maxResults, nextToken: nextToken, serviceId: serviceId})
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
-module GetNamespace = {
-  type t
-  type request = {
-    @ocaml.doc("<p>The ID of the namespace that you want to get information about.</p>") @as("Id")
-    id: resourceId,
-  }
-  type response = {
-    @ocaml.doc("<p>A complex type that contains information about the specified namespace.</p>")
-    @as("Namespace")
-    namespace: option<namespace>,
-  }
-  @module("@aws-sdk/client-servicediscovery") @new
-  external new: request => t = "GetNamespaceCommand"
-  let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1839,8 +1894,8 @@ module DiscoverInstances = {
     az=1a}</code>). Only instances that match all the specified key-value pairs are returned.</p>")
     @as("QueryParameters")
     queryParameters: option<attributes>,
-    @ocaml.doc("<p>The maximum number of instances that you want AWS Cloud Map to return in the response to a
-    <code>DiscoverInstances</code> request. If you don't specify a value for <code>MaxResults</code>, AWS Cloud Map returns up
+    @ocaml.doc("<p>The maximum number of instances that you want Cloud Map to return in the response to a
+    <code>DiscoverInstances</code> request. If you don't specify a value for <code>MaxResults</code>, Cloud Map returns up
    to 100 instances.</p>")
     @as("MaxResults")
     maxResults: option<discoverMaxResults>,
@@ -1883,6 +1938,94 @@ module DiscoverInstances = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module CreatePublicDnsNamespace = {
+  type t
+  type request = {
+    @ocaml.doc("<p>Properties for the public DNS
+   namespace.</p>")
+    @as("Properties")
+    properties: option<publicDnsNamespaceProperties>,
+    @ocaml.doc("<p>The tags to add to the namespace. Each tag consists of a key and an optional value that you define.
+   Tags keys can be up to 128 characters in length, and tag values can be up to 256
+                               characters in length.</p>")
+    @as("Tags")
+    tags: option<tagList_>,
+    @ocaml.doc("<p>A description for the namespace.</p>") @as("Description")
+    description: option<resourceDescription>,
+    @ocaml.doc("<p>A unique string that identifies the request and that allows failed <code>CreatePublicDnsNamespace</code>
+   requests to be retried without the risk of running the operation twice. <code>CreatorRequestId</code> can be any
+   unique string (for example, a date/timestamp).</p>")
+    @as("CreatorRequestId")
+    creatorRequestId: option<resourceId>,
+    @ocaml.doc("<p>The name that you want to assign to this namespace.</p>") @as("Name")
+    name: namespaceNamePublic,
+  }
+  type response = {
+    @ocaml.doc("<p>A value that you can use to determine whether the request completed successfully. To get the status of the
+   operation, see <a href=\"https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html\">GetOperation</a>.</p>")
+    @as("OperationId")
+    operationId: option<operationId>,
+  }
+  @module("@aws-sdk/client-servicediscovery") @new
+  external new: request => t = "CreatePublicDnsNamespaceCommand"
+  let make = (~name, ~properties=?, ~tags=?, ~description=?, ~creatorRequestId=?, ()) =>
+    new({
+      properties: properties,
+      tags: tags,
+      description: description,
+      creatorRequestId: creatorRequestId,
+      name: name,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module CreatePrivateDnsNamespace = {
+  type t
+  type request = {
+    @ocaml.doc("<p>Properties for the private DNS
+   namespace.</p>")
+    @as("Properties")
+    properties: option<privateDnsNamespaceProperties>,
+    @ocaml.doc("<p>The tags to add to the namespace. Each tag consists of a key and an optional value that you define.
+   Tags keys can be up to 128 characters in length, and tag values can be up to 256
+                               characters in length.</p>")
+    @as("Tags")
+    tags: option<tagList_>,
+    @ocaml.doc("<p>The ID of the Amazon VPC that you want to associate the namespace with.</p>")
+    @as("Vpc")
+    vpc: resourceId,
+    @ocaml.doc("<p>A description for the namespace.</p>") @as("Description")
+    description: option<resourceDescription>,
+    @ocaml.doc("<p>A unique string that identifies the request and that allows failed <code>CreatePrivateDnsNamespace</code>
+   requests to be retried without the risk of running the operation twice. <code>CreatorRequestId</code> can be any
+   unique string (for example, a date/timestamp).</p>")
+    @as("CreatorRequestId")
+    creatorRequestId: option<resourceId>,
+    @ocaml.doc("<p>The name that you want to assign to this namespace. When you create a private DNS namespace, Cloud Map
+   automatically creates an Amazon Route 53 private hosted zone that has the same name as the namespace.</p>")
+    @as("Name")
+    name: namespaceNamePrivate,
+  }
+  type response = {
+    @ocaml.doc("<p>A value that you can use to determine whether the request completed successfully.
+                                To get the status of the operation, see <a href=\"https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html\">GetOperation</a>.</p>")
+    @as("OperationId")
+    operationId: option<operationId>,
+  }
+  @module("@aws-sdk/client-servicediscovery") @new
+  external new: request => t = "CreatePrivateDnsNamespaceCommand"
+  let make = (~vpc, ~name, ~properties=?, ~tags=?, ~description=?, ~creatorRequestId=?, ()) =>
+    new({
+      properties: properties,
+      tags: tags,
+      vpc: vpc,
+      description: description,
+      creatorRequestId: creatorRequestId,
+      name: name,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module UpdateService = {
   type t
   type request = {
@@ -1892,8 +2035,8 @@ module UpdateService = {
     @ocaml.doc("<p>The ID of the service that you want to update.</p>") @as("Id") id: resourceId,
   }
   type response = {
-    @ocaml.doc("<p>A value that you can use to determine whether the request completed successfully. To get the status of the
-   operation, see <a href=\"https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html\">GetOperation</a>.</p>")
+    @ocaml.doc("<p>A value that you can use to determine whether the request completed successfully.
+                                To get the status of the operation, see <a href=\"https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html\">GetOperation</a>.</p>")
     @as("OperationId")
     operationId: option<operationId>,
   }
@@ -1903,51 +2046,65 @@ module UpdateService = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
-module ListNamespaces = {
+module UpdatePublicDnsNamespace = {
   type t
   type request = {
-    @ocaml.doc("<p>A complex type that contains specifications for the namespaces that you want to list.</p>
-         <p>If you specify more than one filter, a namespace must match all filters to be returned by
-    <code>ListNamespaces</code>.</p>")
-    @as("Filters")
-    filters: option<namespaceFilters>,
-    @ocaml.doc("<p>The maximum number of namespaces that you want AWS Cloud Map to return in the response to a
-    <code>ListNamespaces</code> request. If you don't specify a value for <code>MaxResults</code>, AWS Cloud Map returns up
-   to 100 namespaces.</p>")
-    @as("MaxResults")
-    maxResults: option<maxResults>,
-    @ocaml.doc("<p>For the first <code>ListNamespaces</code> request, omit this value.</p>
-         <p>If the response contains <code>NextToken</code>, submit another <code>ListNamespaces</code> request to get the
-   next group of results. Specify the value of <code>NextToken</code> from the previous response in the next
-   request.</p>
-         <note>
-            <p>AWS Cloud Map gets <code>MaxResults</code> namespaces and then filters them based on the specified criteria. It's
-    possible that no namespaces in the first <code>MaxResults</code> namespaces matched the specified criteria but that
-    subsequent groups of <code>MaxResults</code> namespaces do contain namespaces that match the criteria.</p>
-         </note>")
-    @as("NextToken")
-    nextToken: option<nextToken>,
+    @ocaml.doc("<p>Updated properties for the public DNS
+   namespace.</p>")
+    @as("Namespace")
+    namespace: publicDnsNamespaceChange,
+    @ocaml.doc("<p>A unique string that identifies the
+   request and that allows failed <code>UpdatePublicDnsNamespace</code> requests to be retried without the risk of
+   running the operation twice. <code>UpdaterRequestId</code> can be any unique string (for example, a
+   date/timestamp).</p>")
+    @as("UpdaterRequestId")
+    updaterRequestId: option<resourceId>,
+    @ocaml.doc("<p>The ID of the namespace being
+   updated.</p>")
+    @as("Id")
+    id: resourceId,
   }
   type response = {
-    @ocaml.doc("<p>If the response contains <code>NextToken</code>, submit another <code>ListNamespaces</code> request to get the
-   next group of results. Specify the value of <code>NextToken</code> from the previous response in the next
-   request.</p>
-         <note>
-            <p>AWS Cloud Map gets <code>MaxResults</code> namespaces and then filters them based on the specified criteria. It's
-    possible that no namespaces in the first <code>MaxResults</code> namespaces matched the specified criteria but that
-    subsequent groups of <code>MaxResults</code> namespaces do contain namespaces that match the criteria.</p>
-         </note>")
-    @as("NextToken")
-    nextToken: option<nextToken>,
-    @ocaml.doc("<p>An array that contains one <code>NamespaceSummary</code> object for each namespace that matches the specified
-   filter criteria.</p>")
-    @as("Namespaces")
-    namespaces: option<namespaceSummariesList>,
+    @ocaml.doc("<p>A value that you can use to determine whether the request completed successfully.
+                                To get the status of the operation, see <a href=\"https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html\">GetOperation</a>.</p>")
+    @as("OperationId")
+    operationId: option<operationId>,
   }
   @module("@aws-sdk/client-servicediscovery") @new
-  external new: request => t = "ListNamespacesCommand"
-  let make = (~filters=?, ~maxResults=?, ~nextToken=?, ()) =>
-    new({filters: filters, maxResults: maxResults, nextToken: nextToken})
+  external new: request => t = "UpdatePublicDnsNamespaceCommand"
+  let make = (~namespace, ~id, ~updaterRequestId=?, ()) =>
+    new({namespace: namespace, updaterRequestId: updaterRequestId, id: id})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module UpdatePrivateDnsNamespace = {
+  type t
+  type request = {
+    @ocaml.doc("<p>Updated properties for the private DNS
+   namespace.</p>")
+    @as("Namespace")
+    namespace: privateDnsNamespaceChange,
+    @ocaml.doc("<p>A unique string that identifies the
+   request and that allows failed <code>UpdatePrivateDnsNamespace</code> requests to be retried without the risk of
+   running the operation twice. <code>UpdaterRequestId</code> can be any unique string (for example, a
+   date/timestamp).</p>")
+    @as("UpdaterRequestId")
+    updaterRequestId: option<resourceId>,
+    @ocaml.doc("<p>The ID of the namespace that you want to
+   update.</p>")
+    @as("Id")
+    id: resourceId,
+  }
+  type response = {
+    @ocaml.doc("<p>A value that you can use to determine whether the request completed successfully.
+                                To get the status of the operation, see <a href=\"https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html\">GetOperation</a>.</p>")
+    @as("OperationId")
+    operationId: option<operationId>,
+  }
+  @module("@aws-sdk/client-servicediscovery") @new
+  external new: request => t = "UpdatePrivateDnsNamespaceCommand"
+  let make = (~namespace, ~id, ~updaterRequestId=?, ()) =>
+    new({namespace: namespace, updaterRequestId: updaterRequestId, id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1966,6 +2123,23 @@ module GetService = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module GetNamespace = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The ID of the namespace that you want to get information about.</p>") @as("Id")
+    id: resourceId,
+  }
+  type response = {
+    @ocaml.doc("<p>A complex type that contains information about the specified namespace.</p>")
+    @as("Namespace")
+    namespace: option<namespace>,
+  }
+  @module("@aws-sdk/client-servicediscovery") @new
+  external new: request => t = "GetNamespaceCommand"
+  let make = (~id, ()) => new({id: id})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module CreateService = {
   type t
   type request = {
@@ -1975,8 +2149,8 @@ module CreateService = {
     @as("Type")
     type_: option<serviceTypeOption>,
     @ocaml.doc("<p>The tags to add to the service. Each tag consists of a key and an optional value that you define.
-   Tags keys can be up to 128 characters in length, and tag values can be up to 256 characters in
-                     length.</p>")
+   Tags keys can be up to 128 characters in length, and tag values can be up to 256
+                               characters in length.</p>")
     @as("Tags")
     tags: option<tagList_>,
     @ocaml.doc("<p>A complex type that contains information about an optional custom health check.</p>
@@ -1990,16 +2164,16 @@ module CreateService = {
     healthCheckCustomConfig: option<healthCheckCustomConfig>,
     @ocaml.doc("<p>
             <i>Public DNS and HTTP namespaces only.</i> A complex type that contains settings for an optional
-   Route 53 health check. If you specify settings for a health check, AWS Cloud Map associates the health check with all the
-   Route 53 DNS records that you specify in <code>DnsConfig</code>.</p>
+   Route 53 health check. If you specify settings for a health check, Cloud Map associates the health check with all the
+   Route 53 DNS records that you specify in <code>DnsConfig</code>.</p>
          <important>
             <p>If you specify a health check configuration, you can specify either <code>HealthCheckCustomConfig</code> or
      <code>HealthCheckConfig</code> but not both.</p>
          </important>
-         <p>For information about the charges for health checks, see <a href=\"http://aws.amazon.com/cloud-map/pricing/\">AWS Cloud Map Pricing</a>.</p>")
+         <p>For information about the charges for health checks, see <a href=\"http://aws.amazon.com/cloud-map/pricing/\">Cloud Map Pricing</a>.</p>")
     @as("HealthCheckConfig")
     healthCheckConfig: option<healthCheckConfig>,
-    @ocaml.doc("<p>A complex type that contains information about the Amazon Route 53 records that you want AWS Cloud Map to create when you
+    @ocaml.doc("<p>A complex type that contains information about the Amazon Route 53 records that you want Cloud Map to create when you
    register an instance. </p>")
     @as("DnsConfig")
     dnsConfig: option<dnsConfig>,
@@ -2015,7 +2189,7 @@ module CreateService = {
     @as("NamespaceId")
     namespaceId: option<resourceId>,
     @ocaml.doc("<p>The name that you want to assign to the service.</p>
-         <p>If you want AWS Cloud Map to create an <code>SRV</code> record when you register an instance and you're using a
+         <p>If you want Cloud Map to create an <code>SRV</code> record when you register an instance and you're using a
    system that requires a specific <code>SRV</code> format, such as <a href=\"http://www.haproxy.org/\">HAProxy</a>, specify the following for <code>Name</code>:</p>
          <ul>
             <li>
@@ -2025,7 +2199,7 @@ module CreateService = {
                <p>End the name with <i>._protocol</i>, such as <code>._tcp</code>.</p>
             </li>
          </ul>
-         <p>When you register an instance, AWS Cloud Map creates an <code>SRV</code> record and assigns a name to the record by
+         <p>When you register an instance, Cloud Map creates an <code>SRV</code> record and assigns a name to the record by
    concatenating the service name and the namespace name (for example,</p>
          <p>
             <code>_exampleservice._tcp.example.com</code>).</p>
@@ -2079,8 +2253,8 @@ module ListServices = {
     <code>ListServices</code>.</p>")
     @as("Filters")
     filters: option<serviceFilters>,
-    @ocaml.doc("<p>The maximum number of services that you want AWS Cloud Map to return in the response to a <code>ListServices</code>
-   request. If you don't specify a value for <code>MaxResults</code>, AWS Cloud Map returns up to 100 services.</p>")
+    @ocaml.doc("<p>The maximum number of services that you want Cloud Map to return in the response to a <code>ListServices</code>
+   request. If you don't specify a value for <code>MaxResults</code>, Cloud Map returns up to 100 services.</p>")
     @as("MaxResults")
     maxResults: option<maxResults>,
     @ocaml.doc("<p>For the first <code>ListServices</code> request, omit this value.</p>
@@ -2088,7 +2262,7 @@ module ListServices = {
    next group of results. Specify the value of <code>NextToken</code> from the previous response in the next
    request.</p>
          <note>
-            <p>AWS Cloud Map gets <code>MaxResults</code> services and then filters them based on the specified criteria. It's
+            <p>Cloud Map gets <code>MaxResults</code> services and then filters them based on the specified criteria. It's
     possible that no services in the first <code>MaxResults</code> services matched the specified criteria but that
     subsequent groups of <code>MaxResults</code> services do contain services that match the criteria.</p>
          </note>")
@@ -2100,7 +2274,7 @@ module ListServices = {
    next group of results. Specify the value of <code>NextToken</code> from the previous response in the next
    request.</p>
          <note>
-            <p>AWS Cloud Map gets <code>MaxResults</code> services and then filters them based on the specified criteria. It's
+            <p>Cloud Map gets <code>MaxResults</code> services and then filters them based on the specified criteria. It's
     possible that no services in the first <code>MaxResults</code> services matched the specified criteria but that
     subsequent groups of <code>MaxResults</code> services do contain services that match the criteria.</p>
          </note>")
@@ -2113,6 +2287,54 @@ module ListServices = {
   }
   @module("@aws-sdk/client-servicediscovery") @new
   external new: request => t = "ListServicesCommand"
+  let make = (~filters=?, ~maxResults=?, ~nextToken=?, ()) =>
+    new({filters: filters, maxResults: maxResults, nextToken: nextToken})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module ListNamespaces = {
+  type t
+  type request = {
+    @ocaml.doc("<p>A complex type that contains specifications for the namespaces that you want to list.</p>
+         <p>If you specify more than one filter, a namespace must match all filters to be returned by
+    <code>ListNamespaces</code>.</p>")
+    @as("Filters")
+    filters: option<namespaceFilters>,
+    @ocaml.doc("<p>The maximum number of namespaces that you want Cloud Map to return in the response to a
+    <code>ListNamespaces</code> request. If you don't specify a value for <code>MaxResults</code>, Cloud Map returns up
+   to 100 namespaces.</p>")
+    @as("MaxResults")
+    maxResults: option<maxResults>,
+    @ocaml.doc("<p>For the first <code>ListNamespaces</code> request, omit this value.</p>
+         <p>If the response contains <code>NextToken</code>, submit another <code>ListNamespaces</code> request to get the
+   next group of results. Specify the value of <code>NextToken</code> from the previous response in the next
+   request.</p>
+         <note>
+            <p>Cloud Map gets <code>MaxResults</code> namespaces and then filters them based on the specified criteria. It's
+    possible that no namespaces in the first <code>MaxResults</code> namespaces matched the specified criteria but that
+    subsequent groups of <code>MaxResults</code> namespaces do contain namespaces that match the criteria.</p>
+         </note>")
+    @as("NextToken")
+    nextToken: option<nextToken>,
+  }
+  type response = {
+    @ocaml.doc("<p>If the response contains <code>NextToken</code>, submit another <code>ListNamespaces</code> request to get the
+   next group of results. Specify the value of <code>NextToken</code> from the previous response in the next
+   request.</p>
+         <note>
+            <p>Cloud Map gets <code>MaxResults</code> namespaces and then filters them based on the specified criteria. It's
+    possible that no namespaces in the first <code>MaxResults</code> namespaces matched the specified criteria but that
+    subsequent groups of <code>MaxResults</code> namespaces do contain namespaces that match the criteria.</p>
+         </note>")
+    @as("NextToken")
+    nextToken: option<nextToken>,
+    @ocaml.doc("<p>An array that contains one <code>NamespaceSummary</code> object for each namespace that matches the specified
+   filter criteria.</p>")
+    @as("Namespaces")
+    namespaces: option<namespaceSummariesList>,
+  }
+  @module("@aws-sdk/client-servicediscovery") @new
+  external new: request => t = "ListNamespacesCommand"
   let make = (~filters=?, ~maxResults=?, ~nextToken=?, ()) =>
     new({filters: filters, maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"

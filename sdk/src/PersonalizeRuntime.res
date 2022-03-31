@@ -42,6 +42,9 @@ type itemList = array<predictedItem>
 module GetRecommendations = {
   type t
   type request = {
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the recommender to use to get recommendations. Provide a recommender ARN if you
+    created a Domain dataset group with a recommender for a domain use case.</p>")
+    recommenderArn: option<arn>,
     @ocaml.doc("<p>The values to use when filtering recommendations. For each placeholder parameter in your filter expression, provide the parameter name (in matching case)
       as a key and the filter value(s) as the corresponding value. Separate multiple values for one parameter with a comma.
     </p> 
@@ -72,27 +75,29 @@ module GetRecommendations = {
     @ocaml.doc(
       "<p>The Amazon Resource Name (ARN) of the campaign to use for getting recommendations.</p>"
     )
-    campaignArn: arn,
+    campaignArn: option<arn>,
   }
   type response = {
     @ocaml.doc("<p>The ID of the recommendation.</p>") recommendationId: option<recommendationID>,
-    @ocaml.doc("<p>A list of recommendations sorted in ascending order by prediction score. There can be a
+    @ocaml.doc("<p>A list of recommendations sorted in descending order by prediction score. There can be a
       maximum of 500 items in the list.</p>")
     itemList: option<itemList>,
   }
   @module("@aws-sdk/client-personalize") @new
   external new: request => t = "GetRecommendationsCommand"
   let make = (
-    ~campaignArn,
+    ~recommenderArn=?,
     ~filterValues=?,
     ~filterArn=?,
     ~context=?,
     ~numResults=?,
     ~userId=?,
     ~itemId=?,
+    ~campaignArn=?,
     (),
   ) =>
     new({
+      recommenderArn: recommenderArn,
       filterValues: filterValues,
       filterArn: filterArn,
       context: context,

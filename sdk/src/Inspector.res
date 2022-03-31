@@ -738,7 +738,7 @@ module UpdateAssessmentTarget = {
     @ocaml.doc("<p>The ARN of the assessment target that you want to update.</p>")
     assessmentTargetArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-inspector") @new
   external new: request => t = "UpdateAssessmentTargetCommand"
   let make = (~assessmentTargetName, ~assessmentTargetArn, ~resourceGroupArn=?, ()) =>
@@ -761,7 +761,7 @@ module UnsubscribeFromEvent = {
          to stop receiving SNS notifications.</p>")
     resourceArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-inspector") @new
   external new: request => t = "UnsubscribeFromEventCommand"
   let make = (~topicArn, ~event, ~resourceArn, ()) =>
@@ -780,7 +780,7 @@ module SubscribeToEvent = {
          to receive SNS notifications.</p>")
     resourceArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-inspector") @new external new: request => t = "SubscribeToEventCommand"
   let make = (~topicArn, ~event, ~resourceArn, ()) =>
     new({topicArn: topicArn, event: event, resourceArn: resourceArn})
@@ -797,7 +797,7 @@ module StopAssessmentRun = {
     stopAction: option<stopAction>,
     @ocaml.doc("<p>The ARN of the assessment run that you want to stop.</p>") assessmentRunArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-inspector") @new external new: request => t = "StopAssessmentRunCommand"
   let make = (~assessmentRunArn, ~stopAction=?, ()) =>
     new({stopAction: stopAction, assessmentRunArn: assessmentRunArn})
@@ -811,7 +811,7 @@ module RegisterCrossAccountAccessRole = {
          perform security assessments. </p>")
     roleArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-inspector") @new
   external new: request => t = "RegisterCrossAccountAccessRoleCommand"
   let make = (~roleArn, ()) => new({roleArn: roleArn})
@@ -820,7 +820,7 @@ module RegisterCrossAccountAccessRole = {
 
 module DescribeCrossAccountAccessRole = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("<p>The date when the cross-account access role was registered.</p>")
     registeredAt: timestamp_,
@@ -832,8 +832,8 @@ module DescribeCrossAccountAccessRole = {
     roleArn: arn,
   }
   @module("@aws-sdk/client-inspector") @new
-  external new: unit => t = "DescribeCrossAccountAccessRoleCommand"
-  let make = () => new()
+  external new: request => t = "DescribeCrossAccountAccessRoleCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1008,7 +1008,7 @@ module DeleteAssessmentTemplate = {
     @ocaml.doc("<p>The ARN that specifies the assessment template that you want to delete.</p>")
     assessmentTemplateArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-inspector") @new
   external new: request => t = "DeleteAssessmentTemplateCommand"
   let make = (~assessmentTemplateArn, ()) => new({assessmentTemplateArn: assessmentTemplateArn})
@@ -1021,7 +1021,7 @@ module DeleteAssessmentTarget = {
     @ocaml.doc("<p>The ARN that specifies the assessment target that you want to delete.</p>")
     assessmentTargetArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-inspector") @new
   external new: request => t = "DeleteAssessmentTargetCommand"
   let make = (~assessmentTargetArn, ()) => new({assessmentTargetArn: assessmentTargetArn})
@@ -1034,7 +1034,7 @@ module DeleteAssessmentRun = {
     @ocaml.doc("<p>The ARN that specifies the assessment run that you want to delete.</p>")
     assessmentRunArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-inspector") @new
   external new: request => t = "DeleteAssessmentRunCommand"
   let make = (~assessmentRunArn, ()) => new({assessmentRunArn: assessmentRunArn})
@@ -1069,7 +1069,7 @@ module SetTagsForResource = {
     @ocaml.doc("<p>The ARN of the assessment template that you want to set tags to.</p>")
     resourceArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-inspector") @new external new: request => t = "SetTagsForResourceCommand"
   let make = (~resourceArn, ~tags=?, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"

@@ -113,9 +113,33 @@ type locationFilterName = [
   | @as("LocationUri") #LocationUri
 ]
 type locationArn = string
+type kmsKeyProviderUri = string
+type kerberosPrincipal = string
+type kerberosKrb5ConfFile = NodeJs.Buffer.t
+type kerberosKeytabFile = NodeJs.Buffer.t
 type iamRoleArn = string
+type hdfsUser = string
+type hdfsSubdirectory = string
+type hdfsServerPort = int
+type hdfsServerHostname = string
+type hdfsRpcProtection = [
+  | @as("PRIVACY") #PRIVACY
+  | @as("INTEGRITY") #INTEGRITY
+  | @as("AUTHENTICATION") #AUTHENTICATION
+  | @as("DISABLED") #DISABLED
+]
+type hdfsReplicationFactor = int
+type hdfsDataTransferProtection = [
+  | @as("PRIVACY") #PRIVACY
+  | @as("INTEGRITY") #INTEGRITY
+  | @as("AUTHENTICATION") #AUTHENTICATION
+  | @as("DISABLED") #DISABLED
+]
+type hdfsBlockSize = int
+type hdfsAuthenticationType = [@as("KERBEROS") #KERBEROS | @as("SIMPLE") #SIMPLE]
 type gid = [@as("BOTH") #BOTH | @as("NAME") #NAME | @as("INT_VALUE") #INT_VALUE | @as("NONE") #NONE]
 type fsxWindowsSubdirectory = string
+type fsxLustreSubdirectory = string
 type fsxFilesystemArn = string
 type filterValue = string
 type filterType = [@as("SIMPLE_PATTERN") #SIMPLE_PATTERN]
@@ -135,7 +159,7 @@ type activationKey = string
 @ocaml.doc("<p>Specifies the schedule you want your task to use for repeated executions. For more
       information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html\">Schedule Expressions for Rules</a>.</p>")
 type taskSchedule = {
-  @ocaml.doc("<p>A cron expression that specifies when AWS DataSync initiates a scheduled transfer from a
+  @ocaml.doc("<p>A cron expression that specifies when DataSync initiates a scheduled transfer from a
       source to a destination location. </p>")
   @as("ScheduleExpression")
   scheduleExpression: scheduleExpressionCron,
@@ -158,30 +182,30 @@ type taskExecutionResultDetail = {
       can use this information to help troubleshoot issues. </p>")
   @as("ErrorDetail")
   errorDetail: option<string_>,
-  @ocaml.doc("<p>Errors that AWS DataSync encountered during execution of the task. You can use this
+  @ocaml.doc("<p>Errors that DataSync encountered during execution of the task. You can use this
       error code to help troubleshoot issues.</p>")
   @as("ErrorCode")
   errorCode: option<string_>,
   @ocaml.doc("<p>The status of the VERIFYING phase.</p>") @as("VerifyStatus")
   verifyStatus: option<phaseStatus>,
-  @ocaml.doc("<p>The total time in milliseconds that AWS DataSync spent in the VERIFYING
+  @ocaml.doc("<p>The total time in milliseconds that DataSync spent in the VERIFYING
       phase.</p>")
   @as("VerifyDuration")
   verifyDuration: option<duration>,
   @ocaml.doc("<p>The status of the TRANSFERRING phase.</p>") @as("TransferStatus")
   transferStatus: option<phaseStatus>,
-  @ocaml.doc("<p>The total time in milliseconds that AWS DataSync spent in the TRANSFERRING
+  @ocaml.doc("<p>The total time in milliseconds that DataSync spent in the TRANSFERRING
       phase.</p>")
   @as("TransferDuration")
   transferDuration: option<duration>,
   @ocaml.doc(
-    "<p>The total time in milliseconds that AWS DataSync took to transfer the file from the source to the destination location.</p>"
+    "<p>The total time in milliseconds that DataSync took to transfer the file from the source to the destination location.</p>"
   )
   @as("TotalDuration")
   totalDuration: option<duration>,
   @ocaml.doc("<p>The status of the PREPARING phase.</p>") @as("PrepareStatus")
   prepareStatus: option<phaseStatus>,
-  @ocaml.doc("<p>The total time in milliseconds that AWS DataSync spent in the PREPARING phase.
+  @ocaml.doc("<p>The total time in milliseconds that DataSync spent in the PREPARING phase.
     </p>")
   @as("PrepareDuration")
   prepareDuration: option<duration>,
@@ -198,13 +222,14 @@ type taskExecutionListEntry = {
   @as("TaskExecutionArn")
   taskExecutionArn: option<taskExecutionArn>,
 }
-@ocaml.doc("<p>Represents a single entry in a list of AWS resource tags. <code>TagListEntry</code>
+@ocaml.doc("<p>Represents a single entry in a list of Amazon Web Services resource tags. <code>TagListEntry</code>
       returns an array that contains a list of tasks when the 
       <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_ListTagsForResource.html\">ListTagsForResource</a>
       operation is called.</p>")
 type tagListEntry = {
-  @ocaml.doc("<p>The value for an AWS resource tag.</p>") @as("Value") value: option<tagValue>,
-  @ocaml.doc("<p>The key for an AWS resource tag.</p>") @as("Key") key: tagKey,
+  @ocaml.doc("<p>The value for an Amazon Web Services resource tag.</p>") @as("Value")
+  value: option<tagValue>,
+  @ocaml.doc("<p>The key for an Amazon Web Services resource tag.</p>") @as("Key") key: tagKey,
 }
 type tagKeyList = array<tagKey>
 type sourceNetworkInterfaceArns = array<networkInterfaceArn>
@@ -217,17 +242,32 @@ type smbMountOptions = {
   @as("Version")
   version: option<smbVersion>,
 }
-@ocaml.doc("<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role
+@ocaml.doc("<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
       that is used to access an Amazon S3 bucket.</p>
-      
+    
          <p>For detailed information about using such a role, see Creating a Location for
-      Amazon S3 in the <i>AWS DataSync User Guide</i>.</p>")
+      Amazon S3 in the <i>DataSync User Guide</i>.</p>")
 type s3Config = {
   @ocaml.doc("<p>The Amazon S3 bucket to access. This bucket is used as a parameter in the 
       <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_CreateLocationS3.html\">CreateLocationS3</a>
       operation. </p>")
   @as("BucketAccessRoleArn")
   bucketAccessRoleArn: iamRoleArn,
+}
+@ocaml.doc("<p>The Quality of Protection (QOP) configuration specifies the Remote Procedure Call (RPC)
+      and data transfer privacy settings configured on the Hadoop Distributed File System (HDFS)
+      cluster.</p>")
+type qopConfiguration = {
+  @ocaml.doc("<p>The data transfer protection setting configured on the HDFS cluster. This setting
+      corresponds to your <code>dfs.data.transfer.protection</code> setting in the
+        <code>hdfs-site.xml</code> file on your Hadoop cluster.</p>")
+  @as("DataTransferProtection")
+  dataTransferProtection: option<hdfsDataTransferProtection>,
+  @ocaml.doc("<p>The RPC protection setting configured on the HDFS cluster. This setting corresponds to
+      your <code>hadoop.rpc.protection</code> setting in your <code>core-site.xml</code> file on
+      your Hadoop cluster.</p>")
+  @as("RpcProtection")
+  rpcProtection: option<hdfsRpcProtection>,
 }
 type plsubnetArnList = array<ec2SubnetArn>
 type plsecurityGroupArnList = array<ec2SecurityGroupArn>
@@ -317,8 +357,8 @@ type options = {
       <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/run-task.html#queue-task-execution\">Queueing task executions</a>.</p>")
   @as("TaskQueueing")
   taskQueueing: option<taskQueueing>,
-  @ocaml.doc("<p>A value that limits the bandwidth used by AWS DataSync. For example, if you want
-      AWS DataSync to use a maximum of 1 MB, set this value to <code>1048576</code>
+  @ocaml.doc("<p>A value that limits the bandwidth used by DataSync. For example, if you want
+      DataSync to use a maximum of 1 MB, set this value to <code>1048576</code>
         (<code>=1024*1024</code>).</p>")
   @as("BytesPerSecond")
   bytesPerSecond: option<bytesPerSecond>,
@@ -330,16 +370,16 @@ type options = {
          <p>PRESERVE: Preserve POSIX-style permissions (recommended).</p>
          <p>NONE: Ignore permissions. </p>
          <note>
-            <p>AWS DataSync can preserve extant permissions of a source location.</p>
+            <p>DataSync can preserve extant permissions of a source location.</p>
          </note>")
   @as("PosixPermissions")
   posixPermissions: option<posixPermissions>,
-  @ocaml.doc("<p>A value that determines whether AWS DataSync should preserve the metadata of block
+  @ocaml.doc("<p>A value that determines whether DataSync should preserve the metadata of block
       and character devices in the source file system, and re-create the files with that device name
       and metadata on the destination. DataSync does not copy the contents of such devices, only the
       name and metadata. </p>
          <note>
-            <p>AWS DataSync can't sync the actual contents of such devices, because they are
+            <p>DataSync can't sync the actual contents of such devices, because they are
         nonterminal and don't return an end-of-file (EOF) marker.</p>
          </note>
          <p>Default value: NONE.</p>
@@ -351,7 +391,7 @@ type options = {
   @ocaml.doc("<p>A value that specifies whether files in the destination that don't exist in the source
       file system should be preserved. This option can affect your storage cost. 
       If your task deletes objects, you might incur minimum storage duration charges for certain storage classes. For detailed
-      information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes\">Considerations when working with Amazon S3 storage classes in DataSync </a> in the <i>AWS DataSync User
+      information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes\">Considerations when working with Amazon S3 storage classes in DataSync </a> in the <i>DataSync User
         Guide</i>.</p>
          <p>Default value: PRESERVE.</p>
          <p>PRESERVE: Ignore such destination files (recommended). </p>
@@ -392,7 +432,7 @@ type options = {
       file was read or written to). If you set <code>Atime</code> to BEST_EFFORT, DataSync
       attempts to preserve the original <code>Atime</code> attribute on all source files (that is,
       the version before the PREPARING phase). However, <code>Atime</code>'s behavior is not
-      fully standard across platforms, so AWS DataSync can only do this on a best-effort basis. </p>
+      fully standard across platforms, so DataSync can only do this on a best-effort basis. </p>
          <p>Default value: BEST_EFFORT.</p>
          <p>BEST_EFFORT: Attempt to preserve the per-file <code>Atime</code> value
       (recommended).</p>
@@ -409,7 +449,7 @@ type options = {
       protect against overwriting those changes. </p>
          <p>Some storage classes have specific behaviors that can affect your S3 storage cost. For detailed information, see 
       <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes\">Considerations when working with Amazon S3 storage classes in DataSync </a>
-      in the <i>AWS DataSync
+      in the <i>DataSync
         User Guide</i>.</p>")
   @as("OverwriteMode")
   overwriteMode: option<overwriteMode>,
@@ -455,7 +495,7 @@ type nfsMountOptions = {
                   <b>
                      <a href=\"https://tools.ietf.org/html/rfc3530\">NFSv4.0</a>
                   </b> - stateful, firewall-friendly protocol version that supports
-          delegations and pseudo filesystems.</p>
+          delegations and pseudo file systems.</p>
             </li>
             <li>
                <p>
@@ -474,7 +514,7 @@ type nfsMountOptions = {
       <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_ListLocations.html\">ListLocations</a>
       operation is called.</p>")
 type locationListEntry = {
-  @ocaml.doc("<p>Represents a list of URLs of a location. <code>LocationUri</code> returns an array that
+  @ocaml.doc("<p>Represents a list of URIs of a location. <code>LocationUri</code> returns an array that
       contains a list of locations when the <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_ListLocations.html\">ListLocations</a> operation is
       called.</p>
          <p>Format: <code>TYPE://GLOBAL_ID/SUBDIR</code>.</p>
@@ -496,6 +536,19 @@ type locationListEntry = {
   @as("LocationArn")
   locationArn: option<locationArn>,
 }
+@ocaml.doc("<p>The NameNode of the Hadoop Distributed File System (HDFS). The NameNode manages the file
+      system's namespace. The NameNode performs operations such as opening, closing, and renaming
+      files and directories. The NameNode contains the information to map blocks of data to the
+      DataNodes.</p>")
+type hdfsNameNode = {
+  @ocaml.doc("<p>The port that the NameNode uses to listen to client requests.</p>") @as("Port")
+  port: hdfsServerPort,
+  @ocaml.doc("<p>The hostname of the NameNode in the HDFS cluster. This value is the IP address or Domain
+      Name Service (DNS) name of the NameNode. An agent that's installed on-premises uses this
+      hostname to communicate with the NameNode in the network.</p>")
+  @as("Hostname")
+  hostname: hdfsServerHostname,
+}
 type filterValues = array<filterAttributeValue>
 @ocaml.doc("<p>Specifies which files, folders, and objects to include or exclude when transferring files
       from source to destination.</p>")
@@ -507,7 +560,7 @@ type filterRule = {
     </p>")
   @as("Value")
   value: option<filterValue>,
-  @ocaml.doc("<p>The type of filter rule to apply. AWS DataSync only supports the SIMPLE_PATTERN rule
+  @ocaml.doc("<p>The type of filter rule to apply. DataSync only supports the SIMPLE_PATTERN rule
       type.</p>")
   @as("FilterType")
   filterType: option<filterType>,
@@ -595,6 +648,7 @@ type locationFilter = {
   name: locationFilterName,
 }
 type inputTagList = array<tagListEntry>
+type hdfsNameNodeList = array<hdfsNameNode>
 type filterList = array<filterRule>
 @ocaml.doc("<p>The subnet and the security group that DataSync uses to access target EFS file system.
       The subnet must have at least one mount target for that file system. The security group that
@@ -613,13 +667,13 @@ type ec2Config = {
 type agentList = array<agentListEntry>
 type taskFilters = array<taskFilter>
 type locationFilters = array<locationFilter>
-@ocaml.doc("<fullname>AWS DataSync</fullname>
+@ocaml.doc("<fullname>DataSync</fullname>
 
-         <p>AWS DataSync is a managed data transfer service that makes it simpler for you to
+         <p>DataSync is a managed data transfer service that makes it simpler for you to
       automate moving data between on-premises storage and Amazon Simple Storage Service (Amazon S3)
       or Amazon Elastic File System (Amazon EFS). </p>
-         <p>This API interface reference for AWS DataSync contains documentation for a
-      programming interface that you can use to manage AWS DataSync.</p>")
+         <p>This API interface reference for DataSync contains documentation for a
+      programming interface that you can use to manage DataSync.</p>")
 module UpdateAgent = {
   type t
   @ocaml.doc("<p>UpdateAgentRequest</p>")
@@ -629,7 +683,7 @@ module UpdateAgent = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the agent to update.</p>") @as("AgentArn")
     agentArn: agentArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-datasync") @new external new: request => t = "UpdateAgentCommand"
   let make = (~agentArn, ~name=?, ()) => new({name: name, agentArn: agentArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -642,7 +696,7 @@ module DeleteTask = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the task to delete.</p>") @as("TaskArn")
     taskArn: taskArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-datasync") @new external new: request => t = "DeleteTaskCommand"
   let make = (~taskArn, ()) => new({taskArn: taskArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -656,7 +710,7 @@ module DeleteLocation = {
     @as("LocationArn")
     locationArn: locationArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-datasync") @new external new: request => t = "DeleteLocationCommand"
   let make = (~locationArn, ()) => new({locationArn: locationArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -667,11 +721,11 @@ module DeleteAgent = {
   @ocaml.doc("<p>DeleteAgentRequest</p>")
   type request = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the agent to delete. Use the <code>ListAgents</code>
-      operation to return a list of agents for your account and AWS Region.</p>")
+      operation to return a list of agents for your account and Amazon Web Services Region.</p>")
     @as("AgentArn")
     agentArn: agentArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-datasync") @new external new: request => t = "DeleteAgentCommand"
   let make = (~agentArn, ()) => new({agentArn: agentArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -685,7 +739,7 @@ module CancelTaskExecution = {
     @as("TaskExecutionArn")
     taskExecutionArn: taskExecutionArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-datasync") @new external new: request => t = "CancelTaskExecutionCommand"
   let make = (~taskExecutionArn, ()) => new({taskExecutionArn: taskExecutionArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -701,7 +755,7 @@ module UpdateTaskExecution = {
     @as("TaskExecutionArn")
     taskExecutionArn: taskExecutionArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-datasync") @new external new: request => t = "UpdateTaskExecutionCommand"
   let make = (~options, ~taskExecutionArn, ()) =>
     new({options: options, taskExecutionArn: taskExecutionArn})
@@ -758,7 +812,7 @@ module UpdateLocationSmb = {
     @as("LocationArn")
     locationArn: locationArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-datasync") @new external new: request => t = "UpdateLocationSmbCommand"
   let make = (
     ~locationArn,
@@ -820,7 +874,7 @@ module UpdateLocationObjectStorage = {
     @as("LocationArn")
     locationArn: locationArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-datasync") @new
   external new: request => t = "UpdateLocationObjectStorageCommand"
   let make = (
@@ -855,7 +909,7 @@ module UntagResource = {
     @as("ResourceArn")
     resourceArn: taggableResourceArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-datasync") @new external new: request => t = "UntagResourceCommand"
   let make = (~keys, ~resourceArn, ()) => new({keys: keys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -915,9 +969,9 @@ module DescribeLocationS3 = {
     @ocaml.doc("<p>The time that the Amazon S3 bucket location was created.</p>")
     @as("CreationTime")
     creationTime: option<time>,
-    @ocaml.doc("<p>If you are using DataSync on an AWS Outpost, the Amazon Resource Name (ARNs) of the EC2
+    @ocaml.doc("<p>If you are using DataSync on an Amazon Web Services Outpost, the Amazon Resource Name (ARNs) of the EC2
       agents deployed on your Outpost. For more information about launching a DataSync agent on an
-      AWS Outpost, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/deploy-agents.html#outposts-agent\">Deploy your DataSync agent on AWS Outposts</a>.</p>")
+      Amazon Web Services Outpost, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/deploy-agents.html#outposts-agent\">Deploy your DataSync agent on Outposts</a>.</p>")
     @as("AgentArns")
     agentArns: option<agentArnList>,
     @as("S3Config") s3Config: option<s3Config>,
@@ -1027,12 +1081,47 @@ module DescribeLocationFsxWindows = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module DescribeLocationFsxLustre = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the FSx for Lustre location to describe. </p>")
+    @as("LocationArn")
+    locationArn: locationArn,
+  }
+  type response = {
+    @ocaml.doc("<p>The time that the FSx for Lustre location was created.</p>") @as("CreationTime")
+    creationTime: option<time>,
+    @ocaml.doc(
+      "<p>The Amazon Resource Names (ARNs) of the security groups that are configured for the FSx for Lustre file system.</p>"
+    )
+    @as("SecurityGroupArns")
+    securityGroupArns: option<ec2SecurityGroupArnList>,
+    @ocaml.doc("<p>The URI of the FSx for Lustre location that was described.</p>")
+    @as("LocationUri")
+    locationUri: option<locationUri>,
+    @ocaml.doc(
+      "<p>The Amazon Resource Name (ARN) of the FSx for Lustre location that was described.</p>"
+    )
+    @as("LocationArn")
+    locationArn: option<locationArn>,
+  }
+  @module("@aws-sdk/client-datasync") @new
+  external new: request => t = "DescribeLocationFsxLustreCommand"
+  let make = (~locationArn, ()) => new({locationArn: locationArn})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module UpdateTask = {
   type t
   @ocaml.doc("<p>UpdateTaskResponse</p>")
   type request = {
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the resource name of the CloudWatch
-      LogGroup.</p>")
+    @ocaml.doc("<p>A list of filter rules that determines which files to include when running a task. The
+      pattern contains a single filter string that consists of the patterns to include. The patterns
+      are delimited by \"|\" (that is, a pipe), for example, <code>\"/folder1|/folder2\"</code>.</p>")
+    @as("Includes")
+    includes: option<filterList>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the resource name of the Amazon CloudWatch log
+      group.</p>")
     @as("CloudWatchLogGroupArn")
     cloudWatchLogGroupArn: option<logGroupArn>,
     @ocaml.doc("<p>The name of the task to update.</p>") @as("Name") name: option<tagValue>,
@@ -1044,8 +1133,7 @@ module UpdateTask = {
     schedule: option<taskSchedule>,
     @ocaml.doc("<p>A list of filter rules that determines which files to exclude from a task. The list should
       contain a single filter string that consists of the patterns to exclude. The patterns are
-      delimited by \"|\" (that is, a pipe), for example: <code>\"/folder1|/folder2\"</code>
-         </p>
+      delimited by \"|\" (that is, a pipe), for example, <code>\"/folder1|/folder2\"</code>.</p>
          <p>
     </p>")
     @as("Excludes")
@@ -1055,10 +1143,11 @@ module UpdateTask = {
     @as("TaskArn")
     taskArn: taskArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-datasync") @new external new: request => t = "UpdateTaskCommand"
   let make = (
     ~taskArn,
+    ~includes=?,
     ~cloudWatchLogGroupArn=?,
     ~name=?,
     ~schedule=?,
@@ -1067,6 +1156,7 @@ module UpdateTask = {
     (),
   ) =>
     new({
+      includes: includes,
       cloudWatchLogGroupArn: cloudWatchLogGroupArn,
       name: name,
       schedule: schedule,
@@ -1097,7 +1187,7 @@ module UpdateLocationNfs = {
       access have permissions that allow read access for all users. Doing either option enables the
       agent to read the files. For the agent to access directories, you must additionally enable all
       execute access.</p>
-         <p>If you are copying data to or from your AWS Snowcone device, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone\">NFS Server on AWS Snowcone</a> for more information.</p>
+         <p>If you are copying data to or from your Snowcone device, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone\">NFS Server on Snowcone</a> for more information.</p>
      
          <p>For information about NFS export configuration, see 18.7. The /etc/exports
       Configuration File in the Red Hat Enterprise Linux documentation.</p>")
@@ -1107,12 +1197,106 @@ module UpdateLocationNfs = {
     @as("LocationArn")
     locationArn: locationArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-datasync") @new external new: request => t = "UpdateLocationNfsCommand"
   let make = (~locationArn, ~mountOptions=?, ~onPremConfig=?, ~subdirectory=?, ()) =>
     new({
       mountOptions: mountOptions,
       onPremConfig: onPremConfig,
+      subdirectory: subdirectory,
+      locationArn: locationArn,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module UpdateLocationHdfs = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The ARNs of the agents that are used to connect to the HDFS cluster. </p>")
+    @as("AgentArns")
+    agentArns: option<agentArnList>,
+    @ocaml.doc("<p>The <code>krb5.conf</code> file that contains the Kerberos configuration information. You
+      can load the <code>krb5.conf</code> file by providing the file's address. If you're using the
+      AWS CLI, it performs the base64 encoding for you. Otherwise, provide the base64-encoded
+      text.</p>")
+    @as("KerberosKrb5Conf")
+    kerberosKrb5Conf: option<kerberosKrb5ConfFile>,
+    @ocaml.doc("<p>The Kerberos key table (keytab) that contains mappings between the defined Kerberos
+      principal and the encrypted keys. You can load the keytab from a file by providing the file's
+      address. If you use the AWS CLI, it performs base64 encoding for you. Otherwise, provide the
+      base64-encoded text.</p>")
+    @as("KerberosKeytab")
+    kerberosKeytab: option<kerberosKeytabFile>,
+    @ocaml.doc(
+      "<p>The Kerberos principal with access to the files and folders on the HDFS cluster. </p>"
+    )
+    @as("KerberosPrincipal")
+    kerberosPrincipal: option<kerberosPrincipal>,
+    @ocaml.doc("<p>The user name used to identify the client on the host operating system.</p>")
+    @as("SimpleUser")
+    simpleUser: option<hdfsUser>,
+    @ocaml.doc("<p>The type of authentication used to determine the identity of the user. </p>")
+    @as("AuthenticationType")
+    authenticationType: option<hdfsAuthenticationType>,
+    @ocaml.doc("<p>The Quality of Protection (QOP) configuration specifies the Remote Procedure Call (RPC)
+      and data transfer privacy settings configured on the Hadoop Distributed File System (HDFS)
+      cluster. </p>")
+    @as("QopConfiguration")
+    qopConfiguration: option<qopConfiguration>,
+    @ocaml.doc("<p>The URI of the HDFS cluster's Key Management Server (KMS). </p>")
+    @as("KmsKeyProviderUri")
+    kmsKeyProviderUri: option<kmsKeyProviderUri>,
+    @ocaml.doc(
+      "<p>The number of DataNodes to replicate the data to when writing to the HDFS cluster. </p>"
+    )
+    @as("ReplicationFactor")
+    replicationFactor: option<hdfsReplicationFactor>,
+    @ocaml.doc("<p>The size of the data blocks to write into the HDFS cluster. </p>")
+    @as("BlockSize")
+    blockSize: option<hdfsBlockSize>,
+    @ocaml.doc("<p>The NameNode that manages the HDFS namespace. The NameNode performs operations such as
+      opening, closing, and renaming files and directories. The NameNode contains the information to
+      map blocks of data to the DataNodes. You can use only one NameNode.</p>")
+    @as("NameNodes")
+    nameNodes: option<hdfsNameNodeList>,
+    @ocaml.doc("<p>A subdirectory in the HDFS cluster. This subdirectory is used to read data from or write
+      data to the HDFS cluster.</p>")
+    @as("Subdirectory")
+    subdirectory: option<hdfsSubdirectory>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the source HDFS cluster location.</p>")
+    @as("LocationArn")
+    locationArn: locationArn,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-datasync") @new external new: request => t = "UpdateLocationHdfsCommand"
+  let make = (
+    ~locationArn,
+    ~agentArns=?,
+    ~kerberosKrb5Conf=?,
+    ~kerberosKeytab=?,
+    ~kerberosPrincipal=?,
+    ~simpleUser=?,
+    ~authenticationType=?,
+    ~qopConfiguration=?,
+    ~kmsKeyProviderUri=?,
+    ~replicationFactor=?,
+    ~blockSize=?,
+    ~nameNodes=?,
+    ~subdirectory=?,
+    (),
+  ) =>
+    new({
+      agentArns: agentArns,
+      kerberosKrb5Conf: kerberosKrb5Conf,
+      kerberosKeytab: kerberosKeytab,
+      kerberosPrincipal: kerberosPrincipal,
+      simpleUser: simpleUser,
+      authenticationType: authenticationType,
+      qopConfiguration: qopConfiguration,
+      kmsKeyProviderUri: kmsKeyProviderUri,
+      replicationFactor: replicationFactor,
+      blockSize: blockSize,
+      nameNodes: nameNodes,
       subdirectory: subdirectory,
       locationArn: locationArn,
     })
@@ -1128,7 +1312,7 @@ module TagResource = {
     @as("ResourceArn")
     resourceArn: taggableResourceArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-datasync") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1138,10 +1322,15 @@ module StartTaskExecution = {
   type t
   @ocaml.doc("<p>StartTaskExecutionRequest</p>")
   type request = {
+    @ocaml.doc("<p>A list of filter rules that determines which files to exclude from a task. The list
+      contains a single filter string that consists of the patterns to exclude. The patterns are
+      delimited by \"|\" (that is, a pipe), for example, <code>\"/folder1|/folder2\"</code>. </p>")
+    @as("Excludes")
+    excludes: option<filterList>,
     @ocaml.doc("<p>A list of filter rules that determines which files to include when running a task. The
       pattern should contain a single filter string that consists of the patterns to include. The
-      patterns are delimited by \"|\" (that is, a pipe). For example: <code>\"/folder1|/folder2\"</code>
-         </p>
+      patterns are delimited by \"|\" (that is, a pipe), for example,
+      <code>\"/folder1|/folder2\"</code>. </p>
     
          <p>
     </p>")
@@ -1159,8 +1348,13 @@ module StartTaskExecution = {
     taskExecutionArn: option<taskExecutionArn>,
   }
   @module("@aws-sdk/client-datasync") @new external new: request => t = "StartTaskExecutionCommand"
-  let make = (~taskArn, ~includes=?, ~overrideOptions=?, ()) =>
-    new({includes: includes, overrideOptions: overrideOptions, taskArn: taskArn})
+  let make = (~taskArn, ~excludes=?, ~includes=?, ~overrideOptions=?, ()) =>
+    new({
+      excludes: excludes,
+      includes: includes,
+      overrideOptions: overrideOptions,
+      taskArn: taskArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1262,7 +1456,7 @@ module DescribeTaskExecution = {
     @as("BytesTransferred")
     bytesTransferred: option<long>,
     @ocaml.doc(
-      "<p>The number of logical bytes written to the destination AWS storage resource.</p>"
+      "<p>The number of logical bytes written to the destination Amazon Web Services storage resource.</p>"
     )
     @as("BytesWritten")
     bytesWritten: option<long>,
@@ -1308,9 +1502,9 @@ module DescribeTaskExecution = {
     @as("Options") options: option<options>,
     @ocaml.doc("<p>The status of the task execution. </p>
 
-      
+    
          <p>For detailed information about task execution statuses, see Understanding
-      Task Statuses in the <i>AWS DataSync User Guide.</i>
+      Task Statuses in the <i>DataSync User Guide.</i>
          </p>")
     @as("Status")
     status: option<taskExecutionStatus>,
@@ -1339,13 +1533,18 @@ module DescribeTask = {
   }
   @ocaml.doc("<p>DescribeTaskResponse</p>")
   type response = {
+    @ocaml.doc("<p>A list of filter rules that determines which files to include when running a task. The
+      pattern contains a single filter string that consists of the patterns to include. The patterns
+      are delimited by \"|\" (that is, a pipe), for example, <code>\"/folder1|/folder2</code>\".</p>")
+    @as("Includes")
+    includes: option<filterList>,
     @ocaml.doc("<p>The time that the task was created.</p>") @as("CreationTime")
     creationTime: option<time>,
     @ocaml.doc("<p>Detailed description of an error that was encountered during the task execution. You
       can use this information to help troubleshoot issues. </p>")
     @as("ErrorDetail")
     errorDetail: option<string_>,
-    @ocaml.doc("<p>Errors that AWS DataSync encountered during execution of the task. You can use this
+    @ocaml.doc("<p>Errors that DataSync encountered during execution of the task. You can use this
       error code to help troubleshoot issues.</p>")
     @as("ErrorCode")
     errorCode: option<string_>,
@@ -1356,8 +1555,7 @@ module DescribeTask = {
     schedule: option<taskSchedule>,
     @ocaml.doc("<p>A list of filter rules that determines which files to exclude from a task. The list should
       contain a single filter string that consists of the patterns to exclude. The patterns are
-      delimited by \"|\" (that is, a pipe), for example: <code>\"/folder1|/folder2\"</code>
-         </p>
+      delimited by \"|\" (that is, a pipe), for example, <code>\"/folder1|/folder2\"</code>. </p>
          <p>
     </p>")
     @as("Excludes")
@@ -1370,23 +1568,25 @@ module DescribeTask = {
       overriding <code>OverrideOptions</code> value to <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html\">StartTaskExecution</a> operation. </p>")
     @as("Options")
     options: option<options>,
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the destination ENIs (Elastic Network Interface) that
-      was created for your subnet.</p>")
+    @ocaml.doc("<p>The Amazon Resource Names (ARNs) of the destination elastic network interfaces (ENIs) that
+      were created for your subnet.</p>")
     @as("DestinationNetworkInterfaceArns")
     destinationNetworkInterfaceArns: option<destinationNetworkInterfaceArns>,
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the source ENIs (Elastic Network Interface) that was
+    @ocaml.doc("<p>The Amazon Resource Names (ARNs) of the source elastic network interfaces (ENIs) that were
       created for your subnet.</p>")
     @as("SourceNetworkInterfaceArns")
     sourceNetworkInterfaceArns: option<sourceNetworkInterfaceArns>,
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that was used to
       monitor and log events in the task.</p>
 
-      
+    
          <p>For more information on these groups, see Working with Log Groups and Log
       Streams in the <i>Amazon CloudWatch User Guide</i>.</p>")
     @as("CloudWatchLogGroupArn")
     cloudWatchLogGroupArn: option<logGroupArn>,
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the AWS storage resource's location.</p>")
+    @ocaml.doc(
+      "<p>The Amazon Resource Name (ARN) of the Amazon Web Services storage resource's location.</p>"
+    )
     @as("DestinationLocationArn")
     destinationLocationArn: option<locationArn>,
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the source file system's location.</p>")
@@ -1399,9 +1599,9 @@ module DescribeTask = {
     name: option<tagValue>,
     @ocaml.doc("<p>The status of the task that was described.</p>
 
-      
+    
          <p>For detailed information about task execution statuses, see Understanding
-      Task Statuses in the <i>AWS DataSync User Guide</i>.</p>")
+      Task Statuses in the <i>DataSync User Guide</i>.</p>")
     @as("Status")
     status: option<taskStatus>,
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the task that was described.</p>")
@@ -1436,6 +1636,60 @@ module DescribeLocationNfs = {
     locationArn: option<locationArn>,
   }
   @module("@aws-sdk/client-datasync") @new external new: request => t = "DescribeLocationNfsCommand"
+  let make = (~locationArn, ()) => new({locationArn: locationArn})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module DescribeLocationHdfs = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the HDFS cluster location to describe.</p>")
+    @as("LocationArn")
+    locationArn: locationArn,
+  }
+  type response = {
+    @ocaml.doc("<p>The time that the HDFS location was created.</p>") @as("CreationTime")
+    creationTime: option<time>,
+    @ocaml.doc("<p>The ARNs of the agents that are used to connect to the HDFS cluster. </p>")
+    @as("AgentArns")
+    agentArns: option<agentArnList>,
+    @ocaml.doc("<p>The Kerberos principal with access to the files and folders on the HDFS cluster. This
+      parameter is used if the <code>AuthenticationType</code> is defined as
+      <code>KERBEROS</code>.</p>")
+    @as("KerberosPrincipal")
+    kerberosPrincipal: option<kerberosPrincipal>,
+    @ocaml.doc("<p>The user name used to identify the client on the host operating system. This parameter is
+      used if the <code>AuthenticationType</code> is defined as <code>SIMPLE</code>.</p>")
+    @as("SimpleUser")
+    simpleUser: option<hdfsUser>,
+    @ocaml.doc("<p>The type of authentication used to determine the identity of the user. </p>")
+    @as("AuthenticationType")
+    authenticationType: option<hdfsAuthenticationType>,
+    @ocaml.doc("<p>The Quality of Protection (QOP) configuration specifies the Remote Procedure Call (RPC)
+      and data transfer protection settings configured on the Hadoop Distributed File System (HDFS)
+      cluster. </p>")
+    @as("QopConfiguration")
+    qopConfiguration: option<qopConfiguration>,
+    @ocaml.doc("<p> The URI of the HDFS cluster's Key Management Server (KMS). </p>")
+    @as("KmsKeyProviderUri")
+    kmsKeyProviderUri: option<kmsKeyProviderUri>,
+    @ocaml.doc(
+      "<p>The number of DataNodes to replicate the data to when writing to the HDFS cluster. </p>"
+    )
+    @as("ReplicationFactor")
+    replicationFactor: option<hdfsReplicationFactor>,
+    @ocaml.doc("<p>The size of the data blocks to write into the HDFS cluster. </p>")
+    @as("BlockSize")
+    blockSize: option<hdfsBlockSize>,
+    @ocaml.doc("<p>The NameNode that manage the HDFS namespace. </p>") @as("NameNodes")
+    nameNodes: option<hdfsNameNodeList>,
+    @ocaml.doc("<p>The URI of the HDFS cluster location.</p>") @as("LocationUri")
+    locationUri: option<locationUri>,
+    @ocaml.doc("<p>The ARN of the HDFS cluster location.</p>") @as("LocationArn")
+    locationArn: option<locationArn>,
+  }
+  @module("@aws-sdk/client-datasync") @new
+  external new: request => t = "DescribeLocationHdfsCommand"
   let make = (~locationArn, ()) => new({locationArn: locationArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
@@ -1508,6 +1762,11 @@ module CreateTask = {
   type t
   @ocaml.doc("<p>CreateTaskRequest</p>")
   type request = {
+    @ocaml.doc("<p>A list of filter rules that determines which files to include when running a task. The
+      pattern contains a single filter string that consists of the patterns to include. The patterns
+      are delimited by \"|\" (that is, a pipe), for example, <code>\"/folder1|/folder2\"</code>.</p>")
+    @as("Includes")
+    includes: option<filterList>,
     @ocaml.doc("<p>The key-value pair that represents the tag that you want to add to the resource. The
       value can be an empty string. </p>")
     @as("Tags")
@@ -1540,7 +1799,9 @@ module CreateTask = {
       monitor and log events in the task. </p>")
     @as("CloudWatchLogGroupArn")
     cloudWatchLogGroupArn: option<logGroupArn>,
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of an AWS storage resource's location. </p>")
+    @ocaml.doc(
+      "<p>The Amazon Resource Name (ARN) of an Amazon Web Services storage resource's location. </p>"
+    )
     @as("DestinationLocationArn")
     destinationLocationArn: locationArn,
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the source location for the task.</p>")
@@ -1556,6 +1817,7 @@ module CreateTask = {
   let make = (
     ~destinationLocationArn,
     ~sourceLocationArn,
+    ~includes=?,
     ~tags=?,
     ~schedule=?,
     ~excludes=?,
@@ -1565,6 +1827,7 @@ module CreateTask = {
     (),
   ) =>
     new({
+      includes: includes,
       tags: tags,
       schedule: schedule,
       excludes: excludes,
@@ -1674,21 +1937,21 @@ module CreateLocationS3 = {
       value can be an empty string. We recommend using tags to name your resources.</p>")
     @as("Tags")
     tags: option<inputTagList>,
-    @ocaml.doc("<p>If you are using DataSync on an AWS Outpost, specify the Amazon Resource Names (ARNs) of
+    @ocaml.doc("<p>If you are using DataSync on an Amazon Web Services Outpost, specify the Amazon Resource Names (ARNs) of
       the DataSync agents deployed on your Outpost. For more information about launching a DataSync
-      agent on an AWS Outpost, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/deploy-agents.html#outposts-agent\">Deploy your DataSync agent on AWS Outposts</a>.</p>")
+      agent on an Amazon Web Services Outpost, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/deploy-agents.html#outposts-agent\">Deploy your DataSync agent on Outposts</a>.</p>")
     @as("AgentArns")
     agentArns: option<agentArnList>,
     @as("S3Config") s3Config: s3Config,
     @ocaml.doc("<p>The Amazon S3 storage class that you want to store your files in when this location is
-      used as a task destination. For buckets in AWS Regions, the storage class defaults to Standard.
-      For buckets on AWS Outposts, the storage class defaults to AWS S3 Outposts.</p>
+      used as a task destination. For buckets in Amazon Web Services Regions, the storage class defaults to Standard.
+      For buckets on Outposts, the storage class defaults to Amazon Web Services S3 Outposts.</p>
       
          <p>For more information about S3 storage classes, see <a href=\"http://aws.amazon.com/s3/storage-classes/\">Amazon S3 Storage Classes</a>. Some storage classes have behaviors that
       can affect your S3 storage cost. For detailed information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes\">Considerations when working with S3 storage classes in DataSync</a>.</p>")
     @as("S3StorageClass")
     s3StorageClass: option<s3StorageClass>,
-    @ocaml.doc("<p>The ARN of the Amazon S3 bucket. If the bucket is on an AWS Outpost, this must be an
+    @ocaml.doc("<p>The ARN of the Amazon S3 bucket. If the bucket is on an Amazon Web Services Outpost, this must be an
       access point ARN.</p>")
     @as("S3BucketArn")
     s3BucketArn: s3BucketArn,
@@ -1820,13 +2083,13 @@ module CreateLocationNfs = {
     mountOptions: option<nfsMountOptions>,
     @ocaml.doc("<p>Contains a list of Amazon Resource Names (ARNs) of agents that are used to connect to
       an NFS server. </p>
-         <p>If you are copying data to or from your AWS Snowcone device, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone\">NFS Server on AWS Snowcone</a> for more information.</p>")
+         <p>If you are copying data to or from your Snowcone device, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone\">NFS Server on Snowcone</a> for more information.</p>")
     @as("OnPremConfig")
     onPremConfig: onPremConfig,
     @ocaml.doc("<p>The name of the NFS server. This value is the IP address or Domain Name Service (DNS)
       name of the NFS server. An agent that is installed on-premises uses this host name to mount
       the NFS server in a network. </p>
-         <p>If you are copying data to or from your AWS Snowcone device, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone\">NFS Server on AWS Snowcone</a> for more information.</p>
+         <p>If you are copying data to or from your Snowcone device, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone\">NFS Server on Snowcone</a> for more information.</p>
          <note>
             <p>This name must either be DNS-compliant or must be an IP version 4 (IPv4)
         address.</p>
@@ -1847,8 +2110,8 @@ module CreateLocationNfs = {
       want DataSync allow read access for all users. Doing either enables the agent to read the
       files. For the agent to access directories, you must additionally enable all execute
       access.</p>
-         <p>If you are copying data to or from your AWS Snowcone device, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone\">NFS Server on AWS Snowcone</a> for more information.</p>
-      
+         <p>If you are copying data to or from your Snowcone device, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone\">NFS Server on Snowcone</a> for more information.</p>
+    
          <p>For information about NFS export configuration, see 18.7. The /etc/exports
       Configuration File in the Red Hat Enterprise Linux documentation.</p>")
     @as("Subdirectory")
@@ -1868,6 +2131,124 @@ module CreateLocationNfs = {
       mountOptions: mountOptions,
       onPremConfig: onPremConfig,
       serverHostname: serverHostname,
+      subdirectory: subdirectory,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module CreateLocationHdfs = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The key-value pair that represents the tag that you want to add to the location. The value
+      can be an empty string. We recommend using tags to name your resources. </p>")
+    @as("Tags")
+    tags: option<inputTagList>,
+    @ocaml.doc("<p>The Amazon Resource Names (ARNs) of the agents that are used to connect to the HDFS
+      cluster.</p>")
+    @as("AgentArns")
+    agentArns: agentArnList,
+    @ocaml.doc("<p>The <code>krb5.conf</code> file that contains the Kerberos configuration information. You
+      can load the <code>krb5.conf</code> file by providing the file's address. If you're using the
+        CLI, it performs the base64 encoding for you. Otherwise, provide the
+      base64-encoded text. </p>
+         <note>
+            <p>If <code>KERBEROS</code> is specified for <code>AuthenticationType</code>, this
+        parameter is required.</p>
+         </note>")
+    @as("KerberosKrb5Conf")
+    kerberosKrb5Conf: option<kerberosKrb5ConfFile>,
+    @ocaml.doc("<p>The Kerberos key table (keytab) that contains mappings between the defined Kerberos
+      principal and the encrypted keys. You can load the keytab from a file by providing the file's
+      address. If you're using the CLI, it performs base64 encoding for you.
+      Otherwise, provide the base64-encoded text. </p>
+         <note>
+            <p>If <code>KERBEROS</code> is specified for <code>AuthenticationType</code>, this
+        parameter is required. </p>
+         </note>")
+    @as("KerberosKeytab")
+    kerberosKeytab: option<kerberosKeytabFile>,
+    @ocaml.doc("<p>The Kerberos principal with access to the files and folders on the HDFS cluster. </p>
+         <note>
+            <p>If <code>KERBEROS</code> is specified for <code>AuthenticationType</code>, this
+        parameter is required.</p>
+         </note>")
+    @as("KerberosPrincipal")
+    kerberosPrincipal: option<kerberosPrincipal>,
+    @ocaml.doc("<p>The user name used to identify the client on the host operating system. </p>
+         <note>
+            <p>If <code>SIMPLE</code> is specified for <code>AuthenticationType</code>, this parameter
+        is required. </p>
+         </note>")
+    @as("SimpleUser")
+    simpleUser: option<hdfsUser>,
+    @ocaml.doc("<p>The type of authentication used to determine the identity of the user. </p>")
+    @as("AuthenticationType")
+    authenticationType: hdfsAuthenticationType,
+    @ocaml.doc("<p>The Quality of Protection (QOP) configuration specifies the Remote Procedure Call (RPC)
+      and data transfer protection settings configured on the Hadoop Distributed File System (HDFS)
+      cluster. If <code>QopConfiguration</code> isn't specified, <code>RpcProtection</code> and
+        <code>DataTransferProtection</code> default to <code>PRIVACY</code>. If you set
+        <code>RpcProtection</code> or <code>DataTransferProtection</code>, the other parameter
+      assumes the same value. </p>")
+    @as("QopConfiguration")
+    qopConfiguration: option<qopConfiguration>,
+    @ocaml.doc("<p>The URI of the HDFS cluster's Key Management Server (KMS). </p>")
+    @as("KmsKeyProviderUri")
+    kmsKeyProviderUri: option<kmsKeyProviderUri>,
+    @ocaml.doc("<p>The number of DataNodes to replicate the data to when writing to the HDFS cluster. By
+      default, data is replicated to three DataNodes.</p>")
+    @as("ReplicationFactor")
+    replicationFactor: option<hdfsReplicationFactor>,
+    @ocaml.doc("<p>The size of data blocks to write into the HDFS cluster. The block size must be a multiple
+      of 512 bytes. The default block size is 128 mebibytes (MiB).</p>")
+    @as("BlockSize")
+    blockSize: option<hdfsBlockSize>,
+    @ocaml.doc("<p>The NameNode that manages the HDFS namespace. The NameNode performs operations such as
+      opening, closing, and renaming files and directories. The NameNode contains the information to
+      map blocks of data to the DataNodes. You can use only one NameNode.</p>")
+    @as("NameNodes")
+    nameNodes: hdfsNameNodeList,
+    @ocaml.doc("<p>A subdirectory in the HDFS cluster. This subdirectory is used to read data from or write
+      data to the HDFS cluster. If the subdirectory isn't specified, it will default to
+        <code>/</code>.</p>")
+    @as("Subdirectory")
+    subdirectory: option<hdfsSubdirectory>,
+  }
+  type response = {
+    @ocaml.doc("<p>The ARN of the source HDFS cluster location that's created. </p>")
+    @as("LocationArn")
+    locationArn: option<locationArn>,
+  }
+  @module("@aws-sdk/client-datasync") @new external new: request => t = "CreateLocationHdfsCommand"
+  let make = (
+    ~agentArns,
+    ~authenticationType,
+    ~nameNodes,
+    ~tags=?,
+    ~kerberosKrb5Conf=?,
+    ~kerberosKeytab=?,
+    ~kerberosPrincipal=?,
+    ~simpleUser=?,
+    ~qopConfiguration=?,
+    ~kmsKeyProviderUri=?,
+    ~replicationFactor=?,
+    ~blockSize=?,
+    ~subdirectory=?,
+    (),
+  ) =>
+    new({
+      tags: tags,
+      agentArns: agentArns,
+      kerberosKrb5Conf: kerberosKrb5Conf,
+      kerberosKeytab: kerberosKeytab,
+      kerberosPrincipal: kerberosPrincipal,
+      simpleUser: simpleUser,
+      authenticationType: authenticationType,
+      qopConfiguration: qopConfiguration,
+      kmsKeyProviderUri: kmsKeyProviderUri,
+      replicationFactor: replicationFactor,
+      blockSize: blockSize,
+      nameNodes: nameNodes,
       subdirectory: subdirectory,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
@@ -1896,7 +2277,7 @@ module CreateLocationFsxWindows = {
       resources. We recommend that you create a name tag for your location.</p>")
     @as("Tags")
     tags: option<inputTagList>,
-    @ocaml.doc("<p>The Amazon Resource Names (ARNs) of the security groups that are to use to configure the
+    @ocaml.doc("<p>The Amazon Resource Names (ARNs) of the security groups that are used to configure the
       FSx for Windows File Server file system.</p>")
     @as("SecurityGroupArns")
     securityGroupArns: ec2SecurityGroupArnList,
@@ -1905,7 +2286,7 @@ module CreateLocationFsxWindows = {
     )
     @as("FsxFilesystemArn")
     fsxFilesystemArn: fsxFilesystemArn,
-    @ocaml.doc("<p>A subdirectory in the location’s path. This subdirectory in the Amazon FSx for Windows
+    @ocaml.doc("<p>A subdirectory in the location's path. This subdirectory in the Amazon FSx for Windows
       File Server file system is used to read data from the Amazon FSx for Windows File Server
       source location or write data to the FSx for Windows File Server destination.</p>")
     @as("Subdirectory")
@@ -1941,6 +2322,46 @@ module CreateLocationFsxWindows = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module CreateLocationFsxLustre = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>The key-value pair that represents a tag that you want to add to the resource. The value can be an empty string. This value helps you manage, filter, and search for your resources. We recommend that you create a name tag for your location.</p>"
+    )
+    @as("Tags")
+    tags: option<inputTagList>,
+    @ocaml.doc(
+      "<p>A subdirectory in the location's path. This subdirectory in the FSx for Lustre file system is used to read data from the FSx for Lustre source location or write data to the FSx for Lustre  destination.</p>"
+    )
+    @as("Subdirectory")
+    subdirectory: option<fsxLustreSubdirectory>,
+    @ocaml.doc(
+      "<p>The Amazon Resource Names (ARNs) of the security groups that are used to configure the FSx for Lustre file system.</p>"
+    )
+    @as("SecurityGroupArns")
+    securityGroupArns: ec2SecurityGroupArnList,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) for the FSx for Lustre file system.</p>")
+    @as("FsxFilesystemArn")
+    fsxFilesystemArn: fsxFilesystemArn,
+  }
+  type response = {
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the FSx for Lustre file system location that's
+      created. </p>")
+    @as("LocationArn")
+    locationArn: option<locationArn>,
+  }
+  @module("@aws-sdk/client-datasync") @new
+  external new: request => t = "CreateLocationFsxLustreCommand"
+  let make = (~securityGroupArns, ~fsxFilesystemArn, ~tags=?, ~subdirectory=?, ()) =>
+    new({
+      tags: tags,
+      subdirectory: subdirectory,
+      securityGroupArns: securityGroupArns,
+      fsxFilesystemArn: fsxFilesystemArn,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module CreateLocationEfs = {
   type t
   @ocaml.doc("<p>CreateLocationEfsRequest</p>")
@@ -1967,7 +2388,7 @@ module CreateLocationEfs = {
           enables outbound connections to the NFS port on one of the file system’s mount targets.
           You can enable outbound connections either by IP address (CIDR range) or security
           group.</p>
-            
+        
                <p>For information about security groups and mount targets, see Security
           Groups for Amazon EC2 Instances and Mount Targets in the <i>Amazon EFS User
             Guide.</i>
@@ -1981,7 +2402,7 @@ module CreateLocationEfs = {
     efsFilesystemArn: efsFilesystemArn,
     @ocaml.doc("<p>A subdirectory in the location’s path. This subdirectory in the EFS file system is used
       to read data from the EFS source location or write data to the EFS destination. By default,
-      AWS DataSync uses the root directory.</p>
+      DataSync uses the root directory.</p>
          <note>
             <p>
                <code>Subdirectory</code> must be specified with forward slashes. For example,
@@ -2046,14 +2467,14 @@ module CreateAgent = {
     agentName: option<tagValue>,
     @ocaml.doc("<p>Your agent activation key. You can get the activation key either by sending an HTTP GET
       request with redirects that enable you to get the agent IP address (port 80). Alternatively,
-      you can get it from the AWS DataSync console.</p>
+      you can get it from the DataSync console.</p>
          <p>The redirect URL returned in the response provides you the activation key for your
       agent in the query string parameter <code>activationKey</code>. It might also include other
       activation-related parameters; however, these are merely defaults. The arguments you pass to
       this API call determine the actual configuration of your agent.</p>
-      
+    
 
-         <p>For more information, see Activating an Agent in the <i>AWS DataSync
+         <p>For more information, see Activating an Agent in the <i>DataSync
         User Guide.</i>
          </p>")
     @as("ActivationKey")
@@ -2062,7 +2483,7 @@ module CreateAgent = {
   @ocaml.doc("<p>CreateAgentResponse</p>")
   type response = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the agent. Use the <code>ListAgents</code> operation
-      to return a list of agents for your account and AWS Region.</p>")
+      to return a list of agents for your account and Amazon Web Services Region.</p>")
     @as("AgentArn")
     agentArn: option<agentArn>,
   }

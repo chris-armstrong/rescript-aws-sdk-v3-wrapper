@@ -224,7 +224,7 @@ module UnsubscribeFromDataset = {
     @as("IdentityPoolId")
     identityPoolId: identityPoolId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-cognito-sync") @new
   external new: request => t = "UnsubscribeFromDatasetCommand"
   let make = (~deviceId, ~datasetName, ~identityId, ~identityPoolId, ()) =>
@@ -251,7 +251,7 @@ module SubscribeToDataset = {
     @as("IdentityPoolId")
     identityPoolId: identityPoolId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-cognito-sync") @new
   external new: request => t = "SubscribeToDatasetCommand"
   let make = (~deviceId, ~datasetName, ~identityId, ~identityPoolId, ()) =>
@@ -364,7 +364,7 @@ module SetCognitoEvents = {
     @as("IdentityPoolId")
     identityPoolId: identityPoolId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-cognito-sync") @new
   external new: request => t = "SetCognitoEventsCommand"
   let make = (~events, ~identityPoolId, ()) => new({events: events, identityPoolId: identityPoolId})

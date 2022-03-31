@@ -47,6 +47,12 @@ type statusDetails = string
 type statusAdditionalInfo = string
 type standardOutputContent = string
 type standardErrorContent = string
+type sourceType = [
+  | @as("AWS::SSM::ManagedInstance") #AWS_SSM_ManagedInstance
+  | @as("AWS::IoT::Thing") #AWS_IoT_Thing
+  | @as("AWS::EC2::Instance") #AWS_EC2_Instance
+]
+type sourceId = string
 type snapshotId = string
 type snapshotDownloadUrl = string
 type signalType = [
@@ -69,6 +75,7 @@ type sessionStatus = [
   | @as("Connected") #Connected
 ]
 type sessionState = [@as("History") #History | @as("Active") #Active]
+type sessionReason = string
 type sessionOwner = string
 type sessionMaxResults = int
 type sessionManagerS3OutputUrl = string
@@ -102,6 +109,7 @@ type reviewStatus = [
 ]
 type responseCode = int
 type resourceTypeForTagging = [
+  | @as("Automation") #Automation
   | @as("OpsMetadata") #OpsMetadata
   | @as("OpsItem") #OpsItem
   | @as("PatchBaseline") #PatchBaseline
@@ -137,12 +145,14 @@ type resourceCountByStatus = string
 type resourceCount = int
 type remainingCount = int
 type registrationsCount = int
+type registrationMetadataValue = string
+type registrationMetadataKey = string
 type registrationLimit = int
 type region = string
 type rebootOption = [@as("NoReboot") #NoReboot | @as("RebootIfNeeded") #RebootIfNeeded]
 type putInventoryMessage = string
 type product = string
-type platformType = [@as("Linux") #Linux | @as("Windows") #Windows]
+type platformType = [@as("MacOS") #MacOS | @as("Linux") #Linux | @as("Windows") #Windows]
 type pingStatus = [
   | @as("Inactive") #Inactive
   | @as("ConnectionLost") #ConnectionLost
@@ -283,6 +293,7 @@ type opsMetadataArn = string
 type opsItemType = string
 type opsItemTitle = string
 type opsItemStatus = [
+  | @as("Closed") #Closed
   | @as("Rejected") #Rejected
   | @as("Approved") #Approved
   | @as("PendingApproval") #PendingApproval
@@ -327,6 +338,7 @@ type opsItemFilterOperator = [
   | @as("Equal") #Equal
 ]
 type opsItemFilterKey = [
+  | @as("InsightByType") #InsightByType
   | @as("ChangeRequestByTargetsResourceGroup") #ChangeRequestByTargetsResourceGroup
   | @as("ChangeRequestByTemplate") #ChangeRequestByTemplate
   | @as("ChangeRequestByApproverName") #ChangeRequestByApproverName
@@ -382,6 +394,8 @@ type opsAggregatorValueKey = string
 type opsAggregatorValue = string
 type opsAggregatorType = string
 type operatingSystem = [
+  | @as("ROCKY_LINUX") #ROCKY_LINUX
+  | @as("RASPBIAN") #RASPBIAN
   | @as("MACOS") #MACOS
   | @as("DEBIAN") #DEBIAN
   | @as("ORACLE_LINUX") #ORACLE_LINUX
@@ -406,6 +420,7 @@ type notificationArn = string
 type nextToken = string
 type metadataValueString = string
 type metadataKey = string
+type maxSessionDuration = string
 type maxResultsEC2Compatible = int
 type maxResults = int
 type maxErrors = string
@@ -423,6 +438,10 @@ type maintenanceWindowTaskPriority = int
 type maintenanceWindowTaskParameterValue = string
 type maintenanceWindowTaskParameterName = string
 type maintenanceWindowTaskId = string
+type maintenanceWindowTaskCutoffBehavior = [
+  | @as("CANCEL_TASK") #CANCEL_TASK
+  | @as("CONTINUE_TASK") #CONTINUE_TASK
+]
 type maintenanceWindowTaskArn = string
 type maintenanceWindowTargetId = string
 type maintenanceWindowStringDateTime = string
@@ -696,6 +715,7 @@ type cloudWatchLogGroupName = string
 type clientToken = string
 type changeRequestName = string
 type changeDetailsValue = string
+type category = string
 type calendarState = [@as("CLOSED") #CLOSED | @as("OPEN") #OPEN]
 type calendarNameOrARN = string
 type boolean_ = bool
@@ -819,17 +839,17 @@ type validNextStepList = array<validNextStep>
 type targetValues = array<targetValue>
 type targetParameterList = array<parameterValue>
 type targetMapValueList = array<targetMapValue>
-@ocaml.doc("<p>Metadata that you assign to your AWS resources. Tags enable you to categorize your resources
-   in different ways, for example, by purpose, owner, or environment. In Systems Manager, you can apply tags
-   to documents, managed instances, maintenance windows, Parameter Store parameters, and patch
-   baselines.</p>")
+@ocaml.doc("<p>Metadata that you assign to your Amazon Web Services resources. Tags enable you to categorize your
+   resources in different ways, for example, by purpose, owner, or environment. In Amazon Web Services Systems Manager, you
+   can apply tags to Systems Manager documents (SSM documents), managed nodes, maintenance windows,
+   parameters, patch baselines, OpsItems, and OpsMetadata.</p>")
 type tag = {
   @ocaml.doc("<p>The value of the tag.</p>") @as("Value") value: tagValue,
   @ocaml.doc("<p>The name of the tag.</p>") @as("Key") key: tagKey,
 }
 type stringList = array<string_>
 type stepExecutionFilterValueList = array<stepExecutionFilterValue>
-@ocaml.doc("<p>The number of managed instances found for each patch severity level defined in the request
+@ocaml.doc("<p>The number of managed nodes found for each patch severity level defined in the request
    filter.</p>")
 type severitySummary = {
   @ocaml.doc("<p>The total number of resources or compliance items that have a severity level of unspecified.
@@ -880,10 +900,11 @@ type sessionFilter = {
      2018-08-29T00:00:00Z to see sessions that started before August 29, 2018.</p>
             </li>
             <li>
-               <p>Target: Specify an instance to which session connections have been made.</p>
+               <p>Target: Specify a managed node to which session connections have been made.</p>
             </li>
             <li>
-               <p>Owner: Specify an AWS user account to see a list of sessions started by that user.</p>
+               <p>Owner: Specify an Amazon Web Services user account to see a list of sessions started by that
+     user.</p>
             </li>
             <li>
                <p>Status: Specify a valid session status to see a list of all sessions with that status.
@@ -918,23 +939,24 @@ type sessionFilter = {
 }
 @ocaml.doc("<p>The service setting data structure.</p>
          <p>
-            <code>ServiceSetting</code> is an account-level setting for an AWS service. This setting
+            <code>ServiceSetting</code> is an account-level setting for an Amazon Web Services service. This setting
    defines how a user interacts with or uses a service or a feature of a service. For example, if an
-   AWS service charges money to the account based on feature or service usage, then the AWS service
-   team might create a default setting of \"false\". This means the user can't use this feature unless
-   they change the setting to \"true\" and intentionally opt in for a paid feature.</p>
-         <p>Services map a <code>SettingId</code> object to a setting value. AWS services teams define
+   Amazon Web Services service charges money to the account based on feature or service usage, then the Amazon Web Services
+   service team might create a default setting of \"false\". This means the user can't use this
+   feature unless they change the setting to \"true\" and intentionally opt in for a paid
+   feature.</p>
+         <p>Services map a <code>SettingId</code> object to a setting value. Amazon Web Services services teams define
    the default value for a <code>SettingId</code>. You can't create a new <code>SettingId</code>,
    but you can overwrite the default value if you have the <code>ssm:UpdateServiceSetting</code>
-   permission for the setting. Use the <a>UpdateServiceSetting</a> API action to change
-   the default setting. Or, use the <a>ResetServiceSetting</a> to change the value back
-   to the original value defined by the AWS service team.</p>")
+   permission for the setting. Use the <a>UpdateServiceSetting</a> API operation to
+   change the default setting. Or, use the <a>ResetServiceSetting</a> to change the value
+   back to the original value defined by the Amazon Web Services service team.</p>")
 type serviceSetting = {
   @ocaml.doc("<p>The status of the service setting. The value can be Default, Customized or
    PendingUpdate.</p>
          <ul>
             <li>
-               <p>Default: The current setting uses a default value provisioned by the AWS service
+               <p>Default: The current setting uses a default value provisioned by the Amazon Web Services service
      team.</p>
             </li>
             <li>
@@ -970,7 +992,8 @@ type scheduledWindowExecution = {
   @ocaml.doc("<p>The ID of the maintenance window to be run.</p>") @as("WindowId")
   windowId: option<maintenanceWindowId>,
 }
-@ocaml.doc("<p>A URL for the S3 bucket where you want to store the results of this request.</p>")
+@ocaml.doc("<p>A URL for the Amazon Web Services Systems Manager (Systems Manager) bucket where you want to store the
+   results of this request.</p>")
 type s3OutputUrl = {
   @ocaml.doc("<p>A URL for an S3 bucket where you want to store the results of this request.</p>")
   @as("OutputUrl")
@@ -982,9 +1005,7 @@ type s3OutputLocation = {
   outputS3KeyPrefix: option<s3KeyPrefix>,
   @ocaml.doc("<p>The name of the S3 bucket.</p>") @as("OutputS3BucketName")
   outputS3BucketName: option<s3BucketName>,
-  @ocaml.doc("<p>(Deprecated) You can no longer specify this parameter. The system ignores it. Instead, Systems Manager
-   automatically determines the Region of the S3 bucket.</p>")
-  @as("OutputS3Region")
+  @ocaml.doc("<p>The Amazon Web Services Region of the S3 bucket.</p>") @as("OutputS3Region")
   outputS3Region: option<s3Region>,
 }
 @ocaml.doc("<p>Information about the result of a document review request.</p>")
@@ -1000,21 +1021,21 @@ type reviewInformation = {
 }
 @ocaml.doc("<p>The inventory item result attribute.</p>")
 type resultAttribute = {
-  @ocaml.doc("<p>Name of the inventory item type. Valid value: AWS:InstanceInformation. Default Value:
-   AWS:InstanceInformation.</p>")
+  @ocaml.doc("<p>Name of the inventory item type. Valid value: <code>AWS:InstanceInformation</code>. Default
+   Value: <code>AWS:InstanceInformation</code>.</p>")
   @as("TypeName")
   typeName: inventoryItemTypeName,
 }
 type resourceDataSyncSourceRegionList = array<resourceDataSyncSourceRegion>
-@ocaml.doc("<p>The AWS Organizations organizational unit data source for the sync.</p>")
+@ocaml.doc("<p>The Organizations organizational unit data source for the sync.</p>")
 type resourceDataSyncOrganizationalUnit = {
-  @ocaml.doc("<p>The AWS Organization unit ID data source for the sync.</p>")
+  @ocaml.doc("<p>The Organizations unit ID data source for the sync.</p>")
   @as("OrganizationalUnitId")
   organizationalUnitId: option<resourceDataSyncOrganizationalUnitId>,
 }
-@ocaml.doc("<p>Synchronize Systems Manager Inventory data from multiple AWS accounts defined in AWS Organizations to
-   a centralized S3 bucket. Data is synchronized to individual key prefixes in the central bucket.
-   Each key prefix represents a different AWS account ID.</p>")
+@ocaml.doc("<p>Synchronize Amazon Web Services Systems Manager Inventory data from multiple Amazon Web Services accounts defined in Organizations to a
+   centralized Amazon S3 bucket. Data is synchronized to individual key prefixes in the
+   central bucket. Each key prefix represents a different Amazon Web Services account ID.</p>")
 type resourceDataSyncDestinationDataSharing = {
   @ocaml.doc("<p>The sharing data type. Only <code>Organization</code> is supported.</p>")
   @as("DestinationDataSharingType")
@@ -1027,28 +1048,33 @@ type relatedOpsItem = {
   @ocaml.doc("<p>The ID of an OpsItem related to the current OpsItem.</p>") @as("OpsItemId")
   opsItemId: string_,
 }
+@ocaml.doc("<p>Reserved for internal use.</p>")
+type registrationMetadataItem = {
+  @ocaml.doc("<p>Reserved for internal use.</p>") @as("Value") value: registrationMetadataValue,
+  @ocaml.doc("<p>Reserved for internal use.</p>") @as("Key") key: registrationMetadataKey,
+}
 type regions = array<region>
-@ocaml.doc("<p>An aggregate of step execution statuses displayed in the AWS Console for a multi-Region and
-   multi-account Automation execution.</p>")
+@ocaml.doc("<p>An aggregate of step execution statuses displayed in the Amazon Web Services Systems Manager console for a
+   multi-Region and multi-account Automation execution.</p>")
 type progressCounters = {
-  @ocaml.doc("<p>The total number of steps that timed out in all specified AWS Regions and accounts for the
-   current Automation execution.</p>")
+  @ocaml.doc("<p>The total number of steps that timed out in all specified Amazon Web Services Regions and Amazon Web Services accounts
+   for the current Automation execution.</p>")
   @as("TimedOutSteps")
   timedOutSteps: option<integer_>,
-  @ocaml.doc("<p>The total number of steps that the system cancelled in all specified AWS Regions and
-   accounts for the current Automation execution.</p>")
+  @ocaml.doc("<p>The total number of steps that the system cancelled in all specified Amazon Web Services Regions and
+   Amazon Web Services accounts for the current Automation execution.</p>")
   @as("CancelledSteps")
   cancelledSteps: option<integer_>,
-  @ocaml.doc("<p>The total number of steps that failed to run in all specified AWS Regions and accounts for
-   the current Automation execution.</p>")
+  @ocaml.doc("<p>The total number of steps that failed to run in all specified Amazon Web Services Regions and
+   Amazon Web Services accounts for the current Automation execution.</p>")
   @as("FailedSteps")
   failedSteps: option<integer_>,
-  @ocaml.doc("<p>The total number of steps that successfully completed in all specified AWS Regions and
-   accounts for the current Automation execution.</p>")
+  @ocaml.doc("<p>The total number of steps that successfully completed in all specified Amazon Web Services Regions and
+   Amazon Web Services accounts for the current Automation execution.</p>")
   @as("SuccessSteps")
   successSteps: option<integer_>,
-  @ocaml.doc("<p>The total number of steps run in all specified AWS Regions and accounts for the current
-   Automation execution.</p>")
+  @ocaml.doc("<p>The total number of steps run in all specified Amazon Web Services Regions and Amazon Web Services accounts for the
+   current Automation execution.</p>")
   @as("TotalSteps")
   totalSteps: option<integer_>,
 }
@@ -1056,14 +1082,12 @@ type platformTypeList = array<platformType>
 @ocaml.doc("<p>Information about the approval status of a patch.</p>")
 type patchStatus = {
   @ocaml.doc("<p>The date the patch was approved (or will be approved if the status is
-   PENDING_APPROVAL).</p>")
+    <code>PENDING_APPROVAL</code>).</p>")
   @as("ApprovalDate")
   approvalDate: option<dateTime>,
   @ocaml.doc("<p>The compliance severity level for a patch.</p>") @as("ComplianceLevel")
   complianceLevel: option<patchComplianceLevel>,
-  @ocaml.doc("<p>The approval status of a patch (APPROVED, PENDING_APPROVAL, EXPLICIT_APPROVED,
-   EXPLICIT_REJECTED).</p>")
-  @as("DeploymentStatus")
+  @ocaml.doc("<p>The approval status of a patch.</p>") @as("DeploymentStatus")
   deploymentStatus: option<patchDeploymentStatus>,
 }
 type patchSourceProductList = array<patchSourceProduct>
@@ -1072,26 +1096,27 @@ type patchOrchestratorFilterValues = array<patchOrchestratorFilterValue>
 type patchIdList = array<patchId>
 type patchGroupList = array<patchGroup>
 type patchFilterValueList = array<patchFilterValue>
-@ocaml.doc("<p>Information about the state of a patch on a particular instance as it relates to the patch
-   baseline used to patch the instance.</p>")
+@ocaml.doc("<p>Information about the state of a patch on a particular managed node as it relates to the
+   patch baseline used to patch the node.</p>")
 type patchComplianceData = {
   @ocaml.doc("<p>The IDs of one or more Common Vulnerabilities and Exposure (CVE) issues that are resolved by
    the patch.</p>")
   @as("CVEIds")
   cveids: option<patchCVEIds>,
-  @ocaml.doc("<p>The date/time the patch was installed on the instance. Note that not all operating systems
-   provide this level of information.</p>")
+  @ocaml.doc("<p>The date/time the patch was installed on the managed node. Not all operating systems provide
+   this level of information.</p>")
   @as("InstalledTime")
   installedTime: dateTime,
-  @ocaml.doc("<p>The state of the patch on the instance, such as INSTALLED or FAILED.</p>
-         <p>For descriptions of each patch state, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-compliance-about.html#sysman-compliance-monitor-patch\">About patch compliance</a> in the <i>AWS Systems Manager User Guide</i>.</p>")
+  @ocaml.doc("<p>The state of the patch on the managed node, such as INSTALLED or FAILED.</p>
+         <p>For descriptions of each patch state, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-compliance-about.html#sysman-compliance-monitor-patch\">About patch compliance</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>")
   @as("State")
   state: patchComplianceDataState,
-  @ocaml.doc("<p>The severity of the patch (for example, Critical, Important, Moderate).</p>")
+  @ocaml.doc("<p>The severity of the patch such as <code>Critical</code>, <code>Important</code>, and
+    <code>Moderate</code>.</p>")
   @as("Severity")
   severity: patchSeverity,
-  @ocaml.doc("<p>The classification of the patch (for example, SecurityUpdates, Updates,
-   CriticalUpdates).</p>")
+  @ocaml.doc("<p>The classification of the patch, such as <code>SecurityUpdates</code>, <code>Updates</code>,
+   and <code>CriticalUpdates</code>.</p>")
   @as("Classification")
   classification: patchClassification,
   @ocaml.doc("<p>The operating system-specific ID of the patch.</p>") @as("KBId")
@@ -1102,15 +1127,14 @@ type patchCVEIdList = array<patchCVEId>
 type patchBugzillaIdList = array<patchBugzillaId>
 @ocaml.doc("<p>Defines the basic information about a patch baseline.</p>")
 type patchBaselineIdentity = {
-  @ocaml.doc("<p>Whether this is the default baseline. Note that Systems Manager supports creating multiple default
-   patch baselines. For example, you can create a default patch baseline for each operating
-   system.</p>")
+  @ocaml.doc("<p>Whether this is the default baseline. Amazon Web Services Systems Manager supports creating multiple default patch
+   baselines. For example, you can create a default patch baseline for each operating system.</p>")
   @as("DefaultBaseline")
   defaultBaseline: option<defaultBaseline>,
   @ocaml.doc("<p>The description of the patch baseline.</p>") @as("BaselineDescription")
   baselineDescription: option<baselineDescription>,
-  @ocaml.doc("<p>Defines the operating system the patch baseline applies to. The Default value is WINDOWS.
-  </p>")
+  @ocaml.doc("<p>Defines the operating system the patch baseline applies to. The default value is
+    <code>WINDOWS</code>. </p>")
   @as("OperatingSystem")
   operatingSystem: option<operatingSystem>,
   @ocaml.doc("<p>The name of the patch baseline.</p>") @as("BaselineName")
@@ -1126,18 +1150,18 @@ type parameterNameList = array<psparameterName>
 type parameterLabelList = array<parameterLabel>
 @ocaml.doc("<p>One or more policies assigned to a parameter.</p>")
 type parameterInlinePolicy = {
-  @ocaml.doc("<p>The status of the policy. Policies report the following statuses: Pending (the policy has
-   not been enforced or applied yet), Finished (the policy was applied), Failed (the policy was not
+  @ocaml.doc("<p>The status of the policy. Policies report the following statuses: Pending (the policy hasn't
+   been enforced or applied yet), Finished (the policy was applied), Failed (the policy wasn't
    applied), or InProgress (the policy is being applied now). </p>")
   @as("PolicyStatus")
   policyStatus: option<string_>,
-  @ocaml.doc("<p>The type of policy. Parameter Store supports the following policy types: Expiration,
-   ExpirationNotification, and NoChangeNotification. </p>")
+  @ocaml.doc("<p>The type of policy. Parameter Store, a capability of Amazon Web Services Systems Manager, supports the following
+   policy types: Expiration, ExpirationNotification, and NoChangeNotification. </p>")
   @as("PolicyType")
   policyType: option<string_>,
   @ocaml.doc("<p>The JSON text of the policy.</p>") @as("PolicyText") policyText: option<string_>,
 }
-@ocaml.doc("<p>An Systems Manager parameter in Parameter Store.</p>")
+@ocaml.doc("<p>An Amazon Web Services Systems Manager parameter in Parameter Store.</p>")
 type parameter = {
   @ocaml.doc("<p>The data type of the parameter, such as <code>text</code> or <code>aws:ec2:image</code>. The
    default is <code>text</code>.</p>")
@@ -1150,8 +1174,8 @@ type parameter = {
   )
   @as("LastModifiedDate")
   lastModifiedDate: option<dateTime>,
-  @ocaml.doc("<p>Applies to parameters that reference information in other AWS services. SourceResult is the
-   raw result or response from the source.</p>")
+  @ocaml.doc("<p>Applies to parameters that reference information in other Amazon Web Services services.
+    <code>SourceResult</code> is the raw result or response from the source.</p>")
   @as("SourceResult")
   sourceResult: option<string_>,
   @ocaml.doc("<p>Either the version number or the label used to retrieve the parameter value. Specify
@@ -1161,9 +1185,19 @@ type parameter = {
   @as("Selector")
   selector: option<psparameterSelector>,
   @ocaml.doc("<p>The parameter version.</p>") @as("Version") version: option<psparameterVersion>,
-  @ocaml.doc("<p>The parameter value.</p>") @as("Value") value: option<psparameterValue>,
+  @ocaml.doc("<p>The parameter value.</p>
+         <note>
+            <p>If type is <code>StringList</code>, the system returns a comma-separated string with no
+    spaces between commas in the <code>Value</code> field.</p>
+         </note>")
+  @as("Value")
+  value: option<psparameterValue>,
   @ocaml.doc("<p>The type of parameter. Valid values include the following: <code>String</code>,
-    <code>StringList</code>, and <code>SecureString</code>.</p>")
+    <code>StringList</code>, and <code>SecureString</code>.</p>
+         <note>
+            <p>If type is <code>StringList</code>, the system returns a comma-separated string with no
+    spaces between commas in the <code>Value</code> field.</p>
+         </note>")
   @as("Type")
   type_: option<parameterType>,
   @ocaml.doc("<p>The name of the parameter.</p>") @as("Name") name: option<psparameterName>,
@@ -1172,8 +1206,9 @@ type parameter = {
   "<p>Information about the source where the association execution details are stored.</p>"
 )
 type outputSource = {
-  @ocaml.doc("<p>The type of source where the association execution details are stored, for example,
-   Amazon S3.</p>")
+  @ocaml.doc(
+    "<p>The type of source where the association execution details are stored, for example, Amazon S3.</p>"
+  )
   @as("OutputSourceType")
   outputSourceType: option<outputSourceType>,
   @ocaml.doc("<p>The ID of the output source, for example the URL of an S3 bucket.</p>")
@@ -1182,8 +1217,9 @@ type outputSource = {
 }
 @ocaml.doc("<p>The OpsItem data type to return.</p>")
 type opsResultAttribute = {
-  @ocaml.doc("<p>Name of the data type. Valid value: AWS:OpsItem, AWS:EC2InstanceInformation,
-   AWS:OpsItemTrendline, or AWS:ComplianceSummary.</p>")
+  @ocaml.doc("<p>Name of the data type. Valid value: <code>AWS:OpsItem</code>,
+    <code>AWS:EC2InstanceInformation</code>, <code>AWS:OpsItemTrendline</code>, or
+    <code>AWS:ComplianceSummary</code>.</p>")
   @as("TypeName")
   typeName: opsDataTypeName,
 }
@@ -1208,16 +1244,15 @@ type opsItemParameterNamesList = array<string_>
 type opsItemOpsDataKeysList = array<string_>
 @ocaml.doc("<p>A notification about the OpsItem.</p>")
 type opsItemNotification = {
-  @ocaml.doc("<p>The Amazon Resource Name (ARN) of an SNS topic where notifications are sent when this
-   OpsItem is edited or changed.</p>")
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of an Amazon Simple Notification Service (Amazon SNS) topic where
+   notifications are sent when this OpsItem is edited or changed.</p>")
   @as("Arn")
   arn: option<string_>,
 }
 @ocaml.doc("<p>Information about the user or resource that created an OpsItem event.</p>")
 type opsItemIdentity = {
-  @ocaml.doc(
-    "<p>The Amazon Resource Name (ARN) of the IAM entity that created the OpsItem event.</p>"
-  )
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the IAM entity that created the OpsItem
+   event.</p>")
   @as("Arn")
   arn: option<string_>,
 }
@@ -1246,14 +1281,13 @@ type metadataValue = {
 }
 type metadataKeysToDeleteList = array<metadataKey>
 type maintenanceWindowTaskParameterValueList = array<maintenanceWindowTaskParameterValue>
-@ocaml.doc("<p>The parameters for a STEP_FUNCTIONS task.</p>
+@ocaml.doc("<p>The parameters for a <code>STEP_FUNCTIONS</code> task.</p>
          <p>For information about specifying and updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and <a>UpdateMaintenanceWindowTask</a>.</p>
          <note>
-   
             <p>
-               <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the
+               <code>LoggingInfo</code> has been deprecated. To specify an Amazon Simple Storage Service (Amazon S3) bucket to contain logs, instead use the
       <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure.
-      For information about how Systems Manager handles these options for the supported maintenance
+      For information about how Amazon Web Services Systems Manager handles these options for the supported maintenance
       window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p>
    
             <p>
@@ -1265,19 +1299,18 @@ type maintenanceWindowTaskParameterValueList = array<maintenanceWindowTaskParame
      <code>TaskParameters</code> and <code>LoggingInfo</code>.</p>
          </note>")
 type maintenanceWindowStepFunctionsParameters = {
-  @ocaml.doc("<p>The name of the STEP_FUNCTIONS task.</p>") @as("Name")
+  @ocaml.doc("<p>The name of the <code>STEP_FUNCTIONS</code> task.</p>") @as("Name")
   name: option<maintenanceWindowStepFunctionsName>,
-  @ocaml.doc("<p>The inputs for the STEP_FUNCTIONS task.</p>") @as("Input")
+  @ocaml.doc("<p>The inputs for the <code>STEP_FUNCTIONS</code> task.</p>") @as("Input")
   input: option<maintenanceWindowStepFunctionsInput>,
 }
-@ocaml.doc("<p>The parameters for a LAMBDA task type.</p>
+@ocaml.doc("<p>The parameters for a <code>LAMBDA</code> task type.</p>
          <p>For information about specifying and updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and <a>UpdateMaintenanceWindowTask</a>.</p>
          <note>
-   
             <p>
-               <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the
+               <code>LoggingInfo</code> has been deprecated. To specify an Amazon Simple Storage Service (Amazon S3) bucket to contain logs, instead use the
       <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure.
-      For information about how Systems Manager handles these options for the supported maintenance
+      For information about how Amazon Web Services Systems Manager handles these options for the supported maintenance
       window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p>
    
             <p>
@@ -1291,15 +1324,15 @@ type maintenanceWindowStepFunctionsParameters = {
 type maintenanceWindowLambdaParameters = {
   @ocaml.doc("<p>JSON to provide to your Lambda function as input.</p>") @as("Payload")
   payload: option<maintenanceWindowLambdaPayload>,
-  @ocaml.doc("<p>(Optional) Specify a Lambda function version or alias name. If you specify a function
-   version, the action uses the qualified function ARN to invoke a specific Lambda function. If you
-   specify an alias name, the action uses the alias ARN to invoke the Lambda function version to
-   which the alias points.</p>")
+  @ocaml.doc("<p>(Optional) Specify an Lambda function version or alias name. If you specify a
+   function version, the operation uses the qualified function Amazon Resource Name (ARN) to invoke
+   a specific Lambda function. If you specify an alias name, the operation uses the
+   alias ARN to invoke the Lambda function version to which the alias points.</p>")
   @as("Qualifier")
   qualifier: option<maintenanceWindowLambdaQualifier>,
-  @ocaml.doc("<p>Pass client-specific information to the Lambda function that you are invoking. You can then
-   process the client information in your Lambda function as you choose through the context
-   variable.</p>")
+  @ocaml.doc("<p>Pass client-specific information to the Lambda function that you are
+   invoking. You can then process the client information in your Lambda function as you
+   choose through the context variable.</p>")
   @as("ClientContext")
   clientContext: option<maintenanceWindowLambdaClientContext>,
 }
@@ -1324,7 +1357,7 @@ type maintenanceWindowIdentity = {
    to become inactive.</p>")
   @as("EndDate")
   endDate: option<maintenanceWindowStringDateTime>,
-  @ocaml.doc("<p>The number of days to wait to run a maintenance window after the scheduled CRON expression
+  @ocaml.doc("<p>The number of days to wait to run a maintenance window after the scheduled cron expression
    date and time.</p>")
   @as("ScheduleOffset")
   scheduleOffset: option<maintenanceWindowOffset>,
@@ -1337,8 +1370,8 @@ type maintenanceWindowIdentity = {
   )
   @as("Schedule")
   schedule: option<maintenanceWindowSchedule>,
-  @ocaml.doc("<p>The number of hours before the end of the maintenance window that Systems Manager stops scheduling new
-   tasks for execution.</p>")
+  @ocaml.doc("<p>The number of hours before the end of the maintenance window that Amazon Web Services Systems Manager stops scheduling
+   new tasks for execution.</p>")
   @as("Cutoff")
   cutoff: option<maintenanceWindowCutoff>,
   @ocaml.doc("<p>The duration of the maintenance window in hours.</p>") @as("Duration")
@@ -1361,13 +1394,14 @@ type maintenanceWindowExecutionTaskInvocationIdentity = {
   @as("WindowTargetId")
   windowTargetId: option<maintenanceWindowTaskTargetId>,
   @ocaml.doc("<p>User-provided value that was specified when the target was registered with the maintenance
-   window. This was also included in any CloudWatch events raised during the task invocation.</p>")
+   window. This was also included in any Amazon CloudWatch Events events raised during the task
+   invocation.</p>")
   @as("OwnerInformation")
   ownerInformation: option<ownerInformation>,
   @ocaml.doc("<p>The time the invocation finished.</p>") @as("EndTime") endTime: option<dateTime>,
   @ocaml.doc("<p>The time the invocation started.</p>") @as("StartTime")
   startTime: option<dateTime>,
-  @ocaml.doc("<p>The details explaining the status of the task invocation. Only available for certain Status
+  @ocaml.doc("<p>The details explaining the status of the task invocation. Not available for all status
    values. </p>")
   @as("StatusDetails")
   statusDetails: option<maintenanceWindowExecutionStatusDetails>,
@@ -1378,7 +1412,7 @@ type maintenanceWindowExecutionTaskInvocationIdentity = {
   parameters: option<maintenanceWindowExecutionTaskInvocationParameters>,
   @ocaml.doc("<p>The task type.</p>") @as("TaskType") taskType: option<maintenanceWindowTaskType>,
   @ocaml.doc("<p>The ID of the action performed in the service that actually handled the task invocation. If
-   the task type is RUN_COMMAND, this value is the command ID.</p>")
+   the task type is <code>RUN_COMMAND</code>, this value is the command ID.</p>")
   @as("ExecutionId")
   executionId: option<maintenanceWindowExecutionTaskExecutionId>,
   @ocaml.doc("<p>The ID of the task invocation.</p>") @as("InvocationId")
@@ -1395,13 +1429,13 @@ type maintenanceWindowExecutionTaskInvocationIdentity = {
 type maintenanceWindowExecutionTaskIdentity = {
   @ocaml.doc("<p>The type of task that ran.</p>") @as("TaskType")
   taskType: option<maintenanceWindowTaskType>,
-  @ocaml.doc("<p>The ARN of the task that ran.</p>") @as("TaskArn")
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the task that ran.</p>") @as("TaskArn")
   taskArn: option<maintenanceWindowTaskArn>,
   @ocaml.doc("<p>The time the task execution finished.</p>") @as("EndTime")
   endTime: option<dateTime>,
   @ocaml.doc("<p>The time the task execution started.</p>") @as("StartTime")
   startTime: option<dateTime>,
-  @ocaml.doc("<p>The details explaining the status of the task execution. Only available for certain status
+  @ocaml.doc("<p>The details explaining the status of the task execution. Not available for all status
    values.</p>")
   @as("StatusDetails")
   statusDetails: option<maintenanceWindowExecutionStatusDetails>,
@@ -1419,7 +1453,7 @@ type maintenanceWindowExecutionTaskIdList = array<maintenanceWindowExecutionTask
 type maintenanceWindowExecution = {
   @ocaml.doc("<p>The time the execution finished.</p>") @as("EndTime") endTime: option<dateTime>,
   @ocaml.doc("<p>The time the execution started.</p>") @as("StartTime") startTime: option<dateTime>,
-  @ocaml.doc("<p>The details explaining the Status. Only available for certain status values.</p>")
+  @ocaml.doc("<p>The details explaining the status. Not available for all status values.</p>")
   @as("StatusDetails")
   statusDetails: option<maintenanceWindowExecutionStatusDetails>,
   @ocaml.doc("<p>The status of the execution.</p>") @as("Status")
@@ -1429,16 +1463,18 @@ type maintenanceWindowExecution = {
   @ocaml.doc("<p>The ID of the maintenance window.</p>") @as("WindowId")
   windowId: option<maintenanceWindowId>,
 }
-@ocaml.doc("<p>Information about an S3 bucket to write instance-level logs to.</p>
+@ocaml.doc("<p>Information about an Amazon Simple Storage Service (Amazon S3) bucket to write managed
+   node-level logs to.</p>
          <note>
             <p>
-               <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the
+               <code>LoggingInfo</code> has been deprecated. To specify an Amazon Simple Storage Service (Amazon S3) bucket to contain logs, instead use the
       <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure.
-      For information about how Systems Manager handles these options for the supported maintenance
+      For information about how Amazon Web Services Systems Manager handles these options for the supported maintenance
       window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p>
          </note>")
 type loggingInfo = {
-  @ocaml.doc("<p>The Region where the S3 bucket is located.</p>") @as("S3Region")
+  @ocaml.doc("<p>The Amazon Web Services Region where the S3 bucket is located.</p>")
+  @as("S3Region")
   s3Region: s3Region,
   @ocaml.doc("<p>(Optional) The S3 bucket subfolder. </p>") @as("S3KeyPrefix")
   s3KeyPrefix: option<s3KeyPrefix>,
@@ -1470,85 +1506,93 @@ type inventoryDeletionSummaryItem = {
   version: option<inventoryItemSchemaVersion>,
 }
 type instancePatchStateFilterValues = array<instancePatchStateFilterValue>
-@ocaml.doc("<p>Defines the high-level patch compliance state for a managed instance, providing information
+@ocaml.doc("<p>Defines the high-level patch compliance state for a managed node, providing information
    about the number of installed, missing, not applicable, and failed patches along with metadata
-   about the operation when this information was gathered for the instance.</p>")
+   about the operation when this information was gathered for the managed node.</p>")
 type instancePatchState = {
-  @ocaml.doc("<p>The number of instances with patches installed that are specified as other than \"Critical\"
-   or \"Security\" but are not compliant with the patch baseline. The status of these instances is
-   NON_COMPLIANT.</p>")
+  @ocaml.doc("<p>The number of managed nodes with patches installed that are specified as other than
+    <code>Critical</code> or <code>Security</code> but aren't compliant with the patch baseline. The
+   status of these managed nodes is <code>NON_COMPLIANT</code>.</p>")
   @as("OtherNonCompliantCount")
   otherNonCompliantCount: option<patchOtherNonCompliantCount>,
-  @ocaml.doc("<p>The number of instances where patches that are specified as \"Security\" in a patch advisory
-   are not installed. These patches might be missing, have failed installation, were rejected, or
-   were installed but awaiting a required instance reboot. The status of these instances is
-    <code>NON_COMPLIANT</code>.</p>")
+  @ocaml.doc("<p>The number of managed nodes where patches that are specified as <code>Security</code> in a
+   patch advisory aren't installed. These patches might be missing, have failed installation, were
+   rejected, or were installed but awaiting a required managed node reboot. The status of these
+   managed nodes is <code>NON_COMPLIANT</code>.</p>")
   @as("SecurityNonCompliantCount")
   securityNonCompliantCount: option<patchSecurityNonCompliantCount>,
-  @ocaml.doc("<p>The number of instances where patches that are specified as \"Critical\" for compliance
-   reporting in the patch baseline are not installed. These patches might be missing, have failed
-   installation, were rejected, or were installed but awaiting a required instance reboot. The
-   status of these instances is <code>NON_COMPLIANT</code>.</p>")
+  @ocaml.doc("<p>The number of managed nodes where patches that are specified as <code>Critical</code> for
+   compliance reporting in the patch baseline aren't installed. These patches might be missing, have
+   failed installation, were rejected, or were installed but awaiting a required managed node
+   reboot. The status of these managed nodes is <code>NON_COMPLIANT</code>.</p>")
   @as("CriticalNonCompliantCount")
   criticalNonCompliantCount: option<patchCriticalNonCompliantCount>,
   @ocaml.doc("<p>Indicates the reboot option specified in the patch baseline.</p>
          <note>
-            <p>Reboot options apply to <code>Install</code> operations only. Reboots are not attempted for
+            <p>Reboot options apply to <code>Install</code> operations only. Reboots aren't attempted for
     Patch Manager <code>Scan</code> operations.</p>
          </note>
          <ul>
             <li>
                <p>
-                  <b>RebootIfNeeded</b>: Patch Manager tries to reboot the
-     instance if it installed any patches, or if any patches are detected with a status of
+                  <code>RebootIfNeeded</code>: Patch Manager tries to reboot the managed node if it
+     installed any patches, or if any patches are detected with a status of
       <code>InstalledPendingReboot</code>.</p>
             </li>
             <li>
                <p>
-                  <b>NoReboot</b>: Patch Manager attempts to install missing
-     packages without trying to reboot the system. Patches installed with this option are assigned a
-     status of <code>InstalledPendingReboot</code>. These patches might not be in effect until a
-     reboot is performed.</p>
+                  <code>NoReboot</code>: Patch Manager attempts to install missing packages without trying
+     to reboot the system. Patches installed with this option are assigned a status of
+      <code>InstalledPendingReboot</code>. These patches might not be in effect until a reboot is
+     performed.</p>
             </li>
          </ul>")
   @as("RebootOption")
   rebootOption: option<rebootOption>,
-  @ocaml.doc("<p>The time of the last attempt to patch the instance with <code>NoReboot</code> specified as
-   the reboot option.</p>")
+  @ocaml.doc("<p>The time of the last attempt to patch the managed node with <code>NoReboot</code> specified
+   as the reboot option.</p>")
   @as("LastNoRebootInstallOperationTime")
   lastNoRebootInstallOperationTime: option<dateTime>,
-  @ocaml.doc("<p>The type of patching operation that was performed: <code>SCAN</code> (assess patch
-   compliance state) or <code>INSTALL</code> (install missing patches).</p>")
+  @ocaml.doc("<p>The type of patching operation that was performed: or </p>
+         <ul>
+            <li>
+               <p>
+                  <code>SCAN</code> assesses the patch compliance state.</p>
+            </li>
+            <li>
+               <p>
+                  <code>INSTALL</code> installs missing patches.</p>
+            </li>
+         </ul>")
   @as("Operation")
   operation: patchOperationType,
-  @ocaml.doc("<p>The time the most recent patching operation completed on the instance.</p>")
+  @ocaml.doc("<p>The time the most recent patching operation completed on the managed node.</p>")
   @as("OperationEndTime")
   operationEndTime: dateTime,
-  @ocaml.doc("<p>The time the most recent patching operation was started on the instance.</p>")
+  @ocaml.doc("<p>The time the most recent patching operation was started on the managed node.</p>")
   @as("OperationStartTime")
   operationStartTime: dateTime,
-  @ocaml.doc("<p>The number of patches from the patch baseline that aren't applicable for the instance and
-   therefore aren't installed on the instance. This number may be truncated if the list of patch
+  @ocaml.doc("<p>The number of patches from the patch baseline that aren't applicable for the managed node
+   and therefore aren't installed on the node. This number may be truncated if the list of patch
    names is very large. The number of patches beyond this limit are reported in
     <code>UnreportedNotApplicableCount</code>.</p>")
   @as("NotApplicableCount")
   notApplicableCount: option<patchNotApplicableCount>,
-  @ocaml.doc("<p>The number of patches beyond the supported limit of <code>NotApplicableCount</code> that are
-   not reported by name to Systems Manager Inventory.</p>")
+  @ocaml.doc("<p>The number of patches beyond the supported limit of <code>NotApplicableCount</code> that
+   aren't reported by name to Inventory. Inventory is a capability of Amazon Web Services Systems Manager.</p>")
   @as("UnreportedNotApplicableCount")
   unreportedNotApplicableCount: option<patchUnreportedNotApplicableCount>,
   @ocaml.doc("<p>The number of patches from the patch baseline that were attempted to be installed during the
    last patching operation, but failed to install.</p>")
   @as("FailedCount")
   failedCount: option<patchFailedCount>,
-  @ocaml.doc("<p>The number of patches from the patch baseline that are applicable for the instance but
+  @ocaml.doc("<p>The number of patches from the patch baseline that are applicable for the managed node but
    aren't currently installed.</p>")
   @as("MissingCount")
   missingCount: option<patchMissingCount>,
-  @ocaml.doc("<p>The number of patches installed on an instance that are specified in a
-    <code>RejectedPatches</code> list. Patches with a status of
-    <i>InstalledRejected</i> were typically installed before they were added to a
-    <code>RejectedPatches</code> list.</p>
+  @ocaml.doc("<p>The number of patches installed on a managed node that are specified in a
+    <code>RejectedPatches</code> list. Patches with a status of <code>InstalledRejected</code> were
+   typically installed before they were added to a <code>RejectedPatches</code> list.</p>
          <note>
             <p>If <code>ALLOW_AS_DEPENDENCY</code> is the specified option for
      <code>RejectedPatchesAction</code>, the value of <code>InstalledRejectedCount</code> will
@@ -1556,16 +1600,16 @@ type instancePatchState = {
          </note>")
   @as("InstalledRejectedCount")
   installedRejectedCount: option<patchInstalledRejectedCount>,
-  @ocaml.doc("<p>The number of patches installed by Patch Manager since the last time the instance was
+  @ocaml.doc("<p>The number of patches installed by Patch Manager since the last time the managed node was
    rebooted.</p>")
   @as("InstalledPendingRebootCount")
   installedPendingRebootCount: option<patchInstalledPendingRebootCount>,
-  @ocaml.doc("<p>The number of patches not specified in the patch baseline that are installed on the
-   instance.</p>")
+  @ocaml.doc("<p>The number of patches not specified in the patch baseline that are installed on the managed
+   node.</p>")
   @as("InstalledOtherCount")
   installedOtherCount: option<patchInstalledOtherCount>,
   @ocaml.doc(
-    "<p>The number of patches from the patch baseline that are installed on the instance.</p>"
+    "<p>The number of patches from the patch baseline that are installed on the managed node.</p>"
   )
   @as("InstalledCount")
   installedCount: option<patchInstalledCount>,
@@ -1573,24 +1617,26 @@ type instancePatchState = {
    service.</p>")
   @as("OwnerInformation")
   ownerInformation: option<ownerInformation>,
-  @ocaml.doc("<p>An https URL or an Amazon S3 path-style URL to a list of patches to be installed. This patch
-   installation list, which you maintain in an S3 bucket in YAML format and specify in the SSM
-   document <code>AWS-RunPatchBaseline</code>, overrides the patches specified by the default patch
-   baseline.</p>
+  @ocaml.doc("<p>An https URL or an Amazon Simple Storage Service (Amazon S3) path-style URL to a list of
+   patches to be installed. This patch installation list, which you maintain in an S3 bucket in YAML
+   format and specify in the SSM document <code>AWS-RunPatchBaseline</code>, overrides the patches
+   specified by the default patch baseline.</p>
          <p>For more information about the <code>InstallOverrideList</code> parameter, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-about-aws-runpatchbaseline.html\">About the
-    SSM document AWS-RunPatchBaseline</a> in the <i>AWS Systems Manager User Guide</i>.</p>")
+     <code>AWS-RunPatchBaseline</code>
+            </a> SSM document in the
+    <i>Amazon Web Services Systems Manager User Guide</i>.</p>")
   @as("InstallOverrideList")
   installOverrideList: option<installOverrideList>,
   @ocaml.doc("<p>The ID of the patch baseline snapshot used during the patching operation when this
    compliance data was collected.</p>")
   @as("SnapshotId")
   snapshotId: option<snapshotId>,
-  @ocaml.doc("<p>The ID of the patch baseline used to patch the instance.</p>") @as("BaselineId")
+  @ocaml.doc("<p>The ID of the patch baseline used to patch the managed node.</p>")
+  @as("BaselineId")
   baselineId: baselineId,
-  @ocaml.doc("<p>The name of the patch group the managed instance belongs to.</p>")
-  @as("PatchGroup")
+  @ocaml.doc("<p>The name of the patch group the managed node belongs to.</p>") @as("PatchGroup")
   patchGroup: patchGroup,
-  @ocaml.doc("<p>The ID of the managed instance the high-level patch compliance information was collected
+  @ocaml.doc("<p>The ID of the managed node the high-level patch compliance information was collected
    for.</p>")
   @as("InstanceId")
   instanceId: instanceId,
@@ -1598,14 +1644,15 @@ type instancePatchState = {
 type instanceInformationFilterValueSet = array<instanceInformationFilterValue>
 type instanceIdList = array<instanceId>
 type instanceAssociationStatusAggregatedCount = Js.Dict.t<instanceCount>
-@ocaml.doc("<p>One or more association documents on the instance. </p>")
+@ocaml.doc("<p>One or more association documents on the managed node. </p>")
 type instanceAssociation = {
-  @ocaml.doc("<p>Version information for the association on the instance.</p>")
+  @ocaml.doc("<p>Version information for the association on the managed node.</p>")
   @as("AssociationVersion")
   associationVersion: option<associationVersion>,
-  @ocaml.doc("<p>The content of the association document for the instance(s).</p>") @as("Content")
+  @ocaml.doc("<p>The content of the association document for the managed node(s).</p>")
+  @as("Content")
   content: option<documentContent>,
-  @ocaml.doc("<p>The instance ID.</p>") @as("InstanceId") instanceId: option<instanceId>,
+  @ocaml.doc("<p>The managed node ID.</p>") @as("InstanceId") instanceId: option<instanceId>,
   @ocaml.doc("<p>The association ID.</p>") @as("AssociationId")
   associationId: option<associationId>,
 }
@@ -1616,12 +1663,12 @@ type documentVersionInfo = {
   )
   @as("ReviewStatus")
   reviewStatus: option<reviewStatus>,
-  @ocaml.doc("<p>A message returned by AWS Systems Manager that explains the <code>Status</code> value. For example, a
+  @ocaml.doc("<p>A message returned by Amazon Web Services Systems Manager that explains the <code>Status</code> value. For example, a
     <code>Failed</code> status might be explained by the <code>StatusInformation</code> message,
-   \"The specified S3 bucket does not exist. Verify that the URL of the S3 bucket is correct.\"</p>")
+   \"The specified S3 bucket doesn't exist. Verify that the URL of the S3 bucket is correct.\"</p>")
   @as("StatusInformation")
   statusInformation: option<documentStatusInformation>,
-  @ocaml.doc("<p>The status of the Systems Manager document, such as <code>Creating</code>, <code>Active</code>,
+  @ocaml.doc("<p>The status of the SSM document, such as <code>Creating</code>, <code>Active</code>,
     <code>Failed</code>, and <code>Deleting</code>.</p>")
   @as("Status")
   status: option<documentStatus>,
@@ -1633,12 +1680,12 @@ type documentVersionInfo = {
   @ocaml.doc("<p>The date the document was created.</p>") @as("CreatedDate")
   createdDate: option<dateTime>,
   @ocaml.doc("<p>The version of the artifact associated with the document. For example, \"Release 12, Update
-   6\". This value is unique across all versions of a document, and cannot be changed.</p>")
+   6\". This value is unique across all versions of a document, and can't be changed.</p>")
   @as("VersionName")
   versionName: option<documentVersionName>,
   @ocaml.doc("<p>The document version.</p>") @as("DocumentVersion")
   documentVersion: option<documentVersion>,
-  @ocaml.doc("<p>The friendly name of the Systems Manager document. This value can differ for each version of the
+  @ocaml.doc("<p>The friendly name of the SSM document. This value can differ for each version of the
    document. If you want to update this value, see <a>UpdateDocument</a>.</p>")
   @as("DisplayName")
   displayName: option<documentDisplayName>,
@@ -1723,32 +1770,44 @@ type commandPlugin = {
   @ocaml.doc("<p>The S3 directory path inside the bucket where the responses to the command executions should
    be stored. This was requested when issuing the command. For example, in the following
    response:</p>
-         <p>doc-example-bucket/ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix/i-02573cafcfEXAMPLE/awsrunShellScript </p>
-         <p>doc-example-bucket is the name of the S3 bucket;</p>
-         <p>ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix is the name of the S3 prefix;</p>
-         <p>i-02573cafcfEXAMPLE is the instance ID;</p>
-         <p>awsrunShellScript is the name of the plugin.</p>")
+         <p>
+            <code>doc-example-bucket/ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix/i-02573cafcfEXAMPLE/awsrunShellScript</code>
+         </p>
+         <p>
+            <code>doc-example-bucket</code> is the name of the S3 bucket;</p>
+         <p>
+            <code>ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix</code> is the name of the S3 prefix;</p>
+         <p>
+            <code>i-02573cafcfEXAMPLE</code> is the managed node ID;</p>
+         <p>
+            <code>awsrunShellScript</code> is the name of the plugin.</p>")
   @as("OutputS3KeyPrefix")
   outputS3KeyPrefix: option<s3KeyPrefix>,
   @ocaml.doc("<p>The S3 bucket where the responses to the command executions should be stored. This was
    requested when issuing the command. For example, in the following response:</p>
-         <p>doc-example-bucket/ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix/i-02573cafcfEXAMPLE/awsrunShellScript </p>
-         <p>doc-example-bucket is the name of the S3 bucket;</p>
-         <p>ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix is the name of the S3 prefix;</p>
-         <p>i-02573cafcfEXAMPLE is the instance ID;</p>
-         <p>awsrunShellScript is the name of the plugin.</p>")
+         <p>
+            <code>doc-example-bucket/ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix/i-02573cafcfEXAMPLE/awsrunShellScript</code>
+         </p>
+         <p>
+            <code>doc-example-bucket</code> is the name of the S3 bucket;</p>
+         <p>
+            <code>ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix</code> is the name of the S3 prefix;</p>
+         <p>
+            <code>i-02573cafcfEXAMPLE</code> is the managed node ID;</p>
+         <p>
+            <code>awsrunShellScript</code> is the name of the plugin.</p>")
   @as("OutputS3BucketName")
   outputS3BucketName: option<s3BucketName>,
-  @ocaml.doc("<p>(Deprecated) You can no longer specify this parameter. The system ignores it. Instead, Systems Manager
-   automatically determines the S3 bucket region.</p>")
+  @ocaml.doc("<p>(Deprecated) You can no longer specify this parameter. The system ignores it. Instead,
+   Amazon Web Services Systems Manager automatically determines the S3 bucket region.</p>")
   @as("OutputS3Region")
   outputS3Region: option<s3Region>,
-  @ocaml.doc("<p>The URL for the complete text written by the plugin to stderr. If execution is not yet
+  @ocaml.doc("<p>The URL for the complete text written by the plugin to stderr. If execution isn't yet
    complete, then this string is empty.</p>")
   @as("StandardErrorUrl")
   standardErrorUrl: option<url>,
-  @ocaml.doc("<p>The URL for the complete text written by the plugin to stdout in Amazon S3. If the S3 bucket for
-   the command was not specified, then this string is empty.</p>")
+  @ocaml.doc("<p>The URL for the complete text written by the plugin to stdout in Amazon S3. If the
+   S3 bucket for the command wasn't specified, then this string is empty.</p>")
   @as("StandardOutputUrl")
   standardOutputUrl: option<url>,
   @ocaml.doc("<p>Output of the plugin execution.</p>") @as("Output")
@@ -1762,17 +1821,18 @@ type commandPlugin = {
   @ocaml.doc("<p>A numeric response code generated after running the plugin. </p>")
   @as("ResponseCode")
   responseCode: option<responseCode>,
-  @ocaml.doc("<p>A detailed status of the plugin execution. StatusDetails includes more information than
-   Status because it includes states resulting from error and concurrency control parameters.
-   StatusDetails can show different results than Status. For more information about these statuses,
-   see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-commands.html\">Understanding command statuses</a> in the <i>AWS Systems Manager User Guide</i>.
-   StatusDetails can be one of the following values:</p>
+  @ocaml.doc("<p>A detailed status of the plugin execution. <code>StatusDetails</code> includes more
+   information than Status because it includes states resulting from error and concurrency control
+   parameters. StatusDetails can show different results than Status. For more information about
+   these statuses, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-commands.html\">Understanding command
+    statuses</a> in the <i>Amazon Web Services Systems Manager User Guide</i>. StatusDetails can be one of the
+   following values:</p>
          <ul>
             <li>
-               <p>Pending: The command has not been sent to the instance.</p>
+               <p>Pending: The command hasn't been sent to the managed node.</p>
             </li>
             <li>
-               <p>In Progress: The command has been sent to the instance but has not reached a terminal
+               <p>In Progress: The command has been sent to the managed node but hasn't reached a terminal
      state.</p>
             </li>
             <li>
@@ -1780,31 +1840,31 @@ type commandPlugin = {
      terminal state.</p>
             </li>
             <li>
-               <p>Delivery Timed Out: The command was not delivered to the instance before the delivery
-     timeout expired. Delivery timeouts do not count against the parent command's MaxErrors limit,
-     but they do contribute to whether the parent command status is Success or Incomplete. This is a
-     terminal state.</p>
+               <p>Delivery Timed Out: The command wasn't delivered to the managed node before the delivery
+     timeout expired. Delivery timeouts don't count against the parent command's
+      <code>MaxErrors</code> limit, but they do contribute to whether the parent command status is
+     Success or Incomplete. This is a terminal state.</p>
             </li>
             <li>
-               <p>Execution Timed Out: Command execution started on the instance, but the execution was not
-     complete before the execution timeout expired. Execution timeouts count against the MaxErrors
-     limit of the parent command. This is a terminal state.</p>
+               <p>Execution Timed Out: Command execution started on the managed node, but the execution
+     wasn't complete before the execution timeout expired. Execution timeouts count against the
+      <code>MaxErrors</code> limit of the parent command. This is a terminal state.</p>
             </li>
             <li>
-               <p>Failed: The command was not successful on the instance. For a plugin, this indicates that
-     the result code was not zero. For a command invocation, this indicates that the result code for
-     one or more plugins was not zero. Invocation failures count against the MaxErrors limit of the
-     parent command. This is a terminal state.</p>
+               <p>Failed: The command wasn't successful on the managed node. For a plugin, this indicates
+     that the result code wasn't zero. For a command invocation, this indicates that the result code
+     for one or more plugins wasn't zero. Invocation failures count against the MaxErrors limit of
+     the parent command. This is a terminal state.</p>
             </li>
             <li>
-               <p>Canceled: The command was terminated before it was completed. This is a terminal
+               <p>Cancelled: The command was terminated before it was completed. This is a terminal
      state.</p>
             </li>
             <li>
-               <p>Undeliverable: The command can't be delivered to the instance. The instance might not
-     exist, or it might not be responding. Undeliverable invocations don't count against the parent
-     command's MaxErrors limit, and they don't contribute to whether the parent command status is
-     Success or Incomplete. This is a terminal state.</p>
+               <p>Undeliverable: The command can't be delivered to the managed node. The managed node might
+     not exist, or it might not be responding. Undeliverable invocations don't count against the
+     parent command's MaxErrors limit, and they don't contribute to whether the parent command
+     status is Success or Incomplete. This is a terminal state.</p>
             </li>
             <li>
                <p>Terminated: The parent command exceeded its MaxErrors limit and subsequent command
@@ -1816,16 +1876,17 @@ type commandPlugin = {
   @ocaml.doc("<p>The status of this plugin. You can run a document with multiple plugins.</p>")
   @as("Status")
   status: option<commandPluginStatus>,
-  @ocaml.doc("<p>The name of the plugin. Must be one of the following: aws:updateAgent, aws:domainjoin,
-   aws:applications, aws:runPowerShellScript, aws:psmodule, aws:cloudWatch, aws:runShellScript, or
-   aws:updateSSMAgent. </p>")
+  @ocaml.doc("<p>The name of the plugin. Must be one of the following: <code>aws:updateAgent</code>,
+    <code>aws:domainjoin</code>, <code>aws:applications</code>,
+   <code>aws:runPowerShellScript</code>, <code>aws:psmodule</code>, <code>aws:cloudWatch</code>,
+    <code>aws:runShellScript</code>, or <code>aws:updateSSMAgent</code>. </p>")
   @as("Name")
   name: option<commandPluginName>,
 }
 @ocaml.doc("<p>Describes a command filter.</p>
          <note>
-            <p>An instance ID can't be specified when a command status is <code>Pending</code> because the
-    command hasn't run on the instance yet.</p>
+            <p>A managed node ID can't be specified when a command status is <code>Pending</code> because
+    the command hasn't run on the node yet.</p>
          </note>")
 type commandFilter = {
   @ocaml.doc("<p>The filter value. Valid values for each filter key are as follows:</p>
@@ -1833,19 +1894,20 @@ type commandFilter = {
             <li>
                <p>
                   <b>InvokedAfter</b>: Specify a timestamp to limit your results.
-     For example, specify <code>2018-07-07T00:00:00Z</code> to see a list of command executions
-     occurring July 7, 2018, and later.</p>
+     For example, specify <code>2021-07-07T00:00:00Z</code> to see a list of command executions
+     occurring July 7, 2021, and later.</p>
             </li>
             <li>
                <p>
                   <b>InvokedBefore</b>: Specify a timestamp to limit your results.
-     For example, specify <code>2018-07-07T00:00:00Z</code> to see a list of command executions from
-     before July 7, 2018.</p>
+     For example, specify <code>2021-07-07T00:00:00Z</code> to see a list of command executions from
+     before July 7, 2021.</p>
             </li>
             <li>
                <p>
                   <b>Status</b>: Specify a valid command status to see a list of
-     all command executions with that status. Status values you can specify include:</p>
+     all command executions with that status. The status choices depend on the API you call.</p>
+               <p>The status values you can specify for <code>ListCommands</code> are:</p>
                <ul>
                   <li>
                      <p>
@@ -1874,27 +1936,118 @@ type commandFilter = {
                   </li>
                   <li>
                      <p>
-                        <code>TimedOut</code>
+                        <code>TimedOut</code> (this includes both Delivery and Execution time outs) </p>
+                  </li>
+                  <li>
+                     <p>
+                        <code>AccessDenied</code>
                      </p>
                   </li>
                   <li>
                      <p>
-                        <code>Cancelling</code>
+                        <code>DeliveryTimedOut</code>
+                     </p>
+                  </li>
+                  <li>
+                     <p>
+                        <code>ExecutionTimedOut</code>
+                     </p>
+                  </li>
+                  <li>
+                     <p>
+                        <code>Incomplete</code>
+                     </p>
+                  </li>
+                  <li>
+                     <p>
+                        <code>NoInstancesInTag</code>
+                     </p>
+                  </li>
+                  <li>
+                     <p>
+                        <code>LimitExceeded</code>
+                     </p>
+                  </li>
+               </ul>
+               <p>The status values you can specify for <code>ListCommandInvocations</code> are:</p>
+               <ul>
+                  <li>
+                     <p>
+                        <code>Pending</code>
+                     </p>
+                  </li>
+                  <li>
+                     <p>
+                        <code>InProgress</code>
+                     </p>
+                  </li>
+                  <li>
+                     <p>
+                        <code>Delayed</code>
+                     </p>
+                  </li>
+                  <li>
+                     <p>
+                        <code>Success</code>
+                     </p>
+                  </li>
+                  <li>
+                     <p>
+                        <code>Cancelled</code>
+                     </p>
+                  </li>
+                  <li>
+                     <p>
+                        <code>Failed</code>
+                     </p>
+                  </li>
+                  <li>
+                     <p>
+                        <code>TimedOut</code> (this includes both Delivery and Execution time outs) </p>
+                  </li>
+                  <li>
+                     <p>
+                        <code>AccessDenied</code>
+                     </p>
+                  </li>
+                  <li>
+                     <p>
+                        <code>DeliveryTimedOut</code>
+                     </p>
+                  </li>
+                  <li>
+                     <p>
+                        <code>ExecutionTimedOut</code>
+                     </p>
+                  </li>
+                  <li>
+                     <p>
+                        <code>Undeliverable</code>
+                     </p>
+                  </li>
+                  <li>
+                     <p>
+                        <code>InvalidPlatform</code>
+                     </p>
+                  </li>
+                  <li>
+                     <p>
+                        <code>Terminated</code>
                      </p>
                   </li>
                </ul>
             </li>
             <li>
                <p>
-                  <b>DocumentName</b>: Specify name of the SSM document for which
-     you want to see command execution results. For example, specify
+                  <b>DocumentName</b>: Specify name of the Amazon Web Services Systems Manager document (SSM
+     document) for which you want to see command execution results. For example, specify
       <code>AWS-RunPatchBaseline</code> to see command executions that used this SSM document to
-     perform security patching operations on instances. </p>
+     perform security patching operations on managed nodes. </p>
             </li>
             <li>
                <p>
-                  <b>ExecutionStage</b>: Specify one of the following
-     values:</p>
+                  <b>ExecutionStage</b>: Specify one of the following values
+      (<code>ListCommands</code> operations only):</p>
                <ul>
                   <li>
                      <p>
@@ -1910,19 +2063,30 @@ type commandFilter = {
             </li>
          </ul>")
   value: commandFilterValue,
-  @ocaml.doc("<p>The name of the filter.</p>") key: commandFilterKey,
+  @ocaml.doc("<p>The name of the filter.</p>
+         <note>
+            <p>The <code>ExecutionStage</code> filter can't be used with the
+     <code>ListCommandInvocations</code> operation, only with <code>ListCommands</code>.</p>
+         </note>")
+  key: commandFilterKey,
 }
-@ocaml.doc("<p>Configuration options for sending command output to CloudWatch Logs.</p>")
+@ocaml.doc("<p>Configuration options for sending command output to Amazon CloudWatch Logs.</p>")
 type cloudWatchOutputConfig = {
   @ocaml.doc("<p>Enables Systems Manager to send command output to CloudWatch Logs.</p>")
   @as("CloudWatchOutputEnabled")
   cloudWatchOutputEnabled: option<cloudWatchOutputEnabled>,
-  @ocaml.doc("<p>The name of the CloudWatch log group where you want to send command output. If you don't
-   specify a group name, Systems Manager automatically creates a log group for you. The log group uses the
-   following naming format: aws/ssm/<i>SystemsManagerDocumentName</i>.</p>")
+  @ocaml.doc("<p>The name of the CloudWatch Logs log group where you want to send command output. If you
+   don't specify a group name, Amazon Web Services Systems Manager automatically creates a log group for you. The log group
+   uses the following naming format:</p>
+         <p>
+            <code>aws/ssm/<i>SystemsManagerDocumentName</i>
+            </code>
+         </p>")
   @as("CloudWatchLogGroupName")
   cloudWatchLogGroupName: option<cloudWatchLogGroupName>,
 }
+type categoryList = array<category>
+type categoryEnumList = array<category>
 type calendarNameOrARNList = array<calendarNameOrARN>
 type automationParameterValueList = array<automationParameterValue>
 type automationExecutionFilterValueList = array<automationExecutionFilterValue>
@@ -2001,18 +2165,19 @@ type associationExecution = {
   associationId: option<associationId>,
 }
 type accounts = array<account>
-@ocaml.doc("<p>Information includes the AWS account ID where the current document is shared and the version
-   shared with that account.</p>")
+@ocaml.doc("<p>Information includes the Amazon Web Services account ID where the current document is shared and the
+   version shared with that account.</p>")
 type accountSharingInfo = {
   @ocaml.doc("<p>The version of the current document shared with the account.</p>")
   @as("SharedDocumentVersion")
   sharedDocumentVersion: option<sharedDocumentVersion>,
-  @ocaml.doc("<p>The AWS account ID where the current document is shared.</p>") @as("AccountId")
+  @ocaml.doc("<p>The Amazon Web Services account ID where the current document is shared.</p>")
+  @as("AccountId")
   accountId: option<accountId>,
 }
 type accountIdList = array<accountId>
 type targetMap = Js.Dict.t<targetMapValueList>
-@ocaml.doc("<p>The combination of AWS Regions and accounts targeted by the current Automation
+@ocaml.doc("<p>The combination of Amazon Web Services Regions and Amazon Web Services accounts targeted by the current Automation
    execution.</p>")
 type targetLocation = {
   @ocaml.doc("<p>The Automation execution role used by the currently running Automation. If not specified,
@@ -2023,65 +2188,62 @@ type targetLocation = {
    executions for the currently running Automation.</p>")
   @as("TargetLocationMaxErrors")
   targetLocationMaxErrors: option<maxErrors>,
-  @ocaml.doc("<p>The maximum number of AWS accounts and AWS regions allowed to run the Automation
+  @ocaml.doc("<p>The maximum number of Amazon Web Services Regions and Amazon Web Services accounts allowed to run the Automation
    concurrently.</p>")
   @as("TargetLocationMaxConcurrency")
   targetLocationMaxConcurrency: option<maxConcurrency>,
-  @ocaml.doc("<p>The AWS Regions targeted by the current Automation execution.</p>") @as("Regions")
+  @ocaml.doc("<p>The Amazon Web Services Regions targeted by the current Automation execution.</p>")
+  @as("Regions")
   regions: option<regions>,
-  @ocaml.doc("<p>The AWS accounts targeted by the current Automation execution.</p>")
+  @ocaml.doc(
+    "<p>The Amazon Web Services accounts targeted by the current Automation execution.</p>"
+  )
   @as("Accounts")
   accounts: option<accounts>,
 }
-@ocaml.doc("<p>An array of search criteria that targets instances using a Key,Value combination that you
+@ocaml.doc("<p>An array of search criteria that targets managed nodes using a key-value pair that you
    specify.</p>
          <note>
             <p> One or more targets must be specified for maintenance window Run Command-type tasks.
     Depending on the task, targets are optional for other maintenance window task types (Automation,
-    AWS Lambda, and AWS Step Functions). For more information about running tasks that do not
-    specify targets, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html\">Registering
+     Lambda, and Step Functions). For more information about running tasks
+    that don't specify targets, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html\">Registering
      maintenance window tasks without targets</a> in the
-    <i>AWS Systems Manager User Guide</i>.</p>
+    <i>Amazon Web Services Systems Manager User Guide</i>.</p>
          </note>
          <p>Supported formats include the following.</p>
          <ul>
             <li>
                <p>
-                  <code>Key=InstanceIds,Values=<i>instance-id-1</i>,<i>instance-id-2</i>,<i>instance-id-3</i>
-                  </code>
+                  <code>Key=InstanceIds,Values=<instance-id-1>,<instance-id-2>,<instance-id-3></code>
                </p>
             </li>
             <li>
                <p>
-                  <code>Key=tag:<i>my-tag-key</i>,Values=<i>my-tag-value-1</i>,<i>my-tag-value-2</i>
-                  </code>
+                  <code>Key=tag:<my-tag-key>,Values=<my-tag-value-1>,<my-tag-value-2></code>
                </p>
             </li>
             <li>
                <p>
-                  <code>Key=tag-key,Values=<i>my-tag-key-1</i>,<i>my-tag-key-2</i>
-                  </code>
+                  <code>Key=tag-key,Values=<my-tag-key-1>,<my-tag-key-2></code>
                </p>
             </li>
             <li>
                <p>
                   <b>Run Command and Maintenance window targets only</b>:
-       <code>Key=resource-groups:Name,Values=<i>resource-group-name</i>
-                  </code>
+      <code>Key=resource-groups:Name,Values=<resource-group-name></code>
                </p>
             </li>
             <li>
                <p>
                   <b>Maintenance window targets only</b>:
-       <code>Key=resource-groups:ResourceTypeFilters,Values=<i>resource-type-1</i>,<i>resource-type-2</i>
-                  </code>
+      <code>Key=resource-groups:ResourceTypeFilters,Values=<resource-type-1>,<resource-type-2></code>
                </p>
             </li>
             <li>
                <p>
                   <b>Automation targets only</b>:
-       <code>Key=ResourceGroup;Values=<i>resource-group-name</i>
-                  </code>
+      <code>Key=ResourceGroup;Values=<resource-group-name></code>
                </p>
             </li>
          </ul>
@@ -2112,11 +2274,10 @@ type targetLocation = {
             <li>
                <p>
                   <b>Maintenance window targets only</b>:
-       <code>Key=resource-groups:ResourceTypeFilters,Values=<i>AWS::EC2::INSTANCE</i>,<i>AWS::EC2::VPC</i>
-                  </code>
+      <code>Key=resource-groups:ResourceTypeFilters,Values=AWS::EC2::INSTANCE,AWS::EC2::VPC</code>
                </p>
-               <p>This example demonstrates how to target only EC2 instances and VPCs in your maintenance
-     window.</p>
+               <p>This example demonstrates how to target only Amazon Elastic Compute Cloud (Amazon EC2)
+     instances and VPCs in your maintenance window.</p>
             </li>
             <li>
                <p>
@@ -2127,24 +2288,23 @@ type targetLocation = {
             <li>
                <p>
                   <b>State Manager association targets only</b>:
-       <code>Key=InstanceIds,Values=<i>*</i>
-                  </code>
+      <code>Key=InstanceIds,Values=*</code>
                </p>
-               <p>This example demonstrates how to target all managed instances in the AWS Region where the
-     association was created.</p>
+               <p>This example demonstrates how to target all managed instances in the Amazon Web Services Region where
+     the association was created.</p>
             </li>
          </ul>
-         <p>For more information about how to send commands that target instances using
-    <code>Key,Value</code> parameters, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-targeting\">Targeting multiple instances</a> in the <i>AWS Systems Manager User Guide</i>.</p>")
+         <p>For more information about how to send commands that target managed nodes using
+    <code>Key,Value</code> parameters, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-targeting\">Targeting multiple instances</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>")
 type target = {
   @ocaml.doc("<p>User-defined criteria that maps to <code>Key</code>. For example, if you specified
     <code>tag:ServerRole</code>, you could specify <code>value:WebServer</code> to run a command on
    instances that include EC2 tags of <code>ServerRole,WebServer</code>. </p>
-         <p>Depending on the type of <code>Target</code>, the maximum number of values for a
-    <code>Key</code> might be lower than the global maximum of 50.</p>")
+         <p>Depending on the type of target, the maximum number of values for a key might be lower than
+   the global maximum of 50.</p>")
   @as("Values")
   values: option<targetValues>,
-  @ocaml.doc("<p>User-defined criteria for sending commands that target instances that meet the
+  @ocaml.doc("<p>User-defined criteria for sending commands that target managed nodes that meet the
    criteria.</p>")
   @as("Key")
   key: option<targetKey>,
@@ -2163,12 +2323,18 @@ type stepExecutionFilter = {
 }
 type sessionManagerParameters = Js.Dict.t<sessionManagerParameterValueList>
 type sessionFilterList = array<sessionFilter>
-@ocaml.doc("<p>Information about a Session Manager connection to an instance.</p>")
+@ocaml.doc("<p>Information about a Session Manager connection to a managed node.</p>")
 type session = {
+  @ocaml.doc("<p>The maximum duration of a session before it terminates.</p>")
+  @as("MaxSessionDuration")
+  maxSessionDuration: option<maxSessionDuration>,
   @ocaml.doc("<p>Reserved for future use.</p>") @as("OutputUrl")
   outputUrl: option<sessionManagerOutputUrl>,
   @ocaml.doc("<p>Reserved for future use.</p>") @as("Details") details: option<sessionDetails>,
-  @ocaml.doc("<p>The ID of the AWS user account that started the session.</p>") @as("Owner")
+  @ocaml.doc("<p>The reason for connecting to the instance.</p>") @as("Reason")
+  reason: option<sessionReason>,
+  @ocaml.doc("<p>The ID of the Amazon Web Services user account that started the session.</p>")
+  @as("Owner")
   owner: option<sessionOwner>,
   @ocaml.doc("<p>The name of the Session Manager SSM document used to define the parameters and plugin settings for the
    session. For example, <code>SSM-SessionManagerRunShell</code>.</p>")
@@ -2185,25 +2351,27 @@ type session = {
   @ocaml.doc("<p>The status of the session. For example, \"Connected\" or \"Terminated\".</p>")
   @as("Status")
   status: option<sessionStatus>,
-  @ocaml.doc("<p>The instance that the Session Manager session connected to.</p>") @as("Target")
+  @ocaml.doc("<p>The managed node that the Session Manager session connected to.</p>") @as("Target")
   target: option<sessionTarget>,
   @ocaml.doc("<p>The ID of the session.</p>") @as("SessionId") sessionId: option<sessionId>,
 }
 type scheduledWindowExecutionList = array<scheduledWindowExecution>
 type reviewInformationList = array<reviewInformation>
 type resultAttributeList = array<resultAttribute>
-@ocaml.doc("<p>Information about the target S3 bucket for the Resource Data Sync.</p>")
+@ocaml.doc("<p>Information about the target S3 bucket for the resource data sync.</p>")
 type resourceDataSyncS3Destination = {
   @ocaml.doc(
     "<p>Enables destination data sharing. By default, this field is <code>null</code>.</p>"
   )
   @as("DestinationDataSharing")
   destinationDataSharing: option<resourceDataSyncDestinationDataSharing>,
-  @ocaml.doc("<p>The ARN of an encryption key for a destination in Amazon S3. Must belong to the same Region as
-   the destination S3 bucket.</p>")
+  @ocaml.doc("<p>The ARN of an encryption key for a destination in Amazon S3. Must belong to the same
+   Region as the destination S3 bucket.</p>")
   @as("AWSKMSKeyARN")
   awskmskeyARN: option<resourceDataSyncAWSKMSKeyARN>,
-  @ocaml.doc("<p>The AWS Region with the S3 bucket targeted by the Resource Data Sync.</p>")
+  @ocaml.doc(
+    "<p>The Amazon Web Services Region with the S3 bucket targeted by the resource data sync.</p>"
+  )
   @as("Region")
   region: resourceDataSyncS3Region,
   @ocaml.doc(
@@ -2229,8 +2397,9 @@ type resolvedTargets = {
   parameterValues: option<targetParameterList>,
 }
 type relatedOpsItems = array<relatedOpsItem>
-@ocaml.doc("<p>Information about the patches to use to update the instances, including target operating
-   systems and source repository. Applies to Linux instances only.</p>")
+type registrationMetadataList = array<registrationMetadataItem>
+@ocaml.doc("<p>Information about the patches to use to update the managed nodes, including target operating
+   systems and source repository. Applies to Linux managed nodes only.</p>")
 type patchSource = {
   @ocaml.doc("<p>The value of the yum repo configuration. For example:</p>
          <p>
@@ -2260,7 +2429,31 @@ type patchSource = {
   name: patchSourceName,
 }
 type patchPropertiesList = array<patchPropertyEntry>
-@ocaml.doc("<p>Defines a filter used in Patch Manager APIs.</p>")
+@ocaml.doc("<p>Defines a filter used in Patch Manager APIs. Supported filter keys depend on the API
+   operation that includes the filter. Patch Manager API operations that use
+    <code>PatchOrchestratorFilter</code> include the following:</p>
+         <ul>
+            <li>
+               <p>
+                  <a>DescribeAvailablePatches</a>
+               </p>
+            </li>
+            <li>
+               <p>
+                  <a>DescribeInstancePatches</a>
+               </p>
+            </li>
+            <li>
+               <p>
+                  <a>DescribePatchBaselines</a>
+               </p>
+            </li>
+            <li>
+               <p>
+                  <a>DescribePatchGroups</a>
+               </p>
+            </li>
+         </ul>")
 type patchOrchestratorFilter = {
   @ocaml.doc("<p>The value for the filter.</p>") @as("Values")
   values: option<patchOrchestratorFilterValues>,
@@ -2278,12 +2471,14 @@ type patchGroupPatchBaselineMapping = {
 }
 @ocaml.doc("<p> Defines which patches should be included in a patch baseline.</p>
          <p>A patch filter consists of a key and a set of values. The filter key is a patch property.
-   For example, the available filter keys for WINDOWS are PATCH_SET, PRODUCT, PRODUCT_FAMILY,
-   CLASSIFICATION, and MSRC_SEVERITY. The filter values define a matching criterion for the patch
-   property indicated by the key. For example, if the filter key is PRODUCT and the filter values
-   are [\"Office 2013\", \"Office 2016\"], then the filter accepts all patches where product name is
-   either \"Office 2013\" or \"Office 2016\". The filter values can be exact values for the patch
-   property given as a key, or a wildcard (*), which matches all values.</p>
+   For example, the available filter keys for <code>WINDOWS</code> are <code>PATCH_SET</code>,
+    <code>PRODUCT</code>, <code>PRODUCT_FAMILY</code>, <code>CLASSIFICATION</code>, and
+    <code>MSRC_SEVERITY</code>.</p>
+         <p>The filter values define a matching criterion for the patch property indicated by the key.
+   For example, if the filter key is <code>PRODUCT</code> and the filter values are <code>[\"Office
+    2013\", \"Office 2016\"]</code>, then the filter accepts all patches where product name is either
+   \"Office 2013\" or \"Office 2016\". The filter values can be exact values for the patch property
+   given as a key, or a wildcard (*), which matches all values.</p>
          <p>You can view lists of valid values for the patch properties by running the
     <code>DescribePatchProperties</code> command. For information about which patch properties can
    be used with each major operating system, see <a>DescribePatchProperties</a>.</p>")
@@ -2305,7 +2500,7 @@ type patchBaselineIdentityList = array<patchBaselineIdentity>
 type patch = {
   @ocaml.doc("<p>The source patch repository for the operating system and version, such as
     <code>trusty-security</code> for Ubuntu Server 14.04 LTE and <code>focal-security</code> for
-   Ubuntu Server 20.04 LTE. Applies to Linux-based instances only.</p>")
+   Ubuntu Server 20.04 LTE. Applies to Linux-based managed nodes only.</p>")
   @as("Repository")
   repository: option<patchRepository>,
   @ocaml.doc("<p>The severity level of the patch. For example, <code>CRITICAL</code> or
@@ -2314,36 +2509,36 @@ type patch = {
   severity: option<patchSeverity>,
   @ocaml.doc("<p>The architecture of the patch. For example, in
     <code>example-pkg-0.710.10-2.7.abcd.x86_64</code>, the architecture is indicated by
-    <code>x86_64</code>. Applies to Linux-based instances only.</p>")
+    <code>x86_64</code>. Applies to Linux-based managed nodes only.</p>")
   @as("Arch")
   arch: option<patchArch>,
   @ocaml.doc("<p>The particular release of a patch. For example, in
     <code>pkg-example-EE-20180914-2.2.amzn1.noarch</code>, the release is <code>2.amaz1</code>.
-   Applies to Linux-based instances only.</p>")
+   Applies to Linux-based managed nodes only.</p>")
   @as("Release")
   release: option<patchRelease>,
   @ocaml.doc("<p>The version number of the patch. For example, in
     <code>example-pkg-1.710.10-2.7.abcd.x86_64</code>, the version number is indicated by
-    <code>-1</code>. Applies to Linux-based instances only.</p>")
+    <code>-1</code>. Applies to Linux-based managed nodes only.</p>")
   @as("Version")
   version: option<patchVersion>,
   @ocaml.doc("<p>The epoch of the patch. For example in
    <code>pkg-example-EE-20180914-2.2.amzn1.noarch</code>, the epoch value is
-   <code>20180914-2</code>. Applies to Linux-based instances only.</p>")
+   <code>20180914-2</code>. Applies to Linux-based managed nodes only.</p>")
   @as("Epoch")
   epoch: option<patchEpoch>,
-  @ocaml.doc("<p>The name of the patch. Applies to Linux-based instances only.</p>") @as("Name")
+  @ocaml.doc("<p>The name of the patch. Applies to Linux-based managed nodes only.</p>") @as("Name")
   name: option<patchName>,
   @ocaml.doc("<p>The Common Vulnerabilities and Exposures (CVE) ID of the patch. For example,
-    <code>CVE-2011-3192</code>. Applies to Linux-based instances only.</p>")
+    <code>CVE-2011-3192</code>. Applies to Linux-based managed nodes only.</p>")
   @as("CVEIds")
   cveids: option<patchCVEIdList>,
   @ocaml.doc("<p>The Bugzilla ID of the patch. For example, <code>1600646</code>. Applies to Linux-based
-   instances only.</p>")
+   managed nodes only.</p>")
   @as("BugzillaIds")
   bugzillaIds: option<patchBugzillaIdList>,
   @ocaml.doc("<p>The Advisory ID of the patch. For example, <code>RHSA-2020:3779</code>. Applies to
-   Linux-based instances only.</p>")
+   Linux-based managed nodes only.</p>")
   @as("AdvisoryIds")
   advisoryIds: option<patchAdvisoryIdList>,
   @ocaml.doc("<p>The language of the patch if it's language-specific.</p>") @as("Language")
@@ -2385,7 +2580,7 @@ type patch = {
   releaseDate: option<dateTime>,
   @ocaml.doc("<p>The ID of the patch. Applies to Windows patches only.</p>
          <note>
-            <p>This ID is not the same as the Microsoft Knowledge Base ID.</p>
+            <p>This ID isn't the same as the Microsoft Knowledge Base ID.</p>
          </note>")
   @as("Id")
   id: option<patchId>,
@@ -2411,17 +2606,16 @@ type parameterStringFilter = {
   @as("Option")
   option_: option<parameterStringQueryOption>,
   @ocaml.doc("<p>The name of the filter.</p>
-         <note>
-            <p>The <code>ParameterStringFilter</code> object is used by the <a>DescribeParameters</a> and <a>GetParametersByPath</a> API actions. However,
-    not all of the pattern values listed for <code>Key</code> can be used with both actions.</p>
-            <p>For <code>DescribeActions</code>, all of the listed patterns are valid, with the exception
-    of <code>Label</code>.</p>
-            <p>For <code>GetParametersByPath</code>, the following patterns listed for <code>Key</code>
-    are not valid: <code>tag</code>, <code>Name</code>, <code>Path</code>, and
+         <p>The <code>ParameterStringFilter</code> object is used by the <a>DescribeParameters</a> and <a>GetParametersByPath</a> API operations.
+   However, not all of the pattern values listed for <code>Key</code> can be used with both
+   operations.</p>
+         <p>For <code>DescribeParameters</code>, all of the listed patterns are valid except
+    <code>Label</code>.</p>
+         <p>For <code>GetParametersByPath</code>, the following patterns listed for <code>Key</code>
+   aren't valid: <code>tag</code>, <code>DataType</code>, <code>Name</code>, <code>Path</code>, and
     <code>Tier</code>.</p>
-            <p>For examples of CLI commands demonstrating valid parameter filter constructions, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-search.html\">Searching for
-     Systems Manager parameters</a> in the <i>AWS Systems Manager User Guide</i>.</p>
-         </note>")
+         <p>For examples of Amazon Web Services CLI commands demonstrating valid parameter filter constructions, see
+    <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-search.html\">Searching for Systems Manager parameters</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>")
   @as("Key")
   key: parameterStringFilterKey,
 }
@@ -2507,7 +2701,7 @@ type opsItemEventFilter = {
   @as("Key")
   key: opsItemEventFilterKey,
 }
-@ocaml.doc("<p>A filter for viewing OpsItem summaries.</p>")
+@ocaml.doc("<p>A filter for viewing OpsData summaries.</p>")
 type opsFilter = {
   @ocaml.doc("<p>The type of filter.</p>") @as("Type") type_: option<opsFilterOperatorType>,
   @ocaml.doc("<p>The filter value.</p>") @as("Values") values: opsFilterValueList,
@@ -2516,30 +2710,38 @@ type opsFilter = {
 type opsEntityItemEntryList = array<opsEntityItemEntry>
 @ocaml.doc("<p>Configurations for sending notifications.</p>")
 type notificationConfig = {
-  @ocaml.doc("<p>Command: Receive notification when the status of a command changes. Invocation: For commands
-   sent to multiple instances, receive notification on a per-instance basis when the status of a
-   command changes. </p>")
+  @ocaml.doc("<p>The type of notification.</p>
+         <ul>
+            <li>
+               <p>
+                  <code>Command</code>: Receive notification when the status of a command changes.</p>
+            </li>
+            <li>
+               <p>
+                  <code>Invocation</code>: For commands sent to multiple managed nodes, receive notification
+     on a per-node basis when the status of a command changes. </p>
+            </li>
+         </ul>")
   @as("NotificationType")
   notificationType: option<notificationType>,
-  @ocaml.doc("<p>The different events for which you can receive notifications. These events include the
-   following: All (events), InProgress, Success, TimedOut, Cancelled, Failed. To learn more about
-   these events, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/monitoring-sns-notifications.html\">Monitoring Systems
-    Manager status changes using Amazon SNS notifications</a> in the
-    <i>AWS Systems Manager User Guide</i>.</p>")
+  @ocaml.doc("<p>The different events for which you can receive notifications. To learn more about these
+   events, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/monitoring-sns-notifications.html\">Monitoring Systems Manager status
+    changes using Amazon SNS notifications</a> in the
+    <i>Amazon Web Services Systems Manager User Guide</i>.</p>")
   @as("NotificationEvents")
   notificationEvents: option<notificationEventList>,
-  @ocaml.doc("<p>An Amazon Resource Name (ARN) for an Amazon Simple Notification Service (Amazon SNS) topic. Run Command pushes
-   notifications about command status changes to this topic.</p>")
+  @ocaml.doc("<p>An Amazon Resource Name (ARN) for an Amazon Simple Notification Service (Amazon SNS) topic. Run
+   Command pushes notifications about command status changes to this topic.</p>")
   @as("NotificationArn")
   notificationArn: option<notificationArn>,
 }
-@ocaml.doc("<p>A summary of resources that are not compliant. The summary is organized according to
-   resource type.</p>")
+@ocaml.doc("<p>A summary of resources that aren't compliant. The summary is organized according to resource
+   type.</p>")
 type nonCompliantSummary = {
   @ocaml.doc("<p>A summary of the non-compliance severity by compliance type</p>")
   @as("SeveritySummary")
   severitySummary: option<severitySummary>,
-  @ocaml.doc("<p>The total number of compliance items that are not compliant.</p>")
+  @ocaml.doc("<p>The total number of compliance items that aren't compliant.</p>")
   @as("NonCompliantCount")
   nonCompliantCount: option<complianceSummaryCount>,
 }
@@ -2553,7 +2755,41 @@ type maintenanceWindowTaskParameterValueExpression = {
   values: option<maintenanceWindowTaskParameterValueList>,
 }
 type maintenanceWindowIdentityList = array<maintenanceWindowIdentity>
-@ocaml.doc("<p>Filter used in the request. Supported filter keys are Name and Enabled.</p>")
+@ocaml.doc("<p>Filter used in the request. Supported filter keys depend on the API operation that includes
+   the filter. API operations that use <code>MaintenanceWindowFilter></code> include the
+   following:</p>
+         <ul>
+            <li>
+               <p>
+                  <a>DescribeMaintenanceWindowExecutions</a>
+               </p>
+            </li>
+            <li>
+               <p>
+                  <a>DescribeMaintenanceWindowExecutionTaskInvocations</a>
+               </p>
+            </li>
+            <li>
+               <p>
+                  <a>DescribeMaintenanceWindowExecutionTasks</a>
+               </p>
+            </li>
+            <li>
+               <p>
+                  <a>DescribeMaintenanceWindows</a>
+               </p>
+            </li>
+            <li>
+               <p>
+                  <a>DescribeMaintenanceWindowTargets</a>
+               </p>
+            </li>
+            <li>
+               <p>
+                  <a>DescribeMaintenanceWindowTasks</a>
+               </p>
+            </li>
+         </ul>")
 type maintenanceWindowFilter = {
   @ocaml.doc("<p>The filter values.</p>") @as("Values")
   values: option<maintenanceWindowFilterValues>,
@@ -2572,13 +2808,13 @@ type inventoryFilter = {
          <note>
             <p>The <code>Exists</code> filter must be used with aggregators. For more information, see
      <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-aggregate.html\">Aggregating inventory
-     data</a> in the <i>AWS Systems Manager User Guide</i>.</p>
+     data</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>
          </note>")
   @as("Type")
   type_: option<inventoryQueryOperatorType>,
-  @ocaml.doc("<p>Inventory filter values. Example: inventory filter where instance IDs are specified as
-   values Key=AWS:InstanceInformation.InstanceId,Values= i-a12b3c4d5e6g, i-1a2b3c4d5e6,Type=Equal
-  </p>")
+  @ocaml.doc("<p>Inventory filter values. Example: inventory filter where managed node IDs are specified as
+   values <code>Key=AWS:InstanceInformation.InstanceId,Values= i-a12b3c4d5e6g,
+    i-1a2b3c4d5e6,Type=Equal</code>. </p>")
   @as("Values")
   values: inventoryFilterValueList,
   @ocaml.doc("<p>The name of the filter key.</p>") @as("Key") key: inventoryFilterKey,
@@ -2586,30 +2822,87 @@ type inventoryFilter = {
 type inventoryDeletionSummaryItems = array<inventoryDeletionSummaryItem>
 type instancePatchStatesList = array<instancePatchState>
 type instancePatchStateList = array<instancePatchState>
-@ocaml.doc("<p>Defines a filter used in <a>DescribeInstancePatchStatesForPatchGroup</a> used to
-   scope down the information returned by the API.</p>")
+@ocaml.doc("<p>Defines a filter used in <a>DescribeInstancePatchStatesForPatchGroup</a> to scope
+   down the information returned by the API.</p>
+         <p>
+            <b>Example</b>: To filter for all managed nodes in a patch group
+   having more than three patches with a <code>FailedCount</code> status, use the following for the
+   filter:</p>
+         <ul>
+            <li>
+               <p>Value for <code>Key</code>: <code>FailedCount</code>
+               </p>
+            </li>
+            <li>
+               <p>Value for <code>Type</code>: <code>GreaterThan</code>
+               </p>
+            </li>
+            <li>
+               <p>Value for <code>Values</code>: <code>3</code>
+               </p>
+            </li>
+         </ul>")
 type instancePatchStateFilter = {
-  @ocaml.doc("<p>The type of comparison that should be performed for the value: Equal, NotEqual, LessThan or
-   GreaterThan.</p>")
-  @as("Type")
+  @ocaml.doc("<p>The type of comparison that should be performed for the value.</p>") @as("Type")
   type_: instancePatchStateOperatorType,
-  @ocaml.doc("<p>The value for the filter, must be an integer greater than or equal to 0.</p>")
+  @ocaml.doc("<p>The value for the filter. Must be an integer greater than or equal to 0.</p>")
   @as("Values")
   values: instancePatchStateFilterValues,
-  @ocaml.doc("<p>The key for the filter. Supported values are FailedCount, InstalledCount,
-   InstalledOtherCount, MissingCount and NotApplicableCount.</p>")
+  @ocaml.doc("<p>The key for the filter. Supported values include the following:</p>
+         <ul>
+            <li>
+               <p>
+                  <code>InstalledCount</code>
+               </p>
+            </li>
+            <li>
+               <p>
+                  <code>InstalledOtherCount</code>
+               </p>
+            </li>
+            <li>
+               <p>
+                  <code>InstalledPendingRebootCount</code>
+               </p>
+            </li>
+            <li>
+               <p>
+                  <code>InstalledRejectedCount</code>
+               </p>
+            </li>
+            <li>
+               <p>
+                  <code>MissingCount</code>
+               </p>
+            </li>
+            <li>
+               <p>
+                  <code>FailedCount</code>
+               </p>
+            </li>
+            <li>
+               <p>
+                  <code>UnreportedNotApplicableCount</code>
+               </p>
+            </li>
+            <li>
+               <p>
+                  <code>NotApplicableCount</code>
+               </p>
+            </li>
+         </ul>")
   @as("Key")
   key: instancePatchStateFilterKey,
 }
-@ocaml.doc("<p>The filters to describe or get information about your managed instances.</p>")
+@ocaml.doc("<p>The filters to describe or get information about your managed nodes.</p>")
 type instanceInformationStringFilter = {
   @ocaml.doc("<p>The filter values.</p>") @as("Values") values: instanceInformationFilterValueSet,
-  @ocaml.doc("<p>The filter key name to describe your instances. For example:</p>
+  @ocaml.doc("<p>The filter key name to describe your managed nodes. For example:</p>
          <p>\"InstanceIds\"|\"AgentVersion\"|\"PingStatus\"|\"PlatformTypes\"|\"ActivationIds\"|\"IamRole\"|\"ResourceType\"|\"AssociationStatus\"|\"Tag
    Key\"</p>
          <important>
             <p>
-               <code>Tag key</code> is not a valid filter. You must specify either <code>tag-key</code> or
+               <code>Tag key</code> isn't a valid filter. You must specify either <code>tag-key</code> or
      <code>tag:keyname</code> and a string. Here are some valid examples: tag-key, tag:123, tag:al!,
     tag:Windows. Here are some <i>invalid</i> examples: tag-keys, Tag Key, tag:,
     tagKey, abc:keyname.</p>
@@ -2617,10 +2910,10 @@ type instanceInformationStringFilter = {
   @as("Key")
   key: instanceInformationStringFilterKey,
 }
-@ocaml.doc("<p>Describes a filter for a specific list of instances. You can filter instances information by
+@ocaml.doc("<p>Describes a filter for a specific list of managed nodes. You can filter node information by
    using tags. You specify tags by using a key-value mapping.</p>
-         <p>Use this action instead of the <a>DescribeInstanceInformationRequest$InstanceInformationFilterList</a> method. The
-    <code>InstanceInformationFilterList</code> method is a legacy method and does not support tags.
+         <p>Use this operation instead of the <a>DescribeInstanceInformationRequest$InstanceInformationFilterList</a> method. The
+    <code>InstanceInformationFilterList</code> method is a legacy method and doesn't support tags.
   </p>")
 type instanceInformationFilter = {
   @ocaml.doc("<p>The filter values.</p>") valueSet: instanceInformationFilterValueSet,
@@ -2633,8 +2926,8 @@ type instanceAssociationOutputUrl = {
   s3OutputUrl: option<s3OutputUrl>,
 }
 @ocaml.doc("<p>An S3 bucket where you want to store the results of this request.</p>
-         <p>For the minimal permissions required to enable Amazon S3 output for an association, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-state-assoc.html\">Creating
-    associations</a> in the <i>Systems Manager User Guide</i>. </p>")
+         <p>For the minimal permissions required to enable Amazon S3 output for an association,
+   see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-state-assoc.html\">Creating associations</a> in the <i>Systems Manager User Guide</i>. </p>")
 type instanceAssociationOutputLocation = {
   @ocaml.doc("<p>An S3 bucket where you want to store the results of this request.</p>")
   @as("S3Location")
@@ -2643,7 +2936,7 @@ type instanceAssociationOutputLocation = {
 type instanceAssociationList = array<instanceAssociation>
 @ocaml.doc("<p>Status information about the aggregated associations.</p>")
 type instanceAggregatedAssociationOverview = {
-  @ocaml.doc("<p>The number of associations for the instance(s).</p>")
+  @ocaml.doc("<p>The number of associations for the managed node(s).</p>")
   @as("InstanceAssociationStatusAggregatedCount")
   instanceAssociationStatusAggregatedCount: option<instanceAssociationStatusAggregatedCount>,
   @ocaml.doc("<p>Detailed status information about the aggregated associations.</p>")
@@ -2656,38 +2949,51 @@ type documentRequiresList = array<documentRequires>
 type documentParameterList = array<documentParameter>
 @ocaml.doc("<p>One or more filters. Use a filter to return a more specific list of documents.</p>
          <p>For keys, you can specify one or more tags that have been applied to a document. </p>
-         <p>You can also use AWS-provided keys, some of which have specific allowed values. These keys
+         <p>You can also use Amazon Web Services-provided keys, some of which have specific allowed values. These keys
    and their associated values are as follows:</p>
          <dl>
             <dt>DocumentType</dt>
             <dd>
                <ul>
                   <li>
-                     <p>ApplicationConfiguration</p>
+                     <p>
+                        <code>ApplicationConfiguration</code>
+                     </p>
                   </li>
                   <li>
-                     <p>ApplicationConfigurationSchema</p>
+                     <p>
+                        <code>ApplicationConfigurationSchema</code>
+                     </p>
                   </li>
                   <li>
-                     <p>Automation</p>
+                     <p>
+                        <code>Automation</code>
+                     </p>
                   </li>
                   <li>
-                     <p>ChangeCalendar</p>
+                     <p>
+                        <code>ChangeCalendar</code>
+                     </p>
                   </li>
                   <li>
-                     <p>Command</p>
+                     <p>
+                        <code>Command</code>
+                     </p>
                   </li>
                   <li>
-                     <p>DeploymentStrategy</p>
+                     <p>
+                        <code>Package</code>
+                     </p>
                   </li>
                   <li>
-                     <p>Package</p>
+                     <p>
+                        <code>Policy</code>
+                     </p>
                   </li>
                   <li>
-                     <p>Policy</p>
-                  </li>
-                  <li>
-                     <p>Session</p>
+                     <p>
+                        <code>Session</code>
+                     </p>
                   </li>
                </ul>
             </dd>
@@ -2697,19 +3003,29 @@ type documentParameterList = array<documentParameter>
        <code>Key=Owner,Values=Self</code>.</p>
                <ul>
                   <li>
-                     <p>Amazon</p>
+                     <p>
+                        <code>Amazon</code>
+                     </p>
                   </li>
                   <li>
-                     <p>Private</p>
+                     <p>
+                        <code>Private</code>
+                     </p>
                   </li>
                   <li>
-                     <p>Public</p>
+                     <p>
+                        <code>Public</code>
+                     </p>
                   </li>
                   <li>
-                     <p>Self</p>
+                     <p>
+                        <code>Self</code>
+                     </p>
                   </li>
                   <li>
-                     <p>ThirdParty</p>
+                     <p>
+                        <code>ThirdParty</code>
+                     </p>
                   </li>
                </ul>
             </dd>
@@ -2717,30 +3033,34 @@ type documentParameterList = array<documentParameter>
             <dd>
                <ul>
                   <li>
-                     <p>Linux</p>
+                     <p>
+                        <code>Linux</code>
+                     </p>
                   </li>
                   <li>
-                     <p>Windows</p>
+                     <p>
+                        <code>Windows</code>
+                     </p>
                   </li>
                </ul>
             </dd>
          </dl>
          <p>
-            <code>Name</code> is another AWS-provided key. If you use <code>Name</code> as a key, you
-   can use a name prefix to return a list of documents. For example, in the AWS CLI, to return a
-   list of all documents that begin with <code>Te</code>, run the following command:</p>
+            <code>Name</code> is another Amazon Web Services-provided key. If you use <code>Name</code> as a key, you
+   can use a name prefix to return a list of documents. For example, in the Amazon Web Services CLI, to return a list
+   of all documents that begin with <code>Te</code>, run the following command:</p>
          <p>
             <code>aws ssm list-documents --filters Key=Name,Values=Te</code>
          </p>
-         <p>You can also use the <code>TargetType</code> AWS-provided key. For a list of valid resource
-   type values that can be used with this key, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\">AWS resource and property types
-    reference</a> in the <i>AWS CloudFormation User Guide</i>.</p>
+         <p>You can also use the <code>TargetType</code> Amazon Web Services-provided key. For a list of valid
+   resource type values that can be used with this key, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\">Amazon Web Services resource and
+    property types reference</a> in the <i>CloudFormation User Guide</i>.</p>
          <p>If you specify more than two keys, only documents that are identified by all the tags are
    returned in the results. If you specify more than two values for a key, documents that are
    identified by any of the values are returned in the results.</p>
-         <p>To specify a custom key and value pair, use the format
+         <p>To specify a custom key-value pair, use the format
     <code>Key=tag:tagName,Values=valueName</code>.</p>
-         <p>For example, if you created a key called region and are using the AWS CLI to call the
+         <p>For example, if you created a key called region and are using the Amazon Web Services CLI to call the
     <code>list-documents</code> command: </p>
          <p>
             <code>aws ssm list-documents --filters Key=tag:region,Values=east,west
@@ -2828,7 +3148,7 @@ type complianceItem = {
    ID could be the number of the KB article; for example: KB4010320.</p>")
   @as("Id")
   id: option<complianceItemId>,
-  @ocaml.doc("<p>An ID for the resource. For a managed instance, this is the instance ID.</p>")
+  @ocaml.doc("<p>An ID for the resource. For a managed node, this is the node ID.</p>")
   @as("ResourceId")
   resourceId: option<complianceResourceId>,
   @ocaml.doc("<p>The type of resource. <code>ManagedInstance</code> is currently the only supported resource
@@ -2905,8 +3225,8 @@ type attachmentContentList = array<attachmentContent>
 @ocaml.doc("<p>Information about the association.</p>")
 type associationOverview = {
   @ocaml.doc("<p>Returns the number of targets for the association status. For example, if you created an
-   association with two instances, and one of them was successful, this would return the count of
-   instances by status.</p>")
+   association with two managed nodes, and one of them was successful, this would return the count
+   of managed nodes by status.</p>")
   @as("AssociationStatusAggregatedCount")
   associationStatusAggregatedCount: option<associationStatusAggregatedCount>,
   @ocaml.doc("<p>A detailed status of the association.</p>") @as("DetailedStatus")
@@ -2927,9 +3247,9 @@ type associationExecutionTarget = {
   @ocaml.doc("<p>Detailed information about the execution status.</p>") @as("DetailedStatus")
   detailedStatus: option<statusName>,
   @ocaml.doc("<p>The association execution status.</p>") @as("Status") status: option<statusName>,
-  @ocaml.doc("<p>The resource type, for example, instance.</p>") @as("ResourceType")
+  @ocaml.doc("<p>The resource type, for example, EC2.</p>") @as("ResourceType")
   resourceType: option<associationResourceType>,
-  @ocaml.doc("<p>The resource ID, for example, the instance ID where the association ran.</p>")
+  @ocaml.doc("<p>The resource ID, for example, the managed node ID where the association ran.</p>")
   @as("ResourceId")
   resourceId: option<associationResourceId>,
   @ocaml.doc("<p>The execution ID.</p>") @as("ExecutionId")
@@ -2940,7 +3260,7 @@ type associationExecutionTarget = {
   associationId: option<associationId>,
 }
 type associationExecutionFilterList = array<associationExecutionFilter>
-@ocaml.doc("<p>A list of of AWS accounts where the current document is shared and the version shared with
+@ocaml.doc("<p>A list of Amazon Web Services accounts where the current document is shared and the version shared with
    each account.</p>")
 type accountSharingInfoList = array<accountSharingInfo>
 type targets = array<target>
@@ -2948,17 +3268,17 @@ type targetMaps = array<targetMap>
 type targetLocations = array<targetLocation>
 type stepExecutionFilterList = array<stepExecutionFilter>
 type sessionList = array<session>
-@ocaml.doc("<p>Information about the AwsOrganizationsSource resource data sync source. A sync source of
-   this type can synchronize data from AWS Organizations or, if an AWS Organization is not present, from
-   multiple AWS Regions.</p>")
+@ocaml.doc("<p>Information about the <code>AwsOrganizationsSource</code> resource data sync source. A sync
+   source of this type can synchronize data from Organizations or, if an Amazon Web Services organization isn't
+   present, from multiple Amazon Web Services Regions.</p>")
 type resourceDataSyncAwsOrganizationsSource = {
-  @ocaml.doc("<p>The AWS Organizations organization units included in the sync.</p>")
+  @ocaml.doc("<p>The Organizations organization units included in the sync.</p>")
   @as("OrganizationalUnits")
   organizationalUnits: option<resourceDataSyncOrganizationalUnitList>,
-  @ocaml.doc("<p>If an AWS Organization is present, this is either <code>OrganizationalUnits</code> or
+  @ocaml.doc("<p>If an Amazon Web Services organization is present, this is either <code>OrganizationalUnits</code> or
     <code>EntireOrganization</code>. For <code>OrganizationalUnits</code>, the data is aggregated
    from a set of organization units. For <code>EntireOrganization</code>, the data is aggregated
-   from the entire AWS Organization. </p>")
+   from the entire Amazon Web Services organization.</p>")
   @as("OrganizationSourceType")
   organizationSourceType: resourceDataSyncOrganizationSourceType,
 }
@@ -3007,7 +3327,9 @@ type parameterMetadata = {
   allowedPattern: option<allowedPattern>,
   @ocaml.doc("<p>Description of the parameter actions.</p>") @as("Description")
   description: option<parameterDescription>,
-  @ocaml.doc("<p>Amazon Resource Name (ARN) of the AWS user who last changed the parameter.</p>")
+  @ocaml.doc(
+    "<p>Amazon Resource Name (ARN) of the Amazon Web Services user who last changed the parameter.</p>"
+  )
   @as("LastModifiedUser")
   lastModifiedUser: option<string_>,
   @ocaml.doc("<p>Date the parameter was last changed or updated.</p>") @as("LastModifiedDate")
@@ -3029,7 +3351,7 @@ type parameterHistory = {
   @ocaml.doc("<p>Information about the policies assigned to a parameter.</p>
          <p>
             <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-policies.html\">Assigning parameter
-    policies</a> in the <i>AWS Systems Manager User Guide</i>.</p>")
+    policies</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>")
   @as("Policies")
   policies: option<parameterPolicyList>,
   @ocaml.doc("<p>The parameter tier.</p>") @as("Tier") tier: option<parameterTier>,
@@ -3043,7 +3365,9 @@ type parameterHistory = {
   @ocaml.doc("<p>The parameter value.</p>") @as("Value") value: option<psparameterValue>,
   @ocaml.doc("<p>Information about the parameter.</p>") @as("Description")
   description: option<parameterDescription>,
-  @ocaml.doc("<p>Amazon Resource Name (ARN) of the AWS user who last changed the parameter.</p>")
+  @ocaml.doc(
+    "<p>Amazon Resource Name (ARN) of the Amazon Web Services user who last changed the parameter.</p>"
+  )
   @as("LastModifiedUser")
   lastModifiedUser: option<string_>,
   @ocaml.doc("<p>Date the parameter was last changed or updated.</p>") @as("LastModifiedDate")
@@ -3094,18 +3418,21 @@ type opsItemSummary = {
     <code>Resolved</code>.</p>")
   @as("Status")
   status: option<opsItemStatus>,
-  @ocaml.doc("<p>The impacted AWS resource.</p>") @as("Source") source: option<opsItemSource>,
+  @ocaml.doc("<p>The impacted Amazon Web Services resource.</p>") @as("Source")
+  source: option<opsItemSource>,
   @ocaml.doc("<p>The importance of this OpsItem in relation to other OpsItems in the system.</p>")
   @as("Priority")
   priority: option<opsItemPriority>,
   @ocaml.doc("<p>The date and time the OpsItem was last updated.</p>") @as("LastModifiedTime")
   lastModifiedTime: option<dateTime>,
-  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the IAM entity that created the OpsItem.</p>")
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the IAM entity that created the
+   OpsItem.</p>")
   @as("LastModifiedBy")
   lastModifiedBy: option<string_>,
   @ocaml.doc("<p>The date and time the OpsItem was created.</p>") @as("CreatedTime")
   createdTime: option<dateTime>,
-  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the IAM entity that created the OpsItem.</p>")
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the IAM entity that created the
+   OpsItem.</p>")
   @as("CreatedBy")
   createdBy: option<string_>,
 }
@@ -3114,10 +3441,19 @@ type opsItemRelatedItemSummaries = array<opsItemRelatedItemSummary>
 type opsItemFilters = array<opsItemFilter>
 type opsItemEventSummaries = array<opsItemEventSummary>
 type opsItemEventFilters = array<opsItemEventFilter>
-@ocaml.doc("<p>Operations engineers and IT professionals use OpsCenter to view, investigate, and remediate
-   operational issues impacting the performance and health of their AWS resources. For more
-   information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html\">AWS Systems Manager OpsCenter</a> in the
-    <i>AWS Systems Manager User Guide</i>. </p>")
+@ocaml.doc("<p>Operations engineers and IT professionals use Amazon Web Services Systems Manager OpsCenter to view, investigate, and
+   remediate operational work items (OpsItems) impacting the performance and health of their Amazon Web Services
+   resources. OpsCenter is integrated with Amazon EventBridge and Amazon CloudWatch. This
+   means you can configure these services to automatically create an OpsItem in OpsCenter when a
+    CloudWatch alarm enters the ALARM state or when EventBridge processes an event from
+   any Amazon Web Services service that publishes events. Configuring Amazon CloudWatch alarms and EventBridge events to automatically create OpsItems allows you to quickly diagnose and remediate
+   issues with Amazon Web Services resources from a single console.</p>
+         <p>To help you diagnose issues, each OpsItem includes contextually relevant information such as
+   the name and ID of the Amazon Web Services resource that generated the OpsItem, alarm or event details, alarm
+   history, and an alarm timeline graph. For the Amazon Web Services resource, OpsCenter aggregates information
+   from Config, CloudTrail logs, and EventBridge, so you don't have
+   to navigate across multiple console pages during your investigation. For more information, see
+    <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html\">OpsCenter</a> in the <i>Amazon Web Services Systems Manager User Guide</i>. </p>")
 type opsItem = {
   @ocaml.doc("<p>The time specified in a change request for a runbook workflow to end. Currently supported
    only for the OpsItem type <code>/aws/changerequest</code>.</p>")
@@ -3147,18 +3483,19 @@ type opsItem = {
    other relevant data. You enter operational data as key-value pairs. The key has a maximum length
    of 128 characters. The value has a maximum size of 20 KB.</p>
          <important>
-            <p>Operational data keys <i>can't</i> begin with the following: amazon, aws,
-    amzn, ssm, /amazon, /aws, /amzn, /ssm.</p>
+            <p>Operational data keys <i>can't</i> begin with the following:
+     <code>amazon</code>, <code>aws</code>, <code>amzn</code>, <code>ssm</code>,
+     <code>/amazon</code>, <code>/aws</code>, <code>/amzn</code>, <code>/ssm</code>.</p>
          </important>
          <p>You can choose to make the data searchable by other users in the account or you can restrict
    search access. Searchable data means that all users with access to the OpsItem Overview page (as
-   provided by the <a>DescribeOpsItems</a> API action) can view and search on the
-   specified data. Operational data that is not searchable is only viewable by users who have access
-   to the OpsItem (as provided by the <a>GetOpsItem</a> API action).</p>
+   provided by the <a>DescribeOpsItems</a> API operation) can view and search on the
+   specified data. Operational data that isn't searchable is only viewable by users who have access
+   to the OpsItem (as provided by the <a>GetOpsItem</a> API operation).</p>
          <p>Use the <code>/aws/resources</code> key in OperationalData to specify a related resource in
    the request. Use the <code>/aws/automations</code> key in OperationalData to associate an
-   Automation runbook with the OpsItem. To view AWS CLI example commands that use these keys, see
-    <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-creating-OpsItems.html#OpsCenter-manually-create-OpsItems\">Creating OpsItems manually</a> in the <i>AWS Systems Manager User Guide</i>.</p>")
+   Automation runbook with the OpsItem. To view Amazon Web Services CLI example commands that use these keys, see
+    <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-creating-OpsItems.html#OpsCenter-manually-create-OpsItems\">Creating OpsItems manually</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>")
   @as("OperationalData")
   operationalData: option<opsItemOperationalData>,
   @ocaml.doc("<p>The origin of the OpsItem, such as Amazon EC2 or Systems Manager. The impacted resource is a subset of
@@ -3176,7 +3513,7 @@ type opsItem = {
   version: option<string_>,
   @ocaml.doc("<p>The ID of the OpsItem.</p>") @as("OpsItemId") opsItemId: option<opsItemId>,
   @ocaml.doc("<p>The OpsItem status. Status can be <code>Open</code>, <code>In Progress</code>, or
-    <code>Resolved</code>. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-working-with-OpsItems-editing-details.html\">Editing OpsItem details</a> in the <i>AWS Systems Manager User Guide</i>.</p>")
+    <code>Resolved</code>. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-working-with-OpsItems-editing-details.html\">Editing OpsItem details</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>")
   @as("Status")
   status: option<opsItemStatus>,
   @ocaml.doc("<p>One or more OpsItems that share something in common with the current OpsItem. For example,
@@ -3187,13 +3524,13 @@ type opsItem = {
   @ocaml.doc("<p>The importance of this OpsItem in relation to other OpsItems in the system.</p>")
   @as("Priority")
   priority: option<opsItemPriority>,
-  @ocaml.doc("<p>The Amazon Resource Name (ARN) of an SNS topic where notifications are sent when this
-   OpsItem is edited or changed.</p>")
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of an Amazon Simple Notification Service (Amazon SNS) topic where
+   notifications are sent when this OpsItem is edited or changed.</p>")
   @as("Notifications")
   notifications: option<opsItemNotifications>,
   @ocaml.doc("<p>The date and time the OpsItem was last updated.</p>") @as("LastModifiedTime")
   lastModifiedTime: option<dateTime>,
-  @ocaml.doc("<p>The ARN of the AWS account that last updated the OpsItem.</p>")
+  @ocaml.doc("<p>The ARN of the Amazon Web Services account that last updated the OpsItem.</p>")
   @as("LastModifiedBy")
   lastModifiedBy: option<string_>,
   @ocaml.doc("<p>The OpsItem description.</p>") @as("Description")
@@ -3204,27 +3541,26 @@ type opsItem = {
    and <code>/aws/issue</code>.</p>")
   @as("OpsItemType")
   opsItemType: option<opsItemType>,
-  @ocaml.doc("<p>The ARN of the AWS account that created the OpsItem.</p>") @as("CreatedBy")
+  @ocaml.doc("<p>The ARN of the Amazon Web Services account that created the OpsItem.</p>")
+  @as("CreatedBy")
   createdBy: option<string_>,
 }
 type opsFilterList = array<opsFilter>
-@ocaml.doc("<p>The OpsItem summaries result item.</p>")
+@ocaml.doc("<p>The OpsData summary.</p>")
 type opsEntityItem = {
-  @ocaml.doc("<p>The detailed data content for an OpsItem summaries result item.</p>")
-  @as("Content")
+  @ocaml.doc("<p>The details of an OpsData summary.</p>") @as("Content")
   content: option<opsEntityItemEntryList>,
-  @ocaml.doc("<p>The time OpsItem data was captured.</p>") @as("CaptureTime")
+  @ocaml.doc("<p>The time the OpsData was captured.</p>") @as("CaptureTime")
   captureTime: option<opsEntityItemCaptureTime>,
 }
 type maintenanceWindowTaskParameters = Js.Dict.t<maintenanceWindowTaskParameterValueExpression>
-@ocaml.doc("<p>The parameters for a RUN_COMMAND task type.</p>
+@ocaml.doc("<p>The parameters for a <code>RUN_COMMAND</code> task type.</p>
          <p>For information about specifying and updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and <a>UpdateMaintenanceWindowTask</a>.</p>
          <note>
-   
             <p>
-               <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the
+               <code>LoggingInfo</code> has been deprecated. To specify an Amazon Simple Storage Service (Amazon S3) bucket to contain logs, instead use the
       <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure.
-      For information about how Systems Manager handles these options for the supported maintenance
+      For information about how Amazon Web Services Systems Manager handles these options for the supported maintenance
       window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p>
    
             <p>
@@ -3232,36 +3568,44 @@ type maintenanceWindowTaskParameters = Js.Dict.t<maintenanceWindowTaskParameterV
       instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information
       about how Systems Manager handles these options for the supported maintenance window task
       types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p>
-            <p>For Run Command tasks, Systems Manager uses specified values for <code>TaskParameters</code> and
-     <code>LoggingInfo</code> only if no values are specified for
+            <p>For <code>RUN_COMMAND</code> tasks, Systems Manager uses specified values for
+     <code>TaskParameters</code> and <code>LoggingInfo</code> only if no values are specified for
      <code>TaskInvocationParameters</code>. </p>
          </note>")
 type maintenanceWindowRunCommandParameters = {
-  @ocaml.doc("<p>If this time is reached and the command has not already started running, it doesn't
+  @ocaml.doc("<p>If this time is reached and the command hasn't already started running, it doesn't
    run.</p>")
   @as("TimeoutSeconds")
   timeoutSeconds: option<timeoutSeconds>,
-  @ocaml.doc("<p>The ARN of the IAM service role to use to publish Amazon Simple Notification Service (Amazon SNS) notifications for
-   maintenance window Run Command tasks.</p>")
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) service role to use to publish Amazon Simple Notification Service 
+(Amazon SNS) notifications for maintenance window Run Command tasks.</p>")
   @as("ServiceRoleArn")
   serviceRoleArn: option<serviceRole>,
-  @ocaml.doc("<p>The parameters for the RUN_COMMAND task execution.</p>") @as("Parameters")
+  @ocaml.doc("<p>The parameters for the <code>RUN_COMMAND</code> task execution.</p>")
+  @as("Parameters")
   parameters: option<parameters>,
   @ocaml.doc("<p>The S3 bucket subfolder.</p>") @as("OutputS3KeyPrefix")
   outputS3KeyPrefix: option<s3KeyPrefix>,
-  @ocaml.doc("<p>The name of the S3 bucket.</p>") @as("OutputS3BucketName")
+  @ocaml.doc("<p>The name of the Amazon Simple Storage Service (Amazon S3) bucket.</p>")
+  @as("OutputS3BucketName")
   outputS3BucketName: option<s3BucketName>,
-  @ocaml.doc("<p>Configurations for sending notifications about command status changes on a per-instance
+  @ocaml.doc("<p>Configurations for sending notifications about command status changes on a per-managed node
    basis.</p>")
   @as("NotificationConfig")
   notificationConfig: option<notificationConfig>,
-  @ocaml.doc("<p>The SSM document version to use in the request. You can specify $DEFAULT, $LATEST, or a
-   specific version number. If you run commands by using the AWS CLI, then you must escape the first
-   two options by using a backslash. If you specify a version number, then you don't need to use the
-   backslash. For example:</p>
-         <p>--document-version \"\\$DEFAULT\"</p>
-         <p>--document-version \"\\$LATEST\"</p>
-         <p>--document-version \"3\"</p>")
+  @ocaml.doc("<p>The Amazon Web Services Systems Manager document (SSM document) version to use in the request. You can specify
+    <code>$DEFAULT</code>, <code>$LATEST</code>, or a specific version number. If you run commands
+   by using the Amazon Web Services CLI, then you must escape the first two options by using a backslash. If you
+   specify a version number, then you don't need to use the backslash. For example:</p>
+         <p>
+            <code>--document-version \"\\$DEFAULT\"</code>
+         </p>
+         <p>
+            <code>--document-version \"\\$LATEST\"</code>
+         </p>
+         <p>
+            <code>--document-version \"3\"</code>
+         </p>")
   @as("DocumentVersion")
   documentVersion: option<documentVersion>,
   @ocaml.doc("<p>SHA-256 or SHA-1. SHA-1 hashes have been deprecated.</p>") @as("DocumentHashType")
@@ -3275,16 +3619,15 @@ type maintenanceWindowRunCommandParameters = {
   comment: option<comment>,
 }
 type maintenanceWindowFilterList = array<maintenanceWindowFilter>
-@ocaml.doc("<p>The parameters for an AUTOMATION task type.</p>")
+@ocaml.doc("<p>The parameters for an <code>AUTOMATION</code> task type.</p>")
 type maintenanceWindowAutomationParameters = {
-  @ocaml.doc("<p>The parameters for the AUTOMATION task.</p>
+  @ocaml.doc("<p>The parameters for the <code>AUTOMATION</code> task.</p>
          <p>For information about specifying and updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and <a>UpdateMaintenanceWindowTask</a>.</p>
          <note>
-   
             <p>
-               <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the
+               <code>LoggingInfo</code> has been deprecated. To specify an Amazon Simple Storage Service (Amazon S3) bucket to contain logs, instead use the
       <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure.
-      For information about how Systems Manager handles these options for the supported maintenance
+      For information about how Amazon Web Services Systems Manager handles these options for the supported maintenance
       window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p>
    
             <p>
@@ -3292,11 +3635,12 @@ type maintenanceWindowAutomationParameters = {
       instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information
       about how Systems Manager handles these options for the supported maintenance window task
       types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p>
-            <p>For AUTOMATION task types, Systems Manager ignores any values specified for these parameters.</p>
+            <p>For <code>AUTOMATION</code> task types, Amazon Web Services Systems Manager ignores any values specified for these
+    parameters.</p>
          </note>")
   @as("Parameters")
   parameters: option<automationParameterMap>,
-  @ocaml.doc("<p>The version of an Automation document to use during task execution.</p>")
+  @ocaml.doc("<p>The version of an Automation runbook to use during task execution.</p>")
   @as("DocumentVersion")
   documentVersion: option<documentVersion>,
 }
@@ -3307,8 +3651,8 @@ type inventoryResultItem = {
   @as("Content")
   content: inventoryItemEntryList,
   @ocaml.doc("<p>MD5 hash of the inventory item type contents. The content hash is used to determine whether
-   to update inventory information. The PutInventory API does not update the inventory item type
-   contents if the MD5 hash has not changed since last update. </p>")
+   to update inventory information. The PutInventory API doesn't update the inventory item type
+   contents if the MD5 hash hasn't changed since last update. </p>")
   @as("ContentHash")
   contentHash: option<inventoryItemContentHash>,
   @ocaml.doc("<p>The time inventory item data was captured.</p>") @as("CaptureTime")
@@ -3333,15 +3677,16 @@ type inventoryItemSchema = {
   attributes: inventoryItemAttributeList,
   @ocaml.doc("<p>The schema version for the inventory item.</p>") @as("Version")
   version: option<inventoryItemSchemaVersion>,
-  @ocaml.doc("<p>The name of the inventory type. Default inventory item type names start with AWS. Custom
+  @ocaml.doc("<p>The name of the inventory type. Default inventory item type names start with Amazon Web Services. Custom
    inventory type names will start with Custom. Default inventory item types include the following:
-   AWS:AWSComponent, AWS:Application, AWS:InstanceInformation, AWS:Network, and
-   AWS:WindowsUpdate.</p>")
+    <code>AWS:AWSComponent</code>, <code>AWS:Application</code>,
+    <code>AWS:InstanceInformation</code>, <code>AWS:Network</code>, and
+    <code>AWS:WindowsUpdate</code>.</p>")
   @as("TypeName")
   typeName: inventoryItemTypeName,
 }
 @ocaml.doc(
-  "<p>Information collected from managed instances based on your inventory policy document</p>"
+  "<p>Information collected from managed nodes based on your inventory policy document</p>"
 )
 type inventoryItem = {
   @ocaml.doc("<p>A map of associated properties for a specified inventory type. For example, with this
@@ -3352,18 +3697,19 @@ type inventoryItem = {
   @ocaml.doc("<p>The inventory data of the inventory type.</p>") @as("Content")
   content: option<inventoryItemEntryList>,
   @ocaml.doc("<p>MD5 hash of the inventory item type contents. The content hash is used to determine whether
-   to update inventory information. The PutInventory API does not update the inventory item type
-   contents if the MD5 hash has not changed since last update. </p>")
+   to update inventory information. The PutInventory API doesn't update the inventory item type
+   contents if the MD5 hash hasn't changed since last update. </p>")
   @as("ContentHash")
   contentHash: option<inventoryItemContentHash>,
   @ocaml.doc("<p>The time the inventory information was collected.</p>") @as("CaptureTime")
   captureTime: inventoryItemCaptureTime,
   @ocaml.doc("<p>The schema version for the inventory item.</p>") @as("SchemaVersion")
   schemaVersion: inventoryItemSchemaVersion,
-  @ocaml.doc("<p>The name of the inventory type. Default inventory item type names start with AWS. Custom
-   inventory type names will start with Custom. Default inventory item types include the following:
-   AWS:AWSComponent, AWS:Application, AWS:InstanceInformation, AWS:Network, and
-   AWS:WindowsUpdate.</p>")
+  @ocaml.doc("<p>The name of the inventory type. Default inventory item type names start with
+    <code>AWS</code>. Custom inventory type names will start with Custom. Default inventory item
+   types include the following: <code>AWS:AWSComponent</code>, <code>AWS:Application</code>,
+    <code>AWS:InstanceInformation</code>, <code>AWS:Network</code>, and
+    <code>AWS:WindowsUpdate</code>.</p>")
   @as("TypeName")
   typeName: inventoryItemTypeName,
 }
@@ -3374,7 +3720,7 @@ type inventoryDeletionSummary = {
   summaryItems: option<inventoryDeletionSummaryItems>,
   @ocaml.doc("<p>Remaining number of items to delete.</p>") @as("RemainingCount")
   remainingCount: option<remainingCount>,
-  @ocaml.doc("<p>The total number of items to delete. This count does not change during the delete
+  @ocaml.doc("<p>The total number of items to delete. This count doesn't change during the delete
    operation.</p>")
   @as("TotalCount")
   totalCount: option<totalCount>,
@@ -3382,8 +3728,16 @@ type inventoryDeletionSummary = {
 type instancePatchStateFilterList = array<instancePatchStateFilter>
 type instanceInformationStringFilterList = array<instanceInformationStringFilter>
 type instanceInformationFilterList = array<instanceInformationFilter>
-@ocaml.doc("<p>Describes a filter for a specific list of instances. </p>")
+@ocaml.doc("<p>Describes a filter for a specific list of managed nodes. </p>")
 type instanceInformation = {
+  @ocaml.doc("<p>The type of the source resource. For IoT Greengrass devices, <code>SourceType</code>
+   is <code>AWS::IoT::Thing</code>. </p>")
+  @as("SourceType")
+  sourceType: option<sourceType>,
+  @ocaml.doc("<p>The ID of the source resource. For IoT Greengrass devices, <code>SourceId</code> is
+   the Thing name. </p>")
+  @as("SourceId")
+  sourceId: option<sourceId>,
   @ocaml.doc("<p>Information about the association.</p>") @as("AssociationOverview")
   associationOverview: option<instanceAggregatedAssociationOverview>,
   @ocaml.doc("<p>The last date the association was successfully run.</p>")
@@ -3393,19 +3747,19 @@ type instanceInformation = {
   lastAssociationExecutionDate: option<dateTime>,
   @ocaml.doc("<p>The status of the association.</p>") @as("AssociationStatus")
   associationStatus: option<statusName>,
-  @ocaml.doc("<p>The fully qualified host name of the managed instance.</p>") @as("ComputerName")
+  @ocaml.doc("<p>The fully qualified host name of the managed node.</p>") @as("ComputerName")
   computerName: option<computerName>,
-  @ocaml.doc("<p>The IP address of the managed instance.</p>") @as("IPAddress")
+  @ocaml.doc("<p>The IP address of the managed node.</p>") @as("IPAddress")
   ipaddress: option<ipaddress>,
-  @ocaml.doc("<p>The name assigned to an on-premises server or virtual machine (VM) when it is activated as a
-   Systems Manager managed instance. The name is specified as the <code>DefaultInstanceName</code> property
-   using the <a>CreateActivation</a> command. It is applied to the managed instance by
-   specifying the Activation Code and Activation ID when you install SSM Agent on the instance, as
+  @ocaml.doc("<p>The name assigned to an on-premises server, edge device, or virtual machine (VM) when it is
+   activated as a Systems Manager managed node. The name is specified as the <code>DefaultInstanceName</code>
+   property using the <a>CreateActivation</a> command. It is applied to the managed node
+   by specifying the Activation Code and Activation ID when you install SSM Agent on the node, as
    explained in <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-install-managed-linux.html\">Install SSM Agent for a
-    hybrid environment (Linux)</a> and <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-install-managed-win.html\">Install SSM Agent for a hybrid environment
-    (Windows)</a>. To retrieve the Name tag of an EC2 instance, use the Amazon EC2
-   <code>DescribeInstances</code> action. For information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html\">DescribeInstances</a> in the
-   <i>Amazon EC2 API Reference</i> or <a href=\"https://docs.aws.amazon.com/cli/latest/ec2/describe-instances.html\">describe-instances</a> in the <i>AWS CLI Command Reference</i>.</p>")
+    hybrid environment (Linux)</a> and <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-install-managed-win.html\">Install SSM Agent for a
+    hybrid environment (Windows)</a>. To retrieve the <code>Name</code> tag of an EC2 instance,
+   use the Amazon EC2 <code>DescribeInstances</code> operation. For information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html\">DescribeInstances</a> in the <i>Amazon EC2 API Reference</i> or <a href=\"https://docs.aws.amazon.com/cli/latest/ec2/describe-instances.html\">describe-instances</a> in
+   the <i>Amazon Web Services CLI Command Reference</i>.</p>")
   @as("Name")
   name: option<string_>,
   @ocaml.doc(
@@ -3413,36 +3767,38 @@ type instanceInformation = {
   )
   @as("ResourceType")
   resourceType: option<resourceType>,
-  @ocaml.doc("<p>The date the server or VM was registered with AWS as a managed instance.</p>")
+  @ocaml.doc(
+    "<p>The date the server or VM was registered with Amazon Web Services as a managed node.</p>"
+  )
   @as("RegistrationDate")
   registrationDate: option<dateTime>,
-  @ocaml.doc("<p>The Amazon Identity and Access Management (IAM) role assigned to the on-premises Systems Manager
-   managed instance. This call does not return the IAM role for EC2 instances. To retrieve the IAM
-   role for an EC2 instance, use the Amazon EC2 <code>DescribeInstances</code> action. For information,
-   see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html\">DescribeInstances</a> in the
-   <i>Amazon EC2 API Reference</i> or <a href=\"https://docs.aws.amazon.com/cli/latest/ec2/describe-instances.html\">describe-instances</a> in the <i>AWS CLI Command Reference</i>.</p>")
+  @ocaml.doc("<p>The Identity and Access Management (IAM) role assigned to the on-premises Systems Manager
+   managed node. This call doesn't return the IAM role for Amazon Elastic Compute Cloud
+    (Amazon EC2) instances. To retrieve the IAM role for an EC2 instance, use
+   the Amazon EC2 <code>DescribeInstances</code> operation. For information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html\">DescribeInstances</a> in the <i>Amazon EC2 API Reference</i> or <a href=\"https://docs.aws.amazon.com/cli/latest/ec2/describe-instances.html\">describe-instances</a> in
+   the <i>Amazon Web Services CLI Command Reference</i>.</p>")
   @as("IamRole")
   iamRole: option<iamRole>,
-  @ocaml.doc(
-    "<p>The activation ID created by Systems Manager when the server or VM was registered.</p>"
-  )
+  @ocaml.doc("<p>The activation ID created by Amazon Web Services Systems Manager when the server or virtual machine (VM) was
+   registered.</p>")
   @as("ActivationId")
   activationId: option<activationId>,
-  @ocaml.doc("<p>The version of the OS platform running on your instance. </p>")
+  @ocaml.doc("<p>The version of the OS platform running on your managed node. </p>")
   @as("PlatformVersion")
   platformVersion: option<string_>,
-  @ocaml.doc("<p>The name of the operating system platform running on your instance. </p>")
+  @ocaml.doc("<p>The name of the operating system platform running on your managed node. </p>")
   @as("PlatformName")
   platformName: option<string_>,
   @ocaml.doc("<p>The operating system platform type. </p>") @as("PlatformType")
   platformType: option<platformType>,
-  @ocaml.doc("<p>Indicates whether the latest version of SSM Agent is running on your Linux Managed Instance.
-   This field does not indicate whether or not the latest version is installed on Windows managed
-   instances, because some older versions of Windows Server use the EC2Config service to process SSM
+  @ocaml.doc("<p>Indicates whether the latest version of SSM Agent is running on your Linux managed node. This
+   field doesn't indicate whether or not the latest version is installed on Windows managed nodes,
+   because some older versions of Windows Server use the EC2Config service to process Systems Manager
    requests.</p>")
   @as("IsLatestVersion")
   isLatestVersion: option<boolean_>,
-  @ocaml.doc("<p>The version of SSM Agent running on your Linux instance. </p>") @as("AgentVersion")
+  @ocaml.doc("<p>The version of SSM Agent running on your Linux managed node. </p>")
+  @as("AgentVersion")
   agentVersion: option<version>,
   @ocaml.doc("<p>The date and time when the agent last pinged the Systems Manager service. </p>")
   @as("LastPingDateTime")
@@ -3453,11 +3809,12 @@ type instanceInformation = {
          </note>")
   @as("PingStatus")
   pingStatus: option<pingStatus>,
-  @ocaml.doc("<p>The instance ID. </p>") @as("InstanceId") instanceId: option<instanceId>,
+  @ocaml.doc("<p>The managed node ID. </p>") @as("InstanceId") instanceId: option<instanceId>,
 }
-@ocaml.doc("<p>Status information about the instance association.</p>")
+@ocaml.doc("<p>Status information about the association.</p>")
 type instanceAssociationStatusInfo = {
-  @ocaml.doc("<p>The name of the association applied to the instance.</p>") @as("AssociationName")
+  @ocaml.doc("<p>The name of the association applied to the managed node.</p>")
+  @as("AssociationName")
   associationName: option<associationName>,
   @ocaml.doc("<p>A URL for an S3 bucket where you want to store the results of this request.</p>")
   @as("OutputUrl")
@@ -3467,16 +3824,15 @@ type instanceAssociationStatusInfo = {
   errorCode: option<agentErrorCode>,
   @ocaml.doc("<p>Summary information about association execution.</p>") @as("ExecutionSummary")
   executionSummary: option<instanceAssociationExecutionSummary>,
-  @ocaml.doc("<p>Detailed status information about the instance association.</p>")
-  @as("DetailedStatus")
+  @ocaml.doc("<p>Detailed status information about the association.</p>") @as("DetailedStatus")
   detailedStatus: option<statusName>,
-  @ocaml.doc("<p>Status information about the instance association.</p>") @as("Status")
+  @ocaml.doc("<p>Status information about the association.</p>") @as("Status")
   status: option<statusName>,
-  @ocaml.doc("<p>The date the instance association ran. </p>") @as("ExecutionDate")
+  @ocaml.doc("<p>The date the association ran. </p>") @as("ExecutionDate")
   executionDate: option<dateTime>,
-  @ocaml.doc("<p>The instance ID where the association was created.</p>") @as("InstanceId")
+  @ocaml.doc("<p>The managed node ID where the association was created.</p>") @as("InstanceId")
   instanceId: option<instanceId>,
-  @ocaml.doc("<p>The version of the association applied to the instance.</p>")
+  @ocaml.doc("<p>The version of the association applied to the managed node.</p>")
   @as("AssociationVersion")
   associationVersion: option<associationVersion>,
   @ocaml.doc("<p>The association document versions.</p>") @as("DocumentVersion")
@@ -3498,10 +3854,11 @@ type failureDetails = {
   @as("FailureStage")
   failureStage: option<string_>,
 }
-@ocaml.doc("<p>The EffectivePatch structure defines metadata about a patch along with the approval state of
-   the patch in a particular patch baseline. The approval state includes information about whether
-   the patch is currently approved, due to be approved by a rule, explicitly approved, or explicitly
-   rejected and the date the patch was or will be approved.</p>")
+@ocaml.doc("<p>The <code>EffectivePatch</code> structure defines metadata about a patch along with the
+   approval state of the patch in a particular patch baseline. The approval state includes
+   information about whether the patch is currently approved, due to be approved by a rule,
+   explicitly approved, or explicitly rejected and the date the patch was or will be
+   approved.</p>")
 type effectivePatch = {
   @ocaml.doc("<p>The status of the patch in a patch baseline. This includes information about whether the
    patch is currently approved, due to be approved by a rule, explicitly approved, or explicitly
@@ -3549,7 +3906,7 @@ type documentReviewerResponseSource = {
   createTime: option<dateTime>,
 }
 type documentKeyValuesFilterList = array<documentKeyValuesFilter>
-@ocaml.doc("<p>Describes the name of a Systems Manager document.</p>")
+@ocaml.doc("<p>Describes the name of a SSM document.</p>")
 type documentIdentifier = {
   @ocaml.doc("<p>The user in your organization who created the document.</p>") @as("Author")
   author: option<documentAuthor>,
@@ -3563,8 +3920,8 @@ type documentIdentifier = {
   @ocaml.doc("<p>The tags, or metadata, that have been applied to the document.</p>") @as("Tags")
   tags: option<tagList_>,
   @ocaml.doc("<p>The target type which defines the kinds of resources the document can run on. For example,
-   /AWS::EC2::Instance. For a list of valid resource types, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\">AWS resource and property types
-    reference</a> in the <i>AWS CloudFormation User Guide</i>. </p>")
+    <code>/AWS::EC2::Instance</code>. For a list of valid resource types, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\">Amazon Web Services resource and
+    property types reference</a> in the <i>CloudFormation User Guide</i>. </p>")
   @as("TargetType")
   targetType: option<targetType>,
   @ocaml.doc("<p>The document format, either JSON or YAML.</p>") @as("DocumentFormat")
@@ -3578,22 +3935,26 @@ type documentIdentifier = {
   platformTypes: option<platformTypeList>,
   @ocaml.doc("<p>An optional field specifying the version of the artifact associated with the document. For
    example, \"Release 12, Update 6\". This value is unique across all versions of a document, and
-   cannot be changed.</p>")
+   can't be changed.</p>")
   @as("VersionName")
   versionName: option<documentVersionName>,
-  @ocaml.doc("<p>The AWS user account that created the document.</p>") @as("Owner")
+  @ocaml.doc("<p>The Amazon Web Services user account that created the document.</p>") @as("Owner")
   owner: option<documentOwner>,
-  @ocaml.doc("<p>An optional field where you can specify a friendly name for the Systems Manager document. This value
-   can differ for each version of the document. If you want to update this value, see <a>UpdateDocument</a>.</p>")
+  @ocaml.doc("<p>An optional field where you can specify a friendly name for the SSM document. This value can
+   differ for each version of the document. If you want to update this value, see <a>UpdateDocument</a>.</p>")
   @as("DisplayName")
   displayName: option<documentDisplayName>,
-  @ocaml.doc("<p>The date the Systems Manager document was created.</p>") @as("CreatedDate")
+  @ocaml.doc("<p>The date the SSM document was created.</p>") @as("CreatedDate")
   createdDate: option<dateTime>,
-  @ocaml.doc("<p>The name of the Systems Manager document.</p>") @as("Name")
-  name: option<documentARN>,
+  @ocaml.doc("<p>The name of the SSM document.</p>") @as("Name") name: option<documentARN>,
 }
-@ocaml.doc("<p>Describes a Systems Manager document. </p>")
+@ocaml.doc("<p>Describes an Amazon Web Services Systems Manager document (SSM document). </p>")
 type documentDescription = {
+  @ocaml.doc("<p>The value that identifies a document's category.</p>") @as("CategoryEnum")
+  categoryEnum: option<categoryEnumList>,
+  @ocaml.doc("<p>The classification of a document to help you identify and categorize its use.</p>")
+  @as("Category")
+  category: option<categoryList>,
   @ocaml.doc("<p>The current status of the review.</p>") @as("ReviewStatus")
   reviewStatus: option<reviewStatus>,
   @ocaml.doc("<p>The version of the document that is currently under review.</p>")
@@ -3619,8 +3980,8 @@ type documentDescription = {
   @ocaml.doc("<p>The tags, or metadata, that have been applied to the document.</p>") @as("Tags")
   tags: option<tagList_>,
   @ocaml.doc("<p>The target type which defines the kinds of resources the document can run on. For example,
-   /AWS::EC2::Instance. For a list of valid resource types, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\">AWS resource and property types
-    reference</a> in the <i>AWS CloudFormation User Guide</i>. </p>")
+    <code>/AWS::EC2::Instance</code>. For a list of valid resource types, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\">Amazon Web Services resource and
+    property types reference</a> in the <i>CloudFormation User Guide</i>. </p>")
   @as("TargetType")
   targetType: option<targetType>,
   @ocaml.doc("<p>The document format, either JSON or YAML.</p>") @as("DocumentFormat")
@@ -3632,7 +3993,9 @@ type documentDescription = {
   @ocaml.doc("<p>The schema version.</p>") @as("SchemaVersion")
   schemaVersion: option<documentSchemaVersion>,
   @ocaml.doc("<p>The type of document.</p>") @as("DocumentType") documentType: option<documentType>,
-  @ocaml.doc("<p>The list of OS platforms compatible with this Systems Manager document. </p>")
+  @ocaml.doc(
+    "<p>The list of operating system (OS) platforms compatible with this SSM document. </p>"
+  )
   @as("PlatformTypes")
   platformTypes: option<platformTypeList>,
   @ocaml.doc("<p>A description of the parameters for a document.</p>") @as("Parameters")
@@ -3641,25 +4004,23 @@ type documentDescription = {
   description: option<descriptionInDocument>,
   @ocaml.doc("<p>The document version.</p>") @as("DocumentVersion")
   documentVersion: option<documentVersion>,
-  @ocaml.doc("<p>A message returned by AWS Systems Manager that explains the <code>Status</code> value. For example, a
+  @ocaml.doc("<p>A message returned by Amazon Web Services Systems Manager that explains the <code>Status</code> value. For example, a
     <code>Failed</code> status might be explained by the <code>StatusInformation</code> message,
-   \"The specified S3 bucket does not exist. Verify that the URL of the S3 bucket is correct.\"</p>")
+   \"The specified S3 bucket doesn't exist. Verify that the URL of the S3 bucket is correct.\"</p>")
   @as("StatusInformation")
   statusInformation: option<documentStatusInformation>,
-  @ocaml.doc("<p>The status of the Systems Manager document.</p>") @as("Status")
-  status: option<documentStatus>,
+  @ocaml.doc("<p>The status of the SSM document.</p>") @as("Status") status: option<documentStatus>,
   @ocaml.doc("<p>The date when the document was created.</p>") @as("CreatedDate")
   createdDate: option<dateTime>,
-  @ocaml.doc("<p>The AWS user account that created the document.</p>") @as("Owner")
+  @ocaml.doc("<p>The Amazon Web Services user account that created the document.</p>") @as("Owner")
   owner: option<documentOwner>,
   @ocaml.doc("<p>The version of the artifact associated with the document.</p>") @as("VersionName")
   versionName: option<documentVersionName>,
-  @ocaml.doc("<p>The friendly name of the Systems Manager document. This value can differ for each version of the
+  @ocaml.doc("<p>The friendly name of the SSM document. This value can differ for each version of the
    document. If you want to update this value, see <a>UpdateDocument</a>.</p>")
   @as("DisplayName")
   displayName: option<documentDisplayName>,
-  @ocaml.doc("<p>The name of the Systems Manager document.</p>") @as("Name")
-  name: option<documentARN>,
+  @ocaml.doc("<p>The name of the SSM document.</p>") @as("Name") name: option<documentARN>,
   @ocaml.doc("<p>The hash type of the document. Valid values include <code>Sha256</code> or
    <code>Sha1</code>.</p>
          <note>
@@ -3694,51 +4055,53 @@ type complianceSummaryItem = {
 type complianceStringFilterList = array<complianceStringFilter>
 type complianceItemList = array<complianceItem>
 type complianceItemEntryList = array<complianceItemEntry>
-@ocaml.doc("<p>An invocation is copy of a command sent to a specific instance. A command can apply to one
-   or more instances. A command invocation applies to one instance. For example, if a user runs
-   SendCommand against three instances, then a command invocation is created for each requested
-   instance ID. A command invocation returns status and detail information about a command you ran.
-  </p>")
+@ocaml.doc("<p>An invocation is a copy of a command sent to a specific managed node. A command can apply to
+   one or more managed nodes. A command invocation applies to one managed node. For example, if a
+   user runs <code>SendCommand</code> against three managed nodes, then a command invocation is
+   created for each requested managed node ID. A command invocation returns status and detail
+   information about a command you ran. </p>")
 type commandInvocation = {
-  @ocaml.doc(
-    "<p>CloudWatch Logs information where you want Systems Manager to send the command output.</p>"
-  )
+  @ocaml.doc("<p>Amazon CloudWatch Logs information where you want Amazon Web Services Systems Manager to send the command
+   output.</p>")
   @as("CloudWatchOutputConfig")
   cloudWatchOutputConfig: option<cloudWatchOutputConfig>,
-  @ocaml.doc("<p>Configurations for sending notifications about command status changes on a per instance
+  @ocaml.doc("<p>Configurations for sending notifications about command status changes on a per managed node
    basis.</p>")
   @as("NotificationConfig")
   notificationConfig: option<notificationConfig>,
-  @ocaml.doc("<p>The IAM service role that Run Command uses to act on your behalf when sending notifications
-   about command status changes on a per instance basis.</p>")
+  @ocaml.doc("<p>The Identity and Access Management (IAM) service role that Run Command, a capability
+   of Amazon Web Services Systems Manager, uses to act on your behalf when sending notifications about command status changes
+   on a per managed node basis.</p>")
   @as("ServiceRole")
   serviceRole: option<serviceRole>,
   @ocaml.doc("<p>Plugins processed by the command.</p>") @as("CommandPlugins")
   commandPlugins: option<commandPluginList>,
-  @ocaml.doc("<p>The URL to the plugin's StdErr file in Amazon S3, if the S3 bucket was defined for the parent
-   command. For an invocation, StandardErrorUrl is populated if there is just one plugin defined for
-   the command, and the S3 bucket was defined for the command.</p>")
+  @ocaml.doc("<p>The URL to the plugin's StdErr file in Amazon Simple Storage Service (Amazon S3), if the S3
+   bucket was defined for the parent command. For an invocation, <code>StandardErrorUrl</code> is
+   populated if there is just one plugin defined for the command, and the S3 bucket was defined for
+   the command.</p>")
   @as("StandardErrorUrl")
   standardErrorUrl: option<url>,
-  @ocaml.doc("<p>The URL to the plugin's StdOut file in Amazon S3, if the S3 bucket was defined for the parent
-   command. For an invocation, StandardOutputUrl is populated if there is just one plugin defined
-   for the command, and the S3 bucket was defined for the command.</p>")
+  @ocaml.doc("<p>The URL to the plugin's StdOut file in Amazon Simple Storage Service (Amazon S3), if the S3
+   bucket was defined for the parent command. For an invocation, <code>StandardOutputUrl</code> is
+   populated if there is just one plugin defined for the command, and the S3 bucket was defined for
+   the command.</p>")
   @as("StandardOutputUrl")
   standardOutputUrl: option<url>,
   @ocaml.doc("<p> Gets the trace output sent by the agent. </p>") @as("TraceOutput")
   traceOutput: option<invocationTraceOutput>,
-  @ocaml.doc("<p>A detailed status of the command execution for each invocation (each instance targeted by
-   the command). StatusDetails includes more information than Status because it includes states
+  @ocaml.doc("<p>A detailed status of the command execution for each invocation (each managed node targeted
+   by the command). StatusDetails includes more information than Status because it includes states
    resulting from error and concurrency control parameters. StatusDetails can show different results
    than Status. For more information about these statuses, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-commands.html\">Understanding command
-    statuses</a> in the <i>AWS Systems Manager User Guide</i>. StatusDetails can be one of the
+    statuses</a> in the <i>Amazon Web Services Systems Manager User Guide</i>. StatusDetails can be one of the
    following values:</p>
          <ul>
             <li>
-               <p>Pending: The command has not been sent to the instance.</p>
+               <p>Pending: The command hasn't been sent to the managed node.</p>
             </li>
             <li>
-               <p>In Progress: The command has been sent to the instance but has not reached a terminal
+               <p>In Progress: The command has been sent to the managed node but hasn't reached a terminal
      state.</p>
             </li>
             <li>
@@ -3746,29 +4109,29 @@ type commandInvocation = {
      terminal state.</p>
             </li>
             <li>
-               <p>Delivery Timed Out: The command was not delivered to the instance before the delivery
-     timeout expired. Delivery timeouts do not count against the parent command's MaxErrors limit,
-     but they do contribute to whether the parent command status is Success or Incomplete. This is a
-     terminal state.</p>
+               <p>Delivery Timed Out: The command wasn't delivered to the managed node before the delivery
+     timeout expired. Delivery timeouts don't count against the parent command's
+      <code>MaxErrors</code> limit, but they do contribute to whether the parent command status is
+     Success or Incomplete. This is a terminal state.</p>
             </li>
             <li>
-               <p>Execution Timed Out: Command execution started on the instance, but the execution was not
-     complete before the execution timeout expired. Execution timeouts count against the MaxErrors
-     limit of the parent command. This is a terminal state.</p>
+               <p>Execution Timed Out: Command execution started on the managed node, but the execution
+     wasn't complete before the execution timeout expired. Execution timeouts count against the
+      <code>MaxErrors</code> limit of the parent command. This is a terminal state.</p>
             </li>
             <li>
-               <p>Failed: The command was not successful on the instance. For a plugin, this indicates that
-     the result code was not zero. For a command invocation, this indicates that the result code for
-     one or more plugins was not zero. Invocation failures count against the MaxErrors limit of the
-     parent command. This is a terminal state.</p>
+               <p>Failed: The command wasn't successful on the managed node. For a plugin, this indicates
+     that the result code wasn't zero. For a command invocation, this indicates that the result code
+     for one or more plugins wasn't zero. Invocation failures count against the
+      <code>MaxErrors</code> limit of the parent command. This is a terminal state.</p>
             </li>
             <li>
-               <p>Canceled: The command was terminated before it was completed. This is a terminal
+               <p>Cancelled: The command was terminated before it was completed. This is a terminal
      state.</p>
             </li>
             <li>
-               <p>Undeliverable: The command can't be delivered to the instance. The instance might not
-     exist or might not be responding. Undeliverable invocations don't count against the parent
+               <p>Undeliverable: The command can't be delivered to the managed node. The managed node might
+     not exist or might not be responding. Undeliverable invocations don't count against the parent
      command's MaxErrors limit and don't contribute to whether the parent command status is Success
      or Incomplete. This is a terminal state.</p>
             </li>
@@ -3781,10 +4144,10 @@ type commandInvocation = {
   statusDetails: option<statusDetails>,
   @ocaml.doc("<p>Whether or not the invocation succeeded, failed, or is pending.</p>") @as("Status")
   status: option<commandInvocationStatus>,
-  @ocaml.doc("<p>The time and date the request was sent to this instance.</p>")
+  @ocaml.doc("<p>The time and date the request was sent to this managed node.</p>")
   @as("RequestedDateTime")
   requestedDateTime: option<dateTime>,
-  @ocaml.doc("<p>The SSM document version.</p>") @as("DocumentVersion")
+  @ocaml.doc("<p>The Systems Manager document (SSM document) version.</p>") @as("DocumentVersion")
   documentVersion: option<documentVersion>,
   @ocaml.doc("<p>The document name that was requested for execution.</p>") @as("DocumentName")
   documentName: option<documentName>,
@@ -3792,11 +4155,9 @@ type commandInvocation = {
    command should do.</p>")
   @as("Comment")
   comment: option<comment>,
-  @ocaml.doc("<p>The name of the invocation target. For EC2 instances this is the value for the aws:Name tag.
-   For on-premises instances, this is the name of the instance.</p>")
-  @as("InstanceName")
+  @ocaml.doc("<p>The fully qualified host name of the managed node.</p>") @as("InstanceName")
   instanceName: option<instanceTagName>,
-  @ocaml.doc("<p>The instance ID in which this invocation was requested.</p>") @as("InstanceId")
+  @ocaml.doc("<p>The managed node ID in which this invocation was requested.</p>") @as("InstanceId")
   instanceId: option<instanceId>,
   @ocaml.doc("<p>The command against which this invocation was requested.</p>") @as("CommandId")
   commandId: option<commandId>,
@@ -3804,9 +4165,9 @@ type commandInvocation = {
 type automationExecutionFilterList = array<automationExecutionFilter>
 type attachmentsSourceList = array<attachmentsSource>
 type associationExecutionTargetsList = array<associationExecutionTarget>
-@ocaml.doc("<p>An activation registers one or more on-premises servers or virtual machines (VMs) with AWS
+@ocaml.doc("<p>An activation registers one or more on-premises servers or virtual machines (VMs) with Amazon Web Services
    so that you can configure those servers or VMs using Run Command. A server or VM that has been
-   registered with AWS is called a managed instance.</p>")
+   registered with Amazon Web Services Systems Manager is called a managed node.</p>")
 type activation = {
   @ocaml.doc("<p>Tags assigned to the activation.</p>") @as("Tags") tags: option<tagList_>,
   @ocaml.doc("<p>The date the activation was created.</p>") @as("CreatedDate")
@@ -3814,24 +4175,22 @@ type activation = {
   @ocaml.doc("<p>Whether or not the activation is expired.</p>") @as("Expired")
   expired: option<boolean_>,
   @ocaml.doc(
-    "<p>The date when this activation can no longer be used to register managed instances.</p>"
+    "<p>The date when this activation can no longer be used to register managed nodes.</p>"
   )
   @as("ExpirationDate")
   expirationDate: option<expirationDate>,
-  @ocaml.doc("<p>The number of managed instances already registered with this activation.</p>")
+  @ocaml.doc("<p>The number of managed nodes already registered with this activation.</p>")
   @as("RegistrationsCount")
   registrationsCount: option<registrationsCount>,
   @ocaml.doc(
-    "<p>The maximum number of managed instances that can be registered using this activation.</p>"
+    "<p>The maximum number of managed nodes that can be registered using this activation.</p>"
   )
   @as("RegistrationLimit")
   registrationLimit: option<registrationLimit>,
-  @ocaml.doc("<p>The Amazon Identity and Access Management (IAM) role to assign to the managed
-   instance.</p>")
+  @ocaml.doc("<p>The Identity and Access Management (IAM) role to assign to the managed node.</p>")
   @as("IamRole")
   iamRole: option<iamRole>,
-  @ocaml.doc("<p>A name for the managed instance when it is created.</p>")
-  @as("DefaultInstanceName")
+  @ocaml.doc("<p>A name for the managed node when it is created.</p>") @as("DefaultInstanceName")
   defaultInstanceName: option<defaultInstanceName>,
   @ocaml.doc("<p>A user defined description of the activation.</p>") @as("Description")
   description: option<activationDescription>,
@@ -3841,7 +4200,7 @@ type activation = {
 }
 @ocaml.doc("<p>Detailed information about an the execution state of an Automation step.</p>")
 type stepExecution = {
-  @ocaml.doc("<p>The combination of AWS Regions and accounts targeted by the current Automation
+  @ocaml.doc("<p>The combination of Amazon Web Services Regions and Amazon Web Services accounts targeted by the current Automation
    execution.</p>")
   @as("TargetLocation")
   targetLocation: option<targetLocation>,
@@ -3883,19 +4242,20 @@ type stepExecution = {
   @ocaml.doc("<p>The execution status for this step.</p>") @as("StepStatus")
   stepStatus: option<automationExecutionStatus>,
   @ocaml.doc("<p>If a step has finished execution, this contains the time the execution ended. If the step
-   has not yet concluded, this field is not populated.</p>")
+   hasn't yet concluded, this field isn't populated.</p>")
   @as("ExecutionEndTime")
   executionEndTime: option<dateTime>,
   @ocaml.doc("<p>If a step has begun execution, this contains the time the step started. If the step is in
-   Pending status, this field is not populated.</p>")
+   Pending status, this field isn't populated.</p>")
   @as("ExecutionStartTime")
   executionStartTime: option<dateTime>,
-  @ocaml.doc(
-    "<p>The maximum number of tries to run the action of the step. The default value is 1.</p>"
-  )
+  @ocaml.doc("<p>The maximum number of tries to run the action of the step. The default value is
+    <code>1</code>.</p>")
   @as("MaxAttempts")
   maxAttempts: option<integer_>,
-  @ocaml.doc("<p>The action to take if the step fails. The default value is Abort.</p>")
+  @ocaml.doc(
+    "<p>The action to take if the step fails. The default value is <code>Abort</code>.</p>"
+  )
   @as("OnFailure")
   onFailure: option<string_>,
   @ocaml.doc("<p>The timeout seconds of the step.</p>") @as("TimeoutSeconds")
@@ -3907,14 +4267,13 @@ type stepExecution = {
   action: option<automationActionName>,
   @ocaml.doc("<p>The name of this execution step.</p>") @as("StepName") stepName: option<string_>,
 }
-@ocaml.doc("<p>Information about an Automation runbook (Automation document) used in a runbook workflow in
-   Change Manager.</p>
+@ocaml.doc("<p>Information about an Automation runbook used in a runbook workflow in Change Manager.</p>
          <note>
             <p>The Automation runbooks specified for the runbook workflow can't run until all required
     approvals for the change request have been received.</p>
          </note>")
 type runbook = {
-  @ocaml.doc("<p>Information about the AWS Regions and accounts targeted by the current Runbook
+  @ocaml.doc("<p>Information about the Amazon Web Services Regions and Amazon Web Services accounts targeted by the current Runbook
    operation.</p>")
   @as("TargetLocations")
   targetLocations: option<targetLocations>,
@@ -3928,7 +4287,7 @@ type runbook = {
    time.</p>")
   @as("MaxConcurrency")
   maxConcurrency: option<maxConcurrency>,
-  @ocaml.doc("<p>A key-value mapping to target resources that the Runbook operation performs tasks on.
+  @ocaml.doc("<p>A key-value mapping to target resources that the runbook operation performs tasks on.
    Required if you specify <code>TargetParameterName</code>.</p>")
   @as("Targets")
   targets: option<targets>,
@@ -3940,13 +4299,10 @@ type runbook = {
     <code>StartChangeRequestExecution</code>.</p>")
   @as("Parameters")
   parameters: option<automationParameterMap>,
-  @ocaml.doc("<p>The version of the Automation runbook (Automation document) used in a
-   runbook workflow.</p>")
+  @ocaml.doc("<p>The version of the Automation runbook used in a runbook workflow.</p>")
   @as("DocumentVersion")
   documentVersion: option<documentVersion>,
-  @ocaml.doc(
-    "<p>The name of the Automation runbook (Automation document) used in a runbook workflow.</p>"
-  )
+  @ocaml.doc("<p>The name of the Automation runbook used in a runbook workflow.</p>")
   @as("DocumentName")
   documentName: documentARN,
 }
@@ -3956,18 +4312,18 @@ type runbook = {
             <code>OrganizationNotExists</code> (Your organization doesn't exist)</p>
          <p>
             <code>NoPermissions</code> (The system can't locate the service-linked role. This role is
-   automatically created when a user creates a resource data sync in Explorer.)</p>
+   automatically created when a user creates a resource data sync in Amazon Web Services Systems Manager Explorer.)</p>
          <p>
             <code>InvalidOrganizationalUnit</code> (You specified or selected an invalid unit in the
    resource data sync configuration.)</p>
          <p>
             <code>TrustedAccessDisabled</code> (You disabled Systems Manager access in the organization in
-   AWS Organizations.)</p>")
+   Organizations.)</p>")
 type resourceDataSyncSourceWithState = {
-  @ocaml.doc("<p>When you create a resource data sync, if you choose one of the AWS Organizations options, then Systems Manager
-   automatically enables all OpsData sources in the selected AWS Regions for all AWS accounts in
+  @ocaml.doc("<p>When you create a resource data sync, if you choose one of the Organizations options, then Systems Manager
+   automatically enables all OpsData sources in the selected Amazon Web Services Regions for all Amazon Web Services accounts in
    your organization (or in the selected organization units). For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/Explorer-resouce-data-sync-multiple-accounts-and-regions.html\">About multiple account and Region resource data syncs</a> in the
-    <i>AWS Systems Manager User Guide</i>.</p>")
+    <i>Amazon Web Services Systems Manager User Guide</i>.</p>")
   @as("EnableAllOpsDataSources")
   enableAllOpsDataSources: option<resourceDataSyncEnableAllOpsDataSources>,
   @ocaml.doc("<p>The data type name for including resource data sync state. There are four sync
@@ -3982,14 +4338,16 @@ type resourceDataSyncSourceWithState = {
    resource data sync configuration.</p>
          <p>
             <code>TrustedAccessDisabled</code>: You disabled Systems Manager access in the organization in
-   AWS Organizations.</p>")
+   Organizations.</p>")
   @as("State")
   state: option<resourceDataSyncState>,
-  @ocaml.doc("<p>Whether to automatically synchronize and aggregate data from new AWS Regions when those
+  @ocaml.doc("<p>Whether to automatically synchronize and aggregate data from new Amazon Web Services Regions when those
    Regions come online.</p>")
   @as("IncludeFutureRegions")
   includeFutureRegions: option<resourceDataSyncIncludeFutureRegions>,
-  @ocaml.doc("<p>The <code>SyncSource</code> AWS Regions included in the resource data sync.</p>")
+  @ocaml.doc(
+    "<p>The <code>SyncSource</code> Amazon Web Services Regions included in the resource data sync.</p>"
+  )
   @as("SourceRegions")
   sourceRegions: option<resourceDataSyncSourceRegionList>,
   @ocaml.doc("<p>The field name in <code>SyncSource</code> for the
@@ -3997,32 +4355,34 @@ type resourceDataSyncSourceWithState = {
   @as("AwsOrganizationsSource")
   awsOrganizationsSource: option<resourceDataSyncAwsOrganizationsSource>,
   @ocaml.doc("<p>The type of data source for the resource data sync. <code>SourceType</code> is either
-    <code>AwsOrganizations</code> (if an organization is present in AWS Organizations) or
+    <code>AwsOrganizations</code> (if an organization is present in Organizations) or
     <code>singleAccountMultiRegions</code>.</p>")
   @as("SourceType")
   sourceType: option<resourceDataSyncSourceType>,
 }
 @ocaml.doc("<p>Information about the source of the data included in the resource data sync.</p>")
 type resourceDataSyncSource = {
-  @ocaml.doc("<p>When you create a resource data sync, if you choose one of the AWS Organizations options, then Systems Manager
-   automatically enables all OpsData sources in the selected AWS Regions for all AWS accounts in
+  @ocaml.doc("<p>When you create a resource data sync, if you choose one of the Organizations options, then Systems Manager
+   automatically enables all OpsData sources in the selected Amazon Web Services Regions for all Amazon Web Services accounts in
    your organization (or in the selected organization units). For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/Explorer-resouce-data-sync-multiple-accounts-and-regions.html\">About multiple account and Region resource data syncs</a> in the
-    <i>AWS Systems Manager User Guide</i>.</p>")
+    <i>Amazon Web Services Systems Manager User Guide</i>.</p>")
   @as("EnableAllOpsDataSources")
   enableAllOpsDataSources: option<resourceDataSyncEnableAllOpsDataSources>,
-  @ocaml.doc("<p>Whether to automatically synchronize and aggregate data from new AWS Regions when those
+  @ocaml.doc("<p>Whether to automatically synchronize and aggregate data from new Amazon Web Services Regions when those
    Regions come online.</p>")
   @as("IncludeFutureRegions")
   includeFutureRegions: option<resourceDataSyncIncludeFutureRegions>,
-  @ocaml.doc("<p>The <code>SyncSource</code> AWS Regions included in the resource data sync.</p>")
+  @ocaml.doc(
+    "<p>The <code>SyncSource</code> Amazon Web Services Regions included in the resource data sync.</p>"
+  )
   @as("SourceRegions")
   sourceRegions: resourceDataSyncSourceRegionList,
-  @ocaml.doc("<p>Information about the AwsOrganizationsSource resource data sync source. A sync source of
-   this type can synchronize data from AWS Organizations.</p>")
+  @ocaml.doc("<p>Information about the <code>AwsOrganizationsSource</code> resource data sync source. A sync
+   source of this type can synchronize data from Organizations.</p>")
   @as("AwsOrganizationsSource")
   awsOrganizationsSource: option<resourceDataSyncAwsOrganizationsSource>,
   @ocaml.doc("<p>The type of data source for the resource data sync. <code>SourceType</code> is either
-    <code>AwsOrganizations</code> (if an organization is present in AWS Organizations) or
+    <code>AwsOrganizations</code> (if an organization is present in Organizations) or
     <code>SingleAccountMultiRegions</code>.</p>")
   @as("SourceType")
   sourceType: resourceDataSyncSourceType,
@@ -4040,36 +4400,57 @@ type opsEntityItemMap = Js.Dict.t<opsEntityItem>
 type maintenanceWindowTaskParametersList = array<maintenanceWindowTaskParameters>
 @ocaml.doc("<p>The parameters for task execution.</p>")
 type maintenanceWindowTaskInvocationParameters = {
-  @ocaml.doc("<p>The parameters for a LAMBDA task type.</p>") @as("Lambda")
+  @ocaml.doc("<p>The parameters for a <code>LAMBDA</code> task type.</p>") @as("Lambda")
   lambda: option<maintenanceWindowLambdaParameters>,
-  @ocaml.doc("<p>The parameters for a STEP_FUNCTIONS task type.</p>") @as("StepFunctions")
+  @ocaml.doc("<p>The parameters for a <code>STEP_FUNCTIONS</code> task type.</p>")
+  @as("StepFunctions")
   stepFunctions: option<maintenanceWindowStepFunctionsParameters>,
-  @ocaml.doc("<p>The parameters for an AUTOMATION task type.</p>") @as("Automation")
+  @ocaml.doc("<p>The parameters for an <code>AUTOMATION</code> task type.</p>") @as("Automation")
   automation: option<maintenanceWindowAutomationParameters>,
-  @ocaml.doc("<p>The parameters for a RUN_COMMAND task type.</p>") @as("RunCommand")
+  @ocaml.doc("<p>The parameters for a <code>RUN_COMMAND</code> task type.</p>") @as("RunCommand")
   runCommand: option<maintenanceWindowRunCommandParameters>,
 }
 @ocaml.doc("<p>Information about a task defined for a maintenance window.</p>")
 type maintenanceWindowTask = {
+  @ocaml.doc("<p>The specification for whether tasks should continue to run after the cutoff time specified
+   in the maintenance windows is reached. </p>")
+  @as("CutoffBehavior")
+  cutoffBehavior: option<maintenanceWindowTaskCutoffBehavior>,
   @ocaml.doc("<p>A description of the task.</p>") @as("Description")
   description: option<maintenanceWindowDescription>,
   @ocaml.doc("<p>The task name.</p>") @as("Name") name: option<maintenanceWindowName>,
-  @ocaml.doc("<p>The maximum number of errors allowed before this task stops being scheduled.</p>")
+  @ocaml.doc("<p>The maximum number of errors allowed before this task stops being scheduled.</p>
+         <note>
+            <p>Although this element is listed as \"Required: No\", a value can be omitted only when you are
+    registering or updating a <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html\">targetless
+     task</a> You must provide a value in all other cases.</p>
+            <p>For maintenance window tasks without a target specified, you can't supply a value for this
+    option. Instead, the system inserts a placeholder value of <code>1</code>. This value doesn't
+    affect the running of your task.</p>
+         </note>")
   @as("MaxErrors")
   maxErrors: option<maxErrors>,
-  @ocaml.doc("<p>The maximum number of targets this task can be run for, in parallel.</p>")
+  @ocaml.doc("<p>The maximum number of targets this task can be run for, in parallel.</p>
+         <note>
+            <p>Although this element is listed as \"Required: No\", a value can be omitted only when you are
+    registering or updating a <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html\">targetless
+     task</a> You must provide a value in all other cases.</p>
+            <p>For maintenance window tasks without a target specified, you can't supply a value for this
+    option. Instead, the system inserts a placeholder value of <code>1</code>. This value doesn't
+    affect the running of your task.</p>
+         </note>")
   @as("MaxConcurrency")
   maxConcurrency: option<maxConcurrency>,
-  @ocaml.doc("<p>The ARN of the IAM service role to use to publish Amazon Simple Notification Service (Amazon SNS) notifications for
-   maintenance window Run Command tasks.</p>")
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) service role to use to publish Amazon Simple Notification Service 
+(Amazon SNS) notifications for maintenance window Run Command tasks.</p>")
   @as("ServiceRoleArn")
   serviceRoleArn: option<serviceRole>,
   @ocaml.doc("<p>Information about an S3 bucket to write task-level logs to.</p>
          <note>
             <p>
-               <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the
+               <code>LoggingInfo</code> has been deprecated. To specify an Amazon Simple Storage Service (Amazon S3) bucket to contain logs, instead use the
       <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure.
-      For information about how Systems Manager handles these options for the supported maintenance
+      For information about how Amazon Web Services Systems Manager handles these options for the supported maintenance
       window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p>
          </note>")
   @as("LoggingInfo")
@@ -4088,18 +4469,16 @@ type maintenanceWindowTask = {
          </note>")
   @as("TaskParameters")
   taskParameters: option<maintenanceWindowTaskParameters>,
-  @ocaml.doc("<p>The targets (either instances or tags). Instances are specified using
-   Key=instanceids,Values=<instanceid1>,<instanceid2>. Tags are specified using
-   Key=<tag name>,Values=<tag value>.</p>")
+  @ocaml.doc("<p>The targets (either managed nodes or tags). Managed nodes are specified using
+    <code>Key=instanceids,Values=<instanceid1>,<instanceid2></code>. Tags are specified
+   using <code>Key=<tag name>,Values=<tag value></code>.</p>")
   @as("Targets")
   targets: option<targets>,
-  @ocaml.doc("<p>The type of task. The type can be one of the following: RUN_COMMAND, AUTOMATION, LAMBDA, or
-   STEP_FUNCTIONS.</p>")
-  @as("Type")
-  type_: option<maintenanceWindowTaskType>,
-  @ocaml.doc("<p>The resource that the task uses during execution. For RUN_COMMAND and AUTOMATION task types,
-    <code>TaskArn</code> is the Systems Manager document name or ARN. For LAMBDA tasks, it's the function name
-   or ARN. For STEP_FUNCTIONS tasks, it's the state machine ARN.</p>")
+  @ocaml.doc("<p>The type of task.</p>") @as("Type") type_: option<maintenanceWindowTaskType>,
+  @ocaml.doc("<p>The resource that the task uses during execution. For <code>RUN_COMMAND</code> and
+    <code>AUTOMATION</code> task types, <code>TaskArn</code> is the Amazon Web Services Systems Manager (SSM document) name or
+   ARN. For <code>LAMBDA</code> tasks, it's the function name or ARN. For
+    <code>STEP_FUNCTIONS</code> tasks, it's the state machine ARN.</p>")
   @as("TaskArn")
   taskArn: option<maintenanceWindowTaskArn>,
   @ocaml.doc("<p>The task ID.</p>") @as("WindowTaskId")
@@ -4114,12 +4493,12 @@ type maintenanceWindowTarget = {
   description: option<maintenanceWindowDescription>,
   @ocaml.doc("<p>The name for the maintenance window target.</p>") @as("Name")
   name: option<maintenanceWindowName>,
-  @ocaml.doc("<p>A user-provided value that will be included in any CloudWatch events that are raised while
-   running tasks for these targets in this maintenance window.</p>")
+  @ocaml.doc("<p>A user-provided value that will be included in any Amazon CloudWatch Events events that are
+   raised while running tasks for these targets in this maintenance window.</p>")
   @as("OwnerInformation")
   ownerInformation: option<ownerInformation>,
-  @ocaml.doc("<p>The targets, either instances or tags.</p>
-         <p>Specify instances using the following format:</p>
+  @ocaml.doc("<p>The targets, either managed nodes or tags.</p>
+         <p>Specify managed nodes using the following format:</p>
          <p>
             <code>Key=instanceids,Values=<instanceid1>,<instanceid2></code>
          </p>
@@ -4149,12 +4528,12 @@ type inventoryGroup = {
   filters: inventoryFilterList,
   @ocaml.doc("<p>The name of the group.</p>") @as("Name") name: inventoryGroupName,
 }
-@ocaml.doc("<p>Status information returned by the <code>DeleteInventory</code> action.</p>")
+@ocaml.doc("<p>Status information returned by the <code>DeleteInventory</code> operation.</p>")
 type inventoryDeletionStatusItem = {
   @ocaml.doc("<p>The UTC timestamp of when the last status report.</p>") @as("LastStatusUpdateTime")
   lastStatusUpdateTime: option<inventoryDeletionLastStatusUpdateTime>,
   @ocaml.doc("<p>Information about the delete operation. For more information about this summary, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-custom.html#sysman-inventory-delete\">Understanding the delete inventory summary</a> in the
-   <i>AWS Systems Manager User Guide</i>.</p>")
+   <i>Amazon Web Services Systems Manager User Guide</i>.</p>")
   @as("DeletionSummary")
   deletionSummary: option<inventoryDeletionSummary>,
   @ocaml.doc("<p>Information about the status.</p>") @as("LastStatusMessage")
@@ -4166,7 +4545,7 @@ type inventoryDeletionStatusItem = {
   deletionStartTime: option<inventoryDeletionStartTime>,
   @ocaml.doc("<p>The name of the inventory data type.</p>") @as("TypeName")
   typeName: option<inventoryItemTypeName>,
-  @ocaml.doc("<p>The deletion ID returned by the <code>DeleteInventory</code> action.</p>")
+  @ocaml.doc("<p>The deletion ID returned by the <code>DeleteInventory</code> operation.</p>")
   @as("DeletionId")
   deletionId: option<uuid>,
 }
@@ -4175,22 +4554,24 @@ type instanceAssociationStatusInfos = array<instanceAssociationStatusInfo>
 type effectivePatchList = array<effectivePatch>
 type documentReviewerResponseList = array<documentReviewerResponseSource>
 type documentIdentifierList = array<documentIdentifier>
-@ocaml.doc("<p>Describes the association of a Systems Manager SSM document and an instance.</p>")
+@ocaml.doc(
+  "<p>Describes the association of a Amazon Web Services Systems Manager document (SSM document) and a managed node.</p>"
+)
 type createAssociationBatchRequestEntry = {
   @ocaml.doc(
     "<p>Use this action to create an association in multiple Regions and multiple accounts.</p>"
   )
   @as("TargetLocations")
   targetLocations: option<targetLocations>,
-  @ocaml.doc("<p>The names or Amazon Resource Names (ARNs) of the Systems Manager Change Calendar type 
-  documents your associations are gated under. The associations only run when that Change 
-  Calendar is open.  For more information, see 
-  <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar\">AWS Systems Manager Change Calendar</a>.</p>")
+  @ocaml.doc("<p>The names or Amazon Resource Names (ARNs) of the Change Calendar type documents your
+   associations are gated under. The associations only run when that Change Calendar is open. For
+   more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar\">Amazon Web Services Systems Manager Change
+    Calendar</a>.</p>")
   @as("CalendarNames")
   calendarNames: option<calendarNameOrARNList>,
   @ocaml.doc("<p>By default, when you create a new associations, the system runs it immediately after it is
    created and then according to the schedule you specified. Specify this option if you don't want
-   an association to run immediately after you create it. This parameter is not supported for rate
+   an association to run immediately after you create it. This parameter isn't supported for rate
    expressions.</p>")
   @as("ApplyOnlyAtCronInterval")
   applyOnlyAtCronInterval: option<applyOnlyAtCronInterval>,
@@ -4200,8 +4581,9 @@ type createAssociationBatchRequestEntry = {
    then the association is <code>COMPLIANT</code>. If the association execution doesn't run
    successfully, the association is <code>NON-COMPLIANT</code>. </p>
          <p>In <code>MANUAL</code> mode, you must specify the <code>AssociationId</code> as a parameter
-   for the <a>PutComplianceItems</a> API action. In this case, compliance data is not
-   managed by State Manager. It is managed by your direct call to the <a>PutComplianceItems</a> API action.</p>
+   for the <a>PutComplianceItems</a> API operation. In this case, compliance data isn't
+   managed by State Manager, a capability of Amazon Web Services Systems Manager. It is managed by your direct call to the
+    <a>PutComplianceItems</a> API operation.</p>
          <p>By default, all associations use <code>AUTO</code> mode.</p>")
   @as("SyncCompliance")
   syncCompliance: option<associationSyncCompliance>,
@@ -4210,10 +4592,10 @@ type createAssociationBatchRequestEntry = {
   @ocaml.doc("<p>The maximum number of targets allowed to run the association at the same time. You can
    specify a number, for example 10, or a percentage of the target set, for example 10%. The default
    value is 100%, which means all targets run the association at the same time.</p>
-         <p>If a new instance starts and attempts to run an association while Systems Manager is running
-   MaxConcurrency associations, the association is allowed to run. During the next association
-   interval, the new instance will process its association within the limit specified for
-   MaxConcurrency.</p>")
+         <p>If a new managed node starts and attempts to run an association while Systems Manager is running
+    <code>MaxConcurrency</code> associations, the association is allowed to run. During the next
+   association interval, the new managed node will process its association within the limit
+   specified for <code>MaxConcurrency</code>.</p>")
   @as("MaxConcurrency")
   maxConcurrency: option<maxConcurrency>,
   @ocaml.doc("<p>The number of errors that are allowed before the system stops sending requests to run the
@@ -4221,12 +4603,12 @@ type createAssociationBatchRequestEntry = {
    example 10, or a percentage of the target set, for example 10%. If you specify 3, for example,
    the system stops sending requests when the fourth error is received. If you specify 0, then the
    system stops sending requests after the first error is returned. If you run an association on 50
-   instances and set MaxError to 10%, then the system stops sending the request when the sixth error
-   is received.</p>
-         <p>Executions that are already running an association when MaxErrors is reached are allowed to
-   complete, but some of these executions may fail as well. If you need to ensure that there won't
-   be more than max-errors failed executions, set MaxConcurrency to 1 so that executions proceed one
-   at a time.</p>")
+   managed nodes and set <code>MaxError</code> to 10%, then the system stops sending the request
+   when the sixth error is received.</p>
+         <p>Executions that are already running an association when <code>MaxErrors</code> is reached
+   are allowed to complete, but some of these executions may fail as well. If you need to ensure
+   that there won't be more than max-errors failed executions, set <code>MaxConcurrency</code> to 1
+   so that executions proceed one at a time.</p>")
   @as("MaxErrors")
   maxErrors: option<maxErrors>,
   @ocaml.doc("<p>Specify a descriptive name for the association.</p>") @as("AssociationName")
@@ -4237,22 +4619,36 @@ type createAssociationBatchRequestEntry = {
   @ocaml.doc("<p>A cron expression that specifies a schedule when the association runs.</p>")
   @as("ScheduleExpression")
   scheduleExpression: option<scheduleExpression>,
-  @ocaml.doc("<p>The instances targeted by the request.</p>") @as("Targets")
+  @ocaml.doc("<p>The managed nodes targeted by the request.</p>") @as("Targets")
   targets: option<targets>,
   @ocaml.doc("<p>The document version.</p>") @as("DocumentVersion")
   documentVersion: option<documentVersion>,
   @ocaml.doc("<p>Specify the target for the association. This target is required for associations that use an
-   Automation document and target resources by using rate controls.</p>")
+   Automation runbook and target resources by using rate controls. Automation is a capability of
+   Amazon Web Services Systems Manager.</p>")
   @as("AutomationTargetParameterName")
   automationTargetParameterName: option<automationTargetParameterName>,
   @ocaml.doc("<p>A description of the parameters for a document. </p>") @as("Parameters")
   parameters: option<parameters>,
-  @ocaml.doc("<p>The ID of the instance. </p>") @as("InstanceId") instanceId: option<instanceId>,
-  @ocaml.doc("<p>The name of the SSM document that contains the configuration information for the instance.
-   You can specify Command or Automation documents.</p>
-         <p>You can specify AWS-predefined documents, documents you created, or a document that is
+  @ocaml.doc("<p>The managed node ID.</p>
+         <note>
+            <p>
+               <code>InstanceId</code> has been deprecated. To specify a managed node ID for an
+    association, use the <code>Targets</code> parameter. Requests that
+    include the parameter <code>InstanceID</code> with Systems Manager documents (SSM documents) that use
+    schema version 2.0 or later will fail. In addition, if you use the
+    parameter <code>InstanceId</code>, you can't use the parameters <code>AssociationName</code>,
+     <code>DocumentVersion</code>, <code>MaxErrors</code>, <code>MaxConcurrency</code>,
+     <code>OutputLocation</code>, or <code>ScheduleExpression</code>. To use these parameters, you
+    must use the <code>Targets</code> parameter.</p>
+         </note>")
+  @as("InstanceId")
+  instanceId: option<instanceId>,
+  @ocaml.doc("<p>The name of the SSM document that contains the configuration information for the managed
+   node. You can specify Command or Automation runbooks.</p>
+         <p>You can specify Amazon Web Services-predefined documents, documents you created, or a document that is
    shared with you from another account.</p>
-         <p>For SSM documents that are shared with you from other AWS accounts, you must specify the
+         <p>For SSM documents that are shared with you from other Amazon Web Services accounts, you must specify the
    complete SSM document ARN, in the following format:</p>
          <p>
             <code>arn:aws:ssm:<i>region</i>:<i>account-id</i>:document/<i>document-name</i>
@@ -4262,8 +4658,8 @@ type createAssociationBatchRequestEntry = {
          <p>
             <code>arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document</code>
          </p>
-         <p>For AWS-predefined documents and SSM documents you created in your account, you only need to
-   specify the document name. For example, <code>AWS-ApplyPatchBaseline</code> or
+         <p>For Amazon Web Services-predefined documents and SSM documents you created in your account, you only need
+   to specify the document name. For example, <code>AWS-ApplyPatchBaseline</code> or
     <code>My-Document</code>.</p>")
   @as("Name")
   name: documentARN,
@@ -4275,16 +4671,16 @@ type command = {
   @ocaml.doc("<p>The <code>TimeoutSeconds</code> value specified for a command.</p>")
   @as("TimeoutSeconds")
   timeoutSeconds: option<timeoutSeconds>,
-  @ocaml.doc(
-    "<p>CloudWatch Logs information where you want Systems Manager to send the command output.</p>"
-  )
+  @ocaml.doc("<p>Amazon CloudWatch Logs information where you want Amazon Web Services Systems Manager to send the command
+   output.</p>")
   @as("CloudWatchOutputConfig")
   cloudWatchOutputConfig: option<cloudWatchOutputConfig>,
   @ocaml.doc("<p>Configurations for sending notifications about command status changes. </p>")
   @as("NotificationConfig")
   notificationConfig: option<notificationConfig>,
-  @ocaml.doc("<p>The IAM service role that Run Command uses to act on your behalf when sending notifications
-   about command status changes. </p>")
+  @ocaml.doc("<p>The Identity and Access Management (IAM) service role that Run Command, a capability
+   of Amazon Web Services Systems Manager, uses to act on your behalf when sending notifications about command status changes.
+  </p>")
   @as("ServiceRole")
   serviceRole: option<serviceRole>,
   @ocaml.doc("<p>The number of targets for which the status is Delivery Timed Out.</p>")
@@ -4294,22 +4690,24 @@ type command = {
   @as("ErrorCount")
   errorCount: option<errorCount>,
   @ocaml.doc("<p>The number of targets for which the command invocation reached a terminal state. Terminal
-   states include the following: Success, Failed, Execution Timed Out, Delivery Timed Out, Canceled,
-   Terminated, or Undeliverable.</p>")
+   states include the following: Success, Failed, Execution Timed Out, Delivery Timed Out,
+   Cancelled, Terminated, or Undeliverable.</p>")
   @as("CompletedCount")
   completedCount: option<completedCount>,
   @ocaml.doc("<p>The number of targets for the command.</p>") @as("TargetCount")
   targetCount: option<targetCount>,
   @ocaml.doc("<p>The maximum number of errors allowed before the system stops sending the command to
    additional targets. You can specify a number of errors, such as 10, or a percentage or errors,
-   such as 10%. The default value is 0. For more information about how to use MaxErrors, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html\">Running commands
-    using Systems Manager Run Command</a> in the <i>AWS Systems Manager User Guide</i>.</p>")
+   such as 10%. The default value is <code>0</code>. For more information about how to use
+    <code>MaxErrors</code>, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html\">Running commands using Systems Manager Run
+    Command</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>")
   @as("MaxErrors")
   maxErrors: option<maxErrors>,
-  @ocaml.doc("<p>The maximum number of instances that are allowed to run the command at the same time. You
-   can specify a number of instances, such as 10, or a percentage of instances, such as 10%. The
-   default value is 50. For more information about how to use MaxConcurrency, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html\">Running commands
-    using Systems Manager Run Command</a> in the <i>AWS Systems Manager User Guide</i>.</p>")
+  @ocaml.doc("<p>The maximum number of managed nodes that are allowed to run the command at the same time.
+   You can specify a number of managed nodes, such as 10, or a percentage of nodes, such as 10%. The
+   default value is 50. For more information about how to use <code>MaxConcurrency</code>, see
+    <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html\">Running
+    commands using Systems Manager Run Command</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>")
   @as("MaxConcurrency")
   maxConcurrency: option<maxConcurrency>,
   @ocaml.doc("<p>The S3 directory path inside the bucket where the responses to the command executions should
@@ -4321,21 +4719,22 @@ type command = {
   @as("OutputS3BucketName")
   outputS3BucketName: option<s3BucketName>,
   @ocaml.doc("<p>(Deprecated) You can no longer specify this parameter. The system ignores it. Instead, Systems Manager
-   automatically determines the Region of the S3 bucket.</p>")
+   automatically determines the Amazon Web Services Region of the S3 bucket.</p>")
   @as("OutputS3Region")
   outputS3Region: option<s3Region>,
-  @ocaml.doc("<p>A detailed status of the command execution. StatusDetails includes more information than
-   Status because it includes states resulting from error and concurrency control parameters.
-   StatusDetails can show different results than Status. For more information about these statuses,
-   see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-commands.html\">Understanding command statuses</a> in the <i>AWS Systems Manager User Guide</i>.
-   StatusDetails can be one of the following values:</p>
+  @ocaml.doc("<p>A detailed status of the command execution. <code>StatusDetails</code> includes more
+   information than <code>Status</code> because it includes states resulting from error and
+   concurrency control parameters. <code>StatusDetails</code> can show different results than
+   Status. For more information about these statuses, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-commands.html\">Understanding command
+    statuses</a> in the <i>Amazon Web Services Systems Manager User Guide</i>. StatusDetails can be one of the
+   following values:</p>
          <ul>
             <li>
-               <p>Pending: The command has not been sent to any instances.</p>
+               <p>Pending: The command hasn't been sent to any managed nodes.</p>
             </li>
             <li>
-               <p>In Progress: The command has been sent to at least one instance but has not reached a
-     final state on all instances.</p>
+               <p>In Progress: The command has been sent to at least one managed node but hasn't reached a
+     final state on all managed nodes.</p>
             </li>
             <li>
                <p>Success: The command successfully ran on all invocations. This is a terminal state.</p>
@@ -4353,18 +4752,18 @@ type command = {
      is a terminal state.</p>
             </li>
             <li>
-               <p>Incomplete: The command was attempted on all instances and one or more invocations does
-     not have a value of Success but not enough invocations failed for the status to be Failed. This
-     is a terminal state.</p>
+               <p>Incomplete: The command was attempted on all managed nodes and one or more invocations
+     doesn't have a value of Success but not enough invocations failed for the status to be Failed.
+     This is a terminal state.</p>
             </li>
             <li>
-               <p>Canceled: The command was terminated before it was completed. This is a terminal
+               <p>Cancelled: The command was terminated before it was completed. This is a terminal
      state.</p>
             </li>
             <li>
-               <p>Rate Exceeded: The number of instances targeted by the command exceeded the account limit
-     for pending invocations. The system has canceled the command before running it on any instance.
-     This is a terminal state.</p>
+               <p>Rate Exceeded: The number of managed nodes targeted by the command exceeded the account
+     limit for pending invocations. The system has canceled the command before running it on any
+     managed node. This is a terminal state.</p>
             </li>
          </ul>")
   @as("StatusDetails")
@@ -4372,24 +4771,27 @@ type command = {
   @ocaml.doc("<p>The status of the command.</p>") @as("Status") status: option<commandStatus>,
   @ocaml.doc("<p>The date and time the command was requested.</p>") @as("RequestedDateTime")
   requestedDateTime: option<dateTime>,
-  @ocaml.doc("<p>An array of search criteria that targets instances using a Key,Value combination that you
-   specify. Targets is required if you don't provide one or more instance IDs in the call.</p>")
+  @ocaml.doc("<p>An array of search criteria that targets managed nodes using a Key,Value combination that
+   you specify. Targets is required if you don't provide one or more managed node IDs in the
+   call.</p>")
   @as("Targets")
   targets: option<targets>,
-  @ocaml.doc("<p>The instance IDs against which this command was requested.</p>") @as("InstanceIds")
+  @ocaml.doc("<p>The managed node IDs against which this command was requested.</p>")
+  @as("InstanceIds")
   instanceIds: option<instanceIdList>,
   @ocaml.doc("<p>The parameter values to be inserted in the document when running the command.</p>")
   @as("Parameters")
   parameters: option<parameters>,
-  @ocaml.doc("<p>If this time is reached and the command has not already started running, it will not run.
-   Calculated based on the ExpiresAfter user input provided as part of the SendCommand API.</p>")
+  @ocaml.doc("<p>If this time is reached and the command hasn't already started running, it won't run.
+   Calculated based on the <code>ExpiresAfter</code> user input provided as part of the
+    <code>SendCommand</code> API operation.</p>")
   @as("ExpiresAfter")
   expiresAfter: option<dateTime>,
   @ocaml.doc("<p>User-specified information about the command, such as a brief description of what the
    command should do.</p>")
   @as("Comment")
   comment: option<comment>,
-  @ocaml.doc("<p>The SSM document version.</p>") @as("DocumentVersion")
+  @ocaml.doc("<p>The Systems Manager document (SSM document) version.</p>") @as("DocumentVersion")
   documentVersion: option<documentVersion>,
   @ocaml.doc("<p>The name of the document requested for execution.</p>") @as("DocumentName")
   documentName: option<documentName>,
@@ -4398,19 +4800,19 @@ type command = {
 }
 @ocaml.doc("<p>Information about the association version.</p>")
 type associationVersionInfo = {
-  @ocaml.doc("<p>The combination of AWS Regions and AWS accounts where you wanted to run the association when
-   this association version was created.</p>")
+  @ocaml.doc("<p>The combination of Amazon Web Services Regions and Amazon Web Services accounts where you wanted to run the association
+   when this association version was created.</p>")
   @as("TargetLocations")
   targetLocations: option<targetLocations>,
-  @ocaml.doc("<p>The names or Amazon Resource Names (ARNs) of the Systems Manager Change Calendar type 
-  documents your associations are gated under. The associations for this version only run when 
-  that Change Calendar is open.  For more information, see 
-  <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar\">AWS Systems Manager Change Calendar</a>.</p>")
+  @ocaml.doc("<p>The names or Amazon Resource Names (ARNs) of the Change Calendar type documents your
+   associations are gated under. The associations for this version only run when that Change
+   Calendar is open. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar\">Amazon Web Services Systems Manager Change
+    Calendar</a>.</p>")
   @as("CalendarNames")
   calendarNames: option<calendarNameOrARNList>,
   @ocaml.doc("<p>By default, when you create a new associations, the system runs it immediately after it is
    created and then according to the schedule you specified. Specify this option if you don't want
-   an association to run immediately after you create it. This parameter is not supported for rate
+   an association to run immediately after you create it. This parameter isn't supported for rate
    expressions.</p>")
   @as("ApplyOnlyAtCronInterval")
   applyOnlyAtCronInterval: option<applyOnlyAtCronInterval>,
@@ -4420,8 +4822,9 @@ type associationVersionInfo = {
    then the association is <code>COMPLIANT</code>. If the association execution doesn't run
    successfully, the association is <code>NON-COMPLIANT</code>.</p>
          <p>In <code>MANUAL</code> mode, you must specify the <code>AssociationId</code> as a parameter
-   for the <a>PutComplianceItems</a> API action. In this case, compliance data is not
-   managed by State Manager. It is managed by your direct call to the <a>PutComplianceItems</a> API action.</p>
+   for the <a>PutComplianceItems</a> API operation. In this case, compliance data isn't
+   managed by State Manager, a capability of Amazon Web Services Systems Manager. It is managed by your direct call to the
+    <a>PutComplianceItems</a> API operation.</p>
          <p>By default, all associations use <code>AUTO</code> mode.</p>")
   @as("SyncCompliance")
   syncCompliance: option<associationSyncCompliance>,
@@ -4431,10 +4834,10 @@ type associationVersionInfo = {
   @ocaml.doc("<p>The maximum number of targets allowed to run the association at the same time. You can
    specify a number, for example 10, or a percentage of the target set, for example 10%. The default
    value is 100%, which means all targets run the association at the same time.</p>
-         <p>If a new instance starts and attempts to run an association while Systems Manager is running
-   MaxConcurrency associations, the association is allowed to run. During the next association
-   interval, the new instance will process its association within the limit specified for
-   MaxConcurrency.</p>")
+         <p>If a new managed node starts and attempts to run an association while Systems Manager is running
+    <code>MaxConcurrency</code> associations, the association is allowed to run. During the next
+   association interval, the new managed node will process its association within the limit
+   specified for <code>MaxConcurrency</code>.</p>")
   @as("MaxConcurrency")
   maxConcurrency: option<maxConcurrency>,
   @ocaml.doc("<p>The number of errors that are allowed before the system stops sending requests to run the
@@ -4442,20 +4845,20 @@ type associationVersionInfo = {
    example 10, or a percentage of the target set, for example 10%. If you specify 3, for example,
    the system stops sending requests when the fourth error is received. If you specify 0, then the
    system stops sending requests after the first error is returned. If you run an association on 50
-   instances and set MaxError to 10%, then the system stops sending the request when the sixth error
-   is received.</p>
-         <p>Executions that are already running an association when MaxErrors is reached are allowed to
-   complete, but some of these executions may fail as well. If you need to ensure that there won't
-   be more than max-errors failed executions, set MaxConcurrency to 1 so that executions proceed one
-   at a time.</p>")
+   managed nodes and set <code>MaxError</code> to 10%, then the system stops sending the request
+   when the sixth error is received.</p>
+         <p>Executions that are already running an association when <code>MaxErrors</code> is reached
+   are allowed to complete, but some of these executions may fail as well. If you need to ensure
+   that there won't be more than max-errors failed executions, set <code>MaxConcurrency</code> to 1
+   so that executions proceed one at a time.</p>")
   @as("MaxErrors")
   maxErrors: option<maxErrors>,
   @ocaml.doc("<p>The name specified for the association version when the association version was
    created.</p>")
   @as("AssociationName")
   associationName: option<associationName>,
-  @ocaml.doc("<p>The location in Amazon S3 specified for the association when the association version was
-   created.</p>")
+  @ocaml.doc("<p>The location in Amazon S3 specified for the association when the association version
+   was created.</p>")
   @as("OutputLocation")
   outputLocation: option<instanceAssociationOutputLocation>,
   @ocaml.doc("<p>The cron or rate schedule specified for the association when the association version was
@@ -4470,9 +4873,8 @@ type associationVersionInfo = {
   @ocaml.doc("<p>Parameters specified when the association version was created.</p>")
   @as("Parameters")
   parameters: option<parameters>,
-  @ocaml.doc(
-    "<p>The version of a Systems Manager document used when the association version was created.</p>"
-  )
+  @ocaml.doc("<p>The version of an Amazon Web Services Systems Manager document (SSM document) used when the association version was
+   created.</p>")
   @as("DocumentVersion")
   documentVersion: option<documentVersion>,
   @ocaml.doc("<p>The name specified when the association was created.</p>") @as("Name")
@@ -4487,19 +4889,19 @@ type associationVersionInfo = {
 }
 @ocaml.doc("<p>Describes the parameters for a document.</p>")
 type associationDescription = {
-  @ocaml.doc("<p>The combination of AWS Regions and AWS accounts where you want to run the
+  @ocaml.doc("<p>The combination of Amazon Web Services Regions and Amazon Web Services accounts where you want to run the
    association.</p>")
   @as("TargetLocations")
   targetLocations: option<targetLocations>,
-  @ocaml.doc("<p>The names or Amazon Resource Names (ARNs) of the Systems Manager Change Calendar type 
-  documents your associations are gated under. The associations only run when that Change 
-  Calendar is open. For more information, see 
-  <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar\">AWS Systems Manager Change Calendar</a>.</p>")
+  @ocaml.doc("<p>The names or Amazon Resource Names (ARNs) of the Change Calendar type documents your
+   associations are gated under. The associations only run when that change calendar is open. For
+   more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar\">Amazon Web Services Systems Manager Change
+    Calendar</a>.</p>")
   @as("CalendarNames")
   calendarNames: option<calendarNameOrARNList>,
   @ocaml.doc("<p>By default, when you create a new associations, the system runs it immediately after it is
    created and then according to the schedule you specified. Specify this option if you don't want
-   an association to run immediately after you create it. This parameter is not supported for rate
+   an association to run immediately after you create it. This parameter isn't supported for rate
    expressions.</p>")
   @as("ApplyOnlyAtCronInterval")
   applyOnlyAtCronInterval: option<applyOnlyAtCronInterval>,
@@ -4509,8 +4911,9 @@ type associationDescription = {
    then the association is <code>COMPLIANT</code>. If the association execution doesn't run
    successfully, the association is <code>NON-COMPLIANT</code>.</p>
          <p>In <code>MANUAL</code> mode, you must specify the <code>AssociationId</code> as a parameter
-   for the <a>PutComplianceItems</a> API action. In this case, compliance data is not
-   managed by State Manager. It is managed by your direct call to the <a>PutComplianceItems</a> API action.</p>
+   for the <a>PutComplianceItems</a> API operation. In this case, compliance data isn't
+   managed by State Manager, a capability of Amazon Web Services Systems Manager. It is managed by your direct call to the
+    <a>PutComplianceItems</a> API operation.</p>
          <p>By default, all associations use <code>AUTO</code> mode.</p>")
   @as("SyncCompliance")
   syncCompliance: option<associationSyncCompliance>,
@@ -4520,10 +4923,10 @@ type associationDescription = {
   @ocaml.doc("<p>The maximum number of targets allowed to run the association at the same time. You can
    specify a number, for example 10, or a percentage of the target set, for example 10%. The default
    value is 100%, which means all targets run the association at the same time.</p>
-         <p>If a new instance starts and attempts to run an association while Systems Manager is running
-   MaxConcurrency associations, the association is allowed to run. During the next association
-   interval, the new instance will process its association within the limit specified for
-   MaxConcurrency.</p>")
+         <p>If a new managed node starts and attempts to run an association while Systems Manager is running
+    <code>MaxConcurrency</code> associations, the association is allowed to run. During the next
+   association interval, the new managed node will process its association within the limit
+   specified for <code>MaxConcurrency</code>.</p>")
   @as("MaxConcurrency")
   maxConcurrency: option<maxConcurrency>,
   @ocaml.doc("<p>The number of errors that are allowed before the system stops sending requests to run the
@@ -4531,12 +4934,12 @@ type associationDescription = {
    example 10, or a percentage of the target set, for example 10%. If you specify 3, for example,
    the system stops sending requests when the fourth error is received. If you specify 0, then the
    system stops sending requests after the first error is returned. If you run an association on 50
-   instances and set MaxError to 10%, then the system stops sending the request when the sixth error
-   is received.</p>
-         <p>Executions that are already running an association when MaxErrors is reached are allowed to
-   complete, but some of these executions may fail as well. If you need to ensure that there won't
-   be more than max-errors failed executions, set MaxConcurrency to 1 so that executions proceed one
-   at a time.</p>")
+   managed nodes and set <code>MaxError</code> to 10%, then the system stops sending the request
+   when the sixth error is received.</p>
+         <p>Executions that are already running an association when <code>MaxErrors</code> is reached
+   are allowed to complete, but some of these executions may fail as well. If you need to ensure
+   that there won't be more than max-errors failed executions, set <code>MaxConcurrency</code> to 1
+   so that executions proceed one at a time.</p>")
   @as("MaxErrors")
   maxErrors: option<maxErrors>,
   @ocaml.doc("<p>The association name.</p>") @as("AssociationName")
@@ -4552,14 +4955,15 @@ type associationDescription = {
   @ocaml.doc("<p>A cron expression that specifies a schedule when the association runs.</p>")
   @as("ScheduleExpression")
   scheduleExpression: option<scheduleExpression>,
-  @ocaml.doc("<p>The instances targeted by the request. </p>") @as("Targets")
+  @ocaml.doc("<p>The managed nodes targeted by the request. </p>") @as("Targets")
   targets: option<targets>,
   @ocaml.doc("<p>The association ID.</p>") @as("AssociationId")
   associationId: option<associationId>,
   @ocaml.doc("<p>A description of the parameters for a document. </p>") @as("Parameters")
   parameters: option<parameters>,
-  @ocaml.doc("<p>Specify the target for the association. This target is required for associations that use an
-   Automation document and target resources by using rate controls.</p>")
+  @ocaml.doc("<p>Choose the parameter that will define how your automation will branch out. This target is
+   required for associations that use an Automation runbook and target resources by using rate
+   controls. Automation is a capability of Amazon Web Services Systems Manager.</p>")
   @as("AutomationTargetParameterName")
   automationTargetParameterName: option<automationTargetParameterName>,
   @ocaml.doc("<p>The document version.</p>") @as("DocumentVersion")
@@ -4573,11 +4977,12 @@ type associationDescription = {
   @ocaml.doc("<p>The date when the association was made.</p>") @as("Date") date: option<dateTime>,
   @ocaml.doc("<p>The association version.</p>") @as("AssociationVersion")
   associationVersion: option<associationVersion>,
-  @ocaml.doc("<p>The ID of the instance.</p>") @as("InstanceId") instanceId: option<instanceId>,
-  @ocaml.doc("<p>The name of the Systems Manager document.</p>") @as("Name")
-  name: option<documentARN>,
+  @ocaml.doc("<p>The managed node ID.</p>") @as("InstanceId") instanceId: option<instanceId>,
+  @ocaml.doc("<p>The name of the SSM document.</p>") @as("Name") name: option<documentARN>,
 }
-@ocaml.doc("<p>Describes an association of a Systems Manager document and an instance.</p>")
+@ocaml.doc(
+  "<p>Describes an association of a Amazon Web Services Systems Manager document (SSM document) and a managed node.</p>"
+)
 type association = {
   @ocaml.doc("<p>The association name.</p>") @as("AssociationName")
   associationName: option<associationName>,
@@ -4589,10 +4994,23 @@ type association = {
   overview: option<associationOverview>,
   @ocaml.doc("<p>The date on which the association was last run.</p>") @as("LastExecutionDate")
   lastExecutionDate: option<dateTime>,
-  @ocaml.doc("<p>The instances targeted by the request to create an association. </p>")
+  @ocaml.doc("<p>The managed nodes targeted by the request to create an association. You can target all
+   managed nodes in an Amazon Web Services account by specifying the <code>InstanceIds</code> key with a value of
+    <code>*</code>.</p>")
   @as("Targets")
   targets: option<targets>,
-  @ocaml.doc("<p>The version of the document used in the association.</p>") @as("DocumentVersion")
+  @ocaml.doc("<p>The version of the document used in the association. If you change a document version for a
+   State Manager association, Systems Manager immediately runs the association unless you previously specifed
+   the <code>apply-only-at-cron-interval</code> parameter.</p>
+
+         <important>
+            <p>State Manager doesn't support running associations that use a new version of a document if
+    that document is shared from another account. State Manager always runs the <code>default</code>
+    version of a document if shared from another account, even though the Systems Manager console shows that a
+    new version was processed. If you want to run an association using a new version of a document
+    shared form another account, you must set the document version to <code>default</code>.</p>
+         </important>")
+  @as("DocumentVersion")
   documentVersion: option<documentVersion>,
   @ocaml.doc("<p>The association version.</p>") @as("AssociationVersion")
   associationVersion: option<associationVersion>,
@@ -4600,14 +5018,13 @@ type association = {
    between a document and a set of targets with a schedule.</p>")
   @as("AssociationId")
   associationId: option<associationId>,
-  @ocaml.doc("<p>The ID of the instance.</p>") @as("InstanceId") instanceId: option<instanceId>,
-  @ocaml.doc("<p>The name of the Systems Manager document.</p>") @as("Name")
-  name: option<documentARN>,
+  @ocaml.doc("<p>The managed node ID.</p>") @as("InstanceId") instanceId: option<instanceId>,
+  @ocaml.doc("<p>The name of the SSM document.</p>") @as("Name") name: option<documentARN>,
 }
 type activationList = array<activation>
 type stepExecutionList = array<stepExecution>
 type runbooks = array<runbook>
-@ocaml.doc("<p>Information about a Resource Data Sync configuration, including its current status and last
+@ocaml.doc("<p>Information about a resource data sync configuration, including its current status and last
    successful sync.</p>")
 type resourceDataSyncItem = {
   @ocaml.doc("<p>The status message details reported by the last sync.</p>")
@@ -4634,24 +5051,24 @@ type resourceDataSyncItem = {
   syncSource: option<resourceDataSyncSourceWithState>,
   @ocaml.doc("<p>The type of resource data sync. If <code>SyncType</code> is <code>SyncToDestination</code>,
    then the resource data sync synchronizes data to an S3 bucket. If the <code>SyncType</code> is
-    <code>SyncFromSource</code> then the resource data sync synchronizes data from AWS Organizations or from
-   multiple AWS Regions.</p>")
+    <code>SyncFromSource</code> then the resource data sync synchronizes data from Organizations or from
+   multiple Amazon Web Services Regions.</p>")
   @as("SyncType")
   syncType: option<resourceDataSyncType>,
-  @ocaml.doc("<p>The name of the Resource Data Sync.</p>") @as("SyncName")
+  @ocaml.doc("<p>The name of the resource data sync.</p>") @as("SyncName")
   syncName: option<resourceDataSyncName>,
 }
 @ocaml.doc("<p>Defines an approval rule for a patch baseline.</p>")
 type patchRule = {
-  @ocaml.doc("<p>For instances identified by the approval rule filters, enables a patch baseline to apply
-   non-security updates available in the specified repository. The default value is 'false'. Applies
-   to Linux instances only.</p>")
+  @ocaml.doc("<p>For managed nodes identified by the approval rule filters, enables a patch baseline to apply
+   non-security updates available in the specified repository. The default value is
+    <code>false</code>. Applies to Linux managed nodes only.</p>")
   @as("EnableNonSecurity")
   enableNonSecurity: option<boolean_>,
   @ocaml.doc("<p>The cutoff date for auto approval of released patches. Any patches released on or before
    this date are installed automatically. Not supported on Debian Server or Ubuntu Server.</p>
          <p>Enter dates in the format <code>YYYY-MM-DD</code>. For example,
-   <code>2020-12-31</code>.</p>")
+   <code>2021-12-31</code>.</p>")
   @as("ApproveUntilDate")
   approveUntilDate: option<patchStringDateTime>,
   @ocaml.doc("<p>The number of days after the release date of each patch matched by the rule that the patch
@@ -4678,9 +5095,8 @@ type maintenanceWindowTargetList = array<maintenanceWindowTarget>
 type inventoryResultEntity = {
   @ocaml.doc("<p>The data section in the inventory result entity JSON.</p>") @as("Data")
   data: option<inventoryResultItemMap>,
-  @ocaml.doc("<p>ID of the inventory result entity. For example, for managed instance inventory the result
-   will be the managed instance ID. For EC2 instance inventory, the result will be the instance ID.
-  </p>")
+  @ocaml.doc("<p>ID of the inventory result entity. For example, for managed node inventory the result will
+   be the managed node ID. For EC2 instance inventory, the result will be the instance ID. </p>")
   @as("Id")
   id: option<inventoryResultEntityId>,
 }
@@ -4722,8 +5138,8 @@ type automationExecutionMetadata = {
   )
   @as("OpsItemId")
   opsItemId: option<string_>,
-  @ocaml.doc("<p>Information about the Automation runbooks (Automation documents) that are run during a
-   runbook workflow in Change Manager.</p>
+  @ocaml.doc("<p>Information about the Automation runbooks that are run during a runbook workflow in
+   Change Manager.</p>
          <note>
             <p>The Automation runbooks specified for the runbook workflow can't run until all required
     approvals for the change request have been received.</p>
@@ -4738,18 +5154,21 @@ type automationExecutionMetadata = {
   @as("AutomationSubtype")
   automationSubtype: option<automationSubtype>,
   @ocaml.doc("<p>Use this filter with <a>DescribeAutomationExecutions</a>. Specify either Local or
-   CrossAccount. CrossAccount is an Automation that runs in multiple AWS Regions and accounts. For
-   more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-automation-multiple-accounts-and-regions.html\">Running Automation workflows in multiple AWS Regions and accounts</a> in the
-    <i>AWS Systems Manager User Guide</i>. </p>")
+   CrossAccount. CrossAccount is an Automation that runs in multiple Amazon Web Services Regions and
+   Amazon Web Services accounts. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-automation-multiple-accounts-and-regions.html\">Running Automation workflows in multiple Amazon Web Services Regions and accounts</a> in the
+    <i>Amazon Web Services Systems Manager User Guide</i>. </p>")
   @as("AutomationType")
   automationType: option<automationType>,
-  @ocaml.doc("<p>The list of execution outputs as defined in the Automation document.</p>")
+  @ocaml.doc("<p>The list of execution outputs as defined in the Automation runbook.</p>")
   @as("Target")
   target: option<string_>,
-  @ocaml.doc("<p>The MaxErrors value specified by the user when starting the Automation.</p>")
+  @ocaml.doc(
+    "<p>The <code>MaxErrors</code> value specified by the user when starting the automation.</p>"
+  )
   @as("MaxErrors")
   maxErrors: option<maxErrors>,
-  @ocaml.doc("<p>The MaxConcurrency value specified by the user when starting the Automation.</p>")
+  @ocaml.doc("<p>The <code>MaxConcurrency</code> value specified by the user when starting the
+   automation.</p>")
   @as("MaxConcurrency")
   maxConcurrency: option<maxConcurrency>,
   @ocaml.doc("<p>A list of targets that resolved during the execution.</p>") @as("ResolvedTargets")
@@ -4757,29 +5176,29 @@ type automationExecutionMetadata = {
   @ocaml.doc("<p>The specified key-value mapping of document parameters to target resources.</p>")
   @as("TargetMaps")
   targetMaps: option<targetMaps>,
-  @ocaml.doc("<p>The targets defined by the user when starting the Automation.</p>") @as("Targets")
+  @ocaml.doc("<p>The targets defined by the user when starting the automation.</p>") @as("Targets")
   targets: option<targets>,
-  @ocaml.doc("<p>The list of execution outputs as defined in the Automation document.</p>")
+  @ocaml.doc("<p>The list of execution outputs as defined in the Automation runbook.</p>")
   @as("TargetParameterName")
   targetParameterName: option<automationParameterKey>,
-  @ocaml.doc("<p>The list of execution outputs as defined in the Automation document.</p>")
+  @ocaml.doc("<p>The list of execution outputs as defined in the Automation runbook.</p>")
   @as("FailureMessage")
   failureMessage: option<string_>,
   @ocaml.doc("<p>The action of the step that is currently running.</p>") @as("CurrentAction")
   currentAction: option<string_>,
   @ocaml.doc("<p>The name of the step that is currently running.</p>") @as("CurrentStepName")
   currentStepName: option<string_>,
-  @ocaml.doc("<p>The ExecutionId of the parent Automation.</p>") @as("ParentAutomationExecutionId")
+  @ocaml.doc("<p>The execution ID of the parent automation.</p>") @as("ParentAutomationExecutionId")
   parentAutomationExecutionId: option<automationExecutionId>,
   @ocaml.doc("<p>The Automation execution mode.</p>") @as("Mode") mode: option<executionMode>,
-  @ocaml.doc("<p>The list of execution outputs as defined in the Automation document.</p>")
+  @ocaml.doc("<p>The list of execution outputs as defined in the Automation runbook.</p>")
   @as("Outputs")
   outputs: option<automationParameterMap>,
   @ocaml.doc("<p>An S3 bucket where execution information is stored.</p>") @as("LogFile")
   logFile: option<string_>,
-  @ocaml.doc("<p>The IAM role ARN of the user who ran the Automation.</p>") @as("ExecutedBy")
+  @ocaml.doc("<p>The IAM role ARN of the user who ran the automation.</p>") @as("ExecutedBy")
   executedBy: option<string_>,
-  @ocaml.doc("<p>The time the execution finished. This is not populated if the execution is still in
+  @ocaml.doc("<p>The time the execution finished. This isn't populated if the execution is still in
    progress.</p>")
   @as("ExecutionEndTime")
   executionEndTime: option<dateTime>,
@@ -4789,8 +5208,7 @@ type automationExecutionMetadata = {
   automationExecutionStatus: option<automationExecutionStatus>,
   @ocaml.doc("<p>The document version used during the execution.</p>") @as("DocumentVersion")
   documentVersion: option<documentVersion>,
-  @ocaml.doc("<p>The name of the Automation document used during execution.</p>")
-  @as("DocumentName")
+  @ocaml.doc("<p>The name of the Automation runbook used during execution.</p>") @as("DocumentName")
   documentName: option<documentName>,
   @ocaml.doc("<p>The execution ID.</p>") @as("AutomationExecutionId")
   automationExecutionId: option<automationExecutionId>,
@@ -4809,8 +5227,7 @@ type automationExecution = {
   )
   @as("OpsItemId")
   opsItemId: option<string_>,
-  @ocaml.doc("<p>Information about the Automation runbooks (Automation documents) that are run as part of a
-   runbook workflow.</p>
+  @ocaml.doc("<p>Information about the Automation runbooks that are run as part of a runbook workflow.</p>
          <note>
             <p>The Automation runbooks specified for the runbook workflow can't run until all required
     approvals for the change request have been received.</p>
@@ -4824,11 +5241,11 @@ type automationExecution = {
     <code>ChangeRequest</code>.</p>")
   @as("AutomationSubtype")
   automationSubtype: option<automationSubtype>,
-  @ocaml.doc("<p>An aggregate of step execution statuses displayed in the AWS Console for a multi-Region and
-   multi-account Automation execution.</p>")
+  @ocaml.doc("<p>An aggregate of step execution statuses displayed in the Amazon Web Services Systems Manager console for a
+   multi-Region and multi-account Automation execution.</p>")
   @as("ProgressCounters")
   progressCounters: option<progressCounters>,
-  @ocaml.doc("<p>The combination of AWS Regions and/or AWS accounts where you want to run the
+  @ocaml.doc("<p>The combination of Amazon Web Services Regions and/or Amazon Web Services accounts where you want to run the
    Automation.</p>")
   @as("TargetLocations")
   targetLocations: option<targetLocations>,
@@ -4836,7 +5253,8 @@ type automationExecution = {
   @ocaml.doc("<p>The MaxErrors value specified by the user when the execution started.</p>")
   @as("MaxErrors")
   maxErrors: option<maxErrors>,
-  @ocaml.doc("<p>The MaxConcurrency value specified by the user when the execution started.</p>")
+  @ocaml.doc("<p>The <code>MaxConcurrency</code> value specified by the user when the execution
+   started.</p>")
   @as("MaxConcurrency")
   maxConcurrency: option<maxConcurrency>,
   @ocaml.doc("<p>A list of resolved targets in the rate control execution.</p>")
@@ -4864,20 +5282,21 @@ type automationExecution = {
   )
   @as("FailureMessage")
   failureMessage: option<string_>,
-  @ocaml.doc("<p>The list of execution outputs as defined in the automation document.</p>")
+  @ocaml.doc("<p>The list of execution outputs as defined in the Automation runbook.</p>")
   @as("Outputs")
   outputs: option<automationParameterMap>,
-  @ocaml.doc("<p>The key-value map of execution parameters, which were supplied when calling
-   StartAutomationExecution.</p>")
+  @ocaml.doc(
+    "<p>The key-value map of execution parameters, which were supplied when calling <a>StartAutomationExecution</a>.</p>"
+  )
   @as("Parameters")
   parameters: option<automationParameterMap>,
   @ocaml.doc("<p>A boolean value that indicates if the response contains the full list of the Automation step
-   executions. If true, use the DescribeAutomationStepExecutions API action to get the full list of
-   step executions.</p>")
+   executions. If true, use the DescribeAutomationStepExecutions API operation to get the full list
+   of step executions.</p>")
   @as("StepExecutionsTruncated")
   stepExecutionsTruncated: option<boolean_>,
   @ocaml.doc("<p>A list of details about the current state of all steps that comprise an execution. An
-   Automation document contains a list of steps that are run in order.</p>")
+   Automation runbook contains a list of steps that are run in order.</p>")
   @as("StepExecutions")
   stepExecutions: option<stepExecutionList>,
   @ocaml.doc("<p>The execution status of the Automation.</p>") @as("AutomationExecutionStatus")
@@ -4888,7 +5307,7 @@ type automationExecution = {
   executionStartTime: option<dateTime>,
   @ocaml.doc("<p>The version of the document to use during execution.</p>") @as("DocumentVersion")
   documentVersion: option<documentVersion>,
-  @ocaml.doc("<p>The name of the Automation document used during the execution.</p>")
+  @ocaml.doc("<p>The name of the Automation runbook used during the execution.</p>")
   @as("DocumentName")
   documentName: option<documentName>,
   @ocaml.doc("<p>The execution ID.</p>") @as("AutomationExecutionId")
@@ -4902,23 +5321,24 @@ type patchRuleGroup = {
 type automationExecutionMetadataList = array<automationExecutionMetadata>
 @ocaml.doc("<p>Defines the basic information about a patch baseline override.</p>")
 type baselineOverride = {
-  @ocaml.doc("<p>Information about the patches to use to update the instances, including target operating
-   systems and source repositories. Applies to Linux instances only.</p>")
+  @ocaml.doc("<p>Information about the patches to use to update the managed nodes, including target operating
+   systems and source repositories. Applies to Linux managed nodes only.</p>")
   @as("Sources")
   sources: option<patchSourceList>,
   @ocaml.doc("<p>Indicates whether the list of approved patches includes non-security updates that should be
-   applied to the instances. The default value is 'false'. Applies to Linux instances only.</p>")
+   applied to the managed nodes. The default value is <code>false</code>. Applies to Linux managed
+   nodes only.</p>")
   @as("ApprovedPatchesEnableNonSecurity")
   approvedPatchesEnableNonSecurity: option<boolean_>,
-  @ocaml.doc("<p>The action for Patch Manager to take on patches included in the RejectedPackages list. A
-   patch can be allowed only if it is a dependency of another package, or blocked entirely along
-   with packages that include it as a dependency.</p>")
+  @ocaml.doc("<p>The action for Patch Manager to take on patches included in the
+    <code>RejectedPackages</code> list. A patch can be allowed only if it is a dependency of another
+   package, or blocked entirely along with packages that include it as a dependency.</p>")
   @as("RejectedPatchesAction")
   rejectedPatchesAction: option<patchAction>,
   @ocaml.doc("<p>A list of explicitly rejected patches for the baseline.</p>
          <p>For information about accepted formats for lists of approved patches and rejected patches,
                         see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html\">About
-                        package name formats for approved and rejected patch lists</a> in the <i>AWS Systems Manager User Guide</i>.</p>")
+                        package name formats for approved and rejected patch lists</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>")
   @as("RejectedPatches")
   rejectedPatches: option<patchIdList>,
   @ocaml.doc("<p>Defines the compliance level for approved patches. When an approved patch is reported as
@@ -4928,7 +5348,7 @@ type baselineOverride = {
   @ocaml.doc("<p>A list of explicitly approved patches for the baseline.</p>
          <p>For information about accepted formats for lists of approved patches and rejected patches,
                         see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html\">About
-                        package name formats for approved and rejected patch lists</a> in the <i>AWS Systems Manager User Guide</i>.</p>")
+                        package name formats for approved and rejected patch lists</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>")
   @as("ApprovedPatches")
   approvedPatches: option<patchIdList>,
   @as("ApprovalRules") approvalRules: option<patchRuleGroup>,
@@ -4939,16 +5359,17 @@ type baselineOverride = {
 }
 type rec opsAggregatorList = array<opsAggregator>
 and opsAggregator = {
-  @ocaml.doc("<p>A nested aggregator for viewing counts of OpsItems.</p>") @as("Aggregators")
+  @ocaml.doc("<p>A nested aggregator for viewing counts of OpsData.</p>") @as("Aggregators")
   aggregators: option<opsAggregatorList>,
   @ocaml.doc("<p>The aggregator filters.</p>") @as("Filters") filters: option<opsFilterList>,
   @ocaml.doc("<p>The aggregator value.</p>") @as("Values") values: option<opsAggregatorValueMap>,
-  @ocaml.doc("<p>The name of an OpsItem attribute on which to limit the count of OpsItems.</p>")
+  @ocaml.doc("<p>The name of an OpsData attribute on which to limit the count of OpsData.</p>")
   @as("AttributeName")
   attributeName: option<opsDataAttributeName>,
-  @ocaml.doc("<p>The data type name to use for viewing counts of OpsItems.</p>") @as("TypeName")
+  @ocaml.doc("<p>The data type name to use for viewing counts of OpsData.</p>") @as("TypeName")
   typeName: option<opsDataTypeName>,
-  @ocaml.doc("<p>Either a Range or Count aggregator for limiting an OpsItem summary.</p>")
+  @ocaml.doc("<p>Either a <code>Range</code> or <code>Count</code> aggregator for limiting an OpsData
+   summary.</p>")
   @as("AggregatorType")
   aggregatorType: option<opsAggregatorType>,
 }
@@ -4964,18 +5385,22 @@ and inventoryAggregator = {
   @ocaml.doc("<p>The inventory type and attribute name for aggregation.</p>") @as("Expression")
   expression: option<inventoryAggregatorExpression>,
 }
-@ocaml.doc("<fullname>AWS Systems Manager</fullname>
-         <p>AWS Systems Manager is a collection of capabilities that helps you automate management tasks such as
+@ocaml.doc("<p>Amazon Web Services Systems Manager is a collection of capabilities that helps you automate management tasks such as
    collecting system inventory, applying operating system (OS) patches, automating the creation of
    Amazon Machine Images (AMIs), and configuring operating systems (OSs) and applications at scale.
-   Systems Manager lets you remotely and securely manage the configuration of your managed instances. A
-    <i>managed instance</i> is any Amazon Elastic Compute Cloud instance (EC2 instance), or any
-   on-premises server or virtual machine (VM) in your hybrid environment that has been configured
-   for Systems Manager.</p>
-         <p>This reference is intended to be used with the <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/\">AWS Systems Manager User Guide</a>.</p>
-         <p>To get started, verify prerequisites and configure managed instances. For more information,
-   see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-setting-up.html\">Setting up
-    AWS Systems Manager</a> in the <i>AWS Systems Manager User Guide</i>.</p>
+   Systems Manager lets you remotely and securely manage the configuration of your managed nodes. A
+    <i>managed node</i> is any Amazon Elastic Compute Cloud (Amazon EC2) instance, edge device, or on-premises
+   server or virtual machine (VM) that has been configured for Systems Manager. </p>
+         <note>
+            <p>With support for IoT Greengrass core devices, the phrase <i>managed
+     instance</i> has been changed to <i>managed node</i> in most of the Systems Manager
+    documentation. The Systems Manager console, API calls, error messages, and SSM documents still use the
+    term <i>instance</i>.</p>
+         </note>
+         <p>This reference is intended to be used with the <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/\">Amazon Web Services Systems Manager User Guide</a>.</p>
+         <p>To get started, verify prerequisites and configure managed nodes. For more information, see
+    <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-setting-up.html\">Setting up
+    Amazon Web Services Systems Manager</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>
          <p class=\"title\">
             <b>Related resources</b>
          </p>
@@ -4984,45 +5409,66 @@ and inventoryAggregator = {
                <p>For information about how to use a Query API, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/making-api-requests.html\">Making API requests</a>. </p>
             </li>
             <li>
-               <p>For information about other API actions you can perform on EC2 instances, see the <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/\">Amazon EC2 API Reference</a>.</p>
+               <p>For information about other API operations you can perform on EC2 instances, see the
+      <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/\">Amazon EC2 API Reference</a>.</p>
             </li>
             <li>
-               <p>For information about AWS AppConfig, a capability of Systems Manager, see the <a href=\"https://docs.aws.amazon.com/appconfig/latest/userguide/\">AWS AppConfig User Guide</a> and the <a href=\"https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/\">AWS AppConfig API
+               <p>For information about AppConfig, a capability of Systems Manager, see the <a href=\"https://docs.aws.amazon.com/appconfig/latest/userguide/\">AppConfig User Guide</a> and the <a href=\"https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/\">AppConfig API
      Reference</a>.</p>
             </li>
             <li>
-               <p>For information about AWS Incident Manager, a capability of Systems Manager, see the <a href=\"https://docs.aws.amazon.com/incident-manager/latest/userguide/\">AWS Incident Manager User Guide</a>
-     and the <a href=\"https://docs.aws.amazon.com/incident-manager/latest/APIReference/\">AWS Incident Manager API
+               <p>For information about Incident Manager, a capability of Systems Manager, see the <a href=\"https://docs.aws.amazon.com/incident-manager/latest/userguide/\">Incident Manager User Guide</a>
+     and the <a href=\"https://docs.aws.amazon.com/incident-manager/latest/APIReference/\">Incident Manager API
       Reference</a>.</p>
             </li>
          </ul>")
 module UpdateServiceSetting = {
   type t
-  @ocaml.doc("<p>The request body of the UpdateServiceSetting API action.</p>")
+  @ocaml.doc("<p>The request body of the UpdateServiceSetting API operation.</p>")
   type request = {
-    @ocaml.doc("<p>The new value to specify for the service setting. For the
-    <code>/ssm/parameter-store/default-parameter-tier</code> setting ID, the setting value can be
-   one of the following.</p>
+    @ocaml.doc("<p>The new value to specify for the service setting. The following list specifies the available
+   values for each setting.</p>
          <ul>
             <li>
-               <p>Standard</p>
+               <p>
+                  <code>/ssm/parameter-store/default-parameter-tier</code>: <code>Standard</code>,
+      <code>Advanced</code>, <code>Intelligent-Tiering</code>
+               </p>
             </li>
             <li>
-               <p>Advanced</p>
+               <p>
+                  <code>/ssm/parameter-store/high-throughput-enabled</code>: <code>true</code> or
+      <code>false</code>
+               </p>
             </li>
             <li>
-               <p>Intelligent-Tiering</p>
+               <p>
+                  <code>/ssm/managed-instance/activation-tier</code>: <code>true</code> or
+      <code>false</code>
+               </p>
             </li>
-         </ul>
-         <p>For the <code>/ssm/parameter-store/high-throughput-enabled</code>, and
-    <code>/ssm/managed-instance/activation-tier</code> setting IDs, the setting value can be true or
-   false.</p>
-         <p>For the <code>/ssm/automation/customer-script-log-destination</code> setting ID, the setting
-   value can be CloudWatch.</p>
-         <p>For the <code>/ssm/automation/customer-script-log-group-name</code> setting ID, the setting
-   value can be the name of a CloudWatch Logs log group.</p>
-         <p>For the <code>/ssm/documents/console/public-sharing-permission</code> setting ID, the setting
-   value can be Enable or Disable.</p>")
+            <li>
+               <p>
+                  <code>/ssm/automation/customer-script-log-destination</code>: <code>CloudWatch</code>
+               </p>
+            </li>
+            <li>
+               <p>
+                  <code>/ssm/automation/customer-script-log-group-name</code>: the name of an Amazon CloudWatch Logs log group</p>
+            </li>
+            <li>
+               <p>
+                  <code>/ssm/documents/console/public-sharing-permission</code>: <code>Enable</code> or
+      <code>Disable</code>
+               </p>
+            </li>
+            <li>
+               <p>
+                  <code>/ssm/managed-instance/activation-tier</code>: <code>standard</code> or
+      <code>advanced</code>
+               </p>
+            </li>
+         </ul>")
     @as("SettingValue")
     settingValue: serviceSettingValue,
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the service setting to reset. For example,
@@ -5063,7 +5509,7 @@ module UpdateServiceSetting = {
     @as("SettingId")
     settingId: serviceSettingId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ssm") @new external new: request => t = "UpdateServiceSettingCommand"
   let make = (~settingValue, ~settingId, ()) =>
     new({settingValue: settingValue, settingId: settingId})
@@ -5074,11 +5520,11 @@ module UpdateManagedInstanceRole = {
   type t
   type request = {
     @ocaml.doc("<p>The IAM role you want to assign or change.</p>") @as("IamRole") iamRole: iamRole,
-    @ocaml.doc("<p>The ID of the managed instance where you want to update the role.</p>")
+    @ocaml.doc("<p>The ID of the managed node where you want to update the role.</p>")
     @as("InstanceId")
     instanceId: managedInstanceId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ssm") @new
   external new: request => t = "UpdateManagedInstanceRoleCommand"
   let make = (~iamRole, ~instanceId, ()) => new({iamRole: iamRole, instanceId: instanceId})
@@ -5088,8 +5534,8 @@ module UpdateManagedInstanceRole = {
 module UpdateMaintenanceWindow = {
   type t
   type request = {
-    @ocaml.doc("<p>If True, then all fields that are required by the CreateMaintenanceWindow action are also
-   required for this API request. Optional fields that are not specified are set to null. </p>")
+    @ocaml.doc("<p>If <code>True</code>, then all fields that are required by the <a>CreateMaintenanceWindow</a> operation are also required for this API request. Optional
+   fields that aren't specified are set to null. </p>")
     @as("Replace")
     replace: option<boolean_>,
     @ocaml.doc("<p>Whether the maintenance window is enabled.</p>") @as("Enabled")
@@ -5098,13 +5544,13 @@ module UpdateMaintenanceWindow = {
    for those targets.</p>")
     @as("AllowUnassociatedTargets")
     allowUnassociatedTargets: option<maintenanceWindowAllowUnassociatedTargets>,
-    @ocaml.doc("<p>The number of hours before the end of the maintenance window that Systems Manager stops scheduling new
-   tasks for execution.</p>")
+    @ocaml.doc("<p>The number of hours before the end of the maintenance window that Amazon Web Services Systems Manager stops scheduling
+   new tasks for execution.</p>")
     @as("Cutoff")
     cutoff: option<maintenanceWindowCutoff>,
     @ocaml.doc("<p>The duration of the maintenance window in hours.</p>") @as("Duration")
     duration: option<maintenanceWindowDurationHours>,
-    @ocaml.doc("<p>The number of days to wait after the date and time specified by a CRON expression before
+    @ocaml.doc("<p>The number of days to wait after the date and time specified by a cron expression before
    running the maintenance window.</p>
          <p>For example, the following cron expression schedules a maintenance window to run the third
    Tuesday of every month at 11:30 PM.</p>
@@ -5127,14 +5573,13 @@ module UpdateMaintenanceWindow = {
     @as("Schedule")
     schedule: option<maintenanceWindowSchedule>,
     @ocaml.doc("<p>The date and time, in ISO-8601 Extended format, for when you want the maintenance window to
-   become inactive. EndDate allows you to set a date and time in the future when the maintenance
-   window will no longer run.</p>")
+   become inactive. <code>EndDate</code> allows you to set a date and time in the future when the
+   maintenance window will no longer run.</p>")
     @as("EndDate")
     endDate: option<maintenanceWindowStringDateTime>,
-    @ocaml.doc("<p>The time zone that the scheduled maintenance window executions are based on, in Internet
-   Assigned Numbers Authority (IANA) format. For example: \"America/Los_Angeles\", \"UTC\", or
-   \"Asia/Seoul\". For more information, see the <a href=\"https://www.iana.org/time-zones\">Time
-    Zone Database</a> on the IANA website.</p>")
+    @ocaml.doc("<p>The date and time, in ISO-8601 Extended format, for when you want the maintenance window to
+   become active. <code>StartDate</code> allows you to delay activation of the maintenance window
+   until the specified future date.</p>")
     @as("StartDate")
     startDate: option<maintenanceWindowStringDateTime>,
     @ocaml.doc("<p>An optional description for the update request.</p>") @as("Description")
@@ -5151,13 +5596,13 @@ module UpdateMaintenanceWindow = {
    for those targets.</p>")
     @as("AllowUnassociatedTargets")
     allowUnassociatedTargets: option<maintenanceWindowAllowUnassociatedTargets>,
-    @ocaml.doc("<p>The number of hours before the end of the maintenance window that Systems Manager stops scheduling new
-   tasks for execution.</p>")
+    @ocaml.doc("<p>The number of hours before the end of the maintenance window that Amazon Web Services Systems Manager stops scheduling
+   new tasks for execution.</p>")
     @as("Cutoff")
     cutoff: option<maintenanceWindowCutoff>,
     @ocaml.doc("<p>The duration of the maintenance window in hours.</p>") @as("Duration")
     duration: option<maintenanceWindowDurationHours>,
-    @ocaml.doc("<p>The number of days to wait to run a maintenance window after the scheduled CRON expression
+    @ocaml.doc("<p>The number of days to wait to run a maintenance window after the scheduled cron expression
    date and time.</p>")
     @as("ScheduleOffset")
     scheduleOffset: option<maintenanceWindowOffset>,
@@ -5173,11 +5618,11 @@ module UpdateMaintenanceWindow = {
     @as("Schedule")
     schedule: option<maintenanceWindowSchedule>,
     @ocaml.doc("<p>The date and time, in ISO-8601 Extended format, for when the maintenance window is scheduled
-   to become inactive. The maintenance window will not run after this specified time.</p>")
+   to become inactive. The maintenance window won't run after this specified time.</p>")
     @as("EndDate")
     endDate: option<maintenanceWindowStringDateTime>,
     @ocaml.doc("<p>The date and time, in ISO-8601 Extended format, for when the maintenance window is scheduled
-   to become active. The maintenance window will not run before this specified time.</p>")
+   to become active. The maintenance window won't run before this specified time.</p>")
     @as("StartDate")
     startDate: option<maintenanceWindowStringDateTime>,
     @ocaml.doc("<p>An optional description of the update.</p>") @as("Description")
@@ -5246,7 +5691,7 @@ module StopAutomationExecution = {
     @ocaml.doc("<p>The execution ID of the Automation to stop.</p>") @as("AutomationExecutionId")
     automationExecutionId: automationExecutionId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ssm") @new external new: request => t = "StopAutomationExecutionCommand"
   let make = (~automationExecutionId, ~type_=?, ()) =>
     new({type_: type_, automationExecutionId: automationExecutionId})
@@ -5260,20 +5705,20 @@ module ResumeSession = {
     sessionId: sessionId,
   }
   type response = {
-    @ocaml.doc("<p>A URL back to SSM Agent on the instance that the Session Manager client uses to send commands and
-   receive output from the instance. Format: <code>wss://ssmmessages.<b>region</b>.amazonaws.com/v1/data-channel/<b>session-id</b>?stream=(input|output)</code>.</p>
+    @ocaml.doc("<p>A URL back to SSM Agent on the managed node that the Session Manager client uses to send commands and
+   receive output from the managed node. Format: <code>wss://ssmmessages.<b>region</b>.amazonaws.com/v1/data-channel/<b>session-id</b>?stream=(input|output)</code>.</p>
          <p>
             <b>region</b> represents the Region identifier for an
-						AWS Region supported by AWS Systems Manager, such as <code>us-east-2</code> for the US East (Ohio) Region.
-						For a list of supported <b>region</b> values, see the <b>Region</b> column in <a href=\"http://docs.aws.amazon.com/general/latest/gr/ssm.html#ssm_region\">Systems Manager service endpoints</a> in the
-        <i>AWS General Reference</i>.</p>
+						Amazon Web Services Region supported by Amazon Web Services Systems Manager, such as <code>us-east-2</code> for the US East (Ohio) Region.
+						For a list of supported <b>region</b> values, see the <b>Region</b> column in <a href=\"https://docs.aws.amazon.com/general/latest/gr/ssm.html#ssm_region\">Systems Manager service endpoints</a> in the
+        <i>Amazon Web Services General Reference</i>.</p>
          <p>
             <b>session-id</b> represents the ID of a Session Manager session, such as
     <code>1a2b3c4dEXAMPLE</code>.</p>")
     @as("StreamUrl")
     streamUrl: option<streamUrl>,
     @ocaml.doc("<p>An encrypted token value containing session and caller information. Used to authenticate the
-   connection to the instance.</p>")
+   connection to the managed node.</p>")
     @as("TokenValue")
     tokenValue: option<tokenValue>,
     @ocaml.doc("<p>The ID of the session.</p>") @as("SessionId") sessionId: option<sessionId>,
@@ -5286,12 +5731,10 @@ module ResumeSession = {
 module RegisterPatchBaselineForPatchGroup = {
   type t
   type request = {
-    @ocaml.doc(
-      "<p>The name of the patch group that should be registered with the patch baseline.</p>"
-    )
+    @ocaml.doc("<p>The name of the patch group to be registered with the patch baseline.</p>")
     @as("PatchGroup")
     patchGroup: patchGroup,
-    @ocaml.doc("<p>The ID of the patch baseline to register the patch group with.</p>")
+    @ocaml.doc("<p>The ID of the patch baseline to register with the patch group.</p>")
     @as("BaselineId")
     baselineId: baselineId,
   }
@@ -5329,9 +5772,8 @@ module RegisterDefaultPatchBaseline = {
 module GetPatchBaselineForPatchGroup = {
   type t
   type request = {
-    @ocaml.doc(
-      "<p>Returns he operating system rule specified for patch groups using the patch baseline.</p>"
-    )
+    @ocaml.doc("<p>Returns the operating system rule specified for patch groups using the patch
+   baseline.</p>")
     @as("OperatingSystem")
     operatingSystem: option<operatingSystem>,
     @ocaml.doc("<p>The name of the patch group whose patch baseline should be retrieved.</p>")
@@ -5374,8 +5816,8 @@ module GetMaintenanceWindowExecutionTaskInvocation = {
   type response = {
     @ocaml.doc("<p>The maintenance window target ID.</p>") @as("WindowTargetId")
     windowTargetId: option<maintenanceWindowTaskTargetId>,
-    @ocaml.doc("<p>User-provided value to be included in any CloudWatch events raised while running tasks for
-   these targets in this maintenance window. </p>")
+    @ocaml.doc("<p>User-provided value to be included in any Amazon CloudWatch Events or Amazon EventBridge
+   events raised while running tasks for these targets in this maintenance window.</p>")
     @as("OwnerInformation")
     ownerInformation: option<ownerInformation>,
     @ocaml.doc("<p>The time that the task finished running on the target.</p>") @as("EndTime")
@@ -5390,9 +5832,7 @@ module GetMaintenanceWindowExecutionTaskInvocation = {
     status: option<maintenanceWindowExecutionStatus>,
     @ocaml.doc("<p>The parameters used at the time that the task ran.</p>") @as("Parameters")
     parameters: option<maintenanceWindowExecutionTaskInvocationParameters>,
-    @ocaml.doc("<p>Retrieves the task type for a maintenance window. Task types include the following: LAMBDA,
-   STEP_FUNCTIONS, AUTOMATION, RUN_COMMAND.</p>")
-    @as("TaskType")
+    @ocaml.doc("<p>Retrieves the task type for a maintenance window.</p>") @as("TaskType")
     taskType: option<maintenanceWindowTaskType>,
     @ocaml.doc("<p>The execution ID.</p>") @as("ExecutionId")
     executionId: option<maintenanceWindowExecutionTaskExecutionId>,
@@ -5430,8 +5870,8 @@ module GetMaintenanceWindow = {
    for those targets.</p>")
     @as("AllowUnassociatedTargets")
     allowUnassociatedTargets: option<maintenanceWindowAllowUnassociatedTargets>,
-    @ocaml.doc("<p>The number of hours before the end of the maintenance window that Systems Manager stops scheduling new
-   tasks for execution.</p>")
+    @ocaml.doc("<p>The number of hours before the end of the maintenance window that Amazon Web Services Systems Manager stops scheduling
+   new tasks for execution.</p>")
     @as("Cutoff")
     cutoff: option<maintenanceWindowCutoff>,
     @ocaml.doc("<p>The duration of the maintenance window in hours.</p>") @as("Duration")
@@ -5440,7 +5880,7 @@ module GetMaintenanceWindow = {
    times for the maintenance window to become active or inactive.</p>")
     @as("NextExecutionTime")
     nextExecutionTime: option<maintenanceWindowStringDateTime>,
-    @ocaml.doc("<p>The number of days to wait to run a maintenance window after the scheduled CRON expression
+    @ocaml.doc("<p>The number of days to wait to run a maintenance window after the scheduled cron expression
    date and time.</p>")
     @as("ScheduleOffset")
     scheduleOffset: option<maintenanceWindowOffset>,
@@ -5456,11 +5896,11 @@ module GetMaintenanceWindow = {
     @as("Schedule")
     schedule: option<maintenanceWindowSchedule>,
     @ocaml.doc("<p>The date and time, in ISO-8601 Extended format, for when the maintenance window is scheduled
-   to become inactive. The maintenance window will not run after this specified time.</p>")
+   to become inactive. The maintenance window won't run after this specified time.</p>")
     @as("EndDate")
     endDate: option<maintenanceWindowStringDateTime>,
     @ocaml.doc("<p>The date and time, in ISO-8601 Extended format, for when the maintenance window is scheduled
-   to become active. The maintenance window will not run before this specified time.</p>")
+   to become active. The maintenance window won't run before this specified time.</p>")
     @as("StartDate")
     startDate: option<maintenanceWindowStringDateTime>,
     @ocaml.doc("<p>The description of the maintenance window.</p>") @as("Description")
@@ -5496,13 +5936,13 @@ module GetDefaultPatchBaseline = {
 
 module GetConnectionStatus = {
   type t
-  type request = {@ocaml.doc("<p>The ID of the instance.</p>") @as("Target") target: sessionTarget}
+  type request = {@ocaml.doc("<p>The managed node ID.</p>") @as("Target") target: sessionTarget}
   type response = {
-    @ocaml.doc("<p>The status of the connection to the instance. For example, 'Connected' or 'Not
+    @ocaml.doc("<p>The status of the connection to the managed node. For example, 'Connected' or 'Not
    Connected'.</p>")
     @as("Status")
     status: option<connectionStatus>,
-    @ocaml.doc("<p>The ID of the instance to check connection status. </p>") @as("Target")
+    @ocaml.doc("<p>The ID of the managed node to check connection status. </p>") @as("Target")
     target: option<sessionTarget>,
   }
   @module("@aws-sdk/client-ssm") @new external new: request => t = "GetConnectionStatusCommand"
@@ -5518,59 +5958,60 @@ module DescribePatchGroupState = {
     patchGroup: patchGroup,
   }
   type response = {
-    @ocaml.doc("<p>The number of instances with patches installed that are specified as other than \"Critical\"
-   or \"Security\" but are not compliant with the patch baseline. The status of these instances is
-   NON_COMPLIANT.</p>")
+    @ocaml.doc("<p>The number of managed nodes with patches installed that are specified as other than
+    <code>Critical</code> or <code>Security</code> but aren't compliant with the patch baseline. The
+   status of these managed nodes is <code>NON_COMPLIANT</code>.</p>")
     @as("InstancesWithOtherNonCompliantPatches")
     instancesWithOtherNonCompliantPatches: option<instancesCount>,
-    @ocaml.doc("<p>The number of instances where patches that are specified as \"Security\" in a patch advisory
-   are not installed. These patches might be missing, have failed installation, were rejected, or
-   were installed but awaiting a required instance reboot. The status of these instances is
-    <code>NON_COMPLIANT</code>.</p>")
+    @ocaml.doc("<p>The number of managed nodes where patches that are specified as <code>Security</code> in a
+   patch advisory aren't installed. These patches might be missing, have failed installation, were
+   rejected, or were installed but awaiting a required managed node reboot. The status of these
+   managed nodes is <code>NON_COMPLIANT</code>.</p>")
     @as("InstancesWithSecurityNonCompliantPatches")
     instancesWithSecurityNonCompliantPatches: option<instancesCount>,
-    @ocaml.doc("<p>The number of instances where patches that are specified as \"Critical\" for compliance
-   reporting in the patch baseline are not installed. These patches might be missing, have failed
-   installation, were rejected, or were installed but awaiting a required instance reboot. The
-   status of these instances is <code>NON_COMPLIANT</code>.</p>")
+    @ocaml.doc("<p>The number of managed nodes where patches that are specified as <code>Critical</code> for
+   compliance reporting in the patch baseline aren't installed. These patches might be missing, have
+   failed installation, were rejected, or were installed but awaiting a required managed node
+   reboot. The status of these managed nodes is <code>NON_COMPLIANT</code>.</p>")
     @as("InstancesWithCriticalNonCompliantPatches")
     instancesWithCriticalNonCompliantPatches: option<instancesCount>,
-    @ocaml.doc("<p>The number of instances with <code>NotApplicable</code> patches beyond the supported limit,
-   which are not reported by name to Systems Manager Inventory.</p>")
+    @ocaml.doc("<p>The number of managed nodes with <code>NotApplicable</code> patches beyond the supported
+   limit, which aren't reported by name to Inventory. Inventory is a capability of Amazon Web Services Systems Manager.</p>")
     @as("InstancesWithUnreportedNotApplicablePatches")
     instancesWithUnreportedNotApplicablePatches: option<integer_>,
-    @ocaml.doc("<p>The number of instances with patches that aren't applicable.</p>")
+    @ocaml.doc("<p>The number of managed nodes with patches that aren't applicable.</p>")
     @as("InstancesWithNotApplicablePatches")
     instancesWithNotApplicablePatches: option<integer_>,
-    @ocaml.doc(
-      "<p>The number of instances with patches from the patch baseline that failed to install.</p>"
-    )
+    @ocaml.doc("<p>The number of managed nodes with patches from the patch baseline that failed to
+   install.</p>")
     @as("InstancesWithFailedPatches")
     instancesWithFailedPatches: option<integer_>,
-    @ocaml.doc("<p>The number of instances with missing patches from the patch baseline.</p>")
+    @ocaml.doc("<p>The number of managed nodes with missing patches from the patch baseline.</p>")
     @as("InstancesWithMissingPatches")
     instancesWithMissingPatches: option<integer_>,
-    @ocaml.doc("<p>The number of instances with patches installed that are specified in a RejectedPatches list.
-   Patches with a status of <i>INSTALLED_REJECTED</i> were typically installed before
-   they were added to a RejectedPatches list.</p>
+    @ocaml.doc("<p>The number of managed nodes with patches installed that are specified in a
+    <code>RejectedPatches</code> list. Patches with a status of <code>INSTALLED_REJECTED</code> were
+   typically installed before they were added to a <code>RejectedPatches</code> list.</p>
          <note>
-            <p>If ALLOW_AS_DEPENDENCY is the specified option for RejectedPatchesAction, the value of
-    InstancesWithInstalledRejectedPatches will always be 0 (zero).</p>
+            <p>If <code>ALLOW_AS_DEPENDENCY</code> is the specified option for
+     <code>RejectedPatchesAction</code>, the value of
+     <code>InstancesWithInstalledRejectedPatches</code> will always be <code>0</code> (zero).</p>
          </note>")
     @as("InstancesWithInstalledRejectedPatches")
     instancesWithInstalledRejectedPatches: option<instancesCount>,
-    @ocaml.doc("<p>The number of instances with patches installed by Patch Manager that have not been rebooted
-   after the patch installation. The status of these instances is NON_COMPLIANT.</p>")
+    @ocaml.doc("<p>The number of managed nodes with patches installed by Patch Manager that haven't been
+   rebooted after the patch installation. The status of these managed nodes is
+    <code>NON_COMPLIANT</code>.</p>")
     @as("InstancesWithInstalledPendingRebootPatches")
     instancesWithInstalledPendingRebootPatches: option<instancesCount>,
-    @ocaml.doc("<p>The number of instances with patches installed that aren't defined in the patch
+    @ocaml.doc("<p>The number of managed nodes with patches installed that aren't defined in the patch
    baseline.</p>")
     @as("InstancesWithInstalledOtherPatches")
     instancesWithInstalledOtherPatches: option<integer_>,
-    @ocaml.doc("<p>The number of instances with installed patches.</p>")
+    @ocaml.doc("<p>The number of managed nodes with installed patches.</p>")
     @as("InstancesWithInstalledPatches")
     instancesWithInstalledPatches: option<integer_>,
-    @ocaml.doc("<p>The number of instances in the patch group.</p>") @as("Instances")
+    @ocaml.doc("<p>The number of managed nodes in the patch group.</p>") @as("Instances")
     instances: option<integer_>,
   }
   @module("@aws-sdk/client-ssm") @new external new: request => t = "DescribePatchGroupStateCommand"
@@ -5604,7 +6045,7 @@ module DeregisterTargetFromMaintenanceWindow = {
   type t
   type request = {
     @ocaml.doc("<p>The system checks if the target is being referenced by a task. If the target is being
-   referenced, the system returns an error and does not deregister the target from the maintenance
+   referenced, the system returns an error and doesn't deregister the target from the maintenance
    window.</p>")
     @as("Safe")
     safe: option<boolean_>,
@@ -5657,12 +6098,12 @@ module DeregisterPatchBaselineForPatchGroup = {
 module DeregisterManagedInstance = {
   type t
   type request = {
-    @ocaml.doc("<p>The ID assigned to the managed instance when you registered it using the activation process.
+    @ocaml.doc("<p>The ID assigned to the managed node when you registered it using the activation process.
   </p>")
     @as("InstanceId")
     instanceId: managedInstanceId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ssm") @new
   external new: request => t = "DeregisterManagedInstanceCommand"
   let make = (~instanceId, ()) => new({instanceId: instanceId})
@@ -5677,7 +6118,7 @@ module DeleteResourceDataSync = {
     @ocaml.doc("<p>The name of the configuration to delete.</p>") @as("SyncName")
     syncName: resourceDataSyncName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ssm") @new external new: request => t = "DeleteResourceDataSyncCommand"
   let make = (~syncName, ~syncType=?, ()) => new({syncType: syncType, syncName: syncName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -5703,7 +6144,7 @@ module DeleteParameter = {
   type request = {
     @ocaml.doc("<p>The name of the parameter to delete.</p>") @as("Name") name: psparameterName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ssm") @new external new: request => t = "DeleteParameterCommand"
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -5716,7 +6157,7 @@ module DeleteOpsMetadata = {
     @as("OpsMetadataArn")
     opsMetadataArn: opsMetadataArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ssm") @new external new: request => t = "DeleteOpsMetadataCommand"
   let make = (~opsMetadataArn, ()) => new({opsMetadataArn: opsMetadataArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -5743,7 +6184,7 @@ module DeleteDocument = {
     @ocaml.doc("<p>Some SSM document types require that you specify a <code>Force</code> flag before you can
    delete the document. For example, you must specify a <code>Force</code> flag to delete a document
    of type <code>ApplicationConfigurationSchema</code>. You can restrict access to the
-    <code>Force</code> flag in an AWS Identity and Access Management (IAM) policy.</p>")
+    <code>Force</code> flag in an Identity and Access Management (IAM) policy.</p>")
     @as("Force")
     force: option<boolean_>,
     @ocaml.doc("<p>The version name of the document that you want to delete. If not provided, all versions of
@@ -5756,7 +6197,7 @@ module DeleteDocument = {
     documentVersion: option<documentVersion>,
     @ocaml.doc("<p>The name of the document.</p>") @as("Name") name: documentName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ssm") @new external new: request => t = "DeleteDocumentCommand"
   let make = (~name, ~force=?, ~versionName=?, ~documentVersion=?, ()) =>
     new({force: force, versionName: versionName, documentVersion: documentVersion, name: name})
@@ -5768,11 +6209,23 @@ module DeleteAssociation = {
   type request = {
     @ocaml.doc("<p>The association ID that you want to delete.</p>") @as("AssociationId")
     associationId: option<associationId>,
-    @ocaml.doc("<p>The ID of the instance.</p>") @as("InstanceId") instanceId: option<instanceId>,
-    @ocaml.doc("<p>The name of the Systems Manager document.</p>") @as("Name")
-    name: option<documentARN>,
+    @ocaml.doc("<p>The managed node ID.</p>
+         <note>
+            <p>
+               <code>InstanceId</code> has been deprecated. To specify a managed node ID for an
+    association, use the <code>Targets</code> parameter. Requests that include the parameter
+     <code>InstanceID</code> with Systems Manager documents (SSM documents) that use schema version 2.0 or
+    later will fail. In addition, if you use the parameter <code>InstanceId</code>, you can't use
+    the parameters <code>AssociationName</code>, <code>DocumentVersion</code>,
+     <code>MaxErrors</code>, <code>MaxConcurrency</code>, <code>OutputLocation</code>, or
+     <code>ScheduleExpression</code>. To use these parameters, you must use the <code>Targets</code>
+    parameter.</p>
+         </note>")
+    @as("InstanceId")
+    instanceId: option<instanceId>,
+    @ocaml.doc("<p>The name of the SSM document.</p>") @as("Name") name: option<documentARN>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ssm") @new external new: request => t = "DeleteAssociationCommand"
   let make = (~associationId=?, ~instanceId=?, ~name=?, ()) =>
     new({associationId: associationId, instanceId: instanceId, name: name})
@@ -5785,7 +6238,7 @@ module DeleteActivation = {
     @ocaml.doc("<p>The ID of the activation that you want to delete.</p>") @as("ActivationId")
     activationId: activationId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ssm") @new external new: request => t = "DeleteActivationCommand"
   let make = (~activationId, ()) => new({activationId: activationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -5841,15 +6294,15 @@ module UnlabelParameterVersion = {
     @as("Labels")
     labels: parameterLabelList,
     @ocaml.doc("<p>The specific version of the parameter which you want to delete one or more labels from. If
-   it is not present, the call will fail.</p>")
+   it isn't present, the call will fail.</p>")
     @as("ParameterVersion")
     parameterVersion: psparameterVersion,
-    @ocaml.doc("<p>The parameter name of which you want to delete one or more labels.</p>")
+    @ocaml.doc("<p>The name of the parameter from which you want to delete one or more labels.</p>")
     @as("Name")
     name: psparameterName,
   }
   type response = {
-    @ocaml.doc("<p>The labels that are not attached to the given parameter version.</p>")
+    @ocaml.doc("<p>The labels that aren't attached to the given parameter version.</p>")
     @as("InvalidLabels")
     invalidLabels: option<parameterLabelList>,
     @ocaml.doc("<p>A list of all labels deleted from the parameter.</p>") @as("RemovedLabels")
@@ -5868,7 +6321,7 @@ module StartAssociationsOnce = {
     @as("AssociationIds")
     associationIds: associationIdList,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ssm") @new external new: request => t = "StartAssociationsOnceCommand"
   let make = (~associationIds, ()) => new({associationIds: associationIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -5876,9 +6329,10 @@ module StartAssociationsOnce = {
 
 module ResetServiceSetting = {
   type t
-  @ocaml.doc("<p>The request body of the ResetServiceSetting API action.</p>")
+  @ocaml.doc("<p>The request body of the ResetServiceSetting API operation.</p>")
   type request = {
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the service setting to reset. The setting ID can be one of the following.</p>
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the service setting to reset. The setting ID can be one of
+   the following.</p>
          <ul>
             <li>
                <p>
@@ -5914,10 +6368,10 @@ module ResetServiceSetting = {
     @as("SettingId")
     settingId: serviceSettingId,
   }
-  @ocaml.doc("<p>The result body of the ResetServiceSetting API action.</p>")
+  @ocaml.doc("<p>The result body of the ResetServiceSetting API operation.</p>")
   type response = {
     @ocaml.doc("<p>The current, effective service setting after calling the ResetServiceSetting API
-   action.</p>")
+   operation.</p>")
     @as("ServiceSetting")
     serviceSetting: option<serviceSetting>,
   }
@@ -5944,22 +6398,24 @@ module RemoveTagsFromResource = {
     <code>/aws/ssm/MyGroup/appmanager</code>.</p>
          <p>For the Document and Parameter values, use the name of the resource.</p>
          <note>
-            <p>The ManagedInstance type for this API action is only for on-premises managed instances.
-    Specify the name of the managed instance in the following format: mi-ID_number. For example,
-    mi-1a2b3c4d5e6f.</p>
+            <p>The <code>ManagedInstance</code> type for this API operation is only for on-premises
+    managed nodes. Specify the name of the managed node in the following format: mi-ID_number. For
+    example, mi-1a2b3c4d5e6f.</p>
          </note>")
     @as("ResourceId")
     resourceId: resourceId,
     @ocaml.doc("<p>The type of resource from which you want to remove a tag.</p>
          <note>
-            <p>The ManagedInstance type for this API action is only for on-premises managed instances.
-    Specify the name of the managed instance in the following format: mi-ID_number. For example,
-    mi-1a2b3c4d5e6f.</p>
+            <p>The <code>ManagedInstance</code> type for this API operation is only for on-premises
+    managed nodes. Specify the name of the managed node in the following format:
+      <code>mi-<i>ID_number</i>
+               </code>. For example,
+    <code>mi-1a2b3c4d5e6f</code>.</p>
          </note>")
     @as("ResourceType")
     resourceType: resourceTypeForTagging,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ssm") @new external new: request => t = "RemoveTagsFromResourceCommand"
   let make = (~tagKeys, ~resourceId, ~resourceType, ()) =>
     new({tagKeys: tagKeys, resourceId: resourceId, resourceType: resourceType})
@@ -5969,18 +6425,18 @@ module RemoveTagsFromResource = {
 module ModifyDocumentPermission = {
   type t
   type request = {
-    @ocaml.doc("<p>(Optional) The version of the document to share. If it's not specified, the system choose
+    @ocaml.doc("<p>(Optional) The version of the document to share. If it isn't specified, the system choose
    the <code>Default</code> version to share.</p>")
     @as("SharedDocumentVersion")
     sharedDocumentVersion: option<sharedDocumentVersion>,
-    @ocaml.doc("<p>The AWS user accounts that should no longer have access to the document. The AWS user
-   account can either be a group of account IDs or <i>All</i>. This action has a
+    @ocaml.doc("<p>The Amazon Web Services user accounts that should no longer have access to the document. The Amazon Web Services
+   user account can either be a group of account IDs or <i>All</i>. This action has a
    higher priority than <i>AccountIdsToAdd</i>. If you specify an account ID to add
    and the same ID to remove, the system removes access to the document.</p>")
     @as("AccountIdsToRemove")
     accountIdsToRemove: option<accountIdList>,
-    @ocaml.doc("<p>The AWS user accounts that should have access to the document. The account IDs can either be
-   a group of account IDs or <i>All</i>.</p>")
+    @ocaml.doc("<p>The Amazon Web Services user accounts that should have access to the document. The account IDs can
+   either be a group of account IDs or <i>All</i>.</p>")
     @as("AccountIdsToAdd")
     accountIdsToAdd: option<accountIdList>,
     @ocaml.doc("<p>The permission type for the document. The permission type can be
@@ -5990,7 +6446,7 @@ module ModifyDocumentPermission = {
     @ocaml.doc("<p>The name of the document that you want to share.</p>") @as("Name")
     name: documentName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ssm") @new external new: request => t = "ModifyDocumentPermissionCommand"
   let make = (
     ~permissionType,
@@ -6027,9 +6483,9 @@ module LabelParameterVersion = {
   type response = {
     @ocaml.doc("<p>The version of the parameter that has been labeled.</p>") @as("ParameterVersion")
     parameterVersion: option<psparameterVersion>,
-    @ocaml.doc("<p>The label does not meet the requirements. For information about parameter label
-   requirements, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-labels.html\">Labeling parameters</a>
-   in the <i>AWS Systems Manager User Guide</i>.</p>")
+    @ocaml.doc("<p>The label doesn't meet the requirements. For information about parameter label requirements,
+   see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-labels.html\">Labeling parameters</a>
+   in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>")
     @as("InvalidLabels")
     invalidLabels: option<parameterLabelList>,
   }
@@ -6041,7 +6497,7 @@ module LabelParameterVersion = {
 
 module GetServiceSetting = {
   type t
-  @ocaml.doc("<p>The request body of the GetServiceSetting API action.</p>")
+  @ocaml.doc("<p>The request body of the GetServiceSetting API operation.</p>")
   type request = {
     @ocaml.doc("<p>The ID of the service setting to get. The setting ID can be one of the following.</p>
          <ul>
@@ -6079,7 +6535,7 @@ module GetServiceSetting = {
     @as("SettingId")
     settingId: serviceSettingId,
   }
-  @ocaml.doc("<p>The query result body of the GetServiceSetting API action.</p>")
+  @ocaml.doc("<p>The query result body of the GetServiceSetting API operation.</p>")
   type response = {
     @ocaml.doc("<p>The query result of the current service setting.</p>") @as("ServiceSetting")
     serviceSetting: option<serviceSetting>,
@@ -6092,11 +6548,14 @@ module GetServiceSetting = {
 module GetParameter = {
   type t
   type request = {
-    @ocaml.doc("<p>Return decrypted values for secure string parameters. This flag is ignored for String and
-   StringList parameter types.</p>")
+    @ocaml.doc("<p>Return decrypted values for secure string parameters. This flag is ignored for
+    <code>String</code> and <code>StringList</code> parameter types.</p>")
     @as("WithDecryption")
     withDecryption: option<boolean_>,
-    @ocaml.doc("<p>The name of the parameter you want to query.</p>") @as("Name")
+    @ocaml.doc("<p>The name of the parameter you want to query.</p>
+         <p>To query by parameter label, use <code>\"Name\": \"name:label\"</code>. To query by parameter
+   version, use <code>\"Name\": \"name:version\"</code>.</p>")
+    @as("Name")
     name: psparameterName,
   }
   type response = {
@@ -6120,9 +6579,7 @@ module GetMaintenanceWindowExecution = {
     endTime: option<dateTime>,
     @ocaml.doc("<p>The time the maintenance window started running.</p>") @as("StartTime")
     startTime: option<dateTime>,
-    @ocaml.doc(
-      "<p>The details explaining the Status. Only available for certain status values.</p>"
-    )
+    @ocaml.doc("<p>The details explaining the status. Not available for all status values.</p>")
     @as("StatusDetails")
     statusDetails: option<maintenanceWindowExecutionStatusDetails>,
     @ocaml.doc("<p>The status of the maintenance window execution.</p>") @as("Status")
@@ -6145,8 +6602,8 @@ module GetCommandInvocation = {
     @ocaml.doc("<p>The name of the plugin for which you want detailed results. If the document contains only
    one plugin, you can omit the name and details for that plugin. If the document contains more than
    one plugin, you must specify the name of the plugin for which you want to view details.</p>
-         <p>Plugin names are also referred to as <i>step names</i> in Systems Manager documents. For
-   example, <code>aws:RunShellScript</code> is a plugin.</p>
+         <p>Plugin names are also referred to as <i>step names</i> in Systems Manager documents (SSM
+   documents). For example, <code>aws:RunShellScript</code> is a plugin.</p>
          <p>To find the <code>PluginName</code>, check the document content and find the name of the
    plugin. Alternatively, use <a>ListCommandInvocations</a> with the
     <code>CommandId</code> and <code>Details</code> parameters. The <code>PluginName</code> is the
@@ -6154,80 +6611,82 @@ module GetCommandInvocation = {
     <code>CommandPlugins</code> list.</p>")
     @as("PluginName")
     pluginName: option<commandPluginName>,
-    @ocaml.doc("<p>(Required) The ID of the managed instance targeted by the command. A managed instance can be
-   an Amazon Elastic Compute Cloud (Amazon EC2) instance or an instance in your hybrid environment that is configured for
-   AWS Systems Manager.</p>")
+    @ocaml.doc("<p>(Required) The ID of the managed node targeted by the command. A <i>managed
+    node</i> can be an Amazon Elastic Compute Cloud (Amazon EC2) instance, edge device, and on-premises server or VM
+   in your hybrid environment that is configured for Amazon Web Services Systems Manager.</p>")
     @as("InstanceId")
     instanceId: instanceId,
     @ocaml.doc("<p>(Required) The parent command ID of the invocation plugin.</p>") @as("CommandId")
     commandId: commandId,
   }
   type response = {
-    @ocaml.doc("<p>CloudWatch Logs information where Systems Manager sent the command output.</p>")
+    @ocaml.doc(
+      "<p>Amazon CloudWatch Logs information where Systems Manager sent the command output.</p>"
+    )
     @as("CloudWatchOutputConfig")
     cloudWatchOutputConfig: option<cloudWatchOutputConfig>,
     @ocaml.doc("<p>The URL for the complete text written by the plugin to <code>stderr</code>. If the command
-   has not finished running, then this string is empty.</p>")
+   hasn't finished running, then this string is empty.</p>")
     @as("StandardErrorUrl")
     standardErrorUrl: option<url>,
-    @ocaml.doc("<p>The first 8,000 characters written by the plugin to <code>stderr</code>. If the command has
-   not finished running, then this string is empty.</p>")
+    @ocaml.doc("<p>The first 8,000 characters written by the plugin to <code>stderr</code>. If the command
+   hasn't finished running, then this string is empty.</p>")
     @as("StandardErrorContent")
     standardErrorContent: option<standardErrorContent>,
-    @ocaml.doc("<p>The URL for the complete text written by the plugin to <code>stdout</code> in Amazon Simple Storage Service
-   (Amazon S3). If an S3 bucket was not specified, then this string is empty.</p>")
+    @ocaml.doc("<p>The URL for the complete text written by the plugin to <code>stdout</code> in Amazon Simple Storage Service (Amazon S3). If an S3 bucket wasn't specified, then this string is
+   empty.</p>")
     @as("StandardOutputUrl")
     standardOutputUrl: option<url>,
-    @ocaml.doc("<p>The first 24,000 characters written by the plugin to <code>stdout</code>. If the command has
-   not finished running, if <code>ExecutionStatus</code> is neither Succeeded nor Failed, then this
-   string is empty.</p>")
+    @ocaml.doc("<p>The first 24,000 characters written by the plugin to <code>stdout</code>. If the command
+   hasn't finished running, if <code>ExecutionStatus</code> is neither Succeeded nor Failed, then
+   this string is empty.</p>")
     @as("StandardOutputContent")
     standardOutputContent: option<standardOutputContent>,
     @ocaml.doc("<p>A detailed status of the command execution for an invocation. <code>StatusDetails</code>
    includes more information than <code>Status</code> because it includes states resulting from
    error and concurrency control parameters. <code>StatusDetails</code> can show different results
    than <code>Status</code>. For more information about these statuses, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-commands.html\">Understanding
-    command statuses</a> in the <i>AWS Systems Manager User Guide</i>.
+    command statuses</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.
     <code>StatusDetails</code> can be one of the following values:</p>
          <ul>
             <li>
-               <p>Pending: The command has not been sent to the instance.</p>
+               <p>Pending: The command hasn't been sent to the managed node.</p>
             </li>
             <li>
-               <p>In Progress: The command has been sent to the instance but has not reached a terminal
+               <p>In Progress: The command has been sent to the managed node but hasn't reached a terminal
      state.</p>
             </li>
             <li>
-               <p>Delayed: The system attempted to send the command to the target, but the target was not
-     available. The instance might not be available because of network issues, because the instance
+               <p>Delayed: The system attempted to send the command to the target, but the target wasn't
+     available. The managed node might not be available because of network issues, because the node
      was stopped, or for similar reasons. The system will try to send the command again.</p>
             </li>
             <li>
                <p>Success: The command or plugin ran successfully. This is a terminal state.</p>
             </li>
             <li>
-               <p>Delivery Timed Out: The command was not delivered to the instance before the delivery
-     timeout expired. Delivery timeouts do not count against the parent command's
+               <p>Delivery Timed Out: The command wasn't delivered to the managed node before the delivery
+     timeout expired. Delivery timeouts don't count against the parent command's
       <code>MaxErrors</code> limit, but they do contribute to whether the parent command status is
      Success or Incomplete. This is a terminal state.</p>
             </li>
             <li>
-               <p>Execution Timed Out: The command started to run on the instance, but the execution was not
-     complete before the timeout expired. Execution timeouts count against the
+               <p>Execution Timed Out: The command started to run on the managed node, but the execution
+     wasn't complete before the timeout expired. Execution timeouts count against the
       <code>MaxErrors</code> limit of the parent command. This is a terminal state.</p>
             </li>
             <li>
-               <p>Failed: The command wasn't run successfully on the instance. For a plugin, this indicates
-     that the result code was not zero. For a command invocation, this indicates that the result
-     code for one or more plugins was not zero. Invocation failures count against the
+               <p>Failed: The command wasn't run successfully on the managed node. For a plugin, this
+     indicates that the result code wasn't zero. For a command invocation, this indicates that the
+     result code for one or more plugins wasn't zero. Invocation failures count against the
       <code>MaxErrors</code> limit of the parent command. This is a terminal state.</p>
             </li>
             <li>
-               <p>Canceled: The command was terminated before it was completed. This is a terminal
+               <p>Cancelled: The command was terminated before it was completed. This is a terminal
      state.</p>
             </li>
             <li>
-               <p>Undeliverable: The command can't be delivered to the instance. The instance might not
+               <p>Undeliverable: The command can't be delivered to the managed node. The node might not
      exist or might not be responding. Undeliverable invocations don't count against the parent
      command's <code>MaxErrors</code> limit and don't contribute to whether the parent command
      status is Success or Incomplete. This is a terminal state.</p>
@@ -6244,36 +6703,37 @@ module GetCommandInvocation = {
     @as("Status")
     status: option<commandInvocationStatus>,
     @ocaml.doc("<p>The date and time the plugin finished running. Date and time are written in ISO 8601 format.
-   For example, June 7, 2017 is represented as 2017-06-7. The following sample AWS CLI command uses
+   For example, June 7, 2017 is represented as 2017-06-7. The following sample Amazon Web Services CLI command uses
    the <code>InvokedAfter</code> filter.</p>
          <p>
             <code>aws ssm list-commands --filters key=InvokedAfter,value=2017-06-07T00:00:00Z</code>
          </p>
-         <p>If the plugin has not started to run, the string is empty.</p>")
+         <p>If the plugin hasn't started to run, the string is empty.</p>")
     @as("ExecutionEndDateTime")
     executionEndDateTime: option<stringDateTime>,
     @ocaml.doc("<p>Duration since <code>ExecutionStartDateTime</code>.</p>")
     @as("ExecutionElapsedTime")
     executionElapsedTime: option<stringDateTime>,
     @ocaml.doc("<p>The date and time the plugin started running. Date and time are written in ISO 8601 format.
-   For example, June 7, 2017 is represented as 2017-06-7. The following sample AWS CLI command uses
+   For example, June 7, 2017 is represented as 2017-06-7. The following sample Amazon Web Services CLI command uses
    the <code>InvokedBefore</code> filter.</p>
          <p>
             <code>aws ssm list-commands --filters key=InvokedBefore,value=2017-06-07T00:00:00Z</code>
          </p>
-         <p>If the plugin has not started to run, the string is empty.</p>")
+         <p>If the plugin hasn't started to run, the string is empty.</p>")
     @as("ExecutionStartDateTime")
     executionStartDateTime: option<stringDateTime>,
     @ocaml.doc("<p>The error level response code for the plugin script. If the response code is
-   <code>-1</code>, then the command has not started running on the instance, or it was not received
-   by the instance.</p>")
+   <code>-1</code>, then the command hasn't started running on the managed node, or it wasn't
+   received by the node.</p>")
     @as("ResponseCode")
     responseCode: option<responseCode>,
     @ocaml.doc("<p>The name of the plugin, or <i>step name</i>, for which details are reported.
    For example, <code>aws:RunShellScript</code> is a plugin.</p>")
     @as("PluginName")
     pluginName: option<commandPluginName>,
-    @ocaml.doc("<p>The SSM document version used in the request.</p>") @as("DocumentVersion")
+    @ocaml.doc("<p>The Systems Manager document (SSM document) version used in the request.</p>")
+    @as("DocumentVersion")
     documentVersion: option<documentVersion>,
     @ocaml.doc(
       "<p>The name of the document that was run. For example, <code>AWS-RunShellScript</code>.</p>"
@@ -6281,8 +6741,9 @@ module GetCommandInvocation = {
     @as("DocumentName")
     documentName: option<documentName>,
     @ocaml.doc("<p>The comment text for the command.</p>") @as("Comment") comment: option<comment>,
-    @ocaml.doc("<p>The ID of the managed instance targeted by the command. A managed instance can be an EC2
-   instance or an instance in your hybrid environment that is configured for Systems Manager.</p>")
+    @ocaml.doc("<p>The ID of the managed node targeted by the command. A <i>managed node</i> can
+   be an Amazon Elastic Compute Cloud (Amazon EC2) instance, edge device, or on-premises server or VM in your hybrid
+   environment that is configured for Amazon Web Services Systems Manager.</p>")
     @as("InstanceId")
     instanceId: option<instanceId>,
     @ocaml.doc("<p>The parent command ID of the invocation plugin.</p>") @as("CommandId")
@@ -6297,12 +6758,12 @@ module GetCommandInvocation = {
 module GetCalendarState = {
   type t
   type request = {
-    @ocaml.doc("<p>(Optional) The specific time for which you want to get calendar state information, in <a href=\"https://en.wikipedia.org/wiki/ISO_8601\">ISO 8601</a> format. If you do not add
-    <code>AtTime</code>, the current time is assumed.</p>")
+    @ocaml.doc("<p>(Optional) The specific time for which you want to get calendar state information, in <a href=\"https://en.wikipedia.org/wiki/ISO_8601\">ISO 8601</a> format. If you don't specify a
+   value or <code>AtTime</code>, the current time is used.</p>")
     @as("AtTime")
     atTime: option<iso8601String>,
-    @ocaml.doc("<p>The names or Amazon Resource Names (ARNs) of the Systems Manager documents that represent the calendar
-   entries for which you want to get the state.</p>")
+    @ocaml.doc("<p>The names or Amazon Resource Names (ARNs) of the Systems Manager documents (SSM documents) that
+   represent the calendar entries for which you want to get the state.</p>")
     @as("CalendarNames")
     calendarNames: calendarNameOrARNList,
   }
@@ -6314,12 +6775,12 @@ module GetCalendarState = {
     @as("NextTransitionTime")
     nextTransitionTime: option<iso8601String>,
     @ocaml.doc("<p>The time, as an <a href=\"https://en.wikipedia.org/wiki/ISO_8601\">ISO 8601</a> string,
-   that you specified in your command. If you did not specify a time, <code>GetCalendarState</code>
+   that you specified in your command. If you don't specify a time, <code>GetCalendarState</code>
    uses the current time.</p>")
     @as("AtTime")
     atTime: option<iso8601String>,
     @ocaml.doc("<p>The state of the calendar. An <code>OPEN</code> calendar indicates that actions are allowed
-   to proceed, and a <code>CLOSED</code> calendar indicates that actions are not allowed to
+   to proceed, and a <code>CLOSED</code> calendar indicates that actions aren't allowed to
    proceed.</p>")
     @as("State")
     state: option<calendarState>,
@@ -6333,15 +6794,15 @@ module DisassociateOpsItemRelatedItem = {
   type t
   type request = {
     @ocaml.doc("<p>The ID of the association for which you want to delete an association between the OpsItem
-   and a related resource.</p>")
+   and a related item.</p>")
     @as("AssociationId")
     associationId: opsItemRelatedItemAssociationId,
     @ocaml.doc("<p>The ID of the OpsItem for which you want to delete an association between the OpsItem and a
-   related resource.</p>")
+   related item.</p>")
     @as("OpsItemId")
     opsItemId: opsItemId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ssm") @new
   external new: request => t = "DisassociateOpsItemRelatedItemCommand"
   let make = (~associationId, ~opsItemId, ()) =>
@@ -6352,12 +6813,14 @@ module DisassociateOpsItemRelatedItem = {
 module DeleteParameters = {
   type t
   type request = {
-    @ocaml.doc("<p>The names of the parameters to delete.</p>") @as("Names")
+    @ocaml.doc("<p>The names of the parameters to delete. After deleting a parameter, wait for at least 30
+   seconds to create a parameter with the same name.</p>")
+    @as("Names")
     names: parameterNameList,
   }
   type response = {
     @ocaml.doc(
-      "<p>The names of parameters that weren't deleted because the parameters are not valid.</p>"
+      "<p>The names of parameters that weren't deleted because the parameters aren't valid.</p>"
     )
     @as("InvalidParameters")
     invalidParameters: option<parameterNameList>,
@@ -6373,14 +6836,14 @@ module CancelCommand = {
   type t
   @ocaml.doc("<p></p>")
   type request = {
-    @ocaml.doc("<p>(Optional) A list of instance IDs on which you want to cancel the command. If not provided,
-   the command is canceled on every instance on which it was requested.</p>")
+    @ocaml.doc("<p>(Optional) A list of managed node IDs on which you want to cancel the command. If not
+   provided, the command is canceled on every node on which it was requested.</p>")
     @as("InstanceIds")
     instanceIds: option<instanceIdList>,
     @ocaml.doc("<p>The ID of the command you want to cancel.</p>") @as("CommandId")
     commandId: commandId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ssm") @new external new: request => t = "CancelCommandCommand"
   let make = (~commandId, ~instanceIds=?, ()) =>
     new({instanceIds: instanceIds, commandId: commandId})
@@ -6390,15 +6853,14 @@ module CancelCommand = {
 module AssociateOpsItemRelatedItem = {
   type t
   type request = {
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the AWS resource that you want to associate with the
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the Amazon Web Services resource that you want to associate with the
    OpsItem.</p>")
     @as("ResourceUri")
     resourceUri: opsItemRelatedItemAssociationResourceUri,
     @ocaml.doc("<p>The type of resource that you want to associate with an OpsItem. OpsCenter supports the
    following types:</p>
          <p>
-            <code>AWS::SSMIncidents::IncidentRecord</code>: an Incident Manager incident. Incident
-   Manager is a capability of AWS Systems Manager.</p>
+            <code>AWS::SSMIncidents::IncidentRecord</code>: an Incident Manager incident. </p>
          <p>
             <code>AWS::SSM::Document</code>: a Systems Manager (SSM) document.</p>")
     @as("ResourceType")
@@ -6437,7 +6899,7 @@ module UpdateOpsMetadata = {
     keysToDelete: option<metadataKeysToDeleteList>,
     @ocaml.doc("<p>Metadata to add to an OpsMetadata object.</p>") @as("MetadataToUpdate")
     metadataToUpdate: option<metadataMap>,
-    @ocaml.doc("<p>The Amazon Resoure Name (ARN) of the OpsMetadata Object to update.</p>")
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the OpsMetadata Object to update.</p>")
     @as("OpsMetadataArn")
     opsMetadataArn: opsMetadataArn,
   }
@@ -6486,7 +6948,7 @@ module UpdateOpsItem = {
     title: option<opsItemTitle>,
     @ocaml.doc("<p>The ID of the OpsItem.</p>") @as("OpsItemId") opsItemId: opsItemId,
     @ocaml.doc("<p>The OpsItem status. Status can be <code>Open</code>, <code>In Progress</code>, or
-    <code>Resolved</code>. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-working-with-OpsItems.html#OpsCenter-working-with-OpsItems-editing-details\">Editing OpsItem details</a> in the <i>AWS Systems Manager User Guide</i>.</p>")
+    <code>Resolved</code>. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-working-with-OpsItems.html#OpsCenter-working-with-OpsItems-editing-details\">Editing OpsItem details</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>")
     @as("Status")
     status: option<opsItemStatus>,
     @ocaml.doc("<p>One or more OpsItems that share something in common with the current OpsItems. For example,
@@ -6511,18 +6973,19 @@ module UpdateOpsItem = {
    other relevant data. You enter operational data as key-value pairs. The key has a maximum length
    of 128 characters. The value has a maximum size of 20 KB.</p>
          <important>
-            <p>Operational data keys <i>can't</i> begin with the following: amazon, aws,
-    amzn, ssm, /amazon, /aws, /amzn, /ssm.</p>
+            <p>Operational data keys <i>can't</i> begin with the following:
+     <code>amazon</code>, <code>aws</code>, <code>amzn</code>, <code>ssm</code>,
+     <code>/amazon</code>, <code>/aws</code>, <code>/amzn</code>, <code>/ssm</code>.</p>
          </important>
          <p>You can choose to make the data searchable by other users in the account or you can restrict
    search access. Searchable data means that all users with access to the OpsItem Overview page (as
-   provided by the <a>DescribeOpsItems</a> API action) can view and search on the
-   specified data. Operational data that is not searchable is only viewable by users who have access
-   to the OpsItem (as provided by the <a>GetOpsItem</a> API action).</p>
+   provided by the <a>DescribeOpsItems</a> API operation) can view and search on the
+   specified data. Operational data that isn't searchable is only viewable by users who have access
+   to the OpsItem (as provided by the <a>GetOpsItem</a> API operation).</p>
          <p>Use the <code>/aws/resources</code> key in OperationalData to specify a related resource in
    the request. Use the <code>/aws/automations</code> key in OperationalData to associate an
-   Automation runbook with the OpsItem. To view AWS CLI example commands that use these keys, see
-    <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-creating-OpsItems.html#OpsCenter-manually-create-OpsItems\">Creating OpsItems manually</a> in the <i>AWS Systems Manager User Guide</i>.</p>")
+   Automation runbook with the OpsItem. To view Amazon Web Services CLI example commands that use these keys, see
+    <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-creating-OpsItems.html#OpsCenter-manually-create-OpsItems\">Creating OpsItems manually</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>")
     @as("OperationalData")
     operationalData: option<opsItemOperationalData>,
     @ocaml.doc("<p>Update the information about the OpsItem. Provide enough information so that users reading
@@ -6530,7 +6993,7 @@ module UpdateOpsItem = {
     @as("Description")
     description: option<opsItemDescription>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ssm") @new external new: request => t = "UpdateOpsItemCommand"
   let make = (
     ~opsItemId,
@@ -6573,39 +7036,45 @@ module UpdateOpsItem = {
 module StartSession = {
   type t
   type request = {
-    @ocaml.doc("<p>Reserved for future use.</p>") @as("Parameters")
+    @ocaml.doc("<p>The values you want to specify for the parameters defined in the Session
+   document.</p>")
+    @as("Parameters")
     parameters: option<sessionManagerParameters>,
+    @ocaml.doc("<p>The reason for connecting to the instance. This value is included in the details for the
+    Amazon CloudWatch Events event created when you start the session.</p>")
+    @as("Reason")
+    reason: option<sessionReason>,
     @ocaml.doc("<p>The name of the SSM document to define the parameters and plugin settings for the session.
    For example, <code>SSM-SessionManagerRunShell</code>. You can call the <a>GetDocument</a> API to verify the document exists before attempting to start a session.
-   If no document name is provided, a shell to the instance is launched by default.</p>")
+   If no document name is provided, a shell to the managed node is launched by default.</p>")
     @as("DocumentName")
     documentName: option<documentARN>,
-    @ocaml.doc("<p>The instance to connect to for the session.</p>") @as("Target")
+    @ocaml.doc("<p>The managed node to connect to for the session.</p>") @as("Target")
     target: sessionTarget,
   }
   type response = {
-    @ocaml.doc("<p>A URL back to SSM Agent on the instance that the Session Manager client uses to send commands and
-   receive output from the instance. Format: <code>wss://ssmmessages.<b>region</b>.amazonaws.com/v1/data-channel/<b>session-id</b>?stream=(input|output)</code>
+    @ocaml.doc("<p>A URL back to SSM Agent on the managed node that the Session Manager client uses to send commands and
+   receive output from the node. Format: <code>wss://ssmmessages.<b>region</b>.amazonaws.com/v1/data-channel/<b>session-id</b>?stream=(input|output)</code>
          </p>
          <p>
             <b>region</b> represents the Region identifier for an
-						AWS Region supported by AWS Systems Manager, such as <code>us-east-2</code> for the US East (Ohio) Region.
-						For a list of supported <b>region</b> values, see the <b>Region</b> column in <a href=\"http://docs.aws.amazon.com/general/latest/gr/ssm.html#ssm_region\">Systems Manager service endpoints</a> in the
-        <i>AWS General Reference</i>.</p>
+						Amazon Web Services Region supported by Amazon Web Services Systems Manager, such as <code>us-east-2</code> for the US East (Ohio) Region.
+						For a list of supported <b>region</b> values, see the <b>Region</b> column in <a href=\"https://docs.aws.amazon.com/general/latest/gr/ssm.html#ssm_region\">Systems Manager service endpoints</a> in the
+        <i>Amazon Web Services General Reference</i>.</p>
          <p>
             <b>session-id</b> represents the ID of a Session Manager session, such as
     <code>1a2b3c4dEXAMPLE</code>.</p>")
     @as("StreamUrl")
     streamUrl: option<streamUrl>,
     @ocaml.doc("<p>An encrypted token value containing session and caller information. Used to authenticate the
-   connection to the instance.</p>")
+   connection to the managed node.</p>")
     @as("TokenValue")
     tokenValue: option<tokenValue>,
     @ocaml.doc("<p>The ID of the session.</p>") @as("SessionId") sessionId: option<sessionId>,
   }
   @module("@aws-sdk/client-ssm") @new external new: request => t = "StartSessionCommand"
-  let make = (~target, ~parameters=?, ~documentName=?, ()) =>
-    new({parameters: parameters, documentName: documentName, target: target})
+  let make = (~target, ~parameters=?, ~reason=?, ~documentName=?, ()) =>
+    new({parameters: parameters, reason: reason, documentName: documentName, target: target})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -6638,7 +7107,7 @@ module SendAutomationSignal = {
     @as("AutomationExecutionId")
     automationExecutionId: automationExecutionId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ssm") @new external new: request => t = "SendAutomationSignalCommand"
   let make = (~signalType, ~automationExecutionId, ~payload=?, ()) =>
     new({payload: payload, signalType: signalType, automationExecutionId: automationExecutionId})
@@ -6649,7 +7118,7 @@ module PutParameter = {
   type t
   type request = {
     @ocaml.doc("<p>The data type for a <code>String</code> parameter. Supported data types include plain text
-   and Amazon Machine Image IDs.</p>
+   and Amazon Machine Image (AMI) IDs.</p>
          <p>
             <b>The following data type values are supported.</b>
          </p>
@@ -6664,27 +7133,31 @@ module PutParameter = {
                   <code>aws:ec2:image</code>
                </p>
             </li>
+            <li>
+               <p>
+                  <code>aws:ssm:integration</code>
+               </p>
+            </li>
          </ul>
          <p>When you create a <code>String</code> parameter and specify <code>aws:ec2:image</code>,
-   Systems Manager validates the parameter value is in the required format, such as
-    <code>ami-12345abcdeEXAMPLE</code>, and that the specified AMI is available in your AWS account.
-   For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-ec2-aliases.html\">Native
-    parameter support for Amazon Machine Image IDs</a> in the
-    <i>AWS Systems Manager User Guide</i>.</p>")
+   Amazon Web Services Systems Manager validates the parameter value is in the required format, such as
+    <code>ami-12345abcdeEXAMPLE</code>, and that the specified AMI is available in your
+   Amazon Web Services account. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-ec2-aliases.html\">Native parameter support
+    for Amazon Machine Image (AMI) IDs</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>")
     @as("DataType")
     dataType: option<parameterDataType>,
-    @ocaml.doc("<p>One or more policies to apply to a parameter. This action takes a JSON array. Parameter
-   Store supports the following policy types:</p>
+    @ocaml.doc("<p>One or more policies to apply to a parameter. This operation takes a JSON array. Parameter
+   Store, a capability of Amazon Web Services Systems Manager supports the following policy types:</p>
          <p>Expiration: This policy deletes the parameter after it expires. When you create the policy,
    you specify the expiration date. You can update the expiration date and time by updating the
-   policy. Updating the <i>parameter</i> does not affect the expiration date and time.
+   policy. Updating the <i>parameter</i> doesn't affect the expiration date and time.
    When the expiration time is reached, Parameter Store deletes the parameter.</p>
-         <p>ExpirationNotification: This policy triggers an event in Amazon CloudWatch Events that
+         <p>ExpirationNotification: This policy initiates an event in Amazon CloudWatch Events that
    notifies you about the expiration. By using this policy, you can receive notification before or
    after the expiration time is reached, in units of days or hours.</p>
-         <p>NoChangeNotification: This policy triggers a CloudWatch event if a parameter has not been
-   modified for a specified period of time. This policy type is useful when, for example, a secret
-   needs to be changed within a period of time, but it has not been changed.</p>
+         <p>NoChangeNotification: This policy initiates a CloudWatch Events event if a parameter hasn't
+   been modified for a specified period of time. This policy type is useful when, for example, a
+   secret needs to be changed within a period of time, but it hasn't been changed.</p>
          <p>All existing policies are preserved until you send new policies or an empty policy. For more
    information about parameter policies, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-policies.html\">Assigning parameter
     policies</a>. </p>")
@@ -6693,12 +7166,12 @@ module PutParameter = {
     @ocaml.doc("<p>The parameter tier to assign to a parameter.</p>
          <p>Parameter Store offers a standard tier and an advanced tier for parameters. Standard
    parameters have a content size limit of 4 KB and can't be configured to use parameter policies.
-   You can create a maximum of 10,000 standard parameters for each Region in an AWS account.
+   You can create a maximum of 10,000 standard parameters for each Region in an Amazon Web Services account.
    Standard parameters are offered at no additional cost. </p>
          <p>Advanced parameters have a content size limit of 8 KB and can be configured to use parameter
-   policies. You can create a maximum of 100,000 advanced parameters for each Region in an AWS
-   account. Advanced parameters incur a charge. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-advanced-parameters.html\">Standard and
-    advanced parameter tiers</a> in the <i>AWS Systems Manager User Guide</i>.</p>
+   policies. You can create a maximum of 100,000 advanced parameters for each Region in an
+   Amazon Web Services account. Advanced parameters incur a charge. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-advanced-parameters.html\">Standard and
+    advanced parameter tiers</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>
          <p>You can change a standard parameter to an advanced parameter any time. But you can't revert
    an advanced parameter to a standard parameter. Reverting an advanced parameter to a standard
    parameter would result in data loss because the system would truncate the size of the parameter
@@ -6711,7 +7184,7 @@ module PutParameter = {
          </p>
          <p>In <code>PutParameter</code> requests, you can specify the tier to create the parameter in.
    Whenever you specify a tier in the request, Parameter Store creates or updates the parameter
-   according to that request. However, if you do not specify a tier in a request, Parameter Store
+   according to that request. However, if you don't specify a tier in a request, Parameter Store
    assigns the tier based on the current Parameter Store default tier configuration.</p>
          <p>The default tier when you begin using Parameter Store is the standard-parameter tier. If you
    use the advanced-parameter tier, you can specify one of the following as the default:</p>
@@ -6742,19 +7215,19 @@ module PutParameter = {
                <p>The parameter uses a parameter policy.</p>
             </li>
             <li>
-               <p>More than 10,000 parameters already exist in your AWS account in the current
-     Region.</p>
+               <p>More than 10,000 parameters already exist in your Amazon Web Services account in the current
+     Amazon Web Services Region.</p>
             </li>
          </ul>
          <p>For more information about configuring the default tier option, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/ps-default-tier.html\">Specifying a
-    default parameter tier</a> in the <i>AWS Systems Manager User Guide</i>.</p>")
+    default parameter tier</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>")
     @as("Tier")
     tier: option<parameterTier>,
     @ocaml.doc("<p>Optional metadata that you assign to a resource. Tags enable you to categorize a resource in
    different ways, such as by purpose, owner, or environment. For example, you might want to tag a
    Systems Manager parameter to identify the type of resource to which it applies, the environment, or the
    type of configuration data referenced by the parameter. In this case, you could specify the
-   following key name/value pairs:</p>
+   following key-value pairs:</p>
          <ul>
             <li>
                <p>
@@ -6774,7 +7247,7 @@ module PutParameter = {
          </ul>
          <note>
             <p>To add tags to an existing Systems Manager parameter, use the <a>AddTagsToResource</a>
-    action.</p>
+    operation.</p>
          </note>")
     @as("Tags")
     tags: option<tagList_>,
@@ -6782,24 +7255,23 @@ module PutParameter = {
    with values restricted to numbers, you can specify the following: AllowedPattern=^\\d+$ </p>")
     @as("AllowedPattern")
     allowedPattern: option<allowedPattern>,
-    @ocaml.doc("<p>Overwrite an existing parameter. The default value is 'false'.</p>")
+    @ocaml.doc("<p>Overwrite an existing parameter. The default value is <code>false</code>.</p>")
     @as("Overwrite")
     overwrite: option<boolean_>,
-    @ocaml.doc("<p>The KMS Key ID that you want to use to encrypt a parameter. Either the default AWS Key
-   Management Service (AWS KMS) key automatically assigned to your AWS account or a custom key.
-   Required for parameters that use the <code>SecureString</code> data type.</p>
-         <p>If you don't specify a key ID, the system uses the default key associated with your AWS
-   account.</p>
+    @ocaml.doc("<p>The Key Management Service (KMS) ID that you want to use to encrypt a
+   parameter. Either the default KMS key automatically assigned to your Amazon Web Services account
+   or a custom key. Required for parameters that use the <code>SecureString</code>
+   data type.</p>
+         <p>If you don't specify a key ID, the system uses the default key associated with your
+   Amazon Web Services account.</p>
          <ul>
             <li>
-               <p>To use your default AWS KMS key, choose the <code>SecureString</code> data
-     type, and do <i>not</i> specify the <code>Key ID</code> when you
-     create the parameter. The system automatically populates <code>Key ID</code> with
-     your default KMS key.</p>
+               <p>To use your default KMS key, choose the <code>SecureString</code> data type, and do <i>not</i> specify the <code>Key ID</code> when you create the parameter. The system automatically populates
+      <code>Key ID</code> with your default KMS key.</p>
             </li>
             <li>
-               <p>To use a custom KMS key, choose the <code>SecureString</code> data type with
-     the <code>Key ID</code> parameter.</p>
+               <p>To use a custom KMS key, choose the <code>SecureString</code>
+     data type with the <code>Key ID</code> parameter.</p>
             </li>
          </ul>")
     @as("KeyId")
@@ -6807,14 +7279,13 @@ module PutParameter = {
     @ocaml.doc("<p>The type of parameter that you want to add to the system.</p>
          <note>
             <p>
-               <code>SecureString</code> is not currently supported for AWS CloudFormation
-    templates.</p>
+               <code>SecureString</code> isn't currently supported for CloudFormation templates.</p>
          </note>
          <p>Items in a <code>StringList</code> must be separated by a comma (,). You can't
    use other punctuation or special character to escape items in the list. If you have a parameter
    value that requires a comma, then use the <code>String</code> data type.</p>
          <important>
-            <p>Specifying a parameter type is not required when updating a parameter. You must specify a
+            <p>Specifying a parameter type isn't required when updating a parameter. You must specify a
     parameter type when creating a parameter.</p>
          </important>")
     @as("Type")
@@ -6831,7 +7302,7 @@ module PutParameter = {
     @ocaml.doc("<p>Information about the parameter that you want to add to the system. Optional but
    recommended.</p>
          <important>
-            <p>Do not enter personally identifiable information in this field.</p>
+            <p>Don't enter personally identifiable information in this field.</p>
          </important>")
     @as("Description")
     description: option<parameterDescription>,
@@ -6846,10 +7317,11 @@ module PutParameter = {
                <p>Parameter names are case sensitive.</p>
             </li>
             <li>
-               <p>A parameter name must be unique within an AWS Region</p>
+               <p>A parameter name must be unique within an Amazon Web Services Region</p>
             </li>
             <li>
-               <p>A parameter name can't be prefixed with \"aws\" or \"ssm\" (case-insensitive).</p>
+               <p>A parameter name can't be prefixed with \"<code>aws</code>\" or \"<code>ssm</code>\"
+     (case-insensitive).</p>
             </li>
             <li>
                <p>Parameter names can include only the following symbols and letters:
@@ -6866,15 +7338,12 @@ module PutParameter = {
                <p>Parameter hierarchies are limited to a maximum depth of fifteen levels.</p>
             </li>
          </ul>
-         <p>For additional information about valid values for parameter names, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-su-create.html\">Creating Systems Manager parameters</a> in the <i>AWS Systems Manager User Guide</i>.</p>
+         <p>For additional information about valid values for parameter names, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-su-create.html\">Creating Systems Manager parameters</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>
          <note>
-            <p>The maximum length constraint listed below includes capacity for additional system
-    attributes that are not part of the name. The maximum length for a parameter name, including the
-    full length of the parameter ARN, is 1011 characters. For example, the length of the following
-    parameter name is 65 characters, not 20 characters:</p>
-            <p>
-               <code>arn:aws:ssm:us-east-2:111122223333:parameter/ExampleParameterName</code>
-            </p>
+            <p>The maximum length constraint of 2048 characters listed below includes 1037 characters
+    reserved for internal use by Systems Manager. The maximum length for a parameter name that you create is
+    1011 characters. This includes the characters in the ARN that precede the name you specify, such
+    as <code>arn:aws:ssm:us-east-2:111122223333:parameter/</code>.</p>
          </note>")
     @as("Name")
     name: psparameterName,
@@ -6884,7 +7353,7 @@ module PutParameter = {
     tier: option<parameterTier>,
     @ocaml.doc("<p>The new version number of a parameter. If you edit a parameter value, Parameter Store
    automatically creates a new version and assigns this new version a unique ID. You can reference a
-   parameter version ID in API actions or in Systems Manager documents (SSM documents). By default, if you
+   parameter version ID in API operations or in Systems Manager documents (SSM documents). By default, if you
    don't specify a specific version, the system returns the latest parameter value when a parameter
    is called.</p>")
     @as("Version")
@@ -6969,15 +7438,17 @@ module GetParameters = {
   type t
   type request = {
     @ocaml.doc("<p>Return decrypted secure string value. Return decrypted values for secure string parameters.
-   This flag is ignored for String and StringList parameter types.</p>")
+   This flag is ignored for <code>String</code> and <code>StringList</code> parameter types.</p>")
     @as("WithDecryption")
     withDecryption: option<boolean_>,
-    @ocaml.doc("<p>Names of the parameters for which you want to query information.</p>")
+    @ocaml.doc("<p>Names of the parameters for which you want to query information.</p>
+         <p>To query by parameter label, use <code>\"Name\": \"name:label\"</code>. To query by parameter
+   version, use <code>\"Name\": \"name:version\"</code>.</p>")
     @as("Names")
     names: parameterNameList,
   }
   type response = {
-    @ocaml.doc("<p>A list of parameters that are not formatted correctly or do not run during an
+    @ocaml.doc("<p>A list of parameters that aren't formatted correctly or don't run during an
    execution.</p>")
     @as("InvalidParameters")
     invalidParameters: option<parameterNameList>,
@@ -7033,7 +7504,7 @@ module GetDocument = {
    be changed.</p>")
     @as("VersionName")
     versionName: option<documentVersionName>,
-    @ocaml.doc("<p>The name of the Systems Manager document.</p>") @as("Name") name: documentARN,
+    @ocaml.doc("<p>The name of the SSM document.</p>") @as("Name") name: documentARN,
   }
   type response = {
     @ocaml.doc("<p>The current review status of a new custom Systems Manager document (SSM document) created by a member
@@ -7055,31 +7526,30 @@ module GetDocument = {
     @ocaml.doc("<p>The document format, either JSON or YAML.</p>") @as("DocumentFormat")
     documentFormat: option<documentFormat>,
     @ocaml.doc("<p>The document type.</p>") @as("DocumentType") documentType: option<documentType>,
-    @ocaml.doc("<p>The contents of the Systems Manager document.</p>") @as("Content")
+    @ocaml.doc("<p>The contents of the SSM document.</p>") @as("Content")
     content: option<documentContent>,
-    @ocaml.doc("<p>A message returned by AWS Systems Manager that explains the <code>Status</code> value. For example, a
+    @ocaml.doc("<p>A message returned by Amazon Web Services Systems Manager that explains the <code>Status</code> value. For example, a
     <code>Failed</code> status might be explained by the <code>StatusInformation</code> message,
-   \"The specified S3 bucket does not exist. Verify that the URL of the S3 bucket is correct.\"</p>")
+   \"The specified S3 bucket doesn't exist. Verify that the URL of the S3 bucket is correct.\"</p>")
     @as("StatusInformation")
     statusInformation: option<documentStatusInformation>,
-    @ocaml.doc("<p>The status of the Systems Manager document, such as <code>Creating</code>, <code>Active</code>,
+    @ocaml.doc("<p>The status of the SSM document, such as <code>Creating</code>, <code>Active</code>,
     <code>Updating</code>, <code>Failed</code>, and <code>Deleting</code>.</p>")
     @as("Status")
     status: option<documentStatus>,
     @ocaml.doc("<p>The document version.</p>") @as("DocumentVersion")
     documentVersion: option<documentVersion>,
     @ocaml.doc("<p>The version of the artifact associated with the document. For example, \"Release 12, Update
-   6\". This value is unique across all versions of a document, and cannot be changed.</p>")
+   6\". This value is unique across all versions of a document, and can't be changed.</p>")
     @as("VersionName")
     versionName: option<documentVersionName>,
-    @ocaml.doc("<p>The friendly name of the Systems Manager document. This value can differ for each version of the
+    @ocaml.doc("<p>The friendly name of the SSM document. This value can differ for each version of the
    document. If you want to update this value, see <a>UpdateDocument</a>.</p>")
     @as("DisplayName")
     displayName: option<documentDisplayName>,
-    @ocaml.doc("<p>The date the Systems Manager document was created.</p>") @as("CreatedDate")
+    @ocaml.doc("<p>The date the SSM document was created.</p>") @as("CreatedDate")
     createdDate: option<dateTime>,
-    @ocaml.doc("<p>The name of the Systems Manager document.</p>") @as("Name")
-    name: option<documentARN>,
+    @ocaml.doc("<p>The name of the SSM document.</p>") @as("Name") name: option<documentARN>,
   }
   @module("@aws-sdk/client-ssm") @new external new: request => t = "GetDocumentCommand"
   let make = (~name, ~documentFormat=?, ~documentVersion=?, ~versionName=?, ()) =>
@@ -7103,8 +7573,8 @@ module DescribePatchProperties = {
    can specify in a subsequent call to get the next set of results.</p>")
     @as("MaxResults")
     maxResults: option<maxResults>,
-    @ocaml.doc("<p>Indicates whether to list patches for the Windows operating system or for Microsoft
-   applications. Not applicable for the Linux or macOS operating systems.</p>")
+    @ocaml.doc("<p>Indicates whether to list patches for the Windows operating system or for applications
+   released by Microsoft. Not applicable for the Linux or macOS operating systems.</p>")
     @as("PatchSet")
     patchSet: option<patchSet>,
     @ocaml.doc("<p>The patch property for which you want to view patch details. </p>")
@@ -7140,13 +7610,15 @@ module DescribePatchProperties = {
 module DescribeInstancePatchStates = {
   type t
   type request = {
-    @ocaml.doc("<p>The maximum number of instances to return (per page).</p>") @as("MaxResults")
+    @ocaml.doc("<p>The maximum number of managed nodes to return (per page).</p>") @as("MaxResults")
     maxResults: option<patchComplianceMaxResults>,
     @ocaml.doc("<p>The token for the next set of items to return. (You received this token from a previous
    call.)</p>")
     @as("NextToken")
     nextToken: option<nextToken>,
-    @ocaml.doc("<p>The ID of the instance whose patch state information should be retrieved.</p>")
+    @ocaml.doc(
+      "<p>The ID of the managed node for which patch state information should be retrieved.</p>"
+    )
     @as("InstanceIds")
     instanceIds: instanceIdList,
   }
@@ -7155,7 +7627,7 @@ module DescribeInstancePatchStates = {
    return, the string is empty.</p>")
     @as("NextToken")
     nextToken: option<nextToken>,
-    @ocaml.doc("<p>The high-level patch state for the requested instances.</p>")
+    @ocaml.doc("<p>The high-level patch state for the requested managed nodes.</p>")
     @as("InstancePatchStates")
     instancePatchStates: option<instancePatchStateList>,
   }
@@ -7177,7 +7649,7 @@ module DescribeEffectiveInstanceAssociations = {
    can specify in a subsequent call to get the next set of results.</p>")
     @as("MaxResults")
     maxResults: option<effectiveInstanceAssociationMaxResults>,
-    @ocaml.doc("<p>The instance ID for which you want to view all associations.</p>")
+    @ocaml.doc("<p>The managed node ID for which you want to view all associations.</p>")
     @as("InstanceId")
     instanceId: instanceId,
   }
@@ -7186,7 +7658,7 @@ module DescribeEffectiveInstanceAssociations = {
    return, the string is empty.</p>")
     @as("NextToken")
     nextToken: option<nextToken>,
-    @ocaml.doc("<p>The associations for the requested instance.</p>") @as("Associations")
+    @ocaml.doc("<p>The associations for the requested managed node.</p>") @as("Associations")
     associations: option<instanceAssociationList>,
   }
   @module("@aws-sdk/client-ssm") @new
@@ -7219,12 +7691,12 @@ module DescribeDocumentPermission = {
    results.</p>")
     @as("NextToken")
     nextToken: option<nextToken>,
-    @ocaml.doc("<p>A list of AWS accounts where the current document is shared and the version shared with each
-   account.</p>")
+    @ocaml.doc("<p>A list of Amazon Web Services accounts where the current document is shared and the version shared with
+   each account.</p>")
     @as("AccountSharingInfoList")
     accountSharingInfoList: option<accountSharingInfoList>,
-    @ocaml.doc("<p>The account IDs that have permission to use this document. The ID can be either an AWS
-   account or <i>All</i>.</p>")
+    @ocaml.doc("<p>The account IDs that have permission to use this document. The ID can be either an
+   Amazon Web Services account or <i>All</i>.</p>")
     @as("AccountIds")
     accountIds: option<accountIdList>,
   }
@@ -7282,7 +7754,7 @@ module CreateOpsMetadata = {
     @ocaml.doc("<p>Optional metadata that you assign to a resource. You can specify a maximum of five tags for
    an OpsMetadata object. Tags enable you to categorize a resource in different ways, such as by
    purpose, owner, or environment. For example, you might want to tag an OpsMetadata object to
-   identify an environment or target AWS Region. In this case, you could specify the following
+   identify an environment or target Amazon Web Services Region. In this case, you could specify the following
    key-value pairs:</p>
          <ul>
             <li>
@@ -7340,15 +7812,17 @@ module CreateOpsItem = {
     @ocaml.doc("<p>Specify a category to assign to an OpsItem. </p>") @as("Category")
     category: option<opsItemCategory>,
     @ocaml.doc("<p>Optional metadata that you assign to a resource. You can restrict access to OpsItems by
-   using an inline IAM policy that specifies tags. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html#OpsCenter-getting-started-user-permissions\">Getting started with OpsCenter</a> in the <i>AWS Systems Manager User Guide</i>.</p>
+   using an inline IAM policy that specifies tags. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html#OpsCenter-getting-started-user-permissions\">Getting started with OpsCenter</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>
          <p>Tags use a key-value pair. For example:</p>
          <p>
             <code>Key=Department,Value=Finance</code>
          </p>
-         <note>
-            <p>To add tags to an existing OpsItem, use the <a>AddTagsToResource</a>
-    action.</p>
-         </note>")
+         <important>
+            <p>To add tags to a new OpsItem, a user must have IAM permissions for both the
+     <code>ssm:CreateOpsItems</code> operation and the <code>ssm:AddTagsToResource</code> operation.
+    To add tags to an existing OpsItem, use the <a>AddTagsToResource</a>
+    operation.</p>
+         </important>")
     @as("Tags")
     tags: option<tagList_>,
     @ocaml.doc(
@@ -7358,7 +7832,8 @@ module CreateOpsItem = {
     title: opsItemTitle,
     @ocaml.doc("<p>The origin of the OpsItem, such as Amazon EC2 or Systems Manager.</p>
          <note>
-            <p>The source name can't contain the following strings: aws, amazon, and amzn. </p>
+            <p>The source name can't contain the following strings: <code>aws</code>, <code>amazon</code>,
+    and <code>amzn</code>. </p>
          </note>")
     @as("Source")
     source: opsItemSource,
@@ -7379,18 +7854,19 @@ module CreateOpsItem = {
    other relevant data. You enter operational data as key-value pairs. The key has a maximum length
    of 128 characters. The value has a maximum size of 20 KB.</p>
          <important>
-            <p>Operational data keys <i>can't</i> begin with the following: amazon, aws,
-    amzn, ssm, /amazon, /aws, /amzn, /ssm.</p>
+            <p>Operational data keys <i>can't</i> begin with the following:
+     <code>amazon</code>, <code>aws</code>, <code>amzn</code>, <code>ssm</code>,
+     <code>/amazon</code>, <code>/aws</code>, <code>/amzn</code>, <code>/ssm</code>.</p>
          </important>
          <p>You can choose to make the data searchable by other users in the account or you can restrict
    search access. Searchable data means that all users with access to the OpsItem Overview page (as
-   provided by the <a>DescribeOpsItems</a> API action) can view and search on the
-   specified data. Operational data that is not searchable is only viewable by users who have access
-   to the OpsItem (as provided by the <a>GetOpsItem</a> API action).</p>
+   provided by the <a>DescribeOpsItems</a> API operation) can view and search on the
+   specified data. Operational data that isn't searchable is only viewable by users who have access
+   to the OpsItem (as provided by the <a>GetOpsItem</a> API operation).</p>
          <p>Use the <code>/aws/resources</code> key in OperationalData to specify a related resource in
    the request. Use the <code>/aws/automations</code> key in OperationalData to associate an
-   Automation runbook with the OpsItem. To view AWS CLI example commands that use these keys, see
-    <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-creating-OpsItems.html#OpsCenter-manually-create-OpsItems\">Creating OpsItems manually</a> in the <i>AWS Systems Manager User Guide</i>.</p>")
+   Automation runbook with the OpsItem. To view Amazon Web Services CLI example commands that use these keys, see
+    <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-creating-OpsItems.html#OpsCenter-manually-create-OpsItems\">Creating OpsItems manually</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>")
     @as("OperationalData")
     operationalData: option<opsItemOperationalData>,
     @ocaml.doc("<p>The type of OpsItem to create. Currently, the only valid values are
@@ -7448,8 +7924,7 @@ module CreateMaintenanceWindow = {
     @ocaml.doc("<p>Optional metadata that you assign to a resource. Tags enable you to categorize a resource in
    different ways, such as by purpose, owner, or environment. For example, you might want to tag a
    maintenance window to identify the type of tasks it will run, the types of targets, and the
-   environment it will run in. In this case, you could specify the following key name/value
-   pairs:</p>
+   environment it will run in. In this case, you could specify the following key-value pairs:</p>
          <ul>
             <li>
                <p>
@@ -7469,26 +7944,26 @@ module CreateMaintenanceWindow = {
          </ul>
          <note>
             <p>To add tags to an existing maintenance window, use the <a>AddTagsToResource</a>
-    action.</p>
+    operation.</p>
          </note>")
     @as("Tags")
     tags: option<tagList_>,
     @ocaml.doc("<p>User-provided idempotency token.</p>") @as("ClientToken")
     clientToken: option<clientToken>,
-    @ocaml.doc("<p>Enables a maintenance window task to run on managed instances, even if you have not
-   registered those instances as targets. If enabled, then you must specify the unregistered
-   instances (by instance ID) when you register a task with the maintenance window.</p>
+    @ocaml.doc("<p>Enables a maintenance window task to run on managed nodes, even if you haven't registered
+   those nodes as targets. If enabled, then you must specify the unregistered managed nodes (by node
+   ID) when you register a task with the maintenance window.</p>
          <p>If you don't enable this option, then you must specify previously-registered targets when
    you register a task with the maintenance window.</p>")
     @as("AllowUnassociatedTargets")
     allowUnassociatedTargets: maintenanceWindowAllowUnassociatedTargets,
-    @ocaml.doc("<p>The number of hours before the end of the maintenance window that Systems Manager stops scheduling new
-   tasks for execution.</p>")
+    @ocaml.doc("<p>The number of hours before the end of the maintenance window that Amazon Web Services Systems Manager stops scheduling
+   new tasks for execution.</p>")
     @as("Cutoff")
     cutoff: maintenanceWindowCutoff,
     @ocaml.doc("<p>The duration of the maintenance window in hours.</p>") @as("Duration")
     duration: maintenanceWindowDurationHours,
-    @ocaml.doc("<p>The number of days to wait after the date and time specified by a CRON expression before
+    @ocaml.doc("<p>The number of days to wait after the date and time specified by a cron expression before
    running the maintenance window.</p>
          <p>For example, the following cron expression schedules a maintenance window to run on the
    third Tuesday of every month at 11:30 PM.</p>
@@ -7511,13 +7986,13 @@ module CreateMaintenanceWindow = {
     @as("Schedule")
     schedule: maintenanceWindowSchedule,
     @ocaml.doc("<p>The date and time, in ISO-8601 Extended format, for when you want the maintenance window to
-   become inactive. EndDate allows you to set a date and time in the future when the maintenance
-   window will no longer run.</p>")
+   become inactive. <code>EndDate</code> allows you to set a date and time in the future when the
+   maintenance window will no longer run.</p>")
     @as("EndDate")
     endDate: option<maintenanceWindowStringDateTime>,
     @ocaml.doc("<p>The date and time, in ISO-8601 Extended format, for when you want the maintenance window to
-   become active. StartDate allows you to delay activation of the maintenance window until the
-   specified future date.</p>")
+   become active. <code>StartDate</code> allows you to delay activation of the maintenance window
+   until the specified future date.</p>")
     @as("StartDate")
     startDate: option<maintenanceWindowStringDateTime>,
     @ocaml.doc("<p>An optional description for the maintenance window. We recommend specifying a description to
@@ -7567,11 +8042,12 @@ module CreateMaintenanceWindow = {
 module CreateActivation = {
   type t
   type request = {
+    @ocaml.doc("<p>Reserved for internal use.</p>") @as("RegistrationMetadata")
+    registrationMetadata: option<registrationMetadataList>,
     @ocaml.doc("<p>Optional metadata that you assign to a resource. Tags enable you to categorize a resource in
    different ways, such as by purpose, owner, or environment. For example, you might want to tag an
    activation to identify which servers or virtual machines (VMs) in your on-premises environment
-   you intend to activate. In this case, you could specify the following key name/value
-   pairs:</p>
+   you intend to activate. In this case, you could specify the following key-value pairs:</p>
          <ul>
             <li>
                <p>
@@ -7585,15 +8061,15 @@ module CreateActivation = {
             </li>
          </ul>
          <important>
-            <p>When you install SSM Agent on your on-premises servers and VMs, you specify an activation
-    ID and code. When you specify the activation ID and code, tags assigned to the activation are
+            <p>When you install SSM Agent on your on-premises servers and VMs, you specify an activation ID
+    and code. When you specify the activation ID and code, tags assigned to the activation are
     automatically applied to the on-premises servers or VMs.</p>
          </important>
          <p>You can't add tags to or delete tags from an existing activation. You can tag your
-   on-premises servers and VMs after they connect to Systems Manager for the first time and are assigned a
-   managed instance ID. This means they are listed in the AWS Systems Manager console with an ID that is
-   prefixed with \"mi-\". For information about how to add tags to your managed instances, see <a>AddTagsToResource</a>. For information about how to remove tags from your managed
-   instances, see <a>RemoveTagsFromResource</a>.</p>")
+   on-premises servers, edge devices, and VMs after they connect to Systems Manager for the first time and are
+   assigned a managed node ID. This means they are listed in the Amazon Web Services Systems Manager console with an ID that
+   is prefixed with \"mi-\". For information about how to add tags to your managed nodes, see <a>AddTagsToResource</a>. For information about how to remove tags from your managed nodes,
+   see <a>RemoveTagsFromResource</a>.</p>")
     @as("Tags")
     tags: option<tagList_>,
     @ocaml.doc("<p>The date by which this activation request should expire, in timestamp format, such as
@@ -7601,26 +8077,27 @@ module CreateActivation = {
    expiration date, the activation code expires in 24 hours.</p>")
     @as("ExpirationDate")
     expirationDate: option<expirationDate>,
-    @ocaml.doc("<p>Specify the maximum number of managed instances you want to register. The default value is 1
-   instance.</p>")
+    @ocaml.doc("<p>Specify the maximum number of managed nodes you want to register. The default value is
+    <code>1</code>.</p>")
     @as("RegistrationLimit")
     registrationLimit: option<registrationLimit>,
-    @ocaml.doc("<p>The Amazon Identity and Access Management (IAM) role that you want to assign to the managed
-   instance. This IAM role must provide AssumeRole permissions for the Systems Manager service principal
-    <code>ssm.amazonaws.com</code>. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-service-role.html\">Create an IAM service role for a
-    hybrid environment</a> in the <i>AWS Systems Manager User Guide</i>.</p>")
+    @ocaml.doc("<p>The name of the Identity and Access Management (IAM) role that you want to assign to
+   the managed node. This IAM role must provide AssumeRole permissions for the
+   Amazon Web Services Systems Manager service principal <code>ssm.amazonaws.com</code>. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-service-role.html\">Create an
+     IAM service role for a hybrid environment</a> in the
+    <i>Amazon Web Services Systems Manager User Guide</i>.</p>")
     @as("IamRole")
     iamRole: iamRole,
-    @ocaml.doc("<p>The name of the registered, managed instance as it will appear in the Systems Manager console or when
-   you use the AWS command line tools to list Systems Manager resources.</p>
+    @ocaml.doc("<p>The name of the registered, managed node as it will appear in the Amazon Web Services Systems Manager console or when
+   you use the Amazon Web Services command line tools to list Systems Manager resources.</p>
          <important>
-            <p>Do not enter personally identifiable information in this field.</p>
+            <p>Don't enter personally identifiable information in this field.</p>
          </important>")
     @as("DefaultInstanceName")
     defaultInstanceName: option<defaultInstanceName>,
     @ocaml.doc("<p>A user-defined description of the resource that you want to register with Systems Manager. </p>
          <important>
-            <p>Do not enter personally identifiable information in this field.</p>
+            <p>Don't enter personally identifiable information in this field.</p>
          </important>")
     @as("Description")
     description: option<activationDescription>,
@@ -7638,6 +8115,7 @@ module CreateActivation = {
   @module("@aws-sdk/client-ssm") @new external new: request => t = "CreateActivationCommand"
   let make = (
     ~iamRole,
+    ~registrationMetadata=?,
     ~tags=?,
     ~expirationDate=?,
     ~registrationLimit=?,
@@ -7646,6 +8124,7 @@ module CreateActivation = {
     (),
   ) =>
     new({
+      registrationMetadata: registrationMetadata,
       tags: tags,
       expirationDate: expirationDate,
       registrationLimit: registrationLimit,
@@ -7661,39 +8140,52 @@ module AddTagsToResource = {
   type request = {
     @ocaml.doc("<p>One or more tags. The value parameter is required.</p>
          <important>
-            <p>Do not enter personally identifiable information in this field.</p>
+            <p>Don't enter personally identifiable information in this field.</p>
          </important>")
     @as("Tags")
     tags: tagList_,
     @ocaml.doc("<p>The resource ID you want to tag.</p>
          <p>Use the ID of the resource. Here are some examples:</p>
-         <p>ManagedInstance: mi-012345abcde</p>
-         <p>MaintenanceWindow: mw-012345abcde</p>
-         <p>PatchBaseline: pb-012345abcde</p>
-         <p>OpsMetadata object: <code>ResourceID</code> for tagging is created from the Amazon Resource
-   Name (ARN) for the object. Specifically, <code>ResourceID</code> is created from the strings that
-   come after the word <code>opsmetadata</code> in the ARN. For example, an OpsMetadata object with
-   an ARN of <code>arn:aws:ssm:us-east-2:1234567890:opsmetadata/aws/ssm/MyGroup/appmanager</code>
-   has a <code>ResourceID</code> of either <code>aws/ssm/MyGroup/appmanager</code> or
+         <p>
+            <code>MaintenanceWindow</code>: <code>mw-012345abcde</code>
+         </p>
+         <p>
+            <code>PatchBaseline</code>: <code>pb-012345abcde</code>
+         </p>
+         <p>
+            <code>OpsMetadata</code> object: <code>ResourceID</code> for tagging is created from the
+   Amazon Resource Name (ARN) for the object. Specifically, <code>ResourceID</code> is created from
+   the strings that come after the word <code>opsmetadata</code> in the ARN. For example, an
+   OpsMetadata object with an ARN of
+    <code>arn:aws:ssm:us-east-2:1234567890:opsmetadata/aws/ssm/MyGroup/appmanager</code> has a
+    <code>ResourceID</code> of either <code>aws/ssm/MyGroup/appmanager</code> or
     <code>/aws/ssm/MyGroup/appmanager</code>.</p>
-         <p>For the Document and Parameter values, use the name of the resource.</p>
+         <p>For the <code>Document</code> and <code>Parameter</code> values, use the name of the
+   resource.</p>
+         <p>
+            <code>ManagedInstance</code>: <code>mi-012345abcde</code>
+         </p>
          <note>
-            <p>The ManagedInstance type for this API action is only for on-premises managed instances. You
-    must specify the name of the managed instance in the following format: mi-ID_number. For
-    example, mi-1a2b3c4d5e6f.</p>
+            <p>The <code>ManagedInstance</code> type for this API operation is only for on-premises
+    managed nodes. You must specify the name of the managed node in the following format:
+      <code>mi-<i>ID_number</i>
+               </code>. For example,
+    <code>mi-1a2b3c4d5e6f</code>.</p>
          </note>")
     @as("ResourceId")
     resourceId: resourceId,
     @ocaml.doc("<p>Specifies the type of resource you are tagging.</p>
          <note>
-            <p>The ManagedInstance type for this API action is for on-premises managed instances. You must
-    specify the name of the managed instance in the following format: mi-ID_number. For example,
-    mi-1a2b3c4d5e6f.</p>
+            <p>The <code>ManagedInstance</code> type for this API operation is for on-premises managed
+    nodes. You must specify the name of the managed node in the following format:
+      <code>mi-<i>ID_number</i>
+               </code>. For example,
+    <code>mi-1a2b3c4d5e6f</code>.</p>
          </note>")
     @as("ResourceType")
     resourceType: resourceTypeForTagging,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ssm") @new external new: request => t = "AddTagsToResourceCommand"
   let make = (~tags, ~resourceId, ~resourceType, ()) =>
     new({tags: tags, resourceId: resourceId, resourceType: resourceType})
@@ -7703,16 +8195,15 @@ module AddTagsToResource = {
 module UpdateMaintenanceWindowTarget = {
   type t
   type request = {
-    @ocaml.doc("<p>If True, then all fields that are required by the RegisterTargetWithMaintenanceWindow action
-   are also required for this API request. Optional fields that are not specified are set to
-   null.</p>")
+    @ocaml.doc("<p>If <code>True</code>, then all fields that are required by the <a>RegisterTargetWithMaintenanceWindow</a> operation are also required for this API
+   request. Optional fields that aren't specified are set to null.</p>")
     @as("Replace")
     replace: option<boolean_>,
     @ocaml.doc("<p>An optional description for the update.</p>") @as("Description")
     description: option<maintenanceWindowDescription>,
     @ocaml.doc("<p>A name for the update.</p>") @as("Name") name: option<maintenanceWindowName>,
-    @ocaml.doc("<p>User-provided value that will be included in any CloudWatch events raised while running
-   tasks for these targets in this maintenance window.</p>")
+    @ocaml.doc("<p>User-provided value that will be included in any Amazon CloudWatch Events events raised while
+   running tasks for these targets in this maintenance window.</p>")
     @as("OwnerInformation")
     ownerInformation: option<ownerInformation>,
     @ocaml.doc("<p>The targets to add or replace.</p>") @as("Targets") targets: option<targets>,
@@ -7760,14 +8251,18 @@ module UpdateMaintenanceWindowTarget = {
 module UpdateDocumentMetadata = {
   type t
   type request = {
-    @ocaml.doc("<p>The document review details to update.</p>") @as("DocumentReviews")
+    @ocaml.doc("<p>The change template review details to update.</p>") @as("DocumentReviews")
     documentReviews: documentReviews,
-    @ocaml.doc("<p>The version of a document to update.</p>") @as("DocumentVersion")
+    @ocaml.doc("<p>The version of a change template in which to update approval metadata.</p>")
+    @as("DocumentVersion")
     documentVersion: option<documentVersion>,
-    @ocaml.doc("<p>The name of the document for which a version is to be updated.</p>") @as("Name")
+    @ocaml.doc(
+      "<p>The name of the change template for which a version's metadata is to be updated.</p>"
+    )
+    @as("Name")
     name: documentName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ssm") @new external new: request => t = "UpdateDocumentMetadataCommand"
   let make = (~documentReviews, ~name, ~documentVersion=?, ()) =>
     new({documentReviews: documentReviews, documentVersion: documentVersion, name: name})
@@ -7785,24 +8280,28 @@ module UpdateDocument = {
     documentFormat: option<documentFormat>,
     @ocaml.doc("<p>The version of the document that you want to update. Currently, Systems Manager supports updating only
    the latest version of the document. You can specify the version number of the latest version or
-   use the <code>$LATEST</code> variable.</p>")
+   use the <code>$LATEST</code> variable.</p>
+         <note>
+            <p>If you change a document version for a State Manager association, Systems Manager immediately runs
+    the association unless you previously specifed the <code>apply-only-at-cron-interval</code>
+    parameter.</p>
+         </note>")
     @as("DocumentVersion")
     documentVersion: option<documentVersion>,
     @ocaml.doc("<p>An optional field specifying the version of the artifact you are updating with the document.
    For example, \"Release 12, Update 6\". This value is unique across all versions of a document, and
-   cannot be changed.</p>")
+   can't be changed.</p>")
     @as("VersionName")
     versionName: option<documentVersionName>,
-    @ocaml.doc("<p>The friendly name of the Systems Manager document that you want to update. This value can differ for
-   each version of the document. If you do not specify a value for this parameter in your request,
+    @ocaml.doc("<p>The friendly name of the SSM document that you want to update. This value can differ for
+   each version of the document. If you don't specify a value for this parameter in your request,
    the existing value is applied to the new document version.</p>")
     @as("DisplayName")
     displayName: option<documentDisplayName>,
-    @ocaml.doc("<p>The name of the Systems Manager document that you want to update.</p>")
-    @as("Name")
+    @ocaml.doc("<p>The name of the SSM document that you want to update.</p>") @as("Name")
     name: documentName,
     @ocaml.doc(
-      "<p>A list of key and value pairs that describe attachments to a version of a document.</p>"
+      "<p>A list of key-value pairs that describe attachments to a version of a document.</p>"
     )
     @as("Attachments")
     attachments: option<attachmentsSourceList>,
@@ -7843,7 +8342,7 @@ module StartAutomationExecution = {
     @ocaml.doc("<p>Optional metadata that you assign to a resource. You can specify a maximum of five tags for
    an automation. Tags enable you to categorize a resource in different ways, such as by purpose,
    owner, or environment. For example, you might want to tag an automation to identify an
-   environment or operating system. In this case, you could specify the following key name/value
+   environment or operating system. In this case, you could specify the following key-value
    pairs:</p>
          <ul>
             <li>
@@ -7859,14 +8358,14 @@ module StartAutomationExecution = {
          </ul>
          <note>
             <p>To add tags to an existing patch baseline, use the <a>AddTagsToResource</a>
-    action.</p>
+    operation.</p>
          </note>")
     @as("Tags")
     tags: option<tagList_>,
-    @ocaml.doc("<p>A location is a combination of AWS Regions and/or AWS accounts where you want to run the
-   Automation. Use this action to start an Automation in multiple Regions and multiple accounts. For
-   more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-automation-multiple-accounts-and-regions.html\">Running Automation workflows in multiple AWS Regions and accounts</a> in the
-    <i>AWS Systems Manager User Guide</i>. </p>")
+    @ocaml.doc("<p>A location is a combination of Amazon Web Services Regions and/or Amazon Web Services accounts where you want to run the
+   automation. Use this operation to start an automation in multiple Amazon Web Services Regions and multiple
+   Amazon Web Services accounts. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-automation-multiple-accounts-and-regions.html\">Running Automation workflows in multiple Amazon Web Services Regions and Amazon Web Services accounts</a> in the
+    <i>Amazon Web Services Systems Manager User Guide</i>. </p>")
     @as("TargetLocations")
     targetLocations: option<targetLocations>,
     @ocaml.doc("<p>The number of errors that are allowed before the system stops running the automation on
@@ -7883,11 +8382,11 @@ module StartAutomationExecution = {
     @as("MaxErrors")
     maxErrors: option<maxErrors>,
     @ocaml.doc("<p>The maximum number of targets allowed to run this task in parallel. You can specify a
-   number, such as 10, or a percentage, such as 10%. The default value is 10.</p>")
+   number, such as 10, or a percentage, such as 10%. The default value is <code>10</code>.</p>")
     @as("MaxConcurrency")
     maxConcurrency: option<maxConcurrency>,
     @ocaml.doc("<p>A key-value mapping of document parameters to target resources. Both Targets and TargetMaps
-   cannot be specified together.</p>")
+   can't be specified together.</p>")
     @as("TargetMaps")
     targetMaps: option<targetMaps>,
     @ocaml.doc(
@@ -7908,16 +8407,16 @@ module StartAutomationExecution = {
     @as("ClientToken")
     clientToken: option<idempotencyToken>,
     @ocaml.doc("<p>A key-value map of execution parameters, which match the declared parameters in the
-   Automation document.</p>")
+   Automation runbook.</p>")
     @as("Parameters")
     parameters: option<automationParameterMap>,
-    @ocaml.doc("<p>The version of the Automation document to use for this execution.</p>")
+    @ocaml.doc("<p>The version of the Automation runbook to use for this execution.</p>")
     @as("DocumentVersion")
     documentVersion: option<documentVersion>,
-    @ocaml.doc("<p>The name of the Systems Manager document to run. This can be a public document or a custom document.
-   To run a shared document belonging to another account, specify the document ARN. For more
+    @ocaml.doc("<p>The name of the SSM document to run. This can be a public document or a custom document. To
+   run a shared document belonging to another account, specify the document ARN. For more
    information about how to use shared documents, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/ssm-using-shared.html\">Using shared SSM documents</a>
-   in the <i>AWS Systems Manager User Guide</i>.</p>")
+   in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>")
     @as("DocumentName")
     documentName: documentARN,
   }
@@ -7968,63 +8467,58 @@ module RegisterTargetWithMaintenanceWindow = {
     description: option<maintenanceWindowDescription>,
     @ocaml.doc("<p>An optional name for the target.</p>") @as("Name")
     name: option<maintenanceWindowName>,
-    @ocaml.doc("<p>User-provided value that will be included in any CloudWatch events raised while running
-   tasks for these targets in this maintenance window.</p>")
+    @ocaml.doc("<p>User-provided value that will be included in any Amazon CloudWatch Events events raised while
+   running tasks for these targets in this maintenance window.</p>")
     @as("OwnerInformation")
     ownerInformation: option<ownerInformation>,
-    @ocaml.doc("<p>The targets to register with the maintenance window. In other words, the instances to run
-   commands on when the maintenance window runs.</p>
+    @ocaml.doc("<p>The targets to register with the maintenance window. In other words, the managed nodes to
+   run commands on when the maintenance window runs.</p>
          <note>
             <p>If a single maintenance window task is registered with multiple targets, its task
     invocations occur sequentially and not in parallel. If your task must run on multiple targets at
     the same time, register a task for each target individually and assign each task the same
     priority level.</p>
          </note>
-         <p>You can specify targets using instance IDs, resource group names, or tags that have been
-   applied to instances.</p>
+         <p>You can specify targets using managed node IDs, resource group names, or tags that have been
+   applied to managed nodes.</p>
          <p>
-            <b>Example 1</b>: Specify instance IDs</p>
+            <b>Example 1</b>: Specify managed node IDs</p>
          <p>
-            <code>Key=InstanceIds,Values=<i>instance-id-1</i>,<i>instance-id-2</i>,<i>instance-id-3</i>
-            </code>
+            <code>Key=InstanceIds,Values=<instance-id-1>,<instance-id-2>,<instance-id-3></code>
          </p>
          <p>
-            <b>Example 2</b>: Use tag key-pairs applied to instances</p>
+            <b>Example 2</b>: Use tag key-pairs applied to managed
+   nodes</p>
          <p>
-            <code>Key=tag:<i>my-tag-key</i>,Values=<i>my-tag-value-1</i>,<i>my-tag-value-2</i>
-            </code>
+            <code>Key=tag:<my-tag-key>,Values=<my-tag-value-1>,<my-tag-value-2></code>
          </p>
          <p>
-            <b>Example 3</b>: Use tag-keys applied to instances</p>
+            <b>Example 3</b>: Use tag-keys applied to managed nodes</p>
          <p>
-            <code>Key=tag-key,Values=<i>my-tag-key-1</i>,<i>my-tag-key-2</i>
-            </code>
+            <code>Key=tag-key,Values=<my-tag-key-1>,<my-tag-key-2></code>
          </p>
-      
+  
          <p>
             <b>Example 4</b>: Use resource group names</p>
          <p>
-            <code>Key=resource-groups:Name,Values=<i>resource-group-name</i>
-            </code>
+            <code>Key=resource-groups:Name,Values=<resource-group-name></code>
          </p>
          <p>
             <b>Example 5</b>: Use filters for resource group types</p>
          <p>
-            <code>Key=resource-groups:ResourceTypeFilters,Values=<i>resource-type-1</i>,<i>resource-type-2</i>
-            </code>
+            <code>Key=resource-groups:ResourceTypeFilters,Values=<resource-type-1>,<resource-type-2></code>
          </p>
          <note>
             <p>For <code>Key=resource-groups:ResourceTypeFilters</code>, specify resource types in the
     following format</p>
             <p>
-               <code>Key=resource-groups:ResourceTypeFilters,Values=<i>AWS::EC2::INSTANCE</i>,<i>AWS::EC2::VPC</i>
-               </code>
+               <code>Key=resource-groups:ResourceTypeFilters,Values=AWS::EC2::INSTANCE,AWS::EC2::VPC</code>
             </p>
          </note>
-      
+  
          <p>For more information about these examples formats, including the best use case for each one,
    see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/mw-cli-tutorial-targets-examples.html\">Examples: Register
-    targets with a maintenance window</a> in the <i>AWS Systems Manager User Guide</i>.</p>")
+    targets with a maintenance window</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>")
     @as("Targets")
     targets: targets,
     @ocaml.doc("<p>The type of target being registered with the maintenance window.</p>")
@@ -8101,13 +8595,11 @@ module PutComplianceItems = {
    resource type.</p>")
     @as("ResourceType")
     resourceType: complianceResourceType,
-    @ocaml.doc(
-      "<p>Specify an ID for this resource. For a managed instance, this is the instance ID.</p>"
-    )
+    @ocaml.doc("<p>Specify an ID for this resource. For a managed node, this is the node ID.</p>")
     @as("ResourceId")
     resourceId: complianceResourceId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ssm") @new external new: request => t = "PutComplianceItemsCommand"
   let make = (
     ~items,
@@ -8246,7 +8738,8 @@ module ListInventoryEntries = {
     filters: option<inventoryFilterList>,
     @ocaml.doc("<p>The type of inventory item for which you want information.</p>") @as("TypeName")
     typeName: inventoryItemTypeName,
-    @ocaml.doc("<p>The instance ID for which you want inventory information.</p>") @as("InstanceId")
+    @ocaml.doc("<p>The managed node ID for which you want inventory information.</p>")
+    @as("InstanceId")
     instanceId: instanceId,
   }
   type response = {
@@ -8254,14 +8747,15 @@ module ListInventoryEntries = {
    return, the string is empty.</p>")
     @as("NextToken")
     nextToken: option<nextToken>,
-    @ocaml.doc("<p>A list of inventory items on the instance(s).</p>") @as("Entries")
+    @ocaml.doc("<p>A list of inventory items on the managed node(s).</p>") @as("Entries")
     entries: option<inventoryItemEntryList>,
-    @ocaml.doc("<p>The time that inventory information was collected for the instance(s).</p>")
+    @ocaml.doc("<p>The time that inventory information was collected for the managed node(s).</p>")
     @as("CaptureTime")
     captureTime: option<inventoryItemCaptureTime>,
-    @ocaml.doc("<p>The inventory schema version used by the instance(s).</p>") @as("SchemaVersion")
+    @ocaml.doc("<p>The inventory schema version used by the managed node(s).</p>")
+    @as("SchemaVersion")
     schemaVersion: option<inventoryItemSchemaVersion>,
-    @ocaml.doc("<p>The instance ID targeted by the request to query inventory information.</p>")
+    @ocaml.doc("<p>The managed node ID targeted by the request to query inventory information.</p>")
     @as("InstanceId")
     instanceId: option<instanceId>,
     @ocaml.doc("<p>The type of inventory item returned by the request.</p>") @as("TypeName")
@@ -8338,12 +8832,11 @@ module GetParametersByPath = {
     withDecryption: option<boolean_>,
     @ocaml.doc("<p>Filters to limit the request results.</p>
          <note>
-            <p>For <code>GetParametersByPath</code>, the following filter <code>Key</code> names are
-    supported: <code>Type</code>, <code>KeyId</code>, <code>Label</code>, and
-    <code>DataType</code>.</p>
-            <p>The following <code>Key</code> values are not supported for
-     <code>GetParametersByPath</code>: <code>tag</code>, <code>Name</code>, <code>Path</code>, and
-     <code>Tier</code>.</p>
+            <p>The following <code>Key</code> values are supported for <code>GetParametersByPath</code>:
+     <code>Type</code>, <code>KeyId</code>, and <code>Label</code>.</p>
+            <p>The following <code>Key</code> values aren't supported for
+    <code>GetParametersByPath</code>: <code>tag</code>, <code>DataType</code>, <code>Name</code>,
+     <code>Path</code>, and <code>Tier</code>.</p>
          </note>")
     @as("ParameterFilters")
     parameterFilters: option<parameterStringFilterList>,
@@ -8351,17 +8844,17 @@ module GetParametersByPath = {
          <important>
             <p>If a user has access to a path, then the user can access all levels of that path. For
     example, if a user has permission to access path <code>/a</code>, then the user can also access
-     <code>/a/b</code>. Even if a user has explicitly been denied access in IAM for parameter
-     <code>/a/b</code>, they can still call the GetParametersByPath API action recursively for
-     <code>/a</code> and view <code>/a/b</code>.</p>
+     <code>/a/b</code>. Even if a user has explicitly been denied access in IAM for
+    parameter <code>/a/b</code>, they can still call the GetParametersByPath API operation
+    recursively for <code>/a</code> and view <code>/a/b</code>.</p>
          </important>")
     @as("Recursive")
     recursive: option<boolean_>,
-    @ocaml.doc("<p>The hierarchy for the parameter. Hierarchies start with a forward slash (/). The hierachy is
-   the parameter name except the last part of the parameter. For the API call to succeeed, the last
-   part of the parameter name cannot be in the path. A parameter name hierarchy can have a maximum
-   of 15 levels. Here is an example of a hierarchy: <code>/Finance/Prod/IAD/WinServ2016/license33
-   </code>
+    @ocaml.doc("<p>The hierarchy for the parameter. Hierarchies start with a forward slash (/). The hierarchy
+   is the parameter name except the last part of the parameter. For the API call to succeed, the
+   last part of the parameter name can't be in the path. A parameter name hierarchy can have a
+   maximum of 15 levels. Here is an example of a hierarchy:
+    <code>/Finance/Prod/IAD/WinServ2016/license33 </code>
          </p>")
     @as("Path")
     path: psparameterName,
@@ -8448,30 +8941,25 @@ module DescribePatchGroups = {
    call.)</p>")
     @as("NextToken")
     nextToken: option<nextToken>,
-    @ocaml.doc("<p>One or more filters. Use a filter to return a more specific list of results.</p>
-         <p>For <code>DescribePatchGroups</code>,valid filter keys include the following:</p>
+    @ocaml.doc("<p>Each element in the array is a structure containing a key-value pair.</p>
+         <p>Supported keys for <code>DescribePatchGroups</code> include the following:</p>
          <ul>
             <li>
                <p>
-                  <code>NAME_PREFIX</code>: The name of the patch group. Wildcards (*) are accepted.</p>
+                  <b>
+                     <code>NAME_PREFIX</code>
+                  </b>
+               </p>
+               <p>Sample values: <code>AWS-</code> | <code>My-</code>.</p>
             </li>
             <li>
                <p>
-                  <code>OPERATING_SYSTEM</code>: The supported operating system type to return results for.
-     For valid operating system values, see <a>GetDefaultPatchBaselineRequest$OperatingSystem</a> in <a>CreatePatchBaseline</a>.</p>
-               <p>Examples:</p>
-               <ul>
-                  <li>
-                     <p>
-                        <code>--filters Key=NAME_PREFIX,Values=MyPatchGroup*</code>
-                     </p>
-                  </li>
-                  <li>
-                     <p>
-                        <code>--filters Key=OPERATING_SYSTEM,Values=AMAZON_LINUX_2</code>
-                     </p>
-                  </li>
-               </ul>
+                  <b>
+                     <code>OPERATING_SYSTEM</code>
+                  </b>
+               </p>
+               <p>Sample values: <code>AMAZON_LINUX</code> | <code>SUSE</code> | <code>WINDOWS</code>
+               </p>
             </li>
          </ul>")
     @as("Filters")
@@ -8485,9 +8973,18 @@ module DescribePatchGroups = {
     @as("NextToken")
     nextToken: option<nextToken>,
     @ocaml.doc("<p>Each entry in the array contains:</p>
-         <p>PatchGroup: string (between 1 and 256 characters, Regex:
-   ^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$)</p>
-         <p>PatchBaselineIdentity: A PatchBaselineIdentity element. </p>")
+         <ul>
+            <li>
+               <p>
+                  <code>PatchGroup</code>: string (between 1 and 256 characters. Regex:
+      <code>^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$)</code>
+               </p>
+            </li>
+            <li>
+               <p>
+                  <code>PatchBaselineIdentity</code>: A <code>PatchBaselineIdentity</code> element.</p>
+            </li>
+         </ul>")
     @as("Mappings")
     mappings: option<patchGroupPatchBaselineMappingList>,
   }
@@ -8507,9 +9004,37 @@ module DescribePatchBaselines = {
     @ocaml.doc("<p>The maximum number of patch baselines to return (per page).</p>")
     @as("MaxResults")
     maxResults: option<patchBaselineMaxResults>,
-    @ocaml.doc("<p>Each element in the array is a structure containing: </p>
-         <p>Key: (string, \"NAME_PREFIX\" or \"OWNER\")</p>
-         <p>Value: (array of strings, exactly 1 entry, between 1 and 255 characters)</p>")
+    @ocaml.doc("<p>Each element in the array is a structure containing a key-value pair.</p>
+         <p>Supported keys for <code>DescribePatchBaselines</code> include the following:</p>
+         <ul>
+            <li>
+               <p>
+                  <b>
+                     <code>NAME_PREFIX</code>
+                  </b>
+               </p>
+               <p>Sample values: <code>AWS-</code> | <code>My-</code>
+               </p>
+            </li>
+            <li>
+               <p>
+                  <b>
+                     <code>OWNER</code>
+                  </b>
+               </p>
+               <p>Sample values: <code>AWS</code> | <code>Self</code>
+               </p>
+            </li>
+            <li>
+               <p>
+                  <b>
+                     <code>OPERATING_SYSTEM</code>
+                  </b>
+               </p>
+               <p>Sample values: <code>AMAZON_LINUX</code> | <code>SUSE</code> | <code>WINDOWS</code>
+               </p>
+            </li>
+         </ul>")
     @as("Filters")
     filters: option<patchOrchestratorFilterList>,
   }
@@ -8518,7 +9043,8 @@ module DescribePatchBaselines = {
    return, the string is empty.</p>")
     @as("NextToken")
     nextToken: option<nextToken>,
-    @ocaml.doc("<p>An array of PatchBaselineIdentity elements.</p>") @as("BaselineIdentities")
+    @ocaml.doc("<p>An array of <code>PatchBaselineIdentity</code> elements.</p>")
+    @as("BaselineIdentities")
     baselineIdentities: option<patchBaselineIdentityList>,
   }
   @module("@aws-sdk/client-ssm") @new external new: request => t = "DescribePatchBaselinesCommand"
@@ -8538,12 +9064,11 @@ module DescribeMaintenanceWindowsForTarget = {
    can specify in a subsequent call to get the next set of results.</p>")
     @as("MaxResults")
     maxResults: option<maintenanceWindowSearchMaxResults>,
-    @ocaml.doc(
-      "<p>The type of resource you want to retrieve information about. For example, \"INSTANCE\".</p>"
-    )
+    @ocaml.doc("<p>The type of resource you want to retrieve information about. For example,
+    <code>INSTANCE</code>.</p>")
     @as("ResourceType")
     resourceType: maintenanceWindowResourceType,
-    @ocaml.doc("<p>The instance ID or key/value pair to retrieve information about.</p>")
+    @ocaml.doc("<p>The managed node ID or key-value pair to retrieve information about.</p>")
     @as("Targets")
     targets: targets,
   }
@@ -8553,7 +9078,7 @@ module DescribeMaintenanceWindowsForTarget = {
     )
     @as("NextToken")
     nextToken: option<nextToken>,
-    @ocaml.doc("<p>Information about the maintenance window targets and tasks an instance is associated
+    @ocaml.doc("<p>Information about the maintenance window targets and tasks a managed node is associated
    with.</p>")
     @as("WindowIdentities")
     windowIdentities: option<maintenanceWindowsForTargetList>,
@@ -8582,7 +9107,8 @@ module DescribeMaintenanceWindows = {
     @as("MaxResults")
     maxResults: option<maintenanceWindowMaxResults>,
     @ocaml.doc("<p>Optional filters used to narrow down the scope of the returned maintenance windows.
-   Supported filter keys are <b>Name</b> and <b>Enabled</b>.</p>")
+   Supported filter keys are <code>Name</code> and <code>Enabled</code>. For example,
+    <code>Name=MyMaintenanceWindow</code> and <code>Enabled=True</code>.</p>")
     @as("Filters")
     filters: option<maintenanceWindowFilterList>,
   }
@@ -8616,12 +9142,11 @@ module DescribeMaintenanceWindowSchedule = {
    executions to only those scheduled before or after a certain date and time.</p>")
     @as("Filters")
     filters: option<patchOrchestratorFilterList>,
-    @ocaml.doc(
-      "<p>The type of resource you want to retrieve information about. For example, \"INSTANCE\".</p>"
-    )
+    @ocaml.doc("<p>The type of resource you want to retrieve information about. For example,
+    <code>INSTANCE</code>.</p>")
     @as("ResourceType")
     resourceType: option<maintenanceWindowResourceType>,
-    @ocaml.doc("<p>The instance ID or key/value pair to retrieve information about.</p>")
+    @ocaml.doc("<p>The managed node ID or key-value pair to retrieve information about.</p>")
     @as("Targets")
     targets: option<targets>,
     @ocaml.doc("<p>The ID of the maintenance window to retrieve information about.</p>")
@@ -8673,10 +9198,17 @@ module DescribeMaintenanceWindowExecutions = {
     @as("MaxResults")
     maxResults: option<maintenanceWindowMaxResults>,
     @ocaml.doc("<p>Each entry in the array is a structure containing:</p>
-         <p>Key (string, between 1 and 128 characters)</p>
-         <p>Values (array of strings, each string is between 1 and 256 characters)</p>
-         <p>The supported Keys are ExecutedBefore and ExecutedAfter with the value being a date/time
-   string such as 2016-11-04T05:00:00Z.</p>")
+         <ul>
+            <li>
+               <p>Key. A string between 1 and 128 characters. Supported keys include
+      <code>ExecutedBefore</code> and <code>ExecutedAfter</code>.</p>
+            </li>
+            <li>
+               <p>Values. An array of strings, each between 1 and 256 characters. Supported values are
+     date/time strings in a valid ISO 8601 date/time format, such as
+      <code>2021-11-04T05:00:00Z</code>.</p>
+            </li>
+         </ul>")
     @as("Filters")
     filters: option<maintenanceWindowFilterList>,
     @ocaml.doc("<p>The ID of the maintenance window whose executions should be retrieved.</p>")
@@ -8710,9 +9242,10 @@ module DescribeMaintenanceWindowExecutionTasks = {
    can specify in a subsequent call to get the next set of results.</p>")
     @as("MaxResults")
     maxResults: option<maintenanceWindowMaxResults>,
-    @ocaml.doc("<p>Optional filters used to scope down the returned tasks. The supported filter key is STATUS
-   with the corresponding values PENDING, IN_PROGRESS, SUCCESS, FAILED, TIMED_OUT, CANCELLING, and
-   CANCELLED. </p>")
+    @ocaml.doc("<p>Optional filters used to scope down the returned tasks. The supported filter key is
+    <code>STATUS</code> with the corresponding values <code>PENDING</code>,
+   <code>IN_PROGRESS</code>, <code>SUCCESS</code>, <code>FAILED</code>, <code>TIMED_OUT</code>,
+    <code>CANCELLING</code>, and <code>CANCELLED</code>.</p>")
     @as("Filters")
     filters: option<maintenanceWindowFilterList>,
     @ocaml.doc(
@@ -8753,8 +9286,9 @@ module DescribeMaintenanceWindowExecutionTaskInvocations = {
     @as("MaxResults")
     maxResults: option<maintenanceWindowMaxResults>,
     @ocaml.doc("<p>Optional filters used to scope down the returned task invocations. The supported filter key
-   is STATUS with the corresponding values PENDING, IN_PROGRESS, SUCCESS, FAILED, TIMED_OUT,
-   CANCELLING, and CANCELLED.</p>")
+   is <code>STATUS</code> with the corresponding values <code>PENDING</code>,
+    <code>IN_PROGRESS</code>, <code>SUCCESS</code>, <code>FAILED</code>, <code>TIMED_OUT</code>,
+    <code>CANCELLING</code>, and <code>CANCELLED</code>.</p>")
     @as("Filters")
     filters: option<maintenanceWindowFilterList>,
     @ocaml.doc(
@@ -8799,12 +9333,52 @@ module DescribeInstancePatches = {
    call.)</p>")
     @as("NextToken")
     nextToken: option<nextToken>,
-    @ocaml.doc("<p>An array of structures. Each entry in the array is a structure containing a Key, Value
-   combination. Valid values for Key are <code>Classification</code> | <code>KBId</code> |
-    <code>Severity</code> | <code>State</code>.</p>")
+    @ocaml.doc("<p>Each element in the array is a structure containing a key-value pair.</p>
+         <p>Supported keys for <code>DescribeInstancePatches</code>include the following:</p>
+         <ul>
+            <li>
+               <p>
+                  <b>
+                     <code>Classification</code>
+                  </b>
+               </p>
+               <p>Sample values: <code>Security</code> | <code>SecurityUpdates</code>
+               </p>
+            </li>
+            <li>
+               <p>
+                  <b>
+                     <code>KBId</code>
+                  </b>
+               </p>
+               <p>Sample values: <code>KB4480056</code> | <code>java-1.7.0-openjdk.x86_64</code>
+               </p>
+            </li>
+            <li>
+               <p>
+                  <b>
+                     <code>Severity</code>
+                  </b>
+               </p>
+               <p>Sample values: <code>Important</code> | <code>Medium</code> | <code>Low</code>
+               </p>
+            </li>
+            <li>
+               <p>
+                  <b>
+                     <code>State</code>
+                  </b>
+               </p>
+               <p>Sample values: <code>Installed</code> | <code>InstalledOther</code> |
+      <code>InstalledPendingReboot</code>
+               </p>
+            </li>
+         </ul>")
     @as("Filters")
     filters: option<patchOrchestratorFilterList>,
-    @ocaml.doc("<p>The ID of the instance whose patch state information should be retrieved.</p>")
+    @ocaml.doc(
+      "<p>The ID of the managed node whose patch state information should be retrieved.</p>"
+    )
     @as("InstanceId")
     instanceId: instanceId,
   }
@@ -8814,13 +9388,29 @@ module DescribeInstancePatches = {
     @as("NextToken")
     nextToken: option<nextToken>,
     @ocaml.doc("<p>Each entry in the array is a structure containing:</p>
-         <p>Title (string)</p>
-         <p>KBId (string)</p>
-         <p>Classification (string)</p>
-         <p>Severity (string)</p>
-         <p>State (string, such as \"INSTALLED\" or \"FAILED\")</p>
-         <p>InstalledTime (DateTime)</p>
-         <p>InstalledBy (string)</p>")
+         <ul>
+            <li>
+               <p>Title (string)</p>
+            </li>
+            <li>
+               <p>KBId (string)</p>
+            </li>
+            <li>
+               <p>Classification (string)</p>
+            </li>
+            <li>
+               <p>Severity (string)</p>
+            </li>
+            <li>
+               <p>State (string, such as \"INSTALLED\" or \"FAILED\")</p>
+            </li>
+            <li>
+               <p>InstalledTime (DateTime)</p>
+            </li>
+            <li>
+               <p>InstalledBy (string)</p>
+            </li>
+         </ul>")
     @as("Patches")
     patches: option<patchComplianceDataList>,
   }
@@ -8840,9 +9430,17 @@ module DescribeInstancePatchStatesForPatchGroup = {
     @as("NextToken")
     nextToken: option<nextToken>,
     @ocaml.doc("<p>Each entry in the array is a structure containing:</p>
-         <p>Key (string between 1 and 200 characters)</p>
-         <p> Values (array containing a single string)</p>
-         <p> Type (string \"Equal\", \"NotEqual\", \"LessThan\", \"GreaterThan\")</p>")
+         <ul>
+            <li>
+               <p>Key (string between 1 and 200 characters)</p>
+            </li>
+            <li>
+               <p>Values (array containing a single string)</p>
+            </li>
+            <li>
+               <p>Type (string \"Equal\", \"NotEqual\", \"LessThan\", \"GreaterThan\")</p>
+            </li>
+         </ul>")
     @as("Filters")
     filters: option<instancePatchStateFilterList>,
     @ocaml.doc("<p>The name of the patch group for which the patch state information should be
@@ -8855,7 +9453,7 @@ module DescribeInstancePatchStatesForPatchGroup = {
    return, the string is empty.</p>")
     @as("NextToken")
     nextToken: option<nextToken>,
-    @ocaml.doc("<p>The high-level patch state for the requested instances. </p>")
+    @ocaml.doc("<p>The high-level patch state for the requested managed nodes. </p>")
     @as("InstancePatchStates")
     instancePatchStates: option<instancePatchStatesList>,
   }
@@ -8871,17 +9469,17 @@ module DescribeDocument = {
   type request = {
     @ocaml.doc("<p>An optional field specifying the version of the artifact associated with the document. For
    example, \"Release 12, Update 6\". This value is unique across all versions of a document, and
-   cannot be changed.</p>")
+   can't be changed.</p>")
     @as("VersionName")
     versionName: option<documentVersionName>,
     @ocaml.doc("<p>The document version for which you want information. Can be a specific version or the
    default version.</p>")
     @as("DocumentVersion")
     documentVersion: option<documentVersion>,
-    @ocaml.doc("<p>The name of the Systems Manager document.</p>") @as("Name") name: documentARN,
+    @ocaml.doc("<p>The name of the SSM document.</p>") @as("Name") name: documentARN,
   }
   type response = {
-    @ocaml.doc("<p>Information about the Systems Manager document.</p>") @as("Document")
+    @ocaml.doc("<p>Information about the SSM document.</p>") @as("Document")
     document: option<documentDescription>,
   }
   @module("@aws-sdk/client-ssm") @new external new: request => t = "DescribeDocumentCommand"
@@ -8899,7 +9497,190 @@ module DescribeAvailablePatches = {
     nextToken: option<nextToken>,
     @ocaml.doc("<p>The maximum number of patches to return (per page).</p>") @as("MaxResults")
     maxResults: option<patchBaselineMaxResults>,
-    @ocaml.doc("<p>Filters used to scope down the returned patches.</p>") @as("Filters")
+    @ocaml.doc("<p>Each element in the array is a structure containing a key-value pair.</p>
+         <p>
+            <b>Windows Server</b>
+         </p>
+         <p>Supported keys for Windows Server managed node patches include the following:</p>
+         <ul>
+            <li>
+               <p>
+                  <b>
+                     <code>PATCH_SET</code>
+                  </b>
+               </p>
+               <p>Sample values: <code>OS</code> | <code>APPLICATION</code>
+               </p>
+            </li>
+            <li>
+               <p>
+                  <b>
+                     <code>PRODUCT</code>
+                  </b>
+               </p>
+               <p>Sample values: <code>WindowsServer2012</code> | <code>Office 2010</code> |
+      <code>MicrosoftDefenderAntivirus</code>
+               </p>
+            </li>
+            <li>
+               <p>
+                  <b>
+                     <code>PRODUCT_FAMILY</code>
+                  </b>
+               </p>
+               <p>Sample values: <code>Windows</code> | <code>Office</code>
+               </p>
+            </li>
+            <li>
+               <p>
+                  <b>
+                     <code>MSRC_SEVERITY</code>
+                  </b>
+               </p>
+               <p>Sample values: <code>ServicePacks</code> | <code>Important</code> | <code>Moderate</code>
+               </p>
+            </li>
+            <li>
+               <p>
+                  <b>
+                     <code>CLASSIFICATION</code>
+                  </b>
+               </p>
+               <p>Sample values: <code>ServicePacks</code> | <code>SecurityUpdates</code> |
+      <code>DefinitionUpdates</code>
+               </p>
+            </li>
+            <li>
+               <p>
+                  <b>
+                     <code>PATCH_ID</code>
+                  </b>
+               </p>
+               <p>Sample values: <code>KB123456</code> | <code>KB4516046</code>
+               </p>
+            </li>
+         </ul>
+
+         <p>
+            <b>Linux</b>
+         </p>
+         <important>
+            <p>When specifying filters for Linux patches, you must specify a key-pair for
+     <code>PRODUCT</code>. For example, using the Command Line Interface (CLI), the
+    following command fails:</p>
+            <p>
+               <code>aws ssm describe-available-patches --filters Key=CVE_ID,Values=CVE-2018-3615</code>
+            </p>
+            <p>However, the following command succeeds:</p>
+            <p>
+               <code>aws ssm describe-available-patches --filters Key=PRODUCT,Values=AmazonLinux2018.03
+     Key=CVE_ID,Values=CVE-2018-3615</code>
+            </p>
+         </important>
+         <p>Supported keys for Linux managed node patches include the following:</p>
+         <ul>
+            <li>
+               <p>
+                  <b>
+                     <code>PRODUCT</code>
+                  </b>
+               </p>
+               <p>Sample values: <code>AmazonLinux2018.03</code> | <code>AmazonLinux2.0</code>
+               </p>
+            </li>
+            <li>
+               <p>
+                  <b>
+                     <code>NAME</code>
+                  </b>
+               </p>
+               <p>Sample values: <code>kernel-headers</code> | <code>samba-python</code> | <code>php</code>
+               </p>
+            </li>
+            <li>
+               <p>
+                  <b>
+                     <code>SEVERITY</code>
+                  </b>
+               </p>
+               <p>Sample values: <code>Critical</code> | <code>Important</code> | <code>Medium</code> |
+      <code>Low</code>
+               </p>
+            </li>
+            <li>
+               <p>
+                  <b>
+                     <code>EPOCH</code>
+                  </b>
+               </p>
+               <p>Sample values: <code>0</code> | <code>1</code>
+               </p>
+            </li>
+            <li>
+               <p>
+                  <b>
+                     <code>VERSION</code>
+                  </b>
+               </p>
+               <p>Sample values: <code>78.6.1</code> | <code>4.10.16</code>
+               </p>
+            </li>
+            <li>
+               <p>
+                  <b>
+                     <code>RELEASE</code>
+                  </b>
+               </p>
+               <p>Sample values: <code>9.56.amzn1</code> | <code>1.amzn2</code>
+               </p>
+            </li>
+            <li>
+               <p>
+                  <b>
+                     <code>ARCH</code>
+                  </b>
+               </p>
+               <p>Sample values: <code>i686</code> | <code>x86_64</code>
+               </p>
+            </li>
+            <li>
+               <p>
+                  <b>
+                     <code>REPOSITORY</code>
+                  </b>
+               </p>
+               <p>Sample values: <code>Core</code> | <code>Updates</code>
+               </p>
+            </li>
+            <li>
+               <p>
+                  <b>
+                     <code>ADVISORY_ID</code>
+                  </b>
+               </p>
+               <p>Sample values: <code>ALAS-2018-1058</code> | <code>ALAS2-2021-1594</code>
+               </p>
+            </li>
+            <li>
+               <p>
+                  <b>
+                     <code>CVE_ID</code>
+                  </b>
+               </p>
+               <p>Sample values: <code>CVE-2018-3615</code> | <code>CVE-2020-1472</code>
+               </p>
+            </li>
+            <li>
+               <p>
+                  <b>
+                     <code>BUGZILLA_ID</code>
+                  </b>
+               </p>
+               <p>Sample values: <code>1463241</code>
+               </p>
+            </li>
+         </ul>")
+    @as("Filters")
     filters: option<patchOrchestratorFilterList>,
   }
   type response = {
@@ -8978,7 +9759,7 @@ module DeleteInventory = {
    custom inventory type. Choose one of the following options:</p>
          <p>DisableSchema: If you choose this option, the system ignores all inventory data for the
    specified version, and any earlier versions. To enable this schema again, you must call the
-    <code>PutInventory</code> action for a version greater than the disabled version.</p>
+    <code>PutInventory</code> operation for a version greater than the disabled version.</p>
          <p>DeleteSchema: This option deletes the specified custom type from the Inventory service. You
    can recreate the schema later, if you want.</p>")
     @as("SchemaDeleteOption")
@@ -8990,16 +9771,16 @@ module DeleteInventory = {
   }
   type response = {
     @ocaml.doc(
-      "<p>A summary of the delete operation. For more information about this summary, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-custom.html#sysman-inventory-delete-summary\">Deleting custom inventory</a> in the <i>AWS Systems Manager User Guide</i>.</p>"
+      "<p>A summary of the delete operation. For more information about this summary, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-custom.html#sysman-inventory-delete-summary\">Deleting custom inventory</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
     )
     @as("DeletionSummary")
     deletionSummary: option<inventoryDeletionSummary>,
     @ocaml.doc("<p>The name of the inventory data type specified in the request.</p>")
     @as("TypeName")
     typeName: option<inventoryItemTypeName>,
-    @ocaml.doc("<p>Every <code>DeleteInventory</code> action is assigned a unique ID. This option returns a
+    @ocaml.doc("<p>Every <code>DeleteInventory</code> operation is assigned a unique ID. This option returns a
    unique ID. You can use this ID to query the status of a delete operation. This option is useful
-   for ensuring that a delete operation has completed before you begin other actions. </p>")
+   for ensuring that a delete operation has completed before you begin other operations. </p>")
     @as("DeletionId")
     deletionId: option<uuid>,
   }
@@ -9020,7 +9801,7 @@ module CreateDocument = {
     @ocaml.doc("<p>Optional metadata that you assign to a resource. Tags enable you to categorize a resource in
    different ways, such as by purpose, owner, or environment. For example, you might want to tag an
    SSM document to identify the types of targets or the environment where it will run. In this case,
-   you could specify the following key name/value pairs:</p>
+   you could specify the following key-value pairs:</p>
          <ul>
             <li>
                <p>
@@ -9035,36 +9816,42 @@ module CreateDocument = {
          </ul>
          <note>
             <p>To add tags to an existing SSM document, use the <a>AddTagsToResource</a>
-    action.</p>
+    operation.</p>
          </note>")
     @as("Tags")
     tags: option<tagList_>,
     @ocaml.doc("<p>Specify a target type to define the kinds of resources the document can run on. For example,
-   to run a document on EC2 instances, specify the following value: /AWS::EC2::Instance. If you
-   specify a value of '/' the document can run on all types of resources. If you don't specify a
-   value, the document can't run on any resources. For a list of valid resource types, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\">AWS resource and property types
-    reference</a> in the <i>AWS CloudFormation User Guide</i>. </p>")
+   to run a document on EC2 instances, specify the following value:
+   <code>/AWS::EC2::Instance</code>. If you specify a value of '/' the document can run on all types
+   of resources. If you don't specify a value, the document can't run on any resources. For a list
+   of valid resource types, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\">Amazon Web Services resource and
+    property types reference</a> in the <i>CloudFormation User Guide</i>. </p>")
     @as("TargetType")
     targetType: option<targetType>,
     @ocaml.doc("<p>Specify the document format for the request. The document format can be JSON, YAML, or TEXT.
    JSON is the default format.</p>")
     @as("DocumentFormat")
     documentFormat: option<documentFormat>,
-    @ocaml.doc("<p>The type of document to create.</p>") @as("DocumentType")
+    @ocaml.doc("<p>The type of document to create.</p>
+         <note>
+            <p>The <code>DeploymentStrategy</code> document type is an internal-use-only document type
+    reserved for AppConfig.</p>
+         </note>")
+    @as("DocumentType")
     documentType: option<documentType>,
     @ocaml.doc("<p>An optional field specifying the version of the artifact you are creating with the document.
    For example, \"Release 12, Update 6\". This value is unique across all versions of a document, and
-   cannot be changed.</p>")
+   can't be changed.</p>")
     @as("VersionName")
     versionName: option<documentVersionName>,
-    @ocaml.doc("<p>An optional field where you can specify a friendly name for the Systems Manager document. This value
-   can differ for each version of the document. You can update this value at a later time using the
-    <a>UpdateDocument</a> action.</p>")
+    @ocaml.doc("<p>An optional field where you can specify a friendly name for the SSM document. This value can
+   differ for each version of the document. You can update this value at a later time using the
+    <a>UpdateDocument</a> operation.</p>")
     @as("DisplayName")
     displayName: option<documentDisplayName>,
-    @ocaml.doc("<p>A name for the Systems Manager document.</p>
+    @ocaml.doc("<p>A name for the SSM document.</p>
          <important>
-            <p>You can't use the following strings as document name prefixes. These are reserved by AWS
+            <p>You can't use the following strings as document name prefixes. These are reserved by Amazon Web Services
     for use as document name prefixes:</p>
             <ul>
                <li>
@@ -9087,40 +9874,37 @@ module CreateDocument = {
     @as("Name")
     name: documentName,
     @ocaml.doc(
-      "<p>A list of key and value pairs that describe attachments to a version of a document.</p>"
+      "<p>A list of key-value pairs that describe attachments to a version of a document.</p>"
     )
     @as("Attachments")
     attachments: option<attachmentsSourceList>,
-    @ocaml.doc("<p>A list of SSM documents required by a document. This parameter is used exclusively by AWS
+    @ocaml.doc("<p>A list of SSM documents required by a document. This parameter is used exclusively by
    AppConfig. When a user creates an AppConfig configuration in an SSM document, the user must also
    specify a required document for validation purposes. In this case, an
     <code>ApplicationConfiguration</code> document requires an
     <code>ApplicationConfigurationSchema</code> document for validation purposes. For more
-   information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/appconfig.html\">AWS AppConfig</a> in the
-    <i>AWS Systems Manager User Guide</i>.</p>")
+   information, see <a href=\"https://docs.aws.amazon.com/appconfig/latest/userguide/what-is-appconfig.html\">What is AppConfig?</a> in the
+    <i>AppConfig User Guide</i>.</p>")
     @as("Requires")
     requires: option<documentRequiresList>,
     @ocaml.doc("<p>The content for the new SSM document in JSON or YAML format. We recommend storing the
    contents for your new document in an external JSON or YAML file and referencing the file in a
    command.</p>
-         <p>For examples, see the following topics in the <i>AWS Systems Manager User Guide</i>.</p>
+         <p>For examples, see the following topics in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>
          <ul>
             <li>
                <p>
-                  <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/create-ssm-document-api.html\">Create an SSM document
-      (AWS API)</a>
+                  <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/create-ssm-document-api.html\">Create an SSM document (Amazon Web Services API)</a>
                </p>
             </li>
             <li>
                <p>
-                  <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/create-ssm-document-cli.html\">Create an SSM document
-      (AWS CLI)</a>
+                  <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/create-ssm-document-cli.html\">Create an SSM document (Amazon Web Services CLI)</a>
                </p>
             </li>
             <li>
                <p>
-                  <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/create-ssm-document-api.html\">Create an SSM document
-      (API)</a>
+                  <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/create-ssm-document-api.html\">Create an SSM document (API)</a>
                </p>
             </li>
          </ul>")
@@ -9128,7 +9912,7 @@ module CreateDocument = {
     content: documentContent,
   }
   type response = {
-    @ocaml.doc("<p>Information about the Systems Manager document.</p>") @as("DocumentDescription")
+    @ocaml.doc("<p>Information about the SSM document.</p>") @as("DocumentDescription")
     documentDescription: option<documentDescription>,
   }
   @module("@aws-sdk/client-ssm") @new external new: request => t = "CreateDocumentCommand"
@@ -9173,7 +9957,7 @@ module UpdateResourceDataSync = {
     @ocaml.doc("<p>The name of the resource data sync you want to update.</p>") @as("SyncName")
     syncName: resourceDataSyncName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ssm") @new external new: request => t = "UpdateResourceDataSyncCommand"
   let make = (~syncSource, ~syncType, ~syncName, ()) =>
     new({syncSource: syncSource, syncType: syncType, syncName: syncName})
@@ -9183,9 +9967,36 @@ module UpdateResourceDataSync = {
 module UpdateMaintenanceWindowTask = {
   type t
   type request = {
-    @ocaml.doc("<p>If True, then all fields that are required by the RegisterTaskWithMaintenanceWindow action
-   are also required for this API request. Optional fields that are not specified are set to
-   null.</p>")
+    @ocaml.doc("<p>Indicates whether tasks should continue to run after the cutoff time specified in the
+   maintenance windows is reached. </p>
+         <ul>
+            <li>
+               <p>
+                  <code>CONTINUE_TASK</code>: When the cutoff time is reached, any tasks that are running
+     continue. The default value.</p>
+            </li>
+            <li>
+               <p>
+                  <code>CANCEL_TASK</code>:</p>
+               <ul>
+                  <li>
+                     <p>For Automation, Lambda, Step Functions tasks: When the cutoff
+       time is reached, any task invocations that are already running continue, but no new task
+       invocations are started.</p>
+                  </li>
+                  <li>
+                     <p>For Run Command tasks: When the cutoff time is reached, the system sends a <a>CancelCommand</a> operation that attempts to cancel the command associated with the
+       task. However, there is no guarantee that the command will be terminated and the underlying
+       process stopped.</p>
+                  </li>
+               </ul>
+               <p>The status for tasks that are not completed is <code>TIMED_OUT</code>.</p>
+            </li>
+         </ul>")
+    @as("CutoffBehavior")
+    cutoffBehavior: option<maintenanceWindowTaskCutoffBehavior>,
+    @ocaml.doc("<p>If True, then all fields that are required by the <a>RegisterTaskWithMaintenanceWindow</a> operation are also required for this API request.
+   Optional fields that aren't specified are set to null.</p>")
     @as("Replace")
     replace: option<boolean_>,
     @ocaml.doc("<p>The new task description to specify.</p>") @as("Description")
@@ -9195,9 +10006,9 @@ module UpdateMaintenanceWindowTask = {
     @ocaml.doc("<p>The new logging location in Amazon S3 to specify.</p>
          <note>
             <p>
-               <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the
+               <code>LoggingInfo</code> has been deprecated. To specify an Amazon Simple Storage Service (Amazon S3) bucket to contain logs, instead use the
       <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure.
-      For information about how Systems Manager handles these options for the supported maintenance
+      For information about how Amazon Web Services Systems Manager handles these options for the supported maintenance
       window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p>
          </note>")
     @as("LoggingInfo")
@@ -9205,20 +10016,24 @@ module UpdateMaintenanceWindowTask = {
     @ocaml.doc("<p>The new <code>MaxErrors</code> value to specify. <code>MaxErrors</code> is the maximum
    number of errors that are allowed before the task stops being scheduled.</p>
          <note>
-            <p>For maintenance window tasks without a target specified, you cannot supply a value for this
-    option. Instead, the system inserts a placeholder value of <code>1</code>, which may be reported
-    in the response to this command. This value does not affect the running of your task and can be
-    ignored.</p>
+            <p>Although this element is listed as \"Required: No\", a value can be omitted only when you are
+    registering or updating a <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html\">targetless
+     task</a> You must provide a value in all other cases.</p>
+            <p>For maintenance window tasks without a target specified, you can't supply a value for this
+    option. Instead, the system inserts a placeholder value of <code>1</code>. This value doesn't
+    affect the running of your task.</p>
          </note>")
     @as("MaxErrors")
     maxErrors: option<maxErrors>,
     @ocaml.doc("<p>The new <code>MaxConcurrency</code> value you want to specify. <code>MaxConcurrency</code>
-   is the number of targets that are allowed to run this task in parallel.</p>
+   is the number of targets that are allowed to run this task, in parallel.</p>
          <note>
-            <p>For maintenance window tasks without a target specified, you cannot supply a value for this
-    option. Instead, the system inserts a placeholder value of <code>1</code>, which may be reported
-    in the response to this command. This value does not affect the running of your task and can be
-    ignored.</p>
+            <p>Although this element is listed as \"Required: No\", a value can be omitted only when you are
+    registering or updating a <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html\">targetless
+     task</a> You must provide a value in all other cases.</p>
+            <p>For maintenance window tasks without a target specified, you can't supply a value for this
+    option. Instead, the system inserts a placeholder value of <code>1</code>. This value doesn't
+    affect the running of your task.</p>
          </note>")
     @as("MaxConcurrency")
     maxConcurrency: option<maxConcurrency>,
@@ -9231,7 +10046,7 @@ module UpdateMaintenanceWindowTask = {
          <important>
             <p>When you update a maintenance window task that has options specified in
      <code>TaskInvocationParameters</code>, you must provide again all the
-     <code>TaskInvocationParameters</code> values that you want to retain. The values you do not
+     <code>TaskInvocationParameters</code> values that you want to retain. The values you don't
     specify again are removed. For example, suppose that when you registered a Run Command task, you
     specified <code>TaskInvocationParameters</code> values for <code>Comment</code>,
      <code>NotificationConfig</code>, and <code>OutputS3BucketName</code>. If you update the
@@ -9253,11 +10068,11 @@ module UpdateMaintenanceWindowTask = {
          <p>Value: an array of strings, each string is between 1 and 255 characters</p>")
     @as("TaskParameters")
     taskParameters: option<maintenanceWindowTaskParameters>,
-    @ocaml.doc("<p>The ARN of the IAM service role for Systems Manager to assume when running a 
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the IAM service role for Amazon Web Services Systems Manager to assume when running a 
   maintenance window task. If you do not specify a service role ARN, Systems Manager uses your account's 
   service-linked role.  If no service-linked role for Systems Manager exists in your account, it is created when you run 
   <code>RegisterTaskWithMaintenanceWindow</code>.</p>
-         <p>For more information, see the following topics in the in the <i>AWS Systems Manager User Guide</i>:</p>
+         <p>For more information, see the following topics in the in the <i>Amazon Web Services Systems Manager User Guide</i>:</p>
          <ul>
             <li>
                <p>
@@ -9276,16 +10091,16 @@ module UpdateMaintenanceWindowTask = {
     serviceRoleArn: option<serviceRole>,
     @ocaml.doc("<p>The task ARN to modify.</p>") @as("TaskArn")
     taskArn: option<maintenanceWindowTaskArn>,
-    @ocaml.doc("<p>The targets (either instances or tags) to modify. Instances are specified using
-   Key=instanceids,Values=instanceID_1,instanceID_2. Tags are specified using
-   Key=tag_name,Values=tag_value. </p>
+    @ocaml.doc("<p>The targets (either managed nodes or tags) to modify. Managed nodes are specified using the
+   format <code>Key=instanceids,Values=instanceID_1,instanceID_2</code>. Tags are specified using
+   the format <code> Key=tag_name,Values=tag_value</code>. </p>
          <note>
             <p>One or more targets must be specified for maintenance window Run Command-type tasks.
     Depending on the task, targets are optional for other maintenance window task types (Automation,
-    AWS Lambda, and AWS Step Functions). For more information about running tasks that do not
-    specify targets, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html\">Registering
+     Lambda, and Step Functions). For more information about running tasks
+    that don't specify targets, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html\">Registering
      maintenance window tasks without targets</a> in the
-    <i>AWS Systems Manager User Guide</i>.</p>
+    <i>Amazon Web Services Systems Manager User Guide</i>.</p>
          </note>")
     @as("Targets")
     targets: option<targets>,
@@ -9295,21 +10110,26 @@ module UpdateMaintenanceWindowTask = {
     windowId: maintenanceWindowId,
   }
   type response = {
+    @ocaml.doc("<p>The specification for whether tasks should continue to run after the cutoff time specified
+   in the maintenance windows is reached. </p>")
+    @as("CutoffBehavior")
+    cutoffBehavior: option<maintenanceWindowTaskCutoffBehavior>,
     @ocaml.doc("<p>The updated task description.</p>") @as("Description")
     description: option<maintenanceWindowDescription>,
     @ocaml.doc("<p>The updated task name.</p>") @as("Name") name: option<maintenanceWindowName>,
     @ocaml.doc("<p>The updated logging information in Amazon S3.</p>
          <note>
             <p>
-               <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the
+               <code>LoggingInfo</code> has been deprecated. To specify an Amazon Simple Storage Service (Amazon S3) bucket to contain logs, instead use the
       <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure.
-      For information about how Systems Manager handles these options for the supported maintenance
+      For information about how Amazon Web Services Systems Manager handles these options for the supported maintenance
       window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p>
          </note>")
     @as("LoggingInfo")
     loggingInfo: option<loggingInfo>,
-    @ocaml.doc("<p>The updated MaxErrors value.</p>") @as("MaxErrors") maxErrors: option<maxErrors>,
-    @ocaml.doc("<p>The updated MaxConcurrency value.</p>") @as("MaxConcurrency")
+    @ocaml.doc("<p>The updated <code>MaxErrors</code> value.</p>") @as("MaxErrors")
+    maxErrors: option<maxErrors>,
+    @ocaml.doc("<p>The updated <code>MaxConcurrency</code> value.</p>") @as("MaxConcurrency")
     maxConcurrency: option<maxConcurrency>,
     @ocaml.doc("<p>The updated priority value.</p>") @as("Priority")
     priority: option<maintenanceWindowTaskPriority>,
@@ -9325,8 +10145,8 @@ module UpdateMaintenanceWindowTask = {
          </note>")
     @as("TaskParameters")
     taskParameters: option<maintenanceWindowTaskParameters>,
-    @ocaml.doc("<p>The ARN of the IAM service role to use to publish Amazon Simple Notification Service (Amazon SNS) notifications for
-   maintenance window Run Command tasks.</p>")
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) service role to use to publish Amazon Simple Notification Service 
+(Amazon SNS) notifications for maintenance window Run Command tasks.</p>")
     @as("ServiceRoleArn")
     serviceRoleArn: option<serviceRole>,
     @ocaml.doc("<p>The updated task ARN value.</p>") @as("TaskArn")
@@ -9342,6 +10162,7 @@ module UpdateMaintenanceWindowTask = {
   let make = (
     ~windowTaskId,
     ~windowId,
+    ~cutoffBehavior=?,
     ~replace=?,
     ~description=?,
     ~name=?,
@@ -9357,6 +10178,7 @@ module UpdateMaintenanceWindowTask = {
     (),
   ) =>
     new({
+      cutoffBehavior: cutoffBehavior,
       replace: replace,
       description: description,
       name: name,
@@ -9380,8 +10202,8 @@ module UpdateAssociationStatus = {
   type request = {
     @ocaml.doc("<p>The association status.</p>") @as("AssociationStatus")
     associationStatus: associationStatus,
-    @ocaml.doc("<p>The ID of the instance.</p>") @as("InstanceId") instanceId: instanceId,
-    @ocaml.doc("<p>The name of the Systems Manager document.</p>") @as("Name") name: documentARN,
+    @ocaml.doc("<p>The managed node ID.</p>") @as("InstanceId") instanceId: instanceId,
+    @ocaml.doc("<p>The name of the SSM document.</p>") @as("Name") name: documentARN,
   }
   type response = {
     @ocaml.doc("<p>Information about the association.</p>") @as("AssociationDescription")
@@ -9396,25 +10218,33 @@ module UpdateAssociationStatus = {
 module UpdateAssociation = {
   type t
   type request = {
-    @ocaml.doc("<p>A location is a combination of AWS Regions and AWS accounts where you want to run the
+    @ocaml.doc("<p>A location is a combination of Amazon Web Services Regions and Amazon Web Services accounts where you want to run the
    association. Use this action to update an association in multiple Regions and multiple
    accounts.</p>")
     @as("TargetLocations")
     targetLocations: option<targetLocations>,
-    @ocaml.doc("<p>The names or Amazon Resource Names (ARNs) of the Systems Manager Change Calendar type
-   documents you want to gate your associations under. The associations only run when that Change
-   Calendar is open. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar\">AWS Systems Manager Change
+    @ocaml.doc("<p>The names or Amazon Resource Names (ARNs) of the Change Calendar type documents you want to
+   gate your associations under. The associations only run when that change calendar is open. For
+   more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar\">Amazon Web Services Systems Manager Change
     Calendar</a>.</p>")
     @as("CalendarNames")
     calendarNames: option<calendarNameOrARNList>,
     @ocaml.doc("<p>By default, when you update an association, the system runs it immediately after it is
    updated and then according to the schedule you specified. Specify this option if you don't want
-   an association to run immediately after you update it. This parameter is not supported for rate
+   an association to run immediately after you update it. This parameter isn't supported for rate
    expressions.</p>
-         <p>Also, if you specified this option when you created the association, you can reset it. To do
-   so, specify the <code>no-apply-only-at-cron-interval</code> parameter when you update the
-   association from the command line. This parameter forces the association to run immediately after
-   updating it and according to the interval specified.</p>")
+
+         <p>If you chose this option when you created an association and later you edit that association
+   or you make changes to the SSM document on which that association is based (by using the
+   Documents page in the console), State Manager applies the association at the next specified cron
+   interval. For example, if you chose the <code>Latest</code> version of an SSM document when you
+   created an association and you edit the association by choosing a different document version on
+   the Documents page, State Manager applies the association at the next specified cron interval if
+   you previously selected this option. If this option wasn't selected, State Manager immediately
+   runs the association.</p>
+         <p>You can reset this option. To do so, specify the <code>no-apply-only-at-cron-interval</code>
+   parameter when you update the association from the command line. This parameter forces the
+   association to run immediately after updating it and according to the interval specified.</p>")
     @as("ApplyOnlyAtCronInterval")
     applyOnlyAtCronInterval: option<applyOnlyAtCronInterval>,
     @ocaml.doc("<p>The mode for generating association compliance. You can specify <code>AUTO</code> or
@@ -9423,8 +10253,9 @@ module UpdateAssociation = {
    then the association is <code>COMPLIANT</code>. If the association execution doesn't run
    successfully, the association is <code>NON-COMPLIANT</code>.</p>
          <p>In <code>MANUAL</code> mode, you must specify the <code>AssociationId</code> as a parameter
-   for the <a>PutComplianceItems</a> API action. In this case, compliance data is not
-   managed by State Manager. It is managed by your direct call to the <a>PutComplianceItems</a> API action.</p>
+   for the <a>PutComplianceItems</a> API operation. In this case, compliance data isn't
+   managed by State Manager, a capability of Amazon Web Services Systems Manager. It is managed by your direct call to the
+    <a>PutComplianceItems</a> API operation.</p>
          <p>By default, all associations use <code>AUTO</code> mode.</p>")
     @as("SyncCompliance")
     syncCompliance: option<associationSyncCompliance>,
@@ -9433,10 +10264,10 @@ module UpdateAssociation = {
     @ocaml.doc("<p>The maximum number of targets allowed to run the association at the same time. You can
    specify a number, for example 10, or a percentage of the target set, for example 10%. The default
    value is 100%, which means all targets run the association at the same time.</p>
-         <p>If a new instance starts and attempts to run an association while Systems Manager is running
-   MaxConcurrency associations, the association is allowed to run. During the next association
-   interval, the new instance will process its association within the limit specified for
-   MaxConcurrency.</p>")
+         <p>If a new managed node starts and attempts to run an association while Systems Manager is running
+    <code>MaxConcurrency</code> associations, the association is allowed to run. During the next
+   association interval, the new managed node will process its association within the limit
+   specified for <code>MaxConcurrency</code>.</p>")
     @as("MaxConcurrency")
     maxConcurrency: option<maxConcurrency>,
     @ocaml.doc("<p>The number of errors that are allowed before the system stops sending requests to run the
@@ -9444,16 +10275,17 @@ module UpdateAssociation = {
    example 10, or a percentage of the target set, for example 10%. If you specify 3, for example,
    the system stops sending requests when the fourth error is received. If you specify 0, then the
    system stops sending requests after the first error is returned. If you run an association on 50
-   instances and set MaxError to 10%, then the system stops sending the request when the sixth error
-   is received.</p>
-         <p>Executions that are already running an association when MaxErrors is reached are allowed to
-   complete, but some of these executions may fail as well. If you need to ensure that there won't
-   be more than max-errors failed executions, set MaxConcurrency to 1 so that executions proceed one
-   at a time.</p>")
+   managed nodes and set <code>MaxError</code> to 10%, then the system stops sending the request
+   when the sixth error is received.</p>
+         <p>Executions that are already running an association when <code>MaxErrors</code> is reached
+   are allowed to complete, but some of these executions may fail as well. If you need to ensure
+   that there won't be more than max-errors failed executions, set <code>MaxConcurrency</code> to 1
+   so that executions proceed one at a time.</p>")
     @as("MaxErrors")
     maxErrors: option<maxErrors>,
-    @ocaml.doc("<p>Specify the target for the association. This target is required for associations that use an
-   Automation document and target resources by using rate controls.</p>")
+    @ocaml.doc("<p>Choose the parameter that will define how your automation will branch out. This target is
+   required for associations that use an Automation runbook and target resources by using rate
+   controls. Automation is a capability of Amazon Web Services Systems Manager.</p>")
     @as("AutomationTargetParameterName")
     automationTargetParameterName: option<automationTargetParameterName>,
     @ocaml.doc("<p>This parameter is provided for concurrency control purposes. You must specify the latest
@@ -9464,12 +10296,12 @@ module UpdateAssociation = {
     @ocaml.doc("<p>The name of the association that you want to update.</p>") @as("AssociationName")
     associationName: option<associationName>,
     @ocaml.doc("<p>The targets of the association.</p>") @as("Targets") targets: option<targets>,
-    @ocaml.doc("<p>The name of the SSM document that contains the configuration information for the instance.
-   You can specify Command or Automation documents.</p>
-         <p>You can specify AWS-predefined documents, documents you created, or a document that is
+    @ocaml.doc("<p>The name of the SSM Command document or Automation runbook that contains the configuration
+   information for the managed node.</p>
+         <p>You can specify Amazon Web Services-predefined documents, documents you created, or a document that is
    shared with you from another account.</p>
-         <p>For SSM documents that are shared with you from other AWS accounts, you must specify the
-   complete SSM document ARN, in the following format:</p>
+         <p>For Systems Manager document (SSM document) that are shared with you from other Amazon Web Services accounts, you
+   must specify the complete SSM document ARN, in the following format:</p>
          <p>
             <code>arn:aws:ssm:<i>region</i>:<i>account-id</i>:document/<i>document-name</i>
             </code>
@@ -9478,8 +10310,8 @@ module UpdateAssociation = {
          <p>
             <code>arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document</code>
          </p>
-         <p>For AWS-predefined documents and SSM documents you created in your account, you only need to
-   specify the document name. For example, <code>AWS-ApplyPatchBaseline</code> or
+         <p>For Amazon Web Services-predefined documents and SSM documents you created in your account, you only need
+   to specify the document name. For example, <code>AWS-ApplyPatchBaseline</code> or
     <code>My-Document</code>.</p>")
     @as("Name")
     name: option<documentARN>,
@@ -9491,11 +10323,19 @@ module UpdateAssociation = {
     )
     @as("ScheduleExpression")
     scheduleExpression: option<scheduleExpression>,
-    @ocaml.doc("<p>The document version you want update for the association. </p>")
+    @ocaml.doc("<p>The document version you want update for the association. </p>
+         <important>
+            <p>State Manager doesn't support running associations that use a new version of a document if
+    that document is shared from another account. State Manager always runs the <code>default</code>
+    version of a document if shared from another account, even though the Systems Manager console shows that a
+    new version was processed. If you want to run an association using a new version of a document
+    shared form another account, you must set the document version to <code>default</code>.</p>
+         </important>")
     @as("DocumentVersion")
     documentVersion: option<documentVersion>,
     @ocaml.doc("<p>The parameters you want to update for the association. If you create a parameter using
-   Parameter Store, you can reference the parameter using {{ssm:parameter-name}}</p>")
+   Parameter Store, a capability of Amazon Web Services Systems Manager, you can reference the parameter using
+    <code>{{ssm:parameter-name}}</code>.</p>")
     @as("Parameters")
     parameters: option<parameters>,
     @ocaml.doc("<p>The ID of the association you want to update. </p>") @as("AssociationId")
@@ -9552,28 +10392,27 @@ module UpdateAssociation = {
 module SendCommand = {
   type t
   type request = {
-    @ocaml.doc(
-      "<p>Enables Systems Manager to send Run Command output to Amazon CloudWatch Logs. </p>"
-    )
+    @ocaml.doc("<p>Enables Amazon Web Services Systems Manager to send Run Command output to Amazon CloudWatch Logs. Run Command is a
+   capability of Amazon Web Services Systems Manager.</p>")
     @as("CloudWatchOutputConfig")
     cloudWatchOutputConfig: option<cloudWatchOutputConfig>,
     @ocaml.doc("<p>Configurations for sending notifications.</p>") @as("NotificationConfig")
     notificationConfig: option<notificationConfig>,
-    @ocaml.doc("<p>The ARN of the IAM service role to use to publish Amazon Simple Notification Service (Amazon SNS) notifications for Run
-   Command commands.</p>")
+    @ocaml.doc("<p>The ARN of the Identity and Access Management (IAM) service role to use to publish
+    Amazon Simple Notification Service (Amazon SNS) notifications for Run Command commands.</p>")
     @as("ServiceRoleArn")
     serviceRoleArn: option<serviceRole>,
     @ocaml.doc("<p>The maximum number of errors allowed without the command failing. When the command fails one
-   more time beyond the value of MaxErrors, the systems stops sending the command to additional
-   targets. You can specify a number like 10 or a percentage like 10%. The default value is 0. For
-   more information about how to use MaxErrors, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-maxerrors\">Using
-    error controls</a> in the <i>AWS Systems Manager User Guide</i>.</p>")
+   more time beyond the value of <code>MaxErrors</code>, the systems stops sending the command to
+   additional targets. You can specify a number like 10 or a percentage like 10%. The default value
+   is <code>0</code>. For more information about how to use <code>MaxErrors</code>, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-maxerrors\">Using
+    error controls</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>")
     @as("MaxErrors")
     maxErrors: option<maxErrors>,
-    @ocaml.doc("<p>(Optional) The maximum number of instances that are allowed to run the command at the same
-   time. You can specify a number such as 10 or a percentage such as 10%. The default value is 50.
-   For more information about how to use MaxConcurrency, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-velocity\">Using
-    concurrency controls</a> in the <i>AWS Systems Manager User Guide</i>.</p>")
+    @ocaml.doc("<p>(Optional) The maximum number of managed nodes that are allowed to run the command at the
+   same time. You can specify a number such as 10 or a percentage such as 10%. The default value is
+    <code>50</code>. For more information about how to use <code>MaxConcurrency</code>, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-velocity\">Using
+    concurrency controls</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>")
     @as("MaxConcurrency")
     maxConcurrency: option<maxConcurrency>,
     @ocaml.doc(
@@ -9587,7 +10426,7 @@ module SendCommand = {
     @as("OutputS3BucketName")
     outputS3BucketName: option<s3BucketName>,
     @ocaml.doc("<p>(Deprecated) You can no longer specify this parameter. The system ignores it. Instead, Systems Manager
-   automatically determines the Region of the S3 bucket.</p>")
+   automatically determines the Amazon Web Services Region of the S3 bucket.</p>")
     @as("OutputS3Region")
     outputS3Region: option<s3Region>,
     @ocaml.doc("<p>The required and optional parameters specified in the document being run.</p>")
@@ -9597,8 +10436,9 @@ module SendCommand = {
    command should do.</p>")
     @as("Comment")
     comment: option<comment>,
-    @ocaml.doc("<p>If this time is reached and the command has not already started running, it will not
-   run.</p>")
+    @ocaml.doc(
+      "<p>If this time is reached and the command hasn't already started running, it won't run.</p>"
+    )
     @as("TimeoutSeconds")
     timeoutSeconds: option<timeoutSeconds>,
     @ocaml.doc("<p>Sha256 or Sha1.</p>
@@ -9614,41 +10454,45 @@ module SendCommand = {
     @as("DocumentHash")
     documentHash: option<documentHash>,
     @ocaml.doc("<p>The SSM document version to use in the request. You can specify $DEFAULT, $LATEST, or a
-   specific version number. If you run commands by using the AWS CLI, then you must escape the first
-   two options by using a backslash. If you specify a version number, then you don't need to use the
-   backslash. For example:</p>
+   specific version number. If you run commands by using the Command Line Interface (Amazon Web Services CLI), then
+   you must escape the first two options by using a backslash. If you specify a version number, then
+   you don't need to use the backslash. For example:</p>
          <p>--document-version \"\\$DEFAULT\"</p>
          <p>--document-version \"\\$LATEST\"</p>
          <p>--document-version \"3\"</p>")
     @as("DocumentVersion")
     documentVersion: option<documentVersion>,
-    @ocaml.doc("<p>The name of the Systems Manager document to run. This can be a public document or a custom document.
-   To run a shared document belonging to another account, specify the document ARN. For more
-   information about how to use shared documents, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/ssm-using-shared.html\">Using shared SSM documents</a>
-   in the <i>AWS Systems Manager User Guide</i>.</p>")
+    @ocaml.doc("<p>The name of the Amazon Web Services Systems Manager document (SSM document) to run. This can be a public document or a
+   custom document. To run a shared document belonging to another account, specify the document
+   Amazon Resource Name (ARN). For more information about how to use shared documents, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/ssm-using-shared.html\">Using shared
+    SSM documents</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>
+         <note>
+            <p>If you specify a document name or ARN that hasn't been shared with your account, you
+    receive an <code>InvalidDocument</code> error. </p>
+         </note>")
     @as("DocumentName")
     documentName: documentARN,
-    @ocaml.doc("<p>An array of search criteria that targets instances using a <code>Key,Value</code>
+    @ocaml.doc("<p>An array of search criteria that targets managed nodes using a <code>Key,Value</code>
    combination that you specify. Specifying targets is most useful when you want to send a command
-   to a large number of instances at once. Using <code>Targets</code>, which accepts tag key-value
-   pairs to identify instances, you can send a command to tens, hundreds, or thousands of instances
-   at once.</p>
-         <p>To send a command to a smaller number of instances, you can use the <code>InstanceIds</code>
-   option instead.</p>
+   to a large number of managed nodes at once. Using <code>Targets</code>, which accepts tag
+   key-value pairs to identify managed nodes, you can send a command to tens, hundreds, or thousands
+   of nodes at once.</p>
+         <p>To send a command to a smaller number of managed nodes, you can use the
+    <code>InstanceIds</code> option instead.</p>
          <p>For more information about how to use targets, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html\">Sending commands to a
-    fleet</a> in the <i>AWS Systems Manager User Guide</i>.</p>")
+    fleet</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>")
     @as("Targets")
     targets: option<targets>,
-    @ocaml.doc("<p>The IDs of the instances where the command should run. Specifying instance IDs is most
-   useful when you are targeting a limited number of instances, though you can specify up to 50
-   IDs.</p>
-         <p>To target a larger number of instances, or if you prefer not to list individual instance
+    @ocaml.doc("<p>The IDs of the managed nodes where the command should run. Specifying managed node IDs is
+   most useful when you are targeting a limited number of managed nodes, though you can specify up
+   to 50 IDs.</p>
+         <p>To target a larger number of managed nodes, or if you prefer not to list individual node
    IDs, we recommend using the <code>Targets</code> option instead. Using <code>Targets</code>,
-   which accepts tag key-value pairs to identify the instances to send commands to, you can a send
-   command to tens, hundreds, or thousands of instances at once.</p>
+   which accepts tag key-value pairs to identify the managed nodes to send commands to, you can a
+   send command to tens, hundreds, or thousands of nodes at once.</p>
          <p>For more information about how to use targets, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html\">Using targets and rate
     controls to send commands to a fleet</a> in the
-   <i>AWS Systems Manager User Guide</i>.</p>")
+   <i>Amazon Web Services Systems Manager User Guide</i>.</p>")
     @as("InstanceIds")
     instanceIds: option<instanceIdList>,
   }
@@ -9704,34 +10548,69 @@ module SendCommand = {
 module RegisterTaskWithMaintenanceWindow = {
   type t
   type request = {
+    @ocaml.doc("<p>Indicates whether tasks should continue to run after the cutoff time specified in the
+   maintenance windows is reached. </p>
+         <ul>
+            <li>
+               <p>
+                  <code>CONTINUE_TASK</code>: When the cutoff time is reached, any tasks that are running
+     continue. The default value.</p>
+            </li>
+            <li>
+               <p>
+                  <code>CANCEL_TASK</code>:</p>
+               <ul>
+                  <li>
+                     <p>For Automation, Lambda, Step Functions tasks: When the cutoff
+       time is reached, any task invocations that are already running continue, but no new task
+       invocations are started.</p>
+                  </li>
+                  <li>
+                     <p>For Run Command tasks: When the cutoff time is reached, the system sends a <a>CancelCommand</a> operation that attempts to cancel the command associated with the
+       task. However, there is no guarantee that the command will be terminated and the underlying
+       process stopped.</p>
+                  </li>
+               </ul>
+               <p>The status for tasks that are not completed is <code>TIMED_OUT</code>.</p>
+            </li>
+         </ul>")
+    @as("CutoffBehavior")
+    cutoffBehavior: option<maintenanceWindowTaskCutoffBehavior>,
     @ocaml.doc("<p>User-provided idempotency token.</p>") @as("ClientToken")
     clientToken: option<clientToken>,
     @ocaml.doc("<p>An optional description for the task.</p>") @as("Description")
     description: option<maintenanceWindowDescription>,
     @ocaml.doc("<p>An optional name for the task.</p>") @as("Name")
     name: option<maintenanceWindowName>,
-    @ocaml.doc("<p>A structure containing information about an S3 bucket to write instance-level logs to. </p>
+    @ocaml.doc("<p>A structure containing information about an Amazon Simple Storage Service (Amazon S3) bucket
+   to write managed node-level logs to. </p>
          <note>
             <p>
-               <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the
+               <code>LoggingInfo</code> has been deprecated. To specify an Amazon Simple Storage Service (Amazon S3) bucket to contain logs, instead use the
       <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure.
-      For information about how Systems Manager handles these options for the supported maintenance
+      For information about how Amazon Web Services Systems Manager handles these options for the supported maintenance
       window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p>
          </note>")
     @as("LoggingInfo")
     loggingInfo: option<loggingInfo>,
     @ocaml.doc("<p>The maximum number of errors allowed before this task stops being scheduled.</p>
          <note>
-            <p>For maintenance window tasks without a target specified, you cannot supply a value for this
-    option. Instead, the system inserts a placeholder value of <code>1</code>. This value does not
+            <p>Although this element is listed as \"Required: No\", a value can be omitted only when you are
+    registering or updating a <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html\">targetless
+     task</a> You must provide a value in all other cases.</p>
+            <p>For maintenance window tasks without a target specified, you can't supply a value for this
+    option. Instead, the system inserts a placeholder value of <code>1</code>. This value doesn't
     affect the running of your task.</p>
          </note>")
     @as("MaxErrors")
     maxErrors: option<maxErrors>,
-    @ocaml.doc("<p>The maximum number of targets this task can be run for in parallel.</p>
+    @ocaml.doc("<p>The maximum number of targets this task can be run for, in parallel.</p>
          <note>
-            <p>For maintenance window tasks without a target specified, you cannot supply a value for this
-    option. Instead, the system inserts a placeholder value of <code>1</code>. This value does not
+            <p>Although this element is listed as \"Required: No\", a value can be omitted only when you are
+    registering or updating a <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html\">targetless
+     task</a> You must provide a value in all other cases.</p>
+            <p>For maintenance window tasks without a target specified, you can't supply a value for this
+    option. Instead, the system inserts a placeholder value of <code>1</code>. This value doesn't
     affect the running of your task.</p>
          </note>")
     @as("MaxConcurrency")
@@ -9757,11 +10636,11 @@ module RegisterTaskWithMaintenanceWindow = {
     taskParameters: option<maintenanceWindowTaskParameters>,
     @ocaml.doc("<p>The type of task being registered.</p>") @as("TaskType")
     taskType: maintenanceWindowTaskType,
-    @ocaml.doc("<p>The ARN of the IAM service role for Systems Manager to assume when running a 
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the IAM service role for Amazon Web Services Systems Manager to assume when running a 
   maintenance window task. If you do not specify a service role ARN, Systems Manager uses your account's 
   service-linked role.  If no service-linked role for Systems Manager exists in your account, it is created when you run 
   <code>RegisterTaskWithMaintenanceWindow</code>.</p>
-         <p>For more information, see the following topics in the in the <i>AWS Systems Manager User Guide</i>:</p>
+         <p>For more information, see the following topics in the in the <i>Amazon Web Services Systems Manager User Guide</i>:</p>
          <ul>
             <li>
                <p>
@@ -9780,16 +10659,16 @@ module RegisterTaskWithMaintenanceWindow = {
     serviceRoleArn: option<serviceRole>,
     @ocaml.doc("<p>The ARN of the task to run.</p>") @as("TaskArn")
     taskArn: maintenanceWindowTaskArn,
-    @ocaml.doc("<p>The targets (either instances or maintenance window targets).</p>
+    @ocaml.doc("<p>The targets (either managed nodes or maintenance window targets).</p>
          <note>
             <p>One or more targets must be specified for maintenance window Run Command-type tasks.
     Depending on the task, targets are optional for other maintenance window task types (Automation,
-    AWS Lambda, and AWS Step Functions). For more information about running tasks that do not
-    specify targets, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html\">Registering
+     Lambda, and Step Functions). For more information about running tasks
+    that don't specify targets, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html\">Registering
      maintenance window tasks without targets</a> in the
-    <i>AWS Systems Manager User Guide</i>.</p>
+    <i>Amazon Web Services Systems Manager User Guide</i>.</p>
          </note>
-         <p>Specify instances using the following format: </p>
+         <p>Specify managed nodes using the following format: </p>
          <p>
             <code>Key=InstanceIds,Values=<instance-id-1>,<instance-id-2></code>
          </p>
@@ -9813,6 +10692,7 @@ module RegisterTaskWithMaintenanceWindow = {
     ~taskType,
     ~taskArn,
     ~windowId,
+    ~cutoffBehavior=?,
     ~clientToken=?,
     ~description=?,
     ~name=?,
@@ -9827,6 +10707,7 @@ module RegisterTaskWithMaintenanceWindow = {
     (),
   ) =>
     new({
+      cutoffBehavior: cutoffBehavior,
       clientToken: clientToken,
       description: description,
       name: name,
@@ -9848,10 +10729,10 @@ module RegisterTaskWithMaintenanceWindow = {
 module PutInventory = {
   type t
   type request = {
-    @ocaml.doc("<p>The inventory items that you want to add or update on instances.</p>")
+    @ocaml.doc("<p>The inventory items that you want to add or update on managed nodes.</p>")
     @as("Items")
     items: inventoryItemList,
-    @ocaml.doc("<p>An instance ID where you want to add or update inventory items.</p>")
+    @ocaml.doc("<p>An managed node ID where you want to add or update inventory items.</p>")
     @as("InstanceId")
     instanceId: instanceId,
   }
@@ -9885,9 +10766,9 @@ module ListResourceComplianceSummaries = {
    results.</p>")
     @as("NextToken")
     nextToken: option<nextToken>,
-    @ocaml.doc("<p>A summary count for specified or targeted managed instances. Summary count includes
-   information about compliant and non-compliant State Manager associations, patch status, or custom
-   items according to the filter criteria that you specify. </p>")
+    @ocaml.doc("<p>A summary count for specified or targeted managed nodes. Summary count includes information
+   about compliant and non-compliant State Manager associations, patch status, or custom items
+   according to the filter criteria that you specify. </p>")
     @as("ResourceComplianceSummaryItems")
     resourceComplianceSummaryItems: option<resourceComplianceSummaryItemList>,
   }
@@ -9916,8 +10797,8 @@ module ListDocuments = {
    to return documents you own use <code>Key=Owner,Values=Self</code>. To specify a custom key-value
    pair, use the format <code>Key=tag:tagName,Values=valueName</code>.</p>
          <note>
-            <p>This API action only supports filtering documents by using a single tag key and one or more
-    tag values. For example: <code>Key=tag:tagName,Values=valueName1,valueName2</code>
+            <p>This API operation only supports filtering documents by using a single tag key and one or
+    more tag values. For example: <code>Key=tag:tagName,Values=valueName1,valueName2</code>
             </p>
          </note>")
     @as("Filters")
@@ -9931,7 +10812,7 @@ module ListDocuments = {
    return, the string is empty.</p>")
     @as("NextToken")
     nextToken: option<nextToken>,
-    @ocaml.doc("<p>The names of the Systems Manager documents.</p>") @as("DocumentIdentifiers")
+    @ocaml.doc("<p>The names of the SSM documents.</p>") @as("DocumentIdentifiers")
     documentIdentifiers: option<documentIdentifierList>,
   }
   @module("@aws-sdk/client-ssm") @new external new: request => t = "ListDocumentsCommand"
@@ -9982,7 +10863,7 @@ module ListCommandInvocations = {
   type t
   type request = {
     @ocaml.doc("<p>(Optional) If set this returns the response of the command executions and any command
-   output. The default value is 'false'. </p>")
+   output. The default value is <code>false</code>. </p>")
     @as("Details")
     details: option<boolean_>,
     @ocaml.doc("<p>(Optional) One or more filters. Use a filter to return a more specific list of
@@ -9997,7 +10878,7 @@ module ListCommandInvocations = {
    token that you can specify in a subsequent call to get the next set of results.</p>")
     @as("MaxResults")
     maxResults: option<commandMaxResults>,
-    @ocaml.doc("<p>(Optional) The command execution details for a specific instance ID.</p>")
+    @ocaml.doc("<p>(Optional) The command execution details for a specific managed node ID.</p>")
     @as("InstanceId")
     instanceId: option<instanceId>,
     @ocaml.doc("<p>(Optional) The invocations for a specific command ID.</p>") @as("CommandId")
@@ -10043,8 +10924,8 @@ module GetParameterHistory = {
    can specify in a subsequent call to get the next set of results.</p>")
     @as("MaxResults")
     maxResults: option<maxResults>,
-    @ocaml.doc("<p>Return decrypted values for secure string parameters. This flag is ignored for String and
-   StringList parameter types.</p>")
+    @ocaml.doc("<p>Return decrypted values for secure string parameters. This flag is ignored for
+    <code>String</code> and <code>StringList</code> parameter types.</p>")
     @as("WithDecryption")
     withDecryption: option<boolean_>,
     @ocaml.doc("<p>The name of the parameter for which you want to review history.</p>") @as("Name")
@@ -10074,33 +10955,41 @@ module GetMaintenanceWindowTask = {
     windowId: maintenanceWindowId,
   }
   type response = {
+    @ocaml.doc("<p>The action to take on tasks when the maintenance window cutoff time is reached.
+    <code>CONTINUE_TASK</code> means that tasks continue to run. For Automation, Lambda, Step Functions tasks, <code>CANCEL_TASK</code> means that currently
+   running task invocations continue, but no new task invocations are started. For Run Command
+   tasks, <code>CANCEL_TASK</code> means the system attempts to stop the task by sending a
+    <code>CancelCommand</code> operation.</p>")
+    @as("CutoffBehavior")
+    cutoffBehavior: option<maintenanceWindowTaskCutoffBehavior>,
     @ocaml.doc("<p>The retrieved task description.</p>") @as("Description")
     description: option<maintenanceWindowDescription>,
     @ocaml.doc("<p>The retrieved task name.</p>") @as("Name") name: option<maintenanceWindowName>,
-    @ocaml.doc("<p>The location in Amazon S3 where the task results are logged.</p>
+    @ocaml.doc("<p>The location in Amazon Simple Storage Service (Amazon S3) where the task results are
+   logged.</p>
          <note>
             <p>
-               <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the
+               <code>LoggingInfo</code> has been deprecated. To specify an Amazon Simple Storage Service (Amazon S3) bucket to contain logs, instead use the
       <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure.
-      For information about how Systems Manager handles these options for the supported maintenance
+      For information about how Amazon Web Services Systems Manager handles these options for the supported maintenance
       window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p>
          </note>")
     @as("LoggingInfo")
     loggingInfo: option<loggingInfo>,
     @ocaml.doc("<p>The maximum number of errors allowed before the task stops being scheduled.</p>
          <note>
-            <p>For maintenance window tasks without a target specified, you cannot supply a value for this
+            <p>For maintenance window tasks without a target specified, you can't supply a value for this
     option. Instead, the system inserts a placeholder value of <code>1</code>, which may be reported
-    in the response to this command. This value does not affect the running of your task and can be
+    in the response to this command. This value doesn't affect the running of your task and can be
     ignored.</p>
          </note>")
     @as("MaxErrors")
     maxErrors: option<maxErrors>,
     @ocaml.doc("<p>The maximum number of targets allowed to run this task in parallel.</p>
          <note>
-            <p>For maintenance window tasks without a target specified, you cannot supply a value for this
+            <p>For maintenance window tasks without a target specified, you can't supply a value for this
     option. Instead, the system inserts a placeholder value of <code>1</code>, which may be reported
-    in the response to this command. This value does not affect the running of your task and can be
+    in the response to this command. This value doesn't affect the running of your task and can be
     ignored.</p>
          </note>")
     @as("MaxConcurrency")
@@ -10124,13 +11013,14 @@ module GetMaintenanceWindowTask = {
     taskParameters: option<maintenanceWindowTaskParameters>,
     @ocaml.doc("<p>The type of task to run.</p>") @as("TaskType")
     taskType: option<maintenanceWindowTaskType>,
-    @ocaml.doc("<p>The ARN of the IAM service role to use to publish Amazon Simple Notification Service (Amazon SNS) notifications for
-   maintenance window Run Command tasks.</p>")
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) service role to use to publish Amazon Simple Notification Service 
+(Amazon SNS) notifications for maintenance window Run Command tasks.</p>")
     @as("ServiceRoleArn")
     serviceRoleArn: option<serviceRole>,
-    @ocaml.doc("<p>The resource that the task used during execution. For RUN_COMMAND and AUTOMATION task types,
-   the TaskArn is the Systems Manager Document name/ARN. For LAMBDA tasks, the value is the function name/ARN.
-   For STEP_FUNCTIONS tasks, the value is the state machine ARN.</p>")
+    @ocaml.doc("<p>The resource that the task used during execution. For <code>RUN_COMMAND</code> and
+    <code>AUTOMATION</code> task types, the value of <code>TaskArn</code> is the SSM document
+   name/ARN. For <code>LAMBDA</code> tasks, the value is the function name/ARN. For
+    <code>STEP_FUNCTIONS</code> tasks, the value is the state machine ARN.</p>")
     @as("TaskArn")
     taskArn: option<maintenanceWindowTaskArn>,
     @ocaml.doc("<p>The targets where the task should run.</p>") @as("Targets")
@@ -10161,9 +11051,7 @@ module GetMaintenanceWindowExecutionTask = {
     endTime: option<dateTime>,
     @ocaml.doc("<p>The time the task execution started.</p>") @as("StartTime")
     startTime: option<dateTime>,
-    @ocaml.doc(
-      "<p>The details explaining the Status. Only available for certain status values.</p>"
-    )
+    @ocaml.doc("<p>The details explaining the status. Not available for all status values.</p>")
     @as("StatusDetails")
     statusDetails: option<maintenanceWindowExecutionStatusDetails>,
     @ocaml.doc("<p>The status of the task.</p>") @as("Status")
@@ -10188,15 +11076,23 @@ module GetMaintenanceWindowExecutionTask = {
       types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p>
          </note>
          <p>The map has the following format:</p>
-         <p>Key: string, between 1 and 255 characters</p>
-         <p>Value: an array of strings, each string is between 1 and 255 characters</p>")
+         <ul>
+            <li>
+               <p>
+                  <code>Key</code>: string, between 1 and 255 characters</p>
+            </li>
+            <li>
+               <p>
+                  <code>Value</code>: an array of strings, each between 1 and 255 characters</p>
+            </li>
+         </ul>")
     @as("TaskParameters")
     taskParameters: option<maintenanceWindowTaskParametersList>,
     @ocaml.doc("<p>The type of task that was run.</p>") @as("Type")
     type_: option<maintenanceWindowTaskType>,
     @ocaml.doc("<p>The role that was assumed when running the task.</p>") @as("ServiceRole")
     serviceRole: option<serviceRole>,
-    @ocaml.doc("<p>The ARN of the task that ran.</p>") @as("TaskArn")
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the task that ran.</p>") @as("TaskArn")
     taskArn: option<maintenanceWindowTaskArn>,
     @ocaml.doc("<p>The ID of the specific task execution in the maintenance window task that was
    retrieved.</p>")
@@ -10326,11 +11222,11 @@ module DescribeOpsItems = {
                <p>Operations: Equals</p>
             </li>
             <li>
-               <p>Key: Title</p>
-               <p>Operations: Contains</p>
+               <p>Key: Title*</p>
+               <p>Operations: Equals,Contains</p>
             </li>
             <li>
-               <p>Key: OperationalData*</p>
+               <p>Key: OperationalData**</p>
                <p>Operations: Equals</p>
             </li>
             <li>
@@ -10354,7 +11250,10 @@ module DescribeOpsItems = {
                <p>Operations: Equals</p>
             </li>
          </ul>
-         <p>*If you filter the response by using the OperationalData operator, specify a key-value pair
+         <p>*The Equals operator for Title matches the first 100 characters. If you specify more than
+   100 characters, they system returns an error that the filter value exceeds the length
+   limit.</p>
+         <p>**If you filter the response by using the OperationalData operator, specify a key-value pair
    by using the following JSON format: {\"key\":\"key_name\",\"value\":\"a_value\"}</p>")
     @as("OpsItemFilters")
     opsItemFilters: option<opsItemFilters>,
@@ -10384,14 +11283,14 @@ module DescribeInstanceInformation = {
    can specify in a subsequent call to get the next set of results. </p>")
     @as("MaxResults")
     maxResults: option<maxResultsEC2Compatible>,
-    @ocaml.doc("<p>One or more filters. Use a filter to return a more specific list of instances. You can
+    @ocaml.doc("<p>One or more filters. Use a filter to return a more specific list of managed nodes. You can
    filter based on tags applied to EC2 instances. Use this <code>Filters</code> data type instead of
     <code>InstanceInformationFilterList</code>, which is deprecated.</p>")
     @as("Filters")
     filters: option<instanceInformationStringFilterList>,
     @ocaml.doc("<p>This is a legacy method. We recommend that you don't use this method. Instead, use the
-    <code>Filters</code> data type. <code>Filters</code> enables you to return instance information
-   by filtering based on tags applied to managed instances.</p>
+    <code>Filters</code> data type. <code>Filters</code> enables you to return node information by
+   filtering based on tags applied to managed nodes.</p>
          <note>
             <p>Attempting to use <code>InstanceInformationFilterList</code> and <code>Filters</code> leads
     to an exception error. </p>
@@ -10404,7 +11303,7 @@ module DescribeInstanceInformation = {
    return, the string is empty. </p>")
     @as("NextToken")
     nextToken: option<nextToken>,
-    @ocaml.doc("<p>The instance information list.</p>") @as("InstanceInformationList")
+    @ocaml.doc("<p>The managed node information list.</p>") @as("InstanceInformationList")
     instanceInformationList: option<instanceInformationList>,
   }
   @module("@aws-sdk/client-ssm") @new
@@ -10430,7 +11329,7 @@ module DescribeInstanceAssociationsStatus = {
    can specify in a subsequent call to get the next set of results.</p>")
     @as("MaxResults")
     maxResults: option<maxResults>,
-    @ocaml.doc("<p>The instance IDs for which you want association status information.</p>")
+    @ocaml.doc("<p>The managed node IDs for which you want association status information.</p>")
     @as("InstanceId")
     instanceId: instanceId,
   }
@@ -10483,15 +11382,14 @@ module DescribeAssociation = {
   type request = {
     @ocaml.doc("<p>Specify the association version to retrieve. To view the latest version, either specify
     <code>$LATEST</code> for this parameter, or omit this parameter. To view a list of all
-   associations for an instance, use <a>ListAssociations</a>. To get a list of versions
-   for a specific association, use <a>ListAssociationVersions</a>. </p>")
+   associations for a managed node, use <a>ListAssociations</a>. To get a list of
+   versions for a specific association, use <a>ListAssociationVersions</a>. </p>")
     @as("AssociationVersion")
     associationVersion: option<associationVersion>,
     @ocaml.doc("<p>The association ID for which you want information.</p>") @as("AssociationId")
     associationId: option<associationId>,
-    @ocaml.doc("<p>The instance ID.</p>") @as("InstanceId") instanceId: option<instanceId>,
-    @ocaml.doc("<p>The name of the Systems Manager document.</p>") @as("Name")
-    name: option<documentARN>,
+    @ocaml.doc("<p>The managed node ID.</p>") @as("InstanceId") instanceId: option<instanceId>,
+    @ocaml.doc("<p>The name of the SSM document.</p>") @as("Name") name: option<documentARN>,
   }
   type response = {
     @ocaml.doc("<p>Information about the association.</p>") @as("AssociationDescription")
@@ -10526,7 +11424,8 @@ module DescribeActivations = {
    results. </p>")
     @as("NextToken")
     nextToken: option<nextToken>,
-    @ocaml.doc("<p>A list of activations for your AWS account.</p>") @as("ActivationList")
+    @ocaml.doc("<p>A list of activations for your Amazon Web Services account.</p>")
+    @as("ActivationList")
     activationList: option<activationList>,
   }
   @module("@aws-sdk/client-ssm") @new external new: request => t = "DescribeActivationsCommand"
@@ -10545,9 +11444,9 @@ module CreateResourceDataSync = {
     @ocaml.doc("<p>Specify <code>SyncToDestination</code> to create a resource data sync that synchronizes data
    to an S3 bucket for Inventory. If you specify <code>SyncToDestination</code>, you must provide a
    value for <code>S3Destination</code>. Specify <code>SyncFromSource</code> to synchronize data
-   from a single account and multiple Regions, or multiple AWS accounts and Regions, as listed in
-   AWS Organizations for Explorer. If you specify <code>SyncFromSource</code>, you must provide a value for
-    <code>SyncSource</code>. The default value is <code>SyncToDestination</code>.</p>")
+   from a single account and multiple Regions, or multiple Amazon Web Services accounts and Amazon Web Services Regions, as
+   listed in Organizations for Explorer. If you specify <code>SyncFromSource</code>, you must provide a
+   value for <code>SyncSource</code>. The default value is <code>SyncToDestination</code>.</p>")
     @as("SyncType")
     syncType: option<resourceDataSyncType>,
     @ocaml.doc("<p>Amazon S3 configuration details for the sync. This parameter is required if the
@@ -10557,7 +11456,7 @@ module CreateResourceDataSync = {
     @ocaml.doc("<p>A name for the configuration.</p>") @as("SyncName")
     syncName: resourceDataSyncName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ssm") @new external new: request => t = "CreateResourceDataSyncCommand"
   let make = (~syncName, ~syncSource=?, ~syncType=?, ~s3Destination=?, ()) =>
     new({
@@ -10572,20 +11471,20 @@ module CreateResourceDataSync = {
 module CreateAssociation = {
   type t
   type request = {
-    @ocaml.doc("<p>A location is a combination of AWS Regions and AWS accounts where you want to run the
+    @ocaml.doc("<p>A location is a combination of Amazon Web Services Regions and Amazon Web Services accounts where you want to run the
    association. Use this action to create an association in multiple Regions and multiple
    accounts.</p>")
     @as("TargetLocations")
     targetLocations: option<targetLocations>,
-    @ocaml.doc("<p>The names or Amazon Resource Names (ARNs) of the Systems Manager Change Calendar type
-   documents you want to gate your associations under. The associations only run when that Change
-   Calendar is open. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar\">AWS Systems Manager Change
+    @ocaml.doc("<p>The names or Amazon Resource Names (ARNs) of the Change Calendar type documents you want to
+   gate your associations under. The associations only run when that change calendar is open. For
+   more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar\">Amazon Web Services Systems Manager Change
     Calendar</a>.</p>")
     @as("CalendarNames")
     calendarNames: option<calendarNameOrARNList>,
     @ocaml.doc("<p>By default, when you create a new association, the system runs it immediately after it is
    created and then according to the schedule you specified. Specify this option if you don't want
-   an association to run immediately after you create it. This parameter is not supported for rate
+   an association to run immediately after you create it. This parameter isn't supported for rate
    expressions.</p>")
     @as("ApplyOnlyAtCronInterval")
     applyOnlyAtCronInterval: option<applyOnlyAtCronInterval>,
@@ -10595,8 +11494,8 @@ module CreateAssociation = {
    then the association is <code>COMPLIANT</code>. If the association execution doesn't run
    successfully, the association is <code>NON-COMPLIANT</code>.</p>
          <p>In <code>MANUAL</code> mode, you must specify the <code>AssociationId</code> as a parameter
-   for the <a>PutComplianceItems</a> API action. In this case, compliance data is not
-   managed by State Manager. It is managed by your direct call to the <a>PutComplianceItems</a> API action.</p>
+   for the <a>PutComplianceItems</a> API operation. In this case, compliance data isn't
+   managed by State Manager. It is managed by your direct call to the <a>PutComplianceItems</a> API operation.</p>
          <p>By default, all associations use <code>AUTO</code> mode.</p>")
     @as("SyncCompliance")
     syncCompliance: option<associationSyncCompliance>,
@@ -10605,10 +11504,10 @@ module CreateAssociation = {
     @ocaml.doc("<p>The maximum number of targets allowed to run the association at the same time. You can
    specify a number, for example 10, or a percentage of the target set, for example 10%. The default
    value is 100%, which means all targets run the association at the same time.</p>
-         <p>If a new instance starts and attempts to run an association while Systems Manager is running
-   MaxConcurrency associations, the association is allowed to run. During the next association
-   interval, the new instance will process its association within the limit specified for
-   MaxConcurrency.</p>")
+         <p>If a new managed node starts and attempts to run an association while Systems Manager is running
+    <code>MaxConcurrency</code> associations, the association is allowed to run. During the next
+   association interval, the new managed node will process its association within the limit
+   specified for <code>MaxConcurrency</code>.</p>")
     @as("MaxConcurrency")
     maxConcurrency: option<maxConcurrency>,
     @ocaml.doc("<p>The number of errors that are allowed before the system stops sending requests to run the
@@ -10616,59 +11515,69 @@ module CreateAssociation = {
    example 10, or a percentage of the target set, for example 10%. If you specify 3, for example,
    the system stops sending requests when the fourth error is received. If you specify 0, then the
    system stops sending requests after the first error is returned. If you run an association on 50
-   instances and set MaxError to 10%, then the system stops sending the request when the sixth error
-   is received.</p>
-         <p>Executions that are already running an association when MaxErrors is reached are allowed to
-   complete, but some of these executions may fail as well. If you need to ensure that there won't
-   be more than max-errors failed executions, set MaxConcurrency to 1 so that executions proceed one
-   at a time.</p>")
+   managed nodes and set <code>MaxError</code> to 10%, then the system stops sending the request
+   when the sixth error is received.</p>
+         <p>Executions that are already running an association when <code>MaxErrors</code> is reached
+   are allowed to complete, but some of these executions may fail as well. If you need to ensure
+   that there won't be more than max-errors failed executions, set <code>MaxConcurrency</code> to 1
+   so that executions proceed one at a time.</p>")
     @as("MaxErrors")
     maxErrors: option<maxErrors>,
-    @ocaml.doc("<p>Specify the target for the association. This target is required for associations that use an
-   Automation document and target resources by using rate controls.</p>")
+    @ocaml.doc("<p>Choose the parameter that will define how your automation will branch out. This target is
+   required for associations that use an Automation runbook and target resources by using rate
+   controls. Automation is a capability of Amazon Web Services Systems Manager.</p>")
     @as("AutomationTargetParameterName")
     automationTargetParameterName: option<automationTargetParameterName>,
     @ocaml.doc("<p>Specify a descriptive name for the association.</p>") @as("AssociationName")
     associationName: option<associationName>,
-    @ocaml.doc("<p>An S3 bucket where you want to store the output details of the request.</p>")
+    @ocaml.doc("<p>An Amazon Simple Storage Service (Amazon S3) bucket where you want to store the output
+   details of the request.</p>")
     @as("OutputLocation")
     outputLocation: option<instanceAssociationOutputLocation>,
     @ocaml.doc("<p>A cron expression when the association will be applied to the target(s).</p>")
     @as("ScheduleExpression")
     scheduleExpression: option<scheduleExpression>,
-    @ocaml.doc("<p>The targets for the association. You can target instances by using tags, AWS Resource
-   Groups, all instances in an AWS account, or individual instance IDs. For more information about
-   choosing targets for an association, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-state-manager-targets-and-rate-controls.html\">Using targets and rate controls with State Manager associations</a> in the
-    <i>AWS Systems Manager User Guide</i>.</p>")
+    @ocaml.doc("<p>The targets for the association. You can target managed nodes by using tags, Amazon Web Services resource
+   groups, all managed nodes in an Amazon Web Services account, or individual managed node IDs. You can target all
+   managed nodes in an Amazon Web Services account by specifying the <code>InstanceIds</code> key with a value of
+    <code>*</code>. For more information about choosing targets for an association, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-state-manager-targets-and-rate-controls.html\">Using targets and rate controls with State Manager associations</a> in the
+    <i>Amazon Web Services Systems Manager User Guide</i>.</p>")
     @as("Targets")
     targets: option<targets>,
     @ocaml.doc("<p>The parameters for the runtime configuration of the document.</p>")
     @as("Parameters")
     parameters: option<parameters>,
-    @ocaml.doc("<p>The instance ID.</p>
+    @ocaml.doc("<p>The managed node ID.</p>
          <note>
             <p>
-               <code>InstanceId</code> has been deprecated. To specify an instance ID for an association,
-    use the <code>Targets</code> parameter. Requests that include the
-    parameter <code>InstanceID</code> with SSM documents that use schema version 2.0 or later will
-    fail. In addition, if you use the parameter <code>InstanceId</code>, you
-    cannot use the parameters <code>AssociationName</code>, <code>DocumentVersion</code>,
-     <code>MaxErrors</code>, <code>MaxConcurrency</code>, <code>OutputLocation</code>, or
-     <code>ScheduleExpression</code>. To use these parameters, you must use the <code>Targets</code>
-    parameter.</p>
+               <code>InstanceId</code> has been deprecated. To specify a managed node ID for an
+    association, use the <code>Targets</code> parameter. Requests that
+    include the parameter <code>InstanceID</code> with Systems Manager documents (SSM documents) that use
+    schema version 2.0 or later will fail. In addition, if you use the
+    parameter <code>InstanceId</code>, you can't use the parameters <code>AssociationName</code>,
+     <code>DocumentVersion</code>, <code>MaxErrors</code>, <code>MaxConcurrency</code>,
+     <code>OutputLocation</code>, or <code>ScheduleExpression</code>. To use these parameters, you
+    must use the <code>Targets</code> parameter.</p>
          </note>")
     @as("InstanceId")
     instanceId: option<instanceId>,
     @ocaml.doc("<p>The document version you want to associate with the target(s). Can be a specific version or
-   the default version.</p>")
+   the default version.</p>
+         <important>
+            <p>State Manager doesn't support running associations that use a new version of a document if
+    that document is shared from another account. State Manager always runs the <code>default</code>
+    version of a document if shared from another account, even though the Systems Manager console shows that a
+    new version was processed. If you want to run an association using a new version of a document
+    shared form another account, you must set the document version to <code>default</code>.</p>
+         </important>")
     @as("DocumentVersion")
     documentVersion: option<documentVersion>,
-    @ocaml.doc("<p>The name of the SSM document that contains the configuration information for the instance.
-   You can specify Command or Automation documents.</p>
-         <p>You can specify AWS-predefined documents, documents you created, or a document that is
+    @ocaml.doc("<p>The name of the SSM Command document or Automation runbook that contains the configuration
+   information for the managed node.</p>
+         <p>You can specify Amazon Web Services-predefined documents, documents you created, or a document that is
    shared with you from another account.</p>
-         <p>For SSM documents that are shared with you from other AWS accounts, you must specify the
-   complete SSM document ARN, in the following format:</p>
+         <p>For Systems Manager documents (SSM documents) that are shared with you from other Amazon Web Services accounts, you
+   must specify the complete SSM document ARN, in the following format:</p>
          <p>
             <code>arn:<i>partition</i>:ssm:<i>region</i>:<i>account-id</i>:document/<i>document-name</i>
             </code>
@@ -10677,8 +11586,8 @@ module CreateAssociation = {
          <p>
             <code>arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document</code>
          </p>
-         <p>For AWS-predefined documents and SSM documents you created in your account, you only need to
-   specify the document name. For example, <code>AWS-ApplyPatchBaseline</code> or
+         <p>For Amazon Web Services-predefined documents and SSM documents you created in your account, you only need
+   to specify the document name. For example, <code>AWS-ApplyPatchBaseline</code> or
     <code>My-Document</code>.</p>")
     @as("Name")
     name: documentARN,
@@ -10743,7 +11652,7 @@ module StartChangeRequestExecution = {
     @ocaml.doc("<p>Optional metadata that you assign to a resource. You can specify a maximum of five tags for
    a change request. Tags enable you to categorize a resource in different ways, such as by
    purpose, owner, or environment. For example, you might want to tag a change request to identify
-   an environment or target AWS Region. In this case, you could specify the following key-value
+   an environment or target Amazon Web Services Region. In this case, you could specify the following key-value
    pairs:</p>
          <ul>
             <li>
@@ -10759,14 +11668,26 @@ module StartChangeRequestExecution = {
          </ul>")
     @as("Tags")
     tags: option<tagList_>,
-    @ocaml.doc("<p>Information about the Automation runbooks (Automation documents) that are run during the
-   runbook workflow.</p>
+    @ocaml.doc("<p>Information about the Automation runbooks that are run during the runbook workflow.</p>
          <note>
             <p>The Automation runbooks specified for the runbook workflow can't run until all required
     approvals for the change request have been received.</p>
          </note>")
     @as("Runbooks")
     runbooks: runbooks,
+    @ocaml.doc("<p>Indicates whether the change request can be approved automatically without the need for
+   manual approvals.</p>
+         <p>If <code>AutoApprovable</code> is enabled in a change template, then setting
+    <code>AutoApprove</code> to <code>true</code> in <code>StartChangeRequestExecution</code>
+   creates a change request that bypasses approver review.</p>
+         <note>
+            <p>Change Calendar restrictions are not bypassed in this scenario. If the state of an
+    associated calendar is <code>CLOSED</code>, change freeze approvers must still grant permission
+    for this change request to run. If they don't, the change won't be processed until the calendar
+    state is again <code>OPEN</code>. </p>
+         </note>")
+    @as("AutoApprove")
+    autoApprove: option<boolean_>,
     @ocaml.doc("<p>The user-provided idempotency token. The token must be unique, is case insensitive, enforces
    the UUID format, and can't be reused.</p>")
     @as("ClientToken")
@@ -10812,6 +11733,7 @@ module StartChangeRequestExecution = {
     ~changeDetails=?,
     ~scheduledEndTime=?,
     ~tags=?,
+    ~autoApprove=?,
     ~clientToken=?,
     ~changeRequestName=?,
     ~parameters=?,
@@ -10824,6 +11746,7 @@ module StartChangeRequestExecution = {
       scheduledEndTime: scheduledEndTime,
       tags: tags,
       runbooks: runbooks,
+      autoApprove: autoApprove,
       clientToken: clientToken,
       changeRequestName: changeRequestName,
       parameters: parameters,
@@ -10849,26 +11772,25 @@ module ListDocumentMetadataHistory = {
    is <code>DocumentReviews</code>.</p>")
     @as("Metadata")
     metadata: documentMetadataEnum,
-    @ocaml.doc("<p>The version of the document.</p>") @as("DocumentVersion")
+    @ocaml.doc("<p>The version of the change template.</p>") @as("DocumentVersion")
     documentVersion: option<documentVersion>,
-    @ocaml.doc("<p>The name of the document.</p>") @as("Name") name: documentName,
+    @ocaml.doc("<p>The name of the change template.</p>") @as("Name") name: documentName,
   }
   type response = {
     @ocaml.doc("<p>The maximum number of items to return for this call. The call also returns a token that you
    can specify in a subsequent call to get the next set of results.</p>")
     @as("NextToken")
     nextToken: option<nextToken>,
-    @ocaml.doc("<p>Information about the response to the document approval request.</p>")
+    @ocaml.doc("<p>Information about the response to the change template approval request.</p>")
     @as("Metadata")
     metadata: option<documentMetadataResponseInfo>,
-    @ocaml.doc(
-      "<p>The user ID of the person in the organization who requested the document review.</p>"
-    )
+    @ocaml.doc("<p>The user ID of the person in the organization who requested the review of the
+   change template.</p>")
     @as("Author")
     author: option<documentAuthor>,
-    @ocaml.doc("<p>The version of the document.</p>") @as("DocumentVersion")
+    @ocaml.doc("<p>The version of the change template.</p>") @as("DocumentVersion")
     documentVersion: option<documentVersion>,
-    @ocaml.doc("<p>The name of the document.</p>") @as("Name") name: option<documentName>,
+    @ocaml.doc("<p>The name of the change template.</p>") @as("Name") name: option<documentName>,
   }
   @module("@aws-sdk/client-ssm") @new
   external new: request => t = "ListDocumentMetadataHistoryCommand"
@@ -10898,10 +11820,11 @@ module ListCommands = {
    token that you can specify in a subsequent call to get the next set of results.</p>")
     @as("MaxResults")
     maxResults: option<commandMaxResults>,
-    @ocaml.doc("<p>(Optional) Lists commands issued against this instance ID.</p>
+    @ocaml.doc("<p>(Optional) Lists commands issued against this managed node ID.</p>
          <note>
-            <p>You can't specify an instance ID in the same command that you specify <code>Status</code> =
-     <code>Pending</code>. This is because the command has not reached the instance yet.</p>
+            <p>You can't specify a managed node ID in the same command that you specify
+     <code>Status</code> = <code>Pending</code>. This is because the command hasn't reached the
+    managed node yet.</p>
          </note>")
     @as("InstanceId")
     instanceId: option<instanceId>,
@@ -10943,8 +11866,8 @@ module ListAssociations = {
          <note>
             <p>Filtering associations using the <code>InstanceID</code> attribute only returns legacy
     associations created using the <code>InstanceID</code> attribute. Associations targeting the
-    instance that are part of the Target Attributes <code>ResourceGroup</code> or <code>Tags</code>
-    are not returned.</p>
+    managed node that are part of the Target Attributes <code>ResourceGroup</code> or
+     <code>Tags</code> aren't returned.</p>
          </note>")
     @as("AssociationFilterList")
     associationFilterList: option<associationFilterList>,
@@ -11010,7 +11933,8 @@ module DescribeMaintenanceWindowTasks = {
     @as("MaxResults")
     maxResults: option<maintenanceWindowMaxResults>,
     @ocaml.doc("<p>Optional filters used to narrow down the scope of the returned tasks. The supported filter
-   keys are WindowTaskId, TaskArn, Priority, and TaskType.</p>")
+   keys are <code>WindowTaskId</code>, <code>TaskArn</code>, <code>Priority</code>, and
+    <code>TaskType</code>.</p>")
     @as("Filters")
     filters: option<maintenanceWindowFilterList>,
     @ocaml.doc("<p>The ID of the maintenance window whose tasks should be retrieved.</p>")
@@ -11044,7 +11968,8 @@ module DescribeMaintenanceWindowTargets = {
     @as("MaxResults")
     maxResults: option<maintenanceWindowMaxResults>,
     @ocaml.doc("<p>Optional filters that can be used to narrow down the scope of the returned window targets.
-   The supported filter keys are Type, WindowTargetId and OwnerInformation.</p>")
+   The supported filter keys are <code>Type</code>, <code>WindowTargetId</code>, and
+    <code>OwnerInformation</code>.</p>")
     @as("Filters")
     filters: option<maintenanceWindowFilterList>,
     @ocaml.doc("<p>The ID of the maintenance window whose targets should be retrieved.</p>")
@@ -11077,7 +12002,7 @@ module DescribeInventoryDeletions = {
     @as("NextToken")
     nextToken: option<nextToken>,
     @ocaml.doc("<p>Specify the delete inventory ID for which you want information. This ID was returned by the
-    <code>DeleteInventory</code> action.</p>")
+    <code>DeleteInventory</code> operation.</p>")
     @as("DeletionId")
     deletionId: option<uuid>,
   }
@@ -11162,9 +12087,8 @@ module ListResourceDataSync = {
     @as("NextToken")
     nextToken: option<nextToken>,
     @ocaml.doc("<p>View a list of resource data syncs according to the sync type. Specify
-    <code>SyncToDestination</code> to view resource data syncs that synchronize data to an Amazon S3
-   bucket. Specify <code>SyncFromSource</code> to view resource data syncs from AWS Organizations or from
-   multiple AWS Regions.</p>")
+    <code>SyncToDestination</code> to view resource data syncs that synchronize data to an Amazon S3 bucket. Specify <code>SyncFromSource</code> to view resource data syncs from Organizations
+   or from multiple Amazon Web Services Regions.</p>")
     @as("SyncType")
     syncType: option<resourceDataSyncType>,
   }
@@ -11174,7 +12098,7 @@ module ListResourceDataSync = {
     @as("NextToken")
     nextToken: option<nextToken>,
     @ocaml.doc(
-      "<p>A list of your current Resource Data Sync configurations and their statuses.</p>"
+      "<p>A list of your current resource data sync configurations and their statuses.</p>"
     )
     @as("ResourceDataSyncItems")
     resourceDataSyncItems: option<resourceDataSyncItemList>,
@@ -11189,7 +12113,7 @@ module GetAutomationExecution = {
   type t
   type request = {
     @ocaml.doc("<p>The unique identifier for an existing automation execution to examine. The execution ID is
-   returned by StartAutomationExecution when the execution of an Automation document is
+   returned by StartAutomationExecution when the execution of an Automation runbook is
    initiated.</p>")
     @as("AutomationExecutionId")
     automationExecutionId: automationExecutionId,
@@ -11224,33 +12148,38 @@ module CreateAssociationBatch = {
 module UpdatePatchBaseline = {
   type t
   type request = {
-    @ocaml.doc("<p>If True, then all fields that are required by the CreatePatchBaseline action are also
-   required for this API request. Optional fields that are not specified are set to null.</p>")
+    @ocaml.doc("<p>If True, then all fields that are required by the <a>CreatePatchBaseline</a>
+   operation are also required for this API request. Optional fields that aren't specified are set
+   to null.</p>")
     @as("Replace")
     replace: option<boolean_>,
-    @ocaml.doc("<p>Information about the patches to use to update the instances, including target operating
-   systems and source repositories. Applies to Linux instances only.</p>")
+    @ocaml.doc("<p>Information about the patches to use to update the managed nodes, including target operating
+   systems and source repositories. Applies to Linux managed nodes only.</p>")
     @as("Sources")
     sources: option<patchSourceList>,
     @ocaml.doc("<p>A description of the patch baseline.</p>") @as("Description")
     description: option<baselineDescription>,
-    @ocaml.doc("<p>The action for Patch Manager to take on patches included in the RejectedPackages
-   list.</p>
+    @ocaml.doc("<p>The action for Patch Manager to take on patches included in the
+    <code>RejectedPackages</code> list.</p>
          <ul>
             <li>
                <p>
-                  <b>ALLOW_AS_DEPENDENCY</b>: A package in the Rejected patches
-     list is installed only if it is a dependency of another package. It is considered compliant
-     with the patch baseline, and its status is reported as <i>InstalledOther</i>.
-     This is the default action if no option is specified.</p>
+                  <b>
+                     <code>ALLOW_AS_DEPENDENCY</code>
+                  </b>: A package in the
+      <code>Rejected</code> patches list is installed only if it is a dependency of another package.
+     It is considered compliant with the patch baseline, and its status is reported as
+      <code>InstalledOther</code>. This is the default action if no option is specified.</p>
             </li>
             <li>
                <p>
-                  <b>BLOCK</b>: Packages in the RejectedPatches list, and packages
-     that include them as dependencies, are not installed under any circumstances. If a package was
-     installed before it was added to the Rejected patches list, it is considered non-compliant with
-     the patch baseline, and its status is reported as
-     <i>InstalledRejected</i>.</p>
+                  <b>
+                     <code>BLOCK</code>
+                  </b>: Packages in the
+      <code>RejectedPatches</code> list, and packages that include them as dependencies, aren't
+     installed under any circumstances. If a package was installed before it was added to the
+      <code>Rejected</code> patches list, it is considered non-compliant with the patch baseline,
+     and its status is reported as <code>InstalledRejected</code>.</p>
             </li>
          </ul>")
     @as("RejectedPatchesAction")
@@ -11258,11 +12187,12 @@ module UpdatePatchBaseline = {
     @ocaml.doc("<p>A list of explicitly rejected patches for the baseline.</p>
          <p>For information about accepted formats for lists of approved patches and rejected patches,
                         see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html\">About
-                        package name formats for approved and rejected patch lists</a> in the <i>AWS Systems Manager User Guide</i>.</p>")
+                        package name formats for approved and rejected patch lists</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>")
     @as("RejectedPatches")
     rejectedPatches: option<patchIdList>,
     @ocaml.doc("<p>Indicates whether the list of approved patches includes non-security updates that should be
-   applied to the instances. The default value is 'false'. Applies to Linux instances only.</p>")
+   applied to the managed nodes. The default value is <code>false</code>. Applies to Linux managed
+   nodes only.</p>")
     @as("ApprovedPatchesEnableNonSecurity")
     approvedPatchesEnableNonSecurity: option<boolean_>,
     @ocaml.doc("<p>Assigns a new compliance severity level to an existing patch baseline.</p>")
@@ -11271,7 +12201,7 @@ module UpdatePatchBaseline = {
     @ocaml.doc("<p>A list of explicitly approved patches for the baseline.</p>
          <p>For information about accepted formats for lists of approved patches and rejected patches,
                         see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html\">About
-                        package name formats for approved and rejected patch lists</a> in the <i>AWS Systems Manager User Guide</i>.</p>")
+                        package name formats for approved and rejected patch lists</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>")
     @as("ApprovedPatches")
     approvedPatches: option<patchIdList>,
     @ocaml.doc("<p>A set of rules used to include patches in the baseline.</p>")
@@ -11285,26 +12215,27 @@ module UpdatePatchBaseline = {
     baselineId: baselineId,
   }
   type response = {
-    @ocaml.doc("<p>Information about the patches to use to update the instances, including target operating
-   systems and source repositories. Applies to Linux instances only.</p>")
+    @ocaml.doc("<p>Information about the patches to use to update the managed nodes, including target operating
+   systems and source repositories. Applies to Linux managed nodes only.</p>")
     @as("Sources")
     sources: option<patchSourceList>,
-    @ocaml.doc("<p>A description of the Patch Baseline.</p>") @as("Description")
+    @ocaml.doc("<p>A description of the patch baseline.</p>") @as("Description")
     description: option<baselineDescription>,
     @ocaml.doc("<p>The date when the patch baseline was last modified.</p>") @as("ModifiedDate")
     modifiedDate: option<dateTime>,
     @ocaml.doc("<p>The date when the patch baseline was created.</p>") @as("CreatedDate")
     createdDate: option<dateTime>,
-    @ocaml.doc("<p>The action specified to take on patches included in the RejectedPatches list. A patch can be
-   allowed only if it is a dependency of another package, or blocked entirely along with packages
-   that include it as a dependency.</p>")
+    @ocaml.doc("<p>The action specified to take on patches included in the <code>RejectedPatches</code> list. A
+   patch can be allowed only if it is a dependency of another package, or blocked entirely along
+   with packages that include it as a dependency.</p>")
     @as("RejectedPatchesAction")
     rejectedPatchesAction: option<patchAction>,
     @ocaml.doc("<p>A list of explicitly rejected patches for the baseline.</p>")
     @as("RejectedPatches")
     rejectedPatches: option<patchIdList>,
     @ocaml.doc("<p>Indicates whether the list of approved patches includes non-security updates that should be
-   applied to the instances. The default value is 'false'. Applies to Linux instances only.</p>")
+   applied to the managed nodes. The default value is <code>false</code>. Applies to Linux managed
+   nodes only.</p>")
     @as("ApprovedPatchesEnableNonSecurity")
     approvedPatchesEnableNonSecurity: option<boolean_>,
     @ocaml.doc("<p>The compliance severity level assigned to the patch baseline after the update
@@ -11363,12 +12294,20 @@ module UpdatePatchBaseline = {
 module GetPatchBaseline = {
   type t
   type request = {
-    @ocaml.doc("<p>The ID of the patch baseline to retrieve.</p>") @as("BaselineId")
+    @ocaml.doc("<p>The ID of the patch baseline to retrieve.</p>
+         <note>
+            <p>To retrieve information about an Amazon Web Services managed patch baseline, specify the full Amazon
+    Resource Name (ARN) of the baseline. For example, for the baseline
+     <code>AWS-AmazonLinuxDefaultPatchBaseline</code>, specify
+     <code>arn:aws:ssm:us-east-2:733109147000:patchbaseline/pb-0e392de35e7c563b7</code> instead of
+     <code>pb-0e392de35e7c563b7</code>.</p>
+         </note>")
+    @as("BaselineId")
     baselineId: baselineId,
   }
   type response = {
-    @ocaml.doc("<p>Information about the patches to use to update the instances, including target operating
-   systems and source repositories. Applies to Linux instances only.</p>")
+    @ocaml.doc("<p>Information about the patches to use to update the managed nodes, including target operating
+   systems and source repositories. Applies to Linux managed nodes only.</p>")
     @as("Sources")
     sources: option<patchSourceList>,
     @ocaml.doc("<p>A description of the patch baseline.</p>") @as("Description")
@@ -11379,16 +12318,17 @@ module GetPatchBaseline = {
     createdDate: option<dateTime>,
     @ocaml.doc("<p>Patch groups included in the patch baseline.</p>") @as("PatchGroups")
     patchGroups: option<patchGroupList>,
-    @ocaml.doc("<p>The action specified to take on patches included in the RejectedPatches list. A patch can be
-   allowed only if it is a dependency of another package, or blocked entirely along with packages
-   that include it as a dependency.</p>")
+    @ocaml.doc("<p>The action specified to take on patches included in the <code>RejectedPatches</code> list. A
+   patch can be allowed only if it is a dependency of another package, or blocked entirely along
+   with packages that include it as a dependency.</p>")
     @as("RejectedPatchesAction")
     rejectedPatchesAction: option<patchAction>,
     @ocaml.doc("<p>A list of explicitly rejected patches for the baseline.</p>")
     @as("RejectedPatches")
     rejectedPatches: option<patchIdList>,
     @ocaml.doc("<p>Indicates whether the list of approved patches includes non-security updates that should be
-   applied to the instances. The default value is 'false'. Applies to Linux instances only.</p>")
+   applied to the managed nodes. The default value is <code>false</code>. Applies to Linux managed
+   nodes only.</p>")
     @as("ApprovedPatchesEnableNonSecurity")
     approvedPatchesEnableNonSecurity: option<boolean_>,
     @ocaml.doc("<p>Returns the specified compliance severity level for approved patches in the patch
@@ -11454,7 +12394,7 @@ module CreatePatchBaseline = {
     @ocaml.doc("<p>Optional metadata that you assign to a resource. Tags enable you to categorize a resource in
    different ways, such as by purpose, owner, or environment. For example, you might want to tag a
    patch baseline to identify the severity level of patches it specifies and the operating system
-   family it applies to. In this case, you could specify the following key name/value pairs:</p>
+   family it applies to. In this case, you could specify the following key-value pairs:</p>
          <ul>
             <li>
                <p>
@@ -11469,35 +12409,39 @@ module CreatePatchBaseline = {
          </ul>
          <note>
             <p>To add tags to an existing patch baseline, use the <a>AddTagsToResource</a>
-    action.</p>
+    operation.</p>
          </note>")
     @as("Tags")
     tags: option<tagList_>,
     @ocaml.doc("<p>User-provided idempotency token.</p>") @as("ClientToken")
     clientToken: option<clientToken>,
-    @ocaml.doc("<p>Information about the patches to use to update the instances, including target operating
-   systems and source repositories. Applies to Linux instances only.</p>")
+    @ocaml.doc("<p>Information about the patches to use to update the managed nodes, including target operating
+   systems and source repositories. Applies to Linux managed nodes only.</p>")
     @as("Sources")
     sources: option<patchSourceList>,
     @ocaml.doc("<p>A description of the patch baseline.</p>") @as("Description")
     description: option<baselineDescription>,
-    @ocaml.doc("<p>The action for Patch Manager to take on patches included in the RejectedPackages
-   list.</p>
+    @ocaml.doc("<p>The action for Patch Manager to take on patches included in the
+    <code>RejectedPackages</code> list.</p>
          <ul>
             <li>
                <p>
-                  <b>ALLOW_AS_DEPENDENCY</b>: A package in the Rejected patches
-     list is installed only if it is a dependency of another package. It is considered compliant
-     with the patch baseline, and its status is reported as <i>InstalledOther</i>.
-     This is the default action if no option is specified.</p>
+                  <b>
+                     <code>ALLOW_AS_DEPENDENCY</code>
+                  </b>: A package in the
+      <code>Rejected</code> patches list is installed only if it is a dependency of another package.
+     It is considered compliant with the patch baseline, and its status is reported as
+      <code>InstalledOther</code>. This is the default action if no option is specified.</p>
             </li>
             <li>
                <p>
-                  <b>BLOCK</b>: Packages in the RejectedPatches list, and packages
-     that include them as dependencies, are not installed under any circumstances. If a package was
-     installed before it was added to the Rejected patches list, it is considered non-compliant with
-     the patch baseline, and its status is reported as
-     <i>InstalledRejected</i>.</p>
+                  <b>
+                     <code>BLOCK</code>
+                  </b>: Packages in the
+      <code>RejectedPatches</code> list, and packages that include them as dependencies, aren't
+     installed under any circumstances. If a package was installed before it was added to the
+     Rejected patches list, it is considered non-compliant with the patch baseline, and its status
+     is reported as <code>InstalledRejected</code>.</p>
             </li>
          </ul>")
     @as("RejectedPatchesAction")
@@ -11505,22 +12449,23 @@ module CreatePatchBaseline = {
     @ocaml.doc("<p>A list of explicitly rejected patches for the baseline.</p>
          <p>For information about accepted formats for lists of approved patches and rejected patches,
                         see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html\">About
-                        package name formats for approved and rejected patch lists</a> in the <i>AWS Systems Manager User Guide</i>.</p>")
+                        package name formats for approved and rejected patch lists</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>")
     @as("RejectedPatches")
     rejectedPatches: option<patchIdList>,
     @ocaml.doc("<p>Indicates whether the list of approved patches includes non-security updates that should be
-   applied to the instances. The default value is 'false'. Applies to Linux instances only.</p>")
+   applied to the managed nodes. The default value is <code>false</code>. Applies to Linux managed
+   nodes only.</p>")
     @as("ApprovedPatchesEnableNonSecurity")
     approvedPatchesEnableNonSecurity: option<boolean_>,
     @ocaml.doc("<p>Defines the compliance level for approved patches. When an approved patch is reported as
    missing, this value describes the severity of the compliance violation. The default value is
-   UNSPECIFIED.</p>")
+    <code>UNSPECIFIED</code>.</p>")
     @as("ApprovedPatchesComplianceLevel")
     approvedPatchesComplianceLevel: option<patchComplianceLevel>,
     @ocaml.doc("<p>A list of explicitly approved patches for the baseline.</p>
          <p>For information about accepted formats for lists of approved patches and rejected patches,
                         see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html\">About
-                        package name formats for approved and rejected patch lists</a> in the <i>AWS Systems Manager User Guide</i>.</p>")
+                        package name formats for approved and rejected patch lists</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>")
     @as("ApprovedPatches")
     approvedPatches: option<patchIdList>,
     @ocaml.doc("<p>A set of rules used to include patches in the baseline.</p>")
@@ -11530,8 +12475,8 @@ module CreatePatchBaseline = {
     @as("GlobalFilters")
     globalFilters: option<patchFilterGroup>,
     @ocaml.doc("<p>The name of the patch baseline.</p>") @as("Name") name: baselineName,
-    @ocaml.doc("<p>Defines the operating system the patch baseline applies to. The Default value is
-   WINDOWS.</p>")
+    @ocaml.doc("<p>Defines the operating system the patch baseline applies to. The default value is
+    <code>WINDOWS</code>.</p>")
     @as("OperatingSystem")
     operatingSystem: option<operatingSystem>,
   }
@@ -11580,24 +12525,28 @@ module GetDeployablePatchSnapshotForInstance = {
     @ocaml.doc("<p>Defines the basic information about a patch baseline override.</p>")
     @as("BaselineOverride")
     baselineOverride: option<baselineOverride>,
-    @ocaml.doc("<p>The user-defined snapshot ID.</p>") @as("SnapshotId") snapshotId: snapshotId,
     @ocaml.doc(
-      "<p>The ID of the instance for which the appropriate patch snapshot should be retrieved.</p>"
+      "<p>The snapshot ID provided by the user when running <code>AWS-RunPatchBaseline</code>.</p>"
     )
+    @as("SnapshotId")
+    snapshotId: snapshotId,
+    @ocaml.doc("<p>The ID of the managed node for which the appropriate patch snapshot should be
+   retrieved.</p>")
     @as("InstanceId")
     instanceId: instanceId,
   }
   type response = {
     @ocaml.doc("<p>Returns the specific operating system (for example Windows Server 2012 or Amazon Linux
-   2015.09) on the instance for the specified patch snapshot.</p>")
+   2015.09) on the managed node for the specified patch snapshot.</p>")
     @as("Product")
     product: option<product>,
-    @ocaml.doc("<p>A pre-signed Amazon S3 URL that can be used to download the patch snapshot.</p>")
+    @ocaml.doc("<p>A pre-signed Amazon Simple Storage Service (Amazon S3) URL that can be used to download the
+   patch snapshot.</p>")
     @as("SnapshotDownloadUrl")
     snapshotDownloadUrl: option<snapshotDownloadUrl>,
     @ocaml.doc("<p>The user-defined snapshot ID.</p>") @as("SnapshotId")
     snapshotId: option<snapshotId>,
-    @ocaml.doc("<p>The ID of the instance.</p>") @as("InstanceId") instanceId: option<instanceId>,
+    @ocaml.doc("<p>The managed node ID.</p>") @as("InstanceId") instanceId: option<instanceId>,
   }
   @module("@aws-sdk/client-ssm") @new
   external new: request => t = "GetDeployablePatchSnapshotForInstanceCommand"
@@ -11616,14 +12565,14 @@ module GetOpsSummary = {
     @ocaml.doc("<p>A token to start the list. Use this token to get the next set of results. </p>")
     @as("NextToken")
     nextToken: option<nextToken>,
-    @ocaml.doc("<p>The OpsItem data type to return.</p>") @as("ResultAttributes")
+    @ocaml.doc("<p>The OpsData data type to return.</p>") @as("ResultAttributes")
     resultAttributes: option<opsResultAttributeList>,
     @ocaml.doc(
-      "<p>Optional aggregators that return counts of OpsItems based on one or more expressions.</p>"
+      "<p>Optional aggregators that return counts of OpsData based on one or more expressions.</p>"
     )
     @as("Aggregators")
     aggregators: option<opsAggregatorList>,
-    @ocaml.doc("<p>Optional filters used to scope down the returned OpsItems. </p>") @as("Filters")
+    @ocaml.doc("<p>Optional filters used to scope down the returned OpsData. </p>") @as("Filters")
     filters: option<opsFilterList>,
     @ocaml.doc("<p>Specify the name of a resource data sync to get.</p>") @as("SyncName")
     syncName: option<resourceDataSyncName>,
@@ -11633,7 +12582,7 @@ module GetOpsSummary = {
    results.</p>")
     @as("NextToken")
     nextToken: option<nextToken>,
-    @ocaml.doc("<p>The list of aggregated and filtered OpsItems.</p>") @as("Entities")
+    @ocaml.doc("<p>The list of aggregated details and filtered OpsData.</p>") @as("Entities")
     entities: option<opsEntityList>,
   }
   @module("@aws-sdk/client-ssm") @new external new: request => t = "GetOpsSummaryCommand"
@@ -11672,7 +12621,7 @@ module GetInventory = {
     resultAttributes: option<resultAttributeList>,
     @ocaml.doc("<p>Returns counts of inventory types based on one or more expressions. For example, if you
    aggregate by using an expression that uses the <code>AWS:InstanceInformation.PlatformType</code>
-   type, you can see a count of how many Windows and Linux instances exist in your inventoried
+   type, you can see a count of how many Windows and Linux managed nodes exist in your inventoried
    fleet.</p>")
     @as("Aggregators")
     aggregators: option<inventoryAggregatorList>,
@@ -11688,7 +12637,7 @@ module GetInventory = {
     @as("NextToken")
     nextToken: option<nextToken>,
     @ocaml.doc(
-      "<p>Collection of inventory entities such as a collection of instance inventory. </p>"
+      "<p>Collection of inventory entities such as a collection of managed node inventory. </p>"
     )
     @as("Entities")
     entities: option<inventoryResultEntityList>,

@@ -72,7 +72,7 @@ type smbsecurityStrategy = [
   | @as("ClientSpecified") #ClientSpecified
 ]
 type smbguestPassword = string
-@ocaml.doc("<p>The ARN of the IAM role that file gateway assumes when it accesses the underlying
+@ocaml.doc("<p>The ARN of the IAM role that an S3 File Gateway assumes when it accesses the underlying
          storage.</p>")
 type role = string
 type retentionLockType = [
@@ -95,7 +95,8 @@ type permissionId = float
 type path = string
 type organizationalUnit = string
 @ocaml.doc("<p>A value that sets the access control list (ACL) permission for objects in the S3 bucket
-         that a file gateway puts objects into. The default value is <code>private</code>.</p>")
+         that an S3 File Gateway puts objects into. The default value is
+         <code>private</code>.</p>")
 type objectACL = [
   | @as("aws-exec-read") #Aws_Exec_Read
   | @as("bucket-owner-full-control") #Bucket_Owner_Full_Control
@@ -116,20 +117,45 @@ type minuteOfHour = int
 type minimumNumTapes = int
 type mediumChangerType = string
 type marker = string
-@ocaml.doc("<p>The ARN of the backend storage used for storing file data. A prefix name can be added to
-         the S3 bucket name. It must end with a \"/\".</p>")
+@ocaml.doc("<p>A custom ARN for the backend storage used for storing data for file shares. It includes
+         a resource ARN with an optional prefix concatenation. The prefix must end with a forward
+         slash (/).</p>
+         <note>
+            <p>You can specify LocationARN as a bucket ARN, access point ARN or access point alias,
+            as shown in the following examples.</p>
+
+            <p>Bucket ARN:</p>
+            <p>
+               <code>arn:aws:s3:::my-bucket/prefix/</code>
+            </p>
+
+            <p>Access point ARN:</p>
+            <p>
+               <code>arn:aws:s3:region:account-id:accesspoint/access-point-name/prefix/</code>
+            </p>
+
+            <p>If you specify an access point, the bucket policy must be configured to delegate
+            access control to the access point. For information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-policies.html#access-points-delegating-control\">Delegating access control to access points</a> in the <i>Amazon S3 User Guide</i>.</p>
+
+            <p>Access point alias:</p>
+            <p>
+               <code>test-ap-ab123cdef4gehijklmn5opqrstuvuse1a-s3alias</code>
+            </p>
+         </note>")
 type locationARN = string
 type localConsolePassword = string
 type lastSoftwareUpdate = string
-@ocaml.doc("<p>The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for Amazon
-         S3 server-side encryption. Storage Gateway does not support asymmetric CMKs. This value can
-         only be set when <code>KMSEncrypted</code> is <code>true</code>. Optional.</p>")
+@ocaml.doc("<p>The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for Amazon S3 server-side encryption. Storage Gateway does not support asymmetric CMKs. This
+         value can only be set when <code>KMSEncrypted</code> is <code>true</code>. Optional.</p>")
 type kmskey = string
 type iqnName = string
 type initiator = string
 type ipv4AddressCIDR = string
+type ipv4Address = string
 type hourOfDay = int
+type hostEnvironmentId = string
 type hostEnvironment = [
+  | @as("SNOWBALL") #SNOWBALL
   | @as("OTHER") #OTHER
   | @as("KVM") #KVM
   | @as("EC2") #EC2
@@ -143,11 +169,13 @@ type gatewayState = string
 type gatewayOperationalState = string
 @ocaml.doc("<p>The name you configured for your gateway.</p>") type gatewayName = string
 type gatewayId = string
+type gatewayCapacity = [@as("Large") #Large | @as("Medium") #Medium | @as("Small") #Small]
 @ocaml.doc("<p>The Amazon Resource Name (ARN) of the gateway. Use the <a>ListGateways</a>
-         operation to return a list of gateways for your account and AWS Region.</p>")
+         operation to return a list of gateways for your account and Amazon Web Services Region.</p>")
 type gatewayARN = string
 type folder = string
 type fileSystemLocationARN = string
+type fileSystemAssociationSyncErrorCode = string
 type fileSystemAssociationStatus = string
 type fileSystemAssociationId = string
 type fileSystemAssociationARN = string
@@ -246,6 +274,7 @@ type description = string
 type deprecationDate = string
 type dayOfWeek = int
 type dayOfMonth = int
+type dnshostName = string
 type createdDate = Js.Date.t
 type cloudWatchLogGroupARN = string
 type clientToken = string
@@ -392,7 +421,7 @@ type tapeInfo = {
   @as("PoolId")
   poolId: option<poolId>,
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the gateway. Use the <a>ListGateways</a>
-         operation to return a list of gateways for your account and AWS Region.</p>")
+         operation to return a list of gateways for your account and Amazon Web Services Region.</p>")
   @as("GatewayARN")
   gatewayARN: option<gatewayARN>,
   @ocaml.doc("<p>The status of the tape.</p>") @as("TapeStatus") tapeStatus: option<tapeStatus>,
@@ -518,6 +547,7 @@ type tag = {
   @ocaml.doc("<p>Value of the tag key.</p>") @as("Value") value: tagValue,
   @ocaml.doc("<p>Tag key. The key can't start with aws:.</p>") @as("Key") key: tagKey,
 }
+type supportedGatewayCapacities = array<gatewayCapacity>
 @ocaml.doc("<p>Describes a custom tape pool.</p>")
 type poolInfo = {
   @ocaml.doc("<p>Status of the custom tape pool. Pool can be <code>ACTIVE</code> or
@@ -529,9 +559,10 @@ type poolInfo = {
   @as("RetentionLockTimeInDays")
   retentionLockTimeInDays: option<retentionLockTimeInDays>,
   @ocaml.doc("<p>Tape retention lock type, which can be configured in two modes. When configured in
-         governance mode, AWS accounts with specific IAM permissions are authorized to remove the
-         tape retention lock from archived virtual tapes. When configured in compliance mode, the
-         tape retention lock cannot be removed by any user, including the root AWS account.</p>")
+         governance mode, Amazon Web Services accounts with specific IAM permissions are authorized
+         to remove the tape retention lock from archived virtual tapes. When configured in
+         compliance mode, the tape retention lock cannot be removed by any user, including the root
+            Amazon Web Services account.</p>")
   @as("RetentionLockType")
   retentionLockType: option<retentionLockType>,
   @ocaml.doc("<p>The storage class that is associated with the custom pool. When you use your backup
@@ -544,7 +575,7 @@ type poolInfo = {
   @as("PoolName")
   poolName: option<poolName>,
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the custom tape pool. Use the <a>ListTapePools</a> operation to return a list of custom tape pools for your
-         account and AWS Region.</p>")
+         account and Amazon Web Services Region.</p>")
   @as("PoolARN")
   poolARN: option<poolARN>,
 }
@@ -567,10 +598,10 @@ type networkInterface = {
   ipv4Address: option<string_>,
 }
 @ocaml.doc("<p>Describes Network File System (NFS) file share default values. Files and folders stored
-         as Amazon S3 objects in S3 buckets don't, by default, have Unix file permissions
-         assigned to them. Upon discovery in an S3 bucket by Storage Gateway, the S3 objects that
-         represent files and folders are assigned these default Unix permissions. This operation is
-         only supported for file gateways.</p>")
+         as Amazon S3 objects in S3 buckets don't, by default, have Unix file
+         permissions assigned to them. Upon discovery in an S3 bucket by Storage Gateway, the S3
+         objects that represent files and folders are assigned these default Unix permissions. This
+         operation is only supported for S3 File Gateways.</p>")
 type nfsfileShareDefaults = {
   @ocaml.doc("<p>The default owner ID for files in the file share (unless the files have another owner ID
          specified). The default value is <code>nfsnobody</code>.</p>")
@@ -590,11 +621,20 @@ type nfsfileShareDefaults = {
   @as("FileMode")
   fileMode: option<permissionMode>,
 }
+type ipAddressList = array<ipv4Address>
 type initiators = array<initiator>
 type hosts = array<host>
 @ocaml.doc("<p>Describes a gateway object.</p>")
 type gatewayInfo = {
-  @ocaml.doc("<p>The AWS Region where the Amazon EC2 instance is located.</p>")
+  @ocaml.doc("<p>A unique identifier for the specific instance of the host platform running the gateway.
+         This value is only available for certain host environments, and its format depends on the
+         host environment type.</p>")
+  @as("HostEnvironmentId")
+  hostEnvironmentId: option<hostEnvironmentId>,
+  @ocaml.doc("<p>The type of hardware or software platform on which the gateway is running.</p>")
+  @as("HostEnvironment")
+  hostEnvironment: option<hostEnvironment>,
+  @ocaml.doc("<p>The Amazon Web Services Region where the Amazon EC2 instance is located.</p>")
   @as("Ec2InstanceRegion")
   ec2InstanceRegion: option<ec2InstanceRegion>,
   @ocaml.doc("<p>The ID of the Amazon EC2 instance that was used to launch the gateway.</p>")
@@ -609,7 +649,7 @@ type gatewayInfo = {
   gatewayOperationalState: option<gatewayOperationalState>,
   @ocaml.doc("<p>The type of the gateway.</p>") @as("GatewayType") gatewayType: option<gatewayType>,
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the gateway. Use the <a>ListGateways</a>
-         operation to return a list of gateways for your account and AWS Region.</p>")
+         operation to return a list of gateways for your account and Amazon Web Services Region.</p>")
   @as("GatewayARN")
   gatewayARN: option<gatewayARN>,
   @ocaml.doc("<p>The unique identifier assigned to your gateway during activation. This ID becomes part
@@ -623,8 +663,9 @@ type folderList = array<folder>
          of a created file system association.</p>")
 type fileSystemAssociationSummary = {
   @as("GatewayARN") gatewayARN: option<gatewayARN>,
-  @ocaml.doc("<p>The status of the file share. Valid Values: <code>AVAILABLE</code> | <code>CREATING</code> | <code>DELETING</code> | 
-         <code>FORCE_DELETING</code> | <code>MISCONFIGURED</code> | <code>UPDATING</code> | <code>UNAVAILABLE</code>
+  @ocaml.doc("<p>The status of the file share. Valid Values: <code>AVAILABLE</code> |
+            <code>CREATING</code> | <code>DELETING</code> | <code>FORCE_DELETING</code> |
+            <code>UPDATING</code> | <code>ERROR</code>
          </p>")
   @as("FileSystemAssociationStatus")
   fileSystemAssociationStatus: option<fileSystemAssociationStatus>,
@@ -634,8 +675,13 @@ type fileSystemAssociationSummary = {
   @ocaml.doc("<p>The ID of the file system association.</p>") @as("FileSystemAssociationId")
   fileSystemAssociationId: option<fileSystemAssociationId>,
 }
+@ocaml.doc("<p>Detailed information on file system association status.</p>")
+type fileSystemAssociationStatusDetail = {
+  @ocaml.doc("<p>The error code for a given file system association status.</p>") @as("ErrorCode")
+  errorCode: option<fileSystemAssociationSyncErrorCode>,
+}
 type fileSystemAssociationARNList = array<fileSystemAssociationARN>
-@ocaml.doc("<p>Describes a file share.</p>")
+@ocaml.doc("<p>Describes a file share. Only supported S3 File Gateway.</p>")
 type fileShareInfo = {
   @as("GatewayARN") gatewayARN: option<gatewayARN>,
   @as("FileShareStatus") fileShareStatus: option<fileShareStatus>,
@@ -643,8 +689,8 @@ type fileShareInfo = {
   @as("FileShareARN") fileShareARN: option<fileShareARN>,
   @as("FileShareType") fileShareType: option<fileShareType>,
 }
-@ocaml.doc("<p>The list of clients that are allowed to access the file gateway. The list must contain
-         either valid IP addresses or valid CIDR blocks.</p>")
+@ocaml.doc("<p>The list of clients that are allowed to access the S3 File Gateway. The list must
+         contain either valid IP addresses or valid CIDR blocks.</p>")
 type fileShareClientList = array<ipv4AddressCIDR>
 type fileShareARNList = array<fileShareARN>
 type diskIds = array<diskId>
@@ -685,14 +731,14 @@ type chapInfo = {
   @as("TargetARN")
   targetARN: option<targetARN>,
 }
-@ocaml.doc("<p>The refresh cache information for the file share.</p>")
+@ocaml.doc("<p>The refresh cache information for the file share or FSx file systems.</p>")
 type cacheAttributes = {
   @ocaml.doc("<p>Refreshes a file share's cache by using Time To Live (TTL). TTL is the length of
          time since the last refresh after which access to the directory would cause the file
-         gateway to first refresh that directory's contents from the Amazon S3 bucket or Amazon FSx file system. The TTL
-         duration is in seconds.</p>
+         gateway to first refresh that directory's contents from the Amazon S3 bucket
+         or Amazon FSx file system. The TTL duration is in seconds.</p>
 
-         <p>Valid Values: 300 to 2,592,000 seconds (5 minutes to 30 days)</p>")
+         <p>Valid Values:0, 300 to 2,592,000 seconds (5 minutes to 30 days)</p>")
   @as("CacheStaleTimeoutInSeconds")
   cacheStaleTimeoutInSeconds: option<cacheStaleTimeoutInSeconds>,
 }
@@ -714,9 +760,10 @@ type automaticTapeCreationRule = {
   @ocaml.doc("<p>The size, in bytes, of the virtual tape capacity.</p>") @as("TapeSizeInBytes")
   tapeSizeInBytes: tapeSize,
   @ocaml.doc("<p>The ID of the pool that you want to add your tape to for archiving. The tape in this
-         pool is archived in the Amazon S3 storage class that is associated with the pool. When you
-         use your backup application to eject the tape, the tape is archived directly into the
-         storage class (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the pool.</p>
+         pool is archived in the Amazon S3 storage class that is associated with the pool.
+         When you use your backup application to eject the tape, the tape is archived directly into
+         the storage class (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the
+         pool.</p>
 
          <p>Valid Values: <code>GLACIER</code> | <code>DEEP_ARCHIVE</code>
          </p>")
@@ -842,11 +889,36 @@ type storageGatewayError = {
   errorDetails: option<errorDetails>,
   @ocaml.doc("<p>Additional information about the error.</p>") errorCode: option<errorCode>,
 }
+@ocaml.doc("<p>A list of Active Directory users and groups that have special permissions for SMB file
+         shares on the gateway.</p>")
+type smblocalGroups = {
+  @ocaml.doc("<p>A list of Active Directory users and groups that have local Gateway Admin permissions.
+         Acceptable formats include: <code>DOMAIN\\User1</code>, <code>user1</code>,
+            <code>DOMAIN\\group1</code>, and <code>group1</code>.</p>
+         <p>Gateway Admins can use the Shared Folders Microsoft Management Console snap-in to
+         force-close files that are open and locked.</p>")
+  @as("GatewayAdmins")
+  gatewayAdmins: option<userList>,
+}
 type poolInfos = array<poolInfo>
 type gateways = array<gatewayInfo>
 type gatewayNetworkInterfaces = array<networkInterface>
 type fileSystemAssociationSummaryList = array<fileSystemAssociationSummary>
+type fileSystemAssociationStatusDetails = array<fileSystemAssociationStatusDetail>
 type fileShareInfoList = array<fileShareInfo>
+@ocaml.doc(
+  "<p>Specifies network configuration information for the gateway associated with the Amazon FSx file system.</p>"
+)
+type endpointNetworkConfiguration = {
+  @ocaml.doc("<p>A list of gateway IP addresses on which the associated Amazon FSx file system is
+         available.</p>
+         <note>
+            <p>If multiple file systems are associated with this gateway, this field is
+            required.</p>
+         </note>")
+  @as("IpAddresses")
+  ipAddresses: option<ipAddressList>,
+}
 @ocaml.doc("<p>Represents a gateway's local disk.</p>")
 type disk = {
   @as("DiskAttributeList") diskAttributeList: option<diskAttributeList>,
@@ -938,22 +1010,18 @@ type cachediSCSIVolume = {
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the storage volume.</p>") @as("VolumeARN")
   volumeARN: option<volumeARN>,
 }
-@ocaml.doc("<p>
-         Describes a bandwidth rate limit interval for a gateway. A bandwidth
-         rate limit schedule consists of one or more bandwidth rate limit intervals. A bandwidth rate limit
-         interval defines a period of time on one or more days of the week, during which bandwidth rate 
-         limits are specified for uploading, downloading, or both. 
-      </p>")
+@ocaml.doc("<p> Describes a bandwidth rate limit interval for a gateway. A bandwidth rate limit
+         schedule consists of one or more bandwidth rate limit intervals. A bandwidth rate limit
+         interval defines a period of time on one or more days of the week, during which bandwidth
+         rate limits are specified for uploading, downloading, or both. </p>")
 type bandwidthRateLimitInterval = {
-  @ocaml.doc("<p>
-         The average download rate limit component of the bandwidth rate limit interval, 
-         in bits per second. This field does not appear in the response if the download rate limit is not set. 
-      </p>")
+  @ocaml.doc("<p> The average download rate limit component of the bandwidth rate limit interval, in bits
+         per second. This field does not appear in the response if the download rate limit is not
+         set. </p>")
   @as("AverageDownloadRateLimitInBitsPerSec")
   averageDownloadRateLimitInBitsPerSec: option<bandwidthDownloadRateLimit>,
-  @ocaml.doc("<p>
-         The average upload rate limit component of the bandwidth rate limit interval,
-         in bits per second. This field does not appear in the response if the upload rate limit is not set. 
+  @ocaml.doc("<p> The average upload rate limit component of the bandwidth rate limit interval, in bits
+         per second. This field does not appear in the response if the upload rate limit is not set.
       </p>")
   @as("AverageUploadRateLimitInBitsPerSec")
   averageUploadRateLimitInBitsPerSec: option<bandwidthUploadRateLimit>,
@@ -961,33 +1029,23 @@ type bandwidthRateLimitInterval = {
          ordinal numbers from 0 to 6, where 0 represents Sunday and 6 represents Saturday. </p>")
   @as("DaysOfWeek")
   daysOfWeek: daysOfWeek,
-  @ocaml.doc("<p>
-         The minute of the hour to end the bandwidth rate limit interval.
-      </p>
-      
+  @ocaml.doc("<p> The minute of the hour to end the bandwidth rate limit interval. </p>
+
          <important>
-            <p>
-            The bandwidth rate limit interval ends at the end of the minute. To end an interval
-            at the end of an hour, use the value <code>59</code>.
-         </p>
+            <p> The bandwidth rate limit interval ends at the end of the minute. To end an interval
+            at the end of an hour, use the value <code>59</code>. </p>
          </important>")
   @as("EndMinuteOfHour")
   endMinuteOfHour: minuteOfHour,
-  @ocaml.doc("<p>
-         The hour of the day to end the bandwidth rate limit interval.
-      </p>")
+  @ocaml.doc("<p> The hour of the day to end the bandwidth rate limit interval. </p>")
   @as("EndHourOfDay")
   endHourOfDay: hourOfDay,
-  @ocaml.doc("<p>
-         The minute of the hour to start the bandwidth rate limit interval.
-         The interval begins at the start of that minute. To begin an interval exactly at 
-         the start of the hour, use the value <code>0</code>.
-      </p>")
+  @ocaml.doc("<p> The minute of the hour to start the bandwidth rate limit interval. The interval begins
+         at the start of that minute. To begin an interval exactly at the start of the hour, use the
+         value <code>0</code>. </p>")
   @as("StartMinuteOfHour")
   startMinuteOfHour: minuteOfHour,
-  @ocaml.doc("<p>
-         The hour of the day to start the bandwidth rate limit interval.
-      </p>")
+  @ocaml.doc("<p> The hour of the day to start the bandwidth rate limit interval. </p>")
   @as("StartHourOfDay")
   startHourOfDay: hourOfDay,
 }
@@ -995,9 +1053,35 @@ type automaticTapeCreationRules = array<automaticTapeCreationRule>
 type vtldevices = array<vtldevice>
 type storediSCSIVolumes = array<storediSCSIVolume>
 @ocaml.doc("<p>The Windows file permissions and ownership information assigned, by default, to native
-         S3 objects when file gateway discovers them in S3 buckets. This operation is only supported
-         for file gateways.</p>")
+         S3 objects when S3 File Gateway discovers them in S3 buckets. This operation is only
+         supported for S3 File Gateways.</p>")
 type smbfileShareInfo = {
+  @ocaml.doc("<p>Specifies whether opportunistic locking is enabled for the SMB file share.</p>
+         <note>
+            <p>Enabling opportunistic locking on case-sensitive shares is not recommended for
+            workloads that involve access to files with the same name in different case.</p>
+         </note>
+         <p>Valid Values: <code>true</code> | <code>false</code>
+         </p>")
+  @as("OplocksEnabled")
+  oplocksEnabled: option<boolean_>,
+  @ocaml.doc("<p>Specifies the Region of the S3 bucket where the SMB file share stores files.</p>
+         <note>
+            <p>This parameter is required for SMB file shares that connect to Amazon S3
+            through a VPC endpoint, a VPC access point, or an access point alias that points to a
+            VPC access point.</p>
+         </note>")
+  @as("BucketRegion")
+  bucketRegion: option<regionId>,
+  @ocaml.doc("<p>Specifies the DNS name for the VPC endpoint that the SMB file share uses to connect to
+            Amazon S3.</p>
+         <note>
+            <p>This parameter is required for SMB file shares that connect to Amazon S3
+            through a VPC endpoint, a VPC access point, or an access point alias that points to a
+            VPC access point.</p>
+         </note>")
+  @as("VPCEndpointDNSName")
+  vpcendpointDNSName: option<dnshostName>,
   @ocaml.doc("<p>The notification policy of the file share. <code>SettlingTimeInSeconds</code> controls
          the number of seconds to wait after the last point in time a client wrote to a file before
          generating an <code>ObjectUploaded</code> notification. Because clients can make many small
@@ -1031,7 +1115,7 @@ type smbfileShareInfo = {
          <note>
             <p>
                <code>FileShareName</code> must be set if an S3 prefix name is set in
-               <code>LocationARN</code>.</p>
+               <code>LocationARN</code>, or if an access point or access point alias is used.</p>
          </note>")
   @as("FileShareName")
   fileShareName: option<fileShareName>,
@@ -1040,9 +1124,10 @@ type smbfileShareInfo = {
          view all tags using the <code>ListTagsForResource</code> API operation.</p>")
   @as("Tags")
   tags: option<tags>,
-  @ocaml.doc("<p>The case of an object name in an Amazon S3 bucket. For <code>ClientSpecified</code>, the
-         client determines the case sensitivity. For <code>CaseSensitive</code>, the gateway
-         determines the case sensitivity. The default value is <code>ClientSpecified</code>.</p>")
+  @ocaml.doc("<p>The case of an object name in an Amazon S3 bucket. For
+            <code>ClientSpecified</code>, the client determines the case sensitivity. For
+            <code>CaseSensitive</code>, the gateway determines the case sensitivity. The default
+         value is <code>ClientSpecified</code>.</p>")
   @as("CaseSensitivity")
   caseSensitivity: option<caseSensitivity>,
   @as("Authentication") authentication: option<authentication>,
@@ -1080,7 +1165,7 @@ type smbfileShareInfo = {
       
 
          <p>For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html\">Using Microsoft Windows ACLs to
-            control access to an SMB file share</a> in the <i>AWS Storage Gateway User
+            control access to an SMB file share</a> in the <i>Storage Gateway User
             Guide</i>.</p>")
   @as("SMBACLEnabled")
   smbaclenabled: option<boolean_>,
@@ -1116,8 +1201,8 @@ type smbfileShareInfo = {
   @as("ReadOnly")
   readOnly: option<boolean_>,
   @as("ObjectACL") objectACL: option<objectACL>,
-  @ocaml.doc("<p>The default storage class for objects put into an Amazon S3 bucket by the file gateway.
-         The default value is <code>S3_INTELLIGENT_TIERING</code>. Optional.</p>
+  @ocaml.doc("<p>The default storage class for objects put into an Amazon S3 bucket by the S3
+         File Gateway. The default value is <code>S3_INTELLIGENT_TIERING</code>. Optional.</p>
 
          <p>Valid Values: <code>S3_STANDARD</code> | <code>S3_INTELLIGENT_TIERING</code> |
             <code>S3_STANDARD_IA</code> | <code>S3_ONEZONE_IA</code>
@@ -1130,8 +1215,9 @@ type smbfileShareInfo = {
   @as("Path")
   path: option<path>,
   @as("KMSKey") kmskey: option<kmskey>,
-  @ocaml.doc("<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own AWS KMS
-         key, or <code>false</code> to use a key managed by Amazon S3. Optional.</p>
+  @ocaml.doc("<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own
+            KMS key, or <code>false</code> to use a key managed by Amazon S3.
+         Optional.</p>
 
          <p>Valid Values: <code>true</code> | <code>false</code>
          </p>")
@@ -1143,9 +1229,29 @@ type smbfileShareInfo = {
   @as("FileShareARN") fileShareARN: option<fileShareARN>,
 }
 @ocaml.doc("<p>The Unix file permissions and ownership information assigned, by default, to native S3
-         objects when file gateway discovers them in S3 buckets. This operation is only supported in
-         file gateways.</p>")
+         objects when an S3 File Gateway discovers them in S3 buckets. This operation is only
+         supported in S3 File Gateways.</p>")
 type nfsfileShareInfo = {
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the storage used for audit logs.</p>")
+  @as("AuditDestinationARN")
+  auditDestinationARN: option<auditDestinationARN>,
+  @ocaml.doc("<p>Specifies the Region of the S3 bucket where the NFS file share stores files.</p>
+         <note>
+            <p>This parameter is required for NFS file shares that connect to Amazon S3
+            through a VPC endpoint, a VPC access point, or an access point alias that points to a
+            VPC access point.</p>
+         </note>")
+  @as("BucketRegion")
+  bucketRegion: option<regionId>,
+  @ocaml.doc("<p>Specifies the DNS name for the VPC endpoint that the NFS file share uses to connect to
+            Amazon S3.</p>
+         <note>
+            <p>This parameter is required for NFS file shares that connect to Amazon S3
+            through a VPC endpoint, a VPC access point, or an access point alias that points to a
+            VPC access point.</p>
+         </note>")
+  @as("VPCEndpointDNSName")
+  vpcendpointDNSName: option<dnshostName>,
   @ocaml.doc("<p>The notification policy of the file share. <code>SettlingTimeInSeconds</code> controls
          the number of seconds to wait after the last point in time a client wrote to a file before
          generating an <code>ObjectUploaded</code> notification. Because clients can make many small
@@ -1179,7 +1285,7 @@ type nfsfileShareInfo = {
          <note>
             <p>
                <code>FileShareName</code> must be set if an S3 prefix name is set in
-               <code>LocationARN</code>.</p>
+               <code>LocationARN</code>, or if an access point or access point alias is used.</p>
          </note>")
   @as("FileShareName")
   fileShareName: option<fileShareName>,
@@ -1222,8 +1328,8 @@ type nfsfileShareInfo = {
   @as("Squash") squash: option<squash>,
   @as("ClientList") clientList: option<fileShareClientList>,
   @as("ObjectACL") objectACL: option<objectACL>,
-  @ocaml.doc("<p>The default storage class for objects put into an Amazon S3 bucket by the file gateway.
-         The default value is <code>S3_INTELLIGENT_TIERING</code>. Optional.</p>
+  @ocaml.doc("<p>The default storage class for objects put into an Amazon S3 bucket by the S3
+         File Gateway. The default value is <code>S3_INTELLIGENT_TIERING</code>. Optional.</p>
 
          <p>Valid Values: <code>S3_STANDARD</code> | <code>S3_INTELLIGENT_TIERING</code> |
             <code>S3_STANDARD_IA</code> | <code>S3_ONEZONE_IA</code>
@@ -1234,8 +1340,9 @@ type nfsfileShareInfo = {
   @as("Role") role: option<role>,
   @as("Path") path: option<path>,
   @as("KMSKey") kmskey: option<kmskey>,
-  @ocaml.doc("<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own AWS KMS
-         key, or <code>false</code> to use a key managed by Amazon S3. Optional.</p>
+  @ocaml.doc("<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own
+            KMS key, or <code>false</code> to use a key managed by Amazon S3.
+         Optional.</p>
 
          <p>Valid Values: <code>true</code> | <code>false</code>
          </p>")
@@ -1250,25 +1357,35 @@ type nfsfileShareInfo = {
 @ocaml.doc("<p>Describes the object returned by <code>DescribeFileSystemAssociations</code> that
          describes a created file system association.</p>")
 type fileSystemAssociationInfo = {
+  @ocaml.doc("<p>An array containing the FileSystemAssociationStatusDetail data type, which provides
+         detailed information on file system association status.</p>")
+  @as("FileSystemAssociationStatusDetails")
+  fileSystemAssociationStatusDetails: option<fileSystemAssociationStatusDetails>,
+  @ocaml.doc("<p>Specifies network configuration information for the gateway associated with the Amazon FSx file system.</p>
+         <note>
+            <p>If multiple file systems are associated with this gateway, this parameter's
+               <code>IpAddresses</code> field is required.</p>
+         </note>")
+  @as("EndpointNetworkConfiguration")
+  endpointNetworkConfiguration: option<endpointNetworkConfiguration>,
   @as("CacheAttributes") cacheAttributes: option<cacheAttributes>,
-  @ocaml.doc(
-    "<p>A list of up to 50 tags assigned to the SMB file share, sorted alphabetically by key name. Each tag is a key-value pair.</p>"
-  )
+  @ocaml.doc("<p>A list of up to 50 tags assigned to the SMB file share, sorted alphabetically by key
+         name. Each tag is a key-value pair.</p>")
   @as("Tags")
   tags: option<tags>,
   @as("GatewayARN") gatewayARN: option<gatewayARN>,
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the storage used for the audit logs.</p>")
   @as("AuditDestinationARN")
   auditDestinationARN: option<auditDestinationARN>,
-  @ocaml.doc("<p>The status of the file system association. 
-         Valid Values: <code>AVAILABLE</code> | <code>CREATING</code> | <code>DELETING</code> | 
-         <code>FORCE_DELETING</code> | <code>MISCONFIGURED</code> | <code>UPDATING</code> | <code>UNAVAILABLE</code>
+  @ocaml.doc("<p>The status of the file system association. Valid Values: <code>AVAILABLE</code> |
+            <code>CREATING</code> | <code>DELETING</code> | <code>FORCE_DELETING</code> |
+            <code>UPDATING</code> | <code>ERROR</code>
          </p>")
   @as("FileSystemAssociationStatus")
   fileSystemAssociationStatus: option<fileSystemAssociationStatus>,
   @ocaml.doc("<p>The ARN of the backend Amazon FSx file system used for storing file data. For
-         information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/APIReference/API_FileSystem.html\">FileSystem</a> in the <i>Amazon FSx
-               API Reference</i>.</p>")
+         information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/APIReference/API_FileSystem.html\">FileSystem</a> in the
+               <i>Amazon FSx API Reference</i>.</p>")
   @as("LocationARN")
   locationARN: option<fileSystemLocationARN>,
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the file system association.</p>")
@@ -1292,60 +1409,56 @@ type smbfileShareInfoList = array<smbfileShareInfo>
 type nfsfileShareInfoList = array<nfsfileShareInfo>
 type fileSystemAssociationInfoList = array<fileSystemAssociationInfo>
 type automaticTapeCreationPolicyInfos = array<automaticTapeCreationPolicyInfo>
-@ocaml.doc("<fullname>AWS Storage Gateway Service</fullname>
+@ocaml.doc("<fullname>Storage Gateway Service</fullname>
 
-         <p>AWS Storage Gateway is the service that connects an on-premises software appliance with
-         cloud-based storage to provide seamless and secure integration between an
-         organization's on-premises IT environment and the AWS storage infrastructure. The
-         service enables you to securely upload data to the AWS Cloud for cost effective backup and
-         rapid disaster recovery.</p>
+         <p>Storage Gateway is the service that connects an on-premises software appliance
+         with cloud-based storage to provide seamless and secure integration between an
+         organization's on-premises IT environment and the Amazon Web Services storage
+         infrastructure. The service enables you to securely upload data to the Amazon Web Services Cloud for cost effective backup and rapid disaster recovery.</p>
 
-         <p>Use the following links to get started using the <i>AWS Storage Gateway Service
-            API Reference</i>:</p>
+         <p>Use the following links to get started using the <i>Storage Gateway
+            Service API Reference</i>:</p>
 
          <ul>
             <li>
                <p>
-                  <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#AWSStorageGatewayHTTPRequestsHeaders\">AWS Storage Gateway required request headers</a>: Describes the required
-               headers that you must send with every POST request to AWS Storage Gateway.</p>
+                  <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#AWSStorageGatewayHTTPRequestsHeaders\">Storage Gateway required request headers</a>: Describes the required
+               headers that you must send with every POST request to Storage Gateway.</p>
             </li>
             <li>
                <p>
-                  <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#AWSStorageGatewaySigningRequests\">Signing requests</a>: AWS Storage Gateway requires that you authenticate
+                  <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#AWSStorageGatewaySigningRequests\">Signing requests</a>: Storage Gateway requires that you authenticate
                every request you send; this topic describes how sign such a request.</p>
             </li>
             <li>
                <p>
-                  <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#APIErrorResponses\">Error responses</a>: Provides reference information about AWS Storage Gateway
-               errors.</p>
+                  <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#APIErrorResponses\">Error responses</a>: Provides reference information about Storage Gateway errors.</p>
             </li>
             <li>
                <p>
-                  <a href=\"https://docs.aws.amazon.com/storagegateway/latest/APIReference/API_Operations.html\">Operations in AWS
-                  Storage Gateway</a>: Contains detailed descriptions of all AWS Storage Gateway
-               operations, their request parameters, response elements, possible errors, and
+                  <a href=\"https://docs.aws.amazon.com/storagegateway/latest/APIReference/API_Operations.html\">Operations in Storage Gateway</a>: Contains detailed descriptions of all Storage Gateway operations, their request parameters, response elements, possible errors, and
                examples of requests and responses.</p>
             </li>
             <li>
                <p>
-                  <a href=\"https://docs.aws.amazon.com/general/latest/gr/sg.html\">AWS Storage Gateway
-                  endpoints and quotas</a>: Provides a list of each AWS Region and the endpoints
-               available for use with AWS Storage Gateway.</p>
+                  <a href=\"https://docs.aws.amazon.com/general/latest/gr/sg.html\">Storage Gateway
+                  endpoints and quotas</a>: Provides a list of each Amazon Web Services Region
+               and the endpoints available for use with Storage Gateway.</p>
             </li>
          </ul>
 
          <note>
-            <p>AWS Storage Gateway resource IDs are in uppercase. When you use these resource IDs
-            with the Amazon EC2 API, EC2 expects resource IDs in lowercase. You must change your
-            resource ID to lowercase to use it with the EC2 API. For example, in Storage Gateway the
-            ID for a volume might be <code>vol-AA22BB012345DAF670</code>. When you use this ID with
-            the EC2 API, you must change it to <code>vol-aa22bb012345daf670</code>. Otherwise, the
-            EC2 API might not behave as expected.</p>
+            <p>Storage Gateway resource IDs are in uppercase. When you use these resource IDs
+            with the Amazon EC2 API, EC2 expects resource IDs in lowercase. You must change
+            your resource ID to lowercase to use it with the EC2 API. For example, in Storage
+            Gateway the ID for a volume might be <code>vol-AA22BB012345DAF670</code>. When you use
+            this ID with the EC2 API, you must change it to <code>vol-aa22bb012345daf670</code>.
+            Otherwise, the EC2 API might not behave as expected.</p>
          </note>
 
          <important>
-            <p>IDs for Storage Gateway volumes and Amazon EBS snapshots created from gateway volumes
-            are changing to a longer format. Starting in December 2016, all new volumes and
+            <p>IDs for Storage Gateway volumes and Amazon EBS snapshots created from gateway
+            volumes are changing to a longer format. Starting in December 2016, all new volumes and
             snapshots will be created with a 17-character string. Starting in April 2016, you will
             be able to use these longer IDs so you can test your systems with the new format. For
             more information, see <a href=\"http://aws.amazon.com/ec2/faqs/#longer-ids\">Longer EC2 and
@@ -1361,7 +1474,7 @@ type automaticTapeCreationPolicyInfos = array<automaticTapeCreationPolicyInfo>
                <code>snap-78e226633445566ee</code>.</p>
 
             <p>For more information, see <a href=\"http://forums.aws.amazon.com/ann.jspa?annID=3557\">Announcement:
-               Heads-up – Longer AWS Storage Gateway volume and snapshot IDs coming in
+               Heads-up – Longer Storage Gateway volume and snapshot IDs coming in
             2016</a>.</p>
          </important>")
 module UpdateVTLDeviceType = {
@@ -1475,7 +1588,8 @@ module UpdateSMBSecurityStrategy = {
 
          <p>ClientSpecified: if you use this option, requests are established based on what is
          negotiated by the client. This option is recommended when you want to maximize
-         compatibility across different clients in your environment.</p>
+         compatibility across different clients in your environment. Supported only in S3 File
+         Gateway.</p>
 
          <p>MandatorySigning: if you use this option, file gateway only allows connections from
          SMBv2 or SMBv3 clients that have signing enabled. This option works with SMB clients on
@@ -1494,6 +1608,23 @@ module UpdateSMBSecurityStrategy = {
   external new: request => t = "UpdateSMBSecurityStrategyCommand"
   let make = (~smbsecurityStrategy, ~gatewayARN, ()) =>
     new({smbsecurityStrategy: smbsecurityStrategy, gatewayARN: gatewayARN})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module UpdateSMBLocalGroups = {
+  type t
+  type request = {
+    @ocaml.doc("<p>A list of Active Directory users and groups that you want to grant special permissions
+         for SMB file shares on the gateway.</p>")
+    @as("SMBLocalGroups")
+    smblocalGroups: smblocalGroups,
+    @as("GatewayARN") gatewayARN: gatewayARN,
+  }
+  type response = {@as("GatewayARN") gatewayARN: option<gatewayARN>}
+  @module("@aws-sdk/client-storagegateway") @new
+  external new: request => t = "UpdateSMBLocalGroupsCommand"
+  let make = (~smblocalGroups, ~gatewayARN, ()) =>
+    new({smblocalGroups: smblocalGroups, gatewayARN: gatewayARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1517,6 +1648,15 @@ module UpdateSMBFileShare = {
   type t
   @ocaml.doc("<p>UpdateSMBFileShareInput</p>")
   type request = {
+    @ocaml.doc("<p>Specifies whether opportunistic locking is enabled for the SMB file share.</p>
+         <note>
+            <p>Enabling opportunistic locking on case-sensitive shares is not recommended for
+            workloads that involve access to files with the same name in different case.</p>
+         </note>
+         <p>Valid Values: <code>true</code> | <code>false</code>
+         </p>")
+    @as("OplocksEnabled")
+    oplocksEnabled: option<boolean_>,
     @ocaml.doc("<p>The notification policy of the file share. <code>SettlingTimeInSeconds</code> controls
          the number of seconds to wait after the last point in time a client wrote to a file before
          generating an <code>ObjectUploaded</code> notification. Because clients can make many small
@@ -1551,13 +1691,14 @@ module UpdateSMBFileShare = {
          <note>
             <p>
                <code>FileShareName</code> must be set if an S3 prefix name is set in
-               <code>LocationARN</code>.</p>
+               <code>LocationARN</code>, or if an access point or access point alias is used.</p>
          </note>")
     @as("FileShareName")
     fileShareName: option<fileShareName>,
-    @ocaml.doc("<p>The case of an object name in an Amazon S3 bucket. For <code>ClientSpecified</code>, the
-         client determines the case sensitivity. For <code>CaseSensitive</code>, the gateway
-         determines the case sensitivity. The default value is <code>ClientSpecified</code>.</p>")
+    @ocaml.doc("<p>The case of an object name in an Amazon S3 bucket. For
+            <code>ClientSpecified</code>, the client determines the case sensitivity. For
+            <code>CaseSensitive</code>, the gateway determines the case sensitivity. The default
+         value is <code>ClientSpecified</code>.</p>")
     @as("CaseSensitivity")
     caseSensitivity: option<caseSensitivity>,
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the storage used for audit logs.</p>")
@@ -1595,7 +1736,7 @@ module UpdateSMBFileShare = {
       
 
          <p>For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html\">Using Microsoft Windows ACLs to
-            control access to an SMB file share</a> in the <i>AWS Storage Gateway User
+            control access to an SMB file share</a> in the <i>Storage Gateway User
             Guide</i>.</p>
 
          <p>Valid Values: <code>true</code> | <code>false</code>
@@ -1634,24 +1775,24 @@ module UpdateSMBFileShare = {
     @as("ReadOnly")
     readOnly: option<boolean_>,
     @ocaml.doc("<p>A value that sets the access control list (ACL) permission for objects in the S3 bucket
-         that a file gateway puts objects into. The default value is <code>private</code>.</p>")
+         that a S3 File Gateway puts objects into. The default value is <code>private</code>.</p>")
     @as("ObjectACL")
     objectACL: option<objectACL>,
-    @ocaml.doc("<p>The default storage class for objects put into an Amazon S3 bucket by the file gateway.
-         The default value is <code>S3_INTELLIGENT_TIERING</code>. Optional.</p>
+    @ocaml.doc("<p>The default storage class for objects put into an Amazon S3 bucket by the S3
+         File Gateway. The default value is <code>S3_INTELLIGENT_TIERING</code>. Optional.</p>
 
          <p>Valid Values: <code>S3_STANDARD</code> | <code>S3_INTELLIGENT_TIERING</code> |
             <code>S3_STANDARD_IA</code> | <code>S3_ONEZONE_IA</code>
          </p>")
     @as("DefaultStorageClass")
     defaultStorageClass: option<storageClass>,
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for Amazon
-         S3 server-side encryption. Storage Gateway does not support asymmetric CMKs. This value can
-         only be set when <code>KMSEncrypted</code> is <code>true</code>. Optional.</p>")
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for Amazon S3 server-side encryption. Storage Gateway does not support asymmetric CMKs. This
+         value can only be set when <code>KMSEncrypted</code> is <code>true</code>. Optional.</p>")
     @as("KMSKey")
     kmskey: option<kmskey>,
-    @ocaml.doc("<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own AWS KMS
-         key, or <code>false</code> to use a key managed by Amazon S3. Optional.</p>
+    @ocaml.doc("<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own
+            KMS key, or <code>false</code> to use a key managed by Amazon S3.
+         Optional.</p>
 
          <p>Valid Values: <code>true</code> | <code>false</code>
          </p>")
@@ -1673,6 +1814,7 @@ module UpdateSMBFileShare = {
   external new: request => t = "UpdateSMBFileShareCommand"
   let make = (
     ~fileShareARN,
+    ~oplocksEnabled=?,
     ~notificationPolicy=?,
     ~cacheAttributes=?,
     ~fileShareName=?,
@@ -1693,6 +1835,7 @@ module UpdateSMBFileShare = {
     (),
   ) =>
     new({
+      oplocksEnabled: oplocksEnabled,
       notificationPolicy: notificationPolicy,
       cacheAttributes: cacheAttributes,
       fileShareName: fileShareName,
@@ -1719,6 +1862,9 @@ module UpdateNFSFileShare = {
   type t
   @ocaml.doc("<p>UpdateNFSFileShareInput</p>")
   type request = {
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the storage used for audit logs.</p>")
+    @as("AuditDestinationARN")
+    auditDestinationARN: option<auditDestinationARN>,
     @ocaml.doc("<p>The notification policy of the file share. <code>SettlingTimeInSeconds</code> controls
          the number of seconds to wait after the last point in time a client wrote to a file before
          generating an <code>ObjectUploaded</code> notification. Because clients can make many small
@@ -1745,7 +1891,7 @@ module UpdateNFSFileShare = {
          </p>")
     @as("NotificationPolicy")
     notificationPolicy: option<notificationPolicy>,
-    @ocaml.doc("<p>specifies refresh cache information for the file share.</p>")
+    @ocaml.doc("<p>Specifies refresh cache information for the file share.</p>")
     @as("CacheAttributes")
     cacheAttributes: option<cacheAttributes>,
     @ocaml.doc("<p>The name of the file share. Optional.</p>
@@ -1753,7 +1899,7 @@ module UpdateNFSFileShare = {
          <note>
             <p>
                <code>FileShareName</code> must be set if an S3 prefix name is set in
-               <code>LocationARN</code>.</p>
+               <code>LocationARN</code>, or if an access point or access point alias is used.</p>
          </note>")
     @as("FileShareName")
     fileShareName: option<fileShareName>,
@@ -1808,16 +1954,16 @@ module UpdateNFSFileShare = {
          </ul>")
     @as("Squash")
     squash: option<squash>,
-    @ocaml.doc("<p>The list of clients that are allowed to access the file gateway. The list must contain
-         either valid IP addresses or valid CIDR blocks.</p>")
+    @ocaml.doc("<p>The list of clients that are allowed to access the S3 File Gateway. The list must
+         contain either valid IP addresses or valid CIDR blocks.</p>")
     @as("ClientList")
     clientList: option<fileShareClientList>,
     @ocaml.doc("<p>A value that sets the access control list (ACL) permission for objects in the S3 bucket
-         that a file gateway puts objects into. The default value is <code>private</code>.</p>")
+         that a S3 File Gateway puts objects into. The default value is <code>private</code>.</p>")
     @as("ObjectACL")
     objectACL: option<objectACL>,
-    @ocaml.doc("<p>The default storage class for objects put into an Amazon S3 bucket by the file gateway.
-         The default value is <code>S3_INTELLIGENT_TIERING</code>. Optional.</p>
+    @ocaml.doc("<p>The default storage class for objects put into an Amazon S3 bucket by the S3
+         File Gateway. The default value is <code>S3_INTELLIGENT_TIERING</code>. Optional.</p>
 
          <p>Valid Values: <code>S3_STANDARD</code> | <code>S3_INTELLIGENT_TIERING</code> |
             <code>S3_STANDARD_IA</code> | <code>S3_ONEZONE_IA</code>
@@ -1827,13 +1973,13 @@ module UpdateNFSFileShare = {
     @ocaml.doc("<p>The default values for the file share. Optional.</p>")
     @as("NFSFileShareDefaults")
     nfsfileShareDefaults: option<nfsfileShareDefaults>,
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for Amazon
-         S3 server-side encryption. Storage Gateway does not support asymmetric CMKs. This value can
-         only be set when <code>KMSEncrypted</code> is <code>true</code>. Optional.</p>")
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for Amazon S3 server-side encryption. Storage Gateway does not support asymmetric CMKs. This
+         value can only be set when <code>KMSEncrypted</code> is <code>true</code>. Optional.</p>")
     @as("KMSKey")
     kmskey: option<kmskey>,
-    @ocaml.doc("<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own AWS KMS
-         key, or <code>false</code> to use a key managed by Amazon S3. Optional.</p>
+    @ocaml.doc("<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own
+            KMS key, or <code>false</code> to use a key managed by Amazon S3.
+         Optional.</p>
 
          <p>Valid Values: <code>true</code> | <code>false</code>
          </p>")
@@ -1853,6 +1999,7 @@ module UpdateNFSFileShare = {
   external new: request => t = "UpdateNFSFileShareCommand"
   let make = (
     ~fileShareARN,
+    ~auditDestinationARN=?,
     ~notificationPolicy=?,
     ~cacheAttributes=?,
     ~fileShareName=?,
@@ -1869,6 +2016,7 @@ module UpdateNFSFileShare = {
     (),
   ) =>
     new({
+      auditDestinationARN: auditDestinationARN,
       notificationPolicy: notificationPolicy,
       cacheAttributes: cacheAttributes,
       fileShareName: fileShareName,
@@ -1969,6 +2117,8 @@ module UpdateGatewaySoftwareNow = {
 module UpdateGatewayInformation = {
   type t
   type request = {
+    @ocaml.doc("<p>Specifies the size of the gateway's metadata cache.</p>") @as("GatewayCapacity")
+    gatewayCapacity: option<gatewayCapacity>,
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that you want to use
          to monitor and log events in the gateway.</p>
 
@@ -1991,8 +2141,16 @@ module UpdateGatewayInformation = {
   }
   @module("@aws-sdk/client-storagegateway") @new
   external new: request => t = "UpdateGatewayInformationCommand"
-  let make = (~gatewayARN, ~cloudWatchLogGroupARN=?, ~gatewayTimezone=?, ~gatewayName=?, ()) =>
+  let make = (
+    ~gatewayARN,
+    ~gatewayCapacity=?,
+    ~cloudWatchLogGroupARN=?,
+    ~gatewayTimezone=?,
+    ~gatewayName=?,
+    (),
+  ) =>
     new({
+      gatewayCapacity: gatewayCapacity,
       cloudWatchLogGroupARN: cloudWatchLogGroupARN,
       gatewayTimezone: gatewayTimezone,
       gatewayName: gatewayName,
@@ -2011,13 +2169,12 @@ module UpdateFileSystemAssociation = {
     @ocaml.doc("<p>The password of the user credential.</p>") @as("Password")
     password: option<domainUserPassword>,
     @ocaml.doc("<p>The user name of the user credential that has permission to access the root share D$ of
-         the Amazon FSx file system. The user account must belong to the Amazon FSx delegated admin
-         user group.</p>")
+         the Amazon FSx file system. The user account must belong to the Amazon FSx
+         delegated admin user group.</p>")
     @as("UserName")
     userName: option<domainUserName>,
-    @ocaml.doc(
-      "<p>The Amazon Resource Name (ARN) of the file system association that you want to update.</p>"
-    )
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the file system association that you want to
+         update.</p>")
     @as("FileSystemAssociationARN")
     fileSystemAssociationARN: fileSystemAssociationARN,
   }
@@ -2233,7 +2390,7 @@ module SetSMBGuestPassword = {
   type request = {
     @ocaml.doc("<p>The password that you want to set for your SMB server.</p>") @as("Password")
     password: smbguestPassword,
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the file gateway the SMB file share is associated
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the S3 File Gateway the SMB file share is associated
          with.</p>")
     @as("GatewayARN")
     gatewayARN: gatewayARN,
@@ -2291,7 +2448,7 @@ module RetrieveTapeArchive = {
   type request = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the gateway you want to retrieve the virtual tape to.
          Use the <a>ListGateways</a> operation to return a list of gateways for your
-         account and AWS Region.</p>
+         account and Amazon Web Services Region.</p>
 
          <p>You retrieve archived virtual tapes to only one gateway and the gateway must be a tape
          gateway.</p>")
@@ -2368,9 +2525,8 @@ module RefreshCache = {
     @as("Recursive")
     recursive: option<boolean_>,
     @ocaml.doc("<p>A comma-separated list of the paths of folders to refresh in the cache. The default is
-            [<code>\"/\"</code>]. The default refreshes objects and folders at the root of the Amazon
-         S3 bucket. If <code>Recursive</code> is set to <code>true</code>, the entire S3 bucket that
-         the file share has access to is refreshed.</p>")
+            [<code>\"/\"</code>]. The default refreshes objects and folders at the root of the Amazon S3 bucket. If <code>Recursive</code> is set to <code>true</code>, the entire S3
+         bucket that the file share has access to is refreshed.</p>")
     @as("FolderList")
     folderList: option<folderList>,
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the file share you want to refresh.</p>")
@@ -2672,31 +2828,29 @@ module ListGateways = {
 module ListFileSystemAssociations = {
   type t
   type request = {
-    @ocaml.doc(
-      "<p>Opaque pagination token returned from a previous <code>ListFileSystemAssociations</code> operation. If present, <code>Marker</code> specifies where to continue the list from after a previous call to <code>ListFileSystemAssociations</code>. Optional.</p>"
-    )
+    @ocaml.doc("<p>Opaque pagination token returned from a previous <code>ListFileSystemAssociations</code>
+         operation. If present, <code>Marker</code> specifies where to continue the list from after
+         a previous call to <code>ListFileSystemAssociations</code>. Optional.</p>")
     @as("Marker")
     marker: option<marker>,
-    @ocaml.doc(
-      "<p>The maximum number of file system associations to return in the response. If present, <code>Limit</code> must be an integer with a value greater than zero. Optional.</p>"
-    )
+    @ocaml.doc("<p>The maximum number of file system associations to return in the response. If present,
+            <code>Limit</code> must be an integer with a value greater than zero. Optional.</p>")
     @as("Limit")
     limit: option<positiveIntObject>,
     @as("GatewayARN") gatewayARN: option<gatewayARN>,
   }
   type response = {
-    @ocaml.doc(
-      "<p>An array of information about the Amazon FSx gateway's file system associations.</p>"
-    )
+    @ocaml.doc("<p>An array of information about the Amazon FSx gateway's file system
+         associations.</p>")
     @as("FileSystemAssociationSummaryList")
     fileSystemAssociationSummaryList: option<fileSystemAssociationSummaryList>,
-    @ocaml.doc("<p>If a value is present, there are more file system associations to return. 
-         In a subsequent request, use <code>NextMarker</code> as the value for <code>Marker</code> to retrieve the next set of file system associations.</p>")
+    @ocaml.doc("<p>If a value is present, there are more file system associations to return. In a
+         subsequent request, use <code>NextMarker</code> as the value for <code>Marker</code> to
+         retrieve the next set of file system associations.</p>")
     @as("NextMarker")
     nextMarker: option<marker>,
-    @ocaml.doc(
-      "<p>If the request includes <code>Marker</code>, the response returns that value in this field.</p>"
-    )
+    @ocaml.doc("<p>If the request includes <code>Marker</code>, the response returns that value in this
+         field.</p>")
     @as("Marker")
     marker: option<marker>,
   }
@@ -2727,7 +2881,7 @@ module ListFileShares = {
   }
   @ocaml.doc("<p>ListFileShareOutput</p>")
   type response = {
-    @ocaml.doc("<p>An array of information about the file gateway's file shares.</p>")
+    @ocaml.doc("<p>An array of information about the S3 File Gateway's file shares.</p>")
     @as("FileShareInfoList")
     fileShareInfoList: option<fileShareInfoList>,
     @ocaml.doc("<p>If a value is present, there are more file shares to return. In a subsequent request,
@@ -2778,7 +2932,7 @@ module JoinDomain = {
     @ocaml.doc("<p>The name of the domain that you want the gateway to join.</p>") @as("DomainName")
     domainName: domainName,
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the gateway. Use the <code>ListGateways</code>
-         operation to return a list of gateways for your account and AWS Region.</p>")
+         operation to return a list of gateways for your account and Amazon Web Services Region.</p>")
     @as("GatewayARN")
     gatewayARN: gatewayARN,
   }
@@ -2856,10 +3010,10 @@ module JoinDomain = {
 module DisassociateFileSystem = {
   type t
   type request = {
-    @ocaml.doc("<p>If this value is set to true, the operation disassociates an Amazon FSx file system
-         immediately. It ends all data uploads to the file system, and the file system association
-         enters the <code>FORCE_DELETING</code> status. If this value is set to false, the Amazon
-         FSx file system does not disassociate until all data is uploaded.</p>")
+    @ocaml.doc("<p>If this value is set to true, the operation disassociates an Amazon FSx file
+         system immediately. It ends all data uploads to the file system, and the file system
+         association enters the <code>FORCE_DELETING</code> status. If this value is set to false,
+         the Amazon FSx file system does not disassociate until all data is uploaded.</p>")
     @as("ForceDelete")
     forceDelete: option<boolean2>,
     @ocaml.doc(
@@ -3138,7 +3292,12 @@ module DescribeSMBSettings = {
   type t
   type request = {@as("GatewayARN") gatewayARN: gatewayARN}
   type response = {
-    @ocaml.doc("<p>The shares on this gateway appear when listing shares.</p>")
+    @ocaml.doc("<p>A list of Active Directory users and groups that have special permissions for SMB file
+         shares on the gateway.</p>")
+    @as("SMBLocalGroups")
+    smblocalGroups: option<smblocalGroups>,
+    @ocaml.doc("<p>The shares on this gateway appear when listing shares. Only supported for S3 File
+         Gateways. </p>")
     @as("FileSharesVisible")
     fileSharesVisible: option<boolean_>,
     @ocaml.doc("<p>The type of security strategy that was specified for file gateway.</p>
@@ -3148,7 +3307,8 @@ module DescribeSMBSettings = {
                <p>
                   <code>ClientSpecified</code>: If you use this option, requests are established
                based on what is negotiated by the client. This option is recommended when you want
-               to maximize compatibility across different clients in your environment.</p>
+               to maximize compatibility across different clients in your environment. Only
+               supported for S3 File Gateways.</p>
             </li>
             <li>
                <p>
@@ -3167,7 +3327,7 @@ module DescribeSMBSettings = {
     @as("SMBSecurityStrategy")
     smbsecurityStrategy: option<smbsecurityStrategy>,
     @ocaml.doc("<p>This value is <code>true</code> if a password for the guest user <code>smbguest</code>
-         is set, otherwise <code>false</code>.</p>
+         is set, otherwise <code>false</code>. Only supported for S3 File Gateways.</p>
 
          <p>Valid Values: <code>true</code> | <code>false</code>
          </p>")
@@ -3296,6 +3456,17 @@ module DescribeGatewayInformation = {
   type request = {@as("GatewayARN") gatewayARN: gatewayARN}
   @ocaml.doc("<p>A JSON object containing the following fields:</p>")
   type response = {
+    @ocaml.doc("<p>A unique identifier for the specific instance of the host platform running the gateway.
+         This value is only available for certain host environments, and its format depends on the
+         host environment type.</p>")
+    @as("HostEnvironmentId")
+    hostEnvironmentId: option<hostEnvironmentId>,
+    @ocaml.doc("<p>A list of the metadata cache sizes that the gateway can support based on its current
+         hardware specifications.</p>")
+    @as("SupportedGatewayCapacities")
+    supportedGatewayCapacities: option<supportedGatewayCapacities>,
+    @ocaml.doc("<p>Specifies the size of the gateway's metadata cache.</p>") @as("GatewayCapacity")
+    gatewayCapacity: option<gatewayCapacity>,
     @ocaml.doc("<p>Date after which this gateway will not receive software updates for new features and bug
          fixes.</p>")
     @as("DeprecationDate")
@@ -3311,7 +3482,8 @@ module DescribeGatewayInformation = {
          </p>")
     @as("EndpointType")
     endpointType: option<endpointType>,
-    @ocaml.doc("<p>The type of hypervisor environment used by the host.</p>") @as("HostEnvironment")
+    @ocaml.doc("<p>The type of hardware or software platform on which the gateway is running.</p>")
+    @as("HostEnvironment")
     hostEnvironment: option<hostEnvironment>,
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that is used to
          monitor events in the gateway.</p>")
@@ -3326,7 +3498,7 @@ module DescribeGatewayInformation = {
          tags using the <code>ListTagsForResource</code> API operation.</p>")
     @as("Tags")
     tags: option<tags>,
-    @ocaml.doc("<p>The AWS Region where the Amazon EC2 instance is located.</p>")
+    @ocaml.doc("<p>The Amazon Web Services Region where the Amazon EC2 instance is located.</p>")
     @as("Ec2InstanceRegion")
     ec2InstanceRegion: option<ec2InstanceRegion>,
     @ocaml.doc("<p>The ID of the Amazon EC2 instance that was used to launch the gateway.</p>")
@@ -3435,8 +3607,8 @@ module DescribeCache = {
     @as("CacheHitPercentage")
     cacheHitPercentage: option<double>,
     @ocaml.doc("<p>The file share's contribution to the overall percentage of the gateway's cache
-         that has not been persisted to AWS. The sample is taken at the end of the reporting
-         period.</p>")
+         that has not been persisted to Amazon Web Services. The sample is taken at the end of the
+         reporting period.</p>")
     @as("CacheDirtyPercentage")
     cacheDirtyPercentage: option<double>,
     @ocaml.doc("<p>Percent use of the gateway's cache storage. This metric applies only to the
@@ -3585,7 +3757,7 @@ module DeleteTape = {
     tapeARN: tapeARN,
     @ocaml.doc("<p>The unique Amazon Resource Name (ARN) of the gateway that the virtual tape to delete is
          associated with. Use the <a>ListGateways</a> operation to return a list of
-         gateways for your account and AWS Region.</p>")
+         gateways for your account and Amazon Web Services Region.</p>")
     @as("GatewayARN")
     gatewayARN: gatewayARN,
   }
@@ -3636,9 +3808,9 @@ module DeleteFileShare = {
   @ocaml.doc("<p>DeleteFileShareInput</p>")
   type request = {
     @ocaml.doc("<p>If this value is set to <code>true</code>, the operation deletes a file share
-         immediately and aborts all data uploads to AWS. Otherwise, the file share is not deleted
-         until all data is uploaded to AWS. This process aborts the data upload process, and the
-         file share enters the <code>FORCE_DELETING</code> status.</p>
+         immediately and aborts all data uploads to Amazon Web Services. Otherwise, the file share is
+         not deleted until all data is uploaded to Amazon Web Services. This process aborts the data
+         upload process, and the file share enters the <code>FORCE_DELETING</code> status.</p>
 
          <p>Valid Values: <code>true</code> | <code>false</code>
          </p>")
@@ -3768,13 +3940,13 @@ module CreateTapes = {
          </p>")
     @as("PoolId")
     poolId: option<poolId>,
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for Amazon
-         S3 server-side encryption. Storage Gateway does not support asymmetric CMKs. This value can
-         only be set when <code>KMSEncrypted</code> is <code>true</code>. Optional.</p>")
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for Amazon S3 server-side encryption. Storage Gateway does not support asymmetric CMKs. This
+         value can only be set when <code>KMSEncrypted</code> is <code>true</code>. Optional.</p>")
     @as("KMSKey")
     kmskey: option<kmskey>,
-    @ocaml.doc("<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own AWS KMS
-         key, or <code>false</code> to use a key managed by Amazon S3. Optional.</p>
+    @ocaml.doc("<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own
+            KMS key, or <code>false</code> to use a key managed by Amazon S3.
+         Optional.</p>
 
          <p>Valid Values: <code>true</code> | <code>false</code>
          </p>")
@@ -3810,7 +3982,7 @@ module CreateTapes = {
     tapeSizeInBytes: tapeSize,
     @ocaml.doc("<p>The unique Amazon Resource Name (ARN) that represents the gateway to associate the
          virtual tapes with. Use the <a>ListGateways</a> operation to return a list of
-         gateways for your account and AWS Region.</p>")
+         gateways for your account and Amazon Web Services Region.</p>")
     @as("GatewayARN")
     gatewayARN: gatewayARN,
   }
@@ -3878,13 +4050,13 @@ module CreateTapeWithBarcode = {
          </p>")
     @as("PoolId")
     poolId: option<poolId>,
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for Amazon
-         S3 server-side encryption. Storage Gateway does not support asymmetric CMKs. This value can
-         only be set when <code>KMSEncrypted</code> is <code>true</code>. Optional.</p>")
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for Amazon S3 server-side encryption. Storage Gateway does not support asymmetric CMKs. This
+         value can only be set when <code>KMSEncrypted</code> is <code>true</code>. Optional.</p>")
     @as("KMSKey")
     kmskey: option<kmskey>,
-    @ocaml.doc("<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own AWS KMS
-         key, or <code>false</code> to use a key managed by Amazon S3. Optional.</p>
+    @ocaml.doc("<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own
+            KMS key, or <code>false</code> to use a key managed by Amazon S3.
+         Optional.</p>
 
          <p>Valid Values: <code>true</code> | <code>false</code>
          </p>")
@@ -3907,7 +4079,7 @@ module CreateTapeWithBarcode = {
     tapeSizeInBytes: tapeSize,
     @ocaml.doc("<p>The unique Amazon Resource Name (ARN) that represents the gateway to associate the
          virtual tape with. Use the <a>ListGateways</a> operation to return a list of
-         gateways for your account and AWS Region.</p>")
+         gateways for your account and Amazon Web Services Region.</p>")
     @as("GatewayARN")
     gatewayARN: gatewayARN,
   }
@@ -3963,9 +4135,9 @@ module CreateTapePool = {
     @as("RetentionLockTimeInDays")
     retentionLockTimeInDays: option<retentionLockTimeInDays>,
     @ocaml.doc("<p>Tape retention lock can be configured in two modes. When configured in governance mode,
-         AWS accounts with specific IAM permissions are authorized to remove the tape retention lock
-         from archived virtual tapes. When configured in compliance mode, the tape retention lock
-         cannot be removed by any user, including the root AWS account.</p>")
+            Amazon Web Services accounts with specific IAM permissions are authorized to remove the
+         tape retention lock from archived virtual tapes. When configured in compliance mode, the
+         tape retention lock cannot be removed by any user, including the root Amazon Web Services account.</p>")
     @as("RetentionLockType")
     retentionLockType: option<retentionLockType>,
     @ocaml.doc("<p>The storage class that is associated with the new custom pool. When you use your backup
@@ -3978,7 +4150,7 @@ module CreateTapePool = {
   type response = {
     @ocaml.doc("<p>The unique Amazon Resource Name (ARN) that represents the custom tape pool. Use the
             <a>ListTapePools</a> operation to return a list of tape pools for your
-         account and AWS Region.</p>")
+         account and Amazon Web Services Region.</p>")
     @as("PoolARN")
     poolARN: option<poolARN>,
   }
@@ -4045,13 +4217,13 @@ module CreateStorediSCSIVolume = {
          </note>")
     @as("Tags")
     tags: option<tags>,
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for Amazon
-         S3 server-side encryption. Storage Gateway does not support asymmetric CMKs. This value can
-         only be set when <code>KMSEncrypted</code> is <code>true</code>. Optional.</p>")
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for Amazon S3 server-side encryption. Storage Gateway does not support asymmetric CMKs. This
+         value can only be set when <code>KMSEncrypted</code> is <code>true</code>. Optional.</p>")
     @as("KMSKey")
     kmskey: option<kmskey>,
-    @ocaml.doc("<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own AWS KMS
-         key, or <code>false</code> to use a key managed by Amazon S3. Optional.</p>
+    @ocaml.doc("<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own
+            KMS key, or <code>false</code> to use a key managed by Amazon S3.
+         Optional.</p>
 
          <p>Valid Values: <code>true</code> | <code>false</code>
          </p>")
@@ -4149,7 +4321,7 @@ module CreateSnapshotFromVolumeRecoveryPoint = {
     tags: option<tags>,
     @ocaml.doc("<p>Textual description of the snapshot that appears in the Amazon EC2 console, Elastic
          Block Store snapshots panel in the <b>Description</b> field, and
-         in the AWS Storage Gateway snapshot <b>Details</b> pane,
+         in the Storage Gateway snapshot <b>Details</b> pane,
             <b>Description</b> field.</p>")
     @as("SnapshotDescription")
     snapshotDescription: snapshotDescription,
@@ -4205,7 +4377,7 @@ module CreateSnapshot = {
     tags: option<tags>,
     @ocaml.doc("<p>Textual description of the snapshot that appears in the Amazon EC2 console, Elastic
          Block Store snapshots panel in the <b>Description</b> field, and
-         in the AWS Storage Gateway snapshot <b>Details</b> pane,
+         in the Storage Gateway snapshot <b>Details</b> pane,
             <b>Description</b> field.</p>")
     @as("SnapshotDescription")
     snapshotDescription: snapshotDescription,
@@ -4238,6 +4410,32 @@ module CreateSMBFileShare = {
   type t
   @ocaml.doc("<p>CreateSMBFileShareInput</p>")
   type request = {
+    @ocaml.doc("<p>Specifies whether opportunistic locking is enabled for the SMB file share.</p>
+         <note>
+            <p>Enabling opportunistic locking on case-sensitive shares is not recommended for
+            workloads that involve access to files with the same name in different case.</p>
+         </note>
+         <p>Valid Values: <code>true</code> | <code>false</code>
+         </p>")
+    @as("OplocksEnabled")
+    oplocksEnabled: option<boolean_>,
+    @ocaml.doc("<p>Specifies the Region of the S3 bucket where the SMB file share stores files.</p>
+         <note>
+            <p>This parameter is required for SMB file shares that connect to Amazon S3
+            through a VPC endpoint, a VPC access point, or an access point alias that points to a
+            VPC access point.</p>
+         </note>")
+    @as("BucketRegion")
+    bucketRegion: option<regionId>,
+    @ocaml.doc("<p>Specifies the DNS name for the VPC endpoint that the SMB file share uses to connect to
+            Amazon S3.</p>
+         <note>
+            <p>This parameter is required for SMB file shares that connect to Amazon S3
+            through a VPC endpoint, a VPC access point, or an access point alias that points to a
+            VPC access point.</p>
+         </note>")
+    @as("VPCEndpointDNSName")
+    vpcendpointDNSName: option<dnshostName>,
     @ocaml.doc("<p>The notification policy of the file share. <code>SettlingTimeInSeconds</code> controls
          the number of seconds to wait after the last point in time a client wrote to a file before
          generating an <code>ObjectUploaded</code> notification. Because clients can make many small
@@ -4272,7 +4470,7 @@ module CreateSMBFileShare = {
          <note>
             <p>
                <code>FileShareName</code> must be set if an S3 prefix name is set in
-               <code>LocationARN</code>.</p>
+               <code>LocationARN</code>, or if an access point or access point alias is used.</p>
          </note>")
     @as("FileShareName")
     fileShareName: option<fileShareName>,
@@ -4287,9 +4485,10 @@ module CreateSMBFileShare = {
          </note>")
     @as("Tags")
     tags: option<tags>,
-    @ocaml.doc("<p>The case of an object name in an Amazon S3 bucket. For <code>ClientSpecified</code>, the
-         client determines the case sensitivity. For <code>CaseSensitive</code>, the gateway
-         determines the case sensitivity. The default value is <code>ClientSpecified</code>.</p>")
+    @ocaml.doc("<p>The case of an object name in an Amazon S3 bucket. For
+            <code>ClientSpecified</code>, the client determines the case sensitivity. For
+            <code>CaseSensitive</code>, the gateway determines the case sensitivity. The default
+         value is <code>ClientSpecified</code>.</p>")
     @as("CaseSensitivity")
     caseSensitivity: option<caseSensitivity>,
     @ocaml.doc("<p>The authentication method that users use to access the file share. The default is
@@ -4338,7 +4537,7 @@ module CreateSMBFileShare = {
       
 
          <p>For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html\">Using Microsoft Windows ACLs to
-            control access to an SMB file share</a> in the <i>AWS Storage Gateway User
+            control access to an SMB file share</a> in the <i>Storage Gateway User
             Guide</i>.</p>
 
          <p>Valid Values: <code>true</code> | <code>false</code>
@@ -4377,42 +4576,65 @@ module CreateSMBFileShare = {
     @as("ReadOnly")
     readOnly: option<boolean_>,
     @ocaml.doc("<p>A value that sets the access control list (ACL) permission for objects in the S3 bucket
-         that a file gateway puts objects into. The default value is <code>private</code>.</p>")
+         that a S3 File Gateway puts objects into. The default value is <code>private</code>.</p>")
     @as("ObjectACL")
     objectACL: option<objectACL>,
-    @ocaml.doc("<p>The default storage class for objects put into an Amazon S3 bucket by the file gateway.
-         The default value is <code>S3_INTELLIGENT_TIERING</code>. Optional.</p>
+    @ocaml.doc("<p>The default storage class for objects put into an Amazon S3 bucket by the S3
+         File Gateway. The default value is <code>S3_INTELLIGENT_TIERING</code>. Optional.</p>
 
          <p>Valid Values: <code>S3_STANDARD</code> | <code>S3_INTELLIGENT_TIERING</code> |
             <code>S3_STANDARD_IA</code> | <code>S3_ONEZONE_IA</code>
          </p>")
     @as("DefaultStorageClass")
     defaultStorageClass: option<storageClass>,
-    @ocaml.doc("<p>The ARN of the backend storage used for storing file data. A prefix name can be added to
-         the S3 bucket name. It must end with a \"/\".</p>")
+    @ocaml.doc("<p>A custom ARN for the backend storage used for storing data for file shares. It includes
+         a resource ARN with an optional prefix concatenation. The prefix must end with a forward
+         slash (/).</p>
+         <note>
+            <p>You can specify LocationARN as a bucket ARN, access point ARN or access point alias,
+            as shown in the following examples.</p>
+
+            <p>Bucket ARN:</p>
+            <p>
+               <code>arn:aws:s3:::my-bucket/prefix/</code>
+            </p>
+
+            <p>Access point ARN:</p>
+            <p>
+               <code>arn:aws:s3:region:account-id:accesspoint/access-point-name/prefix/</code>
+            </p>
+
+            <p>If you specify an access point, the bucket policy must be configured to delegate
+            access control to the access point. For information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-policies.html#access-points-delegating-control\">Delegating access control to access points</a> in the <i>Amazon S3 User Guide</i>.</p>
+
+            <p>Access point alias:</p>
+            <p>
+               <code>test-ap-ab123cdef4gehijklmn5opqrstuvuse1a-s3alias</code>
+            </p>
+         </note>")
     @as("LocationARN")
     locationARN: locationARN,
-    @ocaml.doc("<p>The ARN of the AWS Identity and Access Management (IAM) role that a file gateway assumes
-         when it accesses the underlying storage.</p>")
+    @ocaml.doc("<p>The ARN of the Identity and Access Management (IAM) role that an S3 File Gateway assumes when it
+         accesses the underlying storage.</p>")
     @as("Role")
     role: role,
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for Amazon
-         S3 server-side encryption. Storage Gateway does not support asymmetric CMKs. This value can
-         only be set when <code>KMSEncrypted</code> is <code>true</code>. Optional.</p>")
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for Amazon S3 server-side encryption. Storage Gateway does not support asymmetric CMKs. This
+         value can only be set when <code>KMSEncrypted</code> is <code>true</code>. Optional.</p>")
     @as("KMSKey")
     kmskey: option<kmskey>,
-    @ocaml.doc("<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own AWS KMS
-         key, or <code>false</code> to use a key managed by Amazon S3. Optional.</p>
+    @ocaml.doc("<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own
+            KMS key, or <code>false</code> to use a key managed by Amazon S3.
+         Optional.</p>
 
          <p>Valid Values: <code>true</code> | <code>false</code>
          </p>")
     @as("KMSEncrypted")
     kmsencrypted: option<boolean_>,
-    @ocaml.doc("<p>The ARN of the file gateway on which you want to create a file share.</p>")
+    @ocaml.doc("<p>The ARN of the S3 File Gateway on which you want to create a file share.</p>")
     @as("GatewayARN")
     gatewayARN: gatewayARN,
-    @ocaml.doc("<p>A unique string value that you supply that is used by file gateway to ensure idempotent
-         file share creation.</p>")
+    @ocaml.doc("<p>A unique string value that you supply that is used by S3 File Gateway to ensure
+         idempotent file share creation.</p>")
     @as("ClientToken")
     clientToken: clientToken,
   }
@@ -4429,6 +4651,9 @@ module CreateSMBFileShare = {
     ~role,
     ~gatewayARN,
     ~clientToken,
+    ~oplocksEnabled=?,
+    ~bucketRegion=?,
+    ~vpcendpointDNSName=?,
     ~notificationPolicy=?,
     ~cacheAttributes=?,
     ~fileShareName=?,
@@ -4451,6 +4676,9 @@ module CreateSMBFileShare = {
     (),
   ) =>
     new({
+      oplocksEnabled: oplocksEnabled,
+      bucketRegion: bucketRegion,
+      vpcendpointDNSName: vpcendpointDNSName,
       notificationPolicy: notificationPolicy,
       cacheAttributes: cacheAttributes,
       fileShareName: fileShareName,
@@ -4482,6 +4710,26 @@ module CreateNFSFileShare = {
   type t
   @ocaml.doc("<p>CreateNFSFileShareInput</p>")
   type request = {
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the storage used for audit logs.</p>")
+    @as("AuditDestinationARN")
+    auditDestinationARN: option<auditDestinationARN>,
+    @ocaml.doc("<p>Specifies the Region of the S3 bucket where the NFS file share stores files.</p>
+         <note>
+            <p>This parameter is required for NFS file shares that connect to Amazon S3
+            through a VPC endpoint, a VPC access point, or an access point alias that points to a
+            VPC access point.</p>
+         </note>")
+    @as("BucketRegion")
+    bucketRegion: option<regionId>,
+    @ocaml.doc("<p>Specifies the DNS name for the VPC endpoint that the NFS file share uses to connect to
+            Amazon S3.</p>
+         <note>
+            <p>This parameter is required for NFS file shares that connect to Amazon S3
+            through a VPC endpoint, a VPC access point, or an access point alias that points to a
+            VPC access point.</p>
+         </note>")
+    @as("VPCEndpointDNSName")
+    vpcendpointDNSName: option<dnshostName>,
     @ocaml.doc("<p>The notification policy of the file share. <code>SettlingTimeInSeconds</code> controls
          the number of seconds to wait after the last point in time a client wrote to a file before
          generating an <code>ObjectUploaded</code> notification. Because clients can make many small
@@ -4516,7 +4764,7 @@ module CreateNFSFileShare = {
          <note>
             <p>
                <code>FileShareName</code> must be set if an S3 prefix name is set in
-               <code>LocationARN</code>.</p>
+               <code>LocationARN</code>, or if an access point or access point alias is used.</p>
          </note>")
     @as("FileShareName")
     fileShareName: option<fileShareName>,
@@ -4582,50 +4830,73 @@ module CreateNFSFileShare = {
          </ul>")
     @as("Squash")
     squash: option<squash>,
-    @ocaml.doc("<p>The list of clients that are allowed to access the file gateway. The list must contain
-         either valid IP addresses or valid CIDR blocks.</p>")
+    @ocaml.doc("<p>The list of clients that are allowed to access the S3 File Gateway. The list must
+         contain either valid IP addresses or valid CIDR blocks.</p>")
     @as("ClientList")
     clientList: option<fileShareClientList>,
     @ocaml.doc("<p>A value that sets the access control list (ACL) permission for objects in the S3 bucket
-         that a file gateway puts objects into. The default value is <code>private</code>.</p>")
+         that a S3 File Gateway puts objects into. The default value is <code>private</code>.</p>")
     @as("ObjectACL")
     objectACL: option<objectACL>,
-    @ocaml.doc("<p>The default storage class for objects put into an Amazon S3 bucket by the file gateway.
-         The default value is <code>S3_INTELLIGENT_TIERING</code>. Optional.</p>
+    @ocaml.doc("<p>The default storage class for objects put into an Amazon S3 bucket by the S3
+         File Gateway. The default value is <code>S3_INTELLIGENT_TIERING</code>. Optional.</p>
 
          <p>Valid Values: <code>S3_STANDARD</code> | <code>S3_INTELLIGENT_TIERING</code> |
             <code>S3_STANDARD_IA</code> | <code>S3_ONEZONE_IA</code>
          </p>")
     @as("DefaultStorageClass")
     defaultStorageClass: option<storageClass>,
-    @ocaml.doc("<p>The ARN of the backend storage used for storing file data. A prefix name can be added to
-         the S3 bucket name. It must end with a \"/\".</p>")
+    @ocaml.doc("<p>A custom ARN for the backend storage used for storing data for file shares. It includes
+         a resource ARN with an optional prefix concatenation. The prefix must end with a forward
+         slash (/).</p>
+         <note>
+            <p>You can specify LocationARN as a bucket ARN, access point ARN or access point alias,
+            as shown in the following examples.</p>
+
+            <p>Bucket ARN:</p>
+            <p>
+               <code>arn:aws:s3:::my-bucket/prefix/</code>
+            </p>
+
+            <p>Access point ARN:</p>
+            <p>
+               <code>arn:aws:s3:region:account-id:accesspoint/access-point-name/prefix/</code>
+            </p>
+
+            <p>If you specify an access point, the bucket policy must be configured to delegate
+            access control to the access point. For information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-policies.html#access-points-delegating-control\">Delegating access control to access points</a> in the <i>Amazon S3 User Guide</i>.</p>
+
+            <p>Access point alias:</p>
+            <p>
+               <code>test-ap-ab123cdef4gehijklmn5opqrstuvuse1a-s3alias</code>
+            </p>
+         </note>")
     @as("LocationARN")
     locationARN: locationARN,
-    @ocaml.doc("<p>The ARN of the AWS Identity and Access Management (IAM) role that a file gateway assumes
-         when it accesses the underlying storage.</p>")
+    @ocaml.doc("<p>The ARN of the Identity and Access Management (IAM) role that an S3 File Gateway assumes when it
+         accesses the underlying storage.</p>")
     @as("Role")
     role: role,
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for Amazon
-         S3 server-side encryption. Storage Gateway does not support asymmetric CMKs. This value can
-         only be set when <code>KMSEncrypted</code> is <code>true</code>. Optional.</p>")
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for Amazon S3 server-side encryption. Storage Gateway does not support asymmetric CMKs. This
+         value can only be set when <code>KMSEncrypted</code> is <code>true</code>. Optional.</p>")
     @as("KMSKey")
     kmskey: option<kmskey>,
-    @ocaml.doc("<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own AWS KMS
-         key, or <code>false</code> to use a key managed by Amazon S3. Optional.</p>
+    @ocaml.doc("<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own
+            KMS key, or <code>false</code> to use a key managed by Amazon S3.
+         Optional.</p>
 
          <p>Valid Values: <code>true</code> | <code>false</code>
          </p>")
     @as("KMSEncrypted")
     kmsencrypted: option<boolean_>,
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the file gateway on which you want to create a file
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the S3 File Gateway on which you want to create a file
          share.</p>")
     @as("GatewayARN")
     gatewayARN: gatewayARN,
     @ocaml.doc("<p>File share default values. Optional.</p>") @as("NFSFileShareDefaults")
     nfsfileShareDefaults: option<nfsfileShareDefaults>,
-    @ocaml.doc("<p>A unique string value that you supply that is used by file gateway to ensure idempotent
-         file share creation.</p>")
+    @ocaml.doc("<p>A unique string value that you supply that is used by S3 File Gateway to ensure
+         idempotent file share creation.</p>")
     @as("ClientToken")
     clientToken: clientToken,
   }
@@ -4642,6 +4913,9 @@ module CreateNFSFileShare = {
     ~role,
     ~gatewayARN,
     ~clientToken,
+    ~auditDestinationARN=?,
+    ~bucketRegion=?,
+    ~vpcendpointDNSName=?,
     ~notificationPolicy=?,
     ~cacheAttributes=?,
     ~fileShareName=?,
@@ -4659,6 +4933,9 @@ module CreateNFSFileShare = {
     (),
   ) =>
     new({
+      auditDestinationARN: auditDestinationARN,
+      bucketRegion: bucketRegion,
+      vpcendpointDNSName: vpcendpointDNSName,
       notificationPolicy: notificationPolicy,
       cacheAttributes: cacheAttributes,
       fileShareName: fileShareName,
@@ -4695,13 +4972,13 @@ module CreateCachediSCSIVolume = {
          </note>")
     @as("Tags")
     tags: option<tags>,
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for Amazon
-         S3 server-side encryption. Storage Gateway does not support asymmetric CMKs. This value can
-         only be set when <code>KMSEncrypted</code> is <code>true</code>. Optional.</p>")
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for Amazon S3 server-side encryption. Storage Gateway does not support asymmetric CMKs. This
+         value can only be set when <code>KMSEncrypted</code> is <code>true</code>. Optional.</p>")
     @as("KMSKey")
     kmskey: option<kmskey>,
-    @ocaml.doc("<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own AWS KMS
-         key, or <code>false</code> to use a key managed by Amazon S3. Optional.</p>
+    @ocaml.doc("<p>Set to <code>true</code> to use Amazon S3 server-side encryption with your own
+            KMS key, or <code>false</code> to use a key managed by Amazon S3.
+         Optional.</p>
 
          <p>Valid Values: <code>true</code> | <code>false</code>
          </p>")
@@ -4891,29 +5168,36 @@ module AttachVolume = {
 module AssociateFileSystem = {
   type t
   type request = {
+    @ocaml.doc("<p>Specifies the network configuration information for the gateway associated with the
+            Amazon FSx file system.</p>
+         <note>
+            <p>If multiple file systems are associated with this gateway, this parameter's
+               <code>IpAddresses</code> field is required.</p>
+         </note>")
+    @as("EndpointNetworkConfiguration")
+    endpointNetworkConfiguration: option<endpointNetworkConfiguration>,
     @as("CacheAttributes") cacheAttributes: option<cacheAttributes>,
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the storage used for the audit logs.</p>")
     @as("AuditDestinationARN")
     auditDestinationARN: option<auditDestinationARN>,
-    @ocaml.doc(
-      "<p>A list of up to 50 tags that can be assigned to the file system association. Each tag is a key-value pair.</p>"
-    )
+    @ocaml.doc("<p>A list of up to 50 tags that can be assigned to the file system association. Each tag is
+         a key-value pair.</p>")
     @as("Tags")
     tags: option<tags>,
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the Amazon FSx file system to associate with the
-         Amazon FSx file gateway.</p>")
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the Amazon FSx file system to associate with
+         the FSx File Gateway.</p>")
     @as("LocationARN")
     locationARN: fileSystemLocationARN,
     @as("GatewayARN") gatewayARN: gatewayARN,
-    @ocaml.doc("<p>A unique string value that you supply that is used by the file gateway to ensure
+    @ocaml.doc("<p>A unique string value that you supply that is used by the FSx File Gateway to ensure
          idempotent file system association creation.</p>")
     @as("ClientToken")
     clientToken: clientToken,
     @ocaml.doc("<p>The password of the user credential.</p>") @as("Password")
     password: domainUserPassword,
     @ocaml.doc("<p>The user name of the user credential that has permission to access the root share D$ of
-         the Amazon FSx file system. The user account must belong to the Amazon FSx delegated admin
-         user group.</p>")
+         the Amazon FSx file system. The user account must belong to the Amazon FSx
+         delegated admin user group.</p>")
     @as("UserName")
     userName: domainUserName,
   }
@@ -4930,12 +5214,14 @@ module AssociateFileSystem = {
     ~clientToken,
     ~password,
     ~userName,
+    ~endpointNetworkConfiguration=?,
     ~cacheAttributes=?,
     ~auditDestinationARN=?,
     ~tags=?,
     (),
   ) =>
     new({
+      endpointNetworkConfiguration: endpointNetworkConfiguration,
       cacheAttributes: cacheAttributes,
       auditDestinationARN: auditDestinationARN,
       tags: tags,
@@ -5154,20 +5440,20 @@ module ActivateGateway = {
          value is <code>CACHED</code>.</p>
 
          <p>Valid Values: <code>STORED</code> | <code>CACHED</code> | <code>VTL</code> |
-            <code>FILE_S3</code>
+            <code>VTL_SNOW</code> | <code>FILE_S3</code> | <code>FILE_FSX_SMB</code>
          </p>")
     @as("GatewayType")
     gatewayType: option<gatewayType>,
-    @ocaml.doc("<p>A value that indicates the AWS Region where you want to store your data. The gateway AWS
-         Region specified must be the same AWS Region as the AWS Region in your <code>Host</code>
-         header in the request. For more information about available AWS Regions and endpoints for
-         AWS Storage Gateway, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/sg.html\">AWS
-            Storage Gateway endpoints and quotas</a> in the <i>AWS General
-            Reference</i>.</p>
+    @ocaml.doc("<p>A value that indicates the Amazon Web Services Region where you want to store your data.
+         The gateway Amazon Web Services Region specified must be the same Amazon Web Services Region
+         as the Amazon Web Services Region in your <code>Host</code> header in the request. For more
+         information about available Amazon Web Services Regions and endpoints for Storage Gateway, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/sg.html\">
+            Storage Gateway endpoints and quotas</a> in the <i>Amazon Web Services
+            General Reference</i>.</p>
 
-         <p>Valid Values: See <a href=\"https://docs.aws.amazon.com/general/latest/gr/sg.html\">AWS
-            Storage Gateway endpoints and quotas</a> in the <i>AWS General
-            Reference</i>.
+         <p>Valid Values: See <a href=\"https://docs.aws.amazon.com/general/latest/gr/sg.html\">
+            Storage Gateway endpoints and quotas</a> in the <i>Amazon Web Services
+            General Reference</i>.
          
       </p>")
     @as("GatewayRegion")
@@ -5192,14 +5478,13 @@ module ActivateGateway = {
       
 
          <p>For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/get-activation-key.html\">Getting activation
-            key</a> in the <i>AWS Storage Gateway User Guide</i>.</p>")
+            key</a> in the <i>Storage Gateway User Guide</i>.</p>")
     @as("ActivationKey")
     activationKey: activationKey,
   }
-  @ocaml.doc("<p>AWS Storage Gateway returns the Amazon Resource Name (ARN) of the activated gateway. It
-         is a string made of information such as your account, gateway name, and AWS Region. This
-         ARN is used to reference the gateway in other API operations as well as resource-based
-         authorization.</p>
+  @ocaml.doc("<p>Storage Gateway returns the Amazon Resource Name (ARN) of the activated gateway. It
+         is a string made of information such as your account, gateway name, and Amazon Web Services Region. This ARN is used to reference the gateway in other API operations as
+         well as resource-based authorization.</p>
 
          <note>
             <p>For gateways activated prior to September 02, 2015, the gateway ARN contains the
@@ -5236,10 +5521,8 @@ module ActivateGateway = {
 module UpdateBandwidthRateLimitSchedule = {
   type t
   type request = {
-    @ocaml.doc("<p>
-         An array containing bandwidth rate limit schedule intervals for a gateway. 
-         When no bandwidth rate limit intervals have been scheduled, the array is empty.
-      </p>")
+    @ocaml.doc("<p> An array containing bandwidth rate limit schedule intervals for a gateway. When no
+         bandwidth rate limit intervals have been scheduled, the array is empty. </p>")
     @as("BandwidthRateLimitIntervals")
     bandwidthRateLimitIntervals: bandwidthRateLimitIntervals,
     @as("GatewayARN") gatewayARN: gatewayARN,
@@ -5451,9 +5734,9 @@ module DescribeBandwidthRateLimitSchedule = {
   type t
   type request = {@as("GatewayARN") gatewayARN: gatewayARN}
   type response = {
-    @ocaml.doc("<p> 
-         An array that contains the bandwidth rate limit intervals for a tape or volume gateway.
-      </p>")
+    @ocaml.doc(
+      "<p> An array that contains the bandwidth rate limit intervals for a tape or volume gateway. </p>"
+    )
     @as("BandwidthRateLimitIntervals")
     bandwidthRateLimitIntervals: option<bandwidthRateLimitIntervals>,
     @as("GatewayARN") gatewayARN: option<gatewayARN>,
@@ -5525,14 +5808,14 @@ module DescribeNFSFileShares = {
 module DescribeFileSystemAssociations = {
   type t
   type request = {
-    @ocaml.doc(
-      "<p>An array containing the Amazon Resource Name (ARN) of each file system association to be described.</p>"
-    )
+    @ocaml.doc("<p>An array containing the Amazon Resource Name (ARN) of each file system association to be
+         described.</p>")
     @as("FileSystemAssociationARNList")
     fileSystemAssociationARNList: fileSystemAssociationARNList,
   }
   type response = {
-    @ocaml.doc("<p>An array containing the <code>FileSystemAssociationInfo</code> data type of each file system association to be described. 
+    @ocaml.doc("<p>An array containing the <code>FileSystemAssociationInfo</code> data type of each file
+         system association to be described.
          </p>")
     @as("FileSystemAssociationInfoList")
     fileSystemAssociationInfoList: option<fileSystemAssociationInfoList>,

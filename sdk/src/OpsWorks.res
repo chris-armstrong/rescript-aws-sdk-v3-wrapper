@@ -1774,7 +1774,7 @@ module UpdateVolume = {
     @ocaml.doc("<p>The new name.</p>") @as("Name") name: option<string_>,
     @ocaml.doc("<p>The volume ID.</p>") @as("VolumeId") volumeId: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-opsworks") @new external new: request => t = "UpdateVolumeCommand"
   let make = (~volumeId, ~mountPoint=?, ~name=?, ()) =>
     new({mountPoint: mountPoint, name: name, volumeId: volumeId})
@@ -1801,7 +1801,7 @@ module UpdateUserProfile = {
     @as("IamUserArn")
     iamUserArn: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-opsworks") @new external new: request => t = "UpdateUserProfileCommand"
   let make = (~iamUserArn, ~allowSelfManagement=?, ~sshPublicKey=?, ~sshUsername=?, ()) =>
     new({
@@ -1821,7 +1821,7 @@ module UpdateRdsDbInstance = {
     @ocaml.doc("<p>The Amazon RDS instance's ARN.</p>") @as("RdsDbInstanceArn")
     rdsDbInstanceArn: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-opsworks") @new external new: request => t = "UpdateRdsDbInstanceCommand"
   let make = (~rdsDbInstanceArn, ~dbPassword=?, ~dbUser=?, ()) =>
     new({dbPassword: dbPassword, dbUser: dbUser, rdsDbInstanceArn: rdsDbInstanceArn})
@@ -1834,7 +1834,7 @@ module UpdateMyUserProfile = {
     @ocaml.doc("<p>The user's SSH public key.</p>") @as("SshPublicKey")
     sshPublicKey: option<string_>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-opsworks") @new external new: request => t = "UpdateMyUserProfileCommand"
   let make = (~sshPublicKey=?, ()) => new({sshPublicKey: sshPublicKey})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1847,7 +1847,7 @@ module UpdateElasticIp = {
     @ocaml.doc("<p>The IP address for which you want to update the name.</p>") @as("ElasticIp")
     elasticIp: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-opsworks") @new external new: request => t = "UpdateElasticIpCommand"
   let make = (~elasticIp, ~name=?, ()) => new({name: name, elasticIp: elasticIp})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1856,7 +1856,7 @@ module UpdateElasticIp = {
 module UnassignVolume = {
   type t
   type request = {@ocaml.doc("<p>The volume ID.</p>") @as("VolumeId") volumeId: string_}
-
+  type response = {.}
   @module("@aws-sdk/client-opsworks") @new external new: request => t = "UnassignVolumeCommand"
   let make = (~volumeId, ()) => new({volumeId: volumeId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1865,7 +1865,7 @@ module UnassignVolume = {
 module UnassignInstance = {
   type t
   type request = {@ocaml.doc("<p>The instance ID.</p>") @as("InstanceId") instanceId: string_}
-
+  type response = {.}
   @module("@aws-sdk/client-opsworks") @new external new: request => t = "UnassignInstanceCommand"
   let make = (~instanceId, ()) => new({instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1874,7 +1874,7 @@ module UnassignInstance = {
 module StopStack = {
   type t
   type request = {@ocaml.doc("<p>The stack ID.</p>") @as("StackId") stackId: string_}
-
+  type response = {.}
   @module("@aws-sdk/client-opsworks") @new external new: request => t = "StopStackCommand"
   let make = (~stackId, ()) => new({stackId: stackId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1890,7 +1890,7 @@ module StopInstance = {
     force: option<boolean_>,
     @ocaml.doc("<p>The instance ID.</p>") @as("InstanceId") instanceId: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-opsworks") @new external new: request => t = "StopInstanceCommand"
   let make = (~instanceId, ~force=?, ()) => new({force: force, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1899,7 +1899,7 @@ module StopInstance = {
 module StartStack = {
   type t
   type request = {@ocaml.doc("<p>The stack ID.</p>") @as("StackId") stackId: string_}
-
+  type response = {.}
   @module("@aws-sdk/client-opsworks") @new external new: request => t = "StartStackCommand"
   let make = (~stackId, ()) => new({stackId: stackId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1908,7 +1908,7 @@ module StartStack = {
 module StartInstance = {
   type t
   type request = {@ocaml.doc("<p>The instance ID.</p>") @as("InstanceId") instanceId: string_}
-
+  type response = {.}
   @module("@aws-sdk/client-opsworks") @new external new: request => t = "StartInstanceCommand"
   let make = (~instanceId, ()) => new({instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1959,7 +1959,7 @@ module SetPermission = {
     iamUserArn: string_,
     @ocaml.doc("<p>The stack ID.</p>") @as("StackId") stackId: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-opsworks") @new external new: request => t = "SetPermissionCommand"
   let make = (~iamUserArn, ~stackId, ~level=?, ~allowSudo=?, ~allowSsh=?, ()) =>
     new({
@@ -1994,7 +1994,7 @@ module RegisterRdsDbInstance = {
     rdsDbInstanceArn: string_,
     @ocaml.doc("<p>The stack ID.</p>") @as("StackId") stackId: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-opsworks") @new
   external new: request => t = "RegisterRdsDbInstanceCommand"
   let make = (~dbPassword, ~dbUser, ~rdsDbInstanceArn, ~stackId, ()) =>
@@ -2040,7 +2040,7 @@ module RegisterEcsCluster = {
 module RebootInstance = {
   type t
   type request = {@ocaml.doc("<p>The instance ID.</p>") @as("InstanceId") instanceId: string_}
-
+  type response = {.}
   @module("@aws-sdk/client-opsworks") @new external new: request => t = "RebootInstanceCommand"
   let make = (~instanceId, ()) => new({instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -2063,7 +2063,7 @@ module GetHostnameSuggestion = {
 module DisassociateElasticIp = {
   type t
   type request = {@ocaml.doc("<p>The Elastic IP address.</p>") @as("ElasticIp") elasticIp: string_}
-
+  type response = {.}
   @module("@aws-sdk/client-opsworks") @new
   external new: request => t = "DisassociateElasticIpCommand"
   let make = (~elasticIp, ()) => new({elasticIp: elasticIp})
@@ -2081,7 +2081,7 @@ module DetachElasticLoadBalancer = {
     @ocaml.doc("<p>The Elastic Load Balancing instance's name.</p>") @as("ElasticLoadBalancerName")
     elasticLoadBalancerName: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-opsworks") @new
   external new: request => t = "DetachElasticLoadBalancerCommand"
   let make = (~layerId, ~elasticLoadBalancerName, ()) =>
@@ -2098,7 +2098,7 @@ module DeregisterVolume = {
     @as("VolumeId")
     volumeId: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-opsworks") @new external new: request => t = "DeregisterVolumeCommand"
   let make = (~volumeId, ()) => new({volumeId: volumeId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -2110,7 +2110,7 @@ module DeregisterRdsDbInstance = {
     @ocaml.doc("<p>The Amazon RDS instance's ARN.</p>") @as("RdsDbInstanceArn")
     rdsDbInstanceArn: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-opsworks") @new
   external new: request => t = "DeregisterRdsDbInstanceCommand"
   let make = (~rdsDbInstanceArn, ()) => new({rdsDbInstanceArn: rdsDbInstanceArn})
@@ -2120,7 +2120,7 @@ module DeregisterRdsDbInstance = {
 module DeregisterInstance = {
   type t
   type request = {@ocaml.doc("<p>The instance ID.</p>") @as("InstanceId") instanceId: string_}
-
+  type response = {.}
   @module("@aws-sdk/client-opsworks") @new external new: request => t = "DeregisterInstanceCommand"
   let make = (~instanceId, ()) => new({instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -2129,7 +2129,7 @@ module DeregisterInstance = {
 module DeregisterElasticIp = {
   type t
   type request = {@ocaml.doc("<p>The Elastic IP address.</p>") @as("ElasticIp") elasticIp: string_}
-
+  type response = {.}
   @module("@aws-sdk/client-opsworks") @new external new: request => t = "DeregisterElasticIpCommand"
   let make = (~elasticIp, ()) => new({elasticIp: elasticIp})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -2141,7 +2141,7 @@ module DeregisterEcsCluster = {
     @ocaml.doc("<p>The cluster's Amazon Resource Number (ARN).</p>") @as("EcsClusterArn")
     ecsClusterArn: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-opsworks") @new
   external new: request => t = "DeregisterEcsClusterCommand"
   let make = (~ecsClusterArn, ()) => new({ecsClusterArn: ecsClusterArn})
@@ -2155,7 +2155,7 @@ module DeleteUserProfile = {
     @as("IamUserArn")
     iamUserArn: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-opsworks") @new external new: request => t = "DeleteUserProfileCommand"
   let make = (~iamUserArn, ()) => new({iamUserArn: iamUserArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -2164,7 +2164,7 @@ module DeleteUserProfile = {
 module DeleteStack = {
   type t
   type request = {@ocaml.doc("<p>The stack ID.</p>") @as("StackId") stackId: string_}
-
+  type response = {.}
   @module("@aws-sdk/client-opsworks") @new external new: request => t = "DeleteStackCommand"
   let make = (~stackId, ()) => new({stackId: stackId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -2173,7 +2173,7 @@ module DeleteStack = {
 module DeleteLayer = {
   type t
   type request = {@ocaml.doc("<p>The layer ID.</p>") @as("LayerId") layerId: string_}
-
+  type response = {.}
   @module("@aws-sdk/client-opsworks") @new external new: request => t = "DeleteLayerCommand"
   let make = (~layerId, ()) => new({layerId: layerId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -2188,7 +2188,7 @@ module DeleteInstance = {
     deleteElasticIp: option<boolean_>,
     @ocaml.doc("<p>The instance ID.</p>") @as("InstanceId") instanceId: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-opsworks") @new external new: request => t = "DeleteInstanceCommand"
   let make = (~instanceId, ~deleteVolumes=?, ~deleteElasticIp=?, ()) =>
     new({deleteVolumes: deleteVolumes, deleteElasticIp: deleteElasticIp, instanceId: instanceId})
@@ -2198,7 +2198,7 @@ module DeleteInstance = {
 module DeleteApp = {
   type t
   type request = {@ocaml.doc("<p>The app ID.</p>") @as("AppId") appId: string_}
-
+  type response = {.}
   @module("@aws-sdk/client-opsworks") @new external new: request => t = "DeleteAppCommand"
   let make = (~appId, ()) => new({appId: appId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -2250,7 +2250,7 @@ module AttachElasticLoadBalancer = {
     @ocaml.doc("<p>The Elastic Load Balancing instance's name.</p>") @as("ElasticLoadBalancerName")
     elasticLoadBalancerName: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-opsworks") @new
   external new: request => t = "AttachElasticLoadBalancerCommand"
   let make = (~layerId, ~elasticLoadBalancerName, ()) =>
@@ -2264,7 +2264,7 @@ module AssociateElasticIp = {
     @ocaml.doc("<p>The instance ID.</p>") @as("InstanceId") instanceId: option<string_>,
     @ocaml.doc("<p>The Elastic IP address.</p>") @as("ElasticIp") elasticIp: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-opsworks") @new external new: request => t = "AssociateElasticIpCommand"
   let make = (~elasticIp, ~instanceId=?, ()) => new({instanceId: instanceId, elasticIp: elasticIp})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -2276,7 +2276,7 @@ module AssignVolume = {
     @ocaml.doc("<p>The instance ID.</p>") @as("InstanceId") instanceId: option<string_>,
     @ocaml.doc("<p>The volume ID.</p>") @as("VolumeId") volumeId: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-opsworks") @new external new: request => t = "AssignVolumeCommand"
   let make = (~volumeId, ~instanceId=?, ()) => new({instanceId: instanceId, volumeId: volumeId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -2490,7 +2490,7 @@ module UpdateStack = {
     @ocaml.doc("<p>The stack's new name.</p>") @as("Name") name: option<string_>,
     @ocaml.doc("<p>The stack ID.</p>") @as("StackId") stackId: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-opsworks") @new external new: request => t = "UpdateStackCommand"
   let make = (
     ~stackId,
@@ -2638,7 +2638,7 @@ module UpdateInstance = {
     @ocaml.doc("<p>The instance's layer IDs.</p>") @as("LayerIds") layerIds: option<strings>,
     @ocaml.doc("<p>The instance ID.</p>") @as("InstanceId") instanceId: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-opsworks") @new external new: request => t = "UpdateInstanceCommand"
   let make = (
     ~instanceId,
@@ -2681,7 +2681,7 @@ module UntagResource = {
     @ocaml.doc("<p>The stack or layer's Amazon Resource Number (ARN).</p>") @as("ResourceArn")
     resourceArn: resourceArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-opsworks") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -2715,7 +2715,7 @@ module TagResource = {
     @ocaml.doc("<p>The stack or layer's Amazon Resource Number (ARN).</p>") @as("ResourceArn")
     resourceArn: resourceArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-opsworks") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -2851,7 +2851,7 @@ module DescribeStackProvisioningParameters = {
 
 module DescribeMyUserProfile = {
   type t
-
+  type request = {.}
   @ocaml.doc("<p>Contains the response to a <code>DescribeMyUserProfile</code> request.</p>")
   type response = {
     @ocaml.doc(
@@ -2860,8 +2860,9 @@ module DescribeMyUserProfile = {
     @as("UserProfile")
     userProfile: option<selfUserProfile>,
   }
-  @module("@aws-sdk/client-opsworks") @new external new: unit => t = "DescribeMyUserProfileCommand"
-  let make = () => new()
+  @module("@aws-sdk/client-opsworks") @new
+  external new: request => t = "DescribeMyUserProfileCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -3508,7 +3509,7 @@ module AssignInstance = {
     layerIds: strings,
     @ocaml.doc("<p>The instance ID.</p>") @as("InstanceId") instanceId: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-opsworks") @new external new: request => t = "AssignInstanceCommand"
   let make = (~layerIds, ~instanceId, ()) => new({layerIds: layerIds, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -3551,7 +3552,7 @@ module UpdateApp = {
     @ocaml.doc("<p>The app name.</p>") @as("Name") name: option<string_>,
     @ocaml.doc("<p>The app ID.</p>") @as("AppId") appId: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-opsworks") @new external new: request => t = "UpdateAppCommand"
   let make = (
     ~appId,
@@ -3591,7 +3592,7 @@ module SetTimeBasedAutoScaling = {
     autoScalingSchedule: option<weeklyAutoScalingSchedule>,
     @ocaml.doc("<p>The instance ID.</p>") @as("InstanceId") instanceId: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-opsworks") @new
   external new: request => t = "SetTimeBasedAutoScalingCommand"
   let make = (~instanceId, ~autoScalingSchedule=?, ()) =>
@@ -3616,7 +3617,7 @@ module SetLoadBasedAutoScaling = {
     enable: option<boolean_>,
     @ocaml.doc("<p>The layer ID.</p>") @as("LayerId") layerId: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-opsworks") @new
   external new: request => t = "SetLoadBasedAutoScalingCommand"
   let make = (~layerId, ~downScaling=?, ~upScaling=?, ~enable=?, ()) =>
@@ -4078,7 +4079,7 @@ module UpdateLayer = {
     name: option<string_>,
     @ocaml.doc("<p>The layer ID.</p>") @as("LayerId") layerId: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-opsworks") @new external new: request => t = "UpdateLayerCommand"
   let make = (
     ~layerId,
@@ -4585,7 +4586,7 @@ module DescribeTimeBasedAutoScaling = {
 
 module DescribeOperatingSystems = {
   type t
-
+  type request = {.}
   @ocaml.doc("<p>The response to a <code>DescribeOperatingSystems</code> request.</p>")
   type response = {
     @ocaml.doc(
@@ -4595,8 +4596,8 @@ module DescribeOperatingSystems = {
     operatingSystems: option<operatingSystems>,
   }
   @module("@aws-sdk/client-opsworks") @new
-  external new: unit => t = "DescribeOperatingSystemsCommand"
-  let make = () => new()
+  external new: request => t = "DescribeOperatingSystemsCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

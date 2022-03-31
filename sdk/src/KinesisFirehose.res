@@ -23,16 +23,26 @@ type splunkRetryDurationInSeconds = int
 type sizeInMBs = int
 type s3BackupMode = [@as("Enabled") #Enabled | @as("Disabled") #Disabled]
 type roleARN = string
+type retryDurationInSeconds = int
 type redshiftS3BackupMode = [@as("Enabled") #Enabled | @as("Disabled") #Disabled]
 type redshiftRetryDurationInSeconds = int
 type putResponseRecordId = string
 type proportion = float
-type processorType = [@as("Lambda") #Lambda]
+type processorType = [
+  | @as("AppendDelimiterToRecord") #AppendDelimiterToRecord
+  | @as("MetadataExtraction") #MetadataExtraction
+  | @as("Lambda") #Lambda
+  | @as("RecordDeAggregation") #RecordDeAggregation
+]
 type processorParameterValue = string
 type processorParameterName = [
+  | @as("Delimiter") #Delimiter
+  | @as("SubRecordType") #SubRecordType
   | @as("BufferIntervalInSeconds") #BufferIntervalInSeconds
   | @as("BufferSizeInMBs") #BufferSizeInMBs
   | @as("RoleArn") #RoleArn
+  | @as("JsonParsingEngine") #JsonParsingEngine
+  | @as("MetadataExtractionQuery") #MetadataExtractionQuery
   | @as("NumberOfRetries") #NumberOfRetries
   | @as("LambdaArn") #LambdaArn
 ]
@@ -155,6 +165,24 @@ type clusterJDBCURL = string
 type bucketARN = string
 type booleanObject = bool
 type blockSizeBytes = int
+type amazonopensearchserviceTypeName = string
+type amazonopensearchserviceS3BackupMode = [
+  | @as("AllDocuments") #AllDocuments
+  | @as("FailedDocumentsOnly") #FailedDocumentsOnly
+]
+type amazonopensearchserviceRetryDurationInSeconds = int
+type amazonopensearchserviceIndexRotationPeriod = [
+  | @as("OneMonth") #OneMonth
+  | @as("OneWeek") #OneWeek
+  | @as("OneDay") #OneDay
+  | @as("OneHour") #OneHour
+  | @as("NoRotation") #NoRotation
+]
+type amazonopensearchserviceIndexName = string
+type amazonopensearchserviceDomainARN = string
+type amazonopensearchserviceClusterEndpoint = string
+type amazonopensearchserviceBufferingSizeInMBs = int
+type amazonopensearchserviceBufferingIntervalInSeconds = int
 type awskmskeyARN = string
 type tagKeyList = array<tagKey>
 @ocaml.doc("<p>Metadata that you can assign to a delivery stream, consisting of a key-value
@@ -196,11 +224,21 @@ type schemaConfiguration = {
   @as("Region")
   region: option<nonEmptyStringWithoutWhitespace>,
   @ocaml.doc("<p>Specifies the AWS Glue table that contains the column information that constitutes your
-         data schema.</p>")
+         data schema.</p>
+         <important>
+            <p>If the <code>SchemaConfiguration</code> request parameter is used as part of invoking
+            the <code>CreateDeliveryStream</code> API, then the <code>TableName</code> property is
+            required and its value must be specified.</p>
+         </important>")
   @as("TableName")
   tableName: option<nonEmptyStringWithoutWhitespace>,
   @ocaml.doc("<p>Specifies the name of the AWS Glue database that contains the schema for the output
-         data.</p>")
+         data.</p>
+         <important>
+            <p>If the <code>SchemaConfiguration</code> request parameter is used as part of invoking
+            the <code>CreateDeliveryStream</code> API, then the <code>DatabaseName</code> property
+            is required and its value must be specified.</p>
+         </important>")
   @as("DatabaseName")
   databaseName: option<nonEmptyStringWithoutWhitespace>,
   @ocaml.doc("<p>The ID of the AWS Glue Data Catalog. If you don't supply this, the AWS account ID is
@@ -209,9 +247,22 @@ type schemaConfiguration = {
   catalogId: option<nonEmptyStringWithoutWhitespace>,
   @ocaml.doc("<p>The role that Kinesis Data Firehose can use to access AWS Glue. This role must be in
          the same account you use for Kinesis Data Firehose. Cross-account roles aren't
-         allowed.</p>")
+         allowed.</p>
+         <important>
+            <p>If the <code>SchemaConfiguration</code> request parameter is used as part of invoking
+            the <code>CreateDeliveryStream</code> API, then the <code>RoleARN</code> property is
+            required and its value must be specified.</p>
+         </important>")
   @as("RoleARN")
   roleARN: option<nonEmptyStringWithoutWhitespace>,
+}
+@ocaml.doc("<p> The retry behavior in case Kinesis Data Firehose is unable to deliver data to an Amazon
+         S3 prefix.</p>")
+type retryOptions = {
+  @ocaml.doc("<p>The period of time during which Kinesis Data Firehose retries to deliver data to the
+         specified Amazon S3 prefix.</p>")
+  @as("DurationInSeconds")
+  durationInSeconds: option<retryDurationInSeconds>,
 }
 @ocaml.doc("<p>Configures retry behavior in case Kinesis Data Firehose is unable to deliver
          documents to Amazon Redshift.</p>")
@@ -290,11 +341,13 @@ type kinesisStreamSourceDescription = {
   @as("DeliveryStartTimestamp")
   deliveryStartTimestamp: option<deliveryStartTimestamp>,
   @ocaml.doc("<p>The ARN of the role used by the source Kinesis data stream. For more information, see
-            <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam\">AWS Identity and Access Management (IAM) ARN Format</a>.</p>")
+            <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam\">AWS Identity and
+            Access Management (IAM) ARN Format</a>.</p>")
   @as("RoleARN")
   roleARN: option<roleARN>,
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the source Kinesis data stream. For more
-         information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kinesis-streams\">Amazon Kinesis Data Streams ARN Format</a>.</p>")
+         information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kinesis-streams\">Amazon
+            Kinesis Data Streams ARN Format</a>.</p>")
   @as("KinesisStreamARN")
   kinesisStreamARN: option<kinesisStreamARN>,
 }
@@ -302,12 +355,12 @@ type kinesisStreamSourceDescription = {
          the source for a delivery stream.</p>")
 type kinesisStreamSourceConfiguration = {
   @ocaml.doc("<p>The ARN of the role that provides access to the source Kinesis data stream. For more
-         information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam\">AWS Identity and Access Management (IAM) ARN Format</a>.</p>")
+         information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam\">AWS Identity and
+            Access Management (IAM) ARN Format</a>.</p>")
   @as("RoleARN")
   roleARN: roleARN,
-  @ocaml.doc(
-    "<p>The ARN of the source Kinesis data stream. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kinesis-streams\">Amazon Kinesis Data Streams ARN Format</a>.</p>"
-  )
+  @ocaml.doc("<p>The ARN of the source Kinesis data stream. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kinesis-streams\">Amazon
+            Kinesis Data Streams ARN Format</a>.</p>")
   @as("KinesisStreamARN")
   kinesisStreamARN: kinesisStreamARN,
 }
@@ -346,7 +399,13 @@ type httpEndpointConfiguration = {
   accessKey: option<httpEndpointAccessKey>,
   @ocaml.doc("<p>The name of the HTTP endpoint selected as the destination.</p>") @as("Name")
   name: option<httpEndpointName>,
-  @ocaml.doc("<p>The URL of the HTTP endpoint selected as the destination.</p>") @as("Url")
+  @ocaml.doc("<p>The URL of the HTTP endpoint selected as the destination.</p>
+         <important>
+            <p>If you choose an HTTP endpoint as your destination, review and follow the
+            instructions in the <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/httpdeliveryrequestresponse.html\">Appendix - HTTP Endpoint
+               Delivery Request and Response Specifications</a>.</p>
+         </important>")
+  @as("Url")
   url: httpEndpointUrl,
 }
 @ocaml.doc("<p>Describes the metadata that's delivered to the specified HTTP endpoint
@@ -415,9 +474,10 @@ type deliveryStreamNameList = array<deliveryStreamName>
          Encryption (SSE). </p>")
 type deliveryStreamEncryptionConfigurationInput = {
   @ocaml.doc("<p>Indicates the type of customer master key (CMK) to use for encryption. The default
-         setting is <code>AWS_OWNED_CMK</code>. For more information about CMKs, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys\">Customer Master Keys (CMKs)</a>. When you invoke <a>CreateDeliveryStream</a> or <a>StartDeliveryStreamEncryption</a> with
-            <code>KeyType</code> set to CUSTOMER_MANAGED_CMK, Kinesis Data Firehose invokes the
-         Amazon KMS operation <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateGrant.html\">CreateGrant</a> to create a grant that allows the Kinesis Data Firehose service to
+         setting is <code>AWS_OWNED_CMK</code>. For more information about CMKs, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys\">Customer
+            Master Keys (CMKs)</a>. When you invoke <a>CreateDeliveryStream</a> or
+            <a>StartDeliveryStreamEncryption</a> with <code>KeyType</code> set to
+         CUSTOMER_MANAGED_CMK, Kinesis Data Firehose invokes the Amazon KMS operation <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateGrant.html\">CreateGrant</a> to create a grant that allows the Kinesis Data Firehose service to
          use the customer managed CMK to perform encryption and decryption. Kinesis Data Firehose
          manages that grant. </p>
          <p>When you invoke <a>StartDeliveryStreamEncryption</a> to change the CMK for a
@@ -429,8 +489,9 @@ type deliveryStreamEncryptionConfigurationInput = {
             <code>LimitExceededException</code>. </p>
          <important>
             <p>To encrypt your delivery stream, use symmetric CMKs. Kinesis Data Firehose doesn't
-            support asymmetric CMKs. For information about symmetric and asymmetric CMKs, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/symm-asymm-concepts.html\">About Symmetric and Asymmetric CMKs</a> in the AWS Key Management Service
-            developer guide.</p>
+            support asymmetric CMKs. For information about symmetric and asymmetric CMKs, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/symm-asymm-concepts.html\">About
+               Symmetric and Asymmetric CMKs</a> in the AWS Key Management Service developer
+            guide.</p>
          </important>")
   @as("KeyType")
   keyType: keyType,
@@ -506,6 +567,14 @@ type bufferingHints = {
   @as("SizeInMBs")
   sizeInMBs: option<sizeInMBs>,
 }
+type amazonopensearchserviceRetryOptions = {
+  @as("DurationInSeconds") durationInSeconds: option<amazonopensearchserviceRetryDurationInSeconds>,
+}
+type amazonopensearchserviceBufferingHints = {
+  @as("SizeInMBs") sizeInMBs: option<amazonopensearchserviceBufferingSizeInMBs>,
+  @as("IntervalInSeconds")
+  intervalInSeconds: option<amazonopensearchserviceBufferingIntervalInSeconds>,
+}
 @ocaml.doc("<p>The details of the VPC of the Amazon ES destination.</p>")
 type vpcConfigurationDescription = {
   @ocaml.doc("<p>The ID of the Amazon ES destination's VPC.</p>") @as("VpcId")
@@ -517,7 +586,8 @@ type vpcConfigurationDescription = {
          that the Amazon ES domain's security group allows HTTPS traffic from the security groups
          specified here. If you use the same security group for both your delivery stream and the
          Amazon ES domain, make sure the security group inbound rule allows HTTPS traffic. For more
-         information about security group rules, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#SecurityGroupRules\">Security group rules</a> in the Amazon VPC documentation.</p>")
+         information about security group rules, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#SecurityGroupRules\">Security group
+            rules</a> in the Amazon VPC documentation.</p>")
   @as("SecurityGroupIds")
   securityGroupIds: securityGroupIdList,
   @ocaml.doc("<p>The ARN of the IAM role that the delivery stream uses to create endpoints in the
@@ -581,7 +651,8 @@ type vpcConfigurationDescription = {
          scale up the number of ENIs to match throughput, ensure that you have sufficient quota. To
          help you calculate the quota you need, assume that Kinesis Data Firehose can create up to
          three ENIs for this delivery stream for each of the subnets specified here. For more
-         information about ENI quota, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-enis\">Network Interfaces </a> in the Amazon VPC Quotas topic.</p>")
+         information about ENI quota, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-enis\">Network Interfaces
+         </a> in the Amazon VPC Quotas topic.</p>")
   @as("SubnetIds")
   subnetIds: subnetIdList,
 }
@@ -594,7 +665,8 @@ type vpcConfiguration = {
          group. Also ensure that the Amazon ES domain's security group allows HTTPS traffic from the
          security groups specified here. If you use the same security group for both your delivery
          stream and the Amazon ES domain, make sure the security group inbound rule allows HTTPS
-         traffic. For more information about security group rules, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#SecurityGroupRules\">Security group rules</a> in the Amazon VPC documentation.</p>")
+         traffic. For more information about security group rules, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#SecurityGroupRules\">Security group
+            rules</a> in the Amazon VPC documentation.</p>")
   @as("SecurityGroupIds")
   securityGroupIds: securityGroupIdList,
   @ocaml.doc("<p>The ARN of the IAM role that you want the delivery stream to use to create endpoints in
@@ -659,7 +731,8 @@ type vpcConfiguration = {
          scale up the number of ENIs to match throughput, ensure that you have sufficient quota. To
          help you calculate the quota you need, assume that Kinesis Data Firehose can create up to
          three ENIs for this delivery stream for each of the subnets specified here. For more
-         information about ENI quota, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-enis\">Network Interfaces </a> in the Amazon VPC Quotas topic.</p>")
+         information about ENI quota, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-enis\">Network Interfaces
+         </a> in the Amazon VPC Quotas topic.</p>")
   @as("SubnetIds")
   subnetIds: subnetIdList,
 }
@@ -780,6 +853,20 @@ type encryptionConfiguration = {
   @as("NoEncryptionConfig")
   noEncryptionConfig: option<noEncryptionConfig>,
 }
+@ocaml.doc("<p>The configuration of the dynamic partitioning mechanism that creates smaller data sets
+         from the streaming data by partitioning it based on partition keys. Currently, dynamic
+         partitioning is only supported for Amazon S3 destinations. For more information, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/dynamic-partitioning.html\">https://docs.aws.amazon.com/firehose/latest/dev/dynamic-partitioning.html</a>
+         </p>")
+type dynamicPartitioningConfiguration = {
+  @ocaml.doc("<p>Specifies that the dynamic partitioning is enabled for this Kinesis Data Firehose
+         delivery stream.</p>")
+  @as("Enabled")
+  enabled: option<booleanObject>,
+  @ocaml.doc("<p>The retry behavior in case Kinesis Data Firehose is unable to deliver data to an Amazon
+         S3 prefix.</p>")
+  @as("RetryOptions")
+  retryOptions: option<retryOptions>,
+}
 @ocaml.doc("<p>Contains information about the server-side encryption (SSE) status for the delivery
          stream, the type customer master key (CMK) in use, if any, and the ARN of the CMK. You can
          get <code>DeliveryStreamEncryptionConfiguration</code> by invoking the <a>DescribeDeliveryStream</a> operation. </p>")
@@ -796,7 +883,8 @@ type deliveryStreamEncryptionConfiguration = {
   @as("Status")
   status: option<deliveryStreamEncryptionStatus>,
   @ocaml.doc("<p>Indicates the type of customer master key (CMK) that is used for encryption. The default
-         setting is <code>AWS_OWNED_CMK</code>. For more information about CMKs, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys\">Customer Master Keys (CMKs)</a>.</p>")
+         setting is <code>AWS_OWNED_CMK</code>. For more information about CMKs, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys\">Customer
+            Master Keys (CMKs)</a>.</p>")
   @as("KeyType")
   keyType: option<keyType>,
   @ocaml.doc("<p>If <code>KeyType</code> is <code>CUSTOMER_MANAGED_CMK</code>, this field contains the
@@ -842,21 +930,22 @@ type s3DestinationUpdate = {
   bufferingHints: option<bufferingHints>,
   @ocaml.doc("<p>A prefix that Kinesis Data Firehose evaluates and adds to failed records before writing
          them to S3. This prefix appears immediately following the bucket name. For information
-         about how to specify this prefix, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html\">Custom Prefixes
-            for Amazon S3 Objects</a>.</p>")
+         about how to specify this prefix, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html\">Custom Prefixes for Amazon S3
+         Objects</a>.</p>")
   @as("ErrorOutputPrefix")
   errorOutputPrefix: option<errorOutputPrefix>,
   @ocaml.doc("<p>The \"YYYY/MM/DD/HH\" time format prefix is automatically used for delivered Amazon S3
-         files. You can also specify a custom prefix, as described in <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html\">Custom Prefixes
-            for Amazon S3 Objects</a>.</p>")
+         files. You can also specify a custom prefix, as described in <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html\">Custom Prefixes for Amazon S3
+         Objects</a>.</p>")
   @as("Prefix")
   prefix: option<prefix>,
-  @ocaml.doc("<p>The ARN of the S3 bucket. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon
-            Resource Names (ARNs) and AWS Service Namespaces</a>.</p>")
+  @ocaml.doc("<p>The ARN of the S3 bucket. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and
+            AWS Service Namespaces</a>.</p>")
   @as("BucketARN")
   bucketARN: option<bucketARN>,
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the AWS credentials. For more information, see
-            <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>")
+            <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon
+            Resource Names (ARNs) and AWS Service Namespaces</a>.</p>")
   @as("RoleARN")
   roleARN: option<roleARN>,
 }
@@ -879,21 +968,22 @@ type s3DestinationDescription = {
   bufferingHints: bufferingHints,
   @ocaml.doc("<p>A prefix that Kinesis Data Firehose evaluates and adds to failed records before writing
          them to S3. This prefix appears immediately following the bucket name. For information
-         about how to specify this prefix, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html\">Custom Prefixes
-            for Amazon S3 Objects</a>.</p>")
+         about how to specify this prefix, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html\">Custom Prefixes for Amazon S3
+         Objects</a>.</p>")
   @as("ErrorOutputPrefix")
   errorOutputPrefix: option<errorOutputPrefix>,
   @ocaml.doc("<p>The \"YYYY/MM/DD/HH\" time format prefix is automatically used for delivered Amazon S3
-         files. You can also specify a custom prefix, as described in <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html\">Custom Prefixes
-            for Amazon S3 Objects</a>.</p>")
+         files. You can also specify a custom prefix, as described in <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html\">Custom Prefixes for Amazon S3
+         Objects</a>.</p>")
   @as("Prefix")
   prefix: option<prefix>,
-  @ocaml.doc("<p>The ARN of the S3 bucket. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon
-            Resource Names (ARNs) and AWS Service Namespaces</a>.</p>")
+  @ocaml.doc("<p>The ARN of the S3 bucket. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and
+            AWS Service Namespaces</a>.</p>")
   @as("BucketARN")
   bucketARN: bucketARN,
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the AWS credentials. For more information, see
-            <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>")
+            <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon
+            Resource Names (ARNs) and AWS Service Namespaces</a>.</p>")
   @as("RoleARN")
   roleARN: roleARN,
 }
@@ -919,21 +1009,22 @@ type s3DestinationConfiguration = {
   bufferingHints: option<bufferingHints>,
   @ocaml.doc("<p>A prefix that Kinesis Data Firehose evaluates and adds to failed records before writing
          them to S3. This prefix appears immediately following the bucket name. For information
-         about how to specify this prefix, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html\">Custom Prefixes
-            for Amazon S3 Objects</a>.</p>")
+         about how to specify this prefix, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html\">Custom Prefixes for Amazon S3
+         Objects</a>.</p>")
   @as("ErrorOutputPrefix")
   errorOutputPrefix: option<errorOutputPrefix>,
   @ocaml.doc("<p>The \"YYYY/MM/DD/HH\" time format prefix is automatically used for delivered Amazon S3
-         files. You can also specify a custom prefix, as described in <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html\">Custom Prefixes
-            for Amazon S3 Objects</a>.</p>")
+         files. You can also specify a custom prefix, as described in <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html\">Custom Prefixes for Amazon S3
+         Objects</a>.</p>")
   @as("Prefix")
   prefix: option<prefix>,
-  @ocaml.doc("<p>The ARN of the S3 bucket. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon
-            Resource Names (ARNs) and AWS Service Namespaces</a>.</p>")
+  @ocaml.doc("<p>The ARN of the S3 bucket. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and
+            AWS Service Namespaces</a>.</p>")
   @as("BucketARN")
   bucketARN: bucketARN,
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the AWS credentials. For more information, see
-            <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>")
+            <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon
+            Resource Names (ARNs) and AWS Service Namespaces</a>.</p>")
   @as("RoleARN")
   roleARN: roleARN,
 }
@@ -999,7 +1090,8 @@ type processingConfiguration = {
          the Parquet or ORC format before writing it to Amazon S3. Kinesis Data Firehose uses the
          serializer and deserializer that you specify, in addition to the column information from
          the AWS Glue table, to deserialize your input data from JSON and then serialize it to the
-         Parquet or ORC format. For more information, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/record-format-conversion.html\">Kinesis Data Firehose Record Format Conversion</a>.</p>")
+         Parquet or ORC format. For more information, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/record-format-conversion.html\">Kinesis Data Firehose Record
+            Format Conversion</a>.</p>")
 type dataFormatConversionConfiguration = {
   @ocaml.doc("<p>Defaults to <code>true</code>. Set it to <code>false</code> if you want to disable
          format conversion while preserving the configuration details.</p>")
@@ -1169,7 +1261,8 @@ type redshiftDestinationUpdate = {
   @ocaml.doc("<p>The database connection string.</p>") @as("ClusterJDBCURL")
   clusterJDBCURL: option<clusterJDBCURL>,
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the AWS credentials. For more information, see
-            <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>")
+            <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon
+            Resource Names (ARNs) and AWS Service Namespaces</a>.</p>")
   @as("RoleARN")
   roleARN: option<roleARN>,
 }
@@ -1195,7 +1288,8 @@ type redshiftDestinationDescription = {
   @ocaml.doc("<p>The database connection string.</p>") @as("ClusterJDBCURL")
   clusterJDBCURL: clusterJDBCURL,
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the AWS credentials. For more information, see
-            <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>")
+            <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon
+            Resource Names (ARNs) and AWS Service Namespaces</a>.</p>")
   @as("RoleARN")
   roleARN: roleARN,
 }
@@ -1231,7 +1325,8 @@ type redshiftDestinationConfiguration = {
   @ocaml.doc("<p>The database connection string.</p>") @as("ClusterJDBCURL")
   clusterJDBCURL: clusterJDBCURL,
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the AWS credentials. For more information, see
-            <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>")
+            <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon
+            Resource Names (ARNs) and AWS Service Namespaces</a>.</p>")
   @as("RoleARN")
   roleARN: roleARN,
 }
@@ -1342,6 +1437,12 @@ type httpEndpointDestinationConfiguration = {
 }
 @ocaml.doc("<p>Describes an update for a destination in Amazon S3.</p>")
 type extendedS3DestinationUpdate = {
+  @ocaml.doc("<p>The configuration of the dynamic partitioning mechanism that creates smaller data sets
+         from the streaming data by partitioning it based on partition keys. Currently, dynamic
+         partitioning is only supported for Amazon S3 destinations. For more information, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/dynamic-partitioning.html\">https://docs.aws.amazon.com/firehose/latest/dev/dynamic-partitioning.html</a>
+         </p>")
+  @as("DynamicPartitioningConfiguration")
+  dynamicPartitioningConfiguration: option<dynamicPartitioningConfiguration>,
   @ocaml.doc("<p>The serializer, deserializer, and schema for converting data from the JSON format to
          the Parquet or ORC format before writing it to Amazon S3.</p>")
   @as("DataFormatConversionConfiguration")
@@ -1369,26 +1470,33 @@ type extendedS3DestinationUpdate = {
   bufferingHints: option<bufferingHints>,
   @ocaml.doc("<p>A prefix that Kinesis Data Firehose evaluates and adds to failed records before writing
          them to S3. This prefix appears immediately following the bucket name. For information
-         about how to specify this prefix, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html\">Custom Prefixes
-            for Amazon S3 Objects</a>.</p>")
+         about how to specify this prefix, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html\">Custom Prefixes for Amazon S3
+         Objects</a>.</p>")
   @as("ErrorOutputPrefix")
   errorOutputPrefix: option<errorOutputPrefix>,
   @ocaml.doc("<p>The \"YYYY/MM/DD/HH\" time format prefix is automatically used for delivered Amazon S3
-         files. You can also specify a custom prefix, as described in <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html\">Custom Prefixes
-            for Amazon S3 Objects</a>.</p>")
+         files. You can also specify a custom prefix, as described in <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html\">Custom Prefixes for Amazon S3
+         Objects</a>.</p>")
   @as("Prefix")
   prefix: option<prefix>,
-  @ocaml.doc("<p>The ARN of the S3 bucket. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon
-            Resource Names (ARNs) and AWS Service Namespaces</a>.</p>")
+  @ocaml.doc("<p>The ARN of the S3 bucket. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and
+            AWS Service Namespaces</a>.</p>")
   @as("BucketARN")
   bucketARN: option<bucketARN>,
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the AWS credentials. For more information, see
-            <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>")
+            <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon
+            Resource Names (ARNs) and AWS Service Namespaces</a>.</p>")
   @as("RoleARN")
   roleARN: option<roleARN>,
 }
 @ocaml.doc("<p>Describes a destination in Amazon S3.</p>")
 type extendedS3DestinationDescription = {
+  @ocaml.doc("<p>The configuration of the dynamic partitioning mechanism that creates smaller data sets
+         from the streaming data by partitioning it based on partition keys. Currently, dynamic
+         partitioning is only supported for Amazon S3 destinations. For more information, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/dynamic-partitioning.html\">https://docs.aws.amazon.com/firehose/latest/dev/dynamic-partitioning.html</a>
+         </p>")
+  @as("DynamicPartitioningConfiguration")
+  dynamicPartitioningConfiguration: option<dynamicPartitioningConfiguration>,
   @ocaml.doc("<p>The serializer, deserializer, and schema for converting data from the JSON format to
          the Parquet or ORC format before writing it to Amazon S3.</p>")
   @as("DataFormatConversionConfiguration")
@@ -1413,26 +1521,33 @@ type extendedS3DestinationDescription = {
   @ocaml.doc("<p>The buffering option.</p>") @as("BufferingHints") bufferingHints: bufferingHints,
   @ocaml.doc("<p>A prefix that Kinesis Data Firehose evaluates and adds to failed records before writing
          them to S3. This prefix appears immediately following the bucket name. For information
-         about how to specify this prefix, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html\">Custom Prefixes
-            for Amazon S3 Objects</a>.</p>")
+         about how to specify this prefix, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html\">Custom Prefixes for Amazon S3
+         Objects</a>.</p>")
   @as("ErrorOutputPrefix")
   errorOutputPrefix: option<errorOutputPrefix>,
   @ocaml.doc("<p>The \"YYYY/MM/DD/HH\" time format prefix is automatically used for delivered Amazon S3
-         files. You can also specify a custom prefix, as described in <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html\">Custom Prefixes
-            for Amazon S3 Objects</a>.</p>")
+         files. You can also specify a custom prefix, as described in <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html\">Custom Prefixes for Amazon S3
+         Objects</a>.</p>")
   @as("Prefix")
   prefix: option<prefix>,
-  @ocaml.doc("<p>The ARN of the S3 bucket. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon
-            Resource Names (ARNs) and AWS Service Namespaces</a>.</p>")
+  @ocaml.doc("<p>The ARN of the S3 bucket. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and
+            AWS Service Namespaces</a>.</p>")
   @as("BucketARN")
   bucketARN: bucketARN,
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the AWS credentials. For more information, see
-            <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>")
+            <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon
+            Resource Names (ARNs) and AWS Service Namespaces</a>.</p>")
   @as("RoleARN")
   roleARN: roleARN,
 }
 @ocaml.doc("<p>Describes the configuration of a destination in Amazon S3.</p>")
 type extendedS3DestinationConfiguration = {
+  @ocaml.doc("<p>The configuration of the dynamic partitioning mechanism that creates smaller data sets
+         from the streaming data by partitioning it based on partition keys. Currently, dynamic
+         partitioning is only supported for Amazon S3 destinations. For more information, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/dynamic-partitioning.html\">https://docs.aws.amazon.com/firehose/latest/dev/dynamic-partitioning.html</a>
+         </p>")
+  @as("DynamicPartitioningConfiguration")
+  dynamicPartitioningConfiguration: option<dynamicPartitioningConfiguration>,
   @ocaml.doc("<p>The serializer, deserializer, and schema for converting data from the JSON format to
          the Parquet or ORC format before writing it to Amazon S3.</p>")
   @as("DataFormatConversionConfiguration")
@@ -1461,21 +1576,22 @@ type extendedS3DestinationConfiguration = {
   bufferingHints: option<bufferingHints>,
   @ocaml.doc("<p>A prefix that Kinesis Data Firehose evaluates and adds to failed records before writing
          them to S3. This prefix appears immediately following the bucket name. For information
-         about how to specify this prefix, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html\">Custom Prefixes
-            for Amazon S3 Objects</a>.</p>")
+         about how to specify this prefix, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html\">Custom Prefixes for Amazon S3
+         Objects</a>.</p>")
   @as("ErrorOutputPrefix")
   errorOutputPrefix: option<errorOutputPrefix>,
   @ocaml.doc("<p>The \"YYYY/MM/DD/HH\" time format prefix is automatically used for delivered Amazon S3
-         files. You can also specify a custom prefix, as described in <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html\">Custom Prefixes
-            for Amazon S3 Objects</a>.</p>")
+         files. You can also specify a custom prefix, as described in <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html\">Custom Prefixes for Amazon S3
+         Objects</a>.</p>")
   @as("Prefix")
   prefix: option<prefix>,
-  @ocaml.doc("<p>The ARN of the S3 bucket. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon
-            Resource Names (ARNs) and AWS Service Namespaces</a>.</p>")
+  @ocaml.doc("<p>The ARN of the S3 bucket. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and
+            AWS Service Namespaces</a>.</p>")
   @as("BucketARN")
   bucketARN: bucketARN,
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the AWS credentials. For more information, see
-            <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>")
+            <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon
+            Resource Names (ARNs) and AWS Service Namespaces</a>.</p>")
   @as("RoleARN")
   roleARN: roleARN,
 }
@@ -1521,8 +1637,8 @@ type elasticsearchDestinationUpdate = {
   @ocaml.doc("<p>The ARN of the Amazon ES domain. The IAM role must have permissions
             for <code>DescribeElasticsearchDomain</code>, <code>DescribeElasticsearchDomains</code>,
          and <code>DescribeElasticsearchDomainConfig</code> after assuming the IAM role specified in
-            <code>RoleARN</code>. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon
-            Resource Names (ARNs) and AWS Service Namespaces</a>.</p>
+            <code>RoleARN</code>. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and
+            AWS Service Namespaces</a>.</p>
 
          <p>Specify either <code>ClusterEndpoint</code> or <code>DomainARN</code>.</p>")
   @as("DomainARN")
@@ -1530,8 +1646,8 @@ type elasticsearchDestinationUpdate = {
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the IAM role to be assumed by Kinesis Data Firehose
          for calling the Amazon ES Configuration API and for indexing documents. For more
          information, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3\">Grant Kinesis Data
-            Firehose Access to an Amazon S3 Destination</a> and <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon
-            Resource Names (ARNs) and AWS Service Namespaces</a>.</p>")
+            Firehose Access to an Amazon S3 Destination</a> and <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and
+            AWS Service Namespaces</a>.</p>")
   @as("RoleARN")
   roleARN: option<roleARN>,
 }
@@ -1573,7 +1689,8 @@ type elasticsearchDestinationDescription = {
   @as("DomainARN")
   domainARN: option<elasticsearchDomainARN>,
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the AWS credentials. For more information, see
-            <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>")
+            <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon
+            Resource Names (ARNs) and AWS Service Namespaces</a>.</p>")
   @as("RoleARN")
   roleARN: option<roleARN>,
 }
@@ -1639,10 +1756,57 @@ type elasticsearchDestinationConfiguration = {
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the IAM role to be assumed by Kinesis Data Firehose
          for calling the Amazon ES Configuration API and for indexing documents. For more
          information, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3\">Grant Kinesis Data
-            Firehose Access to an Amazon S3 Destination</a> and <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon
-            Resource Names (ARNs) and AWS Service Namespaces</a>.</p>")
+            Firehose Access to an Amazon S3 Destination</a> and <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and
+            AWS Service Namespaces</a>.</p>")
   @as("RoleARN")
   roleARN: roleARN,
+}
+type amazonopensearchserviceDestinationUpdate = {
+  @as("CloudWatchLoggingOptions") cloudWatchLoggingOptions: option<cloudWatchLoggingOptions>,
+  @as("ProcessingConfiguration") processingConfiguration: option<processingConfiguration>,
+  @as("S3Update") s3Update: option<s3DestinationUpdate>,
+  @as("RetryOptions") retryOptions: option<amazonopensearchserviceRetryOptions>,
+  @as("BufferingHints") bufferingHints: option<amazonopensearchserviceBufferingHints>,
+  @as("IndexRotationPeriod")
+  indexRotationPeriod: option<amazonopensearchserviceIndexRotationPeriod>,
+  @as("TypeName") typeName: option<amazonopensearchserviceTypeName>,
+  @as("IndexName") indexName: option<amazonopensearchserviceIndexName>,
+  @as("ClusterEndpoint") clusterEndpoint: option<amazonopensearchserviceClusterEndpoint>,
+  @as("DomainARN") domainARN: option<amazonopensearchserviceDomainARN>,
+  @as("RoleARN") roleARN: option<roleARN>,
+}
+type amazonopensearchserviceDestinationDescription = {
+  @as("VpcConfigurationDescription")
+  vpcConfigurationDescription: option<vpcConfigurationDescription>,
+  @as("CloudWatchLoggingOptions") cloudWatchLoggingOptions: option<cloudWatchLoggingOptions>,
+  @as("ProcessingConfiguration") processingConfiguration: option<processingConfiguration>,
+  @as("S3DestinationDescription") s3DestinationDescription: option<s3DestinationDescription>,
+  @as("S3BackupMode") s3BackupMode: option<amazonopensearchserviceS3BackupMode>,
+  @as("RetryOptions") retryOptions: option<amazonopensearchserviceRetryOptions>,
+  @as("BufferingHints") bufferingHints: option<amazonopensearchserviceBufferingHints>,
+  @as("IndexRotationPeriod")
+  indexRotationPeriod: option<amazonopensearchserviceIndexRotationPeriod>,
+  @as("TypeName") typeName: option<amazonopensearchserviceTypeName>,
+  @as("IndexName") indexName: option<amazonopensearchserviceIndexName>,
+  @as("ClusterEndpoint") clusterEndpoint: option<amazonopensearchserviceClusterEndpoint>,
+  @as("DomainARN") domainARN: option<amazonopensearchserviceDomainARN>,
+  @as("RoleARN") roleARN: option<roleARN>,
+}
+type amazonopensearchserviceDestinationConfiguration = {
+  @as("VpcConfiguration") vpcConfiguration: option<vpcConfiguration>,
+  @as("CloudWatchLoggingOptions") cloudWatchLoggingOptions: option<cloudWatchLoggingOptions>,
+  @as("ProcessingConfiguration") processingConfiguration: option<processingConfiguration>,
+  @as("S3Configuration") s3Configuration: s3DestinationConfiguration,
+  @as("S3BackupMode") s3BackupMode: option<amazonopensearchserviceS3BackupMode>,
+  @as("RetryOptions") retryOptions: option<amazonopensearchserviceRetryOptions>,
+  @as("BufferingHints") bufferingHints: option<amazonopensearchserviceBufferingHints>,
+  @as("IndexRotationPeriod")
+  indexRotationPeriod: option<amazonopensearchserviceIndexRotationPeriod>,
+  @as("TypeName") typeName: option<amazonopensearchserviceTypeName>,
+  @as("IndexName") indexName: amazonopensearchserviceIndexName,
+  @as("ClusterEndpoint") clusterEndpoint: option<amazonopensearchserviceClusterEndpoint>,
+  @as("DomainARN") domainARN: option<amazonopensearchserviceDomainARN>,
+  @as("RoleARN") roleARN: roleARN,
 }
 @ocaml.doc("<p>Describes the destination for a delivery stream.</p>")
 type destinationDescription = {
@@ -1651,6 +1815,10 @@ type destinationDescription = {
   httpEndpointDestinationDescription: option<httpEndpointDestinationDescription>,
   @ocaml.doc("<p>The destination in Splunk.</p>") @as("SplunkDestinationDescription")
   splunkDestinationDescription: option<splunkDestinationDescription>,
+  @as("AmazonopensearchserviceDestinationDescription")
+  amazonopensearchserviceDestinationDescription: option<
+    amazonopensearchserviceDestinationDescription,
+  >,
   @ocaml.doc("<p>The destination in Amazon ES.</p>") @as("ElasticsearchDestinationDescription")
   elasticsearchDestinationDescription: option<elasticsearchDestinationDescription>,
   @ocaml.doc("<p>The destination in Amazon Redshift.</p>") @as("RedshiftDestinationDescription")
@@ -1715,7 +1883,8 @@ type deliveryStreamDescription = {
   @as("DeliveryStreamStatus")
   deliveryStreamStatus: deliveryStreamStatus,
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the delivery stream. For more information, see
-            <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>")
+            <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon
+            Resource Names (ARNs) and AWS Service Namespaces</a>.</p>")
   @as("DeliveryStreamARN")
   deliveryStreamARN: deliveryStreamARN,
   @ocaml.doc("<p>The name of the delivery stream.</p>") @as("DeliveryStreamName")
@@ -1733,7 +1902,7 @@ module StopDeliveryStreamEncryption = {
     @as("DeliveryStreamName")
     deliveryStreamName: deliveryStreamName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-firehose") @new
   external new: request => t = "StopDeliveryStreamEncryptionCommand"
   let make = (~deliveryStreamName, ()) => new({deliveryStreamName: deliveryStreamName})
@@ -1746,16 +1915,17 @@ module DeleteDeliveryStream = {
     @ocaml.doc("<p>Set this to true if you want to delete the delivery stream even if Kinesis Data Firehose
          is unable to retire the grant for the CMK. Kinesis Data Firehose might be unable to retire
          the grant due to a customer error, such as when the CMK or the grant are in an invalid
-         state. If you force deletion, you can then use the <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_RevokeGrant.html\">RevokeGrant</a> operation to revoke the grant you gave to Kinesis Data Firehose. If
-         a failure to retire the grant happens due to an AWS KMS issue, Kinesis Data Firehose keeps
-         retrying the delete operation.</p>
+         state. If you force deletion, you can then use the <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_RevokeGrant.html\">RevokeGrant</a> operation to
+         revoke the grant you gave to Kinesis Data Firehose. If a failure to retire the grant
+         happens due to an AWS KMS issue, Kinesis Data Firehose keeps retrying the delete
+         operation.</p>
          <p>The default value is false.</p>")
     @as("AllowForceDelete")
     allowForceDelete: option<booleanObject>,
     @ocaml.doc("<p>The name of the delivery stream.</p>") @as("DeliveryStreamName")
     deliveryStreamName: deliveryStreamName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-firehose") @new
   external new: request => t = "DeleteDeliveryStreamCommand"
   let make = (~deliveryStreamName, ~allowForceDelete=?, ()) =>
@@ -1773,7 +1943,7 @@ module UntagDeliveryStream = {
     @ocaml.doc("<p>The name of the delivery stream.</p>") @as("DeliveryStreamName")
     deliveryStreamName: deliveryStreamName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-firehose") @new external new: request => t = "UntagDeliveryStreamCommand"
   let make = (~tagKeys, ~deliveryStreamName, ()) =>
     new({tagKeys: tagKeys, deliveryStreamName: deliveryStreamName})
@@ -1792,7 +1962,7 @@ module StartDeliveryStreamEncryption = {
     @as("DeliveryStreamName")
     deliveryStreamName: deliveryStreamName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-firehose") @new
   external new: request => t = "StartDeliveryStreamEncryptionCommand"
   let make = (~deliveryStreamName, ~deliveryStreamEncryptionConfigurationInput=?, ()) =>
@@ -1880,7 +2050,7 @@ module TagDeliveryStream = {
     @as("DeliveryStreamName")
     deliveryStreamName: deliveryStreamName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-firehose") @new external new: request => t = "TagDeliveryStreamCommand"
   let make = (~tags, ~deliveryStreamName, ()) =>
     new({tags: tags, deliveryStreamName: deliveryStreamName})
@@ -1968,6 +2138,8 @@ module UpdateDestination = {
     @ocaml.doc("<p>Describes an update for a destination in Splunk.</p>")
     @as("SplunkDestinationUpdate")
     splunkDestinationUpdate: option<splunkDestinationUpdate>,
+    @as("AmazonopensearchserviceDestinationUpdate")
+    amazonopensearchserviceDestinationUpdate: option<amazonopensearchserviceDestinationUpdate>,
     @ocaml.doc("<p>Describes an update for a destination in Amazon ES.</p>")
     @as("ElasticsearchDestinationUpdate")
     elasticsearchDestinationUpdate: option<elasticsearchDestinationUpdate>,
@@ -1992,7 +2164,7 @@ module UpdateDestination = {
     @ocaml.doc("<p>The name of the delivery stream.</p>") @as("DeliveryStreamName")
     deliveryStreamName: deliveryStreamName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-firehose") @new external new: request => t = "UpdateDestinationCommand"
   let make = (
     ~destinationId,
@@ -2000,6 +2172,7 @@ module UpdateDestination = {
     ~deliveryStreamName,
     ~httpEndpointDestinationUpdate=?,
     ~splunkDestinationUpdate=?,
+    ~amazonopensearchserviceDestinationUpdate=?,
     ~elasticsearchDestinationUpdate=?,
     ~redshiftDestinationUpdate=?,
     ~extendedS3DestinationUpdate=?,
@@ -2009,6 +2182,7 @@ module UpdateDestination = {
     new({
       httpEndpointDestinationUpdate: httpEndpointDestinationUpdate,
       splunkDestinationUpdate: splunkDestinationUpdate,
+      amazonopensearchserviceDestinationUpdate: amazonopensearchserviceDestinationUpdate,
       elasticsearchDestinationUpdate: elasticsearchDestinationUpdate,
       redshiftDestinationUpdate: redshiftDestinationUpdate,
       extendedS3DestinationUpdate: extendedS3DestinationUpdate,
@@ -2026,8 +2200,8 @@ module CreateDeliveryStream = {
     @ocaml.doc("<p>A set of tags to assign to the delivery stream. A tag is a key-value pair that you can
          define and assign to AWS resources. Tags are metadata. For example, you can add friendly
          names and descriptions or other types of information that can help you distinguish the
-         delivery stream. For more information about tags, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html\">Using Cost Allocation Tags</a> in the AWS Billing and Cost Management User
-         Guide.</p>
+         delivery stream. For more information about tags, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html\">Using Cost Allocation
+            Tags</a> in the AWS Billing and Cost Management User Guide.</p>
 
          <p>You can specify up to 50 tags when creating a delivery stream.</p>")
     @as("Tags")
@@ -2039,6 +2213,10 @@ module CreateDeliveryStream = {
     @ocaml.doc("<p>The destination in Splunk. You can specify only one destination.</p>")
     @as("SplunkDestinationConfiguration")
     splunkDestinationConfiguration: option<splunkDestinationConfiguration>,
+    @as("AmazonopensearchserviceDestinationConfiguration")
+    amazonopensearchserviceDestinationConfiguration: option<
+      amazonopensearchserviceDestinationConfiguration,
+    >,
     @ocaml.doc("<p>The destination in Amazon ES. You can specify only one destination.</p>")
     @as("ElasticsearchDestinationConfiguration")
     elasticsearchDestinationConfiguration: option<elasticsearchDestinationConfiguration>,
@@ -2093,6 +2271,7 @@ module CreateDeliveryStream = {
     ~tags=?,
     ~httpEndpointDestinationConfiguration=?,
     ~splunkDestinationConfiguration=?,
+    ~amazonopensearchserviceDestinationConfiguration=?,
     ~elasticsearchDestinationConfiguration=?,
     ~redshiftDestinationConfiguration=?,
     ~extendedS3DestinationConfiguration=?,
@@ -2106,6 +2285,7 @@ module CreateDeliveryStream = {
       tags: tags,
       httpEndpointDestinationConfiguration: httpEndpointDestinationConfiguration,
       splunkDestinationConfiguration: splunkDestinationConfiguration,
+      amazonopensearchserviceDestinationConfiguration: amazonopensearchserviceDestinationConfiguration,
       elasticsearchDestinationConfiguration: elasticsearchDestinationConfiguration,
       redshiftDestinationConfiguration: redshiftDestinationConfiguration,
       extendedS3DestinationConfiguration: extendedS3DestinationConfiguration,

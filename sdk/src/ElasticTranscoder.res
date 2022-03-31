@@ -2997,7 +2997,7 @@ module DeletePreset = {
     @as("Id")
     id: id,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elastictranscoder") @new
   external new: request => t = "DeletePresetCommand"
   let make = (~id, ()) => new({id: id})
@@ -3010,7 +3010,7 @@ module DeletePipeline = {
   type request = {
     @ocaml.doc("<p>The identifier of the pipeline that you want to delete.</p>") @as("Id") id: id,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elastictranscoder") @new
   external new: request => t = "DeletePipelineCommand"
   let make = (~id, ()) => new({id: id})
@@ -3027,7 +3027,7 @@ module CancelJob = {
     @as("Id")
     id: id,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elastictranscoder") @new external new: request => t = "CancelJobCommand"
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"

@@ -205,7 +205,7 @@ module UnlinkDeveloperIdentity = {
     @ocaml.doc("<p>A unique identifier in the format REGION:GUID.</p>") @as("IdentityId")
     identityId: identityId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-cognito-identity") @new
   external new: request => t = "UnlinkDeveloperIdentityCommand"
   let make = (~developerUserIdentifier, ~developerProviderName, ~identityPoolId, ~identityId, ()) =>
@@ -271,7 +271,7 @@ module DeleteIdentityPool = {
     @ocaml.doc("<p>An identity pool ID in the format REGION:GUID.</p>") @as("IdentityPoolId")
     identityPoolId: identityPoolId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-cognito-identity") @new
   external new: request => t = "DeleteIdentityPoolCommand"
   let make = (~identityPoolId, ()) => new({identityPoolId: identityPoolId})
@@ -286,7 +286,7 @@ module UntagResource = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the identity pool.</p>") @as("ResourceArn")
     resourceArn: arnstring,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-cognito-identity") @new
   external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
@@ -306,7 +306,7 @@ module UnlinkIdentity = {
     @ocaml.doc("<p>A unique identifier in the format REGION:GUID.</p>") @as("IdentityId")
     identityId: identityId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-cognito-identity") @new
   external new: request => t = "UnlinkIdentityCommand"
   let make = (~loginsToRemove, ~logins, ~identityId, ()) =>
@@ -322,7 +322,7 @@ module TagResource = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the identity pool.</p>") @as("ResourceArn")
     resourceArn: arnstring,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-cognito-identity") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1025,7 +1025,7 @@ module SetIdentityPoolRoles = {
     @ocaml.doc("<p>An identity pool ID in the format REGION:GUID.</p>") @as("IdentityPoolId")
     identityPoolId: identityPoolId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-cognito-identity") @new
   external new: request => t = "SetIdentityPoolRolesCommand"
   let make = (~roles, ~identityPoolId, ~roleMappings=?, ()) =>

@@ -86,6 +86,18 @@ type t =
   | SparseTrait
   | HttpChecksumRequiredTrait
   | AwsApiClientDiscoveredEndpointTrait
+  | AwsProtocolAwsQueryErrorTrait
+  | AwsCloudFormationCfnExcludePropertyTrait
+  | AwsCloudFormationCfnMutabilityTrait
+  | AwsIamRequiredActionsTrait
+  | AwsApiDataPlaneTrait
+  | AwsIamDefineConditionKeysTrait
+  | ExamplesTrait
+  | AwsApiControlPlaneTrait
+  | AwsIamActionPermissionDescriptionTrait
+  | AwsIamConditionKeysTrait
+  | AwsProtocolsHttpChecksumTrait
+  | AwsCustomizationsS3UnwrappedXmlOutputTrait
 
 let isEnumTrait = trait =>
   switch trait {

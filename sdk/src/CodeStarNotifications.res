@@ -262,7 +262,7 @@ module DeleteTarget = {
     @as("TargetAddress")
     targetAddress: targetAddress,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-codestar-notifications") @new
   external new: request => t = "DeleteTargetCommand"
   let make = (~targetAddress, ~forceUnsubscribeAll=?, ()) =>
@@ -296,7 +296,7 @@ module UntagResource = {
     @as("Arn")
     arn: notificationRuleArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-codestar-notifications") @new
   external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~arn, ()) => new({tagKeys: tagKeys, arn: arn})
@@ -392,7 +392,7 @@ module UpdateNotificationRule = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the notification rule.</p>") @as("Arn")
     arn: notificationRuleArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-codestar-notifications") @new
   external new: request => t = "UpdateNotificationRuleCommand"
   let make = (~arn, ~detailType=?, ~targets=?, ~eventTypeIds=?, ~status=?, ~name=?, ()) =>

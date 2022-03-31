@@ -16,9 +16,13 @@ type baseTimestamp = Js.Date.t
 type baseLong = float
 type timestamp_ = Js.Date.t
 type string_ = string
+type sensitiveStringType = string
 type long = float
+type listConflictingAliasesMaxItemsInteger = int
 type integer_ = int
+type distributionIdString = string
 type boolean_ = bool
+type aliasString = string
 type viewerProtocolPolicy = [
   | @as("redirect-to-https") #Redirect_To_Https
   | @as("https-only") #Https_Only
@@ -37,7 +41,28 @@ type sslProtocol = [
   | @as("SSLv3") #SSLv3
 ]
 type sslsupportMethod = [@as("static-ip") #Static_Ip | @as("vip") #Vip | @as("sni-only") #Sni_Only]
+type responseHeadersPolicyType = [@as("custom") #Custom | @as("managed") #Managed]
+type responseHeadersPolicyAccessControlAllowMethodsValues = [
+  | @as("ALL") #ALL
+  | @as("HEAD") #HEAD
+  | @as("PATCH") #PATCH
+  | @as("DELETE") #DELETE
+  | @as("PUT") #PUT
+  | @as("OPTIONS") #OPTIONS
+  | @as("POST") #POST
+  | @as("GET") #GET
+]
 type resourceARN = string
+type referrerPolicyList = [
+  | @as("unsafe-url") #Unsafe_Url
+  | @as("strict-origin-when-cross-origin") #Strict_Origin_When_Cross_Origin
+  | @as("strict-origin") #Strict_Origin
+  | @as("same-origin") #Same_Origin
+  | @as("origin-when-cross-origin") #Origin_When_Cross_Origin
+  | @as("origin") #Origin
+  | @as("no-referrer-when-downgrade") #No_Referrer_When_Downgrade
+  | @as("no-referrer") #No_Referrer
+]
 type realtimeMetricsSubscriptionStatus = [@as("Disabled") #Disabled | @as("Enabled") #Enabled]
 type priceClass = [
   | @as("PriceClass_All") #PriceClass_All
@@ -68,6 +93,7 @@ type originProtocolPolicy = [
   | @as("http-only") #Http_Only
 ]
 type minimumProtocolVersion = [
+  | @as("TLSv1.2_2021") #TLSv1_2_2021
   | @as("TLSv1.2_2019") #TLSv1_2_2019
   | @as("TLSv1.2_2018") #TLSv1_2_2018
   | @as("TLSv1.1_2016") #TLSv1_1_2016
@@ -103,6 +129,7 @@ type functionName = string
 type functionEventObject = NodeJs.Buffer.t
 type functionBlob = NodeJs.Buffer.t
 type functionARN = string
+type frameOptionsList = [@as("SAMEORIGIN") #SAMEORIGIN | @as("DENY") #DENY]
 type format = [@as("URLEncoded") #URLEncoded]
 type eventType = [
   | @as("origin-response") #Origin_Response
@@ -146,15 +173,13 @@ type cachePolicyCookieBehavior = [
 							<code>SSLSupportMethod</code> to <code>sni-only</code>. This is
 							recommended. Most browsers and clients support
                             SNI.
-                            
-                  </p>
+                            </p>
 					             </li>
                   <li>
 						               <p>To accept HTTPS connections from all viewers, including those that don’t support SNI,
 							set <code>SSLSupportMethod</code> to <code>vip</code>. This is not
 							recommended, and results in additional monthly charges from
-							CloudFront.
-                  </p>
+							CloudFront.</p>
 					             </li>
                </ul> 
 			         </li>
@@ -165,20 +190,17 @@ type cachePolicyCookieBehavior = [
 					<i>Amazon CloudFront Developer Guide</i>.</p>
 			         </li>
             <li> 
-				           <p>The location of the SSL/TLS certificate, <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html\">AWS
-					Certificate Manager (ACM)</a> (recommended) or <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html\">AWS Identity and Access Management (AWS IAM)</a>. You specify the location
+				           <p>The location of the SSL/TLS certificate, <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html\">Certificate Manager (ACM)</a> (recommended) or <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html\">Identity and Access Management (IAM)</a>. You specify the location
 					by setting a value in one of the following fields (not both):</p>
 				           <ul>
                   <li>
 						               <p>
                         <code>ACMCertificateArn</code>
-                     
                      </p>
 					             </li>
                   <li>
 						               <p>
                         <code>IAMCertificateId</code>
-                     
                      </p>
 					             </li>
                </ul> 
@@ -199,13 +221,11 @@ type viewerCertificate = {
             <li>
 				           <p>
                   <code>ACMCertificateArn</code>
-               
                </p>
 			         </li>
             <li>
 				           <p>
                   <code>IAMCertificateId</code>
-               
                </p>
 			         </li>
             <li>
@@ -221,13 +241,11 @@ type viewerCertificate = {
             <li>
 				           <p>
                   <code>ACMCertificateArn</code>
-               
                </p>
 			         </li>
             <li>
 				           <p>
                   <code>IAMCertificateId</code>
-               
                </p>
 			         </li>
             <li>
@@ -258,8 +276,7 @@ type viewerCertificate = {
 				Policy</b>.</p>
 		       </note>
 		       <p>When you’re using SNI only (you set <code>SSLSupportMethod</code> to <code>sni-only</code>),
-			you must specify <code>TLSv1</code> or higher.
-      </p>
+			you must specify <code>TLSv1</code> or higher.</p>
 		       <p>If the distribution uses the CloudFront domain name such as
 			<code>d111111abcdef8.cloudfront.net</code> (you set
 			<code>CloudFrontDefaultCertificate</code> to <code>true</code>), CloudFront automatically sets
@@ -287,7 +304,7 @@ type viewerCertificate = {
                   <code>static-ip</code> - Do not specify this value unless your distribution
 					has been enabled for this feature by the CloudFront team. If you have a use case
 					that requires static IP addresses for a distribution, contact CloudFront through
-					the <a href=\"https://console.aws.amazon.com/support/home\">AWS Support Center</a>.</p>
+					the <a href=\"https://console.aws.amazon.com/support/home\">Amazon Web Services Support Center</a>.</p>
 			         </li>
          </ul> 
 		       <p>If the distribution uses the CloudFront domain name such as
@@ -295,21 +312,18 @@ type viewerCertificate = {
   @as("SSLSupportMethod")
   sslsupportMethod: option<sslsupportMethod>,
   @ocaml.doc("<p>If the distribution uses <code>Aliases</code> (alternate domain names or CNAMEs) and
-			the SSL/TLS certificate is stored in <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html\">AWS Certificate Manager (ACM)</a>, provide the Amazon Resource
+			the SSL/TLS certificate is stored in <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html\">Certificate Manager (ACM)</a>, provide the Amazon Resource
 			Name (ARN) of the ACM certificate. CloudFront only supports ACM certificates in the US
 			East (N. Virginia) Region (<code>us-east-1</code>).</p>
 		       <p>If you specify an ACM certificate ARN, you must also specify values for
-			<code>MinimumProtocolVersion</code> and <code>SSLSupportMethod</code>.
-      </p>")
+			<code>MinimumProtocolVersion</code> and <code>SSLSupportMethod</code>.</p>")
   @as("ACMCertificateArn")
   acmcertificateArn: option<string_>,
   @ocaml.doc("<p>If the distribution uses <code>Aliases</code> (alternate domain names or CNAMEs) and
-			the SSL/TLS certificate is stored in <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html\">AWS
-			Identity and Access Management (AWS IAM)</a>, provide the ID of the IAM
+			the SSL/TLS certificate is stored in <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html\">Identity and Access Management (IAM)</a>, provide the ID of the IAM
 			certificate.</p>
 		       <p>If you specify an IAM certificate ID, you must also specify values for
-			<code>MinimumProtocolVersion</code> and <code>SSLSupportMethod</code>. 
-      </p>")
+			<code>MinimumProtocolVersion</code> and <code>SSLSupportMethod</code>. </p>")
   @as("IAMCertificateId")
   iamcertificateId: option<string_>,
   @ocaml.doc("<p>If the distribution uses the CloudFront domain name such as
@@ -321,7 +335,7 @@ type viewerCertificate = {
 				           <p>
                   <code>ACMCertificateArn</code> or <code>IAMCertificateId</code> (specify a value for one,
 					not both)</p>
-				        
+				
 			         </li>
             <li>
 				           <p>
@@ -331,7 +345,6 @@ type viewerCertificate = {
             <li>
 				           <p>
                   <code>SSLSupportMethod</code>
-               
                </p>
 			         </li>
          </ul>")
@@ -427,6 +440,171 @@ type s3Origin = {
   originAccessIdentity: string_,
   @ocaml.doc("<p>The DNS name of the Amazon S3 origin. </p>") @as("DomainName") domainName: string_,
 }
+@ocaml.doc("<p>Determines whether CloudFront includes the <code>X-XSS-Protection</code> HTTP response header and
+			the header’s value.</p>
+		       <p>For more information about the <code>X-XSS-Protection</code> HTTP response header, see
+				<a href=\"https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection\">X-XSS-Protection</a> in the MDN Web Docs.</p>")
+type responseHeadersPolicyXSSProtection = {
+  @ocaml.doc("<p>A reporting URI, which CloudFront uses as the value of the <code>report</code> directive in the
+			<code>X-XSS-Protection</code> header.</p>
+		       <p>You cannot specify a <code>ReportUri</code> when <code>ModeBlock</code> is
+			<code>true</code>.</p>
+		       <p>For more information about using a reporting URL, see <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection\">X-XSS-Protection</a> in the MDN Web Docs.</p>")
+  @as("ReportUri")
+  reportUri: option<string_>,
+  @ocaml.doc("<p>A Boolean that determines whether CloudFront includes the <code>mode=block</code> directive in the
+			<code>X-XSS-Protection</code> header.</p>
+		       <p>For more information about this directive, see <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection\">X-XSS-Protection</a> in the MDN Web Docs.</p>")
+  @as("ModeBlock")
+  modeBlock: option<boolean_>,
+  @ocaml.doc("<p>A Boolean that determines the value of the <code>X-XSS-Protection</code> HTTP response
+			header. When this setting is <code>true</code>, the value of the
+			<code>X-XSS-Protection</code> header is <code>1</code>. When this setting is
+			<code>false</code>, the value of the <code>X-XSS-Protection</code> header is
+			<code>0</code>.</p>
+		       <p>For more information about these settings, see <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection\">X-XSS-Protection</a> in the MDN Web Docs.</p>")
+  @as("Protection")
+  protection: boolean_,
+  @ocaml.doc("<p>A Boolean that determines whether CloudFront overrides the <code>X-XSS-Protection</code> HTTP
+			response header received from the origin with the one specified in this response headers
+			policy.</p>")
+  @as("Override")
+  override: boolean_,
+}
+@ocaml.doc("<p>Determines whether CloudFront includes the <code>Strict-Transport-Security</code> HTTP response
+			header and the header’s value.</p>
+		       <p>For more information about the <code>Strict-Transport-Security</code> HTTP response
+			header, see <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security\">Strict-Transport-Security</a> in the MDN Web Docs.</p>")
+type responseHeadersPolicyStrictTransportSecurity = {
+  @ocaml.doc("<p>A number that CloudFront uses as the value for the <code>max-age</code> directive in the
+				<code>Strict-Transport-Security</code> HTTP response header.</p>")
+  @as("AccessControlMaxAgeSec")
+  accessControlMaxAgeSec: integer_,
+  @ocaml.doc("<p>A Boolean that determines whether CloudFront includes the <code>preload</code> directive in the
+			<code>Strict-Transport-Security</code> HTTP response header.</p>")
+  @as("Preload")
+  preload: option<boolean_>,
+  @ocaml.doc("<p>A Boolean that determines whether CloudFront includes the <code>includeSubDomains</code> directive
+			in the <code>Strict-Transport-Security</code> HTTP response header.</p>")
+  @as("IncludeSubdomains")
+  includeSubdomains: option<boolean_>,
+  @ocaml.doc("<p>A Boolean that determines whether CloudFront overrides the <code>Strict-Transport-Security</code>
+			HTTP response header received from the origin with the one specified in this response
+			headers policy.</p>")
+  @as("Override")
+  override: boolean_,
+}
+@ocaml.doc("<p>Determines whether CloudFront includes the <code>Referrer-Policy</code> HTTP response header and
+			the header’s value.</p>
+		       <p>For more information about the <code>Referrer-Policy</code> HTTP response header, see
+				<a href=\"https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy\">Referrer-Policy</a> in the MDN Web Docs.</p>")
+type responseHeadersPolicyReferrerPolicy = {
+  @ocaml.doc("<p>The value of the <code>Referrer-Policy</code> HTTP response header. Valid values
+			are:</p>
+		       <ul>
+            <li>
+				           <p>
+                  <code>no-referrer</code>
+               </p>
+			         </li>
+            <li>
+				           <p>
+                  <code>no-referrer-when-downgrade</code>
+               </p>
+			         </li>
+            <li>
+				           <p>
+                  <code>origin</code>
+               </p>
+			         </li>
+            <li>
+				           <p>
+                  <code>origin-when-cross-origin</code>
+               </p>
+			         </li>
+            <li>
+				           <p>
+                  <code>same-origin</code>
+               </p>
+			         </li>
+            <li>
+				           <p>
+                  <code>strict-origin</code>
+               </p>
+			         </li>
+            <li>
+				           <p>
+                  <code>strict-origin-when-cross-origin</code>
+               </p>
+			         </li>
+            <li>
+				           <p>
+                  <code>unsafe-url</code>
+               </p>
+			         </li>
+         </ul>
+		       <p>For more information about these values, see <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy\">Referrer-Policy</a> in the MDN Web Docs.</p>")
+  @as("ReferrerPolicy")
+  referrerPolicy: referrerPolicyList,
+  @ocaml.doc("<p>A Boolean that determines whether CloudFront overrides the <code>Referrer-Policy</code> HTTP
+			response header received from the origin with the one specified in this response headers
+			policy.</p>")
+  @as("Override")
+  override: boolean_,
+}
+@ocaml.doc("<p>Determines whether CloudFront includes the <code>X-Frame-Options</code> HTTP response header and
+			the header’s value.</p>
+		       <p>For more information about the <code>X-Frame-Options</code> HTTP response header, see
+				<a href=\"https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options\">X-Frame-Options</a> in the MDN Web Docs.</p>")
+type responseHeadersPolicyFrameOptions = {
+  @ocaml.doc("<p>The value of the <code>X-Frame-Options</code> HTTP response header. Valid values are
+				<code>DENY</code> and <code>SAMEORIGIN</code>. </p>
+		       <p>For more information about these values, see <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options\">X-Frame-Options</a> in the MDN Web Docs.</p>")
+  @as("FrameOption")
+  frameOption: frameOptionsList,
+  @ocaml.doc("<p>A Boolean that determines whether CloudFront overrides the <code>X-Frame-Options</code> HTTP
+			response header received from the origin with the one specified in this response headers
+			policy.</p>")
+  @as("Override")
+  override: boolean_,
+}
+@ocaml.doc("<p>An HTTP response header name and its value. CloudFront includes this header in HTTP responses that
+			it sends for requests that match a cache behavior that’s associated with this response
+			headers policy.</p>")
+type responseHeadersPolicyCustomHeader = {
+  @ocaml.doc("<p>A Boolean that determines whether CloudFront overrides a response header with the same name
+			received from the origin with the header specified here.</p>")
+  @as("Override")
+  override: boolean_,
+  @ocaml.doc("<p>The value for the HTTP response header.</p>") @as("Value") value: string_,
+  @ocaml.doc("<p>The HTTP response header name.</p>") @as("Header") header: string_,
+}
+@ocaml.doc("<p>Determines whether CloudFront includes the <code>X-Content-Type-Options</code> HTTP response
+			header with its value set to <code>nosniff</code>.</p>
+		       <p>For more information about the <code>X-Content-Type-Options</code> HTTP response
+			header, see <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options\">X-Content-Type-Options</a> in the MDN Web Docs.</p>")
+type responseHeadersPolicyContentTypeOptions = {
+  @ocaml.doc("<p>A Boolean that determines whether CloudFront overrides the <code>X-Content-Type-Options</code>
+			HTTP response header received from the origin with the one specified in this response
+			headers policy.</p>")
+  @as("Override")
+  override: boolean_,
+}
+@ocaml.doc("<p>The policy directives and their values that CloudFront includes as values for the
+				<code>Content-Security-Policy</code> HTTP response header.</p>
+		       <p>For more information about the <code>Content-Security-Policy</code> HTTP response
+			header, see <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy\">Content-Security-Policy</a> in the MDN Web Docs.</p>")
+type responseHeadersPolicyContentSecurityPolicy = {
+  @ocaml.doc("<p>The policy directives and their values that CloudFront includes as values for the
+				<code>Content-Security-Policy</code> HTTP response header.</p>")
+  @as("ContentSecurityPolicy")
+  contentSecurityPolicy: string_,
+  @ocaml.doc("<p>A Boolean that determines whether CloudFront overrides the <code>Content-Security-Policy</code>
+			HTTP response header received from the origin with the one specified in this response
+			headers policy.</p>")
+  @as("Override")
+  override: boolean_,
+}
 @ocaml.doc("<p>A subscription configuration for additional CloudWatch metrics.</p>")
 type realtimeMetricsSubscriptionConfig = {
   @ocaml.doc("<p>A flag that indicates whether additional CloudWatch metrics are enabled for a given
@@ -484,13 +662,13 @@ type pathList = array<string_>
 		       <p>Using Origin Shield can help reduce the load on your origin. For more
             information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/origin-shield.html\">Using Origin Shield</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>")
 type originShield = {
-  @ocaml.doc("<p>The AWS Region for Origin Shield.</p>
-		       <p>Specify the AWS Region that has the lowest latency to your origin.
+  @ocaml.doc("<p>The Amazon Web Services Region for Origin Shield.</p>
+		       <p>Specify the Amazon Web Services Region that has the lowest latency to your origin.
             To specify a region, use the region code, not the region name.
             For example, specify the US East (Ohio) region as <code>us-east-2</code>.</p>
-        <p>When you enable CloudFront Origin Shield, you must specify the AWS Region for Origin
-            Shield. For the list of AWS Regions that you can specify, and for help choosing the best
-            Region for your origin, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/origin-shield.html#choose-origin-shield-region\">Choosing the AWS Region for Origin Shield</a> in the
+        <p>When you enable CloudFront Origin Shield, you must specify the Amazon Web Services Region for Origin
+            Shield. For the list of Amazon Web Services Regions that you can specify, and for help choosing the best
+            Region for your origin, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/origin-shield.html#choose-origin-shield-region\">Choosing the Amazon Web Services Region for Origin Shield</a> in the
 			<i>Amazon CloudFront Developer Guide</i>.</p>")
   @as("OriginShieldRegion")
   originShieldRegion: option<originShieldRegion>,
@@ -511,7 +689,7 @@ type originCustomHeader = {
   @ocaml.doc("<p>The value for the header that you specified in the <code>HeaderName</code> 
 			field.</p>")
   @as("HeaderValue")
-  headerValue: string_,
+  headerValue: sensitiveStringType,
   @ocaml.doc("<p>The name of a header that you want CloudFront to send to your origin. For more information, see
 			<a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/forward-custom-headers.html\">Adding Custom
 			Headers to Origin Requests</a> in the <i> Amazon CloudFront Developer Guide</i>.</p>")
@@ -550,14 +728,14 @@ type loggingConfig = {
   enabled: boolean_,
 }
 type locationList = array<string_>
-@ocaml.doc("<p>A complex type that contains a Lambda function association.</p>")
+@ocaml.doc("<p>A complex type that contains a Lambda@Edge function association.</p>")
 type lambdaFunctionAssociation = {
-  @ocaml.doc("<p>A flag that allows a Lambda function to have read access to the body content. For more information, 
+  @ocaml.doc("<p>A flag that allows a Lambda@Edge function to have read access to the body content. For more information, 
 			see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/lambda-include-body-access.html\">Accessing the Request Body by Choosing the 
 				Include Body Option</a> in the Amazon CloudFront Developer Guide.</p>")
   @as("IncludeBody")
   includeBody: option<boolean_>,
-  @ocaml.doc("<p>Specifies the event type that triggers a Lambda function invocation. You can specify the following values:</p> 
+  @ocaml.doc("<p>Specifies the event type that triggers a Lambda@Edge function invocation. You can specify the following values:</p> 
 		       <ul>
             <li>
                <p>
@@ -584,7 +762,7 @@ type lambdaFunctionAssociation = {
          </ul>")
   @as("EventType")
   eventType: eventType,
-  @ocaml.doc("<p>The ARN of the Lambda function. You must specify the ARN of a function version; you can't specify a Lambda alias 
+  @ocaml.doc("<p>The ARN of the Lambda@Edge function. You must specify the ARN of a function version; you can't specify an alias 
 			or $LATEST.</p>")
   @as("LambdaFunctionARN")
   lambdaFunctionARN: lambdaFunctionARN,
@@ -596,7 +774,7 @@ type kinesisStreamConfig = {
 			log data.</p>")
   @as("StreamARN")
   streamARN: string_,
-  @ocaml.doc("<p>The Amazon Resource Name (ARN) of an AWS Identity and Access Management (IAM) role that
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of an Identity and Access Management (IAM) role that
 			CloudFront can use to send real-time log data to your Kinesis data stream.</p>
 		       <p>For more information the IAM role, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html#understand-real-time-log-config-iam-role\">Real-time log configuration IAM role</a> in the
 			<i>Amazon CloudFront Developer Guide</i>.</p>")
@@ -743,6 +921,22 @@ type contentTypeProfile = {
   @as("Format")
   format: format,
 }
+@ocaml.doc("<p>An alias (also called a CNAME) and the CloudFront distribution and Amazon Web Services account ID that it’s
+			associated with. The distribution and account IDs are partially hidden, which allows you
+			to identify the distributions and accounts that you own, but helps to protect the
+			information of ones that you don’t own.</p>")
+type conflictingAlias = {
+  @ocaml.doc("<p>The (partially hidden) ID of the Amazon Web Services account that owns the distribution that’s
+			associated with the alias.</p>")
+  @as("AccountId")
+  accountId: option<string_>,
+  @ocaml.doc(
+    "<p>The (partially hidden) ID of the CloudFront distribution associated with the alias.</p>"
+  )
+  @as("DistributionId")
+  distributionId: option<string_>,
+  @ocaml.doc("<p>An alias (also called a CNAME).</p>") @as("Alias") alias: option<string_>,
+}
 @ocaml.doc("<p>Summary of the information about a CloudFront origin access identity.</p>")
 type cloudFrontOriginAccessIdentitySummary = {
   @ocaml.doc("<p>The comment for this origin access identity, as originally specified when 
@@ -783,12 +977,12 @@ type cloudFrontOriginAccessIdentityConfig = {
 }
 type awsAccountNumberList = array<string_>
 type aliasList = array<string_>
-@ocaml.doc("<p>AWS services in China customers must file for an Internet Content Provider (ICP) recordal if they want to serve content 
+@ocaml.doc("<p>Amazon Web Services services in China customers must file for an Internet Content Provider (ICP) recordal if they want to serve content 
 			publicly on an alternate domain name, also known as a CNAME, that they've added to CloudFront. AliasICPRecordal provides the ICP 
 			recordal status for CNAMEs associated with distributions. The status is returned in the CloudFront response; you can't configure
 			it yourself.</p>
 		       <p>For more information about ICP recordals, see  <a href=\"https://docs.amazonaws.cn/en_us/aws/latest/userguide/accounts-and-credentials.html\">
-			Signup, Accounts, and Credentials</a> in <i>Getting Started with AWS services in China</i>.</p>")
+			Signup, Accounts, and Credentials</a> in <i>Getting Started with Amazon Web Services services in China</i>.</p>")
 type aliasICPRecordal = {
   @ocaml.doc("<p>The Internet Content Provider (ICP) recordal status for a CNAME. The ICPRecordalStatus is set to 
 			APPROVED for all CNAMEs (aliases) in regions outside of China. </p>
@@ -817,13 +1011,18 @@ type aliasICPRecordal = {
   @ocaml.doc("<p>A domain name associated with a distribution. </p>") @as("CNAME")
   cname: option<string_>,
 }
-@ocaml.doc("<p>A list of AWS accounts whose public keys CloudFront can use to verify the signatures of signed
+type accessControlExposeHeadersList = array<string_>
+type accessControlAllowOriginsList = array<string_>
+type accessControlAllowMethodsList = array<responseHeadersPolicyAccessControlAllowMethodsValues>
+type accessControlAllowHeadersList = array<string_>
+@ocaml.doc("<p>A list of Amazon Web Services accounts whose public keys CloudFront can use to verify the signatures of signed
 			URLs and signed cookies.</p>")
 type trustedSigners = {
-  @ocaml.doc("<p>A list of AWS account identifiers.</p>") @as("Items")
+  @ocaml.doc("<p>A list of Amazon Web Services account identifiers.</p>") @as("Items")
   items: option<awsAccountNumberList>,
-  @ocaml.doc("<p>The number of AWS accounts in the list.</p>") @as("Quantity") quantity: integer_,
-  @ocaml.doc("<p>This field is <code>true</code> if any of the AWS accounts have public keys that CloudFront can
+  @ocaml.doc("<p>The number of Amazon Web Services accounts in the list.</p>") @as("Quantity")
+  quantity: integer_,
+  @ocaml.doc("<p>This field is <code>true</code> if any of the Amazon Web Services accounts have public keys that CloudFront can
 			use to verify the signatures of signed URLs and signed cookies. If not, this field is
 			<code>false</code>.</p>")
   @as("Enabled")
@@ -853,6 +1052,139 @@ type statusCodes = {
   @ocaml.doc("<p>The items (status codes) for an origin group.</p>") @as("Items")
   items: statusCodeList,
   @ocaml.doc("<p>The number of status codes.</p>") @as("Quantity") quantity: integer_,
+}
+@ocaml.doc("<p>A configuration for a set of security-related HTTP response headers. CloudFront adds these headers
+			to HTTP responses that it sends for requests that match a cache behavior associated with
+			this response headers policy.</p>")
+type responseHeadersPolicySecurityHeadersConfig = {
+  @ocaml.doc("<p>Determines whether CloudFront includes the <code>Strict-Transport-Security</code> HTTP response
+			header and the header’s value.</p>
+		       <p>For more information about the <code>Strict-Transport-Security</code> HTTP response
+			header, see <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security\">Strict-Transport-Security</a> in the MDN Web Docs.</p>")
+  @as("StrictTransportSecurity")
+  strictTransportSecurity: option<responseHeadersPolicyStrictTransportSecurity>,
+  @ocaml.doc("<p>Determines whether CloudFront includes the <code>X-Content-Type-Options</code> HTTP response
+			header with its value set to <code>nosniff</code>.</p>
+		       <p>For more information about the <code>X-Content-Type-Options</code> HTTP response
+			header, see <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options\">X-Content-Type-Options</a> in the MDN Web Docs.</p>")
+  @as("ContentTypeOptions")
+  contentTypeOptions: option<responseHeadersPolicyContentTypeOptions>,
+  @ocaml.doc("<p>The policy directives and their values that CloudFront includes as values for the
+				<code>Content-Security-Policy</code> HTTP response header.</p>
+		       <p>For more information about the <code>Content-Security-Policy</code> HTTP response
+			header, see <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy\">Content-Security-Policy</a> in the MDN Web Docs.</p>")
+  @as("ContentSecurityPolicy")
+  contentSecurityPolicy: option<responseHeadersPolicyContentSecurityPolicy>,
+  @ocaml.doc("<p>Determines whether CloudFront includes the <code>Referrer-Policy</code> HTTP response header and
+			the header’s value.</p>
+		       <p>For more information about the <code>Referrer-Policy</code> HTTP response header, see
+			<a href=\"https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy\">Referrer-Policy</a> in the MDN Web Docs.</p>")
+  @as("ReferrerPolicy")
+  referrerPolicy: option<responseHeadersPolicyReferrerPolicy>,
+  @ocaml.doc("<p>Determines whether CloudFront includes the <code>X-Frame-Options</code> HTTP response header and
+			the header’s value.</p>
+		       <p>For more information about the <code>X-Frame-Options</code> HTTP response header, see
+			<a href=\"https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options\">X-Frame-Options</a> in the MDN Web Docs.</p>")
+  @as("FrameOptions")
+  frameOptions: option<responseHeadersPolicyFrameOptions>,
+  @ocaml.doc("<p>Determines whether CloudFront includes the <code>X-XSS-Protection</code> HTTP response header and
+			the header’s value.</p>
+		       <p>For more information about the <code>X-XSS-Protection</code> HTTP response header, see
+			<a href=\"https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection\">X-XSS-Protection</a> in the MDN Web Docs.</p>")
+  @as("XSSProtection")
+  xssprotection: option<responseHeadersPolicyXSSProtection>,
+}
+type responseHeadersPolicyCustomHeaderList = array<responseHeadersPolicyCustomHeader>
+@ocaml.doc("<p>A list of HTTP headers that CloudFront includes as values for the
+				<code>Access-Control-Expose-Headers</code> HTTP response header.</p>
+		       <p>For more information about the <code>Access-Control-Expose-Headers</code> HTTP
+			response header, see <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Expose-Headers\">Access-Control-Expose-Headers</a> in the MDN Web Docs.</p>")
+type responseHeadersPolicyAccessControlExposeHeaders = {
+  @ocaml.doc(
+    "<p>The list of HTTP headers. You can specify <code>*</code> to expose all headers.</p>"
+  )
+  @as("Items")
+  items: option<accessControlExposeHeadersList>,
+  @ocaml.doc("<p>The number of HTTP headers in the list.</p>") @as("Quantity") quantity: integer_,
+}
+@ocaml.doc("<p>A list of origins (domain names) that CloudFront can use as the value for the
+			<code>Access-Control-Allow-Origin</code> HTTP response header.</p>
+		       <p>For more information about the <code>Access-Control-Allow-Origin</code> HTTP response
+			header, see <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin\">Access-Control-Allow-Origin</a> in the MDN Web Docs.</p>")
+type responseHeadersPolicyAccessControlAllowOrigins = {
+  @ocaml.doc("<p>The list of origins (domain names). You can specify <code>*</code> to allow all
+			origins.</p>")
+  @as("Items")
+  items: accessControlAllowOriginsList,
+  @ocaml.doc("<p>The number of origins in the list.</p>") @as("Quantity") quantity: integer_,
+}
+@ocaml.doc("<p>A list of HTTP methods that CloudFront includes as values for the
+				<code>Access-Control-Allow-Methods</code> HTTP response header.</p>
+		       <p>For more information about the <code>Access-Control-Allow-Methods</code> HTTP response
+			header, see <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Methods\">Access-Control-Allow-Methods</a> in the MDN Web Docs.</p>")
+type responseHeadersPolicyAccessControlAllowMethods = {
+  @ocaml.doc("<p>The list of HTTP methods. Valid values are:</p>
+		       <ul>
+            <li>
+				           <p>
+                  <code>GET</code>
+               </p>
+			         </li>
+            <li>
+				           <p>
+                  <code>DELETE</code>
+               </p>
+			         </li>
+            <li>
+				           <p>
+                  <code>HEAD</code>
+               </p>
+			         </li>
+            <li>
+				           <p>
+                  <code>OPTIONS</code>
+               </p>
+			         </li>
+            <li>
+				           <p>
+                  <code>PATCH</code>
+               </p>
+			         </li>
+            <li>
+				           <p>
+                  <code>POST</code>
+               </p>
+			         </li>
+            <li>
+				           <p>
+                  <code>PUT</code>
+               </p>
+			         </li>
+            <li>
+				           <p>
+                  <code>ALL</code>
+               </p>
+			         </li>
+         </ul>
+		       <p>
+            <code>ALL</code> is a special value that includes all of the listed HTTP
+			methods.</p>")
+  @as("Items")
+  items: accessControlAllowMethodsList,
+  @ocaml.doc("<p>The number of HTTP methods in the list.</p>") @as("Quantity") quantity: integer_,
+}
+@ocaml.doc("<p>A list of HTTP header names that CloudFront includes as values for the
+				<code>Access-Control-Allow-Headers</code> HTTP response header.</p>
+		       <p>For more information about the <code>Access-Control-Allow-Headers</code> HTTP response
+			header, see <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Headers\">Access-Control-Allow-Headers</a> in the MDN Web Docs.</p>")
+type responseHeadersPolicyAccessControlAllowHeaders = {
+  @ocaml.doc(
+    "<p>The list of HTTP header names. You can specify <code>*</code> to allow all headers.</p>"
+  )
+  @as("Items")
+  items: accessControlAllowHeadersList,
+  @ocaml.doc("<p>The number of HTTP header names in the list.</p>") @as("Quantity")
+  quantity: integer_,
 }
 @ocaml.doc("<p>Contains a list of query string names.</p>")
 type queryStringNames = {
@@ -1063,6 +1395,7 @@ type cookieNames = {
   quantity: integer_,
 }
 type contentTypeProfileList = array<contentTypeProfile>
+type conflictingAliases = array<conflictingAlias>
 type cloudFrontOriginAccessIdentitySummaryList = array<cloudFrontOriginAccessIdentitySummary>
 @ocaml.doc("<p>CloudFront origin access identity.</p>")
 type cloudFrontOriginAccessIdentity = {
@@ -1125,11 +1458,11 @@ type testResult = {
 			event object, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/functions-event-structure.html\">Event object
 			structure</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>")
   @as("FunctionOutput")
-  functionOutput: option<string_>,
+  functionOutput: option<sensitiveStringType>,
   @ocaml.doc("<p>If the result of testing the function was an error, this field contains the error
 			message.</p>")
   @as("FunctionErrorMessage")
-  functionErrorMessage: option<string_>,
+  functionErrorMessage: option<sensitiveStringType>,
   @ocaml.doc(
     "<p>Contains the log lines that the function wrote (if any) when running the test.</p>"
   )
@@ -1162,7 +1495,7 @@ type streamingDistributionSummary = {
   @ocaml.doc("<p>The comment originally specified when this distribution was created.</p>")
   @as("Comment")
   comment: string_,
-  @ocaml.doc("<p>A complex type that specifies the AWS accounts, if any, that you want to allow to 
+  @ocaml.doc("<p>A complex type that specifies the Amazon Web Services accounts, if any, that you want to allow to 
 			create signed URLs for private content. If you want to require signed URLs in requests for 
 			objects in the target origin that match the <code>PathPattern</code> for this cache behavior, 
 			specify <code>true</code> for <code>Enabled</code>, and specify the applicable values for 
@@ -1199,7 +1532,7 @@ type streamingDistributionSummary = {
   status: string_,
   @ocaml.doc("<p> The ARN (Amazon Resource Name) for the streaming distribution. For example: 
 				<code>arn:aws:cloudfront::123456789012:streaming-distribution/EDFDVBD632BHDS5</code>, where 
-				<code>123456789012</code> is your AWS account ID.</p>")
+				<code>123456789012</code> is your Amazon Web Services account ID.</p>")
   @as("ARN")
   arn: string_,
   @ocaml.doc(
@@ -1218,7 +1551,7 @@ type streamingDistributionConfig = {
 			distribution. </p>")
   @as("PriceClass")
   priceClass: option<priceClass>,
-  @ocaml.doc("<p>A complex type that specifies any AWS accounts that you want to permit to create signed 
+  @ocaml.doc("<p>A complex type that specifies any Amazon Web Services accounts that you want to permit to create signed 
 			URLs for private content. If you want the distribution to use signed URLs, include this 
 			element; if you want the distribution to use public URLs, remove this element. For more 
 			information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html\">Serving Private Content through 
@@ -1249,13 +1582,13 @@ type streamingDistributionConfig = {
   @as("CallerReference")
   callerReference: string_,
 }
-@ocaml.doc("<p>A list of AWS accounts and the active CloudFront key pairs in each account that CloudFront can use to
+@ocaml.doc("<p>A list of Amazon Web Services accounts and the active CloudFront key pairs in each account that CloudFront can use to
 			verify the signatures of signed URLs and signed cookies.</p>")
 type signer = {
   @ocaml.doc("<p>A list of CloudFront key pair identifiers.</p>") @as("KeyPairIds")
   keyPairIds: option<keyPairIds>,
-  @ocaml.doc("<p>An AWS account number that contains active CloudFront key pairs that CloudFront can use to verify the
-			signatures of signed URLs and signed cookies. If the AWS account that owns the key pairs
+  @ocaml.doc("<p>An Amazon Web Services account number that contains active CloudFront key pairs that CloudFront can use to verify the
+			signatures of signed URLs and signed cookies. If the Amazon Web Services account that owns the key pairs
 			is the same account that owns the CloudFront distribution, the value of this field is
 			<code>self</code>.</p>")
   @as("AwsAccountNumber")
@@ -1268,6 +1601,63 @@ type restrictions = {
 			determines the location of your users using <code>MaxMind</code> GeoIP databases.</p>")
   @as("GeoRestriction")
   geoRestriction: geoRestriction,
+}
+@ocaml.doc("<p>A list of HTTP response header names and their values. CloudFront includes these headers in HTTP
+			responses that it sends for requests that match a cache behavior that’s associated with
+			this response headers policy.</p>")
+type responseHeadersPolicyCustomHeadersConfig = {
+  @ocaml.doc("<p>The list of HTTP response headers and their values.</p>") @as("Items")
+  items: option<responseHeadersPolicyCustomHeaderList>,
+  @ocaml.doc("<p>The number of HTTP response headers in the list.</p>") @as("Quantity")
+  quantity: integer_,
+}
+@ocaml.doc("<p>A configuration for a set of HTTP response headers that are used for cross-origin resource
+			sharing (CORS). CloudFront adds these headers to HTTP responses that it sends for CORS
+			requests that match a cache behavior associated with this response headers
+			policy.</p>
+		       <p>For more information about CORS, see <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS\">Cross-Origin Resource
+				Sharing (CORS)</a> in the MDN Web Docs.</p>")
+type responseHeadersPolicyCorsConfig = {
+  @ocaml.doc("<p>A Boolean that determines whether CloudFront overrides HTTP response headers received from the
+			origin with the ones specified in this response headers policy.</p>")
+  @as("OriginOverride")
+  originOverride: boolean_,
+  @ocaml.doc("<p>A number that CloudFront uses as the value for the <code>Access-Control-Max-Age</code> HTTP
+			response header.</p>
+		       <p>For more information about the <code>Access-Control-Max-Age</code> HTTP response
+			header, see <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Max-Age\">Access-Control-Max-Age</a> in the MDN Web Docs.</p>")
+  @as("AccessControlMaxAgeSec")
+  accessControlMaxAgeSec: option<integer_>,
+  @ocaml.doc("<p>A list of HTTP headers that CloudFront includes as values for the
+				<code>Access-Control-Expose-Headers</code> HTTP response header.</p>
+		       <p>For more information about the <code>Access-Control-Expose-Headers</code> HTTP
+			response header, see <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Expose-Headers\">Access-Control-Expose-Headers</a> in the MDN Web Docs.</p>")
+  @as("AccessControlExposeHeaders")
+  accessControlExposeHeaders: option<responseHeadersPolicyAccessControlExposeHeaders>,
+  @ocaml.doc("<p>A Boolean that CloudFront uses as the value for the <code>Access-Control-Allow-Credentials</code>
+			HTTP response header.</p>
+		       <p>For more information about the <code>Access-Control-Allow-Credentials</code> HTTP
+			response header, see <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials\">Access-Control-Allow-Credentials</a> in the MDN Web Docs.</p>")
+  @as("AccessControlAllowCredentials")
+  accessControlAllowCredentials: boolean_,
+  @ocaml.doc("<p>A list of HTTP methods that CloudFront includes as values for the
+				<code>Access-Control-Allow-Methods</code> HTTP response header.</p>
+		       <p>For more information about the <code>Access-Control-Allow-Methods</code> HTTP response
+			header, see <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Methods\">Access-Control-Allow-Methods</a> in the MDN Web Docs.</p>")
+  @as("AccessControlAllowMethods")
+  accessControlAllowMethods: responseHeadersPolicyAccessControlAllowMethods,
+  @ocaml.doc("<p>A list of HTTP header names that CloudFront includes as values for the
+				<code>Access-Control-Allow-Headers</code> HTTP response header.</p>
+		       <p>For more information about the <code>Access-Control-Allow-Headers</code> HTTP response
+			header, see <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Headers\">Access-Control-Allow-Headers</a> in the MDN Web Docs.</p>")
+  @as("AccessControlAllowHeaders")
+  accessControlAllowHeaders: responseHeadersPolicyAccessControlAllowHeaders,
+  @ocaml.doc("<p>A list of origins (domain names) that CloudFront can use as the value for the
+			<code>Access-Control-Allow-Origin</code> HTTP response header.</p>
+		       <p>For more information about the <code>Access-Control-Allow-Origin</code> HTTP response
+			header, see <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin\">Access-Control-Allow-Origin</a> in the MDN Web Docs.</p>")
+  @as("AccessControlAllowOrigins")
+  accessControlAllowOrigins: responseHeadersPolicyAccessControlAllowOrigins,
 }
 @ocaml.doc("<p>Query argument-profile mapping for field-level encryption.</p>")
 type queryArgProfiles = {
@@ -1408,17 +1798,16 @@ type originGroupFailoverCriteria = {
   @as("StatusCodes")
   statusCodes: statusCodes,
 }
-@ocaml.doc("<p>A complex type that specifies a list of Lambda functions associations for a cache 
+@ocaml.doc("<p>A complex type that specifies a list of Lambda@Edge functions associations for a cache 
 			behavior.</p>
  
-		       <p>If you want to invoke one or more Lambda functions triggered by requests that match the 
+		       <p>If you want to invoke one or more Lambda@Edge functions triggered by requests that match the 
 				<code>PathPattern</code> of the cache behavior, specify the applicable values for 
 				<code>Quantity</code> and <code>Items</code>. Note that there can be up to 4 
 				<code>LambdaFunctionAssociation</code> items in this list (one for each possible value of 
-				<code>EventType</code>) and each <code>EventType</code> can be associated with the Lambda 
-			function only once.</p>
+				<code>EventType</code>) and each <code>EventType</code> can be associated with only one function.</p>
  
-		       <p>If you don't want to invoke any Lambda functions for the requests that match 
+		       <p>If you don't want to invoke any Lambda@Edge functions for the requests that match 
 				<code>PathPattern</code>, specify <code>0</code> for <code>Quantity</code> and omit 
 				<code>Items</code>. </p>")
 type lambdaFunctionAssociations = {
@@ -1427,7 +1816,7 @@ type lambdaFunctionAssociations = {
 			for this cache behavior. If <code>Quantity</code> is <code>0</code>, you can omit <code>Items</code>.</p>")
   @as("Items")
   items: option<lambdaFunctionAssociationList>,
-  @ocaml.doc("<p>The number of Lambda function associations for this cache behavior.</p>")
+  @ocaml.doc("<p>The number of Lambda@Edge function associations for this cache behavior.</p>")
   @as("Quantity")
   quantity: integer_,
 }
@@ -1454,10 +1843,10 @@ type kgkeyPairIds = {
 			the <i>Amazon CloudFront Developer Guide</i>.</p>")
 type invalidationList = {
   @ocaml.doc("<p>A complex type that contains one <code>InvalidationSummary</code> element for each 
-			invalidation batch created by the current AWS account.</p>")
+			invalidation batch created by the current Amazon Web Services account.</p>")
   @as("Items")
   items: option<invalidationSummaryList>,
-  @ocaml.doc("<p>The number of invalidation batches that were created by the current AWS account. 
+  @ocaml.doc("<p>The number of invalidation batches that were created by the current Amazon Web Services account. 
 		</p>")
   @as("Quantity")
   quantity: integer_,
@@ -1655,7 +2044,7 @@ type cookiePreference = {
 			element and its child elements, CloudFront deletes them automatically.</p> 
 		       <p>For the current limit on the number of cookie names that you can whitelist for each 
 			cache behavior, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/xrefaws_service_limits.html#limits_cloudfront\">
-				CloudFront Limits</a> in the <i>AWS General Reference</i>.</p>")
+				CloudFront Limits</a> in the <i>Amazon Web Services General Reference</i>.</p>")
   @as("WhitelistedNames")
   whitelistedNames: option<cookieNames>,
   @ocaml.doc("<p>This field is deprecated. We recommend that you use a cache policy or an origin
@@ -1680,6 +2069,23 @@ type contentTypeProfiles = {
   @as("Quantity")
   quantity: integer_,
 }
+@ocaml.doc("<p>A list of aliases (also called CNAMEs) and the CloudFront distributions and Amazon Web Services accounts that
+			they are associated with. In the list, the distribution and account IDs are partially
+			hidden, which allows you to identify the distributions and accounts that you own, but
+			helps to protect the information of ones that you don’t own.</p>")
+type conflictingAliasesList = {
+  @ocaml.doc("<p>Contains the conflicting aliases in the list.</p>") @as("Items")
+  items: option<conflictingAliases>,
+  @ocaml.doc("<p>The number of conflicting aliases returned in the response.</p>") @as("Quantity")
+  quantity: option<integer_>,
+  @ocaml.doc("<p>The maximum number of conflicting aliases requested.</p>") @as("MaxItems")
+  maxItems: option<integer_>,
+  @ocaml.doc("<p>If there are more items in the list than are in this response, this element is present. It
+			contains the value that you should use in the <code>Marker</code> field of a subsequent
+			request to continue listing conflicting aliases where you left off.</p>")
+  @as("NextMarker")
+  nextMarker: option<string_>,
+}
 @ocaml.doc("<p>Lists the origin access identities for CloudFront.Send a <code>GET</code> request to the 
 					<code>/<i>CloudFront API version</i>/origin-access-identity/cloudfront</code> 
 			resource. The response includes a <code>CloudFrontOriginAccessIdentityList</code> element with 
@@ -1689,12 +2095,12 @@ type contentTypeProfiles = {
 			parameters.</p>")
 type cloudFrontOriginAccessIdentityList = {
   @ocaml.doc("<p>A complex type that contains one <code>CloudFrontOriginAccessIdentitySummary</code> 
-			element for each origin access identity that was created by the current AWS 
-			account.</p>")
+			element for each origin access identity that was created by the current Amazon Web Services account.</p>")
   @as("Items")
   items: option<cloudFrontOriginAccessIdentitySummaryList>,
-  @ocaml.doc("<p>The number of CloudFront origin access identities that were created by the current AWS 
-			account. </p>")
+  @ocaml.doc(
+    "<p>The number of CloudFront origin access identities that were created by the current Amazon Web Services account.</p>"
+  )
   @as("Quantity")
   quantity: integer_,
   @ocaml.doc("<p>A flag that indicates whether more origin access identities remain to be listed. If 
@@ -1887,6 +2293,31 @@ type streamingDistributionConfigWithTags = {
   streamingDistributionConfig: streamingDistributionConfig,
 }
 type signerList = array<signer>
+@ocaml.doc("<p>A response headers policy configuration.</p>
+		       <p>A response headers policy configuration contains metadata about the response headers policy,
+			and configurations for sets of HTTP response headers and their values. CloudFront adds the
+			headers in the policy to HTTP responses that it sends for requests that match a cache
+			behavior associated with the policy.</p>")
+type responseHeadersPolicyConfig = {
+  @ocaml.doc("<p>A configuration for a set of custom HTTP response headers.</p>")
+  @as("CustomHeadersConfig")
+  customHeadersConfig: option<responseHeadersPolicyCustomHeadersConfig>,
+  @ocaml.doc("<p>A configuration for a set of security-related HTTP response headers.</p>")
+  @as("SecurityHeadersConfig")
+  securityHeadersConfig: option<responseHeadersPolicySecurityHeadersConfig>,
+  @ocaml.doc("<p>A configuration for a set of HTTP response headers that are used for cross-origin
+			resource sharing (CORS).</p>")
+  @as("CorsConfig")
+  corsConfig: option<responseHeadersPolicyCorsConfig>,
+  @ocaml.doc("<p>A name to identify the response headers policy.</p>
+		       <p>The name must be unique for response headers policies in this Amazon Web Services account.</p>")
+  @as("Name")
+  name: string_,
+  @ocaml.doc("<p>A comment to describe the response headers policy.</p>
+		       <p>The comment cannot be longer than 128 characters.</p>")
+  @as("Comment")
+  comment: option<string_>,
+}
 @ocaml.doc("<p>A real-time log configuration.</p>")
 type realtimeLogConfig = {
   @ocaml.doc("<p>A list of fields that are included in each real-time log record. In an API response, the
@@ -2281,10 +2712,10 @@ type contentTypeProfileConfig = {
 @ocaml.doc("<p>A streaming distribution list. </p>")
 type streamingDistributionList = {
   @ocaml.doc("<p>A complex type that contains one <code>StreamingDistributionSummary</code> element for 
-			each distribution that was created by the current AWS account.</p>")
+			each distribution that was created by the current Amazon Web Services account.</p>")
   @as("Items")
   items: option<streamingDistributionSummaryList>,
-  @ocaml.doc("<p>The number of streaming distributions that were created by the current AWS account. 
+  @ocaml.doc("<p>The number of streaming distributions that were created by the current Amazon Web Services account. 
 		</p>")
   @as("Quantity")
   quantity: integer_,
@@ -2304,6 +2735,27 @@ type streamingDistributionList = {
   @ocaml.doc("<p>The value you provided for the <code>Marker</code> request parameter. </p>")
   @as("Marker")
   marker: string_,
+}
+@ocaml.doc("<p>A response headers policy.</p>
+		       <p>A response headers policy contains information about a set of HTTP response headers
+			and their values.</p>
+		       <p>After you create a response headers policy, you can use its ID to attach it to one or more
+			cache behaviors in a CloudFront distribution. When it’s attached to a cache behavior, CloudFront
+			adds the headers in the policy to HTTP responses that it sends for requests that match
+			the cache behavior.</p>
+		       <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/adding-response-headers.html\">Adding HTTP headers to CloudFront responses</a> in the
+			<i>Amazon CloudFront Developer Guide</i>.</p>")
+type responseHeadersPolicy = {
+  @ocaml.doc("<p>A response headers policy configuration.</p>
+		       <p>A response headers policy contains information about a set of HTTP response headers and
+			their values. CloudFront adds the headers in the policy to HTTP responses that it sends for
+			requests that match a cache behavior that’s associated with the policy.</p>")
+  @as("ResponseHeadersPolicyConfig")
+  responseHeadersPolicyConfig: responseHeadersPolicyConfig,
+  @ocaml.doc("<p>The date and time when the response headers policy was last modified.</p>")
+  @as("LastModifiedTime")
+  lastModifiedTime: timestamp_,
+  @ocaml.doc("<p>The identifier for the response headers policy.</p>") @as("Id") id: string_,
 }
 type realtimeLogConfigList = array<realtimeLogConfig>
 @ocaml.doc("<p>An origin request policy.</p>
@@ -2451,6 +2903,8 @@ type defaultCacheBehavior = {
 		       <p>A complex type that specifies how CloudFront handles query strings, cookies, and HTTP headers.</p>")
   @as("ForwardedValues")
   forwardedValues: option<forwardedValues>,
+  @ocaml.doc("<p>The identifier for a response headers policy.</p>") @as("ResponseHeadersPolicyId")
+  responseHeadersPolicyId: option<string_>,
   @ocaml.doc("<p>The unique identifier of the origin request policy that is attached to the default cache
 			behavior. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy\">Creating origin request policies</a> or <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-origin-request-policies.html\">Using the managed origin request policies</a> in the
 			<i>Amazon CloudFront Developer Guide</i>.</p>")
@@ -2477,7 +2931,7 @@ type defaultCacheBehavior = {
 			behavior.</p>")
   @as("FunctionAssociations")
   functionAssociations: option<functionAssociations>,
-  @ocaml.doc("<p>A complex type that contains zero or more Lambda function associations for a cache 
+  @ocaml.doc("<p>A complex type that contains zero or more Lambda@Edge function associations for a cache 
 			behavior.</p>")
   @as("LambdaFunctionAssociations")
   lambdaFunctionAssociations: option<lambdaFunctionAssociations>,
@@ -2541,11 +2995,11 @@ type defaultCacheBehavior = {
 			         <p>We recommend using <code>TrustedKeyGroups</code> instead of
 				<code>TrustedSigners</code>.</p>
 		       </important>
-		       <p>A list of AWS account IDs whose public keys CloudFront can use to validate signed URLs or signed
+		       <p>A list of Amazon Web Services account IDs whose public keys CloudFront can use to validate signed URLs or signed
 			cookies.</p>
 		       <p>When a cache behavior contains trusted signers, CloudFront requires signed URLs or signed cookies
 			for all requests that match the cache behavior. The URLs or cookies must be signed with
-			the private key of a CloudFront key pair in a trusted signer’s AWS account. The signed URL or
+			the private key of a CloudFront key pair in a trusted signer’s Amazon Web Services account. The signed URL or
 			cookie contains information about which public key CloudFront should use to verify the
 			signature. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html\">Serving private content</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>")
   @as("TrustedSigners")
@@ -2680,6 +3134,8 @@ type cacheBehavior = {
 		       <p>A complex type that specifies how CloudFront handles query strings, cookies, and HTTP headers.</p>")
   @as("ForwardedValues")
   forwardedValues: option<forwardedValues>,
+  @ocaml.doc("<p>The identifier for a response headers policy.</p>") @as("ResponseHeadersPolicyId")
+  responseHeadersPolicyId: option<string_>,
   @ocaml.doc("<p>The unique identifier of the origin request policy that is attached to this cache behavior.
 			For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy\">Creating origin request policies</a> or <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-origin-request-policies.html\">Using the managed origin request policies</a> in the
 			<i>Amazon CloudFront Developer Guide</i>.</p>")
@@ -2706,7 +3162,7 @@ type cacheBehavior = {
 			behavior.</p>")
   @as("FunctionAssociations")
   functionAssociations: option<functionAssociations>,
-  @ocaml.doc("<p>A complex type that contains zero or more Lambda function associations for a cache 
+  @ocaml.doc("<p>A complex type that contains zero or more Lambda@Edge function associations for a cache 
 			behavior.</p>")
   @as("LambdaFunctionAssociations")
   lambdaFunctionAssociations: option<lambdaFunctionAssociations>,
@@ -2768,11 +3224,11 @@ type cacheBehavior = {
 			         <p>We recommend using <code>TrustedKeyGroups</code> instead of
 				<code>TrustedSigners</code>.</p>
 		       </important>
-		       <p>A list of AWS account IDs whose public keys CloudFront can use to validate signed URLs or signed
+		       <p>A list of Amazon Web Services account IDs whose public keys CloudFront can use to validate signed URLs or signed
 			cookies.</p>
 		       <p>When a cache behavior contains trusted signers, CloudFront requires signed URLs or signed cookies
 			for all requests that match the cache behavior. The URLs or cookies must be signed with
-			the private key of a CloudFront key pair in the trusted signer’s AWS account. The signed URL
+			the private key of a CloudFront key pair in the trusted signer’s Amazon Web Services account. The signed URL
 			or cookie contains information about which public key CloudFront should use to verify the
 			signature. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html\">Serving private content</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>")
   @as("TrustedSigners")
@@ -2798,15 +3254,16 @@ type cacheBehavior = {
   @as("PathPattern")
   pathPattern: string_,
 }
-@ocaml.doc("<p>A list of AWS accounts and the active CloudFront key pairs in each account that CloudFront can use
+@ocaml.doc("<p>A list of Amazon Web Services accounts and the active CloudFront key pairs in each account that CloudFront can use
 			to verify the signatures of signed URLs and signed cookies.</p>")
 type activeTrustedSigners = {
-  @ocaml.doc("<p>A list of AWS accounts and the identifiers of active CloudFront key pairs in each account that
+  @ocaml.doc("<p>A list of Amazon Web Services accounts and the identifiers of active CloudFront key pairs in each account that
 			CloudFront can use to verify the signatures of signed URLs and signed cookies.</p>")
   @as("Items")
   items: option<signerList>,
-  @ocaml.doc("<p>The number of AWS accounts in the list.</p>") @as("Quantity") quantity: integer_,
-  @ocaml.doc("<p>This field is <code>true</code> if any of the AWS accounts in the list have active CloudFront
+  @ocaml.doc("<p>The number of Amazon Web Services accounts in the list.</p>") @as("Quantity")
+  quantity: integer_,
+  @ocaml.doc("<p>This field is <code>true</code> if any of the Amazon Web Services accounts in the list have active CloudFront
 			key pairs that CloudFront can use to verify the signatures of signed URLs and signed cookies.
 			If not, this field is <code>false</code>.</p>")
   @as("Enabled")
@@ -2832,13 +3289,13 @@ type streamingDistribution = {
   @ocaml.doc("<p>The current configuration information for the RTMP distribution.</p>")
   @as("StreamingDistributionConfig")
   streamingDistributionConfig: streamingDistributionConfig,
-  @ocaml.doc("<p>A complex type that lists the AWS accounts, if any, that you included in the 
+  @ocaml.doc("<p>A complex type that lists the Amazon Web Services accounts, if any, that you included in the 
 				<code>TrustedSigners</code> complex type for this distribution. These are the accounts that 
 			you want to allow to create signed URLs for private content.</p> 
-		       <p>The <code>Signer</code> complex type lists the AWS account number of the trusted 
-			signer or <code>self</code> if the signer is the AWS account that created the distribution. 
+		       <p>The <code>Signer</code> complex type lists the Amazon Web Services account number of the trusted 
+			signer or <code>self</code> if the signer is the Amazon Web Services account that created the distribution. 
 			The <code>Signer</code> element also includes the IDs of any active CloudFront key pairs that are 
-			associated with the trusted signer's AWS account. If no <code>KeyPairId</code> element 
+			associated with the trusted signer's Amazon Web Services account. If no <code>KeyPairId</code> element 
 			appears for a <code>Signer</code>, that signer can't create signed URLs.</p> 
 		       <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html\">Serving Private 
 				Content through CloudFront</a> in the <i>Amazon CloudFront Developer Guide</i>. </p>")
@@ -2858,13 +3315,22 @@ type streamingDistribution = {
   status: string_,
   @ocaml.doc("<p>The ARN (Amazon Resource Name) for the distribution. For example: 
 			<code>arn:aws:cloudfront::123456789012:distribution/EDFDVBD632BHDS5</code>, where 
-			<code>123456789012</code> is your AWS account ID.</p>")
+			<code>123456789012</code> is your Amazon Web Services account ID.</p>")
   @as("ARN")
   arn: string_,
   @ocaml.doc("<p>The identifier for the RTMP distribution. For example: 
 			<code>EGTXBD79EXAMPLE</code>.</p>")
   @as("Id")
   id: string_,
+}
+@ocaml.doc("<p>Contains a response headers policy.</p>")
+type responseHeadersPolicySummary = {
+  @ocaml.doc("<p>The response headers policy.</p>") @as("ResponseHeadersPolicy")
+  responseHeadersPolicy: responseHeadersPolicy,
+  @ocaml.doc("<p>The type of response headers policy, either <code>managed</code> (created by Amazon Web Services) or
+				<code>custom</code> (created in this Amazon Web Services account).</p>")
+  @as("Type")
+  type_: responseHeadersPolicyType,
 }
 @ocaml.doc("<p>A list of real-time log configurations.</p>")
 type realtimeLogConfigs = {
@@ -2896,8 +3362,8 @@ type origins = {
 type originRequestPolicySummary = {
   @ocaml.doc("<p>The origin request policy.</p>") @as("OriginRequestPolicy")
   originRequestPolicy: originRequestPolicy,
-  @ocaml.doc("<p>The type of origin request policy, either <code>managed</code> (created by AWS) or
-			<code>custom</code> (created in this AWS account).</p>")
+  @ocaml.doc("<p>The type of origin request policy, either <code>managed</code> (created by Amazon Web Services) or
+			<code>custom</code> (created in this Amazon Web Services account).</p>")
   @as("Type")
   type_: originRequestPolicyType,
 }
@@ -3001,6 +3467,7 @@ type cachePolicy = {
   @ocaml.doc("<p>The unique identifier for the cache policy.</p>") @as("Id") id: string_,
 }
 type cacheBehaviorList = array<cacheBehavior>
+type responseHeadersPolicySummaryList = array<responseHeadersPolicySummary>
 type originRequestPolicySummaryList = array<originRequestPolicySummary>
 type fieldLevelEncryptionProfileSummaryList = array<fieldLevelEncryptionProfileSummary>
 @ocaml.doc("<p>A complex data type for field-level encryption profiles.</p>")
@@ -3036,8 +3503,8 @@ type fieldLevelEncryptionList = {
 @ocaml.doc("<p>Contains a cache policy.</p>")
 type cachePolicySummary = {
   @ocaml.doc("<p>The cache policy.</p>") @as("CachePolicy") cachePolicy: cachePolicy,
-  @ocaml.doc("<p>The type of cache policy, either <code>managed</code> (created by AWS) or
-			<code>custom</code> (created in this AWS account).</p>")
+  @ocaml.doc("<p>The type of cache policy, either <code>managed</code> (created by Amazon Web Services) or
+			<code>custom</code> (created in this Amazon Web Services account).</p>")
   @as("Type")
   type_: cachePolicyType,
 }
@@ -3050,6 +3517,20 @@ type cacheBehaviors = {
   items: option<cacheBehaviorList>,
   @ocaml.doc("<p>The number of cache behaviors for this distribution. </p>") @as("Quantity")
   quantity: integer_,
+}
+@ocaml.doc("<p>A list of response headers policies.</p>")
+type responseHeadersPolicyList = {
+  @ocaml.doc("<p>The response headers policies in the list.</p>") @as("Items")
+  items: option<responseHeadersPolicySummaryList>,
+  @ocaml.doc("<p>The number of response headers policies returned.</p>") @as("Quantity")
+  quantity: integer_,
+  @ocaml.doc("<p>The maximum number of response headers policies requested.</p>") @as("MaxItems")
+  maxItems: integer_,
+  @ocaml.doc("<p>If there are more items in the list than are in this response, this element is present. It
+			contains the value that you should use in the <code>Marker</code> field of a subsequent
+			request to continue listing response headers policies where you left off.</p>")
+  @as("NextMarker")
+  nextMarker: option<string_>,
 }
 @ocaml.doc("<p>A list of origin request policies.</p>")
 type originRequestPolicyList = {
@@ -3086,11 +3567,11 @@ type fieldLevelEncryptionProfileList = {
 }
 @ocaml.doc("<p>A summary of the information about a CloudFront distribution.</p>")
 type distributionSummary = {
-  @ocaml.doc("<p>AWS services in China customers must file for an Internet Content Provider (ICP) recordal if they want to serve content 
+  @ocaml.doc("<p>Amazon Web Services services in China customers must file for an Internet Content Provider (ICP) recordal if they want to serve content 
 			publicly on an alternate domain name, also known as a CNAME, that they've added to CloudFront. AliasICPRecordal provides the ICP 
 			recordal status for CNAMEs associated with distributions.</p>
 		       <p>For more information about ICP recordals, see  <a href=\"https://docs.amazonaws.cn/en_us/aws/latest/userguide/accounts-and-credentials.html\">
-			Signup, Accounts, and Credentials</a> in <i>Getting Started with AWS services in China</i>.</p>")
+			Signup, Accounts, and Credentials</a> in <i>Getting Started with Amazon Web Services services in China</i>.</p>")
   @as("AliasICPRecordals")
   aliasICPRecordals: option<aliasICPRecordals>,
   @ocaml.doc("<p>Whether CloudFront responds to IPv6 DNS requests with an IPv6 address for your 
@@ -3160,7 +3641,7 @@ type distributionSummary = {
   status: string_,
   @ocaml.doc("<p>The ARN (Amazon Resource Name) for the distribution. For example: 
 				<code>arn:aws:cloudfront::123456789012:distribution/EDFDVBD632BHDS5</code>, where 
-				<code>123456789012</code> is your AWS account ID.</p>")
+				<code>123456789012</code> is your Amazon Web Services account ID.</p>")
   @as("ARN")
   arn: string_,
   @ocaml.doc("<p>The identifier for the distribution. For example: 
@@ -3181,9 +3662,8 @@ type distributionConfig = {
 			you want to restrict access to some content by IP address and not restrict access to other 
 			content (or restrict access but not by IP address), you can create two distributions. For more 
 			information, see  
-			<a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-creating-signed-url-custom-policy.html\">Creating a Signed URL Using a Custom Policy</a> in the <i>Amazon CloudFront Developer 
-				Guide</i>.</p> 
-		       <p>If you're using an Amazon Route 53 alias resource record set to route traffic to your CloudFront 
+			<a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-creating-signed-url-custom-policy.html\">Creating a Signed URL Using a Custom Policy</a> in the <i>Amazon CloudFront Developer Guide</i>.</p> 
+		       <p>If you're using an Route 53 Amazon Web Services Integration alias resource record set to route traffic to your CloudFront 
 			distribution, you need to create a second alias resource record set when both of the following 
 			are true:</p> 
 		       <ul>
@@ -3195,9 +3675,9 @@ type distributionConfig = {
 			         </li>
          </ul> 
 		       <p>For more information, see <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-to-cloudfront-distribution.html\">Routing Traffic 
-				to an Amazon CloudFront Web Distribution by Using Your Domain Name</a> in the <i>Amazon Route 53 
+				to an Amazon CloudFront Web Distribution by Using Your Domain Name</a> in the <i>Route 53 Amazon Web Services Integration 
 				Developer Guide</i>.</p> 
-		       <p>If you created a CNAME resource record set, either with Amazon Route 53 or with another DNS 
+		       <p>If you created a CNAME resource record set, either with Route 53 Amazon Web Services Integration or with another DNS 
 			service, you don't need to make any changes. A CNAME record will route traffic to your 
 			distribution regardless of the IP address format of the viewer request.</p>")
   @as("IsIPV6Enabled")
@@ -3212,18 +3692,18 @@ type distributionConfig = {
 			search for \"http/2 optimization.\" </p>")
   @as("HttpVersion")
   httpVersion: option<httpVersion>,
-  @ocaml.doc("<p>A unique identifier that specifies the AWS WAF web ACL, if any, to associate
-			with this distribution. To specify a web ACL created using the latest version of AWS
-			WAF, use the ACL ARN, for example
+  @ocaml.doc("<p>A unique identifier that specifies the WAF web ACL, if any, to associate
+			with this distribution. To specify a web ACL created using the latest version of
+            WAF, use the ACL ARN, for example
 			<code>arn:aws:wafv2:us-east-1:123456789012:global/webacl/ExampleWebACL/473e64fd-f30b-4765-81a0-62ad96dd167a</code>.
-			To specify a web ACL created using AWS WAF Classic, use the ACL ID, for example
+			To specify a web ACL created using WAF Classic, use the ACL ID, for example
 			<code>473e64fd-f30b-4765-81a0-62ad96dd167a</code>.</p>
-		       <p>AWS WAF is a web application firewall that lets you monitor the HTTP and HTTPS 
+		       <p>WAF is a web application firewall that lets you monitor the HTTP and HTTPS 
 			requests that are forwarded to CloudFront, and lets you control access to your content. Based on 
 			conditions that you specify, such as the IP addresses that requests originate from or the 
 			values of query strings, CloudFront responds to requests either with the requested content or with 
 			an HTTP 403 status code (Forbidden). You can also configure CloudFront to return a custom error page 
-			when a request is blocked. For more information about AWS WAF, see the <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/what-is-aws-waf.html\">AWS WAF 
+			when a request is blocked. For more information about WAF, see the <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/what-is-aws-waf.html\">WAF 
 				Developer Guide</a>. </p>")
   @as("WebACLId")
   webACLId: option<string_>,
@@ -3339,11 +3819,11 @@ type distributionConfigWithTags = {
 @ocaml.doc("<p>A distribution tells CloudFront where you want content to be delivered from, and the details about how to 
 			track and manage content delivery.</p>")
 type distribution = {
-  @ocaml.doc("<p>AWS services in China customers must file for an Internet Content Provider (ICP) recordal if they want to serve content 
+  @ocaml.doc("<p>Amazon Web Services services in China customers must file for an Internet Content Provider (ICP) recordal if they want to serve content 
 			publicly on an alternate domain name, also known as a CNAME, that they've added to CloudFront. AliasICPRecordal provides the ICP 
 			recordal status for CNAMEs associated with distributions.</p>
 		       <p>For more information about ICP recordals, see  <a href=\"https://docs.amazonaws.cn/en_us/aws/latest/userguide/accounts-and-credentials.html\">
-			Signup, Accounts, and Credentials</a> in <i>Getting Started with AWS services in China</i>.</p>")
+			Signup, Accounts, and Credentials</a> in <i>Getting Started with Amazon Web Services services in China</i>.</p>")
   @as("AliasICPRecordals")
   aliasICPRecordals: option<aliasICPRecordals>,
   @ocaml.doc("<p>The current configuration information for the distribution. Send a <code>GET</code> 
@@ -3363,7 +3843,7 @@ type distribution = {
 		       </important>
 		       <p>CloudFront automatically adds this field to the response if you’ve configured a cache behavior in
 			this distribution to serve private content using trusted signers. This field contains a
-			list of AWS account IDs and the active CloudFront key pairs in each account that CloudFront can use
+			list of Amazon Web Services account IDs and the active CloudFront key pairs in each account that CloudFront can use
 			to verify the signatures of signed URLs or signed cookies.</p>")
   @as("ActiveTrustedSigners")
   activeTrustedSigners: option<activeTrustedSigners>,
@@ -3385,7 +3865,7 @@ type distribution = {
   status: string_,
   @ocaml.doc("<p>The ARN (Amazon Resource Name) for the distribution. For example: 
 				<code>arn:aws:cloudfront::123456789012:distribution/EDFDVBD632BHDS5</code>, where 
-				<code>123456789012</code> is your AWS account ID.</p>")
+				<code>123456789012</code> is your Amazon Web Services account ID.</p>")
   @as("ARN")
   arn: string_,
   @ocaml.doc("<p>The identifier for the distribution. For example: <code>EDFDVBD632BHDS5</code>. 
@@ -3410,10 +3890,12 @@ type cachePolicyList = {
 @ocaml.doc("<p>A distribution list.</p>")
 type distributionList = {
   @ocaml.doc("<p>A complex type that contains one <code>DistributionSummary</code> element for each 
-			distribution that was created by the current AWS account.</p>")
+			distribution that was created by the current Amazon Web Services account.</p>")
   @as("Items")
   items: option<distributionSummaryList>,
-  @ocaml.doc("<p>The number of distributions that were created by the current AWS account. </p>")
+  @ocaml.doc(
+    "<p>The number of distributions that were created by the current Amazon Web Services account.</p>"
+  )
   @as("Quantity")
   quantity: integer_,
   @ocaml.doc("<p>A flag that indicates whether more distributions remain to be listed. If your results 
@@ -3434,7 +3916,8 @@ type distributionList = {
   marker: string_,
 }
 @ocaml.doc("<fullname>Amazon CloudFront</fullname>
-		       <p>This is the <i>Amazon CloudFront API Reference</i>. This guide is for developers who need detailed information about 
+		       <p>This is the <i>Amazon CloudFront API Reference</i>. This guide
+            is for developers who need detailed information about 
 			CloudFront API actions, data types, and errors. For detailed information about CloudFront features, see the <i>Amazon CloudFront Developer Guide</i>.</p>")
 module GetFunction = {
   type t
@@ -3471,9 +3954,31 @@ module DeleteStreamingDistribution = {
     ifMatch: option<string_>,
     @ocaml.doc("<p>The distribution ID. </p>") @as("Id") id: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-cloudfront") @new
   external new: request => t = "DeleteStreamingDistributionCommand"
+  let make = (~id, ~ifMatch=?, ()) => new({ifMatch: ifMatch, id: id})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module DeleteResponseHeadersPolicy = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The version of the response headers policy that you are deleting.</p>
+		       <p>The version is the response headers policy’s <code>ETag</code> value, which you can
+			get using <code>ListResponseHeadersPolicies</code>,
+				<code>GetResponseHeadersPolicy</code>, or
+				<code>GetResponseHeadersPolicyConfig</code>.</p>")
+    @as("IfMatch")
+    ifMatch: option<string_>,
+    @ocaml.doc("<p>The identifier for the response headers policy that you are deleting.</p>
+		       <p>To get the identifier, you can use <code>ListResponseHeadersPolicies</code>.</p>")
+    @as("Id")
+    id: string_,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-cloudfront") @new
+  external new: request => t = "DeleteResponseHeadersPolicyCommand"
   let make = (~id, ~ifMatch=?, ()) => new({ifMatch: ifMatch, id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
@@ -3489,7 +3994,7 @@ module DeleteRealtimeLogConfig = {
     @ocaml.doc("<p>The name of the real-time log configuration to delete.</p>") @as("Name")
     name: option<string_>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-cloudfront") @new
   external new: request => t = "DeleteRealtimeLogConfigCommand"
   let make = (~arn=?, ~name=?, ()) => new({arn: arn, name: name})
@@ -3506,7 +4011,7 @@ module DeletePublicKey = {
     @ocaml.doc("<p>The ID of the public key you want to remove from CloudFront.</p>") @as("Id")
     id: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-cloudfront") @new external new: request => t = "DeletePublicKeyCommand"
   let make = (~id, ~ifMatch=?, ()) => new({ifMatch: ifMatch, id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -3526,7 +4031,7 @@ module DeleteOriginRequestPolicy = {
     @as("Id")
     id: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-cloudfront") @new
   external new: request => t = "DeleteOriginRequestPolicyCommand"
   let make = (~id, ~ifMatch=?, ()) => new({ifMatch: ifMatch, id: id})
@@ -3540,7 +4045,7 @@ module DeleteMonitoringSubscription = {
     @as("DistributionId")
     distributionId: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-cloudfront") @new
   external new: request => t = "DeleteMonitoringSubscriptionCommand"
   let make = (~distributionId, ()) => new({distributionId: distributionId})
@@ -3560,7 +4065,7 @@ module DeleteKeyGroup = {
     @as("Id")
     id: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-cloudfront") @new external new: request => t = "DeleteKeyGroupCommand"
   let make = (~id, ~ifMatch=?, ()) => new({ifMatch: ifMatch, id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -3575,7 +4080,7 @@ module DeleteFunction = {
     ifMatch: string_,
     @ocaml.doc("<p>The name of the function that you are deleting.</p>") @as("Name") name: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-cloudfront") @new external new: request => t = "DeleteFunctionCommand"
   let make = (~ifMatch, ~name, ()) => new({ifMatch: ifMatch, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -3591,7 +4096,7 @@ module DeleteFieldLevelEncryptionProfile = {
     @ocaml.doc("<p>Request the ID of the profile you want to delete from CloudFront.</p>") @as("Id")
     id: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-cloudfront") @new
   external new: request => t = "DeleteFieldLevelEncryptionProfileCommand"
   let make = (~id, ~ifMatch=?, ()) => new({ifMatch: ifMatch, id: id})
@@ -3608,7 +4113,7 @@ module DeleteFieldLevelEncryptionConfig = {
     @ocaml.doc("<p>The ID of the configuration you want to delete from CloudFront.</p>") @as("Id")
     id: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-cloudfront") @new
   external new: request => t = "DeleteFieldLevelEncryptionConfigCommand"
   let make = (~id, ~ifMatch=?, ()) => new({ifMatch: ifMatch, id: id})
@@ -3671,7 +4176,7 @@ module DeleteDistribution = {
     ifMatch: option<string_>,
     @ocaml.doc("<p>The distribution ID. </p>") @as("Id") id: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-cloudfront") @new
   external new: request => t = "DeleteDistributionCommand"
   let make = (~id, ~ifMatch=?, ()) => new({ifMatch: ifMatch, id: id})
@@ -3688,7 +4193,7 @@ module DeleteCloudFrontOriginAccessIdentity = {
     ifMatch: option<string_>,
     @ocaml.doc("<p>The origin access identity's ID.</p>") @as("Id") id: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-cloudfront") @new
   external new: request => t = "DeleteCloudFrontOriginAccessIdentityCommand"
   let make = (~id, ~ifMatch=?, ()) => new({ifMatch: ifMatch, id: id})
@@ -3709,9 +4214,26 @@ module DeleteCachePolicy = {
     @as("Id")
     id: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-cloudfront") @new external new: request => t = "DeleteCachePolicyCommand"
   let make = (~id, ~ifMatch=?, ()) => new({ifMatch: ifMatch, id: id})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module AssociateAlias = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The alias (also known as a CNAME) to add to the target distribution.</p>")
+    @as("Alias")
+    alias: string_,
+    @ocaml.doc("<p>The ID of the distribution that you’re associating the alias with.</p>")
+    @as("TargetDistributionId")
+    targetDistributionId: string_,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-cloudfront") @new external new: request => t = "AssociateAliasCommand"
+  let make = (~alias, ~targetDistributionId, ()) =>
+    new({alias: alias, targetDistributionId: targetDistributionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -3759,14 +4281,14 @@ module GetCloudFrontOriginAccessIdentityConfig = {
 module UpdatePublicKey = {
   type t
   type request = {
-    @ocaml.doc("<p>A public key configuration.</p>") @as("PublicKeyConfig")
-    publicKeyConfig: publicKeyConfig,
     @ocaml.doc("<p>The value of the <code>ETag</code> header that you received when retrieving the public key to update. 
 			For example: <code>E2QWRUHAPOMQZL</code>.</p>")
     @as("IfMatch")
     ifMatch: option<string_>,
     @ocaml.doc("<p>The identifier of the public key that you are updating.</p>") @as("Id")
     id: string_,
+    @ocaml.doc("<p>A public key configuration.</p>") @as("PublicKeyConfig")
+    publicKeyConfig: publicKeyConfig,
   }
   type response = {
     @ocaml.doc("<p>The identifier of the current version of the public key.</p>") @as("ETag")
@@ -3774,8 +4296,8 @@ module UpdatePublicKey = {
     @ocaml.doc("<p>The public key.</p>") @as("PublicKey") publicKey: option<publicKey>,
   }
   @module("@aws-sdk/client-cloudfront") @new external new: request => t = "UpdatePublicKeyCommand"
-  let make = (~publicKeyConfig, ~id, ~ifMatch=?, ()) =>
-    new({publicKeyConfig: publicKeyConfig, ifMatch: ifMatch, id: id})
+  let make = (~id, ~publicKeyConfig, ~ifMatch=?, ()) =>
+    new({ifMatch: ifMatch, id: id, publicKeyConfig: publicKeyConfig})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -3814,14 +4336,14 @@ module UpdateCloudFrontOriginAccessIdentity = {
   type t
   @ocaml.doc("<p>The request to update an origin access identity.</p>")
   type request = {
-    @ocaml.doc("<p>The identity's configuration information.</p>")
-    @as("CloudFrontOriginAccessIdentityConfig")
-    cloudFrontOriginAccessIdentityConfig: cloudFrontOriginAccessIdentityConfig,
     @ocaml.doc("<p>The value of the <code>ETag</code> header that you received when retrieving the 
 			identity's configuration. For example: <code>E2QWRUHAPOMQZL</code>.</p>")
     @as("IfMatch")
     ifMatch: option<string_>,
     @ocaml.doc("<p>The identity's id.</p>") @as("Id") id: string_,
+    @ocaml.doc("<p>The identity's configuration information.</p>")
+    @as("CloudFrontOriginAccessIdentityConfig")
+    cloudFrontOriginAccessIdentityConfig: cloudFrontOriginAccessIdentityConfig,
   }
   @ocaml.doc("<p>The returned result of the corresponding request.</p>")
   type response = {
@@ -3835,11 +4357,11 @@ module UpdateCloudFrontOriginAccessIdentity = {
   }
   @module("@aws-sdk/client-cloudfront") @new
   external new: request => t = "UpdateCloudFrontOriginAccessIdentityCommand"
-  let make = (~cloudFrontOriginAccessIdentityConfig, ~id, ~ifMatch=?, ()) =>
+  let make = (~id, ~cloudFrontOriginAccessIdentityConfig, ~ifMatch=?, ()) =>
     new({
-      cloudFrontOriginAccessIdentityConfig: cloudFrontOriginAccessIdentityConfig,
       ifMatch: ifMatch,
       id: id,
+      cloudFrontOriginAccessIdentityConfig: cloudFrontOriginAccessIdentityConfig,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
@@ -3853,7 +4375,7 @@ module UntagResource = {
     tagKeys: tagKeys,
     @ocaml.doc("<p> An ARN of a CloudFront resource.</p>") @as("Resource") resource: resourceARN,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-cloudfront") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resource, ()) => new({tagKeys: tagKeys, resource: resource})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -3878,6 +4400,33 @@ module PublishFunction = {
   }
   @module("@aws-sdk/client-cloudfront") @new external new: request => t = "PublishFunctionCommand"
   let make = (~ifMatch, ~name, ()) => new({ifMatch: ifMatch, name: name})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module ListDistributionsByResponseHeadersPolicyId = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The ID of the response headers policy whose associated distribution IDs you want to
+			list.</p>")
+    @as("ResponseHeadersPolicyId")
+    responseHeadersPolicyId: string_,
+    @ocaml.doc(
+      "<p>The maximum number of distribution IDs that you want to get in the response.</p>"
+    )
+    @as("MaxItems")
+    maxItems: option<baseInteger>,
+    @ocaml.doc("<p>Use this field when paginating results to indicate where to begin in your list of
+			distribution IDs. The response includes distribution IDs in the list that occur after
+			the marker. To get the next page of the list, set this field’s value to the value of
+				<code>NextMarker</code> from the current page’s response.</p>")
+    @as("Marker")
+    marker: option<string_>,
+  }
+  type response = {@as("DistributionIdList") distributionIdList: option<distributionIdList>}
+  @module("@aws-sdk/client-cloudfront") @new
+  external new: request => t = "ListDistributionsByResponseHeadersPolicyIdCommand"
+  let make = (~responseHeadersPolicyId, ~maxItems=?, ~marker=?, ()) =>
+    new({responseHeadersPolicyId: responseHeadersPolicyId, maxItems: maxItems, marker: marker})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -4169,14 +4718,14 @@ module CreateCloudFrontOriginAccessIdentity = {
 module UpdateKeyGroup = {
   type t
   type request = {
-    @ocaml.doc("<p>The key group configuration.</p>") @as("KeyGroupConfig")
-    keyGroupConfig: keyGroupConfig,
     @ocaml.doc("<p>The version of the key group that you are updating. The version is the key group’s
 			<code>ETag</code> value.</p>")
     @as("IfMatch")
     ifMatch: option<string_>,
     @ocaml.doc("<p>The identifier of the key group that you are updating.</p>") @as("Id")
     id: string_,
+    @ocaml.doc("<p>The key group configuration.</p>") @as("KeyGroupConfig")
+    keyGroupConfig: keyGroupConfig,
   }
   type response = {
     @ocaml.doc("<p>The identifier for this version of the key group.</p>") @as("ETag")
@@ -4185,8 +4734,8 @@ module UpdateKeyGroup = {
     keyGroup: option<keyGroup>,
   }
   @module("@aws-sdk/client-cloudfront") @new external new: request => t = "UpdateKeyGroupCommand"
-  let make = (~keyGroupConfig, ~id, ~ifMatch=?, ()) =>
-    new({keyGroupConfig: keyGroupConfig, ifMatch: ifMatch, id: id})
+  let make = (~id, ~keyGroupConfig, ~ifMatch=?, ()) =>
+    new({ifMatch: ifMatch, id: id, keyGroupConfig: keyGroupConfig})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -4228,7 +4777,7 @@ module TagResource = {
     tags: tags,
     @ocaml.doc("<p> An ARN of a CloudFront resource.</p>") @as("Resource") resource: resourceARN,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-cloudfront") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resource, ()) => new({tags: tags, resource: resource})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -4302,6 +4851,37 @@ module ListInvalidations = {
   @module("@aws-sdk/client-cloudfront") @new external new: request => t = "ListInvalidationsCommand"
   let make = (~distributionId, ~maxItems=?, ~marker=?, ()) =>
     new({maxItems: maxItems, marker: marker, distributionId: distributionId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module ListConflictingAliases = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The maximum number of conflicting aliases that you want in the response.</p>")
+    @as("MaxItems")
+    maxItems: option<listConflictingAliasesMaxItemsInteger>,
+    @ocaml.doc("<p>Use this field when paginating results to indicate where to begin in the list of
+			conflicting aliases. The response includes conflicting aliases in the list that occur
+			after the marker. To get the next page of the list, set this field’s value to the value
+			of <code>NextMarker</code> from the current page’s response.</p>")
+    @as("Marker")
+    marker: option<string_>,
+    @ocaml.doc("<p>The alias (also called a CNAME) to search for conflicting aliases.</p>")
+    @as("Alias")
+    alias: aliasString,
+    @ocaml.doc("<p>The ID of a distribution in your account that has an attached SSL/TLS certificate that
+			includes the provided alias.</p>")
+    @as("DistributionId")
+    distributionId: distributionIdString,
+  }
+  type response = {
+    @ocaml.doc("<p>A list of conflicting aliases.</p>") @as("ConflictingAliasesList")
+    conflictingAliasesList: option<conflictingAliasesList>,
+  }
+  @module("@aws-sdk/client-cloudfront") @new
+  external new: request => t = "ListConflictingAliasesCommand"
+  let make = (~alias, ~distributionId, ~maxItems=?, ~marker=?, ()) =>
+    new({maxItems: maxItems, marker: marker, alias: alias, distributionId: distributionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -4450,6 +5030,33 @@ module ListFunctions = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module GetResponseHeadersPolicyConfig = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The identifier for the response headers policy.</p>
+		       <p>If the response headers policy is attached to a distribution’s cache behavior, you can
+			get the policy’s identifier using <code>ListDistributions</code> or
+				<code>GetDistribution</code>. If the response headers policy is not attached to a
+			cache behavior, you can get the identifier using
+				<code>ListResponseHeadersPolicies</code>.</p>")
+    @as("Id")
+    id: string_,
+  }
+  type response = {
+    @ocaml.doc(
+      "<p>The version identifier for the current version of the response headers policy.</p>"
+    )
+    @as("ETag")
+    etag: option<string_>,
+    @ocaml.doc("<p>Contains a response headers policy.</p>") @as("ResponseHeadersPolicyConfig")
+    responseHeadersPolicyConfig: option<responseHeadersPolicyConfig>,
+  }
+  @module("@aws-sdk/client-cloudfront") @new
+  external new: request => t = "GetResponseHeadersPolicyConfigCommand"
+  let make = (~id, ()) => new({id: id})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module GetRealtimeLogConfig = {
   type t
   type request = {
@@ -4570,11 +5177,36 @@ module CreateInvalidation = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module UpdateResponseHeadersPolicy = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The version of the response headers policy that you are updating.</p>
+		       <p>The version is returned in the cache policy’s <code>ETag</code> field in the response
+			to <code>GetResponseHeadersPolicyConfig</code>.</p>")
+    @as("IfMatch")
+    ifMatch: option<string_>,
+    @ocaml.doc("<p>The identifier for the response headers policy that you are updating.</p>")
+    @as("Id")
+    id: string_,
+    @ocaml.doc("<p>A response headers policy configuration.</p>") @as("ResponseHeadersPolicyConfig")
+    responseHeadersPolicyConfig: responseHeadersPolicyConfig,
+  }
+  type response = {
+    @ocaml.doc("<p>The current version of the response headers policy.</p>") @as("ETag")
+    etag: option<string_>,
+    @ocaml.doc("<p>A response headers policy.</p>") @as("ResponseHeadersPolicy")
+    responseHeadersPolicy: option<responseHeadersPolicy>,
+  }
+  @module("@aws-sdk/client-cloudfront") @new
+  external new: request => t = "UpdateResponseHeadersPolicyCommand"
+  let make = (~id, ~responseHeadersPolicyConfig, ~ifMatch=?, ()) =>
+    new({ifMatch: ifMatch, id: id, responseHeadersPolicyConfig: responseHeadersPolicyConfig})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module UpdateOriginRequestPolicy = {
   type t
   type request = {
-    @ocaml.doc("<p>An origin request policy configuration.</p>") @as("OriginRequestPolicyConfig")
-    originRequestPolicyConfig: originRequestPolicyConfig,
     @ocaml.doc("<p>The version of the origin request policy that you are updating. The version is returned in
 			the origin request policy’s <code>ETag</code> field in the response to
 			<code>GetOriginRequestPolicyConfig</code>.</p>")
@@ -4585,6 +5217,8 @@ module UpdateOriginRequestPolicy = {
 			to <code>GetDistributionConfig</code>.</p>")
     @as("Id")
     id: string_,
+    @ocaml.doc("<p>An origin request policy configuration.</p>") @as("OriginRequestPolicyConfig")
+    originRequestPolicyConfig: originRequestPolicyConfig,
   }
   type response = {
     @ocaml.doc("<p>The current version of the origin request policy.</p>") @as("ETag")
@@ -4594,8 +5228,8 @@ module UpdateOriginRequestPolicy = {
   }
   @module("@aws-sdk/client-cloudfront") @new
   external new: request => t = "UpdateOriginRequestPolicyCommand"
-  let make = (~originRequestPolicyConfig, ~id, ~ifMatch=?, ()) =>
-    new({originRequestPolicyConfig: originRequestPolicyConfig, ifMatch: ifMatch, id: id})
+  let make = (~id, ~originRequestPolicyConfig, ~ifMatch=?, ()) =>
+    new({ifMatch: ifMatch, id: id, originRequestPolicyConfig: originRequestPolicyConfig})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -4621,6 +5255,33 @@ module ListStreamingDistributions = {
   @module("@aws-sdk/client-cloudfront") @new
   external new: request => t = "ListStreamingDistributionsCommand"
   let make = (~maxItems=?, ~marker=?, ()) => new({maxItems: maxItems, marker: marker})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module GetResponseHeadersPolicy = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The identifier for the response headers policy.</p>
+		       <p>If the response headers policy is attached to a distribution’s cache behavior, you can
+			get the policy’s identifier using <code>ListDistributions</code> or
+				<code>GetDistribution</code>. If the response headers policy is not attached to a
+			cache behavior, you can get the identifier using
+				<code>ListResponseHeadersPolicies</code>.</p>")
+    @as("Id")
+    id: string_,
+  }
+  type response = {
+    @ocaml.doc(
+      "<p>The version identifier for the current version of the response headers policy.</p>"
+    )
+    @as("ETag")
+    etag: option<string_>,
+    @ocaml.doc("<p>Contains a response headers policy.</p>") @as("ResponseHeadersPolicy")
+    responseHeadersPolicy: option<responseHeadersPolicy>,
+  }
+  @module("@aws-sdk/client-cloudfront") @new
+  external new: request => t = "GetResponseHeadersPolicyCommand"
+  let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -4692,6 +5353,32 @@ module GetCachePolicyConfig = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module CreateResponseHeadersPolicy = {
+  type t
+  type request = {
+    @ocaml.doc("<p>Contains metadata about the response headers policy, and a set of configurations that
+			specify the response headers.</p>")
+    @as("ResponseHeadersPolicyConfig")
+    responseHeadersPolicyConfig: responseHeadersPolicyConfig,
+  }
+  type response = {
+    @ocaml.doc(
+      "<p>The version identifier for the current version of the response headers policy.</p>"
+    )
+    @as("ETag")
+    etag: option<string_>,
+    @ocaml.doc("<p>The URL of the response headers policy.</p>") @as("Location")
+    location: option<string_>,
+    @ocaml.doc("<p>Contains a response headers policy.</p>") @as("ResponseHeadersPolicy")
+    responseHeadersPolicy: option<responseHeadersPolicy>,
+  }
+  @module("@aws-sdk/client-cloudfront") @new
+  external new: request => t = "CreateResponseHeadersPolicyCommand"
+  let make = (~responseHeadersPolicyConfig, ()) =>
+    new({responseHeadersPolicyConfig: responseHeadersPolicyConfig})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module CreateOriginRequestPolicy = {
   type t
   type request = {
@@ -4718,14 +5405,14 @@ module UpdateStreamingDistribution = {
   type t
   @ocaml.doc("<p>The request to update a streaming distribution.</p>")
   type request = {
-    @ocaml.doc("<p>The streaming distribution's configuration information.</p>")
-    @as("StreamingDistributionConfig")
-    streamingDistributionConfig: streamingDistributionConfig,
     @ocaml.doc("<p>The value of the <code>ETag</code> header that you received when retrieving the 
 			streaming distribution's configuration. For example: <code>E2QWRUHAPOMQZL</code>.</p>")
     @as("IfMatch")
     ifMatch: option<string_>,
     @ocaml.doc("<p>The streaming distribution's id.</p>") @as("Id") id: string_,
+    @ocaml.doc("<p>The streaming distribution's configuration information.</p>")
+    @as("StreamingDistributionConfig")
+    streamingDistributionConfig: streamingDistributionConfig,
   }
   @ocaml.doc("<p>The returned result of the corresponding request.</p>")
   type response = {
@@ -4738,22 +5425,22 @@ module UpdateStreamingDistribution = {
   }
   @module("@aws-sdk/client-cloudfront") @new
   external new: request => t = "UpdateStreamingDistributionCommand"
-  let make = (~streamingDistributionConfig, ~id, ~ifMatch=?, ()) =>
-    new({streamingDistributionConfig: streamingDistributionConfig, ifMatch: ifMatch, id: id})
+  let make = (~id, ~streamingDistributionConfig, ~ifMatch=?, ()) =>
+    new({ifMatch: ifMatch, id: id, streamingDistributionConfig: streamingDistributionConfig})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateFieldLevelEncryptionConfig = {
   type t
   type request = {
-    @ocaml.doc("<p>Request to update a field-level encryption configuration. </p>")
-    @as("FieldLevelEncryptionConfig")
-    fieldLevelEncryptionConfig: fieldLevelEncryptionConfig,
     @ocaml.doc("<p>The value of the <code>ETag</code> header that you received when retrieving the configuration identity to update. 
 			For example: <code>E2QWRUHAPOMQZL</code>.</p>")
     @as("IfMatch")
     ifMatch: option<string_>,
     @ocaml.doc("<p>The ID of the configuration you want to update.</p>") @as("Id") id: string_,
+    @ocaml.doc("<p>Request to update a field-level encryption configuration. </p>")
+    @as("FieldLevelEncryptionConfig")
+    fieldLevelEncryptionConfig: fieldLevelEncryptionConfig,
   }
   type response = {
     @ocaml.doc("<p>The value of the <code>ETag</code> header that you received when updating the configuration. 
@@ -4766,16 +5453,14 @@ module UpdateFieldLevelEncryptionConfig = {
   }
   @module("@aws-sdk/client-cloudfront") @new
   external new: request => t = "UpdateFieldLevelEncryptionConfigCommand"
-  let make = (~fieldLevelEncryptionConfig, ~id, ~ifMatch=?, ()) =>
-    new({fieldLevelEncryptionConfig: fieldLevelEncryptionConfig, ifMatch: ifMatch, id: id})
+  let make = (~id, ~fieldLevelEncryptionConfig, ~ifMatch=?, ()) =>
+    new({ifMatch: ifMatch, id: id, fieldLevelEncryptionConfig: fieldLevelEncryptionConfig})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateCachePolicy = {
   type t
   type request = {
-    @ocaml.doc("<p>A cache policy configuration.</p>") @as("CachePolicyConfig")
-    cachePolicyConfig: cachePolicyConfig,
     @ocaml.doc("<p>The version of the cache policy that you are updating. The version is returned in the cache
 			policy’s <code>ETag</code> field in the response to
 			<code>GetCachePolicyConfig</code>.</p>")
@@ -4786,14 +5471,16 @@ module UpdateCachePolicy = {
 			<code>GetDistributionConfig</code>.</p>")
     @as("Id")
     id: string_,
+    @ocaml.doc("<p>A cache policy configuration.</p>") @as("CachePolicyConfig")
+    cachePolicyConfig: cachePolicyConfig,
   }
   type response = {
     @ocaml.doc("<p>The current version of the cache policy.</p>") @as("ETag") etag: option<string_>,
     @ocaml.doc("<p>A cache policy.</p>") @as("CachePolicy") cachePolicy: option<cachePolicy>,
   }
   @module("@aws-sdk/client-cloudfront") @new external new: request => t = "UpdateCachePolicyCommand"
-  let make = (~cachePolicyConfig, ~id, ~ifMatch=?, ()) =>
-    new({cachePolicyConfig: cachePolicyConfig, ifMatch: ifMatch, id: id})
+  let make = (~id, ~cachePolicyConfig, ~ifMatch=?, ()) =>
+    new({ifMatch: ifMatch, id: id, cachePolicyConfig: cachePolicyConfig})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -5032,15 +5719,15 @@ module CreateCachePolicy = {
 module UpdateFieldLevelEncryptionProfile = {
   type t
   type request = {
-    @ocaml.doc("<p>Request to update a field-level encryption profile. </p>")
-    @as("FieldLevelEncryptionProfileConfig")
-    fieldLevelEncryptionProfileConfig: fieldLevelEncryptionProfileConfig,
     @ocaml.doc("<p>The value of the <code>ETag</code> header that you received when retrieving the profile identity to update. 
 			For example: <code>E2QWRUHAPOMQZL</code>.</p>")
     @as("IfMatch")
     ifMatch: option<string_>,
     @ocaml.doc("<p>The ID of the field-level encryption profile request. </p>") @as("Id")
     id: string_,
+    @ocaml.doc("<p>Request to update a field-level encryption profile. </p>")
+    @as("FieldLevelEncryptionProfileConfig")
+    fieldLevelEncryptionProfileConfig: fieldLevelEncryptionProfileConfig,
   }
   type response = {
     @ocaml.doc("<p>The result of the field-level encryption profile request. </p>") @as("ETag")
@@ -5051,11 +5738,11 @@ module UpdateFieldLevelEncryptionProfile = {
   }
   @module("@aws-sdk/client-cloudfront") @new
   external new: request => t = "UpdateFieldLevelEncryptionProfileCommand"
-  let make = (~fieldLevelEncryptionProfileConfig, ~id, ~ifMatch=?, ()) =>
+  let make = (~id, ~fieldLevelEncryptionProfileConfig, ~ifMatch=?, ()) =>
     new({
-      fieldLevelEncryptionProfileConfig: fieldLevelEncryptionProfileConfig,
       ifMatch: ifMatch,
       id: id,
+      fieldLevelEncryptionProfileConfig: fieldLevelEncryptionProfileConfig,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
@@ -5136,6 +5823,47 @@ module CreateFieldLevelEncryptionProfile = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module ListResponseHeadersPolicies = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>The maximum number of response headers policies that you want to get in the response.</p>"
+    )
+    @as("MaxItems")
+    maxItems: option<baseInteger>,
+    @ocaml.doc("<p>Use this field when paginating results to indicate where to begin in your list of response
+			headers policies. The response includes response headers policies in the list that occur
+			after the marker. To get the next page of the list, set this field’s value to the value
+			of <code>NextMarker</code> from the current page’s response. </p>")
+    @as("Marker")
+    marker: option<string_>,
+    @ocaml.doc("<p>A filter to get only the specified kind of response headers policies. Valid values
+			are:</p>
+		       <ul>
+            <li>
+				           <p>
+                  <code>managed</code> – Gets only the managed policies created by Amazon Web Services.</p>
+			         </li>
+            <li>
+				           <p>
+                  <code>custom</code> – Gets only the custom policies created in your
+					Amazon Web Services account.</p>
+			         </li>
+         </ul>")
+    @as("Type")
+    type_: option<responseHeadersPolicyType>,
+  }
+  type response = {
+    @ocaml.doc("<p>A list of response headers policies.</p>") @as("ResponseHeadersPolicyList")
+    responseHeadersPolicyList: option<responseHeadersPolicyList>,
+  }
+  @module("@aws-sdk/client-cloudfront") @new
+  external new: request => t = "ListResponseHeadersPoliciesCommand"
+  let make = (~maxItems=?, ~marker=?, ~type_=?, ()) =>
+    new({maxItems: maxItems, marker: marker, type_: type_})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module ListOriginRequestPolicies = {
   type t
   type request = {
@@ -5155,12 +5883,11 @@ module ListOriginRequestPolicies = {
 		       <ul>
             <li>
 				           <p>
-                  <code>managed</code> – Returns only the managed policies created by AWS.</p>
+                  <code>managed</code> – Returns only the managed policies created by Amazon Web Services.</p>
 			         </li>
             <li>
 				           <p>
-                  <code>custom</code> – Returns only the custom policies created in your AWS
-					account.</p>
+                  <code>custom</code> – Returns only the custom policies created in your Amazon Web Services account.</p>
 			         </li>
          </ul>")
     @as("Type")
@@ -5233,13 +5960,13 @@ module UpdateDistribution = {
   type t
   @ocaml.doc("<p>The request to update a distribution.</p>")
   type request = {
-    @ocaml.doc("<p>The distribution's configuration information.</p>") @as("DistributionConfig")
-    distributionConfig: distributionConfig,
     @ocaml.doc("<p>The value of the <code>ETag</code> header that you received when retrieving the 
 			distribution's configuration. For example: <code>E2QWRUHAPOMQZL</code>.</p>")
     @as("IfMatch")
     ifMatch: option<string_>,
     @ocaml.doc("<p>The distribution's id.</p>") @as("Id") id: string_,
+    @ocaml.doc("<p>The distribution's configuration information.</p>") @as("DistributionConfig")
+    distributionConfig: distributionConfig,
   }
   @ocaml.doc("<p>The returned result of the corresponding request.</p>")
   type response = {
@@ -5252,8 +5979,8 @@ module UpdateDistribution = {
   }
   @module("@aws-sdk/client-cloudfront") @new
   external new: request => t = "UpdateDistributionCommand"
-  let make = (~distributionConfig, ~id, ~ifMatch=?, ()) =>
-    new({distributionConfig: distributionConfig, ifMatch: ifMatch, id: id})
+  let make = (~id, ~distributionConfig, ~ifMatch=?, ()) =>
+    new({ifMatch: ifMatch, id: id, distributionConfig: distributionConfig})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -5274,12 +6001,11 @@ module ListCachePolicies = {
 		       <ul>
             <li>
 				           <p>
-                  <code>managed</code> – Returns only the managed policies created by AWS.</p>
+                  <code>managed</code> – Returns only the managed policies created by Amazon Web Services.</p>
 			         </li>
             <li>
 				           <p>
-                  <code>custom</code> – Returns only the custom policies created in your AWS
-					account.</p>
+                  <code>custom</code> – Returns only the custom policies created in your Amazon Web Services account.</p>
 			         </li>
          </ul>")
     @as("Type")
@@ -5369,12 +6095,12 @@ module CreateDistribution = {
 
 module ListDistributionsByWebACLId = {
   type t
-  @ocaml.doc("<p>The request to list distributions that are associated with a specified AWS WAF web 
-			ACL. </p>")
+  @ocaml.doc("<p>The request to list distributions that are associated with a specified WAF web 
+			ACL.</p>")
   type request = {
-    @ocaml.doc("<p>The ID of the AWS WAF web ACL that you want to list the associated distributions. 
+    @ocaml.doc("<p>The ID of the WAF web ACL that you want to list the associated distributions. 
 			If you specify \"null\" for the ID, the request returns a list of the distributions that aren't 
-			associated with a web ACL. </p>")
+			associated with a web ACL.</p>")
     @as("WebACLId")
     webACLId: string_,
     @ocaml.doc("<p>The maximum number of distributions that you want CloudFront to return in the response body. 
@@ -5390,7 +6116,7 @@ module ListDistributionsByWebACLId = {
     marker: option<string_>,
   }
   @ocaml.doc("<p>The response to a request to list the distributions that are associated with a 
-			specified AWS WAF web ACL. </p>")
+			specified WAF web ACL.</p>")
   type response = {
     @ocaml.doc("<p>The <code>DistributionList</code> type. </p>") @as("DistributionList")
     distributionList: option<distributionList>,

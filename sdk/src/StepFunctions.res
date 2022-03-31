@@ -712,7 +712,7 @@ module SendTaskSuccess = {
       workflow enters a task state. See <a>GetActivityTaskOutput$taskToken</a>.</p>")
     taskToken: taskToken,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-states") @new external new: request => t = "SendTaskSuccessCommand"
   let make = (~output, ~taskToken, ()) => new({output: output, taskToken: taskToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -726,7 +726,7 @@ module SendTaskHeartbeat = {
       workflow enters a task state. See <a>GetActivityTaskOutput$taskToken</a>.</p>")
     taskToken: taskToken,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-states") @new external new: request => t = "SendTaskHeartbeatCommand"
   let make = (~taskToken, ()) => new({taskToken: taskToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -743,7 +743,7 @@ module SendTaskFailure = {
       workflow enters a task state. See <a>GetActivityTaskOutput$taskToken</a>.</p>")
     taskToken: taskToken,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-states") @new external new: request => t = "SendTaskFailureCommand"
   let make = (~taskToken, ~cause=?, ~error=?, ()) =>
     new({cause: cause, error: error, taskToken: taskToken})
@@ -823,7 +823,7 @@ module DeleteStateMachine = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the state machine to delete.</p>")
     stateMachineArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-states") @new external new: request => t = "DeleteStateMachineCommand"
   let make = (~stateMachineArn, ()) => new({stateMachineArn: stateMachineArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -834,7 +834,7 @@ module DeleteActivity = {
   type request = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the activity to delete.</p>") activityArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-states") @new external new: request => t = "DeleteActivityCommand"
   let make = (~activityArn, ()) => new({activityArn: activityArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -849,7 +849,7 @@ module UntagResource = {
     )
     resourceArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-states") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -984,7 +984,7 @@ module TagResource = {
     )
     resourceArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-states") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"

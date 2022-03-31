@@ -14,6 +14,10 @@ type baseBoolean = bool
 type baseInteger = int
 type baseTimestamp = Js.Date.t
 type baseLong = float
+type targetPlatformOs = [@as("LINUX") #LINUX]
+type targetPlatformArch = [@as("X86_64") #X86_64 | @as("ARM64") #ARM64]
+type targetPlatformAccelerator = [@as("NVIDIA") #NVIDIA]
+type targetDevice = [@as("jetson_xavier") #Jetson_Xavier]
 type tagValue = string
 type tagKey = string
 type tagArn = string
@@ -24,6 +28,7 @@ type s3KeyPrefix = string
 type s3BucketName = string
 type retryAfterSeconds = int
 type resourceType = [
+  | @as("MODEL_PACKAGE_JOB") #MODEL_PACKAGE_JOB
   | @as("TRIAL") #TRIAL
   | @as("MODEL") #MODEL
   | @as("DATASET") #DATASET
@@ -34,6 +39,7 @@ type projectName = string
 type projectArn = string
 type paginationToken = string
 type pageSize = int
+type modelVersionNoLatest = string
 type modelVersion = string
 type modelStatusMessage = string
 type modelStatus = [
@@ -47,6 +53,16 @@ type modelStatus = [
   | @as("TRAINED") #TRAINED
   | @as("TRAINING") #TRAINING
 ]
+type modelPackagingStatusMessage = string
+type modelPackagingMethod = string
+type modelPackagingJobStatus = [
+  | @as("FAILED") #FAILED
+  | @as("SUCCEEDED") #SUCCEEDED
+  | @as("RUNNING") #RUNNING
+  | @as("CREATED") #CREATED
+]
+type modelPackagingJobName = string
+type modelPackagingJobDescription = string
 type modelHostingStatus = [
   | @as("SYSTEM_UPDATING") #SYSTEM_UPDATING
   | @as("STOPPING_HOSTING") #STOPPING_HOSTING
@@ -81,9 +97,34 @@ type datasetStatus = [
 type datasetEntry = string
 type datasetChanges = NodeJs.Buffer.t
 type contentType = string
+type componentVersionArn = string
+type componentVersion = string
+type componentName = string
+type componentDescription = string
+type compilerOptions = string
 type clientToken = string
 type boolean_ = bool
 type anomalyClassFilter = string
+@ocaml.doc("<p>The platform on which a model runs on an AWS IoT Greengrass core device.</p>")
+type targetPlatform = {
+  @ocaml.doc("<p>The target accelerator for the model. NVIDIA (Nvidia graphics processing unit) 
+         is the only accelerator that is currently supported. You must also specify the <code>gpu-code</code>, <code>trt-ver</code>,
+         and <code>cuda-ver</code> compiler options.
+         
+      </p>")
+  @as("Accelerator")
+  accelerator: targetPlatformAccelerator,
+  @ocaml.doc("<p>The target architecture for the model. The currently supported architectures are
+         X86_64 (64-bit version of the x86 instruction set) and ARM_64 (ARMv8 64-bit CPU).
+      </p>")
+  @as("Arch")
+  arch: targetPlatformArch,
+  @ocaml.doc("<p>The target operating system for the model. Linux is the only operating system
+         that is currently supported.
+      </p>")
+  @as("Os")
+  os: targetPlatformOs,
+}
 type tagKeyList = array<tagKey>
 @ocaml.doc(
   "<p>A key and value pair that is attached to the specified Amazon Lookout for Vision model.</p>"
@@ -94,14 +135,17 @@ type tag = {
   @ocaml.doc("<p>The key of the tag that is attached to the specified model.</p>") @as("Key")
   key: tagKey,
 }
-@ocaml.doc("<p>Information about the location training output.</p>")
+@ocaml.doc(
+  "<p>Information about the location of training output or the output of a model packaging job.</p>"
+)
 type s3Location = {
-  @ocaml.doc(
-    "<p>The path of the folder, within the S3 bucket, that contains the training output.</p>"
-  )
+  @ocaml.doc("<p>The path of the folder, within the S3 bucket, that contains the output.</p>")
   @as("Prefix")
   prefix: option<s3KeyPrefix>,
-  @ocaml.doc("<p>The S3 bucket that contains the training output.</p>") @as("Bucket")
+  @ocaml.doc("<p>The S3 bucket that contains the training or model packaging job output. If you are training a model,
+         the bucket must in your AWS account. If you use an S3 bucket for a model packaging job,
+      the S3 bucket must be in the same AWS Region and AWS account in which you use AWS IoT Greengrass.</p>")
+  @as("Bucket")
   bucket: s3BucketName,
 }
 @ocaml.doc("<p>Metadata about an Amazon Lookout for Vision project.</p>")
@@ -129,6 +173,55 @@ type modelPerformance = {
   @ocaml.doc("<p>The overall F1 score metric for the trained model.</p>") @as("F1Score")
   f1Score: option<float_>,
 }
+@ocaml.doc("<p>
+   Metadata for a model packaging job. For more information, see <a>ListModelPackagingJobs</a>.
+</p>")
+type modelPackagingJobMetadata = {
+  @ocaml.doc(
+    "<p>The Unix timestamp for the time and date that the model packaging job was last updated.</p>"
+  )
+  @as("LastUpdatedTimestamp")
+  lastUpdatedTimestamp: option<dateTime>,
+  @ocaml.doc(
+    "<p>The Unix timestamp for the time and date that the model packaging job was created.</p>"
+  )
+  @as("CreationTimestamp")
+  creationTimestamp: option<dateTime>,
+  @ocaml.doc("<p>The status message for the model packaging job.
+</p>")
+  @as("StatusMessage")
+  statusMessage: option<modelPackagingStatusMessage>,
+  @ocaml.doc("<p>The status of the model packaging job.
+</p>")
+  @as("Status")
+  status: option<modelPackagingJobStatus>,
+  @ocaml.doc("<p>
+The AWS service used to package the job. Currently Lookout for Vision can package
+      jobs with AWS IoT Greengrass.
+</p>")
+  @as("ModelPackagingMethod")
+  modelPackagingMethod: option<modelPackagingMethod>,
+  @ocaml.doc("<p>
+The description for the model packaging job.
+</p>")
+  @as("ModelPackagingJobDescription")
+  modelPackagingJobDescription: option<modelPackagingJobDescription>,
+  @ocaml.doc("<p>
+The version of the model that is in the model package.
+</p>")
+  @as("ModelVersion")
+  modelVersion: option<modelVersion>,
+  @ocaml.doc("<p>
+The project that contains the model that is in the model package.
+</p>")
+  @as("ProjectName")
+  projectName: option<projectName>,
+  @ocaml.doc("<p>
+The name of the model packaging job.
+</p>")
+  @as("JobName")
+  jobName: option<modelPackagingJobName>,
+}
 @ocaml.doc("<p>Amazon S3 Location information for an input manifest file. </p>")
 type inputS3Object = {
   @ocaml.doc("<p>The version ID of the bucket.</p>") @as("VersionId")
@@ -142,7 +235,28 @@ type inputS3Object = {
 type imageSource = {
   @ocaml.doc("<p>The type of the image.</p>") @as("Type") type_: option<imageSourceType>,
 }
-@ocaml.doc("<p>Sumary information for an Amazon Lookout for Vision dataset.</p>")
+@ocaml.doc("<p>Information about the AWS IoT Greengrass component created by a model packaging job.
+
+</p>")
+type greengrassOutputDetails = {
+  @ocaml.doc("<p>
+The version of the component.
+</p>")
+  @as("ComponentVersion")
+  componentVersion: option<componentVersion>,
+  @ocaml.doc("<p>
+The name of the component.
+</p>")
+  @as("ComponentName")
+  componentName: option<componentName>,
+  @ocaml.doc("<p>
+The Amazon Resource Name (ARN) of the component.
+</p>")
+  @as("ComponentVersionArn")
+  componentVersionArn: option<componentVersionArn>,
+}
+@ocaml.doc("<p>Summary information for an Amazon Lookout for Vision dataset. For more information,
+      see <a>DescribeDataset</a> and <a>ProjectDescription</a>.</p>")
 type datasetMetadata = {
   @ocaml.doc("<p>The status message for the dataset.</p>") @as("StatusMessage")
   statusMessage: option<datasetStatusMessage>,
@@ -169,6 +283,17 @@ type projectMetadataList = array<projectMetadata>
 type outputConfig = {
   @ocaml.doc("<p>The S3 location for the output.</p>") @as("S3Location") s3Location: s3Location,
 }
+@ocaml.doc("<p>
+Information about the output from a model packaging job.
+</p>")
+type modelPackagingOutputDetails = {
+  @ocaml.doc("<p>
+Information about the AWS IoT Greengrass component in a model packaging job.
+</p>")
+  @as("Greengrass")
+  greengrass: option<greengrassOutputDetails>,
+}
+type modelPackagingJobsList = array<modelPackagingJobMetadata>
 @ocaml.doc("<p>Describes an Amazon Lookout for Vision model.</p>")
 type modelMetadata = {
   @ocaml.doc(
@@ -214,7 +339,8 @@ type datasetGroundTruthManifest = {
   "<p>The description for a dataset. For more information, see <a>DescribeDataset</a>.</p>"
 )
 type datasetDescription = {
-  @ocaml.doc("<p></p>") @as("ImageStats") imageStats: option<datasetImageStats>,
+  @ocaml.doc("<p>Statistics about the images in a dataset.</p>") @as("ImageStats")
+  imageStats: option<datasetImageStats>,
   @ocaml.doc("<p>The status message for the dataset. </p>") @as("StatusMessage")
   statusMessage: option<datasetStatusMessage>,
   @ocaml.doc("<p>The status of the dataset.</p>") @as("Status") status: option<datasetStatus>,
@@ -282,12 +408,140 @@ type modelDescription = {
   @ocaml.doc("<p>The version of the model</p>") @as("ModelVersion")
   modelVersion: option<modelVersion>,
 }
+@ocaml.doc("<p>Configuration information for the AWS IoT Greengrass component created in a model packaging job. 
+   For more information, see <a>StartModelPackagingJob</a>.
+</p>
+         <note>
+            <p>You can't specify a component with the same <code>ComponentName</code> and <code>Componentversion</code> as
+      an existing component with the same component name and component version.</p>
+         </note>")
+type greengrassConfiguration = {
+  @ocaml.doc("<p>
+   A set of tags (key-value pairs) that you want to attach to the AWS IoT Greengrass component.
+</p>")
+  @as("Tags")
+  tags: option<tagList_>,
+  @ocaml.doc("<p>
+   A description for the AWS IoT Greengrass component.
+</p>")
+  @as("ComponentDescription")
+  componentDescription: option<componentDescription>,
+  @ocaml.doc("<p>A Version for the AWS IoT Greengrass component. If you don't provide a
+      value, a default value of <code>
+               <i>Model Version</i>.0.0</code> is used.
+</p>")
+  @as("ComponentVersion")
+  componentVersion: option<componentVersion>,
+  @ocaml.doc("<p>
+   A name for the AWS IoT Greengrass component. 
+</p>")
+  @as("ComponentName")
+  componentName: componentName,
+  @ocaml.doc("<p>
+         An S3 location in which Lookout for Vision stores the component artifacts. 
+      </p>")
+  @as("S3OutputLocation")
+  s3OutputLocation: s3Location,
+  @ocaml.doc("<p>The target platform for the model. If you specify <code>TargetPlatform</code>, you can't specify
+         <code>TargetDevice</code>.
+      </p>")
+  @as("TargetPlatform")
+  targetPlatform: option<targetPlatform>,
+  @ocaml.doc("<p>The target device for the model. Currently the only supported value is <code>jetson_xavier</code>.
+      If you specify <code>TargetDevice</code>, you can't specify
+      <code>TargetPlatform</code>.
+
+</p>")
+  @as("TargetDevice")
+  targetDevice: option<targetDevice>,
+  @ocaml.doc("<p>Additional compiler options for the Greengrass component. Currently, 
+   only NVIDIA Graphics Processing Units (GPU) are supported. If you specify <code>TargetPlatform</code>, you must specify
+<code>CompilerOptions</code>. If you specify <code>TargetDevice</code>, don't specify <code>CompilerOptions</code>.</p> 
+   
+   
+         <p>For more information, see 
+      <i>Compiler options</i> in the  Amazon Lookout for Vision Developer Guide. </p>")
+  @as("CompilerOptions")
+  compilerOptions: option<compilerOptions>,
+}
 @ocaml.doc(
   "<p>Information about the location of a manifest file that Amazon Lookout for Vision uses to to create a dataset.</p>"
 )
 type datasetSource = {
   @ocaml.doc("<p>Location information for the manifest file.</p>") @as("GroundTruthManifest")
   groundTruthManifest: option<datasetGroundTruthManifest>,
+}
+@ocaml.doc("<p>
+Configuration information for a Amazon Lookout for Vision model packaging job. For more information,
+see <a>StartModelPackagingJob</a>.
+</p>")
+type modelPackagingConfiguration = {
+  @ocaml.doc("<p>
+Configuration information for the AWS IoT Greengrass component in a model packaging job.
+</p>")
+  @as("Greengrass")
+  greengrass: greengrassConfiguration,
+}
+@ocaml.doc("<p>
+Information about a model packaging job. For more information, see 
+<a>DescribeModelPackagingJob</a>.
+</p>")
+type modelPackagingDescription = {
+  @ocaml.doc("<p>
+   The Unix timestamp for the time and date that the model packaging job was last updated.
+</p>")
+  @as("LastUpdatedTimestamp")
+  lastUpdatedTimestamp: option<dateTime>,
+  @ocaml.doc("<p>
+   The Unix timestamp for the time and date that the model packaging job was created.
+</p>")
+  @as("CreationTimestamp")
+  creationTimestamp: option<dateTime>,
+  @ocaml.doc("<p>
+The status message for the model packaging job.
+</p>")
+  @as("StatusMessage")
+  statusMessage: option<modelPackagingStatusMessage>,
+  @ocaml.doc("<p>
+The status of the model packaging job.
+</p>")
+  @as("Status")
+  status: option<modelPackagingJobStatus>,
+  @ocaml.doc("<p>Information about the output of the model packaging job. For more information,
+   see <a>DescribeModelPackagingJob</a>.
+</p>")
+  @as("ModelPackagingOutputDetails")
+  modelPackagingOutputDetails: option<modelPackagingOutputDetails>,
+  @ocaml.doc("<p>The AWS service used to package the job. Currently Lookout for Vision can package
+jobs with AWS IoT Greengrass.
+</p>")
+  @as("ModelPackagingMethod")
+  modelPackagingMethod: option<modelPackagingMethod>,
+  @ocaml.doc("<p>The description for the model packaging job.
+
+</p>")
+  @as("ModelPackagingJobDescription")
+  modelPackagingJobDescription: option<modelPackagingJobDescription>,
+  @ocaml.doc("<p>
+The configuration information used in the model packaging job.
+</p>")
+  @as("ModelPackagingConfiguration")
+  modelPackagingConfiguration: option<modelPackagingConfiguration>,
+  @ocaml.doc("<p>The version of the model used in the model packaging job.
+
+</p>")
+  @as("ModelVersion")
+  modelVersion: option<modelVersion>,
+  @ocaml.doc("<p>The name of the project that's associated with a model that's in the model package.
+
+</p>")
+  @as("ProjectName")
+  projectName: option<projectName>,
+  @ocaml.doc("<p>
+The name of the model packaging job.
+</p>")
+  @as("JobName")
+  jobName: option<modelPackagingJobName>,
 }
 @ocaml.doc("<p>This is the Amazon Lookout for Vision API Reference. It provides descriptions of actions, 
       data types, common parameters, and common errors.</p>
@@ -300,10 +554,14 @@ module UpdateDatasetEntries = {
   type t
   type request = {
     @ocaml.doc("<p>ClientToken is an idempotency token that ensures a call to <code>UpdateDatasetEntries</code>
-         completes only once.  You choose the value to pass. For example, An issue, 
-         such as an network outage, might prevent you from getting a response from <code>UpdateDatasetEntries</code>.
+         completes only once.  You choose the value to pass. For example, An issue 
+         might prevent you from getting a response from <code>UpdateDatasetEntries</code>.
          In this case, safely retry your call
-         to <code>UpdateDatasetEntries</code> by using the same <code>ClientToken</code> parameter value. An error occurs
+         to <code>UpdateDatasetEntries</code> by using the same <code>ClientToken</code> parameter value.</p>
+         <p>If you don't supply a value for <code>ClientToken</code>, the AWS SDK you are using inserts a value for you. 
+         This prevents retries after a network error from making multiple updates with the same dataset entries. You'll need to
+         provide your own value for other use cases. </p>
+         <p>An error occurs
          if the other input parameters are not the same as in the first request. Using a different  
          value for <code>ClientToken</code> is considered a new call to <code>UpdateDatasetEntries</code>. An idempotency
          token is active for 8 hours.
@@ -340,11 +598,14 @@ module StopModel = {
   type t
   type request = {
     @ocaml.doc("<p>ClientToken is an idempotency token that ensures a call to <code>StopModel</code>
-         completes only once.  You choose the value to pass. For example, An issue, 
-         such as an network outage, might prevent you from getting a response from <code>StopModel</code>.
+         completes only once.  You choose the value to pass. For example, An issue 
+         might prevent you from getting a response from <code>StopModel</code>.
          In this case, safely retry your call
-         to <code>StopModel</code> by using the same <code>ClientToken</code> parameter value. An error occurs
-         if the other input parameters are not the same as in the first request. Using a different  
+         to <code>StopModel</code> by using the same <code>ClientToken</code> parameter value.</p>
+         <p>If you don't supply a value for <code>ClientToken</code>, the AWS SDK you are using inserts a value for you. 
+         This prevents retries after a network error from making multiple stop requests. You'll need to
+         provide your own value for other use cases. </p>
+         <p>An error occurs if the other input parameters are not the same as in the first request. Using a different  
          value for <code>ClientToken</code> is considered a new call to <code>StopModel</code>. An idempotency
          token is active for 8 hours.
          
@@ -371,18 +632,22 @@ module StartModel = {
   type t
   type request = {
     @ocaml.doc("<p>ClientToken is an idempotency token that ensures a call to <code>StartModel</code>
-         completes only once.  You choose the value to pass. For example, An issue, 
-         such as an network outage, might prevent you from getting a response from <code>StartModel</code>.
+         completes only once.  You choose the value to pass. For example, An issue might prevent 
+         you from getting a response from <code>StartModel</code>.
          In this case, safely retry your call
-         to <code>StartModel</code> by using the same <code>ClientToken</code> parameter value. An error occurs
-         if the other input parameters are not the same as in the first request. Using a different  
+         to <code>StartModel</code> by using the same <code>ClientToken</code> parameter value. </p>
+         <p>If you don't supply a value for <code>ClientToken</code>, the AWS SDK you are using inserts a value for you. 
+         This prevents retries after a network error from making multiple start requests. You'll need to
+         provide your own value for other use cases. </p>
+         
+         <p>An error occurs if the other input parameters are not the same as in the first request. Using a different  
          value for <code>ClientToken</code> is considered a new call to <code>StartModel</code>. An idempotency
          token is active for 8 hours.
       </p>")
     @as("ClientToken")
     clientToken: option<clientToken>,
     @ocaml.doc("<p>The minimum number of inference units to use. A single
-         inference unit represents 1 hour of processing and can support up to 5 Transaction Pers Second (TPS).
+         inference unit represents 1 hour of processing. 
          Use a higher number to increase the TPS throughput of your model. You are charged for the number
          of inference units that you use.
       </p>")
@@ -413,11 +678,14 @@ module DeleteProject = {
   type t
   type request = {
     @ocaml.doc("<p>ClientToken is an idempotency token that ensures a call to <code>DeleteProject</code>
-         completes only once.  You choose the value to pass. For example, An issue, 
-         such as an network outage, might prevent you from getting a response from <code>DeleteProject</code>.
+         completes only once.  You choose the value to pass. For example, An issue
+         might prevent you from getting a response from <code>DeleteProject</code>.
          In this case, safely retry your call
-         to <code>DeleteProject</code> by using the same <code>ClientToken</code> parameter value. An error occurs
-         if the other input parameters are not the same as in the first request. Using a different  
+         to <code>DeleteProject</code> by using the same <code>ClientToken</code> parameter value. </p>
+         <p>If you don't supply a value for <code>ClientToken</code>, the AWS SDK you are using inserts a value for you. 
+         This prevents retries after a network error from making multiple project deletion requests. You'll need to
+         provide your own value for other use cases. </p>
+         <p>An error occurs if the other input parameters are not the same as in the first request. Using a different  
          value for <code>ClientToken</code> is considered a new call to <code>DeleteProject</code>. An idempotency
          token is active for 8 hours.</p>")
     @as("ClientToken")
@@ -440,17 +708,21 @@ module DeleteModel = {
   type t
   type request = {
     @ocaml.doc("<p>ClientToken is an idempotency token that ensures a call to <code>DeleteModel</code>
-      completes only once.  You choose the value to pass. For example, An issue, 
-      such as an network outage, might prevent you from getting a response from <code>DeleteModel</code>.
+      completes only once.  You choose the value to pass. For example, an issue might prevent
+      you from getting a response from <code>DeleteModel</code>.
       In this case, safely retry your call
-       to <code>DeleteModel</code> by using the same <code>ClientToken</code> parameter value. An error occurs
-       if the other input parameters are not the same as in the first request. Using a different  
+       to <code>DeleteModel</code> by using the same <code>ClientToken</code> parameter value.</p>
+         <p>If you don't supply a value for ClientToken, the AWS SDK you are using inserts a value for you. 
+         This prevents retries after a network error from making multiple model deletion requests. You'll need to
+         provide your own value for other use cases. </p>
+    
+         <p>An error occurs if the other input parameters are not the same as in the first request. Using a different  
        value for <code>ClientToken</code> is considered a new call to <code>DeleteModel</code>. An idempotency
        token is active for 8 hours.</p>")
     @as("ClientToken")
     clientToken: option<clientToken>,
     @ocaml.doc("<p>The version of the model that you want to delete.</p>") @as("ModelVersion")
-    modelVersion: modelVersion,
+    modelVersion: modelVersionNoLatest,
     @ocaml.doc("<p>The name of the project that contains the model that you want to delete.</p>")
     @as("ProjectName")
     projectName: projectName,
@@ -470,11 +742,13 @@ module DeleteDataset = {
   type t
   type request = {
     @ocaml.doc("<p>ClientToken is an idempotency token that ensures a call to <code>DeleteDataset</code>
-      completes only once.  You choose the value to pass. For example, An issue, 
-      such as an network outage, might prevent you from getting a response from <code>DeleteDataset</code>.
+      completes only once.  You choose the value to pass. For example, An issue might prevent you from getting a response from <code>DeleteDataset</code>.
       In this case, safely retry your call
-       to <code>DeleteDataset</code> by using the same <code>ClientToken</code> parameter value. An error occurs
-       if the other input parameters are not the same as in the first request. Using a different  
+       to <code>DeleteDataset</code> by using the same <code>ClientToken</code> parameter value. </p>
+         <p>If you don't supply a value for <code>ClientToken</code>, the AWS SDK you are using inserts a value for you. 
+                 This prevents retries after a network error from making multiple deletetion requests. You'll need to
+                 provide your own value for other use cases. </p>       
+         <p>An error occurs if the other input parameters are not the same as in the first request. Using a different  
        value for <code>ClientToken</code> is considered a new call to <code>DeleteDataset</code>. An idempotency
        token is active for 8 hours.</p>")
     @as("ClientToken")
@@ -488,7 +762,7 @@ module DeleteDataset = {
     @as("ProjectName")
     projectName: projectName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-lookoutvision") @new external new: request => t = "DeleteDatasetCommand"
   let make = (~datasetType, ~projectName, ~clientToken=?, ()) =>
     new({clientToken: clientToken, datasetType: datasetType, projectName: projectName})
@@ -506,7 +780,7 @@ module UntagResource = {
     @as("ResourceArn")
     resourceArn: tagArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-lookoutvision") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -597,10 +871,14 @@ module CreateProject = {
   type t
   type request = {
     @ocaml.doc("<p>ClientToken is an idempotency token that ensures a call to <code>CreateProject</code>
-      completes only once.  You choose the value to pass. For example, An issue, 
-      such as an network outage, might prevent you from getting a response from <code>CreateProject</code>.
+      completes only once.  You choose the value to pass. For example, An issue might prevent you from 
+      getting a response from <code>CreateProject</code>.
       In this case, safely retry your call
-       to <code>CreateProject</code> by using the same <code>ClientToken</code> parameter value. An error occurs
+       to <code>CreateProject</code> by using the same <code>ClientToken</code> parameter value. </p>
+         <p>If you don't supply a value for <code>ClientToken</code>, the AWS SDK you are using inserts a value for you. 
+          This prevents retries after a network error from making multiple project creation requests. You'll need to
+           provide your own value for other use cases. </p>      
+         <p>An error occurs
        if the other input parameters are not the same as in the first request. Using a different  
        value for <code>ClientToken</code> is considered a new call to <code>CreateProject</code>. An idempotency
        token is active for 8 hours.</p>")
@@ -626,7 +904,7 @@ module TagResource = {
     @as("ResourceArn")
     resourceArn: tagArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-lookoutvision") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -676,6 +954,45 @@ module ListProjects = {
   @module("@aws-sdk/client-lookoutvision") @new external new: request => t = "ListProjectsCommand"
   let make = (~maxResults=?, ~nextToken=?, ()) =>
     new({maxResults: maxResults, nextToken: nextToken})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module ListModelPackagingJobs = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The maximum number of results to return per paginated call. The largest value you can specify is 100. 
+      If you specify a value greater than 100, a ValidationException
+      error occurs. The default value is 100. </p>")
+    @as("MaxResults")
+    maxResults: option<pageSize>,
+    @ocaml.doc("<p>If the previous response was incomplete (because there is more
+      results to retrieve), Amazon Lookout for Vision returns a pagination token in the response. You can use this pagination 
+      token to retrieve the next set of results. </p>")
+    @as("NextToken")
+    nextToken: option<paginationToken>,
+    @ocaml.doc("<p>
+The name of the project for which you want to list the model packaging jobs.
+</p>")
+    @as("ProjectName")
+    projectName: projectName,
+  }
+  type response = {
+    @ocaml.doc("<p>If the previous response was incomplete (because there is more
+   results to retrieve), Amazon Lookout for Vision returns a pagination token in the response. You can use this pagination 
+   token to retrieve the next set of results.
+</p>")
+    @as("NextToken")
+    nextToken: option<paginationToken>,
+    @ocaml.doc("<p>
+A list of the model packaging jobs created for the specified Amazon Lookout for Vision project.
+</p>")
+    @as("ModelPackagingJobs")
+    modelPackagingJobs: option<modelPackagingJobsList>,
+  }
+  @module("@aws-sdk/client-lookoutvision") @new
+  external new: request => t = "ListModelPackagingJobsCommand"
+  let make = (~projectName, ~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken, projectName: projectName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -745,7 +1062,7 @@ module CreateModel = {
     @ocaml.doc("<p>A set of tags (key-value pairs) that you want to attach to the model.</p>")
     @as("Tags")
     tags: option<tagList_>,
-    @ocaml.doc("<p>The identifier for your AWS Key Management Service (AWS KMS) customer master key (CMK).
+    @ocaml.doc("<p>The identifier for your AWS KMS key.
          The key is used to encrypt training and test images copied into the service for model training. Your 
          source images are unaffected.
          If this parameter is not specified, the copied images are encrypted by a key that AWS owns and manages.</p>")
@@ -755,11 +1072,14 @@ module CreateModel = {
     @as("OutputConfig")
     outputConfig: outputConfig,
     @ocaml.doc("<p>ClientToken is an idempotency token that ensures a call to <code>CreateModel</code>
-      completes only once.  You choose the value to pass. For example, An issue, 
-      such as an network outage, might prevent you from getting a response from <code>CreateModel</code>.
+      completes only once.  You choose the value to pass. For example, An issue
+      might prevent you from getting a response from <code>CreateModel</code>.
       In this case, safely retry your call
-       to <code>CreateModel</code> by using the same <code>ClientToken</code> parameter value. An error occurs
-       if the other input parameters are not the same as in the first request. Using a different  
+       to <code>CreateModel</code> by using the same <code>ClientToken</code> parameter value. </p>
+         <p>If you don't supply a value for <code>ClientToken</code>, the AWS SDK you are using inserts a value for you. 
+            This prevents retries after a network error from starting multiple training jobs. You'll need to
+            provide your own value for other use cases. </p>  
+        <p>An error occurs if the other input parameters are not the same as in the first request. Using a different  
        value for <code>ClientToken</code> is considered a new call to <code>CreateModel</code>. An idempotency
        token is active for 8 hours.</p>")
     @as("ClientToken")
@@ -867,11 +1187,14 @@ module CreateDataset = {
   type t
   type request = {
     @ocaml.doc("<p>ClientToken is an idempotency token that ensures a call to <code>CreateDataset</code>
-      completes only once.  You choose the value to pass. For example, An issue, 
-      such as an network outage, might prevent you from getting a response from <code>CreateDataset</code>.
+      completes only once.  You choose the value to pass. For example, An issue might prevent you
+      from getting a response from <code>CreateDataset</code>.
       In this case, safely retry your call
-       to <code>CreateDataset</code> by using the same <code>ClientToken</code> parameter value. An error occurs
-       if the other input parameters are not the same as in the first request. Using a different  
+       to <code>CreateDataset</code> by using the same <code>ClientToken</code> parameter value.</p>
+         <p>If you don't supply a value for <code>ClientToken</code>, the AWS SDK you are using inserts a value for you. 
+         This prevents retries after a network error from making multiple dataset creation requests. You'll need to
+         provide your own value for other use cases. </p>
+         <p>An error occurs if the other input parameters are not the same as in the first request. Using a different  
        value for <code>ClientToken</code> is considered a new call to <code>CreateDataset</code>. An idempotency
        token is active for 8 hours.
     </p>")
@@ -907,5 +1230,101 @@ module CreateDataset = {
       datasetType: datasetType,
       projectName: projectName,
     })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module StartModelPackagingJob = {
+  type t
+  type request = {
+    @ocaml.doc("<p>ClientToken is an idempotency token that ensures a call to <code>StartModelPackagingJob</code>
+      completes only once.  You choose the value to pass. For example, An issue might prevent you
+      from getting a response from <code>StartModelPackagingJob</code>.
+      In this case, safely retry your call
+      to <code>StartModelPackagingJob</code> by using the same <code>ClientToken</code> parameter value.</p>
+         <p>If you don't supply a value for <code>ClientToken</code>, the AWS SDK you are using inserts a value for you. 
+      This prevents retries after a network error from making multiple dataset creation requests. You'll need to
+      provide your own value for other use cases. </p>
+         <p>An error occurs if the other input parameters are not the same as in the first request. Using a different  
+      value for <code>ClientToken</code> is considered a new call to <code>StartModelPackagingJob</code>. An idempotency
+      token is active for 8 hours.
+   </p>")
+    @as("ClientToken")
+    clientToken: option<clientToken>,
+    @ocaml.doc("<p>A description for the model packaging job.
+</p>")
+    @as("Description")
+    description: option<modelPackagingJobDescription>,
+    @ocaml.doc("<p>The configuration for the model packaging job.
+</p>")
+    @as("Configuration")
+    configuration: modelPackagingConfiguration,
+    @ocaml.doc("<p>A name for the model packaging job. If you don't supply a value, the service creates
+   a job name for you.
+</p>")
+    @as("JobName")
+    jobName: option<modelPackagingJobName>,
+    @ocaml.doc("<p>
+The version of the model within the project that you want to package.
+</p>")
+    @as("ModelVersion")
+    modelVersion: modelVersion,
+    @ocaml.doc("<p>
+The name of the project which contains the version of the model that you want to package.
+</p>")
+    @as("ProjectName")
+    projectName: projectName,
+  }
+  type response = {
+    @ocaml.doc("<p>The job name for the model packaging job. If you don't supply a job name in the <code>JobName</code> input parameter,
+   the service creates a job name for you.
+
+</p>")
+    @as("JobName")
+    jobName: option<modelPackagingJobName>,
+  }
+  @module("@aws-sdk/client-lookoutvision") @new
+  external new: request => t = "StartModelPackagingJobCommand"
+  let make = (
+    ~configuration,
+    ~modelVersion,
+    ~projectName,
+    ~clientToken=?,
+    ~description=?,
+    ~jobName=?,
+    (),
+  ) =>
+    new({
+      clientToken: clientToken,
+      description: description,
+      configuration: configuration,
+      jobName: jobName,
+      modelVersion: modelVersion,
+      projectName: projectName,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module DescribeModelPackagingJob = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The job name for the model packaging job. 
+
+</p>")
+    @as("JobName")
+    jobName: modelPackagingJobName,
+    @ocaml.doc("<p>The name of the project that contains the model packaging job that you want to describe. 
+</p>")
+    @as("ProjectName")
+    projectName: projectName,
+  }
+  type response = {
+    @ocaml.doc("<p>The description of the model packaging job.
+</p>")
+    @as("ModelPackagingDescription")
+    modelPackagingDescription: option<modelPackagingDescription>,
+  }
+  @module("@aws-sdk/client-lookoutvision") @new
+  external new: request => t = "DescribeModelPackagingJobCommand"
+  let make = (~jobName, ~projectName, ()) => new({jobName: jobName, projectName: projectName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

@@ -607,7 +607,7 @@ module UpdateApplication = {
     @ocaml.doc("<p>Configuration ID of the application to be updated.</p>")
     configurationId: applicationId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-discovery") @new external new: request => t = "UpdateApplicationCommand"
   let make = (~configurationId, ~description=?, ~name=?, ()) =>
     new({description: description, name: name, configurationId: configurationId})
@@ -634,13 +634,14 @@ module StopContinuousExport = {
 
 module ExportConfigurations = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("<p>A unique identifier that you can use to query the export status.</p>")
     exportId: option<configurationsExportId>,
   }
-  @module("@aws-sdk/client-discovery") @new external new: unit => t = "ExportConfigurationsCommand"
-  let make = () => new()
+  @module("@aws-sdk/client-discovery") @new
+  external new: request => t = "ExportConfigurationsCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -696,7 +697,7 @@ module StartImportTask = {
 
 module StartContinuousExport = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("<p>A dictionary which describes how the data is stored.</p>
          <ul>
@@ -717,14 +718,15 @@ module StartContinuousExport = {
     @ocaml.doc("<p>The unique ID assigned to this export.</p>")
     exportId: option<configurationsExportId>,
   }
-  @module("@aws-sdk/client-discovery") @new external new: unit => t = "StartContinuousExportCommand"
-  let make = () => new()
+  @module("@aws-sdk/client-discovery") @new
+  external new: request => t = "StartContinuousExportCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetDiscoverySummary = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("<p>Details about discovered connectors, including connector status and health.</p>")
     connectorSummary: option<customerConnectorInfo>,
@@ -736,8 +738,9 @@ module GetDiscoverySummary = {
     @ocaml.doc("<p>The number of applications discovered.</p>") applications: option<long>,
     @ocaml.doc("<p>The number of servers discovered.</p>") servers: option<long>,
   }
-  @module("@aws-sdk/client-discovery") @new external new: unit => t = "GetDiscoverySummaryCommand"
-  let make = () => new()
+  @module("@aws-sdk/client-discovery") @new
+  external new: request => t = "GetDiscoverySummaryCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -749,7 +752,7 @@ module DisassociateConfigurationItemsFromApplication = {
     @ocaml.doc("<p>Configuration ID of an application from which each item is disassociated.</p>")
     applicationConfigurationId: applicationId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-discovery") @new
   external new: request => t = "DisassociateConfigurationItemsFromApplicationCommand"
   let make = (~configurationIds, ~applicationConfigurationId, ()) =>
@@ -766,7 +769,7 @@ module DeleteApplications = {
     @ocaml.doc("<p>Configuration ID of an application to be deleted.</p>")
     configurationIds: applicationIdsList,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-discovery") @new external new: request => t = "DeleteApplicationsCommand"
   let make = (~configurationIds, ()) => new({configurationIds: configurationIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -782,7 +785,7 @@ module AssociateConfigurationItemsToApplication = {
     )
     applicationConfigurationId: applicationId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-discovery") @new
   external new: request => t = "AssociateConfigurationItemsToApplicationCommand"
   let make = (~configurationIds, ~applicationConfigurationId, ()) =>
@@ -936,7 +939,7 @@ module DeleteTags = {
     @ocaml.doc("<p>A list of configuration items with tags that you want to delete.</p>")
     configurationIds: configurationIdList,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-discovery") @new external new: request => t = "DeleteTagsCommand"
   let make = (~configurationIds, ~tags=?, ()) =>
     new({tags: tags, configurationIds: configurationIds})
@@ -956,7 +959,7 @@ module CreateTags = {
     @ocaml.doc("<p>A list of configuration items that you want to tag.</p>")
     configurationIds: configurationIdList,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-discovery") @new external new: request => t = "CreateTagsCommand"
   let make = (~tags, ~configurationIds, ()) => new({tags: tags, configurationIds: configurationIds})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"

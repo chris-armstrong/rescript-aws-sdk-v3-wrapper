@@ -1333,7 +1333,7 @@ module UntagResource = {
     )
     resourceArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-codeartifact") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1717,7 +1717,7 @@ module TagResource = {
     )
     resourceArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-codeartifact") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"

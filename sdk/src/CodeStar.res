@@ -373,7 +373,7 @@ module UpdateProject = {
     @ocaml.doc("<p>The name of the project you want to update.</p>") name: option<projectName>,
     @ocaml.doc("<p>The ID of the project you want to update.</p>") id: projectId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-codestar") @new external new: request => t = "UpdateProjectCommand"
   let make = (~id, ~description=?, ~name=?, ()) =>
     new({description: description, name: name, id: id})
@@ -391,7 +391,7 @@ module DisassociateTeamMember = {
     )
     projectId: projectId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-codestar") @new
   external new: request => t = "DisassociateTeamMemberCommand"
   let make = (~userArn, ~projectId, ()) => new({userArn: userArn, projectId: projectId})
@@ -565,7 +565,7 @@ module UntagProject = {
     @ocaml.doc("<p>The tags to remove from the project.</p>") tags: tagKeys,
     @ocaml.doc("<p>The ID of the project to remove tags from.</p>") id: projectId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-codestar") @new external new: request => t = "UntagProjectCommand"
   let make = (~tags, ~id, ()) => new({tags: tags, id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"

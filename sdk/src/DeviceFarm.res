@@ -2521,7 +2521,7 @@ module DeleteVPCEConfiguration = {
             delete.</p>")
     arn: amazonResourceName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-devicefarm") @new
   external new: request => t = "DeleteVPCEConfigurationCommand"
   let make = (~arn, ()) => new({arn: arn})
@@ -2537,7 +2537,7 @@ module DeleteUpload = {
     )
     arn: amazonResourceName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-devicefarm") @new external new: request => t = "DeleteUploadCommand"
   let make = (~arn, ()) => new({arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -2551,7 +2551,7 @@ module DeleteTestGridProject = {
     )
     projectArn: deviceFarmArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-devicefarm") @new
   external new: request => t = "DeleteTestGridProjectCommand"
   let make = (~projectArn, ()) => new({projectArn: projectArn})
@@ -2565,7 +2565,7 @@ module DeleteRun = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) for the run to delete.</p>")
     arn: amazonResourceName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-devicefarm") @new external new: request => t = "DeleteRunCommand"
   let make = (~arn, ()) => new({arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -2579,7 +2579,7 @@ module DeleteRemoteAccessSession = {
             access.</p>")
     arn: amazonResourceName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-devicefarm") @new
   external new: request => t = "DeleteRemoteAccessSessionCommand"
   let make = (~arn, ()) => new({arn: arn})
@@ -2595,7 +2595,7 @@ module DeleteProject = {
     )
     arn: amazonResourceName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-devicefarm") @new external new: request => t = "DeleteProjectCommand"
   let make = (~arn, ()) => new({arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -2606,7 +2606,7 @@ module DeleteNetworkProfile = {
   type request = {
     @ocaml.doc("<p>The ARN of the network profile to delete.</p>") arn: amazonResourceName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-devicefarm") @new
   external new: request => t = "DeleteNetworkProfileCommand"
   let make = (~arn, ()) => new({arn: arn})
@@ -2620,7 +2620,7 @@ module DeleteInstanceProfile = {
             delete.</p>")
     arn: amazonResourceName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-devicefarm") @new
   external new: request => t = "DeleteInstanceProfileCommand"
   let make = (~arn, ()) => new({arn: arn})
@@ -2636,7 +2636,7 @@ module DeleteDevicePool = {
     )
     arn: amazonResourceName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-devicefarm") @new external new: request => t = "DeleteDevicePoolCommand"
   let make = (~arn, ()) => new({arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -2845,7 +2845,7 @@ module UntagResource = {
     @as("ResourceARN")
     resourceARN: deviceFarmArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-devicefarm") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys: tagKeys, resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -3272,7 +3272,7 @@ module TagResource = {
     @as("ResourceARN")
     resourceARN: deviceFarmArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-devicefarm") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceARN, ()) => new({tags: tags, resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -3718,14 +3718,15 @@ module GetInstanceProfile = {
 
 module GetAccountSettings = {
   type t
-
+  type request = {.}
   @ocaml.doc("<p>Represents the account settings return values from the
                 <code>GetAccountSettings</code> request.</p>")
   type response = {
     @ocaml.doc("<p>The account settings.</p>") accountSettings: option<accountSettings>,
   }
-  @module("@aws-sdk/client-devicefarm") @new external new: unit => t = "GetAccountSettingsCommand"
-  let make = () => new()
+  @module("@aws-sdk/client-devicefarm") @new
+  external new: request => t = "GetAccountSettingsCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

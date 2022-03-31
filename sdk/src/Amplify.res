@@ -45,9 +45,10 @@ type sourceUrl = string
 type source = string
 type serviceRoleArn = string
 type resourceArn = string
+type repositoryCloneMethod = [@as("SIGV4") #SIGV4 | @as("TOKEN") #TOKEN | @as("SSH") #SSH]
 type repository = string
 type pullRequestEnvironmentName = string
-type platform = [@as("WEB") #WEB]
+type platform = [@as("WEB_DYNAMIC") #WEB_DYNAMIC | @as("WEB") #WEB]
 type oauthToken = string
 type nextToken = string
 type name = string
@@ -190,7 +191,7 @@ type customRule = {
   @ocaml.doc("<p> The condition for a URL rewrite or redirect rule, such as a country code. </p>")
   condition: option<condition>,
   @ocaml.doc("<p> The status code for a URL rewrite or redirect rule. </p>
-        
+
         <dl>
             <dt>200</dt>
             <dd>
@@ -198,7 +199,8 @@ type customRule = {
                 </dd>
             <dt>301</dt>
             <dd>
-                    <p>Represents a 301 (moved pemanently) redirect rule. This and all future requests should be directed to the target URL. </p>
+                    <p>Represents a 301 (moved pemanently) redirect rule. This and all future
+                        requests should be directed to the target URL. </p>
                 </dd>
             <dt>302</dt>
             <dd>
@@ -294,12 +296,16 @@ type branch = {
   @ocaml.doc("<p> The build specification (build spec) content for the branch of an Amplify app.
         </p>")
   buildSpec: option<buildSpec>,
-  @ocaml.doc("<p> The basic authorization credentials for a branch of an Amplify app. </p>")
+  @ocaml.doc("<p> The basic authorization credentials for a branch of an Amplify app. You must
+            base64-encode the authorization credentials and provide them in the format
+                <code>user:password</code>.</p>")
   basicAuthCredentials: option<basicAuthCredentials>,
   @ocaml.doc("<p> The thumbnail URL for the branch of an Amplify app. </p>")
   thumbnailUrl: option<thumbnailUrl>,
   @ocaml.doc("<p>Enables performance mode for the branch.</p>
-        <p>Performance mode optimizes for faster hosting performance by keeping content cached at the edge for a longer interval. When performance mode is enabled, hosting configuration or code changes can take up to 10 minutes to roll out. </p>")
+        <p>Performance mode optimizes for faster hosting performance by keeping content cached at
+            the edge for a longer interval. When performance mode is enabled, hosting configuration
+            or code changes can take up to 10 minutes to roll out. </p>")
   enablePerformanceMode: option<enablePerformanceMode>,
   @ocaml.doc("<p> Enables basic authorization for a branch of an Amplify app. </p>")
   enableBasicAuth: enableBasicAuth,
@@ -342,11 +348,15 @@ type autoBranchCreationConfig = {
   @ocaml.doc("<p> The build specification (build spec) for the autocreated branch. </p>")
   buildSpec: option<buildSpec>,
   @ocaml.doc("<p>Enables performance mode for the branch.</p>
-        <p>Performance mode optimizes for faster hosting performance by keeping content cached at the edge for a longer interval. When performance mode is enabled, hosting configuration or code changes can take up to 10 minutes to roll out. </p>")
+        <p>Performance mode optimizes for faster hosting performance by keeping content cached at
+            the edge for a longer interval. When performance mode is enabled, hosting configuration
+            or code changes can take up to 10 minutes to roll out. </p>")
   enablePerformanceMode: option<enablePerformanceMode>,
   @ocaml.doc("<p> Enables basic authorization for the autocreated branch. </p>")
   enableBasicAuth: option<enableBasicAuth>,
-  @ocaml.doc("<p> The basic authorization credentials for the autocreated branch. </p>")
+  @ocaml.doc("<p> The basic authorization credentials for the autocreated branch. You must
+            base64-encode the authorization credentials and provide them in the format
+                <code>user:password</code>.</p>")
   basicAuthCredentials: option<basicAuthCredentials>,
   @ocaml.doc("<p> The environment variables for the autocreated branch. </p>")
   environmentVariables: option<environmentVariables>,
@@ -363,6 +373,11 @@ type branches = array<branch>
 @ocaml.doc("<p> Represents the different branches of a repository for building, deploying, and
             hosting an Amplify app. </p>")
 type app = {
+  @ocaml.doc("<p>The authentication protocol to use to access the Git repository for an Amplify app.
+            For a GitHub repository, specify <code>TOKEN</code>. For an Amazon Web Services CodeCommit repository,
+            specify <code>SIGV4</code>. For GitLab and Bitbucket repositories, specify
+                <code>SSH</code>.</p>")
+  repositoryCloneMethod: option<repositoryCloneMethod>,
   @ocaml.doc("<p> Describes the automated branch creation configuration for the Amplify app. </p>")
   autoBranchCreationConfig: option<autoBranchCreationConfig>,
   @ocaml.doc("<p> Describes the automated branch creation glob patterns for the Amplify app. </p>")
@@ -378,7 +393,9 @@ type app = {
   productionBranch: option<productionBranch>,
   @ocaml.doc("<p> Describes the custom redirect and rewrite rules for the Amplify app. </p>")
   customRules: option<customRules>,
-  @ocaml.doc("<p> The basic authorization credentials for branches for the Amplify app. </p>")
+  @ocaml.doc("<p> The basic authorization credentials for branches for the Amplify app. You must
+            base64-encode the authorization credentials and provide them in the format
+                <code>user:password</code>.</p>")
   basicAuthCredentials: option<basicAuthCredentials>,
   @ocaml.doc("<p> Enables basic authorization for the Amplify app's branches. </p>")
   enableBasicAuth: enableBasicAuth,
@@ -396,7 +413,7 @@ type app = {
   @ocaml.doc("<p> Updates the date and time for the Amplify app. </p>") updateTime: updateTime,
   @ocaml.doc("<p> Creates a date and time for the Amplify app. </p>") createTime: createTime,
   @ocaml.doc("<p> The platform for the Amplify app. </p>") platform: platform,
-  @ocaml.doc("<p> The repository for the Amplify app. </p>") repository: repository,
+  @ocaml.doc("<p> The Git repository for the Amplify app. </p>") repository: repository,
   @ocaml.doc("<p> The description for the Amplify app. </p>") description: description,
   @ocaml.doc("<p> The tag for the Amplify app. </p>") tags: option<tagMap>,
   @ocaml.doc("<p> The name for the Amplify app. </p>") name: name,
@@ -502,7 +519,7 @@ module UntagResource = {
     @ocaml.doc("<p> The Amazon Resource Name (ARN) to use to untag a resource. </p>")
     resourceArn: resourceArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-amplify") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -516,7 +533,7 @@ module TagResource = {
     @ocaml.doc("<p> The Amazon Resource Name (ARN) to use to tag a resource. </p>")
     resourceArn: resourceArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-amplify") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -800,11 +817,15 @@ module UpdateBranch = {
     @ocaml.doc("<p> The build specification (build spec) for the branch. </p>")
     buildSpec: option<buildSpec>,
     @ocaml.doc("<p>Enables performance mode for the branch.</p>
-        <p>Performance mode optimizes for faster hosting performance by keeping content cached at the edge for a longer interval. When performance mode is enabled, hosting configuration or code changes can take up to 10 minutes to roll out. </p>")
+        <p>Performance mode optimizes for faster hosting performance by keeping content cached at
+            the edge for a longer interval. When performance mode is enabled, hosting configuration
+            or code changes can take up to 10 minutes to roll out. </p>")
     enablePerformanceMode: option<enablePerformanceMode>,
     @ocaml.doc("<p> Enables basic authorization for the branch. </p>")
     enableBasicAuth: option<enableBasicAuth>,
-    @ocaml.doc("<p> The basic authorization credentials for the branch. </p>")
+    @ocaml.doc("<p> The basic authorization credentials for the branch. You must base64-encode the
+            authorization credentials and provide them in the format
+            <code>user:password</code>.</p>")
     basicAuthCredentials: option<basicAuthCredentials>,
     @ocaml.doc("<p> The environment variables for the branch. </p>")
     environmentVariables: option<environmentVariables>,
@@ -1039,11 +1060,15 @@ module CreateBranch = {
     buildSpec: option<buildSpec>,
     @ocaml.doc("<p> The tag for the branch. </p>") tags: option<tagMap>,
     @ocaml.doc("<p>Enables performance mode for the branch.</p>
-        <p>Performance mode optimizes for faster hosting performance by keeping content cached at the edge for a longer interval. When performance mode is enabled, hosting configuration or code changes can take up to 10 minutes to roll out. </p>")
+        <p>Performance mode optimizes for faster hosting performance by keeping content cached at
+            the edge for a longer interval. When performance mode is enabled, hosting configuration
+            or code changes can take up to 10 minutes to roll out. </p>")
     enablePerformanceMode: option<enablePerformanceMode>,
     @ocaml.doc("<p> Enables basic authorization for the branch. </p>")
     enableBasicAuth: option<enableBasicAuth>,
-    @ocaml.doc("<p> The basic authorization credentials for the branch. </p>")
+    @ocaml.doc("<p> The basic authorization credentials for the branch. You must base64-encode the
+            authorization credentials and provide them in the format
+            <code>user:password</code>.</p>")
     basicAuthCredentials: option<basicAuthCredentials>,
     @ocaml.doc("<p> The environment variables for the branch. </p>")
     environmentVariables: option<environmentVariables>,
@@ -1134,7 +1159,9 @@ module UpdateApp = {
     buildSpec: option<buildSpec>,
     @ocaml.doc("<p> The custom redirect and rewrite rules for an Amplify app. </p>")
     customRules: option<customRules>,
-    @ocaml.doc("<p> The basic authorization credentials for an Amplify app. </p>")
+    @ocaml.doc("<p> The basic authorization credentials for an Amplify app. You must base64-encode the
+            authorization credentials and provide them in the format
+            <code>user:password</code>.</p>")
     basicAuthCredentials: option<basicAuthCredentials>,
     @ocaml.doc("<p> Enables basic authorization for an Amplify app. </p>")
     enableBasicAuth: option<enableBasicAuth>,
@@ -1265,7 +1292,9 @@ module CreateApp = {
     @ocaml.doc("<p> The tag for an Amplify app. </p>") tags: option<tagMap>,
     @ocaml.doc("<p> The custom rewrite and redirect rules for an Amplify app. </p>")
     customRules: option<customRules>,
-    @ocaml.doc("<p> The credentials for basic authorization for an Amplify app. </p>")
+    @ocaml.doc("<p> The credentials for basic authorization for an Amplify app. You must base64-encode
+            the authorization credentials and provide them in the format
+            <code>user:password</code>.</p>")
     basicAuthCredentials: option<basicAuthCredentials>,
     @ocaml.doc("<p> Enables basic authorization for an Amplify app. This will apply to all branches that
             are part of this app. </p>")
@@ -1352,7 +1381,7 @@ module UpdateDomainAssociation = {
     @ocaml.doc("<p> Sets the branch patterns for automatic subdomain creation. </p>")
     autoSubDomainCreationPatterns: option<autoSubDomainCreationPatterns>,
     @ocaml.doc("<p> Describes the settings for the subdomain. </p>")
-    subDomainSettings: subDomainSettings,
+    subDomainSettings: option<subDomainSettings>,
     @ocaml.doc("<p> Enables the automated creation of subdomains for branches. </p>")
     enableAutoSubDomain: option<enableAutoSubDomain>,
     @ocaml.doc("<p> The name of the domain. </p>") domainName: domainName,
@@ -1367,11 +1396,11 @@ module UpdateDomainAssociation = {
   @module("@aws-sdk/client-amplify") @new
   external new: request => t = "UpdateDomainAssociationCommand"
   let make = (
-    ~subDomainSettings,
     ~domainName,
     ~appId,
     ~autoSubDomainIAMRole=?,
     ~autoSubDomainCreationPatterns=?,
+    ~subDomainSettings=?,
     ~enableAutoSubDomain=?,
     (),
   ) =>

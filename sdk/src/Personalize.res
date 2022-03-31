@@ -54,6 +54,7 @@ type failureReason = string
 type eventValueThreshold = string
 type eventType = string
 type errorMessage = string
+type domain = [@as("VIDEO_ON_DEMAND") #VIDEO_ON_DEMAND | @as("ECOMMERCE") #ECOMMERCE]
 type dockerURI = string
 type description = string
 type date = Js.Date.t
@@ -108,8 +109,8 @@ type solutionSummary = {
 }
 @ocaml.doc("<p>The configuration details of an Amazon S3 input or output bucket.</p>")
 type s3DataConfig = {
-  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the Amazon Key Management Service (KMS) key that Amazon Personalize uses to
-      encrypt or decrypt the input and output files of a batch inference job.</p>")
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the Key Management Service (KMS) key that Amazon Personalize uses to
+      encrypt or decrypt the input and output files.</p>")
   kmsKeyArn: option<kmsKeyArn>,
   @ocaml.doc("<p>The file path of the Amazon S3 bucket.</p>") path: s3Location,
 }
@@ -117,6 +118,8 @@ type resourceConfig = Js.Dict.t<parameterValue>
 @ocaml.doc("<p>Provides a summary of the properties of a recipe. For a complete listing, call the
       <a>DescribeRecipe</a> API.</p>")
 type recipeSummary = {
+  @ocaml.doc("<p>The domain of the recipe (if the recipe is a Domain dataset group use case).</p>")
+  domain: option<domain>,
   @ocaml.doc("<p>The date and time (in Unix time) that the recipe was last updated.</p>")
   lastUpdatedDateTime: option<date>,
   @ocaml.doc("<p>The date and time (in Unix time) that the recipe was created.</p>")
@@ -289,7 +292,7 @@ type eventTracker = {
   @ocaml.doc("<p>The ID of the event tracker. Include this ID in requests to the
     <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_UBS_PutEvents.html\">PutEvents</a> API.</p>")
   trackingId: option<trackingId>,
-  @ocaml.doc("<p>The Amazon AWS account that owns the event tracker.</p>")
+  @ocaml.doc("<p>The Amazon Web Services account that owns the event tracker.</p>")
   accountId: option<accountId>,
   @ocaml.doc("<p>The ARN of the event tracker.</p>") eventTrackerArn: option<arn>,
   @ocaml.doc("<p>The name of the event tracker.</p>") name: option<name>,
@@ -356,6 +359,10 @@ type datasetSummary = {
 @ocaml.doc("<p>Provides a summary of the properties of a dataset schema. For a complete listing, call the
       <a>DescribeSchema</a> API.</p>")
 type datasetSchemaSummary = {
+  @ocaml.doc(
+    "<p>The domain of a schema that you created for a dataset in a Domain dataset group.</p>"
+  )
+  domain: option<domain>,
   @ocaml.doc("<p>The date and time (in Unix time) that the schema was last updated.</p>")
   lastUpdatedDateTime: option<date>,
   @ocaml.doc("<p>The date and time (in Unix time) that the schema was created.</p>")
@@ -366,6 +373,10 @@ type datasetSchemaSummary = {
 @ocaml.doc("<p>Describes the schema for a dataset. For more information on schemas, see
       <a>CreateSchema</a>.</p>")
 type datasetSchema = {
+  @ocaml.doc(
+    "<p>The domain of a schema that you created for a dataset in a Domain dataset group.</p>"
+  )
+  domain: option<domain>,
   @ocaml.doc("<p>The date and time (in Unix time) that the schema was last updated.</p>")
   lastUpdatedDateTime: option<date>,
   @ocaml.doc("<p>The date and time (in Unix time) that the schema was created.</p>")
@@ -400,6 +411,7 @@ type datasetImportJobSummary = {
 @ocaml.doc("<p>Provides a summary of the properties of a dataset group. For a complete listing, call the
       <a>DescribeDatasetGroup</a> API.</p>")
 type datasetGroupSummary = {
+  @ocaml.doc("<p>The domain of a Domain dataset group.</p>") domain: option<domain>,
   @ocaml.doc("<p>If creating a dataset group fails, the reason behind the failure.</p>")
   failureReason: option<failureReason>,
   @ocaml.doc("<p>The date and time (in Unix time) that the dataset group was last updated.</p>")
@@ -426,15 +438,18 @@ type datasetGroupSummary = {
       dataset and add it to a dataset group by calling <a>CreateDataset</a>. The dataset
       group is used to create and train a solution by calling <a>CreateSolution</a>. A
       dataset group can contain only one of each type of dataset.</p>
-         <p>You can specify an AWS Key Management Service (KMS) key to encrypt the datasets in the group.</p>")
+         <p>You can specify an Key Management Service (KMS) key to encrypt the datasets in the group.</p>")
 type datasetGroup = {
+  @ocaml.doc("<p>The domain of a Domain dataset group.</p>") domain: option<domain>,
   @ocaml.doc("<p>If creating a dataset group fails, provides the reason why.</p>")
   failureReason: option<failureReason>,
   @ocaml.doc("<p>The last update date and time (in Unix time) of the dataset group.</p>")
   lastUpdatedDateTime: option<date>,
   @ocaml.doc("<p>The creation date and time (in Unix time) of the dataset group.</p>")
   creationDateTime: option<date>,
-  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the KMS key used to encrypt the datasets.</p>")
+  @ocaml.doc(
+    "<p>The Amazon Resource Name (ARN) of the Key Management Service (KMS) key used to encrypt the datasets.</p>"
+  )
   kmsKeyArn: option<kmsKeyArn>,
   @ocaml.doc("<p>The ARN of the IAM role that has permissions to create the dataset group.</p>")
   roleArn: option<roleArn>,
@@ -554,6 +569,39 @@ type campaignSummary = {
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the campaign.</p>") campaignArn: option<arn>,
   @ocaml.doc("<p>The name of the campaign.</p>") name: option<name>,
 }
+@ocaml.doc("<p>A truncated version of the <a>BatchSegmentJob</a> datatype. The <a>ListBatchSegmentJobs</a> operation returns a list of batch segment job
+      summaries.</p>")
+type batchSegmentJobSummary = {
+  @ocaml.doc(
+    "<p>The Amazon Resource Name (ARN) of the solution version used by the batch segment job to generate batch segments.</p>"
+  )
+  solutionVersionArn: option<arn>,
+  @ocaml.doc("<p>If the batch segment job failed, the reason for the failure.</p>")
+  failureReason: option<failureReason>,
+  @ocaml.doc("<p>The time at which the batch segment job was last updated.</p>")
+  lastUpdatedDateTime: option<date>,
+  @ocaml.doc("<p>The time at which the batch segment job was created.</p>")
+  creationDateTime: option<date>,
+  @ocaml.doc("<p>The status of the batch segment job. The status is one of the following values:</p>
+         <ul>
+            <li>
+               <p>PENDING</p>
+            </li>
+            <li>
+               <p>IN PROGRESS</p>
+            </li>
+            <li>
+               <p>ACTIVE</p>
+            </li>
+            <li>
+               <p>CREATE FAILED</p>
+            </li>
+         </ul>")
+  status: option<status>,
+  @ocaml.doc("<p>The name of the batch segment job.</p>") jobName: option<name>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the batch segment job.</p>")
+  batchSegmentJobArn: option<arn>,
+}
 @ocaml.doc("<p>A truncated version of the <a>BatchInferenceJob</a> datatype. The <a>ListBatchInferenceJobs</a> operation returns a list of batch inference job
       summaries.</p>")
 type batchInferenceJobSummary = {
@@ -608,6 +656,17 @@ type tunedHPOParams = {
 type solutions = array<solutionSummary>
 type solutionVersions = array<solutionVersionSummary>
 type schemas = array<datasetSchemaSummary>
+@ocaml.doc("<p>The configuration details of the recommender.</p>")
+type recommenderConfig = {
+  @ocaml.doc("<p>Specifies the requested minimum provisioned recommendation requests per second that
+      Amazon Personalize will support.</p>")
+  minRecommendationRequestsPerSecond: option<transactionsPerSecond>,
+  @ocaml.doc("<p>Specifies the exploration configuration hyperparameters, including <code>explorationWeight</code> and 
+      <code>explorationItemAgeCutOff</code>, you want to use to configure the amount of item exploration Amazon Personalize uses when
+      recommending items. Provide <code>itemExplorationConfig</code> data only if your recommenders generate personalized recommendations for a user
+      (not popular items or similar items).</p>")
+  itemExplorationConfig: option<hyperParameters>,
+}
 type recipes = array<recipeSummary>
 type integerHyperParameterRanges = array<integerHyperParameterRange>
 type filters = array<filterSummary>
@@ -669,7 +728,7 @@ type datasetImportJob = {
             </li>
          </ul>")
   status: option<status>,
-  @ocaml.doc("<p>The ARN of the AWS Identity and Access Management (IAM) role that has permissions to read from the Amazon S3 data
+  @ocaml.doc("<p>The ARN of the IAM role that has permissions to read from the Amazon S3 data
       source.</p>")
   roleArn: option<arn>,
   @ocaml.doc("<p>The Amazon S3 bucket that contains the training data to import.</p>")
@@ -695,12 +754,17 @@ type categoricalHyperParameterRange = {
 type campaigns = array<campaignSummary>
 @ocaml.doc("<p>The configuration details of a campaign.</p>")
 type campaignConfig = {
-  @ocaml.doc("<p>A string to string map specifying the exploration configuration hyperparameters, including <code>explorationWeight</code> and 
+  @ocaml.doc("<p>Specifies the exploration configuration hyperparameters, including <code>explorationWeight</code> and 
       <code>explorationItemAgeCutOff</code>, you want to use to configure the amount of item exploration Amazon Personalize uses when
       recommending items. Provide <code>itemExplorationConfig</code> data only if your solution uses the
       <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html\">User-Personalization</a> recipe.</p>")
   itemExplorationConfig: option<hyperParameters>,
 }
+type batchSegmentJobs = array<batchSegmentJobSummary>
+@ocaml.doc("<p>The output configuration parameters of a batch segment job.</p>")
+type batchSegmentJobOutput = {s3DataDestination: s3DataConfig}
+@ocaml.doc("<p>The input configuration of a batch segment job.</p>")
+type batchSegmentJobInput = {s3DataSource: s3DataConfig}
 type batchInferenceJobs = array<batchInferenceJobSummary>
 @ocaml.doc("<p>The output configuration parameters of a batch inference job.</p>")
 type batchInferenceJobOutput = {
@@ -730,6 +794,61 @@ type batchInferenceJobConfig = {
 type autoMLConfig = {
   @ocaml.doc("<p>The list of candidate recipes.</p>") recipeList: option<arnList>,
   @ocaml.doc("<p>The metric to optimize.</p>") metricName: option<metricName>,
+}
+@ocaml.doc("<p>Provides a summary of the properties of a recommender update. For a complete listing, call the
+      DescribeRecommender API operation.</p>")
+type recommenderUpdateSummary = {
+  @ocaml.doc("<p>If a recommender update fails, the reason behind the failure.</p>")
+  failureReason: option<failureReason>,
+  @ocaml.doc("<p>The status of the recommender update.</p>
+         <p>A recommender can be in one of the following states:</p>
+         <ul>
+            <li>
+               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>
+            </li>
+            <li>
+               <p>DELETE PENDING > DELETE IN_PROGRESS</p>
+            </li>
+         </ul>")
+  status: option<status>,
+  @ocaml.doc(
+    "<p>The date and time (in Unix time) that the recommender update was last updated.</p>"
+  )
+  lastUpdatedDateTime: option<date>,
+  @ocaml.doc("<p>The date and time (in Unix format) that the recommender update was created.</p>")
+  creationDateTime: option<date>,
+  @ocaml.doc("<p>The configuration details of the recommender update.</p>")
+  recommenderConfig: option<recommenderConfig>,
+}
+@ocaml.doc("<p>Provides a summary of the properties of the recommender.</p>")
+type recommenderSummary = {
+  @ocaml.doc("<p>The date and time (in Unix format) that the recommender was last updated.</p>")
+  lastUpdatedDateTime: option<date>,
+  @ocaml.doc("<p>The date and time (in Unix format) that the recommender was created.</p>")
+  creationDateTime: option<date>,
+  @ocaml.doc("<p>The status of the recommender. A recommender can be in one of the following states:</p>
+         <ul>
+            <li>
+               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>
+            </li>
+            <li>
+               <p>DELETE PENDING > DELETE IN_PROGRESS</p>
+            </li>
+         </ul>")
+  status: option<status>,
+  @ocaml.doc("<p>The configuration details of the recommender.</p>")
+  recommenderConfig: option<recommenderConfig>,
+  @ocaml.doc(
+    "<p>The Amazon Resource Name (ARN) of the recipe (Domain dataset group use case) that the recommender was created for.</p>"
+  )
+  recipeArn: option<arn>,
+  @ocaml.doc(
+    "<p>The Amazon Resource Name (ARN) of the Domain dataset group that contains the recommender.</p>"
+  )
+  datasetGroupArn: option<arn>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the recommender.</p>")
+  recommenderArn: option<arn>,
+  @ocaml.doc("<p>The name of the recommender.</p>") name: option<name>,
 }
 type defaultCategoricalHyperParameterRanges = array<defaultCategoricalHyperParameterRange>
 @ocaml.doc("<p>Describes a job that exports a dataset to an Amazon S3 bucket. For more information, see <a>CreateDatasetExportJob</a>.</p>
@@ -761,7 +880,7 @@ type datasetExportJob = {
             </li>
          </ul>")
   status: option<status>,
-  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management service role that has permissions to add data to your
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the IAM service role that has permissions to add data to your
       output Amazon S3 bucket.</p>")
   roleArn: option<arn>,
   @ocaml.doc("<p>The data to export, based on how you imported the data. You can choose to export <code>BULK</code> data that you imported using a dataset import job, 
@@ -802,6 +921,55 @@ type campaignUpdateSummary = {
   minProvisionedTPS: option<transactionsPerSecond>,
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the deployed solution version.</p>")
   solutionVersionArn: option<arn>,
+}
+@ocaml.doc("<p>Contains information on a batch segment job.</p>")
+type batchSegmentJob = {
+  @ocaml.doc("<p>The time at which the batch segment job last updated.</p>")
+  lastUpdatedDateTime: option<date>,
+  @ocaml.doc("<p>The time at which the batch segment job was created.</p>")
+  creationDateTime: option<date>,
+  @ocaml.doc("<p>The status of the batch segment job. The status is one of the following values:</p>
+         <ul>
+            <li>
+               <p>PENDING</p>
+            </li>
+            <li>
+               <p>IN PROGRESS</p>
+            </li>
+            <li>
+               <p>ACTIVE</p>
+            </li>
+            <li>
+               <p>CREATE FAILED</p>
+            </li>
+         </ul>")
+  status: option<status>,
+  @ocaml.doc(
+    "<p>The ARN of the Amazon Identity and Access Management (IAM) role that requested the batch segment job.</p>"
+  )
+  roleArn: option<roleArn>,
+  @ocaml.doc(
+    "<p>The Amazon S3 bucket that contains the output data generated by the batch segment job.</p>"
+  )
+  jobOutput: option<batchSegmentJobOutput>,
+  @ocaml.doc(
+    "<p>The Amazon S3 path that leads to the input data used to generate the batch segment job.</p>"
+  )
+  jobInput: option<batchSegmentJobInput>,
+  @ocaml.doc(
+    "<p>The number of predicted users generated by the batch segment job for each line of input data.</p>"
+  )
+  numResults: option<numBatchResults>,
+  @ocaml.doc(
+    "<p>The Amazon Resource Name (ARN) of the solution version used by the batch segment job to generate batch segments.</p>"
+  )
+  solutionVersionArn: option<arn>,
+  @ocaml.doc("<p>If the batch segment job failed, the reason for the failure.</p>")
+  failureReason: option<failureReason>,
+  @ocaml.doc("<p>The ARN of the filter used on the batch segment job.</p>") filterArn: option<arn>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the batch segment job.</p>")
+  batchSegmentJobArn: option<arn>,
+  @ocaml.doc("<p>The name of the batch segment job.</p>") jobName: option<name>,
 }
 @ocaml.doc("<p>Contains information on a batch inference job.</p>")
 type batchInferenceJob = {
@@ -852,6 +1020,42 @@ type batchInferenceJob = {
   batchInferenceJobArn: option<arn>,
   @ocaml.doc("<p>The name of the batch inference job.</p>") jobName: option<name>,
 }
+type recommenders = array<recommenderSummary>
+@ocaml.doc("<p>Describes a recommendation generator for a Domain dataset group. You create a recommender in a Domain dataset group
+      for a specific domain use case (domain recipe), and specify the recommender in a <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html\">GetRecommendations</a> request.</p>")
+type recommender = {
+  @ocaml.doc("<p>Provides a summary of the latest updates to the recommender. </p>")
+  latestRecommenderUpdate: option<recommenderUpdateSummary>,
+  @ocaml.doc("<p>If a recommender fails, the reason behind the failure.</p>")
+  failureReason: option<failureReason>,
+  @ocaml.doc("<p>The status of the recommender.</p>
+         <p>A recommender can be in one of the following states:</p>
+         <ul>
+            <li>
+               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>
+            </li>
+            <li>
+               <p>DELETE PENDING > DELETE IN_PROGRESS</p>
+            </li>
+         </ul>")
+  status: option<status>,
+  @ocaml.doc("<p>The date and time (in Unix format) that the recommender was last updated.</p>")
+  lastUpdatedDateTime: option<date>,
+  @ocaml.doc("<p>The date and time (in Unix format) that the recommender was created.</p>")
+  creationDateTime: option<date>,
+  @ocaml.doc("<p>The configuration details of the recommender.</p>")
+  recommenderConfig: option<recommenderConfig>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the recipe (Domain dataset group use case) that the recommender was created for.
+</p>")
+  recipeArn: option<arn>,
+  @ocaml.doc("<p>The name of the recommender.</p>") name: option<name>,
+  @ocaml.doc(
+    "<p>The Amazon Resource Name (ARN) of the Domain dataset group that contains the recommender.</p>"
+  )
+  datasetGroupArn: option<arn>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the recommender.</p>")
+  recommenderArn: option<arn>,
+}
 @ocaml.doc("<p>Specifies the hyperparameters and their ranges.
     Hyperparameters can be categorical, continuous, or integer-valued.</p>")
 type hyperParameterRanges = {
@@ -872,7 +1076,7 @@ type defaultHyperParameterRanges = {
   @ocaml.doc("<p>The integer-valued hyperparameters and their default ranges.</p>")
   integerHyperParameterRanges: option<defaultIntegerHyperParameterRanges>,
 }
-@ocaml.doc("<p>Describes a deployed solution version, otherwise known as a campaign.
+@ocaml.doc("<p>An object that describes the deployment of a solution version.
       For more information on campaigns, see <a>CreateCampaign</a>.</p>")
 type campaign = {
   latestCampaignUpdate: option<campaignUpdateSummary>,
@@ -959,7 +1163,7 @@ type solutionConfig = {
   eventValueThreshold: option<eventValueThreshold>,
 }
 @ocaml.doc(
-  "<p>An object that provides information about a specific version of a <a>Solution</a>.</p>"
+  "<p>An object that provides information about a specific version of a <a>Solution</a> in a Custom dataset group.</p>"
 )
 type solutionVersion = {
   @ocaml.doc("<p>The date and time (in
@@ -1089,7 +1293,7 @@ module StopSolutionVersionCreation = {
     )
     solutionVersionArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-personalize") @new
   external new: request => t = "StopSolutionVersionCreationCommand"
   let make = (~solutionVersionArn, ()) => new({solutionVersionArn: solutionVersionArn})
@@ -1099,7 +1303,7 @@ module StopSolutionVersionCreation = {
 module DeleteSolution = {
   type t
   type request = {@ocaml.doc("<p>The ARN of the solution to delete.</p>") solutionArn: arn}
-
+  type response = {.}
   @module("@aws-sdk/client-personalize") @new external new: request => t = "DeleteSolutionCommand"
   let make = (~solutionArn, ()) => new({solutionArn: solutionArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1110,16 +1314,29 @@ module DeleteSchema = {
   type request = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the schema to delete.</p>") schemaArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-personalize") @new external new: request => t = "DeleteSchemaCommand"
   let make = (~schemaArn, ()) => new({schemaArn: schemaArn})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module DeleteRecommender = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the recommender to delete.</p>")
+    recommenderArn: arn,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-personalize") @new
+  external new: request => t = "DeleteRecommenderCommand"
+  let make = (~recommenderArn, ()) => new({recommenderArn: recommenderArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteFilter = {
   type t
   type request = {@ocaml.doc("<p>The ARN of the filter to delete.</p>") filterArn: arn}
-
+  type response = {.}
   @module("@aws-sdk/client-personalize") @new external new: request => t = "DeleteFilterCommand"
   let make = (~filterArn, ()) => new({filterArn: filterArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1131,7 +1348,7 @@ module DeleteEventTracker = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the event tracker to delete.</p>")
     eventTrackerArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-personalize") @new
   external new: request => t = "DeleteEventTrackerCommand"
   let make = (~eventTrackerArn, ()) => new({eventTrackerArn: eventTrackerArn})
@@ -1141,7 +1358,7 @@ module DeleteEventTracker = {
 module DeleteDatasetGroup = {
   type t
   type request = {@ocaml.doc("<p>The ARN of the dataset group to delete.</p>") datasetGroupArn: arn}
-
+  type response = {.}
   @module("@aws-sdk/client-personalize") @new
   external new: request => t = "DeleteDatasetGroupCommand"
   let make = (~datasetGroupArn, ()) => new({datasetGroupArn: datasetGroupArn})
@@ -1153,7 +1370,7 @@ module DeleteDataset = {
   type request = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the dataset to delete.</p>") datasetArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-personalize") @new external new: request => t = "DeleteDatasetCommand"
   let make = (~datasetArn, ()) => new({datasetArn: datasetArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1164,7 +1381,7 @@ module DeleteCampaign = {
   type request = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the campaign to delete.</p>") campaignArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-personalize") @new external new: request => t = "DeleteCampaignCommand"
   let make = (~campaignArn, ()) => new({campaignArn: campaignArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1204,6 +1421,9 @@ module CreateSolutionVersion = {
 module CreateSchema = {
   type t
   type request = {
+    @ocaml.doc("<p>The domain for the schema. If you are creating a schema for a dataset in a Domain dataset group, specify
+    the domain you chose when you created the Domain dataset group.</p>")
+    domain: option<domain>,
     @ocaml.doc("<p>A schema in Avro JSON format.</p>") schema: avroSchema,
     @ocaml.doc("<p>The name for the schema.</p>") name: name,
   }
@@ -1212,7 +1432,7 @@ module CreateSchema = {
     schemaArn: option<arn>,
   }
   @module("@aws-sdk/client-personalize") @new external new: request => t = "CreateSchemaCommand"
-  let make = (~schema, ~name, ()) => new({schema: schema, name: name})
+  let make = (~schema, ~name, ~domain=?, ()) => new({domain: domain, schema: schema, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1258,21 +1478,29 @@ module CreateEventTracker = {
 module CreateDatasetGroup = {
   type t
   type request = {
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of a KMS key used to encrypt the datasets.</p>")
+    @ocaml.doc("<p>The domain of the dataset group. Specify a domain to create a Domain dataset group. The domain you specify 
+      determines the default schemas for datasets and the use cases available for recommenders. If you don't specify a domain,
+      you create a Custom dataset group with solution versions that you deploy with a campaign.
+    </p>")
+    domain: option<domain>,
+    @ocaml.doc(
+      "<p>The Amazon Resource Name (ARN) of a Key Management Service (KMS) key used to encrypt the datasets.</p>"
+    )
     kmsKeyArn: option<kmsKeyArn>,
-    @ocaml.doc("<p>The ARN of the IAM role that has permissions to access the KMS key. Supplying an IAM
+    @ocaml.doc("<p>The ARN of the Identity and Access Management (IAM) role that has permissions to access the Key Management Service (KMS) key. Supplying an IAM
       role is only valid when also specifying a KMS key.</p>")
     roleArn: option<roleArn>,
     @ocaml.doc("<p>The name for the new dataset group.</p>") name: name,
   }
   type response = {
+    @ocaml.doc("<p>The domain for the new Domain dataset group.</p>") domain: option<domain>,
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the new dataset group.</p>")
     datasetGroupArn: option<arn>,
   }
   @module("@aws-sdk/client-personalize") @new
   external new: request => t = "CreateDatasetGroupCommand"
-  let make = (~name, ~kmsKeyArn=?, ~roleArn=?, ()) =>
-    new({kmsKeyArn: kmsKeyArn, roleArn: roleArn, name: name})
+  let make = (~name, ~domain=?, ~kmsKeyArn=?, ~roleArn=?, ()) =>
+    new({domain: domain, kmsKeyArn: kmsKeyArn, roleArn: roleArn, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1429,6 +1657,25 @@ module CreateDatasetImportJob = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module UpdateRecommender = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The configuration details of the recommender.</p>")
+    recommenderConfig: recommenderConfig,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the recommender to modify.</p>")
+    recommenderArn: arn,
+  }
+  type response = {
+    @ocaml.doc("<p>The same recommender Amazon Resource Name (ARN) as given in the request.</p>")
+    recommenderArn: option<arn>,
+  }
+  @module("@aws-sdk/client-personalize") @new
+  external new: request => t = "UpdateRecommenderCommand"
+  let make = (~recommenderConfig, ~recommenderArn, ()) =>
+    new({recommenderConfig: recommenderConfig, recommenderArn: recommenderArn})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module UpdateCampaign = {
   type t
   type request = {
@@ -1521,6 +1768,11 @@ module ListSchemas = {
 module ListRecipes = {
   type t
   type request = {
+    @ocaml.doc("<p>
+      Filters returned recipes by domain for a Domain dataset group. Only recipes (Domain dataset group use cases)
+      for this domain are included in the response. If you don't specify a domain, only non-domain recipes are returned.
+    </p>")
+    domain: option<domain>,
     @ocaml.doc("<p>The maximum number of recipes to return.</p>") maxResults: option<maxResults>,
     @ocaml.doc("<p>A token returned from the previous call to <code>ListRecipes</code> for getting
       the next set of recipes (if they exist).</p>")
@@ -1533,8 +1785,13 @@ module ListRecipes = {
     @ocaml.doc("<p>The list of available recipes.</p>") recipes: option<recipes>,
   }
   @module("@aws-sdk/client-personalize") @new external new: request => t = "ListRecipesCommand"
-  let make = (~maxResults=?, ~nextToken=?, ~recipeProvider=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, recipeProvider: recipeProvider})
+  let make = (~domain=?, ~maxResults=?, ~nextToken=?, ~recipeProvider=?, ()) =>
+    new({
+      domain: domain,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      recipeProvider: recipeProvider,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1701,6 +1958,33 @@ module ListCampaigns = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module ListBatchSegmentJobs = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The maximum number of batch segment job results to return in each page. The default
+      value is 100.</p>")
+    maxResults: option<maxResults>,
+    @ocaml.doc("<p>The token to request the next page of results.</p>")
+    nextToken: option<nextToken>,
+    @ocaml.doc(
+      "<p>The Amazon Resource Name (ARN) of the solution version that the batch segment jobs used to generate batch segments.</p>"
+    )
+    solutionVersionArn: option<arn>,
+  }
+  type response = {
+    @ocaml.doc("<p>The token to use to retrieve the next page of results. The value is <code>null</code> when
+      there are no more results to return.</p>")
+    nextToken: option<nextToken>,
+    @ocaml.doc("<p>A list containing information on each job that is returned.</p>")
+    batchSegmentJobs: option<batchSegmentJobs>,
+  }
+  @module("@aws-sdk/client-personalize") @new
+  external new: request => t = "ListBatchSegmentJobsCommand"
+  let make = (~maxResults=?, ~nextToken=?, ~solutionVersionArn=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken, solutionVersionArn: solutionVersionArn})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module ListBatchInferenceJobs = {
   type t
   type request = {
@@ -1775,12 +2059,43 @@ module DescribeDatasetImportJob = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module CreateRecommender = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The configuration details of the recommender.</p>")
+    recommenderConfig: option<recommenderConfig>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the recipe that the recommender will use. For a recommender, a recipe is a Domain dataset group
+      use case. Only Domain dataset group use cases can be used to create a recommender. For information about use cases see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/domain-use-cases.html\">Choosing recommender use cases</a>.
+    </p>")
+    recipeArn: arn,
+    @ocaml.doc(
+      "<p>The Amazon Resource Name (ARN) of the destination domain dataset group for the recommender.</p>"
+    )
+    datasetGroupArn: arn,
+    @ocaml.doc("<p>The name of the recommender.</p>") name: name,
+  }
+  type response = {
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the recommender.</p>")
+    recommenderArn: option<arn>,
+  }
+  @module("@aws-sdk/client-personalize") @new
+  external new: request => t = "CreateRecommenderCommand"
+  let make = (~recipeArn, ~datasetGroupArn, ~name, ~recommenderConfig=?, ()) =>
+    new({
+      recommenderConfig: recommenderConfig,
+      recipeArn: recipeArn,
+      datasetGroupArn: datasetGroupArn,
+      name: name,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module CreateDatasetExportJob = {
   type t
   type request = {
     @ocaml.doc("<p>The path to the Amazon S3 bucket where the job's output is stored.</p>")
     jobOutput: datasetExportJobOutput,
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management service role that has permissions to add data to your
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the IAM service role that has permissions to add data to your
       output Amazon S3 bucket.</p>")
     roleArn: roleArn,
     @ocaml.doc("<p>The data to export, based on how you imported the data. You can choose to export only <code>BULK</code> data that you imported using a dataset import job, 
@@ -1818,7 +2133,7 @@ module CreateCampaign = {
     campaignConfig: option<campaignConfig>,
     @ocaml.doc("<p>Specifies the requested minimum provisioned transactions (recommendations) per second that
       Amazon Personalize will support.</p>")
-    minProvisionedTPS: transactionsPerSecond,
+    minProvisionedTPS: option<transactionsPerSecond>,
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the solution version to deploy.</p>")
     solutionVersionArn: arn,
     @ocaml.doc(
@@ -1830,12 +2145,63 @@ module CreateCampaign = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the campaign.</p>") campaignArn: option<arn>,
   }
   @module("@aws-sdk/client-personalize") @new external new: request => t = "CreateCampaignCommand"
-  let make = (~minProvisionedTPS, ~solutionVersionArn, ~name, ~campaignConfig=?, ()) =>
+  let make = (~solutionVersionArn, ~name, ~campaignConfig=?, ~minProvisionedTPS=?, ()) =>
     new({
       campaignConfig: campaignConfig,
       minProvisionedTPS: minProvisionedTPS,
       solutionVersionArn: solutionVersionArn,
       name: name,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module CreateBatchSegmentJob = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The ARN of the Amazon Identity and Access Management role that has permissions to read and write to your input and output
+      Amazon S3 buckets respectively.</p>")
+    roleArn: roleArn,
+    @ocaml.doc("<p>The Amazon S3 path for the bucket where the job's output will be stored.</p>")
+    jobOutput: batchSegmentJobOutput,
+    @ocaml.doc(
+      "<p>The Amazon S3 path for the input data used to generate the batch segment job.</p>"
+    )
+    jobInput: batchSegmentJobInput,
+    @ocaml.doc(
+      "<p>The number of predicted users generated by the batch segment job for each line of input data.</p>"
+    )
+    numResults: option<numBatchResults>,
+    @ocaml.doc("<p>The ARN of the filter to apply to the batch segment job. For more information on using
+      filters, see <a>filter-batch</a>.</p>")
+    filterArn: option<arn>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the solution version you want the batch segment job to use to generate
+      batch segments.</p>")
+    solutionVersionArn: arn,
+    @ocaml.doc("<p>The name of the batch segment job to create.</p>") jobName: name,
+  }
+  type response = {
+    @ocaml.doc("<p>The ARN of the batch segment job.</p>") batchSegmentJobArn: option<arn>,
+  }
+  @module("@aws-sdk/client-personalize") @new
+  external new: request => t = "CreateBatchSegmentJobCommand"
+  let make = (
+    ~roleArn,
+    ~jobOutput,
+    ~jobInput,
+    ~solutionVersionArn,
+    ~jobName,
+    ~numResults=?,
+    ~filterArn=?,
+    (),
+  ) =>
+    new({
+      roleArn: roleArn,
+      jobOutput: jobOutput,
+      jobInput: jobInput,
+      numResults: numResults,
+      filterArn: filterArn,
+      solutionVersionArn: solutionVersionArn,
+      jobName: jobName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
@@ -1924,6 +2290,21 @@ module DescribeDatasetExportJob = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module DescribeBatchSegmentJob = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The ARN of the batch segment job to describe.</p>") batchSegmentJobArn: arn,
+  }
+  type response = {
+    @ocaml.doc("<p>Information on the specified batch segment job.</p>")
+    batchSegmentJob: option<batchSegmentJob>,
+  }
+  @module("@aws-sdk/client-personalize") @new
+  external new: request => t = "DescribeBatchSegmentJobCommand"
+  let make = (~batchSegmentJobArn, ()) => new({batchSegmentJobArn: batchSegmentJobArn})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module DescribeBatchInferenceJob = {
   type t
   type request = {
@@ -1936,6 +2317,44 @@ module DescribeBatchInferenceJob = {
   @module("@aws-sdk/client-personalize") @new
   external new: request => t = "DescribeBatchInferenceJobCommand"
   let make = (~batchInferenceJobArn, ()) => new({batchInferenceJobArn: batchInferenceJobArn})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module ListRecommenders = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The maximum number of recommenders to return.</p>")
+    maxResults: option<maxResults>,
+    @ocaml.doc("<p>A token returned from the previous call to <code>ListRecommenders</code> for getting
+      the next set of recommenders (if they exist).</p>")
+    nextToken: option<nextToken>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the Domain dataset group to list the recommenders for. When
+      a Domain dataset group is not specified, all the recommenders associated with the account are listed.</p>")
+    datasetGroupArn: option<arn>,
+  }
+  type response = {
+    @ocaml.doc("<p>A token for getting the next set of recommenders (if they exist).</p>")
+    nextToken: option<nextToken>,
+    @ocaml.doc("<p>A list of the recommenders.</p>") recommenders: option<recommenders>,
+  }
+  @module("@aws-sdk/client-personalize") @new external new: request => t = "ListRecommendersCommand"
+  let make = (~maxResults=?, ~nextToken=?, ~datasetGroupArn=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken, datasetGroupArn: datasetGroupArn})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module DescribeRecommender = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the recommender to describe.</p>")
+    recommenderArn: arn,
+  }
+  type response = {
+    @ocaml.doc("<p>The properties of the recommender.</p>") recommender: option<recommender>,
+  }
+  @module("@aws-sdk/client-personalize") @new
+  external new: request => t = "DescribeRecommenderCommand"
+  let make = (~recommenderArn, ()) => new({recommenderArn: recommenderArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

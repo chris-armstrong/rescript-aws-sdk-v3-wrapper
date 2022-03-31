@@ -948,7 +948,7 @@ module PutGroupConfiguration = {
     @as("Group")
     group: option<groupString>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-resource-groups") @new
   external new: request => t = "PutGroupConfigurationCommand"
   let make = (~configuration=?, ~group=?, ()) => new({configuration: configuration, group: group})

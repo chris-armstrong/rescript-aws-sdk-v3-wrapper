@@ -14,8 +14,11 @@ type baseBoolean = bool
 type baseInteger = int
 type baseTimestamp = Js.Date.t
 type baseLong = float
+type transferOption = [@as("LOCAL_USE") #LOCAL_USE | @as("EXPORT") #EXPORT | @as("IMPORT") #IMPORT]
 type timestamp_ = Js.Date.t
 type string_ = string
+type storageUnit = [@as("TB") #TB]
+type storageLimit = int
 type snsTopicARN = string
 type snowballType = [
   | @as("SNC1_SSD") #SNC1_SSD
@@ -51,6 +54,10 @@ type shippingLabelStatus = [
 type shipmentState = [@as("RETURNED") #RETURNED | @as("RECEIVED") #RECEIVED]
 type roleARN = string
 type resourceARN = string
+type remoteManagement = [
+  | @as("INSTALLED_AUTOSTART") #INSTALLED_AUTOSTART
+  | @as("INSTALLED_ONLY") #INSTALLED_ONLY
+]
 type longTermPricingType = [@as("ThreeYear") #ThreeYear | @as("OneYear") #OneYear]
 type longTermPricingId = string
 type long = float
@@ -76,6 +83,10 @@ type jobId = string
 type javaBoolean = bool
 type integer_ = int
 type gstin = string
+type deviceServiceName = [
+  | @as("S3_ON_DEVICE_SERVICE") #S3_ON_DEVICE_SERVICE
+  | @as("NFS_ON_DEVICE_SERVICE") #NFS_ON_DEVICE_SERVICE
+]
 type clusterState = [
   | @as("Cancelled") #Cancelled
   | @as("Complete") #Complete
@@ -87,10 +98,33 @@ type clusterId = string
 type boolean_ = bool
 type amiId = string
 type addressId = string
-@ocaml.doc("<p>Configures the wireless connection on an AWS Snowcone device.</p>")
+@ocaml.doc("<p>Configures the wireless connection on an Snowcone device.</p>")
 type wirelessConnection = {
-  @ocaml.doc("<p>Enables the Wi-Fi adapter on an AWS Snowcone device.</p>") @as("IsWifiEnabled")
+  @ocaml.doc("<p>Enables the Wi-Fi adapter on an Snowcone device.</p>") @as("IsWifiEnabled")
   isWifiEnabled: option<boolean_>,
+}
+@ocaml.doc("<p>An object that represents the service or services on the Snow Family device that your
+      transferred data will be exported from or imported into. Amazon Web Services Snow Family supports Amazon S3 and
+      NFS (Network File System).</p>")
+type targetOnDeviceService = {
+  @ocaml.doc("<p>Specifies whether the data is being imported or exported. You can import or export the
+      data, or use it locally on the device.</p>")
+  @as("TransferOption")
+  transferOption: option<transferOption>,
+  @ocaml.doc("<p>Specifies the name of the service on the Snow Family device that your transferred data
+      will be exported from or imported into.</p>")
+  @as("ServiceName")
+  serviceName: option<deviceServiceName>,
+}
+@ocaml.doc("<p>An object that represents the metadata and configuration settings for the Storage Gateway
+      service Tape Gateway type on an Amazon Web Services Snow Family device.</p>")
+type tgwonDeviceServiceConfiguration = {
+  @ocaml.doc("<p>The scale unit of the virtual tapes on the device.</p>") @as("StorageUnit")
+  storageUnit: option<storageUnit>,
+  @ocaml.doc("<p>The maximum number of virtual tapes to store on one Snow Family device. Due to physical
+      resource limitations, this value must be set to 80 for Snowball Edge.</p>")
+  @as("StorageLimit")
+  storageLimit: option<storageLimit>,
 }
 @ocaml.doc("<p>The <code>Status</code> and <code>TrackingNumber</code> information for an inbound or
       outbound shipment.</p>")
@@ -102,6 +136,16 @@ type shipment = {
   @as("TrackingNumber")
   trackingNumber: option<string_>,
   @ocaml.doc("<p>Status information for a shipment.</p>") @as("Status") status: option<string_>,
+}
+@ocaml.doc("<p>An object that represents the metadata and configuration settings for the NFS (Network
+      File System) service on an Amazon Web Services Snow Family device.</p>")
+type nfsonDeviceServiceConfiguration = {
+  @ocaml.doc("<p>The scale unit of the NFS storage on the device.</p>
+         <p>Valid values: TB.</p>")
+  @as("StorageUnit")
+  storageUnit: option<storageUnit>,
+  @ocaml.doc("<p>The maximum NFS storage for one Snow Family device.</p>") @as("StorageLimit")
+  storageLimit: option<storageLimit>,
 }
 type longTermPricingAssociatedJobIdList = array<jobId>
 @ocaml.doc("<p>Contains a key range. For export jobs, a <code>S3Resource</code> object can have an
@@ -119,16 +163,16 @@ type keyRange = {
   beginMarker: option<string_>,
 }
 type jobStateList = array<jobState>
-@ocaml.doc("<p>Contains job logs. Whenever a Snow device is used to import data into or export data out of
-      Amazon S3, you'll have the option of downloading a PDF job report. Job logs are returned as a
-      part of the response syntax of the <code>DescribeJob</code> action in the
+@ocaml.doc("<p>Contains job logs. Whenever a Snow device is used to import data into or export data
+      out of Amazon S3, you'll have the option of downloading a PDF job report. Job logs are
+      returned as a part of the response syntax of the <code>DescribeJob</code> action in the
         <code>JobMetadata</code> data type. The job logs can be accessed for up to 60 minutes after
       this request has been made. To access any of the job logs after 60 minutes have passed, you'll
       have to make another call to the <code>DescribeJob</code> action.</p>
 
          <p>For import jobs, the PDF job report becomes available at the end of the import process.
-      For export jobs, your job report typically becomes available while the Snow device for your job
-      part is being delivered to you.</p>
+      For export jobs, your job report typically becomes available while the Snow device for your
+      job part is being delivered to you.</p>
 
          <p>The job report provides you insight into the state of your Amazon S3 data transfer. The
       report includes details about your job or job part for your records.</p>
@@ -161,11 +205,11 @@ type jobListEntry = {
   @ocaml.doc("<p>The type of device used with this job.</p>") @as("SnowballType")
   snowballType: option<snowballType>,
   @ocaml.doc("<p>The type of job.</p>") @as("JobType") jobType: option<jobType>,
-  @ocaml.doc("<p>A value that indicates that this job is a main job. A main job represents a
-      successful request to create an export job. Main jobs aren't associated with any Snowballs.
-      Instead, each main job will have at least one job part, and each job part is associated with
-      a Snowball. It might take some time before the job parts associated with a particular main
-      job are listed, because they are created after the main job is created.</p>")
+  @ocaml.doc("<p>A value that indicates that this job is a main job. A main job represents a successful
+      request to create an export job. Main jobs aren't associated with any Snowballs. Instead, each
+      main job will have at least one job part, and each job part is associated with a Snowball. It
+      might take some time before the job parts associated with a particular main job are listed,
+      because they are created after the main job is created.</p>")
   @as("IsMaster")
   isMaster: option<boolean_>,
   @ocaml.doc("<p>The current state of this job.</p>") @as("JobState") jobState: option<jobState>,
@@ -174,37 +218,40 @@ type jobListEntry = {
   @as("JobId")
   jobId: option<string_>,
 }
-@ocaml.doc("<p>The tax documents required in AWS Regions in India.</p>")
+@ocaml.doc("<p>The tax documents required in Amazon Web Services Region in India.</p>")
 type indtaxDocuments = {
-  @ocaml.doc("<p>The Goods and Services Tax (GST) documents required in AWS Regions in India.</p>")
+  @ocaml.doc("<p>The Goods and Services Tax (GST) documents required in Amazon Web Services Region in
+      India.</p>")
   @as("GSTIN")
   gstin: option<gstin>,
 }
 @ocaml.doc("<p>The container for the <a>EventTriggerDefinition$EventResourceARN</a>.</p>")
 type eventTriggerDefinition = {
-  @ocaml.doc("<p>The Amazon Resource Name (ARN) for any local Amazon S3 resource that is an AWS Lambda
-      function's event trigger associated with this job.</p>")
+  @ocaml.doc(
+    "<p>The Amazon Resource Name (ARN) for any local Amazon S3 resource that is an Lambda function's event trigger associated with this job.</p>"
+  )
   @as("EventResourceARN")
   eventResourceARN: option<resourceARN>,
 }
 @ocaml.doc("<p>A JSON-formatted object that contains the IDs for an Amazon Machine Image (AMI),
       including the Amazon EC2 AMI ID and the Snow device AMI ID. Each AMI has these two IDs to
-      simplify identifying the AMI in both the AWS Cloud and on the device.</p>")
+      simplify identifying the AMI in both the Amazon Web Services Cloud and on the device.</p>")
 type ec2AmiResource = {
   @ocaml.doc("<p>The ID of the AMI on the Snow device.</p>") @as("SnowballAmiId")
   snowballAmiId: option<string_>,
   @ocaml.doc("<p>The ID of the AMI in Amazon EC2.</p>") @as("AmiId") amiId: amiId,
 }
-@ocaml.doc("<p>Defines the real-time status of a Snow device's data transfer while the device is at AWS.
-      This data is only available while a job has a <code>JobState</code> value of
-        <code>InProgress</code>, for both import and export jobs.</p>")
+@ocaml.doc("<p>Defines the real-time status of a Snow device's data transfer while the device is at
+        Amazon Web Services. This data is only available while a job has a <code>JobState</code>
+      value of <code>InProgress</code>, for both import and export jobs.</p>")
 type dataTransfer = {
-  @ocaml.doc("<p>The total number of objects for a transfer between a Snow device and Amazon S3. This value
-      is set to 0 (zero) until all the keys that will be transferred have been listed.</p>")
+  @ocaml.doc("<p>The total number of objects for a transfer between a Snow device and Amazon S3. This
+      value is set to 0 (zero) until all the keys that will be transferred have been
+      listed.</p>")
   @as("TotalObjects")
   totalObjects: option<long>,
-  @ocaml.doc("<p>The total bytes of data for a transfer between a Snow device and Amazon S3. This value is
-      set to 0 (zero) until all the keys that will be transferred have been listed.</p>")
+  @ocaml.doc("<p>The total bytes of data for a transfer between a Snow device and Amazon S3. This value
+      is set to 0 (zero) until all the keys that will be transferred have been listed.</p>")
   @as("TotalBytes")
   totalBytes: option<long>,
   @ocaml.doc("<p>The number of objects transferred between a Snow device and Amazon S3.</p>")
@@ -240,9 +287,9 @@ type clusterListEntry = {
   @as("ClusterId")
   clusterId: option<string_>,
 }
-@ocaml.doc("<p>The address that you want the Snow device(s) associated with a specific job to
-      be shipped to. Addresses are validated at the time of creation. The address you provide must
-      be located within the serviceable area of your region. Although no individual elements of the
+@ocaml.doc("<p>The address that you want the Snow device(s) associated with a specific job to be
+      shipped to. Addresses are validated at the time of creation. The address you provide must be
+      located within the serviceable area of your region. Although no individual elements of the
         <code>Address</code> are required, if the address is invalid or unsupported, then an
       exception is thrown.</p>")
 type address = {
@@ -289,11 +336,12 @@ type address = {
   name: option<string_>,
   @ocaml.doc("<p>The unique ID for an address.</p>") @as("AddressId") addressId: option<addressId>,
 }
-@ocaml.doc("<p>The tax documents required in your AWS Region.</p>")
+@ocaml.doc("<p>The tax documents required in your Amazon Web Services Region.</p>")
 type taxDocuments = {@as("IND") ind: option<indtaxDocuments>}
-@ocaml.doc("<p>Specifies the device configuration for an AWS Snowcone job. </p>")
+type targetOnDeviceServiceList = array<targetOnDeviceService>
+@ocaml.doc("<p>Specifies the device configuration for an Snowcone job.</p>")
 type snowconeDeviceConfiguration = {
-  @ocaml.doc("<p>Configures the wireless connection for the AWS Snowcone device.</p>")
+  @ocaml.doc("<p>Configures the wireless connection for the Snowcone device.</p>")
   @as("WirelessConnection")
   wirelessConnection: option<wirelessConnection>,
 }
@@ -305,12 +353,12 @@ type shippingDetails = {
   @as("OutboundShipment")
   outboundShipment: option<shipment>,
   @ocaml.doc("<p>The <code>Status</code> and <code>TrackingNumber</code> values for a Snow device being
-      returned to AWS for a particular job.</p>")
+      returned to Amazon Web Services for a particular job.</p>")
   @as("InboundShipment")
   inboundShipment: option<shipment>,
   @ocaml.doc("<p>The shipping speed for a particular job. This speed doesn't dictate how soon you'll get
-      the Snow device from the job's creation date. This speed represents how quickly it moves to its
-      destination while in transit. Regional shipping speeds are as follows:</p>
+      the Snow device from the job's creation date. This speed represents how quickly it moves to
+      its destination while in transit. Regional shipping speeds are as follows:</p>
 
          <ul>
             <li>
@@ -318,13 +366,13 @@ type shippingDetails = {
           express are delivered in about a day.</p>
             </li>
             <li>
-               <p>In the European Union (EU), you have access to express shipping. Typically,
-          Snow devices shipped express are delivered in about a day. In addition, most countries in the
+               <p>In the European Union (EU), you have access to express shipping. Typically, Snow
+          devices shipped express are delivered in about a day. In addition, most countries in the
           EU have access to standard shipping, which typically takes less than a week, one
           way.</p>
             </li>
             <li>
-               <p>In India, Snow device are delivered in one to seven days.</p>
+               <p>In India, Snow devices are delivered in one to seven days.</p>
             </li>
             <li>
                <p>In the United States of America (US), you have access to one-day shipping and
@@ -334,20 +382,17 @@ type shippingDetails = {
   @as("ShippingOption")
   shippingOption: option<shippingOption>,
 }
-@ocaml.doc("<p>Each <code>S3Resource</code> object represents an Amazon S3 bucket that your
-      transferred data will be exported from or imported into. For export jobs, this object can have
-      an optional <code>KeyRange</code> value. The length of the range is defined at job creation,
-      and has either an inclusive <code>BeginMarker</code>, an inclusive <code>EndMarker</code>, or
-      both. Ranges are UTF-8 binary sorted.</p>")
-type s3Resource = {
-  @ocaml.doc("<p>For export jobs, you can provide an optional <code>KeyRange</code> within a specific
-      Amazon S3 bucket. The length of the range is defined at job creation, and has either an
-      inclusive <code>BeginMarker</code>, an inclusive <code>EndMarker</code>, or both. Ranges are
-      UTF-8 binary sorted.</p>")
-  @as("KeyRange")
-  keyRange: option<keyRange>,
-  @ocaml.doc("<p>The Amazon Resource Name (ARN) of an Amazon S3 bucket.</p>") @as("BucketArn")
-  bucketArn: option<resourceARN>,
+@ocaml.doc("<p>An object that represents the metadata and configuration settings for services on an Amazon Web Services
+      Snow Family device.</p>")
+type onDeviceServiceConfiguration = {
+  @ocaml.doc(
+    "<p>Represents the Storage Gateway service Tape Gateway type on a Snow Family device.</p>"
+  )
+  @as("TGWOnDeviceService")
+  tgwonDeviceService: option<tgwonDeviceServiceConfiguration>,
+  @ocaml.doc("<p>Represents the NFS (Network File System) service on a Snow Family device.</p>")
+  @as("NFSOnDeviceService")
+  nfsonDeviceService: option<nfsonDeviceServiceConfiguration>,
 }
 @ocaml.doc("<p>The Amazon Simple Notification Service (Amazon SNS) notification settings associated
       with a specific job. The <code>Notification</code> object is returned as a part of the
@@ -369,44 +414,41 @@ type notification = {
       create Amazon Resource Names (ARNs) for topics by using the <a href=\"https://docs.aws.amazon.com/sns/latest/api/API_CreateTopic.html\">CreateTopic</a> Amazon SNS API
       action.</p>
 
-         <p>You can subscribe email addresses to an Amazon SNS topic through the AWS Management
-      Console, or by using the <a href=\"https://docs.aws.amazon.com/sns/latest/api/API_Subscribe.html\">Subscribe</a> AWS Simple Notification Service (SNS) API action.</p>")
+         <p>You can subscribe email addresses to an Amazon SNS topic through the Amazon Web Services Management Console, or by using the <a href=\"https://docs.aws.amazon.com/sns/latest/api/API_Subscribe.html\">Subscribe</a> Amazon Simple Notification
+      Service (Amazon SNS) API action.</p>")
   @as("SnsTopicARN")
   snsTopicARN: option<snsTopicARN>,
 }
-@ocaml.doc(
-  "<p>Each <code>LongTermPricingListEntry</code> object contains information about a long term pricing type.</p>"
-)
+@ocaml.doc("<p>Each <code>LongTermPricingListEntry</code> object contains information about a long-term
+      pricing type.</p>")
 type longTermPricingListEntry = {
-  @ocaml.doc("<p>The IDs of the jobs that are associated with a long term pricing type.</p>")
+  @ocaml.doc("<p>The IDs of the jobs that are associated with a long-term pricing type.</p>")
   @as("JobIds")
   jobIds: option<longTermPricingAssociatedJobIdList>,
-  @ocaml.doc(
-    "<p>The type of AWS Snow Family device associated with this long term pricing job.</p>"
-  )
+  @ocaml.doc("<p>The type of Snow Family Devices associated with this long-term pricing job.</p>")
   @as("SnowballType")
   snowballType: option<snowballType>,
-  @ocaml.doc("<p>The status of the long term pricing type.</p>") @as("LongTermPricingStatus")
+  @ocaml.doc("<p>The status of the long-term pricing type.</p>") @as("LongTermPricingStatus")
   longTermPricingStatus: option<string_>,
-  @ocaml.doc("<p>If set to <code>true</code>, specifies that the current long term pricing type for the
-      device should be automatically renewed before the long term pricing contract expires.</p>")
+  @ocaml.doc("<p>If set to <code>true</code>, specifies that the current long-term pricing type for the
+      device should be automatically renewed before the long-term pricing contract expires.</p>")
   @as("IsLongTermPricingAutoRenew")
   isLongTermPricingAutoRenew: option<javaBoolean>,
-  @ocaml.doc("<p>A new device that replaces a device that is ordered with long term pricing.</p>")
+  @ocaml.doc("<p>A new device that replaces a device that is ordered with long-term pricing.</p>")
   @as("ReplacementJob")
   replacementJob: option<jobId>,
-  @ocaml.doc("<p>The current active jobs on the device the long term pricing type.</p>")
+  @ocaml.doc("<p>The current active jobs on the device the long-term pricing type.</p>")
   @as("CurrentActiveJob")
   currentActiveJob: option<jobId>,
-  @ocaml.doc("<p>The type of long term pricing that was selected for the device.</p>")
+  @ocaml.doc("<p>The type of long-term pricing that was selected for the device.</p>")
   @as("LongTermPricingType")
   longTermPricingType: option<longTermPricingType>,
-  @ocaml.doc("<p>The start date of the long term pricing contract.</p>")
+  @ocaml.doc("<p>The start date of the long-term pricing contract.</p>")
   @as("LongTermPricingStartDate")
   longTermPricingStartDate: option<timestamp_>,
-  @ocaml.doc("<p>The end date the long term pricing contract.</p>") @as("LongTermPricingEndDate")
+  @ocaml.doc("<p>The end date the long-term pricing contract.</p>") @as("LongTermPricingEndDate")
   longTermPricingEndDate: option<timestamp_>,
-  @ocaml.doc("<p>The ID of the long term pricing type for the device.</p>") @as("LongTermPricingId")
+  @ocaml.doc("<p>The ID of the long-term pricing type for the device.</p>") @as("LongTermPricingId")
   longTermPricingId: option<longTermPricingId>,
 }
 type jobListEntryList = array<jobListEntry>
@@ -415,7 +457,26 @@ type ec2AmiResourceList = array<ec2AmiResource>
 type compatibleImageList = array<compatibleImage>
 type clusterListEntryList = array<clusterListEntry>
 type addressList = array<address>
-type s3ResourceList = array<s3Resource>
+@ocaml.doc("<p>Each <code>S3Resource</code> object represents an Amazon S3 bucket that your
+      transferred data will be exported from or imported into. For export jobs, this object can have
+      an optional <code>KeyRange</code> value. The length of the range is defined at job creation,
+      and has either an inclusive <code>BeginMarker</code>, an inclusive <code>EndMarker</code>, or
+      both. Ranges are UTF-8 binary sorted.</p>")
+type s3Resource = {
+  @ocaml.doc("<p>Specifies the service or services on the Snow Family device that your transferred data
+      will be exported from or imported into. Amazon Web Services Snow Family supports Amazon S3 and NFS (Network File
+      System).</p>")
+  @as("TargetOnDeviceServices")
+  targetOnDeviceServices: option<targetOnDeviceServiceList>,
+  @ocaml.doc("<p>For export jobs, you can provide an optional <code>KeyRange</code> within a specific
+      Amazon S3 bucket. The length of the range is defined at job creation, and has either an
+      inclusive <code>BeginMarker</code>, an inclusive <code>EndMarker</code>, or both. Ranges are
+      UTF-8 binary sorted.</p>")
+  @as("KeyRange")
+  keyRange: option<keyRange>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of an Amazon S3 bucket.</p>") @as("BucketArn")
+  bucketArn: option<resourceARN>,
+}
 type longTermPricingEntryList = array<longTermPricingListEntry>
 @ocaml.doc("<p>Identifies </p>")
 type lambdaResource = {
@@ -424,21 +485,23 @@ type lambdaResource = {
   )
   @as("EventTriggers")
   eventTriggers: option<eventTriggerDefinitionList>,
-  @ocaml.doc("<p>An Amazon Resource Name (ARN) that represents an AWS Lambda function to be triggered by
-      PUT object actions on the associated local Amazon S3 resource.</p>")
+  @ocaml.doc("<p>An Amazon Resource Name (ARN) that represents an Lambda function to be
+      triggered by PUT object actions on the associated local Amazon S3 resource.</p>")
   @as("LambdaArn")
   lambdaArn: option<resourceARN>,
 }
 @ocaml.doc("<p>The container for <code>SnowconeDeviceConfiguration</code>. </p>")
 type deviceConfiguration = {
-  @ocaml.doc("<p>Returns information about the device configuration for an AWS Snowcone job.</p>")
+  @ocaml.doc("<p>Returns information about the device configuration for an Snowcone
+      job.</p>")
   @as("SnowconeDeviceConfiguration")
   snowconeDeviceConfiguration: option<snowconeDeviceConfiguration>,
 }
+type s3ResourceList = array<s3Resource>
 type lambdaResourceList = array<lambdaResource>
-@ocaml.doc("<p>Contains an array of AWS resource objects. Each object represents an Amazon S3 bucket,
-      an AWS Lambda function, or an Amazon Machine Image (AMI) based on Amazon EC2 that is
-      associated with a particular job.</p>")
+@ocaml.doc("<p>Contains an array of Amazon Web Services resource objects. Each object represents an
+      Amazon S3 bucket, an Lambda function, or an Amazon Machine Image (AMI) based
+      on Amazon EC2 that is associated with a particular job.</p>")
 type jobResource = {
   @ocaml.doc("<p>The Amazon Machine Images (AMIs) associated with this job.</p>")
   @as("Ec2AmiResources")
@@ -452,10 +515,22 @@ type jobResource = {
       and other important metadata. This information is returned as a part of the response syntax of
       the <code>DescribeJob</code> action.</p>")
 type jobMetadata = {
-  @ocaml.doc("<p>The ID of the long term pricing type for the device.</p>") @as("LongTermPricingId")
+  @ocaml.doc("<p>Represents metadata and configuration settings for services on an Amazon Web Services Snow Family
+      device.</p>")
+  @as("OnDeviceServiceConfiguration")
+  onDeviceServiceConfiguration: option<onDeviceServiceConfiguration>,
+  @ocaml.doc("<p>The ID of the long-term pricing type for the device.</p>") @as("LongTermPricingId")
   longTermPricingId: option<longTermPricingId>,
+  @ocaml.doc("<p>Allows you to securely operate and manage Snowcone devices remotely from outside of your
+      internal network. When set to <code>INSTALLED_AUTOSTART</code>, remote management will
+      automatically be available when the device arrives at your location. Otherwise, you need to
+      use the Snowball Client to manage the device.</p>")
+  @as("RemoteManagement")
+  remoteManagement: option<remoteManagement>,
   @as("DeviceConfiguration") deviceConfiguration: option<deviceConfiguration>,
-  @ocaml.doc("<p>The metadata associated with the tax documents required in your AWS Region.</p>")
+  @ocaml.doc(
+    "<p>The metadata associated with the tax documents required in your Amazon Web Services Region.</p>"
+  )
   @as("TaxDocuments")
   taxDocuments: option<taxDocuments>,
   @ocaml.doc("<p>The ID of the address that you want a job shipped to, after it will be
@@ -468,13 +543,14 @@ type jobMetadata = {
   clusterId: option<string_>,
   @ocaml.doc("<p>Links to Amazon S3 presigned URLs for the job report and logs. For import jobs, the PDF
       job report becomes available at the end of the import process. For export jobs, your job
-      report typically becomes available while the Snow device for your job part is being delivered to
-      you.</p>")
+      report typically becomes available while the Snow device for your job part is being delivered
+      to you.</p>")
   @as("JobLogInfo")
   jobLogInfo: option<jobLogs>,
   @ocaml.doc("<p>A value that defines the real-time status of a Snow device's data transfer while the
-      device is at AWS. This data is only available while a job has a <code>JobState</code> value of
-        <code>InProgress</code>, for both import and export jobs.</p>")
+      device is at Amazon Web Services. This data is only available while a job has a
+        <code>JobState</code> value of <code>InProgress</code>, for both import and export
+      jobs.</p>")
   @as("DataTransferProgress")
   dataTransferProgress: option<dataTransfer>,
   @ocaml.doc("<p>The Amazon Simple Notification Service (Amazon SNS) notification settings associated
@@ -502,12 +578,11 @@ type jobMetadata = {
   @as("AddressId")
   addressId: option<addressId>,
   @ocaml.doc("<p>The role ARN associated with this job. This ARN was created using the <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html\">CreateRole</a>
-      API action in AWS Identity and Access Management (IAM).</p>")
+      API action in Identity and Access Management.</p>")
   @as("RoleARN")
   roleARN: option<roleARN>,
-  @ocaml.doc("<p>The Amazon Resource Name (ARN) for the AWS Key Management Service (AWS KMS) key
-      associated with this job. This ARN was created using the <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html\">CreateKey</a> API action in AWS
-      KMS.</p>")
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) for the Key Management Service (KMS) key
+      associated with this job. This ARN was created using the <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html\">CreateKey</a> API action in KMS.</p>")
   @as("KmsKeyARN")
   kmsKeyARN: option<kmsKeyARN>,
   @ocaml.doc("<p>The description of the job, provided at job creation.</p>") @as("Description")
@@ -530,7 +605,12 @@ type jobMetadata = {
 }
 @ocaml.doc("<p>Contains metadata about a specific cluster.</p>")
 type clusterMetadata = {
-  @ocaml.doc("<p>The tax documents required in your AWS Region.</p>") @as("TaxDocuments")
+  @ocaml.doc("<p>Represents metadata and configuration settings for services on an Amazon Web Services Snow Family
+      device.</p>")
+  @as("OnDeviceServiceConfiguration")
+  onDeviceServiceConfiguration: option<onDeviceServiceConfiguration>,
+  @ocaml.doc("<p>The tax documents required in your Amazon Web Services Region.</p>")
+  @as("TaxDocuments")
   taxDocuments: option<taxDocuments>,
   @ocaml.doc("<p>The ID of the address that you want a cluster shipped to, after it will be
       shipped to its primary address. This field is not supported in most regions.</p>")
@@ -541,8 +621,8 @@ type clusterMetadata = {
   @as("Notification")
   notification: option<notification>,
   @ocaml.doc("<p>The shipping speed for each node in this cluster. This speed doesn't dictate how soon
-      you'll get each device, rather it represents how quickly each device moves to
-      its destination while in transit. Regional shipping speeds are as follows:</p>
+      you'll get each device, rather it represents how quickly each device moves to its destination
+      while in transit. Regional shipping speeds are as follows:</p>
 
          <ul>
             <li>
@@ -550,9 +630,9 @@ type clusterMetadata = {
           express are delivered in about a day.</p>
             </li>
             <li>
-               <p>In the European Union (EU), you have access to express shipping. Typically,
-          Snow devices shipped express are delivered in about a day. In addition, most countries
-          in the EU have access to standard shipping, which typically takes less than a week, one
+               <p>In the European Union (EU), you have access to express shipping. Typically, Snow
+          devices shipped express are delivered in about a day. In addition, most countries in the
+          EU have access to standard shipping, which typically takes less than a week, one
           way.</p>
             </li>
             <li>
@@ -573,10 +653,11 @@ type clusterMetadata = {
   resources: option<jobResource>,
   @ocaml.doc("<p>The creation date for this cluster.</p>") @as("CreationDate")
   creationDate: option<timestamp_>,
-  @ocaml.doc("<p>The type of AWS Snow device to use for this cluster. 
+  @ocaml.doc("<p>The type of Snowcone device to use for this cluster.
       </p>
          <note>
-            <p>For cluster jobs, AWS Snow Family currently supports only the <code>EDGE</code> device type.</p>
+            <p>For cluster jobs, Amazon Web Services Snow Family currently supports only the
+          <code>EDGE</code> device type.</p>
          </note>")
   @as("SnowballType")
   snowballType: option<snowballType>,
@@ -587,12 +668,11 @@ type clusterMetadata = {
   @ocaml.doc("<p>The current status of the cluster.</p>") @as("ClusterState")
   clusterState: option<clusterState>,
   @ocaml.doc("<p>The role ARN associated with this cluster. This ARN was created using the <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html\">CreateRole</a>
-      API action in AWS Identity and Access Management (IAM).</p>")
+      API action in Identity and Access Management (IAM).</p>")
   @as("RoleARN")
   roleARN: option<roleARN>,
   @ocaml.doc("<p>The <code>KmsKeyARN</code> Amazon Resource Name (ARN) associated with this cluster.
-      This ARN was created using the <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html\">CreateKey</a> API action in AWS Key
-      Management Service (AWS KMS).</p>")
+      This ARN was created using the <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html\">CreateKey</a> API action in Key Management Service (KMS.</p>")
   @as("KmsKeyARN")
   kmsKeyARN: option<kmsKeyARN>,
   @ocaml.doc("<p>The optional description of the cluster.</p>") @as("Description")
@@ -601,30 +681,28 @@ type clusterMetadata = {
   clusterId: option<string_>,
 }
 type jobMetadataList = array<jobMetadata>
-@ocaml.doc("<p>AWS Snow Family is a petabyte-scale data transport solution that uses secure devices to
-      transfer large amounts of data between your on-premises data centers and Amazon Simple Storage
-      Service (Amazon S3). The Snow commands described here provide access to the same
-      functionality that is available in the AWS Snow Family Management Console, which enables you to
-      create and manage jobs for a Snow device. To transfer data locally with a Snow device, you'll
-      need to use the Snowball Edge client or the Amazon S3 API Interface for Snowball or AWS OpsHub for Snow Family. For more
-      information, see the <a href=\"https://docs.aws.amazon.com/AWSImportExport/latest/ug/api-reference.html\">User Guide</a>.</p>")
+@ocaml.doc("<p>The Amazon Web Services Snow Family provides a petabyte-scale data transport solution that uses
+      secure devices to transfer large amounts of data between your on-premises data centers and
+      Amazon Simple Storage Service (Amazon S3). The Snow Family commands described here provide access to the same
+      functionality that is available in the Amazon Web Services Snow Family Management Console, which enables you to create
+      and manage jobs for a Snow Family device. To transfer data locally with a Snow Family device,
+      you'll need to use the Snowball Edge client or the Amazon S3 API Interface for Snowball or OpsHub for Snow Family. For more information, see the <a href=\"https://docs.aws.amazon.com/AWSImportExport/latest/ug/api-reference.html\">User Guide</a>.</p>")
 module UpdateLongTermPricing = {
   type t
   type request = {
-    @ocaml.doc("<p>If set to <code>true</code>, specifies that the current long term pricing type for the
-      device should be automatically renewed before the long term pricing contract expires.</p>")
+    @ocaml.doc("<p>If set to <code>true</code>, specifies that the current long-term pricing type for the
+      device should be automatically renewed before the long-term pricing contract expires.</p>")
     @as("IsLongTermPricingAutoRenew")
     isLongTermPricingAutoRenew: option<javaBoolean>,
-    @ocaml.doc(
-      "<p>Specifies that a device that is ordered with long term pricing should be replaced with a new device.</p>"
-    )
+    @ocaml.doc("<p>Specifies that a device that is ordered with long-term pricing should be replaced with a
+      new device.</p>")
     @as("ReplacementJob")
     replacementJob: option<jobId>,
-    @ocaml.doc("<p>The ID of the long term pricing type for the device.</p>")
+    @ocaml.doc("<p>The ID of the long-term pricing type for the device.</p>")
     @as("LongTermPricingId")
     longTermPricingId: longTermPricingId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-snowball") @new
   external new: request => t = "UpdateLongTermPricingCommand"
   let make = (~longTermPricingId, ~isLongTermPricingAutoRenew=?, ~replacementJob=?, ()) =>
@@ -641,15 +719,15 @@ module UpdateJobShipmentState = {
   type request = {
     @ocaml.doc("<p>The state of a device when it is being shipped. </p>
          <p>Set to <code>RECEIVED</code> when the device arrives at your location.</p>
-         <p>Set to <code>RETURNED</code> when you have returned the device to AWS.</p>")
+         <p>Set to <code>RETURNED</code> when you have returned the device to Amazon Web Services.</p>")
     @as("ShipmentState")
     shipmentState: shipmentState,
     @ocaml.doc("<p>The job ID of the job whose shipment date you want to update, for example
-      <code>JID123e4567-e89b-12d3-a456-426655440000</code>.</p>")
+        <code>JID123e4567-e89b-12d3-a456-426655440000</code>.</p>")
     @as("JobId")
     jobId: jobId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-snowball") @new
   external new: request => t = "UpdateJobShipmentStateCommand"
   let make = (~shipmentState, ~jobId, ()) => new({shipmentState: shipmentState, jobId: jobId})
@@ -660,14 +738,15 @@ module GetSoftwareUpdates = {
   type t
   type request = {
     @ocaml.doc("<p>The ID for a job that you want to get the software update file for, for example
-      <code>JID123e4567-e89b-12d3-a456-426655440000</code>.</p>")
+        <code>JID123e4567-e89b-12d3-a456-426655440000</code>.</p>")
     @as("JobId")
     jobId: jobId,
   }
   type response = {
     @ocaml.doc("<p>The Amazon S3 presigned URL for the update file associated with the specified
-      <code>JobId</code> value. The software update will be available for 2 days after this request is made. 
-      To access an update after the 2 days have passed, you'll have to make another call to <code>GetSoftwareUpdates</code>.</p>")
+        <code>JobId</code> value. The software update will be available for 2 days after this
+      request is made. To access an update after the 2 days have passed, you'll have to make another
+      call to <code>GetSoftwareUpdates</code>.</p>")
     @as("UpdatesURI")
     updatesURI: option<string_>,
   }
@@ -678,7 +757,7 @@ module GetSoftwareUpdates = {
 
 module GetSnowballUsage = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("<p>The number of Snow devices that this account is currently using.</p>")
     @as("SnowballsInUse")
@@ -688,8 +767,8 @@ module GetSnowballUsage = {
     @as("SnowballLimit")
     snowballLimit: option<integer_>,
   }
-  @module("@aws-sdk/client-snowball") @new external new: unit => t = "GetSnowballUsageCommand"
-  let make = () => new()
+  @module("@aws-sdk/client-snowball") @new external new: request => t = "GetSnowballUsageCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -735,16 +814,19 @@ module DescribeReturnShippingLabel = {
   type t
   type request = {
     @ocaml.doc("<p>The automatically generated ID for a job, for example
-      <code>JID123e4567-e89b-12d3-a456-426655440000</code>.</p>")
+        <code>JID123e4567-e89b-12d3-a456-426655440000</code>.</p>")
     @as("JobId")
     jobId: jobId,
   }
   type response = {
+    @ocaml.doc("<p>The pre-signed Amazon S3 URI used to download the return shipping label.</p>")
+    @as("ReturnShippingLabelURI")
+    returnShippingLabelURI: option<string_>,
     @ocaml.doc("<p>The expiration date of the current return shipping label.</p>")
     @as("ExpirationDate")
     expirationDate: option<timestamp_>,
     @ocaml.doc(
-      "<p>The status information of the task on a Snow device that is being returned to AWS.</p>"
+      "<p>The status information of the task on a Snow device that is being returned to Amazon Web Services.</p>"
     )
     @as("Status")
     status: option<shippingLabelStatus>,
@@ -758,19 +840,19 @@ module DescribeReturnShippingLabel = {
 module CreateReturnShippingLabel = {
   type t
   type request = {
-    @ocaml.doc("<p>The shipping speed for a particular job. This speed doesn't dictate how soon the device is returned to AWS.
-      This speed represents how quickly it moves to its
+    @ocaml.doc("<p>The shipping speed for a particular job. This speed doesn't dictate how soon the device
+      is returned to Amazon Web Services. This speed represents how quickly it moves to its
       destination while in transit. Regional shipping speeds are as follows:</p>")
     @as("ShippingOption")
     shippingOption: option<shippingOption>,
-    @ocaml.doc("<p>The ID for a job that you want to create the return shipping label for. For example
-      <code>JID123e4567-e89b-12d3-a456-426655440000</code>.</p>")
+    @ocaml.doc("<p>The ID for a job that you want to create the return shipping label for; for example,
+        <code>JID123e4567-e89b-12d3-a456-426655440000</code>.</p>")
     @as("JobId")
     jobId: jobId,
   }
   type response = {
     @ocaml.doc(
-      "<p>The status information of the task on a Snow device that is being returned to AWS.</p>"
+      "<p>The status information of the task on a Snow device that is being returned to Amazon Web Services.</p>"
     )
     @as("Status")
     status: option<shippingLabelStatus>,
@@ -784,22 +866,20 @@ module CreateReturnShippingLabel = {
 module CreateLongTermPricing = {
   type t
   type request = {
-    @ocaml.doc("<p>The type of AWS Snow Family device to use for the long term pricing job.</p>")
+    @ocaml.doc("<p>The type of Snow Family Devices to use for the long-term pricing job.</p>")
     @as("SnowballType")
     snowballType: option<snowballType>,
-    @ocaml.doc(
-      "<p>Specifies whether the current long term pricing type for the device should be renewed.</p>"
-    )
+    @ocaml.doc("<p>Specifies whether the current long-term pricing type for the device should be
+      renewed.</p>")
     @as("IsLongTermPricingAutoRenew")
     isLongTermPricingAutoRenew: option<javaBoolean>,
-    @ocaml.doc(
-      "<p>The type of long term pricing option you want for the device - one year or three year long term pricing.</p>"
-    )
+    @ocaml.doc("<p>The type of long-term pricing option you want for the device, either 1-year or 3-year
+      long-term pricing.</p>")
     @as("LongTermPricingType")
     longTermPricingType: longTermPricingType,
   }
   type response = {
-    @ocaml.doc("<p>The ID of the long term pricing type for the device.</p>")
+    @ocaml.doc("<p>The ID of the long-term pricing type for the device.</p>")
     @as("LongTermPricingId")
     longTermPricingId: option<longTermPricingId>,
   }
@@ -822,7 +902,7 @@ module CancelJob = {
     @as("JobId")
     jobId: jobId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-snowball") @new external new: request => t = "CancelJobCommand"
   let make = (~jobId, ()) => new({jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -836,7 +916,7 @@ module CancelCluster = {
     @as("ClusterId")
     clusterId: clusterId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-snowball") @new external new: request => t = "CancelClusterCommand"
   let make = (~clusterId, ()) => new({clusterId: clusterId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -849,8 +929,8 @@ module DescribeAddress = {
     addressId: addressId,
   }
   type response = {
-    @ocaml.doc("<p>The address that you want the Snow device(s) associated with a specific job to
-      be shipped to.</p>")
+    @ocaml.doc("<p>The address that you want the Snow device(s) associated with a specific job to be
+      shipped to.</p>")
     @as("Address")
     address: option<address>,
   }
@@ -867,7 +947,8 @@ module CreateAddress = {
   }
   type response = {
     @ocaml.doc("<p>The automatically generated ID for a specific address. You'll use this ID when you
-      create a job to specify which address you want the Snow device for that job shipped to.</p>")
+      create a job to specify which address you want the Snow device for that job shipped
+      to.</p>")
     @as("AddressId")
     addressId: option<string_>,
   }
@@ -1028,7 +1109,7 @@ module ListLongTermPricing = {
   type t
   type request = {
     @ocaml.doc("<p>Because HTTP requests are stateless, this is the starting point for your next list of
-      <code>ListLongTermPricing</code> to return.</p>")
+        <code>ListLongTermPricing</code> to return.</p>")
     @as("NextToken")
     nextToken: option<string_>,
     @ocaml.doc("<p>The maximum number of <code>ListLongTermPricing</code> objects to return.</p>")
@@ -1077,6 +1158,11 @@ module UpdateJob = {
     shippingOption: option<shippingOption>,
     @ocaml.doc("<p>The ID of the updated <a>Address</a> object.</p>") @as("AddressId")
     addressId: option<addressId>,
+    @ocaml.doc("<p>Specifies the service or services on the Snow Family device that your transferred data
+      will be exported from or imported into. Amazon Web Services Snow Family supports Amazon S3 and NFS (Network File
+      System) and the Amazon Web Services Storage Gateway service Tape Gateway type.</p>")
+    @as("OnDeviceServiceConfiguration")
+    onDeviceServiceConfiguration: option<onDeviceServiceConfiguration>,
     @ocaml.doc(
       "<p>The updated <code>JobResource</code> object, or the updated <a>JobResource</a> object. </p>"
     )
@@ -1085,8 +1171,8 @@ module UpdateJob = {
     @ocaml.doc("<p>The new or updated <a>Notification</a> object.</p>") @as("Notification")
     notification: option<notification>,
     @ocaml.doc("<p>The new role Amazon Resource Name (ARN) that you want to associate with this job. To
-      create a role ARN, use the <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html\">CreateRole</a>AWS Identity and Access
-      Management (IAM) API action.</p>")
+      create a role ARN, use the <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html\">CreateRole</a>Identity and Access Management
+      (IAM) API action.</p>")
     @as("RoleARN")
     roleARN: option<roleARN>,
     @ocaml.doc("<p>The job ID of the job that you want to update, for example
@@ -1094,7 +1180,7 @@ module UpdateJob = {
     @as("JobId")
     jobId: jobId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-snowball") @new external new: request => t = "UpdateJobCommand"
   let make = (
     ~jobId,
@@ -1103,6 +1189,7 @@ module UpdateJob = {
     ~description=?,
     ~shippingOption=?,
     ~addressId=?,
+    ~onDeviceServiceConfiguration=?,
     ~resources=?,
     ~notification=?,
     ~roleARN=?,
@@ -1114,6 +1201,7 @@ module UpdateJob = {
       description: description,
       shippingOption: shippingOption,
       addressId: addressId,
+      onDeviceServiceConfiguration: onDeviceServiceConfiguration,
       resources: resources,
       notification: notification,
       roleARN: roleARN,
@@ -1137,6 +1225,11 @@ module UpdateCluster = {
     shippingOption: option<shippingOption>,
     @ocaml.doc("<p>The ID of the updated <a>Address</a> object.</p>") @as("AddressId")
     addressId: option<addressId>,
+    @ocaml.doc("<p>Specifies the service or services on the Snow Family device that your transferred data
+      will be exported from or imported into. Amazon Web Services Snow Family device clusters support Amazon S3 and NFS
+      (Network File System).</p>")
+    @as("OnDeviceServiceConfiguration")
+    onDeviceServiceConfiguration: option<onDeviceServiceConfiguration>,
     @ocaml.doc("<p>The updated arrays of <a>JobResource</a> objects that can include updated
         <a>S3Resource</a> objects or <a>LambdaResource</a> objects.</p>")
     @as("Resources")
@@ -1144,8 +1237,7 @@ module UpdateCluster = {
     @ocaml.doc("<p>The updated description of this cluster.</p>") @as("Description")
     description: option<string_>,
     @ocaml.doc("<p>The new role Amazon Resource Name (ARN) that you want to associate with this cluster.
-      To create a role ARN, use the <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html\">CreateRole</a> API action in AWS
-      Identity and Access Management (IAM).</p>")
+      To create a role ARN, use the <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html\">CreateRole</a> API action in Identity and Access Management (IAM).</p>")
     @as("RoleARN")
     roleARN: option<roleARN>,
     @ocaml.doc("<p>The cluster ID of the cluster that you want to update, for example
@@ -1153,7 +1245,7 @@ module UpdateCluster = {
     @as("ClusterId")
     clusterId: clusterId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-snowball") @new external new: request => t = "UpdateClusterCommand"
   let make = (
     ~clusterId,
@@ -1161,6 +1253,7 @@ module UpdateCluster = {
     ~notification=?,
     ~shippingOption=?,
     ~addressId=?,
+    ~onDeviceServiceConfiguration=?,
     ~resources=?,
     ~description=?,
     ~roleARN=?,
@@ -1171,6 +1264,7 @@ module UpdateCluster = {
       notification: notification,
       shippingOption: shippingOption,
       addressId: addressId,
+      onDeviceServiceConfiguration: onDeviceServiceConfiguration,
       resources: resources,
       description: description,
       roleARN: roleARN,
@@ -1182,10 +1276,16 @@ module UpdateCluster = {
 module CreateJob = {
   type t
   type request = {
-    @ocaml.doc("<p>The ID of the long term pricing type for the device.</p>")
+    @ocaml.doc("<p>The ID of the long-term pricing type for the device.</p>")
     @as("LongTermPricingId")
     longTermPricingId: option<longTermPricingId>,
-    @ocaml.doc("<p>Defines the device configuration for an AWS Snowcone job.</p>
+    @ocaml.doc("<p>Allows you to securely operate and manage Snowcone devices remotely from outside of your
+      internal network. When set to <code>INSTALLED_AUTOSTART</code>, remote management will
+      automatically be available when the device arrives at your location. Otherwise, you need to
+      use the Snowball Client to manage the device.</p>")
+    @as("RemoteManagement")
+    remoteManagement: option<remoteManagement>,
+    @ocaml.doc("<p>Defines the device configuration for an Snowcone job.</p>
     
          <p>For more information, see
       \"https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html\" (Snow
@@ -1194,21 +1294,23 @@ module CreateJob = {
       Family Devices and Capacity) in the <i>Snowcone User Guide</i>.</p>")
     @as("DeviceConfiguration")
     deviceConfiguration: option<deviceConfiguration>,
-    @ocaml.doc("<p>The tax documents required in your AWS Region.</p>") @as("TaxDocuments")
+    @ocaml.doc("<p>The tax documents required in your Amazon Web Services Region.</p>")
+    @as("TaxDocuments")
     taxDocuments: option<taxDocuments>,
     @ocaml.doc("<p>The forwarding address ID for a job. This field is not supported in most
-      regions.</p>")
+      Regions.</p>")
     @as("ForwardingAddressId")
     forwardingAddressId: option<addressId>,
-    @ocaml.doc("<p>The type of AWS Snow Family device to use for this job. 
+    @ocaml.doc("<p>The type of Snow Family Devices to use for this job.
       </p>
          <note>
-            <p>For cluster jobs, AWS Snow Family currently supports only the <code>EDGE</code> device type.</p>
+            <p>For cluster jobs, Amazon Web Services Snow Family currently supports only the
+          <code>EDGE</code> device type.</p>
          </note>
-         <p>The type of AWS Snow device to use for this job. Currently, the only supported
-      device type for cluster jobs is <code>EDGE</code>.</p>
+         <p>The type of Amazon Web Services Snow device to use for this job. Currently, the only
+      supported device type for cluster jobs is <code>EDGE</code>.</p>
          <p>For more information, see <a href=\"https://docs.aws.amazon.com/snowball/latest/developer-guide/device-differences.html\">Snowball Edge Device
-      Options</a> in the Snowball Edge Developer Guide.</p>
+        Options</a> in the Snowball Edge Developer Guide.</p>
     
          <p>For more information, see
       \"https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html\" (Snow
@@ -1227,8 +1329,8 @@ module CreateJob = {
     @as("Notification")
     notification: option<notification>,
     @ocaml.doc("<p>The shipping speed for this job. This speed doesn't dictate how soon you'll get the
-      Snow device, rather it represents how quickly the Snow device moves to its destination while in
-      transit. Regional shipping speeds are as follows:</p>
+      Snow device, rather it represents how quickly the Snow device moves to its destination while
+      in transit. Regional shipping speeds are as follows:</p>
 
          <ul>
             <li>
@@ -1236,8 +1338,8 @@ module CreateJob = {
           express are delivered in about a day.</p>
             </li>
             <li>
-               <p>In the European Union (EU), you have access to express shipping. Typically,
-          Snow devices shipped express are delivered in about a day. In addition, most countries in the
+               <p>In the European Union (EU), you have access to express shipping. Typically, Snow
+          devices shipped express are delivered in about a day. In addition, most countries in the
           EU have access to standard shipping, which typically takes less than a week, one
           way.</p>
             </li>
@@ -1262,13 +1364,13 @@ module CreateJob = {
     @as("SnowballCapacityPreference")
     snowballCapacityPreference: option<snowballCapacity>,
     @ocaml.doc("<p>The <code>RoleARN</code> that you want to associate with this job.
-      <code>RoleArn</code>s are created using the <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html\">CreateRole</a> AWS Identity and
-      Access Management (IAM) API action.</p>")
+      <code>RoleArn</code>s are created using the <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html\">CreateRole</a>
+      Identity and Access Management (IAM) API action.</p>")
     @as("RoleARN")
     roleARN: option<roleARN>,
     @ocaml.doc("<p>The <code>KmsKeyARN</code> that you want to associate with this job.
-        <code>KmsKeyARN</code>s are created using the <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html\">CreateKey</a> AWS Key Management
-      Service (KMS) API action.</p>")
+        <code>KmsKeyARN</code>s are created using the <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html\">CreateKey</a>
+      Key Management Service (KMS) API action.</p>")
     @as("KmsKeyARN")
     kmsKeyARN: option<kmsKeyARN>,
     @ocaml.doc("<p>The ID for the address that you want the Snow device shipped to.</p>")
@@ -1278,6 +1380,11 @@ module CreateJob = {
         Photos 2016-08-11</code>.</p>")
     @as("Description")
     description: option<string_>,
+    @ocaml.doc("<p>Specifies the service or services on the Snow Family device that your transferred data
+      will be exported from or imported into. Amazon Web Services Snow Family supports Amazon S3 and NFS (Network File
+      System) and the Amazon Web Services Storage Gateway service Tape Gateway type.</p>")
+    @as("OnDeviceServiceConfiguration")
+    onDeviceServiceConfiguration: option<onDeviceServiceConfiguration>,
     @ocaml.doc("<p>Defines the Amazon S3 buckets associated with this job.</p>
 
          <p>With <code>IMPORT</code> jobs, you specify the bucket or buckets that your transferred
@@ -1304,6 +1411,7 @@ module CreateJob = {
   @module("@aws-sdk/client-snowball") @new external new: request => t = "CreateJobCommand"
   let make = (
     ~longTermPricingId=?,
+    ~remoteManagement=?,
     ~deviceConfiguration=?,
     ~taxDocuments=?,
     ~forwardingAddressId=?,
@@ -1316,12 +1424,14 @@ module CreateJob = {
     ~kmsKeyARN=?,
     ~addressId=?,
     ~description=?,
+    ~onDeviceServiceConfiguration=?,
     ~resources=?,
     ~jobType=?,
     (),
   ) =>
     new({
       longTermPricingId: longTermPricingId,
+      remoteManagement: remoteManagement,
       deviceConfiguration: deviceConfiguration,
       taxDocuments: taxDocuments,
       forwardingAddressId: forwardingAddressId,
@@ -1334,6 +1444,7 @@ module CreateJob = {
       kmsKeyARN: kmsKeyARN,
       addressId: addressId,
       description: description,
+      onDeviceServiceConfiguration: onDeviceServiceConfiguration,
       resources: resources,
       jobType: jobType,
     })
@@ -1343,7 +1454,14 @@ module CreateJob = {
 module CreateCluster = {
   type t
   type request = {
-    @ocaml.doc("<p>The tax documents required in your AWS Region.</p>") @as("TaxDocuments")
+    @ocaml.doc("<p>Allows you to securely operate and manage Snow devices in a cluster remotely from outside
+      of your internal network. When set to <code>INSTALLED_AUTOSTART</code>, remote management will
+      automatically be available when the device arrives at your location. Otherwise, you need to
+      use the Snowball Client to manage the device.</p>")
+    @as("RemoteManagement")
+    remoteManagement: option<remoteManagement>,
+    @ocaml.doc("<p>The tax documents required in your Amazon Web Services Region.</p>")
+    @as("TaxDocuments")
     taxDocuments: option<taxDocuments>,
     @ocaml.doc("<p>The forwarding address ID for a cluster. This field is not supported in most
       regions.</p>")
@@ -1355,21 +1473,20 @@ module CreateCluster = {
     notification: option<notification>,
     @ocaml.doc("<p>The shipping speed for each node in this cluster. This speed doesn't dictate how soon
       you'll get each Snowball Edge device, rather it represents how quickly each device moves to
-      its destination while in transit. Regional shipping speeds are as follows:
-    </p>
+      its destination while in transit. Regional shipping speeds are as follows: </p>
          <ul>
             <li>
                <p>In Australia, you have access to express shipping. Typically, Snow devices shipped
           express are delivered in about a day.</p>
             </li>
             <li>
-               <p>In the European Union (EU), you have access to express shipping. Typically,
-          Snow devices shipped express are delivered in about a day. In addition, most countries in the
+               <p>In the European Union (EU), you have access to express shipping. Typically, Snow
+          devices shipped express are delivered in about a day. In addition, most countries in the
           EU have access to standard shipping, which typically takes less than a week, one
           way.</p>
             </li>
             <li>
-               <p>In India, Snow device are delivered in one to seven days.</p>
+               <p>In India, Snow devices are delivered in one to seven days.</p>
             </li>
             <li>
                <p>In the United States of America (US), you have access to one-day shipping and
@@ -1383,13 +1500,13 @@ module CreateCluster = {
           express are delivered in about a day.</p>
             </li>
             <li>
-               <p>In the European Union (EU), you have access to express shipping. Typically,
-          Snow devices shipped express are delivered in about a day. In addition, most countries
-          in the EU have access to standard shipping, which typically takes less than a week, one
+               <p>In the European Union (EU), you have access to express shipping. Typically, Snow
+          devices shipped express are delivered in about a day. In addition, most countries in the
+          EU have access to standard shipping, which typically takes less than a week, one
           way.</p>
             </li>
             <li>
-               <p>In India, Snow device are delivered in one to seven days.</p>
+               <p>In India, Snow devices are delivered in one to seven days.</p>
             </li>
             <li>
                <p>In the US, you have access to one-day shipping and two-day shipping.</p>
@@ -1397,10 +1514,10 @@ module CreateCluster = {
          </ul>")
     @as("ShippingOption")
     shippingOption: shippingOption,
-    @ocaml.doc("<p>The type of AWS Snow Family device to use for this cluster. 
-    </p>
+    @ocaml.doc("<p>The type of Snow Family Devices to use for this cluster. </p>
          <note>
-            <p>For cluster jobs, AWS Snow Family currently supports only the <code>EDGE</code> device type.</p>
+            <p>For cluster jobs, Amazon Web Services Snow Family currently supports only the
+          <code>EDGE</code> device type.</p>
          </note>
     
          <p>For more information, see
@@ -1411,13 +1528,11 @@ module CreateCluster = {
     @as("SnowballType")
     snowballType: snowballType,
     @ocaml.doc("<p>The <code>RoleARN</code> that you want to associate with this cluster.
-        <code>RoleArn</code> values are created by using the <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html\">CreateRole</a> API action in AWS
-      Identity and Access Management (IAM).</p>")
+        <code>RoleArn</code> values are created by using the <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html\">CreateRole</a> API action in Identity and Access Management (IAM).</p>")
     @as("RoleARN")
     roleARN: roleARN,
     @ocaml.doc("<p>The <code>KmsKeyARN</code> value that you want to associate with this cluster.
-        <code>KmsKeyARN</code> values are created by using the <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html\">CreateKey</a> API action in AWS Key
-      Management Service (AWS KMS). </p>")
+        <code>KmsKeyARN</code> values are created by using the <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html\">CreateKey</a> API action in Key Management Service (KMS). </p>")
     @as("KmsKeyARN")
     kmsKeyARN: option<kmsKeyARN>,
     @ocaml.doc("<p>The ID for the address that you want the cluster shipped to.</p>")
@@ -1427,8 +1542,14 @@ module CreateCluster = {
         Cluster-01</code>.</p>")
     @as("Description")
     description: option<string_>,
+    @ocaml.doc("<p>Specifies the service or services on the Snow Family device that your transferred data
+      will be exported from or imported into. Amazon Web Services Snow Family device clusters support Amazon S3 and NFS
+      (Network File System).</p>")
+    @as("OnDeviceServiceConfiguration")
+    onDeviceServiceConfiguration: option<onDeviceServiceConfiguration>,
     @ocaml.doc("<p>The resources associated with the cluster job. These resources include Amazon S3
-      buckets and optional AWS Lambda functions written in the Python language. </p>")
+      buckets and optional Lambda functions written in the Python language.
+    </p>")
     @as("Resources")
     resources: jobResource,
     @ocaml.doc("<p>The type of job for this cluster. Currently, the only job type supported for clusters
@@ -1454,14 +1575,17 @@ module CreateCluster = {
     ~addressId,
     ~resources,
     ~jobType,
+    ~remoteManagement=?,
     ~taxDocuments=?,
     ~forwardingAddressId=?,
     ~notification=?,
     ~kmsKeyARN=?,
     ~description=?,
+    ~onDeviceServiceConfiguration=?,
     (),
   ) =>
     new({
+      remoteManagement: remoteManagement,
       taxDocuments: taxDocuments,
       forwardingAddressId: forwardingAddressId,
       notification: notification,
@@ -1471,6 +1595,7 @@ module CreateCluster = {
       kmsKeyARN: kmsKeyARN,
       addressId: addressId,
       description: description,
+      onDeviceServiceConfiguration: onDeviceServiceConfiguration,
       resources: resources,
       jobType: jobType,
     })

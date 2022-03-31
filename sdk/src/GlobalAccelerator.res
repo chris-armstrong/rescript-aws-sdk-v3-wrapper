@@ -760,7 +760,7 @@ module DeleteListener = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the listener.</p>") @as("ListenerArn")
     listenerArn: genericString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-globalaccelerator") @new
   external new: request => t = "DeleteListenerCommand"
   let make = (~listenerArn, ()) => new({listenerArn: listenerArn})
@@ -774,7 +774,7 @@ module DeleteEndpointGroup = {
     @as("EndpointGroupArn")
     endpointGroupArn: genericString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-globalaccelerator") @new
   external new: request => t = "DeleteEndpointGroupCommand"
   let make = (~endpointGroupArn, ()) => new({endpointGroupArn: endpointGroupArn})
@@ -788,7 +788,7 @@ module DeleteCustomRoutingListener = {
     @as("ListenerArn")
     listenerArn: genericString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-globalaccelerator") @new
   external new: request => t = "DeleteCustomRoutingListenerCommand"
   let make = (~listenerArn, ()) => new({listenerArn: listenerArn})
@@ -802,7 +802,7 @@ module DeleteCustomRoutingEndpointGroup = {
     @as("EndpointGroupArn")
     endpointGroupArn: genericString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-globalaccelerator") @new
   external new: request => t = "DeleteCustomRoutingEndpointGroupCommand"
   let make = (~endpointGroupArn, ()) => new({endpointGroupArn: endpointGroupArn})
@@ -816,7 +816,7 @@ module DeleteCustomRoutingAccelerator = {
     @as("AcceleratorArn")
     acceleratorArn: genericString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-globalaccelerator") @new
   external new: request => t = "DeleteCustomRoutingAcceleratorCommand"
   let make = (~acceleratorArn, ()) => new({acceleratorArn: acceleratorArn})
@@ -829,7 +829,7 @@ module DeleteAccelerator = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of an accelerator.</p>") @as("AcceleratorArn")
     acceleratorArn: genericString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-globalaccelerator") @new
   external new: request => t = "DeleteAcceleratorCommand"
   let make = (~acceleratorArn, ()) => new({acceleratorArn: acceleratorArn})
@@ -932,7 +932,7 @@ module UntagResource = {
     @as("ResourceArn")
     resourceArn: resourceArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-globalaccelerator") @new
   external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
@@ -952,7 +952,7 @@ module RemoveCustomRoutingEndpoints = {
     @as("EndpointIds")
     endpointIds: endpointIds,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-globalaccelerator") @new
   external new: request => t = "RemoveCustomRoutingEndpointsCommand"
   let make = (~endpointGroupArn, ~endpointIds, ()) =>
@@ -1030,7 +1030,7 @@ module DenyCustomRoutingTraffic = {
     @as("EndpointGroupArn")
     endpointGroupArn: genericString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-globalaccelerator") @new
   external new: request => t = "DenyCustomRoutingTrafficCommand"
   let make = (
@@ -1085,7 +1085,7 @@ module AllowCustomRoutingTraffic = {
     @as("EndpointGroupArn")
     endpointGroupArn: genericString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-globalaccelerator") @new
   external new: request => t = "AllowCustomRoutingTrafficCommand"
   let make = (
@@ -1120,7 +1120,7 @@ module TagResource = {
     @as("ResourceArn")
     resourceArn: resourceArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-globalaccelerator") @new
   external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})

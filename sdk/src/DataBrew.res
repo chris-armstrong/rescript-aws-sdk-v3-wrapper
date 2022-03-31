@@ -15,14 +15,25 @@ type baseInteger = int
 type baseTimestamp = Js.Date.t
 type baseLong = float
 type valueReference = string
+type validationMode = [@as("CHECK_ALL") #CHECK_ALL]
 type timezoneOffset = string
 type timeout = int
+type thresholdValue = float
+type thresholdUnit = [@as("PERCENTAGE") #PERCENTAGE | @as("COUNT") #COUNT]
+type thresholdType = [
+  | @as("LESS_THAN") #LESS_THAN
+  | @as("GREATER_THAN") #GREATER_THAN
+  | @as("LESS_THAN_OR_EQUAL") #LESS_THAN_OR_EQUAL
+  | @as("GREATER_THAN_OR_EQUAL") #GREATER_THAN_OR_EQUAL
+]
 type targetColumn = string
 type tagValue = string
 type tagKey = string
 type tableName = string
 type stepIndex = int
+type statistic = string
 type startedBy = string
+type startRowIndex = int
 type startColumnIndex = int
 type source = [@as("DATABASE") #DATABASE | @as("DATA-CATALOG") #DATA_CATALOG | @as("S3") #S3]
 type sheetName = string
@@ -43,11 +54,17 @@ type scheduleName = string
 type sampleType = [@as("RANDOM") #RANDOM | @as("LAST_N") #LAST_N | @as("FIRST_N") #FIRST_N]
 type sampleSize = int
 type sampleMode = [@as("CUSTOM_ROWS") #CUSTOM_ROWS | @as("FULL_DATASET") #FULL_DATASET]
+type rulesetName = string
+type rulesetDescription = string
+type ruleName = string
+type ruleCount = int
+type rowRange = int
 type result = string
 type recipeVersion = string
 type recipeName = string
 type recipeErrorMessage = string
 type recipeDescription = string
+type queryString = string
 type publishedBy = string
 type projectName = string
 type preview = bool
@@ -57,6 +74,7 @@ type parameterType = [@as("String") #String | @as("Number") #Number | @as("Datet
 type parameterName = string
 type overwriteOutput = bool
 type outputFormat = [
+  | @as("TABLEAUHYPER") #TABLEAUHYPER
   | @as("XML") #XML
   | @as("ORC") #ORC
   | @as("AVRO") #AVRO
@@ -74,6 +92,7 @@ type multiLine = bool
 type message = string
 type maxRetries = int
 type maxResults100 = int
+type maxOutputFiles = int
 type maxFiles = int
 type maxCapacity = int
 type logSubscription = [@as("DISABLE") #DISABLE | @as("ENABLE") #ENABLE]
@@ -96,6 +115,7 @@ type jobRunId = string
 type jobRunErrorMessage = string
 type jobName = string
 type inputFormat = [
+  | @as("ORC") #ORC
   | @as("EXCEL") #EXCEL
   | @as("PARQUET") #PARQUET
   | @as("JSON") #JSON
@@ -106,13 +126,16 @@ type glueConnectionName = string
 type expression = string
 type executionTime = int
 type errorCode = string
+type entityType = string
 type encryptionMode = [@as("SSE-S3") #SSE_S3 | @as("SSE-KMS") #SSE_KMS]
 type encryptionKeyArn = string
+type disabled = bool
 type delimiter = string
 type datetimeFormat = string
 type date = Js.Date.t
 type datasetName = string
 type databaseTableName = string
+type databaseOutputMode = [@as("NEW_TABLE") #NEW_TABLE]
 type databaseName = string
 type cronExpression = string
 type createdBy = string
@@ -134,15 +157,46 @@ type columnRange = int
 type columnName = string
 type clientSessionId = string
 type catalogId = string
+type bucketOwner = string
 type bucket = string
 type attempt = int
 type assumeControl = bool
 type arn = string
+type analyticsMode = [@as("DISABLE") #DISABLE | @as("ENABLE") #ENABLE]
 type actionId = int
 type accountId = string
 type valuesMap = Js.Dict.t<conditionValue>
+@ocaml.doc("<p>Configuration for data quality validation. Used to select the Rulesets and Validation Mode 
+            to be used in the profile job. When ValidationConfiguration is null, the profile 
+            job will run without data quality validation.</p>")
+type validationConfiguration = {
+  @ocaml.doc("<p>Mode of data quality validation. Default mode is “CHECK_ALL” which verifies all rules 
+            defined in the selected ruleset.</p>")
+  @as("ValidationMode")
+  validationMode: option<validationMode>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) for the ruleset to be validated in the profile job. 
+            The TargetArn of the selected ruleset should be the same as the Amazon Resource Name (ARN) of 
+            the dataset that is associated with the profile job.</p>")
+  @as("RulesetArn")
+  rulesetArn: arn,
+}
+@ocaml.doc("<p>The threshold used with a non-aggregate check expression. The non-aggregate check expression 
+            will be applied to each row in a specific column. Then the threshold will be used to determine 
+            whether the validation succeeds.</p>")
+type threshold = {
+  @ocaml.doc("<p>Unit of threshold value. Can be either a COUNT or PERCENTAGE of the full sample size 
+            used for validation.</p>")
+  @as("Unit")
+  unit_: option<thresholdUnit>,
+  @ocaml.doc("<p>The type of a threshold. Used for comparison of an actual count of rows that satisfy the 
+            rule to the threshold value.</p>")
+  @as("Type")
+  type_: option<thresholdType>,
+  @ocaml.doc("<p>The value of a threshold.</p>") @as("Value") value: thresholdValue,
+}
 type tagMap = Js.Dict.t<tagValue>
 type tagKeyList = array<tagKey>
+type statisticList = array<statistic>
 type sheetNameList = array<sheetName>
 type sheetIndexList = array<sheetIndex>
 @ocaml.doc("<p>Represents the sample size and sampling type for DataBrew to use for interactive data
@@ -152,11 +206,13 @@ type sample = {
   type_: sampleType,
   @ocaml.doc("<p>The number of rows in the sample.</p>") @as("Size") size: option<sampleSize>,
 }
-@ocaml.doc("<p>Represents an Amazon S3 location (bucket name and object key) where DataBrew can read
+@ocaml.doc("<p>Represents an Amazon S3 location (bucket name, bucket owner, and object key) where DataBrew can read
             input data, or write output from a job.</p>")
 type s3Location = {
+  @ocaml.doc("<p>The Amazon Web Services account ID of the bucket owner.</p>") @as("BucketOwner")
+  bucketOwner: option<bucketOwner>,
   @ocaml.doc("<p>The unique name of the object in the bucket.</p>") @as("Key") key: option<key>,
-  @ocaml.doc("<p>The S3 bucket name.</p>") @as("Bucket") bucket: bucket,
+  @ocaml.doc("<p>The Amazon S3 bucket name.</p>") @as("Bucket") bucket: bucket,
 }
 type recipeVersionList = array<recipeVersion>
 @ocaml.doc("<p>Represents any errors encountered when attempting to delete multiple recipe
@@ -177,8 +233,16 @@ type recipeReference = {
   @ocaml.doc("<p>The name of the recipe.</p>") @as("Name") name: recipeName,
 }
 type parameterMap = Js.Dict.t<parameterValue>
-@ocaml.doc("<p>Represents the JSON-specific options that define how input is to be interpreted by AWS
-            Glue DataBrew.</p>")
+@ocaml.doc("<p>Contains additional resource information needed for specific datasets.</p>")
+type metadata = {
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) associated with the dataset. Currently, DataBrew 
+            only supports ARNs from Amazon AppFlow.</p>")
+  @as("SourceArn")
+  sourceArn: option<arn>,
+}
+@ocaml.doc(
+  "<p>Represents the JSON-specific options that define how input is to be interpreted by Glue DataBrew.</p>"
+)
 type jsonOptions = {
   @ocaml.doc("<p>A value that specifies whether JSON input contains embedded new line
             characters.</p>")
@@ -212,40 +276,42 @@ type jobSample = {
 }
 type jobNameList = array<jobName>
 type hiddenColumnList = array<columnName>
-@ocaml.doc("<p>Represents a limit imposed on number of S3 files that should be selected for a dataset from a connected 
-            S3 path.</p>")
+@ocaml.doc("<p>Represents a limit imposed on number of Amazon S3 files that should be selected for a 
+            dataset from a connected Amazon S3 path.</p>")
 type filesLimit = {
-  @ocaml.doc("<p>A criteria to use for S3 files sorting before their selection. By default uses DESCENDING order, 
-            i.e. most recent files are selected first. Anotherpossible value is ASCENDING.</p>")
+  @ocaml.doc("<p>A criteria to use for Amazon S3 files sorting before their selection. By
+            default uses DESCENDING order, i.e. most recent files are selected first. Another
+            possible value is ASCENDING.</p>")
   @as("Order")
   order: option<order>,
-  @ocaml.doc("<p>A criteria to use for S3 files sorting before their selection. By default uses LAST_MODIFIED_DATE as 
+  @ocaml.doc("<p>A criteria to use for Amazon S3 files sorting before their selection. By default uses LAST_MODIFIED_DATE as 
             a sorting criteria. Currently it's the only allowed value.</p>")
   @as("OrderedBy")
   orderedBy: option<orderedBy>,
-  @ocaml.doc("<p>The number of S3 files to select.</p>") @as("MaxFiles") maxFiles: maxFiles,
+  @ocaml.doc("<p>The number of Amazon S3 files to select.</p>") @as("MaxFiles") maxFiles: maxFiles,
 }
-@ocaml.doc(
-  "<p>Represents additional options for correct interpretation of datetime parameters used in the S3 path of a dataset.</p>"
-)
+type entityTypeList = array<entityType>
+@ocaml.doc("<p>Represents additional options for correct interpretation of datetime parameters used in 
+            the Amazon S3 path of a dataset.</p>")
 type datetimeOptions = {
   @ocaml.doc(
     "<p>Optional value for a non-US locale code, needed for correct interpretation of some date formats.</p>"
   )
   @as("LocaleCode")
   localeCode: option<localeCode>,
-  @ocaml.doc("<p>Optional value for a timezone offset of the datetime parameter value in the S3 path. Shouldn't be used if Format for this parameter includes timezone fields.
+  @ocaml.doc("<p>Optional value for a timezone offset of the datetime parameter value in the Amazon S3 
+            path. Shouldn't be used if Format for this parameter includes timezone fields.
             If no offset specified, UTC is assumed.</p>")
   @as("TimezoneOffset")
   timezoneOffset: option<timezoneOffset>,
-  @ocaml.doc("<p>Required option, that defines the datetime format used for a date parameter in the S3 path. Should use only supported datetime specifiers and separation characters, all 
-            litera a-z or A-Z character should be escaped with single quotes. E.g. \"MM.dd.yyyy-'at'-HH:mm\".</p>")
+  @ocaml.doc("<p>Required option, that defines the datetime format used for a date parameter in the 
+            Amazon S3 path. Should use only supported datetime specifiers and separation characters, all 
+            literal a-z or A-Z characters should be escaped with single quotes. E.g. \"MM.dd.yyyy-'at'-HH:mm\".</p>")
   @as("Format")
   format: datetimeFormat,
 }
-@ocaml.doc(
-  "<p>Represents a set of options that define how DataBrew will write a comma-separated value (CSV) file.</p>"
-)
+@ocaml.doc("<p>Represents a set of options that define how DataBrew will write a 
+            comma-separated value (CSV) file.</p>")
 type csvOutputOptions = {
   @ocaml.doc(
     "<p>A single character that specifies the delimiter used to create CSV job output.</p>"
@@ -253,9 +319,8 @@ type csvOutputOptions = {
   @as("Delimiter")
   delimiter: option<delimiter>,
 }
-@ocaml.doc(
-  "<p>Represents a set of options that define how DataBrew will read a comma-separated value (CSV) file when creating a dataset from that file.</p>"
-)
+@ocaml.doc("<p>Represents a set of options that define how DataBrew will read a 
+            comma-separated value (CSV) file when creating a dataset from that file.</p>")
 type csvOptions = {
   @ocaml.doc("<p>A variable that specifies whether the first row in the file is parsed as the
             header. If this value is false, column names are auto-generated.</p>")
@@ -266,8 +331,11 @@ type csvOptions = {
   delimiter: option<delimiter>,
 }
 @ocaml.doc("<p>Represents an individual condition that evaluates to true or false.</p>
-        <p>Conditions are used with recipe actions. The action is only performed for column values where the condition evaluates to true.</p>
-        <p>If a recipe requires more than one condition, then the recipe must specify multiple <code>ConditionExpression</code> elements. Each condition is applied to the rows in a dataset first, before the recipe action is performed.</p>")
+        <p>Conditions are used with recipe actions. The action is only performed for column values where the 
+            condition evaluates to true.</p>
+        <p>If a recipe requires more than one condition, then the recipe must specify multiple 
+            <code>ConditionExpression</code> elements. Each condition is applied to the rows in a dataset first, before 
+            the recipe action is performed.</p>")
 type conditionExpression = {
   @ocaml.doc("<p>A column to apply this condition to.</p>") @as("TargetColumn")
   targetColumn: targetColumn,
@@ -275,14 +343,31 @@ type conditionExpression = {
   @as("Value")
   value: option<conditionValue>,
   @ocaml.doc("<p>A specific condition to apply to a recipe action. For more information, see <a href=\"https://docs.aws.amazon.com/databrew/latest/dg/recipes.html#recipes.structure\">Recipe
-                structure</a> in the <i>AWS Glue DataBrew Developer
+            structure</a> in the <i>Glue DataBrew Developer
             Guide</i>.</p>")
   @as("Condition")
   condition: condition,
 }
+@ocaml.doc("<p>Selector of a column from a dataset for profile job configuration. 
+            One selector includes either a column name or a regular expression.</p>")
+type columnSelector = {
+  @ocaml.doc("<p>The name of a column from a dataset.</p>") @as("Name") name: option<columnName>,
+  @ocaml.doc("<p>A regular expression for selecting a column from a dataset.</p>") @as("Regex")
+  regex: option<columnName>,
+}
 type columnNameList = array<columnName>
 @ocaml.doc("<p>Represents the data being transformed during an action.</p>")
 type viewFrame = {
+  @ocaml.doc("<p>Controls if analytics computation is enabled or disabled. Enabled by default.</p>")
+  @as("Analytics")
+  analytics: option<analyticsMode>,
+  @ocaml.doc("<p>The number of rows to include in the view frame, beginning with the 
+            <code>StartRowIndex</code> value.</p>")
+  @as("RowRange")
+  rowRange: option<rowRange>,
+  @ocaml.doc("<p>The starting index for the range of rows to return in the view frame.</p>")
+  @as("StartRowIndex")
+  startRowIndex: option<startRowIndex>,
   @ocaml.doc("<p>A list of columns to hide in the view frame.</p>") @as("HiddenColumns")
   hiddenColumns: option<hiddenColumnList>,
   @ocaml.doc("<p>The number of columns to include in the view frame, beginning with the
@@ -294,13 +379,21 @@ type viewFrame = {
   @as("StartColumnIndex")
   startColumnIndex: startColumnIndex,
 }
+type validationConfigurationList = array<validationConfiguration>
+@ocaml.doc("<p>Override of a particular evaluation for a profile job. </p>")
+type statisticOverride = {
+  @ocaml.doc("<p>A map that includes overrides of an evaluation’s parameters.</p>")
+  @as("Parameters")
+  parameters: parameterMap,
+  @ocaml.doc("<p>The name of an evaluation</p>") @as("Statistic") statistic: statistic,
+}
 @ocaml.doc("<p>Represents one or more dates and times when a job is to run.</p>")
 type schedule = {
   @ocaml.doc("<p>The name of the schedule.</p>") @as("Name") name: scheduleName,
   @ocaml.doc("<p>Metadata tags that have been applied to the schedule.</p>") @as("Tags")
   tags: option<tagMap>,
   @ocaml.doc("<p>The dates and times when the job is to run. For more information, see <a href=\"https://docs.aws.amazon.com/databrew/latest/dg/jobs.cron.html\">Cron
-                expressions</a> in the <i>AWS Glue DataBrew Developer
+            expressions</a> in the <i>Glue DataBrew Developer
             Guide</i>.</p>")
   @as("CronExpression")
   cronExpression: option<cronExpression>,
@@ -319,12 +412,50 @@ type schedule = {
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the user who created the schedule.</p>")
   @as("CreatedBy")
   createdBy: option<createdBy>,
-  @ocaml.doc("<p>The ID of the AWS account that owns the schedule.</p>") @as("AccountId")
+  @ocaml.doc("<p>The ID of the Amazon Web Services account that owns the schedule.</p>")
+  @as("AccountId")
+  accountId: option<accountId>,
+}
+@ocaml.doc("<p>Represents options that specify how and where DataBrew writes the Amazon S3 output 
+            generated by recipe jobs.</p>")
+type s3TableOutputOptions = {
+  @ocaml.doc("<p>Represents an Amazon S3 location (bucket name and object key) where DataBrew can write output 
+            from a job.</p>")
+  @as("Location")
+  location: s3Location,
+}
+@ocaml.doc("<p>Contains metadata about the ruleset.</p>")
+type rulesetItem = {
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of a resource (dataset) that the ruleset is 
+            associated with.</p>")
+  @as("TargetArn")
+  targetArn: arn,
+  @ocaml.doc("<p>Metadata tags that have been applied to the ruleset.</p>") @as("Tags")
+  tags: option<tagMap>,
+  @ocaml.doc("<p>The number of rules that are defined in the ruleset.</p>") @as("RuleCount")
+  ruleCount: option<ruleCount>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) for the ruleset.</p>") @as("ResourceArn")
+  resourceArn: option<arn>,
+  @ocaml.doc("<p>The name of the ruleset.</p>") @as("Name") name: rulesetName,
+  @ocaml.doc("<p>The modification date and time of the ruleset.</p>") @as("LastModifiedDate")
+  lastModifiedDate: option<date>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the user who last modified the ruleset.</p>")
+  @as("LastModifiedBy")
+  lastModifiedBy: option<lastModifiedBy>,
+  @ocaml.doc("<p>The description of the ruleset.</p>") @as("Description")
+  description: option<rulesetDescription>,
+  @ocaml.doc("<p>The date and time that the ruleset was created.</p>") @as("CreateDate")
+  createDate: option<date>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the user who created the ruleset.</p>")
+  @as("CreatedBy")
+  createdBy: option<createdBy>,
+  @ocaml.doc("<p>The ID of the Amazon Web Services account that owns the ruleset.</p>")
+  @as("AccountId")
   accountId: option<accountId>,
 }
 type recipeErrorList = array<recipeVersionErrorDetail>
 @ocaml.doc("<p>Represents a transformation and associated parameters that are used to apply a change
-            to a DataBrew dataset. For more information, see <a href=\"https://docs.aws.amazon.com/databrew/latest/dg/recipe-structure.html\">Recipe structure</a> and <a href=\"https://docs.aws.amazon.com/databrew/latest/dg/recipe-actions-reference.html\">Recipe
+            to a DataBrew dataset. For more information, see <a href=\"https://docs.aws.amazon.com/databrew/latest/dg/recipe-actions-reference.html\">Recipe
                 actions reference</a>.</p>")
 type recipeAction = {
   @ocaml.doc("<p>Contextual parameters for the transformation.</p>") @as("Parameters")
@@ -368,7 +499,8 @@ type project = {
   createdBy: option<createdBy>,
   @ocaml.doc("<p>The date and time that the project was created.</p>") @as("CreateDate")
   createDate: option<date>,
-  @ocaml.doc("<p>The ID of the AWS account that owns the project.</p>") @as("AccountId")
+  @ocaml.doc("<p>The ID of the Amazon Web Services account that owns the project.</p>")
+  @as("AccountId")
   accountId: option<accountId>,
 }
 @ocaml.doc(
@@ -380,7 +512,10 @@ type outputFormatOptions = {
   @as("Csv")
   csv: option<csvOutputOptions>,
 }
-@ocaml.doc("<p>Represents a structure for defining parameter conditions.</p>")
+@ocaml.doc("<p>Represents a structure for defining parameter conditions. Supported conditions are described
+            here: <a href=\"https://docs.aws.amazon.com/databrew/latest/dg/datasets.multiple-files.html#conditions.for.dynamic.datasets\">Supported 
+                conditions for dynamic datasets</a> in the 
+            <i>Glue DataBrew Developer Guide</i>.</p>")
 type filterExpression = {
   @ocaml.doc(
     "<p>The map of substitution variable names to their values used in this filter expression.</p>"
@@ -410,22 +545,35 @@ type excelOptions = {
   @as("SheetNames")
   sheetNames: option<sheetNameList>,
 }
+@ocaml.doc("<p>Represents options that specify how and where DataBrew writes the database 
+            output generated by recipe jobs.</p>")
+type databaseTableOutputOptions = {
+  @ocaml.doc("<p>A prefix for the name of a table DataBrew will create in the database.</p>")
+  @as("TableName")
+  tableName: databaseTableName,
+  @ocaml.doc("<p>Represents an Amazon S3 location (bucket name and object key) where DataBrew can store 
+            intermediate results.</p>")
+  @as("TempDirectory")
+  tempDirectory: option<s3Location>,
+}
 @ocaml.doc("<p>Connection information for dataset input files stored in a database.</p>")
 type databaseInputDefinition = {
+  @ocaml.doc("<p>Custom SQL to run against the provided Glue connection. This SQL will be used as 
+            the input for DataBrew projects and jobs.</p>")
+  @as("QueryString")
+  queryString: option<queryString>,
   @as("TempDirectory") tempDirectory: option<s3Location>,
   @ocaml.doc("<p>The table within the target database.</p>") @as("DatabaseTableName")
-  databaseTableName: databaseTableName,
-  @ocaml.doc("<p>The AWS Glue Connection that stores the connection information for the target
+  databaseTableName: option<databaseTableName>,
+  @ocaml.doc("<p>The Glue Connection that stores the connection information for the target
             database.</p>")
   @as("GlueConnectionName")
   glueConnectionName: glueConnectionName,
 }
-@ocaml.doc("<p>Represents how metadata stored in the AWS Glue Data Catalog is defined in a DataBrew
+@ocaml.doc("<p>Represents how metadata stored in the Glue Data Catalog is defined in a DataBrew
             dataset. </p>")
 type dataCatalogInputDefinition = {
-  @ocaml.doc(
-    "<p>An Amazon location that AWS Glue Data Catalog can use as a temporary directory.</p>"
-  )
+  @ocaml.doc("<p>Represents an Amazon location where DataBrew can store intermediate results.</p>")
   @as("TempDirectory")
   tempDirectory: option<s3Location>,
   @ocaml.doc("<p>The name of a database table in the Data Catalog. This table corresponds to a DataBrew
@@ -434,13 +582,66 @@ type dataCatalogInputDefinition = {
   tableName: tableName,
   @ocaml.doc("<p>The name of a database in the Data Catalog.</p>") @as("DatabaseName")
   databaseName: databaseName,
-  @ocaml.doc("<p>The unique identifier of the AWS account that holds the Data Catalog that stores the
+  @ocaml.doc("<p>The unique identifier of the Amazon Web Services account that holds the Data Catalog that stores the
             data.</p>")
   @as("CatalogId")
   catalogId: option<catalogId>,
 }
 type conditionExpressionList = array<conditionExpression>
+type columnSelectorList = array<columnSelector>
+@ocaml.doc("<p>Configuration of statistics that are allowed to be run on columns that 
+            contain detected entities. When undefined, no statistics will be computed 
+            on columns that contain detected entities.</p>")
+type allowedStatistics = {
+  @ocaml.doc(
+    "<p>One or more column statistics to allow for columns that contain detected entities.</p>"
+  )
+  @as("Statistics")
+  statistics: statisticList,
+}
+type statisticOverrideList = array<statisticOverride>
 type scheduleList = array<schedule>
+type rulesetItemList = array<rulesetItem>
+@ocaml.doc("<p>Represents a single data quality requirement that should be validated in the 
+            scope of this dataset.</p>")
+type rule = {
+  @ocaml.doc("<p>List of column selectors. Selectors can be used to select columns using a name or regular 
+            expression from the dataset. Rule will be applied to selected columns.</p>")
+  @as("ColumnSelectors")
+  columnSelectors: option<columnSelectorList>,
+  @ocaml.doc("<p>The threshold used with a non-aggregate check expression. Non-aggregate check expressions 
+            will be applied to each row in a specific column, and the threshold will be used to determine 
+            whether the validation succeeds.</p>")
+  @as("Threshold")
+  threshold: option<threshold>,
+  @ocaml.doc("<p>The map of substitution variable names to their values used in a check 
+            expression. Variable names should start with a ':' (colon).  Variable values can either 
+            be actual values or column names. To differentiate between the two, column names 
+            should be enclosed in backticks, for example, <code>\":col1\": \"`Column A`\".</code>
+         </p>")
+  @as("SubstitutionMap")
+  substitutionMap: option<valuesMap>,
+  @ocaml.doc("<p>The expression which includes column references, condition names followed by variable
+            references, possibly grouped and combined with other conditions. For example,
+                <code>(:col1 starts_with :prefix1 or :col1 starts_with :prefix2) and (:col1
+                ends_with :suffix1 or :col1 ends_with :suffix2)</code>. Column and value references
+            are substitution variables that should start with the ':' symbol. Depending on the
+            context, substitution variables' values can be either an actual value or a column name.
+            These values are defined in the SubstitutionMap. If a CheckExpression starts with a
+            column reference, then ColumnSelectors in the rule should be null. If ColumnSelectors
+            has been defined, then there should be no column reference in the left side of a
+            condition, for example, <code>is_between :val1 and :val2</code>.</p>
+        <p>For more information, see <a href=\"https://docs.aws.amazon.com/databrew/latest/dg/profile.data-quality-available-checks.html\">Available checks</a>
+         </p>")
+  @as("CheckExpression")
+  checkExpression: expression,
+  @ocaml.doc("<p>A value that specifies whether the rule is disabled. Once a rule is 
+            disabled, a profile job will not validate it during a job run. Default 
+            value is false.</p>")
+  @as("Disabled")
+  disabled: option<disabled>,
+  @ocaml.doc("<p>The name of the rule.</p>") @as("Name") name: ruleName,
+}
 @ocaml.doc("<p>Represents a single step from a DataBrew recipe to be performed.</p>")
 type recipeStep = {
   @ocaml.doc("<p>One or more conditions that must be met for the recipe step to succeed.</p>
@@ -454,9 +655,13 @@ type recipeStep = {
   action: recipeAction,
 }
 type projectList = array<project>
-@ocaml.doc("<p>Represents options that specify how and where DataBrew writes the output generated by
+@ocaml.doc("<p>Represents options that specify how and where in Amazon S3 DataBrew writes the output generated by
             recipe jobs or profile jobs.</p>")
 type output = {
+  @ocaml.doc("<p>Maximum number of files to be generated by the job and written to the output folder. For output partitioned 
+            by column(s), the MaxOutputFiles value is the maximum number of files per partition.</p>")
+  @as("MaxOutputFiles")
+  maxOutputFiles: option<maxOutputFiles>,
   @ocaml.doc("<p>Represents options that define how DataBrew formats job output files.</p>")
   @as("FormatOptions")
   formatOptions: option<outputFormatOptions>,
@@ -475,21 +680,23 @@ type output = {
   @as("CompressionFormat")
   compressionFormat: option<compressionFormat>,
 }
-@ocaml.doc("<p>Represents information on how DataBrew can find data, in either the AWS Glue Data Catalog or
+@ocaml.doc("<p>Represents information on how DataBrew can find data, in either the Glue Data Catalog or
             Amazon S3.</p>")
 type input = {
+  @ocaml.doc("<p>Contains additional resource information needed for specific datasets.</p>")
+  @as("Metadata")
+  metadata: option<metadata>,
   @ocaml.doc("<p>Connection information for dataset input files stored in a database.</p>")
   @as("DatabaseInputDefinition")
   databaseInputDefinition: option<databaseInputDefinition>,
-  @ocaml.doc("<p>The AWS Glue Data Catalog parameters for the data.</p>")
+  @ocaml.doc("<p>The Glue Data Catalog parameters for the data.</p>")
   @as("DataCatalogInputDefinition")
   dataCatalogInputDefinition: option<dataCatalogInputDefinition>,
   @ocaml.doc("<p>The Amazon S3 location where the data is stored.</p>") @as("S3InputDefinition")
   s3InputDefinition: option<s3Location>,
 }
-@ocaml.doc(
-  "<p>Represents a set of options that define the structure of either comma-separated value (CSV), Excel, or JSON input.</p>"
-)
+@ocaml.doc("<p>Represents a set of options that define the structure of either comma-separated value (CSV),
+            Excel, or JSON input.</p>")
 type formatOptions = {
   @ocaml.doc("<p>Options that define how CSV input is to be interpreted by DataBrew.</p>")
   @as("Csv")
@@ -501,18 +708,16 @@ type formatOptions = {
   @as("Json")
   json: option<jsonOptions>,
 }
-@ocaml.doc(
-  "<p>Represents a dataset paramater that defines type and conditions for a parameter in the S3 path of the dataset.</p>"
-)
+@ocaml.doc("<p>Represents a dataset parameter that defines type and conditions for a parameter in the
+                Amazon S3 path of the dataset.</p>")
 type datasetParameter = {
   @ocaml.doc(
     "<p>The optional filter expression structure to apply additional matching criteria to the parameter.</p>"
   )
   @as("Filter")
   filter: option<filterExpression>,
-  @ocaml.doc(
-    "<p>Optional boolean value that defines whether the captured value of this parameter should be loaded as an additional column in the dataset.</p>"
-  )
+  @ocaml.doc("<p>Optional boolean value that defines whether the captured value of this parameter 
+            should be used to create a new column in a dataset.</p>")
   @as("CreateColumn")
   createColumn: option<createColumn>,
   @ocaml.doc(
@@ -525,15 +730,144 @@ type datasetParameter = {
   )
   @as("Type")
   type_: parameterType,
-  @ocaml.doc("<p>The name of the parameter that is used in the dataset's S3 path.</p>") @as("Name")
+  @ocaml.doc("<p>The name of the parameter that is used in the dataset's Amazon S3 path.</p>")
+  @as("Name")
   name: pathParameterName,
 }
+@ocaml.doc("<p>Represents a JDBC database output object which defines the output destination for 
+            a DataBrew recipe job to write into.</p>")
+type databaseOutput = {
+  @ocaml.doc(
+    "<p>The output mode to write into the database. Currently supported option: NEW_TABLE.</p>"
+  )
+  @as("DatabaseOutputMode")
+  databaseOutputMode: option<databaseOutputMode>,
+  @ocaml.doc("<p>Represents options that specify how and where DataBrew writes the database output 
+            generated by recipe jobs.</p>")
+  @as("DatabaseOptions")
+  databaseOptions: databaseTableOutputOptions,
+  @ocaml.doc("<p>The Glue connection that stores the connection information for the 
+            target database.</p>")
+  @as("GlueConnectionName")
+  glueConnectionName: glueConnectionName,
+}
+@ocaml.doc("<p>Represents options that specify how and where in the Glue Data Catalog DataBrew 
+            writes the output generated by recipe jobs.</p>")
+type dataCatalogOutput = {
+  @ocaml.doc("<p>A value that, if true, means that any data in the location specified for output 
+            is overwritten with new output. Not supported with DatabaseOptions.</p>")
+  @as("Overwrite")
+  overwrite: option<overwriteOutput>,
+  @ocaml.doc("<p>Represents options that specify how and where DataBrew writes the database output 
+            generated by recipe jobs.</p>")
+  @as("DatabaseOptions")
+  databaseOptions: option<databaseTableOutputOptions>,
+  @ocaml.doc("<p>Represents options that specify how and where DataBrew writes the Amazon S3 
+            output generated by recipe jobs.</p>")
+  @as("S3Options")
+  s3Options: option<s3TableOutputOptions>,
+  @ocaml.doc("<p>The name of a table in the Data Catalog.</p>") @as("TableName")
+  tableName: tableName,
+  @ocaml.doc("<p>The name of a database in the Data Catalog.</p>") @as("DatabaseName")
+  databaseName: databaseName,
+  @ocaml.doc("<p>The unique identifier of the Amazon Web Services account that holds the Data Catalog that 
+            stores the data.</p>")
+  @as("CatalogId")
+  catalogId: option<catalogId>,
+}
+type allowedStatisticList = array<allowedStatistics>
+@ocaml.doc("<p>Configuration of evaluations for a profile job. This configuration can be used to select 
+            evaluations and override the parameters of selected evaluations.
+        </p>")
+type statisticsConfiguration = {
+  @ocaml.doc("<p>List of overrides for evaluations.</p>") @as("Overrides")
+  overrides: option<statisticOverrideList>,
+  @ocaml.doc("<p>List of included evaluations. When the list is undefined, all supported 
+            evaluations will be included.</p>")
+  @as("IncludedStatistics")
+  includedStatistics: option<statisticList>,
+}
+type ruleList = array<rule>
 type recipeStepList = array<recipeStep>
-@ocaml.doc(
-  "<p>A structure that map names of parameters used in the S3 path of a dataset to their definitions. A definition includes parameter type and conditions.</p>"
-)
+@ocaml.doc("<p>A structure that map names of parameters used in the Amazon S3 path of a dataset to their definitions. 
+            A definition includes parameter type and conditions.</p>")
 type pathParametersMap = Js.Dict.t<datasetParameter>
 type outputList = array<output>
+@ocaml.doc("<p>Configuration of entity detection for a profile job. When undefined, entity 
+            detection is disabled.</p>")
+type entityDetectorConfiguration = {
+  @ocaml.doc("<p>Configuration of statistics that are allowed to be run on columns that 
+            contain detected entities. When undefined, no statistics will be computed 
+            on columns that contain detected entities.</p>")
+  @as("AllowedStatistics")
+  allowedStatistics: option<allowedStatisticList>,
+  @ocaml.doc("<p>Entity types to detect. Can be any of the following:</p>
+        <ul>
+            <li>
+               <p>USA_SSN</p>
+            </li>
+            <li>
+               <p>EMAIL</p>
+            </li>
+            <li>
+               <p>USA_ITIN</p>
+            </li>
+            <li>
+               <p>USA_PASSPORT_NUMBER</p>
+            </li>
+            <li>
+               <p>PHONE_NUMBER</p>
+            </li>
+            <li>
+               <p>USA_DRIVING_LICENSE</p>
+            </li>
+            <li>
+               <p>BANK_ACCOUNT</p>
+            </li>
+            <li>
+               <p>CREDIT_CARD</p>
+            </li>
+            <li>
+               <p>IP_ADDRESS</p>
+            </li>
+            <li>
+               <p>MAC_ADDRESS</p>
+            </li>
+            <li>
+               <p>USA_DEA_NUMBER</p>
+            </li>
+            <li>
+               <p>USA_HCPCS_CODE</p>
+            </li>
+            <li>
+               <p>USA_NATIONAL_PROVIDER_IDENTIFIER</p>
+            </li>
+            <li>
+               <p>USA_NATIONAL_DRUG_CODE</p>
+            </li>
+            <li>
+               <p>USA_HEALTH_INSURANCE_CLAIM_NUMBER</p>
+            </li>
+            <li>
+               <p>USA_MEDICARE_BENEFICIARY_IDENTIFIER</p>
+            </li>
+            <li>
+               <p>USA_CPT_CODE</p>
+            </li>
+            <li>
+               <p>PERSON_NAME</p>
+            </li>
+            <li>
+               <p>DATE</p>
+            </li>
+         </ul>
+        <p>The Entity type group USA_ALL is also supported, and includes all of the 
+            above entity types except PERSON_NAME and DATE.</p>")
+  @as("EntityTypes")
+  entityTypes: entityTypeList,
+}
+type databaseOutputList = array<databaseOutput>
+type dataCatalogOutputList = array<dataCatalogOutput>
 @ocaml.doc("<p>Represents one or more actions to be performed on a DataBrew dataset.</p>")
 type recipe = {
   @ocaml.doc("<p>The identifier for the version for the recipe. Must be one of the following:</p>
@@ -584,12 +918,11 @@ type recipe = {
   @as("CreatedBy")
   createdBy: option<createdBy>,
 }
-@ocaml.doc(
-  "<p>Represents a set of options that define how DataBrew selects files for a given S3 path in a dataset.</p>"
-)
+@ocaml.doc("<p>Represents a set of options that define how DataBrew selects files for a given Amazon S3 
+            path in a dataset.</p>")
 type pathOptions = {
   @ocaml.doc(
-    "<p>A structure that maps names of parameters used in the S3 path of a dataset to their definitions.</p>"
+    "<p>A structure that maps names of parameters used in the Amazon S3 path of a dataset to their definitions.</p>"
   )
   @as("Parameters")
   parameters: option<pathParametersMap>,
@@ -598,14 +931,16 @@ type pathOptions = {
   )
   @as("FilesLimit")
   filesLimit: option<filesLimit>,
-  @ocaml.doc(
-    "<p>If provided, this structure defines a date range for matching S3 objects based on their LastModifiedDate attribute in S3.</p>"
-  )
+  @ocaml.doc("<p>If provided, this structure defines a date range for matching Amazon S3 objects based on their 
+            LastModifiedDate attribute in Amazon S3.</p>")
   @as("LastModifiedDateCondition")
   lastModifiedDateCondition: option<filterExpression>,
 }
 @ocaml.doc("<p>Represents one run of a DataBrew job.</p>")
 type jobRun = {
+  @ocaml.doc("<p>List of validation configurations that are applied to the profile job run.</p>")
+  @as("ValidationConfigurations")
+  validationConfigurations: option<validationConfigurationList>,
   @ocaml.doc("<p>A sample configuration for profile jobs only, which determines the number of rows on which the
             profile job is run. If a <code>JobSample</code> value isn't provided, the default
             is used. The default value is CUSTOM_ROWS for the mode parameter and 20,000 for the
@@ -619,6 +954,14 @@ type jobRun = {
   startedBy: option<startedBy>,
   @ocaml.doc("<p>The set of steps processed by the job.</p>") @as("RecipeReference")
   recipeReference: option<recipeReference>,
+  @ocaml.doc("<p>Represents a list of JDBC database output objects which defines the output 
+            destination for a DataBrew recipe job to write into.</p>")
+  @as("DatabaseOutputs")
+  databaseOutputs: option<databaseOutputList>,
+  @ocaml.doc("<p>One or more artifacts that represent the Glue Data Catalog output 
+            from running the job.</p>")
+  @as("DataCatalogOutputs")
+  dataCatalogOutputs: option<dataCatalogOutputList>,
   @ocaml.doc("<p>One or more output artifacts from a job run.</p>") @as("Outputs")
   outputs: option<outputList>,
   @ocaml.doc("<p>The name of an Amazon CloudWatch log group, where the job writes diagnostic messages
@@ -649,6 +992,9 @@ type jobRun = {
 }
 @ocaml.doc("<p>Represents all of the attributes of a DataBrew job.</p>")
 type job = {
+  @ocaml.doc("<p>List of validation configurations that are applied to the profile job.</p>")
+  @as("ValidationConfigurations")
+  validationConfigurations: option<validationConfigurationList>,
   @ocaml.doc("<p>A sample configuration for profile jobs only, which determines the number of rows on which the
             profile job is run. If a <code>JobSample</code> value isn't provided, the default value
             is used. The default value is CUSTOM_ROWS for the mode parameter and 20,000 for the
@@ -670,6 +1016,14 @@ type job = {
   recipeReference: option<recipeReference>,
   @ocaml.doc("<p>The name of the project that the job is associated with.</p>") @as("ProjectName")
   projectName: option<projectName>,
+  @ocaml.doc("<p>Represents a list of JDBC database output objects which defines the output 
+            destination for a DataBrew recipe job to write into.</p>")
+  @as("DatabaseOutputs")
+  databaseOutputs: option<databaseOutputList>,
+  @ocaml.doc("<p>One or more artifacts that represent the Glue Data Catalog output 
+            from running the job.</p>")
+  @as("DataCatalogOutputs")
+  dataCatalogOutputs: option<dataCatalogOutputList>,
   @ocaml.doc("<p>One or more artifacts that represent output from running the job.</p>")
   @as("Outputs")
   outputs: option<outputList>,
@@ -707,12 +1061,11 @@ type job = {
         <ul>
             <li>
                 <p>
-                  <code>SSE-KMS</code> - Server-side encryption with keys managed by AWS KMS.</p>
+                  <code>SSE-KMS</code> - Server-side encryption with keys managed by KMS.</p>
             </li>
             <li>
                 <p>
-                  <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon
-                    S3.</p>
+                  <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p>
             </li>
          </ul>")
   @as("EncryptionMode")
@@ -730,8 +1083,23 @@ type job = {
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the user who created the job.</p>")
   @as("CreatedBy")
   createdBy: option<createdBy>,
-  @ocaml.doc("<p>The ID of the AWS account that owns the job.</p>") @as("AccountId")
+  @ocaml.doc("<p>The ID of the Amazon Web Services account that owns the job.</p>") @as("AccountId")
   accountId: option<accountId>,
+}
+@ocaml.doc("<p>Configuration for column evaluations for a profile job. ColumnStatisticsConfiguration can be used to select 
+            evaluations and override parameters of evaluations for particular columns. 
+        </p>")
+type columnStatisticsConfiguration = {
+  @ocaml.doc("<p>Configuration for evaluations. Statistics can be used to select evaluations and override 
+            parameters of evaluations. 
+        </p>")
+  @as("Statistics")
+  statistics: statisticsConfiguration,
+  @ocaml.doc("<p>List of column selectors. Selectors can be used to select columns from the dataset. 
+            When selectors are undefined, configuration will be applied to all supported columns.
+        </p>")
+  @as("Selectors")
+  selectors: option<columnSelectorList>,
 }
 type recipeList = array<recipe>
 type jobRunList = array<jobRun>
@@ -742,13 +1110,13 @@ type dataset = {
   resourceArn: option<arn>,
   @ocaml.doc("<p>Metadata tags that have been applied to the dataset.</p>") @as("Tags")
   tags: option<tagMap>,
-  @ocaml.doc(
-    "<p>A set of options that defines how DataBrew interprets an S3 path of the dataset.</p>"
-  )
+  @ocaml.doc("<p>A set of options that defines how DataBrew interprets an Amazon S3 
+            path of the dataset.</p>")
   @as("PathOptions")
   pathOptions: option<pathOptions>,
-  @ocaml.doc("<p>The location of the data for the dataset, either Amazon S3 or the AWS Glue Data
-            Catalog.</p>")
+  @ocaml.doc(
+    "<p>The location of the data for the dataset, either Amazon S3 or the Glue Data Catalog.</p>"
+  )
   @as("Source")
   source: option<source>,
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the user who last modified the dataset.</p>")
@@ -756,14 +1124,16 @@ type dataset = {
   lastModifiedBy: option<lastModifiedBy>,
   @ocaml.doc("<p>The last modification date and time of the dataset.</p>") @as("LastModifiedDate")
   lastModifiedDate: option<date>,
-  @ocaml.doc("<p>Information on how DataBrew can find the dataset, in either the AWS Glue Data Catalog
+  @ocaml.doc("<p>Information on how DataBrew can find the dataset, in either the Glue Data Catalog
             or Amazon S3.</p>")
   @as("Input")
   input: input,
   @ocaml.doc("<p>A set of options that define how DataBrew interprets the data in the dataset.</p>")
   @as("FormatOptions")
   formatOptions: option<formatOptions>,
-  @ocaml.doc("<p>The file format of a dataset that is created from an S3 file or folder.</p>")
+  @ocaml.doc(
+    "<p>The file format of a dataset that is created from an Amazon S3 file or folder.</p>"
+  )
   @as("Format")
   format: option<inputFormat>,
   @ocaml.doc("<p>The unique name of the dataset.</p>") @as("Name") name: datasetName,
@@ -772,11 +1142,42 @@ type dataset = {
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the user who created the dataset.</p>")
   @as("CreatedBy")
   createdBy: option<createdBy>,
-  @ocaml.doc("<p>The ID of the AWS account that owns the dataset.</p>") @as("AccountId")
+  @ocaml.doc("<p>The ID of the Amazon Web Services account that owns the dataset.</p>")
+  @as("AccountId")
   accountId: option<accountId>,
 }
+type columnStatisticsConfigurationList = array<columnStatisticsConfiguration>
+@ocaml.doc("<p>Configuration for profile jobs. Configuration can be used to select columns, do evaluations, and override default 
+            parameters of evaluations. When configuration is undefined, the profile job will apply default settings to all 
+            supported columns.
+        </p>")
+type profileConfiguration = {
+  @ocaml.doc(
+    "<p>Configuration of entity detection for a profile job. When undefined, entity detection is disabled.</p>"
+  )
+  @as("EntityDetectorConfiguration")
+  entityDetectorConfiguration: option<entityDetectorConfiguration>,
+  @ocaml.doc("<p>List of configurations for column evaluations. ColumnStatisticsConfigurations are used to 
+            select evaluations and override parameters of evaluations for particular columns. When 
+            ColumnStatisticsConfigurations is undefined,  the profile job will profile all supported columns 
+            and run all supported  evaluations.
+        </p>")
+  @as("ColumnStatisticsConfigurations")
+  columnStatisticsConfigurations: option<columnStatisticsConfigurationList>,
+  @ocaml.doc("<p>List of column selectors. ProfileColumns can be used to select columns from the dataset. When 
+            ProfileColumns is undefined, the profile job will profile all supported columns.
+        </p>")
+  @as("ProfileColumns")
+  profileColumns: option<columnSelectorList>,
+  @ocaml.doc("<p>Configuration for inter-column evaluations. Configuration can be used to select evaluations and override 
+            parameters of evaluations. When configuration is undefined, the profile job will run all supported 
+            inter-column evaluations.
+        </p>")
+  @as("DatasetStatisticsConfiguration")
+  datasetStatisticsConfiguration: option<statisticsConfiguration>,
+}
 type datasetList = array<dataset>
-@ocaml.doc("<p>AWS Glue DataBrew is a visual, cloud-scale data-preparation service. DataBrew
+@ocaml.doc("<p>Glue DataBrew is a visual, cloud-scale data-preparation service. DataBrew
             simplifies data preparation tasks, targeting data issues that are hard to spot and
             time-consuming to fix. DataBrew empowers users of all technical levels to visualize the
             data and perform one-click data transformations, with no coding required.</p>")
@@ -856,6 +1257,19 @@ module DeleteSchedule = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module DeleteRuleset = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The name of the ruleset to be deleted.</p>") @as("Name") name: rulesetName,
+  }
+  type response = {
+    @ocaml.doc("<p>The name of the deleted ruleset.</p>") @as("Name") name: rulesetName,
+  }
+  @module("@aws-sdk/client-databrew") @new external new: request => t = "DeleteRulesetCommand"
+  let make = (~name, ()) => new({name: name})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module DeleteRecipeVersion = {
   type t
   type request = {
@@ -919,7 +1333,7 @@ module UpdateSchedule = {
     @ocaml.doc("<p>The name of the schedule to update.</p>") @as("Name") name: scheduleName,
     @ocaml.doc("<p>The date or dates and time or times when the jobs are to be run. For more information,
             see <a href=\"https://docs.aws.amazon.com/databrew/latest/dg/jobs.cron.html\">Cron
-                expressions</a> in the <i>AWS Glue DataBrew Developer
+                expressions</a> in the <i>Glue DataBrew Developer
             Guide</i>.</p>")
     @as("CronExpression")
     cronExpression: cronExpression,
@@ -958,88 +1372,6 @@ module UpdateProject = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
-module UpdateProfileJob = {
-  type t
-  type request = {
-    @ocaml.doc("<p>Sample configuration for Profile Jobs only. Determines the number of rows on which the
-            Profile job will be executed. If a JobSample value is not provided for profile jobs, the
-            default value will be used. The default value is CUSTOM_ROWS for the mode parameter and
-            20000 for the size parameter.</p>")
-    @as("JobSample")
-    jobSample: option<jobSample>,
-    @ocaml.doc("<p>The job's timeout in minutes. A job that attempts to run longer than this timeout
-            period ends with a status of <code>TIMEOUT</code>.</p>")
-    @as("Timeout")
-    timeout: option<timeout>,
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role to
-            be assumed when DataBrew runs the job.</p>")
-    @as("RoleArn")
-    roleArn: arn,
-    @as("OutputLocation") outputLocation: s3Location,
-    @ocaml.doc("<p>The maximum number of times to retry the job after a job run fails.</p>")
-    @as("MaxRetries")
-    maxRetries: option<maxRetries>,
-    @ocaml.doc("<p>The maximum number of compute nodes that DataBrew can use when the job processes
-            data.</p>")
-    @as("MaxCapacity")
-    maxCapacity: option<maxCapacity>,
-    @ocaml.doc("<p>Enables or disables Amazon CloudWatch logging for the job. If logging is enabled,
-            CloudWatch writes one log stream for each job run.</p>")
-    @as("LogSubscription")
-    logSubscription: option<logSubscription>,
-    @ocaml.doc("<p>The name of the job to be updated.</p>") @as("Name") name: jobName,
-    @ocaml.doc("<p>The encryption mode for the job, which can be one of the following:</p>
-        <ul>
-            <li>
-                <p>
-                  <code>SSE-KMS</code> - Server-side encryption with keys managed by AWS
-                    KMS.</p>
-            </li>
-            <li>
-                <p>
-                  <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon
-                    S3.</p>
-            </li>
-         </ul>")
-    @as("EncryptionMode")
-    encryptionMode: option<encryptionMode>,
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of an encryption key that is used to protect the
-            job.</p>")
-    @as("EncryptionKeyArn")
-    encryptionKeyArn: option<encryptionKeyArn>,
-  }
-  type response = {
-    @ocaml.doc("<p>The name of the job that was updated.</p>") @as("Name") name: jobName,
-  }
-  @module("@aws-sdk/client-databrew") @new external new: request => t = "UpdateProfileJobCommand"
-  let make = (
-    ~roleArn,
-    ~outputLocation,
-    ~name,
-    ~jobSample=?,
-    ~timeout=?,
-    ~maxRetries=?,
-    ~maxCapacity=?,
-    ~logSubscription=?,
-    ~encryptionMode=?,
-    ~encryptionKeyArn=?,
-    (),
-  ) =>
-    new({
-      jobSample: jobSample,
-      timeout: timeout,
-      roleArn: roleArn,
-      outputLocation: outputLocation,
-      maxRetries: maxRetries,
-      maxCapacity: maxCapacity,
-      logSubscription: logSubscription,
-      name: name,
-      encryptionMode: encryptionMode,
-      encryptionKeyArn: encryptionKeyArn,
-    })
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
 module UntagResource = {
   type t
   type request = {
@@ -1050,7 +1382,7 @@ module UntagResource = {
     @as("ResourceArn")
     resourceArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-databrew") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1066,7 +1398,7 @@ module TagResource = {
     @as("ResourceArn")
     resourceArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-databrew") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1100,7 +1432,7 @@ module DescribeSchedule = {
     tags: option<tagMap>,
     @ocaml.doc("<p>The date or dates and time or times when the jobs are to be run for the schedule. For
             more information, see <a href=\"https://docs.aws.amazon.com/databrew/latest/dg/jobs.cron.html\">Cron expressions</a> in the
-                <i>AWS Glue DataBrew Developer Guide</i>.</p>")
+            <i>Glue DataBrew Developer Guide</i>.</p>")
     @as("CronExpression")
     cronExpression: option<cronExpression>,
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the schedule.</p>") @as("ResourceArn")
@@ -1155,7 +1487,7 @@ module DescribeProject = {
     sessionStatus: option<sessionStatus>,
     @ocaml.doc("<p>Metadata tags associated with this project.</p>") @as("Tags")
     tags: option<tagMap>,
-    @ocaml.doc("<p>The ARN of the AWS Identity and Access Management (IAM) role to be assumed when
+    @ocaml.doc("<p>The ARN of the Identity and Access Management (IAM) role to be assumed when
             DataBrew runs the job.</p>")
     @as("RoleArn")
     roleArn: option<arn>,
@@ -1194,7 +1526,7 @@ module CreateSchedule = {
     @ocaml.doc("<p>Metadata tags to apply to this schedule.</p>") @as("Tags") tags: option<tagMap>,
     @ocaml.doc("<p>The date or dates and time or times when the jobs are to be run. For more information,
             see <a href=\"https://docs.aws.amazon.com/databrew/latest/dg/jobs.cron.html\">Cron
-                expressions</a> in the <i>AWS Glue DataBrew Developer
+                expressions</a> in the <i>Glue DataBrew Developer
             Guide</i>.</p>")
     @as("CronExpression")
     cronExpression: cronExpression,
@@ -1214,7 +1546,7 @@ module CreateProject = {
   type t
   type request = {
     @ocaml.doc("<p>Metadata tags to apply to this project.</p>") @as("Tags") tags: option<tagMap>,
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role to
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role to
             be assumed for this request.</p>")
     @as("RoleArn")
     roleArn: arn,
@@ -1241,99 +1573,6 @@ module CreateProject = {
       sample: sample,
       recipeName: recipeName,
       name: name,
-      datasetName: datasetName,
-    })
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
-module CreateProfileJob = {
-  type t
-  type request = {
-    @ocaml.doc("<p>Sample configuration for profile jobs only. Determines the number of rows on which the
-            profile job will be executed. If a JobSample value is not provided, the default value
-            will be used. The default value is CUSTOM_ROWS for the mode parameter and 20000 for the
-            size parameter.</p>")
-    @as("JobSample")
-    jobSample: option<jobSample>,
-    @ocaml.doc("<p>The job's timeout in minutes. A job that attempts to run longer than this timeout
-            period ends with a status of <code>TIMEOUT</code>.</p>")
-    @as("Timeout")
-    timeout: option<timeout>,
-    @ocaml.doc("<p>Metadata tags to apply to this job.</p>") @as("Tags") tags: option<tagMap>,
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role to
-            be assumed when DataBrew runs the job.</p>")
-    @as("RoleArn")
-    roleArn: arn,
-    @as("OutputLocation") outputLocation: s3Location,
-    @ocaml.doc("<p>The maximum number of times to retry the job after a job run fails.</p>")
-    @as("MaxRetries")
-    maxRetries: option<maxRetries>,
-    @ocaml.doc(
-      "<p>The maximum number of nodes that DataBrew can use when the job processes data.</p>"
-    )
-    @as("MaxCapacity")
-    maxCapacity: option<maxCapacity>,
-    @ocaml.doc("<p>Enables or disables Amazon CloudWatch logging for the job. If logging is enabled,
-            CloudWatch writes one log stream for each job run.</p>")
-    @as("LogSubscription")
-    logSubscription: option<logSubscription>,
-    @ocaml.doc("<p>The name of the job to be created. Valid characters are alphanumeric (A-Z, a-z, 0-9),
-            hyphen (-), period (.), and space.</p>")
-    @as("Name")
-    name: jobName,
-    @ocaml.doc("<p>The encryption mode for the job, which can be one of the following:</p>
-        <ul>
-            <li>
-                <p>
-                  <code>SSE-KMS</code> - <code>SSE-KMS</code> - Server-side encryption with AWS
-                    KMS-managed keys.</p>
-            </li>
-            <li>
-                <p>
-                  <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon
-                    S3.</p>
-            </li>
-         </ul>")
-    @as("EncryptionMode")
-    encryptionMode: option<encryptionMode>,
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of an encryption key that is used to protect the
-            job.</p>")
-    @as("EncryptionKeyArn")
-    encryptionKeyArn: option<encryptionKeyArn>,
-    @ocaml.doc("<p>The name of the dataset that this job is to act upon.</p>") @as("DatasetName")
-    datasetName: datasetName,
-  }
-  type response = {
-    @ocaml.doc("<p>The name of the job that was created.</p>") @as("Name") name: jobName,
-  }
-  @module("@aws-sdk/client-databrew") @new external new: request => t = "CreateProfileJobCommand"
-  let make = (
-    ~roleArn,
-    ~outputLocation,
-    ~name,
-    ~datasetName,
-    ~jobSample=?,
-    ~timeout=?,
-    ~tags=?,
-    ~maxRetries=?,
-    ~maxCapacity=?,
-    ~logSubscription=?,
-    ~encryptionMode=?,
-    ~encryptionKeyArn=?,
-    (),
-  ) =>
-    new({
-      jobSample: jobSample,
-      timeout: timeout,
-      tags: tags,
-      roleArn: roleArn,
-      outputLocation: outputLocation,
-      maxRetries: maxRetries,
-      maxCapacity: maxCapacity,
-      logSubscription: logSubscription,
-      name: name,
-      encryptionMode: encryptionMode,
-      encryptionKeyArn: encryptionKeyArn,
       datasetName: datasetName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
@@ -1439,6 +1678,36 @@ module ListSchedules = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module ListRulesets = {
+  type t
+  type request = {
+    @ocaml.doc("<p>A token generated by DataBrew that specifies where to continue pagination 
+            if a previous request was truncated. To get the next set of pages, pass in 
+            the NextToken value from the response object of the previous page call.</p>")
+    @as("NextToken")
+    nextToken: option<nextToken>,
+    @ocaml.doc("<p>The maximum number of results to return in this request.</p>") @as("MaxResults")
+    maxResults: option<maxResults100>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of a resource (dataset). Using this parameter 
+            indicates to return only those rulesets that are associated with the specified resource.</p>")
+    @as("TargetArn")
+    targetArn: option<arn>,
+  }
+  type response = {
+    @ocaml.doc("<p>A token that you can use in a subsequent call to retrieve the next set of
+            results.</p>")
+    @as("NextToken")
+    nextToken: option<nextToken>,
+    @ocaml.doc("<p>A list of RulesetItem. RulesetItem contains meta data of a ruleset.</p>")
+    @as("Rulesets")
+    rulesets: rulesetItemList,
+  }
+  @module("@aws-sdk/client-databrew") @new external new: request => t = "ListRulesetsCommand"
+  let make = (~nextToken=?, ~maxResults=?, ~targetArn=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults, targetArn: targetArn})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module ListProjects = {
   type t
   type request = {
@@ -1462,6 +1731,26 @@ module ListProjects = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module UpdateRuleset = {
+  type t
+  type request = {
+    @ocaml.doc("<p>A list of rules that are defined with the ruleset. A rule includes one or more 
+            checks to be validated on a DataBrew dataset.</p>")
+    @as("Rules")
+    rules: ruleList,
+    @ocaml.doc("<p>The description of the ruleset.</p>") @as("Description")
+    description: option<rulesetDescription>,
+    @ocaml.doc("<p>The name of the ruleset to be updated.</p>") @as("Name") name: rulesetName,
+  }
+  type response = {
+    @ocaml.doc("<p>The name of the updated ruleset.</p>") @as("Name") name: rulesetName,
+  }
+  @module("@aws-sdk/client-databrew") @new external new: request => t = "UpdateRulesetCommand"
+  let make = (~rules, ~name, ~description=?, ()) =>
+    new({rules: rules, description: description, name: name})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module UpdateRecipeJob = {
   type t
   type request = {
@@ -1469,13 +1758,22 @@ module UpdateRecipeJob = {
             period ends with a status of <code>TIMEOUT</code>.</p>")
     @as("Timeout")
     timeout: option<timeout>,
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role to
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role to
             be assumed when DataBrew runs the job.</p>")
     @as("RoleArn")
     roleArn: arn,
+    @ocaml.doc("<p>Represents a list of JDBC database output objects which defines the output destination for a 
+            DataBrew recipe job to write into.</p>")
+    @as("DatabaseOutputs")
+    databaseOutputs: option<databaseOutputList>,
+    @ocaml.doc(
+      "<p>One or more artifacts that represent the Glue Data Catalog output from running the job.</p>"
+    )
+    @as("DataCatalogOutputs")
+    dataCatalogOutputs: option<dataCatalogOutputList>,
     @ocaml.doc("<p>One or more artifacts that represent the output from running the job. </p>")
     @as("Outputs")
-    outputs: outputList,
+    outputs: option<outputList>,
     @ocaml.doc("<p>The maximum number of times to retry the job after a job run fails.</p>")
     @as("MaxRetries")
     maxRetries: option<maxRetries>,
@@ -1492,13 +1790,11 @@ module UpdateRecipeJob = {
         <ul>
             <li>
                 <p>
-                  <code>SSE-KMS</code> - Server-side encryption with keys managed by AWS
-                    KMS.</p>
+                  <code>SSE-KMS</code> - Server-side encryption with keys managed by KMS.</p>
             </li>
             <li>
                 <p>
-                  <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon
-                    S3.</p>
+                  <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p>
             </li>
          </ul>")
     @as("EncryptionMode")
@@ -1514,9 +1810,11 @@ module UpdateRecipeJob = {
   @module("@aws-sdk/client-databrew") @new external new: request => t = "UpdateRecipeJobCommand"
   let make = (
     ~roleArn,
-    ~outputs,
     ~name,
     ~timeout=?,
+    ~databaseOutputs=?,
+    ~dataCatalogOutputs=?,
+    ~outputs=?,
     ~maxRetries=?,
     ~maxCapacity=?,
     ~logSubscription=?,
@@ -1527,6 +1825,8 @@ module UpdateRecipeJob = {
     new({
       timeout: timeout,
       roleArn: roleArn,
+      databaseOutputs: databaseOutputs,
+      dataCatalogOutputs: dataCatalogOutputs,
       outputs: outputs,
       maxRetries: maxRetries,
       maxCapacity: maxCapacity,
@@ -1555,6 +1855,43 @@ module UpdateRecipe = {
   @module("@aws-sdk/client-databrew") @new external new: request => t = "UpdateRecipeCommand"
   let make = (~name, ~steps=?, ~description=?, ()) =>
     new({steps: steps, name: name, description: description})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module DescribeRuleset = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The name of the ruleset to be described.</p>") @as("Name") name: rulesetName,
+  }
+  type response = {
+    @ocaml.doc("<p>Metadata tags that have been applied to the ruleset.</p>") @as("Tags")
+    tags: option<tagMap>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) for the ruleset.</p>") @as("ResourceArn")
+    resourceArn: option<arn>,
+    @ocaml.doc("<p>The modification date and time of the ruleset.</p>") @as("LastModifiedDate")
+    lastModifiedDate: option<date>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the user who last modified the ruleset.</p>")
+    @as("LastModifiedBy")
+    lastModifiedBy: option<lastModifiedBy>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the user who created the ruleset.</p>")
+    @as("CreatedBy")
+    createdBy: option<createdBy>,
+    @ocaml.doc("<p>The date and time that the ruleset was created.</p>") @as("CreateDate")
+    createDate: option<date>,
+    @ocaml.doc("<p>A list of rules that are defined with the ruleset. A rule includes one 
+            or more checks to be validated on a DataBrew dataset.</p>")
+    @as("Rules")
+    rules: option<ruleList>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of a resource (dataset) that the ruleset is 
+            associated with.</p>")
+    @as("TargetArn")
+    targetArn: option<arn>,
+    @ocaml.doc("<p>The description of the ruleset.</p>") @as("Description")
+    description: option<rulesetDescription>,
+    @ocaml.doc("<p>The name of the ruleset.</p>") @as("Name") name: rulesetName,
+  }
+  @module("@aws-sdk/client-databrew") @new external new: request => t = "DescribeRulesetCommand"
+  let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1604,152 +1941,31 @@ module DescribeRecipe = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
-module DescribeJobRun = {
+module CreateRuleset = {
   type t
   type request = {
-    @ocaml.doc("<p>The unique identifier of the job run.</p>") @as("RunId") runId: jobRunId,
-    @ocaml.doc("<p>The name of the job being processed during this run.</p>") @as("Name")
-    name: jobName,
+    @ocaml.doc("<p>Metadata tags to apply to the ruleset.</p>") @as("Tags") tags: option<tagMap>,
+    @ocaml.doc("<p>A list of rules that are defined with the ruleset. A rule includes 
+            one or more checks to be validated on a DataBrew dataset.</p>")
+    @as("Rules")
+    rules: ruleList,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of a resource (dataset) that the 
+            ruleset is associated with.</p>")
+    @as("TargetArn")
+    targetArn: arn,
+    @ocaml.doc("<p>The description of the ruleset.</p>") @as("Description")
+    description: option<rulesetDescription>,
+    @ocaml.doc("<p>The name of the ruleset to be created. Valid characters are alphanumeric 
+            (A-Z, a-z, 0-9), hyphen (-), period (.), and space.</p>")
+    @as("Name")
+    name: rulesetName,
   }
   type response = {
-    @ocaml.doc("<p>Sample configuration for profile jobs only. Determines the number of rows on which the
-            profile job will be executed. If a JobSample value is not provided, the default value
-            will be used. The default value is CUSTOM_ROWS for the mode parameter and 20000 for the
-            size parameter.</p>")
-    @as("JobSample")
-    jobSample: option<jobSample>,
-    @ocaml.doc("<p>The date and time when the job run began.</p>") @as("StartedOn")
-    startedOn: option<date>,
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the user who started the job run.</p>")
-    @as("StartedBy")
-    startedBy: option<startedBy>,
-    @as("RecipeReference") recipeReference: option<recipeReference>,
-    @ocaml.doc("<p>One or more output artifacts from a job run.</p>") @as("Outputs")
-    outputs: option<outputList>,
-    @ocaml.doc("<p>The name of an Amazon CloudWatch log group, where the job writes diagnostic messages
-            when it runs.</p>")
-    @as("LogGroupName")
-    logGroupName: option<logGroupName>,
-    @ocaml.doc("<p>The current status of Amazon CloudWatch logging for the job run.</p>")
-    @as("LogSubscription")
-    logSubscription: option<logSubscription>,
-    @ocaml.doc("<p>The current state of the job run entity itself.</p>") @as("State")
-    state: option<jobRunState>,
-    @ocaml.doc("<p>The unique identifier of the job run.</p>") @as("RunId") runId: option<jobRunId>,
-    @ocaml.doc("<p>The name of the job being processed during this run.</p>") @as("JobName")
-    jobName: jobName,
-    @ocaml.doc(
-      "<p>The amount of time, in seconds, during which the job run consumed resources.</p>"
-    )
-    @as("ExecutionTime")
-    executionTime: option<executionTime>,
-    @ocaml.doc(
-      "<p>A message indicating an error (if any) that was encountered when the job ran.</p>"
-    )
-    @as("ErrorMessage")
-    errorMessage: option<jobRunErrorMessage>,
-    @ocaml.doc("<p>The name of the dataset for the job to process.</p>") @as("DatasetName")
-    datasetName: option<datasetName>,
-    @ocaml.doc("<p>The date and time when the job completed processing.</p>") @as("CompletedOn")
-    completedOn: option<date>,
-    @ocaml.doc("<p>The number of times that DataBrew has attempted to run the job.</p>")
-    @as("Attempt")
-    attempt: option<attempt>,
+    @ocaml.doc("<p>The unique name of the created ruleset.</p>") @as("Name") name: rulesetName,
   }
-  @module("@aws-sdk/client-databrew") @new external new: request => t = "DescribeJobRunCommand"
-  let make = (~runId, ~name, ()) => new({runId: runId, name: name})
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
-module DescribeJob = {
-  type t
-  type request = {
-    @ocaml.doc("<p>The name of the job to be described.</p>") @as("Name") name: jobName,
-  }
-  type response = {
-    @ocaml.doc("<p>Sample configuration for profile jobs only. Determines the number of rows on which the
-            profile job will be executed.</p>")
-    @as("JobSample")
-    jobSample: option<jobSample>,
-    @ocaml.doc("<p>The job's timeout in minutes. A job that attempts to run longer than this timeout
-            period ends with a status of <code>TIMEOUT</code>.</p>")
-    @as("Timeout")
-    timeout: option<timeout>,
-    @ocaml.doc("<p>Metadata tags associated with this job.</p>") @as("Tags") tags: option<tagMap>,
-    @ocaml.doc("<p>The ARN of the AWS Identity and Access Management (IAM) role to be assumed when
-            DataBrew runs the job.</p>")
-    @as("RoleArn")
-    roleArn: option<arn>,
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the job.</p>") @as("ResourceArn")
-    resourceArn: option<arn>,
-    @as("RecipeReference") recipeReference: option<recipeReference>,
-    @ocaml.doc("<p>The DataBrew project associated with this job.</p>") @as("ProjectName")
-    projectName: option<projectName>,
-    @ocaml.doc("<p>One or more artifacts that represent the output from running the job.</p>")
-    @as("Outputs")
-    outputs: option<outputList>,
-    @ocaml.doc("<p>The maximum number of times to retry the job after a job run fails.</p>")
-    @as("MaxRetries")
-    maxRetries: option<maxRetries>,
-    @ocaml.doc("<p>The maximum number of compute nodes that DataBrew can consume when the job processes
-            data.</p>")
-    @as("MaxCapacity")
-    maxCapacity: option<maxCapacity>,
-    @ocaml.doc("<p>Indicates whether Amazon CloudWatch logging is enabled for this job.</p>")
-    @as("LogSubscription")
-    logSubscription: option<logSubscription>,
-    @ocaml.doc("<p>The date and time that the job was last modified.</p>") @as("LastModifiedDate")
-    lastModifiedDate: option<date>,
-    @ocaml.doc("<p>The identifier (user name) of the user who last modified the job.</p>")
-    @as("LastModifiedBy")
-    lastModifiedBy: option<lastModifiedBy>,
-    @ocaml.doc("<p>The job type, which must be one of the following:</p>
-        <ul>
-            <li>
-                <p>
-                  <code>PROFILE</code> - The job analyzes the dataset to determine its size,
-                    data types, data distribution, and more.</p>
-            </li>
-            <li>
-                <p>
-                  <code>RECIPE</code> - The job applies one or more transformations to a
-                    dataset.</p>
-            </li>
-         </ul>")
-    @as("Type")
-    type_: option<jobType>,
-    @ocaml.doc("<p>The name of the job.</p>") @as("Name") name: jobName,
-    @ocaml.doc("<p>The encryption mode for the job, which can be one of the following:</p>
-        <ul>
-            <li>
-                <p>
-                  <code>SSE-KMS</code> - Server-side encryption with keys managed by AWS
-                    KMS.</p>
-            </li>
-            <li>
-                <p>
-                  <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon
-                    S3.</p>
-            </li>
-         </ul>")
-    @as("EncryptionMode")
-    encryptionMode: option<encryptionMode>,
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of an encryption key that is used to protect the
-            job.</p>")
-    @as("EncryptionKeyArn")
-    encryptionKeyArn: option<encryptionKeyArn>,
-    @ocaml.doc("<p>The dataset that the job acts upon.</p>") @as("DatasetName")
-    datasetName: option<datasetName>,
-    @ocaml.doc(
-      "<p>The identifier (user name) of the user associated with the creation of the job.</p>"
-    )
-    @as("CreatedBy")
-    createdBy: option<createdBy>,
-    @ocaml.doc("<p>The date and time that the job was created.</p>") @as("CreateDate")
-    createDate: option<date>,
-  }
-  @module("@aws-sdk/client-databrew") @new external new: request => t = "DescribeJobCommand"
-  let make = (~name, ()) => new({name: name})
+  @module("@aws-sdk/client-databrew") @new external new: request => t = "CreateRulesetCommand"
+  let make = (~rules, ~targetArn, ~name, ~tags=?, ~description=?, ()) =>
+    new({tags: tags, rules: rules, targetArn: targetArn, description: description, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1761,7 +1977,7 @@ module CreateRecipeJob = {
     @as("Timeout")
     timeout: option<timeout>,
     @ocaml.doc("<p>Metadata tags to apply to this job.</p>") @as("Tags") tags: option<tagMap>,
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role to
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role to
             be assumed when DataBrew runs the job.</p>")
     @as("RoleArn")
     roleArn: arn,
@@ -1770,9 +1986,18 @@ module CreateRecipeJob = {
             associate with the recipe.</p>")
     @as("ProjectName")
     projectName: option<projectName>,
+    @ocaml.doc("<p>Represents a list of JDBC database output objects which defines the output destination for 
+            a DataBrew recipe job to write to. </p>")
+    @as("DatabaseOutputs")
+    databaseOutputs: option<databaseOutputList>,
+    @ocaml.doc(
+      "<p>One or more artifacts that represent the Glue Data Catalog output from running the job.</p>"
+    )
+    @as("DataCatalogOutputs")
+    dataCatalogOutputs: option<dataCatalogOutputList>,
     @ocaml.doc("<p>One or more artifacts that represent the output from running the job.</p>")
     @as("Outputs")
-    outputs: outputList,
+    outputs: option<outputList>,
     @ocaml.doc("<p>The maximum number of times to retry the job after a job run fails.</p>")
     @as("MaxRetries")
     maxRetries: option<maxRetries>,
@@ -1792,13 +2017,11 @@ module CreateRecipeJob = {
         <ul>
             <li>
                 <p>
-                  <code>SSE-KMS</code> - Server-side encryption with keys managed by AWS
-                    KMS.</p>
+                  <code>SSE-KMS</code> - Server-side encryption with keys managed by KMS.</p>
             </li>
             <li>
                 <p>
-                  <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon
-                    S3.</p>
+                  <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p>
             </li>
          </ul>")
     @as("EncryptionMode")
@@ -1816,12 +2039,14 @@ module CreateRecipeJob = {
   @module("@aws-sdk/client-databrew") @new external new: request => t = "CreateRecipeJobCommand"
   let make = (
     ~roleArn,
-    ~outputs,
     ~name,
     ~timeout=?,
     ~tags=?,
     ~recipeReference=?,
     ~projectName=?,
+    ~databaseOutputs=?,
+    ~dataCatalogOutputs=?,
+    ~outputs=?,
     ~maxRetries=?,
     ~maxCapacity=?,
     ~logSubscription=?,
@@ -1836,6 +2061,8 @@ module CreateRecipeJob = {
       roleArn: roleArn,
       recipeReference: recipeReference,
       projectName: projectName,
+      databaseOutputs: databaseOutputs,
+      dataCatalogOutputs: dataCatalogOutputs,
       outputs: outputs,
       maxRetries: maxRetries,
       maxCapacity: maxCapacity,
@@ -1876,13 +2103,15 @@ module UpdateDataset = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>A set of options that defines how DataBrew interprets an S3 path of the dataset.</p>"
+      "<p>A set of options that defines how DataBrew interprets an Amazon S3 path of the dataset.</p>"
     )
     @as("PathOptions")
     pathOptions: option<pathOptions>,
     @as("Input") input: input,
     @as("FormatOptions") formatOptions: option<formatOptions>,
-    @ocaml.doc("<p>The file format of a dataset that is created from an S3 file or folder.</p>")
+    @ocaml.doc(
+      "<p>The file format of a dataset that is created from an Amazon S3 file or folder.</p>"
+    )
     @as("Format")
     format: option<inputFormat>,
     @ocaml.doc("<p>The name of the dataset to be updated.</p>") @as("Name") name: datasetName,
@@ -1912,13 +2141,12 @@ module DescribeDataset = {
     resourceArn: option<arn>,
     @ocaml.doc("<p>Metadata tags associated with this dataset.</p>") @as("Tags")
     tags: option<tagMap>,
-    @ocaml.doc(
-      "<p>A set of options that defines how DataBrew interprets an S3 path of the dataset.</p>"
-    )
+    @ocaml.doc("<p>A set of options that defines how DataBrew interprets an Amazon S3 
+            path of the dataset.</p>")
     @as("PathOptions")
     pathOptions: option<pathOptions>,
-    @ocaml.doc("<p>The location of the data for this dataset, Amazon S3 or the AWS Glue Data
-            Catalog.</p>")
+    @ocaml.doc("<p>The location of the data for this dataset, Amazon S3 or the 
+            Glue Data Catalog.</p>")
     @as("Source")
     source: option<source>,
     @ocaml.doc("<p>The identifier (user name) of the user who last modified the dataset.</p>")
@@ -1929,7 +2157,8 @@ module DescribeDataset = {
     lastModifiedDate: option<date>,
     @as("Input") input: input,
     @as("FormatOptions") formatOptions: option<formatOptions>,
-    @ocaml.doc("<p>The file format of a dataset that is created from an S3 file or folder.</p>")
+    @ocaml.doc("<p>The file format of a dataset that is created from an Amazon S3 file 
+            or folder.</p>")
     @as("Format")
     format: option<inputFormat>,
     @ocaml.doc("<p>The name of the dataset.</p>") @as("Name") name: datasetName,
@@ -1949,13 +2178,15 @@ module CreateDataset = {
   type request = {
     @ocaml.doc("<p>Metadata tags to apply to this dataset.</p>") @as("Tags") tags: option<tagMap>,
     @ocaml.doc(
-      "<p>A set of options that defines how DataBrew interprets an S3 path of the dataset.</p>"
+      "<p>A set of options that defines how DataBrew interprets an Amazon S3 path of the dataset.</p>"
     )
     @as("PathOptions")
     pathOptions: option<pathOptions>,
     @as("Input") input: input,
     @as("FormatOptions") formatOptions: option<formatOptions>,
-    @ocaml.doc("<p>The file format of a dataset that is created from an S3 file or folder.</p>")
+    @ocaml.doc(
+      "<p>The file format of a dataset that is created from an Amazon S3 file or folder.</p>"
+    )
     @as("Format")
     format: option<inputFormat>,
     @ocaml.doc("<p>The name of the dataset to be created. Valid characters are alphanumeric (A-Z, a-z,
@@ -2095,6 +2326,99 @@ module ListJobRuns = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module UpdateProfileJob = {
+  type t
+  type request = {
+    @ocaml.doc("<p>Sample configuration for Profile Jobs only. Determines the number of rows on which the
+            Profile job will be executed. If a JobSample value is not provided for profile jobs, the
+            default value will be used. The default value is CUSTOM_ROWS for the mode parameter and
+            20000 for the size parameter.</p>")
+    @as("JobSample")
+    jobSample: option<jobSample>,
+    @ocaml.doc("<p>The job's timeout in minutes. A job that attempts to run longer than this timeout
+            period ends with a status of <code>TIMEOUT</code>.</p>")
+    @as("Timeout")
+    timeout: option<timeout>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role to
+            be assumed when DataBrew runs the job.</p>")
+    @as("RoleArn")
+    roleArn: arn,
+    @ocaml.doc("<p>List of validation configurations that are applied to the profile job.</p>")
+    @as("ValidationConfigurations")
+    validationConfigurations: option<validationConfigurationList>,
+    @as("OutputLocation") outputLocation: s3Location,
+    @ocaml.doc("<p>The maximum number of times to retry the job after a job run fails.</p>")
+    @as("MaxRetries")
+    maxRetries: option<maxRetries>,
+    @ocaml.doc("<p>The maximum number of compute nodes that DataBrew can use when the job processes
+            data.</p>")
+    @as("MaxCapacity")
+    maxCapacity: option<maxCapacity>,
+    @ocaml.doc("<p>Enables or disables Amazon CloudWatch logging for the job. If logging is enabled,
+            CloudWatch writes one log stream for each job run.</p>")
+    @as("LogSubscription")
+    logSubscription: option<logSubscription>,
+    @ocaml.doc("<p>The name of the job to be updated.</p>") @as("Name") name: jobName,
+    @ocaml.doc("<p>The encryption mode for the job, which can be one of the following:</p>
+        <ul>
+            <li>
+                <p>
+                  <code>SSE-KMS</code> - Server-side encryption with keys managed by KMS.</p>
+            </li>
+            <li>
+                <p>
+                  <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon
+                    S3.</p>
+            </li>
+         </ul>")
+    @as("EncryptionMode")
+    encryptionMode: option<encryptionMode>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of an encryption key that is used to protect the
+            job.</p>")
+    @as("EncryptionKeyArn")
+    encryptionKeyArn: option<encryptionKeyArn>,
+    @ocaml.doc("<p>Configuration for profile jobs. Used to select columns, do evaluations, 
+            and override default parameters of evaluations. When configuration is null, the
+            profile job will run with default settings.</p>")
+    @as("Configuration")
+    configuration: option<profileConfiguration>,
+  }
+  type response = {
+    @ocaml.doc("<p>The name of the job that was updated.</p>") @as("Name") name: jobName,
+  }
+  @module("@aws-sdk/client-databrew") @new external new: request => t = "UpdateProfileJobCommand"
+  let make = (
+    ~roleArn,
+    ~outputLocation,
+    ~name,
+    ~jobSample=?,
+    ~timeout=?,
+    ~validationConfigurations=?,
+    ~maxRetries=?,
+    ~maxCapacity=?,
+    ~logSubscription=?,
+    ~encryptionMode=?,
+    ~encryptionKeyArn=?,
+    ~configuration=?,
+    (),
+  ) =>
+    new({
+      jobSample: jobSample,
+      timeout: timeout,
+      roleArn: roleArn,
+      validationConfigurations: validationConfigurations,
+      outputLocation: outputLocation,
+      maxRetries: maxRetries,
+      maxCapacity: maxCapacity,
+      logSubscription: logSubscription,
+      name: name,
+      encryptionMode: encryptionMode,
+      encryptionKeyArn: encryptionKeyArn,
+      configuration: configuration,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module ListDatasets = {
   type t
   type request = {
@@ -2114,5 +2438,291 @@ module ListDatasets = {
   @module("@aws-sdk/client-databrew") @new external new: request => t = "ListDatasetsCommand"
   let make = (~nextToken=?, ~maxResults=?, ()) =>
     new({nextToken: nextToken, maxResults: maxResults})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module DescribeJobRun = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The unique identifier of the job run.</p>") @as("RunId") runId: jobRunId,
+    @ocaml.doc("<p>The name of the job being processed during this run.</p>") @as("Name")
+    name: jobName,
+  }
+  type response = {
+    @ocaml.doc("<p>Sample configuration for profile jobs only. Determines the number of rows on which the
+            profile job will be executed. If a JobSample value is not provided, the default value
+            will be used. The default value is CUSTOM_ROWS for the mode parameter and 20000 for the
+            size parameter.</p>")
+    @as("JobSample")
+    jobSample: option<jobSample>,
+    @ocaml.doc("<p>The date and time when the job run began.</p>") @as("StartedOn")
+    startedOn: option<date>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the user who started the job run.</p>")
+    @as("StartedBy")
+    startedBy: option<startedBy>,
+    @as("RecipeReference") recipeReference: option<recipeReference>,
+    @ocaml.doc("<p>Represents a list of JDBC database output objects which defines the output 
+            destination for a DataBrew recipe job to write into.</p>")
+    @as("DatabaseOutputs")
+    databaseOutputs: option<databaseOutputList>,
+    @ocaml.doc(
+      "<p>One or more artifacts that represent the Glue Data Catalog output from running the job.</p>"
+    )
+    @as("DataCatalogOutputs")
+    dataCatalogOutputs: option<dataCatalogOutputList>,
+    @ocaml.doc("<p>One or more output artifacts from a job run.</p>") @as("Outputs")
+    outputs: option<outputList>,
+    @ocaml.doc("<p>The name of an Amazon CloudWatch log group, where the job writes diagnostic messages
+            when it runs.</p>")
+    @as("LogGroupName")
+    logGroupName: option<logGroupName>,
+    @ocaml.doc("<p>The current status of Amazon CloudWatch logging for the job run.</p>")
+    @as("LogSubscription")
+    logSubscription: option<logSubscription>,
+    @ocaml.doc("<p>The current state of the job run entity itself.</p>") @as("State")
+    state: option<jobRunState>,
+    @ocaml.doc("<p>The unique identifier of the job run.</p>") @as("RunId") runId: option<jobRunId>,
+    @ocaml.doc("<p>List of validation configurations that are applied to the profile job.</p>")
+    @as("ValidationConfigurations")
+    validationConfigurations: option<validationConfigurationList>,
+    @ocaml.doc("<p>Configuration for profile jobs. Used to select columns, do evaluations, 
+            and override default parameters of evaluations. When configuration is null, the
+            profile job will run with default settings.</p>")
+    @as("ProfileConfiguration")
+    profileConfiguration: option<profileConfiguration>,
+    @ocaml.doc("<p>The name of the job being processed during this run.</p>") @as("JobName")
+    jobName: jobName,
+    @ocaml.doc(
+      "<p>The amount of time, in seconds, during which the job run consumed resources.</p>"
+    )
+    @as("ExecutionTime")
+    executionTime: option<executionTime>,
+    @ocaml.doc(
+      "<p>A message indicating an error (if any) that was encountered when the job ran.</p>"
+    )
+    @as("ErrorMessage")
+    errorMessage: option<jobRunErrorMessage>,
+    @ocaml.doc("<p>The name of the dataset for the job to process.</p>") @as("DatasetName")
+    datasetName: option<datasetName>,
+    @ocaml.doc("<p>The date and time when the job completed processing.</p>") @as("CompletedOn")
+    completedOn: option<date>,
+    @ocaml.doc("<p>The number of times that DataBrew has attempted to run the job.</p>")
+    @as("Attempt")
+    attempt: option<attempt>,
+  }
+  @module("@aws-sdk/client-databrew") @new external new: request => t = "DescribeJobRunCommand"
+  let make = (~runId, ~name, ()) => new({runId: runId, name: name})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module DescribeJob = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The name of the job to be described.</p>") @as("Name") name: jobName,
+  }
+  type response = {
+    @ocaml.doc("<p>Sample configuration for profile jobs only. Determines the number of rows on which the
+            profile job will be executed.</p>")
+    @as("JobSample")
+    jobSample: option<jobSample>,
+    @ocaml.doc("<p>The job's timeout in minutes. A job that attempts to run longer than this timeout
+            period ends with a status of <code>TIMEOUT</code>.</p>")
+    @as("Timeout")
+    timeout: option<timeout>,
+    @ocaml.doc("<p>Metadata tags associated with this job.</p>") @as("Tags") tags: option<tagMap>,
+    @ocaml.doc("<p>The ARN of the Identity and Access Management (IAM) role to be assumed when
+            DataBrew runs the job.</p>")
+    @as("RoleArn")
+    roleArn: option<arn>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the job.</p>") @as("ResourceArn")
+    resourceArn: option<arn>,
+    @as("RecipeReference") recipeReference: option<recipeReference>,
+    @ocaml.doc("<p>List of validation configurations that are applied to the profile job.</p>")
+    @as("ValidationConfigurations")
+    validationConfigurations: option<validationConfigurationList>,
+    @ocaml.doc("<p>Configuration for profile jobs. Used to select columns, do evaluations, 
+            and override default parameters of evaluations. When configuration is null, the
+            profile job will run with default settings.</p>")
+    @as("ProfileConfiguration")
+    profileConfiguration: option<profileConfiguration>,
+    @ocaml.doc("<p>The DataBrew project associated with this job.</p>") @as("ProjectName")
+    projectName: option<projectName>,
+    @ocaml.doc("<p>Represents a list of JDBC database output objects which defines the output 
+            destination for a DataBrew recipe job to write into.</p>")
+    @as("DatabaseOutputs")
+    databaseOutputs: option<databaseOutputList>,
+    @ocaml.doc(
+      "<p>One or more artifacts that represent the Glue Data Catalog output from running the job.</p>"
+    )
+    @as("DataCatalogOutputs")
+    dataCatalogOutputs: option<dataCatalogOutputList>,
+    @ocaml.doc("<p>One or more artifacts that represent the output from running the job.</p>")
+    @as("Outputs")
+    outputs: option<outputList>,
+    @ocaml.doc("<p>The maximum number of times to retry the job after a job run fails.</p>")
+    @as("MaxRetries")
+    maxRetries: option<maxRetries>,
+    @ocaml.doc("<p>The maximum number of compute nodes that DataBrew can consume when the job processes
+            data.</p>")
+    @as("MaxCapacity")
+    maxCapacity: option<maxCapacity>,
+    @ocaml.doc("<p>Indicates whether Amazon CloudWatch logging is enabled for this job.</p>")
+    @as("LogSubscription")
+    logSubscription: option<logSubscription>,
+    @ocaml.doc("<p>The date and time that the job was last modified.</p>") @as("LastModifiedDate")
+    lastModifiedDate: option<date>,
+    @ocaml.doc("<p>The identifier (user name) of the user who last modified the job.</p>")
+    @as("LastModifiedBy")
+    lastModifiedBy: option<lastModifiedBy>,
+    @ocaml.doc("<p>The job type, which must be one of the following:</p>
+        <ul>
+            <li>
+                <p>
+                  <code>PROFILE</code> - The job analyzes the dataset to determine its size,
+                    data types, data distribution, and more.</p>
+            </li>
+            <li>
+                <p>
+                  <code>RECIPE</code> - The job applies one or more transformations to a
+                    dataset.</p>
+            </li>
+         </ul>")
+    @as("Type")
+    type_: option<jobType>,
+    @ocaml.doc("<p>The name of the job.</p>") @as("Name") name: jobName,
+    @ocaml.doc("<p>The encryption mode for the job, which can be one of the following:</p>
+        <ul>
+            <li>
+                <p>
+                  <code>SSE-KMS</code> - Server-side encryption with keys managed by KMS.</p>
+            </li>
+            <li>
+                <p>
+                  <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon
+                    S3.</p>
+            </li>
+         </ul>")
+    @as("EncryptionMode")
+    encryptionMode: option<encryptionMode>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of an encryption key that is used to protect the
+            job.</p>")
+    @as("EncryptionKeyArn")
+    encryptionKeyArn: option<encryptionKeyArn>,
+    @ocaml.doc("<p>The dataset that the job acts upon.</p>") @as("DatasetName")
+    datasetName: option<datasetName>,
+    @ocaml.doc(
+      "<p>The identifier (user name) of the user associated with the creation of the job.</p>"
+    )
+    @as("CreatedBy")
+    createdBy: option<createdBy>,
+    @ocaml.doc("<p>The date and time that the job was created.</p>") @as("CreateDate")
+    createDate: option<date>,
+  }
+  @module("@aws-sdk/client-databrew") @new external new: request => t = "DescribeJobCommand"
+  let make = (~name, ()) => new({name: name})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module CreateProfileJob = {
+  type t
+  type request = {
+    @ocaml.doc("<p>Sample configuration for profile jobs only. Determines the number of rows on which the
+            profile job will be executed. If a JobSample value is not provided, the default value
+            will be used. The default value is CUSTOM_ROWS for the mode parameter and 20000 for the
+            size parameter.</p>")
+    @as("JobSample")
+    jobSample: option<jobSample>,
+    @ocaml.doc("<p>The job's timeout in minutes. A job that attempts to run longer than this timeout
+            period ends with a status of <code>TIMEOUT</code>.</p>")
+    @as("Timeout")
+    timeout: option<timeout>,
+    @ocaml.doc("<p>Metadata tags to apply to this job.</p>") @as("Tags") tags: option<tagMap>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role to
+            be assumed when DataBrew runs the job.</p>")
+    @as("RoleArn")
+    roleArn: arn,
+    @ocaml.doc("<p>List of validation configurations that are applied to the profile job.</p>")
+    @as("ValidationConfigurations")
+    validationConfigurations: option<validationConfigurationList>,
+    @ocaml.doc("<p>Configuration for profile jobs. Used to select columns, do evaluations, 
+            and override default parameters of evaluations. When configuration is null, the
+            profile job will run with default settings.</p>")
+    @as("Configuration")
+    configuration: option<profileConfiguration>,
+    @as("OutputLocation") outputLocation: s3Location,
+    @ocaml.doc("<p>The maximum number of times to retry the job after a job run fails.</p>")
+    @as("MaxRetries")
+    maxRetries: option<maxRetries>,
+    @ocaml.doc(
+      "<p>The maximum number of nodes that DataBrew can use when the job processes data.</p>"
+    )
+    @as("MaxCapacity")
+    maxCapacity: option<maxCapacity>,
+    @ocaml.doc("<p>Enables or disables Amazon CloudWatch logging for the job. If logging is enabled,
+            CloudWatch writes one log stream for each job run.</p>")
+    @as("LogSubscription")
+    logSubscription: option<logSubscription>,
+    @ocaml.doc("<p>The name of the job to be created. Valid characters are alphanumeric (A-Z, a-z, 0-9),
+            hyphen (-), period (.), and space.</p>")
+    @as("Name")
+    name: jobName,
+    @ocaml.doc("<p>The encryption mode for the job, which can be one of the following:</p>
+        <ul>
+            <li>
+                <p>
+                  <code>SSE-KMS</code> - <code>SSE-KMS</code> - Server-side encryption with 
+                    KMS-managed keys.</p>
+            </li>
+            <li>
+                <p>
+                  <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p>
+            </li>
+         </ul>")
+    @as("EncryptionMode")
+    encryptionMode: option<encryptionMode>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of an encryption key that is used to protect the
+            job.</p>")
+    @as("EncryptionKeyArn")
+    encryptionKeyArn: option<encryptionKeyArn>,
+    @ocaml.doc("<p>The name of the dataset that this job is to act upon.</p>") @as("DatasetName")
+    datasetName: datasetName,
+  }
+  type response = {
+    @ocaml.doc("<p>The name of the job that was created.</p>") @as("Name") name: jobName,
+  }
+  @module("@aws-sdk/client-databrew") @new external new: request => t = "CreateProfileJobCommand"
+  let make = (
+    ~roleArn,
+    ~outputLocation,
+    ~name,
+    ~datasetName,
+    ~jobSample=?,
+    ~timeout=?,
+    ~tags=?,
+    ~validationConfigurations=?,
+    ~configuration=?,
+    ~maxRetries=?,
+    ~maxCapacity=?,
+    ~logSubscription=?,
+    ~encryptionMode=?,
+    ~encryptionKeyArn=?,
+    (),
+  ) =>
+    new({
+      jobSample: jobSample,
+      timeout: timeout,
+      tags: tags,
+      roleArn: roleArn,
+      validationConfigurations: validationConfigurations,
+      configuration: configuration,
+      outputLocation: outputLocation,
+      maxRetries: maxRetries,
+      maxCapacity: maxCapacity,
+      logSubscription: logSubscription,
+      name: name,
+      encryptionMode: encryptionMode,
+      encryptionKeyArn: encryptionKeyArn,
+      datasetName: datasetName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

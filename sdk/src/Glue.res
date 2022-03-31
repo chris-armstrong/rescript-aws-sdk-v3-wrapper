@@ -33,6 +33,7 @@ type updateBehavior = [@as("UPDATE_IN_DATABASE") #UPDATE_IN_DATABASE | @as("LOG"
 type uri = string
 type typeString = string
 type triggerType = [
+  | @as("EVENT") #EVENT
   | @as("ON_DEMAND") #ON_DEMAND
   | @as("CONDITIONAL") #CONDITIONAL
   | @as("SCHEDULED") #SCHEDULED
@@ -60,6 +61,7 @@ type transformSortColumnType = [
   | @as("TRANSFORM_TYPE") #TRANSFORM_TYPE
   | @as("NAME") #NAME
 ]
+type transactionIdString = string
 type totalSegmentsInteger = int
 type token = string
 type timestampValue = Js.Date.t
@@ -91,8 +93,24 @@ type tagKey = string
 type tableTypeString = string
 type tablePrefix = string
 type tableName = string
+type statementState = [
+  | @as("ERROR") #ERROR
+  | @as("CANCELLED") #CANCELLED
+  | @as("CANCELLING") #CANCELLING
+  | @as("AVAILABLE") #AVAILABLE
+  | @as("RUNNING") #RUNNING
+  | @as("WAITING") #WAITING
+]
 type sortDirectionType = [@as("ASCENDING") #ASCENDING | @as("DESCENDING") #DESCENDING]
 type sort = [@as("DESC") #DESC | @as("ASC") #ASC]
+type sessionStatus = [
+  | @as("STOPPED") #STOPPED
+  | @as("STOPPING") #STOPPING
+  | @as("TIMEOUT") #TIMEOUT
+  | @as("FAILED") #FAILED
+  | @as("READY") #READY
+  | @as("PROVISIONING") #PROVISIONING
+]
 type scriptLocationString = string
 type schemaVersionStatus = [
   | @as("DELETING") #DELETING
@@ -135,6 +153,7 @@ type resourceShareType = [@as("ALL") #ALL | @as("FOREIGN") #FOREIGN]
 type replaceBoolean = bool
 type registryStatus = [@as("DELETING") #DELETING | @as("AVAILABLE") #AVAILABLE]
 type recrawlBehavior = [
+  | @as("CRAWL_EVENT_MODE") #CRAWL_EVENT_MODE
   | @as("CRAWL_NEW_FOLDERS_ONLY") #CRAWL_NEW_FOLDERS_ONLY
   | @as("CRAWL_EVERYTHING") #CRAWL_EVERYTHING
 ]
@@ -145,6 +164,10 @@ type pythonScript = string
 type principalType = [@as("GROUP") #GROUP | @as("ROLE") #ROLE | @as("USER") #USER]
 type predicateString = string
 type policyJsonString = string
+type permissionType = [
+  | @as("CELL_FILTER_PERMISSION") #CELL_FILTER_PERMISSION
+  | @as("COLUMN_PERMISSION") #COLUMN_PERMISSION
+]
 type permission = [
   | @as("DATA_LOCATION_ACCESS") #DATA_LOCATION_ACCESS
   | @as("CREATE_TABLE") #CREATE_TABLE
@@ -166,6 +189,13 @@ type partitionIndexStatus = [
 type parametersMapValue = string
 type paginationToken = string
 type pageSize = int
+type orchestrationToken = string
+type orchestrationStatementCodeString = string
+type orchestrationS3Location = string
+type orchestrationRoleArn = string
+type orchestrationNameString = string
+type orchestrationIAMRoleArn = string
+type orchestrationArgumentsValue = string
 type nullableInteger = int
 type nullableDouble = float
 type nullableBoolean = bool
@@ -184,6 +214,7 @@ type maxRetries = int
 type maxResultsNumber = int
 type maxConcurrentRuns = int
 type mluserDataEncryptionModeString = [@as("SSE-KMS") #SSE_KMS | @as("DISABLED") #DISABLED]
+type longValue = float
 type long = float
 type logicalOperator = [@as("EQUALS") #EQUALS]
 type logical = [@as("ANY") #ANY | @as("AND") #AND]
@@ -224,6 +255,7 @@ type glueVersionString = string
 type glueResourceArn = string
 type genericString = string
 type genericBoundedDouble = float
+type generic512CharString = string
 type formatString = string
 type filterString = string
 type fieldType = string
@@ -233,10 +265,12 @@ type existCondition = [
   | @as("MUST_EXIST") #MUST_EXIST
 ]
 type executionTime = int
+type eventQueueArn = string
 type errorString = string
 type errorMessageString = string
 type errorCodeString = string
 type enableHybridValues = [@as("FALSE") #FALSE | @as("TRUE") #TRUE]
+type doubleValue = float
 type double = float
 type descriptionStringRemovable = string
 type descriptionString = string
@@ -247,7 +281,7 @@ type deleteBehavior = [
 ]
 type databaseName = string
 type dataLakePrincipalString = string
-type dataFormat = [@as("AVRO") #AVRO]
+type dataFormat = [@as("PROTOBUF") #PROTOBUF | @as("JSON") #JSON | @as("AVRO") #AVRO]
 type customPatterns = string
 type csvQuoteSymbol = string
 type csvHeaderOption = [@as("ABSENT") #ABSENT | @as("PRESENT") #PRESENT | @as("UNKNOWN") #UNKNOWN]
@@ -349,7 +383,23 @@ type catalogEncryptionMode = [@as("SSE-KMS") #SSE_KMS | @as("DISABLED") #DISABLE
 type booleanValue = bool
 type booleanNullable = bool
 type boolean_ = bool
+type blueprintStatus = [
+  | @as("FAILED") #FAILED
+  | @as("UPDATING") #UPDATING
+  | @as("ACTIVE") #ACTIVE
+  | @as("CREATING") #CREATING
+]
+type blueprintRunState = [
+  | @as("ROLLING_BACK") #ROLLING_BACK
+  | @as("FAILED") #FAILED
+  | @as("SUCCEEDED") #SUCCEEDED
+  | @as("RUNNING") #RUNNING
+]
+type blueprintParameters = string
+type blueprintParameterSpec = string
 type blob = NodeJs.Buffer.t
+type batchWindow = int
+type batchSize = int
 type backfillErrorCode = [
   | @as("UNSUPPORTED_PARTITION_CHARACTER_ERROR") #UNSUPPORTED_PARTITION_CHARACTER_ERROR
   | @as("MISSING_PARTITION_VALUE_ERROR") #MISSING_PARTITION_VALUE_ERROR
@@ -357,7 +407,9 @@ type backfillErrorCode = [
   | @as("INTERNAL_ERROR") #INTERNAL_ERROR
   | @as("ENCRYPTED_PARTITION_ERROR") #ENCRYPTED_PARTITION_ERROR
 ]
+type auditContextString = string
 type attemptCount = int
+type accountId = string
 @ocaml.doc("<p>A classifier for <code>XML</code> content.</p>")
 type xmlclassifier = {
   @ocaml.doc("<p>The XML tag designating the element that contains each record in an XML document being
@@ -412,7 +464,7 @@ type updateXMLClassifierRequest = {
 @ocaml.doc("<p>Specifies a JSON classifier to be updated.</p>")
 type updateJsonClassifierRequest = {
   @ocaml.doc("<p>A <code>JsonPath</code> string defining the JSON data for the classifier to classify.
-      AWS Glue supports a subset of JsonPath, as described in <a href=\"https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json\">Writing JsonPath Custom Classifiers</a>.</p>")
+      Glue supports a subset of JsonPath, as described in <a href=\"https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json\">Writing JsonPath Custom Classifiers</a>.</p>")
   @as("JsonPath")
   jsonPath: option<jsonPath>,
   @ocaml.doc("<p>The name of the classifier.</p>") @as("Name") name: nameString,
@@ -489,14 +541,40 @@ type stringColumnStatisticsData = {
   @ocaml.doc("<p>The size of the longest string in the column.</p>") @as("MaximumLength")
   maximumLength: nonNegativeLong,
 }
+@ocaml.doc("<p>The code execution output in JSON format.</p>")
+type statementOutputData = {
+  @ocaml.doc("<p>The code execution output in text format.</p>") @as("TextPlain")
+  textPlain: option<genericString>,
+}
+@ocaml.doc("<p>The batch condition that started the workflow run. Either the number of events in the batch size arrived,
+      in which case the BatchSize member is non-zero, or the batch window expired, in which case the BatchWindow
+      member is non-zero.</p>")
+type startingEventBatchCondition = {
+  @ocaml.doc("<p>Duration of the batch window in seconds.</p>") @as("BatchWindow")
+  batchWindow: option<nullableInteger>,
+  @ocaml.doc("<p>Number of events in the batch.</p>") @as("BatchSize")
+  batchSize: option<nullableInteger>,
+}
 @ocaml.doc("<p>Specifies a field to sort by and a sort order.</p>")
 type sortCriterion = {
   @ocaml.doc("<p>An ascending or descending sort.</p>") @as("Sort") sort: option<sort>,
   @ocaml.doc("<p>The name of the field on which to sort.</p>") @as("FieldName")
   fieldName: option<valueString>,
 }
+type sessionIdList = array<nameString>
+@ocaml.doc("<p>The <code>SessionCommand</code> that runs the job.</p>")
+type sessionCommand = {
+  @ocaml.doc(
+    "<p>Specifies the Python version. The Python version indicates the version supported for jobs of type Spark.</p>"
+  )
+  @as("PythonVersion")
+  pythonVersion: option<pythonVersionString>,
+  @ocaml.doc("<p>Specifies the name of the SessionCommand.Can be 'glueetl' or 'gluestreaming'.</p>")
+  @as("Name")
+  name: option<nameString>,
+}
 @ocaml.doc("<p>Defines a non-overlapping region of a table's partitions, allowing
-      multiple requests to be executed in parallel.</p>")
+      multiple requests to be run in parallel.</p>")
 type segment = {
   @ocaml.doc("<p>The total number of segments.</p>") @as("TotalSegments")
   totalSegments: totalSegmentsInteger,
@@ -543,7 +621,7 @@ type schemaListItem = {
   @ocaml.doc("<p>the name of the registry where the schema resides.</p>") @as("RegistryName")
   registryName: option<schemaRegistryNameString>,
 }
-@ocaml.doc("<p>The unique ID of the schema in the AWS Glue schema registry.</p>")
+@ocaml.doc("<p>The unique ID of the schema in the Glue schema registry.</p>")
 type schemaId = {
   @ocaml.doc("<p>The name of the schema registry that contains the schema.</p>") @as("RegistryName")
   registryName: option<schemaRegistryNameString>,
@@ -629,14 +707,16 @@ type registryId = {
   registryName: option<schemaRegistryNameString>,
 }
 @ocaml.doc(
-  "<p>When crawling an Amazon S3 data source after the first crawl is complete, specifies whether to crawl the entire dataset again or to crawl only folders that were added since the last crawler run. For more information, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/incremental-crawls.html\">Incremental Crawls in AWS Glue</a> in the developer guide.</p>"
+  "<p>When crawling an Amazon S3 data source after the first crawl is complete, specifies whether to crawl the entire dataset again or to crawl only folders that were added since the last crawler run. For more information, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/incremental-crawls.html\">Incremental Crawls in Glue</a> in the developer guide.</p>"
 )
 type recrawlPolicy = {
   @ocaml.doc("<p>Specifies whether to crawl the entire dataset again or to crawl only folders that were added since the last crawler run.</p>
 	
 	        <p>A value of <code>CRAWL_EVERYTHING</code> specifies crawling the entire dataset again.</p>
   
-         <p>A value of <code>CRAWL_NEW_FOLDERS_ONLY</code> specifies crawling only folders that were added since the last crawler run.</p>")
+         <p>A value of <code>CRAWL_NEW_FOLDERS_ONLY</code> specifies crawling only folders that were added since the last crawler run.</p>
+	
+	        <p>A value of <code>CRAWL_EVENT_MODE</code> specifies crawling only the changes identified by Amazon S3 events.</p>")
   @as("RecrawlBehavior")
   recrawlBehavior: option<recrawlBehavior>,
 }
@@ -657,6 +737,7 @@ type predecessor = {
   @as("JobName")
   jobName: option<nameString>,
 }
+type permissionTypeList = array<permissionType>
 type permissionList = array<permission>
 type pathList = array<path>
 type parametersMap = Js.Dict.t<parametersMapValue>
@@ -681,6 +762,7 @@ type order = {
   @ocaml.doc("<p>The name of the column.</p>") @as("Column") column: nameString,
 }
 type orchestrationStringList = array<genericString>
+type orchestrationArgumentsMap = Js.Dict.t<orchestrationArgumentsValue>
 @ocaml.doc("<p>Specifies configuration properties of a notification.</p>")
 type notificationProperty = {
   @ocaml.doc("<p>After a job run starts, the number of minutes to wait before
@@ -737,7 +819,7 @@ type mluserDataEncryption = {
                <p>DISABLED: encryption is disabled</p>
             </li>
             <li>
-               <p>SSEKMS: use of server-side encryption with AWS Key Management Service (SSE-KMS) for user data stored in Amazon S3.</p>
+               <p>SSEKMS: use of server-side encryption with Key Management Service (SSE-KMS) for user data stored in Amazon S3.</p>
             </li>
          </ul>")
   @as("MlUserDataEncryptionMode")
@@ -754,6 +836,7 @@ type longColumnStatisticsData = {
   @ocaml.doc("<p>The lowest value in the column.</p>") @as("MinimumValue")
   minimumValue: option<long>,
 }
+type locationStringList = array<locationString>
 type locationMap = Js.Dict.t<columnValuesString>
 @ocaml.doc("<p>Specifies data lineage configuration settings for the crawler.</p>")
 type lineageConfiguration = {
@@ -784,6 +867,32 @@ type lastCrawlInfo = {
   errorMessage: option<descriptionString>,
   @ocaml.doc("<p>Status of the last crawl.</p>") @as("Status") status: option<lastCrawlStatus>,
 }
+@ocaml.doc(
+  "<p>When there are multiple versions of a blueprint and the latest version has some errors, this attribute indicates the last successful blueprint definition that is available with the service.</p>"
+)
+type lastActiveDefinition = {
+  @ocaml.doc(
+    "<p>Specifies a path in Amazon S3 where the blueprint is copied when you create or update the blueprint.</p>"
+  )
+  @as("BlueprintServiceLocation")
+  blueprintServiceLocation: option<genericString>,
+  @ocaml.doc(
+    "<p>Specifies a path in Amazon S3 where the blueprint is published by the Glue developer.</p>"
+  )
+  @as("BlueprintLocation")
+  blueprintLocation: option<genericString>,
+  @ocaml.doc("<p>A JSON string specifying the parameters for the blueprint.</p>")
+  @as("ParameterSpec")
+  parameterSpec: option<blueprintParameterSpec>,
+  @ocaml.doc("<p>The date and time the blueprint was last modified.</p>") @as("LastModifiedOn")
+  lastModifiedOn: option<timestampValue>,
+  @ocaml.doc("<p>The description of the blueprint.</p>") @as("Description")
+  description: option<generic512CharString>,
+}
+type lakeFormationConfiguration = {
+  @as("AccountId") accountId: option<accountId>,
+  @as("UseLakeFormationCredentials") useLakeFormationCredentials: option<nullableBoolean>,
+}
 @ocaml.doc("<p>Specifies configuration properties for a labeling set generation task run.</p>")
 type labelingSetGenerationTaskRunProperties = {
   @ocaml.doc("<p>The Amazon Simple Storage Service (Amazon S3) path where you will generate the labeling
@@ -800,7 +909,7 @@ type keyList = array<nameString>
 @ocaml.doc("<p>A classifier for <code>JSON</code> content.</p>")
 type jsonClassifier = {
   @ocaml.doc("<p>A <code>JsonPath</code> string defining the JSON data for the classifier to classify.
-      AWS Glue supports a subset of JsonPath, as described in <a href=\"https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json\">Writing JsonPath Custom Classifiers</a>.</p>")
+      Glue supports a subset of JsonPath, as described in <a href=\"https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json\">Writing JsonPath Custom Classifiers</a>.</p>")
   @as("JsonPath")
   jsonPath: jsonPath,
   @ocaml.doc("<p>The version of this classifier.</p>") @as("Version") version: option<versionId>,
@@ -811,14 +920,14 @@ type jsonClassifier = {
   @ocaml.doc("<p>The name of the classifier.</p>") @as("Name") name: nameString,
 }
 type jobNameList = array<nameString>
-@ocaml.doc("<p>Specifies code executed when a job is run.</p>")
+@ocaml.doc("<p>Specifies code that runs when a job is run.</p>")
 type jobCommand = {
   @ocaml.doc(
-    "<p>The Python version being used to execute a Python shell job. Allowed values are 2 or 3.</p>"
+    "<p>The Python version being used to run a Python shell job. Allowed values are 2 or 3.</p>"
   )
   @as("PythonVersion")
   pythonVersion: option<pythonVersionString>,
-  @ocaml.doc("<p>Specifies the Amazon Simple Storage Service (Amazon S3) path to a script that executes a
+  @ocaml.doc("<p>Specifies the Amazon Simple Storage Service (Amazon S3) path to a script that runs a
       job.</p>")
   @as("ScriptLocation")
   scriptLocation: option<scriptLocationString>,
@@ -880,17 +989,16 @@ type grokClassifier = {
   @ocaml.doc("<p>The name of the classifier.</p>") @as("Name") name: nameString,
 }
 @ocaml.doc(
-  "<p>The database and table in the AWS Glue Data Catalog that is used for input or output data.</p>"
+  "<p>The database and table in the Glue Data Catalog that is used for input or output data.</p>"
 )
 type glueTable = {
-  @ocaml.doc("<p>The name of the connection to the AWS Glue Data Catalog.</p>")
-  @as("ConnectionName")
+  @ocaml.doc("<p>The name of the connection to the Glue Data Catalog.</p>") @as("ConnectionName")
   connectionName: option<nameString>,
-  @ocaml.doc("<p>A unique identifier for the AWS Glue Data Catalog.</p>") @as("CatalogId")
+  @ocaml.doc("<p>A unique identifier for the Glue Data Catalog.</p>") @as("CatalogId")
   catalogId: option<nameString>,
-  @ocaml.doc("<p>A table name in the AWS Glue Data Catalog.</p>") @as("TableName")
+  @ocaml.doc("<p>A table name in the Glue Data Catalog.</p>") @as("TableName")
   tableName: nameString,
-  @ocaml.doc("<p>A database name in the AWS Glue Data Catalog.</p>") @as("DatabaseName")
+  @ocaml.doc("<p>A database name in the Glue Data Catalog.</p>") @as("DatabaseName")
   databaseName: nameString,
 }
 @ocaml.doc("<p>A structure for returning a resource policy.</p>")
@@ -965,6 +1073,20 @@ type executionProperty = {
   @as("MaxConcurrentRuns")
   maxConcurrentRuns: option<maxConcurrentRuns>,
 }
+@ocaml.doc("<p>Batch condition that must be met (specified number of events received or batch time window expired)
+      before EventBridge event trigger fires.</p>")
+type eventBatchingCondition = {
+  @ocaml.doc(
+    "<p>Window of time in seconds after which EventBridge event trigger fires. Window starts when first event is received.</p>"
+  )
+  @as("BatchWindow")
+  batchWindow: option<batchWindow>,
+  @ocaml.doc(
+    "<p>Number of events that must be received from Amazon EventBridge before EventBridge event trigger fires.</p>"
+  )
+  @as("BatchSize")
+  batchSize: batchSize,
+}
 @ocaml.doc("<p>An object containing error details.</p>")
 type errorDetails = {
   @ocaml.doc("<p>The error message for an error.</p>") @as("ErrorMessage")
@@ -981,15 +1103,14 @@ type errorDetail = {
 }
 @ocaml.doc("<p>Specifies the encryption-at-rest configuration for the Data Catalog.</p>")
 type encryptionAtRest = {
-  @ocaml.doc("<p>The ID of the AWS KMS key to use for encryption at rest.</p>")
-  @as("SseAwsKmsKeyId")
+  @ocaml.doc("<p>The ID of the KMS key to use for encryption at rest.</p>") @as("SseAwsKmsKeyId")
   sseAwsKmsKeyId: option<nameString>,
   @ocaml.doc("<p>The encryption-at-rest mode for encrypting Data Catalog data.</p>")
   @as("CatalogEncryptionMode")
   catalogEncryptionMode: catalogEncryptionMode,
 }
-@ocaml.doc("<p>An edge represents a directed connection between two AWS Glue components that are part of the workflow the
-      edge belongs to.</p>")
+@ocaml.doc("<p>An edge represents a directed connection between two components
+      on a workflow graph.</p>")
 type edge = {
   @ocaml.doc("<p>The unique of the node within the workflow where the edge ends.</p>")
   @as("DestinationId")
@@ -1000,7 +1121,7 @@ type edge = {
 }
 @ocaml.doc("<p>Specifies an Amazon DynamoDB table to crawl.</p>")
 type dynamoDBTarget = {
-  @ocaml.doc("<p>The percentage of the configured read capacity units to use by the AWS Glue crawler. Read capacity units is a term defined by DynamoDB, and is a numeric value that acts as rate limiter for the number of reads that can be performed on that table per second.</p>
+  @ocaml.doc("<p>The percentage of the configured read capacity units to use by the Glue crawler. Read capacity units is a term defined by DynamoDB, and is a numeric value that acts as rate limiter for the number of reads that can be performed on that table per second.</p>
 	
 	        <p>The valid values are null or a value between 0.1 to 1.5. A null value is used when user does not provide a value, and defaults to 0.5 of the configured Read Capacity Unit (for provisioned tables), or 0.25 of the max configured Read Capacity Unit (for tables using on-demand mode).</p>")
   scanRate: option<nullableDouble>,
@@ -1070,9 +1191,9 @@ type databaseIdentifier = {
   @ocaml.doc("<p>The ID of the Data Catalog in which the database resides.</p>") @as("CatalogId")
   catalogId: option<catalogIdString>,
 }
-@ocaml.doc("<p>The AWS Lake Formation principal.</p>")
+@ocaml.doc("<p>The Lake Formation principal.</p>")
 type dataLakePrincipal = {
-  @ocaml.doc("<p>An identifier for the AWS Lake Formation principal.</p>")
+  @ocaml.doc("<p>An identifier for the Lake Formation principal.</p>")
   @as("DataLakePrincipalIdentifier")
   dataLakePrincipalIdentifier: option<dataLakePrincipalString>,
 }
@@ -1094,7 +1215,7 @@ type createXMLClassifierRequest = {
 @ocaml.doc("<p>Specifies a JSON classifier for <code>CreateClassifier</code> to create.</p>")
 type createJsonClassifierRequest = {
   @ocaml.doc("<p>A <code>JsonPath</code> string defining the JSON data for the classifier to classify.
-      AWS Glue supports a subset of JsonPath, as described in <a href=\"https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json\">Writing JsonPath Custom Classifiers</a>.</p>")
+      Glue supports a subset of JsonPath, as described in <a href=\"https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json\">Writing JsonPath Custom Classifiers</a>.</p>")
   @as("JsonPath")
   jsonPath: jsonPath,
   @ocaml.doc("<p>The name of the classifier.</p>") @as("Name") name: nameString,
@@ -1157,18 +1278,18 @@ type connectionProperties = Js.Dict.t<valueString>
       encryption or only password encryption.</p>
 	
 	        <p>When a <code>CreationConnection</code> request arrives containing a password, the Data
-      Catalog first encrypts the password using your AWS KMS key. It then encrypts the whole
+      Catalog first encrypts the password using your KMS key. It then encrypts the whole
       connection object again if catalog encryption is also enabled.</p>
  
-         <p>This encryption requires that you set AWS KMS key permissions to enable or restrict access
+         <p>This encryption requires that you set KMS key permissions to enable or restrict access
       on the password key according to your security requirements. For example, you might want only
       administrators to have decrypt permission on the password key.</p>")
 type connectionPasswordEncryption = {
-  @ocaml.doc("<p>An AWS KMS key that is used to encrypt the connection password. </p>
+  @ocaml.doc("<p>An KMS key that is used to encrypt the connection password. </p>
 	
          <p>If connection password protection is enabled, the caller of <code>CreateConnection</code>
       and <code>UpdateConnection</code> needs at least <code>kms:Encrypt</code> permission on the
-      specified AWS KMS key, to encrypt passwords before storing them in the Data Catalog. </p> 
+      specified KMS key, to encrypt passwords before storing them in the Data Catalog. </p> 
     
 	        <p>You can set the decrypt permission to enable or restrict access on the password key according to your security requirements.</p>")
   @as("AwsKmsKeyId")
@@ -1221,6 +1342,10 @@ type condition = {
   logicalOperator: option<logicalOperator>,
 }
 type columnValueStringList = array<columnValuesString>
+type columnRowFilter = {
+  @as("RowFilterExpression") rowFilterExpression: option<predicateString>,
+  @as("ColumnName") columnName: option<nameString>,
+}
 @ocaml.doc("<p>A structure containing the column name and column importance score for a column. </p>
 	
 	        <p>Column importance helps you understand how columns contribute to your model, by identifying which columns in your records are more important than others.</p>")
@@ -1267,7 +1392,7 @@ type catalogImportStatus = {
   @as("ImportCompleted")
   importCompleted: option<boolean_>,
 }
-@ocaml.doc("<p>Specifies a table definition in the AWS Glue Data Catalog.</p>")
+@ocaml.doc("<p>Specifies a table definition in the Glue Data Catalog.</p>")
 type catalogEntry = {
   @ocaml.doc("<p>The name of the table in question.</p>") @as("TableName") tableName: nameString,
   @ocaml.doc("<p>The database in which the table metadata resides.</p>") @as("DatabaseName")
@@ -1282,6 +1407,64 @@ type booleanColumnStatisticsData = {
   numberOfFalses: nonNegativeLong,
   @ocaml.doc("<p>The number of true values in the column.</p>") @as("NumberOfTrues")
   numberOfTrues: nonNegativeLong,
+}
+@ocaml.doc("<p>The details of a blueprint run.</p>")
+type blueprintRun = {
+  @ocaml.doc(
+    "<p>The role ARN. This role will be assumed by the Glue service and will be used to create the workflow and other entities of a workflow.</p>"
+  )
+  @as("RoleArn")
+  roleArn: option<orchestrationIAMRoleArn>,
+  @ocaml.doc(
+    "<p>The blueprint parameters as a string. You will have to provide a value for each key that is required from the parameter spec that is defined in the <code>Blueprint$ParameterSpec</code>.</p>"
+  )
+  @as("Parameters")
+  parameters: option<blueprintParameters>,
+  @ocaml.doc(
+    "<p>If there are any errors while creating the entities of a workflow, we try to roll back the created entities until that point and delete them. This attribute indicates the errors seen while trying to delete the entities that are created.</p>"
+  )
+  @as("RollbackErrorMessage")
+  rollbackErrorMessage: option<messageString>,
+  @ocaml.doc("<p>Indicates any errors that are seen while running the blueprint.</p>")
+  @as("ErrorMessage")
+  errorMessage: option<messageString>,
+  @ocaml.doc("<p>The date and time that the blueprint run completed.</p>") @as("CompletedOn")
+  completedOn: option<timestampValue>,
+  @ocaml.doc("<p>The date and time that the blueprint run started.</p>") @as("StartedOn")
+  startedOn: option<timestampValue>,
+  @ocaml.doc("<p>The state of the blueprint run. Possible values are:</p>
+	
+	        <ul>
+            <li>
+               <p>Running — The blueprint run is in progress.</p>
+            </li>
+            <li>
+               <p>Succeeded — The blueprint run completed successfully.</p>
+            </li>
+            <li>
+               <p>Failed — The blueprint run failed and rollback is complete.</p>
+            </li>
+            <li>
+               <p>Rolling Back — The blueprint run failed and rollback is in progress.</p>
+            </li>
+         </ul>")
+  @as("State")
+  state: option<blueprintRunState>,
+  @ocaml.doc(
+    "<p>The name of a workflow that is created as a result of a successful blueprint run. If a blueprint run has an error, there will not be a workflow created.</p>"
+  )
+  @as("WorkflowName")
+  workflowName: option<nameString>,
+  @ocaml.doc("<p>The run ID for this blueprint run.</p>") @as("RunId") runId: option<idString>,
+  @ocaml.doc("<p>The name of the blueprint.</p>") @as("BlueprintName")
+  blueprintName: option<orchestrationNameString>,
+}
+type blueprintNames = array<orchestrationNameString>
+@ocaml.doc("<p>The details of a blueprint.</p>")
+type blueprintDetails = {
+  @ocaml.doc("<p>The run ID for this blueprint.</p>") @as("RunId") runId: option<idString>,
+  @ocaml.doc("<p>The name of the blueprint.</p>") @as("BlueprintName")
+  blueprintName: option<orchestrationNameString>,
 }
 @ocaml.doc("<p>Defines column statistics supported for bit sequence data values.</p>")
 type binaryColumnStatisticsData = {
@@ -1301,8 +1484,10 @@ type batchStopJobRunSuccessfulSubmission = {
   jobName: option<nameString>,
 }
 type batchStopJobRunJobRunIdList = array<idString>
+type batchGetBlueprintNames = array<orchestrationNameString>
 type batchDeleteTableVersionList = array<versionString>
 type batchDeleteTableNameList = array<nameString>
+type auditColumnNamesList = array<columnNameString>
 type additionalPlanOptionsMap = Js.Dict.t<genericString>
 @ocaml.doc("<p>Specifies a custom CSV classifier to be updated.</p>")
 type updateCsvClassifierRequest = {
@@ -1389,6 +1574,20 @@ type tableError = {
   @as("TableName")
   tableName: option<nameString>,
 }
+@ocaml.doc("<p>The code execution output in JSON format.</p>")
+type statementOutput = {
+  @ocaml.doc("<p>The traceback of the output.</p>") @as("Traceback")
+  traceback: option<orchestrationStringList>,
+  @ocaml.doc("<p>The error value of the output.</p>") @as("ErrorValue")
+  errorValue: option<genericString>,
+  @ocaml.doc("<p>The name of the error in the output.</p>") @as("ErrorName")
+  errorName: option<genericString>,
+  @ocaml.doc("<p>The status of the code execution output.</p>") @as("Status")
+  status: option<statementState>,
+  @ocaml.doc("<p>The execution count of the output.</p>") @as("ExecutionCount")
+  executionCount: option<integerValue>,
+  @ocaml.doc("<p>The code execution output.</p>") @as("Data") data: option<statementOutputData>,
+}
 type sortCriteria = array<sortCriterion>
 @ocaml.doc("<p>Specifies skewed values in a table. Skewed values are those that occur with very high
       frequency.</p>")
@@ -1425,7 +1624,7 @@ type schemaVersionErrorItem = {
   @ocaml.doc("<p>The version number of the schema.</p>") @as("VersionNumber")
   versionNumber: option<versionLongNumber>,
 }
-@ocaml.doc("<p>An object that references a schema stored in the AWS Glue Schema Registry.</p>")
+@ocaml.doc("<p>An object that references a schema stored in the Glue Schema Registry.</p>")
 type schemaReference = {
   @ocaml.doc("<p>The version number of the schema.</p>") @as("SchemaVersionNumber")
   schemaVersionNumber: option<versionLongNumber>,
@@ -1443,6 +1642,21 @@ type schemaReference = {
 type schemaListDefinition = array<schemaListItem>
 @ocaml.doc("<p>Specifies a data store in Amazon Simple Storage Service (Amazon S3).</p>")
 type s3Target = {
+  @ocaml.doc(
+    "<p>A valid Amazon dead-letter SQS ARN. For example, <code>arn:aws:sqs:region:account:deadLetterQueue</code>.</p>"
+  )
+  @as("DlqEventQueueArn")
+  dlqEventQueueArn: option<eventQueueArn>,
+  @ocaml.doc(
+    "<p>A valid Amazon SQS ARN. For example, <code>arn:aws:sqs:region:account:sqs</code>.</p>"
+  )
+  @as("EventQueueArn")
+  eventQueueArn: option<eventQueueArn>,
+  @ocaml.doc(
+    "<p>Sets the number of files in each leaf folder to be crawled when crawling sample files in a dataset. If not set, all the files are crawled. A valid value is an integer between 1 and 249.</p>"
+  )
+  @as("SampleSize")
+  sampleSize: option<nullableInteger>,
   @ocaml.doc(
     "<p>The name of a connection which allows a job or crawler to access data in Amazon S3 within an Amazon Virtual Private Cloud environment (Amazon VPC).</p>"
   )
@@ -1537,16 +1751,6 @@ type devEndpoint = {
                   <code>\"--enable-glue-datacatalog\": \"\"</code>
                </p>
             </li>
-            <li>
-               <p>
-                  <code>\"GLUE_PYTHON_VERSION\": \"3\"</code>
-               </p>
-            </li>
-            <li>
-               <p>
-                  <code>\"GLUE_PYTHON_VERSION\": \"2\"</code>
-               </p>
-            </li>
          </ul>
 	
          <p>You can specify a version of Python support for development endpoints by using the <code>Arguments</code> parameter in the <code>CreateDevEndpoint</code> or <code>UpdateDevEndpoint</code> APIs. If no arguments are provided, the version defaults to Python 2.</p>")
@@ -1609,7 +1813,7 @@ type devEndpoint = {
   @ocaml.doc("<p>The AWS Availability Zone where this <code>DevEndpoint</code> is located.</p>")
   @as("AvailabilityZone")
   availabilityZone: option<genericString>,
-  @ocaml.doc("<p>The number of AWS Glue Data Processing Units (DPUs) allocated to this
+  @ocaml.doc("<p>The number of Glue Data Processing Units (DPUs) allocated to this
         <code>DevEndpoint</code>.</p>")
   @as("NumberOfNodes")
   numberOfNodes: option<integerValue>,
@@ -1618,9 +1822,9 @@ type devEndpoint = {
 		       <p>The maximum number of workers you can define are 299 for <code>G.1X</code>, and 149 for <code>G.2X</code>. </p>")
   @as("NumberOfWorkers")
   numberOfWorkers: option<nullableInteger>,
-  @ocaml.doc("<p>Glue version determines the versions of Apache Spark and Python that AWS Glue supports. The Python version indicates the version supported for running your ETL scripts on development endpoints. </p>
+  @ocaml.doc("<p>Glue version determines the versions of Apache Spark and Python that Glue supports. The Python version indicates the version supported for running your ETL scripts on development endpoints. </p>
  
-         <p>For more information about the available AWS Glue versions and corresponding Spark and Python versions, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/add-job.html\">Glue version</a> in the developer guide.</p>
+         <p>For more information about the available Glue versions and corresponding Spark and Python versions, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/add-job.html\">Glue version</a> in the developer guide.</p>
 	  
 	        <p>Development endpoints that are created without specifying a Glue version default to Glue 0.9.</p>  
 	
@@ -1673,6 +1877,17 @@ type devEndpoint = {
   roleArn: option<roleArn>,
   @ocaml.doc("<p>The name of the <code>DevEndpoint</code>.</p>") @as("EndpointName")
   endpointName: option<genericString>,
+}
+@ocaml.doc("<p>Specifies a Delta data store to crawl one or more Delta tables.</p>")
+type deltaTarget = {
+  @ocaml.doc("<p>Specifies whether to write the manifest files to the Delta table path.</p>")
+  @as("WriteManifest")
+  writeManifest: option<nullableBoolean>,
+  @ocaml.doc("<p>The name of the connection to use to connect to the Delta table target.</p>")
+  @as("ConnectionName")
+  connectionName: option<connectionName>,
+  @ocaml.doc("<p>A list of the Amazon S3 paths to the Delta tables.</p>") @as("DeltaTables")
+  deltaTables: option<pathList>,
 }
 @ocaml.doc("<p>Defines column statistics supported for fixed-point number data columns.</p>")
 type decimalColumnStatisticsData = {
@@ -1758,6 +1973,7 @@ type connectionsList = {
   connections: option<orchestrationStringList>,
 }
 type conditionList = array<condition>
+type columnRowFilterList = array<columnRowFilter>
 type columnImportanceList = array<columnImportance>
 @ocaml.doc("<p>Encapsulates a column name that failed and the reason for failure.</p>")
 type columnError = {
@@ -1778,14 +1994,67 @@ type column = {
   @ocaml.doc("<p>The name of the <code>Column</code>.</p>") @as("Name") name: nameString,
 }
 type codeGenNodeArgs = array<codeGenNodeArg>
-@ocaml.doc("<p>Specifies an AWS Glue Data Catalog target.</p>")
+@ocaml.doc("<p>Specifies an Glue Data Catalog target.</p>")
 type catalogTarget = {
+  @ocaml.doc(
+    "<p>The name of the connection for an Amazon S3-backed Data Catalog table to be a target of the crawl when using a <code>Catalog</code> connection type paired with a <code>NETWORK</code> Connection type.</p>"
+  )
+  @as("ConnectionName")
+  connectionName: option<connectionName>,
   @ocaml.doc("<p>A list of the tables to be synchronized.</p>") @as("Tables")
   tables: catalogTablesList,
   @ocaml.doc("<p>The name of the database to be synchronized.</p>") @as("DatabaseName")
   databaseName: nameString,
 }
 type catalogEntries = array<catalogEntry>
+type blueprintRuns = array<blueprintRun>
+@ocaml.doc("<p>The details of a blueprint.</p>")
+type blueprint = {
+  @ocaml.doc(
+    "<p>When there are multiple versions of a blueprint and the latest version has some errors, this attribute indicates the last successful blueprint definition that is available with the service.</p>"
+  )
+  @as("LastActiveDefinition")
+  lastActiveDefinition: option<lastActiveDefinition>,
+  @ocaml.doc("<p>An error message.</p>") @as("ErrorMessage") errorMessage: option<errorString>,
+  @ocaml.doc("<p>The status of the blueprint registration.</p>
+	
+	        <ul>
+            <li>
+               <p>Creating — The blueprint registration is in progress.</p>
+            </li>
+            <li>
+               <p>Active — The blueprint has been successfully registered.</p>
+            </li>
+            <li>
+               <p>Updating — An update to the blueprint registration is in progress.</p>
+            </li>
+            <li>
+               <p>Failed — The blueprint registration failed.</p>
+            </li>
+         </ul>")
+  @as("Status")
+  status: option<blueprintStatus>,
+  @ocaml.doc(
+    "<p>Specifies a path in Amazon S3 where the blueprint is copied when you call <code>CreateBlueprint/UpdateBlueprint</code> to register the blueprint in Glue.</p>"
+  )
+  @as("BlueprintServiceLocation")
+  blueprintServiceLocation: option<genericString>,
+  @ocaml.doc("<p>Specifies the path in Amazon S3 where the blueprint is published.</p>")
+  @as("BlueprintLocation")
+  blueprintLocation: option<genericString>,
+  @ocaml.doc(
+    "<p>A JSON string that indicates the list of parameter specifications for the blueprint.</p>"
+  )
+  @as("ParameterSpec")
+  parameterSpec: option<blueprintParameterSpec>,
+  @ocaml.doc("<p>The date and time the blueprint was last modified.</p>") @as("LastModifiedOn")
+  lastModifiedOn: option<timestampValue>,
+  @ocaml.doc("<p>The date and time the blueprint was registered.</p>") @as("CreatedOn")
+  createdOn: option<timestampValue>,
+  @ocaml.doc("<p>The description of the blueprint.</p>") @as("Description")
+  description: option<generic512CharString>,
+  @ocaml.doc("<p>The name of the blueprint.</p>") @as("Name") name: option<orchestrationNameString>,
+}
 @ocaml.doc("<p>Contains information about a batch update partition error.</p>")
 type batchUpdatePartitionFailureEntry = {
   @ocaml.doc("<p>The details about the batch update partition error.</p>") @as("ErrorDetail")
@@ -1805,6 +2074,15 @@ type batchStopJobRunError = {
   @as("JobName")
   jobName: option<nameString>,
 }
+@ocaml.doc("<p>A structure containing information for audit.</p>")
+type auditContext = {
+  @ocaml.doc("<p>All columns request for audit.</p>") @as("AllColumnsRequested")
+  allColumnsRequested: option<nullableBoolean>,
+  @ocaml.doc("<p>The requested columns for audit.</p>") @as("RequestedColumns")
+  requestedColumns: option<auditColumnNamesList>,
+  @ocaml.doc("<p>The context for the audit..</p>") @as("AdditionalAuditContext")
+  additionalAuditContext: option<auditContextString>,
+}
 @ocaml.doc("<p>Defines an action to be initiated by a trigger.</p>")
 type action = {
   @ocaml.doc("<p>The name of the crawler to be used with this action.</p>") @as("CrawlerName")
@@ -1823,12 +2101,12 @@ type action = {
   timeout: option<timeout>,
   @ocaml.doc("<p>The job arguments used when this trigger fires. For this job run, they replace the default arguments set in the job definition itself.</p>
          <p>You can specify arguments here that your own job-execution script
-      consumes, as well as arguments that AWS Glue itself consumes.</p>
-         <p>For information about how to specify and consume your own Job arguments, see the <a href=\"https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html\">Calling AWS Glue APIs in Python</a> topic in the developer guide.</p>
-         <p>For information about the key-value pairs that AWS Glue consumes to set up your job, see the <a href=\"https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html\">Special Parameters Used by AWS Glue</a> topic in the developer guide.</p>")
+      consumes, as well as arguments that Glue itself consumes.</p>
+         <p>For information about how to specify and consume your own Job arguments, see the <a href=\"https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html\">Calling Glue APIs in Python</a> topic in the developer guide.</p>
+         <p>For information about the key-value pairs that Glue consumes to set up your job, see the <a href=\"https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html\">Special Parameters Used by Glue</a> topic in the developer guide.</p>")
   @as("Arguments")
   arguments: option<genericMap>,
-  @ocaml.doc("<p>The name of a job to be executed.</p>") @as("JobName") jobName: option<nameString>,
+  @ocaml.doc("<p>The name of a job to be run.</p>") @as("JobName") jobName: option<nameString>,
 }
 @ocaml.doc("<p>A structure used to create or update a user-defined function.</p>")
 type userDefinedFunctionInput = {
@@ -1880,7 +2158,7 @@ type transformFilterCriteria = {
   @as("CreatedBefore")
   createdBefore: option<timestamp_>,
   @ocaml.doc(
-    "<p>This value determines which version of AWS Glue this machine learning transform is compatible with. Glue 1.0 is recommended for most customers. If the value is not set, the Glue compatibility defaults to Glue 0.9.  For more information, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/release-notes.html#release-notes-versions\">AWS Glue Versions</a> in the developer guide.</p>"
+    "<p>This value determines which version of Glue this machine learning transform is compatible with. Glue 1.0 is recommended for most customers. If the value is not set, the Glue compatibility defaults to Glue 0.9.  For more information, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/release-notes.html#release-notes-versions\">Glue Versions</a> in the developer guide.</p>"
   )
   @as("GlueVersion")
   glueVersion: option<glueVersionString>,
@@ -1931,6 +2209,55 @@ type taskRun = {
 }
 type tableVersionErrors = array<tableVersionError>
 type tableErrors = array<tableError>
+@ocaml.doc("<p>The statement or request for a particular action to occur in a session.</p>")
+type statement = {
+  @ocaml.doc("<p>The unix time and date that the job definition was completed.</p>")
+  @as("CompletedOn")
+  completedOn: option<longValue>,
+  @ocaml.doc("<p>The unix time and date that the job definition was started.</p>") @as("StartedOn")
+  startedOn: option<longValue>,
+  @ocaml.doc("<p>The code execution progress.</p>") @as("Progress") progress: option<doubleValue>,
+  @ocaml.doc("<p>The output in JSON.</p>") @as("Output") output: option<statementOutput>,
+  @ocaml.doc("<p>The state while request is actioned.</p>") @as("State")
+  state: option<statementState>,
+  @ocaml.doc("<p>The execution code of the statement.</p>") @as("Code") code: option<genericString>,
+  @ocaml.doc("<p>The ID of the statement.</p>") @as("Id") id: option<integerValue>,
+}
+@ocaml.doc("<p>The period in which a remote Spark runtime environment is running.</p>")
+type session = {
+  @ocaml.doc("<p>The Glue version determines the versions of Apache Spark and Python that AWS Glue supports. 
+      The GlueVersion must be greater than 2.0.</p>")
+  @as("GlueVersion")
+  glueVersion: option<glueVersionString>,
+  @ocaml.doc("<p>The name of the SecurityConfiguration structure to be used with the session.</p>")
+  @as("SecurityConfiguration")
+  securityConfiguration: option<nameString>,
+  @ocaml.doc("<p>The number of AWS Glue data processing units (DPUs) that can be allocated when the job runs. 
+      A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB memory. </p>")
+  @as("MaxCapacity")
+  maxCapacity: option<nullableDouble>,
+  @ocaml.doc("<p>The code execution progress of the session.</p>") @as("Progress")
+  progress: option<doubleValue>,
+  @ocaml.doc("<p>The number of connections used for the session.</p>") @as("Connections")
+  connections: option<connectionsList>,
+  @ocaml.doc("<p>A map array of key-value pairs. Max is 75 pairs. </p>") @as("DefaultArguments")
+  defaultArguments: option<orchestrationArgumentsMap>,
+  @ocaml.doc("<p>The command object.See SessionCommand.</p>") @as("Command")
+  command: option<sessionCommand>,
+  @ocaml.doc(
+    "<p>The name or Amazon Resource Name (ARN) of the IAM role associated with the Session.</p>"
+  )
+  @as("Role")
+  role: option<orchestrationRoleArn>,
+  @ocaml.doc("<p>The description of the session.</p>") @as("Description")
+  description: option<descriptionString>,
+  @ocaml.doc("<p>The error message displayed during the session.</p>") @as("ErrorMessage")
+  errorMessage: option<descriptionString>,
+  @ocaml.doc("<p>The session status. </p>") @as("Status") status: option<sessionStatus>,
+  @ocaml.doc("<p>The time and date when the session was created.</p>") @as("CreatedOn")
+  createdOn: option<timestampValue>,
+  @ocaml.doc("<p>The ID of the session.</p>") @as("Id") id: option<nameString>,
+}
 type schemaVersionErrorList = array<schemaVersionErrorItem>
 type s3TargetList = array<s3Target>
 type principalPermissionsList = array<principalPermissions>
@@ -1967,9 +2294,9 @@ type location = {
 @ocaml.doc("<p>Specifies information used to update an existing job definition. The previous job
       definition is completely overwritten by this information.</p>")
 type jobUpdate = {
-  @ocaml.doc("<p>Glue version determines the versions of Apache Spark and Python that AWS Glue supports. The Python version indicates the version supported for jobs of type Spark. </p>
+  @ocaml.doc("<p>Glue version determines the versions of Apache Spark and Python that Glue supports. The Python version indicates the version supported for jobs of type Spark. </p>
  
-         <p>For more information about the available AWS Glue versions and corresponding Spark and Python versions, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/add-job.html\">Glue version</a> in the developer guide.</p>")
+         <p>For more information about the available Glue versions and corresponding Spark and Python versions, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/add-job.html\">Glue version</a> in the developer guide.</p>")
   @as("GlueVersion")
   glueVersion: option<glueVersionString>,
   @ocaml.doc("<p>Specifies the configuration properties of a job notification.</p>")
@@ -1998,8 +2325,8 @@ type jobUpdate = {
          </ul>")
   @as("WorkerType")
   workerType: option<workerType>,
-  @ocaml.doc("<p>The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure
-     of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href=\"https://aws.amazon.com/glue/pricing/\">AWS Glue pricing page</a>.</p>
+  @ocaml.doc("<p>For Glue version 1.0 or earlier jobs, using the standard worker type, the number of Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure
+     of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href=\"https://aws.amazon.com/glue/pricing/\">Glue pricing page</a>.</p>
       
 	        <p>Do not set <code>Max Capacity</code> if using <code>WorkerType</code> and <code>NumberOfWorkers</code>.</p>	     
 	   
@@ -2016,7 +2343,8 @@ type jobUpdate = {
            Spark streaming ETL job (<code>JobCommand.Name</code>=\"gluestreaming\"), you can allocate from 2 to 100 DPUs. 
            The default is 10 DPUs. This job type cannot have a fractional DPU allocation.</p>
             </li>
-         </ul>")
+         </ul>		
+	        <p>For Glue version 2.0 jobs, you cannot instead specify a <code>Maximum capacity</code>. Instead, you should specify a <code>Worker type</code> and the <code>Number of workers</code>.</p>")
   @as("MaxCapacity")
   maxCapacity: option<nullableDouble>,
   @ocaml.doc("<p>The job timeout in minutes.  This is the maximum time that a job run
@@ -2026,10 +2354,10 @@ type jobUpdate = {
   timeout: option<timeout>,
   @ocaml.doc("<p>This field is deprecated. Use <code>MaxCapacity</code> instead.</p>
   
-         <p>The number of AWS Glue data processing units (DPUs) to allocate to this job. You can
+         <p>The number of Glue data processing units (DPUs) to allocate to this job. You can
       allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of processing
       power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information,
-      see the <a href=\"https://aws.amazon.com/glue/pricing/\">AWS Glue pricing
+      see the <a href=\"https://aws.amazon.com/glue/pricing/\">Glue pricing
       page</a>.</p>")
   @as("AllocatedCapacity")
   allocatedCapacity: option<integerValue>,
@@ -2042,12 +2370,12 @@ type jobUpdate = {
   nonOverridableArguments: option<genericMap>,
   @ocaml.doc("<p>The default arguments for this job.</p>
          <p>You can specify arguments here that your own job-execution script
-      consumes, as well as arguments that AWS Glue itself consumes.</p>
-         <p>For information about how to specify and consume your own Job arguments, see the <a href=\"https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html\">Calling AWS Glue APIs in Python</a> topic in the developer guide.</p>
-         <p>For information about the key-value pairs that AWS Glue consumes to set up your job, see the <a href=\"https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html\">Special Parameters Used by AWS Glue</a> topic in the developer guide.</p>")
+      consumes, as well as arguments that Glue itself consumes.</p>
+         <p>For information about how to specify and consume your own Job arguments, see the <a href=\"https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html\">Calling Glue APIs in Python</a> topic in the developer guide.</p>
+         <p>For information about the key-value pairs that Glue consumes to set up your job, see the <a href=\"https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html\">Special Parameters Used by Glue</a> topic in the developer guide.</p>")
   @as("DefaultArguments")
   defaultArguments: option<genericMap>,
-  @ocaml.doc("<p>The <code>JobCommand</code> that executes this job (required).</p>") @as("Command")
+  @ocaml.doc("<p>The <code>JobCommand</code> that runs this job (required).</p>") @as("Command")
   command: option<jobCommand>,
   @ocaml.doc("<p>An <code>ExecutionProperty</code> specifying the maximum number of concurrent runs allowed
       for this job.</p>")
@@ -2064,9 +2392,9 @@ type jobUpdate = {
 }
 @ocaml.doc("<p>Contains information about a job run.</p>")
 type jobRun = {
-  @ocaml.doc("<p>Glue version determines the versions of Apache Spark and Python that AWS Glue supports. The Python version indicates the version supported for jobs of type Spark. </p>
+  @ocaml.doc("<p>Glue version determines the versions of Apache Spark and Python that Glue supports. The Python version indicates the version supported for jobs of type Spark. </p>
  
-         <p>For more information about the available AWS Glue versions and corresponding Spark and Python versions, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/add-job.html\">Glue version</a> in the developer guide.</p>
+         <p>For more information about the available Glue versions and corresponding Spark and Python versions, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/add-job.html\">Glue version</a> in the developer guide.</p>
 	  
 	        <p>Jobs that are created without specifying a Glue version default to Glue 0.9.</p>")
   @as("GlueVersion")
@@ -2075,7 +2403,7 @@ type jobRun = {
   @as("NotificationProperty")
   notificationProperty: option<notificationProperty>,
   @ocaml.doc("<p>The name of the log group for secure logging that can be server-side encrypted in Amazon
-      CloudWatch using AWS KMS. This name can be <code>/aws-glue/jobs/</code>, in which case the
+      CloudWatch using KMS. This name can be <code>/aws-glue/jobs/</code>, in which case the
       default encryption is <code>NONE</code>. If you add a role name and
       <code>SecurityConfiguration</code> name (in other words,
       <code>/aws-glue/jobs-yourRoleName-yourSecurityConfigurationName/</code>), then that security
@@ -2105,9 +2433,9 @@ type jobRun = {
          </ul>")
   @as("WorkerType")
   workerType: option<workerType>,
-  @ocaml.doc("<p>The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure
+  @ocaml.doc("<p>The number of Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure
       of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory.
-      For more information, see the <a href=\"https://docs.aws.amazon.com/https:/aws.amazon.com/glue/pricing/\">AWS Glue
+      For more information, see the <a href=\"https://aws.amazon.com/glue/pricing/\">Glue
         pricing page</a>.</p>
 
          <p>Do not set <code>Max Capacity</code> if using <code>WorkerType</code> and <code>NumberOfWorkers</code>.</p>
@@ -2135,10 +2463,10 @@ type jobRun = {
   executionTime: option<executionTime>,
   @ocaml.doc("<p>This field is deprecated. Use <code>MaxCapacity</code> instead.</p>
 
-         <p>The number of AWS Glue data processing units (DPUs) allocated to this JobRun.
+         <p>The number of Glue data processing units (DPUs) allocated to this JobRun.
       From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure
       of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory.
-      For more information, see the <a href=\"https://aws.amazon.com/glue/pricing/\">AWS Glue
+      For more information, see the <a href=\"https://aws.amazon.com/glue/pricing/\">Glue
         pricing page</a>.</p>")
   @as("AllocatedCapacity")
   allocatedCapacity: option<integerValue>,
@@ -2148,13 +2476,13 @@ type jobRun = {
   errorMessage: option<errorString>,
   @ocaml.doc("<p>The job arguments associated with this run. For this job run, they replace the default arguments set in the job definition itself.</p>
          <p>You can specify arguments here that your own job-execution script
-      consumes, as well as arguments that AWS Glue itself consumes.</p>
-         <p>For information about how to specify and consume your own job arguments, see the <a href=\"https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html\">Calling AWS Glue APIs in Python</a> topic in the developer guide.</p>
-         <p>For information about the key-value pairs that AWS Glue consumes to set up your job, see the <a href=\"https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html\">Special Parameters Used by AWS Glue</a> topic in the developer guide.</p>")
+      consumes, as well as arguments that Glue itself consumes.</p>
+         <p>For information about how to specify and consume your own job arguments, see the <a href=\"https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html\">Calling Glue APIs in Python</a> topic in the developer guide.</p>
+         <p>For information about the key-value pairs that Glue consumes to set up your job, see the <a href=\"https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html\">Special Parameters Used by Glue</a> topic in the developer guide.</p>")
   @as("Arguments")
   arguments: option<genericMap>,
   @ocaml.doc(
-    "<p>The current state of the job run. For more information about the statuses of jobs that have terminated abnormally, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/job-run-statuses.html\">AWS Glue Job Run Statuses</a>.</p>"
+    "<p>The current state of the job run. For more information about the statuses of jobs that have terminated abnormally, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/job-run-statuses.html\">Glue Job Run Statuses</a>.</p>"
   )
   @as("JobRunState")
   jobRunState: option<jobRunState>,
@@ -2178,9 +2506,9 @@ type jobRun = {
 }
 @ocaml.doc("<p>Specifies a job definition.</p>")
 type job = {
-  @ocaml.doc("<p>Glue version determines the versions of Apache Spark and Python that AWS Glue supports. The Python version indicates the version supported for jobs of type Spark. </p>
+  @ocaml.doc("<p>Glue version determines the versions of Apache Spark and Python that Glue supports. The Python version indicates the version supported for jobs of type Spark. </p>
  
-         <p>For more information about the available AWS Glue versions and corresponding Spark and Python versions, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/add-job.html\">Glue version</a> in the developer guide.</p>
+         <p>For more information about the available Glue versions and corresponding Spark and Python versions, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/add-job.html\">Glue version</a> in the developer guide.</p>
 	  
 	        <p>Jobs that are created without specifying a Glue version default to Glue 0.9.</p>")
   @as("GlueVersion")
@@ -2211,9 +2539,9 @@ type job = {
          </ul>")
   @as("WorkerType")
   workerType: option<workerType>,
-  @ocaml.doc("<p>The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure
+  @ocaml.doc("<p>For Glue version 1.0 or earlier jobs, using the standard worker type, the number of Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure
       of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory.
-      For more information, see the <a href=\"https://aws.amazon.com/glue/pricing/\">AWS Glue
+      For more information, see the <a href=\"https://aws.amazon.com/glue/pricing/\">Glue
       pricing page</a>.</p>
 	  
 	        <p>Do not set <code>Max Capacity</code> if using <code>WorkerType</code> and <code>NumberOfWorkers</code>.</p>
@@ -2231,7 +2559,8 @@ type job = {
             Spark streaming ETL job (<code>JobCommand.Name</code>=\"gluestreaming\"), you can allocate from 2 to 100 DPUs. 
             The default is 10 DPUs. This job type cannot have a fractional DPU allocation.</p>
             </li>
-         </ul>")
+         </ul>
+         <p>For Glue version 2.0 jobs, you cannot instead specify a <code>Maximum capacity</code>. Instead, you should specify a <code>Worker type</code> and the <code>Number of workers</code>.</p>")
   @as("MaxCapacity")
   maxCapacity: option<nullableDouble>,
   @ocaml.doc("<p>The job timeout in minutes.  This is the maximum time that a job run
@@ -2241,10 +2570,10 @@ type job = {
   timeout: option<timeout>,
   @ocaml.doc("<p>This field is deprecated. Use <code>MaxCapacity</code> instead.</p>
 	  
-         <p>The number of AWS Glue data processing units (DPUs) allocated to runs of this job. You can
+         <p>The number of Glue data processing units (DPUs) allocated to runs of this job. You can
       allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of processing
       power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information,
-      see the <a href=\"https://aws.amazon.com/glue/pricing/\">AWS Glue pricing
+      see the <a href=\"https://aws.amazon.com/glue/pricing/\">Glue pricing
       page</a>.</p>
 	        <p></p>")
   @as("AllocatedCapacity")
@@ -2259,12 +2588,12 @@ type job = {
   nonOverridableArguments: option<genericMap>,
   @ocaml.doc("<p>The default arguments for this job, specified as name-value pairs.</p>
          <p>You can specify arguments here that your own job-execution script
-      consumes, as well as arguments that AWS Glue itself consumes.</p>
-         <p>For information about how to specify and consume your own Job arguments, see the <a href=\"https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html\">Calling AWS Glue APIs in Python</a> topic in the developer guide.</p>
-         <p>For information about the key-value pairs that AWS Glue consumes to set up your job, see the <a href=\"https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html\">Special Parameters Used by AWS Glue</a> topic in the developer guide.</p>")
+      consumes, as well as arguments that Glue itself consumes.</p>
+         <p>For information about how to specify and consume your own Job arguments, see the <a href=\"https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html\">Calling Glue APIs in Python</a> topic in the developer guide.</p>
+         <p>For information about the key-value pairs that Glue consumes to set up your job, see the <a href=\"https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html\">Special Parameters Used by Glue</a> topic in the developer guide.</p>")
   @as("DefaultArguments")
   defaultArguments: option<genericMap>,
-  @ocaml.doc("<p>The <code>JobCommand</code> that executes this job.</p>") @as("Command")
+  @ocaml.doc("<p>The <code>JobCommand</code> that runs this job.</p>") @as("Command")
   command: option<jobCommand>,
   @ocaml.doc("<p>An <code>ExecutionProperty</code> specifying the maximum number of concurrent runs allowed
       for this job.</p>")
@@ -2337,6 +2666,7 @@ type encryptionConfiguration = {
   s3Encryption: option<s3EncryptionList>,
 }
 type devEndpointList = array<devEndpoint>
+type deltaTargetList = array<deltaTarget>
 @ocaml.doc("<p>The details of a Crawler node present in the workflow.</p>")
 type crawlerNodeDetails = {
   @ocaml.doc("<p>A list of crawls represented by the crawl node.</p>") @as("Crawls")
@@ -2374,11 +2704,11 @@ type connectionInput = {
             </li>
             <li>
                <p>
-                  <code>MARKETPLACE</code> - Uses configuration settings contained in a connector purchased from AWS Marketplace to read from and write to data stores that are not natively supported by AWS Glue.</p>
+                  <code>MARKETPLACE</code> - Uses configuration settings contained in a connector purchased from Amazon Web Services Marketplace to read from and write to data stores that are not natively supported by Glue.</p>
             </li>
             <li>
                <p>
-                  <code>CUSTOM</code> - Uses configuration settings contained in a custom connector to read from and write to data stores that are not natively supported by AWS Glue.</p>
+                  <code>CUSTOM</code> - Uses configuration settings contained in a custom connector to read from and write to data stores that are not natively supported by Glue.</p>
             </li>
          </ul>
          <p>SFTP is not supported.</p>")
@@ -2467,11 +2797,11 @@ type connection = {
             </li>
             <li>
                <p>
-                  <code>CUSTOM_JDBC_CERT</code> - An Amazon S3 location specifying the customer's root certificate. AWS Glue uses this root certificate to validate the customer’s certificate when connecting to the customer database. AWS Glue only handles X.509 certificates. The certificate provided must be DER-encoded and supplied in Base64 encoding PEM format.</p>
+                  <code>CUSTOM_JDBC_CERT</code> - An Amazon S3 location specifying the customer's root certificate. Glue uses this root certificate to validate the customer’s certificate when connecting to the customer database. Glue only handles X.509 certificates. The certificate provided must be DER-encoded and supplied in Base64 encoding PEM format.</p>
             </li>
             <li>
                <p>
-                  <code>SKIP_CUSTOM_JDBC_CERT_VALIDATION</code> - By default, this is <code>false</code>. AWS Glue validates the Signature algorithm and Subject Public Key Algorithm for the customer certificate. The only permitted algorithms for the Signature algorithm are SHA256withRSA, SHA384withRSA or SHA512withRSA. For the Subject Public Key Algorithm, the key length must be at least 2048. You can set the value of this property to <code>true</code> to skip AWS Glue’s validation of the customer certificate.</p>
+                  <code>SKIP_CUSTOM_JDBC_CERT_VALIDATION</code> - By default, this is <code>false</code>. Glue validates the Signature algorithm and Subject Public Key Algorithm for the customer certificate. The only permitted algorithms for the Signature algorithm are SHA256withRSA, SHA384withRSA or SHA512withRSA. For the Subject Public Key Algorithm, the key length must be at least 2048. You can set the value of this property to <code>true</code> to skip Glue’s validation of the customer certificate.</p>
             </li>
             <li>
                <p>
@@ -2495,7 +2825,7 @@ type connection = {
             </li>
             <li>
                <p>
-                  <code>KAFKA_SKIP_CUSTOM_CERT_VALIDATION</code> - Whether to skip the validation of the CA cert file or not. AWS Glue validates for three algorithms: SHA256withRSA, SHA384withRSA and SHA512withRSA. Default value is \"false\".</p>
+                  <code>KAFKA_SKIP_CUSTOM_CERT_VALIDATION</code> - Whether to skip the validation of the CA cert file or not. Glue validates for three algorithms: SHA256withRSA, SHA384withRSA and SHA512withRSA. Default value is \"false\".</p>
             </li>
             <li>
                <p>
@@ -2527,11 +2857,11 @@ type connection = {
             </li>
             <li>
                <p>
-                  <code>ENCRYPTED_KAFKA_CLIENT_KEYSTORE_PASSWORD</code> - The encrypted version of the Kafka client keystore password (if the user has the AWS Glue encrypt passwords setting selected).</p>
+                  <code>ENCRYPTED_KAFKA_CLIENT_KEYSTORE_PASSWORD</code> - The encrypted version of the Kafka client keystore password (if the user has the Glue encrypt passwords setting selected).</p>
             </li>
             <li>
                <p>
-                  <code>ENCRYPTED_KAFKA_CLIENT_KEY_PASSWORD</code> - The encrypted version of the Kafka client key password (if the user has the AWS Glue encrypt passwords setting selected).</p>
+                  <code>ENCRYPTED_KAFKA_CLIENT_KEY_PASSWORD</code> - The encrypted version of the Kafka client key password (if the user has the Glue encrypt passwords setting selected).</p>
             </li>
          </ul>")
   @as("ConnectionProperties")
@@ -2580,7 +2910,7 @@ type codeGenNode = {
 @ocaml.doc("<p>Classifiers are triggered during a crawl task. A classifier checks whether a given file is
       in a format it can handle. If it is, the classifier creates a schema in the form of a
         <code>StructType</code> object that matches that data format.</p>
-         <p>You can use the standard classifiers that AWS Glue provides, or you can write your own
+         <p>You can use the standard classifiers that Glue provides, or you can write your own
       classifiers to best categorize your data sources and specify the appropriate schemas to use
       for them. A classifier can be a <code>grok</code> classifier, an <code>XML</code> classifier,
       a <code>JSON</code> classifier, or a custom <code>CSV</code> classifier, as specified in one
@@ -2596,6 +2926,7 @@ type classifier = {
   grokClassifier: option<grokClassifier>,
 }
 type catalogTargetList = array<catalogTarget>
+type blueprints = array<blueprint>
 type batchUpdatePartitionFailureList = array<batchUpdatePartitionFailureEntry>
 type batchStopJobRunErrorList = array<batchStopJobRunError>
 type batchGetPartitionValueList = array<partitionValueList>
@@ -2606,6 +2937,10 @@ type userDefinedFunctionList = array<userDefinedFunction>
 @ocaml.doc("<p>A structure used to provide information used to update a trigger. This object updates the
       previous trigger definition by overwriting it completely.</p>")
 type triggerUpdate = {
+  @ocaml.doc("<p>Batch condition that must be met (specified number of events received or batch time window expired)
+      before EventBridge event trigger fires.</p>")
+  @as("EventBatchingCondition")
+  eventBatchingCondition: option<eventBatchingCondition>,
   @ocaml.doc("<p>The predicate of this trigger, which defines when it will fire.</p>")
   @as("Predicate")
   predicate: option<predicate>,
@@ -2623,6 +2958,10 @@ type triggerUpdate = {
 }
 @ocaml.doc("<p>Information about a specific trigger.</p>")
 type trigger = {
+  @ocaml.doc("<p>Batch condition that must be met (specified number of events received or batch time window expired)
+      before EventBridge event trigger fires.</p>")
+  @as("EventBatchingCondition")
+  eventBatchingCondition: option<eventBatchingCondition>,
   @ocaml.doc("<p>The predicate of this trigger, which defines when it will fire.</p>")
   @as("Predicate")
   predicate: option<predicate>,
@@ -2646,7 +2985,7 @@ type trigger = {
 type taskRunList = array<taskRun>
 @ocaml.doc("<p>Describes the physical storage of table data.</p>")
 type storageDescriptor = {
-  @ocaml.doc("<p>An object that references a schema stored in the AWS Glue Schema Registry.</p>
+  @ocaml.doc("<p>An object that references a schema stored in the Glue Schema Registry.</p>
 	
 	        <p>When creating a table, you can pass an empty list of columns for the schema, and instead use a schema reference.</p>")
   @as("SchemaReference")
@@ -2688,6 +3027,7 @@ type storageDescriptor = {
       or <code>TextInputFormat</code>, or a custom format.</p>")
   @as("InputFormat")
   inputFormat: option<formatString>,
+  @as("AdditionalLocations") additionalLocations: option<locationStringList>,
   @ocaml.doc("<p>The physical location of the table. By default, this takes the form of the warehouse
       location, followed by the database location in the warehouse, followed by the table
       name.</p>")
@@ -2696,6 +3036,8 @@ type storageDescriptor = {
   @ocaml.doc("<p>A list of the <code>Columns</code> in the table.</p>") @as("Columns")
   columns: option<columnList>,
 }
+type statementList = array<statement>
+type sessionList = array<session>
 @ocaml.doc("<p>Specifies a security configuration.</p>")
 type securityConfiguration = {
   @ocaml.doc("<p>The encryption configuration associated with this security configuration.</p>")
@@ -2775,7 +3117,9 @@ type database = {
 type dagNodes = array<codeGenNode>
 @ocaml.doc("<p>Specifies data stores to crawl.</p>")
 type crawlerTargets = {
-  @ocaml.doc("<p>Specifies AWS Glue Data Catalog targets.</p>") @as("CatalogTargets")
+  @ocaml.doc("<p>Specifies Delta data store targets.</p>") @as("DeltaTargets")
+  deltaTargets: option<deltaTargetList>,
+  @ocaml.doc("<p>Specifies Glue Data Catalog targets.</p>") @as("CatalogTargets")
   catalogTargets: option<catalogTargetList>,
   @ocaml.doc("<p>Specifies Amazon DynamoDB targets.</p>") @as("DynamoDBTargets")
   dynamoDBTargets: option<dynamoDBTargetList>,
@@ -2895,6 +3239,7 @@ type tableInput = {
 }
 @ocaml.doc("<p>Represents a collection of related data organized in columns and rows.</p>")
 type table = {
+  @as("VersionId") versionId: option<versionString>,
   @ocaml.doc("<p>The ID of the Data Catalog in which the table resides.</p>") @as("CatalogId")
   catalogId: option<catalogIdString>,
   @ocaml.doc(
@@ -2902,7 +3247,7 @@ type table = {
   )
   @as("TargetTable")
   targetTable: option<tableIdentifier>,
-  @ocaml.doc("<p>Indicates whether the table has been registered with AWS Lake Formation.</p>")
+  @ocaml.doc("<p>Indicates whether the table has been registered with Lake Formation.</p>")
   @as("IsRegisteredWithLakeFormation")
   isRegisteredWithLakeFormation: option<boolean_>,
   @ocaml.doc("<p>The person or entity who created the table.</p>") @as("CreatedBy")
@@ -2981,7 +3326,7 @@ type partitionInput = {
   lastAccessTime: option<timestamp_>,
   @ocaml.doc("<p>The values of the partition. Although this parameter is not required by the SDK, you must specify this parameter for a valid input.</p>
 	
-	        <p>The values for the keys for the new partition must be passed as an array of String objects that must be ordered in the same order as the partition keys appearing in the Amazon S3 prefix. Otherwise AWS Glue will add the values to the wrong keys.</p>")
+	        <p>The values for the keys for the new partition must be passed as an array of String objects that must be ordered in the same order as the partition keys appearing in the Amazon S3 prefix. Otherwise Glue will add the values to the wrong keys.</p>")
   @as("Values")
   values: option<valueStringList>,
 }
@@ -3061,9 +3406,9 @@ type mltransform = {
          </ul>")
   @as("WorkerType")
   workerType: option<workerType>,
-  @ocaml.doc("<p>The number of AWS Glue data processing units (DPUs) that are allocated to task runs for this transform. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of
+  @ocaml.doc("<p>The number of Glue data processing units (DPUs) that are allocated to task runs for this transform. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of
       processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more
-      information, see the <a href=\"http://aws.amazon.com/glue/pricing/\">AWS Glue pricing
+      information, see the <a href=\"http://aws.amazon.com/glue/pricing/\">Glue pricing
         page</a>. </p>
 		
 		       <p>
@@ -3088,15 +3433,15 @@ type mltransform = {
   @as("MaxCapacity")
   maxCapacity: option<nullableDouble>,
   @ocaml.doc(
-    "<p>This value determines which version of AWS Glue this machine learning transform is compatible with. Glue 1.0 is recommended for most customers. If the value is not set, the Glue compatibility defaults to Glue 0.9.  For more information, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/release-notes.html#release-notes-versions\">AWS Glue Versions</a> in the developer guide.</p>"
+    "<p>This value determines which version of Glue this machine learning transform is compatible with. Glue 1.0 is recommended for most customers. If the value is not set, the Glue compatibility defaults to Glue 0.9.  For more information, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/release-notes.html#release-notes-versions\">Glue Versions</a> in the developer guide.</p>"
   )
   @as("GlueVersion")
   glueVersion: option<glueVersionString>,
-  @ocaml.doc("<p>The name or Amazon Resource Name (ARN) of the IAM role with the required permissions. The required permissions include both AWS Glue service role permissions to AWS Glue resources, and Amazon S3 permissions required by the transform. </p>
+  @ocaml.doc("<p>The name or Amazon Resource Name (ARN) of the IAM role with the required permissions. The required permissions include both Glue service role permissions to Glue resources, and Amazon S3 permissions required by the transform. </p>
 
 		       <ul>
             <li>
-               <p>This role needs AWS Glue service role permissions to allow access to resources in AWS Glue. See <a href=\"https://docs.aws.amazon.com/glue/latest/dg/attach-policy-iam-user.html\">Attach a Policy to IAM Users That Access AWS Glue</a>.</p>
+               <p>This role needs Glue service role permissions to allow access to resources in Glue. See <a href=\"https://docs.aws.amazon.com/glue/latest/dg/attach-policy-iam-user.html\">Attach a Policy to IAM Users That Access Glue</a>.</p>
             </li>
             <li>
                <p>This role needs permission to your Amazon Simple Storage Service (Amazon S3) sources, targets, temporary directory, scripts, and any libraries used by the task run for this transform.</p>
@@ -3109,7 +3454,7 @@ type mltransform = {
   @as("Schema")
   schema: option<transformSchema>,
   @ocaml.doc(
-    "<p>A count identifier for the labeling files generated by AWS Glue for this transform. As you create a better transform, you can iteratively download, label, and upload the labeling file.</p>"
+    "<p>A count identifier for the labeling files generated by Glue for this transform. As you create a better transform, you can iteratively download, label, and upload the labeling file.</p>"
   )
   @as("LabelCount")
   labelCount: option<labelCount>,
@@ -3123,7 +3468,7 @@ type mltransform = {
       preference on various tradeoffs (such as precious vs. recall, or accuracy vs. cost).</p>")
   @as("Parameters")
   parameters: option<transformParameters>,
-  @ocaml.doc("<p>A list of AWS Glue table definitions used by the transform.</p>")
+  @ocaml.doc("<p>A list of Glue table definitions used by the transform.</p>")
   @as("InputRecordTables")
   inputRecordTables: option<glueTables>,
   @ocaml.doc(
@@ -3159,15 +3504,16 @@ type jobNodeDetails = {
 type databaseList = array<database>
 @ocaml.doc("<p>Specifies a crawler program that examines a data source and uses classifiers to try to
       determine its schema. If successful, the crawler records metadata concerning the data source
-      in the AWS Glue Data Catalog.</p>")
+      in the Glue Data Catalog.</p>")
 type crawler = {
+  @as("LakeFormationConfiguration") lakeFormationConfiguration: option<lakeFormationConfiguration>,
   @ocaml.doc("<p>The name of the <code>SecurityConfiguration</code> structure to be used by this
       crawler.</p>")
   @as("CrawlerSecurityConfiguration")
   crawlerSecurityConfiguration: option<crawlerSecurityConfiguration>,
-  @ocaml.doc("<p>Crawler configuration information. This versioned JSON string allows users
-        to specify aspects of a crawler's behavior.
-        For more information, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html\">Configuring a Crawler</a>.</p>")
+  @ocaml.doc("<p>Crawler configuration information. This versioned JSON string allows users to specify
+      aspects of a crawler's behavior. For more information, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/define-crawler.html#crawler-data-stores-exclude\">Include and Exclude
+        Patterns</a>.</p>")
   @as("Configuration")
   configuration: option<crawlerConfiguration>,
   @ocaml.doc("<p>The version of the crawler.</p>") @as("Version") version: option<versionId>,
@@ -3232,6 +3578,11 @@ type columnStatisticsError = {
   columnStatistics: option<columnStatistics>,
 }
 type backfillErrors = array<backfillError>
+type unfilteredPartition = {
+  @as("IsRegisteredWithLakeFormation") isRegisteredWithLakeFormation: option<boolean_>,
+  @as("AuthorizedColumns") authorizedColumns: option<nameStringList>,
+  @as("Partition") partition: option<partition>,
+}
 type transformList = array<mltransform>
 @ocaml.doc("<p>Specifies a version of a table.</p>")
 type tableVersion = {
@@ -3279,7 +3630,7 @@ type partitionIndexDescriptor = {
   @ocaml.doc("<p>The name of the partition index.</p>") @as("IndexName") indexName: nameString,
 }
 @ocaml.doc(
-  "<p>A node represents an AWS Glue component such as a trigger, or job, etc., that is part of a workflow.</p>"
+  "<p>A node represents an Glue component (trigger, crawler, or job) on a workflow graph.</p>"
 )
 type node = {
   @ocaml.doc("<p>Details of the crawler when the node represents a crawler.</p>")
@@ -3292,9 +3643,9 @@ type node = {
   triggerDetails: option<triggerNodeDetails>,
   @ocaml.doc("<p>The unique Id assigned to the node within the workflow.</p>") @as("UniqueId")
   uniqueId: option<nameString>,
-  @ocaml.doc("<p>The name of the AWS Glue component represented by the node.</p>") @as("Name")
+  @ocaml.doc("<p>The name of the Glue component represented by the node.</p>") @as("Name")
   name: option<nameString>,
-  @ocaml.doc("<p>The type of AWS Glue component represented by the node.</p>") @as("Type")
+  @ocaml.doc("<p>The type of Glue component represented by the node.</p>") @as("Type")
   type_: option<nodeType>,
 }
 type crawlerList = array<crawler>
@@ -3306,11 +3657,12 @@ type batchUpdatePartitionRequestEntry = {
   @ocaml.doc("<p>A list of values defining the partitions.</p>") @as("PartitionValueList")
   partitionValueList: boundedPartitionValueList,
 }
+type unfilteredPartitionList = array<unfilteredPartition>
 type partitionIndexDescriptorList = array<partitionIndexDescriptor>
 type nodeList = array<node>
 type getTableVersionsList = array<tableVersion>
 type batchUpdatePartitionRequestEntryList = array<batchUpdatePartitionRequestEntry>
-@ocaml.doc("<p>A workflow graph represents the complete workflow containing all the AWS Glue components present in the
+@ocaml.doc("<p>A workflow graph represents the complete workflow containing all the Glue components present in the
       workflow and all the directed connections between them.</p>")
 type workflowGraph = {
   @ocaml.doc(
@@ -3319,7 +3671,7 @@ type workflowGraph = {
   @as("Edges")
   edges: option<edgeList>,
   @ocaml.doc(
-    "<p>A list of the the AWS Glue components belong to the workflow represented as nodes.</p>"
+    "<p>A list of the the Glue components belong to the workflow represented as nodes.</p>"
   )
   @as("Nodes")
   nodes: option<nodeList>,
@@ -3328,7 +3680,10 @@ type workflowGraph = {
   "<p>A workflow run is an execution of a workflow providing all the runtime information.</p>"
 )
 type workflowRun = {
-  @ocaml.doc("<p>The graph representing all the AWS Glue components that belong to the workflow as nodes and directed
+  @ocaml.doc("<p>The batch condition that started the workflow run.</p>")
+  @as("StartingEventBatchCondition")
+  startingEventBatchCondition: option<startingEventBatchCondition>,
+  @ocaml.doc("<p>The graph representing all the Glue components that belong to the workflow as nodes and directed
       connections between them as edges.</p>")
   @as("Graph")
   graph: option<workflowGraph>,
@@ -3352,18 +3707,24 @@ type workflowRun = {
   previousRunId: option<idString>,
   @ocaml.doc("<p>The ID of this workflow run.</p>") @as("WorkflowRunId")
   workflowRunId: option<idString>,
-  @ocaml.doc("<p>Name of the workflow that was executed.</p>") @as("Name") name: option<nameString>,
+  @ocaml.doc("<p>Name of the workflow that was run.</p>") @as("Name") name: option<nameString>,
 }
 type workflowRuns = array<workflowRun>
-@ocaml.doc("<p>A workflow represents a flow in which AWS Glue components should be executed to complete a logical
-      task.</p>")
+@ocaml.doc("<p>A workflow is a collection of multiple dependent Glue 
+      jobs and crawlers that are run to complete a complex ETL task. A
+      workflow manages the execution and monitoring of all its jobs and crawlers.</p>")
 type workflow = {
+  @ocaml.doc(
+    "<p>This structure indicates the details of the blueprint that this particular workflow is created from.</p>"
+  )
+  @as("BlueprintDetails")
+  blueprintDetails: option<blueprintDetails>,
   @ocaml.doc(
     "<p>You can use this parameter to prevent unwanted multiple updates to data, to control costs, or in some cases, to prevent exceeding the maximum number of concurrent runs of any of the component jobs. If you leave this parameter blank, there is no limit to the number of concurrent workflow runs.</p>"
   )
   @as("MaxConcurrentRuns")
   maxConcurrentRuns: option<nullableInteger>,
-  @ocaml.doc("<p>The graph representing all the AWS Glue components that belong to the workflow as nodes and directed
+  @ocaml.doc("<p>The graph representing all the Glue components that belong to the workflow as nodes and directed
       connections between them as edges.</p>")
   @as("Graph")
   graph: option<workflowGraph>,
@@ -3373,19 +3734,18 @@ type workflow = {
   lastModifiedOn: option<timestampValue>,
   @ocaml.doc("<p>The date and time when the workflow was created.</p>") @as("CreatedOn")
   createdOn: option<timestampValue>,
-  @ocaml.doc(
-    "<p>A collection of properties to be used as part of each execution of the workflow.</p>"
-  )
+  @ocaml.doc("<p>A collection of properties to be used as part of each execution of the workflow.
+    The run properties are made available to each job in the workflow. A job can modify
+    the properties for the next jobs in the flow.</p>")
   @as("DefaultRunProperties")
   defaultRunProperties: option<workflowRunProperties>,
   @ocaml.doc("<p>A description of the workflow.</p>") @as("Description")
   description: option<genericString>,
-  @ocaml.doc("<p>The name of the workflow representing the flow.</p>") @as("Name")
-  name: option<nameString>,
+  @ocaml.doc("<p>The name of the workflow.</p>") @as("Name") name: option<nameString>,
 }
 type workflows = array<workflow>
-@ocaml.doc("<fullname>AWS Glue</fullname>
-         <p>Defines the public endpoint for the AWS Glue service.</p>")
+@ocaml.doc("<fullname>Glue</fullname>
+         <p>Defines the public endpoint for the Glue service.</p>")
 module UpdateCrawlerSchedule = {
   type t
   type request = {
@@ -3397,10 +3757,30 @@ module UpdateCrawlerSchedule = {
     @ocaml.doc("<p>The name of the crawler whose schedule to update.</p>") @as("CrawlerName")
     crawlerName: nameString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-glue") @new external new: request => t = "UpdateCrawlerScheduleCommand"
   let make = (~crawlerName, ~schedule=?, ()) => new({schedule: schedule, crawlerName: crawlerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module UpdateBlueprint = {
+  type t
+  type request = {
+    @ocaml.doc("<p>Specifies a path in Amazon S3 where the blueprint is published.</p>")
+    @as("BlueprintLocation")
+    blueprintLocation: orchestrationS3Location,
+    @ocaml.doc("<p>A description of the blueprint.</p>") @as("Description")
+    description: option<generic512CharString>,
+    @ocaml.doc("<p>The name of the blueprint.</p>") @as("Name") name: orchestrationNameString,
+  }
+  type response = {
+    @ocaml.doc("<p>Returns the name of the blueprint that was updated.</p>") @as("Name")
+    name: option<nameString>,
+  }
+  @module("@aws-sdk/client-glue") @new external new: request => t = "UpdateBlueprintCommand"
+  let make = (~blueprintLocation, ~name, ~description=?, ()) =>
+    new({blueprintLocation: blueprintLocation, description: description, name: name})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StopWorkflowRun = {
@@ -3409,7 +3789,7 @@ module StopWorkflowRun = {
     @ocaml.doc("<p>The ID of the workflow run to stop.</p>") @as("RunId") runId: idString,
     @ocaml.doc("<p>The name of the workflow to stop.</p>") @as("Name") name: nameString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-glue") @new external new: request => t = "StopWorkflowRunCommand"
   let make = (~runId, ~name, ()) => new({runId: runId, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -3429,13 +3809,28 @@ module StopTrigger = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module StopSession = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The origin of the request.</p>") @as("RequestOrigin")
+    requestOrigin: option<orchestrationNameString>,
+    @ocaml.doc("<p>The ID of the session to be stopped.</p>") @as("Id") id: nameString,
+  }
+  type response = {
+    @ocaml.doc("<p>Returns the Id of the stopped session.</p>") @as("Id") id: option<nameString>,
+  }
+  @module("@aws-sdk/client-glue") @new external new: request => t = "StopSessionCommand"
+  let make = (~id, ~requestOrigin=?, ()) => new({requestOrigin: requestOrigin, id: id})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module StopCrawlerSchedule = {
   type t
   type request = {
     @ocaml.doc("<p>Name of the crawler whose schedule state to set.</p>") @as("CrawlerName")
     crawlerName: nameString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-glue") @new external new: request => t = "StopCrawlerScheduleCommand"
   let make = (~crawlerName, ()) => new({crawlerName: crawlerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -3444,21 +3839,10 @@ module StopCrawlerSchedule = {
 module StopCrawler = {
   type t
   type request = {@ocaml.doc("<p>Name of the crawler to stop.</p>") @as("Name") name: nameString}
-
+  type response = {.}
   @module("@aws-sdk/client-glue") @new external new: request => t = "StopCrawlerCommand"
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
-}
-
-module StartWorkflowRun = {
-  type t
-  type request = {
-    @ocaml.doc("<p>The name of the workflow to start.</p>") @as("Name") name: nameString,
-  }
-  type response = {@ocaml.doc("<p>An Id for the new run.</p>") @as("RunId") runId: option<idString>}
-  @module("@aws-sdk/client-glue") @new external new: request => t = "StartWorkflowRunCommand"
-  let make = (~name, ()) => new({name: name})
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartTrigger = {
@@ -3562,7 +3946,7 @@ module StartCrawlerSchedule = {
     @ocaml.doc("<p>Name of the crawler to schedule.</p>") @as("CrawlerName")
     crawlerName: nameString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-glue") @new external new: request => t = "StartCrawlerScheduleCommand"
   let make = (~crawlerName, ()) => new({crawlerName: crawlerName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -3571,10 +3955,50 @@ module StartCrawlerSchedule = {
 module StartCrawler = {
   type t
   type request = {@ocaml.doc("<p>Name of the crawler to start.</p>") @as("Name") name: nameString}
-
+  type response = {.}
   @module("@aws-sdk/client-glue") @new external new: request => t = "StartCrawlerCommand"
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module StartBlueprintRun = {
+  type t
+  type request = {
+    @ocaml.doc("<p>Specifies the IAM role used to create the workflow.</p>") @as("RoleArn")
+    roleArn: orchestrationIAMRoleArn,
+    @ocaml.doc("<p>Specifies the parameters as a <code>BlueprintParameters</code> object.</p>")
+    @as("Parameters")
+    parameters: option<blueprintParameters>,
+    @ocaml.doc("<p>The name of the blueprint.</p>") @as("BlueprintName")
+    blueprintName: orchestrationNameString,
+  }
+  type response = {
+    @ocaml.doc("<p>The run ID for this blueprint run.</p>") @as("RunId") runId: option<idString>,
+  }
+  @module("@aws-sdk/client-glue") @new external new: request => t = "StartBlueprintRunCommand"
+  let make = (~roleArn, ~blueprintName, ~parameters=?, ()) =>
+    new({roleArn: roleArn, parameters: parameters, blueprintName: blueprintName})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module RunStatement = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The origin of the request.</p>") @as("RequestOrigin")
+    requestOrigin: option<orchestrationNameString>,
+    @ocaml.doc("<p>The statement code to be run.</p>") @as("Code")
+    code: orchestrationStatementCodeString,
+    @ocaml.doc("<p>The Session Id of the statement to be run.</p>") @as("SessionId")
+    sessionId: nameString,
+  }
+  type response = {
+    @ocaml.doc("<p>Returns the Id of the statement that was run.</p>") @as("Id")
+    id: option<integerValue>,
+  }
+  @module("@aws-sdk/client-glue") @new external new: request => t = "RunStatementCommand"
+  let make = (~code, ~sessionId, ~requestOrigin=?, ()) =>
+    new({requestOrigin: requestOrigin, code: code, sessionId: sessionId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutResourcePolicy = {
@@ -3588,8 +4012,7 @@ module PutResourcePolicy = {
                </p>
             </li>
             <li>
-               <p>By using the <b>Grant permissions</b> command on the AWS
-          Management Console.</p>
+               <p>By using the <b>Grant permissions</b> command on the Amazon Web Services Management Console.</p>
             </li>
          </ul>
          <p>Must be set to <code>'TRUE'</code> if you have already used the Management Console to
@@ -3641,12 +4064,12 @@ module ImportCatalogToGlue = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The ID of the catalog to import. Currently, this should be the AWS account ID.</p>"
+      "<p>The ID of the catalog to import. Currently, this should be the Amazon Web Services account ID.</p>"
     )
     @as("CatalogId")
     catalogId: option<catalogIdString>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-glue") @new external new: request => t = "ImportCatalogToGlueCommand"
   let make = (~catalogId=?, ()) => new({catalogId: catalogId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -3655,9 +4078,9 @@ module ImportCatalogToGlue = {
 module GetResourcePolicy = {
   type t
   type request = {
-    @ocaml.doc("<p>The ARN of the AWS Glue resource for which to retrieve the resource policy. If not
+    @ocaml.doc("<p>The ARN of the Glue resource for which to retrieve the resource policy. If not
       supplied, the Data Catalog resource policy is returned. Use <code>GetResourcePolicies</code>
-      to view all existing resource policies. For more information see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/glue-specifying-resource-arns.html\">Specifying AWS Glue Resource ARNs</a>.
+      to view all existing resource policies. For more information see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/glue-specifying-resource-arns.html\">Specifying Glue Resource ARNs</a>.
     </p>")
     @as("ResourceArn")
     resourceArn: option<glueResourceArn>,
@@ -3700,11 +4123,11 @@ module DeleteUserDefinedFunction = {
     @as("DatabaseName")
     databaseName: nameString,
     @ocaml.doc("<p>The ID of the Data Catalog where the function to be deleted is
-      located. If none is supplied, the AWS account ID is used by default.</p>")
+      located. If none is supplied, the Amazon Web Services account ID is used by default.</p>")
     @as("CatalogId")
     catalogId: option<catalogIdString>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-glue") @new
   external new: request => t = "DeleteUserDefinedFunctionCommand"
   let make = (~functionName, ~databaseName, ~catalogId=?, ()) =>
@@ -3742,12 +4165,12 @@ module DeleteTableVersion = {
       compatibility, this name is entirely lowercase.</p>")
     @as("DatabaseName")
     databaseName: nameString,
-    @ocaml.doc("<p>The ID of the Data Catalog where the tables reside. If none is provided, the AWS account
+    @ocaml.doc("<p>The ID of the Data Catalog where the tables reside. If none is provided, the Amazon Web Services account
       ID is used by default.</p>")
     @as("CatalogId")
     catalogId: option<catalogIdString>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-glue") @new external new: request => t = "DeleteTableVersionCommand"
   let make = (~versionId, ~tableName, ~databaseName, ~catalogId=?, ()) =>
     new({
@@ -3762,6 +4185,9 @@ module DeleteTableVersion = {
 module DeleteTable = {
   type t
   type request = {
+    @ocaml.doc("<p>The transaction ID at which to delete the table contents.</p>")
+    @as("TransactionId")
+    transactionId: option<transactionIdString>,
     @ocaml.doc("<p>The name of the table to be deleted. For Hive
       compatibility, this name is entirely lowercase.</p>")
     @as("Name")
@@ -3770,16 +4196,36 @@ module DeleteTable = {
       compatibility, this name is entirely lowercase.</p>")
     @as("DatabaseName")
     databaseName: nameString,
-    @ocaml.doc("<p>The ID of the Data Catalog where the table resides. If none is provided, the AWS account
+    @ocaml.doc("<p>The ID of the Data Catalog where the table resides. If none is provided, the Amazon Web Services account
       ID is used by default.</p>")
     @as("CatalogId")
     catalogId: option<catalogIdString>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-glue") @new external new: request => t = "DeleteTableCommand"
-  let make = (~name, ~databaseName, ~catalogId=?, ()) =>
-    new({name: name, databaseName: databaseName, catalogId: catalogId})
+  let make = (~name, ~databaseName, ~transactionId=?, ~catalogId=?, ()) =>
+    new({
+      transactionId: transactionId,
+      name: name,
+      databaseName: databaseName,
+      catalogId: catalogId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module DeleteSession = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The name of the origin of the delete session request.</p>") @as("RequestOrigin")
+    requestOrigin: option<orchestrationNameString>,
+    @ocaml.doc("<p>The ID of the session to be deleted.</p>") @as("Id") id: nameString,
+  }
+  type response = {
+    @ocaml.doc("<p>Returns the ID of the deleted session.</p>") @as("Id") id: option<nameString>,
+  }
+  @module("@aws-sdk/client-glue") @new external new: request => t = "DeleteSessionCommand"
+  let make = (~id, ~requestOrigin=?, ()) => new({requestOrigin: requestOrigin, id: id})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteSecurityConfiguration = {
@@ -3788,7 +4234,7 @@ module DeleteSecurityConfiguration = {
     @ocaml.doc("<p>The name of the security configuration to delete.</p>") @as("Name")
     name: nameString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-glue") @new
   external new: request => t = "DeleteSecurityConfigurationCommand"
   let make = (~name, ()) => new({name: name})
@@ -3798,14 +4244,14 @@ module DeleteSecurityConfiguration = {
 module DeleteResourcePolicy = {
   type t
   type request = {
-    @ocaml.doc("<p>The ARN of the AWS Glue resource for the resource policy to be deleted.</p>")
+    @ocaml.doc("<p>The ARN of the Glue resource for the resource policy to be deleted.</p>")
     @as("ResourceArn")
     resourceArn: option<glueResourceArn>,
     @ocaml.doc("<p>The hash value returned when this policy was set.</p>")
     @as("PolicyHashCondition")
     policyHashCondition: option<hashString>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-glue") @new external new: request => t = "DeleteResourcePolicyCommand"
   let make = (~resourceArn=?, ~policyHashCondition=?, ()) =>
     new({resourceArn: resourceArn, policyHashCondition: policyHashCondition})
@@ -3830,7 +4276,7 @@ module DeletePartitionIndex = {
     @ocaml.doc("<p>The catalog ID where the table resides.</p>") @as("CatalogId")
     catalogId: option<catalogIdString>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-glue") @new external new: request => t = "DeletePartitionIndexCommand"
   let make = (~indexName, ~tableName, ~databaseName, ~catalogId=?, ()) =>
     new({
@@ -3878,7 +4324,7 @@ module DeleteDevEndpoint = {
     @ocaml.doc("<p>The name of the <code>DevEndpoint</code>.</p>") @as("EndpointName")
     endpointName: genericString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-glue") @new external new: request => t = "DeleteDevEndpointCommand"
   let make = (~endpointName, ()) => new({endpointName: endpointName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -3891,12 +4337,12 @@ module DeleteDatabase = {
       lowercase.</p>")
     @as("Name")
     name: nameString,
-    @ocaml.doc("<p>The ID of the Data Catalog in which the database resides. If none is provided, the AWS
+    @ocaml.doc("<p>The ID of the Data Catalog in which the database resides. If none is provided, the Amazon Web Services
       account ID is used by default.</p>")
     @as("CatalogId")
     catalogId: option<catalogIdString>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-glue") @new external new: request => t = "DeleteDatabaseCommand"
   let make = (~name, ~catalogId=?, ()) => new({name: name, catalogId: catalogId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -3907,7 +4353,7 @@ module DeleteCrawler = {
   type request = {
     @ocaml.doc("<p>The name of the crawler to remove.</p>") @as("Name") name: nameString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-glue") @new external new: request => t = "DeleteCrawlerCommand"
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -3918,12 +4364,12 @@ module DeleteConnection = {
   type request = {
     @ocaml.doc("<p>The name of the connection to delete.</p>") @as("ConnectionName")
     connectionName: nameString,
-    @ocaml.doc("<p>The ID of the Data Catalog in which the connection resides. If none is provided, the AWS
+    @ocaml.doc("<p>The ID of the Data Catalog in which the connection resides. If none is provided, the Amazon Web Services
       account ID is used by default.</p>")
     @as("CatalogId")
     catalogId: option<catalogIdString>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-glue") @new external new: request => t = "DeleteConnectionCommand"
   let make = (~connectionName, ~catalogId=?, ()) =>
     new({connectionName: connectionName, catalogId: catalogId})
@@ -3939,11 +4385,11 @@ module DeleteColumnStatisticsForTable = {
     @as("DatabaseName")
     databaseName: nameString,
     @ocaml.doc("<p>The ID of the Data Catalog where the partitions in question reside.
-      If none is supplied, the AWS account ID is used by default.</p>")
+      If none is supplied, the Amazon Web Services account ID is used by default.</p>")
     @as("CatalogId")
     catalogId: option<catalogIdString>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-glue") @new
   external new: request => t = "DeleteColumnStatisticsForTableCommand"
   let make = (~columnName, ~tableName, ~databaseName, ~catalogId=?, ()) =>
@@ -3961,10 +4407,24 @@ module DeleteClassifier = {
   type request = {
     @ocaml.doc("<p>Name of the classifier to remove.</p>") @as("Name") name: nameString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-glue") @new external new: request => t = "DeleteClassifierCommand"
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module DeleteBlueprint = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The name of the blueprint to delete.</p>") @as("Name") name: nameString,
+  }
+  type response = {
+    @ocaml.doc("<p>Returns the name of the blueprint that was deleted.</p>") @as("Name")
+    name: option<nameString>,
+  }
+  @module("@aws-sdk/client-glue") @new external new: request => t = "DeleteBlueprintCommand"
+  let make = (~name, ()) => new({name: name})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CheckSchemaVersionValidity = {
@@ -3974,7 +4434,7 @@ module CheckSchemaVersionValidity = {
     @as("SchemaDefinition")
     schemaDefinition: schemaDefinitionString,
     @ocaml.doc(
-      "<p>The data format of the schema definition. Currently only <code>AVRO</code> is supported.</p>"
+      "<p>The data format of the schema definition. Currently <code>AVRO</code>, <code>JSON</code> and <code>PROTOBUF</code> are supported.</p>"
     )
     @as("DataFormat")
     dataFormat: dataFormat,
@@ -3990,6 +4450,22 @@ module CheckSchemaVersionValidity = {
   let make = (~schemaDefinition, ~dataFormat, ()) =>
     new({schemaDefinition: schemaDefinition, dataFormat: dataFormat})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module CancelStatement = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The origin of the request to cancel the statement.</p>") @as("RequestOrigin")
+    requestOrigin: option<orchestrationNameString>,
+    @ocaml.doc("<p>The ID of the statement to be cancelled.</p>") @as("Id") id: integerValue,
+    @ocaml.doc("<p>The Session ID of the statement to be cancelled.</p>") @as("SessionId")
+    sessionId: nameString,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-glue") @new external new: request => t = "CancelStatementCommand"
+  let make = (~id, ~sessionId, ~requestOrigin=?, ()) =>
+    new({requestOrigin: requestOrigin, id: id, sessionId: sessionId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module CancelMLTaskRun = {
@@ -4126,16 +4602,6 @@ module UpdateDevEndpoint = {
                   <code>\"--enable-glue-datacatalog\": \"\"</code>
                </p>
             </li>
-            <li>
-               <p>
-                  <code>\"GLUE_PYTHON_VERSION\": \"3\"</code>
-               </p>
-            </li>
-            <li>
-               <p>
-                  <code>\"GLUE_PYTHON_VERSION\": \"2\"</code>
-               </p>
-            </li>
          </ul>
 	
          <p>You can specify a version of Python support for development endpoints by using the <code>Arguments</code> parameter in the <code>CreateDevEndpoint</code> or <code>UpdateDevEndpoint</code> APIs. If no arguments are provided, the version defaults to Python 2.</p>")
@@ -4166,7 +4632,7 @@ module UpdateDevEndpoint = {
     @ocaml.doc("<p>The name of the <code>DevEndpoint</code> to be updated.</p>") @as("EndpointName")
     endpointName: genericString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-glue") @new external new: request => t = "UpdateDevEndpointCommand"
   let make = (
     ~endpointName,
@@ -4203,7 +4669,7 @@ module UntagResource = {
     @as("ResourceArn")
     resourceArn: glueResourceArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-glue") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagsToRemove, ~resourceArn, ()) =>
     new({tagsToRemove: tagsToRemove, resourceArn: resourceArn})
@@ -4214,15 +4680,28 @@ module TagResource = {
   type t
   type request = {
     @ocaml.doc("<p>Tags to add to this resource.</p>") @as("TagsToAdd") tagsToAdd: tagsMap,
-    @ocaml.doc("<p>The ARN of the AWS Glue resource to which to add the tags. For more
-      information about AWS Glue resource ARNs, see the <a href=\"https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-common.html#aws-glue-api-regex-aws-glue-arn-id\">AWS Glue ARN string pattern</a>.</p>")
+    @ocaml.doc("<p>The ARN of the Glue resource to which to add the tags. For more
+      information about Glue resource ARNs, see the <a href=\"https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-common.html#aws-glue-api-regex-aws-glue-arn-id\">Glue ARN string pattern</a>.</p>")
     @as("ResourceArn")
     resourceArn: glueResourceArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-glue") @new external new: request => t = "TagResourceCommand"
   let make = (~tagsToAdd, ~resourceArn, ()) => new({tagsToAdd: tagsToAdd, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module StartWorkflowRun = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The workflow run properties for the new workflow run.</p>") @as("RunProperties")
+    runProperties: option<workflowRunProperties>,
+    @ocaml.doc("<p>The name of the workflow to start.</p>") @as("Name") name: nameString,
+  }
+  type response = {@ocaml.doc("<p>An Id for the new run.</p>") @as("RunId") runId: option<idString>}
+  @module("@aws-sdk/client-glue") @new external new: request => t = "StartWorkflowRunCommand"
+  let make = (~name, ~runProperties=?, ()) => new({runProperties: runProperties, name: name})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartJobRun = {
@@ -4254,9 +4733,9 @@ module StartJobRun = {
       run.</p>")
     @as("SecurityConfiguration")
     securityConfiguration: option<nameString>,
-    @ocaml.doc("<p>The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure
+    @ocaml.doc("<p>The number of Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure
       of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory.
-      For more information, see the <a href=\"https://docs.aws.amazon.com/https:/aws.amazon.com/glue/pricing/\">AWS Glue
+      For more information, see the <a href=\"https://aws.amazon.com/glue/pricing/\">Glue
         pricing page</a>.</p>
 
          <p>Do not set <code>Max Capacity</code> if using <code>WorkerType</code> and <code>NumberOfWorkers</code>.</p>
@@ -4281,18 +4760,18 @@ module StartJobRun = {
     timeout: option<timeout>,
     @ocaml.doc("<p>This field is deprecated. Use <code>MaxCapacity</code> instead.</p>
 
-         <p>The number of AWS Glue data processing units (DPUs) to allocate to this JobRun.
+         <p>The number of Glue data processing units (DPUs) to allocate to this JobRun.
       From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure
       of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory.
-      For more information, see the <a href=\"https://docs.aws.amazon.com/https:/aws.amazon.com/glue/pricing/\">AWS Glue
+      For more information, see the <a href=\"https://aws.amazon.com/glue/pricing/\">Glue
         pricing page</a>.</p>")
     @as("AllocatedCapacity")
     allocatedCapacity: option<integerValue>,
     @ocaml.doc("<p>The job arguments specifically for this run. For this job run, they replace the default arguments set in the job definition itself.</p>
          <p>You can specify arguments here that your own job-execution script
-      consumes, as well as arguments that AWS Glue itself consumes.</p>
-         <p>For information about how to specify and consume your own Job arguments, see the <a href=\"https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html\">Calling AWS Glue APIs in Python</a> topic in the developer guide.</p>
-         <p>For information about the key-value pairs that AWS Glue consumes to set up your job, see the <a href=\"https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html\">Special Parameters Used by AWS Glue</a> topic in the developer guide.</p>")
+      consumes, as well as arguments that Glue itself consumes.</p>
+         <p>For information about how to specify and consume your own Job arguments, see the <a href=\"https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html\">Calling Glue APIs in Python</a> topic in the developer guide.</p>
+         <p>For information about the key-value pairs that Glue consumes to set up your job, see the <a href=\"https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html\">Special Parameters Used by Glue</a> topic in the developer guide.</p>")
     @as("Arguments")
     arguments: option<genericMap>,
     @ocaml.doc("<p>The ID of a previous <code>JobRun</code> to retry.</p>") @as("JobRunId")
@@ -4467,7 +4946,7 @@ module PutWorkflowRunProperties = {
     runId: idString,
     @ocaml.doc("<p>Name of the workflow which was run.</p>") @as("Name") name: nameString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-glue") @new
   external new: request => t = "PutWorkflowRunPropertiesCommand"
   let make = (~runProperties, ~runId, ~name, ()) =>
@@ -4651,6 +5130,29 @@ module ListCrawlers = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module ListBlueprints = {
+  type t
+  type request = {
+    @ocaml.doc("<p>Filters the list by an Amazon Web Services resource tag.</p>") @as("Tags")
+    tags: option<tagsMap>,
+    @ocaml.doc("<p>The maximum size of a list to return.</p>") @as("MaxResults")
+    maxResults: option<pageSize>,
+    @ocaml.doc("<p>A continuation token, if this is a continuation request.</p>") @as("NextToken")
+    nextToken: option<genericString>,
+  }
+  type response = {
+    @ocaml.doc("<p>A continuation token, if not all blueprint names have been returned.</p>")
+    @as("NextToken")
+    nextToken: option<genericString>,
+    @ocaml.doc("<p>List of names of blueprints in the account.</p>") @as("Blueprints")
+    blueprints: option<blueprintNames>,
+  }
+  @module("@aws-sdk/client-glue") @new external new: request => t = "ListBlueprintsCommand"
+  let make = (~tags=?, ~maxResults=?, ~nextToken=?, ()) =>
+    new({tags: tags, maxResults: maxResults, nextToken: nextToken})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module GetWorkflowRunProperties = {
   type t
   type request = {
@@ -4762,7 +5264,7 @@ module GetSchemaVersion = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the schema.</p>") @as("SchemaArn")
     schemaArn: option<glueResourceArn>,
     @ocaml.doc(
-      "<p>The data format of the schema definition. Currently only <code>AVRO</code> is supported.</p>"
+      "<p>The data format of the schema definition. Currently <code>AVRO</code>, <code>JSON</code> and <code>PROTOBUF</code> are supported.</p>"
     )
     @as("DataFormat")
     dataFormat: option<dataFormat>,
@@ -4806,7 +5308,7 @@ module GetSchemaByDefinition = {
     @ocaml.doc("<p>The status of the schema version.</p>") @as("Status")
     status: option<schemaVersionStatus>,
     @ocaml.doc(
-      "<p>The data format of the schema definition. Currently only <code>AVRO</code> is supported.</p>"
+      "<p>The data format of the schema definition. Currently <code>AVRO</code>, <code>JSON</code> and <code>PROTOBUF</code> are supported.</p>"
     )
     @as("DataFormat")
     dataFormat: option<dataFormat>,
@@ -4861,7 +5363,7 @@ module GetSchema = {
     @ocaml.doc("<p>The compatibility mode of the schema.</p>") @as("Compatibility")
     compatibility: option<compatibility>,
     @ocaml.doc(
-      "<p>The data format of the schema definition. Currently only <code>AVRO</code> is supported.</p>"
+      "<p>The data format of the schema definition. Currently <code>AVRO</code>, <code>JSON</code> and <code>PROTOBUF</code> are supported.</p>"
     )
     @as("DataFormat")
     dataFormat: option<dataFormat>,
@@ -4929,7 +5431,7 @@ module GetCatalogImportStatus = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The ID of the catalog to migrate. Currently, this should be the AWS account ID.</p>"
+      "<p>The ID of the catalog to migrate. Currently, this should be the Amazon Web Services account ID.</p>"
     )
     @as("CatalogId")
     catalogId: option<catalogIdString>,
@@ -4940,6 +5442,23 @@ module GetCatalogImportStatus = {
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "GetCatalogImportStatusCommand"
   let make = (~catalogId=?, ()) => new({catalogId: catalogId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module GetBlueprintRun = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The run ID for the blueprint run you want to retrieve.</p>") @as("RunId")
+    runId: idString,
+    @ocaml.doc("<p>The name of the blueprint.</p>") @as("BlueprintName")
+    blueprintName: orchestrationNameString,
+  }
+  type response = {
+    @ocaml.doc("<p>Returns a <code>BlueprintRun</code> object.</p>") @as("BlueprintRun")
+    blueprintRun: option<blueprintRun>,
+  }
+  @module("@aws-sdk/client-glue") @new external new: request => t = "GetBlueprintRunCommand"
+  let make = (~runId, ~blueprintName, ()) => new({runId: runId, blueprintName: blueprintName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -5004,11 +5523,11 @@ module DeletePartition = {
     @as("DatabaseName")
     databaseName: nameString,
     @ocaml.doc("<p>The ID of the Data Catalog where the partition to be deleted resides. If none is provided,
-      the AWS account ID is used by default.</p>")
+      the Amazon Web Services account ID is used by default.</p>")
     @as("CatalogId")
     catalogId: option<catalogIdString>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-glue") @new external new: request => t = "DeletePartitionCommand"
   let make = (~partitionValues, ~tableName, ~databaseName, ~catalogId=?, ()) =>
     new({
@@ -5032,11 +5551,11 @@ module DeleteColumnStatisticsForPartition = {
     @as("DatabaseName")
     databaseName: nameString,
     @ocaml.doc("<p>The ID of the Data Catalog where the partitions in question reside.
-      If none is supplied, the AWS account ID is used by default.</p>")
+      If none is supplied, the Amazon Web Services account ID is used by default.</p>")
     @as("CatalogId")
     catalogId: option<catalogIdString>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-glue") @new
   external new: request => t = "DeleteColumnStatisticsForPartitionCommand"
   let make = (~columnName, ~partitionValues, ~tableName, ~databaseName, ~catalogId=?, ()) =>
@@ -5098,7 +5617,7 @@ module CreateSchema = {
     @as("SchemaDefinition")
     schemaDefinition: option<schemaDefinitionString>,
     @ocaml.doc(
-      "<p>AWS tags that contain a key value pair and may be searched by console, command line, or API. If specified, follows the AWS tags-on-create pattern.</p>"
+      "<p>Amazon Web Services tags that contain a key value pair and may be searched by console, command line, or API. If specified, follows the Amazon Web Services tags-on-create pattern.</p>"
     )
     @as("Tags")
     tags: option<tagsMap>,
@@ -5146,7 +5665,7 @@ module CreateSchema = {
     @as("Compatibility")
     compatibility: option<compatibility>,
     @ocaml.doc(
-      "<p>The data format of the schema definition. Currently only <code>AVRO</code> is supported.</p>"
+      "<p>The data format of the schema definition. Currently <code>AVRO</code>, <code>JSON</code> and <code>PROTOBUF</code> are supported.</p>"
     )
     @as("DataFormat")
     dataFormat: dataFormat,
@@ -5187,7 +5706,7 @@ module CreateSchema = {
     @ocaml.doc("<p>The schema compatibility mode.</p>") @as("Compatibility")
     compatibility: option<compatibility>,
     @ocaml.doc(
-      "<p>The data format of the schema definition. Currently only <code>AVRO</code> is supported.</p>"
+      "<p>The data format of the schema definition. Currently <code>AVRO</code>, <code>JSON</code> and <code>PROTOBUF</code> are supported.</p>"
     )
     @as("DataFormat")
     dataFormat: option<dataFormat>,
@@ -5229,7 +5748,7 @@ module CreateRegistry = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>AWS tags that contain a key value pair and may be searched by console, command line, or API.</p>"
+      "<p>Amazon Web Services tags that contain a key value pair and may be searched by console, command line, or API.</p>"
     )
     @as("Tags")
     tags: option<tagsMap>,
@@ -5267,7 +5786,7 @@ module CreateDevEndpoint = {
     @as("Arguments")
     arguments: option<mapValue>,
     @ocaml.doc(
-      "<p>The tags to use with this DevEndpoint. You may use tags to limit access to the DevEndpoint. For more information about tags in AWS Glue, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html\">AWS Tags in AWS Glue</a> in the developer guide.</p>"
+      "<p>The tags to use with this DevEndpoint. You may use tags to limit access to the DevEndpoint. For more information about tags in Glue, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html\">Amazon Web Services Tags in Glue</a> in the developer guide.</p>"
     )
     @as("Tags")
     tags: option<tagsMap>,
@@ -5294,9 +5813,9 @@ module CreateDevEndpoint = {
 	        <p>The maximum number of workers you can define are 299 for <code>G.1X</code>, and 149 for <code>G.2X</code>. </p>")
     @as("NumberOfWorkers")
     numberOfWorkers: option<nullableInteger>,
-    @ocaml.doc("<p>Glue version determines the versions of Apache Spark and Python that AWS Glue supports. The Python version indicates the version supported for running your ETL scripts on development endpoints. </p>
+    @ocaml.doc("<p>Glue version determines the versions of Apache Spark and Python that Glue supports. The Python version indicates the version supported for running your ETL scripts on development endpoints. </p>
  
-         <p>For more information about the available AWS Glue versions and corresponding Spark and Python versions, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/add-job.html\">Glue version</a> in the developer guide.</p>
+         <p>For more information about the available Glue versions and corresponding Spark and Python versions, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/add-job.html\">Glue version</a> in the developer guide.</p>
 	  
 	        <p>Development endpoints that are created without specifying a Glue version default to Glue 0.9.</p>  
 	
@@ -5319,7 +5838,7 @@ module CreateDevEndpoint = {
             <code>WorkerType</code> configuration, the Spark drivers for the development endpoint will run on 4 vCPU, 16 GB of memory, and a 64 GB disk. </p>")
     @as("WorkerType")
     workerType: option<workerType>,
-    @ocaml.doc("<p>The number of AWS Glue Data Processing Units (DPUs) to allocate to this
+    @ocaml.doc("<p>The number of Glue Data Processing Units (DPUs) to allocate to this
         <code>DevEndpoint</code>.</p>")
     @as("NumberOfNodes")
     numberOfNodes: option<integerValue>,
@@ -5362,16 +5881,6 @@ module CreateDevEndpoint = {
                   <code>\"--enable-glue-datacatalog\": \"\"</code>
                </p>
             </li>
-            <li>
-               <p>
-                  <code>\"GLUE_PYTHON_VERSION\": \"3\"</code>
-               </p>
-            </li>
-            <li>
-               <p>
-                  <code>\"GLUE_PYTHON_VERSION\": \"2\"</code>
-               </p>
-            </li>
          </ul>
 	
          <p>You can specify a version of Python support for development endpoints by using the <code>Arguments</code> parameter in the <code>CreateDevEndpoint</code> or <code>UpdateDevEndpoint</code> APIs. If no arguments are provided, the version defaults to Python 2.</p>")
@@ -5408,9 +5917,9 @@ module CreateDevEndpoint = {
     )
     @as("NumberOfWorkers")
     numberOfWorkers: option<nullableInteger>,
-    @ocaml.doc(
-      "<p>Glue version determines the versions of Apache Spark and Python that AWS Glue supports. The Python version indicates the version supported for running your ETL scripts on development endpoints. </p>"
-    )
+    @ocaml.doc("<p>Glue version determines the versions of Apache Spark and Python that Glue supports. The Python version indicates the version supported for running your ETL scripts on development endpoints. </p>
+ 
+         <p>For more information about the available Glue versions and corresponding Spark and Python versions, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/add-job.html\">Glue version</a> in the developer guide.</p>")
     @as("GlueVersion")
     glueVersion: option<glueVersionString>,
     @ocaml.doc(
@@ -5419,7 +5928,7 @@ module CreateDevEndpoint = {
     @as("WorkerType")
     workerType: option<workerType>,
     @ocaml.doc(
-      "<p>The number of AWS Glue Data Processing Units (DPUs) allocated to this DevEndpoint.</p>"
+      "<p>The number of Glue Data Processing Units (DPUs) allocated to this DevEndpoint.</p>"
     )
     @as("NumberOfNodes")
     numberOfNodes: option<integerValue>,
@@ -5482,6 +5991,28 @@ module CreateDevEndpoint = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module CreateBlueprint = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The tags to be applied to this blueprint.</p>") @as("Tags")
+    tags: option<tagsMap>,
+    @ocaml.doc("<p>Specifies a path in Amazon S3 where the blueprint is published.</p>")
+    @as("BlueprintLocation")
+    blueprintLocation: orchestrationS3Location,
+    @ocaml.doc("<p>A description of the blueprint.</p>") @as("Description")
+    description: option<generic512CharString>,
+    @ocaml.doc("<p>The name of the blueprint.</p>") @as("Name") name: orchestrationNameString,
+  }
+  type response = {
+    @ocaml.doc("<p>Returns the name of the blueprint that was registered.</p>") @as("Name")
+    name: option<nameString>,
+  }
+  @module("@aws-sdk/client-glue") @new external new: request => t = "CreateBlueprintCommand"
+  let make = (~blueprintLocation, ~name, ~tags=?, ~description=?, ()) =>
+    new({tags: tags, blueprintLocation: blueprintLocation, description: description, name: name})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module UpdateMLTransform = {
   type t
   type request = {
@@ -5514,16 +6045,16 @@ module UpdateMLTransform = {
          </ul>")
     @as("WorkerType")
     workerType: option<workerType>,
-    @ocaml.doc("<p>The number of AWS Glue data processing units (DPUs) that are allocated to task runs for this transform. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of
+    @ocaml.doc("<p>The number of Glue data processing units (DPUs) that are allocated to task runs for this transform. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of
       processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more
-      information, see the <a href=\"https://aws.amazon.com/glue/pricing/\">AWS Glue pricing
+      information, see the <a href=\"https://aws.amazon.com/glue/pricing/\">Glue pricing
         page</a>. </p>
 		
          <p>When the <code>WorkerType</code> field is set to a value other than <code>Standard</code>, the <code>MaxCapacity</code> field is set automatically and becomes read-only.</p>")
     @as("MaxCapacity")
     maxCapacity: option<nullableDouble>,
     @ocaml.doc(
-      "<p>This value determines which version of AWS Glue this machine learning transform is compatible with. Glue 1.0 is recommended for most customers. If the value is not set, the Glue compatibility defaults to Glue 0.9.  For more information, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/release-notes.html#release-notes-versions\">AWS Glue Versions</a> in the developer guide.</p>"
+      "<p>This value determines which version of Glue this machine learning transform is compatible with. Glue 1.0 is recommended for most customers. If the value is not set, the Glue compatibility defaults to Glue 0.9.  For more information, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/release-notes.html#release-notes-versions\">Glue Versions</a> in the developer guide.</p>"
     )
     @as("GlueVersion")
     glueVersion: option<glueVersionString>,
@@ -5597,7 +6128,7 @@ module UpdateClassifier = {
     @as("GrokClassifier")
     grokClassifier: option<updateGrokClassifierRequest>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-glue") @new external new: request => t = "UpdateClassifierCommand"
   let make = (~csvClassifier=?, ~jsonClassifier=?, ~xmlclassifier=?, ~grokClassifier=?, ()) =>
     new({
@@ -5615,11 +6146,11 @@ module PutDataCatalogEncryptionSettings = {
     @ocaml.doc("<p>The security configuration to set.</p>") @as("DataCatalogEncryptionSettings")
     dataCatalogEncryptionSettings: dataCatalogEncryptionSettings,
     @ocaml.doc("<p>The ID of the Data Catalog to set the security configuration for. If none is provided, the
-      AWS account ID is used by default.</p>")
+      Amazon Web Services account ID is used by default.</p>")
     @as("CatalogId")
     catalogId: option<catalogIdString>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-glue") @new
   external new: request => t = "PutDataCatalogEncryptionSettingsCommand"
   let make = (~dataCatalogEncryptionSettings, ~catalogId=?, ()) =>
@@ -5814,7 +6345,7 @@ module GetDataCatalogEncryptionSettings = {
   type t
   type request = {
     @ocaml.doc("<p>The ID of the Data Catalog to retrieve the security configuration for. If none is
-      provided, the AWS account ID is used by default.</p>")
+      provided, the Amazon Web Services account ID is used by default.</p>")
     @as("CatalogId")
     catalogId: option<catalogIdString>,
   }
@@ -5853,6 +6384,53 @@ module GetCrawlerMetrics = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module GetBlueprintRuns = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The maximum size of a list to return.</p>") @as("MaxResults")
+    maxResults: option<pageSize>,
+    @ocaml.doc("<p>A continuation token, if this is a continuation request.</p>") @as("NextToken")
+    nextToken: option<genericString>,
+    @ocaml.doc("<p>The name of the blueprint.</p>") @as("BlueprintName") blueprintName: nameString,
+  }
+  type response = {
+    @ocaml.doc("<p>A continuation token, if not all blueprint runs have been returned.</p>")
+    @as("NextToken")
+    nextToken: option<genericString>,
+    @ocaml.doc("<p>Returns a list of <code>BlueprintRun</code> objects.</p>") @as("BlueprintRuns")
+    blueprintRuns: option<blueprintRuns>,
+  }
+  @module("@aws-sdk/client-glue") @new external new: request => t = "GetBlueprintRunsCommand"
+  let make = (~blueprintName, ~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken, blueprintName: blueprintName})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module GetBlueprint = {
+  type t
+  type request = {
+    @ocaml.doc("<p>Specifies whether or not to include the parameter specification.</p>")
+    @as("IncludeParameterSpec")
+    includeParameterSpec: option<nullableBoolean>,
+    @ocaml.doc("<p>Specifies whether or not to include the blueprint in the response.</p>")
+    @as("IncludeBlueprint")
+    includeBlueprint: option<nullableBoolean>,
+    @ocaml.doc("<p>The name of the blueprint.</p>") @as("Name") name: nameString,
+  }
+  type response = {
+    @ocaml.doc("<p>Returns a <code>Blueprint</code> object.</p>") @as("Blueprint")
+    blueprint: option<blueprint>,
+  }
+  @module("@aws-sdk/client-glue") @new external new: request => t = "GetBlueprintCommand"
+  let make = (~name, ~includeParameterSpec=?, ~includeBlueprint=?, ()) =>
+    new({
+      includeParameterSpec: includeParameterSpec,
+      includeBlueprint: includeBlueprint,
+      name: name,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module CreatePartitionIndex = {
   type t
   type request = {
@@ -5874,7 +6452,7 @@ module CreatePartitionIndex = {
     @ocaml.doc("<p>The catalog ID where the table resides.</p>") @as("CatalogId")
     catalogId: option<catalogIdString>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-glue") @new external new: request => t = "CreatePartitionIndexCommand"
   let make = (~partitionIndex, ~tableName, ~databaseName, ~catalogId=?, ()) =>
     new({
@@ -5895,7 +6473,7 @@ module CreateMLTransform = {
     @as("TransformEncryption")
     transformEncryption: option<transformEncryption>,
     @ocaml.doc(
-      "<p>The tags to use with this machine learning transform. You may use tags to limit access to the machine learning transform. For more information about tags in AWS Glue, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html\">AWS Tags in AWS Glue</a> in the developer guide.</p>"
+      "<p>The tags to use with this machine learning transform. You may use tags to limit access to the machine learning transform. For more information about tags in Glue, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html\">Amazon Web Services Tags in Glue</a> in the developer guide.</p>"
     )
     @as("Tags")
     tags: option<tagsMap>,
@@ -5946,9 +6524,9 @@ module CreateMLTransform = {
          </ul>")
     @as("WorkerType")
     workerType: option<workerType>,
-    @ocaml.doc("<p>The number of AWS Glue data processing units (DPUs) that are allocated to task runs for this transform. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of
+    @ocaml.doc("<p>The number of Glue data processing units (DPUs) that are allocated to task runs for this transform. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of
       processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more
-      information, see the <a href=\"https://aws.amazon.com/glue/pricing/\">AWS Glue pricing
+      information, see the <a href=\"https://aws.amazon.com/glue/pricing/\">Glue pricing
         page</a>. </p>
 		
 			      <p>
@@ -5976,15 +6554,15 @@ module CreateMLTransform = {
     @as("MaxCapacity")
     maxCapacity: option<nullableDouble>,
     @ocaml.doc(
-      "<p>This value determines which version of AWS Glue this machine learning transform is compatible with. Glue 1.0 is recommended for most customers. If the value is not set, the Glue compatibility defaults to Glue 0.9.  For more information, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/release-notes.html#release-notes-versions\">AWS Glue Versions</a> in the developer guide.</p>"
+      "<p>This value determines which version of Glue this machine learning transform is compatible with. Glue 1.0 is recommended for most customers. If the value is not set, the Glue compatibility defaults to Glue 0.9.  For more information, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/release-notes.html#release-notes-versions\">Glue Versions</a> in the developer guide.</p>"
     )
     @as("GlueVersion")
     glueVersion: option<glueVersionString>,
-    @ocaml.doc("<p>The name or Amazon Resource Name (ARN) of the IAM role with the required permissions. The required permissions include both AWS Glue service role permissions to AWS Glue resources, and Amazon S3 permissions required by the transform. </p>
+    @ocaml.doc("<p>The name or Amazon Resource Name (ARN) of the IAM role with the required permissions. The required permissions include both Glue service role permissions to Glue resources, and Amazon S3 permissions required by the transform. </p>
 
 		       <ul>
             <li>
-               <p>This role needs AWS Glue service role permissions to allow access to resources in AWS Glue. See <a href=\"https://docs.aws.amazon.com/glue/latest/dg/attach-policy-iam-user.html\">Attach a Policy to IAM Users That Access AWS Glue</a>.</p>
+               <p>This role needs Glue service role permissions to allow access to resources in Glue. See <a href=\"https://docs.aws.amazon.com/glue/latest/dg/attach-policy-iam-user.html\">Attach a Policy to IAM Users That Access Glue</a>.</p>
             </li>
             <li>
                <p>This role needs permission to your Amazon Simple Storage Service (Amazon S3) sources, targets, temporary directory, scripts, and any libraries used by the task run for this transform.</p>
@@ -5996,7 +6574,7 @@ module CreateMLTransform = {
       dependent on the transform type.</p>")
     @as("Parameters")
     parameters: transformParameters,
-    @ocaml.doc("<p>A list of AWS Glue table definitions used by the transform.</p>")
+    @ocaml.doc("<p>A list of Glue table definitions used by the transform.</p>")
     @as("InputRecordTables")
     inputRecordTables: glueTables,
     @ocaml.doc("<p>A description of the machine learning transform that is being defined. The default is an
@@ -6067,9 +6645,9 @@ module CreateJob = {
 	        <p>The maximum number of workers you can define are 299 for <code>G.1X</code>, and 149 for <code>G.2X</code>. </p>")
     @as("NumberOfWorkers")
     numberOfWorkers: option<nullableInteger>,
-    @ocaml.doc("<p>Glue version determines the versions of Apache Spark and Python that AWS Glue supports. The Python version indicates the version supported for jobs of type Spark. </p>
+    @ocaml.doc("<p>Glue version determines the versions of Apache Spark and Python that Glue supports. The Python version indicates the version supported for jobs of type Spark. </p>
  
-         <p>For more information about the available AWS Glue versions and corresponding Spark and Python versions, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/add-job.html\">Glue version</a> in the developer guide.</p>
+         <p>For more information about the available Glue versions and corresponding Spark and Python versions, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/add-job.html\">Glue version</a> in the developer guide.</p>
 	  
 	        <p>Jobs that are created without specifying a Glue version default to Glue 0.9.</p>")
     @as("GlueVersion")
@@ -6078,7 +6656,7 @@ module CreateJob = {
     @as("NotificationProperty")
     notificationProperty: option<notificationProperty>,
     @ocaml.doc(
-      "<p>The tags to use with this job. You may use tags to limit access to the job. For more information about tags in AWS Glue, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html\">AWS Tags in AWS Glue</a> in the developer guide.</p>"
+      "<p>The tags to use with this job. You may use tags to limit access to the job. For more information about tags in Glue, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html\">Amazon Web Services Tags in Glue</a> in the developer guide.</p>"
     )
     @as("Tags")
     tags: option<tagsMap>,
@@ -6086,9 +6664,9 @@ module CreateJob = {
       job.</p>")
     @as("SecurityConfiguration")
     securityConfiguration: option<nameString>,
-    @ocaml.doc("<p>The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure
+    @ocaml.doc("<p>For Glue version 1.0 or earlier jobs, using the standard worker type, the number of Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure
        of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory.
-       For more information, see the <a href=\"https://aws.amazon.com/glue/pricing/\">AWS Glue
+       For more information, see the <a href=\"https://aws.amazon.com/glue/pricing/\">Glue
          pricing page</a>.</p>
 		 
 	        <p>Do not set <code>Max Capacity</code> if using <code>WorkerType</code> and <code>NumberOfWorkers</code>.</p>
@@ -6105,7 +6683,8 @@ module CreateJob = {
          Spark streaming ETL job (<code>JobCommand.Name</code>=\"gluestreaming\"), you can allocate from 2 to 100 DPUs. 
          The default is 10 DPUs. This job type cannot have a fractional DPU allocation.</p>
             </li>
-         </ul>")
+         </ul>
+         <p>For Glue version 2.0 jobs, you cannot instead specify a <code>Maximum capacity</code>. Instead, you should specify a <code>Worker type</code> and the <code>Number of workers</code>.</p>")
     @as("MaxCapacity")
     maxCapacity: option<nullableDouble>,
     @ocaml.doc("<p>The job timeout in minutes.  This is the maximum time that a job run
@@ -6115,10 +6694,10 @@ module CreateJob = {
     timeout: option<timeout>,
     @ocaml.doc("<p>This parameter is deprecated. Use <code>MaxCapacity</code> instead.</p>
 	
-         <p>The number of AWS Glue data processing units (DPUs) to allocate to this Job. You can
+         <p>The number of Glue data processing units (DPUs) to allocate to this Job. You can
       allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of processing
       power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information,
-      see the <a href=\"https://aws.amazon.com/glue/pricing/\">AWS Glue pricing
+      see the <a href=\"https://aws.amazon.com/glue/pricing/\">Glue pricing
       page</a>.</p>")
     @as("AllocatedCapacity")
     allocatedCapacity: option<integerValue>,
@@ -6132,12 +6711,12 @@ module CreateJob = {
     nonOverridableArguments: option<genericMap>,
     @ocaml.doc("<p>The default arguments for this job.</p>
          <p>You can specify arguments here that your own job-execution script
-      consumes, as well as arguments that AWS Glue itself consumes.</p>
-         <p>For information about how to specify and consume your own Job arguments, see the <a href=\"https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html\">Calling AWS Glue APIs in Python</a> topic in the developer guide.</p>
-         <p>For information about the key-value pairs that AWS Glue consumes to set up your job, see the <a href=\"https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html\">Special Parameters Used by AWS Glue</a> topic in the developer guide.</p>")
+      consumes, as well as arguments that Glue itself consumes.</p>
+         <p>For information about how to specify and consume your own Job arguments, see the <a href=\"https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html\">Calling Glue APIs in Python</a> topic in the developer guide.</p>
+         <p>For information about the key-value pairs that Glue consumes to set up your job, see the <a href=\"https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html\">Special Parameters Used by Glue</a> topic in the developer guide.</p>")
     @as("DefaultArguments")
     defaultArguments: option<genericMap>,
-    @ocaml.doc("<p>The <code>JobCommand</code> that executes this job.</p>") @as("Command")
+    @ocaml.doc("<p>The <code>JobCommand</code> that runs this job.</p>") @as("Command")
     command: jobCommand,
     @ocaml.doc("<p>An <code>ExecutionProperty</code> specifying the maximum number of concurrent runs allowed
       for this job.</p>")
@@ -6229,7 +6808,7 @@ module CreateClassifier = {
     @as("GrokClassifier")
     grokClassifier: option<createGrokClassifierRequest>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-glue") @new external new: request => t = "CreateClassifierCommand"
   let make = (~csvClassifier=?, ~jsonClassifier=?, ~xmlclassifier=?, ~grokClassifier=?, ()) =>
     new({
@@ -6246,7 +6825,7 @@ module BatchDeleteConnection = {
   type request = {
     @ocaml.doc("<p>A list of names of the connections to delete.</p>") @as("ConnectionNameList")
     connectionNameList: deleteConnectionNameList,
-    @ocaml.doc("<p>The ID of the Data Catalog in which the connections reside. If none is provided, the AWS
+    @ocaml.doc("<p>The ID of the Data Catalog in which the connections reside. If none is provided, the Amazon Web Services
       account ID is used by default.</p>")
     @as("CatalogId")
     catalogId: option<catalogIdString>,
@@ -6280,11 +6859,11 @@ module UpdateUserDefinedFunction = {
     @as("DatabaseName")
     databaseName: nameString,
     @ocaml.doc("<p>The ID of the Data Catalog where the function to be updated is located. If none is
-      provided, the AWS account ID is used by default.</p>")
+      provided, the Amazon Web Services account ID is used by default.</p>")
     @as("CatalogId")
     catalogId: option<catalogIdString>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-glue") @new
   external new: request => t = "UpdateUserDefinedFunctionCommand"
   let make = (~functionInput, ~functionName, ~databaseName, ~catalogId=?, ()) =>
@@ -6324,12 +6903,12 @@ module UpdateConnection = {
     connectionInput: connectionInput,
     @ocaml.doc("<p>The name of the connection definition to update.</p>") @as("Name")
     name: nameString,
-    @ocaml.doc("<p>The ID of the Data Catalog in which the connection resides. If none is provided, the AWS
+    @ocaml.doc("<p>The ID of the Data Catalog in which the connection resides. If none is provided, the Amazon Web Services
       account ID is used by default.</p>")
     @as("CatalogId")
     catalogId: option<catalogIdString>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-glue") @new external new: request => t = "UpdateConnectionCommand"
   let make = (~connectionInput, ~name, ~catalogId=?, ()) =>
     new({connectionInput: connectionInput, name: name, catalogId: catalogId})
@@ -6380,7 +6959,7 @@ module GetUserDefinedFunction = {
     @as("DatabaseName")
     databaseName: nameString,
     @ocaml.doc("<p>The ID of the Data Catalog where the function to be retrieved is located. If none is
-      provided, the AWS account ID is used by default.</p>")
+      provided, the Amazon Web Services account ID is used by default.</p>")
     @as("CatalogId")
     catalogId: option<catalogIdString>,
   }
@@ -6394,6 +6973,39 @@ module GetUserDefinedFunction = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module GetStatement = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The origin of the request.</p>") @as("RequestOrigin")
+    requestOrigin: option<orchestrationNameString>,
+    @ocaml.doc("<p>The Id of the statement.</p>") @as("Id") id: integerValue,
+    @ocaml.doc("<p>The Session ID of the statement.</p>") @as("SessionId") sessionId: nameString,
+  }
+  type response = {
+    @ocaml.doc("<p>Returns the statement.</p>") @as("Statement") statement: option<statement>,
+  }
+  @module("@aws-sdk/client-glue") @new external new: request => t = "GetStatementCommand"
+  let make = (~id, ~sessionId, ~requestOrigin=?, ()) =>
+    new({requestOrigin: requestOrigin, id: id, sessionId: sessionId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module GetSession = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The origin of the request. </p>") @as("RequestOrigin")
+    requestOrigin: option<orchestrationNameString>,
+    @ocaml.doc("<p>The ID of the session. </p>") @as("Id") id: nameString,
+  }
+  type response = {
+    @ocaml.doc("<p>The session object is returned in the response.</p>") @as("Session")
+    session: option<session>,
+  }
+  @module("@aws-sdk/client-glue") @new external new: request => t = "GetSessionCommand"
+  let make = (~id, ~requestOrigin=?, ()) => new({requestOrigin: requestOrigin, id: id})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module GetPlan = {
   type t
   type request = {
@@ -6404,7 +7016,7 @@ module GetPlan = {
 	        <ul>
             <li>
                <p>
-                  <code>inferSchema</code>  —  Specifies whether to set <code>inferSchema</code> to true or false for the default script generated by an AWS Glue job. For example, to set <code>inferSchema</code> to true, pass the following key value pair:</p>
+                  <code>inferSchema</code>  —  Specifies whether to set <code>inferSchema</code> to true or false for the default script generated by an Glue job. For example, to set <code>inferSchema</code> to true, pass the following key value pair:</p>
 	              <p>
                   <code>--additional-plan-options-map '{\"inferSchema\":\"true\"}'</code>
                </p>
@@ -6522,14 +7134,14 @@ module GetConnection = {
   type request = {
     @ocaml.doc("<p>Allows you to retrieve the connection metadata without returning the password. For
       instance, the AWS Glue console uses this flag to retrieve the connection, and does not display
-      the password. Set this parameter when the caller might not have permission to use the AWS KMS
+      the password. Set this parameter when the caller might not have permission to use the KMS
       key to decrypt the password, but it does have permission to access the rest of the connection
       properties.</p>")
     @as("HidePassword")
     hidePassword: option<boolean_>,
     @ocaml.doc("<p>The name of the connection definition to retrieve.</p>") @as("Name")
     name: nameString,
-    @ocaml.doc("<p>The ID of the Data Catalog in which the connection resides. If none is provided, the AWS
+    @ocaml.doc("<p>The ID of the Data Catalog in which the connection resides. If none is provided, the Amazon Web Services
       account ID is used by default.</p>")
     @as("CatalogId")
     catalogId: option<catalogIdString>,
@@ -6599,12 +7211,12 @@ module CreateUserDefinedFunction = {
     @ocaml.doc("<p>The name of the catalog database in which to create the function.</p>")
     @as("DatabaseName")
     databaseName: nameString,
-    @ocaml.doc("<p>The ID of the Data Catalog in which to create the function. If none is provided, the AWS
+    @ocaml.doc("<p>The ID of the Data Catalog in which to create the function. If none is provided, the Amazon Web Services
       account ID is used by default.</p>")
     @as("CatalogId")
     catalogId: option<catalogIdString>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-glue") @new
   external new: request => t = "CreateUserDefinedFunctionCommand"
   let make = (~functionInput, ~databaseName, ~catalogId=?, ()) =>
@@ -6615,10 +7227,13 @@ module CreateUserDefinedFunction = {
 module CreateTrigger = {
   type t
   type request = {
+    @ocaml.doc("<p>Batch condition that must be met (specified number of events received or batch time window expired)
+      before EventBridge event trigger fires.</p>")
+    @as("EventBatchingCondition")
+    eventBatchingCondition: option<eventBatchingCondition>,
     @ocaml.doc("<p>The tags to use with this trigger. You may use tags to limit access to the trigger.
-      For more information about tags in AWS Glue, see
-      <a href=\"https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html\">AWS Tags in AWS
-        Glue</a> in the developer guide. </p>")
+      For more information about tags in Glue, see
+      <a href=\"https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html\">Amazon Web Services Tags in Glue</a> in the developer guide. </p>")
     @as("Tags")
     tags: option<tagsMap>,
     @ocaml.doc("<p>Set to <code>true</code> to start <code>SCHEDULED</code> and <code>CONDITIONAL</code>
@@ -6652,6 +7267,7 @@ module CreateTrigger = {
     ~actions,
     ~type_,
     ~name,
+    ~eventBatchingCondition=?,
     ~tags=?,
     ~startOnCreation=?,
     ~description=?,
@@ -6661,6 +7277,7 @@ module CreateTrigger = {
     (),
   ) =>
     new({
+      eventBatchingCondition: eventBatchingCondition,
       tags: tags,
       startOnCreation: startOnCreation,
       description: description,
@@ -6670,6 +7287,90 @@ module CreateTrigger = {
       type_: type_,
       workflowName: workflowName,
       name: name,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module CreateSession = {
+  type t
+  @ocaml.doc("<p>Request to create a new session.</p>")
+  type request = {
+    @ocaml.doc("<p>The origin of the request. </p>") @as("RequestOrigin")
+    requestOrigin: option<orchestrationNameString>,
+    @ocaml.doc("<p>The map of key value pairs (tags) belonging to the session.</p>") @as("Tags")
+    tags: option<tagsMap>,
+    @ocaml.doc("<p>The Glue version determines the versions of Apache Spark and Python that AWS Glue supports. 
+      The GlueVersion must be greater than 2.0. </p>")
+    @as("GlueVersion")
+    glueVersion: option<glueVersionString>,
+    @ocaml.doc(
+      "<p>The name of the SecurityConfiguration structure to be used with the session </p>"
+    )
+    @as("SecurityConfiguration")
+    securityConfiguration: option<nameString>,
+    @ocaml.doc("<p>The Worker Type. Can be one of G.1X, G.2X, Standard </p>") @as("WorkerType")
+    workerType: option<workerType>,
+    @ocaml.doc("<p>The number of workers to use for the session. </p>") @as("NumberOfWorkers")
+    numberOfWorkers: option<nullableInteger>,
+    @ocaml.doc("<p>The number of AWS Glue data processing units (DPUs) that can be allocated when the job runs. 
+      A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB memory. </p>")
+    @as("MaxCapacity")
+    maxCapacity: option<nullableDouble>,
+    @ocaml.doc("<p>The number of connections to use for the session. </p>") @as("Connections")
+    connections: option<connectionsList>,
+    @ocaml.doc("<p>A map array of key-value pairs. Max is 75 pairs. </p>") @as("DefaultArguments")
+    defaultArguments: option<orchestrationArgumentsMap>,
+    @ocaml.doc("<p>The number of seconds when idle before request times out. </p>")
+    @as("IdleTimeout")
+    idleTimeout: option<timeout>,
+    @ocaml.doc("<p>The number of seconds before request times out. </p>") @as("Timeout")
+    timeout: option<timeout>,
+    @ocaml.doc("<p>The <code>SessionCommand</code> that runs the job. </p>") @as("Command")
+    command: sessionCommand,
+    @ocaml.doc("<p>The IAM Role ARN </p>") @as("Role") role: orchestrationRoleArn,
+    @ocaml.doc("<p>The description of the session. </p>") @as("Description")
+    description: option<descriptionString>,
+    @ocaml.doc("<p>The ID of the session request. </p>") @as("Id") id: nameString,
+  }
+  type response = {
+    @ocaml.doc("<p>Returns the session object in the response.</p>") @as("Session")
+    session: option<session>,
+  }
+  @module("@aws-sdk/client-glue") @new external new: request => t = "CreateSessionCommand"
+  let make = (
+    ~command,
+    ~role,
+    ~id,
+    ~requestOrigin=?,
+    ~tags=?,
+    ~glueVersion=?,
+    ~securityConfiguration=?,
+    ~workerType=?,
+    ~numberOfWorkers=?,
+    ~maxCapacity=?,
+    ~connections=?,
+    ~defaultArguments=?,
+    ~idleTimeout=?,
+    ~timeout=?,
+    ~description=?,
+    (),
+  ) =>
+    new({
+      requestOrigin: requestOrigin,
+      tags: tags,
+      glueVersion: glueVersion,
+      securityConfiguration: securityConfiguration,
+      workerType: workerType,
+      numberOfWorkers: numberOfWorkers,
+      maxCapacity: maxCapacity,
+      connections: connections,
+      defaultArguments: defaultArguments,
+      idleTimeout: idleTimeout,
+      timeout: timeout,
+      command: command,
+      role: role,
+      description: description,
+      id: id,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
@@ -6699,19 +7400,20 @@ module CreateSecurityConfiguration = {
 module CreateConnection = {
   type t
   type request = {
+    @ocaml.doc("<p>The tags you assign to the connection.</p>") @as("Tags") tags: option<tagsMap>,
     @ocaml.doc("<p>A <code>ConnectionInput</code> object defining the connection
       to create.</p>")
     @as("ConnectionInput")
     connectionInput: connectionInput,
-    @ocaml.doc("<p>The ID of the Data Catalog in which to create the connection. If none is provided, the AWS
+    @ocaml.doc("<p>The ID of the Data Catalog in which to create the connection. If none is provided, the Amazon Web Services
       account ID is used by default.</p>")
     @as("CatalogId")
     catalogId: option<catalogIdString>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-glue") @new external new: request => t = "CreateConnectionCommand"
-  let make = (~connectionInput, ~catalogId=?, ()) =>
-    new({connectionInput: connectionInput, catalogId: catalogId})
+  let make = (~connectionInput, ~tags=?, ~catalogId=?, ()) =>
+    new({tags: tags, connectionInput: connectionInput, catalogId: catalogId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -6759,6 +7461,37 @@ module BatchGetDevEndpoints = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module BatchGetBlueprints = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>Specifies whether or not to include the parameters, as a JSON string, for the blueprint in the response.</p>"
+    )
+    @as("IncludeParameterSpec")
+    includeParameterSpec: option<nullableBoolean>,
+    @ocaml.doc("<p>Specifies whether or not to include the blueprint in the response.</p>")
+    @as("IncludeBlueprint")
+    includeBlueprint: option<nullableBoolean>,
+    @ocaml.doc("<p>A list of blueprint names.</p>") @as("Names") names: batchGetBlueprintNames,
+  }
+  type response = {
+    @ocaml.doc("<p>Returns a list of <code>BlueprintNames</code> that were not found.</p>")
+    @as("MissingBlueprints")
+    missingBlueprints: option<blueprintNames>,
+    @ocaml.doc("<p>Returns a list of blueprint as a <code>Blueprints</code> object.</p>")
+    @as("Blueprints")
+    blueprints: option<blueprints>,
+  }
+  @module("@aws-sdk/client-glue") @new external new: request => t = "BatchGetBlueprintsCommand"
+  let make = (~names, ~includeParameterSpec=?, ~includeBlueprint=?, ()) =>
+    new({
+      includeParameterSpec: includeParameterSpec,
+      includeBlueprint: includeBlueprint,
+      names: names,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module BatchDeleteTableVersion = {
   type t
   type request = {
@@ -6775,7 +7508,7 @@ module BatchDeleteTableVersion = {
       compatibility, this name is entirely lowercase.</p>")
     @as("DatabaseName")
     databaseName: nameString,
-    @ocaml.doc("<p>The ID of the Data Catalog where the tables reside. If none is provided, the AWS account
+    @ocaml.doc("<p>The ID of the Data Catalog where the tables reside. If none is provided, the Amazon Web Services account
       ID is used by default.</p>")
     @as("CatalogId")
     catalogId: option<catalogIdString>,
@@ -6800,13 +7533,16 @@ module BatchDeleteTableVersion = {
 module BatchDeleteTable = {
   type t
   type request = {
+    @ocaml.doc("<p>The transaction ID at which to delete the table contents.</p>")
+    @as("TransactionId")
+    transactionId: option<transactionIdString>,
     @ocaml.doc("<p>A list of the table to delete.</p>") @as("TablesToDelete")
     tablesToDelete: batchDeleteTableNameList,
     @ocaml.doc("<p>The name of the catalog database in which the tables to delete reside. For Hive
       compatibility, this name is entirely lowercase.</p>")
     @as("DatabaseName")
     databaseName: nameString,
-    @ocaml.doc("<p>The ID of the Data Catalog where the table resides. If none is provided, the AWS account
+    @ocaml.doc("<p>The ID of the Data Catalog where the table resides. If none is provided, the Amazon Web Services account
       ID is used by default.</p>")
     @as("CatalogId")
     catalogId: option<catalogIdString>,
@@ -6817,8 +7553,13 @@ module BatchDeleteTable = {
     errors: option<tableErrors>,
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "BatchDeleteTableCommand"
-  let make = (~tablesToDelete, ~databaseName, ~catalogId=?, ()) =>
-    new({tablesToDelete: tablesToDelete, databaseName: databaseName, catalogId: catalogId})
+  let make = (~tablesToDelete, ~databaseName, ~transactionId=?, ~catalogId=?, ()) =>
+    new({
+      transactionId: transactionId,
+      tablesToDelete: tablesToDelete,
+      databaseName: databaseName,
+      catalogId: catalogId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -6837,7 +7578,7 @@ module BatchDeletePartition = {
     @as("DatabaseName")
     databaseName: nameString,
     @ocaml.doc("<p>The ID of the Data Catalog where the partition to be deleted resides. If none is provided,
-      the AWS account ID is used by default.</p>")
+      the Amazon Web Services account ID is used by default.</p>")
     @as("CatalogId")
     catalogId: option<catalogIdString>,
   }
@@ -6884,11 +7625,11 @@ module UpdateDatabase = {
     @as("Name")
     name: nameString,
     @ocaml.doc("<p>The ID of the Data Catalog in which the metadata database resides. If none is provided,
-      the AWS account ID is used by default.</p>")
+      the Amazon Web Services account ID is used by default.</p>")
     @as("CatalogId")
     catalogId: option<catalogIdString>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-glue") @new external new: request => t = "UpdateDatabaseCommand"
   let make = (~databaseInput, ~name, ~catalogId=?, ()) =>
     new({databaseInput: databaseInput, name: name, catalogId: catalogId})
@@ -6907,6 +7648,8 @@ module UpdateCrawler = {
         For more information, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html\">Configuring a Crawler</a>.</p>")
     @as("Configuration")
     configuration: option<crawlerConfiguration>,
+    @as("LakeFormationConfiguration")
+    lakeFormationConfiguration: option<lakeFormationConfiguration>,
     @ocaml.doc("<p>Specifies data lineage configuration settings for the crawler.</p>")
     @as("LineageConfiguration")
     lineageConfiguration: option<lineageConfiguration>,
@@ -6935,7 +7678,7 @@ module UpdateCrawler = {
     @ocaml.doc("<p>A list of targets to crawl.</p>") @as("Targets") targets: option<crawlerTargets>,
     @ocaml.doc("<p>A description of the new crawler.</p>") @as("Description")
     description: option<descriptionStringRemovable>,
-    @ocaml.doc("<p>The AWS Glue database where results are stored, such as:
+    @ocaml.doc("<p>The Glue database where results are stored, such as:
         <code>arn:aws:daylight:us-east-1::database/sometable/*</code>.</p>")
     @as("DatabaseName")
     databaseName: option<databaseName>,
@@ -6945,12 +7688,13 @@ module UpdateCrawler = {
     role: option<role>,
     @ocaml.doc("<p>Name of the new crawler.</p>") @as("Name") name: nameString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-glue") @new external new: request => t = "UpdateCrawlerCommand"
   let make = (
     ~name,
     ~crawlerSecurityConfiguration=?,
     ~configuration=?,
+    ~lakeFormationConfiguration=?,
     ~lineageConfiguration=?,
     ~recrawlPolicy=?,
     ~schemaChangePolicy=?,
@@ -6966,6 +7710,7 @@ module UpdateCrawler = {
     new({
       crawlerSecurityConfiguration: crawlerSecurityConfiguration,
       configuration: configuration,
+      lakeFormationConfiguration: lakeFormationConfiguration,
       lineageConfiguration: lineageConfiguration,
       recrawlPolicy: recrawlPolicy,
       schemaChangePolicy: schemaChangePolicy,
@@ -7039,6 +7784,54 @@ module QuerySchemaVersionMetadata = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module ListStatements = {
+  type t
+  type request = {
+    @as("NextToken") nextToken: option<orchestrationToken>,
+    @ocaml.doc("<p>The origin of the request to list statements.</p>") @as("RequestOrigin")
+    requestOrigin: option<orchestrationNameString>,
+    @ocaml.doc("<p>The Session ID of the statements.</p>") @as("SessionId") sessionId: nameString,
+  }
+  type response = {
+    @as("NextToken") nextToken: option<orchestrationToken>,
+    @ocaml.doc("<p>Returns the list of statements.</p>") @as("Statements")
+    statements: option<statementList>,
+  }
+  @module("@aws-sdk/client-glue") @new external new: request => t = "ListStatementsCommand"
+  let make = (~sessionId, ~nextToken=?, ~requestOrigin=?, ()) =>
+    new({nextToken: nextToken, requestOrigin: requestOrigin, sessionId: sessionId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module ListSessions = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The origin of the request. </p>") @as("RequestOrigin")
+    requestOrigin: option<orchestrationNameString>,
+    @ocaml.doc("<p>Tags belonging to the session. </p>") @as("Tags") tags: option<tagsMap>,
+    @ocaml.doc("<p>The maximum number of results. </p>") @as("MaxResults")
+    maxResults: option<pageSize>,
+    @ocaml.doc(
+      "<p>The token for the next set of results, or null if there are no more result. </p>"
+    )
+    @as("NextToken")
+    nextToken: option<orchestrationToken>,
+  }
+  type response = {
+    @ocaml.doc(
+      "<p>The token for the next set of results, or null if there are no more result. </p>"
+    )
+    @as("NextToken")
+    nextToken: option<orchestrationToken>,
+    @ocaml.doc("<p>Returns the session object. </p>") @as("Sessions") sessions: option<sessionList>,
+    @ocaml.doc("<p>Returns the Id of the session. </p>") @as("Ids") ids: option<sessionIdList>,
+  }
+  @module("@aws-sdk/client-glue") @new external new: request => t = "ListSessionsCommand"
+  let make = (~requestOrigin=?, ~tags=?, ~maxResults=?, ~nextToken=?, ()) =>
+    new({requestOrigin: requestOrigin, tags: tags, maxResults: maxResults, nextToken: nextToken})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module GetUserDefinedFunctions = {
   type t
   type request = {
@@ -7056,7 +7849,7 @@ module GetUserDefinedFunctions = {
     @as("DatabaseName")
     databaseName: option<nameString>,
     @ocaml.doc("<p>The ID of the Data Catalog where the functions to be retrieved are located. If none is
-      provided, the AWS account ID is used by default.</p>")
+      provided, the Amazon Web Services account ID is used by default.</p>")
     @as("CatalogId")
     catalogId: option<catalogIdString>,
   }
@@ -7152,16 +7945,16 @@ module GetMLTransform = {
          </ul>")
     @as("WorkerType")
     workerType: option<workerType>,
-    @ocaml.doc("<p>The number of AWS Glue data processing units (DPUs) that are allocated to task runs for this transform. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of
+    @ocaml.doc("<p>The number of Glue data processing units (DPUs) that are allocated to task runs for this transform. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of
       processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more
-      information, see the <a href=\"https://aws.amazon.com/glue/pricing/\">AWS Glue pricing
+      information, see the <a href=\"https://aws.amazon.com/glue/pricing/\">Glue pricing
         page</a>. </p>
 		
          <p>When the <code>WorkerType</code> field is set to a value other than <code>Standard</code>, the <code>MaxCapacity</code> field is set automatically and becomes read-only.</p>")
     @as("MaxCapacity")
     maxCapacity: option<nullableDouble>,
     @ocaml.doc(
-      "<p>This value determines which version of AWS Glue this machine learning transform is compatible with. Glue 1.0 is recommended for most customers. If the value is not set, the Glue compatibility defaults to Glue 0.9.  For more information, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/release-notes.html#release-notes-versions\">AWS Glue Versions</a> in the developer guide.</p>"
+      "<p>This value determines which version of Glue this machine learning transform is compatible with. Glue 1.0 is recommended for most customers. If the value is not set, the Glue compatibility defaults to Glue 0.9.  For more information, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/release-notes.html#release-notes-versions\">Glue Versions</a> in the developer guide.</p>"
     )
     @as("GlueVersion")
     glueVersion: option<glueVersionString>,
@@ -7180,7 +7973,7 @@ module GetMLTransform = {
     @ocaml.doc("<p>The configuration parameters that are specific to the algorithm used.</p>")
     @as("Parameters")
     parameters: option<transformParameters>,
-    @ocaml.doc("<p>A list of AWS Glue table definitions used by the transform.</p>")
+    @ocaml.doc("<p>A list of Glue table definitions used by the transform.</p>")
     @as("InputRecordTables")
     inputRecordTables: option<glueTables>,
     @ocaml.doc("<p>The date and time when the transform was last modified.</p>")
@@ -7314,7 +8107,7 @@ module GetDatabase = {
       should be all lowercase.</p>")
     @as("Name")
     name: nameString,
-    @ocaml.doc("<p>The ID of the Data Catalog in which the database resides. If none is provided, the AWS
+    @ocaml.doc("<p>The ID of the Data Catalog in which the database resides. If none is provided, the Amazon Web Services
       account ID is used by default.</p>")
     @as("CatalogId")
     catalogId: option<catalogIdString>,
@@ -7339,14 +8132,14 @@ module GetConnections = {
     nextToken: option<token>,
     @ocaml.doc("<p>Allows you to retrieve the connection metadata without returning the password. For
       instance, the AWS Glue console uses this flag to retrieve the connection, and does not display
-      the password. Set this parameter when the caller might not have permission to use the AWS KMS
+      the password. Set this parameter when the caller might not have permission to use the KMS
       key to decrypt the password, but it does have permission to access the rest of the connection
       properties.</p>")
     @as("HidePassword")
     hidePassword: option<boolean_>,
     @ocaml.doc("<p>A filter that controls which connections are returned.</p>") @as("Filter")
     filter: option<getConnectionsFilter>,
-    @ocaml.doc("<p>The ID of the Data Catalog in which the connections reside. If none is provided, the AWS
+    @ocaml.doc("<p>The ID of the Data Catalog in which the connections reside. If none is provided, the Amazon Web Services
       account ID is used by default.</p>")
     @as("CatalogId")
     catalogId: option<catalogIdString>,
@@ -7417,12 +8210,12 @@ module CreateDatabase = {
   type request = {
     @ocaml.doc("<p>The metadata for the database.</p>") @as("DatabaseInput")
     databaseInput: databaseInput,
-    @ocaml.doc("<p>The ID of the Data Catalog in which to create the database. If none is provided, the AWS
+    @ocaml.doc("<p>The ID of the Data Catalog in which to create the database. If none is provided, the Amazon Web Services
       account ID is used by default.</p>")
     @as("CatalogId")
     catalogId: option<catalogIdString>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-glue") @new external new: request => t = "CreateDatabaseCommand"
   let make = (~databaseInput, ~catalogId=?, ()) =>
     new({databaseInput: databaseInput, catalogId: catalogId})
@@ -7433,7 +8226,7 @@ module CreateCrawler = {
   type t
   type request = {
     @ocaml.doc("<p>The tags to use with this crawler request. You may use tags to limit access to the
-            crawler. For more information about tags in AWS Glue, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html\">AWS Tags in AWS Glue</a> in the developer
+            crawler. For more information about tags in Glue, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html\">Amazon Web Services Tags in Glue</a> in the developer
             guide.</p>")
     @as("Tags")
     tags: option<tagsMap>,
@@ -7446,6 +8239,8 @@ module CreateCrawler = {
       For more information, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html\">Configuring a Crawler</a>.</p>")
     @as("Configuration")
     configuration: option<crawlerConfiguration>,
+    @as("LakeFormationConfiguration")
+    lakeFormationConfiguration: option<lakeFormationConfiguration>,
     @ocaml.doc("<p>Specifies data lineage configuration settings for the crawler.</p>")
     @as("LineageConfiguration")
     lineageConfiguration: option<lineageConfiguration>,
@@ -7474,7 +8269,7 @@ module CreateCrawler = {
     targets: crawlerTargets,
     @ocaml.doc("<p>A description of the new crawler.</p>") @as("Description")
     description: option<descriptionString>,
-    @ocaml.doc("<p>The AWS Glue database where results are written, such as:
+    @ocaml.doc("<p>The Glue database where results are written, such as:
         <code>arn:aws:daylight:us-east-1::database/sometable/*</code>.</p>")
     @as("DatabaseName")
     databaseName: option<databaseName>,
@@ -7484,7 +8279,7 @@ module CreateCrawler = {
     role: role,
     @ocaml.doc("<p>Name of the new crawler.</p>") @as("Name") name: nameString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-glue") @new external new: request => t = "CreateCrawlerCommand"
   let make = (
     ~targets,
@@ -7493,6 +8288,7 @@ module CreateCrawler = {
     ~tags=?,
     ~crawlerSecurityConfiguration=?,
     ~configuration=?,
+    ~lakeFormationConfiguration=?,
     ~lineageConfiguration=?,
     ~recrawlPolicy=?,
     ~schemaChangePolicy=?,
@@ -7507,6 +8303,7 @@ module CreateCrawler = {
       tags: tags,
       crawlerSecurityConfiguration: crawlerSecurityConfiguration,
       configuration: configuration,
+      lakeFormationConfiguration: lakeFormationConfiguration,
       lineageConfiguration: lineageConfiguration,
       recrawlPolicy: recrawlPolicy,
       schemaChangePolicy: schemaChangePolicy,
@@ -7543,6 +8340,10 @@ module BatchGetJobs = {
 module UpdateTable = {
   type t
   type request = {
+    @as("VersionId") versionId: option<versionString>,
+    @ocaml.doc("<p>The transaction ID at which to update the table contents. </p>")
+    @as("TransactionId")
+    transactionId: option<transactionIdString>,
     @ocaml.doc("<p>By default, <code>UpdateTable</code> always creates an archived version of the table
       before updating it. However, if <code>skipArchive</code> is set to true,
         <code>UpdateTable</code> does not create the archived version.</p>")
@@ -7556,15 +8357,25 @@ module UpdateTable = {
       compatibility, this name is entirely lowercase.</p>")
     @as("DatabaseName")
     databaseName: nameString,
-    @ocaml.doc("<p>The ID of the Data Catalog where the table resides. If none is provided, the AWS account
+    @ocaml.doc("<p>The ID of the Data Catalog where the table resides. If none is provided, the Amazon Web Services account
       ID is used by default.</p>")
     @as("CatalogId")
     catalogId: option<catalogIdString>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-glue") @new external new: request => t = "UpdateTableCommand"
-  let make = (~tableInput, ~databaseName, ~skipArchive=?, ~catalogId=?, ()) =>
+  let make = (
+    ~tableInput,
+    ~databaseName,
+    ~versionId=?,
+    ~transactionId=?,
+    ~skipArchive=?,
+    ~catalogId=?,
+    (),
+  ) =>
     new({
+      versionId: versionId,
+      transactionId: transactionId,
       skipArchive: skipArchive,
       tableInput: tableInput,
       databaseName: databaseName,
@@ -7592,11 +8403,11 @@ module UpdatePartition = {
     @as("DatabaseName")
     databaseName: nameString,
     @ocaml.doc("<p>The ID of the Data Catalog where the partition to be updated resides. If none is provided,
-      the AWS account ID is used by default.</p>")
+      the Amazon Web Services account ID is used by default.</p>")
     @as("CatalogId")
     catalogId: option<catalogIdString>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-glue") @new external new: request => t = "UpdatePartitionCommand"
   let make = (~partitionInput, ~partitionValueList, ~tableName, ~databaseName, ~catalogId=?, ()) =>
     new({
@@ -7607,6 +8418,71 @@ module UpdatePartition = {
       catalogId: catalogId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module GetUnfilteredTableMetadata = {
+  type t
+  type request = {
+    @as("SupportedPermissionTypes") supportedPermissionTypes: permissionTypeList,
+    @as("AuditContext") auditContext: option<auditContext>,
+    @as("Name") name: nameString,
+    @as("DatabaseName") databaseName: nameString,
+    @as("CatalogId") catalogId: catalogIdString,
+  }
+  type response = {
+    @as("CellFilters") cellFilters: option<columnRowFilterList>,
+    @as("IsRegisteredWithLakeFormation") isRegisteredWithLakeFormation: option<boolean_>,
+    @as("AuthorizedColumns") authorizedColumns: option<nameStringList>,
+    @as("Table") table: option<table>,
+  }
+  @module("@aws-sdk/client-glue") @new
+  external new: request => t = "GetUnfilteredTableMetadataCommand"
+  let make = (~supportedPermissionTypes, ~name, ~databaseName, ~catalogId, ~auditContext=?, ()) =>
+    new({
+      supportedPermissionTypes: supportedPermissionTypes,
+      auditContext: auditContext,
+      name: name,
+      databaseName: databaseName,
+      catalogId: catalogId,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module GetUnfilteredPartitionMetadata = {
+  type t
+  type request = {
+    @as("SupportedPermissionTypes") supportedPermissionTypes: permissionTypeList,
+    @as("AuditContext") auditContext: option<auditContext>,
+    @as("PartitionValues") partitionValues: valueStringList,
+    @as("TableName") tableName: nameString,
+    @as("DatabaseName") databaseName: nameString,
+    @as("CatalogId") catalogId: catalogIdString,
+  }
+  type response = {
+    @as("IsRegisteredWithLakeFormation") isRegisteredWithLakeFormation: option<boolean_>,
+    @as("AuthorizedColumns") authorizedColumns: option<nameStringList>,
+    @as("Partition") partition: option<partition>,
+  }
+  @module("@aws-sdk/client-glue") @new
+  external new: request => t = "GetUnfilteredPartitionMetadataCommand"
+  let make = (
+    ~supportedPermissionTypes,
+    ~partitionValues,
+    ~tableName,
+    ~databaseName,
+    ~catalogId,
+    ~auditContext=?,
+    (),
+  ) =>
+    new({
+      supportedPermissionTypes: supportedPermissionTypes,
+      auditContext: auditContext,
+      partitionValues: partitionValues,
+      tableName: tableName,
+      databaseName: databaseName,
+      catalogId: catalogId,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetTriggers = {
@@ -7638,6 +8514,14 @@ module GetTriggers = {
 module GetTable = {
   type t
   type request = {
+    @ocaml.doc(
+      "<p>The time as of when to read the table contents. If not set, the most recent transaction commit time will be used. Cannot be specified along with <code>TransactionId</code>.</p>"
+    )
+    @as("QueryAsOfTime")
+    queryAsOfTime: option<timestamp_>,
+    @ocaml.doc("<p>The transaction ID at which to read the table contents. </p>")
+    @as("TransactionId")
+    transactionId: option<transactionIdString>,
     @ocaml.doc("<p>The name of the table for which to retrieve the definition. For Hive
       compatibility, this name is entirely lowercase.</p>")
     @as("Name")
@@ -7646,7 +8530,7 @@ module GetTable = {
       For Hive compatibility, this name is entirely lowercase.</p>")
     @as("DatabaseName")
     databaseName: nameString,
-    @ocaml.doc("<p>The ID of the Data Catalog where the table resides. If none is provided, the AWS account
+    @ocaml.doc("<p>The ID of the Data Catalog where the table resides. If none is provided, the Amazon Web Services account
       ID is used by default.</p>")
     @as("CatalogId")
     catalogId: option<catalogIdString>,
@@ -7657,8 +8541,14 @@ module GetTable = {
     table: option<table>,
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "GetTableCommand"
-  let make = (~name, ~databaseName, ~catalogId=?, ()) =>
-    new({name: name, databaseName: databaseName, catalogId: catalogId})
+  let make = (~name, ~databaseName, ~queryAsOfTime=?, ~transactionId=?, ~catalogId=?, ()) =>
+    new({
+      queryAsOfTime: queryAsOfTime,
+      transactionId: transactionId,
+      name: name,
+      databaseName: databaseName,
+      catalogId: catalogId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -7695,7 +8585,7 @@ module GetPartition = {
     @as("DatabaseName")
     databaseName: nameString,
     @ocaml.doc("<p>The ID of the Data Catalog where the partition in question resides. If none is provided,
-      the AWS account ID is used by default.</p>")
+      the Amazon Web Services account ID is used by default.</p>")
     @as("CatalogId")
     catalogId: option<catalogIdString>,
   }
@@ -7737,7 +8627,7 @@ module GetDatabases = {
     @ocaml.doc("<p>A continuation token, if this is a continuation call.</p>") @as("NextToken")
     nextToken: option<token>,
     @ocaml.doc("<p>The ID of the Data Catalog from which to retrieve <code>Databases</code>. If none is
-      provided, the AWS account ID is used by default.</p>")
+      provided, the Amazon Web Services account ID is used by default.</p>")
     @as("CatalogId")
     catalogId: option<catalogIdString>,
   }
@@ -7786,7 +8676,7 @@ module GetColumnStatisticsForTable = {
     @as("DatabaseName")
     databaseName: nameString,
     @ocaml.doc("<p>The ID of the Data Catalog where the partitions in question reside.
-      If none is supplied, the AWS account ID is used by default.</p>")
+      If none is supplied, the Amazon Web Services account ID is used by default.</p>")
     @as("CatalogId")
     catalogId: option<catalogIdString>,
   }
@@ -7822,7 +8712,7 @@ module GetColumnStatisticsForPartition = {
     @as("DatabaseName")
     databaseName: nameString,
     @ocaml.doc("<p>The ID of the Data Catalog where the partitions in question reside.
-      If none is supplied, the AWS account ID is used by default.</p>")
+      If none is supplied, the Amazon Web Services account ID is used by default.</p>")
     @as("CatalogId")
     catalogId: option<catalogIdString>,
   }
@@ -7849,6 +8739,8 @@ module GetColumnStatisticsForPartition = {
 module CreateTable = {
   type t
   type request = {
+    @ocaml.doc("<p>The ID of the transaction.</p>") @as("TransactionId")
+    transactionId: option<transactionIdString>,
     @ocaml.doc(
       "<p>A list of partition indexes, <code>PartitionIndex</code> structures, to create in the table.</p>"
     )
@@ -7863,14 +8755,22 @@ module CreateTable = {
     @as("DatabaseName")
     databaseName: nameString,
     @ocaml.doc("<p>The ID of the Data Catalog in which to create the <code>Table</code>.
-      If none is supplied, the AWS account ID is used by default.</p>")
+      If none is supplied, the Amazon Web Services account ID is used by default.</p>")
     @as("CatalogId")
     catalogId: option<catalogIdString>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-glue") @new external new: request => t = "CreateTableCommand"
-  let make = (~tableInput, ~databaseName, ~partitionIndexes=?, ~catalogId=?, ()) =>
+  let make = (
+    ~tableInput,
+    ~databaseName,
+    ~transactionId=?,
+    ~partitionIndexes=?,
+    ~catalogId=?,
+    (),
+  ) =>
     new({
+      transactionId: transactionId,
       partitionIndexes: partitionIndexes,
       tableInput: tableInput,
       databaseName: databaseName,
@@ -7893,11 +8793,13 @@ module CreatePartition = {
       to be created.</p>")
     @as("DatabaseName")
     databaseName: nameString,
-    @ocaml.doc("<p>The AWS account ID of the catalog in which the partition is to be created.</p>")
+    @ocaml.doc(
+      "<p>The Amazon Web Services account ID of the catalog in which the partition is to be created.</p>"
+    )
     @as("CatalogId")
     catalogId: option<catalogIdString>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-glue") @new external new: request => t = "CreatePartitionCommand"
   let make = (~partitionInput, ~tableName, ~databaseName, ~catalogId=?, ()) =>
     new({
@@ -7939,7 +8841,7 @@ module UpdateColumnStatisticsForTable = {
     @as("DatabaseName")
     databaseName: nameString,
     @ocaml.doc("<p>The ID of the Data Catalog where the partitions in question reside.
-      If none is supplied, the AWS account ID is used by default.</p>")
+      If none is supplied, the Amazon Web Services account ID is used by default.</p>")
     @as("CatalogId")
     catalogId: option<catalogIdString>,
   }
@@ -7972,7 +8874,7 @@ module UpdateColumnStatisticsForPartition = {
     @as("DatabaseName")
     databaseName: nameString,
     @ocaml.doc("<p>The ID of the Data Catalog where the partitions in question reside.
-      If none is supplied, the AWS account ID is used by default.</p>")
+      If none is supplied, the Amazon Web Services account ID is used by default.</p>")
     @as("CatalogId")
     catalogId: option<catalogIdString>,
   }
@@ -8077,6 +8979,14 @@ module SearchTables = {
 module GetTables = {
   type t
   type request = {
+    @ocaml.doc(
+      "<p>The time as of when to read the table contents. If not set, the most recent transaction commit time will be used. Cannot be specified along with <code>TransactionId</code>.</p>"
+    )
+    @as("QueryAsOfTime")
+    queryAsOfTime: option<timestamp_>,
+    @ocaml.doc("<p>The transaction ID at which to read the table contents.</p>")
+    @as("TransactionId")
+    transactionId: option<transactionIdString>,
     @ocaml.doc("<p>The maximum number of tables to return in a single response.</p>")
     @as("MaxResults")
     maxResults: option<catalogGetterPageSize>,
@@ -8091,7 +9001,7 @@ module GetTables = {
       compatibility, this name is entirely lowercase.</p>")
     @as("DatabaseName")
     databaseName: nameString,
-    @ocaml.doc("<p>The ID of the Data Catalog where the tables reside. If none is provided, the AWS account
+    @ocaml.doc("<p>The ID of the Data Catalog where the tables reside. If none is provided, the Amazon Web Services account
       ID is used by default.</p>")
     @as("CatalogId")
     catalogId: option<catalogIdString>,
@@ -8105,8 +9015,19 @@ module GetTables = {
     tableList: option<tableList>,
   }
   @module("@aws-sdk/client-glue") @new external new: request => t = "GetTablesCommand"
-  let make = (~databaseName, ~maxResults=?, ~nextToken=?, ~expression=?, ~catalogId=?, ()) =>
+  let make = (
+    ~databaseName,
+    ~queryAsOfTime=?,
+    ~transactionId=?,
+    ~maxResults=?,
+    ~nextToken=?,
+    ~expression=?,
+    ~catalogId=?,
+    (),
+  ) =>
     new({
+      queryAsOfTime: queryAsOfTime,
+      transactionId: transactionId,
       maxResults: maxResults,
       nextToken: nextToken,
       expression: expression,
@@ -8132,7 +9053,7 @@ module GetTableVersion = {
       compatibility, this name is entirely lowercase.</p>")
     @as("DatabaseName")
     databaseName: nameString,
-    @ocaml.doc("<p>The ID of the Data Catalog where the tables reside. If none is provided, the AWS account
+    @ocaml.doc("<p>The ID of the Data Catalog where the tables reside. If none is provided, the Amazon Web Services account
       ID is used by default.</p>")
     @as("CatalogId")
     catalogId: option<catalogIdString>,
@@ -8155,7 +9076,19 @@ module GetTableVersion = {
 module GetPartitions = {
   type t
   type request = {
-    @as("ExcludeColumnSchema") excludeColumnSchema: option<booleanNullable>,
+    @ocaml.doc(
+      "<p>The time as of when to read the partition contents. If not set, the most recent transaction commit time will be used. Cannot be specified along with <code>TransactionId</code>.</p>"
+    )
+    @as("QueryAsOfTime")
+    queryAsOfTime: option<timestamp_>,
+    @ocaml.doc("<p>The transaction ID at which to read the partition contents.</p>")
+    @as("TransactionId")
+    transactionId: option<transactionIdString>,
+    @ocaml.doc(
+      "<p>When true, specifies not returning the partition column schema. Useful when you are interested only in other partition attributes such as partition values or location. This approach avoids the problem of a large response by not returning duplicate data.</p>"
+    )
+    @as("ExcludeColumnSchema")
+    excludeColumnSchema: option<booleanNullable>,
     @ocaml.doc("<p>The maximum number of partitions to return in a single response.</p>")
     @as("MaxResults")
     maxResults: option<pageSize>,
@@ -8265,7 +9198,7 @@ module GetPartitions = {
                </p>
             </li>
          </ul>
-         <p>If an invalid type is encountered, an exception is thrown. </p>
+         <p>If an type is encountered that is not valid, an exception is thrown. </p>
          <p>The following list shows the valid operators on each type. When you define a crawler, the
         <code>partitionKey</code> type is created as a <code>STRING</code>, to be compatible with the catalog
       partitions. </p>
@@ -8279,7 +9212,7 @@ module GetPartitions = {
     @as("DatabaseName")
     databaseName: nameString,
     @ocaml.doc("<p>The ID of the Data Catalog where the partitions in question reside. If none is provided,
-      the AWS account ID is used by default.</p>")
+      the Amazon Web Services account ID is used by default.</p>")
     @as("CatalogId")
     catalogId: option<catalogIdString>,
   }
@@ -8295,6 +9228,8 @@ module GetPartitions = {
   let make = (
     ~tableName,
     ~databaseName,
+    ~queryAsOfTime=?,
+    ~transactionId=?,
     ~excludeColumnSchema=?,
     ~maxResults=?,
     ~segment=?,
@@ -8304,6 +9239,8 @@ module GetPartitions = {
     (),
   ) =>
     new({
+      queryAsOfTime: queryAsOfTime,
+      transactionId: transactionId,
       excludeColumnSchema: excludeColumnSchema,
       maxResults: maxResults,
       segment: segment,
@@ -8371,7 +9308,7 @@ module BatchGetPartition = {
     @as("DatabaseName")
     databaseName: nameString,
     @ocaml.doc("<p>The ID of the Data Catalog where the partitions in question reside.
-      If none is supplied, the AWS account ID is used by default.</p>")
+      If none is supplied, the Amazon Web Services account ID is used by default.</p>")
     @as("CatalogId")
     catalogId: option<catalogIdString>,
   }
@@ -8428,7 +9365,7 @@ module BatchCreatePartition = {
     @as("DatabaseName")
     databaseName: nameString,
     @ocaml.doc("<p>The ID of the catalog in which the partition is to be created. Currently, this should be
-      the AWS account ID.</p>")
+      the Amazon Web Services account ID.</p>")
     @as("CatalogId")
     catalogId: option<catalogIdString>,
   }
@@ -8441,6 +9378,51 @@ module BatchCreatePartition = {
   let make = (~partitionInputList, ~tableName, ~databaseName, ~catalogId=?, ()) =>
     new({
       partitionInputList: partitionInputList,
+      tableName: tableName,
+      databaseName: databaseName,
+      catalogId: catalogId,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module GetUnfilteredPartitionsMetadata = {
+  type t
+  type request = {
+    @as("MaxResults") maxResults: option<pageSize>,
+    @as("Segment") segment: option<segment>,
+    @as("NextToken") nextToken: option<token>,
+    @as("SupportedPermissionTypes") supportedPermissionTypes: permissionTypeList,
+    @as("AuditContext") auditContext: option<auditContext>,
+    @as("Expression") expression: option<predicateString>,
+    @as("TableName") tableName: nameString,
+    @as("DatabaseName") databaseName: nameString,
+    @as("CatalogId") catalogId: catalogIdString,
+  }
+  type response = {
+    @as("NextToken") nextToken: option<token>,
+    @as("UnfilteredPartitions") unfilteredPartitions: option<unfilteredPartitionList>,
+  }
+  @module("@aws-sdk/client-glue") @new
+  external new: request => t = "GetUnfilteredPartitionsMetadataCommand"
+  let make = (
+    ~supportedPermissionTypes,
+    ~tableName,
+    ~databaseName,
+    ~catalogId,
+    ~maxResults=?,
+    ~segment=?,
+    ~nextToken=?,
+    ~auditContext=?,
+    ~expression=?,
+    (),
+  ) =>
+    new({
+      maxResults: maxResults,
+      segment: segment,
+      nextToken: nextToken,
+      supportedPermissionTypes: supportedPermissionTypes,
+      auditContext: auditContext,
+      expression: expression,
       tableName: tableName,
       databaseName: databaseName,
       catalogId: catalogId,
@@ -8464,7 +9446,7 @@ module GetTableVersions = {
       compatibility, this name is entirely lowercase.</p>")
     @as("DatabaseName")
     databaseName: nameString,
-    @ocaml.doc("<p>The ID of the Data Catalog where the tables reside. If none is provided, the AWS account
+    @ocaml.doc("<p>The ID of the Data Catalog where the tables reside. If none is provided, the Amazon Web Services account
       ID is used by default.</p>")
     @as("CatalogId")
     catalogId: option<catalogIdString>,
@@ -8544,7 +9526,7 @@ module BatchUpdatePartition = {
     @as("DatabaseName")
     databaseName: nameString,
     @ocaml.doc("<p>The ID of the catalog in which the partition is to be updated. Currently, this should be
-      the AWS account ID.</p>")
+      the Amazon Web Services account ID.</p>")
     @as("CatalogId")
     catalogId: option<catalogIdString>,
   }

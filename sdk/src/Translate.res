@@ -17,11 +17,12 @@ type baseLong = float
 type unboundedLengthString = string
 type timestamp_ = Js.Date.t
 type terminologyFile = NodeJs.Buffer.t
-type terminologyDataFormat = [@as("TMX") #TMX | @as("CSV") #CSV]
+type terminologyDataFormat = [@as("TSV") #TSV | @as("TMX") #TMX | @as("CSV") #CSV]
 type terminologyArn = string
 type string_ = string
 type s3Uri = string
 type resourceName = string
+type profanity = [@as("MASK") #MASK]
 type parallelDataStatus = [
   | @as("FAILED") #FAILED
   | @as("DELETING") #DELETING
@@ -49,12 +50,28 @@ type jobName = string
 type jobId = string
 type integer_ = int
 type iamRoleArn = string
+type formality = [@as("INFORMAL") #INFORMAL | @as("FORMAL") #FORMAL]
 type encryptionKeyType = [@as("KMS") #KMS]
 type encryptionKeyID = string
+type directionality = [@as("MULTI") #MULTI | @as("UNI") #UNI]
 type description = string
 type contentType = string
 type clientTokenString = string
 type boundedLengthString = string
+@ocaml.doc("<p>Settings that configure the translation output.</p>")
+type translationSettings = {
+  @ocaml.doc("<p>Enable the profanity setting if you want Amazon Translate to mask profane words and
+      phrases in your translation output.</p>
+         <p>To mask profane words and phrases, Amazon Translate replaces them with the grawlix string
+      “?$#@$“. This 5-character sequence is used for each profane word or phrase, regardless of the
+      length or number of words.</p>
+         <p>Amazon Translate does not detect profanity in all of its supported languages. For
+      languages that support profanity detection, see <a href=\"https://docs.aws.amazon.com/translate/latest/dg/what-is.html#what-is-languages\">Supported
+        Languages and Language Codes in the Amazon Translate Developer Guide</a>.</p>")
+  @as("Profanity")
+  profanity: option<profanity>,
+  @as("Formality") formality: option<formality>,
+}
 @ocaml.doc("<p>Provides information for filtering a list of translation jobs. For more information, see
         <a>ListTextTranslationJobs</a>.</p>")
 type textTranslationJobFilter = {
@@ -74,14 +91,48 @@ type textTranslationJobFilter = {
 }
 @ocaml.doc("<p>The location of the custom terminology data.</p>")
 type terminologyDataLocation = {
-  @ocaml.doc("<p>The location of the custom terminology data.</p>") @as("Location")
+  @ocaml.doc("<p>The Amazon S3 location of the most recent custom terminology input file that was
+      successfully imported into Amazon Translate. The location is returned as a presigned URL that
+      has a 30 minute expiration.</p>
+    
+         <important>
+            <p>Amazon Translate doesn't scan all input files for the risk of CSV injection
+        attacks. </p>
+            <p>CSV injection occurs when a .csv or .tsv file is altered so that a record contains
+        malicious code. The record begins with a special character, such as =, +, -, or @. When the
+        file is opened in a spreadsheet program, the program might interpret the record as a formula
+        and run the code within it.</p>
+            <p>Before you download an input file from Amazon S3, ensure that you recognize the file and trust its creator.</p>
+         </important>")
+  @as("Location")
   location: string_,
   @ocaml.doc("<p>The repository type for the custom terminology data.</p>") @as("RepositoryType")
   repositoryType: string_,
 }
 @ocaml.doc("<p>The data associated with the custom terminology.</p>")
 type terminologyData = {
-  @ocaml.doc("<p>The data format of the custom terminology. Either CSV or TMX.</p>") @as("Format")
+  @ocaml.doc("<p>The directionality of your terminology resource indicates whether it has one source
+      language (uni-directional) or multiple (multi-directional).</p>
+         <dl>
+            <dt>UNI</dt>
+            <dd>
+               <p>The terminology resource has one source language (for example, the first column in a
+            CSV file), and all of its other languages are target languages. </p>
+            </dd>
+            <dt>MULTI</dt>
+            <dd>
+               <p>Any language in the terminology resource can be the source language or a target
+            language. A single multi-directional terminology resource can be used for jobs that
+            translate different language pairs. For example, if the terminology contains terms in
+            English and Spanish, then it can be used for jobs that translate English to Spanish and
+            jobs that translate Spanish to English.</p>
+            </dd>
+         </dl>
+         <p>When you create a custom terminology resource without specifying the directionality, it
+      behaves as uni-directional terminology, although this parameter will have a null value.</p>")
+  @as("Directionality")
+  directionality: option<directionality>,
+  @ocaml.doc("<p>The data format of the custom terminology.</p>") @as("Format")
   format: terminologyDataFormat,
   @ocaml.doc("<p>The file containing the custom terminology data. Your version of the AWS SDK performs a
       Base64-encoding on this field before sending a request to the AWS service. Users of the SDK
@@ -104,7 +155,17 @@ type resourceNameList = array<resourceName>
       into Amazon Translate.</p>")
 type parallelDataDataLocation = {
   @ocaml.doc("<p>The Amazon S3 location of the parallel data input file. The location is returned as a
-      presigned URL to that has a 30 minute expiration.</p>")
+      presigned URL to that has a 30 minute expiration.</p>
+    
+         <important>
+            <p>Amazon Translate doesn't scan all input files for the risk of CSV injection
+        attacks. </p>
+            <p>CSV injection occurs when a .csv or .tsv file is altered so that a record contains
+        malicious code. The record begins with a special character, such as =, +, -, or @. When the
+        file is opened in a spreadsheet program, the program might interpret the record as a formula
+        and run the code within it.</p>
+            <p>Before you download an input file from Amazon S3, ensure that you recognize the file and trust its creator.</p>
+         </important>")
   @as("Location")
   location: string_,
   @ocaml.doc("<p>Describes the repository that contains the parallel data input file.</p>")
@@ -117,13 +178,6 @@ type parallelDataConfig = {
   format: parallelDataFormat,
   @ocaml.doc("<p>The URI of the Amazon S3 folder that contains the parallel data input file. The folder
       must be in the same Region as the API endpoint you are calling.</p>")
-  @as("S3Uri")
-  s3Uri: s3Uri,
-}
-@ocaml.doc("<p>The output configuration properties for a batch translation job.</p>")
-type outputDataConfig = {
-  @ocaml.doc("<p>The URI of the S3 folder that contains a translation job's output file. The folder must
-      be in the same Region as the API endpoint that you are calling.</p>")
   @as("S3Uri")
   s3Uri: s3Uri,
 }
@@ -172,6 +226,12 @@ type inputDataConfig = {
                   <code>application/vnd.openxmlformats-officedocument.spreadsheetml.sheet</code>: The
           input data consists of one or more Excel Workbook files (.xlsx).</p>
             </li>
+            <li>
+               <p>
+                  <code>application/x-xliff+xml</code>: The input data consists of one or more XML
+          Localization Interchange File Format (XLIFF) files (.xlf). Amazon Translate supports only
+          XLIFF version 1.2.</p>
+            </li>
          </ul>
          <important>
             <p>If you structure your input data as HTML, ensure that you set this parameter to
@@ -188,70 +248,41 @@ type inputDataConfig = {
 }
 @ocaml.doc("<p>The encryption key used to encrypt this object.</p>")
 type encryptionKey = {
-  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the encryption key being used to encrypt the custom
-      terminology.</p>")
+  @ocaml.doc(
+    "<p>The Amazon Resource Name (ARN) of the encryption key being used to encrypt this object.</p>"
+  )
   @as("Id")
   id: encryptionKeyID,
-  @ocaml.doc(
-    "<p>The type of encryption key used by Amazon Translate to encrypt custom terminologies.</p>"
-  )
+  @ocaml.doc("<p>The type of encryption key used by Amazon Translate to encrypt this object.</p>")
   @as("Type")
   type_: encryptionKeyType,
 }
-@ocaml.doc("<p>Provides information about a translation job.</p>")
-type textTranslationJobProperties = {
-  @ocaml.doc("<p>The Amazon Resource Name (ARN) of an AWS Identity Access and Management (IAM) role
-      that granted Amazon Translate read access to the job's input data.</p>")
-  @as("DataAccessRoleArn")
-  dataAccessRoleArn: option<iamRoleArn>,
-  @ocaml.doc(
-    "<p>The output configuration properties that were specified when the job was requested.</p>"
-  )
-  @as("OutputDataConfig")
-  outputDataConfig: option<outputDataConfig>,
-  @ocaml.doc(
-    "<p>The input configuration properties that were specified when the job was requested.</p>"
-  )
-  @as("InputDataConfig")
-  inputDataConfig: option<inputDataConfig>,
-  @ocaml.doc("<p>The time at which the translation job ended.</p>") @as("EndTime")
-  endTime: option<timestamp_>,
-  @ocaml.doc("<p>The time at which the translation job was submitted.</p>") @as("SubmittedTime")
-  submittedTime: option<timestamp_>,
-  @ocaml.doc(
-    "<p>An explanation of any errors that may have occured during the translation job.</p>"
-  )
-  @as("Message")
-  message: option<unboundedLengthString>,
-  @ocaml.doc("<p>A list containing the names of the parallel data resources applied to the translation
-      job.</p>")
-  @as("ParallelDataNames")
-  parallelDataNames: option<resourceNameList>,
-  @ocaml.doc("<p>A list containing the names of the terminologies applied to a translation job. Only one
-      terminology can be applied per <a>StartTextTranslationJob</a> request at this
-      time.</p>")
-  @as("TerminologyNames")
-  terminologyNames: option<resourceNameList>,
-  @ocaml.doc("<p>The language code of the language of the target text. The language must be a language
-      supported by Amazon Translate.</p>")
-  @as("TargetLanguageCodes")
-  targetLanguageCodes: option<targetLanguageCodeStringList>,
-  @ocaml.doc("<p>The language code of the language of the source text. The language must be a language
-      supported by Amazon Translate.</p>")
-  @as("SourceLanguageCode")
-  sourceLanguageCode: option<languageCodeString>,
-  @ocaml.doc("<p>The number of documents successfully and unsuccessfully processed during the translation
-      job.</p>")
-  @as("JobDetails")
-  jobDetails: option<jobDetails>,
-  @ocaml.doc("<p>The status of the translation job.</p>") @as("JobStatus")
-  jobStatus: option<jobStatus>,
-  @ocaml.doc("<p>The user-defined name of the translation job.</p>") @as("JobName")
-  jobName: option<jobName>,
-  @ocaml.doc("<p>The ID of the translation job.</p>") @as("JobId") jobId: option<jobId>,
-}
 @ocaml.doc("<p>The properties of the custom terminology.</p>")
 type terminologyProperties = {
+  @ocaml.doc("<p>The format of the custom terminology input file.</p>") @as("Format")
+  format: option<terminologyDataFormat>,
+  @ocaml.doc("<p>The number of terms in the input file that Amazon Translate skipped when you created or
+      updated the terminology resource.</p>")
+  @as("SkippedTermCount")
+  skippedTermCount: option<integer_>,
+  @ocaml.doc("<p>Additional information from Amazon Translate about the terminology resource.</p>")
+  @as("Message")
+  message: option<unboundedLengthString>,
+  @ocaml.doc("<p>The directionality of your terminology resource indicates whether it has one source
+      language (uni-directional) or multiple (multi-directional). </p>
+         <dl>
+            <dt>UNI</dt>
+            <dd>
+               <p>The terminology resource has one source language (the first column in a CSV file),
+            and all of its other languages are target languages.</p>
+            </dd>
+            <dt>MULTI</dt>
+            <dd>
+               <p>Any language in the terminology resource can be the source language.</p>
+            </dd>
+         </dl>")
+  @as("Directionality")
+  directionality: option<directionality>,
   @ocaml.doc(
     "<p>The time at which the custom terminology was last update, based on the timestamp.</p>"
   )
@@ -267,8 +298,8 @@ type terminologyProperties = {
   sizeBytes: option<integer_>,
   @ocaml.doc("<p>The encryption key for the custom terminology.</p>") @as("EncryptionKey")
   encryptionKey: option<encryptionKey>,
-  @ocaml.doc("<p>The language codes for the target languages available with the custom terminology file.
-      All possible target languages are returned in array.</p>")
+  @ocaml.doc("<p>The language codes for the target languages available with the custom terminology
+      resource. All possible target languages are returned in array.</p>")
   @as("TargetLanguageCodes")
   targetLanguageCodes: option<languageCodeStringList>,
   @ocaml.doc("<p>The language code for the source text of the translation request for which the custom
@@ -343,7 +374,68 @@ type parallelDataProperties = {
   @ocaml.doc("<p>The custom name assigned to the parallel data resource.</p>") @as("Name")
   name: option<resourceName>,
 }
-type textTranslationJobPropertiesList = array<textTranslationJobProperties>
+@ocaml.doc("<p>The output configuration properties for a batch translation job.</p>")
+type outputDataConfig = {
+  @as("EncryptionKey") encryptionKey: option<encryptionKey>,
+  @ocaml.doc("<p>The URI of the S3 folder that contains a translation job's output file. The folder must
+      be in the same Region as the API endpoint that you are calling.</p>")
+  @as("S3Uri")
+  s3Uri: s3Uri,
+}
+@ocaml.doc("<p>Provides information about a translation job.</p>")
+type textTranslationJobProperties = {
+  @ocaml.doc("<p>Settings that configure the translation output.</p>") @as("Settings")
+  settings: option<translationSettings>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of an AWS Identity Access and Management (IAM) role
+      that granted Amazon Translate read access to the job's input data.</p>")
+  @as("DataAccessRoleArn")
+  dataAccessRoleArn: option<iamRoleArn>,
+  @ocaml.doc(
+    "<p>The output configuration properties that were specified when the job was requested.</p>"
+  )
+  @as("OutputDataConfig")
+  outputDataConfig: option<outputDataConfig>,
+  @ocaml.doc(
+    "<p>The input configuration properties that were specified when the job was requested.</p>"
+  )
+  @as("InputDataConfig")
+  inputDataConfig: option<inputDataConfig>,
+  @ocaml.doc("<p>The time at which the translation job ended.</p>") @as("EndTime")
+  endTime: option<timestamp_>,
+  @ocaml.doc("<p>The time at which the translation job was submitted.</p>") @as("SubmittedTime")
+  submittedTime: option<timestamp_>,
+  @ocaml.doc(
+    "<p>An explanation of any errors that may have occurred during the translation job.</p>"
+  )
+  @as("Message")
+  message: option<unboundedLengthString>,
+  @ocaml.doc("<p>A list containing the names of the parallel data resources applied to the translation
+      job.</p>")
+  @as("ParallelDataNames")
+  parallelDataNames: option<resourceNameList>,
+  @ocaml.doc("<p>A list containing the names of the terminologies applied to a translation job. Only one
+      terminology can be applied per <a>StartTextTranslationJob</a> request at this
+      time.</p>")
+  @as("TerminologyNames")
+  terminologyNames: option<resourceNameList>,
+  @ocaml.doc("<p>The language code of the language of the target text. The language must be a language
+      supported by Amazon Translate.</p>")
+  @as("TargetLanguageCodes")
+  targetLanguageCodes: option<targetLanguageCodeStringList>,
+  @ocaml.doc("<p>The language code of the language of the source text. The language must be a language
+      supported by Amazon Translate.</p>")
+  @as("SourceLanguageCode")
+  sourceLanguageCode: option<languageCodeString>,
+  @ocaml.doc("<p>The number of documents successfully and unsuccessfully processed during the translation
+      job.</p>")
+  @as("JobDetails")
+  jobDetails: option<jobDetails>,
+  @ocaml.doc("<p>The status of the translation job.</p>") @as("JobStatus")
+  jobStatus: option<jobStatus>,
+  @ocaml.doc("<p>The user-defined name of the translation job.</p>") @as("JobName")
+  jobName: option<jobName>,
+  @ocaml.doc("<p>The ID of the translation job.</p>") @as("JobId") jobId: option<jobId>,
+}
 type terminologyPropertiesList = array<terminologyProperties>
 type parallelDataPropertiesList = array<parallelDataProperties>
 @ocaml.doc("<p>The custom terminology applied to the input text by Amazon Translate for the translated text
@@ -361,6 +453,7 @@ type appliedTerminology = {
   @as("Name")
   name: option<resourceName>,
 }
+type textTranslationJobPropertiesList = array<textTranslationJobProperties>
 type appliedTerminologyList = array<appliedTerminology>
 @ocaml.doc("<p>Provides translation between one source language and another of the same set of
       languages.</p>")
@@ -389,7 +482,7 @@ module DeleteTerminology = {
     @ocaml.doc("<p>The name of the custom terminology being deleted. </p>") @as("Name")
     name: resourceName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-translate") @new external new: request => t = "DeleteTerminologyCommand"
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -455,20 +548,74 @@ module UpdateParallelData = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module CreateParallelData = {
+  type t
+  type request = {
+    @ocaml.doc("<p>A unique identifier for the request. This token is automatically generated when you use
+      Amazon Translate through an AWS SDK.</p>")
+    @as("ClientToken")
+    clientToken: clientTokenString,
+    @as("EncryptionKey") encryptionKey: option<encryptionKey>,
+    @ocaml.doc("<p>Specifies the format and S3 location of the parallel data input file.</p>")
+    @as("ParallelDataConfig")
+    parallelDataConfig: parallelDataConfig,
+    @ocaml.doc("<p>A custom description for the parallel data resource in Amazon Translate.</p>")
+    @as("Description")
+    description: option<description>,
+    @ocaml.doc("<p>A custom name for the parallel data resource in Amazon Translate. You must assign a name
+      that is unique in the account and region.</p>")
+    @as("Name")
+    name: resourceName,
+  }
+  type response = {
+    @ocaml.doc("<p>The status of the parallel data resource. When the resource is ready for you to use, the
+      status is <code>ACTIVE</code>.</p>")
+    @as("Status")
+    status: option<parallelDataStatus>,
+    @ocaml.doc("<p>The custom name that you assigned to the parallel data resource.</p>")
+    @as("Name")
+    name: option<resourceName>,
+  }
+  @module("@aws-sdk/client-translate") @new external new: request => t = "CreateParallelDataCommand"
+  let make = (~clientToken, ~parallelDataConfig, ~name, ~encryptionKey=?, ~description=?, ()) =>
+    new({
+      clientToken: clientToken,
+      encryptionKey: encryptionKey,
+      parallelDataConfig: parallelDataConfig,
+      description: description,
+      name: name,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module StartTextTranslationJob = {
   type t
   type request = {
+    @ocaml.doc("<p>Settings to configure your translation output, including the option to mask profane words
+      and phrases.</p>")
+    @as("Settings")
+    settings: option<translationSettings>,
     @ocaml.doc("<p>A unique identifier for the request. This token is auto-generated when using the Amazon Translate
       SDK.</p>")
     @as("ClientToken")
     clientToken: clientTokenString,
-    @ocaml.doc("<p>The names of the parallel data resources to use in the batch translation job. For a list
-      of available parallel data resources, use the <a>ListParallelData</a>
-      operation.</p>")
+    @ocaml.doc("<p>The name of a parallel data resource to add to the translation job. This resource consists
+      of examples that show how you want segments of text to be translated. When you add parallel
+      data to a translation job, you create an <i>Active Custom Translation</i> job. </p>
+         <p>This parameter accepts only one parallel data resource.</p>
+         <note>
+            <p>Active Custom Translation jobs are priced at a higher rate than other jobs that don't
+        use parallel data. For more information, see <a href=\"http://aws.amazon.com/translate/pricing/\">Amazon Translate pricing</a>.</p>
+         </note>
+         <p>For a list of available parallel data resources, use the <a>ListParallelData</a> operation.</p>
+         <p>For more information, see <a>customizing-translations-parallel-data</a>.</p>")
     @as("ParallelDataNames")
     parallelDataNames: option<resourceNameList>,
-    @ocaml.doc("<p>The name of the terminology to use in the batch translation job. For a list of available
-      terminologies, use the <a>ListTerminologies</a> operation.</p>")
+    @ocaml.doc("<p>The name of a custom terminology resource to add to the translation job. This resource
+      lists examples source terms and the desired translation for each term.</p>
+         <p>This parameter accepts only one custom terminology resource.</p>
+         <p>For a list of available custom terminology resources, use the <a>ListTerminologies</a> operation.</p>
+         <p>For more information, see <a>how-custom-terminology</a>.</p>")
     @as("TerminologyNames")
     terminologyNames: option<resourceNameList>,
     @ocaml.doc("<p>The language code of the output language.</p>") @as("TargetLanguageCodes")
@@ -479,7 +626,7 @@ module StartTextTranslationJob = {
     @as("SourceLanguageCode")
     sourceLanguageCode: languageCodeString,
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of an AWS Identity Access and Management (IAM) role
-      that grants Amazon Translate read access to your input data. For more nformation, see <a>identity-and-access-management</a>.</p>")
+      that grants Amazon Translate read access to your input data. For more information, see <a>identity-and-access-management</a>.</p>")
     @as("DataAccessRoleArn")
     dataAccessRoleArn: iamRoleArn,
     @ocaml.doc("<p>Specifies the S3 folder to which your job output will be saved.
@@ -545,12 +692,14 @@ module StartTextTranslationJob = {
     ~dataAccessRoleArn,
     ~outputDataConfig,
     ~inputDataConfig,
+    ~settings=?,
     ~parallelDataNames=?,
     ~terminologyNames=?,
     ~jobName=?,
     (),
   ) =>
     new({
+      settings: settings,
       clientToken: clientToken,
       parallelDataNames: parallelDataNames,
       terminologyNames: terminologyNames,
@@ -560,46 +709,6 @@ module StartTextTranslationJob = {
       outputDataConfig: outputDataConfig,
       inputDataConfig: inputDataConfig,
       jobName: jobName,
-    })
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
-module CreateParallelData = {
-  type t
-  type request = {
-    @ocaml.doc("<p>A unique identifier for the request. This token is automatically generated when you use
-      Amazon Translate through an AWS SDK.</p>")
-    @as("ClientToken")
-    clientToken: clientTokenString,
-    @as("EncryptionKey") encryptionKey: option<encryptionKey>,
-    @ocaml.doc("<p>Specifies the format and S3 location of the parallel data input file.</p>")
-    @as("ParallelDataConfig")
-    parallelDataConfig: parallelDataConfig,
-    @ocaml.doc("<p>A custom description for the parallel data resource in Amazon Translate.</p>")
-    @as("Description")
-    description: option<description>,
-    @ocaml.doc("<p>A custom name for the parallel data resource in Amazon Translate. You must assign a name
-      that is unique in the account and region.</p>")
-    @as("Name")
-    name: resourceName,
-  }
-  type response = {
-    @ocaml.doc("<p>The status of the parallel data resource. When the resource is ready for you to use, the
-      status is <code>ACTIVE</code>.</p>")
-    @as("Status")
-    status: option<parallelDataStatus>,
-    @ocaml.doc("<p>The custom name that you assigned to the parallel data resource.</p>")
-    @as("Name")
-    name: option<resourceName>,
-  }
-  @module("@aws-sdk/client-translate") @new external new: request => t = "CreateParallelDataCommand"
-  let make = (~clientToken, ~parallelDataConfig, ~name, ~encryptionKey=?, ~description=?, ()) =>
-    new({
-      clientToken: clientToken,
-      encryptionKey: encryptionKey,
-      parallelDataConfig: parallelDataConfig,
-      description: description,
-      name: name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
@@ -625,6 +734,12 @@ module ImportTerminology = {
     name: resourceName,
   }
   type response = {
+    @ocaml.doc("<p>The Amazon S3 location of a file that provides any errors or warnings that were produced
+      by your input file. This file was created when Amazon Translate attempted to create a
+      terminology resource. The location is returned as a presigned URL to that has a 30 minute
+      expiration.</p>")
+    @as("AuxiliaryDataLocation")
+    auxiliaryDataLocation: option<terminologyDataLocation>,
     @ocaml.doc("<p>The properties of the custom terminology being imported.</p>")
     @as("TerminologyProperties")
     terminologyProperties: option<terminologyProperties>,
@@ -644,17 +759,37 @@ module ImportTerminology = {
 module GetTerminology = {
   type t
   type request = {
-    @ocaml.doc(
-      "<p>The data format of the custom terminology being retrieved, either CSV or TMX.</p>"
-    )
+    @ocaml.doc("<p>The data format of the custom terminology being retrieved.</p>
+         <p>If you don't specify this parameter, Amazon Translate returns a file that has the same
+      format as the file that was imported to create the terminology. </p>
+         <p>If you specify this parameter when you retrieve a multi-directional terminology resource,
+      you must specify the same format as that of the input file that was imported to create it.
+      Otherwise, Amazon Translate throws an error.</p>")
     @as("TerminologyDataFormat")
-    terminologyDataFormat: terminologyDataFormat,
+    terminologyDataFormat: option<terminologyDataFormat>,
     @ocaml.doc("<p>The name of the custom terminology being retrieved.</p>") @as("Name")
     name: resourceName,
   }
   type response = {
-    @ocaml.doc("<p>The data location of the custom terminology being retrieved. The custom terminology file
-      is returned in a presigned url that has a 30 minute expiration.</p>")
+    @ocaml.doc("<p>The Amazon S3 location of a file that provides any errors or warnings that were produced
+      by your input file. This file was created when Amazon Translate attempted to create a
+      terminology resource. The location is returned as a presigned URL to that has a 30 minute
+      expiration.</p>")
+    @as("AuxiliaryDataLocation")
+    auxiliaryDataLocation: option<terminologyDataLocation>,
+    @ocaml.doc("<p>The Amazon S3 location of the most recent custom terminology input file that was
+      successfully imported into Amazon Translate. The location is returned as a presigned URL that
+      has a 30 minute expiration.</p>
+    
+         <important>
+            <p>Amazon Translate doesn't scan all input files for the risk of CSV injection
+        attacks. </p>
+            <p>CSV injection occurs when a .csv or .tsv file is altered so that a record contains
+        malicious code. The record begins with a special character, such as =, +, -, or @. When the
+        file is opened in a spreadsheet program, the program might interpret the record as a formula
+        and run the code within it.</p>
+            <p>Before you download an input file from Amazon S3, ensure that you recognize the file and trust its creator.</p>
+         </important>")
     @as("TerminologyDataLocation")
     terminologyDataLocation: option<terminologyDataLocation>,
     @ocaml.doc("<p>The properties of the custom terminology being retrieved.</p>")
@@ -662,7 +797,7 @@ module GetTerminology = {
     terminologyProperties: option<terminologyProperties>,
   }
   @module("@aws-sdk/client-translate") @new external new: request => t = "GetTerminologyCommand"
-  let make = (~terminologyDataFormat, ~name, ()) =>
+  let make = (~name, ~terminologyDataFormat=?, ()) =>
     new({terminologyDataFormat: terminologyDataFormat, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
@@ -686,9 +821,19 @@ module GetParallelData = {
       expiration.</p>")
     @as("AuxiliaryDataLocation")
     auxiliaryDataLocation: option<parallelDataDataLocation>,
-    @ocaml.doc("<p>The location of the most recent parallel data input file that was successfully imported
-      into Amazon Translate. The location is returned as a presigned URL that has a 30 minute
-      expiration.</p>")
+    @ocaml.doc("<p>The Amazon S3 location of the most recent parallel data input file that was successfully
+      imported into Amazon Translate. The location is returned as a presigned URL that has a 30
+      minute expiration.</p>
+    
+         <important>
+            <p>Amazon Translate doesn't scan all input files for the risk of CSV injection
+        attacks. </p>
+            <p>CSV injection occurs when a .csv or .tsv file is altered so that a record contains
+        malicious code. The record begins with a special character, such as =, +, -, or @. When the
+        file is opened in a spreadsheet program, the program might interpret the record as a formula
+        and run the code within it.</p>
+            <p>Before you download an input file from Amazon S3, ensure that you recognize the file and trust its creator.</p>
+         </important>")
     @as("DataLocation")
     dataLocation: option<parallelDataDataLocation>,
     @ocaml.doc("<p>The properties of the parallel data resource that is being retrieved.</p>")
@@ -697,57 +842,6 @@ module GetParallelData = {
   }
   @module("@aws-sdk/client-translate") @new external new: request => t = "GetParallelDataCommand"
   let make = (~name, ()) => new({name: name})
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
-module DescribeTextTranslationJob = {
-  type t
-  type request = {
-    @ocaml.doc("<p>The identifier that Amazon Translate generated for the job. The <a>StartTextTranslationJob</a> operation returns this identifier in its
-      response.</p>")
-    @as("JobId")
-    jobId: jobId,
-  }
-  type response = {
-    @ocaml.doc("<p>An object that contains the properties associated with an asynchronous batch translation
-      job.</p>")
-    @as("TextTranslationJobProperties")
-    textTranslationJobProperties: option<textTranslationJobProperties>,
-  }
-  @module("@aws-sdk/client-translate") @new
-  external new: request => t = "DescribeTextTranslationJobCommand"
-  let make = (~jobId, ()) => new({jobId: jobId})
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
-module ListTextTranslationJobs = {
-  type t
-  type request = {
-    @ocaml.doc(
-      "<p>The maximum number of results to return in each page. The default value is 100.</p>"
-    )
-    @as("MaxResults")
-    maxResults: option<maxResultsInteger>,
-    @ocaml.doc("<p>The token to request the next page of results.</p>") @as("NextToken")
-    nextToken: option<nextToken>,
-    @ocaml.doc("<p>The parameters that specify which batch translation jobs to retrieve. Filters include job
-      name, job status, and submission time. You can only set one filter at a time.</p>")
-    @as("Filter")
-    filter: option<textTranslationJobFilter>,
-  }
-  type response = {
-    @ocaml.doc("<p>The token to use to retreive the next page of results. This value is <code>null</code>
-      when there are no more results to return.</p>")
-    @as("NextToken")
-    nextToken: option<nextToken>,
-    @ocaml.doc("<p>A list containing the properties of each job that is returned.</p>")
-    @as("TextTranslationJobPropertiesList")
-    textTranslationJobPropertiesList: option<textTranslationJobPropertiesList>,
-  }
-  @module("@aws-sdk/client-translate") @new
-  external new: request => t = "ListTextTranslationJobsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, filter: filter})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -806,9 +900,33 @@ module ListParallelData = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module DescribeTextTranslationJob = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The identifier that Amazon Translate generated for the job. The <a>StartTextTranslationJob</a> operation returns this identifier in its
+      response.</p>")
+    @as("JobId")
+    jobId: jobId,
+  }
+  type response = {
+    @ocaml.doc("<p>An object that contains the properties associated with an asynchronous batch translation
+      job.</p>")
+    @as("TextTranslationJobProperties")
+    textTranslationJobProperties: option<textTranslationJobProperties>,
+  }
+  @module("@aws-sdk/client-translate") @new
+  external new: request => t = "DescribeTextTranslationJobCommand"
+  let make = (~jobId, ()) => new({jobId: jobId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module TranslateText = {
   type t
   type request = {
+    @ocaml.doc("<p>Settings to configure your translation output, including the option to mask profane words
+      and phrases.</p>")
+    @as("Settings")
+    settings: option<translationSettings>,
     @ocaml.doc("<p>The language code requested for the language of the target text. The language must be a
       language supported by Amazon Translate.</p>")
     @as("TargetLanguageCode")
@@ -832,6 +950,8 @@ module TranslateText = {
     text: boundedLengthString,
   }
   type response = {
+    @ocaml.doc("<p>Settings that configure the translation output.</p>") @as("AppliedSettings")
+    appliedSettings: option<translationSettings>,
     @ocaml.doc("<p>The names of the custom terminologies applied to the input text by Amazon Translate for the
       translated text response.</p>")
     @as("AppliedTerminologies")
@@ -845,12 +965,51 @@ module TranslateText = {
     @ocaml.doc("<p>The translated text.</p>") @as("TranslatedText") translatedText: string_,
   }
   @module("@aws-sdk/client-translate") @new external new: request => t = "TranslateTextCommand"
-  let make = (~targetLanguageCode, ~sourceLanguageCode, ~text, ~terminologyNames=?, ()) =>
+  let make = (
+    ~targetLanguageCode,
+    ~sourceLanguageCode,
+    ~text,
+    ~settings=?,
+    ~terminologyNames=?,
+    (),
+  ) =>
     new({
+      settings: settings,
       targetLanguageCode: targetLanguageCode,
       sourceLanguageCode: sourceLanguageCode,
       terminologyNames: terminologyNames,
       text: text,
     })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module ListTextTranslationJobs = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>The maximum number of results to return in each page. The default value is 100.</p>"
+    )
+    @as("MaxResults")
+    maxResults: option<maxResultsInteger>,
+    @ocaml.doc("<p>The token to request the next page of results.</p>") @as("NextToken")
+    nextToken: option<nextToken>,
+    @ocaml.doc("<p>The parameters that specify which batch translation jobs to retrieve. Filters include job
+      name, job status, and submission time. You can only set one filter at a time.</p>")
+    @as("Filter")
+    filter: option<textTranslationJobFilter>,
+  }
+  type response = {
+    @ocaml.doc("<p>The token to use to retrieve the next page of results. This value is <code>null</code>
+      when there are no more results to return.</p>")
+    @as("NextToken")
+    nextToken: option<nextToken>,
+    @ocaml.doc("<p>A list containing the properties of each job that is returned.</p>")
+    @as("TextTranslationJobPropertiesList")
+    textTranslationJobPropertiesList: option<textTranslationJobPropertiesList>,
+  }
+  @module("@aws-sdk/client-translate") @new
+  external new: request => t = "ListTextTranslationJobsCommand"
+  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken, filter: filter})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

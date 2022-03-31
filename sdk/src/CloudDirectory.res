@@ -102,9 +102,9 @@ type batchWriteExceptionType = [
   | @as("InternalServiceException") #InternalServiceException
 ]
 @ocaml.doc("<p>Represents the output of a <a>UpdateLinkAttributes</a> response operation.</p>")
-type batchUpdateLinkAttributesResponse = unit
+type batchUpdateLinkAttributesResponse = {.}
 @ocaml.doc("<p>An empty result that represents success.</p>")
-type batchRemoveFacetFromObjectResponse = unit
+type batchRemoveFacetFromObjectResponse = {.}
 type batchReferenceName = string
 type batchReadExceptionType = [
   | @as("InternalServiceException") #InternalServiceException
@@ -123,16 +123,16 @@ type batchReadExceptionType = [
 ]
 type batchOperationIndex = int
 @ocaml.doc("<p>Represents the output of a <a>DetachTypedLink</a> response operation.</p>")
-type batchDetachTypedLinkResponse = unit
+type batchDetachTypedLinkResponse = {.}
 @ocaml.doc("<p>Represents the output of a <a>DetachPolicy</a> response operation.</p>")
-type batchDetachPolicyResponse = unit
+type batchDetachPolicyResponse = {.}
 @ocaml.doc("<p>Represents the output of a <a>DeleteObject</a> response operation.</p>")
-type batchDeleteObjectResponse = unit
+type batchDeleteObjectResponse = {.}
 @ocaml.doc("<p>Represents the output of an <a>AttachPolicy</a> response
       operation.</p>")
-type batchAttachPolicyResponse = unit
+type batchAttachPolicyResponse = {.}
 @ocaml.doc("<p>The result of a batch add facet to object operation.</p>")
-type batchAddFacetToObjectResponse = unit
+type batchAddFacetToObjectResponse = {.}
 type attributeName = string
 type arn = string
 @ocaml.doc("<p>Identifies the schema Amazon Resource Name (ARN) and facet name for the typed
@@ -227,10 +227,11 @@ type tag = {
 }
 @ocaml.doc("<p>A facet.</p>")
 type schemaFacet = {
-  @ocaml.doc("<p>The name of the facet.</p>") @as("FacetName") facetName: option<facetName>,
-  @ocaml.doc(
-    "<p>The ARN of the schema that contains the facet with no minor component. See <a>arns</a> and <a href=\"https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_inplaceschemaupgrade.html\">In-Place Schema Upgrade</a> for a description of when to provide minor versions.</p>"
-  )
+  @ocaml.doc("<p>The name of the facet. If this value is set, SchemaArn must also be set.</p>")
+  @as("FacetName")
+  facetName: option<facetName>,
+  @ocaml.doc("<p>The ARN of the schema that contains the facet with no minor component. See <a>arns</a> and <a href=\"https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_inplaceschemaupgrade.html\">In-Place Schema Upgrade</a> for a description of when to provide minor versions.
+     If this value is set, FacetName must also be set.</p>")
   @as("SchemaArn")
   schemaArn: option<arn>,
 }
@@ -255,7 +256,7 @@ type objectReference = {
          <ul>
             <li>
                <p>
-                  <i>$ObjectIdentifier</i> - An object identifier is an opaque string provided by Amazon Cloud Directory. When creating objects, the system will provide you with the identifier of the created object. An object’s identifier is immutable and no two objects will ever share the same object identifier</p>
+                  <i>$ObjectIdentifier</i> - An object identifier is an opaque string provided by Amazon Cloud Directory. When creating objects, the system will provide you with the identifier of the created object. An object’s identifier is immutable and no two objects will ever share the same object identifier. To identify an object with ObjectIdentifier, the ObjectIdentifier must be wrapped in double quotes. </p>
             </li>
             <li>
                <p>
@@ -497,9 +498,14 @@ type batchListObjectPolicies = {
   @as("ObjectReference")
   objectReference: objectReference,
 }
+@ocaml.doc("<p>Lists parent objects that are associated with a given object in pagination
+      fashion.</p>")
 type batchListObjectParents = {
-  @as("MaxResults") maxResults: option<numberResults>,
-  @as("NextToken") nextToken: option<nextToken>,
+  @ocaml.doc("<p>The maximum number of items to be retrieved in a single call. This is an approximate
+      number.</p>")
+  @as("MaxResults")
+  maxResults: option<numberResults>,
+  @ocaml.doc("<p>The pagination token.</p>") @as("NextToken") nextToken: option<nextToken>,
   @as("ObjectReference") objectReference: objectReference,
 }
 @ocaml.doc(
@@ -701,9 +707,11 @@ type linkAttributeUpdate = {
   @ocaml.doc("<p>The key of the attribute being updated.</p>") @as("AttributeKey")
   attributeKey: option<attributeKey>,
 }
+@ocaml.doc("<p>Represents the output of a <a>ListObjectParents</a> response operation.</p>")
 type batchListObjectParentsResponse = {
-  @as("NextToken") nextToken: option<nextToken>,
-  @as("ParentLinks") parentLinks: option<objectIdentifierAndLinkNameList>,
+  @ocaml.doc("<p>The pagination token.</p>") @as("NextToken") nextToken: option<nextToken>,
+  @ocaml.doc("<p>Returns a list of parent reference and LinkName Tuples.</p>") @as("ParentLinks")
+  parentLinks: option<objectIdentifierAndLinkNameList>,
 }
 @ocaml.doc("<p>Represents the output of a <a>GetObjectInformation</a> response operation.</p>")
 type batchGetObjectInformationResponse = {
@@ -1147,7 +1155,10 @@ type batchReadOperation = {
   @ocaml.doc("<p>Returns policies attached to an object in pagination fashion.</p>")
   @as("ListObjectPolicies")
   listObjectPolicies: option<batchListObjectPolicies>,
-  @as("ListObjectParents") listObjectParents: option<batchListObjectParents>,
+  @ocaml.doc("<p>Lists parent objects that are associated with a given object in pagination
+      fashion.</p>")
+  @as("ListObjectParents")
+  listObjectParents: option<batchListObjectParents>,
   @ocaml.doc("<p>Retrieves attributes within a facet that are associated with an object.</p>")
   @as("GetObjectAttributes")
   getObjectAttributes: option<batchGetObjectAttributes>,
@@ -1196,7 +1207,8 @@ type batchWriteOperationResponseList = array<batchWriteOperationResponse>
 type batchWriteOperationList = array<batchWriteOperation>
 @ocaml.doc("<p>Represents the output of a <code>BatchRead</code> success response operation.</p>")
 type batchReadSuccessfulResponse = {
-  @as("ListObjectParents") listObjectParents: option<batchListObjectParentsResponse>,
+  @ocaml.doc("<p>The list of parent objects to retrieve.</p>") @as("ListObjectParents")
+  listObjectParents: option<batchListObjectParentsResponse>,
   @ocaml.doc("<p>The list of attributes to retrieve from the typed link.</p>")
   @as("GetLinkAttributes")
   getLinkAttributes: option<batchGetLinkAttributesResponse>,
@@ -1477,7 +1489,7 @@ module DeleteTypedLinkFacet = {
     @as("SchemaArn")
     schemaArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-clouddirectory") @new
   external new: request => t = "DeleteTypedLinkFacetCommand"
   let make = (~name, ~schemaArn, ()) => new({name: name, schemaArn: schemaArn})
@@ -1512,7 +1524,7 @@ module DeleteFacet = {
     @as("SchemaArn")
     schemaArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-clouddirectory") @new external new: request => t = "DeleteFacetCommand"
   let make = (~name, ~schemaArn, ()) => new({name: name, schemaArn: schemaArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1621,7 +1633,7 @@ module UntagResource = {
     @as("ResourceArn")
     resourceArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-clouddirectory") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1637,7 +1649,7 @@ module RemoveFacetFromObject = {
     @ocaml.doc("<p>The ARN of the directory in which the object resides.</p>") @as("DirectoryArn")
     directoryArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-clouddirectory") @new
   external new: request => t = "RemoveFacetFromObjectCommand"
   let make = (~objectReference, ~schemaFacet, ~directoryArn, ()) =>
@@ -1997,7 +2009,7 @@ module DetachPolicy = {
     @as("DirectoryArn")
     directoryArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-clouddirectory") @new external new: request => t = "DetachPolicyCommand"
   let make = (~objectReference, ~policyReference, ~directoryArn, ()) =>
     new({
@@ -2075,7 +2087,7 @@ module DeleteObject = {
     @as("DirectoryArn")
     directoryArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-clouddirectory") @new external new: request => t = "DeleteObjectCommand"
   let make = (~objectReference, ~directoryArn, ()) =>
     new({objectReference: objectReference, directoryArn: directoryArn})
@@ -2128,7 +2140,7 @@ module AttachPolicy = {
     @as("DirectoryArn")
     directoryArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-clouddirectory") @new external new: request => t = "AttachPolicyCommand"
   let make = (~objectReference, ~policyReference, ~directoryArn, ()) =>
     new({
@@ -2181,7 +2193,7 @@ module TagResource = {
     @as("ResourceArn")
     resourceArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-clouddirectory") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -2577,7 +2589,7 @@ module AddFacetToObject = {
     @as("DirectoryArn")
     directoryArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-clouddirectory") @new
   external new: request => t = "AddFacetToObjectCommand"
   let make = (~objectReference, ~schemaFacet, ~directoryArn, ~objectAttributeList=?, ()) =>
@@ -2632,7 +2644,7 @@ module UpdateLinkAttributes = {
     @as("DirectoryArn")
     directoryArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-clouddirectory") @new
   external new: request => t = "UpdateLinkAttributesCommand"
   let make = (~attributeUpdates, ~typedLinkSpecifier, ~directoryArn, ()) =>
@@ -2724,7 +2736,7 @@ module DetachTypedLink = {
     @as("DirectoryArn")
     directoryArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-clouddirectory") @new
   external new: request => t = "DetachTypedLinkCommand"
   let make = (~typedLinkSpecifier, ~directoryArn, ()) =>
@@ -3011,7 +3023,7 @@ module UpdateTypedLinkFacet = {
     @as("SchemaArn")
     schemaArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-clouddirectory") @new
   external new: request => t = "UpdateTypedLinkFacetCommand"
   let make = (~identityAttributeOrder, ~attributeUpdates, ~name, ~schemaArn, ()) =>
@@ -3060,7 +3072,7 @@ module CreateTypedLinkFacet = {
     @as("SchemaArn")
     schemaArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-clouddirectory") @new
   external new: request => t = "CreateTypedLinkFacetCommand"
   let make = (~facet, ~schemaArn, ()) => new({facet: facet, schemaArn: schemaArn})
@@ -3110,7 +3122,7 @@ module CreateFacet = {
     @as("SchemaArn")
     schemaArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-clouddirectory") @new external new: request => t = "CreateFacetCommand"
   let make = (~name, ~schemaArn, ~facetStyle=?, ~objectType=?, ~attributes=?, ()) =>
     new({
@@ -3142,7 +3154,7 @@ module UpdateFacet = {
     @as("SchemaArn")
     schemaArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-clouddirectory") @new external new: request => t = "UpdateFacetCommand"
   let make = (~name, ~schemaArn, ~objectType=?, ~attributeUpdates=?, ()) =>
     new({

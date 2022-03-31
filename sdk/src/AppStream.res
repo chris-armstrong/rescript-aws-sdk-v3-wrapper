@@ -24,6 +24,7 @@ type userStackAssociationErrorCode = [
 ]
 type userId = string
 type userAttributeValue = string
+type usbDeviceFilterString = string
 type usageReportSchedule = [@as("DAILY") #DAILY]
 type usageReportExecutionErrorCode = [
   | @as("INTERNAL_SERVICE_ERROR") #INTERNAL_SERVICE_ERROR
@@ -63,10 +64,13 @@ type settingsGroup = string
 @ocaml.doc("<p>Possible values for the state of a streaming session.</p>")
 type sessionState = [@as("EXPIRED") #EXPIRED | @as("PENDING") #PENDING | @as("ACTIVE") #ACTIVE]
 type sessionConnectionState = [@as("NOT_CONNECTED") #NOT_CONNECTED | @as("CONNECTED") #CONNECTED]
+type s3Key = string
+type s3Bucket = string
 @ocaml.doc("<p>The ARN of the resource.</p>") type resourceIdentifier = string
 type regionName = string
 type redirectURL = string
 type platformType = [
+  | @as("AMAZON_LINUX2") #AMAZON_LINUX2
   | @as("WINDOWS_SERVER_2019") #WINDOWS_SERVER_2019
   | @as("WINDOWS_SERVER_2016") #WINDOWS_SERVER_2016
   | @as("WINDOWS") #WINDOWS
@@ -109,7 +113,11 @@ type imageBuilderState = [
   | @as("UPDATING_AGENT") #UPDATING_AGENT
   | @as("PENDING") #PENDING
 ]
-type fleetType = [@as("ON_DEMAND") #ON_DEMAND | @as("ALWAYS_ON") #ALWAYS_ON]
+type fleetType = [
+  | @as("ELASTIC") #ELASTIC
+  | @as("ON_DEMAND") #ON_DEMAND
+  | @as("ALWAYS_ON") #ALWAYS_ON
+]
 type fleetState = [
   | @as("STOPPED") #STOPPED
   | @as("STOPPING") #STOPPING
@@ -154,6 +162,7 @@ type fleetErrorCode = [
 ]
 @ocaml.doc("<p>The fleet attribute.</p>")
 type fleetAttribute = [
+  | @as("USB_DEVICE_FILTER_STRINGS") #USB_DEVICE_FILTER_STRINGS
   | @as("IAM_ROLE_ARN") #IAM_ROLE_ARN
   | @as("DOMAIN_JOIN_INFO") #DOMAIN_JOIN_INFO
   | @as("VPC_CONFIGURATION_SECURITY_GROUP_IDS") #VPC_CONFIGURATION_SECURITY_GROUP_IDS
@@ -176,6 +185,11 @@ type awsAccountId = string
 type authenticationType = [@as("USERPOOL") #USERPOOL | @as("SAML") #SAML | @as("API") #API]
 type arn = string
 type appstreamAgentVersion = string
+type applicationAttribute = [
+  | @as("WORKING_DIRECTORY") #WORKING_DIRECTORY
+  | @as("LAUNCH_PARAMETERS") #LAUNCH_PARAMETERS
+]
+type appVisibility = [@as("ASSOCIATED") #ASSOCIATED | @as("ALL") #ALL]
 type action = [
   | @as("DOMAIN_SMART_CARD_SIGNIN") #DOMAIN_SMART_CARD_SIGNIN
   | @as("DOMAIN_PASSWORD_SIGNIN") #DOMAIN_PASSWORD_SIGNIN
@@ -256,6 +270,7 @@ type user = {
   userName: option<username>,
   @ocaml.doc("<p>The ARN of the user.</p>") @as("Arn") arn: option<arn>,
 }
+type usbDeviceFilterStrings = array<usbDeviceFilterString>
 type tags = Js.Dict.t<tagValue>
 type tagKeyList = array<tagKey>
 @ocaml.doc("<p>The subnet identifiers.</p>") type subnetIdList = array<string_>
@@ -279,6 +294,11 @@ type serviceAccountCredentials = {
   accountName: accountName,
 }
 @ocaml.doc("<p>The security group identifiers.</p>") type securityGroupIdList = array<string_>
+@ocaml.doc("<p>Describes the S3 location.</p>")
+type s3Location = {
+  @ocaml.doc("<p>The S3 key of the S3 object.</p>") @as("S3Key") s3Key: s3Key,
+  @ocaml.doc("<p>The S3 bucket of the S3 object.</p>") @as("S3Bucket") s3Bucket: s3Bucket,
+}
 @ocaml.doc("<p>Describes a resource error.</p>")
 type resourceError = {
   @ocaml.doc("<p>The time the error occurred.</p>") @as("ErrorTimestamp")
@@ -286,6 +306,7 @@ type resourceError = {
   @ocaml.doc("<p>The error message.</p>") @as("ErrorMessage") errorMessage: option<string_>,
   @ocaml.doc("<p>The error code.</p>") @as("ErrorCode") errorCode: option<fleetErrorCode>,
 }
+type platforms = array<platformType>
 type organizationalUnitDistinguishedNamesList = array<organizationalUnitDistinguishedName>
 @ocaml.doc("<p>Describes the network details of the fleet or image builder instance.</p>")
 type networkAccessConfiguration = {
@@ -339,6 +360,52 @@ type fleetError = {
   @ocaml.doc("<p>The error code.</p>") @as("ErrorCode") errorCode: option<fleetErrorCode>,
 }
 @ocaml.doc("<p>The fleet attributes.</p>") type fleetAttributes = array<fleetAttribute>
+@ocaml.doc("<p>An attribute associated with an entitlement. Application entitlements work by matching
+            a supported SAML 2.0 attribute name to a value when a user identity federates to an
+            Amazon AppStream 2.0 SAML application.</p>")
+type entitlementAttribute = {
+  @ocaml.doc("<p>A value that is matched to a supported SAML attribute name when a user identity
+            federates into an Amazon AppStream 2.0 SAML application. </p>")
+  @as("Value")
+  value: string_,
+  @ocaml.doc("<p>A supported AWS IAM SAML <code>PrincipalTag</code> attribute that is matched to the
+            associated value when a user identity federates into an Amazon AppStream 2.0 SAML
+            application.</p>
+        <p>The following are valid values:</p>
+        <ul>
+            <li>
+               <p>roles</p>
+            </li>
+            <li>
+               <p>department </p>
+            </li>
+            <li>
+               <p>organization </p>
+            </li>
+            <li>
+               <p>groups </p>
+            </li>
+            <li>
+               <p>title </p>
+            </li>
+            <li>
+               <p>costCenter </p>
+            </li>
+            <li>
+               <p>userType</p>
+            </li>
+         </ul>
+        <p> </p>")
+  @as("Name")
+  name: string_,
+}
+@ocaml.doc(
+  "<p>The application associated to an entitlement. Access is controlled based on user attributes.</p>"
+)
+type entitledApplication = {
+  @ocaml.doc("<p>The identifier of the application.</p>") @as("ApplicationIdentifier")
+  applicationIdentifier: string_,
+}
 type embedHostDomains = array<embedHostDomain>
 type domainList = array<domain>
 @ocaml.doc(
@@ -403,6 +470,14 @@ type applicationSettings = {
   @as("Enabled")
   enabled: boolean_,
 }
+@ocaml.doc("<p>Describes the application fleet association.</p>")
+type applicationFleetAssociation = {
+  @ocaml.doc("<p>The ARN of the application associated with the fleet.</p>") @as("ApplicationArn")
+  applicationArn: arn,
+  @ocaml.doc("<p>The name of the fleet associated with the application.</p>") @as("FleetName")
+  fleetName: string_,
+}
+type applicationAttributes = array<applicationAttribute>
 @ocaml.doc(
   "<p>Describes an interface VPC endpoint (interface endpoint) that lets you create a private connection between the virtual private cloud (VPC) that you specify and AppStream 2.0. When you specify an interface endpoint for a stack, users of the stack can connect to AppStream 2.0 only through that endpoint. When you specify an interface endpoint for an image builder, administrators can connect to the image builder only through that endpoint.</p>"
 )
@@ -492,9 +567,22 @@ type session = {
   userId: userId,
   @ocaml.doc("<p>The identifier of the streaming session.</p>") @as("Id") id: string_,
 }
+@ocaml.doc("<p>Describes the details of the script.</p>")
+type scriptDetails = {
+  @ocaml.doc("<p>The run timeout, in seconds, for the script.</p>") @as("TimeoutInSeconds")
+  timeoutInSeconds: integer_,
+  @ocaml.doc("<p>The runtime parameters passed to the run path for the script.</p>")
+  @as("ExecutableParameters")
+  executableParameters: option<string_>,
+  @ocaml.doc("<p>The run path for the script.</p>") @as("ExecutablePath") executablePath: string_,
+  @ocaml.doc("<p>The S3 object location for the script.</p>") @as("ScriptS3Location")
+  scriptS3Location: s3Location,
+}
 type resourceErrors = array<resourceError>
 type lastReportGenerationExecutionErrors = array<lastReportGenerationExecutionError>
 type fleetErrors = array<fleetError>
+type entitlementAttributeList = array<entitlementAttribute>
+type entitledApplicationList = array<entitledApplication>
 @ocaml.doc(
   "<p>Describes the configuration information required to join fleets and image builders to Microsoft Active Directory domains.</p>"
 )
@@ -513,8 +601,25 @@ type directoryConfig = {
   @as("DirectoryName")
   directoryName: directoryName,
 }
+type applicationFleetAssociationList = array<applicationFleetAssociation>
 @ocaml.doc("<p>Describes an application in the application catalog.</p>")
 type application = {
+  @ocaml.doc("<p>The time at which the application was created within the app block.</p>")
+  @as("CreatedTime")
+  createdTime: option<timestamp_>,
+  @ocaml.doc("<p>The instance families for the application.</p>") @as("InstanceFamilies")
+  instanceFamilies: option<stringList>,
+  @ocaml.doc("<p>The platforms on which the application can run.</p>") @as("Platforms")
+  platforms: option<platforms>,
+  @ocaml.doc("<p>The S3 location of the application icon.</p>") @as("IconS3Location")
+  iconS3Location: option<s3Location>,
+  @ocaml.doc("<p>The app block ARN of the application.</p>") @as("AppBlockArn")
+  appBlockArn: option<arn>,
+  @ocaml.doc("<p>The ARN of the application.</p>") @as("Arn") arn: option<arn>,
+  @ocaml.doc("<p>The description of the application.</p>") @as("Description")
+  description: option<string_>,
+  @ocaml.doc("<p>The working directory for the application.</p>") @as("WorkingDirectory")
+  workingDirectory: option<string_>,
   @ocaml.doc("<p>Additional attributes that describe the application.</p>") @as("Metadata")
   metadata: option<metadata>,
   @ocaml.doc("<p>If there is a problem, the application can be disabled after image creation.</p>")
@@ -709,6 +814,13 @@ type imageBuilder = {
 }
 @ocaml.doc("<p>Describes a fleet.</p>")
 type fleet = {
+  @ocaml.doc("<p>The USB device filter strings associated with the fleet.</p>")
+  @as("UsbDeviceFilterStrings")
+  usbDeviceFilterStrings: option<usbDeviceFilterStrings>,
+  @ocaml.doc("<p>The maximum number of concurrent sessions for the fleet.</p>")
+  @as("MaxConcurrentSessions")
+  maxConcurrentSessions: option<integer_>,
+  @ocaml.doc("<p>The platform of the fleet.</p>") @as("Platform") platform: option<platformType>,
   @ocaml.doc("<p>The AppStream 2.0 view that is displayed to your users when they stream from the fleet. When <code>APP</code> is specified, only the windows of applications opened by users display. When <code>DESKTOP</code> is specified, the standard desktop that is provided by the operating system displays.</p>
         
         <p>The default value is <code>APP</code>.</p>")
@@ -889,8 +1001,51 @@ type fleet = {
   @ocaml.doc("<p>The name of the fleet.</p>") @as("Name") name: string_,
   @ocaml.doc("<p>The Amazon Resource Name (ARN) for the fleet.</p>") @as("Arn") arn: arn,
 }
+@ocaml.doc("<p>Specifies an entitlement. Entitlements control access to specific applications within
+            a stack, based on user attributes. Entitlements apply to SAML 2.0 federated user
+            identities. Amazon AppStream 2.0 user pool and streaming URL users are entitled to all
+            applications in a stack. Entitlements don't apply to the desktop stream view
+            application, or to applications managed by a dynamic app provider using the Dynamic
+            Application Framework.</p>")
+type entitlement = {
+  @ocaml.doc("<p>The time when the entitlement was last modified.</p>") @as("LastModifiedTime")
+  lastModifiedTime: option<timestamp_>,
+  @ocaml.doc("<p>The time when the entitlement was created.</p>") @as("CreatedTime")
+  createdTime: option<timestamp_>,
+  @ocaml.doc("<p>The attributes of the entitlement.</p>") @as("Attributes")
+  attributes: entitlementAttributeList,
+  @ocaml.doc("<p>Specifies whether all or selected apps are entitled.</p>") @as("AppVisibility")
+  appVisibility: appVisibility,
+  @ocaml.doc("<p>The description of the entitlement.</p>") @as("Description")
+  description: option<description>,
+  @ocaml.doc("<p>The name of the stack with which the entitlement is associated.</p>")
+  @as("StackName")
+  stackName: name,
+  @ocaml.doc("<p>The name of the entitlement.</p>") @as("Name") name: name,
+}
 type directoryConfigList = array<directoryConfig>
 type applications = array<application>
+@ocaml.doc("<p>Describes an app block.</p>
+         <p>App blocks are an Amazon AppStream 2.0 resource that stores the details about the
+           virtual hard disk in an S3 bucket. It also stores the setup script with details about
+           how to mount the virtual hard disk. The virtual hard disk includes the application
+           binaries and other files necessary to launch your applications. Multiple applications
+           can be assigned to a single app block.</p>
+         <p>This is only supported for Elastic fleets.</p>")
+type appBlock = {
+  @ocaml.doc("<p>The created time of the app block.</p>") @as("CreatedTime")
+  createdTime: option<timestamp_>,
+  @ocaml.doc("<p>The setup script details of the app block.</p>") @as("SetupScriptDetails")
+  setupScriptDetails: scriptDetails,
+  @ocaml.doc("<p>The source S3 location of the app block.</p>") @as("SourceS3Location")
+  sourceS3Location: option<s3Location>,
+  @ocaml.doc("<p>The display name of the app block.</p>") @as("DisplayName")
+  displayName: option<string_>,
+  @ocaml.doc("<p>The description of the app block.</p>") @as("Description")
+  description: option<string_>,
+  @ocaml.doc("<p>The ARN of the app block.</p>") @as("Arn") arn: arn,
+  @ocaml.doc("<p>The name of the app block.</p>") @as("Name") name: string_,
+}
 type usageReportSubscriptionList = array<usageReportSubscription>
 @ocaml.doc("<p>Describes a stack.</p>")
 type stack = {
@@ -981,6 +1136,8 @@ type image = {
   @ocaml.doc("<p>The name of the image.</p>") @as("Name") name: string_,
 }
 @ocaml.doc("<p>The fleets.</p>") type fleetList = array<fleet>
+type entitlementList = array<entitlement>
+type appBlocks = array<appBlock>
 @ocaml.doc("<p>The stacks.</p>") type stackList = array<stack>
 type imageList = array<image>
 @ocaml.doc("<fullname>Amazon AppStream 2.0</fullname>
@@ -1007,7 +1164,7 @@ type imageList = array<image>
 module StopFleet = {
   type t
   type request = {@ocaml.doc("<p>The name of the fleet.</p>") @as("Name") name: string_}
-
+  type response = {.}
   @module("@aws-sdk/client-appstream") @new external new: request => t = "StopFleetCommand"
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1016,7 +1173,7 @@ module StopFleet = {
 module StartFleet = {
   type t
   type request = {@ocaml.doc("<p>The name of the fleet.</p>") @as("Name") name: string_}
-
+  type response = {.}
   @module("@aws-sdk/client-appstream") @new external new: request => t = "StartFleetCommand"
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1028,7 +1185,7 @@ module ExpireSession = {
     @ocaml.doc("<p>The identifier of the streaming session.</p>") @as("SessionId")
     sessionId: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-appstream") @new external new: request => t = "ExpireSessionCommand"
   let make = (~sessionId, ()) => new({sessionId: sessionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1048,7 +1205,7 @@ module EnableUser = {
     @as("UserName")
     userName: username,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-appstream") @new external new: request => t = "EnableUserCommand"
   let make = (~authenticationType, ~userName, ()) =>
     new({authenticationType: authenticationType, userName: userName})
@@ -1061,9 +1218,46 @@ module DisassociateFleet = {
     @ocaml.doc("<p>The name of the stack.</p>") @as("StackName") stackName: string_,
     @ocaml.doc("<p>The name of the fleet.</p>") @as("FleetName") fleetName: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-appstream") @new external new: request => t = "DisassociateFleetCommand"
   let make = (~stackName, ~fleetName, ()) => new({stackName: stackName, fleetName: fleetName})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module DisassociateApplicationFromEntitlement = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The identifier of the application to remove from the entitlement.</p>")
+    @as("ApplicationIdentifier")
+    applicationIdentifier: string_,
+    @ocaml.doc("<p>The name of the entitlement.</p>") @as("EntitlementName") entitlementName: name,
+    @ocaml.doc("<p>The name of the stack with which the entitlement is associated.</p>")
+    @as("StackName")
+    stackName: name,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-appstream") @new
+  external new: request => t = "DisassociateApplicationFromEntitlementCommand"
+  let make = (~applicationIdentifier, ~entitlementName, ~stackName, ()) =>
+    new({
+      applicationIdentifier: applicationIdentifier,
+      entitlementName: entitlementName,
+      stackName: stackName,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module DisassociateApplicationFleet = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The ARN of the application.</p>") @as("ApplicationArn") applicationArn: arn,
+    @ocaml.doc("<p>The name of the fleet.</p>") @as("FleetName") fleetName: name,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-appstream") @new
+  external new: request => t = "DisassociateApplicationFleetCommand"
+  let make = (~applicationArn, ~fleetName, ()) =>
+    new({applicationArn: applicationArn, fleetName: fleetName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -1081,7 +1275,7 @@ module DisableUser = {
     @as("UserName")
     userName: username,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-appstream") @new external new: request => t = "DisableUserCommand"
   let make = (~authenticationType, ~userName, ()) =>
     new({authenticationType: authenticationType, userName: userName})
@@ -1102,7 +1296,7 @@ module DeleteUser = {
     @as("UserName")
     userName: username,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-appstream") @new external new: request => t = "DeleteUserCommand"
   let make = (~authenticationType, ~userName, ()) =>
     new({authenticationType: authenticationType, userName: userName})
@@ -1111,17 +1305,18 @@ module DeleteUser = {
 
 module DeleteUsageReportSubscription = {
   type t
-
+  type request = {.}
+  type response = {.}
   @module("@aws-sdk/client-appstream") @new
-  external new: unit => t = "DeleteUsageReportSubscriptionCommand"
-  let make = () => new()
+  external new: request => t = "DeleteUsageReportSubscriptionCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteStack = {
   type t
   type request = {@ocaml.doc("<p>The name of the stack.</p>") @as("Name") name: string_}
-
+  type response = {.}
   @module("@aws-sdk/client-appstream") @new external new: request => t = "DeleteStackCommand"
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1137,7 +1332,7 @@ module DeleteImagePermissions = {
     sharedAccountId: awsAccountId,
     @ocaml.doc("<p>The name of the private image.</p>") @as("Name") name: name,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-appstream") @new
   external new: request => t = "DeleteImagePermissionsCommand"
   let make = (~sharedAccountId, ~name, ()) => new({sharedAccountId: sharedAccountId, name: name})
@@ -1147,9 +1342,23 @@ module DeleteImagePermissions = {
 module DeleteFleet = {
   type t
   type request = {@ocaml.doc("<p>The name of the fleet.</p>") @as("Name") name: string_}
-
+  type response = {.}
   @module("@aws-sdk/client-appstream") @new external new: request => t = "DeleteFleetCommand"
   let make = (~name, ()) => new({name: name})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module DeleteEntitlement = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The name of the stack with which the entitlement is associated.</p>")
+    @as("StackName")
+    stackName: name,
+    @ocaml.doc("<p>The name of the entitlement.</p>") @as("Name") name: name,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-appstream") @new external new: request => t = "DeleteEntitlementCommand"
+  let make = (~stackName, ~name, ()) => new({stackName: stackName, name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -1159,10 +1368,28 @@ module DeleteDirectoryConfig = {
     @ocaml.doc("<p>The name of the directory configuration.</p>") @as("DirectoryName")
     directoryName: directoryName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-appstream") @new
   external new: request => t = "DeleteDirectoryConfigCommand"
   let make = (~directoryName, ()) => new({directoryName: directoryName})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module DeleteApplication = {
+  type t
+  type request = {@ocaml.doc("<p>The name of the application.</p>") @as("Name") name: name}
+  type response = {.}
+  @module("@aws-sdk/client-appstream") @new external new: request => t = "DeleteApplicationCommand"
+  let make = (~name, ()) => new({name: name})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module DeleteAppBlock = {
+  type t
+  type request = {@ocaml.doc("<p>The name of the app block.</p>") @as("Name") name: name}
+  type response = {.}
+  @module("@aws-sdk/client-appstream") @new external new: request => t = "DeleteAppBlockCommand"
+  let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -1191,7 +1418,7 @@ module CreateUser = {
     @as("UserName")
     userName: username,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-appstream") @new external new: request => t = "CreateUserCommand"
   let make = (~authenticationType, ~userName, ~lastName=?, ~firstName=?, ~messageAction=?, ()) =>
     new({
@@ -1206,7 +1433,7 @@ module CreateUser = {
 
 module CreateUsageReportSubscription = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("<p>The schedule for generating usage reports.</p>") @as("Schedule")
     schedule: option<usageReportSchedule>,
@@ -1221,8 +1448,8 @@ module CreateUsageReportSubscription = {
     s3BucketName: option<string_>,
   }
   @module("@aws-sdk/client-appstream") @new
-  external new: unit => t = "CreateUsageReportSubscriptionCommand"
-  let make = () => new()
+  external new: request => t = "CreateUsageReportSubscriptionCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1342,9 +1569,29 @@ module AssociateFleet = {
     @ocaml.doc("<p>The name of the stack.</p>") @as("StackName") stackName: string_,
     @ocaml.doc("<p>The name of the fleet. </p>") @as("FleetName") fleetName: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-appstream") @new external new: request => t = "AssociateFleetCommand"
   let make = (~stackName, ~fleetName, ()) => new({stackName: stackName, fleetName: fleetName})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module AssociateApplicationToEntitlement = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The identifier of the application.</p>") @as("ApplicationIdentifier")
+    applicationIdentifier: string_,
+    @ocaml.doc("<p>The name of the entitlement.</p>") @as("EntitlementName") entitlementName: name,
+    @ocaml.doc("<p>The name of the stack.</p>") @as("StackName") stackName: name,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-appstream") @new
+  external new: request => t = "AssociateApplicationToEntitlementCommand"
+  let make = (~applicationIdentifier, ~entitlementName, ~stackName, ()) =>
+    new({
+      applicationIdentifier: applicationIdentifier,
+      entitlementName: entitlementName,
+      stackName: stackName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -1360,7 +1607,7 @@ module UpdateImagePermissions = {
     sharedAccountId: awsAccountId,
     @ocaml.doc("<p>The name of the private image.</p>") @as("Name") name: name,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-appstream") @new
   external new: request => t = "UpdateImagePermissionsCommand"
   let make = (~imagePermissions, ~sharedAccountId, ~name, ()) =>
@@ -1376,7 +1623,7 @@ module UntagResource = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the resource.</p>") @as("ResourceArn")
     resourceArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-appstream") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1396,7 +1643,7 @@ module TagResource = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the resource.</p>") @as("ResourceArn")
     resourceArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-appstream") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1465,6 +1712,26 @@ module ListAssociatedFleets = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module AssociateApplicationFleet = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The ARN of the application.</p>") @as("ApplicationArn") applicationArn: arn,
+    @ocaml.doc("<p>The name of the fleet.</p>") @as("FleetName") fleetName: name,
+  }
+  type response = {
+    @ocaml.doc("<p>If fleet name is specified, this returns the list of applications that are associated
+            to it. If application ARN is specified, this returns the list of fleets to which it is
+            associated.</p>")
+    @as("ApplicationFleetAssociation")
+    applicationFleetAssociation: option<applicationFleetAssociation>,
+  }
+  @module("@aws-sdk/client-appstream") @new
+  external new: request => t = "AssociateApplicationFleetCommand"
+  let make = (~applicationArn, ~fleetName, ()) =>
+    new({applicationArn: applicationArn, fleetName: fleetName})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module UpdateDirectoryConfig = {
   type t
   type request = {
@@ -1495,6 +1762,97 @@ module UpdateDirectoryConfig = {
       serviceAccountCredentials: serviceAccountCredentials,
       organizationalUnitDistinguishedNames: organizationalUnitDistinguishedNames,
       directoryName: directoryName,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module UpdateApplication = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The attributes to delete for an application.</p>") @as("AttributesToDelete")
+    attributesToDelete: option<applicationAttributes>,
+    @ocaml.doc("<p>The ARN of the app block.</p>") @as("AppBlockArn") appBlockArn: option<arn>,
+    @ocaml.doc("<p>The launch parameters of the application.</p>") @as("LaunchParameters")
+    launchParameters: option<string_>,
+    @ocaml.doc("<p>The working directory of the application.</p>") @as("WorkingDirectory")
+    workingDirectory: option<string_>,
+    @ocaml.doc("<p>The launch path of the application.</p>") @as("LaunchPath")
+    launchPath: option<string_>,
+    @ocaml.doc("<p>The icon S3 location of the application.</p>") @as("IconS3Location")
+    iconS3Location: option<s3Location>,
+    @ocaml.doc("<p>The description of the application.</p>") @as("Description")
+    description: option<description>,
+    @ocaml.doc(
+      "<p>The display name of the application. This name is visible to users in the application catalog.</p>"
+    )
+    @as("DisplayName")
+    displayName: option<displayName>,
+    @ocaml.doc(
+      "<p>The name of the application. This name is visible to users when display name is not specified.</p>"
+    )
+    @as("Name")
+    name: name,
+  }
+  type response = {@as("Application") application: option<application>}
+  @module("@aws-sdk/client-appstream") @new external new: request => t = "UpdateApplicationCommand"
+  let make = (
+    ~name,
+    ~attributesToDelete=?,
+    ~appBlockArn=?,
+    ~launchParameters=?,
+    ~workingDirectory=?,
+    ~launchPath=?,
+    ~iconS3Location=?,
+    ~description=?,
+    ~displayName=?,
+    (),
+  ) =>
+    new({
+      attributesToDelete: attributesToDelete,
+      appBlockArn: appBlockArn,
+      launchParameters: launchParameters,
+      workingDirectory: workingDirectory,
+      launchPath: launchPath,
+      iconS3Location: iconS3Location,
+      description: description,
+      displayName: displayName,
+      name: name,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module ListEntitledApplications = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The maximum size of each page of results.</p>") @as("MaxResults")
+    maxResults: option<integer_>,
+    @ocaml.doc(
+      "<p>The pagination token used to retrieve the next page of results for this operation.</p>"
+    )
+    @as("NextToken")
+    nextToken: option<string_>,
+    @ocaml.doc("<p>The name of the entitlement.</p>") @as("EntitlementName") entitlementName: name,
+    @ocaml.doc("<p>The name of the stack with which the entitlement is associated.</p>")
+    @as("StackName")
+    stackName: name,
+  }
+  type response = {
+    @ocaml.doc(
+      "<p>The pagination token used to retrieve the next page of results for this operation.</p>"
+    )
+    @as("NextToken")
+    nextToken: option<string_>,
+    @ocaml.doc("<p>The entitled applications.</p>") @as("EntitledApplications")
+    entitledApplications: option<entitledApplicationList>,
+  }
+  @module("@aws-sdk/client-appstream") @new
+  external new: request => t = "ListEntitledApplicationsCommand"
+  let make = (~entitlementName, ~stackName, ~maxResults=?, ~nextToken=?, ()) =>
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      entitlementName: entitlementName,
+      stackName: stackName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
@@ -1577,6 +1935,40 @@ module DescribeUserStackAssociations = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module DescribeApplicationFleetAssociations = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The pagination token used to retrieve the next page of results for this
+            operation.</p>")
+    @as("NextToken")
+    nextToken: option<string_>,
+    @ocaml.doc("<p>The maximum size of each page of results.</p>") @as("MaxResults")
+    maxResults: option<integer_>,
+    @ocaml.doc("<p>The ARN of the application.</p>") @as("ApplicationArn")
+    applicationArn: option<arn>,
+    @ocaml.doc("<p>The name of the fleet.</p>") @as("FleetName") fleetName: option<name>,
+  }
+  type response = {
+    @ocaml.doc("<p>The pagination token used to retrieve the next page of results for this
+            operation.</p>")
+    @as("NextToken")
+    nextToken: option<string_>,
+    @ocaml.doc("<p>The application fleet associations in the list.</p>")
+    @as("ApplicationFleetAssociations")
+    applicationFleetAssociations: option<applicationFleetAssociationList>,
+  }
+  @module("@aws-sdk/client-appstream") @new
+  external new: request => t = "DescribeApplicationFleetAssociationsCommand"
+  let make = (~nextToken=?, ~maxResults=?, ~applicationArn=?, ~fleetName=?, ()) =>
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      applicationArn: applicationArn,
+      fleetName: fleetName,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module CreateDirectoryConfig = {
   type t
   type request = {
@@ -1612,9 +2004,91 @@ module CreateDirectoryConfig = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module CreateApplication = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The tags assigned to the application.</p>") @as("Tags") tags: option<tags>,
+    @ocaml.doc("<p>The app block ARN to which the application should be associated</p>")
+    @as("AppBlockArn")
+    appBlockArn: arn,
+    @ocaml.doc(
+      "<p>The instance families the application supports. Valid values are GENERAL_PURPOSE and GRAPHICS_G4.</p>"
+    )
+    @as("InstanceFamilies")
+    instanceFamilies: stringList,
+    @ocaml.doc(
+      "<p>The platforms the application supports. WINDOWS_SERVER_2019 and AMAZON_LINUX2 are supported for Elastic fleets.</p>"
+    )
+    @as("Platforms")
+    platforms: platforms,
+    @ocaml.doc("<p>The launch parameters of the application.</p>") @as("LaunchParameters")
+    launchParameters: option<string_>,
+    @ocaml.doc("<p>The working directory of the application.</p>") @as("WorkingDirectory")
+    workingDirectory: option<string_>,
+    @ocaml.doc("<p>The launch path of the application.</p>") @as("LaunchPath") launchPath: string_,
+    @ocaml.doc("<p>The location in S3 of the application icon.</p>") @as("IconS3Location")
+    iconS3Location: s3Location,
+    @ocaml.doc("<p>The description of the application.</p>") @as("Description")
+    description: option<description>,
+    @ocaml.doc(
+      "<p>The display name of the application. This name is visible to users in the application catalog.</p>"
+    )
+    @as("DisplayName")
+    displayName: option<displayName>,
+    @ocaml.doc(
+      "<p>The name of the application. This name is visible to users when display name is not specified.</p>"
+    )
+    @as("Name")
+    name: name,
+  }
+  type response = {@as("Application") application: option<application>}
+  @module("@aws-sdk/client-appstream") @new external new: request => t = "CreateApplicationCommand"
+  let make = (
+    ~appBlockArn,
+    ~instanceFamilies,
+    ~platforms,
+    ~launchPath,
+    ~iconS3Location,
+    ~name,
+    ~tags=?,
+    ~launchParameters=?,
+    ~workingDirectory=?,
+    ~description=?,
+    ~displayName=?,
+    (),
+  ) =>
+    new({
+      tags: tags,
+      appBlockArn: appBlockArn,
+      instanceFamilies: instanceFamilies,
+      platforms: platforms,
+      launchParameters: launchParameters,
+      workingDirectory: workingDirectory,
+      launchPath: launchPath,
+      iconS3Location: iconS3Location,
+      description: description,
+      displayName: displayName,
+      name: name,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module UpdateFleet = {
   type t
   type request = {
+    @ocaml.doc(
+      "<p>The USB device filter strings that specify which USB devices a user can redirect to the fleet streaming session, when using the Windows native client. This is allowed but not required for Elastic fleets.</p>"
+    )
+    @as("UsbDeviceFilterStrings")
+    usbDeviceFilterStrings: option<usbDeviceFilterStrings>,
+    @ocaml.doc("<p>The maximum number of concurrent sessions for a fleet.</p>")
+    @as("MaxConcurrentSessions")
+    maxConcurrentSessions: option<integer_>,
+    @ocaml.doc(
+      "<p>The platform of the fleet. WINDOWS_SERVER_2019 and AMAZON_LINUX2 are supported for Elastic fleets. </p>"
+    )
+    @as("Platform")
+    platform: option<platformType>,
     @ocaml.doc("<p>The AppStream 2.0 view that is displayed to your users when they stream from the fleet. When <code>APP</code> is specified, only the windows of applications opened by users display. When <code>DESKTOP</code> is specified, the standard desktop that is provided by the operating system displays.</p>
         
         <p>The default value is <code>APP</code>.</p>")
@@ -1666,9 +2140,13 @@ module UpdateFleet = {
         <p>Specify a value between 600 and 360000.</p>")
     @as("MaxUserDurationInSeconds")
     maxUserDurationInSeconds: option<integer_>,
-    @ocaml.doc("<p>The VPC configuration for the fleet.</p>") @as("VpcConfig")
+    @ocaml.doc(
+      "<p>The VPC configuration for the fleet. This is required for Elastic fleets, but not required for other fleet types. Elastic fleets require that you specify at least two subnets in different availability zones. </p>"
+    )
+    @as("VpcConfig")
     vpcConfig: option<vpcConfig>,
-    @ocaml.doc("<p>The desired capacity for the fleet.</p>") @as("ComputeCapacity")
+    @ocaml.doc("<p>The desired capacity for the fleet. This is not allowed for Elastic fleets.</p>")
+    @as("ComputeCapacity")
     computeCapacity: option<computeCapacity>,
     @ocaml.doc("<p>The instance type to use when launching fleet instances. The following instance types are available:</p>
         <ul>
@@ -1771,6 +2249,15 @@ module UpdateFleet = {
             <li>
                <p>stream.graphics-pro.16xlarge</p>
             </li>
+         </ul> 
+        <p>The following instance types are available for Elastic fleets:</p>
+        <ul>
+            <li>
+               <p>stream.standard.small</p>
+            </li>
+            <li>
+               <p>stream.standard.medium</p>
+            </li>
          </ul>")
     @as("InstanceType")
     instanceType: option<string_>,
@@ -1785,6 +2272,9 @@ module UpdateFleet = {
   }
   @module("@aws-sdk/client-appstream") @new external new: request => t = "UpdateFleetCommand"
   let make = (
+    ~usbDeviceFilterStrings=?,
+    ~maxConcurrentSessions=?,
+    ~platform=?,
     ~streamView=?,
     ~iamRoleArn=?,
     ~attributesToDelete=?,
@@ -1805,6 +2295,9 @@ module UpdateFleet = {
     (),
   ) =>
     new({
+      usbDeviceFilterStrings: usbDeviceFilterStrings,
+      maxConcurrentSessions: maxConcurrentSessions,
+      platform: platform,
       streamView: streamView,
       iamRoleArn: iamRoleArn,
       attributesToDelete: attributesToDelete,
@@ -1822,6 +2315,36 @@ module UpdateFleet = {
       name: name,
       imageArn: imageArn,
       imageName: imageName,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module UpdateEntitlement = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The attributes of the entitlement.</p>") @as("Attributes")
+    attributes: option<entitlementAttributeList>,
+    @ocaml.doc("<p>Specifies whether all or only selected apps are entitled.</p>")
+    @as("AppVisibility")
+    appVisibility: option<appVisibility>,
+    @ocaml.doc("<p>The description of the entitlement.</p>") @as("Description")
+    description: option<description>,
+    @ocaml.doc("<p>The name of the stack with which the entitlement is associated.</p>")
+    @as("StackName")
+    stackName: name,
+    @ocaml.doc("<p>The name of the entitlement.</p>") @as("Name") name: name,
+  }
+  type response = {
+    @ocaml.doc("<p>The entitlement.</p>") @as("Entitlement") entitlement: option<entitlement>,
+  }
+  @module("@aws-sdk/client-appstream") @new external new: request => t = "UpdateEntitlementCommand"
+  let make = (~stackName, ~name, ~attributes=?, ~appVisibility=?, ~description=?, ()) =>
+    new({
+      attributes: attributes,
+      appVisibility: appVisibility,
+      description: description,
+      stackName: stackName,
+      name: name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
@@ -1989,6 +2512,32 @@ module DescribeDirectoryConfigs = {
   external new: request => t = "DescribeDirectoryConfigsCommand"
   let make = (~nextToken=?, ~maxResults=?, ~directoryNames=?, ()) =>
     new({nextToken: nextToken, maxResults: maxResults, directoryNames: directoryNames})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module DescribeApplications = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The maximum size of each page of results.</p>") @as("MaxResults")
+    maxResults: option<integer_>,
+    @ocaml.doc("<p>The pagination token used to retrieve the next page of results for this
+            operation.</p>")
+    @as("NextToken")
+    nextToken: option<string_>,
+    @ocaml.doc("<p>The ARNs for the applications.</p>") @as("Arns") arns: option<arnList>,
+  }
+  type response = {
+    @ocaml.doc("<p>The pagination token used to retrieve the next page of results for this
+            operation.</p>")
+    @as("NextToken")
+    nextToken: option<string_>,
+    @ocaml.doc("<p>The applications in the list.</p>") @as("Applications")
+    applications: option<applications>,
+  }
+  @module("@aws-sdk/client-appstream") @new
+  external new: request => t = "DescribeApplicationsCommand"
+  let make = (~maxResults=?, ~nextToken=?, ~arns=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken, arns: arns})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -2201,6 +2750,19 @@ module CreateImageBuilder = {
 module CreateFleet = {
   type t
   type request = {
+    @ocaml.doc(
+      "<p>The USB device filter strings that specify which USB devices a user can redirect to the fleet streaming session, when using the Windows native client. This is allowed but not required for Elastic fleets.</p>"
+    )
+    @as("UsbDeviceFilterStrings")
+    usbDeviceFilterStrings: option<usbDeviceFilterStrings>,
+    @ocaml.doc("<p>The maximum concurrent sessions of the Elastic fleet. This is required for Elastic
+            fleets, and not allowed for other fleet types.</p>")
+    @as("MaxConcurrentSessions")
+    maxConcurrentSessions: option<integer_>,
+    @ocaml.doc("<p>The fleet platform. WINDOWS_SERVER_2019 and AMAZON_LINUX2 are supported for Elastic
+            fleets. </p>")
+    @as("Platform")
+    platform: option<platformType>,
     @ocaml.doc("<p>The AppStream 2.0 view that is displayed to your users when they stream from the fleet. When <code>APP</code> is specified, only the windows of applications opened by users display. When <code>DESKTOP</code> is specified, the standard desktop that is provided by the operating system displays.</p>
         
         <p>The default value is <code>APP</code>.</p>")
@@ -2238,7 +2800,7 @@ module CreateFleet = {
     @as("Tags")
     tags: option<tags>,
     @ocaml.doc(
-      "<p>The name of the directory and organizational unit (OU) to use to join the fleet to a Microsoft Active Directory domain. </p>"
+      "<p>The name of the directory and organizational unit (OU) to use to join the fleet to a Microsoft Active Directory domain. This is not allowed for Elastic fleets. </p>"
     )
     @as("DomainJoinInfo")
     domainJoinInfo: option<domainJoinInfo>,
@@ -2257,10 +2819,16 @@ module CreateFleet = {
         <p>Specify a value between 600 and 360000.</p>")
     @as("MaxUserDurationInSeconds")
     maxUserDurationInSeconds: option<integer_>,
-    @ocaml.doc("<p>The VPC configuration for the fleet.</p>") @as("VpcConfig")
+    @ocaml.doc(
+      "<p>The VPC configuration for the fleet. This is required for Elastic fleets, but not required for other fleet types. Elastic fleets require that you specify at least two subnets in different availability zones.</p>"
+    )
+    @as("VpcConfig")
     vpcConfig: option<vpcConfig>,
-    @ocaml.doc("<p>The desired capacity for the fleet.</p>") @as("ComputeCapacity")
-    computeCapacity: computeCapacity,
+    @ocaml.doc(
+      "<p>The desired capacity for the fleet. This is not allowed for Elastic fleets. For Elastic fleets, specify MaxConcurrentSessions instead.</p>"
+    )
+    @as("ComputeCapacity")
+    computeCapacity: option<computeCapacity>,
     @ocaml.doc("<p>The fleet type.</p>
         <dl>
             <dt>ALWAYS_ON</dt>
@@ -2378,6 +2946,15 @@ module CreateFleet = {
             <li>
                <p>stream.graphics-pro.16xlarge</p>
             </li>
+         </ul> 
+        <p>The following instance types are available for Elastic fleets:</p>
+        <ul>
+            <li>
+               <p>stream.standard.small</p>
+            </li>
+            <li>
+               <p>stream.standard.medium</p>
+            </li>
          </ul>")
     @as("InstanceType")
     instanceType: string_,
@@ -2392,9 +2969,11 @@ module CreateFleet = {
   }
   @module("@aws-sdk/client-appstream") @new external new: request => t = "CreateFleetCommand"
   let make = (
-    ~computeCapacity,
     ~instanceType,
     ~name,
+    ~usbDeviceFilterStrings=?,
+    ~maxConcurrentSessions=?,
+    ~platform=?,
     ~streamView=?,
     ~iamRoleArn=?,
     ~idleDisconnectTimeoutInSeconds=?,
@@ -2406,12 +2985,16 @@ module CreateFleet = {
     ~disconnectTimeoutInSeconds=?,
     ~maxUserDurationInSeconds=?,
     ~vpcConfig=?,
+    ~computeCapacity=?,
     ~fleetType=?,
     ~imageArn=?,
     ~imageName=?,
     (),
   ) =>
     new({
+      usbDeviceFilterStrings: usbDeviceFilterStrings,
+      maxConcurrentSessions: maxConcurrentSessions,
+      platform: platform,
       streamView: streamView,
       iamRoleArn: iamRoleArn,
       idleDisconnectTimeoutInSeconds: idleDisconnectTimeoutInSeconds,
@@ -2428,6 +3011,72 @@ module CreateFleet = {
       instanceType: instanceType,
       imageArn: imageArn,
       imageName: imageName,
+      name: name,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module CreateEntitlement = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The attributes of the entitlement.</p>") @as("Attributes")
+    attributes: entitlementAttributeList,
+    @ocaml.doc("<p>Specifies whether all or selected apps are entitled.</p>") @as("AppVisibility")
+    appVisibility: appVisibility,
+    @ocaml.doc("<p>The description of the entitlement.</p>") @as("Description")
+    description: option<description>,
+    @ocaml.doc("<p>The name of the stack with which the entitlement is associated.</p>")
+    @as("StackName")
+    stackName: name,
+    @ocaml.doc("<p>The name of the entitlement.</p>") @as("Name") name: name,
+  }
+  type response = {
+    @ocaml.doc("<p>The entitlement.</p>") @as("Entitlement") entitlement: option<entitlement>,
+  }
+  @module("@aws-sdk/client-appstream") @new external new: request => t = "CreateEntitlementCommand"
+  let make = (~attributes, ~appVisibility, ~stackName, ~name, ~description=?, ()) =>
+    new({
+      attributes: attributes,
+      appVisibility: appVisibility,
+      description: description,
+      stackName: stackName,
+      name: name,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module CreateAppBlock = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The tags assigned to the app block.</p>") @as("Tags") tags: option<tags>,
+    @ocaml.doc("<p>The setup script details of the app block.</p>") @as("SetupScriptDetails")
+    setupScriptDetails: scriptDetails,
+    @ocaml.doc("<p>The source S3 location of the app block.</p>") @as("SourceS3Location")
+    sourceS3Location: s3Location,
+    @ocaml.doc("<p>The display name of the app block. This is not displayed to the user.</p>")
+    @as("DisplayName")
+    displayName: option<displayName>,
+    @ocaml.doc("<p>The description of the app block.</p>") @as("Description")
+    description: option<description>,
+    @ocaml.doc("<p>The name of the app block.</p>") @as("Name") name: name,
+  }
+  type response = {@ocaml.doc("<p>The app block.</p>") @as("AppBlock") appBlock: option<appBlock>}
+  @module("@aws-sdk/client-appstream") @new external new: request => t = "CreateAppBlockCommand"
+  let make = (
+    ~setupScriptDetails,
+    ~sourceS3Location,
+    ~name,
+    ~tags=?,
+    ~displayName=?,
+    ~description=?,
+    (),
+  ) =>
+    new({
+      tags: tags,
+      setupScriptDetails: setupScriptDetails,
+      sourceS3Location: sourceS3Location,
+      displayName: displayName,
+      description: description,
       name: name,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
@@ -2623,6 +3272,60 @@ module DescribeFleets = {
   }
   @module("@aws-sdk/client-appstream") @new external new: request => t = "DescribeFleetsCommand"
   let make = (~nextToken=?, ~names=?, ()) => new({nextToken: nextToken, names: names})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module DescribeEntitlements = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The maximum size of each page of results.</p>") @as("MaxResults")
+    maxResults: option<integer_>,
+    @ocaml.doc(
+      "<p>The pagination token used to retrieve the next page of results for this operation.</p>"
+    )
+    @as("NextToken")
+    nextToken: option<string_>,
+    @ocaml.doc("<p>The name of the stack with which the entitlement is associated.</p>")
+    @as("StackName")
+    stackName: name,
+    @ocaml.doc("<p>The name of the entitlement.</p>") @as("Name") name: option<name>,
+  }
+  type response = {
+    @ocaml.doc("<p>The pagination token used to retrieve the next page of results for this
+            operation.</p>")
+    @as("NextToken")
+    nextToken: option<string_>,
+    @ocaml.doc("<p>The entitlements.</p>") @as("Entitlements")
+    entitlements: option<entitlementList>,
+  }
+  @module("@aws-sdk/client-appstream") @new
+  external new: request => t = "DescribeEntitlementsCommand"
+  let make = (~stackName, ~maxResults=?, ~nextToken=?, ~name=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken, stackName: stackName, name: name})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module DescribeAppBlocks = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The maximum size of each page of results.</p>") @as("MaxResults")
+    maxResults: option<integer_>,
+    @ocaml.doc("<p>The pagination token used to retrieve the next page of results for this
+            operation.</p>")
+    @as("NextToken")
+    nextToken: option<string_>,
+    @ocaml.doc("<p>The ARNs of the app blocks.</p>") @as("Arns") arns: option<arnList>,
+  }
+  type response = {
+    @ocaml.doc("<p>The pagination token used to retrieve the next page of results for this
+            operation.</p>")
+    @as("NextToken")
+    nextToken: option<string_>,
+    @ocaml.doc("<p>The app blocks in the list.</p>") @as("AppBlocks") appBlocks: option<appBlocks>,
+  }
+  @module("@aws-sdk/client-appstream") @new external new: request => t = "DescribeAppBlocksCommand"
+  let make = (~maxResults=?, ~nextToken=?, ~arns=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken, arns: arns})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

@@ -16,6 +16,7 @@ type baseTimestamp = Js.Date.t
 type baseLong = float
 type vpcId = string
 type uid = float
+type transitionToPrimaryStorageClassRules = [@as("AFTER_1_ACCESS") #AFTER_1_ACCESS]
 type transitionToIARules = [
   | @as("AFTER_90_DAYS") #AFTER_90_DAYS
   | @as("AFTER_60_DAYS") #AFTER_60_DAYS
@@ -41,6 +42,13 @@ type resourceIdType = [@as("SHORT_ID") #SHORT_ID | @as("LONG_ID") #LONG_ID]
 type resourceId = string
 @ocaml.doc("An EFS resource, for example a file system or a mount target.")
 type resource = [@as("MOUNT_TARGET") #MOUNT_TARGET | @as("FILE_SYSTEM") #FILE_SYSTEM]
+type replicationStatus = [
+  | @as("ERROR") #ERROR
+  | @as("DELETING") #DELETING
+  | @as("ENABLING") #ENABLING
+  | @as("ENABLED") #ENABLED
+]
+type regionName = string
 type provisionedThroughputInMibps = float
 type policy = string
 type permissions = string
@@ -70,7 +78,14 @@ type fileSystemSizeValue = float
 type fileSystemNullableSizeValue = float
 type fileSystemId = string
 type fileSystemArn = string
+@ocaml.doc("<p>The error message contains a generic description of the error 
+        condition in English. It is intended for a human audience. Simple programs display the message directly 
+        to the end user if they encounter an error condition they don't know how or don't care to handle. 
+        Sophisticated programs with more exhaustive error handling and proper internationalization are 
+        more likely to ignore the error message.</p>")
 type errorMessage = string
+@ocaml.doc("<p>The error code is a string that uniquely identifies an error condition. 
+        It is meant to be read and understood by programs that detect and handle errors by type. </p>")
 type errorCode = string
 type encrypted = bool
 type creationToken = string
@@ -99,12 +114,12 @@ type mountTargetDescription = {
   @as("VpcId")
   vpcId: option<vpcId>,
   @ocaml.doc("<p>The name of the Availability Zone in which the mount target is located. Availability Zones are 
-      independently mapped to names for each AWS account. For example, the Availability Zone 
-      <code>us-east-1a</code> for your AWS account might not be the same location as <code>us-east-1a</code> for another AWS account.</p>")
+      independently mapped to names for each Amazon Web Services account. For example, the Availability Zone 
+      <code>us-east-1a</code> for your Amazon Web Services account might not be the same location as <code>us-east-1a</code> for another Amazon Web Services account.</p>")
   @as("AvailabilityZoneName")
   availabilityZoneName: option<availabilityZoneName>,
   @ocaml.doc("<p>The unique and consistent identifier of the Availability Zone that the mount target resides in. 
-      For example, <code>use1-az1</code> is an AZ ID for the us-east-1 Region and it has the same location in every AWS account.</p>")
+      For example, <code>use1-az1</code> is an AZ ID for the us-east-1 Region and it has the same location in every Amazon Web Services account.</p>")
   @as("AvailabilityZoneId")
   availabilityZoneId: option<availabilityZoneId>,
   @ocaml.doc("<p>The ID of the network interface that Amazon EFS created when it created the mount
@@ -122,14 +137,27 @@ type mountTargetDescription = {
   fileSystemId: fileSystemId,
   @ocaml.doc("<p>System-assigned mount target ID.</p>") @as("MountTargetId")
   mountTargetId: mountTargetId,
-  @ocaml.doc("<p>AWS account ID that owns the resource.</p>") @as("OwnerId")
+  @ocaml.doc("<p>Amazon Web Services account ID that owns the resource.</p>") @as("OwnerId")
   ownerId: option<awsAccountId>,
 }
-@ocaml.doc("<p>Describes a policy used by EFS lifecycle management to transition files to the Infrequent
-      Access (IA) storage class.</p>")
+@ocaml.doc("<p>Describes a policy used by EFS lifecycle management and EFS intelligent tiering that specifies when to transition 
+      files into and out of the file system's Infrequent Access (IA) storage class. For more information, see 
+      <a href=\"https://docs.aws.amazon.com/efs/latest/ug/lifecycle-management-efs.html\">EFS Intelligent‐Tiering and EFS Lifecycle Management</a>.</p>
+         <note>
+            <p>When using the <code>put-lifecycle-configuration</code> CLI command or the <code>PutLifecycleConfiguration</code> API action, 
+      Amazon EFS requires that each <code>LifecyclePolicy</code> 
+      object have only a single transition. This means that in a request body, <code>LifecyclePolicies</code> needs to be structured as
+      an array of <code>LifecyclePolicy</code> objects, one object for each transition, <code>TransitionToIA</code>, 
+      <code>TransitionToPrimaryStorageClass</code>. For more information, see the request examples in <a>PutLifecycleConfiguration</a>.</p>
+         </note>")
 type lifecyclePolicy = {
+  @ocaml.doc("<p>Describes when to transition a file from IA storage to primary storage. Metadata
+      operations such as listing the contents of a directory don't count as file access
+      events.</p>")
+  @as("TransitionToPrimaryStorageClass")
+  transitionToPrimaryStorageClass: option<transitionToPrimaryStorageClassRules>,
   @ocaml.doc("<p>
-      A value that describes the period of time that a file is not accessed, after which it transitions to the IA storage class. Metadata
+      Describes the period of time that a file is not accessed, after which it transitions to IA storage. Metadata
       operations such as listing the contents of a directory don't count as file access
       events.</p>")
   @as("TransitionToIA")
@@ -158,6 +186,61 @@ type fileSystemSize = {
   @ocaml.doc("<p>The latest known metered size (in bytes) of data stored in the file system.</p>")
   @as("Value")
   value: fileSystemSizeValue,
+}
+@ocaml.doc(
+  "<p>Describes the destination file system to create in the replication configuration.</p>"
+)
+type destinationToCreate = {
+  @ocaml.doc("<p>Specifies the KMS key you want to use to encrypt the destination file system. If you do not 
+      specify a KMS key, EFS uses your default KMS key for Amazon EFS, 
+      <code>/aws/elasticfilesystem</code>. This ID can be in one of the following
+      formats:</p>
+         <ul>
+            <li>
+               <p>Key ID - A unique identifier of the key, for example
+          <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>
+            </li>
+            <li>
+               <p>ARN - An Amazon Resource Name (ARN) for the key, for example
+          <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>
+            </li>
+            <li>
+               <p>Key alias - A previously created display name for a key, for example
+          <code>alias/projectKey1</code>.</p>
+            </li>
+            <li>
+               <p>Key alias ARN - An ARN for a key alias, for example
+          <code>arn:aws:kms:us-west-2:444455556666:alias/projectKey1</code>.</p>
+            </li>
+         </ul>")
+  @as("KmsKeyId")
+  kmsKeyId: option<kmsKeyId>,
+  @ocaml.doc("<p>To create a file system that uses One Zone storage, specify the name of the 
+      Availability Zone in which to create the destination file system.</p>")
+  @as("AvailabilityZoneName")
+  availabilityZoneName: option<availabilityZoneName>,
+  @ocaml.doc("<p>To create a file system that uses regional storage, specify the Amazon Web Services Region
+      in which to create the destination file system.</p>")
+  @as("Region")
+  region: option<regionName>,
+}
+@ocaml.doc("<p>Describes the destination file system in the replication configuration.</p>")
+type destination = {
+  @ocaml.doc("<p>The time when the most recent sync successfully completed on the destination file system. 
+      Any changes to data on the source file system that occurred prior to this time were successfully 
+      replicated to the destination file system. Any changes that occurred after this time might not be 
+      fully replicated.</p>")
+  @as("LastReplicatedTimestamp")
+  lastReplicatedTimestamp: option<timestamp_>,
+  @ocaml.doc(
+    "<p>The Amazon Web Services Region in which the destination file system is located.</p>"
+  )
+  @as("Region")
+  region: regionName,
+  @ocaml.doc("<p>The ID of the destination Amazon EFS file system.</p>") @as("FileSystemId")
+  fileSystemId: fileSystemId,
+  @ocaml.doc("<p>Describes the status of the destination Amazon EFS file system.</p>") @as("Status")
+  status: replicationStatus,
 }
 @ocaml.doc("<p>Required if the <code>RootDirectory</code> > <code>Path</code> specified does not exist. 
       Specifies the POSIX IDs and permissions to apply to the access point's <code>RootDirectory</code> > <code>Path</code>. 
@@ -244,9 +327,20 @@ type rootDirectory = {
   @as("Path")
   path: option<path>,
 }
+@ocaml.doc(
+  "<p>Describes the resource type and its ID preference for the user's Amazon Web Services account, in the current Amazon Web Services Region.</p>"
+)
 type resourceIdPreference = {
-  @as("Resources") resources: option<resources>,
-  @as("ResourceIdType") resourceIdType: option<resourceIdType>,
+  @ocaml.doc(
+    "<p>Identifies the Amazon EFS resources to which the ID preference setting applies, <code>FILE_SYSTEM</code> and <code>MOUNT_TARGET</code>.</p>"
+  )
+  @as("Resources")
+  resources: option<resources>,
+  @ocaml.doc(
+    "<p>Identifies the EFS resource ID preference, either <code>LONG_ID</code> (17 characters) or <code>SHORT_ID</code> (8 characters).</p>"
+  )
+  @as("ResourceIdType")
+  resourceIdType: option<resourceIdType>,
 }
 @ocaml.doc("<p>The full POSIX identity, including the user ID, group ID, and any secondary group IDs, on the access point that is used for all file system operations performed by
       NFS clients using the access point.</p>")
@@ -269,6 +363,31 @@ type posixUser = {
 }
 type mountTargetDescriptions = array<mountTargetDescription>
 type lifecyclePolicies = array<lifecyclePolicy>
+type destinationsToCreate = array<destinationToCreate>
+type destinations = array<destination>
+type replicationConfigurationDescription = {
+  @ocaml.doc("<p>Array of destination objects. Only one destination object is supported.</p>")
+  @as("Destinations")
+  destinations: destinations,
+  @ocaml.doc("<p>Describes when the replication configuration was created.</p>") @as("CreationTime")
+  creationTime: timestamp_,
+  @ocaml.doc(
+    "<p>The Amazon Resource Name (ARN) of the original source Amazon EFS  file system in the replication configuration.</p>"
+  )
+  @as("OriginalSourceFileSystemArn")
+  originalSourceFileSystemArn: fileSystemArn,
+  @ocaml.doc("<p>The ARN of the current source file system in the replication configuration.</p>")
+  @as("SourceFileSystemArn")
+  sourceFileSystemArn: fileSystemArn,
+  @ocaml.doc(
+    "<p>The Amazon Web Services Region in which the source Amazon EFS  file system is located.</p>"
+  )
+  @as("SourceFileSystemRegion")
+  sourceFileSystemRegion: regionName,
+  @ocaml.doc("<p>The ID of the source Amazon EFS file system that is being replicated.</p>")
+  @as("SourceFileSystemId")
+  sourceFileSystemId: fileSystemId,
+}
 @ocaml.doc("<p>A description of the file system.</p>")
 type fileSystemDescription = {
   @ocaml.doc("<p>The tags associated with the file system, presented as an array of <code>Tag</code>
@@ -277,10 +396,10 @@ type fileSystemDescription = {
   tags: tags,
   @ocaml.doc("<p>The unique and consistent identifier of the Availability Zone in which the file system's
       One Zone storage classes exist. For example, <code>use1-az1</code> is an Availability Zone ID
-      for the us-east-1 AWS Region, and it has the same location in every AWS account.</p>")
+      for the us-east-1 Amazon Web Services Region, and it has the same location in every Amazon Web Services account.</p>")
   @as("AvailabilityZoneId")
   availabilityZoneId: option<availabilityZoneId>,
-  @ocaml.doc("<p>Describes the AWS Availability Zone in which the file system is located, and is valid only
+  @ocaml.doc("<p>Describes the Amazon Web Services Availability Zone in which the file system is located, and is valid only
       for file systems using One Zone storage classes. For more information, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/storage-classes.html\">Using EFS storage classes</a> 
       in the <i>Amazon EFS User Guide</i>.</p>")
   @as("AvailabilityZoneName")
@@ -295,8 +414,7 @@ type fileSystemDescription = {
     </p>")
   @as("ThroughputMode")
   throughputMode: option<throughputMode>,
-  @ocaml.doc("<p>The ID of an AWS Key Management Service (AWS KMS) customer master key (CMK) that was
-      used to protect the encrypted file system.</p>")
+  @ocaml.doc("<p>The ID of an KMS key used to protect the encrypted file system.</p>")
   @as("KmsKeyId")
   kmsKeyId: option<kmsKeyId>,
   @ocaml.doc("<p>A Boolean value that, if true, indicates that the file system is encrypted.</p>")
@@ -342,7 +460,7 @@ type fileSystemDescription = {
   fileSystemId: fileSystemId,
   @ocaml.doc("<p>The opaque string specified in the request.</p>") @as("CreationToken")
   creationToken: creationToken,
-  @ocaml.doc("<p>The AWS account that created the file system. If the file system was created by an IAM
+  @ocaml.doc("<p>The Amazon Web Services account that created the file system. If the file system was created by an IAM
       user, the parent account to which the user belongs is the owner.</p>")
   @as("OwnerId")
   ownerId: awsAccountId,
@@ -351,7 +469,9 @@ type fileSystemDescription = {
 type accessPointDescription = {
   @ocaml.doc("<p>Identifies the lifecycle phase of the access point.</p>") @as("LifeCycleState")
   lifeCycleState: option<lifeCycleState>,
-  @ocaml.doc("<p>Identified the AWS account that owns the access point resource.</p>")
+  @ocaml.doc(
+    "<p>Identified the Amazon Web Services account that owns the access point resource.</p>"
+  )
   @as("OwnerId")
   ownerId: option<awsAccountId>,
   @ocaml.doc(
@@ -383,11 +503,12 @@ type accessPointDescription = {
   @as("ClientToken")
   clientToken: option<clientToken>,
 }
+type replicationConfigurationDescriptions = array<replicationConfigurationDescription>
 type fileSystemDescriptions = array<fileSystemDescription>
 type accessPointDescriptions = array<accessPointDescription>
 @ocaml.doc("<fullname>Amazon Elastic File System</fullname>
          <p>Amazon Elastic File System (Amazon EFS) provides simple, scalable file storage for use
-      with Amazon EC2 instances in the AWS Cloud. With Amazon EFS, storage capacity is elastic,
+      with Amazon EC2 Linux and Mac instances in the Amazon Web Services Cloud. With Amazon EFS, storage capacity is elastic,
       growing and shrinking automatically as you add and remove files, so your applications have the
       storage they need, when they need it. For more information, see the <a href=\"https://docs.aws.amazon.com/efs/latest/ug/api-reference.html\">Amazon Elastic File System API Reference</a> and the <a href=\"https://docs.aws.amazon.com/efs/latest/ug/whatisefs.html\">Amazon Elastic File System User Guide</a>.</p>")
 module PutFileSystemPolicy = {
@@ -460,6 +581,20 @@ module DescribeFileSystemPolicy = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module DeleteReplicationConfiguration = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The ID of the source file system in the replication configuration.</p>")
+    @as("SourceFileSystemId")
+    sourceFileSystemId: fileSystemId,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-elasticfilesystem") @new
+  external new: request => t = "DeleteReplicationConfigurationCommand"
+  let make = (~sourceFileSystemId, ()) => new({sourceFileSystemId: sourceFileSystemId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
 module DeleteMountTarget = {
   type t
   @ocaml.doc("<p></p>")
@@ -467,7 +602,7 @@ module DeleteMountTarget = {
     @ocaml.doc("<p>The ID of the mount target to delete (String).</p>") @as("MountTargetId")
     mountTargetId: mountTargetId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticfilesystem") @new
   external new: request => t = "DeleteMountTargetCommand"
   let make = (~mountTargetId, ()) => new({mountTargetId: mountTargetId})
@@ -483,7 +618,7 @@ module DeleteFileSystemPolicy = {
     @as("FileSystemId")
     fileSystemId: fileSystemId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticfilesystem") @new
   external new: request => t = "DeleteFileSystemPolicyCommand"
   let make = (~fileSystemId, ()) => new({fileSystemId: fileSystemId})
@@ -497,7 +632,7 @@ module DeleteFileSystem = {
     @ocaml.doc("<p>The ID of the file system you want to delete.</p>") @as("FileSystemId")
     fileSystemId: fileSystemId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticfilesystem") @new
   external new: request => t = "DeleteFileSystemCommand"
   let make = (~fileSystemId, ()) => new({fileSystemId: fileSystemId})
@@ -510,7 +645,7 @@ module DeleteAccessPoint = {
     @ocaml.doc("<p>The ID of the access point that you want to delete.</p>") @as("AccessPointId")
     accessPointId: accessPointId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticfilesystem") @new
   external new: request => t = "DeleteAccessPointCommand"
   let make = (~accessPointId, ()) => new({accessPointId: accessPointId})
@@ -528,7 +663,7 @@ module UntagResource = {
     @as("ResourceId")
     resourceId: resourceId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticfilesystem") @new
   external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceId, ()) => new({tagKeys: tagKeys, resourceId: resourceId})
@@ -569,7 +704,7 @@ module ModifyMountTargetSecurityGroups = {
     @as("MountTargetId")
     mountTargetId: mountTargetId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticfilesystem") @new
   external new: request => t = "ModifyMountTargetSecurityGroupsCommand"
   let make = (~mountTargetId, ~securityGroups=?, ()) =>
@@ -626,7 +761,7 @@ module DeleteTags = {
     @as("FileSystemId")
     fileSystemId: fileSystemId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticfilesystem") @new external new: request => t = "DeleteTagsCommand"
   let make = (~tagKeys, ~fileSystemId, ()) => new({tagKeys: tagKeys, fileSystemId: fileSystemId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -705,7 +840,7 @@ module TagResource = {
     @as("ResourceId")
     resourceId: resourceId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticfilesystem") @new
   external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceId, ()) => new({tags: tags, resourceId: resourceId})
@@ -717,8 +852,22 @@ module PutLifecycleConfiguration = {
   type request = {
     @ocaml.doc("<p>An array of <code>LifecyclePolicy</code> objects that define the file system's
         <code>LifecycleConfiguration</code> object. A <code>LifecycleConfiguration</code> object
-      tells lifecycle management when to transition files from the Standard storage class to the
-      Infrequent Access storage class.</p>")
+      informs EFS lifecycle management and intelligent tiering of the following:</p>
+         <ul>
+            <li>
+               <p>When to move files in the file system from primary storage to the IA storage class.</p>
+            </li>
+            <li>
+               <p>When to move files that are in IA storage to primary storage.</p>
+            </li>
+         </ul>
+         <note>
+            <p>When using the <code>put-lifecycle-configuration</code> CLI command or the <code>PutLifecycleConfiguration</code> API action, 
+      Amazon EFS requires that each <code>LifecyclePolicy</code> 
+      object have only a single transition. This means that in a request body, <code>LifecyclePolicies</code> needs to be structured as
+      an array of <code>LifecyclePolicy</code> objects, one object for each transition, <code>TransitionToIA</code>, <code>TransitionToPrimaryStorageClass</code>. 
+      See the example requests in the following section for more information.</p>
+         </note>")
     @as("LifecyclePolicies")
     lifecyclePolicies: lifecyclePolicies,
     @ocaml.doc("<p>The ID of the file system for which you are creating the
@@ -727,7 +876,7 @@ module PutLifecycleConfiguration = {
     fileSystemId: fileSystemId,
   }
   type response = {
-    @ocaml.doc("<p>An array of lifecycle management policies. Currently, EFS supports a maximum of one
+    @ocaml.doc("<p>An array of lifecycle management policies. EFS supports a maximum of one
       policy per file system.</p>")
     @as("LifecyclePolicies")
     lifecyclePolicies: option<lifecyclePolicies>,
@@ -741,7 +890,18 @@ module PutLifecycleConfiguration = {
 
 module PutAccountPreferences = {
   type t
-  type request = {@as("ResourceIdType") resourceIdType: resourceIdType}
+  type request = {
+    @ocaml.doc("<p>Specifies the EFS resource ID preference to set for the user's Amazon Web Services account, 
+      in the current Amazon Web Services Region, either <code>LONG_ID</code> (17 characters), or 
+      <code>SHORT_ID</code> (8 characters).</p>
+         <note>
+            <p>Starting in October, 2021, you will receive an error when setting the account 
+      preference to <code>SHORT_ID</code>. Contact Amazon Web Services support if you receive an 
+      error and need to use short IDs for file system and mount target resources.</p>
+         </note>")
+    @as("ResourceIdType")
+    resourceIdType: resourceIdType,
+  }
   type response = {@as("ResourceIdPreference") resourceIdPreference: option<resourceIdPreference>}
   @module("@aws-sdk/client-elasticfilesystem") @new
   external new: request => t = "PutAccountPreferencesCommand"
@@ -889,7 +1049,7 @@ module DescribeLifecycleConfiguration = {
     fileSystemId: fileSystemId,
   }
   type response = {
-    @ocaml.doc("<p>An array of lifecycle management policies. Currently, EFS supports a maximum of one
+    @ocaml.doc("<p>An array of lifecycle management policies. EFS supports a maximum of one
       policy per file system.</p>")
     @as("LifecyclePolicies")
     lifecyclePolicies: option<lifecyclePolicies>,
@@ -903,12 +1063,26 @@ module DescribeLifecycleConfiguration = {
 module DescribeAccountPreferences = {
   type t
   type request = {
-    @as("MaxResults") maxResults: option<maxResults>,
-    @as("NextToken") nextToken: option<token>,
+    @ocaml.doc("<p>(Optional) When retrieving account preferences,
+      you can optionally specify the <code>MaxItems</code> parameter to limit the number of objects returned in a response.  
+      The default value is 100. </p>")
+    @as("MaxResults")
+    maxResults: option<maxResults>,
+    @ocaml.doc("<p>(Optional) You can use <code>NextToken</code> in a subsequent request to fetch the next page of 
+      Amazon Web Services account preferences if the response payload was paginated.</p>")
+    @as("NextToken")
+    nextToken: option<token>,
   }
   type response = {
-    @as("NextToken") nextToken: option<token>,
-    @as("ResourceIdPreference") resourceIdPreference: option<resourceIdPreference>,
+    @ocaml.doc("<p>Present if there are more records than returned in the response. 
+      You can use the <code>NextToken</code> in the subsequent request to fetch the additional descriptions.</p>")
+    @as("NextToken")
+    nextToken: option<token>,
+    @ocaml.doc(
+      "<p>Describes the resource ID preference setting for the Amazon Web Services account associated with the user making the request, in the current Amazon Web Services Region.</p>"
+    )
+    @as("ResourceIdPreference")
+    resourceIdPreference: option<resourceIdPreference>,
   }
   @module("@aws-sdk/client-elasticfilesystem") @new
   external new: request => t = "DescribeAccountPreferencesCommand"
@@ -930,18 +1104,41 @@ module CreateTags = {
     @as("FileSystemId")
     fileSystemId: fileSystemId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticfilesystem") @new external new: request => t = "CreateTagsCommand"
   let make = (~tags, ~fileSystemId, ()) => new({tags: tags, fileSystemId: fileSystemId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
+module CreateReplicationConfiguration = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>An array of destination configuration objects. Only one destination configuration object is supported.</p>"
+    )
+    @as("Destinations")
+    destinations: destinationsToCreate,
+    @ocaml.doc("<p>Specifies the Amazon EFS file system that you want to replicate. This file system cannot already be 
+    a source or destination file system in another replication configuration.</p>")
+    @as("SourceFileSystemId")
+    sourceFileSystemId: fileSystemId,
+  }
+  type response = replicationConfigurationDescription
+  @module("@aws-sdk/client-elasticfilesystem") @new
+  external new: request => t = "CreateReplicationConfigurationCommand"
+  let make = (~destinations, ~sourceFileSystemId, ()) =>
+    new({destinations: destinations, sourceFileSystemId: sourceFileSystemId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module CreateFileSystem = {
   type t
   type request = {
-    @ocaml.doc("<p>A value that specifies to create one or more tags associated with the file system. Each
+    @ocaml.doc("<p>Use to create one or more tags associated with the file system. Each
         tag is a user-defined key-value pair. Name your file system on creation by including a
-          <code>\"Key\":\"Name\",\"Value\":\"{value}\"</code> key-value pair.</p>")
+        <code>\"Key\":\"Name\",\"Value\":\"{value}\"</code> key-value pair. Each key must be unique. For more 
+        information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a>
+        in the <i>Amazon Web Services General Reference Guide</i>.</p>")
     @as("Tags")
     tags: option<tags>,
     @ocaml.doc("<p>Specifies whether automatic backups are enabled on the file system that you are creating.
@@ -952,16 +1149,16 @@ module CreateFileSystem = {
          <p>Default is <code>false</code>. However, if you specify an <code>AvailabilityZoneName</code>, 
       the default is <code>true</code>.</p>
          <note>
-            <p>AWS Backup is not available in all AWS Regions where Amazon EFS is available.</p>
+            <p>Backup is not available in all Amazon Web Services Regions where Amazon EFS is available.</p>
          </note>")
     @as("Backup")
     backup: option<backup>,
-    @ocaml.doc("<p>Used to create a file system that uses One Zone storage classes. It specifies the AWS
+    @ocaml.doc("<p>Used to create a file system that uses One Zone storage classes. It specifies the Amazon Web Services
       Availability Zone in which to create the file system. Use the format <code>us-east-1a</code>
       to specify the Availability Zone. For
       more information about One Zone storage classes, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/storage-classes.html\">Using EFS storage classes</a> in the <i>Amazon EFS User Guide</i>.</p>
          <note>
-            <p>One Zone storage classes are not available in all Availability Zones in AWS Regions where
+            <p>One Zone storage classes are not available in all Availability Zones in Amazon Web Services Regions where
         Amazon EFS is available.</p>
          </note>")
     @as("AvailabilityZoneName")
@@ -969,7 +1166,7 @@ module CreateFileSystem = {
     @ocaml.doc("<p>The throughput, measured in MiB/s, that you want to provision for a file system that
       you're creating. Valid values are 1-1024. Required if <code>ThroughputMode</code> is set
       to <code>provisioned</code>. The upper limit for throughput is 1024 MiB/s. To increase this
-      limit, contact AWS Support. For more information, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits\">Amazon EFS quotas that you can increase</a>
+      limit, contact Amazon Web Services Support. For more information, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits\">Amazon EFS quotas that you can increase</a>
       in the <i>Amazon EFS User Guide</i>.</p>")
     @as("ProvisionedThroughputInMibps")
     provisionedThroughputInMibps: option<provisionedThroughputInMibps>,
@@ -984,10 +1181,10 @@ module CreateFileSystem = {
          <p>Default is <code>bursting</code>.</p>")
     @as("ThroughputMode")
     throughputMode: option<throughputMode>,
-    @ocaml.doc("<p>The ID of the AWS KMS CMK that you want to use to protect the encrypted file system. This
+    @ocaml.doc("<p>The ID of the KMS key that you want to use to protect the encrypted file system. This
       parameter is only required if you want to use a non-default KMS key. If this parameter is not
-      specified, the default CMK for Amazon EFS is used. This ID can be in one of the following
-      formats:</p>
+      specified, the default KMS key for Amazon EFS is used. You can specify a KMS key 
+      ID using the following formats:</p>
          <ul>
             <li>
                <p>Key ID - A unique identifier of the key, for example
@@ -1006,15 +1203,17 @@ module CreateFileSystem = {
             <code>arn:aws:kms:us-west-2:444455556666:alias/projectKey1</code>.</p>
             </li>
          </ul>
-         <p>If <code>KmsKeyId</code> is specified, the <a>CreateFileSystemRequest$Encrypted</a> parameter must be set to true.</p>
+         <p>If you use <code>KmsKeyId</code>, you must set the <a>CreateFileSystemRequest$Encrypted</a> 
+      parameter to true.</p>
          <important>
-            <p>EFS accepts only symmetric KMS keys. You cannot use asymmetric KMS keys with EFS file systems.</p>
+            <p>EFS accepts only symmetric KMS keys. You cannot use asymmetric 
+      KMS keys with Amazon EFS file systems.</p>
          </important>")
     @as("KmsKeyId")
     kmsKeyId: option<kmsKeyId>,
     @ocaml.doc("<p>A Boolean value that, if true, creates an encrypted file system. When creating an
-      encrypted file system, you have the option of specifying <a>CreateFileSystemRequest$KmsKeyId</a> for an existing AWS Key Management Service (AWS
-      KMS) customer master key (CMK). If you don't specify a CMK, then the default CMK for
+      encrypted file system, you have the option of specifying an existing Key Management Service key (KMS key).
+      If you don't specify a KMS key, then the default KMS key for
       Amazon EFS, <code>/aws/elasticfilesystem</code>, is used to protect the encrypted file system.
     </p>")
     @as("Encrypted")
@@ -1084,9 +1283,9 @@ module CreateAccessPoint = {
     @ocaml.doc("<p>The ID of the EFS file system that the access point provides access to.</p>")
     @as("FileSystemId")
     fileSystemId: fileSystemId,
-    @ocaml.doc(
-      "<p>Creates tags associated with the access point. Each tag is a key-value pair.</p>"
-    )
+    @ocaml.doc("<p>Creates tags associated with the access point. Each tag is a key-value pair, each key must be unique. For more 
+      information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a>
+      in the <i>Amazon Web Services General Reference Guide</i>.</p>")
     @as("Tags")
     tags: option<tags>,
     @ocaml.doc("<p>A string of up to 64 ASCII characters that Amazon EFS uses to ensure idempotent
@@ -1105,6 +1304,39 @@ module CreateAccessPoint = {
       tags: tags,
       clientToken: clientToken,
     })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module DescribeReplicationConfigurations = {
+  type t
+  type request = {
+    @ocaml.doc("<p>(Optional) You can optionally specify the <code>MaxItems</code> parameter 
+      to limit the number of objects returned in a response. The default value is 100. </p>")
+    @as("MaxResults")
+    maxResults: option<maxResults>,
+    @ocaml.doc("<p>
+            <code>NextToken</code> is present if the response is paginated. You can use 
+      <code>NextMarker</code> in a subsequent request to fetch the next page of output.</p>")
+    @as("NextToken")
+    nextToken: option<token>,
+    @ocaml.doc(
+      "<p>You can retrieve replication configurations for a specific file system by providing a file system ID.</p>"
+    )
+    @as("FileSystemId")
+    fileSystemId: option<fileSystemId>,
+  }
+  type response = {
+    @ocaml.doc("<p>You can use the <code>NextToken</code> from the previous response in a subsequent 
+      request to fetch the additional descriptions.</p>")
+    @as("NextToken")
+    nextToken: option<token>,
+    @ocaml.doc("<p>The collection of replication configurations returned.</p>") @as("Replications")
+    replications: option<replicationConfigurationDescriptions>,
+  }
+  @module("@aws-sdk/client-elasticfilesystem") @new
+  external new: request => t = "DescribeReplicationConfigurationsCommand"
+  let make = (~maxResults=?, ~nextToken=?, ~fileSystemId=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken, fileSystemId: fileSystemId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1167,7 +1399,8 @@ module DescribeAccessPoints = {
     @as("AccessPointId")
     accessPointId: option<accessPointId>,
     @ocaml.doc("<p>
-            <code>NextToken</code> is present if the response is paginated. You can use <code>NextMarker</code> in the subsequent request to fetch the next page of access point descriptions.</p>")
+            <code>NextToken</code> is present if the response is paginated. You can use 
+      <code>NextMarker</code> in the subsequent request to fetch the next page of access point descriptions.</p>")
     @as("NextToken")
     nextToken: option<token>,
     @ocaml.doc("<p>(Optional) When retrieving all access points for a file system,

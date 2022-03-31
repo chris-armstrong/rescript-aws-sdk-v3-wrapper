@@ -17,7 +17,7 @@ type baseLong = float
 type writeIOs = float
 type transactionId = string
 type statement = string
-@ocaml.doc("<p>Specifies a request to start a transaction.</p>") type startTransactionRequest = unit
+@ocaml.doc("<p>Specifies a request to start a transaction.</p>") type startTransactionRequest = {.}
 type sessionToken = string
 type readIOs = float
 type processingTimeMilliseconds = float
@@ -27,10 +27,10 @@ type ionText = string
 type ionBinary = NodeJs.Buffer.t
 type errorMessage = string
 type errorCode = string
-@ocaml.doc("<p>Specifies a request to end the session.</p>") type endSessionRequest = unit
+@ocaml.doc("<p>Specifies a request to end the session.</p>") type endSessionRequest = {.}
 type commitDigest = NodeJs.Buffer.t
 @ocaml.doc("<p>Contains the details of the transaction to abort.</p>")
-type abortTransactionRequest = unit
+type abortTransactionRequest = {.}
 @ocaml.doc("<p>A structure that can contain a value in multiple encoding formats.</p>")
 type valueHolder = {
   @ocaml.doc(

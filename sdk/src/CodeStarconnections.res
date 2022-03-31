@@ -219,7 +219,7 @@ module DeleteHost = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the host to be deleted.</p>") @as("HostArn")
     hostArn: hostArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-codestar-connections") @new
   external new: request => t = "DeleteHostCommand"
   let make = (~hostArn, ()) => new({hostArn: hostArn})
@@ -236,7 +236,7 @@ module DeleteConnection = {
     @as("ConnectionArn")
     connectionArn: connectionArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-codestar-connections") @new
   external new: request => t = "DeleteConnectionCommand"
   let make = (~connectionArn, ()) => new({connectionArn: connectionArn})
@@ -253,7 +253,7 @@ module UntagResource = {
     @as("ResourceArn")
     resourceArn: amazonResourceName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-codestar-connections") @new
   external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
@@ -289,7 +289,7 @@ module UpdateHost = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the host to be updated.</p>") @as("HostArn")
     hostArn: hostArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-codestar-connections") @new
   external new: request => t = "UpdateHostCommand"
   let make = (~hostArn, ~vpcConfiguration=?, ~providerEndpoint=?, ()) =>
@@ -308,7 +308,7 @@ module TagResource = {
     @as("ResourceArn")
     resourceArn: amazonResourceName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-codestar-connections") @new
   external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})

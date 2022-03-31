@@ -880,7 +880,7 @@ module DeleteVaultNotifications = {
          ('-') in the ID. </p>")
     accountId: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-glacier") @new
   external new: request => t = "DeleteVaultNotificationsCommand"
   let make = (~vaultName, ~accountId, ()) => new({vaultName: vaultName, accountId: accountId})
@@ -899,7 +899,7 @@ module DeleteVaultAccessPolicy = {
          ('-') in the ID. </p>")
     accountId: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-glacier") @new
   external new: request => t = "DeleteVaultAccessPolicyCommand"
   let make = (~vaultName, ~accountId, ()) => new({vaultName: vaultName, accountId: accountId})
@@ -918,7 +918,7 @@ module DeleteVault = {
          ('-') in the ID.</p>")
     accountId: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-glacier") @new external new: request => t = "DeleteVaultCommand"
   let make = (~vaultName, ~accountId, ()) => new({vaultName: vaultName, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -937,7 +937,7 @@ module DeleteArchive = {
          ('-') in the ID.</p>")
     accountId: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-glacier") @new external new: request => t = "DeleteArchiveCommand"
   let make = (~archiveId, ~vaultName, ~accountId, ()) =>
     new({archiveId: archiveId, vaultName: vaultName, accountId: accountId})
@@ -981,7 +981,7 @@ module CompleteVaultLock = {
          If you specify your account ID, do not include any hyphens ('-') in the ID.</p>")
     accountId: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-glacier") @new external new: request => t = "CompleteVaultLockCommand"
   let make = (~lockId, ~vaultName, ~accountId, ()) =>
     new({lockId: lockId, vaultName: vaultName, accountId: accountId})
@@ -1049,7 +1049,7 @@ module AbortVaultLock = {
          If you specify your account ID, do not include any hyphens ('-') in the ID.</p>")
     accountId: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-glacier") @new external new: request => t = "AbortVaultLockCommand"
   let make = (~vaultName, ~accountId, ()) => new({vaultName: vaultName, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1072,7 +1072,7 @@ module AbortMultipartUpload = {
          ('-') in the ID.</p>")
     accountId: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-glacier") @new external new: request => t = "AbortMultipartUploadCommand"
   let make = (~uploadId, ~vaultName, ~accountId, ()) =>
     new({uploadId: uploadId, vaultName: vaultName, accountId: accountId})
@@ -1093,7 +1093,7 @@ module SetVaultAccessPolicy = {
          ('-') in the ID.</p>")
     accountId: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-glacier") @new external new: request => t = "SetVaultAccessPolicyCommand"
   let make = (~vaultName, ~accountId, ~policy=?, ()) =>
     new({policy: policy, vaultName: vaultName, accountId: accountId})
@@ -1115,7 +1115,7 @@ module RemoveTagsFromVault = {
          ('-') in the ID.</p>")
     accountId: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-glacier") @new external new: request => t = "RemoveTagsFromVaultCommand"
   let make = (~vaultName, ~accountId, ~tagKeys=?, ()) =>
     new({tagKeys: tagKeys, vaultName: vaultName, accountId: accountId})
@@ -1209,7 +1209,7 @@ module AddTagsToVault = {
          ('-') in the ID.</p>")
     accountId: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-glacier") @new external new: request => t = "AddTagsToVaultCommand"
   let make = (~vaultName, ~accountId, ~tags=?, ()) =>
     new({tags: tags, vaultName: vaultName, accountId: accountId})
@@ -1231,7 +1231,7 @@ module SetVaultNotifications = {
          ('-') in the ID.</p>")
     accountId: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-glacier") @new
   external new: request => t = "SetVaultNotificationsCommand"
   let make = (~vaultName, ~accountId, ~vaultNotificationConfig=?, ()) =>
@@ -1436,7 +1436,7 @@ module SetDataRetrievalPolicy = {
          If you specify your account ID, do not include any hyphens ('-') in the ID.</p>")
     accountId: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-glacier") @new
   external new: request => t = "SetDataRetrievalPolicyCommand"
   let make = (~accountId, ~policy=?, ()) => new({policy: policy, accountId: accountId})

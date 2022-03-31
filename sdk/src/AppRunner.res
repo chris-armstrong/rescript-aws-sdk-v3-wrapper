@@ -14,6 +14,8 @@ type baseBoolean = bool
 type baseInteger = int
 type baseTimestamp = Js.Date.t
 type baseLong = float
+type vpcConnectorStatus = [@as("INACTIVE") #INACTIVE | @as("ACTIVE") #ACTIVE]
+type vpcConnectorName = string
 type uuid = string
 type timestamp_ = Js.Date.t
 type tagValue = string
@@ -34,7 +36,13 @@ type serviceMaxResults = int
 type serviceId = string
 type runtimeEnvironmentVariablesValue = string
 type runtimeEnvironmentVariablesKey = string
-type runtime = [@as("NODEJS_12") #NODEJS_12 | @as("PYTHON_3") #PYTHON_3]
+type runtime = [
+  | @as("CORRETTO_11") #CORRETTO_11
+  | @as("CORRETTO_8") #CORRETTO_8
+  | @as("NODEJS_14") #NODEJS_14
+  | @as("NODEJS_12") #NODEJS_12
+  | @as("PYTHON_3") #PYTHON_3
+]
 type roleArn = string
 type providerType = [@as("GITHUB") #GITHUB]
 type operationType = [
@@ -65,9 +73,11 @@ type imageIdentifier = string
 type healthCheckUnhealthyThreshold = int
 type healthCheckTimeout = int
 type healthCheckProtocol = [@as("HTTP") #HTTP | @as("TCP") #TCP]
+type healthCheckPath = string
 type healthCheckInterval = int
 type healthCheckHealthyThreshold = int
 type errorMessage = string
+type egressType = [@as("VPC") #VPC | @as("DEFAULT") #DEFAULT]
 type domainName = string
 type describeCustomDomainsMaxResults = int
 type customDomainAssociationStatus = [
@@ -103,14 +113,15 @@ type asconfigMaxSize = int
 type asconfigMaxConcurrency = int
 type tagKeyList = array<tagKey>
 @ocaml.doc(
-  "<p>Describes a tag that is applied to an AWS App Runner resource. A tag is a metadata item consisting of a key-value pair.</p>"
+  "<p>Describes a tag that is applied to an App Runner resource. A tag is a metadata item consisting of a key-value pair.</p>"
 )
 type tag = {
   @ocaml.doc("<p>The value of the tag.</p>") @as("Value") value: option<tagValue>,
   @ocaml.doc("<p>The key of the tag.</p>") @as("Key") key: option<tagKey>,
 }
+type stringList = array<string_>
 @ocaml.doc(
-  "<p>Identifies a version of code that AWS App Runner refers to within a source code repository.</p>"
+  "<p>Identifies a version of code that App Runner refers to within a source code repository.</p>"
 )
 type sourceCodeVersion = {
   @ocaml.doc("<p>A source code version.</p>
@@ -122,7 +133,7 @@ type sourceCodeVersion = {
   @as("Type")
   type_: sourceCodeVersionType,
 }
-@ocaml.doc("<p>Provides summary information for an AWS App Runner service.</p>
+@ocaml.doc("<p>Provides summary information for an App Runner service.</p>
          <p>This type contains limited information about a service. It doesn't include configuration details. It's returned by the <a href=\"https://docs.aws.amazon.com/apprunner/latest/api/API_ListServices.html\">ListServices</a> action. Complete service information is returned by the <a href=\"https://docs.aws.amazon.com/apprunner/latest/api/API_CreateService.html\">CreateService</a>, <a href=\"https://docs.aws.amazon.com/apprunner/latest/api/API_DescribeService.html\">DescribeService</a>, and <a href=\"https://docs.aws.amazon.com/apprunner/latest/api/API_DeleteService.html\">DeleteService</a> actions using the <a href=\"https://docs.aws.amazon.com/apprunner/latest/api/API_Service.html\">Service</a> type.</p>")
 type serviceSummary = {
   @ocaml.doc("<p>The current state of the App Runner service. These particular values mean the following.</p>
@@ -159,7 +170,7 @@ type serviceSummary = {
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of this service.</p>") @as("ServiceArn")
   serviceArn: option<appRunnerResourceArn>,
   @ocaml.doc(
-    "<p>An ID that App Runner generated for this service. It's unique within the AWS Region.</p>"
+    "<p>An ID that App Runner generated for this service. It's unique within the Amazon Web Services Region.</p>"
   )
   @as("ServiceId")
   serviceId: option<serviceId>,
@@ -168,7 +179,7 @@ type serviceSummary = {
 }
 type runtimeEnvironmentVariables = Js.Dict.t<runtimeEnvironmentVariablesValue>
 @ocaml.doc(
-  "<p>Provides summary information for an operation that occurred on an AWS App Runner service.</p>"
+  "<p>Provides summary information for an operation that occurred on an App Runner service.</p>"
 )
 type operationSummary = {
   @ocaml.doc(
@@ -199,11 +210,11 @@ type operationSummary = {
   id: option<uuid>,
 }
 @ocaml.doc(
-  "<p>Describes the runtime configuration of an AWS App Runner service instance (scaling unit).</p>"
+  "<p>Describes the runtime configuration of an App Runner service instance (scaling unit).</p>"
 )
 type instanceConfiguration = {
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of an IAM role that provides permissions to your App Runner service. These are permissions that your code needs when it calls
-      any AWS APIs.</p>")
+      any Amazon Web Services APIs.</p>")
   @as("InstanceRoleArn")
   instanceRoleArn: option<roleArn>,
   @ocaml.doc("<p>The amount of memory, in MB or GB, reserved for each instance of your App Runner service.</p>
@@ -218,16 +229,16 @@ type instanceConfiguration = {
   cpu: option<cpu>,
 }
 @ocaml.doc(
-  "<p>Describes the settings for the health check that AWS App Runner performs to monitor the health of a service.</p>"
+  "<p>Describes the settings for the health check that App Runner performs to monitor the health of a service.</p>"
 )
 type healthCheckConfiguration = {
   @ocaml.doc("<p>The number of consecutive checks that must fail before App Runner decides that the service is unhealthy.</p>
-         <p>Default: <code>3</code>
+         <p>Default: <code>5</code>
          </p>")
   @as("UnhealthyThreshold")
   unhealthyThreshold: option<healthCheckUnhealthyThreshold>,
   @ocaml.doc("<p>The number of consecutive checks that must succeed before App Runner decides that the service is healthy.</p>
-         <p>Default: <code>3</code>
+         <p>Default: <code>1</code>
          </p>")
   @as("HealthyThreshold")
   healthyThreshold: option<healthCheckHealthyThreshold>,
@@ -247,7 +258,7 @@ type healthCheckConfiguration = {
          <p>Default: <code>\"/\"</code>
          </p>")
   @as("Path")
-  path: option<string_>,
+  path: option<healthCheckPath>,
   @ocaml.doc("<p>The IP protocol that App Runner uses to perform health checks for your service.</p>
          <p>If you set <code>Protocol</code> to <code>HTTP</code>, App Runner sends health check requests to the HTTP path specified by <code>Path</code>.</p>
          <p>Default: <code>TCP</code>
@@ -256,13 +267,27 @@ type healthCheckConfiguration = {
   protocol: option<healthCheckProtocol>,
 }
 @ocaml.doc(
-  "<p>Describes a custom encryption key that AWS App Runner uses to encrypt copies of the source repository and service logs.</p>"
+  "<p>Describes a custom encryption key that App Runner uses to encrypt copies of the source repository and service logs.</p>"
 )
 type encryptionConfiguration = {
   @ocaml.doc("<p>The ARN of the KMS key that's used for encryption.</p>") @as("KmsKey")
   kmsKey: kmsKeyArn,
 }
-@ocaml.doc("<p>Provides summary information about an AWS App Runner connection resource.</p>")
+@ocaml.doc(
+  "<p>Describes configuration settings related to outbound network traffic of an App Runner service.</p>"
+)
+type egressConfiguration = {
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the App Runner VPC connector that you want to associate with your App Runner service. Only valid when <code>EgressType =
+        VPC</code>.</p>")
+  @as("VpcConnectorArn")
+  vpcConnectorArn: option<appRunnerResourceArn>,
+  @ocaml.doc("<p>The type of egress configuration.</p>
+         <p>Set to <code>DEFAULT</code> for access to resources hosted on public networks.</p>
+         <p>Set to <code>VPC</code> to associate your service to a custom VPC specified by <code>VpcConnectorArn</code>.</p>")
+  @as("EgressType")
+  egressType: option<egressType>,
+}
+@ocaml.doc("<p>Provides summary information about an App Runner connection resource.</p>")
 type connectionSummary = {
   @ocaml.doc("<p>The App Runner connection creation time, expressed as a Unix time stamp.</p>")
   @as("CreatedAt")
@@ -279,7 +304,7 @@ type connectionSummary = {
   @ocaml.doc("<p>The customer-provided connection name.</p>") @as("ConnectionName")
   connectionName: option<connectionName>,
 }
-@ocaml.doc("<p>Describes an AWS App Runner connection resource.</p>")
+@ocaml.doc("<p>Describes an App Runner connection resource.</p>")
 type connection = {
   @ocaml.doc("<p>The App Runner connection creation time, expressed as a Unix time stamp.</p>")
   @as("CreatedAt")
@@ -309,7 +334,7 @@ type certificateValidationRecord = {
   type_: option<string_>,
   @ocaml.doc("<p>The certificate CNAME record name.</p>") @as("Name") name: option<string_>,
 }
-@ocaml.doc("<p>Provides summary information about an AWS App Runner automatic scaling configuration resource.</p>
+@ocaml.doc("<p>Provides summary information about an App Runner automatic scaling configuration resource.</p>
          <p>This type contains limited information about an auto scaling configuration. It includes only identification information, without configuration
       details. It's returned by the <a>ListAutoScalingConfigurations</a> action. Complete configuration information is returned by the <a>CreateAutoScalingConfiguration</a>, <a>DescribeAutoScalingConfiguration</a>, and <a>DeleteAutoScalingConfiguration</a>
       actions using the <a>AutoScalingConfiguration</a> type.</p>")
@@ -327,11 +352,12 @@ type autoScalingConfigurationSummary = {
   @as("AutoScalingConfigurationArn")
   autoScalingConfigurationArn: option<appRunnerResourceArn>,
 }
-@ocaml.doc("<p>Describes an AWS App Runner automatic scaling configuration resource. Multiple revisions of a configuration have the same
-        <code>AutoScalingConfigurationName</code> and different <code>AutoScalingConfigurationRevision</code> values.</p>
-         <p>A higher <code>MinSize</code> increases the spread of your App Runner service over more Availability Zones in the AWS Region. The tradeoff is a higher
+@ocaml.doc("<p>Describes an App Runner automatic scaling configuration resource.</p>
+         <p>A higher <code>MinSize</code> increases the spread of your App Runner service over more Availability Zones in the Amazon Web Services Region. The tradeoff is a higher
       minimal cost.</p>
-         <p>A lower <code>MaxSize</code> controls your cost. The tradeoff is lower responsiveness during peak demand.</p>")
+         <p>A lower <code>MaxSize</code> controls your cost. The tradeoff is lower responsiveness during peak demand.</p>
+         <p>Multiple revisions of a configuration might have the same <code>AutoScalingConfigurationName</code> and different
+        <code>AutoScalingConfigurationRevision</code> values.</p>")
 type autoScalingConfiguration = {
   @ocaml.doc(
     "<p>The time when the auto scaling configuration was deleted. It's in Unix time stamp format.</p>"
@@ -392,11 +418,56 @@ type authenticationConfiguration = {
   @as("ConnectionArn")
   connectionArn: option<appRunnerResourceArn>,
 }
+@ocaml.doc("<p>Describes an App Runner VPC connector resource. A VPC connector describes the Amazon Virtual Private Cloud (Amazon VPC) that an App Runner service is
+      associated with, and the subnets and security group that are used.</p>
+         <p>Multiple revisions of a connector might have the same <code>Name</code> and different <code>Revision</code> values.</p>
+         <note>
+            <p>At this time, App Runner supports only one revision per name.</p>
+         </note>")
+type vpcConnector = {
+  @ocaml.doc("<p>The time when the VPC connector was deleted. It's in Unix time stamp format.</p>")
+  @as("DeletedAt")
+  deletedAt: option<timestamp_>,
+  @ocaml.doc("<p>The time when the VPC connector was created. It's in Unix time stamp format.</p>")
+  @as("CreatedAt")
+  createdAt: option<timestamp_>,
+  @ocaml.doc("<p>The current state of the VPC connector. If the status of a connector revision is <code>INACTIVE</code>, it was deleted and can't be
+      used. Inactive connector revisions are permanently removed some time after they are deleted.</p>")
+  @as("Status")
+  status: option<vpcConnectorStatus>,
+  @ocaml.doc("<p>A list of IDs of security groups that App Runner uses for access to Amazon Web Services resources under the specified subnets. If not specified, App Runner uses the default
+      security group of the Amazon VPC. The default security group allows all outbound traffic.</p>")
+  @as("SecurityGroups")
+  securityGroups: option<stringList>,
+  @ocaml.doc(
+    "<p>A list of IDs of subnets that App Runner uses for your service. All IDs are of subnets of a single Amazon VPC.</p>"
+  )
+  @as("Subnets")
+  subnets: option<stringList>,
+  @ocaml.doc("<p>The revision of this VPC connector. It's unique among all the active connectors (<code>\"Status\": \"ACTIVE\"</code>) that share the same
+      <code>Name</code>.</p>
+         <note>
+            <p>At this time, App Runner supports only one revision per name.</p>
+         </note>")
+  @as("VpcConnectorRevision")
+  vpcConnectorRevision: option<integer_>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of this VPC connector.</p>") @as("VpcConnectorArn")
+  vpcConnectorArn: option<appRunnerResourceArn>,
+  @ocaml.doc("<p>The customer-provided VPC connector name.</p>") @as("VpcConnectorName")
+  vpcConnectorName: option<vpcConnectorName>,
+}
 type tagList_ = array<tag>
 type serviceSummaryList = array<serviceSummary>
 type operationSummaryList = array<operationSummary>
+@ocaml.doc("<p>Describes configuration settings related to network traffic of an App Runner service. Consists of embedded objects for each configurable network
+      feature.</p>")
+type networkConfiguration = {
+  @ocaml.doc("<p>Network configuration settings for outbound message traffic.</p>")
+  @as("EgressConfiguration")
+  egressConfiguration: option<egressConfiguration>,
+}
 @ocaml.doc(
-  "<p>Describes the configuration that AWS App Runner uses to run an App Runner service using an image pulled from a source image repository.</p>"
+  "<p>Describes the configuration that App Runner uses to run an App Runner service using an image pulled from a source image repository.</p>"
 )
 type imageConfiguration = {
   @ocaml.doc("<p>The port that your application listens to in the container.</p>
@@ -407,14 +478,14 @@ type imageConfiguration = {
   @ocaml.doc("<p>An optional command that App Runner runs to start the application in the source image. If specified, this command overrides the Docker image’s default start
       command.</p>")
   @as("StartCommand")
-  startCommand: option<string_>,
+  startCommand: option<startCommand>,
   @ocaml.doc("<p>Environment variables that are available to your running App Runner service. An array of key-value pairs. Keys with a prefix of <code>AWSAPPRUNNER</code>
       are reserved for system use and aren't valid.</p>")
   @as("RuntimeEnvironmentVariables")
   runtimeEnvironmentVariables: option<runtimeEnvironmentVariables>,
 }
 type connectionSummaryList = array<connectionSummary>
-@ocaml.doc("<p>Describes the basic configuration needed for building and running an AWS App Runner service. This type doesn't support the full set of possible
+@ocaml.doc("<p>Describes the basic configuration needed for building and running an App Runner service. This type doesn't support the full set of possible
       configuration options. Fur full configuration capabilities, use a <code>apprunner.yaml</code> file in the source code repository.</p>")
 type codeConfigurationValues = {
   @ocaml.doc("<p>The environment variables that are available to your running App Runner service. An array of key-value pairs. Keys with a prefix of
@@ -438,6 +509,7 @@ type codeConfigurationValues = {
 }
 type certificateValidationRecordList = array<certificateValidationRecord>
 type autoScalingConfigurationSummaryList = array<autoScalingConfigurationSummary>
+type vpcConnectors = array<vpcConnector>
 @ocaml.doc("<p>Describes a source image repository.</p>")
 type imageRepository = {
   @ocaml.doc(
@@ -452,7 +524,7 @@ type imageRepository = {
   @as("ImageIdentifier")
   imageIdentifier: imageIdentifier,
 }
-@ocaml.doc("<p>Describes a custom domain that's associated with an AWS App Runner service.</p>")
+@ocaml.doc("<p>Describes a custom domain that's associated with an App Runner service.</p>")
 type customDomain = {
   @ocaml.doc("<p>The current state of the domain name association.</p>") @as("Status")
   status: customDomainAssociationStatus,
@@ -470,7 +542,7 @@ type customDomain = {
   domainName: domainName,
 }
 @ocaml.doc(
-  "<p>Describes the configuration that AWS App Runner uses to build and run an App Runner service from a source code repository.</p>"
+  "<p>Describes the configuration that App Runner uses to build and run an App Runner service from a source code repository.</p>"
 )
 type codeConfiguration = {
   @ocaml.doc("<p>The basic configuration for building and running the App Runner service. Use it to quickly launch an App Runner service without providing a
@@ -509,7 +581,7 @@ type codeRepository = {
   repositoryUrl: string_,
 }
 @ocaml.doc(
-  "<p>Describes the source deployed to an AWS App Runner service. It can be a code or an image repository.</p>"
+  "<p>Describes the source deployed to an App Runner service. It can be a code or an image repository.</p>"
 )
 type sourceConfiguration = {
   @ocaml.doc(
@@ -517,10 +589,10 @@ type sourceConfiguration = {
   )
   @as("AuthenticationConfiguration")
   authenticationConfiguration: option<authenticationConfiguration>,
-  @ocaml.doc("<p>If <code>true</code>, continuous integration from the source repository is enabled for the App Runner service. Each repository change (source code commit or
-      new image version) starts a deployment.</p>
-         <p>Default: <code>true</code>
-         </p>")
+  @ocaml.doc("<p>If <code>true</code>, continuous integration from the source repository is enabled for the App Runner service. Each repository change (including any source
+      code commit or new image version) starts a deployment.</p>
+         <p>Default: App Runner sets to <code>false</code> for a source image that uses an ECR Public repository or an ECR repository that's in an Amazon Web Services account other than the one that the service is in. App Runner sets to <code>true</code> in all other cases (which currently include a source code
+      repository or a source image using a same-account ECR repository).</p>")
   @as("AutoDeploymentsEnabled")
   autoDeploymentsEnabled: option<nullableBoolean>,
   @ocaml.doc("<p>The description of a source image
@@ -533,10 +605,15 @@ type sourceConfiguration = {
   @as("CodeRepository")
   codeRepository: option<codeRepository>,
 }
-@ocaml.doc("<p>Describes an AWS App Runner service. It can describe a service in any state, including deleted services.</p>
+@ocaml.doc("<p>Describes an App Runner service. It can describe a service in any state, including deleted services.</p>
          <p>This type contains the full information about a service, including configuration details. It's returned by the <a href=\"https://docs.aws.amazon.com/apprunner/latest/api/API_CreateService.html\">CreateService</a>, <a href=\"https://docs.aws.amazon.com/apprunner/latest/api/API_DescribeService.html\">DescribeService</a>, and <a href=\"https://docs.aws.amazon.com/apprunner/latest/api/API_DeleteService.html\">DeleteService</a> actions. A subset of this
       information is returned by the <a href=\"https://docs.aws.amazon.com/apprunner/latest/api/API_ListServices.html\">ListServices</a> action using the <a href=\"https://docs.aws.amazon.com/apprunner/latest/api/API_ServiceSummary.html\">ServiceSummary</a> type.</p>")
 type service = {
+  @ocaml.doc(
+    "<p>Configuration settings related to network traffic of the web application that this service runs.</p>"
+  )
+  @as("NetworkConfiguration")
+  networkConfiguration: networkConfiguration,
   @ocaml.doc(
     "<p>Summary information for the App Runner automatic scaling configuration resource that's associated with this service.</p>"
   )
@@ -548,7 +625,7 @@ type service = {
   @as("HealthCheckConfiguration")
   healthCheckConfiguration: option<healthCheckConfiguration>,
   @ocaml.doc("<p>The encryption key that App Runner uses to encrypt the service logs and the copy of the source repository that App Runner maintains for the service. It can be
-      either a customer-provided encryption key or an AWS managed CMK.</p>")
+      either a customer-provided encryption key or an Amazon Web Services managed key.</p>")
   @as("EncryptionConfiguration")
   encryptionConfiguration: option<encryptionConfiguration>,
   @ocaml.doc("<p>The runtime configuration of instances (scaling units) of this service.</p>")
@@ -598,24 +675,24 @@ type service = {
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of this service.</p>") @as("ServiceArn")
   serviceArn: appRunnerResourceArn,
   @ocaml.doc(
-    "<p>An ID that App Runner generated for this service. It's unique within the AWS Region.</p>"
+    "<p>An ID that App Runner generated for this service. It's unique within the Amazon Web Services Region.</p>"
   )
   @as("ServiceId")
   serviceId: serviceId,
   @ocaml.doc("<p>The customer-provided service name.</p>") @as("ServiceName")
   serviceName: serviceName,
 }
-@ocaml.doc("<fullname>AWS App Runner</fullname>
+@ocaml.doc("<fullname>App Runner</fullname>
 
-      
+    
 
-         <p>AWS App Runner is an application service that provides a fast, simple, and cost-effective way to go directly from an existing container image or source code
-      to a running service in the AWS cloud in seconds. You don't need to learn new technologies, decide which compute service to use, or understand how to
-      provision and configure AWS resources.</p>
+         <p>App Runner is an application service that provides a fast, simple, and cost-effective way to go directly from an existing container image or source code
+      to a running service in the Amazon Web Services Cloud in seconds. You don't need to learn new technologies, decide which compute service to use, or understand how to
+      provision and configure Amazon Web Services resources.</p>
          <p>App Runner connects directly to your container registry or source code repository. It provides an automatic delivery pipeline with fully managed operations,
       high performance, scalability, and security.</p>
-         <p>For more information about App Runner, see the <a href=\"https://docs.aws.amazon.com/apprunner/latest/dg/\">AWS App Runner Developer Guide</a>.
-      For release information, see the <a href=\"https://docs.aws.amazon.com/apprunner/latest/relnotes/\">AWS App Runner Release Notes</a>.</p>
+         <p>For more information about App Runner, see the <a href=\"https://docs.aws.amazon.com/apprunner/latest/dg/\">App Runner Developer Guide</a>.
+      For release information, see the <a href=\"https://docs.aws.amazon.com/apprunner/latest/relnotes/\">App Runner Release Notes</a>.</p>
          <p>
        To install the Software Development Kits (SDKs), Integrated
       Development Environment (IDE) Toolkits, and command line tools that you can use to access the API, see <a href=\"http://aws.amazon.com/tools/\">Tools for
@@ -623,8 +700,8 @@ type service = {
          <p>
             <b>Endpoints</b>
          </p>
-         <p>For a list of Region-specific endpoints that App Runner supports, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/apprunner.html\">AWS App Runner
-        endpoints and quotas</a> in the <i>AWS General Reference</i>.</p>")
+         <p>For a list of Region-specific endpoints that App Runner supports, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/apprunner.html\">App Runner
+        endpoints and quotas</a> in the <i>Amazon Web Services General Reference</i>.</p>")
 module StartDeployment = {
   type t
   type request = {
@@ -655,7 +732,7 @@ module UntagResource = {
     @as("ResourceArn")
     resourceArn: appRunnerResourceArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-apprunner") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -743,7 +820,7 @@ module TagResource = {
     @as("ResourceArn")
     resourceArn: appRunnerResourceArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-apprunner") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -915,6 +992,84 @@ module ListAutoScalingConfigurations = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module DescribeVpcConnector = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the App Runner VPC connector that you want a description for.</p>
+         <p>The ARN must be a full VPC connector ARN.</p>")
+    @as("VpcConnectorArn")
+    vpcConnectorArn: appRunnerResourceArn,
+  }
+  type response = {
+    @ocaml.doc(
+      "<p>A description of the App Runner VPC connector that you specified in this request.</p>"
+    )
+    @as("VpcConnector")
+    vpcConnector: vpcConnector,
+  }
+  @module("@aws-sdk/client-apprunner") @new
+  external new: request => t = "DescribeVpcConnectorCommand"
+  let make = (~vpcConnectorArn, ()) => new({vpcConnectorArn: vpcConnectorArn})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module DeleteVpcConnector = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the App Runner VPC connector that you want to delete.</p>
+         <p>The ARN must be a full VPC connector ARN.</p>")
+    @as("VpcConnectorArn")
+    vpcConnectorArn: appRunnerResourceArn,
+  }
+  type response = {
+    @ocaml.doc(
+      "<p>A description of the App Runner VPC connector that this request just deleted.</p>"
+    )
+    @as("VpcConnector")
+    vpcConnector: vpcConnector,
+  }
+  @module("@aws-sdk/client-apprunner") @new external new: request => t = "DeleteVpcConnectorCommand"
+  let make = (~vpcConnectorArn, ()) => new({vpcConnectorArn: vpcConnectorArn})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module CreateVpcConnector = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>A list of metadata items that you can associate with your VPC connector resource. A tag is a key-value pair.</p>"
+    )
+    @as("Tags")
+    tags: option<tagList_>,
+    @ocaml.doc("<p>A list of IDs of security groups that App Runner should use for access to Amazon Web Services resources under the specified subnets. If not specified, App Runner uses the
+      default security group of the Amazon VPC. The default security group allows all outbound traffic.</p>")
+    @as("SecurityGroups")
+    securityGroups: option<stringList>,
+    @ocaml.doc("<p>A list of IDs of subnets that App Runner should use when it associates your service with a custom Amazon VPC. Specify IDs of subnets of a single
+        Amazon VPC. App Runner determines the Amazon VPC from the subnets you specify.</p>")
+    @as("Subnets")
+    subnets: stringList,
+    @ocaml.doc("<p>A name for the VPC connector.</p>") @as("VpcConnectorName")
+    vpcConnectorName: vpcConnectorName,
+  }
+  type response = {
+    @ocaml.doc(
+      "<p>A description of the App Runner VPC connector that's created by this request.</p>"
+    )
+    @as("VpcConnector")
+    vpcConnector: vpcConnector,
+  }
+  @module("@aws-sdk/client-apprunner") @new external new: request => t = "CreateVpcConnectorCommand"
+  let make = (~subnets, ~vpcConnectorName, ~tags=?, ~securityGroups=?, ()) =>
+    new({
+      tags: tags,
+      securityGroups: securityGroups,
+      subnets: subnets,
+      vpcConnectorName: vpcConnectorName,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module CreateConnection = {
   type t
   type request = {
@@ -926,7 +1081,7 @@ module CreateConnection = {
     @ocaml.doc("<p>The source repository provider.</p>") @as("ProviderType")
     providerType: providerType,
     @ocaml.doc(
-      "<p>A name for the new connection. It must be unique across all App Runner connections for the AWS account in the AWS Region.</p>"
+      "<p>A name for the new connection. It must be unique across all App Runner connections for the Amazon Web Services account in the Amazon Web Services Region.</p>"
     )
     @as("ConnectionName")
     connectionName: connectionName,
@@ -969,8 +1124,14 @@ module CreateAutoScalingConfiguration = {
          </p>")
     @as("MaxConcurrency")
     maxConcurrency: option<asconfigMaxConcurrency>,
-    @ocaml.doc("<p>A name for the auto scaling configuration. When you use it for the first time in an AWS Region, App Runner creates revision number <code>1</code> of this
-      name. When you use the same name in subsequent calls, App Runner creates incremental revisions of the configuration.</p>")
+    @ocaml.doc("<p>A name for the auto scaling configuration. When you use it for the first time in an Amazon Web Services Region, App Runner creates revision number <code>1</code> of this
+      name. When you use the same name in subsequent calls, App Runner creates incremental revisions of the configuration.</p>
+         <note>
+            <p>The name <code>DefaultConfiguration</code> is reserved (it's the configuration that App Runner uses if you don't provide a custome one). You can't use it
+        to create a new auto scaling configuration, and you can't create a revision of it.</p>
+            <p>When you want to use your own auto scaling configuration for your App Runner service, <i>create a configuration with a different name</i>,
+        and then provide it when you create or update your service.</p>
+         </note>")
     @as("AutoScalingConfigurationName")
     autoScalingConfigurationName: autoScalingConfigurationName,
   }
@@ -998,6 +1159,36 @@ module CreateAutoScalingConfiguration = {
       maxConcurrency: maxConcurrency,
       autoScalingConfigurationName: autoScalingConfigurationName,
     })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module ListVpcConnectors = {
+  type t
+  type request = {
+    @ocaml.doc("<p>A token from a previous result page. It's used for a paginated request. The request retrieves the next result page. All other parameter values must be
+      identical to the ones that are specified in the initial request.</p>
+         <p>If you don't specify <code>NextToken</code>, the request retrieves the first result page.</p>")
+    @as("NextToken")
+    nextToken: option<nextToken>,
+    @ocaml.doc("<p>The maximum number of results to include in each response (result page). It's used for a paginated request.</p>
+         <p>If you don't specify <code>MaxResults</code>, the request retrieves all available results in a single response.</p>")
+    @as("MaxResults")
+    maxResults: option<maxResults>,
+  }
+  type response = {
+    @ocaml.doc(
+      "<p>The token that you can pass in a subsequent request to get the next result page. It's returned in a paginated request.</p>"
+    )
+    @as("NextToken")
+    nextToken: option<nextToken>,
+    @ocaml.doc("<p>A list of information records for VPC connectors. In a paginated request, the request returns up to <code>MaxResults</code> records for each
+      call.</p>")
+    @as("VpcConnectors")
+    vpcConnectors: vpcConnectors,
+  }
+  @module("@aws-sdk/client-apprunner") @new external new: request => t = "ListVpcConnectorsCommand"
+  let make = (~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1126,12 +1317,17 @@ module UpdateService = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The settings for the health check that AWS App Runner performs to monitor the health of your service.</p>"
+      "<p>Configuration settings related to network traffic of the web application that the App Runner service runs.</p>"
+    )
+    @as("NetworkConfiguration")
+    networkConfiguration: option<networkConfiguration>,
+    @ocaml.doc(
+      "<p>The settings for the health check that App Runner performs to monitor the health of the App Runner service.</p>"
     )
     @as("HealthCheckConfiguration")
     healthCheckConfiguration: option<healthCheckConfiguration>,
     @ocaml.doc(
-      "<p>The Amazon Resource Name (ARN) of an App Runner automatic scaling configuration resource that you want to associate with your service.</p>"
+      "<p>The Amazon Resource Name (ARN) of an App Runner automatic scaling configuration resource that you want to associate with the App Runner service.</p>"
     )
     @as("AutoScalingConfigurationArn")
     autoScalingConfigurationArn: option<appRunnerResourceArn>,
@@ -1166,6 +1362,7 @@ module UpdateService = {
   @module("@aws-sdk/client-apprunner") @new external new: request => t = "UpdateServiceCommand"
   let make = (
     ~serviceArn,
+    ~networkConfiguration=?,
     ~healthCheckConfiguration=?,
     ~autoScalingConfigurationArn=?,
     ~instanceConfiguration=?,
@@ -1173,6 +1370,7 @@ module UpdateService = {
     (),
   ) =>
     new({
+      networkConfiguration: networkConfiguration,
       healthCheckConfiguration: healthCheckConfiguration,
       autoScalingConfigurationArn: autoScalingConfigurationArn,
       instanceConfiguration: instanceConfiguration,
@@ -1275,21 +1473,26 @@ module DeleteService = {
 module CreateService = {
   type t
   type request = {
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of an App Runner automatic scaling configuration resource that you want to associate with your service. If not provided, App Runner
-      associates the latest revision of a default auto scaling configuration.</p>")
+    @ocaml.doc(
+      "<p>Configuration settings related to network traffic of the web application that the App Runner service runs.</p>"
+    )
+    @as("NetworkConfiguration")
+    networkConfiguration: option<networkConfiguration>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of an App Runner automatic scaling configuration resource that you want to associate with the App Runner service. If not provided,
+      App Runner associates the latest revision of a default auto scaling configuration.</p>")
     @as("AutoScalingConfigurationArn")
     autoScalingConfigurationArn: option<appRunnerResourceArn>,
     @ocaml.doc(
-      "<p>The settings for the health check that AWS App Runner performs to monitor the health of your service.</p>"
+      "<p>The settings for the health check that App Runner performs to monitor the health of the App Runner service.</p>"
     )
     @as("HealthCheckConfiguration")
     healthCheckConfiguration: option<healthCheckConfiguration>,
     @ocaml.doc("<p>An optional custom encryption key that App Runner uses to encrypt the copy of your source repository that it maintains and your service logs. By default,
-      App Runner uses an AWS managed CMK.</p>")
+      App Runner uses an Amazon Web Services managed key.</p>")
     @as("EncryptionConfiguration")
     encryptionConfiguration: option<encryptionConfiguration>,
     @ocaml.doc(
-      "<p>An optional list of metadata items that you can associate with your service resource. A tag is a key-value pair.</p>"
+      "<p>An optional list of metadata items that you can associate with the App Runner service resource. A tag is a key-value pair.</p>"
     )
     @as("Tags")
     tags: option<tagList_>,
@@ -1304,7 +1507,7 @@ module CreateService = {
     @as("SourceConfiguration")
     sourceConfiguration: sourceConfiguration,
     @ocaml.doc(
-      "<p>A name for the new service. It must be unique across all the running App Runner services in your AWS account in the AWS Region.</p>"
+      "<p>A name for the App Runner service. It must be unique across all the running App Runner services in your Amazon Web Services account in the Amazon Web Services Region.</p>"
     )
     @as("ServiceName")
     serviceName: serviceName,
@@ -1323,6 +1526,7 @@ module CreateService = {
   let make = (
     ~sourceConfiguration,
     ~serviceName,
+    ~networkConfiguration=?,
     ~autoScalingConfigurationArn=?,
     ~healthCheckConfiguration=?,
     ~encryptionConfiguration=?,
@@ -1331,6 +1535,7 @@ module CreateService = {
     (),
   ) =>
     new({
+      networkConfiguration: networkConfiguration,
       autoScalingConfigurationArn: autoScalingConfigurationArn,
       healthCheckConfiguration: healthCheckConfiguration,
       encryptionConfiguration: encryptionConfiguration,

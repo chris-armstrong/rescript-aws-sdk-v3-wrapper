@@ -18,6 +18,11 @@ type __string = string
 type __integerMin1Max25 = int
 type __double = float
 type __boolean = bool
+type unAuthenticatedElement = [
+  | @as("DELETE") #DELETE
+  | @as("CREATE_AND_UPDATE") #CREATE_AND_UPDATE
+  | @as("READ") #READ
+]
 type status = [@as("STALE") #STALE | @as("LATEST") #LATEST]
 type signInMethod = [
   | @as("USERNAME") #USERNAME
@@ -25,9 +30,10 @@ type signInMethod = [
   | @as("EMAIL_AND_PHONE_NUMBER") #EMAIL_AND_PHONE_NUMBER
   | @as("EMAIL") #EMAIL
 ]
+type serviceName = [@as("S3") #S3]
 type service = [@as("COGNITO") #COGNITO]
 @ocaml.doc("<p>Defines the resource configuration for the data model in your Amplify project.</p>")
-type resourceConfig = unit
+type resourceConfig = {.}
 type resolutionStrategy = [
   | @as("NONE") #NONE
   | @as("AUTOMERGE") #AUTOMERGE
@@ -69,7 +75,13 @@ type mode = [
 ]
 type mfaTypesElement = [@as("TOTP") #TOTP | @as("SMS") #SMS]
 type mfamode = [@as("OPTIONAL") #OPTIONAL | @as("OFF") #OFF | @as("ON") #ON]
+@ocaml.doc("<p>The type of verification message to send.</p>")
 type deliveryMethod = [@as("SMS") #SMS | @as("EMAIL") #EMAIL]
+type authenticatedElement = [
+  | @as("DELETE") #DELETE
+  | @as("CREATE_AND_UPDATE") #CREATE_AND_UPDATE
+  | @as("READ") #READ
+]
 type authResources = [
   | @as("IDENTITY_POOL_AND_USER_POOL") #IDENTITY_POOL_AND_USER_POOL
   | @as("USER_POOL_ONLY") #USER_POOL_ONLY
@@ -85,14 +97,21 @@ type additionalConstraintsElement = [
 )
 type updateBackendAuthIdentityPoolConfig = {
   @ocaml.doc(
-    "<p>A Boolean value that you can set to allow or disallow guest-level authorization into your Amplify app.</p>"
+    "<p>A boolean value that can be set to allow or disallow guest-level authorization into your Amplify app.</p>"
   )
   @as("UnauthenticatedLogin")
   unauthenticatedLogin: option<__boolean>,
 }
 @ocaml.doc("<p>SMS settings for authentication.</p>")
 type smsSettings = {
-  @ocaml.doc("<p>The body of the SMS message.</p>") @as("SmsMessage") smsMessage: option<__string>,
+  @ocaml.doc("<p>The contents of the SMS message.</p>") @as("SmsMessage")
+  smsMessage: option<__string>,
+}
+@ocaml.doc("<p>Describes the metadata of the S3 bucket.</p>")
+type s3BucketInfo = {
+  @ocaml.doc("<p>The name of the S3 bucket.</p>") @as("Name") name: option<__string>,
+  @ocaml.doc("<p>The creation date of the S3 bucket.</p>") @as("CreationDate")
+  creationDate: option<__string>,
 }
 @ocaml.doc("<p>The request object for this operation.</p>")
 type loginAuthConfigReqObj = {
@@ -107,20 +126,24 @@ type loginAuthConfigReqObj = {
   @ocaml.doc("<p>The AWS Region for the Amplify Admin UI login.</p>") @as("AwsCognitoRegion")
   awsCognitoRegion: option<__string>,
   @ocaml.doc(
-    "<p>The Amazon Cognito identity pool ID used for Amplify Admin UI login authorization.</p>"
+    "<p>The Amazon Cognito identity pool ID used for the Amplify Admin UI login authorization.</p>"
   )
   @as("AwsCognitoIdentityPoolId")
   awsCognitoIdentityPoolId: option<__string>,
 }
 type listOf__string = array<__string>
+type listOfUnAuthenticatedElement = array<unAuthenticatedElement>
 type listOfRequiredSignUpAttributesElement = array<requiredSignUpAttributesElement>
 type listOfOAuthScopesElement = array<oauthScopesElement>
 type listOfMfaTypesElement = array<mfaTypesElement>
+type listOfAuthenticatedElement = array<authenticatedElement>
 type listOfAdditionalConstraintsElement = array<additionalConstraintsElement>
 @ocaml.doc("<p>The configuration for the email sent when an app user forgets their password.</p>")
 type emailSettings = {
-  @ocaml.doc("<p>The subject of the email.</p>") @as("EmailSubject") emailSubject: option<__string>,
-  @ocaml.doc("<p>The body of the email.</p>") @as("EmailMessage") emailMessage: option<__string>,
+  @ocaml.doc("<p>The contents of the subject line of the email message.</p>") @as("EmailSubject")
+  emailSubject: option<__string>,
+  @ocaml.doc("<p>The contents of the email message.</p>") @as("EmailMessage")
+  emailMessage: option<__string>,
 }
 @ocaml.doc(
   "<p>Describes authorization configurations for the auth resources, configured as a part of your Amplify project.</p>"
@@ -131,7 +154,8 @@ type createBackendAuthIdentityPoolConfig = {
   )
   @as("UnauthenticatedLogin")
   unauthenticatedLogin: __boolean,
-  @ocaml.doc("<p>Name of the identity pool used for authorization.</p>") @as("IdentityPoolName")
+  @ocaml.doc("<p>Name of the Amazon Cognito identity pool used for authorization.</p>")
+  @as("IdentityPoolName")
   identityPoolName: __string,
 }
 @ocaml.doc("<p>The response object for this operation.</p>")
@@ -141,7 +165,7 @@ type backendJobRespObj = {
   @ocaml.doc("<p>The current status of the request.</p>") @as("Status") status: option<__string>,
   @ocaml.doc("<p>The name of the operation.</p>") @as("Operation") operation: option<__string>,
   @ocaml.doc("<p>The ID for the job.</p>") @as("JobId") jobId: option<__string>,
-  @ocaml.doc("<p>If the request failed, this is the returned error.</p>") @as("Error")
+  @ocaml.doc("<p>If the request fails, this error is returned.</p>") @as("Error")
   error: option<__string>,
   @ocaml.doc("<p>The time when the job was created.</p>") @as("CreateTime")
   createTime: option<__string>,
@@ -154,18 +178,32 @@ type backendJobRespObj = {
 )
 type backendAuthSocialProviderConfig = {
   @ocaml.doc(
-    "<p>Describes the client_secret that can be obtained from third-party social federation providers.</p>"
+    "<p>Describes the client_secret, which can be obtained from third-party social federation providers.</p>"
   )
   @as("ClientSecret")
   clientSecret: option<__string>,
   @ocaml.doc(
-    "<p>Describes the client_id that can be obtained from the third-party social federation provider.</p>"
+    "<p>Describes the client_id, which can be obtained from the third-party social federation provider.</p>"
   )
   @as("ClientId")
   clientId: option<__string>,
 }
 @ocaml.doc(
-  "<p>Describes the conflict resolution configuration for the data model configured in your Amplify project.</p>"
+  "<p>Describes Apple social federation configurations for allowing your app users to sign in using OAuth.</p>"
+)
+type backendAuthAppleProviderConfig = {
+  @ocaml.doc("<p>Describes the team_id that comes from Apple.</p>") @as("TeamId")
+  teamId: option<__string>,
+  @ocaml.doc("<p>Describes the private_key that comes from Apple.</p>") @as("PrivateKey")
+  privateKey: option<__string>,
+  @ocaml.doc("<p>Describes the key_id that comes from Apple.</p>") @as("KeyId")
+  keyId: option<__string>,
+  @ocaml.doc("<p>Describes the client_id (also called Services ID) that comes from Apple.</p>")
+  @as("ClientId")
+  clientId: option<__string>,
+}
+@ocaml.doc(
+  "<p>Describes the conflict resolution configuration for your data model configured in your Amplify project.</p>"
 )
 type backendAPIConflictResolution = {
   @ocaml.doc("<p>The strategy for conflict resolution.</p>") @as("ResolutionStrategy")
@@ -176,42 +214,53 @@ type backendAPIConflictResolution = {
 )
 type backendAPIAppSyncAuthSettings = {
   @ocaml.doc(
-    "<p>The openID provider name, if openID is used as an authentication mechanism to access your data models.</p>"
+    "<p>The OpenID provider name, if OpenID was used as an authentication mechanism to access your data models.</p>"
   )
   @as("OpenIDProviderName")
   openIDProviderName: option<__string>,
   @ocaml.doc(
-    "<p>The openID issuer URL, if openID is used as an authentication setting to access your data models.</p>"
+    "<p>The openID issuer URL, if openID was used as an authentication setting to access your data models.</p>"
   )
   @as("OpenIDIssueURL")
   openIDIssueURL: option<__string>,
   @ocaml.doc("<p>The expiry time for the OpenID authentication mechanism.</p>") @as("OpenIDIatTTL")
   openIDIatTTL: option<__string>,
   @ocaml.doc(
-    "<p>The clientID for openID, if openID is used as an authentication setting to access your data models.</p>"
+    "<p>The clientID for openID, if openID was used as an authentication setting to access your data models.</p>"
   )
   @as("OpenIDClientId")
   openIDClientId: option<__string>,
   @ocaml.doc("<p>The expiry time for the OpenID authentication mechanism.</p>") @as("OpenIDAuthTTL")
   openIDAuthTTL: option<__string>,
   @ocaml.doc(
-    "<p>The API key expiration time for API_KEY, if it is used as an authentication mechanism to access your data models.</p>"
+    "<p>The API key expiration time for API_KEY, if it was used as an authentication mechanism to access your data models.</p>"
   )
   @as("ExpirationTime")
   expirationTime: option<__double>,
   @ocaml.doc(
-    "<p>The API key description for API_KEY, if it is used as an authentication mechanism to access your data models.</p>"
+    "<p>The API key description for API_KEY, if it was used as an authentication mechanism to access your data models.</p>"
   )
   @as("Description")
   description: option<__string>,
   @ocaml.doc(
-    "<p>The Amazon Cognito user pool ID, if Amazon Cognito is used as an authentication setting to access your data models.</p>"
+    "<p>The Amazon Cognito user pool ID, if Amazon Cognito was used as an authentication setting to access your data models.</p>"
   )
   @as("CognitoUserPoolId")
   cognitoUserPoolId: option<__string>,
 }
 @ocaml.doc(
-  "<p>Describes the password policy for your Amazon Cognito user pool that's configured as a part of your Amplify project.</p>"
+  "<p>Updates the configuration of the email or SMS message for the auth resource configured for your Amplify project.</p>"
+)
+type updateBackendAuthVerificationMessageConfig = {
+  @ocaml.doc("<p>The settings for the SMS message.</p>") @as("SmsSettings")
+  smsSettings: option<smsSettings>,
+  @ocaml.doc("<p>The settings for the email message.</p>") @as("EmailSettings")
+  emailSettings: option<emailSettings>,
+  @ocaml.doc("<p>The type of verification message to send.</p>") @as("DeliveryMethod")
+  deliveryMethod: deliveryMethod,
+}
+@ocaml.doc(
+  "<p>Describes the password policy for your Amazon Cognito user pool configured as a part of your Amplify project.</p>"
 )
 type updateBackendAuthPasswordPolicyConfig = {
   @ocaml.doc(
@@ -220,23 +269,27 @@ type updateBackendAuthPasswordPolicyConfig = {
   @as("MinimumLength")
   minimumLength: option<__double>,
   @ocaml.doc(
-    "<p>Describes additional constrains on the password requirements to sign in to the auth resource, configured as a part of your Amplify project.</p>"
+    "<p>Describes additional constraints on password requirements to sign in to the auth resource, configured as a part of your Amplify project.</p>"
   )
   @as("AdditionalConstraints")
   additionalConstraints: option<listOfAdditionalConstraintsElement>,
 }
-@ocaml.doc("<p>Describes the forgot password policy for authenticating into the Amplify app.</p>")
+@ocaml.doc(
+  "<p><b>(DEPRECATED)</b> Describes the forgot password policy for authenticating into the Amplify app.</p>"
+)
 type updateBackendAuthForgotPasswordConfig = {
   @ocaml.doc(
-    "<p>The configuration for the SMS message sent when an Amplify app user forgets their password.</p>"
+    "<p><b>(DEPRECATED)</b> The configuration for the SMS message sent when an Amplify app user forgets their password.</p>"
   )
   @as("SmsSettings")
   smsSettings: option<smsSettings>,
-  @ocaml.doc("<p>The configuration for the email sent when an app user forgets their password.</p>")
+  @ocaml.doc(
+    "<p><b>(DEPRECATED)</b> The configuration for the email sent when an app user forgets their password.</p>"
+  )
   @as("EmailSettings")
   emailSettings: option<emailSettings>,
   @ocaml.doc(
-    "<p>Describes which method to use (either SMS or email) to deliver messages to app users that want to recover their password.</p>"
+    "<p><b>(DEPRECATED)</b> Describes which mode to use (either SMS or email) to deliver messages to app users that want to recover their password.</p>"
   )
   @as("DeliveryMethod")
   deliveryMethod: option<deliveryMethod>,
@@ -245,6 +298,7 @@ type updateBackendAuthForgotPasswordConfig = {
   "<p>The settings for using the social identity providers for access to your Amplify app.</p>"
 )
 type socialProviderSettings = {
+  @as("SignInWithApple") signInWithApple: option<backendAuthAppleProviderConfig>,
   @as("LoginWithAmazon") loginWithAmazon: option<backendAuthSocialProviderConfig>,
   @as("Google") google: option<backendAuthSocialProviderConfig>,
   @as("Facebook") facebook: option<backendAuthSocialProviderConfig>,
@@ -255,8 +309,20 @@ type settings = {
   @ocaml.doc("<p>The supported MFA types.</p>") @as("MfaTypes")
   mfaTypes: option<listOfMfaTypesElement>,
 }
+type listOfS3BucketInfo = array<s3BucketInfo>
 type listOfBackendJobRespObj = array<backendJobRespObj>
-@ocaml.doc("<p>The password policy configuration for the backend of your Amplify project.</p>")
+@ocaml.doc(
+  "<p>Creates an email or SMS verification message for the auth resource configured for your Amplify project.</p>"
+)
+type createBackendAuthVerificationMessageConfig = {
+  @ocaml.doc("<p>The settings for the SMS message.</p>") @as("SmsSettings")
+  smsSettings: option<smsSettings>,
+  @ocaml.doc("<p>The settings for the email message.</p>") @as("EmailSettings")
+  emailSettings: option<emailSettings>,
+  @ocaml.doc("<p>The type of verification message to send.</p>") @as("DeliveryMethod")
+  deliveryMethod: deliveryMethod,
+}
+@ocaml.doc("<p>The password policy configuration for the backend to your Amplify project.</p>")
 type createBackendAuthPasswordPolicyConfig = {
   @ocaml.doc(
     "<p>The minimum length of the password used to access the backend of your Amplify project.</p>"
@@ -269,27 +335,52 @@ type createBackendAuthPasswordPolicyConfig = {
   @as("AdditionalConstraints")
   additionalConstraints: option<listOfAdditionalConstraintsElement>,
 }
-@ocaml.doc("<p>Describes the forgot password policy for authenticating into the Amplify app.</p>")
+@ocaml.doc(
+  "<p><b>(DEPRECATED)</b> Describes the forgot password policy for authenticating into the Amplify app.</p>"
+)
 type createBackendAuthForgotPasswordConfig = {
   @ocaml.doc(
-    "<p>The configuration for the SMS message sent when an app user forgets their password.</p>"
+    "<p><b>(DEPRECATED)</b> The configuration for the SMS message sent when an app user forgets their password.</p>"
   )
   @as("SmsSettings")
   smsSettings: option<smsSettings>,
-  @ocaml.doc("<p>The configuration for the email sent when an app user forgets their password.</p>")
+  @ocaml.doc(
+    "<p><b>(DEPRECATED)</b> The configuration for the email sent when an app user forgets their password.</p>"
+  )
   @as("EmailSettings")
   emailSettings: option<emailSettings>,
   @ocaml.doc(
-    "<p>Describes which method to use (either SMS or email) to deliver messages to app users that want to recover their password.</p>"
+    "<p><b>(DEPRECATED)</b> Describes which mode to use (either SMS or email) to deliver messages to app users who want to recover their password.</p>"
   )
   @as("DeliveryMethod")
   deliveryMethod: deliveryMethod,
+}
+@ocaml.doc(
+  "<p>Describes the read, write, and delete permissions users have against your storage S3 bucket.</p>"
+)
+type backendStoragePermissions = {
+  @ocaml.doc(
+    "<p>Lists all unauthenticated user read, write, and delete permissions for your S3 bucket.</p>"
+  )
+  @as("UnAuthenticated")
+  unAuthenticated: option<listOfUnAuthenticatedElement>,
+  @ocaml.doc(
+    "<p>Lists all authenticated user read, write, and delete permissions for your S3 bucket.</p>"
+  )
+  @as("Authenticated")
+  authenticated: listOfAuthenticatedElement,
 }
 @ocaml.doc("<p>Describes the auth types for your configured data models.</p>")
 type backendAPIAuthType = {
   @ocaml.doc("<p>Describes settings for the authentication mode.</p>") @as("Settings")
   settings: option<backendAPIAppSyncAuthSettings>,
   @ocaml.doc("<p>Describes the authentication mode.</p>") @as("Mode") mode: option<mode>,
+}
+@ocaml.doc("<p>The resource configuration for updating backend storage.</p>")
+type updateBackendStorageResourceConfig = {
+  @ocaml.doc("<p>The name of the storage service.</p>") @as("ServiceName") serviceName: serviceName,
+  @ocaml.doc("<p>The authorization configuration for the storage S3 bucket.</p>") @as("Permissions")
+  permissions: backendStoragePermissions,
 }
 @ocaml.doc("<p>The OAuth configurations for authenticating users into your Amplify app.</p>")
 type updateBackendAuthOAuthConfig = {
@@ -333,11 +424,25 @@ type updateBackendAuthMFAConfig = {
   mfamode: option<mfamode>,
 }
 type listOfBackendAPIAuthType = array<backendAPIAuthType>
+@ocaml.doc("<p>The details for a backend storage resource.</p>")
+type getBackendStorageResourceConfig = {
+  @ocaml.doc("<p>The name of the storage service.</p>") @as("ServiceName") serviceName: serviceName,
+  @ocaml.doc("<p>The authorization configuration for the storage S3 bucket.</p>") @as("Permissions")
+  permissions: option<backendStoragePermissions>,
+  @ocaml.doc("<p>Returns True if the storage resource has been imported.</p>") @as("Imported")
+  imported: __boolean,
+  @ocaml.doc("<p>The name of the S3 bucket.</p>") @as("BucketName") bucketName: option<__string>,
+}
+@ocaml.doc("<p>The resource configuration for creating backend storage.</p>")
+type createBackendStorageResourceConfig = {
+  @ocaml.doc("<p>The name of the storage service.</p>") @as("ServiceName") serviceName: serviceName,
+  @ocaml.doc("<p>The authorization configuration for the storage S3 bucket.</p>") @as("Permissions")
+  permissions: backendStoragePermissions,
+  @ocaml.doc("<p>The name of the S3 bucket.</p>") @as("BucketName") bucketName: option<__string>,
+}
 @ocaml.doc("<p>Creates the OAuth configuration for your Amplify project.</p>")
 type createBackendAuthOAuthConfig = {
-  @ocaml.doc(
-    "<p>The settings for using social identity providers for access to your Amplify app.</p>"
-  )
+  @ocaml.doc("<p>The settings for using social providers to access your Amplify app.</p>")
   @as("SocialProviderSettings")
   socialProviderSettings: option<socialProviderSettings>,
   @ocaml.doc("<p>Redirect URLs that OAuth uses when a user signs out of an Amplify app.</p>")
@@ -347,7 +452,7 @@ type createBackendAuthOAuthConfig = {
   @as("RedirectSignInURIs")
   redirectSignInURIs: listOf__string,
   @ocaml.doc(
-    "<p>List of OAuth-related flows that allow your app users to authenticate from your Amplify app.</p>"
+    "<p>List of OAuth-related flows used to allow your app users to authenticate from your Amplify app.</p>"
   )
   @as("OAuthScopes")
   oauthScopes: listOfOAuthScopesElement,
@@ -360,7 +465,7 @@ type createBackendAuthOAuthConfig = {
   domainPrefix: option<__string>,
 }
 @ocaml.doc(
-  "<p>Describes whether to apply multi-factor authentication (MFA) policies for your Amazon Cognito user pool that's configured as a part of your Amplify project.</p>"
+  "<p>Describes whether to apply multi-factor authentication policies for your Amazon Cognito user pool configured as a part of your Amplify project.</p>"
 )
 type createBackendAuthMFAConfig = {
   @ocaml.doc(
@@ -375,9 +480,14 @@ type createBackendAuthMFAConfig = {
   mfamode: mfamode,
 }
 @ocaml.doc(
-  "<p>Describes the Amazon Cognito user pool configuration to configure the authorization resource for your Amplify project on an update.</p>"
+  "<p>Describes the Amazon Cognito user pool configuration for the authorization resource to be configured for your Amplify project on an update.</p>"
 )
 type updateBackendAuthUserPoolConfig = {
+  @ocaml.doc(
+    "<p>Describes the email or SMS verification message for your Amazon Cognito user pool, configured as a part of your Amplify project.</p>"
+  )
+  @as("VerificationMessage")
+  verificationMessage: option<updateBackendAuthVerificationMessageConfig>,
   @ocaml.doc(
     "<p>Describes the password policy for your Amazon Cognito user pool, configured as a part of your Amplify project.</p>"
   )
@@ -389,12 +499,12 @@ type updateBackendAuthUserPoolConfig = {
   @as("OAuth")
   oauth: option<updateBackendAuthOAuthConfig>,
   @ocaml.doc(
-    "<p>Describes whether to apply multi-factor authentication (MFA) policies for your Amazon Cognito user pool that's configured as a part of your Amplify project.</p>"
+    "<p>Describes whether to apply multi-factor authentication policies for your Amazon Cognito user pool configured as a part of your Amplify project.</p>"
   )
   @as("Mfa")
   mfa: option<updateBackendAuthMFAConfig>,
   @ocaml.doc(
-    "<p>Describes the forgot password policy for your Amazon Cognito user pool, configured as a part of your Amplify project.</p>"
+    "<p><b>(DEPRECATED)</b> Describes the forgot password policy for your Amazon Cognito user pool, configured as a part of your Amplify project.</p>"
   )
   @as("ForgotPassword")
   forgotPassword: option<updateBackendAuthForgotPasswordConfig>,
@@ -403,14 +513,19 @@ type updateBackendAuthUserPoolConfig = {
   "<p>Describes the Amazon Cognito user pool configuration for the auth resource to be configured for your Amplify project.</p>"
 )
 type createBackendAuthUserPoolConfig = {
+  @ocaml.doc(
+    "<p>Describes the email or SMS verification message for your Amazon Cognito user pool, configured as a part of your Amplify project.</p>"
+  )
+  @as("VerificationMessage")
+  verificationMessage: option<createBackendAuthVerificationMessageConfig>,
   @ocaml.doc("<p>The Amazon Cognito user pool name.</p>") @as("UserPoolName")
   userPoolName: __string,
   @ocaml.doc(
-    "<p>Describes the sign-in methods that your Amplify app users to log in using the Amazon Cognito user pool that's configured as a part of your Amplify project.</p>"
+    "<p>Describes the sign-in methods that your Amplify app users use to log in using the Amazon Cognito user pool, configured as a part of your Amplify project.</p>"
   )
   @as("SignInMethod")
   signInMethod: signInMethod,
-  @ocaml.doc("<p>The required attributes to sign up new users in the Amazon Cognito user pool.</p>")
+  @ocaml.doc("<p>The required attributes to sign up new users in the user pool.</p>")
   @as("RequiredSignUpAttributes")
   requiredSignUpAttributes: listOfRequiredSignUpAttributesElement,
   @ocaml.doc(
@@ -424,18 +539,18 @@ type createBackendAuthUserPoolConfig = {
   @as("OAuth")
   oauth: option<createBackendAuthOAuthConfig>,
   @ocaml.doc(
-    "<p>Describes whether to apply multi-factor authentication (MFA) policies for your Amazon Cognito user pool that's configured as a part of your Amplify project.</p>"
+    "<p>Describes whether to apply multi-factor authentication policies for your Amazon Cognito user pool configured as a part of your Amplify project.</p>"
   )
   @as("Mfa")
   mfa: option<createBackendAuthMFAConfig>,
   @ocaml.doc(
-    "<p>Describes the forgotten password policy for your Amazon Cognito user pool, configured as a part of your Amplify project.</p>"
+    "<p><b>(DEPRECATED)</b> Describes the forgotten password policy for your Amazon Cognito user pool, configured as a part of your Amplify project.</p>"
   )
   @as("ForgotPassword")
   forgotPassword: option<createBackendAuthForgotPasswordConfig>,
 }
 @ocaml.doc(
-  "<p>The resource configuration for the data model, configured as a part of the Amplify project.</p>"
+  "<p>The resource config for the data model, configured as a part of the Amplify project.</p>"
 )
 type backendAPIResourceConfig = {
   @ocaml.doc(
@@ -455,7 +570,7 @@ type backendAPIResourceConfig = {
   @as("ConflictResolution")
   conflictResolution: option<backendAPIConflictResolution>,
   @ocaml.doc(
-    "<p>The API name used to interact with the data model, configured as a part of the Amplify project.</p>"
+    "<p>The API name used to interact with the data model, configured as a part of your Amplify project.</p>"
   )
   @as("ApiName")
   apiName: option<__string>,
@@ -468,7 +583,7 @@ type backendAPIResourceConfig = {
 )
 type updateBackendAuthResourceConfig = {
   @ocaml.doc(
-    "<p>Describes the authentication configuration for the Amazon Cognito user pool, provisioned as a part of the auth resource in your Amplify project.</p>"
+    "<p>Describes the authentication configuration for the Amazon Cognito user pool, provisioned as a part of your auth resource in the Amplify project.</p>"
   )
   @as("UserPoolConfigs")
   userPoolConfigs: updateBackendAuthUserPoolConfig,
@@ -478,7 +593,7 @@ type updateBackendAuthResourceConfig = {
   @as("Service")
   service: service,
   @ocaml.doc(
-    "<p>Describes the authorization configuration for the Amazon Cognito identity pool, provisioned as a part of the auth resource in your Amplify project.</p>"
+    "<p>Describes the authorization configuration for the Amazon Cognito identity pool, provisioned as a part of your auth resource in the Amplify project.</p>"
   )
   @as("IdentityPoolConfigs")
   identityPoolConfigs: option<updateBackendAuthIdentityPoolConfig>,
@@ -493,7 +608,7 @@ type updateBackendAuthResourceConfig = {
 )
 type createBackendAuthResourceConfig = {
   @ocaml.doc(
-    "<p>Describes the authentication configuration for the Amazon Cognito user pool, provisioned as a part of the auth resource in your Amplify project.</p>"
+    "<p>Describes authentication configuration for the Amazon Cognito user pool, provisioned as a part of your auth resource in the Amplify project.</p>"
   )
   @as("UserPoolConfigs")
   userPoolConfigs: createBackendAuthUserPoolConfig,
@@ -503,7 +618,7 @@ type createBackendAuthResourceConfig = {
   @as("Service")
   service: service,
   @ocaml.doc(
-    "<p>Describes the authorization configuration for the Amazon Cognito identity pool, provisioned as a part of the auth resource in your Amplify project.</p>"
+    "<p>Describes the authorization configuration for the Amazon Cognito identity pool, provisioned as a part of your auth resource in the Amplify project.</p>"
   )
   @as("IdentityPoolConfigs")
   identityPoolConfigs: option<createBackendAuthIdentityPoolConfig>,
@@ -539,7 +654,7 @@ module UpdateBackendJob = {
     @ocaml.doc("<p>The current status of the request.</p>") @as("Status") status: option<__string>,
     @ocaml.doc("<p>The name of the operation.</p>") @as("Operation") operation: option<__string>,
     @ocaml.doc("<p>The ID for the job.</p>") @as("JobId") jobId: option<__string>,
-    @ocaml.doc("<p>If the request failed, this is the returned error.</p>") @as("Error")
+    @ocaml.doc("<p>If the request fails, this error is returned.</p>") @as("Error")
     error: option<__string>,
     @ocaml.doc("<p>The time when the job was created.</p>") @as("CreateTime")
     createTime: option<__string>,
@@ -564,7 +679,7 @@ module RemoveBackendConfig = {
   type t
   type request = {@ocaml.doc("<p>The app ID.</p>") @as("AppId") appId: __string}
   type response = {
-    @ocaml.doc("<p>If the request failed, this is the returned error.</p>") @as("Error")
+    @ocaml.doc("<p>If the request fails, this error is returned.</p>") @as("Error")
     error: option<__string>,
   }
   @module("@aws-sdk/client-amplifybackend") @new
@@ -586,7 +701,7 @@ module RemoveAllBackends = {
     @ocaml.doc("<p>The current status of the request.</p>") @as("Status") status: option<__string>,
     @ocaml.doc("<p>The name of the operation.</p>") @as("Operation") operation: option<__string>,
     @ocaml.doc("<p>The ID for the job.</p>") @as("JobId") jobId: option<__string>,
-    @ocaml.doc("<p>If the request failed, this is the returned error.</p>") @as("Error")
+    @ocaml.doc("<p>If the request fails, this error is returned.</p>") @as("Error")
     error: option<__string>,
     @ocaml.doc("<p>The app ID.</p>") @as("AppId") appId: option<__string>,
   }
@@ -594,6 +709,84 @@ module RemoveAllBackends = {
   external new: request => t = "RemoveAllBackendsCommand"
   let make = (~appId, ~cleanAmplifyApp=?, ()) =>
     new({cleanAmplifyApp: cleanAmplifyApp, appId: appId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module ImportBackendStorage = {
+  type t
+  @ocaml.doc("<p>The request body for ImportBackendStorage.</p>")
+  type request = {
+    @ocaml.doc("<p>The name of the storage service.</p>") @as("ServiceName")
+    serviceName: serviceName,
+    @ocaml.doc("<p>The name of the S3 bucket.</p>") @as("BucketName") bucketName: option<__string>,
+    @ocaml.doc("<p>The name of the backend environment.</p>") @as("BackendEnvironmentName")
+    backendEnvironmentName: __string,
+    @ocaml.doc("<p>The app ID.</p>") @as("AppId") appId: __string,
+  }
+  type response = {
+    @ocaml.doc("<p>The current status of the request.</p>") @as("Status") status: option<__string>,
+    @ocaml.doc("<p>The ID for the job.</p>") @as("JobId") jobId: option<__string>,
+    @ocaml.doc("<p>The name of the backend environment.</p>") @as("BackendEnvironmentName")
+    backendEnvironmentName: option<__string>,
+    @ocaml.doc("<p>The app ID.</p>") @as("AppId") appId: option<__string>,
+  }
+  @module("@aws-sdk/client-amplifybackend") @new
+  external new: request => t = "ImportBackendStorageCommand"
+  let make = (~serviceName, ~backendEnvironmentName, ~appId, ~bucketName=?, ()) =>
+    new({
+      serviceName: serviceName,
+      bucketName: bucketName,
+      backendEnvironmentName: backendEnvironmentName,
+      appId: appId,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module ImportBackendAuth = {
+  type t
+  @ocaml.doc("<p>The request body for ImportBackendAuth.</p>")
+  type request = {
+    @ocaml.doc("<p>The ID of the Amazon Cognito web client.</p>") @as("WebClientId")
+    webClientId: __string,
+    @ocaml.doc("<p>The ID of the Amazon Cognito user pool.</p>") @as("UserPoolId")
+    userPoolId: __string,
+    @ocaml.doc("<p>The ID of the Amazon Cognito native client.</p>") @as("NativeClientId")
+    nativeClientId: __string,
+    @ocaml.doc("<p>The ID of the Amazon Cognito identity pool.</p>") @as("IdentityPoolId")
+    identityPoolId: option<__string>,
+    @ocaml.doc("<p>The name of the backend environment.</p>") @as("BackendEnvironmentName")
+    backendEnvironmentName: __string,
+    @ocaml.doc("<p>The app ID.</p>") @as("AppId") appId: __string,
+  }
+  type response = {
+    @ocaml.doc("<p>The current status of the request.</p>") @as("Status") status: option<__string>,
+    @ocaml.doc("<p>The name of the operation.</p>") @as("Operation") operation: option<__string>,
+    @ocaml.doc("<p>The ID for the job.</p>") @as("JobId") jobId: option<__string>,
+    @ocaml.doc("<p>If the request fails, this error is returned.</p>") @as("Error")
+    error: option<__string>,
+    @ocaml.doc("<p>The name of the backend environment.</p>") @as("BackendEnvironmentName")
+    backendEnvironmentName: option<__string>,
+    @ocaml.doc("<p>The app ID.</p>") @as("AppId") appId: option<__string>,
+  }
+  @module("@aws-sdk/client-amplifybackend") @new
+  external new: request => t = "ImportBackendAuthCommand"
+  let make = (
+    ~webClientId,
+    ~userPoolId,
+    ~nativeClientId,
+    ~backendEnvironmentName,
+    ~appId,
+    ~identityPoolId=?,
+    (),
+  ) =>
+    new({
+      webClientId: webClientId,
+      userPoolId: userPoolId,
+      nativeClientId: nativeClientId,
+      identityPoolId: identityPoolId,
+      backendEnvironmentName: backendEnvironmentName,
+      appId: appId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -632,7 +825,7 @@ module GetBackendJob = {
     @ocaml.doc("<p>The current status of the request.</p>") @as("Status") status: option<__string>,
     @ocaml.doc("<p>The name of the operation.</p>") @as("Operation") operation: option<__string>,
     @ocaml.doc("<p>The ID for the job.</p>") @as("JobId") jobId: option<__string>,
-    @ocaml.doc("<p>If the request failed, this is the returned error.</p>") @as("Error")
+    @ocaml.doc("<p>If the request fails, this error is returned.</p>") @as("Error")
     error: option<__string>,
     @ocaml.doc("<p>The time when the job was created.</p>") @as("CreateTime")
     createTime: option<__string>,
@@ -657,7 +850,7 @@ module GetBackendAPIModels = {
   }
   type response = {
     @ocaml.doc("<p>The current status of the request.</p>") @as("Status") status: option<status>,
-    @ocaml.doc("<p>Stringified JSON of the DataStore model.</p>") @as("Models")
+    @ocaml.doc("<p>Stringified JSON of the datastore model.</p>") @as("Models")
     models: option<__string>,
   }
   @module("@aws-sdk/client-amplifybackend") @new
@@ -680,7 +873,7 @@ module GenerateBackendAPIModels = {
     @ocaml.doc("<p>The current status of the request.</p>") @as("Status") status: option<__string>,
     @ocaml.doc("<p>The name of the operation.</p>") @as("Operation") operation: option<__string>,
     @ocaml.doc("<p>The ID for the job.</p>") @as("JobId") jobId: option<__string>,
-    @ocaml.doc("<p>If the request failed, this is the returned error.</p>") @as("Error")
+    @ocaml.doc("<p>If the request fails, this error is returned.</p>") @as("Error")
     error: option<__string>,
     @ocaml.doc("<p>The name of the backend environment.</p>") @as("BackendEnvironmentName")
     backendEnvironmentName: option<__string>,
@@ -708,6 +901,37 @@ module DeleteToken = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module DeleteBackendStorage = {
+  type t
+  @ocaml.doc("<p>The request body for DeleteBackendStorage.</p>")
+  type request = {
+    @ocaml.doc("<p>The name of the storage service.</p>") @as("ServiceName")
+    serviceName: serviceName,
+    @ocaml.doc("<p>The name of the storage resource.</p>") @as("ResourceName")
+    resourceName: __string,
+    @ocaml.doc("<p>The name of the backend environment.</p>") @as("BackendEnvironmentName")
+    backendEnvironmentName: __string,
+    @ocaml.doc("<p>The app ID.</p>") @as("AppId") appId: __string,
+  }
+  type response = {
+    @ocaml.doc("<p>The current status of the request.</p>") @as("Status") status: option<__string>,
+    @ocaml.doc("<p>The ID for the job.</p>") @as("JobId") jobId: option<__string>,
+    @ocaml.doc("<p>The name of the backend environment.</p>") @as("BackendEnvironmentName")
+    backendEnvironmentName: option<__string>,
+    @ocaml.doc("<p>The app ID.</p>") @as("AppId") appId: option<__string>,
+  }
+  @module("@aws-sdk/client-amplifybackend") @new
+  external new: request => t = "DeleteBackendStorageCommand"
+  let make = (~serviceName, ~resourceName, ~backendEnvironmentName, ~appId, ()) =>
+    new({
+      serviceName: serviceName,
+      resourceName: resourceName,
+      backendEnvironmentName: backendEnvironmentName,
+      appId: appId,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module DeleteBackendAuth = {
   type t
   @ocaml.doc("<p>The request body for DeleteBackendAuth.</p>")
@@ -721,7 +945,7 @@ module DeleteBackendAuth = {
     @ocaml.doc("<p>The current status of the request.</p>") @as("Status") status: option<__string>,
     @ocaml.doc("<p>The name of the operation.</p>") @as("Operation") operation: option<__string>,
     @ocaml.doc("<p>The ID for the job.</p>") @as("JobId") jobId: option<__string>,
-    @ocaml.doc("<p>If the request failed, this is the returned error.</p>") @as("Error")
+    @ocaml.doc("<p>If the request fails, this error is returned.</p>") @as("Error")
     error: option<__string>,
     @ocaml.doc("<p>The name of the backend environment.</p>") @as("BackendEnvironmentName")
     backendEnvironmentName: option<__string>,
@@ -745,7 +969,7 @@ module DeleteBackend = {
     @ocaml.doc("<p>The current status of the request.</p>") @as("Status") status: option<__string>,
     @ocaml.doc("<p>The name of the operation.</p>") @as("Operation") operation: option<__string>,
     @ocaml.doc("<p>The ID for the job.</p>") @as("JobId") jobId: option<__string>,
-    @ocaml.doc("<p>If the request failed, this is the returned error.</p>") @as("Error")
+    @ocaml.doc("<p>If the request fails, this error is returned.</p>") @as("Error")
     error: option<__string>,
     @ocaml.doc("<p>The name of the backend environment.</p>") @as("BackendEnvironmentName")
     backendEnvironmentName: option<__string>,
@@ -803,8 +1027,7 @@ module CreateBackend = {
   type request = {
     @ocaml.doc("<p>The name of the resource.</p>") @as("ResourceName")
     resourceName: option<__string>,
-    @ocaml.doc("<p>The resource configuration for the backend creation request.</p>")
-    @as("ResourceConfig")
+    @ocaml.doc("<p>The resource configuration for creating a backend.</p>") @as("ResourceConfig")
     resourceConfig: option<resourceConfig>,
     @ocaml.doc("<p>The name of the backend environment.</p>") @as("BackendEnvironmentName")
     backendEnvironmentName: __string,
@@ -815,7 +1038,7 @@ module CreateBackend = {
     @ocaml.doc("<p>The current status of the request.</p>") @as("Status") status: option<__string>,
     @ocaml.doc("<p>The name of the operation.</p>") @as("Operation") operation: option<__string>,
     @ocaml.doc("<p>The ID for the job.</p>") @as("JobId") jobId: option<__string>,
-    @ocaml.doc("<p>If the request failed, this is the returned error.</p>") @as("Error")
+    @ocaml.doc("<p>If the request fails, this error is returned.</p>") @as("Error")
     error: option<__string>,
     @ocaml.doc("<p>The name of the backend environment.</p>") @as("BackendEnvironmentName")
     backendEnvironmentName: option<__string>,
@@ -848,7 +1071,7 @@ module CloneBackend = {
     @ocaml.doc("<p>The current status of the request.</p>") @as("Status") status: option<__string>,
     @ocaml.doc("<p>The name of the operation.</p>") @as("Operation") operation: option<__string>,
     @ocaml.doc("<p>The ID for the job.</p>") @as("JobId") jobId: option<__string>,
-    @ocaml.doc("<p>If the request failed, this is the returned error.</p>") @as("Error")
+    @ocaml.doc("<p>If the request fails, this error is returned.</p>") @as("Error")
     error: option<__string>,
     @ocaml.doc("<p>The name of the backend environment.</p>") @as("BackendEnvironmentName")
     backendEnvironmentName: option<__string>,
@@ -879,7 +1102,7 @@ module UpdateBackendConfig = {
     )
     @as("LoginAuthConfig")
     loginAuthConfig: option<loginAuthConfigReqObj>,
-    @ocaml.doc("<p>If the request failed, this is the returned error.</p>") @as("Error")
+    @ocaml.doc("<p>If the request fails, this error is returned.</p>") @as("Error")
     error: option<__string>,
     @ocaml.doc("<p>The app ID for the backend manager.</p>") @as("BackendManagerAppId")
     backendManagerAppId: option<__string>,
@@ -909,15 +1132,31 @@ module GetBackend = {
     backendEnvironmentList: option<listOf__string>,
     @ocaml.doc("<p>The name of the app.</p>") @as("AppName") appName: option<__string>,
     @ocaml.doc("<p>The app ID.</p>") @as("AppId") appId: option<__string>,
-    @ocaml.doc(
-      "<p>A stringified version of the current configurations for your Amplify project.</p>"
-    )
+    @ocaml.doc("<p>A stringified version of the current configs for your Amplify project.</p>")
     @as("AmplifyMetaConfig")
     amplifyMetaConfig: option<__string>,
+    @ocaml.doc("<p>A stringified version of the cli.json file for your Amplify project.</p>")
+    @as("AmplifyFeatureFlags")
+    amplifyFeatureFlags: option<__string>,
   }
   @module("@aws-sdk/client-amplifybackend") @new external new: request => t = "GetBackendCommand"
   let make = (~appId, ~backendEnvironmentName=?, ()) =>
     new({backendEnvironmentName: backendEnvironmentName, appId: appId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module ListS3Buckets = {
+  type t
+  @ocaml.doc("<p>The request body for S3Buckets.</p>")
+  type request = {
+    @ocaml.doc("<p>Reserved for future use.</p>") @as("NextToken") nextToken: option<__string>,
+  }
+  type response = {
+    @ocaml.doc("<p>Reserved for future use.</p>") @as("NextToken") nextToken: option<__string>,
+    @ocaml.doc("<p>The list of S3 buckets.</p>") @as("Buckets") buckets: option<listOfS3BucketInfo>,
+  }
+  @module("@aws-sdk/client-amplifybackend") @new external new: request => t = "ListS3BucketsCommand"
+  let make = (~nextToken=?, ()) => new({nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -975,6 +1214,97 @@ module ListBackendJobs = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module UpdateBackendStorage = {
+  type t
+  @ocaml.doc("<p>The request body for UpdateBackendStorage.</p>")
+  type request = {
+    @ocaml.doc("<p>The name of the storage resource.</p>") @as("ResourceName")
+    resourceName: __string,
+    @ocaml.doc("<p>The resource configuration for updating backend storage.</p>")
+    @as("ResourceConfig")
+    resourceConfig: updateBackendStorageResourceConfig,
+    @ocaml.doc("<p>The name of the backend environment.</p>") @as("BackendEnvironmentName")
+    backendEnvironmentName: __string,
+    @ocaml.doc("<p>The app ID.</p>") @as("AppId") appId: __string,
+  }
+  type response = {
+    @ocaml.doc("<p>The current status of the request.</p>") @as("Status") status: option<__string>,
+    @ocaml.doc("<p>The ID for the job.</p>") @as("JobId") jobId: option<__string>,
+    @ocaml.doc("<p>The name of the backend environment.</p>") @as("BackendEnvironmentName")
+    backendEnvironmentName: option<__string>,
+    @ocaml.doc("<p>The app ID.</p>") @as("AppId") appId: option<__string>,
+  }
+  @module("@aws-sdk/client-amplifybackend") @new
+  external new: request => t = "UpdateBackendStorageCommand"
+  let make = (~resourceName, ~resourceConfig, ~backendEnvironmentName, ~appId, ()) =>
+    new({
+      resourceName: resourceName,
+      resourceConfig: resourceConfig,
+      backendEnvironmentName: backendEnvironmentName,
+      appId: appId,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module GetBackendStorage = {
+  type t
+  @ocaml.doc("<p>The request body for GetBackendStorage.</p>")
+  type request = {
+    @ocaml.doc("<p>The name of the storage resource.</p>") @as("ResourceName")
+    resourceName: __string,
+    @ocaml.doc("<p>The name of the backend environment.</p>") @as("BackendEnvironmentName")
+    backendEnvironmentName: __string,
+    @ocaml.doc("<p>The app ID.</p>") @as("AppId") appId: __string,
+  }
+  type response = {
+    @ocaml.doc("<p>The name of the storage resource.</p>") @as("ResourceName")
+    resourceName: option<__string>,
+    @ocaml.doc("<p>The resource configuration for the backend storage resource.</p>")
+    @as("ResourceConfig")
+    resourceConfig: option<getBackendStorageResourceConfig>,
+    @ocaml.doc("<p>The name of the backend environment.</p>") @as("BackendEnvironmentName")
+    backendEnvironmentName: option<__string>,
+    @ocaml.doc("<p>The app ID.</p>") @as("AppId") appId: option<__string>,
+  }
+  @module("@aws-sdk/client-amplifybackend") @new
+  external new: request => t = "GetBackendStorageCommand"
+  let make = (~resourceName, ~backendEnvironmentName, ~appId, ()) =>
+    new({resourceName: resourceName, backendEnvironmentName: backendEnvironmentName, appId: appId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module CreateBackendStorage = {
+  type t
+  @ocaml.doc("<p>The request body for CreateBackendStorage.</p>")
+  type request = {
+    @ocaml.doc("<p>The name of the storage resource.</p>") @as("ResourceName")
+    resourceName: __string,
+    @ocaml.doc("<p>The resource configuration for creating backend storage.</p>")
+    @as("ResourceConfig")
+    resourceConfig: createBackendStorageResourceConfig,
+    @ocaml.doc("<p>The name of the backend environment.</p>") @as("BackendEnvironmentName")
+    backendEnvironmentName: __string,
+    @ocaml.doc("<p>The app ID.</p>") @as("AppId") appId: __string,
+  }
+  type response = {
+    @ocaml.doc("<p>The current status of the request.</p>") @as("Status") status: option<__string>,
+    @ocaml.doc("<p>The ID for the job.</p>") @as("JobId") jobId: option<__string>,
+    @ocaml.doc("<p>The name of the backend environment.</p>") @as("BackendEnvironmentName")
+    backendEnvironmentName: option<__string>,
+    @ocaml.doc("<p>The app ID.</p>") @as("AppId") appId: option<__string>,
+  }
+  @module("@aws-sdk/client-amplifybackend") @new
+  external new: request => t = "CreateBackendStorageCommand"
+  let make = (~resourceName, ~resourceConfig, ~backendEnvironmentName, ~appId, ()) =>
+    new({
+      resourceName: resourceName,
+      resourceConfig: resourceConfig,
+      backendEnvironmentName: backendEnvironmentName,
+      appId: appId,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module UpdateBackendAPI = {
   type t
   @ocaml.doc("<p>The request body for UpdateBackendAPI.</p>")
@@ -993,7 +1323,7 @@ module UpdateBackendAPI = {
     @ocaml.doc("<p>The current status of the request.</p>") @as("Status") status: option<__string>,
     @ocaml.doc("<p>The name of the operation.</p>") @as("Operation") operation: option<__string>,
     @ocaml.doc("<p>The ID for the job.</p>") @as("JobId") jobId: option<__string>,
-    @ocaml.doc("<p>If the request failed, this is the returned error.</p>") @as("Error")
+    @ocaml.doc("<p>If the request fails, this error is returned.</p>") @as("Error")
     error: option<__string>,
     @ocaml.doc("<p>The name of the backend environment.</p>") @as("BackendEnvironmentName")
     backendEnvironmentName: option<__string>,
@@ -1030,7 +1360,7 @@ module GetBackendAPI = {
     resourceName: option<__string>,
     @ocaml.doc("<p>The resource configuration for this response object.</p>") @as("ResourceConfig")
     resourceConfig: option<backendAPIResourceConfig>,
-    @ocaml.doc("<p>If the request failed, this is the returned error.</p>") @as("Error")
+    @ocaml.doc("<p>If the request fails, this error is returned.</p>") @as("Error")
     error: option<__string>,
     @ocaml.doc("<p>The name of the backend environment.</p>") @as("BackendEnvironmentName")
     backendEnvironmentName: option<__string>,
@@ -1065,7 +1395,7 @@ module DeleteBackendAPI = {
     @ocaml.doc("<p>The current status of the request.</p>") @as("Status") status: option<__string>,
     @ocaml.doc("<p>The name of the operation.</p>") @as("Operation") operation: option<__string>,
     @ocaml.doc("<p>The ID for the job.</p>") @as("JobId") jobId: option<__string>,
-    @ocaml.doc("<p>If the request failed, this is the returned error.</p>") @as("Error")
+    @ocaml.doc("<p>If the request fails, this error is returned.</p>") @as("Error")
     error: option<__string>,
     @ocaml.doc("<p>The name of the backend environment.</p>") @as("BackendEnvironmentName")
     backendEnvironmentName: option<__string>,
@@ -1098,7 +1428,7 @@ module CreateBackendAPI = {
     @ocaml.doc("<p>The current status of the request.</p>") @as("Status") status: option<__string>,
     @ocaml.doc("<p>The name of the operation.</p>") @as("Operation") operation: option<__string>,
     @ocaml.doc("<p>The ID for the job.</p>") @as("JobId") jobId: option<__string>,
-    @ocaml.doc("<p>If the request failed, this is the returned error.</p>") @as("Error")
+    @ocaml.doc("<p>If the request fails, this error is returned.</p>") @as("Error")
     error: option<__string>,
     @ocaml.doc("<p>The name of the backend environment.</p>") @as("BackendEnvironmentName")
     backendEnvironmentName: option<__string>,
@@ -1131,7 +1461,7 @@ module UpdateBackendAuth = {
     @ocaml.doc("<p>The current status of the request.</p>") @as("Status") status: option<__string>,
     @ocaml.doc("<p>The name of the operation.</p>") @as("Operation") operation: option<__string>,
     @ocaml.doc("<p>The ID for the job.</p>") @as("JobId") jobId: option<__string>,
-    @ocaml.doc("<p>If the request failed, this is the returned error.</p>") @as("Error")
+    @ocaml.doc("<p>If the request fails, this error is returned.</p>") @as("Error")
     error: option<__string>,
     @ocaml.doc("<p>The name of the backend environment.</p>") @as("BackendEnvironmentName")
     backendEnvironmentName: option<__string>,
@@ -1166,7 +1496,7 @@ module GetBackendAuth = {
     )
     @as("ResourceConfig")
     resourceConfig: option<createBackendAuthResourceConfig>,
-    @ocaml.doc("<p>If the request failed, this is the returned error.</p>") @as("Error")
+    @ocaml.doc("<p>If the request fails, this error is returned.</p>") @as("Error")
     error: option<__string>,
     @ocaml.doc("<p>The name of the backend environment.</p>") @as("BackendEnvironmentName")
     backendEnvironmentName: option<__string>,
@@ -1194,7 +1524,7 @@ module CreateBackendAuth = {
     @ocaml.doc("<p>The current status of the request.</p>") @as("Status") status: option<__string>,
     @ocaml.doc("<p>The name of the operation.</p>") @as("Operation") operation: option<__string>,
     @ocaml.doc("<p>The ID for the job.</p>") @as("JobId") jobId: option<__string>,
-    @ocaml.doc("<p>If the request failed, this is the returned error.</p>") @as("Error")
+    @ocaml.doc("<p>If the request fails, this error is returned.</p>") @as("Error")
     error: option<__string>,
     @ocaml.doc("<p>The name of the backend environment.</p>") @as("BackendEnvironmentName")
     backendEnvironmentName: option<__string>,

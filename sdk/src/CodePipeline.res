@@ -1557,7 +1557,7 @@ module RegisterWebhookWithThirdParty = {
             supported third party. </p>")
     webhookName: option<webhookName>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-codepipeline") @new
   external new: request => t = "RegisterWebhookWithThirdPartyCommand"
   let make = (~webhookName=?, ()) => new({webhookName: webhookName})
@@ -1579,7 +1579,7 @@ module EnableStageTransition = {
             stage to another.</p>")
     pipelineName: pipelineName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-codepipeline") @new
   external new: request => t = "EnableStageTransitionCommand"
   let make = (~transitionType, ~stageName, ~pipelineName, ()) =>
@@ -1607,7 +1607,7 @@ module DisableStageTransition = {
             one stage to another.</p>")
     pipelineName: pipelineName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-codepipeline") @new
   external new: request => t = "DisableStageTransitionCommand"
   let make = (~reason, ~transitionType, ~stageName, ~pipelineName, ()) =>
@@ -1626,7 +1626,7 @@ module DeregisterWebhookWithThirdParty = {
     @ocaml.doc("<p>The name of the webhook you want to deregister.</p>")
     webhookName: option<webhookName>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-codepipeline") @new
   external new: request => t = "DeregisterWebhookWithThirdPartyCommand"
   let make = (~webhookName=?, ()) => new({webhookName: webhookName})
@@ -1638,7 +1638,7 @@ module DeleteWebhook = {
   type request = {
     @ocaml.doc("<p>The name of the webhook you want to delete.</p>") name: webhookName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-codepipeline") @new external new: request => t = "DeleteWebhookCommand"
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1648,7 +1648,7 @@ module DeletePipeline = {
   type t
   @ocaml.doc("<p>Represents the input of a <code>DeletePipeline</code> action.</p>")
   type request = {@ocaml.doc("<p>The name of the pipeline to be deleted.</p>") name: pipelineName}
-
+  type response = {.}
   @module("@aws-sdk/client-codepipeline") @new external new: request => t = "DeletePipelineCommand"
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1667,7 +1667,7 @@ module DeleteCustomActionType = {
             deploy.</p>")
     category: actionCategory,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-codepipeline") @new
   external new: request => t = "DeleteCustomActionTypeCommand"
   let make = (~version, ~provider, ~category, ()) =>
@@ -1729,7 +1729,7 @@ module UntagResource = {
     @ocaml.doc("<p> The Amazon Resource Name (ARN) of the resource to remove tags from.</p>")
     resourceArn: resourceArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-codepipeline") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1758,7 +1758,7 @@ module PutThirdPartyJobSuccessResult = {
                 <code>PollForThirdPartyJobs</code>.</p>")
     jobId: thirdPartyJobId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-codepipeline") @new
   external new: request => t = "PutThirdPartyJobSuccessResultCommand"
   let make = (
@@ -1793,7 +1793,7 @@ module PutThirdPartyJobFailureResult = {
                 <code>PollForThirdPartyJobs</code>.</p>")
     jobId: thirdPartyJobId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-codepipeline") @new
   external new: request => t = "PutThirdPartyJobFailureResultCommand"
   let make = (~failureDetails, ~clientToken, ~jobId, ()) =>
@@ -1825,7 +1825,7 @@ module PutJobSuccessResult = {
             returned from <code>PollForJobs</code>.</p>")
     jobId: jobId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-codepipeline") @new
   external new: request => t = "PutJobSuccessResultCommand"
   let make = (
@@ -1855,7 +1855,7 @@ module PutJobFailureResult = {
             from <code>PollForJobs</code>.</p>")
     jobId: jobId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-codepipeline") @new
   external new: request => t = "PutJobFailureResultCommand"
   let make = (~failureDetails, ~jobId, ()) => new({failureDetails: failureDetails, jobId: jobId})
@@ -1936,7 +1936,7 @@ module TagResource = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the resource you want to add tags to.</p>")
     resourceArn: resourceArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-codepipeline") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -2182,7 +2182,7 @@ module UpdateActionType = {
     @ocaml.doc("<p>The action type definition for the action type to be updated.</p>")
     actionType: actionTypeDeclaration,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-codepipeline") @new
   external new: request => t = "UpdateActionTypeCommand"
   let make = (~actionType, ()) => new({actionType: actionType})

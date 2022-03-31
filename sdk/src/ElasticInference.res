@@ -171,7 +171,7 @@ module UntagResource = {
         </p>")
     resourceArn: resourceARN,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elastic-inference") @new
   external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
@@ -190,7 +190,7 @@ module TagResource = {
         </p>")
     resourceArn: resourceARN,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elastic-inference") @new
   external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
@@ -293,7 +293,7 @@ module DescribeAccelerators = {
 
 module DescribeAcceleratorTypes = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("<p>
             The available accelerator types.
@@ -301,7 +301,7 @@ module DescribeAcceleratorTypes = {
     acceleratorTypes: option<acceleratorTypeList>,
   }
   @module("@aws-sdk/client-elastic-inference") @new
-  external new: unit => t = "DescribeAcceleratorTypesCommand"
-  let make = () => new()
+  external new: request => t = "DescribeAcceleratorTypesCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

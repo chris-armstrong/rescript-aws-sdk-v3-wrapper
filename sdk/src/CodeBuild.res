@@ -92,6 +92,19 @@ type reportCodeCoverageSortByType = [
   | @as("FILE_PATH") #FILE_PATH
   | @as("LINE_COVERAGE_PERCENTAGE") #LINE_COVERAGE_PERCENTAGE
 ]
+@ocaml.doc("<p>Specifies the visibility of the project's builds. Possible values are:</p>
+
+         <dl>
+            <dt>PUBLIC_READ</dt>
+            <dd>
+               <p>The project builds are visible to the public.</p>
+            </dd>
+            <dt>PRIVATE</dt>
+            <dd>
+               <p>The project builds are not visible to the public.</p>
+            </dd>
+         </dl>")
+type projectVisibilityType = [@as("PRIVATE") #PRIVATE | @as("PUBLIC_READ") #PUBLIC_READ]
 type projectSortByType = [
   | @as("LAST_MODIFIED_TIME") #LAST_MODIFIED_TIME
   | @as("CREATED_TIME") #CREATED_TIME
@@ -173,11 +186,16 @@ type buildBatchPhaseType = [
   | @as("DOWNLOAD_BATCHSPEC") #DOWNLOAD_BATCHSPEC
   | @as("SUBMITTED") #SUBMITTED
 ]
-@ocaml.doc("<p>Specifies the access for objects that are uploaded to an Amazon S3 bucket that is owned by
-            another account.</p>
-        <p>By default, only the account that uploads the objects to the bucket has access to
-            these objects. This property allows you to give the bucket owner access to these
-            objects.</p>
+@ocaml.doc("<p>Specifies the bucket owner's access for objects that another account uploads to their
+            Amazon S3 bucket. By default, only the account that uploads the objects to the bucket has
+            access to these objects. This property allows you to give the bucket owner access to
+            these objects.</p>
+        <note>
+            <p>To use this property, your CodeBuild service role must have the
+                    <code>s3:PutBucketAcl</code> permission. This permission allows CodeBuild to modify
+                the access control list for the bucket.</p>
+        </note>
+        <p>This property can be one of the following values:</p>
          <dl>
             <dt>NONE</dt>
             <dd>
@@ -186,7 +204,7 @@ type buildBatchPhaseType = [
             </dd>
             <dt>READ_ONLY</dt>
             <dd>
-              <p>The bucket owner has read only access to the objects. The uploading account
+              <p>The bucket owner has read-only access to the objects. The uploading account
                         retains ownership of the objects.</p>
             </dd>
             <dt>FULL</dt>
@@ -212,6 +230,10 @@ type buildBatchPhaseType = [
          </dl>")
 type bucketOwnerAccess = [@as("FULL") #FULL | @as("READ_ONLY") #READ_ONLY | @as("NONE") #NONE]
 type boolean_ = bool
+type batchReportModeType = [
+  | @as("REPORT_AGGREGATED_BATCH") #REPORT_AGGREGATED_BATCH
+  | @as("REPORT_INDIVIDUAL_BUILDS") #REPORT_INDIVIDUAL_BUILDS
+]
 type authType = [
   | @as("PERSONAL_ACCESS_TOKEN") #PERSONAL_ACCESS_TOKEN
   | @as("BASIC_AUTH") #BASIC_AUTH
@@ -381,7 +403,7 @@ type testCase = {
   reportArn: option<nonEmptyString>,
 }
 @ocaml.doc("<p>A tag, consisting of a key and a value.</p>
-        <p>This tag is available for use by AWS services that support tags in AWS CodeBuild.</p>")
+        <p>This tag is available for use by Amazon Web Services services that support tags in CodeBuild.</p>")
 type tag = {
   @ocaml.doc("<p>The tag's value.</p>") value: option<valueInput>,
   @ocaml.doc("<p>The tag's key.</p>") key: option<keyInput>,
@@ -398,9 +420,9 @@ type sourceCredentialsInfo = {
   serverType: option<serverType>,
   @ocaml.doc("<p> The Amazon Resource Name (ARN) of the token. </p>") arn: option<nonEmptyString>,
 }
-@ocaml.doc("<p>Information about the authorization settings for AWS CodeBuild to access the source code to be
+@ocaml.doc("<p>Information about the authorization settings for CodeBuild to access the source code to be
             built.</p>
-        <p>This information is for the AWS CodeBuild console's use only. Your code should not get or set
+        <p>This information is for the CodeBuild console's use only. Your code should not get or set
             this information directly.</p>")
 type sourceAuth = {
   @ocaml.doc("<p>The resource value that applies to the specified authorization type.</p>")
@@ -424,18 +446,18 @@ type s3ReportExportConfig = {
         <ul>
             <li>
                 <p>
-                    <code>NONE</code>: AWS CodeBuild creates the raw data in the output bucket. This
+                    <code>NONE</code>: CodeBuild creates the raw data in the output bucket. This
                     is the default if packaging is not specified. </p>
             </li>
             <li>
                 <p>
-                    <code>ZIP</code>: AWS CodeBuild creates a ZIP file with the raw data in the
+                    <code>ZIP</code>: CodeBuild creates a ZIP file with the raw data in the
                     output bucket. </p>
             </li>
          </ul>")
   packaging: option<reportPackagingType>,
   @ocaml.doc("<p> The path to the exported report's raw data results. </p>") path: option<string_>,
-  @ocaml.doc("<p>The AWS account identifier of the owner of the Amazon S3 bucket. This allows report data to be exported to an Amazon S3 bucket
+  @ocaml.doc("<p>The Amazon Web Services account identifier of the owner of the Amazon S3 bucket. This allows report data to be exported to an Amazon S3 bucket
         that is owned by an account other than the account running the build.</p>")
   bucketOwner: option<string_>,
   @ocaml.doc("<p> The name of the S3 bucket where the raw data of a report are exported. </p>")
@@ -466,7 +488,7 @@ type s3LogsConfig = {
          </ul>")
   status: logsConfigStatusType,
 }
-@ocaml.doc("<p>Represents a resolved build artifact. A resolve artifact is an artifact that is built and
+@ocaml.doc("<p>Represents a resolved build artifact. A resolved artifact is an artifact that is built and
             deployed to the destination, such as Amazon S3.</p>")
 type resolvedArtifact = {
   @ocaml.doc("<p>The identifier of the artifact.</p>") identifier: option<string_>,
@@ -507,15 +529,15 @@ type reportArns = array<nonEmptyString>
             </li>
          </ul>
         <p> For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/sample-private-registry.html\">Private Registry with
-                AWS Secrets Manager Sample for AWS CodeBuild</a>. </p>")
+                Secrets Manager Sample for CodeBuild</a>. </p>")
 type registryCredential = {
   @ocaml.doc("<p> The service that created the credentials to access a private Docker registry. The
-            valid value, SECRETS_MANAGER, is for AWS Secrets Manager. </p>")
+            valid value, SECRETS_MANAGER, is for Secrets Manager. </p>")
   credentialProvider: credentialProviderType,
-  @ocaml.doc("<p> The Amazon Resource Name (ARN) or name of credentials created using AWS Secrets Manager. </p>
+  @ocaml.doc("<p> The Amazon Resource Name (ARN) or name of credentials created using Secrets Manager. </p>
         <note>
             <p> The <code>credential</code> can use the name of the credentials only if they
-                exist in your current AWS Region. </p>
+                exist in your current Amazon Web Services Region. </p>
         </note>")
   credential: nonEmptyString,
 }
@@ -525,7 +547,7 @@ type projectSourceVersion = {
           of:</p>
          <ul>
             <li>
-              <p>For AWS CodeCommit: the commit ID, branch, or Git tag to use.</p>
+              <p>For CodeCommit: the commit ID, branch, or Git tag to use.</p>
             </li>
             <li>
               <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that
@@ -547,7 +569,7 @@ type projectSourceVersion = {
             </li>
          </ul>
          <p> For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html\">Source Version Sample
-              with CodeBuild</a> in the <i>AWS CodeBuild User Guide</i>. </p>")
+              with CodeBuild</a> in the <i>CodeBuild User Guide</i>. </p>")
   sourceVersion: string_,
   @ocaml.doc("<p>An identifier for a source in the build project. The identifier can only contain
             alphanumeric characters and underscores, and must be less than 128 characters in length. </p>")
@@ -559,7 +581,7 @@ type projectNames = array<nonEmptyString>
                 Amazon Elastic File System?</a>
         </p>")
 type projectFileSystemLocation = {
-  @ocaml.doc("<p> The mount options for a file system created by AWS EFS. The default mount options
+  @ocaml.doc("<p> The mount options for a file system created by Amazon EFS. The default mount options
             used by CodeBuild are
                 <code>nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2</code>. For
             more information, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/mounting-fs-nfs-mount-settings.html\">Recommended NFS Mount
@@ -576,7 +598,7 @@ type projectFileSystemLocation = {
   mountPoint: option<string_>,
   @ocaml.doc("<p>A string that specifies the location of the file system created by Amazon EFS. Its
             format is <code>efs-dns-name:/directory-path</code>. You can find the DNS name of file
-            system when you view it in the AWS EFS console. The directory path is a path to a
+            system when you view it in the Amazon EFS console. The directory path is a path to a
             directory in the file system that CodeBuild mounts. For example, if the DNS name of a
             file system is <code>fs-abcd1234.efs.us-west-2.amazonaws.com</code>, and its mount
             directory is <code>my-efs-mount-directory</code>, then the <code>location</code> is
@@ -616,9 +638,9 @@ type projectArtifacts = {
   @ocaml.doc("<p>The type of build output artifact to create:</p>
         <ul>
             <li>
-                <p>If <code>type</code> is set to <code>CODEPIPELINE</code>, AWS CodePipeline ignores this
-                    value if specified. This is because AWS CodePipeline manages its build output artifacts
-                    instead of AWS CodeBuild.</p>
+                <p>If <code>type</code> is set to <code>CODEPIPELINE</code>, CodePipeline ignores this
+                    value if specified. This is because CodePipeline manages its build output artifacts
+                    instead of CodeBuild.</p>
             </li>
             <li>
                 <p>If <code>type</code> is set to <code>NO_ARTIFACTS</code>, this value is
@@ -629,26 +651,26 @@ type projectArtifacts = {
                 <ul>
                   <li>
                         <p>
-                        <code>NONE</code>: AWS CodeBuild creates in the output bucket a folder that
+                        <code>NONE</code>: CodeBuild creates in the output bucket a folder that
                             contains the build output. This is the default if <code>packaging</code>
                             is not specified.</p>
                     </li>
                   <li>
                         <p>
-                        <code>ZIP</code>: AWS CodeBuild creates in the output bucket a ZIP file that
+                        <code>ZIP</code>: CodeBuild creates in the output bucket a ZIP file that
                             contains the build output.</p>
                     </li>
                </ul>
             </li>
          </ul>")
   packaging: option<artifactPackaging>,
-  @ocaml.doc("<p>Along with <code>path</code> and <code>namespaceType</code>, the pattern that AWS CodeBuild
+  @ocaml.doc("<p>Along with <code>path</code> and <code>namespaceType</code>, the pattern that CodeBuild
             uses to name and store the output artifact:</p>
         <ul>
             <li>
-                <p>If <code>type</code> is set to <code>CODEPIPELINE</code>, AWS CodePipeline ignores this
-                    value if specified. This is because AWS CodePipeline manages its build output names instead
-                    of AWS CodeBuild.</p>
+                <p>If <code>type</code> is set to <code>CODEPIPELINE</code>, CodePipeline ignores this
+                    value if specified. This is because CodePipeline manages its build output names instead
+                    of CodeBuild.</p>
             </li>
             <li>
                 <p>If <code>type</code> is set to <code>NO_ARTIFACTS</code>, this value is
@@ -681,13 +703,13 @@ type projectArtifacts = {
             </li>
          </ul>")
   name: option<string_>,
-  @ocaml.doc("<p>Along with <code>path</code> and <code>name</code>, the pattern that AWS CodeBuild uses to
+  @ocaml.doc("<p>Along with <code>path</code> and <code>name</code>, the pattern that CodeBuild uses to
             determine the name and location to store the output artifact:</p>
         <ul>
             <li>
-                <p>If <code>type</code> is set to <code>CODEPIPELINE</code>, AWS CodePipeline ignores this
-                    value if specified. This is because AWS CodePipeline manages its build output names instead
-                    of AWS CodeBuild.</p>
+                <p>If <code>type</code> is set to <code>CODEPIPELINE</code>, CodePipeline ignores this
+                    value if specified. This is because CodePipeline manages its build output names instead
+                    of CodeBuild.</p>
             </li>
             <li>
                 <p>If <code>type</code> is set to <code>NO_ARTIFACTS</code>, this value is
@@ -714,13 +736,13 @@ type projectArtifacts = {
             set to <code>MyArtifact.zip</code>, the output artifact is stored in
                 <code>MyArtifacts/<build-ID>/MyArtifact.zip</code>.</p>")
   namespaceType: option<artifactNamespace>,
-  @ocaml.doc("<p>Along with <code>namespaceType</code> and <code>name</code>, the pattern that AWS CodeBuild
+  @ocaml.doc("<p>Along with <code>namespaceType</code> and <code>name</code>, the pattern that CodeBuild
             uses to name and store the output artifact:</p>
         <ul>
             <li>
-                <p>If <code>type</code> is set to <code>CODEPIPELINE</code>, AWS CodePipeline ignores this
-                    value if specified. This is because AWS CodePipeline manages its build output names instead
-                    of AWS CodeBuild.</p>
+                <p>If <code>type</code> is set to <code>CODEPIPELINE</code>, CodePipeline ignores this
+                    value if specified. This is because CodePipeline manages its build output names instead
+                    of CodeBuild.</p>
             </li>
             <li>
                 <p>If <code>type</code> is set to <code>NO_ARTIFACTS</code>, this value is
@@ -740,9 +762,9 @@ type projectArtifacts = {
   @ocaml.doc("<p>Information about the build output artifact location:</p>
         <ul>
             <li>
-                <p>If <code>type</code> is set to <code>CODEPIPELINE</code>, AWS CodePipeline ignores this
-                    value if specified. This is because AWS CodePipeline manages its build output locations
-                    instead of AWS CodeBuild.</p>
+                <p>If <code>type</code> is set to <code>CODEPIPELINE</code>, CodePipeline ignores this
+                    value if specified. This is because CodePipeline manages its build output locations
+                    instead of CodeBuild.</p>
             </li>
             <li>
                 <p>If <code>type</code> is set to <code>NO_ARTIFACTS</code>, this value is
@@ -759,7 +781,7 @@ type projectArtifacts = {
             <li>
                 <p>
                   <code>CODEPIPELINE</code>: The build project has build output generated
-                    through AWS CodePipeline. </p>
+                    through CodePipeline. </p>
                 <note>
                     <p>The <code>CODEPIPELINE</code> type is not supported for
                             <code>secondaryArtifacts</code>.</p>
@@ -795,16 +817,16 @@ type networkInterface = {
 }
 type imageVersions = array<string_>
 type identifiers = array<nonEmptyString>
-@ocaml.doc("<p> Information about the Git submodules configuration for an AWS CodeBuild build project.
+@ocaml.doc("<p> Information about the Git submodules configuration for an CodeBuild build project.
         </p>")
 type gitSubmodulesConfig = {
-  @ocaml.doc("<p> Set to true to fetch Git submodules for your AWS CodeBuild build project. </p>")
+  @ocaml.doc("<p> Set to true to fetch Git submodules for your CodeBuild build project. </p>")
   fetchSubmodules: wrapperBoolean,
 }
 @ocaml.doc("<p>Contains information about an exported environment variable. </p>
-        <p>Exported environment variables are used in conjunction with AWS CodePipeline to export
+        <p>Exported environment variables are used in conjunction with CodePipeline to export
   environment variables from the current build stage to subsequent stages in the pipeline.
-  For more information, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/actions-variables.html\">Working with variables</a> in the <i>AWS CodePipeline User Guide</i>.</p>
+  For more information, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/actions-variables.html\">Working with variables</a> in the <i>CodePipeline User Guide</i>.</p>
         <note>
             <p> During a build, the value of a variable is available starting with the
                   <code>install</code> phase. It can be updated between the start of the
@@ -823,10 +845,10 @@ type environmentVariable = {
         <ul>
             <li>
                 <p>
-                  <code>PARAMETER_STORE</code>: An environment variable stored in Amazon EC2 Systems Manager
+                  <code>PARAMETER_STORE</code>: An environment variable stored in Systems Manager
                     Parameter Store. To learn how to specify a parameter store environment variable,
                     see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#build-spec.env.parameter-store\">env/parameter-store</a> in the
-                    <i>AWS CodeBuild User Guide</i>.</p>
+                    <i>CodeBuild User Guide</i>.</p>
             </li>
             <li>
                 <p>
@@ -835,10 +857,9 @@ type environmentVariable = {
             </li>
             <li>
                 <p>
-                  <code>SECRETS_MANAGER</code>: An environment variable stored in AWS Secrets
-                    Manager. To learn how to specify a secrets manager environment variable, see
+                  <code>SECRETS_MANAGER</code>: An environment variable stored in Secrets Manager. To learn how to specify a secrets manager environment variable, see
                         <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#build-spec.env.secrets-manager\">env/secrets-manager</a> in the
-                    <i>AWS CodeBuild User Guide</i>.</p>
+                    <i>CodeBuild User Guide</i>.</p>
             </li>
          </ul>")
   @as("type")
@@ -846,9 +867,9 @@ type environmentVariable = {
   @ocaml.doc("<p>The value of the environment variable.</p>
         <important>
             <p>We strongly discourage the use of <code>PLAINTEXT</code> environment variables to
-                store sensitive values, especially AWS secret key IDs and secret access keys.
+                store sensitive values, especially Amazon Web Services secret key IDs and secret access keys.
                     <code>PLAINTEXT</code> environment variables can be displayed in plain text
-                using the AWS CodeBuild console and the AWS Command Line Interface (AWS CLI). For sensitive values, we recommend you use an
+                using the CodeBuild console and the CLI. For sensitive values, we recommend you use an
                 environment variable of type <code>PARAMETER_STORE</code> or
                     <code>SECRETS_MANAGER</code>. </p>
         </important>")
@@ -908,28 +929,28 @@ type codeCoverage = {
   @ocaml.doc("<p>The ARN of the report.</p>") reportARN: option<nonEmptyString>,
   @ocaml.doc("<p>The identifier of the code coverage report.</p>") id: option<nonEmptyString>,
 }
-@ocaml.doc("<p> Information about Amazon CloudWatch Logs for a build project. </p>")
+@ocaml.doc("<p> Information about CloudWatch Logs for a build project. </p>")
 type cloudWatchLogsConfig = {
-  @ocaml.doc("<p> The prefix of the stream name of the Amazon CloudWatch Logs. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html\">Working
+  @ocaml.doc("<p> The prefix of the stream name of the CloudWatch Logs. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html\">Working
                 with Log Groups and Log Streams</a>. </p>")
   streamName: option<string_>,
-  @ocaml.doc("<p> The group name of the logs in Amazon CloudWatch Logs. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html\">Working
+  @ocaml.doc("<p> The group name of the logs in CloudWatch Logs. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html\">Working
                 with Log Groups and Log Streams</a>. </p>")
   groupName: option<string_>,
-  @ocaml.doc("<p>The current status of the logs in Amazon CloudWatch Logs for a build project. Valid values are:</p>
+  @ocaml.doc("<p>The current status of the logs in CloudWatch Logs for a build project. Valid values are:</p>
         <ul>
             <li>
                 <p>
-                  <code>ENABLED</code>: Amazon CloudWatch Logs are enabled for this build project.</p>
+                  <code>ENABLED</code>: CloudWatch Logs are enabled for this build project.</p>
             </li>
             <li>
                 <p>
-                  <code>DISABLED</code>: Amazon CloudWatch Logs are not enabled for this build project.</p>
+                  <code>DISABLED</code>: CloudWatch Logs are not enabled for this build project.</p>
             </li>
          </ul>")
   status: logsConfigStatusType,
 }
-@ocaml.doc("<p>Contains information that defines how the AWS CodeBuild build project reports the build status
+@ocaml.doc("<p>Contains information that defines how the CodeBuild build project reports the build status
             to the source provider. </p>")
 type buildStatusConfig = {
   @ocaml.doc("<p>Specifies the target url of the build status CodeBuild sends to the source provider. The
@@ -1012,7 +1033,7 @@ type buildArtifacts = {
   @ocaml.doc("<p>Information about the location of the build artifacts.</p>")
   location: option<string_>,
 }
-@ocaml.doc("<p>Information about the VPC configuration that AWS CodeBuild accesses.</p>")
+@ocaml.doc("<p>Information about the VPC configuration that CodeBuild accesses.</p>")
 type vpcConfig = {
   @ocaml.doc("<p>A list of one or more security groups IDs in your Amazon VPC.</p>")
   securityGroupIds: option<securityGroupIds>,
@@ -1073,22 +1094,23 @@ type projectSource = {
             Enterprise, or Bitbucket. If this is set and you use a different source provider, an
             <code>invalidInputException</code> is thrown. </p>
             <p>To be able to report the build status to the source provider, the user associated with the source provider must
-have write access to the repo. If the user does not have write access, the build status cannot be updated. For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/access-tokens.html\">Source provider access</a> in the <i>AWS CodeBuild User Guide</i>.</p>
-        <note>
-            <p> The status of a build triggered by a webhook is always reported to your source
+have write access to the repo. If the user does not have write access, the build status cannot be updated. For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/access-tokens.html\">Source provider access</a> in the <i>CodeBuild User Guide</i>.</p>
+            <p>The status of a build triggered by a webhook is always reported to your source
                 provider. </p>
-        </note>")
+            <p>If your project's builds are triggered by a webhook, you must push a
+              new commit to the repo for a change to this property to take
+              effect.</p>")
   reportBuildStatus: option<wrapperBoolean>,
-  @ocaml.doc("<p>Information about the authorization settings for AWS CodeBuild to access the source code to be
+  @ocaml.doc("<p>Information about the authorization settings for CodeBuild to access the source code to be
             built.</p>
-        <p>This information is for the AWS CodeBuild console's use only. Your code should not get or set
+        <p>This information is for the CodeBuild console's use only. Your code should not get or set
             this information directly.</p>")
   auth: option<sourceAuth>,
   @ocaml.doc("<p>The buildspec file declaration to use for the builds in this build project.</p>
         <p> If this value is set, it can be either an inline buildspec definition, the path to an
             alternate buildspec file relative to the value of the built-in
                 <code>CODEBUILD_SRC_DIR</code> environment variable, or the path to an S3 bucket.
-            The bucket must be in the same AWS Region as the build project. Specify the buildspec
+            The bucket must be in the same Amazon Web Services Region as the build project. Specify the buildspec
             file using its ARN (for example,
                 <code>arn:aws:s3:::my-codebuild-sample2/buildspec.yml</code>). If this value is not
             provided or is set to an empty string, the source code must contain a buildspec file in
@@ -1103,12 +1125,12 @@ have write access to the repo. If the user does not have write access, the build
         <ul>
             <li>
                 <p>For source code settings that are specified in the source action of a pipeline
-                    in AWS CodePipeline, <code>location</code> should not be specified. If it is specified,
-                    AWS CodePipeline ignores it. This is because AWS CodePipeline uses the settings in a pipeline's source
+                    in CodePipeline, <code>location</code> should not be specified. If it is specified,
+                    CodePipeline ignores it. This is because CodePipeline uses the settings in a pipeline's source
                     action instead of this value.</p>
             </li>
             <li>
-                <p>For source code in an AWS CodeCommit repository, the HTTPS clone URL to the repository
+                <p>For source code in an CodeCommit repository, the HTTPS clone URL to the repository
                     that contains the source code and the buildspec file (for example,
                         <code>https://git-codecommit.<region-ID>.amazonaws.com/v1/repos/<repo-name></code>).</p>
             </li>
@@ -1127,32 +1149,36 @@ have write access to the repo. If the user does not have write access, the build
             </li>
             <li>
                 <p>For source code in a GitHub repository, the HTTPS clone URL to the repository
-                    that contains the source and the buildspec file. You must connect your AWS
-                    account to your GitHub account. Use the AWS CodeBuild console to start creating a build
+                    that contains the source and the buildspec file. You must connect your Amazon Web Services account 
+                    to your GitHub account. Use the CodeBuild console to start creating a build
                     project. When you use the console to connect (or reconnect) with GitHub, on the
                     GitHub <b>Authorize application</b> page, for
                         <b>Organization access</b>, choose <b>Request access</b> next to each repository you want to
-                    allow AWS CodeBuild to have access to, and then choose <b>Authorize
+                    allow CodeBuild to have access to, and then choose <b>Authorize
                         application</b>. (After you have connected to your GitHub account,
-                    you do not need to finish creating the build project. You can leave the AWS CodeBuild
-                    console.) To instruct AWS CodeBuild to use this connection, in the <code>source</code>
+                    you do not need to finish creating the build project. You can leave the CodeBuild
+                    console.) To instruct CodeBuild to use this connection, in the <code>source</code>
                     object, set the <code>auth</code> object's <code>type</code> value to
                         <code>OAUTH</code>.</p>
             </li>
             <li>
                 <p>For source code in a Bitbucket repository, the HTTPS clone URL to the
                     repository that contains the source and the buildspec file. You must connect
-                    your AWS account to your Bitbucket account. Use the AWS CodeBuild console to start
+                    your Amazon Web Services account to your Bitbucket account. Use the CodeBuild console to start
                     creating a build project. When you use the console to connect (or reconnect)
                     with Bitbucket, on the Bitbucket <b>Confirm access to your
                         account</b> page, choose <b>Grant
                         access</b>. (After you have connected to your Bitbucket account, you
-                    do not need to finish creating the build project. You can leave the AWS CodeBuild
-                    console.) To instruct AWS CodeBuild to use this connection, in the <code>source</code>
+                    do not need to finish creating the build project. You can leave the CodeBuild
+                    console.) To instruct CodeBuild to use this connection, in the <code>source</code>
                     object, set the <code>auth</code> object's <code>type</code> value to
                         <code>OAUTH</code>.</p>
             </li>
-         </ul>")
+         </ul>
+        <p>
+          If you specify <code>CODEPIPELINE</code> for the <code>Type</code> property, don't specify this 
+          property. For all of the other types, you must specify <code>Location</code>.
+       </p>")
   location: option<string_>,
   @ocaml.doc("<p>The type of repository that contains the source code to be built. Valid values
             include:</p>
@@ -1163,12 +1189,12 @@ have write access to the repo. If the user does not have write access, the build
             </li>
             <li>
                 <p>
-                  <code>CODECOMMIT</code>: The source code is in an AWS CodeCommit repository.</p>
+                  <code>CODECOMMIT</code>: The source code is in an CodeCommit repository.</p>
             </li>
             <li>
                 <p>
                   <code>CODEPIPELINE</code>: The source code settings are specified in the
-                    source action of a pipeline in AWS CodePipeline.</p>
+                    source action of a pipeline in CodePipeline.</p>
             </li>
             <li>
                 <p>
@@ -1288,43 +1314,43 @@ type projectCache = {
 }
 type projectArtifactsList = array<projectArtifacts>
 type phaseContexts = array<phaseContext>
-@ocaml.doc("<p>Information about build logs in Amazon CloudWatch Logs.</p>")
+@ocaml.doc("<p>Information about build logs in CloudWatch Logs.</p>")
 type logsLocation = {
   @ocaml.doc("<p> Information about S3 logs for a build project. </p>")
   s3Logs: option<s3LogsConfig>,
-  @ocaml.doc("<p> Information about Amazon CloudWatch Logs for a build project. </p>")
+  @ocaml.doc("<p> Information about CloudWatch Logs for a build project. </p>")
   cloudWatchLogs: option<cloudWatchLogsConfig>,
   @ocaml.doc("<p> The ARN of S3 logs for a build project. Its format is
                 <code>arn:${Partition}:s3:::${BucketName}/${ObjectName}</code>. For more
             information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazons3.html#amazons3-resources-for-iam-policies\">Resources Defined by Amazon S3</a>. </p>")
   s3LogsArn: option<string_>,
-  @ocaml.doc("<p> The ARN of Amazon CloudWatch Logs for a build project. Its format is
+  @ocaml.doc("<p> The ARN of CloudWatch Logs for a build project. Its format is
                 <code>arn:${Partition}:logs:${Region}:${Account}:log-group:${LogGroupName}:log-stream:${LogStreamName}</code>.
-            For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazoncloudwatchlogs.html#amazoncloudwatchlogs-resources-for-iam-policies\">Resources Defined by Amazon CloudWatch Logs</a>. </p>")
+            For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazoncloudwatchlogs.html#amazoncloudwatchlogs-resources-for-iam-policies\">Resources Defined by CloudWatch Logs</a>. </p>")
   cloudWatchLogsArn: option<string_>,
   @ocaml.doc("<p> The URL to a build log in an S3 bucket. </p>") s3DeepLink: option<string_>,
-  @ocaml.doc("<p>The URL to an individual build log in Amazon CloudWatch Logs.</p>")
+  @ocaml.doc("<p>The URL to an individual build log in CloudWatch Logs.</p>")
   deepLink: option<string_>,
-  @ocaml.doc("<p>The name of the Amazon CloudWatch Logs stream for the build logs.</p>")
+  @ocaml.doc("<p>The name of the CloudWatch Logs stream for the build logs.</p>")
   streamName: option<string_>,
-  @ocaml.doc("<p>The name of the Amazon CloudWatch Logs group for the build logs.</p>")
+  @ocaml.doc("<p>The name of the CloudWatch Logs group for the build logs.</p>")
   groupName: option<string_>,
 }
-@ocaml.doc("<p> Information about logs for a build project. These can be logs in Amazon CloudWatch Logs, built in a
+@ocaml.doc("<p> Information about logs for a build project. These can be logs in CloudWatch Logs, built in a
             specified S3 bucket, or both. </p>")
 type logsConfig = {
   @ocaml.doc("<p> Information about logs built to an S3 bucket for a build project. S3 logs are not
             enabled by default. </p>")
   s3Logs: option<s3LogsConfig>,
   @ocaml.doc(
-    "<p> Information about Amazon CloudWatch Logs for a build project. Amazon CloudWatch Logs are enabled by default. </p>"
+    "<p> Information about CloudWatch Logs for a build project. CloudWatch Logs are enabled by default. </p>"
   )
   cloudWatchLogs: option<cloudWatchLogsConfig>,
 }
 type filterGroup = array<webhookFilter>
 type exportedEnvironmentVariables = array<exportedEnvironmentVariable>
 type environmentVariables = array<environmentVariable>
-@ocaml.doc("<p>Information about a Docker image that is managed by AWS CodeBuild.</p>")
+@ocaml.doc("<p>Information about a Docker image that is managed by CodeBuild.</p>")
 type environmentImage = {
   @ocaml.doc("<p>A list of environment image versions.</p>") versions: option<imageVersions>,
   @ocaml.doc("<p>The description of the Docker image.</p>") description: option<string_>,
@@ -1337,7 +1363,7 @@ type buildArtifactsList = array<buildArtifacts>
 type batchRestrictions = {
   @ocaml.doc("<p>An array of strings that specify the compute types that are allowed for the batch
             build. See <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html\">Build environment
-                compute types</a> in the <i>AWS CodeBuild User Guide</i> for these values.
+                compute types</a> in the <i>CodeBuild User Guide</i> for these values.
         </p>")
   computeTypesAllowed: option<computeTypesAllowed>,
   @ocaml.doc("<p>Specifies the maximum number of builds allowed.</p>")
@@ -1361,7 +1387,7 @@ type reportGroup = {
          </dl>")
   status: option<reportGroupStatusType>,
   @ocaml.doc("<p>A list of tag key and value pairs associated with this report group. </p>
-        <p>These tags are available for use by AWS services that support AWS CodeBuild report group
+        <p>These tags are available for use by Amazon Web Services services that support CodeBuild report group
       tags.</p>")
   tags: option<tagList_>,
   @ocaml.doc("<p>The date and time this <code>ReportGroup</code> was last modified. </p>")
@@ -1437,30 +1463,29 @@ type report = {
 type projectSources = array<projectSource>
 @ocaml.doc("<p>Information about the build environment of the build project.</p>")
 type projectEnvironment = {
-  @ocaml.doc("<p> The type of credentials AWS CodeBuild uses to pull images in your build. There are two valid
+  @ocaml.doc("<p> The type of credentials CodeBuild uses to pull images in your build. There are two valid
             values: </p>
         <ul>
             <li>
                 <p>
-                    <code>CODEBUILD</code> specifies that AWS CodeBuild uses its own credentials.
-                    This requires that you modify your ECR repository policy to trust AWS
-                    CodeBuild's service principal. </p>
+                    <code>CODEBUILD</code> specifies that CodeBuild uses its own credentials.
+                    This requires that you modify your ECR repository policy to trust CodeBuild service principal. </p>
             </li>
             <li>
                 <p>
-                    <code>SERVICE_ROLE</code> specifies that AWS CodeBuild uses your build project's service
+                    <code>SERVICE_ROLE</code> specifies that CodeBuild uses your build project's service
                     role. </p>
             </li>
          </ul>
         <p> When you use a cross-account or private registry image, you must use SERVICE_ROLE
-            credentials. When you use an AWS CodeBuild curated image, you must use CODEBUILD credentials.
+            credentials. When you use an CodeBuild curated image, you must use CODEBUILD credentials.
         </p>")
   imagePullCredentialsType: option<imagePullCredentialsType>,
   @ocaml.doc("<p> The credentials for access to a private registry.</p>")
   registryCredential: option<registryCredential>,
   @ocaml.doc("<p>The ARN of the Amazon S3 bucket, path prefix, and object key that contains the PEM-encoded
             certificate for the build project. For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/create-project-cli.html#cli.environment.certificate\">certificate</a> in the
-                <i>AWS CodeBuild User Guide</i>.</p>")
+                <i>CodeBuild User Guide</i>.</p>")
   certificate: option<string_>,
   @ocaml.doc("<p>Enables running the Docker daemon inside a Docker container. Set to true only if the
             build project is used to build Docker images. Otherwise, a build that attempts to
@@ -1527,8 +1552,8 @@ type projectEnvironment = {
                     memory and 8 vCPUs on ARM-based processors for builds.</p>
             </li>
          </ul>
-        <p> For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html\">Build Environment
-                Compute Types</a> in the <i>AWS CodeBuild User Guide.</i>
+        <p>For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html\">Build Environment
+                Compute Types</a> in the <i>CodeBuild User Guide.</i>
         </p>")
   computeType: computeType,
   @ocaml.doc("<p>The image tag or image digest that identifies the Docker image to use for this build
@@ -1545,7 +1570,9 @@ type projectEnvironment = {
                     \"sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf,\" use
                         <code><registry>/<repository>@sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf</code>.</p>
             </li>
-         </ul>")
+         </ul>
+        <p>For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-available.html\">Docker images provided by CodeBuild</a> in the <i>CodeBuild user
+                guide</i>.</p>")
   image: nonEmptyString,
   @ocaml.doc("<p>The type of build environment to use for related builds.</p>
         <ul>
@@ -1572,12 +1599,36 @@ type projectEnvironment = {
                     Asia Pacific (Singapore), Asia Pacific (Sydney) , China (Beijing), and
                     China (Ningxia).</p>
             </li>
-         </ul>")
+         </ul>
+        <ul>
+            <li>
+                <p>The environment types <code>WINDOWS_CONTAINER</code> and
+                        <code>WINDOWS_SERVER_2019_CONTAINER</code> are available only in regions
+                    US East (N. Virginia), US East (Ohio), US West (Oregon), and
+                    EU (Ireland).</p>
+            </li>
+         </ul>
+        <p>For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html\">Build environment compute types</a> in the <i>CodeBuild
+                user guide</i>.</p>")
   @as("type")
   type_: environmentType,
 }
 @ocaml.doc("<p>Contains configuration information about a batch build project.</p>")
 type projectBuildBatchConfig = {
+  @ocaml.doc("<p>Specifies how build status reports are sent to the source provider for the batch build. This property is only used
+              when the source provider for your project is Bitbucket, GitHub, or GitHub Enterprise,
+              and your project is configured to report build statuses to the source provider.</p>
+         <dl>
+            <dt>REPORT_AGGREGATED_BATCH</dt>
+            <dd>
+               <p>(Default) Aggregate all of the build statuses into a single status report.</p>
+            </dd>
+            <dt>REPORT_INDIVIDUAL_BUILDS</dt>
+            <dd>
+               <p>Send a separate status report for each individual build.</p>
+            </dd>
+         </dl>")
+  batchReportMode: option<batchReportModeType>,
   @ocaml.doc(
     "<p>Specifies the maximum amount of time, in minutes, that the batch build must be completed in.</p>"
   )
@@ -1659,11 +1710,6 @@ type buildPhase = {
             <dd>
                     <p>The build phase is still in progress.</p>
                 </dd>
-            <dt>QUEUED</dt>
-            <dd>
-                    <p>The build has been submitted and is queued behind other submitted
-                        builds.</p>
-                </dd>
             <dt>STOPPED</dt>
             <dd>
                     <p>The build phase stopped.</p>
@@ -1679,60 +1725,53 @@ type buildPhase = {
          </dl>")
   phaseStatus: option<statusType>,
   @ocaml.doc("<p>The name of the build phase. Valid values include:</p>
-        <ul>
-            <li>
-                <p>
-                  <code>BUILD</code>: Core build activities typically occur in this build
-                    phase.</p>
-            </li>
-            <li>
-                <p>
-                  <code>COMPLETED</code>: The build has been completed.</p>
-            </li>
-            <li>
-                <p>
-                  <code>DOWNLOAD_SOURCE</code>: Source code is being downloaded in this build
-                    phase.</p>
-            </li>
-            <li>
-                <p>
-                  <code>FINALIZING</code>: The build process is completing in this build
-                    phase.</p>
-            </li>
-            <li>
-                <p>
-                  <code>INSTALL</code>: Installation activities typically occur in this build
-                    phase.</p>
-            </li>
-            <li>
-                <p>
-                  <code>POST_BUILD</code>: Post-build activities typically occur in this build
-                    phase.</p>
-            </li>
-            <li>
-                <p>
-                  <code>PRE_BUILD</code>: Pre-build activities typically occur in this build
-                    phase.</p>
-            </li>
-            <li>
-                <p>
-                  <code>PROVISIONING</code>: The build environment is being set up.</p>
-            </li>
-            <li>
-                <p>
-                  <code>QUEUED</code>: The build has been submitted and is queued behind other
-                    submitted builds.</p>
-            </li>
-            <li>
-                <p>
-                  <code>SUBMITTED</code>: The build has been submitted.</p>
-            </li>
-            <li>
-                <p>
-                  <code>UPLOAD_ARTIFACTS</code>: Build output artifacts are being uploaded to
-                    the output location.</p>
-            </li>
-         </ul>")
+        <dl>
+            <dt>BUILD</dt>
+            <dd>
+                    <p>Core build activities typically occur in this build phase.</p>
+                </dd>
+            <dt>COMPLETED</dt>
+            <dd>
+                    <p>The build has been completed.</p>
+                </dd>
+            <dt>DOWNLOAD_SOURCE</dt>
+            <dd>
+                    <p>Source code is being downloaded in this build phase.</p>
+                </dd>
+            <dt>FINALIZING</dt>
+            <dd>
+                    <p>The build process is completing in this build phase.</p>
+                </dd>
+            <dt>INSTALL</dt>
+            <dd>
+                    <p>Installation activities typically occur in this build phase.</p>
+                </dd>
+            <dt>POST_BUILD</dt>
+            <dd>
+                    <p>Post-build activities typically occur in this build phase.</p>
+                </dd>
+            <dt>PRE_BUILD</dt>
+            <dd>
+                    <p>Pre-build activities typically occur in this build phase.</p>
+                </dd>
+            <dt>PROVISIONING</dt>
+            <dd>
+                    <p>The build environment is being set up.</p>
+                </dd>
+            <dt>QUEUED</dt>
+            <dd>
+                    <p>The build has been submitted and is queued behind other submitted
+                        builds.</p>
+                </dd>
+            <dt>SUBMITTED</dt>
+            <dd>
+                    <p>The build has been submitted.</p>
+                </dd>
+            <dt>UPLOAD_ARTIFACTS</dt>
+            <dd>
+                    <p>Build output artifacts are being uploaded to the output location.</p>
+                </dd>
+         </dl>")
   phaseType: option<buildPhaseType>,
 }
 @ocaml.doc("<p>Contains information about a stage for a batch build.</p>")
@@ -1760,11 +1799,6 @@ type buildBatchPhase = {
             <dt>IN_PROGRESS</dt>
             <dd>
                     <p>The build phase is still in progress.</p>
-                </dd>
-            <dt>QUEUED</dt>
-            <dd>
-                    <p>The build has been submitted and is queued behind other submitted
-                        builds.</p>
                 </dd>
             <dt>STOPPED</dt>
             <dd>
@@ -1815,7 +1849,7 @@ type buildBatchPhase = {
   phaseType: option<buildBatchPhaseType>,
 }
 @ocaml.doc("<p>Information about a webhook that connects repository events to a build project in
-      AWS CodeBuild.</p>")
+      CodeBuild.</p>")
 type webhook = {
   @ocaml.doc("<p>A timestamp that indicates the last time a repository's secret token was modified.
     </p>")
@@ -1842,14 +1876,14 @@ type webhook = {
             <p>A Bitbucket webhook does not support <code>secret</code>. </p>
          </note>")
   secret: option<nonEmptyString>,
-  @ocaml.doc("<p>The AWS CodeBuild endpoint where webhook events are sent.</p>")
+  @ocaml.doc("<p>The CodeBuild endpoint where webhook events are sent.</p>")
   payloadUrl: option<nonEmptyString>,
   @ocaml.doc("<p>The URL to the webhook.</p>") url: option<nonEmptyString>,
 }
 type reports = array<report>
 type reportGroups = array<reportGroup>
 @ocaml.doc("<p>A set of Docker images that are related by programming language and are managed by
-            AWS CodeBuild.</p>")
+            CodeBuild.</p>")
 type environmentLanguage = {
   @ocaml.doc("<p>The list of Docker images that are related by the specified programming
             language.</p>")
@@ -1862,6 +1896,12 @@ type buildPhases = array<buildPhase>
 type buildBatchPhases = array<buildBatchPhase>
 @ocaml.doc("<p>Information about a build project.</p>")
 type project = {
+  @ocaml.doc("<p>The ARN of the IAM role that enables CodeBuild to access the CloudWatch Logs and Amazon S3 artifacts for
+      the project's builds.</p>")
+  resourceAccessRole: option<nonEmptyString>,
+  @ocaml.doc("<p>Contains the project identifier used with the public build APIs. </p>")
+  publicProjectAlias: option<nonEmptyString>,
+  projectVisibility: option<projectVisibilityType>,
   @ocaml.doc("<p>The maximum number of concurrent builds that are allowed for this project.</p>
          <p>New builds are only started if the current number of builds is less than or equal to this limit. 
   If the current build count meets this limit, new builds are throttled and are not run.</p>")
@@ -1876,15 +1916,15 @@ type project = {
       <code>mountPoint</code>, and <code>type</code> of a file system created using Amazon Elastic File System.
   </p>")
   fileSystemLocations: option<projectFileSystemLocations>,
-  @ocaml.doc("<p>Information about logs for the build project. A project can create logs in Amazon CloudWatch Logs, an
+  @ocaml.doc("<p>Information about logs for the build project. A project can create logs in CloudWatch Logs, an
       S3 bucket, or both. </p>")
   logsConfig: option<logsConfig>,
   @ocaml.doc("<p>Information about the build badge for the build project.</p>")
   badge: option<projectBadge>,
-  @ocaml.doc("<p>Information about the VPC configuration that AWS CodeBuild accesses.</p>")
+  @ocaml.doc("<p>Information about the VPC configuration that CodeBuild accesses.</p>")
   vpcConfig: option<vpcConfig>,
   @ocaml.doc("<p>Information about a webhook that connects repository events to a build project in
-      AWS CodeBuild.</p>")
+      CodeBuild.</p>")
   webhook: option<webhook>,
   @ocaml.doc("<p>When the build project's settings were last modified, expressed in Unix time
       format.</p>")
@@ -1892,26 +1932,27 @@ type project = {
   @ocaml.doc("<p>When the build project was created, expressed in Unix time format.</p>")
   created: option<timestamp_>,
   @ocaml.doc("<p>A list of tag key and value pairs associated with this build project.</p>
-         <p>These tags are available for use by AWS services that support AWS CodeBuild build project
+         <p>These tags are available for use by Amazon Web Services services that support CodeBuild build project
       tags.</p>")
   tags: option<tagList_>,
-  @ocaml.doc("<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output
+  @ocaml.doc("<p>The Key Management Service customer master key (CMK) to be used for encrypting the build output
       artifacts.</p>
          <note>
             <p>You can use a cross-account KMS key to encrypt the build output artifacts if your
         service role has permission to that key. </p>
          </note>
          <p>You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using
-        the format <code>alias/<alias-name></code>).
+        the format <code>alias/<alias-name></code>). If you don't specify a 
+        value, CodeBuild uses the managed CMK for Amazon Simple Storage Service (Amazon S3).
     </p>")
   encryptionKey: option<nonEmptyString>,
   @ocaml.doc("<p>The number of minutes a build is allowed to be queued before it times out. </p>")
   queuedTimeoutInMinutes: option<timeOut>,
-  @ocaml.doc("<p>How long, in minutes, from 5 to 480 (8 hours), for AWS CodeBuild to wait before timing out any
+  @ocaml.doc("<p>How long, in minutes, from 5 to 480 (8 hours), for CodeBuild to wait before timing out any
       related build that did not get marked as completed. The default is 60 minutes.</p>")
   timeoutInMinutes: option<timeOut>,
-  @ocaml.doc("<p>The ARN of the AWS Identity and Access Management (IAM) role that enables AWS CodeBuild to interact with dependent AWS services
-      on behalf of the AWS account.</p>")
+  @ocaml.doc("<p>The ARN of the IAM role that enables CodeBuild to interact with dependent Amazon Web Services services
+      on behalf of the Amazon Web Services account.</p>")
   serviceRole: option<nonEmptyString>,
   @ocaml.doc("<p>Information about the build environment for this build project.</p>")
   environment: option<projectEnvironment>,
@@ -1929,7 +1970,7 @@ type project = {
       latest version is used. If specified, it must be one of:</p>
          <ul>
             <li>
-               <p>For AWS CodeCommit: the commit ID, branch, or Git tag to use.</p>
+               <p>For CodeCommit: the commit ID, branch, or Git tag to use.</p>
             </li>
             <li>
                <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that
@@ -1953,7 +1994,7 @@ type project = {
          <p>If <code>sourceVersion</code> is specified at the build level, then that version
       takes precedence over this <code>sourceVersion</code> (at the project level). </p>
          <p>For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html\">Source Version Sample
-      with CodeBuild</a> in the <i>AWS CodeBuild User Guide</i>. 
+      with CodeBuild</a> in the <i>CodeBuild User Guide</i>. 
     </p>")
   sourceVersion: option<string_>,
   @ocaml.doc("<p>An array of <code>ProjectSource</code> objects. </p>")
@@ -1998,11 +2039,11 @@ type build = {
   @ocaml.doc("<p> An array of the ARNs associated with this build's reports. </p>")
   reportArns: option<buildReportArns>,
   @ocaml.doc("<p>A list of exported environment variables for this build.</p>
-        <p>Exported environment variables are used in conjunction with AWS CodePipeline to export
+        <p>Exported environment variables are used in conjunction with CodePipeline to export
   environment variables from the current build stage to subsequent stages in the pipeline.
-  For more information, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/actions-variables.html\">Working with variables</a> in the <i>AWS CodePipeline User Guide</i>.</p>")
+  For more information, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/actions-variables.html\">Working with variables</a> in the <i>CodePipeline User Guide</i>.</p>")
   exportedEnvironmentVariables: option<exportedEnvironmentVariables>,
-  @ocaml.doc("<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output
+  @ocaml.doc("<p>The Key Management Service customer master key (CMK) to be used for encrypting the build output
             artifacts.</p>
         <note>
             <p> You can use a cross-account KMS key to encrypt the build output artifacts if your
@@ -2012,7 +2053,7 @@ type build = {
             the format <code>alias/<alias-name></code>).</p>")
   encryptionKey: option<nonEmptyString>,
   @ocaml.doc("<p>Describes a network interface.</p>") networkInterface: option<networkInterface>,
-  @ocaml.doc("<p>If your AWS CodeBuild project accesses resources in an Amazon VPC, you provide this parameter
+  @ocaml.doc("<p>If your CodeBuild project accesses resources in an Amazon VPC, you provide this parameter
             that identifies the VPC ID and the list of security group IDs and subnet IDs. The
             security groups and subnets must belong to the same VPC. You must provide at least one
             security group and one subnet ID.</p>")
@@ -2020,15 +2061,15 @@ type build = {
   @ocaml.doc("<p>The entity that started the build. Valid values include:</p>
         <ul>
             <li>
-                <p>If AWS CodePipeline started the build, the pipeline's name (for example,
+                <p>If CodePipeline started the build, the pipeline's name (for example,
                         <code>codepipeline/my-demo-pipeline</code>).</p>
             </li>
             <li>
-                <p>If an AWS Identity and Access Management (IAM) user started the build, the user's name (for example,
+                <p>If an IAM user started the build, the user's name (for example,
                         <code>MyUserName</code>).</p>
             </li>
             <li>
-                <p>If the Jenkins plugin for AWS CodeBuild started the build, the string
+                <p>If the Jenkins plugin for CodeBuild started the build, the string
                         <code>CodeBuild-Jenkins-Plugin</code>.</p>
             </li>
          </ul>")
@@ -2037,10 +2078,10 @@ type build = {
   buildComplete: option<boolean_>,
   @ocaml.doc("<p> The number of minutes a build is allowed to be queued before it times out. </p>")
   queuedTimeoutInMinutes: option<wrapperInt>,
-  @ocaml.doc("<p>How long, in minutes, for AWS CodeBuild to wait before timing out this build if it does not
+  @ocaml.doc("<p>How long, in minutes, for CodeBuild to wait before timing out this build if it does not
             get marked as completed.</p>")
   timeoutInMinutes: option<wrapperInt>,
-  @ocaml.doc("<p>Information about the build's logs in Amazon CloudWatch Logs.</p>")
+  @ocaml.doc("<p>Information about the build's logs in CloudWatch Logs.</p>")
   logs: option<logsLocation>,
   @ocaml.doc("<p>The name of a service role used for this build.</p>")
   serviceRole: option<nonEmptyString>,
@@ -2055,7 +2096,7 @@ type build = {
                 <code>ProjectSourceVersion</code> must be one of: </p>
         <ul>
             <li>
-                <p>For AWS CodeCommit: the commit ID, branch, or Git tag to use.</p>
+                <p>For CodeCommit: the commit ID, branch, or Git tag to use.</p>
             </li>
             <li>
                 <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that
@@ -2083,14 +2124,14 @@ type build = {
   @ocaml.doc("<p>Information about all previous build phases that are complete and information about
             any current build phase that is not yet complete.</p>")
   phases: option<buildPhases>,
-  @ocaml.doc("<p>The name of the AWS CodeBuild project.</p>") projectName: option<nonEmptyString>,
+  @ocaml.doc("<p>The name of the CodeBuild project.</p>") projectName: option<nonEmptyString>,
   @ocaml.doc("<p> An identifier for the version of this build's source code. </p>
         <ul>
             <li>
-                <p> For AWS CodeCommit, GitHub, GitHub Enterprise, and BitBucket, the commit ID. </p>
+                <p> For CodeCommit, GitHub, GitHub Enterprise, and BitBucket, the commit ID. </p>
             </li>
             <li>
-                <p> For AWS CodePipeline, the source revision provided by AWS CodePipeline. </p>
+                <p> For CodePipeline, the source revision provided by CodePipeline. </p>
             </li>
             <li>
                 <p> For Amazon S3, this does not apply. </p>
@@ -2101,7 +2142,7 @@ type build = {
                 <code>sourceVersion</code> is specified at the project level, then this
                 <code>sourceVersion</code> (at the build level) takes precedence. </p>
         <p> For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html\">Source Version Sample
-                with CodeBuild</a> in the <i>AWS CodeBuild User Guide</i>. </p>")
+                with CodeBuild</a> in the <i>CodeBuild User Guide</i>. </p>")
   sourceVersion: option<nonEmptyString>,
   @ocaml.doc("<p>The current status of the build. Valid values include:</p>
         <ul>
@@ -2146,7 +2187,7 @@ type build = {
 }
 type projects = array<project>
 @ocaml.doc(
-  "<p>A set of Docker images that are related by platform and are managed by AWS CodeBuild.</p>"
+  "<p>A set of Docker images that are related by platform and are managed by CodeBuild.</p>"
 )
 type environmentPlatform = {
   @ocaml.doc("<p>The list of programming languages that are available for the specified
@@ -2177,7 +2218,7 @@ type buildBatch = {
             batch build is incremented by <code>1</code>. If a batch build is deleted, the
                 <code>buildBatchNumber</code> of other batch builds does not change.</p>")
   buildBatchNumber: option<wrapperLong>,
-  @ocaml.doc("<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the batch build output
+  @ocaml.doc("<p>The Key Management Service customer master key (CMK) to be used for encrypting the batch build output
             artifacts.</p>
         <note>
             <p>You can use a cross-account KMS key to encrypt the build output artifacts if your
@@ -2190,14 +2231,14 @@ type buildBatch = {
   @ocaml.doc("<p>The entity that started the batch build. Valid values include:</p>
         <ul>
             <li>
-                <p>If AWS CodePipeline started the build, the pipeline's name (for example,
+                <p>If CodePipeline started the build, the pipeline's name (for example,
                         <code>codepipeline/my-demo-pipeline</code>).</p>
             </li>
             <li>
-                <p>If an AWS Identity and Access Management (IAM) user started the build, the user's name.</p>
+                <p>If an IAM user started the build, the user's name.</p>
             </li>
             <li>
-                <p>If the Jenkins plugin for AWS CodeBuild started the build, the string
+                <p>If the Jenkins plugin for CodeBuild started the build, the string
                         <code>CodeBuild-Jenkins-Plugin</code>.</p>
             </li>
          </ul>")
@@ -2225,7 +2266,7 @@ type buildBatch = {
                 <code>ProjectSourceVersion</code> must be one of: </p>
          <ul>
             <li>
-               <p>For AWS CodeCommit: the commit ID, branch, or Git tag to use.</p>
+               <p>For CodeCommit: the commit ID, branch, or Git tag to use.</p>
             </li>
             <li>
                <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that
@@ -2258,10 +2299,10 @@ type buildBatch = {
   @ocaml.doc("<p>The identifier of the resolved version of this batch build's source code.</p>
         <ul>
             <li>
-                <p>For AWS CodeCommit, GitHub, GitHub Enterprise, and BitBucket, the commit ID.</p>
+                <p>For CodeCommit, GitHub, GitHub Enterprise, and BitBucket, the commit ID.</p>
             </li>
             <li>
-                <p>For AWS CodePipeline, the source revision provided by AWS CodePipeline.</p>
+                <p>For CodePipeline, the source revision provided by CodePipeline.</p>
             </li>
             <li>
                 <p>For Amazon S3, this does not apply.</p>
@@ -2279,17 +2320,45 @@ type buildBatch = {
   @ocaml.doc("<p>The identifier of the batch build.</p>") id: option<nonEmptyString>,
 }
 type buildBatches = array<buildBatch>
-@ocaml.doc("<fullname>AWS CodeBuild</fullname>
-        <p>AWS CodeBuild is a fully managed build service in the cloud. AWS CodeBuild compiles your source code,
-            runs unit tests, and produces artifacts that are ready to deploy. AWS CodeBuild eliminates the
+@ocaml.doc("<fullname>CodeBuild</fullname>
+        <p>CodeBuild is a fully managed build service in the cloud. CodeBuild compiles your source code,
+            runs unit tests, and produces artifacts that are ready to deploy. CodeBuild eliminates the
             need to provision, manage, and scale your own build servers. It provides prepackaged
             build environments for the most popular programming languages and build tools, such as
-            Apache Maven, Gradle, and more. You can also fully customize build environments in AWS CodeBuild
-            to use your own build tools. AWS CodeBuild scales automatically to meet peak build requests. You
-            pay only for the build time you consume. For more information about AWS CodeBuild, see the <i>
-                <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/welcome.html\">AWS CodeBuild User
+            Apache Maven, Gradle, and more. You can also fully customize build environments in CodeBuild
+            to use your own build tools. CodeBuild scales automatically to meet peak build requests. You
+            pay only for the build time you consume. For more information about CodeBuild, see the <i>
+                <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/welcome.html\">CodeBuild User
                     Guide</a>.</i>
          </p>")
+module UpdateProjectVisibility = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The ARN of the IAM role that enables CodeBuild to access the CloudWatch Logs and Amazon S3 artifacts for
+      the project's builds.</p>")
+    resourceAccessRole: option<nonEmptyString>,
+    projectVisibility: projectVisibilityType,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the build project.</p>")
+    projectArn: nonEmptyString,
+  }
+  type response = {
+    projectVisibility: option<projectVisibilityType>,
+    @ocaml.doc("<p>Contains the project identifier used with the public build APIs. </p>")
+    publicProjectAlias: option<nonEmptyString>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the build project.</p>")
+    projectArn: option<nonEmptyString>,
+  }
+  @module("@aws-sdk/client-codebuild") @new
+  external new: request => t = "UpdateProjectVisibilityCommand"
+  let make = (~projectVisibility, ~projectArn, ~resourceAccessRole=?, ()) =>
+    new({
+      resourceAccessRole: resourceAccessRole,
+      projectVisibility: projectVisibility,
+      projectArn: projectArn,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module PutResourcePolicy = {
   type t
   type request = {
@@ -2297,7 +2366,7 @@ module PutResourcePolicy = {
             associate with a resource policy. </p>")
     resourceArn: nonEmptyString,
     @ocaml.doc("<p> A JSON-formatted resource policy. For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/project-sharing.html#project-sharing-share\">Sharing
-                a Project</a> and <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/report-groups-sharing.html#report-groups-sharing-share\">Sharing a Report Group</a> in the <i>AWS CodeBuild User Guide</i>.
+                a Project</a> and <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/report-groups-sharing.html#report-groups-sharing-share\">Sharing a Report Group</a> in the <i>CodeBuild User Guide</i>.
         </p>")
     policy: nonEmptyString,
   }
@@ -2314,10 +2383,10 @@ module PutResourcePolicy = {
 module InvalidateProjectCache = {
   type t
   type request = {
-    @ocaml.doc("<p>The name of the AWS CodeBuild build project that the cache is reset for.</p>")
+    @ocaml.doc("<p>The name of the CodeBuild build project that the cache is reset for.</p>")
     projectName: nonEmptyString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-codebuild") @new
   external new: request => t = "InvalidateProjectCacheCommand"
   let make = (~projectName, ()) => new({projectName: projectName})
@@ -2333,7 +2402,7 @@ module ImportSourceCredentials = {
     shouldOverwrite: option<wrapperBoolean>,
     @ocaml.doc("<p> The type of authentication used to connect to a GitHub, GitHub Enterprise, or
             Bitbucket repository. An OAUTH connection is not supported by the API and must be
-            created using the AWS CodeBuild console. </p>")
+            created using the CodeBuild console. </p>")
     authType: authType,
     @ocaml.doc("<p> The source provider used for this project. </p>") serverType: serverType,
     @ocaml.doc("<p> For GitHub or GitHub Enterprise, this is the personal access token. For Bitbucket,
@@ -2378,10 +2447,8 @@ module GetResourcePolicy = {
 
 module DeleteWebhook = {
   type t
-  type request = {
-    @ocaml.doc("<p>The name of the AWS CodeBuild project.</p>") projectName: projectName,
-  }
-
+  type request = {@ocaml.doc("<p>The name of the CodeBuild project.</p>") projectName: projectName}
+  type response = {.}
   @module("@aws-sdk/client-codebuild") @new external new: request => t = "DeleteWebhookCommand"
   let make = (~projectName, ()) => new({projectName: projectName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -2407,7 +2474,7 @@ module DeleteResourcePolicy = {
     @ocaml.doc("<p> The ARN of the resource that is associated with the resource policy. </p>")
     resourceArn: nonEmptyString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-codebuild") @new
   external new: request => t = "DeleteResourcePolicyCommand"
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
@@ -2425,7 +2492,7 @@ module DeleteReportGroup = {
     deleteReports: option<boolean_>,
     @ocaml.doc("<p>The ARN of the report group to delete. </p>") arn: nonEmptyString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-codebuild") @new external new: request => t = "DeleteReportGroupCommand"
   let make = (~arn, ~deleteReports=?, ()) => new({deleteReports: deleteReports, arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -2439,7 +2506,7 @@ module DeleteReport = {
     </p>")
     arn: nonEmptyString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-codebuild") @new external new: request => t = "DeleteReportCommand"
   let make = (~arn, ()) => new({arn: arn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -2448,7 +2515,7 @@ module DeleteReport = {
 module DeleteProject = {
   type t
   type request = {@ocaml.doc("<p>The name of the build project.</p>") name: nonEmptyString}
-
+  type response = {.}
   @module("@aws-sdk/client-codebuild") @new external new: request => t = "DeleteProjectCommand"
   let make = (~name, ()) => new({name: name})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -2468,7 +2535,7 @@ module ListSharedReportGroups = {
             all of the items in the list, keep calling this operation with each subsequent next
             token that is returned, until no more next tokens are returned. </p>")
     nextToken: option<string_>,
-    @ocaml.doc("<p> The criterion to be used to list report groups shared with the current AWS account or
+    @ocaml.doc("<p> The criterion to be used to list report groups shared with the current Amazon Web Services account or
             user. Valid values include: </p>
         <ul>
             <li>
@@ -2496,7 +2563,7 @@ module ListSharedReportGroups = {
     sortOrder: option<sortOrderType>,
   }
   type response = {
-    @ocaml.doc("<p> The list of ARNs for the report groups shared with the current AWS account or user.
+    @ocaml.doc("<p> The list of ARNs for the report groups shared with the current Amazon Web Services account or user.
         </p>")
     reportGroups: option<reportGroupArns>,
     @ocaml.doc("<p> During a previous call, the maximum number of items that can be returned is the value
@@ -2540,7 +2607,7 @@ module ListSharedProjects = {
             </li>
          </ul>")
     sortOrder: option<sortOrderType>,
-    @ocaml.doc("<p> The criterion to be used to list build projects shared with the current AWS account
+    @ocaml.doc("<p> The criterion to be used to list build projects shared with the current Amazon Web Services account
             or user. Valid values include: </p>
         <ul>
             <li>
@@ -2556,7 +2623,7 @@ module ListSharedProjects = {
     sortBy: option<sharedResourceSortByType>,
   }
   type response = {
-    @ocaml.doc("<p> The list of ARNs for the build projects shared with the current AWS account or user.
+    @ocaml.doc("<p> The list of ARNs for the build projects shared with the current Amazon Web Services account or user.
         </p>")
     projects: option<projectArns>,
     @ocaml.doc("<p> During a previous call, the maximum number of items that can be returned is the value
@@ -2668,7 +2735,7 @@ module ListReports = {
   }
   type response = {
     @ocaml.doc("<p>
-      The list of returned ARNs for the reports in the current AWS account.
+      The list of returned ARNs for the reports in the current Amazon Web Services account.
     </p>")
     reports: option<reportArns>,
     @ocaml.doc("<p>
@@ -2729,7 +2796,7 @@ module ListReportGroups = {
   }
   type response = {
     @ocaml.doc("<p>
-      The list of ARNs for the report groups in the current AWS account.
+      The list of ARNs for the report groups in the current Amazon Web Services account.
     </p>")
     reportGroups: option<reportGroupArns>,
     @ocaml.doc("<p>
@@ -2818,25 +2885,23 @@ module ListBuildsForProject = {
             list, keep calling this operation with each subsequent next token that is returned,
             until no more next tokens are returned.</p>")
     nextToken: option<string_>,
-    @ocaml.doc("<p>The order to list results in. The results are sorted by build number, not the build
-            identifier.</p>
+    @ocaml.doc("<p>The order to sort the results in. The results are sorted by build number, not the build
+            identifier. If this is not specified, the results are sorted in descending order.</p>
         <p>Valid values include:</p>
         <ul>
             <li>
                 <p>
-                  <code>ASCENDING</code>: List the build IDs in ascending order by build
-                    ID.</p>
+                  <code>ASCENDING</code>: List the build identifiers in ascending order, by build number.</p>
             </li>
             <li>
                 <p>
-                  <code>DESCENDING</code>: List the build IDs in descending order by build
-                    ID.</p>
+                  <code>DESCENDING</code>: List the build identifiers in descending order, by build number.</p>
             </li>
          </ul>
         <p>If the project has more than 100 builds, setting the sort order will result in an
             error. </p>")
     sortOrder: option<sortOrderType>,
-    @ocaml.doc("<p>The name of the AWS CodeBuild project.</p>") projectName: nonEmptyString,
+    @ocaml.doc("<p>The name of the CodeBuild project.</p>") projectName: nonEmptyString,
   }
   type response = {
     @ocaml.doc("<p>If there are more than 100 items in the list, only the first 100 items are returned,
@@ -2844,7 +2909,7 @@ module ListBuildsForProject = {
             batch of items in the list, call this operation again, adding the next token to the
             call.</p>")
     nextToken: option<string_>,
-    @ocaml.doc("<p>A list of build IDs for the specified build project, with each build ID representing a
+    @ocaml.doc("<p>A list of build identifiers for the specified build project, with each build ID representing a
             single build.</p>")
     ids: option<buildIds>,
   }
@@ -2983,15 +3048,16 @@ module ListBuildBatches = {
 
 module ListSourceCredentials = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("<p> A list of <code>SourceCredentialsInfo</code> objects. Each
                 <code>SourceCredentialsInfo</code> object includes the authentication type, token
             ARN, and type of source provider for one set of credentials. </p>")
     sourceCredentialsInfos: option<sourceCredentialsInfos>,
   }
-  @module("@aws-sdk/client-codebuild") @new external new: unit => t = "ListSourceCredentialsCommand"
-  let make = () => new()
+  @module("@aws-sdk/client-codebuild") @new
+  external new: request => t = "ListSourceCredentialsCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -3225,7 +3291,7 @@ module UpdateReportGroup = {
     @ocaml.doc("<p>
       An updated list of tag key and value pairs associated with this report group.
     </p>
-         <p>These tags are available for use by AWS services that support AWS CodeBuild report group
+         <p>These tags are available for use by Amazon Web Services services that support CodeBuild report group
       tags.</p>")
     tags: option<tagList_>,
     @ocaml.doc("<p>
@@ -3267,7 +3333,7 @@ module CreateReportGroup = {
     @ocaml.doc("<p>
       A list of tag key and value pairs associated with this report group.
     </p>
-         <p>These tags are available for use by AWS services that support AWS CodeBuild report group
+         <p>These tags are available for use by Amazon Web Services services that support CodeBuild report group
       tags.</p>")
     tags: option<tagList_>,
     @ocaml.doc("<p>
@@ -3318,10 +3384,10 @@ module UpdateWebhook = {
         <code>branchFilter</code>. </p>
          </note>")
     branchFilter: option<string_>,
-    @ocaml.doc("<p>The name of the AWS CodeBuild project.</p>") projectName: projectName,
+    @ocaml.doc("<p>The name of the CodeBuild project.</p>") projectName: projectName,
   }
   type response = {
-    @ocaml.doc("<p> Information about a repository's webhook that is associated with a project in AWS CodeBuild.
+    @ocaml.doc("<p> Information about a repository's webhook that is associated with a project in CodeBuild.
     </p>")
     webhook: option<webhook>,
   }
@@ -3357,11 +3423,11 @@ module CreateWebhook = {
         <code>branchFilter</code>. </p>
          </note>")
     branchFilter: option<string_>,
-    @ocaml.doc("<p>The name of the AWS CodeBuild project.</p>") projectName: projectName,
+    @ocaml.doc("<p>The name of the CodeBuild project.</p>") projectName: projectName,
   }
   type response = {
     @ocaml.doc("<p>Information about a webhook that connects repository events to a build project in
-      AWS CodeBuild.</p>")
+      CodeBuild.</p>")
     webhook: option<webhook>,
   }
   @module("@aws-sdk/client-codebuild") @new external new: request => t = "CreateWebhookCommand"
@@ -3437,19 +3503,19 @@ module UpdateProject = {
       <code>mountPoint</code>, and <code>type</code> of a file system created using Amazon Elastic File System.
   </p>")
     fileSystemLocations: option<projectFileSystemLocations>,
-    @ocaml.doc("<p> Information about logs for the build project. A project can create logs in Amazon CloudWatch Logs,
+    @ocaml.doc("<p> Information about logs for the build project. A project can create logs in CloudWatch Logs,
     logs in an S3 bucket, or both. </p>")
     logsConfig: option<logsConfig>,
     @ocaml.doc("<p>Set this to true to generate a publicly accessible URL for your project's build
       badge.</p>")
     badgeEnabled: option<wrapperBoolean>,
-    @ocaml.doc("<p>VpcConfig enables AWS CodeBuild to access resources in an Amazon VPC.</p>")
+    @ocaml.doc("<p>VpcConfig enables CodeBuild to access resources in an Amazon VPC.</p>")
     vpcConfig: option<vpcConfig>,
     @ocaml.doc("<p>An updated list of tag key and value pairs associated with this build project.</p>
-         <p>These tags are available for use by AWS services that support AWS CodeBuild build project
+         <p>These tags are available for use by Amazon Web Services services that support CodeBuild build project
       tags.</p>")
     tags: option<tagList_>,
-    @ocaml.doc("<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output
+    @ocaml.doc("<p>The Key Management Service customer master key (CMK) to be used for encrypting the build output
     artifacts.</p>
          <note>
             <p> You can use a cross-account KMS key to encrypt the build output artifacts if your
@@ -3463,11 +3529,11 @@ module UpdateProject = {
       "<p> The number of minutes a build is allowed to be queued before it times out. </p>"
     )
     queuedTimeoutInMinutes: option<timeOut>,
-    @ocaml.doc("<p>The replacement value in minutes, from 5 to 480 (8 hours), for AWS CodeBuild to wait before
+    @ocaml.doc("<p>The replacement value in minutes, from 5 to 480 (8 hours), for CodeBuild to wait before
       timing out any related build that did not get marked as completed.</p>")
     timeoutInMinutes: option<timeOut>,
-    @ocaml.doc("<p>The replacement ARN of the AWS Identity and Access Management (IAM) role that enables AWS CodeBuild to interact with dependent
-    AWS services on behalf of the AWS account.</p>")
+    @ocaml.doc("<p>The replacement ARN of the IAM role that enables CodeBuild to interact with dependent
+    Amazon Web Services services on behalf of the Amazon Web Services account.</p>")
     serviceRole: option<nonEmptyString>,
     @ocaml.doc(
       "<p>Information to be changed about the build environment for the build project.</p>"
@@ -3476,7 +3542,7 @@ module UpdateProject = {
     @ocaml.doc("<p>Stores recently used information so that it can be quickly accessed at a later
       time.</p>")
     cache: option<projectCache>,
-    @ocaml.doc("<p> An array of <code>ProjectSource</code> objects. </p>")
+    @ocaml.doc("<p> An array of <code>ProjectArtifact</code> objects. </p>")
     secondaryArtifacts: option<projectArtifactsList>,
     @ocaml.doc("<p>Information to be changed about the build output artifacts for the build
         project.</p>")
@@ -3489,7 +3555,7 @@ module UpdateProject = {
     latest version is used. If specified, it must be one of: </p>
          <ul>
             <li>
-               <p>For AWS CodeCommit: the commit ID, branch, or Git tag to use.</p>
+               <p>For CodeCommit: the commit ID, branch, or Git tag to use.</p>
             </li>
             <li>
                <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that
@@ -3513,7 +3579,7 @@ module UpdateProject = {
          <p> If <code>sourceVersion</code> is specified at the build level, then that version
     takes precedence over this <code>sourceVersion</code> (at the project level). </p>
          <p> For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html\">Source Version Sample
-        with CodeBuild</a> in the <i>AWS CodeBuild User Guide</i>. 
+        with CodeBuild</a> in the <i>CodeBuild User Guide</i>. 
     </p>")
     sourceVersion: option<string_>,
     @ocaml.doc("<p> An array of <code>ProjectSource</code> objects. </p>")
@@ -3599,21 +3665,21 @@ module StartBuild = {
     @ocaml.doc("<p>Specifies if session debugging is enabled for this build. For more information, see
                 <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/session-manager.html\">Viewing a running build in Session Manager</a>.</p>")
     debugSessionEnabled: option<wrapperBoolean>,
-    @ocaml.doc("<p>The type of credentials AWS CodeBuild uses to pull images in your build. There are two valid
+    @ocaml.doc("<p>The type of credentials CodeBuild uses to pull images in your build. There are two valid
             values: </p>
         <dl>
             <dt>CODEBUILD</dt>
             <dd>
-                    <p>Specifies that AWS CodeBuild uses its own credentials. This requires that you
-                        modify your ECR repository policy to trust AWS CodeBuild's service principal.</p>
+                    <p>Specifies that CodeBuild uses its own credentials. This requires that you
+                        modify your ECR repository policy to trust CodeBuild's service principal.</p>
                 </dd>
             <dt>SERVICE_ROLE</dt>
             <dd>
-                    <p>Specifies that AWS CodeBuild uses your build project's service role. </p>
+                    <p>Specifies that CodeBuild uses your build project's service role. </p>
                 </dd>
          </dl>
         <p>When using a cross-account or private registry image, you must use
-            <code>SERVICE_ROLE</code> credentials. When using an AWS CodeBuild curated image,
+            <code>SERVICE_ROLE</code> credentials. When using an CodeBuild curated image,
             you must use <code>CODEBUILD</code> credentials. </p>")
     imagePullCredentialsTypeOverride: option<imagePullCredentialsType>,
     @ocaml.doc("<p> The credentials for access to a private registry. </p>")
@@ -3624,9 +3690,9 @@ module StartBuild = {
     @ocaml.doc("<p>A unique, case sensitive identifier you provide to ensure the idempotency of the
             StartBuild request. The token is included in the StartBuild request and is valid for 5
             minutes. If you repeat the StartBuild request with the same token, but change a
-            parameter, AWS CodeBuild returns a parameter mismatch error. </p>")
+            parameter, CodeBuild returns a parameter mismatch error. </p>")
     idempotencyToken: option<string_>,
-    @ocaml.doc("<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) that overrides the one specified in the build
+    @ocaml.doc("<p>The Key Management Service customer master key (CMK) that overrides the one specified in the build
             project. The CMK key encrypts the build output artifacts.</p>
         <note>
             <p> You can use a cross-account KMS key to encrypt the build output artifacts if your
@@ -3671,7 +3737,7 @@ module StartBuild = {
             completion. If you use this option with a source provider other than GitHub, GitHub
             Enterprise, or Bitbucket, an <code>invalidInputException</code> is thrown. </p>
             <p>To be able to report the build status to the source provider, the user associated with the source provider must
-have write access to the repo. If the user does not have write access, the build status cannot be updated. For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/access-tokens.html\">Source provider access</a> in the <i>AWS CodeBuild User Guide</i>.</p>
+have write access to the repo. If the user does not have write access, the build status cannot be updated. For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/access-tokens.html\">Source provider access</a> in the <i>CodeBuild User Guide</i>.</p>
         <note>
             <p> The status of a build triggered by a webhook is always reported to your source
                 provider. </p>
@@ -3687,13 +3753,13 @@ have write access to the repo. If the user does not have write access, the build
         <p> If this value is set, it can be either an inline buildspec definition, the path to an
             alternate buildspec file relative to the value of the built-in
                 <code>CODEBUILD_SRC_DIR</code> environment variable, or the path to an S3 bucket.
-            The bucket must be in the same AWS Region as the build project. Specify the buildspec
+            The bucket must be in the same Amazon Web Services Region as the build project. Specify the buildspec
             file using its ARN (for example,
                 <code>arn:aws:s3:::my-codebuild-sample2/buildspec.yml</code>). If this value is not
             provided or is set to an empty string, the source code must contain a buildspec file in
             its root directory. For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#build-spec-ref-name-storage\">Buildspec File Name and Storage Location</a>. </p>")
     buildspecOverride: option<string_>,
-    @ocaml.doc("<p> Information about the Git submodules configuration for this build of an AWS CodeBuild build
+    @ocaml.doc("<p> Information about the Git submodules configuration for this build of an CodeBuild build
             project. </p>")
     gitSubmodulesConfigOverride: option<gitSubmodulesConfig>,
     @ocaml.doc("<p>The user-defined depth of history, with a minimum value of 0, that overrides, for this
@@ -3721,7 +3787,7 @@ have write access to the repo. If the user does not have write access, the build
             the latest version is used. If specified, the contents depends on the source
             provider:</p>
         <dl>
-            <dt>AWS CodeCommit</dt>
+            <dt>CodeCommit</dt>
             <dd>
                     <p>The commit ID, branch, or Git tag to use.</p>
                 </dd>
@@ -3750,14 +3816,14 @@ have write access to the repo. If the user does not have write access, the build
         <p>If <code>sourceVersion</code> is specified at the project level, then this
             <code>sourceVersion</code> (at the build level) takes precedence. </p>
         <p>For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html\">Source Version Sample
-            with CodeBuild</a> in the <i>AWS CodeBuild User Guide</i>. </p>")
+            with CodeBuild</a> in the <i>CodeBuild User Guide</i>. </p>")
     sourceVersion: option<string_>,
     @ocaml.doc("<p> An array of <code>ProjectSourceVersion</code> objects that specify one or more
             versions of the project's secondary sources to be used for this build only. </p>")
     secondarySourcesVersionOverride: option<projectSecondarySourceVersions>,
     @ocaml.doc("<p> An array of <code>ProjectSource</code> objects. </p>")
     secondarySourcesOverride: option<projectSources>,
-    @ocaml.doc("<p>The name of the AWS CodeBuild build project to start running a build.</p>")
+    @ocaml.doc("<p>The name of the CodeBuild build project to start running a build.</p>")
     projectName: nonEmptyString,
   }
   type response = {@ocaml.doc("<p>Information about the build to be run.</p>") build: option<build>}
@@ -3839,7 +3905,7 @@ module RetryBuild = {
       <code>RetryBuild</code> request. The token is included in the
       <code>RetryBuild</code> request and is valid for five minutes. If you repeat
       the <code>RetryBuild</code> request with the same token, but change a parameter,
-      AWS CodeBuild returns a parameter mismatch error.</p>")
+      CodeBuild returns a parameter mismatch error.</p>")
     idempotencyToken: option<string_>,
     @ocaml.doc("<p>Specifies the identifier of the build to restart.</p>")
     id: option<nonEmptyString>,
@@ -3867,19 +3933,19 @@ module CreateProject = {
       <code>mountPoint</code>, and <code>type</code> of a file system created using Amazon Elastic File System.
   </p>")
     fileSystemLocations: option<projectFileSystemLocations>,
-    @ocaml.doc("<p>Information about logs for the build project. These can be logs in Amazon CloudWatch Logs, logs
+    @ocaml.doc("<p>Information about logs for the build project. These can be logs in CloudWatch Logs, logs
       uploaded to a specified S3 bucket, or both. </p>")
     logsConfig: option<logsConfig>,
     @ocaml.doc("<p>Set this to true to generate a publicly accessible URL for your project's build
         badge.</p>")
     badgeEnabled: option<wrapperBoolean>,
-    @ocaml.doc("<p>VpcConfig enables AWS CodeBuild to access resources in an Amazon VPC.</p>")
+    @ocaml.doc("<p>VpcConfig enables CodeBuild to access resources in an Amazon VPC.</p>")
     vpcConfig: option<vpcConfig>,
     @ocaml.doc("<p>A list of tag key and value pairs associated with this build project.</p>
-         <p>These tags are available for use by AWS services that support AWS CodeBuild build project
+         <p>These tags are available for use by Amazon Web Services services that support CodeBuild build project
       tags.</p>")
     tags: option<tagList_>,
-    @ocaml.doc("<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output
+    @ocaml.doc("<p>The Key Management Service customer master key (CMK) to be used for encrypting the build output
       artifacts.</p>
          <note>
             <p>You can use a cross-account KMS key to encrypt the build output artifacts if your
@@ -3891,11 +3957,11 @@ module CreateProject = {
     encryptionKey: option<nonEmptyString>,
     @ocaml.doc("<p>The number of minutes a build is allowed to be queued before it times out. </p>")
     queuedTimeoutInMinutes: option<timeOut>,
-    @ocaml.doc("<p>How long, in minutes, from 5 to 480 (8 hours), for AWS CodeBuild to wait before it times out
+    @ocaml.doc("<p>How long, in minutes, from 5 to 480 (8 hours), for CodeBuild to wait before it times out
       any build that has not been marked as completed. The default is 60 minutes.</p>")
     timeoutInMinutes: option<timeOut>,
-    @ocaml.doc("<p>The ARN of the AWS Identity and Access Management (IAM) role that enables AWS CodeBuild to interact with dependent AWS services
-      on behalf of the AWS account.</p>")
+    @ocaml.doc("<p>The ARN of the IAM role that enables CodeBuild to interact with dependent Amazon Web Services services
+      on behalf of the Amazon Web Services account.</p>")
     serviceRole: nonEmptyString,
     @ocaml.doc("<p>Information about the build environment for the build project.</p>")
     environment: projectEnvironment,
@@ -3915,7 +3981,7 @@ module CreateProject = {
             version is used. If specified, it must be one of: </p>
          <ul>
             <li>
-               <p>For AWS CodeCommit: the commit ID, branch, or Git tag to use.</p>
+               <p>For CodeCommit: the commit ID, branch, or Git tag to use.</p>
             </li>
             <li>
                <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that
@@ -3939,7 +4005,7 @@ module CreateProject = {
          <p>If <code>sourceVersion</code> is specified at the build level, then that version takes
             precedence over this <code>sourceVersion</code> (at the project level). </p>
          <p>For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html\">Source Version Sample
-                with CodeBuild</a> in the <i>AWS CodeBuild User Guide</i>. 
+                with CodeBuild</a> in the <i>CodeBuild User Guide</i>. 
     </p>")
     sourceVersion: option<string_>,
     @ocaml.doc("<p>An array of <code>ProjectSource</code> objects. </p>")
@@ -4009,7 +4075,7 @@ module BatchGetProjects = {
   type t
   type request = {
     @ocaml.doc("<p>The names or ARNs of the build projects. To get information about a project shared
-            with your AWS account, its ARN must be specified. You cannot specify a shared project
+            with your Amazon Web Services account, its ARN must be specified. You cannot specify a shared project
             using its name.</p>")
     names: projectNames,
   }
@@ -4056,21 +4122,21 @@ module StartBuildBatch = {
     @ocaml.doc("<p>A <code>BuildBatchConfigOverride</code> object that contains batch build configuration
             overrides.</p>")
     buildBatchConfigOverride: option<projectBuildBatchConfig>,
-    @ocaml.doc("<p>The type of credentials AWS CodeBuild uses to pull images in your batch build. There are two valid
+    @ocaml.doc("<p>The type of credentials CodeBuild uses to pull images in your batch build. There are two valid
         values: </p>
         <dl>
             <dt>CODEBUILD</dt>
             <dd>
-                    <p>Specifies that AWS CodeBuild uses its own credentials. This requires that you
-                        modify your ECR repository policy to trust AWS CodeBuild's service principal.</p>
+                    <p>Specifies that CodeBuild uses its own credentials. This requires that you
+                        modify your ECR repository policy to trust CodeBuild's service principal.</p>
                 </dd>
             <dt>SERVICE_ROLE</dt>
             <dd>
-                    <p>Specifies that AWS CodeBuild uses your build project's service role. </p>
+                    <p>Specifies that CodeBuild uses your build project's service role. </p>
                 </dd>
          </dl>
          <p>When using a cross-account or private registry image, you must use
-                <code>SERVICE_ROLE</code> credentials. When using an AWS CodeBuild curated image,
+                <code>SERVICE_ROLE</code> credentials. When using an CodeBuild curated image,
             you must use <code>CODEBUILD</code> credentials. </p>")
     imagePullCredentialsTypeOverride: option<imagePullCredentialsType>,
     @ocaml.doc("<p>A <code>RegistryCredential</code> object that overrides credentials for access to a
@@ -4083,9 +4149,9 @@ module StartBuildBatch = {
                 <code>StartBuildBatch</code> request. The token is included in the
                 <code>StartBuildBatch</code> request and is valid for five minutes. If you repeat
             the <code>StartBuildBatch</code> request with the same token, but change a parameter,
-            AWS CodeBuild returns a parameter mismatch error.</p>")
+            CodeBuild returns a parameter mismatch error.</p>")
     idempotencyToken: option<string_>,
-    @ocaml.doc("<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) that overrides the one specified in the batch build
+    @ocaml.doc("<p>The Key Management Service customer master key (CMK) that overrides the one specified in the batch build
         project. The CMK key encrypts the build output artifacts.</p>
          <note>
             <p>You can use a cross-account KMS key to encrypt the build output artifacts if your
@@ -4137,7 +4203,7 @@ module StartBuildBatch = {
          <p>If this value is set, it can be either an inline buildspec definition, the path to an
         alternate buildspec file relative to the value of the built-in
         <code>CODEBUILD_SRC_DIR</code> environment variable, or the path to an S3 bucket.
-        The bucket must be in the same AWS Region as the build project. Specify the buildspec
+        The bucket must be in the same Amazon Web Services Region as the build project. Specify the buildspec
         file using its ARN (for example,
         <code>arn:aws:s3:::my-codebuild-sample2/buildspec.yml</code>). If this value is not
         provided or is set to an empty string, the source code must contain a buildspec file in
@@ -4172,7 +4238,7 @@ module StartBuildBatch = {
             the latest version is used. If specified, the contents depends on the source
             provider:</p>
         <dl>
-            <dt>AWS CodeCommit</dt>
+            <dt>CodeCommit</dt>
             <dd>
                     <p>The commit ID, branch, or Git tag to use.</p>
                 </dd>
@@ -4201,7 +4267,7 @@ module StartBuildBatch = {
          <p>If <code>sourceVersion</code> is specified at the project level, then this
                 <code>sourceVersion</code> (at the build level) takes precedence. </p>
          <p>For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html\">Source Version Sample
-                with CodeBuild</a> in the <i>AWS CodeBuild User Guide</i>. </p>")
+                with CodeBuild</a> in the <i>CodeBuild User Guide</i>. </p>")
     sourceVersion: option<string_>,
     @ocaml.doc("<p>An array of <code>ProjectSourceVersion</code> objects that override the secondary source
             versions in the batch build project.</p>")
@@ -4297,7 +4363,7 @@ module RetryBuildBatch = {
                 <code>RetryBuildBatch</code> request. The token is included in the
                 <code>RetryBuildBatch</code> request and is valid for five minutes. If you repeat
             the <code>RetryBuildBatch</code> request with the same token, but change a parameter,
-            AWS CodeBuild returns a parameter mismatch error.</p>")
+            CodeBuild returns a parameter mismatch error.</p>")
     idempotencyToken: option<string_>,
     @ocaml.doc("<p>Specifies the identifier of the batch build to restart.</p>")
     id: option<nonEmptyString>,
@@ -4311,15 +4377,15 @@ module RetryBuildBatch = {
 
 module ListCuratedEnvironmentImages = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("<p>Information about supported platforms for Docker images that are managed by
-            AWS CodeBuild.</p>")
+            CodeBuild.</p>")
     platforms: option<environmentPlatforms>,
   }
   @module("@aws-sdk/client-codebuild") @new
-  external new: unit => t = "ListCuratedEnvironmentImagesCommand"
-  let make = () => new()
+  external new: request => t = "ListCuratedEnvironmentImagesCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

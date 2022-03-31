@@ -37,6 +37,7 @@ let reservedWords = [
   "Result",
   "Ok",
   "Error",
+  "constraint",
 ]
 
 let uppercaseStartRe = Js.Re.fromString("^([A-Z]*)(.*)$")

@@ -261,7 +261,7 @@ module SetTaskStatus = {
     )
     taskId: taskId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-datapipeline") @new external new: request => t = "SetTaskStatusCommand"
   let make = (~taskStatus, ~taskId, ~errorStackTrace=?, ~errorMessage=?, ~errorId=?, ()) =>
     new({
@@ -321,7 +321,7 @@ module DeletePipeline = {
   type t
   @ocaml.doc("<p>Contains the parameters for DeletePipeline.</p>")
   type request = {@ocaml.doc("<p>The ID of the pipeline.</p>") pipelineId: id}
-
+  type response = {.}
   @module("@aws-sdk/client-datapipeline") @new external new: request => t = "DeletePipelineCommand"
   let make = (~pipelineId, ()) => new({pipelineId: pipelineId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -338,7 +338,7 @@ module DeactivatePipeline = {
     cancelActive: option<cancelActive>,
     @ocaml.doc("<p>The ID of the pipeline.</p>") pipelineId: id,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-datapipeline") @new
   external new: request => t = "DeactivatePipelineCommand"
   let make = (~pipelineId, ~cancelActive=?, ()) =>
@@ -359,7 +359,7 @@ module SetStatus = {
     objectIds: idList,
     @ocaml.doc("<p>The ID of the pipeline that contains the objects.</p>") pipelineId: id,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-datapipeline") @new external new: request => t = "SetStatusCommand"
   let make = (~status, ~objectIds, ~pipelineId, ()) =>
     new({status: status, objectIds: objectIds, pipelineId: pipelineId})
@@ -373,7 +373,7 @@ module RemoveTags = {
     @ocaml.doc("<p>The keys of the tags to remove.</p>") tagKeys: stringList,
     @ocaml.doc("<p>The ID of the pipeline.</p>") pipelineId: id,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-datapipeline") @new external new: request => t = "RemoveTagsCommand"
   let make = (~tagKeys, ~pipelineId, ()) => new({tagKeys: tagKeys, pipelineId: pipelineId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -474,7 +474,7 @@ module AddTags = {
     @ocaml.doc("<p>The tags to add, as key/value pairs.</p>") tags: tagList_,
     @ocaml.doc("<p>The ID of the pipeline.</p>") pipelineId: id,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-datapipeline") @new external new: request => t = "AddTagsCommand"
   let make = (~tags, ~pipelineId, ()) => new({tags: tags, pipelineId: pipelineId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -492,7 +492,7 @@ module ActivatePipeline = {
     parameterValues: option<parameterValueList>,
     @ocaml.doc("<p>The ID of the pipeline.</p>") pipelineId: id,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-datapipeline") @new
   external new: request => t = "ActivatePipelineCommand"
   let make = (~pipelineId, ~startTimestamp=?, ~parameterValues=?, ()) =>

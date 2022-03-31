@@ -985,7 +985,7 @@ module StopApplication = {
     @ocaml.doc("<p>Name of the running application to stop.</p>") @as("ApplicationName")
     applicationName: applicationName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-kinesisanalytics") @new
   external new: request => t = "StopApplicationCommand"
   let make = (~applicationName, ()) => new({applicationName: applicationName})
@@ -1011,7 +1011,7 @@ module DeleteApplicationReferenceDataSource = {
     @ocaml.doc("<p>Name of an existing application.</p>") @as("ApplicationName")
     applicationName: applicationName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-kinesisanalytics") @new
   external new: request => t = "DeleteApplicationReferenceDataSourceCommand"
   let make = (~referenceId, ~currentApplicationVersionId, ~applicationName, ()) =>
@@ -1047,7 +1047,7 @@ module DeleteApplicationOutput = {
     @ocaml.doc("<p>Amazon Kinesis Analytics application name.</p>") @as("ApplicationName")
     applicationName: applicationName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-kinesisanalytics") @new
   external new: request => t = "DeleteApplicationOutputCommand"
   let make = (~outputId, ~currentApplicationVersionId, ~applicationName, ()) =>
@@ -1072,7 +1072,7 @@ module DeleteApplicationInputProcessingConfiguration = {
     @ocaml.doc("<p>The Kinesis Analytics application name.</p>") @as("ApplicationName")
     applicationName: applicationName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-kinesisanalytics") @new
   external new: request => t = "DeleteApplicationInputProcessingConfigurationCommand"
   let make = (~inputId, ~currentApplicationVersionId, ~applicationName, ()) =>
@@ -1097,7 +1097,7 @@ module DeleteApplicationCloudWatchLoggingOption = {
     @ocaml.doc("<p>The Kinesis Analytics application name.</p>") @as("ApplicationName")
     applicationName: applicationName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-kinesisanalytics") @new
   external new: request => t = "DeleteApplicationCloudWatchLoggingOptionCommand"
   let make = (~cloudWatchLoggingOptionId, ~currentApplicationVersionId, ~applicationName, ()) =>
@@ -1122,7 +1122,7 @@ module DeleteApplication = {
     @as("ApplicationName")
     applicationName: applicationName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-kinesisanalytics") @new
   external new: request => t = "DeleteApplicationCommand"
   let make = (~createTimestamp, ~applicationName, ()) =>
@@ -1140,7 +1140,7 @@ module UntagResource = {
     @as("ResourceARN")
     resourceARN: kinesisAnalyticsARN,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-kinesisanalytics") @new
   external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys: tagKeys, resourceARN: resourceARN})
@@ -1161,7 +1161,7 @@ module AddApplicationCloudWatchLoggingOption = {
     @ocaml.doc("<p>The Kinesis Analytics application name.</p>") @as("ApplicationName")
     applicationName: applicationName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-kinesisanalytics") @new
   external new: request => t = "AddApplicationCloudWatchLoggingOptionCommand"
   let make = (~cloudWatchLoggingOption, ~currentApplicationVersionId, ~applicationName, ()) =>
@@ -1180,7 +1180,7 @@ module TagResource = {
     @ocaml.doc("<p>The ARN of the application to assign the tags.</p>") @as("ResourceARN")
     resourceARN: kinesisAnalyticsARN,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-kinesisanalytics") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceARN, ()) => new({tags: tags, resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1250,7 +1250,7 @@ module AddApplicationOutput = {
     @as("ApplicationName")
     applicationName: applicationName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-kinesisanalytics") @new
   external new: request => t = "AddApplicationOutputCommand"
   let make = (~output, ~currentApplicationVersionId, ~applicationName, ()) =>
@@ -1285,7 +1285,7 @@ module AddApplicationInputProcessingConfiguration = {
     @as("ApplicationName")
     applicationName: applicationName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-kinesisanalytics") @new
   external new: request => t = "AddApplicationInputProcessingConfigurationCommand"
   let make = (
@@ -1316,7 +1316,7 @@ module StartApplication = {
     @ocaml.doc("<p>Name of the application.</p>") @as("ApplicationName")
     applicationName: applicationName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-kinesisanalytics") @new
   external new: request => t = "StartApplicationCommand"
   let make = (~inputConfigurations, ~applicationName, ()) =>
@@ -1408,7 +1408,7 @@ module AddApplicationReferenceDataSource = {
     @ocaml.doc("<p>Name of an existing application.</p>") @as("ApplicationName")
     applicationName: applicationName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-kinesisanalytics") @new
   external new: request => t = "AddApplicationReferenceDataSourceCommand"
   let make = (~referenceDataSource, ~currentApplicationVersionId, ~applicationName, ()) =>
@@ -1439,7 +1439,7 @@ module AddApplicationInput = {
     @as("ApplicationName")
     applicationName: applicationName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-kinesisanalytics") @new
   external new: request => t = "AddApplicationInputCommand"
   let make = (~input, ~currentApplicationVersionId, ~applicationName, ()) =>
@@ -1554,7 +1554,7 @@ module UpdateApplication = {
     @as("ApplicationName")
     applicationName: applicationName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-kinesisanalytics") @new
   external new: request => t = "UpdateApplicationCommand"
   let make = (~applicationUpdate, ~currentApplicationVersionId, ~applicationName, ()) =>

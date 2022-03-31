@@ -98,7 +98,7 @@ type schemaExtensionStatus = [
 type schemaExtensionId = string
 type sid = string
 type resourceId = string
-@ocaml.doc("<p>The AWS request identifier.</p>") type requestId = string
+@ocaml.doc("<p>The Amazon Web Services request identifier.</p>") type requestId = string
 type replicationScope = [@as("Domain") #Domain]
 type remoteDomainName = string
 type regionType = [@as("Additional") #Additional | @as("Primary") #Primary]
@@ -199,6 +199,7 @@ type computerPassword = string
 type computerName = string
 type cloudOnlyDirectoriesLimitReached = bool
 type clientAuthenticationType = [@as("SmartCard") #SmartCard]
+type clientAuthenticationStatus = [@as("Disabled") #Disabled | @as("Enabled") #Enabled]
 type cidrIp = string
 type certificateType = [@as("ClientLDAPS") #ClientLDAPS | @as("ClientCertAuth") #ClientCertAuth]
 type certificateStateReason = string
@@ -229,9 +230,8 @@ type unshareTarget = {
   @ocaml.doc("<p>Identifier of the directory consumer account.</p>") @as("Id") id: targetId,
 }
 type trustIds = array<trustId>
-@ocaml.doc(
-  "<p>Describes a trust relationship between an AWS Managed Microsoft AD directory and an external domain.</p>"
-)
+@ocaml.doc("<p>Describes a trust relationship between an Managed Microsoft AD directory and an external
+      domain.</p>")
 type trust = {
   @ocaml.doc("<p>Current state of selective authentication for the trust.</p>") @as("SelectiveAuth")
   selectiveAuth: option<selectiveAuth>,
@@ -253,14 +253,15 @@ type trust = {
   @ocaml.doc("<p>The trust relationship type. <code>Forest</code> is the default.</p>")
   @as("TrustType")
   trustType: option<trustType>,
-  @ocaml.doc(
-    "<p>The Fully Qualified Domain Name (FQDN) of the external domain involved in the trust relationship.</p>"
-  )
+  @ocaml.doc("<p>The Fully Qualified Domain Name (FQDN) of the external domain involved in the trust
+      relationship.</p>")
   @as("RemoteDomainName")
   remoteDomainName: option<remoteDomainName>,
   @ocaml.doc("<p>The unique ID of the trust relationship.</p>") @as("TrustId")
   trustId: option<trustId>,
-  @ocaml.doc("<p>The Directory ID of the AWS directory involved in the trust relationship.</p>")
+  @ocaml.doc(
+    "<p>The Directory ID of the Amazon Web Services directory involved in the trust relationship.</p>"
+  )
   @as("DirectoryId")
   directoryId: option<directoryId>,
 }
@@ -268,14 +269,15 @@ type topicNames = array<topicName>
 type tagKeys = array<tagKey>
 @ocaml.doc("<p>Metadata assigned to a directory consisting of a key-value pair.</p>")
 type tag = {
-  @ocaml.doc(
-    "<p>The optional value of the tag. The string value can be Unicode characters. The string can contain only the set of Unicode letters, digits, white-space, '_', '.', '/', '=', '+', '-' (Java regex: \"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-]*)$\").</p>"
-  )
+  @ocaml.doc("<p>The optional value of the tag. The string value can be Unicode characters. The string
+      can contain only the set of Unicode letters, digits, white-space, '_', '.', '/', '=', '+', '-'
+      (Java regex: \"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-]*)$\").</p>")
   @as("Value")
   value: tagValue,
-  @ocaml.doc(
-    "<p>Required name of the tag. The string value can be Unicode characters and cannot be prefixed with \"aws:\". The string can contain only the set of Unicode letters, digits, white-space, '_', '.', '/', '=', '+', '-' (Java regex: \"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-]*)$\").</p>"
-  )
+  @ocaml.doc("<p>Required name of the tag. The string value can be Unicode characters and cannot be
+      prefixed with \"aws:\". The string can contain only the set of Unicode letters, digits,
+      white-space, '_', '.', '/', '=', '+', '-' (Java regex:
+      \"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-]*)$\").</p>")
   @as("Key")
   key: tagKey,
 }
@@ -317,7 +319,7 @@ type sharedDirectory = {
       whether to approve or reject the share invitation.</p>")
   @as("ShareNotes")
   shareNotes: option<notes>,
-  @ocaml.doc("<p>Current directory status of the shared AWS Managed Microsoft AD directory.</p>")
+  @ocaml.doc("<p>Current directory status of the shared Managed Microsoft AD directory.</p>")
   @as("ShareStatus")
   shareStatus: option<shareStatus>,
   @ocaml.doc("<p>Identifier of the shared directory in the directory consumer account. This identifier is
@@ -329,7 +331,7 @@ type sharedDirectory = {
   @as("SharedAccountId")
   sharedAccountId: option<customerId>,
   @ocaml.doc("<p>The method used when sharing a directory to determine whether the directory should be
-      shared within your AWS organization (<code>ORGANIZATIONS</code>) or with any AWS account by
+      shared within your Amazon Web Services organization (<code>ORGANIZATIONS</code>) or with any Amazon Web Services account by
       sending a shared directory request (<code>HANDSHAKE</code>).</p>")
   @as("ShareMethod")
   shareMethod: option<shareMethod>,
@@ -352,9 +354,8 @@ type servers = array<server>
 type schemaExtensionInfo = {
   @ocaml.doc("<p>The date and time that the schema extension was completed.</p>") @as("EndDateTime")
   endDateTime: option<endDateTime>,
-  @ocaml.doc(
-    "<p>The date and time that the schema extension started being applied to the directory.</p>"
-  )
+  @ocaml.doc("<p>The date and time that the schema extension started being applied to the
+      directory.</p>")
   @as("StartDateTime")
   startDateTime: option<startDateTime>,
   @ocaml.doc("<p>The reason for the <code>SchemaExtensionStatus</code>.</p>")
@@ -410,33 +411,37 @@ type ipRouteInfo = {
   @as("DirectoryId")
   directoryId: option<directoryId>,
 }
-@ocaml.doc(
-  "<p>IP address block. This is often the address block of the DNS server used for your on-premises domain. </p>"
-)
+@ocaml.doc("<p>IP address block. This is often the address block of the DNS server used for your
+         self-managed domain. </p>")
 type ipRoute = {
   @ocaml.doc("<p>Description of the address block.</p>") @as("Description")
   description: option<description>,
-  @ocaml.doc(
-    "<p>IP address block using CIDR format, for example 10.0.0.0/24. This is often the address block of the DNS server used for your on-premises domain. For a single IP address use a CIDR address block with /32. For example 10.0.0.0/32.</p>"
-  )
+  @ocaml.doc("<p>IP address block using CIDR format, for example 10.0.0.0/24. This is often the
+         address block of the DNS server used for your self-managed domain. For a single IP address
+         use a CIDR address block with /32. For example 10.0.0.0/32.</p>")
   @as("CidrIp")
   cidrIp: option<cidrIp>,
 }
 type ipAddrs = array<ipAddr>
-@ocaml.doc("<p>Information about SNS topic and AWS Directory Service directory associations.</p>")
+@ocaml.doc(
+  "<p>Information about Amazon SNS topic and Directory Service directory associations.</p>"
+)
 type eventTopic = {
   @ocaml.doc("<p>The topic registration status.</p>") @as("Status") status: option<topicStatus>,
-  @ocaml.doc("<p>The date and time of when you associated your directory with the SNS topic.</p>")
+  @ocaml.doc(
+    "<p>The date and time of when you associated your directory with the Amazon SNS topic.</p>"
+  )
   @as("CreatedDateTime")
   createdDateTime: option<createdDateTime>,
-  @ocaml.doc("<p>The SNS topic ARN (Amazon Resource Name).</p>") @as("TopicArn")
+  @ocaml.doc("<p>The Amazon SNS topic ARN (Amazon Resource Name).</p>") @as("TopicArn")
   topicArn: option<topicArn>,
-  @ocaml.doc("<p>The name of an AWS SNS topic the receives status messages from the directory.</p>")
+  @ocaml.doc(
+    "<p>The name of an Amazon SNS topic the receives status messages from the directory.</p>"
+  )
   @as("TopicName")
   topicName: option<topicName>,
-  @ocaml.doc(
-    "<p>The Directory ID of an AWS Directory Service directory that will publish status messages to an SNS topic.</p>"
-  )
+  @ocaml.doc("<p>The Directory ID of an Directory Service directory that will publish status messages to an Amazon SNS
+      topic.</p>")
   @as("DirectoryId")
   directoryId: option<directoryId>,
 }
@@ -481,15 +486,13 @@ type directoryLimits = {
   @ocaml.doc("<p>The maximum number of connected directories allowed in the Region.</p>")
   @as("ConnectedDirectoriesLimit")
   connectedDirectoriesLimit: option<limit>,
-  @ocaml.doc("<p>Indicates if the AWS Managed Microsoft AD directory limit has been reached.</p>")
+  @ocaml.doc("<p>Indicates if the Managed Microsoft AD directory limit has been reached.</p>")
   @as("CloudOnlyMicrosoftADLimitReached")
   cloudOnlyMicrosoftADLimitReached: option<cloudOnlyDirectoriesLimitReached>,
-  @ocaml.doc("<p>The current number of AWS Managed Microsoft AD directories in the region.</p>")
+  @ocaml.doc("<p>The current number of Managed Microsoft AD directories in the region.</p>")
   @as("CloudOnlyMicrosoftADCurrentCount")
   cloudOnlyMicrosoftADCurrentCount: option<limit>,
-  @ocaml.doc(
-    "<p>The maximum number of AWS Managed Microsoft AD directories allowed in the region.</p>"
-  )
+  @ocaml.doc("<p>The maximum number of Managed Microsoft AD directories allowed in the region.</p>")
   @as("CloudOnlyMicrosoftADLimit")
   cloudOnlyMicrosoftADLimit: option<limit>,
   @ocaml.doc("<p>Indicates if the cloud directory limit has been reached.</p>")
@@ -512,6 +515,24 @@ type clientCertAuthSettings = {
   )
   @as("OCSPUrl")
   ocspurl: option<ocspurl>,
+}
+@ocaml.doc("<p>Contains information about a client authentication method for a directory.</p>")
+type clientAuthenticationSettingInfo = {
+  @ocaml.doc(
+    "<p>The date and time when the status of the client authentication type was last updated.</p>"
+  )
+  @as("LastUpdatedDateTime")
+  lastUpdatedDateTime: option<lastUpdatedDateTime>,
+  @ocaml.doc(
+    "<p>Whether the client authentication type is enabled or disabled for the specified directory.</p>"
+  )
+  @as("Status")
+  status: option<clientAuthenticationStatus>,
+  @ocaml.doc(
+    "<p>The type of client authentication for the specified directory. If no type is specified, a list of all client authentication types that are supported for the directory is retrieved. </p>"
+  )
+  @as("Type")
+  type_: option<clientAuthenticationType>,
 }
 type cidrIps = array<cidrIp>
 @ocaml.doc("<p>Contains general information about a certificate.</p>")
@@ -548,15 +569,12 @@ type regionsInfo = {
       Region.</p>")
   @as("AdditionalRegions")
   additionalRegions: option<additionalRegions>,
-  @ocaml.doc(
-    "<p>The Region where the AWS Managed Microsoft AD directory was originally created.</p>"
-  )
+  @ocaml.doc("<p>The Region where the Managed Microsoft AD directory was originally created.</p>")
   @as("PrimaryRegion")
   primaryRegion: option<regionName>,
 }
-@ocaml.doc(
-  "<p>Contains information about a Remote Authentication Dial In User Service (RADIUS) server.</p>"
-)
+@ocaml.doc("<p>Contains information about a Remote Authentication Dial In User Service (RADIUS)
+         server.</p>")
 type radiusSettings = {
   @ocaml.doc("<p>Not currently used.</p>") @as("UseSameUsername")
   useSameUsername: option<useSameUsername>,
@@ -567,22 +585,20 @@ type radiusSettings = {
   authenticationProtocol: option<radiusAuthenticationProtocol>,
   @ocaml.doc("<p>Required for enabling RADIUS on the directory.</p>") @as("SharedSecret")
   sharedSecret: option<radiusSharedSecret>,
-  @ocaml.doc(
-    "<p>The maximum number of times that communication with the RADIUS server is attempted.</p>"
-  )
+  @ocaml.doc("<p>The maximum number of times that communication with the RADIUS server is
+         attempted.</p>")
   @as("RadiusRetries")
   radiusRetries: option<radiusRetries>,
   @ocaml.doc("<p>The amount of time, in seconds, to wait for the RADIUS server to respond.</p>")
   @as("RadiusTimeout")
   radiusTimeout: option<radiusTimeout>,
-  @ocaml.doc(
-    "<p>The port that your RADIUS server is using for communications. Your on-premises network must allow inbound traffic over this port from the AWS Directory Service servers.</p>"
-  )
+  @ocaml.doc("<p>The port that your RADIUS server is using for communications. Your self-managed
+         network must allow inbound traffic over this port from the Directory Service servers.</p>")
   @as("RadiusPort")
   radiusPort: option<portNumber>,
-  @ocaml.doc(
-    "<p>An array of strings that contains the fully qualified domain name (FQDN) or IP addresses of the RADIUS server endpoints, or the FQDN or IP addresses of your RADIUS server load balancer.</p>"
-  )
+  @ocaml.doc("<p>An array of strings that contains the fully qualified domain name (FQDN) or IP
+         addresses of the RADIUS server endpoints, or the FQDN or IP addresses of your RADIUS server
+         load balancer.</p>")
   @as("RadiusServers")
   radiusServers: option<servers>,
 }
@@ -610,7 +626,7 @@ type directoryVpcSettingsDescription = {
 )
 type directoryVpcSettings = {
   @ocaml.doc("<p>The identifiers of the subnets for the directory servers. The two subnets must be in
-      different Availability Zones. AWS Directory Service creates a directory server and a DNS
+      different Availability Zones. Directory Service creates a directory server and a DNS
       server in each of these subnets.</p>")
   @as("SubnetIds")
   subnetIds: subnetIds,
@@ -627,7 +643,7 @@ type directoryConnectSettingsDescription = {
   @ocaml.doc("<p>The security group identifier for the AD Connector directory.</p>")
   @as("SecurityGroupId")
   securityGroupId: option<securityGroupId>,
-  @ocaml.doc("<p>The user name of the service account in the on-premises directory.</p>")
+  @ocaml.doc("<p>The user name of the service account in your self-managed directory.</p>")
   @as("CustomerUserName")
   customerUserName: option<userName>,
   @ocaml.doc("<p>A list of subnet identifiers in the VPC that the AD Connector is in.</p>")
@@ -639,7 +655,7 @@ type directoryConnectSettingsDescription = {
 @ocaml.doc("<p>Contains information for the <a>ConnectDirectory</a> operation when an AD
       Connector directory is being created.</p>")
 type directoryConnectSettings = {
-  @ocaml.doc("<p>The user name of an account in the on-premises directory that is used to connect to the
+  @ocaml.doc("<p>The user name of an account in your self-managed directory that is used to connect to the
       directory. This account must have the following permissions:</p>
          <ul>
             <li>
@@ -654,7 +670,7 @@ type directoryConnectSettings = {
          </ul>")
   @as("CustomerUserName")
   customerUserName: userName,
-  @ocaml.doc("<p>A list of one or more IP addresses of DNS servers or domain controllers in the on-premises
+  @ocaml.doc("<p>A list of one or more IP addresses of DNS servers or domain controllers in your self-managed
       directory.</p>")
   @as("CustomerDnsIps")
   customerDnsIps: dnsIpAddrs,
@@ -664,26 +680,25 @@ type directoryConnectSettings = {
   @ocaml.doc("<p>The identifier of the VPC in which the AD Connector is created.</p>") @as("VpcId")
   vpcId: vpcId,
 }
-@ocaml.doc(
-  "<p>Points to a remote domain with which you are setting up a trust relationship. Conditional forwarders are required in order to set up a trust relationship with another domain.</p>"
-)
+@ocaml.doc("<p>Points to a remote domain with which you are setting up a trust relationship.
+      Conditional forwarders are required in order to set up a trust relationship with another
+      domain.</p>")
 type conditionalForwarder = {
   @ocaml.doc("<p>The replication scope of the conditional forwarder. The only allowed value is
-                  <code>Domain</code>, which will replicate the conditional forwarder to all of the
-                  domain controllers for your AWS directory.</p>")
+        <code>Domain</code>, which will replicate the conditional forwarder to all of the domain
+      controllers for your Amazon Web Services directory.</p>")
   @as("ReplicationScope")
   replicationScope: option<replicationScope>,
-  @ocaml.doc(
-    "<p>The IP addresses of the remote DNS server associated with RemoteDomainName. This is the IP address of the DNS server that your conditional forwarder points to.</p>"
-  )
+  @ocaml.doc("<p>The IP addresses of the remote DNS server associated with RemoteDomainName. This is the
+      IP address of the DNS server that your conditional forwarder points to.</p>")
   @as("DnsIpAddrs")
   dnsIpAddrs: option<dnsIpAddrs>,
-  @ocaml.doc(
-    "<p>The fully qualified domain name (FQDN) of the remote domains pointed to by the conditional forwarder.</p>"
-  )
+  @ocaml.doc("<p>The fully qualified domain name (FQDN) of the remote domains pointed to by the
+      conditional forwarder.</p>")
   @as("RemoteDomainName")
   remoteDomainName: option<remoteDomainName>,
 }
+type clientAuthenticationSettingsInfo = array<clientAuthenticationSettingInfo>
 type certificatesInfo = array<certificateInfo>
 @ocaml.doc("<p>Information about the certificate.</p>")
 type certificate = {
@@ -752,7 +767,7 @@ type ownerDirectoryDescription = {
   dnsIpAddrs: option<dnsIpAddrs>,
   @ocaml.doc("<p>Identifier of the directory owner account.</p>") @as("AccountId")
   accountId: option<customerId>,
-  @ocaml.doc("<p>Identifier of the AWS Managed Microsoft AD directory in the directory owner
+  @ocaml.doc("<p>Identifier of the Managed Microsoft AD directory in the directory owner
       account.</p>")
   @as("DirectoryId")
   directoryId: option<directoryId>,
@@ -768,18 +783,15 @@ type computer = {
   @ocaml.doc("<p>The identifier of the computer.</p>") @as("ComputerId") computerId: option<sid>,
 }
 type regionsDescription = array<regionDescription>
-@ocaml.doc("<p>Contains information about an AWS Directory Service directory.</p>")
+@ocaml.doc("<p>Contains information about an Directory Service directory.</p>")
 type directoryDescription = {
   @ocaml.doc("<p>Lists the Regions where the directory has replicated.</p>") @as("RegionsInfo")
   regionsInfo: option<regionsInfo>,
-  @ocaml.doc(
-    "<p>Describes the AWS Managed Microsoft AD directory in the directory owner account.</p>"
-  )
+  @ocaml.doc("<p>Describes the Managed Microsoft AD directory in the directory owner account.</p>")
   @as("OwnerDirectoryDescription")
   ownerDirectoryDescription: option<ownerDirectoryDescription>,
-  @ocaml.doc(
-    "<p>The desired number of domain controllers in the directory if the directory is Microsoft AD.</p>"
-  )
+  @ocaml.doc("<p>The desired number of domain controllers in the directory if the directory is Microsoft
+      AD.</p>")
   @as("DesiredNumberOfDomainControllers")
   desiredNumberOfDomainControllers: option<desiredNumberOfDomainControllers>,
   @ocaml.doc(
@@ -802,7 +814,7 @@ type directoryDescription = {
   connectSettings: option<directoryConnectSettingsDescription>,
   @ocaml.doc("<p>A <a>DirectoryVpcSettingsDescription</a> object that contains additional
       information about a directory. This member is only present if the directory is a Simple AD or
-      Managed AD directory.</p>")
+      Managed Microsoft AD directory.</p>")
   @as("VpcSettings")
   vpcSettings: option<directoryVpcSettingsDescription>,
   @ocaml.doc("<p>The directory size.</p>") @as("Type") type_: option<directoryType>,
@@ -817,11 +829,11 @@ type directoryDescription = {
   @as("ShareNotes")
   shareNotes: option<notes>,
   @ocaml.doc("<p>The method used when sharing a directory to determine whether the directory should be
-      shared within your AWS organization (<code>ORGANIZATIONS</code>) or with any AWS account by
+      shared within your Amazon Web Services organization (<code>ORGANIZATIONS</code>) or with any Amazon Web Services account by
       sending a shared directory request (<code>HANDSHAKE</code>).</p>")
   @as("ShareMethod")
   shareMethod: option<shareMethod>,
-  @ocaml.doc("<p>Current directory status of the shared AWS Managed Microsoft AD directory.</p>")
+  @ocaml.doc("<p>Current directory status of the shared Managed Microsoft AD directory.</p>")
   @as("ShareStatus")
   shareStatus: option<shareStatus>,
   @ocaml.doc("<p>The current stage of the directory.</p>") @as("Stage")
@@ -829,7 +841,7 @@ type directoryDescription = {
   @ocaml.doc("<p>The IP addresses of the DNS servers for the directory. For a Simple AD or Microsoft AD
       directory, these are the IP addresses of the Simple AD or Microsoft AD directory servers. For
       an AD Connector directory, these are the IP addresses of the DNS servers or domain controllers
-      in the on-premises directory to which the AD Connector is connected.</p>")
+      in your self-managed directory to which the AD Connector is connected.</p>")
   @as("DnsIpAddrs")
   dnsIpAddrs: option<dnsIpAddrs>,
   @ocaml.doc("<p>The description for the directory.</p>") @as("Description")
@@ -856,17 +868,24 @@ type directoryDescription = {
 }
 @ocaml.doc("<p>A list of directory descriptions.</p>")
 type directoryDescriptions = array<directoryDescription>
-@ocaml.doc("<fullname>AWS Directory Service</fullname>
-         <p>AWS Directory Service is a web service that makes it easy for you to setup and run directories in the AWS cloud, or connect your AWS resources with an existing on-premises Microsoft Active Directory. This guide provides detailed information about AWS Directory Service operations, data types, parameters, and errors. For information about AWS Directory Services features, see <a href=\"https://aws.amazon.com/directoryservice/\">AWS Directory Service</a> and the <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/what_is.html\">AWS Directory Service Administration Guide</a>.</p>
+@ocaml.doc("<fullname>Directory Service</fullname>
+         <p>Directory Service is a web service that makes it easy for you to setup and run directories in the
+         Amazon Web Services cloud, or connect your Amazon Web Services resources with an existing self-managed Microsoft Active
+         Directory. This guide provides detailed information about Directory Service operations, data types,
+         parameters, and errors. For information about Directory Services features, see <a href=\"https://aws.amazon.com/directoryservice/\">Directory Service</a> and the <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/what_is.html\">Directory Service
+            Administration Guide</a>.</p>
          <note>
-            <p>AWS provides SDKs that consist of libraries and sample code for various programming languages and platforms (Java, Ruby, .Net, iOS, Android, etc.). The SDKs provide a convenient way to create programmatic access to AWS Directory Service and other AWS services. For more information about the AWS SDKs, including how to download and install them, see <a href=\"http://aws.amazon.com/tools/\">Tools for Amazon Web
-         Services</a>.</p>
+            <p>Amazon Web Services provides SDKs that consist of libraries and sample code for various
+            programming languages and platforms (Java, Ruby, .Net, iOS, Android, etc.). The SDKs
+            provide a convenient way to create programmatic access to Directory Service and other Amazon Web Services
+            services. For more information about the Amazon Web Services SDKs, including how to download and
+            install them, see <a href=\"http://aws.amazon.com/tools/\">Tools for Amazon Web
+               Services</a>.</p>
          </note>")
 module VerifyTrust = {
   type t
-  @ocaml.doc(
-    "<p>Initiates the verification of an existing trust relationship between an AWS Managed Microsoft AD directory and an external domain.</p>"
-  )
+  @ocaml.doc("<p>Initiates the verification of an existing trust relationship between an Managed Microsoft AD
+      directory and an external domain.</p>")
   type request = {
     @ocaml.doc("<p>The unique Trust ID of the trust relationship to verify.</p>") @as("TrustId")
     trustId: trustId,
@@ -906,13 +925,12 @@ module UpdateNumberOfDomainControllers = {
     @ocaml.doc("<p>The number of domain controllers desired in the directory.</p>")
     @as("DesiredNumber")
     desiredNumber: desiredNumberOfDomainControllers,
-    @ocaml.doc(
-      "<p>Identifier of the directory to which the domain controllers will be added or removed.</p>"
-    )
+    @ocaml.doc("<p>Identifier of the directory to which the domain controllers will be added or
+      removed.</p>")
     @as("DirectoryId")
     directoryId: directoryId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ds") @new
   external new: request => t = "UpdateNumberOfDomainControllersCommand"
   let make = (~desiredNumber, ~directoryId, ()) =>
@@ -925,19 +943,17 @@ module StartSchemaExtension = {
   type request = {
     @ocaml.doc("<p>A description of the schema extension.</p>") @as("Description")
     description: description,
-    @ocaml.doc(
-      "<p>The LDIF file represented as a string. To construct the LdifContent string, precede each line as it would be formatted in an ldif file with \\n. See the example request below for more details. The file size can be no larger than 1MB.</p>"
-    )
+    @ocaml.doc("<p>The LDIF file represented as a string. To construct the LdifContent string, precede
+      each line as it would be formatted in an ldif file with \\n. See the example request below for
+      more details. The file size can be no larger than 1MB.</p>")
     @as("LdifContent")
     ldifContent: ldifContent,
-    @ocaml.doc(
-      "<p>If true, creates a snapshot of the directory before applying the schema extension.</p>"
-    )
+    @ocaml.doc("<p>If true, creates a snapshot of the directory before applying the schema
+      extension.</p>")
     @as("CreateSnapshotBeforeSchemaExtension")
     createSnapshotBeforeSchemaExtension: createSnapshotBeforeSchemaExtension,
-    @ocaml.doc(
-      "<p>The identifier of the directory for which the schema extension will be applied to.</p>"
-    )
+    @ocaml.doc("<p>The identifier of the directory for which the schema extension will be applied
+      to.</p>")
     @as("DirectoryId")
     directoryId: directoryId,
   }
@@ -966,7 +982,7 @@ module RestoreFromSnapshot = {
     @ocaml.doc("<p>The identifier of the snapshot to restore from.</p>") @as("SnapshotId")
     snapshotId: snapshotId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ds") @new external new: request => t = "RestoreFromSnapshotCommand"
   let make = (~snapshotId, ()) => new({snapshotId: snapshotId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -979,12 +995,12 @@ module ResetUserPassword = {
     newPassword: userPassword,
     @ocaml.doc("<p>The user name of the user whose password will be reset.</p>") @as("UserName")
     userName: customerUserName,
-    @ocaml.doc("<p>Identifier of the AWS Managed Microsoft AD or Simple AD directory in which the user
+    @ocaml.doc("<p>Identifier of the Managed Microsoft AD or Simple AD directory in which the user
       resides.</p>")
     @as("DirectoryId")
     directoryId: directoryId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ds") @new external new: request => t = "ResetUserPasswordCommand"
   let make = (~newPassword, ~userName, ~directoryId, ()) =>
     new({newPassword: newPassword, userName: userName, directoryId: directoryId})
@@ -1000,7 +1016,7 @@ module RemoveRegion = {
     @as("DirectoryId")
     directoryId: directoryId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ds") @new external new: request => t = "RemoveRegionCommand"
   let make = (~directoryId, ()) => new({directoryId: directoryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1028,16 +1044,15 @@ module RegisterEventTopic = {
   type t
   @ocaml.doc("<p>Registers a new event topic.</p>")
   type request = {
-    @ocaml.doc(
-      "<p>The SNS topic name to which the directory will publish status messages. This SNS topic must be in the same region as the specified Directory ID.</p>"
-    )
+    @ocaml.doc("<p>The Amazon SNS topic name to which the directory will publish status messages. This Amazon SNS
+      topic must be in the same region as the specified Directory ID.</p>")
     @as("TopicName")
     topicName: topicName,
-    @ocaml.doc("<p>The Directory ID that will publish status messages to the SNS topic.</p>")
+    @ocaml.doc("<p>The Directory ID that will publish status messages to the Amazon SNS topic.</p>")
     @as("DirectoryId")
     directoryId: directoryId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ds") @new external new: request => t = "RegisterEventTopicCommand"
   let make = (~topicName, ~directoryId, ()) => new({topicName: topicName, directoryId: directoryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1047,22 +1062,26 @@ module EnableSso = {
   type t
   @ocaml.doc("<p>Contains the inputs for the <a>EnableSso</a> operation.</p>")
   type request = {
-    @ocaml.doc("<p>The password of an alternate account to use to enable single-sign on. This is only used for
-         AD Connector directories. For more information, see the <i>UserName</i> parameter.</p>")
+    @ocaml.doc("<p>The password of an alternate account to use to enable single-sign on. This is only used
+      for AD Connector directories. For more information, see the <i>UserName</i>
+      parameter.</p>")
     @as("Password")
     password: option<connectPassword>,
-    @ocaml.doc("<p>The username of an alternate account to use to enable single-sign on. This is only used for AD Connector directories. This account must have privileges to add a service principal name.</p>
+    @ocaml.doc("<p>The username of an alternate account to use to enable single-sign on. This is only used
+      for AD Connector directories. This account must have privileges to add a service principal
+      name.</p>
          <p>If the AD Connector service account does not have privileges to add a service principal
-         name, you can specify an alternate account with the <i>UserName</i> and <i>Password</i>
-         parameters. These credentials are only used to enable single sign-on and are not stored by
-         the service. The AD Connector service account is not changed.</p>")
+      name, you can specify an alternate account with the <i>UserName</i> and
+        <i>Password</i> parameters. These credentials are only used to enable single
+      sign-on and are not stored by the service. The AD Connector service account is not
+      changed.</p>")
     @as("UserName")
     userName: option<userName>,
     @ocaml.doc("<p>The identifier of the directory for which to enable single-sign on.</p>")
     @as("DirectoryId")
     directoryId: directoryId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ds") @new external new: request => t = "EnableSsoCommand"
   let make = (~directoryId, ~password=?, ~userName=?, ()) =>
     new({password: password, userName: userName, directoryId: directoryId})
@@ -1079,7 +1098,7 @@ module EnableLDAPS = {
     @ocaml.doc("<p>The identifier of the directory.</p>") @as("DirectoryId")
     directoryId: directoryId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ds") @new external new: request => t = "EnableLDAPSCommand"
   let make = (~type_, ~directoryId, ()) => new({type_: type_, directoryId: directoryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1090,14 +1109,14 @@ module EnableClientAuthentication = {
   type request = {
     @ocaml.doc("<p>The type of client authentication to enable. Currently only the value <code>SmartCard</code> is
       supported. Smart card authentication in AD Connector requires that you enable Kerberos
-      Constrained Delegation for the Service User to the LDAP service in the on-premises AD.
+      Constrained Delegation for the Service User to the LDAP service in your self-managed AD.
     </p>")
     @as("Type")
     type_: clientAuthenticationType,
     @ocaml.doc("<p>The identifier of the specified directory. </p>") @as("DirectoryId")
     directoryId: directoryId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ds") @new
   external new: request => t = "EnableClientAuthenticationCommand"
   let make = (~type_, ~directoryId, ()) => new({type_: type_, directoryId: directoryId})
@@ -1109,21 +1128,25 @@ module DisableSso = {
   @ocaml.doc("<p>Contains the inputs for the <a>DisableSso</a> operation.</p>")
   type request = {
     @ocaml.doc("<p>The password of an alternate account to use to disable single-sign on. This is only used
-         for AD Connector directories. For more information, see the <i>UserName</i> parameter.</p>")
+      for AD Connector directories. For more information, see the <i>UserName</i>
+      parameter.</p>")
     @as("Password")
     password: option<connectPassword>,
-    @ocaml.doc("<p>The username of an alternate account to use to disable single-sign on. This is only used for AD Connector directories. This account must have privileges to remove a service principal name.</p>
-         <p>If the AD Connector service account does not have privileges to remove a service principal
-         name, you can specify an alternate account with the <i>UserName</i> and <i>Password</i>
-         parameters. These credentials are only used to disable single sign-on and are not stored by
-         the service. The AD Connector service account is not changed.</p>")
+    @ocaml.doc("<p>The username of an alternate account to use to disable single-sign on. This is only used
+      for AD Connector directories. This account must have privileges to remove a service
+      principal name.</p>
+         <p>If the AD Connector service account does not have privileges to remove a service
+      principal name, you can specify an alternate account with the <i>UserName</i>
+      and <i>Password</i> parameters. These credentials are only used to disable
+      single sign-on and are not stored by the service. The AD Connector service account is not
+      changed.</p>")
     @as("UserName")
     userName: option<userName>,
     @ocaml.doc("<p>The identifier of the directory for which to disable single-sign on.</p>")
     @as("DirectoryId")
     directoryId: directoryId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ds") @new external new: request => t = "DisableSsoCommand"
   let make = (~directoryId, ~password=?, ~userName=?, ()) =>
     new({password: password, userName: userName, directoryId: directoryId})
@@ -1138,7 +1161,7 @@ module DisableRadius = {
     @as("DirectoryId")
     directoryId: directoryId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ds") @new external new: request => t = "DisableRadiusCommand"
   let make = (~directoryId, ()) => new({directoryId: directoryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1154,7 +1177,7 @@ module DisableLDAPS = {
     @ocaml.doc("<p>The identifier of the directory.</p>") @as("DirectoryId")
     directoryId: directoryId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ds") @new external new: request => t = "DisableLDAPSCommand"
   let make = (~type_, ~directoryId, ()) => new({type_: type_, directoryId: directoryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1171,7 +1194,7 @@ module DisableClientAuthentication = {
     @ocaml.doc("<p>The identifier of the directory </p>") @as("DirectoryId")
     directoryId: directoryId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ds") @new
   external new: request => t = "DisableClientAuthenticationCommand"
   let make = (~type_, ~directoryId, ()) => new({type_: type_, directoryId: directoryId})
@@ -1180,20 +1203,20 @@ module DisableClientAuthentication = {
 
 module DeregisterEventTopic = {
   type t
-  @ocaml.doc("<p>Removes the specified directory as a publisher to the specified SNS topic.</p>")
+  @ocaml.doc(
+    "<p>Removes the specified directory as a publisher to the specified Amazon SNS topic.</p>"
+  )
   type request = {
-    @ocaml.doc(
-      "<p>The name of the SNS topic from which to remove the directory as a publisher.</p>"
-    )
+    @ocaml.doc("<p>The name of the Amazon SNS topic from which to remove the directory as a
+      publisher.</p>")
     @as("TopicName")
     topicName: topicName,
-    @ocaml.doc(
-      "<p>The Directory ID to remove as a publisher. This directory will no longer send messages to the specified SNS topic.</p>"
-    )
+    @ocaml.doc("<p>The Directory ID to remove as a publisher. This directory will no longer send messages
+      to the specified Amazon SNS topic.</p>")
     @as("DirectoryId")
     directoryId: directoryId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ds") @new external new: request => t = "DeregisterEventTopicCommand"
   let make = (~topicName, ~directoryId, ()) => new({topicName: topicName, directoryId: directoryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1207,7 +1230,7 @@ module DeregisterCertificate = {
     @ocaml.doc("<p>The identifier of the directory.</p>") @as("DirectoryId")
     directoryId: directoryId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ds") @new external new: request => t = "DeregisterCertificateCommand"
   let make = (~certificateId, ~directoryId, ()) =>
     new({certificateId: certificateId, directoryId: directoryId})
@@ -1216,9 +1239,8 @@ module DeregisterCertificate = {
 
 module DeleteTrust = {
   type t
-  @ocaml.doc(
-    "<p>Deletes the local side of an existing trust relationship between the AWS Managed Microsoft AD directory and the external domain.</p>"
-  )
+  @ocaml.doc("<p>Deletes the local side of an existing trust relationship between the Managed Microsoft AD
+      directory and the external domain.</p>")
   type request = {
     @ocaml.doc("<p>Delete a conditional forwarder as part of a DeleteTrustRequest.</p>")
     @as("DeleteAssociatedConditionalForwarder")
@@ -1265,7 +1287,7 @@ module DeleteLogSubscription = {
     @as("DirectoryId")
     directoryId: directoryId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ds") @new external new: request => t = "DeleteLogSubscriptionCommand"
   let make = (~directoryId, ()) => new({directoryId: directoryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1292,16 +1314,15 @@ module DeleteConditionalForwarder = {
   type t
   @ocaml.doc("<p>Deletes a conditional forwarder.</p>")
   type request = {
-    @ocaml.doc(
-      "<p>The fully qualified domain name (FQDN) of the remote domain with which you are deleting the conditional forwarder.</p>"
-    )
+    @ocaml.doc("<p>The fully qualified domain name (FQDN) of the remote domain with which you are deleting
+      the conditional forwarder.</p>")
     @as("RemoteDomainName")
     remoteDomainName: remoteDomainName,
     @ocaml.doc("<p>The directory ID for which you are deleting the conditional forwarder.</p>")
     @as("DirectoryId")
     directoryId: directoryId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ds") @new
   external new: request => t = "DeleteConditionalForwarderCommand"
   let make = (~remoteDomainName, ~directoryId, ()) =>
@@ -1341,7 +1362,7 @@ module CreateLogSubscription = {
     @as("DirectoryId")
     directoryId: directoryId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ds") @new external new: request => t = "CreateLogSubscriptionCommand"
   let make = (~logGroupName, ~directoryId, ()) =>
     new({logGroupName: logGroupName, directoryId: directoryId})
@@ -1353,7 +1374,7 @@ module CreateAlias = {
   @ocaml.doc("<p>Contains the inputs for the <a>CreateAlias</a> operation.</p>")
   type request = {
     @ocaml.doc("<p>The requested alias.</p>
-         <p>The alias must be unique amongst all aliases in AWS. This operation throws an
+         <p>The alias must be unique amongst all aliases in Amazon Web Services. This operation throws an
             <code>EntityAlreadyExistsException</code> error if the alias already exists.</p>")
     @as("Alias")
     alias: aliasName,
@@ -1382,7 +1403,7 @@ module CancelSchemaExtension = {
     @as("DirectoryId")
     directoryId: directoryId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ds") @new external new: request => t = "CancelSchemaExtensionCommand"
   let make = (~schemaExtensionId, ~directoryId, ()) =>
     new({schemaExtensionId: schemaExtensionId, directoryId: directoryId})
@@ -1393,23 +1414,20 @@ module UpdateConditionalForwarder = {
   type t
   @ocaml.doc("<p>Updates a conditional forwarder.</p>")
   type request = {
-    @ocaml.doc(
-      "<p>The updated IP addresses of the remote DNS server associated with the conditional forwarder.</p>"
-    )
+    @ocaml.doc("<p>The updated IP addresses of the remote DNS server associated with the conditional
+      forwarder.</p>")
     @as("DnsIpAddrs")
     dnsIpAddrs: dnsIpAddrs,
-    @ocaml.doc(
-      "<p>The fully qualified domain name (FQDN) of the remote domain with which you will set up a trust relationship.</p>"
-    )
+    @ocaml.doc("<p>The fully qualified domain name (FQDN) of the remote domain with which you will set up
+      a trust relationship.</p>")
     @as("RemoteDomainName")
     remoteDomainName: remoteDomainName,
-    @ocaml.doc(
-      "<p>The directory ID of the AWS directory for which to update the conditional forwarder.</p>"
-    )
+    @ocaml.doc("<p>The directory ID of the Amazon Web Services directory for which to update the conditional
+      forwarder.</p>")
     @as("DirectoryId")
     directoryId: directoryId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ds") @new
   external new: request => t = "UpdateConditionalForwarderCommand"
   let make = (~dnsIpAddrs, ~remoteDomainName, ~directoryId, ()) =>
@@ -1424,7 +1442,7 @@ module UnshareDirectory = {
       unshared.</p>")
     @as("UnshareTarget")
     unshareTarget: unshareTarget,
-    @ocaml.doc("<p>The identifier of the AWS Managed Microsoft AD directory that you want to stop
+    @ocaml.doc("<p>The identifier of the Managed Microsoft AD directory that you want to stop
       sharing.</p>")
     @as("DirectoryId")
     directoryId: directoryId,
@@ -1445,7 +1463,7 @@ module ShareDirectory = {
   type t
   type request = {
     @ocaml.doc("<p>The method used when sharing a directory to determine whether the directory should be
-      shared within your AWS organization (<code>ORGANIZATIONS</code>) or with any AWS account by
+      shared within your Amazon Web Services organization (<code>ORGANIZATIONS</code>) or with any Amazon Web Services account by
       sending a directory sharing request (<code>HANDSHAKE</code>).</p>")
     @as("ShareMethod")
     shareMethod: shareMethod,
@@ -1458,8 +1476,9 @@ module ShareDirectory = {
       whether to approve or reject the share invitation.</p>")
     @as("ShareNotes")
     shareNotes: option<notes>,
-    @ocaml.doc("<p>Identifier of the AWS Managed Microsoft AD directory that you want to share with other AWS
-      accounts.</p>")
+    @ocaml.doc(
+      "<p>Identifier of the Managed Microsoft AD directory that you want to share with other Amazon Web Services accounts.</p>"
+    )
     @as("DirectoryId")
     directoryId: directoryId,
   }
@@ -1489,7 +1508,7 @@ module RemoveTagsFromResource = {
     @as("ResourceId")
     resourceId: resourceId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ds") @new external new: request => t = "RemoveTagsFromResourceCommand"
   let make = (~tagKeys, ~resourceId, ()) => new({tagKeys: tagKeys, resourceId: resourceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1499,13 +1518,12 @@ module RemoveIpRoutes = {
   type t
   type request = {
     @ocaml.doc("<p>IP address blocks that you want to remove.</p>") @as("CidrIps") cidrIps: cidrIps,
-    @ocaml.doc(
-      "<p>Identifier (ID) of the directory from which you want to remove the IP addresses.</p>"
-    )
+    @ocaml.doc("<p>Identifier (ID) of the directory from which you want to remove the IP
+         addresses.</p>")
     @as("DirectoryId")
     directoryId: directoryId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ds") @new external new: request => t = "RemoveIpRoutesCommand"
   let make = (~cidrIps, ~directoryId, ()) => new({cidrIps: cidrIps, directoryId: directoryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1567,23 +1585,27 @@ module GetSnapshotLimits = {
 
 module GetDirectoryLimits = {
   type t
-
+  type request = {.}
   @ocaml.doc("<p>Contains the results of the <a>GetDirectoryLimits</a> operation.</p>")
   type response = {
     @ocaml.doc("<p>A <a>DirectoryLimits</a> object that contains the directory limits for the
-      current rRegion.</p>")
+      current Region.</p>")
     @as("DirectoryLimits")
     directoryLimits: option<directoryLimits>,
   }
-  @module("@aws-sdk/client-ds") @new external new: unit => t = "GetDirectoryLimitsCommand"
-  let make = () => new()
+  @module("@aws-sdk/client-ds") @new external new: request => t = "GetDirectoryLimitsCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateTrust = {
   type t
-  @ocaml.doc("<p>AWS Directory Service for Microsoft Active Directory allows you to configure trust relationships. For example, you can establish a trust between your AWS Managed Microsoft AD directory, and your existing on-premises Microsoft Active Directory. This would allow you to provide users and groups access to resources in either domain, with a single set of credentials.</p>
-         <p>This action initiates the creation of the AWS side of a trust relationship between an AWS Managed Microsoft AD directory and an external domain.</p>")
+  @ocaml.doc("<p>Directory Service for Microsoft Active Directory allows you to configure trust relationships. For
+      example, you can establish a trust between your Managed Microsoft AD directory, and your existing
+      self-managed Microsoft Active Directory. This would allow you to provide users and groups
+      access to resources in either domain, with a single set of credentials.</p>
+         <p>This action initiates the creation of the Amazon Web Services side of a trust relationship between an
+      Managed Microsoft AD directory and an external domain.</p>")
   type request = {
     @ocaml.doc("<p>Optional parameter to enable selective authentication for the trust.</p>")
     @as("SelectiveAuth")
@@ -1596,19 +1618,16 @@ module CreateTrust = {
     trustType: option<trustType>,
     @ocaml.doc("<p>The direction of the trust relationship.</p>") @as("TrustDirection")
     trustDirection: trustDirection,
-    @ocaml.doc(
-      "<p>The trust password. The must be the same password that was used when creating the trust relationship on the external domain.</p>"
-    )
+    @ocaml.doc("<p>The trust password. The must be the same password that was used when creating the trust
+      relationship on the external domain.</p>")
     @as("TrustPassword")
     trustPassword: trustPassword,
-    @ocaml.doc(
-      "<p>The Fully Qualified Domain Name (FQDN) of the external domain for which to create the trust relationship.</p>"
-    )
+    @ocaml.doc("<p>The Fully Qualified Domain Name (FQDN) of the external domain for which to create the
+      trust relationship.</p>")
     @as("RemoteDomainName")
     remoteDomainName: remoteDomainName,
-    @ocaml.doc(
-      "<p>The Directory ID of the AWS Managed Microsoft AD directory for which to establish the trust relationship.</p>"
-    )
+    @ocaml.doc("<p>The Directory ID of the Managed Microsoft AD directory for which to establish the trust
+      relationship.</p>")
     @as("DirectoryId")
     directoryId: directoryId,
   }
@@ -1643,25 +1662,23 @@ module CreateTrust = {
 
 module CreateConditionalForwarder = {
   type t
-  @ocaml.doc(
-    "<p>Initiates the creation of a conditional forwarder for your AWS Directory Service for Microsoft Active Directory. Conditional forwarders are required in order to set up a trust relationship with another domain.</p>"
-  )
+  @ocaml.doc("<p>Initiates the creation of a conditional forwarder for your Directory Service for Microsoft Active
+      Directory. Conditional forwarders are required in order to set up a trust relationship with
+      another domain.</p>")
   type request = {
     @ocaml.doc("<p>The IP addresses of the remote DNS server associated with RemoteDomainName.</p>")
     @as("DnsIpAddrs")
     dnsIpAddrs: dnsIpAddrs,
-    @ocaml.doc(
-      "<p>The fully qualified domain name (FQDN) of the remote domain with which you will set up a trust relationship.</p>"
-    )
+    @ocaml.doc("<p>The fully qualified domain name (FQDN) of the remote domain with which you will set up
+      a trust relationship.</p>")
     @as("RemoteDomainName")
     remoteDomainName: remoteDomainName,
-    @ocaml.doc(
-      "<p>The directory ID of the AWS directory for which you are creating the conditional forwarder.</p>"
-    )
+    @ocaml.doc("<p>The directory ID of the Amazon Web Services directory for which you are creating the conditional
+      forwarder.</p>")
     @as("DirectoryId")
     directoryId: directoryId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ds") @new
   external new: request => t = "CreateConditionalForwarderCommand"
   let make = (~dnsIpAddrs, ~remoteDomainName, ~directoryId, ()) =>
@@ -1691,18 +1708,16 @@ module UpdateRadius = {
   type t
   @ocaml.doc("<p>Contains the inputs for the <a>UpdateRadius</a> operation.</p>")
   type request = {
-    @ocaml.doc(
-      "<p>A <a>RadiusSettings</a> object that contains information about the RADIUS server.</p>"
-    )
+    @ocaml.doc("<p>A <a>RadiusSettings</a> object that contains information about the RADIUS
+         server.</p>")
     @as("RadiusSettings")
     radiusSettings: radiusSettings,
-    @ocaml.doc(
-      "<p>The identifier of the directory for which to update the RADIUS server information.</p>"
-    )
+    @ocaml.doc("<p>The identifier of the directory for which to update the RADIUS server
+         information.</p>")
     @as("DirectoryId")
     directoryId: directoryId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ds") @new external new: request => t = "UpdateRadiusCommand"
   let make = (~radiusSettings, ~directoryId, ()) =>
     new({radiusSettings: radiusSettings, directoryId: directoryId})
@@ -1733,21 +1748,19 @@ module ListSchemaExtensions = {
   type t
   type request = {
     @ocaml.doc("<p>The maximum number of items to return.</p>") @as("Limit") limit: option<limit>,
-    @ocaml.doc(
-      "<p>The <code>ListSchemaExtensions.NextToken</code> value from a previous call to <code>ListSchemaExtensions</code>. Pass null if this is the first call.</p>"
-    )
+    @ocaml.doc("<p>The <code>ListSchemaExtensions.NextToken</code> value from a previous call to
+        <code>ListSchemaExtensions</code>. Pass null if this is the first call.</p>")
     @as("NextToken")
     nextToken: option<nextToken>,
-    @ocaml.doc(
-      "<p>The identifier of the directory from which to retrieve the schema extension information.</p>"
-    )
+    @ocaml.doc("<p>The identifier of the directory from which to retrieve the schema extension
+      information.</p>")
     @as("DirectoryId")
     directoryId: directoryId,
   }
   type response = {
-    @ocaml.doc(
-      "<p>If not null, more results are available. Pass this value for the <code>NextToken</code> parameter in a subsequent call to <code>ListSchemaExtensions</code> to retrieve the next set of items.</p>"
-    )
+    @ocaml.doc("<p>If not null, more results are available. Pass this value for the <code>NextToken</code>
+      parameter in a subsequent call to <code>ListSchemaExtensions</code> to retrieve the next set
+      of items.</p>")
     @as("NextToken")
     nextToken: option<nextToken>,
     @ocaml.doc("<p>Information about the schema extensions applied to the directory.</p>")
@@ -1768,16 +1781,17 @@ module ListLogSubscriptions = {
     nextToken: option<nextToken>,
     @ocaml.doc("<p>If a <i>DirectoryID</i> is provided, lists only the log subscription
       associated with that directory. If no <i>DirectoryId</i> is provided, lists all
-      log subscriptions associated with your AWS account. If there are no log subscriptions for the
-      AWS account or the directory, an empty list will be returned.</p>")
+      log subscriptions associated with your Amazon Web Services account. If there are no log subscriptions for the
+      Amazon Web Services account or the directory, an empty list will be returned.</p>")
     @as("DirectoryId")
     directoryId: option<directoryId>,
   }
   type response = {
     @ocaml.doc("<p>The token for the next set of items to return.</p>") @as("NextToken")
     nextToken: option<nextToken>,
-    @ocaml.doc("<p>A list of active <a>LogSubscription</a> objects for calling the AWS
-      account.</p>")
+    @ocaml.doc(
+      "<p>A list of active <a>LogSubscription</a> objects for calling the Amazon Web Services account.</p>"
+    )
     @as("LogSubscriptions")
     logSubscriptions: option<logSubscriptions>,
   }
@@ -1790,24 +1804,23 @@ module ListLogSubscriptions = {
 module ListIpRoutes = {
   type t
   type request = {
-    @ocaml.doc(
-      "<p>Maximum number of items to return. If this value is zero, the maximum number of items is specified by the limitations of the operation.</p>"
-    )
+    @ocaml.doc("<p>Maximum number of items to return. If this value is zero, the maximum number of items
+         is specified by the limitations of the operation.</p>")
     @as("Limit")
     limit: option<limit>,
-    @ocaml.doc("<p>The <i>ListIpRoutes.NextToken</i> value from a previous call to
-         <a>ListIpRoutes</a>. Pass null if this is the first call.</p>")
+    @ocaml.doc(
+      "<p>The <i>ListIpRoutes.NextToken</i> value from a previous call to <a>ListIpRoutes</a>. Pass null if this is the first call.</p>"
+    )
     @as("NextToken")
     nextToken: option<nextToken>,
-    @ocaml.doc(
-      "<p>Identifier (ID) of the directory for which you want to retrieve the IP addresses.</p>"
-    )
+    @ocaml.doc("<p>Identifier (ID) of the directory for which you want to retrieve the IP
+         addresses.</p>")
     @as("DirectoryId")
     directoryId: directoryId,
   }
   type response = {
-    @ocaml.doc("<p>If not null, more results are available. Pass this value for the <i>NextToken</i> parameter
-         in a subsequent call to <a>ListIpRoutes</a> to retrieve the next set of items.</p>")
+    @ocaml.doc("<p>If not null, more results are available. Pass this value for the
+            <i>NextToken</i> parameter in a subsequent call to <a>ListIpRoutes</a> to retrieve the next set of items.</p>")
     @as("NextToken")
     nextToken: option<nextToken>,
     @ocaml.doc("<p>A list of <a>IpRoute</a>s.</p>") @as("IpRoutesInfo")
@@ -1853,15 +1866,14 @@ module EnableRadius = {
   type t
   @ocaml.doc("<p>Contains the inputs for the <a>EnableRadius</a> operation.</p>")
   type request = {
-    @ocaml.doc(
-      "<p>A <a>RadiusSettings</a> object that contains information about the RADIUS server.</p>"
-    )
+    @ocaml.doc("<p>A <a>RadiusSettings</a> object that contains information about the RADIUS
+         server.</p>")
     @as("RadiusSettings")
     radiusSettings: radiusSettings,
     @ocaml.doc("<p>The identifier of the directory for which to enable MFA.</p>") @as("DirectoryId")
     directoryId: directoryId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ds") @new external new: request => t = "EnableRadiusCommand"
   let make = (~radiusSettings, ~directoryId, ()) =>
     new({radiusSettings: radiusSettings, directoryId: directoryId})
@@ -1870,36 +1882,37 @@ module EnableRadius = {
 
 module DescribeTrusts = {
   type t
-  @ocaml.doc(
-    "<p>Describes the trust relationships for a particular AWS Managed Microsoft AD directory. If no input parameters are are provided, such as directory ID or trust ID, this request describes all the trust relationships.</p>"
-  )
+  @ocaml.doc("<p>Describes the trust relationships for a particular Managed Microsoft AD directory. If no input
+      parameters are provided, such as directory ID or trust ID, this request describes all the
+      trust relationships.</p>")
   type request = {
     @ocaml.doc("<p>The maximum number of objects to return.</p>") @as("Limit") limit: option<limit>,
     @ocaml.doc("<p>The <i>DescribeTrustsResult.NextToken</i> value from a previous call to
-      <a>DescribeTrusts</a>. Pass null if this is the first call.</p>")
+        <a>DescribeTrusts</a>. Pass null if this is the first call.</p>")
     @as("NextToken")
     nextToken: option<nextToken>,
-    @ocaml.doc("<p>A list of identifiers of the trust relationships for which to obtain the information. If this member is null, all trust relationships that belong to the current account are returned.</p>
+    @ocaml.doc("<p>A list of identifiers of the trust relationships for which to obtain the information. If
+      this member is null, all trust relationships that belong to the current account are
+      returned.</p>
          <p>An empty list results in an <code>InvalidParameterException</code> being thrown.</p>")
     @as("TrustIds")
     trustIds: option<trustIds>,
-    @ocaml.doc(
-      "<p>The Directory ID of the AWS directory that is a part of the requested trust relationship.</p>"
-    )
+    @ocaml.doc("<p>The Directory ID of the Amazon Web Services directory that is a part of the requested trust
+      relationship.</p>")
     @as("DirectoryId")
     directoryId: option<directoryId>,
   }
   @ocaml.doc("<p>The result of a DescribeTrust request.</p>")
   type response = {
-    @ocaml.doc("<p>If not null, more results are available. Pass this value for the <i>NextToken</i> parameter
-      in a subsequent call to <a>DescribeTrusts</a> to retrieve the next set of items.</p>")
+    @ocaml.doc("<p>If not null, more results are available. Pass this value for the
+        <i>NextToken</i> parameter in a subsequent call to <a>DescribeTrusts</a> to retrieve the next set of items.</p>")
     @as("NextToken")
     nextToken: option<nextToken>,
     @ocaml.doc("<p>The list of Trust objects that were retrieved.</p>
          <p>It is possible that this list contains less than the number of items specified in the
-         <i>Limit</i> member of the request. This occurs if there are less than the requested
-         number of items left to retrieve, or if the limitations of the operation have been
-         exceeded.</p>")
+        <i>Limit</i> member of the request. This occurs if there are less than the
+      requested number of items left to retrieve, or if the limitations of the operation have been
+      exceeded.</p>")
     @as("Trusts")
     trusts: option<trusts>,
   }
@@ -2018,21 +2031,21 @@ module DescribeEventTopics = {
   type t
   @ocaml.doc("<p>Describes event topics.</p>")
   type request = {
-    @ocaml.doc("<p>A list of SNS topic names for which to obtain the information. If this member is null, all associations for the specified Directory ID are returned.</p>
-         <p>An empty list results in an <code>InvalidParameterException</code> being thrown.</p>")
+    @ocaml.doc("<p>A list of Amazon SNS topic names for which to obtain the information. If this member is
+      null, all associations for the specified Directory ID are returned.</p>
+         <p>An empty list results in an <code>InvalidParameterException</code> being
+      thrown.</p>")
     @as("TopicNames")
     topicNames: option<topicNames>,
-    @ocaml.doc(
-      "<p>The Directory ID for which to get the list of associated SNS topics. If this member is null, associations for all Directory IDs are returned.</p>"
-    )
+    @ocaml.doc("<p>The Directory ID for which to get the list of associated Amazon SNS topics. If this member
+      is null, associations for all Directory IDs are returned.</p>")
     @as("DirectoryId")
     directoryId: option<directoryId>,
   }
   @ocaml.doc("<p>The result of a DescribeEventTopic request.</p>")
   type response = {
-    @ocaml.doc(
-      "<p>A list of SNS topic names that receive status messages from the specified Directory ID.</p>"
-    )
+    @ocaml.doc("<p>A list of Amazon SNS topic names that receive status messages from the specified Directory
+      ID.</p>")
     @as("EventTopics")
     eventTopics: option<eventTopics>,
   }
@@ -2046,26 +2059,24 @@ module DescribeDomainControllers = {
   type t
   type request = {
     @ocaml.doc("<p>The maximum number of items to return.</p>") @as("Limit") limit: option<limit>,
-    @ocaml.doc(
-      "<p>The <i>DescribeDomainControllers.NextToken</i> value from a previous call to <a>DescribeDomainControllers</a>. Pass null if this is the first call. </p>"
-    )
+    @ocaml.doc("<p>The <i>DescribeDomainControllers.NextToken</i> value from a previous call
+      to <a>DescribeDomainControllers</a>. Pass null if this is the first call.
+    </p>")
     @as("NextToken")
     nextToken: option<nextToken>,
-    @ocaml.doc(
-      "<p>A list of identifiers for the domain controllers whose information will be provided.</p>"
-    )
+    @ocaml.doc("<p>A list of identifiers for the domain controllers whose information will be
+      provided.</p>")
     @as("DomainControllerIds")
     domainControllerIds: option<domainControllerIds>,
-    @ocaml.doc(
-      "<p>Identifier of the directory for which to retrieve the domain controller information.</p>"
-    )
+    @ocaml.doc("<p>Identifier of the directory for which to retrieve the domain controller
+      information.</p>")
     @as("DirectoryId")
     directoryId: directoryId,
   }
   type response = {
-    @ocaml.doc(
-      "<p>If not null, more results are available. Pass this value for the <code>NextToken</code> parameter in a subsequent call to <a>DescribeDomainControllers</a> retrieve the next set of items.</p>"
-    )
+    @ocaml.doc("<p>If not null, more results are available. Pass this value for the <code>NextToken</code>
+      parameter in a subsequent call to <a>DescribeDomainControllers</a> retrieve the
+      next set of items.</p>")
     @as("NextToken")
     nextToken: option<nextToken>,
     @ocaml.doc("<p>List of the <a>DomainController</a> objects that were retrieved.</p>")
@@ -2080,6 +2091,46 @@ module DescribeDomainControllers = {
       domainControllerIds: domainControllerIds,
       directoryId: directoryId,
     })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module DescribeClientAuthenticationSettings = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>The maximum number of items to return. If this value is zero, the maximum number of items is specified by the limitations of the operation. </p>"
+    )
+    @as("Limit")
+    limit: option<pageLimit>,
+    @ocaml.doc(
+      "<p>The <i>DescribeClientAuthenticationSettingsResult.NextToken</i> value from a previous call to <a>DescribeClientAuthenticationSettings</a>. Pass null if this is the first call.</p>"
+    )
+    @as("NextToken")
+    nextToken: option<nextToken>,
+    @ocaml.doc(
+      "<p>The type of client authentication for which to retrieve information. If no type is specified, a list of all client authentication types that are supported for the specified directory is retrieved.</p>"
+    )
+    @as("Type")
+    type_: option<clientAuthenticationType>,
+    @ocaml.doc("<p>The identifier of the directory for which to retrieve information.</p>")
+    @as("DirectoryId")
+    directoryId: directoryId,
+  }
+  type response = {
+    @ocaml.doc("<p>The next token used to retrieve the client authentication settings if the number of setting types exceeds
+      page limit and there is another page.</p>")
+    @as("NextToken")
+    nextToken: option<nextToken>,
+    @ocaml.doc(
+      "<p>Information about the type of client authentication for the specified directory. The following information is retrieved: The date and time when the status of the client authentication type was last updated, whether the client authentication type is enabled or disabled, and the type of client authentication.</p>"
+    )
+    @as("ClientAuthenticationSettingsInfo")
+    clientAuthenticationSettingsInfo: option<clientAuthenticationSettingsInfo>,
+  }
+  @module("@aws-sdk/client-ds") @new
+  external new: request => t = "DescribeClientAuthenticationSettingsCommand"
+  let make = (~directoryId, ~limit=?, ~nextToken=?, ~type_=?, ()) =>
+    new({limit: limit, nextToken: nextToken, type_: type_, directoryId: directoryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -2105,14 +2156,12 @@ module DescribeCertificate = {
 
 module CreateMicrosoftAD = {
   type t
-  @ocaml.doc("<p>Creates an AWS Managed Microsoft AD directory.</p>")
+  @ocaml.doc("<p>Creates an Managed Microsoft AD directory.</p>")
   type request = {
-    @ocaml.doc("<p>The tags to be assigned to the AWS Managed Microsoft AD directory.</p>")
-    @as("Tags")
+    @ocaml.doc("<p>The tags to be assigned to the Managed Microsoft AD directory.</p>") @as("Tags")
     tags: option<tags>,
-    @ocaml.doc(
-      "<p>AWS Managed Microsoft AD is available in two editions: <code>Standard</code> and <code>Enterprise</code>. <code>Enterprise</code> is the default.</p>"
-    )
+    @ocaml.doc("<p>Managed Microsoft AD is available in two editions: <code>Standard</code> and
+        <code>Enterprise</code>. <code>Enterprise</code> is the default.</p>")
     @as("Edition")
     edition: option<directoryEdition>,
     @ocaml.doc(
@@ -2120,23 +2169,22 @@ module CreateMicrosoftAD = {
     )
     @as("VpcSettings")
     vpcSettings: directoryVpcSettings,
-    @ocaml.doc(
-      "<p>A description for the directory. This label will appear on the AWS console <code>Directory Details</code> page after the directory is created.</p>"
-    )
+    @ocaml.doc("<p>A description for the directory. This label will appear on the Amazon Web Services console
+        <code>Directory Details</code> page after the directory is created.</p>")
     @as("Description")
     description: option<description>,
     @ocaml.doc("<p>The password for the default administrative user named <code>Admin</code>.</p>
          <p>If you need to change the password for the administrator account, you can use the <a>ResetUserPassword</a> API call.</p>")
     @as("Password")
     password: password,
-    @ocaml.doc(
-      "<p>The NetBIOS name for your domain, such as <code>CORP</code>. If you don't specify a NetBIOS name, it will default to the first part of your directory DNS. For example, <code>CORP</code> for the directory DNS <code>corp.example.com</code>. </p>"
-    )
+    @ocaml.doc("<p>The NetBIOS name for your domain, such as <code>CORP</code>. If you don't specify a
+      NetBIOS name, it will default to the first part of your directory DNS. For example,
+        <code>CORP</code> for the directory DNS <code>corp.example.com</code>. </p>")
     @as("ShortName")
     shortName: option<directoryShortName>,
-    @ocaml.doc("<p>The fully qualified domain name for the AWS Managed Microsoft AD directory, such as
-       <code>corp.example.com</code>. This name will resolve inside your VPC only. It does not need
-       to be publicly resolvable.</p>")
+    @ocaml.doc("<p>The fully qualified domain name for the Managed Microsoft AD directory, such as
+        <code>corp.example.com</code>. This name will resolve inside your VPC only. It does not need
+      to be publicly resolvable.</p>")
     @as("Name")
     name: directoryName,
   }
@@ -2252,12 +2300,12 @@ module ConnectDirectory = {
     @ocaml.doc("<p>The size of the directory.</p>") @as("Size") size: directorySize,
     @ocaml.doc("<p>A description for the directory.</p>") @as("Description")
     description: option<description>,
-    @ocaml.doc("<p>The password for the on-premises user account.</p>") @as("Password")
+    @ocaml.doc("<p>The password for your self-managed user account.</p>") @as("Password")
     password: connectPassword,
-    @ocaml.doc("<p>The NetBIOS name of the on-premises directory, such as <code>CORP</code>.</p>")
+    @ocaml.doc("<p>The NetBIOS name of your self-managed directory, such as <code>CORP</code>.</p>")
     @as("ShortName")
     shortName: option<directoryShortName>,
-    @ocaml.doc("<p>The fully qualified name of the on-premises directory, such as
+    @ocaml.doc("<p>The fully qualified name of your self-managed directory, such as
         <code>corp.example.com</code>.</p>")
     @as("Name")
     name: directoryName,
@@ -2298,7 +2346,7 @@ module AddTagsToResource = {
     @as("ResourceId")
     resourceId: resourceId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ds") @new external new: request => t = "AddTagsToResourceCommand"
   let make = (~tags, ~resourceId, ()) => new({tags: tags, resourceId: resourceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -2318,7 +2366,7 @@ module AddRegion = {
     @as("DirectoryId")
     directoryId: directoryId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ds") @new external new: request => t = "AddRegionCommand"
   let make = (~vpcsettings, ~regionName, ~directoryId, ()) =>
     new({vpcsettings: vpcsettings, regionName: regionName, directoryId: directoryId})
@@ -2328,9 +2376,9 @@ module AddRegion = {
 module AddIpRoutes = {
   type t
   type request = {
-    @ocaml.doc("<p>If set to true, updates the inbound and outbound rules of the security group that has the description: \"AWS created security group for <i>directory ID</i> directory controllers.\"
-         Following are the new rules:
-      </p>
+    @ocaml.doc("<p>If set to true, updates the inbound and outbound rules of the security group that has
+         the description: \"Amazon Web Services created security group for <i>directory ID</i>
+         directory controllers.\" Following are the new rules: </p>
          <p>Inbound:</p>
          <ul>
             <li>
@@ -2348,64 +2396,66 @@ module AddIpRoutes = {
             <li>
                <p>Type: Custom UDP Rule, Protocol: UDP, Range: 464, Source: 0.0.0.0/0</p>
             </li>
-            <li> 
+            <li>
                <p>Type: Custom UDP Rule, Protocol: UDP, Range: 445, Source: 0.0.0.0/0</p>
             </li>
-            <li> 
+            <li>
                <p>Type: Custom TCP Rule, Protocol: TCP, Range: 88, Source: 0.0.0.0/0</p>
             </li>
-            <li> 
+            <li>
                <p>Type: Custom TCP Rule, Protocol: TCP, Range: 135, Source: 0.0.0.0/0</p>
             </li>
-            <li> 
+            <li>
                <p>Type: Custom TCP Rule, Protocol: TCP, Range: 445, Source: 0.0.0.0/0</p>
             </li>
-            <li> 
+            <li>
                <p>Type: Custom TCP Rule, Protocol: TCP, Range: 464, Source: 0.0.0.0/0</p>
             </li>
-            <li> 
+            <li>
                <p>Type: Custom TCP Rule, Protocol: TCP, Range: 636, Source: 0.0.0.0/0</p>
             </li>
-            <li> 
-               <p>Type: Custom TCP Rule, Protocol: TCP, Range: 1024-65535, Source: 0.0.0.0/0</p>
+            <li>
+               <p>Type: Custom TCP Rule, Protocol: TCP, Range: 1024-65535, Source:
+               0.0.0.0/0</p>
             </li>
-            <li> 
-               <p>Type: Custom TCP Rule, Protocol: TCP, Range: 3268-33269, Source: 0.0.0.0/0</p>
+            <li>
+               <p>Type: Custom TCP Rule, Protocol: TCP, Range: 3268-33269, Source:
+               0.0.0.0/0</p>
             </li>
-            <li> 
+            <li>
                <p>Type: DNS (UDP), Protocol: UDP, Range: 53, Source: 0.0.0.0/0</p>
             </li>
-            <li> 
+            <li>
                <p>Type: DNS (TCP), Protocol: TCP, Range: 53, Source: 0.0.0.0/0</p>
             </li>
-            <li> 
+            <li>
                <p>Type: LDAP, Protocol: TCP, Range: 389, Source: 0.0.0.0/0</p>
             </li>
-            <li> 
+            <li>
                <p>Type: All ICMP, Protocol: All, Range: N/A, Source: 0.0.0.0/0</p>
             </li>
          </ul>
-      
+
          <p></p>
          <p>Outbound:</p>
          <ul>
-            <li> 
+            <li>
                <p>Type: All traffic, Protocol: All, Range: All, Destination: 0.0.0.0/0</p>
             </li>
          </ul>
-         <p>These security rules impact an internal network interface that is not exposed publicly.</p>")
+         <p>These security rules impact an internal network interface that is not exposed
+         publicly.</p>")
     @as("UpdateSecurityGroupForDirectoryControllers")
     updateSecurityGroupForDirectoryControllers: option<updateSecurityGroupForDirectoryControllers>,
-    @ocaml.doc(
-      "<p>IP address blocks, using CIDR format, of the traffic to route. This is often the IP address block of the DNS server used for your on-premises domain.</p>"
-    )
+    @ocaml.doc("<p>IP address blocks, using CIDR format, of the traffic to route. This is often the IP
+         address block of the DNS server used for your self-managed domain.</p>")
     @as("IpRoutes")
     ipRoutes: ipRoutes,
     @ocaml.doc("<p>Identifier (ID) of the directory to which to add the address block.</p>")
     @as("DirectoryId")
     directoryId: directoryId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ds") @new external new: request => t = "AddIpRoutesCommand"
   let make = (~ipRoutes, ~directoryId, ~updateSecurityGroupForDirectoryControllers=?, ()) =>
     new({
@@ -2420,14 +2470,13 @@ module DescribeConditionalForwarders = {
   type t
   @ocaml.doc("<p>Describes a conditional forwarder.</p>")
   type request = {
-    @ocaml.doc(
-      "<p>The fully qualified domain names (FQDN) of the remote domains for which to get the list of associated conditional forwarders. If this member is null, all conditional forwarders are returned.</p>"
-    )
+    @ocaml.doc("<p>The fully qualified domain names (FQDN) of the remote domains for which to get the list
+      of associated conditional forwarders. If this member is null, all conditional forwarders are
+      returned.</p>")
     @as("RemoteDomainNames")
     remoteDomainNames: option<remoteDomainNames>,
-    @ocaml.doc(
-      "<p>The directory ID for which to get the list of associated conditional forwarders.</p>"
-    )
+    @ocaml.doc("<p>The directory ID for which to get the list of associated conditional
+      forwarders.</p>")
     @as("DirectoryId")
     directoryId: directoryId,
   }

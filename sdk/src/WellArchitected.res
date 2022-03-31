@@ -22,7 +22,7 @@ type workloadNonAwsRegion = string
             results.</p>")
 type workloadNamePrefix = string
 @ocaml.doc("<p>The name of the workload.</p>
-        <p>The name must be unique within an account within a Region. Spaces and capitalization
+        <p>The name must be unique within an account within an Amazon Web Services Region. Spaces and capitalization
             are ignored when checking for uniqueness.</p>")
 type workloadName = string
 @ocaml.doc("<p>The industry type for the workload.</p>
@@ -174,7 +174,9 @@ type workloadImprovementStatus = [
   | @as("NOT_STARTED") #NOT_STARTED
   | @as("NOT_APPLICABLE") #NOT_APPLICABLE
 ]
-@ocaml.doc("<p>The ID assigned to the workload. This ID is unique within an AWS Region.</p>")
+@ocaml.doc(
+  "<p>The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.</p>"
+)
 type workloadId = string
 @ocaml.doc("<p>The environment for the workload.</p>")
 type workloadEnvironment = [@as("PREPRODUCTION") #PREPRODUCTION | @as("PRODUCTION") #PRODUCTION]
@@ -195,7 +197,9 @@ type validationExceptionFieldName = string
 type tagValue = string
 type tagKey = string
 type sharedWithPrefix = string
-@ocaml.doc("<p>The AWS account ID or IAM role with which the workload is shared.</p>")
+@ocaml.doc(
+  "<p>The Amazon Web Services account ID or IAM role with which the workload is shared.</p>"
+)
 type sharedWith = string
 @ocaml.doc("<p>The status of a workload share.</p>")
 type shareStatus = [
@@ -205,6 +209,7 @@ type shareStatus = [
   | @as("REJECTED") #REJECTED
   | @as("ACCEPTED") #ACCEPTED
 ]
+type shareResourceType = [@as("LENS") #LENS | @as("WORKLOAD") #WORKLOAD]
 type shareInvitationId = string
 @ocaml.doc("<p>Share invitation action taken by contributor.</p>")
 type shareInvitationAction = [@as("REJECT") #REJECT | @as("ACCEPT") #ACCEPT]
@@ -250,24 +255,45 @@ type listNotificationsMaxResults = int
 type listLensReviewImprovementsMaxResults = int
 type listAnswersMaxResults = int
 type lensVersion = string
+type lensType = [
+  | @as("CUSTOM_SELF") #CUSTOM_SELF
+  | @as("CUSTOM_SHARED") #CUSTOM_SHARED
+  | @as("AWS_OFFICIAL") #AWS_OFFICIAL
+]
+type lensStatusType = [@as("PUBLISHED") #PUBLISHED | @as("DRAFT") #DRAFT | @as("ALL") #ALL]
 type lensStatus = [
+  | @as("UNSHARED") #UNSHARED
+  | @as("DELETED") #DELETED
   | @as("DEPRECATED") #DEPRECATED
   | @as("NOT_CURRENT") #NOT_CURRENT
   | @as("CURRENT") #CURRENT
 ]
+type lensOwner = string
+type lensNamePrefix = string
 @ocaml.doc("<p>The full name of the lens.</p>") type lensName = string
+type lensJSON = string
 @ocaml.doc("<p>The description of the lens.</p>") type lensDescription = string
+type lensArn = string
 @ocaml.doc("<p>The alias of the lens, for example, <code>serverless</code>.</p>
         <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>")
 type lensAlias = string
 type isReviewOwnerUpdateAcknowledged = bool
+type isMajorVersion = bool
 @ocaml.doc("<p>Defines whether this question is applicable to a lens review.</p>")
 type isApplicable = bool
-@ocaml.doc("<p>The improvement plan URL for a question.</p>") type improvementPlanUrl = string
+@ocaml.doc("<p>The improvement plan URL for a question.</p>
+        <p>This value is only available if the question has been answered.</p>")
+type improvementPlanUrl = string
+type importLensStatus = [
+  | @as("ERROR") #ERROR
+  | @as("COMPLETE") #COMPLETE
+  | @as("IN_PROGRESS") #IN_PROGRESS
+]
 @ocaml.doc("<p>The helpful resource URL for a question.</p>") type helpfulResourceUrl = string
 @ocaml.doc("<p>Type of the resource affected.</p>") type exceptionResourceType = string
 @ocaml.doc("<p>Identifier of the resource affected.</p>") type exceptionResourceId = string
 @ocaml.doc("<p>Description of the error.</p>") type exceptionMessage = string
+type displayText = string
 type differenceStatus = [@as("DELETED") #DELETED | @as("NEW") #NEW | @as("UPDATED") #UPDATED]
 @ocaml.doc("<p>A non-negative integer that denotes how many.</p>") type count = int
 @ocaml.doc("<p>A unique case-sensitive string used to ensure that this request is idempotent
@@ -276,21 +302,43 @@ type differenceStatus = [@as("DELETED") #DELETED | @as("NEW") #NEW | @as("UPDATE
             the same client request token and the same parameters after it has completed
             successfully, the result of the original request is returned. </p>
         <important>
-            <p>This token is listed as required, however, if you do not specify it, the AWS SDKs
-                automatically generate one for you. If you are not using the AWS SDK or the AWS CLI,
+            <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs
+                automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI,
                 you must provide this token or the request will fail.</p>
         </important>")
 type clientRequestToken = string
 @ocaml.doc("<p>The title of a choice.</p>") type choiceTitle = string
+type choiceStatus = [
+  | @as("UNSELECTED") #UNSELECTED
+  | @as("NOT_APPLICABLE") #NOT_APPLICABLE
+  | @as("SELECTED") #SELECTED
+]
+type choiceReason = [
+  | @as("NONE") #NONE
+  | @as("OTHER") #OTHER
+  | @as("ARCHITECTURE_CONSTRAINTS") #ARCHITECTURE_CONSTRAINTS
+  | @as("BUSINESS_PRIORITIES") #BUSINESS_PRIORITIES
+  | @as("OUT_OF_SCOPE") #OUT_OF_SCOPE
+]
+type choiceNotes = string
 @ocaml.doc("<p>The ID of a choice.</p>") type choiceId = string
 @ocaml.doc("<p>The description of a choice.</p>") type choiceDescription = string
+type choiceContentUrl = string
+type choiceContentDisplayText = string
 @ocaml.doc("<p>The Base64-encoded string representation of a lens review report.</p>
         <p>This data can be used to create a PDF file.</p>")
 type base64String = string
-@ocaml.doc("<p>An AWS Region, for example, <code>us-west-2</code> or
+@ocaml.doc("<p>An Amazon Web Services Region, for example, <code>us-west-2</code> or
             <code>ap-northeast-1</code>.</p>")
 type awsRegion = string
-@ocaml.doc("<p>An AWS account ID.</p>") type awsAccountId = string
+@ocaml.doc("<p>An Amazon Web Services account ID.</p>") type awsAccountId = string
+type answerReason = [
+  | @as("NONE") #NONE
+  | @as("OTHER") #OTHER
+  | @as("ARCHITECTURE_CONSTRAINTS") #ARCHITECTURE_CONSTRAINTS
+  | @as("BUSINESS_PRIORITIES") #BUSINESS_PRIORITIES
+  | @as("OUT_OF_SCOPE") #OUT_OF_SCOPE
+]
 @ocaml.doc("<p>A workload share summary return object.</p>")
 type workloadShareSummary = {
   @as("Status") status: option<shareStatus>,
@@ -311,16 +359,16 @@ type workloadShare = {
 @ocaml.doc("<p>The priorities of the pillars, which are used to order items in the improvement plan.
             Each pillar is represented by its <a>PillarReviewSummary$PillarId</a>.</p>")
 type workloadPillarPriorities = array<pillarId>
-@ocaml.doc("<p> The list of non-AWS Regions associated with the workload.</p>")
+@ocaml.doc("<p> The list of non-Amazon Web Services Regions associated with the workload.</p>")
 type workloadNonAwsRegions = array<workloadNonAwsRegion>
 @ocaml.doc(
   "<p>The list of lenses associated with the workload. Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>"
 )
 type workloadLenses = array<lensAlias>
-@ocaml.doc("<p>The list of AWS Regions associated with the workload, for example,
+@ocaml.doc("<p>The list of Amazon Web Services Regions associated with the workload, for example,
                 <code>us-east-2</code>, or <code>ca-central-1</code>.</p>")
 type workloadAwsRegions = array<awsRegion>
-@ocaml.doc("<p>The list of AWS account IDs associated with the workload.</p>")
+@ocaml.doc("<p>The list of Amazon Web Services account IDs associated with the workload.</p>")
 type workloadAccountIds = array<awsAccountId>
 @ocaml.doc(
   "<p>Stores information about a field passed inside a request that resulted in an exception.</p>"
@@ -333,8 +381,12 @@ type tagMap = Js.Dict.t<tagValue>
 type tagKeyList = array<tagKey>
 @ocaml.doc("<p>A share invitation summary return object.</p>")
 type shareInvitationSummary = {
+  @ocaml.doc("<p>The ARN for the lens.</p>") @as("LensArn") lensArn: option<lensArn>,
+  @as("LensName") lensName: option<lensName>,
   @as("WorkloadId") workloadId: option<workloadId>,
   @as("WorkloadName") workloadName: option<workloadName>,
+  @ocaml.doc("<p>The resource type of the share invitation.</p>") @as("ShareResourceType")
+  shareResourceType: option<shareResourceType>,
   @as("PermissionType") permissionType: option<permissionType>,
   @as("SharedWith") sharedWith: option<sharedWith>,
   @as("SharedBy") sharedBy: option<awsAccountId>,
@@ -343,7 +395,11 @@ type shareInvitationSummary = {
 }
 @ocaml.doc("<p>The share invitation.</p>")
 type shareInvitation = {
+  @ocaml.doc("<p>The ARN for the lens.</p>") @as("LensArn") lensArn: option<lensArn>,
+  @as("LensAlias") lensAlias: option<lensAlias>,
   @as("WorkloadId") workloadId: option<workloadId>,
+  @ocaml.doc("<p>The resource type of the share invitation.</p>") @as("ShareResourceType")
+  shareResourceType: option<shareResourceType>,
   @ocaml.doc("<p>The ID assigned to the share invitation.</p>") @as("ShareInvitationId")
   shareInvitationId: option<shareInvitationId>,
 }
@@ -367,37 +423,86 @@ type lensUpgradeSummary = {
   latestLensVersion: option<lensVersion>,
   @ocaml.doc("<p>The current version of the lens.</p>") @as("CurrentLensVersion")
   currentLensVersion: option<lensVersion>,
+  @ocaml.doc("<p>The ARN for the lens.</p>") @as("LensArn") lensArn: option<lensArn>,
   @as("LensAlias") lensAlias: option<lensAlias>,
   @as("WorkloadName") workloadName: option<workloadName>,
   @as("WorkloadId") workloadId: option<workloadId>,
 }
 @ocaml.doc("<p>A lens summary of a lens.</p>")
 type lensSummary = {
-  @as("Description") description: option<lensDescription>,
-  @as("LensName") lensName: option<lensName>,
+  @ocaml.doc("<p>The status of the lens.</p>") @as("LensStatus") lensStatus: option<lensStatus>,
+  @as("Owner") owner: option<awsAccountId>,
   @ocaml.doc("<p>The version of the lens.</p>") @as("LensVersion") lensVersion: option<lensVersion>,
+  @as("UpdatedAt") updatedAt: option<timestamp_>,
+  @as("CreatedAt") createdAt: option<timestamp_>,
+  @as("Description") description: option<lensDescription>,
+  @ocaml.doc("<p>The type of the lens.</p>") @as("LensType") lensType: option<lensType>,
+  @as("LensName") lensName: option<lensName>,
   @as("LensAlias") lensAlias: option<lensAlias>,
+  @ocaml.doc("<p>The ARN of the lens.</p>") @as("LensArn") lensArn: option<lensArn>,
+}
+@ocaml.doc("<p>A lens share summary return object.</p>")
+type lensShareSummary = {
+  @as("Status") status: option<shareStatus>,
+  @as("SharedWith") sharedWith: option<sharedWith>,
+  @as("ShareId") shareId: option<shareId>,
 }
 @ocaml.doc("<p>A report of a lens review.</p>")
 type lensReviewReport = {
   @as("Base64String") base64String: option<base64String>,
+  @ocaml.doc("<p>The ARN for the lens.</p>") @as("LensArn") lensArn: option<lensArn>,
   @as("LensAlias") lensAlias: option<lensAlias>,
 }
-@ocaml.doc("<p>List of lens aliases to associate or disassociate with a workload.</p>
+@ocaml.doc("<p>List of lens aliases to associate or disassociate with a workload. Up to 10 lenses can be specified.</p>
         <p>Identify a lens using its <a>LensSummary$LensAlias</a>.</p>")
 type lensAliases = array<lensAlias>
-@ocaml.doc("<p>An improvement summary of a lens review in a workload.</p>")
-type improvementSummary = {
-  @as("ImprovementPlanUrl") improvementPlanUrl: option<improvementPlanUrl>,
-  @as("Risk") risk: option<risk>,
-  @as("QuestionTitle") questionTitle: option<questionTitle>,
-  @as("PillarId") pillarId: option<pillarId>,
-  @as("QuestionId") questionId: option<questionId>,
+@ocaml.doc("<p>A lens return object.</p>")
+type lens = {
+  @ocaml.doc("<p>The ID assigned to the share invitation.</p>") @as("ShareInvitationId")
+  shareInvitationId: option<shareInvitationId>,
+  @ocaml.doc("<p>The Amazon Web Services account ID that owns the lens.</p>") @as("Owner")
+  owner: option<lensOwner>,
+  @as("Description") description: option<lensDescription>,
+  @as("Name") name: option<lensName>,
+  @ocaml.doc("<p>The version of a lens.</p>") @as("LensVersion") lensVersion: option<lensVersion>,
+  @ocaml.doc("<p>The ARN of a lens.</p>") @as("LensArn") lensArn: option<lensArn>,
 }
-@ocaml.doc("<p>A choice available to answer question.</p>")
-type choice = {
-  @as("Description") description: option<choiceDescription>,
-  @as("Title") title: option<choiceTitle>,
+@ocaml.doc("<p>A list of choices to be updated.</p>")
+type choiceUpdate = {
+  @ocaml.doc("<p>The notes associated with a choice.</p>") @as("Notes") notes: option<choiceNotes>,
+  @ocaml.doc("<p>The reason why a choice is non-applicable to a question in your workload.</p>")
+  @as("Reason")
+  reason: option<choiceReason>,
+  @ocaml.doc("<p>The status of a choice.</p>") @as("Status") status: choiceStatus,
+}
+@ocaml.doc("<p>The choice level improvement plan.</p>")
+type choiceImprovementPlan = {
+  @as("ImprovementPlanUrl") improvementPlanUrl: option<improvementPlanUrl>,
+  @ocaml.doc("<p>The display text for the improvement plan.</p>") @as("DisplayText")
+  displayText: option<displayText>,
+  @as("ChoiceId") choiceId: option<choiceId>,
+}
+@ocaml.doc("<p>The choice content.</p>")
+type choiceContent = {
+  @ocaml.doc("<p>The URL for the choice content.</p>") @as("Url") url: option<choiceContentUrl>,
+  @ocaml.doc("<p>The display text for the choice content.</p>") @as("DisplayText")
+  displayText: option<choiceContentDisplayText>,
+}
+@ocaml.doc("<p>A choice summary that has been answered on a question in your workload.</p>")
+type choiceAnswerSummary = {
+  @ocaml.doc("<p>The reason why a choice is non-applicable to a question in your workload.</p>")
+  @as("Reason")
+  reason: option<choiceReason>,
+  @ocaml.doc("<p>The status of a choice.</p>") @as("Status") status: option<choiceStatus>,
+  @as("ChoiceId") choiceId: option<choiceId>,
+}
+@ocaml.doc("<p>A choice that has been answered on a question in your workload.</p>")
+type choiceAnswer = {
+  @ocaml.doc("<p>The notes associated with a choice.</p>") @as("Notes") notes: option<choiceNotes>,
+  @ocaml.doc("<p>The reason why a choice is non-applicable to a question in your workload.</p>")
+  @as("Reason")
+  reason: option<choiceReason>,
+  @ocaml.doc("<p>The status of a choice.</p>") @as("Status") status: option<choiceStatus>,
   @as("ChoiceId") choiceId: option<choiceId>,
 }
 @ocaml.doc("<p>A workload summary return object.</p>")
@@ -465,6 +570,7 @@ type notificationSummary = {
 }
 @ocaml.doc("<p>List of lens summaries of available lenses.</p>")
 type lensSummaries = array<lensSummary>
+type lensShareSummaries = array<lensShareSummary>
 @ocaml.doc("<p>A lens review summary of a workload.</p>")
 type lensReviewSummary = {
   @as("RiskCounts") riskCounts: option<riskCounts>,
@@ -472,11 +578,23 @@ type lensReviewSummary = {
   @ocaml.doc("<p>The status of the lens.</p>") @as("LensStatus") lensStatus: option<lensStatus>,
   @as("LensName") lensName: option<lensName>,
   @ocaml.doc("<p>The version of the lens.</p>") @as("LensVersion") lensVersion: option<lensVersion>,
+  @ocaml.doc("<p>The ARN for the lens.</p>") @as("LensArn") lensArn: option<lensArn>,
   @as("LensAlias") lensAlias: option<lensAlias>,
 }
-@ocaml.doc("<p>List of improvement summaries of lens review in a workload.</p>")
-type improvementSummaries = array<improvementSummary>
-@ocaml.doc("<p>List of choices available for a question.</p>") type choices = array<choice>
+type choiceUpdates = Js.Dict.t<choiceUpdate>
+type choiceImprovementPlans = array<choiceImprovementPlan>
+type choiceAnswers = array<choiceAnswer>
+type choiceAnswerSummaries = array<choiceAnswerSummary>
+@ocaml.doc("<p>A choice available to answer question.</p>")
+type choice = {
+  @ocaml.doc("<p>The choice level improvement plan.</p>") @as("ImprovementPlan")
+  improvementPlan: option<choiceContent>,
+  @ocaml.doc("<p>The choice level helpful resource.</p>") @as("HelpfulResource")
+  helpfulResource: option<choiceContent>,
+  @as("Description") description: option<choiceDescription>,
+  @as("Title") title: option<choiceTitle>,
+  @as("ChoiceId") choiceId: option<choiceId>,
+}
 @ocaml.doc("<p>A list of workload summaries.</p>") type workloadSummaries = array<workloadSummary>
 @ocaml.doc("<p>List of pillar review summaries of lens review in a workload.</p>")
 type pillarReviewSummaries = array<pillarReviewSummary>
@@ -486,6 +604,7 @@ type pillarDifference = {
   questionDifferences: option<questionDifferences>,
   @ocaml.doc("<p>Indicates the type of change to the pillar.</p>") @as("DifferenceStatus")
   differenceStatus: option<differenceStatus>,
+  @as("PillarName") pillarName: option<pillarName>,
   @as("PillarId") pillarId: option<pillarId>,
 }
 type notificationSummaries = array<notificationSummary>
@@ -505,30 +624,17 @@ type milestone = {
 }
 @ocaml.doc("<p>List of lens summaries of lens reviews of a workload.</p>")
 type lensReviewSummaries = array<lensReviewSummary>
-@ocaml.doc("<p>An answer summary of a lens review in a workload.</p>")
-type answerSummary = {
-  @as("Risk") risk: option<risk>,
-  @as("IsApplicable") isApplicable: option<isApplicable>,
-  @as("SelectedChoices") selectedChoices: option<selectedChoices>,
-  @as("Choices") choices: option<choices>,
-  @as("QuestionTitle") questionTitle: option<questionTitle>,
-  @as("PillarId") pillarId: option<pillarId>,
-  @as("QuestionId") questionId: option<questionId>,
-}
-@ocaml.doc("<p>An answer of the question.</p>")
-type answer = {
-  @as("Notes") notes: option<notes>,
-  @as("Risk") risk: option<risk>,
-  @as("IsApplicable") isApplicable: option<isApplicable>,
-  @as("SelectedChoices") selectedChoices: option<selectedChoices>,
-  @as("Choices") choices: option<choices>,
-  @as("HelpfulResourceUrl") helpfulResourceUrl: option<helpfulResourceUrl>,
+@ocaml.doc("<p>An improvement summary of a lens review in a workload.</p>")
+type improvementSummary = {
+  @ocaml.doc("<p>The improvement plan details.</p>") @as("ImprovementPlans")
+  improvementPlans: option<choiceImprovementPlans>,
   @as("ImprovementPlanUrl") improvementPlanUrl: option<improvementPlanUrl>,
-  @as("QuestionDescription") questionDescription: option<questionDescription>,
+  @as("Risk") risk: option<risk>,
   @as("QuestionTitle") questionTitle: option<questionTitle>,
   @as("PillarId") pillarId: option<pillarId>,
   @as("QuestionId") questionId: option<questionId>,
 }
+@ocaml.doc("<p>List of choices available for a question.</p>") type choices = array<choice>
 type pillarDifferences = array<pillarDifference>
 @ocaml.doc("<p>A list of milestone summaries.</p>")
 type milestoneSummaries = array<milestoneSummary>
@@ -542,30 +648,73 @@ type lensReview = {
   @ocaml.doc("<p>The status of the lens.</p>") @as("LensStatus") lensStatus: option<lensStatus>,
   @as("LensName") lensName: option<lensName>,
   @ocaml.doc("<p>The version of the lens.</p>") @as("LensVersion") lensVersion: option<lensVersion>,
+  @ocaml.doc("<p>The ARN for the lens.</p>") @as("LensArn") lensArn: option<lensArn>,
   @as("LensAlias") lensAlias: option<lensAlias>,
 }
-@ocaml.doc("<p>List of answer summaries of lens review in a workload.</p>")
-type answerSummaries = array<answerSummary>
+@ocaml.doc("<p>List of improvement summaries of lens review in a workload.</p>")
+type improvementSummaries = array<improvementSummary>
+@ocaml.doc("<p>An answer summary of a lens review in a workload.</p>")
+type answerSummary = {
+  @ocaml.doc("<p>The reason why a choice is non-applicable to a question in your workload.</p>")
+  @as("Reason")
+  reason: option<answerReason>,
+  @as("Risk") risk: option<risk>,
+  @as("IsApplicable") isApplicable: option<isApplicable>,
+  @ocaml.doc("<p>A list of selected choices to a question in your workload.</p>")
+  @as("ChoiceAnswerSummaries")
+  choiceAnswerSummaries: option<choiceAnswerSummaries>,
+  @as("SelectedChoices") selectedChoices: option<selectedChoices>,
+  @as("Choices") choices: option<choices>,
+  @as("QuestionTitle") questionTitle: option<questionTitle>,
+  @as("PillarId") pillarId: option<pillarId>,
+  @as("QuestionId") questionId: option<questionId>,
+}
+@ocaml.doc("<p>An answer of the question.</p>")
+type answer = {
+  @ocaml.doc("<p>The reason why the question is not applicable to your workload.</p>") @as("Reason")
+  reason: option<answerReason>,
+  @as("Notes") notes: option<notes>,
+  @as("Risk") risk: option<risk>,
+  @as("IsApplicable") isApplicable: option<isApplicable>,
+  @ocaml.doc("<p>A list of selected choices to a question in your workload.</p>")
+  @as("ChoiceAnswers")
+  choiceAnswers: option<choiceAnswers>,
+  @as("SelectedChoices") selectedChoices: option<selectedChoices>,
+  @as("Choices") choices: option<choices>,
+  @ocaml.doc("<p>The helpful resource text to be displayed.</p>") @as("HelpfulResourceDisplayText")
+  helpfulResourceDisplayText: option<displayText>,
+  @as("HelpfulResourceUrl") helpfulResourceUrl: option<helpfulResourceUrl>,
+  @as("ImprovementPlanUrl") improvementPlanUrl: option<improvementPlanUrl>,
+  @as("QuestionDescription") questionDescription: option<questionDescription>,
+  @as("QuestionTitle") questionTitle: option<questionTitle>,
+  @as("PillarId") pillarId: option<pillarId>,
+  @as("QuestionId") questionId: option<questionId>,
+}
 @ocaml.doc("<p>The differences between the base and latest versions of the lens.</p>")
 type versionDifferences = {
   @ocaml.doc("<p>The differences between the base and latest versions of the lens.</p>")
   @as("PillarDifferences")
   pillarDifferences: option<pillarDifferences>,
 }
-@ocaml.doc("<fullname>AWS Well-Architected Tool</fullname>
+@ocaml.doc("<p>List of answer summaries of lens review in a workload.</p>")
+type answerSummaries = array<answerSummary>
+@ocaml.doc("<fullname>Well-Architected Tool</fullname>
         
-         <p>This is the <i>AWS Well-Architected Tool API Reference</i>. The AWS Well-Architected Tool API provides programmatic access to the 
-            <a href=\"http://aws.amazon.com/well-architected-tool\">AWS Well-Architected Tool</a> in the 
-            <a href=\"https://console.aws.amazon.com/wellarchitected\">AWS Management Console</a>. For information 
-            about the AWS Well-Architected Tool, see the 
-            <a href=\"https://docs.aws.amazon.com/wellarchitected/latest/userguide/intro.html\">AWS Well-Architected Tool User Guide</a>.</p>")
+         <p>This is the <i>Well-Architected Tool API Reference</i>. The WA Tool API provides programmatic access to the 
+            <a href=\"http://aws.amazon.com/well-architected-tool\">Well-Architected Tool</a> in the 
+           <a href=\"https://console.aws.amazon.com/wellarchitected\">Amazon Web Services Management Console</a>. For information 
+            about the Well-Architected Tool, see the 
+           <a href=\"https://docs.aws.amazon.com/wellarchitected/latest/userguide/intro.html\">Well-Architected Tool User Guide</a>.</p>")
 module UntagResource = {
   type t
   type request = {
-    @ocaml.doc("<p>The keys of the tags to be removed.</p>") @as("TagKeys") tagKeys: tagKeyList,
+    @ocaml.doc("<p>A list of tag keys. Existing tags of the resource 
+            whose keys are members of this list are removed from the resource.</p>")
+    @as("TagKeys")
+    tagKeys: tagKeyList,
     @as("WorkloadArn") workloadArn: workloadArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-wellarchitected") @new
   external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~workloadArn, ()) => new({tagKeys: tagKeys, workloadArn: workloadArn})
@@ -578,7 +727,7 @@ module TagResource = {
     @ocaml.doc("<p>The tags for the resource.</p>") @as("Tags") tags: tagMap,
     @as("WorkloadArn") workloadArn: workloadArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-wellarchitected") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~workloadArn, ()) => new({tags: tags, workloadArn: workloadArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -602,7 +751,7 @@ module UpgradeLensReview = {
     @as("LensAlias") lensAlias: lensAlias,
     @as("WorkloadId") workloadId: workloadId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-wellarchitected") @new
   external new: request => t = "UpgradeLensReviewCommand"
   let make = (~milestoneName, ~lensAlias, ~workloadId, ~clientRequestToken=?, ()) =>
@@ -729,7 +878,9 @@ module ListWorkloadShares = {
     @ocaml.doc("<p>The maximum number of results to return for this request.</p>") @as("MaxResults")
     maxResults: option<listWorkloadSharesMaxResults>,
     @as("NextToken") nextToken: option<nextToken>,
-    @ocaml.doc("<p>The AWS account ID or IAM role with which the workload is shared.</p>")
+    @ocaml.doc(
+      "<p>The Amazon Web Services account ID or IAM role with which the workload is shared.</p>"
+    )
     @as("SharedWithPrefix")
     sharedWithPrefix: option<sharedWithPrefix>,
     @as("WorkloadId") workloadId: workloadId,
@@ -759,6 +910,13 @@ module ListShareInvitations = {
     @ocaml.doc("<p>The maximum number of results to return for this request.</p>") @as("MaxResults")
     maxResults: option<listShareInvitationsMaxResults>,
     @as("NextToken") nextToken: option<nextToken>,
+    @ocaml.doc("<p>The type of share invitations to be returned.</p>") @as("ShareResourceType")
+    shareResourceType: option<shareResourceType>,
+    @ocaml.doc(
+      "<p>An optional string added to the beginning of each lens name returned in the results.</p>"
+    )
+    @as("LensNamePrefix")
+    lensNamePrefix: option<lensNamePrefix>,
     @as("WorkloadNamePrefix") workloadNamePrefix: option<workloadNamePrefix>,
   }
   @ocaml.doc("<p>Input for List Share Invitations</p>")
@@ -770,8 +928,21 @@ module ListShareInvitations = {
   }
   @module("@aws-sdk/client-wellarchitected") @new
   external new: request => t = "ListShareInvitationsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ~workloadNamePrefix=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, workloadNamePrefix: workloadNamePrefix})
+  let make = (
+    ~maxResults=?,
+    ~nextToken=?,
+    ~shareResourceType=?,
+    ~lensNamePrefix=?,
+    ~workloadNamePrefix=?,
+    (),
+  ) =>
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      shareResourceType: shareResourceType,
+      lensNamePrefix: lensNamePrefix,
+      workloadNamePrefix: workloadNamePrefix,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -779,6 +950,11 @@ module ListLenses = {
   type t
   @ocaml.doc("<p>Input to list lenses.</p>")
   type request = {
+    @as("LensName") lensName: option<lensName>,
+    @ocaml.doc("<p>The status of lenses to be returned.</p>") @as("LensStatus")
+    lensStatus: option<lensStatusType>,
+    @ocaml.doc("<p>The type of lenses to be returned.</p>") @as("LensType")
+    lensType: option<lensType>,
     @as("MaxResults") maxResults: option<maxResults>,
     @as("NextToken") nextToken: option<nextToken>,
   }
@@ -788,49 +964,67 @@ module ListLenses = {
     @as("LensSummaries") lensSummaries: option<lensSummaries>,
   }
   @module("@aws-sdk/client-wellarchitected") @new external new: request => t = "ListLensesCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken})
+  let make = (~lensName=?, ~lensStatus=?, ~lensType=?, ~maxResults=?, ~nextToken=?, ()) =>
+    new({
+      lensName: lensName,
+      lensStatus: lensStatus,
+      lensType: lensType,
+      maxResults: maxResults,
+      nextToken: nextToken,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
-module ListLensReviewImprovements = {
+module ListLensShares = {
   type t
-  @ocaml.doc("<p>Input to list lens review improvements.</p>")
   type request = {
     @ocaml.doc("<p>The maximum number of results to return for this request.</p>") @as("MaxResults")
-    maxResults: option<listLensReviewImprovementsMaxResults>,
+    maxResults: option<listWorkloadSharesMaxResults>,
     @as("NextToken") nextToken: option<nextToken>,
-    @as("MilestoneNumber") milestoneNumber: option<milestoneNumber>,
-    @as("PillarId") pillarId: option<pillarId>,
+    @ocaml.doc(
+      "<p>The Amazon Web Services account ID or IAM role with which the lens is shared.</p>"
+    )
+    @as("SharedWithPrefix")
+    sharedWithPrefix: option<sharedWithPrefix>,
     @as("LensAlias") lensAlias: lensAlias,
-    @as("WorkloadId") workloadId: workloadId,
   }
-  @ocaml.doc("<p>Output of a list lens review improvements call.</p>")
   type response = {
     @as("NextToken") nextToken: option<nextToken>,
-    @as("ImprovementSummaries") improvementSummaries: option<improvementSummaries>,
-    @as("LensAlias") lensAlias: option<lensAlias>,
-    @as("MilestoneNumber") milestoneNumber: option<milestoneNumber>,
-    @as("WorkloadId") workloadId: option<workloadId>,
+    @ocaml.doc("<p>A list of lens share summaries.</p>") @as("LensShareSummaries")
+    lensShareSummaries: option<lensShareSummaries>,
   }
   @module("@aws-sdk/client-wellarchitected") @new
-  external new: request => t = "ListLensReviewImprovementsCommand"
-  let make = (
-    ~lensAlias,
-    ~workloadId,
-    ~maxResults=?,
-    ~nextToken=?,
-    ~milestoneNumber=?,
-    ~pillarId=?,
-    (),
-  ) =>
+  external new: request => t = "ListLensSharesCommand"
+  let make = (~lensAlias, ~maxResults=?, ~nextToken=?, ~sharedWithPrefix=?, ()) =>
     new({
       maxResults: maxResults,
       nextToken: nextToken,
-      milestoneNumber: milestoneNumber,
-      pillarId: pillarId,
+      sharedWithPrefix: sharedWithPrefix,
       lensAlias: lensAlias,
-      workloadId: workloadId,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module ImportLens = {
+  type t
+  type request = {
+    @ocaml.doc("<p>Tags to associate to a lens.</p>") @as("Tags") tags: option<tagMap>,
+    @as("ClientRequestToken") clientRequestToken: clientRequestToken,
+    @ocaml.doc("<p>The JSON representation of a lens.</p>") @as("JSONString") jsonstring: lensJSON,
+    @as("LensAlias") lensAlias: option<lensAlias>,
+  }
+  type response = {
+    @ocaml.doc("<p>The status of the imported lens.</p>") @as("Status")
+    status: option<importLensStatus>,
+    @ocaml.doc("<p>The ARN for the lens.</p>") @as("LensArn") lensArn: option<lensArn>,
+  }
+  @module("@aws-sdk/client-wellarchitected") @new external new: request => t = "ImportLensCommand"
+  let make = (~clientRequestToken, ~jsonstring, ~tags=?, ~lensAlias=?, ()) =>
+    new({
+      tags: tags,
+      clientRequestToken: clientRequestToken,
+      jsonstring: jsonstring,
+      lensAlias: lensAlias,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
@@ -867,6 +1061,36 @@ module GetLensReviewReport = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module GetLens = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The lens version to be retrieved.</p>") @as("LensVersion")
+    lensVersion: option<lensVersion>,
+    @as("LensAlias") lensAlias: lensAlias,
+  }
+  type response = {@ocaml.doc("<p>A lens return object.</p>") @as("Lens") lens: option<lens>}
+  @module("@aws-sdk/client-wellarchitected") @new external new: request => t = "GetLensCommand"
+  let make = (~lensAlias, ~lensVersion=?, ()) =>
+    new({lensVersion: lensVersion, lensAlias: lensAlias})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module ExportLens = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The lens version to be exported.</p>") @as("LensVersion")
+    lensVersion: option<lensVersion>,
+    @as("LensAlias") lensAlias: lensAlias,
+  }
+  type response = {
+    @ocaml.doc("<p>The JSON for the lens.</p>") @as("LensJSON") lensJSON: option<lensJSON>,
+  }
+  @module("@aws-sdk/client-wellarchitected") @new external new: request => t = "ExportLensCommand"
+  let make = (~lensAlias, ~lensVersion=?, ()) =>
+    new({lensVersion: lensVersion, lensAlias: lensAlias})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module DisassociateLenses = {
   type t
   @ocaml.doc("<p>Input to disassociate lens reviews.</p>")
@@ -874,7 +1098,7 @@ module DisassociateLenses = {
     @as("LensAliases") lensAliases: lensAliases,
     @as("WorkloadId") workloadId: workloadId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-wellarchitected") @new
   external new: request => t = "DisassociateLensesCommand"
   let make = (~lensAliases, ~workloadId, ()) =>
@@ -890,7 +1114,7 @@ module DeleteWorkloadShare = {
     @as("WorkloadId") workloadId: workloadId,
     @as("ShareId") shareId: shareId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-wellarchitected") @new
   external new: request => t = "DeleteWorkloadShareCommand"
   let make = (~clientRequestToken, ~workloadId, ~shareId, ()) =>
@@ -905,11 +1129,41 @@ module DeleteWorkload = {
     @as("ClientRequestToken") clientRequestToken: clientRequestToken,
     @as("WorkloadId") workloadId: workloadId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-wellarchitected") @new
   external new: request => t = "DeleteWorkloadCommand"
   let make = (~clientRequestToken, ~workloadId, ()) =>
     new({clientRequestToken: clientRequestToken, workloadId: workloadId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module DeleteLensShare = {
+  type t
+  type request = {
+    @as("ClientRequestToken") clientRequestToken: clientRequestToken,
+    @as("LensAlias") lensAlias: lensAlias,
+    @as("ShareId") shareId: shareId,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-wellarchitected") @new
+  external new: request => t = "DeleteLensShareCommand"
+  let make = (~clientRequestToken, ~lensAlias, ~shareId, ()) =>
+    new({clientRequestToken: clientRequestToken, lensAlias: lensAlias, shareId: shareId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module DeleteLens = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The status of the lens to be deleted.</p>") @as("LensStatus")
+    lensStatus: lensStatusType,
+    @as("ClientRequestToken") clientRequestToken: clientRequestToken,
+    @as("LensAlias") lensAlias: lensAlias,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-wellarchitected") @new external new: request => t = "DeleteLensCommand"
+  let make = (~lensStatus, ~clientRequestToken, ~lensAlias, ()) =>
+    new({lensStatus: lensStatus, clientRequestToken: clientRequestToken, lensAlias: lensAlias})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -1029,6 +1283,48 @@ module CreateMilestone = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module CreateLensVersion = {
+  type t
+  type request = {
+    @as("ClientRequestToken") clientRequestToken: clientRequestToken,
+    @ocaml.doc("<p>Set to true if this new major lens version.</p>") @as("IsMajorVersion")
+    isMajorVersion: option<isMajorVersion>,
+    @ocaml.doc("<p>The version of the lens being created.</p>") @as("LensVersion")
+    lensVersion: lensVersion,
+    @as("LensAlias") lensAlias: lensAlias,
+  }
+  type response = {
+    @ocaml.doc("<p>The version of the lens.</p>") @as("LensVersion")
+    lensVersion: option<lensVersion>,
+    @ocaml.doc("<p>The ARN for the lens.</p>") @as("LensArn") lensArn: option<lensArn>,
+  }
+  @module("@aws-sdk/client-wellarchitected") @new
+  external new: request => t = "CreateLensVersionCommand"
+  let make = (~clientRequestToken, ~lensVersion, ~lensAlias, ~isMajorVersion=?, ()) =>
+    new({
+      clientRequestToken: clientRequestToken,
+      isMajorVersion: isMajorVersion,
+      lensVersion: lensVersion,
+      lensAlias: lensAlias,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module CreateLensShare = {
+  type t
+  type request = {
+    @as("ClientRequestToken") clientRequestToken: clientRequestToken,
+    @as("SharedWith") sharedWith: sharedWith,
+    @as("LensAlias") lensAlias: lensAlias,
+  }
+  type response = {@as("ShareId") shareId: option<shareId>}
+  @module("@aws-sdk/client-wellarchitected") @new
+  external new: request => t = "CreateLensShareCommand"
+  let make = (~clientRequestToken, ~sharedWith, ~lensAlias, ()) =>
+    new({clientRequestToken: clientRequestToken, sharedWith: sharedWith, lensAlias: lensAlias})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module AssociateLenses = {
   type t
   @ocaml.doc("<p>Input to associate lens reviews.</p>")
@@ -1036,50 +1332,12 @@ module AssociateLenses = {
     @as("LensAliases") lensAliases: lensAliases,
     @as("WorkloadId") workloadId: workloadId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-wellarchitected") @new
   external new: request => t = "AssociateLensesCommand"
   let make = (~lensAliases, ~workloadId, ()) =>
     new({lensAliases: lensAliases, workloadId: workloadId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
-}
-
-module UpdateAnswer = {
-  type t
-  @ocaml.doc("<p>Input to update answer.</p>")
-  type request = {
-    @as("IsApplicable") isApplicable: option<isApplicable>,
-    @as("Notes") notes: option<notes>,
-    @as("SelectedChoices") selectedChoices: option<selectedChoices>,
-    @as("QuestionId") questionId: questionId,
-    @as("LensAlias") lensAlias: lensAlias,
-    @as("WorkloadId") workloadId: workloadId,
-  }
-  @ocaml.doc("<p>Output of a update answer call.</p>")
-  type response = {
-    @as("Answer") answer: option<answer>,
-    @as("LensAlias") lensAlias: option<lensAlias>,
-    @as("WorkloadId") workloadId: option<workloadId>,
-  }
-  @module("@aws-sdk/client-wellarchitected") @new external new: request => t = "UpdateAnswerCommand"
-  let make = (
-    ~questionId,
-    ~lensAlias,
-    ~workloadId,
-    ~isApplicable=?,
-    ~notes=?,
-    ~selectedChoices=?,
-    (),
-  ) =>
-    new({
-      isApplicable: isApplicable,
-      notes: notes,
-      selectedChoices: selectedChoices,
-      questionId: questionId,
-      lensAlias: lensAlias,
-      workloadId: workloadId,
-    })
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListWorkloads = {
@@ -1170,33 +1428,6 @@ module GetMilestone = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
-module GetAnswer = {
-  type t
-  @ocaml.doc("<p>Input to get answer.</p>")
-  type request = {
-    @as("MilestoneNumber") milestoneNumber: option<milestoneNumber>,
-    @as("QuestionId") questionId: questionId,
-    @as("LensAlias") lensAlias: lensAlias,
-    @as("WorkloadId") workloadId: workloadId,
-  }
-  @ocaml.doc("<p>Output of a get answer call.</p>")
-  type response = {
-    @as("Answer") answer: option<answer>,
-    @as("LensAlias") lensAlias: option<lensAlias>,
-    @as("MilestoneNumber") milestoneNumber: option<milestoneNumber>,
-    @as("WorkloadId") workloadId: option<workloadId>,
-  }
-  @module("@aws-sdk/client-wellarchitected") @new external new: request => t = "GetAnswerCommand"
-  let make = (~questionId, ~lensAlias, ~workloadId, ~milestoneNumber=?, ()) =>
-    new({
-      milestoneNumber: milestoneNumber,
-      questionId: questionId,
-      lensAlias: lensAlias,
-      workloadId: workloadId,
-    })
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
 module UpdateLensReview = {
   type t
   @ocaml.doc("<p>Input for update lens review.</p>")
@@ -1217,6 +1448,55 @@ module UpdateLensReview = {
     new({
       pillarNotes: pillarNotes,
       lensNotes: lensNotes,
+      lensAlias: lensAlias,
+      workloadId: workloadId,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module UpdateAnswer = {
+  type t
+  @ocaml.doc("<p>Input to update answer.</p>")
+  type request = {
+    @ocaml.doc("<p>The reason why a question is not applicable to your workload.</p>") @as("Reason")
+    reason: option<answerReason>,
+    @as("IsApplicable") isApplicable: option<isApplicable>,
+    @as("Notes") notes: option<notes>,
+    @ocaml.doc("<p>A list of choices to update on a question in your workload.  The String key 
+            corresponds to the choice ID to be updated.</p>")
+    @as("ChoiceUpdates")
+    choiceUpdates: option<choiceUpdates>,
+    @as("SelectedChoices") selectedChoices: option<selectedChoices>,
+    @as("QuestionId") questionId: questionId,
+    @as("LensAlias") lensAlias: lensAlias,
+    @as("WorkloadId") workloadId: workloadId,
+  }
+  @ocaml.doc("<p>Output of a update answer call.</p>")
+  type response = {
+    @as("Answer") answer: option<answer>,
+    @ocaml.doc("<p>The ARN for the lens.</p>") @as("LensArn") lensArn: option<lensArn>,
+    @as("LensAlias") lensAlias: option<lensAlias>,
+    @as("WorkloadId") workloadId: option<workloadId>,
+  }
+  @module("@aws-sdk/client-wellarchitected") @new external new: request => t = "UpdateAnswerCommand"
+  let make = (
+    ~questionId,
+    ~lensAlias,
+    ~workloadId,
+    ~reason=?,
+    ~isApplicable=?,
+    ~notes=?,
+    ~choiceUpdates=?,
+    ~selectedChoices=?,
+    (),
+  ) =>
+    new({
+      reason: reason,
+      isApplicable: isApplicable,
+      notes: notes,
+      choiceUpdates: choiceUpdates,
+      selectedChoices: selectedChoices,
+      questionId: questionId,
       lensAlias: lensAlias,
       workloadId: workloadId,
     })
@@ -1244,27 +1524,29 @@ module ListMilestones = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
-module ListAnswers = {
+module ListLensReviewImprovements = {
   type t
-  @ocaml.doc("<p>Input to list answers.</p>")
+  @ocaml.doc("<p>Input to list lens review improvements.</p>")
   type request = {
     @ocaml.doc("<p>The maximum number of results to return for this request.</p>") @as("MaxResults")
-    maxResults: option<listAnswersMaxResults>,
+    maxResults: option<listLensReviewImprovementsMaxResults>,
     @as("NextToken") nextToken: option<nextToken>,
     @as("MilestoneNumber") milestoneNumber: option<milestoneNumber>,
     @as("PillarId") pillarId: option<pillarId>,
     @as("LensAlias") lensAlias: lensAlias,
     @as("WorkloadId") workloadId: workloadId,
   }
-  @ocaml.doc("<p>Output of a list answers call.</p>")
+  @ocaml.doc("<p>Output of a list lens review improvements call.</p>")
   type response = {
     @as("NextToken") nextToken: option<nextToken>,
-    @as("AnswerSummaries") answerSummaries: option<answerSummaries>,
+    @as("ImprovementSummaries") improvementSummaries: option<improvementSummaries>,
+    @ocaml.doc("<p>The ARN for the lens.</p>") @as("LensArn") lensArn: option<lensArn>,
     @as("LensAlias") lensAlias: option<lensAlias>,
     @as("MilestoneNumber") milestoneNumber: option<milestoneNumber>,
     @as("WorkloadId") workloadId: option<workloadId>,
   }
-  @module("@aws-sdk/client-wellarchitected") @new external new: request => t = "ListAnswersCommand"
+  @module("@aws-sdk/client-wellarchitected") @new
+  external new: request => t = "ListLensReviewImprovementsCommand"
   let make = (
     ~lensAlias,
     ~workloadId,
@@ -1306,24 +1588,103 @@ module GetLensReview = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module GetAnswer = {
+  type t
+  @ocaml.doc("<p>Input to get answer.</p>")
+  type request = {
+    @as("MilestoneNumber") milestoneNumber: option<milestoneNumber>,
+    @as("QuestionId") questionId: questionId,
+    @as("LensAlias") lensAlias: lensAlias,
+    @as("WorkloadId") workloadId: workloadId,
+  }
+  @ocaml.doc("<p>Output of a get answer call.</p>")
+  type response = {
+    @as("Answer") answer: option<answer>,
+    @ocaml.doc("<p>The ARN for the lens.</p>") @as("LensArn") lensArn: option<lensArn>,
+    @as("LensAlias") lensAlias: option<lensAlias>,
+    @as("MilestoneNumber") milestoneNumber: option<milestoneNumber>,
+    @as("WorkloadId") workloadId: option<workloadId>,
+  }
+  @module("@aws-sdk/client-wellarchitected") @new external new: request => t = "GetAnswerCommand"
+  let make = (~questionId, ~lensAlias, ~workloadId, ~milestoneNumber=?, ()) =>
+    new({
+      milestoneNumber: milestoneNumber,
+      questionId: questionId,
+      lensAlias: lensAlias,
+      workloadId: workloadId,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module ListAnswers = {
+  type t
+  @ocaml.doc("<p>Input to list answers.</p>")
+  type request = {
+    @ocaml.doc("<p>The maximum number of results to return for this request.</p>") @as("MaxResults")
+    maxResults: option<listAnswersMaxResults>,
+    @as("NextToken") nextToken: option<nextToken>,
+    @as("MilestoneNumber") milestoneNumber: option<milestoneNumber>,
+    @as("PillarId") pillarId: option<pillarId>,
+    @as("LensAlias") lensAlias: lensAlias,
+    @as("WorkloadId") workloadId: workloadId,
+  }
+  @ocaml.doc("<p>Output of a list answers call.</p>")
+  type response = {
+    @as("NextToken") nextToken: option<nextToken>,
+    @as("AnswerSummaries") answerSummaries: option<answerSummaries>,
+    @ocaml.doc("<p>The ARN for the lens.</p>") @as("LensArn") lensArn: option<lensArn>,
+    @as("LensAlias") lensAlias: option<lensAlias>,
+    @as("MilestoneNumber") milestoneNumber: option<milestoneNumber>,
+    @as("WorkloadId") workloadId: option<workloadId>,
+  }
+  @module("@aws-sdk/client-wellarchitected") @new external new: request => t = "ListAnswersCommand"
+  let make = (
+    ~lensAlias,
+    ~workloadId,
+    ~maxResults=?,
+    ~nextToken=?,
+    ~milestoneNumber=?,
+    ~pillarId=?,
+    (),
+  ) =>
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      milestoneNumber: milestoneNumber,
+      pillarId: pillarId,
+      lensAlias: lensAlias,
+      workloadId: workloadId,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module GetLensVersionDifference = {
   type t
   type request = {
+    @ocaml.doc("<p>The lens version to target a difference for.</p>") @as("TargetLensVersion")
+    targetLensVersion: option<lensVersion>,
     @ocaml.doc("<p>The base version of the lens.</p>") @as("BaseLensVersion")
-    baseLensVersion: lensVersion,
+    baseLensVersion: option<lensVersion>,
     @as("LensAlias") lensAlias: lensAlias,
   }
   type response = {
     @as("VersionDifferences") versionDifferences: option<versionDifferences>,
     @ocaml.doc("<p>The latest version of the lens.</p>") @as("LatestLensVersion")
     latestLensVersion: option<lensVersion>,
+    @ocaml.doc("<p>The target lens version for the lens.</p>") @as("TargetLensVersion")
+    targetLensVersion: option<lensVersion>,
     @ocaml.doc("<p>The base version of the lens.</p>") @as("BaseLensVersion")
     baseLensVersion: option<lensVersion>,
+    @ocaml.doc("<p>The ARN for the lens.</p>") @as("LensArn") lensArn: option<lensArn>,
     @as("LensAlias") lensAlias: option<lensAlias>,
   }
   @module("@aws-sdk/client-wellarchitected") @new
   external new: request => t = "GetLensVersionDifferenceCommand"
-  let make = (~baseLensVersion, ~lensAlias, ()) =>
-    new({baseLensVersion: baseLensVersion, lensAlias: lensAlias})
+  let make = (~lensAlias, ~targetLensVersion=?, ~baseLensVersion=?, ()) =>
+    new({
+      targetLensVersion: targetLensVersion,
+      baseLensVersion: baseLensVersion,
+      lensAlias: lensAlias,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

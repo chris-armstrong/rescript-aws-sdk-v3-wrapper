@@ -108,7 +108,7 @@ module PutUsers = {
     )
     datasetArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-personalize") @new external new: request => t = "PutUsersCommand"
   let make = (~users, ~datasetArn, ()) => new({users: users, datasetArn: datasetArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -123,7 +123,7 @@ module PutItems = {
     )
     datasetArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-personalize") @new external new: request => t = "PutItemsCommand"
   let make = (~items, ~datasetArn, ()) => new({items: items, datasetArn: datasetArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -143,7 +143,7 @@ module PutEvents = {
       <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateEventTracker.html\">CreateEventTracker</a> API.</p>")
     trackingId: stringType,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-personalize") @new external new: request => t = "PutEventsCommand"
   let make = (~eventList, ~sessionId, ~trackingId, ~userId=?, ()) =>
     new({eventList: eventList, sessionId: sessionId, userId: userId, trackingId: trackingId})

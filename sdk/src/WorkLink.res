@@ -141,7 +141,7 @@ module UpdateIdentityProviderConfiguration = {
     identityProviderType: identityProviderType,
     @ocaml.doc("<p>The ARN of the fleet.</p>") @as("FleetArn") fleetArn: fleetArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-worklink") @new
   external new: request => t = "UpdateIdentityProviderConfigurationCommand"
   let make = (~identityProviderType, ~fleetArn, ~identityProviderSamlMetadata=?, ()) =>
@@ -167,7 +167,7 @@ module UpdateFleetMetadata = {
     displayName: option<displayName>,
     @ocaml.doc("<p>The ARN of the fleet.</p>") @as("FleetArn") fleetArn: fleetArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-worklink") @new external new: request => t = "UpdateFleetMetadataCommand"
   let make = (~fleetArn, ~optimizeForEndUserLocation=?, ~displayName=?, ()) =>
     new({
@@ -185,7 +185,7 @@ module UpdateDomainMetadata = {
     @ocaml.doc("<p>The name of the domain.</p>") @as("DomainName") domainName: domainName,
     @ocaml.doc("<p>The ARN of the fleet.</p>") @as("FleetArn") fleetArn: fleetArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-worklink") @new
   external new: request => t = "UpdateDomainMetadataCommand"
   let make = (~domainName, ~fleetArn, ~displayName=?, ()) =>
@@ -203,7 +203,7 @@ module UpdateDevicePolicyConfiguration = {
     deviceCaCertificate: option<certificateChain>,
     @ocaml.doc("<p>The ARN of the fleet.</p>") @as("FleetArn") fleetArn: fleetArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-worklink") @new
   external new: request => t = "UpdateDevicePolicyConfigurationCommand"
   let make = (~fleetArn, ~deviceCaCertificate=?, ()) =>
@@ -219,7 +219,7 @@ module UpdateAuditStreamConfiguration = {
     auditStreamArn: option<auditStreamArn>,
     @ocaml.doc("<p>The ARN of the fleet.</p>") @as("FleetArn") fleetArn: fleetArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-worklink") @new
   external new: request => t = "UpdateAuditStreamConfigurationCommand"
   let make = (~fleetArn, ~auditStreamArn=?, ()) =>
@@ -233,7 +233,7 @@ module SignOutUser = {
     @ocaml.doc("<p>The name of the user.</p>") @as("Username") username: username,
     @ocaml.doc("<p>The ARN of the fleet.</p>") @as("FleetArn") fleetArn: fleetArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-worklink") @new external new: request => t = "SignOutUserCommand"
   let make = (~username, ~fleetArn, ()) => new({username: username, fleetArn: fleetArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -245,7 +245,7 @@ module RevokeDomainAccess = {
     @ocaml.doc("<p>The name of the domain.</p>") @as("DomainName") domainName: domainName,
     @ocaml.doc("<p>The ARN of the fleet.</p>") @as("FleetArn") fleetArn: fleetArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-worklink") @new external new: request => t = "RevokeDomainAccessCommand"
   let make = (~domainName, ~fleetArn, ()) => new({domainName: domainName, fleetArn: fleetArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -257,7 +257,7 @@ module RestoreDomainAccess = {
     @ocaml.doc("<p>The name of the domain.</p>") @as("DomainName") domainName: domainName,
     @ocaml.doc("<p>The ARN of the fleet.</p>") @as("FleetArn") fleetArn: fleetArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-worklink") @new external new: request => t = "RestoreDomainAccessCommand"
   let make = (~domainName, ~fleetArn, ()) => new({domainName: domainName, fleetArn: fleetArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -269,7 +269,7 @@ module DisassociateWebsiteCertificateAuthority = {
     @ocaml.doc("<p>A unique identifier for the CA.</p>") @as("WebsiteCaId") websiteCaId: id,
     @ocaml.doc("<p>The ARN of the fleet.</p>") @as("FleetArn") fleetArn: fleetArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-worklink") @new
   external new: request => t = "DisassociateWebsiteCertificateAuthorityCommand"
   let make = (~websiteCaId, ~fleetArn, ()) => new({websiteCaId: websiteCaId, fleetArn: fleetArn})
@@ -284,7 +284,7 @@ module DisassociateWebsiteAuthorizationProvider = {
     authorizationProviderId: id,
     @ocaml.doc("<p>The ARN of the fleet.</p>") @as("FleetArn") fleetArn: fleetArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-worklink") @new
   external new: request => t = "DisassociateWebsiteAuthorizationProviderCommand"
   let make = (~authorizationProviderId, ~fleetArn, ()) =>
@@ -298,7 +298,7 @@ module DisassociateDomain = {
     @ocaml.doc("<p>The name of the domain.</p>") @as("DomainName") domainName: domainName,
     @ocaml.doc("<p>The ARN of the fleet.</p>") @as("FleetArn") fleetArn: fleetArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-worklink") @new external new: request => t = "DisassociateDomainCommand"
   let make = (~domainName, ~fleetArn, ()) => new({domainName: domainName, fleetArn: fleetArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -436,7 +436,7 @@ module DescribeAuditStreamConfiguration = {
 module DeleteFleet = {
   type t
   type request = {@ocaml.doc("<p>The ARN of the fleet.</p>") @as("FleetArn") fleetArn: fleetArn}
-
+  type response = {.}
   @module("@aws-sdk/client-worklink") @new external new: request => t = "DeleteFleetCommand"
   let make = (~fleetArn, ()) => new({fleetArn: fleetArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -502,7 +502,7 @@ module AssociateDomain = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the fleet.</p>") @as("FleetArn")
     fleetArn: fleetArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-worklink") @new external new: request => t = "AssociateDomainCommand"
   let make = (~acmCertificateArn, ~domainName, ~fleetArn, ~displayName=?, ()) =>
     new({
@@ -529,7 +529,7 @@ module UpdateCompanyNetworkConfiguration = {
     vpcId: vpcId,
     @ocaml.doc("<p>The ARN of the fleet.</p>") @as("FleetArn") fleetArn: fleetArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-worklink") @new
   external new: request => t = "UpdateCompanyNetworkConfigurationCommand"
   let make = (~securityGroupIds, ~subnetIds, ~vpcId, ~fleetArn, ()) =>
@@ -550,7 +550,7 @@ module UntagResource = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the fleet.</p>") @as("ResourceArn")
     resourceArn: fleetArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-worklink") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -564,7 +564,7 @@ module TagResource = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the fleet.</p>") @as("ResourceArn")
     resourceArn: fleetArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-worklink") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"

@@ -26,6 +26,9 @@ type string1To1000 = string
 type string0To255 = string
 type string0To1000 = string
 type sqsQueueUrl = string
+type s3KeyNameCustomerOutputConfig = string
+type s3KeyName = string
+type s3BucketName = string
 type optionalBoolean = bool
 type name = string
 type message = string
@@ -51,6 +54,7 @@ type zendeskConnectorOperator = [
   | @as("GREATER_THAN") #GREATER_THAN
   | @as("PROJECTION") #PROJECTION
 ]
+type workflowType = [@as("APPFLOW_INTEGRATION") #APPFLOW_INTEGRATION]
 type triggerType = [@as("OnDemand") #OnDemand | @as("Event") #Event | @as("Scheduled") #Scheduled]
 type timezone = string
 type taskType = [
@@ -65,11 +69,23 @@ type taskType = [
 type tagValue = string
 type tagKey = string
 type tagArn = string
+type status = [
+  | @as("CANCELLED") #CANCELLED
+  | @as("RETRY") #RETRY
+  | @as("SPLIT") #SPLIT
+  | @as("FAILED") #FAILED
+  | @as("COMPLETE") #COMPLETE
+  | @as("IN_PROGRESS") #IN_PROGRESS
+  | @as("NOT_STARTED") #NOT_STARTED
+]
 type standardIdentifier = [
+  | @as("ORDER") #ORDER
   | @as("NEW_ONLY") #NEW_ONLY
   | @as("LOOKUP_ONLY") #LOOKUP_ONLY
   | @as("SECONDARY") #SECONDARY
   | @as("UNIQUE") #UNIQUE
+  | @as("CASE") #CASE
+  | @as("ASSET") #ASSET
   | @as("PROFILE") #PROFILE
 ]
 type sourceConnectorType = [
@@ -149,6 +165,7 @@ type s3ConnectorOperator = [
   | @as("LESS_THAN") #LESS_THAN
   | @as("PROJECTION") #PROJECTION
 ]
+type roleArn = string
 type property = string
 type partyType = [@as("OTHER") #OTHER | @as("BUSINESS") #BUSINESS | @as("INDIVIDUAL") #INDIVIDUAL]
 type operatorPropertiesKeys = [
@@ -187,6 +204,25 @@ type marketoConnectorOperator = [
   | @as("PROJECTION") #PROJECTION
 ]
 type kmsArn = string
+type jobScheduleTime = string
+type jobScheduleDayOfTheWeek = [
+  | @as("SATURDAY") #SATURDAY
+  | @as("FRIDAY") #FRIDAY
+  | @as("THURSDAY") #THURSDAY
+  | @as("WEDNESDAY") #WEDNESDAY
+  | @as("TUESDAY") #TUESDAY
+  | @as("MONDAY") #MONDAY
+  | @as("SUNDAY") #SUNDAY
+]
+type identityResolutionJobStatus = [
+  | @as("FAILED") #FAILED
+  | @as("PARTIAL_SUCCESS") #PARTIAL_SUCCESS
+  | @as("COMPLETED") #COMPLETED
+  | @as("MERGING") #MERGING
+  | @as("FIND_MATCHING") #FIND_MATCHING
+  | @as("PREPROCESSING") #PREPROCESSING
+  | @as("PENDING") #PENDING
+]
 type gender = [@as("UNSPECIFIED") #UNSPECIFIED | @as("FEMALE") #FEMALE | @as("MALE") #MALE]
 type flowName = string
 type flowDescription = string
@@ -197,11 +233,13 @@ type fieldContentType = [
   | @as("NUMBER") #NUMBER
   | @as("STRING") #STRING
 ]
+type double = float
 type destinationField = string
 type datetimeTypeFieldName = string
 type date = Js.Date.t
 type dataPullMode = [@as("Complete") #Complete | @as("Incremental") #Incremental]
 type connectorProfileName = string
+type conflictResolvingModel = [@as("SOURCE") #SOURCE | @as("RECENCY") #RECENCY]
 type bucketPrefix = string
 type bucketName = string
 type requestValueList = array<string1To255>
@@ -296,8 +334,35 @@ type s3SourceProperties = {
   @as("BucketName")
   bucketName: bucketName,
 }
+@ocaml.doc("<p>The S3 location where Identity Resolution Jobs write result files.</p>")
+type s3ExportingLocation = {
+  @ocaml.doc(
+    "<p>The S3 key name of the location where Identity Resolution Jobs write result files.</p>"
+  )
+  @as("S3KeyName")
+  s3KeyName: option<s3KeyName>,
+  @ocaml.doc(
+    "<p>The name of the S3 bucket name where Identity Resolution Jobs write result files.</p>"
+  )
+  @as("S3BucketName")
+  s3BucketName: option<s3BucketName>,
+}
+@ocaml.doc(
+  "<p>Configuration information about the S3 bucket where Identity Resolution Jobs write result files.</p>"
+)
+type s3ExportingConfig = {
+  @ocaml.doc(
+    "<p>The S3 key name of the location where Identity Resolution Jobs write result files.</p>"
+  )
+  @as("S3KeyName")
+  s3KeyName: option<s3KeyNameCustomerOutputConfig>,
+  @ocaml.doc("<p>The name of the S3 bucket where Identity Resolution Jobs write result files.</p>")
+  @as("S3BucketName")
+  s3BucketName: s3BucketName,
+}
 type profileIdToBeMergedList = array<uuid>
 type profileIdList = array<uuid>
+type objectTypeNames = Js.Dict.t<typeName>
 @ocaml.doc("<p>Represents a field in a ProfileObjectType.</p>")
 type objectTypeField = {
   @ocaml.doc("<p>The content type of the field. Used for determining equality when searching.</p>")
@@ -312,22 +377,25 @@ type objectTypeField = {
   @as("Source")
   source: option<text>,
 }
-@ocaml.doc("<p>The flag that enables the matching process of duplicate profiles.</p>")
-type matchingResponse = {
-  @ocaml.doc("<p>The flag that enables the matching process of duplicate profiles.</p>")
-  @as("Enabled")
-  enabled: option<optionalBoolean>,
-}
-@ocaml.doc("<p>The flag that enables the matching process of duplicate profiles.</p>")
-type matchingRequest = {
-  @ocaml.doc("<p>The flag that enables the matching process of duplicate profiles.</p>")
-  @as("Enabled")
-  enabled: optionalBoolean,
-}
+type matchingAttributes = array<string1To255>
 @ocaml.doc("<p>The properties that are applied when Marketo is being used as a source.</p>")
 type marketoSourceProperties = {
   @ocaml.doc("<p>The object specified in the Marketo flow source.</p>") @as("Object")
   object_: object_,
+}
+@ocaml.doc("<p>A workflow in list of workflows.</p>")
+type listWorkflowsItem = {
+  @ocaml.doc("<p>Last updated timestamp for workflow.</p>") @as("LastUpdatedAt")
+  lastUpdatedAt: timestamp_,
+  @ocaml.doc("<p>Creation timestamp for workflow.</p>") @as("CreatedAt") createdAt: timestamp_,
+  @ocaml.doc("<p>Description for workflow execution status.</p>") @as("StatusDescription")
+  statusDescription: string1To255,
+  @ocaml.doc("<p>Status of workflow execution.</p>") @as("Status") status: status,
+  @ocaml.doc("<p>Unique identifier for the workflow.</p>") @as("WorkflowId")
+  workflowId: string1To255,
+  @ocaml.doc("<p>The type of workflow. The only supported value is APPFLOW_INTEGRATION.</p>")
+  @as("WorkflowType")
+  workflowType: workflowType,
 }
 @ocaml.doc("<p>A ProfileObject in a list of ProfileObjects.</p>")
 type listProfileObjectsItem = {
@@ -350,6 +418,25 @@ type listProfileObjectTypeTemplateItem = {
   sourceName: option<name>,
   @ocaml.doc("<p>A unique identifier for the object template.</p>") @as("TemplateId")
   templateId: option<name>,
+}
+@ocaml.doc("<p>Statistics about the Identity Resolution Job.</p>")
+type jobStats = {
+  @ocaml.doc("<p>The number of merges completed.</p>") @as("NumberOfMergesDone")
+  numberOfMergesDone: option<long>,
+  @ocaml.doc("<p>The number of matches found.</p>") @as("NumberOfMatchesFound")
+  numberOfMatchesFound: option<long>,
+  @ocaml.doc("<p>The number of profiles reviewed.</p>") @as("NumberOfProfilesReviewed")
+  numberOfProfilesReviewed: option<long>,
+}
+@ocaml.doc(
+  "<p>The day and time when do you want to start the Identity Resolution Job every week.</p>"
+)
+type jobSchedule = {
+  @ocaml.doc("<p>The time when the Identity Resolution Job should run every week.</p>") @as("Time")
+  time: jobScheduleTime,
+  @ocaml.doc("<p>The day when the Identity Resolution Job should run every week.</p>")
+  @as("DayOfTheWeek")
+  dayOfTheWeek: jobScheduleDayOfTheWeek,
 }
 @ocaml.doc("<p>Specifies the configuration used when importing incremental records from the
          source.</p>")
@@ -392,8 +479,113 @@ type connectorOperator = {
   @as("Marketo")
   marketo: option<marketoConnectorOperator>,
 }
+@ocaml.doc(
+  "<p>How the auto-merging process should resolve conflicts between different profiles.</p>"
+)
+type conflictResolution = {
+  @ocaml.doc("<p>The <code>ObjectType</code> name that is used to resolve profile merging conflicts when
+         choosing <code>SOURCE</code> as the <code>ConflictResolvingModel</code>.</p>")
+  @as("SourceName")
+  sourceName: option<string1To255>,
+  @ocaml.doc("<p>How the auto-merging process should resolve conflicts between different profiles.</p>
+         <ul>
+            <li>
+               <p>
+                  <code>RECENCY</code>: Uses the data that was most recently updated.</p>
+            </li>
+            <li>
+               <p>
+                  <code>SOURCE</code>: Uses the data from a specific source. For example, if a
+               company has been aquired or two departments have merged, data from the specified
+               source is used. If two duplicate profiles are from the same source, then
+                  <code>RECENCY</code> is used again.</p>
+            </li>
+         </ul>")
+  @as("ConflictResolvingModel")
+  conflictResolvingModel: conflictResolvingModel,
+}
+@ocaml.doc(
+  "<p>Batch defines the boundaries for ingestion for each step in <code>APPFLOW_INTEGRATION</code> workflow. <code>APPFLOW_INTEGRATION</code> workflow splits ingestion based on these boundaries.</p>"
+)
+type batch = {
+  @ocaml.doc("<p>End time of batch to split ingestion.</p>") @as("EndTime") endTime: timestamp_,
+  @ocaml.doc("<p>Start time of batch to split ingestion.</p>") @as("StartTime")
+  startTime: timestamp_,
+}
 type attributes = Js.Dict.t<string1To255>
 type attributeSourceIdMap = Js.Dict.t<uuid>
+@ocaml.doc("<p>Workflow step details for <code>APPFLOW_INTEGRATION</code> workflow.</p>")
+type appflowIntegrationWorkflowStep = {
+  @ocaml.doc(
+    "<p>Last updated timestamp for workflow step for <code>APPFLOW_INTEGRATION</code> workflow.</p>"
+  )
+  @as("LastUpdatedAt")
+  lastUpdatedAt: timestamp_,
+  @ocaml.doc(
+    "<p>Creation timestamp of workflow step for <code>APPFLOW_INTEGRATION</code> workflow.</p>"
+  )
+  @as("CreatedAt")
+  createdAt: timestamp_,
+  @ocaml.doc(
+    "<p>End datetime of records pulled in batch during execution of workflow step for <code>APPFLOW_INTEGRATION</code> workflow.</p>"
+  )
+  @as("BatchRecordsEndTime")
+  batchRecordsEndTime: string1To255,
+  @ocaml.doc(
+    "<p>Start datetime of records pulled in batch during execution of workflow step for <code>APPFLOW_INTEGRATION</code> workflow.</p>"
+  )
+  @as("BatchRecordsStartTime")
+  batchRecordsStartTime: string1To255,
+  @ocaml.doc(
+    "<p>Total number of records processed during execution of workflow step for <code>APPFLOW_INTEGRATION</code> workflow.</p>"
+  )
+  @as("RecordsProcessed")
+  recordsProcessed: long,
+  @ocaml.doc(
+    "<p>Message indicating execution of workflow step for <code>APPFLOW_INTEGRATION</code> workflow.</p>"
+  )
+  @as("ExecutionMessage")
+  executionMessage: string1To255,
+  @ocaml.doc("<p>Workflow step status for <code>APPFLOW_INTEGRATION</code> workflow.</p>")
+  @as("Status")
+  status: status,
+  @ocaml.doc(
+    "<p>Name of the flow created during execution of workflow step. <code>APPFLOW_INTEGRATION</code> workflow type creates an appflow flow during workflow step execution on the customers behalf.</p>"
+  )
+  @as("FlowName")
+  flowName: flowName,
+}
+@ocaml.doc(
+  "<p>Workflow specific execution metrics for <code>APPFLOW_INTEGRATION</code> workflow.</p>"
+)
+type appflowIntegrationWorkflowMetrics = {
+  @ocaml.doc("<p>Total steps in <code>APPFLOW_INTEGRATION</code> workflow.</p>") @as("TotalSteps")
+  totalSteps: long,
+  @ocaml.doc("<p>Total steps completed in <code>APPFLOW_INTEGRATION</code> workflow.</p>")
+  @as("StepsCompleted")
+  stepsCompleted: long,
+  @ocaml.doc("<p>Number of records processed in <code>APPFLOW_INTEGRATION</code> workflow.</p>")
+  @as("RecordsProcessed")
+  recordsProcessed: long,
+}
+@ocaml.doc(
+  "<p>Structure holding all <code>APPFLOW_INTEGRATION</code> specific workflow attributes.</p>"
+)
+type appflowIntegrationWorkflowAttributes = {
+  @ocaml.doc(
+    "<p>The Amazon Resource Name (ARN) of the IAM role. Customer Profiles assumes this role to create resources on your behalf as part of workflow execution.</p>"
+  )
+  @as("RoleArn")
+  roleArn: option<string1To255>,
+  @ocaml.doc("<p>The name of the AppFlow connector profile used for ingestion.</p>")
+  @as("ConnectorProfileName")
+  connectorProfileName: connectorProfileName,
+  @ocaml.doc(
+    "<p>Specifies the source connector type, such as Salesforce, ServiceNow, and Marketo. Indicates source of ingestion.</p>"
+  )
+  @as("SourceConnectorType")
+  sourceConnectorType: sourceConnectorType,
+}
 @ocaml.doc("<p>A generic address associated with the customer that is not mailing, shipping, or
          billing.</p>")
 type address = {
@@ -416,6 +608,27 @@ type address = {
   address2: option<string1To255>,
   @ocaml.doc("<p>The first line of a customer address.</p>") @as("Address1")
   address1: option<string1To255>,
+}
+@ocaml.doc("<p>List containing steps in workflow.</p>")
+type workflowStepItem = {
+  @ocaml.doc(
+    "<p>Workflow step information specific to <code>APPFLOW_INTEGRATION</code> workflow.</p>"
+  )
+  @as("AppflowIntegration")
+  appflowIntegration: option<appflowIntegrationWorkflowStep>,
+}
+@ocaml.doc("<p>Generic object containing workflow execution metrics.</p>")
+type workflowMetrics = {
+  @ocaml.doc("<p>Workflow execution metrics for <code>APPFLOW_INTEGRATION</code> workflow.</p>")
+  @as("AppflowIntegration")
+  appflowIntegration: option<appflowIntegrationWorkflowMetrics>,
+}
+type workflowList = array<listWorkflowsItem>
+@ocaml.doc("<p>Structure to hold workflow attributes.</p>")
+type workflowAttributes = {
+  @ocaml.doc("<p>Workflow attributes specific to <code>APPFLOW_INTEGRATION</code> workflow.</p>")
+  @as("AppflowIntegration")
+  appflowIntegration: option<appflowIntegrationWorkflowAttributes>,
 }
 @ocaml.doc("<p>Specifies the configuration details that control the trigger for a flow. Currently,
          these settings only apply to the Scheduled trigger type.</p>")
@@ -529,18 +742,35 @@ type objectTypeKey = {
   @ocaml.doc("<p>The reference for the key name of the fields map.</p>") @as("FieldNames")
   fieldNames: option<fieldNameList>,
   @ocaml.doc("<p>The types of keys that a ProfileObject can have. Each ProfileObject can have only 1
-         UNIQUE key but multiple PROFILE keys. PROFILE means that this key can be used to tie an
-         object to a PROFILE. UNIQUE means that it can be used to uniquely identify an object. If a
-         key a is marked as SECONDARY, it will be used to search for profiles after all other
-         PROFILE keys have been searched. A LOOKUP_ONLY key is only used to match a profile but is
-         not persisted to be used for searching of the profile. A NEW_ONLY key is only used if the
-         profile does not already exist before the object is ingested, otherwise it is only used for
-         matching objects to profiles.</p>")
+         UNIQUE key but multiple PROFILE keys. PROFILE, ASSET, CASE, or ORDER  means that this key can be
+         used to tie an object to a PROFILE, ASSET, CASE, or ORDER respectively. UNIQUE means that it can be
+         used to uniquely identify an object. If a key a is marked as SECONDARY, it will be used to
+         search for profiles after all other PROFILE keys have been searched. A LOOKUP_ONLY key is
+         only used to match a profile but is not persisted to be used for searching of the profile.
+         A NEW_ONLY key is only used if the profile does not already exist before the object is
+         ingested, otherwise it is only used for matching objects to profiles.</p>")
   @as("StandardIdentifiers")
   standardIdentifiers: option<standardIdentifierList>,
 }
+@ocaml.doc("<p>The filter applied to ListProfileObjects response to include profile objects with the
+         specified index values. This filter is only supported for ObjectTypeName _asset, _case and
+         _order.</p>")
+type objectFilter = {
+  @ocaml.doc("<p>A list of key values.</p>") @as("Values") values: requestValueList,
+  @ocaml.doc("<p>A searchable identifier of a standard profile object. The predefined keys you can use to
+         search for _asset include: _assetId, _assetName, _serialNumber. The predefined keys you can
+         use to search for _case include: _caseId. The predefined keys you can use to search for
+         _order include: _orderId.</p>")
+  @as("KeyName")
+  keyName: name,
+}
+type matchingAttributesList = array<matchingAttributes>
 @ocaml.doc("<p>The Match group object.</p>")
 type matchItem = {
+  @ocaml.doc("<p>A number between 0 and 1 that represents the confidence level of assigning profiles to a
+         matching group. A score of 1 likely indicates an exact match.</p>")
+  @as("ConfidenceScore")
+  confidenceScore: option<double>,
   @ocaml.doc("<p>A list of identifiers for profiles that match.</p>") @as("ProfileIds")
   profileIds: option<profileIdList>,
   @ocaml.doc("<p>The unique identifiers for this group of profiles that match.</p>") @as("MatchId")
@@ -562,6 +792,13 @@ type listProfileObjectTypeItem = {
 }
 @ocaml.doc("<p>An integration in list of integrations.</p>")
 type listIntegrationItem = {
+  @ocaml.doc("<p>Unique identifier for the workflow.</p>") @as("WorkflowId")
+  workflowId: option<string1To255>,
+  @ocaml.doc("<p>A map in which each key is an event type from an external application such as Segment or Shopify, and each value is an <code>ObjectTypeName</code> (template) used to ingest the event.
+It supports the following event types: <code>SegmentIdentify</code>, <code>ShopifyCreateCustomers</code>, <code>ShopifyUpdateCustomers</code>, <code>ShopifyCreateDraftOrders</code>, 
+<code>ShopifyUpdateDraftOrders</code>, <code>ShopifyCreateOrders</code>, and <code>ShopifyUpdatedOrders</code>.</p>")
+  @as("ObjectTypeNames")
+  objectTypeNames: option<objectTypeNames>,
   @ocaml.doc("<p>The tags used to organize, track, or control access for this resource.</p>")
   @as("Tags")
   tags: option<tagMap>,
@@ -571,7 +808,7 @@ type listIntegrationItem = {
   @ocaml.doc("<p>The timestamp of when the domain was created.</p>") @as("CreatedAt")
   createdAt: timestamp_,
   @ocaml.doc("<p>The name of the profile object type.</p>") @as("ObjectTypeName")
-  objectTypeName: typeName,
+  objectTypeName: option<typeName>,
   @ocaml.doc("<p>The URI of the S3 bucket or any other type of data source.</p>") @as("Uri")
   uri: string1To255,
   @ocaml.doc("<p>The unique name of the domain.</p>") @as("DomainName") domainName: name,
@@ -647,6 +884,27 @@ type fieldSourceProfileIds = {
   accountNumber: option<uuid>,
 }
 type fieldMap = Js.Dict.t<objectTypeField>
+@ocaml.doc("<p>The S3 location where Identity Resolution Jobs write result files.</p>")
+type exportingLocation = {
+  @ocaml.doc(
+    "<p>Information about the S3 location where Identity Resolution Jobs write result files.</p>"
+  )
+  @as("S3Exporting")
+  s3Exporting: option<s3ExportingLocation>,
+}
+@ocaml.doc("<p>Configuration information about the S3 bucket where Identity Resolution Jobs writes result files. </p>
+         <note>
+            <p>You need to give Customer Profiles service principal write permission to your S3 bucket.
+            Otherwise, you'll get an exception in the API response. For an example policy, see
+               <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/cross-service-confused-deputy-prevention.html#customer-profiles-cross-service\">Amazon Connect Customer Profiles cross-service confused deputy prevention</a>. </p>
+         </note>")
+type exportingConfig = {
+  @ocaml.doc("<p>The S3 location where Identity Resolution Jobs write result files.</p>")
+  @as("S3Exporting")
+  s3Exporting: option<s3ExportingConfig>,
+}
+type batches = array<batch>
+type workflowStepsList = array<workflowStepItem>
 @ocaml.doc("<p>The trigger settings that determine how and when Amazon AppFlow runs the specified
          flow.</p>")
 type triggerConfig = {
@@ -684,8 +942,71 @@ type profileList = array<profile>
 type objectTypeKeyList = array<objectTypeKey>
 type matchesList = array<matchItem>
 type integrationList = array<listIntegrationItem>
+@ocaml.doc("<p>Information about the Identity Resolution Job.</p>")
+type identityResolutionJob = {
+  @ocaml.doc("<p>The error messages that are generated when the Identity Resolution Job runs.</p>")
+  @as("Message")
+  message: option<stringTo2048>,
+  @ocaml.doc("<p>The S3 location where the Identity Resolution Job writes result files.</p>")
+  @as("ExportingLocation")
+  exportingLocation: option<exportingLocation>,
+  @ocaml.doc("<p>Statistics about an Identity Resolution Job.</p>") @as("JobStats")
+  jobStats: option<jobStats>,
+  @ocaml.doc("<p>The timestamp of when the job was completed.</p>") @as("JobEndTime")
+  jobEndTime: option<timestamp_>,
+  @ocaml.doc("<p>The timestamp of when the job was started or will be started.</p>")
+  @as("JobStartTime")
+  jobStartTime: option<timestamp_>,
+  @ocaml.doc("<p>The status of the Identity Resolution Job.</p>
+         <ul>
+            <li>
+               <p>
+                  <code>PENDING</code>: The Identity Resolution Job is scheduled but has not started yet. If you turn
+               off the Identity Resolution feature in your domain, jobs in the <code>PENDING</code> state are
+               deleted.</p>
+            </li>
+            <li>
+               <p>
+                  <code>PREPROCESSING</code>: The Identity Resolution Job is loading your data.</p>
+            </li>
+            <li>
+               <p>
+                  <code>FIND_MATCHING</code>: The Identity Resolution Job is using the machine learning model to
+               identify profiles that belong to the same matching group.</p>
+            </li>
+            <li>
+               <p>
+                  <code>MERGING</code>: The Identity Resolution Job is merging duplicate profiles.</p>
+            </li>
+            <li>
+               <p>
+                  <code>COMPLETED</code>: The Identity Resolution Job completed successfully.</p>
+            </li>
+            <li>
+               <p>
+                  <code>PARTIAL_SUCCESS</code>: There's a system error and not all of the data is
+               merged. The Identity Resolution Job writes a message indicating the source of the problem.</p>
+            </li>
+            <li>
+               <p>
+                  <code>FAILED</code>: The Identity Resolution Job did not merge any data. It writes a message
+               indicating the source of the problem.</p>
+            </li>
+         </ul>")
+  @as("Status")
+  status: option<identityResolutionJobStatus>,
+  @ocaml.doc("<p>The unique identifier of the Identity Resolution Job.</p>") @as("JobId")
+  jobId: option<uuid>,
+  @ocaml.doc("<p>The unique name of the domain.</p>") @as("DomainName") domainName: option<name>,
+}
 type domainList = array<listDomainItem>
+@ocaml.doc("<p>The matching criteria to be used during the auto-merging process. </p>")
+type consolidation = {
+  @ocaml.doc("<p>A list of matching criteria.</p>") @as("MatchingAttributesList")
+  matchingAttributesList: matchingAttributesList,
+}
 type keyMap = Js.Dict.t<objectTypeKeyList>
+type identityResolutionJobsList = array<identityResolutionJob>
 @ocaml.doc("<p>The configurations that control how Customer Profiles retrieves data from the source,
          Amazon AppFlow. Customer Profiles uses this information to create an AppFlow flow on behalf of
          customers.</p>")
@@ -712,6 +1033,67 @@ type flowDefinition = {
   flowName: flowName,
   @ocaml.doc("<p>A description of the flow you want to create.</p>") @as("Description")
   description: option<flowDescription>,
+}
+@ocaml.doc("<p>Configuration settings for how to perform the auto-merging of profiles.</p>")
+type autoMerging = {
+  @ocaml.doc("<p>How the auto-merging process should resolve conflicts between different profiles. For
+         example, if Profile A and Profile B have the same <code>FirstName</code> and
+            <code>LastName</code> (and that is the matching criteria), which
+            <code>EmailAddress</code> should be used? </p>")
+  @as("ConflictResolution")
+  conflictResolution: option<conflictResolution>,
+  @ocaml.doc("<p>A list of matching attributes that represent matching criteria. If two profiles meet at
+         least one of the requirements in the matching attributes list, they will be merged.</p>")
+  @as("Consolidation")
+  consolidation: option<consolidation>,
+  @ocaml.doc("<p>The flag that enables the auto-merging of duplicate profiles.</p>") @as("Enabled")
+  enabled: optionalBoolean,
+}
+@ocaml.doc("<p>The flag that enables the matching process of duplicate profiles.</p>")
+type matchingResponse = {
+  @ocaml.doc("<p>Configuration information for exporting Identity Resolution results, for example, to an S3
+         bucket.</p>")
+  @as("ExportingConfig")
+  exportingConfig: option<exportingConfig>,
+  @ocaml.doc("<p>Configuration information about the auto-merging process.</p>") @as("AutoMerging")
+  autoMerging: option<autoMerging>,
+  @ocaml.doc(
+    "<p>The day and time when do you want to start the Identity Resolution Job every week.</p>"
+  )
+  @as("JobSchedule")
+  jobSchedule: option<jobSchedule>,
+  @ocaml.doc("<p>The flag that enables the matching process of duplicate profiles.</p>")
+  @as("Enabled")
+  enabled: option<optionalBoolean>,
+}
+@ocaml.doc("<p>The flag that enables the matching process of duplicate profiles.</p>")
+type matchingRequest = {
+  @ocaml.doc("<p>Configuration information for exporting Identity Resolution results, for example, to an S3
+         bucket.</p>")
+  @as("ExportingConfig")
+  exportingConfig: option<exportingConfig>,
+  @ocaml.doc("<p>Configuration information about the auto-merging process.</p>") @as("AutoMerging")
+  autoMerging: option<autoMerging>,
+  @ocaml.doc(
+    "<p>The day and time when do you want to start the Identity Resolution Job every week.</p>"
+  )
+  @as("JobSchedule")
+  jobSchedule: option<jobSchedule>,
+  @ocaml.doc("<p>The flag that enables the matching process of duplicate profiles.</p>")
+  @as("Enabled")
+  enabled: optionalBoolean,
+}
+@ocaml.doc("<p>Details for workflow of type <code>APPFLOW_INTEGRATION</code>.</p>")
+type appflowIntegration = {
+  @ocaml.doc("<p>Batches in workflow of type <code>APPFLOW_INTEGRATION</code>.</p>") @as("Batches")
+  batches: option<batches>,
+  @as("FlowDefinition") flowDefinition: flowDefinition,
+}
+@ocaml.doc("<p>Configuration data for integration workflow.</p>")
+type integrationConfig = {
+  @ocaml.doc("<p>Configuration data for <code>APPFLOW_INTEGRATION</code> workflow type.</p>")
+  @as("AppflowIntegration")
+  appflowIntegration: option<appflowIntegration>,
 }
 @ocaml.doc("<fullname>Amazon Connect Customer Profiles</fullname>
          <p>Welcome to the Amazon Connect Customer Profiles API Reference. This guide provides information
@@ -741,6 +1123,19 @@ module PutProfileObject = {
   let make = (~domainName, ~object_, ~objectTypeName, ()) =>
     new({domainName: domainName, object_: object_, objectTypeName: objectTypeName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module DeleteWorkflow = {
+  type t
+  type request = {
+    @ocaml.doc("<p>Unique identifier for the workflow.</p>") @as("WorkflowId")
+    workflowId: string1To255,
+    @ocaml.doc("<p>The unique name of the domain.</p>") @as("DomainName") domainName: name,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-profile") @new external new: request => t = "DeleteWorkflowCommand"
+  let make = (~workflowId, ~domainName, ()) => new({workflowId: workflowId, domainName: domainName})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteProfileObjectType = {
@@ -949,84 +1344,6 @@ module UpdateProfile = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
-module UpdateDomain = {
-  type t
-  type request = {
-    @ocaml.doc("<p>The tags used to organize, track, or control access for this resource.</p>")
-    @as("Tags")
-    tags: option<tagMap>,
-    @ocaml.doc(
-      "<p>The process of matching duplicate profiles. This process runs every Saturday at 12AM.</p>"
-    )
-    @as("Matching")
-    matching: option<matchingRequest>,
-    @ocaml.doc("<p>The URL of the SQS dead letter queue, which is used for reporting errors associated with
-         ingesting data from third party applications. If specified as an empty string, it will
-         clear any existing value. You must set up a policy on the DeadLetterQueue for the
-         SendMessage operation to enable Amazon Connect Customer Profiles to send messages to the
-         DeadLetterQueue.</p>")
-    @as("DeadLetterQueueUrl")
-    deadLetterQueueUrl: option<sqsQueueUrl>,
-    @ocaml.doc("<p>The default encryption key, which is an AWS managed key, is used when no specific type
-         of encryption key is specified. It is used to encrypt all data before it is placed in
-         permanent or semi-permanent storage. If specified as an empty string, it will clear any
-         existing value.</p>")
-    @as("DefaultEncryptionKey")
-    defaultEncryptionKey: option<encryptionKey>,
-    @ocaml.doc("<p>The default number of days until the data within the domain expires.</p>")
-    @as("DefaultExpirationDays")
-    defaultExpirationDays: option<expirationDaysInteger>,
-    @ocaml.doc("<p>The unique name of the domain.</p>") @as("DomainName") domainName: name,
-  }
-  type response = {
-    @ocaml.doc("<p>The tags used to organize, track, or control access for this resource.</p>")
-    @as("Tags")
-    tags: option<tagMap>,
-    @ocaml.doc("<p>The timestamp of when the domain was most recently edited.</p>")
-    @as("LastUpdatedAt")
-    lastUpdatedAt: timestamp_,
-    @ocaml.doc("<p>The timestamp of when the domain was created.</p>") @as("CreatedAt")
-    createdAt: timestamp_,
-    @ocaml.doc(
-      "<p>The process of matching duplicate profiles. This process runs every Saturday at 12AM.</p>"
-    )
-    @as("Matching")
-    matching: option<matchingResponse>,
-    @ocaml.doc("<p>The URL of the SQS dead letter queue, which is used for reporting errors associated with
-         ingesting data from third party applications.</p>")
-    @as("DeadLetterQueueUrl")
-    deadLetterQueueUrl: option<sqsQueueUrl>,
-    @ocaml.doc("<p>The default encryption key, which is an AWS managed key, is used when no specific type
-         of encryption key is specified. It is used to encrypt all data before it is placed in
-         permanent or semi-permanent storage.</p>")
-    @as("DefaultEncryptionKey")
-    defaultEncryptionKey: option<encryptionKey>,
-    @ocaml.doc("<p>The default number of days until the data within the domain expires.</p>")
-    @as("DefaultExpirationDays")
-    defaultExpirationDays: option<expirationDaysInteger>,
-    @ocaml.doc("<p>The unique name of the domain.</p>") @as("DomainName") domainName: name,
-  }
-  @module("@aws-sdk/client-profile") @new external new: request => t = "UpdateDomainCommand"
-  let make = (
-    ~domainName,
-    ~tags=?,
-    ~matching=?,
-    ~deadLetterQueueUrl=?,
-    ~defaultEncryptionKey=?,
-    ~defaultExpirationDays=?,
-    (),
-  ) =>
-    new({
-      tags: tags,
-      matching: matching,
-      deadLetterQueueUrl: deadLetterQueueUrl,
-      defaultEncryptionKey: defaultEncryptionKey,
-      defaultExpirationDays: defaultExpirationDays,
-      domainName: domainName,
-    })
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
 module UntagResource = {
   type t
   type request = {
@@ -1034,7 +1351,7 @@ module UntagResource = {
     @ocaml.doc("<p>The ARN of the resource from which you are removing tags.</p>")
     resourceArn: tagArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-profile") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1047,7 +1364,7 @@ module TagResource = {
     tags: tagMap,
     @ocaml.doc("<p>The ARN of the resource that you're adding tags to.</p>") resourceArn: tagArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-profile") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1076,6 +1393,13 @@ module GetIntegration = {
     @ocaml.doc("<p>The unique name of the domain.</p>") @as("DomainName") domainName: name,
   }
   type response = {
+    @ocaml.doc("<p>Unique identifier for the workflow.</p>") @as("WorkflowId")
+    workflowId: option<string1To255>,
+    @ocaml.doc("<p>A map in which each key is an event type from an external application such as Segment or Shopify, and each value is an <code>ObjectTypeName</code> (template) used to ingest the event.
+It supports the following event types: <code>SegmentIdentify</code>, <code>ShopifyCreateCustomers</code>, <code>ShopifyUpdateCustomers</code>, <code>ShopifyCreateDraftOrders</code>, 
+<code>ShopifyUpdateDraftOrders</code>, <code>ShopifyCreateOrders</code>, and <code>ShopifyUpdatedOrders</code>.</p>")
+    @as("ObjectTypeNames")
+    objectTypeNames: option<objectTypeNames>,
     @ocaml.doc("<p>The tags used to organize, track, or control access for this resource.</p>")
     @as("Tags")
     tags: option<tagMap>,
@@ -1085,53 +1409,13 @@ module GetIntegration = {
     @ocaml.doc("<p>The timestamp of when the domain was created.</p>") @as("CreatedAt")
     createdAt: timestamp_,
     @ocaml.doc("<p>The name of the profile object type.</p>") @as("ObjectTypeName")
-    objectTypeName: typeName,
+    objectTypeName: option<typeName>,
     @ocaml.doc("<p>The URI of the S3 bucket or any other type of data source.</p>") @as("Uri")
     uri: string1To255,
     @ocaml.doc("<p>The unique name of the domain.</p>") @as("DomainName") domainName: name,
   }
   @module("@aws-sdk/client-profile") @new external new: request => t = "GetIntegrationCommand"
   let make = (~uri, ~domainName, ()) => new({uri: uri, domainName: domainName})
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
-module GetDomain = {
-  type t
-  type request = {
-    @ocaml.doc("<p>The unique name of the domain.</p>") @as("DomainName") domainName: name,
-  }
-  type response = {
-    @ocaml.doc("<p>The tags used to organize, track, or control access for this resource.</p>")
-    @as("Tags")
-    tags: option<tagMap>,
-    @ocaml.doc("<p>The timestamp of when the domain was most recently edited.</p>")
-    @as("LastUpdatedAt")
-    lastUpdatedAt: timestamp_,
-    @ocaml.doc("<p>The timestamp of when the domain was created.</p>") @as("CreatedAt")
-    createdAt: timestamp_,
-    @ocaml.doc(
-      "<p>The process of matching duplicate profiles. This process runs every Saturday at 12AM.</p>"
-    )
-    @as("Matching")
-    matching: option<matchingResponse>,
-    @ocaml.doc("<p>Usage-specific statistics about the domain.</p>") @as("Stats")
-    stats: option<domainStats>,
-    @ocaml.doc("<p>The URL of the SQS dead letter queue, which is used for reporting errors associated with
-         ingesting data from third party applications.</p>")
-    @as("DeadLetterQueueUrl")
-    deadLetterQueueUrl: option<sqsQueueUrl>,
-    @ocaml.doc("<p>The default encryption key, which is an AWS managed key, is used when no specific type
-         of encryption key is specified. It is used to encrypt all data before it is placed in
-         permanent or semi-permanent storage.</p>")
-    @as("DefaultEncryptionKey")
-    defaultEncryptionKey: option<encryptionKey>,
-    @ocaml.doc("<p>The default number of days until the data within the domain expires.</p>")
-    @as("DefaultExpirationDays")
-    defaultExpirationDays: option<expirationDaysInteger>,
-    @ocaml.doc("<p>The unique name of the domain.</p>") @as("DomainName") domainName: name,
-  }
-  @module("@aws-sdk/client-profile") @new external new: request => t = "GetDomainCommand"
-  let make = (~domainName, ()) => new({domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1266,82 +1550,6 @@ module CreateProfile = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
-module CreateDomain = {
-  type t
-  type request = {
-    @ocaml.doc("<p>The tags used to organize, track, or control access for this resource.</p>")
-    @as("Tags")
-    tags: option<tagMap>,
-    @ocaml.doc(
-      "<p>The process of matching duplicate profiles. This process runs every Saturday at 12AM.</p>"
-    )
-    @as("Matching")
-    matching: option<matchingRequest>,
-    @ocaml.doc("<p>The URL of the SQS dead letter queue, which is used for reporting errors associated with
-         ingesting data from third party applications. You must set up a policy on the
-         DeadLetterQueue for the SendMessage operation to enable Amazon Connect Customer Profiles to send
-         messages to the DeadLetterQueue.</p>")
-    @as("DeadLetterQueueUrl")
-    deadLetterQueueUrl: option<sqsQueueUrl>,
-    @ocaml.doc("<p>The default encryption key, which is an AWS managed key, is used when no specific type
-         of encryption key is specified. It is used to encrypt all data before it is placed in
-         permanent or semi-permanent storage.</p>")
-    @as("DefaultEncryptionKey")
-    defaultEncryptionKey: option<encryptionKey>,
-    @ocaml.doc("<p>The default number of days until the data within the domain expires.</p>")
-    @as("DefaultExpirationDays")
-    defaultExpirationDays: expirationDaysInteger,
-    @ocaml.doc("<p>The unique name of the domain.</p>") @as("DomainName") domainName: name,
-  }
-  type response = {
-    @ocaml.doc("<p>The tags used to organize, track, or control access for this resource.</p>")
-    @as("Tags")
-    tags: option<tagMap>,
-    @ocaml.doc("<p>The timestamp of when the domain was most recently edited.</p>")
-    @as("LastUpdatedAt")
-    lastUpdatedAt: timestamp_,
-    @ocaml.doc("<p>The timestamp of when the domain was created.</p>") @as("CreatedAt")
-    createdAt: timestamp_,
-    @ocaml.doc(
-      "<p>The process of matching duplicate profiles. This process runs every Saturday at 12AM.</p>"
-    )
-    @as("Matching")
-    matching: option<matchingResponse>,
-    @ocaml.doc("<p>The URL of the SQS dead letter queue, which is used for reporting errors associated with
-         ingesting data from third party applications.</p>")
-    @as("DeadLetterQueueUrl")
-    deadLetterQueueUrl: option<sqsQueueUrl>,
-    @ocaml.doc("<p>The default encryption key, which is an AWS managed key, is used when no specific type
-         of encryption key is specified. It is used to encrypt all data before it is placed in
-         permanent or semi-permanent storage.</p>")
-    @as("DefaultEncryptionKey")
-    defaultEncryptionKey: option<encryptionKey>,
-    @ocaml.doc("<p>The default number of days until the data within the domain expires.</p>")
-    @as("DefaultExpirationDays")
-    defaultExpirationDays: expirationDaysInteger,
-    @ocaml.doc("<p>The unique name of the domain.</p>") @as("DomainName") domainName: name,
-  }
-  @module("@aws-sdk/client-profile") @new external new: request => t = "CreateDomainCommand"
-  let make = (
-    ~defaultExpirationDays,
-    ~domainName,
-    ~tags=?,
-    ~matching=?,
-    ~deadLetterQueueUrl=?,
-    ~defaultEncryptionKey=?,
-    (),
-  ) =>
-    new({
-      tags: tags,
-      matching: matching,
-      deadLetterQueueUrl: deadLetterQueueUrl,
-      defaultEncryptionKey: defaultEncryptionKey,
-      defaultExpirationDays: defaultExpirationDays,
-      domainName: domainName,
-    })
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
 module AddProfileKey = {
   type t
   type request = {
@@ -1366,9 +1574,9 @@ module AddProfileKey = {
 module MergeProfiles = {
   type t
   type request = {
-    @ocaml.doc("<p>The identifiers of the fields in the profile that has the information you want to apply to the
-         merge. For example, say you want to merge EmailAddress from Profile1 into MainProfile. This would be the 
-         identifier of the EmailAddress field in Profile1. </p>")
+    @ocaml.doc("<p>The identifiers of the fields in the profile that has the information you want to apply
+         to the merge. For example, say you want to merge EmailAddress from Profile1 into
+         MainProfile. This would be the identifier of the EmailAddress field in Profile1. </p>")
     @as("FieldSourceProfileIds")
     fieldSourceProfileIds: option<fieldSourceProfileIds>,
     @ocaml.doc("<p>The identifier of the profile to be merged into MainProfileId.</p>")
@@ -1393,9 +1601,63 @@ module MergeProfiles = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module ListWorkflows = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The maximum number of results to return per page.</p>") @as("MaxResults")
+    maxResults: option<maxSize100>,
+    @ocaml.doc("<p>The token for the next set of results. Use the value returned in the previous 
+response in the next request to retrieve the next set of results.</p>")
+    @as("NextToken")
+    nextToken: option<token>,
+    @ocaml.doc("<p>Retrieve workflows ended after timestamp.</p>") @as("QueryEndDate")
+    queryEndDate: option<timestamp_>,
+    @ocaml.doc("<p>Retrieve workflows started after timestamp.</p>") @as("QueryStartDate")
+    queryStartDate: option<timestamp_>,
+    @ocaml.doc("<p>Status of workflow execution.</p>") @as("Status") status: option<status>,
+    @ocaml.doc("<p>The type of workflow. The only supported value is APPFLOW_INTEGRATION.</p>")
+    @as("WorkflowType")
+    workflowType: option<workflowType>,
+    @ocaml.doc("<p>The unique name of the domain.</p>") @as("DomainName") domainName: name,
+  }
+  type response = {
+    @ocaml.doc(
+      "<p>If there are additional results, this is the token for the next set of results.</p>"
+    )
+    @as("NextToken")
+    nextToken: option<token>,
+    @ocaml.doc("<p>List containing workflow details.</p>") @as("Items") items: option<workflowList>,
+  }
+  @module("@aws-sdk/client-profile") @new external new: request => t = "ListWorkflowsCommand"
+  let make = (
+    ~domainName,
+    ~maxResults=?,
+    ~nextToken=?,
+    ~queryEndDate=?,
+    ~queryStartDate=?,
+    ~status=?,
+    ~workflowType=?,
+    (),
+  ) =>
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      queryEndDate: queryEndDate,
+      queryStartDate: queryStartDate,
+      status: status,
+      workflowType: workflowType,
+      domainName: domainName,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module ListProfileObjects = {
   type t
   type request = {
+    @ocaml.doc("<p>Applies a filter to the response to include profile objects with the specified index
+         values. This filter is only supported for ObjectTypeName _asset, _case and _order.</p>")
+    @as("ObjectFilter")
+    objectFilter: option<objectFilter>,
     @ocaml.doc("<p>The unique identifier of a customer profile.</p>") @as("ProfileId")
     profileId: uuid,
     @ocaml.doc("<p>The name of the profile object type.</p>") @as("ObjectTypeName")
@@ -1415,8 +1677,17 @@ module ListProfileObjects = {
     items: option<profileObjectList>,
   }
   @module("@aws-sdk/client-profile") @new external new: request => t = "ListProfileObjectsCommand"
-  let make = (~profileId, ~objectTypeName, ~domainName, ~maxResults=?, ~nextToken=?, ()) =>
+  let make = (
+    ~profileId,
+    ~objectTypeName,
+    ~domainName,
+    ~objectFilter=?,
+    ~maxResults=?,
+    ~nextToken=?,
+    (),
+  ) =>
     new({
+      objectFilter: objectFilter,
       profileId: profileId,
       objectTypeName: objectTypeName,
       domainName: domainName,
@@ -1449,13 +1720,47 @@ module ListProfileObjectTypeTemplates = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module GetWorkflow = {
+  type t
+  type request = {
+    @ocaml.doc("<p>Unique identifier for the workflow.</p>") @as("WorkflowId") workflowId: uuid,
+    @ocaml.doc("<p>The unique name of the domain.</p>") @as("DomainName") domainName: name,
+  }
+  type response = {
+    @ocaml.doc("<p>Workflow specific execution metrics.</p>") @as("Metrics")
+    metrics: option<workflowMetrics>,
+    @ocaml.doc("<p>Attributes provided for workflow execution.</p>") @as("Attributes")
+    attributes: option<workflowAttributes>,
+    @ocaml.doc("<p>The timestamp that represents when workflow execution last updated.</p>")
+    @as("LastUpdatedAt")
+    lastUpdatedAt: option<timestamp_>,
+    @ocaml.doc("<p>The timestamp that represents when workflow execution started.</p>")
+    @as("StartDate")
+    startDate: option<timestamp_>,
+    @ocaml.doc("<p>Workflow error messages during execution (if any).</p>") @as("ErrorDescription")
+    errorDescription: option<string1To255>,
+    @ocaml.doc("<p>Status of workflow execution.</p>") @as("Status") status: option<status>,
+    @ocaml.doc("<p>The type of workflow. The only supported value is APPFLOW_INTEGRATION.</p>")
+    @as("WorkflowType")
+    workflowType: option<workflowType>,
+    @ocaml.doc("<p>Unique identifier for the workflow.</p>") @as("WorkflowId")
+    workflowId: option<uuid>,
+  }
+  @module("@aws-sdk/client-profile") @new external new: request => t = "GetWorkflowCommand"
+  let make = (~workflowId, ~domainName, ()) => new({workflowId: workflowId, domainName: domainName})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module SearchProfiles = {
   type t
   type request = {
     @ocaml.doc("<p>A list of key values.</p>") @as("Values") values: requestValueList,
-    @ocaml.doc("<p>A searchable identifier of a customer profile. The predefined keys you can use to search include: _account, _profileId,
-         _fullName, _phone, _email, _ctrContactId, _marketoLeadId, _salesforceAccountId,
-         _salesforceContactId, _zendeskUserId, _zendeskExternalId, _serviceNowSystemId.</p>")
+    @ocaml.doc("<p>A searchable identifier of a customer profile. The predefined keys you can use
+         to search include: _account, _profileId, _assetId, _caseId, _orderId, _fullName, _phone,
+         _email, _ctrContactId, _marketoLeadId, _salesforceAccountId, _salesforceContactId,
+         _salesforceAssetId, _zendeskUserId, _zendeskExternalId, _zendeskTicketId,
+         _serviceNowSystemId, _serviceNowIncidentId, _segmentUserId, _shopifyCustomerId,
+         _shopifyOrderId.</p>")
     @as("KeyName")
     keyName: name,
     @ocaml.doc("<p>The unique name of the domain.</p>") @as("DomainName") domainName: name,
@@ -1509,6 +1814,11 @@ module ListProfileObjectTypes = {
 module ListIntegrations = {
   type t
   type request = {
+    @ocaml.doc(
+      "<p>Boolean to indicate if hidden integration should be returned. Defaults to <code>False</code>.</p>"
+    )
+    @as("IncludeHidden")
+    includeHidden: option<optionalBoolean>,
     @ocaml.doc("<p>The maximum number of objects returned per page.</p>") @as("MaxResults")
     maxResults: option<maxSize100>,
     @ocaml.doc("<p>The pagination token from the previous ListIntegrations API call.</p>")
@@ -1524,8 +1834,13 @@ module ListIntegrations = {
     items: option<integrationList>,
   }
   @module("@aws-sdk/client-profile") @new external new: request => t = "ListIntegrationsCommand"
-  let make = (~domainName, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, domainName: domainName})
+  let make = (~domainName, ~includeHidden=?, ~maxResults=?, ~nextToken=?, ()) =>
+    new({
+      includeHidden: includeHidden,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      domainName: domainName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1553,6 +1868,11 @@ module ListDomains = {
 module ListAccountIntegrations = {
   type t
   type request = {
+    @ocaml.doc(
+      "<p>Boolean to indicate if hidden integration should be returned. Defaults to <code>False</code>.</p>"
+    )
+    @as("IncludeHidden")
+    includeHidden: option<optionalBoolean>,
     @ocaml.doc("<p>The maximum number of objects returned per page.</p>") @as("MaxResults")
     maxResults: option<maxSize100>,
     @ocaml.doc("<p>The pagination token from the previous ListAccountIntegrations API call.</p>")
@@ -1570,8 +1890,45 @@ module ListAccountIntegrations = {
   }
   @module("@aws-sdk/client-profile") @new
   external new: request => t = "ListAccountIntegrationsCommand"
-  let make = (~uri, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, uri: uri})
+  let make = (~uri, ~includeHidden=?, ~maxResults=?, ~nextToken=?, ()) =>
+    new({includeHidden: includeHidden, maxResults: maxResults, nextToken: nextToken, uri: uri})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module GetWorkflowSteps = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The maximum number of results to return per page.</p>") @as("MaxResults")
+    maxResults: option<maxSize100>,
+    @ocaml.doc("<p>The token for the next set of results. Use the value returned in the previous 
+response in the next request to retrieve the next set of results.</p>")
+    @as("NextToken")
+    nextToken: option<token>,
+    @ocaml.doc("<p>Unique identifier for the workflow.</p>") @as("WorkflowId") workflowId: uuid,
+    @ocaml.doc("<p>The unique name of the domain.</p>") @as("DomainName") domainName: name,
+  }
+  type response = {
+    @ocaml.doc(
+      "<p>If there are additional results, this is the token for the next set of results.</p>"
+    )
+    @as("NextToken")
+    nextToken: option<token>,
+    @ocaml.doc("<p>List containing workflow step details.</p>") @as("Items")
+    items: option<workflowStepsList>,
+    @ocaml.doc("<p>The type of workflow. The only supported value is APPFLOW_INTEGRATION.</p>")
+    @as("WorkflowType")
+    workflowType: option<workflowType>,
+    @ocaml.doc("<p>Unique identifier for the workflow.</p>") @as("WorkflowId")
+    workflowId: option<uuid>,
+  }
+  @module("@aws-sdk/client-profile") @new external new: request => t = "GetWorkflowStepsCommand"
+  let make = (~workflowId, ~domainName, ~maxResults=?, ~nextToken=?, ()) =>
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      workflowId: workflowId,
+      domainName: domainName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1606,6 +1963,45 @@ response in the next request to retrieve the next set of results.</p>")
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module GetAutoMergingPreview = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>How the auto-merging process should resolve conflicts between different profiles.</p>"
+    )
+    @as("ConflictResolution")
+    conflictResolution: conflictResolution,
+    @ocaml.doc("<p>A list of matching attributes that represent matching criteria.</p>")
+    @as("Consolidation")
+    consolidation: consolidation,
+    @ocaml.doc("<p>The unique name of the domain.</p>") @as("DomainName") domainName: name,
+  }
+  type response = {
+    @ocaml.doc(
+      "<p>The number of profiles that would be merged if this wasn't a preview dry run.</p>"
+    )
+    @as("NumberOfProfilesWillBeMerged")
+    numberOfProfilesWillBeMerged: option<long>,
+    @ocaml.doc("<p>The number of profiles found in this preview dry run.</p>")
+    @as("NumberOfProfilesInSample")
+    numberOfProfilesInSample: option<long>,
+    @ocaml.doc("<p>The number of match groups in the domain that have been reviewed in this preview dry
+         run.</p>")
+    @as("NumberOfMatchesInSample")
+    numberOfMatchesInSample: option<long>,
+    @ocaml.doc("<p>The unique name of the domain.</p>") @as("DomainName") domainName: name,
+  }
+  @module("@aws-sdk/client-profile") @new
+  external new: request => t = "GetAutoMergingPreviewCommand"
+  let make = (~conflictResolution, ~consolidation, ~domainName, ()) =>
+    new({
+      conflictResolution: conflictResolution,
+      consolidation: consolidation,
+      domainName: domainName,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module PutProfileObjectType = {
   type t
   type request = {
@@ -1617,6 +2013,10 @@ module PutProfileObjectType = {
     keys: option<keyMap>,
     @ocaml.doc("<p>A map of the name and ObjectType field.</p>") @as("Fields")
     fields: option<fieldMap>,
+    @ocaml.doc("<p>The format of your <code>sourceLastUpdatedTimestamp</code> that was previously set up.
+      </p>")
+    @as("SourceLastUpdatedTimestampFormat")
+    sourceLastUpdatedTimestampFormat: option<string1To255>,
     @ocaml.doc("<p>Indicates whether a profile should be created when data is received if one doesn’t exist
          for an object of this type. The default is <code>FALSE</code>. If the AllowProfileCreation
          flag is set to <code>FALSE</code>, then the service tries to fetch a standard profile and
@@ -1653,6 +2053,11 @@ module PutProfileObjectType = {
     keys: option<keyMap>,
     @ocaml.doc("<p>A map of the name and ObjectType field.</p>") @as("Fields")
     fields: option<fieldMap>,
+    @ocaml.doc("<p>The format of your <code>sourceLastUpdatedTimestamp</code> that was previously set up in
+         fields that were parsed using <a href=\"https://docs.oracle.com/javase/10/docs/api/java/text/SimpleDateFormat.html\">SimpleDateFormat</a>. If you have <code>sourceLastUpdatedTimestamp</code> in your
+         field, you must set up <code>sourceLastUpdatedTimestampFormat</code>.</p>")
+    @as("SourceLastUpdatedTimestampFormat")
+    sourceLastUpdatedTimestampFormat: option<string1To255>,
     @ocaml.doc("<p>Indicates whether a profile should be created when data is received if one doesn’t exist
          for an object of this type. The default is <code>FALSE</code>. If the AllowProfileCreation
          flag is set to <code>FALSE</code>, then the service tries to fetch a standard profile and
@@ -1682,6 +2087,7 @@ module PutProfileObjectType = {
     ~tags=?,
     ~keys=?,
     ~fields=?,
+    ~sourceLastUpdatedTimestampFormat=?,
     ~allowProfileCreation=?,
     ~encryptionKey=?,
     ~expirationDays=?,
@@ -1692,6 +2098,7 @@ module PutProfileObjectType = {
       tags: tags,
       keys: keys,
       fields: fields,
+      sourceLastUpdatedTimestampFormat: sourceLastUpdatedTimestampFormat,
       allowProfileCreation: allowProfileCreation,
       encryptionKey: encryptionKey,
       expirationDays: expirationDays,
@@ -1706,6 +2113,11 @@ module PutProfileObjectType = {
 module PutIntegration = {
   type t
   type request = {
+    @ocaml.doc("<p>A map in which each key is an event type from an external application such as Segment or Shopify, and each value is an <code>ObjectTypeName</code> (template) used to ingest the event.
+It supports the following event types: <code>SegmentIdentify</code>, <code>ShopifyCreateCustomers</code>, <code>ShopifyUpdateCustomers</code>, <code>ShopifyCreateDraftOrders</code>, 
+<code>ShopifyUpdateDraftOrders</code>, <code>ShopifyCreateOrders</code>, and <code>ShopifyUpdatedOrders</code>.</p>")
+    @as("ObjectTypeNames")
+    objectTypeNames: option<objectTypeNames>,
     @ocaml.doc("<p>The configuration that controls how Customer Profiles retrieves data from the
          source.</p>")
     @as("FlowDefinition")
@@ -1714,12 +2126,19 @@ module PutIntegration = {
     @as("Tags")
     tags: option<tagMap>,
     @ocaml.doc("<p>The name of the profile object type.</p>") @as("ObjectTypeName")
-    objectTypeName: typeName,
+    objectTypeName: option<typeName>,
     @ocaml.doc("<p>The URI of the S3 bucket or any other type of data source.</p>") @as("Uri")
     uri: option<string1To255>,
     @ocaml.doc("<p>The unique name of the domain.</p>") @as("DomainName") domainName: name,
   }
   type response = {
+    @ocaml.doc("<p>Unique identifier for the workflow.</p>") @as("WorkflowId")
+    workflowId: option<string1To255>,
+    @ocaml.doc("<p>A map in which each key is an event type from an external application such as Segment or Shopify, and each value is an <code>ObjectTypeName</code> (template) used to ingest the event.
+It supports the following event types: <code>SegmentIdentify</code>, <code>ShopifyCreateCustomers</code>, <code>ShopifyUpdateCustomers</code>, <code>ShopifyCreateDraftOrders</code>, 
+<code>ShopifyUpdateDraftOrders</code>, <code>ShopifyCreateOrders</code>, and <code>ShopifyUpdatedOrders</code>.</p>")
+    @as("ObjectTypeNames")
+    objectTypeNames: option<objectTypeNames>,
     @ocaml.doc("<p>The tags used to organize, track, or control access for this resource.</p>")
     @as("Tags")
     tags: option<tagMap>,
@@ -1729,20 +2148,56 @@ module PutIntegration = {
     @ocaml.doc("<p>The timestamp of when the domain was created.</p>") @as("CreatedAt")
     createdAt: timestamp_,
     @ocaml.doc("<p>The name of the profile object type.</p>") @as("ObjectTypeName")
-    objectTypeName: typeName,
+    objectTypeName: option<typeName>,
     @ocaml.doc("<p>The URI of the S3 bucket or any other type of data source.</p>") @as("Uri")
     uri: string1To255,
     @ocaml.doc("<p>The unique name of the domain.</p>") @as("DomainName") domainName: name,
   }
   @module("@aws-sdk/client-profile") @new external new: request => t = "PutIntegrationCommand"
-  let make = (~objectTypeName, ~domainName, ~flowDefinition=?, ~tags=?, ~uri=?, ()) =>
+  let make = (
+    ~domainName,
+    ~objectTypeNames=?,
+    ~flowDefinition=?,
+    ~tags=?,
+    ~objectTypeName=?,
+    ~uri=?,
+    (),
+  ) =>
     new({
+      objectTypeNames: objectTypeNames,
       flowDefinition: flowDefinition,
       tags: tags,
       objectTypeName: objectTypeName,
       uri: uri,
       domainName: domainName,
     })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module ListIdentityResolutionJobs = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The maximum number of results to return per page.</p>") @as("MaxResults")
+    maxResults: option<maxSize100>,
+    @ocaml.doc("<p>The token for the next set of results. Use the value returned in the previous 
+response in the next request to retrieve the next set of results.</p>")
+    @as("NextToken")
+    nextToken: option<token>,
+    @ocaml.doc("<p>The unique name of the domain.</p>") @as("DomainName") domainName: name,
+  }
+  type response = {
+    @ocaml.doc(
+      "<p>If there are additional results, this is the token for the next set of results.</p>"
+    )
+    @as("NextToken")
+    nextToken: option<token>,
+    @ocaml.doc("<p>A list of Identity Resolution Jobs.</p>") @as("IdentityResolutionJobsList")
+    identityResolutionJobsList: option<identityResolutionJobsList>,
+  }
+  @module("@aws-sdk/client-profile") @new
+  external new: request => t = "ListIdentityResolutionJobsCommand"
+  let make = (~domainName, ~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken, domainName: domainName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1758,6 +2213,10 @@ module GetProfileObjectTypeTemplate = {
     keys: option<keyMap>,
     @ocaml.doc("<p>A map of the name and ObjectType field.</p>") @as("Fields")
     fields: option<fieldMap>,
+    @ocaml.doc("<p>The format of your <code>sourceLastUpdatedTimestamp</code> that was previously set
+         up.</p>")
+    @as("SourceLastUpdatedTimestampFormat")
+    sourceLastUpdatedTimestampFormat: option<string1To255>,
     @ocaml.doc("<p>Indicates whether a profile should be created when data is received if one doesn’t exist
          for an object of this type. The default is <code>FALSE</code>. If the AllowProfileCreation
          flag is set to <code>FALSE</code>, then the service tries to fetch a standard profile and
@@ -1799,6 +2258,10 @@ module GetProfileObjectType = {
     keys: option<keyMap>,
     @ocaml.doc("<p>A map of the name and ObjectType field.</p>") @as("Fields")
     fields: option<fieldMap>,
+    @ocaml.doc("<p>The format of your <code>sourceLastUpdatedTimestamp</code> that was previously set
+         up.</p>")
+    @as("SourceLastUpdatedTimestampFormat")
+    sourceLastUpdatedTimestampFormat: option<string1To255>,
     @ocaml.doc("<p>Indicates whether a profile should be created when data is received if one doesn’t exist
          for an object of this type. The default is <code>FALSE</code>. If the AllowProfileCreation
          flag is set to <code>FALSE</code>, then the service tries to fetch a standard profile and
@@ -1823,5 +2286,349 @@ module GetProfileObjectType = {
   @module("@aws-sdk/client-profile") @new external new: request => t = "GetProfileObjectTypeCommand"
   let make = (~objectTypeName, ~domainName, ()) =>
     new({objectTypeName: objectTypeName, domainName: domainName})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module GetIdentityResolutionJob = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The unique identifier of the Identity Resolution Job.</p>") @as("JobId")
+    jobId: uuid,
+    @ocaml.doc("<p>The unique name of the domain.</p>") @as("DomainName") domainName: name,
+  }
+  type response = {
+    @ocaml.doc("<p>Statistics about the Identity Resolution Job.</p>") @as("JobStats")
+    jobStats: option<jobStats>,
+    @ocaml.doc("<p>The S3 location where the Identity Resolution Job writes result files.</p>")
+    @as("ExportingLocation")
+    exportingLocation: option<exportingLocation>,
+    @ocaml.doc("<p>Configuration settings for how to perform the auto-merging of profiles.</p>")
+    @as("AutoMerging")
+    autoMerging: option<autoMerging>,
+    @ocaml.doc("<p>The timestamp of when the Identity Resolution Job will expire.</p>")
+    @as("JobExpirationTime")
+    jobExpirationTime: option<timestamp_>,
+    @ocaml.doc("<p>The timestamp of when the Identity Resolution Job was most recently edited.</p>")
+    @as("LastUpdatedAt")
+    lastUpdatedAt: option<timestamp_>,
+    @ocaml.doc("<p>The timestamp of when the Identity Resolution Job was completed.</p>")
+    @as("JobEndTime")
+    jobEndTime: option<timestamp_>,
+    @ocaml.doc(
+      "<p>The timestamp of when the Identity Resolution Job was started or will be started.</p>"
+    )
+    @as("JobStartTime")
+    jobStartTime: option<timestamp_>,
+    @ocaml.doc(
+      "<p>The error messages that are generated when the Identity Resolution Job runs.</p>"
+    )
+    @as("Message")
+    message: option<stringTo2048>,
+    @ocaml.doc("<p>The status of the Identity Resolution Job.</p>
+         <ul>
+            <li>
+               <p>
+                  <code>PENDING</code>: The Identity Resolution Job is scheduled but has not started yet. If you turn
+               off the Identity Resolution feature in your domain, jobs in the <code>PENDING</code> state are
+               deleted.</p>
+            </li>
+            <li>
+               <p>
+                  <code>PREPROCESSING</code>: The Identity Resolution Job is loading your data.</p>
+            </li>
+            <li>
+               <p>
+                  <code>FIND_MATCHING</code>: The Identity Resolution Job is using the machine learning model to
+               identify profiles that belong to the same matching group.</p>
+            </li>
+            <li>
+               <p>
+                  <code>MERGING</code>: The Identity Resolution Job is merging duplicate profiles.</p>
+            </li>
+            <li>
+               <p>
+                  <code>COMPLETED</code>: The Identity Resolution Job completed successfully.</p>
+            </li>
+            <li>
+               <p>
+                  <code>PARTIAL_SUCCESS</code>: There's a system error and not all of the data is
+               merged. The Identity Resolution Job writes a message indicating the source of the problem.</p>
+            </li>
+            <li>
+               <p>
+                  <code>FAILED</code>: The Identity Resolution Job did not merge any data. It writes a message
+               indicating the source of the problem.</p>
+            </li>
+         </ul>")
+    @as("Status")
+    status: option<identityResolutionJobStatus>,
+    @ocaml.doc("<p>The unique identifier of the Identity Resolution Job.</p>") @as("JobId")
+    jobId: option<uuid>,
+    @ocaml.doc("<p>The unique name of the domain.</p>") @as("DomainName") domainName: option<name>,
+  }
+  @module("@aws-sdk/client-profile") @new
+  external new: request => t = "GetIdentityResolutionJobCommand"
+  let make = (~jobId, ~domainName, ()) => new({jobId: jobId, domainName: domainName})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module UpdateDomain = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The tags used to organize, track, or control access for this resource.</p>")
+    @as("Tags")
+    tags: option<tagMap>,
+    @ocaml.doc("<p>The process of matching duplicate profiles. If <code>Matching</code> = <code>true</code>, Amazon Connect Customer Profiles starts a weekly
+batch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every 
+Saturday at 12AM UTC to detect duplicate profiles in your domains. </p>
+         <p>After the Identity Resolution Job completes, use the 
+<a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html\">GetMatches</a>
+API to return and review the results. Or, if you have configured <code>ExportingConfig</code> in the <code>MatchingRequest</code>, you can download the results from
+S3.</p>")
+    @as("Matching")
+    matching: option<matchingRequest>,
+    @ocaml.doc("<p>The URL of the SQS dead letter queue, which is used for reporting errors associated with
+         ingesting data from third party applications. If specified as an empty string, it will
+         clear any existing value. You must set up a policy on the DeadLetterQueue for the
+         SendMessage operation to enable Amazon Connect Customer Profiles to send messages to the
+         DeadLetterQueue.</p>")
+    @as("DeadLetterQueueUrl")
+    deadLetterQueueUrl: option<sqsQueueUrl>,
+    @ocaml.doc("<p>The default encryption key, which is an AWS managed key, is used when no specific type
+         of encryption key is specified. It is used to encrypt all data before it is placed in
+         permanent or semi-permanent storage. If specified as an empty string, it will clear any
+         existing value.</p>")
+    @as("DefaultEncryptionKey")
+    defaultEncryptionKey: option<encryptionKey>,
+    @ocaml.doc("<p>The default number of days until the data within the domain expires.</p>")
+    @as("DefaultExpirationDays")
+    defaultExpirationDays: option<expirationDaysInteger>,
+    @ocaml.doc("<p>The unique name of the domain.</p>") @as("DomainName") domainName: name,
+  }
+  type response = {
+    @ocaml.doc("<p>The tags used to organize, track, or control access for this resource.</p>")
+    @as("Tags")
+    tags: option<tagMap>,
+    @ocaml.doc("<p>The timestamp of when the domain was most recently edited.</p>")
+    @as("LastUpdatedAt")
+    lastUpdatedAt: timestamp_,
+    @ocaml.doc("<p>The timestamp of when the domain was created.</p>") @as("CreatedAt")
+    createdAt: timestamp_,
+    @ocaml.doc("<p>The process of matching duplicate profiles. If <code>Matching</code> = <code>true</code>, Amazon Connect Customer Profiles starts a weekly
+batch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every 
+Saturday at 12AM UTC to detect duplicate profiles in your domains. </p>
+         <p>After the Identity Resolution Job completes, use the 
+<a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html\">GetMatches</a>
+API to return and review the results. Or, if you have configured <code>ExportingConfig</code> in the <code>MatchingRequest</code>, you can download the results from
+S3.</p>")
+    @as("Matching")
+    matching: option<matchingResponse>,
+    @ocaml.doc("<p>The URL of the SQS dead letter queue, which is used for reporting errors associated with
+         ingesting data from third party applications.</p>")
+    @as("DeadLetterQueueUrl")
+    deadLetterQueueUrl: option<sqsQueueUrl>,
+    @ocaml.doc("<p>The default encryption key, which is an AWS managed key, is used when no specific type
+         of encryption key is specified. It is used to encrypt all data before it is placed in
+         permanent or semi-permanent storage.</p>")
+    @as("DefaultEncryptionKey")
+    defaultEncryptionKey: option<encryptionKey>,
+    @ocaml.doc("<p>The default number of days until the data within the domain expires.</p>")
+    @as("DefaultExpirationDays")
+    defaultExpirationDays: option<expirationDaysInteger>,
+    @ocaml.doc("<p>The unique name of the domain.</p>") @as("DomainName") domainName: name,
+  }
+  @module("@aws-sdk/client-profile") @new external new: request => t = "UpdateDomainCommand"
+  let make = (
+    ~domainName,
+    ~tags=?,
+    ~matching=?,
+    ~deadLetterQueueUrl=?,
+    ~defaultEncryptionKey=?,
+    ~defaultExpirationDays=?,
+    (),
+  ) =>
+    new({
+      tags: tags,
+      matching: matching,
+      deadLetterQueueUrl: deadLetterQueueUrl,
+      defaultEncryptionKey: defaultEncryptionKey,
+      defaultExpirationDays: defaultExpirationDays,
+      domainName: domainName,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module GetDomain = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The unique name of the domain.</p>") @as("DomainName") domainName: name,
+  }
+  type response = {
+    @ocaml.doc("<p>The tags used to organize, track, or control access for this resource.</p>")
+    @as("Tags")
+    tags: option<tagMap>,
+    @ocaml.doc("<p>The timestamp of when the domain was most recently edited.</p>")
+    @as("LastUpdatedAt")
+    lastUpdatedAt: timestamp_,
+    @ocaml.doc("<p>The timestamp of when the domain was created.</p>") @as("CreatedAt")
+    createdAt: timestamp_,
+    @ocaml.doc("<p>The process of matching duplicate profiles. If <code>Matching</code> = <code>true</code>, Amazon Connect Customer Profiles starts a weekly
+batch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every 
+Saturday at 12AM UTC to detect duplicate profiles in your domains. </p>
+         <p>After the Identity Resolution Job completes, use the 
+<a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html\">GetMatches</a>
+API to return and review the results. Or, if you have configured <code>ExportingConfig</code> in the <code>MatchingRequest</code>, you can download the results from
+S3.</p>")
+    @as("Matching")
+    matching: option<matchingResponse>,
+    @ocaml.doc("<p>Usage-specific statistics about the domain.</p>") @as("Stats")
+    stats: option<domainStats>,
+    @ocaml.doc("<p>The URL of the SQS dead letter queue, which is used for reporting errors associated with
+         ingesting data from third party applications.</p>")
+    @as("DeadLetterQueueUrl")
+    deadLetterQueueUrl: option<sqsQueueUrl>,
+    @ocaml.doc("<p>The default encryption key, which is an AWS managed key, is used when no specific type
+         of encryption key is specified. It is used to encrypt all data before it is placed in
+         permanent or semi-permanent storage.</p>")
+    @as("DefaultEncryptionKey")
+    defaultEncryptionKey: option<encryptionKey>,
+    @ocaml.doc("<p>The default number of days until the data within the domain expires.</p>")
+    @as("DefaultExpirationDays")
+    defaultExpirationDays: option<expirationDaysInteger>,
+    @ocaml.doc("<p>The unique name of the domain.</p>") @as("DomainName") domainName: name,
+  }
+  @module("@aws-sdk/client-profile") @new external new: request => t = "GetDomainCommand"
+  let make = (~domainName, ()) => new({domainName: domainName})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module CreateDomain = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The tags used to organize, track, or control access for this resource.</p>")
+    @as("Tags")
+    tags: option<tagMap>,
+    @ocaml.doc("<p>The process of matching duplicate profiles. If <code>Matching</code> = <code>true</code>, Amazon Connect Customer Profiles starts a weekly
+batch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every 
+Saturday at 12AM UTC to detect duplicate profiles in your domains. </p>
+         <p>After the Identity Resolution Job completes, use the 
+<a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html\">GetMatches</a>
+API to return and review the results. Or, if you have configured <code>ExportingConfig</code> in the <code>MatchingRequest</code>, you can download the results from
+S3.</p>")
+    @as("Matching")
+    matching: option<matchingRequest>,
+    @ocaml.doc("<p>The URL of the SQS dead letter queue, which is used for reporting errors associated with
+         ingesting data from third party applications. You must set up a policy on the
+         DeadLetterQueue for the SendMessage operation to enable Amazon Connect Customer Profiles to send
+         messages to the DeadLetterQueue.</p>")
+    @as("DeadLetterQueueUrl")
+    deadLetterQueueUrl: option<sqsQueueUrl>,
+    @ocaml.doc("<p>The default encryption key, which is an AWS managed key, is used when no specific type
+         of encryption key is specified. It is used to encrypt all data before it is placed in
+         permanent or semi-permanent storage.</p>")
+    @as("DefaultEncryptionKey")
+    defaultEncryptionKey: option<encryptionKey>,
+    @ocaml.doc("<p>The default number of days until the data within the domain expires.</p>")
+    @as("DefaultExpirationDays")
+    defaultExpirationDays: expirationDaysInteger,
+    @ocaml.doc("<p>The unique name of the domain.</p>") @as("DomainName") domainName: name,
+  }
+  type response = {
+    @ocaml.doc("<p>The tags used to organize, track, or control access for this resource.</p>")
+    @as("Tags")
+    tags: option<tagMap>,
+    @ocaml.doc("<p>The timestamp of when the domain was most recently edited.</p>")
+    @as("LastUpdatedAt")
+    lastUpdatedAt: timestamp_,
+    @ocaml.doc("<p>The timestamp of when the domain was created.</p>") @as("CreatedAt")
+    createdAt: timestamp_,
+    @ocaml.doc("<p>The process of matching duplicate profiles. If <code>Matching</code> = <code>true</code>, Amazon Connect Customer Profiles starts a weekly
+batch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every 
+Saturday at 12AM UTC to detect duplicate profiles in your domains. </p>
+         <p>After the Identity Resolution Job completes, use the 
+<a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html\">GetMatches</a>
+API to return and review the results. Or, if you have configured <code>ExportingConfig</code> in the <code>MatchingRequest</code>, you can download the results from
+S3.</p>")
+    @as("Matching")
+    matching: option<matchingResponse>,
+    @ocaml.doc("<p>The URL of the SQS dead letter queue, which is used for reporting errors associated with
+         ingesting data from third party applications.</p>")
+    @as("DeadLetterQueueUrl")
+    deadLetterQueueUrl: option<sqsQueueUrl>,
+    @ocaml.doc("<p>The default encryption key, which is an AWS managed key, is used when no specific type
+         of encryption key is specified. It is used to encrypt all data before it is placed in
+         permanent or semi-permanent storage.</p>")
+    @as("DefaultEncryptionKey")
+    defaultEncryptionKey: option<encryptionKey>,
+    @ocaml.doc("<p>The default number of days until the data within the domain expires.</p>")
+    @as("DefaultExpirationDays")
+    defaultExpirationDays: expirationDaysInteger,
+    @ocaml.doc("<p>The unique name of the domain.</p>") @as("DomainName") domainName: name,
+  }
+  @module("@aws-sdk/client-profile") @new external new: request => t = "CreateDomainCommand"
+  let make = (
+    ~defaultExpirationDays,
+    ~domainName,
+    ~tags=?,
+    ~matching=?,
+    ~deadLetterQueueUrl=?,
+    ~defaultEncryptionKey=?,
+    (),
+  ) =>
+    new({
+      tags: tags,
+      matching: matching,
+      deadLetterQueueUrl: deadLetterQueueUrl,
+      defaultEncryptionKey: defaultEncryptionKey,
+      defaultExpirationDays: defaultExpirationDays,
+      domainName: domainName,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module CreateIntegrationWorkflow = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The tags used to organize, track, or control access for this resource.</p>")
+    @as("Tags")
+    tags: option<tagMap>,
+    @ocaml.doc(
+      "<p>The Amazon Resource Name (ARN) of the IAM role. Customer Profiles assumes this role to create resources on your behalf as part of workflow execution.</p>"
+    )
+    @as("RoleArn")
+    roleArn: roleArn,
+    @ocaml.doc("<p>The name of the profile object type.</p>") @as("ObjectTypeName")
+    objectTypeName: typeName,
+    @ocaml.doc("<p>Configuration data for integration workflow.</p>") @as("IntegrationConfig")
+    integrationConfig: integrationConfig,
+    @ocaml.doc("<p>The type of workflow. The only supported value is APPFLOW_INTEGRATION.</p>")
+    @as("WorkflowType")
+    workflowType: workflowType,
+    @ocaml.doc("<p>The unique name of the domain.</p>") @as("DomainName") domainName: name,
+  }
+  type response = {
+    @ocaml.doc("<p>A message indicating create request was received.</p>") @as("Message")
+    message: string1To255,
+    @ocaml.doc("<p>Unique identifier for the workflow.</p>") @as("WorkflowId") workflowId: uuid,
+  }
+  @module("@aws-sdk/client-profile") @new
+  external new: request => t = "CreateIntegrationWorkflowCommand"
+  let make = (
+    ~roleArn,
+    ~objectTypeName,
+    ~integrationConfig,
+    ~workflowType,
+    ~domainName,
+    ~tags=?,
+    (),
+  ) =>
+    new({
+      tags: tags,
+      roleArn: roleArn,
+      objectTypeName: objectTypeName,
+      integrationConfig: integrationConfig,
+      workflowType: workflowType,
+      domainName: domainName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

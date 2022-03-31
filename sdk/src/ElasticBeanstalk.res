@@ -1601,7 +1601,7 @@ module SwapEnvironmentCNAMEs = {
     @as("SourceEnvironmentId")
     sourceEnvironmentId: option<environmentId>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticbeanstalk") @new
   external new: request => t = "SwapEnvironmentCNAMEsCommand"
   let make = (
@@ -1637,7 +1637,7 @@ module RestartAppServer = {
     @as("EnvironmentId")
     environmentId: option<environmentId>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticbeanstalk") @new
   external new: request => t = "RestartAppServerCommand"
   let make = (~environmentName=?, ~environmentId=?, ()) =>
@@ -1669,7 +1669,7 @@ module RequestEnvironmentInfo = {
     @as("EnvironmentId")
     environmentId: option<environmentId>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticbeanstalk") @new
   external new: request => t = "RequestEnvironmentInfoCommand"
   let make = (~infoType, ~environmentName=?, ~environmentId=?, ()) =>
@@ -1694,7 +1694,7 @@ module RebuildEnvironment = {
     @as("EnvironmentId")
     environmentId: option<environmentId>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticbeanstalk") @new
   external new: request => t = "RebuildEnvironmentCommand"
   let make = (~environmentName=?, ~environmentId=?, ()) =>
@@ -1710,7 +1710,7 @@ module DisassociateEnvironmentOperationsRole = {
     @as("EnvironmentName")
     environmentName: environmentName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticbeanstalk") @new
   external new: request => t = "DisassociateEnvironmentOperationsRoleCommand"
   let make = (~environmentName, ()) => new({environmentName: environmentName})
@@ -1728,7 +1728,7 @@ module DeleteEnvironmentConfiguration = {
     @as("ApplicationName")
     applicationName: applicationName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticbeanstalk") @new
   external new: request => t = "DeleteEnvironmentConfigurationCommand"
   let make = (~environmentName, ~applicationName, ()) =>
@@ -1746,7 +1746,7 @@ module DeleteConfigurationTemplate = {
     @as("ApplicationName")
     applicationName: applicationName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticbeanstalk") @new
   external new: request => t = "DeleteConfigurationTemplateCommand"
   let make = (~templateName, ~applicationName, ()) =>
@@ -1769,7 +1769,7 @@ module DeleteApplicationVersion = {
     @as("ApplicationName")
     applicationName: applicationName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticbeanstalk") @new
   external new: request => t = "DeleteApplicationVersionCommand"
   let make = (~versionLabel, ~applicationName, ~deleteSourceBundle=?, ()) =>
@@ -1792,7 +1792,7 @@ module DeleteApplication = {
     @ocaml.doc("<p>The name of the application to delete.</p>") @as("ApplicationName")
     applicationName: applicationName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticbeanstalk") @new
   external new: request => t = "DeleteApplicationCommand"
   let make = (~applicationName, ~terminateEnvByForce=?, ()) =>
@@ -1802,15 +1802,15 @@ module DeleteApplication = {
 
 module CreateStorageLocation = {
   type t
-
+  type request = {.}
   @ocaml.doc("<p>Results of a <a>CreateStorageLocationResult</a> call.</p>")
   type response = {
     @ocaml.doc("<p>The name of the Amazon S3 bucket created.</p>") @as("S3Bucket")
     s3Bucket: option<s3Bucket>,
   }
   @module("@aws-sdk/client-elasticbeanstalk") @new
-  external new: unit => t = "CreateStorageLocationCommand"
-  let make = () => new()
+  external new: request => t = "CreateStorageLocationCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1859,7 +1859,7 @@ module AssociateEnvironmentOperationsRole = {
     @as("EnvironmentName")
     environmentName: environmentName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticbeanstalk") @new
   external new: request => t = "AssociateEnvironmentOperationsRoleCommand"
   let make = (~operationsRole, ~environmentName, ()) =>
@@ -1908,7 +1908,7 @@ module AbortEnvironmentUpdate = {
     @as("EnvironmentId")
     environmentId: option<environmentId>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticbeanstalk") @new
   external new: request => t = "AbortEnvironmentUpdateCommand"
   let make = (~environmentName=?, ~environmentId=?, ()) =>
@@ -1971,7 +1971,7 @@ module UpdateTagsForResource = {
     @as("ResourceArn")
     resourceArn: resourceArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticbeanstalk") @new
   external new: request => t = "UpdateTagsForResourceCommand"
   let make = (~resourceArn, ~tagsToRemove=?, ~tagsToAdd=?, ()) =>
@@ -2333,7 +2333,7 @@ module DescribeEnvironmentHealth = {
 
 module DescribeAccountAttributes = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc(
       "<p>The Elastic Beanstalk resource quotas associated with the calling AWS account.</p>"
@@ -2342,8 +2342,8 @@ module DescribeAccountAttributes = {
     resourceQuotas: option<resourceQuotas>,
   }
   @module("@aws-sdk/client-elasticbeanstalk") @new
-  external new: unit => t = "DescribeAccountAttributesCommand"
-  let make = () => new()
+  external new: request => t = "DescribeAccountAttributesCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -2761,7 +2761,7 @@ module ListPlatformBranches = {
 
 module ListAvailableSolutionStacks = {
   type t
-
+  type request = {.}
   @ocaml.doc("<p>A list of available AWS Elastic Beanstalk solution stacks.</p>")
   type response = {
     @ocaml.doc(
@@ -2773,8 +2773,8 @@ module ListAvailableSolutionStacks = {
     solutionStacks: option<availableSolutionStackNamesList>,
   }
   @module("@aws-sdk/client-elasticbeanstalk") @new
-  external new: unit => t = "ListAvailableSolutionStacksCommand"
-  let make = () => new()
+  external new: request => t = "ListAvailableSolutionStacksCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

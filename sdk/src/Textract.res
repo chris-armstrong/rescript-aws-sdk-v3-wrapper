@@ -14,6 +14,7 @@ type baseBoolean = bool
 type baseInteger = int
 type baseTimestamp = Js.Date.t
 type baseLong = float
+type valueType = [@as("DATE") #DATE]
 type uinteger = int
 type textType = [@as("PRINTED") #PRINTED | @as("HANDWRITING") #HANDWRITING]
 type synthesizedJsonHumanLoopActivationConditionsEvaluationResults = string
@@ -26,6 +27,8 @@ type s3ObjectName = string
 type s3Bucket = string
 type roleArn = string
 type relationshipType = [
+  | @as("TITLE") #TITLE
+  | @as("MERGED_CELL") #MERGED_CELL
   | @as("COMPLEX_FEATURES") #COMPLEX_FEATURES
   | @as("CHILD") #CHILD
   | @as("VALUE") #VALUE
@@ -51,13 +54,15 @@ type flowDefinitionArn = string
 type float_ = float
 type featureType = [@as("FORMS") #FORMS | @as("TABLES") #TABLES]
 type errorCode = string
-type entityType = [@as("VALUE") #VALUE | @as("KEY") #KEY]
+type entityType = [@as("COLUMN_HEADER") #COLUMN_HEADER | @as("VALUE") #VALUE | @as("KEY") #KEY]
 type contentClassifier = [
   | @as("FreeOfAdultContent") #FreeOfAdultContent
   | @as("FreeOfPersonallyIdentifiableInformation") #FreeOfPersonallyIdentifiableInformation
 ]
 type clientRequestToken = string
 type blockType = [
+  | @as("TITLE") #TITLE
+  | @as("MERGED_CELL") #MERGED_CELL
   | @as("SELECTION_ELEMENT") #SELECTION_ELEMENT
   | @as("CELL") #CELL
   | @as("TABLE") #TABLE
@@ -79,10 +84,13 @@ type s3Object = {
   @as("Version")
   version: option<s3ObjectVersion>,
   @ocaml.doc("<p>The file name of the input document. Synchronous operations can use image files that are
-         in JPEG or PNG format. Asynchronous operations also support PDF format files.</p>")
+         in JPEG or PNG format. Asynchronous operations also support PDF and TIFF format files.</p>")
   @as("Name")
   name: option<s3ObjectName>,
-  @ocaml.doc("<p>The name of the S3 bucket.</p>") @as("Bucket") bucket: option<s3Bucket>,
+  @ocaml.doc("<p>The name of the S3 bucket. Note that the # character is not valid in the file
+         name.</p>")
+  @as("Bucket")
+  bucket: option<s3Bucket>,
 }
 @ocaml.doc("<p>The X and Y coordinates of a point on a document page. The X and Y
          values that are returned are ratios of the overall document page size. For example, if the
@@ -100,12 +108,25 @@ type point = {
   x: option<float_>,
 }
 type pages = array<uinteger>
-@ocaml.doc("<p>Sets whether or not your output will go to a user created bucket. 
-         Used to set the name of the bucket, and the prefix on the output 
-         file.</p>")
+@ocaml.doc("<p>Sets whether or not your output will go to a user created bucket. Used to set the name
+         of the bucket, and the prefix on the output file.</p>
+         <p>
+            <code>OutputConfig</code> is an optional parameter which lets you adjust where your output will be placed. 
+         By default, Amazon Textract will store the results internally and can only be accessed by the Get 
+         API operations. With OutputConfig enabled, you can set the name of the bucket the output will be 
+         sent to and the file prefix of the results where you can download your results. Additionally, you 
+         can set the <code>KMSKeyID</code> parameter to a customer master key (CMK) to encrypt your output. Without this
+         parameter set Amazon Textract will encrypt server-side using the AWS managed CMK for Amazon S3.</p>
+         <p>Decryption of Customer Content is necessary for processing of the documents by Amazon Textract. If your account 
+         is opted out under an AI services opt out policy then all unencrypted Customer Content is immediately and permanently deleted after 
+         the Customer Content has been processed by the service. No copy of of the output is retained by Amazon Textract. For information about how to opt out, see <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html\"> Managing AI services opt-out policy. </a>
+         </p>
+         <p>For more information on data privacy,
+         see the <a href=\"https://aws.amazon.com/compliance/data-privacy-faq/\">Data Privacy
+            FAQ</a>.</p>")
 type outputConfig = {
-  @ocaml.doc("<p>The prefix of the object key that the output will be saved to. When 
-         not enabled, the prefix will be “textract_output\".</p>")
+  @ocaml.doc("<p>The prefix of the object key that the output will be saved to. When not enabled, the
+         prefix will be “textract_output\".</p>")
   @as("S3Prefix")
   s3Prefix: option<s3ObjectName>,
   @ocaml.doc("<p>The name of the bucket your output will go to.</p>") @as("S3Bucket")
@@ -123,9 +144,26 @@ type notificationChannel = {
   @as("SNSTopicArn")
   snstopicArn: snstopicArn,
 }
+@ocaml.doc("<p>Contains information relating to dates in a document, including the type
+         of value, and the value.</p>")
+type normalizedValue = {
+  @ocaml.doc("<p>The normalized type of the value detected. In this case, DATE.</p>")
+  @as("ValueType")
+  valueType: option<valueType>,
+  @ocaml.doc("<p>The value of the date, written as Year-Month-DayTHour:Minute:Second.</p>")
+  @as("Value")
+  value: option<string_>,
+}
 type idList = array<nonEmptyString>
 type humanLoopActivationReasons = array<humanLoopActivationReason>
 type featureTypes = array<featureType>
+@ocaml.doc("<p>An object used to store information about the Type detected by Amazon Textract.</p>")
+type expenseType = {
+  @ocaml.doc("<p>The confidence of accuracy, as a percentage.</p>") @as("Confidence")
+  confidence: option<percent>,
+  @ocaml.doc("<p>The word or line of text detected by Amazon Textract.</p>") @as("Text")
+  text: option<string_>,
+}
 type entityTypes = array<entityType>
 @ocaml.doc("<p>Information about the input document.</p>")
 type documentMetadata = {
@@ -133,10 +171,10 @@ type documentMetadata = {
   pages: option<uinteger>,
 }
 type contentClassifiers = array<contentClassifier>
-@ocaml.doc("<p>The bounding box around the detected page, text, key-value pair, table, table cell, or selection element on a
-         document page. The <code>left</code> (x-coordinate) and <code>top</code> (y-coordinate) are
-         coordinates that represent the top and left sides of the bounding box. Note that the
-         upper-left corner of the image is the origin (0,0). </p>
+@ocaml.doc("<p>The bounding box around the detected page, text, key-value pair, table, table cell, or
+         selection element on a document page. The <code>left</code> (x-coordinate) and
+            <code>top</code> (y-coordinate) are coordinates that represent the top and left sides of
+         the bounding box. Note that the upper-left corner of the image is the origin (0,0). </p>
          <p>The <code>top</code> and <code>left</code> values returned are ratios of the overall
          document page size. For example, if the input image is 700 x 200 pixels, and the top-left
          coordinate of the bounding box is 350 x 50 pixels, the API returns a <code>left</code>
@@ -184,29 +222,28 @@ type relationship = {
   @as("Ids")
   ids: option<idList>,
   @ocaml.doc("<p>The type of relationship that the blocks in the IDs array have with the current block.
-         The relationship can be <code>VALUE</code> or <code>CHILD</code>. A relationship of type 
-         VALUE is a list that contains the ID of the VALUE block that's associated with the KEY of a key-value pair. 
-         A relationship of type CHILD is a list of IDs that identify WORD blocks in the case of lines
-         Cell blocks in the case of Tables, and WORD blocks in the case of Selection Elements.</p>")
+         The relationship can be <code>VALUE</code> or <code>CHILD</code>. A relationship of type
+         VALUE is a list that contains the ID of the VALUE block that's associated with the KEY of a
+         key-value pair. A relationship of type CHILD is a list of IDs that identify WORD blocks in
+         the case of lines Cell blocks in the case of Tables, and WORD blocks in the case of
+         Selection Elements.</p>")
   @as("Type")
   type_: option<relationshipType>,
 }
 type polygon = array<point>
-@ocaml.doc("<p>Allows you to set attributes of the image. Currently, you can declare an image as free of
-         personally identifiable information and adult content. </p>")
+@ocaml.doc("<p>Allows you to set attributes of the image. Currently, you can declare an image as free
+         of personally identifiable information and adult content. </p>")
 type humanLoopDataAttributes = {
-  @ocaml.doc(
-    "<p>Sets whether the input image is free of personally identifiable information or adult content.</p>"
-  )
+  @ocaml.doc("<p>Sets whether the input image is free of personally identifiable information or adult
+         content.</p>")
   @as("ContentClassifiers")
   contentClassifiers: option<contentClassifiers>,
 }
-@ocaml.doc("<p>Shows the results of the human in the loop evaluation. If there is no HumanLoopArn, the input 
-         did not trigger human review.</p>")
+@ocaml.doc("<p>Shows the results of the human in the loop evaluation. If there is no HumanLoopArn, the
+         input did not trigger human review.</p>")
 type humanLoopActivationOutput = {
-  @ocaml.doc(
-    "<p>Shows the result of condition evaluations, including those conditions which activated a human review.</p>"
-  )
+  @ocaml.doc("<p>Shows the result of condition evaluations, including those conditions which activated a
+         human review.</p>")
   @as("HumanLoopActivationConditionsEvaluationResults")
   humanLoopActivationConditionsEvaluationResults: option<
     synthesizedJsonHumanLoopActivationConditionsEvaluationResults,
@@ -253,19 +290,35 @@ type document = {
   @as("Bytes")
   bytes: option<imageBlob>,
 }
+@ocaml.doc("<p>Used to contain the information detected by an AnalyzeID operation.</p>")
+type analyzeIDDetections = {
+  @ocaml.doc("<p>The confidence score of the detected text.</p>") @as("Confidence")
+  confidence: option<percent>,
+  @ocaml.doc("<p>Only returned for dates, returns the type of value detected and the date
+         written in a more machine readable way.</p>")
+  @as("NormalizedValue")
+  normalizedValue: option<normalizedValue>,
+  @ocaml.doc("<p>Text of either the normalized field or value associated with it.</p>") @as("Text")
+  text: string_,
+}
 type warnings = array<warning>
 type relationshipList = array<relationship>
-@ocaml.doc("<p>Sets up the human review workflow the document will be sent to if one of the conditions is met. You can also set certain attributes 
-         of the image before review. </p>")
+@ocaml.doc("<p>Structure containing both the normalized type of the extracted information
+         and the text associated with it. These are extracted as Type and Value respectively.</p>")
+type identityDocumentField = {
+  @as("ValueDetection") valueDetection: option<analyzeIDDetections>,
+  @as("Type") type_: option<analyzeIDDetections>,
+}
+@ocaml.doc("<p>Sets up the human review workflow the document will be sent to if one of the conditions
+         is met. You can also set certain attributes of the image before review. </p>")
 type humanLoopConfig = {
   @ocaml.doc("<p>Sets attributes of the input data.</p>") @as("DataAttributes")
   dataAttributes: option<humanLoopDataAttributes>,
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the flow definition.</p>")
   @as("FlowDefinitionArn")
   flowDefinitionArn: flowDefinitionArn,
-  @ocaml.doc(
-    "<p>The name of the human workflow used for this image. This should be kept unique within a region.</p>"
-  )
+  @ocaml.doc("<p>The name of the human workflow used for this image. This should be kept unique within a
+         region.</p>")
   @as("HumanLoopName")
   humanLoopName: humanLoopName,
 }
@@ -279,6 +332,18 @@ type geometry = {
          document page.</p>")
   @as("BoundingBox")
   boundingBox: option<boundingBox>,
+}
+type documentPages = array<document>
+type identityDocumentFieldList = array<identityDocumentField>
+@ocaml.doc(
+  "<p>An object used to store information about the Value or Label detected by Amazon Textract.</p>"
+)
+type expenseDetection = {
+  @ocaml.doc("<p>The confidence in detection, as a percentage</p>") @as("Confidence")
+  confidence: option<percent>,
+  @as("Geometry") geometry: option<geometry>,
+  @ocaml.doc("<p>The word or line of text recognized by Amazon Textract</p>") @as("Text")
+  text: option<string_>,
 }
 @ocaml.doc("<p>A <code>Block</code> represents items that are recognized in a document within a group
          of pixels close to each other. The information returned in a <code>Block</code> object
@@ -295,15 +360,14 @@ type geometry = {
 type block = {
   @ocaml.doc("<p>The page on which a block was detected. <code>Page</code> is returned by asynchronous
          operations. Page values greater than 1 are only returned for multipage documents that are
-         in PDF format. A scanned image (JPEG/PNG), even if it contains multiple document pages, is
+         in PDF or TIFF format. A scanned image (JPEG/PNG), even if it contains multiple document pages, is
          considered to be a single-page document. The value of <code>Page</code> is always 1.
          Synchronous operations don't return <code>Page</code> because every input document is
          considered to be a single-page document.</p>")
   @as("Page")
   page: option<uinteger>,
-  @ocaml.doc(
-    "<p>The selection status of a selection element, such as an option button or check box. </p>"
-  )
+  @ocaml.doc("<p>The selection status of a selection element, such as an option button or check box.
+      </p>")
   @as("SelectionStatus")
   selectionStatus: option<selectionStatus>,
   @ocaml.doc("<p>The type of entity. The following can be returned:</p>
@@ -345,13 +409,13 @@ type block = {
          information. </p>")
   @as("Geometry")
   geometry: option<geometry>,
-  @ocaml.doc("<p>The number of columns that a table cell spans. Currently this value is always 1, even
-         if the number of columns spanned is greater than 1. <code>ColumnSpan</code> isn't returned by
+  @ocaml.doc("<p>The number of columns that a table cell spans. Currently this value is always 1, even if
+         the number of columns spanned is greater than 1. <code>ColumnSpan</code> isn't returned by
             <code>DetectDocumentText</code> and <code>GetDocumentTextDetection</code>. </p>")
   @as("ColumnSpan")
   columnSpan: option<uinteger>,
-  @ocaml.doc("<p>The number of rows that a table cell spans. Currently this value is always 1, even
-         if the number of rows spanned is greater than 1. <code>RowSpan</code> isn't returned by
+  @ocaml.doc("<p>The number of rows that a table cell spans. Currently this value is always 1, even if
+         the number of rows spanned is greater than 1. <code>RowSpan</code> isn't returned by
             <code>DetectDocumentText</code> and <code>GetDocumentTextDetection</code>.</p>")
   @as("RowSpan")
   rowSpan: option<uinteger>,
@@ -365,9 +429,8 @@ type block = {
             <code>GetDocumentTextDetection</code>.</p>")
   @as("RowIndex")
   rowIndex: option<uinteger>,
-  @ocaml.doc(
-    "<p>The kind of text that Amazon Textract has detected. Can check for handwritten text and printed text.</p>"
-  )
+  @ocaml.doc("<p>The kind of text that Amazon Textract has detected. Can check for handwritten text and
+         printed text.</p>")
   @as("TextType")
   textType: option<textType>,
   @ocaml.doc("<p>The word or line of text that's recognized by Amazon Textract. </p>") @as("Text")
@@ -441,10 +504,140 @@ type block = {
   @as("BlockType")
   blockType: option<blockType>,
 }
+@ocaml.doc("<p>The structure that lists each document processed in an AnalyzeID operation.</p>")
+type identityDocument = {
+  @ocaml.doc("<p>The structure used to record information extracted from identity documents.
+         Contains both normalized field and value of the extracted text.</p>")
+  @as("IdentityDocumentFields")
+  identityDocumentFields: option<identityDocumentFieldList>,
+  @ocaml.doc("<p>Denotes the placement of a document in the IdentityDocument list. The first document
+         is marked 1, the second 2 and so on.</p>")
+  @as("DocumentIndex")
+  documentIndex: option<uinteger>,
+}
+@ocaml.doc("<p>Breakdown of detected information, seperated into 
+         the catagories Type, LabelDetection, and ValueDetection</p>")
+type expenseField = {
+  @ocaml.doc("<p>The page number the value was detected on.</p>") @as("PageNumber")
+  pageNumber: option<uinteger>,
+  @ocaml.doc("<p>The value of a detected element. Present in explicit and implicit elements.</p>")
+  @as("ValueDetection")
+  valueDetection: option<expenseDetection>,
+  @ocaml.doc("<p>The explicitly stated label of a detected element.</p>") @as("LabelDetection")
+  labelDetection: option<expenseDetection>,
+  @ocaml.doc(
+    "<p>The implied label of a detected element. Present alongside LabelDetection for explicit elements.</p>"
+  )
+  @as("Type")
+  type_: option<expenseType>,
+}
 type blockList = array<block>
+type identityDocumentList = array<identityDocument>
+type expenseFieldList = array<expenseField>
+@ocaml.doc(
+  "<p>A structure that holds information about the different lines found in a document's tables.</p>"
+)
+type lineItemFields = {
+  @ocaml.doc("<p>ExpenseFields used to show information from detected lines on a table.</p>")
+  @as("LineItemExpenseFields")
+  lineItemExpenseFields: option<expenseFieldList>,
+}
+type lineItemList = array<lineItemFields>
+@ocaml.doc(
+  "<p>A grouping of tables which contain LineItems, with each table identified by the table's <code>LineItemGroupIndex</code>.</p>"
+)
+type lineItemGroup = {
+  @ocaml.doc("<p>The breakdown of information on a particular line of a table. </p>")
+  @as("LineItems")
+  lineItems: option<lineItemList>,
+  @ocaml.doc(
+    "<p>The number used to identify a specific table in a document. The first table encountered will have a LineItemGroupIndex of 1, the second 2, etc.</p>"
+  )
+  @as("LineItemGroupIndex")
+  lineItemGroupIndex: option<uinteger>,
+}
+type lineItemGroupList = array<lineItemGroup>
+@ocaml.doc("<p>The structure holding all the information returned by AnalyzeExpense</p>")
+type expenseDocument = {
+  @ocaml.doc(
+    "<p>Information detected on each table of a document, seperated into <code>LineItems</code>.</p>"
+  )
+  @as("LineItemGroups")
+  lineItemGroups: option<lineItemGroupList>,
+  @ocaml.doc("<p>Any information found outside of a table by Amazon Textract.</p>")
+  @as("SummaryFields")
+  summaryFields: option<expenseFieldList>,
+  @ocaml.doc("<p>Denotes which invoice or receipt in the document the information is coming from. 
+      First document will be 1, the second 2, and so on.</p>")
+  @as("ExpenseIndex")
+  expenseIndex: option<uinteger>,
+}
+type expenseDocumentList = array<expenseDocument>
 @ocaml.doc("<p>Amazon Textract detects and analyzes text in documents and converts it
          into machine-readable text. This is the API reference documentation for
          Amazon Textract.</p>")
+module StartExpenseAnalysis = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The KMS key used to encrypt the inference results. This can be 
+   in either Key ID or Key Alias format. When a KMS key is provided, the 
+   KMS key will be used for server-side encryption of the objects in the 
+   customer bucket. When this parameter is not enabled, the result will 
+   be encrypted server side,using SSE-S3.</p>")
+    @as("KMSKeyId")
+    kmskeyId: option<kmskeyId>,
+    @ocaml.doc("<p>Sets if the output will go to a customer defined bucket. By default, Amazon Textract will
+   save the results internally to be accessed by the <code>GetExpenseAnalysis</code>
+   operation.</p>")
+    @as("OutputConfig")
+    outputConfig: option<outputConfig>,
+    @ocaml.doc("<p>The Amazon SNS topic ARN that you want Amazon Textract to publish the completion status of the
+   operation to. </p>")
+    @as("NotificationChannel")
+    notificationChannel: option<notificationChannel>,
+    @ocaml.doc("<p>An identifier you specify that's included in the completion notification published
+   to the Amazon SNS topic. For example, you can use <code>JobTag</code> to identify the type of
+   document that the completion notification corresponds to (such as a tax form or a
+   receipt).</p>")
+    @as("JobTag")
+    jobTag: option<jobTag>,
+    @ocaml.doc("<p>The idempotent token that's used to identify the start request. If you use the same token with multiple <code>StartDocumentTextDetection</code> requests, the same <code>JobId</code> is returned. 
+   Use <code>ClientRequestToken</code> to prevent the same job from being accidentally started more than once. 
+   For more information, see <a href=\"https://docs.aws.amazon.com/textract/latest/dg/api-async.html\">Calling Amazon Textract Asynchronous Operations</a>
+         </p>")
+    @as("ClientRequestToken")
+    clientRequestToken: option<clientRequestToken>,
+    @ocaml.doc("<p>The location of the document to be processed.</p>") @as("DocumentLocation")
+    documentLocation: documentLocation,
+  }
+  type response = {
+    @ocaml.doc("<p>A unique identifier for the text detection job. The <code>JobId</code> is returned from
+    <code>StartExpenseAnalysis</code>. A <code>JobId</code> value is only valid for 7 days.</p>")
+    @as("JobId")
+    jobId: option<jobId>,
+  }
+  @module("@aws-sdk/client-textract") @new
+  external new: request => t = "StartExpenseAnalysisCommand"
+  let make = (
+    ~documentLocation,
+    ~kmskeyId=?,
+    ~outputConfig=?,
+    ~notificationChannel=?,
+    ~jobTag=?,
+    ~clientRequestToken=?,
+    (),
+  ) =>
+    new({
+      kmskeyId: kmskeyId,
+      outputConfig: outputConfig,
+      notificationChannel: notificationChannel,
+      jobTag: jobTag,
+      clientRequestToken: clientRequestToken,
+      documentLocation: documentLocation,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module StartDocumentTextDetection = {
   type t
   type request = {
@@ -745,5 +938,88 @@ module AnalyzeDocument = {
   @module("@aws-sdk/client-textract") @new external new: request => t = "AnalyzeDocumentCommand"
   let make = (~featureTypes, ~document, ~humanLoopConfig=?, ()) =>
     new({humanLoopConfig: humanLoopConfig, featureTypes: featureTypes, document: document})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module AnalyzeID = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The document being passed to AnalyzeID.</p>") @as("DocumentPages")
+    documentPages: documentPages,
+  }
+  type response = {
+    @ocaml.doc("<p>The version of the AnalyzeIdentity API being used to process documents.</p>")
+    @as("AnalyzeIDModelVersion")
+    analyzeIDModelVersion: option<string_>,
+    @as("DocumentMetadata") documentMetadata: option<documentMetadata>,
+    @ocaml.doc("<p>The list of documents processed by AnalyzeID. Includes a number denoting their
+         place in the list and the response structure for the document.</p>")
+    @as("IdentityDocuments")
+    identityDocuments: option<identityDocumentList>,
+  }
+  @module("@aws-sdk/client-textract") @new external new: request => t = "AnalyzeIDCommand"
+  let make = (~documentPages, ()) => new({documentPages: documentPages})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module GetExpenseAnalysis = {
+  type t
+  type request = {
+    @ocaml.doc("<p>If the previous response was incomplete (because there are more blocks to retrieve), Amazon Textract returns a pagination
+   token in the response. You can use this pagination token to retrieve the next set of blocks.</p>")
+    @as("NextToken")
+    nextToken: option<paginationToken>,
+    @ocaml.doc("<p>The maximum number of results to return per paginated call. The largest value you can
+   specify is 20. If you specify a value greater than 20, a maximum of 20 results is
+   returned. The default value is 20.</p>")
+    @as("MaxResults")
+    maxResults: option<maxResults>,
+    @ocaml.doc("<p>A unique identifier for the text detection job. The <code>JobId</code> is returned from
+    <code>StartExpenseAnalysis</code>. A <code>JobId</code> value is only valid for 7 days.</p>")
+    @as("JobId")
+    jobId: jobId,
+  }
+  type response = {
+    @ocaml.doc("<p>The current model version of AnalyzeExpense.</p>")
+    @as("AnalyzeExpenseModelVersion")
+    analyzeExpenseModelVersion: option<string_>,
+    @ocaml.doc(
+      "<p>Returns if the detection job could not be completed. Contains explanation for what error occured. </p>"
+    )
+    @as("StatusMessage")
+    statusMessage: option<statusMessage>,
+    @ocaml.doc("<p>A list of warnings that occurred during the text-detection operation for the
+   document.</p>")
+    @as("Warnings")
+    warnings: option<warnings>,
+    @ocaml.doc("<p>The expenses detected by Amazon Textract.</p>") @as("ExpenseDocuments")
+    expenseDocuments: option<expenseDocumentList>,
+    @ocaml.doc("<p>If the response is truncated, Amazon Textract returns this token. You can use this token in
+   the subsequent request to retrieve the next set of text-detection results.</p>")
+    @as("NextToken")
+    nextToken: option<paginationToken>,
+    @ocaml.doc("<p>The current status of the text detection job.</p>") @as("JobStatus")
+    jobStatus: option<jobStatus>,
+    @ocaml.doc("<p>Information about a document that Amazon Textract processed. <code>DocumentMetadata</code> is
+   returned in every page of paginated responses from an Amazon Textract operation.</p>")
+    @as("DocumentMetadata")
+    documentMetadata: option<documentMetadata>,
+  }
+  @module("@aws-sdk/client-textract") @new external new: request => t = "GetExpenseAnalysisCommand"
+  let make = (~jobId, ~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults, jobId: jobId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module AnalyzeExpense = {
+  type t
+  type request = {@as("Document") document: document}
+  type response = {
+    @ocaml.doc("<p>The expenses detected by Amazon Textract.</p>") @as("ExpenseDocuments")
+    expenseDocuments: option<expenseDocumentList>,
+    @as("DocumentMetadata") documentMetadata: option<documentMetadata>,
+  }
+  @module("@aws-sdk/client-textract") @new external new: request => t = "AnalyzeExpenseCommand"
+  let make = (~document, ()) => new({document: document})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

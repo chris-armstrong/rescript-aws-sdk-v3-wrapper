@@ -36,6 +36,7 @@ type synthesizedJsonInlineDataSchema = string
 type s3Prefix = string
 type s3Key = string
 type s3Bucket = string
+type offCondition = string
 type nextToken = string
 type nameOrArn = string
 type modelStatus = [
@@ -148,7 +149,7 @@ type inferenceSchedulerSummary = {
          example, it starts once every 5 minutes. </p>")
   @as("DataUploadFrequency")
   dataUploadFrequency: option<dataUploadFrequency>,
-  @ocaml.doc("<p>> A period of time (in minutes) by which inference on the data is delayed after the data
+  @ocaml.doc("<p>A period of time (in minutes) by which inference on the data is delayed after the data
          starts. For instance, if an offset delay time of five minutes was selected, inference will
          not begin on the data until the first data measurement after the five minute mark. For example, if 
          five minutes is selected, the inference scheduler will wake up at the configured frequency with the 
@@ -192,7 +193,7 @@ type inferenceS3InputConfiguration = {
   @ocaml.doc("<p>The bucket containing the input dataset for the inference. </p>") @as("Bucket")
   bucket: s3Bucket,
 }
-@ocaml.doc("<p>>> Specifies configuration information for the input data for the inference, including
+@ocaml.doc("<p>Specifies configuration information for the input data for the inference, including
          timestamp format and delimiter. </p>")
 type inferenceInputNameConfiguration = {
   @ocaml.doc("<p>Indicates the delimiter character used between items in the data. </p>")
@@ -277,10 +278,10 @@ type inferenceOutputConfiguration = {
   @as("S3OutputConfiguration")
   s3OutputConfiguration: inferenceS3OutputConfiguration,
 }
-@ocaml.doc("<p>> Specifies configuration information for the input data for the inference, including S3
+@ocaml.doc("<p>Specifies configuration information for the input data for the inference, including S3
          location of input data.. </p>")
 type inferenceInputConfiguration = {
-  @ocaml.doc("<p>> Specifies configuration information for the input data for the inference, including
+  @ocaml.doc("<p>Specifies configuration information for the input data for the inference, including
          timestamp format and delimiter. </p>")
   @as("InferenceInputNameConfiguration")
   inferenceInputNameConfiguration: option<inferenceInputNameConfiguration>,
@@ -432,7 +433,7 @@ module DeleteModel = {
     @ocaml.doc("<p>The name of the ML model to be deleted. </p>") @as("ModelName")
     modelName: modelName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-lookoutequipment") @new external new: request => t = "DeleteModelCommand"
   let make = (~modelName, ()) => new({modelName: modelName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -445,7 +446,7 @@ module DeleteInferenceScheduler = {
     @as("InferenceSchedulerName")
     inferenceSchedulerName: inferenceSchedulerIdentifier,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-lookoutequipment") @new
   external new: request => t = "DeleteInferenceSchedulerCommand"
   let make = (~inferenceSchedulerName, ()) => new({inferenceSchedulerName: inferenceSchedulerName})
@@ -458,7 +459,7 @@ module DeleteDataset = {
     @ocaml.doc("<p>The name of the dataset to be deleted. </p>") @as("DatasetName")
     datasetName: datasetIdentifier,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-lookoutequipment") @new
   external new: request => t = "DeleteDatasetCommand"
   let make = (~datasetName, ()) => new({datasetName: datasetName})
@@ -476,7 +477,7 @@ module UntagResource = {
     @as("ResourceArn")
     resourceArn: amazonResourceArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-lookoutequipment") @new
   external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
@@ -506,7 +507,7 @@ module UpdateInferenceScheduler = {
          example, it starts once every 5 minutes. </p>")
     @as("DataUploadFrequency")
     dataUploadFrequency: option<dataUploadFrequency>,
-    @ocaml.doc("<p>> A period of time (in minutes) by which inference on the data is delayed after the data
+    @ocaml.doc("<p> A period of time (in minutes) by which inference on the data is delayed after the data
          starts. For instance, if you select an offset delay time of five minutes, inference will
          not begin on the data until the first data measurement after the five minute mark. For example, if 
          five minutes is selected, the inference scheduler will wake up at the configured frequency with the 
@@ -518,7 +519,7 @@ module UpdateInferenceScheduler = {
     @as("InferenceSchedulerName")
     inferenceSchedulerName: inferenceSchedulerIdentifier,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-lookoutequipment") @new
   external new: request => t = "UpdateInferenceSchedulerCommand"
   let make = (
@@ -553,7 +554,7 @@ module TagResource = {
     @as("ResourceArn")
     resourceArn: amazonResourceArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-lookoutequipment") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -742,7 +743,12 @@ module DescribeModel = {
   }
   type response = {
     @ocaml.doc(
-      "<p>Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt model data by Amazon Lookout for Equipment. </p>"
+      "<p>Indicates that the asset associated with this sensor has been shut off. As long as this condition is met, Lookout for Equipment will not use data from this asset for training, evaluation, or inference.</p>"
+    )
+    @as("OffCondition")
+    offCondition: option<offCondition>,
+    @ocaml.doc(
+      "<p>Provides the identifier of the KMS key used to encrypt model data by Amazon Lookout for Equipment. </p>"
     )
     @as("ServerSideKmsKeyId")
     serverSideKmsKeyId: option<kmsKeyArn>,
@@ -840,7 +846,7 @@ module DescribeInferenceScheduler = {
   }
   type response = {
     @ocaml.doc(
-      "<p>Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt inference scheduler data by Amazon Lookout for Equipment. </p>"
+      "<p>Provides the identifier of the KMS key used to encrypt inference scheduler data by Amazon Lookout for Equipment. </p>"
     )
     @as("ServerSideKmsKeyId")
     serverSideKmsKeyId: option<kmsKeyArn>,
@@ -914,7 +920,7 @@ module DescribeDataset = {
     @as("IngestionInputConfiguration")
     ingestionInputConfiguration: option<ingestionInputConfiguration>,
     @ocaml.doc(
-      "<p>Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt dataset data by Amazon Lookout for Equipment. </p>"
+      "<p>Provides the identifier of the KMS key used to encrypt dataset data by Amazon Lookout for Equipment. </p>"
     )
     @as("ServerSideKmsKeyId")
     serverSideKmsKeyId: option<kmsKeyArn>,
@@ -982,10 +988,15 @@ module DescribeDataIngestionJob = {
 module CreateModel = {
   type t
   type request = {
+    @ocaml.doc(
+      "<p>Indicates that the asset associated with this sensor has been shut off. As long as this condition is met, Lookout for Equipment will not use data from this asset for training, evaluation, or inference.</p>"
+    )
+    @as("OffCondition")
+    offCondition: option<offCondition>,
     @ocaml.doc("<p> Any tags associated with the ML model being created. </p>") @as("Tags")
     tags: option<tagList_>,
     @ocaml.doc(
-      "<p>Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt model data by Amazon Lookout for Equipment. </p>"
+      "<p>Provides the identifier of the KMS key used to encrypt model data by Amazon Lookout for Equipment. </p>"
     )
     @as("ServerSideKmsKeyId")
     serverSideKmsKeyId: option<nameOrArn>,
@@ -1049,6 +1060,7 @@ module CreateModel = {
     ~clientToken,
     ~datasetName,
     ~modelName,
+    ~offCondition=?,
     ~tags=?,
     ~serverSideKmsKeyId=?,
     ~dataPreProcessingConfiguration=?,
@@ -1062,6 +1074,7 @@ module CreateModel = {
     (),
   ) =>
     new({
+      offCondition: offCondition,
       tags: tags,
       serverSideKmsKeyId: serverSideKmsKeyId,
       dataPreProcessingConfiguration: dataPreProcessingConfiguration,
@@ -1089,7 +1102,7 @@ module CreateInferenceScheduler = {
     @as("ClientToken")
     clientToken: idempotenceToken,
     @ocaml.doc(
-      "<p>Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt inference scheduler data by Amazon Lookout for Equipment. </p>"
+      "<p>Provides the identifier of the KMS key used to encrypt inference scheduler data by Amazon Lookout for Equipment. </p>"
     )
     @as("ServerSideKmsKeyId")
     serverSideKmsKeyId: option<nameOrArn>,
@@ -1112,7 +1125,7 @@ module CreateInferenceScheduler = {
          example, it starts once every 5 minutes. </p>")
     @as("DataUploadFrequency")
     dataUploadFrequency: dataUploadFrequency,
-    @ocaml.doc("<p> A period of time (in minutes) by which inference on the data is delayed after the data
+    @ocaml.doc("<p>A period of time (in minutes) by which inference on the data is delayed after the data
          starts. For instance, if you select an offset delay time of five minutes, inference will
          not begin on the data until the first data measurement after the five minute mark. For example, if 
          five minutes is selected, the inference scheduler will wake up at the configured frequency with the 
@@ -1182,7 +1195,7 @@ module CreateDataset = {
     @as("ClientToken")
     clientToken: idempotenceToken,
     @ocaml.doc(
-      "<p>Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt dataset data by Amazon Lookout for Equipment. </p>"
+      "<p>Provides the identifier of the KMS key used to encrypt dataset data by Amazon Lookout for Equipment. </p>"
     )
     @as("ServerSideKmsKeyId")
     serverSideKmsKeyId: option<nameOrArn>,

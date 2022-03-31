@@ -160,7 +160,7 @@ module PutReportDefinition = {
     @as("ReportDefinition")
     reportDefinition: reportDefinition,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-cur") @new external new: request => t = "PutReportDefinitionCommand"
   let make = (~reportDefinition, ()) => new({reportDefinition: reportDefinition})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -172,7 +172,7 @@ module ModifyReportDefinition = {
     @as("ReportDefinition") reportDefinition: reportDefinition,
     @as("ReportName") reportName: reportName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-cur") @new external new: request => t = "ModifyReportDefinitionCommand"
   let make = (~reportDefinition, ~reportName, ()) =>
     new({reportDefinition: reportDefinition, reportName: reportName})

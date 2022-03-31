@@ -58,10 +58,15 @@ type source = string
 type setting = string
 type rulesString = string
 type ruleVariableName = string
+type ruleOrder = [
+  | @as("STRICT_ORDER") #STRICT_ORDER
+  | @as("DEFAULT_ACTION_ORDER") #DEFAULT_ACTION_ORDER
+]
 type ruleGroupType = [@as("STATEFUL") #STATEFUL | @as("STATELESS") #STATELESS]
 type ruleCapacity = int
 type resourceStatus = [@as("DELETING") #DELETING | @as("ACTIVE") #ACTIVE]
 type resourceName = string
+type resourceManagedStatus = [@as("ACCOUNT") #ACCOUNT | @as("MANAGED") #MANAGED]
 type resourceId = string
 type resourceArn = string
 type protocolNumber = int
@@ -72,6 +77,8 @@ type policyString = string
 type perObjectSyncStatus = [@as("IN_SYNC") #IN_SYNC | @as("PENDING") #PENDING]
 type paginationToken = string
 type paginationMaxResults = int
+type overrideAction = [@as("DROP_TO_ALERT") #DROP_TO_ALERT]
+type numberOfAssociations = int
 type logType = [@as("FLOW") #FLOW | @as("ALERT") #ALERT]
 type logDestinationType = [
   | @as("KinesisDataFirehose") #KinesisDataFirehose
@@ -146,12 +153,40 @@ type statelessRuleGroupReference = {
   resourceArn: resourceArn,
 }
 type statelessActions = array<collectionMember_String>
-@ocaml.doc("<p>Identifier for a single stateful rule group, used in a firewall policy to refer to a
-         rule group. </p>")
-type statefulRuleGroupReference = {
-  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the stateful rule group.</p>") @as("ResourceArn")
-  resourceArn: resourceArn,
+@ocaml.doc(
+  "<p>Additional options governing how Network Firewall handles the rule group. You can only use these for stateful rule groups.</p>"
+)
+type statefulRuleOptions = {
+  @ocaml.doc("<p>Indicates how to manage the order of the rule evaluation for the rule group. <code>DEFAULT_ACTION_ORDER</code> is
+             the default behavior. Stateful rules are provided to the rule engine as Suricata compatible strings, and Suricata evaluates them
+             based on certain settings. For more information, see 
+         <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/suricata-rule-evaluation-order.html\">Evaluation order for stateful rules</a> in the <i>AWS Network Firewall Developer Guide</i>.
+      </p>")
+  @as("RuleOrder")
+  ruleOrder: option<ruleOrder>,
 }
+@ocaml.doc(
+  "<p>The setting that allows the policy owner to change the behavior of the rule group within a policy. </p>"
+)
+type statefulRuleGroupOverride = {
+  @ocaml.doc("<p>The action that changes the rule group from <code>DROP</code> to <code>ALERT</code>. This only applies to
+      managed rule groups.</p>")
+  @as("Action")
+  action: option<overrideAction>,
+}
+@ocaml.doc(
+  "<p>Configuration settings for the handling of the stateful rule groups in a firewall policy. </p>"
+)
+type statefulEngineOptions = {
+  @ocaml.doc("<p>Indicates how to manage the order of stateful rule evaluation for the policy. <code>DEFAULT_ACTION_ORDER</code> is
+         the default behavior. Stateful rules are provided to the rule engine as Suricata compatible strings, and Suricata evaluates them
+         based on certain settings. For more information, see 
+         <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/suricata-rule-evaluation-order.html\">Evaluation order for stateful rules</a> in the <i>AWS Network Firewall Developer Guide</i>.
+      </p>")
+  @as("RuleOrder")
+  ruleOrder: option<ruleOrder>,
+}
+type statefulActions = array<collectionMember_String>
 type settings = array<setting>
 type ruleTargets = array<collectionMember_String>
 @ocaml.doc("<p>High-level information about a rule group, returned by <a>ListRuleGroups</a>.
@@ -197,13 +232,13 @@ type perObjectStatus = {
   syncStatus: option<perObjectSyncStatus>,
 }
 type logDestinationMap = Js.Dict.t<hashMapValue>
-@ocaml.doc("<p>The 5-tuple criteria for AWS Network Firewall to use to inspect packet headers in stateful
+@ocaml.doc("<p>The basic rule criteria for AWS Network Firewall to use to inspect packet headers in stateful
          traffic flow inspection. Traffic flows that match the criteria are a match for the
          corresponding <a>StatefulRule</a>. </p>")
 type header = {
   @ocaml.doc("<p>The destination port to inspect for. You can specify an individual port, for 
            example <code>1994</code> and you can specify
-         a port range, for example <code>1990-1994</code>.
+         a port range, for example <code>1990:1994</code>.
           To match with any port, specify <code>ANY</code>. </p>")
   @as("DestinationPort")
   destinationPort: port,
@@ -231,7 +266,7 @@ type header = {
   direction: statefulRuleDirection,
   @ocaml.doc("<p>The source port to inspect for. You can specify an individual port, for 
            example <code>1994</code> and you can specify a port
-               range, for example <code>1990-1994</code>.
+               range, for example <code>1990:1994</code>.
           To match with any port, specify <code>ANY</code>. </p>")
   @as("SourcePort")
   sourcePort: port,
@@ -360,22 +395,41 @@ type tcpflagField = {
 type syncStateConfig = Js.Dict.t<perObjectStatus>
 type subnetMappings = array<subnetMapping>
 type statelessRuleGroupReferences = array<statelessRuleGroupReference>
-type statefulRuleGroupReferences = array<statefulRuleGroupReference>
+@ocaml.doc("<p>Identifier for a single stateful rule group, used in a firewall policy to refer to a
+         rule group. </p>")
+type statefulRuleGroupReference = {
+  @ocaml.doc(
+    "<p>The action that allows the policy owner to override the behavior of the rule group within a policy.</p>"
+  )
+  @as("Override")
+  override: option<statefulRuleGroupOverride>,
+  @ocaml.doc("<p>An integer setting that indicates the order in which to run the stateful rule groups in
+      a single <a>FirewallPolicy</a>. This setting only applies to firewall policies
+      that specify the <code>STRICT_ORDER</code> rule order in the stateful engine options settings.</p>
+         <p>Network Firewall evalutes each stateful rule group
+         against a packet starting with the group that has the lowest priority setting. You must ensure
+         that the priority settings are unique within each policy.</p>
+         <p>You can change the priority settings of your rule groups at any time. To make it easier to
+         insert rule groups later, number them so there's a wide range in between, for example use 100,
+         200, and so on. </p>")
+  @as("Priority")
+  priority: option<priority>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the stateful rule group.</p>") @as("ResourceArn")
+  resourceArn: resourceArn,
+}
 @ocaml.doc("<p>Stateful inspection criteria for a domain list rule group. </p>
          <p>For HTTPS traffic, domain filtering is SNI-based. It uses the server name indicator extension of the TLS handshake.</p>
-         <p>By default, Network Firewall domain list inspection only includes traffic coming from the VPC where you deploy the firewall. To inspect traffic from IP addresses outside of the deployment VPC, you set the <code>HOME_NET</code> rule variable to include the CIDR range of the deployment VPC plus the other CIDR ranges. For more information, see <a>RuleVariables</a> in this guide and <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/stateful-rule-groups-domain-names.html\">Stateful domain list rule groups in AWS Network Firewall</a> in the <i>Network Firewall Developer Guide</i>
-         </p>")
+         <p>By default, Network Firewall domain list inspection only includes traffic coming from the VPC where you deploy the firewall. To inspect traffic from IP addresses outside of the deployment VPC, you set the <code>HOME_NET</code> rule variable to include the CIDR range of the deployment VPC plus the other CIDR ranges. For more information, see <a>RuleVariables</a> in this guide and <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/stateful-rule-groups-domain-names.html\">Stateful domain list rule groups in AWS Network Firewall</a> in the <i>Network Firewall Developer Guide</i>.</p>")
 type rulesSourceList = {
   @ocaml.doc("<p>Whether you want to allow or deny access to the domains in your target list.</p>")
   @as("GeneratedRulesType")
   generatedRulesType: generatedRulesType,
   @ocaml.doc(
-    "<p>The protocols you want to inspect. Specify <code>TLS_SNI</code> for <code>HTTPS</code>. Specity <code>HTTP_HOST</code> for <code>HTTP</code>. You can specify either or both. </p>"
+    "<p>The protocols you want to inspect. Specify <code>TLS_SNI</code> for <code>HTTPS</code>. Specify <code>HTTP_HOST</code> for <code>HTTP</code>. You can specify either or both. </p>"
   )
   @as("TargetTypes")
   targetTypes: targetTypes,
-  @ocaml.doc("<p>The domains that you want to inspect for in your traffic flows. To provide multiple
-         domains, separate them with commas. Valid domain specifications are the following:</p>
+  @ocaml.doc("<p>The domains that you want to inspect for in your traffic flows. Valid domain specifications are the following:</p>
          <ul>
             <li>
                <p>Explicit names. For example, <code>abc.example.com</code> matches only the domain <code>abc.example.com</code>.</p>
@@ -496,11 +550,18 @@ type syncState = {
   @as("Attachment")
   attachment: option<attachment>,
 }
+type statefulRuleGroupReferences = array<statefulRuleGroupReference>
 type ruleOptions = array<ruleOption>
 @ocaml.doc(
   "<p>The high-level properties of a rule group. This, along with the <a>RuleGroup</a>, define the rule group. You can retrieve all objects for a rule group by calling <a>DescribeRuleGroup</a>. </p>"
 )
 type ruleGroupResponse = {
+  @ocaml.doc("<p>The number of firewall policies that use this rule group.</p>")
+  @as("NumberOfAssociations")
+  numberOfAssociations: option<numberOfAssociations>,
+  @ocaml.doc("<p>The number of capacity units currently consumed by the rule group rules. </p>")
+  @as("ConsumedCapacity")
+  consumedCapacity: option<ruleCapacity>,
   @ocaml.doc("<p>The key:value pairs to associate with the resource.</p>") @as("Tags")
   tags: option<tagList_>,
   @ocaml.doc("<p>Detailed information about the current status of a rule group. </p>")
@@ -545,6 +606,19 @@ type ipsets = Js.Dict.t<ipset>
   "<p>The high-level properties of a firewall policy. This, along with the <a>FirewallPolicy</a>, define the policy. You can retrieve all objects for a firewall policy by calling <a>DescribeFirewallPolicy</a>. </p>"
 )
 type firewallPolicyResponse = {
+  @ocaml.doc("<p>The number of firewalls that are associated with this firewall policy.</p>")
+  @as("NumberOfAssociations")
+  numberOfAssociations: option<numberOfAssociations>,
+  @ocaml.doc(
+    "<p>The number of capacity units currently consumed by the policy's stateful rules.</p>"
+  )
+  @as("ConsumedStatefulRuleCapacity")
+  consumedStatefulRuleCapacity: option<ruleCapacity>,
+  @ocaml.doc(
+    "<p>The number of capacity units currently consumed by the policy's stateless rules.</p>"
+  )
+  @as("ConsumedStatelessRuleCapacity")
+  consumedStatelessRuleCapacity: option<ruleCapacity>,
   @ocaml.doc("<p>The key:value pairs to associate with the resource.</p>") @as("Tags")
   tags: option<tagList_>,
   @ocaml.doc("<p>The current status of the firewall policy. You can retrieve this for a firewall policy
@@ -616,10 +690,17 @@ type firewall = {
   firewallName: option<resourceName>,
 }
 type syncStates = Js.Dict.t<syncState>
-@ocaml.doc("<p>A single 5-tuple stateful rule, for use in a stateful rule group.</p>")
+@ocaml.doc("<p>A single Suricata rules specification, for use in a stateful rule group.  
+       Use this option to specify a simple Suricata rule with protocol, source and destination, ports, direction, and rule options. 
+       For information about the Suricata <code>Rules</code> format, see
+                                        <a href=\"https://suricata.readthedocs.io/en/suricata-5.0.0/rules/intro.html#\">Rules Format</a>. </p>")
 type statefulRule = {
-  @ocaml.doc("<p></p>") @as("RuleOptions") ruleOptions: ruleOptions,
-  @ocaml.doc("<p>The stateful 5-tuple inspection criteria for this rule, used to inspect traffic flows.
+  @ocaml.doc(
+    "<p>Additional options for the rule. These are the Suricata <code>RuleOptions</code> settings.</p>"
+  )
+  @as("RuleOptions")
+  ruleOptions: ruleOptions,
+  @ocaml.doc("<p>The stateful inspection criteria for this rule, used to inspect traffic flows.
       </p>")
   @as("Header")
   header: header,
@@ -674,13 +755,13 @@ type matchAttributes = {
   @ocaml.doc("<p>The destination ports to inspect for. If not specified, this matches with any
          destination port. This setting is only used for protocols 6 (TCP) and 17 (UDP). </p>
          <p>You can specify individual ports, for example <code>1994</code> and you can specify port
-         ranges, for example <code>1990-1994</code>. </p>")
+         ranges, for example <code>1990:1994</code>. </p>")
   @as("DestinationPorts")
   destinationPorts: option<portRanges>,
   @ocaml.doc("<p>The source ports to inspect for. If not specified, this matches with any source port.
          This setting is only used for protocols 6 (TCP) and 17 (UDP). </p>
          <p>You can specify individual ports, for example <code>1994</code> and you can specify port
-         ranges, for example <code>1990-1994</code>. </p>")
+         ranges, for example <code>1990:1994</code>. </p>")
   @as("SourcePorts")
   sourcePorts: option<portRanges>,
   @ocaml.doc("<p>The destination IP addresses and address ranges to inspect for, in CIDR notation. If not
@@ -826,7 +907,7 @@ type customAction = {
 }
 @ocaml.doc("<p>A single stateless rule. This is used in <a>StatelessRulesAndCustomActions</a>.</p>")
 type statelessRule = {
-  @ocaml.doc("<p>A setting that indicates the order in which to run this rule relative to all of the
+  @ocaml.doc("<p>Indicates the order in which to run this rule relative to all of the
          rules that are defined for a stateless rule group. Network Firewall evaluates the rules in a
          rule group starting with the lowest priority setting. You must ensure that the priority
          settings are unique for the rule group. </p>
@@ -853,7 +934,33 @@ type statelessRules = array<statelessRule>
          <p>This, along with <a>FirewallPolicyResponse</a>, define the policy.
          You can retrieve all objects for a firewall policy by calling <a>DescribeFirewallPolicy</a>.</p>")
 type firewallPolicy = {
-  @ocaml.doc("<p>References to the stateless rule groups that are used in the policy. These define the
+  @ocaml.doc("<p>Additional options governing how Network Firewall handles stateful rules. The stateful 
+       rule groups that you use in your policy must have stateful rule options settings that are compatible with these settings.</p>")
+  @as("StatefulEngineOptions")
+  statefulEngineOptions: option<statefulEngineOptions>,
+  @ocaml.doc("<p>The default actions to take on a packet that doesn't match any stateful rules. The stateful default action is optional, 
+         and is only valid when using the strict rule order.</p>
+         <p>Valid values of the stateful default action:</p>
+         <ul>
+            <li>
+               <p>aws:drop_strict</p>
+            </li>
+            <li>
+               <p>aws:drop_established</p>
+            </li>
+            <li>
+               <p>aws:alert_strict</p>
+            </li>
+            <li>
+               <p>aws:alert_established</p>
+            </li>
+         </ul>
+         <p>For more information, see 
+         <a href=\"https://docs.aws.amazon.com/network-firewall/latest/developerguide/suricata-strict-rule-evaluation-order.html\">Strict evaluation order</a> in the <i>AWS Network Firewall Developer Guide</i>.
+      </p>")
+  @as("StatefulDefaultActions")
+  statefulDefaultActions: option<statefulActions>,
+  @ocaml.doc("<p>References to the stateful rule groups that are used in the policy. These define the
          inspection criteria in stateful rules. </p>")
   @as("StatefulRuleGroupReferences")
   statefulRuleGroupReferences: option<statefulRuleGroupReferences>,
@@ -911,8 +1018,10 @@ type rulesSource = {
   @ocaml.doc("<p>Stateless inspection criteria to be used in a stateless rule group. </p>")
   @as("StatelessRulesAndCustomActions")
   statelessRulesAndCustomActions: option<statelessRulesAndCustomActions>,
-  @ocaml.doc("<p>The 5-tuple stateful inspection criteria. This contains an array of individual 5-tuple
-         stateful rules to be used together in a stateful rule group. </p>")
+  @ocaml.doc("<p>An array of individual stateful rules inspection criteria to be used together in a stateful rule group. 
+       Use this option to specify simple Suricata rules with protocol, source and destination, ports, direction, and rule options. 
+       For information about the Suricata <code>Rules</code> format, see
+                                        <a href=\"https://suricata.readthedocs.io/en/suricata-5.0.0/rules/intro.html#\">Rules Format</a>. </p>")
   @as("StatefulRules")
   statefulRules: option<statefulRules>,
   @ocaml.doc("<p>Stateful inspection criteria for a domain list rule group. </p>")
@@ -934,6 +1043,10 @@ type rulesSource = {
          <p>To use a rule group, you include it by reference in an Network Firewall firewall policy, then you use the policy in a firewall. You can reference a rule group from 
     more than one firewall policy, and you can use a firewall policy in more than one firewall. </p>")
 type ruleGroup = {
+  @ocaml.doc("<p>Additional options governing how Network Firewall handles stateful rules. The policies where you use your stateful 
+       rule group must have stateful rule options settings that are compatible with these settings.</p>")
+  @as("StatefulRuleOptions")
+  statefulRuleOptions: option<statefulRuleOptions>,
   @ocaml.doc("<p>The stateful rules or stateless rules for the rule group. </p>") @as("RulesSource")
   rulesSource: rulesSource,
   @ocaml.doc("<p>Settings that are available for use in the rules in the rule group. You can only use
@@ -967,7 +1080,8 @@ type ruleGroup = {
          prevention service for Amazon Virtual Private Cloud (Amazon VPC). With Network Firewall, you can filter traffic at the
          perimeter of your VPC. This includes filtering traffic going to and coming from an internet
          gateway, NAT gateway, or over VPN or AWS Direct Connect. Network Firewall uses rules that are compatible
-          with Suricata, a free, open source intrusion detection system (IDS) engine. For information about Suricata, 
+      with Suricata, a free, open source intrusion detection system (IDS) engine. 
+      AWS Network Firewall supports Suricata version 5.0.2. For information about Suricata, 
           see the <a href=\"https://suricata-ids.org/\">Suricata website</a>.</p>
          <p>You can use Network Firewall to monitor and protect your VPC traffic in a number of ways.
          The following are just a few examples: </p>
@@ -1027,11 +1141,11 @@ module UpdateSubnetChangeProtection = {
     @as("SubnetChangeProtection")
     subnetChangeProtection: boolean_,
     @ocaml.doc("<p>The descriptive name of the firewall. You can't change the name of a firewall after you create it.</p> 
-         <p>You must specify the ARN or the name, and you can specify both. </p>")
+           <p>You must specify the ARN or the name, and you can specify both. </p>")
     @as("FirewallName")
     firewallName: option<resourceName>,
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the firewall.</p> 
-          <p>You must specify the ARN or the name, and you can specify both. </p>")
+         <p>You must specify the ARN or the name, and you can specify both. </p>")
     @as("FirewallArn")
     firewallArn: option<resourceArn>,
     @ocaml.doc("<p>An optional token that you can use for optimistic locking. Network Firewall returns a token to your requests that access the firewall. The token marks the state of the firewall resource at the time of the request. </p>
@@ -1080,11 +1194,11 @@ module UpdateFirewallPolicyChangeProtection = {
     @as("FirewallPolicyChangeProtection")
     firewallPolicyChangeProtection: boolean_,
     @ocaml.doc("<p>The descriptive name of the firewall. You can't change the name of a firewall after you create it.</p> 
-         <p>You must specify the ARN or the name, and you can specify both. </p>")
+           <p>You must specify the ARN or the name, and you can specify both. </p>")
     @as("FirewallName")
     firewallName: option<resourceName>,
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the firewall.</p> 
-         <p>You must specify the ARN or the name, and you can specify both. </p>")
+           <p>You must specify the ARN or the name, and you can specify both. </p>")
     @as("FirewallArn")
     firewallArn: option<resourceArn>,
     @ocaml.doc("<p>An optional token that you can use for optimistic locking. Network Firewall returns a token to your requests that access the firewall. The token marks the state of the firewall resource at the time of the request. </p>
@@ -1138,11 +1252,11 @@ module UpdateFirewallDescription = {
     @as("Description")
     description: option<description>,
     @ocaml.doc("<p>The descriptive name of the firewall. You can't change the name of a firewall after you create it.</p> 
-         <p>You must specify the ARN or the name, and you can specify both. </p>")
+           <p>You must specify the ARN or the name, and you can specify both. </p>")
     @as("FirewallName")
     firewallName: option<resourceName>,
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the firewall.</p> 
-         <p>You must specify the ARN or the name, and you can specify both. </p>")
+           <p>You must specify the ARN or the name, and you can specify both. </p>")
     @as("FirewallArn")
     firewallArn: option<resourceArn>,
     @ocaml.doc("<p>An optional token that you can use for optimistic locking. Network Firewall returns a token to your requests that access the firewall. The token marks the state of the firewall resource at the time of the request. </p>
@@ -1188,11 +1302,11 @@ module UpdateFirewallDeleteProtection = {
     @as("DeleteProtection")
     deleteProtection: boolean_,
     @ocaml.doc("<p>The descriptive name of the firewall. You can't change the name of a firewall after you create it.</p> 
-         <p>You must specify the ARN or the name, and you can specify both. </p>")
+           <p>You must specify the ARN or the name, and you can specify both. </p>")
     @as("FirewallName")
     firewallName: option<resourceName>,
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the firewall.</p> 
-         <p>You must specify the ARN or the name, and you can specify both. </p>")
+           <p>You must specify the ARN or the name, and you can specify both. </p>")
     @as("FirewallArn")
     firewallArn: option<resourceArn>,
     @ocaml.doc("<p>An optional token that you can use for optimistic locking. Network Firewall returns a token to your requests that access the firewall. The token marks the state of the firewall resource at the time of the request. </p>
@@ -1207,7 +1321,11 @@ module UpdateFirewallDeleteProtection = {
          <p>To make a conditional change to the firewall, provide the token in your update request. Network Firewall uses the token to ensure that the firewall hasn't changed since you last retrieved it. If it has changed, the operation fails with an <code>InvalidTokenException</code>. If this happens, retrieve the firewall again to get a current copy of it with a new token. Reapply your changes as needed, then try the operation again using the new token. </p>")
     @as("UpdateToken")
     updateToken: option<updateToken>,
-    @ocaml.doc("<p></p>") @as("DeleteProtection") deleteProtection: option<boolean_>,
+    @ocaml.doc("<p>A flag indicating whether it is possible to delete the firewall. A setting of <code>TRUE</code> indicates
+         that the firewall is protected against deletion. Use this setting to protect against
+         accidentally deleting a firewall that is in use. When you create a firewall, the operation initializes this flag to <code>TRUE</code>.</p>")
+    @as("DeleteProtection")
+    deleteProtection: option<boolean_>,
     @ocaml.doc(
       "<p>The descriptive name of the firewall. You can't change the name of a firewall after you create it.</p>"
     )
@@ -1269,7 +1387,7 @@ module PutResourcePolicy = {
     @as("ResourceArn")
     resourceArn: resourceArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-network-firewall") @new
   external new: request => t = "PutResourcePolicyCommand"
   let make = (~policy, ~resourceArn, ()) => new({policy: policy, resourceArn: resourceArn})
@@ -1305,7 +1423,7 @@ module DeleteResourcePolicy = {
     @as("ResourceArn")
     resourceArn: resourceArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-network-firewall") @new
   external new: request => t = "DeleteResourcePolicyCommand"
   let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
@@ -1319,11 +1437,11 @@ module AssociateFirewallPolicy = {
     @as("FirewallPolicyArn")
     firewallPolicyArn: resourceArn,
     @ocaml.doc("<p>The descriptive name of the firewall. You can't change the name of a firewall after you create it.</p> 
-         <p>You must specify the ARN or the name, and you can specify both. </p>")
+           <p>You must specify the ARN or the name, and you can specify both. </p>")
     @as("FirewallName")
     firewallName: option<resourceName>,
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the firewall.</p> 
-         <p>You must specify the ARN or the name, and you can specify both. </p>")
+        <p>You must specify the ARN or the name, and you can specify both. </p>")
     @as("FirewallArn")
     firewallArn: option<resourceArn>,
     @ocaml.doc("<p>An optional token that you can use for optimistic locking. Network Firewall returns a token to your requests that access the firewall. The token marks the state of the firewall resource at the time of the request. </p>
@@ -1368,11 +1486,66 @@ module UntagResource = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the resource.</p>") @as("ResourceArn")
     resourceArn: resourceArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-network-firewall") @new
   external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module DescribeRuleGroupMetadata = {
+  type t
+  type request = {
+    @ocaml.doc("<p>Indicates whether the rule group is stateless or stateful. If the rule group is stateless, it contains 
+stateless rules. If it is stateful, it contains stateful rules. </p> 
+         <note>
+            <p>This setting is required for requests that do not include the <code>RuleGroupARN</code>.</p>
+         </note>")
+    @as("Type")
+    type_: option<ruleGroupType>,
+    @ocaml.doc("<p>The descriptive name of the rule group. You can't change the name of a rule group after you create it.</p> 
+         <p>You must specify the ARN or the name, and you can specify both. </p>")
+    @as("RuleGroupArn")
+    ruleGroupArn: option<resourceArn>,
+    @ocaml.doc("<p>The descriptive name of the rule group. You can't change the name of a rule group after you create it.</p> 
+         <p>You must specify the ARN or the name, and you can specify both. </p>")
+    @as("RuleGroupName")
+    ruleGroupName: option<resourceName>,
+  }
+  type response = {
+    @as("StatefulRuleOptions") statefulRuleOptions: option<statefulRuleOptions>,
+    @ocaml.doc("<p>The maximum operating resources that this rule group can use. Rule group capacity is fixed at creation. 
+      When you update a rule group, you are limited to this capacity. When you reference a rule group 
+      from a firewall policy, Network Firewall reserves this capacity for the rule group. </p> 
+         <p>You can retrieve the capacity that would be required for a rule group before you create the rule group by calling 
+      <a>CreateRuleGroup</a> with <code>DryRun</code> set to <code>TRUE</code>. </p>")
+    @as("Capacity")
+    capacity: option<ruleCapacity>,
+    @ocaml.doc("<p>Indicates whether the rule group is stateless or stateful. If the rule group is stateless, it contains 
+stateless rules. If it is stateful, it contains stateful rules. </p> 
+         <note>
+            <p>This setting is required for requests that do not include the <code>RuleGroupARN</code>.</p>
+         </note>")
+    @as("Type")
+    type_: option<ruleGroupType>,
+    @ocaml.doc("<p>Returns the metadata objects for the specified rule group.
+      </p>")
+    @as("Description")
+    description: option<description>,
+    @ocaml.doc("<p>The descriptive name of the rule group. You can't change the name of a rule group after you create it.</p> 
+         <p>You must specify the ARN or the name, and you can specify both. </p>")
+    @as("RuleGroupName")
+    ruleGroupName: resourceName,
+    @ocaml.doc("<p>The descriptive name of the rule group. You can't change the name of a rule group after you create it.</p> 
+         <p>You must specify the ARN or the name, and you can specify both. </p>")
+    @as("RuleGroupArn")
+    ruleGroupArn: resourceArn,
+  }
+  @module("@aws-sdk/client-network-firewall") @new
+  external new: request => t = "DescribeRuleGroupMetadataCommand"
+  let make = (~type_=?, ~ruleGroupArn=?, ~ruleGroupName=?, ()) =>
+    new({type_: type_, ruleGroupArn: ruleGroupArn, ruleGroupName: ruleGroupName})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -1382,7 +1555,7 @@ module TagResource = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the resource.</p>") @as("ResourceArn")
     resourceArn: resourceArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-network-firewall") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1423,6 +1596,11 @@ module ListTagsForResource = {
 module ListRuleGroups = {
   type t
   type request = {
+    @ocaml.doc("<p>The scope of the request. The default setting of <code>ACCOUNT</code> or a setting of 
+         <code>NULL</code> returns all of the rule groups in your account. A setting of 
+         <code>MANAGED</code> returns all available managed rule groups.</p>")
+    @as("Scope")
+    scope: option<resourceManagedStatus>,
     @ocaml.doc("<p>The maximum number of objects that you want Network Firewall to return for this request. If more 
           objects are available, in the response, Network Firewall provides a 
          <code>NextToken</code> value that you can use in a subsequent call to get the next batch of objects.</p>")
@@ -1447,8 +1625,8 @@ module ListRuleGroups = {
   }
   @module("@aws-sdk/client-network-firewall") @new
   external new: request => t = "ListRuleGroupsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken})
+  let make = (~scope=?, ~maxResults=?, ~nextToken=?, ()) =>
+    new({scope: scope, maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1528,11 +1706,11 @@ module DisassociateSubnets = {
     @as("SubnetIds")
     subnetIds: azSubnets,
     @ocaml.doc("<p>The descriptive name of the firewall. You can't change the name of a firewall after you create it.</p> 
-         <p>You must specify the ARN or the name, and you can specify both. </p>")
+           <p>You must specify the ARN or the name, and you can specify both. </p>")
     @as("FirewallName")
     firewallName: option<resourceName>,
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the firewall.</p> 
-         <p>You must specify the ARN or the name, and you can specify both. </p>")
+           <p>You must specify the ARN or the name, and you can specify both. </p>")
     @as("FirewallArn")
     firewallArn: option<resourceArn>,
     @ocaml.doc("<p>An optional token that you can use for optimistic locking. Network Firewall returns a token to your requests that access the firewall. The token marks the state of the firewall resource at the time of the request. </p>
@@ -1577,11 +1755,11 @@ module AssociateSubnets = {
     @as("SubnetMappings")
     subnetMappings: subnetMappings,
     @ocaml.doc("<p>The descriptive name of the firewall. You can't change the name of a firewall after you create it.</p> 
-         <p>You must specify the ARN or the name, and you can specify both. </p>")
+           <p>You must specify the ARN or the name, and you can specify both. </p>")
     @as("FirewallName")
     firewallName: option<resourceName>,
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the firewall.</p> 
-         <p>You must specify the ARN or the name, and you can specify both. </p>")
+           <p>You must specify the ARN or the name, and you can specify both. </p>")
     @as("FirewallArn")
     firewallArn: option<resourceArn>,
     @ocaml.doc("<p>An optional token that you can use for optimistic locking. Network Firewall returns a token to your requests that access the firewall. The token marks the state of the firewall resource at the time of the request. </p>
@@ -1685,11 +1863,11 @@ module UpdateLoggingConfiguration = {
     @as("LoggingConfiguration")
     loggingConfiguration: option<loggingConfiguration>,
     @ocaml.doc("<p>The descriptive name of the firewall. You can't change the name of a firewall after you create it.</p> 
-         <p>You must specify the ARN or the name, and you can specify both. </p>")
+           <p>You must specify the ARN or the name, and you can specify both. </p>")
     @as("FirewallName")
     firewallName: option<resourceName>,
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the firewall.</p> 
-         <p>You must specify the ARN or the name, and you can specify both. </p>")
+           <p>You must specify the ARN or the name, and you can specify both. </p>")
     @as("FirewallArn")
     firewallArn: option<resourceArn>,
   }
@@ -1718,11 +1896,11 @@ module DescribeLoggingConfiguration = {
   type t
   type request = {
     @ocaml.doc("<p>The descriptive name of the firewall. You can't change the name of a firewall after you create it.</p> 
-         <p>You must specify the ARN or the name, and you can specify both. </p>")
+           <p>You must specify the ARN or the name, and you can specify both. </p>")
     @as("FirewallName")
     firewallName: option<resourceName>,
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the firewall.</p> 
-         <p>You must specify the ARN or the name, and you can specify both. </p>")
+           <p>You must specify the ARN or the name, and you can specify both. </p>")
     @as("FirewallArn")
     firewallArn: option<resourceArn>,
   }
@@ -1742,11 +1920,11 @@ module DescribeFirewall = {
   type t
   type request = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the firewall.</p> 
-         <p>You must specify the ARN or the name, and you can specify both. </p>")
+           <p>You must specify the ARN or the name, and you can specify both. </p>")
     @as("FirewallArn")
     firewallArn: option<resourceArn>,
     @ocaml.doc("<p>The descriptive name of the firewall. You can't change the name of a firewall after you create it.</p> 
-         <p>You must specify the ARN or the name, and you can specify both. </p>")
+           <p>You must specify the ARN or the name, and you can specify both. </p>")
     @as("FirewallName")
     firewallName: option<resourceName>,
   }
@@ -1778,11 +1956,11 @@ module DeleteFirewall = {
   type t
   type request = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the firewall.</p> 
-         <p>You must specify the ARN or the name, and you can specify both. </p>")
+           <p>You must specify the ARN or the name, and you can specify both. </p>")
     @as("FirewallArn")
     firewallArn: option<resourceArn>,
     @ocaml.doc("<p>The descriptive name of the firewall. You can't change the name of a firewall after you create it.</p> 
-         <p>You must specify the ARN or the name, and you can specify both. </p>")
+           <p>You must specify the ARN or the name, and you can specify both. </p>")
     @as("FirewallName")
     firewallName: option<resourceName>,
   }
@@ -1894,11 +2072,11 @@ module UpdateFirewallPolicy = {
     @ocaml.doc("<p>The updated firewall policy to use for the firewall. </p>") @as("FirewallPolicy")
     firewallPolicy: firewallPolicy,
     @ocaml.doc("<p>The descriptive name of the firewall policy. You can't change the name of a firewall policy after you create it.</p> 
-         <p>You must specify the ARN or the name, and you can specify both. </p>")
+           <p>You must specify the ARN or the name, and you can specify both. </p>")
     @as("FirewallPolicyName")
     firewallPolicyName: option<resourceName>,
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the firewall policy.</p> 
-         <p>You must specify the ARN or the name, and you can specify both. </p>")
+           <p>You must specify the ARN or the name, and you can specify both. </p>")
     @as("FirewallPolicyArn")
     firewallPolicyArn: option<resourceArn>,
     @ocaml.doc("<p>A token used for optimistic locking. Network Firewall returns a token to your requests that access the firewall policy. The token marks the state of the policy resource at the time of the request. </p>
@@ -1943,11 +2121,11 @@ module DescribeFirewallPolicy = {
   type t
   type request = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the firewall policy.</p> 
-         <p>You must specify the ARN or the name, and you can specify both. </p>")
+           <p>You must specify the ARN or the name, and you can specify both. </p>")
     @as("FirewallPolicyArn")
     firewallPolicyArn: option<resourceArn>,
     @ocaml.doc("<p>The descriptive name of the firewall policy. You can't change the name of a firewall policy after you create it.</p> 
-         <p>You must specify the ARN or the name, and you can specify both. </p>")
+           <p>You must specify the ARN or the name, and you can specify both. </p>")
     @as("FirewallPolicyName")
     firewallPolicyName: option<resourceName>,
   }
@@ -2034,7 +2212,7 @@ module UpdateRuleGroup = {
     description: option<description>,
     @ocaml.doc("<p>Indicates whether the rule group is stateless or stateful. If the rule group is stateless, it contains 
 stateless rules. If it is stateful, it contains stateful rules. </p> 
-         <note>
+           <note>
             <p>This setting is required for requests that do not include the <code>RuleGroupARN</code>.</p>
          </note>")
     @as("Type")
@@ -2055,11 +2233,11 @@ response returns a <a>RuleGroup</a> object that Network Firewall has populated f
     @as("RuleGroup")
     ruleGroup: option<ruleGroup>,
     @ocaml.doc("<p>The descriptive name of the rule group. You can't change the name of a rule group after you create it.</p> 
-         <p>You must specify the ARN or the name, and you can specify both. </p>")
+          <p>You must specify the ARN or the name, and you can specify both. </p>")
     @as("RuleGroupName")
     ruleGroupName: option<resourceName>,
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the rule group.</p> 
-         <p>You must specify the ARN or the name, and you can specify both. </p>")
+           <p>You must specify the ARN or the name, and you can specify both. </p>")
     @as("RuleGroupArn")
     ruleGroupArn: option<resourceArn>,
     @ocaml.doc("<p>A token used for optimistic locking. Network Firewall returns a token to your requests that access the rule group. The token marks the state of the rule group resource at the time of the request. </p>
@@ -2109,17 +2287,17 @@ module DescribeRuleGroup = {
   type request = {
     @ocaml.doc("<p>Indicates whether the rule group is stateless or stateful. If the rule group is stateless, it contains 
 stateless rules. If it is stateful, it contains stateful rules. </p> 
-         <note>
+           <note>
             <p>This setting is required for requests that do not include the <code>RuleGroupARN</code>.</p>
          </note>")
     @as("Type")
     type_: option<ruleGroupType>,
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the rule group.</p> 
-         <p>You must specify the ARN or the name, and you can specify both. </p>")
+           <p>You must specify the ARN or the name, and you can specify both. </p>")
     @as("RuleGroupArn")
     ruleGroupArn: option<resourceArn>,
     @ocaml.doc("<p>The descriptive name of the rule group. You can't change the name of a rule group after you create it.</p> 
-         <p>You must specify the ARN or the name, and you can specify both. </p>")
+           <p>You must specify the ARN or the name, and you can specify both. </p>")
     @as("RuleGroupName")
     ruleGroupName: option<resourceName>,
   }

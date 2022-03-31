@@ -1573,7 +1573,7 @@ module UpdateApplication = {
     @ocaml.doc("<p>The current name of the application you want to change.</p>")
     applicationName: option<applicationName>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-codedeploy") @new external new: request => t = "UpdateApplicationCommand"
   let make = (~newApplicationName=?, ~applicationName=?, ()) =>
     new({newApplicationName: newApplicationName, applicationName: applicationName})
@@ -1616,7 +1616,7 @@ module SkipWaitTimeForInstanceTermination = {
             termination wait time. </p>")
     deploymentId: option<deploymentId>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-codedeploy") @new
   external new: request => t = "SkipWaitTimeForInstanceTerminationCommand"
   let make = (~deploymentId=?, ()) => new({deploymentId: deploymentId})
@@ -1634,7 +1634,7 @@ module RegisterOnPremisesInstance = {
     @ocaml.doc("<p>The name of the on-premises instance to register.</p>")
     instanceName: instanceName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-codedeploy") @new
   external new: request => t = "RegisterOnPremisesInstanceCommand"
   let make = (~instanceName, ~iamUserArn=?, ~iamSessionArn=?, ()) =>
@@ -1681,7 +1681,7 @@ module DeregisterOnPremisesInstance = {
     @ocaml.doc("<p>The name of the on-premises instance to deregister.</p>")
     instanceName: instanceName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-codedeploy") @new
   external new: request => t = "DeregisterOnPremisesInstanceCommand"
   let make = (~instanceName, ()) => new({instanceName: instanceName})
@@ -1695,7 +1695,7 @@ module DeleteResourcesByExternalId = {
             linked to one or more CodeDeploy resources.</p>")
     externalId: option<externalId>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-codedeploy") @new
   external new: request => t = "DeleteResourcesByExternalIdCommand"
   let make = (~externalId=?, ()) => new({externalId: externalId})
@@ -1728,7 +1728,7 @@ module DeleteDeploymentConfig = {
             account.</p>")
     deploymentConfigName: deploymentConfigName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-codedeploy") @new
   external new: request => t = "DeleteDeploymentConfigCommand"
   let make = (~deploymentConfigName, ()) => new({deploymentConfigName: deploymentConfigName})
@@ -1743,7 +1743,7 @@ module DeleteApplication = {
             account.</p>")
     applicationName: applicationName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-codedeploy") @new external new: request => t = "DeleteApplicationCommand"
   let make = (~applicationName, ()) => new({applicationName: applicationName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1761,7 +1761,7 @@ module ContinueDeployment = {
             traffic to the replacement environment. </p>")
     deploymentId: option<deploymentId>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-codedeploy") @new
   external new: request => t = "ContinueDeploymentCommand"
   let make = (~deploymentWaitType=?, ~deploymentId=?, ()) =>
@@ -1782,7 +1782,7 @@ module UntagResource = {
     @as("ResourceArn")
     resourceArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-codedeploy") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -2071,7 +2071,7 @@ module TagResource = {
     @as("ResourceArn")
     resourceArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-codedeploy") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -2087,7 +2087,7 @@ module RemoveTagsFromOnPremisesInstances = {
     @ocaml.doc("<p>The tag key-value pairs to remove from the on-premises instances.</p>")
     tags: tagList_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-codedeploy") @new
   external new: request => t = "RemoveTagsFromOnPremisesInstancesCommand"
   let make = (~instanceNames, ~tags, ()) => new({instanceNames: instanceNames, tags: tags})
@@ -2106,7 +2106,7 @@ module RegisterApplicationRevision = {
             account.</p>")
     applicationName: applicationName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-codedeploy") @new
   external new: request => t = "RegisterApplicationRevisionCommand"
   let make = (~revision, ~applicationName, ~description=?, ()) =>
@@ -2387,7 +2387,7 @@ module AddTagsToOnPremisesInstances = {
             tags are not allowed.</p>")
     tags: tagList_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-codedeploy") @new
   external new: request => t = "AddTagsToOnPremisesInstancesCommand"
   let make = (~instanceNames, ~tags, ()) => new({instanceNames: instanceNames, tags: tags})

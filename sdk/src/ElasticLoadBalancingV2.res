@@ -16,7 +16,12 @@ type baseTimestamp = Js.Date.t
 type baseLong = float
 type zoneName = string
 type vpcId = string
-type targetTypeEnum = [@as("lambda") #Lambda | @as("ip") #Ip | @as("instance") #Instance]
+type targetTypeEnum = [
+  | @as("alb") #Alb
+  | @as("lambda") #Lambda
+  | @as("ip") #Ip
+  | @as("instance") #Instance
+]
 type targetId = string
 type targetHealthStateEnum = [
   | @as("unavailable") #Unavailable
@@ -44,6 +49,7 @@ type targetGroupWeight = int
 type targetGroupStickinessEnabled = bool
 type targetGroupStickinessDurationSeconds = int
 type targetGroupName = string
+type targetGroupIpAddressTypeEnum = [@as("ipv6") #Ipv6 | @as("ipv4") #Ipv4]
 type targetGroupAttributeValue = string
 type targetGroupAttributeKey = string
 type targetGroupArn = string
@@ -343,8 +349,8 @@ type targetGroupAttribute = {
             <li>
                <p>
                   <code>stickiness.app_cookie.cookie_name</code> - Indicates the name of the
-          application-based cookie. Names that start with the following names are not allowed:
-            <code>AWSALB</code>, <code>AWSALBAPP</code>, and <code>AWSALBTG</code>. They're reserved
+          application-based cookie. Names that start with the following prefixes are not allowed:
+            <code>AWSALB</code>, <code>AWSALBAPP</code>, and <code>AWSALBTG</code>; they're reserved
           for use by the load balancer.</p>
             </li>
             <li>
@@ -411,7 +417,7 @@ type targetDescription = {
       traffic from the load balancer nodes in the specified Availability Zone or from all enabled
       Availability Zones for the load balancer.</p>
          <p>This parameter is not supported if the target type of the target group is
-        <code>instance</code>.</p>
+        <code>instance</code> or <code>alb</code>.</p>
          <p>If the target type is <code>ip</code> and the IP address is in a subnet of the VPC for the
       target group, the Availability Zone is automatically detected and this parameter is optional.
       If the IP address is outside the VPC, this parameter is required.</p>
@@ -423,12 +429,15 @@ type targetDescription = {
   @as("AvailabilityZone")
   availabilityZone: option<zoneName>,
   @ocaml.doc("<p>The port on which the target is listening. If the target group protocol is GENEVE, the
-      supported port is 6081. Not used if the target is a Lambda function.</p>")
+      supported port is 6081. If the target type is <code>alb</code>, the targeted Application Load
+      Balancer must have at least one listener whose port matches the target group port. Not used if
+      the target is a Lambda function.</p>")
   @as("Port")
   port: option<port>,
   @ocaml.doc("<p>The ID of the target. If the target type of the target group is <code>instance</code>,
       specify an instance ID. If the target type is <code>ip</code>, specify an IP address. If the
-      target type is <code>lambda</code>, specify the ARN of the Lambda function.</p>")
+      target type is <code>lambda</code>, specify the ARN of the Lambda function. If the target type
+      is <code>alb</code>, specify the ARN of the Application Load Balancer target. </p>")
   @as("Id")
   id: targetId,
 }
@@ -520,7 +529,7 @@ type queryStringKeyValuePair = {
   @ocaml.doc("<p>The key. You can omit the key.</p>") @as("Key") key: option<stringValue>,
 }
 @ocaml.doc("<p>The codes to use when checking for a successful response from a target. If the protocol
-      version is gRPC, these are gRPC codes. Otherwise, these are HTTP codes.</p>")
+      version is gRPC, these are gRPC codes. Otherwise, these are HTTP codes. </p>")
 type matcher = {
   @ocaml.doc("<p>You can specify values between 0 and 99. You can specify multiple values (for example,
       \"0,1\") or a range of values (for example, \"0-5\"). The default value is 12.</p>")
@@ -529,7 +538,9 @@ type matcher = {
   @ocaml.doc("<p>For Application Load Balancers, you can specify values between 200 and 499, and the
       default value is 200. You can specify multiple values (for example, \"200,202\") or a range of
       values (for example, \"200-299\").</p>
-         <p>For Network Load Balancers and Gateway Load Balancers, this must be \"200–399\".</p>")
+         <p>For Network Load Balancers and Gateway Load Balancers, this must be \"200–399\".</p>
+         <p>Note that when using shorthand syntax, some values such as commas need to be
+      escaped.</p>")
   @as("HttpCode")
   httpCode: option<httpCode>,
 }
@@ -582,6 +593,13 @@ type loadBalancerAttribute = {
                   <code>access_logs.s3.prefix</code> - The prefix for the location in the S3 bucket for the
           access logs.</p>
             </li>
+            <li>
+               <p>
+                  <code>ipv6.deny-all-igw-traffic</code> - Blocks internet gateway (IGW) access to the
+          load balancer. It is set to <code>false</code> for internet-facing load balancers and
+          <code>true</code> for internal load balancers, preventing unintended access to your
+          internal load balancer through an internet gateway.</p>
+            </li>
          </ul>
 
          <p>The following attributes are supported by only Application Load Balancers:</p>
@@ -606,17 +624,35 @@ type loadBalancerAttribute = {
             </li>
             <li>
                <p>
-                  <code>routing.http2.enabled</code> - Indicates whether HTTP/2 is enabled. The value is
-            <code>true</code> or <code>false</code>. The default is <code>true</code>. Elastic Load
-          Balancing requires that message header names contain only alphanumeric characters and
-          hyphens.</p>
+                  <code>routing.http.x_amzn_tls_version_and_cipher_suite.enabled</code> - Indicates
+          whether the two headers (<code>x-amzn-tls-version</code> and
+            <code>x-amzn-tls-cipher-suite</code>), which contain information about the negotiated
+          TLS version and cipher suite, are added to the client request before sending it to the
+          target. The <code>x-amzn-tls-version</code> header has information about the TLS protocol
+          version negotiated with the client, and the <code>x-amzn-tls-cipher-suite</code> header
+          has information about the cipher suite negotiated with the client. Both headers are in
+          OpenSSL format. The possible values for the attribute are <code>true</code> and
+            <code>false</code>. The default is <code>false</code>.</p>
+            </li>
+            <li>
+               <p>
+                  <code>routing.http.xff_client_port.enabled</code> - Indicates whether the
+            <code>X-Forwarded-For</code> header should preserve the source port that the client used
+          to connect to the load balancer. The possible values are <code>true</code> and
+            <code>false</code>. The default is <code>false</code>.</p>
+            </li>
+            <li>
+               <p>
+                  <code>routing.http2.enabled</code> - Indicates whether HTTP/2 is enabled. The possible
+          values are <code>true</code> and <code>false</code>. The default is <code>true</code>.
+          Elastic Load Balancing requires that message header names contain only alphanumeric
+          characters and hyphens.</p>
             </li>
             <li>
                <p>
                   <code>waf.fail_open.enabled</code> - Indicates whether to allow a WAF-enabled load
-          balancer to route requests to targets if it is unable to forward the request to AWS WAF.
-          The value is <code>true</code> or <code>false</code>. The default is
-          <code>false</code>.</p>
+          balancer to route requests to targets if it is unable to forward the request to Amazon Web Services WAF. The possible values are <code>true</code> and <code>false</code>. The
+          default is <code>false</code>.</p>
             </li>
          </ul>
 
@@ -626,8 +662,8 @@ type loadBalancerAttribute = {
             <li>
                <p>
                   <code>load_balancing.cross_zone.enabled</code> - Indicates whether cross-zone load
-          balancing is enabled. The value is <code>true</code> or <code>false</code>. The default is
-            <code>false</code>.</p>
+          balancing is enabled. The possible values are <code>true</code> and <code>false</code>.
+          The default is <code>false</code>.</p>
             </li>
          </ul>")
   @as("Key")
@@ -651,9 +687,8 @@ type loadBalancerAddress = {
 }
 type listenerArns = array<listenerArn>
 type listOfString = array<stringValue>
-@ocaml.doc(
-  "<p>Information about an Elastic Load Balancing resource limit for your AWS account.</p>"
-)
+@ocaml.doc("<p>Information about an Elastic Load Balancing resource limit for your Amazon Web Services
+      account.</p>")
 type limit = {
   @ocaml.doc("<p>The maximum value of the limit.</p>") @as("Max") max: option<max>,
   @ocaml.doc("<p>The name of the limit. The possible values are:</p>
@@ -763,14 +798,20 @@ type targetGroupList = array<targetGroupTuple>
 type targetGroupAttributes = array<targetGroupAttribute>
 @ocaml.doc("<p>Information about a target group.</p>")
 type targetGroup = {
+  @ocaml.doc("<p>The type of IP address used for this target group. The possible values are
+        <code>ipv4</code> and <code>ipv6</code>. This is an optional parameter. If not specified,
+      the IP address type defaults to <code>ipv4</code>.</p>")
+  @as("IpAddressType")
+  ipAddressType: option<targetGroupIpAddressTypeEnum>,
   @ocaml.doc("<p>[HTTP/HTTPS protocol] The protocol version. The possible values are <code>GRPC</code>,
         <code>HTTP1</code>, and <code>HTTP2</code>.</p>")
   @as("ProtocolVersion")
   protocolVersion: option<protocolVersion>,
   @ocaml.doc("<p>The type of target that you must specify when registering targets with this target group.
       The possible values are <code>instance</code> (register targets by instance ID),
-        <code>ip</code> (register targets by IP address), or <code>lambda</code> (register a single
-      Lambda function as a target).</p>")
+        <code>ip</code> (register targets by IP address), <code>lambda</code> (register a single
+      Lambda function as a target), or <code>alb</code> (register a single Application Load Balancer
+      as a target).</p>")
   @as("TargetType")
   targetType: option<targetTypeEnum>,
   @ocaml.doc("<p>The Amazon Resource Names (ARN) of the load balancers that route traffic to this target
@@ -1023,6 +1064,8 @@ type tagDescription = {
 }
 @ocaml.doc("<p>Information about a policy used for SSL negotiation.</p>")
 type sslPolicy = {
+  @ocaml.doc("<p> The supported load balancers. </p>") @as("SupportedLoadBalancerTypes")
+  supportedLoadBalancerTypes: option<listOfString>,
   @ocaml.doc("<p>The name of the policy.</p>") @as("Name") name: option<sslPolicyName>,
   @ocaml.doc("<p>The ciphers.</p>") @as("Ciphers") ciphers: option<ciphers>,
   @ocaml.doc("<p>The protocols.</p>") @as("SslProtocols") sslProtocols: option<sslProtocols>,
@@ -1356,9 +1399,9 @@ module SetIpAddressType = {
   type t
   type request = {
     @ocaml.doc("<p>The IP address type. The possible values are <code>ipv4</code> (for IPv4 addresses) and
-        <code>dualstack</code> (for IPv4 and IPv6 addresses). Internal load balancers must use
-        <code>ipv4</code>. You can’t specify <code>dualstack</code> for a load balancer with a UDP
-      or TCP_UDP listener.</p>")
+        <code>dualstack</code> (for IPv4 and IPv6 addresses).
+       You can’t specify
+        <code>dualstack</code> for a load balancer with a UDP or TCP_UDP listener.</p>")
     @as("IpAddressType")
     ipAddressType: ipAddressType,
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the load balancer.</p>") @as("LoadBalancerArn")
@@ -1381,7 +1424,7 @@ module DeleteTargetGroup = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the target group.</p>") @as("TargetGroupArn")
     targetGroupArn: targetGroupArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "DeleteTargetGroupCommand"
   let make = (~targetGroupArn, ()) => new({targetGroupArn: targetGroupArn})
@@ -1394,7 +1437,7 @@ module DeleteRule = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the rule.</p>") @as("RuleArn")
     ruleArn: ruleArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "DeleteRuleCommand"
   let make = (~ruleArn, ()) => new({ruleArn: ruleArn})
@@ -1407,7 +1450,7 @@ module DeleteLoadBalancer = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the load balancer.</p>") @as("LoadBalancerArn")
     loadBalancerArn: loadBalancerArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "DeleteLoadBalancerCommand"
   let make = (~loadBalancerArn, ()) => new({loadBalancerArn: loadBalancerArn})
@@ -1420,7 +1463,7 @@ module DeleteListener = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the listener.</p>") @as("ListenerArn")
     listenerArn: listenerArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "DeleteListenerCommand"
   let make = (~listenerArn, ()) => new({listenerArn: listenerArn})
@@ -1454,7 +1497,7 @@ module RemoveTags = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the resource.</p>") @as("ResourceArns")
     resourceArns: resourceArns,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "RemoveTagsCommand"
   let make = (~tagKeys, ~resourceArns, ()) => new({tagKeys: tagKeys, resourceArns: resourceArns})
@@ -1472,7 +1515,7 @@ module RemoveListenerCertificates = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the listener.</p>") @as("ListenerArn")
     listenerArn: listenerArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "RemoveListenerCertificatesCommand"
   let make = (~certificates, ~listenerArn, ()) =>
@@ -1487,7 +1530,7 @@ module RegisterTargets = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the target group.</p>") @as("TargetGroupArn")
     targetGroupArn: targetGroupArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "RegisterTargetsCommand"
   let make = (~targets, ~targetGroupArn, ()) =>
@@ -1624,7 +1667,7 @@ module DeregisterTargets = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the target group.</p>") @as("TargetGroupArn")
     targetGroupArn: targetGroupArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "DeregisterTargetsCommand"
   let make = (~targets, ~targetGroupArn, ()) =>
@@ -1639,7 +1682,7 @@ module AddTags = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the resource.</p>") @as("ResourceArns")
     resourceArns: resourceArns,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-elasticloadbalancing") @new external new: request => t = "AddTagsCommand"
   let make = (~tags, ~resourceArns, ()) => new({tags: tags, resourceArns: resourceArns})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1700,16 +1743,18 @@ module ModifyTargetGroup = {
     @ocaml.doc("<p>[HTTP/HTTPS health checks] The destination for health checks on the targets.</p>
          <p>[HTTP1 or HTTP2 protocol version] The ping path. The default is /.</p>
          <p>[GRPC protocol version] The path of a custom health check method with the format
-      /package.service/method. The default is /AWS.ALB/healthcheck.</p>")
+      /package.service/method. The default is /Amazon Web Services.ALB/healthcheck.</p>")
     @as("HealthCheckPath")
     healthCheckPath: option<path>,
     @ocaml.doc("<p>The port the load balancer uses when performing health checks on targets.</p>")
     @as("HealthCheckPort")
     healthCheckPort: option<healthCheckPort>,
-    @ocaml.doc("<p>The protocol the load balancer uses when performing health checks on targets. The TCP
-      protocol is supported for health checks only if the protocol of the target group is TCP, TLS,
-      UDP, or TCP_UDP. The GENEVE, TLS, UDP, and TCP_UDP protocols are not supported for health
-      checks.</p>
+    @ocaml.doc("<p>The protocol the load balancer uses when performing health checks on targets. For
+      Application Load Balancers, the default is HTTP. For Network Load Balancers and Gateway Load
+      Balancers, the default is TCP. The TCP protocol is not supported for health checks if the
+      protocol of the target group is HTTP or HTTPS. It is supported for health checks only if the
+      protocol of the target group is TCP, TLS, UDP, or TCP_UDP. The GENEVE, TLS, UDP, and TCP_UDP
+      protocols are not supported for health checks.</p>
          <p>With Network Load Balancers, you can't modify this setting.</p>")
     @as("HealthCheckProtocol")
     healthCheckProtocol: option<protocolEnum>,
@@ -1810,6 +1855,11 @@ module DescribeTargetGroups = {
 module CreateTargetGroup = {
   type t
   type request = {
+    @ocaml.doc("<p>The type of IP address used for this target group. The possible values are
+        <code>ipv4</code> and <code>ipv6</code>. This is an optional parameter. If not specified,
+      the IP address type defaults to <code>ipv4</code>.</p>")
+    @as("IpAddressType")
+    ipAddressType: option<targetGroupIpAddressTypeEnum>,
     @ocaml.doc("<p>The tags to assign to the target group.</p>") @as("Tags") tags: option<tagList_>,
     @ocaml.doc("<p>The type of target that you must specify when registering targets with this target group.
       You can't specify targets for a target group using more than one target type.</p>
@@ -1829,6 +1879,10 @@ module CreateTargetGroup = {
             <li>
                <p>
                   <code>lambda</code> - Register a single Lambda function as a target.</p>
+            </li>
+            <li>
+               <p>
+                  <code>alb</code> - Register a single Application Load Balancer as a target.</p>
             </li>
          </ul>")
     @as("TargetType")
@@ -1867,13 +1921,13 @@ module CreateTargetGroup = {
     @ocaml.doc("<p>[HTTP/HTTPS health checks] The destination for health checks on the targets.</p>
          <p>[HTTP1 or HTTP2 protocol version] The ping path. The default is /.</p>
          <p>[GRPC protocol version] The path of a custom health check method with the format
-      /package.service/method. The default is /AWS.ALB/healthcheck.</p>")
+      /package.service/method. The default is /Amazon Web Services.ALB/healthcheck.</p>")
     @as("HealthCheckPath")
     healthCheckPath: option<path>,
     @ocaml.doc("<p>Indicates whether health checks are enabled. If the target type is <code>lambda</code>,
       health checks are disabled by default but can be enabled. If the target type is
-        <code>instance</code> or <code>ip</code>, health checks are always enabled and cannot be
-      disabled.</p>")
+        <code>instance</code>, <code>ip</code>, or <code>alb</code>, health checks are always
+      enabled and cannot be disabled.</p>")
     @as("HealthCheckEnabled")
     healthCheckEnabled: option<healthCheckEnabled>,
     @ocaml.doc("<p>The port the load balancer uses when performing health checks on targets. If the protocol
@@ -1925,6 +1979,7 @@ module CreateTargetGroup = {
   external new: request => t = "CreateTargetGroupCommand"
   let make = (
     ~name,
+    ~ipAddressType=?,
     ~tags=?,
     ~targetType=?,
     ~matcher=?,
@@ -1943,6 +1998,7 @@ module CreateTargetGroup = {
     (),
   ) =>
     new({
+      ipAddressType: ipAddressType,
       tags: tags,
       targetType: targetType,
       matcher: matcher,
@@ -1969,8 +2025,8 @@ module SetSubnets = {
     @ocaml.doc("<p>[Network Load Balancers] The type of IP addresses used by the subnets for your load
       balancer. The possible values are <code>ipv4</code> (for IPv4 addresses) and
         <code>dualstack</code> (for IPv4 and IPv6 addresses). You can’t specify
-        <code>dualstack</code> for a load balancer with a UDP or TCP_UDP listener. Internal load
-      balancers must use <code>ipv4</code>.</p>")
+        <code>dualstack</code> for a load balancer with a UDP or TCP_UDP listener.
+      .</p>")
     @as("IpAddressType")
     ipAddressType: option<ipAddressType>,
     @ocaml.doc("<p>The IDs of the public subnets. You can specify only one subnet per Availability Zone. You
@@ -2040,6 +2096,10 @@ module DescribeTags = {
 module DescribeSSLPolicies = {
   type t
   type request = {
+    @ocaml.doc("<p> The type of load balancer. The default lists the SSL policies for all load
+      balancers.</p>")
+    @as("LoadBalancerType")
+    loadBalancerType: option<loadBalancerTypeEnum>,
     @ocaml.doc("<p>The maximum number of results to return with this call.</p>") @as("PageSize")
     pageSize: option<pageSize>,
     @ocaml.doc("<p>The marker for the next set of results. (You received this marker from a previous
@@ -2058,8 +2118,8 @@ module DescribeSSLPolicies = {
   }
   @module("@aws-sdk/client-elasticloadbalancing") @new
   external new: request => t = "DescribeSSLPoliciesCommand"
-  let make = (~pageSize=?, ~marker=?, ~names=?, ()) =>
-    new({pageSize: pageSize, marker: marker, names: names})
+  let make = (~loadBalancerType=?, ~pageSize=?, ~marker=?, ~names=?, ()) =>
+    new({loadBalancerType: loadBalancerType, pageSize: pageSize, marker: marker, names: names})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -2103,7 +2163,7 @@ module CreateLoadBalancer = {
     customerOwnedIpv4Pool: option<customerOwnedIpv4Pool>,
     @ocaml.doc("<p>The type of IP addresses used by the subnets for your load balancer. The possible values
       are <code>ipv4</code> (for IPv4 addresses) and <code>dualstack</code> (for IPv4 and IPv6
-      addresses). Internal load balancers must use <code>ipv4</code>.</p>")
+      addresses). </p>")
     @as("IpAddressType")
     ipAddressType: option<ipAddressType>,
     @ocaml.doc("<p>The type of load balancer. The default is <code>application</code>.</p>")

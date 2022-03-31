@@ -50,6 +50,8 @@ type savingsPlansDataType = [
 ]
 type savingsPlanArn = string
 type rightsizingType = [@as("MODIFY") #MODIFY | @as("TERMINATE") #TERMINATE]
+type resourceTagValue = string
+type resourceTagKey = string
 type reservedNormalizedUnits = string
 type reservedHours = string
 type reservationGroupValue = string
@@ -158,6 +160,7 @@ type estimated = bool
 type errorMessage = string
 type entity = string
 type dimension = [
+  | @as("INVOICING_ENTITY") #INVOICING_ENTITY
   | @as("AGREEMENT_END_DATE_TIME_BEFORE") #AGREEMENT_END_DATE_TIME_BEFORE
   | @as("AGREEMENT_END_DATE_TIME_AFTER") #AGREEMENT_END_DATE_TIME_AFTER
   | @as("PAYMENT_OPTION") #PAYMENT_OPTION
@@ -192,9 +195,19 @@ type dimension = [
 ]
 type coverageNormalizedUnitsPercentage = string
 type coverageHoursPercentage = string
-@ocaml.doc("<p>The default value for the cost category.</p>") type costCategoryValue = string
+@ocaml.doc("<p>The
+            default value for the cost category.</p>")
+type costCategoryValue = string
 type costCategoryStatusComponent = [@as("COST_EXPLORER") #COST_EXPLORER]
 type costCategoryStatus = [@as("APPLIED") #APPLIED | @as("PROCESSING") #PROCESSING]
+type costCategorySplitChargeRuleParameterType = [
+  | @as("ALLOCATION_PERCENTAGES") #ALLOCATION_PERCENTAGES
+]
+type costCategorySplitChargeMethod = [
+  | @as("EVEN") #EVEN
+  | @as("PROPORTIONAL") #PROPORTIONAL
+  | @as("FIXED") #FIXED
+]
 @ocaml.doc("<p>The rule schema version in this particular Cost Category.</p>")
 type costCategoryRuleVersion = [@as("CostCategoryExpression.v1") #CostCategoryExpression_V1]
 type costCategoryRuleType = [@as("INHERITED_VALUE") #INHERITED_VALUE | @as("REGULAR") #REGULAR]
@@ -226,148 +239,125 @@ type amortizedUpfrontFee = string
 type amortizedRecurringFee = string
 type accountScope = [@as("LINKED") #LINKED | @as("PAYER") #PAYER]
 type values = array<value>
-@ocaml.doc("<p> Filters cost anomalies based on the total impact. </p>")
+@ocaml.doc("<p>Filters cost anomalies based on the total impact. </p>")
 type totalImpactFilter = {
-  @ocaml.doc("<p> The upper bound dollar value used in the filter. </p>") @as("EndValue")
+  @ocaml.doc("<p>The upper bound dollar value that's used in the filter. </p>") @as("EndValue")
   endValue: option<genericDouble>,
-  @ocaml.doc("<p>
-        The lower bound dollar value used in the filter.
-    </p>")
-  @as("StartValue")
+  @ocaml.doc("<p>The lower bound dollar value that's used in the filter. </p>") @as("StartValue")
   startValue: genericDouble,
-  @ocaml.doc("<p>
-        The comparing value used in the filter.
-    </p>")
-  @as("NumericOperator")
+  @ocaml.doc("<p>The comparing value that's used in the filter. </p>") @as("NumericOperator")
   numericOperator: numericOperator,
 }
-@ocaml.doc("<p> Details on termination recommendation.  </p>")
+@ocaml.doc("<p>Details on termination recommendation. </p>")
 type terminateRecommendationDetail = {
-  @ocaml.doc("<p> The currency code that AWS used to calculate the costs for this instance.</p>")
+  @ocaml.doc("<p>The currency code that Amazon Web Services used to calculate the costs for this
+            instance.</p>")
   @as("CurrencyCode")
   currencyCode: option<genericString>,
-  @ocaml.doc("<p> Estimated savings resulting from modification, on a monthly basis.</p>")
+  @ocaml.doc("<p>The estimated savings that result from modification, on a monthly basis.</p>")
   @as("EstimatedMonthlySavings")
   estimatedMonthlySavings: option<genericString>,
 }
 type tagList_ = array<entity>
-@ocaml.doc("<p>
-        The recipient of <code>AnomalySubscription</code> notifications.
-    </p>")
+@ocaml.doc("<p>The recipient of <code>AnomalySubscription</code> notifications. </p>")
 type subscriber = {
-  @ocaml.doc("<p> Indicates if the subscriber accepts the notifications. </p>") @as("Status")
+  @ocaml.doc("<p>Indicates if the subscriber accepts the notifications. </p>") @as("Status")
   status: option<subscriberStatus>,
-  @ocaml.doc("<p>
-        The notification delivery channel.
-    </p>")
-  @as("Type")
+  @ocaml.doc("<p>The notification delivery channel. </p>") @as("Type")
   type_: option<subscriberType>,
-  @ocaml.doc(
-    "<p> The email address or SNS Amazon Resource Name (ARN), depending on the <code>Type</code>. </p>"
-  )
+  @ocaml.doc("<p>The email address or SNS Amazon Resource Name (ARN). This depends on the
+                <code>Type</code>. </p>")
   @as("Address")
   address: option<subscriberAddress>,
 }
 @ocaml.doc("<p>The details of how to sort the data.</p>")
 type sortDefinition = {
-  @ocaml.doc("<p>The order in which to sort the data.</p>") @as("SortOrder")
+  @ocaml.doc("<p>The order that's used to sort the data.</p>") @as("SortOrder")
   sortOrder: option<sortOrder>,
-  @ocaml.doc("<p>The key by which to sort the data.</p>") @as("Key") key: sortDefinitionKey,
+  @ocaml.doc("<p>The key that's used to sort the data.</p>") @as("Key") key: sortDefinitionKey,
 }
-@ocaml.doc("<p>The measurement of how well you are using your existing Savings Plans.</p>")
+@ocaml.doc("<p>The measurement of how well you're using your existing Savings Plans.</p>")
 type savingsPlansUtilization = {
-  @ocaml.doc(
-    "<p>The amount of <code>UsedCommitment</code> divided by the <code>TotalCommitment</code> for your Savings Plans.</p>"
-  )
+  @ocaml.doc("<p>The amount of <code>UsedCommitment</code> divided by the <code>TotalCommitment</code>
+            for your Savings Plans.</p>")
   @as("UtilizationPercentage")
   utilizationPercentage: option<genericString>,
-  @ocaml.doc(
-    "<p>The amount of your Savings Plans commitment that was not consumed from Savings Plans eligible usage in a specific period.</p>"
-  )
+  @ocaml.doc("<p>The amount of your Savings Plans commitment that wasn't consumed from Savings Plans
+            eligible usage in a specific period.</p>")
   @as("UnusedCommitment")
   unusedCommitment: option<genericString>,
-  @ocaml.doc(
-    "<p>The amount of your Savings Plans commitment that was consumed from Savings Plans eligible usage in a specific period.</p>"
-  )
+  @ocaml.doc("<p>The amount of your Savings Plans commitment that was consumed from Savings Plans
+            eligible usage in a specific period.</p>")
   @as("UsedCommitment")
   usedCommitment: option<genericString>,
-  @ocaml.doc(
-    "<p>The total amount of Savings Plans commitment that's been purchased in an account (or set of accounts).</p>"
-  )
+  @ocaml.doc("<p>The total amount of Savings Plans commitment that's been purchased in an account (or
+            set of accounts).</p>")
   @as("TotalCommitment")
   totalCommitment: option<genericString>,
 }
-@ocaml.doc(
-  "<p>The amount of savings you're accumulating, against the public On-Demand rate of the usage accrued in an account.</p>"
-)
+@ocaml.doc("<p>The amount of savings that you're accumulating, against the public On-Demand rate of
+            the usage accrued in an account.</p>")
 type savingsPlansSavings = {
-  @ocaml.doc("<p>How much the amount that the usage would have cost if it was
-            accrued
-            at the On-Demand rate.</p>")
+  @ocaml.doc("<p>How much the amount that the usage would have cost if it was accrued at the On-Demand
+            rate.</p>")
   @as("OnDemandCostEquivalent")
   onDemandCostEquivalent: option<genericString>,
-  @ocaml.doc(
-    "<p>The savings amount that you are accumulating for the usage that is covered by a Savings Plans, when compared to the On-Demand equivalent of the same usage.</p>"
-  )
+  @ocaml.doc("<p>The savings amount that you're accumulating for the usage that's covered by a Savings
+            Plans, when compared to the On-Demand equivalent of the same usage.</p>")
   @as("NetSavings")
   netSavings: option<genericString>,
 }
 @ocaml.doc("<p>Summary metrics for your Savings Plans Purchase Recommendations.</p>")
 type savingsPlansPurchaseRecommendationSummary = {
-  @ocaml.doc("<p>
-            The estimated On-Demand costs you would expect with no additional commitment, based on your usage of the selected time period and the Savings Plans you own.
-        </p>")
+  @ocaml.doc("<p> The estimated On-Demand costs you would expect with no additional commitment. It's
+            based on your usage of the selected time period and the Savings Plans you own. </p>")
   @as("EstimatedOnDemandCostWithCurrentCommitment")
   estimatedOnDemandCostWithCurrentCommitment: option<genericString>,
-  @ocaml.doc(
-    "<p>The estimated monthly savings amount, based on the recommended Savings Plans purchase.</p>"
-  )
+  @ocaml.doc("<p>The estimated monthly savings amount that's based on the recommended Savings Plans
+            purchase.</p>")
   @as("EstimatedMonthlySavingsAmount")
   estimatedMonthlySavingsAmount: option<genericString>,
-  @ocaml.doc(
-    "<p>The estimated savings relative to the total cost of On-Demand usage, over the lookback period. This is calculated as <code>estimatedSavingsAmount</code>/ <code>CurrentOnDemandSpend</code>*100.</p>"
-  )
+  @ocaml.doc("<p>The estimated savings relative to the total cost of On-Demand usage, over the lookback
+            period. This is calculated as <code>estimatedSavingsAmount</code>/
+                <code>CurrentOnDemandSpend</code>*100.</p>")
   @as("EstimatedSavingsPercentage")
   estimatedSavingsPercentage: option<genericString>,
-  @ocaml.doc("<p>The recommended hourly commitment based on the recommendation parameters.</p>")
+  @ocaml.doc("<p>The recommended hourly commitment that's based on the recommendation
+            parameters.</p>")
   @as("HourlyCommitmentToPurchase")
   hourlyCommitmentToPurchase: option<genericString>,
   @ocaml.doc("<p>The recommended Savings Plans cost on a daily (24 hourly) basis.</p>")
   @as("DailyCommitmentToPurchase")
   dailyCommitmentToPurchase: option<genericString>,
-  @ocaml.doc(
-    "<p>The aggregate number of Savings Plans recommendations that exist for your account.</p>"
-  )
+  @ocaml.doc("<p>The aggregate number of Savings Plans recommendations that exist for your
+            account.</p>")
   @as("TotalRecommendationCount")
   totalRecommendationCount: option<genericString>,
-  @ocaml.doc(
-    "<p>The estimated total savings over the lookback period, based on the purchase of the recommended Savings Plans.</p>"
-  )
+  @ocaml.doc("<p>The estimated total savings over the lookback period, based on the purchase of the
+            recommended Savings Plans.</p>")
   @as("EstimatedSavingsAmount")
   estimatedSavingsAmount: option<genericString>,
-  @ocaml.doc(
-    "<p>The current total on demand spend of the applicable usage types over the lookback period.</p>"
-  )
+  @ocaml.doc("<p>The current total on demand spend of the applicable usage types over the lookback
+            period.</p>")
   @as("CurrentOnDemandSpend")
   currentOnDemandSpend: option<genericString>,
-  @ocaml.doc(
-    "<p>The estimated total cost of the usage after purchasing the recommended Savings Plans. This is a sum of the cost of Savings Plans during this term, and the remaining On-Demand usage.</p>"
-  )
+  @ocaml.doc("<p>The estimated total cost of the usage after purchasing the recommended Savings Plans.
+            This is a sum of the cost of Savings Plans during this term, and the remaining On-Demand
+            usage.</p>")
   @as("EstimatedTotalCost")
   estimatedTotalCost: option<genericString>,
-  @ocaml.doc("<p>The currency code AWS used to generate the recommendations and present potential
-            savings.</p>")
+  @ocaml.doc("<p>The currency code that Amazon Web Services used to generate the recommendations and
+            present potential savings.</p>")
   @as("CurrencyCode")
   currencyCode: option<genericString>,
-  @ocaml.doc(
-    "<p>The estimated return on investment based on the recommended Savings Plans and estimated savings.</p>"
-  )
+  @ocaml.doc("<p>The estimated return on investment that's based on the recommended Savings Plans and
+            estimated savings.</p>")
   @as("EstimatedROI")
   estimatedROI: option<genericString>,
 }
 @ocaml.doc("<p>Metadata about your Savings Plans Purchase Recommendations.</p>")
 type savingsPlansPurchaseRecommendationMetadata = {
-  @ocaml.doc("<p>Additional metadata that may be applicable to the recommendation.</p>")
+  @ocaml.doc("<p>Additional metadata that might be applicable to the recommendation.</p>")
   @as("AdditionalMetadata")
   additionalMetadata: option<genericString>,
   @ocaml.doc("<p>The timestamp showing when the recommendations were generated.</p>")
@@ -376,150 +366,166 @@ type savingsPlansPurchaseRecommendationMetadata = {
   @ocaml.doc("<p>The unique identifier for the recommendation set.</p>") @as("RecommendationId")
   recommendationId: option<genericString>,
 }
-@ocaml.doc("<p>Attribute details on a specific Savings Plan.</p>")
+@ocaml.doc("<p>The attribute details on a specific Savings Plan.</p>")
 type savingsPlansDetails = {
-  @ocaml.doc("<p>The unique ID used to distinguish Savings Plans from one another.</p>")
+  @ocaml.doc("<p>The unique ID that's used to distinguish Savings Plans from one another.</p>")
   @as("OfferingId")
   offeringId: option<genericString>,
   @ocaml.doc("<p>A group of instance types that Savings Plans applies to.</p>")
   @as("InstanceFamily")
   instanceFamily: option<genericString>,
   @ocaml.doc(
-    "<p>A collection of AWS resources in a geographic area. Each AWS Region is isolated and independent of the other Regions.</p>"
+    "<p>A collection of Amazon Web Services resources in a geographic area. Each Amazon Web Services Region is isolated and independent of the other Regions.</p>"
   )
   @as("Region")
   region: option<genericString>,
 }
 type savingsPlansDataTypes = array<savingsPlansDataType>
-@ocaml.doc(
-  "<p>Specific coverage percentage, On-Demand costs, and spend covered by Savings Plans, and total Savings Plans costs for an account.</p>"
-)
+@ocaml.doc("<p>Specific coverage percentage, On-Demand costs, and spend covered by Savings Plans, and
+            total Savings Plans costs for an account.</p>")
 type savingsPlansCoverageData = {
   @ocaml.doc("<p>The percentage of your existing Savings Plans covered usage, divided by all of your
-            eligible Savings Plans usage in an account(or set of accounts).</p>")
+            eligible Savings Plans usage in an account (or set of accounts).</p>")
   @as("CoveragePercentage")
   coveragePercentage: option<genericString>,
-  @ocaml.doc("<p>The total cost of your AWS usage, regardless of your purchase option.</p>")
+  @ocaml.doc("<p>The total cost of your Amazon Web Services usage, regardless of your purchase
+            option.</p>")
   @as("TotalCost")
   totalCost: option<genericString>,
-  @ocaml.doc("<p>The cost of your AWS usage at the public On-Demand rate.</p>") @as("OnDemandCost")
+  @ocaml.doc("<p>The cost of your Amazon Web Services usage at the public On-Demand rate.</p>")
+  @as("OnDemandCost")
   onDemandCost: option<genericString>,
-  @ocaml.doc("<p>The amount of your AWS usage that is covered by a Savings Plans.</p>")
+  @ocaml.doc(
+    "<p>The amount of your Amazon Web Services usage that is covered by a Savings Plans.</p>"
+  )
   @as("SpendCoveredBySavingsPlans")
   spendCoveredBySavingsPlans: option<genericString>,
 }
-@ocaml.doc(
-  "<p>The amortized amount of Savings Plans purchased in a specific account during a specific time interval.</p>"
-)
+@ocaml.doc("<p>The amortized amount of Savings Plans purchased in a specific account during a
+            specific time interval.</p>")
 type savingsPlansAmortizedCommitment = {
-  @ocaml.doc(
-    "<p>The total amortized amount of your Savings Plans commitment, regardless of your Savings Plans purchase method. </p>"
-  )
+  @ocaml.doc("<p>The total amortized amount of your Savings Plans commitment, regardless of your
+            Savings Plans purchase method. </p>")
   @as("TotalAmortizedCommitment")
   totalAmortizedCommitment: option<genericString>,
-  @ocaml.doc(
-    "<p>The amortized amount of your Savings Plans commitment that was purchased with an <code>Upfront</code> or <code>PartialUpfront</code> Savings Plans.</p>"
-  )
+  @ocaml.doc("<p>The amortized amount of your Savings Plans commitment that was purchased with an
+                <code>Upfront</code> or <code>PartialUpfront</code> Savings Plans.</p>")
   @as("AmortizedUpfrontCommitment")
   amortizedUpfrontCommitment: option<genericString>,
-  @ocaml.doc(
-    "<p>The amortized amount of your Savings Plans commitment that was purchased with either a <code>Partial</code> or a <code>NoUpfront</code>.</p>"
-  )
+  @ocaml.doc("<p>The amortized amount of your Savings Plans commitment that was purchased with either a
+                <code>Partial</code> or a <code>NoUpfront</code>.</p>")
   @as("AmortizedRecurringCommitment")
   amortizedRecurringCommitment: option<genericString>,
 }
-@ocaml.doc("<p>
-        The combination of AWS service, linked account, Region, and usage type where a cost anomaly is observed.
-    </p>")
+@ocaml.doc("<p>The combination of Amazon Web Services service, linked account, Region, and usage type
+            where a cost anomaly is observed. </p>")
 type rootCause = {
-  @ocaml.doc("<p>
-        The <code>UsageType</code> value associated with the cost anomaly.
-    </p>")
+  @ocaml.doc("<p>The <code>UsageType</code> value that's associated with the cost anomaly. </p>")
   @as("UsageType")
   usageType: option<genericString>,
-  @ocaml.doc("<p>
-        The linked account value associated with the cost anomaly.
-    </p>")
+  @ocaml.doc("<p>The member account value that's associated with the cost anomaly. </p>")
   @as("LinkedAccount")
   linkedAccount: option<genericString>,
-  @ocaml.doc("<p>
-        The AWS Region associated with the cost anomaly.
-    </p>")
+  @ocaml.doc("<p>The Amazon Web Services Region that's associated with the cost anomaly. </p>")
   @as("Region")
   region: option<genericString>,
-  @ocaml.doc("<p>
-        The AWS service name associated with the cost anomaly.
-    </p>")
+  @ocaml.doc(
+    "<p>The Amazon Web Services service name that's associated with the cost anomaly. </p>"
+  )
   @as("Service")
   service: option<genericString>,
 }
-@ocaml.doc("<p> Summary of rightsizing recommendations  </p>")
+@ocaml.doc("<p>The summary of rightsizing recommendations </p>")
 type rightsizingRecommendationSummary = {
-  @ocaml.doc("<p> Savings percentage based on the recommended modifications, relative to the total
-            On-Demand
-            costs associated with these instances.</p>")
+  @ocaml.doc("<p> The savings percentage based on the recommended modifications. It's relative to the
+            total On-Demand costs that are associated with these instances.</p>")
   @as("SavingsPercentage")
   savingsPercentage: option<genericString>,
-  @ocaml.doc("<p> The currency code that AWS used to calculate the savings.</p>")
+  @ocaml.doc("<p>The currency code that Amazon Web Services used to calculate the savings.</p>")
   @as("SavingsCurrencyCode")
   savingsCurrencyCode: option<genericString>,
-  @ocaml.doc("<p> Estimated total savings resulting from modifications, on a monthly basis.</p>")
+  @ocaml.doc("<p>The estimated total savings resulting from modifications, on a monthly basis.</p>")
   @as("EstimatedTotalMonthlySavingsAmount")
   estimatedTotalMonthlySavingsAmount: option<genericString>,
-  @ocaml.doc("<p> Total number of instance recommendations.</p>") @as("TotalRecommendationCount")
+  @ocaml.doc("<p>The total number of instance recommendations.</p>") @as("TotalRecommendationCount")
   totalRecommendationCount: option<genericString>,
 }
 @ocaml.doc("<p>Metadata for this recommendation set.</p>")
 type rightsizingRecommendationMetadata = {
-  @ocaml.doc("<p>Additional metadata that may be applicable to the recommendation.</p>")
+  @ocaml.doc("<p>Additional metadata that might be applicable to the recommendation.</p>")
   @as("AdditionalMetadata")
   additionalMetadata: option<genericString>,
-  @ocaml.doc("<p> How many days of previous usage that AWS considers when making this
-            recommendation.</p>")
+  @ocaml.doc("<p>The number of days of previous usage that Amazon Web Services considers when making
+            this recommendation.</p>")
   @as("LookbackPeriodInDays")
   lookbackPeriodInDays: option<lookbackPeriodInDays>,
-  @ocaml.doc("<p> The timestamp for when AWS made this recommendation.</p>")
+  @ocaml.doc("<p>The timestamp for when Amazon Web Services made this recommendation.</p>")
   @as("GenerationTimestamp")
   generationTimestamp: option<genericString>,
-  @ocaml.doc("<p> The ID for this specific recommendation.</p>") @as("RecommendationId")
+  @ocaml.doc("<p>The ID for this specific recommendation.</p>") @as("RecommendationId")
   recommendationId: option<genericString>,
 }
-@ocaml.doc("<p> Enables you to customize recommendations across two attributes. You can choose to view
-            recommendations for instances within the same instance families or across different instance
-            families. You can also choose to view your estimated savings associated with recommendations
-            with consideration of existing Savings Plans or RI benefits, or
-            neither. </p>")
+@ocaml.doc("<p>You can use <code>RightsizingRecommendationConfiguration</code> to customize
+            recommendations across two attributes. You can choose to view recommendations for
+            instances within the same instance families or across different instance families. You
+            can also choose to view your estimated savings that are associated with recommendations
+            with consideration of existing Savings Plans or RI benefits, or neither. </p>")
 type rightsizingRecommendationConfiguration = {
-  @ocaml.doc("<p>
-            The option to consider RI or Savings Plans discount benefits in your savings calculation. The default value is <code>TRUE</code>.
-        </p>")
+  @ocaml.doc("<p>The option to consider RI or Savings Plans discount benefits in your savings
+            calculation. The default value is <code>TRUE</code>. </p>")
   @as("BenefitsConsidered")
   benefitsConsidered: genericBoolean,
-  @ocaml.doc("<p>
-            The option to see recommendations within the same instance family, or recommendations for instances across other families. The default value is <code>SAME_INSTANCE_FAMILY</code>.
-        </p>")
+  @ocaml.doc("<p>The option to see recommendations within the same instance family or recommendations
+            for instances across other families. The default value is
+                <code>SAME_INSTANCE_FAMILY</code>. </p>")
   @as("RecommendationTarget")
   recommendationTarget: recommendationTarget,
 }
-@ocaml.doc("<p>A summary about this recommendation, such as the currency code, the amount that AWS
-            estimates that you could save, and the total amount of reservation to
-            purchase.</p>")
+type resourceTagKeyList = array<resourceTagKey>
+@ocaml.doc("<p>
+            The tag structure that contains a tag key and value. 
+        </p>
+        <note>
+            <p>Tagging is supported only for the following Cost Explorer resource types: <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_AnomalyMonitor.html\">
+                  <code>AnomalyMonitor</code>
+               </a>, <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_AnomalySubscription.html\">
+                  <code>AnomalySubscription</code>
+               </a>, <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_CostCategory.html\">
+                  <code>CostCategory</code>
+               </a>.</p>
+         </note>")
+type resourceTag = {
+  @ocaml.doc("<p>
+            The value that is associated with the tag.
+        </p>")
+  @as("Value")
+  value: resourceTagValue,
+  @ocaml.doc("<p>
+            The key that is associated with the tag.
+        </p>")
+  @as("Key")
+  key: resourceTagKey,
+}
+@ocaml.doc("<p>A summary about this recommendation, such as the currency code, the amount that
+                Amazon Web Services estimates that you could save, and the total amount of
+            reservation to purchase.</p>")
 type reservationPurchaseRecommendationSummary = {
   @ocaml.doc("<p>The currency code used for this recommendation.</p>") @as("CurrencyCode")
   currencyCode: option<genericString>,
-  @ocaml.doc("<p>The total amount that AWS estimates that this recommendation could save you in a
-            month, as a percentage of your costs.</p>")
+  @ocaml.doc("<p>The total amount that Amazon Web Services estimates that this recommendation could save
+            you in a month, as a percentage of your costs.</p>")
   @as("TotalEstimatedMonthlySavingsPercentage")
   totalEstimatedMonthlySavingsPercentage: option<genericString>,
-  @ocaml.doc("<p>The total amount that AWS estimates that this recommendation could save you in a
-            month.</p>")
+  @ocaml.doc("<p>The total amount that Amazon Web Services estimates that this recommendation could save
+            you in a month.</p>")
   @as("TotalEstimatedMonthlySavingsAmount")
   totalEstimatedMonthlySavingsAmount: option<genericString>,
 }
-@ocaml.doc("<p>Information about this specific recommendation, such as the timestamp for when AWS
-            made a specific recommendation.</p>")
+@ocaml.doc(
+  "<p>Information about this specific recommendation, such as the timestamp for when Amazon Web Services made a specific recommendation.</p>"
+)
 type reservationPurchaseRecommendationMetadata = {
-  @ocaml.doc("<p>The timestamp for when AWS made this recommendation.</p>")
+  @ocaml.doc("<p>The timestamp for when Amazon Web Services made this recommendation.</p>")
   @as("GenerationTimestamp")
   generationTimestamp: option<genericString>,
   @ocaml.doc("<p>The ID for this specific recommendation.</p>") @as("RecommendationId")
@@ -527,94 +533,98 @@ type reservationPurchaseRecommendationMetadata = {
 }
 @ocaml.doc("<p>The aggregated numbers for your reservation usage.</p>")
 type reservationAggregates = {
-  @ocaml.doc("<p>The unrealized savings due to purchasing and using a reservation.</p>")
+  @ocaml.doc("<p>The unrealized savings because of purchasing and using a reservation.</p>")
   @as("UnrealizedSavings")
   unrealizedSavings: option<unrealizedSavings>,
-  @ocaml.doc("<p>The realized savings due to purchasing and using a reservation.</p>")
+  @ocaml.doc("<p>The realized savings because of purchasing and using a reservation.</p>")
   @as("RealizedSavings")
   realizedSavings: option<realizedSavings>,
   @ocaml.doc("<p>The cost of unused hours for your reservation.</p>") @as("RICostForUnusedHours")
   ricostForUnusedHours: option<ricostForUnusedHours>,
-  @ocaml.doc("<p>The total cost of your reservation, amortized over the reservation
-            period.</p>")
+  @ocaml.doc(
+    "<p>The total cost of your reservation. It's amortized over the reservation period.</p>"
+  )
   @as("TotalAmortizedFee")
   totalAmortizedFee: option<totalAmortizedFee>,
-  @ocaml.doc("<p>The monthly cost of your reservation, amortized over the reservation
+  @ocaml.doc("<p>The monthly cost of your reservation. It's amortized over the reservation
             period.</p>")
   @as("AmortizedRecurringFee")
   amortizedRecurringFee: option<amortizedRecurringFee>,
-  @ocaml.doc("<p>The upfront cost of your reservation, amortized over the reservation
+  @ocaml.doc("<p>The upfront cost of your reservation. It's amortized over the reservation
             period.</p>")
   @as("AmortizedUpfrontFee")
   amortizedUpfrontFee: option<amortizedUpfrontFee>,
-  @ocaml.doc("<p>How much you could save if you use your entire reservation.</p>")
+  @ocaml.doc("<p>How much you might save if you use your entire reservation.</p>")
   @as("TotalPotentialRISavings")
   totalPotentialRISavings: option<totalPotentialRISavings>,
-  @ocaml.doc("<p>How much you saved due to purchasing and utilizing reservation. AWS calculates this
-            by subtracting <code>TotalAmortizedFee</code> from
+  @ocaml.doc("<p>How much you saved due to purchasing and utilizing reservation. Amazon Web Services
+            calculates this by subtracting <code>TotalAmortizedFee</code> from
                 <code>OnDemandCostOfRIHoursUsed</code>.</p>")
   @as("NetRISavings")
   netRISavings: option<netRISavings>,
-  @ocaml.doc("<p>How much your reservation would cost if charged On-Demand rates.</p>")
+  @ocaml.doc("<p>How much your reservation costs if charged On-Demand rates.</p>")
   @as("OnDemandCostOfRIHoursUsed")
   onDemandCostOfRIHoursUsed: option<onDemandCostOfRIHoursUsed>,
-  @ocaml.doc("<p>The number of Amazon EC2 reservation hours that you didn't use, converted to normalized
-            units. Normalized units are available only for Amazon EC2 usage after November 11,
-            2017.</p>")
+  @ocaml.doc("<p>The number of Amazon EC2 reservation hours that you didn't use. It's converted to
+            normalized units. Normalized units are available only for Amazon EC2 usage after
+            November 11, 2017.</p>")
   @as("UnusedUnits")
   unusedUnits: option<unusedUnits>,
   @ocaml.doc("<p>The number of reservation hours that you didn't use.</p>") @as("UnusedHours")
   unusedHours: option<unusedHours>,
-  @ocaml.doc("<p>The total number of Amazon EC2 reservation hours that you used, converted to normalized
-            units. Normalized units are available only for Amazon EC2 usage after November 11,
-            2017.</p>")
+  @ocaml.doc("<p>The total number of Amazon EC2 reservation hours that you used. It's converted to
+            normalized units. Normalized units are available only for Amazon EC2 usage after
+            November 11, 2017.</p>")
   @as("TotalActualUnits")
   totalActualUnits: option<totalActualUnits>,
   @ocaml.doc("<p>The total number of reservation hours that you used.</p>") @as("TotalActualHours")
   totalActualHours: option<totalActualHours>,
-  @ocaml.doc("<p>How many Amazon EC2 reservation hours that you purchased, converted to normalized units.
-            Normalized units are available only for Amazon EC2 usage after November 11, 2017.</p>")
+  @ocaml.doc("<p>The number of Amazon EC2 reservation hours that you purchased. It's converted to
+            normalized units. Normalized units are available only for Amazon EC2 usage after
+            November 11, 2017.</p>")
   @as("PurchasedUnits")
   purchasedUnits: option<purchasedUnits>,
   @ocaml.doc("<p>How many reservation hours that you purchased.</p>") @as("PurchasedHours")
   purchasedHours: option<purchasedHours>,
-  @ocaml.doc("<p>The percentage of Amazon EC2 reservation time that you used, converted to normalized
-            units. Normalized units are available only for Amazon EC2 usage after November 11,
-            2017.</p>")
+  @ocaml.doc("<p>The percentage of Amazon EC2 reservation time that you used. It's converted to
+            normalized units. Normalized units are available only for Amazon EC2 usage after
+            November 11, 2017.</p>")
   @as("UtilizationPercentageInUnits")
   utilizationPercentageInUnits: option<utilizationPercentageInUnits>,
   @ocaml.doc("<p>The percentage of reservation time that you used.</p>")
   @as("UtilizationPercentage")
   utilizationPercentage: option<utilizationPercentage>,
 }
-@ocaml.doc("<p>Details about the Amazon Redshift instances that AWS recommends that you
-            purchase.</p>")
+@ocaml.doc("<p>Details about the Amazon Redshift instances that Amazon Web Services recommends that
+            you purchase.</p>")
 type redshiftInstanceDetails = {
-  @ocaml.doc("<p>Whether the recommended reservation is size flexible.</p>") @as("SizeFlexEligible")
+  @ocaml.doc("<p>Determines whether the recommended reservation is size flexible.</p>")
+  @as("SizeFlexEligible")
   sizeFlexEligible: option<genericBoolean>,
-  @ocaml.doc("<p>Whether the recommendation is for a current-generation instance.</p>")
+  @ocaml.doc("<p>Determines whether the recommendation is for a current-generation instance.</p>")
   @as("CurrentGeneration")
   currentGeneration: option<genericBoolean>,
-  @ocaml.doc("<p>The AWS Region of the recommended reservation.</p>") @as("Region")
+  @ocaml.doc("<p>The Amazon Web Services Region of the recommended reservation.</p>") @as("Region")
   region: option<genericString>,
-  @ocaml.doc("<p>The type of node that AWS recommends.</p>") @as("NodeType")
+  @ocaml.doc("<p>The type of node that Amazon Web Services recommends.</p>") @as("NodeType")
   nodeType: option<genericString>,
   @ocaml.doc("<p>The instance family of the recommended reservation.</p>") @as("Family")
   family: option<genericString>,
 }
-@ocaml.doc("<p>Details about the Amazon RDS instances that AWS recommends that you
+@ocaml.doc("<p>Details about the Amazon RDS instances that Amazon Web Services recommends that you
             purchase.</p>")
 type rdsinstanceDetails = {
-  @ocaml.doc("<p>Whether the recommended reservation is size flexible.</p>") @as("SizeFlexEligible")
+  @ocaml.doc("<p>Determines whether the recommended reservation is size flexible.</p>")
+  @as("SizeFlexEligible")
   sizeFlexEligible: option<genericBoolean>,
-  @ocaml.doc("<p>Whether the recommendation is for a current-generation instance. </p>")
+  @ocaml.doc("<p>Determines whether the recommendation is for a current-generation instance. </p>")
   @as("CurrentGeneration")
   currentGeneration: option<genericBoolean>,
   @ocaml.doc("<p>The license model that the recommended reservation supports.</p>")
   @as("LicenseModel")
   licenseModel: option<genericString>,
-  @ocaml.doc("<p>Whether the recommendation is for a reservation in a single Availability Zone or a
-            reservation with a backup in a second Availability Zone.</p>")
+  @ocaml.doc("<p>Determines whether the recommendation is for a reservation in a single Availability
+            Zone or a reservation with a backup in a second Availability Zone.</p>")
   @as("DeploymentOption")
   deploymentOption: option<genericString>,
   @ocaml.doc("<p>The database edition that the recommended reservation supports.</p>")
@@ -623,36 +633,27 @@ type rdsinstanceDetails = {
   @ocaml.doc("<p>The database engine that the recommended reservation supports.</p>")
   @as("DatabaseEngine")
   databaseEngine: option<genericString>,
-  @ocaml.doc("<p>The AWS Region of the recommended reservation.</p>") @as("Region")
+  @ocaml.doc("<p>The Amazon Web Services Region of the recommended reservation.</p>") @as("Region")
   region: option<genericString>,
-  @ocaml.doc("<p>The type of instance that AWS recommends.</p>") @as("InstanceType")
+  @ocaml.doc("<p>The type of instance that Amazon Web Services recommends.</p>") @as("InstanceType")
   instanceType: option<genericString>,
   @ocaml.doc("<p>The instance family of the recommended reservation.</p>") @as("Family")
   family: option<genericString>,
 }
 type platformDifferences = array<platformDifference>
-@ocaml.doc("<p>
-            The network field that contains a list of network metrics associated with the current instance.
-        </p>")
+@ocaml.doc("<p> The network field that contains a list of network metrics that are associated with
+            the current instance. </p>")
 type networkResourceUtilization = {
-  @ocaml.doc("<p>
-            The network outgress packets measured in packets per second.
-        </p>")
+  @ocaml.doc("<p> The network outgress packets that are measured in packets per second. </p>")
   @as("NetworkPacketsOutPerSecond")
   networkPacketsOutPerSecond: option<genericString>,
-  @ocaml.doc("<p>
-            The network ingress packets measured in packets per second.
-        </p>")
+  @ocaml.doc("<p> The network ingress packets that are measured in packets per second. </p>")
   @as("NetworkPacketsInPerSecond")
   networkPacketsInPerSecond: option<genericString>,
-  @ocaml.doc("<p>
-            The network outgress throughput utilization measured in Bytes per second.
-        </p>")
+  @ocaml.doc("<p> The network outbound throughput utilization measured in Bytes per second. </p>")
   @as("NetworkOutBytesPerSecond")
   networkOutBytesPerSecond: option<genericString>,
-  @ocaml.doc("<p>
-            The network ingress throughput utilization measured in Bytes per second.
-        </p>")
+  @ocaml.doc("<p> The network inbound throughput utilization measured in Bytes per second. </p>")
   @as("NetworkInBytesPerSecond")
   networkInBytesPerSecond: option<genericString>,
 }
@@ -666,23 +667,16 @@ type metricValue = {
 type metricNames = array<metricName>
 type matchOptions = array<matchOption>
 type keys = array<key>
-@ocaml.doc("<p>
-        The anomaly's dollar value.
-    </p>")
+@ocaml.doc("<p>The dollar value of the anomaly. </p>")
 type impact = {
-  @ocaml.doc("<p>
-        The cumulative dollar value observed for an anomaly.
-    </p>")
+  @ocaml.doc("<p>The cumulative dollar value that's observed for an anomaly. </p>")
   @as("TotalImpact")
   totalImpact: option<genericDouble>,
-  @ocaml.doc("<p>
-        The maximum dollar value observed for an anomaly.
-    </p>")
-  @as("MaxImpact")
+  @ocaml.doc("<p>The maximum dollar value that's observed for an anomaly. </p>") @as("MaxImpact")
   maxImpact: genericDouble,
 }
-@ocaml.doc("<p>Represents a group when you specify a group by criteria or in the response to a
-            query with a specific grouping.</p>")
+@ocaml.doc("<p>Represents a group when you specify a group by criteria or in the response to a query
+            with a specific grouping.</p>")
 type groupDefinition = {
   @ocaml.doc("<p>The string that represents a key for a specified group.</p>") @as("Key")
   key: option<groupDefinitionKey>,
@@ -690,165 +684,155 @@ type groupDefinition = {
   type_: option<groupDefinitionType>,
 }
 type findingReasonCodes = array<findingReasonCode>
-@ocaml.doc("<p>Details about the Amazon ElastiCache instances that AWS recommends that you
-            purchase.</p>")
+@ocaml.doc("<p>Details about the Amazon ElastiCache instances that Amazon Web Services recommends that
+            you purchase.</p>")
 type elastiCacheInstanceDetails = {
-  @ocaml.doc("<p>Whether the recommended reservation is size flexible.</p>") @as("SizeFlexEligible")
+  @ocaml.doc("<p>Determines whether the recommended reservation is size flexible.</p>")
+  @as("SizeFlexEligible")
   sizeFlexEligible: option<genericBoolean>,
-  @ocaml.doc("<p>Whether the recommendation is for a current generation instance.</p>")
+  @ocaml.doc("<p>Determines whether the recommendation is for a current generation instance.</p>")
   @as("CurrentGeneration")
   currentGeneration: option<genericBoolean>,
   @ocaml.doc("<p>The description of the recommended reservation.</p>") @as("ProductDescription")
   productDescription: option<genericString>,
-  @ocaml.doc("<p>The AWS Region of the recommended reservation.</p>") @as("Region")
+  @ocaml.doc("<p>The Amazon Web Services Region of the recommended reservation.</p>") @as("Region")
   region: option<genericString>,
-  @ocaml.doc("<p>The type of node that AWS recommends.</p>") @as("NodeType")
+  @ocaml.doc("<p>The type of node that Amazon Web Services recommends.</p>") @as("NodeType")
   nodeType: option<genericString>,
   @ocaml.doc("<p>The instance family of the recommended reservation.</p>") @as("Family")
   family: option<genericString>,
 }
-@ocaml.doc("<p>Details about the Amazon ES instances that AWS recommends that you
+@ocaml.doc("<p>Details about the Amazon OpenSearch Service instances that Amazon Web Services recommends that you
             purchase.</p>")
 type esinstanceDetails = {
-  @ocaml.doc("<p>Whether the recommended reservation is size flexible.</p>") @as("SizeFlexEligible")
+  @ocaml.doc("<p>Determines whether the recommended reservation is size flexible.</p>")
+  @as("SizeFlexEligible")
   sizeFlexEligible: option<genericBoolean>,
-  @ocaml.doc("<p>Whether the recommendation is for a current-generation instance.</p>")
+  @ocaml.doc("<p>Determines whether the recommendation is for a current-generation instance.</p>")
   @as("CurrentGeneration")
   currentGeneration: option<genericBoolean>,
-  @ocaml.doc("<p>The AWS Region of the recommended reservation.</p>") @as("Region")
+  @ocaml.doc("<p>The Amazon Web Services Region of the recommended reservation.</p>") @as("Region")
   region: option<genericString>,
-  @ocaml.doc("<p>The size of instance that AWS recommends.</p>") @as("InstanceSize")
+  @ocaml.doc("<p>The size of instance that Amazon Web Services recommends.</p>") @as("InstanceSize")
   instanceSize: option<genericString>,
-  @ocaml.doc("<p>The class of instance that AWS recommends.</p>") @as("InstanceClass")
+  @ocaml.doc("<p>The class of instance that Amazon Web Services recommends.</p>")
+  @as("InstanceClass")
   instanceClass: option<genericString>,
 }
-@ocaml.doc("<p>The Amazon EC2 hardware specifications that you want AWS to provide recommendations
-            for.</p>")
+@ocaml.doc("<p>The Amazon EC2 hardware specifications that you want Amazon Web Services to provide
+            recommendations for.</p>")
 type ec2Specification = {
-  @ocaml.doc("<p>Whether you want a recommendation for standard or convertible
+  @ocaml.doc("<p>Indicates whether you want a recommendation for standard or convertible
             reservations.</p>")
   @as("OfferingClass")
   offeringClass: option<offeringClass>,
 }
-@ocaml.doc("<p> Details on the Amazon EC2 Resource.</p>")
+@ocaml.doc("<p>Details on the Amazon EC2 Resource.</p>")
 type ec2ResourceDetails = {
-  @ocaml.doc("<p> Number of VCPU cores in the AWS instance type.</p>") @as("Vcpu")
+  @ocaml.doc("<p> The number of VCPU cores in the Amazon Web Services instance type.</p>")
+  @as("Vcpu")
   vcpu: option<genericString>,
-  @ocaml.doc("<p> The disk storage of the AWS instance (not EBS storage).</p>") @as("Storage")
+  @ocaml.doc("<p>The disk storage of the Amazon Web Services instance. This doesn't include EBS
+            storage.</p>")
+  @as("Storage")
   storage: option<genericString>,
-  @ocaml.doc("<p> Network performance capacity of the AWS instance.</p>") @as("NetworkPerformance")
+  @ocaml.doc("<p>The network performance capacity of the Amazon Web Services instance.</p>")
+  @as("NetworkPerformance")
   networkPerformance: option<genericString>,
-  @ocaml.doc("<p> Memory capacity of the AWS instance.</p>") @as("Memory")
+  @ocaml.doc("<p>The memory capacity of the Amazon Web Services instance.</p>") @as("Memory")
   memory: option<genericString>,
-  @ocaml.doc("<p> The SKU of the product.</p>") @as("Sku") sku: option<genericString>,
-  @ocaml.doc("<p> The AWS Region of the instance.</p>") @as("Region") region: option<genericString>,
-  @ocaml.doc("<p> The platform of the AWS instance. The platform is the specific combination of
-            operating system, license model, and software on an instance.</p>")
+  @ocaml.doc("<p>The SKU of the product.</p>") @as("Sku") sku: option<genericString>,
+  @ocaml.doc("<p>The Amazon Web Services Region of the instance.</p>") @as("Region")
+  region: option<genericString>,
+  @ocaml.doc("<p>The platform of the Amazon Web Services instance. The platform is the specific
+            combination of operating system, license model, and software on an instance.</p>")
   @as("Platform")
   platform: option<genericString>,
-  @ocaml.doc("<p> The type of AWS instance.</p>") @as("InstanceType")
+  @ocaml.doc("<p>The type of Amazon Web Services instance.</p>") @as("InstanceType")
   instanceType: option<genericString>,
-  @ocaml.doc("<p> Hourly public On-Demand rate for the instance type.</p>")
+  @ocaml.doc("<p>The hourly public On-Demand rate for the instance type.</p>")
   @as("HourlyOnDemandRate")
   hourlyOnDemandRate: option<genericString>,
 }
-@ocaml.doc("<p>Details about the Amazon EC2 instances that AWS recommends that you purchase.</p>")
+@ocaml.doc("<p>Details about the Amazon EC2 instances that Amazon Web Services recommends that you
+            purchase.</p>")
 type ec2InstanceDetails = {
-  @ocaml.doc("<p>Whether the recommended reservation is size flexible.</p>") @as("SizeFlexEligible")
+  @ocaml.doc("<p>Determines whether the recommended reservation is size flexible.</p>")
+  @as("SizeFlexEligible")
   sizeFlexEligible: option<genericBoolean>,
-  @ocaml.doc("<p>Whether the recommendation is for a current-generation instance. </p>")
+  @ocaml.doc("<p>Determines whether the recommendation is for a current-generation instance. </p>")
   @as("CurrentGeneration")
   currentGeneration: option<genericBoolean>,
-  @ocaml.doc("<p>Whether the recommended reservation is dedicated or shared.</p>") @as("Tenancy")
+  @ocaml.doc("<p>Determines whether the recommended reservation is dedicated or shared.</p>")
+  @as("Tenancy")
   tenancy: option<genericString>,
-  @ocaml.doc("<p>The platform of the recommended reservation. The platform is the specific
-            combination of operating system, license model, and software on an instance.</p>")
+  @ocaml.doc("<p>The platform of the recommended reservation. The platform is the specific combination
+            of operating system, license model, and software on an instance.</p>")
   @as("Platform")
   platform: option<genericString>,
   @ocaml.doc("<p>The Availability Zone of the recommended reservation.</p>") @as("AvailabilityZone")
   availabilityZone: option<genericString>,
-  @ocaml.doc("<p>The AWS Region of the recommended reservation.</p>") @as("Region")
+  @ocaml.doc("<p>The Amazon Web Services Region of the recommended reservation.</p>") @as("Region")
   region: option<genericString>,
-  @ocaml.doc("<p>The type of instance that AWS recommends.</p>") @as("InstanceType")
+  @ocaml.doc("<p>The type of instance that Amazon Web Services recommends.</p>") @as("InstanceType")
   instanceType: option<genericString>,
   @ocaml.doc("<p>The instance family of the recommended reservation.</p>") @as("Family")
   family: option<genericString>,
 }
-@ocaml.doc("<p>
-            The EBS field that contains a list of EBS metrics associated with the current instance.
-        </p>")
+@ocaml.doc("<p>The EBS field that contains a list of EBS metrics that are associated with the current
+            instance. </p>")
 type ebsresourceUtilization = {
-  @ocaml.doc("<p>
-            The maximum size of write operations per second.
-        </p>")
+  @ocaml.doc("<p>The maximum size of write operations per second. </p>")
   @as("EbsWriteBytesPerSecond")
   ebsWriteBytesPerSecond: option<genericString>,
-  @ocaml.doc("<p>
-            The maximum size of read operations per second
-        </p>")
-  @as("EbsReadBytesPerSecond")
+  @ocaml.doc("<p>The maximum size of read operations per second </p>") @as("EbsReadBytesPerSecond")
   ebsReadBytesPerSecond: option<genericString>,
-  @ocaml.doc("<p>
-            The maximum number of write operations per second.
-        </p>")
+  @ocaml.doc("<p>The maximum number of write operations per second. </p>")
   @as("EbsWriteOpsPerSecond")
   ebsWriteOpsPerSecond: option<genericString>,
-  @ocaml.doc("<p>
-            The maximum number of read operations per second.
-        </p>")
-  @as("EbsReadOpsPerSecond")
+  @ocaml.doc("<p>The maximum number of read operations per second. </p>") @as("EbsReadOpsPerSecond")
   ebsReadOpsPerSecond: option<genericString>,
 }
-@ocaml.doc("<p>
-            The field that contains a list of disk (local storage) metrics associated with the current instance.
-        </p>")
+@ocaml.doc("<p> The field that contains a list of disk (local storage) metrics that are associated
+            with the current instance. </p>")
 type diskResourceUtilization = {
-  @ocaml.doc("<p>
-            The maximum write throughput operations per second.
-        </p>")
+  @ocaml.doc("<p> The maximum write throughput operations per second. </p>")
   @as("DiskWriteBytesPerSecond")
   diskWriteBytesPerSecond: option<genericString>,
-  @ocaml.doc("<p>
-            The maximum read throughput operations per second.
-        </p>")
+  @ocaml.doc("<p> The maximum read throughput operations per second. </p>")
   @as("DiskReadBytesPerSecond")
   diskReadBytesPerSecond: option<genericString>,
-  @ocaml.doc("<p>
-            The maximum number of write operations per second.
-        </p>")
+  @ocaml.doc("<p> The maximum number of write operations per second. </p>")
   @as("DiskWriteOpsPerSecond")
   diskWriteOpsPerSecond: option<genericString>,
-  @ocaml.doc("<p>
-            The maximum number of read operations per second.
-        </p>")
+  @ocaml.doc("<p> The maximum number of read operations per second. </p>")
   @as("DiskReadOpsPerSecond")
   diskReadOpsPerSecond: option<genericString>,
 }
-@ocaml.doc("<p>The time period of the request.
-        </p>")
+@ocaml.doc("<p>The time period of the request. </p>")
 type dateInterval = {
-  @ocaml.doc("<p>The end of the time period. The end date is
-            exclusive. For example, if <code>end</code> is <code>2017-05-01</code>, AWS retrieves
-            cost and usage data from the start date up to, but not including,
-                <code>2017-05-01</code>.</p>")
+  @ocaml.doc("<p>The end of the time period. The end date is exclusive. For example, if
+                <code>end</code> is <code>2017-05-01</code>, Amazon Web Services retrieves cost and
+            usage data from the start date up to, but not including, <code>2017-05-01</code>.</p>")
   @as("End")
   end: yearMonthDay,
-  @ocaml.doc("<p>The beginning of the time period. The start
-            date is inclusive. For example, if <code>start</code> is <code>2017-01-01</code>, AWS
-            retrieves cost and usage data starting at <code>2017-01-01</code> up to the end
-            date. The start date must be equal to or no later than the current date to avoid a validation error.</p>")
+  @ocaml.doc("<p>The beginning of the time period. The start date is inclusive. For example, if
+                <code>start</code> is <code>2017-01-01</code>, Amazon Web Services retrieves cost and
+            usage data starting at <code>2017-01-01</code> up to the end date. The start date must
+            be equal to or no later than the current date to avoid a validation error.</p>")
   @as("Start")
   start: yearMonthDay,
 }
-@ocaml.doc("<p>The amount of instance usage, in normalized units. Normalized units enable you to
-            see your EC2 usage for multiple sizes of instances in a uniform way. For example,
-            suppose you run an xlarge instance and a 2xlarge instance. If you run both instances for
+@ocaml.doc("<p>The amount of instance usage, in normalized units. You can use normalized units to see
+            your EC2 usage for multiple sizes of instances in a uniform way. For example, suppose
+            that you run an xlarge instance and a 2xlarge instance. If you run both instances for
             the same amount of time, the 2xlarge instance uses twice as much of your reservation as
-            the xlarge instance, even though both instances show only one instance-hour. Using
-            normalized units instead of instance-hours, the xlarge instance used 8 normalized units,
-            and the 2xlarge instance used 16 normalized units.</p>
-        <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-modifying.html\">Modifying Reserved Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide for
-                Linux Instances</i>.</p>")
+            the xlarge instance, even though both instances show only one instance-hour. When you
+            use normalized units instead of instance-hours, the xlarge instance used 8 normalized
+            units, and the 2xlarge instance used 16 normalized units.</p>
+        <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-modifying.html\">Modifying Reserved Instances</a>
+            in the <i>Amazon Elastic Compute Cloud User Guide for Linux
+            Instances</i>.</p>")
 type coverageNormalizedUnits = {
   @ocaml.doc("<p>The percentage of your used instance normalized units that a reservation
             covers.</p>")
@@ -885,72 +869,65 @@ type coverageCost = {
   onDemandCost: option<onDemandCost>,
 }
 type costCategoryValuesList = array<costCategoryValue>
-@ocaml.doc("<p>
-            The list of processing statuses for Cost Management products for a specific cost category.
-        </p>")
+type costCategorySplitChargeRuleTargetsList = array<genericString>
+type costCategorySplitChargeRuleParameterValuesList = array<genericString>
+@ocaml.doc("<p>The list of processing statuses for Cost Management products for a specific cost
+            category. </p>")
 type costCategoryProcessingStatus = {
-  @ocaml.doc("<p>
-            The process status for a specific cost category.
-        </p>")
-  @as("Status")
+  @ocaml.doc("<p>The process status for a specific cost category. </p>") @as("Status")
   status: option<costCategoryStatus>,
-  @ocaml.doc("<p>
-            The Cost Management product name of the applied status.
-        </p>")
-  @as("Component")
+  @ocaml.doc("<p>The Cost Management product name of the applied status. </p>") @as("Component")
   component: option<costCategoryStatusComponent>,
 }
 type costCategoryNamesList = array<costCategoryName>
-@ocaml.doc(
-  "<p>When creating or updating a cost category, you can define the <code>CostCategoryRule</code> rule type as <code>INHERITED_VALUE</code>. This rule type adds the flexibility of defining a rule that dynamically inherits the cost category value from the dimension value defined by <code>CostCategoryInheritedValueDimension</code>. For example, if you wanted to dynamically group costs based on the value of a specific tag key, you would first choose an inherited value rule type, then choose the tag dimension and specify the tag key to use.</p>"
-)
+@ocaml.doc("<p>When creating or updating a cost category, you can define the
+                <code>CostCategoryRule</code> rule type as <code>INHERITED_VALUE</code>. This rule
+            type adds the flexibility of defining a rule that dynamically inherits the cost category
+            value from the dimension value defined by
+                <code>CostCategoryInheritedValueDimension</code>. For example, if you want to
+            dynamically group costs that are based on the value of a specific tag key, first choose
+            an inherited value rule type, then choose the tag dimension and specify the tag key to
+            use.</p>")
 type costCategoryInheritedValueDimension = {
   @ocaml.doc("<p>The key to extract cost category values.</p>") @as("DimensionKey")
   dimensionKey: option<genericString>,
-  @ocaml.doc("<p>The name of dimension for which to group costs.</p>
-	        <p>If you specify <code>LINKED_ACCOUNT_NAME</code>, the cost category value will be based on account name. If you specify <code>TAG</code>, the cost category value will be based on the value of the specified tag key.</p>")
+  @ocaml.doc("<p>The name of the dimension that's used to group costs.</p>
+        <p>If you specify <code>LINKED_ACCOUNT_NAME</code>, the cost category value is based on
+            account name. If you specify <code>TAG</code>, the cost category value will be based on
+            the value of the specified tag key.</p>")
   @as("DimensionName")
   dimensionName: option<costCategoryInheritedValueDimensionName>,
 }
 type attributes = Js.Dict.t<attributeValue>
-@ocaml.doc("<p> Quantifies the anomaly. The higher score means that it is more anomalous. </p>")
+@ocaml.doc("<p>Quantifies the anomaly. The higher score means that it's more anomalous. </p>")
 type anomalyScore = {
-  @ocaml.doc("<p>
-       The last observed score.
-    </p>")
-  @as("CurrentScore")
-  currentScore: genericDouble,
-  @ocaml.doc("<p>
-        The maximum score observed during the <code>AnomalyDateInterval</code>.
-    </p>")
+  @ocaml.doc("<p>The last observed score. </p>") @as("CurrentScore") currentScore: genericDouble,
+  @ocaml.doc(
+    "<p>The maximum score that's observed during the <code>AnomalyDateInterval</code>. </p>"
+  )
   @as("MaxScore")
   maxScore: genericDouble,
 }
-@ocaml.doc("<p>
-        The time period for an anomaly.
-    </p>")
+@ocaml.doc("<p>The time period for an anomaly. </p>")
 type anomalyDateInterval = {
-  @ocaml.doc("<p>
-        The last date an anomaly was observed.
-    </p>")
-  @as("EndDate")
+  @ocaml.doc("<p>The last date an anomaly was observed. </p>") @as("EndDate")
   endDate: option<yearMonthDay>,
-  @ocaml.doc("<p>
-        The first date an anomaly was observed.
-    </p>")
-  @as("StartDate")
+  @ocaml.doc("<p>The first date an anomaly was observed. </p>") @as("StartDate")
   startDate: yearMonthDay,
 }
 @ocaml.doc("<p>The values that are available for a tag.</p>
-		       <p>If <code>Values</code> and <code>Key</code> are not specified, the <code>ABSENT</code> 
-            <code>MatchOption</code> is applied to all tags. That is, filtering on resources with no tags.</p>
-         <p>If <code>Values</code> is provided and <code>Key</code> is not specified, the <code>ABSENT</code> 
-            <code>MatchOption</code> is applied to the tag <code>Key</code> only. That is, filtering on resources without the given tag key.</p>")
+        <p>If <code>Values</code> and <code>Key</code> aren't specified, the <code>ABSENT</code>
+            <code>MatchOption</code> is applied to all tags. That is, it's filtered on resources
+            with no tags.</p>
+        <p>If <code>Values</code> is provided and <code>Key</code> isn't specified, the
+                <code>ABSENT</code>
+            <code>MatchOption</code> is applied to the tag <code>Key</code> only. That is, it's
+            filtered on resources without the given tag key.</p>")
 type tagValues = {
-  @ocaml.doc("<p>The match options that you can use to filter your results.
-                <code>MatchOptions</code> is only applicable for actions related to Cost Category.
-            The default values for <code>MatchOptions</code> are <code>EQUALS</code> and
-                <code>CASE_SENSITIVE</code>.</p>")
+  @ocaml.doc("<p>The match options that you can use to filter your results. <code>MatchOptions</code>
+            is only applicable for actions related to Cost Category. The default values for
+                <code>MatchOptions</code> are <code>EQUALS</code> and
+            <code>CASE_SENSITIVE</code>.</p>")
   @as("MatchOptions")
   matchOptions: option<matchOptions>,
   @ocaml.doc("<p>The specific value of the tag.</p>") @as("Values") values: option<values>,
@@ -958,31 +935,28 @@ type tagValues = {
 }
 type subscribers = array<subscriber>
 type sortDefinitions = array<sortDefinition>
-@ocaml.doc("<p>Hardware specifications for the service that you want recommendations
-            for.</p>")
+@ocaml.doc("<p>Hardware specifications for the service that you want recommendations for.</p>")
 type serviceSpecification = {
-  @ocaml.doc("<p>The Amazon EC2 hardware specifications that you want AWS to provide recommendations
-            for.</p>")
+  @ocaml.doc("<p>The Amazon EC2 hardware specifications that you want Amazon Web Services to provide
+            recommendations for.</p>")
   @as("EC2Specification")
   ec2Specification: option<ec2Specification>,
 }
-@ocaml.doc(
-  "<p>A single daily or monthly Savings Plans utilization rate, and details for your account. A management account in an organization have access to member accounts. You can use <code>GetDimensionValues</code> to determine the possible dimension values. </p>"
-)
+@ocaml.doc("<p>A single daily or monthly Savings Plans utilization rate, and details for your
+            account. A management account in an organization have access to member accounts. You can
+            use <code>GetDimensionValues</code> to determine the possible dimension values. </p>")
 type savingsPlansUtilizationDetail = {
-  @ocaml.doc(
-    "<p>The total amortized commitment for a Savings Plans. Includes the sum of the upfront and recurring Savings Plans fees.</p>"
-  )
+  @ocaml.doc("<p>The total amortized commitment for a Savings Plans. Includes the sum of the upfront
+            and recurring Savings Plans fees.</p>")
   @as("AmortizedCommitment")
   amortizedCommitment: option<savingsPlansAmortizedCommitment>,
-  @ocaml.doc(
-    "<p>The amount saved by using existing Savings Plans. Savings returns both net savings from savings plans as well as the <code>onDemandCostEquivalent</code> of the Savings Plans when considering the utilization rate.</p>"
-  )
+  @ocaml.doc("<p>The amount saved by using existing Savings Plans. Savings returns both net savings
+            from savings plans as well as the <code>onDemandCostEquivalent</code> of the Savings
+            Plans when considering the utilization rate.</p>")
   @as("Savings")
   savings: option<savingsPlansSavings>,
-  @ocaml.doc(
-    "<p>A ratio of your effectiveness of using existing Savings Plans to apply to workloads that are Savings Plans eligible.</p>"
-  )
+  @ocaml.doc("<p>A ratio of your effectiveness of using existing Savings Plans to apply to workloads
+            that are Savings Plans eligible.</p>")
   @as("Utilization")
   utilization: option<savingsPlansUtilization>,
   @ocaml.doc("<p>The attribute that applies to a specific <code>Dimension</code>.</p>")
@@ -994,106 +968,92 @@ type savingsPlansUtilizationDetail = {
 }
 @ocaml.doc("<p>The amount of Savings Plans utilization, in hours.</p>")
 type savingsPlansUtilizationByTime = {
-  @ocaml.doc(
-    "<p>The total amortized commitment for a Savings Plans. This includes the sum of the upfront and recurring Savings Plans fees.</p>"
-  )
+  @ocaml.doc("<p>The total amortized commitment for a Savings Plans. This includes the sum of the
+            upfront and recurring Savings Plans fees.</p>")
   @as("AmortizedCommitment")
   amortizedCommitment: option<savingsPlansAmortizedCommitment>,
-  @ocaml.doc(
-    "<p>The amount saved by using existing Savings Plans. Savings returns both net savings from Savings Plans as well as the <code>onDemandCostEquivalent</code> of the Savings Plans when considering the utilization rate.</p>"
-  )
+  @ocaml.doc("<p>The amount saved by using existing Savings Plans. Savings returns both net savings
+            from Savings Plans as well as the <code>onDemandCostEquivalent</code> of the Savings
+            Plans when considering the utilization rate.</p>")
   @as("Savings")
   savings: option<savingsPlansSavings>,
-  @ocaml.doc(
-    "<p>A ratio of your effectiveness of using existing Savings Plans to apply to workloads that are Savings Plans eligible.</p>"
-  )
+  @ocaml.doc("<p>A ratio of your effectiveness of using existing Savings Plans to apply to workloads
+            that are Savings Plans eligible.</p>")
   @as("Utilization")
   utilization: savingsPlansUtilization,
   @as("TimePeriod") timePeriod: dateInterval,
 }
 @ocaml.doc("<p>The aggregated utilization metrics for your Savings Plans usage.</p>")
 type savingsPlansUtilizationAggregates = {
-  @ocaml.doc(
-    "<p>The total amortized commitment for a Savings Plans. This includes the sum of the upfront and recurring Savings Plans fees.</p>"
-  )
+  @ocaml.doc("<p>The total amortized commitment for a Savings Plans. This includes the sum of the
+            upfront and recurring Savings Plans fees.</p>")
   @as("AmortizedCommitment")
   amortizedCommitment: option<savingsPlansAmortizedCommitment>,
-  @ocaml.doc(
-    "<p>The amount saved by using existing Savings Plans. Savings returns both net savings from Savings Plans, as well as the <code>onDemandCostEquivalent</code> of the Savings Plans when considering the utilization rate.</p>"
-  )
+  @ocaml.doc("<p>The amount saved by using existing Savings Plans. Savings returns both net savings
+            from Savings Plans, as well as the <code>onDemandCostEquivalent</code> of the Savings
+            Plans when considering the utilization rate.</p>")
   @as("Savings")
   savings: option<savingsPlansSavings>,
-  @ocaml.doc(
-    "<p>A ratio of your effectiveness of using existing Savings Plans to apply to workloads that are Savings Plans eligible.</p>"
-  )
+  @ocaml.doc("<p>A ratio of your effectiveness of using existing Savings Plans to apply to workloads
+            that are Savings Plans eligible.</p>")
   @as("Utilization")
   utilization: savingsPlansUtilization,
 }
 @ocaml.doc("<p>Details for your recommended Savings Plans.</p>")
 type savingsPlansPurchaseRecommendationDetail = {
-  @ocaml.doc(
-    "<p>The average value of hourly On-Demand spend over the lookback period of the applicable usage type.</p>"
-  )
+  @ocaml.doc("<p>The average value of hourly On-Demand spend over the lookback period of the applicable
+            usage type.</p>")
   @as("CurrentAverageHourlyOnDemandSpend")
   currentAverageHourlyOnDemandSpend: option<genericString>,
-  @ocaml.doc(
-    "<p>The highest value of hourly On-Demand spend over the lookback period of the applicable usage type.</p>"
-  )
+  @ocaml.doc("<p>The highest value of hourly On-Demand spend over the lookback period of the applicable
+            usage type.</p>")
   @as("CurrentMaximumHourlyOnDemandSpend")
   currentMaximumHourlyOnDemandSpend: option<genericString>,
-  @ocaml.doc(
-    "<p>The lowest value of hourly On-Demand spend over the lookback period of the applicable usage type.</p>"
-  )
+  @ocaml.doc("<p>The lowest value of hourly On-Demand spend over the lookback period of the applicable
+            usage type.</p>")
   @as("CurrentMinimumHourlyOnDemandSpend")
   currentMinimumHourlyOnDemandSpend: option<genericString>,
-  @ocaml.doc("<p>The estimated monthly savings amount, based on the recommended Savings Plans.</p>")
+  @ocaml.doc("<p>The estimated monthly savings amount based on the recommended Savings Plans.</p>")
   @as("EstimatedMonthlySavingsAmount")
   estimatedMonthlySavingsAmount: option<genericString>,
   @ocaml.doc("<p>The estimated utilization of the recommended Savings Plans.</p>")
   @as("EstimatedAverageUtilization")
   estimatedAverageUtilization: option<genericString>,
-  @ocaml.doc(
-    "<p>The recommended hourly commitment level for the Savings Plans type, and configuration based on the usage during the lookback period.</p>"
-  )
+  @ocaml.doc("<p>The recommended hourly commitment level for the Savings Plans type and the
+            configuration that's based on the usage during the lookback period.</p>")
   @as("HourlyCommitmentToPurchase")
   hourlyCommitmentToPurchase: option<genericString>,
-  @ocaml.doc(
-    "<p>The estimated savings percentage relative to the total cost of applicable On-Demand usage over the lookback period.</p>"
-  )
+  @ocaml.doc("<p>The estimated savings percentage relative to the total cost of applicable On-Demand
+            usage over the lookback period.</p>")
   @as("EstimatedSavingsPercentage")
   estimatedSavingsPercentage: option<genericString>,
-  @ocaml.doc(
-    "<p>The estimated savings amount based on the recommended Savings Plans over the length of the lookback period.</p>"
-  )
+  @ocaml.doc("<p>The estimated savings amount that's based on the recommended Savings Plans over the
+            length of the lookback period.</p>")
   @as("EstimatedSavingsAmount")
   estimatedSavingsAmount: option<genericString>,
-  @ocaml.doc("<p>
-            The estimated On-Demand costs you would expect with no additional commitment, based on your usage of the selected time period and the Savings Plans you own.
-        </p>")
+  @ocaml.doc("<p> The estimated On-Demand costs you would expect with no additional commitment, based
+            on your usage of the selected time period and the Savings Plans you own. </p>")
   @as("EstimatedOnDemandCostWithCurrentCommitment")
   estimatedOnDemandCostWithCurrentCommitment: option<genericString>,
-  @ocaml.doc(
-    "<p>The remaining On-Demand cost estimated to not be covered by the recommended Savings Plans, over the length of the lookback period.</p>"
-  )
+  @ocaml.doc("<p>The remaining On-Demand cost estimated to not be covered by the recommended Savings
+            Plans, over the length of the lookback period.</p>")
   @as("EstimatedOnDemandCost")
   estimatedOnDemandCost: option<genericString>,
-  @ocaml.doc(
-    "<p>The cost of the recommended Savings Plans over the length of the lookback period.</p>"
-  )
+  @ocaml.doc("<p>The cost of the recommended Savings Plans over the length of the lookback
+            period.</p>")
   @as("EstimatedSPCost")
   estimatedSPCost: option<genericString>,
-  @ocaml.doc("<p>The currency code AWS used to generate the recommendations and present potential
-            savings.</p>")
+  @ocaml.doc("<p>The currency code that Amazon Web Services used to generate the recommendations and
+            present potential savings.</p>")
   @as("CurrencyCode")
   currencyCode: option<genericString>,
-  @ocaml.doc(
-    "<p>The estimated return on investment based on the recommended Savings Plans purchased. This is calculated as <code>estimatedSavingsAmount</code>/ <code>estimatedSPCost</code>*100.</p>"
-  )
+  @ocaml.doc("<p>The estimated return on investment that's based on the recommended Savings Plans that
+            you purchased. This is calculated as <code>estimatedSavingsAmount</code>/
+                <code>estimatedSPCost</code>*100.</p>")
   @as("EstimatedROI")
   estimatedROI: option<genericString>,
-  @ocaml.doc(
-    "<p>The upfront cost of the recommended Savings Plans, based on the selected payment option.</p>"
-  )
+  @ocaml.doc("<p>The upfront cost of the recommended Savings Plans, based on the selected payment
+            option.</p>")
   @as("UpfrontCost")
   upfrontCost: option<genericString>,
   @ocaml.doc("<p>The <code>AccountID</code> the recommendation is generated for.</p>")
@@ -1102,9 +1062,8 @@ type savingsPlansPurchaseRecommendationDetail = {
   @ocaml.doc("<p>Details for your recommended Savings Plans.</p>") @as("SavingsPlansDetails")
   savingsPlansDetails: option<savingsPlansDetails>,
 }
-@ocaml.doc(
-  "<p>The amount of Savings Plans eligible usage that is covered by Savings Plans. All calculations consider the On-Demand equivalent of your Savings Plans usage.</p>"
-)
+@ocaml.doc("<p>The amount of Savings Plans eligible usage that is covered by Savings Plans. All
+            calculations consider the On-Demand equivalent of your Savings Plans usage.</p>")
 type savingsPlansCoverage = {
   @as("TimePeriod") timePeriod: option<dateInterval>,
   @ocaml.doc("<p>The amount of Savings Plans eligible usage that the Savings Plans covered.</p>")
@@ -1115,6 +1074,7 @@ type savingsPlansCoverage = {
   attributes: option<attributes>,
 }
 type rootCauses = array<rootCause>
+type resourceTagList = array<resourceTag>
 @ocaml.doc("<p>Details on the resource.</p>")
 type resourceDetails = {
   @ocaml.doc("<p>Details on the Amazon EC2 resource.</p>") @as("EC2ResourceDetails")
@@ -1132,26 +1092,36 @@ type reservationUtilizationGroup = {
   key: option<reservationGroupKey>,
 }
 type metrics = Js.Dict.t<metricValue>
-@ocaml.doc("<p>Details about the instances that AWS recommends that you purchase.</p>")
+@ocaml.doc("<p>Details about the instances that Amazon Web Services recommends that you
+            purchase.</p>")
 type instanceDetails = {
-  @ocaml.doc("<p>The Amazon ES instances that AWS recommends that you purchase.</p>")
+  @ocaml.doc(
+    "<p>The Amazon OpenSearch Service instances that Amazon Web Services recommends that you purchase.</p>"
+  )
   @as("ESInstanceDetails")
   esinstanceDetails: option<esinstanceDetails>,
-  @ocaml.doc("<p>The ElastiCache instances that AWS recommends that you purchase.</p>")
+  @ocaml.doc(
+    "<p>The ElastiCache instances that Amazon Web Services recommends that you purchase.</p>"
+  )
   @as("ElastiCacheInstanceDetails")
   elastiCacheInstanceDetails: option<elastiCacheInstanceDetails>,
-  @ocaml.doc("<p>The Amazon Redshift instances that AWS recommends that you purchase.</p>")
+  @ocaml.doc("<p>The Amazon Redshift instances that Amazon Web Services recommends that you
+            purchase.</p>")
   @as("RedshiftInstanceDetails")
   redshiftInstanceDetails: option<redshiftInstanceDetails>,
-  @ocaml.doc("<p>The Amazon RDS instances that AWS recommends that you purchase.</p>")
+  @ocaml.doc(
+    "<p>The Amazon RDS instances that Amazon Web Services recommends that you purchase.</p>"
+  )
   @as("RDSInstanceDetails")
   rdsinstanceDetails: option<rdsinstanceDetails>,
-  @ocaml.doc("<p>The Amazon EC2 instances that AWS recommends that you purchase.</p>")
+  @ocaml.doc(
+    "<p>The Amazon EC2 instances that Amazon Web Services recommends that you purchase.</p>"
+  )
   @as("EC2InstanceDetails")
   ec2InstanceDetails: option<ec2InstanceDetails>,
 }
 type groupDefinitions = array<groupDefinition>
-@ocaml.doc("<p>The forecast created for your query.</p>")
+@ocaml.doc("<p>The forecast that's created for your query.</p>")
 type forecastResult = {
   @ocaml.doc("<p>The upper limit for the prediction interval. </p>")
   @as("PredictionIntervalUpperBound")
@@ -1164,37 +1134,33 @@ type forecastResult = {
   @ocaml.doc("<p>The period of time that the forecast covers.</p>") @as("TimePeriod")
   timePeriod: option<dateInterval>,
 }
-@ocaml.doc("<p> Utilization metrics of the instance.  </p>")
+@ocaml.doc("<p>Utilization metrics of the instance. </p>")
 type ec2ResourceUtilization = {
-  @ocaml.doc("<p>
-            The network field that contains a list of network metrics associated with the current instance.
-        </p>")
+  @ocaml.doc("<p> The network field that contains a list of network metrics that are associated with
+            the current instance. </p>")
   @as("NetworkResourceUtilization")
   networkResourceUtilization: option<networkResourceUtilization>,
-  @ocaml.doc("<p>
-            The field that contains a list of disk (local storage) metrics associated with the current instance.
-        </p>")
+  @ocaml.doc("<p> The field that contains a list of disk (local storage) metrics that are associated
+            with the current instance. </p>")
   @as("DiskResourceUtilization")
   diskResourceUtilization: option<diskResourceUtilization>,
-  @ocaml.doc("<p>
-            The EBS field that contains a list of EBS metrics associated with the current instance.
-        </p>")
+  @ocaml.doc("<p>The EBS field that contains a list of EBS metrics that are associated with the current
+            instance. </p>")
   @as("EBSResourceUtilization")
   ebsresourceUtilization: option<ebsresourceUtilization>,
-  @ocaml.doc(
-    "<p> Maximum observed or expected storage utilization of the instance (does not measure EBS storage).</p>"
-  )
+  @ocaml.doc("<p> The maximum observed or expected storage utilization of the instance. This doesn't
+            include EBS storage.</p>")
   @as("MaxStorageUtilizationPercentage")
   maxStorageUtilizationPercentage: option<genericString>,
-  @ocaml.doc("<p> Maximum observed or expected memory utilization of the instance.</p>")
+  @ocaml.doc("<p> The maximum observed or expected memory utilization of the instance.</p>")
   @as("MaxMemoryUtilizationPercentage")
   maxMemoryUtilizationPercentage: option<genericString>,
-  @ocaml.doc("<p> Maximum observed or expected CPU utilization of the instance.</p>")
+  @ocaml.doc("<p> The maximum observed or expected CPU utilization of the instance.</p>")
   @as("MaxCpuUtilizationPercentage")
   maxCpuUtilizationPercentage: option<genericString>,
 }
-@ocaml.doc("<p>The metadata of a specific type that you can use to filter and group your results.
-            You can use <code>GetDimensionValues</code> to find specific values.</p>")
+@ocaml.doc("<p>The metadata of a specific type that you can use to filter and group your results. You
+            can use <code>GetDimensionValues</code> to find specific values.</p>")
 type dimensionValuesWithAttributes = {
   @ocaml.doc("<p>The attribute that applies to a specific <code>Dimension</code>.</p>")
   @as("Attributes")
@@ -1205,18 +1171,18 @@ type dimensionValuesWithAttributes = {
 @ocaml.doc("<p>The metadata that you can use to filter and group your results. You can use
                 <code>GetDimensionValues</code> to find specific values.</p>")
 type dimensionValues = {
-  @ocaml.doc("<p>The match options that you can use to filter your results.
-                <code>MatchOptions</code> is only applicable for actions related to Cost Category.
-            The default values for <code>MatchOptions</code> are <code>EQUALS</code> and
-                <code>CASE_SENSITIVE</code>.</p>")
+  @ocaml.doc("<p>The match options that you can use to filter your results. <code>MatchOptions</code>
+            is only applicable for actions related to Cost Category. The default values for
+                <code>MatchOptions</code> are <code>EQUALS</code> and
+            <code>CASE_SENSITIVE</code>.</p>")
   @as("MatchOptions")
   matchOptions: option<matchOptions>,
   @ocaml.doc("<p>The metadata values that you can use to filter and group your results. You can use
                 <code>GetDimensionValues</code> to find specific values.</p>")
   @as("Values")
   values: option<values>,
-  @ocaml.doc("<p>The names of the metadata types that you can use to filter and group your results.
-            For example, <code>AZ</code> returns a list of Availability Zones.</p>")
+  @ocaml.doc("<p>The names of the metadata types that you can use to filter and group your results. For
+            example, <code>AZ</code> returns a list of Availability Zones.</p>")
   @as("Key")
   key: option<dimension>,
 }
@@ -1224,8 +1190,9 @@ type dimensionValues = {
 type coverage = {
   @ocaml.doc("<p>The amount of cost that the reservation covered.</p>") @as("CoverageCost")
   coverageCost: option<coverageCost>,
-  @ocaml.doc("<p>The amount of instance usage that the reservation covered, in normalized
-            units.</p>")
+  @ocaml.doc(
+    "<p>The amount of instance usage that the reservation covered, in normalized units.</p>"
+  )
   @as("CoverageNormalizedUnits")
   coverageNormalizedUnits: option<coverageNormalizedUnits>,
   @ocaml.doc("<p>The amount of instance usage that the reservation covered, in hours.</p>")
@@ -1233,13 +1200,17 @@ type coverage = {
   coverageHours: option<coverageHours>,
 }
 @ocaml.doc("<p>The Cost Categories values used for filtering the costs.</p>
-		       <p>If <code>Values</code> and <code>Key</code> are not specified, the <code>ABSENT</code> 
-            <code>MatchOption</code> is applied to all Cost Categories. That is, filtering on resources that are not mapped to any Cost Categories.</p>
-         <p>If <code>Values</code> is provided and <code>Key</code> is not specified, the <code>ABSENT</code> 
-            <code>MatchOption</code> is applied to the Cost Categories <code>Key</code> only. That is, filtering on resources without the given Cost Categories key.</p>")
+        <p>If <code>Values</code> and <code>Key</code> are not specified, the <code>ABSENT</code>
+            <code>MatchOption</code> is applied to all Cost Categories. That is, it filters on
+            resources that aren't mapped to any Cost Categories.</p>
+        <p>If <code>Values</code> is provided and <code>Key</code> isn't specified, the
+                <code>ABSENT</code>
+            <code>MatchOption</code> is applied to the Cost Categories <code>Key</code> only. That
+            is, it filters on resources without the given Cost Categories key.</p>")
 type costCategoryValues = {
-  @ocaml.doc("<p>
-            The match options that you can use to filter your results. MatchOptions is only applicable for actions related to cost category. The default values for <code>MatchOptions</code> is <code>EQUALS</code> and <code>CASE_SENSITIVE</code>.
+  @ocaml.doc("<p>The match options that you can use to filter your results. MatchOptions is only
+            applicable for actions related to cost category. The default values for
+                <code>MatchOptions</code> is <code>EQUALS</code> and <code>CASE_SENSITIVE</code>.
         </p>")
   @as("MatchOptions")
   matchOptions: option<matchOptions>,
@@ -1247,15 +1218,23 @@ type costCategoryValues = {
   values: option<values>,
   @as("Key") key: option<costCategoryName>,
 }
+@ocaml.doc("<p>The parameters for a split charge method. </p>")
+type costCategorySplitChargeRuleParameter = {
+  @ocaml.doc("<p>The parameter values. </p>") @as("Values")
+  values: costCategorySplitChargeRuleParameterValuesList,
+  @ocaml.doc("<p>The parameter type. </p>") @as("Type")
+  type_: costCategorySplitChargeRuleParameterType,
+}
 type costCategoryProcessingStatusList = array<costCategoryProcessingStatus>
 type tagValuesList = array<tagValues>
 type savingsPlansUtilizationsByTime = array<savingsPlansUtilizationByTime>
 type savingsPlansUtilizationDetails = array<savingsPlansUtilizationDetail>
 type savingsPlansPurchaseRecommendationDetailList = array<savingsPlansPurchaseRecommendationDetail>
 type savingsPlansCoverages = array<savingsPlansCoverage>
-@ocaml.doc("<p>Resource utilization of current resource.  </p>")
+@ocaml.doc("<p>Resource utilization of current resource. </p>")
 type resourceUtilization = {
-  @ocaml.doc("<p>Utilization of current Amazon EC2 instance. </p>") @as("EC2ResourceUtilization")
+  @ocaml.doc("<p>The utilization of current Amazon EC2 instance. </p>")
+  @as("EC2ResourceUtilization")
   ec2ResourceUtilization: option<ec2ResourceUtilization>,
 }
 type reservationUtilizationGroups = array<reservationUtilizationGroup>
@@ -1266,75 +1245,81 @@ type reservationPurchaseRecommendationDetail = {
   recurringStandardMonthlyCost: option<genericString>,
   @ocaml.doc("<p>How much purchasing this instance costs you upfront.</p>") @as("UpfrontCost")
   upfrontCost: option<genericString>,
-  @ocaml.doc("<p>How much AWS estimates that you would have spent for all usage during the specified
-            historical period if you had
-            a
-            reservation.</p>")
+  @ocaml.doc("<p>How much Amazon Web Services estimates that you would have spent for all usage during
+            the specified historical period if you had a reservation.</p>")
   @as("EstimatedReservationCostForLookbackPeriod")
   estimatedReservationCostForLookbackPeriod: option<genericString>,
-  @ocaml.doc("<p>How much AWS estimates that you spend on On-Demand Instances in a month.</p>")
+  @ocaml.doc("<p>How much Amazon Web Services estimates that you spend on On-Demand Instances in a
+            month.</p>")
   @as("EstimatedMonthlyOnDemandCost")
   estimatedMonthlyOnDemandCost: option<genericString>,
-  @ocaml.doc("<p>How much AWS estimates that this specific recommendation could save you in a month,
-            as a percentage of your overall costs.</p>")
+  @ocaml.doc("<p>How much Amazon Web Services estimates that this specific recommendation could save you
+            in a month, as a percentage of your overall costs.</p>")
   @as("EstimatedMonthlySavingsPercentage")
   estimatedMonthlySavingsPercentage: option<genericString>,
-  @ocaml.doc("<p>How much AWS estimates that this specific recommendation could save you in a
-            month.</p>")
+  @ocaml.doc("<p>How much Amazon Web Services estimates that this specific recommendation could save you
+            in a month.</p>")
   @as("EstimatedMonthlySavingsAmount")
   estimatedMonthlySavingsAmount: option<genericString>,
-  @ocaml.doc("<p>The currency code that AWS used to calculate the costs for this instance.</p>")
+  @ocaml.doc("<p>The currency code that Amazon Web Services used to calculate the costs for this
+            instance.</p>")
   @as("CurrencyCode")
   currencyCode: option<genericString>,
-  @ocaml.doc("<p>How long AWS estimates that it takes for this instance to start saving you money,
-            in months.</p>")
+  @ocaml.doc("<p>How long Amazon Web Services estimates that it takes for this instance to start saving
+            you money, in months.</p>")
   @as("EstimatedBreakEvenInMonths")
   estimatedBreakEvenInMonths: option<genericString>,
-  @ocaml.doc("<p>The average utilization of your instances. AWS uses this to calculate your
-            recommended reservation purchases.</p>")
+  @ocaml.doc("<p>The average utilization of your instances. Amazon Web Services uses this to calculate
+            your recommended reservation purchases.</p>")
   @as("AverageUtilization")
   averageUtilization: option<genericString>,
-  @ocaml.doc("<p>The average number of normalized units that you used in an hour during the
-            historical period. AWS uses this to calculate your recommended reservation
+  @ocaml.doc("<p>The average number of normalized units that you used in an hour during the historical
+            period. Amazon Web Services uses this to calculate your recommended reservation
             purchases.</p>")
   @as("AverageNormalizedUnitsUsedPerHour")
   averageNormalizedUnitsUsedPerHour: option<genericString>,
-  @ocaml.doc("<p>The average number of instances that you used in an hour during the historical
-            period. AWS uses this to calculate your recommended reservation purchases.</p>")
+  @ocaml.doc("<p>The average number of instances that you used in an hour during the historical period.
+                Amazon Web Services uses this to calculate your recommended reservation
+            purchases.</p>")
   @as("AverageNumberOfInstancesUsedPerHour")
   averageNumberOfInstancesUsedPerHour: option<genericString>,
-  @ocaml.doc("<p>The maximum number of normalized units that you used in an hour during the
-            historical period. AWS uses this to calculate your recommended reservation
+  @ocaml.doc("<p>The maximum number of normalized units that you used in an hour during the historical
+            period. Amazon Web Services uses this to calculate your recommended reservation
             purchases.</p>")
   @as("MaximumNormalizedUnitsUsedPerHour")
   maximumNormalizedUnitsUsedPerHour: option<genericString>,
-  @ocaml.doc("<p>The maximum number of instances that you used in an hour during the historical
-            period. AWS uses this to calculate your recommended reservation purchases.</p>")
+  @ocaml.doc("<p>The maximum number of instances that you used in an hour during the historical period.
+                Amazon Web Services uses this to calculate your recommended reservation
+            purchases.</p>")
   @as("MaximumNumberOfInstancesUsedPerHour")
   maximumNumberOfInstancesUsedPerHour: option<genericString>,
-  @ocaml.doc("<p>The minimum number of normalized units that you used in an hour during the
-            historical period. AWS uses this to calculate your recommended reservation
+  @ocaml.doc("<p>The minimum number of normalized units that you used in an hour during the historical
+            period. Amazon Web Services uses this to calculate your recommended reservation
             purchases.</p>")
   @as("MinimumNormalizedUnitsUsedPerHour")
   minimumNormalizedUnitsUsedPerHour: option<genericString>,
-  @ocaml.doc("<p>The minimum number of instances that you used in an hour during the historical
-            period. AWS uses this to calculate your recommended reservation purchases.</p>")
+  @ocaml.doc("<p>The minimum number of instances that you used in an hour during the historical period.
+                Amazon Web Services uses this to calculate your recommended reservation
+            purchases.</p>")
   @as("MinimumNumberOfInstancesUsedPerHour")
   minimumNumberOfInstancesUsedPerHour: option<genericString>,
-  @ocaml.doc("<p>The number of normalized units that AWS recommends that you purchase.</p>")
+  @ocaml.doc("<p>The number of normalized units that Amazon Web Services recommends that you
+            purchase.</p>")
   @as("RecommendedNormalizedUnitsToPurchase")
   recommendedNormalizedUnitsToPurchase: option<genericString>,
-  @ocaml.doc("<p>The number of instances that AWS recommends that you purchase.</p>")
+  @ocaml.doc(
+    "<p>The number of instances that Amazon Web Services recommends that you purchase.</p>"
+  )
   @as("RecommendedNumberOfInstancesToPurchase")
   recommendedNumberOfInstancesToPurchase: option<genericString>,
-  @ocaml.doc("<p>Details about the instances that AWS recommends that you purchase.</p>")
+  @ocaml.doc("<p>Details about the instances that Amazon Web Services recommends that you
+            purchase.</p>")
   @as("InstanceDetails")
   instanceDetails: option<instanceDetails>,
   @ocaml.doc("<p>The account that this RI recommendation is for.</p>") @as("AccountId")
   accountId: option<genericString>,
 }
-@ocaml.doc("<p>A
-            group of reservations that share a set of attributes.</p>")
+@ocaml.doc("<p>A group of reservations that share a set of attributes.</p>")
 type reservationCoverageGroup = {
   @ocaml.doc("<p>How much instance usage this group of reservations covered.</p>") @as("Coverage")
   coverage: option<coverage>,
@@ -1349,126 +1334,75 @@ type group = {
 }
 type forecastResultsByTime = array<forecastResult>
 type dimensionValuesWithAttributesList = array<dimensionValuesWithAttributes>
-@ocaml.doc("<p>A reference to a Cost Category containing only enough information to identify the Cost Category.</p>
-        <p>You can use this information to retrieve the full Cost Category information using <code>DescribeCostCategory</code>.</p>")
+type costCategorySplitChargeRuleParametersList = array<costCategorySplitChargeRuleParameter>
+@ocaml.doc("<p>A reference to a Cost Category containing only enough information to identify the Cost
+            Category.</p>
+        <p>You can use this information to retrieve the full Cost Category information using
+                <code>DescribeCostCategory</code>.</p>")
 type costCategoryReference = {
   @as("DefaultValue") defaultValue: option<costCategoryValue>,
-  @ocaml.doc("<p>
-            A list of unique cost category values in a specific cost category.
-        </p>")
+  @ocaml.doc("<p>A list of unique cost category values in a specific cost category. </p>")
   @as("Values")
   values: option<costCategoryValuesList>,
-  @ocaml.doc("<p>
-            The list of processing statuses for Cost Management products for a specific cost category.
-        </p>")
+  @ocaml.doc("<p>The list of processing statuses for Cost Management products for a specific cost
+            category. </p>")
   @as("ProcessingStatus")
   processingStatus: option<costCategoryProcessingStatusList>,
-  @ocaml.doc("<p>
-            The number of rules associated with a specific Cost Category.
-        </p>")
+  @ocaml.doc("<p>The number of rules that are associated with a specific Cost Category. </p>")
   @as("NumberOfRules")
   numberOfRules: option<nonNegativeInteger>,
-  @ocaml.doc("<p>
-            The Cost Category's effective end date.</p>")
-  @as("EffectiveEnd")
+  @ocaml.doc("<p>The Cost Category's effective end date.</p>") @as("EffectiveEnd")
   effectiveEnd: option<zonedDateTime>,
-  @ocaml.doc("<p>
-            The Cost Category's effective start date.</p>")
-  @as("EffectiveStart")
+  @ocaml.doc("<p>The Cost Category's effective start date.</p>") @as("EffectiveStart")
   effectiveStart: option<zonedDateTime>,
   @as("Name") name: option<costCategoryName>,
-  @ocaml.doc("<p>
-            The unique identifier for your Cost Category.
-        </p>")
-  @as("CostCategoryArn")
+  @ocaml.doc("<p>The unique identifier for your Cost Category. </p>") @as("CostCategoryArn")
   costCategoryArn: option<arn>,
 }
-@ocaml.doc("<p>
-        The association between a monitor, threshold, and list of subscribers used to deliver notifications about anomalies detected by a monitor that exceeds a threshold. The content consists of the detailed metadata and the current status of the <code>AnomalySubscription</code> object.
-    </p>")
+@ocaml.doc("<p>The association between a monitor, threshold, and list of subscribers used to deliver
+            notifications about anomalies detected by a monitor that exceeds a threshold. The
+            content consists of the detailed metadata and the current status of the
+                <code>AnomalySubscription</code> object. </p>")
 type anomalySubscription = {
-  @ocaml.doc("<p>
-        The name for the subscription.
-    </p>")
-  @as("SubscriptionName")
+  @ocaml.doc("<p>The name for the subscription. </p>") @as("SubscriptionName")
   subscriptionName: genericString,
-  @ocaml.doc("<p>
-        The frequency at which anomaly reports are sent over email.
-    </p>")
-  @as("Frequency")
+  @ocaml.doc("<p>The frequency that anomaly reports are sent over email. </p>") @as("Frequency")
   frequency: anomalySubscriptionFrequency,
-  @ocaml.doc("<p>
-        The dollar value that triggers a notification if the threshold is exceeded.
-    </p>")
+  @ocaml.doc("<p>The dollar value that triggers a notification if the threshold is exceeded. </p>")
   @as("Threshold")
   threshold: nullableNonNegativeDouble,
-  @ocaml.doc("<p>
-        A list of subscribers to notify.
-    </p>")
-  @as("Subscribers")
+  @ocaml.doc("<p>A list of subscribers to notify. </p>") @as("Subscribers")
   subscribers: subscribers,
-  @ocaml.doc("<p>
-        A list of cost anomaly monitors.
-    </p>")
-  @as("MonitorArnList")
+  @ocaml.doc("<p>A list of cost anomaly monitors. </p>") @as("MonitorArnList")
   monitorArnList: monitorArnList,
-  @ocaml.doc("<p>
-        Your unique account identifier.
-    </p>")
-  @as("AccountId")
+  @ocaml.doc("<p>Your unique account identifier. </p>") @as("AccountId")
   accountId: option<genericString>,
-  @ocaml.doc("<p> The <code>AnomalySubscription</code> Amazon Resource Name (ARN). </p>")
+  @ocaml.doc("<p>The <code>AnomalySubscription</code> Amazon Resource Name (ARN). </p>")
   @as("SubscriptionArn")
   subscriptionArn: option<genericString>,
 }
-@ocaml.doc("<p>
-        An unusual cost pattern. This consists of the detailed metadata and the current status of the anomaly object.
-    </p>")
+@ocaml.doc("<p>An unusual cost pattern. This consists of the detailed metadata and the current status
+            of the anomaly object. </p>")
 type anomaly = {
-  @ocaml.doc("<p>
-        The feedback value.
-    </p>")
-  @as("Feedback")
-  feedback: option<anomalyFeedbackType>,
-  @ocaml.doc(
-    "<p> The Amazon Resource Name (ARN) for the cost monitor that generated this anomaly. </p>"
-  )
+  @ocaml.doc("<p>The feedback value. </p>") @as("Feedback") feedback: option<anomalyFeedbackType>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) for the cost monitor that generated this anomaly.
+        </p>")
   @as("MonitorArn")
   monitorArn: genericString,
-  @ocaml.doc("<p>
-        The dollar impact for the anomaly.
-    </p>")
-  @as("Impact")
-  impact: impact,
-  @ocaml.doc("<p>
-        The latest and maximum score for the anomaly.
-    </p>")
-  @as("AnomalyScore")
+  @ocaml.doc("<p>The dollar impact for the anomaly. </p>") @as("Impact") impact: impact,
+  @ocaml.doc("<p>The latest and maximum score for the anomaly. </p>") @as("AnomalyScore")
   anomalyScore: anomalyScore,
-  @ocaml.doc("<p>
-        The list of identified root causes for the anomaly.
-    </p>")
-  @as("RootCauses")
+  @ocaml.doc("<p>The list of identified root causes for the anomaly. </p>") @as("RootCauses")
   rootCauses: option<rootCauses>,
-  @ocaml.doc("<p>
-        The dimension for the anomaly. For example, an AWS service in a service monitor.
-    </p>")
+  @ocaml.doc("<p>The dimension for the anomaly (for example, an Amazon Web Services service in a service
+            monitor). </p>")
   @as("DimensionValue")
   dimensionValue: option<genericString>,
-  @ocaml.doc("<p>
-        The last day the anomaly is detected.
-    </p>")
-  @as("AnomalyEndDate")
+  @ocaml.doc("<p>The last day the anomaly is detected. </p>") @as("AnomalyEndDate")
   anomalyEndDate: option<yearMonthDay>,
-  @ocaml.doc("<p>
-        The first day the anomaly is detected.
-    </p>")
-  @as("AnomalyStartDate")
+  @ocaml.doc("<p>The first day the anomaly is detected. </p>") @as("AnomalyStartDate")
   anomalyStartDate: option<yearMonthDay>,
-  @ocaml.doc("<p>
-        The unique identifier for the anomaly.
-    </p>")
-  @as("AnomalyId")
+  @ocaml.doc("<p>The unique identifier for the anomaly. </p>") @as("AnomalyId")
   anomalyId: genericString,
 }
 @ocaml.doc("<p>The amount of utilization, in hours.</p>")
@@ -1480,34 +1414,34 @@ type utilizationByTime = {
   @ocaml.doc("<p>The period of time that this utilization was used for.</p>") @as("TimePeriod")
   timePeriod: option<dateInterval>,
 }
-@ocaml.doc("<p> Details on recommended instance.</p>")
+@ocaml.doc("<p>Details on recommended instance.</p>")
 type targetInstance = {
-  @ocaml.doc("<p>
-            Explains the actions you might need to take in order to successfully migrate your workloads from the current instance type to the recommended instance type.
-        </p>")
+  @ocaml.doc("<p> Explains the actions you might need to take in order to successfully migrate your
+            workloads from the current instance type to the recommended instance type. </p>")
   @as("PlatformDifferences")
   platformDifferences: option<platformDifferences>,
-  @ocaml.doc("<p> Expected utilization metrics for target instance type.</p>")
+  @ocaml.doc("<p>The expected utilization metrics for target instance type.</p>")
   @as("ExpectedResourceUtilization")
   expectedResourceUtilization: option<resourceUtilization>,
-  @ocaml.doc("<p> Details on the target instance type.  </p>") @as("ResourceDetails")
+  @ocaml.doc("<p>Details on the target instance type. </p>") @as("ResourceDetails")
   resourceDetails: option<resourceDetails>,
-  @ocaml.doc("<p> Indicates whether this recommendation is the defaulted AWS recommendation.</p>")
+  @ocaml.doc("<p>Determines whether this recommendation is the defaulted Amazon Web Services
+            recommendation.</p>")
   @as("DefaultTargetInstance")
   defaultTargetInstance: option<genericBoolean>,
-  @ocaml.doc("<p> The currency code that AWS used to calculate the costs for this instance.</p>")
+  @ocaml.doc("<p>The currency code that Amazon Web Services used to calculate the costs for this
+            instance.</p>")
   @as("CurrencyCode")
   currencyCode: option<genericString>,
-  @ocaml.doc("<p> Estimated savings resulting from modification, on a monthly basis.</p>")
+  @ocaml.doc("<p>The estimated savings that result from modification, on a monthly basis.</p>")
   @as("EstimatedMonthlySavings")
   estimatedMonthlySavings: option<genericString>,
-  @ocaml.doc("<p> Expected cost to operate this instance type on a monthly basis.</p>")
+  @ocaml.doc("<p>The expected cost to operate this instance type on a monthly basis.</p>")
   @as("EstimatedMonthlyCost")
   estimatedMonthlyCost: option<genericString>,
 }
-@ocaml.doc(
-  "<p>Contains your request parameters, Savings Plan Recommendations Summary, and Details.</p>"
-)
+@ocaml.doc("<p>Contains your request parameters, Savings Plan Recommendations Summary, and
+            Details.</p>")
 type savingsPlansPurchaseRecommendation = {
   @ocaml.doc("<p>Summary metrics for your Savings Plans Recommendations. </p>")
   @as("SavingsPlansPurchaseRecommendationSummary")
@@ -1521,16 +1455,16 @@ type savingsPlansPurchaseRecommendation = {
   lookbackPeriodInDays: option<lookbackPeriodInDays>,
   @ocaml.doc("<p>The payment option used to generate the recommendation.</p>") @as("PaymentOption")
   paymentOption: option<paymentOption>,
-  @ocaml.doc(
-    "<p>The Savings Plans recommendation term in years, used to generate the recommendation.</p>"
-  )
+  @ocaml.doc("<p>The Savings Plans recommendation term in years. It's used to generate the
+            recommendation.</p>")
   @as("TermInYears")
   termInYears: option<termInYears>,
   @ocaml.doc("<p>The requested Savings Plans recommendation type.</p>") @as("SavingsPlansType")
   savingsPlansType: option<supportedSavingsPlansType>,
-  @ocaml.doc(
-    "<p>The account scope that you want your recommendations for. Amazon Web Services calculates recommendations including the management account and member accounts if the value is set to <code>PAYER</code>. If the value is <code>LINKED</code>, recommendations are calculated for individual member accounts only.</p>"
-  )
+  @ocaml.doc("<p>The account scope that you want your recommendations for. Amazon Web Services
+            calculates recommendations that include the management account and member accounts if
+            the value is set to <code>PAYER</code>. If the value is <code>LINKED</code>,
+            recommendations are calculated for individual member accounts only.</p>")
   @as("AccountScope")
   accountScope: option<accountScope>,
 }
@@ -1539,49 +1473,78 @@ type reservationCoverageGroups = array<reservationCoverageGroup>
 type groups = array<group>
 @ocaml.doc("<p>Context about the current instance.</p>")
 type currentInstance = {
-  @ocaml.doc("<p> The currency code that AWS used to calculate the costs for this instance.</p>")
+  @ocaml.doc("<p> The currency code that Amazon Web Services used to calculate the costs for this
+            instance.</p>")
   @as("CurrencyCode")
   currencyCode: option<genericString>,
-  @ocaml.doc("<p> Current On-Demand cost of operating this instance on a monthly basis.</p>")
+  @ocaml.doc("<p>The current On-Demand cost of operating this instance on a monthly basis.</p>")
   @as("MonthlyCost")
   monthlyCost: option<genericString>,
-  @ocaml.doc("<p> The total number of hours the instance ran during the lookback period.</p>")
+  @ocaml.doc("<p>The total number of hours that the instance ran during the lookback period.</p>")
   @as("TotalRunningHoursInLookbackPeriod")
   totalRunningHoursInLookbackPeriod: option<genericString>,
-  @ocaml.doc("<p> Number of hours during the lookback period billed at On-Demand rates.</p>")
+  @ocaml.doc("<p> The number of hours during the lookback period that's billed at On-Demand
+            rates.</p>")
   @as("OnDemandHoursInLookbackPeriod")
   onDemandHoursInLookbackPeriod: option<genericString>,
-  @ocaml.doc("<p>Number of hours during the lookback period covered by Savings Plans.</p>")
+  @ocaml.doc(
+    "<p>The number of hours during the lookback period that's covered by Savings Plans.</p>"
+  )
   @as("SavingsPlansCoveredHoursInLookbackPeriod")
   savingsPlansCoveredHoursInLookbackPeriod: option<genericString>,
-  @ocaml.doc("<p> Number of hours during the lookback period covered by reservations.</p>")
+  @ocaml.doc(
+    "<p> The number of hours during the lookback period that's covered by reservations.</p>"
+  )
   @as("ReservationCoveredHoursInLookbackPeriod")
   reservationCoveredHoursInLookbackPeriod: option<genericString>,
-  @ocaml.doc("<p> Utilization information of the current instance during the lookback period.</p>")
+  @ocaml.doc("<p>Utilization information of the current instance during the lookback period.</p>")
   @as("ResourceUtilization")
   resourceUtilization: option<resourceUtilization>,
-  @ocaml.doc("<p> Details about the resource and utilization.</p>") @as("ResourceDetails")
+  @ocaml.doc("<p>Details about the resource and utilization.</p>") @as("ResourceDetails")
   resourceDetails: option<resourceDetails>,
-  @ocaml.doc("<p>Cost allocation resource tags applied to the instance.</p>") @as("Tags")
+  @ocaml.doc("<p>Cost allocation resource tags that are applied to the instance.</p>") @as("Tags")
   tags: option<tagValuesList>,
-  @ocaml.doc(
-    "<p>The name you've given an instance. This field will show as blank if you haven't given the instance a name.</p>"
-  )
+  @ocaml.doc("<p>The name that you given an instance. This field shows as blank if you haven't given
+            the instance a name.</p>")
   @as("InstanceName")
   instanceName: option<genericString>,
   @ocaml.doc("<p>Resource ID of the current instance.</p>") @as("ResourceId")
   resourceId: option<genericString>,
+}
+@ocaml.doc("<p>Use the split charge rule to split the cost of one Cost Category value across several
+            other target values. </p>")
+type costCategorySplitChargeRule = {
+  @ocaml.doc("<p>The parameters for a split charge method. This is only required for the
+                <code>FIXED</code> method. </p>")
+  @as("Parameters")
+  parameters: option<costCategorySplitChargeRuleParametersList>,
+  @ocaml.doc("<p>The method that's used to define how to split your source costs across your targets. </p>
+        <p>
+            <code>Proportional</code> - Allocates charges across your targets based on the
+            proportional weighted cost of each target.</p>
+        <p>
+            <code>Fixed</code> - Allocates charges across your targets based on your defined
+            allocation percentage.</p>
+        <p>><code>Even</code> - Allocates costs evenly across all targets.</p>")
+  @as("Method")
+  method: costCategorySplitChargeMethod,
+  @ocaml.doc("<p>The Cost Category values that you want to split costs across. These values can't be
+            used as a source in other split charge rules. </p>")
+  @as("Targets")
+  targets: costCategorySplitChargeRuleTargetsList,
+  @ocaml.doc("<p>The Cost Category value that you want to split. That value can't be used as a source
+            or a target in other split charge rules. To indicate uncategorized costs, you can use an empty string as the source.</p>")
+  @as("Source")
+  source: genericString,
 }
 type costCategoryReferencesList = array<costCategoryReference>
 type anomalySubscriptions = array<anomalySubscription>
 type anomalies = array<anomaly>
 type utilizationsByTime = array<utilizationByTime>
 type targetInstancesList = array<targetInstance>
-@ocaml.doc("<p>The result that is associated with a time period.</p>")
+@ocaml.doc("<p>The result that's associated with a time period.</p>")
 type resultByTime = {
-  @ocaml.doc("<p>Whether
-            the result is estimated.</p>")
-  @as("Estimated")
+  @ocaml.doc("<p>Determines whether the result is estimated.</p>") @as("Estimated")
   estimated: option<estimated>,
   @ocaml.doc("<p>The groups that this time period includes.</p>") @as("Groups")
   groups: option<groups>,
@@ -1591,36 +1554,33 @@ type resultByTime = {
   @ocaml.doc("<p>The time period that the result covers.</p>") @as("TimePeriod")
   timePeriod: option<dateInterval>,
 }
-@ocaml.doc("<p>A specific reservation that AWS recommends for purchase.</p>")
+@ocaml.doc("<p>A specific reservation that Amazon Web Services recommends for purchase.</p>")
 type reservationPurchaseRecommendation = {
   @ocaml.doc("<p>A summary about the recommended purchase.</p>") @as("RecommendationSummary")
   recommendationSummary: option<reservationPurchaseRecommendationSummary>,
   @ocaml.doc("<p>Details about the recommended purchases.</p>") @as("RecommendationDetails")
   recommendationDetails: option<reservationPurchaseRecommendationDetails>,
-  @ocaml.doc("<p>Hardware specifications for the service that you want recommendations
-            for.</p>")
+  @ocaml.doc("<p>Hardware specifications for the service that you want recommendations for.</p>")
   @as("ServiceSpecification")
   serviceSpecification: option<serviceSpecification>,
-  @ocaml.doc("<p>The payment option for the reservation. For example, <code>AllUpfront</code> or
-                <code>NoUpfront</code>.</p>")
+  @ocaml.doc("<p>The payment option for the reservation (for example, <code>AllUpfront</code> or
+                <code>NoUpfront</code>).</p>")
   @as("PaymentOption")
   paymentOption: option<paymentOption>,
   @ocaml.doc("<p>The term of the reservation that you want recommendations for, in years.</p>")
   @as("TermInYears")
   termInYears: option<termInYears>,
-  @ocaml.doc("<p>How many days of previous usage that AWS considers when making this
+  @ocaml.doc("<p>How many days of previous usage that Amazon Web Services considers when making this
             recommendation.</p>")
   @as("LookbackPeriodInDays")
   lookbackPeriodInDays: option<lookbackPeriodInDays>,
-  @ocaml.doc("<p>The account scope that AWS recommends that you purchase this instance for. For
-            example, you can purchase this reservation for an entire organization in AWS
-            Organizations.</p>")
+  @ocaml.doc("<p>The account scope that Amazon Web Services recommends that you purchase this instance
+            for. For example, you can purchase this reservation for an entire organization in
+                Amazon Web Services Organizations.</p>")
   @as("AccountScope")
   accountScope: option<accountScope>,
 }
-@ocaml.doc("<p>Reservation
-            coverage for a specified period, in
-            hours.</p>")
+@ocaml.doc("<p>Reservation coverage for a specified period, in hours.</p>")
 type coverageByTime = {
   @ocaml.doc("<p>The total reservation coverage, in hours.</p>") @as("Total")
   total: option<coverage>,
@@ -1629,38 +1589,41 @@ type coverageByTime = {
   @ocaml.doc("<p>The period that this coverage was used over.</p>") @as("TimePeriod")
   timePeriod: option<dateInterval>,
 }
+type costCategorySplitChargeRulesList = array<costCategorySplitChargeRule>
 type resultsByTime = array<resultByTime>
 type reservationPurchaseRecommendations = array<reservationPurchaseRecommendation>
 @ocaml.doc("<p> Details on the modification recommendation.</p>")
 type modifyRecommendationDetail = {
-  @ocaml.doc("<p>Identifies whether this instance type is the AWS default recommendation.</p>")
+  @ocaml.doc("<p>Determines whether this instance type is the Amazon Web Services default
+            recommendation.</p>")
   @as("TargetInstances")
   targetInstances: option<targetInstancesList>,
 }
 type coveragesByTime = array<coverageByTime>
 @ocaml.doc("<p>Recommendations to rightsize resources.</p>")
 type rightsizingRecommendation = {
-  @ocaml.doc("<p>
-            The list of possible reasons why the recommendation is generated such as under or over utilization of specific metrics (for example, CPU, Memory, Network).
-        </p>")
+  @ocaml.doc("<p> The list of possible reasons why the recommendation is generated such as under or
+            over utilization of specific metrics (for example, CPU, Memory, Network). </p>")
   @as("FindingReasonCodes")
   findingReasonCodes: option<findingReasonCodes>,
-  @ocaml.doc("<p>Details for termination recommendations.</p>") @as("TerminateRecommendationDetail")
+  @ocaml.doc("<p>The details for termination recommendations.</p>")
+  @as("TerminateRecommendationDetail")
   terminateRecommendationDetail: option<terminateRecommendationDetail>,
-  @ocaml.doc("<p> Details for modification recommendations.  </p>")
+  @ocaml.doc("<p>The details for the modification recommendations. </p>")
   @as("ModifyRecommendationDetail")
   modifyRecommendationDetail: option<modifyRecommendationDetail>,
-  @ocaml.doc("<p>Recommendation to either terminate or modify the resource.</p>")
+  @ocaml.doc("<p>A recommendation to either terminate or modify the resource.</p>")
   @as("RightsizingType")
   rightsizingType: option<rightsizingType>,
-  @ocaml.doc("<p> Context regarding the current instance.</p>") @as("CurrentInstance")
+  @ocaml.doc("<p>Context regarding the current instance.</p>") @as("CurrentInstance")
   currentInstance: option<currentInstance>,
   @ocaml.doc("<p>The account that this recommendation is for.</p>") @as("AccountId")
   accountId: option<genericString>,
 }
 type rightsizingRecommendationList = array<rightsizingRecommendation>
 type rec expression = {
-  @ocaml.doc("<p>The filter based on <code>CostCategory</code> values.</p>") @as("CostCategories")
+  @ocaml.doc("<p>The filter that's based on <code>CostCategory</code> values.</p>")
+  @as("CostCategories")
   costCategories: option<costCategoryValues>,
   @ocaml.doc("<p>The specific <code>Tag</code> to use for <code>Expression</code>.</p>") @as("Tags")
   tags: option<tagValues>,
@@ -1675,18 +1638,21 @@ type rec expression = {
   or: option<expressions>,
 }
 and expressions = array<expression>
-@ocaml.doc(
-  "<p>Rules are processed in order. If there are multiple rules that match the line item, then the first rule to match is used to determine that Cost Category value.</p>"
-)
+@ocaml.doc("<p>Rules are processed in order. If there are multiple rules that match the line item,
+            then the first rule to match is used to determine that Cost Category value.</p>")
 type costCategoryRule = {
-  @ocaml.doc(
-    "<p>You can define the <code>CostCategoryRule</code> rule type as either <code>REGULAR</code> or <code>INHERITED_VALUE</code>. The <code>INHERITED_VALUE</code> rule type adds the flexibility of defining a rule that dynamically inherits the cost category value from the dimension value defined by <code>CostCategoryInheritedValueDimension</code>. For example, if you wanted to dynamically group costs based on the value of a specific tag key, you would first choose an inherited value rule type, then choose the tag dimension and specify the tag key to use.</p>"
-  )
+  @ocaml.doc("<p>You can define the <code>CostCategoryRule</code> rule type as either
+                <code>REGULAR</code> or <code>INHERITED_VALUE</code>. The
+                <code>INHERITED_VALUE</code> rule type adds the flexibility of defining a rule that
+            dynamically inherits the cost category value from the dimension value defined by
+                <code>CostCategoryInheritedValueDimension</code>. For example, if you want to
+            dynamically group costs based on the value of a specific tag key, first choose an
+            inherited value rule type, then choose the tag dimension and specify the tag key to
+            use.</p>")
   @as("Type")
   type_: option<costCategoryRuleType>,
-  @ocaml.doc(
-    "<p>The value the line item will be categorized as, if the line item contains the matched dimension.</p>"
-  )
+  @ocaml.doc("<p>The value the line item is categorized as if the line item contains the matched
+            dimension.</p>")
   @as("InheritedValue")
   inheritedValue: option<costCategoryInheritedValueDimension>,
   @ocaml.doc("<p>An <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html\">Expression</a>
@@ -1694,98 +1660,71 @@ type costCategoryRule = {
             Currently the only dimensions supported are <code>LINKED_ACCOUNT</code>,
                 <code>SERVICE_CODE</code>, <code>RECORD_TYPE</code>, and
                 <code>LINKED_ACCOUNT_NAME</code>.</p>
-        <p>Root level <code>OR</code> is not supported. We recommend that you create a separate
+        <p>Root level <code>OR</code> isn't supported. We recommend that you create a separate
             rule instead.</p>
-        
         <p>
             <code>RECORD_TYPE</code> is a dimension used for Cost Explorer APIs, and is also
             supported for Cost Category expressions. This dimension uses different terms, depending
             on whether you're using the console or API/JSON editor. For a detailed comparison, see
-            <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/manage-cost-categories.html#cost-categories-terms\">Term Comparisons</a> in the <i>AWS Billing and Cost Management User
+                <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/manage-cost-categories.html#cost-categories-terms\">Term Comparisons</a> in the <i>Billing and Cost Management User
                 Guide</i>.</p>")
   @as("Rule")
   rule: option<expression>,
   @as("Value") value: option<costCategoryValue>,
 }
-@ocaml.doc("<p> This object continuously inspects your account's cost data for anomalies, based on
-                <code>MonitorType</code> and <code>MonitorSpecification</code>. The content consists
+@ocaml.doc("<p>This object continuously inspects your account's cost data for anomalies. It's based
+            on <code>MonitorType</code> and <code>MonitorSpecification</code>. The content consists
             of detailed metadata and the current status of the monitor object. </p>")
 type anomalyMonitor = {
-  @ocaml.doc("<p>
-        The value for evaluated dimensions.
-    </p>")
-  @as("DimensionalValueCount")
+  @ocaml.doc("<p>The value for evaluated dimensions. </p>") @as("DimensionalValueCount")
   dimensionalValueCount: option<nonNegativeInteger>,
   @as("MonitorSpecification") monitorSpecification: option<expression>,
-  @ocaml.doc("<p>
-        The dimensions to evaluate.
-    </p>")
-  @as("MonitorDimension")
+  @ocaml.doc("<p>The dimensions to evaluate. </p>") @as("MonitorDimension")
   monitorDimension: option<monitorDimension>,
-  @ocaml.doc("<p>
-        The possible type values.
-    </p>")
-  @as("MonitorType")
-  monitorType: monitorType,
-  @ocaml.doc("<p>
-        The date when the monitor last evaluated for anomalies.
-    </p>")
+  @ocaml.doc("<p>The possible type values. </p>") @as("MonitorType") monitorType: monitorType,
+  @ocaml.doc("<p>The date when the monitor last evaluated for anomalies. </p>")
   @as("LastEvaluatedDate")
   lastEvaluatedDate: option<yearMonthDay>,
-  @ocaml.doc("<p>
-        The date when the monitor was last updated.
-    </p>")
-  @as("LastUpdatedDate")
+  @ocaml.doc("<p>The date when the monitor was last updated. </p>") @as("LastUpdatedDate")
   lastUpdatedDate: option<yearMonthDay>,
-  @ocaml.doc("<p>
-        The date when the monitor was created.
-    </p>")
-  @as("CreationDate")
+  @ocaml.doc("<p>The date when the monitor was created. </p>") @as("CreationDate")
   creationDate: option<yearMonthDay>,
-  @ocaml.doc("<p>
-        The name of the monitor.
-    </p>")
-  @as("MonitorName")
-  monitorName: genericString,
-  @ocaml.doc("<p> The Amazon Resource Name (ARN) value. </p>") @as("MonitorArn")
+  @ocaml.doc("<p>The name of the monitor. </p>") @as("MonitorName") monitorName: genericString,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) value. </p>") @as("MonitorArn")
   monitorArn: option<genericString>,
 }
 type costCategoryRulesList = array<costCategoryRule>
 type anomalyMonitors = array<anomalyMonitor>
-@ocaml.doc(
-  "<p>The structure of Cost Categories. This includes detailed metadata and the set of rules for the <code>CostCategory</code> object.</p>"
-)
+@ocaml.doc("<p>The structure of Cost Categories. This includes detailed metadata and the set of rules
+            for the <code>CostCategory</code> object.</p>")
 type costCategory = {
   @as("DefaultValue") defaultValue: option<costCategoryValue>,
-  @ocaml.doc("<p>
-            The list of processing statuses for Cost Management products for a specific cost category.
-        </p>")
+  @ocaml.doc("<p>The list of processing statuses for Cost Management products for a specific cost
+            category. </p>")
   @as("ProcessingStatus")
   processingStatus: option<costCategoryProcessingStatusList>,
-  @ocaml.doc("<p>
-            Rules are processed in order. If there are multiple rules that match the line item, then the first rule to match is used to determine that Cost Category value.
+  @ocaml.doc("<p> The split charge rules that are used to allocate your charges between your Cost
+            Category values. </p>")
+  @as("SplitChargeRules")
+  splitChargeRules: option<costCategorySplitChargeRulesList>,
+  @ocaml.doc("<p>The rules are processed in order. If there are multiple rules that match the line
+            item, then the first rule to match is used to determine that Cost Category value.
         </p>")
   @as("Rules")
   rules: costCategoryRulesList,
   @as("RuleVersion") ruleVersion: costCategoryRuleVersion,
   @as("Name") name: costCategoryName,
-  @ocaml.doc("<p>
-            The Cost Category's effective end date.</p>")
-  @as("EffectiveEnd")
+  @ocaml.doc("<p> The effective end data of your Cost Category.</p>") @as("EffectiveEnd")
   effectiveEnd: option<zonedDateTime>,
-  @ocaml.doc("<p>
-            The Cost Category's effective start date.</p>")
-  @as("EffectiveStart")
+  @ocaml.doc("<p>The effective state data of your Cost Category.</p>") @as("EffectiveStart")
   effectiveStart: zonedDateTime,
-  @ocaml.doc("<p>
-            The unique identifier for your Cost Category.
-        </p>")
-  @as("CostCategoryArn")
+  @ocaml.doc("<p>The unique identifier for your Cost Category. </p>") @as("CostCategoryArn")
   costCategoryArn: arn,
 }
-@ocaml.doc("<p>The Cost Explorer API enables you to programmatically query your cost and usage data. You can query for aggregated data 
-			such as total monthly costs or total daily usage. You can also query for granular data, such as the number of 
-			daily write operations for Amazon DynamoDB database tables in your production environment. </p>
+@ocaml.doc("<p>You can use the Cost Explorer API to programmatically query your cost and usage data. You
+      can query for aggregated data such as total monthly costs or total daily usage. You can also
+      query for granular data. This might include the number of daily write operations for Amazon
+      DynamoDB database tables in your production environment. </p>
 		       <p>Service Endpoint</p>
 		       <p>The Cost Explorer API provides the following endpoint:</p>
 		       <ul>
@@ -1795,25 +1734,19 @@ type costCategory = {
                </p>
 			         </li>
          </ul>
-		       <p>For information about costs associated with the Cost Explorer API, see 
-			<a href=\"http://aws.amazon.com/aws-cost-management/pricing/\">AWS Cost Management Pricing</a>.</p>")
+		       <p>For information about the costs that are associated with the Cost Explorer API, see
+        <a href=\"http://aws.amazon.com/aws-cost-management/pricing/\">Amazon Web Services Cost
+        Management Pricing</a>.</p>")
 module UpdateAnomalyMonitor = {
   type t
   type request = {
-    @ocaml.doc("<p>
-      The new name for the cost anomaly monitor.
-    </p>")
-    @as("MonitorName")
+    @ocaml.doc("<p>The new name for the cost anomaly monitor. </p>") @as("MonitorName")
     monitorName: option<genericString>,
-    @ocaml.doc("<p> Cost anomaly monitor Amazon Resource Names (ARNs). </p>") @as("MonitorArn")
+    @ocaml.doc("<p>Cost anomaly monitor Amazon Resource Names (ARNs). </p>") @as("MonitorArn")
     monitorArn: genericString,
   }
   type response = {
-    @ocaml.doc("<p>
-      A cost anomaly monitor ARN.
-    </p>")
-    @as("MonitorArn")
-    monitorArn: genericString,
+    @ocaml.doc("<p>A cost anomaly monitor ARN. </p>") @as("MonitorArn") monitorArn: genericString,
   }
   @module("@aws-sdk/client-ce") @new external new: request => t = "UpdateAnomalyMonitorCommand"
   let make = (~monitorArn, ~monitorName=?, ()) =>
@@ -1829,17 +1762,10 @@ module ProvideAnomalyFeedback = {
     )
     @as("Feedback")
     feedback: anomalyFeedbackType,
-    @ocaml.doc("<p>
-      A cost anomaly ID.
-    </p>")
-    @as("AnomalyId")
-    anomalyId: genericString,
+    @ocaml.doc("<p>A cost anomaly ID. </p>") @as("AnomalyId") anomalyId: genericString,
   }
   type response = {
-    @ocaml.doc("<p>
-      The ID of the modified cost anomaly.
-    </p>")
-    @as("AnomalyId")
+    @ocaml.doc("<p>The ID of the modified cost anomaly. </p>") @as("AnomalyId")
     anomalyId: genericString,
   }
   @module("@aws-sdk/client-ce") @new external new: request => t = "ProvideAnomalyFeedbackCommand"
@@ -1878,12 +1804,12 @@ module DeleteAnomalySubscription = {
   type t
   type request = {
     @ocaml.doc(
-      "<p> The unique identifier of the cost anomaly subscription that you want to delete. </p>"
+      "<p>The unique identifier of the cost anomaly subscription that you want to delete. </p>"
     )
     @as("SubscriptionArn")
     subscriptionArn: genericString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ce") @new external new: request => t = "DeleteAnomalySubscriptionCommand"
   let make = (~subscriptionArn, ()) => new({subscriptionArn: subscriptionArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1892,55 +1818,58 @@ module DeleteAnomalySubscription = {
 module DeleteAnomalyMonitor = {
   type t
   type request = {
-    @ocaml.doc(
-      "<p> The unique identifier of the cost anomaly monitor that you want to delete. </p>"
-    )
+    @ocaml.doc("<p>The unique identifier of the cost anomaly monitor that you want to delete. </p>")
     @as("MonitorArn")
     monitorArn: genericString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ce") @new external new: request => t = "DeleteAnomalyMonitorCommand"
   let make = (~monitorArn, ()) => new({monitorArn: monitorArn})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module UntagResource = {
+  type t
+  type request = {
+    @ocaml.doc("<p>
+      A list of tag keys associated with tags that need to be removed from the resource. If you specify a tag key that does not exist, it is ignored. Although the maximum number of array members is 200, user-tag maximum is 50. The remaining are reserved for Amazon Web Services use.
+    </p>")
+    @as("ResourceTagKeys")
+    resourceTagKeys: resourceTagKeyList,
+    @ocaml.doc("<p>
+      The Amazon Resource Name (ARN) of the resource. For a list of supported resources, see <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ResourceTag.html\">ResourceTag</a>.
+    </p>")
+    @as("ResourceArn")
+    resourceArn: arn,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-ce") @new external new: request => t = "UntagResourceCommand"
+  let make = (~resourceTagKeys, ~resourceArn, ()) =>
+    new({resourceTagKeys: resourceTagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module UpdateAnomalySubscription = {
   type t
   type request = {
-    @ocaml.doc("<p>
-      The subscription's new name.
-    </p>")
-    @as("SubscriptionName")
+    @ocaml.doc("<p>The new name of the subscription. </p>") @as("SubscriptionName")
     subscriptionName: option<genericString>,
-    @ocaml.doc("<p>
-      The update to the subscriber list.
-    </p>")
-    @as("Subscribers")
+    @ocaml.doc("<p>The update to the subscriber list. </p>") @as("Subscribers")
     subscribers: option<subscribers>,
-    @ocaml.doc("<p>
-      A list of cost anomaly monitor ARNs.
-    </p>")
-    @as("MonitorArnList")
+    @ocaml.doc("<p>A list of cost anomaly monitor ARNs. </p>") @as("MonitorArnList")
     monitorArnList: option<monitorArnList>,
-    @ocaml.doc("<p>
-      The update to the frequency value at which subscribers will receive notifications.
-    </p>")
+    @ocaml.doc("<p>The update to the frequency value that subscribers receive notifications. </p>")
     @as("Frequency")
     frequency: option<anomalySubscriptionFrequency>,
-    @ocaml.doc("<p>
-      The update to the threshold value for receiving notifications.
-    </p>")
+    @ocaml.doc("<p>The update to the threshold value for receiving notifications. </p>")
     @as("Threshold")
     threshold: option<nullableNonNegativeDouble>,
-    @ocaml.doc("<p> A cost anomaly subscription Amazon Resource Name (ARN). </p>")
+    @ocaml.doc("<p>A cost anomaly subscription Amazon Resource Name (ARN). </p>")
     @as("SubscriptionArn")
     subscriptionArn: genericString,
   }
   type response = {
-    @ocaml.doc("<p>
-      A cost anomaly subscription ARN.
-    </p>")
-    @as("SubscriptionArn")
+    @ocaml.doc("<p>A cost anomaly subscription ARN. </p>") @as("SubscriptionArn")
     subscriptionArn: genericString,
   }
   @module("@aws-sdk/client-ce") @new external new: request => t = "UpdateAnomalySubscriptionCommand"
@@ -1964,24 +1893,116 @@ module UpdateAnomalySubscription = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module TagResource = {
+  type t
+  type request = {
+    @ocaml.doc("<p>
+      A list of tag key-value pairs to be added to the resource.</p>
+         <p>Each tag consists of a key and a value, and each key must be unique for the resource. The following restrictions apply to resource tags:</p>
+         <ul>
+            <li>
+               <p>Although the maximum number of array members is 200, you can assign a maximum of 50 user-tags to one resource. The remaining are reserved for Amazon Web Services use</p>
+            </li>
+            <li>
+               <p>The maximum length of a key is 128 characters</p>
+            </li>
+            <li>
+               <p>The maximum length of a value is 256 characters</p>
+            </li>
+            <li>
+               <p>Valid characters for keys and values are: <code>A-Z</code>, <code>a-z</code>, spaces, <code>_.:/=+-</code>
+               </p>
+            </li>
+            <li>
+               <p>Keys and values are case sensitive</p>
+            </li>
+            <li>
+               <p>Keys and values are trimmed for any leading or trailing whitespaces</p>
+            </li>
+            <li>
+               <p>Don’t use <code>aws:</code> as a prefix for your keys. This prefix is reserved for Amazon Web Services use</p>
+            </li>
+         </ul>")
+    @as("ResourceTags")
+    resourceTags: resourceTagList,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the resource. For a list of supported resources, see <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ResourceTag.html\">ResourceTag</a>.
+    </p>")
+    @as("ResourceArn")
+    resourceArn: arn,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-ce") @new external new: request => t = "TagResourceCommand"
+  let make = (~resourceTags, ~resourceArn, ()) =>
+    new({resourceTags: resourceTags, resourceArn: resourceArn})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module ListTagsForResource = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>The Amazon Resource Name (ARN) of the resource. For a list of supported resources, see <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ResourceTag.html\">ResourceTag</a>.</p>"
+    )
+    @as("ResourceArn")
+    resourceArn: arn,
+  }
+  type response = {
+    @ocaml.doc("<p>A list of tag key value pairs that are associated with the response.
+    </p>")
+    @as("ResourceTags")
+    resourceTags: option<resourceTagList>,
+  }
+  @module("@aws-sdk/client-ce") @new external new: request => t = "ListTagsForResourceCommand"
+  let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module CreateAnomalySubscription = {
   type t
   type request = {
     @ocaml.doc("<p>
-      The cost anomaly subscription object that you want to create.
-    </p>")
+      An optional list of tags to associate with the specified <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_AnomalySubscription.html\">
+               <code>AnomalySubscription</code>
+            </a>. You can use resource tags to control access to your <code>subscription</code> using IAM policies.</p>
+         <p>Each tag consists of a key and a value, and each key must be unique for the resource. The following restrictions apply to resource tags:</p>
+         <ul>
+            <li>
+               <p>Although the maximum number of array members is 200, you can assign a maximum of 50 user-tags to one resource. The remaining are reserved for Amazon Web Services use</p>
+            </li>
+            <li>
+               <p>The maximum length of a key is 128 characters</p>
+            </li>
+            <li>
+               <p>The maximum length of a value is 256 characters</p>
+            </li>
+            <li>
+               <p>Valid characters for keys and values are: <code>A-Z</code>, <code>a-z</code>, spaces, <code>_.:/=+-</code>
+               </p>
+            </li>
+            <li>
+               <p>Keys and values are case sensitive</p>
+            </li>
+            <li>
+               <p>Keys and values are trimmed for any leading or trailing whitespaces</p>
+            </li>
+            <li>
+               <p>Don’t use <code>aws:</code> as a prefix for your keys. This prefix is reserved for Amazon Web Services use</p>
+            </li>
+         </ul>")
+    @as("ResourceTags")
+    resourceTags: option<resourceTagList>,
+    @ocaml.doc("<p>The cost anomaly subscription object that you want to create. </p>")
     @as("AnomalySubscription")
     anomalySubscription: anomalySubscription,
   }
   type response = {
-    @ocaml.doc("<p>
-      The unique identifier of your newly created cost anomaly subscription.
-    </p>")
+    @ocaml.doc("<p>The unique identifier of your newly created cost anomaly subscription. </p>")
     @as("SubscriptionArn")
     subscriptionArn: genericString,
   }
   @module("@aws-sdk/client-ce") @new external new: request => t = "CreateAnomalySubscriptionCommand"
-  let make = (~anomalySubscription, ()) => new({anomalySubscription: anomalySubscription})
+  let make = (~anomalySubscription, ~resourceTags=?, ()) =>
+    new({resourceTags: resourceTags, anomalySubscription: anomalySubscription})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -2023,36 +2044,25 @@ module ListCostCategoryDefinitions = {
 module GetAnomalySubscriptions = {
   type t
   type request = {
-    @ocaml.doc("<p>
-      The number of entries a paginated response contains.
-    </p>")
-    @as("MaxResults")
+    @ocaml.doc("<p>The number of entries a paginated response contains. </p>") @as("MaxResults")
     maxResults: option<pageSize>,
-    @ocaml.doc("<p>
-      The token to retrieve the next set of results. AWS provides the token when the response from a previous call has more results than the maximum page size.
-    </p>")
+    @ocaml.doc("<p>The token to retrieve the next set of results. Amazon Web Services provides the token when
+      the response from a previous call has more results than the maximum page size. </p>")
     @as("NextPageToken")
     nextPageToken: option<nextPageToken>,
-    @ocaml.doc("<p>
-      Cost anomaly monitor ARNs.
-    </p>")
-    @as("MonitorArn")
+    @ocaml.doc("<p>Cost anomaly monitor ARNs. </p>") @as("MonitorArn")
     monitorArn: option<genericString>,
-    @ocaml.doc("<p>
-      A list of cost anomaly subscription ARNs.
-    </p>")
-    @as("SubscriptionArnList")
+    @ocaml.doc("<p>A list of cost anomaly subscription ARNs. </p>") @as("SubscriptionArnList")
     subscriptionArnList: option<values>,
   }
   type response = {
-    @ocaml.doc("<p>
-      The token to retrieve the next set of results. AWS provides the token when the response from a previous call has more results than the maximum page size.
-    </p>")
+    @ocaml.doc("<p>The token to retrieve the next set of results. Amazon Web Services provides the token when
+      the response from a previous call has more results than the maximum page size. </p>")
     @as("NextPageToken")
     nextPageToken: option<nextPageToken>,
-    @ocaml.doc("<p>
-      A list of cost anomaly subscriptions that includes the detailed metadata for each one.
-    </p>")
+    @ocaml.doc(
+      "<p>A list of cost anomaly subscriptions that includes the detailed metadata for each one. </p>"
+    )
     @as("AnomalySubscriptions")
     anomalySubscriptions: anomalySubscriptions,
   }
@@ -2070,14 +2080,10 @@ module GetAnomalySubscriptions = {
 module GetAnomalies = {
   type t
   type request = {
-    @ocaml.doc("<p>
-      The number of entries a paginated response contains.
-    </p>")
-    @as("MaxResults")
+    @ocaml.doc("<p>The number of entries a paginated response contains. </p>") @as("MaxResults")
     maxResults: option<pageSize>,
-    @ocaml.doc("<p>
-      The token to retrieve the next set of results. AWS provides the token when the response from a previous call has more results than the maximum page size.
-    </p>")
+    @ocaml.doc("<p>The token to retrieve the next set of results. Amazon Web Services provides the token when
+      the response from a previous call has more results than the maximum page size. </p>")
     @as("NextPageToken")
     nextPageToken: option<nextPageToken>,
     @ocaml.doc("<p>Filters anomaly results by the total impact field on the anomaly object. For example, you
@@ -2098,16 +2104,11 @@ module GetAnomalies = {
     monitorArn: option<genericString>,
   }
   type response = {
-    @ocaml.doc("<p>
-      The token to retrieve the next set of results. AWS provides the token when the response from a previous call has more results than the maximum page size.
-    </p>")
+    @ocaml.doc("<p>The token to retrieve the next set of results. Amazon Web Services provides the token when
+      the response from a previous call has more results than the maximum page size. </p>")
     @as("NextPageToken")
     nextPageToken: option<nextPageToken>,
-    @ocaml.doc("<p>
-      A list of cost anomalies.
-    </p>")
-    @as("Anomalies")
-    anomalies: anomalies,
+    @ocaml.doc("<p>A list of cost anomalies. </p>") @as("Anomalies") anomalies: anomalies,
   }
   @module("@aws-sdk/client-ce") @new external new: request => t = "GetAnomaliesCommand"
   let make = (
@@ -2139,7 +2140,7 @@ module GetUsageForecast = {
     @as("PredictionIntervalLevel")
     predictionIntervalLevel: option<predictionIntervalLevel>,
     @ocaml.doc("<p>The filters that you want to use to filter your forecast. The <code>GetUsageForecast</code> API supports filtering by the following dimensions:</p>
-		    
+		
 	        <ul>
             <li>
                <p>
@@ -2304,16 +2305,16 @@ module GetTags = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The token to retrieve the next set of results. AWS provides the token when the response from a previous call has more results than the maximum page size.</p>"
+      "<p>The token to retrieve the next set of results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size.</p>"
     )
     @as("NextPageToken")
     nextPageToken: option<nextPageToken>,
     @ocaml.doc("<p>This field is only used when SortBy is provided in the request. The maximum number of objects that to be returned for this request. If MaxResults is not specified with SortBy, the request will return 1000 results as the default value for this parameter.</p>
-	        <p>For <code>GetTags</code>, MaxResults has an upper limit of 1000.</p>")
+         <p>For <code>GetTags</code>, MaxResults has an upper limit of 1000.</p>")
     @as("MaxResults")
     maxResults: option<maxResults>,
     @ocaml.doc("<p>The value by which you want to sort the data.</p>
-	        <p>The key represents cost and usage metrics. The following values are supported:</p>
+         <p>The key represents cost and usage metrics. The following values are supported:</p>
          <ul>
             <li>
                <p>
@@ -2367,11 +2368,12 @@ module GetTags = {
   }
   type response = {
     @ocaml.doc("<p>The total number of query results.</p>") @as("TotalSize") totalSize: pageSize,
-    @ocaml.doc("<p>The number of query results that AWS returns at a time.</p>") @as("ReturnSize")
+    @ocaml.doc("<p>The number of query results that Amazon Web Services returns at a time.</p>")
+    @as("ReturnSize")
     returnSize: pageSize,
     @ocaml.doc("<p>The tags that match your request.</p>") @as("Tags") tags: tagList_,
     @ocaml.doc(
-      "<p>The token for the next set of retrievable results. AWS provides the token when the response from a previous call has more results than the maximum page size.</p>"
+      "<p>The token for the next set of retrievable results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size.</p>"
     )
     @as("NextPageToken")
     nextPageToken: option<nextPageToken>,
@@ -2403,8 +2405,8 @@ module GetSavingsPlansUtilizationDetails = {
   type t
   type request = {
     @ocaml.doc("<p>The value by which you want to sort the data.</p>
-	  
-	        <p>The following values are supported for <code>Key</code>:</p>
+    
+         <p>The following values are supported for <code>Key</code>:</p>
          <ul>
             <li>
                <p>
@@ -2442,7 +2444,7 @@ module GetSavingsPlansUtilizationDetails = {
                </p>
             </li>
          </ul>
-
+    
          <p>Supported values for <code>SortOrder</code> are <code>ASCENDING</code> or <code>DESCENDING</code>.</p>")
     @as("SortBy")
     sortBy: option<sortDefinition>,
@@ -2531,7 +2533,7 @@ module GetSavingsPlansUtilization = {
   type t
   type request = {
     @ocaml.doc("<p>The value by which you want to sort the data.</p>
-	        <p>The following values are supported for <code>Key</code>:</p>
+         <p>The following values are supported for <code>Key</code>:</p>
          <ul>
             <li>
                <p>
@@ -2559,7 +2561,7 @@ module GetSavingsPlansUtilization = {
                </p>
             </li>
          </ul>
-
+    
          <p>Supported values for <code>SortOrder</code> are <code>ASCENDING</code> or <code>DESCENDING</code>.</p>")
     @as("SortBy")
     sortBy: option<sortDefinition>,
@@ -2677,7 +2679,7 @@ module GetSavingsPlansPurchaseRecommendation = {
   }
   type response = {
     @ocaml.doc(
-      "<p>The token for the next set of retrievable results. AWS provides the token when the response from a previous call has more results than the maximum page size.</p>"
+      "<p>The token for the next set of retrievable results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size.</p>"
     )
     @as("NextPageToken")
     nextPageToken: option<nextPageToken>,
@@ -2719,7 +2721,7 @@ module GetSavingsPlansCoverage = {
   type t
   type request = {
     @ocaml.doc("<p>The value by which you want to sort the data.</p>
-	  	     <p>The following values are supported for <code>Key</code>:</p>
+         <p>The following values are supported for <code>Key</code>:</p>
          <ul>
             <li>
                <p>
@@ -2757,7 +2759,7 @@ module GetSavingsPlansCoverage = {
                </p>
             </li>
          </ul>
-
+    
          <p>Supported values for <code>SortOrder</code> are <code>ASCENDING</code> or <code>DESCENDING</code>.</p>")
     @as("SortBy")
     sortBy: option<sortDefinition>,
@@ -2916,18 +2918,18 @@ module GetReservationUtilization = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The maximum number of objects that you returned for this request. If more objects are available, in the response, AWS provides a NextPageToken value that you can use in a subsequent call to get the next batch of objects.</p>"
+      "<p>The maximum number of objects that you returned for this request. If more objects are available, in the response, Amazon Web Services provides a NextPageToken value that you can use in a subsequent call to get the next batch of objects.</p>"
     )
     @as("MaxResults")
     maxResults: option<maxResults>,
     @ocaml.doc(
-      "<p>The token to retrieve the next set of results. AWS provides the token when the response from a previous call has more results than the maximum page size.</p>"
+      "<p>The token to retrieve the next set of results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size.</p>"
     )
     @as("NextPageToken")
     nextPageToken: option<nextPageToken>,
     @ocaml.doc("<p>The value by which you want to sort the data.</p>
-	  
-	        <p>The following values are supported for <code>Key</code>:</p>
+    
+         <p>The following values are supported for <code>Key</code>:</p>
          <ul>
             <li>
                <p>
@@ -3015,7 +3017,7 @@ module GetReservationUtilization = {
                </p>
             </li>
          </ul>
-
+    
          <p>Supported values for <code>SortOrder</code> are <code>ASCENDING</code> or <code>DESCENDING</code>.</p>")
     @as("SortBy")
     sortBy: option<sortDefinition>,
@@ -3078,7 +3080,7 @@ module GetReservationUtilization = {
   }
   type response = {
     @ocaml.doc(
-      "<p>The token for the next set of retrievable results. AWS provides the token when the response from a previous call has more results than the maximum page size.</p>"
+      "<p>The token for the next set of retrievable results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size.</p>"
     )
     @as("NextPageToken")
     nextPageToken: option<nextPageToken>,
@@ -3134,7 +3136,7 @@ module GetReservationPurchaseRecommendation = {
     @ocaml.doc("<p>The reservation term that you want recommendations for.</p>") @as("TermInYears")
     termInYears: option<termInYears>,
     @ocaml.doc(
-      "<p>The number of previous days that you want AWS to consider when it calculates your recommendations.</p>"
+      "<p>The number of previous days that you want Amazon Web Services to consider when it calculates your recommendations.</p>"
     )
     @as("LookbackPeriodInDays")
     lookbackPeriodInDays: option<lookbackPeriodInDays>,
@@ -3199,12 +3201,12 @@ module GetReservationCoverage = {
   )
   type request = {
     @ocaml.doc(
-      "<p>The maximum number of objects that you returned for this request. If more objects are available, in the response, AWS provides a NextPageToken value that you can use in a subsequent call to get the next batch of objects.</p>"
+      "<p>The maximum number of objects that you returned for this request. If more objects are available, in the response, Amazon Web Services provides a NextPageToken value that you can use in a subsequent call to get the next batch of objects.</p>"
     )
     @as("MaxResults")
     maxResults: option<maxResults>,
     @ocaml.doc("<p>The value by which you want to sort the data.</p>
-	        <p>The following values are supported for <code>Key</code>:</p>
+         <p>The following values are supported for <code>Key</code>:</p>
          <ul>
             <li>
                <p>
@@ -3257,12 +3259,12 @@ module GetReservationCoverage = {
                </p>
             </li>
          </ul>
-
+    
          <p>Supported values for <code>SortOrder</code> are <code>ASCENDING</code> or <code>DESCENDING</code>.</p>")
     @as("SortBy")
     sortBy: option<sortDefinition>,
     @ocaml.doc(
-      "<p>The token to retrieve the next set of results. AWS provides the token when the response from a previous call has more results than the maximum page size.</p>"
+      "<p>The token to retrieve the next set of results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size.</p>"
     )
     @as("NextPageToken")
     nextPageToken: option<nextPageToken>,
@@ -3318,7 +3320,7 @@ module GetReservationCoverage = {
 	        <p>Cost category is also supported.</p>")
     @as("Filter")
     filter: option<expression>,
-    @ocaml.doc("<p>The granularity of the AWS cost data for the reservation. Valid values are <code>MONTHLY</code> and <code>DAILY</code>.</p>
+    @ocaml.doc("<p>The granularity of the Amazon Web Services cost data for the reservation. Valid values are <code>MONTHLY</code> and <code>DAILY</code>.</p>
 		       <p>If <code>GroupBy</code> is set, <code>Granularity</code> can't be set. If <code>Granularity</code> isn't set, 
 			the response object doesn't include <code>Granularity</code>, either <code>MONTHLY</code> or <code>DAILY</code>.</p>
 		       <p>The <code>GetReservationCoverage</code> operation supports only <code>DAILY</code> and <code>MONTHLY</code> granularities.</p>")
@@ -3340,6 +3342,9 @@ module GetReservationCoverage = {
             </li>
             <li>
                <p>INSTANCE_TYPE</p>
+            </li>
+            <li>
+               <p>INVOICING_ENTITY</p>
             </li>
             <li>
                <p>LINKED_ACCOUNT</p>
@@ -3367,7 +3372,7 @@ module GetReservationCoverage = {
   }
   type response = {
     @ocaml.doc(
-      "<p>The token for the next set of retrievable results. AWS provides the token when the response from a previous call has more results than the maximum page size.</p>"
+      "<p>The token for the next set of retrievable results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size.</p>"
     )
     @as("NextPageToken")
     nextPageToken: option<nextPageToken>,
@@ -3405,16 +3410,16 @@ module GetDimensionValues = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The token to retrieve the next set of results. AWS provides the token when the response from a previous call has more results than the maximum page size.</p>"
+      "<p>The token to retrieve the next set of results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size.</p>"
     )
     @as("NextPageToken")
     nextPageToken: option<nextPageToken>,
     @ocaml.doc("<p>This field is only used when SortBy is provided in the request. The maximum number of objects that to be returned for this request. If MaxResults is not specified with SortBy, the request will return 1000 results as the default value for this parameter.</p>
-	        <p>For <code>GetDimensionValues</code>, MaxResults has an upper limit of 1000.</p>")
+         <p>For <code>GetDimensionValues</code>, MaxResults has an upper limit of 1000.</p>")
     @as("MaxResults")
     maxResults: option<maxResults>,
     @ocaml.doc("<p>The value by which you want to sort the data.</p>
-	        <p>The key represents cost and usage metrics. The following values are supported:</p>
+         <p>The key represents cost and usage metrics. The following values are supported:</p>
          <ul>
             <li>
                <p>
@@ -3468,17 +3473,35 @@ module GetDimensionValues = {
                <p>AZ - The Availability Zone. An example is <code>us-east-1a</code>.</p>
             </li>
             <li>
+               <p>BILLING_ENTITY - The Amazon Web Services seller that your account is with. Possible values are the following:</p>
+               <p>- Amazon Web Services(Amazon Web Services): The entity that sells Amazon Web Services services.</p>
+               <p>- AISPL (Amazon Internet Services Pvt. Ltd.): The local Indian entity that is an acting reseller for Amazon Web Services services in India.</p>
+               <p>- Amazon Web Services Marketplace: The entity that supports the sale of solutions built on Amazon Web Services by third-party software providers.</p>
+             </li>
+            <li>
+               <p>CACHE_ENGINE - The Amazon ElastiCache operating system. Examples are Windows or Linux.</p>
+            </li>
+            <li>
+               <p>DEPLOYMENT_OPTION - The scope of Amazon Relational Database Service deployments. Valid values are <code>SingleAZ</code> and <code>MultiAZ</code>.</p>
+            </li>
+            <li>
                <p>DATABASE_ENGINE - The Amazon Relational Database Service database. Examples are Aurora or MySQL.</p>
             </li>
             <li>
                <p>INSTANCE_TYPE - The type of Amazon EC2 instance. An example is <code>m4.xlarge</code>.</p>
             </li>
             <li>
-               <p>LEGAL_ENTITY_NAME - The name of the organization that sells you AWS services, such as Amazon Web Services.</p>
+               <p>INSTANCE_TYPE_FAMILY - A family of instance types optimized to fit different use cases. Examples are <code>Compute Optimized</code> (<code>C4</code>, <code>C5</code>, <code>C6g</code>, <code>C7g</code> etc.), <code>Memory Optimization</code> (<code>R4</code>, <code>R5n</code>, <code>R5b</code>, <code>R6g</code> etc).</p>
+            </li>
+            <li>
+               <p>INVOICING_ENTITY - The name of the entity issuing the Amazon Web Services invoice.</p>
+            </li>
+            <li>
+               <p>LEGAL_ENTITY_NAME - The name of the organization that sells you Amazon Web Services services, such as Amazon Web Services.</p>
             </li>
             <li>
                <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value 
-               field contains the AWS ID of the member account.</p>
+               field contains the Amazon Web Services ID of the member account.</p>
             </li>
             <li>
                <p>OPERATING_SYSTEM - The operating system. Examples are Windows or Linux.</p>
@@ -3494,7 +3517,19 @@ module GetDimensionValues = {
                Instances and Standard Reserved Instances.</p>
             </li>
             <li>
-               <p>SERVICE - The AWS service such as Amazon DynamoDB.</p>
+               <p>RESERVATION_ID - The unique identifier for an Amazon Web Services Reservation Instance.</p>
+            </li>
+            <li>
+               <p>SAVINGS_PLAN_ARN - The unique identifier for your Savings Plans.</p>
+            </li>
+            <li>
+               <p>SAVINGS_PLANS_TYPE - Type of Savings Plans (EC2 Instance or Compute).</p>
+            </li>
+            <li>
+               <p>SERVICE - The Amazon Web Services service such as Amazon DynamoDB.</p>
+            </li>
+            <li>
+               <p>TENANCY - The tenancy of a resource. Examples are shared or dedicated.</p>
             </li>
             <li>
                <p>USAGE_TYPE - The type of usage. An example is DataTransfer-In-Bytes. The response for the <code>GetDimensionValues</code> operation
@@ -3505,7 +3540,7 @@ module GetDimensionValues = {
                operation includes a unit attribute.</p>
             </li>
             <li>
-               <p>REGION - The AWS Region.</p>
+               <p>REGION - The Amazon Web Services Region.</p>
             </li>
             <li>
                <p>RECORD_TYPE - The different types of charges such as RI fees, usage costs, tax refunds, and credits.</p>
@@ -3531,13 +3566,13 @@ module GetDimensionValues = {
             </li>
             <li>
                <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value 
-               field contains the AWS ID of the member account.</p>
+               field contains the Amazon Web Services ID of the member account.</p>
             </li>
             <li>
                <p>PLATFORM - The Amazon EC2 operating system. Examples are Windows or Linux.</p>
             </li>
             <li>
-               <p>REGION - The AWS Region.</p>
+               <p>REGION - The Amazon Web Services Region.</p>
             </li>
             <li>
                <p>SCOPE (Utilization only) - The scope of a Reserved Instance (RI). Values are regional or a single Availability Zone.</p>
@@ -3558,17 +3593,17 @@ module GetDimensionValues = {
                <p>PAYMENT_OPTION - Payment option for the given Savings Plans (for example, All Upfront)</p>
             </li>
             <li>
-               <p>REGION - The AWS Region.</p>
+               <p>REGION - The Amazon Web Services Region.</p>
             </li>
             <li>
                <p>INSTANCE_TYPE_FAMILY - The family of instances (For example, <code>m5</code>)</p>
             </li>
             <li>
                <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value 
-               field contains the AWS ID of the member account.</p>
+               field contains the Amazon Web Services ID of the member account.</p>
             </li>
             <li>
-               <p>SAVINGS_PLAN_ARN - The unique identifier for your Savings Plan</p>
+               <p>SAVINGS_PLAN_ARN - The unique identifier for your Savings Plans.</p>
             </li>
          </ul>")
     @as("Context")
@@ -3579,8 +3614,11 @@ module GetDimensionValues = {
 		</p>")
     @as("Dimension")
     dimension: dimension,
-    @ocaml.doc("<p>The start and end dates for retrieving the dimension values. The start date is inclusive,  but the end date is exclusive. For example, if <code>start</code> is <code>2017-01-01</code> and <code>end</code> is <code>2017-05-01</code>, then the cost and usage data is  
-            retrieved from <code>2017-01-01</code> up to and including <code>2017-04-30</code> but not including <code>2017-05-01</code>.</p>")
+    @ocaml.doc("<p>The start date and end date for retrieving the dimension values. The start date is
+      inclusive, but the end date is exclusive. For example, if <code>start</code> is
+        <code>2017-01-01</code> and <code>end</code> is <code>2017-05-01</code>, then the cost and
+      usage data is retrieved from <code>2017-01-01</code> up to and including
+        <code>2017-04-30</code> but not including <code>2017-05-01</code>.</p>")
     @as("TimePeriod")
     timePeriod: dateInterval,
     @ocaml.doc("<p>The value that you want to search the filter values for.</p>")
@@ -3589,12 +3627,13 @@ module GetDimensionValues = {
   }
   type response = {
     @ocaml.doc(
-      "<p>The token for the next set of retrievable results. AWS provides the token when the response from a previous call has more results than the maximum page size.</p>"
+      "<p>The token for the next set of retrievable results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size.</p>"
     )
     @as("NextPageToken")
     nextPageToken: option<nextPageToken>,
     @ocaml.doc("<p>The total number of search results.</p>") @as("TotalSize") totalSize: pageSize,
-    @ocaml.doc("<p>The number of results that AWS returned at one time.</p>") @as("ReturnSize")
+    @ocaml.doc("<p>The number of results that Amazon Web Services returned at one time.</p>")
+    @as("ReturnSize")
     returnSize: pageSize,
     @ocaml.doc("<p>The filters that you used to filter your request. Some dimensions are available only for a specific context.</p>
 		       <p>If you set the context to <code>COST_AND_USAGE</code>, you can use the following 
@@ -3610,11 +3649,11 @@ module GetDimensionValues = {
                <p>INSTANCE_TYPE - The type of Amazon EC2 instance. An example is <code>m4.xlarge</code>.</p>
             </li>
             <li>
-               <p>LEGAL_ENTITY_NAME - The name of the organization that sells you AWS services, such as Amazon Web Services.</p>
+               <p>LEGAL_ENTITY_NAME - The name of the organization that sells you Amazon Web Services services, such as Amazon Web Services.</p>
             </li>
             <li>
                <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value 
-               field contains the AWS ID of the member account.</p>
+               field contains the Amazon Web Services ID of the member account.</p>
             </li>
             <li>
                <p>OPERATING_SYSTEM - The operating system. Examples are Windows or Linux.</p>
@@ -3630,7 +3669,7 @@ module GetDimensionValues = {
                Instances and Standard Reserved Instances.</p>
             </li>
             <li>
-               <p>SERVICE - The AWS service such as Amazon DynamoDB.</p>
+               <p>SERVICE - The Amazon Web Services service such as Amazon DynamoDB.</p>
             </li>
             <li>
                <p>USAGE_TYPE - The type of usage. An example is DataTransfer-In-Bytes. The response for the <code>GetDimensionValues</code> operation
@@ -3664,13 +3703,13 @@ module GetDimensionValues = {
             </li>
             <li>
                <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value 
-               field contains the AWS ID of the member account.</p>
+               field contains the Amazon Web Services ID of the member account.</p>
             </li>
             <li>
                <p>PLATFORM - The Amazon EC2 operating system. Examples are Windows or Linux.</p>
             </li>
             <li>
-               <p>REGION - The AWS Region.</p>
+               <p>REGION - The Amazon Web Services Region.</p>
             </li>
             <li>
                <p>SCOPE (Utilization only) - The scope of a Reserved Instance (RI). Values are regional or a single Availability Zone.</p>
@@ -3691,14 +3730,14 @@ module GetDimensionValues = {
                <p>PAYMENT_OPTION - Payment option for the given Savings Plans (for example, All Upfront)</p>
             </li>
             <li>
-               <p>REGION - The AWS Region.</p>
+               <p>REGION - The Amazon Web Services Region.</p>
             </li>
             <li>
                <p>INSTANCE_TYPE_FAMILY - The family of instances (For example, <code>m5</code>)</p>
             </li>
             <li>
                <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value 
-               field contains the AWS ID of the member account.</p>
+               field contains the Amazon Web Services ID of the member account.</p>
             </li>
             <li>
                <p>SAVINGS_PLAN_ARN - The unique identifier for your Savings Plan</p>
@@ -3741,7 +3780,7 @@ module GetCostForecast = {
     @as("PredictionIntervalLevel")
     predictionIntervalLevel: option<predictionIntervalLevel>,
     @ocaml.doc("<p>The filters that you want to use to filter your forecast. The <code>GetCostForecast</code> API supports filtering by the following dimensions:</p>
-		    
+		
 	        <ul>
             <li>
                <p>
@@ -3921,17 +3960,17 @@ module GetCostCategories = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>If the number of objects that are still available for retrieval exceeds the limit, AWS returns a NextPageToken value in the response. To retrieve the next batch of objects, provide the NextPageToken from the prior call in your next request.</p>"
+      "<p>If the number of objects that are still available for retrieval exceeds the limit, Amazon Web Services returns a NextPageToken value in the response. To retrieve the next batch of objects, provide the NextPageToken from the prior call in your next request.</p>"
     )
     @as("NextPageToken")
     nextPageToken: option<nextPageToken>,
     @ocaml.doc("<p>This field is only used when <code>SortBy</code> is provided in the request.</p>
-	        <p>The maximum number of objects that to be returned for this request.  If <code>MaxResults</code> is not specified with <code>SortBy</code>, the request will return 1000 results as the default value for this parameter.</p>
-	        <p>For <code>GetCostCategories</code>, MaxResults has an upper limit of 1000.</p>")
+         <p>The maximum number of objects that to be returned for this request.  If <code>MaxResults</code> is not specified with <code>SortBy</code>, the request will return 1000 results as the default value for this parameter.</p>
+         <p>For <code>GetCostCategories</code>, MaxResults has an upper limit of 1000.</p>")
     @as("MaxResults")
     maxResults: option<maxResults>,
     @ocaml.doc("<p>The value by which you want to sort the data.</p>
-	        <p>The key represents cost and usage metrics. The following values are supported:</p>
+         <p>The key represents cost and usage metrics. The following values are supported:</p>
          <ul>
             <li>
                <p>
@@ -3977,7 +4016,7 @@ module GetCostCategories = {
     @as("CostCategoryName") costCategoryName: option<costCategoryName>,
     @as("TimePeriod") timePeriod: dateInterval,
     @ocaml.doc("<p>The value that you want to search the filter values for.</p>
-	        <p>If you do not specify a <code>CostCategoryName</code>, <code>SearchString</code> will be used to filter Cost Category names that match the <code>SearchString</code> pattern. If you do specifiy a <code>CostCategoryName</code>, <code>SearchString</code> will be used to filter Cost Category values that match the <code>SearchString</code> pattern.</p>")
+         <p>If you do not specify a <code>CostCategoryName</code>, <code>SearchString</code> will be used to filter Cost Category names that match the <code>SearchString</code> pattern. If you do specifiy a <code>CostCategoryName</code>, <code>SearchString</code> will be used to filter Cost Category values that match the <code>SearchString</code> pattern.</p>")
     @as("SearchString")
     searchString: option<searchString>,
   }
@@ -3985,14 +4024,14 @@ module GetCostCategories = {
     @ocaml.doc("<p>The total number of objects.</p>") @as("TotalSize") totalSize: pageSize,
     @ocaml.doc("<p>The number of objects returned.</p>") @as("ReturnSize") returnSize: pageSize,
     @ocaml.doc("<p>The Cost Category values.</p>
-	        <p>
+         <p>
             <code>CostCategoryValues</code> are not returned if <code>CostCategoryName</code> is not specified in the request. </p>")
     @as("CostCategoryValues")
     costCategoryValues: option<costCategoryValuesList>,
     @ocaml.doc("<p>The names of the Cost Categories.</p>") @as("CostCategoryNames")
     costCategoryNames: option<costCategoryNamesList>,
     @ocaml.doc(
-      "<p>If the number of objects that are still available for retrieval exceeds the limit, AWS returns a NextPageToken value in the response. To retrieve the next batch of objects, provide the marker from the prior call in your next request.</p>"
+      "<p>If the number of objects that are still available for retrieval exceeds the limit, Amazon Web Services returns a NextPageToken value in the response. To retrieve the next batch of objects, provide the marker from the prior call in your next request.</p>"
     )
     @as("NextPageToken")
     nextPageToken: option<nextPageToken>,
@@ -4024,7 +4063,7 @@ module GetCostAndUsageWithResources = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The token to retrieve the next set of results. AWS provides the token when the response from a previous call has more results than the maximum page size.</p>"
+      "<p>The token to retrieve the next set of results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size.</p>"
     )
     @as("NextPageToken")
     nextPageToken: option<nextPageToken>,
@@ -4058,10 +4097,12 @@ module GetCostAndUsageWithResources = {
       define any combination of dimension filters. For more information, see <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html\">Expression</a>. </p>
          <p>The <code>GetCostAndUsageWithResources</code> operation requires that you either group by or filter by a
       <code>ResourceId</code>. It requires the <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html\">Expression</a> 
-            <code>\"SERVICE = Amazon Elastic Compute Cloud - Compute\"</code> in the filter.</p>")
+            <code>\"SERVICE = Amazon Elastic Compute Cloud - Compute\"</code> in the filter.</p>
+         <p>Valid values for <code>MatchOptions</code> for <code>Dimensions</code> are <code>EQUALS</code> and <code>CASE_SENSITIVE</code>.</p>
+         <p>Valid values for <code>MatchOptions</code> for <code>CostCategories</code> and <code>Tags</code> are <code>EQUALS</code>, <code>ABSENT</code>, and <code>CASE_SENSITIVE</code>. Default values are <code>EQUALS</code> and <code>CASE_SENSITIVE</code>.</p>")
     @as("Filter")
     filter: expression,
-    @ocaml.doc("<p>Sets the AWS cost granularity to <code>MONTHLY</code>, <code>DAILY</code>, or <code>HOURLY</code>. If
+    @ocaml.doc("<p>Sets the Amazon Web Services cost granularity to <code>MONTHLY</code>, <code>DAILY</code>, or <code>HOURLY</code>. If
 	    <code>Granularity</code> isn't set, the response object doesn't include the
 	    <code>Granularity</code>, <code>MONTHLY</code>, <code>DAILY</code>, or <code>HOURLY</code>. </p>")
     @as("Granularity")
@@ -4085,7 +4126,7 @@ module GetCostAndUsageWithResources = {
     @as("GroupDefinitions")
     groupDefinitions: option<groupDefinitions>,
     @ocaml.doc(
-      "<p>The token for the next set of retrievable results. AWS provides the token when the response from a previous call has more results than the maximum page size.</p>"
+      "<p>The token for the next set of retrievable results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size.</p>"
     )
     @as("NextPageToken")
     nextPageToken: option<nextPageToken>,
@@ -4108,16 +4149,16 @@ module GetCostAndUsage = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The token to retrieve the next set of results. AWS provides the token when the response from a previous call has more results than the maximum page size.</p>"
+      "<p>The token to retrieve the next set of results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size.</p>"
     )
     @as("NextPageToken")
     nextPageToken: option<nextPageToken>,
-    @ocaml.doc("<p>You can group AWS costs using up to two different groups, either dimensions, tag keys,
+    @ocaml.doc("<p>You can group Amazon Web Services costs using up to two different groups, either dimensions, tag keys,
       cost categories, or any two group by types.</p>
-		       <p>When you group by tag key, you get all tag values, including empty strings.</p>
-		       <p>Valid values are <code>AZ</code>, <code>INSTANCE_TYPE</code>, <code>LEGAL_ENTITY_NAME</code>, <code>LINKED_ACCOUNT</code>, 
-			<code>OPERATION</code>, <code>PLATFORM</code>, <code>PURCHASE_TYPE</code>, <code>SERVICE</code>, <code>TAGS</code>, 
-		  <code>TENANCY</code>, <code>RECORD_TYPE</code>, and <code>USAGE_TYPE</code>.</p>")
+	        <p>Valid values for the <code>DIMENSION</code> type are <code>AZ</code>, <code>INSTANCE_TYPE</code>, <code>LEGAL_ENTITY_NAME</code>, <code>INVOICING_ENTITY</code>, <code>LINKED_ACCOUNT</code>, 
+			<code>OPERATION</code>, <code>PLATFORM</code>, <code>PURCHASE_TYPE</code>, <code>SERVICE</code>,
+		  <code>TENANCY</code>, <code>RECORD_TYPE</code>, and <code>USAGE_TYPE</code>.</p>
+	        <p>When you group by the <code>TAG</code>  type and include a valid tag key, you get all tag values, including empty strings.</p>")
     @as("GroupBy")
     groupBy: option<groupDefinitions>,
     @ocaml.doc("<p>Which metrics are returned in the query. For more information about blended and unblended rates, see 
@@ -4126,28 +4167,34 @@ module GetCostAndUsage = {
 		       <p>Valid values are <code>AmortizedCost</code>, <code>BlendedCost</code>, <code>NetAmortizedCost</code>, 
 			<code>NetUnblendedCost</code>, <code>NormalizedUsageAmount</code>, <code>UnblendedCost</code>, and <code>UsageQuantity</code>. </p>
 		       <note>
-			         <p>If you return the <code>UsageQuantity</code> metric, the service aggregates all usage numbers without 
-				taking into account the units. For example, if you aggregate <code>usageQuantity</code> across all of Amazon EC2, 
-				the results aren't meaningful because Amazon EC2 compute hours and data transfer are measured in different units 
-				(for example, hours vs. GB). To get more meaningful <code>UsageQuantity</code> metrics, filter by <code>UsageType</code> or 
-				<code>UsageTypeGroups</code>. </p>
+			         <p>If you return the <code>UsageQuantity</code> metric, the service aggregates all usage
+        numbers without taking into account the units. For example, if you aggregate
+          <code>usageQuantity</code> across all of Amazon EC2, the results aren't meaningful because
+        Amazon EC2 compute hours and data transfer are measured in different units (for example,
+        hours and GB). To get more meaningful <code>UsageQuantity</code> metrics, filter by
+          <code>UsageType</code> or <code>UsageTypeGroups</code>. </p>
 		       </note>
 		       <p>
             <code>Metrics</code> is required for <code>GetCostAndUsage</code> requests.</p>")
     @as("Metrics")
     metrics: metricNames,
-    @ocaml.doc("<p>Filters AWS costs by different dimensions. For example, you can specify <code>SERVICE</code> and <code>LINKED_ACCOUNT</code> 
+    @ocaml.doc("<p>Filters Amazon Web Services costs by different dimensions. For example, you can specify <code>SERVICE</code> and <code>LINKED_ACCOUNT</code> 
 			and get the costs that are associated with that account's usage of that service. You can nest <code>Expression</code> objects 
 			to define any combination of dimension filters. For more information, see 
-			<a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html\">Expression</a>. </p>")
+			<a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html\">Expression</a>. </p>
+	        <p>Valid values for <code>MatchOptions</code> for <code>Dimensions</code> are <code>EQUALS</code> and <code>CASE_SENSITIVE</code>.</p>
+	        <p>Valid values for <code>MatchOptions</code> for <code>CostCategories</code> and <code>Tags</code> are <code>EQUALS</code>, <code>ABSENT</code>, and <code>CASE_SENSITIVE</code>. Default values are <code>EQUALS</code> and <code>CASE_SENSITIVE</code>.</p>")
     @as("Filter")
     filter: option<expression>,
-    @ocaml.doc("<p>Sets the AWS cost granularity to <code>MONTHLY</code> or <code>DAILY</code>, or <code>HOURLY</code>. If <code>Granularity</code> isn't set, 
+    @ocaml.doc("<p>Sets the Amazon Web Services cost granularity to <code>MONTHLY</code> or <code>DAILY</code>, or <code>HOURLY</code>. If <code>Granularity</code> isn't set, 
 	    the response object doesn't include the <code>Granularity</code>, either <code>MONTHLY</code> or <code>DAILY</code>, or <code>HOURLY</code>. </p>")
     @as("Granularity")
     granularity: granularity,
-    @ocaml.doc("<p>Sets the start and end dates for retrieving AWS costs. The start date is inclusive,  but the end date is exclusive. For example, if <code>start</code> is <code>2017-01-01</code> and <code>end</code> is <code>2017-05-01</code>, then the cost and usage data is  
-            retrieved from <code>2017-01-01</code> up to and including <code>2017-04-30</code> but not including <code>2017-05-01</code>.</p>")
+    @ocaml.doc("<p>Sets the start date and end date for retrieving Amazon Web Services costs. The start date
+      is inclusive, but the end date is exclusive. For example, if <code>start</code> is
+        <code>2017-01-01</code> and <code>end</code> is <code>2017-05-01</code>, then the cost and
+      usage data is retrieved from <code>2017-01-01</code> up to and including
+        <code>2017-04-30</code> but not including <code>2017-05-01</code>.</p>")
     @as("TimePeriod")
     timePeriod: dateInterval,
   }
@@ -4157,7 +4204,7 @@ module GetCostAndUsage = {
     )
     @as("DimensionValueAttributes")
     dimensionValueAttributes: option<dimensionValuesWithAttributesList>,
-    @ocaml.doc("<p>The time period that is covered by the results in the response.</p>")
+    @ocaml.doc("<p>The time period that's covered by the results in the response.</p>")
     @as("ResultsByTime")
     resultsByTime: option<resultsByTime>,
     @ocaml.doc(
@@ -4166,7 +4213,7 @@ module GetCostAndUsage = {
     @as("GroupDefinitions")
     groupDefinitions: option<groupDefinitions>,
     @ocaml.doc(
-      "<p>The token for the next set of retrievable results. AWS provides the token when the response from a previous call has more results than the maximum page size.</p>"
+      "<p>The token for the next set of retrievable results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size.</p>"
     )
     @as("NextPageToken")
     nextPageToken: option<nextPageToken>,
@@ -4187,25 +4234,60 @@ module GetCostAndUsage = {
 module CreateAnomalyMonitor = {
   type t
   type request = {
-    @ocaml.doc("<p> The cost anomaly detection monitor object that you want to create.</p>")
+    @ocaml.doc("<p>
+      An optional list of tags to associate with the specified <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_AnomalyMonitor.html\">
+               <code>AnomalyMonitor</code>
+            </a>. You can use resource tags to control access to your monitor using IAM policies.</p>
+         <p>Each tag consists of a key and a value, and each key must be unique for the resource. The following restrictions apply to resource tags:</p>
+         <ul>
+            <li>
+               <p>Although the maximum number of array members is 200, you can assign a maximum of 50 user-tags to one resource. The remaining are reserved for Amazon Web Services use</p>
+            </li>
+            <li>
+               <p>The maximum length of a key is 128 characters</p>
+            </li>
+            <li>
+               <p>The maximum length of a value is 256 characters</p>
+            </li>
+            <li>
+               <p>Valid characters for keys and values are: <code>A-Z</code>, <code>a-z</code>, spaces, <code>_.:/=+-</code>
+               </p>
+            </li>
+            <li>
+               <p>Keys and values are case sensitive</p>
+            </li>
+            <li>
+               <p>Keys and values are trimmed for any leading or trailing whitespaces</p>
+            </li>
+            <li>
+               <p>Don’t use <code>aws:</code> as a prefix for your keys. This prefix is reserved for Amazon Web Services use</p>
+            </li>
+         </ul>")
+    @as("ResourceTags")
+    resourceTags: option<resourceTagList>,
+    @ocaml.doc("<p>The cost anomaly detection monitor object that you want to create.</p>")
     @as("AnomalyMonitor")
     anomalyMonitor: anomalyMonitor,
   }
   type response = {
-    @ocaml.doc(
-      "<p> The unique identifier of your newly created cost anomaly detection monitor.</p>"
-    )
+    @ocaml.doc("<p>The unique identifier of your newly created cost anomaly detection monitor.</p>")
     @as("MonitorArn")
     monitorArn: genericString,
   }
   @module("@aws-sdk/client-ce") @new external new: request => t = "CreateAnomalyMonitorCommand"
-  let make = (~anomalyMonitor, ()) => new({anomalyMonitor: anomalyMonitor})
+  let make = (~anomalyMonitor, ~resourceTags=?, ()) =>
+    new({resourceTags: resourceTags, anomalyMonitor: anomalyMonitor})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateCostCategoryDefinition = {
   type t
   type request = {
+    @ocaml.doc("<p>
+      The split charge rules used to allocate your charges between your Cost Category values.
+    </p>")
+    @as("SplitChargeRules")
+    splitChargeRules: option<costCategorySplitChargeRulesList>,
     @as("DefaultValue") defaultValue: option<costCategoryValue>,
     @ocaml.doc("<p>The <code>Expression</code> object used to categorize costs. For more information, see
         <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_CostCategoryRule.html\">CostCategoryRule </a>. </p>")
@@ -4229,8 +4311,9 @@ module UpdateCostCategoryDefinition = {
   }
   @module("@aws-sdk/client-ce") @new
   external new: request => t = "UpdateCostCategoryDefinitionCommand"
-  let make = (~rules, ~ruleVersion, ~costCategoryArn, ~defaultValue=?, ()) =>
+  let make = (~rules, ~ruleVersion, ~costCategoryArn, ~splitChargeRules=?, ~defaultValue=?, ()) =>
     new({
+      splitChargeRules: splitChargeRules,
       defaultValue: defaultValue,
       rules: rules,
       ruleVersion: ruleVersion,
@@ -4242,31 +4325,24 @@ module UpdateCostCategoryDefinition = {
 module GetAnomalyMonitors = {
   type t
   type request = {
-    @ocaml.doc("<p>
-      The number of entries a paginated response contains.
-    </p>")
+    @ocaml.doc("<p>The number of entries that a paginated response contains. </p>")
     @as("MaxResults")
     maxResults: option<pageSize>,
-    @ocaml.doc("<p>
-      The token to retrieve the next set of results. AWS provides the token when the response from a previous call has more results than the maximum page size.
-    </p>")
+    @ocaml.doc("<p>The token to retrieve the next set of results. Amazon Web Services provides the token when
+      the response from a previous call has more results than the maximum page size. </p>")
     @as("NextPageToken")
     nextPageToken: option<nextPageToken>,
-    @ocaml.doc("<p>
-      A list of cost anomaly monitor ARNs.
-    </p>")
-    @as("MonitorArnList")
+    @ocaml.doc("<p>A list of cost anomaly monitor ARNs. </p>") @as("MonitorArnList")
     monitorArnList: option<values>,
   }
   type response = {
-    @ocaml.doc("<p>
-      The token to retrieve the next set of results. AWS provides the token when the response from a previous call has more results than the maximum page size.
-    </p>")
+    @ocaml.doc("<p>The token to retrieve the next set of results. Amazon Web Services provides the token when
+      the response from a previous call has more results than the maximum page size. </p>")
     @as("NextPageToken")
     nextPageToken: option<nextPageToken>,
-    @ocaml.doc("<p>
-      A list of cost anomaly monitors that includes the detailed metadata for each monitor.
-    </p>")
+    @ocaml.doc(
+      "<p>A list of cost anomaly monitors that includes the detailed metadata for each monitor. </p>"
+    )
     @as("AnomalyMonitors")
     anomalyMonitors: anomalyMonitors,
   }
@@ -4279,6 +4355,42 @@ module GetAnomalyMonitors = {
 module CreateCostCategoryDefinition = {
   type t
   type request = {
+    @ocaml.doc("<p>
+      An optional list of tags to associate with the specified <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_CostCategory.html\">
+               <code>CostCategory</code>
+            </a>. You can use resource tags to control access to your <code>cost category</code> using IAM policies.</p>
+         <p>Each tag consists of a key and a value, and each key must be unique for the resource. The following restrictions apply to resource tags:</p>
+         <ul>
+            <li>
+               <p>Although the maximum number of array members is 200, you can assign a maximum of 50 user-tags to one resource. The remaining are reserved for Amazon Web Services use</p>
+            </li>
+            <li>
+               <p>The maximum length of a key is 128 characters</p>
+            </li>
+            <li>
+               <p>The maximum length of a value is 256 characters</p>
+            </li>
+            <li>
+               <p>Valid characters for keys and values are: <code>A-Z</code>, <code>a-z</code>, spaces, <code>_.:/=+-</code>
+               </p>
+            </li>
+            <li>
+               <p>Keys and values are case sensitive</p>
+            </li>
+            <li>
+               <p>Keys and values are trimmed for any leading or trailing whitespaces</p>
+            </li>
+            <li>
+               <p>Don’t use <code>aws:</code> as a prefix for your keys. This prefix is reserved for Amazon Web Services use</p>
+            </li>
+         </ul>")
+    @as("ResourceTags")
+    resourceTags: option<resourceTagList>,
+    @ocaml.doc("<p>
+      The split charge rules used to allocate your charges between your Cost Category values.
+    </p>")
+    @as("SplitChargeRules")
+    splitChargeRules: option<costCategorySplitChargeRulesList>,
     @as("DefaultValue") defaultValue: option<costCategoryValue>,
     @ocaml.doc("<p>The Cost Category rules used to categorize costs. For more information, see
         <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_CostCategoryRule.html\">CostCategoryRule</a>.</p>")
@@ -4301,8 +4413,23 @@ module CreateCostCategoryDefinition = {
   }
   @module("@aws-sdk/client-ce") @new
   external new: request => t = "CreateCostCategoryDefinitionCommand"
-  let make = (~rules, ~ruleVersion, ~name, ~defaultValue=?, ()) =>
-    new({defaultValue: defaultValue, rules: rules, ruleVersion: ruleVersion, name: name})
+  let make = (
+    ~rules,
+    ~ruleVersion,
+    ~name,
+    ~resourceTags=?,
+    ~splitChargeRules=?,
+    ~defaultValue=?,
+    (),
+  ) =>
+    new({
+      resourceTags: resourceTags,
+      splitChargeRules: splitChargeRules,
+      defaultValue: defaultValue,
+      rules: rules,
+      ruleVersion: ruleVersion,
+      name: name,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

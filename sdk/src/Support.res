@@ -50,19 +50,21 @@ type attachmentSetId = string
 type attachmentId = string
 type afterTime = string
 @ocaml.doc(
-  "<p>Details about AWS resources that were analyzed in a call to Trusted Advisor <a>DescribeTrustedAdvisorCheckSummaries</a>.</p>"
+  "<p>Details about Amazon Web Services resources that were analyzed in a call to Trusted Advisor <a>DescribeTrustedAdvisorCheckSummaries</a>.</p>"
 )
 type trustedAdvisorResourcesSummary = {
-  @ocaml.doc("<p>The number of AWS resources ignored by Trusted Advisor because they were marked as
+  @ocaml.doc("<p>The number of Amazon Web Services resources ignored by Trusted Advisor because they were marked as
             suppressed by the user.</p>")
   resourcesSuppressed: long,
-  @ocaml.doc("<p>The number of AWS resources ignored by Trusted Advisor because information was
+  @ocaml.doc("<p>The number of Amazon Web Services resources ignored by Trusted Advisor because information was
             unavailable.</p>")
   resourcesIgnored: long,
-  @ocaml.doc("<p>The number of AWS resources that were flagged (listed) by the Trusted Advisor
+  @ocaml.doc("<p>The number of Amazon Web Services resources that were flagged (listed) by the Trusted Advisor
             check.</p>")
   resourcesFlagged: long,
-  @ocaml.doc("<p>The number of AWS resources that were analyzed by the Trusted Advisor check.</p>")
+  @ocaml.doc(
+    "<p>The number of Amazon Web Services resources that were analyzed by the Trusted Advisor check.</p>"
+  )
   resourcesProcessed: long,
 }
 @ocaml.doc("<p>The estimated cost savings that might be realized if the recommended operations are
@@ -114,12 +116,12 @@ type stringList = array<string_>
 @ocaml.doc("<p>A code and name pair that represents the severity level of a support case. The
             available values depend on the support plan for the account. For more information, see
                 <a href=\"https://docs.aws.amazon.com/awssupport/latest/user/case-management.html#choosing-severity\">Choosing a
-                severity</a> in the <i>AWS Support User Guide</i>.</p>")
+                severity</a> in the <i>Amazon Web Services Support User Guide</i>.</p>")
 type severityLevel = {
   @ocaml.doc("<p>The name of the severity level that corresponds to the severity level code.</p>
         <note>
             <p>The values returned by the API are different from the values that appear in the
-                AWS Support Center. For example, the API uses the code <code>low</code>, but the name
+                Amazon Web Services Support Center. For example, the API uses the code <code>low</code>, but the name
                 appears as General guidance in Support Center. </p>
             <p>The following are the API code names and how they appear in the console:</p>
             <ul>
@@ -146,7 +148,7 @@ type severityLevel = {
             </ul>
         </note>
         <p>For more information, see <a href=\"https://docs.aws.amazon.com/awssupport/latest/user/case-management.html#choosing-severity\">Choosing a
-                severity</a> in the <i>AWS Support User Guide</i>.</p>")
+                severity</a> in the <i>Amazon Web Services Support User Guide</i>.</p>")
   name: option<severityLevelName>,
   @ocaml.doc("<p>The code for case severity level.</p>
         <p>Valid values: <code>low</code> | <code>normal</code> | <code>high</code> |
@@ -158,7 +160,7 @@ type serviceCodeList = array<serviceCode>
 type ccEmailAddressList = array<ccEmailAddress>
 @ocaml.doc("<p>A JSON-formatted name/value pair that represents the category name and category code
             of the problem, selected from the <a>DescribeServices</a> response for each
-            AWS service.</p>")
+            Amazon Web Services service.</p>")
 type category = {
   @ocaml.doc("<p>The category name for the support case.</p>") name: option<categoryName>,
   @ocaml.doc("<p>The category code for the support case.</p>") code: option<categoryCode>,
@@ -183,11 +185,11 @@ type trustedAdvisorResourceDetail = {
             object returned by the call to <a>DescribeTrustedAdvisorChecks</a>. <b>Metadata</b> contains all the data that is shown in the Excel
             download, even in those cases where the UI shows just summary data.</p>")
   metadata: stringList,
-  @ocaml.doc("<p>Specifies whether the AWS resource was ignored by Trusted Advisor because it was
+  @ocaml.doc("<p>Specifies whether the Amazon Web Services resource was ignored by Trusted Advisor because it was
             marked as suppressed by the user.</p>")
   isSuppressed: option<boolean_>,
   @ocaml.doc("<p>The unique identifier for the identified resource.</p>") resourceId: string_,
-  @ocaml.doc("<p>The AWS Region in which the identified resource is located.</p>")
+  @ocaml.doc("<p>The Amazon Web Services Region in which the identified resource is located.</p>")
   region: option<string_>,
   @ocaml.doc("<p>The status code for the resource identified in the Trusted Advisor check.</p>")
   status: string_,
@@ -238,17 +240,17 @@ type trustedAdvisorCheckSummary = {
   @ocaml.doc("<p>The unique identifier for the Trusted Advisor check.</p>") checkId: string_,
 }
 type trustedAdvisorCheckList = array<trustedAdvisorCheckDescription>
-@ocaml.doc("<p>Information about an AWS service returned by the <a>DescribeServices</a>
+@ocaml.doc("<p>Information about an Amazon Web Services service returned by the <a>DescribeServices</a>
             operation.</p>")
 type service = {
   @ocaml.doc("<p>A list of categories that describe the type of support issue a case describes.
             Categories consist of a category name and a category code. Category names and codes are
-            passed to AWS Support when you call <a>CreateCase</a>.</p>")
+            passed to Amazon Web Services Support when you call <a>CreateCase</a>.</p>")
   categories: option<categoryList>,
-  @ocaml.doc("<p>The friendly name for an AWS service. The <code>code</code> element contains the
+  @ocaml.doc("<p>The friendly name for an Amazon Web Services service. The <code>code</code> element contains the
             corresponding code.</p>")
   name: option<serviceName>,
-  @ocaml.doc("<p>The code for an AWS service returned by the <a>DescribeServices</a>
+  @ocaml.doc("<p>The code for an Amazon Web Services service returned by the <a>DescribeServices</a>
             response. The <code>name</code> element contains the corresponding friendly name.</p>")
   code: option<serviceCode>,
 }
@@ -261,11 +263,13 @@ type communication = {
   @ocaml.doc("<p>The time the communication was created.</p>") timeCreated: option<timeCreated>,
   @ocaml.doc("<p>The identity of the account that submitted, or responded to, the support case.
             Customer entries include the role or IAM user as well as the email address. For example,
-            \"AdminRole (Role) <janedoe@example.com>. Entries from the AWS Support team display
+            \"AdminRole (Role) <janedoe@example.com>. Entries from the Amazon Web Services Support team display
             \"Amazon Web Services,\" and don't show an email address.
             </p>")
   submittedBy: option<submittedBy>,
-  @ocaml.doc("<p>The text of the communication between the customer and AWS Support.</p>")
+  @ocaml.doc(
+    "<p>The text of the communication between the customer and Amazon Web Services Support.</p>"
+  )
   body: option<communicationBody>,
   @ocaml.doc("<p>The support case ID requested or returned in the call. The case ID is an
             alphanumeric string formatted as shown in this example:
@@ -318,12 +322,12 @@ type recentCaseCommunications = {
             <li>
                 <p>
                     <b>displayId</b> - The identifier for the case on pages
-                    in the AWS Support Center.</p>
+                    in the Amazon Web Services Support Center.</p>
             </li>
             <li>
                 <p>
                     <b>language</b> - The ISO 639-1 code for the language
-                    in which AWS provides support. AWS Support currently supports English (\"en\") and
+                    in which Amazon Web Services provides support. Amazon Web Services Support currently supports English (\"en\") and
                     Japanese (\"ja\"). Language parameters must be passed explicitly for operations
                     that take them.</p>
             </li>
@@ -340,7 +344,7 @@ type recentCaseCommunications = {
             </li>
             <li>
                 <p>
-                    <b>serviceCode</b> - The identifier for the AWS service
+                    <b>serviceCode</b> - The identifier for the Amazon Web Services service
                     that corresponds to the service code defined in the call to <a>DescribeServices</a>.</p>
             </li>
             <li>
@@ -352,7 +356,7 @@ type recentCaseCommunications = {
             </li>
             <li>
                 <p>
-                    <b>status</b> - The status of the case in the AWS Support Center. Valid values:</p>
+                    <b>status</b> - The status of the case in the Amazon Web Services Support Center. Valid values:</p>
                 <ul>
                   <li>
                         <p>
@@ -402,17 +406,17 @@ type recentCaseCommunications = {
             </li>
          </ul>")
 type caseDetails = {
-  @ocaml.doc("<p>The ISO 639-1 code for the language in which AWS provides support. AWS Support
+  @ocaml.doc("<p>The ISO 639-1 code for the language in which Amazon Web Services provides support. Amazon Web Services Support
             currently supports English (\"en\") and Japanese (\"ja\"). Language parameters must be
             passed explicitly for operations that take them.</p>")
   language: option<language>,
   @ocaml.doc("<p>The email addresses that receive copies of communication about the case.</p>")
   ccEmailAddresses: option<ccEmailAddressList>,
-  @ocaml.doc("<p>The five most recent communications between you and AWS Support Center, including the
+  @ocaml.doc("<p>The five most recent communications between you and Amazon Web Services Support Center, including the
             IDs of any attachments to the communications. Also includes a <code>nextToken</code>
             that you can use to retrieve earlier communications.</p>")
   recentCommunications: option<recentCaseCommunications>,
-  @ocaml.doc("<p>The time that the case was created in the AWS Support Center.</p>")
+  @ocaml.doc("<p>The time that the case was created in the Amazon Web Services Support Center.</p>")
   timeCreated: option<timeCreated>,
   @ocaml.doc("<p>The email address of the account that submitted the case.</p>")
   submittedBy: option<submittedBy>,
@@ -422,7 +426,7 @@ type caseDetails = {
   severityCode: option<severityCode>,
   @ocaml.doc("<p>The category of problem for the support case.</p>")
   categoryCode: option<categoryCode>,
-  @ocaml.doc("<p>The code for the AWS service. You can get a list of codes and the corresponding
+  @ocaml.doc("<p>The code for the Amazon Web Services service. You can get a list of codes and the corresponding
             service names by calling <a>DescribeServices</a>.</p>")
   serviceCode: option<serviceCode>,
   @ocaml.doc("<p>The status of the case.</p>
@@ -460,9 +464,9 @@ type caseDetails = {
             </li>
          </ul>")
   status: option<status>,
-  @ocaml.doc("<p>The subject line for the case in the AWS Support Center.</p>")
+  @ocaml.doc("<p>The subject line for the case in the Amazon Web Services Support Center.</p>")
   subject: option<subject>,
-  @ocaml.doc("<p>The ID displayed for the case in the AWS Support Center. This is a numeric
+  @ocaml.doc("<p>The ID displayed for the case in the Amazon Web Services Support Center. This is a numeric
             string.</p>")
   displayId: option<displayId>,
   @ocaml.doc("<p>The support case ID requested or returned in the call. The case ID is an
@@ -472,53 +476,53 @@ type caseDetails = {
   caseId: option<caseId>,
 }
 type caseList = array<caseDetails>
-@ocaml.doc("<fullname>AWS Support</fullname>
-        <p>The <i>AWS Support API Reference</i> is intended for programmers who need detailed
-            information about the AWS Support operations and data types. You can use the API to manage
-            your support cases programmatically. The AWS Support API uses HTTP methods that return
+@ocaml.doc("<fullname>Amazon Web Services Support</fullname>
+        <p>The <i>Amazon Web Services Support API Reference</i> is intended for programmers who need detailed
+            information about the Amazon Web Services Support operations and data types. You can use the API to manage
+            your support cases programmatically. The Amazon Web Services Support API uses HTTP methods that return
             results in JSON format.</p>
         <note>
             <ul>
                <li>
-                    <p>You must have a Business or Enterprise Support plan to use the AWS Support
+                    <p>You must have a Business, Enterprise On-Ramp, or Enterprise Support plan to use the Amazon Web Services Support
                         API. </p>
                 </li>
                <li>
-                    <p>If you call the AWS Support API from an account that does not have a
-                        Business or Enterprise Support plan, the
+                    <p>If you call the Amazon Web Services Support API from an account that does not have a
+                        Business, Enterprise On-Ramp, or Enterprise Support plan, the
                             <code>SubscriptionRequiredException</code> error message appears. For
-                        information about changing your support plan, see <a href=\"http://aws.amazon.com/premiumsupport/\">AWS Support</a>.</p>
+                        information about changing your support plan, see <a href=\"http://aws.amazon.com/premiumsupport/\">Amazon Web Services Support</a>.</p>
                 </li>
             </ul>
         </note>
-        <p>The AWS Support service also exposes a set of <a href=\"http://aws.amazon.com/premiumsupport/trustedadvisor/\">AWS Trusted Advisor</a> features. You can
+        <p>The Amazon Web Services Support service also exposes a set of <a href=\"http://aws.amazon.com/premiumsupport/trustedadvisor/\">Trusted Advisor</a> features. You can
             retrieve a list of checks and their descriptions, get check results, specify checks to
             refresh, and get the refresh status of checks.</p>
-        <p>The following list describes the AWS Support case management operations:</p>
+        <p>The following list describes the Amazon Web Services Support case management operations:</p>
         <ul>
             <li>
                 <p> Service names, issue categories, and available severity levels  - The
-                        <a>DescribeServices</a> and <a>DescribeSeverityLevels</a> operations return AWS service names,
+                        <a>DescribeServices</a> and <a>DescribeSeverityLevels</a> operations return Amazon Web Services service names,
                     service codes, service categories, and problem severity levels. You use these
                     values when you call the <a>CreateCase</a> operation.</p>
             </li>
             <li>
                 <p> Case creation, case details, and case resolution - The <a>CreateCase</a>, <a>DescribeCases</a>, <a>DescribeAttachment</a>, and <a>ResolveCase</a> operations
-                    create AWS Support cases, retrieve information about cases, and resolve cases.</p>
+                    create Amazon Web Services Support cases, retrieve information about cases, and resolve cases.</p>
             </li>
             <li>
                 <p> Case communication - The <a>DescribeCommunications</a>,
                         <a>AddCommunicationToCase</a>, and <a>AddAttachmentsToSet</a> operations retrieve and add communications
-                    and attachments to AWS Support cases.</p>
+                    and attachments to Amazon Web Services Support cases.</p>
             </li>
          </ul>
-        <p>The following list describes the operations available from the AWS Support service for
+        <p>The following list describes the operations available from the Amazon Web Services Support service for
             Trusted Advisor:</p>
         <ul>
             <li>
                 <p>
                     <a>DescribeTrustedAdvisorChecks</a> returns the list of checks that
-                    run against your AWS resources.</p>
+                    run against your Amazon Web Services resources.</p>
             </li>
             <li>
                 <p>Using the <code>checkId</code> for a specific check returned by <a>DescribeTrustedAdvisorChecks</a>, you can call <a>DescribeTrustedAdvisorCheckResult</a> to obtain the results for the
@@ -540,10 +544,10 @@ type caseList = array<caseDetails>
                     status of one or more checks.</p>
             </li>
          </ul>
-        <p>For authentication of requests, AWS Support uses <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4 Signing
+        <p>For authentication of requests, Amazon Web Services Support uses <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4 Signing
                 Process</a>.</p>
         <p>See <a href=\"https://docs.aws.amazon.com/awssupport/latest/user/Welcome.html\">About the
-            AWS Support API</a> in the <i>AWS Support User Guide</i> for
+            Amazon Web Services Support API</a> in the <i>Amazon Web Services Support User Guide</i> for
             information about how to use this service to create and manage your support cases, and
             how to call Trusted Advisor for results of checks on your resources.</p>")
 module ResolveCase = {
@@ -625,36 +629,36 @@ module CreateCase = {
                 <code>technical</code>. If you don't specify a value, the default is
                 <code>technical</code>.</p>")
     issueType: option<issueType>,
-    @ocaml.doc("<p>The language in which AWS Support handles the case. You must specify the ISO 639-1
+    @ocaml.doc("<p>The language in which Amazon Web Services Support handles the case. You must specify the ISO 639-1
             code for the <code>language</code> parameter if you want support in that language.
             Currently, English (\"en\") and Japanese (\"ja\") are supported.</p>")
     language: option<language>,
-    @ocaml.doc("<p>A list of email addresses that AWS Support copies on case correspondence. AWS Support
-            identifies the account that creates the case when you specify your AWS credentials in an
-            HTTP POST method or use the <a href=\"http://aws.amazon.com/tools/\">AWS SDKs</a>.
+    @ocaml.doc("<p>A list of email addresses that Amazon Web Services Support copies on case correspondence. Amazon Web Services Support
+            identifies the account that creates the case when you specify your Amazon Web Services credentials in an
+            HTTP POST method or use the <a href=\"http://aws.amazon.com/tools/\">Amazon Web Services SDKs</a>.
         </p>")
     ccEmailAddresses: option<ccEmailAddressList>,
     @ocaml.doc("<p>The communication body text that describes the issue. This text appears in the
-                <b>Description</b> field on the AWS Support Center <a href=\"https://console.aws.amazon.com/support/home#/case/create\">Create Case</a> page.</p>")
+                <b>Description</b> field on the Amazon Web Services Support Center <a href=\"https://console.aws.amazon.com/support/home#/case/create\">Create Case</a> page.</p>")
     communicationBody: communicationBody,
     @ocaml.doc("<p>The category of problem for the support case. You also use the <a>DescribeServices</a> operation to get the category code for a service. Each
-            AWS service defines its own set of category codes.</p>")
+            Amazon Web Services service defines its own set of category codes.</p>")
     categoryCode: option<categoryCode>,
     @ocaml.doc("<p>A value that indicates the urgency of the case. This value determines the response
-            time according to your service level agreement with AWS Support. You can use the <a>DescribeSeverityLevels</a> operation to get the possible values for
+            time according to your service level agreement with Amazon Web Services Support. You can use the <a>DescribeSeverityLevels</a> operation to get the possible values for
                 <code>severityCode</code>. </p>
         <p>For more information, see <a>SeverityLevel</a> and <a href=\"https://docs.aws.amazon.com/awssupport/latest/user/getting-started.html#choosing-severity\">Choosing a
-                Severity</a> in the <i>AWS Support User Guide</i>.</p>
+                Severity</a> in the <i>Amazon Web Services Support User Guide</i>.</p>
         <note>
-            <p>The availability of severity levels depends on the support plan for the AWS
-                account.</p>
+            <p>The availability of severity levels depends on the support plan for the
+                Amazon Web Services account.</p>
         </note>")
     severityCode: option<severityCode>,
-    @ocaml.doc("<p>The code for the AWS service. You can use the <a>DescribeServices</a>
+    @ocaml.doc("<p>The code for the Amazon Web Services service. You can use the <a>DescribeServices</a>
             operation to get the possible <code>serviceCode</code> values.</p>")
     serviceCode: option<serviceCode>,
     @ocaml.doc(
-      "<p>The title of the support case. The title appears in the <b>Subject</b> field on the AWS Support Center <a href=\"https://console.aws.amazon.com/support/home#/case/create\">Create Case</a> page.</p>"
+      "<p>The title of the support case. The title appears in the <b>Subject</b> field on the Amazon Web Services Support Center <a href=\"https://console.aws.amazon.com/support/home#/case/create\">Create Case</a> page.</p>"
     )
     subject: subject,
   }
@@ -758,7 +762,7 @@ module DescribeTrustedAdvisorCheckRefreshStatuses = {
 module DescribeSeverityLevels = {
   type t
   type request = {
-    @ocaml.doc("<p>The ISO 639-1 code for the language in which AWS provides support. AWS Support
+    @ocaml.doc("<p>The ISO 639-1 code for the language in which Amazon Web Services provides support. Amazon Web Services Support
             currently supports English (\"en\") and Japanese (\"ja\"). Language parameters must be
             passed explicitly for operations that take them.</p>")
     language: option<language>,
@@ -767,7 +771,7 @@ module DescribeSeverityLevels = {
             operation.</p>")
   type response = {
     @ocaml.doc("<p>The available severity levels for the support case. Available severity levels are
-            defined by your service level agreement with AWS.</p>")
+            defined by your service level agreement with Amazon Web Services.</p>")
     severityLevels: option<severityLevelsList>,
   }
   @module("@aws-sdk/client-support") @new
@@ -814,7 +818,7 @@ module AddAttachmentsToSet = {
 module DescribeTrustedAdvisorChecks = {
   type t
   type request = {
-    @ocaml.doc("<p>The ISO 639-1 code for the language in which AWS provides support. AWS Support
+    @ocaml.doc("<p>The ISO 639-1 code for the language in which Amazon Web Services provides support. Amazon Web Services Support
             currently supports English (\"en\") and Japanese (\"ja\"). Language parameters must be
             passed explicitly for operations that take them.</p>")
     language: string_,
@@ -852,7 +856,7 @@ module DescribeTrustedAdvisorCheckResult = {
   type t
   @ocaml.doc("<p></p>")
   type request = {
-    @ocaml.doc("<p>The ISO 639-1 code for the language in which AWS provides support. AWS Support
+    @ocaml.doc("<p>The ISO 639-1 code for the language in which Amazon Web Services provides support. Amazon Web Services Support
             currently supports English (\"en\") and Japanese (\"ja\"). Language parameters must be
             passed explicitly for operations that take them.</p>")
     language: option<string_>,
@@ -874,17 +878,20 @@ module DescribeTrustedAdvisorCheckResult = {
 module DescribeServices = {
   type t
   type request = {
-    @ocaml.doc("<p>The ISO 639-1 code for the language in which AWS provides support. AWS Support
+    @ocaml.doc("<p>The ISO 639-1 code for the language in which Amazon Web Services provides support. Amazon Web Services Support
             currently supports English (\"en\") and Japanese (\"ja\"). Language parameters must be
             passed explicitly for operations that take them.</p>")
     language: option<language>,
-    @ocaml.doc("<p>A JSON-formatted list of service codes available for AWS services.</p>")
+    @ocaml.doc(
+      "<p>A JSON-formatted list of service codes available for Amazon Web Services services.</p>"
+    )
     serviceCodeList: option<serviceCodeList>,
   }
-  @ocaml.doc("<p>The list of AWS services returned by the <a>DescribeServices</a>
+  @ocaml.doc("<p>The list of Amazon Web Services services returned by the <a>DescribeServices</a>
             operation.</p>")
   type response = {
-    @ocaml.doc("<p>A JSON-formatted list of AWS services.</p>") services: option<serviceList>,
+    @ocaml.doc("<p>A JSON-formatted list of Amazon Web Services services.</p>")
+    services: option<serviceList>,
   }
   @module("@aws-sdk/client-support") @new external new: request => t = "DescribeServicesCommand"
   let make = (~language=?, ~serviceCodeList=?, ()) =>
@@ -935,7 +942,7 @@ module DescribeCases = {
     @ocaml.doc("<p>Specifies whether to include communications in the <code>DescribeCases</code>
             response. By default, communications are included.</p>")
     includeCommunications: option<includeCommunications>,
-    @ocaml.doc("<p>The ISO 639-1 code for the language in which AWS provides support. AWS Support
+    @ocaml.doc("<p>The ISO 639-1 code for the language in which Amazon Web Services provides support. Amazon Web Services Support
             currently supports English (\"en\") and Japanese (\"ja\"). Language parameters must be
             passed explicitly for operations that take them.</p>")
     language: option<language>,
@@ -951,7 +958,9 @@ module DescribeCases = {
     @ocaml.doc("<p>The start date for a filtered date search on support case communications. Case
             communications are available for 12 months after creation.</p>")
     afterTime: option<afterTime>,
-    @ocaml.doc("<p>The ID displayed for a case in the AWS Support Center user interface.</p>")
+    @ocaml.doc(
+      "<p>The ID displayed for a case in the Amazon Web Services Support Center user interface.</p>"
+    )
     displayId: option<displayId>,
     @ocaml.doc("<p>A list of ID numbers of the support cases you want returned. The maximum number of
             cases is 100.</p>")

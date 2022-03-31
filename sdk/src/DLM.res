@@ -114,8 +114,8 @@ type parameterList = array<parameter>
   "<p>Specifies the encryption settings for shared snapshots that are copied across Regions.</p>"
 )
 type encryptionConfiguration = {
-  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the AWS KMS customer master key (CMK) to use for EBS 
-			encryption. If this parameter is not specified, your AWS managed CMK for EBS is used.</p>")
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the KMS key to use for EBS encryption. If 
+			this parameter is not specified, the default KMS key for the account is used.</p>")
   @as("CmkArn")
   cmkArn: option<cmkArn>,
   @ocaml.doc("<p>To encrypt a copy of an unencrypted snapshot when encryption by default is not enabled, enable 
@@ -123,6 +123,22 @@ type encryptionConfiguration = {
 			parameter is false or when encryption by default is not enabled.</p>")
   @as("Encrypted")
   encrypted: encrypted,
+}
+@ocaml.doc("<p>Specifies an AMI deprecation rule for a schedule.</p>")
+type deprecateRule = {
+  @ocaml.doc("<p>The unit of time in which to measure the <b>Interval</b>.</p>") @as("IntervalUnit")
+  intervalUnit: option<retentionIntervalUnitValues>,
+  @ocaml.doc("<p>If the schedule has an age-based retention rule, this parameter specifies the period after which 
+			to deprecate AMIs created by the schedule. The period must be less than or equal to the schedule's 
+			retention period, and it can't be greater than 10 years. This is equivalent to 120 months, 520 
+			weeks, or 3650 days.</p>")
+  @as("Interval")
+  interval: option<interval>,
+  @ocaml.doc("<p>If the schedule has a count-based retention rule, this parameter specifies the number of oldest 
+			AMIs to deprecate. The count must be less than or equal to the schedule's retention count, and it 
+			can't be greater than 1000.</p>")
+  @as("Count")
+  count: option<count>,
 }
 @ocaml.doc("<p>Specifies the retention rule for cross-Region snapshot copies.</p>")
 type crossRegionCopyRetainRule = {
@@ -133,21 +149,35 @@ type crossRegionCopyRetainRule = {
   @as("Interval")
   interval: option<interval>,
 }
+@ocaml.doc(
+  "<p>Specifies an AMI deprecation rule for cross-Region AMI copies created by a cross-Region copy rule.</p>"
+)
+type crossRegionCopyDeprecateRule = {
+  @ocaml.doc("<p>The unit of time in which to measure the <b>Interval</b>.</p>") @as("IntervalUnit")
+  intervalUnit: option<retentionIntervalUnitValues>,
+  @ocaml.doc("<p>The period after which to deprecate the cross-Region AMI copies. The period must be less than or 
+			equal to the cross-Region AMI copy retention period, and it can't be greater than 10 years. This is 
+			equivalent to 120 months, 520 weeks, or 3650 days.</p>")
+  @as("Interval")
+  interval: option<interval>,
+}
 type availabilityZoneList = array<availabilityZone>
 type variableTagsList = array<tag>
 type targetTagList = array<tag>
 type tagsToAddList = array<tag>
-@ocaml.doc("<p>Specifies a rule for sharing snapshots across AWS accounts.</p>")
+@ocaml.doc("<p>Specifies a rule for sharing snapshots across Amazon Web Services accounts.</p>")
 type shareRule = {
   @ocaml.doc("<p>The unit of time for the automatic unsharing interval.</p>")
   @as("UnshareIntervalUnit")
   unshareIntervalUnit: option<retentionIntervalUnitValues>,
   @ocaml.doc(
-    "<p>The period after which snapshots that are shared with other AWS accounts are automatically unshared.</p>"
+    "<p>The period after which snapshots that are shared with other Amazon Web Services accounts are automatically unshared.</p>"
   )
   @as("UnshareInterval")
   unshareInterval: option<interval>,
-  @ocaml.doc("<p>The IDs of the AWS accounts with which to share the snapshots.</p>")
+  @ocaml.doc(
+    "<p>The IDs of the Amazon Web Services accounts with which to share the snapshots.</p>"
+  )
   @as("TargetAccounts")
   targetAccounts: shareTargetAccountList,
 }
@@ -192,8 +222,8 @@ type eventParameters = {
 			are shared with your account.</p>")
   @as("DescriptionRegex")
   descriptionRegex: descriptionRegex,
-  @ocaml.doc("<p>The IDs of the AWS accounts that can trigger policy by sharing snapshots with your account. The 
-			policy only runs if one of the specified AWS accounts shares a snapshot with your account.</p>")
+  @ocaml.doc("<p>The IDs of the Amazon Web Services accounts that can trigger policy by sharing snapshots with your account. 
+			The policy only runs if one of the specified Amazon Web Services accounts shares a snapshot with your account.</p>")
   @as("SnapshotOwner")
   snapshotOwner: snapshotOwnerList,
   @ocaml.doc("<p>The type of event. Currently, only snapshot sharing events are supported.</p>")
@@ -202,14 +232,19 @@ type eventParameters = {
 }
 @ocaml.doc("<p>Specifies a rule for cross-Region snapshot copies.</p>")
 type crossRegionCopyRule = {
-  @ocaml.doc("<p>The retention rule.</p>") @as("RetainRule")
+  @ocaml.doc("<p>The AMI deprecation rule for cross-Region AMI copies created by the rule.</p>")
+  @as("DeprecateRule")
+  deprecateRule: option<crossRegionCopyDeprecateRule>,
+  @ocaml.doc("<p>The retention rule that indicates how long snapshot copies are to be retained in the 
+			destination Region.</p>")
+  @as("RetainRule")
   retainRule: option<crossRegionCopyRetainRule>,
-  @ocaml.doc("<p>Copy all user-defined tags from the source snapshot to the copied snapshot.</p>")
+  @ocaml.doc("<p>Indicates whether to copy all user-defined tags from the source snapshot to the cross-Region 
+			snapshot copy.</p>")
   @as("CopyTags")
   copyTags: option<copyTagsNullable>,
-  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the AWS KMS customer master key (CMK) to use for EBS
-			encryption. If this parameter is not specified, your AWS managed CMK for EBS is
-			used.</p>")
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the KMS key to use for EBS encryption. If this 
+			parameter is not specified, the default KMS key for the account is used.</p>")
   @as("CmkArn")
   cmkArn: option<cmkArn>,
   @ocaml.doc("<p>To encrypt a copy of an unencrypted snapshot if encryption by default is not enabled,
@@ -217,14 +252,16 @@ type crossRegionCopyRule = {
 			even if this parameter is false or if encryption by default is not enabled.</p>")
   @as("Encrypted")
   encrypted: encrypted,
-  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the target AWS Outpost for the snapshot copies.</p>
-		       <p>If you specify an ARN, you must omit <b>TargetRegion</b>. You cannot 
-			specify a target Region and a target Outpost in the same rule.</p>")
+  @ocaml.doc("<p>The target Region or the Amazon Resource Name (ARN) of the target Outpost for the 
+			snapshot copies.</p>
+		       <p>Use this parameter instead of <b>TargetRegion</b>. Do not 
+			specify both.</p>")
   @as("Target")
   target: option<target>,
-  @ocaml.doc("<p>The target Region for the snapshot copies.</p>
-		       <p>If you specify a target Region, you must omit <b>Target</b>. You cannot 
-			specify a target Region and a target Outpost in the same rule.</p>")
+  @ocaml.doc("<p>Avoid using this parameter when creating new policies. Instead, use <b>Target</b>
+			to specify a target Region or a target Outpost for snapshot copies.</p>
+		       <p>For policies created before the <b>Target</b> parameter 
+			was introduced, this parameter indicates the target Region for snapshot copies.</p>")
   @as("TargetRegion")
   targetRegion: option<targetRegion>,
 }
@@ -260,8 +297,8 @@ type createRule = {
 			Region as the source resource, specify <code>CLOUD</code>. To create snapshots on the same 
 			Outpost as the source resource, specify <code>OUTPOST_LOCAL</code>. If you omit this 
 			parameter, <code>CLOUD</code> is used by default.</p>
-		       <p>If the policy targets resources in an AWS Region, then you must create snapshots in the same 
-			Region as the source resource. </p>
+		       <p>If the policy targets resources in an Amazon Web Services Region, then you must create snapshots in the same 
+			Region as the source resource.</p>
 		       <p>If the policy targets resources on an Outpost, then you can create snapshots on the same Outpost 
 			as the source resource, or in the Region of that Outpost.</p>")
   @as("Location")
@@ -274,7 +311,7 @@ type eventSource = {
   @ocaml.doc("<p>Information about the event.</p>") @as("Parameters")
   parameters: option<eventParameters>,
   @ocaml.doc(
-    "<p>The source of the event. Currently only managed AWS CloudWatch Events rules are supported.</p>"
+    "<p>The source of the event. Currently only managed CloudWatch Events rules are supported.</p>"
   )
   @as("Type")
   type_: eventSourceValues,
@@ -283,7 +320,10 @@ type crossRegionCopyRules = array<crossRegionCopyRule>
 type crossRegionCopyActionList = array<crossRegionCopyAction>
 @ocaml.doc("<p>Specifies a backup schedule for a snapshot or AMI lifecycle policy.</p>")
 type schedule = {
-  @ocaml.doc("<p>The rule for sharing snapshots with other AWS accounts.</p>") @as("ShareRules")
+  @ocaml.doc("<p>The AMI deprecation rule for the schedule.</p>") @as("DeprecateRule")
+  deprecateRule: option<deprecateRule>,
+  @ocaml.doc("<p>The rule for sharing snapshots with other Amazon Web Services accounts.</p>")
+  @as("ShareRules")
   shareRules: option<shareRules>,
   @ocaml.doc("<p>The rule for cross-Region snapshot copies.</p>
 		       <p>You can only specify cross-Region copy rules for policies that create snapshots in a Region. 
@@ -303,7 +343,7 @@ type schedule = {
   @as("VariableTags")
   variableTags: option<variableTagsList>,
   @ocaml.doc("<p>The tags to apply to policy-created resources. These user-defined tags are in addition
-			to the AWS-added lifecycle tags.</p>")
+			to the Amazon Web Services-added lifecycle tags.</p>")
   @as("TagsToAdd")
   tagsToAdd: option<tagsToAddList>,
   @ocaml.doc("<p>Copy all user-defined tags on a source volume to snapshots of the volume created by
@@ -344,8 +384,8 @@ type policyDetails = {
 		       <p>This parameter is required for snapshot and AMI policies only. If you are creating an event-based policy, omit this parameter.</p>")
   @as("TargetTags")
   targetTags: option<targetTagList>,
-  @ocaml.doc("<p>The location of the resources to backup. If the source resources are located in an AWS Region, specify 
-			<code>CLOUD</code>. If the source resources are located on an AWS Outpost 
+  @ocaml.doc("<p>The location of the resources to backup. If the source resources are located in an Amazon Web Services Region, 
+			specify <code>CLOUD</code>. If the source resources are located on an Outpost 
 			in your account, specify <code>OUTPOST</code>. </p>
 			      <p>If you specify <code>OUTPOST</code>, Amazon Data Lifecycle Manager backs up all resources 
 				of the specified type with matching target tags across all of the Outposts in your account.</p>")
@@ -360,7 +400,7 @@ type policyDetails = {
   @ocaml.doc("<p>The valid target resource types and actions a policy can manage. Specify <code>EBS_SNAPSHOT_MANAGEMENT</code> 
 			to create a lifecycle policy that manages the lifecycle of Amazon EBS snapshots. Specify <code>IMAGE_MANAGEMENT</code> 
 			to create a lifecycle policy that manages the lifecycle of EBS-backed AMIs. Specify <code>EVENT_BASED_POLICY </code> 
-			to create an event-based policy that performs specific actions when a defined event occurs in your AWS account.</p>
+			to create an event-based policy that performs specific actions when a defined event occurs in your Amazon Web Services account.</p>
 		       <p>The default is <code>EBS_SNAPSHOT_MANAGEMENT</code>.</p>")
   @as("PolicyType")
   policyType: option<policyTypeValues>,
@@ -392,7 +432,7 @@ type lifecyclePolicy = {
   policyId: option<policyId>,
 }
 @ocaml.doc("<fullname>Amazon Data Lifecycle Manager</fullname>
-		       <p>With Amazon Data Lifecycle Manager, you can manage the lifecycle of your AWS resources. You create
+		       <p>With Amazon Data Lifecycle Manager, you can manage the lifecycle of your Amazon Web Services resources. You create
 			lifecycle policies, which are used to automate operations on the specified
 			resources.</p>
 		       <p>Amazon DLM supports Amazon EBS volumes and snapshots. For information about using Amazon DLM
@@ -405,7 +445,7 @@ module UntagResource = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the resource.</p>") @as("ResourceArn")
     resourceArn: policyArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-dlm") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -418,7 +458,7 @@ module TagResource = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the resource.</p>") @as("ResourceArn")
     resourceArn: policyArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-dlm") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -443,7 +483,7 @@ module DeleteLifecyclePolicy = {
   type request = {
     @ocaml.doc("<p>The identifier of the lifecycle policy.</p>") @as("PolicyId") policyId: policyId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-dlm") @new external new: request => t = "DeleteLifecyclePolicyCommand"
   let make = (~policyId, ()) => new({policyId: policyId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -454,7 +494,7 @@ module GetLifecyclePolicies = {
   type request = {
     @ocaml.doc("<p>The tags to add to objects created by the policy.</p>
 		       <p>Tags are strings in the format <code>key=value</code>.</p>
-		       <p>These user-defined tags are added in addition to the AWS-added lifecycle tags.</p>")
+		       <p>These user-defined tags are added in addition to the Amazon Web Services-added lifecycle tags.</p>")
     @as("TagsToAdd")
     tagsToAdd: option<tagsToAddFilterList>,
     @ocaml.doc("<p>The target tag for a policy.</p>
@@ -502,7 +542,7 @@ module UpdateLifecyclePolicy = {
     executionRoleArn: option<executionRoleArn>,
     @ocaml.doc("<p>The identifier of the lifecycle policy.</p>") @as("PolicyId") policyId: policyId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-dlm") @new external new: request => t = "UpdateLifecyclePolicyCommand"
   let make = (~policyId, ~policyDetails=?, ~description=?, ~state=?, ~executionRoleArn=?, ()) =>
     new({

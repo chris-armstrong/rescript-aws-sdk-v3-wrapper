@@ -49,7 +49,7 @@ type tagKey = string
             </li>
          </ul>")
 type suppressionListReason = [@as("COMPLAINT") #COMPLAINT | @as("BOUNCE") #BOUNCE]
-@ocaml.doc("<p>The type of action that you want to perform on the address. Acceptable values:</p>
+@ocaml.doc("<p>The type of action to perform on the address. The following are possible values:</p>
         <ul>
             <li>
                 <p>PUT: add the addresses to the suppression list.</p>
@@ -65,8 +65,7 @@ type successRedirectionURL = string
 type subscriptionStatus = [@as("OPT_OUT") #OPT_OUT | @as("OPT_IN") #OPT_IN]
 type subject = string
 type sentLast24Hours = float
-@ocaml.doc("<p>The name of the dedicated IP pool that you want to associate with the configuration
-            set.</p>")
+@ocaml.doc("<p>The name of the dedicated IP pool to associate with the configuration set.</p>")
 type sendingPoolName = string
 type selector = string
 @ocaml.doc("<p>An Amazon S3 URL in the format
@@ -192,8 +191,7 @@ type mailFromDomainStatus = [
   | @as("SUCCESS") #SUCCESS
   | @as("PENDING") #PENDING
 ]
-@ocaml.doc("<p>The domain that you want to use as a MAIL FROM domain.</p>")
-type mailFromDomainName = string
+@ocaml.doc("<p>The domain to use as a MAIL FROM domain.</p>") type mailFromDomainName = string
 @ocaml.doc("<p>The date and time (in Unix time) when the reputation metrics were last given a fresh
             start. When your account is given a fresh start, your reputation metrics are calculated
             starting from the date of the fresh start.</p>")
@@ -215,17 +213,6 @@ type importDestinationType = [
   | @as("SUPPRESSION_LIST") #SUPPRESSION_LIST
 ]
 type imageUrl = string
-@ocaml.doc("<p>The email identity type. The identity type can be one of the following:</p>
-        <ul>
-            <li>
-                <p>
-                  <code>EMAIL_ADDRESS</code> – The identity is an email address.</p>
-            </li>
-            <li>
-                <p>
-                  <code>DOMAIN</code> – The identity is a domain.</p>
-            </li>
-         </ul>")
 type identityType = [
   | @as("MANAGED_DOMAIN") #MANAGED_DOMAIN
   | @as("DOMAIN") #DOMAIN
@@ -319,14 +306,14 @@ type dkimStatus = [
   | @as("SUCCESS") #SUCCESS
   | @as("PENDING") #PENDING
 ]
+type dkimSigningKeyLength = [@as("RSA_2048_BIT") #RSA_2048_BIT | @as("RSA_1024_BIT") #RSA_1024_BIT]
 type dkimSigningAttributesOrigin = [@as("EXTERNAL") #EXTERNAL | @as("AWS_SES") #AWS_SES]
 type displayName = string
-@ocaml.doc("<p>The location where the Amazon SES API v2 finds the value of a dimension to publish to Amazon CloudWatch. If
-            you want to use the message tags that you specify using an
-                <code>X-SES-MESSAGE-TAGS</code> header or a parameter to the <code>SendEmail</code>
-            or <code>SendRawEmail</code> API, choose <code>messageTag</code>. If you want to use
-            your own email headers, choose <code>emailHeader</code>. If you want to use link tags,
-            choose <code>linkTags</code>.</p>")
+@ocaml.doc("<p>The location where the Amazon SES API v2 finds the value of a dimension to publish to Amazon CloudWatch. To
+            use the message tags that you specify using an <code>X-SES-MESSAGE-TAGS</code> header or
+            a parameter to the <code>SendEmail</code> or <code>SendRawEmail</code> API, choose
+                <code>messageTag</code>. To use your own email headers, choose
+                <code>emailHeader</code>. To use link tags, choose <code>linkTags</code>.</p>")
 type dimensionValueSource = [
   | @as("LINK_TAG") #LINK_TAG
   | @as("EMAIL_HEADER") #EMAIL_HEADER
@@ -378,7 +365,7 @@ type deliverabilityDashboardAccountStatus = [
 type defaultDimensionValue = string
 @ocaml.doc("<p>The data format of the import job's data source.</p>")
 type dataFormat = [@as("JSON") #JSON | @as("CSV") #CSV]
-@ocaml.doc("<p>The domain that you want to use for tracking open and click events.</p>")
+@ocaml.doc("<p>The domain to use for tracking open and click events.</p>")
 type customRedirectDomain = string
 type contactListName = string
 type contactListImportAction = [@as("PUT") #PUT | @as("DELETE") #DELETE]
@@ -412,10 +399,10 @@ type bulkEmailStatus = [
 @ocaml.doc("<p>A description of the blacklisting event.</p>") type blacklistingDescription = string
 @ocaml.doc("<p>An IP address that you want to obtain blacklist information for.</p>")
 type blacklistItemName = string
-@ocaml.doc("<p>The action that you want to take if the required MX record can't be found when you
-            send an email. When you set this value to <code>UseDefaultValue</code>, the mail is sent
-            using <i>amazonses.com</i> as the MAIL FROM domain. When you set this
-            value to <code>RejectMessage</code>, the Amazon SES API v2 returns a
+@ocaml.doc("<p>The action to take if the required MX record can't be found when you send an email.
+            When you set this value to <code>UseDefaultValue</code>, the mail is sent using
+                <i>amazonses.com</i> as the MAIL FROM domain. When you set this value
+            to <code>RejectMessage</code>, the Amazon SES API v2 returns a
                 <code>MailFromDomainNotVerified</code> error, and doesn't attempt to deliver the
             email.</p>
         <p>These behaviors are taken when the custom MAIL FROM domain configuration is in the
@@ -451,11 +438,11 @@ type volumeStatistics = {
             Amazon SES API v2 to send an email, it contains an invisible image that's used to track when
             recipients open your email. If your email contains links, those links are changed
             slightly in order to track when recipients click them.</p>
-        <p>These images and links include references to a domain operated by AWS. You can
+        <p>These images and links include references to a domain operated by Amazon Web Services. You can
             optionally configure the Amazon SES to use a domain that you operate for these images and
             links.</p>")
 type trackingOptions = {
-  @ocaml.doc("<p>The domain that you want to use for tracking open and click events.</p>")
+  @ocaml.doc("<p>The domain to use for tracking open and click events.</p>")
   @as("CustomRedirectDomain")
   customRedirectDomain: customRedirectDomain,
 }
@@ -530,16 +517,16 @@ type tagKeyList = array<tagKey>
                     one value.</p>
             </li>
             <li>
-                <p>The <code>aws:</code> prefix is reserved for use by AWS; you can’t use it in
+                <p>The <code>aws:</code> prefix is reserved for use by Amazon Web Services; you can’t use it in
                     any tag keys or values that you define. In addition, you can't edit or remove
                     tag keys or values that use this prefix. Tags that use this prefix don’t count
                     against the limit of 50 tags per resource.</p>
             </li>
             <li>
                 <p>You can associate tags with public or shared resources, but the tags are
-                    available only for your AWS account, not any other accounts that share the
+                    available only for your Amazon Web Services account, not any other accounts that share the
                     resource. In addition, the tags are available only for resources that are
-                    located in the specified AWS Region for your AWS account.</p>
+                    located in the specified Amazon Web Services Region for your Amazon Web Services account.</p>
             </li>
          </ul>")
 type tag = {
@@ -557,7 +544,7 @@ type tag = {
 type suppressionListReasons = array<suppressionListReason>
 @ocaml.doc("<p>An object that contains details about the action of suppression list.</p>")
 type suppressionListDestination = {
-  @ocaml.doc("<p>The type of action that you want to perform on the address. Acceptable values:</p>
+  @ocaml.doc("<p>The type of action to perform on the address. The following are possible values:</p>
         <ul>
             <li>
                 <p>PUT: add the addresses to the suppression list. If the record already exists,
@@ -600,14 +587,13 @@ type suppressedDestinationAttributes = {
 @ocaml.doc("<p>An object that defines an Amazon SNS destination for email events. You can use Amazon SNS to
             send notification when certain email events occur.</p>")
 type snsDestination = {
-  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the Amazon SNS topic that you want to publish email
-            events to. For more information about Amazon SNS topics, see the <a href=\"https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html\">Amazon SNS Developer
-                Guide</a>.</p>")
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the Amazon SNS topic to publish email events to. For
+            more information about Amazon SNS topics, see the <a href=\"https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html\">Amazon SNS Developer Guide</a>.</p>")
   @as("TopicArn")
   topicArn: amazonResourceName,
 }
 @ocaml.doc("<p>Used to enable or disable email sending for messages that use this configuration set
-            in the current AWS Region.</p>")
+            in the current Amazon Web Services Region.</p>")
 type sendingOptions = {
   @ocaml.doc("<p>If <code>true</code>, email sending is enabled for the configuration set. If
                 <code>false</code>, email sending is disabled for the configuration set.</p>")
@@ -615,18 +601,18 @@ type sendingOptions = {
   sendingEnabled: option<enabled>,
 }
 @ocaml.doc("<p>An object that contains information about the per-day and per-second sending limits
-            for your Amazon SES account in the current AWS Region.</p>")
+            for your Amazon SES account in the current Amazon Web Services Region.</p>")
 type sendQuota = {
-  @ocaml.doc("<p>The number of emails sent from your Amazon SES account in the current AWS Region over the
+  @ocaml.doc("<p>The number of emails sent from your Amazon SES account in the current Amazon Web Services Region over the
             past 24 hours.</p>")
   @as("SentLast24Hours")
   sentLast24Hours: option<sentLast24Hours>,
-  @ocaml.doc("<p>The maximum number of emails that you can send per second in the current AWS Region.
+  @ocaml.doc("<p>The maximum number of emails that you can send per second in the current Amazon Web Services Region.
             This value is also called your <i>maximum sending rate</i> or your
                 <i>maximum TPS (transactions per second) rate</i>.</p>")
   @as("MaxSendRate")
   maxSendRate: option<maxSendRate>,
-  @ocaml.doc("<p>The maximum number of emails that you can send in the current AWS Region over a
+  @ocaml.doc("<p>The maximum number of emails that you can send in the current Amazon Web Services Region over a
             24-hour period. This value is also called your <i>sending
             quota</i>.</p>")
   @as("Max24HourSend")
@@ -664,7 +650,7 @@ type reviewDetails = {
   status: option<reviewStatus>,
 }
 @ocaml.doc("<p>Enable or disable collection of reputation metrics for emails that you send using this
-            configuration set in the current AWS Region. </p>")
+            configuration set in the current Amazon Web Services Region. </p>")
 type reputationOptions = {
   @ocaml.doc("<p>The date and time (in Unix time) when the reputation metrics were last given a fresh
             start. When your account is given a fresh start, your reputation metrics are calculated
@@ -751,8 +737,9 @@ type placementStatistics = {
             dashboards that are built in to Amazon Pinpoint. For more information, see <a href=\"https://docs.aws.amazon.com/pinpoint/latest/userguide/analytics-transactional-messages.html\">Transactional
                 Messaging Charts</a> in the <i>Amazon Pinpoint User Guide</i>.</p>")
 type pinpointDestination = {
-  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the Amazon Pinpoint project that you want to send email
-            events to.</p>")
+  @ocaml.doc(
+    "<p>The Amazon Resource Name (ARN) of the Amazon Pinpoint project to send email events to.</p>"
+  )
   @as("ApplicationArn")
   applicationArn: option<amazonResourceName>,
 }
@@ -789,10 +776,10 @@ type messageTag = {
 }
 @ocaml.doc("<p>A list of attributes that are associated with a MAIL FROM domain.</p>")
 type mailFromAttributes = {
-  @ocaml.doc("<p>The action that you want to take if the required MX record can't be found when you
-            send an email. When you set this value to <code>UseDefaultValue</code>, the mail is sent
-            using <i>amazonses.com</i> as the MAIL FROM domain. When you set this
-            value to <code>RejectMessage</code>, the Amazon SES API v2 returns a
+  @ocaml.doc("<p>The action to take if the required MX record can't be found when you send an email.
+            When you set this value to <code>UseDefaultValue</code>, the mail is sent using
+                <i>amazonses.com</i> as the MAIL FROM domain. When you set this value
+            to <code>RejectMessage</code>, the Amazon SES API v2 returns a
                 <code>MailFromDomainNotVerified</code> error, and doesn't attempt to deliver the
             email.</p>
         <p>These behaviors are taken when the custom MAIL FROM domain configuration is in the
@@ -831,7 +818,9 @@ type mailFromAttributes = {
   @as("MailFromDomain")
   mailFromDomain: mailFromDomainName,
 }
-@ocaml.doc("<p>A list of dedicated IP pools that are associated with your AWS account.</p>")
+@ocaml.doc(
+  "<p>A list of dedicated IP pools that are associated with your Amazon Web Services account.</p>"
+)
 type listOfDedicatedIpPools = array<poolName>
 @ocaml.doc("<p>An object used to specify a list or topic to which an email belongs, which will be
             used when a contact chooses to unsubscribe.</p>")
@@ -873,22 +862,8 @@ type identityInfo = {
   sendingEnabled: option<enabled>,
   @ocaml.doc("<p>The address or domain of the identity.</p>") @as("IdentityName")
   identityName: option<identity>,
-  @ocaml.doc("<p>The email identity type. The identity type can be one of the following:</p>
-        <ul>
-            <li>
-                <p>
-                  <code>EMAIL_ADDRESS</code> – The identity is an email address.</p>
-            </li>
-            <li>
-                <p>
-                  <code>DOMAIN</code> – The identity is a domain.</p>
-            </li>
-            <li>
-                <p>
-                  <code>MANAGED_DOMAIN</code> – The identity is a domain that is managed
-                    by AWS.</p>
-            </li>
-         </ul>")
+  @ocaml.doc("<p>The email identity type. Note: the <code>MANAGED_DOMAIN</code> type is not supported
+            for email identity types.</p>")
   @as("IdentityType")
   identityType: option<identityType>,
 }
@@ -946,23 +921,28 @@ type domainIspPlacement = {
   ispName: option<ispName>,
 }
 type dnsTokenList = array<dnsToken>
-@ocaml.doc("<p>An object that contains information about the tokens used for setting up Bring Your
-            Own DKIM (BYODKIM).</p>")
+@ocaml.doc(
+  "<p>An object that contains configuration for Bring Your Own DKIM (BYODKIM), or, for Easy DKIM</p>"
+)
 type dkimSigningAttributes = {
-  @ocaml.doc("<p>A private key that's used to generate a DKIM signature.</p>
-        <p>The private key must use 1024-bit RSA encryption, and must be encoded using base64
-            encoding.</p>")
+  @ocaml.doc(
+    "<p>[Easy DKIM] The key length of the future DKIM key pair to be generated. This can be changed at most once per day.</p>"
+  )
+  @as("NextSigningKeyLength")
+  nextSigningKeyLength: option<dkimSigningKeyLength>,
+  @ocaml.doc("<p>[Bring Your Own DKIM] A private key that's used to generate a DKIM signature.</p>
+        <p>The private key must use 1024 or 2048-bit RSA encryption, and must be encoded using
+            base64 encoding.</p>")
   @as("DomainSigningPrivateKey")
-  domainSigningPrivateKey: privateKey,
-  @ocaml.doc("<p>A string that's used to identify a public key in the DNS configuration for a
+  domainSigningPrivateKey: option<privateKey>,
+  @ocaml.doc("<p>[Bring Your Own DKIM] A string that's used to identify a public key in the DNS configuration for a
             domain.</p>")
   @as("DomainSigningSelector")
-  domainSigningSelector: selector,
+  domainSigningSelector: option<selector>,
 }
 @ocaml.doc("<p>Used to associate a configuration set with a dedicated IP pool.</p>")
 type deliveryOptions = {
-  @ocaml.doc("<p>The name of the dedicated IP pool that you want to associate with the configuration
-            set.</p>")
+  @ocaml.doc("<p>The name of the dedicated IP pool to associate with the configuration set.</p>")
   @as("SendingPoolName")
   sendingPoolName: option<poolName>,
   @ocaml.doc("<p>Specifies whether messages that use the configuration set are required to use
@@ -1064,8 +1044,8 @@ type content = {
 }
 @ocaml.doc("<p>An object that contains details about the action of a contact list.</p>")
 type contactListDestination = {
-  @ocaml.doc("<p>>The type of action that you want to perform on the addresses. Acceptable
-            values:</p>
+  @ocaml.doc("<p>>The type of action to perform on the addresses. The following are the 
+            possible values:</p>
         <ul>
             <li>
                 <p>PUT: add the addresses to the contact list. If the record already exists, it
@@ -1107,12 +1087,11 @@ type cloudWatchDimensionConfiguration = {
          </ul>")
   @as("DefaultDimensionValue")
   defaultDimensionValue: defaultDimensionValue,
-  @ocaml.doc("<p>The location where the Amazon SES API v2 finds the value of a dimension to publish to Amazon CloudWatch. If
-            you want to use the message tags that you specify using an
-                <code>X-SES-MESSAGE-TAGS</code> header or a parameter to the <code>SendEmail</code>
-            or <code>SendRawEmail</code> API, choose <code>messageTag</code>. If you want to use
-            your own email headers, choose <code>emailHeader</code>. If you want to use link tags,
-            choose <code>linkTags</code>.</p>")
+  @ocaml.doc("<p>The location where the Amazon SES API v2 finds the value of a dimension to publish to Amazon CloudWatch. To
+            use the message tags that you specify using an <code>X-SES-MESSAGE-TAGS</code> header or
+            a parameter to the <code>SendEmail</code> or <code>SendRawEmail</code> API, choose
+                <code>messageTag</code>. To use your own email headers, choose
+                <code>emailHeader</code>. To use link tags, choose <code>linkTags</code>.</p>")
   @as("DimensionValueSource")
   dimensionValueSource: dimensionValueSource,
   @ocaml.doc("<p>The name of an Amazon CloudWatch dimension associated with an email sending metric. The name has to
@@ -1246,7 +1225,7 @@ type suppressionOptions = {
   suppressedReasons: option<suppressionListReasons>,
 }
 @ocaml.doc("<p>An object that contains information about the email address suppression preferences
-            for your account in the current AWS Region.</p>")
+            for your account in the current Amazon Web Services Region.</p>")
 type suppressionAttributes = {
   @ocaml.doc("<p>A list that contains the reasons that email addresses will be automatically added to
             the suppression list for your account. This list can contain any or all of the
@@ -1322,7 +1301,7 @@ type ispPlacement = {
   ispName: option<ispName>,
 }
 @ocaml.doc("<p>An object that contains information about the inbox placement data settings for a
-            verified domain that’s associated with your AWS account. This data is available only
+            verified domain that’s associated with your Amazon Web Services account. This data is available only
             if you enabled the Deliverability dashboard for the domain.</p>")
 type inboxPlacementTrackingOption = {
   @ocaml.doc("<p>An array of strings, one for each major email provider that the inbox placement data
@@ -1417,7 +1396,18 @@ type domainDeliverabilityCampaign = {
             TXT record must be a public key that's paired with the private key that you specified in
             the process of creating the identity</p>")
 type dkimAttributes = {
-  @ocaml.doc("<p>A string that indicates how DKIM was configured for the identity. There are two
+  @ocaml.doc("<p>[Easy DKIM] The last time a key pair was generated for this identity.</p>")
+  @as("LastKeyGenerationTimestamp")
+  lastKeyGenerationTimestamp: option<timestamp_>,
+  @ocaml.doc("<p>[Easy DKIM] The key length of the DKIM key pair in use.</p>")
+  @as("CurrentSigningKeyLength")
+  currentSigningKeyLength: option<dkimSigningKeyLength>,
+  @ocaml.doc(
+    "<p>[Easy DKIM] The key length of the future DKIM key pair to be generated. This can be changed at most once per day.</p>"
+  )
+  @as("NextSigningKeyLength")
+  nextSigningKeyLength: option<dkimSigningKeyLength>,
+  @ocaml.doc("<p>A string that indicates how DKIM was configured for the identity. These are the
             possible values:</p>
         <ul>
             <li>
@@ -1483,7 +1473,15 @@ type dkimAttributes = {
   @as("SigningEnabled")
   signingEnabled: option<enabled>,
 }
-@ocaml.doc("<p>An object that describes the recipients for an email.</p>")
+@ocaml.doc("<p>An object that describes the recipients for an email.</p>
+        <note>
+            <p>Amazon SES does not support the SMTPUTF8 extension, as described in <a href=\"https://tools.ietf.org/html/rfc6531\">RFC6531</a>. For this reason, the
+                    <i>local part</i> of a destination email address (the part of the
+                email address that precedes the @ sign) may only contain <a href=\"https://en.wikipedia.org/wiki/Email_address#Local-part\">7-bit ASCII
+                    characters</a>. If the <i>domain part</i> of an address (the
+                part after the @ sign) contains non-ASCII characters, they must be encoded using
+                Punycode, as described in <a href=\"https://tools.ietf.org/html/rfc3492.html\">RFC3492</a>.</p>
+        </note>")
 type destination = {
   @ocaml.doc("<p>An array that contains the email addresses of the \"BCC\" (blind carbon copy) recipients
             for the email.</p>")
@@ -1499,7 +1497,9 @@ type destination = {
   toAddresses: option<emailAddressList>,
 }
 type deliverabilityTestReports = array<deliverabilityTestReport>
-@ocaml.doc("<p>A list of dedicated IP addresses that are associated with your AWS account.</p>")
+@ocaml.doc(
+  "<p>A list of dedicated IP addresses that are associated with your Amazon Web Services account.</p>"
+)
 type dedicatedIpList = array<dedicatedIp>
 @ocaml.doc("<p>A list of the custom verification email templates that exist in your account.</p>")
 type customVerificationEmailTemplatesList = array<customVerificationEmailTemplateMetadata>
@@ -1614,7 +1614,7 @@ type domainDeliverabilityTrackingOption = {
             domain.</p>")
   @as("SubscriptionStartDate")
   subscriptionStartDate: option<timestamp_>,
-  @ocaml.doc("<p>A verified domain that’s associated with your AWS account and currently has an
+  @ocaml.doc("<p>A verified domain that’s associated with your Amazon Web Services account and currently has an
             active Deliverability dashboard subscription.</p>")
   @as("Domain")
   domain: option<domain>,
@@ -1725,10 +1725,10 @@ type eventDestinationDefinition = {
   enabled: option<enabled>,
 }
 @ocaml.doc("<p>In the Amazon SES API v2, <i>events</i> include message sends, deliveries, opens,
-            clicks, bounces, complaints and delivery delays. <i>Event destinations</i> are places that
-            you can send information about these events to. For example, you can send event data to
-            Amazon SNS to receive notifications when you receive bounces or complaints, or you can use
-            Amazon Kinesis Data Firehose to stream data to Amazon S3 for long-term storage.</p>")
+            clicks, bounces, complaints and delivery delays. <i>Event destinations</i>
+            are places that you can send information about these events to. For example, you can
+            send event data to Amazon SNS to receive notifications when you receive bounces or
+            complaints, or you can use Amazon Kinesis Data Firehose to stream data to Amazon S3 for long-term storage.</p>")
 type eventDestination = {
   @ocaml.doc("<p>An object that defines an Amazon Pinpoint project destination for email events. You can send
             email event data to a Amazon Pinpoint project to view metrics using the Transactional Messaging
@@ -1819,25 +1819,13 @@ type dailyVolumes = array<dailyVolume>
 type bulkEmailEntryList = array<bulkEmailEntry>
 type eventDestinations = array<eventDestination>
 @ocaml.doc("<fullname>Amazon SES API v2</fullname>
-        <p>Welcome to the Amazon SES API v2 Reference. This guide provides information about the Amazon SES API v2,
-            including supported operations, data types, parameters, and schemas.</p>
+        
         <p>
-            <a href=\"https://aws.amazon.com/pinpoint\">Amazon SES</a> is an AWS service that
+            <a href=\"http://aws.amazon.com/ses\">Amazon SES</a> is an Amazon Web Services service that
             you can use to send email messages to your customers.</p>
-        <p>If you're new to Amazon SES API v2, you might find it helpful to also review the <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/\">Amazon Simple Email Service Developer
+        <p>If you're new to Amazon SES API v2, you might find it helpful to review the <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/\">Amazon Simple Email Service Developer
                 Guide</a>. The <i>Amazon SES Developer Guide</i> provides information
-            and code samples that demonstrate how to use Amazon SES API v2 features programmatically.</p>
-        <p>The Amazon SES API v2 is available in several AWS Regions and it provides an endpoint for each
-            of these Regions. For a list of all the Regions and endpoints where the API is currently
-            available, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/rande.html#ses_region\">AWS Service Endpoints</a> in the <i>Amazon Web Services General Reference</i>. To
-            learn more about AWS Regions, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/rande-manage.html\">Managing AWS Regions</a> in the
-                <i>Amazon Web Services General Reference</i>.</p>
-        <p>In each Region, AWS maintains multiple Availability Zones. These Availability Zones
-            are physically isolated from each other, but are united by private, low-latency,
-            high-throughput, and highly redundant network connections. These Availability Zones
-            enable us to provide very high levels of availability and redundancy, while also
-            minimizing latency. To learn more about the number of Availability Zones that are
-            available in each Region, see <a href=\"http://aws.amazon.com/about-aws/global-infrastructure/\">AWS Global Infrastructure</a>.</p>")
+            and code samples that demonstrate how to use Amazon SES API v2 features programmatically.</p>")
 module UpdateEmailIdentityPolicy = {
   type t
   @ocaml.doc("<p>Represents a request to update a sending authorization policy for an identity. Sending
@@ -1855,11 +1843,9 @@ module UpdateEmailIdentityPolicy = {
             characters, dashes, and underscores.</p>")
     @as("PolicyName")
     policyName: policyName,
-    @ocaml.doc("<p>The email identity for which you want to update policy.</p>")
-    @as("EmailIdentity")
-    emailIdentity: identity,
+    @ocaml.doc("<p>The email identity.</p>") @as("EmailIdentity") emailIdentity: identity,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "UpdateEmailIdentityPolicyCommand"
   let make = (~policy, ~policyName, ~emailIdentity, ()) =>
@@ -1896,7 +1882,7 @@ module UpdateCustomVerificationEmailTemplate = {
     @as("TemplateName")
     templateName: emailTemplateName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "UpdateCustomVerificationEmailTemplateCommand"
   let make = (
@@ -1929,7 +1915,7 @@ module TestRenderEmailTemplate = {
             replacement tags in the email template.</p>")
     @as("TemplateData")
     templateData: emailTemplateData,
-    @ocaml.doc("<p>The name of the template that you want to render.</p>") @as("TemplateName")
+    @ocaml.doc("<p>The name of the template.</p>") @as("TemplateName")
     templateName: emailTemplateName,
   }
   @ocaml.doc("<p>The following element is returned by the service.</p>")
@@ -1994,7 +1980,7 @@ module PutSuppressedDestination = {
     @as("EmailAddress")
     emailAddress: emailAddress,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new external new: request => t = "PutSuppressedDestinationCommand"
   let make = (~reason, ~emailAddress, ()) => new({reason: reason, emailAddress: emailAddress})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -2004,10 +1990,10 @@ module PutEmailIdentityMailFromAttributes = {
   type t
   @ocaml.doc("<p>A request to configure the custom MAIL FROM domain for a verified identity.</p>")
   type request = {
-    @ocaml.doc("<p>The action that you want to take if the required MX record isn't found when you send
-            an email. When you set this value to <code>UseDefaultValue</code>, the mail is sent
-            using <i>amazonses.com</i> as the MAIL FROM domain. When you set this
-            value to <code>RejectMessage</code>, the Amazon SES API v2 returns a
+    @ocaml.doc("<p>The action to take if the required MX record isn't found when you send an email. When
+            you set this value to <code>UseDefaultValue</code>, the mail is sent using
+                <i>amazonses.com</i> as the MAIL FROM domain. When you set this value
+            to <code>RejectMessage</code>, the Amazon SES API v2 returns a
                 <code>MailFromDomainNotVerified</code> error, and doesn't attempt to deliver the
             email.</p>
         <p>These behaviors are taken when the custom MAIL FROM domain configuration is in the
@@ -2031,12 +2017,9 @@ module PutEmailIdentityMailFromAttributes = {
          </ul>")
     @as("MailFromDomain")
     mailFromDomain: option<mailFromDomainName>,
-    @ocaml.doc("<p>The verified email identity that you want to set up the custom MAIL FROM domain
-            for.</p>")
-    @as("EmailIdentity")
-    emailIdentity: identity,
+    @ocaml.doc("<p>The verified email identity.</p>") @as("EmailIdentity") emailIdentity: identity,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "PutEmailIdentityMailFromAttributesCommand"
   let make = (~emailIdentity, ~behaviorOnMxFailure=?, ~mailFromDomain=?, ()) =>
@@ -2063,12 +2046,9 @@ module PutEmailIdentityFeedbackAttributes = {
             occur (even if this setting is disabled).</p>")
     @as("EmailForwardingEnabled")
     emailForwardingEnabled: option<enabled>,
-    @ocaml.doc("<p>The email identity that you want to configure bounce and complaint feedback forwarding
-            for.</p>")
-    @as("EmailIdentity")
-    emailIdentity: identity,
+    @ocaml.doc("<p>The email identity.</p>") @as("EmailIdentity") emailIdentity: identity,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "PutEmailIdentityFeedbackAttributesCommand"
   let make = (~emailIdentity, ~emailForwardingEnabled=?, ()) =>
@@ -2087,11 +2067,9 @@ module PutEmailIdentityDkimAttributes = {
             messages are sent without DKIM signing.</p>")
     @as("SigningEnabled")
     signingEnabled: option<enabled>,
-    @ocaml.doc("<p>The email identity that you want to change the DKIM settings for.</p>")
-    @as("EmailIdentity")
-    emailIdentity: identity,
+    @ocaml.doc("<p>The email identity.</p>") @as("EmailIdentity") emailIdentity: identity,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "PutEmailIdentityDkimAttributesCommand"
   let make = (~emailIdentity, ~signingEnabled=?, ()) =>
@@ -2103,16 +2081,14 @@ module PutEmailIdentityConfigurationSetAttributes = {
   type t
   @ocaml.doc("<p>A request to associate a configuration set with an email identity.</p>")
   type request = {
-    @ocaml.doc("<p>The configuration set that you want to associate with an email identity.</p>")
+    @ocaml.doc("<p>The configuration set to associate with an email identity.</p>")
     @as("ConfigurationSetName")
     configurationSetName: option<configurationSetName>,
-    @ocaml.doc(
-      "<p>The email address or domain that you want to associate with a configuration set.</p>"
-    )
+    @ocaml.doc("<p>The email address or domain to associate with a configuration set.</p>")
     @as("EmailIdentity")
     emailIdentity: identity,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "PutEmailIdentityConfigurationSetAttributesCommand"
   let make = (~emailIdentity, ~configurationSetName=?, ()) =>
@@ -2135,7 +2111,7 @@ module PutDedicatedIpWarmupAttributes = {
     @as("Ip")
     ip: ip,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "PutDedicatedIpWarmupAttributesCommand"
   let make = (~warmupPercentage, ~ip, ()) => new({warmupPercentage: warmupPercentage, ip: ip})
@@ -2151,11 +2127,11 @@ module PutDedicatedIpInPool = {
     @as("DestinationPoolName")
     destinationPoolName: poolName,
     @ocaml.doc("<p>The IP address that you want to move to the dedicated IP pool. The value you specify
-            has to be a dedicated IP address that's associated with your AWS account.</p>")
+            has to be a dedicated IP address that's associated with your Amazon Web Services account.</p>")
     @as("Ip")
     ip: ip,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new external new: request => t = "PutDedicatedIpInPoolCommand"
   let make = (~destinationPoolName, ~ip, ()) =>
     new({destinationPoolName: destinationPoolName, ip: ip})
@@ -2167,15 +2143,13 @@ module PutConfigurationSetTrackingOptions = {
   @ocaml.doc("<p>A request to add a custom domain for tracking open and click events to a configuration
             set.</p>")
   type request = {
-    @ocaml.doc("<p>The domain that you want to use to track open and click events.</p>")
+    @ocaml.doc("<p>The domain to use to track open and click events.</p>")
     @as("CustomRedirectDomain")
     customRedirectDomain: option<customRedirectDomain>,
-    @ocaml.doc("<p>The name of the configuration set that you want to add a custom tracking domain
-            to.</p>")
-    @as("ConfigurationSetName")
+    @ocaml.doc("<p>The name of the configuration set.</p>") @as("ConfigurationSetName")
     configurationSetName: configurationSetName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "PutConfigurationSetTrackingOptionsCommand"
   let make = (~configurationSetName, ~customRedirectDomain=?, ()) =>
@@ -2192,12 +2166,11 @@ module PutConfigurationSetSendingOptions = {
                 <code>false</code>, email sending is disabled for the configuration set.</p>")
     @as("SendingEnabled")
     sendingEnabled: option<enabled>,
-    @ocaml.doc("<p>The name of the configuration set that you want to enable or disable email sending
-            for.</p>")
+    @ocaml.doc("<p>The name of the configuration set to enable or disable email sending for.</p>")
     @as("ConfigurationSetName")
     configurationSetName: configurationSetName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "PutConfigurationSetSendingOptionsCommand"
   let make = (~configurationSetName, ~sendingEnabled=?, ()) =>
@@ -2215,12 +2188,10 @@ module PutConfigurationSetReputationOptions = {
             configuration set.</p>")
     @as("ReputationMetricsEnabled")
     reputationMetricsEnabled: option<enabled>,
-    @ocaml.doc("<p>The name of the configuration set that you want to enable or disable reputation metric
-            tracking for.</p>")
-    @as("ConfigurationSetName")
+    @ocaml.doc("<p>The name of the configuration set.</p>") @as("ConfigurationSetName")
     configurationSetName: configurationSetName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "PutConfigurationSetReputationOptionsCommand"
   let make = (~configurationSetName, ~reputationMetricsEnabled=?, ()) =>
@@ -2235,8 +2206,7 @@ module PutConfigurationSetDeliveryOptions = {
   type t
   @ocaml.doc("<p>A request to associate a configuration set with a dedicated IP pool.</p>")
   type request = {
-    @ocaml.doc("<p>The name of the dedicated IP pool that you want to associate with the configuration
-            set.</p>")
+    @ocaml.doc("<p>The name of the dedicated IP pool to associate with the configuration set.</p>")
     @as("SendingPoolName")
     sendingPoolName: option<sendingPoolName>,
     @ocaml.doc("<p>Specifies whether messages that use the configuration set are required to use
@@ -2245,12 +2215,11 @@ module PutConfigurationSetDeliveryOptions = {
             messages can be delivered in plain text if a TLS connection can't be established.</p>")
     @as("TlsPolicy")
     tlsPolicy: option<tlsPolicy>,
-    @ocaml.doc("<p>The name of the configuration set that you want to associate with a dedicated IP
-            pool.</p>")
+    @ocaml.doc("<p>The name of the configuration set to associate with a dedicated IP pool.</p>")
     @as("ConfigurationSetName")
     configurationSetName: configurationSetName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "PutConfigurationSetDeliveryOptionsCommand"
   let make = (~configurationSetName, ~sendingPoolName=?, ~tlsPolicy=?, ()) =>
@@ -2269,13 +2238,13 @@ module PutAccountSendingAttributes = {
     @ocaml.doc("<p>Enables or disables your account's ability to send email. Set to <code>true</code> to
             enable email sending, or set to <code>false</code> to disable email sending.</p>
         <note>
-            <p>If AWS paused your account's ability to send email, you can't use this operation
+            <p>If Amazon Web Services paused your account's ability to send email, you can't use this operation
                 to resume your account's ability to send email.</p>
         </note>")
     @as("SendingEnabled")
     sendingEnabled: option<enabled>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "PutAccountSendingAttributesCommand"
   let make = (~sendingEnabled=?, ()) => new({sendingEnabled: sendingEnabled})
@@ -2287,13 +2256,13 @@ module PutAccountDedicatedIpWarmupAttributes = {
   @ocaml.doc("<p>A request to enable or disable the automatic IP address warm-up feature.</p>")
   type request = {
     @ocaml.doc("<p>Enables or disables the automatic warm-up feature for dedicated IP addresses that are
-            associated with your Amazon SES account in the current AWS Region. Set to <code>true</code>
+            associated with your Amazon SES account in the current Amazon Web Services Region. Set to <code>true</code>
             to enable the automatic warm-up feature, or set to <code>false</code> to disable
             it.</p>")
     @as("AutoWarmupEnabled")
     autoWarmupEnabled: option<enabled>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "PutAccountDedicatedIpWarmupAttributesCommand"
   let make = (~autoWarmupEnabled=?, ()) => new({autoWarmupEnabled: autoWarmupEnabled})
@@ -2348,7 +2317,7 @@ module DeleteSuppressedDestination = {
     @as("EmailAddress")
     emailAddress: emailAddress,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "DeleteSuppressedDestinationCommand"
   let make = (~emailAddress, ()) => new({emailAddress: emailAddress})
@@ -2363,7 +2332,7 @@ module DeleteEmailTemplate = {
     @ocaml.doc("<p>The name of the template to be deleted.</p>") @as("TemplateName")
     templateName: emailTemplateName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new external new: request => t = "DeleteEmailTemplateCommand"
   let make = (~templateName, ()) => new({templateName: templateName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -2381,11 +2350,9 @@ module DeleteEmailIdentityPolicy = {
             characters, dashes, and underscores.</p>")
     @as("PolicyName")
     policyName: policyName,
-    @ocaml.doc("<p>The email identity for which you want to delete a policy.</p>")
-    @as("EmailIdentity")
-    emailIdentity: identity,
+    @ocaml.doc("<p>The email identity.</p>") @as("EmailIdentity") emailIdentity: identity,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "DeleteEmailIdentityPolicyCommand"
   let make = (~policyName, ~emailIdentity, ()) =>
@@ -2399,13 +2366,11 @@ module DeleteEmailIdentity = {
             the ability to send email from that identity. You can restore your ability to send email
             by completing the verification process for the identity again.</p>")
   type request = {
-    @ocaml.doc(
-      "<p>The identity (that is, the email address or domain) that you want to delete.</p>"
-    )
+    @ocaml.doc("<p>The identity (that is, the email address or domain) to delete.</p>")
     @as("EmailIdentity")
     emailIdentity: identity,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new external new: request => t = "DeleteEmailIdentityCommand"
   let make = (~emailIdentity, ()) => new({emailIdentity: emailIdentity})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -2418,7 +2383,7 @@ module DeleteDedicatedIpPool = {
     @ocaml.doc("<p>The name of the dedicated IP pool that you want to delete.</p>") @as("PoolName")
     poolName: poolName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new external new: request => t = "DeleteDedicatedIpPoolCommand"
   let make = (~poolName, ()) => new({poolName: poolName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -2434,7 +2399,7 @@ module DeleteCustomVerificationEmailTemplate = {
     @as("TemplateName")
     templateName: emailTemplateName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "DeleteCustomVerificationEmailTemplateCommand"
   let make = (~templateName, ()) => new({templateName: templateName})
@@ -2447,7 +2412,7 @@ module DeleteContactList = {
     @ocaml.doc("<p>The name of the contact list.</p>") @as("ContactListName")
     contactListName: contactListName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new external new: request => t = "DeleteContactListCommand"
   let make = (~contactListName, ()) => new({contactListName: contactListName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -2462,7 +2427,7 @@ module DeleteContact = {
     @as("ContactListName")
     contactListName: contactListName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new external new: request => t = "DeleteContactCommand"
   let make = (~emailAddress, ~contactListName, ()) =>
     new({emailAddress: emailAddress, contactListName: contactListName})
@@ -2473,15 +2438,14 @@ module DeleteConfigurationSetEventDestination = {
   type t
   @ocaml.doc("<p>A request to delete an event destination from a configuration set.</p>")
   type request = {
-    @ocaml.doc("<p>The name of the event destination that you want to delete.</p>")
-    @as("EventDestinationName")
+    @ocaml.doc("<p>The name of the event destination to delete.</p>") @as("EventDestinationName")
     eventDestinationName: eventDestinationName,
-    @ocaml.doc("<p>The name of the configuration set that contains the event destination that you want to
+    @ocaml.doc("<p>The name of the configuration set that contains the event destination to
             delete.</p>")
     @as("ConfigurationSetName")
     configurationSetName: configurationSetName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "DeleteConfigurationSetEventDestinationCommand"
   let make = (~eventDestinationName, ~configurationSetName, ()) =>
@@ -2493,11 +2457,10 @@ module DeleteConfigurationSet = {
   type t
   @ocaml.doc("<p>A request to delete a configuration set.</p>")
   type request = {
-    @ocaml.doc("<p>The name of the configuration set that you want to delete.</p>")
-    @as("ConfigurationSetName")
+    @ocaml.doc("<p>The name of the configuration set.</p>") @as("ConfigurationSetName")
     configurationSetName: configurationSetName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new external new: request => t = "DeleteConfigurationSetCommand"
   let make = (~configurationSetName, ()) => new({configurationSetName: configurationSetName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -2520,11 +2483,9 @@ module CreateEmailIdentityPolicy = {
             characters, dashes, and underscores.</p>")
     @as("PolicyName")
     policyName: policyName,
-    @ocaml.doc("<p>The email identity for which you want to create a policy.</p>")
-    @as("EmailIdentity")
-    emailIdentity: identity,
+    @ocaml.doc("<p>The email identity.</p>") @as("EmailIdentity") emailIdentity: identity,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "CreateEmailIdentityPolicyCommand"
   let make = (~policy, ~policyName, ~emailIdentity, ()) =>
@@ -2558,7 +2519,7 @@ module CreateCustomVerificationEmailTemplate = {
     @ocaml.doc("<p>The name of the custom verification email template.</p>") @as("TemplateName")
     templateName: emailTemplateName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "CreateCustomVerificationEmailTemplateCommand"
   let make = (
@@ -2590,10 +2551,10 @@ module UpdateEmailTemplate = {
             text-only part.</p>")
     @as("TemplateContent")
     templateContent: emailTemplateContent,
-    @ocaml.doc("<p>The name of the template you want to update.</p>") @as("TemplateName")
+    @ocaml.doc("<p>The name of the template.</p>") @as("TemplateName")
     templateName: emailTemplateName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new external new: request => t = "UpdateEmailTemplateCommand"
   let make = (~templateContent, ~templateName, ()) =>
     new({templateContent: templateContent, templateName: templateName})
@@ -2617,7 +2578,7 @@ module UntagResource = {
     @as("ResourceArn")
     resourceArn: amazonResourceName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -2628,12 +2589,13 @@ module PutEmailIdentityDkimSigningAttributes = {
   @ocaml.doc("<p>A request to change the DKIM attributes for an email identity.</p>")
   type request = {
     @ocaml.doc("<p>An object that contains information about the private key and selector that you want
-            to use to configure DKIM for the identity. This object is only required if you want to
-            configure Bring Your Own DKIM (BYODKIM) for the identity.</p>")
+            to use to configure DKIM for the identity for Bring Your Own DKIM (BYODKIM) for the identity, or,
+            configures the key length to be used for
+            <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html\">Easy DKIM</a>.</p>")
     @as("SigningAttributes")
     signingAttributes: option<dkimSigningAttributes>,
-    @ocaml.doc("<p>The method that you want to use to configure DKIM for the identity. There are two
-            possible values:</p>
+    @ocaml.doc("<p>The method to use to configure DKIM for the identity. There are the following possible
+            values:</p>
         <ul>
             <li>
                 <p>
@@ -2648,9 +2610,7 @@ module PutEmailIdentityDkimSigningAttributes = {
          </ul>")
     @as("SigningAttributesOrigin")
     signingAttributesOrigin: dkimSigningAttributesOrigin,
-    @ocaml.doc("<p>The email identity that you want to configure DKIM for.</p>")
-    @as("EmailIdentity")
-    emailIdentity: identity,
+    @ocaml.doc("<p>The email identity.</p>") @as("EmailIdentity") emailIdentity: identity,
   }
   @ocaml.doc("<p>If the action is successful, the service sends back an HTTP 200 response.</p>
         <p>The following data is returned in JSON format by the service.</p>")
@@ -2737,18 +2697,18 @@ module PutConfigurationSetSuppressionOptions = {
             <li>
                 <p>
                   <code>BOUNCE</code> – Amazon SES adds an email address to the suppression
-                    list for your account when a message sent to that address results in a
-                    hard bounce.</p>
+                    list for your account when a message sent to that address results in a hard
+                    bounce.</p>
             </li>
          </ul>")
     @as("SuppressedReasons")
     suppressedReasons: option<suppressionListReasons>,
-    @ocaml.doc("<p>The name of the configuration set that you want to change the suppression list
-            preferences for.</p>")
+    @ocaml.doc("<p>The name of the configuration set to change the suppression list preferences
+            for.</p>")
     @as("ConfigurationSetName")
     configurationSetName: configurationSetName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "PutConfigurationSetSuppressionOptionsCommand"
   let make = (~configurationSetName, ~suppressedReasons=?, ()) =>
@@ -2780,7 +2740,7 @@ module PutAccountSuppressionAttributes = {
     @as("SuppressedReasons")
     suppressedReasons: option<suppressionListReasons>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "PutAccountSuppressionAttributesCommand"
   let make = (~suppressedReasons=?, ()) => new({suppressedReasons: suppressedReasons})
@@ -2792,7 +2752,7 @@ module PutAccountDetails = {
   @ocaml.doc("<p>A request to submit new account details.</p>")
   type request = {
     @ocaml.doc("<p>Indicates whether or not your account should have production access in the current
-            AWS Region.</p>
+            Amazon Web Services Region.</p>
         <p>If the value is <code>false</code>, then your account is in the
                 <i>sandbox</i>. When your account is in the sandbox, you can only send
             email to verified identities. Additionally, the maximum number of emails you can send in
@@ -2819,7 +2779,7 @@ module PutAccountDetails = {
     @ocaml.doc("<p>The type of email your account will send.</p>") @as("MailType")
     mailType: mailType,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new external new: request => t = "PutAccountDetailsCommand"
   let make = (
     ~useCaseDescription,
@@ -2863,7 +2823,7 @@ module ListDedicatedIpPools = {
             in the <code>NextToken</code> parameter.</p>")
     @as("NextToken")
     nextToken: option<nextToken>,
-    @ocaml.doc("<p>A list of all of the dedicated IP pools that are associated with your AWS account in
+    @ocaml.doc("<p>A list of all of the dedicated IP pools that are associated with your Amazon Web Services account in
             the current Region.</p>")
     @as("DedicatedIpPools")
     dedicatedIpPools: option<listOfDedicatedIpPools>,
@@ -2876,7 +2836,7 @@ module ListDedicatedIpPools = {
 module ListConfigurationSets = {
   type t
   @ocaml.doc("<p>A request to obtain a list of configuration sets for your Amazon SES account in the current
-            AWS Region.</p>")
+            Amazon Web Services Region.</p>")
   type request = {
     @ocaml.doc("<p>The number of results to show in a single call to <code>ListConfigurationSets</code>.
             If the number of results is larger than the number you specified in this parameter, then
@@ -2890,7 +2850,7 @@ module ListConfigurationSets = {
     nextToken: option<nextToken>,
   }
   @ocaml.doc(
-    "<p>A list of configuration sets in your Amazon SES account in the current AWS Region.</p>"
+    "<p>A list of configuration sets in your Amazon SES account in the current Amazon Web Services Region.</p>"
   )
   type response = {
     @ocaml.doc("<p>A token that indicates that there are additional configuration sets to list. To view
@@ -2900,7 +2860,7 @@ module ListConfigurationSets = {
     @as("NextToken")
     nextToken: option<nextToken>,
     @ocaml.doc("<p>An array that contains all of the configuration sets in your Amazon SES account in the
-            current AWS Region.</p>")
+            current Amazon Web Services Region.</p>")
     @as("ConfigurationSets")
     configurationSets: option<configurationSetNameList>,
   }
@@ -2914,7 +2874,7 @@ module GetEmailTemplate = {
   @ocaml.doc("<p>Represents a request to display the template object (which includes the subject line,
             HTML part and text part) for the template you specify.</p>")
   type request = {
-    @ocaml.doc("<p>The name of the template you want to retrieve.</p>") @as("TemplateName")
+    @ocaml.doc("<p>The name of the template.</p>") @as("TemplateName")
     templateName: emailTemplateName,
   }
   @ocaml.doc("<p>The following element is returned by the service.</p>")
@@ -2923,7 +2883,7 @@ module GetEmailTemplate = {
             text-only part.</p>")
     @as("TemplateContent")
     templateContent: emailTemplateContent,
-    @ocaml.doc("<p>The name of the template you want to retrieve.</p>") @as("TemplateName")
+    @ocaml.doc("<p>The name of the template.</p>") @as("TemplateName")
     templateName: emailTemplateName,
   }
   @module("@aws-sdk/client-ses") @new external new: request => t = "GetEmailTemplateCommand"
@@ -2935,9 +2895,7 @@ module GetEmailIdentityPolicies = {
   type t
   @ocaml.doc("<p>A request to return the policies of an email identity.</p>")
   type request = {
-    @ocaml.doc("<p>The email identity that you want to retrieve policies for.</p>")
-    @as("EmailIdentity")
-    emailIdentity: identity,
+    @ocaml.doc("<p>The email identity.</p>") @as("EmailIdentity") emailIdentity: identity,
   }
   @ocaml.doc("<p>Identity policies associated with email identity.</p>")
   type response = {
@@ -2954,7 +2912,7 @@ module GetDedicatedIp = {
   @ocaml.doc("<p>A request to obtain more information about a dedicated IP address.</p>")
   type request = {
     @ocaml.doc("<p>The IP address that you want to obtain more information about. The value you specify
-            has to be a dedicated IP address that's assocaited with your AWS account.</p>")
+            has to be a dedicated IP address that's assocaited with your Amazon Web Services account.</p>")
     @as("Ip")
     ip: ip,
   }
@@ -2978,10 +2936,10 @@ module CreateEmailTemplate = {
             text-only part.</p>")
     @as("TemplateContent")
     templateContent: emailTemplateContent,
-    @ocaml.doc("<p>The name of the template you want to create.</p>") @as("TemplateName")
+    @ocaml.doc("<p>The name of the template.</p>") @as("TemplateName")
     templateName: emailTemplateName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new external new: request => t = "CreateEmailTemplateCommand"
   let make = (~templateContent, ~templateName, ()) =>
     new({templateContent: templateContent, templateName: templateName})
@@ -3000,7 +2958,7 @@ module UpdateContactList = {
     @ocaml.doc("<p>The name of the contact list.</p>") @as("ContactListName")
     contactListName: contactListName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new external new: request => t = "UpdateContactListCommand"
   let make = (~contactListName, ~description=?, ~topics=?, ()) =>
     new({description: description, topics: topics, contactListName: contactListName})
@@ -3023,7 +2981,7 @@ module UpdateContact = {
     @ocaml.doc("<p>The name of the contact list.</p>") @as("ContactListName")
     contactListName: contactListName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new external new: request => t = "UpdateContactCommand"
   let make = (
     ~emailAddress,
@@ -3057,7 +3015,7 @@ module TagResource = {
     @as("ResourceArn")
     resourceArn: amazonResourceName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -3141,7 +3099,7 @@ module ListSuppressedDestinations = {
 module ListEmailTemplates = {
   type t
   @ocaml.doc("<p>Represents a request to list the email templates present in your Amazon SES account in the
-            current AWS Region. For more information, see the <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html\">Amazon SES Developer
+            current Amazon Web Services Region. For more information, see the <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html\">Amazon SES Developer
                 Guide</a>.</p>")
   type request = {
     @ocaml.doc("<p>The number of results to show in a single call to <code>ListEmailTemplates</code>. If the number of
@@ -3174,7 +3132,7 @@ module ListEmailTemplates = {
 
 module ListEmailIdentities = {
   type t
-  @ocaml.doc("<p>A request to list all of the email identities associated with your AWS account. This
+  @ocaml.doc("<p>A request to list all of the email identities associated with your Amazon Web Services account. This
             list includes identities that you've already verified, identities that are unverified,
             and identities that were verified in the past, but are no longer verified.</p>")
   type request = {
@@ -3199,7 +3157,7 @@ module ListEmailIdentities = {
             parameter.</p>")
     @as("NextToken")
     nextToken: option<nextToken>,
-    @ocaml.doc("<p>An array that includes all of the email identities associated with your AWS
+    @ocaml.doc("<p>An array that includes all of the email identities associated with your Amazon Web Services
             account.</p>")
     @as("EmailIdentities")
     emailIdentities: option<identityInfoList>,
@@ -3377,9 +3335,7 @@ module GetEmailIdentity = {
   type t
   @ocaml.doc("<p>A request to return details about an email identity.</p>")
   type request = {
-    @ocaml.doc("<p>The email identity that you want to retrieve details for.</p>")
-    @as("EmailIdentity")
-    emailIdentity: identity,
+    @ocaml.doc("<p>The email identity.</p>") @as("EmailIdentity") emailIdentity: identity,
   }
   @ocaml.doc("<p>Details about an email identity.</p>")
   type response = {
@@ -3416,7 +3372,9 @@ module GetEmailIdentity = {
             occur (even if this setting is disabled).</p>")
     @as("FeedbackForwardingStatus")
     feedbackForwardingStatus: option<enabled>,
-    @ocaml.doc("<p>The email identity type.</p>") @as("IdentityType")
+    @ocaml.doc("<p>The email identity type. Note: the <code>MANAGED_DOMAIN</code> identity type is not
+            supported.</p>")
+    @as("IdentityType")
     identityType: option<identityType>,
   }
   @module("@aws-sdk/client-ses") @new external new: request => t = "GetEmailIdentityCommand"
@@ -3468,7 +3426,7 @@ module GetDedicatedIps = {
     @as("PoolName")
     poolName: option<poolName>,
   }
-  @ocaml.doc("<p>Information about the dedicated IP addresses that are associated with your AWS
+  @ocaml.doc("<p>Information about the dedicated IP addresses that are associated with your Amazon Web Services
             account.</p>")
   type response = {
     @ocaml.doc("<p>A token that indicates that there are additional dedicated IP addresses to list. To
@@ -3476,7 +3434,9 @@ module GetDedicatedIps = {
             passing this token in the <code>NextToken</code> parameter.</p>")
     @as("NextToken")
     nextToken: option<nextToken>,
-    @ocaml.doc("<p>A list of dedicated IP addresses that are associated with your AWS account.</p>")
+    @ocaml.doc(
+      "<p>A list of dedicated IP addresses that are associated with your Amazon Web Services account.</p>"
+    )
     @as("DedicatedIps")
     dedicatedIps: option<dedicatedIpList>,
   }
@@ -3557,9 +3517,7 @@ module GetConfigurationSet = {
   type t
   @ocaml.doc("<p>A request to obtain information about a configuration set.</p>")
   type request = {
-    @ocaml.doc("<p>The name of the configuration set that you want to obtain more information
-            about.</p>")
-    @as("ConfigurationSetName")
+    @ocaml.doc("<p>The name of the configuration set.</p>") @as("ConfigurationSetName")
     configurationSetName: configurationSetName,
   }
   @ocaml.doc("<p>Information about a configuration set.</p>")
@@ -3598,25 +3556,25 @@ module GetConfigurationSet = {
 
 module GetAccount = {
   type t
-
+  type request = {.}
   @ocaml.doc("<p>A list of details about the email-sending capabilities of your Amazon SES account in the
-            current AWS Region.</p>")
+            current Amazon Web Services Region.</p>")
   type response = {
     @ocaml.doc("<p>An object that defines your account details.</p>") @as("Details")
     details: option<accountDetails>,
     @ocaml.doc("<p>An object that contains information about the email address suppression preferences
-            for your account in the current AWS Region.</p>")
+            for your account in the current Amazon Web Services Region.</p>")
     @as("SuppressionAttributes")
     suppressionAttributes: option<suppressionAttributes>,
     @ocaml.doc("<p>Indicates whether or not email sending is enabled for your Amazon SES account in the
-            current AWS Region.</p>")
+            current Amazon Web Services Region.</p>")
     @as("SendingEnabled")
     sendingEnabled: option<enabled>,
     @ocaml.doc("<p>An object that contains information about the per-day and per-second sending limits
-            for your Amazon SES account in the current AWS Region.</p>")
+            for your Amazon SES account in the current Amazon Web Services Region.</p>")
     @as("SendQuota")
     sendQuota: option<sendQuota>,
-    @ocaml.doc("<p>Indicates whether or not your account has production access in the current AWS
+    @ocaml.doc("<p>Indicates whether or not your account has production access in the current Amazon Web Services
             Region.</p>
         <p>If the value is <code>false</code>, then your account is in the
                 <i>sandbox</i>. When your account is in the sandbox, you can only send
@@ -3657,8 +3615,8 @@ module GetAccount = {
     @as("DedicatedIpAutoWarmupEnabled")
     dedicatedIpAutoWarmupEnabled: option<enabled>,
   }
-  @module("@aws-sdk/client-ses") @new external new: unit => t = "GetAccountCommand"
-  let make = () => new()
+  @module("@aws-sdk/client-ses") @new external new: request => t = "GetAccountCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -3689,24 +3647,22 @@ module CreateEmailIdentity = {
   @ocaml.doc("<p>A request to begin the verification process for an email identity (an email address or
             domain).</p>")
   type request = {
-    @ocaml.doc("<p>The configuration set to use by default when sending from this identity.
-            Note that any configuration set defined in the email sending request takes precedence.
-        </p>")
+    @ocaml.doc("<p>The configuration set to use by default when sending from this identity. Note that any
+            configuration set defined in the email sending request takes precedence. </p>")
     @as("ConfigurationSetName")
     configurationSetName: option<configurationSetName>,
     @ocaml.doc("<p>If your request includes this object, Amazon SES configures the identity to use Bring Your
-            Own DKIM (BYODKIM) for DKIM authentication purposes, as opposed to the default method,
-                <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html\">Easy
-                DKIM</a>.</p>
+            Own DKIM (BYODKIM) for DKIM authentication purposes, or, configures the key length to be used for
+            <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html\">Easy DKIM</a>.</p>
         <p>You can only specify this object if the email identity is a domain, as opposed to an
             address.</p>")
     @as("DkimSigningAttributes")
     dkimSigningAttributes: option<dkimSigningAttributes>,
-    @ocaml.doc("<p>An array of objects that define the tags (keys and values) that you want to associate
-            with the email identity.</p>")
+    @ocaml.doc("<p>An array of objects that define the tags (keys and values) to associate with the email
+            identity.</p>")
     @as("Tags")
     tags: option<tagList_>,
-    @ocaml.doc("<p>The email address or domain that you want to verify.</p>") @as("EmailIdentity")
+    @ocaml.doc("<p>The email address or domain to verify.</p>") @as("EmailIdentity")
     emailIdentity: identity,
   }
   @ocaml.doc("<p>If the email identity is a domain, this object contains information about the DKIM
@@ -3723,7 +3679,9 @@ module CreateEmailIdentity = {
             see the <a href=\"https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-email-manage-verify.html\">Amazon Pinpoint User Guide</a>.</p>")
     @as("VerifiedForSendingStatus")
     verifiedForSendingStatus: option<enabled>,
-    @ocaml.doc("<p>The email identity type.</p>") @as("IdentityType")
+    @ocaml.doc("<p>The email identity type. Note: the <code>MANAGED_DOMAIN</code> identity type is not
+            supported.</p>")
+    @as("IdentityType")
     identityType: option<identityType>,
   }
   @module("@aws-sdk/client-ses") @new external new: request => t = "CreateEmailIdentityCommand"
@@ -3747,7 +3705,7 @@ module CreateDedicatedIpPool = {
     tags: option<tagList_>,
     @ocaml.doc("<p>The name of the dedicated IP pool.</p>") @as("PoolName") poolName: poolName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new external new: request => t = "CreateDedicatedIpPoolCommand"
   let make = (~poolName, ~tags=?, ()) => new({tags: tags, poolName: poolName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -3767,7 +3725,7 @@ module CreateContactList = {
     @ocaml.doc("<p>The name of the contact list.</p>") @as("ContactListName")
     contactListName: contactListName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new external new: request => t = "CreateContactListCommand"
   let make = (~contactListName, ~tags=?, ~description=?, ~topics=?, ()) =>
     new({tags: tags, description: description, topics: topics, contactListName: contactListName})
@@ -3792,7 +3750,7 @@ module CreateContact = {
     @as("ContactListName")
     contactListName: contactListName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new external new: request => t = "CreateContactCommand"
   let make = (
     ~emailAddress,
@@ -3817,8 +3775,8 @@ module CreateConfigurationSet = {
   @ocaml.doc("<p>A request to create a configuration set.</p>")
   type request = {
     @as("SuppressionOptions") suppressionOptions: option<suppressionOptions>,
-    @ocaml.doc("<p>An array of objects that define the tags (keys and values) that you want to associate
-            with the configuration set.</p>")
+    @ocaml.doc("<p>An array of objects that define the tags (keys and values) to associate with the
+            configuration set.</p>")
     @as("Tags")
     tags: option<tagList_>,
     @ocaml.doc("<p>An object that defines whether or not Amazon SES can send email that you send using the
@@ -3837,10 +3795,12 @@ module CreateConfigurationSet = {
             using the configuration set.</p>")
     @as("TrackingOptions")
     trackingOptions: option<trackingOptions>,
-    @ocaml.doc("<p>The name of the configuration set.</p>") @as("ConfigurationSetName")
+    @ocaml.doc("<p>The name of the configuration set. The name can contain up to 64 alphanumeric
+            characters, including letters, numbers, hyphens (-) and underscores (_) only.</p>")
+    @as("ConfigurationSetName")
     configurationSetName: configurationSetName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new external new: request => t = "CreateConfigurationSetCommand"
   let make = (
     ~configurationSetName,
@@ -3988,15 +3948,14 @@ module UpdateConfigurationSetEventDestination = {
   type request = {
     @ocaml.doc("<p>An object that defines the event destination.</p>") @as("EventDestination")
     eventDestination: eventDestinationDefinition,
-    @ocaml.doc("<p>The name of the event destination that you want to modify.</p>")
-    @as("EventDestinationName")
+    @ocaml.doc("<p>The name of the event destination.</p>") @as("EventDestinationName")
     eventDestinationName: eventDestinationName,
-    @ocaml.doc("<p>The name of the configuration set that contains the event destination that you want to
+    @ocaml.doc("<p>The name of the configuration set that contains the event destination to
             modify.</p>")
     @as("ConfigurationSetName")
     configurationSetName: configurationSetName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "UpdateConfigurationSetEventDestinationCommand"
   let make = (~eventDestination, ~eventDestinationName, ~configurationSetName, ()) =>
@@ -4018,9 +3977,7 @@ module SendEmail = {
             used when a contact chooses to unsubscribe.</p>")
     @as("ListManagementOptions")
     listManagementOptions: option<listManagementOptions>,
-    @ocaml.doc(
-      "<p>The name of the configuration set that you want to use when sending the email.</p>"
-    )
+    @ocaml.doc("<p>The name of the configuration set to use when sending the email.</p>")
     @as("ConfigurationSetName")
     configurationSetName: option<configurationSetName>,
     @ocaml.doc("<p>A list of tags, in the form of name/value pairs, to apply to an email that you send
@@ -4072,7 +4029,7 @@ module SendEmail = {
             content.</p>")
     @as("FromEmailAddressIdentityArn")
     fromEmailAddressIdentityArn: option<amazonResourceName>,
-    @ocaml.doc("<p>The email address that you want to use as the \"From\" address for the email. The
+    @ocaml.doc("<p>The email address to use as the \"From\" address for the email. The
             address that you specify has to be verified.
             </p>")
     @as("FromEmailAddress")
@@ -4126,9 +4083,7 @@ module SendBulkEmail = {
             more information, see the <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html\">Amazon SES Developer
                 Guide</a>.</p>")
   type request = {
-    @ocaml.doc(
-      "<p>The name of the configuration set that you want to use when sending the email.</p>"
-    )
+    @ocaml.doc("<p>The name of the configuration set to use when sending the email.</p>")
     @as("ConfigurationSetName")
     configurationSetName: option<configurationSetName>,
     @ocaml.doc("<p>The list of bulk email entry objects.</p>") @as("BulkEmailEntries")
@@ -4176,13 +4131,18 @@ module SendBulkEmail = {
                 Guide</a>.</p>")
     @as("FromEmailAddressIdentityArn")
     fromEmailAddressIdentityArn: option<amazonResourceName>,
-    @ocaml.doc("<p>The email address that you want to use as the \"From\" address for the email. The
+    @ocaml.doc("<p>The email address to use as the \"From\" address for the email. The
             address that you specify has to be verified.</p>")
     @as("FromEmailAddress")
     fromEmailAddress: option<emailAddress>,
   }
   @ocaml.doc("<p>The following data is returned in JSON format by the service.</p>")
-  type response = {@as("BulkEmailEntryResults") bulkEmailEntryResults: bulkEmailEntryResultList}
+  type response = {
+    @ocaml.doc("<p>One object per intended recipient. Check each response object and retry any messages
+            with a failure status.</p>")
+    @as("BulkEmailEntryResults")
+    bulkEmailEntryResults: bulkEmailEntryResultList,
+  }
   @module("@aws-sdk/client-ses") @new external new: request => t = "SendBulkEmailCommand"
   let make = (
     ~bulkEmailEntries,
@@ -4216,7 +4176,7 @@ module PutDeliverabilityDashboardOption = {
             access to reputation, deliverability, and other metrics for the domains that you use to
             send email using Amazon SES API v2. You also gain the ability to perform predictive inbox placement tests.</p>
         <p>When you use the Deliverability dashboard, you pay a monthly subscription charge, in addition
-            to any other fees that you accrue by using Amazon SES and other AWS services. For more
+            to any other fees that you accrue by using Amazon SES and other Amazon Web Services services. For more
             information about the features and cost of a Deliverability dashboard subscription, see <a href=\"http://aws.amazon.com/pinpoint/pricing/\">Amazon Pinpoint Pricing</a>.</p>")
   type request = {
     @ocaml.doc("<p>An array of objects, one for each verified domain that you use to send email and
@@ -4228,7 +4188,7 @@ module PutDeliverabilityDashboardOption = {
     @as("DashboardEnabled")
     dashboardEnabled: enabled,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "PutDeliverabilityDashboardOptionCommand"
   let make = (~dashboardEnabled, ~subscribedDomains=?, ()) =>
@@ -4356,7 +4316,7 @@ module GetDomainStatisticsReport = {
 
 module GetDeliverabilityDashboardOptions = {
   type t
-
+  type request = {.}
   @ocaml.doc("<p>An object that shows the status of the Deliverability dashboard.</p>")
   type response = {
     @ocaml.doc("<p>An array of objects, one for each verified domain that you use to send email and
@@ -4386,8 +4346,8 @@ module GetDeliverabilityDashboardOptions = {
     dashboardEnabled: enabled,
   }
   @module("@aws-sdk/client-ses") @new
-  external new: unit => t = "GetDeliverabilityDashboardOptionsCommand"
-  let make = () => new()
+  external new: request => t = "GetDeliverabilityDashboardOptionsCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -4448,13 +4408,10 @@ module CreateConfigurationSetEventDestination = {
     @ocaml.doc("<p>A name that identifies the event destination within the configuration set.</p>")
     @as("EventDestinationName")
     eventDestinationName: eventDestinationName,
-    @ocaml.doc(
-      "<p>The name of the configuration set that you want to add an event destination to.</p>"
-    )
-    @as("ConfigurationSetName")
+    @ocaml.doc("<p>The name of the configuration set .</p>") @as("ConfigurationSetName")
     configurationSetName: configurationSetName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-ses") @new
   external new: request => t = "CreateConfigurationSetEventDestinationCommand"
   let make = (~eventDestination, ~eventDestinationName, ~configurationSetName, ()) =>

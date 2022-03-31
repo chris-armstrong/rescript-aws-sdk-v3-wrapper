@@ -15,6 +15,7 @@ type baseInteger = int
 type baseTimestamp = Js.Date.t
 type baseLong = float
 type workMailIdentifier = string
+type workMailDomainName = string
 type userRole = [@as("SYSTEM_USER") #SYSTEM_USER | @as("RESOURCE") #RESOURCE | @as("USER") #USER]
 type userName = string
 type timestamp_ = Js.Date.t
@@ -61,6 +62,7 @@ type mailboxExportJobState = [
 ]
 type mailboxExportJobId = string
 type mailboxExportErrorInfo = string
+type logGroupArn = string
 type kmsKeyArn = string
 type ipRange = string
 type ipAddress = string
@@ -75,14 +77,22 @@ type folderName = [
   | @as("INBOX") #INBOX
 ]
 type entityState = [@as("DELETED") #DELETED | @as("DISABLED") #DISABLED | @as("ENABLED") #ENABLED]
+type entityIdentifier = string
 type emailAddress = string
 type domainName = string
+type dnsRecordVerificationStatus = [
+  | @as("FAILED") #FAILED
+  | @as("VERIFIED") #VERIFIED
+  | @as("PENDING") #PENDING
+]
 type directoryId = string
 type deviceUserAgent = string
 type deviceType = string
 type deviceOperatingSystem = string
 type deviceModel = string
+type deviceId = string
 type description = string
+type booleanObject = bool
 type boolean_ = bool
 type amazonResourceName = string
 type accessControlRuleName = string
@@ -149,6 +159,22 @@ type organizationSummary = {
   @ocaml.doc("<p>The identifier associated with the organization.</p>") @as("OrganizationId")
   organizationId: option<organizationId>,
 }
+@ocaml.doc("<p>The override object.</p>")
+type mobileDeviceAccessOverride = {
+  @ocaml.doc("<p>The date the override was last modified.</p>") @as("DateModified")
+  dateModified: option<timestamp_>,
+  @ocaml.doc("<p>The date the override was first created.</p>") @as("DateCreated")
+  dateCreated: option<timestamp_>,
+  @ocaml.doc("<p>A description of the override.</p>") @as("Description")
+  description: option<mobileDeviceAccessRuleDescription>,
+  @ocaml.doc("<p>The effect of the override, <code>ALLOW</code> or <code>DENY</code>.</p>")
+  @as("Effect")
+  effect: option<mobileDeviceAccessRuleEffect>,
+  @ocaml.doc("<p>The device to which the override applies.</p>") @as("DeviceId")
+  deviceId: option<deviceId>,
+  @ocaml.doc("<p>The WorkMail user to which the access override applies.</p>") @as("UserId")
+  userId: option<workMailIdentifier>,
+}
 @ocaml.doc("<p>The rule that a simulated user matches.</p>")
 type mobileDeviceAccessMatchedRule = {
   @ocaml.doc("<p>Name of a rule that a simulated user matches.</p>") @as("Name")
@@ -197,6 +223,12 @@ type mailboxExportJob = {
   @ocaml.doc("<p>The identifier of the mailbox export job.</p>") @as("JobId")
   jobId: option<mailboxExportJobId>,
 }
+@ocaml.doc("<p>The data for a given domain.</p>")
+type mailDomainSummary = {
+  @ocaml.doc("<p>Whether the domain is default or not.</p>") @as("DefaultDomain")
+  defaultDomain: option<boolean_>,
+  @ocaml.doc("<p>The domain name.</p>") @as("DomainName") domainName: option<domainName>,
+}
 type ipRangeList = array<ipRange>
 @ocaml.doc("<p>The representation of an Amazon WorkMail group.</p>")
 type group = {
@@ -216,7 +248,7 @@ type group = {
 @ocaml.doc("<p>The configuration applied to an organization's folders by its retention
          policy.</p>")
 type folderConfiguration = {
-  @ocaml.doc("<p>The period of time at which the folder configuration action is applied.</p>")
+  @ocaml.doc("<p>The number of days for which the folder-configuration action applies.</p>")
   @as("Period")
   period: option<retentionPeriod>,
   @ocaml.doc("<p>The action to take on the folder contents at the end of the folder configuration
@@ -235,6 +267,20 @@ type domain = {
   hostedZoneId: option<hostedZoneId>,
   @ocaml.doc("<p>The fully qualified domain name.</p>") @as("DomainName")
   domainName: option<domainName>,
+}
+@ocaml.doc("<p>A DNS record uploaded to your DNS provider.</p>")
+type dnsRecord = {
+  @ocaml.doc("<p>The value returned by the DNS for a query to that hostname and record type.</p>")
+  @as("Value")
+  value: option<string_>,
+  @ocaml.doc("<p>The DNS hostname.- For example, <code>domain.example.com</code>.</p>")
+  @as("Hostname")
+  hostname: option<string_>,
+  @ocaml.doc(
+    "<p>The RFC 1035 record type. Possible values: <code>CNAME</code>, <code>A</code>, <code>MX</code>.</p>"
+  )
+  @as("Type")
+  type_: option<string_>,
 }
 type deviceUserAgentList = array<deviceUserAgent>
 type deviceTypeList = array<deviceType>
@@ -336,12 +382,15 @@ type mobileDeviceAccessRule = {
   @ocaml.doc("<p>The ID assigned to a mobile access rule. </p>") @as("MobileDeviceAccessRuleId")
   mobileDeviceAccessRuleId: option<mobileDeviceAccessRuleId>,
 }
+type mobileDeviceAccessOverridesList = array<mobileDeviceAccessOverride>
 type mobileDeviceAccessMatchedRuleList = array<mobileDeviceAccessMatchedRule>
 type members = array<member>
+type mailDomains = array<mailDomainSummary>
 type jobs = array<mailboxExportJob>
 type groups = array<group>
 type folderConfigurations = array<folderConfiguration>
 type domains = array<domain>
+type dnsRecords = array<dnsRecord>
 @ocaml.doc("<p>A rule that controls access to an Amazon WorkMail organization.</p>")
 type accessControlRule = {
   @ocaml.doc("<p>The date that the rule was modified.</p>") @as("DateModified")
@@ -420,7 +469,7 @@ module UpdatePrimaryEmailAddress = {
     @as("OrganizationId")
     organizationId: organizationId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workmail") @new
   external new: request => t = "UpdatePrimaryEmailAddressCommand"
   let make = (~email, ~entityId, ~organizationId, ()) =>
@@ -442,10 +491,27 @@ module UpdateMailboxQuota = {
     @as("OrganizationId")
     organizationId: organizationId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workmail") @new external new: request => t = "UpdateMailboxQuotaCommand"
   let make = (~mailboxQuota, ~userId, ~organizationId, ()) =>
     new({mailboxQuota: mailboxQuota, userId: userId, organizationId: organizationId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module UpdateDefaultMailDomain = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The domain name that will become the default domain.</p>") @as("DomainName")
+    domainName: workMailDomainName,
+    @ocaml.doc("<p>The Amazon WorkMail organization for which to list domains.</p>")
+    @as("OrganizationId")
+    organizationId: organizationId,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-workmail") @new
+  external new: request => t = "UpdateDefaultMailDomainCommand"
+  let make = (~domainName, ~organizationId, ()) =>
+    new({domainName: domainName, organizationId: organizationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -510,7 +576,7 @@ module ResetPassword = {
     @as("OrganizationId")
     organizationId: organizationId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workmail") @new external new: request => t = "ResetPasswordCommand"
   let make = (~password, ~userId, ~organizationId, ()) =>
     new({password: password, userId: userId, organizationId: organizationId})
@@ -530,11 +596,175 @@ module RegisterToWorkMail = {
     @as("OrganizationId")
     organizationId: organizationId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workmail") @new external new: request => t = "RegisterToWorkMailCommand"
   let make = (~email, ~entityId, ~organizationId, ()) =>
     new({email: email, entityId: entityId, organizationId: organizationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module RegisterMailDomain = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The name of the mail domain to create in Amazon WorkMail and SES.</p>")
+    @as("DomainName")
+    domainName: workMailDomainName,
+    @ocaml.doc("<p>The Amazon WorkMail organization under which you're creating the domain.</p>")
+    @as("OrganizationId")
+    organizationId: organizationId,
+    @ocaml.doc("<p>Idempotency token used when retrying requests.</p>") @as("ClientToken")
+    clientToken: option<idempotencyClientToken>,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-workmail") @new external new: request => t = "RegisterMailDomainCommand"
+  let make = (~domainName, ~organizationId, ~clientToken=?, ()) =>
+    new({domainName: domainName, organizationId: organizationId, clientToken: clientToken})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module PutMobileDeviceAccessOverride = {
+  type t
+  type request = {
+    @ocaml.doc("<p>A description of the override.</p>") @as("Description")
+    description: option<mobileDeviceAccessRuleDescription>,
+    @ocaml.doc("<p>The effect of the override, <code>ALLOW</code> or <code>DENY</code>.</p>")
+    @as("Effect")
+    effect: mobileDeviceAccessRuleEffect,
+    @ocaml.doc(
+      "<p>The mobile device for which you create the override. <code>DeviceId</code> is case insensitive.</p>"
+    )
+    @as("DeviceId")
+    deviceId: deviceId,
+    @ocaml.doc("<p>The WorkMail user for which you create the override. Accepts the following types of user identities:</p>
+         <ul>
+            <li>
+               <p>User ID: <code>12345678-1234-1234-1234-123456789012</code> or <code>S-1-1-12-1234567890-123456789-123456789-1234</code> 
+               </p>
+            </li>
+            <li>
+               <p>Email address: <code>user@domain.tld</code>
+               </p>
+            </li>
+            <li>
+               <p>User name: <code>user</code>
+               </p>
+            </li>
+         </ul>")
+    @as("UserId")
+    userId: entityIdentifier,
+    @ocaml.doc(
+      "<p>Identifies the Amazon WorkMail organization for which you create the override.</p>"
+    )
+    @as("OrganizationId")
+    organizationId: organizationId,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-workmail") @new
+  external new: request => t = "PutMobileDeviceAccessOverrideCommand"
+  let make = (~effect, ~deviceId, ~userId, ~organizationId, ~description=?, ()) =>
+    new({
+      description: description,
+      effect: effect,
+      deviceId: deviceId,
+      userId: userId,
+      organizationId: organizationId,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module PutInboundDmarcSettings = {
+  type t
+  type request = {
+    @ocaml.doc("<p>Enforces or suspends a policy after it's applied.</p>") @as("Enforced")
+    enforced: booleanObject,
+    @ocaml.doc("<p>The ID of the organization that you are applying the DMARC policy to. </p>")
+    @as("OrganizationId")
+    organizationId: organizationId,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-workmail") @new
+  external new: request => t = "PutInboundDmarcSettingsCommand"
+  let make = (~enforced, ~organizationId, ()) =>
+    new({enforced: enforced, organizationId: organizationId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module PutEmailMonitoringConfiguration = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>The Amazon Resource Name (ARN) of the CloudWatch Log group associated with the email monitoring configuration.</p>"
+    )
+    @as("LogGroupArn")
+    logGroupArn: logGroupArn,
+    @ocaml.doc(
+      "<p>The Amazon Resource Name (ARN) of the IAM Role associated with the email monitoring configuration.</p>"
+    )
+    @as("RoleArn")
+    roleArn: roleArn,
+    @ocaml.doc(
+      "<p>The ID of the organization for which the email monitoring configuration is set.</p>"
+    )
+    @as("OrganizationId")
+    organizationId: organizationId,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-workmail") @new
+  external new: request => t = "PutEmailMonitoringConfigurationCommand"
+  let make = (~logGroupArn, ~roleArn, ~organizationId, ()) =>
+    new({logGroupArn: logGroupArn, roleArn: roleArn, organizationId: organizationId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module GetMobileDeviceAccessOverride = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>The mobile device to which the override applies. <code>DeviceId</code> is case insensitive.</p>"
+    )
+    @as("DeviceId")
+    deviceId: deviceId,
+    @ocaml.doc("<p>Identifies the WorkMail user for the override. Accepts the following types of user identities: </p>
+         <ul>
+            <li>
+               <p>User ID: <code>12345678-1234-1234-1234-123456789012</code> or <code>S-1-1-12-1234567890-123456789-123456789-1234</code> 
+               </p>
+            </li>
+            <li>
+               <p>Email address: <code>user@domain.tld</code>
+               </p>
+            </li>
+            <li>
+               <p>User name: <code>user</code>
+               </p>
+            </li>
+         </ul>")
+    @as("UserId")
+    userId: entityIdentifier,
+    @ocaml.doc("<p>The Amazon WorkMail organization to which you want to apply the override.</p>")
+    @as("OrganizationId")
+    organizationId: organizationId,
+  }
+  type response = {
+    @ocaml.doc("<p>The date the description was last modified.</p>") @as("DateModified")
+    dateModified: option<timestamp_>,
+    @ocaml.doc("<p>The date the override was first created.</p>") @as("DateCreated")
+    dateCreated: option<timestamp_>,
+    @ocaml.doc("<p>A description of the override.</p>") @as("Description")
+    description: option<mobileDeviceAccessRuleDescription>,
+    @ocaml.doc("<p>The effect of the override, <code>ALLOW</code> or <code>DENY</code>.</p>")
+    @as("Effect")
+    effect: option<mobileDeviceAccessRuleEffect>,
+    @ocaml.doc("<p>The device to which the access override applies.</p>") @as("DeviceId")
+    deviceId: option<deviceId>,
+    @ocaml.doc("<p>The WorkMail user to which the access override applies.</p>") @as("UserId")
+    userId: option<workMailIdentifier>,
+  }
+  @module("@aws-sdk/client-workmail") @new
+  external new: request => t = "GetMobileDeviceAccessOverrideCommand"
+  let make = (~deviceId, ~userId, ~organizationId, ()) =>
+    new({deviceId: deviceId, userId: userId, organizationId: organizationId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetMailboxDetails = {
@@ -571,7 +801,7 @@ module DisassociateMemberFromGroup = {
     @as("OrganizationId")
     organizationId: organizationId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workmail") @new
   external new: request => t = "DisassociateMemberFromGroupCommand"
   let make = (~memberId, ~groupId, ~organizationId, ()) =>
@@ -594,7 +824,7 @@ module DisassociateDelegateFromResource = {
     @as("OrganizationId")
     organizationId: organizationId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workmail") @new
   external new: request => t = "DisassociateDelegateFromResourceCommand"
   let make = (~entityId, ~resourceId, ~organizationId, ()) =>
@@ -728,6 +958,22 @@ module DescribeMailboxExportJob = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module DescribeInboundDmarcSettings = {
+  type t
+  type request = {
+    @ocaml.doc("<p>Lists the ID of the given organization.</p>") @as("OrganizationId")
+    organizationId: organizationId,
+  }
+  type response = {
+    @ocaml.doc("<p>Lists the enforcement setting of the applied policy.</p>") @as("Enforced")
+    enforced: option<boolean_>,
+  }
+  @module("@aws-sdk/client-workmail") @new
+  external new: request => t = "DescribeInboundDmarcSettingsCommand"
+  let make = (~organizationId, ()) => new({organizationId: organizationId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module DescribeGroup = {
   type t
   type request = {
@@ -761,6 +1007,50 @@ module DescribeGroup = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module DescribeEmailMonitoringConfiguration = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>The ID of the organization for which the email monitoring configuration is described.</p>"
+    )
+    @as("OrganizationId")
+    organizationId: organizationId,
+  }
+  type response = {
+    @ocaml.doc(
+      "<p>The Amazon Resource Name (ARN) of the CloudWatch Log group associated with the email monitoring configuration.</p>"
+    )
+    @as("LogGroupArn")
+    logGroupArn: option<logGroupArn>,
+    @ocaml.doc(
+      "<p>The Amazon Resource Name (ARN) of the IAM Role associated with the email monitoring configuration.</p>"
+    )
+    @as("RoleArn")
+    roleArn: option<roleArn>,
+  }
+  @module("@aws-sdk/client-workmail") @new
+  external new: request => t = "DescribeEmailMonitoringConfigurationCommand"
+  let make = (~organizationId, ()) => new({organizationId: organizationId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module DeregisterMailDomain = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The domain to deregister in WorkMail and SES. </p>") @as("DomainName")
+    domainName: workMailDomainName,
+    @ocaml.doc("<p>The Amazon WorkMail organization for which the domain will be deregistered.</p>")
+    @as("OrganizationId")
+    organizationId: organizationId,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-workmail") @new
+  external new: request => t = "DeregisterMailDomainCommand"
+  let make = (~domainName, ~organizationId, ()) =>
+    new({domainName: domainName, organizationId: organizationId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
 module DeregisterFromWorkMail = {
   type t
   type request = {
@@ -773,7 +1063,7 @@ module DeregisterFromWorkMail = {
     @as("OrganizationId")
     organizationId: organizationId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workmail") @new
   external new: request => t = "DeregisterFromWorkMailCommand"
   let make = (~entityId, ~organizationId, ()) =>
@@ -790,7 +1080,7 @@ module DeleteUser = {
     @as("OrganizationId")
     organizationId: organizationId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workmail") @new external new: request => t = "DeleteUserCommand"
   let make = (~userId, ~organizationId, ()) => new({userId: userId, organizationId: organizationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -802,7 +1092,7 @@ module DeleteRetentionPolicy = {
     @ocaml.doc("<p>The retention policy ID.</p>") @as("Id") id: shortString,
     @ocaml.doc("<p>The organization ID.</p>") @as("OrganizationId") organizationId: organizationId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workmail") @new
   external new: request => t = "DeleteRetentionPolicyCommand"
   let make = (~id, ~organizationId, ()) => new({id: id, organizationId: organizationId})
@@ -819,7 +1109,7 @@ module DeleteResource = {
     @as("OrganizationId")
     organizationId: organizationId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workmail") @new external new: request => t = "DeleteResourceCommand"
   let make = (~resourceId, ~organizationId, ()) =>
     new({resourceId: resourceId, organizationId: organizationId})
@@ -862,11 +1152,50 @@ module DeleteMobileDeviceAccessRule = {
     @as("OrganizationId")
     organizationId: organizationId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workmail") @new
   external new: request => t = "DeleteMobileDeviceAccessRuleCommand"
   let make = (~mobileDeviceAccessRuleId, ~organizationId, ()) =>
     new({mobileDeviceAccessRuleId: mobileDeviceAccessRuleId, organizationId: organizationId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module DeleteMobileDeviceAccessOverride = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>The mobile device for which you delete the override. <code>DeviceId</code> is case insensitive.</p>"
+    )
+    @as("DeviceId")
+    deviceId: deviceId,
+    @ocaml.doc("<p>The WorkMail user for which you want to delete the override. Accepts the following types of user identities:</p>
+         <ul>
+            <li>
+               <p>User ID:  <code>12345678-1234-1234-1234-123456789012</code> or <code>S-1-1-12-1234567890-123456789-123456789-1234</code> 
+               </p>
+            </li>
+            <li>
+               <p>Email address: <code>user@domain.tld</code>
+               </p>
+            </li>
+            <li>
+               <p>User name: <code>user</code>
+               </p>
+            </li>
+         </ul>")
+    @as("UserId")
+    userId: entityIdentifier,
+    @ocaml.doc(
+      "<p>The Amazon WorkMail organization for which the access override will be deleted.</p>"
+    )
+    @as("OrganizationId")
+    organizationId: organizationId,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-workmail") @new
+  external new: request => t = "DeleteMobileDeviceAccessOverrideCommand"
+  let make = (~deviceId, ~userId, ~organizationId, ()) =>
+    new({deviceId: deviceId, userId: userId, organizationId: organizationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -885,7 +1214,7 @@ module DeleteMailboxPermissions = {
     @as("OrganizationId")
     organizationId: organizationId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workmail") @new
   external new: request => t = "DeleteMailboxPermissionsCommand"
   let make = (~granteeId, ~entityId, ~organizationId, ()) =>
@@ -901,10 +1230,26 @@ module DeleteGroup = {
     @ocaml.doc("<p>The organization that contains the group.</p>") @as("OrganizationId")
     organizationId: organizationId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workmail") @new external new: request => t = "DeleteGroupCommand"
   let make = (~groupId, ~organizationId, ()) =>
     new({groupId: groupId, organizationId: organizationId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module DeleteEmailMonitoringConfiguration = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>The ID of the organization from which the email monitoring configuration is deleted.</p>"
+    )
+    @as("OrganizationId")
+    organizationId: organizationId,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-workmail") @new
+  external new: request => t = "DeleteEmailMonitoringConfigurationCommand"
+  let make = (~organizationId, ()) => new({organizationId: organizationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -923,7 +1268,7 @@ module DeleteAlias = {
     @as("OrganizationId")
     organizationId: organizationId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workmail") @new external new: request => t = "DeleteAliasCommand"
   let make = (~alias, ~entityId, ~organizationId, ()) =>
     new({alias: alias, entityId: entityId, organizationId: organizationId})
@@ -938,7 +1283,7 @@ module DeleteAccessControlRule = {
     @ocaml.doc("<p>The identifier for the organization.</p>") @as("OrganizationId")
     organizationId: organizationId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workmail") @new
   external new: request => t = "DeleteAccessControlRuleCommand"
   let make = (~name, ~organizationId, ()) => new({name: name, organizationId: organizationId})
@@ -1019,7 +1364,7 @@ module CreateAlias = {
     @as("OrganizationId")
     organizationId: organizationId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workmail") @new external new: request => t = "CreateAliasCommand"
   let make = (~alias, ~entityId, ~organizationId, ()) =>
     new({alias: alias, entityId: entityId, organizationId: organizationId})
@@ -1034,7 +1379,7 @@ module CancelMailboxExportJob = {
     @ocaml.doc("<p>The idempotency token for the client request.</p>") @as("ClientToken")
     clientToken: idempotencyClientToken,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workmail") @new
   external new: request => t = "CancelMailboxExportJobCommand"
   let make = (~organizationId, ~jobId, ~clientToken, ()) =>
@@ -1052,7 +1397,7 @@ module AssociateMemberToGroup = {
     @ocaml.doc("<p>The organization under which the group exists.</p>") @as("OrganizationId")
     organizationId: organizationId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workmail") @new
   external new: request => t = "AssociateMemberToGroupCommand"
   let make = (~memberId, ~groupId, ~organizationId, ()) =>
@@ -1071,7 +1416,7 @@ module AssociateDelegateToResource = {
     @ocaml.doc("<p>The organization under which the resource exists.</p>") @as("OrganizationId")
     organizationId: organizationId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workmail") @new
   external new: request => t = "AssociateDelegateToResourceCommand"
   let make = (~entityId, ~resourceId, ~organizationId, ()) =>
@@ -1093,7 +1438,7 @@ module UpdateResource = {
     @as("OrganizationId")
     organizationId: organizationId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workmail") @new external new: request => t = "UpdateResourceCommand"
   let make = (~resourceId, ~organizationId, ~bookingOptions=?, ~name=?, ()) =>
     new({
@@ -1151,7 +1496,7 @@ module UpdateMobileDeviceAccessRule = {
     @as("OrganizationId")
     organizationId: organizationId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workmail") @new
   external new: request => t = "UpdateMobileDeviceAccessRuleCommand"
   let make = (
@@ -1194,7 +1539,7 @@ module UntagResource = {
     @ocaml.doc("<p>The tag keys.</p>") @as("TagKeys") tagKeys: tagKeyList,
     @ocaml.doc("<p>The resource ARN.</p>") @as("ResourceARN") resourceARN: amazonResourceName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workmail") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys: tagKeys, resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1224,7 +1569,7 @@ module PutMailboxPermissions = {
     @as("OrganizationId")
     organizationId: organizationId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workmail") @new
   external new: request => t = "PutMailboxPermissionsCommand"
   let make = (~permissionValues, ~granteeId, ~entityId, ~organizationId, ()) =>
@@ -1265,7 +1610,7 @@ module PutAccessControlRule = {
     @ocaml.doc("<p>The rule effect.</p>") @as("Effect") effect: accessControlRuleEffect,
     @ocaml.doc("<p>The rule name.</p>") @as("Name") name: accessControlRuleName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workmail") @new
   external new: request => t = "PutAccessControlRuleCommand"
   let make = (
@@ -1488,7 +1833,7 @@ module TagResource = {
     @ocaml.doc("<p>The tag key-value pairs.</p>") @as("Tags") tags: tagList_,
     @ocaml.doc("<p>The resource ARN.</p>") @as("ResourceARN") resourceARN: amazonResourceName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workmail") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceARN, ()) => new({tags: tags, resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1505,7 +1850,7 @@ module PutRetentionPolicy = {
     @ocaml.doc("<p>The retention policy ID.</p>") @as("Id") id: option<shortString>,
     @ocaml.doc("<p>The organization ID.</p>") @as("OrganizationId") organizationId: organizationId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workmail") @new external new: request => t = "PutRetentionPolicyCommand"
   let make = (~folderConfigurations, ~name, ~organizationId, ~description=?, ~id=?, ()) =>
     new({
@@ -1650,6 +1995,66 @@ module ListOrganizations = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module ListMobileDeviceAccessOverrides = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The maximum number of results to return in a single call.</p>") @as("MaxResults")
+    maxResults: option<maxResults>,
+    @ocaml.doc(
+      "<p>The token to use to retrieve the next page of results. The first call does not require a token.</p>"
+    )
+    @as("NextToken")
+    nextToken: option<nextToken>,
+    @ocaml.doc("<p>The mobile device to which the access override applies.</p>") @as("DeviceId")
+    deviceId: option<deviceId>,
+    @ocaml.doc("<p>The WorkMail user under which you list the mobile device access overrides. Accepts the following types of user identities:</p>
+         <ul>
+            <li>
+               <p>User ID: <code>12345678-1234-1234-1234-123456789012</code> or <code>S-1-1-12-1234567890-123456789-123456789-1234</code> 
+               </p>
+            </li>
+            <li>
+               <p>Email address: <code>user@domain.tld</code>
+               </p>
+            </li>
+            <li>
+               <p>User name: <code>user</code>
+               </p>
+            </li>
+         </ul>")
+    @as("UserId")
+    userId: option<entityIdentifier>,
+    @ocaml.doc(
+      "<p>The Amazon WorkMail organization under which to list mobile device access overrides.</p>"
+    )
+    @as("OrganizationId")
+    organizationId: organizationId,
+  }
+  type response = {
+    @ocaml.doc(
+      "<p>The token to use to retrieve the next page of results. The value is “null” when there are no more results to return.</p>"
+    )
+    @as("NextToken")
+    nextToken: option<nextToken>,
+    @ocaml.doc(
+      "<p>The list of mobile device access overrides that exist for the specified Amazon WorkMail organization and user.</p>"
+    )
+    @as("Overrides")
+    overrides: option<mobileDeviceAccessOverridesList>,
+  }
+  @module("@aws-sdk/client-workmail") @new
+  external new: request => t = "ListMobileDeviceAccessOverridesCommand"
+  let make = (~organizationId, ~maxResults=?, ~nextToken=?, ~deviceId=?, ~userId=?, ()) =>
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      deviceId: deviceId,
+      userId: userId,
+      organizationId: organizationId,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module ListMailboxExportJobs = {
   type t
   type request = {
@@ -1668,6 +2073,38 @@ module ListMailboxExportJobs = {
   external new: request => t = "ListMailboxExportJobsCommand"
   let make = (~organizationId, ~maxResults=?, ~nextToken=?, ()) =>
     new({maxResults: maxResults, nextToken: nextToken, organizationId: organizationId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module ListMailDomains = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>The token to use to retrieve the next page of results. The first call does not require a token.</p>"
+    )
+    @as("NextToken")
+    nextToken: option<nextToken>,
+    @ocaml.doc("<p>The maximum number of results to return in a single call.</p>") @as("MaxResults")
+    maxResults: option<maxResults>,
+    @ocaml.doc("<p>The Amazon WorkMail organization for which to list domains.</p>")
+    @as("OrganizationId")
+    organizationId: organizationId,
+  }
+  type response = {
+    @ocaml.doc(
+      "<p>The token to use to retrieve the next page of results. The value becomes <code>null</code> when there are no more results to return.</p>"
+    )
+    @as("NextToken")
+    nextToken: option<nextToken>,
+    @ocaml.doc(
+      "<p>The list of mail domain summaries, specifying domains that exist in the specified Amazon WorkMail  organization, along with the information about whether the domain is or isn't the default.</p>"
+    )
+    @as("MailDomains")
+    mailDomains: option<mailDomains>,
+  }
+  @module("@aws-sdk/client-workmail") @new external new: request => t = "ListMailDomainsCommand"
+  let make = (~organizationId, ~nextToken=?, ~maxResults=?, ()) =>
+    new({nextToken: nextToken, maxResults: maxResults, organizationId: organizationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1778,6 +2215,40 @@ module GetMobileDeviceAccessEffect = {
       deviceType: deviceType,
       organizationId: organizationId,
     })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module GetMailDomain = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The domain from which you want to retrieve details.</p>") @as("DomainName")
+    domainName: workMailDomainName,
+    @ocaml.doc("<p>The Amazon WorkMail organization for which the domain is retrieved.</p>")
+    @as("OrganizationId")
+    organizationId: organizationId,
+  }
+  type response = {
+    @ocaml.doc("<p>Indicates the status of a DKIM verification.</p>") @as("DkimVerificationStatus")
+    dkimVerificationStatus: option<dnsRecordVerificationStatus>,
+    @ocaml.doc("<p> Indicates the status of the domain ownership verification.</p>")
+    @as("OwnershipVerificationStatus")
+    ownershipVerificationStatus: option<dnsRecordVerificationStatus>,
+    @ocaml.doc("<p>Specifies whether the domain is the default domain for your organization.</p>")
+    @as("IsDefault")
+    isDefault: option<boolean_>,
+    @ocaml.doc(
+      "<p>Specifies whether the domain is a test domain provided by WorkMail, or a custom domain.</p>"
+    )
+    @as("IsTestDomain")
+    isTestDomain: option<boolean_>,
+    @ocaml.doc("<p>A list of the DNS records that Amazon WorkMail recommends adding in your DNS provider for the best user experience. The records configure your domain with DMARC, SPF, DKIM, and direct incoming 
+         email traffic to SES. See admin guide for more details.</p>")
+    @as("Records")
+    records: option<dnsRecords>,
+  }
+  @module("@aws-sdk/client-workmail") @new external new: request => t = "GetMailDomainCommand"
+  let make = (~domainName, ~organizationId, ()) =>
+    new({domainName: domainName, organizationId: organizationId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

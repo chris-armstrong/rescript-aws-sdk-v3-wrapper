@@ -14,6 +14,7 @@ type baseBoolean = bool
 type baseInteger = int
 type baseTimestamp = Js.Date.t
 type baseLong = float
+type versionName = string
 type timestamp_ = Js.Date.t
 type tagValue = string
 type tagKey = string
@@ -27,6 +28,7 @@ type syntaxLanguageCode = [
 ]
 type subnetId = string
 type string_ = string
+type split = [@as("TEST") #TEST | @as("TRAIN") #TRAIN]
 type sentimentType = [
   | @as("MIXED") #MIXED
   | @as("NEUTRAL") #NEUTRAL
@@ -35,6 +37,8 @@ type sentimentType = [
 ]
 type securityGroupId = string
 type s3Uri = string
+type policyRevisionId = string
+type policy = string
 type piiEntityType = [
   | @as("ALL") #ALL
   | @as("MAC_ADDRESS") #MAC_ADDRESS
@@ -161,6 +165,29 @@ type endpointStatus = [
   | @as("CREATING") #CREATING
 ]
 type double = float
+type documentReadMode = [
+  | @as("FORCE_DOCUMENT_READ_ACTION") #FORCE_DOCUMENT_READ_ACTION
+  | @as("SERVICE_DEFAULT") #SERVICE_DEFAULT
+]
+@ocaml.doc("<p>A list of the types of analyses to perform. This field specifies what feature types
+      need to be extracted from the document where entity recognition is expected.</p>
+
+         <ul>
+            <li>
+               <p>
+                  <code>TABLES</code> - Add TABLES to the list to return information about the tables
+          that are detected in the input document. </p>
+            </li>
+            <li>
+               <p>
+                  <code>FORMS</code> - Add FORMS to return detected form data. </p>
+            </li>
+         </ul>")
+type documentReadFeatureTypes = [@as("FORMS") #FORMS | @as("TABLES") #TABLES]
+type documentReadAction = [
+  | @as("TEXTRACT_ANALYZE_DOCUMENT") #TEXTRACT_ANALYZE_DOCUMENT
+  | @as("TEXTRACT_DETECT_DOCUMENT_TEXT") #TEXTRACT_DETECT_DOCUMENT_TEXT
+]
 type documentClassifierMode = [@as("MULTI_LABEL") #MULTI_LABEL | @as("MULTI_CLASS") #MULTI_CLASS]
 type documentClassifierEndpointArn = string
 type documentClassifierDataFormat = [
@@ -175,6 +202,10 @@ type comprehendEndpointArn = string
 type comprehendArnName = string
 type comprehendArn = string
 type clientRequestTokenString = string
+type augmentedManifestsDocumentTypeFormat = [
+  | @as("SEMI_STRUCTURED_DOCUMENT") #SEMI_STRUCTURED_DOCUMENT
+  | @as("PLAIN_TEXT_DOCUMENT") #PLAIN_TEXT_DOCUMENT
+]
 type attributeNamesListItem = string
 type anyLengthString = string
 @ocaml.doc("<p>Provides information for filtering topic detection jobs. For more information, see
@@ -195,6 +226,25 @@ type topicsDetectionJobFilter = {
   @as("JobStatus")
   jobStatus: option<jobStatus>,
   @ocaml.doc("<p></p>") @as("JobName") jobName: option<jobName>,
+}
+@ocaml.doc("<p>Provides information for filtering a list of dominant language detection jobs. For more
+      information, see the  operation.</p>")
+type targetedSentimentDetectionJobFilter = {
+  @ocaml.doc("<p>Filters the list of jobs based on the time that the job was submitted for processing.
+      Returns only jobs submitted after the specified time. Jobs are returned in descending order,
+      newest to oldest.</p>")
+  @as("SubmitTimeAfter")
+  submitTimeAfter: option<timestamp_>,
+  @ocaml.doc("<p>Filters the list of jobs based on the time that the job was submitted for processing.
+      Returns only jobs submitted before the specified time. Jobs are returned in ascending order,
+      oldest to newest.</p>")
+  @as("SubmitTimeBefore")
+  submitTimeBefore: option<timestamp_>,
+  @ocaml.doc("<p>Filters the list of jobs based on job status. Returns only jobs with the specified
+      status.</p>")
+  @as("JobStatus")
+  jobStatus: option<jobStatus>,
+  @ocaml.doc("<p>Filters on the name of the job.</p>") @as("JobName") jobName: option<jobName>,
 }
 type targetEventTypes = array<eventTypeString>
 type tagKeyList = array<tagKey>
@@ -263,7 +313,11 @@ type piiOutputDataConfig = {
   @as("KmsKeyId")
   kmsKeyId: option<kmsKeyId>,
   @ocaml.doc("<p>When you use the <code>PiiOutputDataConfig</code> object with asynchronous operations,
-      you specify the Amazon S3 location where you want to write the output data. </p>")
+      you specify the Amazon S3 location where you want to write the output data. </p>
+         <p>
+      For a PII entity detection job, the output file is plain text, not a compressed archive. 
+      The output file name is the same as the input file, with <code>.out</code> appended at the end.
+    </p>")
   @as("S3Uri")
   s3Uri: s3Uri,
 }
@@ -317,7 +371,7 @@ type partOfSpeechTag = {
   @ocaml.doc("<p>Identifies the part of speech that the token represents.</p>") @as("Tag")
   tag: option<partOfSpeechTagType>,
 }
-@ocaml.doc("<p>Provides configuration parameters for the output of topic detection jobs.</p>
+@ocaml.doc("<p>Provides configuration parameters for the output of inference jobs.</p>
          <p></p>")
 type outputDataConfig = {
   @ocaml.doc("<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt the
@@ -351,11 +405,16 @@ type outputDataConfig = {
          <p>When the topic detection job is finished, the service creates an output file in a
       directory specific to the job. The <code>S3Uri</code> field contains the location of the
       output file, called <code>output.tar.gz</code>. It is a compressed archive that contains the
-      ouput of the operation.</p>")
+      ouput of the operation.</p>
+         <p>
+      For a PII entity detection job, the output file is plain text, not a compressed archive. 
+      The output file name is the same as the input file, with <code>.out</code> appended at the end.
+    </p>")
   @as("S3Uri")
   s3Uri: s3Uri,
 }
 type listOfPiiEntityTypes = array<piiEntityType>
+type listOfDocumentReadFeatureTypes = array<documentReadFeatureTypes>
 @ocaml.doc("<p>Provides information for filtering a list of dominant language detection jobs. For more
       information, see the  operation.</p>")
 type keyPhrasesDetectionJobFilter = {
@@ -395,34 +454,6 @@ type keyPhrase = {
       detection.</p>")
   @as("Score")
   score: option<float_>,
-}
-@ocaml.doc("<p>The input properties for a topic detection job.</p>")
-type inputDataConfig = {
-  @ocaml.doc("<p>Specifies how the text in an input file should be processed:</p>
-         <ul>
-            <li>
-               <p>
-                  <code>ONE_DOC_PER_FILE</code> - Each file is considered a separate document. Use
-          this option when you are processing large documents, such as newspaper articles or
-          scientific papers.</p>
-            </li>
-            <li>
-               <p>
-                  <code>ONE_DOC_PER_LINE</code> - Each line in a file is considered a separate
-          document. Use this option when you are processing many short documents, such as text
-          messages.</p>
-            </li>
-         </ul>")
-  @as("InputFormat")
-  inputFormat: option<inputFormat>,
-  @ocaml.doc("<p>The Amazon S3 URI for the input data. The URI must be in same region as the API
-      endpoint that you are calling. The URI can point to a single input file or it can provide the
-      prefix for a collection of data files. </p>
-         <p>For example, if you use the URI <code>S3://bucketName/prefix</code>, if the prefix is a
-      single file, Amazon Comprehend uses that file as input. If more than one file begins with the
-      prefix, Amazon Comprehend uses all of them as input.</p>")
-  @as("S3Uri")
-  s3Uri: s3Uri,
 }
 @ocaml.doc("<p>Provides information for filtering a list of event detection jobs.</p>")
 type eventsDetectionJobFilter = {
@@ -473,6 +504,24 @@ type entityTypesEvaluationMetrics = {
   @as("Precision")
   precision: option<double>,
 }
+@ocaml.doc("<p> Describes the information about an entity recognizer and its versions.</p>")
+type entityRecognizerSummary = {
+  @ocaml.doc("<p> Provides the status of the latest entity recognizer version.</p>")
+  @as("LatestVersionStatus")
+  latestVersionStatus: option<modelStatus>,
+  @ocaml.doc("<p> The version name you assigned to the latest entity recognizer version.</p>")
+  @as("LatestVersionName")
+  latestVersionName: option<versionName>,
+  @ocaml.doc(
+    "<p> The time that the latest entity recognizer version was submitted for processing.</p>"
+  )
+  @as("LatestVersionCreatedAt")
+  latestVersionCreatedAt: option<timestamp_>,
+  @ocaml.doc("<p> The number of versions you created.</p>") @as("NumberOfVersions")
+  numberOfVersions: option<integer_>,
+  @ocaml.doc("<p> The name that you assigned the entity recognizer.</p>") @as("RecognizerName")
+  recognizerName: option<comprehendArnName>,
+}
 @ocaml.doc("<p>Provides information for filtering a list of entity recognizers. You can only specify one
       filtering parameter in a request. For more information, see the  operation./></p>")
 type entityRecognizerFilter = {
@@ -486,6 +535,8 @@ type entityRecognizerFilter = {
       newest to oldest.</p>")
   @as("SubmitTimeBefore")
   submitTimeBefore: option<timestamp_>,
+  @ocaml.doc("<p>The name that you assigned the entity recognizer.</p>") @as("RecognizerName")
+  recognizerName: option<comprehendArnName>,
   @ocaml.doc("<p>The status of an entity recognizer.</p>") @as("Status")
   status: option<modelStatus>,
 }
@@ -493,7 +544,10 @@ type entityRecognizerFilter = {
 type entityRecognizerEvaluationMetrics = {
   @ocaml.doc("<p>A measure of how accurate the recognizer results are for the test data. It is derived from
       the <code>Precision</code> and <code>Recall</code> values. The <code>F1Score</code> is the
-      harmonic average of the two scores. The highest score is 1, and the worst score is 0. </p>")
+      harmonic average of the two scores. For plain text entity recognizer models, the range is 0 to 100, 
+      where 100 is the best score. For PDF/Word entity recognizer models, the range is 0 to 1, 
+      where 1 is the best score.   
+    </p>")
   @as("F1Score")
   f1Score: option<double>,
   @ocaml.doc("<p>A measure of how complete the recognizer results are for the test data. High recall means
@@ -515,6 +569,18 @@ type entityRecognizerEntityList = {
 }
 @ocaml.doc("<p>Describes the training documents submitted with an entity recognizer.</p>")
 type entityRecognizerDocuments = {
+  @ocaml.doc("<p> Specifies how the text in an input file should be processed. This is optional, and the
+      default is ONE_DOC_PER_LINE. ONE_DOC_PER_FILE - Each file is considered a separate document.
+      Use this option when you are processing large documents, such as newspaper articles or
+      scientific papers. ONE_DOC_PER_LINE - Each line in a file is considered a separate document.
+      Use this option when you are processing many short documents, such as text messages.</p>")
+  @as("InputFormat")
+  inputFormat: option<inputFormat>,
+  @ocaml.doc("<p> Specifies the Amazon S3 location where the test documents for an entity recognizer are
+      located. The URI must be in the same AWS Region as the API endpoint that you are
+      calling.</p>")
+  @as("TestS3Uri")
+  testS3Uri: option<s3Uri>,
   @ocaml.doc("<p> Specifies the Amazon S3 location where the training documents for an entity recognizer
       are located. The URI must be in the same region as the API endpoint that you are
       calling.</p>")
@@ -523,6 +589,11 @@ type entityRecognizerDocuments = {
 }
 @ocaml.doc("<p>Describes the annotations associated with a entity recognizer.</p>")
 type entityRecognizerAnnotations = {
+  @ocaml.doc("<p>This specifies the Amazon S3 location where the test annotations for an entity recognizer
+      are located. The URI must be in the same AWS Region as the API endpoint that you are
+      calling.</p>")
+  @as("TestS3Uri")
+  testS3Uri: option<s3Uri>,
   @ocaml.doc("<p> Specifies the Amazon S3 location where the annotations for an entity recognizer are
       located. The URI must be in the same region as the API endpoint that you are calling.</p>")
   @as("S3Uri")
@@ -581,6 +652,10 @@ type entitiesDetectionJobFilter = {
 }
 @ocaml.doc("<p>Specifies information about the specified endpoint.</p>")
 type endpointProperties = {
+  @ocaml.doc("<p>Data access role ARN to use in case the new model is encrypted with a customer KMS
+      key.</p>")
+  @as("DesiredDataAccessRoleArn")
+  desiredDataAccessRoleArn: option<iamRoleArn>,
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the AWS identity and Access Management (IAM) role that
       grants Amazon Comprehend read access to trained custom models encrypted with a customer
       managed key (ModelKmsKeyId).</p>")
@@ -601,6 +676,10 @@ type endpointProperties = {
       Each inference unit represents of a throughput of 100 characters per second.</p>")
   @as("DesiredInferenceUnits")
   desiredInferenceUnits: option<inferenceUnitsInteger>,
+  @ocaml.doc("<p>ARN of the new model to use for updating an existing endpoint. This ARN is going to be
+      different from the model ARN when the update is in progress</p>")
+  @as("DesiredModelArn")
+  desiredModelArn: option<comprehendModelArn>,
   @ocaml.doc(
     "<p>The Amazon Resource Number (ARN) of the model to which the endpoint is attached.</p>"
   )
@@ -640,7 +719,8 @@ type endpointFilter = {
   modelArn: option<comprehendModelArn>,
 }
 @ocaml.doc("<p>Provides information for filtering a list of dominant language detection jobs. For more
-      information, see the  operation.</p>")
+      information, see the 
+      operation.</p>")
 type dominantLanguageDetectionJobFilter = {
   @ocaml.doc("<p>Filters the list of jobs based on the time that the job was submitted for processing.
       Returns only jobs submitted after the specified time. Jobs are returned in descending order,
@@ -681,6 +761,25 @@ type documentLabel = {
   @as("Score")
   score: option<float_>,
   @ocaml.doc("<p>The name of the label.</p>") @as("Name") name: option<string_>,
+}
+@ocaml.doc("<p>Describes information about a document classifier and its versions.</p>")
+type documentClassifierSummary = {
+  @ocaml.doc("<p>Provides the status of the latest document classifier version.</p>")
+  @as("LatestVersionStatus")
+  latestVersionStatus: option<modelStatus>,
+  @ocaml.doc("<p>The version name you assigned to the latest document classifier version.</p>")
+  @as("LatestVersionName")
+  latestVersionName: option<versionName>,
+  @ocaml.doc(
+    "<p>The time that the latest document classifier version was submitted for processing.</p>"
+  )
+  @as("LatestVersionCreatedAt")
+  latestVersionCreatedAt: option<timestamp_>,
+  @ocaml.doc("<p>The number of versions you created.</p>") @as("NumberOfVersions")
+  numberOfVersions: option<integer_>,
+  @ocaml.doc("<p>The name that you assigned the document classifier.</p>")
+  @as("DocumentClassifierName")
+  documentClassifierName: option<comprehendArnName>,
 }
 @ocaml.doc("<p>Provides output results configuration parameters for custom classifier jobs. </p>")
 type documentClassifierOutputDataConfig = {
@@ -732,6 +831,9 @@ type documentClassifierFilter = {
       returned in ascending order, oldest to newest.</p>")
   @as("SubmitTimeBefore")
   submitTimeBefore: option<timestamp_>,
+  @ocaml.doc("<p>The name that you assigned to the document classifier</p>")
+  @as("DocumentClassifierName")
+  documentClassifierName: option<comprehendArnName>,
   @ocaml.doc("<p>Filters the list of classifiers based on status.</p>") @as("Status")
   status: option<modelStatus>,
 }
@@ -886,39 +988,8 @@ type listOfEntityLabels = array<entityLabel>
 type listOfEntities = array<entity>
 type listOfDominantLanguages = array<dominantLanguage>
 type listOfClasses = array<documentClass>
-@ocaml.doc("<p>Provides information about an events detection job.</p>")
-type eventsDetectionJobProperties = {
-  @ocaml.doc("<p>The types of events that are detected by the job.</p>") @as("TargetEventTypes")
-  targetEventTypes: option<targetEventTypes>,
-  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the AWS Identify and Access Management (IAM) role that
-      grants Amazon Comprehend read access to your input data.</p>")
-  @as("DataAccessRoleArn")
-  dataAccessRoleArn: option<iamRoleArn>,
-  @ocaml.doc("<p>The language code of the input documents.</p>") @as("LanguageCode")
-  languageCode: option<languageCode>,
-  @ocaml.doc("<p>The output data configuration that you supplied when you created the events detection
-      job.</p>")
-  @as("OutputDataConfig")
-  outputDataConfig: option<outputDataConfig>,
-  @ocaml.doc("<p>The input data configuration that you supplied when you created the events detection
-      job.</p>")
-  @as("InputDataConfig")
-  inputDataConfig: option<inputDataConfig>,
-  @ocaml.doc("<p>The time that the events detection job completed.</p>") @as("EndTime")
-  endTime: option<timestamp_>,
-  @ocaml.doc("<p>The time that the events detection job was submitted for processing.</p>")
-  @as("SubmitTime")
-  submitTime: option<timestamp_>,
-  @ocaml.doc("<p>A description of the status of the events detection job.</p>") @as("Message")
-  message: option<anyLengthString>,
-  @ocaml.doc("<p>The current status of the events detection job.</p>") @as("JobStatus")
-  jobStatus: option<jobStatus>,
-  @ocaml.doc("<p>The name you assigned the events detection job.</p>") @as("JobName")
-  jobName: option<jobName>,
-  @ocaml.doc("<p>The identifier assigned to the events detection job.</p>") @as("JobId")
-  jobId: option<jobId>,
-}
 type entityTypesList = array<entityTypesListItem>
+type entityRecognizerSummariesList = array<entityRecognizerSummary>
 @ocaml.doc("<p>Individual item from the list of entity types in the metadata of an entity
       recognizer.</p>")
 type entityRecognizerMetadataEntityTypesListItem = {
@@ -937,6 +1008,43 @@ type entityRecognizerMetadataEntityTypesListItem = {
   type_: option<anyLengthString>,
 }
 type endpointPropertiesList = array<endpointProperties>
+@ocaml.doc("<p>The input properties for a topic detection job.</p>")
+type documentReaderConfig = {
+  @ocaml.doc("<p>Specifies how the text in an input file should be processed:</p>")
+  @as("FeatureTypes")
+  featureTypes: option<listOfDocumentReadFeatureTypes>,
+  @ocaml.doc("<p>This enum field provides two values:</p>
+         <ul>
+            <li>
+               <p>
+                  <code>SERVICE_DEFAULT</code> - use service defaults for Document reading. For
+          Digital PDF it would mean using an internal parser instead of Textract APIs</p>
+            </li>
+            <li>
+               <p>
+                  <code>FORCE_DOCUMENT_READ_ACTION</code> - Always use specified action for
+          DocumentReadAction, including Digital PDF. </p>
+            </li>
+         </ul>")
+  @as("DocumentReadMode")
+  documentReadMode: option<documentReadMode>,
+  @ocaml.doc("<p>This enum field will start with two values which will apply to PDFs:</p>
+         <ul>
+            <li>
+               <p>
+                  <code>TEXTRACT_DETECT_DOCUMENT_TEXT</code> - The service calls DetectDocumentText
+          for PDF documents per page.</p>
+            </li>
+            <li>
+               <p>
+                  <code>TEXTRACT_ANALYZE_DOCUMENT</code> - The service calls AnalyzeDocument for PDF
+          documents per page.</p>
+            </li>
+         </ul>")
+  @as("DocumentReadAction")
+  documentReadAction: documentReadAction,
+}
+type documentClassifierSummariesList = array<documentClassifierSummary>
 @ocaml.doc("<p>Provides information about a document classifier.</p>")
 type classifierMetadata = {
   @ocaml.doc("<p> Describes the result metrics for the test data associated with an documentation
@@ -971,6 +1079,31 @@ type batchDetectSentimentItemResult = {
 @ocaml.doc("<p>An augmented manifest file that provides training data for your custom model. An augmented
       manifest file is a labeled dataset that is produced by Amazon SageMaker Ground Truth.</p>")
 type augmentedManifestsListItem = {
+  @ocaml.doc("<p>The type of augmented manifest. PlainTextDocument or SemiStructuredDocument. If you don't
+      specify, the default is PlainTextDocument. </p>
+         <ul>
+            <li>
+               <p>
+                  <code>PLAIN_TEXT_DOCUMENT</code> A document type that represents any unicode text that
+          is encoded in UTF-8.</p>
+            </li>
+            <li>
+               <p>
+                  <code>SEMI_STRUCTURED_DOCUMENT</code> A document type with positional and structural
+          context, like a PDF. For training with Amazon Comprehend, only PDFs are supported. For
+          inference, Amazon Comprehend support PDFs, DOCX and TXT.</p>
+            </li>
+         </ul>")
+  @as("DocumentType")
+  documentType: option<augmentedManifestsDocumentTypeFormat>,
+  @ocaml.doc("<p>The S3 prefix to the source files (PDFs) that are referred to in the augmented manifest
+      file.</p>")
+  @as("SourceDocumentsS3Uri")
+  sourceDocumentsS3Uri: option<s3Uri>,
+  @ocaml.doc("<p>The S3 prefix to the annotation files that are referred in the augmented manifest
+      file.</p>")
+  @as("AnnotationDataS3Uri")
+  annotationDataS3Uri: option<s3Uri>,
   @ocaml.doc("<p>The JSON attribute that contains the annotations for your training documents. The number
       of attribute names that you specify depends on whether your augmented manifest file is the
       output of a single labeling job or a chained labeling job.</p>
@@ -981,8 +1114,89 @@ type augmentedManifestsListItem = {
       an individual job.</p>")
   @as("AttributeNames")
   attributeNames: attributeNamesList,
+  @ocaml.doc("<p>The purpose of the data you've provided in the augmented manifest. You can either train or
+      test this data. If you don't specify, the default is train.</p>
+         <p>TRAIN - all of the documents in the manifest will be used for training. If no test
+      documents are provided, Amazon Comprehend will automatically reserve a portion of the training
+      documents for testing.</p>
+         <p> TEST - all of the documents in the manifest will be used for testing.</p>")
+  @as("Split")
+  split: option<split>,
   @ocaml.doc("<p>The Amazon S3 location of the augmented manifest file.</p>") @as("S3Uri")
   s3Uri: s3Uri,
+}
+type listOfSyntaxTokens = array<syntaxToken>
+type listOfDetectSentimentResult = array<batchDetectSentimentItemResult>
+@ocaml.doc("<p>The input properties for an inference job.</p>")
+type inputDataConfig = {
+  @ocaml.doc("<p>The document reader config field applies only for InputDataConfig of
+      StartEntitiesDetectionJob. </p>
+         <p>Use DocumentReaderConfig to provide specifications about how you want your inference
+      documents read. Currently it applies for PDF documents in StartEntitiesDetectionJob custom
+      inference.</p>")
+  @as("DocumentReaderConfig")
+  documentReaderConfig: option<documentReaderConfig>,
+  @ocaml.doc("<p>Specifies how the text in an input file should be processed:</p>
+         <ul>
+            <li>
+               <p>
+                  <code>ONE_DOC_PER_FILE</code> - Each file is considered a separate document. Use
+          this option when you are processing large documents, such as newspaper articles or
+          scientific papers.</p>
+            </li>
+            <li>
+               <p>
+                  <code>ONE_DOC_PER_LINE</code> - Each line in a file is considered a separate
+          document. Use this option when you are processing many short documents, such as text
+          messages.</p>
+            </li>
+         </ul>")
+  @as("InputFormat")
+  inputFormat: option<inputFormat>,
+  @ocaml.doc("<p>The Amazon S3 URI for the input data. The URI must be in same region as the API
+      endpoint that you are calling. The URI can point to a single input file or it can provide the
+      prefix for a collection of data files. </p>
+         <p>For example, if you use the URI <code>S3://bucketName/prefix</code>, if the prefix is a
+      single file, Amazon Comprehend uses that file as input. If more than one file begins with the
+      prefix, Amazon Comprehend uses all of them as input.</p>")
+  @as("S3Uri")
+  s3Uri: s3Uri,
+}
+type entityRecognizerMetadataEntityTypesList = array<entityRecognizerMetadataEntityTypesListItem>
+type entityRecognizerAugmentedManifestsList = array<augmentedManifestsListItem>
+type documentClassifierAugmentedManifestsList = array<augmentedManifestsListItem>
+@ocaml.doc("<p>The result of calling the  operation. The
+      operation returns one object for each document that is successfully processed by the
+      operation.</p>")
+type batchDetectKeyPhrasesItemResult = {
+  @ocaml.doc("<p>One or more <a>KeyPhrase</a> objects, one for each key phrase detected in
+      the document.</p>")
+  @as("KeyPhrases")
+  keyPhrases: option<listOfKeyPhrases>,
+  @ocaml.doc("<p>The zero-based index of the document in the input list.</p>") @as("Index")
+  index: option<integer_>,
+}
+@ocaml.doc("<p>The result of calling the  operation. The
+      operation returns one object for each document that is successfully processed by the
+      operation.</p>")
+type batchDetectEntitiesItemResult = {
+  @ocaml.doc("<p>One or more <a>Entity</a> objects, one for each entity detected in the
+      document.</p>")
+  @as("Entities")
+  entities: option<listOfEntities>,
+  @ocaml.doc("<p>The zero-based index of the document in the input list.</p>") @as("Index")
+  index: option<integer_>,
+}
+@ocaml.doc("<p>The result of calling the  operation.
+      The operation returns one object for each document that is successfully processed by the
+      operation.</p>")
+type batchDetectDominantLanguageItemResult = {
+  @ocaml.doc("<p>One or more <a>DominantLanguage</a> objects describing the dominant
+      languages in the document.</p>")
+  @as("Languages")
+  languages: option<listOfDominantLanguages>,
+  @ocaml.doc("<p>The zero-based index of the document in the input list.</p>") @as("Index")
+  index: option<integer_>,
 }
 @ocaml.doc("<p>Provides information about a topic detection job.</p>")
 type topicsDetectionJobProperties = {
@@ -1035,7 +1249,77 @@ type topicsDetectionJobProperties = {
   @as("JobStatus")
   jobStatus: option<jobStatus>,
   @ocaml.doc("<p>The name of the topic detection job.</p>") @as("JobName") jobName: option<jobName>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the topics detection job. It is a unique, fully
+      qualified identifier for the job. It includes the AWS account, Region, and the job ID. The
+      format of the ARN is as follows:</p>
+         <p>
+            <code>arn:<partition>:comprehend:<region>:<account-id>:topics-detection-job/<job-id></code>
+         </p>
+         <p>The following is an example job ARN:</p>
+         <p>
+            <code>arn:aws:comprehend:us-west-2:111122223333:topics-detection-job/1234abcd12ab34cd56ef1234567890ab</code>
+         </p>")
+  @as("JobArn")
+  jobArn: option<comprehendArn>,
   @ocaml.doc("<p>The identifier assigned to the topic detection job.</p>") @as("JobId")
+  jobId: option<jobId>,
+}
+@ocaml.doc("<p>Provides information about a targeted sentiment detection job.</p>")
+type targetedSentimentDetectionJobProperties = {
+  @as("VpcConfig") vpcConfig: option<vpcConfig>,
+  @ocaml.doc("<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt
+      data on the storage volume attached to the ML compute instance(s) that process the  
+      targeted sentiment detection job. The VolumeKmsKeyId can be either of the following formats:</p>
+         <ul>
+            <li>
+               <p>KMS Key ID: <code>\"1234abcd-12ab-34cd-56ef-1234567890ab\"</code>
+               </p>
+            </li>
+            <li>
+               <p>Amazon Resource Name (ARN) of a KMS Key:
+          <code>\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</code>
+               </p>
+            </li>
+         </ul>")
+  @as("VolumeKmsKeyId")
+  volumeKmsKeyId: option<kmsKeyId>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) that gives Amazon Comprehend read access to your input
+      data.</p>")
+  @as("DataAccessRoleArn")
+  dataAccessRoleArn: option<iamRoleArn>,
+  @ocaml.doc("<p>The language code of the input documents.</p>") @as("LanguageCode")
+  languageCode: option<languageCode>,
+  @as("OutputDataConfig") outputDataConfig: option<outputDataConfig>,
+  @as("InputDataConfig") inputDataConfig: option<inputDataConfig>,
+  @ocaml.doc("<p>The time that the targeted sentiment detection job ended.</p>") @as("EndTime")
+  endTime: option<timestamp_>,
+  @ocaml.doc(
+    "<p>The time that the targeted sentiment detection job was submitted for processing.</p>"
+  )
+  @as("SubmitTime")
+  submitTime: option<timestamp_>,
+  @ocaml.doc("<p>A description of the status of a job.</p>") @as("Message")
+  message: option<anyLengthString>,
+  @ocaml.doc("<p>The current status of the targeted sentiment detection job. If the status is <code>FAILED</code>,
+      the <code>Messages</code> field shows the reason for the failure.</p>")
+  @as("JobStatus")
+  jobStatus: option<jobStatus>,
+  @ocaml.doc("<p>The name that you assigned to the targeted sentiment detection job.</p>")
+  @as("JobName")
+  jobName: option<jobName>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the targeted sentiment detection job. It is a unique, fully
+      qualified identifier for the job. It includes the AWS account, Region, and the job ID. The
+      format of the ARN is as follows:</p>
+         <p>
+            <code>arn:<partition>:comprehend:<region>:<account-id>:targeted-sentiment-detection-job/<job-id></code>
+         </p>
+         <p>The following is an example job ARN:</p>
+         <p>
+            <code>arn:aws:comprehend:us-west-2:111122223333:targeted-sentiment-detection-job/1234abcd12ab34cd56ef1234567890ab</code>
+         </p>")
+  @as("JobArn")
+  jobArn: option<comprehendArn>,
+  @ocaml.doc("<p>The identifier assigned to the targeted sentiment detection job.</p>") @as("JobId")
   jobId: option<jobId>,
 }
 @ocaml.doc("<p>Provides information about a sentiment detection job.</p>")
@@ -1088,6 +1372,18 @@ type sentimentDetectionJobProperties = {
   jobStatus: option<jobStatus>,
   @ocaml.doc("<p>The name that you assigned to the sentiment detection job</p>") @as("JobName")
   jobName: option<jobName>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the sentiment detection job. It is a unique, fully
+      qualified identifier for the job. It includes the AWS account, Region, and the job ID. The
+      format of the ARN is as follows:</p>
+         <p>
+            <code>arn:<partition>:comprehend:<region>:<account-id>:sentiment-detection-job/<job-id></code>
+         </p>
+         <p>The following is an example job ARN:</p>
+         <p>
+            <code>arn:aws:comprehend:us-west-2:111122223333:sentiment-detection-job/1234abcd12ab34cd56ef1234567890ab</code>
+         </p>")
+  @as("JobArn")
+  jobArn: option<comprehendArn>,
   @ocaml.doc("<p>The identifier assigned to the sentiment detection job.</p>") @as("JobId")
   jobId: option<jobId>,
 }
@@ -1128,11 +1424,24 @@ type piiEntitiesDetectionJobProperties = {
   jobStatus: option<jobStatus>,
   @ocaml.doc("<p>The name that you assigned the PII entities detection job.</p>") @as("JobName")
   jobName: option<jobName>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the PII entities detection job. It is a unique, fully
+      qualified identifier for the job. It includes the AWS account, Region, and the job ID. The
+      format of the ARN is as follows:</p>
+         <p>
+            <code>arn:<partition>:comprehend:<region>:<account-id>:pii-entities-detection-job/<job-id></code>
+         </p>
+         <p>The following is an example job ARN:</p>
+         <p>
+            <code>arn:aws:comprehend:us-west-2:111122223333:pii-entities-detection-job/1234abcd12ab34cd56ef1234567890ab</code>
+         </p>")
+  @as("JobArn")
+  jobArn: option<comprehendArn>,
   @ocaml.doc("<p>The identifier assigned to the PII entities detection job.</p>") @as("JobId")
   jobId: option<jobId>,
 }
-type listOfSyntaxTokens = array<syntaxToken>
-type listOfDetectSentimentResult = array<batchDetectSentimentItemResult>
+type listOfDetectKeyPhrasesResult = array<batchDetectKeyPhrasesItemResult>
+type listOfDetectEntitiesResult = array<batchDetectEntitiesItemResult>
+type listOfDetectDominantLanguageResult = array<batchDetectDominantLanguageItemResult>
 @ocaml.doc("<p>Provides information about a key phrases detection job.</p>")
 type keyPhrasesDetectionJobProperties = {
   @ocaml.doc("<p> Configuration parameters for a private Virtual Private Cloud (VPC) containing the
@@ -1183,218 +1492,65 @@ type keyPhrasesDetectionJobProperties = {
   jobStatus: option<jobStatus>,
   @ocaml.doc("<p>The name that you assigned the key phrases detection job.</p>") @as("JobName")
   jobName: option<jobName>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the key phrases detection job. It is a unique, fully
+      qualified identifier for the job. It includes the AWS account, Region, and the job ID. The
+      format of the ARN is as follows:</p>
+         <p>
+            <code>arn:<partition>:comprehend:<region>:<account-id>:key-phrases-detection-job/<job-id></code>
+         </p>
+         <p>The following is an example job ARN:</p>
+         <p>
+            <code>arn:aws:comprehend:us-west-2:111122223333:key-phrases-detection-job/1234abcd12ab34cd56ef1234567890ab</code>
+         </p>")
+  @as("JobArn")
+  jobArn: option<comprehendArn>,
   @ocaml.doc("<p>The identifier assigned to the key phrases detection job.</p>") @as("JobId")
   jobId: option<jobId>,
 }
-type eventsDetectionJobPropertiesList = array<eventsDetectionJobProperties>
-type entityRecognizerMetadataEntityTypesList = array<entityRecognizerMetadataEntityTypesListItem>
-type entityRecognizerAugmentedManifestsList = array<augmentedManifestsListItem>
-@ocaml.doc("<p>Provides information about an entities detection job.</p>")
-type entitiesDetectionJobProperties = {
-  @ocaml.doc("<p> Configuration parameters for a private Virtual Private Cloud (VPC) containing the
-      resources you are using for your entity detection job. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html\">Amazon
-        VPC</a>. </p>")
-  @as("VpcConfig")
-  vpcConfig: option<vpcConfig>,
-  @ocaml.doc("<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt
-      data on the storage volume attached to the ML compute instance(s) that process the analysis
-      job. The VolumeKmsKeyId can be either of the following formats:</p>
-         <ul>
-            <li>
-               <p>KMS Key ID: <code>\"1234abcd-12ab-34cd-56ef-1234567890ab\"</code>
-               </p>
-            </li>
-            <li>
-               <p>Amazon Resource Name (ARN) of a KMS Key:
-            <code>\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</code>
-               </p>
-            </li>
-         </ul>")
-  @as("VolumeKmsKeyId")
-  volumeKmsKeyId: option<kmsKeyId>,
-  @ocaml.doc("<p>The Amazon Resource Name (ARN) that gives Amazon Comprehend read access to your input
-      data.</p>")
+@ocaml.doc("<p>Provides information about an events detection job.</p>")
+type eventsDetectionJobProperties = {
+  @ocaml.doc("<p>The types of events that are detected by the job.</p>") @as("TargetEventTypes")
+  targetEventTypes: option<targetEventTypes>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the AWS Identify and Access Management (IAM) role that
+      grants Amazon Comprehend read access to your input data.</p>")
   @as("DataAccessRoleArn")
   dataAccessRoleArn: option<iamRoleArn>,
   @ocaml.doc("<p>The language code of the input documents.</p>") @as("LanguageCode")
   languageCode: option<languageCode>,
-  @ocaml.doc("<p>The output data configuration that you supplied when you created the entities detection
-      job. </p>")
+  @ocaml.doc("<p>The output data configuration that you supplied when you created the events detection
+      job.</p>")
   @as("OutputDataConfig")
   outputDataConfig: option<outputDataConfig>,
-  @ocaml.doc("<p>The input data configuration that you supplied when you created the entities detection
+  @ocaml.doc("<p>The input data configuration that you supplied when you created the events detection
       job.</p>")
   @as("InputDataConfig")
   inputDataConfig: option<inputDataConfig>,
-  @ocaml.doc("<p>The Amazon Resource Name (ARN) that identifies the entity recognizer.</p>")
-  @as("EntityRecognizerArn")
-  entityRecognizerArn: option<entityRecognizerArn>,
-  @ocaml.doc("<p>The time that the entities detection job completed</p>") @as("EndTime")
+  @ocaml.doc("<p>The time that the events detection job completed.</p>") @as("EndTime")
   endTime: option<timestamp_>,
-  @ocaml.doc("<p>The time that the entities detection job was submitted for processing.</p>")
+  @ocaml.doc("<p>The time that the events detection job was submitted for processing.</p>")
   @as("SubmitTime")
   submitTime: option<timestamp_>,
-  @ocaml.doc("<p>A description of the status of a job.</p>") @as("Message")
+  @ocaml.doc("<p>A description of the status of the events detection job.</p>") @as("Message")
   message: option<anyLengthString>,
-  @ocaml.doc("<p>The current status of the entities detection job. If the status is <code>FAILED</code>,
-      the <code>Message</code> field shows the reason for the failure.</p>")
-  @as("JobStatus")
+  @ocaml.doc("<p>The current status of the events detection job.</p>") @as("JobStatus")
   jobStatus: option<jobStatus>,
-  @ocaml.doc("<p>The name that you assigned the entities detection job.</p>") @as("JobName")
+  @ocaml.doc("<p>The name you assigned the events detection job.</p>") @as("JobName")
   jobName: option<jobName>,
-  @ocaml.doc("<p>The identifier assigned to the entities detection job.</p>") @as("JobId")
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the events detection job. It is a unique, fully
+      qualified identifier for the job. It includes the AWS account, Region, and the job ID. The
+      format of the ARN is as follows:</p>
+         <p>
+            <code>arn:<partition>:comprehend:<region>:<account-id>:events-detection-job/<job-id></code>
+         </p>
+         <p>The following is an example job ARN:</p>
+         <p>
+            <code>arn:aws:comprehend:us-west-2:111122223333:events-detection-job/1234abcd12ab34cd56ef1234567890ab</code>
+         </p>")
+  @as("JobArn")
+  jobArn: option<comprehendArn>,
+  @ocaml.doc("<p>The identifier assigned to the events detection job.</p>") @as("JobId")
   jobId: option<jobId>,
 }
-@ocaml.doc("<p>Provides information about a dominant language detection job.</p>")
-type dominantLanguageDetectionJobProperties = {
-  @ocaml.doc("<p> Configuration parameters for a private Virtual Private Cloud (VPC) containing the
-      resources you are using for your dominant language detection job. For more information, see
-        <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html\">Amazon
-        VPC</a>. </p>")
-  @as("VpcConfig")
-  vpcConfig: option<vpcConfig>,
-  @ocaml.doc("<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt
-      data on the storage volume attached to the ML compute instance(s) that process the analysis
-      job. The VolumeKmsKeyId can be either of the following formats:</p>
-         <ul>
-            <li>
-               <p>KMS Key ID: <code>\"1234abcd-12ab-34cd-56ef-1234567890ab\"</code>
-               </p>
-            </li>
-            <li>
-               <p>Amazon Resource Name (ARN) of a KMS Key:
-            <code>\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</code>
-               </p>
-            </li>
-         </ul>")
-  @as("VolumeKmsKeyId")
-  volumeKmsKeyId: option<kmsKeyId>,
-  @ocaml.doc("<p>The Amazon Resource Name (ARN) that gives Amazon Comprehend read access to your input
-      data.</p>")
-  @as("DataAccessRoleArn")
-  dataAccessRoleArn: option<iamRoleArn>,
-  @ocaml.doc("<p>The output data configuration that you supplied when you created the dominant language
-      detection job.</p>")
-  @as("OutputDataConfig")
-  outputDataConfig: option<outputDataConfig>,
-  @ocaml.doc("<p>The input data configuration that you supplied when you created the dominant language
-      detection job.</p>")
-  @as("InputDataConfig")
-  inputDataConfig: option<inputDataConfig>,
-  @ocaml.doc("<p>The time that the dominant language detection job completed.</p>") @as("EndTime")
-  endTime: option<timestamp_>,
-  @ocaml.doc(
-    "<p>The time that the dominant language detection job was submitted for processing.</p>"
-  )
-  @as("SubmitTime")
-  submitTime: option<timestamp_>,
-  @ocaml.doc("<p>A description for the status of a job.</p>") @as("Message")
-  message: option<anyLengthString>,
-  @ocaml.doc("<p>The current status of the dominant language detection job. If the status is
-        <code>FAILED</code>, the <code>Message</code> field shows the reason for the failure.</p>")
-  @as("JobStatus")
-  jobStatus: option<jobStatus>,
-  @ocaml.doc("<p>The name that you assigned to the dominant language detection job.</p>")
-  @as("JobName")
-  jobName: option<jobName>,
-  @ocaml.doc("<p>The identifier assigned to the dominant language detection job.</p>") @as("JobId")
-  jobId: option<jobId>,
-}
-type documentClassifierAugmentedManifestsList = array<augmentedManifestsListItem>
-@ocaml.doc("<p>Provides information about a document classification job.</p>")
-type documentClassificationJobProperties = {
-  @ocaml.doc("<p> Configuration parameters for a private Virtual Private Cloud (VPC) containing the
-      resources you are using for your document classification job. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html\">Amazon
-        VPC</a>. </p>")
-  @as("VpcConfig")
-  vpcConfig: option<vpcConfig>,
-  @ocaml.doc("<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt
-      data on the storage volume attached to the ML compute instance(s) that process the analysis
-      job. The VolumeKmsKeyId can be either of the following formats:</p>
-         <ul>
-            <li>
-               <p>KMS Key ID: <code>\"1234abcd-12ab-34cd-56ef-1234567890ab\"</code>
-               </p>
-            </li>
-            <li>
-               <p>Amazon Resource Name (ARN) of a KMS Key:
-            <code>\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</code>
-               </p>
-            </li>
-         </ul>")
-  @as("VolumeKmsKeyId")
-  volumeKmsKeyId: option<kmsKeyId>,
-  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the AWS identity and Access Management (IAM) role that
-      grants Amazon Comprehend read access to your input data.</p>")
-  @as("DataAccessRoleArn")
-  dataAccessRoleArn: option<iamRoleArn>,
-  @ocaml.doc("<p>The output data configuration that you supplied when you created the document
-      classification job.</p>")
-  @as("OutputDataConfig")
-  outputDataConfig: option<outputDataConfig>,
-  @ocaml.doc("<p>The input data configuration that you supplied when you created the document
-      classification job.</p>")
-  @as("InputDataConfig")
-  inputDataConfig: option<inputDataConfig>,
-  @ocaml.doc("<p>The Amazon Resource Name (ARN) that identifies the document classifier. </p>")
-  @as("DocumentClassifierArn")
-  documentClassifierArn: option<documentClassifierArn>,
-  @ocaml.doc("<p>The time that the document classification job completed.</p>") @as("EndTime")
-  endTime: option<timestamp_>,
-  @ocaml.doc("<p>The time that the document classification job was submitted for processing.</p>")
-  @as("SubmitTime")
-  submitTime: option<timestamp_>,
-  @ocaml.doc("<p>A description of the status of the job.</p>") @as("Message")
-  message: option<anyLengthString>,
-  @ocaml.doc("<p>The current status of the document classification job. If the status is
-        <code>FAILED</code>, the <code>Message</code> field shows the reason for the failure.</p>")
-  @as("JobStatus")
-  jobStatus: option<jobStatus>,
-  @ocaml.doc("<p>The name that you assigned to the document classification job.</p>") @as("JobName")
-  jobName: option<jobName>,
-  @ocaml.doc("<p>The identifier assigned to the document classification job.</p>") @as("JobId")
-  jobId: option<jobId>,
-}
-@ocaml.doc("<p>The result of calling the  operation. The
-      operation returns one object for each document that is successfully processed by the
-      operation.</p>")
-type batchDetectKeyPhrasesItemResult = {
-  @ocaml.doc("<p>One or more <a>KeyPhrase</a> objects, one for each key phrase detected in
-      the document.</p>")
-  @as("KeyPhrases")
-  keyPhrases: option<listOfKeyPhrases>,
-  @ocaml.doc("<p>The zero-based index of the document in the input list.</p>") @as("Index")
-  index: option<integer_>,
-}
-@ocaml.doc("<p>The result of calling the  operation. The
-      operation returns one object for each document that is successfully processed by the
-      operation.</p>")
-type batchDetectEntitiesItemResult = {
-  @ocaml.doc("<p>One or more <a>Entity</a> objects, one for each entity detected in the
-      document.</p>")
-  @as("Entities")
-  entities: option<listOfEntities>,
-  @ocaml.doc("<p>The zero-based index of the document in the input list.</p>") @as("Index")
-  index: option<integer_>,
-}
-@ocaml.doc("<p>The result of calling the  operation.
-      The operation returns one object for each document that is successfully processed by the
-      operation.</p>")
-type batchDetectDominantLanguageItemResult = {
-  @ocaml.doc("<p>One or more <a>DominantLanguage</a> objects describing the dominant
-      languages in the document.</p>")
-  @as("Languages")
-  languages: option<listOfDominantLanguages>,
-  @ocaml.doc("<p>The zero-based index of the document in the input list.</p>") @as("Index")
-  index: option<integer_>,
-}
-type topicsDetectionJobPropertiesList = array<topicsDetectionJobProperties>
-type sentimentDetectionJobPropertiesList = array<sentimentDetectionJobProperties>
-type piiEntitiesDetectionJobPropertiesList = array<piiEntitiesDetectionJobProperties>
-type listOfDetectKeyPhrasesResult = array<batchDetectKeyPhrasesItemResult>
-type listOfDetectEntitiesResult = array<batchDetectEntitiesItemResult>
-type listOfDetectDominantLanguageResult = array<batchDetectDominantLanguageItemResult>
-type keyPhrasesDetectionJobPropertiesList = array<keyPhrasesDetectionJobProperties>
 @ocaml.doc("<p>Detailed information about an entity recognizer.</p>")
 type entityRecognizerMetadata = {
   @ocaml.doc("<p>Entity types from the metadata of an entity recognizer.</p>") @as("EntityTypes")
@@ -1468,8 +1624,141 @@ type entityRecognizerInputDataConfig = {
   @as("DataFormat")
   dataFormat: option<entityRecognizerDataFormat>,
 }
-type entitiesDetectionJobPropertiesList = array<entitiesDetectionJobProperties>
-type dominantLanguageDetectionJobPropertiesList = array<dominantLanguageDetectionJobProperties>
+@ocaml.doc("<p>Provides information about an entities detection job.</p>")
+type entitiesDetectionJobProperties = {
+  @ocaml.doc("<p> Configuration parameters for a private Virtual Private Cloud (VPC) containing the
+      resources you are using for your entity detection job. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html\">Amazon
+        VPC</a>. </p>")
+  @as("VpcConfig")
+  vpcConfig: option<vpcConfig>,
+  @ocaml.doc("<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt
+      data on the storage volume attached to the ML compute instance(s) that process the analysis
+      job. The VolumeKmsKeyId can be either of the following formats:</p>
+         <ul>
+            <li>
+               <p>KMS Key ID: <code>\"1234abcd-12ab-34cd-56ef-1234567890ab\"</code>
+               </p>
+            </li>
+            <li>
+               <p>Amazon Resource Name (ARN) of a KMS Key:
+            <code>\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</code>
+               </p>
+            </li>
+         </ul>")
+  @as("VolumeKmsKeyId")
+  volumeKmsKeyId: option<kmsKeyId>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) that gives Amazon Comprehend read access to your input
+      data.</p>")
+  @as("DataAccessRoleArn")
+  dataAccessRoleArn: option<iamRoleArn>,
+  @ocaml.doc("<p>The language code of the input documents.</p>") @as("LanguageCode")
+  languageCode: option<languageCode>,
+  @ocaml.doc("<p>The output data configuration that you supplied when you created the entities detection
+      job. </p>")
+  @as("OutputDataConfig")
+  outputDataConfig: option<outputDataConfig>,
+  @ocaml.doc("<p>The input data configuration that you supplied when you created the entities detection
+      job.</p>")
+  @as("InputDataConfig")
+  inputDataConfig: option<inputDataConfig>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) that identifies the entity recognizer.</p>")
+  @as("EntityRecognizerArn")
+  entityRecognizerArn: option<entityRecognizerArn>,
+  @ocaml.doc("<p>The time that the entities detection job completed</p>") @as("EndTime")
+  endTime: option<timestamp_>,
+  @ocaml.doc("<p>The time that the entities detection job was submitted for processing.</p>")
+  @as("SubmitTime")
+  submitTime: option<timestamp_>,
+  @ocaml.doc("<p>A description of the status of a job.</p>") @as("Message")
+  message: option<anyLengthString>,
+  @ocaml.doc("<p>The current status of the entities detection job. If the status is <code>FAILED</code>,
+      the <code>Message</code> field shows the reason for the failure.</p>")
+  @as("JobStatus")
+  jobStatus: option<jobStatus>,
+  @ocaml.doc("<p>The name that you assigned the entities detection job.</p>") @as("JobName")
+  jobName: option<jobName>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the entities detection job. It is a unique, fully
+      qualified identifier for the job. It includes the AWS account, Region, and the job ID. The
+      format of the ARN is as follows:</p>
+         <p>
+            <code>arn:<partition>:comprehend:<region>:<account-id>:entities-detection-job/<job-id></code>
+         </p>
+         <p>The following is an example job ARN:</p>
+         <p>
+            <code>arn:aws:comprehend:us-west-2:111122223333:entities-detection-job/1234abcd12ab34cd56ef1234567890ab</code>
+         </p>")
+  @as("JobArn")
+  jobArn: option<comprehendArn>,
+  @ocaml.doc("<p>The identifier assigned to the entities detection job.</p>") @as("JobId")
+  jobId: option<jobId>,
+}
+@ocaml.doc("<p>Provides information about a dominant language detection job.</p>")
+type dominantLanguageDetectionJobProperties = {
+  @ocaml.doc("<p> Configuration parameters for a private Virtual Private Cloud (VPC) containing the
+      resources you are using for your dominant language detection job. For more information, see
+        <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html\">Amazon
+        VPC</a>. </p>")
+  @as("VpcConfig")
+  vpcConfig: option<vpcConfig>,
+  @ocaml.doc("<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt
+      data on the storage volume attached to the ML compute instance(s) that process the analysis
+      job. The VolumeKmsKeyId can be either of the following formats:</p>
+         <ul>
+            <li>
+               <p>KMS Key ID: <code>\"1234abcd-12ab-34cd-56ef-1234567890ab\"</code>
+               </p>
+            </li>
+            <li>
+               <p>Amazon Resource Name (ARN) of a KMS Key:
+            <code>\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</code>
+               </p>
+            </li>
+         </ul>")
+  @as("VolumeKmsKeyId")
+  volumeKmsKeyId: option<kmsKeyId>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) that gives Amazon Comprehend read access to your input
+      data.</p>")
+  @as("DataAccessRoleArn")
+  dataAccessRoleArn: option<iamRoleArn>,
+  @ocaml.doc("<p>The output data configuration that you supplied when you created the dominant language
+      detection job.</p>")
+  @as("OutputDataConfig")
+  outputDataConfig: option<outputDataConfig>,
+  @ocaml.doc("<p>The input data configuration that you supplied when you created the dominant language
+      detection job.</p>")
+  @as("InputDataConfig")
+  inputDataConfig: option<inputDataConfig>,
+  @ocaml.doc("<p>The time that the dominant language detection job completed.</p>") @as("EndTime")
+  endTime: option<timestamp_>,
+  @ocaml.doc(
+    "<p>The time that the dominant language detection job was submitted for processing.</p>"
+  )
+  @as("SubmitTime")
+  submitTime: option<timestamp_>,
+  @ocaml.doc("<p>A description for the status of a job.</p>") @as("Message")
+  message: option<anyLengthString>,
+  @ocaml.doc("<p>The current status of the dominant language detection job. If the status is
+        <code>FAILED</code>, the <code>Message</code> field shows the reason for the failure.</p>")
+  @as("JobStatus")
+  jobStatus: option<jobStatus>,
+  @ocaml.doc("<p>The name that you assigned to the dominant language detection job.</p>")
+  @as("JobName")
+  jobName: option<jobName>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the dominant language detection job. It is a unique,
+      fully qualified identifier for the job. It includes the AWS account, Region, and the job ID.
+      The format of the ARN is as follows:</p>
+         <p>
+            <code>arn:<partition>:comprehend:<region>:<account-id>:dominant-language-detection-job/<job-id></code>
+         </p>
+         <p>The following is an example job ARN:</p>
+         <p>
+            <code>arn:aws:comprehend:us-west-2:111122223333:dominant-language-detection-job/1234abcd12ab34cd56ef1234567890ab</code>
+         </p>")
+  @as("JobArn")
+  jobArn: option<comprehendArn>,
+  @ocaml.doc("<p>The identifier assigned to the dominant language detection job.</p>") @as("JobId")
+  jobId: option<jobId>,
+}
 @ocaml.doc("<p>The input properties for training a document classifier. </p>
          <p>For more information on how the input file is formatted, see <a>how-document-classification-training-data</a>. </p>")
 type documentClassifierInputDataConfig = {
@@ -1488,6 +1777,11 @@ type documentClassifierInputDataConfig = {
       LABELLABELLABEL.</p>")
   @as("LabelDelimiter")
   labelDelimiter: option<labelDelimiter>,
+  @ocaml.doc("<p>The Amazon S3 URI for the input data. The Amazon S3 bucket must be in the same AWS Region
+      as the API endpoint that you are calling. The URI can point to a single input file or it can
+      provide the prefix for a collection of input files. </p>")
+  @as("TestS3Uri")
+  testS3Uri: option<s3Uri>,
   @ocaml.doc("<p>The Amazon S3 URI for the input data. The S3 bucket must be in the same region as the API
       endpoint that you are calling. The URI can point to a single input file or it can provide the
       prefix for a collection of input files.</p>
@@ -1520,9 +1814,74 @@ type documentClassifierInputDataConfig = {
   @as("DataFormat")
   dataFormat: option<documentClassifierDataFormat>,
 }
-type documentClassificationJobPropertiesList = array<documentClassificationJobProperties>
-@ocaml.doc("<p>The result of calling the  operation. The operation
-      returns one object that is successfully processed by the operation.</p>")
+@ocaml.doc("<p>Provides information about a document classification job.</p>")
+type documentClassificationJobProperties = {
+  @ocaml.doc("<p> Configuration parameters for a private Virtual Private Cloud (VPC) containing the
+      resources you are using for your document classification job. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html\">Amazon
+        VPC</a>. </p>")
+  @as("VpcConfig")
+  vpcConfig: option<vpcConfig>,
+  @ocaml.doc("<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt
+      data on the storage volume attached to the ML compute instance(s) that process the analysis
+      job. The VolumeKmsKeyId can be either of the following formats:</p>
+         <ul>
+            <li>
+               <p>KMS Key ID: <code>\"1234abcd-12ab-34cd-56ef-1234567890ab\"</code>
+               </p>
+            </li>
+            <li>
+               <p>Amazon Resource Name (ARN) of a KMS Key:
+            <code>\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</code>
+               </p>
+            </li>
+         </ul>")
+  @as("VolumeKmsKeyId")
+  volumeKmsKeyId: option<kmsKeyId>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the AWS identity and Access Management (IAM) role that
+      grants Amazon Comprehend read access to your input data.</p>")
+  @as("DataAccessRoleArn")
+  dataAccessRoleArn: option<iamRoleArn>,
+  @ocaml.doc("<p>The output data configuration that you supplied when you created the document
+      classification job.</p>")
+  @as("OutputDataConfig")
+  outputDataConfig: option<outputDataConfig>,
+  @ocaml.doc("<p>The input data configuration that you supplied when you created the document
+      classification job.</p>")
+  @as("InputDataConfig")
+  inputDataConfig: option<inputDataConfig>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) that identifies the document classifier. </p>")
+  @as("DocumentClassifierArn")
+  documentClassifierArn: option<documentClassifierArn>,
+  @ocaml.doc("<p>The time that the document classification job completed.</p>") @as("EndTime")
+  endTime: option<timestamp_>,
+  @ocaml.doc("<p>The time that the document classification job was submitted for processing.</p>")
+  @as("SubmitTime")
+  submitTime: option<timestamp_>,
+  @ocaml.doc("<p>A description of the status of the job.</p>") @as("Message")
+  message: option<anyLengthString>,
+  @ocaml.doc("<p>The current status of the document classification job. If the status is
+        <code>FAILED</code>, the <code>Message</code> field shows the reason for the failure.</p>")
+  @as("JobStatus")
+  jobStatus: option<jobStatus>,
+  @ocaml.doc("<p>The name that you assigned to the document classification job.</p>") @as("JobName")
+  jobName: option<jobName>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the document classification job. It is a unique, fully
+      qualified identifier for the job. It includes the AWS account, Region, and the job ID. The
+      format of the ARN is as follows:</p>
+         <p>
+            <code>arn:<partition>:comprehend:<region>:<account-id>:document-classification-job/<job-id></code>
+         </p>
+         <p>The following is an example job ARN:</p>
+         <p>
+            <code>arn:aws:comprehend:us-west-2:111122223333:document-classification-job/1234abcd12ab34cd56ef1234567890ab</code>
+         </p>")
+  @as("JobArn")
+  jobArn: option<comprehendArn>,
+  @ocaml.doc("<p>The identifier assigned to the document classification job.</p>") @as("JobId")
+  jobId: option<jobId>,
+}
+@ocaml.doc("<p>The result of calling the  operation. The
+      operation returns one object that is successfully processed by the operation.</p>")
 type batchDetectSyntaxItemResult = {
   @ocaml.doc("<p>The syntax tokens for the words in the document, one token for each word.</p>")
   @as("SyntaxTokens")
@@ -1530,9 +1889,21 @@ type batchDetectSyntaxItemResult = {
   @ocaml.doc("<p>The zero-based index of the document in the input list.</p>") @as("Index")
   index: option<integer_>,
 }
+type topicsDetectionJobPropertiesList = array<topicsDetectionJobProperties>
+type targetedSentimentDetectionJobPropertiesList = array<targetedSentimentDetectionJobProperties>
+type sentimentDetectionJobPropertiesList = array<sentimentDetectionJobProperties>
+type piiEntitiesDetectionJobPropertiesList = array<piiEntitiesDetectionJobProperties>
 type listOfDetectSyntaxResult = array<batchDetectSyntaxItemResult>
+type keyPhrasesDetectionJobPropertiesList = array<keyPhrasesDetectionJobProperties>
+type eventsDetectionJobPropertiesList = array<eventsDetectionJobProperties>
 @ocaml.doc("<p>Describes information about an entity recognizer.</p>")
 type entityRecognizerProperties = {
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the source model. This model was imported from a
+      different AWS account to create the entity recognizer model in your AWS account.</p>")
+  @as("SourceModelArn")
+  sourceModelArn: option<entityRecognizerArn>,
+  @ocaml.doc("<p>The version name you assigned to the entity recognizer.</p>") @as("VersionName")
+  versionName: option<versionName>,
   @ocaml.doc("<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt
       trained custom models. The ModelKmsKeyId can be either of the following formats: </p>
          <ul>
@@ -1599,8 +1970,17 @@ type entityRecognizerProperties = {
   @as("EntityRecognizerArn")
   entityRecognizerArn: option<entityRecognizerArn>,
 }
+type entitiesDetectionJobPropertiesList = array<entitiesDetectionJobProperties>
+type dominantLanguageDetectionJobPropertiesList = array<dominantLanguageDetectionJobProperties>
 @ocaml.doc("<p>Provides information about a document classifier.</p>")
 type documentClassifierProperties = {
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the source model. This model was imported from a
+      different AWS account to create the document classifier model in your AWS account.</p>")
+  @as("SourceModelArn")
+  sourceModelArn: option<documentClassifierArn>,
+  @ocaml.doc("<p>The version name that you assigned to the document classifier.</p>")
+  @as("VersionName")
+  versionName: option<versionName>,
   @ocaml.doc("<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt
       trained custom models. The ModelKmsKeyId can be either of the following formats:</p>
          <ul>
@@ -1687,6 +2067,7 @@ type documentClassifierProperties = {
   @as("DocumentClassifierArn")
   documentClassifierArn: option<documentClassifierArn>,
 }
+type documentClassificationJobPropertiesList = array<documentClassificationJobProperties>
 type entityRecognizerPropertiesList = array<entityRecognizerProperties>
 type documentClassifierPropertiesList = array<documentClassifierProperties>
 @ocaml.doc("<p>Amazon Comprehend is an AWS service for gaining insight into the content of documents.
@@ -1696,19 +2077,38 @@ type documentClassifierPropertiesList = array<documentClassifierProperties>
 module UpdateEndpoint = {
   type t
   type request = {
+    @ocaml.doc(
+      "<p>Data access role ARN to use in case the new model is encrypted with a customer CMK.</p>"
+    )
+    @as("DesiredDataAccessRoleArn")
+    desiredDataAccessRoleArn: option<iamRoleArn>,
     @ocaml.doc("<p> The desired number of inference units to be used by the model using this endpoint.
       
       Each inference unit represents of a throughput of 100 characters per second.</p>")
     @as("DesiredInferenceUnits")
-    desiredInferenceUnits: inferenceUnitsInteger,
+    desiredInferenceUnits: option<inferenceUnitsInteger>,
+    @ocaml.doc("<p>The ARN of the new model to use when updating an existing endpoint.</p>")
+    @as("DesiredModelArn")
+    desiredModelArn: option<comprehendModelArn>,
     @ocaml.doc("<p>The Amazon Resource Number (ARN) of the endpoint being updated.</p>")
     @as("EndpointArn")
     endpointArn: comprehendEndpointArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-comprehend") @new external new: request => t = "UpdateEndpointCommand"
-  let make = (~desiredInferenceUnits, ~endpointArn, ()) =>
-    new({desiredInferenceUnits: desiredInferenceUnits, endpointArn: endpointArn})
+  let make = (
+    ~endpointArn,
+    ~desiredDataAccessRoleArn=?,
+    ~desiredInferenceUnits=?,
+    ~desiredModelArn=?,
+    (),
+  ) =>
+    new({
+      desiredDataAccessRoleArn: desiredDataAccessRoleArn,
+      desiredInferenceUnits: desiredInferenceUnits,
+      desiredModelArn: desiredModelArn,
+      endpointArn: endpointArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -1720,7 +2120,7 @@ module StopTrainingEntityRecognizer = {
     @as("EntityRecognizerArn")
     entityRecognizerArn: entityRecognizerArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-comprehend") @new
   external new: request => t = "StopTrainingEntityRecognizerCommand"
   let make = (~entityRecognizerArn, ()) => new({entityRecognizerArn: entityRecognizerArn})
@@ -1735,11 +2135,34 @@ module StopTrainingDocumentClassifier = {
     @as("DocumentClassifierArn")
     documentClassifierArn: documentClassifierArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-comprehend") @new
   external new: request => t = "StopTrainingDocumentClassifierCommand"
   let make = (~documentClassifierArn, ()) => new({documentClassifierArn: documentClassifierArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module StopTargetedSentimentDetectionJob = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The identifier of the targeted sentiment detection job to stop.</p>")
+    @as("JobId")
+    jobId: jobId,
+  }
+  type response = {
+    @ocaml.doc("<p>Either <code>STOP_REQUESTED</code> if the job is currently running, or
+      <code>STOPPED</code> if the job was previously stopped with the
+      <code>StopSentimentDetectionJob</code> operation.</p>")
+    @as("JobStatus")
+    jobStatus: option<jobStatus>,
+    @ocaml.doc("<p>The identifier of the targeted sentiment detection job to stop.</p>")
+    @as("JobId")
+    jobId: option<jobId>,
+  }
+  @module("@aws-sdk/client-comprehend") @new
+  external new: request => t = "StopTargetedSentimentDetectionJobCommand"
+  let make = (~jobId, ()) => new({jobId: jobId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StopSentimentDetectionJob = {
@@ -1862,6 +2285,92 @@ module StopDominantLanguageDetectionJob = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module PutResourcePolicy = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The revision ID that Amazon Comprehend assigned to the policy that you are updating. If
+      you are creating a new policy that has no prior version, don't use this parameter. Amazon
+      Comprehend creates the revision ID for you.</p>")
+    @as("PolicyRevisionId")
+    policyRevisionId: option<policyRevisionId>,
+    @ocaml.doc("<p>The JSON resource-based policy to attach to your custom model. Provide your JSON as a
+      UTF-8 encoded string without line breaks. To provide valid JSON for your policy, enclose the
+      attribute names and values in double quotes. If the JSON body is also enclosed in double
+      quotes, then you must escape the double quotes that are inside the policy:</p>
+         <p>
+            <code>\"{\\\"attribute\\\": \\\"value\\\", \\\"attribute\\\": [\\\"value\\\"]}\"</code>
+         </p>
+         <p>To avoid escaping quotes, you can use single quotes to enclose the policy and double
+      quotes to enclose the JSON names and values:</p>
+         <p>
+            <code>'{\"attribute\": \"value\", \"attribute\": [\"value\"]}'</code>
+         </p>")
+    @as("ResourcePolicy")
+    resourcePolicy: policy,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the custom model to attach the policy to.</p>")
+    @as("ResourceArn")
+    resourceArn: comprehendModelArn,
+  }
+  type response = {
+    @ocaml.doc("<p>The revision ID of the policy. Each time you modify a policy, Amazon Comprehend assigns a
+      new revision ID, and it deletes the prior version of the policy.</p>")
+    @as("PolicyRevisionId")
+    policyRevisionId: option<policyRevisionId>,
+  }
+  @module("@aws-sdk/client-comprehend") @new external new: request => t = "PutResourcePolicyCommand"
+  let make = (~resourcePolicy, ~resourceArn, ~policyRevisionId=?, ()) =>
+    new({
+      policyRevisionId: policyRevisionId,
+      resourcePolicy: resourcePolicy,
+      resourceArn: resourceArn,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module DescribeResourcePolicy = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the policy to describe.</p>")
+    @as("ResourceArn")
+    resourceArn: comprehendModelArn,
+  }
+  type response = {
+    @ocaml.doc("<p>The revision ID of the policy. Each time you modify a policy, Amazon Comprehend assigns a
+      new revision ID, and it deletes the prior version of the policy.</p>")
+    @as("PolicyRevisionId")
+    policyRevisionId: option<policyRevisionId>,
+    @ocaml.doc("<p>The time at which the policy was last modified.</p>") @as("LastModifiedTime")
+    lastModifiedTime: option<timestamp_>,
+    @ocaml.doc("<p>The time at which the policy was created.</p>") @as("CreationTime")
+    creationTime: option<timestamp_>,
+    @ocaml.doc("<p>The JSON body of the resource-based policy.</p>") @as("ResourcePolicy")
+    resourcePolicy: option<policy>,
+  }
+  @module("@aws-sdk/client-comprehend") @new
+  external new: request => t = "DescribeResourcePolicyCommand"
+  let make = (~resourceArn, ()) => new({resourceArn: resourceArn})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module DeleteResourcePolicy = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The revision ID of the policy to delete.</p>") @as("PolicyRevisionId")
+    policyRevisionId: option<policyRevisionId>,
+    @ocaml.doc(
+      "<p>The Amazon Resource Name (ARN) of the custom model version that has the policy to delete.</p>"
+    )
+    @as("ResourceArn")
+    resourceArn: comprehendModelArn,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-comprehend") @new
+  external new: request => t = "DeleteResourcePolicyCommand"
+  let make = (~resourceArn, ~policyRevisionId=?, ()) =>
+    new({policyRevisionId: policyRevisionId, resourceArn: resourceArn})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
 module DeleteEntityRecognizer = {
   type t
   type request = {
@@ -1869,7 +2378,7 @@ module DeleteEntityRecognizer = {
     @as("EntityRecognizerArn")
     entityRecognizerArn: entityRecognizerArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-comprehend") @new
   external new: request => t = "DeleteEntityRecognizerCommand"
   let make = (~entityRecognizerArn, ()) => new({entityRecognizerArn: entityRecognizerArn})
@@ -1883,7 +2392,7 @@ module DeleteEndpoint = {
     @as("EndpointArn")
     endpointArn: comprehendEndpointArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-comprehend") @new external new: request => t = "DeleteEndpointCommand"
   let make = (~endpointArn, ()) => new({endpointArn: endpointArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1896,7 +2405,7 @@ module DeleteDocumentClassifier = {
     @as("DocumentClassifierArn")
     documentClassifierArn: documentClassifierArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-comprehend") @new
   external new: request => t = "DeleteDocumentClassifierCommand"
   let make = (~documentClassifierArn, ()) => new({documentClassifierArn: documentClassifierArn})
@@ -1917,66 +2426,10 @@ module UntagResource = {
     @as("ResourceArn")
     resourceArn: comprehendArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-comprehend") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
-}
-
-module StartEventsDetectionJob = {
-  type t
-  type request = {
-    @ocaml.doc("<p>The types of events to detect in the input documents.</p>")
-    @as("TargetEventTypes")
-    targetEventTypes: targetEventTypes,
-    @ocaml.doc("<p>An unique identifier for the request. If you don't set the client request token, Amazon
-      Comprehend generates one.</p>")
-    @as("ClientRequestToken")
-    clientRequestToken: option<clientRequestTokenString>,
-    @ocaml.doc("<p>The language code of the input documents.</p>") @as("LanguageCode")
-    languageCode: languageCode,
-    @ocaml.doc("<p>The identifier of the events detection job.</p>") @as("JobName")
-    jobName: option<jobName>,
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that
-      grants Amazon Comprehend read access to your input data.</p>")
-    @as("DataAccessRoleArn")
-    dataAccessRoleArn: iamRoleArn,
-    @ocaml.doc("<p>Specifies where to send the output files.</p>") @as("OutputDataConfig")
-    outputDataConfig: outputDataConfig,
-    @ocaml.doc("<p>Specifies the format and location of the input data for the job.</p>")
-    @as("InputDataConfig")
-    inputDataConfig: inputDataConfig,
-  }
-  type response = {
-    @ocaml.doc("<p>The status of the events detection job.</p>") @as("JobStatus")
-    jobStatus: option<jobStatus>,
-    @ocaml.doc("<p>An unique identifier for the request. If you don't set the client request token, Amazon
-      Comprehend generates one.</p>")
-    @as("JobId")
-    jobId: option<jobId>,
-  }
-  @module("@aws-sdk/client-comprehend") @new
-  external new: request => t = "StartEventsDetectionJobCommand"
-  let make = (
-    ~targetEventTypes,
-    ~languageCode,
-    ~dataAccessRoleArn,
-    ~outputDataConfig,
-    ~inputDataConfig,
-    ~clientRequestToken=?,
-    ~jobName=?,
-    (),
-  ) =>
-    new({
-      targetEventTypes: targetEventTypes,
-      clientRequestToken: clientRequestToken,
-      languageCode: languageCode,
-      jobName: jobName,
-      dataAccessRoleArn: dataAccessRoleArn,
-      outputDataConfig: outputDataConfig,
-      inputDataConfig: inputDataConfig,
-    })
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DetectSentiment = {
@@ -2035,647 +2488,10 @@ module TagResource = {
     @as("ResourceArn")
     resourceArn: comprehendArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-comprehend") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
-}
-
-module StartTopicsDetectionJob = {
-  type t
-  type request = {
-    @ocaml.doc("<p>Configuration parameters for an optional private Virtual Private Cloud (VPC) containing
-      the resources you are using for your topic detection job. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html\">Amazon
-        VPC</a>. </p>")
-    @as("VpcConfig")
-    vpcConfig: option<vpcConfig>,
-    @ocaml.doc("<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt
-      data on the storage volume attached to the ML compute instance(s) that process the analysis
-      job. The VolumeKmsKeyId can be either of the following formats:</p>
-         <ul>
-            <li>
-               <p>KMS Key ID: <code>\"1234abcd-12ab-34cd-56ef-1234567890ab\"</code>
-               </p>
-            </li>
-            <li>
-               <p>Amazon Resource Name (ARN) of a KMS Key:
-            <code>\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</code>
-               </p>
-            </li>
-         </ul>")
-    @as("VolumeKmsKeyId")
-    volumeKmsKeyId: option<kmsKeyId>,
-    @ocaml.doc("<p>A unique identifier for the request. If you do not set the client request token, Amazon
-      Comprehend generates one.</p>")
-    @as("ClientRequestToken")
-    clientRequestToken: option<clientRequestTokenString>,
-    @ocaml.doc("<p>The number of topics to detect.</p>") @as("NumberOfTopics")
-    numberOfTopics: option<numberOfTopicsInteger>,
-    @ocaml.doc("<p>The identifier of the job.</p>") @as("JobName") jobName: option<jobName>,
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role
-      that grants Amazon Comprehend read access to your input data. For more information, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions\">https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions</a>.</p>")
-    @as("DataAccessRoleArn")
-    dataAccessRoleArn: iamRoleArn,
-    @ocaml.doc("<p>Specifies where to send the output files. The output is a compressed archive with two
-      files, <code>topic-terms.csv</code> that lists the terms associated with each topic, and
-        <code>doc-topics.csv</code> that lists the documents associated with each topic</p>")
-    @as("OutputDataConfig")
-    outputDataConfig: outputDataConfig,
-    @ocaml.doc("<p>Specifies the format and location of the input data for the job.</p>")
-    @as("InputDataConfig")
-    inputDataConfig: inputDataConfig,
-  }
-  type response = {
-    @ocaml.doc("<p>The status of the job: </p>
-         <ul>
-            <li>
-               <p>SUBMITTED - The job has been received and is queued for processing.</p>
-            </li>
-            <li>
-               <p>IN_PROGRESS - Amazon Comprehend is processing the job.</p>
-            </li>
-            <li>
-               <p>COMPLETED - The job was successfully completed and the output is
-          available.</p>
-            </li>
-            <li>
-               <p>FAILED - The job did not complete. To get details, use the
-            <code>DescribeTopicDetectionJob</code> operation.</p>
-            </li>
-         </ul>")
-    @as("JobStatus")
-    jobStatus: option<jobStatus>,
-    @ocaml.doc("<p>The identifier generated for the job. To get the status of the job, use this identifier
-      with the <code>DescribeTopicDetectionJob</code> operation.</p>")
-    @as("JobId")
-    jobId: option<jobId>,
-  }
-  @module("@aws-sdk/client-comprehend") @new
-  external new: request => t = "StartTopicsDetectionJobCommand"
-  let make = (
-    ~dataAccessRoleArn,
-    ~outputDataConfig,
-    ~inputDataConfig,
-    ~vpcConfig=?,
-    ~volumeKmsKeyId=?,
-    ~clientRequestToken=?,
-    ~numberOfTopics=?,
-    ~jobName=?,
-    (),
-  ) =>
-    new({
-      vpcConfig: vpcConfig,
-      volumeKmsKeyId: volumeKmsKeyId,
-      clientRequestToken: clientRequestToken,
-      numberOfTopics: numberOfTopics,
-      jobName: jobName,
-      dataAccessRoleArn: dataAccessRoleArn,
-      outputDataConfig: outputDataConfig,
-      inputDataConfig: inputDataConfig,
-    })
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
-module StartSentimentDetectionJob = {
-  type t
-  type request = {
-    @ocaml.doc("<p>Configuration parameters for an optional private Virtual Private Cloud (VPC) containing
-      the resources you are using for your sentiment detection job. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html\">Amazon
-        VPC</a>. </p>")
-    @as("VpcConfig")
-    vpcConfig: option<vpcConfig>,
-    @ocaml.doc("<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt
-      data on the storage volume attached to the ML compute instance(s) that process the analysis
-      job. The VolumeKmsKeyId can be either of the following formats:</p>
-         <ul>
-            <li>
-               <p>KMS Key ID: <code>\"1234abcd-12ab-34cd-56ef-1234567890ab\"</code>
-               </p>
-            </li>
-            <li>
-               <p>Amazon Resource Name (ARN) of a KMS Key:
-            <code>\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</code>
-               </p>
-            </li>
-         </ul>")
-    @as("VolumeKmsKeyId")
-    volumeKmsKeyId: option<kmsKeyId>,
-    @ocaml.doc("<p>A unique identifier for the request. If you don't set the client request token, Amazon
-      Comprehend generates one.</p>")
-    @as("ClientRequestToken")
-    clientRequestToken: option<clientRequestTokenString>,
-    @ocaml.doc("<p>The language of the input documents. You can specify any of the primary languages
-      supported by Amazon Comprehend. All documents must be in the same language.</p>")
-    @as("LanguageCode")
-    languageCode: languageCode,
-    @ocaml.doc("<p>The identifier of the job.</p>") @as("JobName") jobName: option<jobName>,
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that
-      grants Amazon Comprehend read access to your input data. For more information, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions\">https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions</a>.</p>")
-    @as("DataAccessRoleArn")
-    dataAccessRoleArn: iamRoleArn,
-    @ocaml.doc("<p>Specifies where to send the output files. </p>") @as("OutputDataConfig")
-    outputDataConfig: outputDataConfig,
-    @ocaml.doc("<p>Specifies the format and location of the input data for the job.</p>")
-    @as("InputDataConfig")
-    inputDataConfig: inputDataConfig,
-  }
-  type response = {
-    @ocaml.doc("<p>The status of the job. </p>
-         <ul>
-            <li>
-               <p>SUBMITTED - The job has been received and is queued for processing.</p>
-            </li>
-            <li>
-               <p>IN_PROGRESS - Amazon Comprehend is processing the job.</p>
-            </li>
-            <li>
-               <p>COMPLETED - The job was successfully completed and the output is available.</p>
-            </li>
-            <li>
-               <p>FAILED - The job did not complete. To get details, use the  operation.</p>
-            </li>
-         </ul>")
-    @as("JobStatus")
-    jobStatus: option<jobStatus>,
-    @ocaml.doc("<p>The identifier generated for the job. To get the status of a job, use this identifier with
-      the  operation.</p>")
-    @as("JobId")
-    jobId: option<jobId>,
-  }
-  @module("@aws-sdk/client-comprehend") @new
-  external new: request => t = "StartSentimentDetectionJobCommand"
-  let make = (
-    ~languageCode,
-    ~dataAccessRoleArn,
-    ~outputDataConfig,
-    ~inputDataConfig,
-    ~vpcConfig=?,
-    ~volumeKmsKeyId=?,
-    ~clientRequestToken=?,
-    ~jobName=?,
-    (),
-  ) =>
-    new({
-      vpcConfig: vpcConfig,
-      volumeKmsKeyId: volumeKmsKeyId,
-      clientRequestToken: clientRequestToken,
-      languageCode: languageCode,
-      jobName: jobName,
-      dataAccessRoleArn: dataAccessRoleArn,
-      outputDataConfig: outputDataConfig,
-      inputDataConfig: inputDataConfig,
-    })
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
-module StartPiiEntitiesDetectionJob = {
-  type t
-  type request = {
-    @ocaml.doc("<p>A unique identifier for the request. If you don't set the client request token, Amazon
-      Comprehend generates one.</p>")
-    @as("ClientRequestToken")
-    clientRequestToken: option<clientRequestTokenString>,
-    @ocaml.doc("<p>The language of the input documents.</p>") @as("LanguageCode")
-    languageCode: languageCode,
-    @ocaml.doc("<p>The identifier of the job.</p>") @as("JobName") jobName: option<jobName>,
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that
-      grants Amazon Comprehend read access to your input data.</p>")
-    @as("DataAccessRoleArn")
-    dataAccessRoleArn: iamRoleArn,
-    @ocaml.doc("<p>Provides configuration parameters for PII entity redaction.</p>
-         <p>This parameter is required if you set the <code>Mode</code> parameter to
-        <code>ONLY_REDACTION</code>. In that case, you must provide a <code>RedactionConfig</code>
-      definition that includes the <code>PiiEntityTypes</code> parameter.</p>")
-    @as("RedactionConfig")
-    redactionConfig: option<redactionConfig>,
-    @ocaml.doc("<p>Specifies whether the output provides the locations (offsets) of PII entities or a file in
-      which PII entities are redacted.</p>")
-    @as("Mode")
-    mode: piiEntitiesDetectionMode,
-    @ocaml.doc(
-      "<p>Provides conﬁguration parameters for the output of PII entity detection jobs.</p>"
-    )
-    @as("OutputDataConfig")
-    outputDataConfig: outputDataConfig,
-    @ocaml.doc("<p>The input properties for a PII entities detection job.</p>")
-    @as("InputDataConfig")
-    inputDataConfig: inputDataConfig,
-  }
-  type response = {
-    @ocaml.doc("<p>The status of the job.</p>") @as("JobStatus") jobStatus: option<jobStatus>,
-    @ocaml.doc("<p>The identifier generated for the job.</p>") @as("JobId") jobId: option<jobId>,
-  }
-  @module("@aws-sdk/client-comprehend") @new
-  external new: request => t = "StartPiiEntitiesDetectionJobCommand"
-  let make = (
-    ~languageCode,
-    ~dataAccessRoleArn,
-    ~mode,
-    ~outputDataConfig,
-    ~inputDataConfig,
-    ~clientRequestToken=?,
-    ~jobName=?,
-    ~redactionConfig=?,
-    (),
-  ) =>
-    new({
-      clientRequestToken: clientRequestToken,
-      languageCode: languageCode,
-      jobName: jobName,
-      dataAccessRoleArn: dataAccessRoleArn,
-      redactionConfig: redactionConfig,
-      mode: mode,
-      outputDataConfig: outputDataConfig,
-      inputDataConfig: inputDataConfig,
-    })
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
-module StartKeyPhrasesDetectionJob = {
-  type t
-  type request = {
-    @ocaml.doc("<p> Configuration parameters for an optional private Virtual Private Cloud (VPC) containing
-      the resources you are using for your key phrases detection job. For more information, see
-        <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html\">Amazon
-        VPC</a>. </p>")
-    @as("VpcConfig")
-    vpcConfig: option<vpcConfig>,
-    @ocaml.doc("<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt
-      data on the storage volume attached to the ML compute instance(s) that process the analysis
-      job. The VolumeKmsKeyId can be either of the following formats:</p>
-         <ul>
-            <li>
-               <p>KMS Key ID: <code>\"1234abcd-12ab-34cd-56ef-1234567890ab\"</code>
-               </p>
-            </li>
-            <li>
-               <p>Amazon Resource Name (ARN) of a KMS Key:
-            <code>\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</code>
-               </p>
-            </li>
-         </ul>")
-    @as("VolumeKmsKeyId")
-    volumeKmsKeyId: option<kmsKeyId>,
-    @ocaml.doc("<p>A unique identifier for the request. If you don't set the client request token, Amazon
-      Comprehend generates one.</p>")
-    @as("ClientRequestToken")
-    clientRequestToken: option<clientRequestTokenString>,
-    @ocaml.doc("<p>The language of the input documents. You can specify any of the primary languages
-      supported by Amazon Comprehend. All documents must be in the same language.</p>")
-    @as("LanguageCode")
-    languageCode: languageCode,
-    @ocaml.doc("<p>The identifier of the job.</p>") @as("JobName") jobName: option<jobName>,
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that
-      grants Amazon Comprehend read access to your input data. For more information, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions\">https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions</a>.</p>")
-    @as("DataAccessRoleArn")
-    dataAccessRoleArn: iamRoleArn,
-    @ocaml.doc("<p>Specifies where to send the output files.</p>") @as("OutputDataConfig")
-    outputDataConfig: outputDataConfig,
-    @ocaml.doc("<p>Specifies the format and location of the input data for the job.</p>")
-    @as("InputDataConfig")
-    inputDataConfig: inputDataConfig,
-  }
-  type response = {
-    @ocaml.doc("<p>The status of the job. </p>
-         <ul>
-            <li>
-               <p>SUBMITTED - The job has been received and is queued for processing.</p>
-            </li>
-            <li>
-               <p>IN_PROGRESS - Amazon Comprehend is processing the job.</p>
-            </li>
-            <li>
-               <p>COMPLETED - The job was successfully completed and the output is available.</p>
-            </li>
-            <li>
-               <p>FAILED - The job did not complete. To get details, use the  operation.</p>
-            </li>
-         </ul>")
-    @as("JobStatus")
-    jobStatus: option<jobStatus>,
-    @ocaml.doc("<p>The identifier generated for the job. To get the status of a job, use this identifier with
-      the  operation.</p>")
-    @as("JobId")
-    jobId: option<jobId>,
-  }
-  @module("@aws-sdk/client-comprehend") @new
-  external new: request => t = "StartKeyPhrasesDetectionJobCommand"
-  let make = (
-    ~languageCode,
-    ~dataAccessRoleArn,
-    ~outputDataConfig,
-    ~inputDataConfig,
-    ~vpcConfig=?,
-    ~volumeKmsKeyId=?,
-    ~clientRequestToken=?,
-    ~jobName=?,
-    (),
-  ) =>
-    new({
-      vpcConfig: vpcConfig,
-      volumeKmsKeyId: volumeKmsKeyId,
-      clientRequestToken: clientRequestToken,
-      languageCode: languageCode,
-      jobName: jobName,
-      dataAccessRoleArn: dataAccessRoleArn,
-      outputDataConfig: outputDataConfig,
-      inputDataConfig: inputDataConfig,
-    })
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
-module StartEntitiesDetectionJob = {
-  type t
-  type request = {
-    @ocaml.doc("<p>Configuration parameters for an optional private Virtual Private Cloud (VPC) containing
-      the resources you are using for your entity detection job. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html\">Amazon
-        VPC</a>. </p>")
-    @as("VpcConfig")
-    vpcConfig: option<vpcConfig>,
-    @ocaml.doc("<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt
-      data on the storage volume attached to the ML compute instance(s) that process the analysis
-      job. The VolumeKmsKeyId can be either of the following formats:</p>
-         <ul>
-            <li>
-               <p>KMS Key ID: <code>\"1234abcd-12ab-34cd-56ef-1234567890ab\"</code>
-               </p>
-            </li>
-            <li>
-               <p>Amazon Resource Name (ARN) of a KMS Key:
-            <code>\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</code>
-               </p>
-            </li>
-         </ul>")
-    @as("VolumeKmsKeyId")
-    volumeKmsKeyId: option<kmsKeyId>,
-    @ocaml.doc("<p>A unique identifier for the request. If you don't set the client request token, Amazon
-      Comprehend generates one.</p>")
-    @as("ClientRequestToken")
-    clientRequestToken: option<clientRequestTokenString>,
-    @ocaml.doc("<p>The language of the input documents. All documents must be in the same language. You can
-      specify any of the languages supported by Amazon Comprehend. If custom entities recognition is
-      used, this parameter is ignored and the language used for training the model is used
-      instead.</p>")
-    @as("LanguageCode")
-    languageCode: languageCode,
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) that identifies the specific entity recognizer to be used
-      by the <code>StartEntitiesDetectionJob</code>. This ARN is optional and is only used for a
-      custom entity recognition job.</p>")
-    @as("EntityRecognizerArn")
-    entityRecognizerArn: option<entityRecognizerArn>,
-    @ocaml.doc("<p>The identifier of the job.</p>") @as("JobName") jobName: option<jobName>,
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that
-      grants Amazon Comprehend read access to your input data. For more information, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions\">https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions</a>.</p>")
-    @as("DataAccessRoleArn")
-    dataAccessRoleArn: iamRoleArn,
-    @ocaml.doc("<p>Specifies where to send the output files.</p>") @as("OutputDataConfig")
-    outputDataConfig: outputDataConfig,
-    @ocaml.doc("<p>Specifies the format and location of the input data for the job.</p>")
-    @as("InputDataConfig")
-    inputDataConfig: inputDataConfig,
-  }
-  type response = {
-    @ocaml.doc("<p>The status of the job. </p>
-         <ul>
-            <li>
-               <p>SUBMITTED - The job has been received and is queued for processing.</p>
-            </li>
-            <li>
-               <p>IN_PROGRESS - Amazon Comprehend is processing the job.</p>
-            </li>
-            <li>
-               <p>COMPLETED - The job was successfully completed and the output is available.</p>
-            </li>
-            <li>
-               <p>FAILED - The job did not complete. To get details, use the  operation.</p>
-            </li>
-            <li>
-               <p>STOP_REQUESTED - Amazon Comprehend has received a stop request for the job and is
-          processing the request.</p>
-            </li>
-            <li>
-               <p>STOPPED - The job was successfully stopped without completing.</p>
-            </li>
-         </ul>")
-    @as("JobStatus")
-    jobStatus: option<jobStatus>,
-    @ocaml.doc("<p>The identifier generated for the job. To get the status of job, use this identifier with
-      the  operation.</p>")
-    @as("JobId")
-    jobId: option<jobId>,
-  }
-  @module("@aws-sdk/client-comprehend") @new
-  external new: request => t = "StartEntitiesDetectionJobCommand"
-  let make = (
-    ~languageCode,
-    ~dataAccessRoleArn,
-    ~outputDataConfig,
-    ~inputDataConfig,
-    ~vpcConfig=?,
-    ~volumeKmsKeyId=?,
-    ~clientRequestToken=?,
-    ~entityRecognizerArn=?,
-    ~jobName=?,
-    (),
-  ) =>
-    new({
-      vpcConfig: vpcConfig,
-      volumeKmsKeyId: volumeKmsKeyId,
-      clientRequestToken: clientRequestToken,
-      languageCode: languageCode,
-      entityRecognizerArn: entityRecognizerArn,
-      jobName: jobName,
-      dataAccessRoleArn: dataAccessRoleArn,
-      outputDataConfig: outputDataConfig,
-      inputDataConfig: inputDataConfig,
-    })
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
-module StartDominantLanguageDetectionJob = {
-  type t
-  type request = {
-    @ocaml.doc("<p>Configuration parameters for an optional private Virtual Private Cloud (VPC) containing
-      the resources you are using for your dominant language detection job. For more information,
-      see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html\">Amazon VPC</a>. </p>")
-    @as("VpcConfig")
-    vpcConfig: option<vpcConfig>,
-    @ocaml.doc("<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt
-      data on the storage volume attached to the ML compute instance(s) that process the analysis
-      job. The VolumeKmsKeyId can be either of the following formats:</p>
-         <ul>
-            <li>
-               <p>KMS Key ID: <code>\"1234abcd-12ab-34cd-56ef-1234567890ab\"</code>
-               </p>
-            </li>
-            <li>
-               <p>Amazon Resource Name (ARN) of a KMS Key:
-            <code>\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</code>
-               </p>
-            </li>
-         </ul>")
-    @as("VolumeKmsKeyId")
-    volumeKmsKeyId: option<kmsKeyId>,
-    @ocaml.doc("<p>A unique identifier for the request. If you do not set the client request token, Amazon
-      Comprehend generates one.</p>")
-    @as("ClientRequestToken")
-    clientRequestToken: option<clientRequestTokenString>,
-    @ocaml.doc("<p>An identifier for the job.</p>") @as("JobName") jobName: option<jobName>,
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that
-      grants Amazon Comprehend read access to your input data. For more information, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions\">https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions</a>.</p>")
-    @as("DataAccessRoleArn")
-    dataAccessRoleArn: iamRoleArn,
-    @ocaml.doc("<p>Specifies where to send the output files.</p>") @as("OutputDataConfig")
-    outputDataConfig: outputDataConfig,
-    @ocaml.doc("<p>Specifies the format and location of the input data for the job.</p>")
-    @as("InputDataConfig")
-    inputDataConfig: inputDataConfig,
-  }
-  type response = {
-    @ocaml.doc("<p>The status of the job. </p>
-         <ul>
-            <li>
-               <p>SUBMITTED - The job has been received and is queued for processing.</p>
-            </li>
-            <li>
-               <p>IN_PROGRESS - Amazon Comprehend is processing the job.</p>
-            </li>
-            <li>
-               <p>COMPLETED - The job was successfully completed and the output is available.</p>
-            </li>
-            <li>
-               <p>FAILED - The job did not complete. To get details, use the  operation.</p>
-            </li>
-         </ul>")
-    @as("JobStatus")
-    jobStatus: option<jobStatus>,
-    @ocaml.doc("<p>The identifier generated for the job. To get the status of a job, use this identifier with
-      the  operation.</p>")
-    @as("JobId")
-    jobId: option<jobId>,
-  }
-  @module("@aws-sdk/client-comprehend") @new
-  external new: request => t = "StartDominantLanguageDetectionJobCommand"
-  let make = (
-    ~dataAccessRoleArn,
-    ~outputDataConfig,
-    ~inputDataConfig,
-    ~vpcConfig=?,
-    ~volumeKmsKeyId=?,
-    ~clientRequestToken=?,
-    ~jobName=?,
-    (),
-  ) =>
-    new({
-      vpcConfig: vpcConfig,
-      volumeKmsKeyId: volumeKmsKeyId,
-      clientRequestToken: clientRequestToken,
-      jobName: jobName,
-      dataAccessRoleArn: dataAccessRoleArn,
-      outputDataConfig: outputDataConfig,
-      inputDataConfig: inputDataConfig,
-    })
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
-module StartDocumentClassificationJob = {
-  type t
-  type request = {
-    @ocaml.doc("<p>Configuration parameters for an optional private Virtual Private Cloud (VPC) containing
-      the resources you are using for your document classification job. For more information, see
-        <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html\">Amazon
-        VPC</a>. </p>")
-    @as("VpcConfig")
-    vpcConfig: option<vpcConfig>,
-    @ocaml.doc("<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt
-      data on the storage volume attached to the ML compute instance(s) that process the analysis
-      job. The VolumeKmsKeyId can be either of the following formats:</p>
-         <ul>
-            <li>
-               <p>KMS Key ID: <code>\"1234abcd-12ab-34cd-56ef-1234567890ab\"</code>
-               </p>
-            </li>
-            <li>
-               <p>Amazon Resource Name (ARN) of a KMS Key:
-            <code>\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</code>
-               </p>
-            </li>
-         </ul>")
-    @as("VolumeKmsKeyId")
-    volumeKmsKeyId: option<kmsKeyId>,
-    @ocaml.doc("<p>A unique identifier for the request. If you do not set the client request token, Amazon
-      Comprehend generates one.</p>")
-    @as("ClientRequestToken")
-    clientRequestToken: option<clientRequestTokenString>,
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that
-      grants Amazon Comprehend read access to your input data.</p>")
-    @as("DataAccessRoleArn")
-    dataAccessRoleArn: iamRoleArn,
-    @ocaml.doc("<p>Specifies where to send the output files.</p>") @as("OutputDataConfig")
-    outputDataConfig: outputDataConfig,
-    @ocaml.doc("<p>Specifies the format and location of the input data for the job.</p>")
-    @as("InputDataConfig")
-    inputDataConfig: inputDataConfig,
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the document classifier to use to process the
-      job.</p>")
-    @as("DocumentClassifierArn")
-    documentClassifierArn: documentClassifierArn,
-    @ocaml.doc("<p>The identifier of the job.</p>") @as("JobName") jobName: option<jobName>,
-  }
-  type response = {
-    @ocaml.doc("<p>The status of the job:</p>
-         <ul>
-            <li>
-               <p>SUBMITTED - The job has been received and queued for processing.</p>
-            </li>
-            <li>
-               <p>IN_PROGRESS - Amazon Comprehend is processing the job.</p>
-            </li>
-            <li>
-               <p>COMPLETED - The job was successfully completed and the output is available.</p>
-            </li>
-            <li>
-               <p>FAILED - The job did not complete. For details, use the  operation.</p>
-            </li>
-            <li>
-               <p>STOP_REQUESTED - Amazon Comprehend has received a stop request for the job and is
-          processing the request.</p>
-            </li>
-            <li>
-               <p>STOPPED - The job was successfully stopped without completing.</p>
-            </li>
-         </ul>")
-    @as("JobStatus")
-    jobStatus: option<jobStatus>,
-    @ocaml.doc("<p>The identifier generated for the job. To get the status of the job, use this identifier
-      with the  operation.</p>")
-    @as("JobId")
-    jobId: option<jobId>,
-  }
-  @module("@aws-sdk/client-comprehend") @new
-  external new: request => t = "StartDocumentClassificationJobCommand"
-  let make = (
-    ~dataAccessRoleArn,
-    ~outputDataConfig,
-    ~inputDataConfig,
-    ~documentClassifierArn,
-    ~vpcConfig=?,
-    ~volumeKmsKeyId=?,
-    ~clientRequestToken=?,
-    ~jobName=?,
-    (),
-  ) =>
-    new({
-      vpcConfig: vpcConfig,
-      volumeKmsKeyId: volumeKmsKeyId,
-      clientRequestToken: clientRequestToken,
-      dataAccessRoleArn: dataAccessRoleArn,
-      outputDataConfig: outputDataConfig,
-      inputDataConfig: inputDataConfig,
-      documentClassifierArn: documentClassifierArn,
-      jobName: jobName,
-    })
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
@@ -2704,6 +2520,28 @@ module ListTagsForResource = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module ListEntityRecognizerSummaries = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The maximum number of results to return on each page. The default is 100.</p>")
+    @as("MaxResults")
+    maxResults: option<maxResultsInteger>,
+    @ocaml.doc("<p>Identifies the next page of results to return.</p>") @as("NextToken")
+    nextToken: option<string_>,
+  }
+  type response = {
+    @ocaml.doc("<p>The list entity recognizer summaries.</p>") @as("NextToken")
+    nextToken: option<string_>,
+    @ocaml.doc("<p>The list entity recognizer summaries.</p>") @as("EntityRecognizerSummariesList")
+    entityRecognizerSummariesList: option<entityRecognizerSummariesList>,
+  }
+  @module("@aws-sdk/client-comprehend") @new
+  external new: request => t = "ListEntityRecognizerSummariesCommand"
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module ListEndpoints = {
   type t
   type request = {
@@ -2729,6 +2567,98 @@ module ListEndpoints = {
   @module("@aws-sdk/client-comprehend") @new external new: request => t = "ListEndpointsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) =>
     new({maxResults: maxResults, nextToken: nextToken, filter: filter})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module ListDocumentClassifierSummaries = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The maximum number of results to return on each page. The default is 100.</p>")
+    @as("MaxResults")
+    maxResults: option<maxResultsInteger>,
+    @ocaml.doc("<p>Identifies the next page of results to return.</p>") @as("NextToken")
+    nextToken: option<string_>,
+  }
+  type response = {
+    @ocaml.doc("<p>Identifies the next page of results to return.</p>") @as("NextToken")
+    nextToken: option<string_>,
+    @ocaml.doc("<p>The list of summaries of document classifiers.</p>")
+    @as("DocumentClassifierSummariesList")
+    documentClassifierSummariesList: option<documentClassifierSummariesList>,
+  }
+  @module("@aws-sdk/client-comprehend") @new
+  external new: request => t = "ListDocumentClassifierSummariesCommand"
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module ImportModel = {
+  type t
+  type request = {
+    @ocaml.doc("<p>Tags to be associated with the custom model that is created by this import. A tag is a
+      key-value pair that adds as a metadata to a resource used by Amazon Comprehend. For example, a
+      tag with \"Sales\" as the key might be added to a resource to indicate its use by the sales
+      department.</p>")
+    @as("Tags")
+    tags: option<tagList_>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role that allows
+      Amazon Comprehend to use Amazon Key Management Service (KMS) to encrypt or decrypt the custom
+      model.</p>")
+    @as("DataAccessRoleArn")
+    dataAccessRoleArn: option<iamRoleArn>,
+    @ocaml.doc("<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt
+      trained custom models. The ModelKmsKeyId can be either of the following formats:</p>
+         <ul>
+            <li>
+               <p>KMS Key ID: <code>\"1234abcd-12ab-34cd-56ef-1234567890ab\"</code>
+               </p>
+            </li>
+            <li>
+               <p>Amazon Resource Name (ARN) of a KMS Key:
+            <code>\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</code>
+               </p>
+            </li>
+         </ul>")
+    @as("ModelKmsKeyId")
+    modelKmsKeyId: option<kmsKeyId>,
+    @ocaml.doc("<p>The version name given to the custom model that is created by this import. Version names
+      can have a maximum of 256 characters. Alphanumeric characters, hyphens (-) and underscores (_)
+      are allowed. The version name must be unique among all models with the same classifier name in
+      the account/AWS Region.</p>")
+    @as("VersionName")
+    versionName: option<versionName>,
+    @ocaml.doc("<p>The name to assign to the custom model that is created in Amazon Comprehend by this
+      import.</p>")
+    @as("ModelName")
+    modelName: option<comprehendArnName>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the custom model to import.</p>")
+    @as("SourceModelArn")
+    sourceModelArn: comprehendModelArn,
+  }
+  type response = {
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the custom model being imported.</p>")
+    @as("ModelArn")
+    modelArn: option<comprehendModelArn>,
+  }
+  @module("@aws-sdk/client-comprehend") @new external new: request => t = "ImportModelCommand"
+  let make = (
+    ~sourceModelArn,
+    ~tags=?,
+    ~dataAccessRoleArn=?,
+    ~modelKmsKeyId=?,
+    ~versionName=?,
+    ~modelName=?,
+    (),
+  ) =>
+    new({
+      tags: tags,
+      dataAccessRoleArn: dataAccessRoleArn,
+      modelKmsKeyId: modelKmsKeyId,
+      versionName: versionName,
+      modelName: modelName,
+      sourceModelArn: sourceModelArn,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -2839,24 +2769,6 @@ module DetectDominantLanguage = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
-module DescribeEventsDetectionJob = {
-  type t
-  type request = {
-    @ocaml.doc("<p>The identifier of the events detection job.</p>") @as("JobId") jobId: jobId,
-  }
-  type response = {
-    @ocaml.doc(
-      "<p>An object that contains the properties associated with an event detection job.</p>"
-    )
-    @as("EventsDetectionJobProperties")
-    eventsDetectionJobProperties: option<eventsDetectionJobProperties>,
-  }
-  @module("@aws-sdk/client-comprehend") @new
-  external new: request => t = "DescribeEventsDetectionJobCommand"
-  let make = (~jobId, ()) => new({jobId: jobId})
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
 module CreateEndpoint = {
   type t
   type request = {
@@ -2963,29 +2875,953 @@ module ClassifyDocument = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
-module ListEventsDetectionJobs = {
+module StartTopicsDetectionJob = {
   type t
   type request = {
-    @ocaml.doc("<p>The maximum number of results to return in each page.</p>") @as("MaxResults")
-    maxResults: option<maxResultsInteger>,
-    @ocaml.doc("<p>Identifies the next page of results to return.</p>") @as("NextToken")
-    nextToken: option<string_>,
-    @ocaml.doc("<p>Filters the jobs that are returned. You can filter jobs on their name, status, or the date
-      and time that they were submitted. You can only set one filter at a time.</p>")
-    @as("Filter")
-    filter: option<eventsDetectionJobFilter>,
+    @ocaml.doc("<p>Tags to be associated with the topics detection job. A tag is a key-value pair that adds
+      metadata to a resource used by Amazon Comprehend. For example, a tag with \"Sales\" as the key
+      might be added to a resource to indicate its use by the sales department.</p>")
+    @as("Tags")
+    tags: option<tagList_>,
+    @ocaml.doc("<p>Configuration parameters for an optional private Virtual Private Cloud (VPC) containing
+      the resources you are using for your topic detection job. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html\">Amazon
+        VPC</a>. </p>")
+    @as("VpcConfig")
+    vpcConfig: option<vpcConfig>,
+    @ocaml.doc("<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt
+      data on the storage volume attached to the ML compute instance(s) that process the analysis
+      job. The VolumeKmsKeyId can be either of the following formats:</p>
+         <ul>
+            <li>
+               <p>KMS Key ID: <code>\"1234abcd-12ab-34cd-56ef-1234567890ab\"</code>
+               </p>
+            </li>
+            <li>
+               <p>Amazon Resource Name (ARN) of a KMS Key:
+            <code>\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</code>
+               </p>
+            </li>
+         </ul>")
+    @as("VolumeKmsKeyId")
+    volumeKmsKeyId: option<kmsKeyId>,
+    @ocaml.doc("<p>A unique identifier for the request. If you do not set the client request token, Amazon
+      Comprehend generates one.</p>")
+    @as("ClientRequestToken")
+    clientRequestToken: option<clientRequestTokenString>,
+    @ocaml.doc("<p>The number of topics to detect.</p>") @as("NumberOfTopics")
+    numberOfTopics: option<numberOfTopicsInteger>,
+    @ocaml.doc("<p>The identifier of the job.</p>") @as("JobName") jobName: option<jobName>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role
+      that grants Amazon Comprehend read access to your input data. For more information, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions\">https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions</a>.</p>")
+    @as("DataAccessRoleArn")
+    dataAccessRoleArn: iamRoleArn,
+    @ocaml.doc("<p>Specifies where to send the output files. The output is a compressed archive with two
+      files, <code>topic-terms.csv</code> that lists the terms associated with each topic, and
+        <code>doc-topics.csv</code> that lists the documents associated with each topic</p>")
+    @as("OutputDataConfig")
+    outputDataConfig: outputDataConfig,
+    @ocaml.doc("<p>Specifies the format and location of the input data for the job.</p>")
+    @as("InputDataConfig")
+    inputDataConfig: inputDataConfig,
   }
   type response = {
-    @ocaml.doc("<p>Identifies the next page of results to return.</p>") @as("NextToken")
-    nextToken: option<string_>,
-    @ocaml.doc("<p>A list containing the properties of each job that is returned.</p>")
-    @as("EventsDetectionJobPropertiesList")
-    eventsDetectionJobPropertiesList: option<eventsDetectionJobPropertiesList>,
+    @ocaml.doc("<p>The status of the job: </p>
+         <ul>
+            <li>
+               <p>SUBMITTED - The job has been received and is queued for processing.</p>
+            </li>
+            <li>
+               <p>IN_PROGRESS - Amazon Comprehend is processing the job.</p>
+            </li>
+            <li>
+               <p>COMPLETED - The job was successfully completed and the output is
+          available.</p>
+            </li>
+            <li>
+               <p>FAILED - The job did not complete. To get details, use the
+            <code>DescribeTopicDetectionJob</code> operation.</p>
+            </li>
+         </ul>")
+    @as("JobStatus")
+    jobStatus: option<jobStatus>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the topics detection job. It is a unique, fully
+      qualified identifier for the job. It includes the AWS account, Region, and the job ID. The
+      format of the ARN is as follows:</p>
+         <p>
+            <code>arn:<partition>:comprehend:<region>:<account-id>:topics-detection-job/<job-id></code>
+         </p>
+         <p>The following is an example job ARN:</p>
+         <p>
+            <code>arn:aws:comprehend:us-west-2:111122223333:document-classification-job/1234abcd12ab34cd56ef1234567890ab</code>
+         </p>")
+    @as("JobArn")
+    jobArn: option<comprehendArn>,
+    @ocaml.doc("<p>The identifier generated for the job. To get the status of the job, use this identifier
+      with the <code>DescribeTopicDetectionJob</code> operation.</p>")
+    @as("JobId")
+    jobId: option<jobId>,
   }
   @module("@aws-sdk/client-comprehend") @new
-  external new: request => t = "ListEventsDetectionJobsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, filter: filter})
+  external new: request => t = "StartTopicsDetectionJobCommand"
+  let make = (
+    ~dataAccessRoleArn,
+    ~outputDataConfig,
+    ~inputDataConfig,
+    ~tags=?,
+    ~vpcConfig=?,
+    ~volumeKmsKeyId=?,
+    ~clientRequestToken=?,
+    ~numberOfTopics=?,
+    ~jobName=?,
+    (),
+  ) =>
+    new({
+      tags: tags,
+      vpcConfig: vpcConfig,
+      volumeKmsKeyId: volumeKmsKeyId,
+      clientRequestToken: clientRequestToken,
+      numberOfTopics: numberOfTopics,
+      jobName: jobName,
+      dataAccessRoleArn: dataAccessRoleArn,
+      outputDataConfig: outputDataConfig,
+      inputDataConfig: inputDataConfig,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module StartTargetedSentimentDetectionJob = {
+  type t
+  type request = {
+    @ocaml.doc("<p>Tags to be associated with the targeted sentiment detection job. A tag is a key-value pair that
+      adds metadata to a resource used by Amazon Comprehend. For example, a tag with \"Sales\" as the
+      key might be added to a resource to indicate its use by the sales department.</p>")
+    @as("Tags")
+    tags: option<tagList_>,
+    @as("VpcConfig") vpcConfig: option<vpcConfig>,
+    @ocaml.doc("<p>ID for the KMS key that Amazon Comprehend uses to encrypt
+      data on the storage volume attached to the ML compute instance(s) that process the analysis
+      job. The VolumeKmsKeyId can be either of the following formats:</p>
+         <ul>
+            <li>
+               <p>KMS Key ID: <code>\"1234abcd-12ab-34cd-56ef-1234567890ab\"</code>
+               </p>
+            </li>
+            <li>
+               <p>Amazon Resource Name (ARN) of a KMS Key:
+          <code>\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</code>
+               </p>
+            </li>
+         </ul>")
+    @as("VolumeKmsKeyId")
+    volumeKmsKeyId: option<kmsKeyId>,
+    @ocaml.doc("<p>A unique identifier for the request. If you don't set the client request token, Amazon
+      Comprehend generates one.</p>")
+    @as("ClientRequestToken")
+    clientRequestToken: option<clientRequestTokenString>,
+    @ocaml.doc("<p>The language of the input documents. You can specify any of the primary languages
+      supported by Amazon Comprehend. All documents must be in the same language.</p>")
+    @as("LanguageCode")
+    languageCode: languageCode,
+    @ocaml.doc("<p>The identifier of the job.</p>") @as("JobName") jobName: option<jobName>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that
+      grants Amazon Comprehend read access to your input data. For more information, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions\">Role-based permissions</a>.</p>")
+    @as("DataAccessRoleArn")
+    dataAccessRoleArn: iamRoleArn,
+    @ocaml.doc("<p>Specifies where to send the output files. </p>") @as("OutputDataConfig")
+    outputDataConfig: outputDataConfig,
+    @as("InputDataConfig") inputDataConfig: inputDataConfig,
+  }
+  type response = {
+    @ocaml.doc("<p>The status of the job. </p>
+         <ul>
+            <li>
+               <p>SUBMITTED - The job has been received and is queued for processing.</p>
+            </li>
+            <li>
+               <p>IN_PROGRESS - Amazon Comprehend is processing the job.</p>
+            </li>
+            <li>
+               <p>COMPLETED - The job was successfully completed and the output is available.</p>
+            </li>
+            <li>
+               <p>FAILED - The job did not complete. To get details, use the  operation.</p>
+            </li>
+         </ul>")
+    @as("JobStatus")
+    jobStatus: option<jobStatus>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the targeted sentiment detection job. It is a unique, fully
+      qualified identifier for the job. It includes the AWS account, Region, and the job ID. The
+      format of the ARN is as follows:</p>
+         <p>
+            <code>arn:<partition>:comprehend:<region>:<account-id>:targeted-sentiment-detection-job/<job-id></code>
+         </p>
+         <p>The following is an example job ARN:</p>
+         <p>
+            <code>arn:aws:comprehend:us-west-2:111122223333:targeted-sentiment-detection-job/1234abcd12ab34cd56ef1234567890ab</code>
+         </p>")
+    @as("JobArn")
+    jobArn: option<comprehendArn>,
+    @ocaml.doc("<p>The identifier generated for the job. To get the status of a job, use this identifier with
+      the  operation.</p>")
+    @as("JobId")
+    jobId: option<jobId>,
+  }
+  @module("@aws-sdk/client-comprehend") @new
+  external new: request => t = "StartTargetedSentimentDetectionJobCommand"
+  let make = (
+    ~languageCode,
+    ~dataAccessRoleArn,
+    ~outputDataConfig,
+    ~inputDataConfig,
+    ~tags=?,
+    ~vpcConfig=?,
+    ~volumeKmsKeyId=?,
+    ~clientRequestToken=?,
+    ~jobName=?,
+    (),
+  ) =>
+    new({
+      tags: tags,
+      vpcConfig: vpcConfig,
+      volumeKmsKeyId: volumeKmsKeyId,
+      clientRequestToken: clientRequestToken,
+      languageCode: languageCode,
+      jobName: jobName,
+      dataAccessRoleArn: dataAccessRoleArn,
+      outputDataConfig: outputDataConfig,
+      inputDataConfig: inputDataConfig,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module StartSentimentDetectionJob = {
+  type t
+  type request = {
+    @ocaml.doc("<p>Tags to be associated with the sentiment detection job. A tag is a key-value pair that
+      adds metadata to a resource used by Amazon Comprehend. For example, a tag with \"Sales\" as the
+      key might be added to a resource to indicate its use by the sales department.</p>")
+    @as("Tags")
+    tags: option<tagList_>,
+    @ocaml.doc("<p>Configuration parameters for an optional private Virtual Private Cloud (VPC) containing
+      the resources you are using for your sentiment detection job. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html\">Amazon
+        VPC</a>. </p>")
+    @as("VpcConfig")
+    vpcConfig: option<vpcConfig>,
+    @ocaml.doc("<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt
+      data on the storage volume attached to the ML compute instance(s) that process the analysis
+      job. The VolumeKmsKeyId can be either of the following formats:</p>
+         <ul>
+            <li>
+               <p>KMS Key ID: <code>\"1234abcd-12ab-34cd-56ef-1234567890ab\"</code>
+               </p>
+            </li>
+            <li>
+               <p>Amazon Resource Name (ARN) of a KMS Key:
+            <code>\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</code>
+               </p>
+            </li>
+         </ul>")
+    @as("VolumeKmsKeyId")
+    volumeKmsKeyId: option<kmsKeyId>,
+    @ocaml.doc("<p>A unique identifier for the request. If you don't set the client request token, Amazon
+      Comprehend generates one.</p>")
+    @as("ClientRequestToken")
+    clientRequestToken: option<clientRequestTokenString>,
+    @ocaml.doc("<p>The language of the input documents. You can specify any of the primary languages
+      supported by Amazon Comprehend. All documents must be in the same language.</p>")
+    @as("LanguageCode")
+    languageCode: languageCode,
+    @ocaml.doc("<p>The identifier of the job.</p>") @as("JobName") jobName: option<jobName>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that
+      grants Amazon Comprehend read access to your input data. For more information, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions\">https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions</a>.</p>")
+    @as("DataAccessRoleArn")
+    dataAccessRoleArn: iamRoleArn,
+    @ocaml.doc("<p>Specifies where to send the output files. </p>") @as("OutputDataConfig")
+    outputDataConfig: outputDataConfig,
+    @ocaml.doc("<p>Specifies the format and location of the input data for the job.</p>")
+    @as("InputDataConfig")
+    inputDataConfig: inputDataConfig,
+  }
+  type response = {
+    @ocaml.doc("<p>The status of the job. </p>
+         <ul>
+            <li>
+               <p>SUBMITTED - The job has been received and is queued for processing.</p>
+            </li>
+            <li>
+               <p>IN_PROGRESS - Amazon Comprehend is processing the job.</p>
+            </li>
+            <li>
+               <p>COMPLETED - The job was successfully completed and the output is available.</p>
+            </li>
+            <li>
+               <p>FAILED - The job did not complete. To get details, use the  operation.</p>
+            </li>
+         </ul>")
+    @as("JobStatus")
+    jobStatus: option<jobStatus>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the sentiment detection job. It is a unique, fully
+      qualified identifier for the job. It includes the AWS account, Region, and the job ID. The
+      format of the ARN is as follows:</p>
+         <p>
+            <code>arn:<partition>:comprehend:<region>:<account-id>:sentiment-detection-job/<job-id></code>
+         </p>
+         <p>The following is an example job ARN:</p>
+         <p>
+            <code>arn:aws:comprehend:us-west-2:111122223333:sentiment-detection-job/1234abcd12ab34cd56ef1234567890ab</code>
+         </p>")
+    @as("JobArn")
+    jobArn: option<comprehendArn>,
+    @ocaml.doc("<p>The identifier generated for the job. To get the status of a job, use this identifier with
+      the  operation.</p>")
+    @as("JobId")
+    jobId: option<jobId>,
+  }
+  @module("@aws-sdk/client-comprehend") @new
+  external new: request => t = "StartSentimentDetectionJobCommand"
+  let make = (
+    ~languageCode,
+    ~dataAccessRoleArn,
+    ~outputDataConfig,
+    ~inputDataConfig,
+    ~tags=?,
+    ~vpcConfig=?,
+    ~volumeKmsKeyId=?,
+    ~clientRequestToken=?,
+    ~jobName=?,
+    (),
+  ) =>
+    new({
+      tags: tags,
+      vpcConfig: vpcConfig,
+      volumeKmsKeyId: volumeKmsKeyId,
+      clientRequestToken: clientRequestToken,
+      languageCode: languageCode,
+      jobName: jobName,
+      dataAccessRoleArn: dataAccessRoleArn,
+      outputDataConfig: outputDataConfig,
+      inputDataConfig: inputDataConfig,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module StartPiiEntitiesDetectionJob = {
+  type t
+  type request = {
+    @ocaml.doc("<p>Tags to be associated with the PII entities detection job. A tag is a key-value pair that
+      adds metadata to a resource used by Amazon Comprehend. For example, a tag with \"Sales\" as the
+      key might be added to a resource to indicate its use by the sales department.</p>")
+    @as("Tags")
+    tags: option<tagList_>,
+    @ocaml.doc("<p>A unique identifier for the request. If you don't set the client request token, Amazon
+      Comprehend generates one.</p>")
+    @as("ClientRequestToken")
+    clientRequestToken: option<clientRequestTokenString>,
+    @ocaml.doc("<p>The language of the input documents.</p>") @as("LanguageCode")
+    languageCode: languageCode,
+    @ocaml.doc("<p>The identifier of the job.</p>") @as("JobName") jobName: option<jobName>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that
+      grants Amazon Comprehend read access to your input data.</p>")
+    @as("DataAccessRoleArn")
+    dataAccessRoleArn: iamRoleArn,
+    @ocaml.doc("<p>Provides configuration parameters for PII entity redaction.</p>
+         <p>This parameter is required if you set the <code>Mode</code> parameter to
+        <code>ONLY_REDACTION</code>. In that case, you must provide a <code>RedactionConfig</code>
+      definition that includes the <code>PiiEntityTypes</code> parameter.</p>")
+    @as("RedactionConfig")
+    redactionConfig: option<redactionConfig>,
+    @ocaml.doc("<p>Specifies whether the output provides the locations (offsets) of PII entities or a file in
+      which PII entities are redacted.</p>")
+    @as("Mode")
+    mode: piiEntitiesDetectionMode,
+    @ocaml.doc(
+      "<p>Provides conﬁguration parameters for the output of PII entity detection jobs.</p>"
+    )
+    @as("OutputDataConfig")
+    outputDataConfig: outputDataConfig,
+    @ocaml.doc("<p>The input properties for a PII entities detection job.</p>")
+    @as("InputDataConfig")
+    inputDataConfig: inputDataConfig,
+  }
+  type response = {
+    @ocaml.doc("<p>The status of the job.</p>") @as("JobStatus") jobStatus: option<jobStatus>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the PII entity detection job. It is a unique, fully
+      qualified identifier for the job. It includes the AWS account, Region, and the job ID. The
+      format of the ARN is as follows:</p>
+         <p>
+            <code>arn:<partition>:comprehend:<region>:<account-id>:pii-entities-detection-job/<job-id></code>
+         </p>
+         <p>The following is an example job ARN:</p>
+         <p>
+            <code>arn:aws:comprehend:us-west-2:111122223333:pii-entities-detection-job/1234abcd12ab34cd56ef1234567890ab</code>
+         </p>")
+    @as("JobArn")
+    jobArn: option<comprehendArn>,
+    @ocaml.doc("<p>The identifier generated for the job.</p>") @as("JobId") jobId: option<jobId>,
+  }
+  @module("@aws-sdk/client-comprehend") @new
+  external new: request => t = "StartPiiEntitiesDetectionJobCommand"
+  let make = (
+    ~languageCode,
+    ~dataAccessRoleArn,
+    ~mode,
+    ~outputDataConfig,
+    ~inputDataConfig,
+    ~tags=?,
+    ~clientRequestToken=?,
+    ~jobName=?,
+    ~redactionConfig=?,
+    (),
+  ) =>
+    new({
+      tags: tags,
+      clientRequestToken: clientRequestToken,
+      languageCode: languageCode,
+      jobName: jobName,
+      dataAccessRoleArn: dataAccessRoleArn,
+      redactionConfig: redactionConfig,
+      mode: mode,
+      outputDataConfig: outputDataConfig,
+      inputDataConfig: inputDataConfig,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module StartKeyPhrasesDetectionJob = {
+  type t
+  type request = {
+    @ocaml.doc("<p>Tags to be associated with the key phrases detection job. A tag is a key-value pair that
+      adds metadata to a resource used by Amazon Comprehend. For example, a tag with \"Sales\" as the
+      key might be added to a resource to indicate its use by the sales department.</p>")
+    @as("Tags")
+    tags: option<tagList_>,
+    @ocaml.doc("<p> Configuration parameters for an optional private Virtual Private Cloud (VPC) containing
+      the resources you are using for your key phrases detection job. For more information, see
+        <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html\">Amazon
+        VPC</a>. </p>")
+    @as("VpcConfig")
+    vpcConfig: option<vpcConfig>,
+    @ocaml.doc("<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt
+      data on the storage volume attached to the ML compute instance(s) that process the analysis
+      job. The VolumeKmsKeyId can be either of the following formats:</p>
+         <ul>
+            <li>
+               <p>KMS Key ID: <code>\"1234abcd-12ab-34cd-56ef-1234567890ab\"</code>
+               </p>
+            </li>
+            <li>
+               <p>Amazon Resource Name (ARN) of a KMS Key:
+            <code>\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</code>
+               </p>
+            </li>
+         </ul>")
+    @as("VolumeKmsKeyId")
+    volumeKmsKeyId: option<kmsKeyId>,
+    @ocaml.doc("<p>A unique identifier for the request. If you don't set the client request token, Amazon
+      Comprehend generates one.</p>")
+    @as("ClientRequestToken")
+    clientRequestToken: option<clientRequestTokenString>,
+    @ocaml.doc("<p>The language of the input documents. You can specify any of the primary languages
+      supported by Amazon Comprehend. All documents must be in the same language.</p>")
+    @as("LanguageCode")
+    languageCode: languageCode,
+    @ocaml.doc("<p>The identifier of the job.</p>") @as("JobName") jobName: option<jobName>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that
+      grants Amazon Comprehend read access to your input data. For more information, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions\">https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions</a>.</p>")
+    @as("DataAccessRoleArn")
+    dataAccessRoleArn: iamRoleArn,
+    @ocaml.doc("<p>Specifies where to send the output files.</p>") @as("OutputDataConfig")
+    outputDataConfig: outputDataConfig,
+    @ocaml.doc("<p>Specifies the format and location of the input data for the job.</p>")
+    @as("InputDataConfig")
+    inputDataConfig: inputDataConfig,
+  }
+  type response = {
+    @ocaml.doc("<p>The status of the job. </p>
+         <ul>
+            <li>
+               <p>SUBMITTED - The job has been received and is queued for processing.</p>
+            </li>
+            <li>
+               <p>IN_PROGRESS - Amazon Comprehend is processing the job.</p>
+            </li>
+            <li>
+               <p>COMPLETED - The job was successfully completed and the output is available.</p>
+            </li>
+            <li>
+               <p>FAILED - The job did not complete. To get details, use the  operation.</p>
+            </li>
+         </ul>")
+    @as("JobStatus")
+    jobStatus: option<jobStatus>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the key phrase detection job. It is a unique, fully
+      qualified identifier for the job. It includes the AWS account, Region, and the job ID. The
+      format of the ARN is as follows:</p>
+         <p>
+            <code>arn:<partition>:comprehend:<region>:<account-id>:key-phrases-detection-job/<job-id></code>
+         </p>
+         <p>The following is an example job ARN:</p>
+         <p>
+            <code>arn:aws:comprehend:us-west-2:111122223333:key-phrases-detection-job/1234abcd12ab34cd56ef1234567890ab</code>
+         </p>")
+    @as("JobArn")
+    jobArn: option<comprehendArn>,
+    @ocaml.doc("<p>The identifier generated for the job. To get the status of a job, use this identifier with
+      the  operation.</p>")
+    @as("JobId")
+    jobId: option<jobId>,
+  }
+  @module("@aws-sdk/client-comprehend") @new
+  external new: request => t = "StartKeyPhrasesDetectionJobCommand"
+  let make = (
+    ~languageCode,
+    ~dataAccessRoleArn,
+    ~outputDataConfig,
+    ~inputDataConfig,
+    ~tags=?,
+    ~vpcConfig=?,
+    ~volumeKmsKeyId=?,
+    ~clientRequestToken=?,
+    ~jobName=?,
+    (),
+  ) =>
+    new({
+      tags: tags,
+      vpcConfig: vpcConfig,
+      volumeKmsKeyId: volumeKmsKeyId,
+      clientRequestToken: clientRequestToken,
+      languageCode: languageCode,
+      jobName: jobName,
+      dataAccessRoleArn: dataAccessRoleArn,
+      outputDataConfig: outputDataConfig,
+      inputDataConfig: inputDataConfig,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module StartEventsDetectionJob = {
+  type t
+  type request = {
+    @ocaml.doc("<p>Tags to be associated with the events detection job. A tag is a key-value pair that adds
+      metadata to a resource used by Amazon Comprehend. For example, a tag with \"Sales\" as the key
+      might be added to a resource to indicate its use by the sales department.</p>")
+    @as("Tags")
+    tags: option<tagList_>,
+    @ocaml.doc("<p>The types of events to detect in the input documents.</p>")
+    @as("TargetEventTypes")
+    targetEventTypes: targetEventTypes,
+    @ocaml.doc("<p>An unique identifier for the request. If you don't set the client request token, Amazon
+      Comprehend generates one.</p>")
+    @as("ClientRequestToken")
+    clientRequestToken: option<clientRequestTokenString>,
+    @ocaml.doc("<p>The language code of the input documents.</p>") @as("LanguageCode")
+    languageCode: languageCode,
+    @ocaml.doc("<p>The identifier of the events detection job.</p>") @as("JobName")
+    jobName: option<jobName>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that
+      grants Amazon Comprehend read access to your input data.</p>")
+    @as("DataAccessRoleArn")
+    dataAccessRoleArn: iamRoleArn,
+    @ocaml.doc("<p>Specifies where to send the output files.</p>") @as("OutputDataConfig")
+    outputDataConfig: outputDataConfig,
+    @ocaml.doc("<p>Specifies the format and location of the input data for the job.</p>")
+    @as("InputDataConfig")
+    inputDataConfig: inputDataConfig,
+  }
+  type response = {
+    @ocaml.doc("<p>The status of the events detection job.</p>") @as("JobStatus")
+    jobStatus: option<jobStatus>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the events detection job. It is a unique, fully
+      qualified identifier for the job. It includes the AWS account, Region, and the job ID. The
+      format of the ARN is as follows:</p>
+         <p>
+            <code>arn:<partition>:comprehend:<region>:<account-id>:events-detection-job/<job-id></code>
+         </p>
+         <p>The following is an example job ARN:</p>
+         <p>
+            <code>arn:aws:comprehend:us-west-2:111122223333:events-detection-job/1234abcd12ab34cd56ef1234567890ab</code>
+         </p>")
+    @as("JobArn")
+    jobArn: option<comprehendArn>,
+    @ocaml.doc("<p>An unique identifier for the request. If you don't set the client request token, Amazon
+      Comprehend generates one.</p>")
+    @as("JobId")
+    jobId: option<jobId>,
+  }
+  @module("@aws-sdk/client-comprehend") @new
+  external new: request => t = "StartEventsDetectionJobCommand"
+  let make = (
+    ~targetEventTypes,
+    ~languageCode,
+    ~dataAccessRoleArn,
+    ~outputDataConfig,
+    ~inputDataConfig,
+    ~tags=?,
+    ~clientRequestToken=?,
+    ~jobName=?,
+    (),
+  ) =>
+    new({
+      tags: tags,
+      targetEventTypes: targetEventTypes,
+      clientRequestToken: clientRequestToken,
+      languageCode: languageCode,
+      jobName: jobName,
+      dataAccessRoleArn: dataAccessRoleArn,
+      outputDataConfig: outputDataConfig,
+      inputDataConfig: inputDataConfig,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module StartEntitiesDetectionJob = {
+  type t
+  type request = {
+    @ocaml.doc("<p>Tags to be associated with the entities detection job. A tag is a key-value pair that adds
+      metadata to a resource used by Amazon Comprehend. For example, a tag with \"Sales\" as the key
+      might be added to a resource to indicate its use by the sales department.</p>")
+    @as("Tags")
+    tags: option<tagList_>,
+    @ocaml.doc("<p>Configuration parameters for an optional private Virtual Private Cloud (VPC) containing
+      the resources you are using for your entity detection job. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html\">Amazon
+        VPC</a>. </p>")
+    @as("VpcConfig")
+    vpcConfig: option<vpcConfig>,
+    @ocaml.doc("<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt
+      data on the storage volume attached to the ML compute instance(s) that process the analysis
+      job. The VolumeKmsKeyId can be either of the following formats:</p>
+         <ul>
+            <li>
+               <p>KMS Key ID: <code>\"1234abcd-12ab-34cd-56ef-1234567890ab\"</code>
+               </p>
+            </li>
+            <li>
+               <p>Amazon Resource Name (ARN) of a KMS Key:
+            <code>\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</code>
+               </p>
+            </li>
+         </ul>")
+    @as("VolumeKmsKeyId")
+    volumeKmsKeyId: option<kmsKeyId>,
+    @ocaml.doc("<p>A unique identifier for the request. If you don't set the client request token, Amazon
+      Comprehend generates one.</p>")
+    @as("ClientRequestToken")
+    clientRequestToken: option<clientRequestTokenString>,
+    @ocaml.doc("<p>The language of the input documents. All documents must be in the same language. You can
+      specify any of the languages supported by Amazon Comprehend. If custom entities recognition is
+      used, this parameter is ignored and the language used for training the model is used
+      instead.</p>")
+    @as("LanguageCode")
+    languageCode: languageCode,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) that identifies the specific entity recognizer to be used
+      by the <code>StartEntitiesDetectionJob</code>. This ARN is optional and is only used for a
+      custom entity recognition job.</p>")
+    @as("EntityRecognizerArn")
+    entityRecognizerArn: option<entityRecognizerArn>,
+    @ocaml.doc("<p>The identifier of the job.</p>") @as("JobName") jobName: option<jobName>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that
+      grants Amazon Comprehend read access to your input data. For more information, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions\">https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions</a>.</p>")
+    @as("DataAccessRoleArn")
+    dataAccessRoleArn: iamRoleArn,
+    @ocaml.doc("<p>Specifies where to send the output files.</p>") @as("OutputDataConfig")
+    outputDataConfig: outputDataConfig,
+    @ocaml.doc("<p>Specifies the format and location of the input data for the job.</p>")
+    @as("InputDataConfig")
+    inputDataConfig: inputDataConfig,
+  }
+  type response = {
+    @ocaml.doc("<p>The status of the job. </p>
+         <ul>
+            <li>
+               <p>SUBMITTED - The job has been received and is queued for processing.</p>
+            </li>
+            <li>
+               <p>IN_PROGRESS - Amazon Comprehend is processing the job.</p>
+            </li>
+            <li>
+               <p>COMPLETED - The job was successfully completed and the output is available.</p>
+            </li>
+            <li>
+               <p>FAILED - The job did not complete. To get details, use the  operation.</p>
+            </li>
+            <li>
+               <p>STOP_REQUESTED - Amazon Comprehend has received a stop request for the job and is
+          processing the request.</p>
+            </li>
+            <li>
+               <p>STOPPED - The job was successfully stopped without completing.</p>
+            </li>
+         </ul>")
+    @as("JobStatus")
+    jobStatus: option<jobStatus>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the entities detection job. It is a unique, fully
+      qualified identifier for the job. It includes the AWS account, Region, and the job ID. The
+      format of the ARN is as follows:</p>
+         <p>
+            <code>arn:<partition>:comprehend:<region>:<account-id>:entities-detection-job/<job-id></code>
+         </p>
+         <p>The following is an example job ARN:</p>
+         <p>
+            <code>arn:aws:comprehend:us-west-2:111122223333:entities-detection-job/1234abcd12ab34cd56ef1234567890ab</code>
+         </p>")
+    @as("JobArn")
+    jobArn: option<comprehendArn>,
+    @ocaml.doc("<p>The identifier generated for the job. To get the status of job, use this identifier with
+      the  operation.</p>")
+    @as("JobId")
+    jobId: option<jobId>,
+  }
+  @module("@aws-sdk/client-comprehend") @new
+  external new: request => t = "StartEntitiesDetectionJobCommand"
+  let make = (
+    ~languageCode,
+    ~dataAccessRoleArn,
+    ~outputDataConfig,
+    ~inputDataConfig,
+    ~tags=?,
+    ~vpcConfig=?,
+    ~volumeKmsKeyId=?,
+    ~clientRequestToken=?,
+    ~entityRecognizerArn=?,
+    ~jobName=?,
+    (),
+  ) =>
+    new({
+      tags: tags,
+      vpcConfig: vpcConfig,
+      volumeKmsKeyId: volumeKmsKeyId,
+      clientRequestToken: clientRequestToken,
+      languageCode: languageCode,
+      entityRecognizerArn: entityRecognizerArn,
+      jobName: jobName,
+      dataAccessRoleArn: dataAccessRoleArn,
+      outputDataConfig: outputDataConfig,
+      inputDataConfig: inputDataConfig,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module StartDominantLanguageDetectionJob = {
+  type t
+  type request = {
+    @ocaml.doc("<p>Tags to be associated with the dominant language detection job. A tag is a key-value pair
+      that adds metadata to a resource used by Amazon Comprehend. For example, a tag with \"Sales\" as
+      the key might be added to a resource to indicate its use by the sales department.</p>")
+    @as("Tags")
+    tags: option<tagList_>,
+    @ocaml.doc("<p>Configuration parameters for an optional private Virtual Private Cloud (VPC) containing
+      the resources you are using for your dominant language detection job. For more information,
+      see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html\">Amazon VPC</a>. </p>")
+    @as("VpcConfig")
+    vpcConfig: option<vpcConfig>,
+    @ocaml.doc("<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt
+      data on the storage volume attached to the ML compute instance(s) that process the analysis
+      job. The VolumeKmsKeyId can be either of the following formats:</p>
+         <ul>
+            <li>
+               <p>KMS Key ID: <code>\"1234abcd-12ab-34cd-56ef-1234567890ab\"</code>
+               </p>
+            </li>
+            <li>
+               <p>Amazon Resource Name (ARN) of a KMS Key:
+            <code>\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</code>
+               </p>
+            </li>
+         </ul>")
+    @as("VolumeKmsKeyId")
+    volumeKmsKeyId: option<kmsKeyId>,
+    @ocaml.doc("<p>A unique identifier for the request. If you do not set the client request token, Amazon
+      Comprehend generates one.</p>")
+    @as("ClientRequestToken")
+    clientRequestToken: option<clientRequestTokenString>,
+    @ocaml.doc("<p>An identifier for the job.</p>") @as("JobName") jobName: option<jobName>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that
+      grants Amazon Comprehend read access to your input data. For more information, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions\">https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions</a>.</p>")
+    @as("DataAccessRoleArn")
+    dataAccessRoleArn: iamRoleArn,
+    @ocaml.doc("<p>Specifies where to send the output files.</p>") @as("OutputDataConfig")
+    outputDataConfig: outputDataConfig,
+    @ocaml.doc("<p>Specifies the format and location of the input data for the job.</p>")
+    @as("InputDataConfig")
+    inputDataConfig: inputDataConfig,
+  }
+  type response = {
+    @ocaml.doc("<p>The status of the job. </p>
+         <ul>
+            <li>
+               <p>SUBMITTED - The job has been received and is queued for processing.</p>
+            </li>
+            <li>
+               <p>IN_PROGRESS - Amazon Comprehend is processing the job.</p>
+            </li>
+            <li>
+               <p>COMPLETED - The job was successfully completed and the output is available.</p>
+            </li>
+            <li>
+               <p>FAILED - The job did not complete. To get details, use the  operation.</p>
+            </li>
+         </ul>")
+    @as("JobStatus")
+    jobStatus: option<jobStatus>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the dominant language detection job. It is a unique,
+      fully qualified identifier for the job. It includes the AWS account, Region, and the job ID.
+      The format of the ARN is as follows:</p>
+         <p>
+            <code>arn:<partition>:comprehend:<region>:<account-id>:dominant-language-detection-job/<job-id></code>
+         </p>
+         <p>The following is an example job ARN:</p>
+         <p>
+            <code>arn:aws:comprehend:us-west-2:111122223333:dominant-language-detection-job/1234abcd12ab34cd56ef1234567890ab</code>
+         </p>")
+    @as("JobArn")
+    jobArn: option<comprehendArn>,
+    @ocaml.doc("<p>The identifier generated for the job. To get the status of a job, use this identifier with
+      the  operation.</p>")
+    @as("JobId")
+    jobId: option<jobId>,
+  }
+  @module("@aws-sdk/client-comprehend") @new
+  external new: request => t = "StartDominantLanguageDetectionJobCommand"
+  let make = (
+    ~dataAccessRoleArn,
+    ~outputDataConfig,
+    ~inputDataConfig,
+    ~tags=?,
+    ~vpcConfig=?,
+    ~volumeKmsKeyId=?,
+    ~clientRequestToken=?,
+    ~jobName=?,
+    (),
+  ) =>
+    new({
+      tags: tags,
+      vpcConfig: vpcConfig,
+      volumeKmsKeyId: volumeKmsKeyId,
+      clientRequestToken: clientRequestToken,
+      jobName: jobName,
+      dataAccessRoleArn: dataAccessRoleArn,
+      outputDataConfig: outputDataConfig,
+      inputDataConfig: inputDataConfig,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module StartDocumentClassificationJob = {
+  type t
+  type request = {
+    @ocaml.doc("<p>Tags to be associated with the document classification job. A tag is a key-value pair that
+      adds metadata to a resource used by Amazon Comprehend. For example, a tag with \"Sales\" as the
+      key might be added to a resource to indicate its use by the sales department.</p>")
+    @as("Tags")
+    tags: option<tagList_>,
+    @ocaml.doc("<p>Configuration parameters for an optional private Virtual Private Cloud (VPC) containing
+      the resources you are using for your document classification job. For more information, see
+        <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html\">Amazon
+        VPC</a>. </p>")
+    @as("VpcConfig")
+    vpcConfig: option<vpcConfig>,
+    @ocaml.doc("<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt
+      data on the storage volume attached to the ML compute instance(s) that process the analysis
+      job. The VolumeKmsKeyId can be either of the following formats:</p>
+         <ul>
+            <li>
+               <p>KMS Key ID: <code>\"1234abcd-12ab-34cd-56ef-1234567890ab\"</code>
+               </p>
+            </li>
+            <li>
+               <p>Amazon Resource Name (ARN) of a KMS Key:
+            <code>\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</code>
+               </p>
+            </li>
+         </ul>")
+    @as("VolumeKmsKeyId")
+    volumeKmsKeyId: option<kmsKeyId>,
+    @ocaml.doc("<p>A unique identifier for the request. If you do not set the client request token, Amazon
+      Comprehend generates one.</p>")
+    @as("ClientRequestToken")
+    clientRequestToken: option<clientRequestTokenString>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that
+      grants Amazon Comprehend read access to your input data.</p>")
+    @as("DataAccessRoleArn")
+    dataAccessRoleArn: iamRoleArn,
+    @ocaml.doc("<p>Specifies where to send the output files.</p>") @as("OutputDataConfig")
+    outputDataConfig: outputDataConfig,
+    @ocaml.doc("<p>Specifies the format and location of the input data for the job.</p>")
+    @as("InputDataConfig")
+    inputDataConfig: inputDataConfig,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the document classifier to use to process the
+      job.</p>")
+    @as("DocumentClassifierArn")
+    documentClassifierArn: documentClassifierArn,
+    @ocaml.doc("<p>The identifier of the job.</p>") @as("JobName") jobName: option<jobName>,
+  }
+  type response = {
+    @ocaml.doc("<p>The status of the job:</p>
+         <ul>
+            <li>
+               <p>SUBMITTED - The job has been received and queued for processing.</p>
+            </li>
+            <li>
+               <p>IN_PROGRESS - Amazon Comprehend is processing the job.</p>
+            </li>
+            <li>
+               <p>COMPLETED - The job was successfully completed and the output is available.</p>
+            </li>
+            <li>
+               <p>FAILED - The job did not complete. For details, use the  operation.</p>
+            </li>
+            <li>
+               <p>STOP_REQUESTED - Amazon Comprehend has received a stop request for the job and is
+          processing the request.</p>
+            </li>
+            <li>
+               <p>STOPPED - The job was successfully stopped without completing.</p>
+            </li>
+         </ul>")
+    @as("JobStatus")
+    jobStatus: option<jobStatus>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the document classification job. It is a unique, fully
+      qualified identifier for the job. It includes the AWS account, Region, and the job ID. The
+      format of the ARN is as follows:</p>
+         <p>
+            <code>arn:<partition>:comprehend:<region>:<account-id>:document-classification-job/<job-id></code>
+         </p>
+         <p>The following is an example job ARN:</p>
+         <p>
+            <code>arn:aws:comprehend:us-west-2:111122223333:document-classification-job/1234abcd12ab34cd56ef1234567890ab</code>
+         </p>")
+    @as("JobArn")
+    jobArn: option<comprehendArn>,
+    @ocaml.doc("<p>The identifier generated for the job. To get the status of the job, use this identifier
+      with the  operation.</p>")
+    @as("JobId")
+    jobId: option<jobId>,
+  }
+  @module("@aws-sdk/client-comprehend") @new
+  external new: request => t = "StartDocumentClassificationJobCommand"
+  let make = (
+    ~dataAccessRoleArn,
+    ~outputDataConfig,
+    ~inputDataConfig,
+    ~documentClassifierArn,
+    ~tags=?,
+    ~vpcConfig=?,
+    ~volumeKmsKeyId=?,
+    ~clientRequestToken=?,
+    ~jobName=?,
+    (),
+  ) =>
+    new({
+      tags: tags,
+      vpcConfig: vpcConfig,
+      volumeKmsKeyId: volumeKmsKeyId,
+      clientRequestToken: clientRequestToken,
+      dataAccessRoleArn: dataAccessRoleArn,
+      outputDataConfig: outputDataConfig,
+      inputDataConfig: inputDataConfig,
+      documentClassifierArn: documentClassifierArn,
+      jobName: jobName,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -3014,6 +3850,39 @@ module DetectSyntax = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module BatchDetectSentiment = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The language of the input documents. You can specify any of the primary languages
+      supported by Amazon Comprehend. All documents must be in the same language.</p>")
+    @as("LanguageCode")
+    languageCode: languageCode,
+    @ocaml.doc("<p>A list containing the text of the input documents. The list can contain a maximum of 25
+      documents. Each document must contain fewer that 5,000 bytes of UTF-8 encoded
+      characters.</p>")
+    @as("TextList")
+    textList: customerInputStringList,
+  }
+  type response = {
+    @ocaml.doc("<p>A list containing one  object for each document
+      that contained an error. The results are sorted in ascending order by the <code>Index</code>
+      field and match the order of the documents in the input list. If there are no errors in the
+      batch, the <code>ErrorList</code> is empty.</p>")
+    @as("ErrorList")
+    errorList: batchItemErrorList,
+    @ocaml.doc("<p>A list of  objects containing the
+      results of the operation. The results are sorted in ascending order by the <code>Index</code>
+      field and match the order of the documents in the input list. If all of the documents contain
+      an error, the <code>ResultList</code> is empty.</p>")
+    @as("ResultList")
+    resultList: listOfDetectSentimentResult,
+  }
+  @module("@aws-sdk/client-comprehend") @new
+  external new: request => t = "BatchDetectSentimentCommand"
+  let make = (~languageCode, ~textList, ()) => new({languageCode: languageCode, textList: textList})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module DescribeTopicsDetectionJob = {
   type t
   type request = {
@@ -3027,6 +3896,27 @@ module DescribeTopicsDetectionJob = {
   }
   @module("@aws-sdk/client-comprehend") @new
   external new: request => t = "DescribeTopicsDetectionJobCommand"
+  let make = (~jobId, ()) => new({jobId: jobId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module DescribeTargetedSentimentDetectionJob = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The identifier that Amazon Comprehend generated for the job. The  operation returns this identifier in its
+      response.</p>")
+    @as("JobId")
+    jobId: jobId,
+  }
+  type response = {
+    @ocaml.doc(
+      "<p>An object that contains the properties associated with a targeted sentiment detection job.</p>"
+    )
+    @as("TargetedSentimentDetectionJobProperties")
+    targetedSentimentDetectionJobProperties: option<targetedSentimentDetectionJobProperties>,
+  }
+  @module("@aws-sdk/client-comprehend") @new
+  external new: request => t = "DescribeTargetedSentimentDetectionJobCommand"
   let make = (~jobId, ()) => new({jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
@@ -3086,6 +3976,24 @@ module DescribeKeyPhrasesDetectionJob = {
   }
   @module("@aws-sdk/client-comprehend") @new
   external new: request => t = "DescribeKeyPhrasesDetectionJobCommand"
+  let make = (~jobId, ()) => new({jobId: jobId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module DescribeEventsDetectionJob = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The identifier of the events detection job.</p>") @as("JobId") jobId: jobId,
+  }
+  type response = {
+    @ocaml.doc(
+      "<p>An object that contains the properties associated with an event detection job.</p>"
+    )
+    @as("EventsDetectionJobProperties")
+    eventsDetectionJobProperties: option<eventsDetectionJobProperties>,
+  }
+  @module("@aws-sdk/client-comprehend") @new
+  external new: request => t = "DescribeEventsDetectionJobCommand"
   let make = (~jobId, ()) => new({jobId: jobId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
@@ -3151,230 +4059,25 @@ module DescribeDocumentClassificationJob = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
-module BatchDetectSentiment = {
-  type t
-  type request = {
-    @ocaml.doc("<p>The language of the input documents. You can specify any of the primary languages
-      supported by Amazon Comprehend. All documents must be in the same language.</p>")
-    @as("LanguageCode")
-    languageCode: languageCode,
-    @ocaml.doc("<p>A list containing the text of the input documents. The list can contain a maximum of 25
-      documents. Each document must contain fewer that 5,000 bytes of UTF-8 encoded
-      characters.</p>")
-    @as("TextList")
-    textList: customerInputStringList,
-  }
-  type response = {
-    @ocaml.doc("<p>A list containing one  object for each document
-      that contained an error. The results are sorted in ascending order by the <code>Index</code>
-      field and match the order of the documents in the input list. If there are no errors in the
-      batch, the <code>ErrorList</code> is empty.</p>")
-    @as("ErrorList")
-    errorList: batchItemErrorList,
-    @ocaml.doc("<p>A list of  objects containing the
-      results of the operation. The results are sorted in ascending order by the <code>Index</code>
-      field and match the order of the documents in the input list. If all of the documents contain
-      an error, the <code>ResultList</code> is empty.</p>")
-    @as("ResultList")
-    resultList: listOfDetectSentimentResult,
-  }
-  @module("@aws-sdk/client-comprehend") @new
-  external new: request => t = "BatchDetectSentimentCommand"
-  let make = (~languageCode, ~textList, ()) => new({languageCode: languageCode, textList: textList})
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
-module ListTopicsDetectionJobs = {
-  type t
-  type request = {
-    @ocaml.doc("<p>The maximum number of results to return in each page. The default is 100.</p>")
-    @as("MaxResults")
-    maxResults: option<maxResultsInteger>,
-    @ocaml.doc("<p>Identifies the next page of results to return.</p>") @as("NextToken")
-    nextToken: option<string_>,
-    @ocaml.doc("<p>Filters the jobs that are returned. Jobs can be filtered on their name, status, or the
-      date and time that they were submitted. You can set only one filter at a time.</p>")
-    @as("Filter")
-    filter: option<topicsDetectionJobFilter>,
-  }
-  type response = {
-    @ocaml.doc("<p>Identifies the next page of results to return.</p>") @as("NextToken")
-    nextToken: option<string_>,
-    @ocaml.doc("<p>A list containing the properties of each job that is returned.</p>")
-    @as("TopicsDetectionJobPropertiesList")
-    topicsDetectionJobPropertiesList: option<topicsDetectionJobPropertiesList>,
-  }
-  @module("@aws-sdk/client-comprehend") @new
-  external new: request => t = "ListTopicsDetectionJobsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, filter: filter})
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
-module ListSentimentDetectionJobs = {
-  type t
-  type request = {
-    @ocaml.doc("<p>The maximum number of results to return in each page. The default is 100.</p>")
-    @as("MaxResults")
-    maxResults: option<maxResultsInteger>,
-    @ocaml.doc("<p>Identifies the next page of results to return.</p>") @as("NextToken")
-    nextToken: option<string_>,
-    @ocaml.doc("<p>Filters the jobs that are returned. You can filter jobs on their name, status, or the date
-      and time that they were submitted. You can only set one filter at a time.</p>")
-    @as("Filter")
-    filter: option<sentimentDetectionJobFilter>,
-  }
-  type response = {
-    @ocaml.doc("<p>Identifies the next page of results to return.</p>") @as("NextToken")
-    nextToken: option<string_>,
-    @ocaml.doc("<p>A list containing the properties of each job that is returned.</p>")
-    @as("SentimentDetectionJobPropertiesList")
-    sentimentDetectionJobPropertiesList: option<sentimentDetectionJobPropertiesList>,
-  }
-  @module("@aws-sdk/client-comprehend") @new
-  external new: request => t = "ListSentimentDetectionJobsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, filter: filter})
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
-module ListPiiEntitiesDetectionJobs = {
-  type t
-  type request = {
-    @ocaml.doc("<p>The maximum number of results to return in each page.</p>") @as("MaxResults")
-    maxResults: option<maxResultsInteger>,
-    @ocaml.doc("<p>Identifies the next page of results to return.</p>") @as("NextToken")
-    nextToken: option<string_>,
-    @ocaml.doc("<p>Filters the jobs that are returned. You can filter jobs on their name, status, or the date
-      and time that they were submitted. You can only set one filter at a time.</p>")
-    @as("Filter")
-    filter: option<piiEntitiesDetectionJobFilter>,
-  }
-  type response = {
-    @ocaml.doc("<p>Identifies the next page of results to return.</p>") @as("NextToken")
-    nextToken: option<string_>,
-    @ocaml.doc("<p>A list containing the properties of each job that is returned.</p>")
-    @as("PiiEntitiesDetectionJobPropertiesList")
-    piiEntitiesDetectionJobPropertiesList: option<piiEntitiesDetectionJobPropertiesList>,
-  }
-  @module("@aws-sdk/client-comprehend") @new
-  external new: request => t = "ListPiiEntitiesDetectionJobsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, filter: filter})
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
-module ListKeyPhrasesDetectionJobs = {
-  type t
-  type request = {
-    @ocaml.doc("<p>The maximum number of results to return in each page. The default is 100.</p>")
-    @as("MaxResults")
-    maxResults: option<maxResultsInteger>,
-    @ocaml.doc("<p>Identifies the next page of results to return.</p>") @as("NextToken")
-    nextToken: option<string_>,
-    @ocaml.doc("<p>Filters the jobs that are returned. You can filter jobs on their name, status, or the date
-      and time that they were submitted. You can only set one filter at a time.</p>")
-    @as("Filter")
-    filter: option<keyPhrasesDetectionJobFilter>,
-  }
-  type response = {
-    @ocaml.doc("<p>Identifies the next page of results to return.</p>") @as("NextToken")
-    nextToken: option<string_>,
-    @ocaml.doc("<p>A list containing the properties of each job that is returned.</p>")
-    @as("KeyPhrasesDetectionJobPropertiesList")
-    keyPhrasesDetectionJobPropertiesList: option<keyPhrasesDetectionJobPropertiesList>,
-  }
-  @module("@aws-sdk/client-comprehend") @new
-  external new: request => t = "ListKeyPhrasesDetectionJobsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, filter: filter})
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
-module ListEntitiesDetectionJobs = {
-  type t
-  type request = {
-    @ocaml.doc("<p>The maximum number of results to return in each page. The default is 100.</p>")
-    @as("MaxResults")
-    maxResults: option<maxResultsInteger>,
-    @ocaml.doc("<p>Identifies the next page of results to return.</p>") @as("NextToken")
-    nextToken: option<string_>,
-    @ocaml.doc("<p>Filters the jobs that are returned. You can filter jobs on their name, status, or the date
-      and time that they were submitted. You can only set one filter at a time.</p>")
-    @as("Filter")
-    filter: option<entitiesDetectionJobFilter>,
-  }
-  type response = {
-    @ocaml.doc("<p>Identifies the next page of results to return.</p>") @as("NextToken")
-    nextToken: option<string_>,
-    @ocaml.doc("<p>A list containing the properties of each job that is returned.</p>")
-    @as("EntitiesDetectionJobPropertiesList")
-    entitiesDetectionJobPropertiesList: option<entitiesDetectionJobPropertiesList>,
-  }
-  @module("@aws-sdk/client-comprehend") @new
-  external new: request => t = "ListEntitiesDetectionJobsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, filter: filter})
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
-module ListDominantLanguageDetectionJobs = {
-  type t
-  type request = {
-    @ocaml.doc("<p>The maximum number of results to return in each page. The default is 100.</p>")
-    @as("MaxResults")
-    maxResults: option<maxResultsInteger>,
-    @ocaml.doc("<p>Identifies the next page of results to return.</p>") @as("NextToken")
-    nextToken: option<string_>,
-    @ocaml.doc("<p>Filters that jobs that are returned. You can filter jobs on their name, status, or the
-      date and time that they were submitted. You can only set one filter at a time.</p>")
-    @as("Filter")
-    filter: option<dominantLanguageDetectionJobFilter>,
-  }
-  type response = {
-    @ocaml.doc("<p>Identifies the next page of results to return.</p>") @as("NextToken")
-    nextToken: option<string_>,
-    @ocaml.doc("<p>A list containing the properties of each job that is returned.</p>")
-    @as("DominantLanguageDetectionJobPropertiesList")
-    dominantLanguageDetectionJobPropertiesList: option<dominantLanguageDetectionJobPropertiesList>,
-  }
-  @module("@aws-sdk/client-comprehend") @new
-  external new: request => t = "ListDominantLanguageDetectionJobsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, filter: filter})
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
-module ListDocumentClassificationJobs = {
-  type t
-  type request = {
-    @ocaml.doc("<p>The maximum number of results to return in each page. The default is 100.</p>")
-    @as("MaxResults")
-    maxResults: option<maxResultsInteger>,
-    @ocaml.doc("<p>Identifies the next page of results to return.</p>") @as("NextToken")
-    nextToken: option<string_>,
-    @ocaml.doc("<p>Filters the jobs that are returned. You can filter jobs on their names, status, or the
-      date and time that they were submitted. You can only set one filter at a time.</p>")
-    @as("Filter")
-    filter: option<documentClassificationJobFilter>,
-  }
-  type response = {
-    @ocaml.doc("<p>Identifies the next page of results to return.</p>") @as("NextToken")
-    nextToken: option<string_>,
-    @ocaml.doc("<p>A list containing the properties of each job returned.</p>")
-    @as("DocumentClassificationJobPropertiesList")
-    documentClassificationJobPropertiesList: option<documentClassificationJobPropertiesList>,
-  }
-  @module("@aws-sdk/client-comprehend") @new
-  external new: request => t = "ListDocumentClassificationJobsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, filter: filter})
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
 module CreateEntityRecognizer = {
   type t
   type request = {
+    @ocaml.doc("<p>The JSON resource-based policy to attach to your custom entity recognizer model. You can
+      use this policy to allow another AWS account to import your custom model.</p>
+         <p>Provide your JSON as a UTF-8 encoded string without line breaks. To provide valid JSON for
+      your policy, enclose the attribute names and values in double quotes. If the JSON body is also
+      enclosed in double quotes, then you must escape the double quotes that are inside the
+      policy:</p>
+         <p>
+            <code>\"{\\\"attribute\\\": \\\"value\\\", \\\"attribute\\\": [\\\"value\\\"]}\"</code>
+         </p>
+         <p>To avoid escaping quotes, you can use single quotes to enclose the policy and double
+      quotes to enclose the JSON names and values:</p>
+         <p>
+            <code>'{\"attribute\": \"value\", \"attribute\": [\"value\"]}'</code>
+         </p>")
+    @as("ModelPolicy")
+    modelPolicy: option<policy>,
     @ocaml.doc("<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt
       trained custom models. The ModelKmsKeyId can be either of the following formats</p>
          <ul>
@@ -3435,6 +4138,12 @@ module CreateEntityRecognizer = {
       Amazon Comprehend read access to your input data.</p>")
     @as("DataAccessRoleArn")
     dataAccessRoleArn: iamRoleArn,
+    @ocaml.doc("<p>The version name given to the newly created recognizer. Version names can be a maximum of
+      256 characters. Alphanumeric characters, hyphens (-) and underscores (_) are allowed. The
+      version name must be unique among all models with the same recognizer name in the account/ AWS
+      Region.</p>")
+    @as("VersionName")
+    versionName: option<versionName>,
     @ocaml.doc("<p>The name given to the newly created recognizer. Recognizer names can be a maximum of 256
       characters. Alphanumeric characters, hyphens (-) and underscores (_) are allowed. The name
       must be unique in the account/region.</p>")
@@ -3453,14 +4162,17 @@ module CreateEntityRecognizer = {
     ~inputDataConfig,
     ~dataAccessRoleArn,
     ~recognizerName,
+    ~modelPolicy=?,
     ~modelKmsKeyId=?,
     ~vpcConfig=?,
     ~volumeKmsKeyId=?,
     ~clientRequestToken=?,
     ~tags=?,
+    ~versionName=?,
     (),
   ) =>
     new({
+      modelPolicy: modelPolicy,
       modelKmsKeyId: modelKmsKeyId,
       vpcConfig: vpcConfig,
       volumeKmsKeyId: volumeKmsKeyId,
@@ -3469,6 +4181,7 @@ module CreateEntityRecognizer = {
       inputDataConfig: inputDataConfig,
       tags: tags,
       dataAccessRoleArn: dataAccessRoleArn,
+      versionName: versionName,
       recognizerName: recognizerName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
@@ -3477,6 +4190,22 @@ module CreateEntityRecognizer = {
 module CreateDocumentClassifier = {
   type t
   type request = {
+    @ocaml.doc("<p>The resource-based policy to attach to your custom document classifier model. You can use
+      this policy to allow another AWS account to import your custom model.</p>
+         <p>Provide your policy as a JSON body that you enter as a UTF-8 encoded string without line
+      breaks. To provide valid JSON, enclose the attribute names and values in double quotes. If the
+      JSON body is also enclosed in double quotes, then you must escape the double quotes that are
+      inside the policy:</p>
+         <p>
+            <code>\"{\\\"attribute\\\": \\\"value\\\", \\\"attribute\\\": [\\\"value\\\"]}\"</code>
+         </p>
+         <p>To avoid escaping quotes, you can use single quotes to enclose the policy and double
+      quotes to enclose the JSON names and values:</p>
+         <p>
+            <code>'{\"attribute\": \"value\", \"attribute\": [\"value\"]}'</code>
+         </p>")
+    @as("ModelPolicy")
+    modelPolicy: option<policy>,
     @ocaml.doc("<p>ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt
       trained custom models. The ModelKmsKeyId can be either of the following formats:</p>
          <ul>
@@ -3546,6 +4275,12 @@ module CreateDocumentClassifier = {
       Amazon Comprehend read access to your input data.</p>")
     @as("DataAccessRoleArn")
     dataAccessRoleArn: iamRoleArn,
+    @ocaml.doc("<p>The version name given to the newly created classifier. Version names can have a maximum
+      of 256 characters. Alphanumeric characters, hyphens (-) and underscores (_) are allowed. The
+      version name must be unique among all models with the same classifier name in the account/AWS
+      Region.</p>")
+    @as("VersionName")
+    versionName: option<versionName>,
     @ocaml.doc("<p>The name of the document classifier.</p>") @as("DocumentClassifierName")
     documentClassifierName: comprehendArnName,
   }
@@ -3561,6 +4296,7 @@ module CreateDocumentClassifier = {
     ~inputDataConfig,
     ~dataAccessRoleArn,
     ~documentClassifierName,
+    ~modelPolicy=?,
     ~modelKmsKeyId=?,
     ~mode=?,
     ~vpcConfig=?,
@@ -3568,9 +4304,11 @@ module CreateDocumentClassifier = {
     ~clientRequestToken=?,
     ~outputDataConfig=?,
     ~tags=?,
+    ~versionName=?,
     (),
   ) =>
     new({
+      modelPolicy: modelPolicy,
       modelKmsKeyId: modelKmsKeyId,
       mode: mode,
       vpcConfig: vpcConfig,
@@ -3581,6 +4319,7 @@ module CreateDocumentClassifier = {
       inputDataConfig: inputDataConfig,
       tags: tags,
       dataAccessRoleArn: dataAccessRoleArn,
+      versionName: versionName,
       documentClassifierName: documentClassifierName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
@@ -3681,6 +4420,249 @@ module BatchDetectDominantLanguage = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module ListTopicsDetectionJobs = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The maximum number of results to return in each page. The default is 100.</p>")
+    @as("MaxResults")
+    maxResults: option<maxResultsInteger>,
+    @ocaml.doc("<p>Identifies the next page of results to return.</p>") @as("NextToken")
+    nextToken: option<string_>,
+    @ocaml.doc("<p>Filters the jobs that are returned. Jobs can be filtered on their name, status, or the
+      date and time that they were submitted. You can set only one filter at a time.</p>")
+    @as("Filter")
+    filter: option<topicsDetectionJobFilter>,
+  }
+  type response = {
+    @ocaml.doc("<p>Identifies the next page of results to return.</p>") @as("NextToken")
+    nextToken: option<string_>,
+    @ocaml.doc("<p>A list containing the properties of each job that is returned.</p>")
+    @as("TopicsDetectionJobPropertiesList")
+    topicsDetectionJobPropertiesList: option<topicsDetectionJobPropertiesList>,
+  }
+  @module("@aws-sdk/client-comprehend") @new
+  external new: request => t = "ListTopicsDetectionJobsCommand"
+  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken, filter: filter})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module ListTargetedSentimentDetectionJobs = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The maximum number of results to return in each page. The default is 100.</p>")
+    @as("MaxResults")
+    maxResults: option<maxResultsInteger>,
+    @ocaml.doc("<p>Identifies the next page of results to return.</p>") @as("NextToken")
+    nextToken: option<string_>,
+    @ocaml.doc("<p>Filters the jobs that are returned. You can filter jobs on their name, status, or the date
+      and time that they were submitted. You can only set one filter at a time.</p>")
+    @as("Filter")
+    filter: option<targetedSentimentDetectionJobFilter>,
+  }
+  type response = {
+    @ocaml.doc("<p>Identifies the next page of results to return.</p>") @as("NextToken")
+    nextToken: option<string_>,
+    @ocaml.doc("<p>A list containing the properties of each job that is returned.</p>")
+    @as("TargetedSentimentDetectionJobPropertiesList")
+    targetedSentimentDetectionJobPropertiesList: option<
+      targetedSentimentDetectionJobPropertiesList,
+    >,
+  }
+  @module("@aws-sdk/client-comprehend") @new
+  external new: request => t = "ListTargetedSentimentDetectionJobsCommand"
+  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken, filter: filter})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module ListSentimentDetectionJobs = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The maximum number of results to return in each page. The default is 100.</p>")
+    @as("MaxResults")
+    maxResults: option<maxResultsInteger>,
+    @ocaml.doc("<p>Identifies the next page of results to return.</p>") @as("NextToken")
+    nextToken: option<string_>,
+    @ocaml.doc("<p>Filters the jobs that are returned. You can filter jobs on their name, status, or the date
+      and time that they were submitted. You can only set one filter at a time.</p>")
+    @as("Filter")
+    filter: option<sentimentDetectionJobFilter>,
+  }
+  type response = {
+    @ocaml.doc("<p>Identifies the next page of results to return.</p>") @as("NextToken")
+    nextToken: option<string_>,
+    @ocaml.doc("<p>A list containing the properties of each job that is returned.</p>")
+    @as("SentimentDetectionJobPropertiesList")
+    sentimentDetectionJobPropertiesList: option<sentimentDetectionJobPropertiesList>,
+  }
+  @module("@aws-sdk/client-comprehend") @new
+  external new: request => t = "ListSentimentDetectionJobsCommand"
+  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken, filter: filter})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module ListPiiEntitiesDetectionJobs = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The maximum number of results to return in each page.</p>") @as("MaxResults")
+    maxResults: option<maxResultsInteger>,
+    @ocaml.doc("<p>Identifies the next page of results to return.</p>") @as("NextToken")
+    nextToken: option<string_>,
+    @ocaml.doc("<p>Filters the jobs that are returned. You can filter jobs on their name, status, or the date
+      and time that they were submitted. You can only set one filter at a time.</p>")
+    @as("Filter")
+    filter: option<piiEntitiesDetectionJobFilter>,
+  }
+  type response = {
+    @ocaml.doc("<p>Identifies the next page of results to return.</p>") @as("NextToken")
+    nextToken: option<string_>,
+    @ocaml.doc("<p>A list containing the properties of each job that is returned.</p>")
+    @as("PiiEntitiesDetectionJobPropertiesList")
+    piiEntitiesDetectionJobPropertiesList: option<piiEntitiesDetectionJobPropertiesList>,
+  }
+  @module("@aws-sdk/client-comprehend") @new
+  external new: request => t = "ListPiiEntitiesDetectionJobsCommand"
+  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken, filter: filter})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module ListKeyPhrasesDetectionJobs = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The maximum number of results to return in each page. The default is 100.</p>")
+    @as("MaxResults")
+    maxResults: option<maxResultsInteger>,
+    @ocaml.doc("<p>Identifies the next page of results to return.</p>") @as("NextToken")
+    nextToken: option<string_>,
+    @ocaml.doc("<p>Filters the jobs that are returned. You can filter jobs on their name, status, or the date
+      and time that they were submitted. You can only set one filter at a time.</p>")
+    @as("Filter")
+    filter: option<keyPhrasesDetectionJobFilter>,
+  }
+  type response = {
+    @ocaml.doc("<p>Identifies the next page of results to return.</p>") @as("NextToken")
+    nextToken: option<string_>,
+    @ocaml.doc("<p>A list containing the properties of each job that is returned.</p>")
+    @as("KeyPhrasesDetectionJobPropertiesList")
+    keyPhrasesDetectionJobPropertiesList: option<keyPhrasesDetectionJobPropertiesList>,
+  }
+  @module("@aws-sdk/client-comprehend") @new
+  external new: request => t = "ListKeyPhrasesDetectionJobsCommand"
+  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken, filter: filter})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module ListEventsDetectionJobs = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The maximum number of results to return in each page.</p>") @as("MaxResults")
+    maxResults: option<maxResultsInteger>,
+    @ocaml.doc("<p>Identifies the next page of results to return.</p>") @as("NextToken")
+    nextToken: option<string_>,
+    @ocaml.doc("<p>Filters the jobs that are returned. You can filter jobs on their name, status, or the date
+      and time that they were submitted. You can only set one filter at a time.</p>")
+    @as("Filter")
+    filter: option<eventsDetectionJobFilter>,
+  }
+  type response = {
+    @ocaml.doc("<p>Identifies the next page of results to return.</p>") @as("NextToken")
+    nextToken: option<string_>,
+    @ocaml.doc("<p>A list containing the properties of each job that is returned.</p>")
+    @as("EventsDetectionJobPropertiesList")
+    eventsDetectionJobPropertiesList: option<eventsDetectionJobPropertiesList>,
+  }
+  @module("@aws-sdk/client-comprehend") @new
+  external new: request => t = "ListEventsDetectionJobsCommand"
+  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken, filter: filter})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module ListEntitiesDetectionJobs = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The maximum number of results to return in each page. The default is 100.</p>")
+    @as("MaxResults")
+    maxResults: option<maxResultsInteger>,
+    @ocaml.doc("<p>Identifies the next page of results to return.</p>") @as("NextToken")
+    nextToken: option<string_>,
+    @ocaml.doc("<p>Filters the jobs that are returned. You can filter jobs on their name, status, or the date
+      and time that they were submitted. You can only set one filter at a time.</p>")
+    @as("Filter")
+    filter: option<entitiesDetectionJobFilter>,
+  }
+  type response = {
+    @ocaml.doc("<p>Identifies the next page of results to return.</p>") @as("NextToken")
+    nextToken: option<string_>,
+    @ocaml.doc("<p>A list containing the properties of each job that is returned.</p>")
+    @as("EntitiesDetectionJobPropertiesList")
+    entitiesDetectionJobPropertiesList: option<entitiesDetectionJobPropertiesList>,
+  }
+  @module("@aws-sdk/client-comprehend") @new
+  external new: request => t = "ListEntitiesDetectionJobsCommand"
+  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken, filter: filter})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module ListDominantLanguageDetectionJobs = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The maximum number of results to return in each page. The default is 100.</p>")
+    @as("MaxResults")
+    maxResults: option<maxResultsInteger>,
+    @ocaml.doc("<p>Identifies the next page of results to return.</p>") @as("NextToken")
+    nextToken: option<string_>,
+    @ocaml.doc("<p>Filters that jobs that are returned. You can filter jobs on their name, status, or the
+      date and time that they were submitted. You can only set one filter at a time.</p>")
+    @as("Filter")
+    filter: option<dominantLanguageDetectionJobFilter>,
+  }
+  type response = {
+    @ocaml.doc("<p>Identifies the next page of results to return.</p>") @as("NextToken")
+    nextToken: option<string_>,
+    @ocaml.doc("<p>A list containing the properties of each job that is returned.</p>")
+    @as("DominantLanguageDetectionJobPropertiesList")
+    dominantLanguageDetectionJobPropertiesList: option<dominantLanguageDetectionJobPropertiesList>,
+  }
+  @module("@aws-sdk/client-comprehend") @new
+  external new: request => t = "ListDominantLanguageDetectionJobsCommand"
+  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken, filter: filter})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module ListDocumentClassificationJobs = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The maximum number of results to return in each page. The default is 100.</p>")
+    @as("MaxResults")
+    maxResults: option<maxResultsInteger>,
+    @ocaml.doc("<p>Identifies the next page of results to return.</p>") @as("NextToken")
+    nextToken: option<string_>,
+    @ocaml.doc("<p>Filters the jobs that are returned. You can filter jobs on their names, status, or the
+      date and time that they were submitted. You can only set one filter at a time.</p>")
+    @as("Filter")
+    filter: option<documentClassificationJobFilter>,
+  }
+  type response = {
+    @ocaml.doc("<p>Identifies the next page of results to return.</p>") @as("NextToken")
+    nextToken: option<string_>,
+    @ocaml.doc("<p>A list containing the properties of each job returned.</p>")
+    @as("DocumentClassificationJobPropertiesList")
+    documentClassificationJobPropertiesList: option<documentClassificationJobPropertiesList>,
+  }
+  @module("@aws-sdk/client-comprehend") @new
+  external new: request => t = "ListDocumentClassificationJobsCommand"
+  let make = (~maxResults=?, ~nextToken=?, ~filter=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken, filter: filter})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module DescribeEntityRecognizer = {
   type t
   type request = {
@@ -3741,10 +4723,10 @@ module BatchDetectSyntax = {
       the <code>ErrorList</code> is empty.</p>")
     @as("ErrorList")
     errorList: batchItemErrorList,
-    @ocaml.doc("<p>A list of  objects containing the results
-      of the operation. The results are sorted in ascending order by the <code>Index</code> field
-      and match the order of the documents in the input list. If all of the documents contain an
-      error, the <code>ResultList</code> is empty.</p>")
+    @ocaml.doc("<p>A list of  objects containing the
+      results of the operation. The results are sorted in ascending order by the <code>Index</code>
+      field and match the order of the documents in the input list. If all of the documents contain
+      an error, the <code>ResultList</code> is empty.</p>")
     @as("ResultList")
     resultList: listOfDetectSyntaxResult,
   }

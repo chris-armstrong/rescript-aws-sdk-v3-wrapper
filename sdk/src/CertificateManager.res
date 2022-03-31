@@ -65,8 +65,9 @@ type keyAlgorithm = [
   | @as("EC_secp384r1") #EC_Secp384r1
   | @as("EC_prime256v1") #EC_Prime256v1
   | @as("RSA_4096") #RSA_4096
-  | @as("RSA_1024") #RSA_1024
+  | @as("RSA_3072") #RSA_3072
   | @as("RSA_2048") #RSA_2048
+  | @as("RSA_1024") #RSA_1024
 ]
 type idempotencyToken = string
 type failureReason = [
@@ -138,7 +139,7 @@ type tag = {
   @ocaml.doc("<p>The value of the tag.</p>") @as("Value") value: option<tagValue>,
   @ocaml.doc("<p>The key of the tag.</p>") @as("Key") key: tagKey,
 }
-@ocaml.doc("<p>Contains a DNS record value that you can use to can use to validate ownership or control
+@ocaml.doc("<p>Contains a DNS record value that you can use to validate ownership or control
       of a domain. This is used by the <a>DescribeCertificate</a> action. </p>")
 type resourceRecord = {
   @ocaml.doc("<p>The value of the CNAME record to add to your DNS database. This is supplied by
@@ -221,7 +222,7 @@ type extendedKeyUsage = {
   name: option<extendedKeyUsageName>,
 }
 @ocaml.doc("<p>Object containing
-      expiration events options associated with an AWS account.</p>")
+      expiration events options associated with an Amazon Web Services account.</p>")
 type expiryEventsConfiguration = {
   @ocaml.doc("<p>Specifies the number of days prior to certificate expiration when ACM starts generating
         <code>EventBridge</code> events. ACM sends one event per day per certificate until the
@@ -420,16 +421,16 @@ type certificateDetail = {
         <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html\">managed renewal</a> for
       imported certificates. For more information about the differences between certificates that
       you import and those that ACM provides, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html\">Importing Certificates</a> in the
-        <i>AWS Certificate Manager User Guide</i>. </p>")
+        <i>Amazon Web Services Certificate Manager User Guide</i>. </p>")
   @as("Type")
   type_: option<certificateType>,
   @ocaml.doc("<p>The reason the certificate request failed. This value exists only when the certificate
       status is <code>FAILED</code>. For more information, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/troubleshooting.html#troubleshooting-failed\">Certificate Request
-        Failed</a> in the <i>AWS Certificate Manager User Guide</i>. </p>")
+        Failed</a> in the <i>Amazon Web Services Certificate Manager User Guide</i>. </p>")
   @as("FailureReason")
   failureReason: option<failureReason>,
-  @ocaml.doc("<p>A list of ARNs for the AWS resources that are using the certificate. A certificate can
-      be used by multiple AWS resources. </p>")
+  @ocaml.doc("<p>A list of ARNs for the Amazon Web Services resources that are using the certificate. A certificate can
+      be used by multiple Amazon Web Services resources. </p>")
   @as("InUseBy")
   inUseBy: option<inUseList>,
   @ocaml.doc("<p>The algorithm that was used to sign the certificate.</p>")
@@ -487,13 +488,13 @@ type certificateDetail = {
   domainName: option<domainNameString>,
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the certificate. For more information about ARNs, see
         <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a> in
-      the <i>AWS General Reference</i>.</p>")
+      the <i>Amazon Web Services General Reference</i>.</p>")
   @as("CertificateArn")
   certificateArn: option<arn>,
 }
-@ocaml.doc("<fullname>AWS Certificate Manager</fullname>
-         <p>You can use AWS Certificate Manager (ACM) to manage SSL/TLS certificates for your AWS-based websites
-      and applications. For more information about using ACM, see the <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/\">AWS Certificate Manager User Guide</a>.</p>")
+@ocaml.doc("<fullname>Amazon Web Services Certificate Manager</fullname>
+         <p>You can use Amazon Web Services Certificate Manager (ACM) to manage SSL/TLS certificates for your Amazon Web Services-based websites
+      and applications. For more information about using ACM, see the <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/\">Amazon Web Services Certificate Manager User Guide</a>.</p>")
 module ResendValidationEmail = {
   type t
   type request = {
@@ -537,7 +538,7 @@ module ResendValidationEmail = {
     @as("CertificateArn")
     certificateArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-acm") @new external new: request => t = "ResendValidationEmailCommand"
   let make = (~validationDomain, ~domain, ~certificateArn, ()) =>
     new({validationDomain: validationDomain, domain: domain, certificateArn: certificateArn})
@@ -556,7 +557,7 @@ module RenewCertificate = {
     @as("CertificateArn")
     certificateArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-acm") @new external new: request => t = "RenewCertificateCommand"
   let make = (~certificateArn, ()) => new({certificateArn: certificateArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -636,7 +637,7 @@ module DeleteCertificate = {
     @as("CertificateArn")
     certificateArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-acm") @new external new: request => t = "DeleteCertificateCommand"
   let make = (~certificateArn, ()) => new({certificateArn: certificateArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -659,7 +660,7 @@ module UpdateCertificateOptions = {
     @as("CertificateArn")
     certificateArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-acm") @new external new: request => t = "UpdateCertificateOptionsCommand"
   let make = (~options, ~certificateArn, ()) =>
     new({options: options, certificateArn: certificateArn})
@@ -682,7 +683,7 @@ module PutAccountConfiguration = {
     @as("ExpiryEvents")
     expiryEvents: option<expiryEventsConfiguration>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-acm") @new external new: request => t = "PutAccountConfigurationCommand"
   let make = (~idempotencyToken, ~expiryEvents=?, ()) =>
     new({idempotencyToken: idempotencyToken, expiryEvents: expiryEvents})
@@ -691,15 +692,15 @@ module PutAccountConfiguration = {
 
 module GetAccountConfiguration = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("<p>Expiration events
-      configuration options associated with the AWS account.</p>")
+      configuration options associated with the Amazon Web Services account.</p>")
     @as("ExpiryEvents")
     expiryEvents: option<expiryEventsConfiguration>,
   }
-  @module("@aws-sdk/client-acm") @new external new: unit => t = "GetAccountConfigurationCommand"
-  let make = () => new()
+  @module("@aws-sdk/client-acm") @new external new: request => t = "GetAccountConfigurationCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -711,7 +712,7 @@ module RequestCertificate = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the private certificate authority (CA) that will be used
       to issue the certificate. If you do not provide an ARN and you are trying to request a private
       certificate, ACM will attempt to issue a public certificate. For more information about
-      private CAs, see the <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaWelcome.html\">AWS Certificate Manager Private Certificate Authority (PCA)</a> user guide. The ARN must have the following form: </p>
+      private CAs, see the <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaWelcome.html\">Amazon Web Services Certificate Manager Private Certificate Authority (PCA)</a> user guide. The ARN must have the following form: </p>
 
          <p>
             <code>arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012</code>
@@ -831,7 +832,7 @@ module RemoveTagsFromCertificate = {
     @as("CertificateArn")
     certificateArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-acm") @new
   external new: request => t = "RemoveTagsFromCertificateCommand"
   let make = (~tags, ~certificateArn, ()) => new({tags: tags, certificateArn: certificateArn})
@@ -954,7 +955,7 @@ module AddTagsToCertificate = {
     @as("CertificateArn")
     certificateArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-acm") @new external new: request => t = "AddTagsToCertificateCommand"
   let make = (~tags, ~certificateArn, ()) => new({tags: tags, certificateArn: certificateArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"

@@ -19,18 +19,62 @@ type voiceRecordingTrack = [
   | @as("TO_AGENT") #TO_AGENT
   | @as("FROM_AGENT") #FROM_AGENT
 ]
+type vocabularyState = [
+  | @as("DELETE_IN_PROGRESS") #DELETE_IN_PROGRESS
+  | @as("CREATION_FAILED") #CREATION_FAILED
+  | @as("ACTIVE") #ACTIVE
+  | @as("CREATION_IN_PROGRESS") #CREATION_IN_PROGRESS
+]
+type vocabularyNextToken = string
+type vocabularyName = string
+type vocabularyLastModifiedTime = Js.Date.t
+type vocabularyLanguageCode = [
+  | @as("zh-CN") #Zh_CN
+  | @as("pt-PT") #Pt_PT
+  | @as("pt-BR") #Pt_BR
+  | @as("ko-KR") #Ko_KR
+  | @as("ja-JP") #Ja_JP
+  | @as("it-IT") #It_IT
+  | @as("hi-IN") #Hi_IN
+  | @as("fr-FR") #Fr_FR
+  | @as("fr-CA") #Fr_CA
+  | @as("es-US") #Es_US
+  | @as("es-ES") #Es_ES
+  | @as("en-WL") #En_WL
+  | @as("en-US") #En_US
+  | @as("en-IN") #En_IN
+  | @as("en-IE") #En_IE
+  | @as("en-GB") #En_GB
+  | @as("en-AU") #En_AU
+  | @as("en-AB") #En_AB
+  | @as("de-DE") #De_DE
+  | @as("de-CH") #De_CH
+  | @as("ar-AE") #Ar_AE
+]
+type vocabularyId = string
+type vocabularyFailureReason = string
+type vocabularyContent = string
 type value = float
 type userId = string
-type useCaseType = [@as("RULES_EVALUATION") #RULES_EVALUATION]
+type useCaseType = [
+  | @as("CONNECT_CAMPAIGNS") #CONNECT_CAMPAIGNS
+  | @as("RULES_EVALUATION") #RULES_EVALUATION
+]
 type useCaseId = string
+type updateQuickConnectDescription = string
+type updateHoursOfOperationDescription = string
+type updateAgentStatusDescription = string
 type unit_ = [@as("PERCENT") #PERCENT | @as("COUNT") #COUNT | @as("SECONDS") #SECONDS]
 type uri = string
+type trafficType = [@as("CAMPAIGN") #CAMPAIGN | @as("GENERAL") #GENERAL]
 type timestamp_ = Js.Date.t
 type timeZone = string
 type thresholdValue = float
 type tagValue = string
 type tagKey = string
+type supportedMessagingContentType = string
 type string_ = string
+type streamingId = string
 type storageType = [
   | @as("KINESIS_FIREHOSE") #KINESIS_FIREHOSE
   | @as("KINESIS_STREAM") #KINESIS_STREAM
@@ -41,8 +85,10 @@ type statistic = [@as("AVG") #AVG | @as("MAX") #MAX | @as("SUM") #SUM]
 type sourceType = [@as("ZENDESK") #ZENDESK | @as("SALESFORCE") #SALESFORCE]
 type sourceApplicationName = string
 type securityToken = string
+type securityProfilePermission = string
 type securityProfileName = string
 type securityProfileId = string
+type securityProfileDescription = string
 type routingProfileName = string
 type routingProfileId = string
 type routingProfileDescription = string
@@ -56,7 +102,8 @@ type resourceType = [
   | @as("CONTACT") #CONTACT
 ]
 type referenceValue = string
-type referenceType = [@as("URL") #URL]
+type referenceType = [@as("ATTACHMENT") #ATTACHMENT | @as("URL") #URL]
+type referenceStatus = [@as("REJECTED") #REJECTED | @as("APPROVED") #APPROVED]
 type referenceKey = string
 type quickConnectType = [
   | @as("PHONE_NUMBER") #PHONE_NUMBER
@@ -337,11 +384,19 @@ type maxResult2 = int
 type maxResult1000 = int
 type maxResult100 = int
 type maxResult10 = int
+type lexVersion = [@as("V2") #V2 | @as("V1") #V1]
 type lexRegion = string
 type keyId = string
-type integrationType = [@as("EVENT") #EVENT]
+type integrationType = [
+  | @as("WISDOM_KNOWLEDGE_BASE") #WISDOM_KNOWLEDGE_BASE
+  | @as("WISDOM_ASSISTANT") #WISDOM_ASSISTANT
+  | @as("PINPOINT_APP") #PINPOINT_APP
+  | @as("VOICE_ID") #VOICE_ID
+  | @as("EVENT") #EVENT
+]
 type integrationAssociationId = string
 type instanceStorageResourceType = [
+  | @as("REAL_TIME_CONTACT_ANALYSIS_SEGMENTS") #REAL_TIME_CONTACT_ANALYSIS_SEGMENTS
   | @as("AGENT_EVENTS") #AGENT_EVENTS
   | @as("CONTACT_TRACE_RECORDS") #CONTACT_TRACE_RECORDS
   | @as("MEDIA_STREAMS") #MEDIA_STREAMS
@@ -368,6 +423,7 @@ type instanceAttributeType = [
 type inboundCallsEnabled = bool
 type hoursOfOperationName = string
 type hoursOfOperationId = string
+type hoursOfOperationDescription = string
 type hoursOfOperationDays = [
   | @as("SATURDAY") #SATURDAY
   | @as("FRIDAY") #FRIDAY
@@ -442,6 +498,14 @@ type currentMetricName = [
   | @as("AGENTS_AVAILABLE") #AGENTS_AVAILABLE
   | @as("AGENTS_ONLINE") #AGENTS_ONLINE
 ]
+type contactInitiationMethod = [
+  | @as("API") #API
+  | @as("CALLBACK") #CALLBACK
+  | @as("QUEUE_TRANSFER") #QUEUE_TRANSFER
+  | @as("TRANSFER") #TRANSFER
+  | @as("OUTBOUND") #OUTBOUND
+  | @as("INBOUND") #INBOUND
+]
 type contactId = string
 type contactFlowType = [
   | @as("QUEUE_TRANSFER") #QUEUE_TRANSFER
@@ -454,25 +518,43 @@ type contactFlowType = [
   | @as("CUSTOMER_QUEUE") #CUSTOMER_QUEUE
   | @as("CONTACT_FLOW") #CONTACT_FLOW
 ]
+type contactFlowState = [@as("ARCHIVED") #ARCHIVED | @as("ACTIVE") #ACTIVE]
 type contactFlowName = string
+type contactFlowModuleStatus = [@as("SAVED") #SAVED | @as("PUBLISHED") #PUBLISHED]
+type contactFlowModuleState = [@as("ARCHIVED") #ARCHIVED | @as("ACTIVE") #ACTIVE]
+type contactFlowModuleName = string
+type contactFlowModuleId = string
+type contactFlowModuleDescription = string
+type contactFlowModuleContent = string
 type contactFlowId = string
 type contactFlowDescription = string
 type contactFlowContent = string
 type concurrency = int
 type comparison = [@as("LT") #LT]
 type commonNameLength127 = string
-type commonDescriptionLength250 = string
 type clientToken = string
+type chatStreamingEndpointARN = string
+type chatDurationInMinutes = int
 type chatContentType = string
 type chatContent = string
 type channel = [@as("TASK") #TASK | @as("CHAT") #CHAT | @as("VOICE") #VOICE]
+type campaignId = string
 type bucketName = string
 type botName = string
+type boolean_ = bool
 type autoAccept = bool
 type attributeValue = string
 type attributeName = string
 type associationId = string
+type aliasArn = string
 type agentUsername = string
+type agentStatusType = [@as("OFFLINE") #OFFLINE | @as("CUSTOM") #CUSTOM | @as("ROUTABLE") #ROUTABLE]
+type agentStatusState = [@as("DISABLED") #DISABLED | @as("ENABLED") #ENABLED]
+type agentStatusOrderNumber = int
+type agentStatusName = string
+type agentStatusId = string
+type agentStatusDescription = string
+type agentResourceId = string
 type agentLastName = string
 type agentFirstName = string
 type afterContactWorkTimeLimit = int
@@ -481,6 +563,24 @@ type arn = string
 type voiceRecordingConfiguration = {
   @ocaml.doc("<p>Identifies which track is being recorded.</p>") @as("VoiceRecordingTrack")
   voiceRecordingTrack: option<voiceRecordingTrack>,
+}
+@ocaml.doc("<p>Contains summary information about the custom vocabulary.</p>")
+type vocabularySummary = {
+  @ocaml.doc("<p>The reason why the custom vocabulary was not created.</p>") @as("FailureReason")
+  failureReason: option<vocabularyFailureReason>,
+  @ocaml.doc("<p>The timestamp when the custom vocabulary was last modified.</p>")
+  @as("LastModifiedTime")
+  lastModifiedTime: vocabularyLastModifiedTime,
+  @ocaml.doc("<p>The current state of the custom vocabulary.</p>") @as("State")
+  state: vocabularyState,
+  @ocaml.doc("<p>The language code of the vocabulary entries. For a list of languages and their corresponding language codes, see 
+<a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/transcribe-whatis.html\">What is Amazon Transcribe?</a>
+         </p>")
+  @as("LanguageCode")
+  languageCode: vocabularyLanguageCode,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the custom vocabulary.</p>") @as("Arn") arn: arn,
+  @ocaml.doc("<p>The identifier of the custom vocabulary.</p>") @as("Id") id: vocabularyId,
+  @ocaml.doc("<p>A unique name of the custom vocabulary.</p>") @as("Name") name: vocabularyName,
 }
 @ocaml.doc("<p>Contains summary information about a user.</p>")
 type userSummary = {
@@ -526,7 +626,7 @@ type userIdentityInfo = {
    use
    case.</p>")
 type useCase = {
-  @ocaml.doc("<p>The type of use case to associate to the AppIntegration association. Each AppIntegration
+  @ocaml.doc("<p>The type of use case to associate to the integration association. Each integration
    association can have only one of each use case type.</p>")
   @as("UseCaseType")
   useCaseType: option<useCaseType>,
@@ -534,6 +634,11 @@ type useCase = {
   useCaseArn: option<arn>,
   @ocaml.doc("<p>The identifier for the use case.</p>") @as("UseCaseId")
   useCaseId: option<useCaseId>,
+}
+@ocaml.doc("<p>The URL reference.</p>")
+type urlReference = {
+  @ocaml.doc("<p>A valid URL.</p>") @as("Value") value: option<referenceValue>,
+  @ocaml.doc("<p>Identifier of the URL reference.</p>") @as("Name") name: option<referenceKey>,
 }
 @ocaml.doc("<p>Contains information about the threshold for service level metrics.</p>")
 type threshold = {
@@ -545,6 +650,7 @@ type threshold = {
 }
 type tagMap = Js.Dict.t<tagValue>
 type tagKeyList = array<tagKey>
+type supportedMessagingContentTypes = array<supportedMessagingContentType>
 @ocaml.doc("<p>Contains information about a security profile.</p>")
 type securityProfileSummary = {
   @ocaml.doc("<p>The name of the security profile.</p>") @as("Name")
@@ -600,14 +706,16 @@ type routingProfileQueueConfigSummary = {
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the queue.</p>") @as("QueueArn") queueArn: arn,
   @ocaml.doc("<p>The identifier for the queue.</p>") @as("QueueId") queueId: queueId,
 }
+type referenceTypes = array<referenceType>
 @ocaml.doc("<p>A link that an agent selects to complete a given task. You can have up to 4,096 UTF-8 bytes
    across all references for a contact.</p>")
 type reference = {
-  @ocaml.doc("<p>A valid
-   URL.</p>")
+  @ocaml.doc("<p>The type of the reference. Only <code>URL</code> type can be added or updated on a
+   contact.</p>")
   @as("Type")
   type_: referenceType,
-  @ocaml.doc("<p>A formatted URL that displays to an agent in the Contact Control Panel (CCP)</p>")
+  @ocaml.doc("<p>A valid value for the reference. For example, for a URL reference, a formatted URL that is
+   displayed to an agent in the Contact Control Panel (CCP).</p>")
   @as("Value")
   value: referenceValue,
 }
@@ -645,6 +753,14 @@ type queueQuickConnectConfig = {
   contactFlowId: contactFlowId,
   @ocaml.doc("<p>The identifier for the queue.</p>") @as("QueueId") queueId: queueId,
 }
+@ocaml.doc("<p>If this contact was queued, this contains information about the queue. </p>")
+type queueInfo = {
+  @ocaml.doc("<p>The timestamp when the contact was added to the queue.</p>")
+  @as("EnqueueTimestamp")
+  enqueueTimestamp: option<timestamp_>,
+  @ocaml.doc("<p>The identifier of the agent who accepted the contact.</p>") @as("Id")
+  id: option<queueId>,
+}
 @ocaml.doc("<p>Contains information about the prompt.</p>")
 type promptSummary = {
   @ocaml.doc("<p>The name of the prompt.</p>") @as("Name") name: option<promptName>,
@@ -673,6 +789,7 @@ type phoneNumberQuickConnectConfig = {
   phoneNumber: phoneNumber,
 }
 type phoneNumberCountryCodes = array<phoneNumberCountryCode>
+type permissionsList = array<securityProfilePermission>
 @ocaml.doc("<p>The customer's details.</p>")
 type participantDetails = {
   @ocaml.doc("<p>Display name of the participant.</p>") @as("DisplayName") displayName: displayName,
@@ -693,13 +810,18 @@ type originsList = array<origin>
 type mediaConcurrency = {
   @ocaml.doc("<p>The number of contacts an agent can have on a channel simultaneously.</p>
          <p>Valid Range for <code>VOICE</code>: Minimum value of 1. Maximum value of 1.</p>
-         <p>Valid Range for <code>CHAT</code>: Minimum value of 1. Maximum value of 5.</p>
+         <p>Valid Range for <code>CHAT</code>: Minimum value of 1. Maximum value of 10.</p>
          <p>Valid Range for <code>TASK</code>: Minimum value of 1. Maximum value of 10.</p>")
   @as("Concurrency")
   concurrency: concurrency,
   @ocaml.doc("<p>The channels that agents can handle in the Contact Control Panel (CCP).</p>")
   @as("Channel")
   channel: channel,
+}
+@ocaml.doc("<p>Configuration information of an Amazon Lex V2 bot.</p>")
+type lexV2Bot = {
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the Amazon Lex V2 bot.</p>") @as("AliasArn")
+  aliasArn: option<aliasArn>,
 }
 @ocaml.doc("<p>Configuration information of an Amazon Lex bot.</p>")
 type lexBot = {
@@ -729,7 +851,10 @@ type integrationAssociationSummary = {
   integrationArn: option<arn>,
   @ocaml.doc("<p>The integration type.</p>") @as("IntegrationType")
   integrationType: option<integrationType>,
-  @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+  @ocaml.doc(
+    "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+  )
+  @as("InstanceId")
   instanceId: option<instanceId>,
   @ocaml.doc("<p>The Amazon Resource Name (ARN) for the AppIntegration association.</p>")
   @as("IntegrationAssociationArn")
@@ -764,8 +889,8 @@ type instanceStatusReason = {
 }
 @ocaml.doc("<p>The start time or end time for an hours of operation.</p>")
 type hoursOfOperationTimeSlice = {
-  @ocaml.doc("<p>The minutes.</p>") @as("Minutes") minutes: option<minutesLimit60>,
-  @ocaml.doc("<p>The hours.</p>") @as("Hours") hours: option<hours24Format>,
+  @ocaml.doc("<p>The minutes.</p>") @as("Minutes") minutes: minutesLimit60,
+  @ocaml.doc("<p>The hours.</p>") @as("Hours") hours: hours24Format,
 }
 @ocaml.doc("<p>Contains summary information about hours of operation for a contact center.</p>")
 type hoursOfOperationSummary = {
@@ -804,8 +929,30 @@ type groupings = array<grouping>
 type functionArnsList = array<functionArn>
 @ocaml.doc("<p>The encryption configuration.</p>")
 type encryptionConfig = {
-  @ocaml.doc("<p>The identifier of the encryption key.</p>") @as("KeyId") keyId: keyId,
+  @ocaml.doc("<p>The full ARN of the encryption key. </p>
+         <note>
+            <p>Be sure to provide the full ARN of the encryption key, not just the ID.</p>
+         </note>")
+  @as("KeyId")
+  keyId: keyId,
   @ocaml.doc("<p>The type of encryption.</p>") @as("EncryptionType") encryptionType: encryptionType,
+}
+@ocaml.doc("<p>Contains information about a default vocabulary.</p>")
+type defaultVocabulary = {
+  @ocaml.doc("<p>A unique name of the custom vocabulary.</p>") @as("VocabularyName")
+  vocabularyName: vocabularyName,
+  @ocaml.doc("<p>The identifier of the custom vocabulary.</p>") @as("VocabularyId")
+  vocabularyId: vocabularyId,
+  @ocaml.doc("<p>The language code of the vocabulary entries. For a list of languages and their corresponding language codes, see 
+<a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/transcribe-whatis.html\">What is Amazon Transcribe?</a>
+         </p>")
+  @as("LanguageCode")
+  languageCode: vocabularyLanguageCode,
+  @ocaml.doc(
+    "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+  )
+  @as("InstanceId")
+  instanceId: instanceId,
 }
 @ocaml.doc("<p>Contains information about a real-time metric. For a description of each metric, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html\">Real-time Metrics Definitions</a> in the <i>Amazon Connect Administrator
    Guide</i>.</p>")
@@ -834,6 +981,8 @@ type contactFlowTypes = array<contactFlowType>
          <p>You can also create and update contact flows using the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html\">Amazon Connect
    Flow language</a>.</p>")
 type contactFlowSummary = {
+  @ocaml.doc("<p>The type of contact flow.</p>") @as("ContactFlowState")
+  contactFlowState: option<contactFlowState>,
   @ocaml.doc("<p>The type of contact flow.</p>") @as("ContactFlowType")
   contactFlowType: option<contactFlowType>,
   @ocaml.doc("<p>The name of the contact flow.</p>") @as("Name") name: option<contactFlowName>,
@@ -841,10 +990,28 @@ type contactFlowSummary = {
   arn: option<arn>,
   @ocaml.doc("<p>The identifier of the contact flow.</p>") @as("Id") id: option<contactFlowId>,
 }
+@ocaml.doc("<p>Contains summary information about a contact flow.</p>")
+type contactFlowModuleSummary = {
+  @ocaml.doc("<p>The type of contact flow module.</p>") @as("State")
+  state: option<contactFlowModuleState>,
+  @ocaml.doc("<p>The name of the contact flow module.</p>") @as("Name")
+  name: option<contactFlowModuleName>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the contact flow module.</p>") @as("Arn")
+  arn: option<arn>,
+  @ocaml.doc("<p>The identifier of the contact flow module.</p>") @as("Id")
+  id: option<contactFlowModuleId>,
+}
+@ocaml.doc("<p>The streaming configuration, such as the Amazon SNS streaming endpoint.</p>")
+type chatStreamingConfiguration = {
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the standard Amazon SNS topic. The Amazon Resource Name (ARN) of the streaming endpoint that is used
+   to publish real-time message streaming for chat conversations.</p>")
+  @as("StreamingEndpointArn")
+  streamingEndpointArn: chatStreamingEndpointARN,
+}
 @ocaml.doc("<p>A chat message.</p>")
 type chatMessage = {
   @ocaml.doc("<p>The content of the chat message.</p>") @as("Content") content: chatContent,
-  @ocaml.doc("<p>The type of the content. Supported types are text and plain.</p>")
+  @ocaml.doc("<p>The type of the content. Supported types are <code>text/plain</code>.</p>")
   @as("ContentType")
   contentType: chatContentType,
 }
@@ -856,6 +1023,72 @@ type attribute = {
   value: option<instanceAttributeValue>,
   @ocaml.doc("<p>The type of attribute.</p>") @as("AttributeType")
   attributeType: option<instanceAttributeType>,
+}
+@ocaml.doc("<p>Information about the attachment reference if the <code>referenceType</code> is
+    <code>ATTACHMENT</code>. Otherwise, null.</p>")
+type attachmentReference = {
+  @ocaml.doc("<p>Status of an attachment reference type.</p>") @as("Status")
+  status: option<referenceStatus>,
+  @ocaml.doc("<p>Contains the location path of the attachment reference.</p>") @as("Value")
+  value: option<referenceValue>,
+  @ocaml.doc("<p>Identifier of the attachment reference.</p>") @as("Name")
+  name: option<referenceKey>,
+}
+@ocaml.doc("<p>Configuration of the answering machine detection.</p>")
+type answerMachineDetectionConfig = {
+  @ocaml.doc("<p>Wait for the answering machine prompt.</p>") @as("AwaitAnswerMachinePrompt")
+  awaitAnswerMachinePrompt: option<boolean_>,
+  @ocaml.doc("<p>The flag to indicate if answer machine detection analysis needs to be performed for a voice
+   call. If set to <code>true</code>, <code>TrafficType</code> must be set as <code>CAMPAIGN</code>.
+  </p>")
+  @as("EnableAnswerMachineDetection")
+  enableAnswerMachineDetection: option<boolean_>,
+}
+type agentStatusTypes = array<agentStatusType>
+@ocaml.doc("<p>Summary information for an agent status.</p>")
+type agentStatusSummary = {
+  @ocaml.doc("<p>The type of the agent status.</p>") @as("Type") type_: option<agentStatusType>,
+  @ocaml.doc("<p>The name of the agent status.</p>") @as("Name") name: option<agentStatusName>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) for the agent status.</p>") @as("Arn")
+  arn: option<arn>,
+  @ocaml.doc("<p>The identifier for an agent status.</p>") @as("Id") id: option<agentStatusId>,
+}
+@ocaml.doc("<p>Information about the agent who accepted the contact.</p>")
+type agentInfo = {
+  @ocaml.doc("<p>The timestamp when the contact was connected to the agent.</p>")
+  @as("ConnectedToAgentTimestamp")
+  connectedToAgentTimestamp: option<timestamp_>,
+  @ocaml.doc("<p>The identifier of the agent who accepted the contact.</p>") @as("Id")
+  id: option<agentResourceId>,
+}
+type vocabularySummaryList = array<vocabularySummary>
+@ocaml.doc("<p>Contains information about a custom vocabulary.</p>")
+type vocabulary = {
+  @ocaml.doc("<p>The tags used to organize, track, or control access for this resource.</p>")
+  @as("Tags")
+  tags: option<tagMap>,
+  @ocaml.doc("<p>The content of the custom vocabulary in plain-text format with a table of values. Each row
+   in the table represents a word or a phrase, described with <code>Phrase</code>, <code>IPA</code>,
+    <code>SoundsLike</code>, and <code>DisplayAs</code> fields. Separate the fields with TAB
+   characters. For more information, see <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html#create-vocabulary-table\">Create a custom
+    vocabulary using a table</a>.</p>")
+  @as("Content")
+  content: option<vocabularyContent>,
+  @ocaml.doc("<p>The reason why the custom vocabulary was not created.</p>") @as("FailureReason")
+  failureReason: option<vocabularyFailureReason>,
+  @ocaml.doc("<p>The timestamp when the custom vocabulary was last modified.</p>")
+  @as("LastModifiedTime")
+  lastModifiedTime: vocabularyLastModifiedTime,
+  @ocaml.doc("<p>The current state of the custom vocabulary.</p>") @as("State")
+  state: vocabularyState,
+  @ocaml.doc("<p>The language code of the vocabulary entries. For a list of languages and their corresponding language codes, see 
+<a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/transcribe-whatis.html\">What is Amazon Transcribe?</a>
+         </p>")
+  @as("LanguageCode")
+  languageCode: vocabularyLanguageCode,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the custom vocabulary.</p>") @as("Arn") arn: arn,
+  @ocaml.doc("<p>The identifier of the custom vocabulary.</p>") @as("Id") id: vocabularyId,
+  @ocaml.doc("<p>A unique name of the custom vocabulary.</p>") @as("Name") name: vocabularyName,
 }
 type userSummaryList = array<userSummary>
 @ocaml.doc("<p>Contains information about a user account for a Amazon Connect instance.</p>")
@@ -888,6 +1121,23 @@ type user = {
 }
 type useCaseSummaryList = array<useCase>
 type securityProfileSummaryList = array<securityProfileSummary>
+@ocaml.doc("<p>Contains information about a security profile.</p>")
+type securityProfile = {
+  @ocaml.doc("<p>The tags used to organize, track, or control access for this resource.</p>")
+  @as("Tags")
+  tags: option<tagMap>,
+  @ocaml.doc("<p>The description of the security profile.</p>") @as("Description")
+  description: option<securityProfileDescription>,
+  @ocaml.doc("<p>The name for the security profile.</p>") @as("SecurityProfileName")
+  securityProfileName: option<securityProfileName>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) for the secruity profile.</p>") @as("Arn")
+  arn: option<arn>,
+  @ocaml.doc("<p>The organization resource identifier for the security profile.</p>")
+  @as("OrganizationResourceId")
+  organizationResourceId: option<instanceId>,
+  @ocaml.doc("<p>The identifier for the security profile.</p>") @as("Id")
+  id: option<securityProfileId>,
+}
 type securityKeysList = array<securityKey>
 @ocaml.doc("<p>Information about the Amazon Simple Storage Service (Amazon S3) storage type.</p>")
 type s3Config = {
@@ -915,6 +1165,34 @@ type routingProfileQueueConfig = {
   @ocaml.doc("<p>Contains information about a queue resource.</p>") @as("QueueReference")
   queueReference: routingProfileQueueReference,
 }
+@ocaml.doc("<p>Contains summary information about a reference. <code>ReferenceSummary</code> contains only
+   one non null field between the URL and attachment based on the reference type.</p>")
+type referenceSummary = {
+  @ocaml.doc("<p>Information about the attachment reference if the <code>referenceType</code> is
+    <code>ATTACHMENT</code>. Otherwise, null.</p>")
+  @as("Attachment")
+  attachment: option<attachmentReference>,
+  @ocaml.doc("<p>Information about the URL reference if the <code>referenceType</code> is <code>URL</code>.
+   Otherwise, null.</p>")
+  @as("Url")
+  url: option<urlReference>,
+}
+module ReferenceSummary = {
+  type t = Attachment(attachmentReference) | Url(urlReference)
+  exception ReferenceSummaryUnspecified
+  let classify = value =>
+    switch value {
+    | {attachment: Some(x)} => Attachment(x)
+    | {url: Some(x)} => Url(x)
+    | _ => raise(ReferenceSummaryUnspecified)
+    }
+
+  let make = value =>
+    switch value {
+    | Attachment(x) => {attachment: Some(x), url: None}
+    | Url(x) => {url: Some(x), attachment: None}
+    }
+}
 type quickConnectSummaryList = array<quickConnectSummary>
 @ocaml.doc("<p>Contains configuration settings for a quick connect.</p>")
 type quickConnectConfig = {
@@ -937,7 +1215,9 @@ type quickConnectConfig = {
 type queueSummaryList = array<queueSummary>
 @ocaml.doc("<p>Contains information about a queue.</p>")
 type queue = {
-  @ocaml.doc("<p>One or more tags.</p>") @as("Tags") tags: option<tagMap>,
+  @ocaml.doc("<p>The tags used to organize, track, or control access for this resource.</p>")
+  @as("Tags")
+  tags: option<tagMap>,
   @ocaml.doc("<p>The status of the queue.</p>") @as("Status") status: option<queueStatus>,
   @ocaml.doc(
     "<p>The maximum number of contacts that can be in the queue before it is considered full.</p>"
@@ -961,6 +1241,12 @@ type problems = array<problemDetail>
 type phoneNumberSummaryList = array<phoneNumberSummary>
 type mediaConcurrencies = array<mediaConcurrency>
 type lexBotsList = array<lexBot>
+@ocaml.doc("<p>Configuration information of an Amazon Lex or Amazon Lex V2 bot.</p>")
+type lexBotConfig = {
+  @ocaml.doc("<p>Configuration information of an Amazon Lex V2 bot.</p>") @as("LexV2Bot")
+  lexV2Bot: option<lexV2Bot>,
+  @as("LexBot") lexBot: option<lexBot>,
+}
 @ocaml.doc("<p>Configuration information of a Kinesis video stream.</p>")
 type kinesisVideoStreamConfig = {
   @ocaml.doc("<p>The encryption configuration.</p>") @as("EncryptionConfig")
@@ -995,18 +1281,21 @@ type instance = {
   @ocaml.doc("<p>The identity management type.</p>") @as("IdentityManagementType")
   identityManagementType: option<directoryType>,
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the instance.</p>") @as("Arn") arn: option<arn>,
-  @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("Id")
+  @ocaml.doc(
+    "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+  )
+  @as("Id")
   id: option<instanceId>,
 }
 type hoursOfOperationSummaryList = array<hoursOfOperationSummary>
 @ocaml.doc("<p>Contains information about the hours of operation.</p>")
 type hoursOfOperationConfig = {
-  @ocaml.doc("<p>The end time that your contact center is closes.</p>") @as("EndTime")
-  endTime: option<hoursOfOperationTimeSlice>,
-  @ocaml.doc("<p>The start time that your contact center is open.</p>") @as("StartTime")
-  startTime: option<hoursOfOperationTimeSlice>,
+  @ocaml.doc("<p>The end time that your contact center closes.</p>") @as("EndTime")
+  endTime: hoursOfOperationTimeSlice,
+  @ocaml.doc("<p>The start time that your contact center opens.</p>") @as("StartTime")
+  startTime: hoursOfOperationTimeSlice,
   @ocaml.doc("<p>The day that the hours of operation applies to.</p>") @as("Day")
-  day: option<hoursOfOperationDays>,
+  day: hoursOfOperationDays,
 }
 @ocaml.doc("<p>Contains information about a historical metric. For a description of each metric, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html\">Historical Metrics Definitions</a> in the <i>Amazon Connect Administrator
    Guide</i>.</p>")
@@ -1065,8 +1354,9 @@ type hierarchyGroupSummaryList = array<hierarchyGroupSummary>
 type filters = {
   @ocaml.doc("<p>The channel to use to filter the metrics.</p>") @as("Channels")
   channels: option<channels>,
-  @ocaml.doc("<p>The queues to use to filter the metrics. You can specify up to 100 queues per
-   request.</p>")
+  @ocaml.doc("<p>The queues to use to filter the metrics. You should specify at least one queue, and can
+   specify up to 100 queues per request. The <code>GetCurrentMetricsData</code> API in particular
+   requires a queue when you include a <code>Filter</code> in your request. </p>")
   @as("Queues")
   queues: option<queues>,
 }
@@ -1077,6 +1367,7 @@ type dimensions = {
   @ocaml.doc("<p>Information about the queue for which metrics are returned.</p>") @as("Queue")
   queue: option<queueReference>,
 }
+type defaultVocabularyList = array<defaultVocabulary>
 type currentMetrics = array<currentMetric>
 @ocaml.doc("<p>Contains the data for a real-time metric.</p>")
 type currentMetricData = {
@@ -1085,6 +1376,26 @@ type currentMetricData = {
 }
 type contactReferences = Js.Dict.t<reference>
 type contactFlowSummaryList = array<contactFlowSummary>
+type contactFlowModulesSummaryList = array<contactFlowModuleSummary>
+@ocaml.doc("<p>Contains information about a contact flow module.</p>")
+type contactFlowModule = {
+  @ocaml.doc("<p>The tags used to organize, track, or control access for this resource.</p>")
+  @as("Tags")
+  tags: option<tagMap>,
+  @ocaml.doc("<p>The status of the contact flow module.</p>") @as("Status")
+  status: option<contactFlowModuleStatus>,
+  @ocaml.doc("<p>The type of contact flow module.</p>") @as("State")
+  state: option<contactFlowModuleState>,
+  @ocaml.doc("<p>The description of the contact flow module.</p>") @as("Description")
+  description: option<contactFlowModuleDescription>,
+  @ocaml.doc("<p>The content of the contact flow module.</p>") @as("Content")
+  content: option<contactFlowModuleContent>,
+  @ocaml.doc("<p>The name of the contact flow module.</p>") @as("Name")
+  name: option<contactFlowModuleName>,
+  @ocaml.doc("<p>The identifier of the contact flow module.</p>") @as("Id")
+  id: option<contactFlowModuleId>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN).</p>") @as("Arn") arn: option<arn>,
+}
 @ocaml.doc("<p>Contains information about a contact flow.</p>")
 type contactFlow = {
   @ocaml.doc("<p>One or more tags.</p>") @as("Tags") tags: option<tagMap>,
@@ -1092,6 +1403,7 @@ type contactFlow = {
   content: option<contactFlowContent>,
   @ocaml.doc("<p>The description of the contact flow.</p>") @as("Description")
   description: option<contactFlowDescription>,
+  @ocaml.doc("<p>The type of contact flow.</p>") @as("State") state: option<contactFlowState>,
   @ocaml.doc("<p>The type of the contact flow. For descriptions of the available types, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/create-contact-flow.html#contact-flow-types\">Choose a Contact Flow Type</a> in the <i>Amazon Connect Administrator
    Guide</i>.</p>")
   @as("Type")
@@ -1101,7 +1413,68 @@ type contactFlow = {
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the contact flow.</p>") @as("Arn")
   arn: option<arn>,
 }
+@ocaml.doc("<p>Contains information about a contact.</p>")
+type contact = {
+  @ocaml.doc("<p>The timestamp, in Unix epoch time format, at which to start running the inbound flow.
+  </p>")
+  @as("ScheduledTimestamp")
+  scheduledTimestamp: option<timestamp_>,
+  @ocaml.doc("<p>The timestamp when contact was last updated.</p>") @as("LastUpdateTimestamp")
+  lastUpdateTimestamp: option<timestamp_>,
+  @ocaml.doc("<p>The timestamp when the customer endpoint disconnected from Amazon Connect.</p>")
+  @as("DisconnectTimestamp")
+  disconnectTimestamp: option<timestamp_>,
+  @ocaml.doc("<p>The date and time this contact was initiated, in UTC time. For <code>INBOUND</code>, this is
+   when the contact arrived. For <code>OUTBOUND</code>, this is when the agent began dialing. For
+    <code>CALLBACK</code>, this is when the callback contact was created. For <code>TRANSFER</code>
+   and <code>QUEUE_TRANSFER</code>, this is when the transfer was initiated. For <code>API</code>,
+   this is when the request arrived.</p>")
+  @as("InitiationTimestamp")
+  initiationTimestamp: option<timestamp_>,
+  @ocaml.doc("<p>Information about the agent who accepted the contact.</p>") @as("AgentInfo")
+  agentInfo: option<agentInfo>,
+  @ocaml.doc("<p>If this contact was queued, this contains information about the queue. </p>")
+  @as("QueueInfo")
+  queueInfo: option<queueInfo>,
+  @ocaml.doc("<p>How the contact reached your contact center.</p>") @as("Channel")
+  channel: option<channel>,
+  @ocaml.doc("<p>The description of the contact.</p>") @as("Description")
+  description: option<description>,
+  @ocaml.doc("<p>The name of the contact.</p>") @as("Name") name: option<name>,
+  @ocaml.doc("<p>Indicates how the contact was initiated.</p>") @as("InitiationMethod")
+  initiationMethod: option<contactInitiationMethod>,
+  @ocaml.doc(
+    "<p>If this contact is not the first contact, this is the ID of the previous contact.</p>"
+  )
+  @as("PreviousContactId")
+  previousContactId: option<contactId>,
+  @ocaml.doc(
+    "<p>If this contact is related to other contacts, this is the ID of the initial contact.</p>"
+  )
+  @as("InitialContactId")
+  initialContactId: option<contactId>,
+  @ocaml.doc("<p>The identifier for the contact.</p>") @as("Id") id: option<contactId>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) for the contact.</p>") @as("Arn") arn: option<arn>,
+}
 type attributesList = array<attribute>
+type agentStatusSummaryList = array<agentStatusSummary>
+@ocaml.doc("<p>Contains information about an agent status.</p>")
+type agentStatus = {
+  @ocaml.doc("<p>The tags used to organize, track, or control access for this resource.</p>")
+  @as("Tags")
+  tags: option<tagMap>,
+  @ocaml.doc("<p>The state of the agent status.</p>") @as("State") state: option<agentStatusState>,
+  @ocaml.doc("<p>The display order of the agent status.</p>") @as("DisplayOrder")
+  displayOrder: option<agentStatusOrderNumber>,
+  @ocaml.doc("<p>The type of agent status.</p>") @as("Type") type_: option<agentStatusType>,
+  @ocaml.doc("<p>The description of the agent status.</p>") @as("Description")
+  description: option<agentStatusDescription>,
+  @ocaml.doc("<p>The name of the agent status.</p>") @as("Name") name: option<agentStatusName>,
+  @ocaml.doc("<p>The identifier of the agent status.</p>") @as("AgentStatusId")
+  agentStatusId: option<agentStatusId>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the agent status.</p>") @as("AgentStatusARN")
+  agentStatusARN: option<arn>,
+}
 type routingProfileQueueConfigList = array<routingProfileQueueConfig>
 @ocaml.doc("<p>Contains information about a routing profile.</p>")
 type routingProfile = {
@@ -1122,12 +1495,18 @@ type routingProfile = {
   routingProfileArn: option<arn>,
   @ocaml.doc("<p>The name of the routing profile.</p>") @as("Name")
   name: option<routingProfileName>,
-  @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+  @ocaml.doc(
+    "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+  )
+  @as("InstanceId")
   instanceId: option<instanceId>,
 }
+type referenceSummaryList = array<referenceSummary>
 @ocaml.doc("<p>Contains information about a quick connect.</p>")
 type quickConnect = {
-  @ocaml.doc("<p>One or more tags.</p>") @as("Tags") tags: option<tagMap>,
+  @ocaml.doc("<p>The tags used to organize, track, or control access for this resource.</p>")
+  @as("Tags")
+  tags: option<tagMap>,
   @ocaml.doc("<p>Contains information about the quick connect.</p>") @as("QuickConnectConfig")
   quickConnectConfig: option<quickConnectConfig>,
   @ocaml.doc("<p>The description.</p>") @as("Description")
@@ -1138,6 +1517,7 @@ type quickConnect = {
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the quick connect.</p>") @as("QuickConnectARN")
   quickConnectARN: option<arn>,
 }
+type lexBotConfigList = array<lexBotConfig>
 @ocaml.doc("<p>The storage configuration for the instance.</p>")
 type instanceStorageConfig = {
   @ocaml.doc("<p>The configuration of the Kinesis Firehose delivery stream.</p>")
@@ -1168,6 +1548,9 @@ type historicalMetricData = {
 }
 @ocaml.doc("<p>Contains information about a hierarchy group.</p>")
 type hierarchyGroup = {
+  @ocaml.doc("<p>The tags used to organize, track, or control access for this resource.</p>")
+  @as("Tags")
+  tags: option<tagMap>,
   @ocaml.doc("<p>Information about the levels in the hierarchy group.</p>") @as("HierarchyPath")
   hierarchyPath: option<hierarchyPath>,
   @ocaml.doc("<p>The identifier of the level in the hierarchy group.</p>") @as("LevelId")
@@ -1183,13 +1566,15 @@ type currentMetricDataCollections = array<currentMetricData>
 type instanceStorageConfigs = array<instanceStorageConfig>
 @ocaml.doc("<p>Information about of the hours of operation.</p>")
 type hoursOfOperation = {
-  @ocaml.doc("<p>One or more tags.</p>") @as("Tags") tags: option<tagMap>,
+  @ocaml.doc("<p>The tags used to organize, track, or control access for this resource.</p>")
+  @as("Tags")
+  tags: option<tagMap>,
   @ocaml.doc("<p>Configuration information for the hours of operation.</p>") @as("Config")
   config: option<hoursOfOperationConfigList>,
   @ocaml.doc("<p>The time zone for the hours of operation.</p>") @as("TimeZone")
   timeZone: option<timeZone>,
   @ocaml.doc("<p>The description for the hours of operation.</p>") @as("Description")
-  description: option<commonDescriptionLength250>,
+  description: option<hoursOfOperationDescription>,
   @ocaml.doc("<p>The name for the hours of operation.</p>") @as("Name")
   name: option<commonNameLength127>,
   @ocaml.doc("<p>The Amazon Resource Name (ARN) for the hours of operation.</p>")
@@ -1223,24 +1608,24 @@ type historicalMetricResults = array<historicalMetricResult>
          <p>There are limits to the number of Amazon Connect resources that you can create. There are also limits
    to the number of requests that you can make per second. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html\">Amazon Connect
     Service Quotas</a> in the <i>Amazon Connect Administrator Guide</i>.</p>
-         <p>You can
-   connect
-   programmatically to an AWS service by using an endpoint. For a list of Amazon Connect endpoints, see
-    <a href=\"https://docs.aws.amazon.com/general/latest/gr/connect_region.html\">Amazon Connect
-   Endpoints</a>.</p>
+         <p>You can connect programmatically to an Amazon Web Services service by using an endpoint. For
+   a list of Amazon Connect endpoints, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/connect_region.html\">Amazon Connect Endpoints</a>.</p>
          <note>
             <p>Working with contact flows? Check out the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html\">Amazon Connect Flow language</a>.</p>
          </note>")
 module UpdateUserRoutingProfile = {
   type t
   type request = {
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
     @ocaml.doc("<p>The identifier of the user account.</p>") @as("UserId") userId: userId,
     @ocaml.doc("<p>The identifier of the routing profile for the user.</p>") @as("RoutingProfileId")
     routingProfileId: routingProfileId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "UpdateUserRoutingProfileCommand"
   let make = (~instanceId, ~userId, ~routingProfileId, ()) =>
@@ -1251,7 +1636,10 @@ module UpdateUserRoutingProfile = {
 module UpdateUserHierarchyGroupName = {
   type t
   type request = {
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
     @ocaml.doc("<p>The identifier of the hierarchy group.</p>") @as("HierarchyGroupId")
     hierarchyGroupId: hierarchyGroupId,
@@ -1259,7 +1647,7 @@ module UpdateUserHierarchyGroupName = {
     @as("Name")
     name: hierarchyGroupName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "UpdateUserHierarchyGroupNameCommand"
   let make = (~instanceId, ~hierarchyGroupId, ~name, ()) =>
@@ -1270,13 +1658,16 @@ module UpdateUserHierarchyGroupName = {
 module UpdateUserHierarchy = {
   type t
   type request = {
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
     @ocaml.doc("<p>The identifier of the user account.</p>") @as("UserId") userId: userId,
     @ocaml.doc("<p>The identifier of the hierarchy group.</p>") @as("HierarchyGroupId")
     hierarchyGroupId: option<hierarchyGroupId>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-connect") @new external new: request => t = "UpdateUserHierarchyCommand"
   let make = (~instanceId, ~userId, ~hierarchyGroupId=?, ()) =>
     new({instanceId: instanceId, userId: userId, hierarchyGroupId: hierarchyGroupId})
@@ -1296,10 +1687,13 @@ module UpdateRoutingProfileName = {
     name: option<routingProfileName>,
     @ocaml.doc("<p>The identifier of the routing profile.</p>") @as("RoutingProfileId")
     routingProfileId: routingProfileId,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "UpdateRoutingProfileNameCommand"
   let make = (~routingProfileId, ~instanceId, ~description=?, ~name=?, ()) =>
@@ -1320,10 +1714,13 @@ module UpdateRoutingProfileDefaultOutboundQueue = {
     defaultOutboundQueueId: queueId,
     @ocaml.doc("<p>The identifier of the routing profile.</p>") @as("RoutingProfileId")
     routingProfileId: routingProfileId,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "UpdateRoutingProfileDefaultOutboundQueueCommand"
   let make = (~defaultOutboundQueueId, ~routingProfileId, ~instanceId, ()) =>
@@ -1339,14 +1736,17 @@ module UpdateQuickConnectName = {
   type t
   type request = {
     @ocaml.doc("<p>The description of the quick connect.</p>") @as("Description")
-    description: option<quickConnectDescription>,
+    description: option<updateQuickConnectDescription>,
     @ocaml.doc("<p>The name of the quick connect.</p>") @as("Name") name: option<quickConnectName>,
     @ocaml.doc("<p>The identifier for the quick connect.</p>") @as("QuickConnectId")
     quickConnectId: quickConnectId,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "UpdateQuickConnectNameCommand"
   let make = (~quickConnectId, ~instanceId, ~description=?, ~name=?, ()) =>
@@ -1364,10 +1764,13 @@ module UpdateQueueStatus = {
   type request = {
     @ocaml.doc("<p>The status of the queue.</p>") @as("Status") status: queueStatus,
     @ocaml.doc("<p>The identifier for the queue.</p>") @as("QueueId") queueId: queueId,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-connect") @new external new: request => t = "UpdateQueueStatusCommand"
   let make = (~status, ~queueId, ~instanceId, ()) =>
     new({status: status, queueId: queueId, instanceId: instanceId})
@@ -1381,10 +1784,13 @@ module UpdateQueueName = {
     description: option<queueDescription>,
     @ocaml.doc("<p>The name of the queue.</p>") @as("Name") name: option<commonNameLength127>,
     @ocaml.doc("<p>The identifier for the queue.</p>") @as("QueueId") queueId: queueId,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-connect") @new external new: request => t = "UpdateQueueNameCommand"
   let make = (~queueId, ~instanceId, ~description=?, ~name=?, ()) =>
     new({description: description, name: name, queueId: queueId, instanceId: instanceId})
@@ -1400,10 +1806,13 @@ module UpdateQueueMaxContacts = {
     @as("MaxContacts")
     maxContacts: option<queueMaxContacts>,
     @ocaml.doc("<p>The identifier for the queue.</p>") @as("QueueId") queueId: queueId,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "UpdateQueueMaxContactsCommand"
   let make = (~queueId, ~instanceId, ~maxContacts=?, ()) =>
@@ -1417,10 +1826,13 @@ module UpdateQueueHoursOfOperation = {
     @ocaml.doc("<p>The identifier for the hours of operation.</p>") @as("HoursOfOperationId")
     hoursOfOperationId: hoursOfOperationId,
     @ocaml.doc("<p>The identifier for the queue.</p>") @as("QueueId") queueId: queueId,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "UpdateQueueHoursOfOperationCommand"
   let make = (~hoursOfOperationId, ~queueId, ~instanceId, ()) =>
@@ -1433,16 +1845,47 @@ module UpdateInstanceAttribute = {
   type request = {
     @ocaml.doc("<p>The value for the attribute. Maximum character limit is 100. </p>") @as("Value")
     value: instanceAttributeValue,
-    @ocaml.doc("<p>The type of attribute.</p>") @as("AttributeType")
+    @ocaml.doc("<p>The type of attribute.</p>
+         <note>
+            <p>Only allowlisted customers can consume USE_CUSTOM_TTS_VOICES. To access this feature,
+    contact Amazon Web Services Support for allowlisting.</p>
+         </note>")
+    @as("AttributeType")
     attributeType: instanceAttributeType,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "UpdateInstanceAttributeCommand"
   let make = (~value, ~attributeType, ~instanceId, ()) =>
     new({value: value, attributeType: attributeType, instanceId: instanceId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module UpdateContactSchedule = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>The timestamp, in Unix Epoch seconds format, at which to start running the inbound contact flow. The scheduled time cannot be in the past. It must be within up to 6 days in future. </p>"
+    )
+    @as("ScheduledTime")
+    scheduledTime: timestamp_,
+    @ocaml.doc("<p>The identifier of the contact.</p>") @as("ContactId") contactId: contactId,
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
+    instanceId: instanceId,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-connect") @new
+  external new: request => t = "UpdateContactScheduleCommand"
+  let make = (~scheduledTime, ~contactId, ~instanceId, ()) =>
+    new({scheduledTime: scheduledTime, contactId: contactId, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -1457,7 +1900,7 @@ module UpdateContactFlowName = {
     @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
     instanceId: instanceId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "UpdateContactFlowNameCommand"
   let make = (~contactFlowId, ~instanceId, ~description=?, ~name=?, ()) =>
@@ -1465,6 +1908,112 @@ module UpdateContactFlowName = {
       description: description,
       name: name,
       contactFlowId: contactFlowId,
+      instanceId: instanceId,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module UpdateContactFlowModuleMetadata = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The state of contact flow module.</p>") @as("State")
+    state: option<contactFlowModuleState>,
+    @ocaml.doc("<p>The description of the contact flow module.</p>") @as("Description")
+    description: option<contactFlowModuleDescription>,
+    @ocaml.doc("<p>The name of the contact flow module.</p>") @as("Name")
+    name: option<contactFlowModuleName>,
+    @ocaml.doc("<p>The identifier of the contact flow module.</p>") @as("ContactFlowModuleId")
+    contactFlowModuleId: contactFlowModuleId,
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
+    instanceId: instanceId,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-connect") @new
+  external new: request => t = "UpdateContactFlowModuleMetadataCommand"
+  let make = (~contactFlowModuleId, ~instanceId, ~state=?, ~description=?, ~name=?, ()) =>
+    new({
+      state: state,
+      description: description,
+      name: name,
+      contactFlowModuleId: contactFlowModuleId,
+      instanceId: instanceId,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module UpdateContactFlowMetadata = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The state of contact flow.</p>") @as("ContactFlowState")
+    contactFlowState: option<contactFlowState>,
+    @ocaml.doc("<p>The description of the contact flow.</p>") @as("Description")
+    description: option<contactFlowDescription>,
+    @ocaml.doc("<p>TThe name of the contact flow.</p>") @as("Name") name: option<contactFlowName>,
+    @ocaml.doc("<p>The identifier of the contact flow.</p>") @as("ContactFlowId")
+    contactFlowId: contactFlowId,
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
+    instanceId: instanceId,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-connect") @new
+  external new: request => t = "UpdateContactFlowMetadataCommand"
+  let make = (~contactFlowId, ~instanceId, ~contactFlowState=?, ~description=?, ~name=?, ()) =>
+    new({
+      contactFlowState: contactFlowState,
+      description: description,
+      name: name,
+      contactFlowId: contactFlowId,
+      instanceId: instanceId,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module UpdateAgentStatus = {
+  type t
+  type request = {
+    @ocaml.doc("<p>A number indicating the reset order of the agent status.</p>")
+    @as("ResetOrderNumber")
+    resetOrderNumber: option<boolean_>,
+    @ocaml.doc("<p>The display order of the agent status.</p>") @as("DisplayOrder")
+    displayOrder: option<agentStatusOrderNumber>,
+    @ocaml.doc("<p>The state of the agent status.</p>") @as("State")
+    state: option<agentStatusState>,
+    @ocaml.doc("<p>The description of the agent status.</p>") @as("Description")
+    description: option<updateAgentStatusDescription>,
+    @ocaml.doc("<p>The name of the agent status.</p>") @as("Name") name: option<agentStatusName>,
+    @ocaml.doc("<p>The identifier of the agent status.</p>") @as("AgentStatusId")
+    agentStatusId: agentStatusId,
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
+    instanceId: instanceId,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-connect") @new external new: request => t = "UpdateAgentStatusCommand"
+  let make = (
+    ~agentStatusId,
+    ~instanceId,
+    ~resetOrderNumber=?,
+    ~displayOrder=?,
+    ~state=?,
+    ~description=?,
+    ~name=?,
+    (),
+  ) =>
+    new({
+      resetOrderNumber: resetOrderNumber,
+      displayOrder: displayOrder,
+      state: state,
+      description: description,
+      name: name,
+      agentStatusId: agentStatusId,
       instanceId: instanceId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1478,14 +2027,39 @@ module SuspendContactRecording = {
     @as("InitialContactId")
     initialContactId: contactId,
     @ocaml.doc("<p>The identifier of the contact.</p>") @as("ContactId") contactId: contactId,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "SuspendContactRecordingCommand"
   let make = (~initialContactId, ~contactId, ~instanceId, ()) =>
     new({initialContactId: initialContactId, contactId: contactId, instanceId: instanceId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module StopContactStreaming = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The identifier of the streaming configuration enabled. </p>") @as("StreamingId")
+    streamingId: streamingId,
+    @ocaml.doc("<p>The identifier of the contact. This is the identifier of the contact that is associated with
+   the first interaction with the contact center.</p>")
+    @as("ContactId")
+    contactId: contactId,
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
+    instanceId: instanceId,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-connect") @new external new: request => t = "StopContactStreamingCommand"
+  let make = (~streamingId, ~contactId, ~instanceId, ()) =>
+    new({streamingId: streamingId, contactId: contactId, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -1497,10 +2071,13 @@ module StopContactRecording = {
     @as("InitialContactId")
     initialContactId: contactId,
     @ocaml.doc("<p>The identifier of the contact.</p>") @as("ContactId") contactId: contactId,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-connect") @new external new: request => t = "StopContactRecordingCommand"
   let make = (~initialContactId, ~contactId, ~instanceId, ()) =>
     new({initialContactId: initialContactId, contactId: contactId, instanceId: instanceId})
@@ -1510,11 +2087,14 @@ module StopContactRecording = {
 module StopContact = {
   type t
   type request = {
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
     @ocaml.doc("<p>The ID of the contact.</p>") @as("ContactId") contactId: contactId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-connect") @new external new: request => t = "StopContactCommand"
   let make = (~instanceId, ~contactId, ()) => new({instanceId: instanceId, contactId: contactId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1528,10 +2108,13 @@ module ResumeContactRecording = {
     @as("InitialContactId")
     initialContactId: contactId,
     @ocaml.doc("<p>The identifier of the contact.</p>") @as("ContactId") contactId: contactId,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "ResumeContactRecordingCommand"
   let make = (~initialContactId, ~contactId, ~instanceId, ()) =>
@@ -1547,10 +2130,13 @@ module DisassociateSecurityKey = {
     )
     @as("AssociationId")
     associationId: associationId,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "DisassociateSecurityKeyCommand"
   let make = (~associationId, ~instanceId, ()) =>
@@ -1566,10 +2152,13 @@ module DisassociateLexBot = {
     @ocaml.doc("<p>The name of the Amazon Lex bot. Maximum character limit of 50.</p>")
     @as("BotName")
     botName: botName,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-connect") @new external new: request => t = "DisassociateLexBotCommand"
   let make = (~lexRegion, ~botName, ~instanceId, ()) =>
     new({lexRegion: lexRegion, botName: botName, instanceId: instanceId})
@@ -1582,10 +2171,13 @@ module DisassociateLambdaFunction = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the Lambda function being disassociated.</p>")
     @as("FunctionArn")
     functionArn: functionArn,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance..</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance..</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "DisassociateLambdaFunctionCommand"
   let make = (~functionArn, ~instanceId, ()) =>
@@ -1603,10 +2195,13 @@ module DisassociateInstanceStorageConfig = {
     )
     @as("AssociationId")
     associationId: associationId,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "DisassociateInstanceStorageConfigCommand"
   let make = (~resourceType, ~associationId, ~instanceId, ()) =>
@@ -1618,25 +2213,57 @@ module DisassociateApprovedOrigin = {
   type t
   type request = {
     @ocaml.doc("<p>The domain URL of the integrated application.</p>") @as("Origin") origin: origin,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "DisassociateApprovedOriginCommand"
   let make = (~origin, ~instanceId, ()) => new({origin: origin, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
+module DeleteVocabulary = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The identifier of the custom vocabulary.</p>") @as("VocabularyId")
+    vocabularyId: vocabularyId,
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
+    instanceId: instanceId,
+  }
+  type response = {
+    @ocaml.doc("<p>The current state of the custom vocabulary.</p>") @as("State")
+    state: vocabularyState,
+    @ocaml.doc("<p>The identifier of the custom vocabulary.</p>") @as("VocabularyId")
+    vocabularyId: vocabularyId,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the custom vocabulary.</p>")
+    @as("VocabularyArn")
+    vocabularyArn: arn,
+  }
+  @module("@aws-sdk/client-connect") @new external new: request => t = "DeleteVocabularyCommand"
+  let make = (~vocabularyId, ~instanceId, ()) =>
+    new({vocabularyId: vocabularyId, instanceId: instanceId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module DeleteUserHierarchyGroup = {
   type t
   type request = {
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
     @ocaml.doc("<p>The identifier of the hierarchy group.</p>") @as("HierarchyGroupId")
     hierarchyGroupId: hierarchyGroupId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "DeleteUserHierarchyGroupCommand"
   let make = (~instanceId, ~hierarchyGroupId, ()) =>
@@ -1648,10 +2275,13 @@ module DeleteUser = {
   type t
   type request = {
     @ocaml.doc("<p>The identifier of the user.</p>") @as("UserId") userId: userId,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-connect") @new external new: request => t = "DeleteUserCommand"
   let make = (~userId, ~instanceId, ()) => new({userId: userId, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1661,13 +2291,16 @@ module DeleteUseCase = {
   type t
   type request = {
     @ocaml.doc("<p>The identifier for the use case.</p>") @as("UseCaseId") useCaseId: useCaseId,
-    @ocaml.doc("<p>The identifier for the AppIntegration association.</p>")
+    @ocaml.doc("<p>The identifier for the integration association.</p>")
     @as("IntegrationAssociationId")
     integrationAssociationId: integrationAssociationId,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-connect") @new external new: request => t = "DeleteUseCaseCommand"
   let make = (~useCaseId, ~integrationAssociationId, ~instanceId, ()) =>
     new({
@@ -1678,15 +2311,37 @@ module DeleteUseCase = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
+module DeleteSecurityProfile = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The identifier for the security profle.</p>") @as("SecurityProfileId")
+    securityProfileId: securityProfileId,
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
+    instanceId: instanceId,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-connect") @new
+  external new: request => t = "DeleteSecurityProfileCommand"
+  let make = (~securityProfileId, ~instanceId, ()) =>
+    new({securityProfileId: securityProfileId, instanceId: instanceId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
 module DeleteQuickConnect = {
   type t
   type request = {
     @ocaml.doc("<p>The identifier for the quick connect.</p>") @as("QuickConnectId")
     quickConnectId: quickConnectId,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-connect") @new external new: request => t = "DeleteQuickConnectCommand"
   let make = (~quickConnectId, ~instanceId, ()) =>
     new({quickConnectId: quickConnectId, instanceId: instanceId})
@@ -1696,13 +2351,16 @@ module DeleteQuickConnect = {
 module DeleteIntegrationAssociation = {
   type t
   type request = {
-    @ocaml.doc("<p>The identifier for the AppIntegration association.</p>")
+    @ocaml.doc("<p>The identifier for the integration association.</p>")
     @as("IntegrationAssociationId")
     integrationAssociationId: integrationAssociationId,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "DeleteIntegrationAssociationCommand"
   let make = (~integrationAssociationId, ~instanceId, ()) =>
@@ -1713,40 +2371,72 @@ module DeleteIntegrationAssociation = {
 module DeleteInstance = {
   type t
   type request = {
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-connect") @new external new: request => t = "DeleteInstanceCommand"
   let make = (~instanceId, ()) => new({instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
-module CreateUserHierarchyGroup = {
+module DeleteHoursOfOperation = {
   type t
   type request = {
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc("<p>The identifier for the hours of operation.</p>") @as("HoursOfOperationId")
+    hoursOfOperationId: hoursOfOperationId,
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
-    @ocaml.doc("<p>The identifier for the parent hierarchy group. The user hierarchy is created at level one if
-   the parent group ID is null.</p>")
-    @as("ParentGroupId")
-    parentGroupId: option<hierarchyGroupId>,
-    @ocaml.doc("<p>The name of the user hierarchy group. Must not be more than 100 characters.</p>")
-    @as("Name")
-    name: hierarchyGroupName,
   }
-  type response = {
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the hierarchy group. </p>")
-    @as("HierarchyGroupArn")
-    hierarchyGroupArn: option<arn>,
-    @ocaml.doc("<p>The identifier of the hierarchy group.</p>") @as("HierarchyGroupId")
-    hierarchyGroupId: option<hierarchyGroupId>,
-  }
+  type response = {.}
   @module("@aws-sdk/client-connect") @new
-  external new: request => t = "CreateUserHierarchyGroupCommand"
-  let make = (~instanceId, ~name, ~parentGroupId=?, ()) =>
-    new({instanceId: instanceId, parentGroupId: parentGroupId, name: name})
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteHoursOfOperationCommand"
+  let make = (~hoursOfOperationId, ~instanceId, ()) =>
+    new({hoursOfOperationId: hoursOfOperationId, instanceId: instanceId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module DeleteContactFlowModule = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The identifier of the contact flow module.</p>") @as("ContactFlowModuleId")
+    contactFlowModuleId: contactFlowModuleId,
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
+    instanceId: instanceId,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-connect") @new
+  external new: request => t = "DeleteContactFlowModuleCommand"
+  let make = (~contactFlowModuleId, ~instanceId, ()) =>
+    new({contactFlowModuleId: contactFlowModuleId, instanceId: instanceId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module DeleteContactFlow = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The identifier of the contact flow.</p>") @as("ContactFlowId")
+    contactFlowId: contactFlowId,
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
+    instanceId: instanceId,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-connect") @new external new: request => t = "DeleteContactFlowCommand"
+  let make = (~contactFlowId, ~instanceId, ()) =>
+    new({contactFlowId: contactFlowId, instanceId: instanceId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module CreateInstance = {
@@ -1795,7 +2485,10 @@ module AssociateSecurityKey = {
   type t
   type request = {
     @ocaml.doc("<p>A valid security key in PEM format.</p>") @as("Key") key: pem,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
   type response = {
@@ -1817,10 +2510,13 @@ module AssociateLambdaFunction = {
    140.</p>")
     @as("FunctionArn")
     functionArn: functionArn,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "AssociateLambdaFunctionCommand"
   let make = (~functionArn, ~instanceId, ()) =>
@@ -1828,14 +2524,44 @@ module AssociateLambdaFunction = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
+module AssociateDefaultVocabulary = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>The identifier of the custom vocabulary. If this is empty, the default is set to none.</p>"
+    )
+    @as("VocabularyId")
+    vocabularyId: option<vocabularyId>,
+    @ocaml.doc("<p>The language code of the vocabulary entries. For a list of languages and their corresponding language codes, see 
+<a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/transcribe-whatis.html\">What is Amazon Transcribe?</a>
+         </p>")
+    @as("LanguageCode")
+    languageCode: vocabularyLanguageCode,
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
+    instanceId: instanceId,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-connect") @new
+  external new: request => t = "AssociateDefaultVocabularyCommand"
+  let make = (~languageCode, ~instanceId, ~vocabularyId=?, ()) =>
+    new({vocabularyId: vocabularyId, languageCode: languageCode, instanceId: instanceId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
 module AssociateApprovedOrigin = {
   type t
   type request = {
     @ocaml.doc("<p>The domain to add to your allow list.</p>") @as("Origin") origin: origin,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "AssociateApprovedOriginCommand"
   let make = (~origin, ~instanceId, ()) => new({origin: origin, instanceId: instanceId})
@@ -1845,14 +2571,17 @@ module AssociateApprovedOrigin = {
 module UpdateUserSecurityProfiles = {
   type t
   type request = {
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
     @ocaml.doc("<p>The identifier of the user account.</p>") @as("UserId") userId: userId,
     @ocaml.doc("<p>The identifiers of the security profiles for the user.</p>")
     @as("SecurityProfileIds")
     securityProfileIds: securityProfileIds,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "UpdateUserSecurityProfilesCommand"
   let make = (~instanceId, ~userId, ~securityProfileIds, ()) =>
@@ -1863,14 +2592,17 @@ module UpdateUserSecurityProfiles = {
 module UpdateUserPhoneConfig = {
   type t
   type request = {
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
     @ocaml.doc("<p>The identifier of the user account.</p>") @as("UserId") userId: userId,
     @ocaml.doc("<p>Information about phone configuration settings for the user.</p>")
     @as("PhoneConfig")
     phoneConfig: userPhoneConfig,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "UpdateUserPhoneConfigCommand"
   let make = (~instanceId, ~userId, ~phoneConfig, ()) =>
@@ -1881,17 +2613,48 @@ module UpdateUserPhoneConfig = {
 module UpdateUserIdentityInfo = {
   type t
   type request = {
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
     @ocaml.doc("<p>The identifier of the user account.</p>") @as("UserId") userId: userId,
     @ocaml.doc("<p>The identity information for the user.</p>") @as("IdentityInfo")
     identityInfo: userIdentityInfo,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "UpdateUserIdentityInfoCommand"
   let make = (~instanceId, ~userId, ~identityInfo, ()) =>
     new({instanceId: instanceId, userId: userId, identityInfo: identityInfo})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module UpdateSecurityProfile = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
+    instanceId: instanceId,
+    @ocaml.doc("<p>The identifier for the security profle.</p>") @as("SecurityProfileId")
+    securityProfileId: securityProfileId,
+    @ocaml.doc("<p>The permissions granted to a security profile.</p>") @as("Permissions")
+    permissions: option<permissionsList>,
+    @ocaml.doc("<p>The description of the security profile.</p>") @as("Description")
+    description: option<securityProfileDescription>,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-connect") @new
+  external new: request => t = "UpdateSecurityProfileCommand"
+  let make = (~instanceId, ~securityProfileId, ~permissions=?, ~description=?, ()) =>
+    new({
+      instanceId: instanceId,
+      securityProfileId: securityProfileId,
+      permissions: permissions,
+      description: description,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -1902,10 +2665,13 @@ module UpdateQueueOutboundCallerConfig = {
     @as("OutboundCallerConfig")
     outboundCallerConfig: outboundCallerConfig,
     @ocaml.doc("<p>The identifier for the queue.</p>") @as("QueueId") queueId: queueId,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "UpdateQueueOutboundCallerConfigCommand"
   let make = (~outboundCallerConfig, ~queueId, ~instanceId, ()) =>
@@ -1922,14 +2688,17 @@ module UpdateContactAttributes = {
    can include only alphanumeric, dash, and underscore characters.</p>")
     @as("Attributes")
     attributes: attributes,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
     @ocaml.doc("<p>The identifier of the contact. This is the identifier of the contact associated with the
    first interaction with the contact center.</p>")
     @as("InitialContactId")
     initialContactId: contactId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "UpdateContactAttributesCommand"
   let make = (~attributes, ~instanceId, ~initialContactId, ()) =>
@@ -1943,7 +2712,7 @@ module UntagResource = {
     @ocaml.doc("<p>The tag keys.</p>") tagKeys: tagKeyList,
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the resource.</p>") resourceArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-connect") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1958,7 +2727,7 @@ module TagResource = {
     tags: tagMap,
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the resource.</p>") resourceArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-connect") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1967,6 +2736,17 @@ module TagResource = {
 module StartOutboundVoiceContact = {
   type t
   type request = {
+    @ocaml.doc("<p>Denotes the class of traffic. Calls with different traffic types are handled differently by
+   Amazon Connect. The default value is <code>GENERAL</code>. Use <code>CAMPAIGN</code> if
+    <code>EnableAnswerMachineDetection</code> is set to <code>true</code>. For all other cases, use
+    <code>GENERAL</code>. </p>")
+    @as("TrafficType")
+    trafficType: option<trafficType>,
+    @ocaml.doc("<p>The campaign identifier of the outbound communication.</p>") @as("CampaignId")
+    campaignId: option<campaignId>,
+    @ocaml.doc("<p>Configuration of the answering machine detection for this outbound call. </p>")
+    @as("AnswerMachineDetectionConfig")
+    answerMachineDetectionConfig: option<answerMachineDetectionConfig>,
     @ocaml.doc("<p>A custom key-value pair using an attribute map. The attributes are standard Amazon Connect
    attributes, and can be accessed in contact flows just like any other contact attributes.</p>
          <p>There can be up to 32,768 UTF-8 bytes across all key-value pairs per contact. Attribute keys
@@ -1985,10 +2765,14 @@ module StartOutboundVoiceContact = {
     sourcePhoneNumber: option<phoneNumber>,
     @ocaml.doc("<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
    request. The token is valid for 7 days after creation. If a contact is already started, the
-   contact ID is returned. If the contact is disconnected, a new contact is started.</p>")
+   contact ID is returned.
+   </p>")
     @as("ClientToken")
     clientToken: option<clientToken>,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
     @ocaml.doc("<p>The
    identifier of the contact flow for the outbound call. To see the ContactFlowId in the Amazon Connect
@@ -2015,6 +2799,9 @@ module StartOutboundVoiceContact = {
     ~instanceId,
     ~contactFlowId,
     ~destinationPhoneNumber,
+    ~trafficType=?,
+    ~campaignId=?,
+    ~answerMachineDetectionConfig=?,
     ~attributes=?,
     ~queueId=?,
     ~sourcePhoneNumber=?,
@@ -2022,6 +2809,9 @@ module StartOutboundVoiceContact = {
     (),
   ) =>
     new({
+      trafficType: trafficType,
+      campaignId: campaignId,
+      answerMachineDetectionConfig: answerMachineDetectionConfig,
       attributes: attributes,
       queueId: queueId,
       sourcePhoneNumber: sourcePhoneNumber,
@@ -2029,6 +2819,42 @@ module StartOutboundVoiceContact = {
       instanceId: instanceId,
       contactFlowId: contactFlowId,
       destinationPhoneNumber: destinationPhoneNumber,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module StartContactStreaming = {
+  type t
+  type request = {
+    @ocaml.doc("<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
+            request.</p>")
+    @as("ClientToken")
+    clientToken: clientToken,
+    @ocaml.doc("<p>The streaming configuration, such as the Amazon SNS streaming endpoint.</p>")
+    @as("ChatStreamingConfiguration")
+    chatStreamingConfiguration: chatStreamingConfiguration,
+    @ocaml.doc("<p>The identifier of the contact. This is the identifier of the contact associated with the
+   first interaction with the contact center.</p>")
+    @as("ContactId")
+    contactId: contactId,
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
+    instanceId: instanceId,
+  }
+  type response = {
+    @ocaml.doc("<p>The identifier of the streaming configuration enabled. </p>") @as("StreamingId")
+    streamingId: streamingId,
+  }
+  @module("@aws-sdk/client-connect") @new
+  external new: request => t = "StartContactStreamingCommand"
+  let make = (~clientToken, ~chatStreamingConfiguration, ~contactId, ~instanceId, ()) =>
+    new({
+      clientToken: clientToken,
+      chatStreamingConfiguration: chatStreamingConfiguration,
+      contactId: contactId,
+      instanceId: instanceId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
@@ -2043,10 +2869,13 @@ module StartContactRecording = {
     @as("InitialContactId")
     initialContactId: contactId,
     @ocaml.doc("<p>The identifier of the contact.</p>") @as("ContactId") contactId: contactId,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "StartContactRecordingCommand"
   let make = (~voiceRecordingConfiguration, ~initialContactId, ~contactId, ~instanceId, ()) =>
@@ -2062,6 +2891,15 @@ module StartContactRecording = {
 module StartChatContact = {
   type t
   type request = {
+    @ocaml.doc(
+      "<p>The supported chat message content types. Content types can be text/plain or both text/plain and text/markdown.</p>"
+    )
+    @as("SupportedMessagingContentTypes")
+    supportedMessagingContentTypes: option<supportedMessagingContentTypes>,
+    @ocaml.doc("<p>The total duration of the newly started chat session. If not specified, the chat session duration defaults to 25 hour. 
+   The minumum configurable time is 60 minutes. The maximum configurable time is 10,080 minutes (7 days).</p>")
+    @as("ChatDurationInMinutes")
+    chatDurationInMinutes: option<chatDurationInMinutes>,
     @ocaml.doc("<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
    request.</p>")
     @as("ClientToken")
@@ -2086,7 +2924,10 @@ module StartChatContact = {
          </p>")
     @as("ContactFlowId")
     contactFlowId: contactFlowId,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
   type response = {
@@ -2107,12 +2948,16 @@ module StartChatContact = {
     ~participantDetails,
     ~contactFlowId,
     ~instanceId,
+    ~supportedMessagingContentTypes=?,
+    ~chatDurationInMinutes=?,
     ~clientToken=?,
     ~initialMessage=?,
     ~attributes=?,
     (),
   ) =>
     new({
+      supportedMessagingContentTypes: supportedMessagingContentTypes,
+      chatDurationInMinutes: chatDurationInMinutes,
       clientToken: clientToken,
       initialMessage: initialMessage,
       participantDetails: participantDetails,
@@ -2134,6 +2979,44 @@ module ListTagsForResource = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module ListSecurityProfilePermissions = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The maximum number of results to return per page.</p>") @as("MaxResults")
+    maxResults: option<maxResult1000>,
+    @ocaml.doc("<p>The token for the next set of results. Use the value returned in the previous 
+response in the next request to retrieve the next set of results.</p>")
+    @as("NextToken")
+    nextToken: option<nextToken>,
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
+    instanceId: instanceId,
+    @ocaml.doc("<p>The identifier for the security profle.</p>") @as("SecurityProfileId")
+    securityProfileId: securityProfileId,
+  }
+  type response = {
+    @ocaml.doc(
+      "<p>If there are additional results, this is the token for the next set of results.</p>"
+    )
+    @as("NextToken")
+    nextToken: option<nextToken>,
+    @ocaml.doc("<p>The permissions granted to the security profile.</p>") @as("Permissions")
+    permissions: option<permissionsList>,
+  }
+  @module("@aws-sdk/client-connect") @new
+  external new: request => t = "ListSecurityProfilePermissionsCommand"
+  let make = (~instanceId, ~securityProfileId, ~maxResults=?, ~nextToken=?, ()) =>
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      instanceId: instanceId,
+      securityProfileId: securityProfileId,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module ListLambdaFunctions = {
   type t
   type request = {
@@ -2143,7 +3026,10 @@ module ListLambdaFunctions = {
 response in the next request to retrieve the next set of results.</p>")
     @as("NextToken")
     nextToken: option<nextToken>,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
   type response = {
@@ -2171,7 +3057,10 @@ module ListApprovedOrigins = {
 response in the next request to retrieve the next set of results.</p>")
     @as("NextToken")
     nextToken: option<nextToken>,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
   type response = {
@@ -2191,7 +3080,10 @@ response in the next request to retrieve the next set of results.</p>")
 module GetFederationToken = {
   type t
   type request = {
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
   type response = {
@@ -2227,14 +3119,36 @@ module DisassociateQueueQuickConnects = {
     @ocaml.doc("<p>The quick connects to disassociate from the queue.</p>") @as("QuickConnectIds")
     quickConnectIds: quickConnectsList,
     @ocaml.doc("<p>The identifier for the queue.</p>") @as("QueueId") queueId: queueId,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "DisassociateQueueQuickConnectsCommand"
   let make = (~quickConnectIds, ~queueId, ~instanceId, ()) =>
     new({quickConnectIds: quickConnectIds, queueId: queueId, instanceId: instanceId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module DisassociateBot = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The Amazon Lex V2 bot to disassociate from the instance.</p>") @as("LexV2Bot")
+    lexV2Bot: option<lexV2Bot>,
+    @as("LexBot") lexBot: option<lexBot>,
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
+    instanceId: instanceId,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-connect") @new external new: request => t = "DisassociateBotCommand"
+  let make = (~instanceId, ~lexV2Bot=?, ~lexBot=?, ()) =>
+    new({lexV2Bot: lexV2Bot, lexBot: lexBot, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -2243,7 +3157,10 @@ module DescribeInstanceAttribute = {
   type request = {
     @ocaml.doc("<p>The type of attribute.</p>") @as("AttributeType")
     attributeType: instanceAttributeType,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
   type response = {
@@ -2260,11 +3177,100 @@ module DescribeInstanceAttribute = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module CreateVocabulary = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The tags used to organize, track, or control access for this resource.</p>")
+    @as("Tags")
+    tags: option<tagMap>,
+    @ocaml.doc("<p>The content of the custom vocabulary in plain-text format with a table of values. Each row
+   in the table represents a word or a phrase, described with <code>Phrase</code>, <code>IPA</code>,
+   <code>SoundsLike</code>, and <code>DisplayAs</code> fields. Separate the fields with TAB
+   characters. The size limit is 50KB. For more information, see <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html#create-vocabulary-table\">Create a custom
+    vocabulary using a table</a>.</p>")
+    @as("Content")
+    content: vocabularyContent,
+    @ocaml.doc("<p>The language code of the vocabulary entries. For a list of languages and their corresponding language codes, see 
+<a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/transcribe-whatis.html\">What is Amazon Transcribe?</a>
+         </p>")
+    @as("LanguageCode")
+    languageCode: vocabularyLanguageCode,
+    @ocaml.doc("<p>A unique name of the custom vocabulary.</p>") @as("VocabularyName")
+    vocabularyName: vocabularyName,
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
+    instanceId: instanceId,
+    @ocaml.doc("<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
+            request. If a create request is received more than once with same client token,
+   subsequent requests return the previous response without creating a vocabulary again.</p>")
+    @as("ClientToken")
+    clientToken: option<clientToken>,
+  }
+  type response = {
+    @ocaml.doc("<p>The current state of the custom vocabulary.</p>") @as("State")
+    state: vocabularyState,
+    @ocaml.doc("<p>The identifier of the custom vocabulary.</p>") @as("VocabularyId")
+    vocabularyId: vocabularyId,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the custom vocabulary.</p>")
+    @as("VocabularyArn")
+    vocabularyArn: arn,
+  }
+  @module("@aws-sdk/client-connect") @new external new: request => t = "CreateVocabularyCommand"
+  let make = (~content, ~languageCode, ~vocabularyName, ~instanceId, ~tags=?, ~clientToken=?, ()) =>
+    new({
+      tags: tags,
+      content: content,
+      languageCode: languageCode,
+      vocabularyName: vocabularyName,
+      instanceId: instanceId,
+      clientToken: clientToken,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module CreateUserHierarchyGroup = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The tags used to organize, track, or control access for this resource.</p>")
+    @as("Tags")
+    tags: option<tagMap>,
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
+    instanceId: instanceId,
+    @ocaml.doc("<p>The identifier for the parent hierarchy group. The user hierarchy is created at level one if
+   the parent group ID is null.</p>")
+    @as("ParentGroupId")
+    parentGroupId: option<hierarchyGroupId>,
+    @ocaml.doc("<p>The name of the user hierarchy group. Must not be more than 100 characters.</p>")
+    @as("Name")
+    name: hierarchyGroupName,
+  }
+  type response = {
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the hierarchy group. </p>")
+    @as("HierarchyGroupArn")
+    hierarchyGroupArn: option<arn>,
+    @ocaml.doc("<p>The identifier of the hierarchy group.</p>") @as("HierarchyGroupId")
+    hierarchyGroupId: option<hierarchyGroupId>,
+  }
+  @module("@aws-sdk/client-connect") @new
+  external new: request => t = "CreateUserHierarchyGroupCommand"
+  let make = (~instanceId, ~name, ~tags=?, ~parentGroupId=?, ()) =>
+    new({tags: tags, instanceId: instanceId, parentGroupId: parentGroupId, name: name})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module CreateUser = {
   type t
   type request = {
     @ocaml.doc("<p>One or more tags.</p>") @as("Tags") tags: option<tagMap>,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
     @ocaml.doc("<p>The identifier of the hierarchy group for the user.</p>") @as("HierarchyGroupId")
     hierarchyGroupId: option<hierarchyGroupId>,
@@ -2333,15 +3339,20 @@ module CreateUser = {
 module CreateUseCase = {
   type t
   type request = {
-    @ocaml.doc("<p>One or more tags.</p>") @as("Tags") tags: option<tagMap>,
-    @ocaml.doc("<p>The type of use case to associate to the AppIntegration association. Each AppIntegration
+    @ocaml.doc("<p>The tags used to organize, track, or control access for this resource.</p>")
+    @as("Tags")
+    tags: option<tagMap>,
+    @ocaml.doc("<p>The type of use case to associate to the integration association. Each integration
    association can have only one of each use case type.</p>")
     @as("UseCaseType")
     useCaseType: useCaseType,
-    @ocaml.doc("<p>The identifier for the AppIntegration association.</p>")
+    @ocaml.doc("<p>The identifier for the integration association.</p>")
     @as("IntegrationAssociationId")
     integrationAssociationId: integrationAssociationId,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
   type response = {
@@ -2361,10 +3372,50 @@ module CreateUseCase = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module CreateSecurityProfile = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The tags used to organize, track, or control access for this resource.</p>")
+    @as("Tags")
+    tags: option<tagMap>,
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
+    instanceId: instanceId,
+    @ocaml.doc("<p>Permissions assigned to the security profile.</p>") @as("Permissions")
+    permissions: option<permissionsList>,
+    @ocaml.doc("<p>The description of the security profile.</p>") @as("Description")
+    description: option<securityProfileDescription>,
+    @ocaml.doc("<p>The name of the security profile.</p>") @as("SecurityProfileName")
+    securityProfileName: securityProfileName,
+  }
+  type response = {
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) for the security profile.</p>")
+    @as("SecurityProfileArn")
+    securityProfileArn: option<arn>,
+    @ocaml.doc("<p>The identifier for the security profle.</p>") @as("SecurityProfileId")
+    securityProfileId: option<securityProfileId>,
+  }
+  @module("@aws-sdk/client-connect") @new
+  external new: request => t = "CreateSecurityProfileCommand"
+  let make = (~instanceId, ~securityProfileName, ~tags=?, ~permissions=?, ~description=?, ()) =>
+    new({
+      tags: tags,
+      instanceId: instanceId,
+      permissions: permissions,
+      description: description,
+      securityProfileName: securityProfileName,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module CreateQueue = {
   type t
   type request = {
-    @ocaml.doc("<p>One or more tags.</p>") @as("Tags") tags: option<tagMap>,
+    @ocaml.doc("<p>The tags used to organize, track, or control access for this resource.</p>")
+    @as("Tags")
+    tags: option<tagMap>,
     @ocaml.doc("<p>The quick connects available to agents who are working the queue.</p>")
     @as("QuickConnectIds")
     quickConnectIds: option<quickConnectsList>,
@@ -2381,7 +3432,10 @@ module CreateQueue = {
     @ocaml.doc("<p>The description of the queue.</p>") @as("Description")
     description: option<queueDescription>,
     @ocaml.doc("<p>The name of the queue.</p>") @as("Name") name: commonNameLength127,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
   type response = {
@@ -2417,36 +3471,52 @@ module CreateQueue = {
 module CreateIntegrationAssociation = {
   type t
   type request = {
-    @ocaml.doc("<p>One or more tags.</p>") @as("Tags") tags: option<tagMap>,
-    @ocaml.doc("<p>The type of the data source.</p>") @as("SourceType") sourceType: sourceType,
-    @ocaml.doc("<p>The name of the external application.</p>") @as("SourceApplicationName")
-    sourceApplicationName: sourceApplicationName,
-    @ocaml.doc("<p>The URL for the external application.</p>") @as("SourceApplicationUrl")
-    sourceApplicationUrl: uri,
+    @ocaml.doc("<p>The tags used to organize, track, or control access for this resource.</p>")
+    @as("Tags")
+    tags: option<tagMap>,
+    @ocaml.doc(
+      "<p>The type of the data source. This field is only required for the EVENT integration type.</p>"
+    )
+    @as("SourceType")
+    sourceType: option<sourceType>,
+    @ocaml.doc(
+      "<p>The name of the external application. This field is only required for the EVENT integration type.</p>"
+    )
+    @as("SourceApplicationName")
+    sourceApplicationName: option<sourceApplicationName>,
+    @ocaml.doc(
+      "<p>The URL for the external application. This field is only required for the EVENT integration type.</p>"
+    )
+    @as("SourceApplicationUrl")
+    sourceApplicationUrl: option<uri>,
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the integration.</p>") @as("IntegrationArn")
     integrationArn: arn,
     @ocaml.doc("<p>The type of information to be ingested.</p>") @as("IntegrationType")
     integrationType: integrationType,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
   type response = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) for the association.</p>")
     @as("IntegrationAssociationArn")
     integrationAssociationArn: option<arn>,
-    @ocaml.doc("<p>The identifier for the association.</p>") @as("IntegrationAssociationId")
+    @ocaml.doc("<p>The identifier for the integration association.</p>")
+    @as("IntegrationAssociationId")
     integrationAssociationId: option<integrationAssociationId>,
   }
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "CreateIntegrationAssociationCommand"
   let make = (
-    ~sourceType,
-    ~sourceApplicationName,
-    ~sourceApplicationUrl,
     ~integrationArn,
     ~integrationType,
     ~instanceId,
     ~tags=?,
+    ~sourceType=?,
+    ~sourceApplicationName=?,
+    ~sourceApplicationUrl=?,
     (),
   ) =>
     new({
@@ -2461,16 +3531,56 @@ module CreateIntegrationAssociation = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module CreateAgentStatus = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The tags used to organize, track, or control access for this resource.</p>")
+    @as("Tags")
+    tags: option<tagMap>,
+    @ocaml.doc("<p>The display order of the status.</p>") @as("DisplayOrder")
+    displayOrder: option<agentStatusOrderNumber>,
+    @ocaml.doc("<p>The state of the status.</p>") @as("State") state: agentStatusState,
+    @ocaml.doc("<p>The description of the status.</p>") @as("Description")
+    description: option<agentStatusDescription>,
+    @ocaml.doc("<p>The name of the status.</p>") @as("Name") name: agentStatusName,
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
+    instanceId: instanceId,
+  }
+  type response = {
+    @ocaml.doc("<p>The identifier of the agent status.</p>") @as("AgentStatusId")
+    agentStatusId: option<agentStatusId>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the agent status.</p>") @as("AgentStatusARN")
+    agentStatusARN: option<arn>,
+  }
+  @module("@aws-sdk/client-connect") @new external new: request => t = "CreateAgentStatusCommand"
+  let make = (~state, ~name, ~instanceId, ~tags=?, ~displayOrder=?, ~description=?, ()) =>
+    new({
+      tags: tags,
+      displayOrder: displayOrder,
+      state: state,
+      description: description,
+      name: name,
+      instanceId: instanceId,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module AssociateQueueQuickConnects = {
   type t
   type request = {
     @ocaml.doc("<p>The quick connects to associate with this queue.</p>") @as("QuickConnectIds")
     quickConnectIds: quickConnectsList,
     @ocaml.doc("<p>The identifier for the queue.</p>") @as("QueueId") queueId: queueId,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "AssociateQueueQuickConnectsCommand"
   let make = (~quickConnectIds, ~queueId, ~instanceId, ()) =>
@@ -2481,26 +3591,51 @@ module AssociateQueueQuickConnects = {
 module AssociateLexBot = {
   type t
   type request = {
-    @ocaml.doc("<p>The Amazon Lex box to associate with the instance.</p>") @as("LexBot")
+    @ocaml.doc("<p>The Amazon Lex bot to associate with the instance.</p>") @as("LexBot")
     lexBot: lexBot,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-connect") @new external new: request => t = "AssociateLexBotCommand"
   let make = (~lexBot, ~instanceId, ()) => new({lexBot: lexBot, instanceId: instanceId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module AssociateBot = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The Amazon Lex V2 bot to associate with the instance.</p>") @as("LexV2Bot")
+    lexV2Bot: option<lexV2Bot>,
+    @as("LexBot") lexBot: option<lexBot>,
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
+    instanceId: instanceId,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-connect") @new external new: request => t = "AssociateBotCommand"
+  let make = (~instanceId, ~lexV2Bot=?, ~lexBot=?, ()) =>
+    new({lexV2Bot: lexV2Bot, lexBot: lexBot, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module UpdateUserHierarchyStructure = {
   type t
   type request = {
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
     @ocaml.doc("<p>The hierarchy levels to update.</p>") @as("HierarchyStructure")
     hierarchyStructure: hierarchyStructureUpdate,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "UpdateUserHierarchyStructureCommand"
   let make = (~instanceId, ~hierarchyStructure, ()) =>
@@ -2516,10 +3651,13 @@ module UpdateRoutingProfileConcurrency = {
     mediaConcurrencies: mediaConcurrencies,
     @ocaml.doc("<p>The identifier of the routing profile.</p>") @as("RoutingProfileId")
     routingProfileId: routingProfileId,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "UpdateRoutingProfileConcurrencyCommand"
   let make = (~mediaConcurrencies, ~routingProfileId, ~instanceId, ()) =>
@@ -2539,10 +3677,13 @@ module UpdateQuickConnectConfig = {
     quickConnectConfig: quickConnectConfig,
     @ocaml.doc("<p>The identifier for the quick connect.</p>") @as("QuickConnectId")
     quickConnectId: quickConnectId,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "UpdateQuickConnectConfigCommand"
   let make = (~quickConnectConfig, ~quickConnectId, ~instanceId, ()) =>
@@ -2551,6 +3692,27 @@ module UpdateQuickConnectConfig = {
       quickConnectId: quickConnectId,
       instanceId: instanceId,
     })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module UpdateContactFlowModuleContent = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The content of the contact flow module.</p>") @as("Content")
+    content: contactFlowModuleContent,
+    @ocaml.doc("<p>The identifier of the contact flow module.</p>") @as("ContactFlowModuleId")
+    contactFlowModuleId: contactFlowModuleId,
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
+    instanceId: instanceId,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-connect") @new
+  external new: request => t = "UpdateContactFlowModuleContentCommand"
+  let make = (~content, ~contactFlowModuleId, ~instanceId, ()) =>
+    new({content: content, contactFlowModuleId: contactFlowModuleId, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -2567,7 +3729,7 @@ module UpdateContactFlowContent = {
     @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
     instanceId: instanceId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "UpdateContactFlowContentCommand"
   let make = (~content, ~contactFlowId, ~instanceId, ()) =>
@@ -2575,9 +3737,48 @@ module UpdateContactFlowContent = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
+module UpdateContact = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>A formatted URL that is shown to an agent in the Contact Control Panel (CCP).</p>"
+    )
+    @as("References")
+    references: option<contactReferences>,
+    @ocaml.doc("<p>The description of the contact.</p>") @as("Description")
+    description: option<description>,
+    @ocaml.doc("<p>The name of the contact.</p>") @as("Name") name: option<name>,
+    @ocaml.doc("<p>The identifier of the contact. This is the identifier of the contact associated with the
+   first interaction with your contact center.</p>")
+    @as("ContactId")
+    contactId: contactId,
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
+    instanceId: instanceId,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-connect") @new external new: request => t = "UpdateContactCommand"
+  let make = (~contactId, ~instanceId, ~references=?, ~description=?, ~name=?, ()) =>
+    new({
+      references: references,
+      description: description,
+      name: name,
+      contactId: contactId,
+      instanceId: instanceId,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
 module StartTaskContact = {
   type t
   type request = {
+    @ocaml.doc(
+      "<p>The timestamp, in Unix Epoch seconds format, at which to start running the inbound contact flow. The scheduled time cannot be in the past. It must be within up to 6 days in future. </p>"
+    )
+    @as("ScheduledTime")
+    scheduledTime: option<timestamp_>,
     @ocaml.doc("<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
    request.</p>")
     @as("ClientToken")
@@ -2614,7 +3815,10 @@ module StartTaskContact = {
     @ocaml.doc("<p>The identifier of the previous chat, voice, or task contact. </p>")
     @as("PreviousContactId")
     previousContactId: option<contactId>,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
   type response = {
@@ -2627,6 +3831,7 @@ module StartTaskContact = {
     ~name,
     ~contactFlowId,
     ~instanceId,
+    ~scheduledTime=?,
     ~clientToken=?,
     ~description=?,
     ~references=?,
@@ -2635,6 +3840,7 @@ module StartTaskContact = {
     (),
   ) =>
     new({
+      scheduledTime: scheduledTime,
       clientToken: clientToken,
       description: description,
       references: references,
@@ -2642,6 +3848,60 @@ module StartTaskContact = {
       attributes: attributes,
       contactFlowId: contactFlowId,
       previousContactId: previousContactId,
+      instanceId: instanceId,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module SearchVocabularies = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The language code of the vocabulary entries. For a list of languages and their corresponding language codes, see 
+<a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/transcribe-whatis.html\">What is Amazon Transcribe?</a>
+         </p>")
+    @as("LanguageCode")
+    languageCode: option<vocabularyLanguageCode>,
+    @ocaml.doc("<p>The starting pattern of the name of the vocabulary.</p>") @as("NameStartsWith")
+    nameStartsWith: option<vocabularyName>,
+    @ocaml.doc("<p>The current state of the custom vocabulary.</p>") @as("State")
+    state: option<vocabularyState>,
+    @ocaml.doc("<p>The token for the next set of results. Use the value returned in the previous 
+response in the next request to retrieve the next set of results.</p>")
+    @as("NextToken")
+    nextToken: option<vocabularyNextToken>,
+    @ocaml.doc("<p>The maximum number of results to return per page.</p>") @as("MaxResults")
+    maxResults: option<maxResult100>,
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
+    instanceId: instanceId,
+  }
+  type response = {
+    @ocaml.doc(
+      "<p>If there are additional results, this is the token for the next set of results.</p>"
+    )
+    @as("NextToken")
+    nextToken: option<vocabularyNextToken>,
+    @ocaml.doc("<p>The list of the available custom vocabularies.</p>") @as("VocabularySummaryList")
+    vocabularySummaryList: option<vocabularySummaryList>,
+  }
+  @module("@aws-sdk/client-connect") @new external new: request => t = "SearchVocabulariesCommand"
+  let make = (
+    ~instanceId,
+    ~languageCode=?,
+    ~nameStartsWith=?,
+    ~state=?,
+    ~nextToken=?,
+    ~maxResults=?,
+    (),
+  ) =>
+    new({
+      languageCode: languageCode,
+      nameStartsWith: nameStartsWith,
+      state: state,
+      nextToken: nextToken,
+      maxResults: maxResults,
       instanceId: instanceId,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
@@ -2656,7 +3916,10 @@ module ListUsers = {
 response in the next request to retrieve the next set of results.</p>")
     @as("NextToken")
     nextToken: option<nextToken>,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
   type response = {
@@ -2683,7 +3946,10 @@ module ListUserHierarchyGroups = {
 response in the next request to retrieve the next set of results.</p>")
     @as("NextToken")
     nextToken: option<nextToken>,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
   type response = {
@@ -2705,7 +3971,7 @@ response in the next request to retrieve the next set of results.</p>")
 
 module ListUseCases = {
   type t
-  @ocaml.doc("<p>Provides summary information about the use cases for the specified Amazon Connect AppIntegration
+  @ocaml.doc("<p>Provides summary information about the use cases for the specified integration
    association.</p>")
   type request = {
     @ocaml.doc("<p>The maximum number of results to return per page.</p>") @as("MaxResults")
@@ -2717,7 +3983,10 @@ response in the next request to retrieve the next set of results.</p>")
     @ocaml.doc("<p>The identifier for the integration association.</p>")
     @as("IntegrationAssociationId")
     integrationAssociationId: integrationAssociationId,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
   type response = {
@@ -2749,7 +4018,10 @@ module ListSecurityProfiles = {
 response in the next request to retrieve the next set of results.</p>")
     @as("NextToken")
     nextToken: option<nextToken>,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
   type response = {
@@ -2776,7 +4048,10 @@ module ListSecurityKeys = {
 response in the next request to retrieve the next set of results.</p>")
     @as("NextToken")
     nextToken: option<nextToken>,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
   type response = {
@@ -2803,7 +4078,10 @@ module ListRoutingProfiles = {
 response in the next request to retrieve the next set of results.</p>")
     @as("NextToken")
     nextToken: option<nextToken>,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
   type response = {
@@ -2832,7 +4110,10 @@ response in the next request to retrieve the next set of results.</p>")
     nextToken: option<nextToken>,
     @ocaml.doc("<p>The identifier of the routing profile.</p>") @as("RoutingProfileId")
     routingProfileId: routingProfileId,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
   type response = {
@@ -2870,7 +4151,10 @@ module ListQuickConnects = {
 response in the next request to retrieve the next set of results.</p>")
     @as("NextToken")
     nextToken: option<nextToken>,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
   type response = {
@@ -2903,7 +4187,10 @@ response in the next request to retrieve the next set of results.</p>")
     @as("NextToken")
     nextToken: option<nextToken>,
     @ocaml.doc("<p>The type of queue.</p>") @as("QueueTypes") queueTypes: option<queueTypes>,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
   type response = {
@@ -2936,7 +4223,10 @@ response in the next request to retrieve the next set of results.</p>")
     @as("NextToken")
     nextToken: option<nextToken>,
     @ocaml.doc("<p>The identifier for the queue.</p>") @as("QueueId") queueId: queueId,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
   type response = {
@@ -2995,7 +4285,10 @@ response in the next request to retrieve the next set of results.</p>")
     phoneNumberCountryCodes: option<phoneNumberCountryCodes>,
     @ocaml.doc("<p>The type of phone number.</p>") @as("PhoneNumberTypes")
     phoneNumberTypes: option<phoneNumberTypes>,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
   type response = {
@@ -3029,13 +4322,18 @@ response in the next request to retrieve the next set of results.</p>")
 module ListLexBots = {
   type t
   type request = {
-    @ocaml.doc("<p>The maximum number of results to return per page.</p>") @as("MaxResults")
+    @ocaml.doc("<p>The maximum number of results to return per page. If no value is specified, the default is 10.
+   </p>")
+    @as("MaxResults")
     maxResults: option<maxResult25>,
     @ocaml.doc("<p>The token for the next set of results. Use the value returned in the previous 
 response in the next request to retrieve the next set of results.</p>")
     @as("NextToken")
     nextToken: option<nextToken>,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
   type response = {
@@ -3065,7 +4363,12 @@ module ListIntegrationAssociations = {
 response in the next request to retrieve the next set of results.</p>")
     @as("NextToken")
     nextToken: option<nextToken>,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc("<p>The integration type.</p>") @as("IntegrationType")
+    integrationType: option<integrationType>,
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
   type response = {
@@ -3074,13 +4377,18 @@ response in the next request to retrieve the next set of results.</p>")
     )
     @as("NextToken")
     nextToken: option<nextToken>,
-    @ocaml.doc("<p>The AppIntegration associations.</p>") @as("IntegrationAssociationSummaryList")
+    @ocaml.doc("<p>The associations.</p>") @as("IntegrationAssociationSummaryList")
     integrationAssociationSummaryList: option<integrationAssociationSummaryList>,
   }
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "ListIntegrationAssociationsCommand"
-  let make = (~instanceId, ~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken, instanceId: instanceId})
+  let make = (~instanceId, ~maxResults=?, ~nextToken=?, ~integrationType=?, ()) =>
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      integrationType: integrationType,
+      instanceId: instanceId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -3118,7 +4426,10 @@ module ListInstanceAttributes = {
 response in the next request to retrieve the next set of results.</p>")
     @as("NextToken")
     nextToken: option<nextToken>,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
   type response = {
@@ -3145,7 +4456,10 @@ module ListHoursOfOperations = {
 response in the next request to retrieve the next set of results.</p>")
     @as("NextToken")
     nextToken: option<nextToken>,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
   type response = {
@@ -3165,6 +4479,47 @@ response in the next request to retrieve the next set of results.</p>")
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module ListDefaultVocabularies = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The token for the next set of results. Use the value returned in the previous 
+response in the next request to retrieve the next set of results.</p>")
+    @as("NextToken")
+    nextToken: option<vocabularyNextToken>,
+    @ocaml.doc("<p>The maximum number of results to return per page.</p>") @as("MaxResults")
+    maxResults: option<maxResult100>,
+    @ocaml.doc("<p>The language code of the vocabulary entries. For a list of languages and their corresponding language codes, see 
+<a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/transcribe-whatis.html\">What is Amazon Transcribe?</a>
+         </p>")
+    @as("LanguageCode")
+    languageCode: option<vocabularyLanguageCode>,
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
+    instanceId: instanceId,
+  }
+  type response = {
+    @ocaml.doc(
+      "<p>If there are additional results, this is the token for the next set of results.</p>"
+    )
+    @as("NextToken")
+    nextToken: option<vocabularyNextToken>,
+    @ocaml.doc("<p>A list of default vocabularies.</p>") @as("DefaultVocabularyList")
+    defaultVocabularyList: defaultVocabularyList,
+  }
+  @module("@aws-sdk/client-connect") @new
+  external new: request => t = "ListDefaultVocabulariesCommand"
+  let make = (~instanceId, ~nextToken=?, ~maxResults=?, ~languageCode=?, ()) =>
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      languageCode: languageCode,
+      instanceId: instanceId,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module ListContactFlows = {
   type t
   type request = {
@@ -3176,7 +4531,10 @@ response in the next request to retrieve the next set of results.</p>")
     nextToken: option<nextToken>,
     @ocaml.doc("<p>The type of contact flow.</p>") @as("ContactFlowTypes")
     contactFlowTypes: option<contactFlowTypes>,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
   type response = {
@@ -3199,6 +4557,82 @@ response in the next request to retrieve the next set of results.</p>")
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module ListContactFlowModules = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The state of the contact flow module.</p>") @as("ContactFlowModuleState")
+    contactFlowModuleState: option<contactFlowModuleState>,
+    @ocaml.doc("<p>The maximum number of results to return per page.</p>") @as("MaxResults")
+    maxResults: option<maxResult1000>,
+    @ocaml.doc("<p>The token for the next set of results. Use the value returned in the previous 
+response in the next request to retrieve the next set of results.</p>")
+    @as("NextToken")
+    nextToken: option<nextToken>,
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
+    instanceId: instanceId,
+  }
+  type response = {
+    @ocaml.doc(
+      "<p>If there are additional results, this is the token for the next set of results.</p>"
+    )
+    @as("NextToken")
+    nextToken: option<nextToken>,
+    @ocaml.doc("<p>Information about the contact flow module.</p>")
+    @as("ContactFlowModulesSummaryList")
+    contactFlowModulesSummaryList: option<contactFlowModulesSummaryList>,
+  }
+  @module("@aws-sdk/client-connect") @new
+  external new: request => t = "ListContactFlowModulesCommand"
+  let make = (~instanceId, ~contactFlowModuleState=?, ~maxResults=?, ~nextToken=?, ()) =>
+    new({
+      contactFlowModuleState: contactFlowModuleState,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      instanceId: instanceId,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module ListAgentStatuses = {
+  type t
+  type request = {
+    @ocaml.doc("<p>Available agent status types.</p>") @as("AgentStatusTypes")
+    agentStatusTypes: option<agentStatusTypes>,
+    @ocaml.doc("<p>The maximum number of results to return per page.</p>") @as("MaxResults")
+    maxResults: option<maxResult1000>,
+    @ocaml.doc("<p>The token for the next set of results. Use the value returned in the previous 
+response in the next request to retrieve the next set of results.</p>")
+    @as("NextToken")
+    nextToken: option<nextToken>,
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
+    instanceId: instanceId,
+  }
+  type response = {
+    @ocaml.doc("<p>A summary of agent statuses.</p>") @as("AgentStatusSummaryList")
+    agentStatusSummaryList: option<agentStatusSummaryList>,
+    @ocaml.doc(
+      "<p>If there are additional results, this is the token for the next set of results.</p>"
+    )
+    @as("NextToken")
+    nextToken: option<nextToken>,
+  }
+  @module("@aws-sdk/client-connect") @new external new: request => t = "ListAgentStatusesCommand"
+  let make = (~instanceId, ~agentStatusTypes=?, ~maxResults=?, ~nextToken=?, ()) =>
+    new({
+      agentStatusTypes: agentStatusTypes,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      instanceId: instanceId,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module DisassociateRoutingProfileQueues = {
   type t
   type request = {
@@ -3207,10 +4641,13 @@ module DisassociateRoutingProfileQueues = {
     queueReferences: routingProfileQueueReferenceList,
     @ocaml.doc("<p>The identifier of the routing profile.</p>") @as("RoutingProfileId")
     routingProfileId: routingProfileId,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "DisassociateRoutingProfileQueuesCommand"
   let make = (~queueReferences, ~routingProfileId, ~instanceId, ()) =>
@@ -3222,10 +4659,37 @@ module DisassociateRoutingProfileQueues = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
+module DescribeVocabulary = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The identifier of the custom vocabulary.</p>") @as("VocabularyId")
+    vocabularyId: vocabularyId,
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
+    instanceId: instanceId,
+  }
+  type response = {
+    @ocaml.doc("<p>A list of specific words that you want Contact Lens for Amazon Connect to recognize in your audio input. They
+   are generally domain-specific words and phrases, words that Contact Lens is not recognizing, or
+   proper nouns.</p>")
+    @as("Vocabulary")
+    vocabulary: vocabulary,
+  }
+  @module("@aws-sdk/client-connect") @new external new: request => t = "DescribeVocabularyCommand"
+  let make = (~vocabularyId, ~instanceId, ()) =>
+    new({vocabularyId: vocabularyId, instanceId: instanceId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module DescribeUserHierarchyStructure = {
   type t
   type request = {
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
   type response = {
@@ -3241,7 +4705,10 @@ module DescribeUserHierarchyStructure = {
 module DescribeUser = {
   type t
   type request = {
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
     @ocaml.doc("<p>The identifier of the user account.</p>") @as("UserId") userId: userId,
   }
@@ -3254,11 +4721,36 @@ module DescribeUser = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module DescribeSecurityProfile = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
+    instanceId: instanceId,
+    @ocaml.doc("<p>The identifier for the security profle.</p>") @as("SecurityProfileId")
+    securityProfileId: securityProfileId,
+  }
+  type response = {
+    @ocaml.doc("<p>The security profile.</p>") @as("SecurityProfile")
+    securityProfile: option<securityProfile>,
+  }
+  @module("@aws-sdk/client-connect") @new
+  external new: request => t = "DescribeSecurityProfileCommand"
+  let make = (~instanceId, ~securityProfileId, ()) =>
+    new({instanceId: instanceId, securityProfileId: securityProfileId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module DescribeQueue = {
   type t
   type request = {
     @ocaml.doc("<p>The identifier for the queue.</p>") @as("QueueId") queueId: queueId,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
   type response = {@ocaml.doc("<p>The name of the queue.</p>") @as("Queue") queue: option<queue>}
@@ -3270,7 +4762,10 @@ module DescribeQueue = {
 module DescribeInstance = {
   type t
   type request = {
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
   type response = {
@@ -3278,6 +4773,28 @@ module DescribeInstance = {
   }
   @module("@aws-sdk/client-connect") @new external new: request => t = "DescribeInstanceCommand"
   let make = (~instanceId, ()) => new({instanceId: instanceId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module DescribeContactFlowModule = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The identifier of the contact flow module.</p>") @as("ContactFlowModuleId")
+    contactFlowModuleId: contactFlowModuleId,
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
+    instanceId: instanceId,
+  }
+  type response = {
+    @ocaml.doc("<p>Information about the contact flow module.</p>") @as("ContactFlowModule")
+    contactFlowModule: option<contactFlowModule>,
+  }
+  @module("@aws-sdk/client-connect") @new
+  external new: request => t = "DescribeContactFlowModuleCommand"
+  let make = (~contactFlowModuleId, ~instanceId, ()) =>
+    new({contactFlowModuleId: contactFlowModuleId, instanceId: instanceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -3299,20 +4816,63 @@ module DescribeContactFlow = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module DescribeContact = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The identifier of the contact.</p>") @as("ContactId") contactId: contactId,
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
+    instanceId: instanceId,
+  }
+  type response = {
+    @ocaml.doc("<p>Information about the contact.</p>") @as("Contact") contact: option<contact>,
+  }
+  @module("@aws-sdk/client-connect") @new external new: request => t = "DescribeContactCommand"
+  let make = (~contactId, ~instanceId, ()) => new({contactId: contactId, instanceId: instanceId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module DescribeAgentStatus = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The identifier for the agent status.</p>") @as("AgentStatusId")
+    agentStatusId: agentStatusId,
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
+    instanceId: instanceId,
+  }
+  type response = {
+    @ocaml.doc("<p>The agent status.</p>") @as("AgentStatus") agentStatus: option<agentStatus>,
+  }
+  @module("@aws-sdk/client-connect") @new external new: request => t = "DescribeAgentStatusCommand"
+  let make = (~agentStatusId, ~instanceId, ()) =>
+    new({agentStatusId: agentStatusId, instanceId: instanceId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module CreateQuickConnect = {
   type t
   type request = {
-    @ocaml.doc("<p>One or more tags.</p>") @as("Tags") tags: option<tagMap>,
+    @ocaml.doc("<p>The tags used to organize, track, or control access for this resource.</p>")
+    @as("Tags")
+    tags: option<tagMap>,
     @ocaml.doc("<p>Configuration settings for the quick connect.</p>") @as("QuickConnectConfig")
     quickConnectConfig: quickConnectConfig,
     @ocaml.doc("<p>The description of the quick connect.</p>") @as("Description")
     description: option<quickConnectDescription>,
     @ocaml.doc("<p>The name of the quick connect.</p>") @as("Name") name: quickConnectName,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
   type response = {
-    @ocaml.doc("<p>The identifier for the quick connect.</p>") @as("QuickConnectId")
+    @ocaml.doc("<p>The identifier for the quick connect. </p>") @as("QuickConnectId")
     quickConnectId: option<quickConnectId>,
     @ocaml.doc("<p>The Amazon Resource Name (ARN) for the quick connect. </p>")
     @as("QuickConnectARN")
@@ -3323,6 +4883,48 @@ module CreateQuickConnect = {
     new({
       tags: tags,
       quickConnectConfig: quickConnectConfig,
+      description: description,
+      name: name,
+      instanceId: instanceId,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module CreateContactFlowModule = {
+  type t
+  type request = {
+    @ocaml.doc("<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
+            request.</p>")
+    @as("ClientToken")
+    clientToken: option<clientToken>,
+    @ocaml.doc("<p>The tags used to organize, track, or control access for this resource.</p>")
+    @as("Tags")
+    tags: option<tagMap>,
+    @ocaml.doc("<p>The content of the contact flow module.</p>") @as("Content")
+    content: contactFlowModuleContent,
+    @ocaml.doc("<p>The description of the contact flow module. </p>") @as("Description")
+    description: option<contactFlowModuleDescription>,
+    @ocaml.doc("<p>The name of the contact flow module.</p>") @as("Name")
+    name: contactFlowModuleName,
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
+    instanceId: instanceId,
+  }
+  type response = {
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the contact flow module.</p>") @as("Arn")
+    arn: option<arn>,
+    @ocaml.doc("<p>The identifier of the contact flow module.</p>") @as("Id")
+    id: option<contactFlowModuleId>,
+  }
+  @module("@aws-sdk/client-connect") @new
+  external new: request => t = "CreateContactFlowModuleCommand"
+  let make = (~content, ~name, ~instanceId, ~clientToken=?, ~tags=?, ~description=?, ()) =>
+    new({
+      clientToken: clientToken,
+      tags: tags,
+      content: content,
       description: description,
       name: name,
       instanceId: instanceId,
@@ -3375,10 +4977,13 @@ module UpdateRoutingProfileQueues = {
     queueConfigs: routingProfileQueueConfigList,
     @ocaml.doc("<p>The identifier of the routing profile.</p>") @as("RoutingProfileId")
     routingProfileId: routingProfileId,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "UpdateRoutingProfileQueuesCommand"
   let make = (~queueConfigs, ~routingProfileId, ~instanceId, ()) =>
@@ -3397,10 +5002,13 @@ module UpdateInstanceStorageConfig = {
     )
     @as("AssociationId")
     associationId: associationId,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "UpdateInstanceStorageConfigCommand"
   let make = (~storageConfig, ~resourceType, ~associationId, ~instanceId, ()) =>
@@ -3413,10 +5021,137 @@ module UpdateInstanceStorageConfig = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
+module UpdateHoursOfOperation = {
+  type t
+  type request = {
+    @ocaml.doc("<p>Configuration information of the hours of operation.</p>") @as("Config")
+    config: option<hoursOfOperationConfigList>,
+    @ocaml.doc("<p>The time zone of the hours of operation.</p>") @as("TimeZone")
+    timeZone: option<timeZone>,
+    @ocaml.doc("<p>The description of the hours of operation.</p>") @as("Description")
+    description: option<updateHoursOfOperationDescription>,
+    @ocaml.doc("<p>The name of the hours of operation.</p>") @as("Name")
+    name: option<commonNameLength127>,
+    @ocaml.doc("<p>The identifier of the hours of operation.</p>") @as("HoursOfOperationId")
+    hoursOfOperationId: hoursOfOperationId,
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
+    instanceId: instanceId,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-connect") @new
+  external new: request => t = "UpdateHoursOfOperationCommand"
+  let make = (
+    ~hoursOfOperationId,
+    ~instanceId,
+    ~config=?,
+    ~timeZone=?,
+    ~description=?,
+    ~name=?,
+    (),
+  ) =>
+    new({
+      config: config,
+      timeZone: timeZone,
+      description: description,
+      name: name,
+      hoursOfOperationId: hoursOfOperationId,
+      instanceId: instanceId,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module ListContactReferences = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The token for the next set of results. Use the value returned in the previous 
+response in the next request to retrieve the next set of results.</p>
+         <important>
+            <p>This is not expected to be set, because the value returned in the previous response is
+    always null.</p>
+         </important>")
+    @as("NextToken")
+    nextToken: option<nextToken>,
+    @ocaml.doc("<p>The type of reference.</p>") @as("ReferenceTypes")
+    referenceTypes: referenceTypes,
+    @ocaml.doc("<p>The identifier of the initial contact.</p>") @as("ContactId")
+    contactId: contactId,
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
+    instanceId: instanceId,
+  }
+  type response = {
+    @ocaml.doc("<p>If there are additional results, this is the token for the next set of results.</p>
+         <important>
+            <p>This is always returned as null in the response.</p>
+         </important>")
+    @as("NextToken")
+    nextToken: option<nextToken>,
+    @ocaml.doc("<p>Information about the contact flows.</p>") @as("ReferenceSummaryList")
+    referenceSummaryList: option<referenceSummaryList>,
+  }
+  @module("@aws-sdk/client-connect") @new
+  external new: request => t = "ListContactReferencesCommand"
+  let make = (~referenceTypes, ~contactId, ~instanceId, ~nextToken=?, ()) =>
+    new({
+      nextToken: nextToken,
+      referenceTypes: referenceTypes,
+      contactId: contactId,
+      instanceId: instanceId,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module ListBots = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The version of Amazon Lex or Amazon Lex V2.</p>") @as("LexVersion")
+    lexVersion: lexVersion,
+    @ocaml.doc("<p>The maximum number of results to return per page.</p>") @as("MaxResults")
+    maxResults: option<maxResult25>,
+    @ocaml.doc("<p>The token for the next set of results. Use the value returned in the previous 
+response in the next request to retrieve the next set of results.</p>")
+    @as("NextToken")
+    nextToken: option<nextToken>,
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
+    instanceId: instanceId,
+  }
+  type response = {
+    @ocaml.doc(
+      "<p>If there are additional results, this is the token for the next set of results.</p>"
+    )
+    @as("NextToken")
+    nextToken: option<nextToken>,
+    @ocaml.doc("<p>The names and Regions of the Amazon Lex or Amazon Lex V2 bots associated with the specified
+   instance.</p>")
+    @as("LexBots")
+    lexBots: option<lexBotConfigList>,
+  }
+  @module("@aws-sdk/client-connect") @new external new: request => t = "ListBotsCommand"
+  let make = (~lexVersion, ~instanceId, ~maxResults=?, ~nextToken=?, ()) =>
+    new({
+      lexVersion: lexVersion,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      instanceId: instanceId,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module DescribeUserHierarchyGroup = {
   type t
   type request = {
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
     @ocaml.doc("<p>The identifier of the hierarchy group.</p>") @as("HierarchyGroupId")
     hierarchyGroupId: hierarchyGroupId,
@@ -3437,7 +5172,10 @@ module DescribeRoutingProfile = {
   type request = {
     @ocaml.doc("<p>The identifier of the routing profile.</p>") @as("RoutingProfileId")
     routingProfileId: routingProfileId,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
   type response = {
@@ -3456,7 +5194,10 @@ module DescribeQuickConnect = {
   type request = {
     @ocaml.doc("<p>The identifier for the quick connect.</p>") @as("QuickConnectId")
     quickConnectId: quickConnectId,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
   type response = {
@@ -3479,7 +5220,10 @@ module DescribeInstanceStorageConfig = {
     )
     @as("AssociationId")
     associationId: associationId,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
   type response = {
@@ -3514,7 +5258,10 @@ module CreateRoutingProfile = {
     @ocaml.doc("<p>The name of the routing profile. Must not be more than 127 characters.</p>")
     @as("Name")
     name: routingProfileName,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
   type response = {
@@ -3547,6 +5294,49 @@ module CreateRoutingProfile = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module CreateHoursOfOperation = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The tags used to organize, track, or control access for this resource.</p>")
+    @as("Tags")
+    tags: option<tagMap>,
+    @ocaml.doc(
+      "<p>Configuration information for the hours of operation: day, start time, and end time.</p>"
+    )
+    @as("Config")
+    config: hoursOfOperationConfigList,
+    @ocaml.doc("<p>The time zone of the hours of operation.</p>") @as("TimeZone")
+    timeZone: timeZone,
+    @ocaml.doc("<p>The description of the hours of operation.</p>") @as("Description")
+    description: option<hoursOfOperationDescription>,
+    @ocaml.doc("<p>The name of the hours of operation.</p>") @as("Name") name: commonNameLength127,
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
+    instanceId: instanceId,
+  }
+  type response = {
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) for the hours of operation.</p>")
+    @as("HoursOfOperationArn")
+    hoursOfOperationArn: option<arn>,
+    @ocaml.doc("<p>The identifier for the hours of operation.</p>") @as("HoursOfOperationId")
+    hoursOfOperationId: option<hoursOfOperationId>,
+  }
+  @module("@aws-sdk/client-connect") @new
+  external new: request => t = "CreateHoursOfOperationCommand"
+  let make = (~config, ~timeZone, ~name, ~instanceId, ~tags=?, ~description=?, ()) =>
+    new({
+      tags: tags,
+      config: config,
+      timeZone: timeZone,
+      description: description,
+      name: name,
+      instanceId: instanceId,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module AssociateRoutingProfileQueues = {
   type t
   type request = {
@@ -3554,10 +5344,13 @@ module AssociateRoutingProfileQueues = {
     queueConfigs: routingProfileQueueConfigList,
     @ocaml.doc("<p>The identifier of the routing profile.</p>") @as("RoutingProfileId")
     routingProfileId: routingProfileId,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-connect") @new
   external new: request => t = "AssociateRoutingProfileQueuesCommand"
   let make = (~queueConfigs, ~routingProfileId, ~instanceId, ()) =>
@@ -3572,7 +5365,10 @@ module AssociateInstanceStorageConfig = {
     storageConfig: instanceStorageConfig,
     @ocaml.doc("<p>A valid resource type.</p>") @as("ResourceType")
     resourceType: instanceStorageResourceType,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
   type response = {
@@ -3600,7 +5396,10 @@ response in the next request to retrieve the next set of results.</p>")
     nextToken: option<nextToken>,
     @ocaml.doc("<p>A valid resource type.</p>") @as("ResourceType")
     resourceType: instanceStorageResourceType,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
   type response = {
@@ -3629,7 +5428,10 @@ module DescribeHoursOfOperation = {
   type request = {
     @ocaml.doc("<p>The identifier for the hours of operation.</p>") @as("HoursOfOperationId")
     hoursOfOperationId: hoursOfOperationId,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
   type response = {
@@ -3725,8 +5527,9 @@ response in the next request to retrieve the next set of results.</p>
             <dt>OLDEST_CONTACT_AGE</dt>
             <dd>
                <p>Unit: SECONDS</p>
-               <p>When you use groupings, Unit says SECONDS but the Value is returned in MILLISECONDS. For
-      example, if you get a response like this:</p>
+               <p>When you use groupings, Unit says SECONDS and the Value is returned in SECONDS. </p>
+               <p>When you do not use groupings, Unit says SECONDS but the Value is returned in
+      MILLISECONDS. For example, if you get a response like this:</p>
                <p>
                   <code>{ \"Metric\": { \"Name\": \"OLDEST_CONTACT_AGE\", \"Unit\": \"SECONDS\" }, \"Value\": 24113.0
       </code>}</p>
@@ -3763,7 +5566,10 @@ response in the next request to retrieve the next set of results.</p>
    You can include both queue IDs and queue ARNs in the same request. VOICE, CHAT, and TASK channels are supported.</p>")
     @as("Filters")
     filters: filters,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
   type response = {
@@ -3811,6 +5617,11 @@ response in the next request to retrieve the next set of results.</p>")
     @ocaml.doc("<p>The metrics to retrieve. Specify the name, unit, and statistic for each metric. The
    following historical metrics are available. For a description of each metric, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html\">Historical Metrics Definitions</a> in the <i>Amazon Connect Administrator
    Guide</i>.</p>
+         <note>
+            <p>This API does not support a contacts
+    incoming metric (there's no CONTACTS_INCOMING metric missing from the documented list). </p>
+         </note>
+
          <dl>
             <dt>ABANDON_TIME</dt>
             <dd>
@@ -3947,7 +5758,7 @@ response in the next request to retrieve the next set of results.</p>")
     @ocaml.doc("<p>The grouping applied to the metrics returned. For example, when results are grouped by
    queue, the metrics returned are grouped by queue. The values returned apply to the metrics for
    each queue rather than aggregated for all queues.</p>
-  
+
          <p>If no grouping is specified, a summary of metrics for all queues is returned.</p>")
     @as("Groupings")
     groupings: option<groupings>,
@@ -3973,7 +5784,10 @@ response in the next request to retrieve the next set of results.</p>")
    metrics are available only for 24 hours.</p>")
     @as("StartTime")
     startTime: timestamp_,
-    @ocaml.doc("<p>The identifier of the Amazon Connect instance.</p>") @as("InstanceId")
+    @ocaml.doc(
+      "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>"
+    )
+    @as("InstanceId")
     instanceId: instanceId,
   }
   type response = {

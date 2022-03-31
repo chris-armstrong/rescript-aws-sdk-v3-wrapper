@@ -61,7 +61,11 @@ type tagKey = string
 type simulationUnit = int
 type simulationTimeMillis = float
 type simulationSoftwareSuiteVersionType = string
-type simulationSoftwareSuiteType = [@as("RosbagPlay") #RosbagPlay | @as("Gazebo") #Gazebo]
+type simulationSoftwareSuiteType = [
+  | @as("SimulationRuntime") #SimulationRuntime
+  | @as("RosbagPlay") #RosbagPlay
+  | @as("Gazebo") #Gazebo
+]
 type simulationJobStatus = [
   | @as("Canceled") #Canceled
   | @as("Terminated") #Terminated
@@ -119,6 +123,7 @@ type simulationJobBatchStatus = [
   | @as("Pending") #Pending
 ]
 type simulationJobBatchErrorCode = [@as("InternalServiceError") #InternalServiceError]
+type s3KeyOrPrefix = string
 type s3Key = string
 type s3Etag = string
 type s3Bucket = string
@@ -137,7 +142,7 @@ type robotSoftwareSuiteVersionType = [
   | @as("Melodic") #Melodic
   | @as("Kinetic") #Kinetic
 ]
-type robotSoftwareSuiteType = [@as("ROS2") #ROS2 | @as("ROS") #ROS]
+type robotSoftwareSuiteType = [@as("General") #General | @as("ROS2") #ROS2 | @as("ROS") #ROS]
 type robotDeploymentStep = [
   | @as("Finished") #Finished
   | @as("ExecutingPostLaunch") #ExecutingPostLaunch
@@ -148,6 +153,7 @@ type robotDeploymentStep = [
   | @as("Validating") #Validating
 ]
 type revisionId = string
+type repositoryUrl = string
 type renderingEngineVersionType = string
 type renderingEngineType = [@as("OGRE") #OGRE]
 type port = int
@@ -166,10 +172,12 @@ type json = string
 type jobDuration = float
 type interiorCountPerFloorplan = int
 type integer_ = int
+type imageDigest = string
 type id = string
 type iamRole = string
 type genericString = string
 type genericInteger = int
+type gpuunit = int
 type floorplanCount = int
 type failureBehavior = [@as("Continue") #Continue | @as("Fail") #Fail]
 type failedAt = Js.Date.t
@@ -212,7 +220,9 @@ type deploymentJobErrorCode = [
   | @as("EnvironmentSetupError") #EnvironmentSetupError
   | @as("ResourceNotFound") #ResourceNotFound
 ]
+type dataSourceType = [@as("File") #File | @as("Archive") #Archive | @as("Prefix") #Prefix]
 type createdAt = Js.Date.t
+type computeType = [@as("GPU_AND_CPU") #GPU_AND_CPU | @as("CPU") #CPU]
 type command = string
 type clientRequestToken = string
 type boxedBoolean = bool
@@ -303,41 +313,37 @@ type uploadConfiguration = {
          For example, specifying <code>/var/log/**.log</code> causes all .log files in the
             <code>/var/log</code> directory tree to be collected. For more examples, see <a href=\"https://github.com/gobwas/glob\">Glob Library</a>. </p>")
   path: path,
-  @ocaml.doc("<p>A prefix that specifies where files will be uploaded in Amazon S3. 
-        It is appended to the simulation output location to determine the final path.
-       </p>
-         <p>
-        For example, if your simulation output location is <code>s3://my-bucket</code> and your upload 
-        configuration name is <code>robot-test</code>, your files will be uploaded to 
-        <code>s3://my-bucket/<simid>/<runid>/robot-test</code>.
-      </p>")
+  @ocaml.doc("<p>A prefix that specifies where files will be uploaded in Amazon S3. It is appended to the
+         simulation output location to determine the final path. </p>
+         <p> For example, if your simulation output location is <code>s3://my-bucket</code> and your
+         upload configuration name is <code>robot-test</code>, your files will be uploaded to
+            <code>s3://my-bucket/<simid>/<runid>/robot-test</code>. </p>")
   name: name,
 }
 @ocaml.doc("<p>Information about a tool. Tools are used in a simulation job.</p>")
 type tool = {
-  @ocaml.doc("<p>Exit behavior determines what happens when your tool quits running. 
-        <code>RESTART</code> will cause your tool to be restarted. <code>FAIL</code>
-        will cause your job to exit. The default is <code>RESTART</code>.
-      </p>")
+  @ocaml.doc("<p>Exit behavior determines what happens when your tool quits running. <code>RESTART</code>
+         will cause your tool to be restarted. <code>FAIL</code> will cause your job to exit. The
+         default is <code>RESTART</code>. </p>")
   exitBehavior: option<exitBehavior>,
-  @ocaml.doc("<p>Boolean indicating whether logs will be recorded in CloudWatch for the tool.
-      The default is <code>False</code>.
-      </p>")
+  @ocaml.doc("<p>Boolean indicating whether logs will be recorded in CloudWatch for the tool. The default
+         is <code>False</code>. </p>")
   streamOutputToCloudWatch: option<boxedBoolean>,
   @ocaml.doc(
     "<p>Command-line arguments for the tool. It must include the tool executable name.</p>"
   )
   command: unrestrictedCommand,
   @ocaml.doc("<p>The name of the tool.</p>") name: name,
-  @ocaml.doc("<p>Boolean indicating whether a streaming session will be configured for the tool.
-         If <code>True</code>, AWS RoboMaker will configure a connection so you can interact with
-         the tool as it is running in the simulation. It must have a graphical user interface. 
-         The default is <code>False</code>.
-      </p>")
+  @ocaml.doc("<p>Boolean indicating whether a streaming session will be configured for the tool. If
+            <code>True</code>, AWS RoboMaker will configure a connection so you can interact with
+         the tool as it is running in the simulation. It must have a graphical user interface. The
+         default is <code>False</code>. </p>")
   streamUI: option<boxedBoolean>,
 }
 @ocaml.doc("<p>Summary information for a template.</p>")
 type templateSummary = {
+  @ocaml.doc("<p>The version of the template that you're using.</p>")
+  version: option<genericString>,
   @ocaml.doc("<p>The name of the template.</p>") name: option<templateName>,
   @ocaml.doc(
     "<p>The time, in milliseconds since the epoch, when the template was last updated.</p>"
@@ -455,12 +461,13 @@ type s3Object = {
   @ocaml.doc("<p>The key of the object.</p>") key: s3Key,
   @ocaml.doc("<p>The bucket containing the object.</p>") bucket: s3Bucket,
 }
-type s3Keys = array<s3Key>
+type s3KeysOrPrefixes = array<s3KeyOrPrefix>
 @ocaml.doc("<p>Information about S3 keys.</p>")
 type s3KeyOutput = {
   @ocaml.doc("<p>The etag for the object.</p>") etag: option<s3Etag>,
-  @ocaml.doc("<p>The S3 key.</p>") s3Key: option<s3Key>,
+  @ocaml.doc("<p>The S3 key.</p>") s3Key: option<s3KeyOrPrefix>,
 }
+type s3Etags = array<s3Etag>
 @ocaml.doc("<p>Information about a robot software suite (ROS distribution).</p>")
 type robotSoftwareSuite = {
   @ocaml.doc("<p>The version of the robot software suite (ROS distribution).</p>")
@@ -556,8 +563,11 @@ type networkInterface = {
 }
 @ocaml.doc("<p>The logging configuration.</p>")
 type loggingConfig = {
-  @ocaml.doc("<p>A boolean indicating whether to record all ROS topics.</p>")
-  recordAllRosTopics: boxedBoolean,
+  @ocaml.doc("<p>A boolean indicating whether to record all ROS topics.</p>
+         <important>
+            <p>This API is no longer supported and will throw an error if used.</p>
+         </important>")
+  recordAllRosTopics: option<boxedBoolean>,
 }
 @ocaml.doc("<p>Information about a fleet.</p>")
 type fleet = {
@@ -573,23 +583,40 @@ type fleet = {
 }
 type filterValues = array<name>
 type environmentVariableMap = Js.Dict.t<environmentVariableValue>
+@ocaml.doc("<p>The object that contains the Docker image URI for either your robot or simulation
+         applications.</p>")
+type environment = {
+  @ocaml.doc("<p>The Docker image URI for either your robot or simulation applications.</p>")
+  uri: option<repositoryUrl>,
+}
 type dataSourceNames = array<name>
 @ocaml.doc("<p>Compute information for the simulation job</p>")
 type computeResponse = {
+  @ocaml.doc("<p>Compute GPU unit limit for the simulation job. It is the same as the number of GPUs
+         allocated to the SimulationJob.</p>")
+  gpuUnitLimit: option<gpuunit>,
+  @ocaml.doc("<p>Compute type response information for the simulation job.</p>")
+  computeType: option<computeType>,
   @ocaml.doc("<p>The simulation unit limit. Your simulation is allocated CPU and memory proportional to
          the supplied simulation unit limit. A simulation unit is 1 vcpu and 2GB of memory. You are
-         only billed for the SU utilization you consume up to the maximim value provided. The
+         only billed for the SU utilization you consume up to the maximum value provided. The
          default is 15. </p>")
   simulationUnitLimit: option<simulationUnit>,
 }
 @ocaml.doc("<p>Compute information for the simulation job.</p>")
 type compute = {
+  @ocaml.doc("<p>Compute GPU unit limit for the simulation job. It is the same as the number of GPUs
+        allocated to the SimulationJob.</p>")
+  gpuUnitLimit: option<gpuunit>,
+  @ocaml.doc("<p>Compute type information for the simulation job.</p>")
+  computeType: option<computeType>,
   @ocaml.doc("<p>The simulation unit limit. Your simulation is allocated CPU and memory proportional to
          the supplied simulation unit limit. A simulation unit is 1 vcpu and 2GB of memory. You are
-         only billed for the SU utilization you consume up to the maximim value provided. The
+        only billed for the SU utilization you consume up to the maximum value provided. The
          default is 15. </p>")
   simulationUnitLimit: option<simulationUnit>,
 }
+type commandList = array<nonEmptyString>
 @ocaml.doc("<p>Information about the batch policy.</p>")
 type batchPolicy = {
   @ocaml.doc("<p>The number of active simulation jobs create as part of the batch that can be in an
@@ -658,6 +685,7 @@ type worldGenerationJobSummary = {
 type worldFailures = array<worldFailure>
 @ocaml.doc("<p>Information about a world export job.</p>")
 type worldExportJobSummary = {
+  outputLocation: option<outputLocation>,
   @ocaml.doc("<p>A list of worlds.</p>") worlds: option<arns>,
   @ocaml.doc(
     "<p>The time, in milliseconds since the epoch, when the world export job was created.</p>"
@@ -722,6 +750,8 @@ type sources = array<source>
 type sourceConfigs = array<sourceConfig>
 @ocaml.doc("<p>Summary information for a simulation job.</p>")
 type simulationJobSummary = {
+  @ocaml.doc("<p>The compute type for the simulation job summary.</p>")
+  computeType: option<computeType>,
   @ocaml.doc("<p>The names of the data sources.</p>") dataSourceNames: option<dataSourceNames>,
   @ocaml.doc("<p>A list of simulation job robot application names.</p>")
   robotApplicationNames: option<robotApplicationNames>,
@@ -811,7 +841,24 @@ type deploymentConfig = {
 }
 @ocaml.doc("<p>Information about a data source.</p>")
 type dataSourceConfig = {
-  @ocaml.doc("<p>The list of S3 keys identifying the data source files.</p>") s3Keys: s3Keys,
+  @ocaml.doc("<p>The location where your files are mounted in the container image.</p>
+         <p>If you've specified the <code>type</code> of the data source as an <code>Archive</code>,
+         you must provide an Amazon S3 object key to your archive. The object key must point to
+         either a <code>.zip</code> or <code>.tar.gz</code> file.</p>
+         <p>If you've specified the <code>type</code> of the data source as a <code>Prefix</code>,
+         you provide the Amazon S3 prefix that points to the files that you are using for your data
+         source.</p>
+         <p>If you've specified the <code>type</code> of the data source as a <code>File</code>, you
+         provide the Amazon S3 path to the file that you're using as your data source.</p>")
+  destination: option<path>,
+  @ocaml.doc("<p>The data type for the data source that you're using for your container image or
+         simulation job. You can use this field to specify whether your data source is an Archive,
+         an Amazon S3 prefix, or a file.</p>
+         <p>If you don't specify a field, the default value is <code>File</code>.</p>")
+  @as("type")
+  type_: option<dataSourceType>,
+  @ocaml.doc("<p>The list of S3 keys identifying the data source files.</p>")
+  s3Keys: s3KeysOrPrefixes,
   @ocaml.doc("<p>The S3 bucket where the data files are located.</p>") s3Bucket: s3Bucket,
   @ocaml.doc("<p>The name of the data source.</p>") name: name,
 }
@@ -841,6 +888,22 @@ type deploymentApplicationConfig = {
 type dataSourceConfigs = array<dataSourceConfig>
 @ocaml.doc("<p>Information about a data source.</p>")
 type dataSource = {
+  @ocaml.doc("<p>The location where your files are mounted in the container image.</p>
+         <p>If you've specified the <code>type</code> of the data source as an <code>Archive</code>,
+         you must provide an Amazon S3 object key to your archive. The object key must point to
+         either a <code>.zip</code> or <code>.tar.gz</code> file.</p>
+         <p>If you've specified the <code>type</code> of the data source as a <code>Prefix</code>,
+         you provide the Amazon S3 prefix that points to the files that you are using for your data
+         source.</p>
+         <p>If you've specified the <code>type</code> of the data source as a <code>File</code>, you
+         provide the Amazon S3 path to the file that you're using as your data source.</p>")
+  destination: option<path>,
+  @ocaml.doc("<p>The data type for the data source that you're using for your container image or
+         simulation job. You can use this field to specify whether your data source is an Archive,
+         an Amazon S3 prefix, or a file.</p>
+         <p>If you don't specify a field, the default value is <code>File</code>.</p>")
+  @as("type")
+  type_: option<dataSourceType>,
   @ocaml.doc("<p>The list of S3 keys identifying the data source files.</p>")
   s3Keys: option<s3KeyOutputs>,
   @ocaml.doc("<p>The S3 bucket where the data files are located.</p>") s3Bucket: option<s3Bucket>,
@@ -848,6 +911,9 @@ type dataSource = {
 }
 @ocaml.doc("<p>Information about a launch configuration.</p>")
 type launchConfig = {
+  @ocaml.doc("<p>If you've specified <code>General</code> as the value for your <code>RobotSoftwareSuite</code>, you can use this field to specify a list of commands for your container image.</p>
+         <p>If you've specified <code>SimulationRuntime</code> as the value for your <code>SimulationSoftwareSuite</code>, you can use this field to specify a list of commands for your container image.</p>")
+  command: option<commandList>,
   @ocaml.doc("<p>Boolean indicating whether a streaming session will be configured for the application.
          If <code>True</code>, AWS RoboMaker will configure a connection so you can interact with
          your application as it is running in the simulation. You must configure and launch the
@@ -857,8 +923,8 @@ type launchConfig = {
   portForwardingConfig: option<portForwardingConfig>,
   @ocaml.doc("<p>The environment variables for the application launch.</p>")
   environmentVariables: option<environmentVariableMap>,
-  @ocaml.doc("<p>The launch file name.</p>") launchFile: command,
-  @ocaml.doc("<p>The package name.</p>") packageName: command,
+  @ocaml.doc("<p>The launch file name.</p>") launchFile: option<command>,
+  @ocaml.doc("<p>The package name.</p>") packageName: option<command>,
 }
 @ocaml.doc("<p>Information about worlds that finished.</p>")
 type finishedWorldsSummary = {
@@ -870,17 +936,21 @@ type deploymentApplicationConfigs = array<deploymentApplicationConfig>
 type dataSources = array<dataSource>
 @ocaml.doc("<p>Information about a simulation application configuration.</p>")
 type simulationApplicationConfig = {
-  @ocaml.doc("<p>A Boolean indicating whether to use default simulation application tools. 
-        The default tools are rviz, rqt, terminal and rosbag record.
-        The default is <code>False</code>.
-      </p>")
+  @ocaml.doc("<p>A Boolean indicating whether to use default simulation application tools. The default
+         tools are rviz, rqt, terminal and rosbag record. The default is <code>False</code>.</p>
+         <important>
+            <p>This API is no longer supported and will throw an error if used.</p>
+         </important>")
   useDefaultTools: option<boxedBoolean>,
   @ocaml.doc("<p>Information about tools configured for the simulation application.</p>")
   tools: option<tools>,
   @ocaml.doc("<p>A Boolean indicating whether to use default upload configurations. By default,
             <code>.ros</code> and <code>.gazebo</code> files are uploaded when the application
          terminates and all ROS topics will be recorded.</p>
-         <p>If you set this value, you must specify an <code>outputLocation</code>. </p>")
+         <p>If you set this value, you must specify an <code>outputLocation</code>.</p>
+         <important>
+            <p>This API is no longer supported and will throw an error if used.</p>
+         </important>")
   useDefaultUploadConfigurations: option<boxedBoolean>,
   @ocaml.doc("<p>A list of world configurations.</p>") worldConfigs: option<worldConfigs>,
   @ocaml.doc("<p>Information about upload configurations for the simulation application.</p>")
@@ -893,17 +963,21 @@ type simulationApplicationConfig = {
 }
 @ocaml.doc("<p>Application configuration information for a robot.</p>")
 type robotApplicationConfig = {
-  @ocaml.doc("<p>A Boolean indicating whether to use default robot application tools. 
-        The default tools are rviz, rqt, terminal and rosbag record. 
-        The default is <code>False</code>.
-      </p>")
+  @ocaml.doc("<p>A Boolean indicating whether to use default robot application tools. The default tools
+         are rviz, rqt, terminal and rosbag record. The default is <code>False</code>.</p>
+         <important>
+            <p>This API is no longer supported and will throw an error if used.</p>
+         </important>")
   useDefaultTools: option<boxedBoolean>,
   @ocaml.doc("<p>Information about tools configured for the robot application.</p>")
   tools: option<tools>,
   @ocaml.doc("<p>A Boolean indicating whether to use default upload configurations. By default,
             <code>.ros</code> and <code>.gazebo</code> files are uploaded when the application
          terminates and all ROS topics will be recorded.</p>
-         <p>If you set this value, you must specify an <code>outputLocation</code>. </p>")
+         <p>If you set this value, you must specify an <code>outputLocation</code>.</p>
+         <important>
+            <p>This API is no longer supported and will throw an error if used.</p>
+         </important>")
   useDefaultUploadConfigurations: option<boxedBoolean>,
   @ocaml.doc("<p>The upload configurations for the robot application.</p>")
   uploadConfigurations: option<uploadConfigurations>,
@@ -956,7 +1030,8 @@ type simulationJobRequest = {
          <dl>
             <dt>Continue</dt>
             <dd>
-               <p>Restart the simulation job in the same host instance.</p>
+               <p>Leaves the host running for its maximum timeout duration after a
+                     <code>4XX</code> error code.</p>
             </dd>
             <dt>Fail</dt>
             <dd>
@@ -1010,7 +1085,8 @@ type simulationJob = {
          <dl>
             <dt>Continue</dt>
             <dd>
-               <p>Restart the simulation job in the same host instance.</p>
+               <p>Leaves the host running for its maximum timeout duration after a
+                     <code>4XX</code> error code.</p>
             </dd>
             <dt>Fail</dt>
             <dd>
@@ -1048,7 +1124,7 @@ module RestartSimulationJob = {
   type request = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the simulation job.</p>") job: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-robomaker") @new
   external new: request => t = "RestartSimulationJobCommand"
   let make = (~job, ()) => new({job: job})
@@ -1108,7 +1184,7 @@ module DeleteWorldTemplate = {
     @ocaml.doc("<p>The Amazon Resource Name (arn) of the world template you want to delete.</p>")
     template: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-robomaker") @new
   external new: request => t = "DeleteWorldTemplateCommand"
   let make = (~template, ()) => new({template: template})
@@ -1123,7 +1199,7 @@ module DeleteSimulationApplication = {
     @ocaml.doc("<p>The application information for the simulation application to delete.</p>")
     application: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-robomaker") @new
   external new: request => t = "DeleteSimulationApplicationCommand"
   let make = (~application, ~applicationVersion=?, ()) =>
@@ -1139,7 +1215,7 @@ module DeleteRobotApplication = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the the robot application.</p>")
     application: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-robomaker") @new
   external new: request => t = "DeleteRobotApplicationCommand"
   let make = (~application, ~applicationVersion=?, ()) =>
@@ -1150,7 +1226,7 @@ module DeleteRobotApplication = {
 module DeleteRobot = {
   type t
   type request = {@ocaml.doc("<p>The Amazon Resource Name (ARN) of the robot.</p>") robot: arn}
-
+  type response = {.}
   @module("@aws-sdk/client-robomaker") @new external new: request => t = "DeleteRobotCommand"
   let make = (~robot, ()) => new({robot: robot})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1159,7 +1235,7 @@ module DeleteRobot = {
 module DeleteFleet = {
   type t
   type request = {@ocaml.doc("<p>The Amazon Resource Name (ARN) of the fleet.</p>") fleet: arn}
-
+  type response = {.}
   @module("@aws-sdk/client-robomaker") @new external new: request => t = "DeleteFleetCommand"
   let make = (~fleet, ()) => new({fleet: fleet})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1171,7 +1247,7 @@ module CancelWorldGenerationJob = {
     @ocaml.doc("<p>The Amazon Resource Name (arn) of the world generator job to cancel.</p>")
     job: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-robomaker") @new
   external new: request => t = "CancelWorldGenerationJobCommand"
   let make = (~job, ()) => new({job: job})
@@ -1183,7 +1259,7 @@ module CancelWorldExportJob = {
   type request = {
     @ocaml.doc("<p>The Amazon Resource Name (arn) of the world export job to cancel.</p>") job: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-robomaker") @new
   external new: request => t = "CancelWorldExportJobCommand"
   let make = (~job, ()) => new({job: job})
@@ -1193,7 +1269,7 @@ module CancelWorldExportJob = {
 module CancelSimulationJobBatch = {
   type t
   type request = {@ocaml.doc("<p>The id of the batch to cancel.</p>") batch: arn}
-
+  type response = {.}
   @module("@aws-sdk/client-robomaker") @new
   external new: request => t = "CancelSimulationJobBatchCommand"
   let make = (~batch, ()) => new({batch: batch})
@@ -1203,7 +1279,7 @@ module CancelSimulationJobBatch = {
 module CancelSimulationJob = {
   type t
   type request = {@ocaml.doc("<p>The simulation job ARN to cancel.</p>") job: arn}
-
+  type response = {.}
   @module("@aws-sdk/client-robomaker") @new
   external new: request => t = "CancelSimulationJobCommand"
   let make = (~job, ()) => new({job: job})
@@ -1213,7 +1289,7 @@ module CancelSimulationJob = {
 module CancelDeploymentJob = {
   type t
   type request = {@ocaml.doc("<p>The deployment job ARN to cancel.</p>") job: arn}
-
+  type response = {.}
   @module("@aws-sdk/client-robomaker") @new
   external new: request => t = "CancelDeploymentJobCommand"
   let make = (~job, ()) => new({job: job})
@@ -1263,7 +1339,7 @@ module UntagResource = {
          tags.</p>")
     resourceArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-robomaker") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1281,7 +1357,7 @@ module TagResource = {
     )
     resourceArn: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-robomaker") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1309,6 +1385,8 @@ module DescribeWorldTemplate = {
     template: arn,
   }
   type response = {
+    @ocaml.doc("<p>The version of the world template that you're using.</p>")
+    version: option<genericString>,
     @ocaml.doc("<p>A map that contains tag keys and tag values that are attached to the world
          template.</p>")
     tags: option<tagMap>,
@@ -1427,6 +1505,10 @@ module DescribeWorld = {
     world: arn,
   }
   type response = {
+    @ocaml.doc(
+      "<p>Returns the JSON formatted string that describes the contents of your world.</p>"
+    )
+    worldDescriptionBody: option<json>,
     @ocaml.doc("<p>A map that contains tag keys and tag values that are attached to the world.</p>")
     tags: option<tagMap>,
     @ocaml.doc("<p>The time, in milliseconds since the epoch, when the world was created.</p>")
@@ -1786,6 +1868,10 @@ module BatchDeleteWorlds = {
 module UpdateSimulationApplication = {
   type t
   type request = {
+    @ocaml.doc(
+      "<p>The object that contains the Docker image URI for your simulation application.</p>"
+    )
+    environment: option<environment>,
     @ocaml.doc("<p>The revision id for the robot application.</p>")
     currentRevisionId: option<revisionId>,
     @ocaml.doc("<p>The rendering engine for the simulation application.</p>")
@@ -1794,11 +1880,14 @@ module UpdateSimulationApplication = {
     robotSoftwareSuite: robotSoftwareSuite,
     @ocaml.doc("<p>The simulation software suite used by the simulation application.</p>")
     simulationSoftwareSuite: simulationSoftwareSuite,
-    @ocaml.doc("<p>The sources of the simulation application.</p>") sources: sourceConfigs,
+    @ocaml.doc("<p>The sources of the simulation application.</p>") sources: option<sourceConfigs>,
     @ocaml.doc("<p>The application information for the simulation application.</p>")
     application: arn,
   }
   type response = {
+    @ocaml.doc("<p>The object that contains the Docker image URI used for your simulation
+         application.</p>")
+    environment: option<environment>,
     @ocaml.doc("<p>The revision id of the simulation application.</p>")
     revisionId: option<revisionId>,
     @ocaml.doc("<p>The time, in milliseconds since the epoch, when the simulation application was last
@@ -1821,13 +1910,15 @@ module UpdateSimulationApplication = {
   let make = (
     ~robotSoftwareSuite,
     ~simulationSoftwareSuite,
-    ~sources,
     ~application,
+    ~environment=?,
     ~currentRevisionId=?,
     ~renderingEngine=?,
+    ~sources=?,
     (),
   ) =>
     new({
+      environment: environment,
       currentRevisionId: currentRevisionId,
       renderingEngine: renderingEngine,
       robotSoftwareSuite: robotSoftwareSuite,
@@ -1841,14 +1932,18 @@ module UpdateSimulationApplication = {
 module UpdateRobotApplication = {
   type t
   type request = {
+    @ocaml.doc("<p>The object that contains the Docker image URI for your robot application.</p>")
+    environment: option<environment>,
     @ocaml.doc("<p>The revision id for the robot application.</p>")
     currentRevisionId: option<revisionId>,
     @ocaml.doc("<p>The robot software suite (ROS distribution) used by the robot application.</p>")
     robotSoftwareSuite: robotSoftwareSuite,
-    @ocaml.doc("<p>The sources of the robot application.</p>") sources: sourceConfigs,
+    @ocaml.doc("<p>The sources of the robot application.</p>") sources: option<sourceConfigs>,
     @ocaml.doc("<p>The application information for the robot application.</p>") application: arn,
   }
   type response = {
+    @ocaml.doc("<p>The object that contains the Docker image URI for your robot application.</p>")
+    environment: option<environment>,
     @ocaml.doc("<p>The revision id of the robot application.</p>") revisionId: option<revisionId>,
     @ocaml.doc("<p>The time, in milliseconds since the epoch, when the robot application was last
          updated.</p>")
@@ -1863,8 +1958,16 @@ module UpdateRobotApplication = {
   }
   @module("@aws-sdk/client-robomaker") @new
   external new: request => t = "UpdateRobotApplicationCommand"
-  let make = (~robotSoftwareSuite, ~sources, ~application, ~currentRevisionId=?, ()) =>
+  let make = (
+    ~robotSoftwareSuite,
+    ~application,
+    ~environment=?,
+    ~currentRevisionId=?,
+    ~sources=?,
+    (),
+  ) =>
     new({
+      environment: environment,
       currentRevisionId: currentRevisionId,
       robotSoftwareSuite: robotSoftwareSuite,
       sources: sources,
@@ -1916,6 +2019,12 @@ module DescribeSimulationApplication = {
     application: arn,
   }
   type response = {
+    @ocaml.doc("<p>A SHA256 identifier for the Docker image that you use for your simulation
+         application.</p>")
+    imageDigest: option<imageDigest>,
+    @ocaml.doc("<p>The object that contains the Docker image URI used to create the simulation
+         application.</p>")
+    environment: option<environment>,
     @ocaml.doc("<p>The list of all tags added to the specified simulation application.</p>")
     tags: option<tagMap>,
     @ocaml.doc("<p>The time, in milliseconds since the epoch, when the simulation application was last
@@ -1950,6 +2059,13 @@ module DescribeRobotApplication = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the robot application.</p>") application: arn,
   }
   type response = {
+    @ocaml.doc(
+      "<p>A SHA256 identifier for the Docker image that you use for your robot application.</p>"
+    )
+    imageDigest: option<imageDigest>,
+    @ocaml.doc("<p>The object that contains the Docker image URI used to create the robot
+         application.</p>")
+    environment: option<environment>,
     @ocaml.doc("<p>The list of all tags added to the specified robot application.</p>")
     tags: option<tagMap>,
     @ocaml.doc("<p>The time, in milliseconds since the epoch, when the robot application was last
@@ -1994,6 +2110,12 @@ module DescribeFleet = {
 module CreateSimulationApplicationVersion = {
   type t
   type request = {
+    @ocaml.doc("<p>The SHA256 digest used to identify the Docker image URI used to created the simulation
+         application.</p>")
+    imageDigest: option<imageDigest>,
+    @ocaml.doc("<p>The Amazon S3 eTag identifier for the zip file bundle that you use to create the
+         simulation application.</p>")
+    s3Etags: option<s3Etags>,
     @ocaml.doc("<p>The current revision id for the simulation application. If you provide a value and it
          matches the latest revision ID, a new version will be created.</p>")
     currentRevisionId: option<revisionId>,
@@ -2001,6 +2123,9 @@ module CreateSimulationApplicationVersion = {
     application: arn,
   }
   type response = {
+    @ocaml.doc("<p>The object that contains the Docker image URI used to create the simulation
+         application.</p>")
+    environment: option<environment>,
     @ocaml.doc("<p>The revision ID of the simulation application.</p>")
     revisionId: option<revisionId>,
     @ocaml.doc("<p>The time, in milliseconds since the epoch, when the simulation application was last
@@ -2020,14 +2145,22 @@ module CreateSimulationApplicationVersion = {
   }
   @module("@aws-sdk/client-robomaker") @new
   external new: request => t = "CreateSimulationApplicationVersionCommand"
-  let make = (~application, ~currentRevisionId=?, ()) =>
-    new({currentRevisionId: currentRevisionId, application: application})
+  let make = (~application, ~imageDigest=?, ~s3Etags=?, ~currentRevisionId=?, ()) =>
+    new({
+      imageDigest: imageDigest,
+      s3Etags: s3Etags,
+      currentRevisionId: currentRevisionId,
+      application: application,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateSimulationApplication = {
   type t
   type request = {
+    @ocaml.doc("<p>The object that contains the Docker image URI used to create your simulation
+         application.</p>")
+    environment: option<environment>,
     @ocaml.doc("<p>A map that contains tag keys and tag values that are attached to the simulation
          application.</p>")
     tags: option<tagMap>,
@@ -2039,10 +2172,13 @@ module CreateSimulationApplication = {
     robotSoftwareSuite: robotSoftwareSuite,
     @ocaml.doc("<p>The simulation software suite used by the simulation application.</p>")
     simulationSoftwareSuite: simulationSoftwareSuite,
-    @ocaml.doc("<p>The sources of the simulation application.</p>") sources: sourceConfigs,
+    @ocaml.doc("<p>The sources of the simulation application.</p>") sources: option<sourceConfigs>,
     @ocaml.doc("<p>The name of the simulation application.</p>") name: name,
   }
   type response = {
+    @ocaml.doc("<p>The object that contains the Docker image URI that you used to create your simulation
+         application.</p>")
+    environment: option<environment>,
     @ocaml.doc("<p>The list of all tags added to the simulation application.</p>")
     tags: option<tagMap>,
     @ocaml.doc("<p>The revision id of the simulation application.</p>")
@@ -2067,13 +2203,15 @@ module CreateSimulationApplication = {
   let make = (
     ~robotSoftwareSuite,
     ~simulationSoftwareSuite,
-    ~sources,
     ~name,
+    ~environment=?,
     ~tags=?,
     ~renderingEngine=?,
+    ~sources=?,
     (),
   ) =>
     new({
+      environment: environment,
       tags: tags,
       renderingEngine: renderingEngine,
       robotSoftwareSuite: robotSoftwareSuite,
@@ -2087,12 +2225,22 @@ module CreateSimulationApplication = {
 module CreateRobotApplicationVersion = {
   type t
   type request = {
+    @ocaml.doc(
+      "<p>A SHA256 identifier for the Docker image that you use for your robot application.</p>"
+    )
+    imageDigest: option<imageDigest>,
+    @ocaml.doc("<p>The Amazon S3 identifier for the zip file bundle that you use for your robot
+         application.</p>")
+    s3Etags: option<s3Etags>,
     @ocaml.doc("<p>The current revision id for the robot application. If you provide a value and it matches
          the latest revision ID, a new version will be created.</p>")
     currentRevisionId: option<revisionId>,
     @ocaml.doc("<p>The application information for the robot application.</p>") application: arn,
   }
   type response = {
+    @ocaml.doc("<p>The object that contains the Docker image URI used to create your robot
+         application.</p>")
+    environment: option<environment>,
     @ocaml.doc("<p>The revision id of the robot application.</p>") revisionId: option<revisionId>,
     @ocaml.doc("<p>The time, in milliseconds since the epoch, when the robot application was last
          updated.</p>")
@@ -2106,23 +2254,34 @@ module CreateRobotApplicationVersion = {
   }
   @module("@aws-sdk/client-robomaker") @new
   external new: request => t = "CreateRobotApplicationVersionCommand"
-  let make = (~application, ~currentRevisionId=?, ()) =>
-    new({currentRevisionId: currentRevisionId, application: application})
+  let make = (~application, ~imageDigest=?, ~s3Etags=?, ~currentRevisionId=?, ()) =>
+    new({
+      imageDigest: imageDigest,
+      s3Etags: s3Etags,
+      currentRevisionId: currentRevisionId,
+      application: application,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateRobotApplication = {
   type t
   type request = {
+    @ocaml.doc("<p>The object that contains that URI of the Docker image that you use for your robot
+         application.</p>")
+    environment: option<environment>,
     @ocaml.doc("<p>A map that contains tag keys and tag values that are attached to the robot
          application.</p>")
     tags: option<tagMap>,
     @ocaml.doc("<p>The robot software suite (ROS distribuition) used by the robot application.</p>")
     robotSoftwareSuite: robotSoftwareSuite,
-    @ocaml.doc("<p>The sources of the robot application.</p>") sources: sourceConfigs,
+    @ocaml.doc("<p>The sources of the robot application.</p>") sources: option<sourceConfigs>,
     @ocaml.doc("<p>The name of the robot application.</p>") name: name,
   }
   type response = {
+    @ocaml.doc("<p>An object that contains the Docker image URI used to a create your robot
+         application.</p>")
+    environment: option<environment>,
     @ocaml.doc("<p>The list of all tags added to the robot application.</p>") tags: option<tagMap>,
     @ocaml.doc("<p>The revision id of the robot application.</p>") revisionId: option<revisionId>,
     @ocaml.doc("<p>The time, in milliseconds since the epoch, when the robot application was last
@@ -2137,8 +2296,14 @@ module CreateRobotApplication = {
   }
   @module("@aws-sdk/client-robomaker") @new
   external new: request => t = "CreateRobotApplicationCommand"
-  let make = (~robotSoftwareSuite, ~sources, ~name, ~tags=?, ()) =>
-    new({tags: tags, robotSoftwareSuite: robotSoftwareSuite, sources: sources, name: name})
+  let make = (~robotSoftwareSuite, ~name, ~environment=?, ~tags=?, ~sources=?, ()) =>
+    new({
+      environment: environment,
+      tags: tags,
+      robotSoftwareSuite: robotSoftwareSuite,
+      sources: sources,
+      name: name,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -3013,7 +3178,8 @@ module CreateSimulationJob = {
          <dl>
             <dt>Continue</dt>
             <dd>
-               <p>Restart the simulation job in the same host instance.</p>
+               <p>Leaves the instance running for its maximum timeout duration after a
+                     <code>4XX</code> error code.</p>
             </dd>
             <dt>Fail</dt>
             <dd>

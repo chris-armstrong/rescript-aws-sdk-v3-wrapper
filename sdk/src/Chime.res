@@ -18,11 +18,74 @@ type voiceConnectorName = string
 type voiceConnectorItemPriority = int
 type voiceConnectorGroupName = string
 type voiceConnectorAwsRegion = [@as("us-west-2") #Us_West_2 | @as("us-east-1") #Us_East_1]
+type videoMuxType = [@as("VideoOnly") #VideoOnly]
 type userType = [@as("SharedDevice") #SharedDevice | @as("PrivateUser") #PrivateUser]
 type userName = string
 type userId = string
 type urlType = string
 type uriType = string
+type transcribeVocabularyFilterMethod = [
+  | @as("tag") #Tag
+  | @as("mask") #Mask
+  | @as("remove") #Remove
+]
+type transcribeRegion = [
+  | @as("auto") #Auto
+  | @as("sa-east-1") #Sa_East_1
+  | @as("eu-west-2") #Eu_West_2
+  | @as("eu-west-1") #Eu_West_1
+  | @as("eu-central-1") #Eu_Central_1
+  | @as("ca-central-1") #Ca_Central_1
+  | @as("ap-northeast-1") #Ap_Northeast_1
+  | @as("ap-southeast-2") #Ap_Southeast_2
+  | @as("ap-northeast-2") #Ap_Northeast_2
+  | @as("us-west-2") #Us_West_2
+  | @as("us-east-1") #Us_East_1
+  | @as("us-east-2") #Us_East_2
+]
+type transcribePiiEntityTypes = string
+type transcribePartialResultsStability = [
+  | @as("high") #High
+  | @as("medium") #Medium
+  | @as("low") #Low
+]
+type transcribeMedicalType = [@as("DICTATION") #DICTATION | @as("CONVERSATION") #CONVERSATION]
+type transcribeMedicalSpecialty = [
+  | @as("UROLOGY") #UROLOGY
+  | @as("RADIOLOGY") #RADIOLOGY
+  | @as("ONCOLOGY") #ONCOLOGY
+  | @as("NEUROLOGY") #NEUROLOGY
+  | @as("CARDIOLOGY") #CARDIOLOGY
+  | @as("PRIMARYCARE") #PRIMARYCARE
+]
+type transcribeMedicalRegion = [
+  | @as("auto") #Auto
+  | @as("eu-west-1") #Eu_West_1
+  | @as("ca-central-1") #Ca_Central_1
+  | @as("ap-southeast-2") #Ap_Southeast_2
+  | @as("us-west-2") #Us_West_2
+  | @as("us-east-2") #Us_East_2
+  | @as("us-east-1") #Us_East_1
+]
+type transcribeMedicalLanguageCode = [@as("en-US") #En_US]
+type transcribeMedicalContentIdentificationType = [@as("PHI") #PHI]
+type transcribeLanguageModelName = string
+type transcribeLanguageCode = [
+  | @as("zh-CN") #Zh_CN
+  | @as("ko-KR") #Ko_KR
+  | @as("ja-JP") #Ja_JP
+  | @as("pt-BR") #Pt_BR
+  | @as("de-DE") #De_DE
+  | @as("it-IT") #It_IT
+  | @as("en-AU") #En_AU
+  | @as("fr-FR") #Fr_FR
+  | @as("fr-CA") #Fr_CA
+  | @as("es-US") #Es_US
+  | @as("en-GB") #En_GB
+  | @as("en-US") #En_US
+]
+type transcribeContentRedactionType = [@as("PII") #PII]
+type transcribeContentIdentificationType = [@as("PII") #PII]
 type tollFreePrefix = string
 type timestamp_ = Js.Date.t
 type tagValue = string
@@ -107,6 +170,15 @@ type nextToken = string
 type metadata = string
 type messageId = string
 type memberType = [@as("Webhook") #Webhook | @as("Bot") #Bot | @as("User") #User]
+type mediaPipelineStatus = [
+  | @as("Stopped") #Stopped
+  | @as("Stopping") #Stopping
+  | @as("Failed") #Failed
+  | @as("InProgress") #InProgress
+  | @as("Initializing") #Initializing
+]
+type mediaPipelineSourceType = [@as("ChimeSdkMeeting") #ChimeSdkMeeting]
+type mediaPipelineSinkType = [@as("S3Bucket") #S3Bucket]
 type maxResults = int
 type license = [
   | @as("ProTrial") #ProTrial
@@ -146,6 +218,7 @@ type e164PhoneNumber = string
 type dataRetentionInHours = int
 type cpsLimit = int
 type country = string
+type contentMuxType = [@as("ContentOnly") #ContentOnly]
 type content = string
 type clientRequestToken = string
 type chimeArn = string
@@ -168,6 +241,11 @@ type callingNameStatus = [
 type callingName = string
 type botType = [@as("ChatBot") #ChatBot]
 type boolean_ = bool
+type audioMuxType = [
+  | @as("AudioWithActiveSpeakerVideo") #AudioWithActiveSpeakerVideo
+  | @as("AudioOnly") #AudioOnly
+]
+type artifactsState = [@as("Disabled") #Disabled | @as("Enabled") #Enabled]
 type arn = string
 type areaCode = string
 type appInstanceDataType = [@as("ChannelMessage") #ChannelMessage | @as("Channel") #Channel]
@@ -178,6 +256,7 @@ type accountType = [
   | @as("EnterpriseDirectory") #EnterpriseDirectory
   | @as("Team") #Team
 ]
+type accountStatus = [@as("Active") #Active | @as("Suspended") #Suspended]
 type accountName = string
 @ocaml.doc("<p>The Amazon Chime Voice Connector settings. Includes any Amazon S3 buckets designated for
             storing call detail records.</p>")
@@ -201,6 +280,9 @@ type voiceConnectorItem = {
 @ocaml.doc("<p>The Amazon Chime Voice Connector configuration, including outbound host name and encryption
             settings.</p>")
 type voiceConnector = {
+  @ocaml.doc("<p>The ARN of the specified Amazon Chime Voice Connector.</p>")
+  @as("VoiceConnectorArn")
+  voiceConnectorArn: option<nonEmptyString>,
   @ocaml.doc("<p>The updated Amazon Chime Voice Connector timestamp, in ISO 8601 format.</p>")
   @as("UpdatedTimestamp")
   updatedTimestamp: option<iso8601Timestamp>,
@@ -226,9 +308,16 @@ The AWS Region in which the Amazon Chime Voice Connector is created. Default:
   @ocaml.doc("<p>The Amazon Chime Voice Connector ID.</p>") @as("VoiceConnectorId")
   voiceConnectorId: option<nonEmptyString>,
 }
+@ocaml.doc("<p>The video artifact configuration object.</p>")
+type videoArtifactsConfiguration = {
+  @ocaml.doc("<p>The MUX type of the video artifact configuration object.</p>") @as("MuxType")
+  muxType: option<videoMuxType>,
+  @ocaml.doc("<p>Indicates whether the video artifact is enabled or disabled.</p>") @as("State")
+  state: artifactsState,
+}
 type userIdList = array<nonEmptyString>
-@ocaml.doc("<p>The list of errors returned when errors are encountered during the <a>BatchSuspendUser</a>, <a>BatchUnsuspendUser</a>, or <a>BatchUpdateUser</a> actions. This includes user IDs, error codes, and error
-            messages.</p>")
+@ocaml.doc("<p>The list of errors returned when errors are encountered during the <a>BatchSuspendUser</a>, <a>BatchUnsuspendUser</a>, or 
+    <a>BatchUpdateUser</a> actions. This includes user IDs, error codes, and error messages.</p>")
 type userError = {
   @ocaml.doc("<p>The error message.</p>") @as("ErrorMessage") errorMessage: option<string_>,
   @ocaml.doc("<p>The error code.</p>") @as("ErrorCode") errorCode: option<errorCode>,
@@ -303,6 +392,7 @@ type sipMediaApplicationCall = {
   @ocaml.doc("<p>The transaction ID of a call.</p>") @as("TransactionId")
   transactionId: option<guidString>,
 }
+type sipHeadersMap = Js.Dict.t<sensitiveString>
 @ocaml.doc(
   "<p>An Active Directory (AD) group whose members are granted permission to act as delegates.</p>"
 )
@@ -310,6 +400,7 @@ type signinDelegateGroup = {
   @ocaml.doc("<p>The group name.</p>") @as("GroupName") groupName: option<nonEmptyString>,
 }
 type sensitiveStringList = array<sensitiveString>
+type smaupdateCallArgumentsMap = Js.Dict.t<sensitiveString>
 @ocaml.doc(
   "<p>The retention settings that determine how long to retain chat-room messages for an Amazon Chime Enterprise account.</p>"
 )
@@ -387,7 +478,10 @@ type participant = {
 }
 @ocaml.doc("<p>Origination routes define call distribution properties for your SIP hosts to receive inbound
             calls using your Amazon Chime Voice Connector. Limit: Ten origination routes for each
-            Amazon Chime Voice Connector.</p>")
+            Amazon Chime Voice Connector.</p>
+         <note>
+            <p>The parameters listed below are not required, but you must use at least one. </p>
+         </note>")
 type originationRoute = {
   @ocaml.doc("<p>The weight associated with the host. If hosts are equal in priority, calls are redistributed among
             them based on their relative weight.</p>")
@@ -451,9 +545,12 @@ type meetingNotificationConfiguration = {
   @ocaml.doc("<p>The SNS topic ARN.</p>") @as("SnsTopicArn") snsTopicArn: option<arn>,
 }
 @ocaml.doc(
-  "<p>A set of endpoints used by clients to connect to the media service group for a Amazon Chime SDK meeting.</p>"
+  "<p>A set of endpoints used by clients to connect to the media service group for an Amazon Chime SDK meeting.</p>"
 )
 type mediaPlacement = {
+  @ocaml.doc("<p>The event ingestion URL to which you send client meeting events.</p>")
+  @as("EventIngestionUrl")
+  eventIngestionUrl: option<uriType>,
   @ocaml.doc("<p>The turn control URL.</p>") @as("TurnControlUrl") turnControlUrl: option<uriType>,
   @ocaml.doc("<p>The signaling URL.</p>") @as("SignalingUrl") signalingUrl: option<uriType>,
   @ocaml.doc("<p>The screen viewing URL.</p>") @as("ScreenViewingUrl")
@@ -469,7 +566,12 @@ type mediaPlacement = {
   "<p>The logging configuration associated with an Amazon Chime Voice Connector. Specifies whether SIP message logs are enabled for sending to Amazon CloudWatch Logs.</p>"
 )
 type loggingConfiguration = {
-  @ocaml.doc("<p>When true, enables SIP message logs for sending to Amazon CloudWatch Logs.</p>")
+  @ocaml.doc(
+    "<p>Boolean that enables logging of detailed media metrics for Voice Connectors to CloudWatch logs.</p>"
+  )
+  @as("EnableMediaMetricLogs")
+  enableMediaMetricLogs: option<boolean_>,
+  @ocaml.doc("<p>Boolean that enables SIP message logs to CloudWatch logs.</p>")
   @as("EnableSIPLogs")
   enableSIPLogs: option<boolean_>,
 }
@@ -494,6 +596,7 @@ type geoMatchParams = {
   @ocaml.doc("<p>The area code.</p>") @as("AreaCode") areaCode: areaCode,
   @ocaml.doc("<p>The country.</p>") @as("Country") country: country,
 }
+type externalUserIdList = array<externalUserIdType>
 @ocaml.doc(
   "<p>The configuration that allows a bot to receive outgoing events. Can be either an HTTPS endpoint or a Lambda function ARN.</p>"
 )
@@ -505,6 +608,81 @@ type eventsConfiguration = {
   @as("OutboundEventsHTTPSEndpoint")
   outboundEventsHTTPSEndpoint: option<sensitiveString>,
   @ocaml.doc("<p>The bot ID.</p>") @as("BotId") botId: option<string_>,
+}
+@ocaml.doc("<p>Settings specific to the Amazon Transcribe engine.</p>")
+type engineTranscribeSettings = {
+  @ocaml.doc("<p>The name of the language model used during transcription.</p>")
+  @as("LanguageModelName")
+  languageModelName: option<transcribeLanguageModelName>,
+  @ocaml.doc("<p>Lists the PII entity types you want to identify or redact. To specify entity types, you must enable <code>ContentIdentificationType</code> or <code>ContentRedactionType</code>.</p>
+        <p>
+            <code>PIIEntityTypes</code> must be comma-separated. The available values are: 
+            <code>BANK_ACCOUNT_NUMBER</code>, <code>BANK_ROUTING, CREDIT_DEBIT_NUMBER</code>, <code>CREDIT_DEBIT_CVV</code>, <code>CREDIT_DEBIT_EXPIRY</code>, <code>PIN</code>, <code>EMAIL</code>, 
+            <code>ADDRESS</code>, <code>NAME</code>, <code>PHONE</code>, <code>SSN</code>, and <code>ALL</code>.</p>
+        
+        <p>
+            <code>PiiEntityTypes</code> is an optional parameter with a default value of <code>ALL</code>.</p>")
+  @as("PiiEntityTypes")
+  piiEntityTypes: option<transcribePiiEntityTypes>,
+  @ocaml.doc(
+    "<p>Set this field to <code>PII</code> to redact personally identifiable information in the transcription output. Content redaction is performed only upon complete transcription of the audio segments.</p>"
+  )
+  @as("ContentRedactionType")
+  contentRedactionType: option<transcribeContentRedactionType>,
+  @ocaml.doc(
+    "<p>Set this field to <code>PII</code> to identify personally identifiable information in the transcription output.</p>"
+  )
+  @as("ContentIdentificationType")
+  contentIdentificationType: option<transcribeContentIdentificationType>,
+  @ocaml.doc(
+    "<p>The stabity level of a partial results transcription. Determines how stable you want the transcription results to be. A higher level means the transcription results are less likely to change.</p>"
+  )
+  @as("PartialResultsStability")
+  partialResultsStability: option<transcribePartialResultsStability>,
+  @ocaml.doc(
+    "<p>Generates partial transcription results that are less likely to change as meeting attendees speak. It does so by only allowing the last few words from the partial results to change.</p>"
+  )
+  @as("EnablePartialResultsStabilization")
+  enablePartialResultsStabilization: option<boolean_>,
+  @ocaml.doc(
+    "<p>The AWS Region passed to Amazon Transcribe. If you don't specify a Region, Amazon Chime uses the meeting's Region.</p>"
+  )
+  @as("Region")
+  region: option<transcribeRegion>,
+  @ocaml.doc("<p>The name of the vocabulary passed to Amazon Transcribe.</p>") @as("VocabularyName")
+  vocabularyName: option<string_>,
+  @ocaml.doc("<p>The name of the vocabulary filter passed to Amazon Transcribe.</p>")
+  @as("VocabularyFilterName")
+  vocabularyFilterName: option<string_>,
+  @ocaml.doc("<p>The filtering method passed to Amazon Transcribe.</p>")
+  @as("VocabularyFilterMethod")
+  vocabularyFilterMethod: option<transcribeVocabularyFilterMethod>,
+  @ocaml.doc("<p>The language code specified for the Amazon Transcribe engine.</p>")
+  @as("LanguageCode")
+  languageCode: transcribeLanguageCode,
+}
+@ocaml.doc("<p>Settings specific to the Amazon Transcribe Medical engine.</p>")
+type engineTranscribeMedicalSettings = {
+  @ocaml.doc(
+    "<p>Set this field to <code>PHI</code> to identify personal health information in the transcription output.</p>"
+  )
+  @as("ContentIdentificationType")
+  contentIdentificationType: option<transcribeMedicalContentIdentificationType>,
+  @ocaml.doc(
+    "<p>The AWS Region passed to Amazon Transcribe Medical. If you don't specify a Region, Amazon Chime uses the meeting's Region.</p>"
+  )
+  @as("Region")
+  region: option<transcribeMedicalRegion>,
+  @ocaml.doc("<p>The name of the vocabulary passed to Amazon Transcribe Medical.</p>")
+  @as("VocabularyName")
+  vocabularyName: option<string_>,
+  @ocaml.doc("<p>The type of transcription.</p>") @as("Type") type_: transcribeMedicalType,
+  @ocaml.doc("<p>The specialty specified for the Amazon Transcribe Medical engine.</p>")
+  @as("Specialty")
+  specialty: transcribeMedicalSpecialty,
+  @ocaml.doc("<p>The language code specified for the Amazon Transcribe Medical engine.</p>")
+  @as("LanguageCode")
+  languageCode: transcribeMedicalLanguageCode,
 }
 type e164PhoneNumberList = array<e164PhoneNumber>
 @ocaml.doc(
@@ -558,6 +736,13 @@ type conversationRetentionSettings = {
   @as("RetentionDays")
   retentionDays: option<retentionDays>,
 }
+@ocaml.doc("<p>The content artifact object.</p>")
+type contentArtifactsConfiguration = {
+  @ocaml.doc("<p>The MUX type of the artifact configuration.</p>") @as("MuxType")
+  muxType: option<contentMuxType>,
+  @ocaml.doc("<p>Indicates whether the content artifact is enabled or disabled.</p>") @as("State")
+  state: artifactsState,
+}
 @ocaml.doc("<p>Summary of the details of a <code>Channel</code>.</p>")
 type channelSummary = {
   @ocaml.doc("<p>The time at which the last message in a channel was sent.</p>")
@@ -608,12 +793,18 @@ type bot = {
 }
 @ocaml.doc("<p>A list of failed member ARNs, error codes, and error messages.</p>")
 type batchCreateChannelMembershipError = {
-  @ocaml.doc("<p>The error message. </p>") @as("ErrorMessage") errorMessage: option<string_>,
+  @ocaml.doc("<p>The error message.</p>") @as("ErrorMessage") errorMessage: option<string_>,
   @ocaml.doc("<p>The error code.</p>") @as("ErrorCode") errorCode: option<errorCode>,
   @ocaml.doc("<p>The ARN of the member that the service couldn't add.</p>") @as("MemberArn")
   memberArn: option<chimeArn>,
 }
+@ocaml.doc("<p>The audio artifact configuration object.</p>")
+type audioArtifactsConfiguration = {
+  @ocaml.doc("<p>The MUX type of the audio artifact configuration object.</p>") @as("MuxType")
+  muxType: audioMuxType,
+}
 type attendeeTagKeyList = array<tagKey>
+type attendeeIdList = array<guidString>
 @ocaml.doc("<p>
 An Amazon Chime SDK meeting attendee. Includes a unique 
 <code>AttendeeId</code>
@@ -717,13 +908,11 @@ type alexaForBusinessMetadata = {
   isAlexaForBusinessEnabled: option<boolean_>,
 }
 @ocaml.doc("<p>Settings related to the Amazon Chime account. This includes settings that start or stop
-            remote control of shared screens, or start or stop the dial-out option in the Amazon
-            Chime web application. For more information about these settings, see <a href=\"https://docs.aws.amazon.com/chime/latest/ag/policies.html\">Use the Policies
-                Page</a> in the <i>Amazon Chime Administration Guide</i>.</p>")
+            remote control of shared screens, or start or stop the dial-out option in the Amazon Chime web application. For more information about these settings, see 
+    <a href=\"https://docs.aws.amazon.com/chime/latest/ag/policies.html\">Use the Policies Page</a> in the <i>Amazon Chime Administration Guide</i>.</p>")
 type accountSettings = {
-  @ocaml.doc("<p>Setting that allows meeting participants to choose the <b>Call me at a
-                phone number</b> option. For more information, see <a href=\"https://docs.aws.amazon.com/chime/latest/ug/chime-join-meeting.html\">Join a Meeting
-                without the Amazon Chime App</a>.</p>")
+  @ocaml.doc("<p>Setting that allows meeting participants to choose the <b>Call me at a phone number</b> option. For more information, see 
+    <a href=\"https://docs.aws.amazon.com/chime/latest/ug/chime-join-meeting.html\">Join a Meeting without the Amazon Chime App</a>.</p>")
   @as("EnableDialOut")
   enableDialOut: option<boolean_>,
   @ocaml.doc(
@@ -782,6 +971,17 @@ type updateUserRequestItem = {
   @ocaml.doc("<p>The user ID.</p>") @as("UserId") userId: nonEmptyString,
 }
 type updatePhoneNumberRequestItemList = array<updatePhoneNumberRequestItem>
+@ocaml.doc(
+  "<p>The configuration for the current transcription operation. Must contain <code>EngineTranscribeSettings</code> or <code>EngineTranscribeMedicalSettings</code>.</p>"
+)
+type transcriptionConfiguration = {
+  @ocaml.doc("<p>The transcription configuration settings passed to Amazon Transcribe Medical.</p>")
+  @as("EngineTranscribeMedicalSettings")
+  engineTranscribeMedicalSettings: option<engineTranscribeMedicalSettings>,
+  @ocaml.doc("<p>The transcription configuration settings passed to Amazon Transcribe.</p>")
+  @as("EngineTranscribeSettings")
+  engineTranscribeSettings: option<engineTranscribeSettings>,
+}
 @ocaml.doc("<p>Termination settings enable your SIP hosts to make outbound calls using your Amazon Chime
             Voice Connector.</p>")
 type termination = {
@@ -808,6 +1008,17 @@ type streamingNotificationTargetList = array<streamingNotificationTarget>
 type sipRuleTargetApplicationList = array<sipRuleTargetApplication>
 type sipMediaApplicationEndpointList = array<sipMediaApplicationEndpoint>
 type signinDelegateGroupList = array<signinDelegateGroup>
+@ocaml.doc(
+  "<p>The video streams to capture for a specified media capture pipeline. The total number of video streams can't exceed 25.</p>"
+)
+type selectedVideoStreams = {
+  @ocaml.doc("<p>The external user IDs of the streams selected for a media capture pipeline.</p>")
+  @as("ExternalUserIds")
+  externalUserIds: option<externalUserIdList>,
+  @ocaml.doc("<p>The attendee IDs of the streams selected for a media capture pipeline. </p>")
+  @as("AttendeeIds")
+  attendeeIds: option<attendeeIdList>,
+}
 @ocaml.doc("<p>The room membership details.</p>")
 type roomMembership = {
   @ocaml.doc("<p>The room membership update timestamp, in ISO 8601 format.</p>")
@@ -900,7 +1111,8 @@ type channelModerator = {
 }
 @ocaml.doc("<p>Summary of the details of a moderated channel.</p>")
 type channelModeratedByAppInstanceUserSummary = {
-  @as("ChannelSummary") channelSummary: option<channelSummary>,
+  @ocaml.doc("<p>Summary of the details of a <code>Channel</code>.</p>") @as("ChannelSummary")
+  channelSummary: option<channelSummary>,
 }
 @ocaml.doc("<p>Summary of the messages in a <code>Channel</code>.</p>")
 type channelMessageSummary = {
@@ -943,7 +1155,6 @@ type channelMembershipSummary = {
 }
 @ocaml.doc("<p>Summary of the channel membership details of an <code>AppInstanceUser</code>.</p>")
 type channelMembershipForAppInstanceUserSummary = {
-  @ocaml.doc("<p>Returns the channel membership data for an <code>AppInstance</code>.</p>")
   @as("AppInstanceUserMembershipSummary")
   appInstanceUserMembershipSummary: option<appInstanceUserMembershipSummary>,
   @as("ChannelSummary") channelSummary: option<channelSummary>,
@@ -1003,6 +1214,15 @@ type batchCreateChannelMembershipErrors = array<batchCreateChannelMembershipErro
 type batchCreateAttendeeErrorList = array<createAttendeeError>
 type attendeeTagList = array<tag>
 type attendeeList = array<attendee>
+@ocaml.doc("<p>The configuration for the artifacts.</p>")
+type artifactsConfiguration = {
+  @ocaml.doc("<p>The configuration for the content artifacts.</p>") @as("Content")
+  content: contentArtifactsConfiguration,
+  @ocaml.doc("<p>The configuration for the video artifacts.</p>") @as("Video")
+  video: videoArtifactsConfiguration,
+  @ocaml.doc("<p>The configuration for the audio artifacts.</p>") @as("Audio")
+  audio: audioArtifactsConfiguration,
+}
 type appInstanceUserList = array<appInstanceUserSummary>
 type appInstanceStreamingConfigurationList = array<appInstanceStreamingConfiguration>
 @ocaml.doc("<p>The details of the data-retention settings for an <code>AppInstance</code>.</p>")
@@ -1033,6 +1253,9 @@ type appInstanceAdmin = {
             your group. This creates a fault tolerant mechanism for fallback in case of availability
             events.</p>")
 type voiceConnectorGroup = {
+  @ocaml.doc("<p>The ARN of the specified Amazon Chime Voice Connector group.</p>")
+  @as("VoiceConnectorGroupArn")
+  voiceConnectorGroupArn: option<nonEmptyString>,
   @ocaml.doc(
     "<p>The updated Amazon Chime Voice Connector group time stamp, in ISO 8601 format.</p>"
   )
@@ -1064,6 +1287,14 @@ type streamingConfiguration = {
   @ocaml.doc("<p>The retention period, in hours, for the Amazon Kinesis data.</p>")
   @as("DataRetentionInHours")
   dataRetentionInHours: dataRetentionInHours,
+}
+@ocaml.doc("<p>Source configuration for a specified media capture pipeline.</p>")
+type sourceConfiguration = {
+  @ocaml.doc(
+    "<p>The selected video streams to capture for a specified media capture pipeline. The number of video streams can't exceed 25.</p>"
+  )
+  @as("SelectedVideoStreams")
+  selectedVideoStreams: option<selectedVideoStreams>,
 }
 @ocaml.doc(
   "<p>The SIP rule details, including name, triggers, and target applications. An AWS account can have multiple SIP rules.</p>"
@@ -1208,14 +1439,17 @@ type phoneNumber = {
   @ocaml.doc("<p>The phone number ID.</p>") @as("PhoneNumberId") phoneNumberId: option<string_>,
 }
 @ocaml.doc("<p>Origination settings enable your SIP hosts to receive inbound calls using your Amazon Chime
-            Voice Connector.</p>")
+            Voice Connector.</p>
+         <note>
+            <p>The parameters listed below are not required, but you must use at least one. </p>
+         </note>")
 type origination = {
   @ocaml.doc("<p>When origination settings are disabled, inbound calls are not enabled for your Amazon Chime
-            Voice Connector.</p>")
+            Voice Connector. This parameter is not required, but you must specify this parameter or <code>Routes</code>.</p>")
   @as("Disabled")
   disabled: option<boolean_>,
   @ocaml.doc("<p>The call distribution properties defined for your SIP hosts. Valid range: Minimum value of 1.
-            Maximum value of 20.</p>")
+    Maximum value of 20. This parameter is not required, but you must specify this parameter or <code>Disabled</code>.</p>")
   @as("Routes")
   routes: option<originationRouteList>,
 }
@@ -1249,9 +1483,8 @@ type channelMembershipForAppInstanceUserSummaryList = array<
   channelMembershipForAppInstanceUserSummary,
 >
 type channelBanSummaryList = array<channelBanSummary>
-@ocaml.doc(
-  "<p>The membership information, including member ARNs, the channel ARN, and membership types.</p>"
-)
+@ocaml.doc("<p>The membership information, including member ARNs, the channel ARN, and membership
+         types.</p>")
 type batchChannelMemberships = {
   @ocaml.doc("<p>The ARN of the channel to which you're adding users.</p>") @as("ChannelArn")
   channelArn: option<chimeArn>,
@@ -1259,7 +1492,8 @@ type batchChannelMemberships = {
   members: option<members>,
   @ocaml.doc("<p>The membership types set for the channel users.</p>") @as("Type")
   type_: option<channelMembershipType>,
-  @as("InvitedBy") invitedBy: option<identity>,
+  @ocaml.doc("<p>The identifier of the member who invited another member.</p>") @as("InvitedBy")
+  invitedBy: option<identity>,
 }
 type appInstanceAdminList = array<appInstanceAdminSummary>
 @ocaml.doc(
@@ -1269,6 +1503,8 @@ type account = {
   @ocaml.doc("<p>The sign-in delegate groups associated with the account.</p>")
   @as("SigninDelegateGroups")
   signinDelegateGroups: option<signinDelegateGroupList>,
+  @ocaml.doc("<p>The status of the account.</p>") @as("AccountStatus")
+  accountStatus: option<accountStatus>,
   @ocaml.doc("<p>Supported licenses for the Amazon Chime account.</p>") @as("SupportedLicenses")
   supportedLicenses: option<licenseList>,
   @ocaml.doc("<p>The default license for the Amazon Chime account.</p>") @as("DefaultLicense")
@@ -1276,8 +1512,8 @@ type account = {
   @ocaml.doc("<p>The Amazon Chime account creation timestamp, in ISO 8601 format.</p>")
   @as("CreatedTimestamp")
   createdTimestamp: option<iso8601Timestamp>,
-  @ocaml.doc("<p>The Amazon Chime account type. For more information about different account types, see <a href=\"https://docs.aws.amazon.com/chime/latest/ag/manage-chime-account.html\">Managing Your
-                Amazon Chime Accounts</a> in the <i>Amazon Chime Administration
+  @ocaml.doc("<p>The Amazon Chime account type. For more information about different account types, see 
+    <a href=\"https://docs.aws.amazon.com/chime/latest/ag/manage-chime-account.html\">Managing Your Amazon Chime Accounts</a> in the <i>Amazon Chime Administration
                 Guide</i>.</p>")
   @as("AccountType")
   accountType: option<accountType>,
@@ -1293,12 +1529,58 @@ type phoneNumberOrderList = array<phoneNumberOrder>
 type phoneNumberList = array<phoneNumber>
 type createMeetingWithAttendeesRequestItemList = array<createAttendeeRequestItem>
 type createAttendeeRequestItemList = array<createAttendeeRequestItem>
+@ocaml.doc(
+  "<p>The configuration object of the Amazon Chime SDK meeting for a specified media capture pipeline. <code>SourceType</code> must be <code>ChimeSdkMeeting</code>.</p>"
+)
+type chimeSdkMeetingConfiguration = {
+  @ocaml.doc("<p>The configuration for the artifacts in an Amazon Chime SDK meeting.</p>")
+  @as("ArtifactsConfiguration")
+  artifactsConfiguration: option<artifactsConfiguration>,
+  @ocaml.doc("<p>The source configuration for a specified media capture pipline.</p>")
+  @as("SourceConfiguration")
+  sourceConfiguration: option<sourceConfiguration>,
+}
 type accountList = array<account>
+@ocaml.doc(
+  "<p>A media capture pipeline object consisting of an ID, source type, source ARN, a sink type, a sink ARN, and a configuration object.</p>"
+)
+type mediaCapturePipeline = {
+  @ocaml.doc(
+    "<p>The configuration for a specified media capture pipeline. <code>SourceType</code> must be <code>ChimeSdkMeeting</code>.</p>"
+  )
+  @as("ChimeSdkMeetingConfiguration")
+  chimeSdkMeetingConfiguration: option<chimeSdkMeetingConfiguration>,
+  @ocaml.doc("<p>The time at which the capture pipeline was updated, in ISO 8601 format.</p>")
+  @as("UpdatedTimestamp")
+  updatedTimestamp: option<iso8601Timestamp>,
+  @ocaml.doc("<p>The time at which the capture pipeline was created, in ISO 8601 format.</p>")
+  @as("CreatedTimestamp")
+  createdTimestamp: option<iso8601Timestamp>,
+  @ocaml.doc("<p>ARN of the destination to which the media artifacts are saved.</p>") @as("SinkArn")
+  sinkArn: option<arn>,
+  @ocaml.doc(
+    "<p>Destination type to which the media artifacts are saved. You must use an S3 Bucket.</p>"
+  )
+  @as("SinkType")
+  sinkType: option<mediaPipelineSinkType>,
+  @ocaml.doc("<p>The status of the media capture pipeline.</p>") @as("Status")
+  status: option<mediaPipelineStatus>,
+  @ocaml.doc("<p>ARN of the source from which the media artifacts will be saved.</p>")
+  @as("SourceArn")
+  sourceArn: option<arn>,
+  @ocaml.doc(
+    "<p>Source type from which media artifacts are saved. You must use <code>ChimeMeeting</code>.</p>"
+  )
+  @as("SourceType")
+  sourceType: option<mediaPipelineSourceType>,
+  @ocaml.doc("<p>The ID of a media capture pipeline.</p>") @as("MediaPipelineId")
+  mediaPipelineId: option<guidString>,
+}
+type mediaCapturePipelineList = array<mediaCapturePipeline>
 @ocaml.doc("<p>The Amazon Chime API (application programming interface) is designed for developers to
             perform key tasks, such as creating and managing Amazon Chime accounts, users, and Voice
             Connectors. This guide provides detailed information about the Amazon Chime API,
-            including operations, types, inputs and outputs, and error codes. It also includes some
-            server-side API actions to use with the Amazon Chime SDK. For more information about the
+            including operations, types, inputs and outputs, and error codes. It also includes API actions for use with the Amazon Chime SDK, which developers use to build their own communication applications. For more information about the
             Amazon Chime SDK, see <a href=\"https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html\">
                 Using the Amazon Chime SDK
             </a> in the <i>Amazon Chime Developer Guide</i>.</p>
@@ -1340,7 +1622,7 @@ module UpdatePhoneNumberSettings = {
     @ocaml.doc("<p>The default outbound calling name for the account.</p>") @as("CallingName")
     callingName: callingName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-chime") @new
   external new: request => t = "UpdatePhoneNumberSettingsCommand"
   let make = (~callingName, ()) => new({callingName: callingName})
@@ -1452,13 +1734,27 @@ module UpdateAppInstance = {
     appInstanceArn: chimeArn,
   }
   type response = {
-    @ocaml.doc("<p>The ARN of the <code>AppInstance</code>.</p>") @as("AppInstanceArn")
+    @ocaml.doc("<p>The ARN of the <code>AppInstance</code>. </p>") @as("AppInstanceArn")
     appInstanceArn: option<chimeArn>,
   }
   @module("@aws-sdk/client-chime") @new external new: request => t = "UpdateAppInstanceCommand"
   let make = (~name, ~appInstanceArn, ~metadata=?, ()) =>
     new({metadata: metadata, name: name, appInstanceArn: appInstanceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module StopMeetingTranscription = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The unique ID of the meeting for which you stop transcription.</p>")
+    @as("MeetingId")
+    meetingId: guidString,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-chime") @new
+  external new: request => t = "StopMeetingTranscriptionCommand"
+  let make = (~meetingId, ()) => new({meetingId: meetingId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module SendChannelMessage = {
@@ -1518,7 +1814,7 @@ module RedactRoomMessage = {
     @ocaml.doc("<p>The room ID.</p>") @as("RoomId") roomId: nonEmptyString,
     @ocaml.doc("<p>The Amazon Chime account ID.</p>") @as("AccountId") accountId: nonEmptyString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-chime") @new external new: request => t = "RedactRoomMessageCommand"
   let make = (~messageId, ~roomId, ~accountId, ()) =>
     new({messageId: messageId, roomId: roomId, accountId: accountId})
@@ -1532,7 +1828,7 @@ module RedactConversationMessage = {
     @ocaml.doc("<p>The conversation ID.</p>") @as("ConversationId") conversationId: nonEmptyString,
     @ocaml.doc("<p>The Amazon Chime account ID.</p>") @as("AccountId") accountId: nonEmptyString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-chime") @new
   external new: request => t = "RedactConversationMessageCommand"
   let make = (~messageId, ~conversationId, ~accountId, ()) =>
@@ -1571,7 +1867,7 @@ module LogoutUser = {
     @ocaml.doc("<p>The user ID.</p>") @as("UserId") userId: nonEmptyString,
     @ocaml.doc("<p>The Amazon Chime account ID.</p>") @as("AccountId") accountId: nonEmptyString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-chime") @new external new: request => t = "LogoutUserCommand"
   let make = (~userId, ~accountId, ()) => new({userId: userId, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1579,7 +1875,7 @@ module LogoutUser = {
 
 module GetPhoneNumberSettings = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("<p>The updated outbound calling name timestamp, in ISO 8601 format.</p>")
     @as("CallingNameUpdatedTimestamp")
@@ -1587,8 +1883,8 @@ module GetPhoneNumberSettings = {
     @ocaml.doc("<p>The default outbound calling name for the account.</p>") @as("CallingName")
     callingName: option<callingName>,
   }
-  @module("@aws-sdk/client-chime") @new external new: unit => t = "GetPhoneNumberSettingsCommand"
-  let make = () => new()
+  @module("@aws-sdk/client-chime") @new external new: request => t = "GetPhoneNumberSettingsCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1598,7 +1894,7 @@ module DisassociatePhoneNumberFromUser = {
     @ocaml.doc("<p>The user ID.</p>") @as("UserId") userId: string_,
     @ocaml.doc("<p>The Amazon Chime account ID.</p>") @as("AccountId") accountId: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-chime") @new
   external new: request => t = "DisassociatePhoneNumberFromUserCommand"
   let make = (~userId, ~accountId, ()) => new({userId: userId, accountId: accountId})
@@ -1611,7 +1907,7 @@ module DeleteVoiceConnectorTermination = {
     @ocaml.doc("<p>The Amazon Chime Voice Connector ID.</p>") @as("VoiceConnectorId")
     voiceConnectorId: nonEmptyString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-chime") @new
   external new: request => t = "DeleteVoiceConnectorTerminationCommand"
   let make = (~voiceConnectorId, ()) => new({voiceConnectorId: voiceConnectorId})
@@ -1624,7 +1920,7 @@ module DeleteVoiceConnectorStreamingConfiguration = {
     @ocaml.doc("<p>The Amazon Chime Voice Connector ID.</p>") @as("VoiceConnectorId")
     voiceConnectorId: nonEmptyString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-chime") @new
   external new: request => t = "DeleteVoiceConnectorStreamingConfigurationCommand"
   let make = (~voiceConnectorId, ()) => new({voiceConnectorId: voiceConnectorId})
@@ -1637,7 +1933,7 @@ module DeleteVoiceConnectorProxy = {
     @ocaml.doc("<p>The Amazon Chime Voice Connector ID.</p>") @as("VoiceConnectorId")
     voiceConnectorId: nonEmptyString128,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-chime") @new
   external new: request => t = "DeleteVoiceConnectorProxyCommand"
   let make = (~voiceConnectorId, ()) => new({voiceConnectorId: voiceConnectorId})
@@ -1650,7 +1946,7 @@ module DeleteVoiceConnectorOrigination = {
     @ocaml.doc("<p>The Amazon Chime Voice Connector ID.</p>") @as("VoiceConnectorId")
     voiceConnectorId: nonEmptyString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-chime") @new
   external new: request => t = "DeleteVoiceConnectorOriginationCommand"
   let make = (~voiceConnectorId, ()) => new({voiceConnectorId: voiceConnectorId})
@@ -1663,7 +1959,7 @@ module DeleteVoiceConnectorGroup = {
     @ocaml.doc("<p>The Amazon Chime Voice Connector group ID.</p>") @as("VoiceConnectorGroupId")
     voiceConnectorGroupId: nonEmptyString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-chime") @new
   external new: request => t = "DeleteVoiceConnectorGroupCommand"
   let make = (~voiceConnectorGroupId, ()) => new({voiceConnectorGroupId: voiceConnectorGroupId})
@@ -1676,7 +1972,7 @@ module DeleteVoiceConnectorEmergencyCallingConfiguration = {
     @ocaml.doc("<p>The Amazon Chime Voice Connector ID.</p>") @as("VoiceConnectorId")
     voiceConnectorId: nonEmptyString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-chime") @new
   external new: request => t = "DeleteVoiceConnectorEmergencyCallingConfigurationCommand"
   let make = (~voiceConnectorId, ()) => new({voiceConnectorId: voiceConnectorId})
@@ -1689,7 +1985,7 @@ module DeleteVoiceConnector = {
     @ocaml.doc("<p>The Amazon Chime Voice Connector ID.</p>") @as("VoiceConnectorId")
     voiceConnectorId: nonEmptyString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-chime") @new external new: request => t = "DeleteVoiceConnectorCommand"
   let make = (~voiceConnectorId, ()) => new({voiceConnectorId: voiceConnectorId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1698,7 +1994,7 @@ module DeleteVoiceConnector = {
 module DeleteSipRule = {
   type t
   type request = {@ocaml.doc("<p>The SIP rule ID.</p>") @as("SipRuleId") sipRuleId: nonEmptyString}
-
+  type response = {.}
   @module("@aws-sdk/client-chime") @new external new: request => t = "DeleteSipRuleCommand"
   let make = (~sipRuleId, ()) => new({sipRuleId: sipRuleId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1710,7 +2006,7 @@ module DeleteSipMediaApplication = {
     @ocaml.doc("<p>The SIP media application ID.</p>") @as("SipMediaApplicationId")
     sipMediaApplicationId: nonEmptyString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-chime") @new
   external new: request => t = "DeleteSipMediaApplicationCommand"
   let make = (~sipMediaApplicationId, ()) => new({sipMediaApplicationId: sipMediaApplicationId})
@@ -1725,7 +2021,7 @@ module DeleteRoomMembership = {
     @ocaml.doc("<p>The room ID.</p>") @as("RoomId") roomId: nonEmptyString,
     @ocaml.doc("<p>The Amazon Chime account ID.</p>") @as("AccountId") accountId: nonEmptyString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-chime") @new external new: request => t = "DeleteRoomMembershipCommand"
   let make = (~memberId, ~roomId, ~accountId, ()) =>
     new({memberId: memberId, roomId: roomId, accountId: accountId})
@@ -1738,7 +2034,7 @@ module DeleteRoom = {
     @ocaml.doc("<p>The chat room ID.</p>") @as("RoomId") roomId: nonEmptyString,
     @ocaml.doc("<p>The Amazon Chime account ID.</p>") @as("AccountId") accountId: nonEmptyString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-chime") @new external new: request => t = "DeleteRoomCommand"
   let make = (~roomId, ~accountId, ()) => new({roomId: roomId, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1752,7 +2048,7 @@ module DeleteProxySession = {
     @ocaml.doc("<p>The Amazon Chime voice connector ID.</p>") @as("VoiceConnectorId")
     voiceConnectorId: nonEmptyString128,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-chime") @new external new: request => t = "DeleteProxySessionCommand"
   let make = (~proxySessionId, ~voiceConnectorId, ()) =>
     new({proxySessionId: proxySessionId, voiceConnectorId: voiceConnectorId})
@@ -1764,7 +2060,7 @@ module DeletePhoneNumber = {
   type request = {
     @ocaml.doc("<p>The phone number ID.</p>") @as("PhoneNumberId") phoneNumberId: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-chime") @new external new: request => t = "DeletePhoneNumberCommand"
   let make = (~phoneNumberId, ()) => new({phoneNumberId: phoneNumberId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1775,9 +2071,22 @@ module DeleteMeeting = {
   type request = {
     @ocaml.doc("<p>The Amazon Chime SDK meeting ID.</p>") @as("MeetingId") meetingId: guidString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-chime") @new external new: request => t = "DeleteMeetingCommand"
   let make = (~meetingId, ()) => new({meetingId: meetingId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module DeleteMediaCapturePipeline = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The ID of the media capture pipeline being deleted. </p>") @as("MediaPipelineId")
+    mediaPipelineId: guidString,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-chime") @new
+  external new: request => t = "DeleteMediaCapturePipelineCommand"
+  let make = (~mediaPipelineId, ()) => new({mediaPipelineId: mediaPipelineId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -1787,7 +2096,7 @@ module DeleteEventsConfiguration = {
     @ocaml.doc("<p>The bot ID.</p>") @as("BotId") botId: nonEmptyString,
     @ocaml.doc("<p>The Amazon Chime account ID.</p>") @as("AccountId") accountId: nonEmptyString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-chime") @new
   external new: request => t = "DeleteEventsConfigurationCommand"
   let make = (~botId, ~accountId, ()) => new({botId: botId, accountId: accountId})
@@ -1804,7 +2113,7 @@ module DeleteChannelModerator = {
     channelModeratorArn: chimeArn,
     @ocaml.doc("<p>The ARN of the channel.</p>") @as("ChannelArn") channelArn: chimeArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-chime") @new external new: request => t = "DeleteChannelModeratorCommand"
   let make = (~channelModeratorArn, ~channelArn, ~chimeBearer=?, ()) =>
     new({
@@ -1824,7 +2133,7 @@ module DeleteChannelMessage = {
     @ocaml.doc("<p>The ID of the message being deleted.</p>") @as("MessageId") messageId: messageId,
     @ocaml.doc("<p>The ARN of the channel.</p>") @as("ChannelArn") channelArn: chimeArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-chime") @new external new: request => t = "DeleteChannelMessageCommand"
   let make = (~messageId, ~channelArn, ~chimeBearer=?, ()) =>
     new({chimeBearer: chimeBearer, messageId: messageId, channelArn: channelArn})
@@ -1844,7 +2153,7 @@ module DeleteChannelMembership = {
     @as("ChannelArn")
     channelArn: chimeArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-chime") @new
   external new: request => t = "DeleteChannelMembershipCommand"
   let make = (~memberArn, ~channelArn, ~chimeBearer=?, ()) =>
@@ -1867,7 +2176,7 @@ module DeleteChannelBan = {
     @as("ChannelArn")
     channelArn: chimeArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-chime") @new external new: request => t = "DeleteChannelBanCommand"
   let make = (~memberArn, ~channelArn, ~chimeBearer=?, ()) =>
     new({chimeBearer: chimeBearer, memberArn: memberArn, channelArn: channelArn})
@@ -1883,7 +2192,7 @@ module DeleteChannel = {
     @ocaml.doc("<p>The ARN of the channel being deleted.</p>") @as("ChannelArn")
     channelArn: chimeArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-chime") @new external new: request => t = "DeleteChannelCommand"
   let make = (~channelArn, ~chimeBearer=?, ()) =>
     new({chimeBearer: chimeBearer, channelArn: channelArn})
@@ -1896,7 +2205,7 @@ module DeleteAttendee = {
     @ocaml.doc("<p>The Amazon Chime SDK attendee ID.</p>") @as("AttendeeId") attendeeId: guidString,
     @ocaml.doc("<p>The Amazon Chime SDK meeting ID.</p>") @as("MeetingId") meetingId: guidString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-chime") @new external new: request => t = "DeleteAttendeeCommand"
   let make = (~attendeeId, ~meetingId, ()) => new({attendeeId: attendeeId, meetingId: meetingId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1908,7 +2217,7 @@ module DeleteAppInstanceUser = {
     @ocaml.doc("<p>The ARN of the user request being deleted.</p>") @as("AppInstanceUserArn")
     appInstanceUserArn: chimeArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-chime") @new external new: request => t = "DeleteAppInstanceUserCommand"
   let make = (~appInstanceUserArn, ()) => new({appInstanceUserArn: appInstanceUserArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1921,7 +2230,7 @@ module DeleteAppInstanceStreamingConfigurations = {
     @as("AppInstanceArn")
     appInstanceArn: chimeArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-chime") @new
   external new: request => t = "DeleteAppInstanceStreamingConfigurationsCommand"
   let make = (~appInstanceArn, ()) => new({appInstanceArn: appInstanceArn})
@@ -1937,7 +2246,7 @@ module DeleteAppInstanceAdmin = {
     @as("AppInstanceAdminArn")
     appInstanceAdminArn: chimeArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-chime") @new external new: request => t = "DeleteAppInstanceAdminCommand"
   let make = (~appInstanceArn, ~appInstanceAdminArn, ()) =>
     new({appInstanceArn: appInstanceArn, appInstanceAdminArn: appInstanceAdminArn})
@@ -1950,7 +2259,7 @@ module DeleteAppInstance = {
     @ocaml.doc("<p>The ARN of the <code>AppInstance</code>.</p>") @as("AppInstanceArn")
     appInstanceArn: chimeArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-chime") @new external new: request => t = "DeleteAppInstanceCommand"
   let make = (~appInstanceArn, ()) => new({appInstanceArn: appInstanceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1961,7 +2270,7 @@ module DeleteAccount = {
   type request = {
     @ocaml.doc("<p>The Amazon Chime account ID.</p>") @as("AccountId") accountId: nonEmptyString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-chime") @new external new: request => t = "DeleteAccountCommand"
   let make = (~accountId, ()) => new({accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1970,9 +2279,9 @@ module DeleteAccount = {
 module CreateMeetingDialOut = {
   type t
   type request = {
-    @ocaml.doc("<p>Token used by the Amazon Chime SDK attendee. Call the 
-    <a href=\"https://docs.aws.amazon.com/chime/latest/APIReference/API_CreateAttendee.html\">CreateAttendee</a> action to 
-    get a join token.</p>")
+    @ocaml.doc(
+      "<p>Token used by the Amazon Chime SDK attendee. Call the <a href=\"https://docs.aws.amazon.com/chime/latest/APIReference/API_CreateAttendee.html\">CreateAttendee</a> action to get a join token.</p>"
+    )
     @as("JoinToken")
     joinToken: joinTokenString,
     @ocaml.doc("<p>Phone number called when inviting someone to a meeting.</p>")
@@ -2006,7 +2315,7 @@ module AssociatePhoneNumberWithUser = {
     @ocaml.doc("<p>The user ID.</p>") @as("UserId") userId: string_,
     @ocaml.doc("<p>The Amazon Chime account ID.</p>") @as("AccountId") accountId: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-chime") @new
   external new: request => t = "AssociatePhoneNumberWithUserCommand"
   let make = (~e164PhoneNumber, ~userId, ~accountId, ()) =>
@@ -2035,6 +2344,34 @@ module UpdateVoiceConnector = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module UpdateSipMediaApplicationCall = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>Arguments made available to the Lambda function as part of the <code>CALL_UPDATE_REQUESTED</code> event. Can contain 0-20 key-value pairs.</p>"
+    )
+    @as("Arguments")
+    arguments: smaupdateCallArgumentsMap,
+    @ocaml.doc("<p>The ID of the call transaction.</p>") @as("TransactionId")
+    transactionId: nonEmptyString,
+    @ocaml.doc("<p>The ID of the SIP media application handling the call.</p>")
+    @as("SipMediaApplicationId")
+    sipMediaApplicationId: nonEmptyString,
+  }
+  type response = {
+    @as("SipMediaApplicationCall") sipMediaApplicationCall: option<sipMediaApplicationCall>,
+  }
+  @module("@aws-sdk/client-chime") @new
+  external new: request => t = "UpdateSipMediaApplicationCallCommand"
+  let make = (~arguments, ~transactionId, ~sipMediaApplicationId, ()) =>
+    new({
+      arguments: arguments,
+      transactionId: transactionId,
+      sipMediaApplicationId: sipMediaApplicationId,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module UpdateRoom = {
   type t
   type request = {
@@ -2053,13 +2390,13 @@ module UpdateGlobalSettings = {
   type t
   type request = {
     @ocaml.doc("<p>The Amazon Chime Voice Connector settings.</p>") @as("VoiceConnector")
-    voiceConnector: voiceConnectorSettings,
+    voiceConnector: option<voiceConnectorSettings>,
     @ocaml.doc("<p>The Amazon Chime Business Calling settings.</p>") @as("BusinessCalling")
-    businessCalling: businessCallingSettings,
+    businessCalling: option<businessCallingSettings>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-chime") @new external new: request => t = "UpdateGlobalSettingsCommand"
-  let make = (~voiceConnector, ~businessCalling, ()) =>
+  let make = (~voiceConnector=?, ~businessCalling=?, ()) =>
     new({voiceConnector: voiceConnector, businessCalling: businessCalling})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
@@ -2087,7 +2424,7 @@ module UpdateAccountSettings = {
     accountSettings: accountSettings,
     @ocaml.doc("<p>The Amazon Chime account ID.</p>") @as("AccountId") accountId: nonEmptyString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-chime") @new external new: request => t = "UpdateAccountSettingsCommand"
   let make = (~accountSettings, ~accountId, ()) =>
     new({accountSettings: accountSettings, accountId: accountId})
@@ -2100,7 +2437,7 @@ module UntagResource = {
     @ocaml.doc("<p>The tag keys.</p>") @as("TagKeys") tagKeys: tagKeyList,
     @ocaml.doc("<p>The resource ARN.</p>") @as("ResourceARN") resourceARN: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-chime") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceARN, ()) => new({tagKeys: tagKeys, resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -2112,7 +2449,7 @@ module UntagMeeting = {
     @ocaml.doc("<p>The tag keys.</p>") @as("TagKeys") tagKeys: meetingTagKeyList,
     @ocaml.doc("<p>The Amazon Chime SDK meeting ID.</p>") @as("MeetingId") meetingId: guidString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-chime") @new external new: request => t = "UntagMeetingCommand"
   let make = (~tagKeys, ~meetingId, ()) => new({tagKeys: tagKeys, meetingId: meetingId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -2125,7 +2462,7 @@ module UntagAttendee = {
     @ocaml.doc("<p>The Amazon Chime SDK attendee ID.</p>") @as("AttendeeId") attendeeId: guidString,
     @ocaml.doc("<p>The Amazon Chime SDK meeting ID.</p>") @as("MeetingId") meetingId: guidString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-chime") @new external new: request => t = "UntagAttendeeCommand"
   let make = (~tagKeys, ~attendeeId, ~meetingId, ()) =>
     new({tagKeys: tagKeys, attendeeId: attendeeId, meetingId: meetingId})
@@ -2139,31 +2476,27 @@ module SearchAvailablePhoneNumbers = {
     nextToken: option<string_>,
     @ocaml.doc("<p>The maximum number of results to return in a single call.</p>") @as("MaxResults")
     maxResults: option<phoneNumberMaxResults>,
-    @ocaml.doc("<p>The phone number type used to filter results. Required for
-            non-US
-            numbers.</p>")
+    @ocaml.doc("<p>The phone number type used to filter results. Required for non-US numbers.</p>")
     @as("PhoneNumberType")
     phoneNumberType: option<phoneNumberType>,
-    @ocaml.doc("<p>The toll-free prefix that you use to filter results. Only applies to the
-            US.</p>")
+    @ocaml.doc(
+      "<p>The toll-free prefix that you use to filter results. Only applies to the US.</p>"
+    )
     @as("TollFreePrefix")
     tollFreePrefix: option<tollFreePrefix>,
-    @ocaml.doc("<p>The state used to filter results. Required only if you provide <code>City</code>. Only
-            applies to the
-            US.</p>")
+    @ocaml.doc(
+      "<p>The state used to filter results. Required only if you provide <code>City</code>. Only applies to the US.</p>"
+    )
     @as("State")
     state: option<string_>,
-    @ocaml.doc("<p>The country used to filter results. Defaults to the
-            US
-            Format: ISO 3166-1 alpha-2.</p>")
+    @ocaml.doc(
+      "<p>The country used to filter results. Defaults to the US Format: ISO 3166-1 alpha-2.</p>"
+    )
     @as("Country")
     country: option<alpha2CountryCode>,
-    @ocaml.doc("<p>The city used to filter results. Only applies to the
-            US.</p>")
-    @as("City")
+    @ocaml.doc("<p>The city used to filter results. Only applies to the US.</p>") @as("City")
     city: option<string_>,
-    @ocaml.doc("<p>The area code used to filter results. Only applies to the
-            US.</p>")
+    @ocaml.doc("<p>The area code used to filter results. Only applies to the US.</p>")
     @as("AreaCode")
     areaCode: option<string_>,
   }
@@ -2373,28 +2706,28 @@ module GetRoom = {
 
 module GetMessagingSessionEndpoint = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("<p>The endpoint returned in the response.</p>") @as("Endpoint")
     endpoint: option<messagingSessionEndpoint>,
   }
   @module("@aws-sdk/client-chime") @new
-  external new: unit => t = "GetMessagingSessionEndpointCommand"
-  let make = () => new()
+  external new: request => t = "GetMessagingSessionEndpointCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetGlobalSettings = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("<p>The Amazon Chime Voice Connector settings.</p>") @as("VoiceConnector")
     voiceConnector: option<voiceConnectorSettings>,
     @ocaml.doc("<p>The Amazon Chime Business Calling settings.</p>") @as("BusinessCalling")
     businessCalling: option<businessCallingSettings>,
   }
-  @module("@aws-sdk/client-chime") @new external new: unit => t = "GetGlobalSettingsCommand"
-  let make = () => new()
+  @module("@aws-sdk/client-chime") @new external new: request => t = "GetGlobalSettingsCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -2461,7 +2794,7 @@ module DisassociateSigninDelegateGroupsFromAccount = {
     groupNames: nonEmptyStringList,
     @ocaml.doc("<p>The Amazon Chime account ID.</p>") @as("AccountId") accountId: nonEmptyString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-chime") @new
   external new: request => t = "DisassociateSigninDelegateGroupsFromAccountCommand"
   let make = (~groupNames, ~accountId, ()) => new({groupNames: groupNames, accountId: accountId})
@@ -2512,7 +2845,7 @@ module DeleteVoiceConnectorTerminationCredentials = {
     @ocaml.doc("<p>The Amazon Chime Voice Connector ID.</p>") @as("VoiceConnectorId")
     voiceConnectorId: nonEmptyString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-chime") @new
   external new: request => t = "DeleteVoiceConnectorTerminationCredentialsCommand"
   let make = (~usernames, ~voiceConnectorId, ()) =>
@@ -2549,6 +2882,8 @@ The AWS Region in which the Amazon Chime Voice Connector is created. Default val
 module CreateSipMediaApplicationCall = {
   type t
   type request = {
+    @ocaml.doc("<p>The SIP headers added to an outbound call leg.</p>") @as("SipHeaders")
+    sipHeaders: option<sipHeadersMap>,
     @ocaml.doc("<p>The ID of the SIP media application.</p>") @as("SipMediaApplicationId")
     sipMediaApplicationId: nonEmptyString,
     @ocaml.doc("<p>The phone number that the service should call.</p>") @as("ToPhoneNumber")
@@ -2565,8 +2900,9 @@ module CreateSipMediaApplicationCall = {
   }
   @module("@aws-sdk/client-chime") @new
   external new: request => t = "CreateSipMediaApplicationCallCommand"
-  let make = (~sipMediaApplicationId, ~toPhoneNumber, ~fromPhoneNumber, ()) =>
+  let make = (~sipMediaApplicationId, ~toPhoneNumber, ~fromPhoneNumber, ~sipHeaders=?, ()) =>
     new({
+      sipHeaders: sipHeaders,
       sipMediaApplicationId: sipMediaApplicationId,
       toPhoneNumber: toPhoneNumber,
       fromPhoneNumber: fromPhoneNumber,
@@ -2620,9 +2956,11 @@ module CreateChannelMembership = {
     @ocaml.doc("<p>The <code>AppInstanceUserArn</code> of the user that makes the API call.</p>")
     @as("ChimeBearer")
     chimeBearer: option<chimeArn>,
-    @ocaml.doc("<p>The membership type of a user, <code>DEFAULT</code> or <code>HIDDEN</code>. Default members are always returned as part of 
-<code>ListChannelMemberships</code>. Hidden members are only returned if the type filter in <code>ListChannelMemberships</code> equals 
-<code>HIDDEN</code>. Otherwise hidden members are not returned. This is only supported by moderators.</p>")
+    @ocaml.doc("<p>The membership type of a user, <code>DEFAULT</code> or <code>HIDDEN</code>. Default
+         members are always returned as part of <code>ListChannelMemberships</code>. Hidden members
+         are only returned if the type filter in <code>ListChannelMemberships</code> equals
+            <code>HIDDEN</code>. Otherwise hidden members are not returned. This is only supported
+         by moderators.</p>")
     @as("Type")
     type_: channelMembershipType,
     @ocaml.doc("<p>The ARN of the member you want to add to the channel.</p>") @as("MemberArn")
@@ -2652,9 +2990,8 @@ module CreateChannelBan = {
     @ocaml.doc("<p>The ARN of the ban request.</p>") @as("ChannelArn") channelArn: chimeArn,
   }
   type response = {
-    @ocaml.doc(
-      "<p>The <code>ChannelArn</code> and <code>BannedIdentity</code> of the member in the ban response.</p>"
-    )
+    @ocaml.doc("<p>The <code>ChannelArn</code> and <code>BannedIdentity</code> of the member in the ban
+         response.</p>")
     @as("Member")
     member: option<identity>,
     @ocaml.doc("<p>The ARN of the response to the ban request.</p>") @as("ChannelArn")
@@ -2712,7 +3049,7 @@ module UpdateUserSettings = {
     @ocaml.doc("<p>The user ID.</p>") @as("UserId") userId: string_,
     @ocaml.doc("<p>The Amazon Chime account ID.</p>") @as("AccountId") accountId: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-chime") @new external new: request => t = "UpdateUserSettingsCommand"
   let make = (~userSettings, ~userId, ~accountId, ()) =>
     new({userSettings: userSettings, userId: userId, accountId: accountId})
@@ -2769,7 +3106,7 @@ module TagResource = {
     @ocaml.doc("<p>The tag key-value pairs.</p>") @as("Tags") tags: tagList_,
     @ocaml.doc("<p>The resource ARN.</p>") @as("ResourceARN") resourceARN: arn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-chime") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceARN, ()) => new({tags: tags, resourceARN: resourceARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -2781,7 +3118,7 @@ module TagMeeting = {
     @ocaml.doc("<p>The tag key-value pairs.</p>") @as("Tags") tags: meetingTagList,
     @ocaml.doc("<p>The Amazon Chime SDK meeting ID.</p>") @as("MeetingId") meetingId: guidString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-chime") @new external new: request => t = "TagMeetingCommand"
   let make = (~tags, ~meetingId, ()) => new({tags: tags, meetingId: meetingId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -2794,10 +3131,29 @@ module TagAttendee = {
     @ocaml.doc("<p>The Amazon Chime SDK attendee ID.</p>") @as("AttendeeId") attendeeId: guidString,
     @ocaml.doc("<p>The Amazon Chime SDK meeting ID.</p>") @as("MeetingId") meetingId: guidString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-chime") @new external new: request => t = "TagAttendeeCommand"
   let make = (~tags, ~attendeeId, ~meetingId, ()) =>
     new({tags: tags, attendeeId: attendeeId, meetingId: meetingId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module StartMeetingTranscription = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>The configuration for the current transcription operation. Must contain <code>EngineTranscribeSettings</code> or <code>EngineTranscribeMedicalSettings</code>.</p>"
+    )
+    @as("TranscriptionConfiguration")
+    transcriptionConfiguration: transcriptionConfiguration,
+    @ocaml.doc("<p>The unique ID of the meeting being transcribed.</p>") @as("MeetingId")
+    meetingId: guidString,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-chime") @new
+  external new: request => t = "StartMeetingTranscriptionCommand"
+  let make = (~transcriptionConfiguration, ~meetingId, ()) =>
+    new({transcriptionConfiguration: transcriptionConfiguration, meetingId: meetingId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -2824,7 +3180,7 @@ module PutVoiceConnectorTerminationCredentials = {
     @ocaml.doc("<p>The Amazon Chime Voice Connector ID.</p>") @as("VoiceConnectorId")
     voiceConnectorId: nonEmptyString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-chime") @new
   external new: request => t = "PutVoiceConnectorTerminationCredentialsCommand"
   let make = (~voiceConnectorId, ~credentials=?, ()) =>
@@ -3044,18 +3400,17 @@ module ListChannels = {
     nextToken: option<nextToken>,
     @ocaml.doc("<p>The maximum number of channels that you want to return.</p>") @as("MaxResults")
     maxResults: option<maxResults>,
-    @ocaml.doc("<p>The privacy setting. <code>PUBLIC</code> retrieves all the public channels. <code>PRIVATE</code> retrieves private channels. Only an 
-    <code>AppInstanceAdmin</code> can retrieve private channels.
-</p>")
+    @ocaml.doc("<p>The privacy setting. <code>PUBLIC</code> retrieves all the public channels.
+            <code>PRIVATE</code> retrieves private channels. Only an <code>AppInstanceAdmin</code>
+         can retrieve private channels. </p>")
     @as("Privacy")
     privacy: option<channelPrivacy>,
     @ocaml.doc("<p>The ARN of the <code>AppInstance</code>.</p>") @as("AppInstanceArn")
     appInstanceArn: chimeArn,
   }
   type response = {
-    @ocaml.doc(
-      "<p>The token returned from previous API requests until the number of channels is reached.</p>"
-    )
+    @ocaml.doc("<p>The token returned from previous API requests until the number of channels is
+         reached.</p>")
     @as("NextToken")
     nextToken: option<nextToken>,
     @ocaml.doc("<p>The information about each channel.</p>") @as("Channels")
@@ -3497,10 +3852,7 @@ module DescribeChannelBan = {
     channelArn: chimeArn,
   }
   type response = {
-    @ocaml.doc("<p>The details of
-            the ban.</p>")
-    @as("ChannelBan")
-    channelBan: option<channelBan>,
+    @ocaml.doc("<p>The details of the ban.</p>") @as("ChannelBan") channelBan: option<channelBan>,
   }
   @module("@aws-sdk/client-chime") @new external new: request => t = "DescribeChannelBanCommand"
   let make = (~memberArn, ~channelArn, ~chimeBearer=?, ()) =>
@@ -3686,12 +4038,14 @@ module CreateChannel = {
     @ocaml.doc("<p>The metadata of the creation request. Limited to 1KB and UTF-8.</p>")
     @as("Metadata")
     metadata: option<metadata>,
-    @ocaml.doc("<p>The channel's privacy level: <code>PUBLIC</code> or <code>PRIVATE</code>. Private channels aren't discoverable by users outside the channel. 
-    Public channels are discoverable by anyone in the <code>AppInstance</code>.</p>")
+    @ocaml.doc("<p>The channel's privacy level: <code>PUBLIC</code> or <code>PRIVATE</code>. Private
+         channels aren't discoverable by users outside the channel. Public channels are discoverable
+         by anyone in the <code>AppInstance</code>.</p>")
     @as("Privacy")
     privacy: option<channelPrivacy>,
-    @ocaml.doc("<p>The channel mode: <code>UNRESTRICTED</code> or <code>RESTRICTED</code>. Administrators, moderators, and channel members can add themselves 
-    and other members to unrestricted channels. Only administrators and moderators can add members to restricted channels.</p>")
+    @ocaml.doc("<p>The channel mode: <code>UNRESTRICTED</code> or <code>RESTRICTED</code>. Administrators,
+         moderators, and channel members can add themselves and other members to unrestricted
+         channels. Only administrators and moderators can add members to restricted channels.</p>")
     @as("Mode")
     mode: option<channelMode>,
     @ocaml.doc("<p>The name of the channel.</p>") @as("Name") name: nonEmptyResourceName,
@@ -3792,7 +4146,7 @@ module CreateAppInstanceUser = {
 module CreateAppInstance = {
   type t
   type request = {
-    @ocaml.doc("<p>Tags assigned to the <code>AppInstanceUser</code>.</p>") @as("Tags")
+    @ocaml.doc("<p>Tags assigned to the <code>AppInstance</code>.</p>") @as("Tags")
     tags: option<tagList_>,
     @ocaml.doc("<p>The <code>ClientRequestToken</code> of the <code>AppInstance</code>.</p>")
     @as("ClientRequestToken")
@@ -3921,7 +4275,7 @@ module AssociateSigninDelegateGroupsWithAccount = {
     signinDelegateGroups: signinDelegateGroupList,
     @ocaml.doc("<p>The Amazon Chime account ID.</p>") @as("AccountId") accountId: nonEmptyString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-chime") @new
   external new: request => t = "AssociateSigninDelegateGroupsWithAccountCommand"
   let make = (~signinDelegateGroups, ~accountId, ()) =>
@@ -4114,6 +4468,9 @@ module UpdatePhoneNumber = {
 module UpdateAccount = {
   type t
   type request = {
+    @ocaml.doc("<p>The default license applied when you add users to an Amazon Chime account.</p>")
+    @as("DefaultLicense")
+    defaultLicense: option<license>,
     @ocaml.doc("<p>The new name for the specified Amazon Chime account.</p>") @as("Name")
     name: option<accountName>,
     @ocaml.doc("<p>The Amazon Chime account ID.</p>") @as("AccountId") accountId: nonEmptyString,
@@ -4123,7 +4480,8 @@ module UpdateAccount = {
     account: option<account>,
   }
   @module("@aws-sdk/client-chime") @new external new: request => t = "UpdateAccountCommand"
-  let make = (~accountId, ~name=?, ()) => new({name: name, accountId: accountId})
+  let make = (~accountId, ~defaultLicense=?, ~name=?, ()) =>
+    new({defaultLicense: defaultLicense, name: name, accountId: accountId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -4298,9 +4656,8 @@ module ListChannelsModeratedByAppInstanceUser = {
     @ocaml.doc("<p>The <code>AppInstanceUserArn</code> of the user that makes the API call.</p>")
     @as("ChimeBearer")
     chimeBearer: option<chimeArn>,
-    @ocaml.doc(
-      "<p>The token returned from previous API requests until the number of channels moderated by the user is reached.</p>"
-    )
+    @ocaml.doc("<p>The token returned from previous API requests until the number of channels moderated by
+         the user is reached.</p>")
     @as("NextToken")
     nextToken: option<nextToken>,
     @ocaml.doc("<p>The maximum number of channels in the request.</p>") @as("MaxResults")
@@ -4309,9 +4666,8 @@ module ListChannelsModeratedByAppInstanceUser = {
     appInstanceUserArn: option<chimeArn>,
   }
   type response = {
-    @ocaml.doc(
-      "<p>The token returned from previous API requests until the number of channels moderated by the user is reached.</p>"
-    )
+    @ocaml.doc("<p>The token returned from previous API requests until the number of channels moderated by
+         the user is reached.</p>")
     @as("NextToken")
     nextToken: option<nextToken>,
     @ocaml.doc("<p>The moderated channels in the request.</p>") @as("Channels")
@@ -4335,9 +4691,8 @@ module ListChannelModerators = {
     @ocaml.doc("<p>The <code>AppInstanceUserArn</code> of the user that makes the API call.</p>")
     @as("ChimeBearer")
     chimeBearer: option<chimeArn>,
-    @ocaml.doc(
-      "<p>The token passed by previous API calls until all requested moderators are returned.</p>"
-    )
+    @ocaml.doc("<p>The token passed by previous API calls until all requested moderators are
+         returned.</p>")
     @as("NextToken")
     nextToken: option<nextToken>,
     @ocaml.doc("<p>The maximum number of moderators that you want returned.</p>") @as("MaxResults")
@@ -4347,9 +4702,8 @@ module ListChannelModerators = {
   type response = {
     @ocaml.doc("<p>The information about and names of each moderator.</p>") @as("ChannelModerators")
     channelModerators: option<channelModeratorSummaryList>,
-    @ocaml.doc(
-      "<p>The token passed by previous API calls until all requested moderators are returned.</p>"
-    )
+    @ocaml.doc("<p>The token passed by previous API calls until all requested moderators are
+         returned.</p>")
     @as("NextToken")
     nextToken: option<nextToken>,
     @ocaml.doc("<p>The ARN of the channel.</p>") @as("ChannelArn") channelArn: option<chimeArn>,
@@ -4383,9 +4737,8 @@ module ListChannelMessages = {
     @ocaml.doc("<p>The initial or starting time stamp for your requested messages.</p>")
     @as("NotBefore")
     notBefore: option<timestamp_>,
-    @ocaml.doc(
-      "<p>The order in which you want messages sorted. Default is Descending, based on time created.</p>"
-    )
+    @ocaml.doc("<p>The order in which you want messages sorted. Default is Descending, based on time
+         created.</p>")
     @as("SortOrder")
     sortOrder: option<sortOrder>,
     @ocaml.doc("<p>The ARN of the channel.</p>") @as("ChannelArn") channelArn: chimeArn,
@@ -4471,17 +4824,17 @@ module ListChannelMemberships = {
     @ocaml.doc("<p>The <code>AppInstanceUserArn</code> of the user that makes the API call.</p>")
     @as("ChimeBearer")
     chimeBearer: option<chimeArn>,
-    @ocaml.doc(
-      "<p>The token passed by previous API calls until all requested channel memberships are returned.</p>"
-    )
+    @ocaml.doc("<p>The token passed by previous API calls until all requested channel memberships are
+         returned.</p>")
     @as("NextToken")
     nextToken: option<nextToken>,
     @ocaml.doc("<p>The maximum number of channel memberships that you want returned.</p>")
     @as("MaxResults")
     maxResults: option<maxResults>,
-    @ocaml.doc("<p>The membership type of a user, <code>DEFAULT</code> or <code>HIDDEN</code>. Default members are always returned as part of 
-    <code>ListChannelMemberships</code>. Hidden members are only returned if the type filter in <code>ListChannelMemberships</code> equals 
-    <code>HIDDEN</code>. Otherwise hidden members are not returned.</p>")
+    @ocaml.doc("<p>The membership type of a user, <code>DEFAULT</code> or <code>HIDDEN</code>. Default
+         members are always returned as part of <code>ListChannelMemberships</code>. Hidden members
+         are only returned if the type filter in <code>ListChannelMemberships</code> equals
+            <code>HIDDEN</code>. Otherwise hidden members are not returned.</p>")
     @as("Type")
     type_: option<channelMembershipType>,
     @ocaml.doc("<p>The maximum number of channel memberships that you want returned.</p>")
@@ -4489,9 +4842,8 @@ module ListChannelMemberships = {
     channelArn: chimeArn,
   }
   type response = {
-    @ocaml.doc(
-      "<p>The token passed by previous API calls until all requested channel memberships are returned.</p>"
-    )
+    @ocaml.doc("<p>The token passed by previous API calls until all requested channel memberships are
+         returned.</p>")
     @as("NextToken")
     nextToken: option<nextToken>,
     @ocaml.doc("<p>The information for the requested channel memberships.</p>")
@@ -4927,24 +5279,24 @@ module BatchUpdateUser = {
 module BatchCreateChannelMembership = {
   type t
   type request = {
-    @ocaml.doc("<p>The <code>AppInstanceUserArn</code> of the user that makes the API call.</p>
-        <p></p>")
+    @ocaml.doc("<p>The <code>AppInstanceUserArn</code> of the user that makes the API call.</p>")
     @as("ChimeBearer")
     chimeBearer: option<chimeArn>,
     @ocaml.doc("<p>The ARNs of the members you want to add to the channel.</p>") @as("MemberArns")
     memberArns: memberArns,
-    @ocaml.doc("<p>The membership type of a user, <code>DEFAULT</code> or <code>HIDDEN</code>. Default members are always returned as part of 
-            <code>ListChannelMemberships</code>. Hidden members are only returned if the type filter in <code>ListChannelMemberships</code> equals 
-            <code>HIDDEN</code>. Otherwise hidden members are not returned. This is only supported by moderators.</p>")
+    @ocaml.doc("<p>The membership type of a user, <code>DEFAULT</code> or <code>HIDDEN</code>. Default
+         members are always returned as part of <code>ListChannelMemberships</code>. Hidden members
+         are only returned if the type filter in <code>ListChannelMemberships</code> equals
+            <code>HIDDEN</code>. Otherwise hidden members are not returned. This is only supported
+         by moderators.</p>")
     @as("Type")
     type_: option<channelMembershipType>,
     @ocaml.doc("<p>The ARN of the channel to which you're adding users.</p>") @as("ChannelArn")
     channelArn: chimeArn,
   }
   type response = {
-    @ocaml.doc(
-      "<p>If the action fails for one or more of the memberships in the request, a list of the memberships is returned, along with error codes and error messages.</p>"
-    )
+    @ocaml.doc("<p>If the action fails for one or more of the memberships in the request, a list of the
+         memberships is returned, along with error codes and error messages.</p>")
     @as("Errors")
     errors: option<batchCreateChannelMembershipErrors>,
     @ocaml.doc("<p>The list of channel memberships in the response.</p>")
@@ -5262,5 +5614,100 @@ module BatchCreateAttendee = {
   }
   @module("@aws-sdk/client-chime") @new external new: request => t = "BatchCreateAttendeeCommand"
   let make = (~attendees, ~meetingId, ()) => new({attendees: attendees, meetingId: meetingId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module GetMediaCapturePipeline = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The ID of the pipeline that you want to get.</p>") @as("MediaPipelineId")
+    mediaPipelineId: guidString,
+  }
+  type response = {
+    @ocaml.doc("<p>The media capture pipeline object.</p>") @as("MediaCapturePipeline")
+    mediaCapturePipeline: option<mediaCapturePipeline>,
+  }
+  @module("@aws-sdk/client-chime") @new
+  external new: request => t = "GetMediaCapturePipelineCommand"
+  let make = (~mediaPipelineId, ()) => new({mediaPipelineId: mediaPipelineId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module CreateMediaCapturePipeline = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>The configuration for a specified media capture pipeline. <code>SourceType</code> must be <code>ChimeSdkMeeting</code>.</p>"
+    )
+    @as("ChimeSdkMeetingConfiguration")
+    chimeSdkMeetingConfiguration: option<chimeSdkMeetingConfiguration>,
+    @ocaml.doc("<p>The token assigned to the client making the pipeline request.</p>")
+    @as("ClientRequestToken")
+    clientRequestToken: option<clientRequestToken>,
+    @ocaml.doc("<p>The ARN of the sink type.</p>") @as("SinkArn") sinkArn: arn,
+    @ocaml.doc(
+      "<p>Destination type to which the media artifacts are saved. You must use an S3 bucket. </p>"
+    )
+    @as("SinkType")
+    sinkType: mediaPipelineSinkType,
+    @ocaml.doc("<p>ARN of the source from which the media artifacts are captured.</p>")
+    @as("SourceArn")
+    sourceArn: arn,
+    @ocaml.doc("<p>Source type from which the media artifacts will be captured. A Chime SDK Meeting 
+            is the only supported source.</p>")
+    @as("SourceType")
+    sourceType: mediaPipelineSourceType,
+  }
+  type response = {
+    @ocaml.doc(
+      "<p>A media capture pipeline object, the ID, source type, source ARN, sink type, and  sink ARN of a media capture pipeline object.</p>"
+    )
+    @as("MediaCapturePipeline")
+    mediaCapturePipeline: option<mediaCapturePipeline>,
+  }
+  @module("@aws-sdk/client-chime") @new
+  external new: request => t = "CreateMediaCapturePipelineCommand"
+  let make = (
+    ~sinkArn,
+    ~sinkType,
+    ~sourceArn,
+    ~sourceType,
+    ~chimeSdkMeetingConfiguration=?,
+    ~clientRequestToken=?,
+    (),
+  ) =>
+    new({
+      chimeSdkMeetingConfiguration: chimeSdkMeetingConfiguration,
+      clientRequestToken: clientRequestToken,
+      sinkArn: sinkArn,
+      sinkType: sinkType,
+      sourceArn: sourceArn,
+      sourceType: sourceType,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module ListMediaCapturePipelines = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>The maximum number of results to return in a single call. Valid Range: 1 - 99.</p>"
+    )
+    @as("MaxResults")
+    maxResults: option<resultMax>,
+    @ocaml.doc("<p>The token used to retrieve the next page of results.</p>") @as("NextToken")
+    nextToken: option<string_>,
+  }
+  type response = {
+    @ocaml.doc("<p>The token used to retrieve the next page of results. </p>") @as("NextToken")
+    nextToken: option<string_>,
+    @ocaml.doc("<p>The media capture pipeline objects in the list.</p>")
+    @as("MediaCapturePipelines")
+    mediaCapturePipelines: option<mediaCapturePipelineList>,
+  }
+  @module("@aws-sdk/client-chime") @new
+  external new: request => t = "ListMediaCapturePipelinesCommand"
+  let make = (~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

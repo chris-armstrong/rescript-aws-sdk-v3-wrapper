@@ -17,6 +17,7 @@ type baseLong = float
 type usageLimitPeriod = [@as("monthly") #Monthly | @as("weekly") #Weekly | @as("daily") #Daily]
 type usageLimitLimitType = [@as("data-scanned") #Data_Scanned | @as("time") #Time]
 type usageLimitFeatureType = [
+  | @as("cross-region-datasharing") #Cross_Region_Datasharing
   | @as("concurrency-scaling") #Concurrency_Scaling
   | @as("spectrum") #Spectrum
 ]
@@ -60,6 +61,18 @@ type scheduledActionFilterName = [
 ]
 type scheduleState = [@as("FAILED") #FAILED | @as("ACTIVE") #ACTIVE | @as("MODIFYING") #MODIFYING]
 type reservedNodeOfferingType = [@as("Upgradable") #Upgradable | @as("Regular") #Regular]
+type reservedNodeExchangeStatusType = [
+  | @as("FAILED") #FAILED
+  | @as("SUCCEEDED") #SUCCEEDED
+  | @as("RETRYING") #RETRYING
+  | @as("IN_PROGRESS") #IN_PROGRESS
+  | @as("PENDING") #PENDING
+  | @as("REQUESTED") #REQUESTED
+]
+type reservedNodeExchangeActionType = [
+  | @as("resize-cluster") #Resize_Cluster
+  | @as("restore-cluster") #Restore_Cluster
+]
 type partnerIntegrationStatusMessage = string
 type partnerIntegrationStatus = [
   | @as("ConnectionFailure") #ConnectionFailure
@@ -95,9 +108,26 @@ type integer_ = int
 type exceptionMessage = string
 type doubleOptional = float
 type double = float
+type dataShareStatusForProducer = [
+  | @as("REJECTED") #REJECTED
+  | @as("DEAUTHORIZED") #DEAUTHORIZED
+  | @as("PENDING_AUTHORIZATION") #PENDING_AUTHORIZATION
+  | @as("AUTHORIZED") #AUTHORIZED
+  | @as("ACTIVE") #ACTIVE
+]
+type dataShareStatusForConsumer = [@as("AVAILABLE") #AVAILABLE | @as("ACTIVE") #ACTIVE]
+type dataShareStatus = [
+  | @as("AVAILABLE") #AVAILABLE
+  | @as("REJECTED") #REJECTED
+  | @as("DEAUTHORIZED") #DEAUTHORIZED
+  | @as("AUTHORIZED") #AUTHORIZED
+  | @as("PENDING_AUTHORIZATION") #PENDING_AUTHORIZATION
+  | @as("ACTIVE") #ACTIVE
+]
 type booleanOptional = bool
 type boolean_ = bool
 type authorizationStatus = [@as("Revoking") #Revoking | @as("Authorized") #Authorized]
+type authenticationProfileNameString = string
 type aquaStatus = [@as("applying") #Applying | @as("disabled") #Disabled | @as("enabled") #Enabled]
 type aquaConfigurationStatus = [
   | @as("auto") #Auto
@@ -272,6 +302,11 @@ type resizeInfo = {
   "<p>Describes a resize cluster operation. For example, a scheduled action to run the <code>ResizeCluster</code> API operation. </p>"
 )
 type resizeClusterMessage = {
+  @ocaml.doc("<p>The identifier of the target reserved node offering.</p>")
+  @as("TargetReservedNodeOfferingId")
+  targetReservedNodeOfferingId: option<string_>,
+  @ocaml.doc("<p>The identifier of the reserved node.</p>") @as("ReservedNodeId")
+  reservedNodeId: option<string_>,
   @ocaml.doc("<p>A boolean value indicating whether the resize operation is using the classic resize
             process. If you don't provide this parameter or set the value to
             <code>false</code>, the resize type is elastic. </p>")
@@ -291,6 +326,38 @@ type resizeClusterMessage = {
   clusterType: option<string_>,
   @ocaml.doc("<p>The unique identifier for the cluster to resize.</p>") @as("ClusterIdentifier")
   clusterIdentifier: string_,
+}
+@ocaml.doc("<p>Reserved-node status details, such as the source reserved-node
+            identifier, the target reserved-node identifier, the node type, the node count, and
+            other details.</p>")
+type reservedNodeExchangeStatus = {
+  @ocaml.doc("<p>The count of target reserved nodes in the cluster.</p>")
+  @as("TargetReservedNodeCount")
+  targetReservedNodeCount: option<integer_>,
+  @ocaml.doc("<p>The node type of the target reserved node, for example ra3.4xlarge.</p>")
+  @as("TargetReservedNodeType")
+  targetReservedNodeType: option<string_>,
+  @ocaml.doc("<p>The identifier of the target reserved node offering.</p>")
+  @as("TargetReservedNodeOfferingId")
+  targetReservedNodeOfferingId: option<string_>,
+  @ocaml.doc("<p>The source reserved-node count in the cluster.</p>") @as("SourceReservedNodeCount")
+  sourceReservedNodeCount: option<integer_>,
+  @ocaml.doc("<p>The source reserved-node type, for example ds2.xlarge.</p>")
+  @as("SourceReservedNodeType")
+  sourceReservedNodeType: option<string_>,
+  @ocaml.doc("<p>The identifier of the source reserved node.</p>") @as("SourceReservedNodeId")
+  sourceReservedNodeId: option<string_>,
+  @ocaml.doc("<p>A date and time that indicate when the reserved-node exchange was requested.</p>")
+  @as("RequestTime")
+  requestTime: option<tstamp>,
+  @ocaml.doc(
+    "<p>The status of the reserved-node exchange request. Statuses include in-progress and requested.</p>"
+  )
+  @as("Status")
+  status: option<reservedNodeExchangeStatusType>,
+  @ocaml.doc("<p>The identifier of the reserved-node exchange request.</p>")
+  @as("ReservedNodeExchangeRequestId")
+  reservedNodeExchangeRequestId: option<string_>,
 }
 @ocaml.doc("<p>Describes a recurring charge.</p>")
 type recurringCharge = {
@@ -341,7 +408,7 @@ type pendingModifiedValues = {
   numberOfNodes: option<integerOptional>,
   @ocaml.doc("<p>The pending or in-progress change of the cluster's node type.</p>") @as("NodeType")
   nodeType: option<string_>,
-  @ocaml.doc("<p>The pending or in-progress change of the master user password for the
+  @ocaml.doc("<p>The pending or in-progress change of the admin user password for the
             cluster.</p>")
   @as("MasterUserPassword")
   masterUserPassword: option<string_>,
@@ -506,6 +573,26 @@ type dataTransferProgress = {
   @as("Status")
   status: option<string_>,
 }
+@ocaml.doc("<p>The association of a datashare from a producer account with a data consumer.
+</p>")
+type dataShareAssociation = {
+  @ocaml.doc("<p>The status change data of the datashare that is associated.</p>")
+  @as("StatusChangeDate")
+  statusChangeDate: option<tstamp>,
+  @ocaml.doc("<p>The creation date of the datashare that is associated.</p>") @as("CreatedDate")
+  createdDate: option<tstamp>,
+  @ocaml.doc(
+    "<p>The Amazon Web Services Region of the consumer accounts that have an association with a producer datashare.</p>"
+  )
+  @as("ConsumerRegion")
+  consumerRegion: option<string_>,
+  @ocaml.doc("<p>The status of the datashare that is associated.</p>") @as("Status")
+  status: option<dataShareStatus>,
+  @ocaml.doc("<p>The name of the consumer accounts that have an association with a producer
+            datashare.</p>")
+  @as("ConsumerIdentifier")
+  consumerIdentifier: option<string_>,
+}
 @ocaml.doc("<p>Describes a cluster version, including the parameter group family and description
             of the version.</p>")
 type clusterVersion = {
@@ -606,8 +693,8 @@ type clusterNode = {
   @ocaml.doc("<p>Whether the node is a leader node or a compute node.</p>") @as("NodeRole")
   nodeRole: option<string_>,
 }
-@ocaml.doc("<p>An AWS Identity and Access Management (IAM) role that can be used by the associated
-            Amazon Redshift cluster to access other AWS services.</p>")
+@ocaml.doc("<p>An Identity and Access Management (IAM) role that can be used by the associated
+            Amazon Redshift cluster to access other Amazon Web Services services.</p>")
 type clusterIamRole = {
   @ocaml.doc("<p>A value that describes the status of the IAM role's association with an Amazon
             Redshift cluster.</p>
@@ -641,6 +728,15 @@ type clusterAssociatedToSchedule = {
   scheduleAssociationState: option<scheduleState>,
   @ocaml.doc("<p></p>") @as("ClusterIdentifier") clusterIdentifier: option<string_>,
 }
+@ocaml.doc("<p>Describes an authentication profile.</p>")
+type authenticationProfile = {
+  @ocaml.doc("<p>The content of the authentication profile in JSON format.
+            The maximum length of the JSON string is determined by a quota for your account.</p>")
+  @as("AuthenticationProfileContent")
+  authenticationProfileContent: option<string_>,
+  @ocaml.doc("<p>The name of the authentication profile.</p>") @as("AuthenticationProfileName")
+  authenticationProfileName: option<authenticationProfileNameString>,
+}
 @ocaml.doc("<p>Describes an attribute value.</p>")
 type attributeValueTarget = {
   @ocaml.doc("<p>The value of the attribute.</p>") @as("AttributeValue")
@@ -652,7 +748,7 @@ type aquaConfiguration = {
   @ocaml.doc("<p>The value represents how the cluster is configured to use AQUA. Possible values include the following.</p>
         <ul>
             <li>
-               <p>enabled - Use AQUA if it is available for the current AWS Region and Amazon Redshift node type.</p>
+               <p>enabled - Use AQUA if it is available for the current Amazon Web Services Region and Amazon Redshift node type.</p>
             </li>
             <li>
                <p>disabled - Don't use AQUA. </p>
@@ -678,13 +774,13 @@ type aquaConfiguration = {
   @as("AquaStatus")
   aquaStatus: option<aquaStatus>,
 }
-@ocaml.doc("<p>Describes an AWS customer account authorized to restore a snapshot.</p>")
+@ocaml.doc("<p>Describes an Amazon Web Services account authorized to restore a snapshot.</p>")
 type accountWithRestoreAccess = {
-  @ocaml.doc("<p>The identifier of an AWS support account authorized to restore a snapshot. For AWS
-            support, the identifier is <code>amazon-redshift-support</code>. </p>")
+  @ocaml.doc("<p>The identifier of an Amazon Web Services support account authorized to restore a 
+            snapshot. For Amazon Web Services Support, the identifier is <code>amazon-redshift-support</code>. </p>")
   @as("AccountAlias")
   accountAlias: option<string_>,
-  @ocaml.doc("<p>The identifier of an AWS customer account authorized to restore a
+  @ocaml.doc("<p>The identifier of an Amazon Web Services account authorized to restore a
             snapshot.</p>")
   @as("AccountId")
   accountId: option<string_>,
@@ -762,6 +858,7 @@ type scheduledActionFilter = {
   @ocaml.doc("<p>The type of element to filter. </p>") @as("Name") name: scheduledActionFilterName,
 }
 type revisionTargetsList = array<revisionTarget>
+type reservedNodeExchangeStatusList = array<reservedNodeExchangeStatus>
 type recurringChargeList = array<recurringCharge>
 type partnerIntegrationInfoList = array<partnerIntegrationInfo>
 type parametersList = array<parameter>
@@ -807,7 +904,7 @@ type event = {
   @as("Severity")
   severity: option<string_>,
   @ocaml.doc("<p>A list of the event categories.</p>
-        <p>Values: Configuration, Management, Monitoring, Security</p>")
+        <p>Values: Configuration, Management, Monitoring, Security, Pending</p>")
   @as("EventCategories")
   eventCategories: option<eventCategoriesList>,
   @ocaml.doc("<p>The text of this event.</p>") @as("Message") message: option<string_>,
@@ -817,7 +914,7 @@ type event = {
   sourceIdentifier: option<string_>,
 }
 @ocaml.doc(
-  "<p>Describes an endpoint authorization for authorizing Redshift-managed VPC endpoint access to a cluster across AWS accounts.</p>"
+  "<p>Describes an endpoint authorization for authorizing Redshift-managed VPC endpoint access to a cluster across Amazon Web Services accounts.</p>"
 )
 type endpointAuthorization = {
   @ocaml.doc("<p>The number of Redshift-managed VPC endpoints created for the authorization.</p>")
@@ -838,13 +935,15 @@ type endpointAuthorization = {
   authorizeTime: option<tstamp>,
   @ocaml.doc("<p>The cluster identifier.</p>") @as("ClusterIdentifier")
   clusterIdentifier: option<string_>,
-  @ocaml.doc("<p>The AWS account ID of the grantee of the cluster.</p>") @as("Grantee")
+  @ocaml.doc("<p>The Amazon Web Services account ID of the grantee of the cluster.</p>")
+  @as("Grantee")
   grantee: option<string_>,
-  @ocaml.doc("<p>The AWS account ID of the cluster owner.</p>") @as("Grantor")
+  @ocaml.doc("<p>The Amazon Web Services account ID of the cluster owner.</p>") @as("Grantor")
   grantor: option<string_>,
 }
 type deleteClusterSnapshotMessageList = array<deleteClusterSnapshotMessage>
 type deferredMaintenanceWindowsList = array<deferredMaintenanceWindow>
+type dataShareAssociationList = array<dataShareAssociation>
 type clusterVersionList = array<clusterVersion>
 type clusterSecurityGroupMembershipList = array<clusterSecurityGroupMembership>
 type clusterParameterStatusList = array<clusterParameterStatus>
@@ -852,6 +951,7 @@ type clusterNodesList = array<clusterNode>
 type clusterIamRoleList = array<clusterIamRole>
 type batchSnapshotOperationErrors = array<snapshotErrorMessage>
 type batchSnapshotOperationErrorList = array<snapshotErrorMessage>
+type authenticationProfileList = array<authenticationProfile>
 type attributeValueList = array<attributeValueTarget>
 type associatedClusterList = array<clusterAssociatedToSchedule>
 type accountsWithRestoreAccessList = array<accountWithRestoreAccess>
@@ -947,7 +1047,7 @@ type snapshotSchedule = {
   scheduleDefinitions: option<scheduleDefinitionList>,
 }
 @ocaml.doc("<p>The snapshot copy grant that grants Amazon Redshift permission to encrypt copied
-            snapshots with the specified customer master key (CMK) from AWS KMS in the destination
+            snapshots with the specified encrypted symmetric key from Amazon Web Services KMS in the destination
             region.</p>
         <p>
 For more information about managing snapshot copy grants, go to 
@@ -956,7 +1056,7 @@ in the <i>Amazon Redshift Cluster Management Guide</i>.
 </p>")
 type snapshotCopyGrant = {
   @ocaml.doc("<p>A list of tag instances.</p>") @as("Tags") tags: option<tagList_>,
-  @ocaml.doc("<p>The unique identifier of the customer master key (CMK) in AWS KMS to which
+  @ocaml.doc("<p>The unique identifier of the encrypted symmetric key in Amazon Web Services KMS to which
             Amazon Redshift is granted permission.</p>")
   @as("KmsKeyId")
   kmsKeyId: option<string_>,
@@ -1019,12 +1119,12 @@ type snapshot = {
             cluster.</p>")
   @as("TotalBackupSizeInMegaBytes")
   totalBackupSizeInMegaBytes: option<double>,
-  @ocaml.doc("<p>For manual snapshots, the AWS customer account used to create or copy the snapshot.
+  @ocaml.doc("<p>For manual snapshots, the Amazon Web Services account used to create or copy the snapshot.
             For automatic snapshots, the owner of the cluster. The owner can perform all snapshot
             actions, such as sharing a manual snapshot.</p>")
   @as("OwnerAccount")
   ownerAccount: option<string_>,
-  @ocaml.doc("<p>A list of the AWS customer accounts authorized to restore the snapshot. Returns
+  @ocaml.doc("<p>A list of the Amazon Web Services accounts authorized to restore the snapshot. Returns
                 <code>null</code> if no accounts are authorized. Visible only to the snapshot owner.
         </p>")
   @as("AccountsWithRestoreAccess")
@@ -1034,7 +1134,7 @@ type snapshot = {
             keys.</p>")
   @as("EncryptedWithHSM")
   encryptedWithHSM: option<boolean_>,
-  @ocaml.doc("<p>The AWS Key Management Service (KMS) key ID of the encryption key that was used to
+  @ocaml.doc("<p>The Key Management Service (KMS) key ID of the encryption key that was used to
             encrypt data in the cluster from which the snapshot was taken.</p>")
   @as("KmsKeyId")
   kmsKeyId: option<string_>,
@@ -1064,7 +1164,7 @@ type snapshot = {
   @ocaml.doc("<p>The version ID of the Amazon Redshift engine that is running on the cluster.</p>")
   @as("ClusterVersion")
   clusterVersion: option<string_>,
-  @ocaml.doc("<p>The master user name for the cluster.</p>") @as("MasterUsername")
+  @ocaml.doc("<p>The admin user name for the cluster.</p>") @as("MasterUsername")
   masterUsername: option<string_>,
   @ocaml.doc("<p>The time (UTC) when the cluster was originally created.</p>")
   @as("ClusterCreateTime")
@@ -1296,7 +1396,7 @@ type eventSubscription = {
   severity: option<string_>,
   @ocaml.doc("<p>The list of Amazon Redshift event categories specified in the event notification
             subscription.</p>
-        <p>Values: Configuration, Management, Monitoring, Security</p>")
+        <p>Values: Configuration, Management, Monitoring, Security, Pending</p>")
   @as("EventCategoriesList")
   eventCategoriesList: option<eventCategoriesList>,
   @ocaml.doc("<p>A list of the sources that publish events to the Amazon Redshift event notification
@@ -1334,7 +1434,7 @@ type eventSubscription = {
   @ocaml.doc("<p>The name of the Amazon Redshift event notification subscription.</p>")
   @as("CustSubscriptionId")
   custSubscriptionId: option<string_>,
-  @ocaml.doc("<p>The AWS customer account associated with the Amazon Redshift event notification
+  @ocaml.doc("<p>The Amazon Web Services account associated with the Amazon Redshift event notification
             subscription.</p>")
   @as("CustomerAwsId")
   customerAwsId: option<string_>,
@@ -1346,7 +1446,7 @@ type endpointAuthorizations = array<endpointAuthorization>
 type ec2SecurityGroup = {
   @ocaml.doc("<p>The list of tags for the EC2 security group.</p>") @as("Tags")
   tags: option<tagList_>,
-  @ocaml.doc("<p>The AWS ID of the owner of the EC2 security group specified in the
+  @ocaml.doc("<p>The Amazon Web Services account ID of the owner of the EC2 security group specified in the
                 <code>EC2SecurityGroupName</code> field. </p>")
   @as("EC2SecurityGroupOwnerId")
   ec2SecurityGroupOwnerId: option<string_>,
@@ -1369,6 +1469,27 @@ type defaultClusterParameters = {
             parameters apply.</p>")
   @as("ParameterGroupFamily")
   parameterGroupFamily: option<string_>,
+}
+type dataShare = {
+  @ocaml.doc("<p>The identifier of a datashare to show its managing entity.</p>") @as("ManagedBy")
+  managedBy: option<string_>,
+  @ocaml.doc(
+    "<p>A value that specifies when the datashare has an association between a producer and data consumers.</p>"
+  )
+  @as("DataShareAssociations")
+  dataShareAssociations: option<dataShareAssociationList>,
+  @ocaml.doc(
+    "<p>A value that specifies whether the datashare can be shared to a publicly accessible  cluster.</p>"
+  )
+  @as("AllowPubliclyAccessibleConsumers")
+  allowPubliclyAccessibleConsumers: option<boolean_>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the producer.</p>") @as("ProducerArn")
+  producerArn: option<string_>,
+  @ocaml.doc(
+    "<p>An Amazon Resource Name (ARN) that references the datashare that is owned by a specific namespace of the producer cluster. A datashare ARN is in the <code>arn:aws:redshift:{region}:{account-id}:{datashare}:{namespace-guid}/{datashare-name}</code> format.</p>"
+  )
+  @as("DataShareArn")
+  dataShareArn: option<string_>,
 }
 @ocaml.doc("<p>Describes the status of a parameter group.</p>")
 type clusterParameterGroupStatus = {
@@ -1441,6 +1562,14 @@ type snapshotCopyGrantList = array<snapshotCopyGrant>
 type scheduledActionList = array<scheduledAction>
 type reservedNodeOfferingList = array<reservedNodeOffering>
 type reservedNodeList = array<reservedNode>
+@ocaml.doc("<p>Details for a reserved-node exchange. Examples include the node type for a
+            reserved node, the price for a node, the node's state, and other details.</p>")
+type reservedNodeConfigurationOption = {
+  @as("TargetReservedNodeOffering") targetReservedNodeOffering: option<reservedNodeOffering>,
+  @ocaml.doc("<p>The target reserved-node count.</p>") @as("TargetReservedNodeCount")
+  targetReservedNodeCount: option<integer_>,
+  @as("SourceReservedNode") sourceReservedNode: option<reservedNode>,
+}
 type parameterGroupList = array<clusterParameterGroup>
 type iprangeList = array<iprange>
 type hsmConfigurationList = array<hsmConfiguration>
@@ -1472,7 +1601,8 @@ type endpointAccess = {
   @ocaml.doc("<p>The subnet group name where Amazon Redshift chooses to deploy the endpoint.</p>")
   @as("SubnetGroupName")
   subnetGroupName: option<string_>,
-  @ocaml.doc("<p>The AWS account ID of the owner of the cluster.</p>") @as("ResourceOwner")
+  @ocaml.doc("<p>The Amazon Web Services account ID of the owner of the cluster.</p>")
+  @as("ResourceOwner")
   resourceOwner: option<string_>,
   @ocaml.doc("<p>The cluster identifier of the cluster associated with the endpoint.</p>")
   @as("ClusterIdentifier")
@@ -1480,11 +1610,13 @@ type endpointAccess = {
 }
 type eligibleTracksToUpdateList = array<updateTarget>
 type ec2SecurityGroupList = array<ec2SecurityGroup>
+type dataShareList = array<dataShare>
 type clusterParameterGroupStatusList = array<clusterParameterGroupStatus>
 type clusterDbRevisionsList = array<clusterDbRevision>
 type availabilityZoneList = array<availabilityZone>
 type attributeList = array<accountAttribute>
 type subnetList = array<subnet>
+type reservedNodeConfigurationOptionList = array<reservedNodeConfigurationOption>
 @ocaml.doc("<p>Describes an orderable cluster option.</p>")
 type orderableClusterOption = {
   @ocaml.doc("<p>A list of availability zones for the orderable cluster.</p>")
@@ -1564,6 +1696,16 @@ type clusterSubnetGroup = {
 type clusterSecurityGroups = array<clusterSecurityGroup>
 @ocaml.doc("<p>Describes a cluster.</p>")
 type cluster = {
+  @ocaml.doc(
+    "<p>The status of the reserved-node exchange request. Statuses include in-progress and requested.</p>"
+  )
+  @as("ReservedNodeExchangeStatus")
+  reservedNodeExchangeStatus: option<reservedNodeExchangeStatus>,
+  @ocaml.doc(
+    "<p>The Amazon Resource Name (ARN) for the IAM role set as default for the cluster.</p>"
+  )
+  @as("DefaultIamRoleArn")
+  defaultIamRoleArn: option<string_>,
   @ocaml.doc("<p>The AQUA (Advanced Query Accelerator) configuration of the cluster.</p>")
   @as("AquaConfiguration")
   aquaConfiguration: option<aquaConfiguration>,
@@ -1625,8 +1767,8 @@ type cluster = {
   maintenanceTrackName: option<string_>,
   @ocaml.doc("<p>Cluster operations that are waiting to be started.</p>") @as("PendingActions")
   pendingActions: option<pendingActionsList>,
-  @ocaml.doc("<p>A list of AWS Identity and Access Management (IAM) roles that can be used by the
-            cluster to access other AWS services.</p>")
+  @ocaml.doc("<p>A list of Identity and Access Management (IAM) roles that can be used by the
+            cluster to access other Amazon Web Services services.</p>")
   @as("IamRoles")
   iamRoles: option<clusterIamRoleList>,
   @ocaml.doc("<p>An option that specifies whether to create the cluster with enhanced VPC routing
@@ -1637,7 +1779,7 @@ type cluster = {
         <p>Default: false</p>")
   @as("EnhancedVpcRouting")
   enhancedVpcRouting: option<boolean_>,
-  @ocaml.doc("<p>The AWS Key Management Service (AWS KMS) key ID of the encryption key used to
+  @ocaml.doc("<p>The Key Management Service (KMS) key ID of the encryption key used to
             encrypt data in the cluster.</p>")
   @as("KmsKeyId")
   kmsKeyId: option<string_>,
@@ -1738,7 +1880,7 @@ type cluster = {
             specified, a database named <code>dev</code>dev was created by default. </p>")
   @as("DBName")
   dbname: option<string_>,
-  @ocaml.doc("<p>The master user name for the cluster. This name is used to connect to the database
+  @ocaml.doc("<p>The admin user name for the cluster. This name is used to connect to the database
             that is specified in the <b>DBName</b> parameter. </p>")
   @as("MasterUsername")
   masterUsername: option<string_>,
@@ -1917,7 +2059,7 @@ module UpdatePartnerStatus = {
     )
     @as("ClusterIdentifier")
     clusterIdentifier: partnerIntegrationClusterIdentifier,
-    @ocaml.doc("<p>The AWS account ID that owns the cluster.</p>") @as("AccountId")
+    @ocaml.doc("<p>The Amazon Web Services account ID that owns the cluster.</p>") @as("AccountId")
     accountId: partnerIntegrationAccountId,
   }
   type response = {
@@ -1964,7 +2106,7 @@ module ModifyClusterSnapshotSchedule = {
     @as("ClusterIdentifier")
     clusterIdentifier: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-redshift") @new
   external new: request => t = "ModifyClusterSnapshotScheduleCommand"
   let make = (~clusterIdentifier, ~disassociateSchedule=?, ~scheduleIdentifier=?, ()) =>
@@ -1974,6 +2116,35 @@ module ModifyClusterSnapshotSchedule = {
       clusterIdentifier: clusterIdentifier,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module ModifyAuthenticationProfile = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The new content of the authentication profile in JSON format.
+            The maximum length of the JSON string is determined by a quota for your account.</p>")
+    @as("AuthenticationProfileContent")
+    authenticationProfileContent: string_,
+    @ocaml.doc("<p>The name of the authentication profile to replace.</p>")
+    @as("AuthenticationProfileName")
+    authenticationProfileName: authenticationProfileNameString,
+  }
+  type response = {
+    @ocaml.doc("<p>The updated content of the authentication profile in JSON format.</p>")
+    @as("AuthenticationProfileContent")
+    authenticationProfileContent: option<string_>,
+    @ocaml.doc("<p>The name of the authentication profile that was replaced.</p>")
+    @as("AuthenticationProfileName")
+    authenticationProfileName: option<authenticationProfileNameString>,
+  }
+  @module("@aws-sdk/client-redshift") @new
+  external new: request => t = "ModifyAuthenticationProfileCommand"
+  let make = (~authenticationProfileContent, ~authenticationProfileName, ()) =>
+    new({
+      authenticationProfileContent: authenticationProfileContent,
+      authenticationProfileName: authenticationProfileName,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module EnableLogging = {
@@ -2087,7 +2258,7 @@ module DisableLogging = {
 
 module DescribeStorage = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("<p>The total amount of storage currently provisioned.</p>")
     @as("TotalProvisionedStorageInMegaBytes")
@@ -2096,8 +2267,8 @@ module DescribeStorage = {
     @as("TotalBackupSizeInMegaBytes")
     totalBackupSizeInMegaBytes: option<double>,
   }
-  @module("@aws-sdk/client-redshift") @new external new: unit => t = "DescribeStorageCommand"
-  let make = () => new()
+  @module("@aws-sdk/client-redshift") @new external new: request => t = "DescribeStorageCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -2141,7 +2312,7 @@ module DeleteUsageLimit = {
     @ocaml.doc("<p>The identifier of the usage limit to delete.</p>") @as("UsageLimitId")
     usageLimitId: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-redshift") @new external new: request => t = "DeleteUsageLimitCommand"
   let make = (~usageLimitId, ()) => new({usageLimitId: usageLimitId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -2154,7 +2325,7 @@ module DeleteSnapshotSchedule = {
     @as("ScheduleIdentifier")
     scheduleIdentifier: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-redshift") @new
   external new: request => t = "DeleteSnapshotScheduleCommand"
   let make = (~scheduleIdentifier, ()) => new({scheduleIdentifier: scheduleIdentifier})
@@ -2168,7 +2339,7 @@ module DeleteSnapshotCopyGrant = {
     @ocaml.doc("<p>The name of the snapshot copy grant to delete.</p>") @as("SnapshotCopyGrantName")
     snapshotCopyGrantName: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-redshift") @new
   external new: request => t = "DeleteSnapshotCopyGrantCommand"
   let make = (~snapshotCopyGrantName, ()) => new({snapshotCopyGrantName: snapshotCopyGrantName})
@@ -2181,7 +2352,7 @@ module DeleteScheduledAction = {
     @ocaml.doc("<p>The name of the scheduled action to delete. </p>") @as("ScheduledActionName")
     scheduledActionName: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-redshift") @new
   external new: request => t = "DeleteScheduledActionCommand"
   let make = (~scheduledActionName, ()) => new({scheduledActionName: scheduledActionName})
@@ -2199,7 +2370,7 @@ module DeletePartner = {
     @ocaml.doc("<p>The cluster identifier of the cluster that receives data from the partner.</p>")
     @as("ClusterIdentifier")
     clusterIdentifier: partnerIntegrationClusterIdentifier,
-    @ocaml.doc("<p>The AWS account ID that owns the cluster.</p>") @as("AccountId")
+    @ocaml.doc("<p>The Amazon Web Services account ID that owns the cluster.</p>") @as("AccountId")
     accountId: partnerIntegrationAccountId,
   }
   type response = {
@@ -2228,7 +2399,7 @@ module DeleteHsmConfiguration = {
     @as("HsmConfigurationIdentifier")
     hsmConfigurationIdentifier: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-redshift") @new
   external new: request => t = "DeleteHsmConfigurationCommand"
   let make = (~hsmConfigurationIdentifier, ()) =>
@@ -2244,7 +2415,7 @@ module DeleteHsmClientCertificate = {
     @as("HsmClientCertificateIdentifier")
     hsmClientCertificateIdentifier: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-redshift") @new
   external new: request => t = "DeleteHsmClientCertificateCommand"
   let make = (~hsmClientCertificateIdentifier, ()) =>
@@ -2262,7 +2433,7 @@ module DeleteEventSubscription = {
     @as("SubscriptionName")
     subscriptionName: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-redshift") @new
   external new: request => t = "DeleteEventSubscriptionCommand"
   let make = (~subscriptionName, ()) => new({subscriptionName: subscriptionName})
@@ -2277,7 +2448,7 @@ module DeleteClusterSubnetGroup = {
     @as("ClusterSubnetGroupName")
     clusterSubnetGroupName: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-redshift") @new
   external new: request => t = "DeleteClusterSubnetGroupCommand"
   let make = (~clusterSubnetGroupName, ()) => new({clusterSubnetGroupName: clusterSubnetGroupName})
@@ -2292,7 +2463,7 @@ module DeleteClusterSecurityGroup = {
     @as("ClusterSecurityGroupName")
     clusterSecurityGroupName: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-redshift") @new
   external new: request => t = "DeleteClusterSecurityGroupCommand"
   let make = (~clusterSecurityGroupName, ()) =>
@@ -2317,11 +2488,59 @@ module DeleteClusterParameterGroup = {
     @as("ParameterGroupName")
     parameterGroupName: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-redshift") @new
   external new: request => t = "DeleteClusterParameterGroupCommand"
   let make = (~parameterGroupName, ()) => new({parameterGroupName: parameterGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module DeleteAuthenticationProfile = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The name of the authentication profile to delete.</p>")
+    @as("AuthenticationProfileName")
+    authenticationProfileName: authenticationProfileNameString,
+  }
+  type response = {
+    @ocaml.doc("<p>The name of the authentication profile that was deleted.</p>")
+    @as("AuthenticationProfileName")
+    authenticationProfileName: option<authenticationProfileNameString>,
+  }
+  @module("@aws-sdk/client-redshift") @new
+  external new: request => t = "DeleteAuthenticationProfileCommand"
+  let make = (~authenticationProfileName, ()) =>
+    new({authenticationProfileName: authenticationProfileName})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module CreateAuthenticationProfile = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The content of the authentication profile in JSON format. 
+            The maximum length of the JSON string is determined by a quota for your account.</p>")
+    @as("AuthenticationProfileContent")
+    authenticationProfileContent: string_,
+    @ocaml.doc("<p>The name of the authentication profile to be created.</p>")
+    @as("AuthenticationProfileName")
+    authenticationProfileName: authenticationProfileNameString,
+  }
+  type response = {
+    @ocaml.doc("<p>The content of the authentication profile in JSON format.</p>")
+    @as("AuthenticationProfileContent")
+    authenticationProfileContent: option<string_>,
+    @ocaml.doc("<p>The name of the authentication profile that was created.</p>")
+    @as("AuthenticationProfileName")
+    authenticationProfileName: option<authenticationProfileNameString>,
+  }
+  @module("@aws-sdk/client-redshift") @new
+  external new: request => t = "CreateAuthenticationProfileCommand"
+  let make = (~authenticationProfileContent, ~authenticationProfileName, ()) =>
+    new({
+      authenticationProfileContent: authenticationProfileContent,
+      authenticationProfileName: authenticationProfileName,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AddPartner = {
@@ -2335,7 +2554,7 @@ module AddPartner = {
     @ocaml.doc("<p>The cluster identifier of the cluster that receives data from the partner.</p>")
     @as("ClusterIdentifier")
     clusterIdentifier: partnerIntegrationClusterIdentifier,
-    @ocaml.doc("<p>The AWS account ID that owns the cluster.</p>") @as("AccountId")
+    @ocaml.doc("<p>The Amazon Web Services account ID that owns the cluster.</p>") @as("AccountId")
     accountId: partnerIntegrationAccountId,
   }
   type response = {
@@ -2368,7 +2587,8 @@ module RevokeEndpointAccess = {
     )
     @as("VpcIds")
     vpcIds: option<vpcIdentifierList>,
-    @ocaml.doc("<p>The AWS account ID whose access is to be revoked.</p>") @as("Account")
+    @ocaml.doc("<p>The Amazon Web Services account ID whose access is to be revoked.</p>")
+    @as("Account")
     account: option<string_>,
     @ocaml.doc("<p>The cluster to revoke access from.</p>") @as("ClusterIdentifier")
     clusterIdentifier: option<string_>,
@@ -2451,7 +2671,7 @@ module ModifyAquaConfiguration = {
     @ocaml.doc("<p>The new value of AQUA configuration status. Possible values include the following.</p>
         <ul>
             <li>
-               <p>enabled - Use AQUA if it is available for the current AWS Region and Amazon Redshift node type.</p>
+               <p>enabled - Use AQUA if it is available for the current Amazon Web Services Region and Amazon Redshift node type.</p>
             </li>
             <li>
                <p>disabled - Don't use AQUA. </p>
@@ -2625,7 +2845,7 @@ module DescribeResize = {
   type request = {
     @ocaml.doc("<p>The unique identifier of a cluster whose resize progress you are requesting. This
             parameter is case-sensitive.</p>
-        <p>By default, resize operations for all clusters defined for an AWS account are
+        <p>By default, resize operations for all clusters defined for an Amazon Web Services account are
             returned.</p>")
     @as("ClusterIdentifier")
     clusterIdentifier: string_,
@@ -2721,7 +2941,7 @@ module DeleteTags = {
     @as("ResourceName")
     resourceName: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-redshift") @new external new: request => t = "DeleteTagsCommand"
   let make = (~tagKeys, ~resourceName, ()) => new({tagKeys: tagKeys, resourceName: resourceName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -2822,7 +3042,8 @@ module AuthorizeEndpointAccess = {
     @ocaml.doc("<p>The virtual private cloud (VPC) identifiers to grant access to.</p>")
     @as("VpcIds")
     vpcIds: option<vpcIdentifierList>,
-    @ocaml.doc("<p>The AWS account ID to grant access to.</p>") @as("Account") account: string_,
+    @ocaml.doc("<p>The Amazon Web Services account ID to grant access to.</p>") @as("Account")
+    account: string_,
     @ocaml.doc("<p>The cluster identifier of the cluster to grant access to.</p>")
     @as("ClusterIdentifier")
     clusterIdentifier: option<string_>,
@@ -2873,6 +3094,19 @@ module ResetClusterParameterGroup = {
       resetAllParameters: resetAllParameters,
       parameterGroupName: parameterGroupName,
     })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module RejectDataShare = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the datashare to reject.</p>")
+    @as("DataShareArn")
+    dataShareArn: string_,
+  }
+  type response = dataShare
+  @module("@aws-sdk/client-redshift") @new external new: request => t = "RejectDataShareCommand"
+  let make = (~dataShareArn, ()) => new({dataShareArn: dataShareArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -3009,6 +3243,39 @@ module ModifyClusterParameterGroup = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module DisassociateDataShareConsumer = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>From a datashare consumer account, removes association of a datashare from all the existing and future namespaces in the specified Amazon Web Services Region.</p>"
+    )
+    @as("ConsumerRegion")
+    consumerRegion: option<string_>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the consumer that association for
+            the datashare is removed from.</p>")
+    @as("ConsumerArn")
+    consumerArn: option<string_>,
+    @ocaml.doc("<p>A value that specifies whether association for the datashare is removed from the
+            entire account.</p>")
+    @as("DisassociateEntireAccount")
+    disassociateEntireAccount: option<booleanOptional>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the datashare to remove association for. </p>")
+    @as("DataShareArn")
+    dataShareArn: string_,
+  }
+  type response = dataShare
+  @module("@aws-sdk/client-redshift") @new
+  external new: request => t = "DisassociateDataShareConsumerCommand"
+  let make = (~dataShareArn, ~consumerRegion=?, ~consumerArn=?, ~disassociateEntireAccount=?, ()) =>
+    new({
+      consumerRegion: consumerRegion,
+      consumerArn: consumerArn,
+      disassociateEntireAccount: disassociateEntireAccount,
+      dataShareArn: dataShareArn,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module DescribeTableRestoreStatus = {
   type t
   @ocaml.doc("<p></p>")
@@ -3057,6 +3324,54 @@ module DescribeTableRestoreStatus = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module DescribeReservedNodeExchangeStatus = {
+  type t
+  type request = {
+    @ocaml.doc("<p>An optional pagination token provided by a previous <code>DescribeReservedNodeExchangeStatus</code> request. If this 
+            parameter is specified, the response includes only records beyond the marker, up to the value 
+            specified by the <code>MaxRecords</code> parameter. You can retrieve the next set of response
+            records by providing the returned marker value in the <code>Marker</code> parameter and
+            retrying the request.</p>")
+    @as("Marker")
+    marker: option<string_>,
+    @ocaml.doc("<p>The maximum number of response records to return in each call. If the number of
+            remaining response records exceeds the specified <code>MaxRecords</code> value, a value
+            is returned in a <code>Marker</code> field of the response. You can retrieve the next
+            set of records by retrying the command with the returned marker value.</p>")
+    @as("MaxRecords")
+    maxRecords: option<integerOptional>,
+    @ocaml.doc("<p>The identifier of the reserved-node exchange request.</p>")
+    @as("ReservedNodeExchangeRequestId")
+    reservedNodeExchangeRequestId: option<string_>,
+    @ocaml.doc(
+      "<p>The identifier of the source reserved node in a reserved-node exchange request.</p>"
+    )
+    @as("ReservedNodeId")
+    reservedNodeId: option<string_>,
+  }
+  type response = {
+    @ocaml.doc(
+      "<p>A pagination token provided by a previous <code>DescribeReservedNodeExchangeStatus</code> request.</p>"
+    )
+    @as("Marker")
+    marker: option<string_>,
+    @ocaml.doc("<p>The details of the reserved-node exchange request, including the status, request
+            time, source reserved-node identifier, and additional details.</p>")
+    @as("ReservedNodeExchangeStatusDetails")
+    reservedNodeExchangeStatusDetails: option<reservedNodeExchangeStatusList>,
+  }
+  @module("@aws-sdk/client-redshift") @new
+  external new: request => t = "DescribeReservedNodeExchangeStatusCommand"
+  let make = (~marker=?, ~maxRecords=?, ~reservedNodeExchangeRequestId=?, ~reservedNodeId=?, ()) =>
+    new({
+      marker: marker,
+      maxRecords: maxRecords,
+      reservedNodeExchangeRequestId: reservedNodeExchangeRequestId,
+      reservedNodeId: reservedNodeId,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module DescribePartners = {
   type t
   type request = {
@@ -3075,7 +3390,7 @@ module DescribePartners = {
     )
     @as("ClusterIdentifier")
     clusterIdentifier: partnerIntegrationClusterIdentifier,
-    @ocaml.doc("<p>The AWS account ID that owns the cluster.</p>") @as("AccountId")
+    @ocaml.doc("<p>The Amazon Web Services account ID that owns the cluster.</p>") @as("AccountId")
     accountId: partnerIntegrationAccountId,
   }
   type response = {
@@ -3099,7 +3414,7 @@ module DescribeClusterVersions = {
   type request = {
     @ocaml.doc("<p>An optional parameter that specifies the starting point to return a set of response
             records. When the results of a <a>DescribeClusterVersions</a> request exceed
-            the value specified in <code>MaxRecords</code>, AWS returns a value in the
+            the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the
                 <code>Marker</code> field of the response. You can retrieve the next set of response
             records by providing the returned marker value in the <code>Marker</code> parameter and
             retrying the request. </p>")
@@ -3167,7 +3482,7 @@ module DescribeClusterParameters = {
   type request = {
     @ocaml.doc("<p>An optional parameter that specifies the starting point to return a set of response
             records. When the results of a <a>DescribeClusterParameters</a> request
-            exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the
+            exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the
                 <code>Marker</code> field of the response. You can retrieve the next set of response
             records by providing the returned marker value in the <code>Marker</code> parameter and
             retrying the request. </p>")
@@ -3221,6 +3536,47 @@ module DescribeClusterParameters = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module DescribeAuthenticationProfiles = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>The name of the authentication profile to describe. If not specified then all authentication profiles owned by the account are listed.</p>"
+    )
+    @as("AuthenticationProfileName")
+    authenticationProfileName: option<authenticationProfileNameString>,
+  }
+  type response = {
+    @ocaml.doc("<p>The list of authentication profiles.</p>") @as("AuthenticationProfiles")
+    authenticationProfiles: option<authenticationProfileList>,
+  }
+  @module("@aws-sdk/client-redshift") @new
+  external new: request => t = "DescribeAuthenticationProfilesCommand"
+  let make = (~authenticationProfileName=?, ()) =>
+    new({authenticationProfileName: authenticationProfileName})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module DeauthorizeDataShare = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The identifier of the data consumer that is to have authorization removed from the datashare. 
+            This identifier is an Amazon Web Services account ID or a keyword, such as ADX.</p>")
+    @as("ConsumerIdentifier")
+    consumerIdentifier: string_,
+    @ocaml.doc(
+      "<p>The Amazon Resource Name (ARN) of the datashare to remove authorization from.</p>"
+    )
+    @as("DataShareArn")
+    dataShareArn: string_,
+  }
+  type response = dataShare
+  @module("@aws-sdk/client-redshift") @new
+  external new: request => t = "DeauthorizeDataShareCommand"
+  let make = (~consumerIdentifier, ~dataShareArn, ()) =>
+    new({consumerIdentifier: consumerIdentifier, dataShareArn: dataShareArn})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module CreateUsageLimit = {
   type t
   type request = {
@@ -3241,6 +3597,7 @@ module CreateUsageLimit = {
     @ocaml.doc("<p>The type of limit. Depending on the feature type, this can be based on a time duration or data size.
             If <code>FeatureType</code> is <code>spectrum</code>, then <code>LimitType</code> must be <code>data-scanned</code>.
             If <code>FeatureType</code> is <code>concurrency-scaling</code>, then <code>LimitType</code> must be <code>time</code>.
+            If <code>FeatureType</code> is <code>cross-region-datasharing</code>, then <code>LimitType</code> must be <code>data-scanned</code>.
            </p>")
     @as("LimitType")
     limitType: usageLimitLimitType,
@@ -3291,7 +3648,7 @@ module CreateTags = {
     @as("ResourceName")
     resourceName: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-redshift") @new external new: request => t = "CreateTagsCommand"
   let make = (~tags, ~resourceName, ()) => new({tags: tags, resourceName: resourceName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -3457,11 +3814,67 @@ module BatchDeleteClusterSnapshots = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module AuthorizeDataShare = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>The identifier of the data consumer that is authorized to access the datashare. This identifier is an Amazon Web Services account ID or a keyword, such as ADX.</p>"
+    )
+    @as("ConsumerIdentifier")
+    consumerIdentifier: string_,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the datashare that producers are to authorize
+            sharing for.</p>")
+    @as("DataShareArn")
+    dataShareArn: string_,
+  }
+  type response = dataShare
+  @module("@aws-sdk/client-redshift") @new external new: request => t = "AuthorizeDataShareCommand"
+  let make = (~consumerIdentifier, ~dataShareArn, ()) =>
+    new({consumerIdentifier: consumerIdentifier, dataShareArn: dataShareArn})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module AssociateDataShareConsumer = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>From a datashare consumer account, associates a datashare with all existing and future namespaces in the specified Amazon Web Services Region.</p>"
+    )
+    @as("ConsumerRegion")
+    consumerRegion: option<string_>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the consumer that is associated with the
+            datashare.</p>")
+    @as("ConsumerArn")
+    consumerArn: option<string_>,
+    @ocaml.doc(
+      "<p>A value that specifies whether the datashare is associated with the entire account.</p>"
+    )
+    @as("AssociateEntireAccount")
+    associateEntireAccount: option<booleanOptional>,
+    @ocaml.doc(
+      "<p>The Amazon Resource Name (ARN) of the datashare that the consumer is to use with the account or the namespace.</p>"
+    )
+    @as("DataShareArn")
+    dataShareArn: string_,
+  }
+  type response = dataShare
+  @module("@aws-sdk/client-redshift") @new
+  external new: request => t = "AssociateDataShareConsumerCommand"
+  let make = (~dataShareArn, ~consumerRegion=?, ~consumerArn=?, ~associateEntireAccount=?, ()) =>
+    new({
+      consumerRegion: consumerRegion,
+      consumerArn: consumerArn,
+      associateEntireAccount: associateEntireAccount,
+      dataShareArn: dataShareArn,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module RevokeSnapshotAccess = {
   type t
   @ocaml.doc("<p></p>")
   type request = {
-    @ocaml.doc("<p>The identifier of the AWS customer account that can no longer restore the specified
+    @ocaml.doc("<p>The identifier of the Amazon Web Services account that can no longer restore the specified
             snapshot.</p>")
     @as("AccountWithRestoreAccess")
     accountWithRestoreAccess: string_,
@@ -3522,7 +3935,7 @@ module ModifyEventSubscription = {
     severity: option<string_>,
     @ocaml.doc("<p>Specifies the Amazon Redshift event categories to be published by the event notification
             subscription.</p>
-        <p>Values: configuration, management, monitoring, security</p>")
+        <p>Values: configuration, management, monitoring, security, pending</p>")
     @as("EventCategories")
     eventCategories: option<eventCategoriesList>,
     @ocaml.doc("<p>A list of one or more identifiers of Amazon Redshift source objects. All of the objects
@@ -3537,7 +3950,7 @@ module ModifyEventSubscription = {
     @ocaml.doc("<p>The type of source that will be generating the events. For example, if you want to
             be notified of events generated by a cluster, you would set this parameter to cluster.
             If this value is not specified, events are returned for all Amazon Redshift objects in your
-            AWS account. You must specify a source type in order to specify source IDs.</p>
+            Amazon Web Services account. You must specify a source type in order to specify source IDs.</p>
         <p>Valid values: cluster, cluster-parameter-group, cluster-security-group, cluster-snapshot, and scheduled-action.</p>")
     @as("SourceType")
     sourceType: option<string_>,
@@ -3744,7 +4157,7 @@ module DescribeNodeConfigurationOptions = {
     maxRecords: option<integerOptional>,
     @ocaml.doc("<p>An optional parameter that specifies the starting point to return a set of response
             records. When the results of a <a>DescribeNodeConfigurationOptions</a> request
-            exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the
+            exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the
             <code>Marker</code> field of the response. You can retrieve the next set of response
             records by providing the returned marker value in the <code>Marker</code> parameter and
             retrying the request. </p>")
@@ -3753,7 +4166,7 @@ module DescribeNodeConfigurationOptions = {
     @ocaml.doc("<p>A set of name, operator, and value items to filter the results.</p>")
     @as("Filters")
     filters: option<nodeConfigurationOptionsFilterList>,
-    @ocaml.doc("<p>The AWS customer account used to create or copy the snapshot. 
+    @ocaml.doc("<p>The Amazon Web Services account used to create or copy the snapshot. 
             Required if you are restoring a snapshot you do not own, 
             optional if you own the snapshot.</p>")
     @as("OwnerAccount")
@@ -3815,7 +4228,7 @@ module DescribeEvents = {
   type request = {
     @ocaml.doc("<p>An optional parameter that specifies the starting point to return a set of response
             records. When the results of a <a>DescribeEvents</a> request exceed the value
-            specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code>
+            specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the <code>Marker</code>
             field of the response. You can retrieve the next set of response records by providing
             the returned marker value in the <code>Marker</code> parameter and retrying the request.
         </p>")
@@ -3959,7 +4372,7 @@ module DescribeEndpointAuthorization = {
            If false (default), checks authorization from a grantor point of view.</p>")
     @as("Grantee")
     grantee: option<booleanOptional>,
-    @ocaml.doc("<p>The AWS account ID of either the cluster owner (grantor) or grantee. 
+    @ocaml.doc("<p>The AAmazon Web Services account ID of either the cluster owner (grantor) or grantee. 
        If <code>Grantee</code> parameter is true, then the <code>Account</code> value is of the grantor.</p>")
     @as("Account")
     account: option<string_>,
@@ -3995,7 +4408,7 @@ module DescribeDefaultClusterParameters = {
   type request = {
     @ocaml.doc("<p>An optional parameter that specifies the starting point to return a set of response
             records. When the results of a <a>DescribeDefaultClusterParameters</a>
-            request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in
+            request exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in
             the <code>Marker</code> field of the response. You can retrieve the next set of response
             records by providing the returned marker value in the <code>Marker</code> parameter and
             retrying the request. </p>")
@@ -4051,12 +4464,12 @@ module CreateSnapshotCopyGrant = {
   @ocaml.doc("<p>The result of the <code>CreateSnapshotCopyGrant</code> action.</p>")
   type request = {
     @ocaml.doc("<p>A list of tag instances.</p>") @as("Tags") tags: option<tagList_>,
-    @ocaml.doc("<p>The unique identifier of the customer master key (CMK) to which to grant Amazon Redshift
+    @ocaml.doc("<p>The unique identifier of the encrypted symmetric key to which to grant Amazon Redshift
             permission. If no key is specified, the default key is used.</p>")
     @as("KmsKeyId")
     kmsKeyId: option<string_>,
     @ocaml.doc("<p>The name of the snapshot copy grant. This name must be unique in the region for the
-            AWS account.</p> 
+            Amazon Web Services account.</p> 
          <p>Constraints:</p>
          <ul>
             <li>
@@ -4072,7 +4485,7 @@ module CreateSnapshotCopyGrant = {
                <p>Cannot end with a hyphen or contain two consecutive hyphens.</p>
             </li>
             <li>
-               <p>Must be unique for all clusters within an AWS account.</p>
+               <p>Must be unique for all clusters within an Amazon Web Services account.</p>
             </li>
          </ul>")
     @as("SnapshotCopyGrantName")
@@ -4171,7 +4584,7 @@ module CreateEventSubscription = {
     severity: option<string_>,
     @ocaml.doc("<p>Specifies the Amazon Redshift event categories to be published by the event notification
             subscription.</p>
-        <p>Values: configuration, management, monitoring, security</p>")
+        <p>Values: configuration, management, monitoring, security, pending</p>")
     @as("EventCategories")
     eventCategories: option<eventCategoriesList>,
     @ocaml.doc("<p>A list of one or more identifiers of Amazon Redshift source objects. All of the objects
@@ -4186,7 +4599,7 @@ module CreateEventSubscription = {
     @ocaml.doc("<p>The type of source that will be generating the events. For example, if you want to
             be notified of events generated by a cluster, you would set this parameter to cluster.
             If this value is not specified, events are returned for all Amazon Redshift objects in your
-            AWS account. You must specify a source type in order to specify source IDs.</p>
+            Amazon Web Services account. You must specify a source type in order to specify source IDs.</p>
         <p>Valid values: cluster, cluster-parameter-group, cluster-security-group, cluster-snapshot, and scheduled-action.</p>")
     @as("SourceType")
     sourceType: option<string_>,
@@ -4262,7 +4675,7 @@ module CreateEndpointAccess = {
     @as("EndpointName")
     endpointName: string_,
     @ocaml.doc(
-      "<p>The AWS account ID of the owner of the cluster. This is only required if the cluster is in another AWS account.</p>"
+      "<p>The Amazon Web Services account ID of the owner of the cluster. This is only required if the cluster is in another Amazon Web Services account.</p>"
     )
     @as("ResourceOwner")
     resourceOwner: option<string_>,
@@ -4307,7 +4720,7 @@ module CreateClusterSnapshot = {
     @as("ClusterIdentifier")
     clusterIdentifier: string_,
     @ocaml.doc("<p>A unique identifier for the snapshot that you are requesting. This identifier must
-            be unique for all snapshots within the AWS account.</p>
+            be unique for all snapshots within the Amazon Web Services account.</p>
         <p>Constraints:</p>
         <ul>
             <li>
@@ -4357,7 +4770,7 @@ module CreateClusterParameterGroup = {
     @ocaml.doc("<p>The Amazon Redshift engine version to which the cluster parameter group applies. The
             cluster engine version determines the set of parameters.</p>
         <p>To get a list of valid parameter group family names, you can call <a>DescribeClusterParameterGroups</a>. By default, Amazon Redshift returns a list of
-            all the parameter groups that are owned by your AWS account, including the default
+            all the parameter groups that are owned by your Amazon Web Services account, including the default
             parameter groups for each Amazon Redshift engine version. The parameter group family names
             associated with the default parameter groups provide you the valid values. For example,
             a valid family name is \"redshift-1.0\". </p>")
@@ -4376,7 +4789,7 @@ module CreateClusterParameterGroup = {
                 <p>Cannot end with a hyphen or contain two consecutive hyphens.</p>
             </li>
             <li>
-                <p>Must be unique withing your AWS account.</p>
+                <p>Must be unique withing your Amazon Web Services account.</p>
             </li>
          </ul>
         <note>
@@ -4426,7 +4839,7 @@ module CopyClusterSnapshot = {
                 <p>Cannot end with a hyphen or contain two consecutive hyphens.</p>
             </li>
             <li>
-                <p>Must be unique for the AWS account that is making the request.</p>
+                <p>Must be unique for the Amazon Web Services account that is making the request.</p>
             </li>
          </ul>")
     @as("TargetSnapshotIdentifier")
@@ -4475,9 +4888,9 @@ module AuthorizeSnapshotAccess = {
   type t
   @ocaml.doc("<p></p>")
   type request = {
-    @ocaml.doc("<p>The identifier of the AWS customer account authorized to restore the specified
+    @ocaml.doc("<p>The identifier of the Amazon Web Services account authorized to restore the specified
             snapshot.</p>
-        <p>To share a snapshot with AWS support, specify amazon-redshift-support.</p>")
+        <p>To share a snapshot with Amazon Web Services Support, specify amazon-redshift-support.</p>")
     @as("AccountWithRestoreAccess")
     accountWithRestoreAccess: string_,
     @ocaml.doc("<p>The identifier of the cluster the snapshot was created from. This parameter is
@@ -4585,7 +4998,7 @@ module DescribeUsageLimits = {
     tagKeys: option<tagKeyList>,
     @ocaml.doc("<p>An optional parameter that specifies the starting point to return a set of response
             records. When the results of a <a>DescribeUsageLimits</a> request
-            exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the
+            exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the
             <code>Marker</code> field of the response. You can retrieve the next set of response
             records by providing the returned marker value in the <code>Marker</code> parameter and
             retrying the request. </p>")
@@ -4727,7 +5140,7 @@ module DescribeSnapshotCopyGrants = {
     tagKeys: option<tagKeyList>,
     @ocaml.doc("<p>An optional parameter that specifies the starting point to return a set of response
             records. When the results of a <code>DescribeSnapshotCopyGrant</code> request exceed the
-            value specified in <code>MaxRecords</code>, AWS returns a value in the
+            value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the
                 <code>Marker</code> field of the response. You can retrieve the next set of response
             records by providing the returned marker value in the <code>Marker</code> parameter and
             retrying the request. </p>
@@ -4753,7 +5166,7 @@ module DescribeSnapshotCopyGrants = {
     snapshotCopyGrants: option<snapshotCopyGrantList>,
     @ocaml.doc("<p>An optional parameter that specifies the starting point to return a set of response
             records. When the results of a <code>DescribeSnapshotCopyGrant</code> request exceed the
-            value specified in <code>MaxRecords</code>, AWS returns a value in the
+            value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the
                 <code>Marker</code> field of the response. You can retrieve the next set of response
             records by providing the returned marker value in the <code>Marker</code> parameter and
             retrying the request. </p>
@@ -4788,7 +5201,7 @@ module DescribeScheduledActions = {
     maxRecords: option<integerOptional>,
     @ocaml.doc("<p>An optional parameter that specifies the starting point to return a set of response
             records. When the results of a <a>DescribeScheduledActions</a> request
-            exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the
+            exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the
             <code>Marker</code> field of the response. You can retrieve the next set of response
             records by providing the returned marker value in the <code>Marker</code> parameter and
             retrying the request. </p>")
@@ -4818,7 +5231,7 @@ module DescribeScheduledActions = {
     scheduledActions: option<scheduledActionList>,
     @ocaml.doc("<p>An optional parameter that specifies the starting point to return a set of response
             records. When the results of a <a>DescribeScheduledActions</a> request
-            exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the
+            exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the
             <code>Marker</code> field of the response. You can retrieve the next set of response
             records by providing the returned marker value in the <code>Marker</code> parameter and
             retrying the request. </p>")
@@ -4857,7 +5270,7 @@ module DescribeReservedNodes = {
   type request = {
     @ocaml.doc("<p>An optional parameter that specifies the starting point to return a set of response
             records. When the results of a <a>DescribeReservedNodes</a> request exceed
-            the value specified in <code>MaxRecords</code>, AWS returns a value in the
+            the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the
                 <code>Marker</code> field of the response. You can retrieve the next set of response
             records by providing the returned marker value in the <code>Marker</code> parameter and
             retrying the request. </p>")
@@ -4900,7 +5313,7 @@ module DescribeReservedNodeOfferings = {
   type request = {
     @ocaml.doc("<p>An optional parameter that specifies the starting point to return a set of response
             records. When the results of a <a>DescribeReservedNodeOfferings</a> request
-            exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the
+            exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the
                 <code>Marker</code> field of the response. You can retrieve the next set of response
             records by providing the returned marker value in the <code>Marker</code> parameter and
             retrying the request. </p>")
@@ -4960,7 +5373,7 @@ module DescribeHsmConfigurations = {
     tagKeys: option<tagKeyList>,
     @ocaml.doc("<p>An optional parameter that specifies the starting point to return a set of response
             records. When the results of a <a>DescribeHsmConfigurations</a> request
-            exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the
+            exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the
                 <code>Marker</code> field of the response. You can retrieve the next set of response
             records by providing the returned marker value in the <code>Marker</code> parameter and
             retrying the request. </p>")
@@ -4977,7 +5390,7 @@ module DescribeHsmConfigurations = {
     maxRecords: option<integerOptional>,
     @ocaml.doc("<p>The identifier of a specific Amazon Redshift HSM configuration to be described. If no
             identifier is specified, information is returned for all HSM configurations owned by
-            your AWS customer account.</p>")
+            your Amazon Web Services account.</p>")
     @as("HsmConfigurationIdentifier")
     hsmConfigurationIdentifier: option<string_>,
   }
@@ -5035,7 +5448,7 @@ module DescribeHsmClientCertificates = {
     tagKeys: option<tagKeyList>,
     @ocaml.doc("<p>An optional parameter that specifies the starting point to return a set of response
             records. When the results of a <a>DescribeHsmClientCertificates</a> request
-            exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the
+            exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the
                 <code>Marker</code> field of the response. You can retrieve the next set of response
             records by providing the returned marker value in the <code>Marker</code> parameter and
             retrying the request. </p>")
@@ -5052,7 +5465,7 @@ module DescribeHsmClientCertificates = {
     maxRecords: option<integerOptional>,
     @ocaml.doc("<p>The identifier of a specific HSM client certificate for which you want information.
             If no identifier is specified, information is returned for all HSM client certificates
-            owned by your AWS customer account.</p>")
+            owned by your Amazon Web Services account.</p>")
     @as("HsmClientCertificateIdentifier")
     hsmClientCertificateIdentifier: option<string_>,
   }
@@ -5112,7 +5525,7 @@ module DescribeEventSubscriptions = {
     tagKeys: option<tagKeyList>,
     @ocaml.doc("<p>An optional parameter that specifies the starting point to return a set of response
             records. When the results of a DescribeEventSubscriptions request exceed the value
-            specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code>
+            specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the <code>Marker</code>
             field of the response. You can retrieve the next set of response records by providing
             the returned marker value in the <code>Marker</code> parameter and retrying the request.
         </p>")
@@ -5154,6 +5567,130 @@ module DescribeEventSubscriptions = {
       maxRecords: maxRecords,
       subscriptionName: subscriptionName,
     })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module DescribeDataSharesForProducer = {
+  type t
+  type request = {
+    @ocaml.doc("<p>An optional parameter that specifies the starting point to return a set of response
+            records. When the results of a <a>DescribeDataSharesForProducer</a> request
+            exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the
+            <code>Marker</code> field of the response. You can retrieve the next set of response
+            records by providing the returned marker value in the <code>Marker</code> parameter and
+            retrying the request. </p>")
+    @as("Marker")
+    marker: option<string_>,
+    @ocaml.doc("<p>The maximum number of response records to return in each call. If the number of
+            remaining response records exceeds the specified <code>MaxRecords</code> value, a value
+            is returned in a <code>marker</code> field of the response. You can retrieve the next
+            set of records by retrying the command with the returned marker value. </p>")
+    @as("MaxRecords")
+    maxRecords: option<integerOptional>,
+    @ocaml.doc("<p>An identifier giving the status of a datashare in the producer. If this field is specified, Amazon
+            Redshift returns the list of datashares that have the specified status.</p>")
+    @as("Status")
+    status: option<dataShareStatusForProducer>,
+    @ocaml.doc(
+      "<p>The Amazon Resource Name (ARN) of the producer that returns in the list of datashares.</p>"
+    )
+    @as("ProducerArn")
+    producerArn: option<string_>,
+  }
+  type response = {
+    @ocaml.doc("<p>An optional parameter that specifies the starting point to return a set of response
+            records. When the results of a <a>DescribeDataSharesForProducer</a> request
+            exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the
+            <code>Marker</code> field of the response. You can retrieve the next set of response
+            records by providing the returned marker value in the <code>Marker</code> parameter and
+            retrying the request. </p>")
+    @as("Marker")
+    marker: option<string_>,
+    @ocaml.doc("<p>Shows the results of datashares available for producers.</p>") @as("DataShares")
+    dataShares: option<dataShareList>,
+  }
+  @module("@aws-sdk/client-redshift") @new
+  external new: request => t = "DescribeDataSharesForProducerCommand"
+  let make = (~marker=?, ~maxRecords=?, ~status=?, ~producerArn=?, ()) =>
+    new({marker: marker, maxRecords: maxRecords, status: status, producerArn: producerArn})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module DescribeDataSharesForConsumer = {
+  type t
+  type request = {
+    @ocaml.doc("<p>An optional parameter that specifies the starting point to return a set of response
+            records. When the results of a <a>DescribeDataSharesForConsumer</a> request
+            exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the
+            <code>Marker</code> field of the response. You can retrieve the next set of response
+            records by providing the returned marker value in the <code>Marker</code> parameter and
+            retrying the request. </p>")
+    @as("Marker")
+    marker: option<string_>,
+    @ocaml.doc("<p>The maximum number of response records to return in each call. If the number of
+            remaining response records exceeds the specified <code>MaxRecords</code> value, a value
+            is returned in a <code>marker</code> field of the response. You can retrieve the next
+            set of records by retrying the command with the returned marker value. </p>")
+    @as("MaxRecords")
+    maxRecords: option<integerOptional>,
+    @ocaml.doc("<p>An identifier giving the status of a datashare in the consumer cluster. If this field is specified, Amazon
+            Redshift returns the list of datashares that have the specified status.</p>")
+    @as("Status")
+    status: option<dataShareStatusForConsumer>,
+    @ocaml.doc(
+      "<p>The Amazon Resource Name (ARN) of the consumer that returns in the list of datashares.</p>"
+    )
+    @as("ConsumerArn")
+    consumerArn: option<string_>,
+  }
+  type response = {
+    @ocaml.doc("<p>An optional parameter that specifies the starting point to return a set of response
+            records. When the results of a <a>DescribeDataSharesForConsumer</a> request
+            exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the
+            <code>Marker</code> field of the response. You can retrieve the next set of response
+            records by providing the returned marker value in the <code>Marker</code> parameter and
+            retrying the request. </p>")
+    @as("Marker")
+    marker: option<string_>,
+    @ocaml.doc("<p>Shows the results of datashares available for consumers.</p>") @as("DataShares")
+    dataShares: option<dataShareList>,
+  }
+  @module("@aws-sdk/client-redshift") @new
+  external new: request => t = "DescribeDataSharesForConsumerCommand"
+  let make = (~marker=?, ~maxRecords=?, ~status=?, ~consumerArn=?, ()) =>
+    new({marker: marker, maxRecords: maxRecords, status: status, consumerArn: consumerArn})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module DescribeDataShares = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataShares</a> request exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
+    )
+    @as("Marker")
+    marker: option<string_>,
+    @ocaml.doc("<p>The maximum number of response records to return in each call. If the number of
+            remaining response records exceeds the specified <code>MaxRecords</code> value, a value
+            is returned in a <code>marker</code> field of the response. You can retrieve the next
+            set of records by retrying the command with the returned marker value. </p>")
+    @as("MaxRecords")
+    maxRecords: option<integerOptional>,
+    @ocaml.doc("<p>The identifier of the datashare to describe details of.</p>") @as("DataShareArn")
+    dataShareArn: option<string_>,
+  }
+  type response = {
+    @ocaml.doc(
+      "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataShares</a> request exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
+    )
+    @as("Marker")
+    marker: option<string_>,
+    @ocaml.doc("<p>The results returned from describing datashares.</p>") @as("DataShares")
+    dataShares: option<dataShareList>,
+  }
+  @module("@aws-sdk/client-redshift") @new external new: request => t = "DescribeDataSharesCommand"
+  let make = (~marker=?, ~maxRecords=?, ~dataShareArn=?, ()) =>
+    new({marker: marker, maxRecords: maxRecords, dataShareArn: dataShareArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -5204,15 +5741,15 @@ module DescribeClusterSnapshots = {
             keys associated with them.</p>")
     @as("TagKeys")
     tagKeys: option<tagKeyList>,
-    @ocaml.doc("<p>The AWS customer account used to create or copy the snapshot. Use this field to
+    @ocaml.doc("<p>The Amazon Web Services account used to create or copy the snapshot. Use this field to
             filter the results to snapshots owned by a particular account. To describe snapshots you
-            own, either specify your AWS customer account, or do not specify the
+            own, either specify your Amazon Web Services account, or do not specify the
             parameter.</p>")
     @as("OwnerAccount")
     ownerAccount: option<string_>,
     @ocaml.doc("<p>An optional parameter that specifies the starting point to return a set of response
             records. When the results of a <a>DescribeClusterSnapshots</a> request exceed
-            the value specified in <code>MaxRecords</code>, AWS returns a value in the
+            the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the
                 <code>Marker</code> field of the response. You can retrieve the next set of response
             records by providing the returned marker value in the <code>Marker</code> parameter and
             retrying the request. </p>")
@@ -5327,7 +5864,7 @@ module DescribeClusterParameterGroups = {
     tagKeys: option<tagKeyList>,
     @ocaml.doc("<p>An optional parameter that specifies the starting point to return a set of response
             records. When the results of a <a>DescribeClusterParameterGroups</a> request
-            exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the
+            exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the
                 <code>Marker</code> field of the response. You can retrieve the next set of response
             records by providing the returned marker value in the <code>Marker</code> parameter and
             retrying the request. </p>")
@@ -5441,8 +5978,8 @@ module RevokeClusterSecurityGroupIngress = {
   type t
   @ocaml.doc("<p></p>")
   type request = {
-    @ocaml.doc("<p>The AWS account number of the owner of the security group specified in the
-                <code>EC2SecurityGroupName</code> parameter. The AWS access key ID is not an
+    @ocaml.doc("<p>The Amazon Web Services account number of the owner of the security group specified in the
+                <code>EC2SecurityGroupName</code> parameter. The Amazon Web Services access key ID is not an
             acceptable value. If <code>EC2SecurityGroupOwnerId</code> is specified,
                 <code>EC2SecurityGroupName</code> must also be provided. and <code>CIDRIP</code>
             cannot be provided. </p>
@@ -5480,6 +6017,71 @@ module RevokeClusterSecurityGroupIngress = {
       ec2SecurityGroupName: ec2SecurityGroupName,
       cidrip: cidrip,
       clusterSecurityGroupName: clusterSecurityGroupName,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module GetReservedNodeExchangeConfigurationOptions = {
+  type t
+  type request = {
+    @ocaml.doc("<p>An optional pagination token provided by a previous <code>GetReservedNodeExchangeConfigurationOptions</code> request. If this 
+            parameter is specified, the response includes only records beyond the marker, up to the value 
+            specified by the <code>MaxRecords</code> parameter. You can retrieve the next set of response
+            records by providing the returned marker value in the <code>Marker</code> parameter and
+            retrying the request.</p>")
+    @as("Marker")
+    marker: option<string_>,
+    @ocaml.doc("<p>The maximum number of response records to return in each call. If the number of
+            remaining response records exceeds the specified <code>MaxRecords</code> value, a value
+            is returned in a <code>Marker</code> field of the response. You can retrieve the next
+            set of records by retrying the command with the returned marker value.</p>")
+    @as("MaxRecords")
+    maxRecords: option<integerOptional>,
+    @ocaml.doc(
+      "<p>The identifier for the snapshot that is the source for the reserved-node exchange.</p>"
+    )
+    @as("SnapshotIdentifier")
+    snapshotIdentifier: option<string_>,
+    @ocaml.doc(
+      "<p>The identifier for the cluster that is the source for a reserved-node exchange.</p>"
+    )
+    @as("ClusterIdentifier")
+    clusterIdentifier: option<string_>,
+    @ocaml.doc(
+      "<p>The action type of the reserved-node configuration. The action type can be an exchange initiated from either a snapshot or a resize.</p>"
+    )
+    @as("ActionType")
+    actionType: reservedNodeExchangeActionType,
+  }
+  type response = {
+    @ocaml.doc("<p>the configuration options for the reserved-node
+            exchange. These options include information about the source reserved node and target reserved
+            node. Details include the node type, the price, the node count, and the offering
+            type.</p>")
+    @as("ReservedNodeConfigurationOptionList")
+    reservedNodeConfigurationOptionList: option<reservedNodeConfigurationOptionList>,
+    @ocaml.doc(
+      "<p>A pagination token provided by a previous <code>GetReservedNodeExchangeConfigurationOptions</code> request.</p>"
+    )
+    @as("Marker")
+    marker: option<string_>,
+  }
+  @module("@aws-sdk/client-redshift") @new
+  external new: request => t = "GetReservedNodeExchangeConfigurationOptionsCommand"
+  let make = (
+    ~actionType,
+    ~marker=?,
+    ~maxRecords=?,
+    ~snapshotIdentifier=?,
+    ~clusterIdentifier=?,
+    (),
+  ) =>
+    new({
+      marker: marker,
+      maxRecords: maxRecords,
+      snapshotIdentifier: snapshotIdentifier,
+      clusterIdentifier: clusterIdentifier,
+      actionType: actionType,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
@@ -5524,7 +6126,8 @@ module DescribeEndpointAccess = {
     vpcId: option<string_>,
     @ocaml.doc("<p>The name of the endpoint to be described.</p>") @as("EndpointName")
     endpointName: option<string_>,
-    @ocaml.doc("<p>The AWS account ID of the owner of the cluster.</p>") @as("ResourceOwner")
+    @ocaml.doc("<p>The Amazon Web Services account ID of the owner of the cluster.</p>")
+    @as("ResourceOwner")
     resourceOwner: option<string_>,
     @ocaml.doc("<p>The cluster identifier associated with the described endpoint.</p>")
     @as("ClusterIdentifier")
@@ -5580,8 +6183,7 @@ module CreateClusterSecurityGroup = {
                 <p>Must not be \"Default\".</p>
             </li>
             <li>
-                <p>Must be unique for all security groups that are created by your AWS
-                    account.</p>
+                <p>Must be unique for all security groups that are created by your Amazon Web Services account.</p>
             </li>
          </ul>
         <p>Example: <code>examplesecuritygroup</code>
@@ -5601,8 +6203,8 @@ module AuthorizeClusterSecurityGroupIngress = {
   type t
   @ocaml.doc("<p></p>")
   type request = {
-    @ocaml.doc("<p>The AWS account number of the owner of the security group specified by the
-                <i>EC2SecurityGroupName</i> parameter. The AWS Access Key ID is not an
+    @ocaml.doc("<p>The Amazon Web Services account number of the owner of the security group specified by the
+            <i>EC2SecurityGroupName</i> parameter. The Amazon Web Services Access Key ID is not an
             acceptable value. </p>
         <p>Example: <code>111122223333</code>
         </p>")
@@ -5666,10 +6268,24 @@ module RestoreFromClusterSnapshot = {
   type t
   @ocaml.doc("<p></p>")
   type request = {
+    @ocaml.doc("<p>Enables support for restoring an unencrypted snapshot to a cluster encrypted 
+            with Key Management Service (KMS) and a CMK.</p>")
+    @as("Encrypted")
+    encrypted: option<booleanOptional>,
+    @ocaml.doc("<p>The identifier of the target reserved node offering.</p>")
+    @as("TargetReservedNodeOfferingId")
+    targetReservedNodeOfferingId: option<string_>,
+    @ocaml.doc("<p>The identifier of the target reserved node offering.</p>") @as("ReservedNodeId")
+    reservedNodeId: option<string_>,
+    @ocaml.doc(
+      "<p>The Amazon Resource Name (ARN) for the IAM role that was set as default for the cluster when the cluster was last modified while it was restored from a snapshot.</p>"
+    )
+    @as("DefaultIamRoleArn")
+    defaultIamRoleArn: option<string_>,
     @ocaml.doc("<p>The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) after the cluster is restored. Possible values include the following.</p>
         <ul>
             <li>
-               <p>enabled - Use AQUA if it is available for the current AWS Region and Amazon Redshift node type.</p>
+               <p>enabled - Use AQUA if it is available for the current Amazon Web Services Region and Amazon Redshift node type.</p>
             </li>
             <li>
                <p>disabled - Don't use AQUA. </p>
@@ -5699,11 +6315,12 @@ module RestoreFromClusterSnapshot = {
             snapshot and the source cluster are on different tracks.</p>")
     @as("MaintenanceTrackName")
     maintenanceTrackName: option<string_>,
-    @ocaml.doc("<p>A list of AWS Identity and Access Management (IAM) roles that can be used by the
-            cluster to access other AWS services. You must supply the IAM roles in their Amazon
-            Resource Name (ARN) format. You can supply up to 10 IAM roles in a single
-            request.</p>
-        <p>A cluster can have up to 10 IAM roles associated at any time.</p>")
+    @ocaml.doc("<p>A list of Identity and Access Management (IAM) roles that can be used by the
+            cluster to access other Amazon Web Services services. You must supply the IAM roles in their Amazon
+            Resource Name (ARN) format. </p>
+        <p>The maximum number of IAM roles that you can associate is subject to a quota.
+            For more information, go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html\">Quotas and limits</a>
+            in the <i>Amazon Redshift Cluster Management Guide</i>.</p>")
     @as("IamRoles")
     iamRoles: option<iamRoleArnList>,
     @ocaml.doc("<p>Reserved.</p>") @as("AdditionalInfo") additionalInfo: option<string_>,
@@ -5728,8 +6345,12 @@ module RestoreFromClusterSnapshot = {
                 About Clusters and Nodes</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p>")
     @as("NodeType")
     nodeType: option<string_>,
-    @ocaml.doc("<p>The AWS Key Management Service (KMS) key ID of the encryption key that you want to
-            use to encrypt data in the cluster that you restore from a shared snapshot.</p>")
+    @ocaml.doc("<p>The Key Management Service (KMS) key ID of the encryption key to encrypt data in the cluster 
+            restored from a shared snapshot. You can also provide 
+            the key ID when you restore from an unencrypted snapshot to an encrypted cluster in 
+            the same account. Additionally, you can specify a new KMS key ID when you restore from an encrypted 
+            snapshot in the same account in order to change it. In that case, the restored cluster is encrypted 
+            with the new KMS key ID.</p>")
     @as("KmsKeyId")
     kmsKeyId: option<string_>,
     @ocaml.doc("<p>The default number of days to retain a manual snapshot. If the value is -1, the
@@ -5797,7 +6418,7 @@ module RestoreFromClusterSnapshot = {
             retrieve the data encryption keys stored in an HSM.</p>")
     @as("HsmClientCertificateIdentifier")
     hsmClientCertificateIdentifier: option<string_>,
-    @ocaml.doc("<p>The AWS customer account used to create or copy the snapshot. Required if you are
+    @ocaml.doc("<p>The Amazon Web Services account used to create or copy the snapshot. Required if you are
             restoring a snapshot you do not own, optional if you own the snapshot.</p>")
     @as("OwnerAccount")
     ownerAccount: option<string_>,
@@ -5854,7 +6475,7 @@ module RestoreFromClusterSnapshot = {
                <p>Cannot end with a hyphen or contain two consecutive hyphens.</p>
             </li>
             <li>
-               <p>Must be unique for all clusters within an AWS account.</p>
+               <p>Must be unique for all clusters within an Amazon Web Services account.</p>
             </li>
          </ul>")
     @as("ClusterIdentifier")
@@ -5866,6 +6487,10 @@ module RestoreFromClusterSnapshot = {
   let make = (
     ~snapshotIdentifier,
     ~clusterIdentifier,
+    ~encrypted=?,
+    ~targetReservedNodeOfferingId=?,
+    ~reservedNodeId=?,
+    ~defaultIamRoleArn=?,
     ~aquaConfigurationStatus=?,
     ~availabilityZoneRelocation=?,
     ~numberOfNodes=?,
@@ -5895,6 +6520,10 @@ module RestoreFromClusterSnapshot = {
     (),
   ) =>
     new({
+      encrypted: encrypted,
+      targetReservedNodeOfferingId: targetReservedNodeOfferingId,
+      reservedNodeId: reservedNodeId,
+      defaultIamRoleArn: defaultIamRoleArn,
       aquaConfigurationStatus: aquaConfigurationStatus,
       availabilityZoneRelocation: availabilityZoneRelocation,
       numberOfNodes: numberOfNodes,
@@ -5966,12 +6595,12 @@ module ModifySnapshotCopyRetentionPeriod = {
             snapshots instead of automated snapshots.</p>")
     @as("Manual")
     manual: option<boolean_>,
-    @ocaml.doc("<p>The number of days to retain automated snapshots in the destination AWS Region
-            after they are copied from the source AWS Region.</p>
+    @ocaml.doc("<p>The number of days to retain automated snapshots in the destination Amazon Web Services Region
+            after they are copied from the source Amazon Web Services Region.</p>
         <p>By default, this only changes the retention period of copied automated snapshots. </p>
         <p>If you decrease the retention period for automated snapshots that are copied to a
-            destination AWS Region, Amazon Redshift deletes any existing automated snapshots that were
-            copied to the destination AWS Region and that fall outside of the new retention
+            destination Amazon Web Services Region, Amazon Redshift deletes any existing automated snapshots that were
+            copied to the destination Amazon Web Services Region and that fall outside of the new retention
             period.</p>
         <p>Constraints: Must be at least 1 and no more than 35 for automated snapshots. </p>
         <p>If you specify the <code>manual</code> option, only newly copied manual snapshots will
@@ -5983,8 +6612,7 @@ module ModifySnapshotCopyRetentionPeriod = {
     @as("RetentionPeriod")
     retentionPeriod: integer_,
     @ocaml.doc("<p>The unique identifier of the cluster for which you want to change the retention
-            period for either automated or manual snapshots that are copied to a destination AWS
-            Region.</p>
+            period for either automated or manual snapshots that are copied to a destination Amazon Web Services Region.</p>
         <p>Constraints: Must be the valid name of an existing cluster that has cross-region
             snapshot copy enabled.</p>")
     @as("ClusterIdentifier")
@@ -6073,13 +6701,16 @@ module ModifyClusterIamRoles = {
   type t
   @ocaml.doc("<p></p>")
   type request = {
-    @ocaml.doc("<p>Zero or more IAM roles in ARN format to disassociate from the cluster. You can
-            disassociate up to 10 IAM roles from a single cluster in a single request.</p>")
+    @ocaml.doc(
+      "<p>The Amazon Resource Name (ARN) for the IAM role that was set as default for the cluster when the cluster was last modified.</p>"
+    )
+    @as("DefaultIamRoleArn")
+    defaultIamRoleArn: option<string_>,
+    @ocaml.doc("<p>Zero or more IAM roles in ARN format to disassociate from the cluster. </p>")
     @as("RemoveIamRoles")
     removeIamRoles: option<iamRoleArnList>,
     @ocaml.doc("<p>Zero or more IAM roles to associate with the cluster. The roles must be in their
-            Amazon Resource Name (ARN) format. You can associate up to 10 IAM roles with a single
-            cluster in a single request.</p>")
+            Amazon Resource Name (ARN) format. </p>")
     @as("AddIamRoles")
     addIamRoles: option<iamRoleArnList>,
     @ocaml.doc("<p>The unique identifier of the cluster for which you want to associate or
@@ -6090,8 +6721,9 @@ module ModifyClusterIamRoles = {
   type response = {@as("Cluster") cluster: option<cluster>}
   @module("@aws-sdk/client-redshift") @new
   external new: request => t = "ModifyClusterIamRolesCommand"
-  let make = (~clusterIdentifier, ~removeIamRoles=?, ~addIamRoles=?, ()) =>
+  let make = (~clusterIdentifier, ~defaultIamRoleArn=?, ~removeIamRoles=?, ~addIamRoles=?, ()) =>
     new({
+      defaultIamRoleArn: defaultIamRoleArn,
       removeIamRoles: removeIamRoles,
       addIamRoles: addIamRoles,
       clusterIdentifier: clusterIdentifier,
@@ -6136,7 +6768,7 @@ module ModifyCluster = {
     )
     @as("AvailabilityZoneRelocation")
     availabilityZoneRelocation: option<booleanOptional>,
-    @ocaml.doc("<p>The AWS Key Management Service (KMS) key ID of the encryption key that you want to use
+    @ocaml.doc("<p>The Key Management Service (KMS) key ID of the encryption key that you want to use
             to encrypt data in the cluster.</p>")
     @as("KmsKeyId")
     kmsKeyId: option<string_>,
@@ -6190,7 +6822,7 @@ module ModifyCluster = {
                <p>Cannot end with a hyphen or contain two consecutive hyphens.</p>
             </li>
             <li>
-               <p>Must be unique for all clusters within an AWS account.</p>
+               <p>Must be unique for all clusters within an Amazon Web Services account.</p>
             </li>
          </ul>
 
@@ -6263,13 +6895,13 @@ in the <i>Amazon Redshift Cluster Management Guide</i>.</p>
             that matches the cluster version.</p>")
     @as("ClusterParameterGroupName")
     clusterParameterGroupName: option<string_>,
-    @ocaml.doc("<p>The new password for the cluster master user. This change is asynchronously applied
+    @ocaml.doc("<p>The new password for the cluster admin user. This change is asynchronously applied
             as soon as possible. Between the time of the request and the completion of the request,
             the <code>MasterUserPassword</code> element exists in the
                 <code>PendingModifiedValues</code> element of the operation response. </p>
         <note>
             <p>Operations never return the password, so this operation provides a way to
-                regain access to the master user account for a cluster if the password is
+                regain access to the admin user account for a cluster if the password is
                 lost.</p>
         </note>
         <p>Default: Uses existing setting.</p>
@@ -6288,8 +6920,8 @@ in the <i>Amazon Redshift Cluster Management Guide</i>.</p>
                 <p>Must contain one number.</p>
             </li>
             <li>
-                <p>Can be any printable ASCII character (ASCII code 33 to 126) except '
-                    (single quote), \" (double quote), \\, /, @, or space.</p>
+                <p>Can be any printable ASCII character (ASCII code 33-126) except '
+                    (single quote), \" (double quote), \\, /, or @.</p>
             </li>
          </ul>")
     @as("MasterUserPassword")
@@ -6419,13 +7051,13 @@ module EnableSnapshotCopy = {
   type t
   @ocaml.doc("<p></p>")
   type request = {
-    @ocaml.doc("<p>The number of days to retain newly copied snapshots in the destination AWS Region
-            after they are copied from the source AWS Region. If the value is -1, the manual
+    @ocaml.doc("<p>The number of days to retain newly copied snapshots in the destination Amazon Web Services Region
+            after they are copied from the source Amazon Web Services Region. If the value is -1, the manual
             snapshot is retained indefinitely. </p>
         <p>The value must be either -1 or an integer between 1 and 3,653.</p>")
     @as("ManualSnapshotRetentionPeriod")
     manualSnapshotRetentionPeriod: option<integerOptional>,
-    @ocaml.doc("<p>The name of the snapshot copy grant to use when snapshots of an AWS KMS-encrypted
+    @ocaml.doc("<p>The name of the snapshot copy grant to use when snapshots of an Amazon Web Services KMS-encrypted
             cluster are copied to the destination region.</p>")
     @as("SnapshotCopyGrantName")
     snapshotCopyGrantName: option<string_>,
@@ -6435,8 +7067,8 @@ module EnableSnapshotCopy = {
         <p>Constraints: Must be at least 1 and no more than 35.</p>")
     @as("RetentionPeriod")
     retentionPeriod: option<integerOptional>,
-    @ocaml.doc("<p>The destination AWS Region that you want to copy snapshots to.</p>
-        <p>Constraints: Must be the name of a valid AWS Region. For more information, see
+    @ocaml.doc("<p>The destination Amazon Web Services Region that you want to copy snapshots to.</p>
+        <p>Constraints: Must be the name of a valid Amazon Web Services Region. For more information, see
                 <a href=\"https://docs.aws.amazon.com/general/latest/gr/rande.html#redshift_region\">Regions and Endpoints</a> in the Amazon Web Services General Reference.
         </p>")
     @as("DestinationRegion")
@@ -6490,7 +7122,7 @@ module DescribeOrderableClusterOptions = {
   type request = {
     @ocaml.doc("<p>An optional parameter that specifies the starting point to return a set of response
             records. When the results of a <a>DescribeOrderableClusterOptions</a> request
-            exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the
+            exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the
                 <code>Marker</code> field of the response. You can retrieve the next set of response
             records by providing the returned marker value in the <code>Marker</code> parameter and
             retrying the request. </p>")
@@ -6600,7 +7232,7 @@ module DescribeClusterSecurityGroups = {
     tagKeys: option<tagKeyList>,
     @ocaml.doc("<p>An optional parameter that specifies the starting point to return a set of response
             records. When the results of a <a>DescribeClusterSecurityGroups</a> request
-            exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the
+            exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the
                 <code>Marker</code> field of the response. You can retrieve the next set of response
             records by providing the returned marker value in the <code>Marker</code> parameter and
             retrying the request. </p>
@@ -6755,8 +7387,7 @@ module CreateClusterSubnetGroup = {
                 <p>Must not be \"Default\".</p>
             </li>
             <li>
-                <p>Must be unique for all subnet groups that are created by your AWS
-                    account.</p>
+                <p>Must be unique for all subnet groups that are created by your Amazon Web Services account.</p>
             </li>
          </ul>
         <p>Example: <code>examplesubnetgroup</code>
@@ -6781,10 +7412,15 @@ module CreateCluster = {
   type t
   @ocaml.doc("<p></p>")
   type request = {
+    @ocaml.doc(
+      "<p>The Amazon Resource Name (ARN) for the IAM role that was set as default for the cluster when the cluster was created. </p>"
+    )
+    @as("DefaultIamRoleArn")
+    defaultIamRoleArn: option<string_>,
     @ocaml.doc("<p>The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) when it is created. Possible values include the following.</p>
         <ul>
             <li>
-               <p>enabled - Use AQUA if it is available for the current AWS Region and Amazon Redshift node type.</p>
+               <p>enabled - Use AQUA if it is available for the current Amazon Web Services Region and Amazon Redshift node type.</p>
             </li>
             <li>
                <p>disabled - Don't use AQUA. </p>
@@ -6808,11 +7444,12 @@ module CreateCluster = {
                 <code>current</code> track.</p>")
     @as("MaintenanceTrackName")
     maintenanceTrackName: option<string_>,
-    @ocaml.doc("<p>A list of AWS Identity and Access Management (IAM) roles that can be used by the
-            cluster to access other AWS services. You must supply the IAM roles in their Amazon
-            Resource Name (ARN) format. You can supply up to 10 IAM roles in a single
-            request.</p>
-        <p>A cluster can have up to 10 IAM roles associated with it at any time.</p>")
+    @ocaml.doc("<p>A list of Identity and Access Management (IAM) roles that can be used by the
+            cluster to access other Amazon Web Services services. You must supply the IAM roles in their Amazon
+            Resource Name (ARN) format. </p>
+        <p>The maximum number of IAM roles that you can associate is subject to a quota.
+            For more information, go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html\">Quotas and limits</a>
+            in the <i>Amazon Redshift Cluster Management Guide</i>.</p>")
     @as("IamRoles")
     iamRoles: option<iamRoleArnList>,
     @ocaml.doc("<p>Reserved.</p>") @as("AdditionalInfo") additionalInfo: option<string_>,
@@ -6824,7 +7461,7 @@ module CreateCluster = {
         <p>Default: false</p>")
     @as("EnhancedVpcRouting")
     enhancedVpcRouting: option<booleanOptional>,
-    @ocaml.doc("<p>The AWS Key Management Service (KMS) key ID of the encryption key that you want to
+    @ocaml.doc("<p>The Key Management Service (KMS) key ID of the encryption key that you want to
             use to encrypt data in the cluster.</p>")
     @as("KmsKeyId")
     kmsKeyId: option<string_>,
@@ -6963,7 +7600,7 @@ module CreateCluster = {
         <p>Default: The default cluster security group for Amazon Redshift.</p>")
     @as("ClusterSecurityGroups")
     clusterSecurityGroups: option<clusterSecurityGroupNameList>,
-    @ocaml.doc("<p>The password associated with the master user account for the cluster that is being
+    @ocaml.doc("<p>The password associated with the admin user account for the cluster that is being
             created.</p>
         <p>Constraints:</p>
         <ul>
@@ -6980,13 +7617,13 @@ module CreateCluster = {
                 <p>Must contain one number.</p>
             </li>
             <li>
-                <p>Can be any printable ASCII character (ASCII code 33 to 126) except '
-                    (single quote), \" (double quote), \\, /, @, or space.</p>
+                <p>Can be any printable ASCII character (ASCII code 33-126) except '
+                    (single quote), \" (double quote), \\, /, or @.</p>
             </li>
          </ul>")
     @as("MasterUserPassword")
     masterUserPassword: string_,
-    @ocaml.doc("<p>The user name associated with the master user account for the cluster that is being
+    @ocaml.doc("<p>The user name associated with the admin user account for the cluster that is being
             created.</p>
         <p>Constraints:</p>
         <ul>
@@ -7052,7 +7689,7 @@ module CreateCluster = {
                <p>Cannot end with a hyphen or contain two consecutive hyphens.</p>
             </li>
             <li>
-               <p>Must be unique for all clusters within an AWS account.</p>
+               <p>Must be unique for all clusters within an Amazon Web Services account.</p>
             </li>
          </ul>
 
@@ -7091,6 +7728,7 @@ module CreateCluster = {
     ~masterUsername,
     ~nodeType,
     ~clusterIdentifier,
+    ~defaultIamRoleArn=?,
     ~aquaConfigurationStatus=?,
     ~availabilityZoneRelocation=?,
     ~snapshotScheduleIdentifier=?,
@@ -7122,6 +7760,7 @@ module CreateCluster = {
     (),
   ) =>
     new({
+      defaultIamRoleArn: defaultIamRoleArn,
       aquaConfigurationStatus: aquaConfigurationStatus,
       availabilityZoneRelocation: availabilityZoneRelocation,
       snapshotScheduleIdentifier: snapshotScheduleIdentifier,
@@ -7179,7 +7818,7 @@ module DescribeClusters = {
     tagKeys: option<tagKeyList>,
     @ocaml.doc("<p>An optional parameter that specifies the starting point to return a set of response
             records. When the results of a <a>DescribeClusters</a> request exceed the
-            value specified in <code>MaxRecords</code>, AWS returns a value in the
+            value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the
                 <code>Marker</code> field of the response. You can retrieve the next set of response
             records by providing the returned marker value in the <code>Marker</code> parameter and
             retrying the request. </p>
@@ -7249,7 +7888,7 @@ module DescribeClusterSubnetGroups = {
     tagKeys: option<tagKeyList>,
     @ocaml.doc("<p>An optional parameter that specifies the starting point to return a set of response
             records. When the results of a <a>DescribeClusterSubnetGroups</a> request
-            exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the
+            exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the
                 <code>Marker</code> field of the response. You can retrieve the next set of response
             records by providing the returned marker value in the <code>Marker</code> parameter and
             retrying the request. </p>")

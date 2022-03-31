@@ -14,9 +14,11 @@ type baseBoolean = bool
 type baseInteger = int
 type baseTimestamp = Js.Date.t
 type baseLong = float
+type usageOperation = string
 type tokenType = [@as("REFRESH_TOKEN") #REFRESH_TOKEN]
 type tokenString = string
 type string_ = string
+type statusReasonMessage = string
 type signedToken = string
 type resourceType = [
   | @as("SYSTEMS_MANAGER_MANAGED_INSTANCE") #SYSTEMS_MANAGER_MANAGED_INSTANCE
@@ -33,6 +35,7 @@ type reportGeneratorName = string
 type reportFrequencyType = [@as("MONTH") #MONTH | @as("WEEK") #WEEK | @as("DAY") #DAY]
 type renewType = [@as("Monthly") #Monthly | @as("Weekly") #Weekly | @as("None") #None]
 type receivedStatus = [
+  | @as("WORKFLOW_COMPLETED") #WORKFLOW_COMPLETED
   | @as("DISABLED") #DISABLED
   | @as("DELETED") #DELETED
   | @as("FAILED_WORKFLOW") #FAILED_WORKFLOW
@@ -61,6 +64,12 @@ type licenseCountingType = [
   | @as("Instance") #Instance
   | @as("vCPU") #VCPU
 ]
+type licenseConversionTaskStatus = [
+  | @as("FAILED") #FAILED
+  | @as("SUCCEEDED") #SUCCEEDED
+  | @as("IN_PROGRESS") #IN_PROGRESS
+]
+type licenseConversionTaskId = string
 type licenseConfigurationStatus = [@as("DISABLED") #DISABLED | @as("AVAILABLE") #AVAILABLE]
 type inventoryFilterCondition = [
   | @as("CONTAINS") #CONTAINS
@@ -69,9 +78,9 @@ type inventoryFilterCondition = [
   | @as("EQUALS") #EQUALS
 ]
 type integer_ = int
-type idempotencyToken = string
 type iso8601DateTime = string
 type grantStatus = [
+  | @as("WORKFLOW_COMPLETED") #WORKFLOW_COMPLETED
   | @as("DISABLED") #DISABLED
   | @as("PENDING_DELETE") #PENDING_DELETE
   | @as("DELETED") #DELETED
@@ -145,7 +154,7 @@ type digitalSignatureMethod = [@as("JWT_PS384") #JWT_PS384]
 type dateTime = Js.Date.t
 type clientToken = string
 type clientRequestToken = string
-type checkoutType = [@as("PROVISIONAL") #PROVISIONAL]
+type checkoutType = [@as("PERPETUAL") #PERPETUAL | @as("PROVISIONAL") #PROVISIONAL]
 type boxLong = float
 type boxInteger = int
 type boxBoolean = bool
@@ -185,13 +194,12 @@ type resourceInventory = {
   @ocaml.doc("<p>ID of the resource.</p>") @as("ResourceId") resourceId: option<string_>,
 }
 type reportTypeList = array<reportType>
-@ocaml.doc("<p>Details on how frequently reports are generated.</p>")
+@ocaml.doc("<p>Details about how frequently reports are generated.</p>")
 type reportFrequency = {
   @ocaml.doc("<p>Time period between each report. The period can be daily, weekly, or monthly.</p>")
   period: option<reportFrequencyType>,
-  @ocaml.doc(
-    "<p>Number of times within the frequency period that a report will be generated.  Currently only <code>1</code> is supported.</p>"
-  )
+  @ocaml.doc("<p>Number of times within the frequency period that a report is generated.  
+         The only supported value is <code>1</code>.</p>")
   value: option<integer_>,
 }
 @ocaml.doc("<p>Details about a provisional configuration.</p>")
@@ -201,9 +209,9 @@ type provisionalConfiguration = {
   maxTimeToLiveInMinutes: boxInteger,
 }
 type principalArnList = array<arn>
-@ocaml.doc("<p>Configuration information for AWS Organizations.</p>")
+@ocaml.doc("<p>Configuration information for Organizations.</p>")
 type organizationConfiguration = {
-  @ocaml.doc("<p>Enables AWS Organization integration.</p>") @as("EnableIntegration")
+  @ocaml.doc("<p>Enables Organizations integration.</p>") @as("EnableIntegration")
   enableIntegration: boolean_,
 }
 @ocaml.doc("<p>Describes key/value pairs.</p>")
@@ -227,6 +235,14 @@ type licenseSpecification = {
   @ocaml.doc("<p>Amazon Resource Name (ARN) of the license configuration.</p>")
   @as("LicenseConfigurationArn")
   licenseConfigurationArn: string_,
+}
+@ocaml.doc("<p>Information about a license type conversion task.</p>")
+type licenseConversionContext = {
+  @ocaml.doc("<p>The Usage operation value that corresponds to the license type you are converting your resource from.  For more information about which platforms correspond to which usage operation values see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/billing-info-fields.html#billing-info\">Sample data: usage operation by platform
+      </a>
+         </p>")
+  @as("UsageOperation")
+  usageOperation: option<usageOperation>,
 }
 @ocaml.doc("<p>Details about the usage of a resource associated with a license configuration.</p>")
 type licenseConfigurationUsage = {
@@ -253,7 +269,9 @@ type licenseConfigurationAssociation = {
   @ocaml.doc("<p>Time when the license configuration was associated with the resource.</p>")
   @as("AssociationTime")
   associationTime: option<dateTime>,
-  @ocaml.doc("<p>ID of the AWS account that owns the resource consuming licenses.</p>")
+  @ocaml.doc(
+    "<p>ID of the Amazon Web Services account that owns the resource consuming licenses.</p>"
+  )
   @as("ResourceOwnerId")
   resourceOwnerId: option<string_>,
   @ocaml.doc("<p>Type of server resource.</p>") @as("ResourceType")
@@ -265,7 +283,7 @@ type licenseConfigurationAssociation = {
 type issuerDetails = {
   @ocaml.doc("<p>Issuer key fingerprint.</p>") @as("KeyFingerprint")
   keyFingerprint: option<string_>,
-  @ocaml.doc("<p>Asymmetric CMK from AWS Key Management Service. The CMK must have a key usage of sign and verify, 
+  @ocaml.doc("<p>Asymmetric KMS key from Key Management Service. The KMS key must have a key usage of sign and verify, 
          and support the RSASSA-PSS SHA-256 signing algorithm.</p>")
   @as("SignKey")
   signKey: option<string_>,
@@ -273,7 +291,7 @@ type issuerDetails = {
 }
 @ocaml.doc("<p>Details about the issuer of a license.</p>")
 type issuer = {
-  @ocaml.doc("<p>Asymmetric CMK from AWS Key Management Service. The CMK must have a key usage of sign and verify, 
+  @ocaml.doc("<p>Asymmetric KMS key from Key Management Service. The KMS key must have a key usage of sign and verify, 
          and support the RSASSA-PSS SHA-256 signing algorithm.</p>")
   @as("SignKey")
   signKey: option<string_>,
@@ -366,7 +384,7 @@ type resourceInventoryList = array<resourceInventory>
 @ocaml.doc("<p>Details of the license configuration that this generator reports on.</p>")
 type reportContext = {
   @ocaml.doc(
-    "<p>Amazon Resource Number (ARN) of the license configuration that this generator reports on.</p>"
+    "<p>Amazon Resource Name (ARN) of the license configuration that this generator reports on.</p>"
   )
   licenseConfigurationArns: arnList,
 }
@@ -374,6 +392,8 @@ type reportContext = {
 type receivedMetadata = {
   @ocaml.doc("<p>Allowed operations.</p>") @as("AllowedOperations")
   allowedOperations: option<allowedOperationList>,
+  @ocaml.doc("<p>Received status reason.</p>") @as("ReceivedStatusReason")
+  receivedStatusReason: option<statusReasonMessage>,
   @ocaml.doc("<p>Received status.</p>") @as("ReceivedStatus")
   receivedStatus: option<receivedStatus>,
 }
@@ -389,6 +409,32 @@ type productInformationFilter = {
 type metadataList = array<metadata>
 type managedResourceSummaryList = array<managedResourceSummary>
 type licenseSpecifications = array<licenseSpecification>
+@ocaml.doc("<p>Information about a license type conversion task.</p>")
+type licenseConversionTask = {
+  @ocaml.doc("<p>The time the conversion task was completed.</p>") @as("EndTime")
+  endTime: option<dateTime>,
+  @ocaml.doc("<p>The time the usage operation value of the resource was changed.</p>")
+  @as("LicenseConversionTime")
+  licenseConversionTime: option<dateTime>,
+  @ocaml.doc("<p>The time the conversion task was started at.</p>") @as("StartTime")
+  startTime: option<dateTime>,
+  @ocaml.doc("<p>The status message for the conversion task.</p>") @as("StatusMessage")
+  statusMessage: option<string_>,
+  @ocaml.doc("<p>The status of the conversion task.</p>") @as("Status")
+  status: option<licenseConversionTaskStatus>,
+  @ocaml.doc("<p>Information about the license type this conversion task converted to.</p>")
+  @as("DestinationLicenseContext")
+  destinationLicenseContext: option<licenseConversionContext>,
+  @ocaml.doc("<p>Information about the license type this conversion task converted from.</p>")
+  @as("SourceLicenseContext")
+  sourceLicenseContext: option<licenseConversionContext>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the resource associated with the license type
+         conversion task.</p>")
+  @as("ResourceArn")
+  resourceArn: option<string_>,
+  @ocaml.doc("<p>The ID of the license type conversion task.</p>") @as("LicenseConversionTaskId")
+  licenseConversionTaskId: option<licenseConversionTaskId>,
+}
 type licenseConfigurationUsageList = array<licenseConfigurationUsage>
 type licenseConfigurationAssociations = array<licenseConfigurationAssociation>
 type inventoryFilterList = array<inventoryFilter>
@@ -397,7 +443,8 @@ type grant = {
   @ocaml.doc("<p>Granted operations.</p>") @as("GrantedOperations")
   grantedOperations: allowedOperationList,
   @ocaml.doc("<p>Grant version.</p>") @as("Version") version: string_,
-  @ocaml.doc("<p>Grant status reason.</p>") @as("StatusReason") statusReason: option<string_>,
+  @ocaml.doc("<p>Grant status reason.</p>") @as("StatusReason")
+  statusReason: option<statusReasonMessage>,
   @ocaml.doc("<p>Grant status.</p>") @as("GrantStatus") grantStatus: grantStatus,
   @ocaml.doc("<p>Home Region of the grant.</p>") @as("HomeRegion") homeRegion: string_,
   @ocaml.doc("<p>The grantee principal ARN.</p>") @as("GranteePrincipalArn")
@@ -439,7 +486,7 @@ type reportGenerator = {
   s3Location: option<s3Location>,
   @ocaml.doc("<p>Description of the report generator.</p>") @as("Description")
   description: option<string_>,
-  @ocaml.doc("<p>The AWS account ID used to create the report generator.</p>")
+  @ocaml.doc("<p>The Amazon Web Services account ID used to create the report generator.</p>")
   @as("ReportCreatorAccount")
   reportCreatorAccount: option<string_>,
   @ocaml.doc("<p>Time the last report was generated at.</p>") @as("LastReportGenerationTime")
@@ -449,12 +496,12 @@ type reportGenerator = {
   lastRunFailureReason: option<string_>,
   @ocaml.doc("<p>Status of the last report generation attempt.</p>") @as("LastRunStatus")
   lastRunStatus: option<string_>,
-  @ocaml.doc("<p>Amazon Resource Number (ARN) of the report generator.</p>")
+  @ocaml.doc("<p>Amazon Resource Name (ARN) of the report generator.</p>")
   @as("LicenseManagerReportGeneratorArn")
   licenseManagerReportGeneratorArn: option<string_>,
-  @ocaml.doc("<p>Details on how frequently reports are generated.</p>") @as("ReportFrequency")
+  @ocaml.doc("<p>Details about how frequently reports are generated.</p>") @as("ReportFrequency")
   reportFrequency: option<reportFrequency>,
-  @ocaml.doc("<p>License configuration type this generator reports on.</p>") @as("ReportContext")
+  @ocaml.doc("<p>License configuration type for this generator.</p>") @as("ReportContext")
   reportContext: option<reportContext>,
   @ocaml.doc("<p>Type of reports that are generated.</p>") @as("ReportType")
   reportType: option<reportTypeList>,
@@ -473,7 +520,8 @@ type licenseOperationFailure = {
   @ocaml.doc("<p>The requester is \"License Manager Automated Discovery\".</p>")
   @as("OperationRequestedBy")
   operationRequestedBy: option<string_>,
-  @ocaml.doc("<p>ID of the AWS account that owns the resource.</p>") @as("ResourceOwnerId")
+  @ocaml.doc("<p>ID of the Amazon Web Services account that owns the resource.</p>")
+  @as("ResourceOwnerId")
   resourceOwnerId: option<string_>,
   @ocaml.doc("<p>Name of the operation.</p>") @as("OperationName") operationName: option<string_>,
   @ocaml.doc("<p>Failure time.</p>") @as("FailureTime") failureTime: option<dateTime>,
@@ -482,7 +530,8 @@ type licenseOperationFailure = {
   @ocaml.doc("<p>Amazon Resource Name (ARN) of the resource.</p>") @as("ResourceArn")
   resourceArn: option<string_>,
 }
-@ocaml.doc("<p>Software license that is managed in AWS License Manager.</p>")
+type licenseConversionTasks = array<licenseConversionTask>
+@ocaml.doc("<p>Software license that is managed in License Manager.</p>")
 type license = {
   @ocaml.doc("<p>License version.</p>") @as("Version") version: option<string_>,
   @ocaml.doc("<p>License creation time.</p>") @as("CreateTime") createTime: option<iso8601DateTime>,
@@ -572,12 +621,12 @@ type productInformation = {
             </li>
             <li>
                <p>
-                  <code>Tag:key</code> - The key of a tag attached to an AWS resource you wish to exclude from automated discovery. Logical operator is <code>NOT_EQUALS</code>.  The key for your tag must be appended to <code>Tag:</code> following the example: <code>Tag:name-of-your-key</code>. <code>ProductInformationFilterValue</code> is optional if you are not using values for the key.
+                  <code>Tag:key</code> - The key of a tag attached to an Amazon Web Services resource you wish to exclude from automated discovery. Logical operator is <code>NOT_EQUALS</code>.  The key for your tag must be appended to <code>Tag:</code> following the example: <code>Tag:name-of-your-key</code>. <code>ProductInformationFilterValue</code> is optional if you are not using values for the key.
                </p>
             </li>
             <li>
                <p>
-                  <code>AccountId</code> - The 12-digit ID of an AWS account you wish to exclude from automated discovery.
+                  <code>AccountId</code> - The 12-digit ID of an Amazon Web Services account you wish to exclude from automated discovery.
                Logical operator is <code>NOT_EQUALS</code>.</p>
             </li>
             <li>
@@ -662,9 +711,8 @@ type licenseConfiguration = {
   licenseConfigurationId: option<string_>,
 }
 type licenseConfigurations = array<licenseConfiguration>
-@ocaml.doc("<fullname> AWS License Manager </fullname>
-         <p>AWS License Manager makes it easier to manage licenses from software vendors across multiple 
-         AWS accounts and on-premises servers.</p>")
+@ocaml.doc("<p>License Manager makes it easier to manage licenses from software vendors across multiple 
+         Amazon Web Services accounts and on-premises servers.</p>")
 module RejectGrant = {
   type t
   type request = {
@@ -707,7 +755,7 @@ module ExtendLicenseConsumption = {
 module DeleteToken = {
   type t
   type request = {@ocaml.doc("<p>Token ID.</p>") @as("TokenId") tokenId: string_}
-
+  type response = {.}
   @module("@aws-sdk/client-license-manager") @new external new: request => t = "DeleteTokenCommand"
   let make = (~tokenId, ()) => new({tokenId: tokenId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -716,11 +764,11 @@ module DeleteToken = {
 module DeleteLicenseManagerReportGenerator = {
   type t
   type request = {
-    @ocaml.doc("<p>Amazon Resource Number (ARN) of the report generator that will be deleted.</p>")
+    @ocaml.doc("<p>Amazon Resource Name (ARN) of the report generator to be deleted.</p>")
     @as("LicenseManagerReportGeneratorArn")
     licenseManagerReportGeneratorArn: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-license-manager") @new
   external new: request => t = "DeleteLicenseManagerReportGeneratorCommand"
   let make = (~licenseManagerReportGeneratorArn, ()) =>
@@ -734,7 +782,7 @@ module DeleteLicenseConfiguration = {
     @ocaml.doc("<p>ID of the license configuration.</p>") @as("LicenseConfigurationArn")
     licenseConfigurationArn: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-license-manager") @new
   external new: request => t = "DeleteLicenseConfigurationCommand"
   let make = (~licenseConfigurationArn, ()) =>
@@ -751,7 +799,7 @@ module DeleteLicense = {
     licenseArn: arn,
   }
   type response = {
-    @ocaml.doc("<p>Date on which the license is deleted.</p>") @as("DeletionDate")
+    @ocaml.doc("<p>Date when the license is deleted.</p>") @as("DeletionDate")
     deletionDate: option<iso8601DateTime>,
     @ocaml.doc("<p>License status.</p>") @as("Status") status: option<licenseDeletionStatus>,
   }
@@ -766,6 +814,8 @@ module DeleteGrant = {
   type t
   type request = {
     @ocaml.doc("<p>Current version of the grant.</p>") @as("Version") version: string_,
+    @ocaml.doc("<p>The Status reason for the delete request.</p>") @as("StatusReason")
+    statusReason: option<statusReasonMessage>,
     @ocaml.doc("<p>Amazon Resource Name (ARN) of the grant.</p>") @as("GrantArn") grantArn: arn,
   }
   type response = {
@@ -774,7 +824,8 @@ module DeleteGrant = {
     @ocaml.doc("<p>Grant ARN.</p>") @as("GrantArn") grantArn: option<arn>,
   }
   @module("@aws-sdk/client-license-manager") @new external new: request => t = "DeleteGrantCommand"
-  let make = (~version, ~grantArn, ()) => new({version: version, grantArn: grantArn})
+  let make = (~version, ~grantArn, ~statusReason=?, ()) =>
+    new({version: version, statusReason: statusReason, grantArn: grantArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -785,7 +836,7 @@ module CheckInLicense = {
     @ocaml.doc("<p>License consumption token.</p>") @as("LicenseConsumptionToken")
     licenseConsumptionToken: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-license-manager") @new
   external new: request => t = "CheckInLicenseCommand"
   let make = (~licenseConsumptionToken, ~beneficiary=?, ()) =>
@@ -813,7 +864,7 @@ module UpdateServiceSettings = {
   type request = {
     @ocaml.doc("<p>Activates cross-account discovery.</p>") @as("EnableCrossAccountsDiscovery")
     enableCrossAccountsDiscovery: option<boxBoolean>,
-    @ocaml.doc("<p>Enables integration with AWS Organizations for cross-account discovery.</p>")
+    @ocaml.doc("<p>Enables integration with Organizations for cross-account discovery.</p>")
     @as("OrganizationConfiguration")
     organizationConfiguration: option<organizationConfiguration>,
     @ocaml.doc(
@@ -827,7 +878,7 @@ module UpdateServiceSettings = {
     @as("S3BucketArn")
     s3BucketArn: option<string_>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-license-manager") @new
   external new: request => t = "UpdateServiceSettingsCommand"
   let make = (
@@ -853,7 +904,7 @@ module UntagResource = {
     @ocaml.doc("<p>Amazon Resource Name (ARN) of the license configuration.</p>") @as("ResourceArn")
     resourceArn: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-license-manager") @new
   external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
@@ -862,16 +913,16 @@ module UntagResource = {
 
 module GetServiceSettings = {
   type t
-
+  type request = {.}
   type response = {
-    @ocaml.doc("<p>Amazon Resource Name (ARN) of the AWS resource share. The License Manager management account 
+    @ocaml.doc("<p>Amazon Resource Name (ARN) of the resource share. The License Manager management account 
          provides member accounts with access to this share.</p>")
     @as("LicenseManagerResourceShareArn")
     licenseManagerResourceShareArn: option<string_>,
     @ocaml.doc("<p>Indicates whether cross-account discovery is enabled.</p>")
     @as("EnableCrossAccountsDiscovery")
     enableCrossAccountsDiscovery: option<boxBoolean>,
-    @ocaml.doc("<p>Indicates whether AWS Organizations is integrated with License Manager for
+    @ocaml.doc("<p>Indicates whether Organizations is integrated with License Manager for
          cross-account discovery.</p>")
     @as("OrganizationConfiguration")
     organizationConfiguration: option<organizationConfiguration>,
@@ -884,8 +935,50 @@ module GetServiceSettings = {
     s3BucketArn: option<string_>,
   }
   @module("@aws-sdk/client-license-manager") @new
-  external new: unit => t = "GetServiceSettingsCommand"
-  let make = () => new()
+  external new: request => t = "GetServiceSettingsCommand"
+  let make = () => new(Js.Obj.empty())
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module GetLicenseConversionTask = {
+  type t
+  type request = {
+    @ocaml.doc("<p>ID of the license type conversion task to retrieve information on.</p>")
+    @as("LicenseConversionTaskId")
+    licenseConversionTaskId: licenseConversionTaskId,
+  }
+  type response = {
+    @ocaml.doc("<p>Time at which the license type conversion task was completed.</p>")
+    @as("EndTime")
+    endTime: option<dateTime>,
+    @ocaml.doc("<p>Amount of time to complete the license type conversion.</p>")
+    @as("LicenseConversionTime")
+    licenseConversionTime: option<dateTime>,
+    @ocaml.doc("<p>Time at which the license type conversion task was started .</p>")
+    @as("StartTime")
+    startTime: option<dateTime>,
+    @ocaml.doc("<p>Status of the license type conversion task.</p>") @as("Status")
+    status: option<licenseConversionTaskStatus>,
+    @ocaml.doc("<p>The status message for the conversion task.</p>") @as("StatusMessage")
+    statusMessage: option<string_>,
+    @ocaml.doc("<p>Information about the license type converted to.</p>")
+    @as("DestinationLicenseContext")
+    destinationLicenseContext: option<licenseConversionContext>,
+    @ocaml.doc("<p>Information about the license type converted from.</p>")
+    @as("SourceLicenseContext")
+    sourceLicenseContext: option<licenseConversionContext>,
+    @ocaml.doc(
+      "<p>Amazon Resource Names (ARN) of the resources the license conversion task is associated with.</p>"
+    )
+    @as("ResourceArn")
+    resourceArn: option<string_>,
+    @ocaml.doc("<p>ID of the license type conversion task.</p>") @as("LicenseConversionTaskId")
+    licenseConversionTaskId: option<licenseConversionTaskId>,
+  }
+  @module("@aws-sdk/client-license-manager") @new
+  external new: request => t = "GetLicenseConversionTaskCommand"
+  let make = (~licenseConversionTaskId, ()) =>
+    new({licenseConversionTaskId: licenseConversionTaskId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -912,7 +1005,7 @@ module CreateToken = {
   type t
   type request = {
     @ocaml.doc("<p>Idempotency token, valid for 10 minutes.</p>") @as("ClientToken")
-    clientToken: idempotencyToken,
+    clientToken: clientToken,
     @ocaml.doc("<p>Data specified by the caller to be included in the JWT token. The data is mapped
           to the amr claim of the JWT token.</p>")
     @as("TokenProperties")
@@ -956,11 +1049,47 @@ module CreateToken = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module CreateLicenseConversionTaskForResource = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>Information that identifies the license type you are converting to. For the structure of the destination license, see <a href=\"https://docs.aws.amazon.com/license-manager/latest/userguide/conversion-procedures.html#conversion-cli\">Convert a license type using the AWS CLI</a> in the <i>License Manager User Guide</i>.</p>"
+    )
+    @as("DestinationLicenseContext")
+    destinationLicenseContext: licenseConversionContext,
+    @ocaml.doc("<p>Information that identifies the license type you are converting from. 
+         For the structure of the source license, see <a href=\"https://docs.aws.amazon.com/license-manager/latest/userguide/conversion-procedures.html#conversion-cli\">Convert a license type using the AWS CLI</a> in the <i>License Manager User Guide</i>.</p>")
+    @as("SourceLicenseContext")
+    sourceLicenseContext: licenseConversionContext,
+    @ocaml.doc(
+      "<p>Amazon Resource Name (ARN) of the resource you are converting the license type for.</p>"
+    )
+    @as("ResourceArn")
+    resourceArn: arn,
+  }
+  type response = {
+    @ocaml.doc("<p>The ID of the created license type conversion task.</p>")
+    @as("LicenseConversionTaskId")
+    licenseConversionTaskId: option<licenseConversionTaskId>,
+  }
+  @module("@aws-sdk/client-license-manager") @new
+  external new: request => t = "CreateLicenseConversionTaskForResourceCommand"
+  let make = (~destinationLicenseContext, ~sourceLicenseContext, ~resourceArn, ()) =>
+    new({
+      destinationLicenseContext: destinationLicenseContext,
+      sourceLicenseContext: sourceLicenseContext,
+      resourceArn: resourceArn,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module CreateGrantVersion = {
   type t
   type request = {
     @ocaml.doc("<p>Current version of the grant.</p>") @as("SourceVersion")
     sourceVersion: option<string_>,
+    @ocaml.doc("<p>Grant status reason.</p>") @as("StatusReason")
+    statusReason: option<statusReasonMessage>,
     @ocaml.doc("<p>Grant status.</p>") @as("Status") status: option<grantStatus>,
     @ocaml.doc("<p>Allowed operations for the grant.</p>") @as("AllowedOperations")
     allowedOperations: option<allowedOperationList>,
@@ -970,7 +1099,7 @@ module CreateGrantVersion = {
       "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>"
     )
     @as("ClientToken")
-    clientToken: string_,
+    clientToken: clientToken,
   }
   type response = {
     @ocaml.doc("<p>New version of the grant.</p>") @as("Version") version: option<string_>,
@@ -983,6 +1112,7 @@ module CreateGrantVersion = {
     ~grantArn,
     ~clientToken,
     ~sourceVersion=?,
+    ~statusReason=?,
     ~status=?,
     ~allowedOperations=?,
     ~grantName=?,
@@ -990,6 +1120,7 @@ module CreateGrantVersion = {
   ) =>
     new({
       sourceVersion: sourceVersion,
+      statusReason: statusReason,
       status: status,
       allowedOperations: allowedOperations,
       grantName: grantName,
@@ -1013,7 +1144,7 @@ module CreateGrant = {
       "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>"
     )
     @as("ClientToken")
-    clientToken: string_,
+    clientToken: clientToken,
   }
   type response = {
     @ocaml.doc("<p>Grant version.</p>") @as("Version") version: option<string_>,
@@ -1049,10 +1180,11 @@ module UpdateLicenseSpecificationsForResource = {
     removeLicenseSpecifications: option<licenseSpecifications>,
     @ocaml.doc("<p>ARNs of the license configurations to add.</p>") @as("AddLicenseSpecifications")
     addLicenseSpecifications: option<licenseSpecifications>,
-    @ocaml.doc("<p>Amazon Resource Name (ARN) of the AWS resource.</p>") @as("ResourceArn")
+    @ocaml.doc("<p>Amazon Resource Name (ARN) of the Amazon Web Services resource.</p>")
+    @as("ResourceArn")
     resourceArn: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-license-manager") @new
   external new: request => t = "UpdateLicenseSpecificationsForResourceCommand"
   let make = (~resourceArn, ~removeLicenseSpecifications=?, ~addLicenseSpecifications=?, ()) =>
@@ -1074,29 +1206,27 @@ module UpdateLicenseManagerReportGenerator = {
     )
     @as("ClientToken")
     clientToken: clientRequestToken,
-    @ocaml.doc("<p>Frequency by which reports are generated.  The following options are avaiable:</p>
-         <p>??? What are the APi value options?</p>")
-    @as("ReportFrequency")
+    @ocaml.doc("<p>Frequency by which reports are generated.</p>") @as("ReportFrequency")
     reportFrequency: reportFrequency,
-    @ocaml.doc("<p>?</p>") @as("ReportContext") reportContext: reportContext,
-    @ocaml.doc("<p>Type of reports to generate. The following report types an be generated:</p>
+    @ocaml.doc("<p>The report context.</p>") @as("ReportContext") reportContext: reportContext,
+    @ocaml.doc("<p>Type of reports to generate. The following report types are supported:</p>
          <ul>
             <li>
-               <p>License configuration report - Reports on the number and details of consumed licenses for a license configuration.</p>
+               <p>License configuration report - Reports the number and details of consumed licenses for a license configuration.</p>
             </li>
             <li>
-               <p>Resource report - Reports on the tracked licenses and resource consumption for a license configuration.</p>
+               <p>Resource report - Reports the tracked licenses and resource consumption for a license configuration.</p>
             </li>
          </ul>")
     @as("Type")
     type_: reportTypeList,
     @ocaml.doc("<p>Name of the report generator.</p>") @as("ReportGeneratorName")
     reportGeneratorName: reportGeneratorName,
-    @ocaml.doc("<p>Amazon Resource Number (ARN) of the report generator to update.</p>")
+    @ocaml.doc("<p>Amazon Resource Name (ARN) of the report generator to update.</p>")
     @as("LicenseManagerReportGeneratorArn")
     licenseManagerReportGeneratorArn: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-license-manager") @new
   external new: request => t = "UpdateLicenseManagerReportGeneratorCommand"
   let make = (
@@ -1128,7 +1258,7 @@ module TagResource = {
     @ocaml.doc("<p>Amazon Resource Name (ARN) of the license configuration.</p>") @as("ResourceArn")
     resourceArn: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-license-manager") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1157,7 +1287,7 @@ module ListResourceInventory = {
          <ul>
             <li>
                <p>
-                  <code>account_id</code> - The ID of the AWS account that owns the resource.
+                  <code>account_id</code> - The ID of the Amazon Web Services account that owns the resource.
                Logical operators are <code>EQUALS</code> | <code>NOT_EQUALS</code>.</p>
             </li>
             <li>
@@ -1288,7 +1418,7 @@ module CreateLicenseVersion = {
       "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>"
     )
     @as("ClientToken")
-    clientToken: string_,
+    clientToken: clientToken,
     @ocaml.doc("<p>License status.</p>") @as("Status") status: licenseStatus,
     @ocaml.doc("<p>Configuration for consumption of the license. Choose a provisional configuration for workloads
          running with continuous connectivity. Choose a borrow configuration for workloads with offline
@@ -1371,10 +1501,10 @@ module CreateLicenseManagerReportGenerator = {
     @ocaml.doc("<p>Type of reports to generate. The following report types an be generated:</p>
          <ul>
             <li>
-               <p>License configuration report - Reports on the number and details of consumed licenses for a license configuration.</p>
+               <p>License configuration report - Reports the number and details of consumed licenses for a license configuration.</p>
             </li>
             <li>
-               <p>Resource report - Reports on the tracked licenses and resource consumption for a license configuration.</p>
+               <p>Resource report - Reports the tracked licenses and resource consumption for a license configuration.</p>
             </li>
          </ul>")
     @as("Type")
@@ -1383,7 +1513,7 @@ module CreateLicenseManagerReportGenerator = {
     reportGeneratorName: reportGeneratorName,
   }
   type response = {
-    @ocaml.doc("<p>The Amazon Resource Number (ARN) of the new report generator.</p>")
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the new report generator.</p>")
     @as("LicenseManagerReportGeneratorArn")
     licenseManagerReportGeneratorArn: option<string_>,
   }
@@ -1418,7 +1548,7 @@ module CreateLicense = {
       "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>"
     )
     @as("ClientToken")
-    clientToken: string_,
+    clientToken: clientToken,
     @ocaml.doc("<p>Information about the license.</p>") @as("LicenseMetadata")
     licenseMetadata: option<metadataList>,
     @ocaml.doc("<p>Configuration for consumption of the license. Choose a provisional configuration for workloads
@@ -1495,6 +1625,8 @@ module CheckoutLicense = {
     @ocaml.doc("<p>Product SKU.</p>") @as("ProductSKU") productSKU: string_,
   }
   type response = {
+    @ocaml.doc("<p>Amazon Resource Name (ARN) of the checkout license.</p>") @as("LicenseArn")
+    licenseArn: option<string_>,
     @ocaml.doc("<p>Date and time at which the license checkout expires.</p>") @as("Expiration")
     expiration: option<iso8601DateTime>,
     @ocaml.doc("<p>Date and time at which the license checkout is issued.</p>") @as("IssuedAt")
@@ -1726,6 +1858,33 @@ module ListReceivedGrants = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module ListLicenseConversionTasks = {
+  type t
+  type request = {
+    @ocaml.doc("<p>
+         Filters to scope the results. Valid filters are <code>ResourceArns</code> and <code>Status</code>.
+      </p>")
+    @as("Filters")
+    filters: option<filters>,
+    @ocaml.doc("<p>Maximum number of results to return in a single call.</p>") @as("MaxResults")
+    maxResults: option<boxInteger>,
+    @ocaml.doc("<p>Token for the next set of results.</p>") @as("NextToken")
+    nextToken: option<string_>,
+  }
+  type response = {
+    @ocaml.doc("<p>Token for the next set of results.</p>") @as("NextToken")
+    nextToken: option<string_>,
+    @ocaml.doc("<p>Information about the license configuration tasks for your account.</p>")
+    @as("LicenseConversionTasks")
+    licenseConversionTasks: option<licenseConversionTasks>,
+  }
+  @module("@aws-sdk/client-license-manager") @new
+  external new: request => t = "ListLicenseConversionTasksCommand"
+  let make = (~filters=?, ~maxResults=?, ~nextToken=?, ()) =>
+    new({filters: filters, maxResults: maxResults, nextToken: nextToken})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module ListDistributedGrants = {
   type t
   type request = {
@@ -1797,15 +1956,13 @@ module GetLicenseUsage = {
 module GetLicenseManagerReportGenerator = {
   type t
   type request = {
-    @ocaml.doc(
-      "<p>mazon Resource Number (ARN) of the report generator to retrieve information on.</p>"
-    )
+    @ocaml.doc("<p>Amazon Resource Name (ARN) of the report generator.</p>")
     @as("LicenseManagerReportGeneratorArn")
     licenseManagerReportGeneratorArn: string_,
   }
   type response = {
     @ocaml.doc(
-      "<p>A report generator that creates periodic reports on your license configurations.</p>"
+      "<p>A report generator that creates periodic reports about your license configurations.</p>"
     )
     @as("ReportGenerator")
     reportGenerator: option<reportGenerator>,
@@ -1973,7 +2130,7 @@ module ListLicenseManagerReportGenerators = {
     @ocaml.doc("<p>Token for the next set of results.</p>") @as("NextToken")
     nextToken: option<string_>,
     @ocaml.doc(
-      "<p>A report generator that creates periodic reports on your license configurations.</p>"
+      "<p>A report generator that creates periodic reports about your license configurations.</p>"
     )
     @as("ReportGenerators")
     reportGenerators: option<reportGeneratorList>,
@@ -2041,7 +2198,7 @@ module UpdateLicenseConfiguration = {
     @as("LicenseConfigurationArn")
     licenseConfigurationArn: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-license-manager") @new
   external new: request => t = "UpdateLicenseConfigurationCommand"
   let make = (
@@ -2102,7 +2259,7 @@ module GetLicenseConfiguration = {
     @ocaml.doc("<p>Number of available licenses.</p>") @as("LicenseCount")
     licenseCount: option<boxLong>,
     @ocaml.doc("<p>License rules.</p>") @as("LicenseRules") licenseRules: option<stringList>,
-    @ocaml.doc("<p>Dimension on which the licenses are counted.</p>") @as("LicenseCountingType")
+    @ocaml.doc("<p>Dimension for which the licenses are counted.</p>") @as("LicenseCountingType")
     licenseCountingType: option<licenseCountingType>,
     @ocaml.doc("<p>Description of the license configuration.</p>") @as("Description")
     description: option<string_>,
@@ -2223,7 +2380,7 @@ module ListLicenseConfigurations = {
          <ul>
             <li>
                <p>
-                  <code>licenseCountingType</code> - The dimension on which licenses are counted.
+                  <code>licenseCountingType</code> - The dimension for which licenses are counted.
                Possible values are <code>vCPU</code> | <code>Instance</code> | <code>Core</code> | <code>Socket</code>.
                Logical operators are <code>EQUALS</code> | <code>NOT_EQUALS</code>.</p>
             </li>

@@ -727,7 +727,7 @@ module DeleteScalingPlan = {
     @ocaml.doc("<p>The name of the scaling plan.</p>") @as("ScalingPlanName")
     scalingPlanName: scalingPlanName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-autoscaling-plans") @new
   external new: request => t = "DeleteScalingPlanCommand"
   let make = (~scalingPlanVersion, ~scalingPlanName, ()) =>
@@ -841,7 +841,7 @@ module UpdateScalingPlan = {
     @ocaml.doc("<p>The name of the scaling plan.</p>") @as("ScalingPlanName")
     scalingPlanName: scalingPlanName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-autoscaling-plans") @new
   external new: request => t = "UpdateScalingPlanCommand"
   let make = (

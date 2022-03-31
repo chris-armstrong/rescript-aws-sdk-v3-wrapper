@@ -15,6 +15,7 @@ type baseTimestamp = Js.Date.t
 type baseLong = float
 type volumeSize = float
 type validationExceptionReason = [
+  | @as("CONFLICTING_BLOCK_UPDATE") #CONFLICTING_BLOCK_UPDATE
   | @as("INVALID_VOLUME_SIZE") #INVALID_VOLUME_SIZE
   | @as("INVALID_PARAMETER_VALUE") #INVALID_PARAMETER_VALUE
   | @as("INVALID_DEPENDENCY_REQUEST") #INVALID_DEPENDENCY_REQUEST
@@ -41,6 +42,7 @@ type resourceNotFoundExceptionReason = [
   | @as("SNAPSHOT_NOT_FOUND") #SNAPSHOT_NOT_FOUND
 ]
 type requestThrottledExceptionReason = [
+  | @as("RESOURCE_LEVEL_THROTTLE") #RESOURCE_LEVEL_THROTTLE
   | @as("DEPENDENCY_REQUEST_THROTTLED") #DEPENDENCY_REQUEST_THROTTLED
   | @as("ACCOUNT_THROTTLED") #ACCOUNT_THROTTLED
 ]
@@ -94,26 +96,26 @@ type block = {
 type tags = array<tag>
 type changedBlocks = array<changedBlock>
 type blocks = array<block>
-@ocaml.doc("<p>You can use the Amazon Elastic Block Store (Amazon EBS) direct APIs to create EBS snapshots, write data directly to 
+@ocaml.doc("<p>You can use the Amazon Elastic Block Store (Amazon EBS) direct APIs to create Amazon EBS snapshots, write data directly to 
     		your snapshots, read data on your snapshots, and identify the differences or changes between 
     		two snapshots. If you’re an independent software vendor (ISV) who offers backup services for 
     		Amazon EBS, the EBS direct APIs make it more efficient and cost-effective to track incremental changes on 
-    		your EBS volumes through snapshots. This can be done without having to create new volumes 
+    		your Amazon EBS volumes through snapshots. This can be done without having to create new volumes 
     		from snapshots, and then use Amazon Elastic Compute Cloud (Amazon EC2) instances to compare the differences.</p>
     		
-    	    <p>You can create incremental snapshots directly from data on-premises into EBS volumes and the 
+    	    <p>You can create incremental snapshots directly from data on-premises into volumes and the 
     		cloud to use for quick disaster recovery. With the ability to write and read snapshots, you can 
-    		write your on-premises data to an EBS snapshot during a disaster. Then after recovery, you can 
-    		restore it back to AWS or on-premises from the snapshot. You no longer need to build and 
+    		write your on-premises data to an snapshot during a disaster. Then after recovery, you can 
+    		restore it back to Amazon Web Services or on-premises from the snapshot. You no longer need to build and 
     		maintain complex mechanisms to copy data to and from Amazon EBS.</p>
 
 
         <p>This API reference provides detailed information about the actions, data types,
             parameters, and errors of the EBS direct APIs. For more information about the elements that
-            make up the EBS direct APIs, and examples of how to use them effectively, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-accessing-snapshot.html\">Accessing the Contents of an EBS Snapshot</a> in the <i>Amazon Elastic Compute Cloud User
-                Guide</i>. For more information about the supported AWS Regions, endpoints,
+            make up the EBS direct APIs, and examples of how to use them effectively, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-accessing-snapshot.html\">Accessing the Contents of an Amazon EBS Snapshot</a> in the <i>Amazon Elastic Compute Cloud User
+                Guide</i>. For more information about the supported Amazon Web Services Regions, endpoints,
             and service quotas for the EBS direct APIs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/ebs-service.html\">Amazon Elastic Block Store Endpoints and Quotas</a> in
-            the <i>AWS General Reference</i>.</p>")
+            the <i>Amazon Web Services General Reference</i>.</p>")
 module PutSnapshotBlock = {
   type t
   type request = {
@@ -128,7 +130,7 @@ module PutSnapshotBlock = {
     @ocaml.doc("<p>The progress of the write process, as a percentage.</p>") @as("Progress")
     progress: option<progress>,
     @ocaml.doc("<p>The size of the data to write to the block, in bytes. Currently, the only supported
-            size is <code>524288</code>.</p>
+            size is <code>524288</code> bytes.</p>
         <p>Valid values: <code>524288</code>
          </p>")
     @as("DataLength")
@@ -153,7 +155,16 @@ module PutSnapshotBlock = {
         	KiB aligned.</p>")
     @as("BlockIndex")
     blockIndex: blockIndex,
-    @ocaml.doc("<p>The ID of the snapshot.</p>") @as("SnapshotId") snapshotId: snapshotId,
+    @ocaml.doc("<p>The ID of the snapshot.</p>
+        <important>
+            <p>If the specified snapshot is encrypted, you must have permission to use 
+                the KMS key that was used to encrypt the snapshot. For more information, 
+                see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebsapis-using-encryption.html\">
+                    Using encryption</a> in the <i>Amazon Elastic Compute Cloud User 
+                        Guide</i>..</p>
+        </important>")
+    @as("SnapshotId")
+    snapshotId: snapshotId,
   }
   type response = {
     @ocaml.doc("<p>The algorithm used by Amazon EBS to generate the checksum.</p>")
@@ -189,21 +200,25 @@ module PutSnapshotBlock = {
 module GetSnapshotBlock = {
   type t
   type request = {
-    @ocaml.doc("<p>The block token of the block from which to get data.</p>
-
-
-        <p>Obtain the <code>BlockToken</code> by running the <code>ListChangedBlocks</code> or
-                <code>ListSnapshotBlocks</code> operations.</p>")
+    @ocaml.doc("<p>The block token of the block from which to get data. You can obtain the <code>BlockToken</code> 
+            by running the <code>ListChangedBlocks</code> or <code>ListSnapshotBlocks</code> operations.</p>")
     @as("BlockToken")
     blockToken: blockToken,
-    @ocaml.doc("<p>The block index of the block from which to get data.</p>
-
-
-        <p>Obtain the <code>BlockIndex</code> by running the <code>ListChangedBlocks</code> or
-                <code>ListSnapshotBlocks</code> operations.</p>")
+    @ocaml.doc("<p>The block index of the block in which to read the data. A block index is a logical 
+            index in units of <code>512</code> KiB blocks. To identify the block index, divide 
+            the logical offset of the data in the logical volume by the block size (logical offset 
+            of data/<code>524288</code>). The logical offset of the data must be <code>512</code> 
+            KiB aligned.</p>")
     @as("BlockIndex")
     blockIndex: blockIndex,
-    @ocaml.doc("<p>The ID of the snapshot containing the block from which to get data.</p>")
+    @ocaml.doc("<p>The ID of the snapshot containing the block from which to get data.</p>
+        <important>
+            <p>If the specified snapshot is encrypted, you must have permission to use the 
+                KMS key that was used to encrypt the snapshot. For more information, see 
+                <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebsapis-using-encryption.html\">
+                    Using encryption</a> in the <i>Amazon Elastic Compute Cloud User 
+                        Guide</i>.</p>
+        </important>")
     @as("SnapshotId")
     snapshotId: snapshotId,
   }
@@ -287,31 +302,45 @@ module StartSnapshot = {
         <p>If no value is specified, the timeout defaults to <code>60</code> minutes.</p>")
     @as("Timeout")
     timeout: option<timeout>,
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS KMS) 
-        	customer master key (CMK) to be used to encrypt the snapshot. If you do not specify a 
-        	CMK, the default AWS managed CMK is used.</p>
-        <p>If you specify a <b>ParentSnapshotId</b>, omit this
-            parameter; the snapshot will be encrypted using the same CMK that was used to encrypt
-            the parent snapshot.</p>
-        <p>If <b>Encrypted</b> is set to <code>true</code>, 
-        	you must specify a CMK ARN. </p>")
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the Key Management Service (KMS) key to be used to encrypt the snapshot.</p> 
+        
+        <p>The encryption status of the snapshot depends on the values that you specify for 
+            <b>Encrypted</b>, <b>KmsKeyArn</b>, 
+            and <b>ParentSnapshotId</b>, and whether your Amazon Web Services account 
+            is enabled for <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-by-default\">
+                encryption by default</a>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebsapis-using-encryption.html\">
+                    Using encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
+        
+        
+        <important>
+            <p>To create an encrypted snapshot, you must have permission to use the KMS key. For 
+                more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebsapi-permissions.html#ebsapi-kms-permissions\">
+                    Permissions to use Key Management Service keys</a> in the <i>Amazon Elastic Compute Cloud User 
+                        Guide</i>.</p>
+        </important>")
     @as("KmsKeyArn")
     kmsKeyArn: option<kmsKeyArn>,
-    @ocaml.doc("<p>Indicates whether to encrypt the snapshot. To create an encrypted snapshot, specify
-                <code>true</code>. To create an unencrypted snapshot, omit this parameter.</p>
-        <p>If you specify a value for <b>ParentSnapshotId</b>, omit
-            this parameter.</p>
-        <p>If you specify <code>true</code>, the snapshot is encrypted using the CMK specified
-            using the <b>KmsKeyArn</b> parameter. If no value is specified
-            for <b>KmsKeyArn</b>, the default CMK for your account is 
-        	used. If no default CMK has been specified for your account, the AWS managed CMK is used. 
-        	To set a default CMK for your account, use <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyEbsDefaultKmsKeyId.html\">
-        		ModifyEbsDefaultKmsKeyId</a>.</p>
-        <p>If your account is enabled for encryption by default, you cannot set this parameter to
-                <code>false</code>. In this case, you can omit this parameter.</p>
-
-        <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-accessing-snapshot.html#ebsapis-using-encryption\">
-                Using encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>")
+    @ocaml.doc("<p>Indicates whether to encrypt the snapshot.</p> 
+        
+        <p>You can't specify <b>Encrypted</b> and <b>
+            ParentSnapshotId</b> in the same request. If you specify both parameters, the 
+            request fails with <code>ValidationException</code>.</p>
+        
+        <p>The encryption status of the snapshot depends on the values that you specify for 
+            <b>Encrypted</b>, <b>KmsKeyArn</b>, 
+            and <b>ParentSnapshotId</b>, and whether your Amazon Web Services account 
+            is enabled for <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-by-default\">
+                encryption by default</a>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebsapis-using-encryption.html\">
+            Using encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
+        
+        
+            
+        <important>
+            <p>To create an encrypted snapshot, you must have permission to use the KMS key. For 
+                more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebsapi-permissions.html#ebsapi-kms-permissions\">
+                    Permissions to use Key Management Service keys</a> in the <i>Amazon Elastic Compute Cloud User 
+                        Guide</i>.</p>
+        </important>")
     @as("Encrypted")
     encrypted: option<boolean_>,
     @ocaml.doc("<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
@@ -319,7 +348,7 @@ module StartSnapshot = {
             request, if the original request completes successfully. The subsequent retries with the same 
             client token return the result from the original successful request and they have no additional 
             effect.</p>
-        <p>If you do not specify a client token, one is automatically generated by the AWS SDK.</p>
+        <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services SDK.</p>
         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-direct-api-idempotency.html\">
     		Idempotency for StartSnapshot API</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>")
     @as("ClientToken")
@@ -329,19 +358,37 @@ module StartSnapshot = {
     @ocaml.doc("<p>The tags to apply to the snapshot.</p>") @as("Tags") tags: option<tags>,
     @ocaml.doc("<p>The ID of the parent snapshot. If there is no parent snapshot, or if you are creating
             the first snapshot for an on-premises volume, omit this parameter.</p>
-        <p>If your account is enabled for encryption by default, you cannot use an unencrypted
-            snapshot as a parent snapshot. You must first create an encrypted copy of the parent
-            snapshot using <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CopySnapshot.html\">CopySnapshot</a>.</p>")
+        <p>You can't specify <b>ParentSnapshotId</b> and 
+            <b>Encrypted</b> in the same request. If you specify both 
+            parameters, the request fails with <code>ValidationException</code>.</p>
+        
+        
+        
+        <p>The encryption status of the snapshot depends on the values that you specify for 
+            <b>Encrypted</b>, <b>KmsKeyArn</b>, 
+            and <b>ParentSnapshotId</b>, and whether your Amazon Web Services account 
+            is enabled for <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-by-default\">
+                encryption by default</a>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebsapis-using-encryption.html\">
+                    Using encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>
+        
+        <important>
+            <p>If you specify an encrypted parent snapshot, you must have permission to use the 
+                KMS key that was used to encrypt the parent snapshot. For more information, see 
+                <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebsapi-permissions.html#ebsapi-kms-permissions\">
+                    Permissions to use Key Management Service keys</a> in the <i>Amazon Elastic Compute Cloud User 
+                        Guide</i>.</p>
+        </important>")
     @as("ParentSnapshotId")
     parentSnapshotId: option<snapshotId>,
-    @ocaml.doc("<p>The size of the volume, in GiB. The maximum size is <code>16384</code> GiB (16
+    @ocaml.doc("<p>The size of the volume, in GiB. The maximum size is <code>65536</code> GiB (64
             TiB).</p>")
     @as("VolumeSize")
     volumeSize: volumeSize,
   }
   type response = {
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS KMS) customer
-            master key (CMK) used to encrypt the snapshot.</p>")
+    @ocaml.doc(
+      "<p>The Amazon Resource Name (ARN) of the Key Management Service (KMS) key used to encrypt the snapshot.</p>"
+    )
     @as("KmsKeyArn")
     kmsKeyArn: option<kmsKeyArn>,
     @ocaml.doc("<p>The ID of the parent snapshot.</p>") @as("ParentSnapshotId")
@@ -358,7 +405,7 @@ module StartSnapshot = {
     @ocaml.doc("<p>The timestamp when the snapshot was created.</p>") @as("StartTime")
     startTime: option<timeStamp>,
     @ocaml.doc("<p>The status of the snapshot.</p>") @as("Status") status: option<status>,
-    @ocaml.doc("<p>The AWS account ID of the snapshot owner.</p>") @as("OwnerId")
+    @ocaml.doc("<p>The Amazon Web Services account ID of the snapshot owner.</p>") @as("OwnerId")
     ownerId: option<ownerId>,
     @ocaml.doc("<p>The ID of the snapshot.</p>") @as("SnapshotId") snapshotId: option<snapshotId>,
     @ocaml.doc("<p>The description of the snapshot.</p>") @as("Description")
@@ -393,12 +440,25 @@ module ListSnapshotBlocks = {
   type t
   type request = {
     @ocaml.doc("<p>The block index from which the list should start. The list in the response will start
-            from this block index or the next valid block index in the snapshot.</p>")
+            from this block index or the next valid block index in the snapshot.</p>
+        <p>If you specify <b>NextToken</b>, then 
+            <b>StartingBlockIndex</b> is ignored.</p>")
     @as("StartingBlockIndex")
     startingBlockIndex: option<blockIndex>,
-    @ocaml.doc("<p>The number of results to return.</p>") @as("MaxResults")
+    @ocaml.doc("<p>The maximum number of blocks to be returned by the request.</p>
+        <p>Even if additional blocks can be retrieved from the snapshot, the request can 
+            return less blocks than <b>MaxResults</b> or an empty 
+            array of blocks.</p>
+        <p>To retrieve the next set of blocks from the snapshot, make another request with 
+            the returned <b>NextToken</b> value. The value of 
+            <b>NextToken</b> is <code>null</code> when there are no 
+            more blocks to return.</p>")
+    @as("MaxResults")
     maxResults: option<maxResults>,
-    @ocaml.doc("<p>The token to request the next page of results.</p>") @as("NextToken")
+    @ocaml.doc("<p>The token to request the next page of results.</p>
+        <p>If you specify <b>NextToken</b>, then 
+            <b>StartingBlockIndex</b> is ignored.</p>")
+    @as("NextToken")
     nextToken: option<pageToken>,
     @ocaml.doc("<p>The ID of the snapshot from which to get block indexes and block tokens.</p>")
     @as("SnapshotId")
@@ -409,7 +469,8 @@ module ListSnapshotBlocks = {
             are no more results to return.</p>")
     @as("NextToken")
     nextToken: option<pageToken>,
-    @ocaml.doc("<p>The size of the block.</p>") @as("BlockSize") blockSize: option<blockSize>,
+    @ocaml.doc("<p>The size of the blocks in the snapshot, in bytes.</p>") @as("BlockSize")
+    blockSize: option<blockSize>,
     @ocaml.doc("<p>The size of the volume in GB.</p>") @as("VolumeSize")
     volumeSize: option<volumeSize>,
     @ocaml.doc("<p>The time when the <code>BlockToken</code> expires.</p>") @as("ExpiryTime")
@@ -433,12 +494,25 @@ module ListChangedBlocks = {
   type request = {
     @ocaml.doc("<p>The block index from which the comparison should start.</p>
         <p>The list in the response will start from this block index or the next valid block
-            index in the snapshots.</p>")
+            index in the snapshots.</p>
+        <p>If you specify <b>NextToken</b>, then 
+            <b>StartingBlockIndex</b> is ignored.</p>")
     @as("StartingBlockIndex")
     startingBlockIndex: option<blockIndex>,
-    @ocaml.doc("<p>The number of results to return.</p>") @as("MaxResults")
+    @ocaml.doc("<p>The maximum number of blocks to be returned by the request.</p>
+        <p>Even if additional blocks can be retrieved from the snapshot, the request can 
+            return less blocks than <b>MaxResults</b> or an empty 
+            array of blocks.</p>
+        <p>To retrieve the next set of blocks from the snapshot, make another request with 
+            the returned <b>NextToken</b> value. The value of 
+            <b>NextToken</b> is <code>null</code> when there are no 
+            more blocks to return.</p>")
+    @as("MaxResults")
     maxResults: option<maxResults>,
-    @ocaml.doc("<p>The token to request the next page of results.</p>") @as("NextToken")
+    @ocaml.doc("<p>The token to request the next page of results.</p>
+        <p>If you specify <b>NextToken</b>, then 
+            <b>StartingBlockIndex</b> is ignored.</p>")
+    @as("NextToken")
     nextToken: option<pageToken>,
     @ocaml.doc("<p>The ID of the second snapshot to use for the comparison.</p>
         <important>
@@ -460,7 +534,8 @@ module ListChangedBlocks = {
             are no more results to return.</p>")
     @as("NextToken")
     nextToken: option<pageToken>,
-    @ocaml.doc("<p>The size of the block.</p>") @as("BlockSize") blockSize: option<blockSize>,
+    @ocaml.doc("<p>The size of the blocks in the snapshot, in bytes.</p>") @as("BlockSize")
+    blockSize: option<blockSize>,
     @ocaml.doc("<p>The size of the volume in GB.</p>") @as("VolumeSize")
     volumeSize: option<volumeSize>,
     @ocaml.doc("<p>The time when the <code>BlockToken</code> expires.</p>") @as("ExpiryTime")

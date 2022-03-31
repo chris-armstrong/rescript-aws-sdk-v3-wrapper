@@ -22,7 +22,16 @@ type waitIntervalInSeconds = int
 type vpcId = string
 type volumeSizeInGB = int
 type versionedArnOrName = string
+type versionId = string
 type variantWeight = float
+type variantStatusMessage = string
+type variantStatus = [
+  | @as("Baking") #Baking
+  | @as("ActivatingTraffic") #ActivatingTraffic
+  | @as("Deleting") #Deleting
+  | @as("Updating") #Updating
+  | @as("Creating") #Creating
+]
 type variantPropertyType = [
   | @as("DataCaptureConfig") #DataCaptureConfig
   | @as("DesiredWeight") #DesiredWeight
@@ -70,6 +79,12 @@ type transformJobStatus = [
 type transformJobName = string
 type transformJobArn = string
 type transformInstanceType = [
+  | @as("ml.g4dn.16xlarge") #Ml_G4dn_16xlarge
+  | @as("ml.g4dn.12xlarge") #Ml_G4dn_12xlarge
+  | @as("ml.g4dn.8xlarge") #Ml_G4dn_8xlarge
+  | @as("ml.g4dn.4xlarge") #Ml_G4dn_4xlarge
+  | @as("ml.g4dn.2xlarge") #Ml_G4dn_2xlarge
+  | @as("ml.g4dn.xlarge") #Ml_G4dn_Xlarge
   | @as("ml.m5.24xlarge") #Ml_M5_24xlarge
   | @as("ml.m5.12xlarge") #Ml_M5_12xlarge
   | @as("ml.m5.4xlarge") #Ml_M5_4xlarge
@@ -119,6 +134,14 @@ type trainingJobName = string
 type trainingJobEarlyStoppingType = [@as("Auto") #Auto | @as("Off") #Off]
 type trainingJobArn = string
 type trainingInstanceType = [
+  | @as("ml.g5.48xlarge") #Ml_G5_48xlarge
+  | @as("ml.g5.24xlarge") #Ml_G5_24xlarge
+  | @as("ml.g5.12xlarge") #Ml_G5_12xlarge
+  | @as("ml.g5.16xlarge") #Ml_G5_16xlarge
+  | @as("ml.g5.8xlarge") #Ml_G5_8xlarge
+  | @as("ml.g5.4xlarge") #Ml_G5_4xlarge
+  | @as("ml.g5.2xlarge") #Ml_G5_2xlarge
+  | @as("ml.g5.xlarge") #Ml_G5_Xlarge
   | @as("ml.c5n.18xlarge") #Ml_C5n_18xlarge
   | @as("ml.c5n.9xlarge") #Ml_C5n_9xlarge
   | @as("ml.c5n.4xlarge") #Ml_C5n_4xlarge
@@ -160,10 +183,53 @@ type trainingInstanceType = [
   | @as("ml.m4.xlarge") #Ml_M4_Xlarge
 ]
 type trainingInstanceCount = int
-type trainingInputMode = [@as("File") #File | @as("Pipe") #Pipe]
+@ocaml.doc("<p>The training input mode that the algorithm supports. For more information about input modes, see
+            <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html\">Algorithms</a>.</p>
+
+        <p>
+            <b>Pipe mode</b>
+         </p>
+        <p>If an algorithm supports <code>Pipe</code> mode, Amazon SageMaker streams data directly
+            from Amazon S3 to the container.</p>
+
+        <p>
+            <b>File mode</b>
+         </p>
+        <p>If an algorithm supports <code>File</code> mode, SageMaker
+            downloads the training data from S3 to the provisioned ML storage volume, and mounts the
+            directory to the Docker volume for the training container.</p>
+        <p>You must provision the ML storage volume with sufficient capacity
+            to accommodate the data downloaded from S3. In addition to the training data, the ML
+            storage volume also stores the output model. The algorithm container uses the ML storage
+            volume to also store intermediate information, if any.</p>
+        <p>For distributed algorithms, training data is distributed uniformly.
+            Your training duration is predictable if the input data objects sizes are
+            approximately the same. SageMaker does not split the files any further for model training.
+            If the object sizes are skewed, training won't be optimal as the data distribution is also
+            skewed when one host in a training cluster is overloaded, thus becoming a bottleneck in
+            training.</p>
+
+        <p>
+            <b>FastFile mode</b>
+         </p>
+        <p>If an algorithm supports <code>FastFile</code> mode, SageMaker streams data directly
+            from S3 to the container with no code changes, and provides file system access to
+            the data. Users can author their training script to interact with these files as if
+            they were stored on disk.</p>
+        <p>
+            <code>FastFile</code> mode works best when the data is read sequentially.
+            Augmented manifest files aren't supported.
+            The startup time is lower when there are fewer files in the S3 bucket provided.</p>")
+type trainingInputMode = [@as("FastFile") #FastFile | @as("File") #File | @as("Pipe") #Pipe]
 type trainingEnvironmentValue = string
 type trainingEnvironmentKey = string
-type trafficRoutingConfigType = [@as("CANARY") #CANARY | @as("ALL_AT_ONCE") #ALL_AT_ONCE]
+type trafficType = [@as("PHASES") #PHASES]
+type trafficRoutingConfigType = [
+  | @as("LINEAR") #LINEAR
+  | @as("CANARY") #CANARY
+  | @as("ALL_AT_ONCE") #ALL_AT_ONCE
+]
+type trafficDurationInSeconds = int
 type timestamp_ = Js.Date.t
 type thingName = string
 type terminationWaitInSeconds = int
@@ -187,17 +253,21 @@ type targetPlatformArch = [
   | @as("X86_64") #X86_64
 ]
 type targetPlatformAccelerator = [
+  | @as("NNA") #NNA
   | @as("NVIDIA") #NVIDIA
   | @as("MALI") #MALI
   | @as("INTEL_GRAPHICS") #INTEL_GRAPHICS
 ]
 type targetObjectiveMetricValue = float
 type targetDevice = [
+  | @as("imx8mplus") #Imx8mplus
   | @as("jacinto_tda4vm") #Jacinto_Tda4vm
   | @as("coreml") #Coreml
   | @as("x86_win64") #X86_Win64
   | @as("x86_win32") #X86_Win32
+  | @as("amba_cv25") #Amba_Cv25
   | @as("amba_cv22") #Amba_Cv22
+  | @as("amba_cv2") #Amba_Cv2
   | @as("sitara_am57x") #Sitara_Am57x
   | @as("qcs603") #Qcs603
   | @as("qcs605") #Qcs605
@@ -230,11 +300,27 @@ type tableName = string
 type synthesizedJsonHumanLoopActivationConditions = string
 type success = bool
 type subnetId = string
+type studioLifecycleConfigSortKey = [
+  | @as("Name") #Name
+  | @as("LastModifiedTime") #LastModifiedTime
+  | @as("CreationTime") #CreationTime
+]
+type studioLifecycleConfigName = string
+type studioLifecycleConfigContent = string
+type studioLifecycleConfigArn = string
+type studioLifecycleConfigAppType = [
+  | @as("KernelGateway") #KernelGateway
+  | @as("JupyterServer") #JupyterServer
+]
 type stringParameterValue = string
+type string8192 = string
 type string64 = string
+type string40 = string
+type string3072 = string
 type string256 = string
 type string2048 = string
 type string200 = string
+type string128 = string
 type string1024 = string
 type string_ = string
 type stepStatus = [
@@ -246,6 +332,8 @@ type stepStatus = [
   | @as("Starting") #Starting
 ]
 type stepName = string
+type stepDisplayName = string
+type stepDescription = string
 type statusMessage = string
 type statusDetails = string
 type splitType = [
@@ -254,6 +342,7 @@ type splitType = [
   | @as("Line") #Line
   | @as("None") #None
 ]
+type spawnRate = int
 type sourceUri = string
 type sourceType = string
 type sortTrialsBy = [@as("CreationTime") #CreationTime | @as("Name") #Name]
@@ -264,6 +353,7 @@ type sortPipelineExecutionsBy = [
   | @as("CreationTime") #CreationTime
 ]
 type sortOrder = [@as("Descending") #Descending | @as("Ascending") #Ascending]
+type sortLineageGroupsBy = [@as("CreationTime") #CreationTime | @as("Name") #Name]
 type sortExperimentsBy = [@as("CreationTime") #CreationTime | @as("Name") #Name]
 type sortContextsBy = [@as("CreationTime") #CreationTime | @as("Name") #Name]
 type sortBy = [@as("Status") #Status | @as("CreationTime") #CreationTime | @as("Name") #Name]
@@ -280,6 +370,8 @@ type snsTopicArn = string
 type singleSignOnUserIdentifier = string
 type sessionExpirationDurationInSeconds = int
 type serviceCatalogEntityId = string
+type serverlessMemorySizeInMB = int
+type serverlessMaxConcurrency = int
 type seed = float
 type securityGroupId = string
 type secretArn = string
@@ -335,6 +427,7 @@ type roleArn = string
 type retentionType = [@as("Delete") #Delete | @as("Retain") #Retain]
 type responseMIMEType = string
 type resourceType = [
+  | @as("Project") #Project
   | @as("FeatureGroup") #FeatureGroup
   | @as("PipelineExecution") #PipelineExecution
   | @as("Pipeline") #Pipeline
@@ -347,6 +440,7 @@ type resourceType = [
   | @as("TrainingJob") #TrainingJob
 ]
 type resourcePropertyName = string
+type resourcePolicyString = string
 type resourceId = string
 type resourceArn = string
 type repositoryCredentialsProviderArn = string
@@ -368,11 +462,35 @@ type redshiftResultCompressionType = [
 type redshiftDatabase = string
 @ocaml.doc("<p>The Redshift cluster Identifier.</p>") type redshiftClusterId = string
 type recordWrapper = [@as("RecordIO") #RecordIO | @as("None") #None]
+type recommendationJobType = [@as("Advanced") #Advanced | @as("Default") #Default]
+type recommendationJobStatus = [
+  | @as("STOPPED") #STOPPED
+  | @as("STOPPING") #STOPPING
+  | @as("FAILED") #FAILED
+  | @as("COMPLETED") #COMPLETED
+  | @as("IN_PROGRESS") #IN_PROGRESS
+  | @as("PENDING") #PENDING
+]
+type recommendationJobName = string
+type recommendationJobDescription = string
+type recommendationJobArn = string
+type rstudioServerProUserGroup = [
+  | @as("R_STUDIO_USER") #R_STUDIO_USER
+  | @as("R_STUDIO_ADMIN") #R_STUDIO_ADMIN
+]
+type rstudioServerProAccessStatus = [@as("DISABLED") #DISABLED | @as("ENABLED") #ENABLED]
+@ocaml.doc("<p>A collection of settings that apply to an <code>RSessionGateway</code> app.</p>")
+type rsessionAppSettings = {.}
+type queryLineageMaxResults = int
+type queryLineageMaxDepth = int
 type provisioningParameterValue = string
 type provisioningParameterKey = string
 type provisionedProductStatusMessage = string
 type propertyNameHint = string
 type projectStatus = [
+  | @as("UpdateFailed") #UpdateFailed
+  | @as("UpdateCompleted") #UpdateCompleted
+  | @as("UpdateInProgress") #UpdateInProgress
   | @as("DeleteCompleted") #DeleteCompleted
   | @as("DeleteFailed") #DeleteFailed
   | @as("DeleteInProgress") #DeleteInProgress
@@ -486,6 +604,12 @@ type processingJobStatus = [
 type processingJobName = string
 type processingJobArn = string
 type processingInstanceType = [
+  | @as("ml.g4dn.16xlarge") #Ml_G4dn_16xlarge
+  | @as("ml.g4dn.12xlarge") #Ml_G4dn_12xlarge
+  | @as("ml.g4dn.8xlarge") #Ml_G4dn_8xlarge
+  | @as("ml.g4dn.4xlarge") #Ml_G4dn_4xlarge
+  | @as("ml.g4dn.2xlarge") #Ml_G4dn_2xlarge
+  | @as("ml.g4dn.xlarge") #Ml_G4dn_Xlarge
   | @as("ml.r5.24xlarge") #Ml_R5_24xlarge
   | @as("ml.r5.16xlarge") #Ml_R5_16xlarge
   | @as("ml.r5.12xlarge") #Ml_R5_12xlarge
@@ -536,6 +660,7 @@ type problemType = [
 type probabilityThresholdAttribute = float
 type presignedDomainUrl = string
 type policyString = string
+type platformIdentifier = string
 type pipelineStatus = [@as("Active") #Active]
 type pipelineParameterName = string
 type pipelineName = string
@@ -547,6 +672,7 @@ type pipelineExecutionStatus = [
   | @as("Executing") #Executing
 ]
 type pipelineExecutionName = string
+type pipelineExecutionFailureReason = string
 type pipelineExecutionDescription = string
 type pipelineExecutionArn = string
 type pipelineDescription = string
@@ -636,6 +762,8 @@ type notebookInstanceAcceleratorType = [
 ]
 type nextToken = string
 type networkInterfaceId = string
+type neoVpcSubnetId = string
+type neoVpcSecurityGroupId = string
 type nameContains = string
 type mountPath = string
 type monitoringType = [
@@ -695,6 +823,13 @@ type modelPackageGroupArn = string
 type modelPackageArn = string
 type modelNameContains = string
 type modelName = string
+type modelMetadataFilterType = [
+  | @as("FrameworkVersion") #FrameworkVersion
+  | @as("Task") #Task
+  | @as("Framework") #Framework
+  | @as("Domain") #Domain
+]
+type modelInsightsLocation = string
 type modelCacheSetting = [@as("Disabled") #Disabled | @as("Enabled") #Enabled]
 type modelArn = string
 type modelApprovalStatus = [
@@ -703,6 +838,7 @@ type modelApprovalStatus = [
   | @as("Approved") #Approved
 ]
 type metricValue = float
+type metricSetSource = [@as("Test") #Test | @as("Validation") #Validation | @as("Train") #Train]
 type metricRegex = string
 type metricName = string
 type metadataPropertyValue = string
@@ -716,10 +852,14 @@ type maxResults = int
 type maxPercentageOfInputDatasetLabeled = int
 type maxPayloadInMB = int
 type maxParallelTrainingJobs = int
+type maxParallelOfTests = int
+type maxParallelExecutionSteps = int
 type maxNumberOfTrainingJobs = int
+type maxNumberOfTests = int
 type maxHumanLabeledObjectCount = int
 type maxConcurrentTransforms = int
 type maxConcurrentTaskCount = int
+type maxConcurrentInvocationsPerInstance = int
 type maxCandidates = int
 type maxAutoMLJobRuntimeInSeconds = int
 type long = float
@@ -728,6 +868,11 @@ type listWorkforcesSortByOptions = [@as("CreateDate") #CreateDate | @as("Name") 
 type listTagsMaxResults = int
 type listMaxResults = int
 type listLabelingJobsForWorkteamSortByOptions = [@as("CreationTime") #CreationTime]
+type listInferenceRecommendationsJobsSortBy = [
+  | @as("Status") #Status
+  | @as("CreationTime") #CreationTime
+  | @as("Name") #Name
+]
 type listEdgePackagingJobsSortBy = [
   | @as("STATUS") #STATUS
   | @as("LAST_MODIFIED_TIME") #LAST_MODIFIED_TIME
@@ -745,6 +890,14 @@ type listCompilationJobsSortBy = [
   | @as("CreationTime") #CreationTime
   | @as("Name") #Name
 ]
+type lineageType = [
+  | @as("Action") #Action
+  | @as("Context") #Context
+  | @as("Artifact") #Artifact
+  | @as("TrialComponent") #TrialComponent
+]
+type lineageGroupNameOrArn = string
+type lineageGroupArn = string
 type lastModifiedTime = Js.Date.t
 type lambdaFunctionArn = string
 type labelingJobStatus = [
@@ -761,6 +914,7 @@ type labelingJobAlgorithmSpecificationArn = string
 type labelCounter = int
 type labelAttributeName = string
 type kmsKeyId = string
+type key = string
 type kernelName = string
 type kernelDisplayName = string
 type jsonPath = string
@@ -768,11 +922,28 @@ type jsonContentType = string
 type joinSource = [@as("None") #None | @as("Input") #Input]
 type jobReferenceCodeContains = string
 type jobReferenceCode = string
+type jobDurationInSeconds = int
 type iotRoleAlias = string
 type invocationsTimeoutInSeconds = int
 type invocationsMaxRetries = int
+type integerValue = int
 type integer_ = int
 type instanceType = [
+  | @as("ml.r5.24xlarge") #Ml_R5_24xlarge
+  | @as("ml.r5.16xlarge") #Ml_R5_16xlarge
+  | @as("ml.r5.12xlarge") #Ml_R5_12xlarge
+  | @as("ml.r5.8xlarge") #Ml_R5_8xlarge
+  | @as("ml.r5.4xlarge") #Ml_R5_4xlarge
+  | @as("ml.r5.2xlarge") #Ml_R5_2xlarge
+  | @as("ml.r5.xlarge") #Ml_R5_Xlarge
+  | @as("ml.r5.large") #Ml_R5_Large
+  | @as("ml.g4dn.16xlarge") #Ml_G4dn_16xlarge
+  | @as("ml.g4dn.12xlarge") #Ml_G4dn_12xlarge
+  | @as("ml.g4dn.8xlarge") #Ml_G4dn_8xlarge
+  | @as("ml.g4dn.4xlarge") #Ml_G4dn_4xlarge
+  | @as("ml.g4dn.2xlarge") #Ml_G4dn_2xlarge
+  | @as("ml.g4dn.xlarge") #Ml_G4dn_Xlarge
+  | @as("ml.p3dn.24xlarge") #Ml_P3dn_24xlarge
   | @as("ml.p3.16xlarge") #Ml_P3_16xlarge
   | @as("ml.p3.8xlarge") #Ml_P3_8xlarge
   | @as("ml.p3.2xlarge") #Ml_P3_2xlarge
@@ -793,6 +964,14 @@ type instanceType = [
   | @as("ml.c4.4xlarge") #Ml_C4_4xlarge
   | @as("ml.c4.2xlarge") #Ml_C4_2xlarge
   | @as("ml.c4.xlarge") #Ml_C4_Xlarge
+  | @as("ml.m5d.24xlarge") #Ml_M5d_24xlarge
+  | @as("ml.m5d.16xlarge") #Ml_M5d_16xlarge
+  | @as("ml.m5d.12xlarge") #Ml_M5d_12xlarge
+  | @as("ml.m5d.8xlarge") #Ml_M5d_8xlarge
+  | @as("ml.m5d.4xlarge") #Ml_M5d_4xlarge
+  | @as("ml.m5d.2xlarge") #Ml_M5d_2xlarge
+  | @as("ml.m5d.xlarge") #Ml_M5d_Xlarge
+  | @as("ml.m5d.large") #Ml_M5d_Large
   | @as("ml.m5.24xlarge") #Ml_M5_24xlarge
   | @as("ml.m5.12xlarge") #Ml_M5_12xlarge
   | @as("ml.m5.4xlarge") #Ml_M5_4xlarge
@@ -813,6 +992,10 @@ type instanceType = [
   | @as("ml.t2.medium") #Ml_T2_Medium
 ]
 type inputMode = [@as("File") #File | @as("Pipe") #Pipe]
+type initialTaskCount = int
+type initialNumberOfUsers = int
+type inferenceSpecificationName = string
+type inferenceImage = string
 type inferenceExecutionMode = [@as("Direct") #Direct | @as("Serial") #Serial]
 type imageVersionStatus = [
   | @as("DELETE_FAILED") #DELETE_FAILED
@@ -955,6 +1138,7 @@ type failureReason = string
 type explainabilityLocation = string
 type expiresInSeconds = int
 type experimentSourceArn = string
+type experimentEntityNameOrArn = string
 type experimentEntityName = string
 type experimentDescription = string
 type experimentArn = string
@@ -994,9 +1178,13 @@ type endpointConfigNameContains = string
 type endpointConfigName = string
 type endpointConfigArn = string
 type endpointArn = string
+type enableIotRoleAlias = bool
 type enableCapture = bool
 type efsUid = string
 type edgeVersion = string
+type edgePresetDeploymentType = [@as("GreengrassV2Component") #GreengrassV2Component]
+type edgePresetDeploymentStatus = [@as("FAILED") #FAILED | @as("COMPLETED") #COMPLETED]
+type edgePresetDeploymentArtifact = string
 type edgePackagingJobStatus = [
   | @as("STOPPED") #STOPPED
   | @as("STOPPING") #STOPPING
@@ -1026,6 +1214,11 @@ type disassociateDefaultCodeRepository = bool
 type disassociateAdditionalCodeRepositories = bool
 type disableProfiler = bool
 type directoryPath = string
+type direction = [
+  | @as("Descendants") #Descendants
+  | @as("Ascendants") #Ascendants
+  | @as("Both") #Both
+]
 type directInternetAccess = [@as("Disabled") #Disabled | @as("Enabled") #Enabled]
 type deviceName = string
 type deviceFleetDescription = string
@@ -1055,6 +1248,8 @@ type dataDistributionType = [
   | @as("ShardedByS3Key") #ShardedByS3Key
   | @as("FullyReplicated") #FullyReplicated
 ]
+type customerMetadataValue = string
+type customerMetadataKey = string
 type csvContentType = string
 type creationTime = Js.Date.t
 type contextArn = string
@@ -1132,6 +1327,8 @@ type candidateSortBy = [
 ]
 type candidateName = string
 type candidateDefinitionNotebookLocation = string
+type callbackToken = string
+type bucketName = string
 type branch = string
 type booleanOperator = [@as("Or") #Or | @as("And") #And]
 type boolean_ = bool
@@ -1163,6 +1360,8 @@ type autoMLJobStatus = [
   | @as("Completed") #Completed
 ]
 type autoMLJobSecondaryStatus = [
+  | @as("ModelInsightsError") #ModelInsightsError
+  | @as("GeneratingModelInsightsReport") #GeneratingModelInsightsReport
   | @as("ModelDeploymentError") #ModelDeploymentError
   | @as("DeployingModel") #DeployingModel
   | @as("ExplainabilityError") #ExplainabilityError
@@ -1222,6 +1421,8 @@ type artifactArn = string
 type arnOrName = string
 type approvalDescription = string
 type appType = [
+  | @as("RSessionGateway") #RSessionGateway
+  | @as("RStudioServerPro") #RStudioServerPro
   | @as("TensorBoard") #TensorBoard
   | @as("KernelGateway") #KernelGateway
   | @as("JupyterServer") #JupyterServer
@@ -1234,6 +1435,7 @@ type appStatus = [
   | @as("Deleted") #Deleted
 ]
 type appSortKey = [@as("CreationTime") #CreationTime]
+type appSecurityGroupManagement = [@as("Customer") #Customer | @as("Service") #Service]
 type appNetworkAccessType = [
   | @as("VpcOnly") #VpcOnly
   | @as("PublicInternetOnly") #PublicInternetOnly
@@ -1241,12 +1443,21 @@ type appNetworkAccessType = [
 type appName = string
 type appManaged = bool
 type appInstanceType = [
+  | @as("ml.r5.24xlarge") #Ml_R5_24xlarge
+  | @as("ml.r5.16xlarge") #Ml_R5_16xlarge
+  | @as("ml.r5.12xlarge") #Ml_R5_12xlarge
+  | @as("ml.r5.8xlarge") #Ml_R5_8xlarge
+  | @as("ml.r5.4xlarge") #Ml_R5_4xlarge
+  | @as("ml.r5.2xlarge") #Ml_R5_2xlarge
+  | @as("ml.r5.xlarge") #Ml_R5_Xlarge
+  | @as("ml.r5.large") #Ml_R5_Large
   | @as("ml.g4dn.16xlarge") #Ml_G4dn_16xlarge
   | @as("ml.g4dn.12xlarge") #Ml_G4dn_12xlarge
   | @as("ml.g4dn.8xlarge") #Ml_G4dn_8xlarge
   | @as("ml.g4dn.4xlarge") #Ml_G4dn_4xlarge
   | @as("ml.g4dn.2xlarge") #Ml_G4dn_2xlarge
   | @as("ml.g4dn.xlarge") #Ml_G4dn_Xlarge
+  | @as("ml.p3dn.24xlarge") #Ml_P3dn_24xlarge
   | @as("ml.p3.16xlarge") #Ml_P3_16xlarge
   | @as("ml.p3.8xlarge") #Ml_P3_8xlarge
   | @as("ml.p3.2xlarge") #Ml_P3_2xlarge
@@ -1258,6 +1469,14 @@ type appInstanceType = [
   | @as("ml.c5.2xlarge") #Ml_C5_2xlarge
   | @as("ml.c5.xlarge") #Ml_C5_Xlarge
   | @as("ml.c5.large") #Ml_C5_Large
+  | @as("ml.m5d.24xlarge") #Ml_M5d_24xlarge
+  | @as("ml.m5d.16xlarge") #Ml_M5d_16xlarge
+  | @as("ml.m5d.12xlarge") #Ml_M5d_12xlarge
+  | @as("ml.m5d.8xlarge") #Ml_M5d_8xlarge
+  | @as("ml.m5d.4xlarge") #Ml_M5d_4xlarge
+  | @as("ml.m5d.2xlarge") #Ml_M5d_2xlarge
+  | @as("ml.m5d.xlarge") #Ml_M5d_Xlarge
+  | @as("ml.m5d.large") #Ml_M5d_Large
   | @as("ml.m5.24xlarge") #Ml_M5_24xlarge
   | @as("ml.m5.16xlarge") #Ml_M5_16xlarge
   | @as("ml.m5.12xlarge") #Ml_M5_12xlarge
@@ -1305,6 +1524,17 @@ type actionArn = string
 type accountId = string
 type accept = string
 type vpcSecurityGroupIds = array<securityGroupId>
+@ocaml.doc("<p>A lineage entity connected to the starting entity(ies).</p>")
+type vertex = {
+  @ocaml.doc("<p>The type of resource of the lineage entity.</p>") @as("LineageType")
+  lineageType: option<lineageType>,
+  @ocaml.doc("<p>The type of the lineage entity resource. For example: <code>DataSet</code>, <code>Model</code>, <code>Endpoint</code>, 
+         etc...</p>")
+  @as("Type")
+  type_: option<string40>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the lineage entity resource.</p>") @as("Arn")
+  arn: option<associationEntityArn>,
+}
 @ocaml.doc("<p>Specifies a production variant property type for an Endpoint.</p>
         <p>If you are updating an endpoint with the <a>UpdateEndpointInput$RetainAllVariantProperties</a> option set to
                 <code>true</code>, the <code>VariantProperty</code> objects listed in <a>UpdateEndpointInput$ExcludeRetainedVariantProperties</a> override the
@@ -1341,8 +1571,8 @@ type userProfileDetails = {
   userProfileName: option<userProfileName>,
   @ocaml.doc("<p>The domain ID.</p>") @as("DomainId") domainId: option<domainId>,
 }
-@ocaml.doc("<p>Information about the user who created or modified an experiment, trial, or trial
-      component.</p>")
+@ocaml.doc("<p>Information about the user who created or modified an experiment, trial, trial
+      component, lineage group, or project.</p>")
 type userContext = {
   @ocaml.doc("<p>The domain associated with the user.</p>") @as("DomainId")
   domainId: option<string_>,
@@ -1363,20 +1593,35 @@ type uiTemplate = {
   @as("Content")
   content: templateContent,
 }
-@ocaml.doc("<p>Provided configuration information for the worker UI for a labeling job. </p>")
+@ocaml.doc("<p>Provided configuration information for the worker UI for a labeling job. Provide
+            either <code>HumanTaskUiArn</code> or <code>UiTemplateS3Uri</code>.</p>
+        <p>For named entity recognition, 3D point cloud and video frame labeling jobs, use
+                <code>HumanTaskUiArn</code>.</p>
+        <p>For all other Ground Truth built-in task types and custom task types, use
+                <code>UiTemplateS3Uri</code> to specify the location of a worker task template in
+            Amazon S3.</p>")
 type uiConfig = {
   @ocaml.doc("<p>The ARN of the worker task template used to render the worker UI and tools for
             labeling job tasks.</p>
-        <p>Use this parameter when you are creating a labeling job for 3D point cloud and video
-            fram labeling jobs. Use your labeling job task type to select one of the following ARNs
-            and use it with this parameter when you create a labeling job. Replace
-                <code>aws-region</code> with the AWS region you are creating your labeling job
-            in.</p>
-
+        <p>Use this parameter when you are creating a labeling job for named entity recognition,
+            3D point cloud and video frame labeling jobs. Use your labeling job task type to select
+            one of the following ARNs and use it with this parameter when you create a labeling job.
+            Replace <code>aws-region</code> with the Amazon Web Services Region you are creating your labeling job
+            in. For example, replace <code>aws-region</code> with <code>us-west-1</code> if you
+            create a labeling job in US West (N. California).</p>
+        <p>
+            <b>Named Entity Recognition</b>
+         </p>
+        <p>Use the following <code>HumanTaskUiArn</code> for named entity recognition labeling
+            jobs:</p>
+        <p>
+            <code>arn:aws:sagemaker:aws-region:394669845002:human-task-ui/NamedEntityRecognition</code>
+         </p>
+        
         <p>
             <b>3D Point Cloud HumanTaskUiArns</b>
          </p>
-
+        
         <p>Use this <code>HumanTaskUiArn</code> for 3D point cloud object detection and 3D point
             cloud object detection adjustment labeling jobs. </p>
         <ul>
@@ -1386,7 +1631,7 @@ type uiConfig = {
                 </p>
             </li>
          </ul>
-
+        
         <p> Use this <code>HumanTaskUiArn</code> for 3D point cloud object tracking and 3D point
             cloud object tracking adjustment labeling jobs. </p>
         <ul>
@@ -1396,7 +1641,7 @@ type uiConfig = {
                 </p>
             </li>
          </ul>
-
+        
         <p> Use this <code>HumanTaskUiArn</code> for 3D point cloud semantic segmentation and 3D
             point cloud semantic segmentation adjustment labeling jobs.</p>
         <ul>
@@ -1406,11 +1651,11 @@ type uiConfig = {
                 </p>
             </li>
          </ul>
-
+        
         <p>
             <b>Video Frame HumanTaskUiArns</b>
          </p>
-
+        
         <p>Use this <code>HumanTaskUiArn</code> for video frame object detection and video frame
             object detection adjustment labeling jobs. </p>
         <ul>
@@ -1420,7 +1665,7 @@ type uiConfig = {
                 </p>
             </li>
          </ul>
-
+        
         <p> Use this <code>HumanTaskUiArn</code> for video frame object tracking and video frame
             object tracking adjustment labeling jobs. </p>
         <ul>
@@ -1447,6 +1692,14 @@ type usd = {
   cents: option<cents>,
   @ocaml.doc("<p>The whole number of dollars in the amount.</p>") @as("Dollars")
   dollars: option<dollars>,
+}
+@ocaml.doc("<p>Metadata for a tuning step.</p>")
+type tuningJobStepMetaData = {
+  @ocaml.doc(
+    "<p>The Amazon Resource Name (ARN) of the tuning job that was run by this step execution.</p>"
+  )
+  @as("Arn")
+  arn: option<hyperParameterTuningJobArn>,
 }
 @ocaml.doc("<p>The job completion criteria.</p>")
 type tuningJobCompletionCriteria = {
@@ -1602,9 +1855,19 @@ type transformS3DataSource = {
 @ocaml.doc("<p>Describes the resources, including ML instance types and ML instance count, to use for
             transform job.</p>")
 type transformResources = {
-  @ocaml.doc("<p>The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt model data on the storage volume
-            attached to the ML compute instance(s) that run the batch transform job. The
-                <code>VolumeKmsKeyId</code> can be any of the following formats:</p>
+  @ocaml.doc("<p>The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that Amazon SageMaker uses to encrypt model data on the storage volume
+            attached to the ML compute instance(s) that run the batch transform job.</p>
+        <note>
+            <p>Certain Nitro-based instances include local storage, dependent on the instance
+                type. Local storage volumes are encrypted using a hardware module on the instance.
+                You can't request a <code>VolumeKmsKeyId</code> when using an instance type with
+                local storage.</p>
+            <p>For a list of instance types that support local instance storage, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes\">Instance Store Volumes</a>.</p>
+            <p>For more information about local instance storage encryption, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html\">SSD
+                Instance Store Volumes</a>.</p>
+        </note>
+            <p>
+            The <code>VolumeKmsKeyId</code> can be any of the following formats:</p>
         <ul>
             <li>
                 <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>
@@ -1638,14 +1901,13 @@ type transformResources = {
             algorithms to
             transform
             moderately sized datasets, we recommend using ml.m4.xlarge or
-            <code>ml.m5.large</code>
-         instance types.</p>")
+            <code>ml.m5.large</code>instance types.</p>")
   @as("InstanceType")
   instanceType: transformInstanceType,
 }
 @ocaml.doc("<p>Describes the results of a transform job.</p>")
 type transformOutput = {
-  @ocaml.doc("<p>The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using
+  @ocaml.doc("<p>The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using
             Amazon S3 server-side encryption. The <code>KmsKeyId</code> can be any of the following
             formats: </p>
         <ul>
@@ -1674,11 +1936,10 @@ type transformOutput = {
             role's account. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html\">KMS-Managed Encryption Keys</a> in the
                 <i>Amazon Simple Storage Service
                 Developer Guide.</i>
-         
          </p>
         <p>The KMS key policy must grant permission to the IAM role that you specify in your
                 <a>CreateModel</a> request. For more information, see <a href=\"http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html\">Using
-                Key Policies in AWS KMS</a> in the <i>AWS Key Management Service Developer
+                    Key Policies in Amazon Web Services KMS</a> in the <i>Amazon Web Services Key Management Service Developer
                 Guide</i>.</p>")
   @as("KmsKeyId")
   kmsKeyId: option<kmsKeyId>,
@@ -1883,10 +2144,19 @@ type targetPlatform = {
   os: targetPlatformOs,
 }
 type tagKeyList = array<tagKey>
-@ocaml.doc("<p>Describes a tag. </p>")
+@ocaml.doc("<p>A tag object that consists of a key and an optional value, used to manage metadata
+            for SageMaker Amazon Web Services resources.</p>
+        <p>You can add tags to notebook instances, training jobs, hyperparameter tuning jobs,
+            batch transform jobs, models, labeling jobs, work teams, endpoint configurations, and
+            endpoints. For more information on adding tags to SageMaker resources, see <a>AddTags</a>.</p>
+        <p>For more information on adding metadata to your Amazon Web Services resources with tagging, see
+            <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services
+                resources</a>. For advice on best practices for managing Amazon Web Services resources with
+            tagging, see <a href=\"https://d1.awsstatic.com/whitepapers/aws-tagging-best-practices.pdf\">Tagging
+                Best Practices: Implement an Effective Amazon Web Services Resource Tagging Strategy</a>.</p>")
 type tag = {
   @ocaml.doc("<p>The tag value.</p>") @as("Value") value: tagValue,
-  @ocaml.doc("<p>The tag key.</p>") @as("Key") key: tagKey,
+  @ocaml.doc("<p>The tag key. Tag keys must be unique per resource.</p>") @as("Key") key: tagKey,
 }
 @ocaml.doc("<p>Describes a work team of a vendor that does the a labelling job.</p>")
 type subscribedWorkteam = {
@@ -1904,12 +2174,30 @@ type subscribedWorkteam = {
   workteamArn: workteamArn,
 }
 type subnets = array<subnetId>
-@ocaml.doc("<p>Specifies a limit to how long a model training job, model compilation job, or
-            hyperparameter tuning job can run. It also specifies how long a managed Spot training
-            job has to complete.
-            When the job reaches the time limit, Amazon SageMaker ends the training or compilation job. Use this
-            API to cap model training costs.</p>
-        <p>To stop a job, Amazon SageMaker sends the algorithm the <code>SIGTERM</code> signal, which delays
+@ocaml.doc("<p>Details of the Studio Lifecycle Configuration.</p>")
+type studioLifecycleConfigDetails = {
+  @ocaml.doc("<p>The App type to which the Lifecycle Configuration is attached.</p>")
+  @as("StudioLifecycleConfigAppType")
+  studioLifecycleConfigAppType: option<studioLifecycleConfigAppType>,
+  @ocaml.doc(
+    "<p>This value is equivalent to CreationTime because Studio Lifecycle Configurations are immutable.</p>"
+  )
+  @as("LastModifiedTime")
+  lastModifiedTime: option<timestamp_>,
+  @ocaml.doc("<p>The creation time of the Studio Lifecycle Configuration.</p>") @as("CreationTime")
+  creationTime: option<timestamp_>,
+  @ocaml.doc("<p>The name of the Studio Lifecycle Configuration.</p>")
+  @as("StudioLifecycleConfigName")
+  studioLifecycleConfigName: option<studioLifecycleConfigName>,
+  @ocaml.doc("<p> The Amazon Resource Name (ARN) of the Lifecycle Configuration.</p>")
+  @as("StudioLifecycleConfigArn")
+  studioLifecycleConfigArn: option<studioLifecycleConfigArn>,
+}
+@ocaml.doc("<p>Specifies a limit to how long a model training job or model compilation job 
+            can run. It also specifies how long a managed spot training
+            job has to complete. When the job reaches the time limit, Amazon SageMaker ends the training or
+            compilation job. Use this API to cap model training costs.</p>
+        <p>To stop a training job, Amazon SageMaker sends the algorithm the <code>SIGTERM</code> signal, which delays
             job termination for 120 seconds. Algorithms can use this 120-second window to save the
             model artifacts, so the results of training are not lost. </p>
         <p>The training algorithms provided by Amazon SageMaker automatically save the intermediate results
@@ -1924,28 +2212,33 @@ type subnets = array<subnetId>
                 the training job to complete.</p>
         </note>")
 type stoppingCondition = {
-  @ocaml.doc("<p>The maximum length of time, in seconds, that a managed Spot training job has to complete.
-            It is the amount of time spent waiting for Spot capacity plus the amount of time the job
-            can run. It must be equal to or greater than <code>MaxRuntimeInSeconds</code>.  If the job
-            does not complete during this time, Amazon SageMaker ends the job.</p>
-        <p>When <code>RetryStrategy</code> is specified in the job request, <code>MaxWaitTimeInSeconds</code>
-            specifies the maximum time for all of the attempts in total, not each individual attempt.</p>")
+  @ocaml.doc("<p>The maximum length of time, in seconds, that a managed Spot training job has to
+            complete. It is the amount of time spent waiting for Spot capacity plus the amount of
+            time the job can run. It must be equal to or greater than
+                <code>MaxRuntimeInSeconds</code>. If the job does not complete during this time,
+            Amazon SageMaker ends the job.</p>
+        <p>When <code>RetryStrategy</code> is specified in the job request,
+                <code>MaxWaitTimeInSeconds</code> specifies the maximum time for all of the attempts
+            in total, not each individual attempt.</p>")
   @as("MaxWaitTimeInSeconds")
   maxWaitTimeInSeconds: option<maxWaitTimeInSeconds>,
-  @ocaml.doc("<p>The maximum length of time, in seconds, that a training or compilation job can run.
-            If the job does not complete during this time, Amazon SageMaker ends the job.</p>
-        <p>When <code>RetryStrategy</code> is specified in the job request, <code>MaxRuntimeInSeconds</code>
-            specifies the maximum time for all of the attempts in total, not each individual attempt.</p>
-        <p>The default value is 1 day. The maximum value is 28 days.</p>")
+  @ocaml.doc("<p>The maximum length of time, in seconds, that a training or compilation job can run.</p> 
+        <p>For compilation jobs, if the job does not complete during this time, you will 
+            receive a <code>TimeOut</code> error. We recommend starting with 900 seconds and increase as 
+            necessary based on your model.</p>  
+        <p>For all other jobs, if the job does not complete during this time, Amazon SageMaker ends the job. When 
+            <code>RetryStrategy</code> is specified in the job request,
+                <code>MaxRuntimeInSeconds</code> specifies the maximum time for all of the attempts
+            in total, not each individual attempt. The default value is 1 day. The maximum value is 28 days.</p>")
   @as("MaxRuntimeInSeconds")
   maxRuntimeInSeconds: option<maxRuntimeInSeconds>,
 }
 @ocaml.doc("<p>Specifies an algorithm that was used to create the model package. The algorithm must
-            be either an algorithm resource in your Amazon SageMaker account or an algorithm in AWS Marketplace that you
+            be either an algorithm resource in your Amazon SageMaker account or an algorithm in Amazon Web Services Marketplace that you
             are subscribed to.</p>")
 type sourceAlgorithm = {
   @ocaml.doc("<p>The name of an algorithm that was used to create the model package. The algorithm must
-            be either an algorithm resource in your Amazon SageMaker account or an algorithm in AWS Marketplace that you
+            be either an algorithm resource in your Amazon SageMaker account or an algorithm in Amazon Web Services Marketplace that you
             are subscribed to.</p>")
   @as("AlgorithmName")
   algorithmName: arnOrName,
@@ -1984,7 +2277,7 @@ type shuffleConfig = {
     API is called. When <code>SharingSettings</code> is not specified, notebook sharing
     isn't allowed.</p>")
 type sharingSettings = {
-  @ocaml.doc("<p>When <code>NotebookOutputOption</code> is <code>Allowed</code>, the AWS Key Management Service (KMS)
+  @ocaml.doc("<p>When <code>NotebookOutputOption</code> is <code>Allowed</code>, the Amazon Web Services Key Management Service (KMS)
          encryption key ID used to encrypt the notebook cell output in the Amazon S3 bucket.</p>")
   @as("S3KmsKeyId")
   s3KmsKeyId: option<kmsKeyId>,
@@ -1998,7 +2291,7 @@ type sharingSettings = {
   notebookOutputOption: option<notebookOutputOption>,
 }
 @ocaml.doc("<p>Details of a provisioned service catalog product. For information about service catalog,
-            see <a href=\"https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html\">What is AWS Service
+            see <a href=\"https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html\">What is Amazon Web Services Service
                 Catalog</a>.</p>")
 type serviceCatalogProvisionedProductDetails = {
   @ocaml.doc("<p>The current status of the product.</p>
@@ -2053,8 +2346,8 @@ type secondaryStatusTransition = {
                             <p>Starting the training job.</p>
                         </li>
                   <li>
-                            <p>Launching
-                                requested ML instances.</p>
+                            <p>Launching requested ML
+                                instances.</p>
                         </li>
                   <li>
                             <p>Insufficient
@@ -2279,7 +2572,7 @@ type scheduleConfig = {
 type s3StorageConfig = {
   @ocaml.doc("<p>The S3 path where offline records are written.</p>") @as("ResolvedOutputS3Uri")
   resolvedOutputS3Uri: option<s3Uri>,
-  @ocaml.doc("<p>The AWS Key Management Service (KMS) key ID of the key used to encrypt any objects
+  @ocaml.doc("<p>The Amazon Web Services Key Management Service (KMS) key ID of the key used to encrypt any objects
          written into the <code>OfflineStore</code> S3 location.</p>
          <p>The IAM <code>roleARN</code> that is passed as a parameter to
             <code>CreateFeatureGroup</code> must have below permissions to the
@@ -2300,13 +2593,13 @@ type s3StorageConfig = {
 }
 type ruleParameters = Js.Dict.t<configValue>
 @ocaml.doc("<p>The retry strategy to use when a training job fails due to an
-            <code>InternalServerError</code>. <code>RetryStrategy</code> is specified as
-            part of the <code>CreateTrainingJob</code> and <code>CreateHyperParameterTuningJob</code>
+                <code>InternalServerError</code>. <code>RetryStrategy</code> is specified as part of
+            the <code>CreateTrainingJob</code> and <code>CreateHyperParameterTuningJob</code>
             requests. You can add the <code>StoppingCondition</code> parameter to the request to
             limit the training time for the complete job.</p>")
 type retryStrategy = {
   @ocaml.doc("<p>The number of times to retry the job. When the job is retried, it's
-            <code>SecondaryStatus</code> is changed to <code>STARTING</code>.</p>")
+                <code>SecondaryStatus</code> is changed to <code>STARTING</code>.</p>")
   @as("MaximumRetryAttempts")
   maximumRetryAttempts: maximumRetryAttempts,
 }
@@ -2323,6 +2616,11 @@ type responseMIMETypes = array<responseMIMEType>
 @ocaml.doc("<p>Specifies the ARN's of a SageMaker image and SageMaker image version, and the instance type that
      the version runs on.</p>")
 type resourceSpec = {
+  @ocaml.doc(
+    "<p> The Amazon Resource Name (ARN) of the Lifecycle Configuration attached to the Resource.</p>"
+  )
+  @as("LifecycleConfigArn")
+  lifecycleConfigArn: option<studioLifecycleConfigArn>,
   @ocaml.doc("<p>The instance type that the image version runs on.</p>") @as("InstanceType")
   instanceType: option<appInstanceType>,
   @ocaml.doc("<p>The ARN of the image version created on the instance.</p>")
@@ -2353,7 +2651,7 @@ type resourceLimits = {
 @ocaml.doc("<p>Describes the resources, including ML compute instances and ML storage volumes, to
             use for model training. </p>")
 type resourceConfig = {
-  @ocaml.doc("<p>The AWS KMS key that Amazon SageMaker uses to encrypt data on the storage volume attached to the ML
+  @ocaml.doc("<p>The Amazon Web Services KMS key that Amazon SageMaker uses to encrypt data on the storage volume attached to the ML
             compute instance(s) that run the training job.</p>
         <note>
             <p>Certain Nitro-based instances include local storage, dependent on the instance
@@ -2411,14 +2709,15 @@ type resourceConfig = {
 }
 @ocaml.doc("<p>Specifies an authentication configuration for the private docker registry where your
             model image is hosted. Specify a value for this property only if you specified
-                <code>Vpc</code> as the value for the <code>RepositoryAccessMode</code> field of the
-                <code>ImageConfig</code> object that you passed to a call to <a>CreateModel</a> and the private Docker registry where the model image is
+            <code>Vpc</code> as the value for the <code>RepositoryAccessMode</code> field of the
+            <code>ImageConfig</code> object that you passed to a call to <code>CreateModel</code>
+            and the private Docker registry where the model image is
             hosted requires authentication.</p>")
 type repositoryAuthConfig = {
-  @ocaml.doc("<p>The Amazon Resource Name (ARN) of an AWS Lambda function that provides credentials to
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of an Amazon Web Services Lambda function that provides credentials to
             authenticate to the private Docker registry where your model image is hosted. For
-            information about how to create an AWS Lambda function, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/getting-started-create-function.html\">Create a Lambda function
-                with the console</a> in the <i>AWS Lambda Developer
+            information about how to create an Amazon Web Services Lambda function, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/getting-started-create-function.html\">Create a Lambda function
+                with the console</a> in the <i>Amazon Web Services Lambda Developer
             Guide</i>.</p>")
   @as("RepositoryCredentialsProviderArn")
   repositoryCredentialsProviderArn: repositoryCredentialsProviderArn,
@@ -2448,7 +2747,7 @@ type registerModelStepMetadata = {
 type redshiftDatasetDefinition = {
   @as("OutputCompression") outputCompression: option<redshiftResultCompressionType>,
   @as("OutputFormat") outputFormat: redshiftResultFormat,
-  @ocaml.doc("<p>The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt data from a
+  @ocaml.doc("<p>The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that Amazon SageMaker uses to encrypt data from a
             Redshift execution.</p>")
   @as("KmsKeyId")
   kmsKeyId: option<kmsKeyId>,
@@ -2465,9 +2764,89 @@ type redshiftDatasetDefinition = {
   @as("Database") database: redshiftDatabase,
   @as("ClusterId") clusterId: redshiftClusterId,
 }
+@ocaml.doc("<p>The metrics of recommendations.</p>")
+type recommendationMetrics = {
+  @ocaml.doc("<p>The expected model latency at maximum invocation per minute for the instance.</p>")
+  @as("ModelLatency")
+  modelLatency: integer_,
+  @ocaml.doc("<p>The expected maximum number of requests per minute for the instance.</p>")
+  @as("MaxInvocations")
+  maxInvocations: integer_,
+  @ocaml.doc("<p>Defines the cost per inference for the instance .</p>") @as("CostPerInference")
+  costPerInference: float_,
+  @ocaml.doc("<p>Defines the cost per hour for the instance. </p>") @as("CostPerHour")
+  costPerHour: float_,
+}
+@ocaml.doc("<p>Specifies the maximum number of jobs that can run in parallel 
+    and the maximum number of jobs that can run.</p>")
+type recommendationJobResourceLimit = {
+  @ocaml.doc("<p>Defines the maximum number of parallel load tests.</p>") @as("MaxParallelOfTests")
+  maxParallelOfTests: option<maxParallelOfTests>,
+  @ocaml.doc("<p>Defines the maximum number of load tests.</p>") @as("MaxNumberOfTests")
+  maxNumberOfTests: option<maxNumberOfTests>,
+}
 type realtimeInferenceInstanceTypes = array<productionVariantInstanceType>
+@ocaml.doc(
+  "<p>A collection of settings that configure user interaction with the <code>RStudioServerPro</code> app. <code>RStudioServerProAppSettings</code> cannot be updated. The <code>RStudioServerPro</code> app must be deleted and a new one created to make any changes.</p>"
+)
+type rstudioServerProAppSettings = {
+  @ocaml.doc(
+    "<p>The level of permissions that the user has within the <code>RStudioServerPro</code> app. This value defaults to `User`. The `Admin` value allows the user access to the RStudio Administrative Dashboard.</p>"
+  )
+  @as("UserGroup")
+  userGroup: option<rstudioServerProUserGroup>,
+  @ocaml.doc(
+    "<p>Indicates whether the current user has access to the <code>RStudioServerPro</code> app.</p>"
+  )
+  @as("AccessStatus")
+  accessStatus: option<rstudioServerProAccessStatus>,
+}
+type queryTypes = array<string40>
+type queryProperties = Js.Dict.t<string256>
+type queryLineageTypes = array<lineageType>
+type queryLineageStartArns = array<associationEntityArn>
+@ocaml.doc("<p>Container for the metadata for a Quality check step. For more information, see 
+         the topic on <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/build-and-manage-steps.html#step-type-quality-check\">QualityCheck step</a> in the <i>Amazon SageMaker Developer Guide</i>.
+      </p>")
+type qualityCheckStepMetadata = {
+  @ocaml.doc("<p>This flag indicates if a newly calculated baseline can be accessed through step properties 
+         <code>BaselineUsedForDriftCheckConstraints</code> and <code>BaselineUsedForDriftCheckStatistics</code>. 
+         If it is set to <code>False</code>, the previous baseline of the configured check type must also be available. 
+         These can be accessed through the <code>BaselineUsedForDriftCheckConstraints</code> and <code>
+            BaselineUsedForDriftCheckStatistics</code> properties. </p>")
+  @as("RegisterNewBaseline")
+  registerNewBaseline: option<boolean_>,
+  @ocaml.doc("<p>This flag indicates if the drift check against the previous baseline will be skipped or not. 
+         If it is set to <code>False</code>, the previous baseline of the configured check type must be available.</p>")
+  @as("SkipCheck")
+  skipCheck: option<boolean_>,
+  @ocaml.doc(
+    "<p>The Amazon Resource Name (ARN) of the Quality check processing job that was run by this step execution.</p>"
+  )
+  @as("CheckJobArn")
+  checkJobArn: option<string256>,
+  @ocaml.doc("<p>The Amazon S3 URI of violation report if violations are detected.</p>")
+  @as("ViolationReport")
+  violationReport: option<string1024>,
+  @ocaml.doc("<p>The model package group name.</p>") @as("ModelPackageGroupName")
+  modelPackageGroupName: option<string256>,
+  @ocaml.doc("<p>The Amazon S3 URI of the newly calculated baseline constraints file.</p>")
+  @as("CalculatedBaselineConstraints")
+  calculatedBaselineConstraints: option<string1024>,
+  @ocaml.doc("<p>The Amazon S3 URI of the newly calculated baseline statistics file.</p>")
+  @as("CalculatedBaselineStatistics")
+  calculatedBaselineStatistics: option<string1024>,
+  @ocaml.doc("<p>The Amazon S3 URI of the baseline constraints file used for the drift check.</p>")
+  @as("BaselineUsedForDriftCheckConstraints")
+  baselineUsedForDriftCheckConstraints: option<string1024>,
+  @ocaml.doc("<p>The Amazon S3 URI of the baseline statistics file used for the drift check.</p>")
+  @as("BaselineUsedForDriftCheckStatistics")
+  baselineUsedForDriftCheckStatistics: option<string1024>,
+  @ocaml.doc("<p>The type of the Quality check step.</p>") @as("CheckType")
+  checkType: option<string256>,
+}
 @ocaml.doc("<p>A key value pair used when you provision a project as a service catalog product. For
-            information, see <a href=\"https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html\">What is AWS Service
+            information, see <a href=\"https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html\">What is Amazon Web Services Service
                 Catalog</a>.</p>")
 type provisioningParameter = {
   @ocaml.doc("<p>The value of the provisioning parameter.</p>") @as("Value")
@@ -2517,10 +2896,60 @@ type profilerRuleEvaluationStatus = {
   @ocaml.doc("<p>The name of the rule configuration.</p>") @as("RuleConfigurationName")
   ruleConfigurationName: option<ruleConfigurationName>,
 }
+@ocaml.doc("<p>Describes the status of the production variant.</p>")
+type productionVariantStatus = {
+  @ocaml.doc("<p>The start time of the current status change.</p>") @as("StartTime")
+  startTime: option<timestamp_>,
+  @ocaml.doc("<p>A message that describes the status of the production variant.</p>")
+  @as("StatusMessage")
+  statusMessage: option<variantStatusMessage>,
+  @ocaml.doc("<p>The endpoint variant status which describes the current deployment stage status or operational status.</p>
+        <ul>
+            <li>
+                <p>
+                  <code>Creating</code>: Creating inference resources for the production variant.</p>
+            </li>
+            <li>
+                <p>
+                  <code>Deleting</code>: Terminating inference resources for the production variant.</p>
+            </li>
+            <li>
+                <p>
+                  <code>Updating</code>: Updating capacity for the production variant.</p>
+            </li>
+            <li>
+                <p>
+                  <code>ActivatingTraffic</code>: Turning on traffic for the production variant.</p>
+            </li>
+            <li>
+                <p>
+                  <code>Baking</code>: Waiting period to monitor the CloudWatch alarms in the
+                automatic rollback configuration.</p>
+            </li>
+         </ul>")
+  @as("Status")
+  status: variantStatus,
+}
+@ocaml.doc("<important>
+            <p>Serverless Inference is in preview release for Amazon SageMaker and is subject to change. We do not recommend using this feature in production environments.</p>
+         </important>
+         <p>Specifies the serverless configuration for an endpoint variant.</p>")
+type productionVariantServerlessConfig = {
+  @ocaml.doc(
+    "<p>The maximum number of concurrent invocations your serverless endpoint can process.</p>"
+  )
+  @as("MaxConcurrency")
+  maxConcurrency: serverlessMaxConcurrency,
+  @ocaml.doc(
+    "<p>The memory size of your serverless endpoint. Valid values are in 1 GB increments: 1024 MB, 2048 MB, 3072 MB, 4096 MB, 5120 MB, or 6144 MB.</p>"
+  )
+  @as("MemorySizeInMB")
+  memorySizeInMB: serverlessMemorySizeInMB,
+}
 @ocaml.doc("<p>Specifies configuration for a core dump from the model container when the process
             crashes.</p>")
 type productionVariantCoreDumpConfig = {
-  @ocaml.doc("<p>The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the core dump data at rest using
+  @ocaml.doc("<p>The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that Amazon SageMaker uses to encrypt the core dump data at rest using
             Amazon S3 server-side encryption. The <code>KmsKeyId</code> can be any of the following
             formats: </p>
         <ul>
@@ -2550,7 +2979,7 @@ type productionVariantCoreDumpConfig = {
             </li>
          </ul>
         
-        <p>If you use a KMS key ID or an alias of your master key, the Amazon SageMaker execution role must
+        <p>If you use a KMS key ID or an alias of your KMS key, the Amazon SageMaker execution role must
             include permissions to call <code>kms:Encrypt</code>. If you don't provide a KMS key ID,
             Amazon SageMaker uses the default KMS key for Amazon S3 for your role's account. Amazon SageMaker uses server-side
             encryption with KMS-managed keys for <code>OutputDataConfig</code>. If you use a bucket
@@ -2562,8 +2991,8 @@ type productionVariantCoreDumpConfig = {
          </p>
         <p>The KMS key policy must grant permission to the IAM role that you specify in your
                 <code>CreateEndpoint</code> and <code>UpdateEndpoint</code> requests. For more
-            information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html\">Using Key Policies in AWS
-                KMS</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>")
+            information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html\">Using Key Policies in Amazon Web Services
+                KMS</a> in the <i>Amazon Web Services Key Management Service Developer Guide</i>.</p>")
   @as("KmsKeyId")
   kmsKeyId: option<kmsKeyId>,
   @ocaml.doc("<p>The Amazon S3 bucket to send the core dump to.</p>") @as("DestinationS3Uri")
@@ -2677,13 +3106,31 @@ type processingFeatureStoreOutput = {
 type processingEnvironmentMap = Js.Dict.t<processingEnvironmentValue>
 @ocaml.doc("<p>Configuration for the cluster used to run a processing job.</p>")
 type processingClusterConfig = {
-  @ocaml.doc("<p>The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt data on the
+  @ocaml.doc("<p>The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that Amazon SageMaker uses to encrypt data on the
             storage volume attached to the ML compute instance(s) that run the processing job.
-        </p>")
+        </p>
+        <note>
+            <p>Certain Nitro-based instances include local storage, dependent on the instance
+                type. Local storage volumes are encrypted using a hardware module on the instance.
+                You can't request a <code>VolumeKmsKeyId</code> when using an instance type with
+                local storage.</p>
+            <p>For a list of instance types that support local instance storage, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes\">Instance Store Volumes</a>.</p>
+            <p>For more information about local instance storage encryption, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html\">SSD
+                Instance Store Volumes</a>.</p>
+        </note>")
   @as("VolumeKmsKeyId")
   volumeKmsKeyId: option<kmsKeyId>,
   @ocaml.doc("<p>The size of the ML storage volume in gigabytes that you want to provision. You must
-            specify sufficient ML storage for your scenario.</p>")
+            specify sufficient ML storage for your scenario.</p>
+        <note>
+            <p>Certain Nitro-based instances include local storage with a fixed total size,
+                dependent on the instance type. When using these instances for processing, Amazon SageMaker mounts
+                the local instance storage instead of Amazon EBS gp2 storage. You can't request a
+                <code>VolumeSizeInGB</code> greater than the total size of the local instance
+                storage.</p>
+            <p>For a list of instance types that support local instance storage, including the
+                total size per instance type, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes\">Instance Store Volumes</a>.</p>
+        </note>")
   @as("VolumeSizeInGB")
   volumeSizeInGB: processingVolumeSizeInGB,
   @ocaml.doc("<p>The ML compute instance type for the processing job.</p>") @as("InstanceType")
@@ -2713,8 +3160,20 @@ type pipelineSummary = {
   @ocaml.doc("<p> The Amazon Resource Name (ARN) of the pipeline.</p>") @as("PipelineArn")
   pipelineArn: option<pipelineArn>,
 }
+@ocaml.doc("<p>Specifies the names of the experiment and trial created by a pipeline.</p>")
+type pipelineExperimentConfig = {
+  @ocaml.doc("<p>The name of the trial.</p>") @as("TrialName")
+  trialName: option<experimentEntityName>,
+  @ocaml.doc("<p>The name of the experiment.</p>") @as("ExperimentName")
+  experimentName: option<experimentEntityName>,
+}
 @ocaml.doc("<p>A pipeline execution summary.</p>")
 type pipelineExecutionSummary = {
+  @ocaml.doc(
+    "<p>A message generated by SageMaker Pipelines describing why the pipeline execution failed.</p>"
+  )
+  @as("PipelineExecutionFailureReason")
+  pipelineExecutionFailureReason: option<string3072>,
   @ocaml.doc("<p>The display name of the pipeline execution.</p>")
   @as("PipelineExecutionDisplayName")
   pipelineExecutionDisplayName: option<pipelineExecutionName>,
@@ -2728,6 +3187,28 @@ type pipelineExecutionSummary = {
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the pipeline execution.</p>")
   @as("PipelineExecutionArn")
   pipelineExecutionArn: option<pipelineExecutionArn>,
+}
+@ocaml.doc("<p>The location of the pipeline definition stored in Amazon S3.</p>")
+type pipelineDefinitionS3Location = {
+  @ocaml.doc("<p>Version Id of the pipeline definition file. If not specified, Amazon SageMaker 
+            will retrieve the latest version.</p>")
+  @as("VersionId")
+  versionId: option<versionId>,
+  @ocaml.doc("<p>The object key (or key name) uniquely identifies the 
+            object in an S3 bucket. </p>")
+  @as("ObjectKey")
+  objectKey: key,
+  @ocaml.doc("<p>Name of the S3 bucket.</p>") @as("Bucket") bucket: bucketName,
+}
+@ocaml.doc("<p>Defines the traffic pattern.</p>")
+type phase = {
+  @ocaml.doc("<p>Specifies how long traffic phase should be.</p>") @as("DurationInSeconds")
+  durationInSeconds: option<trafficDurationInSeconds>,
+  @ocaml.doc("<p>Specified how many new users to spawn in a minute.</p>") @as("SpawnRate")
+  spawnRate: option<spawnRate>,
+  @ocaml.doc("<p>Specifies how many concurrent users to start with.</p>")
+  @as("InitialNumberOfUsers")
+  initialNumberOfUsers: option<initialNumberOfUsers>,
 }
 @ocaml.doc("<p>A previously completed or stopped hyperparameter tuning job to be used as a starting
             point for a new hyperparameter tuning job.</p>")
@@ -2750,11 +3231,24 @@ type parameterValues = array<parameterValue>
 @ocaml.doc("<p>Assigns a value to a named Pipeline parameter.</p>")
 type parameter = {
   @ocaml.doc("<p>The literal value for the parameter.</p>") @as("Value") value: string1024,
-  @ocaml.doc(
-    "<p>The name of the parameter to assign a value to. This parameter name must match a named parameter in the pipeline definition.</p>"
-  )
+  @ocaml.doc("<p>The name of the parameter to assign a value to. This 
+         parameter name must match a named parameter in the 
+         pipeline definition.</p>")
   @as("Name")
   name: pipelineParameterName,
+}
+@ocaml.doc("<p>Configuration that controls the parallelism of the pipeline. 
+            By default, the parallelism configuration specified applies to all 
+            executions of the pipeline unless overridden.</p>")
+type parallelismConfiguration = {
+  @ocaml.doc("<p>The max number of steps that can be executed in parallel. </p>")
+  @as("MaxParallelExecutionSteps")
+  maxParallelExecutionSteps: maxParallelExecutionSteps,
+}
+@ocaml.doc("<p>An output parameter of a pipeline step.</p>")
+type outputParameter = {
+  @ocaml.doc("<p>The value of the output parameter.</p>") @as("Value") value: string1024,
+  @ocaml.doc("<p>The name of the output parameter.</p>") @as("Name") name: string256,
 }
 @ocaml.doc("<p>Provides information about how to store model training results (model
             artifacts).</p>")
@@ -2763,7 +3257,7 @@ type outputDataConfig = {
             example, <code>s3://bucket-name/key-name-prefix</code>. </p>")
   @as("S3OutputPath")
   s3OutputPath: s3Uri,
-  @ocaml.doc("<p>The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using
+  @ocaml.doc("<p>The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using
             Amazon S3 server-side encryption. The <code>KmsKeyId</code> can be any of the following
             formats: </p>
         <ul>
@@ -2793,28 +3287,28 @@ type outputDataConfig = {
             </li>
          </ul>
         
-        <p>If you use a KMS key ID or an alias of your master key, the Amazon SageMaker execution role must
+        <p>If you use a KMS key ID or an alias of your KMS key, the Amazon SageMaker execution role must
             include permissions to call <code>kms:Encrypt</code>. If you don't provide a KMS key ID,
             Amazon SageMaker uses the default KMS key for Amazon S3 for your role's account. Amazon SageMaker uses server-side
             encryption with KMS-managed keys for <code>OutputDataConfig</code>. If you use a bucket
             policy with an <code>s3:PutObject</code> permission that only allows objects with
             server-side encryption, set the condition key of
                 <code>s3:x-amz-server-side-encryption</code> to <code>\"aws:kms\"</code>. For more
-            information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingKMSEncryption.html\">KMS-Managed Encryption Keys</a> in the <i>Amazon Simple Storage Service Developer
-                Guide.</i>
+            information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingKMSEncryption.html\">KMS-Managed Encryption
+                Keys</a> in the <i>Amazon Simple Storage Service Developer Guide.</i>
          </p>
         <p>The KMS key policy must grant permission to the IAM role that you specify in your
                 <code>CreateTrainingJob</code>, <code>CreateTransformJob</code>, or
                 <code>CreateHyperParameterTuningJob</code> requests. For more information, see
                 <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html\">Using
-                Key Policies in AWS KMS</a> in the <i>AWS Key Management Service Developer
+                    Key Policies in Amazon Web Services KMS</a> in the <i>Amazon Web Services Key Management Service Developer
                 Guide</i>.</p>")
   @as("KmsKeyId")
   kmsKeyId: option<kmsKeyId>,
 }
 @ocaml.doc("<p>The security configuration for <code>OnlineStore</code>.</p>")
 type onlineStoreSecurityConfig = {
-  @ocaml.doc("<p>The ID of the AWS Key Management Service (AWS KMS) key that SageMaker Feature Store uses
+  @ocaml.doc("<p>The ID of the Amazon Web Services Key Management Service (Amazon Web Services KMS) key that SageMaker Feature Store uses
          to encrypt the Amazon S3 objects at rest using Amazon S3 server-side encryption.</p>
          <p>The caller (either IAM user or IAM role) of <code>CreateFeatureGroup</code> must have
          below permissions to the <code>OnlineStore</code>
@@ -2975,10 +3469,10 @@ type objectiveStatusCounters = {
   @as("Succeeded")
   succeeded: option<objectiveStatusCounter>,
 }
-@ocaml.doc("<p>Configures SNS notifications of available or expiring work items for work
+@ocaml.doc("<p>Configures Amazon SNS notifications of available or expiring work items for work
             teams.</p>")
 type notificationConfiguration = {
-  @ocaml.doc("<p>The ARN for the SNS topic to which notifications should be published.</p>")
+  @ocaml.doc("<p>The ARN for the Amazon SNS topic to which notifications should be published.</p>")
   @as("NotificationTopicArn")
   notificationTopicArn: option<notificationTopicArn>,
 }
@@ -3016,6 +3510,8 @@ type notebookInstanceLifecycleConfigSummary = {
   notebookInstanceLifecycleConfigName: notebookInstanceLifecycleConfigName,
 }
 type notebookInstanceAcceleratorTypes = array<notebookInstanceAcceleratorType>
+type neoVpcSubnets = array<neoVpcSubnetId>
+type neoVpcSecurityGroupIds = array<neoVpcSecurityGroupId>
 @ocaml.doc("<p>Specifies additional configuration for hosting multi-model endpoints.</p>")
 type multiModelConfig = {
   @ocaml.doc("<p>Whether to cache models for a multi-model endpoint. By default, multi-model endpoints
@@ -3133,7 +3629,7 @@ type monitoringConstraintsResource = {
 }
 @ocaml.doc("<p>Configuration for the cluster used to run model monitoring jobs.</p>")
 type monitoringClusterConfig = {
-  @ocaml.doc("<p>The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt data
+  @ocaml.doc("<p>The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that Amazon SageMaker uses to encrypt data
          on the storage volume attached to the ML compute instance(s) that run the model monitoring
          job.</p>")
   @as("VolumeKmsKeyId")
@@ -3226,33 +3722,36 @@ type modelPackageGroupSummary = {
   @ocaml.doc("<p>The name of the model group.</p>") @as("ModelPackageGroupName")
   modelPackageGroupName: entityName,
 }
-@ocaml.doc("<p>Describes the Docker container for the model package.</p>")
-type modelPackageContainerDefinition = {
-  @ocaml.doc("<p>The AWS Marketplace product ID of the model package.</p>") @as("ProductId")
-  productId: option<productId>,
-  @ocaml.doc("<p>The Amazon S3 path where the model artifacts, which result from model training, are stored.
-            This path must point to a single <code>gzip</code> compressed tar archive
-                (<code>.tar.gz</code> suffix).</p>
-        <note>
-            <p>The model artifacts must be in an S3 bucket that is in the same region as the
-                model package.</p>
-        </note>")
-  @as("ModelDataUrl")
-  modelDataUrl: option<url>,
-  @ocaml.doc("<p>An MD5 hash of the training algorithm that identifies the Docker image used for
-            training.</p>")
-  @as("ImageDigest")
-  imageDigest: option<imageDigest>,
-  @ocaml.doc("<p>The Amazon EC2 Container Registry (Amazon ECR) path where inference code is stored.</p>
-        <p>If you are using your own custom algorithm instead of an algorithm provided by Amazon SageMaker,
-            the inference code must meet Amazon SageMaker requirements. Amazon SageMaker supports both
-                <code>registry/repository[:tag]</code> and <code>registry/repository[@digest]</code>
-            image path formats. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html\">Using Your Own Algorithms with Amazon
-                SageMaker</a>.</p>")
-  @as("Image")
-  image: containerImage,
-  @ocaml.doc("<p>The DNS host name for the Docker container.</p>") @as("ContainerHostname")
-  containerHostname: option<containerHostname>,
+type modelPackageArnList = array<modelPackageArn>
+@ocaml.doc("<p>A summary of the model metadata.</p>")
+type modelMetadataSummary = {
+  @ocaml.doc("<p>The framework version of the model.</p>") @as("FrameworkVersion")
+  frameworkVersion: string_,
+  @ocaml.doc("<p>The name of the model.</p>") @as("Model") model: string_,
+  @ocaml.doc("<p>The machine learning task of the model.</p>") @as("Task") task: string_,
+  @ocaml.doc("<p>The machine learning framework of the model.</p>") @as("Framework")
+  framework: string_,
+  @ocaml.doc("<p>The machine learning domain of the model.</p>") @as("Domain") domain: string_,
+}
+@ocaml.doc("<p>Part of the search expression. You can specify the name and value 
+          (domain, task, framework, framework version, task, and model).</p>")
+type modelMetadataFilter = {
+  @ocaml.doc("<p>The value to filter the model metadata.</p>") @as("Value") value: string256,
+  @ocaml.doc("<p>The name of the of the model to filter by.</p>") @as("Name")
+  name: modelMetadataFilterType,
+}
+@ocaml.doc("<p>The model latency threshold.</p>")
+type modelLatencyThreshold = {
+  @ocaml.doc("<p>The model latency percentile value in milliseconds.</p>")
+  @as("ValueInMilliseconds")
+  valueInMilliseconds: option<integer_>,
+  @ocaml.doc("<p>The model latency percentile threshold.</p>") @as("Percentile")
+  percentile: option<string64>,
+}
+@ocaml.doc("<p>Input object for the model.</p>")
+type modelInput = {
+  @ocaml.doc("<p>The input configuration object for the model.</p>") @as("DataInputConfig")
+  dataInputConfig: dataInputConfig,
 }
 @ocaml.doc("<p>Provides information to verify the integrity of stored model artifacts. </p>")
 type modelDigests = {
@@ -3277,14 +3776,14 @@ type modelDeployConfig = {
          endpoint name is not generated automatically.</p>
          <note>
             <p>Specify the <code>EndpointName</code> if and only if you set
-               <code>AutoGenerateEndpointName</code> to <code>False</code>; otherwise a 400 error
-            is thrown.</p>
+               <code>AutoGenerateEndpointName</code> to <code>False</code>; otherwise a 400 error is
+            thrown.</p>
          </note>")
   @as("EndpointName")
   endpointName: option<endpointName>,
   @ocaml.doc("<p>Set to <code>True</code> to automatically generate an endpoint name for a one-click
          Autopilot model deployment; set to <code>False</code> otherwise. The default value is
-            <code>True</code>.</p>
+            <code>False</code>.</p>
          <note>
             <p>If you set <code>AutoGenerateEndpointName</code> to <code>True</code>, do not specify
             the <code>EndpointName</code>; otherwise a 400 error is thrown.</p>
@@ -3305,7 +3804,7 @@ type modelClientConfig = {
 @ocaml.doc("<p>Provides information about the location that is configured for storing model
             artifacts. </p>
         <p>Model artifacts are the output that results from training a model, and typically
-            consist of trained parameters, a model defintion that describes how to compute
+            consist of trained parameters, a model definition that describes how to compute
             inferences, and other metadata.</p>")
 type modelArtifacts = {
   @ocaml.doc("<p>The path of the S3 object that contains the model artifacts. For example,
@@ -3321,8 +3820,7 @@ type metricsSource = {
 }
 @ocaml.doc("<p>Specifies a metric that the training algorithm
             writes
-            to <code>stderr</code> or <code>stdout</code>
-         . Amazon SageMakerhyperparameter
+            to <code>stderr</code> or <code>stdout</code>. Amazon SageMakerhyperparameter
             tuning captures
             all
             defined metrics.
@@ -3337,6 +3835,14 @@ type metricDefinition = {
   @as("Regex")
   regex: metricRegex,
   @ocaml.doc("<p>The name of the metric.</p>") @as("Name") name: metricName,
+}
+@ocaml.doc("<p>Information about the metric for a candidate produced by an AutoML job.</p>")
+type metricDatum = {
+  @ocaml.doc("<p>The dataset split from which the AutoML job produced the metric.</p>") @as("Set")
+  set: option<metricSetSource>,
+  @ocaml.doc("<p>The value of the metric.</p>") @as("Value") value: option<float_>,
+  @ocaml.doc("<p>The name of the metric.</p>") @as("MetricName")
+  metricName: option<autoMLMetricEnum>,
 }
 @ocaml.doc(
   "<p>The name, value, and date and time of a metric that was emitted to Amazon CloudWatch.</p>"
@@ -3357,7 +3863,24 @@ type metadataProperties = {
 }
 type listTrialComponentKey256 = array<trialComponentKey256>
 type listLineageEntityParameterKey = array<stringParameterValue>
+@ocaml.doc("<p>Lists a summary of the properties of a lineage group. A lineage group provides a group of shareable lineage entity 
+         resources.</p>")
+type lineageGroupSummary = {
+  @ocaml.doc("<p>The last modified time of the lineage group summary.</p>") @as("LastModifiedTime")
+  lastModifiedTime: option<timestamp_>,
+  @ocaml.doc("<p>The creation time of the lineage group summary.</p>") @as("CreationTime")
+  creationTime: option<timestamp_>,
+  @ocaml.doc("<p>The display name of the lineage group summary.</p>") @as("DisplayName")
+  displayName: option<experimentEntityName>,
+  @ocaml.doc("<p>The name or Amazon Resource Name (ARN) of the lineage group.</p>")
+  @as("LineageGroupName")
+  lineageGroupName: option<experimentEntityName>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the lineage group resource.</p>")
+  @as("LineageGroupArn")
+  lineageGroupArn: option<lineageGroupArn>,
+}
 type lineageEntityParameters = Js.Dict.t<stringParameterValue>
+type lifecycleConfigArns = array<studioLifecycleConfigArn>
 @ocaml.doc("<p>A set of conditions for stopping a labeling job. If any of the conditions are met, the
             job is automatically stopped. You can use these conditions to control the cost of data
             labeling.</p>
@@ -3406,12 +3929,12 @@ type labelingJobS3DataSource = {
 @ocaml.doc("<p>Configure encryption on the storage volume attached to the ML compute instance used to
             run automated data labeling model training and inference. </p>")
 type labelingJobResourceConfig = {
-  @ocaml.doc("<p>The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt data on the storage volume
+  @ocaml.doc("<p>The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that Amazon SageMaker uses to encrypt data on the storage volume
             attached to the ML compute instance(s) that run the training and inference jobs used for
             automated data labeling. </p>
         <p>You can only specify a <code>VolumeKmsKeyId</code> when you create a labeling job with
             automated data labeling enabled using the API operation <code>CreateLabelingJob</code>.
-            You cannot specify an AWS KMS customer managed CMK to encrypt the storage volume used for
+            You cannot specify an Amazon Web Services KMS key to encrypt the storage volume used for
             automated data labeling model training and inference when you create a labeling job
             using the console. To learn more, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sms-security.html\">Output Data and Storage Volume
                 Encryption</a>.</p>
@@ -3445,10 +3968,10 @@ type labelingJobOutputConfig = {
                 Job</a>. </p>")
   @as("SnsTopicArn")
   snsTopicArn: option<snsTopicArn>,
-  @ocaml.doc("<p>The AWS Key Management Service ID of the key used to encrypt the output data, if any.</p>
+  @ocaml.doc("<p>The Amazon Web Services Key Management Service ID of the key used to encrypt the output data, if any.</p>
         <p>If you provide your own KMS key ID, you must add the required permissions to your KMS
-            key described in <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sms-security-permission.html#sms-security-kms-permissions\">Encrypt Output Data and Storage Volume with AWS KMS</a>.</p>
-        <p>If you don't provide a KMS key ID, Amazon SageMaker uses the default AWS KMS key for Amazon S3 for your
+            key described in <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sms-security-permission.html#sms-security-kms-permissions\">Encrypt Output Data and Storage Volume with Amazon Web Services KMS</a>.</p>
+        <p>If you don't provide a KMS key ID, Amazon SageMaker uses the default Amazon Web Services KMS key for Amazon S3 for your
             role's account to encrypt your output data.</p>
         <p>If you use a bucket policy with an <code>s3:PutObject</code> permission that only
             allows objects with server-side encryption, set the condition key of
@@ -3501,7 +4024,9 @@ type labelCounters = {
 type kernelSpec = {
   @ocaml.doc("<p>The display name of the kernel.</p>") @as("DisplayName")
   displayName: option<kernelDisplayName>,
-  @ocaml.doc("<p>The name of the kernel.</p>") @as("Name") name: kernelName,
+  @ocaml.doc("<p>The name of the Jupyter kernel in the image. This value is case sensitive.</p>")
+  @as("Name")
+  name: kernelName,
 }
 type jsonContentTypes = array<jsonContentType>
 @ocaml.doc("<p>Defines the possible values for an integer hyperparameter.</p>")
@@ -3553,11 +4078,10 @@ type inputModes = array<trainingInputMode>
             shape
             of the expected data inputs, and the framework in which the model was trained.</p>")
 type inputConfig = {
-  @ocaml.doc("<p>Specifies the framework version to use.</p>
-        <p>This API field is only supported for PyTorch framework versions <code>1.4</code>, 
-            <code>1.5</code>, and <code>1.6</code> for 
-            cloud instance target devices: <code>ml_c4</code>, <code>ml_c5</code>, <code>ml_m4</code>, 
-            <code>ml_m5</code>, <code>ml_p2</code>, <code>ml_p3</code>, and <code>ml_g4dn</code>.</p>")
+  @ocaml.doc("<p>Specifies the framework version to use. This API field is only supported for the PyTorch and TensorFlow frameworks.</p>
+        <p>For information about framework versions supported for cloud targets and edge devices, see 
+            <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/neo-supported-cloud.html\">Cloud Supported Instance Types and Frameworks</a> and 
+            <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/neo-supported-devices-edge-frameworks.html\">Edge Supported Frameworks</a>.</p>")
   @as("FrameworkVersion")
   frameworkVersion: option<frameworkVersion>,
   @ocaml.doc("<p>Identifies the framework in which the model was trained. For example:
@@ -3899,6 +4423,30 @@ type inputConfig = {
   @as("S3Uri")
   s3Uri: s3Uri,
 }
+@ocaml.doc("<p>A structure that contains a list of recommendation jobs.</p>")
+type inferenceRecommendationsJob = {
+  @ocaml.doc("<p>If the job fails, provides information why the job failed.</p>")
+  @as("FailureReason")
+  failureReason: option<failureReason>,
+  @ocaml.doc("<p>A timestamp that shows when the job was last modified.</p>")
+  @as("LastModifiedTime")
+  lastModifiedTime: lastModifiedTime,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of an IAM role that enables Amazon SageMaker 
+    to perform tasks on your behalf.</p>")
+  @as("RoleArn")
+  roleArn: roleArn,
+  @ocaml.doc("<p>A timestamp that shows when the job completed.</p>") @as("CompletionTime")
+  completionTime: option<timestamp_>,
+  @ocaml.doc("<p>A timestamp that shows when the job was created.</p>") @as("CreationTime")
+  creationTime: creationTime,
+  @ocaml.doc("<p>The status of the job.</p>") @as("Status") status: recommendationJobStatus,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the recommendation job.</p>") @as("JobArn")
+  jobArn: recommendationJobArn,
+  @ocaml.doc("<p>The recommendation job type.</p>") @as("JobType") jobType: recommendationJobType,
+  @ocaml.doc("<p>The job description.</p>") @as("JobDescription")
+  jobDescription: recommendationJobDescription,
+  @ocaml.doc("<p>The name of the job.</p>") @as("JobName") jobName: recommendationJobName,
+}
 @ocaml.doc("<p>Specifies details about how containers in a multi-container endpoint are run.</p>")
 type inferenceExecutionConfig = {
   @ocaml.doc("<p>How containers in a multi-container are run. The following values are valid.</p>
@@ -4005,7 +4553,7 @@ type groups = array<group>
 @ocaml.doc("<p>Specifies configuration details for a Git repository when the repository is
             updated.</p>")
 type gitConfigForUpdate = {
-  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the AWS Secrets Manager secret that contains the
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret that contains the
             credentials used to access the git repository. The secret must have a staging label of
                 <code>AWSCURRENT</code> and must be in the following format:</p>
         <p>
@@ -4015,9 +4563,11 @@ type gitConfigForUpdate = {
   @as("SecretArn")
   secretArn: option<secretArn>,
 }
-@ocaml.doc("<p>Specifies configuration details for a Git repository in your AWS account.</p>")
+@ocaml.doc(
+  "<p>Specifies configuration details for a Git repository in your Amazon Web Services account.</p>"
+)
 type gitConfig = {
-  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the AWS Secrets Manager secret that contains the
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret that contains the
             credentials used to access the git repository. The secret must have a staging label of
                 <code>AWSCURRENT</code> and must be in the following format:</p>
         <p>
@@ -4093,7 +4643,7 @@ type finalAutoMLJobObjectiveMetric = {
 @ocaml.doc("<p>A conditional statement for a search expression that includes a resource property, a
       Boolean operator, and a value. Resources that match the statement are returned in the
       results from the <a>Search</a> API.</p>
-      
+    
          <p>If you specify a <code>Value</code>, but not an <code>Operator</code>, Amazon SageMaker uses the
       equals operator.</p>
          <p>In search, there are several property types:</p>
@@ -4315,6 +4865,14 @@ type fileSystemConfig = {
   @as("MountPath")
   mountPath: option<mountPath>,
 }
+@ocaml.doc("<p>Contains details regarding the file source.</p>")
+type fileSource = {
+  @ocaml.doc("<p>The Amazon S3 URI for the file source.</p>") @as("S3Uri") s3Uri: s3Uri,
+  @ocaml.doc("<p>The digest of the file source.</p>") @as("ContentDigest")
+  contentDigest: option<contentDigest>,
+  @ocaml.doc("<p>The type of content stored in the file source.</p>") @as("ContentType")
+  contentType: option<contentType>,
+}
 @ocaml.doc("<p>A list of features. You must include <code>FeatureName</code> and
             <code>FeatureType</code>. Valid feature <code>FeatureType</code>s are
             <code>Integral</code>, <code>Fractional</code> and <code>String</code>. </p>")
@@ -4329,6 +4887,13 @@ type featureDefinition = {
             <code>api_invocation_time</code>.</p>")
   @as("FeatureName")
   featureName: option<featureName>,
+}
+@ocaml.doc("<p>The container for the metadata for Fail step.</p>")
+type failStepMetadata = {
+  @ocaml.doc("<p>A message that you define and then is processed and rendered by 
+         the Fail step when the error occurs.</p>")
+  @as("ErrorMessage")
+  errorMessage: option<string3072>,
 }
 @ocaml.doc("<p>The source of the experiment.</p>")
 type experimentSource = {
@@ -4367,6 +4932,20 @@ type experimentConfig = {
   @ocaml.doc("<p>The name of an existing experiment to associate the trial component with.</p>")
   @as("ExperimentName")
   experimentName: option<experimentEntityName>,
+}
+@ocaml.doc(
+  "<p>A list of environment parameters suggested by the Amazon SageMaker Inference Recommender.</p>"
+)
+type environmentParameter = {
+  @ocaml.doc("<p>The value suggested by the Amazon SageMaker Inference Recommender.</p>")
+  @as("Value")
+  value: string_,
+  @ocaml.doc("<p>The value type suggested by the Amazon SageMaker Inference Recommender.</p>")
+  @as("ValueType")
+  valueType: string_,
+  @ocaml.doc("<p>The environment key suggested by the Amazon SageMaker Inference Recommender.</p>")
+  @as("Key")
+  key: string_,
 }
 type environmentMap = Js.Dict.t<environmentValue>
 @ocaml.doc("<p>Provides summary information for an endpoint.</p>")
@@ -4432,6 +5011,25 @@ type endpointSummary = {
   endpointArn: endpointArn,
   @ocaml.doc("<p>The name of the endpoint.</p>") @as("EndpointName") endpointName: endpointName,
 }
+@ocaml.doc(
+  "<p>The endpoint configuration made by Inference Recommender during a recommendation job.</p>"
+)
+type endpointOutputConfiguration = {
+  @ocaml.doc("<p>The number of instances recommended to launch initially.</p>")
+  @as("InitialInstanceCount")
+  initialInstanceCount: integer_,
+  @ocaml.doc("<p>The instance type recommended by Amazon SageMaker Inference Recommender.</p>")
+  @as("InstanceType")
+  instanceType: productionVariantInstanceType,
+  @ocaml.doc(
+    "<p>The name of the production variant (deployed model) made during a recommendation job.</p>"
+  )
+  @as("VariantName")
+  variantName: string_,
+  @ocaml.doc("<p>The name of the endpoint made during a recommendation job.</p>")
+  @as("EndpointName")
+  endpointName: string_,
+}
 @ocaml.doc("<p>Input object for the endpoint</p>")
 type endpointInput = {
   @ocaml.doc("<p>If specified, monitoring jobs substract this time from the end time. For information
@@ -4464,7 +5062,7 @@ type endpointInput = {
   @as("S3DataDistributionType")
   s3DataDistributionType: option<processingS3DataDistributionType>,
   @ocaml.doc("<p>Whether the <code>Pipe</code> or <code>File</code> is used as the input mode for
-         transfering data for the monitoring job. <code>Pipe</code> mode is recommended for large
+         transferring data for the monitoring job. <code>Pipe</code> mode is recommended for large
          datasets. <code>File</code> mode is useful for small files that fit in memory. Defaults to
             <code>File</code>.</p>")
   @as("S3InputMode")
@@ -4488,6 +5086,21 @@ type endpointConfigSummary = {
   @ocaml.doc("<p>The name of the endpoint configuration.</p>") @as("EndpointConfigName")
   endpointConfigName: endpointConfigName,
 }
+@ocaml.doc("<p>The output of a SageMaker Edge Manager deployable resource.</p>")
+type edgePresetDeploymentOutput = {
+  @ocaml.doc("<p>Returns a message describing the status of the deployed resource.</p>")
+  @as("StatusMessage")
+  statusMessage: option<string_>,
+  @ocaml.doc("<p>The status of the deployable resource.</p>") @as("Status")
+  status: option<edgePresetDeploymentStatus>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the generated deployable resource.</p>")
+  @as("Artifact")
+  artifact: option<edgePresetDeploymentArtifact>,
+  @ocaml.doc("<p>The deployment type created by SageMaker Edge Manager. Currently only 
+     supports Amazon Web Services IoT Greengrass Version 2 components.</p>")
+  @as("Type")
+  type_: edgePresetDeploymentType,
+}
 @ocaml.doc("<p>Summary of edge packaging job.</p>")
 type edgePackagingJobSummary = {
   @ocaml.doc("<p>The timestamp of when the edge packaging job was last updated.</p>")
@@ -4510,9 +5123,48 @@ type edgePackagingJobSummary = {
 }
 @ocaml.doc("<p>The output configuration.</p>")
 type edgeOutputConfig = {
-  @ocaml.doc(
-    "<p>The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt data on the storage volume after compilation job. If you don't provide a KMS key ID, Amazon SageMaker uses the default KMS key for Amazon S3 for your role's account.</p>"
-  )
+  @ocaml.doc("<p>The configuration used to create deployment artifacts. 
+      Specify configuration options with a JSON string. The available configuration options for each type are:</p>
+         <ul>
+            <li>
+               <p>
+                  <code>ComponentName</code> (optional) - Name of the GreenGrass V2 component. If not specified,
+     the default name generated consists of \"SagemakerEdgeManager\" and the name of your SageMaker Edge Manager
+     packaging job.</p>
+            </li>
+            <li>
+               <p>
+                  <code>ComponentDescription</code> (optional) - Description of the component.</p>
+            </li>
+            <li>
+               <p>
+                  <code>ComponentVersion</code> (optional) - The version of the component.</p>
+               <note>
+                  <p>Amazon Web Services IoT Greengrass uses semantic versions for components. Semantic versions follow a<i>
+       major.minor.patch</i> number system. For example, version 1.0.0 represents the first
+        major release for a component. For more information, see the <a href=\"https://semver.org/\">semantic version specification</a>.</p>
+               </note>
+            </li>
+            <li>
+               <p>
+                  <code>PlatformOS</code> (optional) - The name of the operating system for the platform.
+     Supported platforms include Windows and Linux.</p>
+            </li>
+            <li>
+               <p>
+                  <code>PlatformArchitecture</code> (optional) - The processor architecture for the platform. </p>
+               <p>Supported architectures Windows include: Windows32_x86, Windows64_x64.</p>
+               <p>Supported architectures for Linux include: Linux x86_64, Linux ARMV8.</p>
+            </li>
+         </ul>")
+  @as("PresetDeploymentConfig")
+  presetDeploymentConfig: option<string_>,
+  @ocaml.doc("<p>The deployment type SageMaker Edge Manager will create. 
+      Currently only supports Amazon Web Services IoT Greengrass Version 2 components.</p>")
+  @as("PresetDeploymentType")
+  presetDeploymentType: option<edgePresetDeploymentType>,
+  @ocaml.doc("<p>The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that Amazon SageMaker uses to encrypt data on the storage volume after compilation job. 
+     If you don't provide a KMS key ID, Amazon SageMaker uses the default KMS key for Amazon S3 for your role's account.</p>")
   @as("KmsKeyId")
   kmsKeyId: option<kmsKeyId>,
   @ocaml.doc("<p>The Amazon Simple Storage (S3) bucker URI.</p>") @as("S3OutputLocation")
@@ -4553,6 +5205,37 @@ type edgeModel = {
   @ocaml.doc("<p>The model version.</p>") @as("ModelVersion") modelVersion: edgeVersion,
   @ocaml.doc("<p>The name of the model.</p>") @as("ModelName") modelName: entityName,
 }
+@ocaml.doc("<p>A directed edge connecting two lineage entities.</p>")
+type edge = {
+  @ocaml.doc("<p>The type of the Association(Edge) between the source and destination. For example <code>ContributedTo</code>, 
+         <code>Produced</code>, or <code>DerivedFrom</code>.</p>")
+  @as("AssociationType")
+  associationType: option<associationEdgeType>,
+  @ocaml.doc(
+    "<p>The Amazon Resource Name (ARN) of the destination lineage entity of the directed edge.</p>"
+  )
+  @as("DestinationArn")
+  destinationArn: option<associationEntityArn>,
+  @ocaml.doc(
+    "<p>The Amazon Resource Name (ARN) of the source lineage entity of the directed edge.</p>"
+  )
+  @as("SourceArn")
+  sourceArn: option<associationEntityArn>,
+}
+@ocaml.doc("<p>The configurations and outcomes of an Amazon EMR step execution.</p>")
+type emrstepMetadata = {
+  @ocaml.doc("<p>The path to the log file where the cluster step's failure root cause 
+            is recorded.</p>")
+  @as("LogFilePath")
+  logFilePath: option<string1024>,
+  @ocaml.doc("<p>The name of the EMR cluster step.</p>") @as("StepName")
+  stepName: option<string256>,
+  @ocaml.doc("<p>The identifier of the EMR cluster step.</p>") @as("StepId")
+  stepId: option<string256>,
+  @ocaml.doc("<p>The identifier of the EMR cluster.</p>") @as("ClusterId")
+  clusterId: option<string256>,
+}
+type domainSecurityGroupIds = array<securityGroupId>
 @ocaml.doc("<p>The domain's details.</p>")
 type domainDetails = {
   @ocaml.doc("<p>The domain's URL.</p>") @as("Url") url: option<string1024>,
@@ -4585,7 +5268,7 @@ type deviceFleetSummary = {
 }
 @ocaml.doc("<p>Information of a particular device.</p>")
 type device = {
-  @ocaml.doc("<p>AWS Internet of Things (IoT) object name.</p>") @as("IotThingName")
+  @ocaml.doc("<p>Amazon Web Services Internet of Things (IoT) object name.</p>") @as("IotThingName")
   iotThingName: option<thingName>,
   @ocaml.doc("<p>Description of the device.</p>") @as("Description")
   description: option<deviceDescription>,
@@ -4650,20 +5333,20 @@ type dataProcessing = {
             are <code>None</code> and <code>Input</code>. The default value is <code>None</code>,
             which specifies not to join the input with the transformed data. If you want the batch
             transform job to join the original input data with the transformed data, set
-            <code>JoinSource</code> to <code>Input</code>. You can specify <code>OutputFilter</code> 
-            as an additional filter to select a portion of the joined dataset and store it in the output file.</p>
-        <p>For JSON or JSONLines objects, such as a JSON array, Amazon SageMaker adds the transformed data to
+                <code>JoinSource</code> to <code>Input</code>. You can specify
+                <code>OutputFilter</code> as an additional filter to select a portion of the joined
+            dataset and store it in the output file.</p>
+        <p>For JSON or JSONLines objects, such as a JSON array, SageMaker adds the transformed data to
             the input JSON object in an attribute called <code>SageMakerOutput</code>. The joined
             result for JSON must be a key-value pair object. If the input is not a key-value pair
-            object, Amazon SageMaker creates a new JSON file. In the new JSON file, and the input data is stored
+            object, SageMaker creates a new JSON file. In the new JSON file, and the input data is stored
             under the <code>SageMakerInput</code> key and the results are stored in
                 <code>SageMakerOutput</code>.</p>
-        <p>For CSV data, Amazon SageMaker takes each row as a JSON array and joins the transformed 
-            data with the input by appending each transformed row to the end of the input. 
-            The joined data has the original input data followed by the transformed data and 
-            the output is a CSV file.</p>
-        <p>For information on how joining in applied, see 
-            <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html#batch-transform-data-processing-workflow\">Workflow for Associating Inferences with Input Records</a>.</p>")
+        <p>For CSV data, SageMaker takes each row as a JSON array and joins the transformed data with
+            the input by appending each transformed row to the end of the input. The joined data has
+            the original input data followed by the transformed data and the output is a CSV
+            file.</p>
+        <p>For information on how joining in applied, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html#batch-transform-data-processing-workflow\">Workflow for Associating Inferences with Input Records</a>.</p>")
   @as("JoinSource")
   joinSource: option<joinSource>,
   @ocaml.doc("<p>A <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html#data-processing-operators\">JSONPath</a> expression used to select a portion of the joined dataset to save
@@ -4701,6 +5384,8 @@ type dataCaptureConfigSummary = {
   @ocaml.doc("<p></p>") @as("CaptureStatus") captureStatus: captureStatus,
   @ocaml.doc("<p></p>") @as("EnableCapture") enableCapture: enableCapture,
 }
+type customerMetadataMap = Js.Dict.t<customerMetadataValue>
+type customerMetadataKeyList = array<customerMetadataKey>
 @ocaml.doc("<p>A custom SageMaker image. For more information, see
        <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/studio-byoi.html\">Bring your own SageMaker image</a>.</p>")
 type customImage = {
@@ -4845,6 +5530,41 @@ type cognitoConfig = {
   @as("UserPool")
   userPool: cognitoUserPool,
 }
+@ocaml.doc("<p>The container for the metadata for the ClarifyCheck step. For more information, 
+         see the topic on <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/build-and-manage-steps.html#step-type-clarify-check\">ClarifyCheck step</a> in the <i>Amazon SageMaker Developer Guide</i>.
+      </p>")
+type clarifyCheckStepMetadata = {
+  @ocaml.doc("<p>This flag indicates if a newly calculated baseline can be accessed through step properties 
+         <code>BaselineUsedForDriftCheckConstraints</code> and <code>BaselineUsedForDriftCheckStatistics</code>. 
+         If it is set to <code>False</code>, the previous baseline of the configured check type must also be available. 
+         These can be accessed through the <code>BaselineUsedForDriftCheckConstraints</code> property. </p>")
+  @as("RegisterNewBaseline")
+  registerNewBaseline: option<boolean_>,
+  @ocaml.doc("<p>This flag indicates if the drift check against the previous baseline will be skipped or not. 
+         If it is set to <code>False</code>, the previous baseline of the configured check type must be available.</p>")
+  @as("SkipCheck")
+  skipCheck: option<boolean_>,
+  @ocaml.doc(
+    "<p>The Amazon Resource Name (ARN) of the check processing job that was run by this step's execution.</p>"
+  )
+  @as("CheckJobArn")
+  checkJobArn: option<string256>,
+  @ocaml.doc("<p>The Amazon S3 URI of the violation report if violations are detected.</p>")
+  @as("ViolationReport")
+  violationReport: option<string1024>,
+  @ocaml.doc("<p>The model package group name.</p>") @as("ModelPackageGroupName")
+  modelPackageGroupName: option<string256>,
+  @ocaml.doc("<p>The Amazon S3 URI of the newly calculated baseline constraints file.</p>")
+  @as("CalculatedBaselineConstraints")
+  calculatedBaselineConstraints: option<string1024>,
+  @ocaml.doc(
+    "<p>The Amazon S3 URI of baseline constraints file to be used for the drift check.</p>"
+  )
+  @as("BaselineUsedForDriftCheckConstraints")
+  baselineUsedForDriftCheckConstraints: option<string1024>,
+  @ocaml.doc("<p>The type of the Clarify Check step</p>") @as("CheckType")
+  checkType: option<string256>,
+}
 type cidrs = array<cidr>
 @ocaml.doc("<p>Contains information about the output location for managed spot training checkpoint
             data. </p>")
@@ -4858,15 +5578,38 @@ type checkpointConfig = {
   @as("S3Uri")
   s3Uri: s3Uri,
 }
+type categoricalParameterRangeValues = array<string128>
 @ocaml.doc("<p></p>")
 type captureOption = {@ocaml.doc("<p></p>") @as("CaptureMode") captureMode: captureMode}
-@ocaml.doc("<p>Currently, the <code>CapacitySize</code> API is not supported.</p>")
+@ocaml.doc("<p>Specifies the endpoint capacity to activate for production.</p>")
 type capacitySize = {
-  @ocaml.doc("<p></p>") @as("Value") value: capacitySizeValue,
-  @ocaml.doc("<p>This API is not supported.</p>") @as("Type") type_: capacitySizeType,
+  @ocaml.doc(
+    "<p>Defines the capacity size, either as a number of instances or a capacity percentage.</p>"
+  )
+  @as("Value")
+  value: capacitySizeValue,
+  @ocaml.doc("<p>Specifies the endpoint capacity type.</p>
+        <ul>
+            <li>
+               <p>
+                  <code>INSTANCE_COUNT</code>: The endpoint activates based on
+                the number of instances.</p>
+            </li>
+            <li>
+               <p>
+                  <code>CAPACITY_PERCENT</code>: The endpoint activates based on
+            the specified percentage of capacity.</p>
+            </li>
+         </ul>")
+  @as("Type")
+  type_: capacitySizeType,
 }
 @ocaml.doc("<p>The location of artifacts for an AutoML candidate job.</p>")
 type candidateArtifactLocations = {
+  @ocaml.doc("<p>The Amazon S3 prefix to the model insight artifacts generated for the AutoML
+         candidate.</p>")
+  @as("ModelInsights")
+  modelInsights: option<modelInsightsLocation>,
   @ocaml.doc("<p>The Amazon S3 prefix to the explainability artifacts generated for the AutoML
          candidate.</p>")
   @as("Explainability")
@@ -4877,6 +5620,11 @@ type cacheHitResult = {
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the pipeline execution.</p>")
   @as("SourcePipelineExecutionArn")
   sourcePipelineExecutionArn: option<pipelineExecutionArn>,
+}
+@ocaml.doc("<p>The error code and error description associated with the resource.</p>")
+type batchDescribeModelPackageError = {
+  @ocaml.doc("<p></p>") @as("ErrorResponse") errorResponse: string_,
+  @ocaml.doc("<p></p>") @as("ErrorCode") errorCode: string_,
 }
 @ocaml.doc("<p>The Amazon S3 data source.</p>")
 type autoMLS3DataSource = {
@@ -4894,7 +5642,8 @@ type autoMLOutputDataConfig = {
   @ocaml.doc("<p>The Amazon S3 output path. Must be 128 characters or less.</p>")
   @as("S3OutputPath")
   s3OutputPath: s3Uri,
-  @ocaml.doc("<p>The AWS KMS encryption key ID.</p>") @as("KmsKeyId") kmsKeyId: option<kmsKeyId>,
+  @ocaml.doc("<p>The Amazon Web Services KMS encryption key ID.</p>") @as("KmsKeyId")
+  kmsKeyId: option<kmsKeyId>,
 }
 @ocaml.doc("<p>Specifies a metric to minimize or maximize as the objective of a job.</p>")
 type autoMLJobObjective = {
@@ -4908,8 +5657,8 @@ type autoMLJobObjective = {
                   <code>MSE</code>: The mean squared error (MSE) is the average of the squared
                differences between the predicted and actual values. It is used for regression. MSE
                values are always positive: the better a model is at predicting the actual values,
-               the smaller the MSE value. When the data contains outliers, they tend to dominate the
-               MSE, which might cause subpar prediction performance.</p>
+               the smaller the MSE value is. When the data contains outliers, they tend to dominate
+               the MSE, which might cause subpar prediction performance.</p>
             </li>
             <li>
                <p>
@@ -4985,11 +5734,15 @@ type autoMLJobObjective = {
 @ocaml.doc("<p>How long a job is allowed to run, or how many candidates a job is allowed to
          generate.</p>")
 type autoMLJobCompletionCriteria = {
-  @ocaml.doc("<p>The maximum time, in seconds, an AutoML job is allowed to wait for a trial to complete.
-         It must be equal to or greater than <code>MaxRuntimePerTrainingJobInSeconds</code>.</p>")
+  @ocaml.doc("<p>The maximum runtime, in seconds, an AutoML job has to complete.</p>
+         <p>If an AutoML job exceeds the maximum runtime, the job is stopped automatically and its
+         processing is ended gracefully. The AutoML job identifies the best model whose training was
+         completed and marks it as the best-performing model. Any unfinished steps of the job, such
+         as automatic one-click Autopilot model deployment, will not be completed. </p>")
   @as("MaxAutoMLJobRuntimeInSeconds")
   maxAutoMLJobRuntimeInSeconds: option<maxAutoMLJobRuntimeInSeconds>,
-  @ocaml.doc("<p>The maximum time, in seconds, a job is allowed to run.</p>")
+  @ocaml.doc("<p>The maximum time, in seconds, that each training job is allowed to run as part of a
+         hyperparameter tuning job. For more information, see the  used by the  action.</p>")
   @as("MaxRuntimePerTrainingJobInSeconds")
   maxRuntimePerTrainingJobInSeconds: option<maxRuntimePerTrainingJobInSeconds>,
   @ocaml.doc("<p>The maximum number of times a training job is allowed to run.</p>")
@@ -5018,7 +5771,7 @@ type attributeNames = array<attributeName>
 type athenaDatasetDefinition = {
   @as("OutputCompression") outputCompression: option<athenaResultCompressionType>,
   @as("OutputFormat") outputFormat: athenaResultFormat,
-  @ocaml.doc("<p>The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt data generated from
+  @ocaml.doc("<p>The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that Amazon SageMaker uses to encrypt data generated from
             an Athena query execution.</p>")
   @as("KmsKeyId")
   kmsKeyId: option<kmsKeyId>,
@@ -5029,6 +5782,27 @@ type athenaDatasetDefinition = {
   @as("QueryString") queryString: athenaQueryString,
   @as("Database") database: athenaDatabase,
   @as("Catalog") catalog: athenaCatalog,
+}
+@ocaml.doc(
+  "<p>Specifies the configuration for notifications of inference results for asynchronous inference.</p>"
+)
+type asyncInferenceNotificationConfig = {
+  @ocaml.doc("<p>Amazon SNS topic to post a notification to when inference fails. 
+            If no topic is provided, no notification is sent on failure.</p>")
+  @as("ErrorTopic")
+  errorTopic: option<snsTopicArn>,
+  @ocaml.doc("<p>Amazon SNS topic to post a notification to when inference completes successfully. 
+            If no topic is provided, no notification is sent on success.</p>")
+  @as("SuccessTopic")
+  successTopic: option<snsTopicArn>,
+}
+@ocaml.doc("<p>Configures the behavior of the client used by Amazon SageMaker to interact with the 
+            model container during asynchronous inference.</p>")
+type asyncInferenceClientConfig = {
+  @ocaml.doc("<p>The maximum number of concurrent requests sent by the SageMaker client to the 
+            model container. If no value is provided, Amazon SageMaker will choose an optimal value for you.</p>")
+  @as("MaxConcurrentInvocationsPerInstance")
+  maxConcurrentInvocationsPerInstance: option<maxConcurrentInvocationsPerInstance>,
 }
 @ocaml.doc("<p>The ID and ID type of an artifact source.</p>")
 type artifactSourceType = {
@@ -5324,7 +6098,7 @@ type annotationConsolidationConfig = {
         <ul>
             <li>
                 <p>
-                  <code>rn:aws:lambda:us-east-1:432418664414:function:ACS-TextMultiClass</code>
+                  <code>arn:aws:lambda:us-east-1:432418664414:function:ACS-TextMultiClass</code>
                </p>
             </li>
             <li>
@@ -6567,8 +7341,11 @@ type algorithmStatusItem = {
   @as("Name")
   name: entityName,
 }
-@ocaml.doc("<p>This API is not supported.</p>")
-type alarm = {@ocaml.doc("<p></p>") @as("AlarmName") alarmName: option<alarmName>}
+@ocaml.doc("<p>An Amazon CloudWatch alarm configured to monitor metrics on an endpoint.</p>")
+type alarm = {
+  @ocaml.doc("<p>The name of a CloudWatch alarm in your account.</p>") @as("AlarmName")
+  alarmName: option<alarmName>,
+}
 @ocaml.doc("<p>Edge Manager agent version.</p>")
 type agentVersion = {
   @ocaml.doc("<p>The number of Edge Manager agents.</p>") @as("AgentCount") agentCount: long,
@@ -6596,6 +7373,7 @@ type vpcConfig = {
   @as("SecurityGroupIds")
   securityGroupIds: vpcSecurityGroupIds,
 }
+type vertices = array<vertex>
 type variantPropertyList = array<variantProperty>
 type userProfileList = array<userProfileDetails>
 @ocaml.doc("<p>A summary of the properties of a trial. To get the complete set of properties, call the
@@ -6623,7 +7401,8 @@ type trialComponentSummary = {
   lastModifiedBy: option<userContext>,
   @ocaml.doc("<p>When the component was last modified.</p>") @as("LastModifiedTime")
   lastModifiedTime: option<timestamp_>,
-  @ocaml.doc("<p>Who created the component.</p>") @as("CreatedBy") createdBy: option<userContext>,
+  @ocaml.doc("<p>Who created the trial component.</p>") @as("CreatedBy")
+  createdBy: option<userContext>,
   @ocaml.doc("<p>When the component was created.</p>") @as("CreationTime")
   creationTime: option<timestamp_>,
   @ocaml.doc("<p>When the component ended.</p>") @as("EndTime") endTime: option<timestamp_>,
@@ -6675,11 +7454,45 @@ type transformDataSource = {
   s3DataSource: transformS3DataSource,
 }
 type trainingJobSummaries = array<trainingJobSummary>
-@ocaml.doc("<p>Currently, the <code>TrafficRoutingConfig</code> API is not supported.</p>")
+@ocaml.doc("<p>Defines the traffic routing strategy during an endpoint deployment to shift traffic from the
+            old fleet to the new fleet.</p>")
 type trafficRoutingConfig = {
-  @ocaml.doc("<p></p>") @as("CanarySize") canarySize: option<capacitySize>,
-  @ocaml.doc("<p></p>") @as("WaitIntervalInSeconds") waitIntervalInSeconds: waitIntervalInSeconds,
-  @ocaml.doc("<p></p>") @as("Type") type_: trafficRoutingConfigType,
+  @ocaml.doc("<p>Batch size for each step to turn on traffic on the new endpoint fleet. <code>Value</code> must be
+            10-50% of the variant's total instance count.</p>")
+  @as("LinearStepSize")
+  linearStepSize: option<capacitySize>,
+  @ocaml.doc("<p>Batch size for the first step to turn on traffic on the new endpoint fleet. <code>Value</code> must be less than
+        or equal to 50% of the variant's total instance count.</p>")
+  @as("CanarySize")
+  canarySize: option<capacitySize>,
+  @ocaml.doc("<p>The waiting time (in seconds) between incremental steps to turn on traffic on the
+            new endpoint fleet.</p>")
+  @as("WaitIntervalInSeconds")
+  waitIntervalInSeconds: waitIntervalInSeconds,
+  @ocaml.doc("<p>Traffic routing strategy type.</p>
+        <ul>
+            <li>
+               <p>
+                  <code>ALL_AT_ONCE</code>: Endpoint traffic shifts to the new fleet
+                in a single step.
+            </p>
+            </li>
+            <li>
+               <p>
+                  <code>CANARY</code>: Endpoint traffic shifts to the new fleet
+                in two steps. The first step is the canary, which is a small portion of the traffic. The
+                second step is the remainder of the traffic.
+            </p>
+            </li>
+            <li>
+               <p>
+                  <code>LINEAR</code>: Endpoint traffic shifts to the new fleet in
+                n steps of a configurable size.
+            </p>
+            </li>
+         </ul>")
+  @as("Type")
+  type_: trafficRoutingConfigType,
 }
 @ocaml.doc("<p>The TensorBoard app settings.</p>")
 type tensorBoardAppSettings = {
@@ -6699,6 +7512,7 @@ type suggestionQuery = {
   propertyNameQuery: option<propertyNameQuery>,
 }
 type subscribedWorkteams = array<subscribedWorkteam>
+type studioLifecycleConfigsList = array<studioLifecycleConfigDetails>
 @ocaml.doc("<p>A list of IP address ranges (<a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html\">CIDRs</a>). Used to create an allow
             list of IP addresses for a private workforce. Workers will only be able to login to their worker portal from an 
             IP address within this range. By default, a workforce isn't restricted to specific IP addresses.</p>")
@@ -6815,6 +7629,68 @@ type resolvedAttributes = {
   @as("AutoMLJobObjective") autoMLJobObjective: option<autoMLJobObjective>,
 }
 type renderingErrorList = array<renderingError>
+@ocaml.doc(
+  "<p>A collection of settings that update the current configuration for the <code>RStudioServerPro</code> Domain-level app.</p>"
+)
+type rstudioServerProDomainSettingsForUpdate = {
+  @as("DefaultResourceSpec") defaultResourceSpec: option<resourceSpec>,
+  @ocaml.doc("<p>The execution role for the <code>RStudioServerPro</code> Domain-level app.</p>")
+  @as("DomainExecutionRoleArn")
+  domainExecutionRoleArn: roleArn,
+}
+@ocaml.doc(
+  "<p>A collection of settings that configure the <code>RStudioServerPro</code> Domain-level app.</p>"
+)
+type rstudioServerProDomainSettings = {
+  @as("DefaultResourceSpec") defaultResourceSpec: option<resourceSpec>,
+  @ocaml.doc("<p>A URL pointing to an RStudio Package Manager server.</p>")
+  @as("RStudioPackageManagerUrl")
+  rstudioPackageManagerUrl: option<string_>,
+  @ocaml.doc("<p>A URL pointing to an RStudio Connect server.</p>") @as("RStudioConnectUrl")
+  rstudioConnectUrl: option<string_>,
+  @ocaml.doc(
+    "<p>The ARN of the execution role for the <code>RStudioServerPro</code> Domain-level app.</p>"
+  )
+  @as("DomainExecutionRoleArn")
+  domainExecutionRoleArn: roleArn,
+}
+@ocaml.doc("<p>A set of filters to narrow the set of lineage entities connected to the <code>StartArn</code>(s) returned by the 
+      <code>QueryLineage</code> API action.</p>")
+type queryFilters = {
+  @ocaml.doc("<p>Filter the lineage entities connected to the <code>StartArn</code>(s) by a set if property key value pairs. 
+         If multiple pairs are provided, an entity will be included in the results if it matches any of the provided pairs.</p>")
+  @as("Properties")
+  properties: option<queryProperties>,
+  @ocaml.doc(
+    "<p>Filter the lineage entities connected to the <code>StartArn</code>(s) after the last modified date.</p>"
+  )
+  @as("ModifiedAfter")
+  modifiedAfter: option<timestamp_>,
+  @ocaml.doc(
+    "<p>Filter the lineage entities connected to the <code>StartArn</code>(s) before the last modified date.</p>"
+  )
+  @as("ModifiedBefore")
+  modifiedBefore: option<timestamp_>,
+  @ocaml.doc(
+    "<p>Filter the lineage entities connected to the <code>StartArn</code>(s) after the create date.</p>"
+  )
+  @as("CreatedAfter")
+  createdAfter: option<timestamp_>,
+  @ocaml.doc(
+    "<p>Filter the lineage entities connected to the <code>StartArn</code>(s) by created date.</p>"
+  )
+  @as("CreatedBefore")
+  createdBefore: option<timestamp_>,
+  @ocaml.doc(
+    "<p>Filter the lineage entities connected to the <code>StartArn</code>(s) by the type of the lineage entity.</p>"
+  )
+  @as("LineageTypes")
+  lineageTypes: option<queryLineageTypes>,
+  @ocaml.doc("<p>Filter the lineage entities connected to the <code>StartArn</code> by type. For example: <code>DataSet</code>, 
+         <code>Model</code>, <code>Endpoint</code>, or <code>ModelDeployment</code>.</p>")
+  @as("Types")
+  types: option<queryTypes>,
+}
 @ocaml.doc("<p>Defines the amount of money paid to an Amazon Mechanical Turk worker for each task performed. </p>
         <p>Use one of the following prices for bounding box tasks. Prices are in US dollars and
             should be based on the complexity of the task; the longer it takes in your initial
@@ -7199,11 +8075,17 @@ type profilerConfig = {
   @as("S3OutputPath")
   s3OutputPath: s3Uri,
 }
-@ocaml.doc("<p>Identifies
-            a model that you want to host and the resources to deploy for hosting
-            it. If you are deploying multiple models, tell Amazon SageMaker how to distribute
-            traffic among the models by specifying variant weights. </p>")
+type productionVariantStatusList = array<productionVariantStatus>
+@ocaml.doc("<p>Identifies a model that you want to host and the resources chosen to deploy for
+            hosting it. If you are deploying multiple models, tell Amazon SageMaker how to distribute traffic
+            among the models by specifying variant weights. </p>")
 type productionVariant = {
+  @ocaml.doc("<p>The serverless configuration for an endpoint. Specifies a serverless endpoint configuration instead of an instance-based endpoint configuration.</p>
+         <note>
+            <p>Serverless Inference is in preview release for Amazon SageMaker and is subject to change. We do not recommend using this feature in production environments.</p>
+         </note>")
+  @as("ServerlessConfig")
+  serverlessConfig: option<productionVariantServerlessConfig>,
   @ocaml.doc("<p>Specifies configuration for a core dump from the model container when the process
             crashes.</p>")
   @as("CoreDumpConfig")
@@ -7222,9 +8104,9 @@ type productionVariant = {
   @as("InitialVariantWeight")
   initialVariantWeight: option<variantWeight>,
   @ocaml.doc("<p>The ML compute instance type.</p>") @as("InstanceType")
-  instanceType: productionVariantInstanceType,
+  instanceType: option<productionVariantInstanceType>,
   @ocaml.doc("<p>Number of instances to launch initially.</p>") @as("InitialInstanceCount")
-  initialInstanceCount: taskCount,
+  initialInstanceCount: option<initialTaskCount>,
   @ocaml.doc("<p>The name of the model that you want to host. This is the name that you specified
             when creating the model.</p>")
   @as("ModelName")
@@ -7260,33 +8142,11 @@ type processingOutput = {
 type processingJobSummaries = array<processingJobSummary>
 type pipelineSummaryList = array<pipelineSummary>
 type pipelineExecutionSummaryList = array<pipelineExecutionSummary>
-@ocaml.doc("<p>Metadata for a step execution.</p>")
-type pipelineExecutionStepMetadata = {
-  @ocaml.doc("<p>If this is a Condition step metadata object, details on the condition.</p>")
-  @as("Condition")
-  condition: option<conditionStepMetadata>,
-  @ocaml.doc("<p>Metadata for the RegisterModel step.</p>") @as("RegisterModel")
-  registerModel: option<registerModelStepMetadata>,
-  @ocaml.doc("<p>Metadata for the Model step.</p>") @as("Model") model: option<modelStepMetadata>,
-  @ocaml.doc(
-    "<p>The Amazon Resource Name (ARN) of the transform job that was run by this step execution.</p>"
-  )
-  @as("TransformJob")
-  transformJob: option<transformJobStepMetadata>,
-  @ocaml.doc(
-    "<p>The Amazon Resource Name (ARN) of the processing job that was run by this step execution.</p>"
-  )
-  @as("ProcessingJob")
-  processingJob: option<processingJobStepMetadata>,
-  @ocaml.doc(
-    "<p>The Amazon Resource Name (ARN) of the training job that was run by this step execution.</p>"
-  )
-  @as("TrainingJob")
-  trainingJob: option<trainingJobStepMetadata>,
-}
+type phases = array<phase>
 type parents = array<parent>
 type parentHyperParameterTuningJobs = array<parentHyperParameterTuningJob>
 type parameterList = array<parameter>
+type outputParameterList = array<outputParameter>
 @ocaml.doc("<p>Contains information about the output location for the compiled model and the target
             device that the model runs on. <code>TargetDevice</code> and <code>TargetPlatform</code>
             are mutually exclusive, so you need to choose one between the two to specify your target
@@ -7295,9 +8155,13 @@ type parameterList = array<parameter>
             platform of your edge device and <code>CompilerOptions</code> if there are specific
             settings that are required or recommended to use for particular TargetPlatform.</p>")
 type outputConfig = {
-  @ocaml.doc("<p>The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt data on the storage volume
-        after compilation job. If you don't provide a KMS key ID, Amazon SageMaker uses the default KMS key for Amazon S3 for your role's account</p>
-        <p>The KmsKeyId can be any of the following formats: </p>
+  @ocaml.doc("<p>The Amazon Web Services Key Management Service key (Amazon Web Services KMS) that Amazon SageMaker uses to encrypt your output models with Amazon S3 server-side encryption
+        after compilation job. If you don't provide a KMS key ID, Amazon SageMaker uses the default KMS key for Amazon S3 for your role's account.
+        For more information, see
+        <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingKMSEncryption.html\">KMS-Managed Encryption
+                Keys</a> in the <i>Amazon Simple Storage Service Developer Guide.</i>
+        </p>    
+	        <p>The KmsKeyId can be any of the following formats: </p>
         <ul>
             <li>
                 <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>
@@ -7548,7 +8412,7 @@ type outputConfig = {
   @as("S3OutputLocation")
   s3OutputLocation: s3Uri,
 }
-@ocaml.doc("<p>Use this to specify the AWS Key Management Service (KMS) Key ID, or
+@ocaml.doc("<p>Use this to specify the Amazon Web Services Key Management Service (KMS) Key ID, or
             <code>KMSKeyId</code>, for at rest data encryption. You can turn
             <code>OnlineStore</code> on or off by specifying the <code>EnableOnlineStore</code> flag
          at General Assembly; the default value is <code>False</code>.</p>")
@@ -7580,7 +8444,7 @@ type oidcMemberDefinition = {
 @ocaml.doc("<p>The configuration of an <code>OfflineStore</code>.</p>
          <p>Provide an <code>OfflineStoreConfig</code> in a request to
             <code>CreateFeatureGroup</code> to create an <code>OfflineStore</code>.</p>
-         <p>To encrypt an <code>OfflineStore</code> using at rest data encryption, specify AWS Key
+         <p>To encrypt an <code>OfflineStore</code> using at rest data encryption, specify Amazon Web Services Key
          Management Service (KMS) key ID, or <code>KMSKeyId</code>, in
          <code>S3StorageConfig</code>.</p>")
 type offlineStoreConfig = {
@@ -7588,7 +8452,7 @@ type offlineStoreConfig = {
          is created. </p>")
   @as("DataCatalogConfig")
   dataCatalogConfig: option<dataCatalogConfig>,
-  @ocaml.doc("<p>Set to <code>True</code> to disable the automatic creation of an AWS Glue table when
+  @ocaml.doc("<p>Set to <code>True</code> to disable the automatic creation of an Amazon Web Services Glue table when
        configuring an <code>OfflineStore</code>.</p>")
   @as("DisableGlueTableCreation")
   disableGlueTableCreation: option<boolean_>,
@@ -7600,7 +8464,7 @@ type offlineStoreConfig = {
 type notebookInstanceSummary = {
   @ocaml.doc("<p>An array of up to three Git repositories associated with the notebook instance. These
             can be either the names of Git repositories stored as resources in your account, or the
-            URL of Git repositories in <a href=\"https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html\">AWS CodeCommit</a> or in any
+            URL of Git repositories in <a href=\"https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html\">Amazon Web Services CodeCommit</a> or in any
             other Git repository. These repositories are cloned at the same level as the default
             repository of your notebook instance. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html\">Associating Git
                 Repositories with Amazon SageMaker Notebook Instances</a>.</p>")
@@ -7608,7 +8472,7 @@ type notebookInstanceSummary = {
   additionalCodeRepositories: option<additionalCodeRepositoryNamesOrUrls>,
   @ocaml.doc("<p>The Git repository associated with the notebook instance as its default code
             repository. This can be either the name of a Git repository stored as a resource in your
-            account, or the URL of a Git repository in <a href=\"https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html\">AWS CodeCommit</a> or in any
+            account, or the URL of a Git repository in <a href=\"https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html\">Amazon Web Services CodeCommit</a> or in any
             other Git repository. When you open a notebook instance, it opens in the directory that
             contains this repository. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html\">Associating Git Repositories with Amazon SageMaker
                 Notebook Instances</a>.</p>")
@@ -7645,6 +8509,20 @@ type notebookInstanceSummary = {
 }
 type notebookInstanceLifecycleConfigSummaryList = array<notebookInstanceLifecycleConfigSummary>
 type notebookInstanceLifecycleConfigList = array<notebookInstanceLifecycleHook>
+@ocaml.doc("<p>The <a>VpcConfig</a> configuration object that specifies the VPC that you 
+            want the compilation jobs to connect to. For more information on 
+            controlling access to your Amazon S3 buckets used for compilation job, see 
+            <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/neo-vpc.html\">Give Amazon SageMaker Compilation Jobs Access to Resources in Your Amazon VPC</a>.</p>")
+type neoVpcConfig = {
+  @ocaml.doc("<p>The ID of the subnets in the VPC that you want to connect the 
+            compilation job to for accessing the model in Amazon S3.</p>")
+  @as("Subnets")
+  subnets: neoVpcSubnets,
+  @ocaml.doc("<p>The VPC security group IDs. IDs have the form of <code>sg-xxxxxxxx</code>. 
+            Specify the security groups for the VPC that is specified in the <code>Subnets</code> field.</p>")
+  @as("SecurityGroupIds")
+  securityGroupIds: neoVpcSecurityGroupIds,
+}
 type monitoringScheduleSummaryList = array<monitoringScheduleSummary>
 @ocaml.doc("<p>Identifies the resources to deploy for a monitoring job.</p>")
 type monitoringResources = {
@@ -7761,7 +8639,56 @@ type modelQuality = {
 type modelPackageSummaryList = array<modelPackageSummary>
 type modelPackageStatusItemList = array<modelPackageStatusItem>
 type modelPackageGroupSummaryList = array<modelPackageGroupSummary>
-type modelPackageContainerDefinitionList = array<modelPackageContainerDefinition>
+@ocaml.doc("<p>Describes the Docker container for the model package.</p>")
+type modelPackageContainerDefinition = {
+  @ocaml.doc("<p>The name of a pre-trained machine learning benchmarked by 
+           Amazon SageMaker Inference Recommender model that matches your model. 
+           You can find a list of benchmarked models by calling <code>ListModelMetadata</code>.</p>")
+  @as("NearestModelName")
+  nearestModelName: option<string_>,
+  @ocaml.doc("<p>The framework version of the Model Package Container Image.</p>")
+  @as("FrameworkVersion")
+  frameworkVersion: option<frameworkVersion>,
+  @ocaml.doc("<p>The machine learning framework of the model package container image.</p>")
+  @as("Framework")
+  framework: option<string_>,
+  @ocaml.doc("<p>A structure with Model Input details.</p>") @as("ModelInput")
+  modelInput: option<modelInput>,
+  @ocaml.doc("<p>The environment variables to set in the Docker container. Each key and value in the
+            <code>Environment</code> string to string map can have length of up to 1024. We
+            support up to 16 entries in the map.</p>")
+  @as("Environment")
+  environment: option<environmentMap>,
+  @ocaml.doc("<p>The Amazon Web Services Marketplace product ID of the model package.</p>")
+  @as("ProductId")
+  productId: option<productId>,
+  @ocaml.doc("<p>The Amazon S3 path where the model artifacts, which result from model training, are stored.
+            This path must point to a single <code>gzip</code> compressed tar archive
+                (<code>.tar.gz</code> suffix).</p>
+        <note>
+            <p>The model artifacts must be in an S3 bucket that is in the same region as the
+                model package.</p>
+        </note>")
+  @as("ModelDataUrl")
+  modelDataUrl: option<url>,
+  @ocaml.doc("<p>An MD5 hash of the training algorithm that identifies the Docker image used for
+            training.</p>")
+  @as("ImageDigest")
+  imageDigest: option<imageDigest>,
+  @ocaml.doc("<p>The Amazon EC2 Container Registry (Amazon ECR) path where inference code is stored.</p>
+        <p>If you are using your own custom algorithm instead of an algorithm provided by Amazon SageMaker,
+            the inference code must meet Amazon SageMaker requirements. Amazon SageMaker supports both
+                <code>registry/repository[:tag]</code> and <code>registry/repository[@digest]</code>
+            image path formats. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html\">Using Your Own Algorithms with Amazon
+                SageMaker</a>.</p>")
+  @as("Image")
+  image: containerImage,
+  @ocaml.doc("<p>The DNS host name for the Docker container.</p>") @as("ContainerHostname")
+  containerHostname: option<containerHostname>,
+}
+type modelMetadataSummaries = array<modelMetadataSummary>
+type modelMetadataFilters = array<modelMetadataFilter>
+type modelLatencyThresholds = array<modelLatencyThreshold>
 @ocaml.doc("<p>Inputs for the model explainability job.</p>")
 type modelExplainabilityJobInput = {@as("EndpointInput") endpointInput: endpointInput}
 @ocaml.doc("<p>The configuration for a baseline model explainability job.</p>")
@@ -7816,6 +8743,8 @@ type modelBiasAppSpecification = {
   imageUri: imageUri,
 }
 type metricDefinitionList = array<metricDefinition>
+type metricDataList = array<metricDatum>
+type lineageGroupSummaries = array<lineageGroupSummary>
 @ocaml.doc("<p>Provides summary information for a work team.</p>")
 type labelingJobForWorkteamSummary = {
   @ocaml.doc("<p>The configured number of workers per data object.</p>")
@@ -7826,7 +8755,9 @@ type labelingJobForWorkteamSummary = {
   labelCounters: option<labelCountersForWorkteam>,
   @ocaml.doc("<p>The date and time that the labeling job was created.</p>") @as("CreationTime")
   creationTime: timestamp_,
-  @ocaml.doc("<p>The AWS account ID of the account used to start the labeling job.</p>")
+  @ocaml.doc(
+    "<p>The Amazon Web Services account ID of the account used to start the labeling job.</p>"
+  )
   @as("WorkRequesterAccountId")
   workRequesterAccountId: accountId,
   @ocaml.doc("<p>A unique identifier for a labeling job. You can use this to refer to a specific
@@ -7919,12 +8850,18 @@ type kernelSpecs = array<kernelSpec>
 @ocaml.doc("<p>The JupyterServer app settings.</p>")
 type jupyterServerAppSettings = {
   @ocaml.doc(
+    "<p> The Amazon Resource Name (ARN) of the Lifecycle Configurations attached to the JupyterServerApp.</p>"
+  )
+  @as("LifecycleConfigArns")
+  lifecycleConfigArns: option<lifecycleConfigArns>,
+  @ocaml.doc(
     "<p>The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the JupyterServer app.</p>"
   )
   @as("DefaultResourceSpec")
   defaultResourceSpec: option<resourceSpec>,
 }
 type integerParameterRanges = array<integerParameterRange>
+type inferenceRecommendationsJobs = array<inferenceRecommendationsJob>
 type images = array<image>
 type imageVersions = array<imageVersion>
 @ocaml.doc("<p>Specifies whether the model container is in Amazon ECR or a private Docker registry
@@ -8134,12 +9071,41 @@ type experimentSummary = {
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the experiment.</p>") @as("ExperimentArn")
   experimentArn: option<experimentArn>,
 }
+type environmentParameters = array<environmentParameter>
 type endpointSummaryList = array<endpointSummary>
 type endpointConfigSummaryList = array<endpointConfigSummary>
+type edges = array<edge>
 type edgePackagingJobSummaries = array<edgePackagingJobSummary>
 type edgeModels = array<edgeModel>
 type edgeModelSummaries = array<edgeModelSummary>
 type edgeModelStats = array<edgeModelStat>
+@ocaml.doc("<p>Represents the drift check model quality baselines that can be used when the model monitor is set using 
+         the model package. </p>")
+type driftCheckModelQuality = {
+  @as("Constraints") constraints: option<metricsSource>,
+  @as("Statistics") statistics: option<metricsSource>,
+}
+@ocaml.doc("<p>Represents the drift check data quality baselines that can be used when the model monitor is set using 
+         the model package. </p>")
+type driftCheckModelDataQuality = {
+  @as("Constraints") constraints: option<metricsSource>,
+  @as("Statistics") statistics: option<metricsSource>,
+}
+@ocaml.doc("<p>Represents the drift check explainability baselines that can be used when the model monitor is set 
+         using the model package. </p>")
+type driftCheckExplainability = {
+  @ocaml.doc("<p>The explainability config file for the model.</p>") @as("ConfigFile")
+  configFile: option<fileSource>,
+  @as("Constraints") constraints: option<metricsSource>,
+}
+@ocaml.doc("<p>Represents the drift check bias baselines that can be used when the model monitor is set using the 
+         model package.</p>")
+type driftCheckBias = {
+  @as("PostTrainingConstraints") postTrainingConstraints: option<metricsSource>,
+  @as("PreTrainingConstraints") preTrainingConstraints: option<metricsSource>,
+  @ocaml.doc("<p>The bias config file for a model.</p>") @as("ConfigFile")
+  configFile: option<fileSource>,
+}
 type domainList = array<domainDetails>
 type devices = array<device>
 type deviceFleetSummaries = array<deviceFleetSummary>
@@ -8273,7 +9239,7 @@ type collectionConfiguration = {
 @ocaml.doc("<p>Specifies summary information about a Git repository.</p>")
 type codeRepositorySummary = {
   @ocaml.doc("<p>Configuration details for the Git repository, including the URL where it is located
-            and the ARN of the AWS Secrets Manager secret that contains the credentials used to
+            and the ARN of the Amazon Web Services Secrets Manager secret that contains the credentials used to
             access the repository.</p>")
   @as("GitConfig")
   gitConfig: option<gitConfig>,
@@ -8324,6 +9290,12 @@ type categoricalParameterRange = {
   @ocaml.doc("<p>The name of the categorical hyperparameter to tune.</p>") @as("Name")
   name: parameterKey,
 }
+@ocaml.doc("<p>Environment parameters you want to benchmark your load test against.</p>")
+type categoricalParameter = {
+  @ocaml.doc("<p>The list of values you can pass.</p>") @as("Value")
+  value: categoricalParameterRangeValues,
+  @ocaml.doc("<p>The Name of the environment variable.</p>") @as("Name") name: string64,
+}
 type captureOptionList = array<captureOption>
 @ocaml.doc("<p></p>")
 type captureContentTypeHeader = {
@@ -8331,16 +9303,13 @@ type captureContentTypeHeader = {
   @ocaml.doc("<p></p>") @as("CsvContentTypes") csvContentTypes: option<csvContentTypes>,
 }
 type candidateSteps = array<autoMLCandidateStep>
-@ocaml.doc("<p>The properties of an AutoML candidate job.</p>")
-type candidateProperties = {
-  @ocaml.doc("<p>The Amazon S3 prefix to the artifacts generated for an AutoML candidate.</p>")
-  @as("CandidateArtifactLocations")
-  candidateArtifactLocations: option<candidateArtifactLocations>,
-}
 @ocaml.doc("<p>Contains bias metrics for a model.</p>")
 type bias = {
+  @as("PostTrainingReport") postTrainingReport: option<metricsSource>,
+  @as("PreTrainingReport") preTrainingReport: option<metricsSource>,
   @ocaml.doc("<p>The bias report for a model</p>") @as("Report") report: option<metricsSource>,
 }
+type batchDescribeModelPackageErrorMap = Js.Dict.t<batchDescribeModelPackageError>
 type autoMLPartialFailureReasons = array<autoMLPartialFailureReason>
 @ocaml.doc("<p>The data source for the Autopilot job.</p>")
 type autoMLDataSource = {
@@ -8362,8 +9331,25 @@ type autoMLContainerDefinition = {
   @ocaml.doc("<p>The location of the model artifacts. For more information, see .</p>")
   @as("ModelDataUrl")
   modelDataUrl: url,
-  @ocaml.doc("<p>The ECR path of the container. For more information, see .</p>") @as("Image")
+  @ocaml.doc("<p>The Amazon Elastic Container Registry (Amazon ECR) path of the container. For more
+         information, see .</p>")
+  @as("Image")
   image: containerImage,
+}
+@ocaml.doc("<p>Specifies the configuration for asynchronous inference invocation outputs.</p>")
+type asyncInferenceOutputConfig = {
+  @ocaml.doc(
+    "<p>Specifies the configuration for notifications of inference results for asynchronous inference.</p>"
+  )
+  @as("NotificationConfig")
+  notificationConfig: option<asyncInferenceNotificationConfig>,
+  @ocaml.doc("<p>The Amazon S3 location to upload inference responses to.</p>") @as("S3OutputPath")
+  s3OutputPath: destinationS3Uri,
+  @ocaml.doc("<p>The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that
+            Amazon SageMaker uses to encrypt the asynchronous inference output in Amazon S3.</p>
+        <p></p>")
+  @as("KmsKeyId")
+  kmsKeyId: option<kmsKeyId>,
 }
 @ocaml.doc("<p>Lists a summary of the properties of an association. An association is an entity that
         links other lineage or experiment entities. An example would be an association between a
@@ -8420,7 +9406,7 @@ type actionSummary = {
   actionArn: option<actionArn>,
 }
 @ocaml.doc("<p>A single private workforce, which is automatically created when you create your first
-            private work team. You can create one private work force in each AWS Region. By default,
+            private work team. You can create one private work force in each Amazon Web Services Region. By default,
             any workforce-related API operation used in a specific region will apply to the
             workforce created in that region. To learn how to create a private workforce, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sms-workforce-create-private.html\">Create a Private Workforce</a>.</p>")
 type workforce = {
@@ -8512,14 +9498,31 @@ type transformInput = {
   @as("DataSource")
   dataSource: transformDataSource,
 }
+@ocaml.doc("<p>Defines the traffic pattern of the load test.</p>")
+type trafficPattern = {
+  @ocaml.doc("<p>Defines the phases traffic specification.</p>") @as("Phases")
+  phases: option<phases>,
+  @ocaml.doc("<p>Defines the traffic patterns.</p>") @as("TrafficType")
+  trafficType: option<trafficType>,
+}
 @ocaml.doc("<p>A list of algorithms that were used to create a model package.</p>")
 type sourceAlgorithmSpecification = {
   @ocaml.doc("<p>A list of the algorithms that were used to create a model package.</p>")
   @as("SourceAlgorithms")
   sourceAlgorithms: sourceAlgorithmList,
 }
+@ocaml.doc("<p>Details that you specify to provision a service catalog product. 
+            For information about service catalog, see <a href=\"https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html\">What is Amazon Web Services Service Catalog</a>.
+        </p>")
+type serviceCatalogProvisioningUpdateDetails = {
+  @ocaml.doc("<p>A list of key value pairs that you specify when you provision a product.</p>")
+  @as("ProvisioningParameters")
+  provisioningParameters: option<provisioningParameters>,
+  @ocaml.doc("<p>The ID of the provisioning artifact.</p>") @as("ProvisioningArtifactId")
+  provisioningArtifactId: option<serviceCatalogEntityId>,
+}
 @ocaml.doc("<p>Details that you specify to provision a service catalog product. For information about
-            service catalog, see .<a href=\"https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html\">What is AWS Service
+            service catalog, see <a href=\"https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html\">What is Amazon Web Services Service
                 Catalog</a>.</p>")
 type serviceCatalogProvisioningDetails = {
   @ocaml.doc("<p>A list of key value pairs that you specify when you provision a product.</p>")
@@ -8531,9 +9534,22 @@ type serviceCatalogProvisioningDetails = {
   @as("PathId")
   pathId: option<serviceCatalogEntityId>,
   @ocaml.doc("<p>The ID of the provisioning artifact.</p>") @as("ProvisioningArtifactId")
-  provisioningArtifactId: serviceCatalogEntityId,
+  provisioningArtifactId: option<serviceCatalogEntityId>,
   @ocaml.doc("<p>The ID of the product to provision.</p>") @as("ProductId")
   productId: serviceCatalogEntityId,
+}
+@ocaml.doc("<p>Specifies conditions for stopping a job. When a job reaches a 
+           stopping condition limit, SageMaker ends the job.</p>")
+type recommendationJobStoppingConditions = {
+  @ocaml.doc("<p>The interval of time taken by a model to respond as viewed from SageMaker. 
+          The interval includes the local communication time taken to send the request 
+          and to fetch the response from the container of a model and the time taken to 
+          complete the inference in the container.</p>")
+  @as("ModelLatencyThresholds")
+  modelLatencyThresholds: option<modelLatencyThresholds>,
+  @ocaml.doc("<p>The maximum number of requests per minute expected for the endpoint.</p>")
+  @as("MaxInvocations")
+  maxInvocations: option<integer_>,
 }
 type profilerRuleConfigurations = array<profilerRuleConfiguration>
 @ocaml.doc("<p>Describes weight and capacities for a production variant associated with an
@@ -8541,6 +9557,23 @@ type profilerRuleConfigurations = array<profilerRuleConfiguration>
             API and the endpoint status is <code>Updating</code>, you get different desired and
             current values. </p>")
 type productionVariantSummary = {
+  @ocaml.doc("<p>The serverless configuration requested for the endpoint update.</p>
+         <note>
+            <p>Serverless Inference is in preview release for Amazon SageMaker and is subject to change. We do not recommend using this feature in production environments.</p>
+         </note>")
+  @as("DesiredServerlessConfig")
+  desiredServerlessConfig: option<productionVariantServerlessConfig>,
+  @ocaml.doc("<p>The serverless configuration for the endpoint.</p>
+         <note>
+            <p>Serverless Inference is in preview release for Amazon SageMaker and is subject to change. We do not recommend using this feature in production environments.</p>
+         </note>")
+  @as("CurrentServerlessConfig")
+  currentServerlessConfig: option<productionVariantServerlessConfig>,
+  @ocaml.doc(
+    "<p>The endpoint variant status which describes the current deployment stage status or operational status.</p>"
+  )
+  @as("VariantStatus")
+  variantStatus: option<productionVariantStatusList>,
   @ocaml.doc("<p>The number of instances requested in the
                 <code>UpdateEndpointWeightsAndCapacities</code> request. </p>")
   @as("DesiredInstanceCount")
@@ -8578,32 +9611,14 @@ type processingInput = {
   appManaged: option<appManaged>,
   @ocaml.doc("<p>The name for the processing job input.</p>") @as("InputName") inputName: string_,
 }
-@ocaml.doc("<p>An execution of a step in a pipeline.</p>")
-type pipelineExecutionStep = {
-  @ocaml.doc("<p>The metadata for the step execution.</p>") @as("Metadata")
-  metadata: option<pipelineExecutionStepMetadata>,
-  @ocaml.doc(
-    "<p>The reason why the step failed execution. This is only returned if the step failed its execution.</p>"
-  )
-  @as("FailureReason")
-  failureReason: option<failureReason>,
-  @ocaml.doc("<p>If this pipeline execution step was cached, details on the cache hit.</p>")
-  @as("CacheHitResult")
-  cacheHitResult: option<cacheHitResult>,
-  @ocaml.doc("<p>The status of the step execution.</p>") @as("StepStatus")
-  stepStatus: option<stepStatus>,
-  @ocaml.doc("<p>The time that the step stopped executing.</p>") @as("EndTime")
-  endTime: option<timestamp_>,
-  @ocaml.doc("<p>The time that the step started executing.</p>") @as("StartTime")
-  startTime: option<timestamp_>,
-  @ocaml.doc("<p>The name of the step that is executed.</p>") @as("StepName")
-  stepName: option<stepName>,
-}
 @ocaml.doc("<p>An execution of a pipeline.</p>")
 type pipelineExecution = {
   @ocaml.doc("<p>Contains a list of pipeline parameters. This list can be empty. </p>")
   @as("PipelineParameters")
   pipelineParameters: option<parameterList>,
+  @ocaml.doc("<p>The parallelism configuration applied to the pipeline execution.</p>")
+  @as("ParallelismConfiguration")
+  parallelismConfiguration: option<parallelismConfiguration>,
   @as("LastModifiedBy") lastModifiedBy: option<userContext>,
   @as("CreatedBy") createdBy: option<userContext>,
   @ocaml.doc("<p>The time that the pipeline execution was last modified.</p>")
@@ -8611,6 +9626,9 @@ type pipelineExecution = {
   lastModifiedTime: option<timestamp_>,
   @ocaml.doc("<p>The creation time of the pipeline execution.</p>") @as("CreationTime")
   creationTime: option<timestamp_>,
+  @ocaml.doc("<p>If the execution failed, a message describing why.</p>") @as("FailureReason")
+  failureReason: option<pipelineExecutionFailureReason>,
+  @as("PipelineExperimentConfig") pipelineExperimentConfig: option<pipelineExperimentConfig>,
   @ocaml.doc("<p>The description of the pipeline execution.</p>")
   @as("PipelineExecutionDescription")
   pipelineExecutionDescription: option<pipelineExecutionDescription>,
@@ -8630,6 +9648,9 @@ type pipelineExecution = {
 type pipeline = {
   @ocaml.doc("<p>A list of tags that apply to the pipeline.</p>") @as("Tags")
   tags: option<tagList_>,
+  @ocaml.doc("<p>The parallelism configuration applied to the pipeline.</p>")
+  @as("ParallelismConfiguration")
+  parallelismConfiguration: option<parallelismConfiguration>,
   @as("LastModifiedBy") lastModifiedBy: option<userContext>,
   @as("CreatedBy") createdBy: option<userContext>,
   @ocaml.doc("<p>The time when the pipeline was last run.</p>") @as("LastRunTime")
@@ -8651,6 +9672,66 @@ type pipeline = {
   pipelineName: option<pipelineName>,
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the pipeline.</p>") @as("PipelineArn")
   pipelineArn: option<pipelineArn>,
+}
+@ocaml.doc("<p>The production variant summary for a deployment when an endpoint is
+            creating or updating with the <code>
+               <a>CreateEndpoint</a>
+            </code>
+            or <code>
+               <a>UpdateEndpoint</a>
+            </code> operations.
+            Describes the <code>VariantStatus </code>, weight and capacity for a production
+            variant associated with an endpoint.
+           </p>")
+type pendingProductionVariantSummary = {
+  @ocaml.doc("<p>The serverless configuration requested for this deployment, as specified in the endpoint configuration for the endpoint.</p>
+         <note>
+            <p>Serverless Inference is in preview release for Amazon SageMaker and is subject to change. We do not recommend using this feature in production environments.</p>
+         </note>")
+  @as("DesiredServerlessConfig")
+  desiredServerlessConfig: option<productionVariantServerlessConfig>,
+  @ocaml.doc("<p>The serverless configuration for the endpoint.</p>
+         <note>
+            <p>Serverless Inference is in preview release for Amazon SageMaker and is subject to change. We do not recommend using this feature in production environments.</p>
+         </note>")
+  @as("CurrentServerlessConfig")
+  currentServerlessConfig: option<productionVariantServerlessConfig>,
+  @ocaml.doc(
+    "<p>The endpoint variant status which describes the current deployment stage status or operational status.</p>"
+  )
+  @as("VariantStatus")
+  variantStatus: option<productionVariantStatusList>,
+  @ocaml.doc("<p>The size of the Elastic Inference (EI) instance to use for the production variant. EI
+            instances provide on-demand GPU computing for inference. For more information, see
+            <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/ei.html\">Using Elastic
+                Inference in Amazon SageMaker</a>.</p>")
+  @as("AcceleratorType")
+  acceleratorType: option<productionVariantAcceleratorType>,
+  @ocaml.doc("<p>The type of instances associated with the variant.</p>") @as("InstanceType")
+  instanceType: option<productionVariantInstanceType>,
+  @ocaml.doc("<p>The number of instances requested in this deployment, as specified in the endpoint configuration
+            for the endpoint. The value is taken from the request to the <code>
+               <a>CreateEndpointConfig</a>
+            </code> operation.</p>")
+  @as("DesiredInstanceCount")
+  desiredInstanceCount: option<taskCount>,
+  @ocaml.doc("<p>The number of instances associated with the variant.</p>")
+  @as("CurrentInstanceCount")
+  currentInstanceCount: option<taskCount>,
+  @ocaml.doc("<p>The requested weight for the variant in this deployment, as specified in the endpoint configuration
+            for the endpoint. The value is taken from the request to the <code>
+               <a>CreateEndpointConfig</a>
+            </code> operation.</p>")
+  @as("DesiredWeight")
+  desiredWeight: option<variantWeight>,
+  @ocaml.doc("<p>The weight associated with the variant.</p>") @as("CurrentWeight")
+  currentWeight: option<variantWeight>,
+  @ocaml.doc("<p>An array of <code>DeployedImage</code> objects that specify the Amazon EC2
+            Container Registry paths of the inference images deployed on instances of this
+            <code>ProductionVariant</code>.</p>")
+  @as("DeployedImages")
+  deployedImages: option<deployedImages>,
+  @ocaml.doc("<p>The name of the variant.</p>") @as("VariantName") variantName: variantName,
 }
 @ocaml.doc("<p>Defines the possible values for categorical, continuous, and integer hyperparameters
             to be used by an algorithm.</p>")
@@ -8739,8 +9820,8 @@ type modelPackageStatusDetails = {
 }
 @ocaml.doc("<p>A group of versioned models in the model registry.</p>")
 type modelPackageGroup = {
-  @ocaml.doc("<p>A list of the tags associated with the model group. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS
-            resources</a> in the <i>AWS General Reference Guide</i>.</p>")
+  @ocaml.doc("<p>A list of the tags associated with the model group. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services
+            resources</a> in the <i>Amazon Web Services General Reference Guide</i>.</p>")
   @as("Tags")
   tags: option<tagList_>,
   @ocaml.doc("<p>The status of the model group. This can be one of the following values.</p>
@@ -8784,6 +9865,7 @@ type modelPackageGroup = {
   @ocaml.doc("<p>The name of the model group.</p>") @as("ModelPackageGroupName")
   modelPackageGroupName: option<entityName>,
 }
+type modelPackageContainerDefinitionList = array<modelPackageContainerDefinition>
 @ocaml.doc("<p>Contains metrics captured from a model.</p>")
 type modelMetrics = {
   @ocaml.doc("<p>Metrics that help explain a model.</p>") @as("Explainability")
@@ -8794,6 +9876,26 @@ type modelMetrics = {
   modelDataQuality: option<modelDataQuality>,
   @ocaml.doc("<p>Metrics that measure the quality of a model.</p>") @as("ModelQuality")
   modelQuality: option<modelQuality>,
+}
+@ocaml.doc("<p>One or more filters that searches for the specified resource or resources in 
+          a search. All resource objects that satisfy the expression's condition are 
+          included in the search results</p>")
+type modelMetadataSearchExpression = {
+  @ocaml.doc("<p>A list of filter objects.</p>") @as("Filters")
+  filters: option<modelMetadataFilters>,
+}
+@ocaml.doc(
+  "<p>Defines the model configuration. Includes the specification name and environment parameters.</p>"
+)
+type modelConfiguration = {
+  @ocaml.doc(
+    "<p>Defines the environment parameters that includes key, value types, and values.</p>"
+  )
+  @as("EnvironmentParameters")
+  environmentParameters: option<environmentParameters>,
+  @ocaml.doc("<p>The inference specification name in the model package version.</p>")
+  @as("InferenceSpecificationName")
+  inferenceSpecificationName: option<inferenceSpecificationName>,
 }
 @ocaml.doc(
   "<p>Defines an Amazon Cognito or your own OIDC IdP user group that is part of a work team.</p>"
@@ -8809,6 +9911,16 @@ type memberDefinition = {
   @ocaml.doc("<p>The Amazon Cognito user group that is part of the work team.</p>")
   @as("CognitoMemberDefinition")
   cognitoMemberDefinition: option<cognitoMemberDefinition>,
+}
+@ocaml.doc("<p>Metadata for a Lambda step.</p>")
+type lambdaStepMetadata = {
+  @ocaml.doc("<p>A list of the output parameters of the Lambda step.</p>") @as("OutputParameters")
+  outputParameters: option<outputParameterList>,
+  @ocaml.doc(
+    "<p>The Amazon Resource Name (ARN) of the Lambda function that was run by this step execution.</p>"
+  )
+  @as("Arn")
+  arn: option<string256>,
 }
 @ocaml.doc("<p>Input configuration information for a labeling job.</p>")
 type labelingJobInputConfig = {
@@ -8832,6 +9944,11 @@ type kernelGatewayImageConfig = {
 @ocaml.doc("<p>The KernelGateway app settings.</p>")
 type kernelGatewayAppSettings = {
   @ocaml.doc(
+    "<p> The Amazon Resource Name (ARN) of the Lifecycle Configurations attached to the the user profile or domain.</p>"
+  )
+  @as("LifecycleConfigArns")
+  lifecycleConfigArns: option<lifecycleConfigArns>,
+  @ocaml.doc(
     "<p>A list of custom SageMaker images that are configured to run as a KernelGateway app.</p>"
   )
   @as("CustomImages")
@@ -8841,30 +9958,6 @@ type kernelGatewayAppSettings = {
   )
   @as("DefaultResourceSpec")
   defaultResourceSpec: option<resourceSpec>,
-}
-@ocaml.doc("<p>Defines how to perform inference generation after a training job is run.</p>")
-type inferenceSpecification = {
-  @ocaml.doc("<p>The supported MIME types for the output data.</p>")
-  @as("SupportedResponseMIMETypes")
-  supportedResponseMIMETypes: responseMIMETypes,
-  @ocaml.doc("<p>The supported MIME types for the input data.</p>") @as("SupportedContentTypes")
-  supportedContentTypes: contentTypes,
-  @ocaml.doc("<p>A list of the instance types that are used to generate inferences in real-time.</p>
-        <p>This parameter is required for unversioned models, and optional for versioned
-            models.</p>")
-  @as("SupportedRealtimeInferenceInstanceTypes")
-  supportedRealtimeInferenceInstanceTypes: option<realtimeInferenceInstanceTypes>,
-  @ocaml.doc("<p>A list of the instance types on which a transformation job can be run or on which an
-            endpoint can be deployed.</p>
-        <p>This parameter is required for unversioned models, and optional for versioned
-            models.</p>")
-  @as("SupportedTransformInstanceTypes")
-  supportedTransformInstanceTypes: option<transformInstanceTypes>,
-  @ocaml.doc(
-    "<p>The Amazon ECR registry path of the Docker image that contains the inference code.</p>"
-  )
-  @as("Containers")
-  containers: modelPackageContainerDefinitionList,
 }
 @ocaml.doc("<p>Specifies the configuration for a hyperparameter tuning job that uses one or more
             previous hyperparameter tuning jobs as a starting point. The results of previous tuning
@@ -8938,24 +10031,7 @@ type hyperParameterAlgorithmSpecification = {
                 <code>TrainingImage</code>.</p>")
   @as("AlgorithmName")
   algorithmName: option<arnOrName>,
-  @ocaml.doc("<p>The input mode that the algorithm supports:
-            File
-            or Pipe. In File input mode, Amazon SageMaker downloads the training data from
-            Amazon S3 to the
-            storage
-            volume that is attached to the training instance and mounts the directory to the Docker
-            volume for the training container. In Pipe input mode, Amazon SageMaker streams
-            data directly from Amazon S3 to the container. </p>
-        <p>If you specify File mode, make sure that
-            you
-            provision the storage volume that is attached to the training instance with enough
-            capacity to accommodate the training data downloaded from Amazon S3, the model artifacts, and
-            intermediate
-            information.</p>
-        <p></p>
-        <p>For more information about input modes, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html\">Algorithms</a>. </p>")
-  @as("TrainingInputMode")
-  trainingInputMode: trainingInputMode,
+  @as("TrainingInputMode") trainingInputMode: trainingInputMode,
   @ocaml.doc("<p> The registry path of the Docker image that contains the training algorithm. For
             information about Docker registry paths for built-in algorithms, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-algo-docker-registry-paths.html\">Algorithms
                 Provided by Amazon SageMaker: Common Parameters</a>. Amazon SageMaker supports both
@@ -8989,9 +10065,7 @@ type humanTaskConfig = {
                     The default is 6 hours (21,600 seconds).</p>
             </li>
             <li>
-                <p>If you choose a private or vendor workforce, the default value is 10 days
-                    (864,000 seconds). For most users, the maximum is also 10 days. If you want to
-                    change this limit, contact AWS Support.</p>
+                <p>If you choose a private or vendor workforce, the default value is 30 days (2592,000 seconds) for non-AL mode. For most users, the maximum is also 30 days.</p>
             </li>
          </ul>")
   @as("TaskAvailabilityLifetimeInSeconds")
@@ -9008,9 +10082,7 @@ type humanTaskConfig = {
                     the maximum is 8 hours (28,800 seconds).</p>
             </li>
             <li>
-                <p>For <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sms-point-cloud.html\">3D point cloud</a> and <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sms-video.html\">video frame</a> labeling jobs,
-                    the maximum is 7 days (604,800 seconds). If you want to change these limits,
-                    contact AWS Support.</p>
+                <p>For <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sms-point-cloud.html\">3D point cloud</a> and <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sms-video.html\">video frame</a> labeling jobs, the maximum is 30 days (2952,000 seconds) for non-AL mode. For most users, the maximum is also 30 days.</p>
             </li>
          </ul>")
   @as("TaskTimeLimitInSeconds")
@@ -10664,7 +11736,7 @@ type experiment = {
   @as("LastModifiedBy") lastModifiedBy: option<userContext>,
   @ocaml.doc("<p>When the experiment was last modified.</p>") @as("LastModifiedTime")
   lastModifiedTime: option<timestamp_>,
-  @as("CreatedBy") createdBy: option<userContext>,
+  @ocaml.doc("<p>Who created the experiment.</p>") @as("CreatedBy") createdBy: option<userContext>,
   @ocaml.doc("<p>When the experiment was created.</p>") @as("CreationTime")
   creationTime: option<timestamp_>,
   @ocaml.doc("<p>The description of the experiment.</p>") @as("Description")
@@ -10679,8 +11751,53 @@ type experiment = {
   @ocaml.doc("<p>The name of the experiment.</p>") @as("ExperimentName")
   experimentName: option<experimentEntityName>,
 }
+@ocaml.doc("<p>Represents the drift check baselines that can be used when the model monitor is set using the model 
+         package. </p>")
+type driftCheckBaselines = {
+  @ocaml.doc("<p>Represents the drift check model data quality baselines that can be used when the model monitor is set 
+         using the model package.</p>")
+  @as("ModelDataQuality")
+  modelDataQuality: option<driftCheckModelDataQuality>,
+  @ocaml.doc("<p>Represents the drift check model quality baselines that can be used when the model monitor is set using 
+         the model package.</p>")
+  @as("ModelQuality")
+  modelQuality: option<driftCheckModelQuality>,
+  @ocaml.doc("<p>Represents the drift check explainability baselines that can be used when the model monitor is set using 
+         the model package. </p>")
+  @as("Explainability")
+  explainability: option<driftCheckExplainability>,
+  @ocaml.doc("<p>Represents the drift check bias baselines that can be used when the model monitor is set using the model 
+         package. </p>")
+  @as("Bias")
+  bias: option<driftCheckBias>,
+}
+@ocaml.doc("<p>A collection of <code>Domain</code> configuration settings to update.</p>")
+type domainSettingsForUpdate = {
+  @ocaml.doc(
+    "<p>A collection of <code>RStudioServerPro</code> Domain-level app settings to update.</p>"
+  )
+  @as("RStudioServerProDomainSettingsForUpdate")
+  rstudioServerProDomainSettingsForUpdate: option<rstudioServerProDomainSettingsForUpdate>,
+}
+@ocaml.doc(
+  "<p>A collection of settings that apply to the <code>SageMaker Domain</code>. These settings are specified through the <code>CreateDomain</code> API call.</p>"
+)
+type domainSettings = {
+  @ocaml.doc(
+    "<p>A collection of settings that configure the <code>RStudioServerPro</code> Domain-level app.</p>"
+  )
+  @as("RStudioServerProDomainSettings")
+  rstudioServerProDomainSettings: option<rstudioServerProDomainSettings>,
+  @ocaml.doc(
+    "<p>The security groups for the Amazon Virtual Private Cloud that the <code>Domain</code> uses for communication between Domain-level apps and user apps.</p>"
+  )
+  @as("SecurityGroupIds")
+  securityGroupIds: option<domainSecurityGroupIds>,
+}
 @ocaml.doc("<p>Summary of the device.</p>")
 type deviceSummary = {
+  @ocaml.doc("<p>Edge Manager agent version.</p>") @as("AgentVersion")
+  agentVersion: option<edgeVersion>,
   @ocaml.doc("<p>Models on the device.</p>") @as("Models") models: option<edgeModelSummaries>,
   @ocaml.doc("<p>The last heartbeat received from the device.</p>") @as("LatestHeartbeat")
   latestHeartbeat: option<timestamp_>,
@@ -10688,7 +11805,7 @@ type deviceSummary = {
   @as("RegistrationTime")
   registrationTime: option<timestamp_>,
   @ocaml.doc(
-    "<p>The AWS Internet of Things (IoT) object thing name associated with the device..</p>"
+    "<p>The Amazon Web Services Internet of Things (IoT) object thing name associated with the device..</p>"
   )
   @as("IotThingName")
   iotThingName: option<thingName>,
@@ -10728,6 +11845,9 @@ type containerDefinition = {
   @ocaml.doc("<p>Specifies additional configuration for multi-model endpoints.</p>")
   @as("MultiModelConfig")
   multiModelConfig: option<multiModelConfig>,
+  @ocaml.doc("<p>The inference specification name in the model package version.</p>")
+  @as("InferenceSpecificationName")
+  inferenceSpecificationName: option<inferenceSpecificationName>,
   @ocaml.doc("<p>The name or Amazon Resource Name (ARN) of the model package to use to create the
             model.</p>")
   @as("ModelPackageName")
@@ -10746,11 +11866,11 @@ type containerDefinition = {
             <p>The model artifacts must be in an S3 bucket that is in the same region as the
                 model or endpoint you are creating.</p>
         </note>
-        <p>If you provide a value for this parameter, Amazon SageMaker uses AWS Security Token Service to
-            download model artifacts from the S3 path you provide. AWS STS is activated in your
-            IAM user account by default. If you previously deactivated AWS STS for a region, you
-            need to reactivate AWS STS for that region. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html\">Activating and
-                Deactivating AWS STS in an AWS Region</a> in the <i>AWS Identity and Access Management User
+        <p>If you provide a value for this parameter, Amazon SageMaker uses Amazon Web Services Security Token Service to
+            download model artifacts from the S3 path you provide. Amazon Web Services STS is activated in your
+            IAM user account by default. If you previously deactivated Amazon Web Services STS for a region, you
+            need to reactivate Amazon Web Services STS for that region. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html\">Activating and
+                Deactivating Amazon Web Services STS in an Amazon Web Services Region</a> in the <i>Amazon Web Services Identity and Access Management User
                 Guide</i>.</p>
         <important>
             <p>If you use a built-in algorithm to create a model, Amazon SageMaker requires that you provide
@@ -10796,18 +11916,58 @@ type containerDefinition = {
 type collectionConfigurations = array<collectionConfiguration>
 type codeRepositorySummaryList = array<codeRepositorySummary>
 type channelSpecifications = array<channelSpecification>
+type categoricalParameters = array<categoricalParameter>
 type categoricalParameterRanges = array<categoricalParameterRange>
-@ocaml.doc("<p>Currently, the <code>BlueGreenUpdatePolicy</code> API is not supported.</p>")
+@ocaml.doc("<p>The properties of an AutoML candidate job.</p>")
+type candidateProperties = {
+  @ocaml.doc("<p>Information about the candidate metrics for an AutoML job.</p>")
+  @as("CandidateMetrics")
+  candidateMetrics: option<metricDataList>,
+  @ocaml.doc("<p>The Amazon S3 prefix to the artifacts generated for an AutoML candidate.</p>")
+  @as("CandidateArtifactLocations")
+  candidateArtifactLocations: option<candidateArtifactLocations>,
+}
+@ocaml.doc("<p>Metadata about a callback step.</p>")
+type callbackStepMetadata = {
+  @ocaml.doc("<p>A list of the output parameters of the callback step.</p>") @as("OutputParameters")
+  outputParameters: option<outputParameterList>,
+  @ocaml.doc(
+    "<p>The URL of the Amazon Simple Queue Service (Amazon SQS) queue used by the callback step.</p>"
+  )
+  @as("SqsQueueUrl")
+  sqsQueueUrl: option<string256>,
+  @ocaml.doc("<p>The pipeline generated token from the Amazon SQS queue.</p>") @as("CallbackToken")
+  callbackToken: option<callbackToken>,
+}
+@ocaml.doc("<p>Update policy for a blue/green deployment. If this update policy is specified, SageMaker
+            creates a new fleet during the deployment while maintaining the old fleet. SageMaker flips
+            traffic to the new fleet according to the specified traffic routing configuration. Only
+            one update policy should be used in the deployment configuration. If no update policy is
+            specified, SageMaker uses a blue/green deployment strategy with all at once traffic shifting
+            by default.</p>")
 type blueGreenUpdatePolicy = {
-  @ocaml.doc("<p></p>") @as("MaximumExecutionTimeoutInSeconds")
+  @ocaml.doc("<p>Maximum execution timeout for the deployment. Note that the timeout value should be larger
+        than the total waiting time specified in <code>TerminationWaitInSeconds</code> and <code>WaitIntervalInSeconds</code>.</p>")
+  @as("MaximumExecutionTimeoutInSeconds")
   maximumExecutionTimeoutInSeconds: option<maximumExecutionTimeoutInSeconds>,
-  @ocaml.doc("<p></p>") @as("TerminationWaitInSeconds")
+  @ocaml.doc("<p>Additional waiting time in seconds after the completion of an endpoint deployment
+            before terminating the old endpoint fleet. Default is 0.</p>")
+  @as("TerminationWaitInSeconds")
   terminationWaitInSeconds: option<terminationWaitInSeconds>,
-  @ocaml.doc("<p></p>") @as("TrafficRoutingConfiguration")
+  @ocaml.doc("<p>Defines the traffic routing strategy to shift traffic from the old fleet to the new fleet
+            during an endpoint deployment.</p>")
+  @as("TrafficRoutingConfiguration")
   trafficRoutingConfiguration: trafficRoutingConfig,
 }
-@ocaml.doc("<p>Currently, the <code>AutoRollbackConfig</code> API is not supported.</p>")
-type autoRollbackConfig = {@ocaml.doc("<p></p>") @as("Alarms") alarms: option<alarmList>}
+@ocaml.doc(
+  "<p>Automatic rollback configuration for handling endpoint deployment failures and recovery.</p>"
+)
+type autoRollbackConfig = {
+  @ocaml.doc("<p>List of CloudWatch alarms in your account that are configured to monitor metrics on an endpoint.
+            If any alarms are tripped during a deployment, SageMaker rolls back the deployment.</p>")
+  @as("Alarms")
+  alarms: option<alarmList>,
+}
 @ocaml.doc("<p>Security options.</p>")
 type autoMLSecurityConfig = {
   @ocaml.doc("<p>The VPC configuration.</p>") @as("VpcConfig") vpcConfig: option<vpcConfig>,
@@ -10834,13 +11994,18 @@ type autoMLJobSummary = {
   @ocaml.doc("<p>The status of the AutoML job.</p>") @as("AutoMLJobStatus")
   autoMLJobStatus: autoMLJobStatus,
   @ocaml.doc("<p>The ARN of the AutoML job.</p>") @as("AutoMLJobArn") autoMLJobArn: autoMLJobArn,
-  @ocaml.doc("<p>The name of the AutoML you are requesting.</p>") @as("AutoMLJobName")
+  @ocaml.doc("<p>The name of the AutoML job you are requesting.</p>") @as("AutoMLJobName")
   autoMLJobName: autoMLJobName,
 }
 type autoMLContainerDefinitions = array<autoMLContainerDefinition>
 @ocaml.doc("<p>A channel is a named input source that training algorithms can consume. For more
          information, see .</p>")
 type autoMLChannel = {
+  @ocaml.doc("<p>The content type of the data from the input source. You can use
+         <code>text/csv;header=present</code> or <code>x-application/vnd.amazon+parquet</code>.
+         The default value is <code>text/csv;header=present</code>.</p>")
+  @as("ContentType")
+  contentType: option<contentType>,
   @ocaml.doc("<p>The name of the target variable in supervised learning, usually represented by
          'y'.</p>")
   @as("TargetAttributeName")
@@ -10851,6 +12016,16 @@ type autoMLChannel = {
   compressionType: option<compressionType>,
   @ocaml.doc("<p>The data source for an AutoML channel.</p>") @as("DataSource")
   dataSource: autoMLDataSource,
+}
+@ocaml.doc("<p>Specifies configuration for how an endpoint performs asynchronous inference.</p>")
+type asyncInferenceConfig = {
+  @ocaml.doc("<p>Specifies the configuration for asynchronous inference invocation outputs.</p>")
+  @as("OutputConfig")
+  outputConfig: asyncInferenceOutputConfig,
+  @ocaml.doc("<p>Configures the behavior of the client used by Amazon SageMaker to interact 
+            with the model container during asynchronous inference.</p>")
+  @as("ClientConfig")
+  clientConfig: option<asyncInferenceClientConfig>,
 }
 type associationSummaries = array<associationSummary>
 @ocaml.doc("<p>A structure describing the source of an artifact.</p>")
@@ -10905,25 +12080,9 @@ type algorithmSpecification = {
             expressions used to parse algorithm logs. Amazon SageMaker publishes each metric to Amazon CloudWatch.</p>")
   @as("MetricDefinitions")
   metricDefinitions: option<metricDefinitionList>,
-  @ocaml.doc("<p>The input mode that the algorithm supports. For the input modes that Amazon SageMaker
-            algorithms support, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html\">Algorithms</a>. If an algorithm supports the <code>File</code> input mode, Amazon SageMaker
-            downloads the training data from S3 to the provisioned ML storage Volume, and mounts the
-            directory to docker volume for training container. If an algorithm supports the
-                <code>Pipe</code> input mode, Amazon SageMaker streams data directly from S3 to the container. </p>
-        <p> In File mode, make sure you provision ML storage volume with sufficient capacity
-            to accommodate the data download from S3. In addition to the training data, the ML
-            storage volume also stores the output model. The algorithm container use ML storage
-            volume to also store intermediate information, if any. </p>
-        <p> For distributed algorithms using File mode, training data is distributed
-            uniformly, and your training duration is predictable if the input data objects size is
-            approximately same. Amazon SageMaker does not split the files any further for model training. If the
-            object sizes are skewed, training won't be optimal as the data distribution is also
-            skewed where one host in a training cluster is overloaded, thus becoming bottleneck in
-            training. </p>")
-  @as("TrainingInputMode")
-  trainingInputMode: trainingInputMode,
+  @as("TrainingInputMode") trainingInputMode: trainingInputMode,
   @ocaml.doc("<p>The name of the algorithm resource to use for the training job. This must be an
-            algorithm resource that you created or subscribe to on AWS Marketplace. If you specify a value for
+            algorithm resource that you created or subscribe to on Amazon Web Services Marketplace. If you specify a value for
             this parameter, you can't specify a value for <code>TrainingImage</code>.</p>")
   @as("AlgorithmName")
   algorithmName: option<arnOrName>,
@@ -10947,6 +12106,14 @@ type workforces = array<workforce>
      settings in <code>UserSettings</code>, the values specified in <code>CreateUserProfile</code>
      take precedence over those specified in <code>CreateDomain</code>.</p>")
 type userSettings = {
+  @ocaml.doc("<p>A collection of settings that configure the <code>RSessionGateway</code> app.</p>")
+  @as("RSessionAppSettings")
+  rsessionAppSettings: option<rsessionAppSettings>,
+  @ocaml.doc(
+    "<p>A collection of settings that configure user interaction with the <code>RStudioServerPro</code> app.</p>"
+  )
+  @as("RStudioServerProAppSettings")
+  rstudioServerProAppSettings: option<rstudioServerProAppSettings>,
   @ocaml.doc("<p>The TensorBoard app settings.</p>") @as("TensorBoardAppSettings")
   tensorBoardAppSettings: option<tensorBoardAppSettings>,
   @ocaml.doc("<p>The kernel gateway app settings.</p>") @as("KernelGatewayAppSettings")
@@ -10982,7 +12149,7 @@ type trial = {
   @as("LastModifiedBy") lastModifiedBy: option<userContext>,
   @ocaml.doc("<p>Who last modified the trial.</p>") @as("LastModifiedTime")
   lastModifiedTime: option<timestamp_>,
-  @as("CreatedBy") createdBy: option<userContext>,
+  @ocaml.doc("<p>Who created the trial.</p>") @as("CreatedBy") createdBy: option<userContext>,
   @ocaml.doc("<p>When the trial was created.</p>") @as("CreationTime")
   creationTime: option<timestamp_>,
   @as("Source") source: option<trialSource>,
@@ -11126,10 +12293,39 @@ type transformJob = {
   @ocaml.doc("<p>The name of the transform job.</p>") @as("TransformJobName")
   transformJobName: option<transformJobName>,
 }
+@ocaml.doc("<p>The properties of a project as returned by the Search API.</p>")
+type project = {
+  @as("LastModifiedBy") lastModifiedBy: option<userContext>,
+  @ocaml.doc("<p>A timestamp container for when the project was last modified.</p>")
+  @as("LastModifiedTime")
+  lastModifiedTime: option<timestamp_>,
+  @ocaml.doc("<p>An array of key-value pairs. You can use tags to categorize your Amazon Web Services resources in
+            different ways, for example, by purpose, owner, or environment. For more information,
+            see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services
+                Resources</a>.</p>")
+  @as("Tags")
+  tags: option<tagList_>,
+  @ocaml.doc("<p>A timestamp specifying when the project was created.</p>") @as("CreationTime")
+  creationTime: option<timestamp_>,
+  @ocaml.doc("<p>Who created the project.</p>") @as("CreatedBy") createdBy: option<userContext>,
+  @ocaml.doc("<p>The status of the project.</p>") @as("ProjectStatus")
+  projectStatus: option<projectStatus>,
+  @as("ServiceCatalogProvisionedProductDetails")
+  serviceCatalogProvisionedProductDetails: option<serviceCatalogProvisionedProductDetails>,
+  @as("ServiceCatalogProvisioningDetails")
+  serviceCatalogProvisioningDetails: option<serviceCatalogProvisioningDetails>,
+  @ocaml.doc("<p>The description of the project.</p>") @as("ProjectDescription")
+  projectDescription: option<entityDescription>,
+  @ocaml.doc("<p>The ID of the project.</p>") @as("ProjectId") projectId: option<projectId>,
+  @ocaml.doc("<p>The name of the project.</p>") @as("ProjectName")
+  projectName: option<projectEntityName>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the project.</p>") @as("ProjectArn")
+  projectArn: option<projectArn>,
+}
 type productionVariantSummaryList = array<productionVariantSummary>
 @ocaml.doc("<p>Configuration for uploading output from the processing container.</p>")
 type processingOutputConfig = {
-  @ocaml.doc("<p>The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the processing
+  @ocaml.doc("<p>The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that Amazon SageMaker uses to encrypt the processing
             job output. <code>KmsKeyId</code> can be an ID of a KMS key, ARN of a KMS key, alias of
             a KMS key, or alias of a KMS key. The <code>KmsKeyId</code> is applied to all
             outputs.</p>")
@@ -11142,7 +12338,116 @@ type processingOutputConfig = {
   outputs: processingOutputs,
 }
 type processingInputs = array<processingInput>
-type pipelineExecutionStepList = array<pipelineExecutionStep>
+@ocaml.doc("<p>Metadata for a step execution.</p>")
+type pipelineExecutionStepMetadata = {
+  @ocaml.doc("<p>The configurations and outcomes of a Fail step execution.</p>") @as("Fail")
+  fail: option<failStepMetadata>,
+  @ocaml.doc("<p>The configurations and outcomes of an EMR step execution.</p>") @as("EMR")
+  emr: option<emrstepMetadata>,
+  @ocaml.doc("<p>Container for the metadata for a Clarify check step. The configurations 
+         and outcomes of the check step execution. This includes: </p>
+         <ul>
+            <li>
+               <p>The type of the check conducted,</p>
+            </li>
+            <li>
+               <p>The Amazon S3 URIs of baseline constraints and statistics files to be used for the drift check.</p>
+            </li>
+            <li>
+               <p>The Amazon S3 URIs of newly calculated baseline constraints and statistics.</p>
+            </li>
+            <li>
+               <p>The model package group name provided.</p>
+            </li>
+            <li>
+               <p>The Amazon S3 URI of the violation report if violations detected.</p>
+            </li>
+            <li>
+               <p>The Amazon Resource Name (ARN) of check processing job initiated by the step execution.</p>
+            </li>
+            <li>
+               <p>The boolean flags indicating if the drift check is skipped.</p>
+            </li>
+            <li>
+               <p>If step property <code>BaselineUsedForDriftCheck</code> is set the same as 
+               <code>CalculatedBaseline</code>.</p>
+            </li>
+         </ul>")
+  @as("ClarifyCheck")
+  clarifyCheck: option<clarifyCheckStepMetadata>,
+  @ocaml.doc("<p>The configurations and outcomes of the check step execution. This includes: </p>
+         <ul>
+            <li>
+               <p>The type of the check conducted,</p>
+            </li>
+            <li>
+               <p>The Amazon S3 URIs of baseline constraints and statistics files to be used for the drift check.</p>
+            </li>
+            <li>
+               <p>The Amazon S3 URIs of newly calculated baseline constraints and statistics.</p>
+            </li>
+            <li>
+               <p>The model package group name provided.</p>
+            </li>
+            <li>
+               <p>The Amazon S3 URI of the violation report if violations detected.</p>
+            </li>
+            <li>
+               <p>The Amazon Resource Name (ARN) of check processing job initiated by the step execution.</p>
+            </li>
+            <li>
+               <p>The boolean flags indicating if the drift check is skipped.</p>
+            </li>
+            <li>
+               <p>If step property <code>BaselineUsedForDriftCheck</code> is set the same as 
+            <code>CalculatedBaseline</code>.</p>
+            </li>
+         </ul>")
+  @as("QualityCheck")
+  qualityCheck: option<qualityCheckStepMetadata>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the Lambda function that was run by this step execution and a list of
+        output parameters.</p>")
+  @as("Lambda")
+  lambda: option<lambdaStepMetadata>,
+  @ocaml.doc("<p>The URL of the Amazon SQS queue used by this step execution, the pipeline generated token,
+        and a list of output parameters.</p>")
+  @as("Callback")
+  callback: option<callbackStepMetadata>,
+  @ocaml.doc("<p>The outcome of the condition evaluation that was run by this step execution.</p>")
+  @as("Condition")
+  condition: option<conditionStepMetadata>,
+  @ocaml.doc(
+    "<p>The Amazon Resource Name (ARN) of the model package the model was registered to by this step execution.</p>"
+  )
+  @as("RegisterModel")
+  registerModel: option<registerModelStepMetadata>,
+  @ocaml.doc(
+    "<p>The Amazon Resource Name (ARN) of the model that was created by this step execution.</p>"
+  )
+  @as("Model")
+  model: option<modelStepMetadata>,
+  @ocaml.doc(
+    "<p>The Amazon Resource Name (ARN) of the tuning job that was run by this step execution.</p>"
+  )
+  @as("TuningJob")
+  tuningJob: option<tuningJobStepMetaData>,
+  @ocaml.doc(
+    "<p>The Amazon Resource Name (ARN) of the transform job that was run by this step execution.</p>"
+  )
+  @as("TransformJob")
+  transformJob: option<transformJobStepMetadata>,
+  @ocaml.doc(
+    "<p>The Amazon Resource Name (ARN) of the processing job that was run by this step execution.</p>"
+  )
+  @as("ProcessingJob")
+  processingJob: option<processingJobStepMetadata>,
+  @ocaml.doc(
+    "<p>The Amazon Resource Name (ARN) of the training job that was run by this step execution.</p>"
+  )
+  @as("TrainingJob")
+  trainingJob: option<trainingJobStepMetadata>,
+}
+type pendingProductionVariantSummaryList = array<pendingProductionVariantSummary>
 @ocaml.doc("<p>Specifies ranges of integer, continuous, and categorical hyperparameters that a
             hyperparameter tuning job searches. The hyperparameter tuning job launches training jobs
             with hyperparameter values within these ranges to find the combination of values that
@@ -11170,7 +12475,7 @@ type parameterRanges = {
 type nestedFiltersList = array<nestedFilters>
 @ocaml.doc("<p>The output configuration for monitoring jobs.</p>")
 type monitoringOutputConfig = {
-  @ocaml.doc("<p>The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model
+  @ocaml.doc("<p>The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that Amazon SageMaker uses to encrypt the model
          artifacts at rest using Amazon S3 server-side encryption.</p>")
   @as("KmsKeyId")
   kmsKeyId: option<kmsKeyId>,
@@ -11220,6 +12525,39 @@ type labelingJobSummary = {
   @ocaml.doc("<p>The name of the labeling job.</p>") @as("LabelingJobName")
   labelingJobName: labelingJobName,
 }
+@ocaml.doc("<p>Defines how to perform inference generation after a training job is run.</p>")
+type inferenceSpecification = {
+  @ocaml.doc("<p>The supported MIME types for the output data.</p>")
+  @as("SupportedResponseMIMETypes")
+  supportedResponseMIMETypes: responseMIMETypes,
+  @ocaml.doc("<p>The supported MIME types for the input data.</p>") @as("SupportedContentTypes")
+  supportedContentTypes: contentTypes,
+  @ocaml.doc("<p>A list of the instance types that are used to generate inferences in real-time.</p>
+        <p>This parameter is required for unversioned models, and optional for versioned
+            models.</p>")
+  @as("SupportedRealtimeInferenceInstanceTypes")
+  supportedRealtimeInferenceInstanceTypes: option<realtimeInferenceInstanceTypes>,
+  @ocaml.doc("<p>A list of the instance types on which a transformation job can be run or on which an
+            endpoint can be deployed.</p>
+        <p>This parameter is required for unversioned models, and optional for versioned
+            models.</p>")
+  @as("SupportedTransformInstanceTypes")
+  supportedTransformInstanceTypes: option<transformInstanceTypes>,
+  @ocaml.doc(
+    "<p>The Amazon ECR registry path of the Docker image that contains the inference code.</p>"
+  )
+  @as("Containers")
+  containers: modelPackageContainerDefinitionList,
+}
+@ocaml.doc("<p>A list of recommendations made by Amazon SageMaker Inference Recommender.</p>")
+type inferenceRecommendation = {
+  @ocaml.doc("<p>Defines the model configuration.</p>") @as("ModelConfiguration")
+  modelConfiguration: modelConfiguration,
+  @ocaml.doc("<p>Defines the endpoint configuration parameters.</p>") @as("EndpointConfiguration")
+  endpointConfiguration: endpointOutputConfiguration,
+  @ocaml.doc("<p>The metrics used to decide what recommendation to make.</p>") @as("Metrics")
+  metrics: recommendationMetrics,
+}
 @ocaml.doc("<p>Defines a hyperparameter to be used by an algorithm.</p>")
 type hyperParameterSpecification = {
   @ocaml.doc("<p>The default value for this hyperparameter. If a default value is specified, a
@@ -11243,12 +12581,29 @@ type hyperParameterSpecification = {
   @ocaml.doc("<p>The name of this hyperparameter. The name must be unique.</p>") @as("Name")
   name: parameterName,
 }
+@ocaml.doc("<p>Specifies the range of environment parameters</p>")
+type environmentParameterRanges = {
+  @ocaml.doc("<p>Specified a list of parameters for each category.</p>")
+  @as("CategoricalParameterRanges")
+  categoricalParameterRanges: option<categoricalParameters>,
+}
 type deviceSummaries = array<deviceSummary>
-@ocaml.doc("<p>Currently, the <code>DeploymentConfig</code> API is not supported.</p>")
+@ocaml.doc("<p>The deployment configuration for an endpoint, which contains the desired deployment
+            strategy and rollback configurations.</p>")
 type deploymentConfig = {
-  @ocaml.doc("<p></p>") @as("AutoRollbackConfiguration")
+  @ocaml.doc(
+    "<p>Automatic rollback configuration for handling endpoint deployment failures and recovery.</p>"
+  )
+  @as("AutoRollbackConfiguration")
   autoRollbackConfiguration: option<autoRollbackConfig>,
-  @ocaml.doc("<p></p>") @as("BlueGreenUpdatePolicy") blueGreenUpdatePolicy: blueGreenUpdatePolicy,
+  @ocaml.doc("<p>Update policy for a blue/green deployment. If this update policy is specified, SageMaker
+            creates a new fleet during the deployment while maintaining the old fleet. SageMaker flips
+            traffic to the new fleet according to the specified traffic routing configuration. Only
+            one update policy should be used in the deployment configuration. If no update policy is
+            specified, SageMaker uses a blue/green deployment strategy with all at once traffic shifting
+            by default.</p>")
+  @as("BlueGreenUpdatePolicy")
+  blueGreenUpdatePolicy: blueGreenUpdatePolicy,
 }
 @ocaml.doc("<p>Configuration information for the Debugger hook parameters, metric and tensor collections, and
             storage paths. To learn more about
@@ -11334,10 +12689,10 @@ type autoMLJobConfig = {
   completionCriteria: option<autoMLJobCompletionCriteria>,
 }
 type autoMLInputDataConfig = array<autoMLChannel>
-@ocaml.doc("<p>An Autopilot job returns recommendations, or candidates. Each candidate has futher details
-         about the steps involved and the status.</p>")
+@ocaml.doc("<p>Information about a candidate produced by an AutoML training job, including its status,
+         steps, and other properties.</p>")
 type autoMLCandidate = {
-  @ocaml.doc("<p>The AutoML candidate's properties.</p>") @as("CandidateProperties")
+  @ocaml.doc("<p>The properties of an AutoML candidate job.</p>") @as("CandidateProperties")
   candidateProperties: option<candidateProperties>,
   @ocaml.doc("<p>The failure reason.</p>") @as("FailureReason")
   failureReason: option<autoMLFailureReason>,
@@ -11388,6 +12743,37 @@ type appImageConfigDetails = {
   @as("AppImageConfigArn")
   appImageConfigArn: option<appImageConfigArn>,
 }
+@ocaml.doc("<p>A structure of additional Inference Specification. Additional Inference Specification 
+            specifies details about inference jobs that can be run with models based on
+            this model package</p>")
+type additionalInferenceSpecificationDefinition = {
+  @ocaml.doc("<p>The supported MIME types for the output data.</p>")
+  @as("SupportedResponseMIMETypes")
+  supportedResponseMIMETypes: option<responseMIMETypes>,
+  @ocaml.doc("<p>The supported MIME types for the input data.</p>") @as("SupportedContentTypes")
+  supportedContentTypes: option<contentTypes>,
+  @ocaml.doc(
+    "<p>A list of the instance types that are used to generate inferences in real-time.</p>"
+  )
+  @as("SupportedRealtimeInferenceInstanceTypes")
+  supportedRealtimeInferenceInstanceTypes: option<realtimeInferenceInstanceTypes>,
+  @ocaml.doc("<p>A list of the instance types on which a transformation job can be run 
+           or on which an endpoint can be deployed.</p>")
+  @as("SupportedTransformInstanceTypes")
+  supportedTransformInstanceTypes: option<transformInstanceTypes>,
+  @ocaml.doc(
+    "<p>The Amazon ECR registry path of the Docker image that contains the inference code.</p>"
+  )
+  @as("Containers")
+  containers: modelPackageContainerDefinitionList,
+  @ocaml.doc("<p>A description of the additional Inference specification</p>") @as("Description")
+  description: option<entityDescription>,
+  @ocaml.doc("<p>A unique name to identify the additional inference specification. The name must 
+           be unique within the list of your additional inference specifications for a 
+           particular model package.</p>")
+  @as("Name")
+  name: entityName,
+}
 @ocaml.doc("<p>Provides details about a labeling work team.</p>")
 type workteam = {
   @ocaml.doc("<p>Configures SNS notifications of available or expiring work items for work
@@ -11427,7 +12813,7 @@ type workteam = {
             see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/processing-job.html\">Process
                 Data and Evaluate Models</a>.</p>")
 type processingJob = {
-  @ocaml.doc("<p>An array of key-value pairs. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL\">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management
+  @ocaml.doc("<p>An array of key-value pairs. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL\">Using Cost Allocation Tags</a> in the <i>Amazon Web Services Billing and Cost Management
                 User Guide</i>.</p>")
   @as("Tags")
   tags: option<tagList_>,
@@ -11478,6 +12864,48 @@ type processingJob = {
   @ocaml.doc("<p>List of input configurations for the processing job.</p>") @as("ProcessingInputs")
   processingInputs: option<processingInputs>,
 }
+@ocaml.doc("<p>An execution of a step in a pipeline.</p>")
+type pipelineExecutionStep = {
+  @ocaml.doc("<p>Metadata for the step execution.</p>") @as("Metadata")
+  metadata: option<pipelineExecutionStepMetadata>,
+  @ocaml.doc(
+    "<p>The reason why the step failed execution. This is only returned if the step failed its execution.</p>"
+  )
+  @as("FailureReason")
+  failureReason: option<failureReason>,
+  @ocaml.doc(
+    "<p>The current attempt of the execution step. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/pipelines-retry-policy.html\">Retry Policy for SageMaker Pipelines steps</a>.</p>"
+  )
+  @as("AttemptCount")
+  attemptCount: option<integerValue>,
+  @ocaml.doc("<p>If this pipeline execution step was cached, details on the cache hit.</p>")
+  @as("CacheHitResult")
+  cacheHitResult: option<cacheHitResult>,
+  @ocaml.doc("<p>The status of the step execution.</p>") @as("StepStatus")
+  stepStatus: option<stepStatus>,
+  @ocaml.doc("<p>The time that the step stopped executing.</p>") @as("EndTime")
+  endTime: option<timestamp_>,
+  @ocaml.doc("<p>The time that the step started executing.</p>") @as("StartTime")
+  startTime: option<timestamp_>,
+  @ocaml.doc("<p>The description of the step.</p>") @as("StepDescription")
+  stepDescription: option<stepDescription>,
+  @ocaml.doc("<p>The display name of the step.</p>") @as("StepDisplayName")
+  stepDisplayName: option<stepDisplayName>,
+  @ocaml.doc("<p>The name of the step that is executed.</p>") @as("StepName")
+  stepName: option<stepName>,
+}
+@ocaml.doc("<p>The summary of an in-progress deployment when an endpoint is creating or
+            updating with a new endpoint configuration.</p>")
+type pendingDeploymentSummary = {
+  @ocaml.doc("<p>The start time of the deployment.</p>") @as("StartTime")
+  startTime: option<timestamp_>,
+  @ocaml.doc("<p>List of <code>PendingProductionVariantSummary</code> objects.</p>")
+  @as("ProductionVariants")
+  productionVariants: option<pendingProductionVariantSummaryList>,
+  @ocaml.doc("<p>The name of the endpoint configuration used in the deployment. </p>")
+  @as("EndpointConfigName")
+  endpointConfigName: endpointConfigName,
+}
 @ocaml.doc("<p>Defines the monitoring job.</p>")
 type monitoringJobDefinition = {
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume to perform tasks on
@@ -11513,7 +12941,7 @@ type monitoringJobDefinition = {
 }
 @ocaml.doc("<p>Contains data, such as the inputs and targeted instance types that are used in the
             process of validating the model package.</p>
-        <p>The data provided in the validation profile is made available to your buyers on AWS
+        <p>The data provided in the validation profile is made available to your buyers on Amazon Web Services
             Marketplace.</p>")
 type modelPackageValidationProfile = {
   @ocaml.doc("<p>The <code>TransformJobDefinition</code> object that describes the transform job used
@@ -11525,6 +12953,7 @@ type modelPackageValidationProfile = {
 }
 type labelingJobSummaryList = array<labelingJobSummary>
 type inputDataConfig = array<channel>
+type inferenceRecommendations = array<inferenceRecommendation>
 @ocaml.doc("<p>Configures a hyperparameter tuning job.</p>")
 type hyperParameterTuningJobConfig = {
   @ocaml.doc("<p>The tuning job's completion criteria.</p>") @as("TuningJobCompletionCriteria")
@@ -11572,9 +13001,39 @@ type hyperParameterTuningJobConfig = {
   strategy: hyperParameterTuningJobStrategyType,
 }
 type hyperParameterSpecifications = array<hyperParameterSpecification>
+@ocaml.doc("<p>The endpoint configuration for the load test.</p>")
+type endpointInputConfiguration = {
+  @ocaml.doc("<p> The parameter you want to benchmark against.</p>")
+  @as("EnvironmentParameterRanges")
+  environmentParameterRanges: option<environmentParameterRanges>,
+  @ocaml.doc("<p>The inference specification name in the model package version.</p>")
+  @as("InferenceSpecificationName")
+  inferenceSpecificationName: option<inferenceSpecificationName>,
+  @ocaml.doc("<p>The instance types to use for the load test.</p>") @as("InstanceType")
+  instanceType: productionVariantInstanceType,
+}
+@ocaml.doc("<p>Provides summary information about the model package.</p>")
+type batchDescribeModelPackageSummary = {
+  @ocaml.doc("<p>The approval status of the model.</p>") @as("ModelApprovalStatus")
+  modelApprovalStatus: option<modelApprovalStatus>,
+  @ocaml.doc("<p>The status of the mortgage package.</p>") @as("ModelPackageStatus")
+  modelPackageStatus: modelPackageStatus,
+  @as("InferenceSpecification") inferenceSpecification: inferenceSpecification,
+  @ocaml.doc("<p>The creation time of the mortgage package summary.</p>") @as("CreationTime")
+  creationTime: creationTime,
+  @ocaml.doc("<p>The description of the model package.</p>") @as("ModelPackageDescription")
+  modelPackageDescription: option<entityDescription>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the model package.</p>") @as("ModelPackageArn")
+  modelPackageArn: modelPackageArn,
+  @ocaml.doc("<p>The version number of a versioned model.</p>") @as("ModelPackageVersion")
+  modelPackageVersion: option<modelPackageVersion>,
+  @ocaml.doc("<p>The group name for the model package</p>") @as("ModelPackageGroupName")
+  modelPackageGroupName: entityName,
+}
 type autoMLCandidates = array<autoMLCandidate>
 type artifactSummaries = array<artifactSummary>
 type appImageConfigList = array<appImageConfigDetails>
+type additionalInferenceSpecifications = array<additionalInferenceSpecificationDefinition>
 type workteams = array<workteam>
 @ocaml.doc("<p>Defines how the algorithm is used for a training job.</p>")
 type trainingSpecification = {
@@ -11613,10 +13072,9 @@ type trainingSpecification = {
 }
 @ocaml.doc("<p>Defines the input needed to run a training job using the algorithm.</p>")
 type trainingJobDefinition = {
-  @ocaml.doc("<p>Specifies a limit to how long a model training job can run.
-            It also specifies how long a managed Spot training job has to complete.
-            When the job reaches the time limit, Amazon SageMaker ends
-            the training job. Use this API to cap model training costs.</p>
+  @ocaml.doc("<p>Specifies a limit to how long a model training job can run. It also specifies how long
+            a managed Spot training job has to complete. When the job reaches the time limit, Amazon SageMaker
+            ends the training job. Use this API to cap model training costs.</p>
         <p>To stop a job, Amazon SageMaker sends the algorithm the SIGTERM signal, which delays job
             termination for 120 seconds. Algorithms can use this 120-second window to save the model
             artifacts.</p>")
@@ -11636,25 +13094,18 @@ type trainingJobDefinition = {
   inputDataConfig: inputDataConfig,
   @ocaml.doc("<p>The hyperparameters used for the training job.</p>") @as("HyperParameters")
   hyperParameters: option<hyperParameters>,
-  @ocaml.doc("<p>The input mode used by the algorithm for the training job. For the input modes that
-            Amazon SageMaker algorithms support, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html\">Algorithms</a>.</p>
-        <p>If an algorithm supports the <code>File</code> input mode, Amazon SageMaker downloads the training
-            data from S3 to the provisioned ML storage Volume, and mounts the directory to docker
-            volume for training container. If an algorithm supports the <code>Pipe</code> input
-            mode, Amazon SageMaker streams data directly from S3 to the container.</p>")
-  @as("TrainingInputMode")
-  trainingInputMode: trainingInputMode,
+  @as("TrainingInputMode") trainingInputMode: trainingInputMode,
 }
 @ocaml.doc("<p>Contains information about a training job.</p>")
 type trainingJob = {
-  @ocaml.doc("<p>An array of key-value pairs. You can use tags to categorize your AWS resources in
+  @ocaml.doc("<p>An array of key-value pairs. You can use tags to categorize your Amazon Web Services resources in
             different ways, for example, by purpose, owner, or environment. For more information,
-            see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS
+            see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services
                 Resources</a>.</p>")
   @as("Tags")
   tags: option<tagList_>,
   @ocaml.doc("<p>The number of times to retry the job when the job fails due to an
-            <code>InternalServerError</code>.</p>")
+                <code>InternalServerError</code>.</p>")
   @as("RetryStrategy")
   retryStrategy: option<retryStrategy>,
   @ocaml.doc("<p>The environment variables to set in the Docker container.</p>") @as("Environment")
@@ -11716,10 +13167,9 @@ type trainingJob = {
   @ocaml.doc("<p>A timestamp that indicates when the training job was created.</p>")
   @as("CreationTime")
   creationTime: option<timestamp_>,
-  @ocaml.doc("<p>Specifies a limit to how long a model training job can run.
-            It also specifies how long a managed Spot training job has to complete.
-            When the job reaches the time limit, Amazon SageMaker ends
-            the training job. Use this API to cap model training costs.</p>
+  @ocaml.doc("<p>Specifies a limit to how long a model training job can run. It also specifies how long
+            a managed Spot training job has to complete. When the job reaches the time limit, Amazon SageMaker
+            ends the training job. Use this API to cap model training costs.</p>
         <p>To stop a job, Amazon SageMaker sends the algorithm the <code>SIGTERM</code> signal, which delays
             job termination for 120 seconds. Algorithms can use this 120-second window to save the
             model artifacts, so the results of training are not lost. </p>")
@@ -11743,7 +13193,7 @@ type trainingJob = {
   @as("InputDataConfig")
   inputDataConfig: option<inputDataConfig>,
   @ocaml.doc(
-    "<p>The AWS Identity and Access Management (IAM) role configured for the training job.</p>"
+    "<p>The Amazon Web Services Identity and Access Management (IAM) role configured for the training job.</p>"
   )
   @as("RoleArn")
   roleArn: option<roleArn>,
@@ -11901,6 +13351,7 @@ type trainingJob = {
   @ocaml.doc("<p>The name of the training job.</p>") @as("TrainingJobName")
   trainingJobName: option<trainingJobName>,
 }
+type pipelineExecutionStepList = array<pipelineExecutionStep>
 @ocaml.doc("<p>Configures the monitoring schedule and defines the monitoring job.</p>")
 type monitoringScheduleConfig = {
   @ocaml.doc("<p>The type of the monitoring job definition to schedule.</p>") @as("MonitoringType")
@@ -11914,11 +13365,12 @@ type monitoringScheduleConfig = {
   scheduleConfig: option<scheduleConfig>,
 }
 type modelPackageValidationProfiles = array<modelPackageValidationProfile>
+type modelPackageSummaries = Js.Dict.t<batchDescribeModelPackageSummary>
 @ocaml.doc("<p>Defines
             the training jobs launched by a hyperparameter tuning job.</p>")
 type hyperParameterTrainingJobDefinition = {
   @ocaml.doc("<p>The number of times to retry the job when the job fails due to an
-            <code>InternalServerError</code>.</p>")
+                <code>InternalServerError</code>.</p>")
   @as("RetryStrategy")
   retryStrategy: option<retryStrategy>,
   @as("CheckpointConfig") checkpointConfig: option<checkpointConfig>,
@@ -11941,9 +13393,8 @@ type hyperParameterTrainingJobDefinition = {
   @as("EnableNetworkIsolation")
   enableNetworkIsolation: option<boolean_>,
   @ocaml.doc("<p>Specifies a limit to how long a model hyperparameter training job can run. It also
-            specifies how long a managed spot training job has to complete.
-            When the job reaches the time limit, Amazon SageMaker ends the training job. Use this API to cap model
-            training costs.</p>")
+            specifies how long a managed spot training job has to complete. When the job reaches the
+            time limit, Amazon SageMaker ends the training job. Use this API to cap model training costs.</p>")
   @as("StoppingCondition")
   stoppingCondition: stoppingCondition,
   @ocaml.doc("<p>The resources,
@@ -12003,6 +13454,7 @@ type hyperParameterTrainingJobDefinition = {
   @ocaml.doc("<p>The job definition name.</p>") @as("DefinitionName")
   definitionName: option<hyperParameterTrainingJobDefinitionName>,
 }
+type endpointInputConfigurations = array<endpointInputConfiguration>
 @ocaml.doc("<p>Detailed information about the source of a trial component. Either
         <code>ProcessingJob</code> or <code>TrainingJob</code> is returned.</p>")
 type trialComponentSourceDetail = {
@@ -12018,12 +13470,28 @@ type trialComponentSourceDetail = {
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the source.</p>") @as("SourceArn")
   sourceArn: option<trialComponentSourceArn>,
 }
+@ocaml.doc("<p>The input configuration of the recommendation job.</p>")
+type recommendationJobInputConfig = {
+  @ocaml.doc("<p>Specifies the endpoint configuration to use for a job.</p>")
+  @as("EndpointConfigurations")
+  endpointConfigurations: option<endpointInputConfigurations>,
+  @ocaml.doc("<p>Defines the resource limit of the job.</p>") @as("ResourceLimit")
+  resourceLimit: option<recommendationJobResourceLimit>,
+  @ocaml.doc("<p>Specifies the traffic pattern of the job.</p>") @as("TrafficPattern")
+  trafficPattern: option<trafficPattern>,
+  @ocaml.doc("<p>Specifies the maximum duration of the job, in seconds.></p>")
+  @as("JobDurationInSeconds")
+  jobDurationInSeconds: option<jobDurationInSeconds>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of a versioned model package.</p>")
+  @as("ModelPackageVersionArn")
+  modelPackageVersionArn: modelPackageArn,
+}
 @ocaml.doc("<p>A schedule for a model monitoring job. For information about model monitor, see
             <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor.html\">Amazon SageMaker Model
                 Monitor</a>.</p>")
 type monitoringSchedule = {
-  @ocaml.doc("<p>A list of the tags associated with the monitoring schedlue. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS
-            resources</a> in the <i>AWS General Reference Guide</i>.</p>")
+  @ocaml.doc("<p>A list of the tags associated with the monitoring schedlue. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services
+            resources</a> in the <i>Amazon Web Services General Reference Guide</i>.</p>")
   @as("Tags")
   tags: option<tagList_>,
   @as("LastMonitoringExecutionSummary")
@@ -12081,7 +13549,7 @@ type modelPackageValidationSpecification = {
 type hyperParameterTrainingJobDefinitions = array<hyperParameterTrainingJobDefinition>
 @ocaml.doc("<p>Defines a training job and a batch transform job that Amazon SageMaker runs to validate your
             algorithm.</p>
-        <p>The data provided in the validation profile is made available to your buyers on AWS
+        <p>The data provided in the validation profile is made available to your buyers on Amazon Web Services
             Marketplace.</p>")
 type algorithmValidationProfile = {
   @ocaml.doc("<p>The <code>TransformJobDefinition</code> object that describes the transform job that
@@ -12109,6 +13577,9 @@ type trialComponent = {
   )
   @as("Tags")
   tags: option<tagList_>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the lineage group resource.</p>")
+  @as("LineageGroupArn")
+  lineageGroupArn: option<lineageGroupArn>,
   @ocaml.doc("<p>Details of the source of the component.</p>") @as("SourceDetail")
   sourceDetail: option<trialComponentSourceDetail>,
   @as("MetadataProperties") metadataProperties: option<metadataProperties>,
@@ -12123,7 +13594,8 @@ type trialComponent = {
   @as("LastModifiedBy") lastModifiedBy: option<userContext>,
   @ocaml.doc("<p>When the component was last modified.</p>") @as("LastModifiedTime")
   lastModifiedTime: option<timestamp_>,
-  @as("CreatedBy") createdBy: option<userContext>,
+  @ocaml.doc("<p>Who created the trial component.</p>") @as("CreatedBy")
+  createdBy: option<userContext>,
   @ocaml.doc("<p>When the component was created.</p>") @as("CreationTime")
   creationTime: option<timestamp_>,
   @ocaml.doc("<p>When the component ended.</p>") @as("EndTime") endTime: option<timestamp_>,
@@ -12145,10 +13617,33 @@ type trialComponent = {
 type monitoringScheduleList = array<monitoringSchedule>
 @ocaml.doc("<p>A versioned model that can be deployed for SageMaker inference.</p>")
 type modelPackage = {
-  @ocaml.doc("<p>A list of the tags associated with the model package. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS
-            resources</a> in the <i>AWS General Reference Guide</i>.</p>")
+  @ocaml.doc(
+    "<p>Represents the drift check baselines that can be used when the model monitor is set using the model package.</p>"
+  )
+  @as("DriftCheckBaselines")
+  driftCheckBaselines: option<driftCheckBaselines>,
+  @ocaml.doc("<p>The metadata properties for the model package. </p>")
+  @as("CustomerMetadataProperties")
+  customerMetadataProperties: option<customerMetadataMap>,
+  @ocaml.doc("<p>A list of the tags associated with the model package. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services
+            resources</a> in the <i>Amazon Web Services General Reference Guide</i>.</p>")
   @as("Tags")
   tags: option<tagList_>,
+  @ocaml.doc("<p>An array of additional Inference Specification objects.</p>")
+  @as("AdditionalInferenceSpecifications")
+  additionalInferenceSpecifications: option<additionalInferenceSpecifications>,
+  @ocaml.doc("<p>The Amazon Simple Storage Service path where the sample payload are stored. This path must point to 
+           a single gzip compressed tar archive (.tar.gz suffix).</p>")
+  @as("SamplePayloadUrl")
+  samplePayloadUrl: option<string_>,
+  @ocaml.doc("<p>The machine learning task your model package accomplishes. Common machine 
+     learning tasks include object detection and image classification.</p>")
+  @as("Task")
+  task: option<string_>,
+  @ocaml.doc("<p>The machine learning domain of your model package and its components. Common 
+           machine learning domains include computer vision and natural language processing.</p>")
+  @as("Domain")
+  domain: option<string_>,
   @ocaml.doc("<p>A description provided when the model approval is set.</p>")
   @as("ApprovalDescription")
   approvalDescription: option<approvalDescription>,
@@ -12177,9 +13672,9 @@ type modelPackage = {
          </ul>")
   @as("ModelApprovalStatus")
   modelApprovalStatus: option<modelApprovalStatus>,
-  @ocaml.doc("<p>Whether the model package is to be certified to be listed on AWS Marketplace. For
-            information about listing model packages on AWS Marketplace, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-mkt-list.html\">List Your
-                Algorithm or Model Package on AWS Marketplace</a>.</p>")
+  @ocaml.doc("<p>Whether the model package is to be certified to be listed on Amazon Web Services Marketplace. For
+            information about listing model packages on Amazon Web Services Marketplace, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-mkt-list.html\">List Your
+                Algorithm or Model Package on Amazon Web Services Marketplace</a>.</p>")
   @as("CertifyForMarketplace")
   certifyForMarketplace: option<certifyForMarketplace>,
   @as("ModelPackageStatusDetails") modelPackageStatusDetails: option<modelPackageStatusDetails>,
@@ -12230,8 +13725,8 @@ type modelPackage = {
 type algorithmValidationProfiles = array<algorithmValidationProfile>
 @ocaml.doc("<p>A hosted endpoint for real-time inference.</p>")
 type endpoint = {
-  @ocaml.doc("<p>A list of the tags associated with the endpoint. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS
-                resources</a> in the <i>AWS General Reference Guide</i>.</p>")
+  @ocaml.doc("<p>A list of the tags associated with the endpoint. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services
+            resources</a> in the <i>Amazon Web Services General Reference Guide</i>.</p>")
   @as("Tags")
   tags: option<tagList_>,
   @ocaml.doc("<p>A list of monitoring schedules for the endpoint. For information about model
@@ -12271,6 +13766,7 @@ type algorithmValidationSpecification = {
 }
 @ocaml.doc("<p>A single resource returned as part of the <a>Search</a> API response.</p>")
 type searchRecord = {
+  @ocaml.doc("<p>The properties of a project.</p>") @as("Project") project: option<project>,
   @as("FeatureGroup") featureGroup: option<featureGroup>,
   @as("PipelineExecution") pipelineExecution: option<pipelineExecution>,
   @as("Pipeline") pipeline: option<pipeline>,
@@ -12319,19 +13815,21 @@ and searchExpressionList = array<searchExpression>
          </ul>")
 module EnableSagemakerServicecatalogPortfolio = {
   type t
-
+  type request = {.}
+  type response = {.}
   @module("@aws-sdk/client-sagemaker") @new
-  external new: unit => t = "EnableSagemakerServicecatalogPortfolioCommand"
-  let make = () => new()
+  external new: request => t = "EnableSagemakerServicecatalogPortfolioCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DisableSagemakerServicecatalogPortfolio = {
   type t
-
+  type request = {.}
+  type response = {.}
   @module("@aws-sdk/client-sagemaker") @new
-  external new: unit => t = "DisableSagemakerServicecatalogPortfolioCommand"
-  let make = () => new()
+  external new: request => t = "DisableSagemakerServicecatalogPortfolioCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -12352,103 +13850,6 @@ module UpdateTrial = {
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "UpdateTrialCommand"
   let make = (~trialName, ~displayName=?, ()) =>
     new({displayName: displayName, trialName: trialName})
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
-module UpdatePipelineExecution = {
-  type t
-  type request = {
-    @ocaml.doc("<p>The display name of the pipeline execution.</p>")
-    @as("PipelineExecutionDisplayName")
-    pipelineExecutionDisplayName: option<pipelineExecutionName>,
-    @ocaml.doc("<p>The description of the pipeline execution.</p>")
-    @as("PipelineExecutionDescription")
-    pipelineExecutionDescription: option<pipelineExecutionDescription>,
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the pipeline execution.</p>")
-    @as("PipelineExecutionArn")
-    pipelineExecutionArn: pipelineExecutionArn,
-  }
-  type response = {
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the updated pipeline execution.</p>")
-    @as("PipelineExecutionArn")
-    pipelineExecutionArn: option<pipelineExecutionArn>,
-  }
-  @module("@aws-sdk/client-sagemaker") @new
-  external new: request => t = "UpdatePipelineExecutionCommand"
-  let make = (
-    ~pipelineExecutionArn,
-    ~pipelineExecutionDisplayName=?,
-    ~pipelineExecutionDescription=?,
-    (),
-  ) =>
-    new({
-      pipelineExecutionDisplayName: pipelineExecutionDisplayName,
-      pipelineExecutionDescription: pipelineExecutionDescription,
-      pipelineExecutionArn: pipelineExecutionArn,
-    })
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
-module UpdatePipeline = {
-  type t
-  type request = {
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) that the pipeline uses to execute.</p>")
-    @as("RoleArn")
-    roleArn: option<roleArn>,
-    @ocaml.doc("<p>The description of the pipeline.</p>") @as("PipelineDescription")
-    pipelineDescription: option<pipelineDescription>,
-    @ocaml.doc("<p>The JSON pipeline definition.</p>") @as("PipelineDefinition")
-    pipelineDefinition: option<pipelineDefinition>,
-    @ocaml.doc("<p>The display name of the pipeline.</p>") @as("PipelineDisplayName")
-    pipelineDisplayName: option<pipelineName>,
-    @ocaml.doc("<p>The name of the pipeline to update.</p>") @as("PipelineName")
-    pipelineName: pipelineName,
-  }
-  type response = {
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the updated pipeline.</p>") @as("PipelineArn")
-    pipelineArn: option<pipelineArn>,
-  }
-  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "UpdatePipelineCommand"
-  let make = (
-    ~pipelineName,
-    ~roleArn=?,
-    ~pipelineDescription=?,
-    ~pipelineDefinition=?,
-    ~pipelineDisplayName=?,
-    (),
-  ) =>
-    new({
-      roleArn: roleArn,
-      pipelineDescription: pipelineDescription,
-      pipelineDefinition: pipelineDefinition,
-      pipelineDisplayName: pipelineDisplayName,
-      pipelineName: pipelineName,
-    })
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
-module UpdateModelPackage = {
-  type t
-  type request = {
-    @ocaml.doc("<p>A description for the approval status of the model.</p>")
-    @as("ApprovalDescription")
-    approvalDescription: option<approvalDescription>,
-    @ocaml.doc("<p>The approval status of the model.</p>") @as("ModelApprovalStatus")
-    modelApprovalStatus: modelApprovalStatus,
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the model.</p>") @as("ModelPackageArn")
-    modelPackageArn: modelPackageArn,
-  }
-  type response = {
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the model.</p>") @as("ModelPackageArn")
-    modelPackageArn: modelPackageArn,
-  }
-  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "UpdateModelPackageCommand"
-  let make = (~modelApprovalStatus, ~modelPackageArn, ~approvalDescription=?, ()) =>
-    new({
-      approvalDescription: approvalDescription,
-      modelApprovalStatus: modelApprovalStatus,
-      modelPackageArn: modelPackageArn,
-    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -12477,10 +13878,10 @@ module UpdateExperiment = {
 module StopTransformJob = {
   type t
   type request = {
-    @ocaml.doc("<p>The name of the transform job to stop.</p>") @as("TransformJobName")
+    @ocaml.doc("<p>The name of the batch transform job to stop.</p>") @as("TransformJobName")
     transformJobName: transformJobName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "StopTransformJobCommand"
   let make = (~transformJobName, ()) => new({transformJobName: transformJobName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -12492,7 +13893,7 @@ module StopTrainingJob = {
     @ocaml.doc("<p>The name of the training job to stop.</p>") @as("TrainingJobName")
     trainingJobName: trainingJobName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "StopTrainingJobCommand"
   let make = (~trainingJobName, ()) => new({trainingJobName: trainingJobName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -12504,7 +13905,7 @@ module StopProcessingJob = {
     @ocaml.doc("<p>The name of the processing job to stop.</p>") @as("ProcessingJobName")
     processingJobName: processingJobName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "StopProcessingJobCommand"
   let make = (~processingJobName, ()) => new({processingJobName: processingJobName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -12514,7 +13915,7 @@ module StopPipelineExecution = {
   type t
   type request = {
     @ocaml.doc("<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
-         operation. An idempotent operation completes no more than one time.</p>")
+         operation. An idempotent operation completes no more than once.</p>")
     @as("ClientRequestToken")
     clientRequestToken: idempotencyToken,
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the pipeline execution.</p>")
@@ -12539,7 +13940,7 @@ module StopNotebookInstance = {
     @ocaml.doc("<p>The name of the notebook instance to terminate.</p>") @as("NotebookInstanceName")
     notebookInstanceName: notebookInstanceName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sagemaker") @new
   external new: request => t = "StopNotebookInstanceCommand"
   let make = (~notebookInstanceName, ()) => new({notebookInstanceName: notebookInstanceName})
@@ -12552,7 +13953,7 @@ module StopMonitoringSchedule = {
     @ocaml.doc("<p>The name of the schedule to stop.</p>") @as("MonitoringScheduleName")
     monitoringScheduleName: monitoringScheduleName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sagemaker") @new
   external new: request => t = "StopMonitoringScheduleCommand"
   let make = (~monitoringScheduleName, ()) => new({monitoringScheduleName: monitoringScheduleName})
@@ -12565,9 +13966,22 @@ module StopLabelingJob = {
     @ocaml.doc("<p>The name of the labeling job to stop.</p>") @as("LabelingJobName")
     labelingJobName: labelingJobName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "StopLabelingJobCommand"
   let make = (~labelingJobName, ()) => new({labelingJobName: labelingJobName})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module StopInferenceRecommendationsJob = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The name of the job you want to stop.</p>") @as("JobName")
+    jobName: recommendationJobName,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-sagemaker") @new
+  external new: request => t = "StopInferenceRecommendationsJobCommand"
+  let make = (~jobName, ()) => new({jobName: jobName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -12577,7 +13991,7 @@ module StopHyperParameterTuningJob = {
     @ocaml.doc("<p>The name of the tuning job to stop.</p>") @as("HyperParameterTuningJobName")
     hyperParameterTuningJobName: hyperParameterTuningJobName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sagemaker") @new
   external new: request => t = "StopHyperParameterTuningJobCommand"
   let make = (~hyperParameterTuningJobName, ()) =>
@@ -12591,7 +14005,7 @@ module StopEdgePackagingJob = {
     @ocaml.doc("<p>The name of the edge packaging job.</p>") @as("EdgePackagingJobName")
     edgePackagingJobName: entityName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sagemaker") @new
   external new: request => t = "StopEdgePackagingJobCommand"
   let make = (~edgePackagingJobName, ()) => new({edgePackagingJobName: edgePackagingJobName})
@@ -12604,7 +14018,7 @@ module StopCompilationJob = {
     @ocaml.doc("<p>The name of the model compilation job to stop.</p>") @as("CompilationJobName")
     compilationJobName: entityName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "StopCompilationJobCommand"
   let make = (~compilationJobName, ()) => new({compilationJobName: compilationJobName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -12616,7 +14030,7 @@ module StopAutoMLJob = {
     @ocaml.doc("<p>The name of the object you are requesting.</p>") @as("AutoMLJobName")
     autoMLJobName: autoMLJobName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "StopAutoMLJobCommand"
   let make = (~autoMLJobName, ()) => new({autoMLJobName: autoMLJobName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -12628,7 +14042,7 @@ module StartNotebookInstance = {
     @ocaml.doc("<p>The name of the notebook instance to start.</p>") @as("NotebookInstanceName")
     notebookInstanceName: notebookInstanceName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sagemaker") @new
   external new: request => t = "StartNotebookInstanceCommand"
   let make = (~notebookInstanceName, ()) => new({notebookInstanceName: notebookInstanceName})
@@ -12641,11 +14055,40 @@ module StartMonitoringSchedule = {
     @ocaml.doc("<p>The name of the schedule to start.</p>") @as("MonitoringScheduleName")
     monitoringScheduleName: monitoringScheduleName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sagemaker") @new
   external new: request => t = "StartMonitoringScheduleCommand"
   let make = (~monitoringScheduleName, ()) => new({monitoringScheduleName: monitoringScheduleName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module SendPipelineExecutionStepFailure = {
+  type t
+  type request = {
+    @ocaml.doc("<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
+         operation. An idempotent operation completes no more than one time.</p>")
+    @as("ClientRequestToken")
+    clientRequestToken: option<idempotencyToken>,
+    @ocaml.doc("<p>A message describing why the step failed.</p>") @as("FailureReason")
+    failureReason: option<string256>,
+    @ocaml.doc("<p>The pipeline generated token from the Amazon SQS queue.</p>")
+    @as("CallbackToken")
+    callbackToken: callbackToken,
+  }
+  type response = {
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the pipeline execution.</p>")
+    @as("PipelineExecutionArn")
+    pipelineExecutionArn: option<pipelineExecutionArn>,
+  }
+  @module("@aws-sdk/client-sagemaker") @new
+  external new: request => t = "SendPipelineExecutionStepFailureCommand"
+  let make = (~callbackToken, ~clientRequestToken=?, ~failureReason=?, ()) =>
+    new({
+      clientRequestToken: clientRequestToken,
+      failureReason: failureReason,
+      callbackToken: callbackToken,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutModelPackageGroupPolicy = {
@@ -12671,14 +14114,14 @@ module PutModelPackageGroupPolicy = {
 
 module GetSagemakerServicecatalogPortfolioStatus = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("<p>Whether Service Catalog is enabled or disabled in SageMaker.</p>") @as("Status")
     status: option<sagemakerServicecatalogStatus>,
   }
   @module("@aws-sdk/client-sagemaker") @new
-  external new: unit => t = "GetSagemakerServicecatalogPortfolioStatusCommand"
-  let make = () => new()
+  external new: request => t = "GetSagemakerServicecatalogPortfolioStatusCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -12696,6 +14139,28 @@ module GetModelPackageGroupPolicy = {
   @module("@aws-sdk/client-sagemaker") @new
   external new: request => t = "GetModelPackageGroupPolicyCommand"
   let make = (~modelPackageGroupName, ()) => new({modelPackageGroupName: modelPackageGroupName})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module GetLineageGroupPolicy = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The name or Amazon Resource Name (ARN) of the lineage group.</p>")
+    @as("LineageGroupName")
+    lineageGroupName: lineageGroupNameOrArn,
+  }
+  type response = {
+    @ocaml.doc(
+      "<p>The resource policy that gives access to the lineage group in another account.</p>"
+    )
+    @as("ResourcePolicy")
+    resourcePolicy: option<resourcePolicyString>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the lineage group.</p>") @as("LineageGroupArn")
+    lineageGroupArn: option<lineageGroupArn>,
+  }
+  @module("@aws-sdk/client-sagemaker") @new
+  external new: request => t = "GetLineageGroupPolicyCommand"
+  let make = (~lineageGroupName, ()) => new({lineageGroupName: lineageGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -12718,6 +14183,42 @@ module DisassociateTrialComponent = {
   external new: request => t = "DisassociateTrialComponentCommand"
   let make = (~trialName, ~trialComponentName, ()) =>
     new({trialName: trialName, trialComponentName: trialComponentName})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module DescribeStudioLifecycleConfig = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The name of the Studio Lifecycle Configuration to describe.</p>")
+    @as("StudioLifecycleConfigName")
+    studioLifecycleConfigName: studioLifecycleConfigName,
+  }
+  type response = {
+    @ocaml.doc("<p>The App type that the Lifecycle Configuration is attached to.</p>")
+    @as("StudioLifecycleConfigAppType")
+    studioLifecycleConfigAppType: option<studioLifecycleConfigAppType>,
+    @ocaml.doc("<p>The content of your Studio Lifecycle Configuration script.</p>")
+    @as("StudioLifecycleConfigContent")
+    studioLifecycleConfigContent: option<studioLifecycleConfigContent>,
+    @ocaml.doc(
+      "<p>This value is equivalent to CreationTime because Studio Lifecycle Configurations are immutable.</p>"
+    )
+    @as("LastModifiedTime")
+    lastModifiedTime: option<timestamp_>,
+    @ocaml.doc("<p>The creation time of the Studio Lifecycle Configuration.</p>")
+    @as("CreationTime")
+    creationTime: option<timestamp_>,
+    @ocaml.doc("<p>The name of the Studio Lifecycle Configuration that is described.</p>")
+    @as("StudioLifecycleConfigName")
+    studioLifecycleConfigName: option<studioLifecycleConfigName>,
+    @ocaml.doc("<p>The ARN of the Lifecycle Configuration to describe.</p>")
+    @as("StudioLifecycleConfigArn")
+    studioLifecycleConfigArn: option<studioLifecycleConfigArn>,
+  }
+  @module("@aws-sdk/client-sagemaker") @new
+  external new: request => t = "DescribeStudioLifecycleConfigCommand"
+  let make = (~studioLifecycleConfigName, ()) =>
+    new({studioLifecycleConfigName: studioLifecycleConfigName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -12839,7 +14340,7 @@ module DeleteWorkforce = {
     @ocaml.doc("<p>The name of the workforce.</p>") @as("WorkforceName")
     workforceName: workforceName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DeleteWorkforceCommand"
   let make = (~workforceName, ()) => new({workforceName: workforceName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -12852,7 +14353,7 @@ module DeleteUserProfile = {
     userProfileName: userProfileName,
     @ocaml.doc("<p>The domain ID.</p>") @as("DomainId") domainId: domainId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DeleteUserProfileCommand"
   let make = (~userProfileName, ~domainId, ()) =>
     new({userProfileName: userProfileName, domainId: domainId})
@@ -12892,13 +14393,28 @@ module DeleteTrial = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module DeleteStudioLifecycleConfig = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The name of the Studio Lifecycle Configuration to delete.</p>")
+    @as("StudioLifecycleConfigName")
+    studioLifecycleConfigName: studioLifecycleConfigName,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-sagemaker") @new
+  external new: request => t = "DeleteStudioLifecycleConfigCommand"
+  let make = (~studioLifecycleConfigName, ()) =>
+    new({studioLifecycleConfigName: studioLifecycleConfigName})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
 module DeleteProject = {
   type t
   type request = {
     @ocaml.doc("<p>The name of the project to delete.</p>") @as("ProjectName")
     projectName: projectEntityName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DeleteProjectCommand"
   let make = (~projectName, ()) => new({projectName: projectName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -12932,7 +14448,7 @@ module DeleteNotebookInstanceLifecycleConfig = {
     @as("NotebookInstanceLifecycleConfigName")
     notebookInstanceLifecycleConfigName: notebookInstanceLifecycleConfigName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sagemaker") @new
   external new: request => t = "DeleteNotebookInstanceLifecycleConfigCommand"
   let make = (~notebookInstanceLifecycleConfigName, ()) =>
@@ -12947,7 +14463,7 @@ module DeleteNotebookInstance = {
     @as("NotebookInstanceName")
     notebookInstanceName: notebookInstanceName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sagemaker") @new
   external new: request => t = "DeleteNotebookInstanceCommand"
   let make = (~notebookInstanceName, ()) => new({notebookInstanceName: notebookInstanceName})
@@ -12961,7 +14477,7 @@ module DeleteMonitoringSchedule = {
     @as("MonitoringScheduleName")
     monitoringScheduleName: monitoringScheduleName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sagemaker") @new
   external new: request => t = "DeleteMonitoringScheduleCommand"
   let make = (~monitoringScheduleName, ()) => new({monitoringScheduleName: monitoringScheduleName})
@@ -12975,7 +14491,7 @@ module DeleteModelQualityJobDefinition = {
     @as("JobDefinitionName")
     jobDefinitionName: monitoringJobDefinitionName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sagemaker") @new
   external new: request => t = "DeleteModelQualityJobDefinitionCommand"
   let make = (~jobDefinitionName, ()) => new({jobDefinitionName: jobDefinitionName})
@@ -12989,7 +14505,7 @@ module DeleteModelPackageGroupPolicy = {
     @as("ModelPackageGroupName")
     modelPackageGroupName: entityName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sagemaker") @new
   external new: request => t = "DeleteModelPackageGroupPolicyCommand"
   let make = (~modelPackageGroupName, ()) => new({modelPackageGroupName: modelPackageGroupName})
@@ -13002,7 +14518,7 @@ module DeleteModelPackageGroup = {
     @ocaml.doc("<p>The name of the model group to delete.</p>") @as("ModelPackageGroupName")
     modelPackageGroupName: arnOrName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sagemaker") @new
   external new: request => t = "DeleteModelPackageGroupCommand"
   let make = (~modelPackageGroupName, ()) => new({modelPackageGroupName: modelPackageGroupName})
@@ -13012,12 +14528,13 @@ module DeleteModelPackageGroup = {
 module DeleteModelPackage = {
   type t
   type request = {
-    @ocaml.doc("<p>The name of the model package. The name must have 1 to 63 characters. Valid characters
-            are a-z, A-Z, 0-9, and - (hyphen).</p>")
+    @ocaml.doc("<p>The name or Amazon Resource Name (ARN) of the model package to delete.</p>
+        <p>When you specify a name, the name must have 1 to 63 characters. Valid
+          characters are a-z, A-Z, 0-9, and - (hyphen).</p>")
     @as("ModelPackageName")
     modelPackageName: versionedArnOrName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DeleteModelPackageCommand"
   let make = (~modelPackageName, ()) => new({modelPackageName: modelPackageName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -13030,7 +14547,7 @@ module DeleteModelExplainabilityJobDefinition = {
     @as("JobDefinitionName")
     jobDefinitionName: monitoringJobDefinitionName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sagemaker") @new
   external new: request => t = "DeleteModelExplainabilityJobDefinitionCommand"
   let make = (~jobDefinitionName, ()) => new({jobDefinitionName: jobDefinitionName})
@@ -13044,7 +14561,7 @@ module DeleteModelBiasJobDefinition = {
     @as("JobDefinitionName")
     jobDefinitionName: monitoringJobDefinitionName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sagemaker") @new
   external new: request => t = "DeleteModelBiasJobDefinitionCommand"
   let make = (~jobDefinitionName, ()) => new({jobDefinitionName: jobDefinitionName})
@@ -13056,7 +14573,7 @@ module DeleteModel = {
   type request = {
     @ocaml.doc("<p>The name of the model to delete.</p>") @as("ModelName") modelName: modelName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DeleteModelCommand"
   let make = (~modelName, ()) => new({modelName: modelName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -13068,7 +14585,7 @@ module DeleteImageVersion = {
     @ocaml.doc("<p>The version to delete.</p>") @as("Version") version: imageVersionNumber,
     @ocaml.doc("<p>The name of the image.</p>") @as("ImageName") imageName: imageName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DeleteImageVersionCommand"
   let make = (~version, ~imageName, ()) => new({version: version, imageName: imageName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -13079,7 +14596,7 @@ module DeleteImage = {
   type request = {
     @ocaml.doc("<p>The name of the image to delete.</p>") @as("ImageName") imageName: imageName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DeleteImageCommand"
   let make = (~imageName, ()) => new({imageName: imageName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -13094,7 +14611,7 @@ module DeleteHumanTaskUi = {
     @as("HumanTaskUiName")
     humanTaskUiName: humanTaskUiName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DeleteHumanTaskUiCommand"
   let make = (~humanTaskUiName, ()) => new({humanTaskUiName: humanTaskUiName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -13106,7 +14623,7 @@ module DeleteFlowDefinition = {
     @ocaml.doc("<p>The name of the flow definition you are deleting.</p>") @as("FlowDefinitionName")
     flowDefinitionName: flowDefinitionName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sagemaker") @new
   external new: request => t = "DeleteFlowDefinitionCommand"
   let make = (~flowDefinitionName, ()) => new({flowDefinitionName: flowDefinitionName})
@@ -13117,11 +14634,11 @@ module DeleteFeatureGroup = {
   type t
   type request = {
     @ocaml.doc("<p>The name of the <code>FeatureGroup</code> you want to delete. The name must be unique
-         within an AWS Region in an AWS account. </p>")
+         within an Amazon Web Services Region in an Amazon Web Services account. </p>")
     @as("FeatureGroupName")
     featureGroupName: featureGroupName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DeleteFeatureGroupCommand"
   let make = (~featureGroupName, ()) => new({featureGroupName: featureGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -13150,7 +14667,7 @@ module DeleteEndpointConfig = {
     @as("EndpointConfigName")
     endpointConfigName: endpointConfigName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sagemaker") @new
   external new: request => t = "DeleteEndpointConfigCommand"
   let make = (~endpointConfigName, ()) => new({endpointConfigName: endpointConfigName})
@@ -13163,7 +14680,7 @@ module DeleteEndpoint = {
     @ocaml.doc("<p>The name of the endpoint that you want to delete.</p>") @as("EndpointName")
     endpointName: endpointName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DeleteEndpointCommand"
   let make = (~endpointName, ()) => new({endpointName: endpointName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -13175,7 +14692,7 @@ module DeleteDeviceFleet = {
     @ocaml.doc("<p>The name of the fleet to delete.</p>") @as("DeviceFleetName")
     deviceFleetName: entityName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DeleteDeviceFleetCommand"
   let make = (~deviceFleetName, ()) => new({deviceFleetName: deviceFleetName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -13188,7 +14705,7 @@ module DeleteDataQualityJobDefinition = {
     @as("JobDefinitionName")
     jobDefinitionName: monitoringJobDefinitionName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sagemaker") @new
   external new: request => t = "DeleteDataQualityJobDefinitionCommand"
   let make = (~jobDefinitionName, ()) => new({jobDefinitionName: jobDefinitionName})
@@ -13216,7 +14733,7 @@ module DeleteCodeRepository = {
     @ocaml.doc("<p>The name of the Git repository to delete.</p>") @as("CodeRepositoryName")
     codeRepositoryName: entityName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sagemaker") @new
   external new: request => t = "DeleteCodeRepositoryCommand"
   let make = (~codeRepositoryName, ()) => new({codeRepositoryName: codeRepositoryName})
@@ -13248,7 +14765,7 @@ module DeleteAppImageConfig = {
     @ocaml.doc("<p>The name of the AppImageConfig to delete.</p>") @as("AppImageConfigName")
     appImageConfigName: appImageConfigName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sagemaker") @new
   external new: request => t = "DeleteAppImageConfigCommand"
   let make = (~appImageConfigName, ()) => new({appImageConfigName: appImageConfigName})
@@ -13264,7 +14781,7 @@ module DeleteApp = {
     userProfileName: userProfileName,
     @ocaml.doc("<p>The domain ID.</p>") @as("DomainId") domainId: domainId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DeleteAppCommand"
   let make = (~appName, ~appType, ~userProfileName, ~domainId, ()) =>
     new({appName: appName, appType: appType, userProfileName: userProfileName, domainId: domainId})
@@ -13277,7 +14794,7 @@ module DeleteAlgorithm = {
     @ocaml.doc("<p>The name of the algorithm to delete.</p>") @as("AlgorithmName")
     algorithmName: entityName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DeleteAlgorithmCommand"
   let make = (~algorithmName, ()) => new({algorithmName: algorithmName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -13365,7 +14882,7 @@ module CreateImageVersion = {
     )
     @as("ImageName")
     imageName: imageName,
-    @ocaml.doc("<p>A unique ID. If not specified, the AWS CLI and AWS SDKs, such as the SDK for Python
+    @ocaml.doc("<p>A unique ID. If not specified, the Amazon Web Services CLI and Amazon Web Services SDKs, such as the SDK for Python
         (Boto3), add a unique value to the call.</p>")
     @as("ClientToken")
     clientToken: clientToken,
@@ -13451,6 +14968,95 @@ module AddAssociation = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module UpdatePipelineExecution = {
+  type t
+  type request = {
+    @ocaml.doc("<p>This configuration, if specified, overrides the parallelism configuration 
+            of the parent pipeline for this specific run.</p>")
+    @as("ParallelismConfiguration")
+    parallelismConfiguration: option<parallelismConfiguration>,
+    @ocaml.doc("<p>The display name of the pipeline execution.</p>")
+    @as("PipelineExecutionDisplayName")
+    pipelineExecutionDisplayName: option<pipelineExecutionName>,
+    @ocaml.doc("<p>The description of the pipeline execution.</p>")
+    @as("PipelineExecutionDescription")
+    pipelineExecutionDescription: option<pipelineExecutionDescription>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the pipeline execution.</p>")
+    @as("PipelineExecutionArn")
+    pipelineExecutionArn: pipelineExecutionArn,
+  }
+  type response = {
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the updated pipeline execution.</p>")
+    @as("PipelineExecutionArn")
+    pipelineExecutionArn: option<pipelineExecutionArn>,
+  }
+  @module("@aws-sdk/client-sagemaker") @new
+  external new: request => t = "UpdatePipelineExecutionCommand"
+  let make = (
+    ~pipelineExecutionArn,
+    ~parallelismConfiguration=?,
+    ~pipelineExecutionDisplayName=?,
+    ~pipelineExecutionDescription=?,
+    (),
+  ) =>
+    new({
+      parallelismConfiguration: parallelismConfiguration,
+      pipelineExecutionDisplayName: pipelineExecutionDisplayName,
+      pipelineExecutionDescription: pipelineExecutionDescription,
+      pipelineExecutionArn: pipelineExecutionArn,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module UpdatePipeline = {
+  type t
+  type request = {
+    @ocaml.doc("<p>If specified, it applies to all executions of this pipeline by default.</p>")
+    @as("ParallelismConfiguration")
+    parallelismConfiguration: option<parallelismConfiguration>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) that the pipeline uses to execute.</p>")
+    @as("RoleArn")
+    roleArn: option<roleArn>,
+    @ocaml.doc("<p>The description of the pipeline.</p>") @as("PipelineDescription")
+    pipelineDescription: option<pipelineDescription>,
+    @ocaml.doc("<p>The location of the pipeline definition stored in Amazon S3. If specified, 
+            SageMaker will retrieve the pipeline definition from this location.</p>")
+    @as("PipelineDefinitionS3Location")
+    pipelineDefinitionS3Location: option<pipelineDefinitionS3Location>,
+    @ocaml.doc("<p>The JSON pipeline definition.</p>") @as("PipelineDefinition")
+    pipelineDefinition: option<pipelineDefinition>,
+    @ocaml.doc("<p>The display name of the pipeline.</p>") @as("PipelineDisplayName")
+    pipelineDisplayName: option<pipelineName>,
+    @ocaml.doc("<p>The name of the pipeline to update.</p>") @as("PipelineName")
+    pipelineName: pipelineName,
+  }
+  type response = {
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the updated pipeline.</p>") @as("PipelineArn")
+    pipelineArn: option<pipelineArn>,
+  }
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "UpdatePipelineCommand"
+  let make = (
+    ~pipelineName,
+    ~parallelismConfiguration=?,
+    ~roleArn=?,
+    ~pipelineDescription=?,
+    ~pipelineDefinitionS3Location=?,
+    ~pipelineDefinition=?,
+    ~pipelineDisplayName=?,
+    (),
+  ) =>
+    new({
+      parallelismConfiguration: parallelismConfiguration,
+      roleArn: roleArn,
+      pipelineDescription: pipelineDescription,
+      pipelineDefinitionS3Location: pipelineDefinitionS3Location,
+      pipelineDefinition: pipelineDefinition,
+      pipelineDisplayName: pipelineDisplayName,
+      pipelineName: pipelineName,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module UpdateNotebookInstance = {
   type t
   type request = {
@@ -13488,7 +15094,7 @@ module UpdateNotebookInstance = {
     acceleratorTypes: option<notebookInstanceAcceleratorTypes>,
     @ocaml.doc("<p>An array of up to three Git repositories to associate with the notebook instance.
             These can be either the names of Git repositories stored as resources in your account,
-            or the URL of Git repositories in <a href=\"https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html\">AWS CodeCommit</a> or in any
+            or the URL of Git repositories in <a href=\"https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html\">Amazon Web Services CodeCommit</a> or in any
             other Git repository. These repositories are cloned at the same level as the default
             repository of your notebook instance. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html\">Associating Git
                 Repositories with Amazon SageMaker Notebook Instances</a>.</p>")
@@ -13496,7 +15102,7 @@ module UpdateNotebookInstance = {
     additionalCodeRepositories: option<additionalCodeRepositoryNamesOrUrls>,
     @ocaml.doc("<p>The Git repository to associate with the notebook instance as its default code
             repository. This can be either the name of a Git repository stored as a resource in your
-            account, or the URL of a Git repository in <a href=\"https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html\">AWS CodeCommit</a> or in any
+            account, or the URL of a Git repository in <a href=\"https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html\">Amazon Web Services CodeCommit</a> or in any
             other Git repository. When you open a notebook instance, it opens in the directory that
             contains this repository. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html\">Associating Git Repositories with Amazon SageMaker
                 Notebook Instances</a>.</p>")
@@ -13534,7 +15140,7 @@ module UpdateNotebookInstance = {
     @ocaml.doc("<p>The name of the notebook instance to update.</p>") @as("NotebookInstanceName")
     notebookInstanceName: notebookInstanceName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sagemaker") @new
   external new: request => t = "UpdateNotebookInstanceCommand"
   let make = (
@@ -13608,6 +15214,13 @@ module UpdateImage = {
 module UpdateDeviceFleet = {
   type t
   type request = {
+    @ocaml.doc("<p>Whether to create an Amazon Web Services IoT Role Alias during device fleet creation. 
+      The name of the role alias generated will match this pattern: 
+      \"SageMakerEdge-{DeviceFleetName}\".</p>
+         <p>For example, if your device fleet is called \"demo-fleet\", the name of 
+      the role alias will be \"SageMakerEdge-demo-fleet\".</p>")
+    @as("EnableIotRoleAlias")
+    enableIotRoleAlias: option<enableIotRoleAlias>,
     @ocaml.doc("<p>Output configuration  for storing sample data collected by the fleet.</p>")
     @as("OutputConfig")
     outputConfig: edgeOutputConfig,
@@ -13617,10 +15230,18 @@ module UpdateDeviceFleet = {
     roleArn: option<roleArn>,
     @ocaml.doc("<p>The name of the fleet.</p>") @as("DeviceFleetName") deviceFleetName: entityName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "UpdateDeviceFleetCommand"
-  let make = (~outputConfig, ~deviceFleetName, ~description=?, ~roleArn=?, ()) =>
+  let make = (
+    ~outputConfig,
+    ~deviceFleetName,
+    ~enableIotRoleAlias=?,
+    ~description=?,
+    ~roleArn=?,
+    (),
+  ) =>
     new({
+      enableIotRoleAlias: enableIotRoleAlias,
       outputConfig: outputConfig,
       description: description,
       roleArn: roleArn,
@@ -13661,7 +15282,7 @@ module UpdateCodeRepository = {
   type t
   type request = {
     @ocaml.doc("<p>The configuration of the git repository, including the URL and the Amazon Resource
-            Name (ARN) of the AWS Secrets Manager secret that contains the credentials used to
+            Name (ARN) of the Amazon Web Services Secrets Manager secret that contains the credentials used to
             access the repository. The secret must have a staging label of <code>AWSCURRENT</code>
             and must be in the following format:</p>
         <p>
@@ -13743,6 +15364,37 @@ module UpdateAction = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module RetryPipelineExecution = {
+  type t
+  type request = {
+    @ocaml.doc("<p>This configuration, if specified, overrides the parallelism configuration 
+            of the parent pipeline.</p>")
+    @as("ParallelismConfiguration")
+    parallelismConfiguration: option<parallelismConfiguration>,
+    @ocaml.doc("<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
+         operation. An idempotent operation completes no more than once.</p>")
+    @as("ClientRequestToken")
+    clientRequestToken: idempotencyToken,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the pipeline execution.</p>")
+    @as("PipelineExecutionArn")
+    pipelineExecutionArn: pipelineExecutionArn,
+  }
+  type response = {
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the pipeline execution.</p>")
+    @as("PipelineExecutionArn")
+    pipelineExecutionArn: option<pipelineExecutionArn>,
+  }
+  @module("@aws-sdk/client-sagemaker") @new
+  external new: request => t = "RetryPipelineExecutionCommand"
+  let make = (~clientRequestToken, ~pipelineExecutionArn, ~parallelismConfiguration=?, ()) =>
+    new({
+      parallelismConfiguration: parallelismConfiguration,
+      clientRequestToken: clientRequestToken,
+      pipelineExecutionArn: pipelineExecutionArn,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module DescribeTrial = {
   type t
   type request = {
@@ -13805,6 +15457,9 @@ module DescribePipelineExecution = {
     pipelineExecutionArn: pipelineExecutionArn,
   }
   type response = {
+    @ocaml.doc("<p>The parallelism configuration applied to the pipeline.</p>")
+    @as("ParallelismConfiguration")
+    parallelismConfiguration: option<parallelismConfiguration>,
     @as("LastModifiedBy") lastModifiedBy: option<userContext>,
     @as("CreatedBy") createdBy: option<userContext>,
     @ocaml.doc("<p>The time when the pipeline execution was modified last.</p>")
@@ -13812,6 +15467,9 @@ module DescribePipelineExecution = {
     lastModifiedTime: option<timestamp_>,
     @ocaml.doc("<p>The time when the pipeline execution was created.</p>") @as("CreationTime")
     creationTime: option<timestamp_>,
+    @ocaml.doc("<p>If the execution failed, a message describing why.</p>") @as("FailureReason")
+    failureReason: option<pipelineExecutionFailureReason>,
+    @as("PipelineExperimentConfig") pipelineExperimentConfig: option<pipelineExperimentConfig>,
     @ocaml.doc("<p>The description of the pipeline execution.</p>")
     @as("PipelineExecutionDescription")
     pipelineExecutionDescription: option<pipelineExecutionDescription>,
@@ -13839,6 +15497,9 @@ module DescribePipeline = {
     pipelineName: pipelineName,
   }
   type response = {
+    @ocaml.doc("<p>Lists the parallelism configuration applied to the pipeline.</p>")
+    @as("ParallelismConfiguration")
+    parallelismConfiguration: option<parallelismConfiguration>,
     @as("LastModifiedBy") lastModifiedBy: option<userContext>,
     @as("CreatedBy") createdBy: option<userContext>,
     @ocaml.doc("<p>The time when the pipeline was last run.</p>") @as("LastRunTime")
@@ -13876,6 +15537,9 @@ module DescribeNotebookInstance = {
     notebookInstanceName: notebookInstanceName,
   }
   type response = {
+    @ocaml.doc("<p>The platform identifier of the notebook instance runtime environment.</p>")
+    @as("PlatformIdentifier")
+    platformIdentifier: option<platformIdentifier>,
     @ocaml.doc("<p>Whether root access is enabled or disabled for users of the notebook instance.</p>
         <note>
             <p>Lifecycle configurations need root access to be able to set up a notebook
@@ -13887,7 +15551,7 @@ module DescribeNotebookInstance = {
     rootAccess: option<rootAccess>,
     @ocaml.doc("<p>An array of up to three Git repositories associated with the notebook instance. These
             can be either the names of Git repositories stored as resources in your account, or the
-            URL of Git repositories in <a href=\"https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html\">AWS CodeCommit</a> or in any
+            URL of Git repositories in <a href=\"https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html\">Amazon Web Services CodeCommit</a> or in any
             other Git repository. These repositories are cloned at the same level as the default
             repository of your notebook instance. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html\">Associating Git
                 Repositories with Amazon SageMaker Notebook Instances</a>.</p>")
@@ -13895,7 +15559,7 @@ module DescribeNotebookInstance = {
     additionalCodeRepositories: option<additionalCodeRepositoryNamesOrUrls>,
     @ocaml.doc("<p>The Git repository associated with the notebook instance as its default code
             repository. This can be either the name of a Git repository stored as a resource in your
-            account, or the URL of a Git repository in <a href=\"https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html\">AWS CodeCommit</a> or in any
+            account, or the URL of a Git repository in <a href=\"https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html\">Amazon Web Services CodeCommit</a> or in any
             other Git repository. When you open a notebook instance, it opens in the directory that
             contains this repository. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html\">Associating Git Repositories with Amazon SageMaker
                 Notebook Instances</a>.</p>")
@@ -13936,7 +15600,7 @@ module DescribeNotebookInstance = {
         </p>")
     @as("NetworkInterfaceId")
     networkInterfaceId: option<networkInterfaceId>,
-    @ocaml.doc("<p>The AWS KMS key ID Amazon SageMaker uses to encrypt data when storing it on the ML storage
+    @ocaml.doc("<p>The Amazon Web Services KMS key ID Amazon SageMaker uses to encrypt data when storing it on the ML storage
             volume attached to the instance. </p>")
     @as("KmsKeyId")
     kmsKeyId: option<kmsKeyId>,
@@ -13995,6 +15659,34 @@ module DescribeModelPackageGroup = {
   @module("@aws-sdk/client-sagemaker") @new
   external new: request => t = "DescribeModelPackageGroupCommand"
   let make = (~modelPackageGroupName, ()) => new({modelPackageGroupName: modelPackageGroupName})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module DescribeLineageGroup = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The name of the lineage group.</p>") @as("LineageGroupName")
+    lineageGroupName: experimentEntityName,
+  }
+  type response = {
+    @as("LastModifiedBy") lastModifiedBy: option<userContext>,
+    @ocaml.doc("<p>The last modified time of the lineage group.</p>") @as("LastModifiedTime")
+    lastModifiedTime: option<timestamp_>,
+    @as("CreatedBy") createdBy: option<userContext>,
+    @ocaml.doc("<p>The creation time of lineage group.</p>") @as("CreationTime")
+    creationTime: option<timestamp_>,
+    @ocaml.doc("<p>The description of the lineage group.</p>") @as("Description")
+    description: option<experimentDescription>,
+    @ocaml.doc("<p>The display name of the lineage group.</p>") @as("DisplayName")
+    displayName: option<experimentEntityName>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the lineage group.</p>") @as("LineageGroupArn")
+    lineageGroupArn: option<lineageGroupArn>,
+    @ocaml.doc("<p>The name of the lineage group.</p>") @as("LineageGroupName")
+    lineageGroupName: option<experimentEntityName>,
+  }
+  @module("@aws-sdk/client-sagemaker") @new
+  external new: request => t = "DescribeLineageGroupCommand"
+  let make = (~lineageGroupName, ()) => new({lineageGroupName: lineageGroupName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -14071,6 +15763,9 @@ module DescribeEdgePackagingJob = {
     edgePackagingJobName: entityName,
   }
   type response = {
+    @ocaml.doc("<p>The output of a SageMaker Edge Manager deployable resource.</p>")
+    @as("PresetDeploymentOutput")
+    presetDeploymentOutput: option<edgePresetDeploymentOutput>,
     @ocaml.doc("<p>The signature document of files in the model artifact.</p>")
     @as("ModelSignature")
     modelSignature: option<string_>,
@@ -14086,7 +15781,9 @@ module DescribeEdgePackagingJob = {
     edgePackagingJobStatusMessage: option<string_>,
     @ocaml.doc("<p>The current status of the packaging job.</p>") @as("EdgePackagingJobStatus")
     edgePackagingJobStatus: edgePackagingJobStatus,
-    @ocaml.doc("<p>The CMK to use when encrypting the EBS volume the job run on.</p>")
+    @ocaml.doc(
+      "<p>The Amazon Web Services KMS key to use when encrypting the EBS volume the job run on.</p>"
+    )
     @as("ResourceKey")
     resourceKey: option<kmsKeyId>,
     @ocaml.doc("<p>The output configuration for the edge packaging job.</p>") @as("OutputConfig")
@@ -14123,12 +15820,12 @@ module DescribeDeviceFleet = {
   }
   type response = {
     @ocaml.doc(
-      "<p>The Amazon Resource Name (ARN) alias created in AWS Internet of Things (IoT).</p>"
+      "<p>The Amazon Resource Name (ARN) alias created in Amazon Web Services Internet of Things (IoT).</p>"
     )
     @as("IotRoleAlias")
     iotRoleAlias: option<iotRoleAlias>,
     @ocaml.doc(
-      "<p>The Amazon Resource Name (ARN) that has access to AWS Internet of Things (IoT).</p>"
+      "<p>The Amazon Resource Name (ARN) that has access to Amazon Web Services Internet of Things (IoT).</p>"
     )
     @as("RoleArn")
     roleArn: option<roleArn>,
@@ -14155,9 +15852,11 @@ module DescribeContext = {
   type t
   type request = {
     @ocaml.doc("<p>The name of the context to describe.</p>") @as("ContextName")
-    contextName: experimentEntityName,
+    contextName: experimentEntityNameOrArn,
   }
   type response = {
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the lineage group.</p>") @as("LineageGroupArn")
+    lineageGroupArn: option<lineageGroupArn>,
     @as("LastModifiedBy") lastModifiedBy: option<userContext>,
     @ocaml.doc("<p>When the context was last modified.</p>") @as("LastModifiedTime")
     lastModifiedTime: option<timestamp_>,
@@ -14188,7 +15887,7 @@ module DescribeCodeRepository = {
   }
   type response = {
     @ocaml.doc("<p>Configuration details about the repository, including the URL where the repository is
-            located, the default branch, and the Amazon Resource Name (ARN) of the AWS Secrets
+            located, the default branch, and the Amazon Resource Name (ARN) of the Amazon Web Services Secrets
             Manager secret that contains the credentials used to access the repository.</p>")
     @as("GitConfig")
     gitConfig: option<gitConfig>,
@@ -14227,7 +15926,10 @@ module DescribeApp = {
     @ocaml.doc("<p>The failure reason.</p>") @as("FailureReason")
     failureReason: option<failureReason>,
     @ocaml.doc("<p>The creation time.</p>") @as("CreationTime") creationTime: option<creationTime>,
-    @ocaml.doc("<p>The timestamp of the last user's activity.</p>") @as("LastUserActivityTimestamp")
+    @ocaml.doc(
+      "<p>The timestamp of the last user's activity. <code>LastUserActivityTimestamp</code> is also updated when SageMaker performs health checks without user activity. As a result, this value is set to the same value as <code>LastHealthCheckTimestamp</code>.</p>"
+    )
+    @as("LastUserActivityTimestamp")
     lastUserActivityTimestamp: option<timestamp_>,
     @ocaml.doc("<p>The timestamp of the last health check.</p>") @as("LastHealthCheckTimestamp")
     lastHealthCheckTimestamp: option<timestamp_>,
@@ -14253,6 +15955,8 @@ module DescribeAction = {
     actionName: experimentEntityName,
   }
   type response = {
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the lineage group.</p>") @as("LineageGroupArn")
+    lineageGroupArn: option<lineageGroupArn>,
     @as("MetadataProperties") metadataProperties: option<metadataProperties>,
     @as("LastModifiedBy") lastModifiedBy: option<userContext>,
     @ocaml.doc("<p>When the action was last modified.</p>") @as("LastModifiedTime")
@@ -14270,7 +15974,7 @@ module DescribeAction = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the action.</p>") @as("ActionArn")
     actionArn: option<actionArn>,
     @ocaml.doc("<p>The name of the action.</p>") @as("ActionName")
-    actionName: option<experimentEntityName>,
+    actionName: option<experimentEntityNameOrArn>,
   }
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DescribeActionCommand"
   let make = (~actionName, ()) => new({actionName: actionName})
@@ -14284,7 +15988,7 @@ module DeregisterDevices = {
     @ocaml.doc("<p>The name of the fleet the devices belong to.</p>") @as("DeviceFleetName")
     deviceFleetName: entityName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DeregisterDevicesCommand"
   let make = (~deviceNames, ~deviceFleetName, ()) =>
     new({deviceNames: deviceNames, deviceFleetName: deviceFleetName})
@@ -14301,7 +16005,7 @@ module DeleteTags = {
     @as("ResourceArn")
     resourceArn: resourceArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DeleteTagsCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -14317,7 +16021,7 @@ module DeleteDomain = {
     retentionPolicy: option<retentionPolicy>,
     @ocaml.doc("<p>The domain ID.</p>") @as("DomainId") domainId: domainId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DeleteDomainCommand"
   let make = (~domainId, ~retentionPolicy=?, ()) =>
     new({retentionPolicy: retentionPolicy, domainId: domainId})
@@ -14415,7 +16119,7 @@ module UpdateNotebookInstanceLifecycleConfig = {
     @as("NotebookInstanceLifecycleConfigName")
     notebookInstanceLifecycleConfigName: notebookInstanceLifecycleConfigName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sagemaker") @new
   external new: request => t = "UpdateNotebookInstanceLifecycleConfigCommand"
   let make = (~notebookInstanceLifecycleConfigName, ~onStart=?, ~onCreate=?, ()) =>
@@ -14455,7 +16159,7 @@ module UpdateDevices = {
     @ocaml.doc("<p>The name of the fleet the devices belong to.</p>") @as("DeviceFleetName")
     deviceFleetName: entityName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "UpdateDevicesCommand"
   let make = (~devices, ~deviceFleetName, ()) =>
     new({devices: devices, deviceFleetName: deviceFleetName})
@@ -14465,8 +16169,12 @@ module UpdateDevices = {
 module StartPipelineExecution = {
   type t
   type request = {
+    @ocaml.doc("<p>This configuration, if specified, overrides the parallelism configuration 
+            of the parent pipeline for this specific run.</p>")
+    @as("ParallelismConfiguration")
+    parallelismConfiguration: option<parallelismConfiguration>,
     @ocaml.doc("<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
-         operation. An idempotent operation completes no more than one time.</p>")
+         operation. An idempotent operation completes no more than once.</p>")
     @as("ClientRequestToken")
     clientRequestToken: idempotencyToken,
     @ocaml.doc("<p>The description of the pipeline execution.</p>")
@@ -14490,17 +16198,49 @@ module StartPipelineExecution = {
   let make = (
     ~clientRequestToken,
     ~pipelineName,
+    ~parallelismConfiguration=?,
     ~pipelineExecutionDescription=?,
     ~pipelineParameters=?,
     ~pipelineExecutionDisplayName=?,
     (),
   ) =>
     new({
+      parallelismConfiguration: parallelismConfiguration,
       clientRequestToken: clientRequestToken,
       pipelineExecutionDescription: pipelineExecutionDescription,
       pipelineParameters: pipelineParameters,
       pipelineExecutionDisplayName: pipelineExecutionDisplayName,
       pipelineName: pipelineName,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module SendPipelineExecutionStepSuccess = {
+  type t
+  type request = {
+    @ocaml.doc("<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
+         operation. An idempotent operation completes no more than one time.</p>")
+    @as("ClientRequestToken")
+    clientRequestToken: option<idempotencyToken>,
+    @ocaml.doc("<p>A list of the output parameters of the callback step.</p>")
+    @as("OutputParameters")
+    outputParameters: option<outputParameterList>,
+    @ocaml.doc("<p>The pipeline generated token from the Amazon SQS queue.</p>")
+    @as("CallbackToken")
+    callbackToken: callbackToken,
+  }
+  type response = {
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the pipeline execution.</p>")
+    @as("PipelineExecutionArn")
+    pipelineExecutionArn: option<pipelineExecutionArn>,
+  }
+  @module("@aws-sdk/client-sagemaker") @new
+  external new: request => t = "SendPipelineExecutionStepSuccessCommand"
+  let make = (~callbackToken, ~clientRequestToken=?, ~outputParameters=?, ()) =>
+    new({
+      clientRequestToken: clientRequestToken,
+      outputParameters: outputParameters,
+      callbackToken: callbackToken,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
@@ -14549,11 +16289,99 @@ module RegisterDevices = {
     devices: devices,
     @ocaml.doc("<p>The name of the fleet.</p>") @as("DeviceFleetName") deviceFleetName: entityName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "RegisterDevicesCommand"
   let make = (~devices, ~deviceFleetName, ~tags=?, ()) =>
     new({tags: tags, devices: devices, deviceFleetName: deviceFleetName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module QueryLineage = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>Limits the number of vertices in the request. Use the <code>NextToken</code> in a response to to retrieve the next page of results.</p>"
+    )
+    @as("NextToken")
+    nextToken: option<string8192>,
+    @ocaml.doc(
+      "<p>Limits the number of vertices in the results. Use the <code>NextToken</code> in a response to to retrieve the next page of results.</p>"
+    )
+    @as("MaxResults")
+    maxResults: option<queryLineageMaxResults>,
+    @ocaml.doc("<p>The maximum depth in lineage relationships from the <code>StartArns</code> that will be traversed. Depth is a measure of the number 
+         of <code>Associations</code> from the <code>StartArn</code> entity to the matched results.</p>")
+    @as("MaxDepth")
+    maxDepth: option<queryLineageMaxDepth>,
+    @ocaml.doc("<p>A set of filtering parameters that allow you to specify which entities should be returned.</p>
+         <ul>
+            <li>
+               <p>Properties - Key-value pairs to match on the lineage entities' properties.</p>
+            </li>
+            <li>
+               <p>LineageTypes - A set of lineage entity types to match on. For example: <code>TrialComponent</code>, 
+            <code>Artifact</code>, or <code>Context</code>.</p>
+            </li>
+            <li>
+               <p>CreatedBefore - Filter entities created before this date.</p>
+            </li>
+            <li>
+               <p>ModifiedBefore - Filter entities modified before this date.</p>
+            </li>
+            <li>
+               <p>ModifiedAfter - Filter entities modified after this date.</p>
+            </li>
+         </ul>")
+    @as("Filters")
+    filters: option<queryFilters>,
+    @ocaml.doc("<p> Setting this value to <code>True</code> will retrieve not only the entities of interest but also the 
+         <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/lineage-tracking-entities.html\">Associations</a> and 
+         lineage entities on the path. Set to <code>False</code> to only return lineage entities that match your query.</p>")
+    @as("IncludeEdges")
+    includeEdges: option<boolean_>,
+    @ocaml.doc("<p>Associations between lineage entities are directed.  This parameter determines the direction from the 
+         StartArn(s) the query will look.</p>")
+    @as("Direction")
+    direction: option<direction>,
+    @ocaml.doc(
+      "<p>A list of resource Amazon Resource Name (ARN) that represent the starting point for your lineage query.</p>"
+    )
+    @as("StartArns")
+    startArns: queryLineageStartArns,
+  }
+  type response = {
+    @ocaml.doc(
+      "<p>Limits the number of vertices in the response. Use the <code>NextToken</code> in a response to to retrieve the next page of results.</p>"
+    )
+    @as("NextToken")
+    nextToken: option<string8192>,
+    @ocaml.doc("<p>A list of edges that connect vertices in the response.</p>") @as("Edges")
+    edges: option<edges>,
+    @ocaml.doc("<p>A list of vertices connected to the start entity(ies) in the lineage graph.</p>")
+    @as("Vertices")
+    vertices: option<vertices>,
+  }
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "QueryLineageCommand"
+  let make = (
+    ~startArns,
+    ~nextToken=?,
+    ~maxResults=?,
+    ~maxDepth=?,
+    ~filters=?,
+    ~includeEdges=?,
+    ~direction=?,
+    (),
+  ) =>
+    new({
+      nextToken: nextToken,
+      maxResults: maxResults,
+      maxDepth: maxDepth,
+      filters: filters,
+      includeEdges: includeEdges,
+      direction: direction,
+      startArns: startArns,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListUserProfiles = {
@@ -14828,6 +16656,93 @@ module ListSubscribedWorkteams = {
   external new: request => t = "ListSubscribedWorkteamsCommand"
   let make = (~maxResults=?, ~nextToken=?, ~nameContains=?, ()) =>
     new({maxResults: maxResults, nextToken: nextToken, nameContains: nameContains})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module ListStudioLifecycleConfigs = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The sort order. The default value is Descending.</p>") @as("SortOrder")
+    sortOrder: option<sortOrder>,
+    @ocaml.doc("<p>The property used to sort results. The default value is CreationTime.</p>")
+    @as("SortBy")
+    sortBy: option<studioLifecycleConfigSortKey>,
+    @ocaml.doc(
+      "<p>A filter that returns only Lifecycle Configurations modified after the specified time.</p>"
+    )
+    @as("ModifiedTimeAfter")
+    modifiedTimeAfter: option<timestamp_>,
+    @ocaml.doc(
+      "<p>A filter that returns only Lifecycle Configurations modified before the specified time.</p>"
+    )
+    @as("ModifiedTimeBefore")
+    modifiedTimeBefore: option<timestamp_>,
+    @ocaml.doc(
+      "<p>A filter that returns only Lifecycle Configurations created on or after the specified time.</p>"
+    )
+    @as("CreationTimeAfter")
+    creationTimeAfter: option<timestamp_>,
+    @ocaml.doc(
+      "<p>A filter that returns only Lifecycle Configurations created on or before the specified time.</p>"
+    )
+    @as("CreationTimeBefore")
+    creationTimeBefore: option<timestamp_>,
+    @ocaml.doc(
+      "<p>A parameter to search for the App Type to which the Lifecycle Configuration is attached.</p>"
+    )
+    @as("AppTypeEquals")
+    appTypeEquals: option<studioLifecycleConfigAppType>,
+    @ocaml.doc(
+      "<p>A string in the Lifecycle Configuration name. This filter returns only Lifecycle Configurations whose name contains the specified string.</p>"
+    )
+    @as("NameContains")
+    nameContains: option<studioLifecycleConfigName>,
+    @ocaml.doc(
+      "<p>If the previous call to ListStudioLifecycleConfigs didn't return the full set of Lifecycle Configurations, the call returns a token for getting the next set of Lifecycle Configurations.</p>"
+    )
+    @as("NextToken")
+    nextToken: option<nextToken>,
+    @ocaml.doc(
+      "<p>The maximum number of Studio Lifecycle Configurations to return in the response. The default value is 10.</p>"
+    )
+    @as("MaxResults")
+    maxResults: option<maxResults>,
+  }
+  type response = {
+    @ocaml.doc("<p>A list of Lifecycle Configurations and their properties.</p>")
+    @as("StudioLifecycleConfigs")
+    studioLifecycleConfigs: option<studioLifecycleConfigsList>,
+    @ocaml.doc("<p>A token for getting the next set of actions, if there are any.</p>")
+    @as("NextToken")
+    nextToken: option<nextToken>,
+  }
+  @module("@aws-sdk/client-sagemaker") @new
+  external new: request => t = "ListStudioLifecycleConfigsCommand"
+  let make = (
+    ~sortOrder=?,
+    ~sortBy=?,
+    ~modifiedTimeAfter=?,
+    ~modifiedTimeBefore=?,
+    ~creationTimeAfter=?,
+    ~creationTimeBefore=?,
+    ~appTypeEquals=?,
+    ~nameContains=?,
+    ~nextToken=?,
+    ~maxResults=?,
+    (),
+  ) =>
+    new({
+      sortOrder: sortOrder,
+      sortBy: sortBy,
+      modifiedTimeAfter: modifiedTimeAfter,
+      modifiedTimeBefore: modifiedTimeBefore,
+      creationTimeAfter: creationTimeAfter,
+      creationTimeBefore: creationTimeBefore,
+      appTypeEquals: appTypeEquals,
+      nameContains: nameContains,
+      nextToken: nextToken,
+      maxResults: maxResults,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -15423,8 +17338,8 @@ module ListModels = {
             (timestamp).</p>")
     @as("CreationTimeBefore")
     creationTimeBefore: option<timestamp_>,
-    @ocaml.doc("<p>A string in the training job name. This filter returns only models in the training
-            job whose name contains the specified string.</p>")
+    @ocaml.doc("<p>A string in the model name. This filter returns only models whose 
+            name contains the specified string.</p>")
     @as("NameContains")
     nameContains: option<modelNameContains>,
     @ocaml.doc("<p>The maximum number of models to return in the response.</p>") @as("MaxResults")
@@ -15559,16 +17474,17 @@ module ListModelPackages = {
             packages, use the token in the next request.</p>")
     @as("NextToken")
     nextToken: option<nextToken>,
-    @ocaml.doc("<p>A filter that returns onlyl the model packages of the specified type. This can be one
+    @ocaml.doc("<p>A filter that returns only the model packages of the specified type. This can be one
             of the following values.</p>
         <ul>
             <li>
                 <p>
-                  <code>VERSIONED</code> - List only versioned models.</p>
+                  <code>UNVERSIONED</code> - List only unversioined models. 
+                    This is the default value if no <code>ModelPackageType</code> is specified.</p>
             </li>
             <li>
                 <p>
-                  <code>UNVERSIONED</code> - List only unversioined models.</p>
+                  <code>VERSIONED</code> - List only versioned models.</p>
             </li>
             <li>
                 <p>
@@ -15673,7 +17589,9 @@ module ListModelPackageGroups = {
             of model groups, use it in the subsequent request.</p>")
     @as("NextToken")
     nextToken: option<nextToken>,
-    @ocaml.doc("<p>A list of summaries of the model groups in your AWS account.</p>")
+    @ocaml.doc(
+      "<p>A list of summaries of the model groups in your Amazon Web Services account.</p>"
+    )
     @as("ModelPackageGroupSummaryList")
     modelPackageGroupSummaryList: modelPackageGroupSummaryList,
   }
@@ -15837,6 +17755,150 @@ module ListModelBiasJobDefinitions = {
       sortOrder: sortOrder,
       sortBy: sortBy,
       endpointName: endpointName,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module ListLineageGroups = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The maximum number of endpoints to return in the response. This value defaults to
+         10.</p>")
+    @as("MaxResults")
+    maxResults: option<maxResults>,
+    @ocaml.doc("<p>If the response is truncated, SageMaker returns this token. To retrieve the next set of
+         algorithms, use it in the subsequent request.</p>")
+    @as("NextToken")
+    nextToken: option<nextToken>,
+    @ocaml.doc("<p>The sort order for the results. The default is <code>Ascending</code>.</p>")
+    @as("SortOrder")
+    sortOrder: option<sortOrder>,
+    @ocaml.doc("<p>The parameter by which to sort the results. The default is
+         <code>CreationTime</code>.</p>")
+    @as("SortBy")
+    sortBy: option<sortLineageGroupsBy>,
+    @ocaml.doc(
+      "<p>A timestamp to filter against lineage groups created before a certain point in time.</p>"
+    )
+    @as("CreatedBefore")
+    createdBefore: option<timestamp_>,
+    @ocaml.doc(
+      "<p>A timestamp to filter against lineage groups created after a certain point in time.</p>"
+    )
+    @as("CreatedAfter")
+    createdAfter: option<timestamp_>,
+  }
+  type response = {
+    @ocaml.doc("<p>If the response is truncated, SageMaker returns this token. To retrieve the next set of
+         algorithms, use it in the subsequent request.</p>")
+    @as("NextToken")
+    nextToken: option<nextToken>,
+    @ocaml.doc("<p>A list of lineage groups and their properties.</p>") @as("LineageGroupSummaries")
+    lineageGroupSummaries: option<lineageGroupSummaries>,
+  }
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "ListLineageGroupsCommand"
+  let make = (
+    ~maxResults=?,
+    ~nextToken=?,
+    ~sortOrder=?,
+    ~sortBy=?,
+    ~createdBefore=?,
+    ~createdAfter=?,
+    (),
+  ) =>
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      sortOrder: sortOrder,
+      sortBy: sortBy,
+      createdBefore: createdBefore,
+      createdAfter: createdAfter,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module ListInferenceRecommendationsJobs = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The maximum number of recommendations to return in the response.</p>")
+    @as("MaxResults")
+    maxResults: option<maxResults>,
+    @ocaml.doc("<p>If the response to a previous <code>ListInferenceRecommendationsJobsRequest</code> request 
+         was truncated, the response includes a <code>NextToken</code>. To retrieve the next set 
+         of recommendations, use the token in the next request.</p>")
+    @as("NextToken")
+    nextToken: option<nextToken>,
+    @ocaml.doc("<p>The sort order for the results.</p>") @as("SortOrder")
+    sortOrder: option<sortOrder>,
+    @ocaml.doc("<p>The parameter by which to sort the results.</p>") @as("SortBy")
+    sortBy: option<listInferenceRecommendationsJobsSortBy>,
+    @ocaml.doc(
+      "<p>A filter that retrieves only inference recommendations jobs with a specific status.</p>"
+    )
+    @as("StatusEquals")
+    statusEquals: option<recommendationJobStatus>,
+    @ocaml.doc(
+      "<p>A string in the job name. This filter returns only recommendations whose name contains the specified string.</p>"
+    )
+    @as("NameContains")
+    nameContains: option<nameContains>,
+    @ocaml.doc(
+      "<p>A filter that returns only jobs that were last modified before the specified time (timestamp).</p>"
+    )
+    @as("LastModifiedTimeBefore")
+    lastModifiedTimeBefore: option<lastModifiedTime>,
+    @ocaml.doc(
+      "<p>A filter that returns only jobs that were last modified after the specified time (timestamp).</p>"
+    )
+    @as("LastModifiedTimeAfter")
+    lastModifiedTimeAfter: option<lastModifiedTime>,
+    @ocaml.doc(
+      "<p>A filter that returns only jobs created before the specified time (timestamp).</p>"
+    )
+    @as("CreationTimeBefore")
+    creationTimeBefore: option<creationTime>,
+    @ocaml.doc(
+      "<p>A filter that returns only jobs created after the specified time (timestamp).</p>"
+    )
+    @as("CreationTimeAfter")
+    creationTimeAfter: option<creationTime>,
+  }
+  type response = {
+    @ocaml.doc("<p>A token for getting the next set of recommendations, if there are any.</p>")
+    @as("NextToken")
+    nextToken: option<nextToken>,
+    @ocaml.doc(
+      "<p>The recommendations created from the Amazon SageMaker Inference Recommender job.</p>"
+    )
+    @as("InferenceRecommendationsJobs")
+    inferenceRecommendationsJobs: inferenceRecommendationsJobs,
+  }
+  @module("@aws-sdk/client-sagemaker") @new
+  external new: request => t = "ListInferenceRecommendationsJobsCommand"
+  let make = (
+    ~maxResults=?,
+    ~nextToken=?,
+    ~sortOrder=?,
+    ~sortBy=?,
+    ~statusEquals=?,
+    ~nameContains=?,
+    ~lastModifiedTimeBefore=?,
+    ~lastModifiedTimeAfter=?,
+    ~creationTimeBefore=?,
+    ~creationTimeAfter=?,
+    (),
+  ) =>
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      sortOrder: sortOrder,
+      sortBy: sortBy,
+      statusEquals: statusEquals,
+      nameContains: nameContains,
+      lastModifiedTimeBefore: lastModifiedTimeBefore,
+      lastModifiedTimeAfter: lastModifiedTimeAfter,
+      creationTimeBefore: creationTimeBefore,
+      creationTimeAfter: creationTimeAfter,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
@@ -16117,9 +18179,8 @@ module ListEndpoints = {
             the specified string.</p>")
     @as("NameContains")
     nameContains: option<endpointNameContains>,
-    @ocaml.doc(
-      "<p>The maximum number of endpoints to return in the response. This value defaults to 10.</p>"
-    )
+    @ocaml.doc("<p>The maximum number of endpoints to return in the response. This value defaults to
+            10.</p>")
     @as("MaxResults")
     maxResults: option<maxResults>,
     @ocaml.doc("<p>If the result of a <code>ListEndpoints</code> request was truncated, the response
@@ -16717,9 +18778,11 @@ module DescribeTrialComponent = {
   type t
   type request = {
     @ocaml.doc("<p>The name of the trial component to describe.</p>") @as("TrialComponentName")
-    trialComponentName: experimentEntityName,
+    trialComponentName: experimentEntityNameOrArn,
   }
   type response = {
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the lineage group.</p>") @as("LineageGroupArn")
+    lineageGroupArn: option<lineageGroupArn>,
     @ocaml.doc("<p>The metrics for the component.</p>") @as("Metrics")
     metrics: option<trialComponentMetricSummaries>,
     @as("MetadataProperties") metadataProperties: option<metadataProperties>,
@@ -16733,7 +18796,8 @@ module DescribeTrialComponent = {
     lastModifiedBy: option<userContext>,
     @ocaml.doc("<p>When the component was last modified.</p>") @as("LastModifiedTime")
     lastModifiedTime: option<timestamp_>,
-    @ocaml.doc("<p>Who created the component.</p>") @as("CreatedBy") createdBy: option<userContext>,
+    @ocaml.doc("<p>Who created the trial component.</p>") @as("CreatedBy")
+    createdBy: option<userContext>,
     @ocaml.doc("<p>When the component was created.</p>") @as("CreationTime")
     creationTime: option<timestamp_>,
     @ocaml.doc("<p>When the component ended.</p>") @as("EndTime") endTime: option<timestamp_>,
@@ -16852,7 +18916,7 @@ module DescribeFeatureGroup = {
     @as("RoleArn")
     roleArn: option<roleArn>,
     @ocaml.doc("<p>The configuration of the <code>OfflineStore</code>, inducing the S3 location of the
-            <code>OfflineStore</code>, AWS Glue or AWS Hive data catalogue configurations, and the
+         <code>OfflineStore</code>, Amazon Web Services Glue or Amazon Web Services Hive data catalogue configurations, and the
          security configuration.</p>")
     @as("OfflineStoreConfig")
     offlineStoreConfig: option<offlineStoreConfig>,
@@ -16903,6 +18967,8 @@ module DescribeDevice = {
     nextToken: option<nextToken>,
   }
   type response = {
+    @ocaml.doc("<p>Edge Manager agent version.</p>") @as("AgentVersion")
+    agentVersion: option<edgeVersion>,
     @ocaml.doc(
       "<p>The response from the last list when returning a list large enough to need tokening.</p>"
     )
@@ -16916,7 +18982,7 @@ module DescribeDevice = {
     @as("RegistrationTime")
     registrationTime: timestamp_,
     @ocaml.doc(
-      "<p>The AWS Internet of Things (IoT) object thing name associated with the device.</p>"
+      "<p>The Amazon Web Services Internet of Things (IoT) object thing name associated with the device.</p>"
     )
     @as("IotThingName")
     iotThingName: option<thingName>,
@@ -16943,6 +19009,12 @@ module DescribeCompilationJob = {
     compilationJobName: entityName,
   }
   type response = {
+    @ocaml.doc("<p>A <a>VpcConfig</a> object that specifies the VPC that you want your
+            compilation job to connect to. Control access to your models by
+            configuring the VPC. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/neo-vpc.html\">Protect Compilation Jobs by Using an Amazon
+                Virtual Private Cloud</a>.</p>")
+    @as("VpcConfig")
+    vpcConfig: option<neoVpcConfig>,
     @ocaml.doc("<p>Information about the output location for the compiled model and the target device
             that the model runs on.</p>")
     @as("OutputConfig")
@@ -16975,6 +19047,14 @@ module DescribeCompilationJob = {
     lastModifiedTime: lastModifiedTime,
     @ocaml.doc("<p>The time that the model compilation job was created.</p>") @as("CreationTime")
     creationTime: creationTime,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the versioned model package that was 
+    provided to SageMaker Neo when you initiated a compilation job.</p>")
+    @as("ModelPackageVersionArn")
+    modelPackageVersionArn: option<modelPackageArn>,
+    @ocaml.doc("<p>The inference image to use when compiling a model. 
+            Specify an image only if the target device is a cloud instance.</p>")
+    @as("InferenceImage")
+    inferenceImage: option<inferenceImage>,
     @ocaml.doc("<p>Specifies a limit to how long a model compilation job can run. When the job reaches
             the time limit, Amazon SageMaker ends the compilation job. Use this API to cap model training
             costs.</p>")
@@ -17087,7 +19167,7 @@ module CreateTrialComponent = {
       displayed.</p>")
     @as("DisplayName")
     displayName: option<experimentEntityName>,
-    @ocaml.doc("<p>The name of the component. The name must be unique in your AWS account and is not
+    @ocaml.doc("<p>The name of the component. The name must be unique in your Amazon Web Services account and is not
       case-sensitive.</p>")
     @as("TrialComponentName")
     trialComponentName: experimentEntityName,
@@ -17142,7 +19222,7 @@ module CreateTrial = {
         <code>DisplayName</code> isn't specified, <code>TrialName</code> is displayed.</p>")
     @as("DisplayName")
     displayName: option<experimentEntityName>,
-    @ocaml.doc("<p>The name of the trial. The name must be unique in your AWS account and is not
+    @ocaml.doc("<p>The name of the trial. The name must be unique in your Amazon Web Services account and is not
       case-sensitive.</p>")
     @as("TrialName")
     trialName: experimentEntityName,
@@ -17163,9 +19243,56 @@ module CreateTrial = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module CreateStudioLifecycleConfig = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>Tags to be associated with the Lifecycle Configuration. Each tag consists of a key and an optional value. Tag keys must be unique per resource. Tags are searchable using the Search API. </p>"
+    )
+    @as("Tags")
+    tags: option<tagList_>,
+    @ocaml.doc("<p>The App type that the Lifecycle Configuration is attached to.</p>")
+    @as("StudioLifecycleConfigAppType")
+    studioLifecycleConfigAppType: studioLifecycleConfigAppType,
+    @ocaml.doc(
+      "<p>The content of your Studio Lifecycle Configuration script. This content must be base64 encoded.</p>"
+    )
+    @as("StudioLifecycleConfigContent")
+    studioLifecycleConfigContent: studioLifecycleConfigContent,
+    @ocaml.doc("<p>The name of the Studio Lifecycle Configuration to create.</p>")
+    @as("StudioLifecycleConfigName")
+    studioLifecycleConfigName: studioLifecycleConfigName,
+  }
+  type response = {
+    @ocaml.doc("<p>The ARN of your created Lifecycle Configuration.</p>")
+    @as("StudioLifecycleConfigArn")
+    studioLifecycleConfigArn: option<studioLifecycleConfigArn>,
+  }
+  @module("@aws-sdk/client-sagemaker") @new
+  external new: request => t = "CreateStudioLifecycleConfigCommand"
+  let make = (
+    ~studioLifecycleConfigAppType,
+    ~studioLifecycleConfigContent,
+    ~studioLifecycleConfigName,
+    ~tags=?,
+    (),
+  ) =>
+    new({
+      tags: tags,
+      studioLifecycleConfigAppType: studioLifecycleConfigAppType,
+      studioLifecycleConfigContent: studioLifecycleConfigContent,
+      studioLifecycleConfigName: studioLifecycleConfigName,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module CreatePipeline = {
   type t
   type request = {
+    @ocaml.doc("<p>This is the configuration that controls the parallelism of the pipeline. 
+            If specified, it applies to all runs of this pipeline by default.</p>")
+    @as("ParallelismConfiguration")
+    parallelismConfiguration: option<parallelismConfiguration>,
     @ocaml.doc("<p>A list of tags to apply to the created pipeline.</p>") @as("Tags")
     tags: option<tagList_>,
     @ocaml.doc(
@@ -17179,8 +19306,12 @@ module CreatePipeline = {
     clientRequestToken: idempotencyToken,
     @ocaml.doc("<p>A description of the pipeline.</p>") @as("PipelineDescription")
     pipelineDescription: option<pipelineDescription>,
+    @ocaml.doc("<p>The location of the pipeline definition stored in Amazon S3. If specified, 
+            SageMaker will retrieve the pipeline definition from this location.</p>")
+    @as("PipelineDefinitionS3Location")
+    pipelineDefinitionS3Location: option<pipelineDefinitionS3Location>,
     @ocaml.doc("<p>The JSON pipeline definition of the pipeline.</p>") @as("PipelineDefinition")
-    pipelineDefinition: pipelineDefinition,
+    pipelineDefinition: option<pipelineDefinition>,
     @ocaml.doc("<p>The display name of the pipeline.</p>") @as("PipelineDisplayName")
     pipelineDisplayName: option<pipelineName>,
     @ocaml.doc("<p>The name of the pipeline.</p>") @as("PipelineName") pipelineName: pipelineName,
@@ -17193,18 +19324,22 @@ module CreatePipeline = {
   let make = (
     ~roleArn,
     ~clientRequestToken,
-    ~pipelineDefinition,
     ~pipelineName,
+    ~parallelismConfiguration=?,
     ~tags=?,
     ~pipelineDescription=?,
+    ~pipelineDefinitionS3Location=?,
+    ~pipelineDefinition=?,
     ~pipelineDisplayName=?,
     (),
   ) =>
     new({
+      parallelismConfiguration: parallelismConfiguration,
       tags: tags,
       roleArn: roleArn,
       clientRequestToken: clientRequestToken,
       pipelineDescription: pipelineDescription,
+      pipelineDefinitionS3Location: pipelineDefinitionS3Location,
       pipelineDefinition: pipelineDefinition,
       pipelineDisplayName: pipelineDisplayName,
       pipelineName: pipelineName,
@@ -17246,6 +19381,9 @@ module CreateNotebookInstanceLifecycleConfig = {
 module CreateNotebookInstance = {
   type t
   type request = {
+    @ocaml.doc("<p>The platform identifier of the notebook instance runtime environment.</p>")
+    @as("PlatformIdentifier")
+    platformIdentifier: option<platformIdentifier>,
     @ocaml.doc("<p>Whether root access is enabled or disabled for users of the notebook instance. The
             default value is <code>Enabled</code>.</p>
         <note>
@@ -17258,7 +19396,7 @@ module CreateNotebookInstance = {
     rootAccess: option<rootAccess>,
     @ocaml.doc("<p>An array of up to three Git repositories to associate with the notebook instance.
             These can be either the names of Git repositories stored as resources in your account,
-            or the URL of Git repositories in <a href=\"https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html\">AWS CodeCommit</a> or in any
+            or the URL of Git repositories in <a href=\"https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html\">Amazon Web Services CodeCommit</a> or in any
             other Git repository. These repositories are cloned at the same level as the default
             repository of your notebook instance. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html\">Associating Git
                 Repositories with Amazon SageMaker Notebook Instances</a>.</p>")
@@ -17266,7 +19404,7 @@ module CreateNotebookInstance = {
     additionalCodeRepositories: option<additionalCodeRepositoryNamesOrUrls>,
     @ocaml.doc("<p>A Git repository to associate with the notebook instance as its default code
             repository. This can be either the name of a Git repository stored as a resource in your
-            account, or the URL of a Git repository in <a href=\"https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html\">AWS CodeCommit</a> or in any
+            account, or the URL of a Git repository in <a href=\"https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html\">Amazon Web Services CodeCommit</a> or in any
             other Git repository. When you open a notebook instance, it opens in the directory that
             contains this repository. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html\">Associating Git Repositories with Amazon SageMaker
                 Notebook Instances</a>.</p>")
@@ -17295,19 +19433,19 @@ module CreateNotebookInstance = {
                 Customize a Notebook Instance</a>.</p>")
     @as("LifecycleConfigName")
     lifecycleConfigName: option<notebookInstanceLifecycleConfigName>,
-    @ocaml.doc("<p>An array of key-value pairs. You can use tags to categorize your AWS resources in
+    @ocaml.doc("<p>An array of key-value pairs. You can use tags to categorize your Amazon Web Services resources in
             different ways, for example, by purpose, owner, or environment. For more information,
-            see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS
+            see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services
                 Resources</a>.</p>")
     @as("Tags")
     tags: option<tagList_>,
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of a AWS Key Management Service key that Amazon SageMaker uses to encrypt data on
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of a Amazon Web Services Key Management Service key that Amazon SageMaker uses to encrypt data on
             the storage volume attached to your notebook instance. The KMS key you provide must be
             enabled. For information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/enabling-keys.html\">Enabling and Disabling
-                Keys</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>")
+                Keys</a> in the <i>Amazon Web Services Key Management Service Developer Guide</i>.</p>")
     @as("KmsKeyId")
     kmsKeyId: option<kmsKeyId>,
-    @ocaml.doc("<p> When you send any requests to AWS resources from the notebook instance, Amazon SageMaker
+    @ocaml.doc("<p> When you send any requests to Amazon Web Services resources from the notebook instance, Amazon SageMaker
             assumes this role to perform tasks on your behalf. You must grant this role necessary
             permissions so Amazon SageMaker can perform these tasks. The policy must allow the Amazon SageMaker service
             principal (sagemaker.amazonaws.com) permissions to assume this role. For more
@@ -17343,6 +19481,7 @@ module CreateNotebookInstance = {
     ~roleArn,
     ~instanceType,
     ~notebookInstanceName,
+    ~platformIdentifier=?,
     ~rootAccess=?,
     ~additionalCodeRepositories=?,
     ~defaultCodeRepository=?,
@@ -17357,6 +19496,7 @@ module CreateNotebookInstance = {
     (),
   ) =>
     new({
+      platformIdentifier: platformIdentifier,
       rootAccess: rootAccess,
       additionalCodeRepositories: additionalCodeRepositories,
       defaultCodeRepository: defaultCodeRepository,
@@ -17379,8 +19519,8 @@ module CreateModelPackageGroup = {
   type t
   type request = {
     @ocaml.doc("<p>A list of key value pairs associated with the model group. For more information, see
-                <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS
-                resources</a> in the <i>AWS General Reference Guide</i>.</p>")
+            <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services
+                resources</a> in the <i>Amazon Web Services General Reference Guide</i>.</p>")
     @as("Tags")
     tags: option<tagList_>,
     @ocaml.doc("<p>A description for the model group.</p>") @as("ModelPackageGroupDescription")
@@ -17486,11 +19626,13 @@ module CreateFeatureGroup = {
                   <code>OfflineStore</code>.</p>
             </li>
             <li>
-               <p>A configuration for an AWS Glue or AWS Hive data cataolgue. </p>
+               <p>A configuration for an Amazon Web Services Glue or Amazon Web Services Hive data catalog. </p>
             </li>
             <li>
                <p>An KMS encryption key to encrypt the Amazon S3 location used for
-                  <code>OfflineStore</code>.</p>
+               <code>OfflineStore</code>. If KMS encryption key is not specified, by default we encrypt all data at rest using 
+               Amazon Web Services KMS key. By defining your <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-key.html\">bucket-level key</a> for SSE, 
+               you can reduce Amazon Web Services KMS requests costs by up to 99 percent.</p>
             </li>
          </ul>
          <p>To learn more about this parameter, see <a>OfflineStoreConfig</a>.</p>")
@@ -17499,7 +19641,7 @@ module CreateFeatureGroup = {
     @ocaml.doc("<p>You can turn the <code>OnlineStore</code> on or off by specifying <code>True</code> for
          the <code>EnableOnlineStore</code> flag in <code>OnlineStoreConfig</code>; the default
          value is <code>False</code>.</p>
-         <p>You can also include an AWS KMS key ID (<code>KMSKeyId</code>) for at-rest encryption of
+         <p>You can also include an Amazon Web Services KMS key ID (<code>KMSKeyId</code>) for at-rest encryption of
          the <code>OnlineStore</code>.</p>")
     @as("OnlineStoreConfig")
     onlineStoreConfig: option<onlineStoreConfig>,
@@ -17560,8 +19702,8 @@ module CreateFeatureGroup = {
          </ul>")
     @as("RecordIdentifierFeatureName")
     recordIdentifierFeatureName: featureName,
-    @ocaml.doc("<p>The name of the <code>FeatureGroup</code>. The name must be unique within an AWS Region
-         in an AWS account. The name:</p>
+    @ocaml.doc("<p>The name of the <code>FeatureGroup</code>. The name must be unique within an Amazon Web Services Region
+         in an Amazon Web Services account. The name:</p>
          <ul>
             <li>
                <p>Must start and end with an alphanumeric character.</p>
@@ -17621,7 +19763,7 @@ module CreateExperiment = {
       displayed.</p>")
     @as("DisplayName")
     displayName: option<experimentEntityName>,
-    @ocaml.doc("<p>The name of the experiment. The name must be unique in your AWS account and is not
+    @ocaml.doc("<p>The name of the experiment. The name must be unique in your Amazon Web Services account and is not
       case-sensitive.</p>")
     @as("ExperimentName")
     experimentName: experimentEntityName,
@@ -17641,42 +19783,12 @@ module CreateExperiment = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
-module CreateEndpoint = {
-  type t
-  type request = {
-    @ocaml.doc("<p>An array of key-value pairs. You can use tags to categorize your AWS resources in
-            different ways, for example, by purpose, owner, or environment. For more information,
-            see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS
-                Resources</a>.</p>")
-    @as("Tags")
-    tags: option<tagList_>,
-    @ocaml.doc(
-      "<p>The name of an endpoint configuration. For more information, see <a>CreateEndpointConfig</a>. </p>"
-    )
-    @as("EndpointConfigName")
-    endpointConfigName: endpointConfigName,
-    @ocaml.doc("<p>The name of the endpoint.The name must be unique within an AWS Region in your AWS
-            account. The name is case-insensitive in <code>CreateEndpoint</code>, but the case is
-            preserved and must be matched in .</p>")
-    @as("EndpointName")
-    endpointName: endpointName,
-  }
-  type response = {
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the endpoint.</p>") @as("EndpointArn")
-    endpointArn: endpointArn,
-  }
-  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "CreateEndpointCommand"
-  let make = (~endpointConfigName, ~endpointName, ~tags=?, ()) =>
-    new({tags: tags, endpointConfigName: endpointConfigName, endpointName: endpointName})
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
 module CreateEdgePackagingJob = {
   type t
   type request = {
     @ocaml.doc("<p>Creates tags for the packaging job.</p>") @as("Tags") tags: option<tagList_>,
     @ocaml.doc(
-      "<p>The CMK to use when encrypting the EBS volume the edge packaging job runs on.</p>"
+      "<p>The Amazon Web Services KMS key to use when encrypting the EBS volume the edge packaging job runs on.</p>"
     )
     @as("ResourceKey")
     resourceKey: option<kmsKeyId>,
@@ -17698,7 +19810,7 @@ module CreateEdgePackagingJob = {
     @ocaml.doc("<p>The name of the edge packaging job.</p>") @as("EdgePackagingJobName")
     edgePackagingJobName: entityName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sagemaker") @new
   external new: request => t = "CreateEdgePackagingJobCommand"
   let make = (
@@ -17728,6 +19840,13 @@ module CreateEdgePackagingJob = {
 module CreateDeviceFleet = {
   type t
   type request = {
+    @ocaml.doc("<p>Whether to create an Amazon Web Services IoT Role Alias during device fleet creation. 
+     The name of the role alias generated will match this pattern: 
+     \"SageMakerEdge-{DeviceFleetName}\".</p>
+         <p>For example, if your device fleet is called \"demo-fleet\", the name of 
+     the role alias will be \"SageMakerEdge-demo-fleet\".</p>")
+    @as("EnableIotRoleAlias")
+    enableIotRoleAlias: option<enableIotRoleAlias>,
     @ocaml.doc("<p>Creates tags for the specified fleet.</p>") @as("Tags") tags: option<tagList_>,
     @ocaml.doc("<p>The output configuration for storing sample data collected by the fleet.</p>")
     @as("OutputConfig")
@@ -17735,17 +19854,26 @@ module CreateDeviceFleet = {
     @ocaml.doc("<p>A description of the fleet.</p>") @as("Description")
     description: option<deviceFleetDescription>,
     @ocaml.doc(
-      "<p>The Amazon Resource Name (ARN) that has access to AWS Internet of Things (IoT).</p>"
+      "<p>The Amazon Resource Name (ARN) that has access to Amazon Web Services Internet of Things (IoT).</p>"
     )
     @as("RoleArn")
     roleArn: option<roleArn>,
     @ocaml.doc("<p>The name of the fleet that the device belongs to.</p>") @as("DeviceFleetName")
     deviceFleetName: entityName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "CreateDeviceFleetCommand"
-  let make = (~outputConfig, ~deviceFleetName, ~tags=?, ~description=?, ~roleArn=?, ()) =>
+  let make = (
+    ~outputConfig,
+    ~deviceFleetName,
+    ~enableIotRoleAlias=?,
+    ~tags=?,
+    ~description=?,
+    ~roleArn=?,
+    (),
+  ) =>
     new({
+      enableIotRoleAlias: enableIotRoleAlias,
       tags: tags,
       outputConfig: outputConfig,
       description: description,
@@ -17765,7 +19893,9 @@ module CreateContext = {
     description: option<experimentDescription>,
     @ocaml.doc("<p>The context type.</p>") @as("ContextType") contextType: string256,
     @ocaml.doc("<p>The source type, ID, and URI.</p>") @as("Source") source: contextSource,
-    @ocaml.doc("<p>The name of the context. Must be unique to your account in an AWS Region.</p>")
+    @ocaml.doc(
+      "<p>The name of the context. Must be unique to your account in an Amazon Web Services Region.</p>"
+    )
     @as("ContextName")
     contextName: experimentEntityName,
   }
@@ -17789,9 +19919,9 @@ module CreateContext = {
 module CreateCompilationJob = {
   type t
   type request = {
-    @ocaml.doc("<p>An array of key-value pairs. You can use tags to categorize your AWS resources in
+    @ocaml.doc("<p>An array of key-value pairs. You can use tags to categorize your Amazon Web Services resources in
             different ways, for example, by purpose, owner, or environment. For more information,
-            see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS
+            see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services
                 Resources</a>.</p>")
     @as("Tags")
     tags: option<tagList_>,
@@ -17800,6 +19930,12 @@ module CreateCompilationJob = {
             costs.</p>")
     @as("StoppingCondition")
     stoppingCondition: stoppingCondition,
+    @ocaml.doc("<p>A <a>VpcConfig</a> object that specifies the VPC that you want your
+            compilation job to connect to. Control access to your models by
+            configuring the VPC. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/neo-vpc.html\">Protect Compilation Jobs by Using an Amazon
+                Virtual Private Cloud</a>.</p>")
+    @as("VpcConfig")
+    vpcConfig: option<neoVpcConfig>,
     @ocaml.doc("<p>Provides information about the output location for the compiled model and the target
             device the model runs on.</p>")
     @as("OutputConfig")
@@ -17807,7 +19943,13 @@ module CreateCompilationJob = {
     @ocaml.doc("<p>Provides information about the location of input model artifacts, the name and shape
             of the expected data inputs, and the framework in which the model was trained.</p>")
     @as("InputConfig")
-    inputConfig: inputConfig,
+    inputConfig: option<inputConfig>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of a versioned model package. Provide either a 
+    <code>ModelPackageVersionArn</code> or an <code>InputConfig</code> object in the 
+    request syntax. The presence of both objects in the <code>CreateCompilationJob</code> 
+    request will return an exception.</p>")
+    @as("ModelPackageVersionArn")
+    modelPackageVersionArn: option<modelPackageArn>,
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of an IAM role that enables Amazon SageMaker to perform tasks on
             your behalf. </p>
         <p>During model compilation, Amazon SageMaker needs your permission to:</p>
@@ -17832,8 +19974,8 @@ module CreateCompilationJob = {
          </p>")
     @as("RoleArn")
     roleArn: roleArn,
-    @ocaml.doc("<p>A name for the model compilation job. The name must be unique within the AWS Region
-            and within your AWS account. </p>")
+    @ocaml.doc("<p>A name for the model compilation job. The name must be unique within the Amazon Web Services Region
+            and within your Amazon Web Services account. </p>")
     @as("CompilationJobName")
     compilationJobName: entityName,
   }
@@ -17855,17 +19997,21 @@ module CreateCompilationJob = {
   let make = (
     ~stoppingCondition,
     ~outputConfig,
-    ~inputConfig,
     ~roleArn,
     ~compilationJobName,
     ~tags=?,
+    ~vpcConfig=?,
+    ~inputConfig=?,
+    ~modelPackageVersionArn=?,
     (),
   ) =>
     new({
       tags: tags,
       stoppingCondition: stoppingCondition,
+      vpcConfig: vpcConfig,
       outputConfig: outputConfig,
       inputConfig: inputConfig,
+      modelPackageVersionArn: modelPackageVersionArn,
       roleArn: roleArn,
       compilationJobName: compilationJobName,
     })
@@ -17875,9 +20021,9 @@ module CreateCompilationJob = {
 module CreateCodeRepository = {
   type t
   type request = {
-    @ocaml.doc("<p>An array of key-value pairs. You can use tags to categorize your AWS resources in
+    @ocaml.doc("<p>An array of key-value pairs. You can use tags to categorize your Amazon Web Services resources in
             different ways, for example, by purpose, owner, or environment. For more information,
-            see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS
+            see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services
                 Resources</a>.</p>")
     @as("Tags")
     tags: option<tagList_>,
@@ -17952,7 +20098,9 @@ module CreateAction = {
     description: option<experimentDescription>,
     @ocaml.doc("<p>The action type.</p>") @as("ActionType") actionType: string256,
     @ocaml.doc("<p>The source type, ID, and URI.</p>") @as("Source") source: actionSource,
-    @ocaml.doc("<p>The name of the action. Must be unique to your account in an AWS Region.</p>")
+    @ocaml.doc(
+      "<p>The name of the action. Must be unique to your account in an Amazon Web Services Region.</p>"
+    )
     @as("ActionName")
     actionName: experimentEntityName,
   }
@@ -17988,9 +20136,9 @@ module CreateAction = {
 module AddTags = {
   type t
   type request = {
-    @ocaml.doc("<p>An array of key-value pairs. You can use tags to categorize your AWS resources in
+    @ocaml.doc("<p>An array of key-value pairs. You can use tags to categorize your Amazon Web Services resources in
             different ways, for example, by purpose, owner, or environment. For more information,
-            see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS
+            see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services
                 Resources</a>.</p>")
     @as("Tags")
     tags: tagList_,
@@ -18025,7 +20173,7 @@ module UpdateWorkforce = {
     workforceName: workforceName,
   }
   type response = {
-    @ocaml.doc("<p>A single private workforce. You can create one private work force in each AWS Region. By default,
+    @ocaml.doc("<p>A single private workforce. You can create one private work force in each Amazon Web Services Region. By default,
             any workforce-related API operation used in a specific region will apply to the
             workforce created in that region. To learn how to create a private workforce, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sms-workforce-create-private.html\">Create a Private Workforce</a>.</p>")
     @as("Workforce")
@@ -18062,6 +20210,46 @@ module UpdateTrainingJob = {
       profilerRuleConfigurations: profilerRuleConfigurations,
       profilerConfig: profilerConfig,
       trainingJobName: trainingJobName,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module UpdateProject = {
+  type t
+  type request = {
+    @ocaml.doc("<p>An array of key-value pairs. You can use tags to categorize your 
+            Amazon Web Services resources in different ways, for example, by purpose, owner, or 
+            environment. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services Resources</a>.</p>")
+    @as("Tags")
+    tags: option<tagList_>,
+    @ocaml.doc("<p>The product ID and provisioning artifact ID to provision a service catalog. 
+            The provisioning artifact ID will default to the latest provisioning artifact 
+            ID of the product, if you don't provide the provisioning artifact ID. For more 
+            information, see <a href=\"https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html\">What is Amazon Web Services Service Catalog</a>.
+        </p>")
+    @as("ServiceCatalogProvisioningUpdateDetails")
+    serviceCatalogProvisioningUpdateDetails: option<serviceCatalogProvisioningUpdateDetails>,
+    @ocaml.doc("<p>The description for the project.</p>") @as("ProjectDescription")
+    projectDescription: option<entityDescription>,
+    @ocaml.doc("<p>The name of the project.</p>") @as("ProjectName") projectName: projectEntityName,
+  }
+  type response = {
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the project.</p>") @as("ProjectArn")
+    projectArn: projectArn,
+  }
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "UpdateProjectCommand"
+  let make = (
+    ~projectName,
+    ~tags=?,
+    ~serviceCatalogProvisioningUpdateDetails=?,
+    ~projectDescription=?,
+    (),
+  ) =>
+    new({
+      tags: tags,
+      serviceCatalogProvisioningUpdateDetails: serviceCatalogProvisioningUpdateDetails,
+      projectDescription: projectDescription,
+      projectName: projectName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
@@ -18405,6 +20593,36 @@ module ListNotebookInstances = {
       maxResults: maxResults,
       nextToken: nextToken,
     })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module ListModelMetadata = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The maximum number of models to return in the response.</p>") @as("MaxResults")
+    maxResults: option<maxResults>,
+    @ocaml.doc("<p>If the response to a previous <code>ListModelMetadataResponse</code> request was truncated, 
+           the response includes a NextToken. To retrieve the next set of model metadata, 
+           use the token in the next request.</p>")
+    @as("NextToken")
+    nextToken: option<nextToken>,
+    @ocaml.doc("<p>One or more filters that searches for the specified resource or resources 
+          in a search. All resource objects that satisfy the expression's condition are 
+          included in the search results. Specify the  Framework, FrameworkVersion, Domain 
+          or Task to filter supported. Filter names and values are case-sensitive.</p>")
+    @as("SearchExpression")
+    searchExpression: option<modelMetadataSearchExpression>,
+  }
+  type response = {
+    @ocaml.doc("<p>A token for getting the next set of recommendations, if there are any.</p>")
+    @as("NextToken")
+    nextToken: option<nextToken>,
+    @ocaml.doc("<p>A structure that holds model metadata.</p>") @as("ModelMetadataSummaries")
+    modelMetadataSummaries: modelMetadataSummaries,
+  }
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "ListModelMetadataCommand"
+  let make = (~maxResults=?, ~nextToken=?, ~searchExpression=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken, searchExpression: searchExpression})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -18824,7 +21042,7 @@ module ListCodeRepositories = {
             </li>
             <li>
                 <p>Configuration information, including the URL location of the repository and
-                    the ARN of the AWS Secrets Manager secret that contains the credentials used
+                    the ARN of the Amazon Web Services Secrets Manager secret that contains the credentials used
                     to access the repository.</p>
             </li>
          </ul>")
@@ -19022,7 +21240,7 @@ module DescribeWorkforce = {
   }
   type response = {
     @ocaml.doc("<p>A single private workforce, which is automatically created when you create your first
-            private work team. You can create one private work force in each AWS Region. By default,
+            private work team. You can create one private work force in each Amazon Web Services Region. By default,
             any workforce-related API operation used in a specific region will apply to the
             workforce created in that region. To learn how to create a private workforce, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sms-workforce-create-private.html\">Create a Private Workforce</a>.</p>")
     @as("Workforce")
@@ -19145,6 +21363,9 @@ module DescribeProject = {
     projectName: projectEntityName,
   }
   type response = {
+    @as("LastModifiedBy") lastModifiedBy: option<userContext>,
+    @ocaml.doc("<p>The timestamp when project was last modified.</p>") @as("LastModifiedTime")
+    lastModifiedTime: option<timestamp_>,
     @ocaml.doc("<p>The time when the project was created.</p>") @as("CreationTime")
     creationTime: timestamp_,
     @as("CreatedBy") createdBy: option<userContext>,
@@ -19153,7 +21374,7 @@ module DescribeProject = {
     @ocaml.doc("<p>Information about a provisioned service catalog product.</p>")
     @as("ServiceCatalogProvisionedProductDetails")
     serviceCatalogProvisionedProductDetails: option<serviceCatalogProvisionedProductDetails>,
-    @ocaml.doc("<p>Information used to provision a service catalog product. For information, see <a href=\"https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html\">What is AWS Service
+    @ocaml.doc("<p>Information used to provision a service catalog product. For information, see <a href=\"https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html\">What is Amazon Web Services Service
             Catalog</a>.</p>")
     @as("ServiceCatalogProvisioningDetails")
     serviceCatalogProvisioningDetails: serviceCatalogProvisioningDetails,
@@ -19180,9 +21401,9 @@ module DescribeLabelingJob = {
     @ocaml.doc("<p>The location of the output produced by the labeling job.</p>")
     @as("LabelingJobOutput")
     labelingJobOutput: option<labelingJobOutput>,
-    @ocaml.doc("<p>An array of key-value pairs. You can use tags to categorize your AWS resources in
+    @ocaml.doc("<p>An array of key-value pairs. You can use tags to categorize your Amazon Web Services resources in
             different ways, for example, by purpose, owner, or environment. For more information,
-            see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS
+            see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services
                 Resources</a>.</p>")
     @as("Tags")
     tags: option<tagList_>,
@@ -19259,7 +21480,7 @@ module DescribeLabelingJob = {
             during data labeling.</p>")
     @as("RoleArn")
     roleArn: roleArn,
-    @ocaml.doc("<p>The location of the job's output data and the AWS Key Management Service key ID for the key used to
+    @ocaml.doc("<p>The location of the job's output data and the Amazon Web Services Key Management Service key ID for the key used to
             encrypt the output data, if any.</p>")
     @as("OutputConfig")
     outputConfig: labelingJobOutputConfig,
@@ -19310,7 +21531,7 @@ module DescribeFlowDefinition = {
     @ocaml.doc("<p>The reason your flow definition failed.</p>") @as("FailureReason")
     failureReason: option<failureReason>,
     @ocaml.doc(
-      "<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) execution role for the flow definition.</p>"
+      "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Identity and Access Management (IAM) execution role for the flow definition.</p>"
     )
     @as("RoleArn")
     roleArn: roleArn,
@@ -19355,10 +21576,16 @@ module DescribeEndpointConfig = {
     endpointConfigName: endpointConfigName,
   }
   type response = {
+    @ocaml.doc("<p>Returns the description of an endpoint configuration created using the 
+            <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpointConfig.html\">
+               <code>CreateEndpointConfig</code>
+            </a> API.</p>")
+    @as("AsyncInferenceConfig")
+    asyncInferenceConfig: option<asyncInferenceConfig>,
     @ocaml.doc("<p>A timestamp that shows when the endpoint configuration was created.</p>")
     @as("CreationTime")
     creationTime: timestamp_,
-    @ocaml.doc("<p>AWS KMS key ID Amazon SageMaker uses to encrypt data when storing it on the ML storage
+    @ocaml.doc("<p>Amazon Web Services KMS key ID Amazon SageMaker uses to encrypt data when storing it on the ML storage
             volume attached to the instance.</p>")
     @as("KmsKeyId")
     kmsKeyId: option<kmsKeyId>,
@@ -19388,6 +21615,8 @@ module DescribeArtifact = {
     artifactArn: artifactArn,
   }
   type response = {
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the lineage group.</p>") @as("LineageGroupArn")
+    lineageGroupArn: option<lineageGroupArn>,
     @as("MetadataProperties") metadataProperties: option<metadataProperties>,
     @as("LastModifiedBy") lastModifiedBy: option<userContext>,
     @ocaml.doc("<p>When the artifact was last modified.</p>") @as("LastModifiedTime")
@@ -19403,7 +21632,7 @@ module DescribeArtifact = {
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the artifact.</p>") @as("ArtifactArn")
     artifactArn: option<artifactArn>,
     @ocaml.doc("<p>The name of the artifact.</p>") @as("ArtifactName")
-    artifactName: option<experimentEntityName>,
+    artifactName: option<experimentEntityNameOrArn>,
   }
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DescribeArtifactCommand"
   let make = (~artifactArn, ()) => new({artifactArn: artifactArn})
@@ -19459,7 +21688,7 @@ module CreateTransformJob = {
     @ocaml.doc("<p>(Optional)
             An
             array of key-value pairs. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what\">Using
-                Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User
+                Cost Allocation Tags</a> in the <i>Amazon Web Services Billing and Cost Management User
                 Guide</i>.</p>")
     @as("Tags")
     tags: option<tagList_>,
@@ -19530,12 +21759,12 @@ module CreateTransformJob = {
     @as("MaxConcurrentTransforms")
     maxConcurrentTransforms: option<maxConcurrentTransforms>,
     @ocaml.doc("<p>The name of the model that you want to use for the transform job.
-                <code>ModelName</code> must be the name of an existing Amazon SageMaker model within an AWS
-            Region in an AWS account.</p>")
+            <code>ModelName</code> must be the name of an existing Amazon SageMaker model within an Amazon Web Services
+            Region in an Amazon Web Services account.</p>")
     @as("ModelName")
     modelName: modelName,
-    @ocaml.doc("<p>The name of the transform job. The name must be unique within an AWS Region in an
-            AWS account. </p>")
+    @ocaml.doc("<p>The name of the transform job. The name must be unique within an Amazon Web Services Region in an
+            Amazon Web Services account. </p>")
     @as("TransformJobName")
     transformJobName: transformJobName,
   }
@@ -19581,12 +21810,13 @@ module CreateTransformJob = {
 module CreateProject = {
   type t
   type request = {
-    @ocaml.doc("<p>An array of key-value pairs that you want to use to organize and track your AWS
-            resource costs. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS resources</a> in the <i>AWS General Reference Guide</i>.</p>")
+    @ocaml.doc("<p>An array of key-value pairs that you want to use to organize and track your Amazon Web Services
+            resource costs. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a> in the <i>Amazon Web Services General Reference Guide</i>.</p>")
     @as("Tags")
     tags: option<tagList_>,
-    @ocaml.doc("<p>The product ID and provisioning artifact ID to provision a service catalog. For
-            information, see <a href=\"https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html\">What is AWS Service
+    @ocaml.doc("<p>The product ID and provisioning artifact ID to provision a service catalog. The provisioning 
+            artifact ID will default to the latest provisioning artifact ID of the product, if you don't 
+            provide the provisioning artifact ID. For more information, see <a href=\"https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html\">What is Amazon Web Services Service
                 Catalog</a>.</p>")
     @as("ServiceCatalogProvisioningDetails")
     serviceCatalogProvisioningDetails: serviceCatalogProvisioningDetails,
@@ -19619,7 +21849,7 @@ module CreateProject = {
 module CreateLabelingJob = {
   type t
   type request = {
-    @ocaml.doc("<p>An array of key/value pairs. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what\">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management
+    @ocaml.doc("<p>An array of key/value pairs. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what\">Using Cost Allocation Tags</a> in the <i>Amazon Web Services Billing and Cost Management
                 User Guide</i>.</p>")
     @as("Tags")
     tags: option<tagList_>,
@@ -19641,6 +21871,13 @@ module CreateLabelingJob = {
         <p>For 3D point cloud and video frame task types, you can add label category attributes
             and frame attributes to your label category configuration file. To learn how, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sms-point-cloud-label-category-config.html\">Create a
                 Labeling Category Configuration File for 3D Point Cloud Labeling Jobs</a>. </p>
+        <p>For named entity recognition jobs, in addition to <code>\"labels\"</code>, you must
+            provide worker instructions in the label category configuration file using the
+                <code>\"instructions\"</code> parameter: <code>\"instructions\":
+                {\"shortInstruction\":\"<h1>Add header</h1><p>Add Instructions</p>\",
+                \"fullInstruction\":\"<p>Add additional instructions.</p>\"}</code>. For details
+            and an example, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sms-named-entity-recg.html#sms-creating-ner-api\">Create a
+                Named Entity Recognition Labeling Job (API) </a>.</p>
         <p>For all other <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sms-task-types.html\">built-in task types</a> and <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sms-custom-templates.html\">custom
                 tasks</a>, your label category configuration file must be a JSON file in the
             following format. Identify the labels you want to use by replacing <code>label_1</code>,
@@ -19686,7 +21923,7 @@ module CreateLabelingJob = {
             can successfully complete data labeling.</p>")
     @as("RoleArn")
     roleArn: roleArn,
-    @ocaml.doc("<p>The location of the output data and the AWS Key Management Service key ID for the key used to encrypt
+    @ocaml.doc("<p>The location of the output data and the Amazon Web Services Key Management Service key ID for the key used to encrypt
             the output data, if any.</p>")
     @as("OutputConfig")
     outputConfig: labelingJobOutputConfig,
@@ -19772,7 +22009,7 @@ module CreateLabelingJob = {
     @as("LabelAttributeName")
     labelAttributeName: labelAttributeName,
     @ocaml.doc("<p>The name of the labeling job. This name is used to identify the job in a list of
-            labeling jobs. Labeling job names must be unique within an AWS account and region.
+            labeling jobs. Labeling job names must be unique within an Amazon Web Services account and region.
                 <code>LabelingJobName</code> is not case sensitive. For example, Example-job and
             example-job are considered the same labeling job name by Ground Truth.</p>")
     @as("LabelingJobName")
@@ -19880,7 +22117,12 @@ module CreateFlowDefinition = {
 module CreateEndpointConfig = {
   type t
   type request = {
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of a AWS Key Management Service key that Amazon SageMaker uses to encrypt data on
+    @ocaml.doc("<p>Specifies configuration for how an endpoint performs asynchronous inference. 
+            This is a required field in order for your Endpoint to be invoked using
+            <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_runtime_InvokeEndpointAsync.html\">InvokeEndpointAsync</a>.</p>")
+    @as("AsyncInferenceConfig")
+    asyncInferenceConfig: option<asyncInferenceConfig>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of a Amazon Web Services Key Management Service key that Amazon SageMaker uses to encrypt data on
             the storage volume attached to the ML compute instance that hosts the endpoint.</p>
         <p>The KmsKeyId can be any of the following formats: </p>
         <ul>
@@ -19905,8 +22147,8 @@ module CreateEndpointConfig = {
          </ul>
         <p>The KMS key policy must grant permission to the IAM role that you specify in your
                 <code>CreateEndpoint</code>, <code>UpdateEndpoint</code> requests. For more
-            information, refer to the AWS Key Management Service section<a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html\"> Using Key
-                Policies in AWS KMS </a>
+            information, refer to the Amazon Web Services Key Management Service section<a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html\"> Using Key
+                Policies in Amazon Web Services KMS </a>
          </p>
         <note>
             <p>Certain Nitro-based instances include local storage, dependent on the instance
@@ -19923,9 +22165,9 @@ module CreateEndpointConfig = {
         </note>")
     @as("KmsKeyId")
     kmsKeyId: option<kmsKeyId>,
-    @ocaml.doc("<p>An array of key-value pairs. You can use tags to categorize your AWS resources in
+    @ocaml.doc("<p>An array of key-value pairs. You can use tags to categorize your Amazon Web Services resources in
             different ways, for example, by purpose, owner, or environment. For more information,
-            see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS
+            see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services
                 Resources</a>.</p>")
     @as("Tags")
     tags: option<tagList_>,
@@ -19950,12 +22192,14 @@ module CreateEndpointConfig = {
   let make = (
     ~productionVariants,
     ~endpointConfigName,
+    ~asyncInferenceConfig=?,
     ~kmsKeyId=?,
     ~tags=?,
     ~dataCaptureConfig=?,
     (),
   ) =>
     new({
+      asyncInferenceConfig: asyncInferenceConfig,
       kmsKeyId: kmsKeyId,
       tags: tags,
       dataCaptureConfig: dataCaptureConfig,
@@ -19976,7 +22220,9 @@ module CreateArtifact = {
     @ocaml.doc("<p>The artifact type.</p>") @as("ArtifactType") artifactType: string256,
     @ocaml.doc("<p>The ID, ID type, and URI of the source.</p>") @as("Source")
     source: artifactSource,
-    @ocaml.doc("<p>The name of the artifact. Must be unique to your account in an AWS Region.</p>")
+    @ocaml.doc(
+      "<p>The name of the artifact. Must be unique to your account in an Amazon Web Services Region.</p>"
+    )
     @as("ArtifactName")
     artifactName: option<experimentEntityName>,
   }
@@ -20054,7 +22300,13 @@ module UpdateUserProfile = {
 module UpdateEndpoint = {
   type t
   type request = {
-    @ocaml.doc("<p>The deployment configuration for the endpoint to be updated.</p>")
+    @ocaml.doc("<p>Specifies whether to reuse the last deployment configuration. The default value is
+            false (the configuration is not reused).</p>")
+    @as("RetainDeploymentConfig")
+    retainDeploymentConfig: option<boolean_>,
+    @ocaml.doc(
+      "<p>The deployment configuration for an endpoint, which contains the desired deployment strategy and rollback configurations.</p>"
+    )
     @as("DeploymentConfig")
     deploymentConfig: option<deploymentConfig>,
     @ocaml.doc("<p>When you are updating endpoint resources with <a>UpdateEndpointInput$RetainAllVariantProperties</a>, whose value is set to
@@ -20087,12 +22339,14 @@ module UpdateEndpoint = {
   let make = (
     ~endpointConfigName,
     ~endpointName,
+    ~retainDeploymentConfig=?,
     ~deploymentConfig=?,
     ~excludeRetainedVariantProperties=?,
     ~retainAllVariantProperties=?,
     (),
   ) =>
     new({
+      retainDeploymentConfig: retainDeploymentConfig,
       deploymentConfig: deploymentConfig,
       excludeRetainedVariantProperties: excludeRetainedVariantProperties,
       retainAllVariantProperties: retainAllVariantProperties,
@@ -20105,6 +22359,9 @@ module UpdateEndpoint = {
 module UpdateDomain = {
   type t
   type request = {
+    @ocaml.doc("<p>A collection of <code>DomainSettings</code> configuration values to update.</p>")
+    @as("DomainSettingsForUpdate")
+    domainSettingsForUpdate: option<domainSettingsForUpdate>,
     @ocaml.doc("<p>A collection of settings.</p>") @as("DefaultUserSettings")
     defaultUserSettings: option<userSettings>,
     @ocaml.doc("<p>The ID of the domain to be updated.</p>") @as("DomainId") domainId: domainId,
@@ -20114,8 +22371,12 @@ module UpdateDomain = {
     domainArn: option<domainArn>,
   }
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "UpdateDomainCommand"
-  let make = (~domainId, ~defaultUserSettings=?, ()) =>
-    new({defaultUserSettings: defaultUserSettings, domainId: domainId})
+  let make = (~domainId, ~domainSettingsForUpdate=?, ~defaultUserSettings=?, ()) =>
+    new({
+      domainSettingsForUpdate: domainSettingsForUpdate,
+      defaultUserSettings: defaultUserSettings,
+      domainId: domainId,
+    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -20151,49 +22412,6 @@ module ListWorkforces = {
       nameContains: nameContains,
       sortOrder: sortOrder,
       sortBy: sortBy,
-    })
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
-module ListPipelineExecutionSteps = {
-  type t
-  type request = {
-    @ocaml.doc(
-      "<p>The field by which to sort results. The default is <code>CreatedTime</code>.</p>"
-    )
-    @as("SortOrder")
-    sortOrder: option<sortOrder>,
-    @ocaml.doc("<p>The maximum number of pipeline execution steps to return in the response.</p>")
-    @as("MaxResults")
-    maxResults: option<maxResults>,
-    @ocaml.doc("<p>If the result of the previous <code>ListPipelineExecutionSteps</code> request was truncated,
-         the response includes a <code>NextToken</code>. To retrieve the next set of pipeline execution steps, use the token in the next request.</p>")
-    @as("NextToken")
-    nextToken: option<nextToken>,
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the pipeline execution.</p>")
-    @as("PipelineExecutionArn")
-    pipelineExecutionArn: option<pipelineExecutionArn>,
-  }
-  type response = {
-    @ocaml.doc("<p>If the result of the previous <code>ListPipelineExecutionSteps</code> request was truncated,
-         the response includes a <code>NextToken</code>. To retrieve the next set of pipeline execution steps, use the token in the next request.</p>")
-    @as("NextToken")
-    nextToken: option<nextToken>,
-    @ocaml.doc("<p>A list of <code>PipeLineExecutionStep</code> objects. Each
-            <code>PipeLineExecutionStep</code> consists of StepName, StartTime, EndTime, StepStatus,
-         and Metadata. Metadata is an object with properties for each job that contains relevant
-         information about the job created by the step.</p>")
-    @as("PipelineExecutionSteps")
-    pipelineExecutionSteps: option<pipelineExecutionStepList>,
-  }
-  @module("@aws-sdk/client-sagemaker") @new
-  external new: request => t = "ListPipelineExecutionStepsCommand"
-  let make = (~sortOrder=?, ~maxResults=?, ~nextToken=?, ~pipelineExecutionArn=?, ()) =>
-    new({
-      sortOrder: sortOrder,
-      maxResults: maxResults,
-      nextToken: nextToken,
-      pipelineExecutionArn: pipelineExecutionArn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
@@ -20359,8 +22577,8 @@ module DescribeUserProfile = {
 module DescribeProcessingJob = {
   type t
   type request = {
-    @ocaml.doc("<p>The name of the processing job. The name must be unique within an AWS Region in the
-            AWS account.</p>")
+    @ocaml.doc("<p>The name of the processing job. The name must be unique within an Amazon Web Services Region in the
+            Amazon Web Services account.</p>")
     @as("ProcessingJobName")
     processingJobName: processingJobName,
   }
@@ -20418,8 +22636,8 @@ module DescribeProcessingJob = {
             processing job. In distributed training, you specify more than one instance.</p>")
     @as("ProcessingResources")
     processingResources: processingResources,
-    @ocaml.doc("<p>The name of the processing job. The name must be unique within an AWS Region in the
-            AWS account.</p>")
+    @ocaml.doc("<p>The name of the processing job. The name must be unique within an Amazon Web Services Region in the
+            Amazon Web Services account.</p>")
     @as("ProcessingJobName")
     processingJobName: processingJobName,
     @ocaml.doc("<p>Output configuration for the processing job.</p>") @as("ProcessingOutputConfig")
@@ -20436,8 +22654,8 @@ module DescribeProcessingJob = {
 module DescribeModelQualityJobDefinition = {
   type t
   type request = {
-    @ocaml.doc("<p>The name of the model quality job. The name must be unique within an AWS Region in the
-         AWS account.</p>")
+    @ocaml.doc("<p>The name of the model quality job. The name must be unique within an Amazon Web Services Region in the
+         Amazon Web Services account.</p>")
     @as("JobDefinitionName")
     jobDefinitionName: monitoringJobDefinitionName,
   }
@@ -20461,8 +22679,8 @@ module DescribeModelQualityJobDefinition = {
     modelQualityBaselineConfig: option<modelQualityBaselineConfig>,
     @ocaml.doc("<p>The time at which the model quality job was created.</p>") @as("CreationTime")
     creationTime: timestamp_,
-    @ocaml.doc("<p>The name of the quality job definition. The name must be unique within an AWS Region in
-         the AWS account.</p>")
+    @ocaml.doc("<p>The name of the quality job definition. The name must be unique within an Amazon Web Services Region in
+         the Amazon Web Services account.</p>")
     @as("JobDefinitionName")
     jobDefinitionName: monitoringJobDefinitionName,
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the model quality job.</p>")
@@ -20479,13 +22697,13 @@ module DescribeModelExplainabilityJobDefinition = {
   type t
   type request = {
     @ocaml.doc("<p>The name of the model explainability job definition. The name must be unique within an
-         AWS Region in the AWS account.</p>")
+         Amazon Web Services Region in the Amazon Web Services account.</p>")
     @as("JobDefinitionName")
     jobDefinitionName: monitoringJobDefinitionName,
   }
   type response = {
     @as("StoppingCondition") stoppingCondition: option<monitoringStoppingCondition>,
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the Amazon Web Services Identity and Access Management (IAM) role that
          has read permission to the input data location and write permission to the output data
          location in Amazon S3.</p>")
     @as("RoleArn")
@@ -20507,8 +22725,8 @@ module DescribeModelExplainabilityJobDefinition = {
     @ocaml.doc("<p>The time at which the model explainability job was created.</p>")
     @as("CreationTime")
     creationTime: timestamp_,
-    @ocaml.doc("<p>The name of the explainability job definition. The name must be unique within an AWS
-         Region in the AWS account.</p>")
+    @ocaml.doc("<p>The name of the explainability job definition. The name must be unique within an Amazon Web Services
+         Region in the Amazon Web Services account.</p>")
     @as("JobDefinitionName")
     jobDefinitionName: monitoringJobDefinitionName,
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the model explainability job.</p>")
@@ -20524,14 +22742,14 @@ module DescribeModelExplainabilityJobDefinition = {
 module DescribeModelBiasJobDefinition = {
   type t
   type request = {
-    @ocaml.doc("<p>The name of the model bias job definition. The name must be unique within an AWS Region
-         in the AWS account.</p>")
+    @ocaml.doc("<p>The name of the model bias job definition. The name must be unique within an Amazon Web Services Region
+         in the Amazon Web Services account.</p>")
     @as("JobDefinitionName")
     jobDefinitionName: monitoringJobDefinitionName,
   }
   type response = {
     @as("StoppingCondition") stoppingCondition: option<monitoringStoppingCondition>,
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the Amazon Web Services Identity and Access Management (IAM) role that
          has read permission to the input data location and write permission to the output data
          location in Amazon S3.</p>")
     @as("RoleArn")
@@ -20550,8 +22768,8 @@ module DescribeModelBiasJobDefinition = {
     modelBiasBaselineConfig: option<modelBiasBaselineConfig>,
     @ocaml.doc("<p>The time at which the model bias job was created.</p>") @as("CreationTime")
     creationTime: timestamp_,
-    @ocaml.doc("<p>The name of the bias job definition. The name must be unique within an AWS Region in the
-         AWS account.</p>")
+    @ocaml.doc("<p>The name of the bias job definition. The name must be unique within an Amazon Web Services Region in the
+         Amazon Web Services account.</p>")
     @as("JobDefinitionName")
     jobDefinitionName: monitoringJobDefinitionName,
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the model bias job.</p>")
@@ -20605,97 +22823,22 @@ module DescribeModel = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
-module DescribeEndpoint = {
-  type t
-  type request = {
-    @ocaml.doc("<p>The name of the endpoint.</p>") @as("EndpointName") endpointName: endpointName,
-  }
-  type response = {
-    @ocaml.doc("<p>The most recent deployment configuration for the endpoint.</p>")
-    @as("LastDeploymentConfig")
-    lastDeploymentConfig: option<deploymentConfig>,
-    @ocaml.doc("<p>A timestamp that shows when the endpoint was last modified.</p>")
-    @as("LastModifiedTime")
-    lastModifiedTime: timestamp_,
-    @ocaml.doc("<p>A timestamp that shows when the endpoint was created.</p>") @as("CreationTime")
-    creationTime: timestamp_,
-    @ocaml.doc("<p>If the status of the endpoint is <code>Failed</code>, the reason why it failed.
-        </p>")
-    @as("FailureReason")
-    failureReason: option<failureReason>,
-    @ocaml.doc("<p>The status of the endpoint.</p>
-        <ul>
-            <li>
-                <p>
-                  <code>OutOfService</code>: Endpoint is not available to take incoming
-                    requests.</p>
-            </li>
-            <li>
-                <p>
-                  <code>Creating</code>: <a>CreateEndpoint</a> is executing.</p>
-            </li>
-            <li>
-                <p>
-                  <code>Updating</code>: <a>UpdateEndpoint</a> or <a>UpdateEndpointWeightsAndCapacities</a> is executing.</p>
-            </li>
-            <li>
-                <p>
-                  <code>SystemUpdating</code>: Endpoint is undergoing maintenance and cannot be
-                    updated or deleted or re-scaled until it has completed. This maintenance
-                    operation does not change any customer-specified values such as VPC config, KMS
-                    encryption, model, instance type, or instance count.</p>
-            </li>
-            <li>
-                <p>
-                  <code>RollingBack</code>: Endpoint fails to scale up or down or change its
-                    variant weight and is in the process of rolling back to its previous
-                    configuration. Once the rollback completes, endpoint returns to an
-                        <code>InService</code> status. This transitional status only applies to an
-                    endpoint that has autoscaling enabled and is undergoing variant weight or
-                    capacity changes as part of an <a>UpdateEndpointWeightsAndCapacities</a> call or when the <a>UpdateEndpointWeightsAndCapacities</a> operation is called
-                    explicitly.</p>
-            </li>
-            <li>
-                <p>
-                  <code>InService</code>: Endpoint is available to process incoming
-                    requests.</p>
-            </li>
-            <li>
-                <p>
-                  <code>Deleting</code>: <a>DeleteEndpoint</a> is executing.</p>
-            </li>
-            <li>
-                <p>
-                  <code>Failed</code>: Endpoint could not be created, updated, or re-scaled. Use
-                        <a>DescribeEndpointOutput$FailureReason</a> for information about
-                    the failure. <a>DeleteEndpoint</a> is the only operation that can be
-                    performed on a failed endpoint.</p>
-            </li>
-         </ul>")
-    @as("EndpointStatus")
-    endpointStatus: endpointStatus,
-    @as("DataCaptureConfig") dataCaptureConfig: option<dataCaptureConfigSummary>,
-    @ocaml.doc("<p> An array of <a>ProductionVariantSummary</a> objects, one for each model
-            hosted behind this endpoint. </p>")
-    @as("ProductionVariants")
-    productionVariants: option<productionVariantSummaryList>,
-    @ocaml.doc("<p>The name of the endpoint configuration associated with this endpoint.</p>")
-    @as("EndpointConfigName")
-    endpointConfigName: endpointConfigName,
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the endpoint.</p>") @as("EndpointArn")
-    endpointArn: endpointArn,
-    @ocaml.doc("<p>Name of the endpoint.</p>") @as("EndpointName") endpointName: endpointName,
-  }
-  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DescribeEndpointCommand"
-  let make = (~endpointName, ()) => new({endpointName: endpointName})
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
 module DescribeDomain = {
   type t
   type request = {@ocaml.doc("<p>The domain ID.</p>") @as("DomainId") domainId: domainId}
   type response = {
-    @ocaml.doc("<p>The AWS KMS customer managed CMK used to encrypt
+    @ocaml.doc(
+      "<p>The ID of the security group that authorizes traffic between the <code>RSessionGateway</code> apps and the <code>RStudioServerPro</code> app.</p>"
+    )
+    @as("SecurityGroupIdForDomainBoundary")
+    securityGroupIdForDomainBoundary: option<securityGroupId>,
+    @ocaml.doc("<p>The entity that creates and manages the required security groups for inter-app communication in <code>VPCOnly</code> mode. 
+            Required when <code>CreateDomain.AppNetworkAccessType</code> is <code>VPCOnly</code> and <code>DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn</code> is provided.</p>")
+    @as("AppSecurityGroupManagement")
+    appSecurityGroupManagement: option<appSecurityGroupManagement>,
+    @ocaml.doc("<p>A collection of <code>Domain</code> settings.</p>") @as("DomainSettings")
+    domainSettings: option<domainSettings>,
+    @ocaml.doc("<p>The Amazon Web Services KMS customer managed key used to encrypt
          the EFS volume attached to the domain.</p>")
     @as("KmsKeyId")
     kmsKeyId: option<kmsKeyId>,
@@ -20707,8 +22850,7 @@ module DescribeDomain = {
     @ocaml.doc("<p>The domain's URL.</p>") @as("Url") url: option<string1024>,
     @ocaml.doc("<p>The VPC subnets that Studio uses for communication.</p>") @as("SubnetIds")
     subnetIds: option<subnets>,
-    @ocaml.doc("<p>This member is deprecated and replaced with <code>KmsKeyId</code>.</p>")
-    @as("HomeEfsFileSystemKmsKeyId")
+    @ocaml.doc("<p>Use <code>KmsKeyId</code>.</p>") @as("HomeEfsFileSystemKmsKeyId")
     homeEfsFileSystemKmsKeyId: option<kmsKeyId>,
     @ocaml.doc("<p>Specifies the VPC used for non-EFS traffic. The default value is
         <code>PublicInternetOnly</code>.</p>
@@ -20817,7 +22959,7 @@ module DescribeAutoMLJob = {
          that endpoint if deployed automatically.</p>")
     @as("ModelDeployConfig")
     modelDeployConfig: option<modelDeployConfig>,
-    @ocaml.doc("<p>This contains <code>ProblemType</code>, <code>AutoMLJobObjective</code> and
+    @ocaml.doc("<p>This contains <code>ProblemType</code>, <code>AutoMLJobObjective</code>, and
             <code>CompletionCriteria</code>. If you do not provide these values, they are
          auto-inferred. If you do provide them, the values used are the ones you provide.</p>")
     @as("ResolvedAttributes")
@@ -20855,8 +22997,9 @@ module DescribeAutoMLJob = {
     problemType: option<problemType>,
     @ocaml.doc("<p>Returns the job's objective.</p>") @as("AutoMLJobObjective")
     autoMLJobObjective: option<autoMLJobObjective>,
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that has read permission to
-         the input data location and write permission to the output data location in Amazon S3.</p>")
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the Amazon Web Services Identity and Access Management (IAM) role that
+         has read permission to the input data location and write permission to the output data
+         location in Amazon S3.</p>")
     @as("RoleArn")
     roleArn: roleArn,
     @ocaml.doc("<p>Returns the job's output data config.</p>") @as("OutputDataConfig")
@@ -20880,7 +23023,7 @@ module CreateWorkteam = {
     @ocaml.doc("<p>An array of key-value pairs.</p>
         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-resource-tags.html\">Resource
                 Tag</a> and <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what\">Using
-                Cost Allocation Tags</a> in the <i> AWS Billing and Cost Management User
+                    Cost Allocation Tags</a> in the <i> Amazon Web Services Billing and Cost Management User
                 Guide</i>.</p>")
     @as("Tags")
     tags: option<tagList_>,
@@ -20953,7 +23096,7 @@ module CreateUserProfile = {
           User Profile launches.</p>")
     @as("Tags")
     tags: option<tagList_>,
-    @ocaml.doc("<p>The username of the associated AWS Single Sign-On User for this UserProfile.  If the Domain's AuthMode is SSO, this field is
+    @ocaml.doc("<p>The username of the associated Amazon Web Services Single Sign-On User for this UserProfile.  If the Domain's AuthMode is SSO, this field is
            required, and must match a valid username of a user in your directory.  If the Domain's AuthMode is not SSO, this field cannot be specified.
        </p>")
     @as("SingleSignOnUserValue")
@@ -20997,7 +23140,7 @@ module CreateProcessingJob = {
   type t
   type request = {
     @as("ExperimentConfig") experimentConfig: option<experimentConfig>,
-    @ocaml.doc("<p>(Optional) An array of key-value pairs. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL\">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management
+    @ocaml.doc("<p>(Optional) An array of key-value pairs. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL\">Using Cost Allocation Tags</a> in the <i>Amazon Web Services Billing and Cost Management
                 User Guide</i>.</p>")
     @as("Tags")
     tags: option<tagList_>,
@@ -21024,8 +23167,8 @@ module CreateProcessingJob = {
             processing job. In distributed training, you specify more than one instance.</p>")
     @as("ProcessingResources")
     processingResources: processingResources,
-    @ocaml.doc("<p> The name of the processing job. The name must be unique within an AWS Region in the
-            AWS account.</p>")
+    @ocaml.doc("<p> The name of the processing job. The name must be unique within an Amazon Web Services Region in the
+            Amazon Web Services account.</p>")
     @as("ProcessingJobName")
     processingJobName: processingJobName,
     @ocaml.doc("<p>Output configuration for the processing job.</p>") @as("ProcessingOutputConfig")
@@ -21075,7 +23218,7 @@ module CreateProcessingJob = {
 module CreateModelQualityJobDefinition = {
   type t
   type request = {
-    @ocaml.doc("<p>(Optional) An array of key-value pairs. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL\">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management
+    @ocaml.doc("<p>(Optional) An array of key-value pairs. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL\">Using Cost Allocation Tags</a> in the <i>Amazon Web Services Billing and Cost Management
             User Guide</i>.</p>")
     @as("Tags")
     tags: option<tagList_>,
@@ -21139,7 +23282,7 @@ module CreateModelQualityJobDefinition = {
 module CreateModelExplainabilityJobDefinition = {
   type t
   type request = {
-    @ocaml.doc("<p>(Optional) An array of key-value pairs. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL\">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management
+    @ocaml.doc("<p>(Optional) An array of key-value pairs. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL\">Using Cost Allocation Tags</a> in the <i>Amazon Web Services Billing and Cost Management
             User Guide</i>.</p>")
     @as("Tags")
     tags: option<tagList_>,
@@ -21163,7 +23306,7 @@ module CreateModelExplainabilityJobDefinition = {
     @as("ModelExplainabilityBaselineConfig")
     modelExplainabilityBaselineConfig: option<modelExplainabilityBaselineConfig>,
     @ocaml.doc("<p> The name of the model explainability job definition. The name must be unique within an
-         AWS Region in the AWS account.</p>")
+         Amazon Web Services Region in the Amazon Web Services account.</p>")
     @as("JobDefinitionName")
     jobDefinitionName: monitoringJobDefinitionName,
   }
@@ -21205,7 +23348,7 @@ module CreateModelExplainabilityJobDefinition = {
 module CreateModelBiasJobDefinition = {
   type t
   type request = {
-    @ocaml.doc("<p>(Optional) An array of key-value pairs. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL\">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management
+    @ocaml.doc("<p>(Optional) An array of key-value pairs. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL\">Using Cost Allocation Tags</a> in the <i>Amazon Web Services Billing and Cost Management
             User Guide</i>.</p>")
     @as("Tags")
     tags: option<tagList_>,
@@ -21226,8 +23369,8 @@ module CreateModelBiasJobDefinition = {
     @ocaml.doc("<p>The baseline configuration for a model bias job.</p>")
     @as("ModelBiasBaselineConfig")
     modelBiasBaselineConfig: option<modelBiasBaselineConfig>,
-    @ocaml.doc("<p>The name of the bias job definition. The name must be unique within an AWS Region in the
-         AWS account.</p>")
+    @ocaml.doc("<p>The name of the bias job definition. The name must be unique within an Amazon Web Services Region in the
+         Amazon Web Services account.</p>")
     @as("JobDefinitionName")
     jobDefinitionName: monitoringJobDefinitionName,
   }
@@ -21280,9 +23423,9 @@ module CreateModel = {
                 Transform Jobs by Using an Amazon Virtual Private Cloud</a>.</p>")
     @as("VpcConfig")
     vpcConfig: option<vpcConfig>,
-    @ocaml.doc("<p>An array of key-value pairs. You can use tags to categorize your AWS resources in
+    @ocaml.doc("<p>An array of key-value pairs. You can use tags to categorize your Amazon Web Services resources in
             different ways, for example, by purpose, owner, or environment. For more information,
-            see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS
+            see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services
                 Resources</a>.</p>")
     @as("Tags")
     tags: option<tagList_>,
@@ -21340,15 +23483,59 @@ module CreateModel = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module CreateEndpoint = {
+  type t
+  type request = {
+    @ocaml.doc("<p>An array of key-value pairs. You can use tags to categorize your Amazon Web Services resources in
+            different ways, for example, by purpose, owner, or environment. For more information,
+            see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services
+                Resources</a>.</p>")
+    @as("Tags")
+    tags: option<tagList_>,
+    @as("DeploymentConfig") deploymentConfig: option<deploymentConfig>,
+    @ocaml.doc(
+      "<p>The name of an endpoint configuration. For more information, see <a>CreateEndpointConfig</a>. </p>"
+    )
+    @as("EndpointConfigName")
+    endpointConfigName: endpointConfigName,
+    @ocaml.doc("<p>The name of the endpoint.The name must be unique within an Amazon Web Services Region in your Amazon Web Services
+            account. The name is case-insensitive in <code>CreateEndpoint</code>, but the case is
+            preserved and must be matched in .</p>")
+    @as("EndpointName")
+    endpointName: endpointName,
+  }
+  type response = {
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the endpoint.</p>") @as("EndpointArn")
+    endpointArn: endpointArn,
+  }
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "CreateEndpointCommand"
+  let make = (~endpointConfigName, ~endpointName, ~tags=?, ~deploymentConfig=?, ()) =>
+    new({
+      tags: tags,
+      deploymentConfig: deploymentConfig,
+      endpointConfigName: endpointConfigName,
+      endpointName: endpointName,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module CreateDomain = {
   type t
   type request = {
-    @ocaml.doc("<p>SageMaker uses AWS KMS to encrypt the EFS volume attached to the domain with an AWS managed
-         customer master key (CMK) by default. For more control, specify a customer managed CMK.</p>")
+    @ocaml.doc("<p>A collection of <code>Domain</code> settings.</p>") @as("DomainSettings")
+    domainSettings: option<domainSettings>,
+    @ocaml.doc("<p>The entity that creates and manages the required security groups for inter-app
+            communication in <code>VPCOnly</code> mode. Required when
+            <code>CreateDomain.AppNetworkAccessType</code> is <code>VPCOnly</code> and
+            <code>DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn</code> is
+            provided.</p>")
+    @as("AppSecurityGroupManagement")
+    appSecurityGroupManagement: option<appSecurityGroupManagement>,
+    @ocaml.doc("<p>SageMaker uses Amazon Web Services KMS to encrypt the EFS volume attached to the domain with an Amazon Web Services managed
+         key by default. For more control, specify a customer managed key.</p>")
     @as("KmsKeyId")
     kmsKeyId: option<kmsKeyId>,
-    @ocaml.doc("<p>This member is deprecated and replaced with <code>KmsKeyId</code>.</p>")
-    @as("HomeEfsFileSystemKmsKeyId")
+    @ocaml.doc("<p>Use <code>KmsKeyId</code>.</p>") @as("HomeEfsFileSystemKmsKeyId")
     homeEfsFileSystemKmsKeyId: option<kmsKeyId>,
     @ocaml.doc("<p>Specifies the VPC used for non-EFS traffic. The default value is
         <code>PublicInternetOnly</code>.</p>
@@ -21404,6 +23591,8 @@ module CreateDomain = {
     ~defaultUserSettings,
     ~authMode,
     ~domainName,
+    ~domainSettings=?,
+    ~appSecurityGroupManagement=?,
     ~kmsKeyId=?,
     ~homeEfsFileSystemKmsKeyId=?,
     ~appNetworkAccessType=?,
@@ -21411,6 +23600,8 @@ module CreateDomain = {
     (),
   ) =>
     new({
+      domainSettings: domainSettings,
+      appSecurityGroupManagement: appSecurityGroupManagement,
       kmsKeyId: kmsKeyId,
       homeEfsFileSystemKmsKeyId: homeEfsFileSystemKmsKeyId,
       appNetworkAccessType: appNetworkAccessType,
@@ -21427,7 +23618,7 @@ module CreateDomain = {
 module CreateDataQualityJobDefinition = {
   type t
   type request = {
-    @ocaml.doc("<p>(Optional) An array of key-value pairs. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL\">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management
+    @ocaml.doc("<p>(Optional) An array of key-value pairs. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL\">Using Cost Allocation Tags</a> in the <i>Amazon Web Services Billing and Cost Management
             User Guide</i>.</p>")
     @as("Tags")
     tags: option<tagList_>,
@@ -21504,18 +23695,14 @@ module CreateAutoMLJob = {
          of data preprocessors, algorithms, and algorithm parameter settings.</p>")
     @as("GenerateCandidateDefinitionsOnly")
     generateCandidateDefinitionsOnly: option<generateCandidateDefinitionsOnly>,
-    @ocaml.doc("<p>The ARN of the role that is used to access the data.</p>
-      
-         <p><para>Specifies whether to automatically deploy the best &ATP; model to an
-         endpoint and the name of that endpoint if deployed automatically.</para></p>")
-    @as("RoleArn")
+    @ocaml.doc("<p>The ARN of the role that is used to access the data.</p>") @as("RoleArn")
     roleArn: roleArn,
     @ocaml.doc("<p>Contains <code>CompletionCriteria</code> and <code>SecurityConfig</code> settings for
          the AutoML job.</p>")
     @as("AutoMLJobConfig")
     autoMLJobConfig: option<autoMLJobConfig>,
-    @ocaml.doc("<p>Defines the objective metric used to measure the predictive quality of an AutoML job.
-         You provide an <a>AutoMLJobObjective$MetricName</a> and Autopilot infers whether to
+    @ocaml.doc("<p>Defines the objective metric used to measure the predictive quality of an AutoML job. You
+         provide an <a>AutoMLJobObjective$MetricName</a> and Autopilot infers whether to
          minimize or maximize it.</p>")
     @as("AutoMLJobObjective")
     autoMLJobObjective: option<autoMLJobObjective>,
@@ -21525,11 +23712,8 @@ module CreateAutoMLJob = {
             Amazon SageMaker Autopilot problem types and algorithm support</a>.</p>")
     @as("ProblemType")
     problemType: option<problemType>,
-    @ocaml.doc("<p>Provides information about encryption and the Amazon S3 output path needed to store
-         artifacts from an AutoML job. Format(s) supported: CSV.</p>
-      
-         <p><para>Specifies whether to automatically deploy the best &ATP; model to an
-         endpoint and the name of that endpoint if deployed automatically.</para></p>")
+    @ocaml.doc("<p>Provides information about encryption and the Amazon S3 output path needed to store artifacts
+         from an AutoML job. Format(s) supported: CSV.</p>")
     @as("OutputDataConfig")
     outputDataConfig: autoMLOutputDataConfig,
     @ocaml.doc("<p>An array of channel objects that describes the input data and its location. Each channel
@@ -21543,7 +23727,7 @@ module CreateAutoMLJob = {
     autoMLJobName: autoMLJobName,
   }
   type response = {
-    @ocaml.doc("<p>The unique ARN that is assigned to the AutoML job when it is created.</p>")
+    @ocaml.doc("<p>The unique ARN assigned to the AutoML job when it is created.</p>")
     @as("AutoMLJobArn")
     autoMLJobArn: autoMLJobArn,
   }
@@ -21627,6 +23811,57 @@ module UpdateWorkteam = {
       description: description,
       memberDefinitions: memberDefinitions,
       workteamName: workteamName,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module UpdateModelPackage = {
+  type t
+  type request = {
+    @ocaml.doc("<p>An array of additional Inference Specification objects to be added to the 
+    existing array additional Inference Specification. Total number of additional 
+    Inference Specifications can not exceed 15. Each additional Inference Specification 
+    specifies artifacts based on this model package that can be used on inference endpoints. 
+    Generally used with SageMaker Neo to store the compiled artifacts.</p>")
+    @as("AdditionalInferenceSpecificationsToAdd")
+    additionalInferenceSpecificationsToAdd: option<additionalInferenceSpecifications>,
+    @ocaml.doc(
+      "<p>The metadata properties associated with the model package versions to remove.</p>"
+    )
+    @as("CustomerMetadataPropertiesToRemove")
+    customerMetadataPropertiesToRemove: option<customerMetadataKeyList>,
+    @ocaml.doc("<p>The metadata properties associated with the model package versions.</p>")
+    @as("CustomerMetadataProperties")
+    customerMetadataProperties: option<customerMetadataMap>,
+    @ocaml.doc("<p>A description for the approval status of the model.</p>")
+    @as("ApprovalDescription")
+    approvalDescription: option<approvalDescription>,
+    @ocaml.doc("<p>The approval status of the model.</p>") @as("ModelApprovalStatus")
+    modelApprovalStatus: option<modelApprovalStatus>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the model package.</p>") @as("ModelPackageArn")
+    modelPackageArn: modelPackageArn,
+  }
+  type response = {
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the model.</p>") @as("ModelPackageArn")
+    modelPackageArn: modelPackageArn,
+  }
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "UpdateModelPackageCommand"
+  let make = (
+    ~modelPackageArn,
+    ~additionalInferenceSpecificationsToAdd=?,
+    ~customerMetadataPropertiesToRemove=?,
+    ~customerMetadataProperties=?,
+    ~approvalDescription=?,
+    ~modelApprovalStatus=?,
+    (),
+  ) =>
+    new({
+      additionalInferenceSpecificationsToAdd: additionalInferenceSpecificationsToAdd,
+      customerMetadataPropertiesToRemove: customerMetadataPropertiesToRemove,
+      customerMetadataProperties: customerMetadataProperties,
+      approvalDescription: approvalDescription,
+      modelApprovalStatus: modelApprovalStatus,
+      modelPackageArn: modelPackageArn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
@@ -21945,7 +24180,7 @@ module DescribeTrainingJob = {
     @as("Environment")
     environment: option<trainingEnvironmentMap>,
     @ocaml.doc("<p>The number of times to retry the job when the job fails due to an
-            <code>InternalServerError</code>.</p>")
+                <code>InternalServerError</code>.</p>")
     @as("RetryStrategy")
     retryStrategy: option<retryStrategy>,
     @ocaml.doc("<p>Profiling status of a training job.</p>") @as("ProfilingStatus")
@@ -21971,7 +24206,7 @@ module DescribeTrainingJob = {
             time.</p>
         <p>Multiply <code>BillableTimeInSeconds</code> by the number of instances
                 (<code>InstanceCount</code>) in your training cluster to get the total compute time
-            Amazon SageMaker will bill you if you run distributed training. The formula is as follows:
+            SageMaker will bill you if you run distributed training. The formula is as follows:
                 <code>BillableTimeInSeconds * InstanceCount</code> .</p>
         <p>You can calculate the savings from using managed spot training using the formula
                 <code>(1 - BillableTimeInSeconds / TrainingTimeInSeconds) * 100</code>. For example,
@@ -22028,10 +24263,9 @@ module DescribeTrainingJob = {
     @ocaml.doc("<p>A timestamp that indicates when the training job was created.</p>")
     @as("CreationTime")
     creationTime: timestamp_,
-    @ocaml.doc("<p>Specifies a limit to how long a model training job can run.
-            It also specifies how long a managed Spot training job has to complete.
-            When the job reaches the time limit, Amazon SageMaker ends
-            the training job. Use this API to cap model training costs.</p>
+    @ocaml.doc("<p>Specifies a limit to how long a model training job can run. It also specifies how long
+            a managed Spot training job has to complete. When the job reaches the time limit, Amazon SageMaker
+            ends the training job. Use this API to cap model training costs.</p>
         <p>To stop a job, Amazon SageMaker sends the algorithm the <code>SIGTERM</code> signal, which delays
             job termination for 120 seconds. Algorithms can use this 120-second window to save the
             model artifacts, so the results of training are not lost. </p>")
@@ -22055,7 +24289,7 @@ module DescribeTrainingJob = {
     @as("InputDataConfig")
     inputDataConfig: option<inputDataConfig>,
     @ocaml.doc(
-      "<p>The AWS Identity and Access Management (IAM) role configured for the training job. </p>"
+      "<p>The Amazon Web Services Identity and Access Management (IAM) role configured for the training job. </p>"
     )
     @as("RoleArn")
     roleArn: option<roleArn>,
@@ -22233,11 +24467,107 @@ module DescribeTrainingJob = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module DescribeEndpoint = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The name of the endpoint.</p>") @as("EndpointName") endpointName: endpointName,
+  }
+  type response = {
+    @ocaml.doc("<p>Returns the summary of an in-progress deployment. This field is only returned when the
+            endpoint is creating or updating with a new endpoint configuration.</p>")
+    @as("PendingDeploymentSummary")
+    pendingDeploymentSummary: option<pendingDeploymentSummary>,
+    @ocaml.doc("<p>Returns the description of an endpoint configuration created 
+            using the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpointConfig.html\">
+               <code>CreateEndpointConfig</code>
+            </a> API.</p>")
+    @as("AsyncInferenceConfig")
+    asyncInferenceConfig: option<asyncInferenceConfig>,
+    @ocaml.doc("<p>The most recent deployment configuration for the endpoint.</p>")
+    @as("LastDeploymentConfig")
+    lastDeploymentConfig: option<deploymentConfig>,
+    @ocaml.doc("<p>A timestamp that shows when the endpoint was last modified.</p>")
+    @as("LastModifiedTime")
+    lastModifiedTime: timestamp_,
+    @ocaml.doc("<p>A timestamp that shows when the endpoint was created.</p>") @as("CreationTime")
+    creationTime: timestamp_,
+    @ocaml.doc("<p>If the status of the endpoint is <code>Failed</code>, the reason why it failed.
+        </p>")
+    @as("FailureReason")
+    failureReason: option<failureReason>,
+    @ocaml.doc("<p>The status of the endpoint.</p>
+        <ul>
+            <li>
+                <p>
+                  <code>OutOfService</code>: Endpoint is not available to take incoming
+                    requests.</p>
+            </li>
+            <li>
+                <p>
+                  <code>Creating</code>: <a>CreateEndpoint</a> is executing.</p>
+            </li>
+            <li>
+                <p>
+                  <code>Updating</code>: <a>UpdateEndpoint</a> or <a>UpdateEndpointWeightsAndCapacities</a> is executing.</p>
+            </li>
+            <li>
+                <p>
+                  <code>SystemUpdating</code>: Endpoint is undergoing maintenance and cannot be
+                    updated or deleted or re-scaled until it has completed. This maintenance
+                    operation does not change any customer-specified values such as VPC config, KMS
+                    encryption, model, instance type, or instance count.</p>
+            </li>
+            <li>
+                <p>
+                  <code>RollingBack</code>: Endpoint fails to scale up or down or change its
+                    variant weight and is in the process of rolling back to its previous
+                    configuration. Once the rollback completes, endpoint returns to an
+                        <code>InService</code> status. This transitional status only applies to an
+                    endpoint that has autoscaling enabled and is undergoing variant weight or
+                    capacity changes as part of an <a>UpdateEndpointWeightsAndCapacities</a> call or when the <a>UpdateEndpointWeightsAndCapacities</a> operation is called
+                    explicitly.</p>
+            </li>
+            <li>
+                <p>
+                  <code>InService</code>: Endpoint is available to process incoming
+                    requests.</p>
+            </li>
+            <li>
+                <p>
+                  <code>Deleting</code>: <a>DeleteEndpoint</a> is executing.</p>
+            </li>
+            <li>
+                <p>
+                  <code>Failed</code>: Endpoint could not be created, updated, or re-scaled. Use
+                        <a>DescribeEndpointOutput$FailureReason</a> for information about
+                    the failure. <a>DeleteEndpoint</a> is the only operation that can be
+                    performed on a failed endpoint.</p>
+            </li>
+         </ul>")
+    @as("EndpointStatus")
+    endpointStatus: endpointStatus,
+    @as("DataCaptureConfig") dataCaptureConfig: option<dataCaptureConfigSummary>,
+    @ocaml.doc("<p> An array of <a>ProductionVariantSummary</a> objects, one for each model
+            hosted behind this endpoint. </p>")
+    @as("ProductionVariants")
+    productionVariants: option<productionVariantSummaryList>,
+    @ocaml.doc("<p>The name of the endpoint configuration associated with this endpoint.</p>")
+    @as("EndpointConfigName")
+    endpointConfigName: endpointConfigName,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the endpoint.</p>") @as("EndpointArn")
+    endpointArn: endpointArn,
+    @ocaml.doc("<p>Name of the endpoint.</p>") @as("EndpointName") endpointName: endpointName,
+  }
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DescribeEndpointCommand"
+  let make = (~endpointName, ()) => new({endpointName: endpointName})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module CreateTrainingJob = {
   type t
   type request = {
     @ocaml.doc("<p>The number of times to retry the job when the job fails due to an
-            <code>InternalServerError</code>.</p>")
+                <code>InternalServerError</code>.</p>")
     @as("RetryStrategy")
     retryStrategy: option<retryStrategy>,
     @ocaml.doc("<p>The environment variables to set in the Docker container.</p>")
@@ -22283,16 +24613,15 @@ module CreateTrainingJob = {
             the training container does not have network access.</p>")
     @as("EnableNetworkIsolation")
     enableNetworkIsolation: option<boolean_>,
-    @ocaml.doc("<p>An array of key-value pairs. You can use tags to categorize your AWS resources in
+    @ocaml.doc("<p>An array of key-value pairs. You can use tags to categorize your Amazon Web Services resources in
             different ways, for example, by purpose, owner, or environment. For more information,
-            see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS
+            see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services
                 Resources</a>.</p>")
     @as("Tags")
     tags: option<tagList_>,
-    @ocaml.doc("<p>Specifies a limit to how long a model training job can run.
-            It also specifies how long a managed Spot training job has to complete.
-            When the job reaches the time limit, Amazon SageMaker ends
-            the training job. Use this API to cap model training costs.</p>
+    @ocaml.doc("<p>Specifies a limit to how long a model training job can run. It also specifies how long
+            a managed Spot training job has to complete. When the job reaches the time limit, Amazon SageMaker
+            ends the training job. Use this API to cap model training costs.</p>
         <p>To stop a job, Amazon SageMaker sends the algorithm the <code>SIGTERM</code> signal, which delays
             job termination for 120 seconds. Algorithms can use this 120-second window to save the
             model artifacts, so the results of training are not lost. </p>")
@@ -22319,7 +24648,6 @@ module CreateTrainingJob = {
     outputDataConfig: outputDataConfig,
     @ocaml.doc("<p>An array of <code>Channel</code> objects. Each channel is a named input source.
                 <code>InputDataConfig</code>
-         
             describes the input data and its location. </p>
         <p>Algorithms can accept input data from one or more channels. For example, an
             algorithm might have two channels of input data, <code>training_data</code> and
@@ -22362,8 +24690,8 @@ module CreateTrainingJob = {
                 <code>Length Constraint</code>. </p>")
     @as("HyperParameters")
     hyperParameters: option<hyperParameters>,
-    @ocaml.doc("<p>The name of the training job. The name must be unique within an AWS Region in an
-            AWS account. </p>")
+    @ocaml.doc("<p>The name of the training job. The name must be unique within an Amazon Web Services Region in an
+            Amazon Web Services account. </p>")
     @as("TrainingJobName")
     trainingJobName: trainingJobName,
   }
@@ -22431,8 +24759,8 @@ module UpdateMonitoringSchedule = {
          monitoring job.</p>")
     @as("MonitoringScheduleConfig")
     monitoringScheduleConfig: monitoringScheduleConfig,
-    @ocaml.doc("<p>The name of the monitoring schedule. The name must be unique within an AWS Region within
-         an AWS account.</p>")
+    @ocaml.doc("<p>The name of the monitoring schedule. The name must be unique within an Amazon Web Services Region within
+         an Amazon Web Services account.</p>")
     @as("MonitoringScheduleName")
     monitoringScheduleName: monitoringScheduleName,
   }
@@ -22490,6 +24818,49 @@ module ListWorkteams = {
       nameContains: nameContains,
       sortOrder: sortOrder,
       sortBy: sortBy,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module ListPipelineExecutionSteps = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>The field by which to sort results. The default is <code>CreatedTime</code>.</p>"
+    )
+    @as("SortOrder")
+    sortOrder: option<sortOrder>,
+    @ocaml.doc("<p>The maximum number of pipeline execution steps to return in the response.</p>")
+    @as("MaxResults")
+    maxResults: option<maxResults>,
+    @ocaml.doc("<p>If the result of the previous <code>ListPipelineExecutionSteps</code> request was truncated,
+         the response includes a <code>NextToken</code>. To retrieve the next set of pipeline execution steps, use the token in the next request.</p>")
+    @as("NextToken")
+    nextToken: option<nextToken>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the pipeline execution.</p>")
+    @as("PipelineExecutionArn")
+    pipelineExecutionArn: option<pipelineExecutionArn>,
+  }
+  type response = {
+    @ocaml.doc("<p>If the result of the previous <code>ListPipelineExecutionSteps</code> request was truncated,
+         the response includes a <code>NextToken</code>. To retrieve the next set of pipeline execution steps, use the token in the next request.</p>")
+    @as("NextToken")
+    nextToken: option<nextToken>,
+    @ocaml.doc("<p>A list of <code>PipeLineExecutionStep</code> objects. Each
+            <code>PipeLineExecutionStep</code> consists of StepName, StartTime, EndTime, StepStatus,
+         and Metadata. Metadata is an object with properties for each job that contains relevant
+         information about the job created by the step.</p>")
+    @as("PipelineExecutionSteps")
+    pipelineExecutionSteps: option<pipelineExecutionStepList>,
+  }
+  @module("@aws-sdk/client-sagemaker") @new
+  external new: request => t = "ListPipelineExecutionStepsCommand"
+  let make = (~sortOrder=?, ~maxResults=?, ~nextToken=?, ~pipelineExecutionArn=?, ()) =>
+    new({
+      sortOrder: sortOrder,
+      maxResults: maxResults,
+      nextToken: nextToken,
+      pipelineExecutionArn: pipelineExecutionArn,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
@@ -22562,7 +24933,7 @@ module DescribeMonitoringSchedule = {
 module CreateMonitoringSchedule = {
   type t
   type request = {
-    @ocaml.doc("<p>(Optional) An array of key-value pairs. For more information, see <a href=\" https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL\">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management
+    @ocaml.doc("<p>(Optional) An array of key-value pairs. For more information, see <a href=\" https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL\">Using Cost Allocation Tags</a> in the <i>Amazon Web Services Billing and Cost Management
             User Guide</i>.</p>")
     @as("Tags")
     tags: option<tagList_>,
@@ -22570,8 +24941,8 @@ module CreateMonitoringSchedule = {
          monitoring job.</p>")
     @as("MonitoringScheduleConfig")
     monitoringScheduleConfig: monitoringScheduleConfig,
-    @ocaml.doc("<p>The name of the monitoring schedule. The name must be unique within an AWS Region within
-         an AWS account.</p>")
+    @ocaml.doc("<p>The name of the monitoring schedule. The name must be unique within an Amazon Web Services Region within
+         an Amazon Web Services account.</p>")
     @as("MonitoringScheduleName")
     monitoringScheduleName: monitoringScheduleName,
   }
@@ -22591,13 +24962,62 @@ module CreateMonitoringSchedule = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module BatchDescribeModelPackage = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The list of Amazon Resource Name (ARN) of the model package groups.</p>")
+    @as("ModelPackageArnList")
+    modelPackageArnList: modelPackageArnList,
+  }
+  type response = {
+    @ocaml.doc("<p>A map of the resource and BatchDescribeModelPackageError objects 
+            reporting the error associated with describing the model package.</p>")
+    @as("BatchDescribeModelPackageErrorMap")
+    batchDescribeModelPackageErrorMap: option<batchDescribeModelPackageErrorMap>,
+    @ocaml.doc("<p>The summaries for the model package versions</p>") @as("ModelPackageSummaries")
+    modelPackageSummaries: option<modelPackageSummaries>,
+  }
+  @module("@aws-sdk/client-sagemaker") @new
+  external new: request => t = "BatchDescribeModelPackageCommand"
+  let make = (~modelPackageArnList, ()) => new({modelPackageArnList: modelPackageArnList})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module DescribeModelPackage = {
   type t
   type request = {
-    @ocaml.doc("<p>The name of the model package to describe.</p>") @as("ModelPackageName")
+    @ocaml.doc("<p>The name or Amazon Resource Name (ARN) of the model package to describe.</p>
+        <p>When you specify a name, the name must have 1 to 63 characters. Valid
+            characters are a-z, A-Z, 0-9, and - (hyphen).</p>")
+    @as("ModelPackageName")
     modelPackageName: versionedArnOrName,
   }
   type response = {
+    @ocaml.doc("<p>An array of additional Inference Specification objects. Each additional 
+    Inference Specification specifies artifacts based on this model package that can 
+    be used on inference endpoints. Generally used with SageMaker Neo to store the compiled artifacts.</p>")
+    @as("AdditionalInferenceSpecifications")
+    additionalInferenceSpecifications: option<additionalInferenceSpecifications>,
+    @ocaml.doc("<p>The Amazon Simple Storage Service (Amazon S3) path where the sample payload are stored. This path points to a single 
+    gzip compressed tar archive (.tar.gz suffix).</p>")
+    @as("SamplePayloadUrl")
+    samplePayloadUrl: option<string_>,
+    @ocaml.doc("<p>The machine learning task you specified that your model package accomplishes. 
+     Common machine learning tasks include object detection and image classification.</p>")
+    @as("Task")
+    task: option<string_>,
+    @ocaml.doc("<p>The machine learning domain of the model package you specified. Common machine 
+    learning domains include computer vision and natural language processing.</p>")
+    @as("Domain")
+    domain: option<string_>,
+    @ocaml.doc("<p>Represents the drift check baselines that can be used when the model monitor is set using the model package. 
+         For more information, see the topic on <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/pipelines-quality-clarify-baseline-lifecycle.html#pipelines-quality-clarify-baseline-drift-detection\">Drift Detection against Previous Baselines in SageMaker Pipelines</a> in the <i>Amazon SageMaker Developer Guide</i>.
+      </p>")
+    @as("DriftCheckBaselines")
+    driftCheckBaselines: option<driftCheckBaselines>,
+    @ocaml.doc("<p>The metadata properties associated with the model package versions.</p>")
+    @as("CustomerMetadataProperties")
+    customerMetadataProperties: option<customerMetadataMap>,
     @ocaml.doc("<p>A description provided for the model approval.</p>") @as("ApprovalDescription")
     approvalDescription: option<approvalDescription>,
     @as("LastModifiedBy") lastModifiedBy: option<userContext>,
@@ -22609,7 +25029,9 @@ module DescribeModelPackage = {
     @as("CreatedBy") createdBy: option<userContext>,
     @ocaml.doc("<p>The approval status of the model package.</p>") @as("ModelApprovalStatus")
     modelApprovalStatus: option<modelApprovalStatus>,
-    @ocaml.doc("<p>Whether the model package is certified for listing on AWS Marketplace.</p>")
+    @ocaml.doc(
+      "<p>Whether the model package is certified for listing on Amazon Web Services Marketplace.</p>"
+    )
     @as("CertifyForMarketplace")
     certifyForMarketplace: option<certifyForMarketplace>,
     @ocaml.doc("<p>Details about the current status of the model package.</p>")
@@ -22617,7 +25039,7 @@ module DescribeModelPackage = {
     modelPackageStatusDetails: modelPackageStatusDetails,
     @ocaml.doc("<p>The current status of the model package.</p>") @as("ModelPackageStatus")
     modelPackageStatus: modelPackageStatus,
-    @ocaml.doc("<p>Configurations for one or more transform jobs that Amazon SageMaker runs to test the model
+    @ocaml.doc("<p>Configurations for one or more transform jobs that SageMaker runs to test the model
             package.</p>")
     @as("ValidationSpecification")
     validationSpecification: option<modelPackageValidationSpecification>,
@@ -22647,6 +25069,58 @@ module DescribeModelPackage = {
   @module("@aws-sdk/client-sagemaker") @new
   external new: request => t = "DescribeModelPackageCommand"
   let make = (~modelPackageName, ()) => new({modelPackageName: modelPackageName})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module DescribeInferenceRecommendationsJob = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The name of the job. The name must be unique within an 
+           Amazon Web Services Region in the Amazon Web Services account.</p>")
+    @as("JobName")
+    jobName: recommendationJobName,
+  }
+  type response = {
+    @ocaml.doc("<p>The recommendations made by Inference Recommender.</p>")
+    @as("InferenceRecommendations")
+    inferenceRecommendations: option<inferenceRecommendations>,
+    @ocaml.doc("<p>The stopping conditions that you provided when you initiated the job.</p>")
+    @as("StoppingConditions")
+    stoppingConditions: option<recommendationJobStoppingConditions>,
+    @ocaml.doc("<p>Returns information about the versioned model package Amazon Resource Name (ARN), 
+    the traffic pattern, and endpoint configurations you provided when you initiated the job.</p>")
+    @as("InputConfig")
+    inputConfig: recommendationJobInputConfig,
+    @ocaml.doc("<p>If the job fails, provides information why the job failed.</p>")
+    @as("FailureReason")
+    failureReason: option<failureReason>,
+    @ocaml.doc("<p>A timestamp that shows when the job was last modified.</p>")
+    @as("LastModifiedTime")
+    lastModifiedTime: lastModifiedTime,
+    @ocaml.doc("<p>A timestamp that shows when the job completed.</p>") @as("CompletionTime")
+    completionTime: option<timestamp_>,
+    @ocaml.doc("<p>A timestamp that shows when the job was created.</p>") @as("CreationTime")
+    creationTime: creationTime,
+    @ocaml.doc("<p>The status of the job.</p>") @as("Status") status: recommendationJobStatus,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the Amazon Web Services 
+           Identity and Access Management (IAM) role you provided when you initiated the job.</p>")
+    @as("RoleArn")
+    roleArn: roleArn,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the job.</p>") @as("JobArn")
+    jobArn: recommendationJobArn,
+    @ocaml.doc("<p>The job type that you provided when you initiated the job.</p>") @as("JobType")
+    jobType: recommendationJobType,
+    @ocaml.doc("<p>The job description that you provided when you initiated the job.</p>")
+    @as("JobDescription")
+    jobDescription: option<recommendationJobDescription>,
+    @ocaml.doc("<p>The name of the job. The name must be unique within an 
+           Amazon Web Services Region in the Amazon Web Services account.</p>")
+    @as("JobName")
+    jobName: recommendationJobName,
+  }
+  @module("@aws-sdk/client-sagemaker") @new
+  external new: request => t = "DescribeInferenceRecommendationsJobCommand"
+  let make = (~jobName, ()) => new({jobName: jobName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -22726,6 +25200,32 @@ module DescribeHyperParameterTuningJob = {
 module CreateModelPackage = {
   type t
   type request = {
+    @ocaml.doc("<p>An array of additional Inference Specification objects. Each additional 
+    Inference Specification specifies artifacts based on this model package that can 
+    be used on inference endpoints. Generally used with SageMaker Neo to store the 
+    compiled artifacts. </p>")
+    @as("AdditionalInferenceSpecifications")
+    additionalInferenceSpecifications: option<additionalInferenceSpecifications>,
+    @ocaml.doc("<p>The Amazon Simple Storage Service (Amazon S3) path where the sample payload are stored. This path must point 
+    to a single gzip compressed tar archive (.tar.gz suffix).</p>")
+    @as("SamplePayloadUrl")
+    samplePayloadUrl: option<s3Uri>,
+    @ocaml.doc("<p>The machine learning task your model package accomplishes. Common machine 
+    learning tasks include object detection and image classification.</p>")
+    @as("Task")
+    task: option<string_>,
+    @ocaml.doc("<p>The machine learning domain of your model package and its components. Common 
+    machine learning domains include computer vision and natural language processing.</p>")
+    @as("Domain")
+    domain: option<string_>,
+    @ocaml.doc("<p>Represents the drift check baselines that can be used when the model monitor is set using the model package.
+         For more information, see the topic on <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/pipelines-quality-clarify-baseline-lifecycle.html#pipelines-quality-clarify-baseline-drift-detection\">Drift Detection against Previous Baselines in SageMaker Pipelines</a> in the <i>Amazon SageMaker Developer Guide</i>.
+      </p>")
+    @as("DriftCheckBaselines")
+    driftCheckBaselines: option<driftCheckBaselines>,
+    @ocaml.doc("<p>The metadata properties associated with the model package versions.</p>")
+    @as("CustomerMetadataProperties")
+    customerMetadataProperties: option<customerMetadataMap>,
     @ocaml.doc("<p>A unique token that guarantees that the call to this API is idempotent.</p>")
     @as("ClientToken")
     clientToken: option<clientToken>,
@@ -22739,11 +25239,11 @@ module CreateModelPackage = {
         to deploy the model.</p>")
     @as("ModelApprovalStatus")
     modelApprovalStatus: option<modelApprovalStatus>,
-    @ocaml.doc("<p>A list of key value pairs associated with the model. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS
-                resources</a> in the <i>AWS General Reference Guide</i>.</p>")
+    @ocaml.doc("<p>A list of key value pairs associated with the model. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services
+            resources</a> in the <i>Amazon Web Services General Reference Guide</i>.</p>")
     @as("Tags")
     tags: option<tagList_>,
-    @ocaml.doc("<p>Whether to certify the model package for listing on AWS Marketplace.</p>
+    @ocaml.doc("<p>Whether to certify the model package for listing on Amazon Web Services Marketplace.</p>
         <p>This parameter is optional for unversioned models, and does not apply to versioned
             models.</p>")
     @as("CertifyForMarketplace")
@@ -22775,11 +25275,11 @@ module CreateModelPackage = {
     inferenceSpecification: option<inferenceSpecification>,
     @ocaml.doc("<p>A description of the model package.</p>") @as("ModelPackageDescription")
     modelPackageDescription: option<entityDescription>,
-    @ocaml.doc("<p>The name of the model group that this model version belongs to.</p>
+    @ocaml.doc("<p>The name or Amazon Resource Name (ARN) of the model package group that this model version belongs to.</p>
         <p>This parameter is required for versioned models, and does not apply to unversioned
             models.</p>")
     @as("ModelPackageGroupName")
-    modelPackageGroupName: option<entityName>,
+    modelPackageGroupName: option<arnOrName>,
     @ocaml.doc("<p>The name of the model package. The name must have 1 to 63 characters. Valid characters
             are a-z, A-Z, 0-9, and - (hyphen).</p>
         <p>This parameter is required for unversioned models. It is not applicable to versioned
@@ -22794,6 +25294,12 @@ module CreateModelPackage = {
   }
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "CreateModelPackageCommand"
   let make = (
+    ~additionalInferenceSpecifications=?,
+    ~samplePayloadUrl=?,
+    ~task=?,
+    ~domain=?,
+    ~driftCheckBaselines=?,
+    ~customerMetadataProperties=?,
     ~clientToken=?,
     ~modelMetrics=?,
     ~metadataProperties=?,
@@ -22809,6 +25315,12 @@ module CreateModelPackage = {
     (),
   ) =>
     new({
+      additionalInferenceSpecifications: additionalInferenceSpecifications,
+      samplePayloadUrl: samplePayloadUrl,
+      task: task,
+      domain: domain,
+      driftCheckBaselines: driftCheckBaselines,
+      customerMetadataProperties: customerMetadataProperties,
       clientToken: clientToken,
       modelMetrics: modelMetrics,
       metadataProperties: metadataProperties,
@@ -22825,12 +25337,74 @@ module CreateModelPackage = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module CreateInferenceRecommendationsJob = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The metadata that you apply to Amazon Web Services resources to help you 
+           categorize and organize them. Each tag consists of a key and a value, both of 
+           which you define. For more information, see 
+           <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services Resources</a> 
+           in the Amazon Web Services General Reference.</p>")
+    @as("Tags")
+    tags: option<tagList_>,
+    @ocaml.doc("<p>A set of conditions for stopping a recommendation job.  If any of 
+          the conditions are met, the job is automatically stopped.</p>")
+    @as("StoppingConditions")
+    stoppingConditions: option<recommendationJobStoppingConditions>,
+    @ocaml.doc("<p>Description of the recommendation job.</p>") @as("JobDescription")
+    jobDescription: option<recommendationJobDescription>,
+    @ocaml.doc("<p>Provides information about the versioned model package Amazon Resource Name (ARN), 
+    the traffic pattern, and endpoint configurations.</p>")
+    @as("InputConfig")
+    inputConfig: recommendationJobInputConfig,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of an IAM role that enables Amazon SageMaker 
+    to perform tasks on your behalf.</p>")
+    @as("RoleArn")
+    roleArn: roleArn,
+    @ocaml.doc("<p>Defines the type of recommendation job. Specify <code>Default</code> to initiate an instance 
+           recommendation and <code>Advanced</code> to initiate a load test. If left unspecified, 
+           Amazon SageMaker Inference Recommender will run an instance recommendation (<code>DEFAULT</code>) job.</p>")
+    @as("JobType")
+    jobType: recommendationJobType,
+    @ocaml.doc("<p>A name for the recommendation job. The name must be unique within 
+           the Amazon Web Services Region and within your Amazon Web Services account.</p>")
+    @as("JobName")
+    jobName: recommendationJobName,
+  }
+  type response = {
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the recommendation job.</p>") @as("JobArn")
+    jobArn: recommendationJobArn,
+  }
+  @module("@aws-sdk/client-sagemaker") @new
+  external new: request => t = "CreateInferenceRecommendationsJobCommand"
+  let make = (
+    ~inputConfig,
+    ~roleArn,
+    ~jobType,
+    ~jobName,
+    ~tags=?,
+    ~stoppingConditions=?,
+    ~jobDescription=?,
+    (),
+  ) =>
+    new({
+      tags: tags,
+      stoppingConditions: stoppingConditions,
+      jobDescription: jobDescription,
+      inputConfig: inputConfig,
+      roleArn: roleArn,
+      jobType: jobType,
+      jobName: jobName,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module CreateHyperParameterTuningJob = {
   type t
   type request = {
-    @ocaml.doc("<p>An array of key-value pairs. You can use tags to categorize your AWS resources in
+    @ocaml.doc("<p>An array of key-value pairs. You can use tags to categorize your Amazon Web Services resources in
             different ways, for example, by purpose, owner, or environment. For more information,
-            see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS
+            see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services
                 Resources</a>.</p>
         <p>Tags that you specify for the tuning job are also added to all training jobs that the
             tuning job launches.</p>")
@@ -22872,8 +25446,8 @@ module CreateHyperParameterTuningJob = {
     @as("HyperParameterTuningJobConfig")
     hyperParameterTuningJobConfig: hyperParameterTuningJobConfig,
     @ocaml.doc("<p>The name of the tuning job. This name is the prefix for the names of all training jobs
-            that this tuning job launches. The name must be unique within the same AWS account and
-            AWS Region. The name must have 1 to 32 characters. Valid characters are a-z, A-Z, 0-9,
+            that this tuning job launches. The name must be unique within the same Amazon Web Services account and
+            Amazon Web Services Region. The name must have 1 to 32 characters. Valid characters are a-z, A-Z, 0-9,
             and : + = @ _ % - (hyphen). The name is not case sensitive.</p>")
     @as("HyperParameterTuningJobName")
     hyperParameterTuningJobName: hyperParameterTuningJobName,
@@ -22913,7 +25487,9 @@ module DescribeAlgorithm = {
     algorithmName: arnOrName,
   }
   type response = {
-    @ocaml.doc("<p>Whether the algorithm is certified to be listed in AWS Marketplace.</p>")
+    @ocaml.doc(
+      "<p>Whether the algorithm is certified to be listed in Amazon Web Services Marketplace.</p>"
+    )
     @as("CertifyForMarketplace")
     certifyForMarketplace: option<certifyForMarketplace>,
     @ocaml.doc("<p>The product identifier of the algorithm.</p>") @as("ProductId")
@@ -22950,14 +25526,14 @@ module DescribeAlgorithm = {
 module CreateAlgorithm = {
   type t
   type request = {
-    @ocaml.doc("<p>An array of key-value pairs. You can use tags to categorize your AWS resources in
+    @ocaml.doc("<p>An array of key-value pairs. You can use tags to categorize your Amazon Web Services resources in
             different ways, for example, by purpose, owner, or environment. For more information,
-            see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS
+            see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services
                 Resources</a>.</p>")
     @as("Tags")
     tags: option<tagList_>,
     @ocaml.doc(
-      "<p>Whether to certify the algorithm so that it can be listed in AWS Marketplace.</p>"
+      "<p>Whether to certify the algorithm so that it can be listed in Amazon Web Services Marketplace.</p>"
     )
     @as("CertifyForMarketplace")
     certifyForMarketplace: option<certifyForMarketplace>,

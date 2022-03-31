@@ -24,6 +24,7 @@ type streamStatus = [
   | @as("CREATING") #CREATING
 ]
 type streamName = string
+type streamMode = [@as("ON_DEMAND") #ON_DEMAND | @as("PROVISIONED") #PROVISIONED]
 type streamARN = string
 type shardIteratorType = [
   | @as("AT_TIMESTAMP") #AT_TIMESTAMP
@@ -48,6 +49,8 @@ type scalingType = [@as("UNIFORM_SCALING") #UNIFORM_SCALING]
 type retentionPeriodHours = int
 type positiveIntegerObject = int
 type partitionKey = string
+type onDemandStreamCountObject = int
+type onDemandStreamCountLimitObject = int
 type nextToken = string
 type millisBehindLatest = float
 type metricsName = [
@@ -85,8 +88,8 @@ type tagMap = Js.Dict.t<tagValue>
 type tagKeyList = array<tagKey>
 @ocaml.doc("<p>Metadata assigned to the stream, consisting of a key-value pair.</p>")
 type tag = {
-  @ocaml.doc("<p>An optional string, typically used to describe or define the tag. Maximum length:
-            256 characters. Valid characters: Unicode letters, digits, white space, _ . / = + - %
+  @ocaml.doc("<p>An optional string, typically used to describe or define the tag. Maximum length: 256
+            characters. Valid characters: Unicode letters, digits, white space, _ . / = + - %
             @</p>")
   @as("Value")
   value: option<tagValue>,
@@ -96,7 +99,15 @@ type tag = {
   key: tagKey,
 }
 type streamNameList = array<streamName>
-@ocaml.doc("<p></p>")
+@ocaml.doc("<p> Specifies the capacity mode to which you want to set your data stream. Currently, in
+            Kinesis Data Streams, you can choose between an <b>on-demand</b> capacity mode and a <b>provisioned</b> capacity mode for your data streams. </p>")
+type streamModeDetails = {
+  @ocaml.doc("<p> Specifies the capacity mode to which you want to set your data stream. Currently, in
+            Kinesis Data Streams, you can choose between an <b>on-demand</b> capacity mode and a <b>provisioned</b> capacity mode for your data streams. </p>")
+  @as("StreamMode")
+  streamMode: streamMode,
+}
+@ocaml.doc("<p>The starting position in the data stream from which to start streaming.</p>")
 type startingPosition = {
   @ocaml.doc("<p>The time stamp of the data record from which to start reading. To specify a time
             stamp, set <code>StartingPosition</code> to <code>Type AT_TIMESTAMP</code>. A time stamp
@@ -132,10 +143,63 @@ type startingPosition = {
   type_: shardIteratorType,
 }
 type shardIdList = array<shardId>
+@ocaml.doc("<p>The request parameter used to filter out the response of the <code>ListShards</code>
+            API.</p>")
 type shardFilter = {
-  @as("Timestamp") timestamp_: option<timestamp_>,
-  @as("ShardId") shardId: option<shardId>,
-  @as("Type") type_: shardFilterType,
+  @ocaml.doc("<p>The timestamps specified in the <code>ShardFilter</code> parameter. A timestamp is a
+            Unix epoch date with precision in milliseconds. For example,
+            2016-04-04T19:58:46.480-00:00 or 1459799926.480. This property can only be used if
+                <code>FROM_TIMESTAMP</code> or <code>AT_TIMESTAMP</code> shard types are
+            specified.</p>")
+  @as("Timestamp")
+  timestamp_: option<timestamp_>,
+  @ocaml.doc("<p>The exclusive start <code>shardID</code> speified in the <code>ShardFilter</code>
+            parameter. This property can only be used if the <code>AFTER_SHARD_ID</code> shard type
+            is specified.</p>")
+  @as("ShardId")
+  shardId: option<shardId>,
+  @ocaml.doc("<p>The shard type specified in the <code>ShardFilter</code> parameter. This is a required
+            property of the <code>ShardFilter</code> parameter.</p>
+        <p>You can specify the following valid values: </p>
+        <ul>
+            <li>
+                <p>
+                  <code>AFTER_SHARD_ID</code> - the response includes all the shards, starting
+                    with the shard whose ID immediately follows the <code>ShardId</code> that you
+                    provided. </p>
+            </li>
+            <li>
+                <p>
+                  <code>AT_TRIM_HORIZON</code> - the response includes all the shards that were
+                    open at <code>TRIM_HORIZON</code>.</p>
+            </li>
+            <li>
+                <p>
+                  <code>FROM_TRIM_HORIZON</code> - (default), the response includes all the
+                    shards within the retention period of the data stream (trim to tip).</p>
+            </li>
+            <li>
+                <p>
+                  <code>AT_LATEST</code> - the response includes only the currently open shards
+                    of the data stream.</p>
+            </li>
+            <li>
+                <p>
+                  <code>AT_TIMESTAMP</code> - the response includes all shards whose start
+                    timestamp is less than or equal to the given timestamp and end timestamp is
+                    greater than or equal to the given timestamp or still open. </p>
+            </li>
+            <li>
+                <p>
+                  <code>FROM_TIMESTAMP</code> - the response incldues all closed shards whose
+                    end timestamp is greater than or equal to the given timestamp and also all open
+                    shards. Corrected to <code>TRIM_HORIZON</code> of the data stream if
+                        <code>FROM_TIMESTAMP</code> is less than the <code>TRIM_HORIZON</code>
+                    value.</p>
+            </li>
+         </ul>")
+  @as("Type")
+  type_: shardFilterType,
 }
 @ocaml.doc("<p>The range of possible sequence numbers for the shard.</p>")
 type sequenceNumberRange = {
@@ -166,8 +230,8 @@ type resourceInUseException = {
   @ocaml.doc("<p>A message that provides information about the error.</p>")
   message: option<errorMessage>,
 }
-@ocaml.doc("<p>The unit of data of the Kinesis data stream, which is composed of a sequence
-            number, a partition key, and a data blob.</p>")
+@ocaml.doc("<p>The unit of data of the Kinesis data stream, which is composed of a sequence number, a
+            partition key, and a data blob.</p>")
 type record = {
   @ocaml.doc("<p>The encryption type used on the record. This parameter can be one of the following
             values:</p>
@@ -179,7 +243,7 @@ type record = {
             <li>
                 <p>
                   <code>KMS</code>: Use server-side encryption on the records in the stream
-                    using a customer-managed AWS KMS key.</p>
+                    using a customer-managed Amazon Web Services KMS key.</p>
             </li>
          </ul>")
   @as("EncryptionType")
@@ -199,22 +263,21 @@ type record = {
   @ocaml.doc("<p>The unique identifier of the record within its shard.</p>") @as("SequenceNumber")
   sequenceNumber: sequenceNumber,
 }
-@ocaml.doc("<p>Represents the result of an individual record from a <code>PutRecords</code>
-            request. A record that is successfully added to a stream includes
-                <code>SequenceNumber</code> and <code>ShardId</code> in the result. A record that
-            fails to be added to the stream includes <code>ErrorCode</code> and
-                <code>ErrorMessage</code> in the result.</p>")
+@ocaml.doc("<p>Represents the result of an individual record from a <code>PutRecords</code> request.
+            A record that is successfully added to a stream includes <code>SequenceNumber</code> and
+                <code>ShardId</code> in the result. A record that fails to be added to the stream
+            includes <code>ErrorCode</code> and <code>ErrorMessage</code> in the result.</p>")
 type putRecordsResultEntry = {
-  @ocaml.doc("<p>The error message for an individual record result. An <code>ErrorCode</code> value
-            of <code>ProvisionedThroughputExceededException</code> has an error message that
+  @ocaml.doc("<p>The error message for an individual record result. An <code>ErrorCode</code> value of
+                <code>ProvisionedThroughputExceededException</code> has an error message that
             includes the account ID, stream name, and shard ID. An <code>ErrorCode</code> value of
                 <code>InternalFailure</code> has the error message <code>\"Internal Service
                 Failure\"</code>.</p>")
   @as("ErrorMessage")
   errorMessage: option<errorMessage>,
-  @ocaml.doc("<p>The error code for an individual record result. <code>ErrorCodes</code> can be
-            either <code>ProvisionedThroughputExceededException</code> or
-                <code>InternalFailure</code>.</p>")
+  @ocaml.doc("<p>The error code for an individual record result. <code>ErrorCodes</code> can be either
+                <code>ProvisionedThroughputExceededException</code> or
+            <code>InternalFailure</code>.</p>")
   @as("ErrorCode")
   errorCode: option<errorCode>,
   @ocaml.doc("<p>The shard ID for an individual record result.</p>") @as("ShardId")
@@ -233,8 +296,8 @@ type putRecordsRequestEntry = {
             same partition key map to the same shard within the stream.</p>")
   @as("PartitionKey")
   partitionKey: partitionKey,
-  @ocaml.doc("<p>The hash value used to determine explicitly the shard that the data record is
-            assigned to by overriding the partition key hash.</p>")
+  @ocaml.doc("<p>The hash value used to determine explicitly the shard that the data record is assigned
+            to by overriding the partition key hash.</p>")
   @as("ExplicitHashKey")
   explicitHashKey: option<hashKey>,
   @ocaml.doc("<p>The data blob to put into the record, which is base64-encoded when the blob is
@@ -247,7 +310,8 @@ type putRecordsRequestEntry = {
 type metricsNameList = array<metricsName>
 @ocaml.doc("<p>The request was denied due to request throttling. For more information about
             throttling, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/limits.html#requests-per-second\">Limits</a> in
-            the <i>AWS Key Management Service Developer Guide</i>.</p>")
+            the <i>Amazon Web Services Key Management Service Developer
+            Guide</i>.</p>")
 type kmsthrottlingException = {
   name: string,
   @as("$fault") fault: [#client | #server],
@@ -256,7 +320,7 @@ type kmsthrottlingException = {
   @ocaml.doc("<p>A message that provides information about the error.</p>")
   message: option<errorMessage>,
 }
-@ocaml.doc("<p>The AWS access key ID needs a subscription for the service.</p>")
+@ocaml.doc("<p>The Amazon Web Services access key ID needs a subscription for the service.</p>")
 type kmsoptInRequired = {
   name: string,
   @as("$fault") fault: [#client | #server],
@@ -275,10 +339,10 @@ type kmsnotFoundException = {
   @ocaml.doc("<p>A message that provides information about the error.</p>")
   message: option<errorMessage>,
 }
-@ocaml.doc("<p>The request was rejected because the state of the specified resource isn't valid
-            for this request. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html\">How Key State Affects Use of a
-                Customer Master Key</a> in the <i>AWS Key Management Service Developer
-                Guide</i>.</p>")
+@ocaml.doc("<p>The request was rejected because the state of the specified resource isn't valid for
+            this request. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html\">How Key State Affects Use of a
+                Customer Master Key</a> in the <i>Amazon Web Services Key Management
+                Service Developer Guide</i>.</p>")
 type kmsinvalidStateException = {
   name: string,
   @as("$fault") fault: [#client | #server],
@@ -391,8 +455,8 @@ type putRecordsRequestEntryList = array<putRecordsRequestEntry>
 @ocaml.doc("<p>Represents enhanced metrics types.</p>")
 type enhancedMetrics = {
   @ocaml.doc("<p>List of shard-level metrics.</p>
-        <p>The following are the valid shard-level metrics. The value \"<code>ALL</code>\"
-            enhances every metric.</p>
+        <p>The following are the valid shard-level metrics. The value \"<code>ALL</code>\" enhances
+            every metric.</p>
         <ul>
             <li>
                 <p>
@@ -442,10 +506,15 @@ type enhancedMetrics = {
   shardLevelMetrics: option<metricsNameList>,
 }
 type consumerList = array<consumer>
+@ocaml.doc("<p>Output parameter of the GetRecords API. The existing child shard of the current
+            shard.</p>")
 type childShard = {
   @as("HashKeyRange") hashKeyRange: hashKeyRange,
-  @as("ParentShards") parentShards: shardIdList,
-  @as("ShardId") shardId: shardId,
+  @ocaml.doc("<p>The current shard that is the parent of the existing child shard.</p>")
+  @as("ParentShards")
+  parentShards: shardIdList,
+  @ocaml.doc("<p>The shard ID of the existing child shard of the current shard.</p>") @as("ShardId")
+  shardId: shardId,
 }
 type shardList = array<shard>
 type enhancedMonitoringList = array<enhancedMetrics>
@@ -453,7 +522,10 @@ type childShardList = array<childShard>
 @ocaml.doc("<p>After you call <a>SubscribeToShard</a>, Kinesis Data Streams sends events
             of this type over an HTTP/2 connection to your consumer.</p>")
 type subscribeToShardEvent = {
-  @as("ChildShards") childShards: option<childShardList>,
+  @ocaml.doc("<p>The list of the child shards of the current shard, returned only at the end of the
+            current shard.</p>")
+  @as("ChildShards")
+  childShards: option<childShardList>,
   @ocaml.doc("<p>The number of milliseconds the read records are from the tip of the stream, indicating
             how far behind current time the consumer is. A value of zero indicates that record
             processing is caught up, and there are no new records to process at this moment.</p>")
@@ -475,10 +547,10 @@ type streamDescriptionSummary = {
   consumerCount: option<consumerCountObject>,
   @ocaml.doc("<p>The number of open shards in the stream.</p>") @as("OpenShardCount")
   openShardCount: shardCountObject,
-  @ocaml.doc("<p>The GUID for the customer-managed AWS KMS key to use for encryption. This value can
-            be a globally unique identifier, a fully specified ARN to either an alias or a key, or
-            an alias name prefixed by \"alias/\".You can also use a master key owned by Kinesis Data
-            Streams by specifying the alias <code>aws/kinesis</code>.</p>
+  @ocaml.doc("<p>The GUID for the customer-managed Amazon Web Services KMS key to use for encryption.
+            This value can be a globally unique identifier, a fully specified ARN to either an alias
+            or a key, or an alias name prefixed by \"alias/\".You can also use a master key owned by
+            Kinesis Data Streams by specifying the alias <code>aws/kinesis</code>.</p>
         <ul>
             <li>
                 <p>Key ARN example:
@@ -530,6 +602,10 @@ type streamDescriptionSummary = {
   streamCreationTimestamp: timestamp_,
   @ocaml.doc("<p>The current retention period, in hours.</p>") @as("RetentionPeriodHours")
   retentionPeriodHours: retentionPeriodHours,
+  @ocaml.doc("<p> Specifies the capacity mode to which you want to set your data stream. Currently, in
+            Kinesis Data Streams, you can choose between an <b>on-demand</b> ycapacity mode and a <b>provisioned</b> capacity mode for your data streams. </p>")
+  @as("StreamModeDetails")
+  streamModeDetails: option<streamModeDetails>,
   @ocaml.doc("<p>The current status of the stream being described. The stream status is one of the
             following states:</p>
         <ul>
@@ -568,10 +644,10 @@ type streamDescriptionSummary = {
 }
 @ocaml.doc("<p>Represents the output for <a>DescribeStream</a>.</p>")
 type streamDescription = {
-  @ocaml.doc("<p>The GUID for the customer-managed AWS KMS key to use for encryption. This value can
-            be a globally unique identifier, a fully specified ARN to either an alias or a key, or
-            an alias name prefixed by \"alias/\".You can also use a master key owned by Kinesis Data
-            Streams by specifying the alias <code>aws/kinesis</code>.</p>
+  @ocaml.doc("<p>The GUID for the customer-managed Amazon Web Services KMS key to use for encryption.
+            This value can be a globally unique identifier, a fully specified ARN to either an alias
+            or a key, or an alias name prefixed by \"alias/\".You can also use a master key owned by
+            Kinesis Data Streams by specifying the alias <code>aws/kinesis</code>.</p>
         <ul>
             <li>
                 <p>Key ARN example:
@@ -600,8 +676,8 @@ type streamDescription = {
          </ul>")
   @as("KeyId")
   keyId: option<keyId>,
-  @ocaml.doc("<p>The server-side encryption type used on the stream. This parameter can be one of
-            the following values:</p>
+  @ocaml.doc("<p>The server-side encryption type used on the stream. This parameter can be one of the
+            following values:</p>
         <ul>
             <li>
                 <p>
@@ -610,7 +686,7 @@ type streamDescription = {
             <li>
                 <p>
                   <code>KMS</code>: Use server-side encryption on the records in the stream
-                    using a customer-managed AWS KMS key.</p>
+                    using a customer-managed Amazon Web Services KMS key.</p>
             </li>
          </ul>")
   @as("EncryptionType")
@@ -630,6 +706,10 @@ type streamDescription = {
   @as("HasMoreShards")
   hasMoreShards: booleanObject,
   @ocaml.doc("<p>The shards that comprise the stream.</p>") @as("Shards") shards: shardList,
+  @ocaml.doc("<p> Specifies the capacity mode to which you want to set your data stream. Currently, in
+            Kinesis Data Streams, you can choose between an <b>on-demand</b> capacity mode and a <b>provisioned</b> capacity mode for your data streams. </p>")
+  @as("StreamModeDetails")
+  streamModeDetails: option<streamModeDetails>,
   @ocaml.doc("<p>The current status of the stream being described. The stream status is one of the
             following states:</p>
         <ul>
@@ -840,16 +920,16 @@ module SubscribeToShardEventStream = {
     }
 }
 @ocaml.doc("<fullname>Amazon Kinesis Data Streams Service API Reference</fullname>
-        <p>Amazon Kinesis Data Streams is a managed service that scales elastically for
-            real-time processing of streaming big data.</p>")
+        <p>Amazon Kinesis Data Streams is a managed service that scales elastically for real-time
+            processing of streaming big data.</p>")
 module UpdateShardCount = {
   type t
   type request = {
     @ocaml.doc("<p>The scaling type. Uniform scaling creates shards of equal size.</p>")
     @as("ScalingType")
     scalingType: scalingType,
-    @ocaml.doc("<p>The new number of shards. This value has the following default limits. By default,
-            you cannot do the following: </p>
+    @ocaml.doc("<p>The new number of shards. This value has the following default limits. By default, you
+            cannot do the following: </p>
         <ul>
             <li>
                 <p>Set this value to more than double your current shard count for a
@@ -859,13 +939,13 @@ module UpdateShardCount = {
                 <p>Set this value below half your current shard count for a stream.</p>
             </li>
             <li>
-                <p>Set this value to more than 500 shards in a stream (the default limit for
-                    shard count per stream is 500 per account per region), unless you request a
+                <p>Set this value to more than 10000 shards in a stream (the default limit for
+                    shard count per stream is 10000 per account per region), unless you request a
                     limit increase.</p>
             </li>
             <li>
-                <p>Scale a stream with more than 500 shards down unless you set this value to
-                    less than 500 shards.</p>
+                <p>Scale a stream with more than 10000 shards down unless you set this value to
+                    less than 10000 shards.</p>
             </li>
          </ul>")
     @as("TargetShardCount")
@@ -888,11 +968,11 @@ module UpdateShardCount = {
 module StopStreamEncryption = {
   type t
   type request = {
-    @ocaml.doc("<p>The GUID for the customer-managed AWS KMS key to use for encryption. This value can
-            be a globally unique identifier, a fully specified Amazon Resource Name (ARN) to either
-            an alias or a key, or an alias name prefixed by \"alias/\".You can also use a master key
-            owned by Kinesis Data Streams by specifying the alias
-            <code>aws/kinesis</code>.</p>
+    @ocaml.doc("<p>The GUID for the customer-managed Amazon Web Services KMS key to use for encryption.
+            This value can be a globally unique identifier, a fully specified Amazon Resource Name
+            (ARN) to either an alias or a key, or an alias name prefixed by \"alias/\".You can also
+            use a master key owned by Kinesis Data Streams by specifying the alias
+                <code>aws/kinesis</code>.</p>
         <ul>
             <li>
                 <p>Key ARN example:
@@ -928,7 +1008,7 @@ module StopStreamEncryption = {
     @as("StreamName")
     streamName: streamName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-kinesis") @new external new: request => t = "StopStreamEncryptionCommand"
   let make = (~keyId, ~encryptionType, ~streamName, ()) =>
     new({keyId: keyId, encryptionType: encryptionType, streamName: streamName})
@@ -938,11 +1018,11 @@ module StopStreamEncryption = {
 module StartStreamEncryption = {
   type t
   type request = {
-    @ocaml.doc("<p>The GUID for the customer-managed AWS KMS key to use for encryption. This value can
-            be a globally unique identifier, a fully specified Amazon Resource Name (ARN) to either
-            an alias or a key, or an alias name prefixed by \"alias/\".You can also use a master key
-            owned by Kinesis Data Streams by specifying the alias
-            <code>aws/kinesis</code>.</p>
+    @ocaml.doc("<p>The GUID for the customer-managed Amazon Web Services KMS key to use for encryption.
+            This value can be a globally unique identifier, a fully specified Amazon Resource Name
+            (ARN) to either an alias or a key, or an alias name prefixed by \"alias/\".You can also
+            use a master key owned by Kinesis Data Streams by specifying the alias
+                <code>aws/kinesis</code>.</p>
         <ul>
             <li>
                 <p>Key ARN example:
@@ -978,7 +1058,7 @@ module StartStreamEncryption = {
     @as("StreamName")
     streamName: streamName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-kinesis") @new
   external new: request => t = "StartStreamEncryptionCommand"
   let make = (~keyId, ~encryptionType, ~streamName, ()) =>
@@ -990,8 +1070,8 @@ module SplitShard = {
   type t
   @ocaml.doc("<p>Represents the input for <code>SplitShard</code>.</p>")
   type request = {
-    @ocaml.doc("<p>A hash key value for the starting hash key of one of the child shards created by
-            the split. The hash key range for a given shard constitutes a set of ordered contiguous
+    @ocaml.doc("<p>A hash key value for the starting hash key of one of the child shards created by the
+            split. The hash key range for a given shard constitutes a set of ordered contiguous
             positive integers. The value for <code>NewStartingHashKey</code> must be in the range of
             hash keys being mapped into the shard. The <code>NewStartingHashKey</code> hash key
             value and all higher hash key values in hash key range are distributed to one of the
@@ -1004,7 +1084,7 @@ module SplitShard = {
     @ocaml.doc("<p>The name of the stream for the shard split.</p>") @as("StreamName")
     streamName: streamName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-kinesis") @new external new: request => t = "SplitShardCommand"
   let make = (~newStartingHashKey, ~shardToSplit, ~streamName, ()) =>
     new({
@@ -1019,15 +1099,15 @@ module PutRecord = {
   type t
   @ocaml.doc("<p>Represents the input for <code>PutRecord</code>.</p>")
   type request = {
-    @ocaml.doc("<p>Guarantees strictly increasing sequence numbers, for puts from the same client and
-            to the same partition key. Usage: set the <code>SequenceNumberForOrdering</code> of
-            record <i>n</i> to the sequence number of record <i>n-1</i>
-            (as returned in the result when putting record <i>n-1</i>). If this
-            parameter is not set, records are coarsely ordered based on arrival time.</p>")
+    @ocaml.doc("<p>Guarantees strictly increasing sequence numbers, for puts from the same client and to
+            the same partition key. Usage: set the <code>SequenceNumberForOrdering</code> of record
+                <i>n</i> to the sequence number of record <i>n-1</i> (as
+            returned in the result when putting record <i>n-1</i>). If this parameter
+            is not set, records are coarsely ordered based on arrival time.</p>")
     @as("SequenceNumberForOrdering")
     sequenceNumberForOrdering: option<sequenceNumber>,
-    @ocaml.doc("<p>The hash value used to explicitly determine the shard the data record is assigned
-            to by overriding the partition key hash.</p>")
+    @ocaml.doc("<p>The hash value used to explicitly determine the shard the data record is assigned to
+            by overriding the partition key hash.</p>")
     @as("ExplicitHashKey")
     explicitHashKey: option<hashKey>,
     @ocaml.doc("<p>Determines which shard in the stream the data record is assigned to. Partition keys
@@ -1050,8 +1130,8 @@ module PutRecord = {
   }
   @ocaml.doc("<p>Represents the output for <code>PutRecord</code>.</p>")
   type response = {
-    @ocaml.doc("<p>The encryption type to use on the record. This parameter can be one of the
-            following values:</p>
+    @ocaml.doc("<p>The encryption type to use on the record. This parameter can be one of the following
+            values:</p>
         <ul>
             <li>
                 <p>
@@ -1060,14 +1140,14 @@ module PutRecord = {
             <li>
                 <p>
                   <code>KMS</code>: Use server-side encryption on the records in the stream
-                    using a customer-managed AWS KMS key.</p>
+                    using a customer-managed Amazon Web Services KMS key.</p>
             </li>
          </ul>")
     @as("EncryptionType")
     encryptionType: option<encryptionType>,
-    @ocaml.doc("<p>The sequence number identifier that was assigned to the put data record. The
-            sequence number for the record is unique across all records in the stream. A sequence
-            number is the identifier associated with every record put into the stream.</p>")
+    @ocaml.doc("<p>The sequence number identifier that was assigned to the put data record. The sequence
+            number for the record is unique across all records in the stream. A sequence number is
+            the identifier associated with every record put into the stream.</p>")
     @as("SequenceNumber")
     sequenceNumber: sequenceNumber,
     @ocaml.doc("<p>The shard ID of the shard where the data record was placed.</p>") @as("ShardId")
@@ -1099,14 +1179,13 @@ module MergeShards = {
     @ocaml.doc("<p>The shard ID of the adjacent shard for the merge.</p>")
     @as("AdjacentShardToMerge")
     adjacentShardToMerge: shardId,
-    @ocaml.doc("<p>The shard ID of the shard to combine with the adjacent shard for the
-            merge.</p>")
+    @ocaml.doc("<p>The shard ID of the shard to combine with the adjacent shard for the merge.</p>")
     @as("ShardToMerge")
     shardToMerge: shardId,
     @ocaml.doc("<p>The name of the stream for the merge.</p>") @as("StreamName")
     streamName: streamName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-kinesis") @new external new: request => t = "MergeShardsCommand"
   let make = (~adjacentShardToMerge, ~shardToMerge, ~streamName, ()) =>
     new({
@@ -1127,7 +1206,7 @@ module IncreaseStreamRetentionPeriod = {
     retentionPeriodHours: retentionPeriodHours,
     @ocaml.doc("<p>The name of the stream to modify.</p>") @as("StreamName") streamName: streamName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-kinesis") @new
   external new: request => t = "IncreaseStreamRetentionPeriodCommand"
   let make = (~retentionPeriodHours, ~streamName, ()) =>
@@ -1148,8 +1227,8 @@ module GetShardIterator = {
             (TRIM_HORIZON).</p>")
     @as("Timestamp")
     timestamp_: option<timestamp_>,
-    @ocaml.doc("<p>The sequence number of the data record in the shard from which to start reading.
-            Used with shard iterator type AT_SEQUENCE_NUMBER and AFTER_SEQUENCE_NUMBER.</p>")
+    @ocaml.doc("<p>The sequence number of the data record in the shard from which to start reading. Used
+            with shard iterator type AT_SEQUENCE_NUMBER and AFTER_SEQUENCE_NUMBER.</p>")
     @as("StartingSequenceNumber")
     startingSequenceNumber: option<sequenceNumber>,
     @ocaml.doc("<p>Determines how the shard iterator is used to start reading data records from the
@@ -1175,13 +1254,13 @@ module GetShardIterator = {
             </li>
             <li>
                 
-                <p>TRIM_HORIZON - Start reading at the last untrimmed record in the shard in
-                    the system, which is the oldest data record in the shard.</p>
+                <p>TRIM_HORIZON - Start reading at the last untrimmed record in the shard in the
+                    system, which is the oldest data record in the shard.</p>
             </li>
             <li>
                 
-                <p>LATEST - Start reading just after the most recent record in the shard, so
-                    that you always read the most recent data in the shard.</p>
+                <p>LATEST - Start reading just after the most recent record in the shard, so that
+                    you always read the most recent data in the shard.</p>
             </li>
          </ul>")
     @as("ShardIteratorType")
@@ -1221,15 +1300,21 @@ module GetShardIterator = {
 
 module DescribeLimits = {
   type t
-
+  type request = {.}
   type response = {
+    @ocaml.doc("<p> The maximum number of data streams with the on-demand capacity mode. </p>")
+    @as("OnDemandStreamCountLimit")
+    onDemandStreamCountLimit: onDemandStreamCountLimitObject,
+    @ocaml.doc("<p> Indicates the number of data streams with the on-demand capacity mode.</p>")
+    @as("OnDemandStreamCount")
+    onDemandStreamCount: onDemandStreamCountObject,
     @ocaml.doc("<p>The number of open shards.</p>") @as("OpenShardCount")
     openShardCount: shardCountObject,
     @ocaml.doc("<p>The maximum number of shards.</p>") @as("ShardLimit")
     shardLimit: shardCountObject,
   }
-  @module("@aws-sdk/client-kinesis") @new external new: unit => t = "DescribeLimitsCommand"
-  let make = () => new()
+  @module("@aws-sdk/client-kinesis") @new external new: request => t = "DescribeLimitsCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -1246,11 +1331,12 @@ module DeregisterStreamConsumer = {
     @ocaml.doc("<p>The name that you gave to the consumer.</p>") @as("ConsumerName")
     consumerName: option<consumerName>,
     @ocaml.doc("<p>The ARN of the Kinesis data stream that the consumer is registered with. For more
-            information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kinesis-streams\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>")
+            information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kinesis-streams\">Amazon Resource Names (ARNs) and Amazon Web Services Service
+            Namespaces</a>.</p>")
     @as("StreamARN")
     streamARN: option<streamARN>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-kinesis") @new
   external new: request => t = "DeregisterStreamConsumerCommand"
   let make = (~consumerARN=?, ~consumerName=?, ~streamARN=?, ()) =>
@@ -1269,7 +1355,7 @@ module DeleteStream = {
     enforceConsumerDeletion: option<booleanObject>,
     @ocaml.doc("<p>The name of the stream to delete.</p>") @as("StreamName") streamName: streamName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-kinesis") @new external new: request => t = "DeleteStreamCommand"
   let make = (~streamName, ~enforceConsumerDeletion=?, ()) =>
     new({enforceConsumerDeletion: enforceConsumerDeletion, streamName: streamName})
@@ -1286,7 +1372,7 @@ module DecreaseStreamRetentionPeriod = {
     retentionPeriodHours: retentionPeriodHours,
     @ocaml.doc("<p>The name of the stream to modify.</p>") @as("StreamName") streamName: streamName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-kinesis") @new
   external new: request => t = "DecreaseStreamRetentionPeriodCommand"
   let make = (~retentionPeriodHours, ~streamName, ()) =>
@@ -1294,25 +1380,23 @@ module DecreaseStreamRetentionPeriod = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
-module CreateStream = {
+module UpdateStreamMode = {
   type t
-  @ocaml.doc("<p>Represents the input for <code>CreateStream</code>.</p>")
   type request = {
-    @ocaml.doc("<p>The number of shards that the stream will use. The throughput of the stream is a
-            function of the number of shards; more shards are required for greater provisioned
-            throughput.</p>")
-    @as("ShardCount")
-    shardCount: positiveIntegerObject,
-    @ocaml.doc("<p>A name to identify the stream. The stream name is scoped to the AWS account used by
-            the application that creates the stream. It is also scoped by AWS Region. That is, two
-            streams in two different AWS accounts can have the same name. Two streams in the same
-            AWS account but in two different Regions can also have the same name.</p>")
-    @as("StreamName")
-    streamName: streamName,
+    @ocaml.doc("<p> Specifies the capacity mode to which you want to set your data stream. Currently, in
+            Kinesis Data Streams, you can choose between an <b>on-demand</b> capacity mode and a <b>provisioned</b> capacity mode for your data streams. </p>")
+    @as("StreamModeDetails")
+    streamModeDetails: streamModeDetails,
+    @ocaml.doc(
+      "<p> Specifies the ARN of the data stream whose capacity mode you want to update. </p>"
+    )
+    @as("StreamARN")
+    streamARN: streamARN,
   }
-
-  @module("@aws-sdk/client-kinesis") @new external new: request => t = "CreateStreamCommand"
-  let make = (~shardCount, ~streamName, ()) => new({shardCount: shardCount, streamName: streamName})
+  type response = {.}
+  @module("@aws-sdk/client-kinesis") @new external new: request => t = "UpdateStreamModeCommand"
+  let make = (~streamModeDetails, ~streamARN, ()) =>
+    new({streamModeDetails: streamModeDetails, streamARN: streamARN})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -1325,7 +1409,7 @@ module RemoveTagsFromStream = {
     tagKeys: tagKeyList,
     @ocaml.doc("<p>The name of the stream.</p>") @as("StreamName") streamName: streamName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-kinesis") @new external new: request => t = "RemoveTagsFromStreamCommand"
   let make = (~tagKeys, ~streamName, ()) => new({tagKeys: tagKeys, streamName: streamName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1339,7 +1423,8 @@ module RegisterStreamConsumer = {
     @as("ConsumerName")
     consumerName: consumerName,
     @ocaml.doc("<p>The ARN of the Kinesis data stream that you want to register the consumer with. For
-            more info, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kinesis-streams\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>")
+            more info, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kinesis-streams\">Amazon Resource Names (ARNs) and Amazon Web Services Service
+            Namespaces</a>.</p>")
     @as("StreamARN")
     streamARN: streamARN,
   }
@@ -1363,7 +1448,9 @@ module ListStreams = {
     @ocaml.doc("<p>The name of the stream to start the list with.</p>")
     @as("ExclusiveStartStreamName")
     exclusiveStartStreamName: option<streamName>,
-    @ocaml.doc("<p>The maximum number of streams to list.</p>") @as("Limit")
+    @ocaml.doc("<p>The maximum number of streams to list. The default value is 100. If you specify a
+            value greater than 100, at most 100 results are returned.</p>")
+    @as("Limit")
     limit: option<listStreamsInputLimit>,
   }
   @ocaml.doc("<p>Represents the output for <code>ListStreams</code>.</p>")
@@ -1371,8 +1458,8 @@ module ListStreams = {
     @ocaml.doc("<p>If set to <code>true</code>, there are more streams available to list.</p>")
     @as("HasMoreStreams")
     hasMoreStreams: booleanObject,
-    @ocaml.doc("<p>The names of the streams that are associated with the AWS account making the
-                <code>ListStreams</code> request.</p>")
+    @ocaml.doc("<p>The names of the streams that are associated with the Amazon Web Services account
+            making the <code>ListStreams</code> request.</p>")
     @as("StreamNames")
     streamNames: streamNameList,
   }
@@ -1387,8 +1474,8 @@ module EnableEnhancedMonitoring = {
   @ocaml.doc("<p>Represents the input for <a>EnableEnhancedMonitoring</a>.</p>")
   type request = {
     @ocaml.doc("<p>List of shard-level metrics to enable.</p>
-        <p>The following are the valid shard-level metrics. The value \"<code>ALL</code>\"
-            enables every metric.</p>
+        <p>The following are the valid shard-level metrics. The value \"<code>ALL</code>\" enables
+            every metric.</p>
         <ul>
             <li>
                 <p>
@@ -1444,12 +1531,12 @@ module EnableEnhancedMonitoring = {
     "<p>Represents the output for <a>EnableEnhancedMonitoring</a> and <a>DisableEnhancedMonitoring</a>.</p>"
   )
   type response = {
-    @ocaml.doc("<p>Represents the list of all the metrics that would be in the enhanced state after
-            the operation.</p>")
+    @ocaml.doc("<p>Represents the list of all the metrics that would be in the enhanced state after the
+            operation.</p>")
     @as("DesiredShardLevelMetrics")
     desiredShardLevelMetrics: option<metricsNameList>,
-    @ocaml.doc("<p>Represents the current state of the metrics that are in the enhanced state before
-            the operation.</p>")
+    @ocaml.doc("<p>Represents the current state of the metrics that are in the enhanced state before the
+            operation.</p>")
     @as("CurrentShardLevelMetrics")
     currentShardLevelMetrics: option<metricsNameList>,
     @ocaml.doc("<p>The name of the Kinesis data stream.</p>") @as("StreamName")
@@ -1467,8 +1554,8 @@ module DisableEnhancedMonitoring = {
   @ocaml.doc("<p>Represents the input for <a>DisableEnhancedMonitoring</a>.</p>")
   type request = {
     @ocaml.doc("<p>List of shard-level metrics to disable.</p>
-        <p>The following are the valid shard-level metrics. The value \"<code>ALL</code>\"
-            disables every metric.</p>
+        <p>The following are the valid shard-level metrics. The value \"<code>ALL</code>\" disables
+            every metric.</p>
         <ul>
             <li>
                 <p>
@@ -1516,8 +1603,9 @@ module DisableEnhancedMonitoring = {
                 Kinesis Data Streams Developer Guide</i>.</p>")
     @as("ShardLevelMetrics")
     shardLevelMetrics: metricsNameList,
-    @ocaml.doc("<p>The name of the Kinesis data stream for which to disable enhanced
-            monitoring.</p>")
+    @ocaml.doc(
+      "<p>The name of the Kinesis data stream for which to disable enhanced monitoring.</p>"
+    )
     @as("StreamName")
     streamName: streamName,
   }
@@ -1525,12 +1613,12 @@ module DisableEnhancedMonitoring = {
     "<p>Represents the output for <a>EnableEnhancedMonitoring</a> and <a>DisableEnhancedMonitoring</a>.</p>"
   )
   type response = {
-    @ocaml.doc("<p>Represents the list of all the metrics that would be in the enhanced state after
-            the operation.</p>")
+    @ocaml.doc("<p>Represents the list of all the metrics that would be in the enhanced state after the
+            operation.</p>")
     @as("DesiredShardLevelMetrics")
     desiredShardLevelMetrics: option<metricsNameList>,
-    @ocaml.doc("<p>Represents the current state of the metrics that are in the enhanced state before
-            the operation.</p>")
+    @ocaml.doc("<p>Represents the current state of the metrics that are in the enhanced state before the
+            operation.</p>")
     @as("CurrentShardLevelMetrics")
     currentShardLevelMetrics: option<metricsNameList>,
     @ocaml.doc("<p>The name of the Kinesis data stream.</p>") @as("StreamName")
@@ -1552,7 +1640,8 @@ module DescribeStreamConsumer = {
     @ocaml.doc("<p>The name that you gave to the consumer.</p>") @as("ConsumerName")
     consumerName: option<consumerName>,
     @ocaml.doc("<p>The ARN of the Kinesis data stream that the consumer is registered with. For more
-            information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kinesis-streams\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>")
+            information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kinesis-streams\">Amazon Resource Names (ARNs) and Amazon Web Services Service
+            Namespaces</a>.</p>")
     @as("StreamARN")
     streamARN: option<streamARN>,
   }
@@ -1568,6 +1657,35 @@ module DescribeStreamConsumer = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module CreateStream = {
+  type t
+  @ocaml.doc("<p>Represents the input for <code>CreateStream</code>.</p>")
+  type request = {
+    @ocaml.doc("<p> Indicates the capacity mode of the data stream. Currently, in Kinesis Data Streams,
+            you can choose between an <b>on-demand</b> capacity mode and a
+                <b>provisioned</b> capacity mode for your data
+            streams.</p>")
+    @as("StreamModeDetails")
+    streamModeDetails: option<streamModeDetails>,
+    @ocaml.doc("<p>The number of shards that the stream will use. The throughput of the stream is a
+            function of the number of shards; more shards are required for greater provisioned
+            throughput.</p>")
+    @as("ShardCount")
+    shardCount: option<positiveIntegerObject>,
+    @ocaml.doc("<p>A name to identify the stream. The stream name is scoped to the Amazon Web Services
+            account used by the application that creates the stream. It is also scoped by Amazon Web Services Region. That is, two streams in two different Amazon Web Services accounts
+            can have the same name. Two streams in the same Amazon Web Services account but in two
+            different Regions can also have the same name.</p>")
+    @as("StreamName")
+    streamName: streamName,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-kinesis") @new external new: request => t = "CreateStreamCommand"
+  let make = (~streamName, ~streamModeDetails=?, ~shardCount=?, ()) =>
+    new({streamModeDetails: streamModeDetails, shardCount: shardCount, streamName: streamName})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
 module AddTagsToStream = {
   type t
   @ocaml.doc("<p>Represents the input for <code>AddTagsToStream</code>.</p>")
@@ -1576,7 +1694,7 @@ module AddTagsToStream = {
     tags: tagMap,
     @ocaml.doc("<p>The name of the stream.</p>") @as("StreamName") streamName: streamName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-kinesis") @new external new: request => t = "AddTagsToStreamCommand"
   let make = (~tags, ~streamName, ()) => new({tags: tags, streamName: streamName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1604,16 +1722,15 @@ module PutRecords = {
             <li>
                 <p>
                   <code>KMS</code>: Use server-side encryption on the records using a
-                    customer-managed AWS KMS key.</p>
+                    customer-managed Amazon Web Services KMS key.</p>
             </li>
          </ul>")
     @as("EncryptionType")
     encryptionType: option<encryptionType>,
-    @ocaml.doc("<p>An array of successfully and unsuccessfully processed record results, correlated
-            with the request by natural ordering. A record that is successfully added to a stream
-            includes <code>SequenceNumber</code> and <code>ShardId</code> in the result. A record
-            that fails to be added to a stream includes <code>ErrorCode</code> and
-                <code>ErrorMessage</code> in the result.</p>")
+    @ocaml.doc("<p>An array of successfully and unsuccessfully processed record results. A record that is
+            successfully added to a stream includes <code>SequenceNumber</code> and
+                <code>ShardId</code> in the result. A record that fails to be added to a stream
+            includes <code>ErrorCode</code> and <code>ErrorMessage</code> in the result.</p>")
     @as("Records")
     records: putRecordsResultEntryList,
     @ocaml.doc("<p>The number of unsuccessfully processed records in a <code>PutRecords</code>
@@ -1636,8 +1753,8 @@ module ListTagsForStream = {
             response.</p>")
     @as("Limit")
     limit: option<listTagsForStreamInputLimit>,
-    @ocaml.doc("<p>The key to use as the starting point for the list of tags. If this parameter is
-            set, <code>ListTagsForStream</code> gets all tags that occur after
+    @ocaml.doc("<p>The key to use as the starting point for the list of tags. If this parameter is set,
+                <code>ListTagsForStream</code> gets all tags that occur after
                 <code>ExclusiveStartTagKey</code>. </p>")
     @as("ExclusiveStartTagKey")
     exclusiveStartTagKey: option<tagKey>,
@@ -1645,8 +1762,8 @@ module ListTagsForStream = {
   }
   @ocaml.doc("<p>Represents the output for <code>ListTagsForStream</code>.</p>")
   type response = {
-    @ocaml.doc("<p>If set to <code>true</code>, more tags are available. To request additional tags,
-            set <code>ExclusiveStartTagKey</code> to the key of the last tag returned.</p>")
+    @ocaml.doc("<p>If set to <code>true</code>, more tags are available. To request additional tags, set
+                <code>ExclusiveStartTagKey</code> to the key of the last tag returned.</p>")
     @as("HasMoreTags")
     hasMoreTags: booleanObject,
     @ocaml.doc("<p>A list of tags associated with <code>StreamName</code>, starting with the first tag
@@ -1672,7 +1789,8 @@ module ListStreamConsumers = {
     @as("StreamCreationTimestamp")
     streamCreationTimestamp: option<timestamp_>,
     @ocaml.doc("<p>The maximum number of consumers that you want a single call of
-                <code>ListStreamConsumers</code> to return.</p>")
+                <code>ListStreamConsumers</code> to return. The default value is 100. If you specify
+            a value greater than 100, at most 100 results are returned. </p>")
     @as("MaxResults")
     maxResults: option<listStreamConsumersInputLimit>,
     @ocaml.doc("<p>When the number of consumers that are registered with the data stream is greater than
@@ -1701,7 +1819,8 @@ module ListStreamConsumers = {
     @as("NextToken")
     nextToken: option<nextToken>,
     @ocaml.doc("<p>The ARN of the Kinesis data stream for which you want to list the registered
-            consumers. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kinesis-streams\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>")
+            consumers. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kinesis-streams\">Amazon Resource Names (ARNs) and Amazon Web Services Service
+            Namespaces</a>.</p>")
     @as("StreamARN")
     streamARN: streamARN,
   }
@@ -1741,44 +1860,63 @@ module ListStreamConsumers = {
 module ListShards = {
   type t
   type request = {
-    @as("ShardFilter") shardFilter: option<shardFilter>,
-    @ocaml.doc("<p>Specify this input parameter to distinguish data streams that have the same name.
-            For example, if you create a data stream and then delete it, and you later create
-            another data stream with the same name, you can use this input parameter to specify
-            which of the two streams you want to list the shards for.</p>
+    @ocaml.doc("<p>Enables you to filter out the response of the <code>ListShards</code> API. You can
+            only specify one filter at a time. </p>
+        <p>If you use the <code>ShardFilter</code> parameter when invoking the ListShards API,
+            the <code>Type</code> is the required property and must be specified. If you specify the
+                <code>AT_TRIM_HORIZON</code>, <code>FROM_TRIM_HORIZON</code>, or
+                <code>AT_LATEST</code> types, you do not need to specify either the
+                <code>ShardId</code> or the <code>Timestamp</code> optional properties. </p>
+        <p>If you specify the <code>AFTER_SHARD_ID</code> type, you must also provide the value
+            for the optional <code>ShardId</code> property. The <code>ShardId</code> property is
+            identical in fuctionality to the <code>ExclusiveStartShardId</code> parameter of the
+                <code>ListShards</code> API. When <code>ShardId</code> property is specified, the
+            response includes the shards starting with the shard whose ID immediately follows the
+                <code>ShardId</code> that you provided. </p>
+        <p>If you specify the <code>AT_TIMESTAMP</code> or <code>FROM_TIMESTAMP_ID</code> type,
+            you must also provide the value for the optional <code>Timestamp</code> property. If you
+            specify the AT_TIMESTAMP type, then all shards that were open at the provided timestamp
+            are returned. If you specify the FROM_TIMESTAMP type, then all shards starting from the
+            provided timestamp to TIP are returned. </p>")
+    @as("ShardFilter")
+    shardFilter: option<shardFilter>,
+    @ocaml.doc("<p>Specify this input parameter to distinguish data streams that have the same name. For
+            example, if you create a data stream and then delete it, and you later create another
+            data stream with the same name, you can use this input parameter to specify which of the
+            two streams you want to list the shards for.</p>
         <p>You cannot specify this parameter if you specify the <code>NextToken</code>
             parameter.</p>")
     @as("StreamCreationTimestamp")
     streamCreationTimestamp: option<timestamp_>,
     @ocaml.doc("<p>The maximum number of shards to return in a single call to <code>ListShards</code>.
-            The minimum value you can specify for this parameter is 1, and the maximum is 10,000,
-            which is also the default.</p>
+            The maximum number of shards to return in a single call. The default value is 1000. If
+            you specify a value greater than 1000, at most 1000 results are returned. </p>
         <p>When the number of shards to be listed is greater than the value of
                 <code>MaxResults</code>, the response contains a <code>NextToken</code> value that
             you can use in a subsequent call to <code>ListShards</code> to list the next set of
             shards.</p>")
     @as("MaxResults")
     maxResults: option<listShardsInputLimit>,
-    @ocaml.doc("<p>Specify this parameter to indicate that you want to list the shards starting with
-            the shard whose ID immediately follows <code>ExclusiveStartShardId</code>.</p>
+    @ocaml.doc("<p>Specify this parameter to indicate that you want to list the shards starting with the
+            shard whose ID immediately follows <code>ExclusiveStartShardId</code>.</p>
         <p>If you don't specify this parameter, the default behavior is for
                 <code>ListShards</code> to list the shards starting with the first one in the
             stream.</p>
         <p>You cannot specify this parameter if you specify <code>NextToken</code>.</p>")
     @as("ExclusiveStartShardId")
     exclusiveStartShardId: option<shardId>,
-    @ocaml.doc("<p>When the number of shards in the data stream is greater than the default value for
-            the <code>MaxResults</code> parameter, or if you explicitly specify a value for
+    @ocaml.doc("<p>When the number of shards in the data stream is greater than the default value for the
+                <code>MaxResults</code> parameter, or if you explicitly specify a value for
                 <code>MaxResults</code> that is less than the number of shards in the data stream,
             the response includes a pagination token named <code>NextToken</code>. You can specify
             this <code>NextToken</code> value in a subsequent call to <code>ListShards</code> to
             list the next set of shards.</p>
-        <p>Don't specify <code>StreamName</code> or <code>StreamCreationTimestamp</code> if
-            you specify <code>NextToken</code> because the latter unambiguously identifies the
+        <p>Don't specify <code>StreamName</code> or <code>StreamCreationTimestamp</code> if you
+            specify <code>NextToken</code> because the latter unambiguously identifies the
             stream.</p>
-        <p>You can optionally specify a value for the <code>MaxResults</code> parameter when
-            you specify <code>NextToken</code>. If you specify a <code>MaxResults</code> value that
-            is less than the number of shards that the operation returns if you don't specify
+        <p>You can optionally specify a value for the <code>MaxResults</code> parameter when you
+            specify <code>NextToken</code>. If you specify a <code>MaxResults</code> value that is
+            less than the number of shards that the operation returns if you don't specify
                 <code>MaxResults</code>, the response will contain a new <code>NextToken</code>
             value. You can use the new <code>NextToken</code> value in a subsequent call to the
                 <code>ListShards</code> operation.</p>
@@ -1786,8 +1924,7 @@ module ListShards = {
             <p>Tokens expire after 300 seconds. When you obtain a value for
                     <code>NextToken</code> in the response to a call to <code>ListShards</code>, you
                 have 300 seconds to use that value. If you specify an expired token in a call to
-                    <code>ListShards</code>, you get
-                <code>ExpiredNextTokenException</code>.</p>
+                    <code>ListShards</code>, you get <code>ExpiredNextTokenException</code>.</p>
         </important>")
     @as("NextToken")
     nextToken: option<nextToken>,
@@ -1798,8 +1935,8 @@ module ListShards = {
     streamName: option<streamName>,
   }
   type response = {
-    @ocaml.doc("<p>When the number of shards in the data stream is greater than the default value for
-            the <code>MaxResults</code> parameter, or if you explicitly specify a value for
+    @ocaml.doc("<p>When the number of shards in the data stream is greater than the default value for the
+                <code>MaxResults</code> parameter, or if you explicitly specify a value for
                 <code>MaxResults</code> that is less than the number of shards in the data stream,
             the response includes a pagination token named <code>NextToken</code>. You can specify
             this <code>NextToken</code> value in a subsequent call to <code>ListShards</code> to
@@ -1809,8 +1946,7 @@ module ListShards = {
             <p>Tokens expire after 300 seconds. When you obtain a value for
                     <code>NextToken</code> in the response to a call to <code>ListShards</code>, you
                 have 300 seconds to use that value. If you specify an expired token in a call to
-                    <code>ListShards</code>, you get
-                <code>ExpiredNextTokenException</code>.</p>
+                    <code>ListShards</code>, you get <code>ExpiredNextTokenException</code>.</p>
         </important>")
     @as("NextToken")
     nextToken: option<nextToken>,
@@ -1859,16 +1995,19 @@ module GetRecords = {
   }
   @ocaml.doc("<p>Represents the output for <a>GetRecords</a>.</p>")
   type response = {
-    @as("ChildShards") childShards: option<childShardList>,
-    @ocaml.doc("<p>The number of milliseconds the <a>GetRecords</a> response is from the
-            tip of the stream, indicating how far behind current time the consumer is. A value of
-            zero indicates that record processing is caught up, and there are no new records to
-            process at this moment.</p>")
+    @ocaml.doc("<p>The list of the current shard's child shards, returned in the <code>GetRecords</code>
+            API's response only when the end of the current shard is reached.</p>")
+    @as("ChildShards")
+    childShards: option<childShardList>,
+    @ocaml.doc("<p>The number of milliseconds the <a>GetRecords</a> response is from the tip
+            of the stream, indicating how far behind current time the consumer is. A value of zero
+            indicates that record processing is caught up, and there are no new records to process
+            at this moment.</p>")
     @as("MillisBehindLatest")
     millisBehindLatest: option<millisBehindLatest>,
-    @ocaml.doc("<p>The next position in the shard from which to start sequentially reading data
-            records. If set to <code>null</code>, the shard has been closed and the requested
-            iterator does not return any more data. </p>")
+    @ocaml.doc("<p>The next position in the shard from which to start sequentially reading data records.
+            If set to <code>null</code>, the shard has been closed and the requested iterator does
+            not return any more data. </p>")
     @as("NextShardIterator")
     nextShardIterator: option<shardIterator>,
     @ocaml.doc("<p>The data records retrieved from the shard.</p>") @as("Records")
@@ -1901,10 +2040,16 @@ module DescribeStream = {
   type t
   @ocaml.doc("<p>Represents the input for <code>DescribeStream</code>.</p>")
   type request = {
-    @ocaml.doc("<p>The shard ID of the shard to start with.</p>") @as("ExclusiveStartShardId")
+    @ocaml.doc("<p>The shard ID of the shard to start with.</p>
+        <p>Specify this parameter to indicate that you want to describe the stream starting with
+            the shard whose ID immediately follows <code>ExclusiveStartShardId</code>.</p>
+        <p>If you don't specify this parameter, the default behavior for
+                <code>DescribeStream</code> is to describe the stream starting with the first shard
+            in the stream.</p>")
+    @as("ExclusiveStartShardId")
     exclusiveStartShardId: option<shardId>,
-    @ocaml.doc("<p>The maximum number of shards to return in a single call. The default value is 100.
-            If you specify a value greater than 100, at most 100 shards are returned.</p>")
+    @ocaml.doc("<p>The maximum number of shards to return in a single call. The default value is 100. If
+            you specify a value greater than 100, at most 100 results are returned.</p>")
     @as("Limit")
     limit: option<describeStreamInputLimit>,
     @ocaml.doc("<p>The name of the stream to describe.</p>") @as("StreamName")
@@ -1912,8 +2057,8 @@ module DescribeStream = {
   }
   @ocaml.doc("<p>Represents the output for <code>DescribeStream</code>.</p>")
   type response = {
-    @ocaml.doc("<p>The current status of the stream, the stream Amazon Resource Name (ARN), an array
-            of shard objects that comprise the stream, and whether there are more shards
+    @ocaml.doc("<p>The current status of the stream, the stream Amazon Resource Name (ARN), an array of
+            shard objects that comprise the stream, and whether there are more shards
             available.</p>")
     @as("StreamDescription")
     streamDescription: streamDescription,
@@ -1927,7 +2072,9 @@ module DescribeStream = {
 module SubscribeToShard = {
   type t
   type request = {
-    @ocaml.doc("<p></p>") @as("StartingPosition") startingPosition: startingPosition,
+    @ocaml.doc("<p>The starting position in the data stream from which to start streaming.</p>")
+    @as("StartingPosition")
+    startingPosition: startingPosition,
     @ocaml.doc("<p>The ID of the shard you want to subscribe to. To see a list of all the shards for a
             given stream, use <a>ListShards</a>.</p>")
     @as("ShardId")

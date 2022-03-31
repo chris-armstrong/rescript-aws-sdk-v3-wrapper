@@ -118,7 +118,7 @@ module CloseTunnel = {
     delete: option<deleteFlag>,
     @ocaml.doc("<p>The ID of the tunnel to close.</p>") tunnelId: tunnelId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iotsecuredtunneling") @new
   external new: request => t = "CloseTunnelCommand"
   let make = (~tunnelId, ~delete=?, ()) => new({delete: delete, tunnelId: tunnelId})
@@ -131,7 +131,7 @@ module UntagResource = {
     @ocaml.doc("<p>The keys of the tags to remove.</p>") tagKeys: tagKeyList,
     @ocaml.doc("<p>The resource ARN.</p>") resourceArn: amazonResourceName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iotsecuredtunneling") @new
   external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
@@ -144,7 +144,7 @@ module TagResource = {
     @ocaml.doc("<p>The tags for the resource.</p>") tags: tagList_,
     @ocaml.doc("<p>The ARN of the resource.</p>") resourceArn: amazonResourceName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-iotsecuredtunneling") @new
   external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})

@@ -58,19 +58,19 @@ type attributeNameList = array<string_>
 type service = {
   @ocaml.doc("<p>The attributes that are available for this service.</p>") @as("AttributeNames")
   attributeNames: option<attributeNameList>,
-  @ocaml.doc("<p>The code for the AWS service.</p>") @as("ServiceCode")
+  @ocaml.doc("<p>The code for the Amazon Web Services service.</p>") @as("ServiceCode")
   serviceCode: option<string_>,
 }
 type filters = array<filter>
 type attributeValueList = array<attributeValue>
 type serviceList = array<service>
-@ocaml.doc("<p>AWS Price List Service API (AWS Price List Service) is a centralized and convenient way to
-         programmatically query Amazon Web Services for services, products, and pricing information. The AWS Price List Service
+@ocaml.doc("<p>Amazon Web Services Price List Service API (Amazon Web Services Price List Service) is a centralized and convenient way to
+         programmatically query Amazon Web Services for services, products, and pricing information. The Amazon Web Services Price List Service
          uses standardized product attributes such as <code>Location</code>, <code>Storage
             Class</code>, and <code>Operating System</code>, and provides prices at the SKU
-         level. You can use the AWS Price List Service to build cost control and scenario planning tools, reconcile
+         level. You can use the Amazon Web Services Price List Service to build cost control and scenario planning tools, reconcile
          billing data, forecast future spend for budgeting purposes, and provide cost benefit
-         analysis that compare your internal workloads with AWS.</p>
+         analysis that compare your internal workloads with Amazon Web Services.</p>
          <p>Use <code>GetServices</code> without a service code to retrieve the service codes for all AWS services, then 
          <code>GetServices</code> with a service code to retreive the attribute names for 
          that service. After you have the service code and attribute names, you can use <code>GetAttributeValues</code>
@@ -79,7 +79,7 @@ type serviceList = array<service>
          an <code>AmazonEC2</code> instance, with a <code>Provisioned IOPS</code> 
             <code>volumeType</code>.</p>
          <p>Service Endpoint</p>
-         <p>AWS Price List Service API provides the following two endpoints:</p>
+         <p>Amazon Web Services Price List Service API provides the following two endpoints:</p>
          <ul>
             <li>
                <p>https://api.pricing.us-east-1.amazonaws.com</p>

@@ -31,10 +31,12 @@ type timeOfDay = string
 type tagValue = string
 type tagKey = string
 type stringMax256 = string
+type statusType = [@as("Inactive") #Inactive | @as("Active") #Active]
 type serialNumber = string
 type sensitiveString = string
 type revocationReason = string
 type resourceType = [
+  | @as("Bucket") #Bucket
   | @as("Certificate") #Certificate
   | @as("Distribution") #Distribution
   | @as("ContactMethod") #ContactMethod
@@ -56,6 +58,7 @@ type resourceType = [
   | @as("ContainerService") #ContainerService
 ]
 type resourceName = string
+type resourceBucketAccess = [@as("deny") #Deny | @as("allow") #Allow]
 type resourceArn = string
 type requestFailureReason = string
 type renewalStatusReason = string
@@ -80,6 +83,7 @@ type relationalDatabaseMetricName = [
 ]
 type relationalDatabaseEngine = [@as("mysql") #Mysql]
 type regionName = [
+  | @as("eu-north-1") #Eu_North_1
   | @as("ap-northeast-2") #Ap_Northeast_2
   | @as("ap-northeast-1") #Ap_Northeast_1
   | @as("ap-southeast-2") #Ap_Southeast_2
@@ -107,6 +111,13 @@ type portAccessType = [@as("Private") #Private | @as("Public") #Public]
 type port = int
 type originProtocolPolicyEnum = [@as("https-only") #Https_Only | @as("http-only") #Http_Only]
 type operationType = [
+  | @as("SetResourceAccessForBucket") #SetResourceAccessForBucket
+  | @as("UpdateBucket") #UpdateBucket
+  | @as("UpdateBucketBundle") #UpdateBucketBundle
+  | @as("DeleteBucketAccessKey") #DeleteBucketAccessKey
+  | @as("CreateBucketAccessKey") #CreateBucketAccessKey
+  | @as("DeleteBucket") #DeleteBucket
+  | @as("CreateBucket") #CreateBucket
   | @as("DeleteContainerImage") #DeleteContainerImage
   | @as("RegisterContainerImage") #RegisterContainerImage
   | @as("CreateContainerServiceRegistryLogin") #CreateContainerServiceRegistryLogin
@@ -366,6 +377,7 @@ type instanceHealthReason = [
 type instanceAccessProtocol = [@as("rdp") #Rdp | @as("ssh") #Ssh]
 type includeCertificateDetails = bool
 type inUseResourceCount = int
+type iamaccessKeyId = string
 type headerEnum = [
   | @as("Referer") #Referer
   | @as("Origin") #Origin
@@ -485,6 +497,12 @@ type certificateStatus = [
   | @as("PENDING_VALIDATION") #PENDING_VALIDATION
 ]
 type certificateName = string
+type bucketName = string
+type bucketMetricName = [
+  | @as("NumberOfObjects") #NumberOfObjects
+  | @as("BucketSizeBytes") #BucketSizeBytes
+]
+type bucketAccessLogPrefix = string
 type blueprintType = [@as("app") #App | @as("os") #Os]
 type behaviorEnum = [@as("cache") #Cache | @as("dont-cache") #Dont_Cache]
 type base64 = string
@@ -501,11 +519,11 @@ type alarmState = [
   | @as("OK") #OK
 ]
 type addOnType = [@as("AutoSnapshot") #AutoSnapshot]
+type accessType = [@as("private") #Private | @as("public") #Public]
 type accessDirection = [@as("outbound") #Outbound | @as("inbound") #Inbound]
 type tagKeyList = array<tagKey>
 @ocaml.doc("<p>Describes a tag key and optional value assigned to an Amazon Lightsail resource.</p>
-         <p>For more information about tags in Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags\">Lightsail
-        Dev Guide</a>.</p>")
+         <p>For more information about tags in Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags\">Amazon Lightsail Developer Guide</a>.</p>")
 type tag = {
   @ocaml.doc("<p>The value of the tag.</p>
          <p>Constraints: Tag values accept a maximum of 256 letters, numbers, spaces in UTF-8, or the
@@ -524,6 +542,12 @@ type resourceRecord = {
   @ocaml.doc("<p>The value for the DNS record.</p>") value: option<string_>,
   @ocaml.doc("<p>The DNS record type.</p>") @as("type") type_: option<string_>,
   @ocaml.doc("<p>The name of the record.</p>") name: option<string_>,
+}
+@ocaml.doc("<p>Describes an Amazon Lightsail instance that has access to a Lightsail bucket.</p>")
+type resourceReceivingAccess = {
+  @ocaml.doc("<p>The Lightsail resource type (for example, <code>Instance</code>).</p>")
+  resourceType: option<nonEmptyString>,
+  @ocaml.doc("<p>The name of the Lightsail instance.</p>") name: option<nonEmptyString>,
 }
 type resourceNameList = array<resourceName>
 @ocaml.doc("<p>Describes the resource location.</p>")
@@ -641,10 +665,11 @@ type passwordData = {
          </note>")
   ciphertext: option<string_>,
 }
+type partnerIdList = array<nonEmptyString>
 @ocaml.doc("<p>Describes the origin resource of an Amazon Lightsail content delivery network (CDN)
       distribution.</p>
-         <p>An origin can be a Lightsail instance or load balancer. A distribution pulls content
-      from an origin, caches it, and serves it to viewers via a worldwide network of edge
+         <p>An origin can be a Lightsail instance, bucket, or load balancer. A distribution pulls
+      content from an origin, caches it, and serves it to viewers via a worldwide network of edge
       servers.</p>")
 type origin = {
   @ocaml.doc("<p>The protocol that your Amazon Lightsail distribution uses when establishing a connection
@@ -879,7 +904,7 @@ type instanceEntry = {
          </note>")
   userData: option<string_>,
   @ocaml.doc("<p>The port configuration to use for the new Amazon EC2 instance.</p>
-      
+    
          <p>The following configuration options are available:</p>
          <ul>
             <li>
@@ -928,8 +953,8 @@ type instanceEntry = {
 }
 @ocaml.doc("<p>Describes the origin resource of an Amazon Lightsail content delivery network (CDN)
       distribution.</p>
-         <p>An origin can be a Lightsail instance or load balancer. A distribution pulls content
-      from an origin, caches it, and serves it to viewers via a worldwide network of edge
+         <p>An origin can be a Lightsail instance, bucket, or load balancer. A distribution pulls
+      content from an origin, caches it, and serves it to viewers via a worldwide network of edge
       servers.</p>")
 type inputOrigin = {
   @ocaml.doc("<p>The protocol that your Amazon Lightsail distribution uses when establishing a connection
@@ -993,7 +1018,7 @@ type domainNameList = array<domainName>
 type domainEntryOptions = Js.Dict.t<string_>
 @ocaml.doc("<p>Describes the specifications of a distribution bundle.</p>")
 type distributionBundle = {
-  @ocaml.doc("<p>Indicates whether the bundle is active, and can be specified for a new
+  @ocaml.doc("<p>Indicates whether the bundle is active, and can be specified for a new or existing
       distribution.</p>")
   isActive: option<boolean_>,
   @ocaml.doc("<p>The monthly network transfer quota of the bundle.</p>")
@@ -1152,7 +1177,9 @@ type containerServiceLogEvent = {
 )
 type containerServiceHealthCheckConfig = {
   @ocaml.doc("<p>The HTTP codes to use when checking for a successful response from a container. You can
-      specify values between 200 and 499.</p>")
+      specify values between <code>200</code> and <code>499</code>. You can specify multiple values
+      (for example, <code>200,202</code>) or a range of values (for example,
+      <code>200-299</code>).</p>")
   successCodes: option<string_>,
   @ocaml.doc("<p>The path on the container on which to perform the health check. The default value is
         <code>/</code>.</p>")
@@ -1196,8 +1223,7 @@ type certificateStatusList = array<certificateStatus>
         <code>cache</code>, then a per-path cache behavior can be used to specify a directory, file,
       or file type that your distribution will cache. Alternately, if the distribution's
         <code>cacheBehavior</code> is <code>dont-cache</code>, then a per-path cache behavior can be
-      used to specify a directory, file, or file type that your distribution will not cache.</p>
-         <p>if the cacheBehavior's behavior is set to 'cache', then</p>")
+      used to specify a directory, file, or file type that your distribution will not cache.</p>")
 type cacheBehaviorPerPath = {
   @ocaml.doc("<p>The cache behavior for the specified path.</p>
          <p>You can specify one of the following per-path cache behaviors:</p>
@@ -1294,6 +1320,67 @@ type cacheBehavior = {
             </li>
          </ul>")
   behavior: option<behaviorEnum>,
+}
+@ocaml.doc("<p>Describes the state of an Amazon Lightsail bucket.</p>")
+type bucketState = {
+  @ocaml.doc("<p>A message that describes the state of the bucket.</p>") message: option<string_>,
+  @ocaml.doc("<p>The state code of the bucket.</p>
+
+         <p>The following codes are possible:</p>
+
+         <ul>
+            <li>
+               <p>
+                  <code>OK</code> - The bucket is in a running state.</p>
+            </li>
+            <li>
+               <p>
+                  <code>Unknown</code> - Creation of the bucket might have timed-out. You might want to
+          delete the bucket and create a new one.</p>
+            </li>
+         </ul>")
+  code: option<nonEmptyString>,
+}
+@ocaml.doc("<p>Describes the specifications of a bundle that can be applied to an Amazon Lightsail
+      bucket.</p>
+
+         <p>A bucket bundle specifies the monthly cost, storage space, and data transfer quota for a
+      bucket.</p>")
+type bucketBundle = {
+  @ocaml.doc("<p>Indicates whether the bundle is active. Use for a new or existing bucket.</p>")
+  isActive: option<boolean_>,
+  @ocaml.doc("<p>The monthly network transfer quota of the bundle.</p>")
+  transferPerMonthInGb: option<integer_>,
+  @ocaml.doc("<p>The storage size of the bundle, in GB.</p>") storagePerMonthInGb: option<integer_>,
+  @ocaml.doc("<p>The monthly price of the bundle, in US dollars.</p>") price: option<float_>,
+  @ocaml.doc("<p>The name of the bundle.</p>") name: option<nonEmptyString>,
+  @ocaml.doc("<p>The ID of the bundle.</p>") bundleId: option<nonEmptyString>,
+}
+@ocaml.doc("<p>Describes the access log configuration for a bucket in the Amazon Lightsail object storage
+      service.</p>
+         <p>For more information about bucket access logs, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-bucket-access-logs\">Logging bucket requests using access logging in Amazon Lightsail</a> in the
+        <i>Amazon Lightsail Developer Guide</i>.</p>")
+type bucketAccessLogConfig = {
+  @ocaml.doc("<p>The optional object prefix for the bucket access log.</p>
+         <p>The prefix is an optional addition to the object key that organizes your access log files
+      in the destination bucket. For example, if you specify a <code>logs/</code> prefix, then each
+      log object will begin with the <code>logs/</code> prefix in its key (for example,
+        <code>logs/2021-11-01-21-32-16-E568B2907131C0C0</code>).</p>
+         <note>
+            <p>This parameter can be optionally specified when enabling the access log for a bucket,
+        and should be omitted when disabling the access log.</p>
+         </note>")
+  prefix: option<bucketAccessLogPrefix>,
+  @ocaml.doc("<p>The name of the bucket where the access is saved. The destination can be a Lightsail
+      bucket in the same account, and in the same AWS Region as the source bucket.</p>
+         <note>
+            <p>This parameter is required when enabling the access log for a bucket, and should be
+        omitted when disabling the access log.</p>
+         </note>")
+  destination: option<bucketName>,
+  @ocaml.doc("<p>A Boolean value that indicates whether bucket access logging is enabled for the
+      bucket.</p>")
+  enabled: boolean_,
 }
 @ocaml.doc("<p>Describes a blueprint (a virtual private server image).</p>")
 type blueprint = {
@@ -1410,8 +1497,68 @@ type addOn = {
   @ocaml.doc("<p>The status of the add-on.</p>") status: option<string_>,
   @ocaml.doc("<p>The name of the add-on.</p>") name: option<string_>,
 }
+@ocaml.doc("<p>Describes the anonymous access permissions for an Amazon Lightsail bucket and its
+      objects.</p>
+         <p>For more information about bucket access permissions, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-understanding-bucket-permissions\">Understanding bucket permissions in Amazon Lightsail</a> in the </p>
+         <p>
+            <i>Amazon Lightsail Developer Guide</i>.</p>")
+type accessRules = {
+  @ocaml.doc("<p>A Boolean value that indicates whether the access control list (ACL) permissions that are
+      applied to individual objects override the <code>getObject</code> option that is currently
+      specified.</p>
+
+         <p>When this is true, you can use the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObjectAcl.html\">PutObjectAcl</a> Amazon S3 API action to set
+      individual objects to public (read-only) using the <code>public-read</code> ACL, or to private
+      using the <code>private</code> ACL.</p>")
+  allowPublicOverrides: option<boolean_>,
+  @ocaml.doc("<p>Specifies the anonymous access to all objects in a bucket.</p>
+
+         <p>The following options can be specified:</p>
+
+         <ul>
+            <li>
+               <p>
+                  <code>public</code> - Sets all objects in the bucket to public (read-only), making
+          them readable by anyone in the world.</p>
+
+
+               <p>If the <code>getObject</code> value is set to <code>public</code>, then all objects in
+          the bucket default to public regardless of the <code>allowPublicOverrides</code>
+          value.</p>
+            </li>
+            <li>
+               <p>
+                  <code>private</code> - Sets all objects in the bucket to private, making them readable
+          only by you or anyone you give access to.</p>
+
+
+               <p>If the <code>getObject</code> value is set to <code>private</code>, and the
+            <code>allowPublicOverrides</code> value is set to <code>true</code>, then all objects in
+          the bucket default to private unless they are configured with a <code>public-read</code>
+          ACL. Individual objects with a <code>public-read</code> ACL are readable by anyone in the
+          world.</p>
+            </li>
+         </ul>")
+  getObject: option<accessType>,
+}
+@ocaml.doc("<p>Describes the last time an access key was used.</p>
+
+         <note>
+            <p>This object does not include data in the response of a <a href=\"https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_CreateBucketAccessKey.html\">CreateBucketAccessKey</a> action.</p>
+         </note>")
+type accessKeyLastUsed = {
+  @ocaml.doc("<p>The name of the AWS service with which this access key was most recently used.</p>
+         <p>This value is <code>N/A</code> if the access key has not been used.</p>")
+  serviceName: option<string_>,
+  @ocaml.doc("<p>The AWS Region where this access key was most recently used.</p>
+         <p>This value is <code>N/A</code> if the access key has not been used.</p>")
+  region: option<string_>,
+  @ocaml.doc("<p>The date and time when the access key was most recently used.</p>
+         <p>This value is null if the access key has not been used.</p>")
+  lastUsedDate: option<isoDate>,
+}
 type tagList_ = array<tag>
-@ocaml.doc("<p>Describes the static IP.</p>")
+@ocaml.doc("<p>Describes a static IP.</p>")
 type staticIp = {
   @ocaml.doc("<p>A Boolean value indicating whether the static IP is attached.</p>")
   isAttached: option<boolean_>,
@@ -2017,10 +2164,17 @@ type container = {
   @ocaml.doc("<p>The name of the image used for the container.</p>
 
          <p>Container images sourced from your Lightsail container service, that are registered and
-      stored on your service, start with a colon (<code>:</code>). For example,
-        <code>:container-service-1.mystaticwebsite.1</code>. Container images sourced from a public
-      registry like Docker Hub don't start with a colon. For example, <code>nginx:latest</code> or
-        <code>nginx</code>.</p>")
+      stored on your service, start with a colon (<code>:</code>). For example, if your container
+      service name is <code>container-service-1</code>, the container image label is
+        <code>mystaticsite</code>, and you want to use the third (<code>3</code>) version of the
+      registered container image, then you should specify
+        <code>:container-service-1.mystaticsite.3</code>. To use the latest version of a container
+      image, specify <code>latest</code> instead of a version number (for example,
+        <code>:container-service-1.mystaticsite.latest</code>). Lightsail will automatically use
+      the highest numbered version of the registered container image.</p>
+
+         <p>Container images sourced from a public registry like Docker Hub don't start with a colon.
+      For example, <code>nginx:latest</code> or <code>nginx</code>.</p>")
   image: option<string_>,
 }
 @ocaml.doc("<p>Describes a contact method.</p>
@@ -2097,13 +2251,13 @@ type bundle = {
   @ocaml.doc("<p>The price in US dollars (e.g., <code>5.0</code>) of the bundle.</p>")
   price: option<float_>,
 }
+type bucketBundleList = array<bucketBundle>
 type blueprintList = array<blueprint>
 type availabilityZoneList = array<availabilityZone>
 type attachedDiskList = array<attachedDisk>
 @ocaml.doc("<p>Describes an alarm.</p>
-         <p>An alarm is a way to monitor your Amazon Lightsail resource metrics. For more information,
-      see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-alarms\">Alarms
-        in Amazon Lightsail</a>.</p>")
+         <p>An alarm is a way to monitor your Lightsail resource metrics. For more information, see
+        <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-alarms\">Alarms in Amazon Lightsail</a>.</p>")
 type alarm = {
   @ocaml.doc("<p>Indicates whether the alarm is enabled.</p>")
   notificationEnabled: option<boolean_>,
@@ -2233,6 +2387,42 @@ type addOnRequest = {
   @ocaml.doc("<p>The add-on type.</p>") addOnType: addOnType,
 }
 type addOnList = array<addOn>
+type accessReceiverList = array<resourceReceivingAccess>
+@ocaml.doc("<p>Describes an access key for an Amazon Lightsail bucket.</p>
+
+         <p>Access keys grant full programmatic access to the specified bucket and its objects. You
+      can have a maximum of two access keys per bucket. Use the <a href=\"https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_CreateBucketAccessKey.html\">CreateBucketAccessKey</a> action to create an access key for a specific bucket. For
+      more information about access keys, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-creating-bucket-access-keys\">Creating access keys for a bucket in Amazon Lightsail</a> in the
+        <i>Amazon Lightsail Developer Guide</i>.</p>
+
+         <important>
+            <p>The <code>secretAccessKey</code> value is returned only in response to the
+          <code>CreateBucketAccessKey</code> action. You can get a secret access key only when you
+        first create an access key; you cannot get the secret access key later. If you lose the
+        secret access key, you must create a new access key.</p>
+         </important>")
+type accessKey = {
+  @ocaml.doc("<p>An object that describes the last time the access key was used.</p>
+
+         <note>
+            <p>This object does not include data in the response of a <a href=\"https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_CreateBucketAccessKey.html\">CreateBucketAccessKey</a> action. If the access key has not been used, the
+          <code>region</code> and <code>serviceName</code> values are <code>N/A</code>, and the
+          <code>lastUsedDate</code> value is null.</p>
+         </note>")
+  lastUsed: option<accessKeyLastUsed>,
+  @ocaml.doc("<p>The timestamp when the access key was created.</p>") createdAt: option<isoDate>,
+  @ocaml.doc("<p>The status of the access key.</p>
+
+         <p>A status of <code>Active</code> means that the key is valid, while <code>Inactive</code>
+      means it is not.</p>")
+  status: option<statusType>,
+  @ocaml.doc("<p>The secret access key used to sign requests.</p>
+
+         <p>You should store the secret access key in a safe location. We recommend that you delete
+      the access key if the secret access key is compromised.</p>")
+  secretAccessKey: option<nonEmptyString>,
+  @ocaml.doc("<p>The ID of the access key.</p>") accessKeyId: option<iamaccessKeyId>,
+}
 type staticIpList = array<staticIp>
 @ocaml.doc("<p>Describes a database snapshot.</p>")
 type relationalDatabaseSnapshot = {
@@ -2256,8 +2446,7 @@ type relationalDatabaseSnapshot = {
   @ocaml.doc("<p>The software of the database snapshot (for example, <code>MySQL</code>)</p>")
   engine: option<nonEmptyString>,
   @ocaml.doc("<p>The tag keys and optional values for the resource. For more information about tags in
-      Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags\">Lightsail
-        Dev Guide</a>.</p>")
+      Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags\">Amazon Lightsail Developer Guide</a>.</p>")
   tags: option<tagList_>,
   @ocaml.doc("<p>The Lightsail resource type.</p>") resourceType: option<resourceType>,
   @ocaml.doc("<p>The Region name and Availability Zone where the database snapshot is located.</p>")
@@ -2322,8 +2511,7 @@ type relationalDatabase = {
       database.</p>")
   relationalDatabaseBlueprintId: option<nonEmptyString>,
   @ocaml.doc("<p>The tag keys and optional values for the resource. For more information about tags in
-      Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags\">Lightsail
-        Dev Guide</a>.</p>")
+      Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags\">Amazon Lightsail Developer Guide</a>.</p>")
   tags: option<tagList_>,
   @ocaml.doc("<p>The Lightsail resource type for the database (for example,
         <code>RelationalDatabase</code>).</p>")
@@ -2445,7 +2633,7 @@ type loadBalancerTlsCertificateRenewalSummary = {
          </ul>")
   renewalStatus: option<loadBalancerTlsCertificateRenewalStatus>,
 }
-@ocaml.doc("<p>Describes the Lightsail load balancer.</p>")
+@ocaml.doc("<p>Describes a load balancer.</p>")
 type loadBalancer = {
   @ocaml.doc("<p>The IP address type of the load balancer.</p>
 
@@ -2480,8 +2668,7 @@ type loadBalancer = {
   @ocaml.doc("<p>The DNS name of your Lightsail load balancer.</p>")
   dnsName: option<nonEmptyString>,
   @ocaml.doc("<p>The tag keys and optional values for the resource. For more information about tags in
-      Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags\">Lightsail
-        Dev Guide</a>.</p>")
+      Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags\">Amazon Lightsail Developer Guide</a>.</p>")
   tags: option<tagList_>,
   @ocaml.doc("<p>The resource type (e.g., <code>LoadBalancer</code>.</p>")
   resourceType: option<resourceType>,
@@ -2498,12 +2685,11 @@ type loadBalancer = {
   @ocaml.doc("<p>The name of the load balancer (e.g., <code>my-load-balancer</code>).</p>")
   name: option<resourceName>,
 }
-@ocaml.doc("<p>Describes the SSH key pair.</p>")
+@ocaml.doc("<p>Describes an SSH key pair.</p>")
 type keyPair = {
   @ocaml.doc("<p>The RSA fingerprint of the key pair.</p>") fingerprint: option<base64>,
   @ocaml.doc("<p>The tag keys and optional values for the resource. For more information about tags in
-      Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags\">Lightsail
-        Dev Guide</a>.</p>")
+      Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags\">Amazon Lightsail Developer Guide</a>.</p>")
   tags: option<tagList_>,
   @ocaml.doc("<p>The resource type (usually <code>KeyPair</code>).</p>")
   resourceType: option<resourceType>,
@@ -2599,8 +2785,7 @@ type diskSnapshot = {
   @ocaml.doc("<p>The status of the disk snapshot operation.</p>") state: option<diskSnapshotState>,
   @ocaml.doc("<p>The size of the disk in GB.</p>") sizeInGb: option<integer_>,
   @ocaml.doc("<p>The tag keys and optional values for the resource. For more information about tags in
-      Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags\">Lightsail
-        Dev Guide</a>.</p>")
+      Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags\">Amazon Lightsail Developer Guide</a>.</p>")
   tags: option<tagList_>,
   @ocaml.doc("<p>The Lightsail resource type (e.g., <code>DiskSnapshot</code>).</p>")
   resourceType: option<resourceType>,
@@ -2616,7 +2801,7 @@ type diskSnapshot = {
   @ocaml.doc("<p>The name of the disk snapshot (e.g., <code>my-disk-snapshot</code>).</p>")
   name: option<resourceName>,
 }
-@ocaml.doc("<p>Describes a system disk or a block storage disk.</p>")
+@ocaml.doc("<p>Describes a block storage disk.</p>")
 type disk = {
   @ocaml.doc("<p>(Deprecated) The number of GB in use by the disk.</p>
          <note>
@@ -2646,8 +2831,7 @@ type disk = {
   @ocaml.doc("<p>An array of objects representing the add-ons enabled on the disk.</p>")
   addOns: option<addOnList>,
   @ocaml.doc("<p>The tag keys and optional values for the resource. For more information about tags in
-      Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags\">Lightsail
-        Dev Guide</a>.</p>")
+      Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags\">Amazon Lightsail Developer Guide</a>.</p>")
   tags: option<tagList_>,
   @ocaml.doc("<p>The Lightsail resource type (e.g., <code>Disk</code>).</p>")
   resourceType: option<resourceType>,
@@ -2664,7 +2848,7 @@ type disk = {
 type containerMap = Js.Dict.t<container>
 type contactMethodsList = array<contactMethod>
 @ocaml.doc("<p>Describes a CloudFormation stack record created as a result of the <code>create cloud
-        formation stack</code> operation.</p>
+        formation stack</code> action.</p>
          <p>A CloudFormation stack record provides information about the AWS CloudFormation stack used to
       create a new Amazon Elastic Compute Cloud instance from an exported Lightsail instance snapshot.</p>")
 type cloudFormationStackRecord = {
@@ -2766,6 +2950,73 @@ type cacheSettings = {
   defaultTTL: option<long>,
 }
 type bundleList = array<bundle>
+@ocaml.doc("<p>Describes an Amazon Lightsail bucket.</p>")
+type bucket = {
+  @ocaml.doc("<p>An object that describes the access log configuration for the bucket.</p>")
+  accessLogConfig: option<bucketAccessLogConfig>,
+  @ocaml.doc("<p>An object that describes the state of the bucket.</p>") state: option<bucketState>,
+  @ocaml.doc("<p>An array of objects that describe Lightsail instances that have access to the
+      bucket.</p>
+
+         <p>Use the <a href=\"https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_SetResourceAccessForBucket.html\">SetResourceAccessForBucket</a>
+      action to update the instances that have access to a bucket.</p>")
+  resourcesReceivingAccess: option<accessReceiverList>,
+  @ocaml.doc("<p>An array of strings that specify the AWS account IDs that have read-only access to the
+      bucket.</p>")
+  readonlyAccessAccounts: option<partnerIdList>,
+  @ocaml.doc("<p>Indicates whether the bundle that is currently applied to a bucket can be changed to
+      another bundle.</p>
+
+         <p>You can update a bucket's bundle only one time within a monthly AWS billing
+      cycle.</p>
+
+         <p>Use the <a href=\"https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_UpdateBucketBundle.html\">UpdateBucketBundle</a> action to change a
+      bucket's bundle.</p>")
+  ableToUpdateBundle: option<boolean_>,
+  @ocaml.doc("<p>Indicates whether object versioning is enabled for the bucket.</p>
+
+         <p>The following options can be configured:</p>
+         <ul>
+            <li>
+               <p>
+                  <code>Enabled</code> - Object versioning is enabled.</p>
+            </li>
+            <li>
+               <p>
+                  <code>Suspended</code> - Object versioning was previously enabled but is currently
+          suspended. Existing object versions are retained.</p>
+            </li>
+            <li>
+               <p>
+                  <code>NeverEnabled</code> - Object versioning has never been enabled.</p>
+            </li>
+         </ul>")
+  objectVersioning: option<nonEmptyString>,
+  @ocaml.doc("<p>The tag keys and optional values for the bucket. For more information, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags\">Tags in
+        Amazon Lightsail</a> in the <i>Amazon Lightsail Developer Guide</i>.</p>")
+  tags: option<tagList_>,
+  @ocaml.doc("<p>The support code for a bucket. Include this code in your email to support when you have
+      questions about a Lightsail bucket. This code enables our support team to look up your
+      Lightsail information more easily.</p>")
+  supportCode: option<nonEmptyString>,
+  @ocaml.doc("<p>The name of the bucket.</p>") name: option<bucketName>,
+  location: option<resourceLocation>,
+  @ocaml.doc("<p>The URL of the bucket.</p>") url: option<nonEmptyString>,
+  @ocaml.doc("<p>The timestamp when the distribution was created.</p>") createdAt: option<isoDate>,
+  @ocaml.doc("<p>The ID of the bundle currently applied to the bucket.</p>
+
+         <p>A bucket bundle specifies the monthly cost, storage space, and data transfer quota for a
+      bucket.</p>
+
+         <p>Use the <a href=\"https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_UpdateBucketBundle.html\">UpdateBucketBundle</a> action to change the
+      bundle of a bucket.</p>")
+  bundleId: option<nonEmptyString>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the bucket.</p>") arn: option<nonEmptyString>,
+  @ocaml.doc("<p>An object that describes the access rules of the bucket.</p>")
+  accessRules: option<accessRules>,
+  @ocaml.doc("<p>The Lightsail resource type of the bucket (for example, <code>Bucket</code>).</p>")
+  resourceType: option<nonEmptyString>,
+}
 @ocaml.doc("<p>Describes an automatic snapshot.</p>")
 type autoSnapshotDetails = {
   @ocaml.doc("<p>An array of objects that describe the block storage disks attached to the instance when
@@ -2780,6 +3031,7 @@ type autoSnapshotDetails = {
 type attachedDiskMap = Js.Dict.t<diskMapList>
 type alarmsList = array<alarm>
 type addOnRequestList = array<addOnRequest>
+type accessKeyList = array<accessKey>
 @ocaml.doc(
   "<p>Describes the status of a SSL/TLS certificate renewal managed by Amazon Lightsail.</p>"
 )
@@ -2942,8 +3194,7 @@ type loadBalancerTlsCertificate = {
   @ocaml.doc("<p>The load balancer name where your SSL/TLS certificate is attached.</p>")
   loadBalancerName: option<resourceName>,
   @ocaml.doc("<p>The tag keys and optional values for the resource. For more information about tags in
-      Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags\">Lightsail
-        Dev Guide</a>.</p>")
+      Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags\">Amazon Lightsail Developer Guide</a>.</p>")
   tags: option<tagList_>,
   @ocaml.doc("<p>The resource type (e.g., <code>LoadBalancerTlsCertificate</code>).</p>
          <ul>
@@ -3033,8 +3284,7 @@ type loadBalancerList = array<loadBalancer>
 @ocaml.doc("<p>Describes an Amazon Lightsail content delivery network (CDN) distribution.</p>")
 type lightsailDistribution = {
   @ocaml.doc("<p>The tag keys and optional values for the resource. For more information about tags in
-      Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags\">Lightsail
-        Dev Guide</a>.</p>")
+      Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags\">Amazon Lightsail Developer Guide</a>.</p>")
   tags: option<tagList_>,
   @ocaml.doc("<p>The IP address type of the distribution.</p>
 
@@ -3056,7 +3306,7 @@ type lightsailDistribution = {
   defaultCacheBehavior: option<cacheBehavior>,
   @ocaml.doc("<p>The public DNS of the origin.</p>") originPublicDNS: option<string_>,
   @ocaml.doc("<p>An object that describes the origin resource of the distribution, such as a Lightsail
-      instance or load balancer.</p>
+      instance, bucket, or load balancer.</p>
          <p>The distribution pulls, caches, and serves content from the origin.</p>")
   origin: option<origin>,
   @ocaml.doc("<p>The name of the SSL/TLS certificate attached to the distribution, if any.</p>")
@@ -3117,13 +3367,12 @@ type exportSnapshotRecordSourceInfo = {
         <code>DiskSnapshot</code>).</p>")
   resourceType: option<exportSnapshotRecordSourceType>,
 }
-@ocaml.doc("<p>Describes a domain where you are storing recordsets in Lightsail.</p>")
+@ocaml.doc("<p>Describes a domain where you are storing recordsets.</p>")
 type domain = {
   @ocaml.doc("<p>An array of key-value pairs containing information about the domain entries.</p>")
   domainEntries: option<domainEntryList>,
   @ocaml.doc("<p>The tag keys and optional values for the resource. For more information about tags in
-      Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags\">Lightsail
-        Dev Guide</a>.</p>")
+      Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags\">Amazon Lightsail Developer Guide</a>.</p>")
   tags: option<tagList_>,
   @ocaml.doc("<p>The resource type. </p>") resourceType: option<resourceType>,
   @ocaml.doc("<p>The AWS Region and Availability Zones where the domain recordset was created.</p>")
@@ -3196,6 +3445,7 @@ type containerServiceDeployment = {
   @ocaml.doc("<p>The version number of the deployment.</p>") version: option<integer_>,
 }
 type cloudFormationStackRecordList = array<cloudFormationStackRecord>
+type bucketList = array<bucket>
 type autoSnapshotDetailsList = array<autoSnapshotDetails>
 type loadBalancerTlsCertificateList = array<loadBalancerTlsCertificate>
 @ocaml.doc("<p>Describes an instance snapshot.</p>")
@@ -3229,8 +3479,7 @@ type instanceSnapshot = {
   progress: option<string_>,
   @ocaml.doc("<p>The state the snapshot is in.</p>") state: option<instanceSnapshotState>,
   @ocaml.doc("<p>The tag keys and optional values for the resource. For more information about tags in
-      Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags\">Lightsail
-        Dev Guide</a>.</p>")
+      Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags\">Amazon Lightsail Developer Guide</a>.</p>")
   tags: option<tagList_>,
   @ocaml.doc("<p>The type of resource (usually <code>InstanceSnapshot</code>).</p>")
   resourceType: option<resourceType>,
@@ -3382,8 +3631,7 @@ type containerService = {
       container service.</p>")
   power: option<containerServicePowerName>,
   @ocaml.doc("<p>The tag keys and optional values for the resource. For more information about tags in
-      Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags\">Lightsail
-        Dev Guide</a>.</p>")
+      Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags\">Amazon Lightsail Developer Guide</a>.</p>")
   tags: option<tagList_>,
   @ocaml.doc("<p>The Lightsail resource type of the container service (i.e.,
         <code>ContainerService</code>).</p>")
@@ -3410,8 +3658,7 @@ type certificate = {
       information more easily.</p>")
   supportCode: option<string_>,
   @ocaml.doc("<p>The tag keys and optional values for the resource. For more information about tags in
-      Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags\">Lightsail
-        Dev Guide</a>.</p>")
+      Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags\">Amazon Lightsail Developer Guide</a>.</p>")
   tags: option<tagList_>,
   @ocaml.doc("<p>The reason the certificate was revoked. This value is present only when the certificate
       status is <code>REVOKED</code>.</p>")
@@ -3551,8 +3798,7 @@ type instance = {
   @ocaml.doc("<p>The blueprint ID (e.g., <code>os_amlinux_2016_03</code>).</p>")
   blueprintId: option<nonEmptyString>,
   @ocaml.doc("<p>The tag keys and optional values for the resource. For more information about tags in
-      Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags\">Lightsail
-        Dev Guide</a>.</p>")
+      Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags\">Amazon Lightsail Developer Guide</a>.</p>")
   tags: option<tagList_>,
   @ocaml.doc("<p>The type of resource (usually <code>Instance</code>).</p>")
   resourceType: option<resourceType>,
@@ -3578,8 +3824,7 @@ type containerServiceList = array<containerService>
 @ocaml.doc("<p>Describes an Amazon Lightsail SSL/TLS certificate.</p>")
 type certificateSummary = {
   @ocaml.doc("<p>The tag keys and optional values for the resource. For more information about tags in
-      Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags\">Lightsail
-        Dev Guide</a>.</p>")
+      Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags\">Amazon Lightsail Developer Guide</a>.</p>")
   tags: option<tagList_>,
   @ocaml.doc("<p>An object that describes a certificate in detail.</p>")
   certificateDetail: option<certificate>,
@@ -3592,14 +3837,14 @@ type instanceList = array<instance>
 type certificateSummaryList = array<certificateSummary>
 @ocaml.doc("<p>Amazon Lightsail is the easiest way to get started with Amazon Web Services (AWS) for developers
       who need to build websites or web applications. It includes everything you need to launch your
-      project quickly - instances (virtual private servers), container services, managed databases,
-      SSD-based block storage, static IP addresses, load balancers, content delivery network (CDN)
-      distributions, DNS management of registered domains, and resource snapshots (backups) - for a
-      low, predictable monthly price.</p>
+      project quickly - instances (virtual private servers), container services, storage buckets,
+      managed databases, SSD-based block storage, static IP addresses, load balancers, content
+      delivery network (CDN) distributions, DNS management of registered domains, and resource
+      snapshots (backups) - for a low, predictable monthly price.</p>
 
          <p>You can manage your Lightsail resources using the Lightsail console, Lightsail API,
       AWS Command Line Interface (AWS CLI), or SDKs. For more information about Lightsail concepts
-      and tasks, see the <a href=\"http://lightsail.aws.amazon.com/ls/docs/how-to/article/lightsail-how-to-set-up-access-keys-to-use-sdk-api-cli\">Lightsail Dev Guide</a>.</p>
+      and tasks, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/lightsail-how-to-set-up-access-keys-to-use-sdk-api-cli\">Amazon Lightsail Developer Guide</a>.</p>
 
          <p>This API Reference provides detailed information about the actions, data types,
       parameters, and errors of the Lightsail service. For more information about the supported
@@ -3607,14 +3852,14 @@ type certificateSummaryList = array<certificateSummary>
         Quotas</a> in the <i>AWS General Reference</i>.</p>")
 module IsVpcPeered = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("<p>Returns <code>true</code> if the Lightsail VPC is peered; otherwise,
       <code>false</code>.</p>")
     isPeered: option<boolean_>,
   }
-  @module("@aws-sdk/client-lightsail") @new external new: unit => t = "IsVpcPeeredCommand"
-  let make = () => new()
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "IsVpcPeeredCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -3673,15 +3918,17 @@ module GetDistributionLatestCacheReset = {
 
 module DownloadDefaultKeyPair = {
   type t
-
+  type request = {.}
   type response = {
+    @ocaml.doc("<p>The timestamp when the default key pair was created.</p>")
+    createdAt: option<isoDate>,
     @ocaml.doc("<p>A base64-encoded RSA private key.</p>") privateKeyBase64: option<base64>,
     @ocaml.doc("<p>A base64-encoded public key of the <code>ssh-rsa</code> type.</p>")
     publicKeyBase64: option<base64>,
   }
   @module("@aws-sdk/client-lightsail") @new
-  external new: unit => t = "DownloadDefaultKeyPairCommand"
-  let make = () => new()
+  external new: request => t = "DownloadDefaultKeyPairCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -3691,7 +3938,7 @@ module DeleteContainerService = {
     @ocaml.doc("<p>The name of the container service to delete.</p>")
     serviceName: containerServiceName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-lightsail") @new
   external new: request => t = "DeleteContainerServiceCommand"
   let make = (~serviceName, ()) => new({serviceName: serviceName})
@@ -3719,7 +3966,7 @@ module DeleteContainerImage = {
     )
     serviceName: containerServiceName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-lightsail") @new
   external new: request => t = "DeleteContainerImageCommand"
   let make = (~image, ~serviceName, ()) => new({image: image, serviceName: serviceName})
@@ -3821,15 +4068,15 @@ module GetActiveNames = {
 
 module CreateContainerServiceRegistryLogin = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("<p>An object that describes the log in information for the container service registry of your
       Lightsail account.</p>")
     registryLogin: option<containerServiceRegistryLogin>,
   }
   @module("@aws-sdk/client-lightsail") @new
-  external new: unit => t = "CreateContainerServiceRegistryLoginCommand"
-  let make = () => new()
+  external new: request => t = "CreateContainerServiceRegistryLoginCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -3855,14 +4102,14 @@ module UpdateDistributionBundle = {
 
 module UnpeerVpc = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("<p>An array of objects that describe the result of the action, such as the status of the
       request, the timestamp of the request, and the resources affected by the request.</p>")
     operation: option<operation>,
   }
-  @module("@aws-sdk/client-lightsail") @new external new: unit => t = "UnpeerVpcCommand"
-  let make = () => new()
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "UnpeerVpcCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -3891,14 +4138,14 @@ module ResetDistributionCache = {
 
 module PeerVpc = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("<p>An array of objects that describe the result of the action, such as the status of the
       request, the timestamp of the request, and the resources affected by the request.</p>")
     operation: option<operation>,
   }
-  @module("@aws-sdk/client-lightsail") @new external new: unit => t = "PeerVpcCommand"
-  let make = () => new()
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "PeerVpcCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -4036,7 +4283,7 @@ module GetRelationalDatabaseMetricData = {
                <p>Specified in the Unix time format.</p>
                <p>For example, if you wish to use an end time of October 1, 2018, at 8 PM UTC, then you
           input <code>1538424000</code> as the end time.</p>
-            
+        
             </li>
          </ul>")
     endTime: isoDate,
@@ -4050,7 +4297,7 @@ module GetRelationalDatabaseMetricData = {
                <p>Specified in the Unix time format.</p>
                <p>For example, if you wish to use a start time of October 1, 2018, at 8 PM UTC, then you
           input <code>1538424000</code> as the start time.</p>
-            
+        
             </li>
          </ul>")
     startTime: isoDate,
@@ -4195,7 +4442,7 @@ module GetRelationalDatabaseLogEvents = {
                <p>Specified in the Unix time format.</p>
                <p>For example, if you wish to use an end time of October 1, 2018, at 8 PM UTC, then you
           input <code>1538424000</code> as the end time.</p>
-            
+        
             </li>
          </ul>")
     endTime: option<isoDate>,
@@ -4949,28 +5196,28 @@ module GetDistributionMetricData = {
 
 module GetDistributionBundles = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("<p>An object that describes a distribution bundle.</p>")
     bundles: option<distributionBundleList>,
   }
   @module("@aws-sdk/client-lightsail") @new
-  external new: unit => t = "GetDistributionBundlesCommand"
-  let make = () => new()
+  external new: request => t = "GetDistributionBundlesCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetContainerServicePowers = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("<p>An array of objects that describe the powers that can be specified for a container
       service.</p>")
     powers: option<containerServicePowerList>,
   }
   @module("@aws-sdk/client-lightsail") @new
-  external new: unit => t = "GetContainerServicePowersCommand"
-  let make = () => new()
+  external new: request => t = "GetContainerServicePowersCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -5198,15 +5445,139 @@ module GetContainerImages = {
 
 module GetContainerAPIMetadata = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("<p>Metadata about Lightsail containers, such as the current version of the Lightsail
       Control (lightsailctl) plugin.</p>")
     metadata: option<containerServiceMetadataEntryList>,
   }
   @module("@aws-sdk/client-lightsail") @new
-  external new: unit => t = "GetContainerAPIMetadataCommand"
-  let make = () => new()
+  external new: request => t = "GetContainerAPIMetadataCommand"
+  let make = () => new(Js.Obj.empty())
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module GetBucketMetricData = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The unit for the metric data request.</p>
+         <p>Valid units depend on the metric data being requested. For the valid units with each
+      available metric, see the <code>metricName</code> parameter.</p>")
+    @as("unit")
+    unit_: metricUnit,
+    @ocaml.doc("<p>The statistic for the metric.</p>
+
+         <p>The following statistics are available:</p>
+
+         <ul>
+            <li>
+               <p>
+                  <code>Minimum</code> - The lowest value observed during the specified period. Use this
+          value to determine low volumes of activity for your application.</p>
+            </li>
+            <li>
+               <p>
+                  <code>Maximum</code> - The highest value observed during the specified period. Use
+          this value to determine high volumes of activity for your application.</p>
+            </li>
+            <li>
+               <p>
+                  <code>Sum</code> - The sum of all values submitted for the matching metric. You can
+          use this statistic to determine the total volume of a metric.</p>
+            </li>
+            <li>
+               <p>
+                  <code>Average</code> - The value of <code>Sum</code> / <code>SampleCount</code> during
+          the specified period. By comparing this statistic with the <code>Minimum</code> and
+            <code>Maximum</code> values, you can determine the full scope of a metric and how close
+          the average use is to the <code>Minimum</code> and <code>Maximum</code> values. This
+          comparison helps you to know when to increase or decrease your resources.</p>
+            </li>
+            <li>
+               <p>
+                  <code>SampleCount</code> - The count, or number, of data points used for the
+          statistical calculation.</p>
+            </li>
+         </ul>")
+    statistics: metricStatisticList,
+    @ocaml.doc("<p>The granularity, in seconds, of the returned data points.</p>
+         <note>
+            <p>Bucket storage metrics are reported once per day. Therefore, you should specify a period
+        of 86400 seconds, which is the number of seconds in a day.</p>
+         </note>")
+    period: metricPeriod,
+    @ocaml.doc("<p>The timestamp indicating the latest data to be returned.</p>") endTime: isoDate,
+    @ocaml.doc("<p>The timestamp indicating the earliest data to be returned.</p>")
+    startTime: isoDate,
+    @ocaml.doc("<p>The metric for which you want to return information.</p>
+
+         <p>Valid bucket metric names are listed below, along with the most useful statistics to
+      include in your request, and the published unit value.</p>
+
+         <note>
+            <p>These bucket metrics are reported once per day.</p>
+         </note>
+
+         <ul>
+            <li>
+               <p>
+                  <b>
+                     <code>BucketSizeBytes</code>
+                  </b> - The amount of data in
+          bytes stored in a bucket. This value is calculated by summing the size of all objects in
+          the bucket (including object versions), including the size of all parts for all incomplete
+          multipart uploads to the bucket.</p>
+               <p>Statistics: The most useful statistic is <code>Maximum</code>.</p>
+               <p>Unit: The published unit is <code>Bytes</code>.</p>
+            </li>
+            <li>
+               <p>
+                  <b>
+                     <code>NumberOfObjects</code>
+                  </b> - The total number of
+          objects stored in a bucket. This value is calculated by counting all objects in the bucket
+          (including object versions) and the total number of parts for all incomplete multipart
+          uploads to the bucket.</p>
+               <p>Statistics: The most useful statistic is <code>Average</code>.</p>
+               <p>Unit: The published unit is <code>Count</code>.</p>
+            </li>
+         </ul>")
+    metricName: bucketMetricName,
+    @ocaml.doc("<p>The name of the bucket for which to get metric data.</p>")
+    bucketName: bucketName,
+  }
+  type response = {
+    @ocaml.doc("<p>An array of objects that describe the metric data returned.</p>")
+    metricData: option<metricDatapointList>,
+    @ocaml.doc("<p>The name of the metric returned.</p>") metricName: option<bucketMetricName>,
+  }
+  @module("@aws-sdk/client-lightsail") @new
+  external new: request => t = "GetBucketMetricDataCommand"
+  let make = (~unit_, ~statistics, ~period, ~endTime, ~startTime, ~metricName, ~bucketName, ()) =>
+    new({
+      unit_: unit_,
+      statistics: statistics,
+      period: period,
+      endTime: endTime,
+      startTime: startTime,
+      metricName: metricName,
+      bucketName: bucketName,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module GetBucketBundles = {
+  type t
+  type request = {
+    @ocaml.doc("<p>A Boolean value that indicates whether to include inactive (unavailable) bundles in the
+      response.</p>")
+    includeInactive: option<boolean_>,
+  }
+  type response = {
+    @ocaml.doc("<p>An object that describes bucket bundles.</p>") bundles: option<bucketBundleList>,
+  }
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "GetBucketBundlesCommand"
+  let make = (~includeInactive=?, ()) => new({includeInactive: includeInactive})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -5261,6 +5632,12 @@ module DetachCertificateFromDistribution = {
 module DeleteKeyPair = {
   type t
   type request = {
+    @ocaml.doc("<p>The RSA fingerprint of the Lightsail default key pair to delete.</p>
+         <note>
+            <p>The <code>expectedFingerprint</code> parameter is required only when specifying to
+        delete a Lightsail default key pair.</p>
+         </note>")
+    expectedFingerprint: option<string_>,
     @ocaml.doc("<p>The name of the key pair to delete.</p>") keyPairName: resourceName,
   }
   type response = {
@@ -5269,7 +5646,8 @@ module DeleteKeyPair = {
     operation: option<operation>,
   }
   @module("@aws-sdk/client-lightsail") @new external new: request => t = "DeleteKeyPairCommand"
-  let make = (~keyPairName, ()) => new({keyPairName: keyPairName})
+  let make = (~keyPairName, ~expectedFingerprint=?, ()) =>
+    new({expectedFingerprint: expectedFingerprint, keyPairName: keyPairName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -5628,7 +6006,7 @@ module UpdateDistribution = {
     @ocaml.doc("<p>An object that describes the default cache behavior for the distribution.</p>")
     defaultCacheBehavior: option<cacheBehavior>,
     @ocaml.doc("<p>An object that describes the origin resource for the distribution, such as a Lightsail
-      instance or load balancer.</p>
+      instance, bucket, or load balancer.</p>
          <p>The distribution pulls, caches, and serves content from the origin.</p>")
     origin: option<inputOrigin>,
     @ocaml.doc("<p>The name of the distribution to update.</p>
@@ -5658,6 +6036,83 @@ module UpdateDistribution = {
       defaultCacheBehavior: defaultCacheBehavior,
       origin: origin,
       distributionName: distributionName,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module UpdateBucketBundle = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The ID of the new bundle to apply to the bucket.</p>
+
+         <p>Use the <a href=\"https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetBucketBundles.html\">GetBucketBundles</a> action to get a list of
+      bundle IDs that you can specify.</p>")
+    bundleId: nonEmptyString,
+    @ocaml.doc("<p>The name of the bucket for which to update the bundle.</p>")
+    bucketName: bucketName,
+  }
+  type response = {
+    @ocaml.doc("<p>An array of objects that describe the result of the action, such as the status of the
+      request, the timestamp of the request, and the resources affected by the request.</p>")
+    operations: option<operationList>,
+  }
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "UpdateBucketBundleCommand"
+  let make = (~bundleId, ~bucketName, ()) => new({bundleId: bundleId, bucketName: bucketName})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module UpdateBucket = {
+  type t
+  type request = {
+    @ocaml.doc("<p>An object that describes the access log configuration for the bucket.</p>")
+    accessLogConfig: option<bucketAccessLogConfig>,
+    @ocaml.doc("<p>An array of strings to specify the AWS account IDs that can access the bucket.</p>
+
+         <p>You can give a maximum of 10 AWS accounts access to a bucket.</p>")
+    readonlyAccessAccounts: option<partnerIdList>,
+    @ocaml.doc("<p>Specifies whether to enable or suspend versioning of objects in the bucket.</p>
+
+         <p>The following options can be specified:</p>
+         <ul>
+            <li>
+               <p>
+                  <code>Enabled</code> - Enables versioning of objects in the specified bucket.</p>
+            </li>
+            <li>
+               <p>
+                  <code>Suspended</code> - Suspends versioning of objects in the specified bucket.
+          Existing object versions are retained.</p>
+            </li>
+         </ul>")
+    versioning: option<nonEmptyString>,
+    @ocaml.doc(
+      "<p>An object that sets the public accessibility of objects in the specified bucket.</p>"
+    )
+    accessRules: option<accessRules>,
+    @ocaml.doc("<p>The name of the bucket to update.</p>") bucketName: bucketName,
+  }
+  type response = {
+    @ocaml.doc("<p>An array of objects that describe the result of the action, such as the status of the
+      request, the timestamp of the request, and the resources affected by the request.</p>")
+    operations: option<operationList>,
+    @ocaml.doc("<p>An object that describes the bucket that is updated.</p>")
+    bucket: option<bucket>,
+  }
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "UpdateBucketCommand"
+  let make = (
+    ~bucketName,
+    ~accessLogConfig=?,
+    ~readonlyAccessAccounts=?,
+    ~versioning=?,
+    ~accessRules=?,
+    (),
+  ) =>
+    new({
+      accessLogConfig: accessLogConfig,
+      readonlyAccessAccounts: readonlyAccessAccounts,
+      versioning: versioning,
+      accessRules: accessRules,
+      bucketName: bucketName,
     })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
@@ -5817,6 +6272,45 @@ module StartInstance = {
   }
   @module("@aws-sdk/client-lightsail") @new external new: request => t = "StartInstanceCommand"
   let make = (~instanceName, ()) => new({instanceName: instanceName})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module SetResourceAccessForBucket = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The access setting.</p>
+
+         <p>The following access settings are available:</p>
+
+         <ul>
+            <li>
+               <p>
+                  <code>allow</code> - Allows access to the bucket and its objects.</p>
+            </li>
+            <li>
+               <p>
+                  <code>deny</code> - Denies access to the bucket and its objects. Use this setting to
+          remove access for a resource previously set to <code>allow</code>.</p>
+            </li>
+         </ul>")
+    access: resourceBucketAccess,
+    @ocaml.doc(
+      "<p>The name of the bucket for which to set access to another Lightsail resource.</p>"
+    )
+    bucketName: bucketName,
+    @ocaml.doc("<p>The name of the Lightsail instance for which to set bucket access. The instance must be
+      in a running or stopped state.</p>")
+    resourceName: resourceName,
+  }
+  type response = {
+    @ocaml.doc("<p>An array of objects that describe the result of the action, such as the status of the
+      request, the timestamp of the request, and the resources affected by the request.</p>")
+    operations: option<operationList>,
+  }
+  @module("@aws-sdk/client-lightsail") @new
+  external new: request => t = "SetResourceAccessForBucketCommand"
+  let make = (~access, ~bucketName, ~resourceName, ()) =>
+    new({access: access, bucketName: bucketName, resourceName: resourceName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -6410,6 +6904,22 @@ module GetBundles = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module GetBucketAccessKeys = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The name of the bucket for which to return access keys.</p>")
+    bucketName: bucketName,
+  }
+  type response = {
+    @ocaml.doc("<p>An object that describes the access keys for the specified bucket.</p>")
+    accessKeys: option<accessKeyList>,
+  }
+  @module("@aws-sdk/client-lightsail") @new
+  external new: request => t = "GetBucketAccessKeysCommand"
+  let make = (~bucketName, ()) => new({bucketName: bucketName})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module GetAlarms = {
   type t
   type request = {
@@ -6787,6 +7297,72 @@ module DeleteCertificate = {
   }
   @module("@aws-sdk/client-lightsail") @new external new: request => t = "DeleteCertificateCommand"
   let make = (~certificateName, ()) => new({certificateName: certificateName})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module DeleteBucketAccessKey = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The ID of the access key to delete.</p>
+
+         <p>Use the <a href=\"https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetBucketAccessKeys.html\">GetBucketAccessKeys</a> action to get a
+      list of access key IDs that you can specify.</p>")
+    accessKeyId: nonEmptyString,
+    @ocaml.doc("<p>The name of the bucket that the access key belongs to.</p>")
+    bucketName: bucketName,
+  }
+  type response = {
+    @ocaml.doc("<p>An array of objects that describe the result of the action, such as the status of the
+      request, the timestamp of the request, and the resources affected by the request.</p>")
+    operations: option<operationList>,
+  }
+  @module("@aws-sdk/client-lightsail") @new
+  external new: request => t = "DeleteBucketAccessKeyCommand"
+  let make = (~accessKeyId, ~bucketName, ()) =>
+    new({accessKeyId: accessKeyId, bucketName: bucketName})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module DeleteBucket = {
+  type t
+  type request = {
+    @ocaml.doc("<p>A Boolean value that indicates whether to force delete the bucket.</p>
+
+         <p>You must force delete the bucket if it has one of the following conditions:</p>
+         <ul>
+            <li>
+               <p>The bucket is the origin of a distribution.</p>
+            </li>
+            <li>
+               <p>The bucket has instances that were granted access to it using the <a href=\"https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_SetResourceAccessForBucket.html\">SetResourceAccessForBucket</a> action.</p>
+            </li>
+            <li>
+               <p>The bucket has objects.</p>
+            </li>
+            <li>
+               <p>The bucket has access keys.</p>
+            </li>
+         </ul>
+
+         <important>
+            <p>Force deleting a bucket might impact other resources that rely on the bucket, such as
+        instances, distributions, or software that use the issued access keys.</p>
+         </important>")
+    forceDelete: option<boolean_>,
+    @ocaml.doc("<p>The name of the bucket to delete.</p>
+
+         <p>Use the <a href=\"https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetBuckets.html\">GetBuckets</a> action to get a list of bucket names
+      that you can specify.</p>")
+    bucketName: bucketName,
+  }
+  type response = {
+    @ocaml.doc("<p>An array of objects that describe the result of the action, such as the status of the
+      request, the timestamp of the request, and the resources affected by the request.</p>")
+    operations: option<operationList>,
+  }
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "DeleteBucketCommand"
+  let make = (~bucketName, ~forceDelete=?, ()) =>
+    new({forceDelete: forceDelete, bucketName: bucketName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -7336,7 +7912,7 @@ module CreateInstancesFromSnapshot = {
             </li>
             <li>
                <p>Define this parameter only when creating a new instance from an automatic snapshot.
-          For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots\">Lightsail Dev Guide</a>.</p>
+          For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots\">Amazon Lightsail Developer Guide</a>.</p>
             </li>
          </ul>")
     useLatestRestorableAutoSnapshot: option<boolean_>,
@@ -7355,7 +7931,7 @@ module CreateInstancesFromSnapshot = {
             </li>
             <li>
                <p>Define this parameter only when creating a new instance from an automatic snapshot.
-          For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots\">Lightsail Dev Guide</a>.</p>
+          For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots\">Amazon Lightsail Developer Guide</a>.</p>
             </li>
          </ul>")
     restoreDate: option<string_>,
@@ -7370,7 +7946,7 @@ module CreateInstancesFromSnapshot = {
             </li>
             <li>
                <p>Define this parameter only when creating a new instance from an automatic snapshot.
-          For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots\">Lightsail Dev Guide</a>.</p>
+          For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots\">Amazon Lightsail Developer Guide</a>.</p>
             </li>
          </ul>")
     sourceInstanceName: option<string_>,
@@ -7395,7 +7971,7 @@ module CreateInstancesFromSnapshot = {
             <p>Depending on the machine image you choose, the command to get software on your instance
         varies. Amazon Linux and CentOS use <code>yum</code>, Debian and Ubuntu use
           <code>apt-get</code>, and FreeBSD uses <code>pkg</code>. For a complete list, see the
-          <a href=\"https://lightsail.aws.amazon.com/ls/docs/getting-started/article/compare-options-choose-lightsail-instance-image\">Dev Guide</a>.</p>
+          <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/compare-options-choose-lightsail-instance-image\">Amazon Lightsail Developer Guide</a>.</p>
          </note>")
     userData: option<string_>,
     @ocaml.doc("<p>The bundle of specification information for your virtual private server (or
@@ -7488,7 +8064,7 @@ module CreateInstances = {
             <p>Depending on the machine image you choose, the command to get software on your instance
         varies. Amazon Linux and CentOS use <code>yum</code>, Debian and Ubuntu use
           <code>apt-get</code>, and FreeBSD uses <code>pkg</code>. For a complete list, see the
-          <a href=\"https://lightsail.aws.amazon.com/ls/docs/getting-started/article/compare-options-choose-lightsail-instance-image\">Dev Guide</a>.</p>
+          <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/compare-options-choose-lightsail-instance-image\">Amazon Lightsail Developer Guide</a>.</p>
          </note>")
     userData: option<string_>,
     @ocaml.doc("<p>The bundle of specification information for your virtual private server (or
@@ -7633,7 +8209,7 @@ module CreateDiskFromSnapshot = {
             </li>
             <li>
                <p>Define this parameter only when creating a new disk from an automatic snapshot. For
-          more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots\">Lightsail Dev Guide</a>.</p>
+          more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots\">Amazon Lightsail Developer Guide</a>.</p>
             </li>
          </ul>")
     useLatestRestorableAutoSnapshot: option<boolean_>,
@@ -7652,7 +8228,7 @@ module CreateDiskFromSnapshot = {
             </li>
             <li>
                <p>Define this parameter only when creating a new disk from an automatic snapshot. For
-          more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots\">Lightsail Dev Guide</a>.</p>
+          more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots\">Amazon Lightsail Developer Guide</a>.</p>
             </li>
          </ul>")
     restoreDate: option<string_>,
@@ -7666,7 +8242,7 @@ module CreateDiskFromSnapshot = {
             </li>
             <li>
                <p>Define this parameter only when creating a new disk from an automatic snapshot. For
-          more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots\">Lightsail Dev Guide</a>.</p>
+          more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots\">Amazon Lightsail Developer Guide</a>.</p>
             </li>
          </ul>")
     sourceDiskName: option<string_>,
@@ -7835,6 +8411,76 @@ module CreateCloudFormationStack = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module CreateBucketAccessKey = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>The name of the bucket that the new access key will belong to, and grant access to.</p>"
+    )
+    bucketName: bucketName,
+  }
+  type response = {
+    @ocaml.doc("<p>An array of objects that describe the result of the action, such as the status of the
+      request, the timestamp of the request, and the resources affected by the request.</p>")
+    operations: option<operationList>,
+    @ocaml.doc("<p>An object that describes the access key that is created.</p>")
+    accessKey: option<accessKey>,
+  }
+  @module("@aws-sdk/client-lightsail") @new
+  external new: request => t = "CreateBucketAccessKeyCommand"
+  let make = (~bucketName, ()) => new({bucketName: bucketName})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module CreateBucket = {
+  type t
+  type request = {
+    @ocaml.doc("<p>A Boolean value that indicates whether to enable versioning of objects in the
+      bucket.</p>
+
+         <p>For more information about versioning, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-managing-bucket-object-versioning\">Enabling and suspending object versioning in a bucket in Amazon Lightsail</a> in the
+        <i>Amazon Lightsail Developer Guide</i>.</p>")
+    enableObjectVersioning: option<boolean_>,
+    @ocaml.doc("<p>The tag keys and optional values to add to the bucket during creation.</p>
+
+         <p>Use the <a href=\"https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_TagResource.html\">TagResource</a> action to tag the bucket after it's
+      created.</p>")
+    tags: option<tagList_>,
+    @ocaml.doc("<p>The ID of the bundle to use for the bucket.</p>
+
+         <p>A bucket bundle specifies the monthly cost, storage space, and data transfer quota for a
+      bucket.</p>
+
+         <p>Use the <a href=\"https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetBucketBundles.html\">GetBucketBundles</a> action to get a list of
+      bundle IDs that you can specify.</p>
+
+         <p>Use the <a href=\"https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_UpdateBucketBundle.html\">UpdateBucketBundle</a> action to change the
+      bundle after the bucket is created.</p>")
+    bundleId: nonEmptyString,
+    @ocaml.doc("<p>The name for the bucket.</p>
+
+         <p>For more information about bucket names, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/bucket-naming-rules-in-amazon-lightsail\">Bucket naming rules in Amazon Lightsail</a> in the <i>Amazon Lightsail Developer
+        Guide</i>.</p>")
+    bucketName: bucketName,
+  }
+  type response = {
+    @ocaml.doc("<p>An array of objects that describe the result of the action, such as the status of the
+      request, the timestamp of the request, and the resources affected by the request.</p>")
+    operations: option<operationList>,
+    @ocaml.doc("<p>An object that describes the bucket that is created.</p>")
+    bucket: option<bucket>,
+  }
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "CreateBucketCommand"
+  let make = (~bundleId, ~bucketName, ~enableObjectVersioning=?, ~tags=?, ()) =>
+    new({
+      enableObjectVersioning: enableObjectVersioning,
+      tags: tags,
+      bundleId: bundleId,
+      bucketName: bucketName,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module CopySnapshot = {
   type t
   type request = {
@@ -7853,7 +8499,7 @@ module CopySnapshot = {
             </li>
             <li>
                <p>Define this parameter only when copying an automatic snapshot as a manual snapshot.
-          For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-keeping-automatic-snapshots\">Lightsail Dev Guide</a>.</p>
+          For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-keeping-automatic-snapshots\">Amazon Lightsail Developer Guide</a>.</p>
             </li>
          </ul>")
     useLatestRestorableAutoSnapshot: option<boolean_>,
@@ -7871,7 +8517,7 @@ module CopySnapshot = {
             </li>
             <li>
                <p>Define this parameter only when copying an automatic snapshot as a manual snapshot.
-          For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-keeping-automatic-snapshots\">Lightsail Dev Guide</a>.</p>
+          For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-keeping-automatic-snapshots\">Amazon Lightsail Developer Guide</a>.</p>
             </li>
          </ul>")
     restoreDate: option<string_>,
@@ -7881,7 +8527,7 @@ module CopySnapshot = {
          <ul>
             <li>
                <p>Define this parameter only when copying an automatic snapshot as a manual snapshot.
-          For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-keeping-automatic-snapshots\">Lightsail Dev Guide</a>.</p>
+          For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-keeping-automatic-snapshots\">Amazon Lightsail Developer Guide</a>.</p>
             </li>
          </ul>")
     sourceResourceName: option<string_>,
@@ -8127,6 +8773,9 @@ module GetLoadBalancers = {
 module GetKeyPairs = {
   type t
   type request = {
+    @ocaml.doc("<p>A Boolean value that indicates whether to include the default key pair in the response of
+      your request.</p>")
+    includeDefaultKeyPair: option<boolean_>,
     @ocaml.doc("<p>The token to advance to the next page of results from your request.</p>
          <p>To get a page token, perform an initial <code>GetKeyPairs</code> request. If your results
       are paginated, the response will return a next page token that you can specify as the page
@@ -8143,7 +8792,8 @@ module GetKeyPairs = {
     keyPairs: option<keyPairList>,
   }
   @module("@aws-sdk/client-lightsail") @new external new: request => t = "GetKeyPairsCommand"
-  let make = (~pageToken=?, ()) => new({pageToken: pageToken})
+  let make = (~includeDefaultKeyPair=?, ~pageToken=?, ()) =>
+    new({includeDefaultKeyPair: includeDefaultKeyPair, pageToken: pageToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -8237,6 +8887,45 @@ module GetCloudFormationStackRecords = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module GetBuckets = {
+  type t
+  type request = {
+    @ocaml.doc("<p>A Boolean value that indicates whether to include Lightsail instances that were given
+      access to the bucket using the <a href=\"https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_SetResourceAccessForBucket.html\">SetResourceAccessForBucket</a>
+      action.</p>")
+    includeConnectedResources: option<boolean_>,
+    @ocaml.doc("<p>The token to advance to the next page of results from your request.</p>
+
+         <p>To get a page token, perform an initial <code>GetBuckets</code> request. If your results
+      are paginated, the response will return a next page token that you can specify as the page
+      token in a subsequent request.</p>")
+    pageToken: option<string_>,
+    @ocaml.doc("<p>The name of the bucket for which to return information.</p>
+
+         <p>When omitted, the response includes all of your buckets in the AWS Region where the
+      request is made.</p>")
+    bucketName: option<bucketName>,
+  }
+  type response = {
+    @ocaml.doc("<p>The token to advance to the next page of results from your request.</p>
+
+         <p>A next page token is not returned if there are no more results to display.</p>
+
+         <p>To get the next page of results, perform another <code>GetBuckets</code> request and
+      specify the next page token using the <code>pageToken</code> parameter.</p>")
+    nextPageToken: option<string_>,
+    @ocaml.doc("<p>An array of objects that describe buckets.</p>") buckets: option<bucketList>,
+  }
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "GetBucketsCommand"
+  let make = (~includeConnectedResources=?, ~pageToken=?, ~bucketName=?, ()) =>
+    new({
+      includeConnectedResources: includeConnectedResources,
+      pageToken: pageToken,
+      bucketName: bucketName,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module GetAutoSnapshots = {
   type t
   type request = {
@@ -8286,7 +8975,7 @@ module CreateDistribution = {
     @ocaml.doc("<p>An object that describes the default cache behavior for the distribution.</p>")
     defaultCacheBehavior: cacheBehavior,
     @ocaml.doc("<p>An object that describes the origin resource for the distribution, such as a Lightsail
-      instance or load balancer.</p>
+      instance, bucket, or load balancer.</p>
          <p>The distribution pulls, caches, and serves content from the origin.</p>")
     origin: inputOrigin,
     @ocaml.doc("<p>The name for the distribution.</p>") distributionName: resourceName,
@@ -8453,8 +9142,7 @@ module GetDistributions = {
       page token in a subsequent request.</p>")
     pageToken: option<string_>,
     @ocaml.doc("<p>The name of the distribution for which to return information.</p>
-         <p>Use the <code>GetDistributions</code> action to get a list of distribution names that you
-      can specify.</p>
+    
          <p>When omitted, the response includes all of your distributions in the AWS Region where
       the request is made.</p>")
     distributionName: option<resourceName>,
@@ -8543,10 +9231,9 @@ module CreateContainerService = {
          <p>You can specify public domain names using a string to array map as shown in the example
       later on this page.</p>")
     publicDomainNames: option<containerServicePublicDomains>,
-    @ocaml.doc("<p>The tag keys and optional values for the container service.</p>
-
-         <p>For more information about tags in Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags\">Lightsail
-        Dev Guide</a>.</p>")
+    @ocaml.doc("<p>The tag keys and optional values to add to the container service during create.</p>
+         <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>
+         <p>For more information about tags in Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags\">Amazon Lightsail Developer Guide</a>.</p>")
     tags: option<tagList_>,
     @ocaml.doc("<p>The scale specification for the container service.</p>
 

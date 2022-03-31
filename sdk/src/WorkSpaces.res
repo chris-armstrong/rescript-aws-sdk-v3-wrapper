@@ -64,6 +64,7 @@ type workspaceBundleDescription = string
 type volumeEncryptionKey = string
 type userVolumeSizeGib = int
 type userName = string
+type updateDescription = string
 type timestamp_ = Js.Date.t
 type tenancy = [@as("SHARED") #SHARED | @as("DEDICATED") #DEDICATED]
 type targetWorkspaceState = [
@@ -101,6 +102,9 @@ type ipGroupName = string
 type ipGroupId = string
 type ipGroupDesc = string
 type ipAddress = string
+type iosLogo = NodeJs.Buffer.t
+type ios3XLogo = NodeJs.Buffer.t
+type ios2XLogo = NodeJs.Buffer.t
 type imageType = [@as("SHARED") #SHARED | @as("OWNED") #OWNED]
 type exceptionMessage = string
 type errorType = string
@@ -109,6 +113,7 @@ type directoryName = string
 type directoryId = string
 type description = string
 type defaultOu = string
+type defaultLogo = NodeJs.Buffer.t
 type dedicatedTenancySupportResultEnum = [@as("DISABLED") #DISABLED | @as("ENABLED") #ENABLED]
 type dedicatedTenancySupportEnum = [@as("ENABLED") #ENABLED]
 type dedicatedTenancyModificationStateEnum = [
@@ -140,6 +145,18 @@ type compute = [
   | @as("STANDARD") #STANDARD
   | @as("VALUE") #VALUE
 ]
+type clientUrl = string
+type clientLoginMessage = string
+type clientLocale = string
+type clientEmail = string
+type clientDeviceType = [
+  | @as("DeviceTypeWeb") #DeviceTypeWeb
+  | @as("DeviceTypeLinux") #DeviceTypeLinux
+  | @as("DeviceTypeIos") #DeviceTypeIos
+  | @as("DeviceTypeAndroid") #DeviceTypeAndroid
+  | @as("DeviceTypeOsx") #DeviceTypeOsx
+  | @as("DeviceTypeWindows") #DeviceTypeWindows
+]
 type bundleOwner = string
 type bundleId = string
 type booleanObject = bool
@@ -155,7 +172,10 @@ type application = [
   | @as("Microsoft_Office_2019") #Microsoft_Office_2019
   | @as("Microsoft_Office_2016") #Microsoft_Office_2016
 ]
+type amazonUuid = string
 type alias = string
+type addInUrl = string
+type addInName = string
 type accessPropertyValue = [@as("DENY") #DENY | @as("ALLOW") #ALLOW]
 type arn = string
 @ocaml.doc("<p>Describes a WorkSpace.</p>")
@@ -164,17 +184,18 @@ type workspaceProperties = {
          Bundles</a>.</p>")
   @as("ComputeTypeName")
   computeTypeName: option<compute>,
-  @ocaml.doc("<p>The size of the user storage. For important information about how to modify the size of the root and user volumes, see 
-         <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/modify-workspaces.html\">Modify a WorkSpace</a>.</p>")
+  @ocaml.doc("<p>The size of the user storage. For important information about how to modify the size of
+         the root and user volumes, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/modify-workspaces.html\">Modify a
+         WorkSpace</a>.</p>")
   @as("UserVolumeSizeGib")
   userVolumeSizeGib: option<userVolumeSizeGib>,
-  @ocaml.doc("<p>The size of the root volume. For important information about how to modify the size of the root and user volumes, see 
-         <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/modify-workspaces.html\">Modify a WorkSpace</a>.</p>")
+  @ocaml.doc("<p>The size of the root volume. For important information about how to modify the size of
+         the root and user volumes, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/modify-workspaces.html\">Modify a
+         WorkSpace</a>.</p>")
   @as("RootVolumeSizeGib")
   rootVolumeSizeGib: option<rootVolumeSizeGib>,
-  @ocaml.doc(
-    "<p>The time after a user logs off when WorkSpaces are automatically stopped. Configured in 60-minute intervals.</p>"
-  )
+  @ocaml.doc("<p>The time after a user logs off when WorkSpaces are automatically stopped. Configured in
+         60-minute intervals.</p>")
   @as("RunningModeAutoStopTimeoutInMinutes")
   runningModeAutoStopTimeoutInMinutes: option<runningModeAutoStopTimeoutInMinutes>,
   @ocaml.doc("<p>The running mode. For more information, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/running-mode.html\">Manage the WorkSpace Running
@@ -198,18 +219,18 @@ type workspaceCreationProperties = {
   userEnabledAsLocalAdministrator: option<booleanObject>,
   @ocaml.doc("<p>The identifier of your custom security group.</p>") @as("CustomSecurityGroupId")
   customSecurityGroupId: option<securityGroupId>,
-  @ocaml.doc("<p>The default organizational unit (OU) for your WorkSpaces directories. This string must be the full Lightweight 
-         Directory Access Protocol (LDAP) distinguished name for the target domain and OU. It must be in the form 
-         <code>\"OU=<i>value</i>,DC=<i>value</i>,DC=<i>value</i>\"</code>, 
-         where <i>value</i> is any string of characters, and the number of domain components (DCs) is 
-         two or more. For example, <code>OU=WorkSpaces_machines,DC=machines,DC=example,DC=com</code>. </p>
-      
+  @ocaml.doc("<p>The default organizational unit (OU) for your WorkSpaces directories. This string must
+         be the full Lightweight Directory Access Protocol (LDAP) distinguished name for the target
+         domain and OU. It must be in the form
+               <code>\"OU=<i>value</i>,DC=<i>value</i>,DC=<i>value</i>\"</code>,
+         where <i>value</i> is any string of characters, and the number of domain
+         components (DCs) is two or more. For example,
+            <code>OU=WorkSpaces_machines,DC=machines,DC=example,DC=com</code>. </p>
          <important>
             <ul>
                <li>
-                  <p>To avoid errors, certain characters in the distinguished name must be escaped. For more information, 
-                  see <a href=\"https://docs.microsoft.com/previous-versions/windows/desktop/ldap/distinguished-names\">
-                     Distinguished Names</a> in the Microsoft documentation.</p>
+                  <p>To avoid errors, certain characters in the distinguished name must be escaped.
+                  For more information, see <a href=\"https://docs.microsoft.com/previous-versions/windows/desktop/ldap/distinguished-names\"> Distinguished Names</a> in the Microsoft documentation.</p>
                </li>
                <li>
                   <p>The API doesn't validate whether the OU exists.</p>
@@ -222,18 +243,17 @@ type workspaceCreationProperties = {
   @as("EnableInternetAccess")
   enableInternetAccess: option<booleanObject>,
   @ocaml.doc("<p>Indicates whether Amazon WorkDocs is enabled for your WorkSpaces.</p>
-      
-         <note>         
-            <p>If WorkDocs is already enabled for a WorkSpaces directory and you disable it, new WorkSpaces launched in the 
-            directory will not have WorkDocs enabled. However, WorkDocs remains enabled for any existing WorkSpaces, unless 
-            you either disable users' access to WorkDocs or you delete the WorkDocs site. To disable users' access to WorkDocs, 
-            see <a href=\"https://docs.aws.amazon.com/workdocs/latest/adminguide/inactive-user.html\">Disabling Users</a> in the 
-            <i>Amazon WorkDocs Administration Guide</i>. To delete a WorkDocs site, see 
-            <a href=\"https://docs.aws.amazon.com/workdocs/latest/adminguide/manage-sites.html\">Deleting a Site</a> in the 
-            <i>Amazon WorkDocs Administration Guide</i>.</p>
-         
-            <p>If you enable WorkDocs on a directory that already has existing WorkSpaces, the existing WorkSpaces and any 
-         new WorkSpaces that are launched in the directory will have WorkDocs enabled.</p>
+         <note>
+            <p>If WorkDocs is already enabled for a WorkSpaces directory and you disable it, new
+            WorkSpaces launched in the directory will not have WorkDocs enabled. However, WorkDocs
+            remains enabled for any existing WorkSpaces, unless you either disable users' access to
+            WorkDocs or you delete the WorkDocs site. To disable users' access to WorkDocs, see
+               <a href=\"https://docs.aws.amazon.com/workdocs/latest/adminguide/inactive-user.html\">Disabling Users</a> in the <i>Amazon WorkDocs Administration
+               Guide</i>. To delete a WorkDocs site, see <a href=\"https://docs.aws.amazon.com/workdocs/latest/adminguide/manage-sites.html\">Deleting a Site</a> in the
+               <i>Amazon WorkDocs Administration Guide</i>.</p>
+            <p>If you enable WorkDocs on a directory that already has existing WorkSpaces, the
+            existing WorkSpaces and any new WorkSpaces that are launched in the directory will have
+            WorkDocs enabled.</p>
          </note>")
   @as("EnableWorkDocs")
   enableWorkDocs: option<booleanObject>,
@@ -268,7 +288,8 @@ type workspaceAccessProperties = {
   @ocaml.doc("<p>Indicates whether users can use Chromebooks to access their WorkSpaces.</p>")
   @as("DeviceTypeChromeOs")
   deviceTypeChromeOs: option<accessPropertyValue>,
-  @ocaml.doc("<p>Indicates whether users can use Android devices to access their WorkSpaces.</p>")
+  @ocaml.doc("<p>Indicates whether users can use Android and Android-compatible Chrome OS devices to
+         access their WorkSpaces.</p>")
   @as("DeviceTypeAndroid")
   deviceTypeAndroid: option<accessPropertyValue>,
   @ocaml.doc("<p>Indicates whether users can use iOS devices to access their WorkSpaces.</p>")
@@ -277,16 +298,10 @@ type workspaceAccessProperties = {
   @ocaml.doc("<p>Indicates whether users can access their WorkSpaces through a web browser.</p>")
   @as("DeviceTypeWeb")
   deviceTypeWeb: option<accessPropertyValue>,
-  @ocaml.doc("<p>Indicates whether users can use macOS clients to access their WorkSpaces. To restrict
-         WorkSpaces access to trusted devices (also known as managed devices) with valid
-         certificates, specify a value of <code>TRUST</code>. For more information, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/trusted-devices.html\">Restrict
-            WorkSpaces Access to Trusted Devices</a>. </p>")
+  @ocaml.doc("<p>Indicates whether users can use macOS clients to access their WorkSpaces.</p>")
   @as("DeviceTypeOsx")
   deviceTypeOsx: option<accessPropertyValue>,
-  @ocaml.doc("<p>Indicates whether users can use Windows clients to access their WorkSpaces. To restrict
-         WorkSpaces access to trusted devices (also known as managed devices) with valid
-         certificates, specify a value of <code>TRUST</code>. For more information, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/trusted-devices.html\">Restrict
-            WorkSpaces Access to Trusted Devices</a>. </p>")
+  @ocaml.doc("<p>Indicates whether users can use Windows clients to access their WorkSpaces.</p>")
   @as("DeviceTypeWindows")
   deviceTypeWindows: option<accessPropertyValue>,
 }
@@ -294,6 +309,21 @@ type workspaceAccessProperties = {
 type userStorage = {
   @ocaml.doc("<p>The size of the user volume.</p>") @as("Capacity")
   capacity: option<nonEmptyString>,
+}
+@ocaml.doc("<p>Describes whether a WorkSpace image needs to be updated with the latest drivers and
+         other components required by Amazon WorkSpaces.</p>
+         <note>
+            <p>Only Windows 10 WorkSpace images can be programmatically updated at this time.</p>
+         </note>")
+type updateResult = {
+  @ocaml.doc("<p>A description of whether updates for the WorkSpace image are pending or
+         available.</p>")
+  @as("Description")
+  description: option<updateDescription>,
+  @ocaml.doc("<p>Indicates whether updated drivers or other components are available for the specified
+         WorkSpace image.</p>")
+  @as("UpdateAvailable")
+  updateAvailable: option<booleanObject>,
 }
 @ocaml.doc("<p>Describes the information used to terminate a WorkSpace.</p>")
 type terminateRequest = {
@@ -367,6 +397,7 @@ type modificationState = {
   @ocaml.doc("<p>The modification state.</p>") @as("State") state: option<modificationStateEnum>,
   @ocaml.doc("<p>The resource.</p>") @as("Resource") resource: option<modificationResourceEnum>,
 }
+type loginMessage = Js.Dict.t<clientLoginMessage>
 @ocaml.doc("<p>Describes a rule for an IP access control group.</p>")
 type ipRuleItem = {
   @ocaml.doc("<p>The description.</p>") ruleDesc: option<ipRuleDesc>,
@@ -374,18 +405,17 @@ type ipRuleItem = {
 }
 type ipRevokedRuleList = array<ipRule>
 type ipGroupIdList = array<ipGroupId>
-@ocaml.doc("<p>Describes the AWS accounts that have been granted permission to use a shared image. For more 
-         information about sharing images, see 
-         <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/share-custom-image.html\">
-            Share or Unshare a Custom WorkSpaces Image</a>.</p>")
+@ocaml.doc("<p>Describes the Amazon Web Services accounts that have been granted permission to use a
+         shared image. For more information about sharing images, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/share-custom-image.html\"> Share or Unshare a Custom
+            WorkSpaces Image</a>.</p>")
 type imagePermission = {
-  @ocaml.doc("<p>The identifier of the AWS account that an image has been shared with.</p>")
+  @ocaml.doc("<p>The identifier of the Amazon Web Services account that an image has been shared
+         with.</p>")
   @as("SharedAccountId")
   sharedAccountId: option<awsAccount>,
 }
-@ocaml.doc("<p>Describes a WorkSpace that could not be rebooted.
-         (<a>RebootWorkspaces</a>), rebuilt (<a>RebuildWorkspaces</a>), restored (<a>RestoreWorkspace</a>), terminated
-         (<a>TerminateWorkspaces</a>), started (<a>StartWorkspaces</a>), or stopped (<a>StopWorkspaces</a>).</p>")
+@ocaml.doc("<p>Describes a WorkSpace that could not be rebooted. (<a>RebootWorkspaces</a>),
+         rebuilt (<a>RebuildWorkspaces</a>), restored (<a>RestoreWorkspace</a>), terminated (<a>TerminateWorkspaces</a>), started (<a>StartWorkspaces</a>), or stopped (<a>StopWorkspaces</a>).</p>")
 type failedWorkspaceChangeRequest = {
   @ocaml.doc("<p>The text of the error message that is returned if the WorkSpace cannot be
          rebooted.</p>")
@@ -399,9 +429,9 @@ type failedWorkspaceChangeRequest = {
 }
 type dnsIpAddresses = array<ipAddress>
 type directoryIdList = array<directoryId>
-@ocaml.doc(
-  "<p>Describes the default values that are used to create WorkSpaces. For more information, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/update-directory-details.html\">Update Directory Details for Your WorkSpaces</a>.</p>"
-)
+@ocaml.doc("<p>Describes the default values that are used to create WorkSpaces. For more information,
+         see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/update-directory-details.html\">Update Directory
+            Details for Your WorkSpaces</a>.</p>")
 type defaultWorkspaceCreationProperties = {
   @ocaml.doc("<p>Specifies whether maintenance mode is enabled for WorkSpaces. For more information, see
             <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/workspace-maintenance.html\">WorkSpace
@@ -413,10 +443,9 @@ type defaultWorkspaceCreationProperties = {
   )
   @as("UserEnabledAsLocalAdministrator")
   userEnabledAsLocalAdministrator: option<booleanObject>,
-  @ocaml.doc("<p>The identifier of the default security group to apply to WorkSpaces when they are created. 
-         For more information, see 
-         <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/amazon-workspaces-security-groups.html\">
-            Security Groups for Your WorkSpaces</a>.</p>")
+  @ocaml.doc("<p>The identifier of the default security group to apply to WorkSpaces when they are
+         created. For more information, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/amazon-workspaces-security-groups.html\"> Security
+            Groups for Your WorkSpaces</a>.</p>")
   @as("CustomSecurityGroupId")
   customSecurityGroupId: option<securityGroupId>,
   @ocaml.doc(
@@ -424,14 +453,15 @@ type defaultWorkspaceCreationProperties = {
   )
   @as("DefaultOu")
   defaultOu: option<defaultOu>,
-  @ocaml.doc("<p>Specifies whether to automatically assign an Elastic public IP address to WorkSpaces in this directory by default. 
-         If enabled, the Elastic public IP address allows outbound internet access from your WorkSpaces when you’re using an 
-         internet gateway in the Amazon VPC in which your WorkSpaces are located. If you're using a Network Address 
-         Translation (NAT) gateway for outbound internet access from your VPC, or if your WorkSpaces are in public 
-         subnets and you manually assign them Elastic IP addresses, you should disable this setting. This setting 
-         applies to new WorkSpaces that you launch or to existing WorkSpaces that you rebuild. For more information, 
-         see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/amazon-workspaces-vpc.html\">
-            Configure a VPC for Amazon WorkSpaces</a>.</p>")
+  @ocaml.doc("<p>Specifies whether to automatically assign an Elastic public IP address to WorkSpaces in
+         this directory by default. If enabled, the Elastic public IP address allows outbound
+         internet access from your WorkSpaces when you’re using an internet gateway in the Amazon
+         VPC in which your WorkSpaces are located. If you're using a Network Address Translation
+         (NAT) gateway for outbound internet access from your VPC, or if your WorkSpaces are in
+         public subnets and you manually assign them Elastic IP addresses, you should disable this
+         setting. This setting applies to new WorkSpaces that you launch or to existing WorkSpaces
+         that you rebuild. For more information, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/amazon-workspaces-vpc.html\"> Configure a VPC for
+            Amazon WorkSpaces</a>.</p>")
   @as("EnableInternetAccess")
   enableInternetAccess: option<booleanObject>,
   @ocaml.doc("<p>Specifies whether the directory is enabled for Amazon WorkDocs.</p>")
@@ -439,38 +469,46 @@ type defaultWorkspaceCreationProperties = {
   enableWorkDocs: option<booleanObject>,
 }
 type dedicatedTenancyCidrRangeList = array<dedicatedTenancyManagementCidrRange>
-@ocaml.doc("<p>Describes the permissions for a connection alias. Connection aliases are used for cross-Region redirection. 
-         For more information, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html\">
-         Cross-Region Redirection for Amazon WorkSpaces</a>.</p>")
+@ocaml.doc("<p>Describes the permissions for a connection alias. Connection aliases are used for
+         cross-Region redirection. For more information, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html\"> Cross-Region
+            Redirection for Amazon WorkSpaces</a>.</p>")
 type connectionAliasPermission = {
-  @ocaml.doc(
-    "<p>Indicates whether the specified AWS account is allowed to associate the connection alias with a directory.</p>"
-  )
+  @ocaml.doc("<p>Indicates whether the specified Amazon Web Services account is allowed to associate the
+         connection alias with a directory.</p>")
   @as("AllowAssociation")
   allowAssociation: booleanObject,
-  @ocaml.doc("<p>The identifier of the AWS account that the connection alias is shared with.</p>")
+  @ocaml.doc("<p>The identifier of the Amazon Web Services account that the connection alias is shared
+         with.</p>")
   @as("SharedAccountId")
   sharedAccountId: awsAccount,
 }
 type connectionAliasIdList = array<connectionAliasId>
-@ocaml.doc("<p>Describes a connection alias association that is used for cross-Region redirection. For more information, see 
-         <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html\">
-         Cross-Region Redirection for Amazon WorkSpaces</a>.</p>")
+@ocaml.doc("<p>Describes a connection alias association that is used for cross-Region redirection. For
+         more information, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html\"> Cross-Region
+            Redirection for Amazon WorkSpaces</a>.</p>")
 type connectionAliasAssociation = {
-  @ocaml.doc("<p>The identifier of the connection alias association. You use the connection identifier in the DNS TXT record when 
-         you're configuring your DNS routing policies.</p>")
+  @ocaml.doc("<p>The identifier of the connection alias association. You use the connection identifier in
+         the DNS TXT record when you're configuring your DNS routing policies.</p>")
   @as("ConnectionIdentifier")
   connectionIdentifier: option<connectionIdentifier>,
   @ocaml.doc("<p>The identifier of the directory associated with a connection alias.</p>")
   @as("ResourceId")
   resourceId: option<nonEmptyString>,
-  @ocaml.doc(
-    "<p>The identifier of the AWS account that associated the connection alias with a directory.</p>"
-  )
+  @ocaml.doc("<p>The identifier of the Amazon Web Services account that associated the connection alias
+         with a directory.</p>")
   @as("AssociatedAccountId")
   associatedAccountId: option<awsAccount>,
   @ocaml.doc("<p>The association status of the connection alias.</p>") @as("AssociationStatus")
   associationStatus: option<associationStatus>,
+}
+@ocaml.doc("<p>Describes an Amazon Connect client add-in.</p>")
+type connectClientAddIn = {
+  @ocaml.doc("<p>The endpoint URL of the client add-in.</p>") @as("URL") url: option<addInUrl>,
+  @ocaml.doc("<p>The name of the client add in.</p>") @as("Name") name: option<addInName>,
+  @ocaml.doc("<p>The directory identifier for which the client add-in is configured.</p>")
+  @as("ResourceId")
+  resourceId: option<directoryId>,
+  @ocaml.doc("<p>The client add-in identifier.</p>") @as("AddInId") addInId: option<amazonUuid>,
 }
 @ocaml.doc("<p>Describes the compute type of the bundle.</p>")
 type computeType = {@ocaml.doc("<p>The compute type.</p>") @as("Name") name: option<compute>}
@@ -482,6 +520,7 @@ type clientProperties = {
   @as("ReconnectEnabled")
   reconnectEnabled: option<reconnectEnum>,
 }
+type clientDeviceTypeList = array<clientDeviceType>
 type bundleIdList = array<bundleId>
 type applicationList = array<application>
 @ocaml.doc("<p>Describes a modification to the configuration of Bring Your Own License (BYOL) for the
@@ -512,10 +551,14 @@ type accountModification = {
 }
 @ocaml.doc("<p>Describes a WorkSpace image.</p>")
 type workspaceImage = {
-  @ocaml.doc("<p>The identifier of the AWS account that owns the image.</p>") @as("OwnerAccountId")
+  @ocaml.doc("<p>The updates (if any) that are available for the specified image.</p>")
+  @as("Updates")
+  updates: option<updateResult>,
+  @ocaml.doc("<p>The identifier of the Amazon Web Services account that owns the image.</p>")
+  @as("OwnerAccountId")
   ownerAccountId: option<awsAccount>,
-  @ocaml.doc("<p>The date when the image was created. If the image has been shared, the AWS account 
-         that the image has been shared with sees the original creation date of the image.</p>")
+  @ocaml.doc("<p>The date when the image was created. If the image has been shared, the Amazon Web Services account that the image has been shared with sees the original creation date
+         of the image.</p>")
   @as("Created")
   created: option<timestamp_>,
   @ocaml.doc("<p>The text of the error message that is returned for the image.</p>")
@@ -558,13 +601,12 @@ type workspaceDirectory = {
   @ocaml.doc("<p>The default creation properties for all WorkSpaces in the directory.</p>")
   @as("WorkspaceCreationProperties")
   workspaceCreationProperties: option<defaultWorkspaceCreationProperties>,
-  @ocaml.doc("<p>The state of the directory's registration with Amazon WorkSpaces. After a directory is 
-         deregistered, the <code>DEREGISTERED</code> state is returned very briefly before the directory 
-         metadata is cleaned up, so this state is rarely returned. To confirm that a directory is deregistered, 
-         check for the directory ID by using 
-         <a href=\"https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaceDirectories.html\">
-            DescribeWorkspaceDirectories</a>. If the directory ID isn't returned, then the directory has been 
-         successfully deregistered.</p>")
+  @ocaml.doc("<p>The state of the directory's registration with Amazon WorkSpaces. After a directory is
+         deregistered, the <code>DEREGISTERED</code> state is returned very briefly before the
+         directory metadata is cleaned up, so this state is rarely returned. To confirm that a
+         directory is deregistered, check for the directory ID by using <a href=\"https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaceDirectories.html\">
+            DescribeWorkspaceDirectories</a>. If the directory ID isn't returned, then the
+         directory has been successfully deregistered.</p>")
   @as("State")
   state: option<workspaceDirectoryState>,
   @ocaml.doc("<p>The identifier of the security group that is assigned to new WorkSpaces.</p>")
@@ -613,7 +655,7 @@ type workspaceBundle = {
   @ocaml.doc("<p>The description of the bundle.</p>") @as("Description")
   description: option<description>,
   @ocaml.doc("<p>The owner of the bundle. This is the account identifier of the owner, or
-         <code>AMAZON</code> if the bundle is provided by AWS.</p>")
+         <code>AMAZON</code> if the bundle is provided by Amazon Web Services.</p>")
   @as("Owner")
   owner: option<bundleOwner>,
   @ocaml.doc("<p>The name of the bundle.</p>") @as("Name") name: option<nonEmptyString>,
@@ -628,14 +670,257 @@ type rebuildWorkspaceRequests = array<rebuildRequest>
 type rebootWorkspaceRequests = array<rebootRequest>
 type modificationStateList = array<modificationState>
 type ipRuleList = array<ipRuleItem>
+@ocaml.doc("<p>The client branding attributes to import for iOS device types. These attributes are
+         displayed on the iOS client login screen.</p>
+         <important>
+            <p>Client branding attributes are public facing. Ensure you do not include sensitive
+            information.</p>
+         </important>")
+type iosImportClientBrandingAttributes = {
+  @ocaml.doc("<p>The login message. Specified as a key value pair, in which the key is a locale and the
+         value is the localized message for that locale. The only key supported is
+            <code>en_US</code>. </p>")
+  @as("LoginMessage")
+  loginMessage: option<loginMessage>,
+  @ocaml.doc("<p>The forgotten password link. This is the web address that users can go to if they forget
+         the password for their WorkSpace.</p>")
+  @as("ForgotPasswordLink")
+  forgotPasswordLink: option<clientUrl>,
+  @ocaml.doc("<p>The support link. The link for the company's customer support page for their
+         WorkSpace.</p>
+         <note>
+            <ul>
+               <li>
+                  <p>In each platform type, the <code>SupportEmail</code> and
+                     <code>SupportLink</code> parameters are mutually exclusive. You can specify one
+                  parameter for each platform type, but not both.</p>
+               </li>
+               <li>
+                  <p>The default support link is <code>workspaces-feedback@amazon.com</code>.</p>
+               </li>
+            </ul>
+         </note>")
+  @as("SupportLink")
+  supportLink: option<clientUrl>,
+  @ocaml.doc("<p>The support email. The company's customer support email address.</p>
+         <note>
+            <ul>
+               <li>
+                  <p>In each platform type, the <code>SupportEmail</code> and
+                     <code>SupportLink</code> parameters are mutually exclusive. You can specify one
+                  parameter for each platform type, but not both.</p>
+               </li>
+               <li>
+                  <p>The default email is <code>workspaces-feedback@amazon.com</code>.</p>
+               </li>
+            </ul>
+         </note>")
+  @as("SupportEmail")
+  supportEmail: option<clientEmail>,
+  @ocaml.doc("<p>The @3x version of the logo. This is the higher resolution display that offers a scale
+         factor of 3.0 (or @3x).</p>
+         <note>
+            <p> For more information about iOS image size and resolution, see <a href=\"https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/image-size-and-resolution/\">Image Size and Resolution </a> in the <i>Apple Human Interface
+               Guidelines</i>.</p>
+         </note>")
+  @as("Logo3x")
+  logo3x: option<ios3XLogo>,
+  @ocaml.doc("<p>The @2x version of the logo. This is the higher resolution display that offers a scale
+         factor of 2.0 (or @2x).</p>
+         <note>
+            <p> For more information about iOS image size and resolution, see <a href=\"https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/image-size-and-resolution/\">Image Size and Resolution </a> in the <i>Apple Human Interface
+               Guidelines</i>.</p>
+         </note>")
+  @as("Logo2x")
+  logo2x: option<ios2XLogo>,
+  @ocaml.doc("<p>The logo. This is the link where users can download the logo image. This is the
+         standard-resolution display that has a 1:1 pixel density (or @1x), where one pixel is equal
+         to one point.</p>")
+  @as("Logo")
+  logo: option<iosLogo>,
+}
+@ocaml.doc("<p>The client branding attributes for iOS device types. These attributes are displayed on
+         the iOS client login screen only.</p>
+         <important>
+            <p>Client branding attributes are public facing. Ensure you do not include sensitive
+            information.</p>
+         </important>")
+type iosClientBrandingAttributes = {
+  @ocaml.doc("<p>The login message. Specified as a key value pair, in which the key is a locale and the
+         value is the localized message for that locale. The only key supported is
+            <code>en_US</code>. </p>")
+  @as("LoginMessage")
+  loginMessage: option<loginMessage>,
+  @ocaml.doc("<p>The forgotten password link. This is the web address that users can go to if they forget
+         the password for their WorkSpace.</p>")
+  @as("ForgotPasswordLink")
+  forgotPasswordLink: option<clientUrl>,
+  @ocaml.doc("<p>The support link. The link for the company's customer support page for their
+         WorkSpace.</p>
+         <note>
+            <ul>
+               <li>
+                  <p>In each platform type, the <code>SupportEmail</code> and
+                     <code>SupportLink</code> parameters are mutually exclusive. You can specify one
+                  parameter for each platform type, but not both.</p>
+               </li>
+               <li>
+                  <p>The default support link is <code>workspaces-feedback@amazon.com</code>.</p>
+               </li>
+            </ul>
+         </note>")
+  @as("SupportLink")
+  supportLink: option<clientUrl>,
+  @ocaml.doc("<p>The support email. The company's customer support email address.</p>
+         <note>
+            <ul>
+               <li>
+                  <p>In each platform type, the <code>SupportEmail</code> and
+                     <code>SupportLink</code> parameters are mutually exclusive. You can specify one
+                  parameter for each platform type, but not both.</p>
+               </li>
+               <li>
+                  <p>The default email is <code>workspaces-feedback@amazon.com</code>.</p>
+               </li>
+            </ul>
+         </note>")
+  @as("SupportEmail")
+  supportEmail: option<clientEmail>,
+  @ocaml.doc("<p>The @3x version of the logo. This is the higher resolution display that offers a scale
+         factor of 3.0 (or @3x).</p>
+         <note>
+            <p> For more information about iOS image size and resolution, see <a href=\"https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/image-size-and-resolution/\">Image Size and Resolution </a> in the <i>Apple Human Interface
+               Guidelines</i>.</p>
+         </note>")
+  @as("Logo3xUrl")
+  logo3xUrl: option<clientUrl>,
+  @ocaml.doc("<p>The @2x version of the logo. This is the higher resolution display that offers a scale
+         factor of 2.0 (or @2x).</p>
+         <note>
+            <p> For more information about iOS image size and resolution, see <a href=\"https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/image-size-and-resolution/\">Image Size and Resolution </a> in the <i>Apple Human Interface
+               Guidelines</i>.</p>
+         </note>")
+  @as("Logo2xUrl")
+  logo2xUrl: option<clientUrl>,
+  @ocaml.doc("<p>The logo. This is the link where users can download the logo image. This is the
+         standard-resolution display that has a 1:1 pixel density (or @1x), where one pixel is equal
+         to one point.</p>")
+  @as("LogoUrl")
+  logoUrl: option<clientUrl>,
+}
 type imagePermissions = array<imagePermission>
 type failedTerminateWorkspaceRequests = array<failedWorkspaceChangeRequest>
 type failedStopWorkspaceRequests = array<failedWorkspaceChangeRequest>
 type failedStartWorkspaceRequests = array<failedWorkspaceChangeRequest>
 type failedRebuildWorkspaceRequests = array<failedWorkspaceChangeRequest>
 type failedRebootWorkspaceRequests = array<failedWorkspaceChangeRequest>
+@ocaml.doc("<p>The default client branding attributes to be imported. These attributes display on the
+         client login screen.</p>
+         <important>
+            <p>Client branding attributes are public facing. Ensure that you do not include
+            sensitive information.</p>
+         </important>")
+type defaultImportClientBrandingAttributes = {
+  @ocaml.doc("<p>The login message. Specified as a key value pair, in which the key is a locale and the
+         value is the localized message for that locale. The only key supported is
+            <code>en_US</code>. </p>")
+  @as("LoginMessage")
+  loginMessage: option<loginMessage>,
+  @ocaml.doc("<p>The forgotten password link. This is the web address that users can go to if they forget
+         the password for their WorkSpace.</p>")
+  @as("ForgotPasswordLink")
+  forgotPasswordLink: option<clientUrl>,
+  @ocaml.doc("<p>The support link. The link for the company's customer support page for their
+         WorkSpace.</p>
+         <note>
+            <ul>
+               <li>
+                  <p>In each platform type, the <code>SupportEmail</code> and
+                     <code>SupportLink</code> parameters are mutually exclusive. You can specify one
+                  parameter for each platform type, but not both.</p>
+               </li>
+               <li>
+                  <p>The default support link is <code>workspaces-feedback@amazon.com</code>.</p>
+               </li>
+            </ul>
+         </note>")
+  @as("SupportLink")
+  supportLink: option<clientUrl>,
+  @ocaml.doc("<p>The support email. The company's customer support email address.</p>
+         <note>
+            <ul>
+               <li>
+                  <p>In each platform type, the <code>SupportEmail</code> and
+                     <code>SupportLink</code> parameters are mutually exclusive. You can specify one
+                  parameter for each platform type, but not both.</p>
+               </li>
+               <li>
+                  <p>The default email is <code>workspaces-feedback@amazon.com</code>.</p>
+               </li>
+            </ul>
+         </note>")
+  @as("SupportEmail")
+  supportEmail: option<clientEmail>,
+  @ocaml.doc("<p>The logo. This is the link where users can download the logo image. The only image
+         format accepted is <code>.png</code>.</p>")
+  @as("Logo")
+  logo: option<defaultLogo>,
+}
+@ocaml.doc("<p>Returns default client branding attributes that were imported. These attributes display
+         on the client login screen.</p>
+         <important>
+            <p>Client branding attributes are public facing. Ensure that you don't include sensitive
+            information.</p>
+         </important>")
+type defaultClientBrandingAttributes = {
+  @ocaml.doc("<p>The login message. Specified as a key value pair, in which the key is a locale and the
+         value is the localized message for that locale. The only key supported is
+            <code>en_US</code>. </p>")
+  @as("LoginMessage")
+  loginMessage: option<loginMessage>,
+  @ocaml.doc("<p>The forgotten password link. This is the web address that users can go to if they forget
+         the password for their WorkSpace.</p>")
+  @as("ForgotPasswordLink")
+  forgotPasswordLink: option<clientUrl>,
+  @ocaml.doc("<p>The support link. The link for the company's customer support page for their
+         WorkSpace.</p>
+         <note>
+            <ul>
+               <li>
+                  <p>In each platform type, the <code>SupportEmail</code> and
+                     <code>SupportLink</code> parameters are mutually exclusive.You can specify one
+                  parameter for each platform type, but not both.</p>
+               </li>
+               <li>
+                  <p>The default support link is <code>workspaces-feedback@amazon.com</code>.</p>
+               </li>
+            </ul>
+         </note>")
+  @as("SupportLink")
+  supportLink: option<clientUrl>,
+  @ocaml.doc("<p>The support email. The company's customer support email address.</p>
+         <note>
+            <ul>
+               <li>
+                  <p>In each platform type, the <code>SupportEmail</code> and
+                     <code>SupportLink</code> parameters are mutually exclusive. You can specify one
+                  parameter for each platform type, but not both.</p>
+               </li>
+               <li>
+                  <p>The default email is <code>workspaces-feedback@amazon.com</code>.</p>
+               </li>
+            </ul>
+         </note>")
+  @as("SupportEmail")
+  supportEmail: option<clientEmail>,
+  @ocaml.doc("<p>The logo URL. This is the link where users can download the logo image. The only
+         supported image format is <code>.png</code>.</p>")
+  @as("LogoUrl")
+  logoUrl: option<clientUrl>,
+}
 type connectionAliasPermissions = array<connectionAliasPermission>
 type connectionAliasAssociationList = array<connectionAliasAssociation>
+type connectClientAddInList = array<connectClientAddIn>
 @ocaml.doc("<p>Information about the Amazon WorkSpaces client.</p>")
 type clientPropertiesResult = {
   @ocaml.doc("<p>Information about the Amazon WorkSpaces client.</p>") @as("ClientProperties")
@@ -662,8 +947,8 @@ type workspaceRequest = {
   @ocaml.doc("<p>Indicates whether the data stored on the user volume is encrypted.</p>")
   @as("UserVolumeEncryptionEnabled")
   userVolumeEncryptionEnabled: option<booleanObject>,
-  @ocaml.doc("<p>The symmetric AWS KMS customer master key (CMK) used to encrypt data stored on your WorkSpace. 
-         Amazon WorkSpaces does not support asymmetric CMKs.</p>")
+  @ocaml.doc("<p>The symmetric KMS key used to encrypt data stored on your WorkSpace.
+         Amazon WorkSpaces does not support asymmetric KMS keys.</p>")
   @as("VolumeEncryptionKey")
   volumeEncryptionKey: option<volumeEncryptionKey>,
   @ocaml.doc(
@@ -671,12 +956,14 @@ type workspaceRequest = {
   )
   @as("BundleId")
   bundleId: bundleId,
-  @ocaml.doc("<p>The user name of the user for the WorkSpace. This user name must exist in the AWS
-         Directory Service directory for the WorkSpace.</p>")
+  @ocaml.doc(
+    "<p>The user name of the user for the WorkSpace. This user name must exist in the Directory Service directory for the WorkSpace.</p>"
+  )
   @as("UserName")
   userName: userName,
-  @ocaml.doc("<p>The identifier of the AWS Directory Service directory for the WorkSpace. You can use
-            <a>DescribeWorkspaceDirectories</a> to list the available directories.</p>")
+  @ocaml.doc(
+    "<p>The identifier of the Directory Service directory for the WorkSpace. You can use <a>DescribeWorkspaceDirectories</a> to list the available directories.</p>"
+  )
   @as("DirectoryId")
   directoryId: directoryId,
 }
@@ -693,13 +980,13 @@ type workspace = {
   @ocaml.doc("<p>Indicates whether the data stored on the user volume is encrypted.</p>")
   @as("UserVolumeEncryptionEnabled")
   userVolumeEncryptionEnabled: option<booleanObject>,
-  @ocaml.doc("<p>The symmetric AWS KMS customer master key (CMK) used to encrypt data stored on your WorkSpace. 
-         Amazon WorkSpaces does not support asymmetric CMKs.</p>")
+  @ocaml.doc("<p>The symmetric KMS key used to encrypt data stored on your WorkSpace.
+         Amazon WorkSpaces does not support asymmetric KMS keys.</p>")
   @as("VolumeEncryptionKey")
   volumeEncryptionKey: option<volumeEncryptionKey>,
-  @ocaml.doc("<p>The name of the WorkSpace, as seen by the operating system. The format of this name varies. 
-         For more information, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/launch-workspaces-tutorials.html\">
-            Launch a WorkSpace</a>. </p>")
+  @ocaml.doc("<p>The name of the WorkSpace, as seen by the operating system. The format of this name
+         varies. For more information, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/launch-workspaces-tutorials.html\"> Launch a
+            WorkSpace</a>. </p>")
   @as("ComputerName")
   computerName: option<computerName>,
   @ocaml.doc("<p>The error code that is returned if the WorkSpace cannot be created.</p>")
@@ -714,42 +1001,44 @@ type workspace = {
   @ocaml.doc("<p>The identifier of the bundle used to create the WorkSpace.</p>") @as("BundleId")
   bundleId: option<bundleId>,
   @ocaml.doc("<p>The operational state of the WorkSpace.</p>
-      
          <note>
-            <p>After a WorkSpace is terminated, the <code>TERMINATED</code> state is returned 
-            only briefly before the WorkSpace directory metadata is cleaned up, so this state is rarely 
-            returned. To confirm that a WorkSpace is terminated, check for the WorkSpace ID by using 
-            <a href=\"https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaces.html\">
-               DescribeWorkSpaces</a>. If the WorkSpace ID isn't returned, then the WorkSpace has 
-            been successfully terminated.</p>
+            <p>After a WorkSpace is terminated, the <code>TERMINATED</code> state is returned only
+            briefly before the WorkSpace directory metadata is cleaned up, so this state is rarely
+            returned. To confirm that a WorkSpace is terminated, check for the WorkSpace ID by using
+               <a href=\"https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaces.html\">
+               DescribeWorkSpaces</a>. If the WorkSpace ID isn't returned, then the WorkSpace
+            has been successfully terminated.</p>
          </note>")
   @as("State")
   state: option<workspaceState>,
   @ocaml.doc("<p>The IP address of the WorkSpace.</p>") @as("IpAddress")
   ipAddress: option<ipAddress>,
   @ocaml.doc("<p>The user for the WorkSpace.</p>") @as("UserName") userName: option<userName>,
-  @ocaml.doc("<p>The identifier of the AWS Directory Service directory for the WorkSpace.</p>")
+  @ocaml.doc("<p>The identifier of the Directory Service directory for the WorkSpace.</p>")
   @as("DirectoryId")
   directoryId: option<directoryId>,
   @ocaml.doc("<p>The identifier of the WorkSpace.</p>") @as("WorkspaceId")
   workspaceId: option<workspaceId>,
 }
 type directoryList = array<workspaceDirectory>
-@ocaml.doc("<p>Describes a connection alias. Connection aliases are used for cross-Region redirection. For more information, 
-         see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html\">
-         Cross-Region Redirection for Amazon WorkSpaces</a>.</p>")
+@ocaml.doc("<p>Describes a connection alias. Connection aliases are used for cross-Region redirection.
+         For more information, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html\"> Cross-Region
+            Redirection for Amazon WorkSpaces</a>.</p>")
 type connectionAlias = {
   @ocaml.doc("<p>The association status of the connection alias.</p>") @as("Associations")
   associations: option<connectionAliasAssociationList>,
-  @ocaml.doc("<p>The identifier of the AWS account that owns the connection alias.</p>")
+  @ocaml.doc(
+    "<p>The identifier of the Amazon Web Services account that owns the connection alias.</p>"
+  )
   @as("OwnerAccountId")
   ownerAccountId: option<awsAccount>,
   @ocaml.doc("<p>The current state of the connection alias.</p>") @as("State")
   state: option<connectionAliasState>,
   @ocaml.doc("<p>The identifier of the connection alias.</p>") @as("AliasId")
   aliasId: option<connectionAliasId>,
-  @ocaml.doc("<p>The connection string specified for the connection alias. The connection string must be in the form of 
-         a fully qualified domain name (FQDN), such as <code>www.example.com</code>.</p>")
+  @ocaml.doc("<p>The connection string specified for the connection alias. The connection string must be
+         in the form of a fully qualified domain name (FQDN), such as
+         <code>www.example.com</code>.</p>")
   @as("ConnectionString")
   connectionString: option<connectionString>,
 }
@@ -773,25 +1062,39 @@ type failedCreateWorkspaceRequest = {
 type connectionAliasList = array<connectionAlias>
 type failedCreateWorkspaceRequests = array<failedCreateWorkspaceRequest>
 @ocaml.doc("<fullname>Amazon WorkSpaces Service</fullname>
-         <p>Amazon WorkSpaces enables you to provision virtual, cloud-based Microsoft Windows and
-         Amazon Linux desktops for your users.</p>")
+         <p>Amazon WorkSpaces enables you to provision virtual, cloud-based Microsoft Windows
+         or Amazon Linux desktops for your users, known as <i>WorkSpaces</i>.
+            WorkSpaces eliminates the need to procure and deploy hardware or install complex
+         software. You can quickly add or remove users as your needs change. Users can access their
+         virtual desktops from multiple devices or web browsers.</p>
+         <p>This API Reference provides detailed information about the actions, data types,
+         parameters, and errors of the WorkSpaces service. For more information about the
+         supported Amazon Web Services Regions, endpoints, and service quotas of the Amazon WorkSpaces service, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/wsp.html\">WorkSpaces endpoints and quotas</a> in the <i>Amazon Web Services
+            General Reference</i>.</p>
+         <p>You can also manage your WorkSpaces resources using the WorkSpaces
+         console, Command Line Interface (CLI), and SDKs. For more information about
+         administering WorkSpaces, see the <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/\">Amazon WorkSpaces Administration Guide</a>.
+         For more information about using the Amazon WorkSpaces client application or web
+         browser to access provisioned WorkSpaces, see the <a href=\"https://docs.aws.amazon.com/workspaces/latest/userguide/\">Amazon WorkSpaces User Guide</a>. For more
+         information about using the CLI to manage your WorkSpaces resources,
+         see the <a href=\"https://docs.aws.amazon.com/cli/latest/reference/workspaces/index.html\">WorkSpaces section of the CLI Reference</a>.</p>")
 module UpdateWorkspaceImagePermission = {
   type t
   type request = {
-    @ocaml.doc("<p>The identifier of the AWS account to share or unshare the image with.</p>
-      
+    @ocaml.doc("<p>The identifier of the Amazon Web Services account to share or unshare the image
+         with.</p>
          <important>
-            <p>Before sharing the image, confirm that you are sharing to the correct AWS account ID.</p>
+            <p>Before sharing the image, confirm that you are sharing to the correct Amazon Web Services account ID.</p>
          </important>")
     @as("SharedAccountId")
     sharedAccountId: awsAccount,
-    @ocaml.doc("<p>The permission to copy the image. This permission can be revoked only after an image 
-      has been shared.</p>")
+    @ocaml.doc("<p>The permission to copy the image. This permission can be revoked only after an image has
+         been shared.</p>")
     @as("AllowCopyImage")
     allowCopyImage: booleanObject,
     @ocaml.doc("<p>The identifier of the image.</p>") @as("ImageId") imageId: workspaceImageId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workspaces") @new
   external new: request => t = "UpdateWorkspaceImagePermissionCommand"
   let make = (~sharedAccountId, ~allowCopyImage, ~imageId, ()) =>
@@ -806,10 +1109,30 @@ module UpdateWorkspaceBundle = {
     imageId: option<workspaceImageId>,
     @ocaml.doc("<p>The identifier of the bundle.</p>") @as("BundleId") bundleId: option<bundleId>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workspaces") @new
   external new: request => t = "UpdateWorkspaceBundleCommand"
   let make = (~imageId=?, ~bundleId=?, ()) => new({imageId: imageId, bundleId: bundleId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module UpdateConnectClientAddIn = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The endpoint URL of the Amazon Connect client add-in.</p>") @as("URL")
+    url: option<addInUrl>,
+    @ocaml.doc("<p>The name of the client add-in.</p>") @as("Name") name: option<addInName>,
+    @ocaml.doc("<p>The directory identifier for which the client add-in is configured.</p>")
+    @as("ResourceId")
+    resourceId: directoryId,
+    @ocaml.doc("<p>The identifier of the client add-in to update.</p>") @as("AddInId")
+    addInId: amazonUuid,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-workspaces") @new
+  external new: request => t = "UpdateConnectClientAddInCommand"
+  let make = (~resourceId, ~addInId, ~url=?, ~name=?, ()) =>
+    new({url: url, name: name, resourceId: resourceId, addInId: addInId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -819,7 +1142,7 @@ module RestoreWorkspace = {
     @ocaml.doc("<p>The identifier of the WorkSpace.</p>") @as("WorkspaceId")
     workspaceId: workspaceId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workspaces") @new external new: request => t = "RestoreWorkspaceCommand"
   let make = (~workspaceId, ()) => new({workspaceId: workspaceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -833,7 +1156,7 @@ module ModifyWorkspaceState = {
     @ocaml.doc("<p>The identifier of the WorkSpace.</p>") @as("WorkspaceId")
     workspaceId: workspaceId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workspaces") @new
   external new: request => t = "ModifyWorkspaceStateCommand"
   let make = (~workspaceState, ~workspaceId, ()) =>
@@ -854,7 +1177,7 @@ module ModifyAccount = {
     @ocaml.doc("<p>The status of BYOL.</p>") @as("DedicatedTenancySupport")
     dedicatedTenancySupport: option<dedicatedTenancySupportEnum>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workspaces") @new external new: request => t = "ModifyAccountCommand"
   let make = (~dedicatedTenancyManagementCidrRange=?, ~dedicatedTenancySupport=?, ()) =>
     new({
@@ -874,8 +1197,9 @@ module MigrateWorkspace = {
     sourceWorkspaceId: workspaceId,
   }
   type response = {
-    @ocaml.doc("<p>The new identifier of the WorkSpace that is being migrated. If the migration does not succeed, 
-         the target WorkSpace ID will not be used, and the WorkSpace will still have the original WorkSpace ID.</p>")
+    @ocaml.doc("<p>The new identifier of the WorkSpace that is being migrated. If the migration does not
+         succeed, the target WorkSpace ID will not be used, and the WorkSpace will still have the
+         original WorkSpace ID.</p>")
     @as("TargetWorkspaceId")
     targetWorkspaceId: option<workspaceId>,
     @ocaml.doc("<p>The original identifier of the WorkSpace that is being migrated.</p>")
@@ -894,7 +1218,7 @@ module DisassociateConnectionAlias = {
     @ocaml.doc("<p>The identifier of the connection alias to disassociate.</p>") @as("AliasId")
     aliasId: connectionAliasId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workspaces") @new
   external new: request => t = "DisassociateConnectionAliasCommand"
   let make = (~aliasId, ()) => new({aliasId: aliasId})
@@ -903,7 +1227,7 @@ module DisassociateConnectionAlias = {
 
 module DescribeAccount = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("<p>The IP address range, specified as an IPv4 CIDR block, used for the management network
          interface.</p>
@@ -916,21 +1240,21 @@ module DescribeAccount = {
     @as("DedicatedTenancySupport")
     dedicatedTenancySupport: option<dedicatedTenancySupportResultEnum>,
   }
-  @module("@aws-sdk/client-workspaces") @new external new: unit => t = "DescribeAccountCommand"
-  let make = () => new()
+  @module("@aws-sdk/client-workspaces") @new external new: request => t = "DescribeAccountCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeregisterWorkspaceDirectory = {
   type t
   type request = {
-    @ocaml.doc("<p>The identifier of the directory. If any WorkSpaces are registered to this directory, you must 
-         remove them before you deregister the directory, or you will receive an OperationNotSupportedException 
-         error.</p>")
+    @ocaml.doc("<p>The identifier of the directory. If any WorkSpaces are registered to this directory, you
+         must remove them before you deregister the directory, or you will receive an
+         OperationNotSupportedException error.</p>")
     @as("DirectoryId")
     directoryId: directoryId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workspaces") @new
   external new: request => t = "DeregisterWorkspaceDirectoryCommand"
   let make = (~directoryId, ()) => new({directoryId: directoryId})
@@ -942,7 +1266,7 @@ module DeleteWorkspaceImage = {
   type request = {
     @ocaml.doc("<p>The identifier of the image.</p>") @as("ImageId") imageId: workspaceImageId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workspaces") @new
   external new: request => t = "DeleteWorkspaceImageCommand"
   let make = (~imageId, ()) => new({imageId: imageId})
@@ -954,7 +1278,7 @@ module DeleteWorkspaceBundle = {
   type request = {
     @ocaml.doc("<p>The identifier of the bundle.</p>") @as("BundleId") bundleId: option<bundleId>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workspaces") @new
   external new: request => t = "DeleteWorkspaceBundleCommand"
   let make = (~bundleId=?, ()) => new({bundleId: bundleId})
@@ -967,7 +1291,7 @@ module DeleteIpGroup = {
     @ocaml.doc("<p>The identifier of the IP access control group.</p>") @as("GroupId")
     groupId: ipGroupId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workspaces") @new external new: request => t = "DeleteIpGroupCommand"
   let make = (~groupId, ()) => new({groupId: groupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -979,11 +1303,46 @@ module DeleteConnectionAlias = {
     @ocaml.doc("<p>The identifier of the connection alias to delete.</p>") @as("AliasId")
     aliasId: connectionAliasId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workspaces") @new
   external new: request => t = "DeleteConnectionAliasCommand"
   let make = (~aliasId, ()) => new({aliasId: aliasId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module DeleteConnectClientAddIn = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The directory identifier for which the client add-in is configured.</p>")
+    @as("ResourceId")
+    resourceId: directoryId,
+    @ocaml.doc("<p>The identifier of the client add-in to delete.</p>") @as("AddInId")
+    addInId: amazonUuid,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-workspaces") @new
+  external new: request => t = "DeleteConnectClientAddInCommand"
+  let make = (~resourceId, ~addInId, ()) => new({resourceId: resourceId, addInId: addInId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module CreateConnectClientAddIn = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The endpoint URL of the Amazon Connect client add-in.</p>") @as("URL")
+    url: addInUrl,
+    @ocaml.doc("<p>The name of the client add-in.</p>") @as("Name") name: addInName,
+    @ocaml.doc("<p>The directory identifier for which to configure the client add-in.</p>")
+    @as("ResourceId")
+    resourceId: directoryId,
+  }
+  type response = {
+    @ocaml.doc("<p>The client add-in identifier.</p>") @as("AddInId") addInId: option<amazonUuid>,
+  }
+  @module("@aws-sdk/client-workspaces") @new
+  external new: request => t = "CreateConnectClientAddInCommand"
+  let make = (~url, ~name, ~resourceId, ()) => new({url: url, name: name, resourceId: resourceId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssociateConnectionAlias = {
@@ -996,8 +1355,8 @@ module AssociateConnectionAlias = {
     aliasId: connectionAliasId,
   }
   type response = {
-    @ocaml.doc("<p>The identifier of the connection alias association. You use the connection identifier in the DNS TXT record when 
-         you're configuring your DNS routing policies. </p>")
+    @ocaml.doc("<p>The identifier of the connection alias association. You use the connection identifier in
+         the DNS TXT record when you're configuring your DNS routing policies. </p>")
     @as("ConnectionIdentifier")
     connectionIdentifier: option<connectionIdentifier>,
   }
@@ -1011,7 +1370,7 @@ module UpdateConnectionAliasPermission = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>Indicates whether to share or unshare the connection alias with the specified AWS account.</p>"
+      "<p>Indicates whether to share or unshare the connection alias with the specified Amazon Web Services account.</p>"
     )
     @as("ConnectionAliasPermission")
     connectionAliasPermission: connectionAliasPermission,
@@ -1021,7 +1380,7 @@ module UpdateConnectionAliasPermission = {
     @as("AliasId")
     aliasId: connectionAliasId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workspaces") @new
   external new: request => t = "UpdateConnectionAliasPermissionCommand"
   let make = (~connectionAliasPermission, ~aliasId, ()) =>
@@ -1036,7 +1395,7 @@ module RevokeIpRules = {
     userRules: ipRevokedRuleList,
     @ocaml.doc("<p>The identifier of the group.</p>") @as("GroupId") groupId: ipGroupId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workspaces") @new external new: request => t = "RevokeIpRulesCommand"
   let make = (~userRules, ~groupId, ()) => new({userRules: userRules, groupId: groupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1050,7 +1409,7 @@ module ModifyWorkspaceProperties = {
     @ocaml.doc("<p>The identifier of the WorkSpace.</p>") @as("WorkspaceId")
     workspaceId: workspaceId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workspaces") @new
   external new: request => t = "ModifyWorkspacePropertiesCommand"
   let make = (~workspaceProperties, ~workspaceId, ()) =>
@@ -1066,7 +1425,7 @@ module ModifyWorkspaceCreationProperties = {
     workspaceCreationProperties: workspaceCreationProperties,
     @ocaml.doc("<p>The identifier of the directory.</p>") @as("ResourceId") resourceId: directoryId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workspaces") @new
   external new: request => t = "ModifyWorkspaceCreationPropertiesCommand"
   let make = (~workspaceCreationProperties, ~resourceId, ()) =>
@@ -1082,7 +1441,7 @@ module ModifyWorkspaceAccessProperties = {
     workspaceAccessProperties: workspaceAccessProperties,
     @ocaml.doc("<p>The identifier of the directory.</p>") @as("ResourceId") resourceId: directoryId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workspaces") @new
   external new: request => t = "ModifyWorkspaceAccessPropertiesCommand"
   let make = (~workspaceAccessProperties, ~resourceId, ()) =>
@@ -1098,7 +1457,7 @@ module ModifySelfservicePermissions = {
     selfservicePermissions: selfservicePermissions,
     @ocaml.doc("<p>The identifier of the directory.</p>") @as("ResourceId") resourceId: directoryId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workspaces") @new
   external new: request => t = "ModifySelfservicePermissionsCommand"
   let make = (~selfservicePermissions, ~resourceId, ()) =>
@@ -1114,7 +1473,7 @@ module ModifyClientProperties = {
     @ocaml.doc("<p>The resource identifiers, in the form of directory IDs.</p>") @as("ResourceId")
     resourceId: nonEmptyString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workspaces") @new
   external new: request => t = "ModifyClientPropertiesCommand"
   let make = (~clientProperties, ~resourceId, ()) =>
@@ -1137,9 +1496,8 @@ module ListAvailableManagementCidrRanges = {
     managementCidrRangeConstraint: managementCidrRangeConstraint,
   }
   type response = {
-    @ocaml.doc(
-      "<p>The token to use to retrieve the next page of results. This value is null when there are no more results to return. </p>"
-    )
+    @ocaml.doc("<p>The token to use to retrieve the next page of results. This value is null when there are
+         no more results to return. </p>")
     @as("NextToken")
     nextToken: option<paginationToken>,
     @ocaml.doc("<p>The list of available IP address ranges, specified as IPv4 CIDR blocks.</p>")
@@ -1165,7 +1523,7 @@ module DisassociateIpGroups = {
     @ocaml.doc("<p>The identifier of the directory.</p>") @as("DirectoryId")
     directoryId: directoryId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workspaces") @new
   external new: request => t = "DisassociateIpGroupsCommand"
   let make = (~groupIds, ~directoryId, ()) => new({groupIds: groupIds, directoryId: directoryId})
@@ -1177,13 +1535,32 @@ module DeleteTags = {
   type request = {
     @ocaml.doc("<p>The tag keys.</p>") @as("TagKeys") tagKeys: tagKeyList,
     @ocaml.doc("<p>The identifier of the WorkSpaces resource. The supported resource types are WorkSpaces,
-         registered directories, images, custom bundles, IP access control groups, and connection aliases.</p>")
+         registered directories, images, custom bundles, IP access control groups, and connection
+         aliases.</p>")
     @as("ResourceId")
     resourceId: nonEmptyString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workspaces") @new external new: request => t = "DeleteTagsCommand"
   let make = (~tagKeys, ~resourceId, ()) => new({tagKeys: tagKeys, resourceId: resourceId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module DeleteClientBranding = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The device type for which you want to delete client branding.</p>")
+    @as("Platforms")
+    platforms: clientDeviceTypeList,
+    @ocaml.doc("<p>The directory identifier of the WorkSpace for which you want to delete client
+         branding.</p>")
+    @as("ResourceId")
+    resourceId: directoryId,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-workspaces") @new
+  external new: request => t = "DeleteClientBrandingCommand"
+  let make = (~platforms, ~resourceId, ()) => new({platforms: platforms, resourceId: resourceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -1195,7 +1572,7 @@ module AssociateIpGroups = {
     @ocaml.doc("<p>The identifier of the directory.</p>") @as("DirectoryId")
     directoryId: directoryId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workspaces") @new external new: request => t = "AssociateIpGroupsCommand"
   let make = (~groupIds, ~directoryId, ()) => new({groupIds: groupIds, directoryId: directoryId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1207,7 +1584,7 @@ module UpdateRulesOfIpGroup = {
     @ocaml.doc("<p>One or more rules.</p>") @as("UserRules") userRules: ipRuleList,
     @ocaml.doc("<p>The identifier of the group.</p>") @as("GroupId") groupId: ipGroupId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workspaces") @new
   external new: request => t = "UpdateRulesOfIpGroupCommand"
   let make = (~userRules, ~groupId, ()) => new({userRules: userRules, groupId: groupId})
@@ -1272,34 +1649,37 @@ module RegisterWorkspaceDirectory = {
   type request = {
     @ocaml.doc("<p>The tags associated with the directory.</p>") @as("Tags") tags: option<tagList_>,
     @ocaml.doc("<p>Indicates whether your WorkSpace directory is dedicated or shared. To use Bring Your Own
-         License (BYOL) images, this value must be set to <code>DEDICATED</code> and your AWS account must be 
-         enabled for BYOL. If your account has not been enabled for BYOL, you will receive an 
-         InvalidParameterValuesException error. For more information about BYOL images, see
-            <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html\">Bring Your Own Windows Desktop Images</a>.</p>")
+         License (BYOL) images, this value must be set to <code>DEDICATED</code> and your Amazon Web Services account must be enabled for BYOL. If your account has not been enabled for
+         BYOL, you will receive an InvalidParameterValuesException error. For more information about
+         BYOL images, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html\">Bring Your Own Windows
+            Desktop Images</a>.</p>")
     @as("Tenancy")
     tenancy: option<tenancy>,
     @ocaml.doc("<p>Indicates whether self-service capabilities are enabled or disabled.</p>")
     @as("EnableSelfService")
     enableSelfService: option<booleanObject>,
-    @ocaml.doc("<p>Indicates whether Amazon WorkDocs is enabled or disabled. If you have enabled this parameter and 
-         WorkDocs is not available in the Region, you will receive an OperationNotSupportedException error. Set 
-         <code>EnableWorkDocs</code> to disabled, and try again.</p>")
+    @ocaml.doc("<p>Indicates whether Amazon WorkDocs is enabled or disabled. If you have enabled this
+         parameter and WorkDocs is not available in the Region, you will receive an
+         OperationNotSupportedException error. Set <code>EnableWorkDocs</code> to disabled, and try
+         again.</p>")
     @as("EnableWorkDocs")
     enableWorkDocs: booleanObject,
-    @ocaml.doc("<p>The identifiers of the subnets for your virtual private cloud (VPC). Make sure that the subnets 
-         are in supported Availability Zones. The subnets must also be in separate Availability Zones. If these 
-         conditions are not met, you will receive an OperationNotSupportedException error.</p>")
+    @ocaml.doc("<p>The identifiers of the subnets for your virtual private cloud (VPC). Make sure that the
+         subnets are in supported Availability Zones. The subnets must also be in separate
+         Availability Zones. If these conditions are not met, you will receive an
+         OperationNotSupportedException error.</p>")
     @as("SubnetIds")
     subnetIds: option<subnetIds>,
-    @ocaml.doc("<p>The identifier of the directory. You cannot register a directory if it does not have a status 
-         of Active. If the directory does not have a status of Active, you will receive an 
-         InvalidResourceStateException error. If you have already registered the maximum number of directories 
-         that you can register with Amazon WorkSpaces, you will receive a ResourceLimitExceededException error. 
-         Deregister directories that you are not using for WorkSpaces, and try again.</p>")
+    @ocaml.doc("<p>The identifier of the directory. You cannot register a directory if it does not have a
+         status of Active. If the directory does not have a status of Active, you will receive an
+         InvalidResourceStateException error. If you have already registered the maximum number of
+         directories that you can register with Amazon WorkSpaces, you will receive a
+         ResourceLimitExceededException error. Deregister directories that you are not using for
+         WorkSpaces, and try again.</p>")
     @as("DirectoryId")
     directoryId: directoryId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workspaces") @new
   external new: request => t = "RegisterWorkspaceDirectoryCommand"
   let make = (
@@ -1361,11 +1741,9 @@ module RebootWorkspaces = {
 module ImportWorkspaceImage = {
   type t
   type request = {
-    @ocaml.doc("<p>If specified, the version of Microsoft Office to subscribe to. Valid only for Windows 10 
-         BYOL images. For more information about subscribing to Office for BYOL images, see 
-         <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html\">
-            Bring Your Own Windows Desktop Licenses</a>.</p>
-      
+    @ocaml.doc("<p>If specified, the version of Microsoft Office to subscribe to. Valid only for Windows 10
+         BYOL images. For more information about subscribing to Office for BYOL images, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html\"> Bring
+            Your Own Windows Desktop Licenses</a>.</p>
          <note>
             <p>Although this parameter is an array, only one item is allowed at this time.</p>
          </note>")
@@ -1378,13 +1756,13 @@ module ImportWorkspaceImage = {
     imageDescription: workspaceImageDescription,
     @ocaml.doc("<p>The name of the WorkSpace image.</p>") @as("ImageName")
     imageName: workspaceImageName,
-    @ocaml.doc("<p>The ingestion process to be used when importing the image, depending on which protocol 
-         you want to use for your BYOL Workspace image, either PCoIP or WorkSpaces Streaming Protocol 
-         (WSP). To use WSP, specify a value that ends in <code>_WSP</code>. To use PCoIP, specify a value 
-         that does not end in <code>_WSP</code>. </p>
-      
-         <p>For non-GPU-enabled bundles (bundles other than Graphics or GraphicsPro), specify 
-         <code>BYOL_REGULAR</code> or <code>BYOL_REGULAR_WSP</code>, depending on the protocol.</p>")
+    @ocaml.doc("<p>The ingestion process to be used when importing the image, depending on which protocol
+         you want to use for your BYOL Workspace image, either PCoIP or WorkSpaces Streaming
+         Protocol (WSP). To use WSP, specify a value that ends in <code>_WSP</code>. To use PCoIP,
+         specify a value that does not end in <code>_WSP</code>. </p>
+         <p>For non-GPU-enabled bundles (bundles other than Graphics or GraphicsPro), specify
+            <code>BYOL_REGULAR</code> or <code>BYOL_REGULAR_WSP</code>, depending on the
+         protocol.</p>")
     @as("IngestionProcess")
     ingestionProcess: workspaceImageIngestionProcess,
     @ocaml.doc("<p>The identifier of the EC2 image.</p>") @as("Ec2ImageId") ec2ImageId: ec2ImageId,
@@ -1415,6 +1793,70 @@ module ImportWorkspaceImage = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module ImportClientBranding = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The branding information to import for web access.</p>") @as("DeviceTypeWeb")
+    deviceTypeWeb: option<defaultImportClientBrandingAttributes>,
+    @ocaml.doc("<p>The branding information to import for Linux devices.</p>")
+    @as("DeviceTypeLinux")
+    deviceTypeLinux: option<defaultImportClientBrandingAttributes>,
+    @ocaml.doc("<p>The branding information to import for iOS devices.</p>") @as("DeviceTypeIos")
+    deviceTypeIos: option<iosImportClientBrandingAttributes>,
+    @ocaml.doc("<p>The branding information to import for Android devices.</p>")
+    @as("DeviceTypeAndroid")
+    deviceTypeAndroid: option<defaultImportClientBrandingAttributes>,
+    @ocaml.doc("<p>The branding information to import for macOS devices.</p>") @as("DeviceTypeOsx")
+    deviceTypeOsx: option<defaultImportClientBrandingAttributes>,
+    @ocaml.doc("<p>The branding information to import for Windows devices.</p>")
+    @as("DeviceTypeWindows")
+    deviceTypeWindows: option<defaultImportClientBrandingAttributes>,
+    @ocaml.doc("<p>The directory identifier of the WorkSpace for which you want to import client
+         branding.</p>")
+    @as("ResourceId")
+    resourceId: directoryId,
+  }
+  type response = {
+    @ocaml.doc("<p>The branding information configured for web access.</p>") @as("DeviceTypeWeb")
+    deviceTypeWeb: option<defaultClientBrandingAttributes>,
+    @ocaml.doc("<p>The branding information configured for Linux devices.</p>")
+    @as("DeviceTypeLinux")
+    deviceTypeLinux: option<defaultClientBrandingAttributes>,
+    @ocaml.doc("<p>The branding information configured for iOS devices.</p>") @as("DeviceTypeIos")
+    deviceTypeIos: option<iosClientBrandingAttributes>,
+    @ocaml.doc("<p>The branding information configured for Android devices.</p>")
+    @as("DeviceTypeAndroid")
+    deviceTypeAndroid: option<defaultClientBrandingAttributes>,
+    @ocaml.doc("<p>The branding information configured for macOS devices.</p>") @as("DeviceTypeOsx")
+    deviceTypeOsx: option<defaultClientBrandingAttributes>,
+    @ocaml.doc("<p>The branding information configured for Windows devices.</p>")
+    @as("DeviceTypeWindows")
+    deviceTypeWindows: option<defaultClientBrandingAttributes>,
+  }
+  @module("@aws-sdk/client-workspaces") @new
+  external new: request => t = "ImportClientBrandingCommand"
+  let make = (
+    ~resourceId,
+    ~deviceTypeWeb=?,
+    ~deviceTypeLinux=?,
+    ~deviceTypeIos=?,
+    ~deviceTypeAndroid=?,
+    ~deviceTypeOsx=?,
+    ~deviceTypeWindows=?,
+    (),
+  ) =>
+    new({
+      deviceTypeWeb: deviceTypeWeb,
+      deviceTypeLinux: deviceTypeLinux,
+      deviceTypeIos: deviceTypeIos,
+      deviceTypeAndroid: deviceTypeAndroid,
+      deviceTypeOsx: deviceTypeOsx,
+      deviceTypeWindows: deviceTypeWindows,
+      resourceId: resourceId,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module DescribeWorkspacesConnectionStatus = {
   type t
   type request = {
@@ -1427,9 +1869,8 @@ module DescribeWorkspacesConnectionStatus = {
     workspaceIds: option<workspaceIdList>,
   }
   type response = {
-    @ocaml.doc(
-      "<p>The token to use to retrieve the next page of results. This value is null when there are no more results to return. </p>"
-    )
+    @ocaml.doc("<p>The token to use to retrieve the next page of results. This value is null when there are
+         no more results to return. </p>")
     @as("NextToken")
     nextToken: option<paginationToken>,
     @ocaml.doc("<p>Information about the connection status of the WorkSpace.</p>")
@@ -1454,8 +1895,8 @@ module DescribeWorkspaceSnapshots = {
          include both the root volume and the user volume.</p>")
     @as("RestoreSnapshots")
     restoreSnapshots: option<snapshotList>,
-    @ocaml.doc("<p>Information about the snapshots that can be used to rebuild a WorkSpace. These snapshots include
-         the user volume.</p>")
+    @ocaml.doc("<p>Information about the snapshots that can be used to rebuild a WorkSpace. These snapshots
+         include the user volume.</p>")
     @as("RebuildSnapshots")
     rebuildSnapshots: option<snapshotList>,
   }
@@ -1470,19 +1911,19 @@ module DescribeWorkspaceImagePermissions = {
   type request = {
     @ocaml.doc("<p>The maximum number of items to return.</p>") @as("MaxResults")
     maxResults: option<limit>,
-    @ocaml.doc("<p>If you received a <code>NextToken</code> from a previous call that was paginated, 
+    @ocaml.doc("<p>If you received a <code>NextToken</code> from a previous call that was paginated,
          provide this token to receive the next set of results.</p>")
     @as("NextToken")
     nextToken: option<paginationToken>,
     @ocaml.doc("<p>The identifier of the image.</p>") @as("ImageId") imageId: workspaceImageId,
   }
   type response = {
-    @ocaml.doc(
-      "<p>The token to use to retrieve the next page of results. This value is null when there are no more results to return. </p>"
-    )
+    @ocaml.doc("<p>The token to use to retrieve the next page of results. This value is null when there are
+         no more results to return. </p>")
     @as("NextToken")
     nextToken: option<paginationToken>,
-    @ocaml.doc("<p>The identifiers of the AWS accounts that the image has been shared with.</p>")
+    @ocaml.doc("<p>The identifiers of the Amazon Web Services accounts that the image has been shared
+         with.</p>")
     @as("ImagePermissions")
     imagePermissions: option<imagePermissions>,
     @ocaml.doc("<p>The identifier of the image.</p>") @as("ImageId")
@@ -1499,7 +1940,8 @@ module DescribeTags = {
   type t
   type request = {
     @ocaml.doc("<p>The identifier of the WorkSpaces resource. The supported resource types are WorkSpaces,
-         registered directories, images, custom bundles, IP access control groups, and connection aliases.</p>")
+         registered directories, images, custom bundles, IP access control groups, and connection
+         aliases.</p>")
     @as("ResourceId")
     resourceId: nonEmptyString,
   }
@@ -1514,17 +1956,16 @@ module DescribeConnectionAliasPermissions = {
   type request = {
     @ocaml.doc("<p>The maximum number of results to return.</p>") @as("MaxResults")
     maxResults: option<limit>,
-    @ocaml.doc("<p>If you received a <code>NextToken</code> from a previous call that was paginated, provide this token to receive the 
-         next set of results. </p>")
+    @ocaml.doc("<p>If you received a <code>NextToken</code> from a previous call that was paginated,
+         provide this token to receive the next set of results. </p>")
     @as("NextToken")
     nextToken: option<paginationToken>,
     @ocaml.doc("<p>The identifier of the connection alias.</p>") @as("AliasId")
     aliasId: connectionAliasId,
   }
   type response = {
-    @ocaml.doc(
-      "<p>The token to use to retrieve the next page of results. This value is null when there are no more results to return. </p>"
-    )
+    @ocaml.doc("<p>The token to use to retrieve the next page of results. This value is null when there are
+         no more results to return. </p>")
     @as("NextToken")
     nextToken: option<paginationToken>,
     @ocaml.doc("<p>The permissions associated with a connection alias.</p>")
@@ -1540,6 +1981,62 @@ module DescribeConnectionAliasPermissions = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module DescribeConnectClientAddIns = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The maximum number of items to return.</p>") @as("MaxResults")
+    maxResults: option<limit>,
+    @ocaml.doc("<p>If you received a <code>NextToken</code> from a previous call that was paginated,
+         provide this token to receive the next set of results.</p>")
+    @as("NextToken")
+    nextToken: option<paginationToken>,
+    @ocaml.doc("<p>The directory identifier for which the client add-in is configured.</p>")
+    @as("ResourceId")
+    resourceId: directoryId,
+  }
+  type response = {
+    @ocaml.doc("<p>The token to use to retrieve the next page of results. This value is null when there are
+         no more results to return. </p>")
+    @as("NextToken")
+    nextToken: option<paginationToken>,
+    @ocaml.doc("<p>Information about client add-ins.</p>") @as("AddIns")
+    addIns: option<connectClientAddInList>,
+  }
+  @module("@aws-sdk/client-workspaces") @new
+  external new: request => t = "DescribeConnectClientAddInsCommand"
+  let make = (~resourceId, ~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken, resourceId: resourceId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module DescribeClientBranding = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The directory identifier of the WorkSpace for which you want to view client branding
+         information.</p>")
+    @as("ResourceId")
+    resourceId: directoryId,
+  }
+  type response = {
+    @ocaml.doc("<p>The branding information for Web access.</p>") @as("DeviceTypeWeb")
+    deviceTypeWeb: option<defaultClientBrandingAttributes>,
+    @ocaml.doc("<p>The branding information for Linux devices.</p>") @as("DeviceTypeLinux")
+    deviceTypeLinux: option<defaultClientBrandingAttributes>,
+    @ocaml.doc("<p>The branding information for iOS devices.</p>") @as("DeviceTypeIos")
+    deviceTypeIos: option<iosClientBrandingAttributes>,
+    @ocaml.doc("<p>The branding information for Android devices.</p>") @as("DeviceTypeAndroid")
+    deviceTypeAndroid: option<defaultClientBrandingAttributes>,
+    @ocaml.doc("<p>The branding information for macOS devices.</p>") @as("DeviceTypeOsx")
+    deviceTypeOsx: option<defaultClientBrandingAttributes>,
+    @ocaml.doc("<p>The branding information for Windows devices.</p>") @as("DeviceTypeWindows")
+    deviceTypeWindows: option<defaultClientBrandingAttributes>,
+  }
+  @module("@aws-sdk/client-workspaces") @new
+  external new: request => t = "DescribeClientBrandingCommand"
+  let make = (~resourceId, ()) => new({resourceId: resourceId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module DescribeAccountModifications = {
   type t
   type request = {
@@ -1549,8 +2046,8 @@ module DescribeAccountModifications = {
     nextToken: option<paginationToken>,
   }
   type response = {
-    @ocaml.doc("<p>The token to use to retrieve the next page of results. This value is null when there 
-         are no more results to return. </p>")
+    @ocaml.doc("<p>The token to use to retrieve the next page of results. This value is null when there are
+         no more results to return. </p>")
     @as("NextToken")
     nextToken: option<paginationToken>,
     @ocaml.doc("<p>The list of modifications to the configuration of BYOL.</p>")
@@ -1609,6 +2106,36 @@ module CreateWorkspaceBundle = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module CreateUpdatedWorkspaceImage = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The tags that you want to add to the new updated WorkSpace image.</p>
+         <note>
+            <p>To add tags at the same time when you're creating the updated image, you must create
+            an IAM policy that grants your IAM user permissions to use
+               <code>workspaces:CreateTags</code>. </p>
+         </note>")
+    @as("Tags")
+    tags: option<tagList_>,
+    @ocaml.doc("<p>The identifier of the source WorkSpace image.</p>") @as("SourceImageId")
+    sourceImageId: workspaceImageId,
+    @ocaml.doc("<p>A description of whether updates for the WorkSpace image are available.</p>")
+    @as("Description")
+    description: workspaceImageDescription,
+    @ocaml.doc("<p>The name of the new updated WorkSpace image.</p>") @as("Name")
+    name: workspaceImageName,
+  }
+  type response = {
+    @ocaml.doc("<p>The identifier of the new updated WorkSpace image.</p>") @as("ImageId")
+    imageId: option<workspaceImageId>,
+  }
+  @module("@aws-sdk/client-workspaces") @new
+  external new: request => t = "CreateUpdatedWorkspaceImageCommand"
+  let make = (~sourceImageId, ~description, ~name, ~tags=?, ()) =>
+    new({tags: tags, sourceImageId: sourceImageId, description: description, name: name})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module CreateTags = {
   type t
   type request = {
@@ -1616,11 +2143,12 @@ module CreateTags = {
     @as("Tags")
     tags: tagList_,
     @ocaml.doc("<p>The identifier of the WorkSpaces resource. The supported resource types are WorkSpaces,
-         registered directories, images, custom bundles, IP access control groups, and connection aliases.</p>")
+         registered directories, images, custom bundles, IP access control groups, and connection
+         aliases.</p>")
     @as("ResourceId")
     resourceId: nonEmptyString,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workspaces") @new external new: request => t = "CreateTagsCommand"
   let make = (~tags, ~resourceId, ()) => new({tags: tags, resourceId: resourceId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1652,12 +2180,12 @@ module CreateConnectionAlias = {
   type request = {
     @ocaml.doc("<p>The tags to associate with the connection alias.</p>") @as("Tags")
     tags: option<tagList_>,
-    @ocaml.doc("<p>A connection string in the form of a fully qualified domain name (FQDN), such as <code>www.example.com</code>.</p>
-      
+    @ocaml.doc("<p>A connection string in the form of a fully qualified domain name (FQDN), such as
+            <code>www.example.com</code>.</p>
          <important>
-            <p>After you create a connection string, it is always associated to your AWS account. You cannot recreate the same 
-            connection string with a different account, even if you delete all instances of it from the original account. The 
-         connection string is globally reserved for your account.</p>
+            <p>After you create a connection string, it is always associated to your Amazon Web Services account. You cannot recreate the same connection string with a different
+            account, even if you delete all instances of it from the original account. The
+            connection string is globally reserved for your account.</p>
          </important>")
     @as("ConnectionString")
     connectionString: connectionString,
@@ -1708,7 +2236,7 @@ module AuthorizeIpRules = {
     @ocaml.doc("<p>The rules to add to the group.</p>") @as("UserRules") userRules: ipRuleList,
     @ocaml.doc("<p>The identifier of the group.</p>") @as("GroupId") groupId: ipGroupId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-workspaces") @new external new: request => t = "AuthorizeIpRulesCommand"
   let make = (~userRules, ~groupId, ()) => new({userRules: userRules, groupId: groupId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1729,9 +2257,8 @@ module DescribeWorkspaceImages = {
     imageIds: option<workspaceImageIdList>,
   }
   type response = {
-    @ocaml.doc(
-      "<p>The token to use to retrieve the next page of results. This value is null when there are no more results to return. </p>"
-    )
+    @ocaml.doc("<p>The token to use to retrieve the next page of results. This value is null when there are
+         no more results to return. </p>")
     @as("NextToken")
     nextToken: option<paginationToken>,
     @ocaml.doc("<p>Information about the images.</p>") @as("Images")
@@ -1759,9 +2286,8 @@ module DescribeWorkspaceDirectories = {
     directoryIds: option<directoryIdList>,
   }
   type response = {
-    @ocaml.doc(
-      "<p>The token to use to retrieve the next page of results. This value is null when there are no more results to return. </p>"
-    )
+    @ocaml.doc("<p>The token to use to retrieve the next page of results. This value is null when there are
+         no more results to return. </p>")
     @as("NextToken")
     nextToken: option<paginationToken>,
     @ocaml.doc("<p>Information about the directories.</p>") @as("Directories")
@@ -1783,8 +2309,8 @@ module DescribeWorkspaceBundles = {
     @as("NextToken")
     nextToken: option<paginationToken>,
     @ocaml.doc("<p>The owner of the bundles. You cannot combine this parameter with any other filter.</p>
-         <p>To describe the bundles provided by AWS, specify <code>AMAZON</code>. To describe the
-         bundles that belong to your account, don't specify a value.</p>")
+         <p>To describe the bundles provided by Amazon Web Services, specify <code>AMAZON</code>. 
+         To describe the bundles that belong to your account, don't specify a value.</p>")
     @as("Owner")
     owner: option<bundleOwner>,
     @ocaml.doc(
@@ -1854,9 +2380,8 @@ module DescribeWorkspaces = {
     workspaceIds: option<workspaceIdList>,
   }
   type response = {
-    @ocaml.doc(
-      "<p>The token to use to retrieve the next page of results. This value is null when there are no more results to return. </p>"
-    )
+    @ocaml.doc("<p>The token to use to retrieve the next page of results. This value is null when there are
+         no more results to return. </p>")
     @as("NextToken")
     nextToken: option<paginationToken>,
     @ocaml.doc("<p>Information about the WorkSpaces.</p>
@@ -1900,9 +2425,8 @@ module DescribeIpGroups = {
     groupIds: option<ipGroupIdList>,
   }
   type response = {
-    @ocaml.doc(
-      "<p>The token to use to retrieve the next page of results. This value is null when there are no more results to return. </p>"
-    )
+    @ocaml.doc("<p>The token to use to retrieve the next page of results. This value is null when there are
+         no more results to return. </p>")
     @as("NextToken")
     nextToken: option<paginationToken>,
     @ocaml.doc("<p>Information about the IP access control groups.</p>") @as("Result")
@@ -1917,8 +2441,8 @@ module DescribeIpGroups = {
 module DescribeConnectionAliases = {
   type t
   type request = {
-    @ocaml.doc("<p>If you received a <code>NextToken</code> from a previous call that was paginated, provide this token to receive the 
-         next set of results. </p>")
+    @ocaml.doc("<p>If you received a <code>NextToken</code> from a previous call that was paginated,
+         provide this token to receive the next set of results. </p>")
     @as("NextToken")
     nextToken: option<paginationToken>,
     @ocaml.doc("<p>The maximum number of connection aliases to return.</p>") @as("Limit")
@@ -1930,9 +2454,8 @@ module DescribeConnectionAliases = {
     aliasIds: option<connectionAliasIdList>,
   }
   type response = {
-    @ocaml.doc(
-      "<p>The token to use to retrieve the next page of results. This value is null when there are no more results to return. </p>"
-    )
+    @ocaml.doc("<p>The token to use to retrieve the next page of results. This value is null when there are
+         no more results to return. </p>")
     @as("NextToken")
     nextToken: option<paginationToken>,
     @ocaml.doc("<p>Information about the specified connection aliases.</p>")

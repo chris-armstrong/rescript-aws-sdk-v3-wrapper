@@ -1554,7 +1554,7 @@ module RejectPortfolioShare = {
     @as("AcceptLanguage")
     acceptLanguage: option<acceptLanguage>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "RejectPortfolioShareCommand"
   let make = (~portfolioId, ~portfolioShareType=?, ~acceptLanguage=?, ()) =>
@@ -1568,23 +1568,24 @@ module RejectPortfolioShare = {
 
 module GetAWSOrganizationsAccessStatus = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("<p>The status of the portfolio share feature.</p>") @as("AccessStatus")
     accessStatus: option<accessStatus>,
   }
   @module("@aws-sdk/client-servicecatalog") @new
-  external new: unit => t = "GetAWSOrganizationsAccessStatusCommand"
-  let make = () => new()
+  external new: request => t = "GetAWSOrganizationsAccessStatusCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module EnableAWSOrganizationsAccess = {
   type t
-
+  type request = {.}
+  type response = {.}
   @module("@aws-sdk/client-servicecatalog") @new
-  external new: unit => t = "EnableAWSOrganizationsAccessCommand"
-  let make = () => new()
+  external new: request => t = "EnableAWSOrganizationsAccessCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -1594,7 +1595,7 @@ module DisassociateTagOptionFromResource = {
     @ocaml.doc("<p>The TagOption identifier.</p>") @as("TagOptionId") tagOptionId: tagOptionId,
     @ocaml.doc("<p>The resource identifier.</p>") @as("ResourceId") resourceId: resourceId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "DisassociateTagOptionFromResourceCommand"
   let make = (~tagOptionId, ~resourceId, ()) =>
@@ -1636,7 +1637,7 @@ module DisassociateServiceActionFromProvisioningArtifact = {
     @as("ProductId")
     productId: id,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "DisassociateServiceActionFromProvisioningArtifactCommand"
   let make = (~serviceActionId, ~provisioningArtifactId, ~productId, ~acceptLanguage=?, ()) =>
@@ -1672,7 +1673,7 @@ module DisassociateProductFromPortfolio = {
     @as("AcceptLanguage")
     acceptLanguage: option<acceptLanguage>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "DisassociateProductFromPortfolioCommand"
   let make = (~portfolioId, ~productId, ~acceptLanguage=?, ()) =>
@@ -1704,7 +1705,7 @@ module DisassociatePrincipalFromPortfolio = {
     @as("AcceptLanguage")
     acceptLanguage: option<acceptLanguage>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "DisassociatePrincipalFromPortfolioCommand"
   let make = (~principalARN, ~portfolioId, ~acceptLanguage=?, ()) =>
@@ -1723,7 +1724,7 @@ module DisassociateBudgetFromResource = {
     @ocaml.doc("<p>The name of the budget you want to disassociate.</p>") @as("BudgetName")
     budgetName: budgetName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "DisassociateBudgetFromResourceCommand"
   let make = (~resourceId, ~budgetName, ()) => new({resourceId: resourceId, budgetName: budgetName})
@@ -1732,10 +1733,11 @@ module DisassociateBudgetFromResource = {
 
 module DisableAWSOrganizationsAccess = {
   type t
-
+  type request = {.}
+  type response = {.}
   @module("@aws-sdk/client-servicecatalog") @new
-  external new: unit => t = "DisableAWSOrganizationsAccessCommand"
-  let make = () => new()
+  external new: request => t = "DisableAWSOrganizationsAccessCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -1782,7 +1784,7 @@ module DescribeCopyProductStatus = {
 module DeleteTagOption = {
   type t
   type request = {@ocaml.doc("<p>The TagOption identifier.</p>") @as("Id") id: tagOptionId}
-
+  type response = {.}
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "DeleteTagOptionCommand"
   let make = (~id, ()) => new({id: id})
@@ -1815,7 +1817,7 @@ module DeleteServiceAction = {
     @as("Id")
     id: id,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "DeleteServiceActionCommand"
   let make = (~id, ~acceptLanguage=?, ()) => new({acceptLanguage: acceptLanguage, id: id})
@@ -1846,7 +1848,7 @@ module DeleteProvisioningArtifact = {
     @as("AcceptLanguage")
     acceptLanguage: option<acceptLanguage>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "DeleteProvisioningArtifactCommand"
   let make = (~provisioningArtifactId, ~productId, ~acceptLanguage=?, ()) =>
@@ -1884,7 +1886,7 @@ module DeleteProvisionedProductPlan = {
     @as("AcceptLanguage")
     acceptLanguage: option<acceptLanguage>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "DeleteProvisionedProductPlanCommand"
   let make = (~planId, ~ignoreErrors=?, ~acceptLanguage=?, ()) =>
@@ -1914,7 +1916,7 @@ module DeleteProduct = {
     @as("AcceptLanguage")
     acceptLanguage: option<acceptLanguage>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-servicecatalog") @new external new: request => t = "DeleteProductCommand"
   let make = (~id, ~acceptLanguage=?, ()) => new({id: id, acceptLanguage: acceptLanguage})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1942,7 +1944,7 @@ module DeletePortfolio = {
     @as("AcceptLanguage")
     acceptLanguage: option<acceptLanguage>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "DeletePortfolioCommand"
   let make = (~id, ~acceptLanguage=?, ()) => new({id: id, acceptLanguage: acceptLanguage})
@@ -1971,7 +1973,7 @@ module DeleteConstraint = {
     @as("AcceptLanguage")
     acceptLanguage: option<acceptLanguage>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "DeleteConstraintCommand"
   let make = (~id, ~acceptLanguage=?, ()) => new({id: id, acceptLanguage: acceptLanguage})
@@ -1984,7 +1986,7 @@ module AssociateTagOptionWithResource = {
     @ocaml.doc("<p>The TagOption identifier.</p>") @as("TagOptionId") tagOptionId: tagOptionId,
     @ocaml.doc("<p>The resource identifier.</p>") @as("ResourceId") resourceId: resourceId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "AssociateTagOptionWithResourceCommand"
   let make = (~tagOptionId, ~resourceId, ()) =>
@@ -2026,7 +2028,7 @@ module AssociateServiceActionWithProvisioningArtifact = {
     @as("ProductId")
     productId: id,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "AssociateServiceActionWithProvisioningArtifactCommand"
   let make = (~serviceActionId, ~provisioningArtifactId, ~productId, ~acceptLanguage=?, ()) =>
@@ -2064,7 +2066,7 @@ module AssociateProductWithPortfolio = {
     @as("AcceptLanguage")
     acceptLanguage: option<acceptLanguage>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "AssociateProductWithPortfolioCommand"
   let make = (~portfolioId, ~productId, ~sourcePortfolioId=?, ~acceptLanguage=?, ()) =>
@@ -2104,7 +2106,7 @@ module AssociatePrincipalWithPortfolio = {
     @as("AcceptLanguage")
     acceptLanguage: option<acceptLanguage>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "AssociatePrincipalWithPortfolioCommand"
   let make = (~principalType, ~principalARN, ~portfolioId, ~acceptLanguage=?, ()) =>
@@ -2126,7 +2128,7 @@ module AssociateBudgetWithResource = {
     @ocaml.doc("<p>The name of the budget you want to associate.</p>") @as("BudgetName")
     budgetName: budgetName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "AssociateBudgetWithResourceCommand"
   let make = (~resourceId, ~budgetName, ()) => new({resourceId: resourceId, budgetName: budgetName})
@@ -2175,7 +2177,7 @@ module AcceptPortfolioShare = {
     @as("AcceptLanguage")
     acceptLanguage: option<acceptLanguage>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-servicecatalog") @new
   external new: request => t = "AcceptPortfolioShareCommand"
   let make = (~portfolioId, ~portfolioShareType=?, ~acceptLanguage=?, ()) =>
@@ -3589,7 +3591,7 @@ module ListPortfoliosForProduct = {
   type t
   type request = {
     @ocaml.doc("<p>The maximum number of items to return with this call.</p>") @as("PageSize")
-    pageSize: option<pageSize>,
+    pageSize: option<pageSizeMax100>,
     @ocaml.doc(
       "<p>The page token for the next set of results. To retrieve the first set of results, use null.</p>"
     )
@@ -3639,7 +3641,7 @@ module ListPortfolios = {
   type t
   type request = {
     @ocaml.doc("<p>The maximum number of items to return with this call.</p>") @as("PageSize")
-    pageSize: option<pageSize>,
+    pageSize: option<pageSizeMax100>,
     @ocaml.doc(
       "<p>The page token for the next set of results. To retrieve the first set of results, use null.</p>"
     )
@@ -3880,7 +3882,7 @@ module ListAcceptedPortfolioShares = {
     @as("PortfolioShareType")
     portfolioShareType: option<portfolioShareType>,
     @ocaml.doc("<p>The maximum number of items to return with this call.</p>") @as("PageSize")
-    pageSize: option<pageSize>,
+    pageSize: option<pageSizeMax100>,
     @ocaml.doc(
       "<p>The page token for the next set of results. To retrieve the first set of results, use null.</p>"
     )
@@ -5045,7 +5047,7 @@ module SearchProducts = {
     @as("SortBy")
     sortBy: option<productViewSortBy>,
     @ocaml.doc("<p>The maximum number of items to return with this call.</p>") @as("PageSize")
-    pageSize: option<pageSize>,
+    pageSize: option<pageSizeMax100>,
     @ocaml.doc("<p>The search filters. If no search filters are specified, the output includes
          all products to which the caller has access.</p>")
     @as("Filters")

@@ -1,5 +1,7 @@
-open AwsSdkV3
+open AwsSdkV3.S3
 
-let client = S3.createClient()
-let listBucketsCommand = S3.ListBuckets.new()
-let _ = client->S3.ListBuckets.send(listBucketsCommand)
+let client = createClient()
+let listBucketsCommand = ListBuckets.new(Js.Obj.empty())
+let _ = client
+  ->ListBuckets.send(listBucketsCommand)
+  ->Promise.thenResolve(res => Js.log2("Buckets", res.buckets))

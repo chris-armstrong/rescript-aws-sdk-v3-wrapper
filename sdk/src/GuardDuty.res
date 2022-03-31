@@ -91,6 +91,7 @@ type detectorId = string
 type destinationType = [@as("S3") #S3]
 type dataSourceStatus = [@as("DISABLED") #DISABLED | @as("ENABLED") #ENABLED]
 type dataSource = [
+  | @as("KUBERNETES_AUDIT_LOGS") #KUBERNETES_AUDIT_LOGS
   | @as("S3_LOGS") #S3_LOGS
   | @as("DNS_LOGS") #DNS_LOGS
   | @as("CLOUD_TRAIL") #CLOUD_TRAIL
@@ -100,11 +101,16 @@ type clientToken = string
 type boolean_ = bool
 type adminStatus = [@as("DISABLE_IN_PROGRESS") #DISABLE_IN_PROGRESS | @as("ENABLED") #ENABLED]
 type accountId = string
+@ocaml.doc("<p>Container volume mount.</p>")
+type volumeMount = {
+  @ocaml.doc("<p>Volume mount path.</p>") @as("MountPath") mountPath: option<string_>,
+  @ocaml.doc("<p>Volume mount name.</p>") @as("Name") name: option<string_>,
+}
 @ocaml.doc("<p>Contains information about the accounts that weren't processed.</p>")
 type unprocessedAccount = {
   @ocaml.doc("<p>A reason why the account hasn't been processed.</p>") @as("Result")
   result: string_,
-  @ocaml.doc("<p>The AWS account ID.</p>") @as("AccountId") accountId: accountId,
+  @ocaml.doc("<p>The Amazon Web Services account ID.</p>") @as("AccountId") accountId: accountId,
 }
 @ocaml.doc("<p>Contains the total usage with the corresponding currency unit for that value.</p>")
 type total = {
@@ -121,6 +127,7 @@ type tag = {
   @ocaml.doc("<p>The EC2 instance tag value.</p>") @as("Value") value: option<string_>,
   @ocaml.doc("<p>The EC2 instance tag key.</p>") @as("Key") key: option<string_>,
 }
+type sourceIps = array<string_>
 @ocaml.doc("<p>Contains information about the criteria used for sorting findings.</p>")
 type sortCriteria = {
   @ocaml.doc("<p>The order by which the sorted findings are to be displayed.</p>") @as("OrderBy")
@@ -140,6 +147,11 @@ type securityGroup = {
   @ocaml.doc("<p>The security group ID of the EC2 instance.</p>") @as("GroupId")
   groupId: option<string_>,
 }
+@ocaml.doc("<p>Container security context.</p>")
+type securityContext = {
+  @ocaml.doc("<p>Whether the container is privileged.</p>") @as("Privileged")
+  privileged: option<boolean_>,
+}
 @ocaml.doc("<p>Describes whether S3 data event logs will be enabled as a data source.</p>")
 type s3LogsConfigurationResult = {
   @ocaml.doc("<p>A value that describes whether S3 data event logs are automatically enabled for new
@@ -158,6 +170,18 @@ type remotePortDetails = {
   @ocaml.doc("<p>The port name of the remote connection.</p>") @as("PortName")
   portName: option<string_>,
   @ocaml.doc("<p>The port number of the remote connection.</p>") @as("Port") port: option<integer_>,
+}
+@ocaml.doc(
+  "<p>Contains details about the remote Amazon Web Services account that made the API call.</p>"
+)
+type remoteAccountDetails = {
+  @ocaml.doc(
+    "<p>Details on whether the Amazon Web Services account of the remote API caller is related to your GuardDuty environment.  If this value is <code>True</code> the API caller is affiliated to your account in some way. If it is <code>False</code> the API caller is from outside your environment.</p>"
+  )
+  @as("Affiliated")
+  affiliated: option<boolean_>,
+  @ocaml.doc("<p>The Amazon Web Services account ID of the remote API caller.</p>") @as("AccountId")
+  accountId: option<string_>,
 }
 @ocaml.doc("<p>Contains information about the product code for the EC2 instance.</p>")
 type productCode = {
@@ -192,6 +216,23 @@ type organizationS3LogsConfigurationResult = {
       organization.</p>")
 type organizationS3LogsConfiguration = {
   @ocaml.doc("<p>A value that contains information on whether S3 data event logs will be enabled
+      automatically as a data source for the organization.</p>")
+  @as("AutoEnable")
+  autoEnable: boolean_,
+}
+@ocaml.doc(
+  "<p>The current configuration of Kubernetes audit logs as a data source for the organization.</p>"
+)
+type organizationKubernetesAuditLogsConfigurationResult = {
+  @ocaml.doc(
+    "<p>Whether Kubernetes audit logs data source should be auto-enabled for new members joining the organization.</p>"
+  )
+  @as("AutoEnable")
+  autoEnable: boolean_,
+}
+@ocaml.doc("<p>Organization-wide Kubernetes audit logs configuration.</p>")
+type organizationKubernetesAuditLogsConfiguration = {
+  @ocaml.doc("<p>A value that contains information on whether Kubernetes audit logs should be enabled
       automatically as a data source for the organization.</p>")
   @as("AutoEnable")
   autoEnable: boolean_,
@@ -249,6 +290,19 @@ type localIpDetails = {
   @ocaml.doc("<p>The IPv4 local address of the connection.</p>") @as("IpAddressV4")
   ipAddressV4: option<string_>,
 }
+@ocaml.doc("<p>Describes whether Kubernetes audit logs are enabled as a data source.</p>")
+type kubernetesAuditLogsConfigurationResult = {
+  @ocaml.doc(
+    "<p>A value that describes whether Kubernetes audit logs are enabled as a data source.</p>"
+  )
+  @as("Status")
+  status: dataSourceStatus,
+}
+@ocaml.doc("<p>Describes whether Kubernetes audit logs are enabled as a data source.</p>")
+type kubernetesAuditLogsConfiguration = {
+  @ocaml.doc("<p>The status of Kubernetes audit logs as a data source.</p>") @as("Enable")
+  enable: boolean_,
+}
 type ipv6Addresses = array<string_>
 type ipSetIds = array<string_>
 @ocaml.doc("<p>Contains information about the invitation to become a member account.</p>")
@@ -270,6 +324,15 @@ type iamInstanceProfile = {
   @ocaml.doc("<p>The profile ID of the EC2 instance.</p>") @as("Id") id: option<string_>,
   @ocaml.doc("<p>The profile ARN of the EC2 instance.</p>") @as("Arn") arn: option<string_>,
 }
+@ocaml.doc(
+  "<p>Represents a pre-existing file or directory on the host machine that the volume maps to.</p>"
+)
+type hostPath = {
+  @ocaml.doc("<p>Path of the file or directory on the host that the volume maps to.</p>")
+  @as("Path")
+  path: option<string_>,
+}
+type groups = array<string_>
 @ocaml.doc("<p>Contains information about the location of the remote IP address.</p>")
 type geoLocation = {
   @ocaml.doc("<p>The longitude information of the remote IP address.</p>") @as("Lon")
@@ -290,7 +353,7 @@ type equals = array<string_>
 type eq = array<string_>
 @ocaml.doc("<p>Contains information about the domain.</p>")
 type domainDetails = {
-  @ocaml.doc("<p>The domain information for the AWS API call.</p>") @as("Domain")
+  @ocaml.doc("<p>The domain information for the Amazon Web Services API call.</p>") @as("Domain")
   domain: option<string_>,
 }
 @ocaml.doc("<p>Contains information about the DNS_REQUEST action described in this finding.</p>")
@@ -304,7 +367,11 @@ type detectorIds = array<detectorId>
 type destinationProperties = {
   @ocaml.doc("<p>The ARN of the KMS key to use for encryption.</p>") @as("KmsKeyArn")
   kmsKeyArn: option<string_>,
-  @ocaml.doc("<p>The ARN of the resource to publish to.</p>") @as("DestinationArn")
+  @ocaml.doc("<p>The ARN of the resource to publish to.</p>
+         <p>To specify an S3 bucket folder use the following format:
+        <code>arn:aws:s3:::DOC-EXAMPLE-BUCKET/myFolder/</code>
+         </p>")
+  @as("DestinationArn")
   destinationArn: option<string_>,
 }
 @ocaml.doc("<p>Contains information about the publishing destination, including the ID, type, and
@@ -394,7 +461,7 @@ type adminAccount = {
   @ocaml.doc("<p>Indicates whether the account is enabled as the delegated administrator.</p>")
   @as("AdminStatus")
   adminStatus: option<adminStatus>,
-  @ocaml.doc("<p>The AWS account ID for the account.</p>") @as("AdminAccountId")
+  @ocaml.doc("<p>The Amazon Web Services account ID for the account.</p>") @as("AdminAccountId")
   adminAccountId: option<string_>,
 }
 type accountIds = array<accountId>
@@ -423,12 +490,24 @@ type accessControlList = {
   @as("AllowsPublicReadAccess")
   allowsPublicReadAccess: option<boolean_>,
 }
-@ocaml.doc("<p>Contains information on the sum of usage based on an AWS resource.</p>")
+type volumeMounts = array<volumeMount>
+@ocaml.doc("<p>Volume used by the Kubernetes workload.</p>")
+type volume = {
+  @ocaml.doc(
+    "<p>Represents a pre-existing file or directory on the host machine that the volume maps to.</p>"
+  )
+  @as("HostPath")
+  hostPath: option<hostPath>,
+  @ocaml.doc("<p>Volume name.</p>") @as("Name") name: option<string_>,
+}
+@ocaml.doc(
+  "<p>Contains information on the sum of usage based on an Amazon Web Services resource.</p>"
+)
 type usageResourceResult = {
   @ocaml.doc("<p>Represents the sum total of usage for the specified resource type.</p>")
   @as("Total")
   total: option<total>,
-  @ocaml.doc("<p>The AWS resource that generated usage.</p>") @as("Resource")
+  @ocaml.doc("<p>The Amazon Web Services resource that generated usage.</p>") @as("Resource")
   resource: option<string_>,
 }
 @ocaml.doc("<p>Contains information on the result of usage based on data source type.</p>")
@@ -486,22 +565,43 @@ type remoteIpDetails = {
 }
 type productCodes = array<productCode>
 type privateIpAddresses = array<privateIpAddressDetails>
-@ocaml.doc("<p>An object that contains information on which data sources are automatically enabled for
-      new members within the organization.</p>")
-type organizationDataSourceConfigurationsResult = {
-  @ocaml.doc("<p>Describes whether S3 data event logs are enabled as a data source.</p>")
-  @as("S3Logs")
-  s3Logs: organizationS3LogsConfigurationResult,
+@ocaml.doc("<p>The current configuration of all Kubernetes data sources for the organization.</p>")
+type organizationKubernetesConfigurationResult = {
+  @ocaml.doc(
+    "<p>The current configuration of Kubernetes audit logs as a data source for the organization.</p>"
+  )
+  @as("AuditLogs")
+  auditLogs: organizationKubernetesAuditLogsConfigurationResult,
 }
-@ocaml.doc("<p>An object that contains information on which data sources will be configured to be
-      automatically enabled for new members within the organization.</p>")
-type organizationDataSourceConfigurations = {
-  @ocaml.doc("<p>Describes whether S3 data event logs are enabled for new members of the
-      organization.</p>")
-  @as("S3Logs")
-  s3Logs: option<organizationS3LogsConfiguration>,
+@ocaml.doc("<p>Organization-wide Kubernetes data sources configurations.</p>")
+type organizationKubernetesConfiguration = {
+  @ocaml.doc(
+    "<p>Whether Kubernetes audit logs data source should be auto-enabled for new members joining the organization.</p>"
+  )
+  @as("AuditLogs")
+  auditLogs: organizationKubernetesAuditLogsConfiguration,
 }
 type members = array<member>
+@ocaml.doc("<p>Details about the Kubernetes user involved in a Kubernetes finding.</p>")
+type kubernetesUserDetails = {
+  @ocaml.doc("<p>The groups that include the user who called the Kubernetes API.</p>") @as("Groups")
+  groups: option<groups>,
+  @ocaml.doc("<p>The user ID of the user who called the Kubernetes API.</p>") @as("Uid")
+  uid: option<string_>,
+  @ocaml.doc("<p>The username of the user who called the Kubernetes API.</p>") @as("Username")
+  username: option<string_>,
+}
+@ocaml.doc("<p>Describes whether any Kubernetes logs will be enabled as a data source.</p>")
+type kubernetesConfigurationResult = {
+  @ocaml.doc("<p>Describes whether Kubernetes audit logs are enabled as a data source.</p>")
+  @as("AuditLogs")
+  auditLogs: kubernetesAuditLogsConfigurationResult,
+}
+@ocaml.doc("<p>Describes whether any Kubernetes data sources are enabled.</p>")
+type kubernetesConfiguration = {
+  @ocaml.doc("<p>The status of Kubernetes audit logs as a data source.</p>") @as("AuditLogs")
+  auditLogs: kubernetesAuditLogsConfiguration,
+}
 type invitations = array<invitation>
 @ocaml.doc("<p>Contains information about finding statistics.</p>")
 type findingStatistics = {
@@ -510,33 +610,6 @@ type findingStatistics = {
   countBySeverity: option<countBySeverity>,
 }
 type destinations = array<destination>
-@ocaml.doc("<p>Contains information on the status of data sources for the detector.</p>")
-type dataSourceConfigurationsResult = {
-  @ocaml.doc("<p>An object that contains information on the status of S3 Data event logs as a data
-      source.</p>")
-  @as("S3Logs")
-  s3Logs: s3LogsConfigurationResult,
-  @ocaml.doc("<p>An object that contains information on the status of VPC flow logs as a data
-      source.</p>")
-  @as("FlowLogs")
-  flowLogs: flowLogsConfigurationResult,
-  @ocaml.doc(
-    "<p>An object that contains information on the status of DNS logs as a data source.</p>"
-  )
-  @as("DNSLogs")
-  dnslogs: dnslogsConfigurationResult,
-  @ocaml.doc(
-    "<p>An object that contains information on the status of CloudTrail as a data source.</p>"
-  )
-  @as("CloudTrail")
-  cloudTrail: cloudTrailConfigurationResult,
-}
-@ocaml.doc("<p>Contains information about which data sources are enabled.</p>")
-type dataSourceConfigurations = {
-  @ocaml.doc("<p>Describes whether S3 data event logs are enabled as a data source.</p>")
-  @as("S3Logs")
-  s3Logs: option<s3LogsConfiguration>,
-}
 @ocaml.doc("<p>Contains information about the condition.</p>")
 type condition = {
   @ocaml.doc("<p>Represents a <i>less than or equal</i> condition to be applied to a single
@@ -613,6 +686,7 @@ type accountLevelPermissions = {
   blockPublicAccess: option<blockPublicAccess>,
 }
 type accountDetails = array<accountDetail>
+type volumes = array<volume>
 type usageResourceResultList = array<usageResourceResult>
 type usageDataSourceResultList = array<usageDataSourceResult>
 type usageAccountResultList = array<usageAccountResult>
@@ -634,6 +708,28 @@ type permissionConfiguration = {
   @ocaml.doc("<p>Contains information about the bucket level permissions for the S3 bucket.</p>")
   @as("BucketLevelPermissions")
   bucketLevelPermissions: option<bucketLevelPermissions>,
+}
+@ocaml.doc("<p>An object that contains information on which data sources are automatically enabled for
+      new members within the organization.</p>")
+type organizationDataSourceConfigurationsResult = {
+  @ocaml.doc("<p>Describes the configuration of Kubernetes data sources.</p>") @as("Kubernetes")
+  kubernetes: option<organizationKubernetesConfigurationResult>,
+  @ocaml.doc("<p>Describes whether S3 data event logs are enabled as a data source.</p>")
+  @as("S3Logs")
+  s3Logs: organizationS3LogsConfigurationResult,
+}
+@ocaml.doc("<p>An object that contains information on which data sources will be configured to be
+      automatically enabled for new members within the organization.</p>")
+type organizationDataSourceConfigurations = {
+  @ocaml.doc(
+    "<p>Describes the configuration of Kubernetes data sources for new members of the organization.</p>"
+  )
+  @as("Kubernetes")
+  kubernetes: option<organizationKubernetesConfiguration>,
+  @ocaml.doc("<p>Describes whether S3 data event logs are enabled for new members of the
+      organization.</p>")
+  @as("S3Logs")
+  s3Logs: option<organizationS3LogsConfiguration>,
 }
 @ocaml.doc("<p>Contains information about the elastic network interface of the EC2 instance.</p>")
 type networkInterface = {
@@ -676,27 +772,116 @@ type networkConnectionAction = {
   @as("Blocked")
   blocked: option<boolean_>,
 }
-@ocaml.doc("<p>Contains information on which data sources are enabled for a member account.</p>")
-type memberDataSourceConfiguration = {
-  @ocaml.doc("<p>Contains information on the status of data sources for the account.</p>")
-  @as("DataSources")
-  dataSources: dataSourceConfigurationsResult,
-  @ocaml.doc("<p>The account ID for the member account.</p>") @as("AccountId") accountId: accountId,
+@ocaml.doc("<p>Information about the Kubernetes API call action described in this finding.</p>")
+type kubernetesApiCallAction = {
+  @ocaml.doc("<p>Parameters related to the Kubernetes API call action.</p>") @as("Parameters")
+  parameters: option<string_>,
+  @ocaml.doc("<p>The resulting HTTP response code of the Kubernetes API call action.</p>")
+  @as("StatusCode")
+  statusCode: option<integer_>,
+  @as("RemoteIpDetails") remoteIpDetails: option<remoteIpDetails>,
+  @ocaml.doc("<p>The user agent of the caller of the Kubernetes API.</p>") @as("UserAgent")
+  userAgent: option<string_>,
+  @ocaml.doc(
+    "<p>The IP of the  Kubernetes API caller and the IPs of any proxies or load balancers between the caller and the API endpoint.</p>"
+  )
+  @as("SourceIps")
+  sourceIps: option<sourceIps>,
+  @ocaml.doc("<p>The Kubernetes API request HTTP verb.</p>") @as("Verb") verb: option<string_>,
+  @ocaml.doc("<p>The Kubernetes API request URI.</p>") @as("RequestUri")
+  requestUri: option<string_>,
+}
+@ocaml.doc("<p>Details about the EKS cluster involved in a Kubernetes finding.</p>")
+type eksClusterDetails = {
+  @ocaml.doc("<p>The timestamp when the EKS cluster was created.</p>") @as("CreatedAt")
+  createdAt: option<timestamp_>,
+  @ocaml.doc("<p>The EKS cluster tags.</p>") @as("Tags") tags: option<tags>,
+  @ocaml.doc("<p>The EKS cluster status.</p>") @as("Status") status: option<string_>,
+  @ocaml.doc("<p>The VPC ID to which the EKS cluster is attached.</p>") @as("VpcId")
+  vpcId: option<string_>,
+  @ocaml.doc("<p>EKS cluster ARN.</p>") @as("Arn") arn: option<string_>,
+  @ocaml.doc("<p>EKS cluster name.</p>") @as("Name") name: option<string_>,
+}
+@ocaml.doc("<p>Contains information on the status of data sources for the detector.</p>")
+type dataSourceConfigurationsResult = {
+  @ocaml.doc(
+    "<p>An object that contains information on the status of all Kubernetes data sources.</p>"
+  )
+  @as("Kubernetes")
+  kubernetes: option<kubernetesConfigurationResult>,
+  @ocaml.doc("<p>An object that contains information on the status of S3 Data event logs as a data
+      source.</p>")
+  @as("S3Logs")
+  s3Logs: s3LogsConfigurationResult,
+  @ocaml.doc("<p>An object that contains information on the status of VPC flow logs as a data
+      source.</p>")
+  @as("FlowLogs")
+  flowLogs: flowLogsConfigurationResult,
+  @ocaml.doc(
+    "<p>An object that contains information on the status of DNS logs as a data source.</p>"
+  )
+  @as("DNSLogs")
+  dnslogs: dnslogsConfigurationResult,
+  @ocaml.doc(
+    "<p>An object that contains information on the status of CloudTrail as a data source.</p>"
+  )
+  @as("CloudTrail")
+  cloudTrail: cloudTrailConfigurationResult,
+}
+@ocaml.doc("<p>Contains information about which data sources are enabled.</p>")
+type dataSourceConfigurations = {
+  @ocaml.doc("<p>Describes whether any Kubernetes logs are enabled as data sources.</p>")
+  @as("Kubernetes")
+  kubernetes: option<kubernetesConfiguration>,
+  @ocaml.doc("<p>Describes whether S3 data event logs are enabled as a data source.</p>")
+  @as("S3Logs")
+  s3Logs: option<s3LogsConfiguration>,
 }
 type criterion = Js.Dict.t<condition>
+@ocaml.doc("<p>Details of a container.</p>")
+type container = {
+  @ocaml.doc("<p>Container security context.</p>") @as("SecurityContext")
+  securityContext: option<securityContext>,
+  @ocaml.doc("<p>Container volume mounts.</p>") @as("VolumeMounts")
+  volumeMounts: option<volumeMounts>,
+  @ocaml.doc(
+    "<p>Part of the image name before the last slash. For example, imagePrefix for public.ecr.aws/amazonlinux/amazonlinux:latest would be public.ecr.aws/amazonlinux. If the image name is relative and does not have a slash, this field is empty.</p>"
+  )
+  @as("ImagePrefix")
+  imagePrefix: option<string_>,
+  @ocaml.doc("<p>Container image.</p>") @as("Image") image: option<string_>,
+  @ocaml.doc("<p>Container name.</p>") @as("Name") name: option<string_>,
+  @ocaml.doc("<p>Container ID.</p>") @as("Id") id: option<string_>,
+  @ocaml.doc(
+    "<p>The container runtime (such as, Docker or containerd) used to run the container.</p>"
+  )
+  @as("ContainerRuntime")
+  containerRuntime: option<string_>,
+}
 @ocaml.doc("<p>Contains information about the API action.</p>")
 type awsApiCallAction = {
-  @ocaml.doc("<p>The AWS service name whose API was invoked.</p>") @as("ServiceName")
+  @ocaml.doc(
+    "<p>The details of the Amazon Web Services account that made the API call. This field appears if the call was made from outside your account.</p>"
+  )
+  @as("RemoteAccountDetails")
+  remoteAccountDetails: option<remoteAccountDetails>,
+  @ocaml.doc("<p>The Amazon Web Services service name whose API was invoked.</p>")
+  @as("ServiceName")
   serviceName: option<string_>,
-  @ocaml.doc("<p>The remote IP information of the connection that initiated the AWS API call.</p>")
+  @ocaml.doc(
+    "<p>The remote IP information of the connection that initiated the Amazon Web Services API call.</p>"
+  )
   @as("RemoteIpDetails")
   remoteIpDetails: option<remoteIpDetails>,
-  @ocaml.doc("<p>The error code of the failed AWS API action.</p>") @as("ErrorCode")
+  @as("UserAgent") userAgent: option<string_>,
+  @ocaml.doc("<p>The error code of the failed Amazon Web Services API action.</p>") @as("ErrorCode")
   errorCode: option<string_>,
-  @ocaml.doc("<p>The domain information for the AWS API call.</p>") @as("DomainDetails")
+  @ocaml.doc("<p>The domain information for the Amazon Web Services API call.</p>")
+  @as("DomainDetails")
   domainDetails: option<domainDetails>,
-  @ocaml.doc("<p>The AWS API caller type.</p>") @as("CallerType") callerType: option<string_>,
-  @ocaml.doc("<p>The AWS API name.</p>") @as("Api") api: option<string_>,
+  @ocaml.doc("<p>The Amazon Web Services API caller type.</p>") @as("CallerType")
+  callerType: option<string_>,
+  @ocaml.doc("<p>The Amazon Web Services API name.</p>") @as("Api") api: option<string_>,
 }
 @ocaml.doc("<p>Contains the result of GuardDuty usage. If a UsageStatisticType is provided the result for
       other types will be null. </p>")
@@ -724,7 +909,13 @@ type publicAccess = {
 }
 type portProbeDetails = array<portProbeDetail>
 type networkInterfaces = array<networkInterface>
-type memberDataSourceConfigurations = array<memberDataSourceConfiguration>
+@ocaml.doc("<p>Contains information on which data sources are enabled for a member account.</p>")
+type memberDataSourceConfiguration = {
+  @ocaml.doc("<p>Contains information on the status of data sources for the account.</p>")
+  @as("DataSources")
+  dataSources: dataSourceConfigurationsResult,
+  @ocaml.doc("<p>The account ID for the member account.</p>") @as("AccountId") accountId: accountId,
+}
 @ocaml.doc("<p>Contains information about the criteria used for querying findings.</p>")
 type findingCriteria = {
   @ocaml.doc("<p>Represents a map of finding properties that match specified conditions and values when
@@ -738,6 +929,7 @@ type evidence = {
   @as("ThreatIntelligenceDetails")
   threatIntelligenceDetails: option<threatIntelligenceDetails>,
 }
+type containers = array<container>
 @ocaml.doc("<p>Contains information on the S3 bucket.</p>")
 type s3BucketDetail = {
   @ocaml.doc("<p>Describes the public access policies that apply to the S3 bucket.</p>")
@@ -766,6 +958,25 @@ type portProbeAction = {
   @as("Blocked")
   blocked: option<boolean_>,
 }
+type memberDataSourceConfigurations = array<memberDataSourceConfiguration>
+@ocaml.doc("<p>Details about the Kubernetes workload involved in a Kubernetes finding.</p>")
+type kubernetesWorkloadDetails = {
+  @ocaml.doc("<p>Volumes used by the Kubernetes workload.</p>") @as("Volumes")
+  volumes: option<volumes>,
+  @ocaml.doc("<p>Containers running as part of the Kubernetes workload.</p>") @as("Containers")
+  containers: option<containers>,
+  @ocaml.doc(
+    "<p>Whether the hostNetwork flag is enabled for the pods included in the workload.</p>"
+  )
+  @as("HostNetwork")
+  hostNetwork: option<boolean_>,
+  @ocaml.doc("<p>Kubernetes namespace that the workload is part of.</p>") @as("Namespace")
+  namespace: option<string_>,
+  @ocaml.doc("<p>Kubernetes workload ID.</p>") @as("Uid") uid: option<string_>,
+  @ocaml.doc("<p>Kubernetes workload type (e.g. Pod, Deployment, etc.).</p>") @as("Type")
+  type_: option<string_>,
+  @ocaml.doc("<p>Kubernetes workload name.</p>") @as("Name") name: option<string_>,
+}
 @ocaml.doc("<p>Contains information about the details of an instance.</p>")
 type instanceDetails = {
   @ocaml.doc("<p>The tags of the EC2 instance.</p>") @as("Tags") tags: option<tags>,
@@ -777,7 +988,7 @@ type instanceDetails = {
   networkInterfaces: option<networkInterfaces>,
   @ocaml.doc("<p>The launch time of the EC2 instance.</p>") @as("LaunchTime")
   launchTime: option<string_>,
-  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the AWS Outpost. Only applicable to AWS Outposts
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the Amazon Web Services Outpost. Only applicable to Amazon Web Services Outposts
       instances.</p>")
   @as("OutpostArn")
   outpostArn: option<string_>,
@@ -795,8 +1006,22 @@ type instanceDetails = {
   availabilityZone: option<string_>,
 }
 type s3BucketDetails = array<s3BucketDetail>
+@ocaml.doc(
+  "<p>Details about Kubernetes resources such as a Kubernetes user or workload resource involved in a Kubernetes finding.</p>"
+)
+type kubernetesDetails = {
+  @ocaml.doc("<p>Details about the Kubernetes workload involved in a Kubernetes finding.</p>")
+  @as("KubernetesWorkloadDetails")
+  kubernetesWorkloadDetails: option<kubernetesWorkloadDetails>,
+  @ocaml.doc("<p>Details about the Kubernetes user involved in a Kubernetes finding.</p>")
+  @as("KubernetesUserDetails")
+  kubernetesUserDetails: option<kubernetesUserDetails>,
+}
 @ocaml.doc("<p>Contains information about actions.</p>")
 type action = {
+  @ocaml.doc("<p>Information about the Kubernetes API call action described in this finding.</p>")
+  @as("KubernetesApiCallAction")
+  kubernetesApiCallAction: option<kubernetesApiCallAction>,
   @ocaml.doc("<p>Information about the PORT_PROBE action described in this finding.</p>")
   @as("PortProbeAction")
   portProbeAction: option<portProbeAction>,
@@ -816,7 +1041,9 @@ type action = {
 type service = {
   @ocaml.doc("<p>Feedback that was submitted about the finding.</p>") @as("UserFeedback")
   userFeedback: option<string_>,
-  @ocaml.doc("<p>The name of the AWS service (GuardDuty) that generated a finding.</p>")
+  @ocaml.doc(
+    "<p>The name of the Amazon Web Services service (GuardDuty) that generated a finding.</p>"
+  )
   @as("ServiceName")
   serviceName: option<string_>,
   @ocaml.doc("<p>The resource role information for this finding.</p>") @as("ResourceRole")
@@ -840,10 +1067,19 @@ type service = {
   @ocaml.doc("<p>Information about the activity that is described in a finding.</p>") @as("Action")
   action: option<action>,
 }
-@ocaml.doc("<p>Contains information about the AWS resource associated with the activity that prompted
+@ocaml.doc("<p>Contains information about the Amazon Web Services resource associated with the activity that prompted
       GuardDuty to generate a finding.</p>")
 type resource = {
-  @ocaml.doc("<p>The type of AWS resource.</p>") @as("ResourceType") resourceType: option<string_>,
+  @ocaml.doc("<p>The type of Amazon Web Services resource.</p>") @as("ResourceType")
+  resourceType: option<string_>,
+  @ocaml.doc(
+    "<p>Details about the Kubernetes user and workload involved in a Kubernetes finding.</p>"
+  )
+  @as("KubernetesDetails")
+  kubernetesDetails: option<kubernetesDetails>,
+  @ocaml.doc("<p>Details about the EKS cluster involved in a Kubernetes finding.</p>")
+  @as("EksClusterDetails")
+  eksClusterDetails: option<eksClusterDetails>,
   @ocaml.doc("<p>The information about the EC2 instance associated with the activity that prompted
       GuardDuty to generate a finding.</p>")
   @as("InstanceDetails")
@@ -883,17 +1119,17 @@ type finding = {
 }
 type findings = array<finding>
 @ocaml.doc("<p>Amazon GuardDuty is a continuous security monitoring service that analyzes and processes
-      the following data sources: VPC Flow Logs, AWS CloudTrail event logs, and DNS logs. It uses
+      the following data sources: VPC Flow Logs, Amazon Web Services CloudTrail event logs, and DNS logs. It uses
       threat intelligence feeds (such as lists of malicious IPs and domains) and machine learning to
-      identify unexpected, potentially unauthorized, and malicious activity within your AWS
+      identify unexpected, potentially unauthorized, and malicious activity within your Amazon Web Services
       environment. This can include issues like escalations of privileges, uses of exposed
       credentials, or communication with malicious IPs, URLs, or domains. For example, GuardDuty can
       detect compromised EC2 instances that serve malware or mine bitcoin. </p>
-         <p>GuardDuty also monitors AWS account access behavior for signs of compromise. Some examples
+         <p>GuardDuty also monitors Amazon Web Services account access behavior for signs of compromise. Some examples
       of this are unauthorized infrastructure deployments such as EC2 instances deployed in a Region
       that has never been used, or unusual API calls like a password policy change to reduce
       password strength. </p>
-         <p>GuardDuty informs you of the status of your AWS environment by producing security findings
+         <p>GuardDuty informs you of the status of your Amazon Web Services environment by producing security findings
       that you can view in the GuardDuty console or through Amazon CloudWatch events. For more
       information, see the <i>
                <a href=\"https://docs.aws.amazon.com/guardduty/latest/ug/what-is-guardduty.html\">Amazon
@@ -920,7 +1156,7 @@ module UpdateThreatIntelSet = {
     @as("DetectorId")
     detectorId: detectorId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-guardduty") @new
   external new: request => t = "UpdateThreatIntelSetCommand"
   let make = (~threatIntelSetId, ~detectorId, ~activate=?, ~location=?, ~name=?, ()) =>
@@ -942,9 +1178,7 @@ module UpdateIPSet = {
     )
     @as("Activate")
     activate: option<boolean_>,
-    @ocaml.doc("<p>The updated URI of the file that contains the IPSet. For example:
-      https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.</p>")
-    @as("Location")
+    @ocaml.doc("<p>The updated URI of the file that contains the IPSet. </p>") @as("Location")
     location: option<location>,
     @ocaml.doc("<p>The unique ID that specifies the IPSet that you want to update.</p>") @as("Name")
     name: option<name>,
@@ -957,7 +1191,7 @@ module UpdateIPSet = {
     @as("DetectorId")
     detectorId: detectorId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-guardduty") @new external new: request => t = "UpdateIPSetCommand"
   let make = (~ipSetId, ~detectorId, ~activate=?, ~location=?, ~name=?, ()) =>
     new({
@@ -972,25 +1206,26 @@ module UpdateIPSet = {
 
 module GetInvitationsCount = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc("<p>The number of received invitations.</p>") @as("InvitationsCount")
     invitationsCount: option<integer_>,
   }
-  @module("@aws-sdk/client-guardduty") @new external new: unit => t = "GetInvitationsCountCommand"
-  let make = () => new()
+  @module("@aws-sdk/client-guardduty") @new
+  external new: request => t = "GetInvitationsCountCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module EnableOrganizationAdminAccount = {
   type t
   type request = {
-    @ocaml.doc("<p>The AWS Account ID for the organization account to be enabled as a GuardDuty delegated
+    @ocaml.doc("<p>The Amazon Web Services Account ID for the organization account to be enabled as a GuardDuty delegated
       administrator.</p>")
     @as("AdminAccountId")
     adminAccountId: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-guardduty") @new
   external new: request => t = "EnableOrganizationAdminAccountCommand"
   let make = (~adminAccountId, ()) => new({adminAccountId: adminAccountId})
@@ -1004,7 +1239,7 @@ module DisassociateFromMasterAccount = {
     @as("DetectorId")
     detectorId: detectorId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-guardduty") @new
   external new: request => t = "DisassociateFromMasterAccountCommand"
   let make = (~detectorId, ()) => new({detectorId: detectorId})
@@ -1014,12 +1249,12 @@ module DisassociateFromMasterAccount = {
 module DisableOrganizationAdminAccount = {
   type t
   type request = {
-    @ocaml.doc("<p>The AWS Account ID for the organizations account to be disabled as a GuardDuty delegated
+    @ocaml.doc("<p>The Amazon Web Services Account ID for the organizations account to be disabled as a GuardDuty delegated
       administrator.</p>")
     @as("AdminAccountId")
     adminAccountId: string_,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-guardduty") @new
   external new: request => t = "DisableOrganizationAdminAccountCommand"
   let make = (~adminAccountId, ()) => new({adminAccountId: adminAccountId})
@@ -1036,7 +1271,7 @@ module DeleteThreatIntelSet = {
     @as("DetectorId")
     detectorId: detectorId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-guardduty") @new
   external new: request => t = "DeleteThreatIntelSetCommand"
   let make = (~threatIntelSetId, ~detectorId, ()) =>
@@ -1055,7 +1290,7 @@ module DeletePublishingDestination = {
     @as("DetectorId")
     detectorId: detectorId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-guardduty") @new
   external new: request => t = "DeletePublishingDestinationCommand"
   let make = (~destinationId, ~detectorId, ()) =>
@@ -1070,7 +1305,7 @@ module DeleteIPSet = {
     @ocaml.doc("<p>The unique ID of the detector associated with the IPSet.</p>") @as("DetectorId")
     detectorId: detectorId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-guardduty") @new external new: request => t = "DeleteIPSetCommand"
   let make = (~ipSetId, ~detectorId, ()) => new({ipSetId: ipSetId, detectorId: detectorId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1085,7 +1320,7 @@ module DeleteFilter = {
     @as("DetectorId")
     detectorId: detectorId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-guardduty") @new external new: request => t = "DeleteFilterCommand"
   let make = (~filterName, ~detectorId, ()) => new({filterName: filterName, detectorId: detectorId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1097,7 +1332,7 @@ module DeleteDetector = {
     @ocaml.doc("<p>The unique ID of the detector that you want to delete.</p>") @as("DetectorId")
     detectorId: detectorId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-guardduty") @new external new: request => t = "DeleteDetectorCommand"
   let make = (~detectorId, ()) => new({detectorId: detectorId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1120,7 +1355,7 @@ module AcceptInvitation = {
     @as("DetectorId")
     detectorId: detectorId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-guardduty") @new external new: request => t = "AcceptInvitationCommand"
   let make = (~invitationId, ~masterId, ~detectorId, ()) =>
     new({invitationId: invitationId, masterId: masterId, detectorId: detectorId})
@@ -1142,7 +1377,7 @@ module UpdatePublishingDestination = {
     @as("DetectorId")
     detectorId: detectorId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-guardduty") @new
   external new: request => t = "UpdatePublishingDestinationCommand"
   let make = (~destinationId, ~detectorId, ~destinationProperties=?, ()) =>
@@ -1167,7 +1402,7 @@ module UpdateFindingsFeedback = {
     @as("DetectorId")
     detectorId: detectorId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-guardduty") @new
   external new: request => t = "UpdateFindingsFeedbackCommand"
   let make = (~feedback, ~findingIds, ~detectorId, ~comments=?, ()) =>
@@ -1184,7 +1419,7 @@ module UntagResource = {
     @as("ResourceArn")
     resourceArn: guardDutyArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-guardduty") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1199,7 +1434,7 @@ module UnarchiveFindings = {
     @as("DetectorId")
     detectorId: detectorId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-guardduty") @new external new: request => t = "UnarchiveFindingsCommand"
   let make = (~findingIds, ~detectorId, ()) => new({findingIds: findingIds, detectorId: detectorId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1215,7 +1450,7 @@ module TagResource = {
     @as("ResourceArn")
     resourceArn: guardDutyArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-guardduty") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1370,9 +1605,7 @@ module GetThreatIntelSet = {
     @ocaml.doc("<p>The tags of the threat list resource.</p>") @as("Tags") tags: option<tagMap>,
     @ocaml.doc("<p>The status of threatIntelSet file uploaded.</p>") @as("Status")
     status: threatIntelSetStatus,
-    @ocaml.doc("<p>The URI of the file that contains the ThreatIntelSet. For example:
-      https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.</p>")
-    @as("Location")
+    @ocaml.doc("<p>The URI of the file that contains the ThreatIntelSet. </p>") @as("Location")
     location: location,
     @ocaml.doc("<p>The format of the threatIntelSet.</p>") @as("Format")
     format: threatIntelSetFormat,
@@ -1414,9 +1647,7 @@ module GetIPSet = {
     @ocaml.doc("<p>The tags of the IPSet resource.</p>") @as("Tags") tags: option<tagMap>,
     @ocaml.doc("<p>The status of IPSet file that was uploaded.</p>") @as("Status")
     status: ipSetStatus,
-    @ocaml.doc("<p>The URI of the file that contains the IPSet. For example:
-      https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.</p>")
-    @as("Location")
+    @ocaml.doc("<p>The URI of the file that contains the IPSet.</p>") @as("Location")
     location: location,
     @ocaml.doc("<p>The format of the file that contains the IPSet.</p>") @as("Format")
     format: ipSetFormat,
@@ -1473,9 +1704,7 @@ module CreateThreatIntelSet = {
       ThreatIntelSet.</p>")
     @as("Activate")
     activate: boolean_,
-    @ocaml.doc("<p>The URI of the file that contains the ThreatIntelSet. For example:
-      https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.</p>")
-    @as("Location")
+    @ocaml.doc("<p>The URI of the file that contains the ThreatIntelSet. </p>") @as("Location")
     location: location,
     @ocaml.doc("<p>The format of the file that contains the ThreatIntelSet.</p>") @as("Format")
     format: threatIntelSetFormat,
@@ -1515,7 +1744,7 @@ module CreateSampleFindings = {
     @ocaml.doc("<p>The ID of the detector to create sample findings for.</p>") @as("DetectorId")
     detectorId: detectorId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-guardduty") @new
   external new: request => t = "CreateSampleFindingsCommand"
   let make = (~detectorId, ~findingTypes=?, ()) =>
@@ -1569,9 +1798,7 @@ module CreateIPSet = {
       IPSet.</p>")
     @as("Activate")
     activate: boolean_,
-    @ocaml.doc("<p>The URI of the file that contains the IPSet. For example:
-      https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.</p>")
-    @as("Location")
+    @ocaml.doc("<p>The URI of the file that contains the IPSet. </p>") @as("Location")
     location: location,
     @ocaml.doc("<p>The format of the file that contains the IPSet.</p>") @as("Format")
     format: ipSetFormat,
@@ -1611,80 +1838,9 @@ module ArchiveFindings = {
     @as("DetectorId")
     detectorId: detectorId,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-guardduty") @new external new: request => t = "ArchiveFindingsCommand"
   let make = (~findingIds, ~detectorId, ()) => new({findingIds: findingIds, detectorId: detectorId})
-  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
-}
-
-module UpdateOrganizationConfiguration = {
-  type t
-  type request = {
-    @ocaml.doc("<p>Describes which data sources will be updated.</p>") @as("DataSources")
-    dataSources: option<organizationDataSourceConfigurations>,
-    @ocaml.doc(
-      "<p>Indicates whether to automatically enable member accounts in the organization.</p>"
-    )
-    @as("AutoEnable")
-    autoEnable: boolean_,
-    @ocaml.doc("<p>The ID of the detector to update the delegated administrator for.</p>")
-    @as("DetectorId")
-    detectorId: detectorId,
-  }
-
-  @module("@aws-sdk/client-guardduty") @new
-  external new: request => t = "UpdateOrganizationConfigurationCommand"
-  let make = (~autoEnable, ~detectorId, ~dataSources=?, ()) =>
-    new({dataSources: dataSources, autoEnable: autoEnable, detectorId: detectorId})
-  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
-}
-
-module UpdateMemberDetectors = {
-  type t
-  type request = {
-    @ocaml.doc("<p>Describes which data sources will be updated.</p>") @as("DataSources")
-    dataSources: option<dataSourceConfigurations>,
-    @ocaml.doc("<p>A list of member account IDs to be updated.</p>") @as("AccountIds")
-    accountIds: accountIds,
-    @ocaml.doc("<p>The detector ID of the administrator account.</p>") @as("DetectorId")
-    detectorId: detectorId,
-  }
-  type response = {
-    @ocaml.doc("<p>A list of member account IDs that were unable to be processed along with an explanation
-      for why they were not processed.</p>")
-    @as("UnprocessedAccounts")
-    unprocessedAccounts: unprocessedAccounts,
-  }
-  @module("@aws-sdk/client-guardduty") @new
-  external new: request => t = "UpdateMemberDetectorsCommand"
-  let make = (~accountIds, ~detectorId, ~dataSources=?, ()) =>
-    new({dataSources: dataSources, accountIds: accountIds, detectorId: detectorId})
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
-module UpdateDetector = {
-  type t
-  type request = {
-    @ocaml.doc("<p>Describes which data sources will be updated.</p>") @as("DataSources")
-    dataSources: option<dataSourceConfigurations>,
-    @ocaml.doc("<p>An enum value that specifies how frequently findings are exported, such as to CloudWatch
-      Events.</p>")
-    @as("FindingPublishingFrequency")
-    findingPublishingFrequency: option<findingPublishingFrequency>,
-    @ocaml.doc("<p>Specifies whether the detector is enabled or not enabled.</p>") @as("Enable")
-    enable: option<boolean_>,
-    @ocaml.doc("<p>The unique ID of the detector to update.</p>") @as("DetectorId")
-    detectorId: detectorId,
-  }
-
-  @module("@aws-sdk/client-guardduty") @new external new: request => t = "UpdateDetectorCommand"
-  let make = (~detectorId, ~dataSources=?, ~findingPublishingFrequency=?, ~enable=?, ()) =>
-    new({
-      dataSources: dataSources,
-      findingPublishingFrequency: findingPublishingFrequency,
-      enable: enable,
-      detectorId: detectorId,
-    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
@@ -1927,31 +2083,6 @@ module GetMembers = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
-module GetDetector = {
-  type t
-  type request = {
-    @ocaml.doc("<p>The unique ID of the detector that you want to get.</p>") @as("DetectorId")
-    detectorId: detectorId,
-  }
-  type response = {
-    @ocaml.doc("<p>The tags of the detector resource.</p>") @as("Tags") tags: option<tagMap>,
-    @ocaml.doc("<p>Describes which data sources are enabled for the detector.</p>")
-    @as("DataSources")
-    dataSources: option<dataSourceConfigurationsResult>,
-    @ocaml.doc("<p>The last-updated timestamp for the detector.</p>") @as("UpdatedAt")
-    updatedAt: option<string_>,
-    @ocaml.doc("<p>The detector status.</p>") @as("Status") status: detectorStatus,
-    @ocaml.doc("<p>The GuardDuty service role.</p>") @as("ServiceRole") serviceRole: string_,
-    @ocaml.doc("<p>The publishing frequency of the finding.</p>") @as("FindingPublishingFrequency")
-    findingPublishingFrequency: option<findingPublishingFrequency>,
-    @ocaml.doc("<p>The timestamp of when the detector was created.</p>") @as("CreatedAt")
-    createdAt: option<string_>,
-  }
-  @module("@aws-sdk/client-guardduty") @new external new: request => t = "GetDetectorCommand"
-  let make = (~detectorId, ()) => new({detectorId: detectorId})
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
 module DisassociateMembers = {
   type t
   type request = {
@@ -1973,34 +2104,6 @@ module DisassociateMembers = {
   @module("@aws-sdk/client-guardduty") @new
   external new: request => t = "DisassociateMembersCommand"
   let make = (~accountIds, ~detectorId, ()) => new({accountIds: accountIds, detectorId: detectorId})
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
-module DescribeOrganizationConfiguration = {
-  type t
-  type request = {
-    @ocaml.doc("<p>The ID of the detector to retrieve information about the delegated administrator
-      from.</p>")
-    @as("DetectorId")
-    detectorId: detectorId,
-  }
-  type response = {
-    @ocaml.doc("<p>Describes which data sources are enabled automatically for member
-      accounts.</p>")
-    @as("DataSources")
-    dataSources: option<organizationDataSourceConfigurationsResult>,
-    @ocaml.doc("<p>Indicates whether the maximum number of allowed member accounts are already associated
-      with the delegated administrator account for your organization.</p>")
-    @as("MemberAccountLimitReached")
-    memberAccountLimitReached: boolean_,
-    @ocaml.doc("<p>Indicates whether GuardDuty is automatically enabled for accounts added to the
-      organization.</p>")
-    @as("AutoEnable")
-    autoEnable: boolean_,
-  }
-  @module("@aws-sdk/client-guardduty") @new
-  external new: request => t = "DescribeOrganizationConfigurationCommand"
-  let make = (~detectorId, ()) => new({detectorId: detectorId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -2029,7 +2132,7 @@ module DeleteMembers = {
 module DeleteInvitations = {
   type t
   type request = {
-    @ocaml.doc("<p>A list of account IDs of the AWS accounts that sent invitations to the current member
+    @ocaml.doc("<p>A list of account IDs of the Amazon Web Services accounts that sent invitations to the current member
       account that you want to delete invitations from.</p>")
     @as("AccountIds")
     accountIds: accountIds,
@@ -2048,7 +2151,7 @@ module DeleteInvitations = {
 module DeclineInvitations = {
   type t
   type request = {
-    @ocaml.doc("<p>A list of account IDs of the AWS accounts that sent invitations to the current member
+    @ocaml.doc("<p>A list of account IDs of the Amazon Web Services accounts that sent invitations to the current member
       account that you want to decline invitations from.</p>")
     @as("AccountIds")
     accountIds: accountIds,
@@ -2085,6 +2188,130 @@ module CreateMembers = {
   @module("@aws-sdk/client-guardduty") @new external new: request => t = "CreateMembersCommand"
   let make = (~accountDetails, ~detectorId, ()) =>
     new({accountDetails: accountDetails, detectorId: detectorId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module UpdateOrganizationConfiguration = {
+  type t
+  type request = {
+    @ocaml.doc("<p>Describes which data sources will be updated.</p>") @as("DataSources")
+    dataSources: option<organizationDataSourceConfigurations>,
+    @ocaml.doc(
+      "<p>Indicates whether to automatically enable member accounts in the organization.</p>"
+    )
+    @as("AutoEnable")
+    autoEnable: boolean_,
+    @ocaml.doc("<p>The ID of the detector to update the delegated administrator for.</p>")
+    @as("DetectorId")
+    detectorId: detectorId,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-guardduty") @new
+  external new: request => t = "UpdateOrganizationConfigurationCommand"
+  let make = (~autoEnable, ~detectorId, ~dataSources=?, ()) =>
+    new({dataSources: dataSources, autoEnable: autoEnable, detectorId: detectorId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module UpdateMemberDetectors = {
+  type t
+  type request = {
+    @ocaml.doc("<p>Describes which data sources will be updated.</p>") @as("DataSources")
+    dataSources: option<dataSourceConfigurations>,
+    @ocaml.doc("<p>A list of member account IDs to be updated.</p>") @as("AccountIds")
+    accountIds: accountIds,
+    @ocaml.doc("<p>The detector ID of the administrator account.</p>") @as("DetectorId")
+    detectorId: detectorId,
+  }
+  type response = {
+    @ocaml.doc("<p>A list of member account IDs that were unable to be processed along with an explanation
+      for why they were not processed.</p>")
+    @as("UnprocessedAccounts")
+    unprocessedAccounts: unprocessedAccounts,
+  }
+  @module("@aws-sdk/client-guardduty") @new
+  external new: request => t = "UpdateMemberDetectorsCommand"
+  let make = (~accountIds, ~detectorId, ~dataSources=?, ()) =>
+    new({dataSources: dataSources, accountIds: accountIds, detectorId: detectorId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module UpdateDetector = {
+  type t
+  type request = {
+    @ocaml.doc("<p>Describes which data sources will be updated.</p>") @as("DataSources")
+    dataSources: option<dataSourceConfigurations>,
+    @ocaml.doc("<p>An enum value that specifies how frequently findings are exported, such as to CloudWatch
+      Events.</p>")
+    @as("FindingPublishingFrequency")
+    findingPublishingFrequency: option<findingPublishingFrequency>,
+    @ocaml.doc("<p>Specifies whether the detector is enabled or not enabled.</p>") @as("Enable")
+    enable: option<boolean_>,
+    @ocaml.doc("<p>The unique ID of the detector to update.</p>") @as("DetectorId")
+    detectorId: detectorId,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-guardduty") @new external new: request => t = "UpdateDetectorCommand"
+  let make = (~detectorId, ~dataSources=?, ~findingPublishingFrequency=?, ~enable=?, ()) =>
+    new({
+      dataSources: dataSources,
+      findingPublishingFrequency: findingPublishingFrequency,
+      enable: enable,
+      detectorId: detectorId,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
+module GetDetector = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The unique ID of the detector that you want to get.</p>") @as("DetectorId")
+    detectorId: detectorId,
+  }
+  type response = {
+    @ocaml.doc("<p>The tags of the detector resource.</p>") @as("Tags") tags: option<tagMap>,
+    @ocaml.doc("<p>Describes which data sources are enabled for the detector.</p>")
+    @as("DataSources")
+    dataSources: option<dataSourceConfigurationsResult>,
+    @ocaml.doc("<p>The last-updated timestamp for the detector.</p>") @as("UpdatedAt")
+    updatedAt: option<string_>,
+    @ocaml.doc("<p>The detector status.</p>") @as("Status") status: detectorStatus,
+    @ocaml.doc("<p>The GuardDuty service role.</p>") @as("ServiceRole") serviceRole: string_,
+    @ocaml.doc("<p>The publishing frequency of the finding.</p>") @as("FindingPublishingFrequency")
+    findingPublishingFrequency: option<findingPublishingFrequency>,
+    @ocaml.doc("<p>The timestamp of when the detector was created.</p>") @as("CreatedAt")
+    createdAt: option<string_>,
+  }
+  @module("@aws-sdk/client-guardduty") @new external new: request => t = "GetDetectorCommand"
+  let make = (~detectorId, ()) => new({detectorId: detectorId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module DescribeOrganizationConfiguration = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The ID of the detector to retrieve information about the delegated administrator
+      from.</p>")
+    @as("DetectorId")
+    detectorId: detectorId,
+  }
+  type response = {
+    @ocaml.doc("<p>Describes which data sources are enabled automatically for member
+      accounts.</p>")
+    @as("DataSources")
+    dataSources: option<organizationDataSourceConfigurationsResult>,
+    @ocaml.doc("<p>Indicates whether the maximum number of allowed member accounts are already associated
+      with the delegated administrator account for your organization.</p>")
+    @as("MemberAccountLimitReached")
+    memberAccountLimitReached: boolean_,
+    @ocaml.doc("<p>Indicates whether GuardDuty is automatically enabled for accounts added to the
+      organization.</p>")
+    @as("AutoEnable")
+    autoEnable: boolean_,
+  }
+  @module("@aws-sdk/client-guardduty") @new
+  external new: request => t = "DescribeOrganizationConfigurationCommand"
+  let make = (~detectorId, ()) => new({detectorId: detectorId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -2302,9 +2529,6 @@ module ListFindings = {
                <p>service.action.networkConnectionAction.protocol</p>
             </li>
             <li>
-               <p>service.action.networkConnectionAction.remoteIpDetails.city.cityName</p>
-            </li>
-            <li>
                <p>service.action.networkConnectionAction.remoteIpDetails.country.countryName</p>
             </li>
             <li>
@@ -2421,30 +2645,6 @@ module GetUsageStatistics = {
       usageStatisticType: usageStatisticType,
       detectorId: detectorId,
     })
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
-module GetMemberDetectors = {
-  type t
-  type request = {
-    @ocaml.doc("<p>The account ID of the member account.</p>") @as("AccountIds")
-    accountIds: accountIds,
-    @ocaml.doc("<p>The detector ID for the administrator account.</p>") @as("DetectorId")
-    detectorId: detectorId,
-  }
-  type response = {
-    @ocaml.doc("<p>A list of member account IDs that were unable to be processed along with an explanation
-      for why they were not processed.</p>")
-    @as("UnprocessedAccounts")
-    unprocessedAccounts: unprocessedAccounts,
-    @ocaml.doc(
-      "<p>An object that describes which data sources are enabled for a member account.</p>"
-    )
-    @as("MemberDataSourceConfigurations")
-    memberDataSourceConfigurations: memberDataSourceConfigurations,
-  }
-  @module("@aws-sdk/client-guardduty") @new external new: request => t = "GetMemberDetectorsCommand"
-  let make = (~accountIds, ~detectorId, ()) => new({accountIds: accountIds, detectorId: detectorId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -2657,6 +2857,21 @@ module CreateFilter = {
                <p>service.additionalInfo.threatListName</p>
             </li>
             <li>
+               <p>resource.s3BucketDetails.publicAccess.effectivePermissions</p>
+            </li>
+            <li>
+               <p>resource.s3BucketDetails.name</p>
+            </li>
+            <li>
+               <p>resource.s3BucketDetails.tags.key</p>
+            </li>
+            <li>
+               <p>resource.s3BucketDetails.tags.value</p>
+            </li>
+            <li>
+               <p>resource.s3BucketDetails.type</p>
+            </li>
+            <li>
                <p>service.archived</p>
                <p>When this attribute is set to TRUE, only archived findings are listed. When it's set
           to FALSE, only unarchived findings are listed. When this attribute is not set, all
@@ -2725,6 +2940,30 @@ module CreateFilter = {
       name: name,
       detectorId: detectorId,
     })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module GetMemberDetectors = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The account ID of the member account.</p>") @as("AccountIds")
+    accountIds: accountIds,
+    @ocaml.doc("<p>The detector ID for the administrator account.</p>") @as("DetectorId")
+    detectorId: detectorId,
+  }
+  type response = {
+    @ocaml.doc("<p>A list of member account IDs that were unable to be processed along with an explanation
+      for why they were not processed.</p>")
+    @as("UnprocessedAccounts")
+    unprocessedAccounts: unprocessedAccounts,
+    @ocaml.doc(
+      "<p>An object that describes which data sources are enabled for a member account.</p>"
+    )
+    @as("MemberDataSourceConfigurations")
+    memberDataSourceConfigurations: memberDataSourceConfigurations,
+  }
+  @module("@aws-sdk/client-guardduty") @new external new: request => t = "GetMemberDetectorsCommand"
+  let make = (~accountIds, ~detectorId, ()) => new({accountIds: accountIds, detectorId: detectorId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 

@@ -39,7 +39,7 @@ module PostToConnection = {
     @as("Data")
     data: data,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "PostToConnectionCommand"
   let make = (~connectionId, ~data, ()) => new({connectionId: connectionId, data: data})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -48,7 +48,7 @@ module PostToConnection = {
 module DeleteConnection = {
   type t
   type request = {@as("ConnectionId") connectionId: __string}
-
+  type response = {.}
   @module("@aws-sdk/client-apigateway") @new external new: request => t = "DeleteConnectionCommand"
   let make = (~connectionId, ()) => new({connectionId: connectionId})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"

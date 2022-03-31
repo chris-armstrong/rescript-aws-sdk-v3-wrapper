@@ -19,6 +19,7 @@ type videoJobStatus = [
   | @as("SUCCEEDED") #SUCCEEDED
   | @as("IN_PROGRESS") #IN_PROGRESS
 ]
+type videoColorRange = [@as("LIMITED") #LIMITED | @as("FULL") #FULL]
 type versionName = string
 type url = string
 type ulong = float
@@ -27,6 +28,10 @@ type timestamp_ = float
 type timecode = string
 type textTypes = [@as("WORD") #WORD | @as("LINE") #LINE]
 type technicalCueType = [
+  | @as("Content") #Content
+  | @as("Slate") #Slate
+  | @as("StudioLogo") #StudioLogo
+  | @as("OpeningCredits") #OpeningCredits
   | @as("BlackFrames") #BlackFrames
   | @as("EndCredits") #EndCredits
   | @as("ColorBars") #ColorBars
@@ -64,6 +69,7 @@ type reason = [
   | @as("EXTREME_POSE") #EXTREME_POSE
   | @as("EXCEEDS_MAX_FACES") #EXCEEDS_MAX_FACES
 ]
+type queryString = string
 type qualityFilter = [
   | @as("HIGH") #HIGH
   | @as("MEDIUM") #MEDIUM
@@ -108,9 +114,13 @@ type orientationCorrection = [
   | @as("ROTATE_90") #ROTATE_90
   | @as("ROTATE_0") #ROTATE_0
 ]
+type minCoveragePercentage = float
 type maxResults = int
+type maxPixelThreshold = float
 type maxFacesToIndex = int
 type maxFaces = int
+type listDatasetLabelsPageSize = int
+type listDatasetEntriesPageSize = int
 type landmarkType = [
   | @as("upperJawlineRight") #UpperJawlineRight
   | @as("midJawlineRight") #MidJawlineRight
@@ -144,17 +154,28 @@ type landmarkType = [
   | @as("eyeLeft") #EyeLeft
 ]
 type labelDetectionSortBy = [@as("TIMESTAMP") #TIMESTAMP | @as("NAME") #NAME]
+@ocaml.doc("<p>A list of enum string of possible gender values that Celebrity returns.</p>")
+type knownGenderType = [
+  | @as("Unlisted") #Unlisted
+  | @as("Nonbinary") #Nonbinary
+  | @as("Female") #Female
+  | @as("Male") #Male
+]
 type kmsKeyId = string
 type kinesisVideoArn = string
 type kinesisDataArn = string
 type jobTag = string
 type jobId = string
+type isLabeled = bool
 type inferenceUnits = int
+type indexFacesModelVersion = string
 type imageId = string
 type imageBlob = NodeJs.Buffer.t
 type humanLoopName = string
 type humanLoopArn = string
 type humanLoopActivationReason = string
+type hasErrors = bool
+type groundTruthBlob = NodeJs.Buffer.t
 type genderType = [@as("Female") #Female | @as("Male") #Male]
 type flowDefinitionArn = string
 type float_ = float
@@ -176,6 +197,24 @@ type emotionName = [
 ]
 type degree = float
 type dateTime = Js.Date.t
+type datasetType = [@as("TEST") #TEST | @as("TRAIN") #TRAIN]
+type datasetStatusMessageCode = [
+  | @as("CLIENT_ERROR") #CLIENT_ERROR
+  | @as("SERVICE_ERROR") #SERVICE_ERROR
+  | @as("SUCCESS") #SUCCESS
+]
+type datasetStatus = [
+  | @as("DELETE_IN_PROGRESS") #DELETE_IN_PROGRESS
+  | @as("UPDATE_FAILED") #UPDATE_FAILED
+  | @as("UPDATE_COMPLETE") #UPDATE_COMPLETE
+  | @as("UPDATE_IN_PROGRESS") #UPDATE_IN_PROGRESS
+  | @as("CREATE_FAILED") #CREATE_FAILED
+  | @as("CREATE_COMPLETE") #CREATE_COMPLETE
+  | @as("CREATE_IN_PROGRESS") #CREATE_IN_PROGRESS
+]
+type datasetLabel = string
+type datasetEntry = string
+type datasetArn = string
 type contentModerationSortBy = [@as("TIMESTAMP") #TIMESTAMP | @as("NAME") #NAME]
 type contentClassifier = [
   | @as("FreeOfAdultContent") #FreeOfAdultContent
@@ -197,6 +236,11 @@ type attribute = [@as("ALL") #ALL | @as("DEFAULT") #DEFAULT]
 @ocaml.doc("<p>Information about a video that Amazon Rekognition analyzed. <code>Videometadata</code> is returned in
             every page of paginated responses from a Amazon Rekognition video operation.</p>")
 type videoMetadata = {
+  @ocaml.doc("<p>
+      A description of the range of luminance values in a video, either LIMITED (16 to 235) or FULL (0 to 255).
+    </p>")
+  @as("ColorRange")
+  colorRange: option<videoColorRange>,
   @ocaml.doc("<p>Horizontal pixel dimension of the video.</p>") @as("FrameWidth")
   frameWidth: option<ulong>,
   @ocaml.doc("<p>Vertical pixel dimension of the video.</p>") @as("FrameHeight")
@@ -245,18 +289,6 @@ type streamProcessor = {
   @ocaml.doc("<p>Name of the Amazon Rekognition stream processor. </p>") @as("Name")
   name: option<streamProcessorName>,
 }
-@ocaml.doc("<p>Filters for the technical segments returned by <a>GetSegmentDetection</a>. For more information,
-      see <a>StartSegmentDetectionFilters</a>.</p>")
-type startTechnicalCueDetectionFilter = {
-  @ocaml.doc("<p>Specifies the minimum confidence that Amazon Rekognition Video must have in order to return a detected segment. Confidence
-      represents how certain Amazon Rekognition is that a segment is correctly identified. 0 is the lowest confidence.
-      100 is the highest confidence.  Amazon Rekognition Video doesn't return any segments with a confidence level
-      lower than this specified value.</p>
-         <p>If you don't specify <code>MinSegmentConfidence</code>, <code>GetSegmentDetection</code> returns 
-      segments with confidence values greater than or equal to 50 percent.</p>")
-  @as("MinSegmentConfidence")
-  minSegmentConfidence: option<segmentConfidence>,
-}
 @ocaml.doc("<p>Filters for the shot detection segments returned by <code>GetSegmentDetection</code>. 
       For more information, see <a>StartSegmentDetectionFilters</a>.</p>")
 type startShotDetectionFilter = {
@@ -300,7 +332,7 @@ type segmentTypeInfo = {
 @ocaml.doc("<p>Provides the S3 bucket name and object name.</p>
          <p>The region for the S3 bucket containing the S3 object must match the region you use for
       Amazon Rekognition operations.</p>
-      
+    
          <p>For Amazon Rekognition to process an S3 object, the user must have permission to
       access the S3 object. For more information, see Resource-Based Policies in the Amazon Rekognition
       Developer Guide. </p>")
@@ -314,16 +346,7 @@ type s3Object = {
 type reasons = array<reason>
 type protectiveEquipmentTypes = array<protectiveEquipmentType>
 type protectiveEquipmentPersonIds = array<uinteger>
-@ocaml.doc("<p>A description of a Amazon Rekognition Custom Labels project.</p>")
-type projectDescription = {
-  @ocaml.doc("<p>The current status of the project.</p>") @as("Status")
-  status: option<projectStatus>,
-  @ocaml.doc("<p>The Unix timestamp for the date and time that the project was created.</p>")
-  @as("CreationTimestamp")
-  creationTimestamp: option<dateTime>,
-  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the project.</p>") @as("ProjectArn")
-  projectArn: option<projectArn>,
-}
+type projectNames = array<projectName>
 @ocaml.doc("<p>Indicates the pose of the face as determined by its pitch, roll, and yaw.</p>")
 type pose = {
   @ocaml.doc("<p>Value representing the face rotation on the pitch axis.</p>") @as("Pitch")
@@ -357,7 +380,8 @@ type outputConfig = {
   s3Bucket: option<s3Bucket>,
 }
 @ocaml.doc("<p>The Amazon Simple Notification Service topic to which Amazon Rekognition publishes the completion status of a video analysis operation. For more information, see
-            <a>api-video</a>.</p>")
+          <a>api-video</a>. Note that the Amazon SNS topic must have a topic name that begins with <i>AmazonRekognition</i> if you are using the AmazonRekognitionServiceRole permissions policy to access the topic.
+          For more information, see <a href=\"https://docs.aws.amazon.com/rekognition/latest/dg/api-video-roles.html#api-video-roles-all-topics\">Giving access to multiple Amazon SNS topics</a>.</p>")
 type notificationChannel = {
   @ocaml.doc(
     "<p>The ARN of an IAM role that gives Amazon Rekognition publishing permissions to the Amazon SNS topic. </p>"
@@ -388,9 +412,9 @@ type mouthOpen = {
   @as("Value")
   value: option<boolean_>,
 }
-@ocaml.doc("<p>Provides information about a single type of unsafe content found in an image or video. Each type of
+@ocaml.doc("<p>Provides information about a single type of inappropriate, unwanted, or offensive content found in an image or video. Each type of
       moderated content has a label within a hierarchical taxonomy. For more information, see
-      Detecting Unsafe Content in the Amazon Rekognition Developer Guide.</p>")
+      Content moderation in the Amazon Rekognition Developer Guide.</p>")
 type moderationLabel = {
   @ocaml.doc("<p>The name for the parent label. Labels at the top level of the hierarchy have the parent
       label <code>\"\"</code>.</p>")
@@ -420,6 +444,12 @@ type landmark = {
   @as("X")
   x: option<float_>,
   @ocaml.doc("<p>Type of landmark.</p>") @as("Type") type_: option<landmarkType>,
+}
+@ocaml.doc("<p>The known gender identity for the celebrity that matches the provided ID. The known
+      gender identity can be Male, Female, Nonbinary, or Unlisted.</p>")
+type knownGender = {
+  @ocaml.doc("<p>A string value of the KnownGender info about the Celebrity.</p>") @as("Type")
+  type_: option<knownGenderType>,
 }
 @ocaml.doc("<p>Kinesis video stream stream that provides the source streaming video for a Amazon Rekognition Video stream processor. For more information, see
             CreateStreamProcessor in the Amazon Rekognition Developer Guide.</p>")
@@ -467,8 +497,8 @@ type gender = {
 @ocaml.doc("<p>Input face recognition parameters for an Amazon Rekognition stream processor. <code>FaceRecognitionSettings</code> is a request
         parameter for <a>CreateStreamProcessor</a>.</p>")
 type faceSearchSettings = {
-  @ocaml.doc("<p>Minimum face match confidence score that must be met to return a result for a recognized face. Default is 80.
-        0 is the lowest confidence. 100 is the highest confidence.</p>")
+  @ocaml.doc("<p>Minimum face match confidence score that must be met to return a result for a recognized face. The default is 80.
+        0 is the lowest confidence. 100 is the highest confidence. Values between 0 and 100 are accepted, and values lower than 80 are set to 80.</p>")
   @as("FaceMatchThreshold")
   faceMatchThreshold: option<percent>,
   @ocaml.doc("<p>The ID of a collection that contains faces that you want to search for.</p>")
@@ -504,6 +534,16 @@ type emotion = {
   confidence: option<percent>,
   @ocaml.doc("<p>Type of emotion detected.</p>") @as("Type") type_: option<emotionName>,
 }
+@ocaml.doc("<p>
+         A training dataset or a test dataset used in a dataset distribution operation.
+         For more information, see <a>DistributeDatasetEntries</a>.
+      </p>")
+type distributeDataset = {
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the dataset that you want to use.
+      </p>")
+  @as("Arn")
+  arn: datasetArn,
+}
 @ocaml.doc(
   "<p>A set of parameters that allow you to filter out certain results from your returned results.</p>"
 )
@@ -521,6 +561,107 @@ type detectionFilter = {
       50.</p>")
   @as("MinConfidence")
   minConfidence: option<percent>,
+}
+@ocaml.doc("<p>
+Provides statistics about a dataset. For more information, see <a>DescribeDataset</a>.
+
+</p>")
+type datasetStats = {
+  @ocaml.doc("<p>
+         The total number of entries that contain at least one error.
+      </p>")
+  @as("ErrorEntries")
+  errorEntries: option<uinteger>,
+  @ocaml.doc("<p>
+The total number of labels declared in the dataset.
+</p>")
+  @as("TotalLabels")
+  totalLabels: option<uinteger>,
+  @ocaml.doc("<p>
+The total number of images in the dataset.
+</p>")
+  @as("TotalEntries")
+  totalEntries: option<uinteger>,
+  @ocaml.doc("<p>
+The total number of images in the dataset that have labels.
+</p>")
+  @as("LabeledEntries")
+  labeledEntries: option<uinteger>,
+}
+@ocaml.doc("<p>
+   Summary information for an Amazon Rekognition Custom Labels dataset. For more information, see 
+   <a>ProjectDescription</a>.
+</p>")
+type datasetMetadata = {
+  @ocaml.doc("<p>
+   The status message code for the dataset operation. If a service error occurs, try the 
+   API call again later. If a client error occurs, check the input parameters to the dataset
+   API call that failed.
+</p>")
+  @as("StatusMessageCode")
+  statusMessageCode: option<datasetStatusMessageCode>,
+  @ocaml.doc("<p>
+   The status message for the dataset.
+</p>")
+  @as("StatusMessage")
+  statusMessage: option<statusMessage>,
+  @ocaml.doc("<p>
+   The status for the dataset.
+</p>")
+  @as("Status")
+  status: option<datasetStatus>,
+  @ocaml.doc("<p>
+The Amazon Resource Name (ARN) for the dataset.
+</p>")
+  @as("DatasetArn")
+  datasetArn: option<datasetArn>,
+  @ocaml.doc("<p>
+   The type of the dataset.
+</p>")
+  @as("DatasetType")
+  datasetType: option<datasetType>,
+  @ocaml.doc("<p>
+   The Unix timestamp for the date and time that the dataset was created. 
+</p>")
+  @as("CreationTimestamp")
+  creationTimestamp: option<dateTime>,
+}
+type datasetLabels = array<datasetLabel>
+@ocaml.doc("<p>
+   Statistics about a label used in a dataset. For more information, see <a>DatasetLabelDescription</a>.
+</p>")
+type datasetLabelStats = {
+  @ocaml.doc("<p>
+The total number of images that have the label assigned to a bounding box.
+</p>")
+  @as("BoundingBoxCount")
+  boundingBoxCount: option<uinteger>,
+  @ocaml.doc("<p>
+The total number of images that use the label.
+</p>")
+  @as("EntryCount")
+  entryCount: option<uinteger>,
+}
+type datasetEntries = array<datasetEntry>
+@ocaml.doc("<p>
+Describes updates or additions to a dataset. A Single update or addition
+is an entry (JSON Line) that provides information about a single image. To update an existing entry,
+you match the <code>source-ref</code> field of the update entry with the <code>source-ref</code> filed of the entry that you want to update.
+ If the <code>source-ref</code> field doesn't match an existing entry, the entry is added to dataset as a new entry. </p>")
+type datasetChanges = {
+  @ocaml.doc("<p>A Base64-encoded binary data object
+   containing one or JSON lines that either update the dataset or are additions to the dataset.  You change a dataset by calling <a>UpdateDatasetEntries</a>.
+   If you are using an AWS SDK to call <code>UpdateDatasetEntries</code>, you don't need to encode <code>Changes</code> as the SDK encodes the data for you.
+
+</p>
+   
+   
+         <p>For example JSON lines,
+      see Image-Level labels in manifest files and 
+      and Object localization in manifest files in the <i>Amazon Rekognition Custom Labels Developer Guide</i>.
+   </p>")
+  @as("GroundTruth")
+  groundTruth: groundTruthBlob,
 }
 @ocaml.doc("<p>Information about an item of Personal Protective Equipment covering a corresponding body part. For more 
          information, see <a>DetectProtectiveEquipment</a>.</p>")
@@ -566,6 +707,32 @@ type boundingBox = {
   height: option<float_>,
   @ocaml.doc("<p>Width of the bounding box as a ratio of the overall image width.</p>") @as("Width")
   width: option<float_>,
+}
+@ocaml.doc("<p>
+      A filter that allows you to control the black frame detection by specifying the black levels
+      and pixel coverage of black pixels in a frame. As videos can come from multiple sources, formats,
+      and time periods, they may contain different standards and varying noise levels for black frames that need to be accounted for.
+      For more information, see <a>StartSegmentDetection</a>.
+    </p>")
+type blackFrame = {
+  @ocaml.doc("<p>
+      The minimum percentage of pixels in a frame that need to have a luminance below the max_black_pixel_value for a frame to be considered
+      a black frame. Luminance is calculated using the BT.709 matrix.
+    </p>
+         <p>The default value is 99, which means at least 99% of all pixels in the frame are black pixels as per the <code>MaxPixelThreshold</code>
+      set. You can reduce this value to allow more noise on the black frame.</p>")
+  @as("MinCoveragePercentage")
+  minCoveragePercentage: option<minCoveragePercentage>,
+  @ocaml.doc("<p>
+      A threshold used to determine the maximum luminance value for a pixel to be considered black. In a full color range video,
+      luminance values range from 0-255. A pixel value of 0 is pure black, and the most strict filter. The maximum black pixel
+      value is computed as follows: max_black_pixel_value = minimum_luminance + MaxPixelThreshold *luminance_range.
+    </p>
+         <p>For example, for a full range video with BlackPixelThreshold = 0.1,  max_black_pixel_value is 0 + 0.1 * (255-0) = 25.5.</p>
+         <p>The default value of MaxPixelThreshold is 0.2, which maps to a max_black_pixel_value of 51 for a full range video.
+      You can lower this threshold to be more strict on black levels.</p>")
+  @as("MaxPixelThreshold")
+  maxPixelThreshold: option<maxPixelThreshold>,
 }
 @ocaml.doc("<p>Indicates whether or not the face has a beard, and the confidence level in the
       determination.</p>")
@@ -632,14 +799,23 @@ type streamProcessorInput = {
   @as("KinesisVideoStream")
   kinesisVideoStream: option<kinesisVideoStream>,
 }
-@ocaml.doc("<p>Filters applied to the technical cue or shot detection segments. 
-      For more information, see <a>StartSegmentDetection</a>.
+@ocaml.doc("<p>Filters for the technical segments returned by <a>GetSegmentDetection</a>. For more information,
+      see <a>StartSegmentDetectionFilters</a>.</p>")
+type startTechnicalCueDetectionFilter = {
+  @ocaml.doc("<p>
+      A filter that allows you to control the black frame detection by specifying the black levels and pixel coverage of black pixels in a frame.
+      Videos can come from multiple sources, formats, and time periods, with different standards and varying noise levels for black frames that need to be accounted for.
     </p>")
-type startSegmentDetectionFilters = {
-  @ocaml.doc("<p>Filters that are specific to shot detections.</p>") @as("ShotFilter")
-  shotFilter: option<startShotDetectionFilter>,
-  @ocaml.doc("<p>Filters that are specific to technical cues.</p>") @as("TechnicalCueFilter")
-  technicalCueFilter: option<startTechnicalCueDetectionFilter>,
+  @as("BlackFrame")
+  blackFrame: option<blackFrame>,
+  @ocaml.doc("<p>Specifies the minimum confidence that Amazon Rekognition Video must have in order to return a detected segment. Confidence
+      represents how certain Amazon Rekognition is that a segment is correctly identified. 0 is the lowest confidence.
+      100 is the highest confidence.  Amazon Rekognition Video doesn't return any segments with a confidence level
+      lower than this specified value.</p>
+         <p>If you don't specify <code>MinSegmentConfidence</code>, <code>GetSegmentDetection</code> returns 
+      segments with confidence values greater than or equal to 50 percent.</p>")
+  @as("MinSegmentConfidence")
+  minSegmentConfidence: option<segmentConfidence>,
 }
 type segmentTypesInfo = array<segmentTypeInfo>
 @ocaml.doc("<p>A technical cue or shot detection segment detected in a video. An array
@@ -647,6 +823,21 @@ type segmentTypesInfo = array<segmentTypeInfo>
       is returned by <a>GetSegmentDetection</a>.
     </p>")
 type segmentDetection = {
+  @ocaml.doc("<p>
+      The duration of a video segment, expressed in frames.
+    </p>")
+  @as("DurationFrames")
+  durationFrames: option<ulong>,
+  @ocaml.doc("<p>
+      The frame number at the end of a video segment, using a frame index that starts with 0.
+    </p>")
+  @as("EndFrameNumber")
+  endFrameNumber: option<ulong>,
+  @ocaml.doc("<p>
+      The frame number of the start of a video segment, using a frame index that starts with 0.
+    </p>")
+  @as("StartFrameNumber")
+  startFrameNumber: option<ulong>,
   @ocaml.doc(
     "<p>If the segment is a shot detection, contains information about the shot detection.</p>"
   )
@@ -753,7 +944,6 @@ type protectiveEquipmentSummarizationAttributes = {
   @as("MinConfidence")
   minConfidence: percent,
 }
-type projectDescriptions = array<projectDescription>
 type polygon = array<point>
 type parents = array<parent>
 type moderationLabels = array<moderationLabel>
@@ -775,7 +965,7 @@ type instance = {
       from a local file system. Image bytes passed by using the <code>Bytes</code> property must be
       base64-encoded. Your code may not need to encode image bytes if you are using an AWS SDK to
       call Amazon Rekognition API operations. </p>
-      
+    
          <p>For more information, see Analyzing an Image Loaded from a Local File System 
       in the Amazon Rekognition Developer Guide.</p>
          <p> You pass images stored in an S3 bucket to an Amazon Rekognition API operation by using the
@@ -788,7 +978,7 @@ type instance = {
       CLI to call Amazon Rekognition operations, passing image bytes using the Bytes
       property is not supported. You must first upload the image to an Amazon S3 bucket and then
       call the operation using the S3Object property.</p>
-      
+    
          <p>For Amazon Rekognition to process an S3 object, the user must have permission to access the S3
       object. For more information, see Resource Based Policies in the Amazon Rekognition Developer Guide.
     </p>")
@@ -824,6 +1014,11 @@ type groundTruthManifest = {@as("S3Object") s3Object: option<s3Object>}
 @ocaml.doc("<p>Describes the face properties such as the bounding box, face ID, image ID of the input
       image, and external image ID that you assigned. </p>")
 type face = {
+  @ocaml.doc("<p>
+      The version of the face detect and storage model that was used when indexing the face vector.
+    </p>")
+  @as("IndexFacesModelVersion")
+  indexFacesModelVersion: option<indexFacesModelVersion>,
   @ocaml.doc("<p>Confidence level that the bounding box contains a face (and not a different object such
       as a tree).</p>")
   @as("Confidence")
@@ -856,13 +1051,71 @@ type equipmentDetection = {
   boundingBox: option<boundingBox>,
 }
 type emotions = array<emotion>
-@ocaml.doc("<p>Information about an unsafe content label detection in a stored video.</p>")
+type distributeDatasetMetadataList = array<distributeDataset>
+type datasetMetadataList = array<datasetMetadata>
+@ocaml.doc("<p>
+Describes a dataset label. For more information, see <a>ListDatasetLabels</a>.
+</p>")
+type datasetLabelDescription = {
+  @ocaml.doc("<p>
+Statistics about the label.
+</p>")
+  @as("LabelStats")
+  labelStats: option<datasetLabelStats>,
+  @ocaml.doc("<p>
+The name of the label.
+</p>")
+  @as("LabelName")
+  labelName: option<datasetLabel>,
+}
+@ocaml.doc("<p>
+A description for a dataset. For more information, see <a>DescribeDataset</a>.</p>
+         <p>The status fields <code>Status</code>, <code>StatusMessage</code>, and <code>StatusMessageCode</code>
+reflect the last operation on the dataset.
+</p>")
+type datasetDescription = {
+  @ocaml.doc("<p>
+The status message code for the dataset.
+</p>")
+  @as("DatasetStats")
+  datasetStats: option<datasetStats>,
+  @ocaml.doc("<p>
+   The status message code for the dataset operation. If a service error occurs, try the 
+   API call again later. If a client error occurs, check the input parameters to the dataset
+   API call that failed.
+</p>")
+  @as("StatusMessageCode")
+  statusMessageCode: option<datasetStatusMessageCode>,
+  @ocaml.doc("<p>
+   The status message for the dataset. 
+</p>")
+  @as("StatusMessage")
+  statusMessage: option<statusMessage>,
+  @ocaml.doc("<p>
+   The status of the dataset.
+</p>")
+  @as("Status")
+  status: option<datasetStatus>,
+  @ocaml.doc("<p>
+   The Unix timestamp for the date and time that the dataset was last updated.
+</p>")
+  @as("LastUpdatedTimestamp")
+  lastUpdatedTimestamp: option<dateTime>,
+  @ocaml.doc("<p>
+The Unix timestamp for the time and date that the dataset was created.
+</p>")
+  @as("CreationTimestamp")
+  creationTimestamp: option<dateTime>,
+}
+@ocaml.doc(
+  "<p>Information about an inappropriate, unwanted, or offensive content label detection in a stored video.</p>"
+)
 type contentModerationDetection = {
-  @ocaml.doc("<p>The unsafe content label detected by in the stored video.</p>")
+  @ocaml.doc("<p>The content moderation label detected by in the stored video.</p>")
   @as("ModerationLabel")
   moderationLabel: option<moderationLabel>,
   @ocaml.doc(
-    "<p>Time, in milliseconds from the beginning of the video, that the unsafe content label was detected.</p>"
+    "<p>Time, in milliseconds from the beginning of the video, that the content moderation label was detected.</p>"
   )
   @as("Timestamp")
   timestamp_: option<timestamp_>,
@@ -879,8 +1132,34 @@ type comparedSourceImageFace = {
   boundingBox: option<boundingBox>,
 }
 type audioMetadataList = array<audioMetadata>
+@ocaml.doc("<p>Filters applied to the technical cue or shot detection segments. 
+      For more information, see <a>StartSegmentDetection</a>.
+    </p>")
+type startSegmentDetectionFilters = {
+  @ocaml.doc("<p>Filters that are specific to shot detections.</p>") @as("ShotFilter")
+  shotFilter: option<startShotDetectionFilter>,
+  @ocaml.doc("<p>Filters that are specific to technical cues.</p>") @as("TechnicalCueFilter")
+  technicalCueFilter: option<startTechnicalCueDetectionFilter>,
+}
 type segmentDetections = array<segmentDetection>
 type regionsOfInterest = array<regionOfInterest>
+@ocaml.doc(
+  "<p>A description of an Amazon Rekognition Custom Labels project. For more information, see <a>DescribeProjects</a>.</p>"
+)
+type projectDescription = {
+  @ocaml.doc("<p>
+         Information about the training and test datasets in the project.
+      </p>")
+  @as("Datasets")
+  datasets: option<datasetMetadataList>,
+  @ocaml.doc("<p>The current status of the project.</p>") @as("Status")
+  status: option<projectStatus>,
+  @ocaml.doc("<p>The Unix timestamp for the date and time that the project was created.</p>")
+  @as("CreationTimestamp")
+  creationTimestamp: option<dateTime>,
+  @ocaml.doc("<p>The Amazon Resource Name (ARN) of the project.</p>") @as("ProjectArn")
+  projectArn: option<projectArn>,
+}
 type instances = array<instance>
 @ocaml.doc("<p>Sets up the flow definition the image will be sent to if one of the conditions is met. 
       You can also set certain attributes of the image before review.</p>")
@@ -1016,10 +1295,39 @@ type evaluationResult = {
   f1Score: option<float_>,
 }
 type equipmentDetections = array<equipmentDetection>
+@ocaml.doc("<p>
+The source that Amazon Rekognition Custom Labels uses to create a dataset. To
+use an Amazon Sagemaker format manifest file, specify the  S3 bucket location in the <code>GroundTruthManifest</code> field.
+The S3 bucket must be in your AWS account.
+To create a copy of an existing dataset,  specify the Amazon Resource Name (ARN) of
+an existing dataset in <code>DatasetArn</code>.</p>
+         <p>You need to specify a value for <code>DatasetArn</code> or <code>GroundTruthManifest</code>, but not both.
+    if you supply both values, or if you don't specify any values, an InvalidParameterException exception occurs. 
+ </p>
+         <p>For more information, see <a>CreateDataset</a>.</p>")
+type datasetSource = {
+  @ocaml.doc("<p>
+The ARN of an Amazon Rekognition Custom Labels dataset that you want to copy.
+</p>")
+  @as("DatasetArn")
+  datasetArn: option<datasetArn>,
+  @as("GroundTruthManifest") groundTruthManifest: option<groundTruthManifest>,
+}
+type datasetLabelDescriptions = array<datasetLabelDescription>
 type contentModerationDetections = array<contentModerationDetection>
 @ocaml.doc("<p>Provides face metadata for target image faces that are analyzed by
         <code>CompareFaces</code> and <code>RecognizeCelebrities</code>.</p>")
 type comparedFace = {
+  @ocaml.doc("<p> Indicates whether or not the face is smiling, and the confidence level in the determination. 
+    </p>")
+  @as("Smile")
+  smile: option<smile>,
+  @ocaml.doc("<p> The emotions that appear to be expressed on the face, 
+      and the confidence level in the determination. Valid values include \"Happy\", \"Sad\", 
+      \"Angry\", \"Confused\", \"Disgusted\", \"Surprised\", \"Calm\", \"Unknown\", and \"Fear\".
+    </p>")
+  @as("Emotions")
+  emotions: option<emotions>,
   @ocaml.doc("<p>Identifies face image brightness and sharpness. </p>") @as("Quality")
   quality: option<imageQuality>,
   @ocaml.doc("<p>Indicates the pose of the face as determined by its pitch, roll, and yaw.</p>")
@@ -1077,7 +1385,7 @@ type unindexedFace = {
       and has a parent identifier (<code>ParentId</code>) that identifies the line of text in which
       the word appears. The word <code>Id</code> is also an index for the word within a line of
       words. </p>
-      
+    
          <p>For more information, see Detecting Text in the Amazon Rekognition Developer Guide.</p>")
 type textDetection = {
   @ocaml.doc("<p>The location of the detected text on the image. Includes an axis aligned coarse
@@ -1128,6 +1436,7 @@ type protectiveEquipmentBodyPart = {
   confidence: option<percent>,
   @ocaml.doc("<p>The detected body part.</p>") @as("Name") name: option<bodyPart>,
 }
+type projectDescriptions = array<projectDescription>
 @ocaml.doc("<p>Details about a person detected in a video analysis request.</p>")
 type personDetail = {
   @ocaml.doc("<p>Face details for the detected person.</p>") @as("Face") face: option<faceDetail>,
@@ -1219,6 +1528,8 @@ type compareFacesMatch = {
 }
 @ocaml.doc("<p>Information about a recognized celebrity.</p>")
 type celebrityDetail = {
+  @ocaml.doc("<p>Retrieves the known gender for the celebrity.</p>") @as("KnownGender")
+  knownGender: option<knownGender>,
   @ocaml.doc("<p>Face details for the recognized celebrity.</p>") @as("Face")
   face: option<faceDetail>,
   @ocaml.doc("<p>Bounding box around the body of a celebrity.</p>") @as("BoundingBox")
@@ -1238,6 +1549,7 @@ type celebrityDetail = {
   "<p>Provides information about a celebrity recognized by the <a>RecognizeCelebrities</a> operation.</p>"
 )
 type celebrity = {
+  @as("KnownGender") knownGender: option<knownGender>,
   @ocaml.doc("<p>The confidence, in percentage, that Amazon Rekognition has that the recognized face is the
       celebrity.</p>")
   @as("MatchConfidence")
@@ -1256,11 +1568,10 @@ type celebrity = {
 }
 type assets = array<asset>
 @ocaml.doc("<p>Contains the Amazon S3 bucket location of the validation data for a model training job. </p>
+         <p>The validation data includes error information for individual JSON Lines in the dataset.
+         For more information, see <i>Debugging a Failed Model Training</i> in the
+         Amazon Rekognition Custom Labels Developer Guide. </p>
       
-         <p>The validation data includes error information for individual 
-         JSON lines in the dataset.             
-            For more information, see Debugging a Failed Model Training in the
-            Amazon Rekognition Custom Labels Developer Guide. </p>
          <p>You get the <code>ValidationData</code> object for the training dataset (<a>TrainingDataResult</a>)
          and the test dataset (<a>TestingDataResult</a>) by calling <a>DescribeProjectVersions</a>. </p>
          <p>The assets array contains a single <a>Asset</a> object. 
@@ -1292,12 +1603,11 @@ type textDetectionResult = {
   timestamp_: option<timestamp_>,
 }
 type textDetectionList = array<textDetection>
-@ocaml.doc("<p>The dataset used for testing. Optionally, if <code>AutoCreate</code> is set,  Amazon Rekognition Custom Labels creates a 
-         testing dataset using an 80/20 split of the training dataset.</p>")
+@ocaml.doc("<p>The dataset used for testing. Optionally, if <code>AutoCreate</code> is set,  Amazon Rekognition Custom Labels uses the
+         training dataset to create a test dataset with a temporary split of the training dataset. </p>")
 type testingData = {
-  @ocaml.doc(
-    "<p>If specified, Amazon Rekognition Custom Labels creates a testing dataset with an 80/20 split of the training dataset.</p>"
-  )
+  @ocaml.doc("<p>If specified, Amazon Rekognition Custom Labels temporarily splits the training dataset (80%) to create a test dataset (20%) for the training job.
+      After training completes, the test dataset is not stored and the training dataset reverts to its previous size.</p>")
   @as("AutoCreate")
   autoCreate: option<boolean_>,
   @ocaml.doc("<p>The assets used for testing.</p>") @as("Assets") assets: option<assets>,
@@ -1423,10 +1733,10 @@ type personDetections = array<personDetection>
 type labelDetections = array<labelDetection>
 type celebrityRecognitions = array<celebrityRecognition>
 type protectiveEquipmentPersons = array<protectiveEquipmentPerson>
-@ocaml.doc("<p>The description of a version of a model.</p>")
+@ocaml.doc("<p>A description of a version of an Amazon Rekognition Custom Labels model.</p>")
 type projectVersionDescription = {
   @ocaml.doc(
-    "<p>The identifer for the AWS Key Management Service (AWS KMS) customer master key that was used to encrypt the model during training. </p>"
+    "<p>The identifer for the AWS Key Management Service key (AWS KMS key) that was used to encrypt the model during training. </p>"
   )
   @as("KmsKeyId")
   kmsKeyId: option<kmsKeyId>,
@@ -1448,7 +1758,7 @@ type projectVersionDescription = {
   @ocaml.doc("<p>The Unix date and time that training of the model ended.</p>")
   @as("TrainingEndTimestamp")
   trainingEndTimestamp: option<dateTime>,
-  @ocaml.doc("<p>The duration, in seconds, that the model version has been billed for training. 
+  @ocaml.doc("<p>The duration, in seconds, that you were billed for a successful training of the model version. 
       This value is only returned if the model version has been successfully trained.</p>")
   @as("BillableTrainingTimeInSeconds")
   billableTrainingTimeInSeconds: option<ulong>,
@@ -1477,7 +1787,7 @@ module StopStreamProcessor = {
     @as("Name")
     name: streamProcessorName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-rekognition") @new
   external new: request => t = "StopStreamProcessorCommand"
   let make = (~name, ()) => new({name: name})
@@ -1508,7 +1818,7 @@ module StartStreamProcessor = {
     @ocaml.doc("<p>The name of the stream processor to start processing.</p>") @as("Name")
     name: streamProcessorName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-rekognition") @new
   external new: request => t = "StartStreamProcessorCommand"
   let make = (~name, ()) => new({name: name})
@@ -1576,7 +1886,7 @@ module DeleteStreamProcessor = {
     @ocaml.doc("<p>The name of the stream processor you want to delete.</p>") @as("Name")
     name: streamProcessorName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-rekognition") @new
   external new: request => t = "DeleteStreamProcessorCommand"
   let make = (~name, ()) => new({name: name})
@@ -1618,6 +1928,21 @@ module DeleteProject = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module DeleteDataset = {
+  type t
+  type request = {
+    @ocaml.doc("<p>
+The ARN of the Amazon Rekognition Custom Labels dataset that you want to delete. 
+</p>")
+    @as("DatasetArn")
+    datasetArn: datasetArn,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-rekognition") @new external new: request => t = "DeleteDatasetCommand"
+  let make = (~datasetArn, ()) => new({datasetArn: datasetArn})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
 module DeleteCollection = {
   type t
   type request = {
@@ -1651,6 +1976,27 @@ module CreateProject = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module UpdateDatasetEntries = {
+  type t
+  type request = {
+    @ocaml.doc("<p>
+   The changes that you want to make to the dataset. 
+</p>")
+    @as("Changes")
+    changes: datasetChanges,
+    @ocaml.doc("<p>
+The Amazon Resource Name (ARN) of the dataset that you want to update.
+</p>")
+    @as("DatasetArn")
+    datasetArn: datasetArn,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-rekognition") @new
+  external new: request => t = "UpdateDatasetEntriesCommand"
+  let make = (~changes, ~datasetArn, ()) => new({changes: changes, datasetArn: datasetArn})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
 module UntagResource = {
   type t
   type request = {
@@ -1665,7 +2011,7 @@ module UntagResource = {
     @as("ResourceArn")
     resourceArn: resourceArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-rekognition") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1685,7 +2031,7 @@ module TagResource = {
     @as("ResourceArn")
     resourceArn: resourceArn,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-rekognition") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -1713,6 +2059,82 @@ module ListTagsForResource = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module ListDatasetEntries = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The maximum number of results to return per paginated call. The largest value you can specify is 100. 
+      If you specify a value greater than 100, a ValidationException
+      error occurs. The default value is 100. </p>")
+    @as("MaxResults")
+    maxResults: option<listDatasetEntriesPageSize>,
+    @ocaml.doc("<p>If the previous response was incomplete (because there is more
+      results to retrieve), Amazon Rekognition Custom Labels returns a pagination token in the response. You can use this pagination 
+      token to retrieve the next set of results. </p>")
+    @as("NextToken")
+    nextToken: option<extendedPaginationToken>,
+    @ocaml.doc("<p>Specifies an error filter for the response. Specify <code>True</code> to only include entries that have errors.
+      </p>")
+    @as("HasErrors")
+    hasErrors: option<hasErrors>,
+    @ocaml.doc("<p>If specified, <code>ListDatasetEntries</code> only returns JSON Lines where the value of <code>SourceRefContains</code> is
+   part of the <code>source-ref</code> field. The <code>source-ref</code> field contains the Amazon S3 location of the image.
+   You can use <code>SouceRefContains</code> for tasks such as getting the JSON Line for a single image, or gettting JSON Lines for all images within a specific folder.</p>")
+    @as("SourceRefContains")
+    sourceRefContains: option<queryString>,
+    @ocaml.doc("<p>
+   Specify <code>true</code> to get only the JSON Lines where the image is labeled. 
+   Specify <code>false</code> to get only the JSON Lines where the image isn't labeled. If you
+   don't specify <code>Labeled</code>, <code>ListDatasetEntries</code> returns JSON Lines for labeled and unlabeled 
+   images.
+</p>")
+    @as("Labeled")
+    labeled: option<isLabeled>,
+    @ocaml.doc("<p>Specifies a label filter for the response. The response includes an entry only if one or more of the labels in <code>ContainsLabels</code> exist in the entry.       
+      </p>")
+    @as("ContainsLabels")
+    containsLabels: option<datasetLabels>,
+    @ocaml.doc("<p>
+The Amazon Resource Name (ARN) for the dataset that you want to use. 
+</p>")
+    @as("DatasetArn")
+    datasetArn: datasetArn,
+  }
+  type response = {
+    @ocaml.doc("<p>If the previous response was incomplete (because there is more
+      results to retrieve), Amazon Rekognition Custom Labels returns a pagination token in the response. You can use this pagination 
+      token to retrieve the next set of results. </p>")
+    @as("NextToken")
+    nextToken: option<extendedPaginationToken>,
+    @ocaml.doc("<p>
+A list of entries (images) in the dataset.
+</p>")
+    @as("DatasetEntries")
+    datasetEntries: option<datasetEntries>,
+  }
+  @module("@aws-sdk/client-rekognition") @new
+  external new: request => t = "ListDatasetEntriesCommand"
+  let make = (
+    ~datasetArn,
+    ~maxResults=?,
+    ~nextToken=?,
+    ~hasErrors=?,
+    ~sourceRefContains=?,
+    ~labeled=?,
+    ~containsLabels=?,
+    (),
+  ) =>
+    new({
+      maxResults: maxResults,
+      nextToken: nextToken,
+      hasErrors: hasErrors,
+      sourceRefContains: sourceRefContains,
+      labeled: labeled,
+      containsLabels: containsLabels,
+      datasetArn: datasetArn,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module ListCollections = {
   type t
   type request = {
@@ -1722,7 +2144,7 @@ module ListCollections = {
     nextToken: option<paginationToken>,
   }
   type response = {
-    @ocaml.doc("<p>Version numbers of the face detection models associated with the collections in the array <code>CollectionIds</code>.
+    @ocaml.doc("<p>Latest face models being used with the corresponding collections in the array. For more information, see <a href=\"https://docs.aws.amazon.com/rekognition/latest/dg/face-detection-model.html\">Model versioning</a>. 
     For example, the value of <code>FaceModelVersions[2]</code> is the version number for the face detection model used
       by the collection in <code>CollectionId[2]</code>.</p>")
     @as("FaceModelVersions")
@@ -1749,6 +2171,8 @@ module GetCelebrityInfo = {
     id: rekognitionUniqueId,
   }
   type response = {
+    @ocaml.doc("<p>Retrieves the known gender for the celebrity.</p>") @as("KnownGender")
+    knownGender: option<knownGender>,
     @ocaml.doc("<p>The name of the celebrity.</p>") @as("Name") name: option<string_>,
     @ocaml.doc("<p>An array of URLs pointing to additional celebrity information. </p>") @as("Urls")
     urls: option<urls>,
@@ -1788,7 +2212,7 @@ module CreateCollection = {
   }
   type response = {
     @ocaml.doc(
-      "<p>Version number of the face detection model associated with the collection you are creating.</p>"
+      "<p>Latest face model being used with the collection. For more information, see <a href=\"https://docs.aws.amazon.com/rekognition/latest/dg/face-detection-model.html\">Model versioning</a>.</p>"
     )
     @as("FaceModelVersion")
     faceModelVersion: option<string_>,
@@ -1804,59 +2228,6 @@ module CreateCollection = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
-module StartSegmentDetection = {
-  type t
-  type request = {
-    @ocaml.doc(
-      "<p>An array of segment types to detect in the video. Valid values are TECHNICAL_CUE and SHOT.</p>"
-    )
-    @as("SegmentTypes")
-    segmentTypes: segmentTypes,
-    @ocaml.doc("<p>Filters for technical cue or shot detection.</p>") @as("Filters")
-    filters: option<startSegmentDetectionFilters>,
-    @ocaml.doc("<p>An identifier you specify that's returned in the completion notification that's published to your Amazon Simple Notification Service topic.
-      For example, you can use <code>JobTag</code> to group related jobs and identify them in the completion notification.</p>")
-    @as("JobTag")
-    jobTag: option<jobTag>,
-    @ocaml.doc("<p>The ARN of the Amazon SNS topic to which you want Amazon Rekognition Video to publish the completion status of the
-      segment detection operation.</p>")
-    @as("NotificationChannel")
-    notificationChannel: option<notificationChannel>,
-    @ocaml.doc("<p>Idempotent token used to identify the start request. If you use the same token with multiple
-      <code>StartSegmentDetection</code> requests, the same <code>JobId</code> is returned. Use
-      <code>ClientRequestToken</code> to prevent the same job from being accidently started more than once. </p>")
-    @as("ClientRequestToken")
-    clientRequestToken: option<clientRequestToken>,
-    @as("Video") video: video,
-  }
-  type response = {
-    @ocaml.doc("<p>Unique identifier for the segment detection job. The <code>JobId</code> is returned from <code>StartSegmentDetection</code>.
-    </p>")
-    @as("JobId")
-    jobId: option<jobId>,
-  }
-  @module("@aws-sdk/client-rekognition") @new
-  external new: request => t = "StartSegmentDetectionCommand"
-  let make = (
-    ~segmentTypes,
-    ~video,
-    ~filters=?,
-    ~jobTag=?,
-    ~notificationChannel=?,
-    ~clientRequestToken=?,
-    (),
-  ) =>
-    new({
-      segmentTypes: segmentTypes,
-      filters: filters,
-      jobTag: jobTag,
-      notificationChannel: notificationChannel,
-      clientRequestToken: clientRequestToken,
-      video: video,
-    })
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
 module StartPersonTracking = {
   type t
   type request = {
@@ -1865,7 +2236,7 @@ module StartPersonTracking = {
     @as("JobTag")
     jobTag: option<jobTag>,
     @ocaml.doc("<p>The Amazon SNS topic ARN you want Amazon Rekognition Video to publish the completion status of the people detection
-        operation to.</p>")
+        operation to. The Amazon SNS topic must have a topic name that begins with <i>AmazonRekognition</i> if you are using the AmazonRekognitionServiceRole permissions policy.</p>")
     @as("NotificationChannel")
     notificationChannel: option<notificationChannel>,
     @ocaml.doc("<p>Idempotent token used to identify the start request. If you use the same token with multiple
@@ -1904,7 +2275,7 @@ module StartLabelDetection = {
     @as("JobTag")
     jobTag: option<jobTag>,
     @ocaml.doc("<p>The Amazon SNS topic ARN you want Amazon Rekognition Video to publish the completion status of the label detection
-        operation to. </p>")
+        operation to. The Amazon SNS topic must have a topic name that begins with <i>AmazonRekognition</i> if you are using the AmazonRekognitionServiceRole permissions policy.</p>")
     @as("NotificationChannel")
     notificationChannel: option<notificationChannel>,
     @ocaml.doc("<p>Specifies the minimum confidence that Amazon Rekognition Video must have in order to return a detected label. Confidence
@@ -1959,7 +2330,7 @@ module StartFaceSearch = {
     @as("JobTag")
     jobTag: option<jobTag>,
     @ocaml.doc(
-      "<p>The ARN of the Amazon SNS topic to which you want Amazon Rekognition Video to publish the completion status of the search. </p>"
+      "<p>The ARN of the Amazon SNS topic to which you want Amazon Rekognition Video to publish the completion status of the search. The Amazon SNS topic must have a topic name that begins with <i>AmazonRekognition</i> if you are using the AmazonRekognitionServiceRole permissions policy to access the topic.</p>"
     )
     @as("NotificationChannel")
     notificationChannel: option<notificationChannel>,
@@ -2024,7 +2395,7 @@ module StartFaceDetection = {
     @as("FaceAttributes")
     faceAttributes: option<faceAttributes>,
     @ocaml.doc("<p>The ARN of the Amazon SNS topic to which you want Amazon Rekognition Video to publish the completion status of the
-         face detection operation.</p>")
+         face detection operation. The Amazon SNS topic must have a topic name that begins with <i>AmazonRekognition</i> if you are using the AmazonRekognitionServiceRole permissions policy.</p>")
     @as("NotificationChannel")
     notificationChannel: option<notificationChannel>,
     @ocaml.doc("<p>Idempotent token used to identify the start request. If you use the same token with multiple
@@ -2071,7 +2442,7 @@ module StartContentModeration = {
     @as("JobTag")
     jobTag: option<jobTag>,
     @ocaml.doc("<p>The Amazon SNS topic ARN that you want Amazon Rekognition Video to publish the completion status of the
-      unsafe content analysis to.</p>")
+      content analysis to. The Amazon SNS topic must have a topic name that begins with <i>AmazonRekognition</i> if you are using the AmazonRekognitionServiceRole permissions policy to access the topic.</p>")
     @as("NotificationChannel")
     notificationChannel: option<notificationChannel>,
     @ocaml.doc("<p>Idempotent token used to identify the start request. If you use the same token with multiple
@@ -2086,13 +2457,13 @@ module StartContentModeration = {
        returns labels with confidence values greater than or equal to 50 percent.</p>")
     @as("MinConfidence")
     minConfidence: option<percent>,
-    @ocaml.doc("<p>The video in which you want to detect unsafe content. The video must be stored
+    @ocaml.doc("<p>The video in which you want to detect inappropriate, unwanted, or offensive content. The video must be stored
       in an Amazon S3 bucket.</p>")
     @as("Video")
     video: video,
   }
   type response = {
-    @ocaml.doc("<p>The identifier for the unsafe content analysis job. Use <code>JobId</code> to identify the job in
+    @ocaml.doc("<p>The identifier for the content analysis job. Use <code>JobId</code> to identify the job in
       a subsequent call to <code>GetContentModeration</code>.</p>")
     @as("JobId")
     jobId: option<jobId>,
@@ -2125,7 +2496,7 @@ module StartCelebrityRecognition = {
     @as("JobTag")
     jobTag: option<jobTag>,
     @ocaml.doc("<p>The Amazon SNS topic ARN that you want Amazon Rekognition Video to publish the completion status of the
-      celebrity recognition analysis to.</p>")
+      celebrity recognition analysis to. The Amazon SNS topic must have a topic name that begins with <i>AmazonRekognition</i> if you are using the AmazonRekognitionServiceRole permissions policy.</p>")
     @as("NotificationChannel")
     notificationChannel: option<notificationChannel>,
     @ocaml.doc("<p>Idempotent token used to identify the start request. If you use the same token with multiple
@@ -2184,6 +2555,22 @@ module ListStreamProcessors = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module DistributeDatasetEntries = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The ARNS for the training dataset and test dataset that you want to use. The datasets must belong to
+         the same project. The test dataset must be empty.
+         </p>")
+    @as("Datasets")
+    datasets: distributeDatasetMetadataList,
+  }
+  type response = {.}
+  @module("@aws-sdk/client-rekognition") @new
+  external new: request => t = "DistributeDatasetEntriesCommand"
+  let make = (~datasets, ()) => new({datasets: datasets})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+}
+
 module DescribeStreamProcessor = {
   type t
   type request = {
@@ -2227,35 +2614,24 @@ module DescribeStreamProcessor = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
-module DescribeProjects = {
+module DescribeDataset = {
   type t
   type request = {
-    @ocaml.doc("<p>The maximum number of results to return per paginated call. The largest value you can specify is 100. 
-         If you specify a value greater than 100, a ValidationException
-         error occurs. The default value is 100. </p>")
-    @as("MaxResults")
-    maxResults: option<projectsPageSize>,
-    @ocaml.doc("<p>If the previous response was incomplete (because there is more
-         results to retrieve), Amazon Rekognition Custom Labels returns a pagination token in the response. You can use this pagination 
-         token to retrieve the next set of results. </p>")
-    @as("NextToken")
-    nextToken: option<extendedPaginationToken>,
+    @ocaml.doc("<p>
+The Amazon Resource Name (ARN) of the dataset that you want to describe.
+</p>")
+    @as("DatasetArn")
+    datasetArn: datasetArn,
   }
   type response = {
-    @ocaml.doc("<p>If the previous response was incomplete (because there is more
-         results to retrieve), Amazon Rekognition Custom Labels returns a pagination token in the response. 
-         You can use this pagination token to retrieve the next set of results. </p>")
-    @as("NextToken")
-    nextToken: option<extendedPaginationToken>,
-    @ocaml.doc(
-      "<p>A list of project descriptions. The list is sorted by the date and time the projects are created.</p>"
-    )
-    @as("ProjectDescriptions")
-    projectDescriptions: option<projectDescriptions>,
+    @ocaml.doc("<p>
+The description for the dataset.
+</p>")
+    @as("DatasetDescription")
+    datasetDescription: option<datasetDescription>,
   }
-  @module("@aws-sdk/client-rekognition") @new external new: request => t = "DescribeProjectsCommand"
-  let make = (~maxResults=?, ~nextToken=?, ()) =>
-    new({maxResults: maxResults, nextToken: nextToken})
+  @module("@aws-sdk/client-rekognition") @new external new: request => t = "DescribeDatasetCommand"
+  let make = (~datasetArn, ()) => new({datasetArn: datasetArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -2309,6 +2685,59 @@ module CreateStreamProcessor = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module StartSegmentDetection = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>An array of segment types to detect in the video. Valid values are TECHNICAL_CUE and SHOT.</p>"
+    )
+    @as("SegmentTypes")
+    segmentTypes: segmentTypes,
+    @ocaml.doc("<p>Filters for technical cue or shot detection.</p>") @as("Filters")
+    filters: option<startSegmentDetectionFilters>,
+    @ocaml.doc("<p>An identifier you specify that's returned in the completion notification that's published to your Amazon Simple Notification Service topic.
+      For example, you can use <code>JobTag</code> to group related jobs and identify them in the completion notification.</p>")
+    @as("JobTag")
+    jobTag: option<jobTag>,
+    @ocaml.doc("<p>The ARN of the Amazon SNS topic to which you want Amazon Rekognition Video to publish the completion status of the
+      segment detection operation. Note that the Amazon SNS topic must have a topic name that begins with <i>AmazonRekognition</i> if you are using the AmazonRekognitionServiceRole permissions policy to access the topic.</p>")
+    @as("NotificationChannel")
+    notificationChannel: option<notificationChannel>,
+    @ocaml.doc("<p>Idempotent token used to identify the start request. If you use the same token with multiple
+      <code>StartSegmentDetection</code> requests, the same <code>JobId</code> is returned. Use
+      <code>ClientRequestToken</code> to prevent the same job from being accidently started more than once. </p>")
+    @as("ClientRequestToken")
+    clientRequestToken: option<clientRequestToken>,
+    @as("Video") video: video,
+  }
+  type response = {
+    @ocaml.doc("<p>Unique identifier for the segment detection job. The <code>JobId</code> is returned from <code>StartSegmentDetection</code>.
+    </p>")
+    @as("JobId")
+    jobId: option<jobId>,
+  }
+  @module("@aws-sdk/client-rekognition") @new
+  external new: request => t = "StartSegmentDetectionCommand"
+  let make = (
+    ~segmentTypes,
+    ~video,
+    ~filters=?,
+    ~jobTag=?,
+    ~notificationChannel=?,
+    ~clientRequestToken=?,
+    (),
+  ) =>
+    new({
+      segmentTypes: segmentTypes,
+      filters: filters,
+      jobTag: jobTag,
+      notificationChannel: notificationChannel,
+      clientRequestToken: clientRequestToken,
+      video: video,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module ListFaces = {
   type t
   type request = {
@@ -2324,7 +2753,7 @@ module ListFaces = {
   }
   type response = {
     @ocaml.doc(
-      "<p>Version number of the face detection model associated with the input collection (<code>CollectionId</code>).</p>"
+      "<p>Latest face model being used with the collection. For more information, see <a href=\"https://docs.aws.amazon.com/rekognition/latest/dg/face-detection-model.html\">Model versioning</a>.</p>"
     )
     @as("FaceModelVersion")
     faceModelVersion: option<string_>,
@@ -2338,6 +2767,44 @@ module ListFaces = {
   @module("@aws-sdk/client-rekognition") @new external new: request => t = "ListFacesCommand"
   let make = (~collectionId, ~maxResults=?, ~nextToken=?, ()) =>
     new({maxResults: maxResults, nextToken: nextToken, collectionId: collectionId})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module ListDatasetLabels = {
+  type t
+  type request = {
+    @ocaml.doc("<p>The maximum number of results to return per paginated call. The largest value you can specify is 100. 
+      If you specify a value greater than 100, a ValidationException
+      error occurs. The default value is 100. </p>")
+    @as("MaxResults")
+    maxResults: option<listDatasetLabelsPageSize>,
+    @ocaml.doc("<p>If the previous response was incomplete (because there is more
+      results to retrieve), Amazon Rekognition Custom Labels returns a pagination token in the response. You can use this pagination 
+      token to retrieve the next set of results. </p>")
+    @as("NextToken")
+    nextToken: option<extendedPaginationToken>,
+    @ocaml.doc("<p>
+The Amazon Resource Name (ARN) of the dataset that you want to use.
+</p>")
+    @as("DatasetArn")
+    datasetArn: datasetArn,
+  }
+  type response = {
+    @ocaml.doc("<p>If the previous response was incomplete (because there is more
+      results to retrieve), Amazon Rekognition Custom Labels returns a pagination token in the response. You can use this pagination 
+      token to retrieve the next set of results. </p>")
+    @as("NextToken")
+    nextToken: option<extendedPaginationToken>,
+    @ocaml.doc("<p>
+A list of the labels in the dataset.
+</p>")
+    @as("DatasetLabelDescriptions")
+    datasetLabelDescriptions: option<datasetLabelDescriptions>,
+  }
+  @module("@aws-sdk/client-rekognition") @new
+  external new: request => t = "ListDatasetLabelsCommand"
+  let make = (~datasetArn, ~maxResults=?, ~nextToken=?, ()) =>
+    new({maxResults: maxResults, nextToken: nextToken, datasetArn: datasetArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -2415,7 +2882,7 @@ module GetContentModeration = {
     sortBy: option<contentModerationSortBy>,
     @ocaml.doc("<p>If the previous response was incomplete (because there is more data to retrieve), Amazon Rekognition
         returns a pagination token in the response. You can use this pagination token
-        to retrieve the next set of unsafe content labels.</p>")
+        to retrieve the next set of content moderation labels.</p>")
     @as("NextToken")
     nextToken: option<paginationToken>,
     @ocaml.doc("<p>Maximum number of results to return per paginated call. The largest value you can specify is 1000. 
@@ -2423,22 +2890,24 @@ module GetContentModeration = {
     The default value is 1000.</p>")
     @as("MaxResults")
     maxResults: option<maxResults>,
-    @ocaml.doc("<p>The identifier for the unsafe content job. Use <code>JobId</code> to identify the job in
+    @ocaml.doc("<p>The identifier for the inappropriate, unwanted, or offensive content moderation job. Use <code>JobId</code> to identify the job in
        a subsequent call to <code>GetContentModeration</code>.</p>")
     @as("JobId")
     jobId: jobId,
   }
   type response = {
     @ocaml.doc(
-      "<p>Version number of the moderation detection model that was used to detect unsafe content.</p>"
+      "<p>Version number of the moderation detection model that was used to detect inappropriate, unwanted, or offensive content.</p>"
     )
     @as("ModerationModelVersion")
     moderationModelVersion: option<string_>,
     @ocaml.doc("<p>If the response is truncated, Amazon Rekognition Video returns this token that you can use in the subsequent
-     request to retrieve the next set of unsafe content labels. </p>")
+     request to retrieve the next set of content moderation labels. </p>")
     @as("NextToken")
     nextToken: option<paginationToken>,
-    @ocaml.doc("<p>The detected unsafe content labels and the time(s) they were detected.</p>")
+    @ocaml.doc(
+      "<p>The detected inappropriate, unwanted, or offensive content moderation labels and the time(s) they were detected.</p>"
+    )
     @as("ModerationLabels")
     moderationLabels: option<contentModerationDetections>,
     @ocaml.doc("<p>Information about a video that Amazon Rekognition analyzed. <code>Videometadata</code>
@@ -2450,7 +2919,7 @@ module GetContentModeration = {
     )
     @as("StatusMessage")
     statusMessage: option<statusMessage>,
-    @ocaml.doc("<p>The current status of the unsafe content analysis job.</p>") @as("JobStatus")
+    @ocaml.doc("<p>The current status of the content moderation analysis job.</p>") @as("JobStatus")
     jobStatus: option<videoJobStatus>,
   }
   @module("@aws-sdk/client-rekognition") @new
@@ -2500,6 +2969,42 @@ module DetectModerationLabels = {
   external new: request => t = "DetectModerationLabelsCommand"
   let make = (~image, ~humanLoopConfig=?, ~minConfidence=?, ()) =>
     new({humanLoopConfig: humanLoopConfig, minConfidence: minConfidence, image: image})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module CreateDataset = {
+  type t
+  type request = {
+    @ocaml.doc("<p>
+The ARN of the Amazon Rekognition Custom Labels project to which you want to asssign the dataset.
+</p>")
+    @as("ProjectArn")
+    projectArn: projectArn,
+    @ocaml.doc("<p>
+The type of the dataset. Specify <code>train</code> to create a training dataset. Specify <code>test</code> 
+   to create a test dataset.
+</p>")
+    @as("DatasetType")
+    datasetType: datasetType,
+    @ocaml.doc("<p>
+The source files for the dataset. You can specify the ARN of an existing dataset or specify the Amazon S3 bucket location
+of an Amazon Sagemaker format manifest file. If you don't specify <code>datasetSource</code>, an empty dataset is created.
+  To add labeled images to the dataset,  You can use the console or call <a>UpdateDatasetEntries</a>.
+  
+</p>")
+    @as("DatasetSource")
+    datasetSource: option<datasetSource>,
+  }
+  type response = {
+    @ocaml.doc("<p>
+The ARN of the created  Amazon Rekognition Custom Labels dataset.
+</p>")
+    @as("DatasetArn")
+    datasetArn: option<datasetArn>,
+  }
+  @module("@aws-sdk/client-rekognition") @new external new: request => t = "CreateDatasetCommand"
+  let make = (~projectArn, ~datasetType, ~datasetSource=?, ()) =>
+    new({projectArn: projectArn, datasetType: datasetType, datasetSource: datasetSource})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -2583,7 +3088,7 @@ module SearchFacesByImage = {
   }
   type response = {
     @ocaml.doc(
-      "<p>Version number of the face detection model associated with the input collection (<code>CollectionId</code>).</p>"
+      "<p>Latest face model being used with the collection. For more information, see <a href=\"https://docs.aws.amazon.com/rekognition/latest/dg/face-detection-model.html\">Model versioning</a>.</p>"
     )
     @as("FaceModelVersion")
     faceModelVersion: option<string_>,
@@ -2633,7 +3138,7 @@ module SearchFaces = {
   }
   type response = {
     @ocaml.doc(
-      "<p>Version number of the face detection model associated with the input collection (<code>CollectionId</code>).</p>"
+      "<p>Latest face model being used with the collection. For more information, see <a href=\"https://docs.aws.amazon.com/rekognition/latest/dg/face-detection-model.html\">Model versioning</a>.</p>"
     )
     @as("FaceModelVersion")
     faceModelVersion: option<string_>,
@@ -2698,19 +3203,59 @@ module DetectFaces = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module DescribeProjects = {
+  type t
+  type request = {
+    @ocaml.doc("<p>A list of the projects that you want Amazon Rekognition Custom Labels to describe. If you don't specify a value, 
+      the response includes descriptions for all the projects in your AWS account.</p>")
+    @as("ProjectNames")
+    projectNames: option<projectNames>,
+    @ocaml.doc("<p>The maximum number of results to return per paginated call. The largest value you can specify is 100. 
+         If you specify a value greater than 100, a ValidationException
+         error occurs. The default value is 100. </p>")
+    @as("MaxResults")
+    maxResults: option<projectsPageSize>,
+    @ocaml.doc("<p>If the previous response was incomplete (because there is more
+         results to retrieve), Amazon Rekognition Custom Labels returns a pagination token in the response. You can use this pagination 
+         token to retrieve the next set of results. </p>")
+    @as("NextToken")
+    nextToken: option<extendedPaginationToken>,
+  }
+  type response = {
+    @ocaml.doc("<p>If the previous response was incomplete (because there is more
+         results to retrieve), Amazon Rekognition Custom Labels returns a pagination token in the response. 
+         You can use this pagination token to retrieve the next set of results. </p>")
+    @as("NextToken")
+    nextToken: option<extendedPaginationToken>,
+    @ocaml.doc(
+      "<p>A list of project descriptions. The list is sorted by the date and time the projects are created.</p>"
+    )
+    @as("ProjectDescriptions")
+    projectDescriptions: option<projectDescriptions>,
+  }
+  @module("@aws-sdk/client-rekognition") @new external new: request => t = "DescribeProjectsCommand"
+  let make = (~projectNames=?, ~maxResults=?, ~nextToken=?, ()) =>
+    new({projectNames: projectNames, maxResults: maxResults, nextToken: nextToken})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module RecognizeCelebrities = {
   type t
   type request = {
     @ocaml.doc("<p>The input image as base64-encoded bytes or an S3 object. If you use the AWS CLI to call
       Amazon Rekognition operations, passing base64-encoded image bytes is not supported. </p>
-         <p>If you are using an AWS SDK to call Amazon Rekognition, you might not need to base64-encode image bytes
-      passed using the <code>Bytes</code> field. 
-      For more information, see Images in the Amazon Rekognition developer guide.</p>")
+         <p>If you are using an AWS SDK to call Amazon Rekognition, you might not need to
+      base64-encode image bytes passed using the <code>Bytes</code> field. For more information, see
+      Images in the Amazon Rekognition developer guide.</p>")
     @as("Image")
     image: image,
   }
   type response = {
-    @ocaml.doc("<p>The orientation of the input image (counterclockwise direction). If your application
+    @ocaml.doc("<note>
+            <p>Support for estimating image orientation using the the OrientationCorrection field has ceased as of August 2021. 
+        Any returned values for this field included in an API response will always be NULL.</p>
+         </note>
+         <p>The orientation of the input image (counterclockwise direction). If your application
       displays the image, you can use this value to correct the orientation. The bounding box
       coordinates returned in <code>CelebrityFaces</code> and <code>UnrecognizedFaces</code>
       represent face locations before the image orientation is corrected. </p>
@@ -2727,7 +3272,11 @@ module RecognizeCelebrities = {
     @ocaml.doc("<p>Details about each unrecognized face in the image.</p>") @as("UnrecognizedFaces")
     unrecognizedFaces: option<comparedFaceList>,
     @ocaml.doc("<p>Details about each celebrity found in the image. Amazon Rekognition can detect a maximum of 64
-      celebrities in an image.</p>")
+      celebrities in an image. Each celebrity object includes the following attributes:
+      <code>Face</code>, <code>Confidence</code>, <code>Emotions</code>, <code>Landmarks</code>,
+      <code>Pose</code>, <code>Quality</code>, <code>Smile</code>, <code>Id</code>,
+      <code>KnownGender</code>, <code>MatchConfidence</code>, <code>Name</code>,
+      <code>Urls</code>.</p>")
     @as("CelebrityFaces")
     celebrityFaces: option<celebrityList>,
   }
@@ -2802,8 +3351,9 @@ module IndexFaces = {
       specify the <code>QualityFilter</code> request parameter.</p>")
     @as("UnindexedFaces")
     unindexedFaces: option<unindexedFaces>,
-    @ocaml.doc("<p>The version number of the face detection model that's associated with the input
-      collection (<code>CollectionId</code>).</p>")
+    @ocaml.doc(
+      "<p>Latest face model being used with the collection. For more information, see <a href=\"https://docs.aws.amazon.com/rekognition/latest/dg/face-detection-model.html\">Model versioning</a>.</p>"
+    )
     @as("FaceModelVersion")
     faceModelVersion: option<string_>,
     @ocaml.doc("<p>If your collection is associated with a face detection model that's later 
@@ -2987,8 +3537,12 @@ module DetectCustomLabels = {
   type t
   type request = {
     @ocaml.doc("<p>Specifies the minimum confidence level for the labels to return. 
-         Amazon Rekognition doesn't return any labels with a confidence lower than this specified value. If you specify a
-      value of 0, all labels are return, regardless of the default thresholds that the model version applies.</p>")
+         <code>DetectCustomLabels</code> doesn't return any labels with a confidence value that's lower than
+         this specified value. If you specify a
+      value of 0, <code>DetectCustomLabels</code> returns all labels, regardless of the assumed 
+         threshold applied to each label.
+      If you don't specify a value for <code>MinConfidence</code>,  <code>DetectCustomLabels</code>
+         returns labels based on the assumed threshold of each label.</p>")
     @as("MinConfidence")
     minConfidence: option<percent>,
     @ocaml.doc("<p>Maximum number of results you want the service to return in the response. 
@@ -3019,12 +3573,27 @@ module DetectCustomLabels = {
 module CreateProjectVersion = {
   type t
   type request = {
-    @ocaml.doc("<p>The identifier for your AWS Key Management Service (AWS KMS) customer master key (CMK).
-         You can supply the Amazon Resource Name (ARN) of your CMK, the ID of your CMK,
-         or an alias for your CMK.
-         The key is used to encrypt training and test images copied into the service for model training. Your 
-         source images are unaffected. The key is also used to encrypt training results and manifest files written
-         to the output Amazon S3 bucket (<code>OutputConfig</code>).</p>
+    @ocaml.doc("<p>The identifier for your AWS Key Management Service key (AWS KMS key).
+         You can supply the Amazon Resource Name (ARN) of your KMS key, the ID of your KMS key,
+         an alias for your KMS key, or an alias ARN.
+         The key is used to encrypt training and test images copied into the service for model training.
+         Your source images are unaffected. The key is also used to encrypt training results
+         and manifest files written to the output Amazon S3 bucket (<code>OutputConfig</code>).</p>
+         <p>If you choose to use your own KMS key, you need the following permissions on the KMS key.</p> 
+         <ul>
+            <li>
+               <p>kms:CreateGrant</p>
+            </li>
+            <li>
+               <p>kms:DescribeKey</p>
+            </li>
+            <li>
+               <p>kms:GenerateDataKey</p>
+            </li>
+            <li>
+               <p>kms:Decrypt</p>
+            </li>
+         </ul>
          <p>If you don't specify a value for <code>KmsKeyId</code>, images copied into the service are encrypted
          using a key that AWS owns and manages.</p>")
     @as("KmsKeyId")
@@ -3034,11 +3603,20 @@ module CreateProjectVersion = {
     </p>")
     @as("Tags")
     tags: option<tagMap>,
-    @ocaml.doc("<p>The dataset to use for testing.</p>") @as("TestingData")
-    testingData: testingData,
-    @ocaml.doc("<p>The dataset to use for training. </p>") @as("TrainingData")
-    trainingData: trainingData,
-    @ocaml.doc("<p>The Amazon S3 location to store the results of training.</p>")
+    @ocaml.doc("<p>Specifies an external manifest that the service uses to test the model.
+         If you specify <code>TestingData</code> you must also specify <code>TrainingData</code>.
+         The project must not have any associated datasets.</p>")
+    @as("TestingData")
+    testingData: option<testingData>,
+    @ocaml.doc("<p>Specifies an external manifest that the services uses to train the model.
+         If you specify <code>TrainingData</code> you must also specify <code>TestingData</code>.
+         The project must not have any associated datasets.
+      </p>")
+    @as("TrainingData")
+    trainingData: option<trainingData>,
+    @ocaml.doc("<p>The Amazon S3 bucket location to store the results of training.
+      The S3 bucket can be in any AWS account as long as the caller has
+      <code>s3:PutObject</code> permissions on the S3 bucket.</p>")
     @as("OutputConfig")
     outputConfig: outputConfig,
     @ocaml.doc("<p>A name for the version of the model. This value must be unique.</p>")
@@ -3058,13 +3636,13 @@ module CreateProjectVersion = {
   @module("@aws-sdk/client-rekognition") @new
   external new: request => t = "CreateProjectVersionCommand"
   let make = (
-    ~testingData,
-    ~trainingData,
     ~outputConfig,
     ~versionName,
     ~projectArn,
     ~kmsKeyId=?,
     ~tags=?,
+    ~testingData=?,
+    ~trainingData=?,
     (),
   ) =>
     new({

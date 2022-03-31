@@ -111,7 +111,7 @@ module StopHumanLoop = {
     @ocaml.doc("<p>The name of the human loop that you want to stop.</p>") @as("HumanLoopName")
     humanLoopName: humanLoopName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "StopHumanLoopCommand"
   let make = (~humanLoopName, ()) => new({humanLoopName: humanLoopName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -123,7 +123,7 @@ module DeleteHumanLoop = {
     @ocaml.doc("<p>The name of the human loop that you want to delete.</p>") @as("HumanLoopName")
     humanLoopName: humanLoopName,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DeleteHumanLoopCommand"
   let make = (~humanLoopName, ()) => new({humanLoopName: humanLoopName})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"

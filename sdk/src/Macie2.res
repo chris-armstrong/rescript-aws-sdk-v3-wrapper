@@ -102,7 +102,7 @@ type sharedAccess = [
 @ocaml.doc("<p>The qualitative representation of the finding's severity. Possible values are:</p>")
 type severityDescription = [@as("High") #High | @as("Medium") #Medium | @as("Low") #Low]
 @ocaml.doc(
-  "<p>The category of sensitive data that was detected and produced the finding. Possible values are:</p>"
+  "<p>For a finding, the category of sensitive data that was detected and produced the finding. For a managed data identifier, the category of sensitive data that the managed data identifier detects. Possible values are:</p>"
 )
 type sensitiveDataItemCategory = [
   | @as("CUSTOM_IDENTIFIER") #CUSTOM_IDENTIFIER
@@ -135,14 +135,12 @@ type searchResourcesComparator = [@as("NE") #NE | @as("EQ") #EQ]
 )
 type scopeFilterKey = [
   | @as("OBJECT_KEY") #OBJECT_KEY
-  | @as("TAG") #TAG
   | @as("OBJECT_SIZE") #OBJECT_SIZE
   | @as("OBJECT_LAST_MODIFIED_DATE") #OBJECT_LAST_MODIFIED_DATE
   | @as("OBJECT_EXTENSION") #OBJECT_EXTENSION
-  | @as("BUCKET_CREATION_DATE") #BUCKET_CREATION_DATE
 ]
 @ocaml.doc(
-  "<p>The current status of the relationship between an account and an associated Amazon Macie administrator account (<i>inviter account</i>). Possible values are:</p>"
+  "<p>The current status of the relationship between an account and an associated Amazon Macie administrator account. Possible values are:</p>"
 )
 type relationshipStatus = [
   | @as("AccountSuspended") #AccountSuspended
@@ -158,6 +156,15 @@ type relationshipStatus = [
 ]
 type orderBy = [@as("DESC") #DESC | @as("ASC") #ASC]
 type maxResults = int
+@ocaml.doc(
+  "<p>The selection type that determines which managed data identifiers a classification job uses to analyze data. Valid values are:</p>"
+)
+type managedDataIdentifierSelector = [
+  | @as("NONE") #NONE
+  | @as("INCLUDE") #INCLUDE
+  | @as("EXCLUDE") #EXCLUDE
+  | @as("ALL") #ALL
+]
 @ocaml.doc("<p>The status of an Amazon Macie account. Valid values are:</p>")
 type macieStatus = [@as("ENABLED") #ENABLED | @as("PAUSED") #PAUSED]
 @ocaml.doc("<p>The property to sort the results by. Valid values are:</p>")
@@ -230,7 +237,7 @@ type findingType = [
 @ocaml.doc("<p>The grouping to sort the results by. Valid values are:</p>")
 type findingStatisticsSortAttributeName = [@as("count") #Count | @as("groupKey") #GroupKey]
 @ocaml.doc(
-  "<p>The frequency with which Amazon Macie publishes updates to policy findings for an account. This includes publishing updates to AWS Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events). For more information, see <a href=\"https://docs.aws.amazon.com/macie/latest/user/findings-monitor.html\">Monitoring and processing findings</a> in the <i>Amazon Macie User Guide</i>. Valid values are:</p>"
+  "<p>The frequency with which Amazon Macie publishes updates to policy findings for an account. This includes publishing updates to Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events). For more information, see <a href=\"https://docs.aws.amazon.com/macie/latest/user/findings-monitor.html\">Monitoring and processing findings</a> in the <i>Amazon Macie User Guide</i>. Valid values are:</p>"
 )
 type findingPublishingFrequency = [
   | @as("SIX_HOURS") #SIX_HOURS
@@ -269,20 +276,28 @@ type dayOfWeek = [
   | @as("SUNDAY") #SUNDAY
 ]
 @ocaml.doc(
+  "<p>The severity of a finding, ranging from LOW, for least severe, to HIGH, for most severe. Valid values are:</p>"
+)
+type dataIdentifierSeverity = [@as("HIGH") #HIGH | @as("MEDIUM") #MEDIUM | @as("LOW") #LOW]
+@ocaml.doc(
   "<p>Specifies that a classification job runs once a day, every day. This is an empty object.</p>"
 )
-type dailySchedule = unit
+type dailySchedule = {.}
 @ocaml.doc(
   "<p>The type of currency that the data for an Amazon Macie usage metric is reported in. Possible values are:</p>"
 )
 type currency = [@as("USD") #USD]
+@ocaml.doc(
+  "<p>The error code for an error that prevented Amazon Macie from retrieving and processing information about an S3 bucket and the bucket's objects.</p>"
+)
+type bucketMetadataErrorCode = [@as("ACCESS_DENIED") #ACCESS_DENIED]
 type allowsUnencryptedObjectUploads = [
   | @as("UNKNOWN") #UNKNOWN
   | @as("FALSE") #FALSE
   | @as("TRUE") #TRUE
 ]
 @ocaml.doc(
-  "<p>The current status of an account as the delegated Amazon Macie administrator account for an AWS organization. Possible values are:</p>"
+  "<p>The current status of an account as the delegated Amazon Macie administrator account for an organization in Organizations. Possible values are:</p>"
 )
 type adminStatus = [@as("DISABLING_IN_PROGRESS") #DISABLING_IN_PROGRESS | @as("ENABLED") #ENABLED]
 type __listOf__string = array<__string>
@@ -301,7 +316,7 @@ type userPausedDetails = {
   )
   jobPausedAt: option<__timestampIso8601>,
   @ocaml.doc(
-    "<p>The Amazon Resource Name (ARN) of the AWS Health event that Amazon Macie sent to notify you of the job or job run's pending expiration and cancellation. This value is null if a job has been paused for less than 23 days.</p>"
+    "<p>The Amazon Resource Name (ARN) of the Health event that Amazon Macie sent to notify you of the job or job run's pending expiration and cancellation. This value is null if a job has been paused for less than 23 days.</p>"
   )
   jobImminentExpirationHealthEventArn: option<__string>,
   @ocaml.doc(
@@ -310,7 +325,7 @@ type userPausedDetails = {
   jobExpiresAt: option<__timestampIso8601>,
 }
 @ocaml.doc(
-  "<p>Provides information about an AWS account and entity that performed an action on an affected resource. The action was performed using the credentials for your AWS account.</p>"
+  "<p>Provides information about an Amazon Web Services account and entity that performed an action on an affected resource. The action was performed using the credentials for your Amazon Web Services account.</p>"
 )
 type userIdentityRoot = {
   @ocaml.doc("<p>The unique identifier for the entity that performed the action.</p>")
@@ -319,7 +334,8 @@ type userIdentityRoot = {
     "<p>The Amazon Resource Name (ARN) of the principal that performed the action. The last section of the ARN contains the name of the user or role that performed the action.</p>"
   )
   arn: option<__string>,
-  @ocaml.doc("<p>The unique identifier for the AWS account.</p>") accountId: option<__string>,
+  @ocaml.doc("<p>The unique identifier for the Amazon Web Services account.</p>")
+  accountId: option<__string>,
 }
 @ocaml.doc(
   "<p>Provides aggregated data for an Amazon Macie usage metric. The value for the metric reports estimated usage data for an account for the preceding 30 days or the current calendar month to date, depending on the time period (timeRange) specified in the request.</p>"
@@ -354,7 +370,9 @@ type unprocessedAccount = {
   errorMessage: option<__string>,
   @ocaml.doc("<p>The source of the issue or delay in processing the request.</p>")
   errorCode: option<errorCode>,
-  @ocaml.doc("<p>The AWS account ID for the account that the request applies to.</p>")
+  @ocaml.doc(
+    "<p>The Amazon Web Services account ID for the account that the request applies to.</p>"
+  )
   accountId: option<__string>,
 }
 @ocaml.doc(
@@ -397,6 +415,19 @@ type sortCriteria = {
   )
   attributeName: option<__string>,
 }
+@ocaml.doc(
+  "<p>Specifies a severity level for findings that a custom data identifier produces. A severity level determines which severity is assigned to the findings, based on the number of occurrences of text that matches the custom data identifier's detection criteria.</p>"
+)
+type severityLevel = {
+  @ocaml.doc(
+    "<p>The severity to assign to a finding: if the number of occurrences is greater than or equal to the specified threshold (occurrencesThreshold); and, if applicable, the number of occurrences is less than the threshold for the next consecutive severity level for the custom data identifier, moving from LOW to HIGH.</p>"
+  )
+  severity: dataIdentifierSeverity,
+  @ocaml.doc(
+    "<p>The minimum number of occurrences of text that must match the custom data identifier's detection criteria in order to produce a finding with the specified severity (severity).</p>"
+  )
+  occurrencesThreshold: __long,
+}
 @ocaml.doc("<p>Provides the numerical and qualitative representations of a finding's severity.</p>")
 type severity = {
   @ocaml.doc(
@@ -428,7 +459,7 @@ type sessionIssuer = {
   )
   arn: option<__string>,
   @ocaml.doc(
-    "<p>The unique identifier for the AWS account that owns the entity that was used to get the credentials.</p>"
+    "<p>The unique identifier for the Amazon Web Services account that owns the entity that was used to get the credentials.</p>"
   )
   accountId: option<__string>,
 }
@@ -464,7 +495,7 @@ type serviceLimit = {
 )
 type serverSideEncryption = {
   @ocaml.doc(
-    "<p>The Amazon Resource Name (ARN) or unique identifier (key ID) for the AWS Key Management Service (AWS KMS) customer master key (CMK) that's used to encrypt data in the bucket or the object. If an AWS KMS CMK isn't used, this value is null.</p>"
+    "<p>The Amazon Resource Name (ARN) or unique identifier (key ID) for the KMS key that's used to encrypt data in the bucket or the object. This value is null if an KMS key isn't used to encrypt the data.</p>"
   )
   kmsMasterKeyId: option<__string>,
   @ocaml.doc(
@@ -473,15 +504,15 @@ type serverSideEncryption = {
   encryptionType: option<encryptionType>,
 }
 @ocaml.doc(
-  "<p>Specifies configuration settings that determine which findings are published to AWS Security Hub automatically. For information about how Macie publishes findings to Security Hub, see <a href=\"https://docs.aws.amazon.com/macie/latest/user/securityhub-integration.html\">Amazon Macie integration with Security Hub</a> in the <i>Amazon Macie User Guide</i>.</p>"
+  "<p>Specifies configuration settings that determine which findings are published to Security Hub automatically. For information about how Macie publishes findings to Security Hub, see <a href=\"https://docs.aws.amazon.com/macie/latest/user/securityhub-integration.html\">Amazon Macie integration with Security Hub</a> in the <i>Amazon Macie User Guide</i>.</p>"
 )
 type securityHubConfiguration = {
   @ocaml.doc(
-    "<p>Specifies whether to publish policy findings to AWS Security Hub. If you set this value to true, Amazon Macie automatically publishes all new and updated policy findings that weren't suppressed by a findings filter. The default value is true.</p>"
+    "<p>Specifies whether to publish policy findings to Security Hub. If you set this value to true, Amazon Macie automatically publishes all new and updated policy findings that weren't suppressed by a findings filter. The default value is true.</p>"
   )
   publishPolicyFindings: __boolean,
   @ocaml.doc(
-    "<p>Specifies whether to publish sensitive data findings to AWS Security Hub. If you set this value to true, Amazon Macie automatically publishes all sensitive data findings that weren't suppressed by a findings filter. The default value is false.</p>"
+    "<p>Specifies whether to publish sensitive data findings to Security Hub. If you set this value to true, Amazon Macie automatically publishes all sensitive data findings that weren't suppressed by a findings filter. The default value is false.</p>"
   )
   publishClassificationFindings: __boolean,
 }
@@ -493,7 +524,7 @@ type searchResourcesTagCriterionPair = {
   @ocaml.doc("<p>The value for the tag key to use in the condition.</p>") key: option<__string>,
 }
 @ocaml.doc(
-  "<p>Specifies criteria for sorting the results of a query for information about AWS resources that Amazon Macie monitors and analyzes.</p>"
+  "<p>Specifies criteria for sorting the results of a query for information about Amazon Web Services resources that Amazon Macie monitors and analyzes.</p>"
 )
 type searchResourcesSortCriteria = {
   @ocaml.doc(
@@ -508,7 +539,7 @@ type searchResourcesSortCriteria = {
 )
 type s3Destination = {
   @ocaml.doc(
-    "<p>The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS KMS) customer master key (CMK) to use for encryption of the results. This must be the ARN of an existing CMK that's in the same AWS Region as the bucket.</p>"
+    "<p>The Amazon Resource Name (ARN) of the KMS key to use for encryption of the results. This must be the ARN of an existing, symmetric, customer managed KMS key that's in the same Amazon Web Services Region as the bucket.</p>"
   )
   kmsKeyArn: __string,
   @ocaml.doc(
@@ -517,42 +548,47 @@ type s3Destination = {
   keyPrefix: option<__string>,
   @ocaml.doc("<p>The name of the bucket.</p>") bucketName: __string,
 }
-@ocaml.doc("<p>Provides information about the user who owns an S3 bucket.</p>")
+@ocaml.doc(
+  "<p>Provides information about the Amazon Web Services account that owns an S3 bucket.</p>"
+)
 type s3BucketOwner = {
-  @ocaml.doc("<p>The AWS account ID for the user who owns the bucket.</p>") id: option<__string>,
-  @ocaml.doc("<p>The display name of the user who owns the bucket.</p>")
+  @ocaml.doc("<p>The canonical user ID for the account that owns the bucket.</p>")
+  id: option<__string>,
+  @ocaml.doc("<p>The display name of the account that owns the bucket.</p>")
   displayName: option<__string>,
 }
 @ocaml.doc(
-  "<p>Specifies the location of an occurrence of sensitive data in an Apache Avro object container or Apache Parquet file.</p>"
+  "<p>Specifies the location of an occurrence of sensitive data in an Apache Avro object container, Apache Parquet file, JSON file, or JSON Lines file.</p>"
 )
 type record = {
-  @ocaml.doc("<p>The record index, starting from 0, for the record that contains the data.</p>")
+  @ocaml.doc(
+    "<p>For an Avro object container or Parquet file, the record index, starting from 0, for the record that contains the sensitive data. For a JSON Lines file, the line index, starting from 0, for the line that contains the sensitive data. This value is always 0 for JSON files.</p>"
+  )
   recordIndex: option<__long>,
   @ocaml.doc(
-    "<p>The path, as a JSONPath expression, to the field in the record that contains the data. If Amazon Macie detects sensitive data in the name of any element in the path, Macie omits this field.</p> <p>If the name of an element exceeds 20 characters, Macie truncates the name by removing characters from the beginning of the name. If the resulting full path exceeds 250 characters, Macie also truncates the path, starting with the first element in the path, until the path contains 250 or fewer characters.</p>"
+    "<p>The path, as a JSONPath expression, to the sensitive data. For an Avro object container or Parquet file, this is the path to the field in the record (recordIndex) that contains the data. For a JSON or JSON Lines file, this is the path to the field or array that contains the data. If the data is a value in an array, the path also indicates which value contains the data.</p> <p>If Amazon Macie detects sensitive data in the name of any element in the path, Macie omits this field. If the name of an element exceeds 20 characters, Macie truncates the name by removing characters from the beginning of the name. If the resulting full path exceeds 250 characters, Macie also truncates the path, starting with the first element in the path, until the path contains 250 or fewer characters.</p>"
   )
   jsonPath: option<__string>,
 }
 @ocaml.doc(
-  "<p>Provides details about the location of an occurrence of sensitive data in an Adobe Portable Document Format file, Microsoft Word document, or non-binary text file.</p>"
+  "<p>Specifies the location of an occurrence of sensitive data in a non-binary text file, such as an HTML, TXT, or XML file.</p>"
 )
 type range = {
   @ocaml.doc(
-    "<p>The column number for the column that contains the data, if the file contains structured data.</p>"
+    "<p>The number of characters, with spaces and starting from 1, from the beginning of the first line that contains the sensitive data (start) to the beginning of the sensitive data.</p>"
   )
   startColumn: option<__long>,
   @ocaml.doc(
-    "<p>Possible values are:</p> <ul><li><p>In an Occurrences.lineRanges array, the number of lines from the beginning of the file to the beginning of the sensitive data.</p></li> <li><p>In an Occurrences.offsetRanges array, the number of characters from the beginning of the file to the beginning of the sensitive data.</p></li> <li><p>In a Page object, the number of lines (lineRange) or characters (offsetRange) from the beginning of the page to the beginning of the sensitive data.</p></li></ul>"
+    "<p>The number of lines from the beginning of the file to the beginning of the sensitive data.</p>"
   )
   start: option<__long>,
   @ocaml.doc(
-    "<p>Possible values are:</p> <ul><li><p>In an Occurrences.lineRanges array, the number of lines from the beginning of the file to the end of the sensitive data.</p></li> <li><p>In an Occurrences.offsetRanges array, the number of characters from the beginning of the file to the end of the sensitive data.</p></li> <li><p>In a Page object, the number of lines (lineRange) or characters (offsetRange) from the beginning of the page to the end of the sensitive data.</p></li></ul>"
+    "<p>The number of lines from the beginning of the file to the end of the sensitive data.</p>"
   )
   end: option<__long>,
 }
 @ocaml.doc(
-  "<p>Provides information about the total storage size (in bytes) or number of objects that Amazon Macie can't analyze in one or more S3 buckets. In a BucketMetadata or MatchingBucket object, this data is for a specific bucket. In a GetBucketStatisticsResponse object, this data is aggregated for all the buckets in the query results. If versioning is enabled for a bucket, total storage size values are based on the size of the latest version of each applicable object in the bucket.</p>"
+  "<p>Provides information about the total storage size (in bytes) or number of objects that Amazon Macie can't analyze in one or more S3 buckets. In a BucketMetadata or MatchingBucket object, this data is for a specific bucket. In a GetBucketStatisticsResponse object, this data is aggregated for the buckets in the query results. If versioning is enabled for a bucket, total storage size values are based on the size of the latest version of each applicable object in the bucket.</p>"
 )
 type objectLevelStatistics = {
   @ocaml.doc(
@@ -585,11 +621,11 @@ type objectCountByEncryptionType = {
   )
   s3Managed: option<__long>,
   @ocaml.doc(
-    "<p>The total number of objects that are encrypted with an AWS Key Management Service (AWS KMS) customer master key (CMK). The objects use AWS managed AWS KMS encryption (AWS-KMS) or customer managed AWS KMS encryption (SSE-KMS).</p>"
+    "<p>The total number of objects that are encrypted with an KMS key, either an Amazon Web Services managed key or a customer managed key. The objects use KMS encryption (SSE-KMS).</p>"
   )
   kmsManaged: option<__long>,
   @ocaml.doc(
-    "<p>The total number of objects that are encrypted with a customer-managed key. The objects use customer-provided server-side encryption (SSE-C).</p>"
+    "<p>The total number of objects that are encrypted with a customer-provided key. The objects use customer-provided server-side encryption (SSE-C).</p>"
   )
   customerManaged: option<__long>,
 }
@@ -599,6 +635,19 @@ type monthlySchedule = {
     "<p>The numeric day of the month when Amazon Macie runs the job. This value can be an integer from 1 through 31.</p> <p>If this value exceeds the number of days in a certain month, Macie doesn't run the job that month. Macie runs the job only during months that have the specified day. For example, if this value is 31 and a month has only 30 days, Macie doesn't run the job that month. To run the job every month, specify a value that's less than 29.</p>"
   )
   dayOfMonth: option<__integer>,
+}
+@ocaml.doc(
+  "<p>Provides information about a managed data identifier. For additional information, see <a href=\"https://docs.aws.amazon.com/macie/latest/user/managed-data-identifiers.html\">Using managed data identifiers</a> in the <i>Amazon Macie User Guide</i>.</p>"
+)
+type managedDataIdentifierSummary = {
+  @ocaml.doc(
+    "<p>The unique identifier for the managed data identifier. This is a string that describes the type of sensitive data that the managed data identifier detects. For example: OPENSSH_PRIVATE_KEY for OpenSSH private keys, CREDIT_CARD_NUMBER for credit card numbers, or USA_PASSPORT_NUMBER for US passport numbers.</p>"
+  )
+  id: option<__string>,
+  @ocaml.doc(
+    "<p>The category of sensitive data that the managed data identifier detects: CREDENTIALS, for credentials data such as private keys or Amazon Web Services secret access keys; FINANCIAL_INFORMATION, for financial data such as credit card numbers; or, PERSONAL_INFORMATION, for personal health information, such as health insurance identification numbers, or personally identifiable information, such as passport numbers.</p>"
+  )
+  category: option<sensitiveDataItemCategory>,
 }
 @ocaml.doc(
   "<p>Specifies criteria for sorting the results of a request for information about classification jobs.</p>"
@@ -689,27 +738,22 @@ type ipCountry = {
 }
 @ocaml.doc("<p>Provides information about the city that an IP address originated from.</p>")
 type ipCity = {@ocaml.doc("<p>The name of the city.</p>") name: option<__string>}
-@ocaml.doc(
-  "<p>Provides information about an Amazon Macie membership invitation that was received by an account.</p>"
-)
+@ocaml.doc("<p>Provides information about an Amazon Macie membership invitation.</p>")
 type invitation = {
   @ocaml.doc(
-    "<p>The status of the relationship between the account that sent the invitation (<i>inviter account</i>) and the account that received the invitation (<i>invitee account</i>).</p>"
+    "<p>The status of the relationship between the account that sent the invitation and the account that received the invitation.</p>"
   )
   relationshipStatus: option<relationshipStatus>,
   @ocaml.doc(
     "<p>The date and time, in UTC and extended ISO 8601 format, when the invitation was sent.</p>"
   )
   invitedAt: option<__timestampIso8601>,
-  @ocaml.doc(
-    "<p>The unique identifier for the invitation. Amazon Macie uses this identifier to validate the inviter account with the invitee account.</p>"
-  )
-  invitationId: option<__string>,
-  @ocaml.doc("<p>The AWS account ID for the account that sent the invitation.</p>")
+  @ocaml.doc("<p>The unique identifier for the invitation.</p>") invitationId: option<__string>,
+  @ocaml.doc("<p>The Amazon Web Services account ID for the account that sent the invitation.</p>")
   accountId: option<__string>,
 }
 @ocaml.doc(
-  "<p>Provides information about an AWS Identity and Access Management (IAM) user who performed an action on an affected resource.</p>"
+  "<p>Provides information about an Identity and Access Management (IAM) user who performed an action on an affected resource.</p>"
 )
 type iamUser = {
   @ocaml.doc("<p>The user name of the IAM user who performed the action.</p>")
@@ -721,7 +765,7 @@ type iamUser = {
   )
   arn: option<__string>,
   @ocaml.doc(
-    "<p>The unique identifier for the AWS account that's associated with the IAM user who performed the action.</p>"
+    "<p>The unique identifier for the Amazon Web Services account that's associated with the IAM user who performed the action.</p>"
   )
   accountId: option<__string>,
 }
@@ -769,11 +813,11 @@ type customDataIdentifierSummary = {
 @ocaml.doc("<p>Provides information about the status of a sensitive data finding.</p>")
 type classificationResultStatus = {
   @ocaml.doc(
-    "<p>A brief description of the status of the finding. Amazon Macie uses this value to notify you of any errors, warnings, or considerations that might impact your analysis of the finding.</p>"
+    "<p>A brief description of the status of the finding. This value is null if the status (code) of the finding is COMPLETE.</p> <p>Amazon Macie uses this value to notify you of any errors, warnings, or considerations that might impact your analysis of the finding and the affected S3 object. Possible values are:</p> <ul><li><p>ARCHIVE_CONTAINS_UNPROCESSED_FILES - The object is an archive file and Macie extracted and analyzed only some or none of the files in the archive. To determine which files Macie analyzed, if any, you can refer to the corresponding sensitive data discovery result for the finding (ClassificationDetails.detailedResultsLocation).</p></li> <li><p>ARCHIVE_EXCEEDS_SIZE_LIMIT - The object is an archive file whose total storage size exceeds the size quota for this type of archive.</p></li> <li><p>ARCHIVE_NESTING_LEVEL_OVER_LIMIT - The object is an archive file whose nested depth exceeds the quota for the maximum number of nested levels that Macie analyzes for this type of archive.</p></li> <li><p>ARCHIVE_TOTAL_BYTES_EXTRACTED_OVER_LIMIT - The object is an archive file that exceeds the quota for the maximum amount of data that Macie extracts and analyzes for this type of archive.</p></li> <li><p>ARCHIVE_TOTAL_DOCUMENTS_PROCESSED_OVER_LIMIT - The object is an archive file that contains more than the maximum number of files that Macie extracts and analyzes for this type of archive.</p></li> <li><p>FILE_EXCEEDS_SIZE_LIMIT - The storage size of the object exceeds the size quota for this type of file.</p></li> <li><p>INVALID_ENCRYPTION - The object is encrypted using server-side encryption but Macie isn’t allowed to use the key. Macie can’t decrypt and analyze the object.</p></li> <li><p>INVALID_KMS_KEY - The object is encrypted with an KMS key that was disabled or is being deleted. Macie can’t decrypt and analyze the object.</p></li> <li><p>INVALID_OBJECT_STATE - The object doesn’t use a supported Amazon S3 storage class. For more information, see <a href=\"https://docs.aws.amazon.com/macie/latest/user/data-classification.html\">Discovering sensitive data</a> in the <i>Amazon Macie User Guide</i>.</p></li> <li><p>JSON_NESTING_LEVEL_OVER_LIMIT - The object contains JSON data and the nested depth of the data exceeds the quota for the number of nested levels that Macie analyzes for this type of file.</p></li> <li><p>MALFORMED_FILE - The object is a malformed or corrupted file. An error occurred when Macie attempted to detect the file’s type or extract data from the file.</p></li> <li><p>OBJECT_VERSION_MISMATCH - The object was changed while Macie was analyzing it.</p></li> <li><p>NO_SUCH_BUCKET_AVAILABLE - The object was in a bucket that was deleted shortly before or when Macie attempted to analyze the object.</p></li> <li><p>MALFORMED_OR_FILE_SIZE_EXCEEDS_LIMIT - The object is a Microsoft Office file that is malformed or exceeds the size quota for this type of file. If the file is malformed, an error occurred when Macie attempted to extract data from the file.</p></li> <li><p>OOXML_UNCOMPRESSED_SIZE_EXCEEDS_LIMIT - The object is an Office Open XML file that exceeds the size quota for this type of file.</p></li> <li><p>OOXML_UNCOMPRESSED_RATIO_EXCEEDS_LIMIT - The object is an Office Open XML file whose compression ratio exceeds the compression quota for this type of file.</p></li> <li><p>PERMISSION_DENIED - Macie isn’t allowed to access the object. The object’s permissions settings prevent Macie from analyzing the object.</p></li> <li><p>SOURCE_OBJECT_NO_LONGER_AVAILABLE - The object was deleted shortly before or when Macie attempted to analyze it.</p></li> <li><p>UNABLE_TO_PARSE_FILE - The object is a file that contains structured data and an error occurred when Macie attempted to parse the data.</p></li> <li><p>UNSUPPORTED_FILE_TYPE_EXCEPTION - The object is a file that uses an unsupported file or storage format. For more information, see <a href=\"https://docs.aws.amazon.com/macie/latest/user/discovery-supported-formats.html\">Supported file and storage formats</a> in the <i>Amazon Macie User Guide</i>.</p></li></ul> <p>For information about sensitive data discovery quotas for files, see <a href=\"https://docs.aws.amazon.com/macie/latest/user/macie-quotas.html\">Amazon Macie quotas</a> in the <i>Amazon Macie User Guide</i>.</p>"
   )
   reason: option<__string>,
   @ocaml.doc(
-    "<p>The status of the finding. Possible values are:</p> <ul><li><p>COMPLETE - Amazon Macie successfully completed its analysis of the object that the finding applies to.</p></li> <li><p>PARTIAL - Macie analyzed only a subset of the data in the object that the finding applies to. For example, the object is an archive file that contains files in an unsupported format.</p></li> <li><p>SKIPPED - Macie wasn't able to analyze the object that the finding applies to. For example, the object is a malformed file or a file that uses an unsupported format.</p></li></ul>"
+    "<p>The status of the finding. Possible values are:</p> <ul><li><p>COMPLETE - Amazon Macie successfully completed its analysis of the S3 object that the finding applies to.</p></li> <li><p>PARTIAL - Macie analyzed only a subset of the data in the S3 object that the finding applies to. For example, the object is an archive file that contains files in an unsupported format.</p></li> <li><p>SKIPPED - Macie wasn't able to analyze the S3 object that the finding applies to. For example, the object is a file that uses an unsupported format.</p></li></ul>"
   )
   code: option<__string>,
 }
@@ -781,17 +825,16 @@ type classificationResultStatus = {
   "<p>Specifies the location of an occurrence of sensitive data in a Microsoft Excel workbook, CSV file, or TSV file.</p>"
 )
 type cell = {
-  @ocaml.doc("<p>The row number of the row that contains the data.</p>") row: option<__long>,
-  @ocaml.doc(
-    "<p>The name of the column that contains the data, if available. This value is also null if Amazon Macie detects sensitive data in the name of any column in the file.</p>"
-  )
+  @ocaml.doc("<p>The row number of the row that contains the sensitive data.</p>")
+  row: option<__long>,
+  @ocaml.doc("<p>The name of the column that contains the sensitive data, if available.</p>")
   columnName: option<__string>,
   @ocaml.doc(
-    "<p>The column number of the column that contains the data. For a Microsoft Excel workbook, this value correlates to the alphabetical character(s) for a column identifier. For example, 1 for column A, 2 for column B, and so on.</p>"
+    "<p>The column number of the column that contains the sensitive data. For a Microsoft Excel workbook, this value correlates to the alphabetical character(s) for a column identifier, for example: 1 for column A, 2 for column B, and so on.</p>"
   )
   column: option<__long>,
   @ocaml.doc(
-    "<p>The location of the cell, as an absolute cell reference, that contains the data. For example, Sheet2!C5 for cell C5 on Sheet2 in a Microsoft Excel workbook. This value is null for CSV and TSV files.</p>"
+    "<p>The location of the cell, as an absolute cell reference, that contains the sensitive data, for example Sheet2!C5 for cell C5 on Sheet2 in a Microsoft Excel workbook. This value is null for CSV and TSV files.</p>"
   )
   cellReference: option<__string>,
 }
@@ -813,12 +856,12 @@ type bucketSortCriteria = {
 )
 type bucketServerSideEncryption = {
   @ocaml.doc(
-    "<p>The type of server-side encryption that's used by default when storing new objects in the bucket. Possible values are:</p> <ul><li><p>AES256 - New objects are encrypted with an Amazon S3 managed key and use Amazon S3 managed encryption (SSE-S3).</p></li> <li><p>aws:kms - New objects are encrypted with an AWS KMS CMK, specified by the kmsMasterKeyId property, and use AWS managed AWS KMS encryption (AWS-KMS) or customer managed AWS KMS encryption (SSE-KMS).</p></li> <li><p>NONE - New objects aren't encrypted by default. Default encryption is disabled for the bucket.</p></li></ul>"
+    "<p>The type of server-side encryption that's used by default when storing new objects in the bucket. Possible values are:</p> <ul><li><p>AES256 - New objects are encrypted with an Amazon S3 managed key. They use SSE-S3 encryption.</p></li> <li><p>aws:kms - New objects are encrypted with an KMS key (kmsMasterKeyId), either an Amazon Web Services managed key or a customer managed key. They use SSE-KMS encryption.</p></li> <li><p>NONE - New objects aren't encrypted by default. Default encryption is disabled for the bucket.</p></li></ul>"
   )
   @as("type")
   type_: option<type_>,
   @ocaml.doc(
-    "<p>The Amazon Resource Name (ARN) or unique identifier (key ID) for the AWS Key Management Service (AWS KMS) customer master key (CMK) that's used by default to encrypt objects that are added to the bucket. This value is null if the bucket uses an Amazon S3 managed key to encrypt new objects or the bucket doesn't encrypt new objects by default.</p>"
+    "<p>The Amazon Resource Name (ARN) or unique identifier (key ID) for the KMS key that's used by default to encrypt objects that are added to the bucket. This value is null if the bucket uses an Amazon S3 managed key to encrypt new objects or the bucket doesn't encrypt new objects by default.</p>"
   )
   kmsMasterKeyId: option<__string>,
 }
@@ -853,21 +896,23 @@ type bucketCountPolicyAllowsUnencryptedObjectUploads = {
   allowsUnencryptedObjectUploads: option<__long>,
 }
 @ocaml.doc(
-  "<p>Provides information about the number of S3 buckets that are or aren't shared with other AWS accounts.</p>"
+  "<p>Provides information about the number of S3 buckets that are or aren't shared with other Amazon Web Services accounts.</p>"
 )
 type bucketCountBySharedAccessType = {
   @ocaml.doc(
-    "<p>The total number of buckets that Amazon Macie wasn't able to evaluate shared access settings for. Macie can't determine whether these buckets are shared with other AWS accounts.</p>"
+    "<p>The total number of buckets that Amazon Macie wasn't able to evaluate shared access settings for. Macie can't determine whether these buckets are shared with other Amazon Web Services accounts.</p>"
   )
   unknown: option<__long>,
-  @ocaml.doc("<p>The total number of buckets that aren't shared with other AWS accounts.</p>")
+  @ocaml.doc(
+    "<p>The total number of buckets that aren't shared with other Amazon Web Services accounts.</p>"
+  )
   notShared: option<__long>,
   @ocaml.doc(
-    "<p>The total number of buckets that are shared with an AWS account that's part of the same Amazon Macie organization.</p>"
+    "<p>The total number of buckets that are shared with an Amazon Web Services account that's part of the same Amazon Macie organization.</p>"
   )
   internal: option<__long>,
   @ocaml.doc(
-    "<p>The total number of buckets that are shared with an AWS account that isn't part of the same Amazon Macie organization.</p>"
+    "<p>The total number of buckets that are shared with an Amazon Web Services account that isn't part of the same Amazon Macie organization.</p>"
   )
   @as("external")
   external_: option<__long>,
@@ -889,7 +934,7 @@ type bucketCountByEncryptionType = {
   )
   s3Managed: option<__long>,
   @ocaml.doc(
-    "<p>The total number of buckets that use an AWS Key Management Service (AWS KMS) customer master key (CMK) to encrypt new objects by default. These buckets use AWS managed AWS KMS encryption (AWS-KMS) or customer managed AWS KMS encryption (SSE-KMS) by default.</p>"
+    "<p>The total number of buckets that use an KMS key to encrypt new objects by default, either an Amazon Web Services managed key or a customer managed key. These buckets use KMS encryption (SSE-KMS) by default.</p>"
   )
   kmsManaged: option<__long>,
 }
@@ -949,19 +994,20 @@ type batchGetCustomDataIdentifierSummary = {
   arn: option<__string>,
 }
 @ocaml.doc(
-  "<p>Provides information about an AWS service that performed an action on an affected resource.</p>"
+  "<p>Provides information about an Amazon Web Service that performed an action on an affected resource.</p>"
 )
 type awsService = {
-  @ocaml.doc("<p>The name of the AWS service that performed the action.</p>")
+  @ocaml.doc("<p>The name of the Amazon Web Service that performed the action.</p>")
   invokedBy: option<__string>,
 }
 @ocaml.doc(
-  "<p>Provides information about an AWS account and entity that performed an action on an affected resource. The action was performed using the credentials for an AWS account other than your own account.</p>"
+  "<p>Provides information about an Amazon Web Services account and entity that performed an action on an affected resource. The action was performed using the credentials for an Amazon Web Services account other than your own account.</p>"
 )
 type awsAccount = {
   @ocaml.doc("<p>The unique identifier for the entity that performed the action.</p>")
   principalId: option<__string>,
-  @ocaml.doc("<p>The unique identifier for the AWS account.</p>") accountId: option<__string>,
+  @ocaml.doc("<p>The unique identifier for the Amazon Web Services account.</p>")
+  accountId: option<__string>,
 }
 @ocaml.doc(
   "<p>Provides information about an API operation that an entity invoked for an affected resource.</p>"
@@ -976,7 +1022,7 @@ type apiCallDetails = {
   )
   firstSeen: option<__timestampIso8601>,
   @ocaml.doc(
-    "<p>The URL of the AWS service that provides the operation, for example: s3.amazonaws.com.</p>"
+    "<p>The URL of the Amazon Web Service that provides the operation, for example: s3.amazonaws.com.</p>"
   )
   apiServiceName: option<__string>,
   @ocaml.doc(
@@ -985,21 +1031,22 @@ type apiCallDetails = {
   api: option<__string>,
 }
 @ocaml.doc(
-  "<p>Provides information about the delegated Amazon Macie administrator account for an AWS organization.</p>"
+  "<p>Provides information about the delegated Amazon Macie administrator account for an organization in Organizations.</p>"
 )
 type adminAccount = {
   @ocaml.doc(
-    "<p>The current status of the account as the delegated administrator of Amazon Macie for the organization.</p>"
+    "<p>The current status of the account as the delegated Amazon Macie administrator account for the organization.</p>"
   )
   status: option<adminStatus>,
-  @ocaml.doc("<p>The AWS account ID for the account.</p>") accountId: option<__string>,
+  @ocaml.doc("<p>The Amazon Web Services account ID for the account.</p>")
+  accountId: option<__string>,
 }
 @ocaml.doc(
-  "<p>Specifies details for an account to associate with an Amazon Macie administrator account.</p>"
+  "<p>Specifies the details of an account to associate with an Amazon Macie administrator account.</p>"
 )
 type accountDetail = {
   @ocaml.doc("<p>The email address for the account.</p>") email: __string,
-  @ocaml.doc("<p>The AWS account ID for the account.</p>") accountId: __string,
+  @ocaml.doc("<p>The Amazon Web Services account ID for the account.</p>") accountId: __string,
 }
 @ocaml.doc(
   "<p>Provides information about the permissions settings of the bucket-level access control list (ACL) for an S3 bucket.</p>"
@@ -1019,6 +1066,7 @@ type __listOfUnprocessedAccount = array<unprocessedAccount>
 type __listOfTagValuePair = array<tagValuePair>
 type __listOfTagCriterionPairForJob = array<tagCriterionPairForJob>
 type __listOfSearchResourcesTagCriterionPair = array<searchResourcesTagCriterionPair>
+type __listOfManagedDataIdentifierSummary = array<managedDataIdentifierSummary>
 type __listOfKeyValuePair = array<keyValuePair>
 type __listOfInvitation = array<invitation>
 type __listOfGroupCount = array<groupCount>
@@ -1030,7 +1078,7 @@ type __listOfAdminAccount = array<adminAccount>
 )
 type usageStatisticsFilter = {
   @ocaml.doc(
-    "<p>An array that lists values to use in the condition, based on the value for the field specified by the key property. If the value for the key property is accountId, this array can specify multiple values. Otherwise, this array can specify only one value.</p> <p>Valid values for each supported field are:</p> <ul><li><p>accountId - The unique identifier for an AWS account.</p></li></ul> <ul><li><p>freeTrialStartDate - The date and time, in UTC and extended ISO 8601 format, when the free trial started for an account.</p></li></ul> <ul><li><p>serviceLimit - A Boolean (true or false) value that indicates whether an account has reached its monthly quota.</p></li></ul> <ul><li><p>total - A string that represents the current estimated cost for an account.</p></li></ul>"
+    "<p>An array that lists values to use in the condition, based on the value for the field specified by the key property. If the value for the key property is accountId, this array can specify multiple values. Otherwise, this array can specify only one value.</p> <p>Valid values for each supported field are:</p> <ul><li><p>accountId - The unique identifier for an Amazon Web Services account.</p></li> <li><p>freeTrialStartDate - The date and time, in UTC and extended ISO 8601 format, when the free trial started for an account.</p></li> <li><p>serviceLimit - A Boolean (true or false) value that indicates whether an account has reached its monthly quota.</p></li> <li><p>total - A string that represents the current estimated cost for an account.</p></li></ul>"
   )
   values: option<__listOf__string>,
   @ocaml.doc("<p>The field to use in the condition.</p>") key: option<usageStatisticsFilterKey>,
@@ -1063,12 +1111,12 @@ type usageByAccount = {
 )
 type simpleScopeTerm = {
   @ocaml.doc(
-    "<p>An array that lists the values to use in the condition. If the value for the key property is OBJECT_EXTENSION or OBJECT_KEY, this array can specify multiple values and Amazon Macie uses an OR operator to join the values. Otherwise, this array can specify only one value.</p> <p>Valid values for each supported property (key) are:</p> <ul><li><p>OBJECT_EXTENSION - A string that represents the file name extension of an object. For example: docx or pdf</p></li> <li><p>OBJECT_KEY - A string that represents the key prefix (folder name or path) of an object. For example: logs or awslogs/eventlogs. This value applies a condition to objects whose keys (names) begin with the specified value.</p></li> <li><p>OBJECT_LAST_MODIFIED_DATE - The date and time (in UTC and extended ISO 8601 format) when an object was created or last changed, whichever is latest. For example: 2020-09-28T14:31:13Z</p></li> <li><p>OBJECT_SIZE - An integer that represents the storage size (in bytes) of an object.</p></li> <li><p>TAG - A string that represents a tag key for an object. For advanced options, use a TagScopeTerm object instead of a SimpleScopeTerm object to define a tag-based condition for the job.</p></li></ul> <p>Macie doesn't support use of wildcard characters in these values. Also, string values are case sensitive.</p>"
+    "<p>An array that lists the values to use in the condition. If the value for the key property is OBJECT_EXTENSION or OBJECT_KEY, this array can specify multiple values and Amazon Macie uses OR logic to join the values. Otherwise, this array can specify only one value.</p> <p>Valid values for each supported property (key) are:</p> <ul><li><p>OBJECT_EXTENSION - A string that represents the file name extension of an object. For example: docx or pdf</p></li> <li><p>OBJECT_KEY - A string that represents the key prefix (folder name or path) of an object. For example: logs or awslogs/eventlogs. This value applies a condition to objects whose keys (names) begin with the specified value.</p></li> <li><p>OBJECT_LAST_MODIFIED_DATE - The date and time (in UTC and extended ISO 8601 format) when an object was created or last changed, whichever is latest. For example: 2020-09-28T14:31:13Z</p></li> <li><p>OBJECT_SIZE - An integer that represents the storage size (in bytes) of an object.</p></li></ul> <p>Macie doesn't support use of wildcard characters in these values. Also, string values are case sensitive.</p>"
   )
   values: option<__listOf__string>,
   @ocaml.doc("<p>The object property to use in the condition.</p>") key: option<scopeFilterKey>,
   @ocaml.doc(
-    "<p>The operator to use in the condition. Valid operators for each supported property (key) are:</p> <ul><li><p>OBJECT_EXTENSION - EQ (equals) or NE (not equals)</p></li> <li><p>OBJECT_KEY - STARTS_WITH</p></li> <li><p>OBJECT_LAST_MODIFIED_DATE - Any operator except CONTAINS</p></li> <li><p>OBJECT_SIZE - Any operator except CONTAINS</p></li> <li><p>TAG - EQ (equals) or NE (not equals)</p></li></ul>"
+    "<p>The operator to use in the condition. Valid values for each supported property (key) are:</p> <ul><li><p>OBJECT_EXTENSION - EQ (equals) or NE (not equals)</p></li> <li><p>OBJECT_KEY - STARTS_WITH</p></li> <li><p>OBJECT_LAST_MODIFIED_DATE - Any operator except CONTAINS</p></li> <li><p>OBJECT_SIZE - Any operator except CONTAINS</p></li></ul>"
   )
   comparator: option<jobComparator>,
 }
@@ -1077,7 +1125,7 @@ type simpleScopeTerm = {
 )
 type simpleCriterionForJob = {
   @ocaml.doc(
-    "<p>An array that lists one or more values to use in the condition. If you specify multiple values, Amazon Macie uses OR logic to join the values. Valid values for each supported property (key) are:</p> <ul><li><p>ACCOUNT_ID - A string that represents the unique identifier for the AWS account that owns the bucket.</p></li> <li><p>S3_BUCKET_EFFECTIVE_PERMISSION - A string that represents an enumerated value that Macie defines for the <a href=\"https://docs.aws.amazon.com/macie/latest/APIReference/datasources-s3.html#datasources-s3-prop-bucketpublicaccess-effectivepermission\">BucketPublicAccess.effectivePermission</a> property of a bucket.</p></li> <li><p>S3_BUCKET_NAME - A string that represents the name of a bucket.</p></li> <li><p>S3_BUCKET_SHARED_ACCESS - A string that represents an enumerated value that Macie defines for the <a href=\"https://docs.aws.amazon.com/macie/latest/APIReference/datasources-s3.html#datasources-s3-prop-bucketmetadata-sharedaccess\">BucketMetadata.sharedAccess</a> property of a bucket.</p></li></ul> <p>Values are case sensitive. Also, Macie doesn't support use of partial values or wildcard characters in these values.</p>"
+    "<p>An array that lists one or more values to use in the condition. If you specify multiple values, Amazon Macie uses OR logic to join the values. Valid values for each supported property (key) are:</p> <ul><li><p>ACCOUNT_ID - A string that represents the unique identifier for the Amazon Web Services account that owns the bucket.</p></li> <li><p>S3_BUCKET_EFFECTIVE_PERMISSION - A string that represents an enumerated value that Macie defines for the <a href=\"https://docs.aws.amazon.com/macie/latest/APIReference/datasources-s3.html#datasources-s3-prop-bucketpublicaccess-effectivepermission\">BucketPublicAccess.effectivePermission</a> property of a bucket.</p></li> <li><p>S3_BUCKET_NAME - A string that represents the name of a bucket.</p></li> <li><p>S3_BUCKET_SHARED_ACCESS - A string that represents an enumerated value that Macie defines for the <a href=\"https://docs.aws.amazon.com/macie/latest/APIReference/datasources-s3.html#datasources-s3-prop-bucketmetadata-sharedaccess\">BucketMetadata.sharedAccess</a> property of a bucket.</p></li></ul> <p>Values are case sensitive. Also, Macie doesn't support use of partial values or wildcard characters in these values.</p>"
   )
   values: option<__listOf__string>,
   @ocaml.doc("<p>The property to use in the condition.</p>") key: option<simpleCriterionKeyForJob>,
@@ -1086,6 +1134,10 @@ type simpleCriterionForJob = {
   )
   comparator: option<jobComparator>,
 }
+@ocaml.doc(
+  "<p>The severity to assign to findings that the custom data identifier produces, based on the number of occurrences of text that matches the custom data identifier's detection criteria. You can specify as many as three SeverityLevel objects in this array, one for each severity: LOW, MEDIUM, or HIGH. If you specify more than one, the occurrences thresholds must be in ascending order by severity, moving from LOW to HIGH. For example, 1 for LOW, 50 for MEDIUM, and 100 for HIGH. If an S3 object contains fewer occurrences than the lowest specified threshold, Amazon Macie doesn't create a finding.</p> <p>If you don't specify any values for this array, Macie creates findings for S3 objects that contain at least one occurrence of text that matches the detection criteria, and Macie automatically assigns the MEDIUM severity to those findings.</p>"
+)
+type severityLevelList = array<severityLevel>
 @ocaml.doc(
   "<p>Provides information about a session that was created for an entity that performed an action by using temporary security credentials.</p>"
 )
@@ -1098,11 +1150,11 @@ type sessionContext = {
   attributes: option<sessionContextAttributes>,
 }
 @ocaml.doc(
-  "<p>Specifies a property-based filter condition that determines which AWS resources are included or excluded from the query results.</p>"
+  "<p>Specifies a property-based filter condition that determines which Amazon Web Services resources are included or excluded from the query results.</p>"
 )
 type searchResourcesSimpleCriterion = {
   @ocaml.doc(
-    "<p>An array that lists one or more values to use in the condition. If you specify multiple values, Amazon Macie uses OR logic to join the values. Valid values for each supported property (key) are:</p> <ul><li><p>ACCOUNT_ID - A string that represents the unique identifier for the AWS account that owns the resource.</p></li> <li><p>S3_BUCKET_EFFECTIVE_PERMISSION - A string that represents an enumerated value that Macie defines for the <a href=\"https://docs.aws.amazon.com/macie/latest/APIReference/datasources-s3.html#datasources-s3-prop-bucketpublicaccess-effectivepermission\">BucketPublicAccess.effectivePermission</a> property of an S3 bucket.</p></li> <li><p>S3_BUCKET_NAME - A string that represents the name of an S3 bucket.</p></li> <li><p>S3_BUCKET_SHARED_ACCESS - A string that represents an enumerated value that Macie defines for the <a href=\"https://docs.aws.amazon.com/macie/latest/APIReference/datasources-s3.html#datasources-s3-prop-bucketmetadata-sharedaccess\">BucketMetadata.sharedAccess</a> property of an S3 bucket.</p></li></ul> <p>Values are case sensitive. Also, Macie doesn't support use of partial values or wildcard characters in values.</p>"
+    "<p>An array that lists one or more values to use in the condition. If you specify multiple values, Amazon Macie uses OR logic to join the values. Valid values for each supported property (key) are:</p> <ul><li><p>ACCOUNT_ID - A string that represents the unique identifier for the Amazon Web Services account that owns the resource.</p></li> <li><p>S3_BUCKET_EFFECTIVE_PERMISSION - A string that represents an enumerated value that Macie defines for the <a href=\"https://docs.aws.amazon.com/macie/latest/APIReference/datasources-s3.html#datasources-s3-prop-bucketpublicaccess-effectivepermission\">BucketPublicAccess.effectivePermission</a> property of an S3 bucket.</p></li> <li><p>S3_BUCKET_NAME - A string that represents the name of an S3 bucket.</p></li> <li><p>S3_BUCKET_SHARED_ACCESS - A string that represents an enumerated value that Macie defines for the <a href=\"https://docs.aws.amazon.com/macie/latest/APIReference/datasources-s3.html#datasources-s3-prop-bucketmetadata-sharedaccess\">BucketMetadata.sharedAccess</a> property of an S3 bucket.</p></li></ul> <p>Values are case sensitive. Also, Macie doesn't support use of partial values or wildcard characters in values.</p>"
   )
   values: option<__listOf__string>,
   @ocaml.doc("<p>The property to use in the condition.</p>")
@@ -1113,23 +1165,25 @@ type searchResourcesSimpleCriterion = {
   comparator: option<searchResourcesComparator>,
 }
 @ocaml.doc(
-  "<p>Specifies an AWS account that owns S3 buckets for a classification job to analyze, and one or more specific buckets to analyze for that account.</p>"
+  "<p>Specifies an Amazon Web Services account that owns S3 buckets for a classification job to analyze, and one or more specific buckets to analyze for that account.</p>"
 )
 type s3BucketDefinitionForJob = {
   @ocaml.doc("<p>An array that lists the names of the buckets.</p>") buckets: __listOf__string,
-  @ocaml.doc("<p>The unique identifier for the AWS account that owns the buckets.</p>")
+  @ocaml.doc(
+    "<p>The unique identifier for the Amazon Web Services account that owns the buckets.</p>"
+  )
   accountId: __string,
 }
 @ocaml.doc(
-  "<p>Provides information about settings that define whether one or more objects in an S3 bucket are replicated to S3 buckets for other AWS accounts and, if so, which accounts.</p>"
+  "<p>Provides information about settings that define whether one or more objects in an S3 bucket are replicated to S3 buckets for other Amazon Web Services accounts and, if so, which accounts.</p>"
 )
 type replicationDetails = {
   @ocaml.doc(
-    "<p>An array of AWS account IDs, one for each AWS account that the bucket is configured to replicate one or more objects to.</p>"
+    "<p>An array of Amazon Web Services account IDs, one for each Amazon Web Services account that the bucket is configured to replicate one or more objects to.</p>"
   )
   replicationAccounts: option<__listOf__string>,
   @ocaml.doc(
-    "<p>Specifies whether the bucket is configured to replicate one or more objects to an AWS account that isn't part of the same Amazon Macie organization.</p>"
+    "<p>Specifies whether the bucket is configured to replicate one or more objects to an Amazon Web Services account that isn't part of the same Amazon Macie organization.</p>"
   )
   replicatedExternally: option<__boolean>,
   @ocaml.doc(
@@ -1137,24 +1191,16 @@ type replicationDetails = {
   )
   replicated: option<__boolean>,
 }
-@ocaml.doc(
-  "<p>Specifies the location of occurrences of sensitive data in an Apache Parquet file.</p>"
-)
 type records = array<record>
-@ocaml.doc(
-  "<p>Provides details about the location of occurrences of sensitive data in an Adobe Portable Document Format file, Microsoft Word document, or non-binary text file.</p>"
-)
 type ranges = array<range>
 @ocaml.doc(
   "<p>Specifies the location of an occurrence of sensitive data in an Adobe Portable Document Format file.</p>"
 )
 type page = {
-  @ocaml.doc("<p>The page number of the page that contains the data.</p>")
+  @ocaml.doc("<p>The page number of the page that contains the sensitive data.</p>")
   pageNumber: option<__long>,
-  @ocaml.doc("<p>The position of the data on the page, relative to the beginning of the page.</p>")
-  offsetRange: option<range>,
-  @ocaml.doc("<p>The line that contains the data, and the position of the data on that line.</p>")
-  lineRange: option<range>,
+  @ocaml.doc("<p>Reserved for future use.</p>") offsetRange: option<range>,
+  @ocaml.doc("<p>Reserved for future use.</p>") lineRange: option<range>,
 }
 @ocaml.doc(
   "<p>Provides information about an account that's associated with an Amazon Macie administrator account.</p>"
@@ -1173,21 +1219,22 @@ type member = {
   )
   relationshipStatus: option<relationshipStatus>,
   @ocaml.doc(
-    "<p>(Deprecated) The AWS account ID for the administrator account. This property has been replaced by the administratorAccountId property and is retained only for backward compatibility.</p>"
+    "<p>(Deprecated) The Amazon Web Services account ID for the administrator account. This property has been replaced by the administratorAccountId property and is retained only for backward compatibility.</p>"
   )
   masterAccountId: option<__string>,
   @ocaml.doc(
-    "<p>The date and time, in UTC and extended ISO 8601 format, when an Amazon Macie membership invitation was last sent to the account. This value is null if a Macie invitation hasn't been sent to the account.</p>"
+    "<p>The date and time, in UTC and extended ISO 8601 format, when an Amazon Macie membership invitation was last sent to the account. This value is null if an invitation hasn't been sent to the account.</p>"
   )
   invitedAt: option<__timestampIso8601>,
   @ocaml.doc("<p>The email address for the account.</p>") email: option<__string>,
   @ocaml.doc("<p>The Amazon Resource Name (ARN) of the account.</p>") arn: option<__string>,
-  @ocaml.doc("<p>The AWS account ID for the administrator account.</p>")
+  @ocaml.doc("<p>The Amazon Web Services account ID for the administrator account.</p>")
   administratorAccountId: option<__string>,
-  @ocaml.doc("<p>The AWS account ID for the account.</p>") accountId: option<__string>,
+  @ocaml.doc("<p>The Amazon Web Services account ID for the account.</p>")
+  accountId: option<__string>,
 }
 @ocaml.doc(
-  "<p>Provides statistical data and other information about an S3 bucket that Amazon Macie monitors and analyzes.</p>"
+  "<p>Provides statistical data and other information about an S3 bucket that Amazon Macie monitors and analyzes for your account. If an error occurs when Macie attempts to retrieve and process information about the bucket or the bucket's objects, the value for most of these properties is null. Exceptions are accountId and bucketName. To identify the cause of the error, refer to the errorCode and errorMessage values.</p>"
 )
 type matchingBucket = {
   @ocaml.doc(
@@ -1199,11 +1246,11 @@ type matchingBucket = {
   )
   unclassifiableObjectCount: option<objectLevelStatistics>,
   @ocaml.doc(
-    "<p>The total storage size, in bytes, of the objects that are compressed (.gz, .gzip, .zip) files in the bucket.</p><p>If versioning is enabled for the bucket, Macie calculates this value based on the size of the latest version of each applicable object in the bucket. This value doesn't reflect the storage size of all versions of each applicable object in the bucket.</p>"
+    "<p>The total storage size, in bytes, of the objects that are compressed (.gz, .gzip, .zip) files in the bucket.</p> <p>If versioning is enabled for the bucket, Amazon Macie calculates this value based on the size of the latest version of each applicable object in the bucket. This value doesn't reflect the storage size of all versions of each applicable object in the bucket.</p>"
   )
   sizeInBytesCompressed: option<__long>,
   @ocaml.doc(
-    "<p>The total storage size, in bytes, of the bucket.</p><p>If versioning is enabled for the bucket, Amazon Macie calculates this value based on the size of the latest version of each object in the bucket. This value doesn't reflect the storage size of all versions of each object in the bucket.</p>"
+    "<p>The total storage size, in bytes, of the bucket.</p> <p>If versioning is enabled for the bucket, Amazon Macie calculates this value based on the size of the latest version of each object in the bucket. This value doesn't reflect the storage size of all versions of each object in the bucket.</p>"
   )
   sizeInBytes: option<__long>,
   @ocaml.doc(
@@ -1216,7 +1263,15 @@ type matchingBucket = {
   )
   jobDetails: option<jobDetails>,
   @ocaml.doc(
-    "<p>The total storage size, in bytes, of the objects that Amazon Macie can analyze in the bucket. These objects use a supported storage class and have a file name extension for a supported file or storage format.</p><p>If versioning is enabled for the bucket, Macie calculates this value based on the size of the latest version of each applicable object in the bucket. This value doesn't reflect the storage size of all versions of each applicable object in the bucket.</p>"
+    "<p>A brief description of the error (errorCode) that prevented Amazon Macie from retrieving and processing information about the bucket and the bucket's objects. This value is null if Macie was able to retrieve and process the information.</p>"
+  )
+  errorMessage: option<__string>,
+  @ocaml.doc(
+    "<p>Specifies the error code for an error that prevented Amazon Macie from retrieving and processing information about the bucket and the bucket's objects. If this value is ACCESS_DENIED, Macie doesn't have permission to retrieve the information. For example, the bucket has a restrictive bucket policy and Amazon S3 denied the request. If this value is null, Macie was able to retrieve and process the information.</p>"
+  )
+  errorCode: option<bucketMetadataErrorCode>,
+  @ocaml.doc(
+    "<p>The total storage size, in bytes, of the objects that Amazon Macie can analyze in the bucket. These objects use a supported storage class and have a file name extension for a supported file or storage format.</p> <p>If versioning is enabled for the bucket, Macie calculates this value based on the size of the latest version of each applicable object in the bucket. This value doesn't reflect the storage size of all versions of each applicable object in the bucket.</p>"
   )
   classifiableSizeInBytes: option<__long>,
   @ocaml.doc(
@@ -1224,7 +1279,9 @@ type matchingBucket = {
   )
   classifiableObjectCount: option<__long>,
   @ocaml.doc("<p>The name of the bucket.</p>") bucketName: option<__string>,
-  @ocaml.doc("<p>The unique identifier for the AWS account that owns the bucket.</p>")
+  @ocaml.doc(
+    "<p>The unique identifier for the Amazon Web Services account that owns the bucket.</p>"
+  )
   accountId: option<__string>,
 }
 @ocaml.doc(
@@ -1363,7 +1420,7 @@ type bucketCriteriaAdditionalProperties = {
   @ocaml.doc("<p>The value for the property is greater than the specified value.</p>")
   gt: option<__long>,
   @ocaml.doc(
-    "<p>The value for the property matches (equals) the specified value. If you specify multiple values, Macie uses OR logic to join the values.</p>"
+    "<p>The value for the property matches (equals) the specified value. If you specify multiple values, Amazon Macie uses OR logic to join the values.</p>"
   )
   eq: option<__listOf__string>,
 }
@@ -1371,7 +1428,9 @@ type bucketCriteriaAdditionalProperties = {
   "<p>Provides information about the account-level permissions settings that apply to an S3 bucket.</p>"
 )
 type accountLevelPermissions = {
-  @ocaml.doc("<p>The block public access settings for the AWS account that owns the bucket.</p>")
+  @ocaml.doc(
+    "<p>The block public access settings for the Amazon Web Services account that owns the bucket.</p>"
+  )
   blockPublicAccess: option<blockPublicAccess>,
 }
 type __listOfUsageStatisticsFilter = array<usageStatisticsFilter>
@@ -1381,15 +1440,18 @@ type __listOfMember = array<member>
 type __listOfListJobsFilterTerm = array<listJobsFilterTerm>
 type __listOfFindingsFilterListItem = array<findingsFilterListItem>
 @ocaml.doc(
-  "<p>Specifies a tag-based condition that determines whether an S3 object is included or excluded from a classification job. Tag keys and values are case sensitive. Also, Amazon Macie doesn't support use of partial values or wildcard characters in tag-based conditions.</p>"
+  "<p>Specifies a tag-based condition that determines whether an S3 object is included or excluded from a classification job.</p>"
 )
 type tagScopeTerm = {
   @ocaml.doc("<p>The type of object to apply the condition to.</p>") target: option<tagTarget>,
-  @ocaml.doc("<p>The tag keys or tag key and value pairs to use in the condition.</p>")
-  tagValues: option<__listOfTagValuePair>,
-  @ocaml.doc("<p>The tag key to use in the condition.</p>") key: option<__string>,
   @ocaml.doc(
-    "<p>The operator to use in the condition. Valid operators are EQ (equals) or NE (not equals).</p>"
+    "<p>The tag keys or tag key and value pairs to use in the condition. To specify only tag keys in a condition, specify the keys in this array and set the value for each associated tag value to an empty string.</p>"
+  )
+  tagValues: option<__listOfTagValuePair>,
+  @ocaml.doc("<p>The object property to use in the condition. The only valid value is TAG.</p>")
+  key: option<__string>,
+  @ocaml.doc(
+    "<p>The operator to use in the condition. Valid values are EQ (equals) or NE (not equals).</p>"
   )
   comparator: option<jobComparator>,
 }
@@ -1405,7 +1467,7 @@ type tagCriterionForJob = {
   comparator: option<jobComparator>,
 }
 @ocaml.doc(
-  "<p>Specifies a tag-based filter condition that determines which AWS resources are included or excluded from the query results.</p>"
+  "<p>Specifies a tag-based filter condition that determines which Amazon Web Services resources are included or excluded from the query results.</p>"
 )
 type searchResourcesTagCriterion = {
   @ocaml.doc("<p>The tag keys, tag values, or tag key and value pairs to use in the condition.</p>")
@@ -1415,7 +1477,7 @@ type searchResourcesTagCriterion = {
   )
   comparator: option<searchResourcesComparator>,
 }
-@ocaml.doc("<p>Provides information about an S3 object that a finding applies to.</p>")
+@ocaml.doc("<p>Provides information about the S3 object that a finding applies to.</p>")
 type s3Object = {
   @ocaml.doc("<p>The identifier for the affected version of the object.</p>")
   versionId: option<__string>,
@@ -1451,14 +1513,14 @@ type s3Object = {
 )
 type pages = array<page>
 @ocaml.doc(
-  "<p>Provides statistical data and other information about an AWS resource that Amazon Macie monitors and analyzes.</p>"
+  "<p>Provides statistical data and other information about an Amazon Web Services resource that Amazon Macie monitors and analyzes for your account.</p>"
 )
 type matchingResource = {
   @ocaml.doc("<p>The details of an S3 bucket that Amazon Macie monitors and analyzes.</p>")
   matchingBucket: option<matchingBucket>,
 }
 @ocaml.doc(
-  "<p>Provides information about an identity that performed an action on an affected resource by using temporary security credentials. The credentials were obtained using the GetFederationToken operation of the AWS Security Token Service (AWS STS) API.</p>"
+  "<p>Provides information about an identity that performed an action on an affected resource by using temporary security credentials. The credentials were obtained using the GetFederationToken operation of the Security Token Service (STS) API.</p>"
 )
 type federatedUser = {
   @ocaml.doc(
@@ -1472,10 +1534,10 @@ type federatedUser = {
   )
   arn: option<__string>,
   @ocaml.doc(
-    "<p>The unique identifier for the AWS account that owns the entity that was used to get the credentials.</p>"
+    "<p>The unique identifier for the Amazon Web Services account that owns the entity that was used to get the credentials.</p>"
   )
   accountId: option<__string>,
-  @ocaml.doc("<p>The AWS access key ID that identifies the credentials.</p>")
+  @ocaml.doc("<p>The Amazon Web Services access key ID that identifies the credentials.</p>")
   accessKeyId: option<__string>,
 }
 @ocaml.doc(
@@ -1496,7 +1558,7 @@ type bucketPermissionConfiguration = {
 )
 type bucketCriteria = Js.Dict.t<bucketCriteriaAdditionalProperties>
 @ocaml.doc(
-  "<p>Provides information about an identity that performed an action on an affected resource by using temporary security credentials. The credentials were obtained using the AssumeRole operation of the AWS Security Token Service (AWS STS) API.</p>"
+  "<p>Provides information about an identity that performed an action on an affected resource by using temporary security credentials. The credentials were obtained using the AssumeRole operation of the Security Token Service (STS) API.</p>"
 )
 type assumedRole = {
   @ocaml.doc(
@@ -1510,10 +1572,10 @@ type assumedRole = {
   )
   arn: option<__string>,
   @ocaml.doc(
-    "<p>The unique identifier for the AWS account that owns the entity that was used to get the credentials.</p>"
+    "<p>The unique identifier for the Amazon Web Services account that owns the entity that was used to get the credentials.</p>"
   )
   accountId: option<__string>,
-  @ocaml.doc("<p>The AWS access key ID that identifies the credentials.</p>")
+  @ocaml.doc("<p>The Amazon Web Services access key ID that identifies the credentials.</p>")
   accessKeyId: option<__string>,
 }
 type __listOfMatchingResource = array<matchingResource>
@@ -1524,27 +1586,27 @@ type userIdentity = {
   @ocaml.doc("<p>The type of entity that performed the action.</p>") @as("type")
   type_: option<userIdentityType>,
   @ocaml.doc(
-    "<p>If the action was performed using the credentials for your AWS account, the details of your account.</p>"
+    "<p>If the action was performed using the credentials for your Amazon Web Services account, the details of your account.</p>"
   )
   root: option<userIdentityRoot>,
   @ocaml.doc(
-    "<p>If the action was performed using the credentials for an AWS Identity and Access Management (IAM) user, the name and other details about the user.</p>"
+    "<p>If the action was performed using the credentials for an Identity and Access Management (IAM) user, the name and other details about the user.</p>"
   )
   iamUser: option<iamUser>,
   @ocaml.doc(
-    "<p>If the action was performed with temporary security credentials that were obtained using the GetFederationToken operation of the AWS Security Token Service (AWS STS) API, the identifiers, session context, and other details about the identity.</p>"
+    "<p>If the action was performed with temporary security credentials that were obtained using the GetFederationToken operation of the Security Token Service (STS) API, the identifiers, session context, and other details about the identity.</p>"
   )
   federatedUser: option<federatedUser>,
   @ocaml.doc(
-    "<p>If the action was performed by an AWS account that belongs to an AWS service, the name of the service.</p>"
+    "<p>If the action was performed by an Amazon Web Services account that belongs to an Amazon Web Service, the name of the service.</p>"
   )
   awsService: option<awsService>,
   @ocaml.doc(
-    "<p>If the action was performed using the credentials for another AWS account, the details of that account.</p>"
+    "<p>If the action was performed using the credentials for another Amazon Web Services account, the details of that account.</p>"
   )
   awsAccount: option<awsAccount>,
   @ocaml.doc(
-    "<p>If the action was performed with temporary security credentials that were obtained using the AssumeRole operation of the AWS Security Token Service (AWS STS) API, the identifiers, session context, and other details about the identity.</p>"
+    "<p>If the action was performed with temporary security credentials that were obtained using the AssumeRole operation of the Security Token Service (STS) API, the identifiers, session context, and other details about the identity.</p>"
   )
   assumedRole: option<assumedRole>,
 }
@@ -1558,11 +1620,13 @@ type usageRecord = {
     "<p>The date and time, in UTC and extended ISO 8601 format, when the free trial started for the account.</p>"
   )
   freeTrialStartDate: option<__timestampIso8601>,
-  @ocaml.doc("<p>The unique identifier for the AWS account that the data applies to.</p>")
+  @ocaml.doc(
+    "<p>The unique identifier for the Amazon Web Services account that the data applies to.</p>"
+  )
   accountId: option<__string>,
 }
 @ocaml.doc(
-  "<p>Specifies a property- or tag-based filter condition for including or excluding AWS resources from the query results.</p>"
+  "<p>Specifies a property- or tag-based filter condition for including or excluding Amazon Web Services resources from the query results.</p>"
 )
 type searchResourcesCriteria = {
   @ocaml.doc(
@@ -1575,27 +1639,24 @@ type searchResourcesCriteria = {
   simpleCriterion: option<searchResourcesSimpleCriterion>,
 }
 @ocaml.doc(
-  "<p>Provides the location of 1-15 occurrences of sensitive data that was detected by managed data identifiers or a custom data identifier and produced a sensitive data finding.</p>"
+  "<p>Specifies the location of 1-15 occurrences of sensitive data that was detected by a managed data identifier or a custom data identifier and produced a sensitive data finding.</p>"
 )
 type occurrences = {
   @ocaml.doc(
-    "<p>An array of objects, one for each occurrence of sensitive data in an Apache Avro object container or Apache Parquet file. Each object specifies the record index and the path to the field in the record that contains the data. This value is null for all other types of files.</p>"
+    "<p>An array of objects, one for each occurrence of sensitive data in an Apache Avro object container, Apache Parquet file, JSON file, or JSON Lines file. This value is null for all other types of files.</p> <p>For an Avro object container or Parquet file, each Record object specifies a record index and the path to a field in a record that contains the sensitive data. For a JSON or JSON Lines file, each Record object specifies the path to a field or array that contains the sensitive data. For a JSON Lines file, it also specifies the index of the line that contains the data.</p>"
   )
   records: option<records>,
   @ocaml.doc(
-    "<p>An array of objects, one for each occurrence of sensitive data in an Adobe Portable Document Format file. Each object specifies the page that contains the data, and the position of the data on that page. This value is null for all other types of files.</p>"
+    "<p>An array of objects, one for each occurrence of sensitive data in an Adobe Portable Document Format file. This value is null for all other types of files.</p><p>Each Page object specifies a page that contains the sensitive data.</p>"
   )
   pages: option<pages>,
+  @ocaml.doc("<p>Reserved for future use.</p>") offsetRanges: option<ranges>,
   @ocaml.doc(
-    "<p>An array of objects, one for each occurrence of sensitive data in a binary text file. Each object specifies the position of the data relative to the beginning of the file.</p> <p>This value is typically null. For binary text files, Amazon Macie adds location data to a lineRanges.Range or Page object, depending on the file type.</p>"
-  )
-  offsetRanges: option<ranges>,
-  @ocaml.doc(
-    "<p>An array of objects, one for each occurrence of sensitive data in a Microsoft Word document or non-binary text file, such as an HTML, JSON, TXT, or XML file. Each object specifies the line that contains the data, and the position of the data on that line.</p> <p>This value is often null for file types that are supported by Cell, Page, or Record objects. Exceptions are the locations of data in: unstructured sections of an otherwise structured file, such as a comment in a file; a malformed file that Amazon Macie analyzes as plain text; and, a CSV or TSV file that has any column names that contain sensitive data.</p>"
+    "<p>An array of objects, one for each occurrence of sensitive data in a non-binary text file, such as an HTML, TXT, or XML file. Each Range object specifies a line or inclusive range of lines that contains the sensitive data, and the position of the data on the specified line or lines.</p> <p>This value is often null for file types that are supported by Cell, Page, or Record objects. Exceptions are the location of sensitive data in: unstructured sections of an otherwise structured file, such as a comment in a file; a malformed file that Amazon Macie analyzes as plain text; and, a CSV or TSV file that has any column names that contain sensitive data.</p>"
   )
   lineRanges: option<ranges>,
   @ocaml.doc(
-    "<p>An array of objects, one for each occurrence of sensitive data in a Microsoft Excel workbook, CSV file, or TSV file. Each object specifies the cell or field that contains the data. This value is null for all other types of files.</p>"
+    "<p>An array of objects, one for each occurrence of sensitive data in a Microsoft Excel workbook, CSV file, or TSV file. This value is null for all other types of files.</p><p>Each Cell object specifies a cell or field that contains the sensitive data.</p>"
   )
   cells: option<cells>,
 }
@@ -1613,7 +1674,7 @@ type listJobsFilterCriteria = {
   excludes: option<__listOfListJobsFilterTerm>,
 }
 @ocaml.doc(
-  "<p>Specifies a property- or tag-based condition that defines criteria for including or excluding S3 objects from a classification job.</p>"
+  "<p>Specifies a property- or tag-based condition that defines criteria for including or excluding S3 objects from a classification job. A JobScopeTerm object can contain only one simpleScopeTerm object or one tagScopeTerm object.</p>"
 )
 type jobScopeTerm = {
   @ocaml.doc(
@@ -1662,14 +1723,16 @@ type __listOfUsageRecord = array<usageRecord>
 type __listOfSearchResourcesCriteria = array<searchResourcesCriteria>
 type __listOfJobScopeTerm = array<jobScopeTerm>
 type __listOfCriteriaForJob = array<criteriaForJob>
-@ocaml.doc("<p>Provides information about an S3 bucket that a finding applies to.</p>")
+@ocaml.doc("<p>Provides information about the S3 bucket that a finding applies to.</p>")
 type s3Bucket = {
   @ocaml.doc("<p>The tags that are associated with the bucket.</p>") tags: option<keyValuePairList>,
   @ocaml.doc(
     "<p>The permissions settings that determine whether the bucket is publicly accessible.</p>"
   )
   publicAccess: option<bucketPublicAccess>,
-  @ocaml.doc("<p>The display name and AWS account ID for the user who owns the bucket.</p>")
+  @ocaml.doc(
+    "<p>The display name and canonical user ID for the Amazon Web Services account that owns the bucket.</p>"
+  )
   owner: option<s3BucketOwner>,
   @ocaml.doc("<p>The name of the bucket.</p>") name: option<__string>,
   @ocaml.doc(
@@ -1704,7 +1767,7 @@ type findingActor = {
   domainDetails: option<domainDetails>,
 }
 @ocaml.doc(
-  "<p>Provides information about a type of sensitive data that was detected by managed data identifiers and produced a sensitive data finding.</p>"
+  "<p>Provides information about a type of sensitive data that was detected by a managed data identifier and produced a sensitive data finding.</p>"
 )
 type defaultDetection = {
   @ocaml.doc(
@@ -1738,7 +1801,7 @@ type customDetection = {
   arn: option<__string>,
 }
 @ocaml.doc(
-  "<p>Provides information about an S3 bucket that Amazon Macie monitors and analyzes.</p>"
+  "<p>Provides statistical data and other information about an S3 bucket that Amazon Macie monitors and analyzes for your account. If an error occurs when Macie attempts to retrieve and process information about the bucket or the bucket's objects, the value for the versioning property is false and the value for most other properties is null. Exceptions are accountId, bucketArn, bucketCreatedAt, bucketName, lastUpdated, and region. To identify the cause of the error, refer to the errorCode and errorMessage values.</p>"
 )
 type bucketMetadata = {
   @ocaml.doc("<p>Specifies whether versioning is enabled for the bucket.</p>")
@@ -1756,7 +1819,7 @@ type bucketMetadata = {
   )
   tags: option<__listOfKeyValuePair>,
   @ocaml.doc(
-    "<p>The total storage size, in bytes, of the objects that are compressed (.gz, .gzip, .zip) files in the bucket.</p> <p>If versioning is enabled for the bucket, Macie calculates this value based on the size of the latest version of each applicable object in the bucket. This value doesn't reflect the storage size of all versions of each applicable object in the bucket.</p>"
+    "<p>The total storage size, in bytes, of the objects that are compressed (.gz, .gzip, .zip) files in the bucket.</p> <p>If versioning is enabled for the bucket, Amazon Macie calculates this value based on the size of the latest version of each applicable object in the bucket. This value doesn't reflect the storage size of all versions of each applicable object in the bucket.</p>"
   )
   sizeInBytesCompressed: option<__long>,
   @ocaml.doc(
@@ -1764,7 +1827,7 @@ type bucketMetadata = {
   )
   sizeInBytes: option<__long>,
   @ocaml.doc(
-    "<p>Specifies whether the bucket is shared with another AWS account. Possible values are:</p> <ul><li><p>EXTERNAL - The bucket is shared with an AWS account that isn't part of the same Amazon Macie organization.</p></li> <li><p>INTERNAL - The bucket is shared with an AWS account that's part of the same Amazon Macie organization.</p></li> <li><p>NOT_SHARED - The bucket isn't shared with other AWS accounts.</p></li> <li><p>UNKNOWN - Amazon Macie wasn't able to evaluate the shared access settings for the bucket.</p></li></ul>"
+    "<p>Specifies whether the bucket is shared with another Amazon Web Services account. Possible values are:</p> <ul><li><p>EXTERNAL - The bucket is shared with an Amazon Web Services account that isn't part of the same Amazon Macie organization.</p></li> <li><p>INTERNAL - The bucket is shared with an Amazon Web Services account that's part of the same Amazon Macie organization.</p></li> <li><p>NOT_SHARED - The bucket isn't shared with other Amazon Web Services accounts.</p></li> <li><p>UNKNOWN - Amazon Macie wasn't able to evaluate the shared access settings for the bucket.</p></li></ul>"
   )
   sharedAccess: option<sharedAccess>,
   @ocaml.doc(
@@ -1772,10 +1835,11 @@ type bucketMetadata = {
   )
   serverSideEncryption: option<bucketServerSideEncryption>,
   @ocaml.doc(
-    "<p>Specifies whether the bucket is configured to replicate one or more objects to buckets for other AWS accounts and, if so, which accounts.</p>"
+    "<p>Specifies whether the bucket is configured to replicate one or more objects to buckets for other Amazon Web Services accounts and, if so, which accounts.</p>"
   )
   replicationDetails: option<replicationDetails>,
-  @ocaml.doc("<p>The AWS Region that hosts the bucket.</p>") region: option<__string>,
+  @ocaml.doc("<p>The Amazon Web Services Region that hosts the bucket.</p>")
+  region: option<__string>,
   @ocaml.doc(
     "<p>Specifies whether the bucket is publicly accessible due to the combination of permissions settings that apply to the bucket, and provides information about those settings.</p>"
   )
@@ -1794,6 +1858,14 @@ type bucketMetadata = {
   )
   jobDetails: option<jobDetails>,
   @ocaml.doc(
+    "<p>A brief description of the error (errorCode) that prevented Amazon Macie from retrieving and processing information about the bucket and the bucket's objects. This value is null if Macie was able to retrieve and process the information.</p>"
+  )
+  errorMessage: option<__string>,
+  @ocaml.doc(
+    "<p>Specifies the error code for an error that prevented Amazon Macie from retrieving and processing information about the bucket and the bucket's objects. If this value is ACCESS_DENIED, Macie doesn't have permission to retrieve the information. For example, the bucket has a restrictive bucket policy and Amazon S3 denied the request. If this value is null, Macie was able to retrieve and process the information.</p>"
+  )
+  errorCode: option<bucketMetadataErrorCode>,
+  @ocaml.doc(
     "<p>The total storage size, in bytes, of the objects that Amazon Macie can analyze in the bucket. These objects use a supported storage class and have a file name extension for a supported file or storage format.</p> <p>If versioning is enabled for the bucket, Macie calculates this value based on the size of the latest version of each applicable object in the bucket. This value doesn't reflect the storage size of all versions of each applicable object in the bucket.</p>"
   )
   classifiableSizeInBytes: option<__long>,
@@ -1811,12 +1883,14 @@ type bucketMetadata = {
     "<p>Specifies whether the bucket policy for the bucket requires server-side encryption of objects when objects are uploaded to the bucket. Possible values are:</p> <ul><li><p>FALSE - The bucket policy requires server-side encryption of new objects. PutObject requests must include the x-amz-server-side-encryption header and the value for that header must be AES256 or aws:kms.</p></li> <li><p>TRUE - The bucket doesn't have a bucket policy or it has a bucket policy that doesn't require server-side encryption of new objects. If a bucket policy exists, it doesn't require PutObject requests to include the x-amz-server-side-encryption header and it doesn't require the value for that header to be AES256 or aws:kms.</p></li> <li><p>UNKNOWN - Amazon Macie can't determine whether the bucket policy requires server-side encryption of new objects.</p></li></ul>"
   )
   allowsUnencryptedObjectUploads: option<allowsUnencryptedObjectUploads>,
-  @ocaml.doc("<p>The unique identifier for the AWS account that owns the bucket.</p>")
+  @ocaml.doc(
+    "<p>The unique identifier for the Amazon Web Services account that owns the bucket.</p>"
+  )
   accountId: option<__string>,
 }
 type __listOfBucketMetadata = array<bucketMetadata>
 @ocaml.doc(
-  "<p>Specifies property- and tag-based conditions that define filter criteria for including or excluding AWS resources from the query results.</p>"
+  "<p>Specifies property- and tag-based conditions that define filter criteria for including or excluding Amazon Web Services resources from the query results.</p>"
 )
 type searchResourcesCriteriaBlock = {
   @ocaml.doc(
@@ -1827,13 +1901,9 @@ type searchResourcesCriteriaBlock = {
 }
 @ocaml.doc("<p>Provides information about the resources that a finding applies to.</p>")
 type resourcesAffected = {
-  @ocaml.doc(
-    "<p>An array of objects, one for each S3 object that the finding applies to. Each object provides a set of metadata about an affected S3 object.</p>"
-  )
+  @ocaml.doc("<p>The details of the S3 object that the finding applies to.</p>")
   s3Object: option<s3Object>,
-  @ocaml.doc(
-    "<p>An array of objects, one for each S3 bucket that the finding applies to. Each object provides a set of metadata about an affected S3 bucket.</p>"
-  )
+  @ocaml.doc("<p>The details of the S3 bucket that the finding applies to.</p>")
   s3Bucket: option<s3Bucket>,
 }
 @ocaml.doc("<p>Provides the details of a policy finding.</p>")
@@ -1847,7 +1917,7 @@ type policyDetails = {
 )
 type jobScopingBlock = {
   @ocaml.doc(
-    "<p>An array of conditions, one for each condition that determines which objects to include or exclude from the job. If you specify more than one condition, Amazon Macie uses AND logic to join the conditions.</p>"
+    "<p>An array of conditions, one for each property- or tag-based condition that determines which objects to include or exclude from the job. If you specify more than one condition, Amazon Macie uses AND logic to join the conditions.</p>"
   )
   @as("and")
   and_: option<__listOfJobScopeTerm>,
@@ -1881,7 +1951,7 @@ type sensitiveDataItem = {
   )
   detections: option<defaultDetections>,
   @ocaml.doc(
-    "<p>The category of sensitive data that was detected. For example: CREDENTIALS, for credentials data such as private keys or AWS secret keys; FINANCIAL_INFORMATION, for financial data such as credit card numbers; or, PERSONAL_INFORMATION, for personal health information, such as health insurance identification numbers, or personally identifiable information, such as driver's license identification numbers.</p>"
+    "<p>The category of sensitive data that was detected. For example: CREDENTIALS, for credentials data such as private keys or Amazon Web Services secret access keys; FINANCIAL_INFORMATION, for financial data such as credit card numbers; or, PERSONAL_INFORMATION, for personal health information, such as health insurance identification numbers, or personally identifiable information, such as passport numbers.</p>"
   )
   category: option<sensitiveDataItemCategory>,
 }
@@ -1903,11 +1973,11 @@ type searchResourcesBucketCriteria = {
 )
 type scoping = {
   @ocaml.doc(
-    "<p>The property- or tag-based conditions that determine which objects to include in the analysis.</p>"
+    "<p>The property- and tag-based conditions that determine which objects to include in the analysis.</p>"
   )
   includes: option<jobScopingBlock>,
   @ocaml.doc(
-    "<p>The property- or tag-based conditions that determine which objects to exclude from the analysis.</p>"
+    "<p>The property- and tag-based conditions that determine which objects to exclude from the analysis.</p>"
   )
   excludes: option<jobScopingBlock>,
 }
@@ -1954,7 +2024,7 @@ type s3JobDefinition = {
   )
   scoping: option<scoping>,
   @ocaml.doc(
-    "<p>An array of objects, one for each AWS account that owns specific S3 buckets to analyze. Each object specifies the account ID for an account and one or more buckets to analyze for that account. A job's definition can contain a bucketDefinitions array or a bucketCriteria object, not both.</p>"
+    "<p>An array of objects, one for each Amazon Web Services account that owns specific S3 buckets to analyze. Each object specifies the account ID for an account and one or more buckets to analyze for that account. A job's definition can contain a bucketDefinitions array or a bucketCriteria object, not both.</p>"
   )
   bucketDefinitions: option<__listOfS3BucketDefinitionForJob>,
 }
@@ -1980,7 +2050,7 @@ type jobSummary = {
   )
   jobType: option<jobType>,
   @ocaml.doc(
-    "<p>The current status of the job. Possible values are:</p> <ul><li><p>CANCELLED - You cancelled the job or, if it's a one-time job, you paused the job and didn't resume it within 30 days.</p></li> <li><p>COMPLETE - For a one-time job, Amazon Macie finished processing the data specified for the job. This value doesn't apply to recurring jobs.</p></li> <li><p>IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn't apply to one-time jobs.</p></li> <li><p>PAUSED - Amazon Macie started running the job but additional processing would exceed the monthly sensitive data discovery quota for your account or one or more member accounts that the job analyzes data for.</p></li> <li><p>RUNNING - For a one-time job, the job is in progress. For a recurring job, a scheduled run is in progress.</p></li> <li><p>USER_PAUSED - You paused the job. If you paused the job while it had a status of RUNNING and you don't resume it within 30 days of pausing it, the job or job run will expire and be cancelled, depending on the job's type. To check the expiration date, refer to the UserPausedDetails.jobExpiresAt property.</p></li></ul>"
+    "<p>The current status of the job. Possible values are:</p> <ul><li><p>CANCELLED - You cancelled the job or, if it's a one-time job, you paused the job and didn't resume it within 30 days.</p></li> <li><p>COMPLETE - For a one-time job, Amazon Macie finished processing the data specified for the job. This value doesn't apply to recurring jobs.</p></li> <li><p>IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn't apply to one-time jobs.</p></li> <li><p>PAUSED - Macie started running the job but additional processing would exceed the monthly sensitive data discovery quota for your account or one or more member accounts that the job analyzes data for.</p></li> <li><p>RUNNING - For a one-time job, the job is in progress. For a recurring job, a scheduled run is in progress.</p></li> <li><p>USER_PAUSED - You paused the job. If you paused the job while it had a status of RUNNING and you don't resume it within 30 days of pausing it, the job or job run will expire and be cancelled, depending on the job's type. To check the expiration date, refer to the UserPausedDetails.jobExpiresAt property.</p></li></ul>"
   )
   jobStatus: option<jobStatus>,
   @ocaml.doc("<p>The unique identifier for the job.</p>") jobId: option<__string>,
@@ -1989,7 +2059,7 @@ type jobSummary = {
   )
   createdAt: option<__timestampIso8601>,
   @ocaml.doc(
-    "<p>An array of objects, one for each AWS account that owns specific S3 buckets for the job to analyze. Each object specifies the account ID for an account and one or more buckets to analyze for that account. A job's definition can contain a bucketDefinitions array or a bucketCriteria object, not both.</p>"
+    "<p>An array of objects, one for each Amazon Web Services account that owns specific S3 buckets for the job to analyze. Each object specifies the account ID for an account and one or more buckets to analyze for that account. A job's definition can contain a bucketDefinitions array or a bucketCriteria object, not both.</p>"
   )
   bucketDefinitions: option<__listOfS3BucketDefinitionForJob>,
 }
@@ -2022,7 +2092,7 @@ type classificationResult = {
   "<p>Provides information about a sensitive data finding, including the classification job that produced the finding.</p>"
 )
 type classificationDetails = {
-  @ocaml.doc("<p>The status and other details for the finding.</p>")
+  @ocaml.doc("<p>The status and other details of the finding.</p>")
   result: option<classificationResult>,
   @ocaml.doc("<p>The unique identifier for the classification job that produced the finding.</p>")
   jobId: option<__string>,
@@ -2054,13 +2124,13 @@ type finding = {
   sample: option<__boolean>,
   @ocaml.doc("<p>The resources that the finding applies to.</p>")
   resourcesAffected: option<resourcesAffected>,
-  @ocaml.doc("<p>The AWS Region that Amazon Macie created the finding in.</p>")
+  @ocaml.doc("<p>The Amazon Web Services Region that Amazon Macie created the finding in.</p>")
   region: option<__string>,
   @ocaml.doc(
     "<p>The details of a policy finding. This value is null for a sensitive data finding.</p>"
   )
   policyDetails: option<policyDetails>,
-  @ocaml.doc("<p>The AWS partition that Amazon Macie created the finding in.</p>")
+  @ocaml.doc("<p>The Amazon Web Services partition that Amazon Macie created the finding in.</p>")
   partition: option<__string>,
   @ocaml.doc(
     "<p>The unique identifier for the finding. This is a random string that Amazon Macie generates and assigns to a finding when it creates the finding.</p>"
@@ -2083,9 +2153,10 @@ type finding = {
     "<p>The category of the finding. Possible values are: CLASSIFICATION, for a sensitive data finding; and, POLICY, for a policy finding.</p>"
   )
   category: option<findingCategory>,
-  @ocaml.doc("<p>Specifies whether the finding is archived.</p>") archived: option<__boolean>,
+  @ocaml.doc("<p>Specifies whether the finding is archived (suppressed).</p>")
+  archived: option<__boolean>,
   @ocaml.doc(
-    "<p>The unique identifier for the AWS account that the finding applies to. This is typically the account that owns the affected resource.</p>"
+    "<p>The unique identifier for the Amazon Web Services account that the finding applies to. This is typically the account that owns the affected resource.</p>"
   )
   accountId: option<__string>,
 }
@@ -2097,11 +2168,11 @@ module UpdateOrganizationConfiguration = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>Specifies whether to enable Amazon Macie automatically for each account, when the account is added to the AWS organization.</p>"
+      "<p>Specifies whether to enable Amazon Macie automatically for an account when the account is added to the organization in Organizations.</p>"
     )
     autoEnable: __boolean,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-macie2") @new
   external new: request => t = "UpdateOrganizationConfigurationCommand"
   let make = (~autoEnable, ()) => new({autoEnable: autoEnable})
@@ -2120,7 +2191,7 @@ module UpdateMemberSession = {
     )
     id: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-macie2") @new external new: request => t = "UpdateMemberSessionCommand"
   let make = (~status, ~id, ()) => new({status: status, id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -2134,11 +2205,11 @@ module UpdateMacieSession = {
     )
     status: option<macieStatus>,
     @ocaml.doc(
-      "Specifies how often to publish updates to policy findings for the account. This includes publishing updates to AWS Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events)."
+      "<p>Specifies how often to publish updates to policy findings for the account. This includes publishing updates to Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events).</p>"
     )
     findingPublishingFrequency: option<findingPublishingFrequency>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-macie2") @new external new: request => t = "UpdateMacieSessionCommand"
   let make = (~status=?, ~findingPublishingFrequency=?, ()) =>
     new({status: status, findingPublishingFrequency: findingPublishingFrequency})
@@ -2154,7 +2225,7 @@ module UpdateClassificationJob = {
     jobStatus: jobStatus,
     @ocaml.doc("<p>The unique identifier for the classification job.</p>") jobId: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-macie2") @new
   external new: request => t = "UpdateClassificationJobCommand"
   let make = (~jobStatus, ~jobId, ()) => new({jobStatus: jobStatus, jobId: jobId})
@@ -2163,22 +2234,22 @@ module UpdateClassificationJob = {
 
 module GetMacieSession = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc(
-      "<p>The date and time, in UTC and extended ISO 8601 format, of the most recent change to the status of the Macie account.</p>"
+      "<p>The date and time, in UTC and extended ISO 8601 format, of the most recent change to the status of the Amazon Macie account.</p>"
     )
     updatedAt: option<__timestampIso8601>,
     @ocaml.doc(
-      "<p>The current status of the Macie account. Possible values are: PAUSED, the account is enabled but all Macie activities are suspended (paused) for the account; and, ENABLED, the account is enabled and all Macie activities are enabled for the account.</p>"
+      "<p>The current status of the Amazon Macie account. Possible values are: PAUSED, the account is enabled but all Macie activities are suspended (paused) for the account; and, ENABLED, the account is enabled and all Macie activities are enabled for the account.</p>"
     )
     status: option<macieStatus>,
     @ocaml.doc(
-      "<p>The Amazon Resource Name (ARN) of the service-linked role that allows Macie to monitor and analyze data in AWS resources for the account.</p>"
+      "<p>The Amazon Resource Name (ARN) of the service-linked role that allows Amazon Macie to monitor and analyze data in Amazon Web Services resources for the account.</p>"
     )
     serviceRole: option<__string>,
     @ocaml.doc(
-      "<p>The frequency with which Macie publishes updates to policy findings for the account. This includes publishing updates to AWS Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events).</p>"
+      "<p>The frequency with which Amazon Macie publishes updates to policy findings for the account. This includes publishing updates to Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events).</p>"
     )
     findingPublishingFrequency: option<findingPublishingFrequency>,
     @ocaml.doc(
@@ -2186,22 +2257,22 @@ module GetMacieSession = {
     )
     createdAt: option<__timestampIso8601>,
   }
-  @module("@aws-sdk/client-macie2") @new external new: unit => t = "GetMacieSessionCommand"
-  let make = () => new()
+  @module("@aws-sdk/client-macie2") @new external new: request => t = "GetMacieSessionCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetInvitationsCount = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc(
       "<p>The total number of invitations that were received by the account, not including the currently accepted invitation.</p>"
     )
     invitationsCount: option<__long>,
   }
-  @module("@aws-sdk/client-macie2") @new external new: unit => t = "GetInvitationsCountCommand"
-  let make = () => new()
+  @module("@aws-sdk/client-macie2") @new external new: request => t = "GetInvitationsCountCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -2213,11 +2284,11 @@ module EnableOrganizationAdminAccount = {
     )
     clientToken: option<__string>,
     @ocaml.doc(
-      "<p>The AWS account ID for the account to designate as the delegated Amazon Macie administrator account for the organization.</p>"
+      "<p>The Amazon Web Services account ID for the account to designate as the delegated Amazon Macie administrator account for the organization.</p>"
     )
     adminAccountId: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-macie2") @new
   external new: request => t = "EnableOrganizationAdminAccountCommand"
   let make = (~adminAccountId, ~clientToken=?, ()) =>
@@ -2233,7 +2304,7 @@ module EnableMacie = {
     )
     status: option<macieStatus>,
     @ocaml.doc(
-      "Specifies how often to publish updates to policy findings for the account. This includes publishing updates to AWS Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events)."
+      "<p>Specifies how often to publish updates to policy findings for the account. This includes publishing updates to Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events).</p>"
     )
     findingPublishingFrequency: option<findingPublishingFrequency>,
     @ocaml.doc(
@@ -2241,7 +2312,7 @@ module EnableMacie = {
     )
     clientToken: option<__string>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-macie2") @new external new: request => t = "EnableMacieCommand"
   let make = (~status=?, ~findingPublishingFrequency=?, ~clientToken=?, ()) =>
     new({
@@ -2260,7 +2331,7 @@ module DisassociateMember = {
     )
     id: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-macie2") @new external new: request => t = "DisassociateMemberCommand"
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -2268,29 +2339,33 @@ module DisassociateMember = {
 
 module DisassociateFromMasterAccount = {
   type t
-
+  type request = {.}
+  type response = {.}
   @module("@aws-sdk/client-macie2") @new
-  external new: unit => t = "DisassociateFromMasterAccountCommand"
-  let make = () => new()
+  external new: request => t = "DisassociateFromMasterAccountCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DisassociateFromAdministratorAccount = {
   type t
-
+  type request = {.}
+  type response = {.}
   @module("@aws-sdk/client-macie2") @new
-  external new: unit => t = "DisassociateFromAdministratorAccountCommand"
-  let make = () => new()
+  external new: request => t = "DisassociateFromAdministratorAccountCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DisableOrganizationAdminAccount = {
   type t
   type request = {
-    @ocaml.doc("<p>The AWS account ID of the delegated Amazon Macie administrator account.</p>")
+    @ocaml.doc(
+      "<p>The Amazon Web Services account ID of the delegated Amazon Macie administrator account.</p>"
+    )
     adminAccountId: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-macie2") @new
   external new: request => t = "DisableOrganizationAdminAccountCommand"
   let make = (~adminAccountId, ()) => new({adminAccountId: adminAccountId})
@@ -2299,28 +2374,29 @@ module DisableOrganizationAdminAccount = {
 
 module DisableMacie = {
   type t
-
-  @module("@aws-sdk/client-macie2") @new external new: unit => t = "DisableMacieCommand"
-  let make = () => new()
+  type request = {.}
+  type response = {.}
+  @module("@aws-sdk/client-macie2") @new external new: request => t = "DisableMacieCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DescribeOrganizationConfiguration = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc(
-      "<p>Specifies whether the maximum number of Amazon Macie member accounts are part of the AWS organization.</p>"
+      "<p>Specifies whether the maximum number of Amazon Macie member accounts are part of the organization.</p>"
     )
     maxAccountLimitReached: option<__boolean>,
     @ocaml.doc(
-      "<p>Specifies whether Amazon Macie is enabled automatically for accounts that are added to the AWS organization.</p>"
+      "<p>Specifies whether Amazon Macie is enabled automatically for accounts that are added to the organization.</p>"
     )
     autoEnable: option<__boolean>,
   }
   @module("@aws-sdk/client-macie2") @new
-  external new: unit => t = "DescribeOrganizationConfigurationCommand"
-  let make = () => new()
+  external new: request => t = "DescribeOrganizationConfigurationCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -2332,7 +2408,7 @@ module DeleteMember = {
     )
     id: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-macie2") @new external new: request => t = "DeleteMemberCommand"
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -2346,7 +2422,7 @@ module DeleteFindingsFilter = {
     )
     id: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-macie2") @new external new: request => t = "DeleteFindingsFilterCommand"
   let make = (~id, ()) => new({id: id})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -2360,7 +2436,7 @@ module DeleteCustomDataIdentifier = {
     )
     id: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-macie2") @new
   external new: request => t = "DeleteCustomDataIdentifierCommand"
   let make = (~id, ()) => new({id: id})
@@ -2371,14 +2447,16 @@ module AcceptInvitation = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>(Deprecated) The AWS account ID for the account that sent the invitation. This property has been replaced by the administratorAccountId property and is retained only for backward compatibility.</p>"
+      "<p>(Deprecated) The Amazon Web Services account ID for the account that sent the invitation. This property has been replaced by the administratorAccountId property and is retained only for backward compatibility.</p>"
     )
     masterAccount: option<__string>,
     @ocaml.doc("<p>The unique identifier for the invitation to accept.</p>") invitationId: __string,
-    @ocaml.doc("<p>The AWS account ID for the account that sent the invitation.</p>")
+    @ocaml.doc(
+      "<p>The Amazon Web Services account ID for the account that sent the invitation.</p>"
+    )
     administratorAccountId: option<__string>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-macie2") @new external new: request => t = "AcceptInvitationCommand"
   let make = (~invitationId, ~masterAccount=?, ~administratorAccountId=?, ()) =>
     new({
@@ -2401,7 +2479,7 @@ module UntagResource = {
     )
     resourceArn: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-macie2") @new external new: request => t = "UntagResourceCommand"
   let make = (~tagKeys, ~resourceArn, ()) => new({tagKeys: tagKeys, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -2419,21 +2497,21 @@ module TestCustomDataIdentifier = {
     )
     regex: __string,
     @ocaml.doc(
-      "<p>The maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern. The distance can be 1 - 300 characters. The default value is 50.</p>"
+      "<p>The maximum number of characters that can exist between text that matches the regular expression and the character sequences specified by the keywords array. Amazon Macie includes or excludes a result based on the proximity of a keyword to text that matches the regular expression. The distance can be 1-300 characters. The default value is 50.</p>"
     )
     maximumMatchDistance: option<__integer>,
     @ocaml.doc(
-      "<p>An array that lists specific character sequences (keywords), one of which must be within proximity (maximumMatchDistance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 3 - 90 characters. Keywords aren't case sensitive.</p>"
+      "<p>An array that lists specific character sequences (<i>keywords</i>), one of which must be within proximity (maximumMatchDistance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 3-90 UTF-8 characters. Keywords aren't case sensitive.</p>"
     )
     keywords: option<__listOf__string>,
     @ocaml.doc(
-      "<p>An array that lists specific character sequences (ignore words) to exclude from the results. If the text matched by the regular expression is the same as any string in this array, Amazon Macie ignores it. The array can contain as many as 10 ignore words. Each ignore word can contain 4 - 90 characters. Ignore words are case sensitive.</p>"
+      "<p>An array that lists specific character sequences (<i>ignore words</i>) to exclude from the results. If the text matched by the regular expression contains any string in this array, Amazon Macie ignores it. The array can contain as many as 10 ignore words. Each ignore word can contain 4-90 UTF-8 characters. Ignore words are case sensitive.</p>"
     )
     ignoreWords: option<__listOf__string>,
   }
   type response = {
     @ocaml.doc(
-      "<p>The number of instances of sample text that matched the detection criteria specified in the custom data identifier.</p>"
+      "<p>The number of occurrences of sample text that matched the criteria specified by the custom data identifier.</p>"
     )
     matchCount: option<__integer>,
   }
@@ -2462,7 +2540,7 @@ module TagResource = {
     )
     resourceArn: __string,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-macie2") @new external new: request => t = "TagResourceCommand"
   let make = (~tags, ~resourceArn, ()) => new({tags: tags, resourceArn: resourceArn})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -2472,7 +2550,7 @@ module PutFindingsPublicationConfiguration = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>The configuration settings that determine which findings to publish to AWS Security Hub.</p>"
+      "<p>The configuration settings that determine which findings to publish to Security Hub.</p>"
     )
     securityHubConfiguration: option<securityHubConfiguration>,
     @ocaml.doc(
@@ -2480,7 +2558,7 @@ module PutFindingsPublicationConfiguration = {
     )
     clientToken: option<__string>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-macie2") @new
   external new: request => t = "PutFindingsPublicationConfigurationCommand"
   let make = (~securityHubConfiguration=?, ~clientToken=?, ()) =>
@@ -2529,18 +2607,19 @@ module GetMember = {
     )
     relationshipStatus: option<relationshipStatus>,
     @ocaml.doc(
-      "<p>(Deprecated) The AWS account ID for the administrator account. This property has been replaced by the administratorAccountId property and is retained only for backward compatibility.</p>"
+      "<p>(Deprecated) The Amazon Web Services account ID for the administrator account. This property has been replaced by the administratorAccountId property and is retained only for backward compatibility.</p>"
     )
     masterAccountId: option<__string>,
     @ocaml.doc(
-      "<p>The date and time, in UTC and extended ISO 8601 format, when an Amazon Macie membership invitation was last sent to the account. This value is null if a Macie invitation hasn't been sent to the account.</p>"
+      "<p>The date and time, in UTC and extended ISO 8601 format, when an Amazon Macie membership invitation was last sent to the account. This value is null if an invitation hasn't been sent to the account.</p>"
     )
     invitedAt: option<__timestampIso8601>,
     @ocaml.doc("<p>The email address for the account.</p>") email: option<__string>,
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the account.</p>") arn: option<__string>,
-    @ocaml.doc("<p>The AWS account ID for the administrator account.</p>")
+    @ocaml.doc("<p>The Amazon Web Services account ID for the administrator account.</p>")
     administratorAccountId: option<__string>,
-    @ocaml.doc("<p>The AWS account ID for the account.</p>") accountId: option<__string>,
+    @ocaml.doc("<p>The Amazon Web Services account ID for the account.</p>")
+    accountId: option<__string>,
   }
   @module("@aws-sdk/client-macie2") @new external new: request => t = "GetMemberCommand"
   let make = (~id, ()) => new({id: id})
@@ -2549,85 +2628,38 @@ module GetMember = {
 
 module GetMasterAccount = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc(
-      "<p>(Deprecated) The AWS account ID for the administrator account. If the accounts are associated by a Macie membership invitation, this object also provides details about the invitation that was sent to establish the relationship between the accounts.</p>"
+      "<p>(Deprecated) The Amazon Web Services account ID for the administrator account. If the accounts are associated by a Macie membership invitation, this object also provides details about the invitation that was sent to establish the relationship between the accounts.</p>"
     )
     master: option<invitation>,
   }
-  @module("@aws-sdk/client-macie2") @new external new: unit => t = "GetMasterAccountCommand"
-  let make = () => new()
+  @module("@aws-sdk/client-macie2") @new external new: request => t = "GetMasterAccountCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetFindingsPublicationConfiguration = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc(
-      "<p>The configuration settings that determine which findings are published to AWS Security Hub.</p>"
+      "<p>The configuration settings that determine which findings are published to Security Hub.</p>"
     )
     securityHubConfiguration: option<securityHubConfiguration>,
   }
   @module("@aws-sdk/client-macie2") @new
-  external new: unit => t = "GetFindingsPublicationConfigurationCommand"
-  let make = () => new()
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
-module GetCustomDataIdentifier = {
-  type t
-  type request = {
-    @ocaml.doc(
-      "<p>The unique identifier for the Amazon Macie resource or account that the request applies to.</p>"
-    )
-    id: __string,
-  }
-  type response = {
-    @ocaml.doc(
-      "<p>A map of key-value pairs that identifies the tags (keys and values) that are associated with the custom data identifier.</p>"
-    )
-    tags: option<tagMap>,
-    @ocaml.doc("<p>The regular expression (<i>regex</i>) that defines the pattern to match.</p>")
-    regex: option<__string>,
-    @ocaml.doc("<p>The custom name of the custom data identifier.</p>") name: option<__string>,
-    @ocaml.doc(
-      "<p>The maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern.</p>"
-    )
-    maximumMatchDistance: option<__integer>,
-    @ocaml.doc(
-      "<p>An array that lists specific character sequences (keywords), one of which must be within proximity (maximumMatchDistance) of the regular expression to match. Keywords aren't case sensitive.</p>"
-    )
-    keywords: option<__listOf__string>,
-    @ocaml.doc(
-      "<p>An array that lists specific character sequences (ignore words) to exclude from the results. If the text matched by the regular expression is the same as any string in this array, Amazon Macie ignores it. Ignore words are case sensitive.</p>"
-    )
-    ignoreWords: option<__listOf__string>,
-    @ocaml.doc("<p>The unique identifier for the custom data identifier.</p>") id: option<__string>,
-    @ocaml.doc("<p>The custom description of the custom data identifier.</p>")
-    description: option<__string>,
-    @ocaml.doc(
-      "<p>Specifies whether the custom data identifier was deleted. If you delete a custom data identifier, Amazon Macie doesn't delete it permanently. Instead, it soft deletes the identifier.</p>"
-    )
-    deleted: option<__boolean>,
-    @ocaml.doc(
-      "<p>The date and time, in UTC and extended ISO 8601 format, when the custom data identifier was created.</p>"
-    )
-    createdAt: option<__timestampIso8601>,
-    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the custom data identifier.</p>")
-    arn: option<__string>,
-  }
-  @module("@aws-sdk/client-macie2") @new
-  external new: request => t = "GetCustomDataIdentifierCommand"
-  let make = (~id, ()) => new({id: id})
+  external new: request => t = "GetFindingsPublicationConfigurationCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetBucketStatistics = {
   type t
   type request = {
-    @ocaml.doc("<p>The unique identifier for the AWS account.</p>") accountId: option<__string>,
+    @ocaml.doc("<p>The unique identifier for the Amazon Web Services account.</p>")
+    accountId: option<__string>,
   }
   type response = {
     @ocaml.doc(
@@ -2639,11 +2671,11 @@ module GetBucketStatistics = {
     )
     unclassifiableObjectCount: option<objectLevelStatistics>,
     @ocaml.doc(
-      "<p>The total storage size, in bytes, of the objects that are compressed (.gz, .gzip, .zip) files in the buckets.</p> <p>If versioning is enabled for any of the buckets, Macie calculates this value based on the size of the latest version of each applicable object in those buckets. This value doesn't reflect the storage size of all versions of the applicable objects in the buckets.</p>"
+      "<p>The total storage size, in bytes, of the objects that are compressed (.gz, .gzip, .zip) files in the buckets.</p> <p>If versioning is enabled for any of the buckets, Amazon Macie calculates this value based on the size of the latest version of each applicable object in those buckets. This value doesn't reflect the storage size of all versions of the applicable objects in the buckets.</p>"
     )
     sizeInBytesCompressed: option<__long>,
     @ocaml.doc(
-      "<p>The total storage size, in bytes, of the buckets.</p> <p>If versioning is enabled for any of the buckets, Macie calculates this value based on the size of the latest version of each object in those buckets. This value doesn't reflect the storage size of all versions of the objects in the buckets.</p>"
+      "<p>The total storage size, in bytes, of the buckets.</p> <p>If versioning is enabled for any of the buckets, Amazon Macie calculates this value based on the size of the latest version of each object in those buckets. This value doesn't reflect the storage size of all versions of the objects in the buckets.</p>"
     )
     sizeInBytes: option<__long>,
     @ocaml.doc("<p>The total number of objects in the buckets.</p>") objectCount: option<__long>,
@@ -2660,7 +2692,7 @@ module GetBucketStatistics = {
     )
     classifiableObjectCount: option<__long>,
     @ocaml.doc(
-      "<p>The total number of buckets that are or aren't shared with another AWS account.</p>"
+      "<p>The total number of buckets that are or aren't shared with another Amazon Web Services account.</p>"
     )
     bucketCountBySharedAccessType: option<bucketCountBySharedAccessType>,
     @ocaml.doc(
@@ -2686,15 +2718,16 @@ module GetBucketStatistics = {
 
 module GetAdministratorAccount = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc(
-      "<p>The AWS account ID for the administrator account. If the accounts are associated by a Macie membership invitation, this object also provides details about the invitation that was sent to establish the relationship between the accounts.</p>"
+      "<p>The Amazon Web Services account ID for the administrator account. If the accounts are associated by an Amazon Macie membership invitation, this object also provides details about the invitation that was sent to establish the relationship between the accounts.</p>"
     )
     administrator: option<invitation>,
   }
-  @module("@aws-sdk/client-macie2") @new external new: unit => t = "GetAdministratorAccountCommand"
-  let make = () => new()
+  @module("@aws-sdk/client-macie2") @new
+  external new: request => t = "GetAdministratorAccountCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -2702,11 +2735,11 @@ module CreateSampleFindings = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>An array that lists one or more types of findings to include in the set of sample findings. Currently, the only supported value is Policy:IAMUser/S3BucketEncryptionDisabled.</p>"
+      "<p>An array of finding types, one for each type of sample finding to create. To create a sample of every type of finding that Amazon Macie supports, don't include this array in your request.</p>"
     )
     findingTypes: option<__listOfFindingType>,
   }
-
+  type response = {.}
   @module("@aws-sdk/client-macie2") @new external new: request => t = "CreateSampleFindingsCommand"
   let make = (~findingTypes=?, ()) => new({findingTypes: findingTypes})
   @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
@@ -2719,7 +2752,7 @@ module CreateMember = {
       "<p>A map of key-value pairs that specifies the tags to associate with the account in Amazon Macie.</p> <p>An account can have a maximum of 50 tags. Each tag consists of a tag key and an associated tag value. The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.</p>"
     )
     tags: option<tagMap>,
-    @ocaml.doc("<p>The details for the account to associate with the administrator account.</p>")
+    @ocaml.doc("<p>The details of the account to associate with the administrator account.</p>")
     account: accountDetail,
   }
   type response = {
@@ -2730,72 +2763,6 @@ module CreateMember = {
   }
   @module("@aws-sdk/client-macie2") @new external new: request => t = "CreateMemberCommand"
   let make = (~account, ~tags=?, ()) => new({tags: tags, account: account})
-  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
-}
-
-module CreateCustomDataIdentifier = {
-  type t
-  type request = {
-    @ocaml.doc(
-      "<p>A map of key-value pairs that specifies the tags to associate with the custom data identifier.</p> <p>A custom data identifier can have a maximum of 50 tags. Each tag consists of a tag key and an associated tag value. The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.</p>"
-    )
-    tags: option<tagMap>,
-    @ocaml.doc(
-      "<p>The regular expression (<i>regex</i>) that defines the pattern to match. The expression can contain as many as 512 characters.</p>"
-    )
-    regex: option<__string>,
-    @ocaml.doc(
-      "<p>A custom name for the custom data identifier. The name can contain as many as 128 characters.</p> <p>We strongly recommend that you avoid including any sensitive data in the name of a custom data identifier. Other users of your account might be able to see the identifier's name, depending on the actions that they're allowed to perform in Amazon Macie.</p>"
-    )
-    name: option<__string>,
-    @ocaml.doc(
-      "<p>The maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern. The distance can be 1 - 300 characters. The default value is 50.</p>"
-    )
-    maximumMatchDistance: option<__integer>,
-    @ocaml.doc(
-      "<p>An array that lists specific character sequences (keywords), one of which must be within proximity (maximumMatchDistance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 3 - 90 characters. Keywords aren't case sensitive.</p>"
-    )
-    keywords: option<__listOf__string>,
-    @ocaml.doc(
-      "<p>An array that lists specific character sequences (ignore words) to exclude from the results. If the text matched by the regular expression is the same as any string in this array, Amazon Macie ignores it. The array can contain as many as 10 ignore words. Each ignore word can contain 4 - 90 characters. Ignore words are case sensitive.</p>"
-    )
-    ignoreWords: option<__listOf__string>,
-    @ocaml.doc(
-      "<p>A custom description of the custom data identifier. The description can contain as many as 512 characters.</p> <p>We strongly recommend that you avoid including any sensitive data in the description of a custom data identifier. Other users of your account might be able to see the identifier's description, depending on the actions that they're allowed to perform in Amazon Macie.</p>"
-    )
-    description: option<__string>,
-    @ocaml.doc(
-      "<p>A unique, case-sensitive token that you provide to ensure the idempotency of the request.</p>"
-    )
-    clientToken: option<__string>,
-  }
-  type response = {
-    @ocaml.doc("<p>The unique identifier for the custom data identifier that was created.</p>")
-    customDataIdentifierId: option<__string>,
-  }
-  @module("@aws-sdk/client-macie2") @new
-  external new: request => t = "CreateCustomDataIdentifierCommand"
-  let make = (
-    ~tags=?,
-    ~regex=?,
-    ~name=?,
-    ~maximumMatchDistance=?,
-    ~keywords=?,
-    ~ignoreWords=?,
-    ~description=?,
-    ~clientToken=?,
-    (),
-  ) =>
-    new({
-      tags: tags,
-      regex: regex,
-      name: name,
-      maximumMatchDistance: maximumMatchDistance,
-      keywords: keywords,
-      ignoreWords: ignoreWords,
-      description: description,
-      clientToken: clientToken,
-    })
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -2845,6 +2812,28 @@ module ListOrganizationAdminAccounts = {
   external new: request => t = "ListOrganizationAdminAccountsCommand"
   let make = (~nextToken=?, ~maxResults=?, ()) =>
     new({nextToken: nextToken, maxResults: maxResults})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
+module ListManagedDataIdentifiers = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>The nextToken string that specifies which page of results to return in a paginated response.</p>"
+    )
+    nextToken: option<__string>,
+  }
+  type response = {
+    @ocaml.doc(
+      "<p>The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.</p>"
+    )
+    nextToken: option<__string>,
+    @ocaml.doc("<p>An array of objects, one for each managed data identifier.</p>")
+    items: option<__listOfManagedDataIdentifierSummary>,
+  }
+  @module("@aws-sdk/client-macie2") @new
+  external new: request => t = "ListManagedDataIdentifiersCommand"
+  let make = (~nextToken=?, ()) => new({nextToken: nextToken})
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -2924,9 +2913,61 @@ module GetUsageTotals = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module GetCustomDataIdentifier = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>The unique identifier for the Amazon Macie resource or account that the request applies to.</p>"
+    )
+    id: __string,
+  }
+  type response = {
+    @ocaml.doc(
+      "<p>A map of key-value pairs that identifies the tags (keys and values) that are associated with the custom data identifier.</p>"
+    )
+    tags: option<tagMap>,
+    @ocaml.doc(
+      "<p>Specifies the severity that's assigned to findings that the custom data identifier produces, based on the number of occurrences of text that matches the custom data identifier's detection criteria. By default, Amazon Macie creates findings for S3 objects that contain at least one occurrence of text that matches the detection criteria, and Macie assigns the MEDIUM severity to those findings.</p>"
+    )
+    severityLevels: option<severityLevelList>,
+    @ocaml.doc("<p>The regular expression (<i>regex</i>) that defines the pattern to match.</p>")
+    regex: option<__string>,
+    @ocaml.doc("<p>The custom name of the custom data identifier.</p>") name: option<__string>,
+    @ocaml.doc(
+      "<p>The maximum number of characters that can exist between text that matches the regular expression and the character sequences specified by the keywords array. Amazon Macie includes or excludes a result based on the proximity of a keyword to text that matches the regular expression.</p>"
+    )
+    maximumMatchDistance: option<__integer>,
+    @ocaml.doc(
+      "<p>An array that lists specific character sequences (<i>keywords</i>), one of which must be within proximity (maximumMatchDistance) of the regular expression to match. Keywords aren't case sensitive.</p>"
+    )
+    keywords: option<__listOf__string>,
+    @ocaml.doc(
+      "<p>An array that lists specific character sequences (<i>ignore words</i>) to exclude from the results. If the text matched by the regular expression contains any string in this array, Amazon Macie ignores it. Ignore words are case sensitive.</p>"
+    )
+    ignoreWords: option<__listOf__string>,
+    @ocaml.doc("<p>The unique identifier for the custom data identifier.</p>") id: option<__string>,
+    @ocaml.doc("<p>The custom description of the custom data identifier.</p>")
+    description: option<__string>,
+    @ocaml.doc(
+      "<p>Specifies whether the custom data identifier was deleted. If you delete a custom data identifier, Amazon Macie doesn't delete it permanently. Instead, it soft deletes the identifier.</p>"
+    )
+    deleted: option<__boolean>,
+    @ocaml.doc(
+      "<p>The date and time, in UTC and extended ISO 8601 format, when the custom data identifier was created.</p>"
+    )
+    createdAt: option<__timestampIso8601>,
+    @ocaml.doc("<p>The Amazon Resource Name (ARN) of the custom data identifier.</p>")
+    arn: option<__string>,
+  }
+  @module("@aws-sdk/client-macie2") @new
+  external new: request => t = "GetCustomDataIdentifierCommand"
+  let make = (~id, ()) => new({id: id})
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module GetClassificationExportConfiguration = {
   type t
-
+  type request = {.}
   type response = {
     @ocaml.doc(
       "<p>The location where data classification results are stored, and the encryption settings that are used when storing results in that location.</p>"
@@ -2934,8 +2975,8 @@ module GetClassificationExportConfiguration = {
     configuration: option<classificationExportConfiguration>,
   }
   @module("@aws-sdk/client-macie2") @new
-  external new: unit => t = "GetClassificationExportConfigurationCommand"
-  let make = () => new()
+  external new: request => t = "GetClassificationExportConfigurationCommand"
+  let make = () => new(Js.Obj.empty())
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
@@ -2943,7 +2984,7 @@ module DeleteInvitations = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>An array that lists AWS account IDs, one for each account that sent an invitation to delete.</p>"
+      "<p>An array that lists Amazon Web Services account IDs, one for each account that sent an invitation to delete.</p>"
     )
     accountIds: __listOf__string,
   }
@@ -2962,7 +3003,7 @@ module DeclineInvitations = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>An array that lists AWS account IDs, one for each account that sent an invitation to decline.</p>"
+      "<p>An array that lists Amazon Web Services account IDs, one for each account that sent an invitation to decline.</p>"
     )
     accountIds: __listOf__string,
   }
@@ -2981,15 +3022,15 @@ module CreateInvitations = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>A custom message to include in the invitation. Amazon Macie adds this message to the standard content that it sends for an invitation.</p>"
+      "<p>Custom text to include in the email message that contains the invitation. The text can contain as many as 80 alphanumeric characters.</p>"
     )
     message: option<__string>,
     @ocaml.doc(
-      "<p>Specifies whether to send an email notification to the root user of each account that the invitation will be sent to. This notification is in addition to an alert that the root user receives in AWS Personal Health Dashboard. To send an email notification to the root user of each account, set this value to true.</p>"
+      "<p>Specifies whether to send the invitation as an email message. If this value is false, Amazon Macie sends the invitation (as an email message) to the email address that you specified for the recipient's account when you associated the account with your account. The default value is false.</p>"
     )
     disableEmailNotification: option<__boolean>,
     @ocaml.doc(
-      "<p>An array that lists AWS account IDs, one for each account to send the invitation to.</p>"
+      "<p>An array that lists Amazon Web Services account IDs, one for each account to send the invitation to.</p>"
     )
     accountIds: __listOf__string,
   }
@@ -3009,17 +3050,89 @@ module CreateInvitations = {
   @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
+module CreateCustomDataIdentifier = {
+  type t
+  type request = {
+    @ocaml.doc(
+      "<p>A map of key-value pairs that specifies the tags to associate with the custom data identifier.</p> <p>A custom data identifier can have a maximum of 50 tags. Each tag consists of a tag key and an associated tag value. The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.</p>"
+    )
+    tags: option<tagMap>,
+    @ocaml.doc(
+      "<p>The severity to assign to findings that the custom data identifier produces, based on the number of occurrences of text that matches the custom data identifier's detection criteria. You can specify as many as three SeverityLevel objects in this array, one for each severity: LOW, MEDIUM, or HIGH. If you specify more than one, the occurrences thresholds must be in ascending order by severity, moving from LOW to HIGH. For example, 1 for LOW, 50 for MEDIUM, and 100 for HIGH. If an S3 object contains fewer occurrences than the lowest specified threshold, Amazon Macie doesn't create a finding.</p> <p>If you don't specify any values for this array, Macie creates findings for S3 objects that contain at least one occurrence of text that matches the detection criteria, and Macie assigns the MEDIUM severity to those findings.</p>"
+    )
+    severityLevels: option<severityLevelList>,
+    @ocaml.doc(
+      "<p>The regular expression (<i>regex</i>) that defines the pattern to match. The expression can contain as many as 512 characters.</p>"
+    )
+    regex: __string,
+    @ocaml.doc(
+      "<p>A custom name for the custom data identifier. The name can contain as many as 128 characters.</p> <p>We strongly recommend that you avoid including any sensitive data in the name of a custom data identifier. Other users of your account might be able to see this name, depending on the actions that they're allowed to perform in Amazon Macie.</p>"
+    )
+    name: __string,
+    @ocaml.doc(
+      "<p>The maximum number of characters that can exist between text that matches the regular expression and the character sequences specified by the keywords array. Amazon Macie includes or excludes a result based on the proximity of a keyword to text that matches the regular expression. The distance can be 1-300 characters. The default value is 50.</p>"
+    )
+    maximumMatchDistance: option<__integer>,
+    @ocaml.doc(
+      "<p>An array that lists specific character sequences (<i>keywords</i>), one of which must be within proximity (maximumMatchDistance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 3-90 UTF-8 characters. Keywords aren't case sensitive.</p>"
+    )
+    keywords: option<__listOf__string>,
+    @ocaml.doc(
+      "<p>An array that lists specific character sequences (<i>ignore words</i>) to exclude from the results. If the text matched by the regular expression contains any string in this array, Amazon Macie ignores it. The array can contain as many as 10 ignore words. Each ignore word can contain 4-90 UTF-8 characters. Ignore words are case sensitive.</p>"
+    )
+    ignoreWords: option<__listOf__string>,
+    @ocaml.doc(
+      "<p>A custom description of the custom data identifier. The description can contain as many as 512 characters.</p> <p>We strongly recommend that you avoid including any sensitive data in the description of a custom data identifier. Other users of your account might be able to see this description, depending on the actions that they're allowed to perform in Amazon Macie.</p>"
+    )
+    description: option<__string>,
+    @ocaml.doc(
+      "<p>A unique, case-sensitive token that you provide to ensure the idempotency of the request.</p>"
+    )
+    clientToken: option<__string>,
+  }
+  type response = {
+    @ocaml.doc("<p>The unique identifier for the custom data identifier that was created.</p>")
+    customDataIdentifierId: option<__string>,
+  }
+  @module("@aws-sdk/client-macie2") @new
+  external new: request => t = "CreateCustomDataIdentifierCommand"
+  let make = (
+    ~regex,
+    ~name,
+    ~tags=?,
+    ~severityLevels=?,
+    ~maximumMatchDistance=?,
+    ~keywords=?,
+    ~ignoreWords=?,
+    ~description=?,
+    ~clientToken=?,
+    (),
+  ) =>
+    new({
+      tags: tags,
+      severityLevels: severityLevels,
+      regex: regex,
+      name: name,
+      maximumMatchDistance: maximumMatchDistance,
+      keywords: keywords,
+      ignoreWords: ignoreWords,
+      description: description,
+      clientToken: clientToken,
+    })
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+}
+
 module BatchGetCustomDataIdentifiers = {
   type t
   type request = {
     @ocaml.doc(
-      "<p>An array of strings that lists the unique identifiers for the custom data identifiers to retrieve information about.</p>"
+      "<p>An array of custom data identifier IDs, one for each custom data identifier to retrieve information about.</p>"
     )
     ids: option<__listOf__string>,
   }
   type response = {
     @ocaml.doc(
-      "<p>An array of identifiers, one for each identifier that was specified in the request, but doesn't correlate to an existing custom data identifier.</p>"
+      "<p>An array of custom data identifier IDs, one for each custom data identifier that was specified in the request but doesn't correlate to an existing custom data identifier.</p>"
     )
     notFoundIdentifierIds: option<__listOf__string>,
     @ocaml.doc(
@@ -3055,7 +3168,7 @@ module ListMembers = {
     )
     nextToken: option<__string>,
     @ocaml.doc(
-      "<p>An array of objects, one for each account that's associated with the administrator account and meets the criteria specified by the onlyAssociated request parameter.</p>"
+      "<p>An array of objects, one for each account that's associated with the administrator account and meets the criteria specified in the request.</p>"
     )
     members: option<__listOfMember>,
   }
@@ -3097,11 +3210,15 @@ module UpdateFindingsFilter = {
   type t
   type request = {
     @ocaml.doc(
+      "<p>A unique, case-sensitive token that you provide to ensure the idempotency of the request.</p>"
+    )
+    clientToken: option<__string>,
+    @ocaml.doc(
       "<p>The position of the filter in the list of saved filters on the Amazon Macie console. This value also determines the order in which the filter is applied to findings, relative to other filters that are also applied to the findings.</p>"
     )
     position: option<__integer>,
     @ocaml.doc(
-      "<p>A custom name for the filter. The name must contain at least 3 characters and can contain as many as 64 characters.</p> <p>We strongly recommend that you avoid including any sensitive data in the name of a filter. Other users might be able to see the filter's name, depending on the actions that they're allowed to perform in Amazon Macie.</p>"
+      "<p>A custom name for the filter. The name must contain at least 3 characters and can contain as many as 64 characters.</p> <p>We strongly recommend that you avoid including any sensitive data in the name of a filter. Other users might be able to see this name, depending on the actions that they're allowed to perform in Amazon Macie.</p>"
     )
     name: option<__string>,
     @ocaml.doc(
@@ -3111,7 +3228,7 @@ module UpdateFindingsFilter = {
     @ocaml.doc("<p>The criteria to use to filter findings.</p>")
     findingCriteria: option<findingCriteria>,
     @ocaml.doc(
-      "<p>A custom description of the filter. The description can contain as many as 512 characters.</p> <p>We strongly recommend that you avoid including any sensitive data in the description of a filter. Other users might be able to see the filter's description, depending on the actions that they're allowed to perform in Amazon Macie.</p>"
+      "<p>A custom description of the filter. The description can contain as many as 512 characters.</p> <p>We strongly recommend that you avoid including any sensitive data in the description of a filter. Other users might be able to see this description, depending on the actions that they're allowed to perform in Amazon Macie.</p>"
     )
     description: option<__string>,
     @ocaml.doc(
@@ -3126,8 +3243,18 @@ module UpdateFindingsFilter = {
     arn: option<__string>,
   }
   @module("@aws-sdk/client-macie2") @new external new: request => t = "UpdateFindingsFilterCommand"
-  let make = (~id, ~position=?, ~name=?, ~findingCriteria=?, ~description=?, ~action=?, ()) =>
+  let make = (
+    ~id,
+    ~clientToken=?,
+    ~position=?,
+    ~name=?,
+    ~findingCriteria=?,
+    ~description=?,
+    ~action=?,
+    (),
+  ) =>
     new({
+      clientToken: clientToken,
       position: position,
       name: name,
       id: id,
@@ -3249,12 +3376,12 @@ module CreateFindingsFilter = {
     )
     position: option<__integer>,
     @ocaml.doc(
-      "<p>A custom name for the filter. The name must contain at least 3 characters and can contain as many as 64 characters.</p> <p>We strongly recommend that you avoid including any sensitive data in the name of a filter. Other users of your account might be able to see the filter's name, depending on the actions that they're allowed to perform in Amazon Macie.</p>"
+      "<p>A custom name for the filter. The name must contain at least 3 characters and can contain as many as 64 characters.</p> <p>We strongly recommend that you avoid including any sensitive data in the name of a filter. Other users of your account might be able to see this name, depending on the actions that they're allowed to perform in Amazon Macie.</p>"
     )
     name: __string,
     @ocaml.doc("<p>The criteria to use to filter findings.</p>") findingCriteria: findingCriteria,
     @ocaml.doc(
-      "<p>A custom description of the filter. The description can contain as many as 512 characters.</p> <p>We strongly recommend that you avoid including any sensitive data in the description of a filter. Other users of your account might be able to see the filter's description, depending on the actions that they're allowed to perform in Amazon Macie.</p>"
+      "<p>A custom description of the filter. The description can contain as many as 512 characters.</p> <p>We strongly recommend that you avoid including any sensitive data in the description of a filter. Other users of your account might be able to see this description, depending on the actions that they're allowed to perform in Amazon Macie.</p>"
     )
     description: option<__string>,
     @ocaml.doc(
@@ -3436,7 +3563,7 @@ module DescribeClassificationJob = {
     )
     statistics: option<statistics>,
     @ocaml.doc(
-      "<p>The recurrence pattern for running the job. If the job is configured to run only once, this value is null.</p>"
+      "<p>The recurrence pattern for running the job. This value is null if the job is configured to run only once.</p>"
     )
     scheduleFrequency: option<jobScheduleFrequency>,
     @ocaml.doc(
@@ -3448,6 +3575,14 @@ module DescribeClassificationJob = {
     )
     s3JobDefinition: option<s3JobDefinition>,
     @ocaml.doc("<p>The custom name of the job.</p>") name: option<__string>,
+    @ocaml.doc(
+      "<p>The selection type that determines which managed data identifiers the job uses to analyze data. Possible values are:</p> <ul><li><p>ALL - Use all the managed data identifiers that Amazon Macie provides.</p></li> <li><p>EXCLUDE - Use all the managed data identifiers that Macie provides except the managed data identifiers specified by the managedDataIdentifierIds property.</p></li> <li><p>INCLUDE - Use only the managed data identifiers specified by the managedDataIdentifierIds property.</p></li> <li><p>NONE - Don't use any managed data identifiers.</p></li></ul> <p>If this value is null, the job uses all managed data identifiers. If this value is null, ALL, or EXCLUDE for a recurring job, the job also uses new managed data identifiers as they are released.</p>"
+    )
+    managedDataIdentifierSelector: option<managedDataIdentifierSelector>,
+    @ocaml.doc(
+      "<p>An array of unique identifiers, one for each managed data identifier that the job is explicitly configured to include (use) or exclude (not use) when it analyzes data. Inclusion or exclusion depends on the managed data identifier selection type specified for the job (managedDataIdentifierSelector). This value is null if the job's managed data identifier selection type is ALL or the job uses only custom data identifiers (customDataIdentifierIds) to analyze data.</p>"
+    )
+    managedDataIdentifierIds: option<__listOf__string>,
     @ocaml.doc(
       "<p>The date and time, in UTC and extended ISO 8601 format, when the job started. If the job is a recurring job, this value indicates when the most recent run started.</p>"
     )
@@ -3461,17 +3596,19 @@ module DescribeClassificationJob = {
     )
     jobType: option<jobType>,
     @ocaml.doc(
-      "<p>The current status of the job. Possible values are:</p> <ul><li><p>CANCELLED - You cancelled the job or, if it's a one-time job, you paused the job and didn't resume it within 30 days.</p></li> <li><p>COMPLETE - For a one-time job, Amazon Macie finished processing the data specified for the job. This value doesn't apply to recurring jobs.</p></li> <li><p>IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn't apply to one-time jobs.</p></li> <li><p>PAUSED - Amazon Macie started running the job but additional processing would exceed the monthly sensitive data discovery quota for your account or one or more member accounts that the job analyzes data for.</p></li> <li><p>RUNNING - For a one-time job, the job is in progress. For a recurring job, a scheduled run is in progress.</p></li> <li><p>USER_PAUSED - You paused the job. If you paused the job while it had a status of RUNNING and you don't resume it within 30 days of pausing it, the job or job run will expire and be cancelled, depending on the job's type. To check the expiration date, refer to the UserPausedDetails.jobExpiresAt property.</p></li></ul>"
+      "<p>The current status of the job. Possible values are:</p> <ul><li><p>CANCELLED - You cancelled the job or, if it's a one-time job, you paused the job and didn't resume it within 30 days.</p></li> <li><p>COMPLETE - For a one-time job, Amazon Macie finished processing the data specified for the job. This value doesn't apply to recurring jobs.</p></li> <li><p>IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn't apply to one-time jobs.</p></li> <li><p>PAUSED - Macie started running the job but additional processing would exceed the monthly sensitive data discovery quota for your account or one or more member accounts that the job analyzes data for.</p></li> <li><p>RUNNING - For a one-time job, the job is in progress. For a recurring job, a scheduled run is in progress.</p></li> <li><p>USER_PAUSED - You paused the job. If you paused the job while it had a status of RUNNING and you don't resume it within 30 days of pausing it, the job or job run will expire and be cancelled, depending on the job's type. To check the expiration date, refer to the UserPausedDetails.jobExpiresAt property.</p></li></ul>"
     )
     jobStatus: option<jobStatus>,
     @ocaml.doc("<p>The unique identifier for the job.</p>") jobId: option<__string>,
     @ocaml.doc("<p>The Amazon Resource Name (ARN) of the job.</p>") jobArn: option<__string>,
     @ocaml.doc(
-      "<p>Specifies whether the job is configured to analyze all existing, eligible objects immediately after it's created.</p>"
+      "<p>For a recurring job, specifies whether you configured the job to analyze all existing, eligible objects immediately after the job was created (true). If you configured the job to analyze only those objects that were created or changed after the job was created and before the job's first scheduled run, this value is false. This value is also false for a one-time job.</p>"
     )
     initialRun: option<__boolean>,
     @ocaml.doc("<p>The custom description of the job.</p>") description: option<__string>,
-    @ocaml.doc("<p>The custom data identifiers that the job uses to analyze data.</p>")
+    @ocaml.doc(
+      "<p>An array of unique identifiers, one for each custom data identifier that the job uses to analyze data. This value is null if the job uses only managed data identifiers to analyze data.</p>"
+    )
     customDataIdentifierIds: option<__listOf__string>,
     @ocaml.doc(
       "<p>The date and time, in UTC and extended ISO 8601 format, when the job was created.</p>"
@@ -3500,7 +3637,7 @@ module CreateClassificationJob = {
     )
     scheduleFrequency: option<jobScheduleFrequency>,
     @ocaml.doc(
-      "<p>The sampling depth, as a percentage, to apply when processing objects. This value determines the percentage of eligible objects that the job analyzes. If this value is less than 100, Amazon Macie selects the objects to analyze at random, up to the specified percentage, and analyzes all the data in those objects.</p>"
+      "<p>The sampling depth, as a percentage, for the job to apply when processing objects. This value determines the percentage of eligible objects that the job analyzes. If this value is less than 100, Amazon Macie selects the objects to analyze at random, up to the specified percentage, and analyzes all the data in those objects.</p>"
     )
     samplingPercentage: option<__integer>,
     @ocaml.doc(
@@ -3510,18 +3647,28 @@ module CreateClassificationJob = {
     @ocaml.doc("<p>A custom name for the job. The name can contain as many as 500 characters.</p>")
     name: __string,
     @ocaml.doc(
+      "<p>The selection type to apply when determining which managed data identifiers the job uses to analyze data. Valid values are:</p> <ul><li><p>ALL - Use all the managed data identifiers that Amazon Macie provides. If you specify this value, don't specify any values for the managedDataIdentifierIds property.</p></li> <li><p>EXCLUDE - Use all the managed data identifiers that Macie provides except the managed data identifiers specified by the managedDataIdentifierIds property.</p></li> <li><p>INCLUDE - Use only the managed data identifiers specified by the managedDataIdentifierIds property.</p></li> <li><p>NONE - Don't use any managed data identifiers. If you specify this value, specify at least one custom data identifier for the job (customDataIdentifierIds) and don't specify any values for the managedDataIdentifierIds property.</p></li></ul> <p>If you don't specify a value for this property, the job uses all managed data identifiers. If you don't specify a value for this property or you specify ALL or EXCLUDE for a recurring job, the job also uses new managed data identifiers as they are released.</p>"
+    )
+    managedDataIdentifierSelector: option<managedDataIdentifierSelector>,
+    @ocaml.doc(
+      "<p>An array of unique identifiers, one for each managed data identifier for the job to include (use) or exclude (not use) when it analyzes data. Inclusion or exclusion depends on the managed data identifier selection type that you specify for the job (managedDataIdentifierSelector).</p><p>To retrieve a list of valid values for this property, use the ListManagedDataIdentifiers operation.</p>"
+    )
+    managedDataIdentifierIds: option<__listOf__string>,
+    @ocaml.doc(
       "<p>The schedule for running the job. Valid values are:</p> <ul><li><p>ONE_TIME - Run the job only once. If you specify this value, don't specify a value for the scheduleFrequency property.</p></li> <li><p>SCHEDULED - Run the job on a daily, weekly, or monthly basis. If you specify this value, use the scheduleFrequency property to define the recurrence pattern for the job.</p></li></ul>"
     )
     jobType: jobType,
     @ocaml.doc(
-      "<p>Specifies whether to analyze all existing, eligible objects immediately after the job is created.</p>"
+      "<p>For a recurring job, specifies whether to analyze all existing, eligible objects immediately after the job is created (true). To analyze only those objects that are created or changed after you create the job and before the job's first scheduled run, set this value to false.</p><p>If you configure the job to run only once, don't specify a value for this property.</p>"
     )
     initialRun: option<__boolean>,
     @ocaml.doc(
       "<p>A custom description of the job. The description can contain as many as 200 characters.</p>"
     )
     description: option<__string>,
-    @ocaml.doc("<p>The custom data identifiers to use for data analysis and classification.</p>")
+    @ocaml.doc(
+      "<p>An array of unique identifiers, one for each custom data identifier for the job to use when it analyzes data. To use only managed data identifiers, don't specify a value for this property and specify a value other than NONE for the managedDataIdentifierSelector property.</p>"
+    )
     customDataIdentifierIds: option<__listOf__string>,
     @ocaml.doc(
       "<p>A unique, case-sensitive token that you provide to ensure the idempotency of the request.</p>"
@@ -3542,6 +3689,8 @@ module CreateClassificationJob = {
     ~tags=?,
     ~scheduleFrequency=?,
     ~samplingPercentage=?,
+    ~managedDataIdentifierSelector=?,
+    ~managedDataIdentifierIds=?,
     ~initialRun=?,
     ~description=?,
     ~customDataIdentifierIds=?,
@@ -3553,6 +3702,8 @@ module CreateClassificationJob = {
       samplingPercentage: samplingPercentage,
       s3JobDefinition: s3JobDefinition,
       name: name,
+      managedDataIdentifierSelector: managedDataIdentifierSelector,
+      managedDataIdentifierIds: managedDataIdentifierIds,
       jobType: jobType,
       initialRun: initialRun,
       description: description,
