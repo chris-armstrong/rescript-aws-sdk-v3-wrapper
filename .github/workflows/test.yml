@@ -36,7 +36,7 @@ jobs:
         # Since none of the previous commands change any committed files, we can determine if generated files are up
         # to date by regenerating them and seeing if they have changed.
         run: |
-          yarn generate
+          yarn regenerate
           git diff --exit-code || echo "Run 'yarn generate' and commit the changes."
 
       - name: Test formatting
