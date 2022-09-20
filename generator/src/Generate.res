@@ -215,10 +215,8 @@ let generateOperationStructureType = (varName, opStruct) =>
     }
 
   | OperationStructureRef(name) => generateType(`#${varName}`, safeTypeName(name))
-  | OperationStructureNone => generateType(
-      `#${varName}`,
-      generateStructureShape({traits: None, members: []}),
-    )
+  | OperationStructureNone =>
+    generateType(`#${varName}`, generateStructureShape({traits: None, members: []}))
   }
 
 /* Determine if the input request has a type, or is just `unit` */
