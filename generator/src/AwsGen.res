@@ -11,8 +11,7 @@ let modelsPath = Path.join([basepath, "aws-sdk-js-v3/codegen/sdk-codegen/aws-mod
 let outdir = Path.join([basepath, "sdk/src"])
 let modelFiles = Fs.readdirSync(modelsPath)
 
-
-Array.forEach(modelFiles, file => {
+let generateFile = file => {
   let path = Path.join([modelsPath, file])
   Js.log(`Reading ${path}`)
   let parsed =
@@ -36,4 +35,6 @@ Array.forEach(modelFiles, file => {
     }
   | Error(error) => Js.log(`Unable to generate for file ${file}: ${error}`)
   }
-})
+}
+
+Array.forEach(modelFiles, generateFile)
